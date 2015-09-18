@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Custom/gyrth/axes/Objects/smallaxe.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "1"/>
+    <physics mass = "1.5kg "/>
+    <points>
+        <pommel x="0" y="-0.15" z="0"/>
+        <guard x="0" y="0.25" z="0"/>
+        <tip x="0" y="0.35" z="0"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="guard"/>
+        <metal start="guard" end="tip"/>
+    </lines>
+    <attack_override stationary = "Data/Custom/gyrth/axes/Attacks/smallaxe.xml"
+                     moving = "Data/Custom/gyrth/axes/Attacks/smallaxe.xml"
+                     moving_close = "Data/Custom/gyrth/axes/Attacks/smallaxe.xml"
+                     stationary_close = "Data/Custom/gyrth/axes/Attacks/smallaxe.xml"/>
+    <range extend = "0.1"/>
+</item>

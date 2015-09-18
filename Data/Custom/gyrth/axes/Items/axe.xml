@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Custom/gyrth/axes/Objects/axe.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "2"/>
+    <physics mass = "3kg "/>
+     <points>
+        <pommel x="0" y="-0.25" z="0"/>
+        <guard x="0" y="0.41" z="0"/>
+        <tip x="0" y="0.57" z="0"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="guard"/>
+        <metal start="guard" end="tip"/>
+    </lines>
+    <anim_blend idle = "Data/Animations/r_bigdogsword.xml"
+				movement = "Data/Animations/r_bigdogswordmove.xml"/>
+    <attack_override stationary = "Data/Attacks/dogbroadswordoverhand.xml"
+                     moving = "Data/Attacks/dogbroadswordside.xml"
+                     moving_close = "Data/Attacks/dogbroadswordsideclose.xml"
+                     stationary_close = "Data/Attacks/doghammerswing.xml"/>
+    <range extend = "0.5"/>
+</item>
