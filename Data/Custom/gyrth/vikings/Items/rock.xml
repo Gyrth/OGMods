@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<item>
+    <type>misc</type>
+    <appearance obj_path = "Data/Custom/gyrth/vikings/Objects/rock.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_rapiergrip.anm"
+		  hands = "1"/>
+    <physics mass = "5kg "/>
+     <points>
+        <linksachterbeneden x="1.7" y="0.0" z="0.0"/>
+        <linksachterboven x="-1.8" y="0.0" z="0.0"/>
+        <linksvoorbeneden x="0.0" y="1.9" z="0.0"/>
+        <linksvoorboven x="0.9" y="-0.9" z="1.4"/>
+        <rechtsachterbeneden x="0.0" y="-2.2" z="0.0"/>
+        <rechtsachterboven x="-0.7" y="2.2" z="0.0"/>
+
+    </points>
+    <lines>
+        <wood start="linksachterbeneden" end="linksachterboven"/>
+        <wood start="linksvoorbeneden" end="linksvoorboven"/>
+        <wood start="rechtsachterbeneden" end="rechtsachterboven"/>
+    </lines>
+</item>

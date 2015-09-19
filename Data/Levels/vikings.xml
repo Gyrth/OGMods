@@ -1,0 +1,431 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name></Name>
+<Description></Description>
+<Shader>post</Shader>
+<Terrain>
+    <Heightmap>Data/Custom/gyrth/vikings/Textures/vikings_hm.png</Heightmap>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/grass_beach/grass_beach_c.tga</ColorMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_normal.png" materialpath="Data/Materials/grass.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass_stones_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_stones_n.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/rubble_rocks_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/rubble_rocks_n.tga" materialpath="Data/Materials/rocks.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/chipped_rock.tga" normalpath="Data/Textures/Terrain/DetailTextures/chipped_rock_normal.tga" materialpath="Data/Materials/rock.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate Shadow="true" AO="true" NavMesh="true" />
+<SpawnPoints>
+    <SpawnPoint t0="0" t1="200" t2="0" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" />
+</SpawnPoints>
+<AmbientSounds>
+    <Ambient path="Data/Sounds/ambient/amb_grassfield_loop" />
+</AmbientSounds>
+<Script>Data/Scripts/challengelevel.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Level Boundaries" type="int" val="1" />
+    <parameter name="Objectives" type="string" val="must_visit_trigger" />
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue4.tga</DomeTexture>
+    <SunAngularRad>0.113107</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.449258" r1="0.635958" r2="-0.627475" />
+    <ExtraAO>0</ExtraAO>
+    <SkyRotation>0</SkyRotation>
+</Sky>
+<ActorObjects>
+    <ActorObject t0="-443.66" t1="185.413" t2="-26.6207" s0="1" s1="1" s2="1" r0="0.0511128" r1="0" r2="-0.998693" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.998693" r9="0" r10="0.0511128" r11="0" r12="0" r13="0" r14="0" r15="1" id="2" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Lives" type="string" val="1" />
+            <parameter name="Movement Speed" type="string" val="2.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="13" type="2" mirrored="0" attachment="Data/Custom/gyrth/vikings/attachments/head.xml" />
+            <ItemConnection id="12" type="2" mirrored="0" attachment="Data/Custom/gyrth/vikings/attachments/head.xml" />
+        </ItemConnections>
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <Hotspot t0="376.578" t1="-70.8139" t2="-41.7871" s0="1.01475" s1="0.895425" s2="0.967881" r0="1" r1="0" r2="0" r3="0" r4="0" r5="0.999969" r6="0.00791746" r7="0" r8="0" r9="-0.00791746" r10="0.999969" r11="0" r12="0" r13="0" r14="0" r15="1" id="3" type_file="Data/Custom/gyrth/vikings/Objects/obelix_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <Hotspot t0="249.013" t1="-52.4817" t2="-46.3004" s0="0.241939" s1="1.40368" s2="0.254779" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" type_file="Data/Custom/gyrth/vikings/Objects/roman_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <Hotspot t0="170.78" t1="-28.7659" t2="-34.3158" s0="0.234656" s1="1.44355" s2="0.228791" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="4" type_file="Data/Custom/gyrth/vikings/Objects/roman_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <Hotspot t0="93.8892" t1="-9.71226" t2="-13.7552" s0="0.235857" s1="1.35904" s2="0.258754" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="5" type_file="Data/Custom/gyrth/vikings/Objects/roman_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <Hotspot t0="30.4007" t1="12.4894" t2="-8.35855" s0="0.238434" s1="1.43421" s2="0.310891" r0="0.991993" r1="-0.0738414" r2="0.102453" r3="0" r4="0.0796511" r5="0.995369" r6="-0.0538197" r7="0" r8="-0.0980041" r9="0.0615493" r10="0.993281" r11="0" r12="0" r13="0" r14="0" r15="1" id="6" type_file="Data/Custom/gyrth/vikings/Objects/roman_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <Hotspot t0="-75.0957" t1="65.6032" t2="-38.6427" s0="0.2592" s1="1.58001" s2="0.252359" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="7" type_file="Data/Custom/gyrth/vikings/Objects/roman_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <Hotspot t0="-159.53" t1="97.1812" t2="-49.9658" s0="0.244913" s1="1.73598" s2="0.341446" r0="0.990752" r1="-0.13568" r2="0.000911082" r3="0" r4="0.13564" r5="0.990586" r6="0.0184608" r7="0" r8="-0.00340727" r9="-0.0181665" r10="0.999829" r11="0" r12="0" r13="0" r14="0" r15="1" id="8" type_file="Data/Custom/gyrth/vikings/Objects/roman_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <Hotspot t0="-234.494" t1="123.788" t2="-45.4232" s0="0.356491" s1="1.70236" s2="0.318354" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="9" type_file="Data/Custom/gyrth/vikings/Objects/roman_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <Hotspot t0="-316.53" t1="151.827" t2="-36.5052" s0="0.352131" s1="1.8932" s2="0.314444" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="10" type_file="Data/Custom/gyrth/vikings/Objects/roman_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <Hotspot t0="-404.351" t1="173.837" t2="-27.9688" s0="0.275284" s1="1.96286" s2="0.3101" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="11" type_file="Data/Custom/gyrth/vikings/Objects/roman_trigger.xml">
+        <parameters />
+    </Hotspot>
+    <ItemObject t0="-432.197" t1="179.366" t2="-34.4055" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="12" type_file="Data/Custom/gyrth/vikings/Items/asterix_mustache.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-432.451" t1="179.183" t2="-34.5374" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="13" type_file="Data/Custom/gyrth/vikings/Items/asterix_helmet.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-398.199" t1="242.428" t2="-28.7119" s0="1" s1="1" s2="1" r0="0.683159" r1="-0.728775" r2="0.046701" r3="0" r4="0.727162" r5="0.672967" r6="-0.135461" r7="0" r8="0.0672924" r9="0.126501" r10="0.989681" r11="0" r12="0" r13="0" r14="0" r15="1" id="14" type_file="Data/Custom/gyrth/vikings/Items/ketel.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-363.13" t1="275.136" t2="-32.043" s0="1" s1="1" s2="1" r0="0.683159" r1="-0.728775" r2="0.046701" r3="0" r4="0.727162" r5="0.672967" r6="-0.135461" r7="0" r8="0.0672924" r9="0.126501" r10="0.989681" r11="0" r12="0" r13="0" r14="0" r15="1" id="15" type_file="Data/Custom/gyrth/vikings/Items/ketel.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-323.151" t1="532.122" t2="-33.9253" s0="1" s1="1" s2="1" r0="0.683159" r1="-0.728775" r2="0.046701" r3="0" r4="0.727162" r5="0.672967" r6="-0.135461" r7="0" r8="0.0672924" r9="0.126501" r10="0.989681" r11="0" r12="0" r13="0" r14="0" r15="1" id="16" type_file="Data/Custom/gyrth/vikings/Items/ketel.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-279.736" t1="568.026" t2="-32.1237" s0="1" s1="1" s2="1" r0="0.683159" r1="-0.728775" r2="0.046701" r3="0" r4="0.727162" r5="0.672967" r6="-0.135461" r7="0" r8="0.0672924" r9="0.126501" r10="0.989681" r11="0" r12="0" r13="0" r14="0" r15="1" id="18" type_file="Data/Custom/gyrth/vikings/Items/ketel.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-359.255" t1="788.435" t2="-39.578" s0="1" s1="1" s2="1" r0="0.683159" r1="-0.728775" r2="0.046701" r3="0" r4="0.727162" r5="0.672967" r6="-0.135461" r7="0" r8="0.0672924" r9="0.126501" r10="0.989681" r11="0" r12="0" r13="0" r14="0" r15="1" id="19" type_file="Data/Custom/gyrth/vikings/Items/ketel.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-286.882" t1="1135.71" t2="-45.2734" s0="1" s1="1" s2="1" r0="0.683159" r1="-0.728775" r2="0.046701" r3="0" r4="0.727162" r5="0.672967" r6="-0.135461" r7="0" r8="0.0672924" r9="0.126501" r10="0.989681" r11="0" r12="0" r13="0" r14="0" r15="1" id="21" type_file="Data/Custom/gyrth/vikings/Items/ketel.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-335.938" t1="892.961" t2="-44.1601" s0="1" s1="1" s2="1" r0="0.683159" r1="-0.728775" r2="0.046701" r3="0" r4="0.727162" r5="0.672967" r6="-0.135461" r7="0" r8="0.0672924" r9="0.126501" r10="0.989681" r11="0" r12="0" r13="0" r14="0" r15="1" id="22" type_file="Data/Custom/gyrth/vikings/Items/ketel.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-322.214" t1="431.577" t2="-50.3776" s0="1.21074" s1="1.21074" s2="1.21074" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="27" type_file="Data/Custom/gyrth/vikings/Items/boat.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-275.112" t1="769.335" t2="-36.8874" s0="1.21074" s1="1.21074" s2="1.21074" r0="-0.0841126" r1="-0.988736" r2="0.123798" r3="0" r4="0.995244" r5="-0.0894858" r6="-0.0384917" r7="0" r8="0.0491363" r9="0.119971" r10="0.991561" r11="0" r12="0" r13="0" r14="0" r15="1" id="28" type_file="Data/Custom/gyrth/vikings/Items/boat.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <Hotspot t0="-404.247" t1="172.94" t2="-27.9131" s0="0.372701" s1="1.43114" s2="0.343214" r0="0.994074" r1="0.00331243" r2="-0.108657" r3="0" r4="-0.00326388" r5="0.999994" r6="0.000624593" r7="0" r8="0.108659" r9="-0.000266247" r10="0.994079" r11="0" r12="0" r13="0" r14="0" r15="1" id="29" type_file="Data/Custom/gyrth/vikings/Objects/roman_counter.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/roman1.png" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="-316.505" t1="152.1" t2="-36.5614" s0="0.158345" s1="0.965522" s2="0.214704" r0="0.998494" r1="0" r2="-0.0548694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0548694" r9="0" r10="0.998494" r11="0" r12="0" r13="0" r14="0" r15="1" id="30" type_file="Data/Custom/gyrth/vikings/Objects/roman_counter.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/roman2.png" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="-234.558" t1="123.006" t2="-45.4726" s0="0.246957" s1="1.33002" s2="0.313443" r0="0.999211" r1="-0.0104076" r2="0.0383341" r3="0" r4="0.0105449" r5="0.999939" r6="-0.00338275" r7="0" r8="-0.0382965" r9="0.00378431" r10="0.999259" r11="0" r12="0" r13="0" r14="0" r15="1" id="31" type_file="Data/Custom/gyrth/vikings/Objects/roman_counter.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/roman3.png" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="-159.713" t1="97.0202" t2="-49.8755" s0="0.237135" s1="1.19573" s2="0.305121" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="32" type_file="Data/Custom/gyrth/vikings/Objects/roman_counter.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/roman4.png" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="-75.1574" t1="65.6738" t2="-38.6549" s0="0.392029" s1="1.37192" s2="0.337999" r0="0.998343" r1="-0.0310915" r2="-0.0484202" r3="0" r4="0.0323632" r5="0.999146" r6="0.0257044" r7="0" r8="0.0475797" r9="-0.0272289" r10="0.998496" r11="0" r12="0" r13="0" r14="0" r15="1" id="33" type_file="Data/Custom/gyrth/vikings/Objects/roman_counter.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/roman5.png" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="30.2394" t1="12.3681" t2="-8.39643" s0="0.392029" s1="1.37192" s2="0.337999" r0="0.998343" r1="-0.0310915" r2="-0.0484202" r3="0" r4="0.0323632" r5="0.999146" r6="0.0257043" r7="0" r8="0.0475797" r9="-0.0272288" r10="0.998496" r11="0" r12="0" r13="0" r14="0" r15="1" id="23" type_file="Data/Custom/gyrth/vikings/Objects/roman_counter.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/roman6.png" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="93.7583" t1="-10.0068" t2="-13.7388" s0="0.392029" s1="1.37192" s2="0.337999" r0="0.998343" r1="-0.0310915" r2="-0.0484202" r3="0" r4="0.0323632" r5="0.999146" r6="0.0257043" r7="0" r8="0.0475797" r9="-0.0272288" r10="0.998496" r11="0" r12="0" r13="0" r14="0" r15="1" id="34" type_file="Data/Custom/gyrth/vikings/Objects/roman_counter.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/roman7.png" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="170.827" t1="-29.0485" t2="-34.3629" s0="0.392029" s1="1.37192" s2="0.337999" r0="0.998343" r1="-0.0310915" r2="-0.0484202" r3="0" r4="0.0323632" r5="0.999146" r6="0.0257043" r7="0" r8="0.0475797" r9="-0.0272288" r10="0.998496" r11="0" r12="0" r13="0" r14="0" r15="1" id="35" type_file="Data/Custom/gyrth/vikings/Objects/roman_counter.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/roman8.png" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="248.973" t1="-52.7285" t2="-46.3828" s0="0.392029" s1="1.37192" s2="0.337999" r0="0.998343" r1="-0.0310915" r2="-0.0484202" r3="0" r4="0.0323632" r5="0.999146" r6="0.0257043" r7="0" r8="0.0475797" r9="-0.0272288" r10="0.998496" r11="0" r12="0" r13="0" r14="0" r15="1" id="36" type_file="Data/Custom/gyrth/vikings/Objects/roman_counter.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/roman9.png" />
+        </parameters>
+    </Hotspot>
+    <ItemObject t0="-433.474" t1="355.181" t2="-33.0051" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="37" type_file="Data/Custom/gyrth/vikings/Items/rock.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-414.456" t1="430.131" t2="-34.3705" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="38" type_file="Data/Custom/gyrth/vikings/Items/rock.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-365.073" t1="557.886" t2="-36.6729" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="39" type_file="Data/Custom/gyrth/vikings/Items/rock.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="-302.782" t1="601.237" t2="-37.1329" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="17" type_file="Data/Custom/gyrth/vikings/Items/rock.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <EnvObject t0="377.977" t1="-67.5363" t2="-53.0069" s0="1" s1="1" s2="1" r0="-0.999978" r1="0" r2="-0.00668955" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.00668955" r9="0" r10="-0.999978" r11="0" r12="0" r13="0" r14="0" r15="1" id="40" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/hut_medium.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="377.371" t1="-69.2756" t2="-46.0896" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="41" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/shops/shop_slope_umbrella_patterned.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="376.033" t1="-73.1375" t2="-41.4905" s0="0.306411" s1="0.46068" s2="0.304769" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="42" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/terraces/cat_patio_ramp.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="384.231" t1="-68.7331" t2="-41.739" s0="1" s1="1" s2="1" r0="0.0968479" r1="0" r2="0.995299" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.995299" r9="-0" r10="0.0968479" r11="0" r12="0" r13="0" r14="0" r15="1" id="20" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/hut_small.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="382.126" t1="-69.6759" t2="-41.5584" s0="1" s1="1" s2="1" r0="0.103621" r1="0" r2="0.994617" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.994617" r9="-0" r10="0.103621" r11="0" r12="0" r13="0" r14="0" r15="1" id="24" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="377.433" t1="-70.6702" t2="-45.566" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="25" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/shops/shop_bin.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="377.408" t1="-70.7091" t2="-46.4048" s0="2.03417" s1="2.03417" s2="2.03417" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="26" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Furniture/shop_tall_table.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="380.383" t1="-67.9733" t2="-30.108" s0="1" s1="1" s2="1" r0="0.999823" r1="-0.00792871" r2="0.0170711" r3="0" r4="0.00771863" r5="0.999894" r6="0.0123373" r7="0" r8="-0.0171671" r9="-0.0122033" r10="0.999778" r11="0" r12="0" r13="0" r14="0" r15="1" id="43" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/hut_large.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="378.105" t1="-74.6006" t2="-51.6379" s0="0.346921" s1="0.753362" s2="0.354026" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="44" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/terraces/cat_patio_box.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="-427.093" t1="175.378" t2="-22.9972" s0="8.97316" s1="3.76062" s2="11.1546" r0="0.999917" r1="0.00325581" r2="0.0124703" r3="0" r4="-0.00326385" r5="0.999995" r6="0.000624644" r7="0" r8="-0.0124682" r9="-0.000665294" r10="0.999922" r11="0" r12="0" r13="0" r14="0" r15="1" id="45" type_file="Data/Custom/gyrth/vikings/Objects/runtext.xml">
+        <parameters>
+            <parameter name="Display Image" type="string" val="Data/Custom/gyrth/vikings/Textures/runtext.png" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="181.242" t1="91.4333" t2="90.1523" s0="18.4041" s1="18.4041" s2="18.4041" r0="0.648397" r1="0" r2="-0.761302" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.761302" r9="0" r10="0.648397" r11="0" r12="0" r13="0" r14="0" r15="1" id="46" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/cylinder_square_rocks.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="15.2295" t1="145.482" t2="-127.936" s0="17.4731" s1="17.4731" s2="17.4731" r0="-0.34803" r1="0" r2="-0.937484" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.937484" r9="0" r10="-0.34803" r11="0" r12="0" r13="0" r14="0" r15="1" id="47" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/cylinder_square_rocks.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-31.4796" t1="88.8494" t2="40.0485" s0="1.33828" s1="1.34379" s2="0.752934" r0="-0.948848" r1="0.103873" r2="0.298159" r3="0" r4="0.108084" r5="0.994139" r6="-0.00237825" r7="0" r8="-0.296658" r9="0.0299695" r10="-0.954513" r11="0" r12="0" r13="0" r14="0" r15="1" id="48" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/rocky_desert_plains_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="303.782" t1="32.4755" t2="-110.193" s0="4.232" s1="4.03813" s2="0.795614" r0="0.978316" r1="-0.132077" r2="0.159542" r3="0" r4="0.123293" r5="0.990318" r6="0.0637966" r7="0" r8="-0.166423" r9="-0.0427428" r10="0.985128" r11="0" r12="0" r13="0" r14="0" r15="1" id="49" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/rocky_dry_bluffs_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-104.195" t1="145.143" t2="63.0906" s0="15.4693" s1="15.7161" s2="12.8695" r0="0.872194" r1="-0.128572" r2="-0.471961" r3="0" r4="0.113078" r5="0.9917" r6="-0.0611887" r7="0" r8="0.475911" r9="-3.72529e-008" r10="0.879493" r11="0" r12="0" r13="0" r14="0" r15="1" id="50" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/cylinder_square_rocks.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="41.8879" t1="58.9255" t2="46.6514" s0="1" s1="1" s2="1" r0="-0.695134" r1="0" r2="0.71888" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.71888" r9="0" r10="-0.695134" r11="0" r12="0" r13="0" r14="0" r15="1" id="54" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="3.34273" t1="73.1895" t2="36.1824" s0="1" s1="1" s2="1" r0="-0.695134" r1="0" r2="0.71888" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.71888" r9="0" r10="-0.695134" r11="0" r12="0" r13="0" r14="0" r15="1" id="51" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="96.598" t1="38.1831" t2="46.7153" s0="1" s1="1" s2="1" r0="-0.695134" r1="0" r2="0.71888" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.71888" r9="0" r10="-0.695134" r11="0" r12="0" r13="0" r14="0" r15="1" id="52" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="58.0528" t1="52.4472" t2="36.2463" s0="1" s1="1" s2="1" r0="-0.695134" r1="0" r2="0.71888" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.71888" r9="0" r10="-0.695134" r11="0" r12="0" r13="0" r14="0" r15="1" id="53" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="152.892" t1="25.0118" t2="38.6203" s0="1" s1="1" s2="1" r0="-0.695134" r1="0" r2="0.71888" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.71888" r9="0" r10="-0.695134" r11="0" r12="0" r13="0" r14="0" r15="1" id="55" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="114.346" t1="39.2759" t2="28.1513" s0="1" s1="1" s2="1" r0="-0.695134" r1="0" r2="0.71888" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.71888" r9="0" r10="-0.695134" r11="0" r12="0" r13="0" r14="0" r15="1" id="56" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-209.023" t1="244.221" t2="-128.128" s0="14.4817" s1="14.4817" s2="14.4817" r0="0.518633" r1="0" r2="0.854997" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.854997" r9="-0" r10="0.518633" r11="0" r12="0" r13="0" r14="0" r15="1" id="57" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/chevron_temple_building.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-213.115" t1="203.483" t2="55.8562" s0="8.87521" s1="8.87521" s2="8.87521" r0="-0.682369" r1="0" r2="0.731008" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.731008" r9="0" r10="-0.682369" r11="0" r12="0" r13="0" r14="0" r15="1" id="58" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/chevron_thin_building.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="116.534" t1="80.1941" t2="-101.211" s0="10.4163" s1="10.4163" s2="10.4163" r0="0.730815" r1="0" r2="0.682576" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.682576" r9="-0" r10="0.730815" r11="0" r12="0" r13="0" r14="0" r15="1" id="59" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/chevron_tower_building.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="268.615" t1="13.7387" t2="65.4717" s0="2.40227" s1="2.84714" s2="0.669341" r0="-0.693466" r1="0" r2="0.72049" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.72049" r9="0" r10="-0.693466" r11="0" r12="0" r13="0" r14="0" r15="1" id="60" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/city_projection.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.7433" t1="107.324" t2="-162.715" s0="3.36162" s1="5.17753" s2="2.27078" r0="0.945295" r1="-0.263545" r2="0.192255" r3="0" r4="0.268555" r5="0.963264" r6="-7.45058e-009" r7="0" r8="-0.185192" r9="0.051631" r10="0.981345" r11="0" r12="0" r13="0" r14="0" r15="1" id="61" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/city_slices.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-123.773" t1="141.651" t2="-120.859" s0="4.82227" s1="8.58301" s2="1.36848" r0="0.691639" r1="-0.0295727" r2="0.721637" r3="0" r4="0.0102743" r5="0.999463" r6="0.0311108" r7="0" r8="-0.72217" r9="-0.0141032" r10="0.691572" r11="0" r12="0" r13="0" r14="0" r15="1" id="62" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/construction_ring.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-213.237" t1="167.171" t2="8.93251" s0="2.25188" s1="2.25188" s2="2.25188" r0="0.667587" r1="0" r2="-0.744532" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.744532" r9="0" r10="0.667587" r11="0" r12="0" r13="0" r14="0" r15="1" id="63" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/construction_temple.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-326.306" t1="195.759" t2="-97.3013" s0="3.23034" s1="3.23034" s2="3.23034" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="64" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-374.405" t1="224.009" t2="25.106" s0="6.08878" s1="6.08878" s2="6.08878" r0="0.543469" r1="0" r2="0.839429" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.839429" r9="-0" r10="0.543469" r11="0" r12="0" r13="0" r14="0" r15="1" id="65" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-321.252" t1="218.024" t2="30.141" s0="6.89341" s1="6.89341" s2="6.89341" r0="-0.591136" r1="0" r2="0.806572" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.806572" r9="0" r10="-0.591136" r11="0" r12="0" r13="0" r14="0" r15="1" id="66" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/cylinder_dome_building.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="415.281" t1="14.3253" t2="62.1241" s0="12.5576" s1="12.5576" s2="12.5576" r0="-0.560982" r1="0" r2="0.827828" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.827828" r9="0" r10="-0.560982" r11="0" r12="0" r13="0" r14="0" r15="1" id="67" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/cylinder_tower_building.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-273.735" t1="176.159" t2="-95.1365" s0="1" s1="1" s2="1" r0="0.533848" r1="0" r2="0.845581" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.845581" r9="-0" r10="0.533848" r11="0" r12="0" r13="0" r14="0" r15="1" id="68" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-224.165" t1="162.122" t2="-98.7245" s0="1" s1="1" s2="1" r0="0.640548" r1="0" r2="0.767918" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.767918" r9="-0" r10="0.640548" r11="0" r12="0" r13="0" r14="0" r15="1" id="69" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-121.351" t1="124.546" t2="-88.4249" s0="1" s1="1" s2="1" r0="0.779892" r1="0" r2="0.625914" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.625914" r9="-0" r10="0.779892" r11="0" r12="0" r13="0" r14="0" r15="1" id="70" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-174.292" t1="143.662" t2="-91.3587" s0="1" s1="1" s2="1" r0="0.769552" r1="-0.068087" r2="0.634944" r3="0" r4="0.0436911" r5="0.997584" r6="0.0540203" r7="0" r8="-0.637088" r9="-0.01383" r10="0.770667" r11="0" r12="0" r13="0" r14="0" r15="1" id="71" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-406.96" t1="214.393" t2="-94.8791" s0="11.8711" s1="11.8711" s2="11.8711" r0="-0.889002" r1="0" r2="-0.457904" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.457904" r9="0" r10="-0.889002" r11="0" r12="0" r13="0" r14="0" r15="1" id="72" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/cylinder_square_rocks.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-268.744" t1="190.64" t2="7.81188" s0="1.33828" s1="1.34379" s2="0.752934" r0="-0.948848" r1="0.103873" r2="0.298159" r3="0" r4="0.108084" r5="0.994139" r6="-0.00237825" r7="0" r8="-0.296658" r9="0.0299695" r10="-0.954513" r11="0" r12="0" r13="0" r14="0" r15="1" id="73" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/rocky_desert_plains_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-276.023" t1="183.991" t2="12.4366" s0="1" s1="1" s2="1" r0="-0.695134" r1="0" r2="0.71888" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.71888" r9="0" r10="-0.695134" r11="0" r12="0" r13="0" r14="0" r15="1" id="74" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-340.942" t1="196.966" t2="14.6307" s0="1" s1="1" s2="1" r0="-0.695134" r1="0" r2="0.71888" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.71888" r9="0" r10="-0.695134" r11="0" r12="0" r13="0" r14="0" r15="1" id="75" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-381.297" t1="206.544" t2="23.2812" s0="1" s1="1" s2="1" r0="-0.695134" r1="0" r2="0.71888" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.71888" r9="0" r10="-0.695134" r11="0" r12="0" r13="0" r14="0" r15="1" id="76" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-382.419" t1="201.664" t2="-74.4026" s0="1" s1="1" s2="1" r0="0.861447" r1="0" r2="0.507848" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.507848" r9="-0" r10="0.861447" r11="0" r12="0" r13="0" r14="0" r15="1" id="77" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-331.863" t1="191.294" t2="-79.209" s0="1" s1="1" s2="1" r0="0.823908" r1="-0.148778" r2="0.546846" r3="0" r4="0.123959" r5="0.988871" r6="0.0822742" r7="0" r8="-0.553001" r9="1.3411e-007" r10="0.833181" r11="0" r12="0" r13="0" r14="0" r15="1" id="78" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="478.347" t1="15.1588" t2="-127.72" s0="18.4041" s1="18.4041" s2="18.4041" r0="-0.336915" r1="0" r2="-0.941535" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.941535" r9="0" r10="-0.336915" r11="0" r12="0" r13="0" r14="0" r15="1" id="80" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/cylinder_square_rocks.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="458.421" t1="-4.68122" t2="91.9572" s0="4.23902" s1="6.52889" s2="2.86346" r0="-0.00774661" r1="-0.01726" r2="0.999821" r3="0" r4="-0.00911304" r5="0.999811" r6="0.0171892" r7="0" r8="-0.999928" r9="-0.00897825" r10="-0.00790244" r11="0" r12="0" r13="0" r14="0" r15="1" id="81" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/structures/city_slices.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="466.896" t1="-59.1776" t2="-48.5595" s0="1" s1="1" s2="1" r0="0.039439" r1="0" r2="0.999222" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999222" r9="-0" r10="0.039439" r11="0" r12="0" r13="0" r14="0" r15="1" id="79" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="450.93" t1="-53.9232" t2="-90.1863" s0="1" s1="1" s2="1" r0="0.0389584" r1="-0.155585" r2="0.987054" r3="0" r4="0.00613616" r5="0.987823" r6="0.155464" r7="0" r8="-0.999222" r9="8.19564e-008" r10="0.0394387" r11="0" r12="0" r13="0" r14="0" r15="1" id="82" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="474.467" t1="-59.3668" t2="-10.3131" s0="1" s1="1" s2="1" r0="0.038544" r1="0.211828" r2="0.976547" r3="0" r4="-0.00835401" r5="0.977307" r6="-0.211663" r7="0" r8="-0.999222" r9="2.75671e-007" r10="0.039439" r11="0" r12="0" r13="0" r14="0" r15="1" id="83" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="466.988" t1="-52.9904" t2="15.3743" s0="1" s1="1" s2="1" r0="0.038544" r1="0.211828" r2="0.976547" r3="0" r4="-0.00835401" r5="0.977307" r6="-0.211663" r7="0" r8="-0.999222" r9="2.75671e-007" r10="0.039439" r11="0" r12="0" r13="0" r14="0" r15="1" id="84" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="417.053" t1="-47.211" t2="-99.3585" s0="1" s1="1" s2="1" r0="0.0389133" r1="-0.162695" r2="0.985909" r3="0" r4="0.00641634" r5="0.986676" r6="0.162569" r7="0" r8="-0.999222" r9="-1.71363e-007" r10="0.0394388" r11="0" r12="0" r13="0" r14="0" r15="1" id="85" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/2d_3d/environment/sparce_temperate_details.xml">
+        <parameters />
+    </EnvObject>
+    <Decal t0="-11.4873" t1="35.245" t2="-6.47369" s0="22.9564" s1="22.9564" s2="22.9564" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="87" type_file="Data/Objects/Decals/FadedWhiteRocks.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="9.38321" t1="22.0413" t2="-6.11705" s0="22.9564" s1="22.9564" s2="22.9564" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="88" type_file="Data/Objects/Decals/FadedWhiteRocks.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-137.482" t1="95.7079" t2="-47.5187" s0="22.9038" s1="22.9038" s2="22.9038" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="89" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-137.263" t1="95.4949" t2="-29.6909" s0="22.9038" s1="22.9038" s2="22.9038" r0="1" r1="0" r2="-0" r3="0" r4="-0" r5="0.943384" r6="-0.331704" r7="0" r8="0" r9="0.331704" r10="0.943384" r11="0" r12="0" r13="0" r14="0" r15="1" id="90" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-155.834" t1="103.024" t2="-32.7044" s0="22.9038" s1="22.9038" s2="22.9038" r0="1" r1="0" r2="-0" r3="0" r4="-0" r5="0.943384" r6="-0.331704" r7="0" r8="0" r9="0.331704" r10="0.943384" r11="0" r12="0" r13="0" r14="0" r15="1" id="91" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-156.993" t1="102.605" t2="-48.8571" s0="22.9038" s1="22.9038" s2="22.9038" r0="1" r1="0" r2="0" r3="0" r4="0" r5="0.998886" r6="0.0471878" r7="0" r8="0" r9="-0.0471878" r10="0.998886" r11="0" r12="0" r13="0" r14="0" r15="1" id="92" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-243.765" t1="126.975" t2="-44.642" s0="39.6572" s1="39.6572" s2="39.6572" r0="0.145418" r1="0.0109956" r2="0.989309" r3="0" r4="0.278914" r5="0.958926" r6="-0.0516553" r7="0" r8="-0.949242" r9="0.283444" r10="0.136378" r11="0" r12="0" r13="0" r14="0" r15="1" id="93" type_file="Data/Objects/Decals/DarkStonyDirt.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-300.083" t1="150.6" t2="-28.2463" s0="23.2996" s1="23.2996" s2="23.2996" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="94" type_file="Data/Objects/Decals/ErodedSlope.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-300.118" t1="147.434" t2="-47.1757" s0="23.2996" s1="23.2996" s2="23.2996" r0="-0.997688" r1="0" r2="0.0679655" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0679655" r9="0" r10="-0.997688" r11="0" r12="0" r13="0" r14="0" r15="1" id="95" type_file="Data/Objects/Decals/ErodedSlope.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-279.804" t1="148.493" t2="-46.5829" s0="23.2996" s1="23.2996" s2="23.2996" r0="-0.982325" r1="0.174813" r2="0.066919" r3="0" r4="0.174408" r5="0.984602" r6="-0.0118812" r7="0" r8="-0.0679655" r9="1.67638e-008" r10="-0.997688" r11="0" r12="0" r13="0" r14="0" r15="1" id="96" type_file="Data/Objects/Decals/ErodedSlope.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-280.949" t1="144.018" t2="-28.1161" s0="23.2996" s1="23.2996" s2="23.2996" r0="1" r1="0" r2="-0" r3="0" r4="-0" r5="0.973771" r6="-0.227532" r7="0" r8="0" r9="0.227532" r10="0.973771" r11="0" r12="0" r13="0" r14="0" r15="1" id="97" type_file="Data/Objects/Decals/ErodedSlope.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-412.67" t1="176.351" t2="-36.1367" s0="21.7277" s1="21.7277" s2="21.7277" r0="1" r1="0" r2="0" r3="0" r4="0" r5="0.939757" r6="0.341844" r7="0" r8="0" r9="-0.341844" r10="0.939757" r11="0" r12="0" r13="0" r14="0" r15="1" id="98" type_file="Data/Objects/Decals/Tanmud.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-411.775" t1="178.118" t2="-18.7212" s0="21.7277" s1="21.7277" s2="21.7277" r0="1" r1="0" r2="0" r3="0" r4="0" r5="0.986438" r6="0.164133" r7="0" r8="0" r9="-0.164133" r10="0.986438" r11="0" r12="0" r13="0" r14="0" r15="1" id="99" type_file="Data/Objects/Decals/Tanmud.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="277.172" t1="-58.0395" t2="-49.0684" s0="35.0264" s1="35.0264" s2="35.0264" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="100" type_file="Data/Objects/Decals/PeakRock.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="-360.886" t1="159.419" t2="-28.8034" s0="35.0264" s1="35.0264" s2="35.0264" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="101" type_file="Data/Objects/Decals/PeakRock.xml" i="0" color_r="0.643137" color_g="0.643137" color_b="0.643137">
+        <parameters />
+    </Decal>
+    <Decal t0="278.878" t1="-45.5914" t2="-30.6004" s0="35.0264" s1="35.0264" s2="35.0264" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="102" type_file="Data/Objects/Decals/PeakRock.xml" i="0" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </Decal>
+    <Decal t0="195.945" t1="-30.1905" t2="-39.2107" s0="35.0264" s1="35.0264" s2="35.0264" r0="0.972909" r1="-0.23119" r2="-0" r3="0" r4="0.23119" r5="0.972909" r6="0" r7="0" r8="0" r9="-0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="86" type_file="Data/Objects/Decals/PeakRock.xml" i="0" color_r="0.517647" color_g="0.427451" color_b="0.345098">
+        <parameters />
+    </Decal>
+    <EnvObject t0="253.81" t1="-10.5488" t2="-73.6255" s0="1" s1="1" s2="1" r0="0.931018" r1="-0.364973" r2="1.86265e-007" r3="0" r4="0.294711" r5="0.751784" r6="0.589886" r7="0" r8="-0.215293" r9="-0.549195" r10="0.807486" r11="0" r12="0" r13="0" r14="0" r15="1" id="103" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/rocks/CliffPeak.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="55.747" t1="43.1183" t2="-49.1596" s0="5.38386" s1="5.38386" s2="5.38386" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="104" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/rocks/DesertRock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-190.719" t1="133.667" t2="-17.9137" s0="4.06119" s1="4.06119" s2="4.06119" r0="0.0272815" r1="0.655484" r2="0.754716" r3="0" r4="0.255004" r5="0.725454" r6="-0.639288" r7="0" r8="-0.966555" r9="0.209897" r10="-0.14736" r11="0" r12="0" r13="0" r14="0" r15="1" id="105" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-282.572" t1="168.849" t2="-71.6057" s0="2.38161" s1="2.38161" s2="2.38161" r0="0.874948" r1="-0.481808" r2="-0.0482342" r3="0" r4="0.479467" r5="0.848139" r6="0.225326" r7="0" r8="-0.0676545" r9="-0.220275" r10="0.973089" r11="0" r12="0" r13="0" r14="0" r15="1" id="106" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-392.171" t1="194.323" t2="1.86089" s0="2.95416" s1="2.91157" s2="2.83946" r0="0.19147" r1="0.543081" r2="0.817559" r3="0" r4="0.212986" r5="0.790132" r6="-0.574743" r7="0" r8="-0.958111" r9="0.284175" r10="0.0356178" r11="0" r12="0" r13="0" r14="0" r15="1" id="107" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="323.263" t1="-47.4218" t2="-11.2653" s0="4.67038" s1="4.67038" s2="4.67038" r0="1" r1="0" r2="-0" r3="0" r4="-0" r5="0.144619" r6="-0.989487" r7="0" r8="0" r9="0.989487" r10="0.144619" r11="0" r12="0" r13="0" r14="0" r15="1" id="108" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/plain_rock_large.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-95.0267" t1="82.1726" t2="-10.668" s0="6.19356" s1="2.15222" s2="6.68981" r0="0.971716" r1="-0.199929" r2="0.125686" r3="0" r4="0.228609" r5="0.662919" r6="-0.712935" r7="0" r8="0.0592171" r9="0.721503" r10="0.689874" r11="0" r12="0" r13="0" r14="0" r15="1" id="109" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Rocks/rock1b.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-333.741" t1="162.847" t2="-11.8816" s0="2.47421" s1="1.78304" s2="2.55827" r0="-0.189408" r1="-0.791673" r2="-0.580843" r3="0" r4="0.0870239" r5="-0.602758" r6="0.793165" r7="0" r8="-0.978035" r9="0.0996845" r10="0.183062" r11="0" r12="0" r13="0" r14="0" r15="1" id="110" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-161.76" t1="106.117" t2="-63.2572" s0="2.47421" s1="1.78304" s2="2.55827" r0="-0.052932" r1="0.824936" r2="-0.562742" r3="0" r4="0.0206562" r5="-0.562507" r6="-0.826535" r7="0" r8="-0.998384" r9="-0.0553742" r10="0.0127346" r11="0" r12="0" r13="0" r14="0" r15="1" id="111" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="142.713" t1="-9.9254" t2="-7.61446" s0="2.47421" s1="1.78304" s2="2.55827" r0="-0.0303087" r1="0.907141" r2="0.419735" r3="0" r4="0.0323204" r5="0.420598" r6="-0.906672" r7="0" r8="-0.999018" r9="-0.0139139" r10="-0.042067" r11="0" r12="0" r13="0" r14="0" r15="1" id="112" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="332.506" t1="-66.64" t2="-68.6607" s0="2.47421" s1="1.78304" s2="2.55827" r0="-0.052932" r1="0.824936" r2="-0.562742" r3="0" r4="0.0206562" r5="-0.562507" r6="-0.826535" r7="0" r8="-0.998384" r9="-0.0553742" r10="0.0127346" r11="0" r12="0" r13="0" r14="0" r15="1" id="113" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-421.905" t1="184.904" t2="-44.9897" s0="2.50518" s1="2.21823" s2="2.55827" r0="-0.024111" r1="0.818234" r2="-0.57438" r3="0" r4="-0.0855298" r5="-0.574129" r6="-0.814286" r7="0" r8="-0.996044" r9="0.0294934" r10="0.0838261" r11="0" r12="0" r13="0" r14="0" r15="1" id="114" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+</ActorObjects>
