@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<particle>
+    <textures color_map = "Data/Textures/smoke.tga" 
+              normal_map = "Data/Textures/smoke_normal.tga"
+              shader = "litsprite"
+              soft_shader = "litspritesoft"/>
+	<stretch velocity_axis = "true" speed_stretch = "true" min_squash = "false"/>
+    <size min = "2.0" max = "4.0"/>
+    <color red =   "1.0"
+           green = "1.0"
+           blue =  "1.0"
+           alpha_min = "0.5" alpha_max = "1.0"/>
+    <behavior inertia="0.2" gravity="1.0" wind="0.1" size_decay_rate="0.0" opacity_decay_rate="0.0"/>
+    <quadratic_expansion speed="2.0"/>
+    <quadratic_dispersion persistence="3.0"/>
+</particle>
