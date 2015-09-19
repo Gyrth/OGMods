@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<particle>
+    <textures color_map = "Data/Textures/spark.tga" 
+              shader = "litsprite"
+              soft_shader = "litspritesoft"/>
+    <size min = "0.01" max = "0.3"/>
+    <color red =   "1.0"
+           green = "1.0"
+           blue =  "1.0"
+           alpha_min = "0.0" alpha_max = "5.0"/>
+    <behavior inertia="1.0" gravity="0.05" wind="0.0" size_decay_rate="0.01" opacity_decay_rate="1.00"/>
+</particle>
