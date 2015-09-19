@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/Characters/rats/rat/rat.obj</Model>
+	<ColorMap>Data/Custom/gyrth/boat_level/Textures/rat_c.png</ColorMap>
+	<NormalMap>Data/Custom/gyrth/boat_level/Textures/normal.png</NormalMap>
+
+	<PaletteMap 
+		label_red="Pelts" 
+                label_green="Shirt" 
+                label_blue="Fur"
+		label_alpha="Skin">
+        	Data/Textures/Characters/rats/rat/rat_m.tga
+    	</PaletteMap>
+	
+	<ShaderName>cubemapobjitem</ShaderName>
+</Object>
