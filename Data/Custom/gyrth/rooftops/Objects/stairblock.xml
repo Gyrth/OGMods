@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Custom/gyrth/rooftops/Models/stairblock.obj</Model>
+	<ColorMap>Data/Custom/gyrth/rooftops/Textures/white.png</ColorMap>
+	<NormalMap>Data/Custom/gyrth/rooftops/Textures/normal.png</NormalMap>
+
+	<DetailMaps>
+	<DetailMap colorpath="Data/Custom/gyrth/rooftops/Textures/tile.png" normalpath="Data/Custom/gyrth/rooftops/Textures/normal.png" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Custom/gyrth/rooftops/Textures/tile.png" normalpath="Data/Custom/gyrth/rooftops/Textures/normal.png" materialpath="Data/Materials/rocks.xml" />
+   </DetailMaps>
+	<ShaderName>detailmap4</ShaderName>
+</Object>
+
+

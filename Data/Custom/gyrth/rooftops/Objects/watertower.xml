@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Custom/gyrth/rooftops/Models/watertower.obj</Model>
+	<ColorMap>Data/Custom/gyrth/rooftops/Textures/white.png</ColorMap>
+	<NormalMap>Data/Custom/gyrth/rooftops/Textures/normal.png</NormalMap>
+
+	<DetailMaps>
+	<DetailMap colorpath="Data/Textures/Buildings/detail_textures/gray_metal_c.tga" normalpath="Data/Textures/Buildings/detail_textures/gray_metal_n.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/Buildings/detail_textures/gray_metal_c.tga" normalpath="Data/Textures/Buildings/detail_textures/gray_metal_n.tga" materialpath="Data/Materials/rocks.xml" />
+   </DetailMaps>
+	<ShaderName>detailmap4</ShaderName>
+</Object>
+
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Custom/gyrth/rooftops/Models/apartment2.obj</Model>
+	<ColorMap>Data/Custom/gyrth/rooftops/Textures/white.png</ColorMap>
+	<NormalMap>Data/Custom/gyrth/rooftops/Textures/normal.png</NormalMap>
+	<WeightMap>Data/Custom/gyrth/rooftops/Textures/apartment2_w.png</WeightMap>
+
+	<DetailMaps>
+	<DetailMap colorpath="Data/Custom/gyrth/rooftops/Textures/tile.png" normalpath="Data/Custom/gyrth/rooftops/Textures/normal.png" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Custom/gyrth/rooftops/Textures/black.png" normalpath="Data/Custom/gyrth/rooftops/Textures/normal.png" materialpath="Data/Materials/rocks.xml" />
+   </DetailMaps>
+	<ShaderName>detailmap4</ShaderName>
+</Object>
+
+
