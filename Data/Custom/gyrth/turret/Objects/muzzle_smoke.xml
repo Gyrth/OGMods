@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<particle>
+    <textures color_map = "Data/Textures/smoke.tga" 
+              normal_map = "Data/Textures/smoke_normal.tga"
+              shader = "dirtpuff"
+              soft_shader = "dirtpuffsoft"/>
+    <size min = "1.0" max = "3.0"/>
+    <color red =   "0.2"
+           green = "0.2"
+           blue =  "0.2"
+           alpha_min = "0.0" alpha_max = "1.0"/>
+    <behavior inertia="0.97" gravity="0.2" wind="1.0" size_decay_rate="0.2" opacity_decay_rate="0.2"/>
+    <quadratic_expansion speed="10.0"/>
+</particle>
