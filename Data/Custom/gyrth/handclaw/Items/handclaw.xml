@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Custom/gyrth/handclaw/Objects/handclaw.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogchiselgrip.anm"
+		  hands = "1"/>
+    <physics mass = "1.5kg "/>
+     <points>
+        <boven x="0" y="0" z="-0.1"/>
+        <onder x="0" y="0" z="0.48"/>
+    </points>
+    <lines>
+        <metal start="boven" end="onder"/>
+    </lines>
+    <attack_override stationary = "Data/Custom/gyrth/handclaw/Attacks/handclaw.xml"
+                     moving = "Data/Custom/gyrth/handclaw/Attacks/rightcross.xml"
+                     moving_close = "Data/Custom/gyrth/handclaw/Attacks/rightcross.xml"
+                     stationary_close = "Data/Custom/gyrth/handclaw/Attacks/handclaw.xml"/>
+</item>

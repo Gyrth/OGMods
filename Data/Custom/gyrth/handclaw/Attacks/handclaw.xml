@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<attack>
+    <animations unblocked = "Data/Animations/r_thrustpunch.anm"
+                blocked = "Data/Animations/r_thrustpunchblocked.anm"/>
+    <flags height = "medium"
+           direction = "front"
+           swap_stance = "true"
+           swap_stance_blocked = "true"
+		   flesh_unblockable = "true"/>
+    <reaction>Data/Attacks/reaction_medfront.xml</reaction>
+    <impact_dir x="0.0" y="0.3" z="1.0"/>
+    <block_damage min="1.0" max="1.0"/>
+    <damage min="0.5" max="0.5"/>
+    <sharp_damage min="0.9" max="0.9"/>
+    <force val="20000"/>
+    <cut_plane type="heavy" x="0.0" y="5.0" z="5.0"/>
+    <materialevent></materialevent>
+</attack>
