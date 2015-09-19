@@ -6,8 +6,10 @@ I've included two maps which already have the scripts attached.
 	2. Press Load.  
 
 If you want your own level to have snow or rain edit your level xml file and add one of these:  
+```
 <Script>Data/Custom/gyrth/snow/Scripts/snow.as</Script>  
 <Script>Data/Custom/gyrth/rain/Scripts/rain.as</Script>  
+```
 	
 Last tested and working on alpha 209.  
 [Preorder the game here.](http://www.wolfire.com/overgrowth)
