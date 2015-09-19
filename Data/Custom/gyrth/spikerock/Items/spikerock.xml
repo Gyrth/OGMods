@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Custom/gyrth/spikerock/Objects/spikerock.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "1"/>
+    <physics mass = "1.5kg "/>
+     <points>
+        <boven x="0" y="0" z="0.5"/>
+        <onder x="0" y="0" z="-0.5"/>
+    </points>
+    <lines>
+        <metal start="boven" end="onder"/>
+    </lines>
+    <attack_override stationary = "Data/Attacks/soccerkick.xml"
+                     moving = "Data/Attacks/spinkick.xml"
+                     moving_close = "Data/Custom/Gyrth/Attacks/doghammerswing.xml"
+                     stationary_close = "Data/Custom/Gyrth/Attacks/thrustpunch.xml"/>
+    <anim_override idle = "Data/Animations/r_knifestancerear.xml"/>	 
+</item>
