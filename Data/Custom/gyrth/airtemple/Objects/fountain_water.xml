@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Custom/gyrth/airtemple/Models/fountain_water.obj</Model>
+	<ColorMap>Data/Custom/gyrth/airtemple/Textures/fountain_water.png</ColorMap>
+	<NormalMap>Data/Custom/gyrth/airtemple/Textures/normal.png</NormalMap>
+	<TranslucencyMap>Data/Custom/gyrth/airtemple/Textures/flag_t.tga</TranslucencyMap>
+	<WindMap>Data/Custom/gyrth/airtemple/Textures/flag_wind.tga</WindMap>
+	<ShaderName>plant</ShaderName>
+		<flags
+        double_sided = "false"
+        no_collision = "true"
+        bush_collision = "false"
+    	/>
+</Object>

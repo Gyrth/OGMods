@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<particle>
+    <textures color_map = "Data/Textures/splatspritelight_c.tga" 
+              normal_map = "Data/Textures/splatspritelight_n.tga"
+              shader = "splat"
+              soft_shader = "splatsoft"/>
+    <size min = "0.02" max = "0.04"/>
+    <stretch velocity_axis = "true" speed_stretch = "true" min_squash = "true"/>
+    <color red =   "0.1"
+           green = "0.0"
+           blue =  "0.0"
+           alpha_min = "1.0" alpha_max = "2.0"/>
+    <behavior inertia="1.0" gravity="1.0" wind="1.0" size_decay_rate="0.0" opacity_decay_rate="1.0"/>
+    <collision decal="Data/Objects/Decals/blooddropsplat.xml" decal_size_mult = "15.0" destroy="true"
+               character_collide="true" character_add_blood="true" materialevent="blood_drip"/>
+</particle>
