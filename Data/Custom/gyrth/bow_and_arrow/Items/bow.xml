@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Custom/gyrth/bow_and_arrow/Objects/bow.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "1"/>
+    <points>
+        <wood_base x="0" y="-0.3" z="0"/>
+        <blade_base x="0" y="0.25" z="0"/>
+        <blade_tip x="0" y="0.3" z="0"/>
+    </points>
+	<sheathe ik_attach = "torso"
+	  anim = "Data/Animations/r_dogweaponsheathed.anm"/>
+    <lines>
+        <wood start="wood_base" end="blade_base"/>
+        <metal start="blade_base" end="blade_tip"/>
+    </lines>
+	<label>bow</label>
+    <anim_override_flags
+                   lowleftblock = "mirror"
+                   lowrightblock = "mirror"/>
+    <physics mass = "5.0 kg"/>
+    <range extend = "1.0"/>
+</item>
