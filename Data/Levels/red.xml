@@ -1,0 +1,678 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name></Name>
+<Description></Description>
+<Shader>post</Shader>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/red_hills/red_hills_hm.png</Heightmap>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/red_hills/red_hills_c.tga</ColorMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_normal.png" materialpath="Data/Materials/dirt.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_dirt_normal.tga" materialpath="Data/Materials/dirt.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate Shadow="true" AO="true" NavMesh="false" />
+<SpawnPoints>
+    <SpawnPoint t0="0" t1="0" t2="0" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" />
+</SpawnPoints>
+<AmbientSounds />
+<Script>Data/Scripts/kill_the_thief.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Level Boundaries" type="int" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
+    <SunAngularRad>0.112145</SunAngularRad>
+    <SunColorAngle>6.8534</SunColorAngle>
+    <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
+    <ExtraAO>0</ExtraAO>
+    <SkyRotation>0</SkyRotation>
+</Sky>
+<ActorObjects>
+    <ActorObject t0="48.8241" t1="20.3255" t2="-116.313" s0="1" s1="1" s2="1" r0="0.67593" r1="0" r2="0.736966" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.736966" r9="-0" r10="0.67593" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Left handed" type="string" val="0.0" />
+            <parameter name="Lives" type="string" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="7.72557" t1="0.0274158" t2="-97.4157" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="4" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.74777" t1="0.0397344" t2="-83.9813" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="5" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.74777" t1="0.03021" t2="-110.738" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="6" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.72557" t1="0.0178914" t2="-124.173" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="7" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.1275" t1="0.0369401" t2="-83.9813" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="8" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.1053" t1="0.0246215" t2="-97.4157" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="9" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.1275" t1="0.0274158" t2="-110.738" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="10" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.1053" t1="0.0150971" t2="-124.173" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="11" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.5985" t1="-0.018889" t2="-97.4157" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="12" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.6207" t1="-0.00657034" t2="-83.9813" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="13" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.6207" t1="-0.0160947" t2="-110.738" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="14" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.5985" t1="-0.0284133" t2="-124.173" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="15" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="48.0004" t1="-0.0093646" t2="-83.9813" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="16" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="47.9782" t1="-0.0216832" t2="-97.4157" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="17" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="48.0004" t1="-0.018889" t2="-110.738" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="18" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="47.9782" t1="-0.0312076" t2="-124.173" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="19" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="46.4014" t1="-30.7851" t2="-133.423" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="20" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.4285" t1="-0.0473905" t2="-97.4157" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="21" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.4507" t1="-0.0350718" t2="-83.9813" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="22" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="19.5285" t1="-30.7388" t2="-133.423" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="23" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.4507" t1="-0.0445962" t2="-110.738" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="24" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.4285" t1="-0.0569148" t2="-124.173" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="25" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.8305" t1="-0.0378661" t2="-83.9813" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="26" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.8083" t1="-0.0501847" t2="-97.4157" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="27" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.8305" t1="-0.0473905" t2="-110.738" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="28" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.8083" t1="-0.0597091" t2="-124.173" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="29" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.3014" t1="-0.0936952" t2="-97.4157" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="30" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.3236" t1="-0.0813766" t2="-83.9813" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="31" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.3236" t1="-0.0909009" t2="-110.738" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="32" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.3014" t1="-0.10322" t2="-124.173" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="33" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="101.703" t1="-0.0841708" t2="-83.9813" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="34" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="101.681" t1="-0.0964894" t2="-97.4157" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="35" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="101.703" t1="-0.0936952" t2="-110.738" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="36" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="101.681" t1="-0.106014" t2="-124.173" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="37" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.72557" t1="-0.0662656" t2="-43.7854" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="38" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.74777" t1="-0.053947" t2="-30.351" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="39" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.74777" t1="-0.0634713" t2="-57.108" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="40" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.72557" t1="-0.0757899" t2="-70.5424" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="41" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.1275" t1="-0.0567412" t2="-30.351" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="42" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.1053" t1="-0.0690598" t2="-43.7854" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="43" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.1275" t1="-0.0662656" t2="-57.108" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="44" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.1053" t1="-0.0785842" t2="-70.5424" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="45" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.5985" t1="-0.11257" t2="-43.7854" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="46" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.6207" t1="-0.100252" t2="-30.3511" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="47" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.6207" t1="-0.109776" t2="-57.108" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="48" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.5985" t1="-0.122095" t2="-70.5424" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="49" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="48.0004" t1="-0.103046" t2="-30.351" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="50" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="47.9782" t1="-0.115365" t2="-43.7854" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="51" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="48.0004" t1="-0.11257" t2="-57.108" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="52" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="47.9782" t1="-0.124889" t2="-70.5424" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="53" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="46.4014" t1="-30.8788" t2="-79.7927" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="54" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="19.5285" t1="-30.8325" t2="-79.7927" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="55" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.4285" t1="-0.141072" t2="-43.7854" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="56" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.4507" t1="-0.128753" t2="-30.351" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="57" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.4507" t1="-0.138278" t2="-57.108" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="58" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.4285" t1="-0.150596" t2="-70.5424" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="59" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.8305" t1="-0.131547" t2="-30.351" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="60" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.8083" t1="-0.143866" t2="-43.7854" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="61" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.8305" t1="-0.141072" t2="-57.108" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="62" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.8083" t1="-0.15339" t2="-70.5424" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="63" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.3014" t1="-0.187376" t2="-43.7854" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="64" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.3236" t1="-0.175058" t2="-30.3511" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="65" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.3236" t1="-0.184582" t2="-57.108" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="66" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.3014" t1="-0.196901" t2="-70.5424" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="67" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="101.703" t1="-0.177852" t2="-30.351" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="68" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="101.681" t1="-0.190171" t2="-43.7854" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="69" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="101.703" t1="-0.187376" t2="-57.108" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="70" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="101.681" t1="-0.199695" t2="-70.5424" s0="6.75306" s1="6.75306" s2="6.75306" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="71" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/blockCatroad.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="63.8525" t1="11.0411" t2="-128.881" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="72" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="48.2068" t1="11.2602" t2="-121.365" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="73" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="25.8121" t1="11.2612" t2="-118.052" s0="0.796488" s1="1" s2="1.00626" r0="-0.00825083" r1="-8.39452e-008" r2="0.999966" r3="0" r4="8.39452e-008" r5="1" r6="8.46407e-008" r7="0" r8="-0.999966" r9="8.46407e-008" r10="-0.00825083" r11="0" r12="0" r13="0" r14="0" r15="1" id="74" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="38.6972" t1="15.0331" t2="-128.468" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="75" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="13.9095" t1="19.3737" t2="-72.7856" s0="0.911434" s1="0.911434" s2="0.911434" r0="-1" r1="-3.17814e-008" r2="0.000691771" r3="0" r4="-3.17814e-008" r5="1" r6="1.09927e-011" r7="0" r8="-0.000691771" r9="-1.09927e-011" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="76" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="100.182" t1="12.1169" t2="-63.9815" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="77" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/overhang_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="93.4598" t1="20.9042" t2="-98.6775" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="78" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/babylon_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="100.593" t1="11.2611" t2="-33.2046" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="79" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="13.9843" t1="11.2611" t2="-72.7696" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="80" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="51.4634" t1="11.2611" t2="-83.9258" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="81" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="9.90931" t1="11.2611" t2="-97.6627" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="82" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="80.8698" t1="10.9165" t2="-128.881" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="83" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="97.8953" t1="10.8468" t2="-128.881" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="84" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.959" t1="10.8468" t2="-121.932" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="85" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.813" t1="10.8468" t2="-104.761" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="86" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.67" t1="10.8468" t2="-87.8929" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="87" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.524" t1="10.8468" t2="-70.7219" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="88" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.388" t1="10.8468" t2="-53.7544" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="89" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.242" t1="10.8468" t2="-36.5833" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="90" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="1.48383" t1="10.8468" t2="-122.094" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="91" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="1.33802" t1="10.8467" t2="-104.923" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="92" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="1.19434" t1="10.8468" t2="-88.0554" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="93" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="1.04853" t1="10.8467" t2="-70.8843" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="94" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="0.91264" t1="10.8468" t2="-53.9168" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="95" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="0.766834" t1="10.8467" t2="-36.7458" s0="1" s1="1" s2="1" r0="0.00593561" r1="0" r2="-0.999982" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999982" r9="0" r10="0.00593561" r11="0" r12="0" r13="0" r14="0" r15="1" id="96" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="11.4553" t1="11.0411" t2="-128.808" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="97" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="28.4725" t1="10.9165" t2="-128.808" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="98" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="30.4279" t1="21.1121" t2="-102.003" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="99" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/babylon_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="79.9108" t1="20.5591" t2="-76.9154" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="100" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/babylon_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="5.02975" t1="12.9142" t2="-30.9926" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="101" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/babylon_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="64.1947" t1="14.042" t2="-41.8625" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="102" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/babylon_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="15.5885" t1="21.279" t2="-45.6563" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="103" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/babylon_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="53.4962" t1="21.1118" t2="-68.1765" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="104" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/babylon_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="73.0982" t1="15.0331" t2="-104.194" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="105" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="67.4119" t1="15.0331" t2="-113.422" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="106" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="28.0652" t1="15.0331" t2="-80.332" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="107" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="48.7044" t1="15.0331" t2="-48.9787" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="108" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="74.7819" t1="15.0331" t2="-60.5881" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="109" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="82.3313" t1="15.0331" t2="-36.6359" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="110" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="32.5109" t1="15.0331" t2="-26.3179" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="111" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="59.9138" t1="11.0411" t2="-26.5243" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="112" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="76.931" t1="10.9165" t2="-26.5243" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="113" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="93.9565" t1="10.8468" t2="-26.5243" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="114" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.51652" t1="11.0411" t2="-26.452" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="115" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="24.5338" t1="10.9165" t2="-26.452" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="116" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="43.4381" t1="12.1407" t2="-23.4529" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="117" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/overhang_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="29.8035" t1="11.2611" t2="-98.1341" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="118" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="32.7641" t1="11.2611" t2="-73.8535" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="119" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="32.5748" t1="11.2611" t2="-50.0672" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="120" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="18.3927" t1="11.2611" t2="-49.7552" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="121" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="53.4499" t1="11.2611" t2="-68.0947" s0="1" s1="1" s2="1" r0="-0.00053525" r1="8.42711e-008" r2="-1" r3="0" r4="-8.42711e-008" r5="1" r6="8.43162e-008" r7="0" r8="1" r9="8.43162e-008" r10="-0.00053525" r11="0" r12="0" r13="0" r14="0" r15="1" id="122" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="53.2469" t1="11.2611" t2="-48.1428" s0="1" s1="1" s2="1" r0="0.00267524" r1="8.41808e-008" r2="-0.999996" r3="0" r4="8.41808e-008" r5="1" r6="8.44063e-008" r7="0" r8="0.999996" r9="-8.44063e-008" r10="0.00267524" r11="0" r12="0" r13="0" r14="0" r15="1" id="123" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="67.5093" t1="12.738" t2="-88.2603" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="124" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/overhang_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="82.6087" t1="11.2611" t2="-53.8493" s0="1" s1="1" s2="1" r0="-0.00053525" r1="8.42711e-008" r2="-1" r3="0" r4="-8.42711e-008" r5="1" r6="8.43162e-008" r7="0" r8="1" r9="8.43162e-008" r10="-0.00053525" r11="0" r12="0" r13="0" r14="0" r15="1" id="125" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="77.7404" t1="11.2612" t2="-75.411" s0="1" s1="1" s2="1" r0="-0.00053525" r1="8.42711e-008" r2="-1" r3="0" r4="-8.42711e-008" r5="1" r6="8.43162e-008" r7="0" r8="1" r9="8.43162e-008" r10="-0.00053525" r11="0" r12="0" r13="0" r14="0" r15="1" id="126" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="94.0239" t1="11.2611" t2="-102.03" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="127" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="68.4836" t1="11.2611" t2="-103.689" s0="1" s1="1" s2="1" r0="-0.00825083" r1="-8.39452e-008" r2="0.999966" r3="0" r4="8.39452e-008" r5="1" r6="8.46407e-008" r7="0" r8="-0.999966" r9="8.46407e-008" r10="-0.00825083" r11="0" r12="0" r13="0" r14="0" r15="1" id="128" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="97.6608" t1="11.2611" t2="-124.53" s0="1" s1="1" s2="1" r0="-0.00825083" r1="-8.39452e-008" r2="0.999966" r3="0" r4="8.39452e-008" r5="1" r6="8.46407e-008" r7="0" r8="-0.999966" r9="8.46407e-008" r10="-0.00825083" r11="0" r12="0" r13="0" r14="0" r15="1" id="129" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="77.0027" t1="11.2611" t2="-113.534" s0="1" s1="1" s2="1" r0="-0.999998" r1="-3.14321e-008" r2="0.00202072" r3="0" r4="-3.14321e-008" r5="1" r6="3.17578e-011" r7="0" r8="-0.00202072" r9="-3.17578e-011" r10="-0.999998" r11="0" r12="0" r13="0" r14="0" r15="1" id="130" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="14.9108" t1="11.2612" t2="-118.131" s0="0.796488" s1="1" s2="1.00626" r0="-0.00825083" r1="-8.39452e-008" r2="0.999966" r3="0" r4="8.39452e-008" r5="1" r6="8.46407e-008" r7="0" r8="-0.999966" r9="8.46407e-008" r10="-0.00825083" r11="0" r12="0" r13="0" r14="0" r15="1" id="131" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="47.6322" t1="15.0331" t2="-103.786" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="132" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="96.4853" t1="11.2612" t2="-78.592" s0="0.948878" s1="1" s2="0.658052" r0="-0.00053525" r1="8.42711e-008" r2="-1" r3="0" r4="-8.42711e-008" r5="1" r6="8.43162e-008" r7="0" r8="1" r9="8.43162e-008" r10="-0.00053525" r11="0" r12="0" r13="0" r14="0" r15="1" id="133" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="52.7783" t1="12.1169" t2="-37.1989" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="134" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/overhang_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.679" t1="11.2611" t2="-26.3998" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="135" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="81.9026" t1="11.0396" t2="-36.8999" s0="0.712854" s1="1" s2="0.977281" r0="-0.00053525" r1="8.42711e-008" r2="-1" r3="0" r4="-8.42711e-008" r5="1" r6="8.43162e-008" r7="0" r8="1" r9="8.43162e-008" r10="-0.00053525" r11="0" r12="0" r13="0" r14="0" r15="1" id="136" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="103.029" t1="14.042" t2="-53.706" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="137" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/babylon_tower.xml">
+        <parameters />
+    </EnvObject>
+    <PathPointObject t0="40.5188" t1="7.60951" t2="-109.35" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="138" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="3" />
+            <Connection id="144" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="40.5301" t1="7.60951" t2="-86.6269" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="3" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="138" />
+            <Connection id="139" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="5.02655" t1="7.6095" t2="-84.8362" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="139" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="3" />
+            <Connection id="140" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="4.72468" t1="7.30275" t2="-61.0638" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="140" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="139" />
+            <Connection id="141" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="23.8943" t1="7.30275" t2="-60.6082" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="141" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="140" />
+            <Connection id="142" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="23.2069" t1="7.21846" t2="-84.576" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="142" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="141" />
+            <Connection id="143" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="19.3837" t1="7.21846" t2="-89.7167" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="143" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="142" />
+            <Connection id="144" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="20.1897" t1="7.21846" t2="-109.347" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="144" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="143" />
+            <Connection id="138" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="42.2384" t1="7.30275" t2="-58.5207" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="146" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="149" />
+            <Connection id="147" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="42.2589" t1="7.30275" t2="-30.7358" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="147" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="146" />
+            <Connection id="148" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="69.8571" t1="7.30275" t2="-31.3614" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="148" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="147" />
+            <Connection id="149" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="67.4041" t1="7.30275" t2="-58.7231" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="149" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="146" />
+            <Connection id="148" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="56.0037" t1="7.60951" t2="-95.3492" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="150" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="153" />
+            <Connection id="151" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="103.038" t1="7.60951" t2="-91.1664" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="151" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="150" />
+            <Connection id="152" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="103.96" t1="7.60951" t2="-113.538" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="152" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="151" />
+            <Connection id="153" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="85.9056" t1="7.60951" t2="-124.8" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="153" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="150" />
+            <Connection id="152" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="64.6605" t1="7.36146" t2="-86.0232" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="154" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="155" />
+            <Connection id="157" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="90.3561" t1="7.36147" t2="-63.241" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="155" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="154" />
+            <Connection id="156" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="91.8836" t1="7.10523" t2="-30.02" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="156" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="157" />
+            <Connection id="155" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="70.8931" t1="7.17512" t2="-39.4446" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="157" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="string" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="154" />
+            <Connection id="156" />
+        </Connections>
+    </PathPointObject>
+    <PlaceholderObject t0="34.9482" t1="7.66837" t2="-155.241" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="2" type_file="Data/Objects/Buildings/Door1.xml" special_type="0">
+        <parameters>
+            <parameter name="Name" type="string" val="savehouse_preview" />
+        </parameters>
+        <Connections>
+            <Connection id="2" />
+        </Connections>
+    </PlaceholderObject>
+</ActorObjects>
