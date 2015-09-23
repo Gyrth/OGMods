@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Objects/Weapons/gabenife.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "1"/>
+    <sheathe ik_attach = "hip"
+          anim = "Data/Animations/r_dogweaponsheathed.anm"/>
+    <physics mass = "0.5 kg"/>
+    <points>
+        <pommel x="0.0" z="0.007" y="-0.089"/>
+        <guard x="0.0" z="0.007" y="0.112"/>
+        <tip x="0.002" z="0.007" y="0.41"/>
+    </points>
+    <label>knife</label>
+    <lines>
+        <wood start="pommel" end="guard"/>
+        <metal start="guard" end="tip"/>
+    </lines>
+    <anim_override idle = "Data/Animations/r_knifestancerear.xml"/>
+    <attack_override moving = "Data/Attacks/knifeslash.xml"
+                     moving_close = "Data/Attacks/knifeslash.xml"
+                     stationary = "Data/Attacks/knifeslash.xml"
+                     stationary_close = "Data/Attacks/knifeslash.xml"/>
+    <range multiply = "0.8"/>
+</item>

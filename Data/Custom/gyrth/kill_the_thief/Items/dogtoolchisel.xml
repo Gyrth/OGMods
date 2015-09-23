@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Objects/Gear/DogTools/DogToolChisel.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogchiselgrip.anm"
+		  hands = "1"/>
+    <sheathe ik_attach = "hip"
+          anim = "Data/Animations/r_sheathedspine.anm"/>
+    <physics mass = "1.5 kg"/>
+</item>
