@@ -4,6 +4,7 @@
 string level_name;
 int navpoint_type_id = 33;
 int hotspot_type_id = 26;
+int placeholder_type_id = 35;
 
 int obj_id;
 array<int> spawned_object_ids;
@@ -46,10 +47,10 @@ void Init(string p_level_name) {
     stolen_item_names.insertLast("Dog Hammer");
     stolen_item_paths.insertLast(level.GetPath("DogHammer"));
 
-    stolen_item_names.insertLast("Flint Hammer");
+    stolen_item_names.insertLast("Flint Knife");
     stolen_item_paths.insertLast(level.GetPath("FlintKnife"));
 
-    stolen_item_names.insertLast("GabenKnife");
+    stolen_item_names.insertLast("Gaben Knife");
     stolen_item_paths.insertLast(level.GetPath("GabenKnife"));
 
     stolen_item_names.insertLast("Rat Sack");
@@ -70,6 +71,7 @@ void Reset(){
 }
 
 void SetupScene(){
+    //Before the scene is build the custom update code needs to be paused so non existing objects won't be called.
     scene_build = false;
 
     DeleteObjectsInList(spawned_object_ids);
@@ -89,38 +91,45 @@ void SetupScene(){
     int number_of_groups = groups.size();
     Print( "Found " + number_of_groups + " waypoint groups.\n");
     int chosen_thief = GetRandomInt(number_of_groups);
+    int chosen_item_num = GetRandomInt(stolen_item_names.size());
     for(int a = 0;a<number_of_groups;a++){
         //
         int number_of_group_members = groups[a].size();
         string actor_path = char_paths[GetRandomInt(char_paths.size())];
-        Object@ waypoint = ReadObjectFromID(groups[a][0]);
+        Object@ waypoint = ReadObjectFromID(groups[a][GetRandomInt(groups[a].size())]);
         vec3 waypoint_pos = waypoint.GetTranslation();
         vec3 spawn_point = vec3(waypoint_pos.x, waypoint_pos.y+2.0f, waypoint_pos.z);
-        vec3 stolen_object_spawn_point = vec3(waypoint_pos.x, waypoint_pos.y+10.0f, waypoint_pos.z);
+        //Spawn the item above the character to prevent collisions.
+        vec3 object_spawn_point = vec3(waypoint_pos.x, waypoint_pos.y+10.0f, waypoint_pos.z);
         Object@ char_obj = SpawnObjectAtSpawnPoint(spawn_point,actor_path);
+
         ScriptParams@ char_params = char_obj.GetScriptParams();
         waypoint.ConnectTo(char_obj);
+
+        int mirrored_int = GetRandomInt(2);
+        AttachmentType attachtype;
+        bool mirrored;
+        if(mirrored_int == 0){
+            mirrored = false;
+        }else{
+            mirrored = true;
+        }
+        int attachtype_int = GetRandomInt(2);
+        Print("attachtype: " + attachtype_int + "\n");
+        switch(attachtype_int){
+            case 0: attachtype = _at_grip; break;
+            case 1: attachtype = _at_sheathe; break;
+            //case 2: attachtype = _at_attachment; break;
+        }
+
         if(a == chosen_thief){
+            Print("Random character index: " + chosen_thief + " and ID: " + char_obj.GetID() + "\n");
             thief_id = char_obj.GetID();
-            int mirrored_int = GetRandomInt(2);
-            AttachmentType attachtype;
-            bool mirrored;
-            if(mirrored_int == 0){
-                mirrored = false;
-            }else{
-                mirrored = true;
-            }
-            int attachtype_int = GetRandomInt(2);
-            Print("atttachtype: " + attachtype_int + "\n");
-            switch(attachtype_int){
-                case 0: attachtype = _at_grip; break;
-                case 1: attachtype = _at_sheathe; break;
-                //case 2: attachtype = _at_attachment; break;
-            }
-            int chosen_item_num = GetRandomInt(stolen_item_names.size());
+
+            
 
             string item_path = stolen_item_paths[chosen_item_num];
-            Object@ stolen_item = SpawnObjectAtSpawnPoint(stolen_object_spawn_point, item_path);
+            Object@ stolen_item = SpawnObjectAtSpawnPoint(object_spawn_point, item_path);
             char_obj.AttachItem(stolen_item, attachtype, mirrored);
             
             int chosen_color = GetRandomInt(colors.size());
@@ -133,6 +142,14 @@ void SetupScene(){
                 char_params.AddString("Teams", "guard");
             }
         }else{
+            //If the character is not a thief it might get a decoy object attached somewhere.
+            int random_item = GetRandomInt(stolen_item_paths.size());
+            if(random_item != chosen_item_num){
+                string item_path = stolen_item_paths[random_item];
+                Object@ random_object = SpawnObjectAtSpawnPoint(object_spawn_point, item_path);
+                char_obj.AttachItem(random_object, attachtype, mirrored);
+            }
+
             if(char_params.HasParam("Teams")) {
                 char_params.SetString("Teams", "guard, turner");
             } else{
@@ -152,13 +169,24 @@ void SetupScene(){
         if(params.HasParam("Name")){
             string name_str = params.GetString("Name");
             if("savehouse" == name_str){
+                //When a savehouse is found the settings are reset.
+                //The ID needs to be -1 first so there isn't a chance another savehouse is triggered.
+                params.SetInt("ThiefID", -1);
+                //Then the savehouse is added to the list so we can get a random one after this.
                 savehouses.insertLast(hotspots[i]);
-                Print("FOUND A SAVEHOUSE!\n");
             }
         }
     }
+    Print("Found " + savehouses.size() + " savehouses\n");
+    //A random index is generated within the size of the array.
     int random_savehouse = GetRandomInt(savehouses.size());
+    //Now the index is used to get the ID of the savehouse.
     chosen_savehouse = savehouses[random_savehouse];
+    //Set the ID of the thief as a parameter so that the thief can now trigger the hotspot.
+    Object @obj = ReadObjectFromID(chosen_savehouse);
+    ScriptParams@ params = obj.GetScriptParams();
+    params.SetInt("ThiefID", thief_id);
+    //Release the scene_build boolean so that the update loop can now use the characters and other objects.
     scene_build = true;
 }
 
@@ -216,6 +244,9 @@ void ReceiveMessage(string msg) {
         Reset();
     } else if(token == "dispose_level"){
         gui.RemoveAll();
+    } else if(token == "thiefsave"){
+        Print("Thief is in the savehouse!\n");
+        CloseDoors();
     }
 }
 
@@ -226,7 +257,7 @@ void DrawGUI() {
 
 void Update() {
     SetPlaceholderPreviews();
-    if(scene_build == true || chosen_savehouse != -1){
+    if(scene_build == true && ObjectExists(chosen_savehouse) && ObjectExists(thief_id)){
         MovementObject@ thief = ReadCharacterID(thief_id);
         Object@ savehouse = ReadObjectFromID(chosen_savehouse);
         vec3 house_pos = savehouse.GetTranslation();
@@ -237,9 +268,6 @@ void Update() {
             Print(command + "\n");
             thief.Execute(command);
         }
-        
-        //int num_known_chars = thief.GetIntVar("situation.known_chars.size();");
-        Print("Is aggressive : " + isAttacking + "\n");
     }
 }
 
@@ -298,6 +326,23 @@ Object@ SpawnObjectAtSpawnPoint(vec3 spawn_point, string &in path){
     return new_obj;
 }
 
+void CloseDoors(){
+    //Get all the placeholder objects.
+    array<int> @placeholders = GetObjectIDsType(placeholder_type_id);
+    int num_placeholders = placeholders.size();
+    for(int i = 0; i< num_placeholders;i++){
+        Object @obj = ReadObjectFromID(placeholders[i]);
+        //Check if the placeholder is a savehousepreview object.
+        ScriptParams@ params = obj.GetScriptParams();
+        if(params.HasParam("Name")){
+            string name_str = params.GetString("Name");
+            if("savehouse_preview" == name_str){
+                SpawnObjectAtPlaceholder(obj, level.GetPath("savehouse_preview"));
+            }
+        }
+    }
+}
+
 void DeleteObjectsInList(array<int> &inout ids){
     int num_ids = ids.length();
     for(int i=0; i<num_ids; ++i){
@@ -318,4 +363,20 @@ vec3 FloatTintFromByte(const vec3 &in tint){
     float_tint.y = tint.y / 255.0f;
     float_tint.z = tint.z / 255.0f;
     return float_tint;
+}
+
+Object@ SpawnObjectAtPlaceholder(Object@ spawn, string &in path){
+    int obj_id = CreateObject(path);
+    spawned_object_ids.push_back(obj_id);
+    Object @new_obj = ReadObjectFromID(obj_id);
+    new_obj.SetTranslation(spawn.GetTranslation());
+    vec4 rot_vec4 = spawn.GetRotationVec4();
+    vec3 scale = spawn.GetScale();
+
+    quaternion q(rot_vec4.x, rot_vec4.y, rot_vec4.z, rot_vec4.a);
+    new_obj.SetRotation(q);
+    new_obj.SetScale(scale);
+    ScriptParams@ params = new_obj.GetScriptParams();
+    params.AddIntCheckbox("No Save", true);
+    return new_obj;
 }
