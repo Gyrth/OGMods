@@ -318,13 +318,13 @@ void SetupScene(){
     array<vec3> possible_spawnpoints;
     int num_placeholders = placeholders.size();
     for(int i = 0; i< num_placeholders;i++){
-        Object @obj = ReadObjectFromID(placeholders[i]);
+        Object @placeholder_obj = ReadObjectFromID(placeholders[i]);
         //Check if the placeholder is a player_spawn point.
-        ScriptParams@ params = obj.GetScriptParams();
-        if(params.HasParam("Name")){
-            string name_str = params.GetString("Name");
+        ScriptParams@ placeholder_params = placeholder_obj.GetScriptParams();
+        if(placeholder_params.HasParam("Name")){
+            string name_str = placeholder_params.GetString("Name");
             if("player_spawn" == name_str){
-                possible_spawnpoints.insertLast(obj.GetTranslation());
+                possible_spawnpoints.insertLast(placeholder_obj.GetTranslation());
             }
         }
     }
@@ -471,9 +471,9 @@ void DrawGUI() {
 
 void Update() {
     time += time_step;
-    global_time += time_step * 1000;
+    global_time += uint64(time_step * 1000);
     if(timer_started){
-        timer_time -= time_step * 1000;
+        timer_time -= uint64(time_step * 1000);
     }
     if(timer_time /1000 == 0){
         timer_started = false;
@@ -509,10 +509,10 @@ void Update() {
         }
 
         if(show_text){
-            text_visible += time_step;
+            text_visible += float(time_step);
             text_visible = min(1.0f, text_visible);
         } else {
-            text_visible -= time_step;
+            text_visible -= float(time_step);
             text_visible = max(0.0f, text_visible);
         }
 
@@ -533,7 +533,6 @@ void Update() {
                     Print("Killed innocent!\n");
                 }
             }
-            MovementObject@ thief = ReadCharacterID(thief_id);
             if(thief.GetIntVar("knocked_out") != _awake){
                 //If the thief is dead the player wins!
                 SetEndText("win", "You killed the thief!");
@@ -740,7 +739,9 @@ bool MetaEventWaiting(){
 void ProcessMetaEvent(MetaEvent me){
     switch(me.type){
     case kWait:
-        meta_event_wait = global_time + 1000 * atof(me.data);
+        meta_event_wait = uint64(global_time + 1000 * atof(me.data));
+        Print("Waittime : " + uint64(global_time + 1000 * atof(me.data)) + "\n");
+        //Print("wait: " + Waittime )
         break;
     case kDisplay:
         UpdateIngameText(me.data);
