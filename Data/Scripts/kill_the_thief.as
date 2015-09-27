@@ -17,6 +17,9 @@ array<string> char_paths;
 
 bool scene_build = false;
 int thief_id = -1;
+array<int> innocent_ids;
+bool mission_done = false;
+bool play_combat_song = false;
 
 int chosen_savehouse = -1;
 string chosen_thief_name;
@@ -136,7 +139,6 @@ void Init(string p_level_name) {
 
 void Reset(){
     Print("Reseting----------------------- \n");
-
     SetupScene();
     
 }
@@ -144,11 +146,36 @@ void Reset(){
 void SetupScene(){
     //Before the scene is build the custom update code needs to be paused so non existing objects won't be called.
     scene_build = false;
+    play_combat_song = false;
 
     global_time = 0.0f;
     timer_time = 120000.0f;
     timer_started = false;
+
+    meta_states.resize(kMaxMetaStates);
+    meta_events.resize(kMaxMetaEvents);
+    meta_event_wait = global_time;
+    wait_player_move_dist = 0.0f;
+    wait_for_click = false;
+
+    show_text = false;
+    text_visible = 0.0f;
+
     DeleteObjectsInList(spawned_object_ids);
+
+    array<int> characters;
+    GetCharacters(characters);
+    for(int i=0, len=characters.size(); i<len; ++i){
+        MovementObject@ char = ReadCharacterID(characters[i]);
+        
+        char.Execute("Recover();");
+        char.Execute("Reset();");
+        char.Execute("situation.clear();");
+    }
+    //The innocents array needs to be reset so that character id's of the previous round are not used.
+    innocent_ids.resize(0);
+
+    ShowTimer("");
 
     array<int> @nav_points = GetObjectIDsType(navpoint_type_id);
     array<array<int>> groups;
@@ -227,6 +254,8 @@ void SetupScene(){
             }
              
             Object@ char_obj = SpawnObjectAtSpawnPoint(spawn_point,non_thief_actor_path);
+            //Add the innocent charater to the array to later check if the player doesn't kill it. 
+            innocent_ids.insertLast(char_obj.GetID());
             //If the character is not a thief it might get a decoy object attached somewhere.
             int random_item = GetRandomInt(stolen_item_paths.size());
             if(random_item != chosen_item_num){
@@ -253,9 +282,6 @@ void SetupScene(){
                 char_params.AddString("Teams", "guard");
             }
         }
-
-
-
     }
 
     //Setup the savehouse hotspots.
@@ -286,10 +312,31 @@ void SetupScene(){
     Object @obj = ReadObjectFromID(chosen_savehouse);
     ScriptParams@ params = obj.GetScriptParams();
     params.SetInt("ThiefID", thief_id);
+
+    //Set the player to a randomly selected player_spawn point.
+    array<int> @placeholders = GetObjectIDsType(placeholder_type_id);
+    array<vec3> possible_spawnpoints;
+    int num_placeholders = placeholders.size();
+    for(int i = 0; i< num_placeholders;i++){
+        Object @obj = ReadObjectFromID(placeholders[i]);
+        //Check if the placeholder is a player_spawn point.
+        ScriptParams@ params = obj.GetScriptParams();
+        if(params.HasParam("Name")){
+            string name_str = params.GetString("Name");
+            if("player_spawn" == name_str){
+                possible_spawnpoints.insertLast(obj.GetTranslation());
+            }
+        }
+    }
+    vec3 chosen_spawnpoint = possible_spawnpoints[GetRandomInt(possible_spawnpoints.size())];
+    Object @player_obj = ReadObjectFromID(ReadCharacter(0).GetID());
+    player_obj.SetTranslation(chosen_spawnpoint);
+
+    SetIntroText();
+    mission_done = false;
     //Release the scene_build boolean so that the update loop can now use the characters and other objects.
     scene_build = true;
-    ClearMeta();
-    SetIntroText();
+    
 }
 
 
@@ -343,13 +390,14 @@ void ReceiveMessage(string msg) {
         return;
     }
     string token = token_iter.GetToken(msg);
-    if(token == "reset"){
-        Reset();
-    } else if(token == "dispose_level"){
+    if(token == "dispose_level"){
         gui.RemoveAll();
     } else if(token == "thiefsave"){
-        Print("Thief is in the savehouse!\n");
-        CloseDoors();
+        if(mission_done == false){
+            Print("Thief is in the savehouse!\n");
+            CloseDoors();
+            SetEndText("lose", "The thief reached the savehouse.");
+        }
     } else if(token == "wait_for_player_move"){
         token_iter.FindNextToken(msg);
         string param1 = token_iter.GetToken(msg);
@@ -369,6 +417,10 @@ void ReceiveMessage(string msg) {
                 show_text = true;
             }
         }
+    }else if(token == "reset"){
+        Reset();
+    }else if(token == "reset_characters"){
+
     }
 }
 
@@ -414,17 +466,6 @@ void DrawGUI() {
         image.position.z = 3;
         image.color = vec4(1,1,1,1);}
 
-    {   HUDImage @image = hud.AddImage();
-        image.SetImageFromPath(level.GetPath("diffuse_tex"));
-        float stretch = GetScreenHeight() / image.GetHeight();
-        image.position.x = GetScreenWidth() /2 - 200;
-        image.position.y = GetScreenHeight() -150;
-        image.position.z = 3;
-        image.tex_scale.y = 20;
-        image.tex_scale.x = 20;
-        image.color = vec4(1.0f,1.0f,1.0f,0.5f);
-        image.scale = vec3(400 / image.GetWidth(), 5000.0, 1.0);}
-
 }
 
 
@@ -433,7 +474,6 @@ void Update() {
     global_time += time_step * 1000;
     if(timer_started){
         timer_time -= time_step * 1000;
-        Print(timer_time /1000 + "\n");
     }
     if(timer_time /1000 == 0){
         timer_started = false;
@@ -443,9 +483,6 @@ void Update() {
     if(scene_build == true && ObjectExists(chosen_savehouse) && ObjectExists(thief_id)){
         MovementObject@ thief = ReadCharacterID(thief_id);
 
-        MovementObject@ player = ReadCharacter(0);
-        DebugDrawLine(thief.position, player.position, vec3(255,255,255), _delete_on_update);
-
         Object@ savehouse = ReadObjectFromID(chosen_savehouse);
         vec3 house_pos = savehouse.GetTranslation();
         int isAttacking = thief.QueryIntFunction("int IsAggressive()");
@@ -453,40 +490,71 @@ void Update() {
             string command =    "nav_target = vec3("+house_pos.x+", "+house_pos.y+", "+house_pos.z+");" +
                                 "goal = _navigate;";
             Print(command + "\n");
+            play_combat_song = true;
             thief.Execute(command);
         }
-    }
-    if(timer_time/1000 != previous_timer_time && timer_time/1000 >= 0){
-        int seconds = (timer_time/1000)%60;
-        if(seconds < 10){
-            AddMetaEvent(KTimer, "" + (timer_time/1000)/60 + ":0" + seconds);
-        }else{
-            AddMetaEvent(KTimer, "" + (timer_time/1000)/60 + ":" + seconds);
+        if(timer_time/1000 != previous_timer_time && timer_time/1000 >= 0){
+            int seconds = (timer_time/1000)%60;
+            int minutes = (timer_time/1000)/60;
+            if(seconds < 10){
+                AddMetaEvent(KTimer, "" + minutes + ":0" + seconds);
+                if(seconds == 0 && minutes == 0){
+                    SetEndText("lose", "You ran out of time.");
+                }
+            }else{
+                AddMetaEvent(KTimer, "" + minutes + ":" + seconds);
+            }
+            
+            previous_timer_time = timer_time/1000;
+        }
+
+        if(show_text){
+            text_visible += time_step;
+            text_visible = min(1.0f, text_visible);
+        } else {
+            text_visible -= time_step;
+            text_visible = max(0.0f, text_visible);
+        }
+
+        UpdateMetaEventWait();
+        while(meta_event_start != meta_event_end && !MetaEventWaiting()){
+            ProcessMetaEvent(meta_events[meta_event_start]);
+            meta_event_start = (meta_event_start+1)%kMaxMetaEvents;
         }
         
-        previous_timer_time = timer_time/1000;
+        if(mission_done == false){
+            int num_innocents = innocent_ids.size();
+            for(int i = 0; i<num_innocents;i++){
+                MovementObject@ char = ReadCharacterID(innocent_ids[i]);
+                if(char.GetIntVar("knocked_out") != _awake){
+                    //If an innocent character is dead the player loses.
+                    SetEndText("lose", "You killed an innocent civilian.");
+                    mission_done = true;
+                    Print("Killed innocent!\n");
+                }
+            }
+            MovementObject@ thief = ReadCharacterID(thief_id);
+            if(thief.GetIntVar("knocked_out") != _awake){
+                //If the thief is dead the player wins!
+                SetEndText("win", "You killed the thief!");
+                mission_done = true;
+            }
+            MovementObject@ player = ReadCharacter(0);
+            //Cheater
+            //DebugDrawLine(thief.position, player.position, vec3(255,255,255), _delete_on_update);
+            if(player.GetIntVar("knocked_out") != _awake){
+                //If the player dies the game is also lost.
+                SetEndText("lost", "Try not to die!");
+                mission_done = true;
+            }
+        }
+        UpdateMusic();
     }
-
-
-    if(show_text){
-        text_visible += time_step;
-        text_visible = min(1.0f, text_visible);
-    } else {
-        text_visible -= time_step;
-        text_visible = max(0.0f, text_visible);
-    }
-
-    UpdateMetaEventWait();
-    while(meta_event_start != meta_event_end && !MetaEventWaiting()){
-        ProcessMetaEvent(meta_events[meta_event_start]);
-        meta_event_start = (meta_event_start+1)%kMaxMetaEvents;
-    }
-    UpdateMusic();
 }
 
 
 void UpdateMusic() {
-    int player_id = GetPlayerCharacterID();
+    player_id = GetPlayerCharacterID();
     if(player_id != -1 && ReadCharacter(player_id).GetIntVar("knocked_out") != _awake){
         PlaySong("sad");
         return;
@@ -496,7 +564,7 @@ void UpdateMusic() {
         PlaySong("ambient-happy");
         return;
     }
-    if(player_id != -1 && ReadCharacter(player_id).QueryIntFunction("int CombatSong()") == 1){
+    if(play_combat_song){
         PlaySong("combat");
         return;
     }
@@ -523,6 +591,9 @@ void SetPlaceholderPreviews() {
             string name_str = params.GetString("Name");
             if("savehouse_preview" == name_str){
                 SetSpawnPointPreview(obj,level.GetPath("savehouse_preview"));
+            }
+            if("player_spawn" == name_str){
+                SetSpawnPointPreview(obj,level.GetPath("player_preview"));
             }
         }
     }
@@ -639,6 +710,7 @@ void UpdateMetaEventWait() {
             }
             if(xz_distance_squared(initial_player_pos, player_char.position) > wait_player_move_dist){
                 wait_player_move_dist = 0.0f;
+                timer_started = true;
             }
         }
     }
@@ -684,7 +756,6 @@ void ProcessMetaEvent(MetaEvent me){
 
 void SetIntroText() {
     AddMetaEvent(kMessage, "set show_text true");
-    
 
     TextCanvasTexture @text = level.GetTextElement(main_text_id);
     text.ClearTextCanvas();
@@ -724,11 +795,10 @@ void SetIntroText() {
 
     text.UploadTextCanvasToTexture();
 
-    AddMetaEvent(kMessage, "wait_for_click");
+    AddMetaEvent(kMessage, "wait_for_player_move 5.0");
     AddMetaEvent(kMessage, "set show_text false");
 }
 void ShowTimer(string str) {   
-
 
     TextCanvasTexture @text = level.GetTextElement(timer_text_id);
     text.ClearTextCanvas();
@@ -742,8 +812,9 @@ void ShowTimer(string str) {
     
     if(timer_time /1000 <= 10){
         text.SetPenColor(255,0,0,255);
+        PlaySound(level.GetPath("timer_sound"));
     }else{
-        text.SetPenColor(0,0,0,255);
+        text.SetPenColor(255,255,255,255);
     }
     text.SetPenRotation(0.0f);
     
@@ -768,4 +839,48 @@ void UpdateIngameText(string str) {
     text.AddText(str, style);
 
     text.UploadTextCanvasToTexture();
+}
+
+void SetEndText(string win_or_lose, string text_message) {
+    
+    mission_done = true;
+    timer_started = false;
+    play_combat_song = false;
+    AddMetaEvent(kWait, "2.0");
+    AddMetaEvent(kMessage, "set show_text true");
+    AddMetaEvent(kWait, "2.0");
+    AddMetaEvent(kMessage, "reset_characters");
+    AddMetaEvent(kWait, "0.1");
+    AddMetaEvent(kMessage, "reset");
+    TextCanvasTexture @text = level.GetTextElement(main_text_id);
+    text.ClearTextCanvas();
+    string font_str = level.GetPath("font");
+    TextStyle small_style, big_style;
+    small_style.font_face_id = GetFontFaceID(font_str, 48);
+    big_style.font_face_id = GetFontFaceID(font_str, 72);
+
+    vec2 pen_pos = vec2(0,256);
+    text.SetPenPosition(pen_pos);
+    text.SetPenColor(0,0,0,255);
+    text.SetPenRotation(0.0f);
+    int line_break_dist = 42;
+    text.AddText("Kill the Thief", big_style);
+    pen_pos.y += line_break_dist;
+    pen_pos.y += line_break_dist;
+    text.SetPenPosition(pen_pos);
+    text.AddText(text_message, small_style);
+    pen_pos.y += line_break_dist;
+    
+    text.SetPenPosition(pen_pos);
+    if(win_or_lose == "win"){
+        PlaySoundGroup(level.GetPath("win_sound"));
+        text.AddText("Well done.", small_style);
+    }
+    else if(win_or_lose == "lose"){
+        PlaySoundGroup(level.GetPath("lose_sound"));
+        text.AddText("You lose.", small_style);
+    }
+
+    text.UploadTextCanvasToTexture();
+
 }

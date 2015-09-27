@@ -2,6 +2,7 @@
 <path key="char_player"     path="Data/Objects/IGF_Characters/pale_turner_actor.xml"/>
 <path key="font"            path="Data/UI/arena/images/arabtype.ttf"/>
 <path key="savehouse_preview"   path="Data/Objects/Buildings/Door1.xml"/>
+<path key="player_preview"     path="Data/Objects/IGF_Characters/pale_turner.xml"/>
 <path key="char_civ"        path="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml"/>
 <path key="char_raider"     path="Data/Objects/characters/raider_rabbit_actor.xml"/>
 <path key="char_guard"      path="Data/Objects/IGF_Characters/IGF_GuardActor.xml"/>
@@ -19,3 +20,7 @@
 <path key="GabenKnife"      path="Data/Custom/gyrth/kill_the_thief/Items/gabenife.xml"/>
 <path key="RatSack"      path="Data/Custom/gyrth/kill_the_thief/Items/ratjunksack.xml"/>
 <path key="diffuse_tex"     path="Data/Textures/diffuse.tga"/>
+
+<path key="win_sound"     path="Data/Sounds/versus/fight_win1.xml"/>
+<path key="lose_sound"      path="Data/Sounds/versus/fight_lose1.xml"/>
+<path key="timer_sound"      path="Data/Sounds/weapon_foley/ring/weapon_blade_ring_medium_1.wav"/>
