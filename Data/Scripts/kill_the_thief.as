@@ -521,33 +521,37 @@ void Update() {
             ProcessMetaEvent(meta_events[meta_event_start]);
             meta_event_start = (meta_event_start+1)%kMaxMetaEvents;
         }
-        
-        if(mission_done == false){
-            int num_innocents = innocent_ids.size();
-            for(int i = 0; i<num_innocents;i++){
-                MovementObject@ char = ReadCharacterID(innocent_ids[i]);
-                if(char.GetIntVar("knocked_out") != _awake){
-                    //If an innocent character is dead the player loses.
-                    SetEndText("lose", "You killed an innocent civilian.");
-                    mission_done = true;
-                    Print("Killed innocent!\n");
-                }
-            }
-            if(thief.GetIntVar("knocked_out") != _awake){
-                //If the thief is dead the player wins!
-                SetEndText("win", "You killed the thief!");
+        VictoryCheck();
+        UpdateMusic();
+    }
+}
+
+void VictoryCheck(){
+    if(mission_done == false){
+        int num_innocents = innocent_ids.size();
+        for(int i = 0; i<num_innocents;i++){
+            MovementObject@ char = ReadCharacterID(innocent_ids[i]);
+            if(char.GetIntVar("knocked_out") != _awake){
+                //If an innocent character is dead the player loses.
+                SetEndText("lose", "You killed an innocent civilian.");
                 mission_done = true;
-            }
-            MovementObject@ player = ReadCharacter(0);
-            //Cheater
-            //DebugDrawLine(thief.position, player.position, vec3(255,255,255), _delete_on_update);
-            if(player.GetIntVar("knocked_out") != _awake){
-                //If the player dies the game is also lost.
-                SetEndText("lost", "Try not to die!");
-                mission_done = true;
+                Print("Killed innocent!\n");
             }
         }
-        UpdateMusic();
+        MovementObject@ thief = ReadCharacterID(thief_id);
+        if(thief.GetIntVar("knocked_out") != _awake){
+            //If the thief is dead the player wins!
+            SetEndText("win", "You killed the thief!");
+            mission_done = true;
+        }
+        MovementObject@ player = ReadCharacter(0);
+        //Cheater
+        //DebugDrawLine(thief.position, player.position, vec3(255,255,255), _delete_on_update);
+        if(player.GetIntVar("knocked_out") != _awake){
+            //If the player dies the game is also lost.
+            SetEndText("lost", "Try not to die!");
+            mission_done = true;
+        }
     }
 }
 
