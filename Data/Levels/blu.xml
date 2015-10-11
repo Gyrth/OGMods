@@ -1,0 +1,996 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name></Name>
+<Description></Description>
+<Shader>post</Shader>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/red_hills/red_hills_hm.png</Heightmap>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/red_hills/red_hills_c.tga</ColorMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_normal.png" materialpath="Data/Materials/dirt.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_dirt_normal.tga" materialpath="Data/Materials/dirt.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate Shadow="true" AO="true" NavMesh="true" />
+<SpawnPoints>
+    <SpawnPoint t0="0" t1="200" t2="0" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" />
+</SpawnPoints>
+<AmbientSounds />
+<Script>Data/Scripts/protect_the_caravan.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Level Boundaries" type="int" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
+    <SunAngularRad>0.112145</SunAngularRad>
+    <SunColorAngle>6.8534</SunColorAngle>
+    <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
+    <ExtraAO>0</ExtraAO>
+    <SkyRotation>0</SkyRotation>
+</Sky>
+<ActorObjects>
+    <ActorObject t0="61.2507" t1="11.0463" t2="-170.349" s0="1" s1="1" s2="1" r0="0.67593" r1="0" r2="0.736966" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.736966" r9="-0" r10="0.67593" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Left handed" type="string" val="0.0" />
+            <parameter name="Lives" type="string" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="108.105" t1="-12.6045" t2="-42.5655" s0="1" s1="1" s2="1" r0="0.183159" r1="0" r2="-0.983083" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="-0.983083" r9="-0" r10="-0.183159" r11="0" r12="0" r13="0" r14="0" r15="1" id="2" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-100.705" t1="-12.7679" t2="66.4681" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="4" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="19.3699" t1="46.3459" t2="-79.0463" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="5" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="12.553" t1="-13.8114" t2="114.65" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.462261" r1="-0.000433865" r2="-0.886744" r3="0" r4="-0.000525866" r5="1" r6="-0.000215144" r7="0" r8="0.886744" r9="0.000366856" r10="-0.462261" r11="0" r12="0" r13="0" r14="0" r15="1" id="6" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-88.9465" t1="-3.31761" t2="32.5545" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.499934" r1="-9.9871e-005" r2="-0.866064" r3="0" r4="0.000434129" r5="1" r6="-0.000365916" r7="0" r8="0.866064" r9="-0.000558917" r10="-0.499934" r11="0" r12="0" r13="0" r14="0" r15="1" id="8" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="4.76814" t1="44.7793" t2="-78.4905" s0="1" s1="1" s2="1" r0="0.002648" r1="-0.999996" r2="-3.36499e-007" r3="0" r4="0.999996" r5="0.002648" r6="5.06207e-007" r7="0" r8="-5.05315e-007" r9="-3.37838e-007" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="9" color_r="0.894118" color_g="0.0823529" color_b="0.0823529" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="19.3699" t1="-14.8534" t2="-92.6057" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="10" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.62701" t1="9.56363" t2="-72.2969" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="11" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.61696" t1="3.40443" t2="-99.4157" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="5.58794e-009" r2="5.58794e-009" r3="0" r4="-5.58794e-009" r5="1" r6="-1.56125e-017" r7="0" r8="-5.58794e-009" r9="-1.56125e-017" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="12" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.71139" t1="31.6205" t2="-85.8645" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="-8.75443e-008" r2="-1.13622e-007" r3="0" r4="8.75443e-008" r5="-1" r6="4.97348e-015" r7="0" r8="-1.13622e-007" r9="-4.97348e-015" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="13" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-4.11571" t1="9.56422" t2="-92.6057" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="14" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-4.11571" t1="15.2466" t2="-79.0463" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.5" r1="0" r2="0.866025" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.866025" r9="-0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="15" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="19.3699" t1="-4.60713" t2="-79.0463" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="16" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-3.95706" t1="-6.14813" t2="-119.864" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="17" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-4.00316" t1="-2.67486" t2="-133.371" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="18" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.78584" t1="-18.0874" t2="-140.172" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="19" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.78604" t1="-2.69454" t2="-113.054" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="20" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="102.829" t1="8.20413" t2="112.601" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="21" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="19.5285" t1="-14.7036" t2="-119.864" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="22" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-22.2472" t1="-19.5756" t2="106.454" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.999077" r1="0" r2="0.042964" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.042964" r9="-0" r10="0.999077" r11="0" r12="0" r13="0" r14="0" r15="1" id="24" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="158.036" t1="-19.0089" t2="147.797" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.307473" r1="-0.918424" r2="0.248914" r3="0" r4="0.932669" r5="0.239015" r6="-0.270185" r7="0" r8="0.18865" r9="0.315229" r10="0.930076" r11="0" r12="0" r13="0" r14="0" r15="1" id="25" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="1.18995" t1="-10.1476" t2="107.477" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.46233" r1="0" r2="-0.886708" r3="0" r4="-0" r5="-1" r6="0" r7="0" r8="-0.886708" r9="0" r10="0.46233" r11="0" r12="0" r13="0" r14="0" r15="1" id="26" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-22.8566" t1="-15.9976" t2="120.015" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.462331" r1="0" r2="-0.886707" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.886707" r9="0" r10="-0.462331" r11="0" r12="0" r13="0" r14="0" r15="1" id="27" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-10.8334" t1="-11.8705" t2="113.746" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.46233" r1="0" r2="0.886708" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.886708" r9="0" r10="-0.46233" r11="0" r12="0" r13="0" r14="0" r15="1" id="28" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-11.389" t1="-17.432" t2="127.279" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.462331" r1="0" r2="-0.886707" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.886707" r9="0" r10="-0.462331" r11="0" r12="0" r13="0" r14="0" r15="1" id="29" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="0.634219" t1="-30.3471" t2="121.01" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.536746" r1="0" r2="-0.843744" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.843744" r9="0" r10="0.536746" r11="0" r12="0" r13="0" r14="0" r15="1" id="30" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="80.199" t1="-31.2318" t2="149.151" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.500066" r1="0.000533936" r2="0.865987" r3="0" r4="0.000434064" r5="1" r6="-0.000365913" r7="0" r8="-0.865987" r9="0.000192913" r10="-0.500066" r11="0" r12="0" r13="0" r14="0" r15="1" id="31" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-65.4169" t1="7.04995" t2="46.0633" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="0.000434014" r5="1" r6="-0.000365983" r7="0" r8="-7.59206e-005" r9="0.000366016" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="32" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="12.3593" t1="50.7011" t2="-77.6435" s0="1" s1="1" s2="1" r0="0.0026468" r1="-0.999996" r2="-3.36507e-007" r3="0" r4="0.999996" r5="0.0026468" r6="5.06208e-007" r7="0" r8="-5.05315e-007" r9="-3.37846e-007" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="33" color_r="0.894118" color_g="0.0823529" color_b="0.0823529" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-77.2054" t1="1.19557" t2="39.3052" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0.000433986" r2="-7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="-7.59206e-005" r9="0.000366016" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="34" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-88.9424" t1="-6.74759" t2="46.1104" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.499935" r1="0.000100048" r2="0.866063" r3="0" r4="0.000434048" r5="1" r6="-0.000366074" r7="0" r8="-0.866063" r9="0.000558926" r10="0.499935" r11="0" r12="0" r13="0" r14="0" r15="1" id="35" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="13.7398" t1="-20.4925" t2="87.54" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.999073" r1="0.000534403" r2="0.0430399" r3="0" r4="-0.000525597" r5="1" r6="-0.000215911" r7="0" r8="-0.0430401" r9="0.000193089" r10="0.999073" r11="0" r12="0" r13="0" r14="0" r15="1" id="36" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="43.6279" t1="-11.8247" t2="136.352" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.500066" r1="-0.000533936" r2="-0.865987" r3="0" r4="0.000434063" r5="1" r6="-0.000365913" r7="0" r8="0.865987" r9="-0.000192913" r10="0.500066" r11="0" r12="0" r13="0" r14="0" r15="1" id="37" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="76.6736" t1="0.506542" t2="-3.05716" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0.000433986" r2="-7.60794e-005" r3="0" r4="0.000434014" r5="1" r6="-0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="38" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="68.4836" t1="30.9066" t2="142.348" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.500066" r1="0.000533936" r2="0.865987" r3="0" r4="0.000434064" r5="1" r6="-0.000365913" r7="0" r8="-0.865987" r9="0.000192913" r10="-0.500066" r11="0" r12="0" r13="0" r14="0" r15="1" id="39" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="18.4541" t1="-8.91188" t2="165.953" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="40" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="56.72" t1="-13.5185" t2="162.702" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.500066" r1="0.000533936" r2="0.865987" r3="0" r4="0.000434064" r5="1" r6="-0.000365913" r7="0" r8="-0.865987" r9="0.000192913" r10="-0.500066" r11="0" r12="0" r13="0" r14="0" r15="1" id="41" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="68.4615" t1="-20.0465" t2="142.367" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.500066" r1="0.000533936" r2="0.865987" r3="0" r4="0.000434064" r5="1" r6="-0.000365913" r7="0" r8="-0.865987" r9="0.000192913" r10="-0.500066" r11="0" r12="0" r13="0" r14="0" r15="1" id="42" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-10.2917" t1="11.9174" t2="100.169" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.439378" r1="9.16646e-008" r2="-0.898302" r3="0" r4="1.60795e-007" r5="1" r6="1.8069e-007" r7="0" r8="0.898302" r9="-2.23834e-007" r10="0.439378" r11="0" r12="0" r13="0" r14="0" r15="1" id="43" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="102.838" t1="-16.6138" t2="139.756" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0.000433986" r2="-7.60794e-005" r3="0" r4="0.000434014" r5="1" r6="-0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="44" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="126.315" t1="-5.32755" t2="112.631" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="45" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="89.9017" t1="37.7049" t2="135.824" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.799166" r1="0.595694" r2="0.0805091" r3="0" r4="-0.594208" r5="0.762636" r6="0.255544" r7="0" r8="0.0908271" r9="-0.252062" r10="0.963439" r11="0" r12="0" r13="0" r14="0" r15="1" id="46" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="102.829" t1="-0.292261" t2="126.161" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="47" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="102.829" t1="-15.6449" t2="99.0417" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="48" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="78.9043" t1="-2.25966" t2="98.8524" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="49" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.5681" t1="-14.6489" t2="-27.4048" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.0698787" r1="0.997555" r2="-0.000241578" r3="0" r4="-0.879778" r5="-0.0617425" r6="-0.471358" r7="0" r8="-0.470221" r9="-0.0327253" r10="0.881942" r11="0" r12="0" r13="0" r14="0" r15="1" id="50" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.78583" t1="-9.56155" t2="-126.613" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="51" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="114.572" t1="-1.91211" t2="105.852" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="52" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-77.2076" t1="6.83316" t2="25.7477" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="0.000434014" r5="1" r6="-0.000365983" r7="0" r8="-7.59206e-005" r9="0.000366016" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="54" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-53.8497" t1="4.02447" t2="-1.32163" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="55" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-65.5926" t1="6.73089" t2="18.9871" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="56" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-65.5926" t1="7.60246" t2="-8.13166" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="57" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-77.3353" t1="6.16801" t2="-1.32163" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="59" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-77.3353" t1="11.1659" t2="12.2377" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.5" r1="0" r2="0.866025" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.866025" r9="-0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="60" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-65.4568" t1="6.5998" t2="32.551" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.500066" r1="0.000533936" r2="0.865987" r3="0" r4="0.000434064" r5="1" r6="-0.000365913" r7="0" r8="-0.865987" r9="0.000192913" r10="-0.500066" r11="0" r12="0" r13="0" r14="0" r15="1" id="61" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-53.8036" t1="-3.31303" t2="12.1854" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="62" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="31.8832" t1="-16.4881" t2="129.572" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.500066" r1="0.000533936" r2="0.865987" r3="0" r4="0.000434064" r5="1" r6="-0.000365913" r7="0" r8="-0.865987" r9="0.000192913" r10="-0.500066" r11="0" r12="0" r13="0" r14="0" r15="1" id="63" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="68.5526" t1="43.2474" t2="128.833" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="64" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="68.3027" t1="-14.0551" t2="155.533" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="65" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-92.559" t1="-8.34254" t2="156.644" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.999915" r1="-3.3062e-008" r2="-0.013019" r3="0" r4="0.0110731" r5="-0.525919" r6="0.850463" r7="0" r8="-0.00684696" r9="-0.850535" r10="-0.525874" r11="0" r12="0" r13="0" r14="0" r15="1" id="66" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-81.2197" t1="-31.9768" t2="130.819" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488682" r1="0" r2="0.872462" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.872462" r9="0" r10="0.488682" r11="0" r12="0" r13="0" r14="0" r15="1" id="67" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-69.5243" t1="-24.4323" t2="123.857" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488686" r1="0" r2="0.87246" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.87246" r9="-0" r10="-0.488686" r11="0" r12="0" r13="0" r14="0" r15="1" id="68" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-93.184" t1="-35.7512" t2="110.605" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488682" r1="0" r2="0.872462" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.872462" r9="0" r10="0.488682" r11="0" r12="0" r13="0" r14="0" r15="1" id="69" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-81.354" t1="-19.9785" t2="117.231" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.488683" r1="0" r2="-0.872462" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.872462" r9="0" r10="0.488683" r11="0" r12="0" r13="0" r14="0" r15="1" id="70" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-81.504" t1="-16.828" t2="103.687" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488682" r1="0" r2="0.872462" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.872462" r9="0" r10="0.488682" r11="0" r12="0" r13="0" r14="0" r15="1" id="71" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-69.6745" t1="-12.7221" t2="110.314" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.511232" r1="0" r2="0.859443" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.859443" r9="0" r10="-0.511232" r11="0" r12="0" r13="0" r14="0" r15="1" id="72" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-92.981" t1="-22.0482" t2="124.178" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.999915" r1="0" r2="-0.013019" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="-0.013019" r9="-0" r10="-0.999915" r11="0" r12="0" r13="0" r14="0" r15="1" id="73" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.7935" t1="9.86447" t2="145.776" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.773509" r1="-0.623713" r2="0.11254" r3="0" r4="0.623881" r5="0.718052" r6="-0.308504" r7="0" r8="0.111608" r9="0.308842" r10="0.944542" r11="0" r12="0" r13="0" r14="0" r15="1" id="74" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="91.0861" t1="-15.2595" t2="119.411" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.5" r1="0" r2="0.866025" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.866025" r9="-0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="75" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="79.1947" t1="0.458883" t2="-83.2218" s0="1" s1="1" s2="1" r0="0.183159" r1="0" r2="-0.983083" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.983083" r9="0" r10="0.183159" r11="0" r12="0" r13="0" r14="0" r15="1" id="76" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-9.81324" t1="3.18532" t2="-47.3108" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="77" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-21.5099" t1="21.3172" t2="-40.5835" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="78" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-33.2989" t1="13.7727" t2="-33.7817" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="79" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-33.2989" t1="9.31898" t2="-47.3412" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="80" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-45.0416" t1="6.16843" t2="-54.0905" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="81" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-45.0416" t1="-6.74663" t2="-40.5311" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.5" r1="0" r2="0.866025" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.866025" r9="-0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="82" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-21.556" t1="6.60076" t2="-54.0905" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="83" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-33.2989" t1="25.0917" t2="-60.9005" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="84" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="46.8873" t1="-17.6552" t2="37.0012" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="85" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="58.5617" t1="0.476686" t2="43.7672" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="86" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="70.3467" t1="-7.06781" t2="50.5759" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="-0.866025" r3="0" r4="-0" r5="-1" r6="0" r7="0" r8="-0.866025" r9="0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="87" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="58.6039" t1="-14.2393" t2="57.3556" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.5" r1="0" r2="0.866025" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="88" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="70.3729" t1="-27.5872" t2="64.1201" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="90" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="46.8874" t1="-16.9576" t2="50.5607" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="91" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="46.8611" t1="-21.1127" t2="64.1353" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="92" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-13.099" t1="0.294449" t2="35.1452" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.511233" r1="0" r2="-0.859442" r3="0" r4="-0" r5="-1" r6="0" r7="0" r8="-0.859442" r9="0" r10="0.511233" r11="0" r12="0" r13="0" r14="0" r15="1" id="93" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-1.69022" t1="-22.3596" t2="14.6695" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488682" r1="0" r2="0.872462" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.872462" r9="0" r10="0.488682" r11="0" r12="0" r13="0" r14="0" r15="1" id="94" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="27.2732" t1="22.4498" t2="44.2971" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488683" r1="0" r2="0.872462" r3="0" r4="0.83145" r5="-0.302992" r6="0.465711" r7="0" r8="0.264349" r9="0.952993" r10="0.148067" r11="0" r12="0" r13="0" r14="0" r15="1" id="95" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-1.82499" t1="-10.3614" t2="1.08172" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.488683" r1="0" r2="-0.872462" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.872462" r9="0" r10="0.488683" r11="0" r12="0" r13="0" r14="0" r15="1" id="96" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-1.97505" t1="-7.21081" t2="-12.4617" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488682" r1="0" r2="0.872462" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.872462" r9="0" r10="0.488682" r11="0" r12="0" r13="0" r14="0" r15="1" id="97" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="9.85496" t1="-4.25185" t2="-5.83539" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.511232" r1="0" r2="0.859443" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.859443" r9="0" r10="-0.511232" r11="0" r12="0" r13="0" r14="0" r15="1" id="98" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-13.4521" t1="-7.64315" t2="8.02867" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.999915" r1="0" r2="-0.013019" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="-0.013019" r9="-0" r10="-0.999915" r11="0" r12="0" r13="0" r14="0" r15="1" id="99" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-13.655" t1="-26.1341" t2="-5.54451" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488682" r1="0" r2="0.872462" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.872462" r9="0" r10="0.488682" r11="0" r12="0" r13="0" r14="0" r15="1" id="100" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="89.6484" t1="-15.1663" t2="50.6452" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.500066" r1="-0.000533936" r2="-0.865987" r3="0" r4="-0.000434064" r5="-1" r6="0.000365913" r7="0" r8="-0.865987" r9="0.000192913" r10="-0.500066" r11="0" r12="0" r13="0" r14="0" r15="1" id="102" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-4.06166" t1="4.53109" t2="150.754" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="103" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="126.27" t1="-21.0364" t2="153.08" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.177644" r1="-0.941371" r2="0.286815" r3="0" r4="0.977745" r5="0.135782" r6="-0.159929" r7="0" r8="0.111608" r9="0.308843" r10="0.944542" r11="0" r12="0" r13="0" r14="0" r15="1" id="104" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-1.47187" t1="4.75969" t2="28.1983" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488686" r1="0" r2="0.87246" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.87246" r9="-0" r10="-0.488686" r11="0" r12="0" r13="0" r14="0" r15="1" id="105" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="58.6302" t1="-17.3899" t2="70.8998" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="106" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-53.6734" t1="-7.76602" t2="52.8869" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.500066" r1="0.000533936" r2="0.865987" r3="0" r4="0.000434064" r5="1" r6="-0.000365913" r7="0" r8="-0.865987" r9="0.000192913" r10="-0.500066" r11="0" r12="0" r13="0" r14="0" r15="1" id="107" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="50.287" t1="-2.89365" t2="6.47904" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.5" r1="0" r2="0.866025" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.866025" r9="-0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="108" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="13.1544" t1="-17.0003" t2="101.086" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.999073" r1="0.000534403" r2="0.0430399" r3="0" r4="-0.000525597" r5="1" r6="-0.000215911" r7="0" r8="-0.0430401" r9="0.000193089" r10="0.999073" r11="0" r12="0" r13="0" r14="0" r15="1" id="109" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-13.2755" t1="-4.22771" t2="21.587" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.999915" r1="0" r2="-0.013019" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="-0.013019" r9="-0" r10="-0.999915" r11="0" r12="0" r13="0" r14="0" r15="1" id="110" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="10.0051" t1="-14.8151" t2="7.70801" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.488686" r1="0" r2="0.87246" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.87246" r9="-0" r10="-0.488686" r11="0" r12="0" r13="0" r14="0" r15="1" id="111" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="114.555" t1="-5.07159" t2="133.066" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="112" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.765" t1="-6.14098" t2="75.6621" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="113" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.764" t1="-10.8582" t2="62.1044" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="114" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="114.618" t1="12.8043" t2="119.359" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="115" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="32.399" t1="-4.13206" t2="-3.87892" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.5" r1="0" r2="0.866025" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.866025" r9="-0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="116" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="35.1008" t1="-0.531914" t2="-50.4534" s0="1" s1="1" s2="1" r0="-0.183159" r1="0" r2="0.983083" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.983083" r9="-0" r10="-0.183159" r11="0" r12="0" r13="0" r14="0" r15="1" id="117" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="115.597" t1="-0.473303" t2="-114.867" s0="1" s1="1" s2="1" r0="0.999991" r1="0" r2="0.004294" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.004294" r9="-0" r10="0.999991" r11="0" r12="0" r13="0" r14="0" r15="1" id="118" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="81.8977" t1="0.49855" t2="-98.2129" s0="1" s1="1" s2="1" r0="0.166646" r1="0" r2="-0.986017" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.986017" r9="0" r10="0.166646" r11="0" r12="0" r13="0" r14="0" r15="1" id="119" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="90.7032" t1="0.465149" t2="-96.6676" s0="1" s1="1" s2="1" r0="-0.183159" r1="0" r2="0.983083" r3="0" r4="0" r5="1" r6="-0" r7="0" r8="-0.983083" r9="0" r10="-0.183159" r11="0" r12="0" r13="0" r14="0" r15="1" id="120" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="118.163" t1="-3.91853" t2="-131" s0="1" s1="1" s2="1" r0="-0.527503" r1="-8.19564e-007" r2="0.849553" r3="0" r4="-0.336992" r5="0.917962" r6="-0.209244" r7="0" r8="-0.779857" r9="-0.396669" r10="-0.484228" r11="0" r12="0" r13="0" r14="0" r15="1" id="121" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="137.97" t1="-17.5672" t2="77.2275" s0="1.72149" s1="1.72149" s2="1.72149" r0="1" r1="0" r2="-0" r3="0" r4="-0" r5="0.999861" r6="-0.016659" r7="0" r8="0" r9="0.016659" r10="0.999861" r11="0" r12="0" r13="0" r14="0" r15="1" id="122" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_hourglass.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.985" t1="1.79991" t2="-119.34" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="123" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="150.909" t1="-3.80506" t2="-110.667" s0="1" s1="1" s2="1" r0="-0.527503" r1="-8.19564e-007" r2="0.849553" r3="0" r4="-0.336992" r5="0.917962" r6="-0.209244" r7="0" r8="-0.779857" r9="-0.396669" r10="-0.484228" r11="0" r12="0" r13="0" r14="0" r15="1" id="124" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="142.728" t1="-3.84683" t2="-115.747" s0="1" s1="1" s2="1" r0="-0.527503" r1="-8.19564e-007" r2="0.849553" r3="0" r4="-0.336992" r5="0.917962" r6="-0.209244" r7="0" r8="-0.779857" r9="-0.396669" r10="-0.484228" r11="0" r12="0" r13="0" r14="0" r15="1" id="125" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="134.527" t1="-3.83666" t2="-120.839" s0="1" s1="1" s2="1" r0="-0.527503" r1="-8.19564e-007" r2="0.849553" r3="0" r4="-0.336992" r5="0.917962" r6="-0.209244" r7="0" r8="-0.779857" r9="-0.396669" r10="-0.484228" r11="0" r12="0" r13="0" r14="0" r15="1" id="126" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="126.34" t1="-3.8629" t2="-125.923" s0="1" s1="1" s2="1" r0="-0.527503" r1="-8.19564e-007" r2="0.849553" r3="0" r4="-0.336992" r5="0.917962" r6="-0.209244" r7="0" r8="-0.779857" r9="-0.396669" r10="-0.484228" r11="0" r12="0" r13="0" r14="0" r15="1" id="127" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="51.7837" t1="-12.6045" t2="-72.5466" s0="1" s1="1" s2="1" r0="0.183159" r1="0" r2="-0.983083" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="-0.983083" r9="-0" r10="-0.183159" r11="0" r12="0" r13="0" r14="0" r15="1" id="128" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.031" t1="3.84287" t2="-43.5548" s0="1" s1="1" s2="1" r0="0.751938" r1="0" r2="0.659234" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.659234" r9="-0" r10="0.751938" r11="0" r12="0" r13="0" r14="0" r15="1" id="129" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_corner.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.882" t1="1.95519" t2="-110.483" s0="1" s1="1" s2="1" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="130" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="87.9026" t1="0.42548" t2="-81.6007" s0="1" s1="1" s2="1" r0="-0.183159" r1="0" r2="0.983083" r3="0" r4="0" r5="1" r6="-0" r7="0" r8="-0.983083" r9="0" r10="-0.183159" r11="0" r12="0" r13="0" r14="0" r15="1" id="131" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="115.662" t1="-6.01027" t2="-88.3278" s0="1" s1="1" s2="1" r0="0.5" r1="0" r2="0.866025" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.866025" r9="-0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="132" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="93.6796" t1="2.7663" t2="-88.289" s0="1" s1="1" s2="1" r0="-0.181305" r1="0" r2="0.983427" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.983427" r9="-0" r10="-0.181305" r11="0" r12="0" r13="0" r14="0" r15="1" id="133" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="100.313" t1="-1.97263" t2="-123.751" s0="1" s1="1" s2="1" r0="0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="-0.866025" r9="-0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="134" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.985" t1="-1.9725" t2="-128.197" s0="1" s1="1" s2="1" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="135" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="84.9405" t1="0.426553" t2="-89.9251" s0="1" s1="1" s2="1" r0="0.176167" r1="0" r2="-0.98436" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="-0.98436" r9="-0" r10="-0.176167" r11="0" r12="0" r13="0" r14="0" r15="1" id="136" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.985" t1="1.77305" t2="-83.9115" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="137" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="115.645" t1="1.79989" t2="-79.4473" s0="1" s1="1" s2="1" r0="0.5" r1="0" r2="0.866025" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.866025" r9="-0" r10="0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="138" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="100.257" t1="-0.473303" t2="-114.933" s0="1" s1="1" s2="1" r0="0.999991" r1="0" r2="0.004294" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.004294" r9="-0" r10="0.999991" r11="0" r12="0" r13="0" r14="0" r15="1" id="139" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="100.219" t1="1.71686" t2="-106.076" s0="1" s1="1" s2="1" r0="0.999991" r1="0" r2="0.004294" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0.004294" r9="0" r10="-0.999991" r11="0" r12="0" r13="0" r14="0" r15="1" id="140" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.7803" t1="6.55417" t2="-86.4663" s0="1" s1="1" s2="1" r0="-0.183159" r1="0" r2="0.983083" r3="0" r4="0" r5="1" r6="-0" r7="0" r8="-0.983083" r9="0" r10="-0.183159" r11="0" r12="0" r13="0" r14="0" r15="1" id="141" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="107.985" t1="1.77305" t2="-92.7686" s0="1" s1="1" s2="1" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="142" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_slope.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-65.5926" t1="-8.83946" t2="5.42795" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="143" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="127.97" t1="-6.82818" t2="-46.3874" s0="1" s1="1" s2="1" r0="-0.729677" r1="-0.117062" r2="-0.673697" r3="0" r4="0.086009" r5="-0.993124" r6="0.0794102" r7="0" r8="-0.678361" r9="-1.67638e-007" r10="0.734729" r11="0" r12="0" r13="0" r14="0" r15="1" id="144" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chunk.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="110.843" t1="1.00978" t2="-42.4909" s0="1" s1="1" s2="1" r0="0.751788" r1="0" r2="0.659405" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.659405" r9="-0" r10="0.751788" r11="0" r12="0" r13="0" r14="0" r15="1" id="145" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chunk.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-53.6355" t1="-11.9317" t2="66.4008" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="0.000434014" r5="1" r6="-0.000365983" r7="0" r8="-7.59206e-005" r9="0.000366016" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="146" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-65.4221" t1="-13.1702" t2="59.6411" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0.000433986" r2="-7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="-7.59206e-005" r9="0.000366016" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="147" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-88.9051" t1="-28.6518" t2="59.7703" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.508617" r1="0.000535794" r2="0.860993" r3="0" r4="0.000434206" r5="1" r6="-0.000365798" r7="0" r8="-0.860993" r9="0.000187798" r10="-0.508617" r11="0" r12="0" r13="0" r14="0" r15="1" id="148" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-77.194" t1="19.0839" t2="52.855" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="149" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-65.4199" t1="-16.6265" t2="73.1986" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="150" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-65.5926" t1="51.3422" t2="5.42769" s0="1.53066" s1="1.53066" s2="1.53066" r0="-1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="155" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="150.409" t1="-23.712" t2="72.3676" s0="1" s1="1" s2="1" r0="0.224369" r1="0.964749" r2="-0.137542" r3="0" r4="-0.822504" r5="0.263172" r6="0.50421" r7="0" r8="0.522633" r9="-5.66244e-007" r10="0.852558" r11="0" r12="0" r13="0" r14="0" r15="1" id="158" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chunk.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="132.42" t1="-8.09827" t2="-42.8287" s0="1" s1="1" s2="1" r0="0.552554" r1="0.150046" r2="0.81986" r3="0" r4="0.714806" r5="0.420572" r6="-0.558723" r7="0" r8="-0.428644" r9="0.894766" r10="0.125135" r11="0" r12="0" r13="0" r14="0" r15="1" id="159" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_boulder.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="108.583" t1="0.390462" t2="-40.1469" s0="1" s1="1" s2="1" r0="-0.295838" r1="-0.952436" r2="0.0731141" r3="0" r4="0.874192" r5="-0.300797" r6="-0.381194" r7="0" r8="0.385055" r9="-0.0488558" r10="0.921599" r11="0" r12="0" r13="0" r14="0" r15="1" id="160" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_boulder.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="124.376" t1="-12.5539" t2="-31.4138" s0="1" s1="1" s2="1" r0="-0.263816" r1="-0.964572" r2="0.00136311" r3="0" r4="0.947018" r5="-0.258746" r6="0.19028" r7="0" r8="-0.183186" r9="0.0514898" r10="0.981729" r11="0" r12="0" r13="0" r14="0" r15="1" id="161" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_boulder.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-53.8036" t1="37.1181" t2="12.1854" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="162" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="101.466" t1="-21.5214" t2="159.874" s0="1" s1="1" s2="1" r0="0.451396" r1="0.892247" r2="-0.0116709" r3="0" r4="0.717138" r5="-0.354962" r6="0.599763" r7="0" r8="0.530994" r9="-0.2791" r10="-0.800093" r11="0" r12="0" r13="0" r14="0" r15="1" id="163" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_corner.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="105.965" t1="17.8058" t2="136.481" s0="1" s1="1" s2="1" r0="0.221581" r1="-0.258823" r2="0.940166" r3="0" r4="0.811582" r5="0.583433" r6="-0.0306604" r7="0" r8="-0.540588" r9="0.769816" r10="0.339334" r11="0" r12="0" r13="0" r14="0" r15="1" id="164" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chunk.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="111.321" t1="22.3711" t2="137.253" s0="1.24128" s1="1.24128" s2="1.24128" r0="0.224442" r1="-0.949333" r2="0.219983" r3="0" r4="0.776552" r5="0.0378582" r6="-0.628915" r7="0" r8="0.588722" r9="0.311983" r10="0.745703" r11="0" r12="0" r13="0" r14="0" r15="1" id="165" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_boulder.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="156.094" t1="-21.4504" t2="86.2507" s0="1" s1="1" s2="1" r0="-0.295838" r1="-0.952436" r2="0.0731141" r3="0" r4="0.874192" r5="-0.300797" r6="-0.381194" r7="0" r8="0.385055" r9="-0.0488558" r10="0.921599" r11="0" r12="0" r13="0" r14="0" r15="1" id="166" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_boulder.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="112.314" t1="24.6662" t2="130.82" s0="1.40559" s1="1.40559" s2="1.40559" r0="0.869772" r1="0.249184" r2="0.425916" r3="0" r4="-0.245909" r5="0.967198" r6="-0.0636868" r7="0" r8="-0.427815" r9="-0.0493437" r10="0.902518" r11="0" r12="0" r13="0" r14="0" r15="1" id="167" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chunk.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="87.9376" t1="-19.7175" t2="163.928" s0="1" s1="1" s2="1" r0="0.751788" r1="5.36442e-007" r2="0.659405" r3="0" r4="-0.316648" r5="0.877158" r6="0.36101" r7="0" r8="-0.578402" r9="-0.480202" r10="0.659437" r11="0" r12="0" r13="0" r14="0" r15="1" id="168" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chunk.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="95.4879" t1="-21.3914" t2="173.058" s0="1" s1="1" s2="1" r0="0.622757" r1="-0.0599531" r2="-0.780115" r3="0" r4="0.596555" r5="-0.608758" r6="0.523007" r7="0" r8="-0.506257" r9="-0.791088" r10="-0.343343" r11="0" r12="0" r13="0" r14="0" r15="1" id="170" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_corner.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="80.711" t1="-22.1372" t2="165.431" s0="1" s1="1" s2="1" r0="-0.295838" r1="-0.952436" r2="0.0731141" r3="0" r4="0.874192" r5="-0.300797" r6="-0.381194" r7="0" r8="0.385055" r9="-0.0488558" r10="0.921599" r11="0" r12="0" r13="0" r14="0" r15="1" id="171" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_boulder.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="111.393" t1="-8.40176" t2="-41.4698" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="0.936948" r6="0.34947" r7="0" r8="0" r9="-0.34947" r10="0.936948" r11="0" r12="0" r13="0" r14="0" r15="1" id="172" color_r="0.580392" color_g="0.086275" color_b="0.086275" type_file="Data/Objects/Crete/hex_crete_rubble.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="129.985" t1="-8.74371" t2="-42.7806" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="0.983669" r6="0.179985" r7="0" r8="0" r9="-0.179985" r10="0.983669" r11="0" r12="0" r13="0" r14="0" r15="1" id="173" color_r="0.580392" color_g="0.086275" color_b="0.086275" type_file="Data/Objects/Crete/hex_crete_rubble.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="99.8247" t1="-22.3248" t2="177.722" s0="0.693645" s1="0.693645" s2="0.693645" r0="-0.178916" r1="-0.0455058" r2="-0.982811" r3="0" r4="0.0617901" r5="0.996438" r6="-0.0573853" r7="0" r8="0.981922" r9="-0.0709952" r10="-0.175467" r11="0" r12="0" r13="0" r14="0" r15="1" id="174" color_r="0.74902" color_g="0.098039" color_b="0.098039" type_file="Data/Objects/Crete/hex_crete_rubble.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="145.279" t1="-22.6935" t2="75.3429" s0="1" s1="1" s2="1" r0="1" r1="0" r2="-0" r3="0" r4="-0" r5="0.994881" r6="-0.101051" r7="0" r8="0" r9="0.101051" r10="0.994881" r11="0" r12="0" r13="0" r14="0" r15="1" id="175" color_r="0.580392" color_g="0.086275" color_b="0.086275" type_file="Data/Objects/Crete/hex_crete_rubble.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="182.417" t1="-13.7859" t2="123.38" s0="1" s1="1" s2="1" r0="-0.295838" r1="-0.952436" r2="0.0731141" r3="0" r4="0.874192" r5="-0.300797" r6="-0.381194" r7="0" r8="0.385055" r9="-0.0488558" r10="0.921599" r11="0" r12="0" r13="0" r14="0" r15="1" id="176" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_boulder.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="119.067" t1="-7.63779" t2="-43.6475" s0="1" s1="1" s2="1" r0="0.396765" r1="0.88511" r2="-0.243224" r3="0" r4="-0.754607" r5="0.465382" r6="0.462588" r7="0" r8="0.522633" r9="-3.72529e-007" r10="0.852558" r11="0" r12="0" r13="0" r14="0" r15="1" id="177" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chunk.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="138.559" t1="-21.6007" t2="86.1011" s0="1" s1="1" s2="1" r0="-0.279939" r1="0.0970106" r2="0.955104" r3="0" r4="-4.35859e-007" r5="0.994881" r6="-0.101051" r7="0" r8="-0.960018" r9="-0.0282886" r10="-0.278506" r11="0" r12="0" r13="0" r14="0" r15="1" id="178" color_r="0.580392" color_g="0.086275" color_b="0.086275" type_file="Data/Objects/Crete/hex_crete_rubble.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="113.836" t1="20.6163" t2="131.703" s0="0.693645" s1="0.693645" s2="0.693645" r0="-0.279939" r1="0.0970106" r2="0.955104" r3="0" r4="-4.35859e-007" r5="0.994881" r6="-0.101051" r7="0" r8="-0.960018" r9="-0.0282886" r10="-0.278506" r11="0" r12="0" r13="0" r14="0" r15="1" id="179" color_r="0.74902" color_g="0.098039" color_b="0.098039" type_file="Data/Objects/Crete/hex_crete_rubble.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="65.7526" t1="2.02666" t2="157.472" s0="0.469692" s1="0.469692" s2="0.469692" r0="0.976167" r1="0.0557748" r2="0.209731" r3="0" r4="-0.0564093" r5="0.998403" r6="-0.00296016" r7="0" r8="-0.209561" r9="-0.00894116" r10="0.977755" r11="0" r12="0" r13="0" r14="0" r15="1" id="180" color_r="0.74902" color_g="0.098039" color_b="0.098039" type_file="Data/Objects/Crete/hex_crete_rubble.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="102.676" t1="-22.2862" t2="163.296" s0="0.693645" s1="0.693645" s2="0.693645" r0="-0.997693" r1="0.0600441" r2="-0.0316692" r3="0" r4="0.0579859" r5="0.99637" r6="0.0623311" r7="0" r8="0.0352968" r9="0.0603509" r10="-0.997553" r11="0" r12="0" r13="0" r14="0" r15="1" id="181" color_r="0.74902" color_g="0.098039" color_b="0.098039" type_file="Data/Objects/Crete/hex_crete_rubble.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-63.619" t1="16.7623" t2="3.31852" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="0.661341" r6="0.750085" r7="0" r8="0" r9="-0.750085" r10="0.661341" r11="0" r12="0" r13="0" r14="0" r15="1" id="183" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/medium_props/egg_b.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="27.4573" t1="-24.5498" t2="75.1098" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.5" r1="0" r2="-0.866025" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.866025" r9="0" r10="-0.5" r11="0" r12="0" r13="0" r14="0" r15="1" id="184" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-48.35" t1="-19.8654" t2="94.2526" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="-0.000433986" r2="7.60794e-005" r3="0" r4="-0.000434014" r5="-1" r6="0.000365983" r7="0" r8="7.59206e-005" r9="-0.000366016" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="185" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-77.159" t1="-21.1134" t2="66.4462" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.499935" r1="0.000100048" r2="0.866063" r3="0" r4="0.000434048" r5="1" r6="-0.000366074" r7="0" r8="-0.866063" r9="0.000558926" r10="0.499935" r11="0" r12="0" r13="0" r14="0" r15="1" id="186" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-80.7534" t1="-10.2915" t2="57.5964" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="187" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/medium_props/egg_c.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="104.346" t1="9.18738" t2="138.755" s0="0.693645" s1="0.693645" s2="0.693645" r0="-0.866558" r1="-0.050432" r2="-0.496523" r3="0" r4="-0.056409" r5="0.998403" r6="-0.00296017" r7="0" r8="0.495879" r9="0.0254432" r10="-0.868019" r11="0" r12="0" r13="0" r14="0" r15="1" id="188" color_r="0.74902" color_g="0.098039" color_b="0.098039" type_file="Data/Objects/Crete/hex_crete_rubble.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="106.251" t1="10.1531" t2="136.368" s0="1" s1="1" s2="1" r0="0.0392721" r1="-0.738661" r2="0.672932" r3="0" r4="0.874192" r5="-0.300797" r6="-0.381195" r7="0" r8="0.48399" r9="0.603242" r10="0.633919" r11="0" r12="0" r13="0" r14="0" r15="1" id="189" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_boulder.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-33.436" t1="19.0878" t2="-57.1831" s0="1.53066" s1="1.53066" s2="1.53066" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="193" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="79.117" t1="23.5833" t2="-0.0661862" s0="0.475021" s1="0.475021" s2="0.475021" r0="-0.576965" r1="6.44853e-007" r2="0.816769" r3="0" r4="-4.33145e-007" r5="1" r6="-1.09549e-006" r7="0" r8="-0.816769" r9="-9.85839e-007" r10="-0.576965" r11="0" r12="0" r13="0" r14="0" r15="1" id="194" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="73.8721" t1="28.4924" t2="-3.22765" s0="0.475021" s1="0.475021" s2="0.475021" r0="-0.576965" r1="6.61448e-007" r2="0.816769" r3="0" r4="-4.4974e-007" r5="1" r6="-1.12753e-006" r7="0" r8="-0.816769" r9="-1.01788e-006" r10="-0.576965" r11="0" r12="0" r13="0" r14="0" r15="1" id="198" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="78.1059" t1="32.7907" t2="-6.01501" s0="0.475021" s1="0.475021" s2="0.475021" r0="-0.576965" r1="6.97667e-007" r2="0.816769" r3="0" r4="5.54771e-006" r5="1" r6="3.06472e-006" r7="0" r8="-0.816769" r9="6.29943e-006" r10="-0.576965" r11="0" r12="0" r13="0" r14="0" r15="1" id="206" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="2.81477" t1="22.3061" t2="36.6655" s0="0.750679" s1="0.750679" s2="0.750679" r0="-0.488685" r1="0" r2="0.87246" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.87246" r9="-0" r10="-0.488685" r11="0" r12="0" r13="0" r14="0" r15="1" id="214" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="5.86197" t1="20.2613" t2="31.2253" s0="0.750679" s1="0.750679" s2="0.750679" r0="-0.488686" r1="0" r2="0.87246" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.87246" r9="-0" r10="-0.488686" r11="0" r12="0" r13="0" r14="0" r15="1" id="215" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-7.30224" t1="5.91926" t2="102.401" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.462331" r1="0" r2="-0.886708" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.886708" r9="0" r10="-0.462331" r11="0" r12="0" r13="0" r14="0" r15="1" id="216" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="118.836" t1="10.7594" t2="139.21" s0="1.40559" s1="1.40559" s2="1.40559" r0="-0.399321" r1="0.773578" r2="0.492056" r3="0" r4="-0.707446" r5="0.0813844" r6="-0.702066" r7="0" r8="-0.583148" r9="-0.628453" r10="0.514767" r11="0" r12="0" r13="0" r14="0" r15="1" id="227" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chunk.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="121.231" t1="13.7906" t2="129.942" s0="1.40559" s1="1.40559" s2="1.40559" r0="-0.197355" r1="0.724279" r2="0.66066" r3="0" r4="-0.788028" r5="0.283671" r6="-0.54639" r7="0" r8="-0.583149" r9="-0.628451" r10="0.514768" r11="0" r12="0" r13="0" r14="0" r15="1" id="228" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chunk.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="115.45" t1="20.7894" t2="127.187" s0="1.24128" s1="1.24128" s2="1.24128" r0="0.99943" r1="0.00226433" r2="0.033685" r3="0" r4="0.0337566" r5="-0.0831322" r6="-0.995967" r7="0" r8="0.000545107" r9="0.996536" r10="-0.0831612" r11="0" r12="0" r13="0" r14="0" r15="1" id="229" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_boulder.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-64.1885" t1="39.6811" t2="13.3742" s0="1" s1="1" s2="1" r0="0.00264949" r1="-0.999997" r2="-3.36503e-007" r3="0" r4="0.999997" r5="0.00264949" r6="5.06207e-007" r7="0" r8="-5.05314e-007" r9="-3.37843e-007" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="245" color_r="0.894118" color_g="0.0823529" color_b="0.0823529" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-57.699" t1="45.8682" t2="19.2863" s0="1" s1="1" s2="1" r0="0.0585791" r1="-0.998155" r2="-0.015956" r3="0" r4="0.661736" r5="0.0268584" r6="0.749256" r7="0" r8="-0.747445" r9="-0.0544493" r10="0.662088" r11="0" r12="0" r13="0" r14="0" r15="1" id="246" color_r="0.894118" color_g="0.0823529" color_b="0.0823529" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-59.1811" t1="56.955" t2="1.01744" s0="1" s1="1" s2="1" r0="0.0585802" r1="-0.998155" r2="-0.0159477" r3="0" r4="0.661736" r5="0.0268653" r6="0.749255" r7="0" r8="-0.747445" r9="-0.0544448" r10="0.662089" r11="0" r12="0" r13="0" r14="0" r15="1" id="247" color_r="0.894118" color_g="0.0823529" color_b="0.0823529" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-65.3526" t1="61.6788" t2="-2.52376" s0="1" s1="1" s2="1" r0="-0.0613007" r1="-0.984092" r2="0.166746" r3="0" r4="0.992191" r5="-0.0782613" r6="-0.0971199" r7="0" r8="0.108625" r9="0.15949" r10="0.981205" r11="0" r12="0" r13="0" r14="0" r15="1" id="248" color_r="0.894118" color_g="0.0823529" color_b="0.0823529" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-72.5445" t1="66.5767" t2="1.4343" s0="1" s1="1" s2="1" r0="-0.0474749" r1="-0.997805" r2="0.0461773" r3="0" r4="0.302305" r5="-0.0584142" r6="-0.95142" r7="0" r8="0.952028" r9="-0.0312089" r10="0.304414" r11="0" r12="0" r13="0" r14="0" r15="1" id="249" color_r="0.894118" color_g="0.0823529" color_b="0.0823529" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-70.295" t1="72.5949" t2="1.77051" s0="1" s1="1" s2="1" r0="-0.0680134" r1="-0.993925" r2="0.0865319" r3="0" r4="0.446225" r5="-0.107879" r6="-0.888395" r7="0" r8="0.892333" r9="-0.0218101" r10="0.450851" r11="0" r12="0" r13="0" r14="0" r15="1" id="250" color_r="0.894118" color_g="0.0823529" color_b="0.0823529" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <Group t0="-32.7665" t1="48.3542" t2="-60.7352" s0="6.52188" s1="24.6537" s2="7.5103" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="265" version="1">
+        <parameters />
+        <EnvObject t0="-31.9401" t1="43.9387" t2="-62.3814" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="195" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-32.5546" t1="46.3292" t2="-59.0891" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="196" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.593" t1="52.2061" t2="-61.3135" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="197" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.4623" t1="60.3752" t2="-61.8898" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.616955" r1="-0.0448979" r2="0.785717" r3="0" r4="-0.0194457" r5="0.997197" r6="0.0722514" r7="0" r8="-0.786758" r9="-0.0598546" r10="0.614352" r11="0" r12="0" r13="0" r14="0" r15="1" id="199" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.4908" t1="60.1125" t2="-60.7501" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.661273" r1="5.11648e-007" r2="0.750145" r3="0" r4="7.70619e-008" r5="1" r6="-7.49997e-007" r7="0" r8="-0.750145" r9="5.53761e-007" r10="0.661273" r11="0" r12="0" r13="0" r14="0" r15="1" id="200" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.7719" t1="60.1125" t2="-61.9665" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.756559" r1="8.79482e-007" r2="0.653926" r3="0" r4="7.96301e-007" r5="1" r6="-4.23646e-007" r7="0" r8="-0.653926" r9="2.00209e-007" r10="-0.756559" r11="0" r12="0" r13="0" r14="0" r15="1" id="201" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.6703" t1="60.1125" t2="-62.7438" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.175666" r1="6.41992e-007" r2="0.98445" r3="0" r4="2.764e-007" r5="1" r6="-7.01454e-007" r7="0" r8="-0.98445" r9="3.95323e-007" r10="0.175666" r11="0" r12="0" r13="0" r14="0" r15="1" id="202" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.2725" t1="60.2889" t2="-61.1437" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.175666" r1="6.41992e-007" r2="0.98445" r3="0" r4="2.764e-007" r5="1" r6="-7.01454e-007" r7="0" r8="-0.98445" r9="3.95323e-007" r10="0.175666" r11="0" r12="0" r13="0" r14="0" r15="1" id="203" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.3984" t1="60.1125" t2="-61.364" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.765042" r1="-8.65637e-007" r2="-0.64398" r3="0" r4="7.022e-007" r5="1" r6="-5.09991e-007" r7="0" r8="0.64398" r9="-6.20379e-008" r10="0.765042" r11="0" r12="0" r13="0" r14="0" r15="1" id="204" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.0454" t1="60.1368" t2="-60.1055" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.965301" r1="2.44598e-007" r2="-0.261141" r3="0" r4="4.64426e-007" r5="1" r6="-7.80088e-007" r7="0" r8="0.261141" r9="-8.74301e-007" r10="-0.965301" r11="0" r12="0" r13="0" r14="0" r15="1" id="205" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <Group t0="-69.048" t1="16.951" t2="4.70536" s0="7.31334" s1="2.32135" s2="7.76993" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="266" version="1">
+        <parameters />
+        <EnvObject t0="-70.1282" t1="17.2838" t2="4.57419" s0="1.30637" s1="1.30637" s2="1.30637" r0="0.435927" r1="-0.0448995" r2="-0.898861" r3="0" r4="0.0734666" r5="0.997197" r6="-0.0141818" r7="0" r8="0.896978" r9="-0.0598541" r10="0.438004" r11="0" r12="0" r13="0" r14="0" r15="1" id="152" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.0938" t1="16.5653" t2="5.73704" s0="1.30637" s1="1.30637" s2="1.30637" r0="0.384529" r1="-4.96006e-007" r2="-0.923113" r3="0" r4="-1.09112e-006" r5="1" r6="-9.9183e-007" r7="0" r8="0.923113" r9="1.38861e-006" r10="0.384529" r11="0" r12="0" r13="0" r14="0" r15="1" id="182" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.7473" t1="16.5653" t2="7.88549" s0="1.30637" s1="1.30637" s2="1.30637" r0="0.919317" r1="9.69933e-007" r2="0.393519" r3="0" r4="3.56934e-008" r5="1" r6="-2.54815e-006" r7="0" r8="-0.393519" r9="2.35661e-006" r10="0.919317" r11="0" r12="0" r13="0" r14="0" r15="1" id="240" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-71.9785" t1="16.5653" t2="6.10918" s0="1.30637" s1="1.30637" s2="1.30637" r0="0.807931" r1="-4.43307e-007" r2="-0.589277" r3="0" r4="-4.43307e-007" r5="1" r6="-1.36009e-006" r7="0" r8="0.589277" r9="1.36009e-006" r10="0.807931" r11="0" r12="0" r13="0" r14="0" r15="1" id="241" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.5216" t1="17.0478" t2="3.21358" s0="1.30637" s1="1.30637" s2="1.30637" r0="0.807931" r1="-4.43307e-007" r2="-0.589277" r3="0" r4="-4.43307e-007" r5="1" r6="-1.36009e-006" r7="0" r8="0.589277" r9="1.36009e-006" r10="0.807931" r11="0" r12="0" r13="0" r14="0" r15="1" id="242" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.7137" t1="16.5653" t2="6.24551" s0="1.30637" s1="1.30637" s2="1.30637" r0="-0.914095" r1="1.21662e-006" r2="-0.4055" r3="0" r4="1.29074e-006" r5="1" r6="9.06591e-008" r7="0" r8="0.4055" r9="-4.40522e-007" r10="-0.914095" r11="0" r12="0" r13="0" r14="0" r15="1" id="243" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.2414" t1="16.6318" t2="1.41087" s0="1.30637" s1="1.30637" s2="1.30637" r0="0.188249" r1="1.00699e-006" r2="0.982121" r3="0" r4="-9.56378e-008" r5="1" r6="-1.00699e-006" r7="0" r8="-0.982121" r9="9.56378e-008" r10="0.188249" r11="0" r12="0" r13="0" r14="0" r15="1" id="244" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <Group t0="78.0543" t1="40.8939" t2="-6.08707" s0="3.04013" s1="0.855104" s2="2.30881" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="267" version="1">
+        <parameters />
+        <EnvObject t0="78.5038" t1="41.0156" t2="-5.51913" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.99771" r1="-0.0448988" r2="0.0505788" r3="0" r4="-0.0477942" r5="0.997197" r6="-0.0575696" r7="0" r8="-0.0478522" r9="-0.0598551" r10="-0.997059" r11="0" r12="0" r13="0" r14="0" r15="1" id="207" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="78.1664" t1="40.7529" t2="-7.01682" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.994226" r1="2.44449e-007" r2="0.107302" r3="0" r4="3.06097e-007" r5="1" r6="5.58055e-007" r7="0" r8="-0.107302" r9="5.87678e-007" r10="-0.994226" r11="0" r12="0" r13="0" r14="0" r15="1" id="208" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="79.322" t1="40.7529" t2="-6.54451" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.0975972" r1="9.42561e-008" r2="-0.995226" r3="0" r4="-1.50724e-006" r5="1" r6="2.42516e-007" r7="0" r8="0.995226" r9="1.52371e-006" r10="-0.0975972" r11="0" r12="0" r13="0" r14="0" r15="1" id="209" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="79.3214" t1="40.7529" t2="-5.19631" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.905422" r1="-5.5571e-007" r2="-0.424513" r3="0" r4="-7.24212e-007" r5="1" r6="2.3558e-007" r7="0" r8="0.424513" r9="5.20737e-007" r10="-0.905422" r11="0" r12="0" r13="0" r14="0" r15="1" id="210" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="77.785" t1="40.9293" t2="-5.79456" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.905422" r1="-5.5571e-007" r2="-0.424513" r3="0" r4="-7.24212e-007" r5="1" r6="2.3558e-007" r7="0" r8="0.424513" r9="5.20737e-007" r10="-0.905422" r11="0" r12="0" r13="0" r14="0" r15="1" id="211" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="78.6145" t1="40.7529" t2="-6.5871" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.084578" r1="1.10554e-006" r2="0.996417" r3="0" r4="-2.99037e-007" r5="1" r6="-1.08413e-006" r7="0" r8="-0.996417" r9="-2.06272e-007" r10="0.084578" r11="0" r12="0" r13="0" r14="0" r15="1" id="212" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="76.8059" t1="40.7772" t2="-6.20808" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.770236" r1="6.72918e-007" r2="-0.637759" r3="0" r4="-6.72918e-007" r5="1" r6="2.42431e-007" r7="0" r8="0.637759" r9="2.42431e-007" r10="0.770236" r11="0" r12="0" r13="0" r14="0" r15="1" id="213" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <Group t0="-9.90914" t1="27.6923" t2="100.718" s0="6.52191" s1="24.6536" s2="7.51069" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="268" version="1">
+        <parameters />
+        <EnvObject t0="-9.08267" t1="23.2768" t2="99.0713" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="217" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-9.6971" t1="25.6672" t2="102.364" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="218" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.7356" t1="31.5442" t2="100.139" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="219" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.6048" t1="39.7132" t2="99.5629" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.616955" r1="-0.0448979" r2="0.785717" r3="0" r4="-0.0194457" r5="0.997197" r6="0.0722514" r7="0" r8="-0.786758" r9="-0.0598546" r10="0.614352" r11="0" r12="0" r13="0" r14="0" r15="1" id="220" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.6334" t1="39.4505" t2="100.703" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.661273" r1="5.11648e-007" r2="0.750145" r3="0" r4="7.70619e-008" r5="1" r6="-7.49997e-007" r7="0" r8="-0.750145" r9="5.53761e-007" r10="0.661273" r11="0" r12="0" r13="0" r14="0" r15="1" id="221" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.9144" t1="39.4505" t2="99.4862" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.756559" r1="8.79482e-007" r2="0.653926" r3="0" r4="7.96301e-007" r5="1" r6="-4.23646e-007" r7="0" r8="-0.653926" r9="2.00209e-007" r10="-0.756559" r11="0" r12="0" r13="0" r14="0" r15="1" id="222" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.8129" t1="39.4505" t2="98.7089" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.175666" r1="6.41992e-007" r2="0.98445" r3="0" r4="2.764e-007" r5="1" r6="-7.01454e-007" r7="0" r8="-0.98445" r9="3.95323e-007" r10="0.175666" r11="0" r12="0" r13="0" r14="0" r15="1" id="223" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.415" t1="39.6269" t2="100.309" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.175666" r1="6.41992e-007" r2="0.98445" r3="0" r4="2.764e-007" r5="1" r6="-7.01454e-007" r7="0" r8="-0.98445" r9="3.95323e-007" r10="0.175666" r11="0" r12="0" r13="0" r14="0" r15="1" id="224" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.5409" t1="39.4505" t2="100.089" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.765042" r1="-8.65637e-007" r2="-0.64398" r3="0" r4="7.022e-007" r5="1" r6="-5.09991e-007" r7="0" r8="0.64398" r9="-6.20379e-008" r10="0.765042" r11="0" r12="0" r13="0" r14="0" r15="1" id="225" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.1879" t1="39.4748" t2="101.347" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.9653" r1="2.44597e-007" r2="-0.261142" r3="0" r4="4.64426e-007" r5="1" r6="-7.80088e-007" r7="0" r8="0.261142" r9="-8.74301e-007" r10="-0.9653" r11="0" r12="0" r13="0" r14="0" r15="1" id="226" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <Group t0="69.7225" t1="61.142" t2="128.631" s0="6.52188" s1="24.6537" s2="7.50999" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="269" version="1">
+        <parameters />
+        <EnvObject t0="70.549" t1="56.7265" t2="126.985" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="230" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="69.9346" t1="59.117" t2="130.277" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="231" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="68.8961" t1="64.9939" t2="128.053" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="232" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="69.0269" t1="73.163" t2="127.476" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.616955" r1="-0.0448979" r2="0.785717" r3="0" r4="-0.0194457" r5="0.997197" r6="0.0722514" r7="0" r8="-0.786758" r9="-0.0598546" r10="0.614352" r11="0" r12="0" r13="0" r14="0" r15="1" id="233" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="67.9983" t1="72.9003" t2="128.616" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.661273" r1="5.11648e-007" r2="0.750145" r3="0" r4="7.70619e-008" r5="1" r6="-7.49997e-007" r7="0" r8="-0.750145" r9="5.53761e-007" r10="0.661273" r11="0" r12="0" r13="0" r14="0" r15="1" id="234" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="67.7173" t1="72.9003" t2="127.4" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.756559" r1="8.79482e-007" r2="0.653926" r3="0" r4="7.96301e-007" r5="1" r6="-4.23646e-007" r7="0" r8="-0.653926" r9="2.00209e-007" r10="-0.756559" r11="0" r12="0" r13="0" r14="0" r15="1" id="235" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="68.8188" t1="72.9003" t2="126.622" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.175666" r1="6.41992e-007" r2="0.98445" r3="0" r4="2.764e-007" r5="1" r6="-7.01454e-007" r7="0" r8="-0.98445" r9="3.95323e-007" r10="0.175666" r11="0" r12="0" r13="0" r14="0" r15="1" id="236" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="69.2166" t1="73.0767" t2="128.223" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.175666" r1="6.41992e-007" r2="0.98445" r3="0" r4="2.764e-007" r5="1" r6="-7.01454e-007" r7="0" r8="-0.98445" r9="3.95323e-007" r10="0.175666" r11="0" r12="0" r13="0" r14="0" r15="1" id="237" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="68.0907" t1="72.9003" t2="128.002" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.765042" r1="-8.65637e-007" r2="-0.64398" r3="0" r4="7.022e-007" r5="1" r6="-5.09991e-007" r7="0" r8="0.64398" r9="-6.20379e-008" r10="0.765042" r11="0" r12="0" r13="0" r14="0" r15="1" id="238" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="69.4438" t1="72.9246" t2="129.261" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.9653" r1="2.44597e-007" r2="-0.261142" r3="0" r4="4.64426e-007" r5="1" r6="-7.80088e-007" r7="0" r8="0.261142" r9="-8.74301e-007" r10="-0.9653" r11="0" r12="0" r13="0" r14="0" r15="1" id="239" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <Group t0="-63.3315" t1="76.8187" t2="6.07579" s0="6.52188" s1="24.6537" s2="7.51031" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="270" version="1">
+        <parameters />
+        <EnvObject t0="-62.505" t1="72.4032" t2="4.42963" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="251" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.1195" t1="74.7937" t2="7.72194" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="252" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.1579" t1="80.6706" t2="5.49754" s0="0.475021" s1="0.475021" s2="0.475021" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="253" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.0272" t1="88.8397" t2="4.92123" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.616955" r1="-0.0448979" r2="0.785717" r3="0" r4="-0.0194457" r5="0.997197" r6="0.0722514" r7="0" r8="-0.786758" r9="-0.0598546" r10="0.614352" r11="0" r12="0" r13="0" r14="0" r15="1" id="254" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-65.0557" t1="88.577" t2="6.06094" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.661273" r1="5.11648e-007" r2="0.750145" r3="0" r4="7.70619e-008" r5="1" r6="-7.49997e-007" r7="0" r8="-0.750145" r9="5.53761e-007" r10="0.661273" r11="0" r12="0" r13="0" r14="0" r15="1" id="255" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-65.3368" t1="88.577" t2="4.84454" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.756559" r1="8.79482e-007" r2="0.653926" r3="0" r4="7.96301e-007" r5="1" r6="-4.23646e-007" r7="0" r8="-0.653926" r9="2.00209e-007" r10="-0.756559" r11="0" r12="0" r13="0" r14="0" r15="1" id="256" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.2352" t1="88.577" t2="4.06723" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.175666" r1="6.41992e-007" r2="0.98445" r3="0" r4="2.764e-007" r5="1" r6="-7.01454e-007" r7="0" r8="-0.98445" r9="3.95323e-007" r10="0.175666" r11="0" r12="0" r13="0" r14="0" r15="1" id="257" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.8374" t1="88.7534" t2="5.66734" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.175666" r1="6.41992e-007" r2="0.98445" r3="0" r4="2.764e-007" r5="1" r6="-7.01454e-007" r7="0" r8="-0.98445" r9="3.95323e-007" r10="0.175666" r11="0" r12="0" r13="0" r14="0" r15="1" id="258" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.9633" t1="88.577" t2="5.44704" s0="0.477657" s1="0.477657" s2="0.477657" r0="0.765042" r1="-8.65637e-007" r2="-0.64398" r3="0" r4="7.022e-007" r5="1" r6="-5.09991e-007" r7="0" r8="0.64398" r9="-6.20379e-008" r10="0.765042" r11="0" r12="0" r13="0" r14="0" r15="1" id="259" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.6103" t1="88.6013" t2="6.70554" s0="0.477657" s1="0.477657" s2="0.477657" r0="-0.965301" r1="2.44598e-007" r2="-0.261141" r3="0" r4="4.64426e-007" r5="1" r6="-7.80088e-007" r7="0" r8="0.261141" r9="-8.74301e-007" r10="-0.965301" r11="0" r12="0" r13="0" r14="0" r15="1" id="260" color_r="1" color_g="0" color_b="0.635294" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <Hotspot t0="27.5162" t1="-3.1369" t2="-68.4256" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="300" type_file="D:/Wolfire/Overgrowth2/data/Custom/Gyrth/protect_the_caravan/Objects/enemiespawn.xml">
+        <parameters>
+            <parameter name="Number of Enemies" type="string" val="2" />
+        </parameters>
+    </Hotspot>
+    <PathPointObject t0="41.8943" t1="2.38284" t2="-120.143" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="3" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="7" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="21.8085" t1="-5.05091" t2="-48.8225" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="7" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="3" />
+            <Connection id="23" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-28.7742" t1="-10.1585" t2="-17.8551" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="23" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="7" />
+            <Connection id="53" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-43.5365" t1="-18.4552" t2="115.217" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="53" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="23" />
+        </Connections>
+    </PathPointObject>
+    <PlaceholderObject t0="34.0856" t1="-7.21837" t2="-37.5262" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="58" type_file="Data/Objects/IGF_Characters/IGF_Guard.xml" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="300" />
+            <parameter name="Character" type="string" val="char_guard" />
+            <parameter name="Name" type="string" val="enemy_spawn" />
+            <parameter name="Weapon" type="string" val="DogKnife" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="42.7389" t1="-5.49598" t2="-44.383" s0="1" s1="1" s2="1" r0="-0.183159" r1="0" r2="0.983083" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.983083" r9="-0" r10="-0.183159" r11="0" r12="0" r13="0" r14="0" r15="1" id="89" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_half_slope.xml">
+        <parameters />
+    </EnvObject>
+    <PlaceholderObject t0="-0.255138" t1="-2.58856" t2="-65.308" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="101" type_file="Data/Objects/IGF_Characters/IGF_Guard.xml" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="300" />
+            <parameter name="Character" type="string" val="char_guard" />
+            <parameter name="Name" type="string" val="enemy_spawn" />
+            <parameter name="Weapon" type="string" val="DogKnife" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="-22.0465" t1="-8.23185" t2="-22.1334" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="151" type_file="D:/Wolfire/Overgrowth2/data/Custom/Gyrth/protect_the_caravan/Objects/enemiespawn.xml">
+        <parameters>
+            <parameter name="Number of Enemies" type="string" val="2" />
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="-85.0844" t1="-13.0304" t2="-6.23484" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="153" type_file="Data/Objects/IGF_Characters/IGF_Guard.xml" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="151" />
+            <parameter name="Character" type="string" val="char_guard" />
+            <parameter name="Name" type="string" val="enemy_spawn" />
+            <parameter name="Weapon" type="string" val="DogKnife" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-18.0788" t1="-11.9758" t2="45.2757" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="154" type_file="Data/Objects/IGF_Characters/IGF_Guard.xml" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="151" />
+            <parameter name="Character" type="string" val="char_guard" />
+            <parameter name="Name" type="string" val="enemy_spawn" />
+            <parameter name="Weapon" type="string" val="DogKnife" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="-55.8281" t1="-8.71032" t2="185.689" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.95996" r1="2.23517e-007" r2="-0.280139" r3="0" r4="0.238268" r5="-0.525919" r6="-0.816479" r7="0" r8="-0.147331" r9="-0.850535" r10="0.50486" r11="0" r12="0" r13="0" r14="0" r15="1" id="156" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-44.4888" t1="-32.3446" t2="159.864" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.722587" r1="1.09191e-008" r2="-0.69128" r3="0" r4="9.97141e-008" r5="-1" r6="8.84345e-008" r7="0" r8="-0.69128" r9="-1.32832e-007" r10="-0.722587" r11="0" r12="0" r13="0" r14="0" r15="1" id="157" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_chipped.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-32.7934" t1="-24.8001" t2="152.902" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.72259" r1="0" r2="-0.691277" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.691277" r9="0" r10="0.72259" r11="0" r12="0" r13="0" r14="0" r15="1" id="169" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-56.4531" t1="-36.119" t2="139.649" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.722587" r1="1.09191e-008" r2="-0.69128" r3="0" r4="9.97141e-008" r5="-1" r6="8.84345e-008" r7="0" r8="-0.69128" r9="-1.32832e-007" r10="-0.722587" r11="0" r12="0" r13="0" r14="0" r15="1" id="190" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-44.6231" t1="-20.3463" t2="146.276" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.722587" r1="0" r2="0.69128" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.69128" r9="0" r10="-0.722587" r11="0" r12="0" r13="0" r14="0" r15="1" id="191" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-44.7731" t1="-17.1958" t2="132.732" s0="1.53066" s1="1.53066" s2="1.53066" r0="0.722587" r1="1.09191e-008" r2="-0.69128" r3="0" r4="9.97141e-008" r5="-1" r6="8.84345e-008" r7="0" r8="-0.69128" r9="-1.32832e-007" r10="-0.722587" r11="0" r12="0" r13="0" r14="0" r15="1" id="192" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-32.9436" t1="-13.0899" t2="139.359" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.237371" r1="0" r2="-0.971419" r3="0" r4="-0" r5="-1" r6="0" r7="0" r8="-0.971419" r9="0" r10="0.237371" r11="0" r12="0" r13="0" r14="0" r15="1" id="261" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-56.2501" t1="-22.416" t2="153.223" s0="1.53066" s1="1.53066" s2="1.53066" r0="-0.95996" r1="0" r2="-0.280139" r3="0" r4="-0" r5="-1" r6="0" r7="0" r8="-0.280139" r9="0" r10="0.959959" r11="0" r12="0" r13="0" r14="0" r15="1" id="262" color_r="0.611765" color_g="0.058824" color_b="0.058824" type_file="Data/Objects/Crete/hex_crete_tall.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="-43.6255" t1="-19.2085" t2="115.35" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="263" type_file="D:/Wolfire/Overgrowth2/data/Custom/Gyrth/protect_the_caravan/Objects/enemiespawn.xml">
+        <parameters>
+            <parameter name="Number of Enemies" type="string" val="3" />
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="-6.24836" t1="-8.31438" t2="140.805" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="264" type_file="Data/Objects/IGF_Characters/IGF_Guard.xml" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="263" />
+            <parameter name="Character" type="string" val="char_guard" />
+            <parameter name="Name" type="string" val="enemy_spawn" />
+            <parameter name="Weapon" type="string" val="DogKnife" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-84.7253" t1="-9.74625" t2="75.533" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="271" type_file="Data/Objects/IGF_Characters/IGF_Guard.xml" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="263" />
+            <parameter name="Character" type="string" val="char_guard" />
+            <parameter name="Name" type="string" val="enemy_spawn" />
+            <parameter name="Weapon" type="string" val="DogKnife" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-74.1865" t1="-11.8113" t2="162.054" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="272" type_file="Data/Objects/IGF_Characters/IGF_Guard.xml" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="263" />
+            <parameter name="Character" type="string" val="char_guard" />
+            <parameter name="Name" type="string" val="enemy_spawn" />
+            <parameter name="Weapon" type="string" val="DogKnife" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <ActorObject t0="42.5495" t1="4.05092" t2="-125.211" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="273" type_file="D:\Wolfire\Overgrowth2\data\Custom\Gyrth\protect_the_caravan\Objects\IGF_RabbitCivActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1" />
+            <parameter name="Attack Knockback" type="string" val="1" />
+            <parameter name="Attack Speed" type="string" val="1" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Character Scale" type="string" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1" />
+            <parameter name="Ear Size" type="string" val="1" />
+            <parameter name="Fat" type="string" val="0.5" />
+            <parameter name="Ground Aggression" type="string" val="0.5" />
+            <parameter name="Left handed" type="string" val="0" />
+            <parameter name="Lives" type="string" val="1" />
+            <parameter name="Movement Speed" type="string" val="1" />
+            <parameter name="Muscle" type="string" val="0.5" />
+            <parameter name="Teams" type="string" val="caravan, turner" />
+        </parameters>
+        <Connections>
+            <Connection id="3" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+</ActorObjects>

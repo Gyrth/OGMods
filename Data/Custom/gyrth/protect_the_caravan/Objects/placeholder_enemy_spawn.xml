@@ -1,0 +1,12 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <PlaceholderObject t0="-27.2173" t1="33.1439" t2="85.7654" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="-1">
+        <parameters>
+            <parameter name="Name" type="string" val="enemy_spawn" />
+            <parameter name="BelongsTo" type="int" val="-1" />
+            <parameter name="Character" type="string" val="char_guard" />
+            <parameter name="Weapon" type="string" val="DogKnife" />
+        </parameters>
+    </PlaceholderObject>
+</ActorObjects>
