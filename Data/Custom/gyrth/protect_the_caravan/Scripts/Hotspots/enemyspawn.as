@@ -1,4 +1,5 @@
 array<int> enemyspawn_ids;
+array<int> weapon_and_character_ids;
 Object@ main_hotspot = ReadObjectFromID(hotspot.GetID());
 int placeholder_type_id = 35;
 bool init_done = false;
@@ -11,6 +12,12 @@ void Init() {
 void SetParameters() {
     params.AddInt("Number of Enemies", 1);
 
+}
+
+void Reset(){
+    level.SendMessage("remove_enemies");
+    level.SendMessage("remove_weapons");
+    triggered = false;
 }
 
 void HandleEvent(string event, MovementObject @mo){
@@ -40,7 +47,7 @@ void Update(){
                 int obj_id = CreateObject("Data/Custom/Gyrth/protect_the_caravan/Objects/placeholder_enemy_spawn.xml");
                 enemyspawn_ids.push_back(obj_id);
                 Object @new_obj = ReadObjectFromID(obj_id);
-                new_obj.SetDeletable(false);
+                //new_obj.SetDeletable(false);
                 ScriptParams@ spawnpoint_params = new_obj.GetScriptParams();
                 if(spawnpoint_params.HasParam("BelongsTo")){
                     Print("Setting id to " + hotspot.GetID() + "\n");
@@ -59,6 +66,8 @@ void Update(){
                 if(ObjectExists(enemyspawn_ids[i])){
                     Object@ spawn_hotspot = ReadObjectFromID(enemyspawn_ids[i]);
                     DebugDrawLine(main_hotspot.GetTranslation(), spawn_hotspot.GetTranslation(), vec3(0.5f), _delete_on_update); 
+                }else{
+                    enemyspawn_ids.removeAt(i);
                 }
             }
         }
@@ -100,6 +109,7 @@ void AfterInitFunction(){
     init_done = true;
 }
 void SpawnCharacters(){
+    level.SendMessage("remove_enemies");
 
         string command =    "nav_target = vec3("+main_hotspot.GetTranslation().x+", "+main_hotspot.GetTranslation().y+", "+main_hotspot.GetTranslation().z+");" +
                             "goal = _navigate;";
@@ -113,20 +123,27 @@ void SpawnCharacters(){
             string weap_choise = placeholder_params.GetString("Weapon");
             Print("Weapon dir " + weap_choise + " char dir " + char_choise + "\n");
             string char_dir = level.GetPath(char_choise);
-            string weap_dir = level.GetPath(weap_choise);
-
+            
             int char_id = CreateObject(char_dir);
+            weapon_and_character_ids.push_back(char_id);
+            level.SendMessage("add_enemy \""+char_id+"\"");
             Object@ char_obj = ReadObjectFromID(char_id);
             MovementObject@ char = ReadCharacterID(char_id);
             ScriptParams@ enemy_params = char_obj.GetScriptParams();
             enemy_params.SetString("Teams", "Enemy");
             char_obj.SetTranslation(spawnpoint.GetTranslation());
             char.Execute(command);
+            
+            if(weap_choise != ""){
+                string weap_dir = level.GetPath(weap_choise);
+                int weap_id = CreateObject(weap_dir);
+                weapon_and_character_ids.push_back(weap_id);
+                level.SendMessage("add_weapon \""+weap_id+"\"");
+                Object@ weap_obj = ReadObjectFromID(weap_id);
 
-            int weap_id = CreateObject(weap_dir);
-            Object@ weap_obj = ReadObjectFromID(weap_id);
+                char_obj.AttachItem(weap_obj, _at_grip, false);
+            }
 
-            char_obj.AttachItem(weap_obj, _at_grip, false);
         }
     }
 }
