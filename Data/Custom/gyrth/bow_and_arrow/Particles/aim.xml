@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<particle>
+    <textures color_map = "Data/Textures/aim.png" 
+              shader = "simple"
+              soft_shader = "simple"/>
+    <stretch velocity_axis = "true" speed_stretch = "false" min_squash = "false"/>
+    <size min = "0.4" max = "0.4"/>
+    <color red =   "1.0"
+           green = "1.0"
+           blue =  "1.0"
+           alpha = "1.0"/>
+    <behavior inertia="1.0" gravity="0.1" wind="0.0" size_decay_rate="0.00" opacity_decay_rate="50.0"/>
+</particle>
