@@ -363,6 +363,10 @@ float start_throwing_time = 0.0f;
 vec3 throw_target;
 int sheathe_layer_id = -1;
 
+//Bow and arrow variables.
+array<Arrow> arrows;
+float previousTime;
+
 float _pick_up_range = 2.0f;
 
 vec3 old_cam_pos;
@@ -2141,9 +2145,10 @@ void UpdateState(const Timestep &in ts) {
         cam_pos_offset = vec3(0.0f);
         //Slowly change the fov back to 90.
         if(fov < 90){
-            fov += 0.3;
+            fov += 0.5;
         }
     }
+    HandleArrows();
 
     UpdateEyeLookTarget();
     UpdateHeadLook(ts);
@@ -6366,11 +6371,11 @@ void HandleThrow() {
         }else{
             throw_target_pos = hit;
         }
-        MakeParticle("Data/Particles/aim.xml", throw_target_pos, vec3(0));
+        MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/aim.xml", throw_target_pos, vec3(0));
         //
         //cam_distance = 1.0f;
 
-            fov = max(fov - ((time - start_throwing_time)/5) ,40);
+            fov = max(fov - ((time - start_throwing_time)) ,40);
             //Print(facing + "\n");
             vec3 rotation = camera.GetFacing();
             cam_pos_offset = vec3(rotation.z * -0.5, 0, rotation.x * 0.5);
@@ -6381,12 +6386,12 @@ void HandleThrow() {
         //SetState(_movement_state);
 
         //DebugDrawWireSphere(hit, 0.1f, vec3(1.0f,1.0f,1.0f), _delete_on_update);
-        //camera.AddShake(0.01f);
+        camera.AddShake((time - start_throwing_time)/2000.0f);
 
     }
     else if(isAiming == true){
         Print("The time while aiming was " + (time - start_throwing_time) + "\n");
-        if((time - start_throwing_time) < 1.0f){
+        if((time - start_throwing_time) < 1.0f && fov > 50){
             float throw_range = 50.0f;
             int target = GetClosestCharacterID(throw_range, _TC_ENEMY | _TC_CONSCIOUS | _TC_NON_RAGDOLL);
             if(target != -1 && (on_ground || flip_info.IsFlipping())){
@@ -6396,6 +6401,16 @@ void HandleThrow() {
                 going_to_throw_item_time = time;
             }
         }
+        Object@ mainArrow = ReadObjectFromID(weapon_slots[primary_weapon_slot]);
+        ScriptParams@ arrowParams = mainArrow.GetScriptParams();
+
+        Arrow arrowShot;
+        arrowShot.arrowID = weapon_slots[primary_weapon_slot];
+        arrowShot.timeShot = time;
+        arrowShot.type = arrowParams.GetString("Type");
+        Print("The type is " + arrowShot.type + "\n");
+        arrows.insertLast(arrowShot);
+
 
         going_to_throw_item = true;
         going_to_throw_item_time = time;
@@ -6485,6 +6500,86 @@ void HandleThrow() {
             going_to_throw_item = false;
         }
     }
+}
+
+class Arrow {
+    string type;
+    float timeShot;
+    int arrowID;
+};
+
+void HandleArrows(){
+    if(arrows.size() > 0){
+        for(uint32 i = 0; i<arrows.size(); i++){
+            Arrow curArrow = arrows[i];
+            float lifeTime;
+            if(curArrow.type == "impactexplosion"){
+
+            }else if(curArrow.type == "poison"){
+
+            }else if(curArrow.type == "smoke"){
+                //Print(floor(time * 10) / 10 + "\n");
+                lifeTime = 5.0f;
+                if (time - previousTime > 0.05){
+
+                    Print((floor(time * 100) / 100) + "\n");
+                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                    MakeParticle("Data/Particles/smoke.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)));
+                    previousTime = time;
+                }
+                
+
+            }else if(curArrow.type == "standard"){
+
+            }else if(curArrow.type == "timedexplosion"){
+                lifeTime = 5.0f;
+
+                if (time - previousTime > 0.01){
+
+                    Print((floor(time * 100) / 100) + "\n");
+                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                    MakeParticle("Data/Particles/metalspark.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)));
+                    previousTime = time;
+                }
+
+                if((curArrow.timeShot + lifeTime) < time){
+                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                    vec3 start = arrowItem.GetPhysicsPosition();
+
+                    array<int> nearbyCharacters;
+                    GetCharactersInSphere(start, 10.0f, nearbyCharacters);
+
+                    MakeParticle("Data/Custom/gyrth/grenade/Scripts/propane.xml",start,vec3(0.0f,15.0f,0.0f));
+
+                    for(int i=0; i<3; i++){
+                        MakeParticle("Data/Custom/gyrth/grenade/Scripts/explosion_smoke.xml",start,
+                        vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
+                    }
+                    PlaySound("Data/Custom/gyrth/grenade/Sounds/explosion.wav", start);
+                    
+
+                    for(uint32 i=0; i<nearbyCharacters.size(); ++i){
+                        MovementObject@ char = ReadCharacterID(nearbyCharacters[i]);
+                        vec3 force = normalize(char.position - start) * 40000.0f;
+                        force.y += 1000.0f;
+                        char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
+                        "HandleRagdollImpactImpulse(impulse, this_mo.rigged_object().GetAvgIKChainPos(\"torso\"), 5.0f);"+
+                        "ragdoll_limp_stun = 1.0f;"+
+                        "recovery_time = 2.0f;");
+                    }
+                }
+
+            }else{
+
+            }
+            if((curArrow.timeShot + lifeTime) < time){
+                
+                arrows.removeAt(i);
+                i--;
+            }
+        }
+    }
+
 }
 
 void HandlePickUp() {
