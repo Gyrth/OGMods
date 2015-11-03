@@ -1,6 +1,7 @@
 #include "interpdirection.as"
 #include "aschar_aux.as"
 #include "aircontrols.as"
+#include "bowandarrow.as"
 
 enum WalkDir {WALK_BACKWARDS, STRAFE, FORWARDS};
 
@@ -363,12 +364,7 @@ float start_throwing_time = 0.0f;
 vec3 throw_target;
 int sheathe_layer_id = -1;
 
-//Bow and arrow variables.
-array<Arrow> arrows;
-float previousTime;
-int aimAnimationID = -1;
-bool shortDrawAnim = false;
-int bowUpDownAnim;
+BowAndArrow bowAndArrow;
 
 float _pick_up_range = 2.0f;
 
@@ -1969,7 +1965,7 @@ void HandleSpecialKeyPresses() {
             in_animation = true;
             this_mo.rigged_object().anim_client().SetAnimationCallback("void EndAnim()");*/
             //
-            //SwapWeaponHands();
+            SwapWeaponHands();
             
             //CheckPossibleAttacks();
         }
@@ -2144,7 +2140,7 @@ void UpdatePlantAvoid() {
 void UpdateState(const Timestep &in ts) {
     //For the bow and arrow.
     //When the character starts walking again after shooting an arrow the normal fov and camera offset need to be set.
-    if(arrows.length < 1 || length_squared(this_mo.velocity) > 1.0f){
+    if(bowAndArrow.arrows.length < 1 || length_squared(this_mo.velocity) > 1.0f){
 
         
         //Slowly change the fov back to 90.
@@ -2153,7 +2149,8 @@ void UpdateState(const Timestep &in ts) {
         }
         cam_pos_offset *= 0.99f;
     }
-    HandleArrows();
+    bowAndArrow.HandleArrows();
+    bowAndArrow.HandleBow();
 
     UpdateEyeLookTarget();
     UpdateHeadLook(ts);
@@ -5711,6 +5708,7 @@ void UpdateAttacking(const Timestep &in ts) {
         string anim_path;
         if(attack_getter.IsThrow() == 0){
             anim_path = attack_getter.GetUnblockedAnimPath();
+            Print(anim_path + "\n");
             attack_predictability = this_mo.CheckAttackHistory(attack_getter.GetPath());
             this_mo.AddToAttackHistory(attack_getter.GetPath());
             //Print("Updating attack history\n"); 
@@ -6327,165 +6325,24 @@ void StartSheathing(int slot){
 }
 
 void HandleThrow(const Timestep &in ts) {
-    
-
     if(WantsToThrowItem() && weapon_slots[primary_weapon_slot] != -1 && throw_knife_layer_id == -1){
-        if(start_throwing_time == 0.0f){
-            start_throwing_time = time;
-        }
-        BoneTransform transform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kHeadIK]]);
-        ItemObject@ primaryWeapon = ReadItemID(weapon_slots[primary_weapon_slot]);
-        ItemObject@ secondaryWeapon = ReadItemID(weapon_slots[secondary_weapon_slot]);
-        vec3 cameraFacing = camera.GetFacing();
-        Object@ charObject = ReadObjectFromID(this_mo.GetID());
 
-
-        //ResetSecondaryAnimation();
-        //this_mo.SetAnimation("Data/Custom/Gyrth/bow_and_arrow/Animations/r_draw_bow_stance.anm", 10.0f, flags);
-        //this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_dragstance.xml",20.0f,0);
-        //this_mo.rigged_object().anim_client().SetAnimatedItemID(0, weapon_slots[primary_weapon_slot]);
-        //this_mo.rigged_object().ik_enabled = true;
+        if(weapon_slots[secondary_weapon_slot] != -1 && 
+            ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "bow" &&
+            ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "arrow"){
+            bowAndArrow.BowAiming();
         
-
-        //this_mo.rigged_object().anim_client().RemoveLayer(aimAnimationID,20.0f);
-        //aimAnimationID = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/Gyrth/bow_and_arrow/Animations/r_draw_bow_stance.anm",20.0f,flags);
-        
-        
-        //SetState(_movement_state);
-
-        //gyrth
-        
-        
-        
-        quaternion head_rotation = transform.rotation;
-        
-        //vec3 axis = head_rotation * vec3(0,30,20);
-        vec3 facing = camera.GetFacing() *3.0f;
-        vec3 axis = facing * 30.0f;
-        //Collision check for non player objects
-        vec3 hit = col.GetRayCollision(camera.GetPos() + facing, transform.origin + axis);
-        //Collision check for player objects.
-        col.CheckRayCollisionCharacters(camera.GetPos() + facing, transform.origin + axis);
-
-        const CollisionPoint contact = sphere_col.GetContact(0);
-            
-            //DebugDrawWireSphere(camera.GetPos() + facing, 0.2f, vec3(1.0f,1.0f,1.0f), _delete_on_update);
-
-        if(contact.position != vec3(0,0,0) && distance(transform.origin, hit) > distance(transform.origin ,contact.position)){
-            //Print("Found character\n");
-            throw_target_pos = contact.position;
         }else{
-            throw_target_pos = hit;
-        }
-        MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/aim.xml", throw_target_pos, vec3(0));
-        //
-        //cam_distance = 1.0f;
-
-        fov = max(fov - ((time - start_throwing_time)) ,40);
-        //Print(facing + "\n");
-        
-        cam_pos_offset = vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5);
-        Print("offset: " + cam_pos_offset + "\n");
-
-        //float armLift = distance(this_mo.position, throw_target_pos)*0.001f;
-        //key_transforms[kRightArmKey].origin += vec3(0, head_rotation.y,0);
-        //key_transforms[kRightArmKey].rotation += head_rotation;
-        //key_transforms[kLeftArmKey].origin += vec3(0, head_rotation.y,0);
-        //key_transforms[kLeftArmKey].rotation += head_rotation;
-
-        //DrawArms(key_transforms[kChestKey], key_transforms[kLeftArmKey], key_transforms[kRightArmKey], 60);
-
-        key_transforms[kChestKey].rotation = head_rotation;
-        key_transforms[kChestKey].origin = transform.origin;
-        key_transforms[kHipKey].rotation = head_rotation;
-        key_transforms[kHipKey].origin = transform.origin;
-        DrawBody(key_transforms[kHipKey], key_transforms[kChestKey]);
-
-        this_mo.rigged_object().ik_enabled = true;
-        
-
-
-        int8 flags = _ANM_FROM_START;
-        
-        if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
-            //old_use_foot_plants = true;
-            //HandleFootStance(ts);
-            //true_max_speed = 2.0f;
-            if(shortDrawAnim == false){
-                PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/draw.wav", this_mo.position);
-
-            }
-
-            this_mo.SetAnimation("Data/Custom/Gyrth/bow_and_arrow/Animations/r_draw_bow_stance.anm", 20.0f, flags);
-
-            this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 5.0f);
-            
-            Print((this_mo.GetFacing().y) + "\n");
-            if(this_mo.GetFacing().y >0){
-                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/Gyrth/bow_and_arrow/Animations/r_draw_bow_stance_aim_up.anm",(40*this_mo.GetFacing().y/1),flags);
-            }else{
-                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/Gyrth/bow_and_arrow/Animations/r_draw_bow_stance_aim_down.anm",-(40*this_mo.GetFacing().y/1),0);
-            }
-            //bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_plantavoid.anm",distance(transform.origin ,throw_target_pos),flags);
-            Print(normalize(vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5)) + "\n");
-            this_mo.SetRotationFromFacing(normalize(cameraFacing + vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5)));
-
-            mat4 bowTransform = secondaryWeapon.GetPhysicsTransform();
-            Object@ bowObject = ReadObjectFromID(secondaryWeapon.GetID());
-            bowObject.SetScale(vec3(2));
-            //mat4 bowMat4Rotation = bowTransform.GetRotationPart();
-            BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kLeftArmKey]]);
-            quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
-            Print("w: " + bowRotation * vec3(0,0,1) + "\n");
-            DebugDrawLine(handTransform.origin, secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0,0.8,0)), vec3(1), _delete_on_draw);
-            DebugDrawLine(handTransform.origin, secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0,-0.8,0)), vec3(1), _delete_on_draw);
-            shortDrawAnim = true;
-        }else{
-            //true_max_speed = _base_true_max_speed;
-            shortDrawAnim = false;
-        }
-        isAiming = true;
-        //DebugDrawLine(camera.GetPos(), throw_target_pos, vec3(1.0f,1.0f,1.0f), _delete_on_update);
-
-        
-        //SetState(_movement_state);
-        //
-        //DebugDrawWireSphere(hit, 0.1f, vec3(1.0f,1.0f,1.0f), _delete_on_update);
-        //camera.AddShake((time - start_throwing_time)/2000.0f);
-
-    }
-    else if(isAiming == true){
-        Print("The time while aiming was " + (time - start_throwing_time) + "\n");
-        this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 1.0f);
-        true_max_speed = _base_true_max_speed;  
-        if((time - start_throwing_time) < 1.0f && fov > 50){
-            shortDrawAnim = false;
             float throw_range = 50.0f;
             int target = GetClosestCharacterID(throw_range, _TC_ENEMY | _TC_CONSCIOUS | _TC_NON_RAGDOLL);
             if(target != -1 && (on_ground || flip_info.IsFlipping())){
                 SetTargetID(target);
-                throw_target_pos = ReadCharacterID(target).position;
                 going_to_throw_item = true;
                 going_to_throw_item_time = time;
             }
         }
-        Object@ mainArrow = ReadObjectFromID(weapon_slots[primary_weapon_slot]);
-        ScriptParams@ arrowParams = mainArrow.GetScriptParams();
-
-        Arrow arrowShot;
-        arrowShot.arrowID = weapon_slots[primary_weapon_slot];
-        arrowShot.timeShot = time;
-        arrowShot.type = arrowParams.GetString("Type");
-        Print("The type is " + arrowShot.type + "\n");
-        arrows.insertLast(arrowShot);
-
-
-        going_to_throw_item = true;
-        going_to_throw_item_time = time;
-
-        this_mo.SetRotationFromFacing(camera.GetFacing());
-        isAiming = false;
-        start_throwing_time = 0.0f;
+    }else if(bowAndArrow.isAiming){
+        bowAndArrow.BowShoot();
     }
 
     if(going_to_throw_item && going_to_throw_item_time <= time && going_to_throw_item_time > time - 1.0f){
@@ -6519,32 +6376,9 @@ void HandleThrow(const Timestep &in ts) {
                     this_mo.SetAnimation("Data/Animations/r_dogswordthrow.anm", 10.0f, flags);
                 } else if(label == "spear"){
                     this_mo.SetAnimation("Data/Animations/r_spearthrow.anm", 10.0f, flags);
-                    //PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/draw.wav", this_mo.position);
-                    //this_mo.SetAnimation("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow.anm", 10.0f, flags);
                 }
                 else if(label == "arrow" && label_secondary == "bow"){
-                    SetState(_attack_state);
-                    float throw_range = 150.0f;
-                    //int target = GetClosestCharacterID(throw_range, _TC_ENEMY);
-                    //SetTargetID(target);
-                    
-                    //throw_knife_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_running.anm",10.0f,0);
-                    string draw_type = "empty";
-                    if(shortDrawAnim){
-                        draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_short.anm";
-                    }else{
-                        PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/draw.wav", this_mo.position);
-                        int number = rand()%3;
-                        switch(number){
-                        case 0: draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow.anm";break;
-                        case 1: draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_askew.anm";break;
-                        case 2: draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_sideways.anm";break;
-                        }
-                    }
-
-                    this_mo.SetAnimation(draw_type, 8.0f, arrow_flags);
-                    shortDrawAnim = false;
-                    //throw_knife_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifethrowlayer.anm",20.0f,flags);
+                    bowAndArrow.BowShootAnim();
                 }
                 attack_getter.Load(character_getter.GetAttackPath("stationary")); // Set attack to a normal attack so faces enemy correctly
                 this_mo.rigged_object().anim_client().SetAnimationCallback("void EndAttack()");
@@ -6554,14 +6388,7 @@ void HandleThrow(const Timestep &in ts) {
                 throw_anim = true;
             } else {
                 if(!on_ground && label == "arrow" && label_secondary == "bow"){
-                    SetState(_movement_state);
-                    float throw_range = 20.0f;
-                    //int target = GetClosestCharacterID(throw_range, _TC_ENEMY);
-                    //SetTargetID(target);
-                    PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/draw.wav", this_mo.position);
-                    throw_knife_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_running.anm",20.0f,flags);
-                    //this_mo.SetAnimation("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_running.anm", 8.0f, flags);
-                    throw_anim = true;
+                    bowAndArrow.BowShootAnimInAir();
                 } 
                 else if(!flip_info.IsFlipping()){
                     throw_knife_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifethrowlayer.anm",8.0f,flags);
@@ -6575,106 +6402,6 @@ void HandleThrow(const Timestep &in ts) {
             going_to_throw_item = false;
         }
     }
-}
-
-class Arrow {
-    string type;
-    float timeShot;
-    int arrowID;
-};
-
-void HandleArrows(){
-    if(arrows.size() > 0){
-        for(uint32 i = 0; i<arrows.size(); i++){
-            Arrow curArrow = arrows[i];
-            float lifeTime;
-            if(curArrow.type == "impactexplosion"){
-                lifeTime = 5.0f;
-                previousTime = time;
-
-            }else if(curArrow.type == "poison"){
-                lifeTime = 5.0f;
-                previousTime = time;
-
-            }else if(curArrow.type == "smoke"){
-                //Print(floor(time * 10) / 10 + "\n");
-                lifeTime = 5.0f;
-                if (time - previousTime > 0.05){
-
-                    Print((floor(time * 100) / 100) + "\n");
-                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
-                    MakeParticle("Data/Particles/smoke.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)));
-                    previousTime = time;
-                }
-                
-
-            }else if(curArrow.type == "standard"){
-                Print("Standard " + "\n");
-                lifeTime = 5.0f;
-                previousTime = time;
-            }else if(curArrow.type == "timedexplosion"){
-                lifeTime = 5.0f;
-
-                if (time - previousTime > 0.01){
-
-                    Print((floor(time * 100) / 100) + "\n");
-                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
-                    MakeParticle("Data/Particles/metalspark.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)));
-                    
-                }
-
-                if((curArrow.timeShot + lifeTime) < time){
-                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
-                    vec3 start = arrowItem.GetPhysicsPosition();
-
-                    array<int> nearbyCharacters;
-                    GetCharactersInSphere(start, 5.0f, nearbyCharacters);
-
-                    MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/propane.xml",start,vec3(0.0f,15.0f,0.0f));
-
-                    for(int i=0; i<3; i++){
-                        MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosion_smoke.xml",start,
-                        vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
-
-                        MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosiondecal.xml",start,
-                        vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
-                    }
-
-                    PlaySound("Data/Custom/gyrth/grenade/Sounds/explosion.wav", start);
-                    
-
-                    for(uint32 i=0; i<nearbyCharacters.size(); ++i){
-                        MovementObject@ char = ReadCharacterID(nearbyCharacters[i]);
-                        if(char.GetID() == this_mo.GetID()){
-                            Print("Found player\n");
-                            vec3 force = normalize(char.position - start) * 40000.0f;
-                            force.y += 1000.0f;
-                            HandleRagdollImpactImpulse(force, this_mo.rigged_object().GetAvgIKChainPos("torso"), 5.0f);
-                            ragdoll_limp_stun = 1.0f;
-                            recovery_time = 2.0f;
-                        }else{
-                            vec3 force = normalize(char.position - start) * 40000.0f;
-                            force.y += 1000.0f;
-                            char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
-                            "HandleRagdollImpactImpulse(impulse, this_mo.rigged_object().GetAvgIKChainPos(\"torso\"), 5.0f);"+
-                            "ragdoll_limp_stun = 1.0f;"+
-                            "recovery_time = 2.0f;");
-                        }
-
-                    }
-                }
-
-            }else{
-
-            }
-            if((curArrow.timeShot + lifeTime) < time){
-                
-                arrows.removeAt(i);
-                i--;
-            }
-        }
-    }
-
 }
 
 void HandlePickUp() {
