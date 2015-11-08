@@ -1,9 +1,36 @@
-<?xml version="2.0" ?>
-<Type>saved</Type>
-<ActorObjects>
-    <ItemObject t0="8.12997" t1="7.42405" t2="-164.698" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="-8.74228e-008" r7="0" r8="0" r9="8.74228e-008" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="693" type_file="Data/Custom/Gyrth/bow_and_arrow/Items/arrow.xml" color_r="1" color_g="1" color_b="1">
-        <parameters>
-            <parameter name="Type" type="string" val="poison" />
-        </parameters>
-    </ItemObject>
-</ActorObjects>
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Custom/gyrth/bow_and_arrow/Objects/PoisonCloudArrow.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_grip.anm"
+		  hands = "1"/>
+    <points>
+        <wood_base x="0" y="-0.3" z="0"/>
+        <blade_base x="0" y="0.25" z="0"/>
+        <blade_tip x="0" y="0.3" z="0"/>
+    </points>
+	<sheathe ik_attach = "torso"
+	  anim = "Data/Animations/r_dogweaponsheathed.anm"/>
+      
+    <anim_blend idle = "Data/Animations/r_spearidle.xml"
+                movement = "Data/Animations/r_spearmove.xml"/>
+    <anim_override movement = "Data/Animations/r_spearmovestance.xml"/>
+
+    <attachments>
+        <attachment>Data/Items/attachments/righthip.xml</attachment>
+        <attachment>Data/Items/attachments/rightchest.xml</attachment>
+        <attachment>Data/Items/attachments/rightrearhip.xml</attachment>
+        <attachment>Data/Items/attachments/rightfronthip.xml</attachment>
+    </attachments>
+    <lines>
+        <wood start="wood_base" end="blade_base"/>
+        <metal start="blade_base" end="blade_tip"/>
+    </lines>
+    <label>arrow</label>
+    <anim_override_flags
+                   lowleftblock = "mirror"
+                   lowrightblock = "mirror"/>
+    <physics mass = "0.15 kg"/>
+    <range extend = "1.0"/>
+</item>
