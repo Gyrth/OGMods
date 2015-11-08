@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <item>
     <type>weapon</type>
-    <appearance obj_path = "Data/Custom/gyrth/bow_and_arrow/Objects/arrow2.xml"/>
+    <appearance obj_path = "Data/Custom/gyrth/bow_and_arrow/Objects/FlashBangArrow.xml"/>
     <grip ik_attach = "rightarm"
           anim = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_grip.anm"
 		  hands = "1"/>
@@ -12,8 +12,10 @@
     </points>
 	<sheathe ik_attach = "torso"
 	  anim = "Data/Animations/r_dogweaponsheathed.anm"/>
-
-
+      
+    <anim_blend idle = "Data/Animations/r_spearidle.xml"
+                movement = "Data/Animations/r_spearmove.xml"/>
+    <anim_override movement = "Data/Animations/r_spearmovestance.xml"/>
 
     <attachments>
         <attachment>Data/Items/attachments/righthip.xml</attachment>
