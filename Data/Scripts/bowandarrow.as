@@ -13,6 +13,7 @@ class BowAndArrow {
     int bowUpDownAnim;
     float start_throwing_time = 0.0f;
     uint32 aimingParticle;
+    uint32 miscParticleID;
     //vec3 throw_target_pos = -1;
     bool isAiming = false;
     array<Arrow> arrows;
@@ -37,7 +38,7 @@ class BowAndArrow {
         vec3 end = vec3(facing.x, max(-0.9, min(0.3f, facing.y)), facing.z) * 30.0f;
         //vec3 end = facing * 30.0f;
         //Collision check for non player objects
-        Print(cameraFacing.y + "\n");
+        //Print(cameraFacing.y + "\n");
         vec3 hit = col.GetRayCollision(camera.GetPos() + start, camera.GetPos() + end);
         //Collision check for player objects.
         col.CheckRayCollisionCharacters(camera.GetPos() + start, camera.GetPos() + end);
@@ -81,7 +82,7 @@ class BowAndArrow {
 
             }
 
-            this_mo.SetAnimation("Data/Custom/Gyrth/bow_and_arrow/Animations/r_draw_bow_stance.anm", 20.0f, flags);
+            this_mo.SetAnimation("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_stance.anm", 20.0f, flags);
 
             this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 5.0f);
             
@@ -192,60 +193,189 @@ class BowAndArrow {
                 Arrow curArrow = arrows[i];
                 float lifeTime;
                 if(curArrow.type == "impactexplosion"){
-                    lifeTime = 5.0f;
-                    previousTime = time;
+                    //This arrow has a maximum falltime of 60 seconds. But it will most likely explode before that.
+                    lifeTime = 60.0f;
+                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                    //When the arrow leaves the hand of the character it will be active.
+                    if(arrowItem.HeldByWhom() != this_mo.GetID()){
+                        //When the velocity is low enough it is save to assume it has hit something.
+                        if(length(arrowItem.GetLinearVelocity()) < 20.0f){
+                            //Use the position of the arrow to calculate the exposion direction.
+                            vec3 start = arrowItem.GetPhysicsPosition();
+                            //A nice explosion video with a couple of smoke particles.
+                            MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/propane.xml",start,vec3(0.0f,2.0f,0.0f));
+
+                            for(int i=0; i<3; i++){
+                                //This particle is just smoke.
+                                MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosion_smoke.xml",start,
+                                vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
+                                //While this one leave a nice decal on the ground or objects that are near.
+                                MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosiondecal.xml",start,
+                                vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
+                            }
+                            //A very loud explosion sound at the arrow position.
+                            PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/explosion.wav", start);
+                            //Now it's time to apply the forces and damage to any near characters.
+                            array<int> nearbyCharacters;
+                            //This explosion has a radius of 5.0f;
+                            GetCharactersInSphere(start, 5.0f, nearbyCharacters);
+                            for(uint32 i=0; i<nearbyCharacters.size(); ++i){
+                                MovementObject@ char = ReadCharacterID(nearbyCharacters[i]);
+                                //Every character will receive a velocity, damage and ragdoll state.
+                                //If it's the character that shot the arrow in the first place, we don't have to use Execute.
+                                if(char.GetID() == this_mo.GetID()){
+                                    vec3 force = normalize(char.position - start) * 40000.0f;
+                                    force.y += 1000.0f;
+                                    HandleRagdollImpactImpulse(force, this_mo.rigged_object().GetAvgIKChainPos("torso"), 5.0f);
+                                    ragdoll_limp_stun = 1.0f;
+                                    recovery_time = 2.0f;
+                                }else{
+                                    vec3 force = normalize(char.position - start) * 40000.0f;
+                                    force.y += 1000.0f;
+                                    char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
+                                    "HandleRagdollImpactImpulse(impulse, this_mo.rigged_object().GetAvgIKChainPos(\"torso\"), 5.0f);"+
+                                    "ragdoll_limp_stun = 1.0f;"+
+                                    "recovery_time = 2.0f;");
+                                }
+                            }
+                            //If the arrow has explode it can be removed from the arrow array.
+                            arrows.removeAt(i);
+                            i--;
+                        }
+                    }
 
                 }else if(curArrow.type == "poison"){
-                    lifeTime = 5.0f;
-                    previousTime = time;
+                    lifeTime = 20.0f;
+                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                    //If the arrow is stuck in someone it will apply damage.
+                    int charID = arrowItem.StuckInWhom();
+                    if(charID != -1){
+                        if (time - previousTime > 1.0f){
+                            MovementObject@ victim = ReadCharacterID(charID);
+                            if(victim.GetIntVar("knocked_out") == _awake){
+                                victim.Execute("TakeDamage(0.25f);");
+                            }else{
+                                victim.Execute("Ragdoll(_RGDL_INJURED);");
+                            }
+                            previousTime = time;
+                        }
+                        //After 20 seconds the rolling around animation can stop and the character is dead/limp.
+                        if((curArrow.timeShot + lifeTime) < time){
+                            MovementObject@ victim = ReadCharacterID(charID);
+                            victim.Execute("Ragdoll(_RGDL_LIMP);");
+                        }
+                    }
+                }else if(curArrow.type == "poisoncloud"){
+                    lifeTime = 15.0f;
+                    //Activate the green smoke trail after 0.7 seconds.
+                    if((time - curArrow.timeShot) > 0.7f){
+                        ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                        //Use the 5 seconds as a baseline
+                        float tempTime = time - (curArrow.timeShot + 5.0f);
+                        //The position of the arrow will be the spawnpoint of all the particles
+                        vec3 start = arrowItem.GetPhysicsPosition();
+                        //On exactly 5 seconds the arrow will explode in green smoke.
+                        if(tempTime > 0.0080f && tempTime < 0.0086f){
+                            for(int i =0; i < 20; i++){
+                                MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/poison_smoke.xml", arrowItem.GetPhysicsPosition(), 
+                                    vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*200.0f);
+                            }
+                        //Before 5 seconds a smoketrail add a green smoketrail.
+                        }else if(tempTime < 0.0086f){
+                            if (time - previousTime > 0.1){
+                                MakeParticle("Data/Particles/smoke.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)), vec3(0.0f,0.5f,0.0f));
+                                previousTime = time;
+                            }
+                        }
+                        //After 5 seconds all the characters that are near will receive damage
+                        if(tempTime > 0.0080f && (time - previousTime) > 1.0f){
+                            array<int> nearbyCharacters;
+                            GetCharactersInSphere(start, 5.0f, nearbyCharacters);
+                            for(uint32 i=0; i<nearbyCharacters.size(); ++i){
+                                MovementObject@ victim = ReadCharacterID(nearbyCharacters[i]);
+                                if(victim.GetID() == this_mo.GetID()){
+                                    if(knocked_out == _awake){
+                                        TakeDamage(0.25f);
+                                    }
+                                    if(knocked_out != _awake){
+                                        Ragdoll(_RGDL_INJURED);
+                                        Ragdoll(_RGDL_LIMP);
+                                    }
+                                }else{
+                                    if(victim.GetIntVar("knocked_out") == _awake){
+                                        victim.Execute("TakeDamage(0.25f);");
+                                    }
+                                    if(victim.GetIntVar("knocked_out") != _awake){
+                                        //Once the character has no health left it will flail around a bit and die.
+                                        victim.Execute("Ragdoll(_RGDL_INJURED);");
+                                        victim.Execute("Ragdoll(_RGDL_LIMP);");
+                                    }
+                                }
 
+                            }
+                            previousTime = time;
+                        }
+                    }
                 }else if(curArrow.type == "smoke"){
-                    //Print(floor(time * 10) / 10 + "\n");
+                    //The smoke arrow will explode in 5 seconds.
                     lifeTime = 5.0f;
-                    if (time - previousTime > 0.05){
-
-                        Print((floor(time * 100) / 100) + "\n");
+                    //Every .1 second a smoketrail particle will spawn on the arrow position.
+                    if (time - previousTime > 0.1){
                         ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
                         MakeParticle("Data/Particles/smoke.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)));
                         previousTime = time;
                     }
-                    
-
-                }else if(curArrow.type == "standard"){
-                    Print("Standard " + "\n");
-                    lifeTime = 5.0f;
-                    previousTime = time;
-                }else if(curArrow.type == "timedexplosion"){
-                    lifeTime = 5.0f;
-
-                    if (time - previousTime > 0.01){
-
-                        //Print((floor(time * 100) / 100) + "\n");
-                        ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
-                        MakeParticle("Data/Particles/metalspark.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)));
-                        
-                    }
-
+                    //Once the 5 second mark is reached it explodes.
                     if((curArrow.timeShot + lifeTime) < time){
                         ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
                         vec3 start = arrowItem.GetPhysicsPosition();
 
                         array<int> nearbyCharacters;
                         GetCharactersInSphere(start, 5.0f, nearbyCharacters);
+                        //The particles will go into a random direction from the arrow position.
+                        for(int i =0; i < 20; i++){
+                            MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/lasting_smoke.xml", arrowItem.GetPhysicsPosition(), 
+                                vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*200.0f);
+                        }
+                        //Every non player character will be startlet for 3 seconds and start looking around.
+                        for(uint32 i=0; i<nearbyCharacters.size(); ++i){
+                            MovementObject@ char = ReadCharacterID(nearbyCharacters[i]);
+                            if(!char.controlled){
+                                char.Execute("startled = true;" +
+                                    "startle_time = 3.0f;" +
+                                    "SetGoal(_investigate);" +
+                                    "SetSubGoal(_investigate_around);");
+                            }
+                        }
+                    }
 
+                }else if(curArrow.type == "standard"){
+                    //A standard arrow still has a 5 seconds lifetime because camera still needs to be zoomed in to see the impact.
+                    lifeTime = 5.0f;
+                    previousTime = time;
+                }else if(curArrow.type == "timedexplosion"){
+                    //The timed explosion has a lifetime of 5 seconds.
+                    lifeTime = 5.0f;
+                    if (time - previousTime > 0.01){
+                        //These metalsparks are a sort of fuse effect that will trail behind.
+                        ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                        miscParticleID = MakeParticle("Data/Particles/metalspark.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)));
+                        previousTime = time;
+                    }
+                    //Once the 5 seconds are over the explosion starts. Just like the impact arrow.
+                    if((curArrow.timeShot + lifeTime) < time){
+                        ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                        vec3 start = arrowItem.GetPhysicsPosition();
+                        array<int> nearbyCharacters;
+                        GetCharactersInSphere(start, 5.0f, nearbyCharacters);
                         MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/propane.xml",start,vec3(0.0f,2.0f,0.0f));
-
                         for(int i=0; i<3; i++){
                             MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosion_smoke.xml",start,
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
-
                             MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosiondecal.xml",start,
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
                         }
-
-                        PlaySound("Data/Custom/gyrth/grenade/Sounds/explosion.wav", start);
-                        
-
+                        PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/explosion.wav", start);
                         for(uint32 i=0; i<nearbyCharacters.size(); ++i){
                             MovementObject@ char = ReadCharacterID(nearbyCharacters[i]);
                             if(char.GetID() == this_mo.GetID()){
@@ -263,13 +393,60 @@ class BowAndArrow {
                                 "ragdoll_limp_stun = 1.0f;"+
                                 "recovery_time = 2.0f;");
                             }
-
                         }
                     }
+                    
+                }else if(curArrow.type == "flashbang"){
+                    lifeTime = 5.0f;
+                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                    //The flashbang arrow has a trail of sparks as well as a fuse.
+                    if (time - previousTime > 0.01){
+                        miscParticleID = MakeParticle("Data/Particles/metalspark.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)));
+                        previousTime = time;
+                    }
 
+                    if((curArrow.timeShot + lifeTime) < time){
+                        vec3 start = arrowItem.GetPhysicsPosition();
+                        //The flashbang sound is an explosion with a very annoying beep after it.
+                        PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/flashbang.wav", start);
+                        //This particle is a very short and big light particle to emulate a big flash.
+                        MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/flashbang.xml", start, vec3(0));
+
+                        array<int> nearbyCharacters;
+                        GetCharactersInSphere(start, 5.0f, nearbyCharacters);
+                        //All the nearby characters will be affected.
+                        for(uint32 i=0; i<nearbyCharacters.size(); ++i){
+                            MovementObject@ char = ReadCharacterID(nearbyCharacters[i]);
+                            //Non player characters will roll around for 5 seconds and recover.
+                            if(!char.controlled){
+                                char.Execute("Ragdoll(_RGDL_INJURED);"+
+                                             "recovery_time = 5.0f;"+
+                                             "roll_after_ragdoll_delay += 200.0f;"+
+                                             "DropWeapon();");
+                            }else{
+                                //The character that shot the arrow will can be affected without the Execute.
+                                if(char.GetID() == this_mo.GetID()){
+                                    HandleRagdollImpactImpulse(vec3(0), this_mo.rigged_object().GetAvgIKChainPos("torso"), 0.0f);
+                                    ragdoll_limp_stun = 5.0f;
+                                    recovery_time = 5.0f;
+                                    DropWeapon();
+                                }else{
+                                    //Any other player characters will have seperate ragdoll code but the effect is the same.
+                                    char.Execute("vec3 impulse = vec3(0);" +
+                                    "HandleRagdollImpactImpulse(impulse, this_mo.rigged_object().GetAvgIKChainPos(\"torso\"), 0.0f);"+
+                                    "ragdoll_limp_stun = 5.0f;"+
+                                    "recovery_time = 5.0f;"+
+                                    "DropWeapon();");
+                                }
+                                //This particle will be seen on the entire screen if a player chracter is in range.
+                                MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/flashbangonscreen.xml", start, vec3(0));
+                            }
+                        }
+                    }
                 }else{
 
                 }
+                //Once the lifetime of the arrow is met the arrow is removed from the array.
                 if((curArrow.timeShot + lifeTime) < time){
                     
                     arrows.removeAt(i);
@@ -280,9 +457,6 @@ class BowAndArrow {
 
     }
     void HandleBow(){
-        
-        
-
         if(weapon_slots[primary_weapon_slot] != -1){
             ItemObject@ primaryWeapon = ReadItemID(weapon_slots[primary_weapon_slot]);
             if(primaryWeapon.GetLabel() == "bow"){
@@ -311,6 +485,5 @@ class BowAndArrow {
             }
         }
     }
-
 };
 
