@@ -13,9 +13,9 @@
 	<sheathe ik_attach = "torso"
 	  anim = "Data/Animations/r_dogweaponsheathed.anm"/>
       
-    <anim_blend idle = "Data/Animations/r_spearidle.xml"
-                movement = "Data/Animations/r_spearmove.xml"/>
-    <anim_override movement = "Data/Animations/r_spearmovestance.xml"/>
+    <anim_blend idle = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrowidle.xml"
+                movement = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrowmove.xml"/>
+    <anim_override movement = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrowmovestance.xml"/>
 
     <attachments>
         <attachment>Data/Items/attachments/righthip.xml</attachment>
