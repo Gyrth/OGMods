@@ -18,6 +18,7 @@ class BowAndArrow {
     uint32 miscParticleID;
     bool isAiming = false;
     array<Arrow> arrows;
+    bool longDrawAnim = false;
 
    void BowAiming(){
         if(start_throwing_time == 0.0f){
@@ -123,7 +124,9 @@ class BowAndArrow {
             going_to_throw_item_time = time;
 
             this_mo.SetRotationFromFacing(camera.GetFacing());
+            
             isAiming = false;
+            throw_anim = false;
             start_throwing_time = 0.0f;
         }
     }
@@ -137,6 +140,7 @@ class BowAndArrow {
             draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_short.anm";
         }else{
             PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/draw.wav", this_mo.position);
+            longDrawAnim = true;
             int number = rand()%3;
             switch(number){
             case 0: draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow.anm";break;
@@ -438,13 +442,17 @@ class BowAndArrow {
 
     }
     void HandleBow(){
-        if(weapon_slots[primary_weapon_slot] != -1){
+        if(weapon_slots[primary_weapon_slot] == -1){
+            isAiming = false;
+            longDrawAnim = false;
+        }else{
+            //If the bow is the only weapon the character is holding a single string needs to be drawn.
             ItemObject@ primaryWeapon = ReadItemID(weapon_slots[primary_weapon_slot]);
-            if(primaryWeapon.GetLabel() == "bow"){
+            if (primaryWeapon.GetLabel() == "bow"){
                 mat4 bowTransform = primaryWeapon.GetPhysicsTransform();
-                BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kLeftArmKey]]);
+                BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kRightArmKey]]);
                 quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
-                DebugDrawLine(primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.1,-0.78,0)), primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.1,0.78,0)), vec3(0), _delete_on_update);
+                DebugDrawLine(primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.1,-0.77,0)), primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.132,0.77,0)), vec3(0), _delete_on_update);
             }
         }
         if(weapon_slots[secondary_weapon_slot] != -1){
@@ -452,7 +460,7 @@ class BowAndArrow {
             if (secondaryWeapon.GetLabel() == "bow"){
                 mat4 bowTransform = secondaryWeapon.GetPhysicsTransform();
                 
-                if(isAiming && floor(length(this_mo.velocity)) < 2.0f && on_ground){
+                if(isAiming || longDrawAnim){
                     BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kLeftArmKey]]);
                     quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
 

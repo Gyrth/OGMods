@@ -1475,7 +1475,7 @@ void Update(int num_frames) {
 		label_primary = ReadItemID(primary_weapon_id).GetLabel();
 	}
     if(weapon_slots[primary_weapon_slot] == -1 && weapon_slots[secondary_weapon_slot] != -1 && label_secondary != "bow"){
-        SwapWeaponHands();
+        //SwapWeaponHands();
     }
 	//Print("Primary: " + weapon_slots[primary_weapon_slot]);
 	//Print("Secondary: " + weapon_slots[secondary_weapon_slot]);
@@ -1792,6 +1792,7 @@ string wolf_key = "5";
 string dog_key = "6";
 string rabbot_key = "7";
 string misc_key = "b";
+string other_misc_key = "c";
 
 void HandleSpecialKeyPresses() {
     if(!DebugKeysEnabled()){
@@ -1966,8 +1967,10 @@ void HandleSpecialKeyPresses() {
             this_mo.rigged_object().anim_client().SetAnimationCallback("void EndAnim()");*/
             //
             SwapWeaponHands();
-            
             //CheckPossibleAttacks();
+        }
+        if(GetInputPressed(this_mo.controller_id, other_misc_key)){
+            ApplyIdle(4.0f, true);
         }
     }
     if(GetInputPressed(this_mo.controller_id, path_key) && target_id != -1){
@@ -4139,6 +4142,8 @@ void Sheathe(int src, int dst){
 
 void UnSheathe(int dst, int src){    
     if(weapon_slots[src] != -1 && weapon_slots[dst] == -1){
+        
+
         ItemObject@ item_obj = ReadItemID(weapon_slots[src]);
         vec3 pos = item_obj.GetPhysicsPosition();
         string sound = "Data/Sounds/weapon_foley/grab/weapon_grap_metal_leather_glove.xml";
@@ -4151,6 +4156,7 @@ void UnSheathe(int dst, int src){
         weapon_slots[src+2] = -1;
         UpdateItemFistGrip();
         UpdatePrimaryWeapon();
+        ApplyIdle(4.0f, true);
     }
 }
 

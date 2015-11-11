@@ -12,23 +12,14 @@
     </points>
 	<sheathe ik_attach = "torso"
 	  anim = "Data/Custom/gyrth/bow_and_arrow/Animations/r_bow_sheathed.anm"/>
-    <anim_override idle = "Data/Animations/r_weaponidlestance.xml"
-                   movement = "Data/Animations/r_spearmovestance.xml"
-                   blockflinch = "Data/Animations/r_spearblockflinch.anm"
-                   medleftblock = "Data/Animations/r_spearblockleft.anm"
-                   medrightblock = "Data/Animations/r_spearblockright.anm"
-                   highleftblock = "Data/Animations/r_spearblockhighleft.anm"
-                   highrightblock = "Data/Animations/r_spearblockhighright.anm"
-                   lowleftblock = "Data/Animations/r_spearblocklowleft.anm"
-                   lowrightblock = "Data/Animations/r_spearblocklowright.anm"/>
+
+    <anim_blend idle = "Data/Animations/r_weaponidlestance.xml"/>
+
     <lines>
         <wood start="wood_base" end="blade_base"/>
         <metal start="blade_base" end="blade_tip"/>
     </lines>
 	<label>bow</label>
-    <anim_override_flags
-                   lowleftblock = "mirror"
-                   lowrightblock = "mirror"/>
     <physics mass = "5.0 kg"/>
     <range extend = "1.0"/>
 </item>
