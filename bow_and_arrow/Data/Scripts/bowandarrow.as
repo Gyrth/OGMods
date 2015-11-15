@@ -67,9 +67,9 @@ class BowAndArrow {
             this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 5.0f);
             
             if(this_mo.GetFacing().y >0){
-                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_stance_aim_up.anm",(40*this_mo.GetFacing().y/1),flags);
+                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_stance_aim_up.anm",(60*this_mo.GetFacing().y/2),flags);
             }else{
-                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_stance_aim_down.anm",-(40*this_mo.GetFacing().y/1),0);
+                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_stance_aim_down.anm",-(60*this_mo.GetFacing().y/2),flags);
             }
             
             if(cameraFacing.y > -1.0f){
@@ -159,10 +159,18 @@ class BowAndArrow {
             for(uint32 i = 0; i<arrows.size(); i++){
                 Arrow curArrow = arrows[i];
                 float lifeTime;
+
+                if(i == arrows.size() - 1 && inSlowMo){
+                    ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                    cam_pos_offset = (arrowItem.GetPhysicsPosition() - this_mo.position);
+                }
+
                 if(curArrow.type == "impactexplosion"){
+
                     //This arrow has a maximum falltime of 60 seconds. But it will most likely explode before that.
                     lifeTime = 60.0f;
                     ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+                    
                     //When the arrow leaves the hand of the character it will be active.
                     if(arrowItem.HeldByWhom() != this_mo.GetID()){
                         //When the velocity is low enough it is save to assume it has hit something.
@@ -170,12 +178,12 @@ class BowAndArrow {
                             //Use the position of the arrow to calculate the exposion direction.
                             vec3 start = arrowItem.GetPhysicsPosition();
                             //A nice explosion video with a couple of smoke particles.
-                            MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/propane.xml",start,vec3(0.0f,2.0f,0.0f));
+                            MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/fire_expanding.xml",start,vec3(0.0f,10.0f,0.0f));
 
                             for(int j=0; j<3; j++){
                                 //This particle is just smoke.
                                 MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosion_smoke.xml",start,
-                                vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
+                                vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(2.0f,5.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
                                 //While this one leave a nice decal on the ground or objects that are near.
                                 MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosiondecal.xml",start,
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
@@ -234,6 +242,8 @@ class BowAndArrow {
                 }else if(curArrow.type == "poison"){
                     lifeTime = 10.0f;
                     ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
+
+
                     
                     //If the arrow is stuck in someone it will apply damage.
                     if(curArrow.victimID == -1){
@@ -372,10 +382,10 @@ class BowAndArrow {
                         vec3 start = arrowItem.GetPhysicsPosition();
                         array<int> nearbyCharacters;
                         GetCharactersInSphere(start, 5.0f, nearbyCharacters);
-                        MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/propane.xml",start,vec3(0.0f,2.0f,0.0f));
+                        MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/fire_expanding.xml",start,vec3(0.0f,10.0f,0.0f));
                         for(int j=0; j<3; j++){
                             MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosion_smoke.xml",start,
-                            vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
+                            vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(2.0f,5.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
                             MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosiondecal.xml",start,
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
                         }
@@ -398,7 +408,7 @@ class BowAndArrow {
                                 "recovery_time = 2.0f;");
                             }
                         }
-                        DebugDrawWireSphere(start, 50.0f, vec3(0), _fade);
+                        //DebugDrawWireSphere(start, 50.0f, vec3(0), _fade);
                         nearbyCharacters.resize(0);
                         GetCharactersInSphere(start, 50.0f, nearbyCharacters);
                         for(uint32 k=0; k<nearbyCharacters.size(); ++k){
@@ -408,7 +418,7 @@ class BowAndArrow {
                                     "NotifySound("+ this_mo.GetID() + ", pos);");
                             }
                         }
-                        DebugDrawWireSphere(start, 20.0f, vec3(1), _fade);
+                        //DebugDrawWireSphere(start, 20.0f, vec3(1), _fade);
                         nearbyCharacters.resize(0);
                         GetCharactersInSphere(start, 20.0f, nearbyCharacters);
                         for(uint32 k=0; k<nearbyCharacters.size(); ++k){
@@ -491,16 +501,12 @@ class BowAndArrow {
             //If the bow is the only weapon the character is holding a single string needs to be drawn.
             ItemObject@ primaryWeapon = ReadItemID(weapon_slots[primary_weapon_slot]);
             if (primaryWeapon.GetLabel() == "bow"){
-                mat4 bowTransform = primaryWeapon.GetPhysicsTransform();
-                BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kRightArmKey]]);
-                quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
-                DebugDrawLine(primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.1,-0.77,0)), primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.132,0.77,0)), vec3(0), _delete_on_update);
+
             }
         }
         if(weapon_slots[secondary_weapon_slot] != -1){
             ItemObject@ secondaryWeapon = ReadItemID(weapon_slots[secondary_weapon_slot]);
             if (secondaryWeapon.GetLabel() == "bow"){
-                mat4 bowTransform = secondaryWeapon.GetPhysicsTransform();
                 if(throw_anim){
                     if(longDrawAnim && ((time - start_throwing_time) < 0.5f && fov > 50)){
                         float throw_range = 50.0f;
@@ -510,17 +516,31 @@ class BowAndArrow {
                             throw_target_pos = ReadCharacterID(target).rigged_object().GetAvgIKChainPos("torso");
                         }
                     }
-                    BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kLeftArmKey]]);
-                    quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
-
-                    DebugDrawLine(handTransform.origin, secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.1,0.78,0)), vec3(0), _delete_on_update);
-                    DebugDrawLine(handTransform.origin, secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.1,-0.78,0)), vec3(0), _delete_on_update);
-                }else{
-                    BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kLeftArmKey]]);
-                    quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
-                    DebugDrawLine(secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.1,-0.77,0)), secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.132,0.77,0)), vec3(0), _delete_on_update);
+                    DrawDoubleSting(weapon_slots[secondary_weapon_slot]);
+                }else if(isAiming && floor(length(this_mo.velocity)) < 2.0f && on_ground){
+                    DrawDoubleSting(weapon_slots[secondary_weapon_slot]);
+                }
+                else{
+                    DrawSingleString(weapon_slots[secondary_weapon_slot]);
                 }
             }
         }
+    }
+
+    void DrawSingleString(int weaponID){
+        ItemObject@ primaryWeapon = ReadItemID(weaponID);
+        mat4 bowTransform = primaryWeapon.GetPhysicsTransform();
+        BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kRightArmKey]]);
+        quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
+        DebugDrawLine(primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.13,-0.70,0)), primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.13,0.70,0)), vec3(0), _delete_on_update);
+    }
+    void DrawDoubleSting(int weaponID){
+        ItemObject@ secondaryWeapon = ReadItemID(weaponID);
+        mat4 bowTransform = secondaryWeapon.GetPhysicsTransform();
+        BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kLeftArmKey]]);
+        quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
+
+        DebugDrawLine(handTransform.origin, secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.13,0.70,0)), vec3(0), _delete_on_update);
+        DebugDrawLine(handTransform.origin, secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.13,-0.70,0)), vec3(0), _delete_on_update);
     }
 };

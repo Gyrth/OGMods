@@ -15,6 +15,7 @@ LedgeInfo ledge_info;
 BowAndArrow bowAndArrow;
 float fov = 90;
 vec3 throw_target_pos = -1;
+bool inSlowMo = false;
 
 bool static_char = false;
 bool left_handed = true;
@@ -1344,6 +1345,7 @@ array<float> target_resting_mouth_pose;
 float resting_mouth_pose_time = 0.0f;
 
 void Update(int num_frames) {
+    bowAndArrow.HandleBow();
     CheckForNANPosAndVel(1);
     Timestep ts(time_step, num_frames);    
     time += ts.step();
@@ -1778,6 +1780,7 @@ string wolf_key = "5";
 string dog_key = "6";
 string rabbot_key = "7";
 string misc_key = "b";
+string slow_key = "tab";
 
 void HandleSpecialKeyPresses() {
     if(!DebugKeysEnabled()){
@@ -1921,6 +1924,10 @@ void HandleSpecialKeyPresses() {
         }
         if(GetInputPressed(this_mo.controller_id, misc_key)){
             SwapWeaponHands();
+            //UpdatePrimaryWeapon();
+        }
+        if(GetInputPressed(this_mo.controller_id, slow_key)){
+            inSlowMo = !inSlowMo;
         }
     }
     if(GetInputPressed(this_mo.controller_id, path_key) && target_id != -1){
@@ -2103,7 +2110,7 @@ void UpdateState(const Timestep &in ts) {
         cam_pos_offset *= 0.99f;
     }
     bowAndArrow.HandleArrows();
-    bowAndArrow.HandleBow();
+    
 
     UpdateEyeLookTarget();
     UpdateHeadLook(ts);
@@ -4123,6 +4130,7 @@ void UnSheathe(int dst, int src){
         weapon_slots[dst] = weapon_slots[src];
         weapon_slots[src] = weapon_slots[src+2];
         weapon_slots[src+2] = -1;
+
         UpdateItemFistGrip();
         UpdatePrimaryWeapon();
     }
@@ -6277,13 +6285,14 @@ void StartSheathing(int slot){
         {
             ItemObject@ item_obj = ReadItemID(weapon_slots[slot]);
             if(item_obj.HasSheatheAttachment()){
-                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifesheathe.anm",8.0f,flags);
+                Print("SHEATHE!\n");
+                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/sheathe.anm",8.0f,flags);
                 this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
             }
         } else {
             ItemObject@ item_obj = ReadItemID(weapon_slots[slot]);
             if(item_obj.HasSheatheAttachment()){
-                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifesheathesameside.anm",8.0f,flags);
+                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/sheathe_sameside.anm",8.0f,flags);
                 this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
             }
         }

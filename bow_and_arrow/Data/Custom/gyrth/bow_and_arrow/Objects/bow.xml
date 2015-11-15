@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <Object>
-	<Model>Data/Custom/gyrth/bow_and_arrow/Models/bow.obj</Model>
-	<ColorMap>Data/Custom/gyrth/bow_and_arrow/Textures/bow_color.png</ColorMap>
-	<NormalMap>Data/Textures/Weapons/DogWeapons/DogGlaive/dogglaive_normal.TGA</NormalMap>
-	<SharpnessMap>Data/Custom/gyrth/bow_and_arrow/Textures/arrow_sharpness.png</SharpnessMap>
-	<ShaderName>cubemapobjitem</ShaderName>
+	<Model>Data/Custom/gyrth/bow_and_arrow/Models/Bow.obj</Model>
+	<ColorMap>Data/Custom/gyrth/bow_and_arrow/Textures/Bow_c.png</ColorMap>
+	<NormalMap>Data/Custom/gyrth/bow_and_arrow/Textures/Bow_n.png</NormalMap>
+	<SharpnessMap>Data/Custom/gyrth/bow_and_arrow/Textures/blunt.png</SharpnessMap>
+	<ShaderName>cubemapitem</ShaderName>
 </Object>

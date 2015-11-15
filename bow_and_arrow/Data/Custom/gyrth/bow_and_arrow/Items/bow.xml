@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <item>
     <type>weapon</type>
-    <appearance obj_path = "Data/Custom/gyrth/bow_and_arrow/Objects/bow.xml"/>
+    <appearance obj_path = "Data/Custom/gyrth/bow_and_arrow/Objects/Bow.xml"/>
     <grip ik_attach = "rightarm"
           anim = "Data/Custom/gyrth/bow_and_arrow/Animations/r_bow_grip.anm"
 		  hands = "1"/>
@@ -14,6 +14,14 @@
 	  anim = "Data/Custom/gyrth/bow_and_arrow/Animations/r_bow_sheathed.anm"/>
 
     <anim_blend idle = "Data/Animations/r_weaponidlestance.xml"/>
+
+    <attack_override moving_close = "Data/Attacks/jab.xml"
+             stationary_close = "Data/Custom/gyrth/bow_and_arrow/Attacks/kneestrike.xml"
+             moving = "Data/Custom/gyrth/bow_and_arrow/Attacks/roundhouse.xml"
+             stationary = "Data/Custom/gyrth/bow_and_arrow/Attacks/frontkick.xml"
+             moving_low = "Data/Custom/gyrth/bow_and_arrow/Attacks/soccerkick.xml"
+             low = "Data/Custom/gyrth/bow_and_arrow/Attacks/sweep.xml"
+             air = "Data/Attacks/legcannon.xml" />
 
     <lines>
         <wood start="wood_base" end="blade_base"/>
