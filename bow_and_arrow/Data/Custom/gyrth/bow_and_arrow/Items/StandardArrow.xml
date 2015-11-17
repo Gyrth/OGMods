@@ -11,7 +11,7 @@
         <blade_tip x="0" y="0.3" z="0"/>
     </points>
 	<sheathe ik_attach = "torso"
-	  anim = "Data/Custom/gyrth/bow_and_arrow/Animations/r_bow_sheathed.anm"/>
+	  anim = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_sheathed.anm"/>
       
     <anim_blend idle = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrowidle.xml"
                 movement = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrowmove.xml"/>

@@ -272,11 +272,23 @@ enum WeaponSlot {
     _sheathed_right=3,
     _sheathed_left_sheathe=4,
     _sheathed_right_sheathe=5,
+    _sheathed_arrow_one=6,
+    _sheathed_arrow_two=7,
+    _sheathed_arrow_one_sheathe=8,
+    _sheathed_arrow_two_sheathe=9,
+    _sheathed_arrow_three=10,
+    _sheathed_arrow_four=11,
+    _sheathed_arrow_three_sheathe=12,
+    _sheathed_arrow_four_sheathe=13,
+    _sheathed_arrow_five=14,
+    _sheathed_arrow_six=15,
+    _sheathed_arrow_five_sheathe=16,
+    _sheathed_arrow_six_sheathe=17,
 };
 
 int primary_weapon_slot = _held_right;
 int secondary_weapon_slot = _held_left;
-const int _num_weap_slots = 6;
+const int _num_weap_slots = 18;
 array<int> weapon_slots;
 
 // Pre-jump happens after jump key is pressed and before the character gets upwards velocity. The time available for the jump animation that happens on the ground. 
@@ -4102,13 +4114,53 @@ void GrabWeaponFromBody(int stuck_id, int weapon_id, const vec3 &in pos) {{
 }
 
 void Sheathe(int src, int dst){
-    if(weapon_slots[src] != -1 && weapon_slots[dst+2] == -1){
+    if(weapon_slots[src] != -1 && weapon_slots[dst+2] == -1 && ReadItemID(weapon_slots[src]).GetLabel() != "arrow"){
         ItemObject@ item_obj = ReadItemID(weapon_slots[src]);
         vec3 pos = item_obj.GetPhysicsPosition();
         string sound = "Data/Sounds/weapon_foley/impact/weapon_drop_light_dirt.xml";
         PlaySoundGroup(sound, pos,0.5f);
 
         bool dst_right = (dst == _sheathed_right);
+
+        this_mo.rigged_object().SheatheItem(weapon_slots[src], dst_right);
+        weapon_slots[dst+2] = weapon_slots[dst];
+        weapon_slots[dst] = weapon_slots[src];
+        weapon_slots[src] = -1;
+        UpdateItemFistGrip();
+        UpdatePrimaryWeapon();
+    }else if(weapon_slots[src] != -1 && weapon_slots[dst+2] == -1 && ReadItemID(weapon_slots[src]).GetLabel() == "arrow"){
+        ItemObject@ item_obj = ReadItemID(weapon_slots[src]);
+        vec3 pos = item_obj.GetPhysicsPosition();
+        string sound = "Data/Sounds/weapon_foley/impact/weapon_drop_light_dirt.xml";
+        PlaySoundGroup(sound, pos,0.5f);
+
+        bool dst_right = (dst == _sheathed_right);
+
+        if(weapon_slots[_sheathed_arrow_one] == -1){
+            dst = _sheathed_arrow_one;
+            dst_right = true;
+            Print("Sheathing on first arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_two] == -1){
+            dst = _sheathed_arrow_two;
+            dst_right = false;
+            Print("Sheathing on second arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_three] == -1){
+            dst = _sheathed_arrow_three;
+            dst_right = true;
+            Print("Sheathing on thrird arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_four] == -1){
+            dst = _sheathed_arrow_four;
+            dst_right = false;
+            Print("Sheathing on fourth arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_five] == -1){
+            dst = _sheathed_arrow_five;
+            dst_right = true;
+            Print("Sheathing on fifth arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_six] == -1){
+            dst = _sheathed_arrow_six;
+            dst_right = false;
+            Print("Sheathing on sixth arrow slot\n");
+        }
         this_mo.rigged_object().SheatheItem(weapon_slots[src], dst_right);
         weapon_slots[dst+2] = weapon_slots[dst];
         weapon_slots[dst] = weapon_slots[src];
@@ -4118,8 +4170,10 @@ void Sheathe(int src, int dst){
     }
 }
 
-void UnSheathe(int dst, int src){    
+void UnSheathe(int dst, int src){
+    
     if(weapon_slots[src] != -1 && weapon_slots[dst] == -1){
+
         ItemObject@ item_obj = ReadItemID(weapon_slots[src]);
         vec3 pos = item_obj.GetPhysicsPosition();
         string sound = "Data/Sounds/weapon_foley/grab/weapon_grap_metal_leather_glove.xml";
@@ -4133,7 +4187,62 @@ void UnSheathe(int dst, int src){
 
         UpdateItemFistGrip();
         UpdatePrimaryWeapon();
+    }else if(weapon_slots[dst] == -1 && ArrowInQuiver()){
+
+
+        bool dst_right = (dst == _held_right);
+        Print("At unsheathing\n");
+        int chosenItem = -1;
+        if(weapon_slots[_sheathed_arrow_one] != -1){
+            chosenItem = _sheathed_arrow_one;
+            Print("UnSheatheItem on first arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_two] != -1){
+            chosenItem = _sheathed_arrow_two;
+            Print("UnSheatheItem on second arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_three] != -1){
+            chosenItem = _sheathed_arrow_three;
+            Print("UnSheatheItem on thrird arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_four] != -1){
+            chosenItem = _sheathed_arrow_four;
+            Print("UnSheatheItem on fourth arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_five] != -1){
+            chosenItem = _sheathed_arrow_five;
+            Print("UnSheatheItem on fifth arrow slot\n");
+        }else if(weapon_slots[_sheathed_arrow_six] != -1){
+            chosenItem = _sheathed_arrow_six;
+            Print("UnSheatheItem on sixth arrow slot\n");
+        }
+        if(chosenItem != -1){
+            ItemObject@ item_obj = ReadItemID(weapon_slots[chosenItem]);
+            vec3 pos = item_obj.GetPhysicsPosition();
+            string sound = "Data/Sounds/weapon_foley/grab/weapon_grap_metal_leather_glove.xml";
+            PlaySoundGroup(sound, pos,0.5f);
+            this_mo.rigged_object().UnSheatheItem(weapon_slots[chosenItem], dst_right);
+            weapon_slots[dst] = weapon_slots[chosenItem];
+            weapon_slots[chosenItem] = weapon_slots[chosenItem+2];
+            weapon_slots[chosenItem+2] = -1;
+
+            UpdateItemFistGrip();
+            UpdatePrimaryWeapon();
+        }
     }
+}
+bool ArrowInQuiver(){
+    bool arrowAvailable = false;
+    if(weapon_slots[_sheathed_arrow_one] != -1){
+        arrowAvailable = true;
+    }else if(weapon_slots[_sheathed_arrow_two] != -1){
+        arrowAvailable = true;
+    }else if(weapon_slots[_sheathed_arrow_three]!= -1){
+        arrowAvailable = true;
+    }else if(weapon_slots[_sheathed_arrow_four] != -1){
+        arrowAvailable = true;
+    }else if(weapon_slots[_sheathed_arrow_five] != -1){
+        arrowAvailable = true;
+    }else if(weapon_slots[_sheathed_arrow_six] != -1){
+        arrowAvailable = true;
+    }
+    return arrowAvailable;
 }
 
 void HandleAnimationMiscEvent(const string&in event, const vec3&in world_pos) {
@@ -4164,6 +4273,8 @@ void HandleAnimationMiscEvent(const string&in event, const vec3&in world_pos) {
             this_mo.rigged_object().anim_client().RemoveLayer(pickup_layer, 4.0f);
             pickup_layer = -1;
         }
+        UpdateItemFistGrip();
+        UpdatePrimaryWeapon();
     }
     if(event == "heldweaponswap" ){ 
         if(weapon_slots[_held_left] != -1){
@@ -6264,7 +6375,21 @@ void StartSheathing(int slot){
     }
     int dst = -1;
     // Put weapon in sheathe if possible, otherwise put in empty slot
-    if(weapon_slots[side_a] != -1 && DoesItemFitInItem(weapon_slots[slot], weapon_slots[side_a])){
+    if(obj.GetLabel() == "arrow"){
+        if(weapon_slots[_sheathed_arrow_one] == -1){
+            dst = _sheathed_arrow_one;
+        }else if(weapon_slots[_sheathed_arrow_two] == -1){
+            dst = _sheathed_arrow_two;
+        }else if(weapon_slots[_sheathed_arrow_three] == -1){
+            dst = _sheathed_arrow_three;
+        }else if(weapon_slots[_sheathed_arrow_four] == -1){
+            dst = _sheathed_arrow_four;
+        }else if(weapon_slots[_sheathed_arrow_five] == -1){
+            dst = _sheathed_arrow_five;
+        }else if(weapon_slots[_sheathed_arrow_six] == -1){
+            dst = _sheathed_arrow_six;
+        }
+    }else if(weapon_slots[side_a] != -1 && DoesItemFitInItem(weapon_slots[slot], weapon_slots[side_a])){
         dst = side_a;
     } else if(weapon_slots[side_b] != -1 && DoesItemFitInItem(weapon_slots[slot], weapon_slots[side_b])){
         dst = side_b;
@@ -6279,20 +6404,26 @@ void StartSheathing(int slot){
         int flags = 0;
         if(slot == _held_left){
             flags = _ANM_MIRRORED;
+        } if(obj.GetLabel() == "arrow"){
+            ItemObject@ item_obj = ReadItemID(weapon_slots[slot]);
+            if(item_obj.HasSheatheAttachment()){
+                Print("Sheathing an arrow!\n");
+                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifesheathe.anm",8.0f,flags);
+                this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
+            }
         }
-        if((slot == _held_left && dst == _sheathed_right) ||
+        else if((slot == _held_left && dst == _sheathed_right) ||
            (slot == _held_right && dst == _sheathed_left))
         {
             ItemObject@ item_obj = ReadItemID(weapon_slots[slot]);
             if(item_obj.HasSheatheAttachment()){
-                Print("SHEATHE!\n");
-                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/sheathe.anm",8.0f,flags);
+                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifesheathe.anm",8.0f,flags);
                 this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
             }
         } else {
             ItemObject@ item_obj = ReadItemID(weapon_slots[slot]);
             if(item_obj.HasSheatheAttachment()){
-                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/sheathe_sameside.anm",8.0f,flags);
+                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifesheathesameside.anm",8.0f,flags);
                 this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
             }
         }
@@ -6451,6 +6582,7 @@ void HandlePickUp() {
         if(WantsToSheatheItem() && weapon_slots[primary_weapon_slot] != -1){ 
             StartSheathing(primary_weapon_slot);
         } else if(WantsToUnSheatheItem(src) && weapon_slots[primary_weapon_slot] == -1){
+            Print("Ubsheathe: " + src + "\n");
             if(src != -1){
                 int flags = 0;
                 if(primary_weapon_slot == _held_left){
