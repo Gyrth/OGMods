@@ -4135,31 +4135,30 @@ void Sheathe(int src, int dst){
         PlaySoundGroup(sound, pos,0.5f);
 
         bool dst_right = (dst == _sheathed_right);
-
+        
         if(weapon_slots[_sheathed_arrow_one] == -1){
             dst = _sheathed_arrow_one;
-            dst_right = true;
             Print("Sheathing on first arrow slot\n");
         }else if(weapon_slots[_sheathed_arrow_two] == -1){
             dst = _sheathed_arrow_two;
-            dst_right = false;
             Print("Sheathing on second arrow slot\n");
         }else if(weapon_slots[_sheathed_arrow_three] == -1){
             dst = _sheathed_arrow_three;
-            dst_right = true;
             Print("Sheathing on thrird arrow slot\n");
         }else if(weapon_slots[_sheathed_arrow_four] == -1){
             dst = _sheathed_arrow_four;
-            dst_right = false;
             Print("Sheathing on fourth arrow slot\n");
         }else if(weapon_slots[_sheathed_arrow_five] == -1){
             dst = _sheathed_arrow_five;
-            dst_right = true;
             Print("Sheathing on fifth arrow slot\n");
         }else if(weapon_slots[_sheathed_arrow_six] == -1){
             dst = _sheathed_arrow_six;
-            dst_right = false;
             Print("Sheathing on sixth arrow slot\n");
+        }
+        if(dst % 2 == 0){
+            dst_right = true;
+        }else{
+            dst_right = false;
         }
         this_mo.rigged_object().SheatheItem(weapon_slots[src], dst_right);
         weapon_slots[dst+2] = weapon_slots[dst];
@@ -4315,6 +4314,7 @@ void HandleAnimationMiscEvent(const string&in event, const vec3&in world_pos) {
     } else if(event == "unsheatherighthandrighthi" ){
         UnSheathe(_held_right, _sheathed_right);
     }
+    Print("Event: " + event + "\n");
 }
 
 void AISound(vec3 pos, float max_range){
@@ -6407,9 +6407,13 @@ void StartSheathing(int slot){
         } if(obj.GetLabel() == "arrow"){
             ItemObject@ item_obj = ReadItemID(weapon_slots[slot]);
             if(item_obj.HasSheatheAttachment()){
-                Print("Sheathing an arrow!\n");
-                sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifesheathe.anm",8.0f,flags);
-                this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
+                if(dst % 2 == 0){
+                    sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_sheathe_sameside.anm",8.0f,flags);
+                    this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
+                }else{
+                    sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_sheathe.anm",8.0f,flags);
+                    this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
+                }
             }
         }
         else if((slot == _held_left && dst == _sheathed_right) ||
@@ -6585,10 +6589,16 @@ void HandlePickUp() {
             Print("Ubsheathe: " + src + "\n");
             if(src != -1){
                 int flags = 0;
+                ItemObject@ item_obj = ReadItemID(weapon_slots[src]);
                 if(primary_weapon_slot == _held_left){
                     flags = _ANM_MIRRORED;
-                }
-                if((primary_weapon_slot == _held_left && src == _sheathed_right) ||
+                }if(item_obj.GetLabel() == "arrow"){
+                    if(src % 2 == 0){
+                        sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_unsheathe_sameside.anm",8.0f,flags);
+                    }else{
+                        sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_unsheathe.anm",8.0f,flags);
+                    }
+                }else if((primary_weapon_slot == _held_left && src == _sheathed_right) ||
                    (primary_weapon_slot == _held_right && src == _sheathed_left))
                 {
                     sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifeunsheathe.anm",8.0f,flags);
