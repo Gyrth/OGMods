@@ -4,6 +4,7 @@ class Arrow {
     int arrowID;
     int victimID = -1;
     vec3 explosionPos;
+    bool triggered = false;
 }
 
 class BowAndArrow {
@@ -242,8 +243,6 @@ class BowAndArrow {
                 }else if(curArrow.type == "poison"){
                     lifeTime = 10.0f;
                     ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
-
-
                     
                     //If the arrow is stuck in someone it will apply damage.
                     if(curArrow.victimID == -1){
@@ -280,10 +279,9 @@ class BowAndArrow {
                     //Activate the green smoke trail after 0.7 seconds.
                     if((time - curArrow.timeShot) > 0.7f){
                         ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
-                        //Use the 5 seconds as a baseline
-                        float tempTime = time - (curArrow.timeShot + 5.0f);
                         //On exactly 5 seconds the arrow will explode in green smoke.
-                        if(tempTime > 0.0080f && tempTime < 0.0086f){
+                        if((time - curArrow.timeShot) > 5.0f && curArrow.triggered == false){
+                            arrows[i].triggered = true;
                             //The position of the arrow will be the spawnpoint of all the particles
                             vec3 start = arrowItem.GetPhysicsPosition();
                             arrows[i].explosionPos = start;
@@ -292,14 +290,14 @@ class BowAndArrow {
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*200.0f);
                             }
                         //Before 5 seconds a smoketrail add a green smoketrail.
-                        }else if(tempTime < 0.0086f){
+                        }else if((time - curArrow.timeShot) < 5.0f){
                             if (time - previousTime > 0.1){
                                 MakeParticle("Data/Particles/smoke.xml", arrowItem.GetPhysicsPosition(), vec3(RangedRandomFloat(-1.0f, 1.0f)), vec3(0.0f,0.5f,0.0f));
                                 previousTime = time;
                             }
                         }
                         //After 5 seconds all the characters that are near will receive damage
-                        if(tempTime > 0.0080f && (time - previousTime) > 1.0f){
+                        if((time - curArrow.timeShot) > 5.0f && curArrow.triggered && (time - previousTime) > 1.0f){
                             array<int> nearbyCharacters;
                             GetCharactersInSphere(curArrow.explosionPos, 5.0f, nearbyCharacters);
                             Print("apply damage "+ nearbyCharacters.size() + "\n");
@@ -473,7 +471,7 @@ class BowAndArrow {
                                     "DropWeapon();");
                                 }
                                 //This particle will be seen on the entire screen if a player chracter is in range.
-                                MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/flashbangonscreen.xml", start, vec3(0));
+                                //MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/flashbangonscreen.xml", start, vec3(0));
                             }
                         }
                     }

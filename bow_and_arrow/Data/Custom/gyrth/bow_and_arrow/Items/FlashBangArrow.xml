@@ -16,6 +16,7 @@
     <anim_blend idle = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrowidle.xml"
                 movement = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrowmove.xml"/>
     <anim_override movement = "Data/Custom/gyrth/bow_and_arrow/Animations/r_arrowmovestance.xml"/>
+    
     <attack_override moving_close = "Data/Attacks/jab.xml"
              stationary_close = "Data/Custom/gyrth/bow_and_arrow/Attacks/kneestrike.xml"
              moving = "Data/Custom/gyrth/bow_and_arrow/Attacks/roundhouse.xml"

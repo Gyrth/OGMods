@@ -4186,7 +4186,7 @@ void UnSheathe(int dst, int src){
 
         UpdateItemFistGrip();
         UpdatePrimaryWeapon();
-    }else if(weapon_slots[dst] == -1 && ArrowInQuiver()){
+    }else if(weapon_slots[dst] == -1 && ArrowsInQuiver() > 0){
 
 
         bool dst_right = (dst == _held_right);
@@ -4220,28 +4220,26 @@ void UnSheathe(int dst, int src){
             weapon_slots[dst] = weapon_slots[chosenItem];
             weapon_slots[chosenItem] = weapon_slots[chosenItem+2];
             weapon_slots[chosenItem+2] = -1;
-
-            UpdateItemFistGrip();
-            UpdatePrimaryWeapon();
+            
         }
     }
 }
-bool ArrowInQuiver(){
-    bool arrowAvailable = false;
+int ArrowsInQuiver(){
+    int amount = 0;
     if(weapon_slots[_sheathed_arrow_one] != -1){
-        arrowAvailable = true;
-    }else if(weapon_slots[_sheathed_arrow_two] != -1){
-        arrowAvailable = true;
-    }else if(weapon_slots[_sheathed_arrow_three]!= -1){
-        arrowAvailable = true;
-    }else if(weapon_slots[_sheathed_arrow_four] != -1){
-        arrowAvailable = true;
-    }else if(weapon_slots[_sheathed_arrow_five] != -1){
-        arrowAvailable = true;
-    }else if(weapon_slots[_sheathed_arrow_six] != -1){
-        arrowAvailable = true;
+        amount++;
+    }if(weapon_slots[_sheathed_arrow_two] != -1){
+        amount++;
+    }if(weapon_slots[_sheathed_arrow_three]!= -1){
+        amount++;
+    }if(weapon_slots[_sheathed_arrow_four] != -1){
+        amount++;
+    }if(weapon_slots[_sheathed_arrow_five] != -1){
+        amount++;
+    }if(weapon_slots[_sheathed_arrow_six] != -1){
+        amount++;
     }
-    return arrowAvailable;
+    return amount;
 }
 
 void HandleAnimationMiscEvent(const string&in event, const vec3&in world_pos) {
@@ -6586,24 +6584,28 @@ void HandlePickUp() {
         if(WantsToSheatheItem() && weapon_slots[primary_weapon_slot] != -1){ 
             StartSheathing(primary_weapon_slot);
         } else if(WantsToUnSheatheItem(src) && weapon_slots[primary_weapon_slot] == -1){
-            Print("Ubsheathe: " + src + "\n");
             if(src != -1){
                 int flags = 0;
                 ItemObject@ item_obj = ReadItemID(weapon_slots[src]);
                 if(primary_weapon_slot == _held_left){
                     flags = _ANM_MIRRORED;
-                }if(item_obj.GetLabel() == "arrow"){
-                    if(src % 2 == 0){
-                        sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_unsheathe_sameside.anm",8.0f,flags);
-                    }else{
-                        sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_unsheathe.anm",8.0f,flags);
-                    }
-                }else if((primary_weapon_slot == _held_left && src == _sheathed_right) ||
+                }
+                if((primary_weapon_slot == _held_left && src == _sheathed_right) ||
                    (primary_weapon_slot == _held_right && src == _sheathed_left))
                 {
                     sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifeunsheathe.anm",8.0f,flags);
                 } else {
                     sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_knifeunsheathesameside.anm",8.0f,flags);
+                }
+            }else{
+                if(ArrowsInQuiver() > 0){
+                    if(ArrowsInQuiver() % 2 == 0){
+                            sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_unsheathe_sameside.anm",8.0f,0);
+                            Print("Ubsheathe  same side: " + ArrowsInQuiver() + "\n");
+                        }else{
+                            sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_unsheathe.anm",8.0f,0);
+                            Print("Ubsheathe  other side: " + ArrowsInQuiver() + "\n");
+                    }
                 }
             }
         }
