@@ -1,11 +1,18 @@
 # Bow And Arrow
 ## Howto use:  
-Backup/Rename aschar.as in your /Data/Scripts folder if you want to undo this mod later.  
+Put the bow_and_arrow folder inside the Mods folder.  
   
-	1. Open up Data/Custom/gyrth/bow_and_arrow/Items/arrow.xml and Data/Custom/gyrth/bow_and_arrow/Items/bow.xml.  
-	2. Place both in the scene somewhere.  
-	3. Pick up an arrow first and then the bow.  
+	1. Open up Data/Custom/gyrth/bow_and_arrow/Items/Quiver.xml and attach it to your character by holding alt.  
+	2. Open Data/Custom/gyrth/bow_and_arrow/Items/Bow.xml and pick it up.  
+	2. Choose, place anf pick up an arrow you want:  
+		Data/Custom/gyrth/bow_and_arrow/Items/FlashBangArrow_prefab.xml  
+		Data/Custom/gyrth/bow_and_arrow/Items/ImpactExplosionArrow_prefab.xml  
+		Data/Custom/gyrth/bow_and_arrow/Items/PoisonArrow_prefab.xml  
+		Data/Custom/gyrth/bow_and_arrow/Items/PoisonCloudArrow_prefab.xml  
+		Data/Custom/gyrth/bow_and_arrow/Items/SmokeArrow_prefab.xml  
+		Data/Custom/gyrth/bow_and_arrow/Items/TimedExplosionArrow_prefab.xml  
+	3. Make sure the bow is in the left hand and an arrow in the right (Swap with b).  
 	4. Press q to shoot at an enemy.  
 	
-Last tested and working on alpha 209.  
+Last tested and working on alpha 211.  
 [Preorder the game here.](http://www.wolfire.com/overgrowth)
