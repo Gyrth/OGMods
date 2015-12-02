@@ -6406,10 +6406,10 @@ void StartSheathing(int slot){
             ItemObject@ item_obj = ReadItemID(weapon_slots[slot]);
             if(item_obj.HasSheatheAttachment()){
                 if(dst % 2 == 0){
-                    sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_sheathe_sameside.anm",8.0f,flags);
+                    sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_arrow_sheathe_sameside.anm",8.0f,flags);
                     this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
                 }else{
-                    sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_sheathe.anm",8.0f,flags);
+                    sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_arrow_sheathe.anm",8.0f,flags);
                     this_mo.rigged_object().anim_client().SetLayerItemID(sheathe_layer_id, 0, weapon_slots[slot]);
                 }
             }
@@ -6600,10 +6600,10 @@ void HandlePickUp() {
             }else{
                 if(ArrowsInQuiver() > 0){
                     if(ArrowsInQuiver() % 2 == 0){
-                            sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_unsheathe_sameside.anm",8.0f,0);
+                            sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_arrow_unsheathe_sameside.anm",8.0f,0);
                             Print("Ubsheathe  same side: " + ArrowsInQuiver() + "\n");
                         }else{
-                            sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_arrow_unsheathe.anm",8.0f,0);
+                            sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_arrow_unsheathe.anm",8.0f,0);
                             Print("Ubsheathe  other side: " + ArrowsInQuiver() + "\n");
                     }
                 }

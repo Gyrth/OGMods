@@ -49,7 +49,7 @@ class BowAndArrow {
             throw_target_pos = hit;
         }
 
-        aimingParticle = MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/aim.xml", throw_target_pos, vec3(0));
+        aimingParticle = MakeParticle("Data/Particles/aim.xml", throw_target_pos, vec3(0));
 
         fov = max(fov - ((time - start_throwing_time)), 40.0f);
         
@@ -59,18 +59,18 @@ class BowAndArrow {
         
         if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
             if(shortDrawAnim == false){
-                PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/draw.wav", this_mo.position);
+                PlaySound("Data/Sounds/draw.wav", this_mo.position);
 
             }
 
-            this_mo.SetAnimation("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_stance.anm", 20.0f, flags);
+            this_mo.SetAnimation("Data/Animations/r_draw_bow_stance.anm", 20.0f, flags);
 
             this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 5.0f);
             
             if(this_mo.GetFacing().y >0){
-                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_stance_aim_up.anm",(60*this_mo.GetFacing().y/2),flags);
+                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_up.anm",(60*this_mo.GetFacing().y/2),flags);
             }else{
-                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_stance_aim_down.anm",-(60*this_mo.GetFacing().y/2),flags);
+                bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_down.anm",-(60*this_mo.GetFacing().y/2),flags);
             }
             
             if(cameraFacing.y > -1.0f){
@@ -133,16 +133,16 @@ class BowAndArrow {
         SetState(_attack_state);
         string draw_type = "empty";
         if(shortDrawAnim){
-            draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_short.anm";
+            draw_type = "Data/Animations/r_draw_bow_short.anm";
             longDrawAnim = false;
         }else{
-            PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/draw.wav", this_mo.position);
+            PlaySound("Data/Sounds/draw.wav", this_mo.position);
             longDrawAnim = true;
             int number = rand()%3;
             switch(number){
-            case 0: draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow.anm";break;
-            case 1: draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_askew.anm";break;
-            case 2: draw_type = "Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_sideways.anm";break;
+            case 0: draw_type = "Data/Animations/r_draw_bow.anm";break;
+            case 1: draw_type = "Data/Animations/r_draw_bow_askew.anm";break;
+            case 2: draw_type = "Data/Animations/r_draw_bow_sideways.anm";break;
             }
         }
 
@@ -151,8 +151,8 @@ class BowAndArrow {
     void BowShootAnimInAir(){
         int8 flags = 0;
         SetState(_movement_state);
-        PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/draw.wav", this_mo.position);
-        throw_knife_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Custom/gyrth/bow_and_arrow/Animations/r_draw_bow_running.anm",20.0f,flags);
+        PlaySound("Data/Sounds/draw.wav", this_mo.position);
+        throw_knife_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_running.anm",20.0f,flags);
         throw_anim = true;
     }
     void HandleArrows(){
@@ -179,18 +179,18 @@ class BowAndArrow {
                             //Use the position of the arrow to calculate the exposion direction.
                             vec3 start = arrowItem.GetPhysicsPosition();
                             //A nice explosion video with a couple of smoke particles.
-                            MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/fire_expanding.xml",start,vec3(0.0f,10.0f,0.0f));
+                            MakeParticle("Data/Particles/fire_expanding.xml",start,vec3(0.0f,10.0f,0.0f));
 
                             for(int j=0; j<3; j++){
                                 //This particle is just smoke.
-                                MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosion_smoke.xml",start,
+                                MakeParticle("Data/Particles/explosion_smoke.xml",start,
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(2.0f,5.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
                                 //While this one leave a nice decal on the ground or objects that are near.
-                                MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosiondecal.xml",start,
+                                MakeParticle("Data/Particles/explosiondecal.xml",start,
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
                             }
                             //A very loud explosion sound at the arrow position.
-                            PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/explosion.wav", start);
+                            PlaySound("Data/Sounds/explosion.wav", start);
                             //Now it's time to apply the forces and damage to any near characters.
                             array<int> nearbyCharacters;
                             //This explosion has a radius of 5.0f;
@@ -286,7 +286,7 @@ class BowAndArrow {
                             vec3 start = arrowItem.GetPhysicsPosition();
                             arrows[i].explosionPos = start;
                             for(int j =0; j < 20; j++){
-                                MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/poison_smoke.xml", arrowItem.GetPhysicsPosition(), 
+                                MakeParticle("Data/Particles/poison_smoke.xml", arrowItem.GetPhysicsPosition(), 
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*200.0f);
                             }
                         //Before 5 seconds a smoketrail add a green smoketrail.
@@ -346,7 +346,7 @@ class BowAndArrow {
                         //DebugDrawWireSphere(start, 7.0f, vec3(0), _fade);
                         //The particles will go into a random direction from the arrow position.
                         for(int k =0; k < 10; k++){
-                            MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/lasting_smoke.xml", arrowItem.GetPhysicsPosition(), 
+                            MakeParticle("Data/Particles/lasting_smoke.xml", arrowItem.GetPhysicsPosition(), 
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*200.0f);
                         }
                         //Every non player character will be startlet for 3 seconds and start looking around.
@@ -380,14 +380,14 @@ class BowAndArrow {
                         vec3 start = arrowItem.GetPhysicsPosition();
                         array<int> nearbyCharacters;
                         GetCharactersInSphere(start, 5.0f, nearbyCharacters);
-                        MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/fire_expanding.xml",start,vec3(0.0f,10.0f,0.0f));
+                        MakeParticle("Data/Particles/fire_expanding.xml",start,vec3(0.0f,10.0f,0.0f));
                         for(int j=0; j<3; j++){
-                            MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosion_smoke.xml",start,
+                            MakeParticle("Data/Particles/explosion_smoke.xml",start,
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(2.0f,5.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
-                            MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/explosiondecal.xml",start,
+                            MakeParticle("Data/Particles/explosiondecal.xml",start,
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
                         }
-                        PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/explosion.wav", start);
+                        PlaySound("Data/Sounds/explosion.wav", start);
                         for(uint32 j=0; j<nearbyCharacters.size(); ++j){
                             MovementObject@ char = ReadCharacterID(nearbyCharacters[j]);
                             if(char.GetID() == this_mo.GetID()){
@@ -440,9 +440,9 @@ class BowAndArrow {
                     if((curArrow.timeShot + lifeTime) < time){
                         vec3 start = arrowItem.GetPhysicsPosition();
                         //The flashbang sound is an explosion with a very annoying beep after it.
-                        PlaySound("Data/Custom/gyrth/bow_and_arrow/Sounds/flashbang.wav", start);
+                        PlaySound("Data/Sounds/flashbang.wav", start);
                         //This particle is a very short and big light particle to emulate a big flash.
-                        MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/flashbang.xml", start, vec3(0));
+                        MakeParticle("Data/Particles/flashbang.xml", start, vec3(0));
 
                         array<int> nearbyCharacters;
                         GetCharactersInSphere(start, 5.0f, nearbyCharacters);
@@ -471,7 +471,7 @@ class BowAndArrow {
                                     "DropWeapon();");
                                 }
                                 //This particle will be seen on the entire screen if a player chracter is in range.
-                                //MakeParticle("Data/Custom/gyrth/bow_and_arrow/Particles/flashbangonscreen.xml", start, vec3(0));
+                                //MakeParticle("Data/Particles/flashbangonscreen.xml", start, vec3(0));
                             }
                         }
                     }
