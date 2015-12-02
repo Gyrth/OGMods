@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<item>
+    <type>misc</type>
+    <appearance obj_path = "Data/Objects/StandardArrow.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_rapiergrip.anm"
+          anim_base = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "2"/>
+    <physics mass = "0.1 kg"/>
+    <points>
+        <pommel x="0" y="0" z="-0.16"/>
+        <guard x="0" y="0" z="0.05"/>
+        <tip x="0" y="0.04" z="0.94"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="guard"/>
+        <metal start="guard" end="tip"/>
+    </lines>
+    <anim_blend idle = "Data/Animations/r_bigdogsword.xml"
+				movement = "Data/Animations/r_bigdogswordmove.xml"/>
+    <attack_override stationary = "Data/Attacks/dogbroadswordoverhand.xml"
+                     moving = "Data/Attacks/dogbroadswordside.xml"
+                     moving_close = "Data/Attacks/dogbroadswordsideclose.xml"
+                     stationary_close = "Data/Attacks/dogbroadswordsideclose.xml"/>
+    <anim_override idle = "Data/Animations/r_weaponidlestance.xml"
+                   movement = "Data/Animations/r_weaponmovestance.xml"/>
+</item>
