@@ -5,7 +5,7 @@
     <grip ik_attach = "rightarm"
           anim = "Data/Animations/r_rapiergrip.anm"
           anim_base = "Data/Animations/r_dogweapongrip.anm"/>
-    <physics mass = "0.1 kg"/>
+    <physics mass = "0.03 kg"/>
     <points>
         <tip x="0" y="-0.3" z="0"/>
         <feathers x="0" y="-0.6" z="0"/>

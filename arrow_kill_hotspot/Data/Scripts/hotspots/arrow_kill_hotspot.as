@@ -64,7 +64,7 @@ void Update() {
                     bool arrowShot = false;
                     //Keep finding a way to shoot the character until the arrow is not obstructed.
                     while(arrowShot == false){
-                        vec3 victimPos = victim.rigged_object().GetAvgIKChainPos("torso");
+                        vec3 victimPos = victim.rigged_object().GetAvgIKChainPos("head");
                         vec3 offset = vec3(RangedRandomFloat(-1.0f,1.0f),RangedRandomFloat(-1.0f,1.0f),RangedRandomFloat(-1.0f,1.0f));
                         vec3 spawnPos = victimPos + normalize(offset) * params.GetFloat("Distance");
                         //This script does not have access to the col object.
@@ -94,7 +94,7 @@ void Update() {
                             newArrowItem.SetSafe();
                             //The rotation is set to point the tip to the character.
                             newArrowObject.SetRotation(rot);
-                            vec3 direction = normalize(victimPos - spawnPos);
+                            vec3 direction = normalize((victimPos + (victim.velocity * 0.1f)) - spawnPos);
                             //Request the velocity that has been set and multiply it with the direction to shoot it at the victim.
                             newArrowItem.SetLinearVelocity(direction*params.GetInt("Arrow Velocity"));
                             newArrowItem.SetThrown();
