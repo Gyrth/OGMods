@@ -28,6 +28,10 @@ void Reset(){
 
 void SetParameters() {
     params.AddFloatSlider("Pull Speed",1,"min:0,max:10,step:0.1,text_mult:100");
+    params.AddIntCheckbox("Left Leg", true);
+    params.AddIntCheckbox("Right Leg", true);
+    params.AddIntCheckbox("Left Arm", true);
+    params.AddIntCheckbox("Right Arm", true);
 }
 
 void HandleEvent(string event, MovementObject @mo){
@@ -67,9 +71,18 @@ void Update(){
                 
                 vec3 ropeEndPos = firstRopePointObj.GetTranslation();
 
-                currentChar.rigged_object().MoveRagdollPart("left_leg",ropeEndPos,0.0f);
-                currentChar.rigged_object().MoveRagdollPart("right_leg",ropeEndPos,0.0f);
-                
+                if(params.GetInt("Left Leg") == 1){
+                    currentChar.rigged_object().MoveRagdollPart("left_leg",ropeEndPos,0.0f);
+                }
+                if(params.GetInt("Right Leg") == 1){
+                    currentChar.rigged_object().MoveRagdollPart("right_leg",ropeEndPos,0.0f);
+                }
+                if(params.GetInt("Left Arm") == 1){
+                    currentChar.rigged_object().MoveRagdollPart("leftarm",ropeEndPos,0.0f);
+                }
+                if(params.GetInt("Right Arm") == 1){
+                    currentChar.rigged_object().MoveRagdollPart("rightarm",ropeEndPos,0.0f);
+                }
                 
                 currentChar.rigged_object().SetRagdollDamping(0.5f);
                 Object@ ropeObj = ReadObjectFromID(ropeObject);
