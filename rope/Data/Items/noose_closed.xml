@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<item>
+    <type>misc</type>
+    <appearance obj_path = "Data/Objects/noose_closed.xml"/>
+    <attachments>
+        <attachment>Data/Items/attachments/noose_attached.xml</attachment>
+    </attachments>
+    <physics mass = "1.5 kg"
+             sound_modifier = "soft"/>
+</item>
