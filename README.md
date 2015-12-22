@@ -2,15 +2,15 @@
 ## Howto use:  
 Put the bow_and_arrow folder inside the Mods folder.  
   
-	1. Open up Data/Custom/gyrth/bow_and_arrow/Items/Quiver.xml and attach it to your character by holding alt.  
-	2. Open Data/Custom/gyrth/bow_and_arrow/Items/Bow.xml and pick it up.  
+	1. Open up Data/Items/Quiver.xml and attach it to your character by holding alt.  
+	2. Open Data/Items/Bow.xml and pick it up.  
 	2. Choose, place and pick up an arrow you want:  
-		Data/Custom/gyrth/bow_and_arrow/Items/FlashBangArrow_prefab.xml  
-		Data/Custom/gyrth/bow_and_arrow/Items/ImpactExplosionArrow_prefab.xml  
-		Data/Custom/gyrth/bow_and_arrow/Items/PoisonArrow_prefab.xml  
-		Data/Custom/gyrth/bow_and_arrow/Items/PoisonCloudArrow_prefab.xml  
-		Data/Custom/gyrth/bow_and_arrow/Items/SmokeArrow_prefab.xml  
-		Data/Custom/gyrth/bow_and_arrow/Items/TimedExplosionArrow_prefab.xml  
+		Data/Items/FlashBangArrow_prefab.xml  
+		Data/Items/ImpactExplosionArrow_prefab.xml  
+		Data/Items/PoisonArrow_prefab.xml  
+		Data/Items/PoisonCloudArrow_prefab.xml  
+		Data/Items/SmokeArrow_prefab.xml  
+		Data/Items/TimedExplosionArrow_prefab.xml  
 	3. Make sure the bow is in the left hand and an arrow in the right (Swap with b).  
 	4. Press q to shoot at an enemy.  
 	
