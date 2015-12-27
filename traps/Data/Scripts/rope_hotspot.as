@@ -54,7 +54,7 @@ void OnEnter(MovementObject @mo) {
         charObj.AttachItem(nooseObject, _at_attachment, false);
         nooseObject.SetScale(vec3(0.5f, 0.5f,0.5f));
         DeleteObjectID(nooseObjID);
-        PlaySound("Data/Sounds/rope_snap.wav");
+        //PlaySound("Data/Sounds/rope_snap.wav");
         activated = true;
     }
 }
