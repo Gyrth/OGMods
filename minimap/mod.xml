@@ -1,0 +1,15 @@
+<? xml version="1.0" ?>
+<Mod>
+    <!-- The ID is necessary and should never change between versions of the same mod -->
+    <!-- The id can consist of english alphabet or dash "-" -->
+    <Id>minimap</Id> 
+    <!-- The human readable name is presented in UI's -->
+    <Name>Minimap</Name> 
+    <!-- Version number, can have any formatting you wish. Can consists of numbers english alphabet, "." or "-" -->
+    <Version>0.1.0</Version>
+    <!-- Your immortal stamp -->
+    <Author>Gyrth McMulin</Author>
+    
+    <!-- Specification for which version of the game that is supported. It's possible to specify more than one -->
+    <SupportedVersion>a215</SupportedVersion>
+</Mod>
