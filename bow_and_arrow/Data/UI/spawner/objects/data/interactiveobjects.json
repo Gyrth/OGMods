@@ -1,0 +1,44 @@
+{ "spawner_tab" : "Interactive Objects", "ogda_type" : "item", "objects" : [
+["cat_rapier_scabbard",        "Data/Items/cat_weapons/cat_rapier_scabbard.xml",       "cat_rapier_scabbard.png"],
+["Cat Rapier",                 "Data/Items/Rapier.xml",                                "Cat Rapier.png"],
+["Cat Gauche",                 "Data/Items/MainGauche.xml",                            "Main Gauche.png"],
+
+
+["Dog Broad Sword",            "Data/Items/DogWeapons/DogBroadSword.xml",              "Dog Broad Sword.png"],
+["Dog Sword",                  "Data/Items/DogWeapons/DogSword.xml",                   "Dog Sword.png"],
+["Dog Knife",                  "Data/Items/DogWeapons/DogKnife.xml",                   "Dog Knife.png"],
+["Dog Spear",                  "Data/Items/DogWeapons/DogSpear.xml",                   "Dog Spear.png"],
+["Dog Sword Scabbard",         "Data/Items/DogWeapons/DogSwordScabbard.xml",           "dog_sword_scabbard.png"],
+
+["Rabbit Knife",               "Data/Items/rabbit_weapons/rabbit_knife.xml",           "rabbit_knife.png"],
+["Rabbit Throwing Knife",      "Data/Items/rabbit_weapons/rabbit_throwing_knife.xml",  "rabbit_throwing_knife.png"],
+
+["Rat Machete",                "Data/Items/rat_weapons/rat_machete.xml",               "rat_machete.png"],
+["Rat Throwing Blade",         "Data/Items/rat_weapons/rat_throwing_blade.xml",        "rat_throwing_blade.png"],
+
+["Bastard Sword",              "Data/Items/Bastard.xml",                               "bastard Sword.png"],
+["Flint Knife",                "Data/Items/flint_knife.xml",                           "flint_knife.png"],
+["Flint Knife C Two",          "Data/Items/flint_knife_c2.xml",                        "flint_knife_c2.png"],
+["Gabe Knife",                 "Data/Items/gabenife.xml",                              "gabenife.png"],
+
+["Dog Backbone",               "Data/Items/collectable/dogbackbone.xml",               "dogbackbone.png"],
+["Rat Junk Sack",              "Data/Items/collectable/ratjunksack.xml",               "ratjunksack.png"],
+
+["Large Bag",                  "Data/Items/gear/rabbit_gear/large_bag.xml",            "large_bag.png"],
+["Large Wood Plate",           "Data/Items/gear/rabbit_gear/large_wood_plate.xml",     "large_wood_plate.png"],
+["Medium Bags",                "Data/Items/gear/rabbit_gear/medium_bags.xml",          "medium_bags.png"],
+
+["Hammer",                     "Data/Items/gear/dogtools/dogtoolhammer.xml",           "Dog Tool Hammer.png"],
+["Chisel",                     "Data/Items/gear/dogtools/dogtoolchisel.xml",           "Dog Tool Chisel.png"],
+["Awl",                        "Data/Items/gear/dogtools/dogtoolawl.xml",              "Dog Tool Awl.png"],
+
+["Bow",                        "Data/Items/Bow.xml",              						"Bow.png"],
+["Quiver",                     "Data/Items/Quiver.xml",              					"Quiver.png"],
+["Flashbang Arrow",            "Data/Items/FlashbangArrow_prefab.xml",              	"Flashbang Arrow.png"],
+["Impact Explosion Arrow",     "Data/Items/ImpactExplosionArrow_prefab.xml",            "Impact Explosion Arrow.png"],
+["Poison Arrow",               "Data/Items/PoisonArrow_prefab.xml",              		"Poison Arrow.png"],
+["Poison Cloud Arrow",         "Data/Items/PoisonCloudArrow_prefab.xml",              	"Poison Cloud Arrow.png"],
+["Smoke Arrow",                "Data/Items/SmokeArrow_prefab.xml",              		"Smoke Arrow.png"],
+["Timed Explosion Arrow",      "Data/Items/TimedExplosionArrow_prefab.xml",             "Timed Explosion Arrow.png"]
+
+]}
