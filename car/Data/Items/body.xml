@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<item>
+    <type>misc</type>
+    <appearance obj_path = "Data/Objects/body.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "1"/>
+    <points>
+        <wood_base x="0" y="-0.3" z="0"/>
+        <blade_base x="0" y="0.25" z="0"/>
+        <blade_tip x="0" y="0.3" z="0"/>
+    </points>
+    <lines>
+        <wood start="wood_base" end="blade_base"/>
+        <metal start="blade_base" end="blade_tip"/>
+    </lines>
+    <physics mass = "100.0 kg"/>
+    <flags no_collision = "true"/>
+</item>

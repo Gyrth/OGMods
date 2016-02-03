@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<attachment>
+	<anim>Data/Animations/noose_sheathed.anm</anim>
+	<attach ik_chain="right_leg" bone="0"/>
+    <mirror allow="true"/>
+</attachment>
