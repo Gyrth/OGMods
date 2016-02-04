@@ -3,11 +3,11 @@ array<int> wheelIds;
 int bodyID;
 
 void Init() {
-    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml"));
-    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml"));
-    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml"));
-    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml"));
-    bodyID = CreateObject("Data/Items/body.xml");
+    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml", false));
+    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml", false));
+    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml", false));
+    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml", false));
+    bodyID = CreateObject("Data/Items/body.xml", false);
     Object@ bodyObj = ReadObjectFromID(bodyID);
     bodyObj.SetTranslation(thisHotspot.GetTranslation());
     for(uint a =0;a<wheelIds.length();a++){
@@ -48,12 +48,20 @@ void Update(){
     MovementObject@ this_mo = ReadCharacter(0);
     float debugSphereSize = 0.1f;
     float bodyLength = 4.2f;
-    float bodyWidth = 2.0f;
+    float bodyWidth = 1.7f;
     float maxUpForce = 1.0f;
-    float suspensionHeight = 2.0f;
-    float suspensionHardness = 0.9f;
+    float suspensionHeight = 1.5f;
+    float suspensionHardness = 1.0f;
+    float height = -0.3f;
+    float sidewaysDrag = 0.2f;
+    float suspensionDrag = 0.05f;
     //quaternion bodyRotation = QuaternionFromMat4(bodyTransform.GetRotationPart());
     array<float> wheelDistances;
+    array<vec3> wheelPositions;
+
+    vec3 down = normalize(bodyTransform.GetRotationPart() * vec3(0,-1,0));
+    vec3 up = normalize(bodyTransform.GetRotationPart() * vec3(0,1,0));
+    vec3 right = normalize(bodyTransform.GetRotationPart() * vec3(0,0,1));
 
     for(uint i = 0; i < wheelIds.size(); i++){
         Object@ wheelObj = ReadObjectFromID(wheelIds[i]);
@@ -61,7 +69,6 @@ void Update(){
 
         //quaternion rot;
         vec3 dir;
-        int height = 0;
         if(i == 0){
             dir = bodyTransform.GetRotationPart() * vec3(bodyLength/2,height,(bodyWidth/2)*-1);
         }else if(i == 1){
@@ -72,7 +79,6 @@ void Update(){
             dir = bodyTransform.GetRotationPart() * vec3((bodyLength/2)*-1,height,(bodyWidth/2)*-1);
         }
         vec3 newWheelPos = bodyPosition + dir;
-        vec3 down = normalize(bodyTransform.GetRotationPart() * vec3(0,-1,0));
         //GetRotationBetweenVectors(dir, thisHotspot.GetTranslation(), rot);
 
 
@@ -81,7 +87,7 @@ void Update(){
         angVel.x = 0.0f;
         angVel.y = 0.0f;
         vec3 emptyVec = vec3(0.0f);
-        DebugText("ok", length(angVel)+"", _fade);
+        //DebugText("ok", length(angVel)+"", _fade);
         //wheelIO.SetAngularVelocity(angVel);
 
 
@@ -100,6 +106,7 @@ void Update(){
         collisionPoint.z = this_mo.GetFloatVar("right_smear_time");
 
         wheelDistances.insertLast(distance(collisionEnd, collisionPoint));
+        wheelPositions.insertLast(collisionPoint);
 
         wheelIO.SetLinearVelocity((direction * 20.0f) * distance(newWheelPos, wheelIO.GetPhysicsPosition()));
 
@@ -114,37 +121,67 @@ void Update(){
     for(uint i = 0;i<wheelDistances.length();i++){
         collectiveUpForce += wheelDistances[i];
     }
-    float upForce = collectiveUpForce / wheelDistances.length();
-    vec3 up = normalize(bodyTransform.GetRotationPart() * vec3(0,1,0));
-    vec3 newCarPos = bodyIO.GetPhysicsPosition() + up * upForce;
-    DebugDrawWireSphere(newCarPos, debugSphereSize, vec3(0.5), _delete_on_update);
-    DebugDrawWireSphere(bodyIO.GetPhysicsPosition(), debugSphereSize, vec3(0), _delete_on_update);
-    vec3 direction = newCarPos - bodyIO.GetPhysicsPosition();
+    
+    
 
-    vec3 suspensionUpForce = direction *  distance(newCarPos, bodyIO.GetPhysicsPosition());
-    DebugText("sus", suspensionUpForce + "", _fade);
+    //Controls
+    //If the wheels are touching the ground
+    //DebugText("off", "collectiveUpForce = " + collectiveUpForce + ";", _fade);
+    vec3 newVelocity = bodyIO.GetLinearVelocity();
+    if(collectiveUpForce > 0.1f){
+        float upForce = collectiveUpForce / wheelDistances.length();
+        vec3 newCarPos = bodyIO.GetPhysicsPosition() + up * upForce;
+        DebugDrawWireSphere(newCarPos, debugSphereSize, vec3(0.5), _delete_on_update);
+        DebugDrawWireSphere(bodyIO.GetPhysicsPosition(), debugSphereSize, vec3(0), _delete_on_update);
+        vec3 direction = newCarPos - bodyIO.GetPhysicsPosition();
 
-    vec3 newVelocity = bodyIO.GetLinearVelocity() + (suspensionUpForce * suspensionHardness);
-    bodyIO.SetLinearVelocity(newVelocity * 0.995f);
+        vec3 suspensionUpForce = direction *  distance(newCarPos, bodyIO.GetPhysicsPosition());
+        
 
+        newVelocity += suspensionUpForce * suspensionHardness;
 
-    if(GetInputDown(this_mo.controller_id, "up")){
+        if(GetInputDown(this_mo.controller_id, "up")){
+            newVelocity += normalize(bodyTransform.GetRotationPart() * vec3(1,0,0)) * 0.1f;
+        }else if(GetInputDown(this_mo.controller_id, "down")){
+            newVelocity += normalize(bodyTransform.GetRotationPart() * vec3(-1,0,0)) * 0.1f;
+        }
+        //newVelocity -= dot(down, newVelocity);
+        DebugText("hmm", bodyTransform.GetRotationPart() * vec3(1,1,1) + "", _fade);
+        
+        float sidewaysVel = dot(right, newVelocity);
+        newVelocity -= (right * sidewaysVel) * sidewaysDrag;
 
-        vec3 carVelocity = normalize(bodyTransform.GetRotationPart() * vec3(1,0,0)) * 0.1f + bodyIO.GetLinearVelocity();
-        //DebugText("asd", "Pressing up" + carVelocity, _fade);
-        bodyIO.SetLinearVelocity(carVelocity);
+        float updownVel = dot(up, newVelocity);
+        newVelocity -= (up * updownVel) * suspensionDrag;
+
+        vec3 collectiveAng = vec3(0.0f);
+        collectiveAng += cross(wheelPositions[0], wheelPositions[1]);
+        collectiveAng += cross(wheelPositions[1], wheelPositions[2]);
+        collectiveAng += cross(wheelPositions[2], wheelPositions[3]);
+        collectiveAng += cross(wheelPositions[3], wheelPositions[0]);
+        quaternion newQuat;
+        GetRotationBetweenVectors(wheelPositions[2], wheelPositions[1], newQuat);
+        vec3 newAngVelocity = collectiveAng / 4;
+        mat4 debugTransform;
+        debugTransform.SetTranslationPart(bodyPosition);
+        debugTransform.SetRotationPart(Mat4FromQuaternion(newQuat));
+
+        DebugDrawWireMesh("Data/Models/body.obj", debugTransform , vec4(1), _delete_on_update);
+        //bodyIO.SetAngularVelocity(bodyIO.GetAngularVelocity() - newAngVelocity);
+
+        //newVelocity.y *= 0.95f;
+
     }
     if(!EditorModeActive()){
         vec3 dir = bodyTransform.GetRotationPart() * vec3(-5,5,0);
         vec3 newCamPos = bodyPosition + dir;
         vec3 offset = newCamPos - this_mo.position;
         this_mo.Execute("cam_pos_offset = " + offset + ";");
-        DebugText("off", "cam_pos_offset = " + offset + ";", _fade);
         //camera.SetPos(newCamPos);
         ///camera.LookAt(bodyPosition);
 
     }
-
+    bodyIO.SetLinearVelocity(newVelocity);
 }
 
 void OnExit(MovementObject @mo) {
