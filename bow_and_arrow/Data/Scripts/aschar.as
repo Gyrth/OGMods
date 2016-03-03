@@ -76,6 +76,8 @@ float test_talking_amount = 0.0f;
 int knocked_out = _awake;
 float knocked_out_time = 0.0f;
 
+bool ignore_death = false;
+
 float speak_sound_delay = 0.0f;
 vec3 dialogue_torso_target;
 float dialogue_torso_control;
@@ -1356,11 +1358,17 @@ array<float> resting_mouth_pose;
 array<float> target_resting_mouth_pose;
 float resting_mouth_pose_time = 0.0f;
 
+float old_time = 0.0f;
+
 void Update(int num_frames) {
     bowAndArrow.HandleBow();
     CheckForNANPosAndVel(1);
     Timestep ts(time_step, num_frames);    
     time += ts.step();
+        
+    if( old_time > time )
+        Log( error, "Sanity check failure, timer was reset in player character: " + this_mo.getID() + "\n");
+    old_time = time;
 
     // Update talking
     if(test_talking){
@@ -1673,6 +1681,7 @@ void RecoverHealth() {
     blood_damage = 0.0f;
     temp_health = 1.0f;
     permanent_health = 1.0f;
+	ignore_death = false;
 }
 
 void Recover() {      
@@ -3855,6 +3864,18 @@ void SetKnockedOut(int val) {
     }
 }
 
+void KillCharacter(){
+    HandleAIEvent(_damaged);
+    temp_health = -1.0f;
+    permanent_health = -1.0f;
+	blood_health = -1.0f;
+    knocked_out_time = the_time;
+	knocked_out = _dead;
+	ignore_death = true;
+    this_mo.StopVoice();
+	Ragdoll(_RGDL_LIMP);
+}
+
 void ReceiveMessage(string msg){
     TokenIterator token_iter;
     token_iter.Init();
@@ -3864,6 +3885,8 @@ void ReceiveMessage(string msg){
     string token = token_iter.GetToken(msg);
     if(token == "restore_health"){
         RecoverHealth();
+	} else if(token == "remove_health"){
+        KillCharacter();
     } else if(token == "start_talking"){
         test_talking = true;
     } else if(token == "stop_talking"){
@@ -4169,8 +4192,7 @@ void Sheathe(int src, int dst){
     }
 }
 
-void UnSheathe(int dst, int src){
-    
+void UnSheathe(int dst, int src){    
     if(weapon_slots[src] != -1 && weapon_slots[dst] == -1){
 
         ItemObject@ item_obj = ReadItemID(weapon_slots[src]);
