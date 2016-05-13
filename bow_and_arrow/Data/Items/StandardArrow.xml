@@ -5,16 +5,21 @@
     <grip ik_attach = "rightarm"
           anim = "Data/Animations/r_arrow_grip.anm"
 		  hands = "1"/>
-    <points>
-        <tip x="0" y="-0.3" z="0"/>
-        <feathers x="0" y="-0.6" z="0"/>
-    </points>
-    <lines>
-        <metal start="tip" end="feathers"/>
-    </lines>
+      <points>
+          <wood_base x="0" y="-0.3" z="0"/>
+		  <side1 x="0" y="0.0" z="0.1"/>
+		  <side2 x="0" y="0.0" z="-0.1"/>
+          <blade_base x="0" y="0.2" z="0"/>
+          <blade_tip x="0" y="0.3" z="0"/>
+      </points>
+      <lines>
+          <wood start="wood_base" end="blade_base"/>
+          <metal start="blade_base" end="blade_tip"/>
+		  <metal start="side1" end="side2"/>
+      </lines>
 	<sheathe ik_attach = "torso"
 	  anim = "Data/Animations/r_arrow_sheathed.anm"/>
-      
+
     <anim_blend idle = "Data/Animations/r_arrowidle.xml"
                 movement = "Data/Animations/r_arrowmove.xml"/>
     <anim_override movement = "Data/Animations/r_arrowmovestance.xml"/>
@@ -27,5 +32,4 @@
              air = "Data/Attacks/legcannon.xml" />
     <label>arrow</label>
     <physics mass = "0.15 kg"/>
-    <range extend = "1.0"/>
 </item>

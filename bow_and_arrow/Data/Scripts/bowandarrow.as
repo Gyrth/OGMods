@@ -30,11 +30,11 @@ class BowAndArrow {
         ItemObject@ secondaryWeapon = ReadItemID(weapon_slots[secondary_weapon_slot]);
         vec3 cameraFacing = camera.GetFacing();
         Object@ charObject = ReadObjectFromID(this_mo.GetID());
-        
+
         quaternion head_rotation = transform.rotation;
         vec3 facing = camera.GetFacing();
         vec3 start = facing * 3.0f;
-        //Limited aim enabled.        
+        //Limited aim enabled.
         vec3 end = vec3(facing.x, max(-0.9, min(0.3f, facing.y)), facing.z) * 30.0f;
         //Collision check for non player objects
         vec3 hit = col.GetRayCollision(camera.GetPos() + start, camera.GetPos() + end);
@@ -52,11 +52,11 @@ class BowAndArrow {
         aimingParticle = MakeParticle("Data/Particles/aim.xml", throw_target_pos, vec3(0));
 
         fov = max(fov - ((time - start_throwing_time)), 40.0f);
-        
+
         cam_pos_offset = vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5);
 
         int8 flags = _ANM_FROM_START;
-        
+
         if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
             if(shortDrawAnim == false){
                 PlaySound("Data/Sounds/draw.wav", this_mo.position);
@@ -66,13 +66,13 @@ class BowAndArrow {
             this_mo.SetAnimation("Data/Animations/r_draw_bow_stance.anm", 20.0f, flags);
 
             this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 5.0f);
-            
+
             if(this_mo.GetFacing().y >0){
                 bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_up.anm",(60*this_mo.GetFacing().y/2),flags);
             }else{
                 bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_down.anm",-(60*this_mo.GetFacing().y/2),flags);
             }
-            
+
             if(cameraFacing.y > -1.0f){
                 this_mo.SetRotationFromFacing(normalize(cameraFacing + vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5)));
             }
@@ -98,10 +98,10 @@ class BowAndArrow {
             start_throwing_time = 0.0f;
 
         }else{
-            
+
             Print("The time while aiming was " + (time - start_throwing_time) + "\n");
             this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 1.0f);
-            true_max_speed = _base_true_max_speed;  
+            true_max_speed = _base_true_max_speed;
             if((time - start_throwing_time) < 0.5f && fov > 50){
                 shortDrawAnim = false;
                 longDrawAnim = true;
@@ -123,7 +123,7 @@ class BowAndArrow {
             going_to_throw_item_time = time;
 
             this_mo.SetRotationFromFacing(camera.GetFacing());
-            
+
             isAiming = false;
             throw_anim = false;
         }
@@ -171,7 +171,7 @@ class BowAndArrow {
                     //This arrow has a maximum falltime of 60 seconds. But it will most likely explode before that.
                     lifeTime = 60.0f;
                     ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
-                    
+
                     //When the arrow leaves the hand of the character it will be active.
                     if(arrowItem.HeldByWhom() != this_mo.GetID()){
                         //When the velocity is low enough it is save to assume it has hit something.
@@ -243,7 +243,7 @@ class BowAndArrow {
                 }else if(curArrow.type == "poison"){
                     lifeTime = 10.0f;
                     ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
-                    
+
                     //If the arrow is stuck in someone it will apply damage.
                     if(curArrow.victimID == -1){
 
@@ -258,7 +258,7 @@ class BowAndArrow {
                             }
                         }
                     }else{
-                        
+
                         if (time - previousTime > 0.1f){
                             MovementObject@ victim = ReadCharacterID(curArrow.victimID);
                             if(victim.GetIntVar("knocked_out") == _awake){
@@ -272,7 +272,7 @@ class BowAndArrow {
                             }
                             previousTime = time;
                         }
-                        
+
                     }
                 }else if(curArrow.type == "poisoncloud"){
                     lifeTime = 18.0f;
@@ -286,7 +286,7 @@ class BowAndArrow {
                             vec3 start = arrowItem.GetPhysicsPosition();
                             arrows[i].explosionPos = start;
                             for(int j =0; j < 20; j++){
-                                MakeParticle("Data/Particles/poison_smoke.xml", arrowItem.GetPhysicsPosition(), 
+                                MakeParticle("Data/Particles/poison_smoke.xml", arrowItem.GetPhysicsPosition(),
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*200.0f);
                             }
                         //Before 5 seconds a smoketrail add a green smoketrail.
@@ -346,7 +346,7 @@ class BowAndArrow {
                         //DebugDrawWireSphere(start, 7.0f, vec3(0), _fade);
                         //The particles will go into a random direction from the arrow position.
                         for(int k =0; k < 10; k++){
-                            MakeParticle("Data/Particles/lasting_smoke.xml", arrowItem.GetPhysicsPosition(), 
+                            MakeParticle("Data/Particles/lasting_smoke.xml", arrowItem.GetPhysicsPosition(),
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*200.0f);
                         }
                         //Every non player character will be startlet for 3 seconds and start looking around.
@@ -427,7 +427,7 @@ class BowAndArrow {
                             }
                         }
                     }
-                    
+
                 }else if(curArrow.type == "flashbang"){
                     lifeTime = 5.0f;
                     ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
@@ -448,7 +448,7 @@ class BowAndArrow {
                         GetCharactersInSphere(start, 5.0f, nearbyCharacters);
                         //All the nearby characters will be affected.
                         for(uint32 j=0; j<nearbyCharacters.size(); ++j){
-                            MovementObject@ char = ReadCharacterID(nearbyCharacters[i]);
+                            MovementObject@ char = ReadCharacterID(nearbyCharacters[j]);
                             //Non player characters will roll around for 5 seconds and recover.
                             if(!char.controlled){
                                 char.Execute("Ragdoll(_RGDL_INJURED);"+
@@ -480,7 +480,7 @@ class BowAndArrow {
                 }
                 //Once the lifetime of the arrow is met the arrow is removed from the array.
                 if((curArrow.timeShot + lifeTime) < time){
-                    
+
                     arrows.removeAt(i);
                     i--;
                 }
@@ -495,18 +495,12 @@ class BowAndArrow {
             shortDrawAnim = false;
             start_throwing_time = 0.0f;
             throw_anim = false;
-        }else{
-            //If the bow is the only weapon the character is holding a single string needs to be drawn.
-            ItemObject@ primaryWeapon = ReadItemID(weapon_slots[primary_weapon_slot]);
-            if (primaryWeapon.GetLabel() == "bow"){
-
-            }
         }
         if(weapon_slots[secondary_weapon_slot] != -1){
             ItemObject@ secondaryWeapon = ReadItemID(weapon_slots[secondary_weapon_slot]);
             if (secondaryWeapon.GetLabel() == "bow"){
                 if(throw_anim){
-                    if(longDrawAnim && ((time - start_throwing_time) < 0.5f && fov > 50)){
+                    if(longDrawAnim && (fov > 50)){
                         float throw_range = 50.0f;
                         int target = GetClosestCharacterID(throw_range, _TC_ENEMY | _TC_CONSCIOUS | _TC_NON_RAGDOLL);
                         SetTargetID(target);
