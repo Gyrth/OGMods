@@ -98,13 +98,13 @@ void Update() {
     if(width_length != new_width_length){
         //Print(" " + width_length.x + " " + width_length.y + " i snot " + new_width_length.x + " " + new_width_length.y + "\n");
         if(width_length.y > new_width_length.y){
-            //DebugText("key", "Moved up", _fade);
+            DebugText("key", "Moved up", _fade);
             for(uint i = 0; i < world[world.size() - 1].size(); i++){
                 DeleteObjectID(world[world.size() - 1][i][0]);
             }
             world.removeLast();
 
-            array<array<int>> new_row(world_size, array<int>(3));
+            array<array<int>> new_row(world_size, array<int>(world_size));
             for(uint i = 0; i < world[0].size(); i++){
                 int id = DuplicateObject(ReadObjectFromID(main_block_id));
                 //int id = CreateObject(building_block, true);
@@ -115,18 +115,19 @@ void Update() {
                 vec3 offset = vec3(0.0f, 0.0f, -1.0f) * (2.0f * block_scale.x);
                 Object@ adjacent_block = ReadObjectFromID(world[0][i][0]);
                 block.SetTranslation(offset + adjacent_block.GetTranslation());
+                AddRandomHeightBlocks(new_row[i]);
                 //DebugDrawLine(player.position, adjacent_block.GetTranslation(), vec3(0), _fade);
             }
             world.insertAt(0, new_row);
         }
         if(width_length.y < new_width_length.y){
-            //DebugText("key", "Moved down" , _fade);
+            DebugText("key", "Moved down" , _fade);
             for(uint i = 0; i < world[0].size(); i++){
                 DeleteObjectID(world[0][i][0]);
             }
             world.removeAt(0);
 
-            array<array<int>> new_row(world_size, array<int>(3));
+            array<array<int>> new_row(world_size, array<int>(world_size));
             for(uint i = 0; i < world[world.size() - 1].size(); i++){
                 int id = DuplicateObject(ReadObjectFromID(main_block_id));
                 //int id = CreateObject(building_block, true);
@@ -137,6 +138,7 @@ void Update() {
                 vec3 offset = vec3(0.0f, 0.0f, 1.0f) * (2.0f * block_scale.x);
                 Object@ adjacent_block = ReadObjectFromID(world[world.size() - 1][i][0]);
                 block.SetTranslation(offset + adjacent_block.GetTranslation());
+                AddRandomHeightBlocks(new_row[i]);
             }
             world.insertLast(new_row);
         }
@@ -195,16 +197,31 @@ void PrintBlockWorld(){
     Print("\n");
 }
 
+void AddRandomHeightBlocks(array<int> @blocks){
+    int amount = rand()%(world_size - 1);
+    Print("Spawn " + amount + "blocks on top\n");
+    Object@ floor_block = ReadObjectFromID(blocks[0]);
+    vec3 floor_block_pos = floor_block.GetTranslation();
+    Print("ID floor block in func " + blocks[0] + "\n");
+    for(int i = 0; i < amount; i++){
+        int id = DuplicateObject(ReadObjectFromID(main_block_id));
+        Object@ new_block = ReadObjectFromID(id);
+        new_block.SetScale(0.99f * block_scale);
+        new_block.SetTranslation(vec3(floor_block_pos.x, floor_block_pos.y + ((block_scale.x * 2) * i) , floor_block_pos.z));
+        blocks[i + 1] = id;
+        DebugDrawLine(floor_block.GetTranslation(), new_block.GetTranslation(), vec3(0), _persistent);
+    }
+}
+
 void CreateFloor(){
     MovementObject@ player = ReadCharacterID(player_id);
     vec3 player_pos = player.position;
-    float floor_height = height - 10;
+    float floor_height = height - (block_scale.x * 2.0 * world_size);
     for(uint i = 0; i < uint(world_size); i++){
         for(uint j = 0; j < uint(world_size); j++){
             int id = DuplicateObject(ReadObjectFromID(main_block_id));
             //int id = CreateObject(building_block, true);
-            Print("adding " + i + " " + j + " 0\n");
-            world[i][j][0] = id;
+
             Object@ block = ReadObjectFromID(id);
             //block.SetScale(block_scale);
             block.SetScale(0.99f * block_scale);
@@ -212,6 +229,21 @@ void CreateFloor(){
             //block.SetTranslation(vec3( width_length.x - (world_size / 2), 0, width_length.y - (world_size / 2)) + (vec3(float(j), floor_height, float(i))));
             //DebugDrawText(block.GetTranslation() + vec3(0.0f, 1.6f, 0.0f), "" + id, 5.0f, true, _persistent);
             //DebugDrawLine(player_pos, block.GetTranslation(), vec3(0), _persistent);
+
+            Print("adding " + i + " " + j + " 0\n");
+            Print("ID floor block " + id + "\n");
+            world[i][j][0] = id;
+
+            for(uint h = 0; h < world[i][j].size(); h++){
+                Print(world[i][j][h] + " ");
+            }
+            Print("Floor block contains # " + world[i][j].size() + "\n");
+
+            AddRandomHeightBlocks(world[i][j]);
+            for(uint h = 0; h < world[i][j].size(); h++){
+                Print(world[i][j][h] + " ");
+            }
+            Print("Floor block now contains # " + world[i][j].size() + "\n");
         }
     }
     //PrintBlockWorld();
