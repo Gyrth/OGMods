@@ -11,7 +11,8 @@ int player_id = -1;
 float height = 0.0f;
 vec2 width_length = vec2(0.0f,0.0f);
 string building_block = "Data/Objects/primitives/edged_cube.xml";
-vec3 block_scale = vec3(3.0);
+float block_scale = 3.0;
+float local_block_scale = 0.9f;
 int focus_block_id = -1;
 int main_block_id = -1;
 
@@ -19,6 +20,7 @@ MusicLoad ml("Data/Music/challengelevel.xml");
 
 void Init(string p_level_name) {
     level_name = p_level_name;
+    /*
     world.resize(world_size);
     for(uint i = 0; i < world.size(); i++){
         world[i].resize(world_size);
@@ -26,6 +28,7 @@ void Init(string p_level_name) {
             world[i][j].resize(world_size);
         }
     }
+    */
 }
 
 bool HasFocus(){
@@ -87,18 +90,11 @@ void Update() {
 
     time += time_step;
     MovementObject@ player = ReadCharacterID(player_id);
-    vec2 new_width_length = vec2(floor(player.position.x / (2.0f * block_scale.x)), floor(player.position.z / (2.0f * block_scale.x)));
+    vec2 new_width_length = vec2(floor(player.position.x / (2.0f * block_scale)), floor(player.position.z / (2.0f * block_scale)));
 
-    //Print("New:" + new_width_length.x + "x" + new_width_length.y + " " + " Cur:" + width_length.x + "x" + width_length.y + "\n");
-
-    //Print(new_width_length.x + " is between " + (width_length.x - (2.0f * block_scale.x)) + " and " + (width_length.x + (2.0f * block_scale.x)) + "\n");
-
-    //if(new_width_length.x < (width_length.x - (block_scale.x)) || new_width_length.x > (width_length.x + (block_scale.x)) ||
-    //  new_width_length.y < (width_length.y - (block_scale.x)) || new_width_length.y > (width_length.y + (block_scale.x))){
     if(width_length != new_width_length){
-        //Print(" " + width_length.x + " " + width_length.y + " i snot " + new_width_length.x + " " + new_width_length.y + "\n");
         if(width_length.y > new_width_length.y){
-            DebugText("key", "Moved up", _fade);
+            //DebugText("key", "Moved up", _fade);
             for(uint i = 0; i < world[world.size() - 1].size(); i++){
                 DeleteObjectID(world[world.size() - 1][i][0]);
             }
@@ -106,22 +102,13 @@ void Update() {
 
             array<array<int>> new_row(world_size, array<int>(world_size));
             for(uint i = 0; i < world[0].size(); i++){
-                int id = DuplicateObject(ReadObjectFromID(main_block_id));
-                //int id = CreateObject(building_block, true);
-                new_row[i][0] = id;
-                Object@ block = ReadObjectFromID(id);
-                //block.SetScale(block_scale);
-                block.SetScale(0.99f * block_scale);
-                vec3 offset = vec3(0.0f, 0.0f, -1.0f) * (2.0f * block_scale.x);
-                Object@ adjacent_block = ReadObjectFromID(world[0][i][0]);
-                block.SetTranslation(offset + adjacent_block.GetTranslation());
+                new_row[i][0] = CreateBlock(world[0][i][0], vec3(0.0f, 0.0f, -1.0f));
                 AddRandomHeightBlocks(new_row[i]);
-                //DebugDrawLine(player.position, adjacent_block.GetTranslation(), vec3(0), _fade);
             }
             world.insertAt(0, new_row);
         }
         if(width_length.y < new_width_length.y){
-            DebugText("key", "Moved down" , _fade);
+            //DebugText("key", "Moved down" , _fade);
             for(uint i = 0; i < world[0].size(); i++){
                 DeleteObjectID(world[0][i][0]);
             }
@@ -129,61 +116,53 @@ void Update() {
 
             array<array<int>> new_row(world_size, array<int>(world_size));
             for(uint i = 0; i < world[world.size() - 1].size(); i++){
-                int id = DuplicateObject(ReadObjectFromID(main_block_id));
-                //int id = CreateObject(building_block, true);
-                new_row[i][0] = id;
-                Object@ block = ReadObjectFromID(id);
-                //block.SetScale(block_scale);
-                block.SetScale(0.99f * block_scale);
-                vec3 offset = vec3(0.0f, 0.0f, 1.0f) * (2.0f * block_scale.x);
-                Object@ adjacent_block = ReadObjectFromID(world[world.size() - 1][i][0]);
-                block.SetTranslation(offset + adjacent_block.GetTranslation());
+                new_row[i][0] = CreateBlock(world[world.size() - 1][i][0], vec3(0.0f, 0.0f, 1.0f));
                 AddRandomHeightBlocks(new_row[i]);
             }
             world.insertLast(new_row);
         }
         if(width_length.x < new_width_length.x){
-            //DebugText("key", "Moved right", _fade);
+            DebugText("key", "Moved right", _fade);
             for(uint i = 0; i < world.size(); i++){
                 DeleteObjectID(world[i][0][0]);
                 world[i].removeAt(0);
             }
 
             for(uint i = 0; i < world.size(); i++){
-                int id = DuplicateObject(ReadObjectFromID(main_block_id));
-                //int id = CreateObject(building_block, true);
-                Object@ block = ReadObjectFromID(id);
-                //block.SetScale(block_scale);
-                block.SetScale(0.99f * block_scale);
-                vec3 offset = vec3(1.0f, 0.0f, 0.0f) * (2.0f * block_scale.x);
-                Object@ adjacent_block = ReadObjectFromID(world[i][world[i].size() - 1][0]);
-                block.SetTranslation(offset + adjacent_block.GetTranslation());
-                array<int> new_row = {id};
+                array<int> new_row;
+                new_row.insertLast(CreateBlock(world[i][world[i].size() - 1][0], vec3(1.0f, 0.0f, 0.0f)));
                 world[i].insertLast(new_row);
+                AddRandomHeightBlocks(new_row);
             }
         }
         if(width_length.x > new_width_length.x){
-            //DebugText("key", "Moved left\n" , _fade);
+            DebugText("key", "Moved left\n" , _fade);
             for(uint i = 0; i < world.size(); i++){
                 DeleteObjectID(world[i][world[i].size() - 1][0]);
                 world[i].removeAt(world[i].size() - 1);
             }
 
             for(uint i = 0; i < world.size(); i++){
-                int id = DuplicateObject(ReadObjectFromID(main_block_id));
-                //int id = CreateObject(building_block, true);
-                Object@ block = ReadObjectFromID(id);
-                //block.SetScale(block_scale);
-                block.SetScale(0.99f * block_scale);
-                vec3 offset = vec3(-1.0f, 0.0f, 0.0f) * (2.0f * block_scale.x);
-                Object@ adjacent_block = ReadObjectFromID(world[i][0][0]);
-                block.SetTranslation(offset + adjacent_block.GetTranslation());
-                array<int> new_row = {id};
+                array<int> new_row;
+                new_row.insertLast(CreateBlock(world[i][0][0], vec3(-1.0f, 0.0f, 0.0f)));
                 world[i].insertAt(0, new_row);
+                AddRandomHeightBlocks(new_row);
             }
         }
         width_length = new_width_length;
       }
+}
+
+int CreateBlock(int adjacent_block_id, vec3 offset){
+    vec3 scaled_offset = offset * (2.0f * block_scale);
+    //int id = DuplicateObject(ReadObjectFromID(main_block_id));
+    //Object@ block = ReadObjectFromID(main_block_id);
+    int id = CreateObject(building_block, true);
+    Object@ adjacent_block = ReadObjectFromID(adjacent_block_id);
+    Object@ new_block = ReadObjectFromID(id);
+    new_block.SetScale(vec3(local_block_scale * block_scale));
+    new_block.SetTranslation(adjacent_block.GetTranslation() + scaled_offset);
+    return id;
 }
 
 void PrintBlockWorld(){
@@ -197,56 +176,54 @@ void PrintBlockWorld(){
     Print("\n");
 }
 
+void DeleteColumn(array<array<>> column){
+    
+}
+
 void AddRandomHeightBlocks(array<int> @blocks){
     int amount = rand()%(world_size - 1);
-    Print("Spawn " + amount + "blocks on top\n");
-    Object@ floor_block = ReadObjectFromID(blocks[0]);
-    vec3 floor_block_pos = floor_block.GetTranslation();
-    Print("ID floor block in func " + blocks[0] + "\n");
+    //Print("Spawn " + amount + " blocks on top\n");
+    //Print("ID floor block in func " + blocks[0] + "\n");
     for(int i = 0; i < amount; i++){
-        int id = DuplicateObject(ReadObjectFromID(main_block_id));
-        Object@ new_block = ReadObjectFromID(id);
-        new_block.SetScale(0.99f * block_scale);
-        new_block.SetTranslation(vec3(floor_block_pos.x, floor_block_pos.y + ((block_scale.x * 2) * i) , floor_block_pos.z));
-        blocks[i + 1] = id;
-        DebugDrawLine(floor_block.GetTranslation(), new_block.GetTranslation(), vec3(0), _persistent);
+        int id = CreateBlock(blocks[blocks.size() - 1], vec3(0.0f, 1.0f, 0.0f));
+        blocks.insertLast(id);
+        //DebugDrawLine(floor_block.GetTranslation(), new_block.GetTranslation(), vec3(0), _persistent);
     }
+    //Print("ID floor block in func " + blocks[0] + "\n");
 }
 
 void CreateFloor(){
     MovementObject@ player = ReadCharacterID(player_id);
     vec3 player_pos = player.position;
-    float floor_height = height - (block_scale.x * 2.0 * world_size);
+    float floor_height = height - (block_scale * 2.0 * world_size);
     for(uint i = 0; i < uint(world_size); i++){
+        array<array<int>> new_row;
         for(uint j = 0; j < uint(world_size); j++){
             int id = DuplicateObject(ReadObjectFromID(main_block_id));
-            //int id = CreateObject(building_block, true);
-
             Object@ block = ReadObjectFromID(id);
-            //block.SetScale(block_scale);
-            block.SetScale(0.99f * block_scale);
-            block.SetTranslation(vec3( width_length.x - (world_size / 2) * (block_scale.x * 2), 0, width_length.y - (world_size / 2) * (block_scale.x * 2)) + (vec3(float(j) * (block_scale.x * 2), floor_height, float(i) * (block_scale.x * 2))));
-            //block.SetTranslation(vec3( width_length.x - (world_size / 2), 0, width_length.y - (world_size / 2)) + (vec3(float(j), floor_height, float(i))));
+            block.SetScale(local_block_scale * block_scale);
+            block.SetTranslation(vec3( width_length.x - (world_size / 2) * (block_scale * 2), 0, width_length.y - (world_size / 2) * (block_scale * 2)) + (vec3(float(j) * (block_scale * 2), floor_height, float(i) * (block_scale * 2))));
+
             //DebugDrawText(block.GetTranslation() + vec3(0.0f, 1.6f, 0.0f), "" + id, 5.0f, true, _persistent);
             //DebugDrawLine(player_pos, block.GetTranslation(), vec3(0), _persistent);
 
             Print("adding " + i + " " + j + " 0\n");
             Print("ID floor block " + id + "\n");
-            world[i][j][0] = id;
 
-            for(uint h = 0; h < world[i][j].size(); h++){
-                Print(world[i][j][h] + " ");
-            }
-            Print("Floor block contains # " + world[i][j].size() + "\n");
+            array<int> new_column = {id};
+            new_row.insertLast(new_column);
 
-            AddRandomHeightBlocks(world[i][j]);
-            for(uint h = 0; h < world[i][j].size(); h++){
-                Print(world[i][j][h] + " ");
+            Print("Floor block contains # " + new_column.size() + "\n");
+            AddRandomHeightBlocks(new_column);
+            for(uint h = 0; h < new_column.size(); h++){
+                Print(new_column[h] + " ");
             }
-            Print("Floor block now contains # " + world[i][j].size() + "\n");
+            Print("Floor block now contains # " + new_column.size() + "\n");
         }
+        world.insertLast(new_row);
+        //PrintBlockWorld();
     }
-    //PrintBlockWorld();
+    PrintBlockWorld();
 }
 
 void UpdateMusic() {
