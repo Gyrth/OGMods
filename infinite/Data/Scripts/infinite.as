@@ -3,10 +3,13 @@
 #include "music_load.as"
 
 //Parameters for user to change
-int world_size = 11;
+int world_size = 20;
 string building_block = "Data/Objects/primitives/edged_cube.xml";
-float block_scale = 3.0;
+float block_scale = 5.0;
 float local_block_scale = 0.99f;
+float min_color = 0.0f;
+float max_color = 1.5f;
+float max_extra = 0.075f;
 
 //Variables not to be changed
 string level_name;
@@ -15,6 +18,7 @@ int player_id = -1;
 float height = 0.0f;
 vec2 width_length = vec2(0.0f,0.0f);
 int main_block_id = -1;
+vec3 main_color = vec3(0);
 
 MusicLoad ml("Data/Music/challengelevel.xml");
 
@@ -50,6 +54,20 @@ void ReceiveMessage(string msg) {
     }
 }
 
+vec3 RandomColor(){
+    vec3 color = vec3(RangedRandomFloat(min_color, max_color), RangedRandomFloat(min_color, max_color), RangedRandomFloat(min_color, max_color));
+    return color;
+}
+
+vec3 RandomAdjacentColor(vec3 color){
+    float new_x = RangedRandomFloat(-max_extra, max_extra) + color.x;
+    float new_y = RangedRandomFloat(-max_extra, max_extra) + color.y;
+    float new_z = RangedRandomFloat(-max_extra, max_extra) + color.z;
+    vec3 new_color = vec3(max(min_color, (min(max_color, new_x))), max(min_color, (min(max_color, new_y))), max(min_color, (min(max_color, new_z))));
+
+    return new_color;
+}
+
 void DrawGUI() {
 
 }
@@ -64,6 +82,8 @@ void Update() {
               break;
             }
         }
+        main_color = RandomColor();
+        Print("main color " + main_color.x + " " + main_color.y + " " + main_color.z + "\n");
         MovementObject@ player = ReadCharacterID(player_id);
         height = floor(player.position.y);
         //width_length = vec2(floor(player.position.x), floor(player.position.z));
@@ -80,7 +100,7 @@ void Update() {
         vec2 moved = vec2(0.0f);
         if(width_length != new_width_length){
             if(width_length.y > new_width_length.y){
-                Print("Moved up\n");
+                //Print("Moved up\n");
 
                 DeleteRow(world[world.size() - 1]);
                 world.removeLast();
@@ -95,7 +115,7 @@ void Update() {
                 moved += vec2(0.0f, -1.0f);
             }
             if(width_length.y < new_width_length.y){
-                Print("Moved down\n");
+                //Print("Moved down\n");
 
                 DeleteRow(world[0]);
                 world.removeAt(0);
@@ -109,7 +129,7 @@ void Update() {
                 moved += vec2(0.0f, 1.0f);
             }
             if(width_length.x < new_width_length.x){
-                Print("Moved right\n");
+                //Print("Moved right\n");
 
                 for(uint i = 0; i < world.size(); i++){
                     DeleteColumn(world[i][0]);
@@ -125,7 +145,7 @@ void Update() {
                 moved += vec2(1.0f, 0.0f);
             }
             if(width_length.x > new_width_length.x){
-                Print("Moved left\n");
+                //Print("Moved left\n");
 
                 for(uint i = 0; i < world.size(); i++){
                     DeleteColumn(world[i][world[i].size() - 1]);
@@ -141,6 +161,8 @@ void Update() {
                 moved += vec2(-1.0f, 0.0f);
             }
             width_length = width_length + moved;
+            main_color = RandomAdjacentColor(main_color);
+            //Print("new main color " + main_color.x + " " + main_color.y + " " + main_color.z + "\n");
         }
     }
 }
@@ -149,6 +171,7 @@ int CreateBlock(int adjacent_block_id, vec3 offset){
     vec3 scaled_offset = offset * (2.0f * block_scale);
     int id = DuplicateObject(ReadObjectFromID(main_block_id));
     Object@ block = ReadObjectFromID(main_block_id);
+    block.SetTint(RandomAdjacentColor(main_color));
     //int id = CreateObject(building_block, true);
     Object@ adjacent_block = ReadObjectFromID(adjacent_block_id);
     Object@ new_block = ReadObjectFromID(id);
@@ -205,10 +228,11 @@ void CreateFloor(){
         for(uint j = 0; j < uint(world_size); j++){
             int id = DuplicateObject(ReadObjectFromID(main_block_id));
             Object@ block = ReadObjectFromID(id);
+            block.SetTint(main_color);
             block.SetScale(local_block_scale * block_scale);
 
             vec3 new_pos = vec3(starting_pos.x + ((block_scale * 2.0f) * float(j)), floor_height, starting_pos.z + ((block_scale * 2.0f) * float(i)));
-            Print("Setting block " + id + " on pos " + new_pos.x + " " + new_pos.y + " " + new_pos.z + "\n");
+            //Print("Setting block " + id + " on pos " + new_pos.x + " " + new_pos.y + " " + new_pos.z + "\n");
             block.SetTranslation(new_pos);
 
             //DebugDrawText(block.GetTranslation() + vec3(0.0f, block_scale, 0.0f), "" + id, 5.0f, true, _persistent);
@@ -219,6 +243,7 @@ void CreateFloor(){
             new_row.insertLast(new_column);
         }
         world.insertLast(new_row);
+        main_color = RandomAdjacentColor(main_color);
         //PrintBlockWorld();
     }
 }
