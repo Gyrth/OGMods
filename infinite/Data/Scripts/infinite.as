@@ -5,11 +5,11 @@
 //Parameters for user to change
 int world_size = 15;
 string building_block = "Data/Objects/primitives/edged_cube.xml";
-float block_scale = 5.0;
-float local_block_scale = 0.9f;
+float block_scale = 3.0;
+float local_block_scale = 1.0f;
 float min_color = 0.0f;
-float max_color = 1.5f;
-float max_extra = 0.075f;
+float max_color = 5.0f;
+float max_extra = 0.25f;
 bool change_colours = false;
 
 //Variables not to be changed
