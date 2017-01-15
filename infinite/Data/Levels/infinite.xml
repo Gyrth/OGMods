@@ -7,26 +7,28 @@
 <AmbientSounds />
 <Script>infinite.as</Script>
 <LevelScriptParameters>
-    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
-    <parameter name="Extra AO" type="string" val="0" />
-    <parameter name="HDR Black point" type="string" val="0.01" />
-    <parameter name="HDR Bloom multiplier" type="string" val="1" />
-    <parameter name="HDR White point" type="string" val="0.8" />
-    <parameter name="Level Boundaries" type="string" val="1" />
+    <parameter name="Achievements" type="string" val="Test, no_injuries, no_kills" />
+    <parameter name="Fog amount" type="string" val="1" />
+    <parameter name="HDR Black point" type="string" val="0" />
+    <parameter name="HDR Bloom multiplier" type="string" val="0.275" />
+    <parameter name="HDR White point" type="string" val="1.249" />
+    <parameter name="Level Boundaries" type="string" val="0" />
     <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Sky Brightness" type="string" val="1.5" />
     <parameter name="Sky Rotation" type="string" val="0" />
+    <parameter name="Sky Tint" type="string" val="255, 255, 255" />
 </LevelScriptParameters>
 <Sky>
-    <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
-    <SunAngularRad>0.112145</SunAngularRad>
-    <SunColorAngle>6.8534</SunColorAngle>
-    <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
+    <DomeTexture>Data/Textures/skies/bright_dusk.tga</DomeTexture>
+    <SunAngularRad>0.079679</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.899701" r1="0.39539" r2="0.184944" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="0.000" t1="10000.000" t2="0.000" s0="1" s1="1" s2="1" q0="0.27491" q1="-0.558987" q2="0.20344" r0="0.29229" r1="-1.19209e-07" r2="0.95633" r3="0" r4="-0.614684" r5="0.766073" r6="0.187871" r7="0" r8="-0.732619" r9="-0.642753" r10="0.223916" r11="0" r12="0" r13="0" r14="0" r15="1" id="271">
+    <CameraObject t0="-2.70258" t1="1972.79" t2="-1.10779" s0="1" s1="1" s2="1" q0="0.0548658" q1="0.869008" q2="-0.098984" r0="-0.529946" r1="7.45058e-08" r2="-0.848032" r3="0" r4="0.190715" r5="0.974384" r6="-0.11918" r7="0" r8="0.826308" r9="-0.224891" r10="-0.51637" r11="0" r12="0" r13="0" r14="0" r15="1" id="271">
         <parameters />
     </CameraObject>
-    <ActorObject t0="0.000" t1="10000.000" t2="0.000" s0="1" s1="1" s2="1" q0="5.96046e-08" q1="-0.298372" q2="0" r0="0.821948" r1="-3.55687e-08" r2="0.569562" r3="0" r4="-3.55687e-08" r5="1" r6="1.13779e-07" r7="0" r8="-0.569562" r9="-1.13779e-07" r10="0.821948" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <ActorObject t0="0" t1="2000" t2="0" s0="1" s1="1" s2="1" q0="5.96046e-08" q1="-0.298372" q2="0" r0="0.821948" r1="-3.55687e-08" r2="0.569562" r3="0" r4="-3.55687e-08" r5="1" r6="1.13779e-07" r7="0" r8="-0.569562" r9="-1.13779e-07" r10="0.821948" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="string" val="0.5" />
             <parameter name="Attack Damage" type="string" val="1.0" />

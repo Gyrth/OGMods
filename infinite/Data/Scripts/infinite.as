@@ -5,8 +5,8 @@
 //Parameters for user to change
 int world_size = 15;
 string building_block = "Data/Objects/primitives/edged_cube.xml";
-float block_scale = 10.0;
-float local_block_scale = 0.99f;
+float block_scale = 5.0;
+float local_block_scale = 0.9f;
 float min_color = 0.0f;
 float max_color = 1.5f;
 float max_extra = 0.075f;
@@ -26,6 +26,22 @@ MusicLoad ml("Data/Music/challengelevel.xml");
 
 void Init(string p_level_name) {
     level_name = p_level_name;
+    SavedLevel @saved_level = save_file.GetSavedLevel(level_name);
+    if(saved_level.GetValue("Already Written") != "true"){
+        Print("Did not find parameter!");
+        saved_level.SetValue("Block Scale", ""+block_scale);
+        saved_level.SetValue("Local Block Scale", ""+local_block_scale);
+        saved_level.SetValue("Min Color", ""+min_color);
+        saved_level.SetValue("Max Color", ""+max_color);
+        saved_level.SetValue("Max Extra", ""+max_extra);
+        saved_level.SetValue("Already Written", "true");
+        save_file.WriteInPlace();
+    }else{
+        Print("Found parameter!\n");
+    }
+    //saved_level.SetValue("Block Scale", ""+block_scale);
+
+    Print("Block Scale: " + (saved_level.GetValue("Block Scale")) + "\n");
 }
 
 bool HasFocus(){
