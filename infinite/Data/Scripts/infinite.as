@@ -3,13 +3,14 @@
 #include "music_load.as"
 
 //Parameters for user to change
-int world_size = 20;
+int world_size = 15;
 string building_block = "Data/Objects/primitives/edged_cube.xml";
-float block_scale = 5.0;
+float block_scale = 10.0;
 float local_block_scale = 0.99f;
 float min_color = 0.0f;
 float max_color = 1.5f;
 float max_extra = 0.075f;
+bool change_colours = false;
 
 //Variables not to be changed
 string level_name;
@@ -19,6 +20,7 @@ float height = 0.0f;
 vec2 width_length = vec2(0.0f,0.0f);
 int main_block_id = -1;
 vec3 main_color = vec3(0);
+float timer = 0.0f;
 
 MusicLoad ml("Data/Music/challengelevel.xml");
 
@@ -90,7 +92,7 @@ void Update() {
         width_length = vec2(floor(player.position.x / (2.0f * block_scale)), floor(player.position.z / (2.0f * block_scale)));
         main_block_id = CreateObject(building_block, true);
         Object@ block = ReadObjectFromID(main_block_id);
-        block.SetScale(0.0f);
+        block.SetScale(vec3(0));
         CreateFloor();
         width_length = vec2(floor(player.position.x / (2.0f * block_scale)), floor(player.position.z / (2.0f * block_scale)));
         PrintBlockWorld();
@@ -164,6 +166,7 @@ void Update() {
             main_color = RandomAdjacentColor(main_color);
             //Print("new main color " + main_color.x + " " + main_color.y + " " + main_color.z + "\n");
         }
+        UpdateColours();
     }
 }
 
@@ -175,6 +178,7 @@ int CreateBlock(int adjacent_block_id, vec3 offset){
     //int id = CreateObject(building_block, true);
     Object@ adjacent_block = ReadObjectFromID(adjacent_block_id);
     Object@ new_block = ReadObjectFromID(id);
+    new_block.SetSelectable(false);
     new_block.SetScale(vec3(local_block_scale * block_scale));
     new_block.SetTranslation(adjacent_block.GetTranslation() + scaled_offset);
     return id;
@@ -189,6 +193,26 @@ void PrintBlockWorld(){
         Print("]\n");
     }
     Print("\n");
+}
+
+void UpdateColours(){
+    if(change_colours){
+        timer += time_step;
+        if(timer > 0.1f){
+          for(uint i = 0; i < world.size(); i++){
+              for(uint j = 0; j < world[i].size(); j++){
+                  for(uint k = 0; k < world[i][j].size(); k++){
+                      Object@ block = ReadObjectFromID(world[i][j][k]);
+                      //vec3 cur_tint = block.GetTint();
+                      //block.SetTint(RandomAdjacentColor(cur_tint));
+                      block.SetTint(RandomAdjacentColor(main_color));
+                  }
+              }
+          }
+          main_color = RandomAdjacentColor(main_color);
+          timer = 0.0f;
+        }
+    }
 }
 
 void DeleteRow(array<array<int>> row){
@@ -229,6 +253,7 @@ void CreateFloor(){
             int id = DuplicateObject(ReadObjectFromID(main_block_id));
             Object@ block = ReadObjectFromID(id);
             block.SetTint(main_color);
+            block.SetSelectable(false);
             block.SetScale(local_block_scale * block_scale);
 
             vec3 new_pos = vec3(starting_pos.x + ((block_scale * 2.0f) * float(j)), floor_height, starting_pos.z + ((block_scale * 2.0f) * float(i)));
