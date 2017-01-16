@@ -4,7 +4,7 @@ An attempt to make an infinite world made of blocks, like Minecraft.
 ## Howto use:  
 	1. Put the infinite map into your Data/Mods folder.   
 	2. Open Overgrowth and click Editor.   
-	3. Put in infinitelxml and click Load.   
+	3. Put in infinite.xml and click Load.   
 	
 ## Howto get different blocks:  
 	1. Open infinite/Data/Scripts/infinite.as in an editor.   
