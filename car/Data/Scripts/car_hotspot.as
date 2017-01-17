@@ -117,14 +117,7 @@ void Update(){
 
             vec3 collisionEnd = newWheelPos + down * suspensionHeight;
 
-            this_mo.Execute("vec3 tempVec = col.GetRayCollision(" + newWheelPos + ", " + collisionEnd + ");" +
-                            "smear_sound_time = tempVec.x;"+
-                            "left_smear_time = tempVec.y;"+
-                            "right_smear_time = tempVec.z;");
-            vec3 collisionPoint;
-            collisionPoint.x = this_mo.GetFloatVar("smear_sound_time");
-            collisionPoint.y = this_mo.GetFloatVar("left_smear_time");
-            collisionPoint.z = this_mo.GetFloatVar("right_smear_time");
+            vec3 collisionPoint = col.GetRayCollision(newWheelPos, collisionEnd);
 
             wheelDistances.insertLast(distance(collisionEnd, collisionPoint));
             wheelPositions.insertLast(collisionPoint);
@@ -161,10 +154,17 @@ void Update(){
 
             newVelocity += suspensionUpForce * suspensionHardness;
 
-            if(GetInputDown(this_mo.controller_id, "w")){
+            vec3 steering_ang = vec3(0);
+
+            if(GetInputDown(this_mo.controller_id, "up")){
                 newVelocity += normalize(bodyTransform.GetRotationPart() * vec3(1,0,0)) * 0.1f;
-            }else if(GetInputDown(this_mo.controller_id, "s")){
+            }else if(GetInputDown(this_mo.controller_id, "down")){
                 newVelocity += normalize(bodyTransform.GetRotationPart() * vec3(-1,0,0)) * 0.1f;
+            }
+            if(GetInputDown(this_mo.controller_id, "left")){
+                steering_ang += vec3(0.0f, 1.0f, 0.0f);
+            }else if(GetInputDown(this_mo.controller_id, "right")){
+                steering_ang += vec3(0.0f, -1.0f, 0.0f);
             }
             //newVelocity -= dot(down, newVelocity);
             //DebugText("hmm", bodyTransform.GetRotationPart() * vec3(1,1,1) + "", _fade);
@@ -181,14 +181,25 @@ void Update(){
             collectiveAng += cross(wheelPositions[2], wheelPositions[3]);
             collectiveAng += cross(wheelPositions[3], wheelPositions[0]);
             quaternion newQuat;
-            GetRotationBetweenVectors(wheelPositions[2], wheelPositions[1], newQuat);
+            GetRotationBetweenVectors(wheelPositions[2], wheelPositions[0], newQuat);
             vec3 newAngVelocity = collectiveAng / 4;
             mat4 debugTransform;
             debugTransform.SetTranslationPart(bodyPosition);
             debugTransform.SetRotationPart(Mat4FromQuaternion(newQuat));
 
             //DebugDrawWireMesh("Data/Models/body.obj", debugTransform , vec4(1), _delete_on_update);
-            //bodyIO.SetAngularVelocity(bodyIO.GetAngularVelocity() - newAngVelocity);
+            //Print("old " + wheelPositions.size() + "\n");
+            //Print("new " + wheelDistances.size() + "\n");
+            quaternion cur_rot = QuaternionFromMat4(bodyIO.GetPhysicsTransform().GetRotationPart());
+            //vec3 ang_vel = Mult(, newAngVelocity);
+            vec3 ang_vel = Mult(cur_rot, vec3(newQuat.x, newQuat.y, newQuat.z));
+            bodyIO.SetAngularVelocity(ang_vel + steering_ang);
+            Print("Ang vel " + ang_vel + "\n");
+            //Print("vel " + newAngVelocity + "\n");
+            //bodyIO.SetAngularVelocity(ang_vel);
+            //Print("" + newQuat.x + " " + newQuat.y + " " + newQuat.z + "\n");
+            //Print("" + cur_rot.x + " " + cur_rot.y + " " + cur_rot.z + "\n");
+
 
             //newVelocity.y *= 0.95f;
 
@@ -220,11 +231,6 @@ void Update(){
 
 
         if(length(bodyIO.GetLinearVelocity()) == 0.0f){
-
-
-
-
-
             //DebugText("ang", "ang : " + bodyIO.GetAngularVelocity(), _fade);
             //DebugText("vel", "Vel : " + bodyIO.GetLinearVelocity(), _fade);
 
