@@ -1,13 +1,19 @@
 Object@ thisHotspot = ReadObjectFromID(hotspot.GetID());
 array<int> wheelIds;
 int bodyID;
+mat4 oldBodyPhysicsTransform;
+mat4 previousTransform;
+vec3 oldBodyLinVel;
+vec3 oldBodyAngVel;
+array<mat4> oldTransforms(100);
+vec3 offset = vec3(-0.198593f, 0.505668f, 0.0f);
 
 void Init() {
-    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml", false));
-    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml", false));
-    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml", false));
-    wheelIds.insertLast(CreateObject("Data/Items/wheel.xml", false));
-    bodyID = CreateObject("Data/Items/body.xml", false);
+    wheelIds.insertLast(CreateObject("Data/Objects/wheel.xml", true));
+    wheelIds.insertLast(CreateObject("Data/Objects/wheel.xml", true));
+    wheelIds.insertLast(CreateObject("Data/Objects/wheel.xml", true));
+    wheelIds.insertLast(CreateObject("Data/Objects/wheel.xml", true));
+    bodyID = CreateObject("Data/Items/body.xml", true);
     Object@ bodyObj = ReadObjectFromID(bodyID);
     bodyObj.SetTranslation(thisHotspot.GetTranslation());
     for(uint a =0;a<wheelIds.length();a++){
@@ -65,7 +71,7 @@ void Update(){
 
     for(uint i = 0; i < wheelIds.size(); i++){
         Object@ wheelObj = ReadObjectFromID(wheelIds[i]);
-        ItemObject@ wheelIO = ReadItemID(wheelIds[i]);
+        //ItemObject@ wheelIO = ReadItemID(wheelIds[i]);
 
         //quaternion rot;
         vec3 dir;
@@ -82,11 +88,11 @@ void Update(){
         //GetRotationBetweenVectors(dir, thisHotspot.GetTranslation(), rot);
 
 
-        vec3 direction = newWheelPos - wheelIO.GetPhysicsPosition();
-                vec3 angVel = wheelIO.GetAngularVelocity();
-        angVel.x = 0.0f;
-        angVel.y = 0.0f;
-        vec3 emptyVec = vec3(0.0f);
+        //vec3 direction = newWheelPos - wheelIO.GetPhysicsPosition();
+        //        vec3 angVel = wheelIO.GetAngularVelocity();
+        //angVel.x = 0.0f;
+        //angVel.y = 0.0f;
+        //vec3 emptyVec = vec3(0.0f);
         //DebugText("ok", length(angVel)+"", _fade);
         //wheelIO.SetAngularVelocity(angVel);
 
@@ -108,21 +114,21 @@ void Update(){
         wheelDistances.insertLast(distance(collisionEnd, collisionPoint));
         wheelPositions.insertLast(collisionPoint);
 
-        wheelIO.SetLinearVelocity((direction * 20.0f) * distance(newWheelPos, wheelIO.GetPhysicsPosition()));
+        //wheelIO.SetLinearVelocity((direction * 20.0f) * distance(newWheelPos, wheelIO.GetPhysicsPosition()));
 
         DebugDrawWireSphere(collisionPoint, debugSphereSize, vec3(1.0f), _delete_on_update);
 
-        if(length(angVel) == 0.0f){
-            //wheelObj.SetTranslation(newWheelPos);
+        //if(length(angVel) == 0.0f){
+            wheelObj.SetTranslation(collisionPoint + (vec3(0, 0.5f, 0)));
             //wheelIO.ActivatePhysics();
-        }
+        //}
     }
     float collectiveUpForce = 0.0f;
     for(uint i = 0;i<wheelDistances.length();i++){
         collectiveUpForce += wheelDistances[i];
     }
-    
-    
+
+
 
     //Controls
     //If the wheels are touching the ground
@@ -131,12 +137,12 @@ void Update(){
     if(collectiveUpForce > 0.1f){
         float upForce = collectiveUpForce / wheelDistances.length();
         vec3 newCarPos = bodyIO.GetPhysicsPosition() + up * upForce;
-        DebugDrawWireSphere(newCarPos, debugSphereSize, vec3(0.5), _delete_on_update);
-        DebugDrawWireSphere(bodyIO.GetPhysicsPosition(), debugSphereSize, vec3(0), _delete_on_update);
+        //DebugDrawWireSphere(newCarPos, debugSphereSize, vec3(0.5), _delete_on_update);
+        //DebugDrawWireSphere(bodyIO.GetPhysicsPosition(), debugSphereSize, vec3(1, 0, 0), _delete_on_update);
         vec3 direction = newCarPos - bodyIO.GetPhysicsPosition();
 
         vec3 suspensionUpForce = direction *  distance(newCarPos, bodyIO.GetPhysicsPosition());
-        
+
 
         newVelocity += suspensionUpForce * suspensionHardness;
 
@@ -146,8 +152,8 @@ void Update(){
             newVelocity += normalize(bodyTransform.GetRotationPart() * vec3(-1,0,0)) * 0.1f;
         }
         //newVelocity -= dot(down, newVelocity);
-        DebugText("hmm", bodyTransform.GetRotationPart() * vec3(1,1,1) + "", _fade);
-        
+        //DebugText("hmm", bodyTransform.GetRotationPart() * vec3(1,1,1) + "", _fade);
+
         float sidewaysVel = dot(right, newVelocity);
         newVelocity -= (right * sidewaysVel) * sidewaysDrag;
 
@@ -166,7 +172,7 @@ void Update(){
         debugTransform.SetTranslationPart(bodyPosition);
         debugTransform.SetRotationPart(Mat4FromQuaternion(newQuat));
 
-        DebugDrawWireMesh("Data/Models/body.obj", debugTransform , vec4(1), _delete_on_update);
+        //DebugDrawWireMesh("Data/Models/body.obj", debugTransform , vec4(1), _delete_on_update);
         //bodyIO.SetAngularVelocity(bodyIO.GetAngularVelocity() - newAngVelocity);
 
         //newVelocity.y *= 0.95f;
@@ -181,7 +187,42 @@ void Update(){
         ///camera.LookAt(bodyPosition);
 
     }
-    bodyIO.SetLinearVelocity(newVelocity);
+    //DebugText("vel", "Vel : " + bodyIO.GetLinearVelocity(), _fade);
+
+
+    if(length(bodyIO.GetLinearVelocity()) == 0.0f){
+        //DebugText("ang", "ang : " + bodyIO.GetAngularVelocity(), _fade);
+        //DebugText("vel", "Vel : " + bodyIO.GetLinearVelocity(), _fade);
+
+        //bodyIO.SetPhysicsTransform(oldBodyPhysicsTransform);
+        //bodyIO.SetLinearVelocity(oldBodyLinVel);
+        //bodyIO.SetAngularVelocity(oldBodyAngVel);
+
+        DebugDrawWireSphere(thisHotspot.GetTranslation(), debugSphereSize, vec3(0.0), _fade);
+
+        oldBodyPhysicsTransform.SetTranslationPart(oldBodyPhysicsTransform.GetTranslationPart() - offset);
+        bodyIO.SetPhysicsTransform(oldBodyPhysicsTransform);
+
+        DebugDrawWireSphere(bodyIO.GetPhysicsPosition(), debugSphereSize, vec3(1, 0, 0), _fade);
+        bodyIO.SetLinearVelocity(oldBodyLinVel);
+        bodyIO.ActivatePhysics();
+
+    }else{
+
+        //DebugText("ang", "ang : " + bodyIO.GetAngularVelocity(), _fade);
+        //DebugText("vel", "Vel : " + bodyIO.GetLinearVelocity(), _fade);
+        //Print("vel : " + oldBodyLinVel + "\n");
+        //DebugText("vel3", "old Vel : " + oldBodyLinVel, _fade);
+        if(bodyIO.GetLinearVelocity().x > 0.01f || bodyIO.GetLinearVelocity().x < -0.01f){
+            oldBodyLinVel = bodyIO.GetLinearVelocity();
+            oldBodyAngVel = bodyIO.GetAngularVelocity();
+        }else{
+            bodyIO.SetLinearVelocity(oldBodyLinVel);
+            bodyIO.SetAngularVelocity(oldBodyAngVel);
+        }
+        oldBodyPhysicsTransform = bodyIO.GetPhysicsTransform();
+        bodyIO.SetLinearVelocity(newVelocity);
+    }
 }
 
 void OnExit(MovementObject @mo) {
