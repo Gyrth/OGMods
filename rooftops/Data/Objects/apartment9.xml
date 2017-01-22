@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/apartment9.obj</Model>
+	<ColorMap>Data/Textures/white.png</ColorMap>
+	<NormalMap>Data/Textures/normal.png</NormalMap>
+	<WeightMap>Data/Textures/apartment9_w.png</WeightMap>
+
+	<DetailMaps>
+	<DetailMap colorpath="Data/Textures/tile.png" normalpath="Data/Textures/normal.png" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/black.png" normalpath="Data/Textures/normal.png" materialpath="Data/Materials/rocks.xml" />
+   </DetailMaps>
+	<ShaderName>detailmap4</ShaderName>
+</Object>
+
+

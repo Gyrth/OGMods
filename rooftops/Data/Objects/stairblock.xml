@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/stairblock.obj</Model>
+	<ColorMap>Data/Textures/white.png</ColorMap>
+	<NormalMap>Data/Textures/normal.png</NormalMap>
+
+	<DetailMaps>
+	<DetailMap colorpath="Data/Textures/tile.png" normalpath="Data/Textures/normal.png" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/tile.png" normalpath="Data/Textures/normal.png" materialpath="Data/Materials/rocks.xml" />
+   </DetailMaps>
+	<ShaderName>detailmap4</ShaderName>
+</Object>
+
+
