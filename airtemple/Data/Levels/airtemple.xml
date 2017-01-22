@@ -1,0 +1,788 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name></Name>
+<Description></Description>
+<Shader>post</Shader>
+<Terrain>
+    <Heightmap>Data/Textures/grass_beach_hm.png</Heightmap>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/grass_beach/grass_beach_c.tga</ColorMap>
+    <ModelOverride>Data/Models/airtemple_ground.obj</ModelOverride>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_normal.png" materialpath="Data/Materials/grass.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass_stones_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_stones_n.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/rubble_rocks_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/rubble_rocks_n.tga" materialpath="Data/Materials/rocks.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/chipped_rock.tga" normalpath="Data/Textures/Terrain/DetailTextures/chipped_rock_normal.tga" materialpath="Data/Materials/rock.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate Shadow="true" AO="true" NavMesh="true" />
+<SpawnPoints>
+    <SpawnPoint t0="0" t1="200" t2="0" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" />
+</SpawnPoints>
+<AmbientSounds />
+<Script>Data/Scripts/airtemplelevelscript.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Extra AO" type="float" val="0" />
+    <parameter name="Level Boundaries" type="int" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue4.tga</DomeTexture>
+    <SunAngularRad>0.113683</SunAngularRad>
+    <SunColorAngle>346.1</SunColorAngle>
+    <RayToSun r0="0.463964" r1="0.508092" r2="-0.725658" />
+    <ExtraAO>0</ExtraAO>
+</Sky>
+<ActorObjects>
+    <EnvObject t0="-175.262" t1="486.253" t2="118.237" s0="2.74617" s1="2.74617" s2="2.74617" r0="-1" r1="0" r2="0.000625" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.000625" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="2.47096" t1="577.96" t2="243.798" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="2" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/ceilin.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-506.099" t1="262.449" t2="26.8368" s0="1" s1="1" s2="1" r0="-0.676203" r1="0" r2="-0.736715" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.736715" r9="0" r10="-0.676203" r11="0" r12="0" r13="0" r14="0" r15="1" id="3" color_r="0.294118" color_g="0.219608" color_b="0.086275" type_file="Data/Objects/cliffedgecorner.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="539.66" t1="268.273" t2="312.319" s0="1" s1="1" s2="1" r0="0.827451" r1="0" r2="0.561538" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.561538" r9="-0" r10="0.827451" r11="0" r12="0" r13="0" r14="0" r15="1" id="4" color_r="0.294118" color_g="0.219608" color_b="0.086275" type_file="Data/Objects/cliffedgecorner.xml">
+        <parameters />
+    </EnvObject>
+    <ActorObject t0="384.127" t1="370.348" t2="302.063" s0="1" s1="1" s2="1" r0="0.989216" r1="0.134571" r2="0.0578075" r3="0" r4="-0.0841249" r5="0.198966" r6="0.976389" r7="0" r8="0.119892" r9="-0.970723" r10="0.208142" r11="0" r12="0" r13="0" r14="0" r15="1" id="5" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Left handed" type="string" val="0.0" />
+            <parameter name="Lives" type="string" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="308.399" t1="493.958" t2="98.4056" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.99996" r1="0" r2="-0.00896134" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.00896134" r9="0" r10="0.99996" r11="0" r12="0" r13="0" r14="0" r15="1" id="6" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="346.857" t1="505.925" t2="98.5077" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.0417413" r1="0" r2="0.999129" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999129" r9="-0" r10="-0.0417413" r11="0" r12="0" r13="0" r14="0" r15="1" id="7" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="84.2015" t1="350.241" t2="311.507" s0="40.737" s1="36.8696" s2="32.0811" r0="0.973282" r1="0" r2="-0.229613" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.229613" r9="0" r10="0.973282" r11="0" r12="0" r13="0" r14="0" r15="1" id="8" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="0.407358" t1="556.283" t2="106.105" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="9" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/cliffedge1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-322.545" t1="447.507" t2="-123.572" s0="2.51656" s1="2.51656" s2="2.51656" r0="0.791741" r1="-0.0617428" r2="0.607729" r3="0" r4="-0.288965" r5="0.838669" r6="0.461665" r7="0" r8="-0.538188" r9="-0.541131" r10="0.646167" r11="0" r12="0" r13="0" r14="0" r15="1" id="10" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Plants/Trees/Test/TestTree5.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-303.224" t1="450.329" t2="-117.821" s0="2.51656" s1="2.51656" s2="2.51656" r0="1" r1="0" r2="0" r3="0" r4="0" r5="0.881066" r6="0.472994" r7="0" r8="0" r9="-0.472994" r10="0.881066" r11="0" r12="0" r13="0" r14="0" r15="1" id="11" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Plants/Trees/Test/TestTree5.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="6.03926" t1="265.972" t2="236.819" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="14" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/backwall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="329.997" t1="502.816" t2="85.6201" s0="8.72055" s1="8.26842" s2="9.11248" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="15" color_r="0.513726" color_g="0.513726" color_b="0.513726" type_file="Data/Objects/bridge.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-8.84839" t1="270.01" t2="-129.878" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="16" color_r="0.352941" color_g="0.294118" color_b="0.203922" type_file="Data/Objects/cliffedge2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-120.165" t1="542.912" t2="304.758" s0="17.1232" s1="16.426" s2="27.2811" r0="-0.999581" r1="0" r2="0.0289603" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0289603" r9="0" r10="-0.999581" r11="0" r12="0" r13="0" r14="0" r15="1" id="17" color_r="0.352941" color_g="0.352941" color_b="0.352941" type_file="Data/Objects/stairbase2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-68.7283" t1="522.123" t2="321.899" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.884511" r1="0" r2="-0.46652" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.46652" r9="0" r10="-0.884511" r11="0" r12="0" r13="0" r14="0" r15="1" id="18" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-221.541" t1="527.072" t2="332.011" s0="6.21096" s1="6.21096" s2="6.21096" r0="-0.998491" r1="0" r2="0.0549081" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0549081" r9="0" r10="-0.998491" r11="0" r12="0" r13="0" r14="0" r15="1" id="19" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="98.1645" t1="430.24" t2="310.93" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.959015" r1="0" r2="0.283357" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.283357" r9="0" r10="-0.959015" r11="0" r12="0" r13="0" r14="0" r15="1" id="20" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-124.798" t1="566.109" t2="236.061" s0="29.8932" s1="29.8932" s2="29.8932" r0="0.344727" r1="0" r2="0.938703" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.938703" r9="-0" r10="0.344727" r11="0" r12="0" r13="0" r14="0" r15="1" id="21" color_r="0.321569" color_g="0.321569" color_b="0.321569" type_file="Data/Objects/bigbridge.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="87.5904" t1="437.223" t2="314.908" s0="6.21096" s1="6.21096" s2="6.21096" r0="-0.984311" r1="0" r2="0.176439" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.176439" r9="0" r10="-0.984311" r11="0" r12="0" r13="0" r14="0" r15="1" id="22" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-733.762" t1="38.8615" t2="237.466" s0="1.3601" s1="0.835781" s2="0.495207" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="23" color_r="0.884314" color_g="0.001841" color_b="1.47059" type_file="Data/Objects/fog.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="253.213" t1="494.325" t2="132.96" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.0351646" r1="0" r2="-0.999381" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999381" r9="0" r10="-0.0351646" r11="0" r12="0" r13="0" r14="0" r15="1" id="24" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="37.0132" t1="470.693" t2="326.82" s0="6.21096" s1="6.21096" s2="6.21096" r0="-0.985348" r1="0" r2="0.170559" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.170559" r9="0" r10="-0.985348" r11="0" r12="0" r13="0" r14="0" r15="1" id="25" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-116.198" t1="-36.4115" t2="309.386" s0="6.26206" s1="1.64011" s2="3.18016" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="26" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/botom.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="19.0901" t1="480.671" t2="325.738" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.9753" r1="0" r2="-0.220884" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.220884" r9="0" r10="-0.9753" r11="0" r12="0" r13="0" r14="0" r15="1" id="27" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="160.783" t1="388.391" t2="294.986" s0="6.21096" s1="6.21096" s2="6.21096" r0="-0.967025" r1="0" r2="0.254681" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.254681" r9="0" r10="-0.967025" r11="0" r12="0" r13="0" r14="0" r15="1" id="28" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="71.3089" t1="448.16" t2="320.877" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.98515" r1="0" r2="0.171698" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.171698" r9="0" r10="-0.98515" r11="0" r12="0" r13="0" r14="0" r15="1" id="29" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-148.855" t1="238.653" t2="-308.536" s0="5.08121" s1="0.625238" s2="2.28671" r0="0.993685" r1="-0.00330016" r2="0.112154" r3="0" r4="0.109749" r5="0.236477" r6="-0.965419" r7="0" r8="-0.0233358" r9="0.971631" r10="0.235346" r11="0" r12="0" r13="0" r14="0" r15="1" id="30" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/botom.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="288.664" t1="551.87" t2="237.715" s0="2.74617" s1="2.74617" s2="2.74617" r0="0.0431587" r1="0" r2="0.999068" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999068" r9="-0" r10="0.0431587" r11="0" r12="0" r13="0" r14="0" r15="1" id="31" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-146.917" t1="531.341" t2="159.902" s0="4.43369" s1="4.43369" s2="4.43369" r0="0.349295" r1="0" r2="0.937013" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.937013" r9="-0" r10="0.349295" r11="0" r12="0" r13="0" r14="0" r15="1" id="32" color_r="0.286275" color_g="0.286275" color_b="0.286275" type_file="Data/Objects/staircase.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-4.10332" t1="500.778" t2="322.671" s0="8.23216" s1="8.24589" s2="10.5153" r0="0.988405" r1="0" r2="-0.151843" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.151843" r9="0" r10="0.988405" r11="0" r12="0" r13="0" r14="0" r15="1" id="33" color_r="0.329412" color_g="0.329412" color_b="0.329412" type_file="Data/Objects/platform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-27.6124" t1="494.798" t2="332.81" s0="4.50046" s1="4.50046" s2="4.50046" r0="-0.999023" r1="0" r2="0.044206" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.044206" r9="0" r10="-0.999023" r11="0" r12="0" r13="0" r14="0" r15="1" id="34" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="177.668" t1="376.704" t2="288.593" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.966992" r1="0" r2="0.254808" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.254808" r9="0" r10="-0.966992" r11="0" r12="0" r13="0" r14="0" r15="1" id="35" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="119.716" t1="416.227" t2="307.801" s0="4.50046" s1="4.50046" s2="4.50046" r0="-0.963341" r1="0" r2="0.268279" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.268279" r9="0" r10="-0.963341" r11="0" r12="0" r13="0" r14="0" r15="1" id="36" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="53.5902" t1="460.009" t2="325.201" s0="6.21096" s1="6.21096" s2="6.21096" r0="-0.984311" r1="0" r2="0.176439" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.176439" r9="0" r10="-0.984311" r11="0" r12="0" r13="0" r14="0" r15="1" id="37" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-280.562" t1="453.122" t2="326.984" s0="4.50046" s1="4.50046" s2="4.50046" r0="-0.808108" r1="0" r2="-0.589034" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.589034" r9="0" r10="-0.808108" r11="0" r12="0" r13="0" r14="0" r15="1" id="38" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="104.702" t1="382.671" t2="314.294" s0="5.33027" s1="5.33027" s2="5.33027" r0="0.980219" r1="0" r2="-0.197914" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.197914" r9="0" r10="0.980219" r11="0" r12="0" r13="0" r14="0" r15="1" id="39" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/platform_statues.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-102.85" t1="516.617" t2="305.418" s0="39.5565" s1="43.6961" s2="41.6963" r0="-0.802891" r1="0" r2="-0.596126" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.596126" r9="0" r10="-0.802891" r11="0" r12="0" r13="0" r14="0" r15="1" id="40" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="335.471" t1="569.976" t2="232.262" s0="0.312437" s1="0.937611" s2="0.33613" r0="0.999931" r1="-0.0117245" r2="0.000928468" r3="0" r4="0.0117168" r5="0.9999" r6="0.00789074" r7="0" r8="-0.00102089" r9="-0.00787932" r10="0.999968" r11="0" r12="0" r13="0" r14="0" r15="1" id="41" type_file="Data/Objects/presureplatehotspot.xml">
+        <parameters>
+            <parameter name="HotspotNumber" type="string" val="1" />
+            <parameter name="ItemID" type="string" val="500" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="335.449" t1="569.343" t2="232.269" s0="0.392017" s1="0.392017" s2="0.392017" r0="0.999914" r1="-0.0131211" r2="2.4199e-007" r3="0" r4="0.0131211" r5="0.999914" r6="-1.17624e-007" r7="0" r8="-2.40425e-007" r9="1.20789e-007" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="500" color_r="0.329412" color_g="0.329412" color_b="0.329412" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-355.662" t1="499.734" t2="102.242" s0="2.84973" s1="2.84973" s2="2.84973" r0="-0.0167329" r1="0" r2="0.99986" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.99986" r9="-0" r10="-0.0167329" r11="0" r12="0" r13="0" r14="0" r15="1" id="43" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-31.0167" t1="498.785" t2="83.1884" s0="2.84973" s1="2.84973" s2="2.84973" r0="-0.053405" r1="0" r2="-0.998573" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.998573" r9="0" r10="-0.053405" r11="0" r12="0" r13="0" r14="0" r15="1" id="44" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="89.1784" t1="501.572" t2="113.775" s0="2.84973" s1="2.84973" s2="2.84973" r0="-0.998671" r1="0" r2="0.0515343" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0515343" r9="0" r10="-0.998671" r11="0" r12="0" r13="0" r14="0" r15="1" id="45" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-381" t1="545.772" t2="172.788" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.0489973" r1="0" r2="0.998799" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.998799" r9="-0" r10="0.0489973" r11="0" r12="0" r13="0" r14="0" r15="1" id="46" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-311.697" t1="511.73" t2="99.8897" s0="2.41869" s1="2.41869" s2="2.41869" r0="0.0469977" r1="0" r2="0.998895" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.998895" r9="-0" r10="0.0469977" r11="0" r12="0" r13="0" r14="0" r15="1" id="47" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="82.2191" t1="509.725" t2="72.248" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.0336115" r1="0" r2="-0.999435" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999435" r9="0" r10="-0.0336115" r11="0" r12="0" r13="0" r14="0" r15="1" id="48" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="96.2256" t1="571.495" t2="152.667" s0="2.41869" s1="2.41869" s2="2.41869" r0="0.99985" r1="0" r2="-0.0173283" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0173283" r9="0" r10="0.99985" r11="0" r12="0" r13="0" r14="0" r15="1" id="49" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-110.245" t1="501.032" t2="144.393" s0="2.74617" s1="2.74617" s2="2.74617" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="50" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-271.125" t1="486.667" t2="121.906" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.00683367" r1="0" r2="-0.999977" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999977" r9="0" r10="-0.00683367" r11="0" r12="0" r13="0" r14="0" r15="1" id="51" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="58.0106" t1="507.282" t2="84.3436" s0="14.3149" s1="9.90951" s2="9.11248" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="52" color_r="0.513726" color_g="0.513726" color_b="0.513726" type_file="Data/Objects/bridge.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="40.0032" t1="549.982" t2="221.093" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.999906" r1="0" r2="-0.0137125" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0137125" r9="0" r10="-0.999906" r11="0" r12="0" r13="0" r14="0" r15="1" id="53" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-300.348" t1="508.675" t2="117.85" s0="9.11248" s1="9.11248" s2="9.11248" r0="0.0310541" r1="0" r2="0.999518" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999518" r9="-0" r10="0.0310541" r11="0" r12="0" r13="0" r14="0" r15="1" id="54" color_r="0.513726" color_g="0.513726" color_b="0.513726" type_file="Data/Objects/bridge.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="32.3142" t1="489.169" t2="96.5496" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.999683" r1="0" r2="0.0251864" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0251864" r9="0" r10="-0.999683" r11="0" r12="0" r13="0" r14="0" r15="1" id="55" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-125.216" t1="497.283" t2="100.874" s0="2.84973" s1="2.84973" s2="2.84973" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="56" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-37.6849" t1="519.895" t2="134.588" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.0211862" r1="0" r2="-0.999776" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999776" r9="0" r10="-0.0211862" r11="0" r12="0" r13="0" r14="0" r15="1" id="57" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-72.9712" t1="489.539" t2="108.622" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.00683367" r1="0" r2="-0.999977" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999977" r9="0" r10="-0.00683367" r11="0" r12="0" r13="0" r14="0" r15="1" id="58" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="68.3696" t1="530.064" t2="327.114" s0="5.79309" s1="5.79309" s2="5.79309" r0="-0.153554" r1="0" r2="0.98814" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.98814" r9="-0" r10="-0.153554" r11="0" r12="0" r13="0" r14="0" r15="1" id="59" color_r="0.368627" color_g="0.368627" color_b="0.368627" type_file="Data/Objects/platform_cross2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="169.771" t1="363.76" t2="263.825" s0="9.72229" s1="9.72229" s2="9.72229" r0="0.257993" r1="0" r2="0.966147" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.966147" r9="-0" r10="0.257993" r11="0" r12="0" r13="0" r14="0" r15="1" id="60" color_r="0.392157" color_g="0.392157" color_b="0.392157" type_file="Data/Objects/platform_hole.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-166.199" t1="553.395" t2="161.013" s0="38.0417" s1="38.0417" s2="38.0417" r0="0.122852" r1="0" r2="-0.992425" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.992425" r9="0" r10="0.122852" r11="0" r12="0" r13="0" r14="0" r15="1" id="61" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-175.374" t1="506.52" t2="138.861" s0="16.426" s1="16.426" s2="16.426" r0="0.287971" r1="0" r2="0.957639" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.957639" r9="-0" r10="0.287971" r11="0" r12="0" r13="0" r14="0" r15="1" id="62" color_r="0.556863" color_g="0.556863" color_b="0.556863" type_file="Data/Objects/stairbase2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="169.969" t1="371.386" t2="264.85" s0="7.11967" s1="7.11967" s2="7.11967" r0="0.976983" r1="0" r2="-0.213318" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.213318" r9="0" r10="0.976983" r11="0" r12="0" r13="0" r14="0" r15="1" id="63" color_r="0.435294" color_g="0.435294" color_b="0.435294" type_file="Data/Objects/fountain.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="172.229" t1="364.688" t2="265.409" s0="0.115517" s1="2.03547" s2="0.240231" r0="-0.210208" r1="0.0053574" r2="0.977642" r3="0" r4="-0.0254793" r5="-0.999675" r6="-2.89641e-007" r7="0" r8="0.977325" r9="-0.0249097" r10="0.210276" r11="0" r12="0" r13="0" r14="0" r15="1" id="64" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/runningwater.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="168.275" t1="362.802" t2="264.046" s0="0.115517" s1="2.03547" s2="0.240231" r0="0.870699" r1="-0.022192" r2="0.491316" r3="0" r4="-0.0254794" r5="-0.999675" r6="-5.12227e-009" r7="0" r8="0.491156" r9="-0.0125184" r10="-0.870982" r11="0" r12="0" r13="0" r14="0" r15="1" id="65" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/runningwater.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="169.718" t1="362.634" t2="264.821" s0="0.115517" s1="2.03547" s2="0.240231" r0="0.973704" r1="-0.0248174" r2="-0.226462" r3="0" r4="-0.0254793" r5="-0.999675" r6="-2.39816e-008" r7="0" r8="-0.226389" r9="0.00577013" r10="-0.97402" r11="0" r12="0" r13="0" r14="0" r15="1" id="66" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/runningwater.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="170.056" t1="316.755" t2="270.308" s0="85.2374" s1="82.0515" s2="50.2332" r0="-0.998373" r1="0" r2="-0.0570269" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0570269" r9="0" r10="-0.998373" r11="0" r12="0" r13="0" r14="0" r15="1" id="67" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="170.997" t1="362.639" t2="263.254" s0="0.115517" s1="2.03547" s2="0.240231" r0="0.870699" r1="-0.022192" r2="0.491316" r3="0" r4="-0.0254794" r5="-0.999675" r6="-5.12227e-009" r7="0" r8="0.491156" r9="-0.0125184" r10="-0.870982" r11="0" r12="0" r13="0" r14="0" r15="1" id="68" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/runningwater.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="170.004" t1="364.586" t2="262.329" s0="0.115517" s1="2.03547" s2="0.240231" r0="0.999285" r1="-0.0254694" r2="0.0279247" r3="0" r4="-0.0254794" r5="-0.999676" r6="-1.5425e-008" r7="0" r8="0.0279157" r9="-0.000711489" r10="-0.99961" r11="0" r12="0" r13="0" r14="0" r15="1" id="69" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/runningwater.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="167.745" t1="364.677" t2="266.321" s0="0.115517" s1="2.03547" s2="0.240231" r0="-0.5445" r1="0.013878" r2="-0.838646" r3="0" r4="-0.0254794" r5="-0.999676" r6="2.42144e-008" r7="0" r8="-0.838374" r9="0.0213682" r10="0.544677" r11="0" r12="0" r13="0" r14="0" r15="1" id="70" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/runningwater.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-314.1" t1="372.05" t2="266.61" s0="9.09999" s1="9.09999" s2="9.09999" r0="-0.999996" r1="0" r2="-0.00282435" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.00282435" r9="0" r10="-0.999996" r11="0" r12="0" r13="0" r14="0" r15="1" id="71" color_r="0.180392" color_g="0.180392" color_b="0.180392" type_file="Data/Objects/walkway.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="170.04" t1="364.005" t2="264.885" s0="0.977907" s1="0.977907" s2="0.977907" r0="0.936514" r1="0" r2="0.350629" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.350629" r9="-0" r10="0.936514" r11="0" r12="0" r13="0" r14="0" r15="1" id="72" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/fountain_water.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-249.68" t1="583.517" t2="232.204" s0="10.2711" s1="10.2711" s2="10.2711" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="73" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/ceilingwalkway_small.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-72.9781" t1="388.411" t2="261.558" s0="13.3057" s1="13.3057" s2="13.3057" r0="-0.985407" r1="0" r2="-0.170216" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.170216" r9="0" r10="-0.985407" r11="0" r12="0" r13="0" r14="0" r15="1" id="74" color_r="0.360784" color_g="0.360784" color_b="0.360784" type_file="Data/Objects/platform_pilars.xml">
+        <parameters />
+    </EnvObject>
+    <AmbientSoundObject t0="167.919" t1="365.211" t2="266.954" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="75" type_file="Data/Sound/water.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="170.304" t1="365.439" t2="267.257" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="76" type_file="Data/Sound/water.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <EnvObject t0="299.11" t1="562.469" t2="189.251" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.0340858" r1="-3.43433e-007" r2="0.999419" r3="0" r4="-3.19324e-007" r5="1" r6="3.54523e-007" r7="0" r8="-0.999419" r9="-3.31223e-007" r10="0.0340858" r11="0" r12="0" r13="0" r14="0" r15="1" id="77" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <AmbientSoundObject t0="171.288" t1="365.006" t2="263.196" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="78" type_file="Data/Sound/water.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="169.487" t1="365.119" t2="261.74" s0="1" s1="1" s2="1" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="79" type_file="Data/Sound/water.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <EnvObject t0="99.697" t1="425.501" t2="333.941" s0="61.9839" s1="56.0994" s2="48.8134" r0="-0.785256" r1="0" r2="-0.619171" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.619171" r9="0" r10="-0.785256" r11="0" r12="0" r13="0" r14="0" r15="1" id="80" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="134.586" t1="487.662" t2="98.8591" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.0149024" r1="0" r2="0.999889" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999889" r9="-0" r10="-0.0149024" r11="0" r12="0" r13="0" r14="0" r15="1" id="81" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="215.091" t1="504.659" t2="98.5309" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.999998" r1="0" r2="-0.00214999" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.00214999" r9="0" r10="-0.999998" r11="0" r12="0" r13="0" r14="0" r15="1" id="82" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="172.897" t1="502.719" t2="133.982" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.055338" r1="0" r2="0.998468" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.998468" r9="-0" r10="0.055338" r11="0" r12="0" r13="0" r14="0" r15="1" id="83" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="260.582" t1="488.122" t2="89.3047" s0="2.74617" s1="2.74617" s2="2.74617" r0="0.999875" r1="0" r2="0.015827" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.015827" r9="-0" r10="0.999875" r11="0" r12="0" r13="0" r14="0" r15="1" id="84" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="237.656" t1="576.283" t2="176.81" s0="2.41869" s1="2.41869" s2="2.41869" r0="-1" r1="0" r2="0.000603469" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.000603469" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="85" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-335.485" t1="576.569" t2="241.438" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.999907" r1="0" r2="0.0136804" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0136804" r9="0" r10="-0.999907" r11="0" r12="0" r13="0" r14="0" r15="1" id="86" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="188.359" t1="554.262" t2="174.308" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.105875" r1="0" r2="-0.994379" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.994379" r9="0" r10="-0.105875" r11="0" r12="0" r13="0" r14="0" r15="1" id="87" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-217.131" t1="550.984" t2="292.363" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.00831914" r1="0" r2="0.999965" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999965" r9="-0" r10="-0.00831914" r11="0" r12="0" r13="0" r14="0" r15="1" id="88" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="79.4813" t1="575.14" t2="241.589" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.999907" r1="0" r2="0.0136804" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0136804" r9="0" r10="-0.999907" r11="0" r12="0" r13="0" r14="0" r15="1" id="89" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-87.4586" t1="561.901" t2="174.792" s0="2.84973" s1="2.84973" s2="2.84973" r0="1" r1="0" r2="-0.000250386" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.000250386" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="90" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="127.524" t1="558.566" t2="221.071" s0="2.84973" s1="2.84973" s2="2.84973" r0="-0.999758" r1="0" r2="0.0219945" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0219945" r9="0" r10="-0.999758" r11="0" r12="0" r13="0" r14="0" r15="1" id="91" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="139.32" t1="559.922" t2="171.125" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.999802" r1="0" r2="0.019894" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.019894" r9="-0" r10="0.999802" r11="0" r12="0" r13="0" r14="0" r15="1" id="92" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-16.765" t1="574.043" t2="241.889" s0="2.41869" s1="2.41869" s2="2.41869" r0="0.101365" r1="0" r2="0.994849" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.994849" r9="-0" r10="0.101365" r11="0" r12="0" r13="0" r14="0" r15="1" id="93" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="51.2012" t1="556.849" t2="171.757" s0="2.84973" s1="2.84973" s2="2.84973" r0="-0.0305592" r1="0" r2="0.999533" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999533" r9="-0" r10="-0.0305592" r11="0" r12="0" r13="0" r14="0" r15="1" id="94" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="200.394" t1="552.102" t2="240.367" s0="2.74617" s1="2.74617" s2="2.74617" r0="0.999057" r1="0" r2="-0.0434073" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0434073" r9="0" r10="0.999057" r11="0" r12="0" r13="0" r14="0" r15="1" id="95" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="174.729" t1="488.075" t2="83.6858" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.055338" r1="0" r2="0.998468" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.998468" r9="-0" r10="0.055338" r11="0" r12="0" r13="0" r14="0" r15="1" id="96" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="333.59" t1="488.564" t2="143.048" s0="2.74617" s1="2.74617" s2="2.74617" r0="0.999875" r1="0" r2="0.015827" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.015827" r9="-0" r10="0.999875" r11="0" r12="0" r13="0" r14="0" r15="1" id="97" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-2.00689" t1="516.018" t2="117.679" s0="2.41869" s1="2.41869" s2="2.41869" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="98" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-304.691" t1="408.733" t2="300.986" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.99799" r1="0" r2="0.063364" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.063364" r9="-0" r10="0.99799" r11="0" r12="0" r13="0" r14="0" r15="1" id="99" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-216.555" t1="475.367" t2="328.01" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.970825" r1="0" r2="-0.239791" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.239791" r9="0" r10="0.970825" r11="0" r12="0" r13="0" r14="0" r15="1" id="100" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-151.792" t1="509.805" t2="337.28" s0="3.42846" s1="3.42846" s2="3.42846" r0="0.852097" r1="0" r2="-0.523384" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.523384" r9="0" r10="0.852097" r11="0" r12="0" r13="0" r14="0" r15="1" id="101" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs3_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-198.846" t1="486.607" t2="326.574" s0="3.42846" s1="3.42846" s2="3.42846" r0="0.973161" r1="0" r2="-0.230125" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.230125" r9="0" r10="0.973161" r11="0" r12="0" r13="0" r14="0" r15="1" id="102" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs3_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-263.268" t1="442.17" t2="329.981" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.792074" r1="0" r2="0.610425" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.610425" r9="-0" r10="0.792074" r11="0" r12="0" r13="0" r14="0" r15="1" id="103" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="33.4984" t1="504.254" t2="321.847" s0="3.40691" s1="3.42846" s2="5.23587" r0="0.989954" r1="0" r2="0.141388" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.141388" r9="-0" r10="0.989954" r11="0" r12="0" r13="0" r14="0" r15="1" id="104" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs3_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-286.481" t1="421.134" t2="306.585" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.790614" r1="0" r2="0.612315" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.612315" r9="-0" r10="0.790614" r11="0" r12="0" r13="0" r14="0" r15="1" id="105" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-341.974" t1="384.657" t2="303.164" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.998478" r1="0" r2="0.055152" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.055152" r9="-0" r10="0.998478" r11="0" r12="0" r13="0" r14="0" r15="1" id="106" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-250.46" t1="452.011" t2="340.844" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.969883" r1="0" r2="-0.243571" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.243571" r9="0" r10="0.969883" r11="0" r12="0" r13="0" r14="0" r15="1" id="107" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="16.6356" t1="492.847" t2="314.763" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.988695" r1="0" r2="0.149938" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.149938" r9="-0" r10="0.988695" r11="0" r12="0" r13="0" r14="0" r15="1" id="108" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-276.689" t1="430.314" t2="317.552" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.790614" r1="0" r2="0.612315" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.612315" r9="-0" r10="0.790614" r11="0" r12="0" r13="0" r14="0" r15="1" id="109" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-232.553" t1="463.904" t2="336.817" s0="3.42846" s1="3.42846" s2="3.42846" r0="0.970348" r1="0" r2="-0.241714" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.241714" r9="0" r10="0.970348" r11="0" r12="0" r13="0" r14="0" r15="1" id="110" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs3_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="-77.6705" t1="371.773" t2="279.868" s0="0.314586" s1="0.66449" s2="0.318581" r0="0.983493" r1="-1.12688e-007" r2="0.180945" r3="0" r4="1.12688e-007" r5="1" r6="1.028e-008" r7="0" r8="-0.180945" r9="1.028e-008" r10="0.983493" r11="0" r12="0" r13="0" r14="0" r15="1" id="111" type_file="Data/Objects/presureplatehotspot.xml">
+        <parameters>
+            <parameter name="HotspotNumber" type="string" val="2" />
+            <parameter name="ItemID" type="string" val="504" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="-323.194" t1="396.879" t2="304.197" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.998478" r1="0" r2="0.055152" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.055152" r9="-0" r10="0.998478" r11="0" r12="0" r13="0" r14="0" r15="1" id="112" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="141.657" t1="401.142" t2="299.609" s0="4.50046" s1="4.50046" s2="4.50046" r0="-0.963341" r1="0" r2="0.268279" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.268279" r9="0" r10="-0.963341" r11="0" r12="0" r13="0" r14="0" r15="1" id="113" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="118.563" t1="374.117" t2="387.942" s0="136.247" s1="123.312" s2="107.297" r0="0.994684" r1="-0.00302195" r2="-0.102933" r3="0" r4="-0.102835" r5="0.0233982" r6="-0.994423" r7="0" r8="0.00541355" r9="0.999722" r10="0.022963" r11="0" r12="0" r13="0" r14="0" r15="1" id="114" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="212.046" t1="391.558" t2="319.09" s0="51.9635" s1="47.0303" s2="40.9221" r0="0.796826" r1="-0.270171" r2="0.54044" r3="0" r4="-0.214159" r5="-0.962677" r6="-0.165495" r7="0" r8="0.564981" r9="0.0161307" r10="-0.824946" r11="0" r12="0" r13="0" r14="0" r15="1" id="115" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="138.826" t1="404.112" t2="306.191" s0="22.7451" s1="20.5857" s2="17.9121" r0="0.973282" r1="0" r2="-0.229613" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.229613" r9="0" r10="0.973282" r11="0" r12="0" r13="0" r14="0" r15="1" id="116" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="153.766" t1="396.583" t2="310.976" s0="39.0342" s1="35.3285" s2="30.7401" r0="-0.824657" r1="0" r2="0.565633" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.565633" r9="0" r10="-0.824657" r11="0" r12="0" r13="0" r14="0" r15="1" id="117" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="16.3436" t1="505.048" t2="322.352" s0="29.3987" s1="29.3987" s2="29.3987" r0="-0.802891" r1="0" r2="-0.596126" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.596126" r9="0" r10="-0.802891" r11="0" r12="0" r13="0" r14="0" r15="1" id="118" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-50.5601" t1="509.45" t2="333.529" s0="4.50046" s1="4.50046" s2="4.50046" r0="-0.999023" r1="0" r2="0.044206" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.044206" r9="0" r10="-0.999023" r11="0" r12="0" r13="0" r14="0" r15="1" id="119" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-136.64" t1="521.312" t2="328.047" s0="3.42846" s1="3.42846" s2="3.42846" r0="0.852097" r1="0" r2="-0.523384" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.523384" r9="0" r10="0.852097" r11="0" r12="0" r13="0" r14="0" r15="1" id="120" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs3_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-178.491" t1="470.338" t2="329.035" s0="39.5565" s1="43.6961" s2="41.6963" r0="-0.802891" r1="0" r2="-0.596126" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.596126" r9="0" r10="-0.802891" r11="0" r12="0" r13="0" r14="0" r15="1" id="121" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-172.808" t1="493.185" t2="325.144" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.790614" r1="0" r2="0.612315" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.612315" r9="-0" r10="0.790614" r11="0" r12="0" r13="0" r14="0" r15="1" id="122" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="51.2878" t1="516.156" t2="326.463" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.989676" r1="0" r2="0.143323" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.143323" r9="-0" r10="0.989676" r11="0" r12="0" r13="0" r14="0" r15="1" id="123" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="176.912" t1="384.878" t2="309.524" s0="61.9839" s1="56.0994" s2="48.8134" r0="-0.749953" r1="0" r2="0.661491" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.661491" r9="0" r10="-0.749953" r11="0" r12="0" r13="0" r14="0" r15="1" id="124" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="93.7078" t1="435.295" t2="339.409" s0="61.9839" s1="56.0994" s2="48.8134" r0="-0.732439" r1="0" r2="-0.680832" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.680832" r9="0" r10="-0.732439" r11="0" r12="0" r13="0" r14="0" r15="1" id="125" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="199.248" t1="377.248" t2="309.715" s0="51.9635" s1="47.0303" s2="40.9221" r0="-0.824657" r1="0" r2="0.565633" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.565633" r9="0" r10="-0.824657" r11="0" r12="0" r13="0" r14="0" r15="1" id="126" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="139.253" t1="366.661" t2="270.256" s0="16.426" s1="16.426" s2="16.426" r0="-0.97559" r1="0" r2="0.219599" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.219599" r9="0" r10="-0.97559" r11="0" r12="0" r13="0" r14="0" r15="1" id="127" color_r="0.27451" color_g="0.27451" color_b="0.27451" type_file="Data/Objects/stairbase2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-291.816" t1="467.628" t2="311.147" s0="5.0531" s1="5.0531" s2="5.0531" r0="-0.583496" r1="0" r2="0.812116" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.812116" r9="0" r10="-0.583496" r11="0" r12="0" r13="0" r14="0" r15="1" id="128" color_r="0.368627" color_g="0.368627" color_b="0.368627" type_file="Data/Objects/platform_cross.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-121.952" t1="533.192" t2="317.053" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.851573" r1="0" r2="-0.524237" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.524237" r9="0" r10="0.851573" r11="0" r12="0" r13="0" r14="0" r15="1" id="129" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="69.9451" t1="459.521" t2="326.819" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.988543" r1="0" r2="-0.150942" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.150942" r9="0" r10="0.988543" r11="0" r12="0" r13="0" r14="0" r15="1" id="130" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-162.087" t1="500.837" t2="329.79" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.790614" r1="0" r2="0.612315" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.612315" r9="-0" r10="0.790614" r11="0" r12="0" r13="0" r14="0" r15="1" id="131" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-85.3471" t1="533.887" t2="314.112" s0="6.21096" s1="6.21096" s2="6.21096" r0="-0.880061" r1="0" r2="-0.474861" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.474861" r9="0" r10="-0.880061" r11="0" r12="0" r13="0" r14="0" r15="1" id="132" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-204.935" t1="516.335" t2="332.242" s0="6.21096" s1="6.21096" s2="6.21096" r0="-0.998491" r1="0" r2="0.0549081" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0549081" r9="0" r10="-0.998491" r11="0" r12="0" r13="0" r14="0" r15="1" id="133" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="85.7895" t1="472.54" t2="323.954" s0="5.0531" s1="5.0531" s2="5.0531" r0="0.153319" r1="0" r2="0.988177" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.988177" r9="-0" r10="0.153319" r11="0" r12="0" r13="0" r14="0" r15="1" id="134" color_r="0.368627" color_g="0.368627" color_b="0.368627" type_file="Data/Objects/platform_cross.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-235.642" t1="538.248" t2="325.371" s0="5.0531" s1="5.0531" s2="5.0531" r0="-0.0803409" r1="0" r2="0.996767" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.996767" r9="-0" r10="-0.0803409" r11="0" r12="0" r13="0" r14="0" r15="1" id="135" color_r="0.368627" color_g="0.368627" color_b="0.368627" type_file="Data/Objects/platform_cross.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-185.065" t1="503.371" t2="328.513" s0="4.50046" s1="4.50046" s2="4.50046" r0="-0.999023" r1="0" r2="0.044206" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.044206" r9="0" r10="-0.999023" r11="0" r12="0" r13="0" r14="0" r15="1" id="136" color_r="0.501961" color_g="0.501961" color_b="0.501961" type_file="Data/Objects/stairs3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="90.1424" t1="580.841" t2="230.727" s0="10.2291" s1="10.2291" s2="10.2291" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="137" color_r="0.505882" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/ceilingwalkway.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-13.7328" t1="550.86" t2="169.307" s0="2.74617" s1="2.74617" s2="2.74617" r0="0.998607" r1="0" r2="-0.0527567" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0527567" r9="0" r10="0.998607" r11="0" r12="0" r13="0" r14="0" r15="1" id="138" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-86.1532" t1="561.689" t2="233.247" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.0489973" r1="0" r2="0.998799" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.998799" r9="-0" r10="0.0489973" r11="0" r12="0" r13="0" r14="0" r15="1" id="139" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-39.9424" t1="571.354" t2="290.467" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.927322" r1="0" r2="0.374263" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.374263" r9="0" r10="-0.927322" r11="0" r12="0" r13="0" r14="0" r15="1" id="140" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-360.045" t1="495.472" t2="150.088" s0="2.74617" s1="2.74617" s2="2.74617" r0="0.999856" r1="0" r2="0.0169424" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.0169424" r9="-0" r10="0.999856" r11="0" r12="0" r13="0" r14="0" r15="1" id="141" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-171.999" t1="559.229" t2="298.623" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.0489973" r1="0" r2="0.998799" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.998799" r9="-0" r10="0.0489973" r11="0" r12="0" r13="0" r14="0" r15="1" id="142" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-260.886" t1="575.035" t2="287.006" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.999907" r1="0" r2="0.0136804" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0136804" r9="0" r10="-0.999907" r11="0" r12="0" r13="0" r14="0" r15="1" id="143" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-176.767" t1="551.973" t2="237.521" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.00831914" r1="0" r2="0.999965" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999965" r9="-0" r10="-0.00831914" r11="0" r12="0" r13="0" r14="0" r15="1" id="144" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-226.463" t1="575.763" t2="242.192" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.999907" r1="0" r2="0.0136804" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0136804" r9="0" r10="-0.999907" r11="0" r12="0" r13="0" r14="0" r15="1" id="145" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-372.329" t1="564.564" t2="247.929" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.998856" r1="0" r2="0.0478175" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.0478175" r9="-0" r10="0.998856" r11="0" r12="0" r13="0" r14="0" r15="1" id="146" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-203.885" t1="534.15" t2="176.833" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.00831914" r1="0" r2="0.999965" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999965" r9="-0" r10="-0.00831914" r11="0" r12="0" r13="0" r14="0" r15="1" id="147" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-295.35" t1="561.356" t2="227.11" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.0489973" r1="0" r2="0.998799" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.998799" r9="-0" r10="0.0489973" r11="0" r12="0" r13="0" r14="0" r15="1" id="148" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-319.786" t1="546.546" t2="172.202" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.0489973" r1="0" r2="0.998799" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.998799" r9="-0" r10="0.0489973" r11="0" r12="0" r13="0" r14="0" r15="1" id="149" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-222.303" t1="498.943" t2="139.135" s0="2.84973" s1="2.84973" s2="2.84973" r0="-0.0167329" r1="0" r2="0.99986" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.99986" r9="-0" r10="-0.0167329" r11="0" r12="0" r13="0" r14="0" r15="1" id="150" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-235.933" t1="512.643" t2="93.9906" s0="2.41869" s1="2.41869" s2="2.41869" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="151" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-312.196" t1="499.652" t2="140.682" s0="2.84973" s1="2.84973" s2="2.84973" r0="-0.0167329" r1="0" r2="0.99986" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.99986" r9="-0" r10="-0.0167329" r11="0" r12="0" r13="0" r14="0" r15="1" id="152" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-51.5447" t1="507.452" t2="96.4761" s0="9.11248" s1="9.11248" s2="9.11248" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="153" color_r="0.513726" color_g="0.513726" color_b="0.513726" type_file="Data/Objects/bridge.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="105.611" t1="384.88" t2="309.205" s0="2.04353" s1="2.04353" s2="2.04353" r0="0.979036" r1="-0.00600913" r2="-0.203599" r3="0" r4="0.203592" r5="-0.00181651" r6="0.979054" r7="0" r8="-0.00625308" r9="-0.99998" r10="-0.000555018" r11="0" r12="0" r13="0" r14="0" r15="1" id="154" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/names.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-134.219" t1="551.981" t2="307.009" s0="17.0962" s1="16.426" s2="25.3929" r0="-0.999581" r1="0" r2="0.0289603" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0289603" r9="0" r10="-0.999581" r11="0" r12="0" r13="0" r14="0" r15="1" id="155" color_r="0.352941" color_g="0.352941" color_b="0.352941" type_file="Data/Objects/stairbase2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-148.462" t1="561.235" t2="307.076" s0="16.426" s1="16.426" s2="16.426" r0="-0.999581" r1="0" r2="0.0289603" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0289603" r9="0" r10="-0.999581" r11="0" r12="0" r13="0" r14="0" r15="1" id="156" color_r="0.352941" color_g="0.352941" color_b="0.352941" type_file="Data/Objects/stairbase2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-361.282" t1="552.283" t2="206.19" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.00831914" r1="0" r2="0.999965" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999965" r9="-0" r10="-0.00831914" r11="0" r12="0" r13="0" r14="0" r15="1" id="157" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-86.9873" t1="543.779" t2="298.226" s0="17.1232" s1="16.426" s2="27.2811" r0="0.952683" r1="0" r2="-0.303966" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.303966" r9="0" r10="0.952683" r11="0" r12="0" r13="0" r14="0" r15="1" id="158" color_r="0.352941" color_g="0.352941" color_b="0.352941" type_file="Data/Objects/stairbase2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-61.3702" t1="561.425" t2="288.931" s0="16.426" s1="16.367" s2="14.5153" r0="0.942327" r1="0" r2="-0.334695" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.334695" r9="0" r10="0.942327" r11="0" r12="0" r13="0" r14="0" r15="1" id="159" color_r="0.352941" color_g="0.352941" color_b="0.352941" type_file="Data/Objects/stairbase2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-73.466" t1="553.15" t2="293.045" s0="17.0962" s1="16.5453" s2="21.4736" r0="0.949137" r1="0" r2="-0.314863" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.314863" r9="0" r10="0.949137" r11="0" r12="0" r13="0" r14="0" r15="1" id="160" color_r="0.352941" color_g="0.352941" color_b="0.352941" type_file="Data/Objects/stairbase2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-50.0509" t1="574.856" t2="221.903" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.999907" r1="0" r2="0.0136804" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0136804" r9="0" r10="-0.999907" r11="0" r12="0" r13="0" r14="0" r15="1" id="161" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="240.507" t1="572.846" t2="222.181" s0="2.41869" s1="2.41869" s2="2.41869" r0="0.0332672" r1="0" r2="0.999447" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999447" r9="-0" r10="0.0332672" r11="0" r12="0" r13="0" r14="0" r15="1" id="162" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-242.286" t1="390.829" t2="275.565" s0="2.24667" s1="2.24667" s2="2.24667" r0="-0.0367227" r1="0" r2="0.999325" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.999325" r9="-0" r10="-0.0367227" r11="0" r12="0" r13="0" r14="0" r15="1" id="163" color_r="0.262745" color_g="0.262745" color_b="0.262745" type_file="Data/Objects/platform_chess.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-72.7539" t1="397.908" t2="294.555" s0="26.6016" s1="29.6264" s2="29.4829" r0="-0.985529" r1="0" r2="-0.169504" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.169504" r9="0" r10="-0.985529" r11="0" r12="0" r13="0" r14="0" r15="1" id="164" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="189.226" t1="367.802" t2="285.583" s0="14.725" s1="14.725" s2="14.725" r0="0.272127" r1="0" r2="0.962261" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.962261" r9="-0" r10="0.272127" r11="0" r12="0" r13="0" r14="0" r15="1" id="165" color_r="0.360784" color_g="0.360784" color_b="0.360784" type_file="Data/Objects/stairbase.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-353.158" t1="375.859" t2="302.796" s0="15.6724" s1="15.6724" s2="15.6724" r0="-0.0581225" r1="0" r2="0.998309" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.998309" r9="-0" r10="-0.0581225" r11="0" r12="0" r13="0" r14="0" r15="1" id="166" color_r="0.188235" color_g="0.188235" color_b="0.188235" type_file="Data/Objects/stairbase3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="103.088" t1="326.065" t2="290.996" s0="89.6578" s1="81.146" s2="70.607" r0="0.973282" r1="0" r2="-0.229613" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.229613" r9="0" r10="0.973282" r11="0" r12="0" r13="0" r14="0" r15="1" id="167" color_r="0.458824" color_g="0.27451" color_b="0.156863" type_file="Data/Objects/stoneplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-77.6935" t1="370.973" t2="279.863" s0="0.372452" s1="0.398786" s2="0.392018" r0="0.983493" r1="-1.12688e-007" r2="0.180945" r3="0" r4="1.12688e-007" r5="1" r6="1.028e-008" r7="0" r8="-0.180945" r9="1.028e-008" r10="0.983493" r11="0" r12="0" r13="0" r14="0" r15="1" id="504" color_r="0.329412" color_g="0.329412" color_b="0.329412" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="-424.286" t1="518.828" t2="150.471" s0="0.318589" s1="0.859101" s2="0.317284" r0="-0.999653" r1="0.000936729" r2="-0.0263185" r3="0" r4="0.000533937" r5="0.999883" r6="0.0153074" r7="0" r8="0.0263298" r9="0.015288" r10="-0.999537" r11="0" r12="0" r13="0" r14="0" r15="1" id="169" type_file="Data/Objects/presureplatehotspot.xml">
+        <parameters>
+            <parameter name="HotspotNumber" type="string" val="3" />
+            <parameter name="ItemID" type="string" val="503" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="-424.293" t1="518.009" t2="150.449" s0="0.392017" s1="0.392017" s2="0.392017" r0="-0.999653" r1="0.000936729" r2="-0.0263185" r3="0" r4="0.000533937" r5="0.999883" r6="0.0153074" r7="0" r8="0.0263298" r9="0.015288" r10="-0.999537" r11="0" r12="0" r13="0" r14="0" r15="1" id="503" color_r="0.329412" color_g="0.329412" color_b="0.329412" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="320.616" t1="520.68" t2="115.759" s0="0.318589" s1="0.748017" s2="0.312775" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="171" type_file="Data/Objects/presureplatehotspot.xml">
+        <parameters>
+            <parameter name="HotspotNumber" type="string" val="4" />
+            <parameter name="ItemID" type="string" val="502" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="320.642" t1="520.358" t2="115.765" s0="0.392017" s1="0.392017" s2="0.392017" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="502" color_r="0.329412" color_g="0.329412" color_b="0.329412" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="382.146" t1="366.483" t2="310.502" s0="1.62006" s1="1.70842" s2="1.43736" r0="0.986134" r1="4.83301e-007" r2="0.165948" r3="0" r4="-4.23746e-007" r5="1" r6="-3.9428e-007" r7="0" r8="-0.165948" r9="3.18493e-007" r10="0.986134" r11="0" r12="0" r13="0" r14="0" r15="1" id="173" type_file="Data/Objects/presureplatehotspot.xml">
+        <parameters>
+            <parameter name="HotspotNumber" type="string" val="5" />
+            <parameter name="ItemID" type="string" val="501" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="382.02" t1="366.37" t2="310.623" s0="1.83254" s1="0.951725" s2="1.63063" r0="0.985196" r1="3.80343e-007" r2="0.171434" r3="0" r4="-4.62394e-007" r5="1" r6="4.38681e-007" r7="0" r8="-0.171434" r9="-5.11457e-007" r10="0.985196" r11="0" r12="0" r13="0" r14="0" r15="1" id="501" color_r="0.329412" color_g="0.329412" color_b="0.329412" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="338.806" t1="561.5" t2="232.776" s0="2.4535" s1="2.4535" s2="2.4535" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="42" color_r="0.254902" color_g="0.254902" color_b="0.254902" type_file="Data/Objects/upsidedownhouse4.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="333.136" t1="571.878" t2="232.275" s0="1.53148" s1="1.53148" s2="1.53148" r0="-0.019233" r1="-6.88142e-008" r2="-0.999815" r3="0" r4="2.39015e-007" r5="1" r6="-7.34248e-008" r7="0" r8="0.999815" r9="-2.40383e-007" r10="-0.019233" r11="0" r12="0" r13="0" r14="0" r15="1" id="168" color_r="0.0705882" color_g="0.0705882" color_b="0.0705882" type_file="Data/Objects/statue1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-77.2059" t1="375.43" t2="277.955" s0="3.28638" s1="3.28638" s2="3.28638" r0="0.907375" r1="-1.69785e-007" r2="0.420322" r3="0" r4="-3.433e-007" r5="1" r6="1.14504e-006" r7="0" r8="-0.420322" r9="-1.18328e-006" r10="0.907375" r11="0" r12="0" r13="0" r14="0" r15="1" id="170" color_r="0.101961" color_g="0.101961" color_b="0.101961" type_file="Data/Objects/statue2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-425.387" t1="509.688" t2="149.825" s0="2.75603" s1="2.75603" s2="2.75603" r0="-0.0174932" r1="-6.05738e-007" r2="0.999847" r3="0" r4="-1.09482e-006" r5="1" r6="5.86676e-007" r7="0" r8="-0.999847" r9="-1.08439e-006" r10="-0.0174932" r11="0" r12="0" r13="0" r14="0" r15="1" id="174" color_r="0.384314" color_g="0.384314" color_b="0.384314" type_file="Data/Objects/upsidedownhouse5.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-148.151" t1="549.963" t2="173.102" s0="29.4192" s1="29.4192" s2="29.4192" r0="0.365758" r1="-1.85569e-007" r2="0.93071" r3="0" r4="-7.54264e-007" r5="1" r6="4.95801e-007" r7="0" r8="-0.93071" r9="-8.83344e-007" r10="0.365758" r11="0" r12="0" r13="0" r14="0" r15="1" id="175" color_r="0.196078" color_g="0.196078" color_b="0.196078" type_file="Data/Objects/bigbridgeextra.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="380.414" t1="378.161" t2="321.105" s0="11.8691" s1="9.33856" s2="9.28816" r0="-0.169083" r1="8.89723e-007" r2="0.985602" r3="0" r4="-1.60587e-007" r5="1" r6="-9.3027e-007" r7="0" r8="-0.985602" r9="-3.15568e-007" r10="-0.169083" r11="0" r12="0" r13="0" r14="0" r15="1" id="600" color_r="0.215686" color_g="0.215686" color_b="0.215686" type_file="Data/Objects/dropdoor3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="383.677" t1="379.846" t2="318.316" s0="1.25614" s1="1.25614" s2="1.25614" r0="-0.992526" r1="-1.7658e-007" r2="-0.122037" r3="0" r4="-2.54746e-007" r5="1" r6="6.24911e-007" r7="0" r8="0.122037" r9="6.51329e-007" r10="-0.992526" r11="0" r12="0" r13="0" r14="0" r15="1" id="186" color_r="0.796078" color_g="0.796078" color_b="0.796078" type_file="Data/Objects/hint3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="381.867" t1="379.822" t2="317.976" s0="1.87428" s1="1.87428" s2="1.87428" r0="-0.988033" r1="1.31254e-007" r2="-0.154243" r3="0" r4="1.95588e-007" r5="1" r6="-4.01924e-007" r7="0" r8="0.154243" r9="-4.27283e-007" r10="-0.988033" r11="0" r12="0" r13="0" r14="0" r15="1" id="187" color_r="0.796078" color_g="0.796078" color_b="0.796078" type_file="Data/Objects/hint2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="346.519" t1="384.549" t2="216.128" s0="36.8901" s1="36.8901" s2="36.8901" r0="-0.635808" r1="4.12192e-007" r2="-0.771848" r3="0" r4="4.50293e-007" r5="1" r6="1.63105e-007" r7="0" r8="0.771848" r9="-2.43854e-007" r10="-0.635808" r11="0" r12="0" r13="0" r14="0" r15="1" id="189" color_r="0.321569" color_g="0.321569" color_b="0.321569" type_file="Data/Objects/sevensidedbuilding.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="254.625" t1="364.373" t2="238.332" s0="13.3197" s1="13.3197" s2="13.3197" r0="-0.969792" r1="4.15799e-008" r2="0.243933" r3="0" r4="-4.15799e-008" r5="1" r6="-3.35763e-007" r7="0" r8="-0.243933" r9="-3.35763e-007" r10="-0.969792" r11="0" r12="0" r13="0" r14="0" r15="1" id="190" color_r="0.223529" color_g="0.223529" color_b="0.223529" type_file="Data/Objects/bridgetosevensided.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="380.487" t1="396.984" t2="322.013" s0="5.8479" s1="5.8479" s2="5.8479" r0="0.170105" r1="-2.30547e-006" r2="-0.985426" r3="0" r4="-7.66156e-007" r5="1" r6="-2.47182e-006" r7="0" r8="0.985426" r9="1.17546e-006" r10="0.170105" r11="0" r12="0" r13="0" r14="0" r15="1" id="176" color_r="0.184314" color_g="0.184314" color_b="0.184314" type_file="Data/Objects/gateplatform.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="310.166" t1="372.073" t2="387.533" s0="0.930499" s1="0.930499" s2="0.930499" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="177" color_r="0.25098" color_g="0.0745098" color_b="0" type_file="Data/Objects/cave.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="378.409" t1="364.193" t2="275.579" s0="12.8693" s1="12.8693" s2="12.8693" r0="0.446797" r1="-1.55854e-006" r2="0.894635" r3="0" r4="-1.70163e-006" r5="1" r6="2.59192e-006" r7="0" r8="-0.894635" r9="-2.6804e-006" r10="0.446797" r11="0" r12="0" r13="0" r14="0" r15="1" id="178" color_r="0.239216" color_g="0.239216" color_b="0.239216" type_file="Data/Objects/bridgetodropdoor.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="385.534" t1="365.13" t2="292.023" s0="12.758" s1="19.5576" s2="17.0521" r0="-0.180376" r1="-1.72027e-006" r2="0.983598" r3="0" r4="-6.60782e-007" r5="1" r6="1.62778e-006" r7="0" r8="-0.983598" r9="-3.56331e-007" r10="-0.180376" r11="0" r12="0" r13="0" r14="0" r15="1" id="179" color_r="0.317647" color_g="0.317647" color_b="0.317647" type_file="Data/Objects/stairbase4.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="211.853" t1="390.753" t2="372.446" s0="4.82959" s1="4.07938" s2="3.27787" r0="-0.687315" r1="-1.81492e-006" r2="-0.72636" r3="0" r4="-3.7498e-007" r5="1" r6="-2.14383e-006" r7="0" r8="0.72636" r9="-1.20111e-006" r10="-0.687315" r11="0" r12="0" r13="0" r14="0" r15="1" id="182" color_r="0.0901961" color_g="0.0901961" color_b="0.0901961" type_file="Data/Objects/hiddenroom.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="187.387" t1="401.312" t2="395.452" s0="4.84082" s1="4.84082" s2="4.84082" r0="-0.681721" r1="-2.52382e-007" r2="-0.731612" r3="0" r4="-5.12809e-007" r5="1" r6="1.32873e-007" r7="0" r8="0.731612" r9="4.65759e-007" r10="-0.681721" r11="0" r12="0" r13="0" r14="0" r15="1" id="201" color_r="0.156863" color_g="0.156863" color_b="0.156863" type_file="Data/Objects/hiddenroomstopblock.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="197.355" t1="387.204" t2="386.181" s0="0.216072" s1="0.707244" s2="0.210149" r0="0.730263" r1="1.02555e-007" r2="-0.683166" r3="0" r4="7.25609e-008" r5="1" r6="2.2768e-007" r7="0" r8="0.683166" r9="-2.15838e-007" r10="0.730263" r11="0" r12="0" r13="0" r14="0" r15="1" id="200" color_r="0.156863" color_g="0.156863" color_b="0.156863" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="167.025" t1="435.172" t2="412.235" s0="1.13941" s1="1.13941" s2="1.13941" r0="0.644223" r1="-1.2517e-006" r2="0.764838" r3="0" r4="0.17909" r5="0.9722" r6="-0.150846" r7="0" r8="-0.743575" r9="0.234153" r10="0.626313" r11="0" r12="0" r13="0" r14="0" r15="1" id="180" color_r="0.133333" color_g="0.0666667" color_b="0" type_file="Data/Objects/fallshute.xml">
+        <parameters />
+    </EnvObject>
+    <ItemObject t0="157.337" t1="472.45" t2="425.428" s0="0.744995" s1="0.896917" s2="0.745076" r0="1" r1="0" r2="-0" r3="0" r4="-0" r5="0.0220174" r6="-0.999758" r7="0" r8="0" r9="0.999758" r10="0.0220174" r11="0" r12="0" r13="0" r14="0" r15="1" id="185" type_file="Data/Items/indianabolder.xml" color_r="0.368627" color_g="0.368627" color_b="0.368627">
+        <parameters />
+    </ItemObject>
+    <Hotspot t0="197.35" t1="387.605" t2="386.174" s0="0.157957" s1="1.13202" s2="0.176317" r0="0.731487" r1="-4.70523e-007" r2="-0.681856" r3="0" r4="-2.2835e-007" r5="1" r6="-9.35033e-007" r7="0" r8="0.681856" r9="8.39666e-007" r10="0.731487" r11="0" r12="0" r13="0" r14="0" r15="1" id="191" type_file="Data/Objects/indianajoneshotspot.xml">
+        <parameters>
+            <parameter name="ItemToDetect" type="string" val="0" />
+            <parameter name="ItemToMove" type="string" val="201" />
+        </parameters>
+    </Hotspot>
+    <ItemObject t0="197.326" t1="389.495" t2="386.164" s0="1" s1="1" s2="1" r0="-0.740949" r1="0.0199584" r2="0.671264" r3="0" r4="-0.0299859" r5="0.997578" r6="-0.0627592" r7="0" r8="-0.670891" r9="-0.0666299" r10="-0.738556" r11="0" r12="0" r13="0" r14="0" r15="1" id="181" type_file="Data/Items/wolfhead.xml" color_r="1" color_g="1" color_b="1">
+        <parameters />
+    </ItemObject>
+    <Hotspot t0="164.048" t1="449.57" t2="417.109" s0="3.30302" s1="3.30302" s2="3.30302" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="183" type_file="Data/Objects/boulderPushUpHotspot.xml">
+        <parameters />
+    </Hotspot>
+    <EnvObject t0="-424.597" t1="521.041" t2="151.853" s0="0.722486" s1="0.722486" s2="0.722486" r0="-0.974097" r1="-1.30406e-007" r2="0.226129" r3="0" r4="-4.72451e-008" r5="1" r6="3.73171e-007" r7="0" r8="-0.226129" r9="3.52821e-007" r10="-0.974097" r11="0" r12="0" r13="0" r14="0" r15="1" id="184" color_r="0.0392157" color_g="0.0392157" color_b="0.0392157" type_file="Data/Objects/statue4.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="380.184" t1="379.862" t2="317.656" s0="0.29699" s1="0.29699" s2="0.29699" r0="-0.986271" r1="-3.13193e-007" r2="-0.165133" r3="0" r4="-4.32058e-008" r5="1" r6="-1.63856e-006" r7="0" r8="0.165133" r9="-1.60893e-006" r10="-0.986271" r11="0" r12="0" r13="0" r14="0" r15="1" id="172" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/hint4.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="378.299" t1="379.809" t2="317.295" s0="1.22968" s1="1.22968" s2="1.22968" r0="-0.984644" r1="1.35522e-007" r2="-0.174577" r3="0" r4="1.01979e-007" r5="1" r6="2.01107e-007" r7="0" r8="0.174577" r9="1.80216e-007" r10="-0.984644" r11="0" r12="0" r13="0" r14="0" r15="1" id="188" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/hint5.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="320.818" t1="520.936" t2="112.154" s0="1.25666" s1="1.25666" s2="1.25666" r0="0.999872" r1="-0.0130855" r2="-0.00916697" r3="0" r4="0.00620908" r5="0.846915" r6="-0.531693" r7="0" r8="0.0147211" r9="0.531568" r10="0.846888" r11="0" r12="0" r13="0" r14="0" r15="1" id="192" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/hiddenroomsmall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="320.734" t1="524.152" t2="117.369" s0="2.03437" s1="2.03437" s2="2.03437" r0="-0.957215" r1="-0.211584" r2="-0.197412" r3="0" r4="-0.0506347" r5="0.794136" r6="-0.605627" r7="0" r8="0.284913" r9="-0.56972" r10="-0.770872" r11="0" r12="0" r13="0" r14="0" r15="1" id="193" color_r="0.0705882" color_g="0.0705882" color_b="0.0705882" type_file="Data/Objects/statue5.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="345.511" t1="576.772" t2="199.271" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.999975" r1="1.57493e-007" r2="0.00711302" r3="0" r4="1.57291e-007" r5="1" r6="-2.90086e-008" r7="0" r8="-0.00711302" r9="-2.7889e-008" r10="-0.999975" r11="0" r12="0" r13="0" r14="0" r15="1" id="194" color_r="0.145098" color_g="0.145098" color_b="0.145098" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="380.845" t1="554.661" t2="243.122" s0="2.74617" s1="2.74617" s2="2.74617" r0="0.0053975" r1="-1.43279e-007" r2="-0.999986" r3="0" r4="3.11411e-007" r5="1" r6="-1.416e-007" r7="0" r8="0.999986" r9="-3.10642e-007" r10="0.0053975" r11="0" r12="0" r13="0" r14="0" r15="1" id="195" color_r="0.145098" color_g="0.145098" color_b="0.145098" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="393.463" t1="565.326" t2="195.586" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.999948" r1="-7.08012e-007" r2="-0.0101718" r3="0" r4="7.23776e-007" r5="1" r6="1.54606e-006" r7="0" r8="0.0101718" r9="-1.55334e-006" r10="0.999948" r11="0" r12="0" r13="0" r14="0" r15="1" id="196" color_r="0.145098" color_g="0.145098" color_b="0.145098" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="347.613" t1="570.898" t2="272.51" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.999975" r1="1.57494e-007" r2="0.00711302" r3="0" r4="1.57291e-007" r5="1" r6="-2.90086e-008" r7="0" r8="-0.00711302" r9="-2.7889e-008" r10="-0.999975" r11="0" r12="0" r13="0" r14="0" r15="1" id="197" color_r="0.145098" color_g="0.145098" color_b="0.145098" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="333.023" t1="388.429" t2="330.774" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.966992" r1="0" r2="0.254808" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.254808" r9="0" r10="-0.966992" r11="0" r12="0" r13="0" r14="0" r15="1" id="198" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="318.891" t1="397.513" t2="327.886" s0="6.21096" s1="6.21096" s2="6.21096" r0="-0.998963" r1="-3.30012e-009" r2="0.0455237" r3="0" r4="-4.14853e-009" r5="1" r6="-1.85423e-008" r7="0" r8="-0.0455237" r9="-1.87119e-008" r10="-0.998963" r11="0" r12="0" r13="0" r14="0" r15="1" id="199" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="299.711" t1="409.957" t2="333.128" s0="4.50046" s1="4.50046" s2="4.50046" r0="-0.9986" r1="3.36001e-008" r2="0.0529065" r3="0" r4="3.34316e-008" r5="1" r6="-4.06934e-009" r7="0" r8="-0.0529065" r9="-2.29489e-009" r10="-0.9986" r11="0" r12="0" r13="0" r14="0" r15="1" id="203" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="350.699" t1="376.288" t2="323.749" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.873141" r1="3.80247e-008" r2="0.487468" r3="0" r4="7.7342e-008" r5="1" r6="6.05288e-008" r7="0" r8="-0.487468" r9="9.05519e-008" r10="-0.873141" r11="0" r12="0" r13="0" r14="0" r15="1" id="204" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="280.763" t1="425.237" t2="328.212" s0="5.79309" s1="5.79309" s2="5.79309" r0="-0.153554" r1="0" r2="0.98814" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-0.98814" r9="-0" r10="-0.153554" r11="0" r12="0" r13="0" r14="0" r15="1" id="205" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/platform_cross2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="347.87" t1="447.274" t2="340.629" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.952595" r1="-3.08007e-007" r2="0.304242" r3="0" r4="3.08007e-007" r5="1" r6="4.79919e-008" r7="0" r8="-0.304242" r9="4.79919e-008" r10="0.952595" r11="0" r12="0" r13="0" r14="0" r15="1" id="202" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="318.326" t1="436.284" t2="331.947" s0="3.40691" s1="3.42846" s2="5.23587" r0="0.995928" r1="1.66304e-007" r2="-0.0901472" r3="0" r4="-1.66304e-007" r5="1" r6="7.51121e-009" r7="0" r8="0.0901472" r9="7.51121e-009" r10="0.995928" r11="0" r12="0" r13="0" r14="0" r15="1" id="206" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs3_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="300.861" t1="424.747" t2="332.197" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.959029" r1="4.72159e-007" r2="-0.283308" r3="0" r4="-3.69787e-007" r5="1" r6="4.14825e-007" r7="0" r8="0.283308" r9="-2.93066e-007" r10="0.959029" r11="0" r12="0" r13="0" r14="0" r15="1" id="207" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="334.025" t1="448.833" t2="334.857" s0="5.0531" s1="5.0531" s2="5.0531" r0="0.0954063" r1="-0.00746694" r2="0.995411" r3="0" r4="-0.00823809" r5="0.999932" r6="0.00829045" r7="0" r8="-0.995404" r9="-0.00899125" r10="0.0953383" r11="0" r12="0" r13="0" r14="0" r15="1" id="208" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/platform_cross.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="364.023" t1="458.415" t2="347.527" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.946681" r1="4.46839e-007" r2="0.322171" r3="0" r4="-6.4148e-007" r5="1" r6="4.97991e-007" r7="0" r8="-0.322171" r9="-6.78105e-007" r10="0.946681" r11="0" r12="0" r13="0" r14="0" r15="1" id="209" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="380.659" t1="469.768" t2="353.492" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.940348" r1="1.35705e-006" r2="0.340214" r3="0" r4="-1.06883e-006" r5="1" r6="-1.0346e-006" r7="0" r8="-0.340214" r9="6.09254e-007" r10="0.940348" r11="0" r12="0" r13="0" r14="0" r15="1" id="210" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="368.407" t1="471.88" t2="348.746" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.835995" r1="-8.1039e-008" r2="-0.548737" r3="0" r4="-1.47394e-007" r5="1" r6="7.68705e-008" r7="0" r8="0.548737" r9="1.45144e-007" r10="-0.835995" r11="0" r12="0" r13="0" r14="0" r15="1" id="211" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="315.099" t1="508.718" t2="339.841" s0="4.50046" s1="4.50046" s2="4.50046" r0="-0.983706" r1="5.23781e-008" r2="0.179784" r3="0" r4="3.66639e-008" r5="1" r6="-9.07292e-008" r7="0" r8="-0.179784" r9="-8.26593e-008" r10="-0.983706" r11="0" r12="0" r13="0" r14="0" r15="1" id="212" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="335.158" t1="495.285" t2="333.474" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.981115" r1="-3.89091e-008" r2="0.193423" r3="0" r4="-2.04136e-008" r5="1" r6="9.7615e-008" r7="0" r8="-0.193423" r9="9.18231e-008" r10="-0.981115" r11="0" r12="0" r13="0" r14="0" r15="1" id="213" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="353.577" t1="484.218" t2="336.578" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.835996" r1="-8.10391e-008" r2="-0.548736" r3="0" r4="-1.47394e-007" r5="1" r6="7.68707e-008" r7="0" r8="0.548736" r9="1.45144e-007" r10="-0.835996" r11="0" r12="0" r13="0" r14="0" r15="1" id="214" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="273.354" t1="535.699" t2="337.42" s0="4.50046" s1="4.50046" s2="4.50046" r0="-0.994738" r1="7.28277e-008" r2="0.102456" r3="0" r4="6.11062e-008" r5="1" r6="-1.17544e-007" r7="0" r8="-0.102456" r9="-1.10664e-007" r10="-0.994738" r11="0" r12="0" r13="0" r14="0" r15="1" id="215" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="294.037" t1="521.986" t2="336.9" s0="5.20227" s1="5.20227" s2="5.20227" r0="-0.974703" r1="-1.1275e-007" r2="-0.223504" r3="0" r4="-1.53769e-007" r5="1" r6="1.66125e-007" r7="0" r8="0.223504" r9="1.9629e-007" r10="-0.974703" r11="0" r12="0" r13="0" r14="0" r15="1" id="216" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="257.155" t1="550.532" t2="330.256" s0="5.0531" s1="5.0531" s2="5.0531" r0="-0.433474" r1="4.07772e-007" r2="0.901166" r3="0" r4="6.01457e-007" r5="1" r6="-1.63184e-007" r7="0" r8="-0.901166" r9="4.71277e-007" r10="-0.433474" r11="0" r12="0" r13="0" r14="0" r15="1" id="217" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/platform_cross.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="276.07" t1="550.883" t2="340.283" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.980096" r1="6.50682e-007" r2="0.198523" r3="0" r4="-6.74466e-007" r5="1" r6="5.21857e-008" r7="0" r8="-0.198523" r9="-1.85044e-007" r10="0.980096" r11="0" r12="0" r13="0" r14="0" r15="1" id="218" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="298.603" t1="556.638" t2="311.867" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.999638" r1="2.42486e-007" r2="-0.0269129" r3="0" r4="-2.29652e-007" r5="1" r6="4.79971e-007" r7="0" r8="0.0269129" r9="-4.73616e-007" r10="0.999638" r11="0" r12="0" r13="0" r14="0" r15="1" id="220" color_r="0.431373" color_g="0.431373" color_b="0.431373" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="339.043" t1="551.947" t2="312.657" s0="2.74617" s1="2.74617" s2="2.74617" r0="0.00539714" r1="-1.43279e-007" r2="-0.999986" r3="0" r4="3.11411e-007" r5="1" r6="-1.416e-007" r7="0" r8="0.999986" r9="-3.10642e-007" r10="0.00539714" r11="0" r12="0" r13="0" r14="0" r15="1" id="221" color_r="0.145098" color_g="0.145098" color_b="0.145098" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="258.047" t1="570.544" t2="290.201" s0="2.41869" s1="2.41869" s2="2.41869" r0="-0.999714" r1="1.86161e-008" r2="0.0239304" r3="0" r4="1.86342e-008" r5="1" r6="5.3376e-010" r7="0" r8="-0.0239304" r9="9.79531e-010" r10="-0.999714" r11="0" r12="0" r13="0" r14="0" r15="1" id="222" color_r="0.431373" color_g="0.431373" color_b="0.431373" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="292.978" t1="561.89" t2="342.483" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.973249" r1="5.99275e-008" r2="0.229753" r3="0" r4="4.08826e-007" r5="1" r6="-1.99265e-006" r7="0" r8="-0.229753" r9="2.03327e-006" r10="0.973249" r11="0" r12="0" r13="0" r14="0" r15="1" id="223" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="206.741" t1="550.98" t2="287.654" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.999997" r1="-9.04721e-008" r2="0.00256159" r3="0" r4="-9.02042e-008" r5="1" r6="1.047e-007" r7="0" r8="-0.00256159" r9="1.04469e-007" r10="-0.999997" r11="0" r12="0" r13="0" r14="0" r15="1" id="219" color_r="0.431373" color_g="0.431373" color_b="0.431373" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="155.002" t1="576.217" t2="289.379" s0="2.41869" s1="2.41869" s2="2.41869" r0="0.998491" r1="-4.24213e-007" r2="-0.0549069" r3="0" r4="3.58734e-007" r5="1" r6="-1.2024e-006" r7="0" r8="0.0549069" r9="1.18089e-006" r10="0.998491" r11="0" r12="0" r13="0" r14="0" r15="1" id="224" color_r="0.431373" color_g="0.431373" color_b="0.431373" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="83.6483" t1="557.51" t2="291.287" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.00620264" r1="6.71475e-007" r2="0.999981" r3="0" r4="1.68844e-007" r5="1" r6="-6.72535e-007" r7="0" r8="-0.999981" r9="1.73012e-007" r10="0.00620264" r11="0" r12="0" r13="0" r14="0" r15="1" id="225" color_r="0.431373" color_g="0.431373" color_b="0.431373" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="25.5756" t1="553.911" t2="286.958" s0="2.74617" s1="2.74617" s2="2.74617" r0="-0.00662374" r1="5.32809e-007" r2="0.999978" r3="0" r4="-1.94519e-007" r5="1" r6="-5.34109e-007" r7="0" r8="-0.999978" r9="-1.98053e-007" r10="-0.00662374" r11="0" r12="0" r13="0" r14="0" r15="1" id="226" color_r="0.431373" color_g="0.431373" color_b="0.431373" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="83.1631" t1="526.521" t2="328.062" s0="7.05992" s1="7.05992" s2="7.05992" r0="0.929068" r1="1.66499e-006" r2="-0.369909" r3="0" r4="-1.62009e-006" r5="1" r6="4.32042e-007" r7="0" r8="0.369909" r9="1.9789e-007" r10="0.929068" r11="0" r12="0" r13="0" r14="0" r15="1" id="227" color_r="0.278431" color_g="0.278431" color_b="0.278431" type_file="Data/Objects/stairs1_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="99.2655" t1="537.829" t2="321.04" s0="4.62786" s1="4.62786" s2="4.62786" r0="0.916189" r1="-4.15868e-007" r2="-0.400747" r3="0" r4="-7.21942e-008" r5="1" r6="-1.20278e-006" r7="0" r8="0.400747" r9="1.13091e-006" r10="0.916189" r11="0" r12="0" r13="0" r14="0" r15="1" id="228" color_r="0.305882" color_g="0.305882" color_b="0.305882" type_file="Data/Objects/stairs2_mirror.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-390.03" t1="516.931" t2="112.722" s0="2.41869" s1="2.41869" s2="2.41869" r0="0.99974" r1="-1.658e-007" r2="0.0228208" r3="0" r4="1.46755e-007" r5="1" r6="8.36194e-007" r7="0" r8="-0.0228208" r9="-8.32627e-007" r10="0.99974" r11="0" r12="0" r13="0" r14="0" r15="1" id="229" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-459.704" t1="500.157" t2="118.261" s0="2.84973" s1="2.84973" s2="2.84973" r0="0.999505" r1="1.27889e-007" r2="0.0314551" r3="0" r4="-1.72891e-007" r5="1" r6="1.42797e-006" r7="0" r8="-0.0314551" r9="-1.4327e-006" r10="0.999505" r11="0" r12="0" r13="0" r14="0" r15="1" id="230" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-466.239" t1="491.433" t2="170.161" s0="2.74617" s1="2.74617" s2="2.74617" r0="0.0073359" r1="3.75263e-007" r2="-0.999973" r3="0" r4="-3.75263e-007" r5="1" r6="3.7252e-007" r7="0" r8="0.999973" r9="3.7252e-007" r10="0.0073359" r11="0" r12="0" r13="0" r14="0" r15="1" id="231" color_r="0.517647" color_g="0.517647" color_b="0.517647" type_file="Data/Objects/upsidedownhouse.xml">
+        <parameters />
+    </EnvObject>
+</ActorObjects>

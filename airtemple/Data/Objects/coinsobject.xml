@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/coins.obj</Model>
+	<ColorMap>Data/Textures/gray_color.tga</ColorMap>
+	<NormalMap>Data/Textures/normal.png</NormalMap>
+	<WeightMap>Data/Textures/weightmap_even.png</WeightMap>
+	<MaterialPath>Data/Materials/coins.xml</MaterialPath>
+	<DetailMaps>
+	<DetailMap colorpath="Data/Textures/buildings/detail_textures/tight_bricks_c.tga" normalpath="Data/Textures/buildings/detail_textures/tight_bricks_n.tga" />
+	<DetailMap colorpath="Data/Textures/buildings/detail_textures/messy_brick_c.tga" normalpath="Data/Textures/buildings/detail_textures/messy_brick_n.tga" />
+	<DetailMap colorpath="Data/Textures/buildings/detail_textures/plaster_bricks_c.tga" normalpath="Data/Textures/buildings/detail_textures/plaster_bricks_n.tga" />
+	<DetailMap colorpath="Data/Textures/buildings/detail_textures/tight_bricks_c.tga" normalpath="Data/Textures/buildings/detail_textures/tight_bricks_n.tga" />
+	</DetailMaps>
+	<ShaderName>detailmap4</ShaderName>
+</Object>
+

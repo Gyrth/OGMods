@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data//Models/fallshute.obj</Model>
+    <ColorMap>Data/Textures/Terrain/grass_beach/grass_beach_c.tga</ColorMap>
+	<NormalMap>Data/Textures/normal.png</NormalMap>
+	<WeightMap>Data/Textures/weightmap_even.png</WeightMap>
+
+
+	<DetailMaps>
+	<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/layered_rock.tga" normalpath="Data/Textures/Terrain/DetailTextures/layered_rock_normal.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/sharp_grassy_cliffs_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/sharp_grassy_cliffs_n.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass_rocks_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_rocks_n.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dark_round_rocks.tga" normalpath="Data/Textures/Terrain/DetailTextures/dark_round_rocks_normal.tga" materialpath="Data/Materials/rocks.xml" />
+    </DetailMaps>
+	<ShaderName>detailmap4tangent</ShaderName>
+</Object>
+
+
