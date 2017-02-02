@@ -1,14 +1,14 @@
 <?xml version="1.0" ?>
 <particle>
-    <textures color_map = "Data/Textures/spark.tga" 
-              shader = "texturecopy"
-              soft_shader = "texturecopy"/>
+    <textures color_map = "Data/Textures/spark.tga"
+              shader = "glowsprite"
+              soft_shader = "envobject #PARTICLE #GLOW"/>
     <stretch velocity_axis = "false" speed_stretch = "false" min_squash = "false"/>
     <size min = "20.00" max = "20.00"/>
     <color red =   "1.0"
            green = "1.0"
            blue =  "1.0"
            alpha = "1.0"/>
-    <behavior inertia="0.95" gravity="1.0" wind="5.0" size_decay_rate="5.00" opacity_decay_rate="5.00"/>
+    <behavior inertia="0.95" gravity="1.0" wind="5.0" size_decay_rate="15.00" opacity_decay_rate="15.00"/>
     <quadratic_expansion speed="100.0"/>
 </particle>

@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <particle>
-    <textures color_map = "Data/Textures/smoke.tga" 
-              normal_map = "Data/Textures/smoke_normal.tga"
-              shader = "litsprite"
-              soft_shader = "litspritesoft"/>
+    <textures color_map = "Data/Textures/smoke.tga"
+            normal_map = "Data/Textures/smoke_normal.tga"
+            shader = "envobject #PARTICLE"
+            soft_shader = "envobject #PARTICLE"/>
     <size min = "2.0" max = "4.0"/>
     <color red =   "1.0"
            green = "1.0"

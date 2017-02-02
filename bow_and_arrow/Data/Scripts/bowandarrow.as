@@ -33,7 +33,7 @@ class BowAndArrow {
 
         quaternion head_rotation = transform.rotation;
         vec3 facing = camera.GetFacing();
-        vec3 start = facing * 3.0f;
+        vec3 start = facing * 5.0f;
         //Limited aim enabled.
         vec3 end = vec3(facing.x, max(-0.9, min(0.3f, facing.y)), facing.z) * 30.0f;
         //Collision check for non player objects
@@ -41,15 +41,16 @@ class BowAndArrow {
         //Collision check for player objects.
         col.CheckRayCollisionCharacters(camera.GetPos() + start, camera.GetPos() + end);
 
-        const CollisionPoint contact = sphere_col.GetContact(0);
-
-        if(contact.position != vec3(0,0,0) && distance(transform.origin, hit) > distance(transform.origin ,contact.position)){
-            throw_target_pos = contact.position;
-        }else{
+        if(sphere_col.NumContacts() != 0){
+            const CollisionPoint contact = sphere_col.GetContact(0);
+            if(contact.position != vec3(0,0,0) && distance(transform.origin, hit) > distance(transform.origin ,contact.position)){
+                throw_target_pos = contact.position;
+            }
+        } else{
             throw_target_pos = hit;
         }
 
-        aimingParticle = MakeParticle("Data/Particles/aim.xml", throw_target_pos, vec3(0));
+        aimingParticle = MakeParticle("Data/Particles/bow_and_arrow_aim.xml", throw_target_pos, vec3(0));
 
         fov = max(fov - ((time - start_throwing_time)), 40.0f);
 
@@ -179,14 +180,14 @@ class BowAndArrow {
                             //Use the position of the arrow to calculate the exposion direction.
                             vec3 start = arrowItem.GetPhysicsPosition();
                             //A nice explosion video with a couple of smoke particles.
-                            MakeParticle("Data/Particles/fire_expanding.xml",start,vec3(0.0f,10.0f,0.0f));
+                            MakeMetalSparks(start);
 
                             for(int j=0; j<3; j++){
                                 //This particle is just smoke.
-                                MakeParticle("Data/Particles/explosion_smoke.xml",start,
+                                MakeParticle("Data/Particles/bow_and_arrow_explosion_smoke.xml",start,
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(2.0f,5.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
                                 //While this one leave a nice decal on the ground or objects that are near.
-                                MakeParticle("Data/Particles/explosiondecal.xml",start,
+                                MakeParticle("Data/Particles/bow_and_arrow_explosiondecal.xml",start,
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
                             }
                             //A very loud explosion sound at the arrow position.
@@ -286,7 +287,7 @@ class BowAndArrow {
                             vec3 start = arrowItem.GetPhysicsPosition();
                             arrows[i].explosionPos = start;
                             for(int j =0; j < 20; j++){
-                                MakeParticle("Data/Particles/poison_smoke.xml", arrowItem.GetPhysicsPosition(),
+                                MakeParticle("Data/Particles/bow_and_arrow_poison_smoke.xml", arrowItem.GetPhysicsPosition(),
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*200.0f);
                             }
                         //Before 5 seconds a smoketrail add a green smoketrail.
@@ -346,7 +347,7 @@ class BowAndArrow {
                         //DebugDrawWireSphere(start, 7.0f, vec3(0), _fade);
                         //The particles will go into a random direction from the arrow position.
                         for(int k =0; k < 10; k++){
-                            MakeParticle("Data/Particles/lasting_smoke.xml", arrowItem.GetPhysicsPosition(),
+                            MakeParticle("Data/Particles/bow_and_arrow_lasting_smoke.xml", arrowItem.GetPhysicsPosition(),
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*200.0f);
                         }
                         //Every non player character will be startlet for 3 seconds and start looking around.
@@ -380,11 +381,11 @@ class BowAndArrow {
                         vec3 start = arrowItem.GetPhysicsPosition();
                         array<int> nearbyCharacters;
                         GetCharactersInSphere(start, 5.0f, nearbyCharacters);
-                        MakeParticle("Data/Particles/fire_expanding.xml",start,vec3(0.0f,10.0f,0.0f));
+                        MakeMetalSparks(start);
                         for(int j=0; j<3; j++){
-                            MakeParticle("Data/Particles/explosion_smoke.xml",start,
+                            MakeParticle("Data/Particles/bow_and_arrow_explosion_smoke.xml",start,
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(2.0f,5.0f),RangedRandomFloat(-2.0f,2.0f))*3.0f);
-                            MakeParticle("Data/Particles/explosiondecal.xml",start,
+                            MakeParticle("Data/Particles/bow_and_arrow_explosiondecal.xml",start,
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
                         }
                         PlaySound("Data/Sounds/explosion.wav", start);
@@ -442,7 +443,7 @@ class BowAndArrow {
                         //The flashbang sound is an explosion with a very annoying beep after it.
                         PlaySound("Data/Sounds/flashbang.wav", start);
                         //This particle is a very short and big light particle to emulate a big flash.
-                        MakeParticle("Data/Particles/flashbang.xml", start, vec3(0));
+                        MakeParticle("Data/Particles/bow_and_arrow_flashbang.xml", start, vec3(0));
 
                         array<int> nearbyCharacters;
                         GetCharactersInSphere(start, 5.0f, nearbyCharacters);
@@ -470,8 +471,6 @@ class BowAndArrow {
                                     "recovery_time = 5.0f;"+
                                     "DropWeapon();");
                                 }
-                                //This particle will be seen on the entire screen if a player chracter is in range.
-                                //MakeParticle("Data/Particles/flashbangonscreen.xml", start, vec3(0));
                             }
                         }
                     }
@@ -518,7 +517,15 @@ class BowAndArrow {
             }
         }
     }
-
+    void MakeMetalSparks(vec3 pos){
+        int num_sparks = 60;
+    		float speed = 20.0f;
+        for(int i=0; i<num_sparks; ++i){
+            MakeParticle("Data/Particles/bow_and_arrow_explosion_fire.xml",pos,vec3(RangedRandomFloat(-speed,speed),
+                                                             RangedRandomFloat(-speed,speed),
+                                                             RangedRandomFloat(-speed,speed)));
+        }
+    }
     void DrawSingleString(int weaponID){
         ItemObject@ primaryWeapon = ReadItemID(weaponID);
         mat4 bowTransform = primaryWeapon.GetPhysicsTransform();

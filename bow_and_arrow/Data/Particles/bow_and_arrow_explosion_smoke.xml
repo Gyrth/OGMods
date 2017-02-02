@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <particle>
-    <textures color_map = "Data/Textures/black_smoke.png" 
+    <textures color_map = "Data/Textures/smoke.tga"
               normal_map = "Data/Textures/smoke_normal.tga"
-              shader = "dirtpuff"
-              soft_shader = "dirtpuffsoft"/>
+              shader = "envobject #PARTICLE"
+              soft_shader = "envobject #PARTICLE"/>
     <size min = "3.0" max = "5.0"/>
     <color red =   "0.3"
            green = "0.3"

@@ -9,8 +9,23 @@
     <Version>0.2.0</Version>
     <!-- Your immortal stamp -->
     <Author>Gyrth McMulin</Author>
+    <!-- Thumbnail used in-game, no strict size is defined yet, should be 16:9 -->
+    <Thumbnail>Data/Images/bow_and_arrow_thumb.jpg</Thumbnail>
+    <!-- First preview image will be used as preview on steamworks, you can add additional ones -->
+    <PreviewImage>Data/Images/bow_and_arrow_full.jpg</PreviewImage>
+    <Description>A bow and arrow mod, with a bunch of different arrow type. Poison, poison cloud, flashbang, smoke, timed explosion, impact explosion and the standard arrow.</Description>
+    <!-- Tags sent to and mainly used by steam workshop -->
+    <Tag>a227</Tag>
+    <Tag>b1</Tag>
+    <Tag>weapon</Tag>
+    <Tag>scripting</Tag>
 
     <!-- Specification for which version of the game that is supported. It's possible to specify more than one -->
-    <SupportedVersion>a209</SupportedVersion>
-    <SupportedVersion>a210</SupportedVersion>
+    <SupportedVersion>a227</SupportedVersion>
+    <SupportedVersion>b1</SupportedVersion>
+    <!-- Indicate that mod is compatible with __ALL__ versions of overgrowth, use with care, especially with script mods -->
+    <SupportedVersion>*</SupportedVersion>
+
+    <!-- Indicate whether or not the game needs to restart for the mod to function properly, this will have to be determined via manual testing. -->
+    <NeedsRestart>false</NeedsRestart>
 </Mod>

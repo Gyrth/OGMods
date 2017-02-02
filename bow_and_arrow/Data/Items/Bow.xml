@@ -16,11 +16,11 @@
     <anim_blend idle = "Data/Animations/r_weaponidlestance.xml"/>
 
     <attack_override moving_close = "Data/Attacks/jab.xml"
-             stationary_close = "Data/Attacks/kneestrike.xml"
-             moving = "Data/Attacks/roundhouse.xml"
-             stationary = "Data/Attacks/frontkick.xml"
-             moving_low = "Data/Attacks/soccerkick.xml"
-             low = "Data/Attacks/sweep.xml"
+             stationary_close = "Data/Attacks/bow_and_arrow_kneestrike.xml"
+             moving = "Data/Attacks/bow_and_arrow_roundhouse.xml"
+             stationary = "Data/Attacks/bow_and_arrow_frontkick.xml"
+             moving_low = "Data/Attacks/bow_and_arrow_soccerkick.xml"
+             low = "Data/Attacks/bow_and_arrow_sweep.xml"
              air = "Data/Attacks/legcannon.xml" />
 
     <lines>

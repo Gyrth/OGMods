@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <particle>
-    <textures color_map = "Data/Textures/splatspritelight_c.tga" 
-              normal_map = "Data/Textures/splatspritelight_n.tga"
-              shader = "splat"
-              soft_shader = "splatsoft"/>
+    <textures color_map = "Data/Textures/smoke.tga"
+            normal_map = "Data/Textures/smoke_normal.tga"
+            shader = "envobject #PARTICLE"
+            soft_shader = "envobject #PARTICLE"/>
     <size min = "0.15" max = "0.25"/>
     <color red =   "0.0"
            green = "0.0"
