@@ -679,6 +679,10 @@ void ClearShadowObjects() {
 }
 
 void Dispose() {
+    if(on_fire_loop_handle != -1){
+        StopSound(on_fire_loop_handle);
+        on_fire_loop_handle = -1;
+    }
     ClearShadowObjects();
     if(fire_object_id != -1){
         QueueDeleteObjectID(fire_object_id);
@@ -962,7 +966,7 @@ void HitByItem(string material, vec3 point, int id, int type) {
     if(species != _dog || io.GetLabel() == "spear"){
         if(type == 2){
             if(IsAggro() == 0 || io.GetLabel() != "knife"){
-                TakeBloodDamage(force_len / 30.0f);
+                TakeBloodDamage(force_len);
             } else {
                 TakeBloodDamage(RangedRandomFloat(0.6,1.0));
                 ko_shield = max(0, ko_shield - 2);
@@ -1044,23 +1048,58 @@ void Contact(){
     last_collide_time = time;
 }
 
-void Collided(float impulse){
-    if(impulse < 5.0f){
-        return;
+float body_fall_delay_time = 0.0f;
+float body_fall_heavy_delay_time = 0.0f;
+float body_fall_medium_delay_time = 0.0f;
+float body_fall_light_delay_time = 0.0f;
+
+void Collided(float posx, float posy, float posz, float impulse, float hardness){
+    float impulse_hardness = impulse*hardness;
+    if(impulse_hardness > 5.0f){
+        const float _impact_damage_mult = 0.005f;
+        int old_knocked_out = knocked_out;
+        float damage = impulse*_impact_damage_mult;
+        PossibleHeadBleed(damage);
+        TakeDamage(damage);
+        if(old_knocked_out == _awake && knocked_out == _unconscious){
+            string sound = "Data/Sounds/hit/hit_medium_juicy.xml";
+            PlaySoundGroup(sound, this_mo.position);
+        }
+        if(old_knocked_out != _dead && knocked_out == _dead){
+            string sound = "Data/Sounds/hit/hit_hard.xml";
+            PlaySoundGroup(sound, this_mo.position);
+            SetRagdollType(_RGDL_LIMP);
+        }
     }
-    const float _impact_damage_mult = 0.005f;
-    int old_knocked_out = knocked_out;
-    float damage = impulse*_impact_damage_mult;
-    PossibleHeadBleed(damage);
-    TakeDamage(damage);
-    if(old_knocked_out == _awake && knocked_out == _unconscious){
-        string sound = "Data/Sounds/hit/hit_medium_juicy.xml";
-        PlaySoundGroup(sound, this_mo.position);
-    }
-    if(old_knocked_out != _dead && knocked_out == _dead){
-        string sound = "Data/Sounds/hit/hit_hard.xml";
-        PlaySoundGroup(sound, this_mo.position);
-        SetRagdollType(_RGDL_LIMP);
+
+    if(zone_killed == 0){
+        const float _body_fall_light_threshold = 1.0f;
+        const float _body_fall_medium_threshold = 2.0f;
+        const float _body_fall_heavy_threshold = 3.0f;
+        const float _body_fall_threshold = 4.0f;
+
+        vec3 pos(posx, posy, posz);
+
+        if(body_fall_delay_time <= the_time && impulse > _body_fall_threshold){
+            body_fall_delay_time = the_time + 0.6f;
+            this_mo.MaterialEvent("bodyfall", pos);
+        } else if(body_fall_heavy_delay_time <= the_time && impulse > _body_fall_heavy_threshold){
+            this_mo.MaterialEvent("bodyfall_heavy", pos, 0.8f);
+            body_fall_heavy_delay_time = the_time + 0.2f;
+            if(body_fall_delay_time <= the_time){
+                body_fall_delay_time = the_time + 0.6f;
+                this_mo.MaterialEvent("bodyfall", pos);
+            }
+        } else if(body_fall_medium_delay_time <= the_time && impulse > _body_fall_medium_threshold){
+            this_mo.MaterialEvent("bodyfall_medium", pos, 0.6f);
+            body_fall_medium_delay_time = the_time + 0.2f;
+        } else if(body_fall_light_delay_time <= the_time && impulse > _body_fall_light_threshold){
+            this_mo.MaterialEvent("bodyfall_light", pos, 0.4f);
+            body_fall_light_delay_time = the_time + 0.2f;
+        }
+        if(impulse > 1.0f){
+            this_mo.MaterialParticle("skid", pos, vec3(0.0f,1.0f,0.0f));
+        }
     }
 }
 
@@ -1924,6 +1963,9 @@ void Update(int num_frames) {
     time += ts.step();
 
     if(on_fire){
+        if(on_fire_loop_handle != -1){
+            SetSoundPosition(on_fire_loop_handle, this_mo.position);
+        }
         if(knocked_out == _awake){
             TakeBloodDamage(ts.step() * 0.5);
             if(knocked_out != _awake){
@@ -4856,7 +4898,23 @@ void SetKnockedOut(int val) {
     }
 }
 
+int on_fire_loop_handle = -1;
+
 void SetOnFire(bool val){
+    if(val && !on_fire){
+        if(zone_killed == 0){
+            PlaySound("Data/Sounds/fire/character_catch_fire_small.wav", this_mo.position);
+        } else {            
+            PlaySound("Data/Sounds/fire/character_fall_in_lava.wav", this_mo.position);
+        }
+        on_fire_loop_handle = PlaySoundLoopAtLocation("Data/Sounds/fire/character_on_fire_loop_small.wav",this_mo.position,1.0f);
+    } else if(!val && on_fire){
+        PlaySound("Data/Sounds/fire/character_fire_extinguish_small_shortened.wav", this_mo.position);        
+        if(on_fire_loop_handle != -1){
+            StopSound(on_fire_loop_handle);
+            on_fire_loop_handle = -1;
+        }
+    }
     on_fire = val;
     if(on_fire){
         fire_sleep = false;
