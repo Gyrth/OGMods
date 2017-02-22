@@ -390,6 +390,8 @@ bool _draw_stealth_debug = false;
 bool _debug_draw_vis_lines = false;
 bool _debug_draw_bones = false;
 
+float game_difficulty = 0.0; // 0.0 is easiest, 1.0 is original
+
 void UpdateMovementDebugSettings() {
     _draw_collision_spheres = GetConfigValueBool("debug_draw_collision_spheres");
     _draw_combat_debug = GetConfigValueBool("debug_draw_combat_debug");
@@ -798,7 +800,7 @@ void FireUpdate() {
             }
             fire_spark_delay += RangedRandomFloat(0.0f, 0.3f);
         }
-
+        
         smoke_delay -= time_step;
         if(smoke_delay <= 0.0f){
             for(int i=0; i<1; ++i){
@@ -858,7 +860,7 @@ void ParryItem(int id){
     }
     attack_getter2.Load(path);
     StartActiveBlockAnim(attack_getter2.GetReactionPath(), dir_char_to_item * -1.0f);
-
+    
     if(active_block_flinch_layer != -1){
         this_mo.rigged_object().anim_client().RemoveLayer(active_block_flinch_layer, 4.0f);
         active_block_flinch_layer = -1;
@@ -958,7 +960,7 @@ void HitByItem(string material, vec3 point, int id, int type) {
         if(species == _dog && type == 2){
             ko_shield = max(0, ko_shield-1);
         }
-        if(species == _wolf){// || (species == _dog && ko_shield>0)){
+        if(species == _wolf){// || (species == _dog && ko_shield>0)){  
             return;
         }
     }
@@ -968,8 +970,8 @@ void HitByItem(string material, vec3 point, int id, int type) {
             if(IsAggro() == 0 || io.GetLabel() != "knife"){
                 TakeBloodDamage(force_len);
             } else {
-                TakeBloodDamage(RangedRandomFloat(0.6,1.0));
-                ko_shield = max(0, ko_shield - 2);
+                TakeBloodDamage(RangedRandomFloat(0.6,1.0));           
+                ko_shield = max(0, ko_shield - 2); 
             }
         } else {
             TakeDamage(force_len / 30.0f);
@@ -1917,15 +1919,15 @@ void Update(int num_frames) {
                 case 4: quat.x = atof(token_iter.GetToken(str)); break;
                 case 5: quat.y = atof(token_iter.GetToken(str)); break;
                 case 6: quat.z = atof(token_iter.GetToken(str)); break;
-                case 7: quat.w = atof(token_iter.GetToken(str));
+                case 7: quat.w = atof(token_iter.GetToken(str)); 
                     {
                         mat4 translate_mat;
                         translate_mat.SetTranslationPart(pos);
                         mat4 rotation_mat;
                         rotation_mat = Mat4FromQuaternion(quat);
                         mat4 mat = translate_mat * rotation_mat;
-                        DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone,0)),
-                                      mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone,1)),
+                        DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone,0)), 
+                                      mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone,1)), 
                                       vec4(1.0f), vec4(1.0f), _delete_on_draw);
                         skeleton.SetBoneTransform(bone, mat);
                     }
@@ -2041,7 +2043,7 @@ void Update(int num_frames) {
         breath_time += ts.step() * breath_speed;
         breath_amount = (sin(breath_time)*0.5f+0.5f)* 1.0f*mix(0.5f,1.0f,breath_speed/5.0f);
     }
-
+    
     LeaveTelemetryZone();
 
     EnterTelemetryZone("C");
@@ -2052,7 +2054,7 @@ void Update(int num_frames) {
         this_mo.position = dialogue_position;
         {
             vec3 new_facing = Mult(quaternion(vec4(0,1,0,dialogue_rotation*3.1415f/180.0f)), vec3(1,0,0));
-            this_mo.SetRotationFromFacing(new_facing);
+            this_mo.SetRotationFromFacing(new_facing);            
         }
 
         on_ground = true;
@@ -2207,7 +2209,7 @@ void Update(int num_frames) {
 
     HandleSpecialKeyPresses();
     LeaveTelemetryZone();
-    EnterTelemetryZone("UpdateBrain");
+    EnterTelemetryZone("UpdateBrain"); 
     UpdateBrain(ts); //in playercontrol.as or enemycontrol.as
     LeaveTelemetryZone();
     UpdateState(ts);
@@ -2655,12 +2657,12 @@ void HandleSpecialKeyPresses() {
                     Object@ obj = ReadObjectFromID(flash_obj_id);
                     flash_obj_ids.push_back(flash_obj_id);
                     obj.SetTranslation(start);
-                    obj.SetTint(vec3(1.0));
+                    obj.SetTint(vec3(1.0));                    
                 }
                 /*
                 for(int i=0; i<20; ++i){
                     float offset = i + RangedRandomFloat(0.0f, 1.0f);
-                    MakeParticle("Data/Particles/metalflash.xml",camera.GetPos() + camera.GetFacing() * (0.3f + offset * 2.0f) - camera.GetUpVector()*0.1f,vec3(0.0));
+                    MakeParticle("Data/Particles/metalflash.xml",camera.GetPos() + camera.GetFacing() * (0.3f + offset * 2.0f) - camera.GetUpVector()*0.1f,vec3(0.0));   
                 }*/
                 vec3 end = camera.GetPos() + camera.GetFacing() * 1000.0f;
                 col.GetObjRayCollision(start, end);
@@ -2681,7 +2683,7 @@ void HandleSpecialKeyPresses() {
                     char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
                                  "vec3 pos = vec3("+hit_pos.x+", "+hit_pos.y+", "+hit_pos.z+");" +
                                  "HandleRagdollImpactImpulse(impulse, pos, 5.0f);");
-                } else if(hit_wall){
+                } else if(hit_wall){  
                     {
                         int flash_obj_id = CreateObject("Data/Objects/default_light.xml", true);
                         Object@ obj = ReadObjectFromID(flash_obj_id);
@@ -2694,12 +2696,12 @@ void HandleSpecialKeyPresses() {
                         Object@ obj = ReadObjectFromID(flash_obj_id);
                         obj.SetTranslation(pos);
                         obj.SetScale(vec3(0.3));
-                        obj.SetTint(vec3(0.0));
+                        obj.SetTint(vec3(0.0));        
                     }
                     for(int i=0; i<10; ++i){
-                        MakeParticle("Data/Particles/metalflash.xml",pos,normal * 10.0f + vec3(RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f)));
+                        MakeParticle("Data/Particles/metalflash.xml",pos,normal * 10.0f + vec3(RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f)));  
                         MakeParticle("Data/Particles/metalspark.xml",pos,normal * 10.0f + vec3(RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f)));
-                    }
+                    }   
                 }
             }
 
@@ -2910,7 +2912,7 @@ void UpdateState(const Timestep &in ts) {
             if(last_collide_time > time - 0.1f){
                 this_mo.rigged_object().skeleton().AddVelocity(GetTargetVelocity() * 5.0f * ts.step());
             } else {
-                this_mo.rigged_object().skeleton().AddVelocity(GetTargetVelocity() * _air_control * ts.step());
+                this_mo.rigged_object().skeleton().AddVelocity(GetTargetVelocity() * _air_control * ts.step());            
             }
         }
     }
@@ -3594,7 +3596,7 @@ void UpdateActiveBlockMechanics(const Timestep &in ts) {
         if(active_block_recharge <= 0.0f){
             active_block_time = time;
             active_blocking = true;
-            active_block_duration = 0.2f;
+            active_block_duration = HowLongDoesActiveBlockLast();
         }
         active_block_recharge = 0.2f;
     }
@@ -4527,9 +4529,9 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
                     Object@ obj = ReadObjectFromID(flash_obj_id);
                     flash_obj_ids.push_back(flash_obj_id);
                     obj.SetTranslation(pos);
-                    obj.SetTint(vec3(0.5));
+                    obj.SetTint(vec3(0.5));   
                 }
-                TakeSharpDamage(sharp_damage * attack_damage_mult * 0.5, pos, attacker_id, true);
+                TakeSharpDamage(sharp_damage * attack_damage_mult * 0.5, pos, attacker_id, true);                            
             } else if(metal_armor && !attacking_with_knife) {
                 PlaySoundGroup("Data/Sounds/weapon_foley/cut/flesh_hit.xml", pos, _sound_priority_high);
                 level.SendMessage("cut "+this_mo.getID()+" "+attacker_id);
@@ -4553,7 +4555,7 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
                         sharp_damage = min(0.5, sharp_damage);
                     }
                 }
-                TakeSharpDamage(sharp_damage * attack_damage_mult, pos, attacker_id, true);
+                TakeSharpDamage(sharp_damage * attack_damage_mult, pos, attacker_id, true);     
             }
         }
 		if(sharp_damage == 0.0f || knocked_out != _awake || block_health <= 0){
@@ -4679,10 +4681,10 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
                 if( max_ko_shield > 0 && (((ko_shield + 0.5) / float(max_ko_shield)) < blood_health)){
                     blood_health = (ko_shield + 0.5) / float(max_ko_shield);
                 }
-                TakeSharpDamage(0.1f, pos, attacker_id, false);
+                TakeSharpDamage(0.1f, pos, attacker_id, false);      
                 if(ko_shield > max_ko_shield * blood_health){
                     ko_shield = int(max_ko_shield * blood_health);
-                }
+                }          
             }
         }
         if(can_passive_block && metal_armor && weapon_slots[primary_weapon_slot] == -1){
@@ -5112,8 +5114,8 @@ void CharacterDefeated() {
         for(int i=0; i<num; ++i){
             MovementObject@ char = ReadCharacter(i);
             if(!char.controlled &&
-               char.GetIntVar("knocked_out") == _awake &&
-               !player_char.OnSameTeam(char) &&
+               char.GetIntVar("knocked_out") == _awake && 
+               !player_char.OnSameTeam(char) && 
                char.QueryIntFunction("int IsAggro()") == 1)
             {
                 ++num_threats;
@@ -5122,7 +5124,7 @@ void CharacterDefeated() {
         Print("Num_threats: "+num_threats+"\n");
         const float kDistanceThreshold = 10.0 * 10.0;
         if(zone_killed == 0){
-            if(this_mo.controlled || (IsAggro() == 1 && num_threats == 0 && distance_squared(this_mo.position, player_char.position) < kDistanceThreshold)){
+            if(this_mo.controlled || (IsAggro() == 1 && num_threats == 0 && distance_squared(this_mo.position, player_char.position) < kDistanceThreshold)){       
                 TimedSlowMotion(0.1f,0.7f, 0.05f);
             }
         }
@@ -5257,7 +5259,11 @@ void HandleEditorAttachment(int which, int attachment_type, bool mirror){
             weapon_slots[weap_slot] = which;
         } else if(old_goes_in_new) {
             Print("Item "+weapon_slots[weap_slot]+" could fit in item "+which+"\n");
-            weapon_slots[weap_slot+2] = weapon_slots[which];
+            if( which < int(weapon_slots.length()) ) {
+                weapon_slots[weap_slot+2] = weapon_slots[which];
+            } else {
+                Log(error, "Tried to reference weapon_slots out of array bounds");
+            }
         } else {
             Print("Neither item can fit in the other\n");
         }
@@ -5295,10 +5301,10 @@ void WeaponRemovedFromBody(int weapon_id) {
     injured_ragdoll_time += 6.0f;
     if(knocked_out != _dead){
         if((species == _wolf || species == _dog) && ko_shield > 1){
-            TakeBloodDamage(0.1);
+            TakeBloodDamage(0.1); 
             ko_shield = max(0, ko_shield - 1);
         } else {
-            TakeBloodDamage(100.0);
+            TakeBloodDamage(100.0); 
             ko_shield = 0;
         }
         if(knocked_out == _dead){
@@ -5306,7 +5312,7 @@ void WeaponRemovedFromBody(int weapon_id) {
             this_mo.PlaySoundGroupVoice("death",0.4f);
             AISound(this_mo.position, VERY_LOUD_SOUND_RADIUS, _sound_type_voice);
         }
-
+        
         if(this_mo.controlled){
             AchievementEvent("player_alive_weapon_removed_from_body");
         }else{
@@ -5902,7 +5908,7 @@ float GetAttackRange() {
     if(on_ground){
         return (_attack_range + range_extender)*range_multiplier*this_mo.rigged_object().GetCharScale() - _leg_sphere_size;
     } else {
-        return _attack_range * this_mo.rigged_object().GetCharScale() - _leg_sphere_size;
+        return _attack_range * this_mo.rigged_object().GetCharScale() - _leg_sphere_size;        
     }
 }
 
@@ -5928,7 +5934,7 @@ void UpdateGroundAttackControls(const Timestep &in ts) {
                 attack_id = GetAttackTarget(range, _TC_ENEMY | _TC_CONSCIOUS | _TC_NON_RAGDOLL);
             }
             if(attack_id == -1){
-                attack_id = GetAttackTarget(range, _TC_ENEMY | _TC_CONSCIOUS);
+                attack_id = GetAttackTarget(range, _TC_ENEMY | _TC_CONSCIOUS);                
             }
         }
 
@@ -6089,10 +6095,10 @@ void UpdateAirAttackControls() {
 void UpdateGroundControls(const Timestep &in ts) {
     if(tethered == _TETHERED_FREE){
         UpdateGroundAttackControls(ts);
-    } else if(tethered == _TETHERED_REARCHOKE &&
-              (WantsToThroatCut()) &&
-              !executing &&
-              (weapon_slots[primary_weapon_slot] != -1 && ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() != "staff"))
+    } else if(tethered == _TETHERED_REARCHOKE && 
+              (WantsToThroatCut()) && 
+              !executing && 
+              (weapon_slots[primary_weapon_slot] != -1 && ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() != "staff")) 
     {
     	// Cut victim's throat
         uint8 flags = _ANM_FROM_START;
@@ -6428,7 +6434,7 @@ void GetVisibleCharacters(uint16 flags, array<int> &visible_characters){
                 last_val = nearby_characters_peripheral[a];
             }
             ++a;
-        }
+        } 
     }
 
     //DebugDrawWireMesh("Data/Models/fov.obj", transform, vec4(1.0f), _delete_on_update);
@@ -8041,7 +8047,7 @@ int GetThrowTarget() {
         int known_id = situation.KnownID(targets[i]);
         if(known_id != -1 &&
            situation.known_chars[known_id].last_seen_time > time - 1.0 &&
-           !this_mo.OnSameTeam(mo) && mo.GetIntVar("state") != _ragdoll_state &&
+           !this_mo.OnSameTeam(mo) && mo.GetIntVar("state") != _ragdoll_state && 
            distance_squared(this_mo.position, mo.position) > min_throw_range_squared)
         {
             vec3 cam_dir = normalize(mo.position - camera.GetPos());
@@ -8165,7 +8171,7 @@ bool CanGrabWeaponFromBody(ItemObject@ item_obj){
                char.GetIntVar("species") == _dog ||
                char.GetIntVar("knocked_out") != _awake ||
                char.GetFloatVar("block_stunned") > 0.0f ||
-               char.GetIntVar("state") == _ragdoll_state)
+               char.GetIntVar("state") == _ragdoll_state) 
             {
                 can_take = true;
             }
@@ -8945,7 +8951,7 @@ void WaterIntersect(int id) {
     if(water_penetration > 0.0){
         size = 0.5 - water_penetration;
     } else {
-        size = 0.5 + water_penetration * 0.5;
+        size = 0.5 + water_penetration * 0.5;        
     }
     size *= 0.8;
     if(size > 0.0 && last_splash_time < the_time - 0.03){
@@ -10267,37 +10273,53 @@ void UpdateShadow() {
     LeaveTelemetryZone();
 }
 
+float HowLongDoesActiveBlockLast() {
+    if(this_mo.controlled){
+        return mix(0.4, 0.2, game_difficulty);
+    } else {
+        return 0.2;
+    }
+}
+
+float HowLongDoesActiveDodgeLast() {
+    if(this_mo.controlled){
+        return mix(0.4, 0.2, game_difficulty);
+    } else {
+        return 0.2;
+    }
+}
+
 void DrawHealthBar() {
     //vec3 facing = this_mo.GetFacing();
     vec3 facing = camera.GetFlatFacing();
     vec3 right = vec3(-facing.z, 0.0f, facing.x);
     float width = 0.5;
     float height = 0.05f;
-    DebugDrawLine(this_mo.position + vec3(0.0, 1.25, 0.0) - right * width,
+    DebugDrawLine(this_mo.position + vec3(0.0, 1.25, 0.0) - right * width, 
                   this_mo.position + vec3(0.0, 1.25, 0.0) + right * width,
                   vec4(0.0, 0.0, 0.0, 0.5), vec4(0.0, 0.0, 0.0, 0.5),
                   _delete_on_draw);
     if(permanent_health > 0.0){
-        DebugDrawLine(this_mo.position + vec3(0.0, 1.25, 0.0) - right * width,
+        DebugDrawLine(this_mo.position + vec3(0.0, 1.25, 0.0) - right * width, 
                       this_mo.position + vec3(0.0, 1.25, 0.0) + right * width * (permanent_health * 2.0 - 1.0),
                       vec3(1.0, 0.0, 0.0),
                       _delete_on_draw);
 
-        DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height, 0.0) - right * width,
+        DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height, 0.0) - right * width, 
                       this_mo.position + vec3(0.0, 1.25+height, 0.0) + right * width * (permanent_health * 2.0 - 1.0),
                       vec4(0.0, 0.0, 0.0, 0.5), vec4(0.0, 0.0, 0.0, 0.5),
                       _delete_on_draw);
         if(temp_health > 0.0){
-            DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height, 0.0) - right * width,
+            DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height, 0.0) - right * width, 
                           this_mo.position + vec3(0.0, 1.25+height, 0.0) + right * width * (temp_health * 2.0 - 1.0),
                           vec3(0.0, 0.0, 1.0),
                           _delete_on_draw);
-            DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) - right * width,
+            DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) - right * width, 
                           this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) + right * width * (temp_health * 2.0 - 1.0),
                           vec4(0.0, 0.0, 0.0, 0.5), vec4(0.0, 0.0, 0.0, 0.5),
                           _delete_on_draw);
             if(block_health > 0.0f){
-                DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) - right * width,
+                DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) - right * width, 
                               this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) + right * width * (block_health * 2.0 - 1.0),
                               vec3(0.0, 1.0, 0.0),
                               _delete_on_draw);
@@ -10315,7 +10337,7 @@ void DrawHealthBar() {
                         this_mo.position + vec3(0.0, 1.45, 0.0) + right * (i-max_ko_shield*0.5)*scale,
                             1.0f * scale,
                             vec4(vec3(brightness), 1.0f),
-                          _delete_on_draw);
+                          _delete_on_draw);        
         }
     }
 
@@ -10326,7 +10348,7 @@ void DrawHealthBar() {
     if(active_blocking){
         color = vec4(0.0, 0.5, 0.0, 1.0);
     }
-    if(active_dodge_time > time - 0.2f){
+    if(active_dodge_time > time - HowLongDoesActiveDodgeLast()){
         color = vec4(1.0, 1.0, 1.0, 1.0);
     }
     if(this_mo.controlled){
@@ -10353,7 +10375,7 @@ void DrawHealthBar() {
         vec3 dir = normalize(target_pos - this_mo.position);
         vec3 adjusted_impact_dir = GetAdjustedImpactDir(temp_attack_getter.GetImpactDir(), dir);
 
-        DebugDrawLine(this_mo.position,
+        DebugDrawLine(this_mo.position, 
                       this_mo.position + adjusted_impact_dir,
                       vec4(0.5, 0.0, 0.0, 1.0), vec4(0.5, 0.0, 0.0, 0.0),
                       _delete_on_draw);
@@ -10392,11 +10414,11 @@ void PreDrawCameraNoCull(float curr_game_time) {
         }
         if(curr_game_time < hit_flash_time + kHitFlashDuration){
             float opac = 0.4;
-            tint*= mix(1.0, 2.0 - (curr_game_time - hit_flash_time) / kHitFlashDuration, opac);
+            tint*= mix(1.0, 2.0 - (curr_game_time - hit_flash_time) / kHitFlashDuration, opac);   
         }
         if(curr_game_time < dark_hit_flash_time + kHitFlashDuration){
             float opac = 0.4;
-            tint *= mix(1.0, (curr_game_time - dark_hit_flash_time) / kHitFlashDuration, opac);
+            tint *= mix(1.0, (curr_game_time - dark_hit_flash_time) / kHitFlashDuration, opac); 
         }
         camera.SetVignetteTint(vignette_tint);
         camera.SetTint(tint);
@@ -11346,7 +11368,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
                 target_left_hand -= ledge_info.ledge_dir * (dot(target_left_hand, ledge_info.ledge_dir) - dot(this_mo.position, ledge_info.ledge_dir) - _leg_sphere_size);
                 target_left_hand[1] = ledge_info.ledge_height - 0.05;
                 //key_transforms[kLeftArmKey].origin[1] += ledge_info.ledge_height - left_hand[1] - 0.03;
-                vec3 new_offset = target_left_hand - left_hand;
+                vec3 new_offset = target_left_hand - left_hand;            
                 if(new_offset.y < offset.y){
                     offset = new_offset;
                 }
@@ -11623,49 +11645,49 @@ void FinalAnimationMatrixUpdate(int num_frames) {
             int obj_id = 3;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kLeftLegKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kLeftLegIK]]];
+            key_transforms[kLeftLegKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kLeftLegIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 4;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kRightLegKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kRightLegIK]]];
+            key_transforms[kRightLegKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kRightLegIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 5;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kLeftArmKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kLeftArmIK]]];
+            key_transforms[kLeftArmKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kLeftArmIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 7;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kRightArmKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kRightArmIK]]];
+            key_transforms[kRightArmKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kRightArmIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 14;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kHipKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kTorsoIK]+2]];
+            key_transforms[kHipKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kTorsoIK]+2]];            
         }
         {
             BoneTransform temp;
             int obj_id = 17;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kChestKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kTorsoIK]]];
+            key_transforms[kChestKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kTorsoIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 45;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kHeadKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kHeadIK]]];
+            key_transforms[kHeadKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kHeadIK]]];            
         }
         //key_transforms[kLeftLegKey+j] = rigged_object.GetFrameMatrix(bone) * skeleton_bind_transforms[bone];
             /*
