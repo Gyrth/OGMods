@@ -1,0 +1,71 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name></Name>
+<Description></Description>
+<Shader>post</Shader>
+<OutOfDate NavMesh="false" />
+<AmbientSounds />
+<Script>challengelevel.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Extra AO" type="string" val="0" />
+    <parameter name="HDR Black point" type="string" val="0.01" />
+    <parameter name="HDR Bloom multiplier" type="string" val="1" />
+    <parameter name="HDR White point" type="string" val="0.8" />
+    <parameter name="Level Boundaries" type="string" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Sky Rotation" type="string" val="0" />
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
+    <SunAngularRad>0.112145</SunAngularRad>
+    <SunColorAngle>6.8534</SunColorAngle>
+    <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
+</Sky>
+<ActorObjects>
+    <ActorObject t0="11.9313" t1="-4.21672" t2="-105.647" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="-23.2368" t1="-3.03192" t2="-92.9333" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data\Objects\de_dust2.xml">
+        <parameters />
+    </EnvObject>
+    <CameraObject t0="-40.9084" t1="32.9043" t2="-106.352" s0="1" s1="1" s2="1" q0="0.112242" q1="0.883962" q2="-0.274454" q3="0.361509" id="271">
+        <parameters />
+    </CameraObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="default Turner" path="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_TurnerActor.png" />
+</RecentItems>

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/de_dust2.obj</Model>
+	<ColorMap>Data/Textures/de_dust2_c.png</ColorMap>
+	<NormalMap>Data/Textures/de_dust2_n.png</NormalMap>
+	<flags double_sided = "true"/>
+	<ShaderPath>Data/GLSL/cubemap</ShaderPath>
+	<ShaderName>cubemap</ShaderName>
+</Object>
