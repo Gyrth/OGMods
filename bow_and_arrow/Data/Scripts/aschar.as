@@ -50,7 +50,7 @@ enum SoundType {
 }
 
 enum AIEvent{_ragdolled, _activeblocked, _thrown, _choking, _jumped, _can_climb,
-             _grabbed_ledge, _climbed_up, _damaged, _dodged};
+             _grabbed_ledge, _climbed_up, _damaged, _dodged, _defeated, _attacking};
 
 int head_choke_queue = -1;
 
@@ -110,6 +110,13 @@ vec3 dialogue_torso_target;
 float dialogue_torso_control;
 vec3 dialogue_head_target;
 float dialogue_head_control;
+
+enum EyeLookType {
+    _eye_look_target = 0,
+    _eye_look_front = 1
+}
+
+EyeLookType dialogue_eye_look_type;
 
 // Body bob offset so that characters don't sway in sync
 float body_bob_freq = 0.0f;
@@ -448,7 +455,6 @@ float target_rotation = 0.0f;
 float target_rotation2 = 0.0f;
 float cam_rotation = 0.0f;
 float cam_rotation2 = 0.0f;
-bool cam_rotation_set = false;
 float cam_distance = 1.0f;
 float auto_cam_override = 0.0f;
 
@@ -695,6 +701,12 @@ void Dispose() {
             QueueDeleteObjectID(flash_obj_ids[i]);
         }
         flash_obj_ids.removeAt(i);
+    }
+    for(int i=0, len = splash_ids.size(); i<len; ++i){
+        if(splash_ids[i] != -1){
+            QueueDeleteObjectID(splash_ids[i]);
+            splash_ids[i] = -1;
+        }
     }
 }
 
@@ -1061,6 +1073,9 @@ void Collided(float posx, float posy, float posz, float impulse, float hardness)
         const float _impact_damage_mult = 0.005f;
         int old_knocked_out = knocked_out;
         float damage = impulse*_impact_damage_mult;
+        if(this_mo.controlled){
+            damage *= mix(0.2f, 1.0f, game_difficulty);
+        }
         PossibleHeadBleed(damage);
         TakeDamage(damage);
         if(old_knocked_out == _awake && knocked_out == _unconscious){
@@ -1074,7 +1089,7 @@ void Collided(float posx, float posy, float posz, float impulse, float hardness)
         }
     }
 
-    if(zone_killed == 0){
+    if(zone_killed == 0 && water_depth < 0.2){
         const float _body_fall_light_threshold = 1.0f;
         const float _body_fall_medium_threshold = 2.0f;
         const float _body_fall_heavy_threshold = 3.0f;
@@ -1847,9 +1862,18 @@ float resting_mouth_pose_time = 0.0f;
 
 float old_time = 0.0f;
 
+void UpdatePaused() {
+    if(this_mo.controller_id == 0 || GetSplitscreen()){
+        Timestep ts(time_step, 1);
+        ApplyCameraControls(ts);
+    }
+}
+
 void Update(int num_frames) {
     bowAndArrow.HandleBow();
     UpdateMovementDebugSettings();
+    game_difficulty = GetConfigValueFloat("game_difficulty");
+
     EnterTelemetryZone("A");
     for(int i=0; i<int(flash_obj_ids.size());){
         if(ObjectExists(flash_obj_ids[i])){
@@ -2070,8 +2094,13 @@ void Update(int num_frames) {
         idle_stance_amount = 0.2f;
 
         torso_look = normalize(dialogue_torso_target-this_mo.rigged_object().GetAvgIKChainPos("torso"))*dialogue_torso_control;
-        head_look = normalize(dialogue_head_target-this_mo.rigged_object().GetAvgIKChainPos("head"))*dialogue_head_control;
-        eye_look_target = dialogue_eye_dir;
+        vec3 head_look_dir = normalize(dialogue_head_target-this_mo.rigged_object().GetAvgIKChainPos("head"));
+        head_look = head_look_dir*dialogue_head_control;
+        if(dialogue_eye_look_type == _eye_look_front){
+            eye_look_target = this_mo.rigged_object().GetAvgIKChainPos("head") + normalize(mix(this_mo.GetFacing(), head_look_dir, dialogue_head_control)) * 5.0;
+        } else {
+            eye_look_target = dialogue_eye_dir;
+        }
 
         UpdateBlink(ts);
         HandleFootStance(ts);
@@ -2082,6 +2111,11 @@ void Update(int num_frames) {
             }
         }
         LeaveTelemetryZone();
+
+        target_rotation = dialogue_rotation - 90;
+        target_rotation2 = 0;
+        cam_rotation = target_rotation;
+        cam_rotation2 = target_rotation2;
         return;
     }
     CheckForNANPosAndVel(3);
@@ -2505,7 +2539,7 @@ void HandleSpecialKeyPresses() {
     }
 
     if(this_mo.controlled){
-        if(GetInputDown(this_mo.controller_id, scream_key)){
+        if(GetInputPressed(this_mo.controller_id, scream_key)){
             string sound = "Data/Sounds/voice/torikamal/fallscream.xml";
             this_mo.ForceSoundGroupVoice(sound, 0.0f);
             AISound(this_mo.position, VERY_LOUD_SOUND_RADIUS, _sound_type_voice);
@@ -3050,7 +3084,7 @@ void HandleTethering(const Timestep &in ts) {
         int weap_id = GetCharPrimaryWeapon(char);
         if(weap_id == -1 || ReadItemID(weap_id).GetLabel() == "staff"){
             ko_shield = 0;
-            TakeDamage(ts.step() * 0.25f);
+            TakeDamage(ts.step() * mix(0.5f, 0.25f, game_difficulty));
             if(knocked_out != _awake){
                 this_mo.MaterialEvent("choke_fall", this_mo.position);
                 int other_char_id = tether_id;
@@ -3861,13 +3895,13 @@ void Ragdoll(int type){
     //Print("Ragdoll type " + type+"\n");
     UnTether();
     this_mo.rigged_object().SetRagdollDamping(0.0f);
-    HandleAIEvent(_ragdolled);
     const float _ragdoll_recovery_time = 1.0f;
     recovery_time = _ragdoll_recovery_time;
     roll_recovery_time = 0.2f;
     ragdoll_time = 0.0f;
 
     if(state != _ragdoll_state){
+        HandleAIEvent(_ragdolled);
         ledge_info.on_ledge = false;
         this_mo.Ragdoll();
         SetState(_ragdoll_state);
@@ -4478,6 +4512,12 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
 
     bool metal_armor = HasMetalArmor();
 
+    float defender_difficulty = 1.0;
+    if(this_mo.controlled){
+        defender_difficulty = game_difficulty;
+    }
+    float angle_tolerance = mix(1.1f, 0.0f, defender_difficulty);
+
     // Check if passive block is possible
     bool can_passive_block = true;
     bool can_animate_passive_block = true;
@@ -4487,8 +4527,8 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
     }
     if(species != _wolf || attacker_is_wolf == 1){
         if((startled && !this_mo.controlled && species != _dog) ||
-           (state == _attack_state && (!blockable_weapon_attack || (!has_blocking_weapon && !metal_armor)) && species != _dog) ||
-           (dot(dir, this_mo.GetFacing()) > 0.0f && species != _dog) ||
+           (state == _attack_state && (!blockable_weapon_attack || (!has_blocking_weapon && !metal_armor)) && species != _dog && RangedRandomFloat(0.0, 0.99) < defender_difficulty) ||
+           (dot(dir, this_mo.GetFacing()) > angle_tolerance && species != _dog) ||
            (sharp_damage > 0.0f && (!blockable_weapon_attack || (!has_blocking_weapon && !metal_armor))))
         {
            can_gameplay_passive_block = false;
@@ -4887,12 +4927,14 @@ void SetKnockedOut(int val) {
     knocked_out = val;
 
     if(val == _dead || blood_health <= 0.0f ){
+        HandleAIEvent(_defeated);
         level.SendMessage("character_died "+this_mo.getID());
         if(!this_mo.controlled){
             AchievementEvent("enemy_died");
         }
     }
     if(val == _unconscious ){
+        HandleAIEvent(_defeated);
         level.SendMessage("character_knocked_out "+this_mo.getID());
         if(!this_mo.controlled){
             AchievementEvent("enemy_ko");
@@ -4905,13 +4947,13 @@ int on_fire_loop_handle = -1;
 void SetOnFire(bool val){
     if(val && !on_fire){
         if(zone_killed == 0){
-            PlaySound("Data/Sounds/fire/character_catch_fire_small.wav", this_mo.position);
+            this_mo.PlaySoundAttached("Data/Sounds/fire/character_catch_fire_small.wav", this_mo.position);
         } else {            
-            PlaySound("Data/Sounds/fire/character_fall_in_lava.wav", this_mo.position);
+            this_mo.PlaySoundAttached("Data/Sounds/fire/character_fall_in_lava.wav", this_mo.position);
         }
         on_fire_loop_handle = PlaySoundLoopAtLocation("Data/Sounds/fire/character_on_fire_loop_small.wav",this_mo.position,1.0f);
     } else if(!val && on_fire){
-        PlaySound("Data/Sounds/fire/character_fire_extinguish_small_shortened.wav", this_mo.position);        
+        this_mo.PlaySoundAttached("Data/Sounds/fire/character_fire_extinguish_small_shortened.wav", this_mo.position);        
         if(on_fire_loop_handle != -1){
             StopSound(on_fire_loop_handle);
             on_fire_loop_handle = -1;
@@ -5007,21 +5049,26 @@ void ReceiveMessage(string msg){
         dialogue_anim = token;
     } else if(token == "set_eye_dir"){
         // Get params
-        vec3 pos;
         token_iter.FindNextToken(msg);
         token = token_iter.GetToken(msg);
-        pos.x = atof(token);
-        token_iter.FindNextToken(msg);
-        token = token_iter.GetToken(msg);
-        pos.y = atof(token);
-        token_iter.FindNextToken(msg);
-        token = token_iter.GetToken(msg);
-        pos.z = atof(token);
-        token_iter.FindNextToken(msg);
-        token = token_iter.GetToken(msg);
-        blink_mult = atof(token);
-
-        dialogue_eye_dir = pos;
+        if(token == "front"){
+            dialogue_eye_look_type = _eye_look_front;
+            blink_mult = 1.0f;
+        } else {
+            dialogue_eye_look_type = _eye_look_target;
+            vec3 pos;
+            pos.x = atof(token);
+            token_iter.FindNextToken(msg);
+            token = token_iter.GetToken(msg);
+            pos.y = atof(token);
+            token_iter.FindNextToken(msg);
+            token = token_iter.GetToken(msg);
+            pos.z = atof(token);
+            token_iter.FindNextToken(msg);
+            token = token_iter.GetToken(msg);
+            blink_mult = atof(token);
+            dialogue_eye_dir = pos;
+        }
     } else if(token == "set_rotation"){ // params: float rotation
         // Get params
         token_iter.FindNextToken(msg);
@@ -5513,6 +5560,26 @@ void AISound(vec3 pos, float max_range, SoundType type){
 }
 
 void HandleAnimationMaterialEvent(const string&in event, const vec3&in world_pos) {
+    if(water_depth > 0.0){
+        Print("event: "+event+"\n");
+        if(water_depth < 0.4){
+            if(event == "leftrunstep" || event == "rightrunstep"){
+                this_mo.PlaySoundGroupAttached("Data/Sounds/water_foley/mud_fs_run.xml", this_mo.position);
+                if(water_depth > 0.1){
+                    return;
+                }
+            }
+            if(event == "leftwalkstep" || event == "leftcrouchwalkstep" ||
+               event == "rightwalkstep" || event == "rightcrouchwalkstep"){
+                this_mo.PlaySoundGroupAttached("Data/Sounds/water_foley/mud_fs_walk.xml", this_mo.position);
+                if(water_depth > 0.1){
+                    return;
+                }
+            }
+        } else {
+            return;
+        }
+    }
     if(event == "leftstep" ||
        event == "leftwalkstep" ||
        event == "leftwallstep" ||
@@ -5641,6 +5708,7 @@ void HandleAnimationCombatEvent(const string&in event, const vec3&in world_pos) 
         float range_extend = range_extender + 0.1f + ledge_hit_extend;
         if(attack_getter.GetSpecial() == "legcannon" && target_mo.rigged_object().GetCharScale() > this_mo.rigged_object().GetCharScale()){
             range_extend = (target_mo.rigged_object().GetCharScale() - this_mo.rigged_object().GetCharScale()) * _attack_range * 2.0;
+            range_extend += mix(1.0, 0.0, game_difficulty);
         }
         if(event == "attackblocked" || distance(this_mo.position, target_pos) < (_attack_range + range_extend) * this_mo.rigged_object().GetCharScale()){
             vec3 facing = this_mo.GetFacing();
@@ -5666,6 +5734,8 @@ void HandleAnimationCombatEvent(const string&in event, const vec3&in world_pos) 
                 missed = false;
             }
             if(return_val != _miss && attack_getter.GetSpecial() == "legcannon"){
+                dir.y -= mix(1.0, 0.0, game_difficulty);
+                dir = normalize(dir);
                 this_mo.velocity += dir * -10.0f;
             }
             if(return_val == _block_impact){
@@ -5728,8 +5798,11 @@ vec3 WorldToGroundSpace(vec3 world_space_vec){
 // For the player, they return true when the appopriate control key is down.
 void UpdateGroundMovementControls(const Timestep &in ts) {
     vec3 target_velocity = GetTargetVelocity(); // GetTargetVelocity() is defined in enemycontrol.as and playercontrol.as. Player target velocity depends on the camera and controls, AI's on player's position.
-    if(length_squared(target_velocity)>0.0f){
+    if(length_squared(target_velocity)>0.0f && !sliding){
         feet_moving = true;
+    }
+    if(sliding){
+        target_velocity = vec3(0.0);
     }
 
     // target_duck_amount is used in UpdateDuckAmount()
@@ -5811,13 +5884,18 @@ void UpdateGroundMovementControls(const Timestep &in ts) {
         if(this_mo.controlled && dot(this_mo.velocity, flat_ground_normal)>-0.8f){
             target_velocity -= dot(target_velocity, flat_ground_normal) * flat_ground_normal;
             target_velocity += flat_ground_normal * flat_ground_length;
-            feet_moving = true;
+            if(!sliding){
+                feet_moving = true;
+            }
         }
         if(length(target_velocity)>1.0f){
             target_velocity = normalize(target_velocity);
         }
     }
 
+    if(sliding){
+        this_mo.position += flat_ground_normal * ts.step() * 2.0;
+    }
 
     vec3 adjusted_vel = WorldToGroundSpace(target_velocity);
 
@@ -6017,6 +6095,7 @@ void UpdateGroundAttackControls(const Timestep &in ts) {
         }else{
             AchievementEvent("ai_attacked");
         }
+        HandleAIEvent(_attacking);
         breath_speed += 2.0f;
         LoadAppropriateAttack(false, attack_getter);
         if(attacking_with_throw == 2){
@@ -6475,12 +6554,15 @@ void Land(vec3 vel, const Timestep &in ts) {
         float slide_amount = 1.0f - (dot(normalize(this_mo.velocity*-1.0f), normalize(ground_normal)));
         //Print("Slide amount: "+slide_amount+"\n");
         //Print("Slide vel: "+slide_amount*length(this_mo.velocity)+"\n");
-        if(character_getter.GetTag("species") == "cat"){
-            this_mo.MaterialEvent("land", this_mo.position - vec3(0.0f,_leg_sphere_size, 0.0f), 0.5f);
-            AISound(this_mo.position, QUIET_SOUND_RADIUS, _sound_type_foley);
-        } else {
-            this_mo.MaterialEvent("land", this_mo.position - vec3(0.0f,_leg_sphere_size, 0.0f), 1.0f);
-            AISound(this_mo.position, LOUD_SOUND_RADIUS, _sound_type_loud_foley);
+
+        if(water_depth < 0.25){
+            if(character_getter.GetTag("species") == "cat"){
+                this_mo.MaterialEvent("land", this_mo.position - vec3(0.0f,_leg_sphere_size, 0.0f), 0.5f);
+                AISound(this_mo.position, QUIET_SOUND_RADIUS, _sound_type_foley);
+            } else {
+                this_mo.MaterialEvent("land", this_mo.position - vec3(0.0f,_leg_sphere_size, 0.0f), 1.0f);
+                AISound(this_mo.position, LOUD_SOUND_RADIUS, _sound_type_loud_foley);
+            }
         }
         if(slide_amount > 0.0f){
             float slide_vel = slide_amount*length(this_mo.velocity);
@@ -6533,6 +6615,10 @@ vec3 HandleBumperCollision(){
     float size;
     GetCollisionSphere(offset, scale, size);
     col.GetSlidingScaledSphereCollision(this_mo.position+offset, size, scale);
+    /*for(int i=0, len=sphere_col.NumContacts(); i<len; ++i){
+        CollisionPoint contact = sphere_col.GetContact(i);
+        DebugDrawLine(contact.position, contact.position + contact.normal, vec4(1.0), vec4(1.0), _fade);
+    }*/
     if(_draw_collision_spheres){
         DebugDrawWireScaledSphere(this_mo.position+offset,size,scale,vec3(0.0f,1.0f,0.0f),_delete_on_update);
     }
@@ -6568,11 +6654,29 @@ vec3 HandlePiecewiseBumperCollision(vec3 old_pos){
     return new_pos - old_new_pos;
 }
 
+bool HitGround(){
+    bool ground_labeled = false;
+    for(int i=0, len=sphere_col.NumContacts(); i<len; ++i){
+        CollisionPoint contact = sphere_col.GetContact(i);
+        if(contact.custom_normal[1] == 0.0 || (contact.custom_normal[1] >= 1.0 && contact.custom_normal[1] < 4.0) ){
+            ground_labeled = true;
+        }
+    }
+    return ground_labeled;
+}
+
+bool balancing = false;
+vec3 balance_pos;
+
 bool HandleStandingCollision() {
     vec3 upper_pos = this_mo.position+vec3(0,0.1f,0);
     vec3 lower_pos = this_mo.position+vec3(0,-0.2f,0);
     if(species == _wolf){
         lower_pos = this_mo.position+vec3(0,-0.5f,0);
+    }
+    if(StuckToNavMesh()){
+        upper_pos = this_mo.position+vec3(0,1.0f,0);
+        lower_pos = this_mo.position+vec3(0,-1.5f,0);
     }
     col.GetSweptSphereCollision(upper_pos,
                                  lower_pos,
@@ -6581,6 +6685,22 @@ bool HandleStandingCollision() {
     if(_draw_collision_spheres){
         DebugDrawWireSphere(upper_pos,_leg_sphere_size,vec3(0.0f,0.0f,1.0f),_delete_on_update);
         DebugDrawWireSphere(lower_pos,_leg_sphere_size,vec3(0.0f,0.0f,1.0f),_delete_on_update);
+    }
+    float balance_num = 0.0;
+    balance_pos = vec3(0.0);
+    for(int i=0, len=sphere_col.NumContacts(); i<len; ++i){
+        CollisionPoint contact = sphere_col.GetContact(i);
+        if(contact.custom_normal[1] >= 2.0 && contact.custom_normal[1] < 3.0){
+            balance_pos += contact.position;
+            balance_num += 1.0;
+        }
+    }
+    balancing = false;
+    if(balance_num > 0.0){
+        balancing = true;
+        //DebugText("Balance", "Balance", 0.1);
+        balance_pos /= balance_num;
+        //DebugDrawWireSphere(balance_pos,0.1,vec3(0.0f,0.0f,1.0f),_delete_on_update);
     }
     return (sphere_col.position == lower_pos);
 }
@@ -6649,6 +6769,8 @@ PredictPathOutput PredictPath(vec3 start, vec3 end){
     return predict_path_output;
 }
 
+bool sliding;
+
 void HandleGroundCollisions(const Timestep &in ts) {
     // Check if character has room to stand up
     float old_duck_amount = duck_amount;
@@ -6680,23 +6802,32 @@ void HandleGroundCollisions(const Timestep &in ts) {
         duck_vel = 0.0f;
     }
 
-    vec3 bumper_collision_response = HandleBumperCollision();
-    if(normalize(bumper_collision_response).y < -0.8f){
-        for(int i=0; i<10; ++i){
-            col.GetSlidingSphereCollision(this_mo.position, _leg_sphere_size);
-            this_mo.position = sphere_col.adjusted_position;
-            this_mo.velocity += (sphere_col.adjusted_position - sphere_col.position) / ts.step();
-            this_mo.velocity += bumper_collision_response / ts.step();
-            bumper_collision_response = HandleBumperCollision();
+    if(StuckToNavMesh()){
+        if(this_mo.controlled){
+            vec3 nav_point = GetNavPointPos(this_mo.position);
+            nav_point[1] = this_mo.position[1];
+            //this_mo.velocity += (nav_point - this_mo.position) / ts.step();
+            if(distance(this_mo.position, nav_point) > 0.3){
+                this_mo.position = nav_point + normalize(this_mo.position-nav_point)*0.3;
+            }
+            //DebugDrawWireSphere(nav_point, 0.5, vec3(1.0), _delete_on_update);
         }
+    } else {
+        vec3 old_pos = this_mo.position;
+        vec3 bumper_collision_response = HandleBumperCollision();
+        if(normalize(bumper_collision_response).y < -0.8f){
+            for(int i=0; i<10; ++i){
+                col.GetSlidingSphereCollision(this_mo.position, _leg_sphere_size);
+                this_mo.position = sphere_col.adjusted_position;
+                this_mo.velocity += (sphere_col.adjusted_position - sphere_col.position) / ts.step();
+                this_mo.velocity += bumper_collision_response / ts.step();
+                bumper_collision_response = HandleBumperCollision();
+            }
+        }
+        this_mo.position.y = min(old_pos.y, this_mo.position.y);
+        bumper_collision_response.y = min(0.0, bumper_collision_response.y);
+        this_mo.velocity += bumper_collision_response / ts.step(); // Push away from wall, and apply velocity change verlet style
     }
-    /*if(!this_mo.controlled && length_squared(bumper_collision_response) > 0.0f){
-        if(ledge_info.CheckLedges(true)){
-            HandleAIEvent(_can_climb);
-        }
-    }*/
-    this_mo.velocity += bumper_collision_response / ts.step(); // Push away from wall, and apply velocity change verlet style
-
     //if(sphere_col.NumContacts() != 0 && flip_info.ShouldRagdollIntoWall()){
     //    GoLimp();
     //}
@@ -6730,21 +6861,36 @@ void HandleGroundCollisions(const Timestep &in ts) {
         //Print("id " + coll.id + "\n");
         //DebugDrawLine(this_mo.position, coll.position, vec3(0), _delete_on_update);
 
-
-
+        bool old_sliding = sliding;
+        sliding = false;
         for(int i=0; i<sphere_col.NumContacts(); i++){
             const CollisionPoint contact = sphere_col.GetContact(i);
             float dist = distance(contact.position, this_mo.position);
             if(dist <= _leg_sphere_size + 0.01f){
+                vec3 contact_normal = contact.normal;
+                if(contact.custom_normal.y > 1.0 && contact.custom_normal.y < 2.0){
+                    contact_normal = vec3(0,1,0);
+                }
+                if(contact.custom_normal.y >= 3.0 && contact.custom_normal.y < 4.0){
+                    if(!sliding && !old_sliding){
+                        this_mo.MaterialEvent("slide", this_mo.position - vec3(0.0f,_leg_sphere_size, 0.0f), 1.0);
+                    }
+                    sliding = true;
+                    feet_moving = false;
+                }
                 ground_normal = ground_normal * 0.9f +                      // Calculate ground_normal with moving average of contact point normals
-                    contact.normal * 0.1f;
+                    contact_normal * 0.1f;
                 ground_normal = normalize(ground_normal);
                 /*DebugDrawLine(sphere_col.position,
                 sphere_col.position-contact.normal,
                 vec3(1.0f,0.0f,0.0f),
                 _delete_on_update);*/
             }
-        }/*
+        }
+        if(this_mo.controlled){
+            DebugText("sliding", "Sliding: "+sliding, 0.1f);
+        }
+        /*
          DebugDrawLine(sphere_col.position,
          sphere_col.position-ground_normal,
          vec3(0.0f,1.0f,0.0f),
@@ -6781,39 +6927,73 @@ void HandleAirCollisions(const Timestep &in ts) {
         if(_draw_collision_spheres){
             DebugDrawWireScaledSphere(this_mo.position+col_offset, _leg_sphere_size, col_scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
         }
-        this_mo.position = sphere_col.adjusted_position-col_offset;         // Collide like a sliding sphere with verlet-integrated velocity response
-        vec3 adjustment = (this_mo.position - (sphere_col.position-col_offset));
+        vec3 adjusted_pos = sphere_col.adjusted_position-col_offset;         // Collide like a sliding sphere with verlet-integrated velocity response
+        vec3 adjustment = (adjusted_pos - (sphere_col.position-col_offset));
         adjustment.y = min(0.0f,adjustment.y);
-        this_mo.velocity += adjustment / (ts.step());
+        bool old_adjust = true;
+        for(int contact_index=0; contact_index<sphere_col.NumContacts(); ++contact_index){
+            const CollisionPoint contact = sphere_col.GetContact(contact_index);
+            if(contact.custom_normal.y >= 7.0){
+                old_adjust = false;
+                this_mo.velocity.y = min(0.0, this_mo.velocity.y);
+                jump_info.jetpack_fuel = 0.0;
+            } else if(contact.custom_normal.y >= 4.0){
+                vec3 temp_norm = contact.normal;
+                temp_norm[1] *= 0.1;
+                temp_norm = normalize(temp_norm);
+                this_mo.velocity = this_mo.velocity + temp_norm * max(0.0, -dot(this_mo.velocity, temp_norm));
+                old_adjust = false;
+            } else if(contact.custom_normal.y >= 1.0){
+                old_adjust = false;
+            }
+        }
+        if(old_adjust){
+            this_mo.velocity += adjustment / (ts.step());
+        }
         offset += (sphere_col.adjusted_position - sphere_col.position) * ts.frames();
         vec3 closest_point;
+        bool wallrunnable = false;
         float closest_dist = -1.0f;
         for(int j=0; j<sphere_col.NumContacts(); j++){
             const CollisionPoint contact = sphere_col.GetContact(j);
             if(contact.normal.y < _ground_normal_y_threshold){              // If collision with a surface that can't be walked on, check for wallrun
-                float dist = distance_squared(contact.position, this_mo.position);
+                float dist = distance_squared(contact.position, adjusted_pos);
                 if(closest_dist == -1.0f || dist < closest_dist){
                     closest_dist = dist;
                     closest_point = contact.position;
+                    if(contact.custom_normal.y == 0.0 || 
+                       (contact.custom_normal.y >= 4.0 && contact.custom_normal.y < 5.0) || 
+                       (contact.custom_normal.y >= 6.0 && contact.custom_normal.y < 7.0))
+                    {
+                        wallrunnable = true;
+                    } else {
+                        wallrunnable = false;
+                    }
                 }
             }
         }
-        if(closest_dist != -1.0f){
+        if(HitGround()){
+            for(int j=0; j<sphere_col.NumContacts(); j++){
+                if(landing){
+                    break;
+                }
+                const CollisionPoint contact = sphere_col.GetContact(j);
+                if(contact.normal.y > _ground_normal_y_threshold ||
+                   (this_mo.velocity.y < 0.0f && contact.normal.y > 0.2f) ||
+                    (contact.custom_normal.y >= 1.0 && contact.custom_normal.y < 4.0))
+                {                                                               // If collision with a surface that can be walked on, then land
+                    if(air_time > 0.1f){
+                        landing = true;
+                        landing_normal = contact.normal;
+                    }
+                }
+            }
+        }
+        if(!landing){
+            this_mo.position = adjusted_pos;
+        }
+        if(closest_dist != -1.0f && wallrunnable){
             jump_info.HitWall(normalize(closest_point-this_mo.position));
-        }
-        for(int j=0; j<sphere_col.NumContacts(); j++){
-            if(landing){
-                break;
-            }
-            const CollisionPoint contact = sphere_col.GetContact(j);
-            if(contact.normal.y > _ground_normal_y_threshold ||
-               (this_mo.velocity.y < 0.0f && contact.normal.y > 0.2f))
-            {                                                               // If collision with a surface that can be walked on, then land
-                if(air_time > 0.1f){
-                    landing = true;
-                    landing_normal = contact.normal;
-                }
-            }
         }
     }
     if(landing){
@@ -6855,6 +7035,9 @@ void HandleAirCollisions(const Timestep &in ts) {
 
 void HandleLedgeCollisions(const Timestep &in ts) {
     if(ledge_info.ghost_movement){
+        return;
+    }
+    if(ledge_info.on_ledge && ledge_obj != -1){
         return;
     }
     vec3 col_offset(0.0f,0.8f,0.0f);
@@ -7529,6 +7712,9 @@ void WakeUp(int how) {
     duck_amount = 1.0f;
     duck_vel = 0.0f;
     target_duck_amount = 1.0f;
+    if(this_mo.controlled){
+        block_health = max(block_health, mix(1.0, 0.0, game_difficulty));
+    }
     if(how == _wake_stand || how == _wake_block_stand){
         SetOnGround(true);
         flip_info.Land();
@@ -8625,17 +8811,6 @@ void ApplyCameraControls(const Timestep &in ts) {
     cam_distance = min(cam_distance, target_cam_distance);
     cam_distance = mix(target_cam_distance, cam_distance, 0.95f);
 
-    // If this is the first frame, set camera to match character facing
-    if(!cam_rotation_set && !shared_cam){
-        vec3 facing = this_mo.GetFacing();
-        float cur_rotation = atan2(-facing.x, -facing.z)/(3.1415f/180.0f);
-        cam_rotation = cur_rotation;
-        target_rotation = cam_rotation;
-        cam_rotation2 = -20.0f;
-        target_rotation2 = cam_rotation2;
-        cam_rotation_set = true;
-    }
-
     float camera_vibration_mult = 2.0f;
     float camera_vibration = camera_shake * camera_vibration_mult;
 
@@ -8666,7 +8841,7 @@ void ApplyCameraControls(const Timestep &in ts) {
         cam_pos = head;//camera.GetFacing() * 0.1f;
     }
 
-    if(water_id != -1){
+    if(water_id != -1 && water_depth > 0.01){
         if(ObjectExists(water_id)){
             mat4 transform = ReadObjectFromID(water_id).GetTransform();
             vec3 actual_cam_pos = cam_pos - camera.GetFacing() * cam_distance;
@@ -8904,6 +9079,15 @@ void Reset() {
     inSlowMo = false;
 }
 
+void SetCameraFromFacing() {
+    vec3 facing = this_mo.GetFacing();
+    float cur_rotation = atan2(-facing.x, -facing.z)/(3.1415f/180.0f);
+    cam_rotation = cur_rotation;
+    target_rotation = cam_rotation;
+    cam_rotation2 = -20.0f;
+    target_rotation2 = cam_rotation2;
+}
+
 void PostReset() {
     CacheSkeletonInfo();
     weapon_slots.resize(_num_weap_slots);
@@ -8917,11 +9101,52 @@ void PostReset() {
     SetOnGround(true);
     StartFootStance();
     CheckSpecies();
+    target_rotation = 0;
+    target_rotation2 = 0;
+    cam_rotation = target_rotation;
+    cam_rotation2 = target_rotation2;
+
+    if(this_mo.controlled){
+        SetCameraFromFacing();
+    }
+    splash_ids.resize(kMaxSplash);
+    for(int i=0; i<kMaxSplash; ++i){
+        splash_ids[i] = -1;
+    }
 }
 
 bool in_water = false;
 int water_id = -1;
 float last_splash_time = 0.0;
+
+const int kMaxSplash = 10;
+array<int> splash_ids;
+int splash_index = 0;
+float breath = 1.0;
+int breath_bars = 10;
+float water_depth = 0.0;
+float last_sound_time = 0.0;
+
+int AddSplash(vec3 pos, vec3 scale, quaternion rotation) {
+    int splash_id = CreateObject("Data/Objects/Decals/water_froth.xml", true);
+    Object @splash_obj = ReadObjectFromID(splash_id);
+    splash_obj.SetScale(scale);
+    splash_obj.SetTint(vec3(0,0,0));
+    splash_obj.SetTranslation(pos);
+    splash_obj.SetRotation(rotation);
+    //DebugDrawWireScaledSphere(splash_obj.GetTranslation(),1.0f,splash_obj.GetScale()*0.5, vec3(1.0f),_fade);
+    if(splash_ids[splash_index] != -1){
+        QueueDeleteObjectID(splash_ids[splash_index]);
+        splash_ids[splash_index] = -1;
+    }
+    splash_ids[splash_index] = splash_id;
+    ++splash_index;
+    if(splash_index >= kMaxSplash){
+        splash_index = 0;
+    }
+    last_splash_time = the_time;
+    return splash_id;
+}
 
 void WaterIntersect(int id) {
     water_id = id;
@@ -8929,8 +9154,19 @@ void WaterIntersect(int id) {
     vec3 pos = invert(transform) * this_mo.position;
     DebugText("inverse", "Inverse: "+pos, 0.5f);
     float water_penetration = (pos[1] - 2.0)*ReadObjectFromID(id).GetScale()[1];
+    pos[1] = 2.0;
     DebugText("water_penetration", "water_penetration: "+water_penetration, 0.5);
-    if(water_penetration < 0.0){
+    float old_water_depth = water_depth;
+    water_depth = _leg_sphere_size - water_penetration;
+    if((old_water_depth <= 0.2 != water_depth <= 0.2) && (!on_ground || state == _ragdoll_state)){
+        this_mo.PlaySoundGroupAttached("Data/Sounds/water_foley/bodyfall_water.xml", this_mo.position);
+        AISound(this_mo.position, LOUD_SOUND_RADIUS, _sound_type_loud_foley);
+        vec3 splash_pos = transform * pos;
+        //DebugDrawWireSphere(splash_pos, 1.0, vec3(1.0), _fade);
+        AddSplash(splash_pos, vec3(3,0.1,3), quaternion());
+    }
+    DebugText("water_depth", "water_depth: "+water_depth, 0.5);
+    /*if(water_penetration < -2.5){
         if(!in_water){
             this_mo.PlaySoundGroupAttached("Data/Sounds/water_foley/bodyfall_water.xml", this_mo.position);
             ReceiveMessage("extinguish");
@@ -8945,8 +9181,12 @@ void WaterIntersect(int id) {
         in_water = true;
     } else {
         in_water = false;
+    }*/
+    if(water_penetration < -0.8){
+        in_water = true;
+    } else {
+        in_water = false;
     }
-    pos[1] = 2.0;
     float size;
     if(water_penetration > 0.0){
         size = 0.5 - water_penetration;
@@ -8954,10 +9194,78 @@ void WaterIntersect(int id) {
         size = 0.5 + water_penetration * 0.5;        
     }
     size *= 0.8;
-    if(size > 0.0 && last_splash_time < the_time - 0.03){
-        DebugDrawWireScaledSphere(transform * pos, size, vec3(1,0,1), vec3(1.0), _fade);
-        //MakeParticle("Data/Particles/heavysnow.xml",transform * pos,vec3(0.0f));
-        last_splash_time = the_time;
+    vec3 flat_vel = vec3(this_mo.velocity.x, 0.0, this_mo.velocity.z);
+    float flat_speed = length(flat_vel);
+    if(flat_speed != 0.0){
+        flat_vel /= flat_speed;
+    }
+
+    if(water_penetration < 0.1){
+        float depth_slow = min(1.0, (water_penetration-0.1)*-1.0);
+        this_mo.velocity.x *= mix(1.0, 0.9, depth_slow);
+        this_mo.velocity.z *= mix(1.0, 0.9, depth_slow);
+        jump_info.jetpack_fuel = min(jump_info.jetpack_fuel, _jump_fuel * mix(1.0, 0.0, depth_slow));
+    } 
+
+    float head_water_penetration;
+    vec3 head_pos;
+    {
+        RiggedObject@ rigged_object = this_mo.rigged_object();
+        Skeleton@ skeleton = rigged_object.skeleton();
+        int head_bone = skeleton.IKBoneStart("head");
+        BoneTransform head_transform = BoneTransform(rigged_object.GetDisplayBoneMatrix(head_bone));
+        BoneTransform bind_matrix = invert(skeleton_bind_transforms[head_bone]);
+        head_pos = head_transform * skeleton.GetPointPos(skeleton.GetBonePoint(head_bone, 0));
+        vec3 head_pos_water_space = invert(transform) * head_pos;
+        head_water_penetration = (head_pos_water_space[1] - 2.0)*ReadObjectFromID(id).GetScale()[1];
+        if(head_water_penetration < 0.0){
+            DebugText("Underwater", "Head underwater!", 0.1f);
+            breath -= time_step;
+            if(breath < 0.0){
+                --breath_bars;
+                breath += 1.0;
+            }
+        } else {
+            breath = 1.0;
+            breath_bars = 10;
+        }
+        if(knocked_out != _dead && (breath_bars <= 0 || water_penetration < -3.0)){
+            DebugText("Drowned", "Drowned", 0.1f);
+            zone_killed=1;
+
+            ko_shield = 0;
+            TakeDamage(1.0f);
+            Ragdoll(_RGDL_FALL);
+            hit_flash_time = the_time;
+        }
+    }
+
+    if(length(this_mo.velocity) > 1.0 && head_water_penetration > -0.2 && water_depth > 0.25){
+        if(last_sound_time < the_time){ 
+            last_sound_time = the_time + 0.3 / (1.0 + flat_speed * 0.05);
+            string sound;
+            if(water_depth > 0.7){
+                sound = "Data/Sounds/water_foley/wading_through_water.xml";
+            } else {
+                sound = "Data/Sounds/water_foley/steps_water.xml";
+            }
+            this_mo.PlaySoundGroupAttached(sound,this_mo.position);     
+        }
+    }
+
+    float height = max(head_pos.y - this_mo.position.y, 0.0) + _leg_sphere_size + 0.3;
+        DebugText("height", "height: "+height, 0.1f);
+    if(water_penetration > -1.0){
+        if((flat_speed > 2.0 || abs(this_mo.velocity.y) > 1.0) && water_penetration > -(height - 0.6)){
+            MakeParticle("Data/Particles/watersplash.xml",transform * pos + vec3(RangedRandomFloat(-0.1,0.1),-0.2,RangedRandomFloat(-0.1,0.1)),vec3(0,min(3.0, flat_speed*0.3+abs(this_mo.velocity.y)*0.4),0), vec3(1.0));
+        }
+        if(size > 0.0 && last_splash_time < the_time - 0.2){
+            vec3 splash_pos = this_mo.position + vec3(0.0,height*0.5-_leg_sphere_size,0.0);
+            float vel_scale = min(6.0, max(1.0, length(this_mo.velocity)*0.3+abs(this_mo.velocity.y)*0.1) * 1.3);
+            vec3 scale = vec3(0.7 * max(vel_scale, (flat_speed*0.7 + 1.0)),height, 0.7 * vel_scale);
+            quaternion rotation = quaternion(vec4(0.0,1.0,0.0,atan2(-flat_vel.z, flat_vel.x)));
+            AddSplash(splash_pos, scale, rotation);
+        }
     }
 }
 
@@ -10189,6 +10497,18 @@ void DrawTail(int num_frames){
     LeaveTelemetryZone();
 }
 
+vec3 ClosestPointOnSegment(vec3 point, vec3 a, vec3 b){
+    vec3 dir = normalize(b-a);
+    float t = dot(point, dir);
+    if(t < dot(a, dir)){
+        return a;
+    } else if(t > dot(b, dir)){
+        return b;
+    } else {
+        return a + dir * (t - dot(a,dir));
+    }
+}
+
 void PreDrawFrame(float curr_game_time) {
     if(shadow_id != -1){
         Object @shadow_obj = ReadObjectFromID(shadow_id);
@@ -10399,6 +10719,7 @@ void PreDrawCameraNoCull(float curr_game_time) {
         vec3 vignette_tint = camera.GetVignetteTint();
         float target_red_tint = max(0.0, blood_health);
         float target_black_tint = (max(0.0, temp_health) + ko_shield) / (max_ko_shield+1.0);
+        target_black_tint = max(0.0, min(target_black_tint, breath_bars/10+breath));
         //red_tint = (sin(curr_game_time * 4.0) + sin(curr_game_time * 2.0)) * 0.125 + 0.5;
         const float kVignetteChangeSpeed = 0.5;
         red_tint = MoveTowards(red_tint, target_red_tint, (curr_game_time-last_game_time) * kVignetteChangeSpeed);
@@ -10720,6 +11041,9 @@ const bool kSwordStabTest = false;
 mat4 old_mat;
 mat4 sword_mat;
 mat4 sword_rel_mat;
+float hang_angle;
+float hang_amount;
+float hang_angle_vel;
 
 void FinalAttachedItemUpdate(int num_frames) {
     if(kSwordStabTest){
@@ -11175,7 +11499,10 @@ void FinalAnimationMatrixUpdate(int num_frames) {
         }
 
         // Avoid head flip-flopping when trying to look straight back
-        float head_range = 1.7f;
+        float head_range = 1.3f;
+        if(species != _rabbit){
+            head_range *= 0.7f;
+        }
         if(angle > angle_threshold && old_head_angle <= -head_range ){
             angle = -head_range;
         } else if(angle < -angle_threshold && old_head_angle >= head_range ){
@@ -11274,6 +11601,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
         ground_collision.push_back(false);
         ground_collision.push_back(false);
         offset.resize(2);
+        vec3 foot_balance_offset;
         for(int j=0; j<2; ++j){
             // Get initial foot information
             string ik_label = legs[j];
@@ -11290,13 +11618,9 @@ void FinalAnimationMatrixUpdate(int num_frames) {
                 vec3 pos = mat * foot_center;
                 vec3 check_pos = pos + foot[j].pos;
 
-                // Check where ground is under foot
-                col.GetSweptSphereCollision(check_pos + vec3(0.0f,0.2f,0.0f),
-                                            check_pos + vec3(0.0f,-0.6f,0.0f),
-                                            0.05f);
-                if(sphere_col.NumContacts() > 0){
+                if(balancing){
                     ground_collision[j] = true;
-                    float ground_height = sphere_col.position.y - 0.01;
+                    float ground_height = balance_pos[1] - 0.01;
                     if(old_foot_offset[j] != 0.0f){
                         old_foot_offset[j] = min(ground_height + 0.1f, max(ground_height - 0.1f, old_foot_offset[j]));
                         ground_height = mix(ground_height, old_foot_offset[j], pow(0.8, num_frames));
@@ -11304,12 +11628,51 @@ void FinalAnimationMatrixUpdate(int num_frames) {
                     old_foot_offset[j] = ground_height;
                     float ground_offset = ground_height - pos.y;
                     vec3 new_pos = pos + vec3(0,ground_offset,0);
+
+                    vec3 vec(1,0,0);
+                    quaternion quat(vec4(0,1,0,3.1417 * 0.25));
+                    for(int i=0; i<8; ++i){
+                        col.GetSweptSphereCollision(balance_pos + vec * 0.4f,
+                                                    balance_pos,
+                                                    0.05f);
+                        if(sphere_col.NumContacts() > 0){
+                            //DebugDrawWireSphere(sphere_col.position, 0.05f, vec3(1.0), _delete_on_draw);
+                            if(dot(sphere_col.position, vec)-0.05 < dot(new_pos, vec)){
+                                new_pos += vec * (dot(sphere_col.position, vec)-0.05 - dot(new_pos, vec));
+                            }
+                        }
+                        vec = quat * vec;
+                    }
+
                     new_pos.y += anim_pos.y- 0.05f;
                     new_pos.y += foot[j].height;
                     new_pos.x += foot[j].pos.x;
                     new_pos.z += foot[j].pos.z;
                     offset[j] = (new_pos - pos)*weight;
+                    foot_balance_offset += offset[j] * 0.5;
                     transform.origin += offset[j];
+                } else {
+                    // Check where ground is under foot
+                    col.GetSweptSphereCollision(check_pos + vec3(0.0f,0.2f,0.0f),
+                                                check_pos + vec3(0.0f,-0.6f,0.0f),
+                                                0.05f);
+                    if(sphere_col.NumContacts() > 0){
+                        ground_collision[j] = true;
+                        float ground_height = sphere_col.position.y - 0.01;
+                        if(old_foot_offset[j] != 0.0f){
+                            old_foot_offset[j] = min(ground_height + 0.1f, max(ground_height - 0.1f, old_foot_offset[j]));
+                            ground_height = mix(ground_height, old_foot_offset[j], pow(0.8, num_frames));
+                        }
+                        old_foot_offset[j] = ground_height;
+                        float ground_offset = ground_height - pos.y;
+                        vec3 new_pos = pos + vec3(0,ground_offset,0);
+                        new_pos.y += anim_pos.y- 0.05f;
+                        new_pos.y += foot[j].height;
+                        new_pos.x += foot[j].pos.x;
+                        new_pos.z += foot[j].pos.z;
+                        offset[j] = (new_pos - pos)*weight;
+                        transform.origin += offset[j];
+                    }
                 }
 
                 // Check ground normal
@@ -11328,7 +11691,9 @@ void FinalAnimationMatrixUpdate(int num_frames) {
                 rotation = mix(identity, rotation, weight*rotate_weight);
 
                 transform = transform * inv_skeleton_bind_transforms[bone];
-                transform.rotation = rotation * transform.rotation;
+                if(!balancing){
+                    transform.rotation = rotation * transform.rotation;
+                }
                 transform = transform * skeleton_bind_transforms[bone];
                 key_transforms[kLeftLegKey+j] = transform;
             }
@@ -11338,6 +11703,13 @@ void FinalAnimationMatrixUpdate(int num_frames) {
             if(ground_collision[i] && !ground_collision[other]){
                 key_transforms[kLeftLegKey+other].origin += offset[i];
             }
+        }
+        if(balancing){
+            key_transforms[kHipKey].origin += foot_balance_offset * 0.7;
+            key_transforms[kChestKey].origin += foot_balance_offset * 0.5;
+            key_transforms[kHeadKey].origin += foot_balance_offset * 0.4;
+            key_transforms[kLeftArmKey].origin += foot_balance_offset * 1.0;
+            key_transforms[kRightArmKey].origin += foot_balance_offset * 1.0;
         }
         LeaveTelemetryZone();
     } else {
@@ -11360,6 +11732,74 @@ void FinalAnimationMatrixUpdate(int num_frames) {
 
     const bool kTestNewLedge = false;
     if(ledge_info.on_ledge){
+        this_mo.rigged_object().anim_client().SetBlendCoord("leg_support",1.0f);
+        // Figure out tilt
+        bool tilt_back = false;
+        vec3 test_pos = this_mo.position;
+        test_pos.y = ledge_info.ledge_height - 0.7;
+        vec3 test_pos_start = test_pos - (ledge_info.ledge_dir + vec3(0,-1,0))*0.5;
+        col.GetSlidingSphereCollision(test_pos_start, _leg_sphere_size);
+        if(sphere_col.NumContacts() == 0){
+            col.GetSweptSphereCollision(test_pos_start, test_pos, _leg_sphere_size);
+            float dist = distance(sphere_col.position, test_pos);
+            if(dist > -1 && dist < 1){
+                float angle = asin(dist);
+                if(angle > 0.0){
+                    hang_angle = angle;
+                    hang_angle_vel = 0.0;
+                    tilt_back = true;
+                }
+            }
+        }
+        if(!tilt_back){
+            col.GetSlidingSphereCollision(test_pos_start, _leg_sphere_size);
+            test_pos = this_mo.position;
+            test_pos.y = ledge_info.ledge_height - 1.0;
+            test_pos_start = test_pos + ledge_info.ledge_dir;
+            col.GetSweptSphereCollision(test_pos, test_pos_start, _leg_sphere_size);
+            float dist = distance(sphere_col.position, test_pos);
+            DebugText("dist", "dist: "+dist, 0.5);
+            if(dist <= 0.6){
+                float angle = -asin(dist);
+                for(int i=0; i<num_frames; ++i){
+                    hang_angle = mix(hang_angle, angle, 0.01);
+                }        
+                hang_angle_vel = 0.0;
+                tilt_back = true;
+            } else {
+                hang_angle_vel -= hang_angle * time_step * num_frames * 30.0;
+                hang_angle += hang_angle_vel * time_step * num_frames;
+                hang_angle_vel *= pow(0.97, num_frames);
+                this_mo.rigged_object().anim_client().SetBlendCoord("hang_active",1.0 - (1.0 / (1.0 + length(this_mo.velocity))));
+            }
+        }
+        if(tilt_back){
+            for(int i=0; i<num_frames; ++i){
+                hang_amount = mix(hang_amount, 0.0, 0.05);
+            }        
+        } else {            
+            for(int i=0; i<num_frames; ++i){
+                hang_amount = mix(hang_amount, 1.0, 0.05);
+            }        
+        }
+        this_mo.rigged_object().anim_client().SetBlendCoord("leg_support",1.0-hang_amount);
+                
+        if(hang_angle != 0.0){
+            vec3 axis = normalize(cross(vec3(0,1,0),ledge_info.ledge_dir));
+            vec3 point = vec3(this_mo.position.x, ledge_info.ledge_height, this_mo.position.z)+ledge_info.ledge_dir * _leg_sphere_size;
+            quaternion rot(vec4(axis[0], axis[1], axis[2], hang_angle));
+            BoneTransform transform;
+            transform.rotation = rot;
+            transform.origin = point * -1.0;
+            //key_transforms[kLeftLegKey+j] = rigged_object.GetFrameMatrix(bone) * skeleton_bind_transforms[bone];
+            for(int i=0; i<kNumKeys; ++i){
+                key_transforms[i].origin -= point;
+                key_transforms[i].origin = rot * key_transforms[i].origin;
+                key_transforms[i].rotation = rot * key_transforms[i].rotation;
+                key_transforms[i].origin += point;
+            }
+        }
+        
         if(kTestNewLedge){
             vec3 offset = vec3(999, 999, 999);
             for(int i=0; i<2; ++i){
@@ -11406,9 +11846,11 @@ void FinalAnimationMatrixUpdate(int num_frames) {
                 key_transforms[kLeftLegKey+i].origin += foot[i];
                 key_transforms[kLeftArmKey+i].origin += hand[i];
             }
+            for(int i=0; i<2; ++i){
+                key_transforms[kLeftLegKey+i].origin += body * mix(0.0, 1.0, hang_amount);
+            }
         }
     }
-
     // Adjust hip to preserve leg length
     BoneTransform hip_offset;
     quaternion hip_rotate;

@@ -5,6 +5,7 @@
     <Id>bow-and-arrow</Id>
     <!-- The human readable name is presented in UI's -->
     <Name>Bow and Arrow Mod</Name>
+	<Category>Item Pack</Category>
     <!-- Version number, can have any formatting you wish. Can consists of numbers english alphabet, "." or "-" -->
     <Version>0.2.0</Version>
     <!-- Your immortal stamp -->
@@ -28,4 +29,42 @@
 
     <!-- Indicate whether or not the game needs to restart for the mod to function properly, this will have to be determined via manual testing. -->
     <NeedsRestart>false</NeedsRestart>
+	
+	<!-- Add an item, which will be listed and available in the editor for spawning -->
+	<Item category="Bow and Arrow"
+	      title="Bow"
+	      path="Data/Items/Bow.xml"
+	      thumbnail="Data/UI/spawner/Bow.png" />
+	<Item category="Bow and Arrow"
+		  title="Quiver"
+		  path="Data/Items/Quiver.xml"
+		  thumbnail="Data/UI/spawner/Quiver.png" />
+	<Item category="Bow and Arrow"
+	    title="Flashbang Arrow"
+	    path="Data/Items/FlashBangArrow_prefab.xml"
+	    thumbnail="Data/UI/spawner/Flashbang Arrow.png" />
+	<Item category="Bow and Arrow"
+		title="Impact Explosion Arrow"
+		path="Data/Items/ImpactExplosionArrow_prefab.xml"
+		thumbnail="Data/UI/spawner/Impact Explosion Arrow.png" />
+	<Item category="Bow and Arrow"
+		title="Poison Arrow"
+		path="Data/Items/PoisonArrow_prefab.xml"
+		thumbnail="Data/UI/spawner/Poison Arrow.png" />
+	<Item category="Bow and Arrow"
+		title="Poison Cloud Arrow"
+		path="Data/Items/PoisonCloudArrow_prefab.xml"
+		thumbnail="Data/UI/spawner/Poison Cloud Arrow.png" />
+	<Item category="Bow and Arrow"
+		title="Smoke Arrow"
+		path="Data/Items/SmokeArrow_prefab.xml"
+		thumbnail="Data/UI/spawner/Smoke Arrow.png" />
+	<Item category="Bow and Arrow"
+		title="Standard Arrow"
+		path="Data/Items/StandardArrow_prefab.xml"
+		thumbnail="Data/UI/spawner/Standard Arrow.png" />
+	<Item category="Bow and Arrow"
+		title="Timed Explosion Arrow"
+		path="Data/Items/TimedExplosionArrow_prefab.xml"
+		thumbnail="Data/UI/spawner/Timed Explosion Arrow.png" />
 </Mod>
