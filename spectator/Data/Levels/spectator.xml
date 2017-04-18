@@ -1,0 +1,454 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name></Name>
+<Description></Description>
+<Shader>post</Shader>
+<OutOfDate NavMesh="true" />
+<AmbientSounds />
+<Script></Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="HDR Black point" type="string" val="0.005" />
+    <parameter name="HDR Bloom multiplier" type="string" val="1" />
+    <parameter name="HDR White point" type="string" val="0.971" />
+    <parameter name="Level Boundaries" type="string" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Sky Brightness" type="string" val="1" />
+    <parameter name="Sky Rotation" type="string" val="-62" />
+    <parameter name="Sky Tint" type="string" val="255, 255, 255" />
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue4.tga</DomeTexture>
+    <SunAngularRad>0.153056</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
+</Sky>
+<ActorObjects>
+    <ActorObject t0="8.43738" t1="-1.98797" t2="7.30294" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="0" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <CameraObject t0="10.3653" t1="0.622012" t2="-5.35376" s0="1" s1="1" s2="1" q0="0.0707608" q1="-0.895715" q2="0.154221" q3="0.410979" id="1">
+        <parameters />
+    </CameraObject>
+    <EnvObject t0="3.42549" t1="-3.42134" t2="2.37398" s0="6.46988" s1="1" s2="6.38524" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <ActorObject t0="6.22476" t1="-1.98797" t2="7.32064" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="3" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="3.82534" t1="-1.98798" t2="7.33984" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="4" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="1.49334" t1="-1.98798" t2="7.31506" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="5" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-1.06052" t1="-1.98798" t2="7.18338" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="6" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="8.03652" t1="-1.98797" t2="5.26348" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="7" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="5.8239" t1="-1.98797" t2="5.28118" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="8" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="3.42448" t1="-1.98797" t2="5.30038" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="9" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="1.09248" t1="-1.98797" t2="5.2756" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="10" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-1.46139" t1="-1.98797" t2="5.14392" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="11" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="8.12352" t1="-1.98797" t2="2.98044" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="12" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="5.9109" t1="-1.98797" t2="2.99814" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="13" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="3.51148" t1="-1.98798" t2="3.01734" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="14" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="1.17948" t1="-1.98798" t2="2.99256" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="15" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-1.37439" t1="-1.98798" t2="2.86088" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="16" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="8.16412" t1="-1.98797" t2="0.994191" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="17" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="5.95151" t1="-1.98798" t2="1.01189" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="18" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="3.55208" t1="-1.98798" t2="1.03109" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="19" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="1.22008" t1="-1.98798" t2="1.00631" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="20" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-1.33378" t1="-1.98798" t2="0.874631" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="21" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="8.12537" t1="-1.98797" t2="-0.933817" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="22" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="5.91276" t1="-1.98798" t2="-0.916114" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="23" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="3.51334" t1="-1.98798" t2="-0.896916" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="24" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="1.18133" t1="-1.98798" t2="-0.921693" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="25" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-1.37253" t1="-1.98798" t2="-1.05338" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="26" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="8.09371" t1="-1.98797" t2="-2.78158" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="27" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="5.8811" t1="-1.98798" t2="-2.76387" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="28" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="3.48167" t1="-1.98798" t2="-2.74468" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="29" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="1.14967" t1="-1.98798" t2="-2.76945" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="30" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-1.40419" t1="-1.98798" t2="-2.90114" s0="1" s1="1" s2="1" q0="0" q1="-0.744054" q2="0" q3="0.66812" id="31" type_file="Data/Objects/IGF_Characters/IGF_SpectatorActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+</ActorObjects>
+<RecentItems />
