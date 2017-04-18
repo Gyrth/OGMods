@@ -1,5 +1,4 @@
-# OGMods
-A collection of mods for Overgrowth.  
-Choose a branch for each mod.  
+# Benchmark
+An attempt at making a benchmark mod with average fps, maximum fps and lowest fps.  
 
 [Preorder the game here.](http://www.wolfire.com/overgrowth)
