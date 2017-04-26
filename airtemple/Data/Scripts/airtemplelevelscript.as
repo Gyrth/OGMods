@@ -31,6 +31,15 @@ bool HasFocus(){
 }
 
 void ReceiveMessage(string msg) {
+  TokenIterator token_iter;
+  token_iter.Init();
+  if(!token_iter.FindNextToken(msg)){
+      return;
+  }
+  string token = token_iter.GetToken(msg);
+  if(token == "dispose_level"){
+      return;
+  }
   Object@ firstPlateObj = ReadObjectFromID(500);
   Object@ secondPlateObj = ReadObjectFromID(501);
   Object@ thirdPlateObj = ReadObjectFromID(502);
@@ -45,13 +54,6 @@ void ReceiveMessage(string msg) {
     posplatefour = fourthPlateObj.GetTranslation();
   }
   if (moving == false){
-    message = msg;
-    TokenIterator token_iter;
-    token_iter.Init();
-    if(!token_iter.FindNextToken(message)){
-      return;
-    }
-    string token = token_iter.GetToken(message);
     substr = token.substr(0, 7);
     objid = parseInt(token.substr(7,3));
     upordown = token.substr(10, 2);
