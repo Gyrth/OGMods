@@ -19,12 +19,8 @@
     <Tag>b3</Tag>
     <Tag>weapon</Tag>
     <Tag>scripting</Tag>
-
     <!-- Specification for which version of the game that is supported. It's possible to specify more than one -->
-    <SupportedVersion>a227</SupportedVersion>
-    <SupportedVersion>b1</SupportedVersion>
-    <!-- Indicate that mod is compatible with __ALL__ versions of overgrowth, use with care, especially with script mods -->
-    <SupportedVersion>*</SupportedVersion>
+    <SupportedVersion>b3</SupportedVersion>
 
     <!-- Indicate whether or not the game needs to restart for the mod to function properly, this will have to be determined via manual testing. -->
     <NeedsRestart>false</NeedsRestart>
