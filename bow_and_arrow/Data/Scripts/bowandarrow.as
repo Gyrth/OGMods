@@ -191,7 +191,7 @@ class BowAndArrow {
                                 vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
                             }
                             //A very loud explosion sound at the arrow position.
-                            PlaySound("Data/Sounds/explosion.wav", start);
+                            PlaySound("Data/Sounds/explosion_arrow.wav", start);
                             //Now it's time to apply the forces and damage to any near characters.
                             array<int> nearbyCharacters;
                             //This explosion has a radius of 5.0f;
@@ -388,7 +388,7 @@ class BowAndArrow {
                             MakeParticle("Data/Particles/bow_and_arrow_explosiondecal.xml",start,
                             vec3(RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f),RangedRandomFloat(-2.0f,2.0f))*30.0f);
                         }
-                        PlaySound("Data/Sounds/explosion.wav", start);
+                        PlaySound("Data/Sounds/explosion_arrow.wav", start);
                         for(uint32 j=0; j<nearbyCharacters.size(); ++j){
                             MovementObject@ char = ReadCharacterID(nearbyCharacters[j]);
                             if(char.GetID() == this_mo.GetID()){
@@ -441,7 +441,7 @@ class BowAndArrow {
                     if((curArrow.timeShot + lifeTime) < time){
                         vec3 start = arrowItem.GetPhysicsPosition();
                         //The flashbang sound is an explosion with a very annoying beep after it.
-                        PlaySound("Data/Sounds/flashbang.wav", start);
+                        PlaySound("Data/Sounds/flashbang_arrow.wav", start);
                         //This particle is a very short and big light particle to emulate a big flash.
                         MakeParticle("Data/Particles/bow_and_arrow_flashbang.xml", start, vec3(0));
 

@@ -5,7 +5,7 @@
     <Id>bow-and-arrow</Id>
     <!-- The human readable name is presented in UI's -->
     <Name>Bow and Arrow Mod</Name>
-	<Category>Item Pack</Category>
+    <Category>Item Pack</Category>
     <!-- Version number, can have any formatting you wish. Can consists of numbers english alphabet, "." or "-" -->
     <Version>0.2.0</Version>
     <!-- Your immortal stamp -->
@@ -16,33 +16,26 @@
     <PreviewImage>Data/Images/bow_and_arrow_full.jpg</PreviewImage>
     <Description>A bow and arrow mod, with a bunch of different arrow type. Poison, poison cloud, flashbang, smoke, timed explosion, impact explosion and the standard arrow.</Description>
     <!-- Tags sent to and mainly used by steam workshop -->
-    <Tag>a227</Tag>
-    <Tag>b1</Tag>
+    <Tag>b4</Tag>
     <Tag>weapon</Tag>
     <Tag>scripting</Tag>
-
     <!-- Specification for which version of the game that is supported. It's possible to specify more than one -->
-    <SupportedVersion>a227</SupportedVersion>
-    <SupportedVersion>b1</SupportedVersion>
-    <!-- Indicate that mod is compatible with __ALL__ versions of overgrowth, use with care, especially with script mods -->
-    <SupportedVersion>*</SupportedVersion>
-
+    <SupportedVersion>b4</SupportedVersion>
     <!-- Indicate whether or not the game needs to restart for the mod to function properly, this will have to be determined via manual testing. -->
     <NeedsRestart>false</NeedsRestart>
-	
 	<!-- Add an item, which will be listed and available in the editor for spawning -->
 	<Item category="Bow and Arrow"
-	      title="Bow"
-	      path="Data/Items/Bow.xml"
-	      thumbnail="Data/UI/spawner/Bow.png" />
+		title="Bow"
+		path="Data/Items/Bow.xml"
+		thumbnail="Data/UI/spawner/Bow.png" />
 	<Item category="Bow and Arrow"
-		  title="Quiver"
-		  path="Data/Items/Quiver.xml"
-		  thumbnail="Data/UI/spawner/Quiver.png" />
+		title="Quiver"
+		path="Data/Items/Quiver.xml"
+		thumbnail="Data/UI/spawner/Quiver.png" />
 	<Item category="Bow and Arrow"
-	    title="Flashbang Arrow"
-	    path="Data/Items/FlashBangArrow_prefab.xml"
-	    thumbnail="Data/UI/spawner/Flashbang Arrow.png" />
+		title="Flashbang Arrow"
+		path="Data/Items/FlashBangArrow_prefab.xml"
+		thumbnail="Data/UI/spawner/Flashbang Arrow.png" />
 	<Item category="Bow and Arrow"
 		title="Impact Explosion Arrow"
 		path="Data/Items/ImpactExplosionArrow_prefab.xml"
