@@ -60,8 +60,6 @@ void ReceiveMessage(string msg) {
     string token = token_iter.GetToken(msg);
     if(token == "reset"){
         Reset();
-    } else if(token == "dispose_level"){
-        gui.RemoveAll();
     } else if(token == "achievement_event"){
         token_iter.FindNextToken(msg);
     } else if(token == "achievement_event_float"){

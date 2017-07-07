@@ -4,12 +4,26 @@
     <!-- The id can consist of english alphabet or dash "-" -->
     <Id>infinite</Id>
     <!-- The human readable name is presented in UI's -->
-    <Name>Infinite Mod</Name>
+    <Name>Infinite Level</Name>
     <!-- Version number, can have any formatting you wish. Can consists of numbers english alphabet, "." or "-" -->
+    <Category>Level Pack</Category>
     <Version>0.1.0</Version>
     <!-- Your immortal stamp -->
     <Author>Gyrth McMulin</Author>
+    <!-- Thumbnail used in-game, no strict size is defined yet, should be 16:9 -->
+    <Thumbnail>Data/Images/infinite_thumb.jpg</Thumbnail>
+    <!-- First preview image will be used as preview on steamworks, you can add additional ones -->
+    <PreviewImage>Data/Images/infinite_full.jpg</PreviewImage>
+    <Description>A map completely made by a level script. You can walk in any direction endlessly. There are a few variables you can change in Data/Scripts/infinite.as to make different looking worlds.</Description>
+    <!-- Tags sent to and mainly used by steam workshop -->
+    <Tag>b4</Tag>
+    <Tag>level</Tag>
+    <Tag>scripting</Tag>
 
     <!-- Specification for which version of the game that is supported. It's possible to specify more than one -->
-    <SupportedVersion>a227</SupportedVersion>
+    <SupportedVersion>b4</SupportedVersion>
+
+    <!-- Indicate whether or not the game needs to restart for the mod to function properly, this will have to be determined via manual testing. -->
+    <NeedsRestart>false</NeedsRestart>
+    <Level title="Infinite" thumbnail="Images/infinite_full.jpg">infinite.xml</Level>
 </Mod>
