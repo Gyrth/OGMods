@@ -11,6 +11,13 @@
 	<attachments>
         <attachment>Data/Items/attachments/righthip.xml</attachment>
     </attachments>
+    <points>
+        <top x="0" y="-0.25" z="0"/>
+        <bottom x="0" y="0.25" z="0"/>
+    </points>
+    <lines>
+        <metal start="top" end="bottom"/>
+    </lines>
     <physics mass = "1.0 kg"/>
     <range extend = "0.0"/>
 </item>
