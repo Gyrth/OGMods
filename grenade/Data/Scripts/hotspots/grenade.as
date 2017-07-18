@@ -8,6 +8,8 @@ float grenade_time = 0.0f;
 float delay = 5.0f;
 bool grenade_thrown = false;
 int PublicProp;
+int char_id = -1;
+int id = -1;
 
 void Init() {
     vec3 spawn_point = vec3(hotspot_pos.x, hotspot_pos.y+0.2f, hotspot_pos.z);
@@ -19,6 +21,11 @@ void Init() {
 
 void SetParameters() {
 
+}
+
+void Reset(){
+  grenade_time = 0.0f;
+  grenade_thrown = false;
 }
 
 void Update() {
@@ -49,27 +56,26 @@ void Update() {
         }
     }
     else{
-        array<int> nearby_characters;
-        GetCharactersInSphere(io.GetPhysicsPosition(), 1.0f, nearby_characters);
-        int num_chars = nearby_characters.size();
-        for(int i=0; i<num_chars; ++i){
-          MovementObject@ mo = ReadCharacterID(nearby_characters[i]);
-            int id = mo.GetArrayIntVar("weapon_slots",mo.GetIntVar("primary_weapon_slot"));
-            if( (id == grenade_id && mo.QueryIntFunction("bool WantsToThrowItem()") == 1 && mo.QueryIntFunction("int GetThrowTarget()") != -1) || mo.QueryIntFunction("bool WantsToDropItem()") == 1){
-                PlaySound("Data/Sounds/pin_pull_mono.wav", mo.position);
-                grenade_time = time;
-                grenade_thrown = true;
-            }
+        if(char_id != -1){
+          MovementObject@ mo = ReadCharacterID(char_id);
+          if( id == grenade_id && mo.QueryIntFunction("bool WantsToDropItem()") == 1 ||
+              id == grenade_id && mo.QueryIntFunction("bool WantsToThrowItem()") == 1 && mo.QueryIntFunction("int GetThrowTarget()") != -1){
+            PlaySound("Data/Sounds/pin_pull_mono.wav", mo.position);
+            grenade_time = time;
+            grenade_thrown = true;
+          }
+          id = mo.GetArrayIntVar("weapon_slots",mo.GetIntVar("primary_weapon_slot"));
         }
+        char_id = io.HeldByWhom();
     }
 }
 
 void MakeMetalSparks(vec3 pos){
-    int num_sparks = 60;
+  int num_sparks = 60;
 	float speed = 20.0f;
     for(int i=0; i<num_sparks; ++i){
         MakeParticle("Data/Particles/explosion_fire.xml",pos,vec3(RangedRandomFloat(-speed,speed),
-                                                         RangedRandomFloat(-speed,speed),
-                                                         RangedRandomFloat(-speed,speed)));
+                                                                  RangedRandomFloat(-speed,speed),
+                                                                  RangedRandomFloat(-speed,speed)));
     }
 }
