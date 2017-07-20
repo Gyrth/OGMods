@@ -9,20 +9,29 @@ class Arrow {
 
 class BowAndArrow {
 
-    //Bow and arrow variables.
-    float previousTime;
-    int aimAnimationID = -1;
-    bool shortDrawAnim = false;
-    int bowUpDownAnim;
-    float start_throwing_time = 0.0f;
-    uint32 aimingParticle;
-    uint32 miscParticleID;
-    bool isAiming = false;
-    array<Arrow> arrows;
-    bool longDrawAnim = false;
+  //Bow and arrow variables.
+  float previousTime;
+  int aimAnimationID = -1;
+  bool shortDrawAnim = false;
+  int bowUpDownAnim;
+  float start_throwing_time = 0.0f;
+  uint32 aimingParticle;
+  uint32 miscParticleID;
+  bool isAiming = false;
+  array<Arrow> arrows;
+  bool longDrawAnim = false;
+  float orig_sensitivity = -1.0f;
+  float aim_sensitivity = 0.1f;
+  float zoom_mult = 5.0f;
+  bool init_done = Init();
 
-   void BowAiming(){
-        if(start_throwing_time == 0.0f){
+  bool Init(){
+    orig_sensitivity = GetConfigValueFloat("mouse_sensitivity");
+    return true;
+  }
+
+  void BowAiming(){
+        if(!isAiming){
             start_throwing_time = time;
         }
         BoneTransform transform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kHeadIK]]);
@@ -40,44 +49,39 @@ class BowAndArrow {
         vec3 hit = col.GetRayCollision(camera.GetPos() + start, camera.GetPos() + end);
         //Collision check for player objects.
         col.CheckRayCollisionCharacters(camera.GetPos() + start, camera.GetPos() + end);
+        SetConfigValueFloat("mouse_sensitivity", aim_sensitivity);
 
         if(sphere_col.NumContacts() != 0){
             const CollisionPoint contact = sphere_col.GetContact(0);
             if(contact.position != vec3(0,0,0) && distance(transform.origin, hit) > distance(transform.origin ,contact.position)){
                 throw_target_pos = contact.position;
+            }else{
+              return;
             }
         } else{
             throw_target_pos = hit;
         }
 
         aimingParticle = MakeParticle("Data/Particles/bow_and_arrow_aim.xml", throw_target_pos, vec3(0));
-
-        fov = max(fov - ((time - start_throwing_time)), 40.0f);
-
+        fov = max(fov - ((time - start_throwing_time) * zoom_mult), 40.0f);
         cam_pos_offset = vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5);
-
         int8 flags = _ANM_FROM_START;
 
         if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
             if(shortDrawAnim == false){
                 PlaySound("Data/Sounds/draw.wav", this_mo.position);
-
             }
 
             this_mo.SetAnimation("Data/Animations/r_draw_bow_stance.anm", 20.0f, flags);
-
             this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 5.0f);
-
             if(this_mo.GetFacing().y >0){
                 bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_up.anm",(60*this_mo.GetFacing().y/2),flags);
             }else{
                 bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_down.anm",-(60*this_mo.GetFacing().y/2),flags);
             }
-
             if(cameraFacing.y > -1.0f){
                 this_mo.SetRotationFromFacing(normalize(cameraFacing + vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5)));
             }
-
             mat4 bowTransform = secondaryWeapon.GetPhysicsTransform();
             Object@ bowObject = ReadObjectFromID(secondaryWeapon.GetID());
             bowObject.SetScale(vec3(2));
@@ -96,11 +100,7 @@ class BowAndArrow {
     void BowShoot(){
         if(weapon_slots[primary_weapon_slot] == -1){
             isAiming = false;
-            start_throwing_time = 0.0f;
-
         }else{
-
-            Print("The time while aiming was " + (time - start_throwing_time) + "\n");
             this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 1.0f);
             true_max_speed = _base_true_max_speed;
             if((time - start_throwing_time) < 0.5f && fov > 50){
@@ -116,18 +116,14 @@ class BowAndArrow {
             arrowShot.arrowID = weapon_slots[primary_weapon_slot];
             arrowShot.timeShot = time;
             arrowShot.type = arrowParams.GetString("Type");
-            Print("The type is " + arrowShot.type + "\n");
             arrows.insertLast(arrowShot);
-
-
             going_to_throw_item = true;
             going_to_throw_item_time = time;
-
             this_mo.SetRotationFromFacing(camera.GetFacing());
-
             isAiming = false;
             throw_anim = false;
         }
+        SetConfigValueFloat("mouse_sensitivity", orig_sensitivity);
     }
     void BowShootAnim(){
         int8 flags = 0;
@@ -244,10 +240,8 @@ class BowAndArrow {
                 }else if(curArrow.type == "poison"){
                     lifeTime = 10.0f;
                     ItemObject@ arrowItem = ReadItemID(curArrow.arrowID);
-
                     //If the arrow is stuck in someone it will apply damage.
                     if(curArrow.victimID == -1){
-
                         //Cannot write the victimID to the curArrow which is a copy. So write directly to the arrow on the correct index.
                         arrows[i].victimID = arrowItem.StuckInWhom();
                         //Once the victim is poisoned it will freak out and find who's shot him/her
@@ -301,7 +295,6 @@ class BowAndArrow {
                         if((time - curArrow.timeShot) > 5.0f && curArrow.triggered && (time - previousTime) > 1.0f){
                             array<int> nearbyCharacters;
                             GetCharactersInSphere(curArrow.explosionPos, 5.0f, nearbyCharacters);
-                            Print("apply damage "+ nearbyCharacters.size() + "\n");
                             for(uint32 j=0; j<nearbyCharacters.size(); ++j){
                                 MovementObject@ victim = ReadCharacterID(nearbyCharacters[j]);
 
@@ -363,8 +356,8 @@ class BowAndArrow {
                     }
 
                 }else if(curArrow.type == "standard"){
-                    //A standard arrow still has a 5 seconds lifetime because camera still needs to be zoomed in to see the impact.
-                    lifeTime = 5.0f;
+                    //A standard arrow still has a 2 seconds lifetime because camera still needs to be zoomed in to see the impact.
+                    lifeTime = 2.0f;
                     previousTime = time;
                 }else if(curArrow.type == "timedexplosion"){
                     //The timed explosion has a lifetime of 5 seconds.
@@ -392,7 +385,6 @@ class BowAndArrow {
                         for(uint32 j=0; j<nearbyCharacters.size(); ++j){
                             MovementObject@ char = ReadCharacterID(nearbyCharacters[j]);
                             if(char.GetID() == this_mo.GetID()){
-                                Print("Found player\n");
                                 vec3 force = normalize(char.position - start) * 40000.0f;
                                 force.y += 1000.0f;
                                 HandleRagdollImpactImpulse(force, this_mo.rigged_object().GetAvgIKChainPos("torso"), 5.0f);
@@ -443,7 +435,7 @@ class BowAndArrow {
                         //The flashbang sound is an explosion with a very annoying beep after it.
                         PlaySound("Data/Sounds/flashbang_arrow.wav", start);
                         //This particle is a very short and big light particle to emulate a big flash.
-                        MakeParticle("Data/Particles/bow_and_arrow_flashbang.xml", start, vec3(0));
+                        MakeMetalSparks(start);
 
                         array<int> nearbyCharacters;
                         GetCharactersInSphere(start, 5.0f, nearbyCharacters);
@@ -514,6 +506,12 @@ class BowAndArrow {
                 else{
                     DrawSingleString(weapon_slots[secondary_weapon_slot]);
                 }
+            }
+            if(weapon_slots[primary_weapon_slot] != -1){
+              if( ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "arrow" &&
+                  ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "bow"){
+                SwapWeaponHands();
+              }
             }
         }
     }
