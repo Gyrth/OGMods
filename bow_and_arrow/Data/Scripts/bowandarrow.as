@@ -500,7 +500,7 @@ class BowAndArrow {
                         }
                     }
                     DrawDoubleSting(weapon_slots[secondary_weapon_slot]);
-                }else if(isAiming && floor(length(this_mo.velocity)) < 2.0f && on_ground){
+                }else if(isAiming && floor(length(this_mo.velocity)) < 1.0f && on_ground && sheathe_layer_id == -1){
                     DrawDoubleSting(weapon_slots[secondary_weapon_slot]);
                 }
                 else{
