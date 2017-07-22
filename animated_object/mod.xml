@@ -1,0 +1,31 @@
+<? xml version="1.0" ?>
+<Mod>
+  <!-- The ID is necessary and should never change between versions of the same mod -->
+  <!-- The id can consist of english alphabet or dash "-" -->
+  <Id>animated-object</Id>
+  <!-- The human readable name is presented in UI's -->
+  <Name>Animated Object Mod</Name>
+  <Category>Item Pack</Category>
+  <!-- Version number, can have any formatting you wish. Can consists of numbers english alphabet, "." or "-" -->
+  <Version>0.1.0</Version>
+  <!-- Your immortal stamp -->
+  <Author>Gyrth McMulin</Author>
+  <!-- Thumbnail used in-game, no strict size is defined yet, should be 16:9 -->
+  <Thumbnail>Data/Images/animated_object_thumb.jpg</Thumbnail>
+  <!-- First preview image will be used as preview on steamworks, you can add additional ones -->
+  <PreviewImage>Data/Images/animated_object_full.jpg</PreviewImage>
+  <Description>Animated object.</Description>
+  <!-- Tags sent to and mainly used by steam workshop -->
+  <Tag>b4</Tag>
+  <Tag>weapon</Tag>
+  <Tag>scripting</Tag>
+  <!-- Specification for which version of the game that is supported. It's possible to specify more than one -->
+  <SupportedVersion>b4</SupportedVersion>
+  <!-- Indicate whether or not the game needs to restart for the mod to function properly, this will have to be determined via manual testing. -->
+  <NeedsRestart>false</NeedsRestart>
+	<!-- Add an item, which will be listed and available in the editor for spawning -->
+	<Item category="Interactive Objects"
+		title="Animated Object"
+		path="Data/Objects/animated_hotspot.xml"
+		thumbnail="Data/UI/spawner/animated_object.png" />\
+</Mod>

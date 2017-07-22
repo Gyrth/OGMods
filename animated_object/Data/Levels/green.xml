@@ -1,0 +1,242 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name></Name>
+<Description></Description>
+<Shader>post</Shader>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/red_hills/red_hills_hm.png</Heightmap>
+    <ShaderExtra></ShaderExtra>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/red_hills/red_hills_c.tga</ColorMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_normal.png" materialpath="Data/Materials/dirt.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_dirt_normal.tga" materialpath="Data/Materials/dirt.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
+<AmbientSounds />
+<Script>challengelevel.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Extra AO" type="string" val="0" />
+    <parameter name="HDR Black point" type="string" val="0.01" />
+    <parameter name="HDR Bloom multiplier" type="string" val="1" />
+    <parameter name="HDR White point" type="string" val="0.8" />
+    <parameter name="Level Boundaries" type="string" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Sky Rotation" type="string" val="0" />
+</LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
+    <SunAngularRad>0.112145</SunAngularRad>
+    <SunColorAngle>6.8534</SunColorAngle>
+    <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
+</Sky>
+<ActorObjects>
+    <CameraObject t0="70.2089" t1="27.2033" t2="-123.082" s0="1" s1="1" s2="1" q0="0.359167" q1="0.011503" q2="-0.00442728" q3="0.933192" id="1">
+        <parameters />
+    </CameraObject>
+    <ActorObject t0="47.7552" t1="5.2247" t2="-134.009" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" id="2" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="string" val="0.0" />
+            <parameter name="Lives" type="string" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <Hotspot t0="58.561" t1="4.48764" t2="-138.004" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="3" type_file="Data/Objects/animated_hotspot.xml">
+        <parameters>
+            <parameter name="Model Path" type="string" val="Data/Models/Buildings/Door1.obj" />
+            <parameter name="Number of Keys" type="int" val="4" />
+            <parameter name="Object Path" type="string" val="Data/Objects/Buildings/Door1.xml" />
+            <parameter name="Play mode" type="int" val="0" />
+            <parameter name="Speed" type="float" val="0.072899" />
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="52.9421" t1="9.82267" t2="-135.55" s0="1" s1="1" s2="1" q0="0.196677" q1="0.345334" q2="-0.0550365" q3="-0.915988" id="6" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="3" />
+            <parameter name="Index" type="int" val="2" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="53.479" t1="11.9923" t2="-140.565" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="8" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="3" />
+            <parameter name="Index" type="int" val="0" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="59.4273" t1="12.1278" t2="-141.405" s0="1" s1="1" s2="1" q0="0.940165" q1="0.216588" q2="-0.183586" q3="0.188351" id="9" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="3" />
+            <parameter name="Index" type="int" val="1" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="64.4693" t1="8.64725" t2="-134.907" s0="1" s1="1" s2="1" q0="0.50291" q1="-0.0481603" q2="0.0382171" q3="0.862149" id="10" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="3" />
+            <parameter name="Index" type="int" val="3" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="73.1943" t1="5.70177" t2="-164.336" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="11" type_file="Data/Objects/animated_hotspot.xml">
+        <parameters>
+            <parameter name="Model Path" type="string" val="Data/Models/Buildings/Door1.obj" />
+            <parameter name="Number of Keys" type="int" val="2" />
+            <parameter name="Object Path" type="string" val="Data/Objects/Buildings/Door1.xml" />
+            <parameter name="Play mode" type="int" val="1" />
+            <parameter name="Speed" type="float" val="0.046352" />
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="70.3399" t1="19.6538" t2="-166.068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="14" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="11" />
+            <parameter name="Index" type="int" val="0" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="73.2043" t1="5.71177" t2="-164.326" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="15" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="11" />
+            <parameter name="Index" type="int" val="1" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="81.3138" t1="3.49795" t2="-146.009" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" type_file="Data/Objects/animated_hotspot.xml">
+        <parameters>
+            <parameter name="Model Path" type="string" val="Data/Models/Buildings/Door1.obj" />
+            <parameter name="Number of Keys" type="int" val="6" />
+            <parameter name="Object Path" type="string" val="Data/Objects/Buildings/Door1.xml" />
+            <parameter name="Play mode" type="int" val="0" />
+            <parameter name="Speed" type="float" val="0.076218" />
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="95.1709" t1="5.70445" t2="-138.096" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="18" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="16" />
+            <parameter name="Index" type="int" val="5" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="79.0688" t1="10.5922" t2="-148.701" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="19" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="16" />
+            <parameter name="Index" type="int" val="4" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="90.2556" t1="8.75557" t2="-147.071" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="20" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="16" />
+            <parameter name="Index" type="int" val="3" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="80.1372" t1="4.71543" t2="-135.287" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="21" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="16" />
+            <parameter name="Index" type="int" val="2" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="100.443" t1="3.4208" t2="-144.291" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="22" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="16" />
+            <parameter name="Index" type="int" val="1" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="73.4829" t1="5.4913" t2="-147.023" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="23" type_file="" special_type="0">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="16" />
+            <parameter name="Index" type="int" val="0" />
+            <parameter name="Name" type="string" val="animation_key" />
+            <parameter name="Playsound" type="string" val="" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="Animated Object" path="Data/Objects/animated_hotspot.xml" thumbnail_path="Data/UI/spawner/animated_object.png" />
+</RecentItems>
