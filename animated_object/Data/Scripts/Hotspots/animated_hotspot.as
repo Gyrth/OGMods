@@ -87,6 +87,8 @@ void Reset(){
         DeleteObjectID(objectID);
         objectPath = params.GetString("Object Path");
         objectID = CreateObject(objectPath);
+        Object@ mainObject = ReadObjectFromID(objectID);
+        mainObject.SetTranslation(mainHotspot.GetTranslation() + unnoticableOffset);
     }
 }
 
@@ -192,14 +194,10 @@ void Update(){
           float curPathpointPos = distance(currentPathpoint.GetTranslation(), object.GetTranslation());
           float prevPathpointPos = distance(previousPathpoint.GetTranslation(), object.GetTranslation());
           float totalDistance = curPathpointPos + prevPathpointPos;
-          float prevCounts = (1.0f * prevPathpointPos)/totalDistance;
-          float curCounts = (1.0f * curPathpointPos)/totalDistance;
-          quaternion newRotation;
-          newRotation.x = (currentPathpoint.GetRotation().x * prevCounts) + (previousPathpoint.GetRotation().x * curCounts);
-          newRotation.y = (currentPathpoint.GetRotation().y * prevCounts) + (previousPathpoint.GetRotation().y * curCounts);
-          newRotation.z = (currentPathpoint.GetRotation().z * prevCounts) + (previousPathpoint.GetRotation().z * curCounts);
-          newRotation.w = (currentPathpoint.GetRotation().w * prevCounts) + (previousPathpoint.GetRotation().w * curCounts);
-          object.SetRotation(newRotation);
+          float alpha = (1.0f * curPathpointPos)/totalDistance;
+
+          quaternion relative = mix(currentPathpoint.GetRotation(), previousPathpoint.GetRotation(), alpha);
+          object.SetRotation(relative);
         }
       }
   }
@@ -399,7 +397,6 @@ void CreatePathpoint(){
 
 void CreateMainAnimationObject(){
   objectID = CreateObject(objectPath);
-  Print("Create main object " + objectID + "\n");
   Object@ mainObject = ReadObjectFromID(objectID);
   mainObject.SetTranslation(mainHotspot.GetTranslation() + unnoticableOffset);
 }
