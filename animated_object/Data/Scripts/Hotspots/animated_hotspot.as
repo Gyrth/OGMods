@@ -169,13 +169,7 @@ void Update(){
             }
             index = (numPathpoints-1);
           }
-          Object@ nextPathpoint = ReadObjectFromID(placeholderIDs[index]);
-          ScriptParams@ paramsNextPathpoint = nextPathpoint.GetScriptParams();
-          if(paramsNextPathpoint.HasParam("Playsound")){
-            if(paramsNextPathpoint.GetString("Playsound") != ""){
-              PlaySound(paramsNextPathpoint.GetString("Playsound"), nextPathpoint.GetTranslation());
-            }
-          }
+          PlayAvailableSound();
       }
       if(playing){
         if(previousPathpointID != -1){
@@ -208,6 +202,18 @@ void Update(){
       mainObject.SetTranslation(firstPathpoint.GetTranslation() + unnoticableOffset);
       mainObject.SetRotation(firstPathpoint.GetRotation());
       index = 0;
+    }
+  }
+}
+
+void PlayAvailableSound(){
+  if(previousPathpointID != -1){
+    Object@ pathpoint = ReadObjectFromID(previousPathpointID);
+    ScriptParams@ param = pathpoint.GetScriptParams();
+    if(param.HasParam("Playsound")){
+      if(param.GetString("Playsound") != ""){
+        PlaySound(param.GetString("Playsound"), pathpoint.GetTranslation());
+      }
     }
   }
 }
