@@ -2684,6 +2684,7 @@ string rabbot_key = "7";
 string misc_key = "b";
 
 void HandleSpecialKeyPresses() {
+    UpdateLaserEyes();
     if(!DebugKeysEnabled()){
         return;
     }
@@ -2743,11 +2744,6 @@ void HandleSpecialKeyPresses() {
             string sound = "Data/Sounds/voice/torikamal/fallscream.xml";
             this_mo.ForceSoundGroupVoice(sound, 0.0f);
             AISound(this_mo.position, VERY_LOUD_SOUND_RADIUS, _sound_type_voice);
-        }
-        if(GetInputDown(this_mo.controller_id, lightning_key)){
-          ActivateLaserEyes();
-        }else{
-          DeactivateLaserEyes();
         }
         if(GetInputPressed(this_mo.controller_id, combat_rabbit_key)){
             int rand_int = rand()%3;

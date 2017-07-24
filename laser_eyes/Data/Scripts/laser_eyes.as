@@ -9,17 +9,24 @@ float aim_sensitivity = 0.1f;
 float part_mult = 2.0f;
 int laser_loop_id = -1;
 
-bool init_done = false;
+bool init_done = LaserInit();
+
+void UpdateLaserEyes(){
+  if(this_mo.controlled){
+    if(GetInputDown(this_mo.controller_id, lightning_key) && length(this_mo.velocity) < 1.0f){
+      ActivateLaserEyes();
+    }else{
+      DeactivateLaserEyes();
+    }
+  }
+}
+
+bool LaserInit(){
+  orig_sensitivity = GetConfigValueFloat("mouse_sensitivity");
+  return true;
+}
 
 void ActivateLaserEyes(){
-  if(length(this_mo.velocity) > 1.0f){
-    DeactivateLaserEyes();
-    return;
-  }
-  if(!init_done){
-    orig_sensitivity = GetConfigValueFloat("mouse_sensitivity");
-    init_done = true;
-  }
   if(!laser_eyes_active){
     start_throwing_time = time;
     laser_loop_id = PlaySoundLoopAtLocation("Data/Sounds/laser_middle.wav", this_mo.position, 2.0f);
@@ -40,7 +47,7 @@ void ActivateLaserEyes(){
   vec3 facing = camera.GetFacing();
   vec3 start = facing * 3.0f;
   //Limited aim enabled.
-  vec3 end = vec3(facing.x, max(-0.9, min(0.5f, facing.y)), facing.z) * max_distance;
+  vec3 end = vec3(facing.x, max(-0.9, min(0.8f, facing.y)), facing.z) * max_distance;
   //Collision check for non player objects
   vec3 hit = col.GetRayCollision(camera.GetPos() + start, camera.GetPos() + end);
   //Collision check for player objects.
@@ -90,8 +97,8 @@ void ActivateLaserEyes(){
 void DeactivateLaserEyes(){
   if(laser_eyes_active){
     BoneTransform transform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kHeadIK]]);
-    StopSound(laser_loop_id);
     this_mo.PlaySoundAttached("Data/Sounds/laser_end.wav",this_mo.position);
+    StopSound(laser_loop_id);
   }
   laser_eyes_active = false;
   cam_pos_offset = vec3(0);
