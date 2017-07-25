@@ -7,7 +7,7 @@
 <AmbientSounds />
 <Script>infinite.as</Script>
 <LevelScriptParameters>
-    <parameter name="Achievements" type="string" val="Test, no_injuries, no_kills" />
+    <parameter name="Achievements" type="string" val="no_injuries, no_kills" />
     <parameter name="Fog amount" type="string" val="1" />
     <parameter name="HDR Black point" type="string" val="0" />
     <parameter name="HDR Bloom multiplier" type="string" val="0.275" />
@@ -17,6 +17,14 @@
     <parameter name="Sky Brightness" type="string" val="1.5" />
     <parameter name="Sky Rotation" type="string" val="0" />
     <parameter name="Sky Tint" type="string" val="255, 255, 255" />
+    <parameter name="World size" type="string" val="15" />
+    <parameter name="Building block" type="string" val="Data/Objects/primitives/edged_cube.xml" />
+    <parameter name="Block scale" type="string" val="3.0" />
+    <parameter name="Local block scale" type="string" val="1.0" />
+    <parameter name="Minimum color" type="string" val="0.25" />
+    <parameter name="Maximum color" type="string" val="5.0" />
+    <parameter name="Maximum extra" type="string" val="0.25" />
+    <parameter name="Change colours" type="string" val="0" />
 </LevelScriptParameters>
 <Sky>
     <DomeTexture>Data/Textures/skies/bright_dusk.tga</DomeTexture>

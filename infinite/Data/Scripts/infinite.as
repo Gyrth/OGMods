@@ -3,14 +3,14 @@
 #include "music_load.as"
 
 //Parameters for user to change
-int world_size = 15;
-string building_block = "Data/Objects/primitives/edged_cube.xml";
-float block_scale = 3.0;
-float local_block_scale = 1.0f;
-float min_color = 0.0f;
-float max_color = 5.0f;
-float max_extra = 0.25f;
-bool change_colours = false;
+int world_size;
+string building_block;
+float block_scale;
+float local_block_scale;
+float min_color;
+float max_color;
+float max_extra;
+bool change_colours;
 
 //Variables not to be changed
 string level_name;
@@ -25,23 +25,19 @@ float timer = 0.0f;
 MusicLoad ml("Data/Music/challengelevel.xml");
 
 void Init(string p_level_name) {
-    level_name = p_level_name;
-    SavedLevel @saved_level = save_file.GetSavedLevel(level_name);
-    if(saved_level.GetValue("Already Written") != "true"){
-        Print("Did not find parameter!");
-        saved_level.SetValue("Block Scale", ""+block_scale);
-        saved_level.SetValue("Local Block Scale", ""+local_block_scale);
-        saved_level.SetValue("Min Color", ""+min_color);
-        saved_level.SetValue("Max Color", ""+max_color);
-        saved_level.SetValue("Max Extra", ""+max_extra);
-        saved_level.SetValue("Already Written", "true");
-        save_file.WriteInPlace();
-    }else{
-        Print("Found parameter!\n");
-    }
-    //saved_level.SetValue("Block Scale", ""+block_scale);
+  level_name = p_level_name;
+}
 
-    Print("Block Scale: " + (saved_level.GetValue("Block Scale")) + "\n");
+void ReadScriptParameters(){
+  ScriptParams@ level_params = level.GetScriptParams();
+  world_size = level_params.GetInt("World size");
+  building_block = level_params.GetString("Building block");
+  block_scale = level_params.GetFloat("Block scale");
+  local_block_scale = level_params.GetFloat("Local block scale");
+  min_color = level_params.GetFloat("Minimum color");
+  max_color = level_params.GetFloat("Maximum color");
+  max_extra = level_params.GetFloat("Maximum extra");
+  change_colours = (level_params.GetInt("Change colours") == 1);
 }
 
 bool HasFocus(){
@@ -49,6 +45,26 @@ bool HasFocus(){
 }
 
 void Reset(){
+  for(int i = 0; i < int(world.size()); i++){
+    for(int j = 0; j < int(world[i].size()); j++){
+      for(int z = 0; z < int(world[i][j].size()); z++){
+        DeleteObjectID(world[i][j][z]);
+      }
+    }
+  }
+  world.resize(0);
+  ReadScriptParameters();
+  if(main_block_id != -1){
+    DeleteObjectID(main_block_id);
+  }
+  main_block_id = CreateObject(building_block, true);
+  Object@ block = ReadObjectFromID(main_block_id);
+  block.SetScale(vec3(0));
+  main_color = RandomColor();
+  Object@ player_obj = ReadObjectFromID(player_id);
+  height = floor(player_obj.GetTranslation().y);
+  width_length = vec2(floor(player_obj.GetTranslation().x / (2.0f * block_scale)), floor(player_obj.GetTranslation().z / (2.0f * block_scale)));
+  CreateFloor();
 }
 
 void ReceiveMessage(string msg) {
@@ -60,13 +76,6 @@ void ReceiveMessage(string msg) {
     string token = token_iter.GetToken(msg);
     if(token == "reset"){
         Reset();
-    } else if(token == "achievement_event"){
-        token_iter.FindNextToken(msg);
-    } else if(token == "achievement_event_float"){
-        token_iter.FindNextToken(msg);
-        string str = token_iter.GetToken(msg);
-        token_iter.FindNextToken(msg);
-        float val = atof(token_iter.GetToken(msg));
     }
 }
 
@@ -80,7 +89,6 @@ vec3 RandomAdjacentColor(vec3 color){
     float new_y = RangedRandomFloat(-max_extra, max_extra) + color.y;
     float new_z = RangedRandomFloat(-max_extra, max_extra) + color.z;
     vec3 new_color = vec3(max(min_color, (min(max_color, new_x))), max(min_color, (min(max_color, new_y))), max(min_color, (min(max_color, new_z))));
-
     return new_color;
 }
 
@@ -98,32 +106,17 @@ void Update() {
               break;
             }
         }
-        main_color = RandomColor();
-        Print("main color " + main_color.x + " " + main_color.y + " " + main_color.z + "\n");
-        MovementObject@ player = ReadCharacterID(player_id);
-        height = floor(player.position.y);
-        //width_length = vec2(floor(player.position.x), floor(player.position.z));
-        width_length = vec2(floor(player.position.x / (2.0f * block_scale)), floor(player.position.z / (2.0f * block_scale)));
-        main_block_id = CreateObject(building_block, true);
-        Object@ block = ReadObjectFromID(main_block_id);
-        block.SetScale(vec3(0));
-        CreateFloor();
-        width_length = vec2(floor(player.position.x / (2.0f * block_scale)), floor(player.position.z / (2.0f * block_scale)));
-        PrintBlockWorld();
+        Reset();
     }else{
         MovementObject@ player = ReadCharacterID(player_id);
         vec2 new_width_length = vec2(floor(player.position.x / (2.0f * block_scale)), floor(player.position.z / (2.0f * block_scale)));
         vec2 moved = vec2(0.0f);
         if(width_length != new_width_length){
             if(width_length.y > new_width_length.y){
-                //Print("Moved up\n");
-
                 DeleteRow(world[world.size() - 1]);
                 world.removeLast();
-
                 array<array<int>> new_row;
                 for(uint i = 0; i < world[0].size(); i++){
-                    //new_row[i].insertLast(CreateBlock(world[0][i][0], vec3(0.0f, 0.0f, -1.0f)));
                     new_row.insertLast(array<int> = {CreateBlock(world[0][i][0], vec3(0.0f, 0.0f, -1.0f))});
                     AddRandomHeightBlocks(new_row[i]);
                 }
@@ -131,11 +124,8 @@ void Update() {
                 moved += vec2(0.0f, -1.0f);
             }
             if(width_length.y < new_width_length.y){
-                //Print("Moved down\n");
-
                 DeleteRow(world[0]);
                 world.removeAt(0);
-
                 array<array<int>> new_row;
                 for(uint i = 0; i < world[world.size() - 1].size(); i++){
                     new_row.insertLast(array<int> = {CreateBlock(world[world.size() - 1][i][0], vec3(0.0f, 0.0f, 1.0f))});
@@ -145,13 +135,10 @@ void Update() {
                 moved += vec2(0.0f, 1.0f);
             }
             if(width_length.x < new_width_length.x){
-                //Print("Moved right\n");
-
                 for(uint i = 0; i < world.size(); i++){
                     DeleteColumn(world[i][0]);
                     world[i].removeAt(0);
                 }
-
                 for(uint i = 0; i < world.size(); i++){
                     array<int> new_column;
                     new_column.insertLast(CreateBlock(world[i][world[i].size() - 1][0], vec3(1.0f, 0.0f, 0.0f)));
@@ -161,13 +148,10 @@ void Update() {
                 moved += vec2(1.0f, 0.0f);
             }
             if(width_length.x > new_width_length.x){
-                //Print("Moved left\n");
-
                 for(uint i = 0; i < world.size(); i++){
                     DeleteColumn(world[i][world[i].size() - 1]);
                     world[i].removeAt(world[i].size() - 1);
                 }
-
                 for(uint i = 0; i < world.size(); i++){
                     array<int> new_column;
                     new_column.insertLast(CreateBlock(world[i][0][0], vec3(-1.0f, 0.0f, 0.0f)));
@@ -178,7 +162,6 @@ void Update() {
             }
             width_length = width_length + moved;
             main_color = RandomAdjacentColor(main_color);
-            //Print("new main color " + main_color.x + " " + main_color.y + " " + main_color.z + "\n");
         }
         UpdateColours();
     }
@@ -235,7 +218,6 @@ void DeleteRow(array<array<int>> row){
             DeleteObjectID(row[i][j]);
         }
     }
-    //PrintBlockWorld();
 }
 
 void DeleteColumn(array<int> column){
@@ -249,7 +231,6 @@ void AddRandomHeightBlocks(array<int> @blocks){
     for(int i = 0; i < amount; i++){
         int id = CreateBlock(blocks[blocks.size() - 1], vec3(0.0f, 1.0f, 0.0f));
         blocks.insertLast(id);
-        //DebugDrawLine(floor_block.GetTranslation(), new_block.GetTranslation(), vec3(0), _persistent);
     }
 }
 
@@ -258,9 +239,7 @@ void CreateFloor(){
     vec3 player_pos = player.position;
     float floor_height = height - (block_scale * 2.0 * world_size);
 
-    //vec3 starting_pos = vec3(width_length.x - ((world_size / 2.0f) * block_scale) + (block_scale / 2.0f), 0, width_length.y - ((world_size / 2.0f) * block_scale) + (block_scale / 2.0f));
     vec3 starting_pos = vec3(width_length.x - ((world_size) * block_scale) + (block_scale), 0, width_length.y - ((world_size) * block_scale) + (block_scale));
-    Print("Starting pos " + starting_pos.x + " " + starting_pos.z + "\n");
     for(uint i = 0; i < uint(world_size); i++){
         array<array<int>> new_row;
         for(uint j = 0; j < uint(world_size); j++){
@@ -271,19 +250,13 @@ void CreateFloor(){
             block.SetScale(local_block_scale * block_scale);
 
             vec3 new_pos = vec3(starting_pos.x + ((block_scale * 2.0f) * float(j)), floor_height, starting_pos.z + ((block_scale * 2.0f) * float(i)));
-            //Print("Setting block " + id + " on pos " + new_pos.x + " " + new_pos.y + " " + new_pos.z + "\n");
             block.SetTranslation(new_pos);
-
-            //DebugDrawText(block.GetTranslation() + vec3(0.0f, block_scale, 0.0f), "" + id, 5.0f, true, _persistent);
-            //DebugDrawLine(player_pos, block.GetTranslation(), vec3(0), _persistent);
-
             array<int> new_column = {id};
             AddRandomHeightBlocks(new_column);
             new_row.insertLast(new_column);
         }
         world.insertLast(new_row);
         main_color = RandomAdjacentColor(main_color);
-        //PrintBlockWorld();
     }
 }
 
