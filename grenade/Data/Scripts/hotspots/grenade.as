@@ -1,7 +1,6 @@
 int grenade_id = CreateObject("Data/Items/grenade.xml", true);
 Object@ grenade = ReadObjectFromID(grenade_id);
 Object@ grenade_hotspot = ReadObjectFromID(hotspot.GetID());
-ItemObject@ io = ReadItemID(grenade_id);
 vec3 hotspot_pos = grenade_hotspot.GetTranslation();
 float time = 0.0f;
 float grenade_time = 0.0f;
@@ -9,7 +8,8 @@ float delay = 5.0f;
 bool grenade_thrown = false;
 int PublicProp;
 int char_id = -1;
-int id = -1;
+int primary_id = -1;
+int secondary_id = -1;
 
 void Init() {
     vec3 spawn_point = vec3(hotspot_pos.x, hotspot_pos.y+0.2f, hotspot_pos.z);
@@ -32,7 +32,8 @@ void Update() {
     time += time_step;
     if(grenade_thrown){
         if((time - grenade_time)>delay && grenade_id != -1){
-          vec3 start = io.GetPhysicsPosition();
+          ItemObject@ item_object = ReadItemID(grenade_id);
+          vec3 start = item_object.GetPhysicsPosition();
           MakeMetalSparks(start);
           for(int i=0; i<3; i++){
                 MakeParticle("Data/Particles/explosion_smoke.xml",start,
@@ -58,15 +59,18 @@ void Update() {
     else{
         if(char_id != -1){
           MovementObject@ mo = ReadCharacterID(char_id);
-          if( id == grenade_id && mo.QueryIntFunction("bool WantsToDropItem()") == 1 ||
-              id == grenade_id && mo.QueryIntFunction("bool WantsToThrowItem()") == 1 && mo.QueryIntFunction("int GetThrowTarget()") != -1){
+          if( primary_id == grenade_id && mo.QueryIntFunction("bool WantsToDropItem()") == 1 ||
+              secondary_id == grenade_id && mo.QueryIntFunction("bool WantsToDropItem()") == 1 ||
+              primary_id == grenade_id && mo.QueryIntFunction("bool WantsToThrowItem()") == 1 && mo.QueryIntFunction("int GetThrowTarget()") != -1){
             PlaySound("Data/Sounds/pin_pull_mono.wav", mo.position);
             grenade_time = time;
             grenade_thrown = true;
           }
-          id = mo.GetArrayIntVar("weapon_slots",mo.GetIntVar("primary_weapon_slot"));
+          primary_id = mo.GetArrayIntVar("weapon_slots",mo.GetIntVar("primary_weapon_slot"));
+          secondary_id = mo.GetArrayIntVar("weapon_slots",mo.GetIntVar("secondary_weapon_slot"));
         }
-        char_id = io.HeldByWhom();
+        ItemObject@ item_object = ReadItemID(grenade_id);
+        char_id = item_object.HeldByWhom();
     }
 }
 
