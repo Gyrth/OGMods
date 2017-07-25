@@ -94,9 +94,13 @@ void Reset(){
     //Once the level is reset the new paths will be used.
     model_path = params.GetString("Model Path");
     if(objectPath != params.GetString("Object Path")){
+      if(FileExists(params.GetString("Object Path"))){
         DeleteObjectID(objectID);
         objectPath = params.GetString("Object Path");
         objectID = CreateObject(objectPath);
+      }else{
+        DisplayError("Error", "Could not find file " + params.GetString("Object Path"));
+      }
     }
     Object@ object = ReadObjectFromID(objectID);
     object.SetTranslation(ReadObjectFromID(node_ids[index]).GetTranslation());
@@ -273,10 +277,14 @@ void UpdateTransform(){
 void PlayAvailableSound(){
   if(prev_node_id != -1){
     Object@ pathpoint = ReadObjectFromID(prev_node_id);
-    ScriptParams@ param = pathpoint.GetScriptParams();
-    if(param.HasParam("Playsound")){
-      if(param.GetString("Playsound") != ""){
-        PlaySound(param.GetString("Playsound"), pathpoint.GetTranslation());
+    ScriptParams@ pathpoint_params = pathpoint.GetScriptParams();
+    if(pathpoint_params.HasParam("Playsound")){
+      if(pathpoint_params.GetString("Playsound") != ""){
+        if(FileExists(pathpoint_params.GetString("Playsound"))){
+          PlaySound(pathpoint_params.GetString("Playsound"), pathpoint.GetTranslation());
+        }else{
+          DisplayError("Error", "Could not find file " + pathpoint_params.GetString("Playsound"));
+        }
       }
     }
   }
