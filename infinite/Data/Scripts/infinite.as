@@ -21,6 +21,7 @@ vec2 width_length = vec2(0.0f,0.0f);
 int main_block_id = -1;
 vec3 main_color = vec3(0);
 float timer = 0.0f;
+bool reset_player = false;
 
 MusicLoad ml("Data/Music/challengelevel.xml");
 
@@ -45,6 +46,11 @@ bool HasFocus(){
 }
 
 void Reset(){
+  player_id = -1;
+  reset_player = true;
+}
+
+void ResetWorld(){
   for(int i = 0; i < int(world.size()); i++){
     for(int j = 0; j < int(world[i].size()); j++){
       for(int z = 0; z < int(world[i][j].size()); z++){
@@ -63,6 +69,7 @@ void Reset(){
   main_color = RandomColor();
   Object@ player_obj = ReadObjectFromID(player_id);
   height = floor(player_obj.GetTranslation().y);
+
   width_length = vec2(floor(player_obj.GetTranslation().x / (2.0f * block_scale)), floor(player_obj.GetTranslation().z / (2.0f * block_scale)));
   CreateFloor();
 }
@@ -106,64 +113,93 @@ void Update() {
               break;
             }
         }
-        Reset();
-    }else{
-        MovementObject@ player = ReadCharacterID(player_id);
-        vec2 new_width_length = vec2(floor(player.position.x / (2.0f * block_scale)), floor(player.position.z / (2.0f * block_scale)));
-        vec2 moved = vec2(0.0f);
-        if(width_length != new_width_length){
-            if(width_length.y > new_width_length.y){
-                DeleteRow(world[world.size() - 1]);
-                world.removeLast();
-                array<array<int>> new_row;
-                for(uint i = 0; i < world[0].size(); i++){
-                    new_row.insertLast(array<int> = {CreateBlock(world[0][i][0], vec3(0.0f, 0.0f, -1.0f))});
-                    AddRandomHeightBlocks(new_row[i]);
-                }
-                world.insertAt(0, new_row);
-                moved += vec2(0.0f, -1.0f);
-            }
-            if(width_length.y < new_width_length.y){
-                DeleteRow(world[0]);
-                world.removeAt(0);
-                array<array<int>> new_row;
-                for(uint i = 0; i < world[world.size() - 1].size(); i++){
-                    new_row.insertLast(array<int> = {CreateBlock(world[world.size() - 1][i][0], vec3(0.0f, 0.0f, 1.0f))});
-                    AddRandomHeightBlocks(new_row[i]);
-                }
-                world.insertLast(new_row);
-                moved += vec2(0.0f, 1.0f);
-            }
-            if(width_length.x < new_width_length.x){
-                for(uint i = 0; i < world.size(); i++){
-                    DeleteColumn(world[i][0]);
-                    world[i].removeAt(0);
-                }
-                for(uint i = 0; i < world.size(); i++){
-                    array<int> new_column;
-                    new_column.insertLast(CreateBlock(world[i][world[i].size() - 1][0], vec3(1.0f, 0.0f, 0.0f)));
-                    AddRandomHeightBlocks(new_column);
-                    world[i].insertLast(new_column);
-                }
-                moved += vec2(1.0f, 0.0f);
-            }
-            if(width_length.x > new_width_length.x){
-                for(uint i = 0; i < world.size(); i++){
-                    DeleteColumn(world[i][world[i].size() - 1]);
-                    world[i].removeAt(world[i].size() - 1);
-                }
-                for(uint i = 0; i < world.size(); i++){
-                    array<int> new_column;
-                    new_column.insertLast(CreateBlock(world[i][0][0], vec3(-1.0f, 0.0f, 0.0f)));
-                    AddRandomHeightBlocks(new_column);
-                    world[i].insertAt(0, new_column);
-                }
-                moved += vec2(-1.0f, 0.0f);
-            }
-            width_length = width_length + moved;
-            main_color = RandomAdjacentColor(main_color);
+        if(player_id == -1){
+          player_id = ReadCharacter(0).GetID();
         }
-        UpdateColours();
+        ResetWorld();
+    }else{
+      if(reset_player){
+        //Setting the player on top of the highest block underneath.
+        MovementObject@ player = ReadCharacterID(player_id);
+        if(world_size % 2 == 1){
+          int middle_column = int(floor(world_size / 2.0f));
+          uint column_size = world[middle_column][middle_column].size();
+          player.position.y = height - (2.0f * block_scale * (world_size - column_size));
+        }else{
+          uint column_size = 0;
+          int middle_column = int(floor(world_size / 2.0f));
+          if(world[middle_column][middle_column].size() > column_size){
+            column_size = world[middle_column][middle_column].size();
+          }
+          if(world[middle_column-1][middle_column].size() > column_size){
+            column_size = world[middle_column-1][middle_column].size();
+          }
+          if(world[middle_column][middle_column-1].size() > column_size){
+            column_size = world[middle_column][middle_column-1].size();
+          }
+          if(world[middle_column-1][middle_column-1].size() > column_size){
+            column_size = world[middle_column-1][middle_column-1].size();
+          }
+          player.position.y = height - (2.0f * block_scale * (world_size - column_size));
+        }
+        reset_player = false;
+      }
+      MovementObject@ player = ReadCharacterID(player_id);
+      vec2 new_width_length = vec2(floor(player.position.x / (2.0f * block_scale)), floor(player.position.z / (2.0f * block_scale)));
+      vec2 moved = vec2(0.0f);
+      if(width_length != new_width_length){
+          if(width_length.y > new_width_length.y){
+              DeleteRow(world[world.size() - 1]);
+              world.removeLast();
+              array<array<int>> new_row;
+              for(uint i = 0; i < world[0].size(); i++){
+                  new_row.insertLast(array<int> = {CreateBlock(world[0][i][0], vec3(0.0f, 0.0f, -1.0f))});
+                  AddRandomHeightBlocks(new_row[i]);
+              }
+              world.insertAt(0, new_row);
+              moved += vec2(0.0f, -1.0f);
+          }
+          if(width_length.y < new_width_length.y){
+              DeleteRow(world[0]);
+              world.removeAt(0);
+              array<array<int>> new_row;
+              for(uint i = 0; i < world[world.size() - 1].size(); i++){
+                  new_row.insertLast(array<int> = {CreateBlock(world[world.size() - 1][i][0], vec3(0.0f, 0.0f, 1.0f))});
+                  AddRandomHeightBlocks(new_row[i]);
+              }
+              world.insertLast(new_row);
+              moved += vec2(0.0f, 1.0f);
+          }
+          if(width_length.x < new_width_length.x){
+              for(uint i = 0; i < world.size(); i++){
+                  DeleteColumn(world[i][0]);
+                  world[i].removeAt(0);
+              }
+              for(uint i = 0; i < world.size(); i++){
+                  array<int> new_column;
+                  new_column.insertLast(CreateBlock(world[i][world[i].size() - 1][0], vec3(1.0f, 0.0f, 0.0f)));
+                  AddRandomHeightBlocks(new_column);
+                  world[i].insertLast(new_column);
+              }
+              moved += vec2(1.0f, 0.0f);
+          }
+          if(width_length.x > new_width_length.x){
+              for(uint i = 0; i < world.size(); i++){
+                  DeleteColumn(world[i][world[i].size() - 1]);
+                  world[i].removeAt(world[i].size() - 1);
+              }
+              for(uint i = 0; i < world.size(); i++){
+                  array<int> new_column;
+                  new_column.insertLast(CreateBlock(world[i][0][0], vec3(-1.0f, 0.0f, 0.0f)));
+                  AddRandomHeightBlocks(new_column);
+                  world[i].insertAt(0, new_column);
+              }
+              moved += vec2(-1.0f, 0.0f);
+          }
+          width_length = width_length + moved;
+          main_color = RandomAdjacentColor(main_color);
+      }
+      UpdateColours();
     }
 }
 
