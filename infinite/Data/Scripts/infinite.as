@@ -21,7 +21,7 @@ vec2 width_length = vec2(0.0f,0.0f);
 int main_block_id = -1;
 vec3 main_color = vec3(0);
 float timer = 0.0f;
-bool reset_player = false;
+bool reset_player = true;
 
 MusicLoad ml("Data/Music/challengelevel.xml");
 
