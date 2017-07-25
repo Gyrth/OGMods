@@ -14,7 +14,7 @@
   <Thumbnail>Data/Images/animated_object_thumb.jpg</Thumbnail>
   <!-- First preview image will be used as preview on steamworks, you can add additional ones -->
   <PreviewImage>Data/Images/animated_object_full.jpg</PreviewImage>
-  <Description>Animated object.</Description>
+  <Description>Add animated objects to your own levels. Using basic animation keys.</Description>
   <!-- Tags sent to and mainly used by steam workshop -->
   <Tag>b4</Tag>
   <Tag>weapon</Tag>
@@ -27,5 +27,6 @@
 	<Item category="Interactive Objects"
 		title="Animated Object"
 		path="Data/Objects/animated_hotspot.xml"
-		thumbnail="Data/UI/spawner/animated_object.png" />\
+		thumbnail="Data/UI/spawner/animated_object.png" />
+  <Level title="Anim Showcase" thumbnail="Images/animated_object_full.jpg">green.xml</Level>
 </Mod>
