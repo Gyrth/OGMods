@@ -17,6 +17,7 @@ string model_path;
 string objectPath;
 float node_timer = 0.0f;
 bool next_pathpoint = true;
+bool update_all_positions = false;
 
 enum PlayMode{
   kLoopForward = 0,
@@ -217,31 +218,34 @@ void UpdateTransform(){
     Object@ object = ReadObjectFromID(objectID);
 
     if(params.GetInt("Const time") == 1){
-      bool skip = false;
       //The animation will have a constant speed.
+      bool skip_node = false;
       float whole_distance = CalculateWholeDistance();
       if(whole_distance != 0.0f){
         float node_distance = distance(currentPathpoint.GetTranslation(), previousPathpoint.GetTranslation());
         if(node_distance != 0.0f){
           float node_time = params.GetFloat("Seconds") * (node_distance / whole_distance);
-          //Position
           float alpha = node_timer / node_time;
-          vec3 new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
-          object.SetTranslation(new_position);
-          //Rotation
-          quaternion relative = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
-          object.SetRotation(relative);
+          //Setting the position and rotation:
           if(alpha >= 1.0f){
+            //Because the alpha isn't always perfect 1.0f at the end let's set the end pos and rot like this.
             next_pathpoint = true;
             node_timer = 0.0f;
+            object.SetTranslation(currentPathpoint.GetTranslation());
+            object.SetRotation(currentPathpoint.GetRotation());
+          }else{
+            vec3 new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
+            object.SetTranslation(new_position);
+            quaternion relative = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
+            object.SetRotation(relative);
           }
         }else{
-          skip = true;
+          skip_node = true;
         }
       }else{
-        skip = true;
+        skip_node = true;
       }
-      if(skip){
+      if(skip_node){
         object.SetTranslation(currentPathpoint.GetTranslation());
         object.SetRotation(currentPathpoint.GetRotation());
         next_pathpoint = true;
@@ -250,16 +254,19 @@ void UpdateTransform(){
     }else{
       //The animation will devide the time between the animation keys.
       float node_time = params.GetFloat("Seconds") / node_ids.size();
-      //Position
+      //Setting the position and rotation:
       float alpha = node_timer / node_time;
-      vec3 new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
-      object.SetTranslation(new_position);
-      //Rotation
-      quaternion relative = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
-      object.SetRotation(relative);
       if(alpha >= 1.0f){
         next_pathpoint = true;
         node_timer = 0.0f;
+        object.SetTranslation(currentPathpoint.GetTranslation());
+        object.SetRotation(currentPathpoint.GetRotation());
+      }else{
+        vec3 new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
+        object.SetTranslation(new_position);
+        //Rotation
+        quaternion relative = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
+        object.SetRotation(relative);
       }
     }
   }else if(done == false && EditorModeActive()){
@@ -270,6 +277,18 @@ void UpdateTransform(){
       mainObject.SetTranslation(firstPathpoint.GetTranslation());
       mainObject.SetRotation(firstPathpoint.GetRotation());
       index = 0;
+    }
+  }
+  UpdateAllPositions();
+}
+
+void UpdateAllPositions(){
+  if(update_all_positions){
+    //A hacky way to update the physicstransform of all the objects.
+    array<int> all_env = GetObjectIDsType(_env_object);
+    for(uint i = 0; i < all_env.size(); i++){
+      Object@ obj = ReadObjectFromID(all_env[i]);
+      obj.SetTranslation(obj.GetTranslation());
     }
   }
 }
