@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/lever.obj</Model>
+	<ColorMap>Data/Textures/lever_c.png</ColorMap>
+	<NormalMap>Data/Textures/lever_c.png</NormalMap>
+	<SharpnessMap>Data/Textures/spike_sharpness.tga</SharpnessMap>
+	<ShaderPath>Data/GLSL/cubemap</ShaderPath>
+	<ShaderName>cubemap</ShaderName>
+</Object>

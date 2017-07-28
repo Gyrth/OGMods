@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Objects/lever.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "1"/>
+      <anim_blend idle = "Data/Animations/r_spearidle.xml"
+  				movement = "Data/Animations/r_spearmove.xml"/>
+      <physics mass = "2 kg"/>
+      <range extend = "1.0"/>
+</item>
