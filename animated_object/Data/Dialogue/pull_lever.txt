@@ -1,0 +1,10 @@
+#name "One-person test"
+#participants 1
+send_character_message 1 "set_dialogue_control true"
+set_character_pos 1 58.3071 7.66323 -166.222 0
+send_character_message 1 "set_animation \"Data/Animations/lever_pull.anm\""
+set_cam 58.6372 8.13648 -165.224 -19.25 16.42 1.93 90
+say 1 "Chris" "Hello there! [wait 2.0]How can I help you?"
+send_character_message 1 "set_dialogue_control false"
+set_cam_control false
+set_dialogue_visible false
