@@ -12,12 +12,12 @@
 <path key="female_dog"        path="Data/Objects/characters/dogs/light_armored_dog_female_actor.xml"/>
 <path key="male_dog"          path="Data/Objects/characters/dogs/light_armored_dog_male_1_actor.xml"/>
 
-<path key="DogKnife"          path="Data/Items/DogKnife.xml"/>
-<path key="DogAwl"            path="Data/Items/dogtoolawl.xml"/>
-<path key="DogHammer"         path="Data/Items/dogtoolhammer.xml"/>
+<path key="DogKnife"          path="Data/Items/DogWeapons/DogKnife.xml"/>
+<path key="DogAwl"            path="Data/Items/gear/dogtools/dogtoolawl.xml"/>
+<path key="DogHammer"         path="Data/Items/gear/dogtools/dogtoolhammer.xml"/>
 <path key="FlintKnife"        path="Data/Items/flint_knife.xml"/>
 <path key="GabenKnife"        path="Data/Items/gabenife.xml"/>
-<path key="RatSack"           path="Data/Items/ratjunksack.xml"/>
+<path key="RatSack"           path="Data/Items/collectable/ratjunksack.xml"/>
 <path key="diffuse_tex"       path="Data/Textures/diffuse.tga"/>
 
 <path key="win_sound"         path="Data/Sounds/versus/fight_win1.xml"/>
