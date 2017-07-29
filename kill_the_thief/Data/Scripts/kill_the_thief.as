@@ -1,10 +1,15 @@
 #include "ui_effects.as"
 #include "threatcheck.as"
+#include "music_load.as"
+
+MusicLoad ml("Data/Music/challengelevel.xml");
 
 string level_name;
 int navpoint_type_id = 33;
 int hotspot_type_id = 26;
 int placeholder_type_id = 35;
+
+uint char_limit = 256;
 
 int obj_id;
 array<int> spawned_object_ids;
@@ -65,7 +70,7 @@ class MetaEvent {
 }
 void Init(string p_level_name) {
     level_name = p_level_name;
-    
+
 
     color_names.insertLast("Red");
     colors.insertLast(vec3(255,0,0));
@@ -111,7 +116,7 @@ void Init(string p_level_name) {
 
     char_paths.insertLast(level.GetPath("hooded_rat"));
     char_names.insertLast("Hooded Rat");
-    
+
     char_paths.insertLast(level.GetPath("striped_cat"));
     char_names.insertLast("Striped Cat");
 
@@ -140,7 +145,7 @@ void Init(string p_level_name) {
 void Reset(){
     Print("Reseting----------------------- \n");
     SetupScene();
-    
+
 }
 
 void SetupScene(){
@@ -167,7 +172,7 @@ void SetupScene(){
     GetCharacters(characters);
     for(int i=0, len=characters.size(); i<len; ++i){
         MovementObject@ char = ReadCharacterID(characters[i]);
-        
+
         char.Execute("Recover();");
         char.Execute("Reset();");
         char.Execute("situation.clear();");
@@ -204,7 +209,7 @@ void SetupScene(){
         vec3 spawn_point = vec3(waypoint_pos.x, waypoint_pos.y+2.0f, waypoint_pos.z);
         //Spawn the item and character above the character to prevent collisions. This can cause crashes.
         vec3 object_spawn_point = vec3(waypoint_pos.x, waypoint_pos.y+10.0f, waypoint_pos.z);
-        
+
 
         //Some random attachment variables to make the position of the item less predictable.
         int mirrored_int = GetRandomInt(2);
@@ -231,7 +236,7 @@ void SetupScene(){
             chosen_stolen_item_name = stolen_item_names[chosen_item_num];
             Object@ stolen_item = SpawnObjectAtSpawnPoint(object_spawn_point, item_path);
             char_obj.AttachItem(stolen_item, attachtype, mirrored);
-            
+
             int chosen_color = GetRandomInt(colors.size());
             chosen_stolen_item_color_name = color_names[chosen_color];
             Print("Chosen " + stolen_item_names[chosen_item_num] + " with color: " + color_names[chosen_color] + " to the " + attachtype + "\n");
@@ -252,9 +257,9 @@ void SetupScene(){
                 non_thief_actor_path = char_paths[GetRandomInt(char_paths.size())];
                 Print("while\n");
             }
-             
+
             Object@ char_obj = SpawnObjectAtSpawnPoint(spawn_point,non_thief_actor_path);
-            //Add the innocent charater to the array to later check if the player doesn't kill it. 
+            //Add the innocent charater to the array to later check if the player doesn't kill it.
             innocent_ids.insertLast(char_obj.GetID());
             //If the character is not a thief it might get a decoy object attached somewhere.
             int random_item = GetRandomInt(stolen_item_paths.size());
@@ -263,7 +268,7 @@ void SetupScene(){
                 Object@ random_object = SpawnObjectAtSpawnPoint(object_spawn_point, item_path);
                 char_obj.AttachItem(random_object, attachtype, mirrored);
             }
-            //Setting the hostile boolean to false will cause the AI to not attack the player, 
+            //Setting the hostile boolean to false will cause the AI to not attack the player,
             //but let the player attack the NPC.
             MovementObject@ non_thief =ReadCharacterID(char_obj.GetID());
             non_thief.Execute("hostile = false;");
@@ -336,7 +341,7 @@ void SetupScene(){
     mission_done = false;
     //Release the scene_build boolean so that the update loop can now use the characters and other objects.
     scene_build = true;
-    
+
 }
 
 
@@ -351,15 +356,15 @@ void GetGroup(int startingPoint, array<int> &in navPointsIn, array<int> &out nav
 
     PathPointObject@ current_pathpoint = cast<PathPointObject>(ReadObjectFromID(startingPoint));
     int num_connections = current_pathpoint.NumConnectionIDs();
-    //Print("This node has this many connections : "+ num_connections + "\n"); 
+    //Print("This node has this many connections : "+ num_connections + "\n");
     int newoutsize = newGroupOut.size();
     newGroupOut.insertLast(startingPoint);
     int numberOfWaypoints = navPointsOut.size();
 
     for(int k = 0;k<numberOfWaypoints;k++){
-       
+
         if(navPointsOut[k] == startingPoint){
-            
+
             int outsize = navPointsOut.size();
             navPointsOut.removeAt(k);
             break;
@@ -391,7 +396,7 @@ void ReceiveMessage(string msg) {
     }
     string token = token_iter.GetToken(msg);
     if(token == "dispose_level"){
-        gui.RemoveAll();
+        //gui.RemoveAll();
     } else if(token == "thiefsave"){
         if(mission_done == false){
             Print("Thief is in the savehouse!\n");
@@ -401,7 +406,7 @@ void ReceiveMessage(string msg) {
     } else if(token == "wait_for_player_move"){
         token_iter.FindNextToken(msg);
         string param1 = token_iter.GetToken(msg);
-        wait_player_move_dist = atof(param1); 
+        wait_player_move_dist = atof(param1);
         initial_player_pos_set = false;
     } else if(token == "wait_for_click"){
         wait_for_click = true;
@@ -446,21 +451,21 @@ void DrawGUI() {
         image.scale = vec3(600 / image.GetWidth(), stretch, 1.0);}
 
     {   HUDImage @image = hud.AddImage();
-        image.SetImageFromText(level.GetTextElement(main_text_id)); 
+        image.SetImageFromText(level.GetTextElement(main_text_id));
         image.position.x = int(GetScreenWidth() * 0.4f - 200 + 10);
         image.position.y = GetScreenHeight()-500;
         image.position.z = 4;
         image.color = vec4(1,1,1,text_visible);}
 
     {   HUDImage @image = hud.AddImage();
-        image.SetImageFromText(level.GetTextElement(timer_text_id)); 
+        image.SetImageFromText(level.GetTextElement(timer_text_id));
         image.position.x = GetScreenWidth()/2-100;
         image.position.y = GetScreenHeight()-350;
         image.position.z = 4;
         image.color = vec4(1,1,1,1);}
 
     {   HUDImage @image = hud.AddImage();
-        image.SetImageFromText(level.GetTextElement(ingame_text_id)); 
+        image.SetImageFromText(level.GetTextElement(ingame_text_id));
         image.position.x = GetScreenWidth()/2-256;
         image.position.y = GetScreenHeight()-500;
         image.position.z = 3;
@@ -504,7 +509,7 @@ void Update() {
             }else{
                 AddMetaEvent(KTimer, "" + minutes + ":" + seconds);
             }
-            
+
             previous_timer_time = timer_time/1000;
         }
 
@@ -774,36 +779,36 @@ void SetIntroText() {
     text.SetPenColor(0,0,0,255);
     text.SetPenRotation(0.0f);
     int line_break_dist = 42;
-    text.AddText("Kill the Thief", big_style);
+    text.AddText("Kill the Thief", big_style, char_limit);
     pen_pos.y += line_break_dist;
     text.SetPenPosition(pen_pos);
-    text.AddText("There is a thief in this city.", small_style);
-    pen_pos.y += line_break_dist;
-    pen_pos.y += line_break_dist;
-    text.SetPenPosition(pen_pos);
-    text.AddText("Description: " + chosen_thief_name, small_style);
-    
-    pen_pos.y += line_break_dist;
-    text.SetPenPosition(pen_pos);
-    text.AddText("Stolen: " + chosen_stolen_item_color_name + " " + chosen_stolen_item_name, small_style);
-    
+    text.AddText("There is a thief in this city.", small_style, char_limit);
     pen_pos.y += line_break_dist;
     pen_pos.y += line_break_dist;
     text.SetPenPosition(pen_pos);
-    text.AddText("The thief WILL run when he sees you.",small_style);
+    text.AddText("Description: " + chosen_thief_name, small_style, char_limit);
+
+    pen_pos.y += line_break_dist;
+    text.SetPenPosition(pen_pos);
+    text.AddText("Stolen: " + chosen_stolen_item_color_name + " " + chosen_stolen_item_name, small_style, char_limit);
+
+    pen_pos.y += line_break_dist;
+    pen_pos.y += line_break_dist;
+    text.SetPenPosition(pen_pos);
+    text.AddText("The thief WILL run when he sees you.",small_style, char_limit);
      pen_pos.y += line_break_dist;
     text.SetPenPosition(pen_pos);
-    text.AddText("Don't let him reach a savehouse.",small_style);
+    text.AddText("Don't let him reach a savehouse.",small_style, char_limit);
     pen_pos.y += line_break_dist;
     text.SetPenPosition(pen_pos);
-    text.AddText("Good luck!",small_style);
+    text.AddText("Good luck!",small_style, char_limit);
 
     text.UploadTextCanvasToTexture();
 
     AddMetaEvent(kMessage, "wait_for_player_move 5.0");
     AddMetaEvent(kMessage, "set show_text false");
 }
-void ShowTimer(string str) {   
+void ShowTimer(string str) {
 
     TextCanvasTexture @text = level.GetTextElement(timer_text_id);
     text.ClearTextCanvas();
@@ -814,7 +819,7 @@ void ShowTimer(string str) {
     vec2 pen_pos = vec2(0,256);
     int line_break_dist = 42;
     text.SetPenPosition(pen_pos);
-    
+
     if(timer_time /1000 <= 10){
         text.SetPenColor(255,0,0,255);
         PlaySound(level.GetPath("timer_sound"));
@@ -822,8 +827,8 @@ void ShowTimer(string str) {
         text.SetPenColor(255,255,255,255);
     }
     text.SetPenRotation(0.0f);
-    
-    text.AddText(str, style);
+
+    text.AddText(str, style, char_limit);
 
     text.UploadTextCanvasToTexture();
 }
@@ -840,14 +845,14 @@ void UpdateIngameText(string str) {
     text.SetPenPosition(pen_pos);
     text.SetPenColor(255,255,255,255);
     text.SetPenRotation(0.0f);
-    
-    text.AddText(str, style);
+
+    text.AddText(str, style, char_limit);
 
     text.UploadTextCanvasToTexture();
 }
 
 void SetEndText(string win_or_lose, string text_message) {
-    
+
     mission_done = true;
     timer_started = false;
     play_combat_song = false;
@@ -869,21 +874,21 @@ void SetEndText(string win_or_lose, string text_message) {
     text.SetPenColor(0,0,0,255);
     text.SetPenRotation(0.0f);
     int line_break_dist = 42;
-    text.AddText("Kill the Thief", big_style);
+    text.AddText("Kill the Thief", big_style, char_limit);
     pen_pos.y += line_break_dist;
     pen_pos.y += line_break_dist;
     text.SetPenPosition(pen_pos);
-    text.AddText(text_message, small_style);
+    text.AddText(text_message, small_style, char_limit);
     pen_pos.y += line_break_dist;
-    
+
     text.SetPenPosition(pen_pos);
     if(win_or_lose == "win"){
         PlaySoundGroup(level.GetPath("win_sound"));
-        text.AddText("Well done.", small_style);
+        text.AddText("Well done.", small_style, char_limit);
     }
     else if(win_or_lose == "lose"){
         PlaySoundGroup(level.GetPath("lose_sound"));
-        text.AddText("You lose.", small_style);
+        text.AddText("You lose.", small_style, char_limit);
     }
 
     text.UploadTextCanvasToTexture();
