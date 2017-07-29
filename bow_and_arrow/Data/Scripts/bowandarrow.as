@@ -52,6 +52,11 @@ class BowAndArrow {
     if(throw_anim && longDrawAnim){
       TargetClosestEnemy();
     }
+    //When the player is aiming, but attacked and started to ragdoll reset the aiming.
+    if(isAiming && state == _ragdoll_state){
+      isAiming = false;
+      allowAiming = false;
+    }
     if(throw_anim && weapon_slots[primary_weapon_slot] == -1){
       throw_anim = false;
     }
