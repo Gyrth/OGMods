@@ -9,5 +9,5 @@
            green = "0.7"
            blue =  "0.5"
            alpha = "1.0"/>
-    <behavior inertia="0.95" gravity="1.0" wind="5.0" size_decay_rate="1.0" opacity_decay_rate="1.0"/>
+    <behavior inertia="0.95" gravity="1.0" wind="5.0" size_decay_rate="2.0" opacity_decay_rate="2.0"/>
 </particle>
