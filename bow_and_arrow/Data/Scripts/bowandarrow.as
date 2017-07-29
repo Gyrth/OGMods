@@ -17,11 +17,11 @@ class BowAndArrow {
   uint32 aimingParticle;
   uint32 miscParticleID;
   bool isAiming = false;
+  bool allowAiming = true;
   array<Arrow> arrows;
   bool longDrawAnim = false;
   float orig_sensitivity = -1.0f;
   float aim_sensitivity = 0.1f;
-  float zoom_mult = 5.0f;
   bool init_done = Init();
 
   bool Init(){
@@ -32,7 +32,7 @@ class BowAndArrow {
   void HandleBow(){
     if(weapon_slots[secondary_weapon_slot] != -1){
       ItemObject@ secondaryWeapon = ReadItemID(weapon_slots[secondary_weapon_slot]);
-      if( isAiming && floor(length(this_mo.velocity)) < 1.0f && on_ground && sheathe_layer_id == -1||
+      if( isAiming && floor(length(this_mo.velocity)) < 1.0f && on_ground ||
           throw_anim){
         DrawDoubleSting(weapon_slots[secondary_weapon_slot]);
         vec3 direction = normalize(throw_target_pos - this_mo.position);
@@ -55,6 +55,9 @@ class BowAndArrow {
     if(throw_anim && weapon_slots[primary_weapon_slot] == -1){
       throw_anim = false;
     }
+    if(!allowAiming && !WantsToThrowItem()){
+      allowAiming = true;
+    }
   }
 
   void TargetClosestEnemy(){
@@ -67,56 +70,63 @@ class BowAndArrow {
   }
 
   void BowAiming(){
-    if(!isAiming){
+    if(!isAiming && sheathe_layer_id == -1 && allowAiming){
       start_throwing_time = time;
+      PlaySound("Data/Sounds/draw.wav", this_mo.position);
+      isAiming = true;
     }
-    BoneTransform transform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kHeadIK]]);
-    ItemObject@ primaryWeapon = ReadItemID(weapon_slots[primary_weapon_slot]);
-    ItemObject@ secondaryWeapon = ReadItemID(weapon_slots[secondary_weapon_slot]);
-    vec3 cameraFacing = camera.GetFacing();
-    Object@ charObject = ReadObjectFromID(this_mo.GetID());
+    if(isAiming){
+      if(WantsToSheatheItem()){
+        isAiming = false;
+        allowAiming = false;
+        return;
+      }
 
-    quaternion head_rotation = transform.rotation;
-    vec3 facing = camera.GetFacing();
-    vec3 start = facing * 5.0f;
-    //Limited aim enabled.
-    vec3 end = vec3(facing.x, max(-0.9, min(0.3f, facing.y)), facing.z) * 30.0f;
-    //Collision check for non player objects
-    vec3 hit = col.GetRayCollision(camera.GetPos(), camera.GetPos() + end);
-    //Collision check for player objects.
-    col.CheckRayCollisionCharacters(camera.GetPos(), camera.GetPos() + end);
-    SetConfigValueFloat("mouse_sensitivity", aim_sensitivity);
+      BoneTransform transform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kHeadIK]]);
+      ItemObject@ primaryWeapon = ReadItemID(weapon_slots[primary_weapon_slot]);
+      ItemObject@ secondaryWeapon = ReadItemID(weapon_slots[secondary_weapon_slot]);
+      vec3 cameraFacing = camera.GetFacing();
+      Object@ charObject = ReadObjectFromID(this_mo.GetID());
 
-    throw_target_pos = hit;
-    if(sphere_col.NumContacts() != 0){
-      for(int i = 0; i < sphere_col.NumContacts(); i++){
-        const CollisionPoint contact = sphere_col.GetContact(i);
-        if(contact.id != this_mo.GetID() && contact.position != vec3(0,0,0) && distance(camera.GetPos(), throw_target_pos) > distance(camera.GetPos() ,contact.position)){
-          throw_target_pos = contact.position;
+      quaternion head_rotation = transform.rotation;
+      vec3 facing = camera.GetFacing();
+      vec3 start = facing * 5.0f;
+      //Limited aim enabled.
+      vec3 end = vec3(facing.x, max(-0.9, min(0.5f, facing.y)), facing.z) * 30.0f;
+      //Collision check for non player objects
+      vec3 hit = col.GetRayCollision(camera.GetPos(), camera.GetPos() + end);
+      //Collision check for player objects.
+      col.CheckRayCollisionCharacters(camera.GetPos(), camera.GetPos() + end);
+      SetConfigValueFloat("mouse_sensitivity", aim_sensitivity);
+
+      throw_target_pos = hit;
+      if(sphere_col.NumContacts() != 0){
+        for(int i = 0; i < sphere_col.NumContacts(); i++){
+          const CollisionPoint contact = sphere_col.GetContact(i);
+          if(contact.id != this_mo.GetID() && contact.position != vec3(0,0,0) && distance(camera.GetPos(), throw_target_pos) > distance(camera.GetPos() ,contact.position)){
+            throw_target_pos = contact.position;
+          }
+        }
+      }
+      aimingParticle = MakeParticle("Data/Particles/bow_and_arrow_aim.xml", throw_target_pos, vec3(0));
+      fov = max(fov - ((time - start_throwing_time)), 40.0f);
+
+      cam_pos_offset = vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5);
+      int8 flags = _ANM_FROM_START;
+
+      if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
+        this_mo.SetAnimation("Data/Animations/r_draw_bow_stance.anm", 20.0f, flags);
+        this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 20.0f);
+        if(this_mo.GetFacing().y > 0){
+          bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_up.anm",(60*cameraFacing.y),flags);
+        }else{
+          bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_down.anm",-(60*cameraFacing.y),flags);
+        }
+        if(cameraFacing.y > -1.0f){
+          this_mo.SetRotationFromFacing(normalize(cameraFacing + vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5)));
         }
       }
     }
-    aimingParticle = MakeParticle("Data/Particles/bow_and_arrow_aim.xml", throw_target_pos, vec3(0));
-    fov = max(fov - ((time - start_throwing_time) * zoom_mult), 40.0f);
-    cam_pos_offset = vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5);
-    int8 flags = _ANM_FROM_START;
-
-    if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
-      if(!isAiming){
-        PlaySound("Data/Sounds/draw.wav", this_mo.position);
-      }
-      this_mo.SetAnimation("Data/Animations/r_draw_bow_stance.anm", 20.0f, flags);
-      this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 20.0f);
-      if(this_mo.GetFacing().y > 0){
-        bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_up.anm",(60*cameraFacing.y),flags);
-      }else{
-        bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_down.anm",-(60*cameraFacing.y),flags);
-      }
-      if(cameraFacing.y > -1.0f){
-        this_mo.SetRotationFromFacing(normalize(cameraFacing + vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5)));
-      }
-    }
-    isAiming = true;
   }
   void BowShoot(){
     if(weapon_slots[primary_weapon_slot] == -1){
@@ -141,7 +151,6 @@ class BowAndArrow {
       arrows.insertLast(arrowShot);
       going_to_throw_item = true;
       going_to_throw_item_time = time;
-      vec3 direction = normalize(throw_target_pos - this_mo.position);
       isAiming = false;
     }
     SetConfigValueFloat("mouse_sensitivity", orig_sensitivity);

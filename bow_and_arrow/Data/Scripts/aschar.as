@@ -3099,12 +3099,14 @@ float ai_look_override_time = -1.0;
 void UpdateState(const Timestep &in ts) {
     //For the bow and arrow.
     //When the character starts walking again after shooting an arrow the normal fov and camera offset need to be set.
-    if(bowAndArrow.arrows.length < 1 || length_squared(this_mo.velocity) > 1.0f){
+    if((bowAndArrow.arrows.length < 1 || length_squared(this_mo.velocity) > 1.0f) && !bowAndArrow.isAiming){
         //Slowly change the fov back to 90.
         if(fov < 90){
-            fov += 0.75;
+          fov += 0.75;
         }
-        cam_pos_offset *= 0.90f;
+        if(length(cam_pos_offset) > 0.1f){
+          cam_pos_offset *= 0.90f;
+        }
     }
     bowAndArrow.HandleArrows();
     EnterTelemetryZone("UpdateState");
@@ -8271,7 +8273,7 @@ void ThrowWeapon() {
         		    ItemObject@ secondaryWeapon = ReadItemID(sec_weapon_id);
                 if(secondaryWeapon.GetLabel() == "bow"){
       	            float dist = distance(start, throw_target_pos);
-      	            float max = dist * 50.0f;
+      	            float max = dist * 40.0f;
       	            launch_vel = GetVelocityForTarget(start, throw_target_pos, max, max, 0.001f, time);
       	            PlaySoundGroup("Data/Sounds/bow_release.xml", this_mo.position);
                 }
@@ -8762,6 +8764,7 @@ void HandlePickUp() {
                 }
             }
         }
+        UpdatePrimaryWeapon();
     }
 }
 
