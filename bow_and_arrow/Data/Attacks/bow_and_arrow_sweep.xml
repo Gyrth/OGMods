@@ -4,6 +4,7 @@
                 blocked = "Data/Animations/r_sweepblocked.anm"/>
     <flags height = "low"
            swap_stance = "false"
+           swap_stance_blocked = "false"
            direction = "right"
            mobile = "true"/>
     <reaction>Data/Attacks/reaction_lowright.xml</reaction>

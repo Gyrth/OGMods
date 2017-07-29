@@ -4,6 +4,7 @@
                 blocked = "Data/Animations/r_roundhouseblocked.anm"/>
     <flags height = "high"
             swap_stance = "false"
+            swap_stance_blocked = "false"
             direction = "left"/>
     <reaction>Data/Attacks/reaction_highleft.xml</reaction>
     <impact_dir x="-1.0" y="0.0" z="0.0"/>

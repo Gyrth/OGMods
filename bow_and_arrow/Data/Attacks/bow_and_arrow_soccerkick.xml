@@ -5,6 +5,7 @@
     <flags height = "medium"
            direction = "front"
            swap_stance = "false"
+           swap_stance_blocked = "false"
            mobile = "true"/>
     <reaction>Data/Attacks/reaction_medfront.xml</reaction>
     <impact_dir x="0.0" y="0.0" z="1.0"/>
