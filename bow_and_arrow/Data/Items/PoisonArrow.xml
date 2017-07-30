@@ -3,33 +3,29 @@
     <type>weapon</type>
     <appearance obj_path = "Data/Objects/PoisonArrow.xml"/>
     <grip ik_attach = "rightarm"
-          anim = "Data/Animations/r_arrow_grip.anm"
-		  hands = "1"/>
+        anim = "Data/Animations/r_arrow_grip.anm"
+        hands = "1"/>
     <points>
-      <blade_tip x="0" y="0.3" z="0"/>
-      <blade_base x="0" y="0.2" z="0"/>
-      <wood_base x="0" y="-0.3" z="0"/>
+        <blade_tip x="0" y="0.3" z="0"/>
+        <blade_base x="0" y="0.0" z="0"/>
+        <wood_base x="0" y="-0.3" z="0"/>
     </points>
     <lines>
-      <metal start="blade_base" end="blade_tip"/>
-      <wood start="wood_base" end="blade_base"/>
+        <wood start="wood_base" end="blade_base"/>
+        <metal start="blade_base" end="blade_tip"/>
     </lines>
     <sheathe ik_attach = "torso"
-      anim = "Data/Animations/r_arrow_sheathed.anm"/>
-
+        anim = "Data/Animations/r_arrow_sheathed.anm"/>
     <anim_blend idle = "Data/Animations/r_arrowidle.xml"
-                movement = "Data/Animations/r_arrowmove.xml"/>
+        movement = "Data/Animations/r_arrowmove.xml"/>
     <anim_override movement = "Data/Animations/r_arrowmovestance.xml"/>
     <attack_override moving_close = "Data/Attacks/jab.xml"
-             stationary_close = "Data/Attacks/bow_and_arrow_kneestrike.xml"
-             moving = "Data/Attacks/bow_and_arrow_roundhouse.xml"
-             stationary = "Data/Attacks/bow_and_arrow_frontkick.xml"
-             moving_low = "Data/Attacks/bow_and_arrow_soccerkick.xml"
-             low = "Data/Attacks/bow_and_arrow_sweep.xml"
-             air = "Data/Attacks/legcannon.xml" />
+        stationary_close = "Data/Attacks/bow_and_arrow_kneestrike.xml"
+        moving = "Data/Attacks/bow_and_arrow_roundhouse.xml"
+        stationary = "Data/Attacks/bow_and_arrow_frontkick.xml"
+        moving_low = "Data/Attacks/bow_and_arrow_soccerkick.xml"
+        low = "Data/Attacks/bow_and_arrow_sweep.xml"
+        air = "Data/Attacks/legcannon.xml" />
     <label>arrow</label>
-    <anim_override_flags
-                   lowleftblock = "mirror"
-                   lowrightblock = "mirror"/>
     <physics mass = "0.15 kg"/>
 </item>
