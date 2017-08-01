@@ -137,11 +137,11 @@ void SetWindowDimensions(int w, int h)
 void Update(int paused) {
     if(has_ui){
         int new_weapon = current_weapon;
-        if(GetInputDown(0, "mousescrolldown")){
+        if(GetInputDown(0, "mousescrolldown") && !EditorModeActive()){
             switcher_time = the_time;
             direction = true;
     		new_weapon = min(current_weapon+1, weapons.size() -1);
-    	} else if(GetInputDown(0, "mousescrollup")){
+    	} else if(GetInputDown(0, "mousescrollup") && !EditorModeActive()){
             switcher_time = the_time;
             direction = false;
             new_weapon = max(0, current_weapon-1);
@@ -156,7 +156,7 @@ void Update(int paused) {
             fade_in = true;
             has_ui = false;
         }
-    }else{
+    }else if(!EditorModeActive()){
         if(GetInputDown(0, "mousescrollup") || GetInputDown(0, "mousescrolldown")){
             switcher_time = the_time;
             AddUI();
