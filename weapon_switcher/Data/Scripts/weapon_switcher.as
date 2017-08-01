@@ -176,6 +176,8 @@ void SwitchToWeapon(){
         DeleteObjectID(weapon_id);
     }
     Object@ player = ReadObjectFromID(player_id);
+    MovementObject@ player_mo = ReadCharacterID(player_id);
+    player_mo.Execute("DropWeapon();");
     weapon_id = CreateObject(weapons[current_weapon].item_path);
     Object@ weapon_obj = ReadObjectFromID(weapon_id);
     player.AttachItem(weapon_obj, _at_grip, false);
