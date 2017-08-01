@@ -1,0 +1,15 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>weapon-switcher</Id>
+    <Name>Weapon Switcher Mod</Name>
+    <Version>0.1.0</Version>
+    <Author>Gyrth</Author>
+    <Category>Level Script</Category>
+    <Thumbnail>Data/Images/weapon_switcher_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/weapon_switcher_full.jpg</PreviewImage>
+    <Description>Weapon switcher.</Description>
+    <Tag>scripting</Tag>
+    <Tag>weapon</Tag>
+    <SupportedVersion>b4</SupportedVersion>
+    <LevelHookFile>Data/Scripts/weapon_switcher.as</LevelHookFile>
+</Mod>
