@@ -177,6 +177,9 @@ void SwitchToWeapon(){
     }
     Object@ player = ReadObjectFromID(player_id);
     MovementObject@ player_mo = ReadCharacterID(player_id);
+    if(player_mo.GetIntVar("knocked_out") != _awake){
+        return;
+    }
     player_mo.Execute("DropWeapon();");
     weapon_id = CreateObject(weapons[current_weapon].item_path);
     Object@ weapon_obj = ReadObjectFromID(weapon_id);
