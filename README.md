@@ -1,5 +1,8 @@
-# OGMods
-A collection of mods for Overgrowth.  
-Choose a branch for each mod.  
+# Weapon Switcher
+## Howto install:  
+	1. Put the weapon_switcher folder into [Overgrowth Cache folder]/Data/Mods.
+## Howto use the weapon switcher:  
+	1. While controlling a character use the scrollwheel to select a different weapon.  
 
+Last tested and working on beta 4.  
 [Preorder the game here.](http://www.wolfire.com/overgrowth)
