@@ -23,24 +23,24 @@ class BowAndArrow {
   }
 
   void HandleBow(){
-    if(weapon_slots[secondary_weapon_slot] != -1){
-      ItemObject@ secondaryWeapon = ReadItemID(weapon_slots[secondary_weapon_slot]);
-      if( isAiming && floor(length(this_mo.velocity)) < 1.0f && on_ground ||
-          throw_anim){
-        DrawDoubleSting(weapon_slots[secondary_weapon_slot]);
-        vec3 direction = normalize(throw_target_pos - this_mo.position);
-        if(!on_ground){
-          this_mo.SetRotationFromFacing(normalize(direction + vec3(direction.z * -1.00, 0, direction.x * 1.00)));
+      ItemObject@ bow_item;
+
+    if(weapon_slots[primary_weapon_slot] != -1 && ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "bow"){
+        @bow_item = ReadItemID(weapon_slots[primary_weapon_slot]);
+    }else if(weapon_slots[secondary_weapon_slot] != -1 && ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "bow"){
+        @bow_item = ReadItemID(weapon_slots[secondary_weapon_slot]);
+    }
+    if(bow_item !is null){
+        if( isAiming && floor(length(this_mo.velocity)) < 1.0f && on_ground ||
+        throw_anim){
+            DrawDoubleSting(bow_item);
+            vec3 direction = normalize(throw_target_pos - this_mo.position);
+            if(!on_ground){
+                this_mo.SetRotationFromFacing(normalize(direction + vec3(direction.z * -1.00, 0, direction.x * 1.00)));
+            }
+        }else{
+            DrawSingleString(bow_item);
         }
-      }else{
-        DrawSingleString(weapon_slots[secondary_weapon_slot]);
-      }
-      if(weapon_slots[primary_weapon_slot] != -1){
-        if( ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "arrow" &&
-            ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "bow"){
-          SwapWeaponHands();
-        }
-      }
     }
     if(throw_anim && longDrawAnim){
       TargetClosestEnemy();
@@ -211,21 +211,19 @@ class BowAndArrow {
         }
     }
 
-  void DrawSingleString(int weaponID){
-    ItemObject@ primaryWeapon = ReadItemID(weaponID);
-    mat4 bowTransform = primaryWeapon.GetPhysicsTransform();
+  void DrawSingleString(ItemObject@ bow){
+    mat4 bowTransform = bow.GetPhysicsTransform();
     BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kRightArmKey]]);
     quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
-    DebugDrawLine(primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.13,-0.70,0)), primaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.13,0.70,0)), vec3(0), _delete_on_update);
+    DebugDrawLine(bow.GetPhysicsPosition() + (bowRotation * vec3(0.13,-0.70,0)), bow.GetPhysicsPosition() + (bowRotation * vec3(0.13,0.70,0)), vec3(0), _delete_on_update);
   }
-  void DrawDoubleSting(int weaponID){
-    ItemObject@ secondaryWeapon = ReadItemID(weaponID);
-    mat4 bowTransform = secondaryWeapon.GetPhysicsTransform();
+  void DrawDoubleSting(ItemObject@ bow){
+    mat4 bowTransform = bow.GetPhysicsTransform();
     BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kLeftArmKey]]);
     quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
 
-    DebugDrawLine(handTransform.origin, secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.13,0.70,0)), vec3(0), _delete_on_update);
-    DebugDrawLine(handTransform.origin, secondaryWeapon.GetPhysicsPosition() + (bowRotation * vec3(0.13,-0.70,0)), vec3(0), _delete_on_update);
+    DebugDrawLine(handTransform.origin, bow.GetPhysicsPosition() + (bowRotation * vec3(0.13,0.70,0)), vec3(0), _delete_on_update);
+    DebugDrawLine(handTransform.origin, bow.GetPhysicsPosition() + (bowRotation * vec3(0.13,-0.70,0)), vec3(0), _delete_on_update);
   }
 };
 void ArrowMetalSparks(vec3 pos){

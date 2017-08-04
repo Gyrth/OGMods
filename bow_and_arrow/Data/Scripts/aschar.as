@@ -2320,8 +2320,11 @@ void Update(int num_frames) {
         }
     }
     CheckForNANPosAndVel(4);
-    if(weapon_slots[primary_weapon_slot] == -1 && weapon_slots[secondary_weapon_slot] != -1 && !WantsToSheatheItem()){
+    if(weapon_slots[primary_weapon_slot] != -1 && weapon_slots[secondary_weapon_slot] != -1){
+      if( ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "arrow" &&
+          ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "bow"){
         SwapWeaponHands();
+      }
     }
 
     if(vision_check_time <= time){
@@ -2569,9 +2572,6 @@ void SwapWeaponHands() {
         return;
     }
     if(sheathe_layer_id != -1){
-        return;
-    }
-    if(ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "bow"){
         return;
     }
     int8 flags = 0;
@@ -2854,6 +2854,7 @@ void HandleSpecialKeyPresses() {
             SwitchCharacter("Data/Characters/rabbot.xml");
         }
         if(GetInputPressed(this_mo.controller_id, misc_key)){
+            SwapWeaponHands();
             const bool kTestIdleAntic = false;
             if(kTestIdleAntic){
                 this_mo.SetAnimation("Data/Animations/r_wallpress.anm",20.0f);
