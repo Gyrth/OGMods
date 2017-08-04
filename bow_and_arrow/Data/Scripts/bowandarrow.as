@@ -213,7 +213,6 @@ class BowAndArrow {
 
   void DrawSingleString(ItemObject@ bow){
     mat4 bowTransform = bow.GetPhysicsTransform();
-    BoneTransform handTransform = this_mo.rigged_object().GetFrameMatrix(ik_chain_elements[ik_chain_start_index[kRightArmKey]]);
     quaternion bowRotation = QuaternionFromMat4(bowTransform.GetRotationPart());
     DebugDrawLine(bow.GetPhysicsPosition() + (bowRotation * vec3(0.13,-0.70,0)), bow.GetPhysicsPosition() + (bowRotation * vec3(0.13,0.70,0)), vec3(0), _delete_on_update);
   }
