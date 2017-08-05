@@ -1,4 +1,8 @@
 #include "aschar_aux.as"
+#include "situationawareness.as"
+
+Situation situation;
+int target_id = -1;
 
 float startle_time;
 
@@ -127,7 +131,7 @@ vec3 ground_normal(0,1,0);
 vec3 flip_modifier_axis;
 float flip_modifier_rotation;
 vec3 tilt_modifier;
-const float _leg_sphere_size = 0.45f; // affects the size of a sphere collider used for leg collisions
+const float _leg_sphere_size = 1.00f; // affects the size of a sphere collider used for leg collisions
 enum IdleType{_stand, _active, _combat};
 IdleType idle_type = _active;
 
@@ -163,11 +167,33 @@ const float _ground_normal_y_threshold = 0.5f;
 bool balancing = false;
 vec3 balance_pos;
 
+bool show_debug = false;
+
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
     time += ts.step();
     ApplyPhysics(ts);
     HandleCollisions(ts);
+    UpdateJumping();
+}
+
+float jump_wait = 0.0f;
+bool allow_jumping = true;
+void UpdateJumping(){
+    if(on_ground && allow_jumping){
+        jump_wait -= time_step;
+        if(jump_wait < 0.0f){
+            jump_wait = RangedRandomFloat(0.1f, 0.25f);
+            float jump_mult = 5.0f;
+            vec3 jump_vel;
+            jump_vel.y = RangedRandomFloat(1.0f, 2.0f);
+            jump_vel.x = RangedRandomFloat(-1.0f, 1.0f);
+            jump_vel.z = RangedRandomFloat(-1.0f, 1.0f);
+            this_mo.velocity += jump_vel * jump_mult;
+            this_mo.SetRotationFromFacing(normalize(this_mo.velocity));
+            Print("Jump\n");
+        }
+    }
 }
 
 void FinalAttachedItemUpdate(int num_frames) {
@@ -214,8 +240,7 @@ void ApplyPhysics(const Timestep &in ts) {
 
 void HandleCollisions(const Timestep &in ts) {
     vec3 initial_vel = this_mo.velocity;
-    bool _draw_collision_spheres = true;
-    if(_draw_collision_spheres){
+    if(show_debug){
         DebugDrawWireSphere(this_mo.position,
                             _leg_sphere_size,
                             vec3(1.0f,1.0f,1.0f),
@@ -303,9 +328,10 @@ bool HandleStandingCollision() {
     col.GetSweptSphereCollision(upper_pos,
                                  lower_pos,
                                  _leg_sphere_size);
-
-    DebugDrawWireSphere(upper_pos,_leg_sphere_size,vec3(0.0f,0.0f,1.0f),_delete_on_update);
-    DebugDrawWireSphere(lower_pos,_leg_sphere_size,vec3(0.0f,0.0f,1.0f),_delete_on_update);
+    if(show_debug){
+        DebugDrawWireSphere(upper_pos,_leg_sphere_size,vec3(0.0f,0.0f,1.0f),_delete_on_update);
+        DebugDrawWireSphere(lower_pos,_leg_sphere_size,vec3(0.0f,0.0f,1.0f),_delete_on_update);
+    }
     float balance_num = 0.0;
     balance_pos = vec3(0.0);
     for(int i=0, len=sphere_col.NumContacts(); i<len; ++i){
@@ -319,7 +345,6 @@ bool HandleStandingCollision() {
     if(balance_num > 0.0){
         balancing = true;
         balance_pos /= balance_num;
-        DebugDrawWireSphere(balance_pos,0.1,vec3(0.0f,0.0f,1.0f),_delete_on_update);
     }
     return (sphere_col.position == lower_pos);
 }
@@ -340,7 +365,9 @@ void HandleAirCollisions(const Timestep &in ts) {
         float size;
         GetCollisionSphere(col_offset, col_scale, size);
         col.GetSlidingScaledSphereCollision(this_mo.position+col_offset, _leg_sphere_size, col_scale);
-        DebugDrawWireScaledSphere(this_mo.position+col_offset, _leg_sphere_size, col_scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
+        if(show_debug){
+            DebugDrawWireScaledSphere(this_mo.position+col_offset, _leg_sphere_size, col_scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
+        }
 
         vec3 closest_point;
         float closest_dist = -1.0f;
@@ -372,7 +399,9 @@ vec3 HandleBumperCollision(){
     float size;
     GetCollisionSphere(offset, scale, size);
     col.GetSlidingScaledSphereCollision(this_mo.position+offset, size, scale);
-    DebugDrawWireScaledSphere(this_mo.position+offset,size,scale,vec3(0.0f,1.0f,0.0f),_delete_on_update);
+    if(show_debug){
+        DebugDrawWireScaledSphere(this_mo.position+offset,size,scale,vec3(0.0f,1.0f,0.0f),_delete_on_update);
+    }
     this_mo.position = sphere_col.adjusted_position-offset;
     return (sphere_col.adjusted_position - sphere_col.position);
 }
@@ -550,9 +579,12 @@ void MovementObjectDeleted(int id){
 }
 
 void FinalAnimationMatrixUpdate(int num_frames) {
+    float scale = 0.5f;
+
     RiggedObject@ rigged_object = this_mo.rigged_object();
     BoneTransform local_to_world;
     vec3 offset = this_mo.position;
+    offset.y -= _leg_sphere_size;
     vec3 facing = this_mo.GetFacing();
     float cur_rotation = atan2(facing.x, facing.z);
     quaternion rotation(vec4(0,1,0,cur_rotation));
@@ -664,4 +696,11 @@ int NeedsAnimFrames(){
 }
 
 void SetParameters() {
+    params.AddFloatSlider("Character Scale",1,"min:0.6,max:1.4,step:0.02,text_mult:100");
+    float new_char_scale = params.GetFloat("Character Scale");
+    if(new_char_scale != this_mo.rigged_object().GetRelativeCharScale()){
+        this_mo.RecreateRiggedObject(this_mo.char_path);
+        ResetSecondaryAnimation();
+        CacheSkeletonInfo();
+    }
 }
