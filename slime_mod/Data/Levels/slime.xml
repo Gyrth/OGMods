@@ -25,25 +25,25 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="12.6505" t1="5.32999" t2="-11.9966" s0="1" s1="1" s2="1" q0="0.0789859" q1="-0.920399" q2="0.252666" q3="0.287726" id="1">
+    <CameraObject t0="9.95721" t1="10.5967" t2="-14.406" s0="1" s1="1" s2="1" q0="-0.0887576" q1="0.905736" q2="-0.235936" q3="-0.340732" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="0.494736" t1="-3.42134" t2="-0.469863" s0="34.4902" s1="1" s2="33.7116" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-35.0102" t1="-1.95966" t2="-0.437461" s0="1.4119" s1="2.46167" s2="33.6955" q0="0" q1="0" q2="0" q3="1" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="-35.0102" t1="4.76806" t2="-0.365916" s0="1.4119" s1="9.18939" s2="33.624" q0="0" q1="0" q2="0" q3="1" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="35.4434" t1="-1.95966" t2="-0.361941" s0="1.4119" s1="2.46167" s2="33.6955" q0="0" q1="0" q2="0" q3="1" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="35.4434" t1="4.73993" t2="-0.542037" s0="1.4119" s1="9.16126" s2="33.5154" q0="0" q1="0" q2="0" q3="1" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="0.126461" t1="-1.95966" t2="31.9207" s0="33.86" s1="2.46168" s2="1.34759" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="0.189598" t1="4.70721" t2="31.9207" s0="33.7969" s1="9.12855" s2="1.34759" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="0.209348" t1="-1.95966" t2="-32.7479" s0="33.86" s1="2.46168" s2="1.34759" q0="0" q1="0" q2="0" q3="1" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="0.230474" t1="4.90963" t2="-32.7479" s0="33.8811" s1="9.33097" s2="1.34759" q0="0" q1="0" q2="0" q3="1" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="4.89337" t1="-0.285589" t2="-0.692036" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="10" type_file="Data/Characters/slime_actor.xml" is_player="0">
+    <ActorObject t0="0.963945" t1="-1.44054" t2="1.76464" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="10" type_file="Data/Characters/slime_actor.xml" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
         </parameters>

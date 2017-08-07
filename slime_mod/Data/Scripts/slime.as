@@ -168,6 +168,8 @@ bool balancing = false;
 vec3 balance_pos;
 
 bool show_debug = false;
+bool dialogue_control = false;
+
 
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
@@ -178,12 +180,15 @@ void Update(int num_frames) {
 }
 
 float jump_wait = 0.0f;
-bool allow_jumping = false;
+float long_offset = 3.14f;
+float long_magnitude = 0.0f;
+float wide_offset = 3.14f;
+bool allow_jumping = true;
 void UpdateJumping(){
     if(on_ground && allow_jumping){
         jump_wait -= time_step;
         if(jump_wait < 0.0f){
-            jump_wait = RangedRandomFloat(0.1f, 0.25f);
+            jump_wait = RangedRandomFloat(0.25f, 0.50f);
             float jump_mult = 5.0f;
             vec3 jump_vel;
             jump_vel.y = RangedRandomFloat(1.0f, 2.0f);
@@ -191,8 +196,22 @@ void UpdateJumping(){
             jump_vel.z = RangedRandomFloat(-1.0f, 1.0f);
             this_mo.velocity += jump_vel * jump_mult;
             this_mo.SetRotationFromFacing(normalize(this_mo.velocity));
-            Print("Jump\n");
+            long_magnitude = length(this_mo.velocity) * 0.05f;
+            Print("Jump " + long_magnitude + "\n");
+            long_offset = 0.0f;
         }
+    }
+    if(long_offset < 3.14f){
+        long_offset += time_step * 50.0f;
+        this_mo.rigged_object().SetMorphTargetWeight("long",pow(sin(long_offset), 2.0f), long_magnitude);
+    }else{
+        this_mo.rigged_object().SetMorphTargetWeight("long",0.0f, 1.0f);
+    }
+    if(wide_offset < 3.14f){
+        wide_offset += time_step * 30.0f;
+        this_mo.rigged_object().SetMorphTargetWeight("wide",pow(sin(wide_offset), 2.0f), 0.25f);
+    }else{
+        this_mo.rigged_object().SetMorphTargetWeight("wide",0.0f, 1.0f);
     }
 }
 
@@ -203,7 +222,6 @@ void HandleAnimationEvent(string event, vec3 world_pos){
 
 }
 void Reset() {
-    this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, _ANM_FROM_START);
 }
 
 void Init(string character_path) {
@@ -223,17 +241,7 @@ void ApplyPhysics(const Timestep &in ts) {
     bool feet_moving = false;
     float _walk_accel = 35.0f; // how fast characters accelerate when moving
     if(on_ground){
-        if(!feet_moving){
-            this_mo.velocity *= pow(0.95f,ts.frames());
-        } else {
-            const float e = 2.71828183f;
-            if(max_speed == 0.0f){
-                max_speed = true_max_speed;
-            }
-            float exp = _walk_accel*time_step*-1/max_speed;
-            float current_movement_friction = pow(e,exp);
-            this_mo.velocity *= pow(current_movement_friction, ts.frames());
-        }
+        this_mo.velocity *= pow(0.95f,ts.frames());
     }
 }
 
@@ -250,7 +258,7 @@ void HandleCollisions(const Timestep &in ts) {
     } else {
         HandleAirCollisions(ts);
     }
-    last_col_pos = this_mo.position;
+    /*last_col_pos = this_mo.position;
     // Flatten velocity against previous velocity
     if(dot(initial_vel, this_mo.velocity) < 0.0f){                              // If velocity is in opposite direction from old velocity,
         vec3 initial_dir = normalize(initial_vel);                              // flatten it against plane with normal of old velocity
@@ -260,7 +268,7 @@ void HandleCollisions(const Timestep &in ts) {
     // Collisions should not increase speed
     if(length_squared(initial_vel) < length_squared(this_mo.velocity)){         // If speed is greater than before collision, set it to the
         this_mo.velocity = normalize(this_mo.velocity)*length(initial_vel);     // old speed
-    }
+    }*/
 }
 
 
@@ -298,12 +306,6 @@ void HandleGroundCollisions(const Timestep &in ts) {
             bumper_collision_response = HandleBumperCollision();
         }
     }
-    this_mo.position.y = min(old_pos.y, this_mo.position.y);
-    bumper_collision_response.y = min(0.0, bumper_collision_response.y);
-    this_mo.velocity += bumper_collision_response / ts.step(); // Push away from wall, and apply velocity change verlet style
-
-    //Print("ground_normal " + ground_normal + "\n");
-
     bool in_air = HandleStandingCollision();
     if(in_air){
         on_ground = false;
@@ -382,6 +384,7 @@ void HandleAirCollisions(const Timestep &in ts) {
     }
     if(landing){
         Print("Land\n");
+        wide_offset = 0.0f;
         on_ground = true;
     }
 }
