@@ -169,7 +169,17 @@ vec3 balance_pos;
 
 bool show_debug = false;
 bool dialogue_control = false;
-
+bool static_char = false;
+int invisible_when_stationary = 0;
+int species = 0;
+float threat_amount = 0.0f;
+float target_threat_amount = 0.0f;
+float threat_vel = 0.0f;
+int primary_weapon_slot = 0;
+int secondary_weapon_slot = 1;
+array<int> weapon_slots = {-1, -1};
+int knife_layer_id = -1;
+int throw_knife_layer_id = -1;
 
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
@@ -224,11 +234,14 @@ void HandleAnimationEvent(string event, vec3 world_pos){
 void Reset() {
 }
 
-void Init(string character_path) {
+bool Init(string character_path) {
     this_mo.char_path = character_path;
-    character_getter.Load(this_mo.char_path);
-    this_mo.RecreateRiggedObject(this_mo.char_path);
-    this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+    bool success = character_getter.Load(this_mo.char_path);
+    if(success){
+        this_mo.RecreateRiggedObject(this_mo.char_path);
+        this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+    }
+    return success;
 }
 
 void PostReset() {
@@ -408,6 +421,10 @@ vec3 HandleBumperCollision(){
     return (sphere_col.adjusted_position - sphere_col.position);
 }
 
+int WasHit(string type, string attack_path, vec3 dir, vec3 pos, int attacker_id, float attack_damage_mult, float attack_knockback_mult) {
+    return 0;
+}
+
 void ImpactSound(float magnitude, vec3 position) {
     this_mo.MaterialEvent("bodyfall", position);
 }
@@ -585,5 +602,35 @@ int NeedsAnimFrames(){
     return 0;
 }
 
+int IsPassive() {
+    return 0;
+}
+
+int IsOnLedge(){
+    return 0;
+}
+
+int IsDodging(){
+    return 0;
+}
+
+int IsAggro() {
+    return 1;
+}
+
 void SetParameters() {
+    params.AddIntCheckbox("Static",false);
+    static_char = (params.GetInt("Static") != 0);
+
+    string team_str;
+    character_getter.GetTeamString(team_str);
+    params.AddString("Teams",team_str);
+
+    params.AddFloatSlider("Character Scale",1,"min:0.6,max:1.4,step:0.02,text_mult:100");
+    float new_char_scale = params.GetFloat("Character Scale");
+    if(new_char_scale != this_mo.rigged_object().GetRelativeCharScale()){
+        this_mo.RecreateRiggedObject(this_mo.char_path);
+        ResetSecondaryAnimation();
+        this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+    }
 }
