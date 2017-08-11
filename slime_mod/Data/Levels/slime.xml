@@ -3,6 +3,9 @@
 <Name></Name>
 <Description></Description>
 <Shader>post</Shader>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
 <OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
 <Script></Script>
@@ -13,6 +16,7 @@
     <parameter name="HDR White point" type="string" val="0.971" />
     <parameter name="Level Boundaries" type="string" val="1" />
     <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
     <parameter name="Sky Brightness" type="string" val="1" />
     <parameter name="Sky Rotation" type="string" val="-62" />
     <parameter name="Sky Tint" type="string" val="255, 255, 255" />
@@ -25,10 +29,46 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="9.95721" t1="10.5967" t2="-14.406" s0="1" s1="1" s2="1" q0="-0.0887576" q1="0.905736" q2="-0.235936" q3="-0.340732" id="1">
+    <ActorObject t0="1.51681" t1="-3.21282" t2="-0.685118" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <CameraObject t0="1.60472" t1="2.96495" t2="-12.7141" s0="1" s1="1" s2="1" q0="0.00854327" q1="-0.96032" q2="0.277194" q3="0.0295974" id="1">
         <parameters />
     </CameraObject>
-    <EnvObject t0="0.494736" t1="-3.42134" t2="-0.469863" s0="34.4902" s1="1" s2="33.7116" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="0.763525" t1="-4.80862" t2="-0.685865" s0="34.4902" s1="1" s2="33.7116" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="-35.0102" t1="4.76806" t2="-0.365916" s0="1.4119" s1="9.18939" s2="33.624" q0="0" q1="0" q2="0" q3="1" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -45,7 +85,9 @@
     </EnvObject>
     <ActorObject t0="0.963945" t1="-1.44054" t2="1.76464" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="10" type_file="Data/Characters/slime_actor.xml" is_player="0">
         <parameters>
-            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Character Scale" type="float" val="0.71858" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
         </parameters>
         <Connections>
             <Connection id="10" />
@@ -53,7 +95,11 @@
         <ItemConnections />
         <Palette />
     </ActorObject>
+    <ItemObject t0="-4.48509" t1="-0.515051" t2="2.04004" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="11" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </ItemObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Slime" path="Data/Characters/slime_actor.xml" thumbnail_path="Data/UI/spawner/Slime.png" />
+    <SpawnerItem display_name="Dog Spear" path="Data/Items/DogWeapons/DogSpear.xml" thumbnail_path="Data/UI/spawner/thumbs/Interactive Objects/Dog Spear.png" />
 </RecentItems>
