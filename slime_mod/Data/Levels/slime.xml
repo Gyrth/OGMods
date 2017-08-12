@@ -65,7 +65,7 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <CameraObject t0="1.60472" t1="2.96495" t2="-12.7141" s0="1" s1="1" s2="1" q0="0.00854327" q1="-0.96032" q2="0.277194" q3="0.0295974" id="1">
+    <CameraObject t0="-23.6046" t1="-0.260734" t2="-6.02118" s0="1" s1="1" s2="1" q0="0.0179363" q1="0.980904" q2="-0.158879" q3="0.110737" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="0.763525" t1="-4.80862" t2="-0.685865" s0="34.4902" s1="1" s2="33.7116" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -77,15 +77,27 @@
     <EnvObject t0="35.4434" t1="4.73993" t2="-0.542037" s0="1.4119" s1="9.16126" s2="33.5154" q0="0" q1="0" q2="0" q3="1" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
+    <ActorObject t0="-22.9755" t1="-1.90217" t2="2.80498" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="4" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
     <EnvObject t0="0.189598" t1="4.70721" t2="31.9207" s0="33.7969" s1="9.12855" s2="1.34759" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="0.230474" t1="4.90963" t2="-32.7479" s0="33.8811" s1="9.33097" s2="1.34759" q0="0" q1="0" q2="0" q3="1" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="0.963945" t1="-1.44054" t2="1.76464" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="10" type_file="Data/Characters/slime_actor.xml" is_player="0">
+    <ActorObject t0="-25.0517" t1="-2.63588" t2="3.00382" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="10" type_file="Data/Characters/slime_actor.xml" is_player="0">
         <parameters>
-            <parameter name="Character Scale" type="float" val="0.71858" />
+            <parameter name="Character Scale" type="float" val="0.5" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Teams" type="string" val="slime" />
         </parameters>
@@ -95,11 +107,183 @@
         <ItemConnections />
         <Palette />
     </ActorObject>
-    <ItemObject t0="-4.48509" t1="-0.515051" t2="2.04004" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="11" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="-25.4425" t1="12.6319" t2="1.92157" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.999891" q3="0.0147407" id="11" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
+    <ActorObject t0="-24.0712" t1="-1.61826" t2="3.1355" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="12" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-22.8036" t1="-0.61418" t2="3.19603" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="14" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-25.3834" t1="-0.228775" t2="3.88017" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-22.6497" t1="1.03855" t2="3.7122" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="18" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-24.9007" t1="1.34271" t2="4.29846" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="20" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ItemObject t0="-20.9356" t1="11.795" t2="2.41859" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.999891" q3="0.0147407" id="22" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </ItemObject>
+    <ActorObject t0="-22.4497" t1="1.52521" t2="3.83085" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="23" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-19.5304" t1="1.55619" t2="3.21092" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="25" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-18.2763" t1="1.16067" t2="2.80665" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="27" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-18.5868" t1="-0.68685" t2="2.25875" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="29" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-20.0972" t1="-0.986485" t2="2.48887" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="31" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-20.2221" t1="-1.86287" t2="2.21953" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="33" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-19.3005" t1="-2.02591" t2="1.96233" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="35" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-17.5909" t1="-2.14676" t2="1.5453" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="37" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="-15.3014" t1="-1.93689" t2="1.10144" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="39" type_file="Data/Characters/slime_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="slime" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Slime" path="Data/Characters/slime_actor.xml" thumbnail_path="Data/UI/spawner/Slime.png" />
     <SpawnerItem display_name="Dog Spear" path="Data/Items/DogWeapons/DogSpear.xml" thumbnail_path="Data/UI/spawner/thumbs/Interactive Objects/Dog Spear.png" />
+    <SpawnerItem display_name="Male Civilian Rabbit Pale" path="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/pale_rabbit_civ_actor.png" />
 </RecentItems>
