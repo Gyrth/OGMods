@@ -301,7 +301,7 @@ void UpdateFaceExpression(){
 
 void ChangeFaceExpression(){
     string path;
-    switch(rand()%4){
+    switch(rand()%5){
         case 0:
             path = "Data/Characters/slime_smile.xml";
             break;
@@ -311,15 +311,20 @@ void ChangeFaceExpression(){
         case 2:
             path = "Data/Characters/slime_closed_eyes_smile.xml";
             break;
+        case 3:
+            path = "Data/Characters/slime_worried.xml";
+            break;
         default:
             path = "Data/Characters/slime_small_smile.xml";
             break;
     }
+    vec3 old_facing = this_mo.GetFacing();
     this_mo.char_path = path;
     character_getter.Load(this_mo.char_path);
     this_mo.RecreateRiggedObject(this_mo.char_path);
     this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
     FixDiscontinuity();
+    this_mo.SetRotationFromFacing(old_facing);
 }
 
 float wiggle_wait = 0.0f;
