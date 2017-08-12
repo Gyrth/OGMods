@@ -289,9 +289,10 @@ void Update(int num_frames) {
 }
 float wiggle_wait = 0.0f;
 float wave = 1.0f;
+bool targeted_jump = false;
 
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
-    float distance_threshold = character_scale;
+    float distance_threshold = character_scale * 2.0f;
     vec3 this_com = this_mo.rigged_object().skeleton().GetCenterOfMass();
     vec3 other_com = other.rigged_object().skeleton().GetCenterOfMass();
     this_com.y = this_mo.position.y;
@@ -302,11 +303,12 @@ void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
         dir /= dist;
         dir *= distance_threshold - dist;
         vec3 other_push = dir * 0.5f / (time_step) * 0.15f;
-        this_mo.velocity += other_push;
+        this_mo.velocity -= other_push;
         other.Execute("
         if(!static_char){
             push_velocity += vec3("+other_push.x+","+other_push.y+","+other_push.z+");
             MindReceiveMessage(\"collided "+this_mo.GetID()+"\");
+            wide_offset = 0.0f;
         }");
     }
 }
@@ -323,12 +325,21 @@ void UpdateJumping(){
             jump_wait = RangedRandomFloat(0.25f, 0.50f);
             float jump_mult = 5.0f;
             vec3 jump_vel;
-            jump_vel.y = RangedRandomFloat(1.0f, 2.0f);
-            jump_vel.x = RangedRandomFloat(-1.0f, 1.0f);
-            jump_vel.z = RangedRandomFloat(-1.0f, 1.0f);
+
+            if(targeted_jump && GetPlayerCharacterID() != -1){
+                MovementObject@ char = ReadCharacterID(GetPlayerCharacterID());
+                jump_vel = normalize(char.position - this_mo.position);
+                jump_vel.y = RangedRandomFloat(1.0f, 2.0f);
+            }else{
+                jump_vel.y = RangedRandomFloat(1.0f, 2.0f);
+                jump_vel.x = RangedRandomFloat(-1.0f, 1.0f);
+                jump_vel.z = RangedRandomFloat(-1.0f, 1.0f);
+            }
+
             this_mo.velocity += jump_vel * jump_mult;
-            long_magnitude = length(this_mo.velocity) * 0.05f;
+            long_magnitude = length(this_mo.velocity) * 0.075f;
             long_offset = 0.0f;
+            on_ground = false;
         }
     }
     if(long_offset < 3.14f){
@@ -340,7 +351,7 @@ void UpdateJumping(){
     float damping_time = 20.0f;
     if(wide_offset < damping_time){
         wide_offset += time_step * 40.0f;
-        float weight = (damping_time - wide_offset) * 0.02f * pow(sin(wide_offset), 2.0f);
+        float weight = (damping_time - wide_offset) * 0.01f * pow(sin(wide_offset), 2.0f);
         this_mo.rigged_object().SetMorphTargetWeight("wide", weight, min(1.0f, land_magnitude));
         this_mo.rigged_object().SetMorphTargetWeight("deep", weight, min(1.0f, land_magnitude));
     }else{
@@ -413,12 +424,16 @@ void HandleCollisions(const Timestep &in ts) {
 }
 
 void HandleGroundCollisions(const Timestep &in ts) {
-    vec3 old_vel = this_mo.velocity;
     // Check if character has room to stand up
-    float old_duck_amount = duck_amount;
-    vec3 test_bumper_collision_response(0.0f, -10.0f, 0.0f);
     vec3 old_pos = this_mo.position;
-    vec3 bumper_collision_response = HandleBumperCollision();
+    vec3 scale;
+    float size;
+    GetCollisionSphere(scale, size);
+    col.GetSlidingScaledSphereCollision(this_mo.position, size, scale);
+    if(show_debug){
+        DebugDrawWireScaledSphere(this_mo.position, size, scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
+    }
+    this_mo.position = sphere_col.adjusted_position;
     bool in_air = HandleStandingCollision();
     if(in_air){
         on_ground = false;
@@ -439,12 +454,11 @@ bool HandleStandingCollision() {
 }
 
 void HandleAirCollisions(const Timestep &in ts) {
-    vec3 initial_vel = this_mo.velocity;
     vec3 offset = this_mo.position - last_col_pos;
     this_mo.position = last_col_pos;
     bool landing = false;
     vec3 old_vel = this_mo.velocity;
-    for(int i=0; i<ts.frames(); ++i){                                        // Divide movement into multiple pieces to help prevent surface penetration
+    for(int i=0; i<ts.frames(); ++i){ // Divide movement into multiple pieces to help prevent surface penetration
         if(on_ground){
             break;
         }
@@ -462,8 +476,7 @@ void HandleAirCollisions(const Timestep &in ts) {
         for(int j=0; j<sphere_col.NumContacts(); j++){
             const CollisionPoint contact = sphere_col.GetContact(j);
             land_magnitude = length(this_mo.velocity);
-            float bounciness = 0.5f;
-            float max_bounce_vel = 150.0f;
+            float bounciness = 0.55f;
             if(contact.normal.y > _ground_normal_y_threshold ||
                 (this_mo.velocity.y < 0.0f && contact.normal.y > 0.2f) ||
                 (contact.custom_normal.y >= 1.0 && contact.custom_normal.y < 4.0))
@@ -471,12 +484,12 @@ void HandleAirCollisions(const Timestep &in ts) {
                     landing = true;
                     PlaySoundGroup("Data/Sounds/weapon_foley/impact/weapon_drop_light_dirt.xml", this_mo.position, 1.0f);
                     //The charater is pushed back when colliding with the ground.
-                    /*this_mo.position = contact.position + vec3(0.0f, character_scale, 0.0f);*/
-                    this_mo.velocity += contact.normal * length(this_mo.velocity) * bounciness;
+                    if(length(this_mo.velocity) > 3.0f){
+                        this_mo.velocity = reflect(this_mo.velocity, contact.normal) * bounciness;
+                    }
                 }else{
                     //A wall
-                    /*this_mo.position = contact.position + (character_scale * contact.normal);*/
-                    this_mo.velocity = contact.normal * length(this_mo.velocity);
+                    this_mo.velocity = reflect(this_mo.velocity, contact.normal);
                 }
         }
     }
@@ -490,18 +503,6 @@ void HandleAirCollisions(const Timestep &in ts) {
 void GetCollisionSphere(vec3 &out scale, float &out size){
     scale = vec3(1.0f);
     size = character_scale;
-}
-
-vec3 HandleBumperCollision(){
-    vec3 scale;
-    float size;
-    GetCollisionSphere(scale, size);
-    col.GetSlidingScaledSphereCollision(this_mo.position, size, scale);
-    if(show_debug){
-        DebugDrawWireScaledSphere(this_mo.position, size, scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
-    }
-    this_mo.position = sphere_col.adjusted_position;
-    return (sphere_col.adjusted_position - sphere_col.position);
 }
 
 int WasHit(string type, string attack_path, vec3 dir, vec3 pos, int attacker_id, float attack_damage_mult, float attack_knockback_mult) {
@@ -648,9 +649,23 @@ int IsAggro() {
     return 1;
 }
 
+int GetPlayerCharacterID() {
+    int num = GetNumCharacters();
+    for(int i=0; i<num; ++i){
+        MovementObject@ char = ReadCharacter(i);
+        if(char.controlled){
+            return char.GetID();
+        }
+    }
+    return -1;
+}
+
 void SetParameters() {
     params.AddIntCheckbox("Static",false);
     static_char = (params.GetInt("Static") != 0);
+
+    params.AddIntCheckbox("Follow Player",false);
+    targeted_jump = (params.GetInt("Follow Player") != 0);
 
     string team_str;
     character_getter.GetTeamString(team_str);
