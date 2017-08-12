@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<character>
+    <appearance obj_path = "Data/Objects/slime_smile.xml"
+                skeleton = "Data/Skeletons/slime.xml"/>
+    <animations/>
+    <attacks/>
+    <team>slime</team>
+    <morphs>
+        <long />
+        <wide />
+        <deep />
+    </morphs>
+    </visemes>
+    <voice path = "Data/Sounds/voice/rabbit2.xml"
+           pitch = "1.0"/>
+    <clothing>Data/Materials/cloth_fabric.xml</clothing>
+    <tags/>
+ </character>

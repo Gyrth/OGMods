@@ -286,7 +286,39 @@ void Update(int num_frames) {
     HandleCollisions(ts);
     UpdateJumping();
     UpdateFacing(ts);
+    UpdateFaceExpression();
 }
+float face_timer = 0.0f;
+float face_timer_timout = 0.0f;
+void UpdateFaceExpression(){
+    face_timer += time_step;
+    if(face_timer > face_timer_timout){
+        face_timer_timout = RangedRandomFloat(0.1f, 0.5f);
+        ChangeFaceExpression();
+        face_timer = 0.0f;
+    }
+}
+
+void ChangeFaceExpression(){
+    string path;
+    switch(rand()%3){
+        case 0:
+            path = "Data/Characters/slime_smile.xml";
+            break;
+        case 1:
+            path = "Data/Characters/slime_open_smile.xml";
+            break;
+        default:
+            path = "Data/Characters/slime_small_smile.xml";
+            break;
+    }
+    this_mo.char_path = path;
+    character_getter.Load(this_mo.char_path);
+    this_mo.RecreateRiggedObject(this_mo.char_path);
+    this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+    FixDiscontinuity();
+}
+
 float wiggle_wait = 0.0f;
 float wave = 1.0f;
 bool targeted_jump = false;
@@ -318,7 +350,7 @@ float long_offset = 3.14f;
 float long_magnitude = 0.0f;
 float wide_offset = 3.14f;
 void UpdateJumping(){
-    bool allow_jumping = true;
+    bool allow_jumping = false;
     if(on_ground && allow_jumping){
         jump_wait -= time_step;
         if(jump_wait < 0.0f){
@@ -520,7 +552,6 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
 }
 
 int AboutToBeHitByItem(int id){
-    Print("About to be hit\n");
     return 1;
 }
 
@@ -557,7 +588,6 @@ void FixDiscontinuity() {
 
 void PreDrawCameraNoCull(float curr_game_time) {
     if(queue_fix_discontinuity){
-        Update(1);
         this_mo.FixDiscontinuity();
         FinalAnimationMatrixUpdate(1);
         queue_fix_discontinuity = false;
