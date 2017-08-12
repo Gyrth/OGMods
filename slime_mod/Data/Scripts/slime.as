@@ -301,12 +301,15 @@ void UpdateFaceExpression(){
 
 void ChangeFaceExpression(){
     string path;
-    switch(rand()%3){
+    switch(rand()%4){
         case 0:
             path = "Data/Characters/slime_smile.xml";
             break;
         case 1:
             path = "Data/Characters/slime_open_smile.xml";
+            break;
+        case 2:
+            path = "Data/Characters/slime_closed_eyes_smile.xml";
             break;
         default:
             path = "Data/Characters/slime_small_smile.xml";
