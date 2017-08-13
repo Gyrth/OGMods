@@ -279,6 +279,7 @@ array<vec3> temp_old_weap_points;
 array<vec3> old_weap_points;
 array<vec3> weap_points;
 
+
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
     time += ts.step();
@@ -287,15 +288,43 @@ void Update(int num_frames) {
     UpdateJumping();
     UpdateFacing(ts);
     UpdateFaceExpression();
+    UpdateMultiplying();
 }
 float face_timer = 0.0f;
 float face_timer_timout = 0.0f;
+bool change_face_expression = false;
 void UpdateFaceExpression(){
-    face_timer += time_step;
-    if(face_timer > face_timer_timout){
-        face_timer_timout = RangedRandomFloat(0.1f, 0.5f);
-        ChangeFaceExpression();
-        face_timer = 0.0f;
+    if(change_face_expression){
+        face_timer += time_step;
+        if(face_timer > face_timer_timout){
+            face_timer_timout = RangedRandomFloat(0.1f, 0.5f);
+            ChangeFaceExpression();
+            face_timer = 0.0f;
+        }
+    }
+}
+
+float multiply_timer = 0.0f;
+bool multiply = false;
+void UpdateMultiplying(){
+    if(multiply && length(this_mo.velocity) < 0.5f){
+        multiply_timer += time_step;
+        if(multiply_timer > 0.5f){
+            multiply_timer = 0.0f;
+            character_scale += 0.1f;
+            vec3 old_facing = this_mo.GetFacing();
+            if(character_scale > 1.0f){
+                character_scale = 0.25f;
+                Object@ new_slime = ReadObjectFromID(CreateObject("Data/Characters/slime_actor.xml"));
+                ScriptParams@ new_params = new_slime.GetScriptParams();
+                new_slime.SetTranslation(this_mo.position + vec3(0.5f, 0.0f, 0.0f));
+            }
+            params.SetFloat("Character Scale", character_scale);
+            this_mo.RecreateRiggedObject(this_mo.char_path);
+            this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+            FixDiscontinuity();
+            this_mo.SetRotationFromFacing(old_facing);
+        }
     }
 }
 
@@ -357,8 +386,8 @@ float jump_wait = 0.0f;
 float long_offset = 3.14f;
 float long_magnitude = 0.0f;
 float wide_offset = 3.14f;
+bool allow_jumping = true;
 void UpdateJumping(){
-    bool allow_jumping = false;
     if(on_ground && allow_jumping){
         jump_wait -= time_step;
         if(jump_wait < 0.0f){
@@ -705,15 +734,18 @@ void SetParameters() {
     params.AddIntCheckbox("Follow Player",false);
     targeted_jump = (params.GetInt("Follow Player") != 0);
 
+    params.AddIntCheckbox("Multiply",false);
+    multiply = (params.GetInt("Multiply") != 0);
+
     string team_str;
     character_getter.GetTeamString(team_str);
     params.AddString("Teams",team_str);
 
-    params.AddFloatSlider("Character Scale",0.5,"min:0.25,max:2.0,step:0.02,text_mult:100");
+    params.AddFloatSlider("Character Scale",0.25,"min:0.25,max:2.0,step:0.02,text_mult:100");
     character_scale = params.GetFloat("Character Scale");
     if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
         this_mo.RecreateRiggedObject(this_mo.char_path);
-        ResetSecondaryAnimation();
         this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+        FixDiscontinuity();
     }
 }
