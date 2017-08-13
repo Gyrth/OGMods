@@ -315,9 +315,14 @@ void UpdateMultiplying(){
             vec3 old_facing = this_mo.GetFacing();
             if(character_scale > 1.0f){
                 character_scale = 0.25f;
-                Object@ new_slime = ReadObjectFromID(CreateObject("Data/Characters/slime_actor.xml"));
+                int new_slime_id = CreateObject("Data/Characters/slime_actor.xml");
+                Object@ new_slime = ReadObjectFromID(new_slime_id);
                 ScriptParams@ new_params = new_slime.GetScriptParams();
-                new_slime.SetTranslation(this_mo.position + vec3(0.5f, 0.0f, 0.0f));
+                new_params.SetInt("Multiply", multiply ? 1 : 0);
+                new_params.SetInt("Follow Player", targeted_jump ? 1 : 0);
+                new_params.SetInt("Face Expressions", change_face_expression ? 1 : 0);
+                ReadCharacterID(new_slime_id).Execute("SetParameters();");
+                new_slime.SetTranslation(this_mo.position + vec3(character_scale, 0.0f, 0.0f));
             }
             params.SetFloat("Character Scale", character_scale);
             this_mo.RecreateRiggedObject(this_mo.char_path);
@@ -382,7 +387,7 @@ void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
     }
 }
 
-float jump_wait = 0.0f;
+float jump_wait = 1.0f;
 float long_offset = 3.14f;
 float long_magnitude = 0.0f;
 float wide_offset = 3.14f;
@@ -450,18 +455,18 @@ void Reset() {
     this_mo.rigged_object().ClearBoneConstraints();
 }
 
-bool Init(string character_path) {
-    this_mo.char_path = character_path;
+void Init(string character_path) {
+    /*this_mo.char_path = character_path;
     bool success = character_getter.Load(this_mo.char_path);
     if(success){
         this_mo.RecreateRiggedObject(this_mo.char_path);
         this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
     }
-    return success;
+    return success;*/
 
-    /*character_getter.Load(this_mo.char_path);
+    character_getter.Load(this_mo.char_path);
     this_mo.RecreateRiggedObject(this_mo.char_path);
-    this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);*/
+    this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
 }
 
 void PostReset() {
@@ -625,7 +630,7 @@ void FixDiscontinuity() {
 
 void PreDrawCameraNoCull(float curr_game_time) {
     if(queue_fix_discontinuity){
-        this_mo.FixDiscontinuity();
+        //this_mo.FixDiscontinuity();
         FinalAnimationMatrixUpdate(1);
         queue_fix_discontinuity = false;
     }
@@ -728,9 +733,6 @@ int GetPlayerCharacterID() {
 }
 
 void SetParameters() {
-    params.AddIntCheckbox("Static",false);
-    static_char = (params.GetInt("Static") != 0);
-
     params.AddIntCheckbox("Follow Player",false);
     targeted_jump = (params.GetInt("Follow Player") != 0);
 
@@ -749,6 +751,6 @@ void SetParameters() {
     if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
         this_mo.RecreateRiggedObject(this_mo.char_path);
         this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
-        FixDiscontinuity();
+        //FixDiscontinuity();
     }
 }
