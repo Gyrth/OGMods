@@ -322,8 +322,8 @@ void UpdateMultiplying(){
             params.SetFloat("Character Scale", character_scale);
             this_mo.RecreateRiggedObject(this_mo.char_path);
             this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
-            FixDiscontinuity();
             this_mo.SetRotationFromFacing(old_facing);
+            FixDiscontinuity();
         }
     }
 }
@@ -736,6 +736,9 @@ void SetParameters() {
 
     params.AddIntCheckbox("Multiply",false);
     multiply = (params.GetInt("Multiply") != 0);
+
+    params.AddIntCheckbox("Face Expressions",false);
+    change_face_expression = (params.GetInt("Face Expressions") != 0);
 
     string team_str;
     character_getter.GetTeamString(team_str);
