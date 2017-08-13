@@ -7,12 +7,13 @@
     <Category>Item Pack</Category>
     <Thumbnail>Data/Images/slime_thumb.jpg</Thumbnail>
     <PreviewImage>Data/Images/slime_full.jpg</PreviewImage>
-    <Description>Slime mod.</Description>
+    <Description>A Slime character from the game Slime Rancher. It jumps around a bit and you can kick it.</Description>
     <Tag>scripting</Tag>
     <Tag>character</Tag>
-    <SupportedVersion>*</SupportedVersion>
+    <SupportedVersion>b4</SupportedVersion>
     <Item category="Character"
         title="Slime"
         path="Data/Characters/slime_actor.xml"
         thumbnail="Data/UI/spawner/slime.png" />
+    <Level title="Slime Testing" thumbnail="Images/slime_full.jpg">slime.xml</Level>
 </Mod>
