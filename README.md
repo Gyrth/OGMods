@@ -1,4 +1,5 @@
 # Weapon Switcher
+Since the base game doesn't have a weapon switcher I thought I'd make one. Inspired by the weapon switcher in Zelda.  
 ## Howto install:  
 	1. Put the weapon_switcher folder into [Overgrowth Cache folder]/Data/Mods.
 ## Howto use the weapon switcher:  
