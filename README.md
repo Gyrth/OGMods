@@ -6,5 +6,5 @@ A gamemode where you are placed inside a city and need to find a thief. A descri
 ## Howto load the level:  
 	1. From the main menu go to Play -> Custom Levels -> Kill the Thief.  
 
-Last tested and working on alpha 209.  
+Last tested and working on beta 4.  
 [Preorder the game here.](http://www.wolfire.com/overgrowth)
