@@ -5,14 +5,14 @@ These animations can be added to a level then saved and loaded.
 ## How to add an animated object to the level:  
 	1. Open up a level.  
 	2. Press f1 to go into editor mode.  
-  3. Click Load->Interactive Items->Animated Object.  
-  4. Click somewhere in the scene.  
+	3. Click Load->Interactive Items->Animated Object.  
+	4. Click somewhere in the scene.  
 
 ## How to animate an object:  
-  1. Select the main hotspot. (the biggest box)  
-  2. Press u to open the parameters.  
-  3. Change the parameters to your liking.  
-  4. Move the wireframe objects around.  
+	1. Select the main hotspot. (the biggest box)  
+	2. Press u to open the parameters.  
+	3. Change the parameters to your liking.  
+	4. Move the wireframe objects around.  
 	5. Trigger the animation by walking into the hotspot.  
 
 ## Animation type numbers:  
