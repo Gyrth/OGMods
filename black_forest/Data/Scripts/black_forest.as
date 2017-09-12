@@ -19,14 +19,19 @@ bool reset_player = true;
 float floor_height;
 vec2 grid_position;
 
-MusicLoad ml("Data/Music/challengelevel.xml");
+MusicLoad ml("Data/Music/black_forest.xml");
 
 World world;
 int skip_update = 0;
 
 array<BlockType@> block_types = {
-                                    /*BlockType("Data/Objects/block_house.xml", 10.0f)};*/
-                                    BlockType("Data/Objects/block_path_straight_vertical.xml", 5.1f),
+                                    BlockType("Data/Objects/block_trees_1.xml", 5.1f),
+                                    BlockType("Data/Objects/block_trees_2.xml", 5.1f),
+                                    BlockType("Data/Objects/block_trees_3.xml", 5.1f),
+                                    BlockType("Data/Objects/block_trees_4.xml", 5.1f),
+                                    BlockType("Data/Objects/block_trees_5.xml", 5.1f)};
+                                    /*BlockType("Data/Objects/block_trees_prefab.xml", 10.0f)};*/
+                                    /*BlockType("Data/Objects/block_path_straight_vertical.xml", 5.1f),
                                     BlockType("Data/Objects/block_path_straight_horizontal.xml", 5.1f),
                                     BlockType("Data/Objects/block_house.xml", 5.1f),
                                     BlockType("Data/Objects/block_camp.xml", 5.1f),
@@ -37,7 +42,7 @@ array<BlockType@> block_types = {
                                     BlockType("Data/Objects/block_trees_dense.xml", 1.0f),
                                     BlockType("Data/Objects/block_ruins.xml", 5.1f),
                                     BlockType("Data/Objects/block_guard_sword.xml", 0.0f),
-                                    BlockType("Data/Objects/prefab.xml", 0.0f)};
+                                    BlockType("Data/Objects/prefab.xml", 0.0f)};*/
 
 class BlockType{
     string path;
@@ -319,6 +324,7 @@ void Init(string p_level_name) {
     for(uint i = 0; i < block_types.size(); i++){
         block_types[i].Init();
     }
+    PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
 }
 
 void ReadScriptParameters(){
@@ -382,6 +388,8 @@ void Update() {
       world.UpdateSpawning();
       world.UpdateWeather();
     }
+    UpdateMusic();
+    UpdateSounds();
 }
 
 void UpdateMovement(){
@@ -425,14 +433,24 @@ void UpdateMusic() {
         PlaySong("sad");
         return;
     }
-    int threats_remaining = ThreatsRemaining();
-    if(threats_remaining == 0){
-        PlaySong("ambient-happy");
-        return;
-    }
     if(player_id != -1 && ReadCharacter(player_id).QueryIntFunction("int CombatSong()") == 1){
         PlaySong("combat");
         return;
     }
     PlaySong("ambient-tense");
+}
+
+float delay = 5.0f;
+float radius = 5.0f;
+array<string> sounds = {"Data/Sounds/ambient/amb_forest_wood_creak_1.wav",
+                        "Data/Sounds/ambient/amb_forest_wood_creak_2.wav",
+                        "Data/Sounds/ambient/amb_forest_wood_creak_3.wav"};
+void UpdateSounds(){
+    delay -= time_step;
+    if(delay < 0.0f){
+        delay = RangedRandomFloat(3.0, 20.0f);
+        MovementObject@ player = ReadCharacterID(player_id);
+        vec3 position = player.position + vec3(RangedRandomFloat(-radius, radius),RangedRandomFloat(-radius, radius),RangedRandomFloat(-radius, radius));
+        PlaySound(sounds[rand() % sounds.size()], position);
+    }
 }

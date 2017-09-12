@@ -1,0 +1,27 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="4.08173" t1="18.9706" t2="58.9669" s0="57.0906" s1="65.4977" s2="55.3821" q0="0" q1="0" q2="0" q3="1" id="37" version="1">
+        <parameters />
+        <EnvObject t0="8.67019" t1="-3.66092" t2="63.1833" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="4.08173" t1="28.7479" t2="58.9669" s0="1" s1="1" s2="1" q0="0" q1="-0.807578" q2="0" q3="0.58976" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.646" t1="8.51684" t2="69.5446" s0="1.42185" s1="1.42185" s2="1.42185" q0="0" q1="-0.554579" q2="0" q3="0.832131" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.99534" t1="7.50792" t2="66.589" s0="1" s1="1" s2="1" q0="0" q1="0.612807" q2="0" q3="0.790233" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree4.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="0.717646" t1="6.67242" t2="72.1631" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.9597" t1="6.67242" t2="56.8847" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

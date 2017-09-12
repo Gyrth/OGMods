@@ -1,0 +1,27 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.40319" t1="11.7746" t2="62.6119" s0="26.1118" s1="51.1059" s2="22.0248" q0="0" q1="0" q2="0" q3="1" id="21" version="1">
+        <parameters />
+        <EnvObject t0="8.67019" t1="-3.66092" t2="63.1833" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="0.878134" t1="7.8393" t2="55.7755" s0="1" s1="1" s2="1" q0="0" q1="0.506449" q2="0" q3="0.86227" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.21678" t1="7.3983" t2="69.0917" s0="1" s1="1" s2="1" q0="-0.00134552" q1="0.935641" q2="0.00199193" q3="0.352939" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.3704" t1="7.75643" t2="59.765" s0="1" s1="1" s2="1" q0="-0.00186986" q1="0.997979" q2="0.00151058" q3="0.0634649" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.7517" t1="21.3614" t2="59.6493" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.17781" t1="13.9924" t2="64.7327" s0="1" s1="1" s2="1" q0="0" q1="-0.930194" q2="0" q3="0.367068" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_small.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

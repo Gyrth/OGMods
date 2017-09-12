@@ -1,0 +1,33 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="7.21627" t1="11.631" t2="61.9492" s0="27.3294" s1="50.8186" s2="22.8767" q0="0" q1="0" q2="0" q3="1" id="30" version="1">
+        <parameters />
+        <EnvObject t0="8.67019" t1="-3.66092" t2="63.1833" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="17.8323" t1="7.45574" t2="66.7131" s0="1" s1="1" s2="1" q0="0" q1="-0.522117" q2="0" q3="0.852874" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.64579" t1="7.79324" t2="72.1249" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.7447" t1="7.98406" t2="66.8256" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.3836" t1="9.77904" t2="58.6013" s0="1" s1="1" s2="1" q0="0" q1="-0.773688" q2="0" q3="0.633567" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-0.13925" t1="21.0741" t2="56.4726" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B_tops.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.6847" t1="6.73801" t2="68.0767" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.12921" t1="6.54954" t2="59.2457" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>
