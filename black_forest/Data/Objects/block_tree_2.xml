@@ -1,0 +1,84 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-34.0995" t1="28.1168" t2="-7.43529" s0="20.01" s1="51.6361" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="16" version="1">
+        <parameters>
+            <parameter name="Transpose" type="int" val="1" />
+        </parameters>
+        <EnvObject t0="-34.0995" t1="12.4161" t2="-7.43529" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_path_straight_vertical.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+            <Group t0="-34.3979" t1="37.8835" t2="-12.3255" s0="9.02897" s1="32.0827" s2="7.95274" q0="0" q1="0" q2="0" q3="1" id="85" version="1">
+                <parameters>
+                    <parameter name="BlockChild" type="int" val="1" />
+                </parameters>
+                <EnvObject t0="-32.8881" t1="35.4529" t2="-11.4191" s0="0.714939" s1="0.714939" s2="0.714939" q0="0.744295" q1="0.424055" q2="0.180123" q3="-0.483485" id="72" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_bleached.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-34.0456" t1="37.4103" t2="-12.1305" s0="1.5266" s1="1.5266" s2="1.5266" q0="-0.000252984" q1="-0.853086" q2="0.000413975" q3="0.521771" id="73" color_r="0.96" color_g="0.972549" color_b="0.991373" overbright="0" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-34.3236" t1="52.6467" t2="-12.195" s0="0.566531" s1="0.566531" s2="0.566531" q0="0.292068" q1="-0.427625" q2="-0.544588" q3="0.65974" id="74" color_r="0.65098" color_g="0.67451" color_b="0.67451" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-33.8487" t1="44.3215" t2="-12.9638" s0="0.5329" s1="0.5329" s2="0.5329" q0="-0.392298" q1="0.272018" q2="0.438294" q3="0.761582" id="75" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_bleached.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-36.9695" t1="41.6822" t2="-11.5753" s0="0.883194" s1="0.883194" s2="0.883194" q0="0" q1="0" q2="-0.230444" q3="0.973086" id="76" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-35.1952" t1="37.1295" t2="-10.4768" s0="0.883194" s1="0.883194" s2="0.883194" q0="-0.0209625" q1="0.301915" q2="0.0660173" q3="0.950815" id="77" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-34.4159" t1="43.3734" t2="-10.3797" s0="0.883194" s1="0.883194" s2="0.883194" q0="-0.0339249" q1="0.488603" q2="0.0603887" q3="0.869752" id="78" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-32.2495" t1="39.3257" t2="-12.769" s0="0.883194" s1="0.883194" s2="0.883194" q0="-0.0691808" q1="0.996381" q2="-0.00342038" q3="-0.049261" id="79" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-31.845" t1="35.776" t2="-12.27" s0="0.883194" s1="0.883194" s2="0.883194" q0="-0.0691808" q1="0.996381" q2="-0.00342038" q3="-0.049261" id="80" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-33.8111" t1="37.8844" t2="-14.1717" s0="0.883194" s1="0.883194" s2="0.883194" q0="-0.588409" q1="0.672288" q2="-0.379858" q3="-0.239814" id="81" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-35.2915" t1="40.8386" t2="-11.7622" s0="0.714939" s1="0.714939" s2="0.714939" q0="0.101981" q1="0.657132" q2="0.739788" q3="0.102427" id="82" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_bleached.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-33.9305" t1="45.9949" t2="-13.3424" s0="0.663163" s1="0.663163" s2="0.663163" q0="-0.293864" q1="0.838541" q2="-0.17164" q3="-0.425479" id="83" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+                <EnvObject t0="-33.9627" t1="50.3097" t2="-12.7365" s0="0.663163" s1="0.663163" s2="0.663163" q0="-0.525563" q1="0.799397" q2="0.12747" q3="-0.261724" id="84" color_r="0.65098" color_g="0.67451" color_b="0.67451" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                    <parameters>
+                        <parameter name="BlockChild" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+            </Group>
+    </Group>
+</ActorObjects>

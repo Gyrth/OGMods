@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/block_path_straight_vertical.obj</Model>
+	<ColorMap>Data/Textures/Terrain/forest_hills/forest_hills_c.tga</ColorMap>
+	<NormalMap>Data/Textures/block_path_straight_n.png</NormalMap>
+	<WeightMap>Data/Textures/block_path_straight_cw.png</WeightMap>
+	<DetailMaps>
+		<DetailMap colorpath="Data/Textures/buildings/detail_textures/tight_bricks_c.tga" normalpath="Data/Textures/buildings/detail_textures/tight_bricks_n.tga" materialpath="Data/Materials/rocks.xml" />
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt_rubble.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_rubble_normal.tga" materialpath="Data/Materials/gravel.xml" />
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/rubble_rocks_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/rubble_rocks_n.tga" materialpath="Data/Materials/rocks.xml" />
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/gray_rock.tga" normalpath="Data/Textures/Terrain/DetailTextures/gray_rock_normal.tga" materialpath="Data/Materials/rock.xml" />
+	</DetailMaps>
+	<!-- <DetailObjects>
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/WildGrass.xml" weight_path="Data/Textures/block_path_straight_w.png" normal_conform="0.900000" density="2.000000" min_embed="0.000000" max_embed="0.400000" min_scale="1.000000" max_scale="2.000000" view_distance="20.000000" jitter_degrees="10.000000" overbright="0.000000" />
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/GrassSeed.xml" weight_path="Data/Textures/block_path_straight_w.png" normal_conform="0.000000" density="0.200000" min_embed="0.000000" max_embed="0.100000" min_scale="0.800000" max_scale="1.000000" view_distance="50.000000" jitter_degrees="5.000000" overbright="0.400000" />
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/fall_tall_grass.xml" weight_path="Data/Textures/block_path_straight_w.png" normal_conform="0.900000" density="2.000000" min_embed="0.000000" max_embed="0.400000" min_scale="2.000000" max_scale="3.500000" view_distance="50.000000" jitter_degrees="10.000000" overbright="0.200000" />
+		<DetailObject obj_path="Data/Objects/Environment/Rocks/lichen_rock_c.xml" weight_path="Data/Textures/block_path_straight_w.png" normal_conform="0.900000" density="0.600000" min_embed="0.400000" max_embed="0.600000" min_scale="0.200000" max_scale="0.800000" view_distance="30.000000" jitter_degrees="30.000000" overbright="0.300000" collision_type="static" />
+	</DetailObjects> -->
+	<MaterialPath>Data/Materials/dirt.xml</MaterialPath>
+	<ShaderName>envobject #DETAILMAP4 #TANGENT #BASE_TANGENT</ShaderName>
+</Object>

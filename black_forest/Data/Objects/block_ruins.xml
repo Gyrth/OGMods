@@ -1,0 +1,49 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="56.7788" t1="17.9824" t2="51.2257" s0="20.01" s1="25.4554" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="1877" version="1">
+        <parameters>
+            <parameter name="Transpose" type="int" val="1" />
+        </parameters>
+        <EnvObject t0="56.7788" t1="15.3721" t2="51.2257" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1858" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_path_straight_vertical.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="61.918" t1="27.3144" t2="43.6597" s0="1.87895" s1="1.87895" s2="1.87895" q0="0" q1="1" q2="0" q3="0" id="1859" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/Ruins1Wall.xml">
+            <parameters>
+                <parameter name="BlockChild" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="50.9043" t1="27.6085" t2="43.4248" s0="2.24873" s1="2.24873" s2="2.24873" q0="0" q1="0" q2="0" q3="1" id="1860" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/Ruins1Pillar.xml">
+            <parameters>
+                <parameter name="BlockChild" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="57.3013" t1="27.7222" t2="51.2312" s0="1.29575" s1="1.29575" s2="1.29575" q0="0" q1="0.707107" q2="0" q3="0.707107" id="1876" color_r="0.199998" color_g="0.2" color_b="0.199998" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters>
+                <parameter name="BlockChild" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="50.437" t1="27.6594" t2="59.3387" s0="1" s1="1" s2="1" q0="0" q1="0.0263617" q2="0" q3="0.999653" id="1883" color_r="0.282353" color_g="0.28235" color_b="0.28235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+            <parameters>
+                <parameter name="BlockChild" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="57.4851" t1="27.6901" t2="56.033" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="-0.707107" id="1884" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters>
+                <parameter name="BlockChild" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="51.158" t1="25.5191" t2="57.186" s0="0.904608" s1="0.904608" s2="0.904608" q0="0" q1="-0.00532018" q2="0" q3="0.999986" id="1886" color_r="0.254902" color_g="0.254899" color_b="0.254899" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+            <parameters>
+                <parameter name="BlockChild" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="57.2788" t1="27.6901" t2="46.4477" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="-0.707107" id="1889" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters>
+                <parameter name="BlockChild" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

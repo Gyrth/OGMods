@@ -1,0 +1,40 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>dark-forest</Id>
+    <Name>Black Forest Mod</Name>
+    <Category>Item Pack</Category>
+    <Version>0.1.0</Version>
+    <Author>Gyrth McMulin</Author>
+    <Thumbnail>Data/Images/black_forest_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/black_forest_full.jpg</PreviewImage>
+    <Description>Black Forest.</Description>
+    <Tag>dark</Tag>
+    <Tag>forest</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <NeedsRestart>false</NeedsRestart>
+    <Level title="Black Forest" thumbnail="Images/black_forest_full.jpg">black_forest.xml</Level>
+    <Item category="Block"
+        title="block_path_straight_vertical"
+        path="Data/Objects/block_path_straight_vertical.xml"
+        thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block"
+        title="block_path_straight_horizontal"
+        path="Data/Objects/block_path_straight_horizontal.xml"
+        thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block"
+        title="group"
+        path="Data/Objects/group.xml"
+        thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block"
+        title="guard"
+        path="Data/Objects/block_guard_patrol.xml"
+        thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block"
+        title="guard prefab"
+        path="Data/Objects/guard_patrolling.xml"
+        thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block"
+        title="guard patrolling"
+        path="Data/Objects/block_guard_patrol.xml"
+        thumbnail="Data/UI/spawner/icon.png" />
+</Mod>
