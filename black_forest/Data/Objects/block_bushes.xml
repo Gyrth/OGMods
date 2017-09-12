@@ -3,7 +3,6 @@
 <ActorObjects>
     <Group t0="-33.5522" t1="13.3395" t2="-7.47507" s0="20.01" s1="23.6418" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="47" version="1">
         <parameters>
-            <parameter name="Transpose" type="int" val="1" />
         </parameters>
         <EnvObject t0="-33.5522" t1="11.636" t2="-7.47507" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_path_straight_vertical.xml">
             <parameters>
@@ -12,22 +11,18 @@
         </EnvObject>
         <EnvObject t0="-27.4611" t1="22.86" t2="-2.19954" s0="1" s1="1" s2="1" q0="0" q1="0.39695" q2="0" q3="0.91784" id="40" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
             <parameters>
-                <parameter name="BlockChild" type="int" val="1" />
             </parameters>
         </EnvObject>
         <EnvObject t0="-36.9999" t1="22.86" t2="-1.8424" s0="1" s1="1" s2="1" q0="0" q1="0.46736" q2="0" q3="0.884067" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
             <parameters>
-                <parameter name="BlockChild" type="int" val="1" />
             </parameters>
         </EnvObject>
         <EnvObject t0="-37.8648" t1="22.86" t2="-13.0913" s0="1" s1="1" s2="1" q0="0" q1="0.584352" q2="0" q3="0.811501" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
             <parameters>
-                <parameter name="BlockChild" type="int" val="1" />
             </parameters>
         </EnvObject>
         <EnvObject t0="-27.3725" t1="22.86" t2="-13.1276" s0="1" s1="1" s2="1" q0="0" q1="-0.541184" q2="0" q3="0.840904" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
             <parameters>
-                <parameter name="BlockChild" type="int" val="1" />
             </parameters>
         </EnvObject>
     </Group>

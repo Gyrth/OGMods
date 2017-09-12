@@ -3,7 +3,6 @@
 <ActorObjects>
     <Group t0="-13.6552" t1="16.2388" t2="37.7722" s0="20.01" s1="27.4838" s2="20.3291" q0="0" q1="0" q2="0" q3="1" id="2632" version="1">
         <parameters>
-            <parameter name="Transpose" type="int" val="1" />
         </parameters>
         <EnvObject t0="-13.6552" t1="12.6142" t2="37.6127" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2630" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_path_straight_vertical.xml">
             <parameters>
@@ -12,7 +11,6 @@
         </EnvObject>
         <EnvObject t0="-14.1746" t1="25.8141" t2="43.5575" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2631" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/hut_medium.xml">
             <parameters>
-                <parameter name="BlockChild" type="int" val="1" />
             </parameters>
         </EnvObject>
     </Group>

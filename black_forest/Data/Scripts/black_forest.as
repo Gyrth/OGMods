@@ -25,10 +25,11 @@ World world;
 int skip_update = 0;
 
 array<BlockType@> block_types = {
-                                    /*BlockType("Data/Objects/block_trees.xml", 10.0f)};*/
+                                    /*BlockType("Data/Objects/block_house.xml", 10.0f)};*/
                                     BlockType("Data/Objects/block_path_straight_vertical.xml", 5.1f),
                                     BlockType("Data/Objects/block_path_straight_horizontal.xml", 5.1f),
                                     BlockType("Data/Objects/block_house.xml", 5.1f),
+                                    BlockType("Data/Objects/block_camp.xml", 5.1f),
                                     BlockType("Data/Objects/block_bushes.xml", 5.1f),
                                     BlockType("Data/Objects/block_tree.xml", 5.1f),
                                     BlockType("Data/Objects/block_tree_2.xml", 5.1f),
@@ -107,8 +108,8 @@ class Block{
             Print("No objects!\n");
         }
         for(uint i = 0; i < obj_ids.size(); i++){
-            QueueDeleteObjectID(obj_ids[i]);
-            /*DeleteObjectID(obj_ids[i]);*/
+            /*QueueDeleteObjectID(obj_ids[i]);*/
+            DeleteObjectID(obj_ids[i]);
         }
         obj_ids.resize(0);
         deleted = true;
@@ -220,6 +221,8 @@ class World{
                 /*new_block.SetTranslation(objects_to_spawn[0].position + vec3(0.0f, new_block.GetBoundingBox().y / 2.0f, 0.0f));*/
 
                 /*int id = DuplicateObject(objects_to_spawn[0].block_type.original);*/
+                //Other scripts can create objects as well. So we first need to mark those as old or else they will get added to the world system.
+                MarkOldObjects();
                 int id = CreateObject(objects_to_spawn[0].block_type.path);
 
                 objects_to_spawn[0].owner.AddObjectID(id);
@@ -227,12 +230,8 @@ class World{
                 vec3 bounds = obj.GetBoundingBox();
                 if(IsGroupDerived(id)){
                     ScriptParams@ params = obj.GetScriptParams();
-                    if(params.HasParam("Transpose")){
-                        params.Remove("Transpose");
-                        TransposeNewBlock(objects_to_spawn[0]);
-                    }else{
-                        obj.SetTranslation(objects_to_spawn[0].position + vec3(0.0f, obj.GetScale().y / 2.0f, 0.0f));
-                    }
+                    TransposeNewBlock(objects_to_spawn[0]);
+                    /*obj.SetTranslation(objects_to_spawn[0].position + vec3(0.0f, obj.GetScale().y / 2.0f, 0.0f));*/
                 }else{
                     obj.SetTranslation(objects_to_spawn[0].position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f));
                 }
@@ -246,6 +245,7 @@ class World{
         vec3 offset = vec3(0.0f);
         vec3 position = spawn_object.owner.position;
         vec3 base_pos = vec3(0.0f);
+        bool block_base_found = false;
 
         for(uint i = 0; i < all_obj.size(); i++){
             Object@ obj = ReadObjectFromID(all_obj[i]);
@@ -257,19 +257,43 @@ class World{
                 obj.SetTranslation(position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f));
                 base_pos = position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f);
                 params.Remove("BlockBase");
+                params.AddInt("Old", 1);
+                block_base_found = true;
                 break;
             }
+        }
+        if(!block_base_found){
+            DisplayError("Ohno", "No blockbase found in " + spawn_object.block_type.path);
         }
         /*DebugDrawLine(position, position + vec3(0.0f,20.0f,0.0f), vec3(0.0f), _persistent);*/
 
         //Now set all children with the offset.
+        int num = 0;
+
+        array<EntityType> transpose_types = {_env_object, _movement_object, _item_object, _hotspot_object, _decal_object, _dynamic_light_object, _path_point_object};
+
+        for(uint i = 0; i < all_obj.size(); i++){
+            Object@ obj = ReadObjectFromID(all_obj[i]);
+            if(transpose_types.find(obj.GetType()) != -1){
+                ScriptParams@ params = obj.GetScriptParams();
+                if(!params.HasParam("Old") && all_obj[i] != player_id){
+                    spawn_object.owner.AddObjectID(all_obj[i]);
+                    params.AddInt("Old", 1);
+                    obj.SetTranslation(obj.GetTranslation() + base_pos + offset);
+                    num++;
+                }
+            }
+        }
+        Print("Found " + num + " children\n");
+    }
+
+    void MarkOldObjects(){
+        array<int> all_obj = GetObjectIDs();
         for(uint i = 0; i < all_obj.size(); i++){
             Object@ obj = ReadObjectFromID(all_obj[i]);
             ScriptParams@ params = obj.GetScriptParams();
-            if(params.HasParam("BlockChild")){
-                spawn_object.owner.AddObjectID(all_obj[i]);
-                params.Remove("BlockChild");
-                obj.SetTranslation(obj.GetTranslation() + base_pos + offset);
+            if(!params.HasParam("Old")){
+                params.AddInt("Old", 1);
             }
         }
     }
@@ -311,9 +335,13 @@ void Reset(){
 }
 
 void ResetWorld(){
-  world.Reset();
-  ReadScriptParameters();
-  world.CreateFloor();
+    array<int> all_obj = GetObjectIDs();
+    for(uint i = 0; i < all_obj.size(); i++){
+        Print("Prebuild id " + all_obj[i] + "\n");
+    }
+    world.Reset();
+    ReadScriptParameters();
+    world.CreateFloor();
 }
 
 void ReceiveMessage(string msg) {
