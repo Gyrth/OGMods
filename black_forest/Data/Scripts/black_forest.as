@@ -109,6 +109,14 @@ BlockType@ GetRandomBlockType(){
     return block_types[0];
 }
 
+void ForgetCharacter(int id){
+    array<int> mos = GetObjectIDsType(_movement_object);
+    for(uint i = 0; i < mos.size(); i++){
+        MovementObject@ char = ReadCharacterID(mos[i]);
+        char.Execute("situation.MovementObjectDeleted(" + id + ");");
+    }
+}
+
 class Block{
     array<int> obj_ids;
     int main_block_id = -1;
@@ -141,6 +149,7 @@ class Block{
                 }else{
                     //MovementObject need to be queued or else the ItemObject they hold is going to reset position in the same update.
                     QueueDeleteObjectID(obj_ids[i]);
+                    ForgetCharacter(obj_ids[i]);
                     continue;
                 }
             }else if(obj.GetType() == _item_object){
@@ -388,6 +397,7 @@ class World{
                     if(distance(char.position, player.position) > (world_size * block_size)){
                         //MovementObject need to be queued or else the ItemObject they hold is going to reset position in the same update.
                         QueueDeleteObjectID(garbage[i]);
+                        ForgetCharacter(garbage[i]);
                         garbage.removeAt(i);
                         i--;
                     }
