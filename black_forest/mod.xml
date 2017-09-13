@@ -13,36 +13,49 @@
     <SupportedVersion>*</SupportedVersion>
     <NeedsRestart>false</NeedsRestart>
     <Level title="Black Forest" thumbnail="Images/black_forest_full.jpg">black_forest.xml</Level>
-    <Item category="Block"
-        title="block_path_straight_vertical"
-        path="Data/Objects/block_path_straight_vertical.xml"
-        thumbnail="Data/UI/spawner/icon.png" />
-    <Item category="Block"
-        title="block_path_straight_horizontal"
-        path="Data/Objects/block_path_straight_horizontal.xml"
-        thumbnail="Data/UI/spawner/icon.png" />
-    <Item category="Block"
-        title="block basic"
-        path="Data/Objects/block_basic.xml"
-        thumbnail="Data/UI/spawner/icon.png" />
-    <Item category="Block"
-        title="group"
-        path="Data/Objects/group.xml"
-        thumbnail="Data/UI/spawner/icon.png" />
-    <Item category="Block"
-        title="guard patrol"
-        path="Data/Objects/block_guard_patrol.xml"
-        thumbnail="Data/UI/spawner/icon.png" />
-    <Item category="Block"
-        title="guard prefab"
-        path="Data/Objects/guard_patrolling.xml"
-        thumbnail="Data/UI/spawner/icon.png" />
-    <Item category="Block"
-        title="camp"
-        path="Data/Objects/block_camp.xml"
-        thumbnail="Data/UI/spawner/icon.png" />
-    <Item category="Block"
-        title="ruins"
-        path="Data/Objects/block_ruins.xml"
-        thumbnail="Data/UI/spawner/icon.png" />
+
+    <Item category="Block" title="block_path_straight_vertical" path="Data/Objects/block_path_straight_vertical.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_path_straight_horizontal" path="Data/Objects/block_path_straight_horizontal.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_basic" path="Data/Objects/block_basic.xml" thumbnail="Data/UI/spawner/icon.png" />
+
+    <Item category="Block" title="block_trees_1" path="Data/Objects/block_trees_1.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_2" path="Data/Objects/block_trees_2.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_3" path="Data/Objects/block_trees_3.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_4" path="Data/Objects/block_trees_4.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_5" path="Data/Objects/block_trees_5.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_6" path="Data/Objects/block_trees_6.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_7" path="Data/Objects/block_trees_7.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_8" path="Data/Objects/block_trees_8.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_9" path="Data/Objects/block_trees_9.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_10" path="Data/Objects/block_trees_10.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_11" path="Data/Objects/block_trees_11.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_12" path="Data/Objects/block_trees_12.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_13" path="Data/Objects/block_trees_13.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_14" path="Data/Objects/block_trees_14.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_15" path="Data/Objects/block_trees_15.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_16" path="Data/Objects/block_trees_16.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_17" path="Data/Objects/block_trees_17.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_18" path="Data/Objects/block_trees_18.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_19" path="Data/Objects/block_trees_19.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_20" path="Data/Objects/block_trees_20.xml" thumbnail="Data/UI/spawner/icon.png" />
+
+    <Item category="Block" title="block_ruins_1" path="Data/Objects/block_ruins_1.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_ruins_2" path="Data/Objects/block_ruins_2.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_ruins_3" path="Data/Objects/block_ruins_3.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_ruins_4" path="Data/Objects/block_ruins_4.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_ruins_5" path="Data/Objects/block_ruins_5.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_ruins_6" path="Data/Objects/block_ruins_6.xml" thumbnail="Data/UI/spawner/icon.png" />
+
+    <Item category="Block" title="block_house_1" path="Data/Objects/block_house_1.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_house_2" path="Data/Objects/block_house_2.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_house_3" path="Data/Objects/block_house_3.xml" thumbnail="Data/UI/spawner/icon.png" />
+
+    <Item category="Block" title="block_camp_1" path="Data/Objects/block_camp_1.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_camp_2" path="Data/Objects/block_camp_2.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_camp_3" path="Data/Objects/block_camp_3.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_camp_4" path="Data/Objects/block_camp_4.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_camp_5" path="Data/Objects/block_camp_5.xml" thumbnail="Data/UI/spawner/icon.png" />
+
+    <Item category="Block" title="block_guard_patrol" path="Data/Objects/block_guard_patrol.xml" thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block" title="block_trees_falen" path="Data/Objects/block_trees_falen.xml" thumbnail="Data/UI/spawner/icon.png" />
 </Mod>

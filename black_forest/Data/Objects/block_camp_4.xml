@@ -1,0 +1,138 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-33.5096" t1="16.0653" t2="70.4752" s0="20.01" s1="24.4794" s2="21.2613" q0="0" q1="0" q2="0" q3="1" id="327" version="1">
+        <parameters />
+        <EnvObject t0="-33.5096" t1="13.8306" t2="69.8495" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="215" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-27.6949" t1="24.0404" t2="75.8063" s0="1.61071" s1="1.61071" s2="1.61071" q0="0" q1="0" q2="0" q3="1" id="216" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/dark_rubble.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.0245" t1="25.1428" t2="65.3428" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="218" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Mossy_Block1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-40.1145" t1="24.416" t2="71.7547" s0="1" s1="1" s2="1" q0="-0.353553" q1="0.353553" q2="-0.612372" q3="0.612372" id="219" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Mossy_SmallBlockAStack.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-27.8756" t1="26.0127" t2="71.087" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="221" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Mossy_SmallBlockBStack.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.4009" t1="24.0459" t2="71.8679" s0="0.476934" s1="0.476934" s2="0.476934" q0="-0.323957" q1="0.146996" q2="-0.160244" q3="0.920745" id="220" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-36.1552" t1="25.043" t2="77.7347" s0="0.209682" s1="0.209682" s2="0.209682" q0="0" q1="-0.334906" q2="0" q3="0.942251" id="222" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Statues/rabbit_head.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.2655" t1="23.8809" t2="71.5387" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.0166793" q3="0.999861" id="225" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.3155" t1="23.9346" t2="71.4924" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="226" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_wood.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.3079" t1="24.2906" t2="71.5444" s0="1" s1="1" s2="1" q0="0" q1="0.563574" q2="0" q3="0.826066" id="228" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/arm_meat.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="-34.3088" t1="23.8984" t2="71.4858" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" id="236" version="1">
+            <parameters />
+            <Hotspot t0="-34.3041" t1="23.9049" t2="71.5017" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" id="233" type_file="Data/Objects/Hotspots/fire_test.xml">
+                <parameters>
+                    <parameter name="Fire Ribbons" type="int" val="4" />
+                    <parameter name="Ignite Characters" type="int" val="1" />
+                    <parameter name="Light Amplify" type="float" val="1" />
+                    <parameter name="Light Distance" type="float" val="2" />
+                </parameters>
+            </Hotspot>
+            <EnvObject t0="-34.3187" t1="23.8295" t2="71.4626" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" id="234" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+                <parameters />
+            </EnvObject>
+            <Decal t0="-34.3016" t1="23.8524" t2="71.4606" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" id="235" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+                <parameters />
+            </Decal>
+        </Group>
+        <EnvObject t0="-33.2105" t1="23.9272" t2="70.5759" s0="1" s1="1" s2="1" q0="0" q1="-0.385018" q2="0" q3="0.922909" id="239" color_r="0.819608" color_g="0.556863" color_b="0.556863" overbright="0" type_file="Data/Objects/Environment/camp/bed_roll.xml">
+            <parameters />
+        </EnvObject>
+        <ActorObject t0="-31.6956" t1="24.8306" t2="68.9661" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="240" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+            <parameters>
+                <parameter name="Aggression" type="float" val="0.5" />
+                <parameter name="Attack Damage" type="float" val="1" />
+                <parameter name="Attack Knockback" type="float" val="1" />
+                <parameter name="Attack Speed" type="float" val="1" />
+                <parameter name="Block Follow-up" type="float" val="0.5" />
+                <parameter name="Block Skill" type="float" val="0.5" />
+                <parameter name="Character Scale" type="float" val="1" />
+                <parameter name="Damage Resistance" type="float" val="1" />
+                <parameter name="Ear Size" type="float" val="1" />
+                <parameter name="Fat" type="float" val="0.5" />
+                <parameter name="Focus FOV distance" type="float" val="100" />
+                <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+                <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+                <parameter name="Ground Aggression" type="float" val="0.5" />
+                <parameter name="Knockout Shield" type="int" val="0" />
+                <parameter name="Left handed" type="int" val="0" />
+                <parameter name="Movement Speed" type="float" val="1" />
+                <parameter name="Muscle" type="float" val="0.5" />
+                <parameter name="Peripheral FOV distance" type="float" val="4" />
+                <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+                <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+                <parameter name="Static" type="int" val="0" />
+                <parameter name="Teams" type="string" val="guard" />
+            </parameters>
+            <Connections>
+            </Connections>
+            <ItemConnections />
+            <Palette>
+                <Color label="Clothes" channel="0" red="1" green="1" blue="1" />
+                <Color label="Fur" channel="1" red="1" green="1" blue="1" />
+                <Color label="Leather" channel="2" red="1" green="1" blue="1" />
+                <Color label="Armor" channel="3" red="1" green="1" blue="1" />
+            </Palette>
+        </ActorObject>
+        <ItemObject t0="-32.07" t1="24.3977" t2="73.8266" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="244" type_file="Data/Items/rat_weapons/rat_throwing_blade.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <PathPointObject t0="-33.8519" t1="24.3198" t2="71.0177" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="318" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Sit" />
+                <parameter name="Wait" type="float" val="5" />
+            </parameters>
+            <Connections>
+            </Connections>
+        </PathPointObject>
+        <PathPointObject t0="-27.4677" t1="24.3198" t2="65.1493" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="320" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="5" />
+            </parameters>
+            <Connections>
+            </Connections>
+        </PathPointObject>
+        <PathPointObject t0="-31.8818" t1="24.3198" t2="77.8483" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="322" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="5" />
+            </parameters>
+            <Connections>
+            </Connections>
+        </PathPointObject>
+        <PathPointObject t0="-37.7286" t1="24.3198" t2="72.1614" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="324" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections>
+            </Connections>
+        </PathPointObject>
+        <PathPointObject t0="-42.0638" t1="24.3198" t2="78.2487" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="326" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="5" />
+            </parameters>
+            <Connections>
+            </Connections>
+        </PathPointObject>
+    </Group>
+</ActorObjects>

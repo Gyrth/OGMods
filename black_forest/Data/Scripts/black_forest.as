@@ -25,11 +25,25 @@ World world;
 int skip_update = 0;
 
 array<BlockType@> block_types = {
-                                    BlockType("Data/Objects/block_guard_patrol.xml", 3.0f),
-                                    BlockType("Data/Objects/block_house_1.xml", 3.0f),
-                                    BlockType("Data/Objects/block_house_2.xml", 3.0f),
-                                    BlockType("Data/Objects/block_camp.xml", 3.0f),
-                                    BlockType("Data/Objects/block_trees_falen.xml", 3.0f),
+                                    BlockType("Data/Objects/block_guard_patrol.xml", 1.0f),
+                                    BlockType("Data/Objects/block_house_1.xml", 1.0f),
+                                    BlockType("Data/Objects/block_house_2.xml", 1.0f),
+                                    BlockType("Data/Objects/block_house_3.xml", 1.0f),
+                                    BlockType("Data/Objects/block_trees_falen.xml", 1.0f),
+                                    
+                                    BlockType("Data/Objects/block_camp_1.xml", 1.0f),
+                                    BlockType("Data/Objects/block_camp_2.xml", 1.0f),
+                                    BlockType("Data/Objects/block_camp_3.xml", 1.0f),
+                                    BlockType("Data/Objects/block_camp_4.xml", 1.0f),
+                                    BlockType("Data/Objects/block_camp_5.xml", 1.0f),
+
+                                    BlockType("Data/Objects/block_ruins_1.xml", 3.0f),
+                                    BlockType("Data/Objects/block_ruins_2.xml", 3.0f),
+                                    BlockType("Data/Objects/block_ruins_3.xml", 3.0f),
+                                    BlockType("Data/Objects/block_ruins_4.xml", 3.0f),
+                                    BlockType("Data/Objects/block_ruins_5.xml", 3.0f),
+                                    BlockType("Data/Objects/block_ruins_6.xml", 3.0f),
+
                                     BlockType("Data/Objects/block_trees_1.xml", 10.0f),
                                     BlockType("Data/Objects/block_trees_2.xml", 10.0f),
                                     BlockType("Data/Objects/block_trees_3.xml", 10.0f),
@@ -50,19 +64,6 @@ array<BlockType@> block_types = {
                                     BlockType("Data/Objects/block_trees_18.xml", 10.0f),
                                     BlockType("Data/Objects/block_trees_19.xml", 10.0f),
                                     BlockType("Data/Objects/block_trees_20.xml", 10.0f)};
-                                    /*BlockType("Data/Objects/block_trees_prefab.xml", 10.0f)};*/
-                                    /*BlockType("Data/Objects/block_path_straight_vertical.xml", 5.1f),
-                                    BlockType("Data/Objects/block_path_straight_horizontal.xml", 5.1f),
-                                    BlockType("Data/Objects/block_house.xml", 5.1f),
-                                    BlockType("Data/Objects/block_camp.xml", 5.1f),
-                                    BlockType("Data/Objects/block_bushes.xml", 5.1f),
-                                    BlockType("Data/Objects/block_tree.xml", 5.1f),
-                                    BlockType("Data/Objects/block_tree_2.xml", 5.1f),
-                                    BlockType("Data/Objects/block_trees.xml", 1.1f),
-                                    BlockType("Data/Objects/block_trees_dense.xml", 1.0f),
-                                    BlockType("Data/Objects/block_ruins.xml", 5.1f),
-                                    BlockType("Data/Objects/block_guard_sword.xml", 0.0f),
-                                    BlockType("Data/Objects/prefab.xml", 0.0f)};*/
 
 class BlockType{
     string path;
@@ -194,8 +195,8 @@ class Block{
                     pathpoint.ConnectTo(char);
                 }
                 if(i == (pathpoints.size() - 1)){
-                    Object@ next_pathpoint = ReadObjectFromID(pathpoints[0]);
-                    pathpoint.ConnectTo(next_pathpoint);
+                    /*Object@ next_pathpoint = ReadObjectFromID(pathpoints[0]);
+                    pathpoint.ConnectTo(next_pathpoint);*/
                 }else{
                     Object@ next_pathpoint = ReadObjectFromID(pathpoints[i + 1]);
                     pathpoint.ConnectTo(next_pathpoint);
