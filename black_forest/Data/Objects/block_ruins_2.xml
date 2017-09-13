@@ -1,0 +1,27 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="29.1255" t1="10.2118" t2="77.6564" s0="26.003" s1="51.0787" s2="23.1393" q0="0" q1="0" q2="0" q3="1" id="46" version="1">
+        <parameters />
+        <EnvObject t0="31.3612" t1="7.35285" t2="80.3404" s0="1.25111" s1="1.25111" s2="1.25111" q0="0" q1="0.0263617" q2="0" q3="0.999653" id="47" color_r="0.282353" color_g="0.28235" color_b="0.28235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.0822" t1="5.21255" t2="78.1877" s0="1.13176" s1="1.13176" s2="1.13176" q0="0" q1="-0.00532018" q2="0" q3="0.999986" id="49" color_r="0.254902" color_g="0.254899" color_b="0.254899" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.122" t1="-5.32256" t2="79.2211" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="25.8836" t1="19.785" t2="75.6035" s0="1" s1="1" s2="1" q0="0" q1="0.609468" q2="0" q3="0.792811" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="25.3717" t1="6.43351" t2="85.3417" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="39.4692" t1="11.1354" t2="78.3875" s0="1" s1="1" s2="1" q0="-0.00594278" q1="0.999532" q2="0.0107208" q3="0.0280136" id="45" color_r="0.247059" color_g="0.247056" color_b="0.247056" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

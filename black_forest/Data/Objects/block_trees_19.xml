@@ -1,0 +1,36 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-1.08057" t1="11.552" t2="69.6068" s0="22.2085" s1="29.2772" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="117" version="1">
+        <parameters />
+        <EnvObject t0="-2.1798" t1="6.91839" t2="69.6068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="5.32143" t1="21.4051" t2="75.2767" s0="0.600369" s1="0.600369" s2="0.600369" q0="0" q1="0.638706" q2="0" q3="0.769451" id="95" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.14348" t1="19.1822" t2="65.0635" s0="1.36252" s1="1.36252" s2="1.36252" q0="0" q1="0.700893" q2="0" q3="0.713266" id="104" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-9.41335" t1="16.9129" t2="64.8773" s0="2.16003" s1="2.16003" s2="2.16003" q0="0" q1="0" q2="0" q3="1" id="106" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/low_fern_.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.07457" t1="19.9764" t2="74.807" s0="1.89391" s1="1.89391" s2="1.89391" q0="0" q1="0.689631" q2="0" q3="0.724161" id="107" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-4.60502" t1="17.8701" t2="66.3131" s0="0.831394" s1="0.831394" s2="0.831394" q0="0" q1="0.689631" q2="0" q3="0.724161" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-9.2518" t1="17.15" t2="65.1392" s0="1.69169" s1="1.69169" s2="1.69169" q0="0" q1="0.943641" q2="0" q3="0.330971" id="111" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/low_fern_.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-1.42822" t1="17.4703" t2="72.8907" s0="1" s1="1" s2="1" q0="0" q1="-0.0886069" q2="0" q3="0.996067" id="113" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-1.99746" t1="18.5262" t2="72.2752" s0="1.23507" s1="1.23507" s2="1.23507" q0="0" q1="0.613006" q2="0" q3="0.790078" id="115" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

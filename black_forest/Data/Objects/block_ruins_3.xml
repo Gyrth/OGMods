@@ -1,0 +1,30 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="32.122" t1="3.87026" t2="79.2211" s0="20.01" s1="38.3956" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="57" version="1">
+        <parameters />
+        <EnvObject t0="36.2549" t1="4.54866" t2="80.8002" s0="1.13176" s1="1.13176" s2="1.13176" q0="0" q1="-0.00532018" q2="0" q3="0.999986" id="49" color_r="0.254902" color_g="0.254899" color_b="0.254899" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.122" t1="-5.32256" t2="79.2211" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="25.3717" t1="6.43351" t2="85.3417" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="36.6181" t1="8.85938" t2="82.4433" s0="1" s1="1" s2="1" q0="-0.000163401" q1="-0.999896" q2="-0.0142884" q3="0.00204664" id="48" color_r="0.239216" color_g="0.239213" color_b="0.239213" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_relief.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="36.5805" t1="11.6654" t2="83.4295" s0="1" s1="1" s2="1" q0="0" q1="-0.0387255" q2="0" q3="0.99925" id="55" color_r="0.239216" color_g="0.239213" color_b="0.239213" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_wall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="27.396" t1="12.8544" t2="74.116" s0="1" s1="1" s2="1" q0="0" q1="0.353397" q2="0" q3="0.935474" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/mossy_trunk_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="37.1043" t1="5.16591" t2="76.618" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

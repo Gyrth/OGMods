@@ -1,0 +1,33 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="34.1388" t1="10.1298" t2="81.6626" s0="24.0437" s1="50.9148" s2="24.8929" q0="0" q1="0" q2="0" q3="1" id="55" version="1">
+        <parameters />
+        <EnvObject t0="32.122" t1="-5.32256" t2="79.2211" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="37.2612" t1="6.61974" t2="71.6551" s0="1.87895" s1="1.87895" s2="1.87895" q0="0" q1="1" q2="0" q3="0" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/Ruins1Wall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="26.2475" t1="6.91384" t2="71.4202" s0="2.24873" s1="2.24873" s2="2.24873" q0="0" q1="0" q2="0" q3="1" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/Ruins1Pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.6445" t1="7.02754" t2="79.2266" s0="1.29575" s1="1.29575" s2="1.29575" q0="0" q1="0.707107" q2="0" q3="0.707107" id="46" color_r="0.199998" color_g="0.2" color_b="0.199998" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.6576" t1="6.99544" t2="84.0321" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="-0.707107" id="48" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.622" t1="6.99544" t2="74.4431" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="-0.707107" id="50" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="38.4533" t1="19.621" t2="86.0592" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="25.3717" t1="6.43351" t2="85.3417" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

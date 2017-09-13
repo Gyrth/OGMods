@@ -1,0 +1,36 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-4.73928" t1="21.8528" t2="69.6068" s0="25.1289" s1="49.8789" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="55" version="1">
+        <parameters />
+        <EnvObject t0="-2.1798" t1="6.91839" t2="69.6068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-9.59635" t1="30.8261" t2="69.6216" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.33302" t1="17.9728" t2="77.3792" s0="0.714088" s1="0.714088" s2="0.714088" q0="0" q1="0.595542" q2="0" q3="0.803324" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.1986" t1="18.1954" t2="76.496" s0="2.10512" s1="2.10512" s2="2.10512" q0="0" q1="0" q2="0" q3="1" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.42238" t1="19.2664" t2="77.5082" s0="0.714088" s1="0.714088" s2="0.714088" q0="-0.0188747" q1="0.747917" q2="-0.0648693" q3="0.660347" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-9.73324" t1="19.0262" t2="74.2676" s0="3.28427" s1="3.28427" s2="3.28427" q0="0" q1="-0.743351" q2="0" q3="0.668902" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.29525" t1="19.1978" t2="76.993" s0="3.81846" s1="3.81846" s2="3.81846" q0="0" q1="0.568553" q2="0" q3="0.822647" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.96368" t1="19.2298" t2="66.5075" s0="1.39031" s1="1.39031" s2="1.39031" q0="0" q1="0.530069" q2="0" q3="0.847955" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-4.71857" t1="17.6816" t2="61.0469" s0="1.70712" s1="1.70712" s2="1.70712" q0="0" q1="0" q2="0" q3="1" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,54 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="36.0383" t1="2.98684" t2="80.0582" s0="21.0363" s1="28.8105" s2="21.7256" q0="0" q1="0" q2="0" q3="1" id="93" version="1">
+        <parameters />
+        <EnvObject t0="35.5251" t1="-1.41338" t2="79.4806" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="34.9969" t1="12.9021" t2="84.7935" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/hut_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="34.807" t1="9.04599" t2="79.2653" s0="1" s1="1" s2="1" q0="0" q1="0.755619" q2="0" q3="0.655012" id="59" color_r="0.52549" color_g="0.525485" color_b="0.525485" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="34.7985" t1="10.368" t2="88.0097" s0="1.78495" s1="1.78495" s2="1.78495" q0="0" q1="1" q2="0" q3="0" id="65" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Objects/Buildings/shops/shop_bin_painted.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="36.7213" t1="12.1053" t2="88.1232" s0="0.35416" s1="0.35416" s2="0.35416" q0="0" q1="0" q2="0" q3="1" id="69" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Objects/Environment/cat_props/banner.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="33.0746" t1="12.2334" t2="88.332" s0="0.35416" s1="0.35416" s2="0.35416" q0="0" q1="0" q2="0" q3="1" id="75" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Objects/Environment/cat_props/banner.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="31.3907" t1="10.8995" t2="84.7652" s0="1.11826" s1="1.8242" s2="1.31409" q0="0.5" q1="-0.5" q2="0.5" q3="0.5" id="78" color_r="0.682353" color_g="0.682346" color_b="0.682346" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="31.4222" t1="10.2272" t2="85.7205" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="79" color_r="0.682353" color_g="0.682346" color_b="0.682346" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="31.4222" t1="10.2416" t2="83.8764" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="82" color_r="0.682353" color_g="0.682346" color_b="0.682346" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+            <parameters />
+        </EnvObject>
+        <ItemObject t0="31.4539" t1="11.5439" t2="84.802" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="83" type_file="Data/Items/DogWeapons/DogKnife.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <EnvObject t0="34.5227" t1="12.9105" t2="77.2474" s0="1" s1="1" s2="1" q0="0" q1="0.0547622" q2="0" q3="0.998499" id="84" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/shop_tarp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="31.5358" t1="10.5936" t2="74.5543" s0="2.5445" s1="2.5445" s2="2.5445" q0="-0.707107" q1="0" q2="0" q3="0.707107" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="36.8654" t1="10.5474" t2="74.0483" s0="2.5445" s1="2.5445" s2="2.5445" q0="-0.707107" q1="0" q2="0" q3="0.707107" id="88" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="42.4482" t1="11.1814" t2="71.6082" s0="0.696949" s1="0.696949" s2="0.696949" q0="0" q1="-0.702839" q2="0" q3="0.711348" id="90" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="43.2765" t1="9.3769" t2="83.8445" s0="1" s1="1" s2="1" q0="0" q1="-0.511089" q2="0" q3="0.859528" id="91" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree4.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

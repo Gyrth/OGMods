@@ -38,7 +38,11 @@
         path="Data/Objects/guard_patrolling.xml"
         thumbnail="Data/UI/spawner/icon.png" />
     <Item category="Block"
-        title="guard patrolling"
-        path="Data/Objects/block_guard_patrol.xml"
+        title="camp"
+        path="Data/Objects/block_camp.xml"
+        thumbnail="Data/UI/spawner/icon.png" />
+    <Item category="Block"
+        title="ruins"
+        path="Data/Objects/block_ruins.xml"
         thumbnail="Data/UI/spawner/icon.png" />
 </Mod>

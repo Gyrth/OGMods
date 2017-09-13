@@ -1,0 +1,36 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="34.9312" t1="13.9206" t2="76.7507" s0="34.482" s1="50.6779" s2="30.2053" q0="0" q1="0" q2="0" q3="1" id="96" version="1">
+        <parameters />
+        <EnvObject t0="35.5251" t1="-1.41338" t2="79.4806" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="35.3727" t1="9.9714" t2="83.9742" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/HutDoor_Open.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="35.2006" t1="9.78012" t2="79.7292" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="59" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/rabbit_village/rabbit_hut_walls.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="35.0525" t1="7.81606" t2="80.2768" s0="0.64379" s1="0.64379" s2="0.64379" q0="0" q1="0" q2="0" q3="1" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="35.1731" t1="10.4574" t2="79.8737" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/rabbit_village/rabbit_hut_roof.xml">
+            <parameters />
+        </EnvObject>
+        <ItemObject t0="35.3221" t1="9.83009" t2="78.4533" s0="1" s1="1" s2="1" q0="-0.593856" q1="0.579279" q2="0.424405" q3="0.362836" id="86" type_file="Data/Items/DogWeapons/DogBroadSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <EnvObject t0="44.0367" t1="19.6954" t2="83.7984" s0="0.745392" s1="0.745392" s2="0.745392" q0="0" q1="0.484091" q2="0" q3="0.875017" id="91" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="28.7876" t1="23.2933" t2="72.7785" s0="1" s1="1" s2="1" q0="0" q1="0.350877" q2="0" q3="0.936422" id="93" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.8828" t1="9.27844" t2="85.2645" s0="1" s1="1" s2="1" q0="0" q1="0.610625" q2="0" q3="0.79192" id="95" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -25,11 +25,30 @@ World world;
 int skip_update = 0;
 
 array<BlockType@> block_types = {
-                                    BlockType("Data/Objects/block_trees_1.xml", 5.1f),
-                                    BlockType("Data/Objects/block_trees_2.xml", 5.1f),
-                                    BlockType("Data/Objects/block_trees_3.xml", 5.1f),
-                                    BlockType("Data/Objects/block_trees_4.xml", 5.1f),
-                                    BlockType("Data/Objects/block_trees_5.xml", 5.1f)};
+                                    BlockType("Data/Objects/block_house_1.xml", 5.1f),
+                                    BlockType("Data/Objects/block_house_2.xml", 5.1f),
+                                    BlockType("Data/Objects/block_camp.xml", 5.1f),
+                                    BlockType("Data/Objects/block_trees_falen.xml", 0.1f),
+                                    BlockType("Data/Objects/block_trees_1.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_2.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_3.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_4.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_5.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_6.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_7.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_8.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_9.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_10.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_11.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_12.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_13.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_14.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_15.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_16.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_17.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_18.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_19.xml", 5.0f),
+                                    BlockType("Data/Objects/block_trees_20.xml", 5.0f)};
                                     /*BlockType("Data/Objects/block_trees_prefab.xml", 10.0f)};*/
                                     /*BlockType("Data/Objects/block_path_straight_vertical.xml", 5.1f),
                                     BlockType("Data/Objects/block_path_straight_horizontal.xml", 5.1f),

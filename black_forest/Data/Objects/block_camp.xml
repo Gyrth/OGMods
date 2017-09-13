@@ -1,58 +1,55 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="3.28415" t1="-1.95379" t2="1.64872" s0="20.01" s1="21.1699" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="27" version="1">
+    <Group t0="40.2795" t1="11.6947" t2="81.9706" s0="21.5431" s1="51.1419" s2="22.8811" q0="0" q1="0" q2="0" q3="1" id="53" version="1">
         <parameters />
-        <EnvObject t0="3.28415" t1="-2.42134" t2="1.64872" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+        <EnvObject t0="39.5129" t1="-3.87126" t2="80.5351" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
             <parameters>
                 <parameter name="BlockBase" type="int" val="1" />
             </parameters>
         </EnvObject>
-        <EnvObject t0="3.42549" t1="-3.42134" t2="2.37398" s0="6.46988" s1="1" s2="6.38524" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <EnvObject t0="37.5096" t1="7.93667" t2="73.3785" s0="1" s1="1" s2="1" q0="0" q1="-0.712729" q2="0" q3="0.701439" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/arm_meat.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="4.20443" t1="7.92346" t2="6.68498" s0="1" s1="1" s2="1" q0="0" q1="-0.712729" q2="0" q3="0.701439" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/arm_meat.xml">
+        <EnvObject t0="38.6194" t1="7.55461" t2="74.0175" s0="1" s1="1" s2="1" q0="0" q1="-0.844474" q2="0" q3="0.535597" id="30" color_r="0.819608" color_g="0.556863" color_b="0.556863" overbright="0" type_file="Data/Objects/Environment/camp/bed_roll.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="5.31418" t1="7.5414" t2="7.32395" s0="1" s1="1" s2="1" q0="0" q1="-0.844474" q2="0" q3="0.535597" id="23" color_r="0.819608" color_g="0.556863" color_b="0.556863" overbright="0" type_file="Data/Objects/Environment/camp/bed_roll.xml">
+        <EnvObject t0="37.579" t1="7.81596" t2="73.3943" s0="1" s1="1" s2="1" q0="0" q1="-0.934785" q2="0" q3="0.355215" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/cook_tripod.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="4.27378" t1="7.80275" t2="6.70074" s0="1" s1="1" s2="1" q0="0" q1="-0.934785" q2="0" q3="0.355215" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/cook_tripod.xml">
+        <EnvObject t0="37.4746" t1="7.54521" t2="73.3845" s0="1.06381" s1="1" s2="1.0607" q0="-0.0118878" q1="-0.71263" q2="0.0116995" q3="0.701342" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_ash.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="4.16939" t1="7.532" t2="6.69095" s0="1.06381" s1="1" s2="1.0607" q0="-0.0118878" q1="-0.71263" q2="0.0116995" q3="0.701342" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_ash.xml">
+        <EnvObject t0="37.4717" t1="7.53639" t2="73.4281" s0="1" s1="1" s2="1" q0="-0.0118878" q1="-0.71263" q2="0.0116995" q3="0.701342" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="4.16649" t1="7.52318" t2="6.73457" s0="1" s1="1" s2="1" q0="-0.0118878" q1="-0.71263" q2="0.0116995" q3="0.701342" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
+        <EnvObject t0="37.0547" t1="7.55813" t2="74.3552" s0="1" s1="1" s2="1" q0="0" q1="0.711211" q2="0" q3="0.702978" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/wood_pile.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="3.74953" t1="7.54492" t2="7.66167" s0="1" s1="1" s2="1" q0="0" q1="0.711211" q2="0" q3="0.702978" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/wood_pile.xml">
+        <EnvObject t0="37.4747" t1="7.62687" t2="73.3995" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_wood_hot.xml">
             <parameters />
         </EnvObject>
-        <Group t0="6.76913" t1="7.59976" t2="8.40935" s0="2.42145" s1="2.05277" s2="2.28746" q0="0" q1="-0.712729" q2="0" q3="0.701439" id="38" version="1">
+        <Group t0="40.2703" t1="7.46835" t2="74.1383" s0="2.42145" s1="2.05277" s2="2.28746" q0="0" q1="-0.712729" q2="0" q3="0.701439" id="40" version="1">
             <parameters />
-            <EnvObject t0="6.56429" t1="8.01325" t2="8.83287" s0="1" s1="1" s2="1" q0="-0.399006" q1="0.448866" q2="0.234278" q3="0.764479" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <EnvObject t0="40.0654" t1="7.88184" t2="74.5618" s0="1" s1="1" s2="1" q0="-0.399006" q1="0.448866" q2="0.234278" q3="0.764479" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
                 <parameters />
             </EnvObject>
-            <EnvObject t0="7.0084" t1="8.01309" t2="8.02265" s0="1" s1="1" s2="1" q0="-0.764478" q1="-0.234278" q2="0.448866" q3="-0.399006" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <EnvObject t0="40.5096" t1="7.88168" t2="73.7516" s0="1" s1="1" s2="1" q0="-0.764478" q1="-0.234278" q2="0.448866" q3="-0.399006" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
                 <parameters />
             </EnvObject>
-            <EnvObject t0="6.18075" t1="8.37479" t2="8.12632" s0="1" s1="1" s2="1" q0="-0.174079" q1="-0.181781" q2="0.693092" q3="0.675482" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <EnvObject t0="39.6819" t1="8.24338" t2="73.8552" s0="1" s1="1" s2="1" q0="-0.174079" q1="-0.181781" q2="0.693092" q3="0.675482" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
                 <parameters />
             </EnvObject>
-            <EnvObject t0="5.74207" t1="7.59976" t2="8.68387" s0="1" s1="1" s2="1" q0="-0.616246" q1="0.354183" q2="0.361831" q3="0.60322" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <EnvObject t0="39.2432" t1="7.46835" t2="74.4128" s0="1" s1="1" s2="1" q0="-0.616246" q1="0.354183" q2="0.361831" q3="0.60322" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
                 <parameters />
             </EnvObject>
-            <EnvObject t0="6.48043" t1="7.59976" t2="7.36062" s0="1" s1="1" s2="1" q0="-0.616246" q1="0.354183" q2="0.361831" q3="0.60322" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <EnvObject t0="39.9816" t1="7.46835" t2="73.0895" s0="1" s1="1" s2="1" q0="-0.616246" q1="0.354183" q2="0.361831" q3="0.60322" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
                 <parameters />
             </EnvObject>
         </Group>
-        <EnvObject t0="4.16951" t1="7.61366" t2="6.70601" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_wood_hot.xml">
+        <Group t0="37.4705" t1="7.57277" t2="73.4402" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" id="45" version="1">
             <parameters />
-        </EnvObject>
-        <Group t0="4.16534" t1="7.55956" t2="6.74666" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" id="42" version="1">
-            <parameters />
-            <Hotspot t0="4.17003" t1="7.56607" t2="6.76256" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" id="39" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <Hotspot t0="37.4752" t1="7.57928" t2="73.4561" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" id="42" type_file="Data/Objects/Hotspots/fire_test.xml">
                 <parameters>
                     <parameter name="Fire Ribbons" type="int" val="4" />
                     <parameter name="Ignite Characters" type="int" val="1" />
@@ -60,12 +57,24 @@
                     <parameter name="Light Distance" type="float" val="2" />
                 </parameters>
             </Hotspot>
-            <EnvObject t0="4.15542" t1="7.49072" t2="6.72349" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" id="40" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+            <EnvObject t0="37.4606" t1="7.50393" t2="73.417" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" id="43" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
                 <parameters />
             </EnvObject>
-            <Decal t0="4.17251" t1="7.51363" t2="6.72148" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" id="41" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <Decal t0="37.4777" t1="7.52684" t2="73.415" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" id="44" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
                 <parameters />
             </Decal>
         </Group>
+        <EnvObject t0="37.7648" t1="3.85505" t2="77.506" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_dirty.xml">
+            <parameters />
+        </EnvObject>
+        <ItemObject t0="38.3163" t1="7.61413" t2="73.7277" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="48" type_file="Data/Items/DogWeapons/DogSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <EnvObject t0="43.3436" t1="21.2995" t2="85.3614" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="34.5443" t1="7.1931" t2="87.0306" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
+        </EnvObject>
     </Group>
 </ActorObjects>

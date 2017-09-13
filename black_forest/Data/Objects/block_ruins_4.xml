@@ -1,0 +1,36 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="38.5103" t1="14.1794" t2="77.2409" s0="25.9803" s1="51.1955" s2="24.4894" q0="0" q1="0" q2="0" q3="1" id="72" version="1">
+        <parameters />
+        <EnvObject t0="35.5251" t1="-1.41338" t2="79.4806" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="32.5306" t1="9.7012" t2="83.1772" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="48" color_r="0.294118" color_g="0.294115" color_b="0.294115" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.5791" t1="8.82409" t2="84.4038" s0="1" s1="1" s2="1" q0="0.079879" q1="0.0690987" q2="0.644206" q3="0.757524" id="54" color_r="0.294118" color_g="0.294115" color_b="0.294115" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_top.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="40.3819" t1="11.0244" t2="86.4211" s0="1" s1="1" s2="1" q0="0" q1="0.00630413" q2="0" q3="0.99998" id="56" color_r="0.294118" color_g="0.294115" color_b="0.294115" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.6868" t1="11.1027" t2="76.0912" s0="1" s1="1" s2="1" q0="0" q1="0.00630413" q2="0" q3="0.99998" id="59" color_r="0.294118" color_g="0.294115" color_b="0.294115" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="42.0004" t1="9.48488" t2="78.7704" s0="1" s1="1" s2="1" q0="0" q1="0.582629" q2="0" q3="0.812738" id="63" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="39.1914" t1="9.67083" t2="78.5093" s0="1.36253" s1="1.36253" s2="1.36253" q0="0" q1="0.580706" q2="0" q3="0.814114" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="43.0729" t1="23.8109" t2="73.293" s0="1" s1="1" s2="1" q0="0" q1="-0.255181" q2="0" q3="0.966893" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A_tops.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.3582" t1="9.16019" t2="73.2051" s0="1" s1="1" s2="1" q0="0" q1="0.422114" q2="0" q3="0.906543" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,30 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-0.940768" t1="27.0941" t2="72.0512" s0="33.572" s1="60.3615" s2="24.8989" q0="0" q1="0" q2="0" q3="1" id="121" version="1">
+        <parameters />
+        <EnvObject t0="-2.1798" t1="6.91839" t2="69.6068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="5.69857" t1="32.0117" t2="74.4276" s0="1" s1="1" s2="1" q0="0" q1="0.441471" q2="0" q3="0.897276" id="106" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.02395" t1="36.4888" t2="73.2502" s0="1.2978" s1="1.2978" s2="1.2978" q0="0" q1="-0.565118" q2="0" q3="0.82501" id="107" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-0.258271" t1="17.8693" t2="67.965" s0="1" s1="1" s2="1" q0="0" q1="0.734698" q2="0" q3="0.678394" id="115" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-0.260946" t1="17.8867" t2="61.2244" s0="0.727719" s1="0.727719" s2="0.727719" q0="0" q1="0" q2="0" q3="1" id="117" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.90965" t1="19.0268" t2="62.6607" s0="1.50835" s1="1.50835" s2="1.50835" q0="0" q1="0.415854" q2="0" q3="0.909431" id="118" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.73221" t1="17.2731" t2="63.3041" s0="0.66564" s1="0.66564" s2="0.66564" q0="0" q1="0.734698" q2="0" q3="0.678394" id="120" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

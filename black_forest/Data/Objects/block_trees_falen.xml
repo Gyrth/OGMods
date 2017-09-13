@@ -1,0 +1,30 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-1.77619" t1="14.5873" t2="70.7876" s0="25.01" s1="35.3478" s2="23.0087" q0="0" q1="0" q2="0" q3="1" id="85" version="1">
+        <parameters />
+        <EnvObject t0="-2.1798" t1="6.91839" t2="69.6068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-2.5114" t1="23.0693" t2="71.0272" s0="0.986077" s1="0.986077" s2="0.986077" q0="0.235917" q1="0.25733" q2="-0.312323" q3="0.883507" id="74" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_log_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.4439" t1="23.1321" t2="77.2897" s0="1" s1="1" s2="1" q0="0" q1="-0.52582" q2="0" q3="0.850596" id="76" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/elm/elm_trunk.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.9844" t1="16.3734" t2="64.0223" s0="1" s1="1" s2="1" q0="0.0384181" q1="0.31174" q2="0.116122" q3="0.942262" id="78" color_r="0.372549" color_g="0.362322" color_b="0.362322" overbright="0" type_file="Data/Objects/Environment/camp/trench_middle.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.59154" t1="18.123" t2="69.8516" s0="1" s1="1" s2="1" q0="0" q1="0.613228" q2="0" q3="0.789906" id="81" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-6.66575" t1="19.2616" t2="76.6127" s0="1.51479" s1="1.51479" s2="1.51479" q0="0" q1="0.613228" q2="0" q3="0.789906" id="82" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/snowy_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.46859" t1="18.0254" t2="64.2505" s0="2.13338" s1="2.13338" s2="2.13338" q0="0" q1="0" q2="0" q3="1" id="84" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>
