@@ -25,31 +25,31 @@ World world;
 int skip_update = 0;
 
 array<BlockType@> block_types = {
-                                    BlockType("Data/Objects/block_guard_patrol.xml", 5.1f),
-                                    BlockType("Data/Objects/block_house_1.xml", 0.1f),
-                                    BlockType("Data/Objects/block_house_2.xml", 0.1f),
-                                    BlockType("Data/Objects/block_camp.xml", 0.1f),
-                                    BlockType("Data/Objects/block_trees_falen.xml", 0.1f),
-                                    BlockType("Data/Objects/block_trees_1.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_2.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_3.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_4.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_5.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_6.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_7.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_8.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_9.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_10.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_11.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_12.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_13.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_14.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_15.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_16.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_17.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_18.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_19.xml", 5.0f),
-                                    BlockType("Data/Objects/block_trees_20.xml", 5.0f)};
+                                    BlockType("Data/Objects/block_guard_patrol.xml", 3.0f),
+                                    BlockType("Data/Objects/block_house_1.xml", 3.0f),
+                                    BlockType("Data/Objects/block_house_2.xml", 3.0f),
+                                    BlockType("Data/Objects/block_camp.xml", 3.0f),
+                                    BlockType("Data/Objects/block_trees_falen.xml", 3.0f),
+                                    BlockType("Data/Objects/block_trees_1.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_2.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_3.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_4.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_5.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_6.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_7.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_8.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_9.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_10.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_11.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_12.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_13.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_14.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_15.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_16.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_17.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_18.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_19.xml", 10.0f),
+                                    BlockType("Data/Objects/block_trees_20.xml", 10.0f)};
                                     /*BlockType("Data/Objects/block_trees_prefab.xml", 10.0f)};*/
                                     /*BlockType("Data/Objects/block_path_straight_vertical.xml", 5.1f),
                                     BlockType("Data/Objects/block_path_straight_horizontal.xml", 5.1f),
@@ -128,16 +128,37 @@ class Block{
     array<SpawnObject@> GetObjectsToSpawn(){
         return objects_to_spawn;
     }
-    void Delete(){
-        if(obj_ids.size() < 0){
-            Print("No objects!\n");
-        }
+    array<int> Delete(){
+        array<int> garbage;
         for(uint i = 0; i < obj_ids.size(); i++){
-            /*QueueDeleteObjectID(obj_ids[i]);*/
+            Object@ obj = ReadObjectFromID(obj_ids[i]);
+            if(obj.GetType() == _movement_object){
+                MovementObject@ char = ReadCharacterID(obj_ids[i]);
+                MovementObject@ player = ReadCharacterID(player_id);
+                if(distance(char.position, player.position) < (world_size * block_size / 2.0f)){
+                    garbage.insertLast(obj_ids[i]);
+                    continue;
+                }else{
+                    //MovementObject need to be queued or else the ItemObject they hold is going to reset position in the same update.
+                    QueueDeleteObjectID(obj_ids[i]);
+                    continue;
+                }
+            }else if(obj.GetType() == _item_object){
+                MovementObject@ player = ReadCharacterID(player_id);
+                ItemObject@ item = ReadItemID(obj_ids[i]);
+                vec3 color = vec3(RangedRandomFloat(0.0f, 1.0f), RangedRandomFloat(0.0f, 1.0f), RangedRandomFloat(0.0f, 1.0f));
+                if(distance(item.GetPhysicsPosition(), player.position) < (world_size * block_size / 2.0f)){
+                    /*DebugDrawWireSphere(item.GetPhysicsPosition(), 0.5f, color, _persistent);
+                    DebugDrawWireSphere(player.position, 0.5f, color, _persistent);*/
+                    garbage.insertLast(obj_ids[i]);
+                    continue;
+                }
+            }
             DeleteObjectID(obj_ids[i]);
         }
         obj_ids.resize(0);
         deleted = true;
+        return garbage;
     }
     void AddObjectID(int id){
         obj_ids.insertLast(id);
@@ -193,11 +214,12 @@ class SpawnObject{
 class World{
     array<array<Block@>> blocks;
     array<SpawnObject@> objects_to_spawn;
+    array<int> garbage;
     World(){}
     void Reset(){}
     void MoveXUp(){
         for(uint i = 0; i < blocks.size(); i++){
-            blocks[i][0].Delete();
+            garbage.insertAt(0, blocks[i][0].Delete());
             blocks[i].removeAt(0);
         }
         for(uint i = 0; i < blocks.size(); i++){
@@ -208,7 +230,7 @@ class World{
     void MoveXDown(){
         //Remove all the blocks on the left side so we can move to the right.
         for(uint i = 0; i < blocks.size(); i++){
-            blocks[i][blocks[i].size() - 1].Delete();
+            garbage.insertAt(0, blocks[i][blocks[i].size() - 1].Delete());
             blocks[i].removeAt(blocks[i].size() - 1);
         }
         for(uint i = 0; i < blocks.size(); i++){
@@ -218,7 +240,7 @@ class World{
     }
     void MoveZUp(){
         for(uint i = 0; i < blocks[0].size(); i++){
-            blocks[0][i].Delete();
+            garbage.insertAt(0, blocks[0][i].Delete());
         }
         blocks.removeAt(0);
         array<Block@> new_row;
@@ -231,7 +253,7 @@ class World{
     void MoveZDown(){
         //Remove the bottom row.
         for(uint i = 0; i < blocks[blocks.size() - 1].size(); i++){
-            blocks[blocks.size() - 1][i].Delete();
+            garbage.insertAt(0, blocks[blocks.size() - 1][i].Delete());
         }
         blocks.removeLast();
         array<Block@> new_row;
@@ -353,6 +375,35 @@ class World{
             }
         }
     }
+    float garbage_timer = 1.0f;
+    void RemoveGarbage(){
+        garbage_timer -= time_step;
+        if(garbage_timer < 0.0f){
+            garbage_timer = 1.0f;
+            for(uint i = 0; i < garbage.size(); i++){
+                Object@ obj = ReadObjectFromID(garbage[i]);
+                if(obj.GetType() == _movement_object){
+                    MovementObject@ char = ReadCharacterID(garbage[i]);
+                    MovementObject@ player = ReadCharacterID(player_id);
+                    if(distance(char.position, player.position) > (world_size * block_size)){
+                        //MovementObject need to be queued or else the ItemObject they hold is going to reset position in the same update.
+                        QueueDeleteObjectID(garbage[i]);
+                        garbage.removeAt(i);
+                        i--;
+                    }
+                }else if(obj.GetType() == _item_object){
+                    MovementObject@ player = ReadCharacterID(player_id);
+                    ItemObject@ item = ReadItemID(garbage[i]);
+                    if(distance(item.GetPhysicsPosition(), player.position) > (world_size * block_size)){
+                        /*DebugDrawLine(item.GetPhysicsPosition(), player.position, vec3(1.0f), _persistent);*/
+                        DeleteObjectID(garbage[i]);
+                        garbage.removeAt(i);
+                        i--;
+                    }
+                }
+            }
+        }
+    }
     float timer = 0.0f;
     bool rain = false;
     void UpdateWeather(){
@@ -438,6 +489,7 @@ void Update() {
       UpdateMovement();
       world.UpdateSpawning();
       world.UpdateWeather();
+      world.RemoveGarbage();
     }
     UpdateMusic();
     UpdateSounds();
