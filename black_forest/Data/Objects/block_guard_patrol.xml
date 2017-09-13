@@ -1,92 +1,75 @@
 <?xml version="2.0" ?>
-<Type>prefab</Type>
-<Prefab>
-    <Group t0="4.58085" t1="-1.37568" t2="3.63296" s0="20.01" s1="22.3261" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="4" version="1">
-        <parameters>
-        </parameters>
-        <EnvObject t0="4.58085" t1="-2.42134" t2="3.63296" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="7.00619" t1="-1.7015" t2="2.28682" s0="20.01" s1="22.341" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="18" version="1">
+        <parameters />
+        <EnvObject t0="7.00619" t1="-2.867" t2="2.28682" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
             <parameters>
                 <parameter name="BlockBase" type="int" val="1" />
             </parameters>
         </EnvObject>
-        <Prefab>
-            <ActorObject t0="3.48462" t1="8.69104" t2="3.98694" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="3" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
-                <parameters>
-                    <parameter name="Aggression" type="float" val="0.5" />
-                    <parameter name="Attack Damage" type="float" val="1" />
-                    <parameter name="Attack Knockback" type="float" val="1" />
-                    <parameter name="Attack Speed" type="float" val="1" />
-                    <parameter name="Block Follow-up" type="float" val="0.5" />
-                    <parameter name="Block Skill" type="float" val="0.5" />
-                    <parameter name="Character Scale" type="float" val="1" />
-                    <parameter name="Damage Resistance" type="float" val="1" />
-                    <parameter name="Ear Size" type="float" val="1" />
-                    <parameter name="Fat" type="float" val="0.5" />
-                    <parameter name="Focus FOV distance" type="float" val="100" />
-                    <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
-                    <parameter name="Focus FOV vertical" type="float" val="0.62834" />
-                    <parameter name="Ground Aggression" type="float" val="0.5" />
-                    <parameter name="Knockout Shield" type="int" val="0" />
-                    <parameter name="Left handed" type="int" val="0" />
-                    <parameter name="Movement Speed" type="float" val="1" />
-                    <parameter name="Muscle" type="float" val="0.5" />
-                    <parameter name="Peripheral FOV distance" type="float" val="4" />
-                    <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
-                    <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
-                    <parameter name="Static" type="int" val="0" />
-                    <parameter name="Teams" type="string" val="guard" />
-                </parameters>
-                <Connections>
-                    <Connection id="13" />
-                </Connections>
-                <ItemConnections>
-                    <ItemConnection id="7" type="0" mirrored="0" attachment="" />
-                </ItemConnections>
-                <Palette />
-            </ActorObject>
-            <ItemObject t0="1.47824" t1="9.08986" t2="4.32644" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
-                <parameters />
-            </ItemObject>
-            <PathPointObject t0="-2.66747" t1="8.36324" t2="-3.94226" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="9" type_file="">
-                <parameters>
-                    <parameter name="Type" type="string" val="Stand" />
-                    <parameter name="Wait" type="float" val="0" />
-                </parameters>
-                <Connections>
-                    <Connection id="15" />
-                    <Connection id="11" />
-                </Connections>
-            </PathPointObject>
-            <PathPointObject t0="-2.70883" t1="8.36324" t2="11.5826" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="11" type_file="">
-                <parameters>
-                    <parameter name="Type" type="string" val="Stand" />
-                    <parameter name="Wait" type="float" val="0" />
-                </parameters>
-                <Connections>
-                    <Connection id="9" />
-                    <Connection id="13" />
-                </Connections>
-            </PathPointObject>
-            <PathPointObject t0="12.1348" t1="8.36324" t2="11.4993" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="13" type_file="">
-                <parameters>
-                    <parameter name="Type" type="string" val="Stand" />
-                    <parameter name="Wait" type="float" val="0" />
-                </parameters>
-                <Connections>
-                    <Connection id="11" />
-                    <Connection id="15" />
-                </Connections>
-            </PathPointObject>
-            <PathPointObject t0="11.4792" t1="8.36324" t2="-3.88553" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="15" type_file="">
-                <parameters>
-                    <parameter name="Type" type="string" val="Stand" />
-                    <parameter name="Wait" type="float" val="0" />
-                </parameters>
-                <Connections>
-                    <Connection id="13" />
-                    <Connection id="9" />
-                </Connections>
-            </PathPointObject>
-        </Prefab>
+        <ActorObject t0="5.90996" t1="8.24538" t2="2.6408" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="12" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+            <parameters>
+                <parameter name="Aggression" type="float" val="0.5" />
+                <parameter name="Attack Damage" type="float" val="1" />
+                <parameter name="Attack Knockback" type="float" val="1" />
+                <parameter name="Attack Speed" type="float" val="1" />
+                <parameter name="Block Follow-up" type="float" val="0.5" />
+                <parameter name="Block Skill" type="float" val="0.5" />
+                <parameter name="Character Scale" type="float" val="1" />
+                <parameter name="Damage Resistance" type="float" val="1" />
+                <parameter name="Ear Size" type="float" val="1" />
+                <parameter name="Fat" type="float" val="0.5" />
+                <parameter name="Focus FOV distance" type="float" val="100" />
+                <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+                <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+                <parameter name="Ground Aggression" type="float" val="0.5" />
+                <parameter name="Knockout Shield" type="int" val="0" />
+                <parameter name="Left handed" type="int" val="0" />
+                <parameter name="Movement Speed" type="float" val="1" />
+                <parameter name="Muscle" type="float" val="0.5" />
+                <parameter name="Peripheral FOV distance" type="float" val="4" />
+                <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+                <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+                <parameter name="Static" type="int" val="0" />
+                <parameter name="Teams" type="string" val="guard" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+            <ItemConnections />
+            <Palette />
+        </ActorObject>
+        <ItemObject t0="3.90358" t1="8.6442" t2="2.9803" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="13" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <PathPointObject t0="-0.242127" t1="7.91758" t2="-5.2884" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="14" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="-0.283487" t1="7.91758" t2="10.2365" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="15" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="14.5601" t1="7.91758" t2="10.1532" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="13.9045" t1="7.91758" t2="-5.23167" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="17" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
     </Group>
-</Prefab>
+</ActorObjects>

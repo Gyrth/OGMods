@@ -25,9 +25,10 @@ World world;
 int skip_update = 0;
 
 array<BlockType@> block_types = {
-                                    BlockType("Data/Objects/block_house_1.xml", 5.1f),
-                                    BlockType("Data/Objects/block_house_2.xml", 5.1f),
-                                    BlockType("Data/Objects/block_camp.xml", 5.1f),
+                                    BlockType("Data/Objects/block_guard_patrol.xml", 5.1f),
+                                    BlockType("Data/Objects/block_house_1.xml", 0.1f),
+                                    BlockType("Data/Objects/block_house_2.xml", 0.1f),
+                                    BlockType("Data/Objects/block_camp.xml", 0.1f),
                                     BlockType("Data/Objects/block_trees_falen.xml", 0.1f),
                                     BlockType("Data/Objects/block_trees_1.xml", 5.0f),
                                     BlockType("Data/Objects/block_trees_2.xml", 5.0f),
@@ -140,6 +141,41 @@ class Block{
     }
     void AddObjectID(int id){
         obj_ids.insertLast(id);
+    }
+    void ConnectAll(){
+        int char_id = -1;
+        int item_id = -1;
+        array<int> pathpoints;
+        for(uint i = 0; i < obj_ids.size(); i++){
+            Object@ obj = ReadObjectFromID(obj_ids[i]);
+            if(obj.GetType() == _path_point_object){
+                pathpoints.insertLast(obj_ids[i]);
+            }else if(obj.GetType() == _movement_object){
+                char_id = obj_ids[i];
+            }else if(obj.GetType() == _item_object){
+                item_id = obj_ids[i];
+            }
+        }
+        if(char_id != -1){
+            Object@ char = ReadObjectFromID(char_id);
+            for(uint i = 0; i < pathpoints.size(); i++){
+                Object@ pathpoint = ReadObjectFromID(pathpoints[i]);
+                if(i == 0){
+                    pathpoint.ConnectTo(char);
+                }
+                if(i == (pathpoints.size() - 1)){
+                    Object@ next_pathpoint = ReadObjectFromID(pathpoints[0]);
+                    pathpoint.ConnectTo(next_pathpoint);
+                }else{
+                    Object@ next_pathpoint = ReadObjectFromID(pathpoints[i + 1]);
+                    pathpoint.ConnectTo(next_pathpoint);
+                }
+            }
+            if(item_id != -1){
+                Object@ item = ReadObjectFromID(item_id);
+                char.AttachItem(item, _at_grip, false);
+            }
+        }
     }
 }
 
@@ -292,10 +328,7 @@ class World{
         /*DebugDrawLine(position, position + vec3(0.0f,20.0f,0.0f), vec3(0.0f), _persistent);*/
 
         //Now set all children with the offset.
-        int num = 0;
-
         array<EntityType> transpose_types = {_env_object, _movement_object, _item_object, _hotspot_object, _decal_object, _dynamic_light_object, _path_point_object};
-
         for(uint i = 0; i < all_obj.size(); i++){
             Object@ obj = ReadObjectFromID(all_obj[i]);
             if(transpose_types.find(obj.GetType()) != -1){
@@ -304,11 +337,10 @@ class World{
                     spawn_object.owner.AddObjectID(all_obj[i]);
                     params.AddInt("Old", 1);
                     obj.SetTranslation(obj.GetTranslation() + base_pos + offset);
-                    num++;
                 }
             }
         }
-        Print("Found " + num + " children\n");
+        spawn_object.owner.ConnectAll();
     }
 
     void MarkOldObjects(){
