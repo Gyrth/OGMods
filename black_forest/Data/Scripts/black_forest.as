@@ -10,11 +10,6 @@ string building_block = "Data/Objects/block_path_straight_horizontal.xml";
 //Variables not to be manually changed
 string level_name;
 int player_id = -1;
-float height = 0.0f;
-vec2 width_length = vec2(0.0f,0.0f);
-int main_block_id = -1;
-vec3 main_color = vec3(0);
-float timer = 0.0f;
 bool reset_player = true;
 float floor_height;
 vec2 grid_position;
@@ -22,7 +17,6 @@ vec2 grid_position;
 MusicLoad ml("Data/Music/black_forest.xml");
 
 World world;
-int skip_update = 0;
 
 array<BlockType@> block_types = {
                                     BlockType("Data/Objects/block_house_1.xml", 1.0f),
@@ -525,8 +519,8 @@ void UpdateMovement(){
     MovementObject@ player = ReadCharacterID(player_id);
     vec2 new_grid_position = vec2(floor(player.position.x / (2.0f * block_size)), floor(player.position.z / (2.0f * block_size)));
 
-    DebugText("awe", "Player pos " + player.position.x + " And " + player.position.z, _delete_on_update);
-    DebugText("awe2", "New grid pos " + new_grid_position.x + " And " + new_grid_position.y, _delete_on_update);
+    /*DebugText("awe", "Player pos " + player.position.x + " And " + player.position.z, _delete_on_update);
+    DebugText("awe2", "New grid pos " + new_grid_position.x + " And " + new_grid_position.y, _delete_on_update);*/
 
     /*vec2 new_grid_position = vec2(floor(player.position.x), floor(player.position.z));*/
     vec2 moved = vec2(0.0f);
