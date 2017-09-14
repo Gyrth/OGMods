@@ -1,0 +1,119 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-21.8443" t1="10.6579" t2="71.9347" s0="20.01" s1="26.3519" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="110" version="1">
+        <parameters />
+        <EnvObject t0="-21.8443" t1="7.48698" t2="71.9347" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="string" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-17.4401" t1="16.7641" t2="75.5332" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="39" color_r="0.345098" color_g="0.345095" color_b="0.345095" overbright="0" type_file="Data/Objects/Environment/caves/cave_wall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.5253" t1="16.6312" t2="70.2783" s0="1" s1="1" s2="1" q0="-0.998533" q1="0" q2="0.0541499" q3="0" id="42" color_r="0.345098" color_g="0.345095" color_b="0.345095" overbright="0" type_file="Data/Objects/Environment/caves/cave_wall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-20.7902" t1="19.2496" t2="76.8422" s0="0.736365" s1="0.736364" s2="0.736364" q0="0" q1="0.681497" q2="0" q3="0.731821" id="44" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.2207" t1="19.2496" t2="66.8585" s0="0.736364" s1="0.736364" s2="0.736364" q0="0" q1="-0.731821" q2="0" q3="0.681497" id="46" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-26.3381" t1="17.3009" t2="68.3282" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="65" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_pillar_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-28.1849" t1="17.3009" t2="70.7692" s0="1" s1="1" s2="1" q0="0" q1="-0.597417" q2="0" q3="0.801931" id="69" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_pillar_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-27.8693" t1="17.3009" t2="73.7602" s0="1" s1="1" s2="1" q0="0" q1="0.320734" q2="0" q3="0.947169" id="80" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_pillar_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-26.5153" t1="17.17" t2="76.1657" s0="1" s1="1" s2="1" q0="0" q1="0.320734" q2="0" q3="0.947169" id="82" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_pillar_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-23.9981" t1="17.487" t2="70.7107" s0="3.85918" s1="1" s2="3.87923" q0="0" q1="0.244178" q2="0" q3="0.96973" id="83" type_file="Data/Objects/Decals/Hay_02.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-24.2331" t1="17.487" t2="73.0531" s0="3.85918" s1="1" s2="3.87923" q0="0" q1="-0.466347" q2="0" q3="0.884602" id="85" type_file="Data/Objects/Decals/Hay_02.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-22.9018" t1="17.487" t2="71.9931" s0="3.85918" s1="1" s2="3.87923" q0="0" q1="0.244178" q2="0" q3="0.96973" id="92" type_file="Data/Objects/Decals/Hay_02.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="-22.8082" t1="16.8414" t2="71.9627" s0="0.658257" s1="0.658257" s2="0.658257" q0="0" q1="0" q2="0" q3="1" id="95" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.0407" t1="21.6527" t2="72.7293" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="97" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_capital_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <ActorObject t0="-20.8561" t1="18.487" t2="72.6714" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="98" type_file="Data/Objects/characters/wolves/male_wolf_actor.xml" is_player="0">
+            <parameters>
+                <parameter name="Aggression" type="float" val="0.5" />
+                <parameter name="Attack Damage" type="float" val="1" />
+                <parameter name="Attack Knockback" type="float" val="1" />
+                <parameter name="Attack Speed" type="float" val="1" />
+                <parameter name="Block Follow-up" type="float" val="0.5" />
+                <parameter name="Block Skill" type="float" val="0.5" />
+                <parameter name="Character Scale" type="float" val="1" />
+                <parameter name="Damage Resistance" type="float" val="1" />
+                <parameter name="Ear Size" type="float" val="1" />
+                <parameter name="Fat" type="float" val="0.5" />
+                <parameter name="Focus FOV distance" type="float" val="100" />
+                <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+                <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+                <parameter name="Ground Aggression" type="float" val="0.5" />
+                <parameter name="Knockout Shield" type="int" val="0" />
+                <parameter name="Left handed" type="int" val="0" />
+                <parameter name="Movement Speed" type="float" val="1" />
+                <parameter name="Muscle" type="float" val="0.5" />
+                <parameter name="Peripheral FOV distance" type="float" val="4" />
+                <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+                <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+                <parameter name="Static" type="int" val="0" />
+                <parameter name="Teams" type="string" val="wolf" />
+            </parameters>
+            <Connections>
+            </Connections>
+            <ItemConnections />
+            <Palette>
+                <Color label="Fur" channel="0" red="0.105882" green="0.0676025" blue="0.0527336" />
+                <Color label="Back" channel="1" red="0.196078" green="0.196076" blue="0.196076" />
+                <Color label="Neck" channel="2" red="0.203922" green="0.20392" blue="0.20392" />
+                <Color label="Legs" channel="3" red="0.101961" green="0.0791695" blue="0.0791695" />
+            </Palette>
+        </ActorObject>
+        <PathPointObject t0="-23.8815" t1="18.3828" t2="71.7021" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="103" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Sleep" />
+                <parameter name="Wait" type="float" val="15" />
+            </parameters>
+            <Connections>
+            </Connections>
+        </PathPointObject>
+        <PathPointObject t0="-14.1844" t1="17.6573" t2="73.3705" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="105" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections>
+            </Connections>
+        </PathPointObject>
+        <PathPointObject t0="-13.6701" t1="17.6573" t2="80.8504" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="107" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="3" />
+            </parameters>
+            <Connections>
+            </Connections>
+        </PathPointObject>
+        <PathPointObject t0="-13.7666" t1="17.9587" t2="63.5069" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="109" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="2" />
+            </parameters>
+            <Connections>
+            </Connections>
+        </PathPointObject>
+    </Group>
+</ActorObjects>

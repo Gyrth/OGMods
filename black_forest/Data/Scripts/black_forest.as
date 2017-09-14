@@ -25,17 +25,21 @@ World world;
 int skip_update = 0;
 
 array<BlockType@> block_types = {
-                                    BlockType("Data/Objects/block_guard_patrol.xml", 1.0f),
                                     BlockType("Data/Objects/block_house_1.xml", 1.0f),
                                     BlockType("Data/Objects/block_house_2.xml", 1.0f),
                                     BlockType("Data/Objects/block_house_3.xml", 1.0f),
                                     BlockType("Data/Objects/block_trees_falen.xml", 1.0f),
-                                    
-                                    BlockType("Data/Objects/block_camp_1.xml", 1.0f),
-                                    BlockType("Data/Objects/block_camp_2.xml", 1.0f),
-                                    BlockType("Data/Objects/block_camp_3.xml", 1.0f),
-                                    BlockType("Data/Objects/block_camp_4.xml", 1.0f),
-                                    BlockType("Data/Objects/block_camp_5.xml", 1.0f),
+
+                                    BlockType("Data/Objects/block_wolf_den_1.xml", 0.25f),
+                                    BlockType("Data/Objects/block_wolf_den_2.xml", 0.25f),
+                                    BlockType("Data/Objects/block_wolf_den_3.xml", 0.25f),
+
+                                    BlockType("Data/Objects/block_guard_patrol.xml", 0.75f),
+                                    BlockType("Data/Objects/block_camp_1.xml", 0.75f),
+                                    BlockType("Data/Objects/block_camp_2.xml", 0.75f),
+                                    BlockType("Data/Objects/block_camp_3.xml", 0.75f),
+                                    BlockType("Data/Objects/block_camp_4.xml", 0.75f),
+                                    BlockType("Data/Objects/block_camp_5.xml", 0.75f),
 
                                     BlockType("Data/Objects/block_ruins_1.xml", 3.0f),
                                     BlockType("Data/Objects/block_ruins_2.xml", 3.0f),
@@ -451,6 +455,7 @@ bool HasFocus(){
 void Reset(){
   /*player_id = -1;
   reset_player = true;*/
+  ResetLevel();
 }
 
 void ResetWorld(){
@@ -504,6 +509,7 @@ void Update() {
     }
     UpdateMusic();
     UpdateSounds();
+    UpdateReviving();
 }
 
 void UpdateMovement(){
@@ -566,5 +572,12 @@ void UpdateSounds(){
         MovementObject@ player = ReadCharacterID(player_id);
         vec3 position = player.position + vec3(RangedRandomFloat(-radius, radius),RangedRandomFloat(-radius, radius),RangedRandomFloat(-radius, radius));
         PlaySound(sounds[rand() % sounds.size()], position);
+    }
+}
+
+void UpdateReviving(){
+    MovementObject@ player = ReadCharacterID(player_id);
+    if(player.GetIntVar("knocked_out") == _dead && GetInputDown(0, "mouse0")){
+        Reset();
     }
 }
