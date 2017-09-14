@@ -30,10 +30,10 @@ array<BlockType@> block_types = {
                                     BlockType("Data/Objects/block_house_3.xml", 1.0f),
                                     BlockType("Data/Objects/block_trees_falen.xml", 1.0f),
 
-                                    BlockType("Data/Objects/block_wolf_den_1.xml", 5.25f),
-                                    /*BlockType("Data/Objects/block_wolf_den_2.xml", 0.25f),
+                                    BlockType("Data/Objects/block_wolf_den_1.xml", 0.25f),
+                                    BlockType("Data/Objects/block_wolf_den_2.xml", 0.25f),
                                     BlockType("Data/Objects/block_wolf_den_3.xml", 0.25f),
-                                    BlockType("Data/Objects/block_wolf_den_4.xml", 0.25f),*/
+                                    BlockType("Data/Objects/block_wolf_den_4.xml", 0.25f),
 
                                     BlockType("Data/Objects/block_lake_1.xml", 0.5f),
                                     BlockType("Data/Objects/block_lake_2.xml", 0.5f),
