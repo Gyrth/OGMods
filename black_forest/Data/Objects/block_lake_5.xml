@@ -1,0 +1,42 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="11.888" t1="26.9772" t2="77.6652" s0="22.4791" s1="50.272" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="324" version="1">
+        <parameters />
+        <EnvObject t0="10.6535" t1="11.8462" t2="77.6652" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="10.7964" t1="19.193" t2="77.134" s0="4.07797" s1="1" s2="4.06187" q0="0" q1="0" q2="0" q3="1" id="111" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="10.2179" t1="17.2134" t2="82.6319" s0="1.94648" s1="1.94648" s2="1.94648" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="228" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.05209" t1="20.649" t2="81.27" s0="1" s1="1" s2="1" q0="0.493704" q1="-0.717646" q2="-0.34324" q3="0.351305" id="237" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_top.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.69064" t1="22.6855" t2="72.0457" s0="1" s1="1" s2="1" q0="0" q1="-0.999853" q2="0" q3="-0.0171884" id="239" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.6986" t1="23.0236" t2="72.0848" s0="1" s1="1" s2="1" q0="0" q1="-0.00475597" q2="0" q3="0.999989" id="241" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.2042" t1="17.2134" t2="74.9661" s0="1.94648" s1="1.94648" s2="1.94648" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="245" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.8184" t1="36.1471" t2="73.9165" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="320" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B_tops.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="10.18" t1="21.8462" t2="78.1934" s0="2.40155" s1="1" s2="2.589" q0="0" q1="0" q2="0" q3="1" id="322" type_file="Data/Objects/Hotspots/emitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="Smoke" />
+            </parameters>
+        </Hotspot>
+    </Group>
+</ActorObjects>

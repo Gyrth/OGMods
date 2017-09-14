@@ -3,7 +3,7 @@
 #include "music_load.as"
 
 //Parameters for user to change
-int world_size = 5;
+int world_size = 4;
 float block_size = 10.0f;
 string building_block = "Data/Objects/block_path_straight_horizontal.xml";
 
@@ -30,9 +30,18 @@ array<BlockType@> block_types = {
                                     BlockType("Data/Objects/block_house_3.xml", 1.0f),
                                     BlockType("Data/Objects/block_trees_falen.xml", 1.0f),
 
-                                    BlockType("Data/Objects/block_wolf_den_1.xml", 0.25f),
-                                    BlockType("Data/Objects/block_wolf_den_2.xml", 0.25f),
+                                    BlockType("Data/Objects/block_wolf_den_1.xml", 5.25f),
+                                    /*BlockType("Data/Objects/block_wolf_den_2.xml", 0.25f),
                                     BlockType("Data/Objects/block_wolf_den_3.xml", 0.25f),
+                                    BlockType("Data/Objects/block_wolf_den_4.xml", 0.25f),*/
+
+                                    BlockType("Data/Objects/block_lake_1.xml", 0.5f),
+                                    BlockType("Data/Objects/block_lake_2.xml", 0.5f),
+                                    BlockType("Data/Objects/block_lake_3.xml", 0.5f),
+                                    BlockType("Data/Objects/block_lake_4.xml", 0.5f),
+                                    BlockType("Data/Objects/block_lake_5.xml", 0.5f),
+                                    BlockType("Data/Objects/block_lake_6.xml", 0.5f),
+                                    BlockType("Data/Objects/block_lake_7.xml", 0.5f),
 
                                     BlockType("Data/Objects/block_guard_patrol.xml", 0.75f),
                                     BlockType("Data/Objects/block_camp_1.xml", 0.75f),

@@ -1,0 +1,43 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.20671" t1="26.679" t2="79.6208" s0="24.9822" s1="49.6755" s2="23.9213" q0="0" q1="0" q2="0" q3="1" id="208" version="1">
+        <parameters />
+        <EnvObject t0="10.6535" t1="11.8462" t2="77.6652" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="10.8166" t1="19.6281" t2="77.1826" s0="4.07797" s1="1" s2="4.06187" q0="0" q1="0" q2="0" q3="1" id="111" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="10.7064" t1="21.8364" t2="71.3849" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.6867" t1="15.3177" t2="74.5597" s0="1" s1="1" s2="1" q0="-0.0104502" q1="-0.700011" q2="0.00862879" q3="0.714003" id="196" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_EndLegs.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.373" t1="22.7183" t2="74.5431" s0="0.619793" s1="1" s2="0.521722" q0="-0.940232" q1="0" q2="0" q3="0.340533" id="144" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.3457" t1="22.5501" t2="75.8871" s0="1.07161" s1="0.328826" s2="0.462638" q0="0.33553" q1="-0.622431" q2="-0.33553" q3="0.622431" id="190" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/SmallProps/Rope/Rope_Bend_01.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.3261" t1="21.5731" t2="76.6102" s0="0.355359" s1="0.355359" s2="0.355359" q0="0" q1="0" q2="0" q3="1" id="192" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/RopeBall1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.062" t1="20.4846" t2="81.3095" s0="1" s1="1" s2="1" q0="0.177106" q1="-0.13661" q2="-0.595286" q3="0.771755" id="194" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Statues/RobedStatue.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.42302" t1="35.5505" t2="83.5317" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="201" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.717" t1="22.2961" t2="71.5301" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="205" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

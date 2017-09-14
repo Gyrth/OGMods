@@ -1,0 +1,45 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="10.2279" t1="11.4723" t2="77.5377" s0="20.01" s1="22.8223" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="337" version="1">
+        <parameters />
+        <EnvObject t0="10.2279" t1="10.0662" t2="77.5377" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="10.3709" t1="17.4129" t2="77.0066" s0="4.07797" s1="1" s2="4.06187" q0="0" q1="0" q2="0" q3="1" id="111" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="9.42002" t1="19.1024" t2="80.1345" s0="1" s1="1" s2="1" q0="0.0886138" q1="0.68406" q2="0.709577" q3="-0.14391" id="228" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.1883" t1="18.676" t2="78.4465" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="237" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/Redwood/log1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.7735" t1="20.2896" t2="84.6272" s0="0.768242" s1="0.768242" s2="0.768242" q0="0" q1="0" q2="0" q3="1" id="320" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.46957" t1="20.9838" t2="83.2266" s0="0.655432" s1="0.655432" s2="0.655432" q0="0" q1="0.749177" q2="0" q3="0.66237" id="322" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.67301" t1="20.2167" t2="71.7993" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="324" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.6514" t1="20.345" t2="70.6986" s0="0.655432" s1="0.655432" s2="0.655432" q0="0" q1="0.749177" q2="0" q3="0.66237" id="328" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.654" t1="20.4588" t2="70.6531" s0="1.40044" s1="1.40044" s2="1.40044" q0="0" q1="0.999329" q2="0" q3="0.0366405" id="332" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="10.1196" t1="19.4129" t2="76.0302" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="334" type_file="Data/Objects/Hotspots/emitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="Smoke" />
+            </parameters>
+        </Hotspot>
+    </Group>
+</ActorObjects>

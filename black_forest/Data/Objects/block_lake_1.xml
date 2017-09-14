@@ -1,0 +1,49 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.9019" t1="5.14281" t2="74.52" s0="20.01" s1="20.1875" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="134" version="1">
+        <parameters />
+        <EnvObject t0="9.9019" t1="5.05406" t2="74.52" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="10.1086" t1="12.569" t2="74.5832" s0="3.814" s1="0.966606" s2="4.2382" q0="0" q1="0" q2="0" q3="1" id="7" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="15.6418" t1="14.7645" t2="72.0264" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.3859" t1="14.7793" t2="72.1223" s0="1" s1="1" s2="1" q0="0" q1="0.476892" q2="0" q3="0.878962" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.2612" t1="14.7645" t2="77.382" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="95" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.431" t1="14.7645" t2="80.7298" s0="1" s1="1" s2="1" q0="0" q1="0.762217" q2="0" q3="0.647322" id="97" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.66876" t1="14.7645" t2="76.0373" s0="1" s1="1" s2="1" q0="0" q1="0.825157" q2="0" q3="0.564903" id="99" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.58781" t1="14.7645" t2="69.5736" s0="1" s1="1" s2="1" q0="0" q1="0.598793" q2="0" q3="0.800904" id="101" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.5377" t1="14.7645" t2="68.5423" s0="1" s1="1" s2="1" q0="0" q1="-0.748263" q2="0" q3="0.663402" id="103" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.9559" t1="14.7645" t2="74.8332" s0="1" s1="1" s2="1" q0="0" q1="-0.836027" q2="0" q3="0.548688" id="105" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.3422" t1="14.7793" t2="72.9424" s0="1" s1="1" s2="1" q0="0" q1="-0.449973" q2="0" q3="0.893042" id="107" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.8103" t1="14.7793" t2="73.2636" s0="1" s1="1" s2="1" q0="0" q1="0.923881" q2="0" q3="0.382681" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,82 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="10.6535" t1="12.1959" t2="77.6652" s0="20.01" s1="20.7094" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="339" version="1">
+        <parameters />
+        <EnvObject t0="10.6535" t1="11.8462" t2="77.6652" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="10.7964" t1="19.193" t2="77.134" s0="4.07797" s1="1" s2="4.06187" q0="0" q1="0" q2="0" q3="1" id="111" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="4.91666" t1="21.1027" t2="77.0021" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.250511" q2="0" q3="0.968114" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.30028" t1="21.1027" t2="80.0175" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="-0.394906" q2="0" q3="0.918722" id="192" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.39992" t1="21.1027" t2="82.8154" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="-0.84032" q2="0" q3="0.54209" id="196" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.6813" t1="21.1027" t2="83.2823" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="-0.352249" q2="0" q3="0.935906" id="205" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.02565" t1="21.1027" t2="73.6958" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0" q2="0" q3="1" id="228" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.1864" t1="21.1027" t2="82.2303" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.40715" q2="0" q3="0.913361" id="237" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.8413" t1="21.1027" t2="77.689" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.771305" q2="0" q3="0.636466" id="239" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.6245" t1="21.1027" t2="73.7987" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.998868" q2="0" q3="0.0475577" id="241" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.5664" t1="21.1027" t2="71.2656" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.889938" q2="0" q3="-0.456082" id="243" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.12517" t1="21.1027" t2="71.1556" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.495246" q2="0" q3="-0.868753" id="245" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.63705" t1="21.1027" t2="72.1187" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="-0.196692" q2="0" q3="-0.980465" id="319" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.93024" t1="19.1052" t2="77.8426" s0="3.05715" s1="1.15912" s2="1" q0="0.707107" q1="0" q2="0" q3="0.707107" id="320" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.4224" t1="19.1052" t2="75.5065" s0="2.48211" s1="1.03819" s2="1" q0="0.618421" q1="0.342863" q2="-0.342863" q3="0.618421" id="322" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.8246" t1="19.1052" t2="79.2645" s0="2.40211" s1="1.03398" s2="1" q0="0.297901" q1="0.641291" q2="-0.641291" q3="0.297901" id="324" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.8054" t1="19.1052" t2="77.5515" s0="3.05715" s1="1.15912" s2="1" q0="0.648468" q1="0.281939" q2="-0.281939" q3="0.648468" id="326" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.30412" t1="21.201" t2="81.8196" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="328" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.6384" t1="21.201" t2="72.5532" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="330" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.6486" t1="21.201" t2="72.8028" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="332" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.9517" t1="21.201" t2="83.6135" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="334" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.379" t1="20.8848" t2="75.8283" s0="1" s1="1" s2="1" q0="-0.703596" q1="-0.0016799" q2="-0.126521" q3="0.699245" id="337" color_r="0.0753556" color_g="0.109804" color_b="0.0849929" overbright="0" type_file="Data/Objects/Buildings/spires/spire_top.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.5965" t1="21.1149" t2="77.489" s0="1.04482" s1="1.04482" s2="1.04482" q0="-0.409596" q1="-0.588378" q2="-0.415129" q3="0.560066" id="338" color_r="0.0753556" color_g="0.109804" color_b="0.0849929" overbright="0" type_file="Data/Objects/Buildings/spires/spire_trim.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>
