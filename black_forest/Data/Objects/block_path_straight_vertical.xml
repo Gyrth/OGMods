@@ -17,5 +17,5 @@
 		<DetailObject obj_path="Data/Objects/Environment/Rocks/lichen_rock_c.xml" weight_path="Data/Textures/block_path_straight_w.png" normal_conform="0.900000" density="0.600000" min_embed="0.400000" max_embed="0.600000" min_scale="0.200000" max_scale="0.800000" view_distance="30.000000" jitter_degrees="30.000000" overbright="0.300000" collision_type="static" />
 	</DetailObjects> -->
 	<MaterialPath>Data/Materials/dirt.xml</MaterialPath>
-	<ShaderName>envobject #DETAILMAP4 #TANGENT #BASE_TANGENT</ShaderName>
+	<ShaderName>detailmap4</ShaderName>
 </Object>

@@ -14,6 +14,7 @@ int player_id = -1;
 bool reset_player = true;
 float floor_height;
 vec2 grid_position;
+bool rebuild_world = false;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -234,7 +235,18 @@ class World{
     array<SpawnObject@> objects_to_spawn;
     array<int> garbage;
     World(){}
-    void Reset(){}
+    void Reset(){
+        for(uint i = 0; i < blocks.size(); i++){
+            for(uint j = 0; j < blocks[i].size(); j++){
+                blocks[i][j].Delete();
+            }
+        }
+        for(uint i = 0; i < garbage.size(); i++){
+            DeleteObjectID(garbage[i]);
+        }
+        blocks.resize(0);
+        garbage.resize(0);
+    }
     void MoveXUp(){
         for(uint i = 0; i < blocks.size(); i++){
             garbage.insertAt(0, blocks[i][0].Delete());
@@ -455,12 +467,13 @@ void Init(string p_level_name) {
         block_types[i].Init();
     }
     PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
+    ReadScriptParameters();
 }
 
 void ReadScriptParameters(){
-  ScriptParams@ level_params = level.GetScriptParams();
-  rain = level_params.GetInt("Rain") == 1;
-  if(rain){
+    ScriptParams@ level_params = level.GetScriptParams();
+    rain = level_params.GetInt("Rain") == 1;
+    if(rain){
       level_params.SetString("GPU Particle Field", "#RAIN");
       level_params.SetString("Custom Shader", "#RAINY #ADD_MOON");
       if(rand() % 2 == 0){
@@ -471,14 +484,22 @@ void ReadScriptParameters(){
           rain_sound_id = -1;
       }
       rain_sound_id = PlaySoundLoop("Data/Sounds/weather/rain.wav", 1.0f);
-  }else{
+    }else{
       if(rain_sound_id != -1){
           StopSound(rain_sound_id);
           rain_sound_id = -1;
       }
       level_params.SetString("GPU Particle Field", "#BUGS");
       level_params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
-  }
+    }
+    if(world_size != level_params.GetInt("World Size")){
+        world_size = level_params.GetInt("World Size");
+        rebuild_world = true;
+    }
+    if(block_size != level_params.GetInt("Block Size")){
+        block_size = level_params.GetInt("Block Size");
+        rebuild_world = true;
+    }
 }
 
 bool HasFocus(){
@@ -486,19 +507,16 @@ bool HasFocus(){
 }
 
 void Reset(){
-  /*player_id = -1;
-  reset_player = true;*/
-  ResetLevel();
-  ReadScriptParameters();
+    ReadScriptParameters();
+    ResetLevel();
+    if(rebuild_world){
+        BuildWorld();
+        rebuild_world = false;
+    }
 }
 
-void ResetWorld(){
-    array<int> all_obj = GetObjectIDs();
-    for(uint i = 0; i < all_obj.size(); i++){
-        Print("Prebuild id " + all_obj[i] + "\n");
-    }
+void BuildWorld(){
     world.Reset();
-    ReadScriptParameters();
     world.CreateFloor();
 }
 
@@ -533,8 +551,7 @@ void Update() {
         }
         MovementObject@ player = ReadCharacterID(player_id);
         grid_position = vec2(floor(player.position.x / (block_size)), floor(player.position.z / (block_size)));
-        /*Print("Position " + grid_position.x + " " + grid_position.y + "\n");*/
-        ResetWorld();
+        BuildWorld();
     }else{
       UpdateMovement();
       world.UpdateSpawning();
@@ -611,7 +628,7 @@ void UpdateSounds(){
 
 void UpdateReviving(){
     MovementObject@ player = ReadCharacterID(player_id);
-    if(player.GetIntVar("knocked_out") == _dead && GetInputPressed(0, "mouse0")){
+    if(!EditorModeActive() && player.GetIntVar("knocked_out") == _dead && GetInputPressed(0, "mouse0")){
         Reset();
     }
 }
