@@ -6,8 +6,9 @@
 int world_size = 4;
 float block_size = 10.0f;
 string building_block = "Data/Objects/block_path_straight_horizontal.xml";
-
+bool rain = false;
 //Variables not to be manually changed
+int rain_sound_id = -1;
 string level_name;
 int player_id = -1;
 bool reset_player = true;
@@ -24,10 +25,10 @@ array<BlockType@> block_types = {
                                     BlockType("Data/Objects/block_house_3.xml", 1.0f),
                                     BlockType("Data/Objects/block_trees_falen.xml", 1.0f),
 
-                                    BlockType("Data/Objects/block_wolf_den_1.xml", 0.25f),
-                                    BlockType("Data/Objects/block_wolf_den_2.xml", 0.25f),
-                                    BlockType("Data/Objects/block_wolf_den_3.xml", 0.25f),
-                                    BlockType("Data/Objects/block_wolf_den_4.xml", 0.25f),
+                                    BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f),
+                                    BlockType("Data/Objects/block_wolf_den_2.xml", 0.05f),
+                                    BlockType("Data/Objects/block_wolf_den_3.xml", 0.05f),
+                                    BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f),
 
                                     BlockType("Data/Objects/block_lake_1.xml", 0.5f),
                                     BlockType("Data/Objects/block_lake_2.xml", 0.5f),
@@ -37,12 +38,12 @@ array<BlockType@> block_types = {
                                     BlockType("Data/Objects/block_lake_6.xml", 0.5f),
                                     BlockType("Data/Objects/block_lake_7.xml", 0.5f),
 
-                                    BlockType("Data/Objects/block_guard_patrol.xml", 0.75f),
-                                    BlockType("Data/Objects/block_camp_1.xml", 0.75f),
-                                    BlockType("Data/Objects/block_camp_2.xml", 0.75f),
-                                    BlockType("Data/Objects/block_camp_3.xml", 0.75f),
-                                    BlockType("Data/Objects/block_camp_4.xml", 0.75f),
-                                    BlockType("Data/Objects/block_camp_5.xml", 0.75f),
+                                    BlockType("Data/Objects/block_guard_patrol.xml", 0.5f),
+                                    BlockType("Data/Objects/block_camp_1.xml", 0.5f),
+                                    BlockType("Data/Objects/block_camp_2.xml", 0.5f),
+                                    BlockType("Data/Objects/block_camp_3.xml", 0.5f),
+                                    BlockType("Data/Objects/block_camp_4.xml", 0.5f),
+                                    BlockType("Data/Objects/block_camp_5.xml", 0.5f),
 
                                     BlockType("Data/Objects/block_ruins_1.xml", 3.0f),
                                     BlockType("Data/Objects/block_ruins_2.xml", 3.0f),
@@ -422,20 +423,29 @@ class World{
             }
         }
     }
-    float timer = 0.0f;
-    bool rain = false;
+    float timer = RangedRandomFloat(5.0f, 6.0f);
     void UpdateWeather(){
-        /*if(timer > 50.0f){
-            timer = 0.0f;
+        /*if(timer < 0.0f){
+            timer = RangedRandomFloat(5.0f, 6.0f);
             ScriptParams@ params = level.GetScriptParams();
             if(rain){
                 params.SetString("GPU Particle Field", "#RAIN");
+                params.SetString("Custom Shader", "#RAINY #ADD_MOON");
+                if(rand() % 2 == 0){
+                    PlaySoundGroup("Data/Sounds/weather/thunder_strike_mike_koenig.xml");
+                }
+                rain_sound_id = PlaySoundLoop("Data/Sounds/weather/rain.wav", 1.0f);
             }else{
-                params.Remove("GPU Particle Field");
+                if(rain_sound_id != -1){
+                    StopSound(rain_sound_id);
+                    rain_sound_id = -1;
+                }
+                params.SetString("GPU Particle Field", "#BUGS");
+                params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
             }
             rain = !rain;
         }
-        timer += time_step;*/
+        timer -= time_step;*/
     }
 }
 
@@ -449,6 +459,26 @@ void Init(string p_level_name) {
 
 void ReadScriptParameters(){
   ScriptParams@ level_params = level.GetScriptParams();
+  rain = level_params.GetInt("Rain") == 1;
+  if(rain){
+      level_params.SetString("GPU Particle Field", "#RAIN");
+      level_params.SetString("Custom Shader", "#RAINY #ADD_MOON");
+      if(rand() % 2 == 0){
+          PlaySoundGroup("Data/Sounds/weather/thunder_strike_mike_koenig.xml");
+      }
+      if(rain_sound_id != -1){
+          StopSound(rain_sound_id);
+          rain_sound_id = -1;
+      }
+      rain_sound_id = PlaySoundLoop("Data/Sounds/weather/rain.wav", 1.0f);
+  }else{
+      if(rain_sound_id != -1){
+          StopSound(rain_sound_id);
+          rain_sound_id = -1;
+      }
+      level_params.SetString("GPU Particle Field", "#BUGS");
+      level_params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
+  }
 }
 
 bool HasFocus(){
@@ -459,6 +489,7 @@ void Reset(){
   /*player_id = -1;
   reset_player = true;*/
   ResetLevel();
+  ReadScriptParameters();
 }
 
 void ResetWorld(){
@@ -527,12 +558,12 @@ void UpdateMovement(){
     if(grid_position != new_grid_position){
         /*Print("Grid pos changed\n");*/
       if(new_grid_position.y > grid_position.y){
-          Print("Moved up\n");
+          /*Print("Moved up\n");*/
           world.MoveZUp();
           moved += vec2(0.0f, 1.0f);
       }
       if(new_grid_position.y < grid_position.y){
-          Print("Moved down\n");
+          /*Print("Moved down\n");*/
           world.MoveZDown();
           moved += vec2(0.0f, -1.0f);
       }
