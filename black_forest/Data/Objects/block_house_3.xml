@@ -1,17 +1,50 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="-13.6552" t1="16.2388" t2="37.7722" s0="20.01" s1="27.4838" s2="20.3291" q0="0" q1="0" q2="0" q3="1" id="2632" version="1">
-        <parameters>
-        </parameters>
-        <EnvObject t0="-13.6552" t1="12.6142" t2="37.6127" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2630" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+    <Group t0="23.8174" t1="13.3129" t2="80.1739" s0="24.9128" s1="51.1656" s2="22.5379" q0="0" q1="0" q2="0" q3="1" id="97" version="1">
+        <parameters />
+        <EnvObject t0="26.2688" t1="-2.26493" t2="81.1188" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="62" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
             <parameters>
                 <parameter name="BlockBase" type="int" val="1" />
             </parameters>
         </EnvObject>
-        <EnvObject t0="-14.1746" t1="25.8141" t2="43.5575" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2631" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/hut_medium.xml">
+        <EnvObject t0="25.7494" t1="10.935" t2="87.0636" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="63" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/hut_medium.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.2495" t1="13.2369" t2="86.6182" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/rabbit_village/rabbit_hut_round_hearth.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="25.8491" t1="9.10443" t2="84.8028" s0="1.15339" s1="1.10346" s2="1.09748" q0="0" q1="0.993468" q2="0" q3="-0.114109" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Door1.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="29.4224" t1="17.8236" t2="86.7427" s0="0.34944" s1="1.25272" s2="0.315853" q0="0" q1="0" q2="0" q3="1" id="68" type_file="Data/Objects/Hotspots/emitter.xml">
             <parameters>
+                <parameter name="Type" type="string" val="Smoke" />
             </parameters>
+        </Hotspot>
+        <EnvObject t0="29.8897" t1="9.96148" t2="75.4602" s0="2.99619" s1="2.99619" s2="2.99619" q0="0" q1="1" q2="0" q3="2.23517e-06" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="23.407" t1="10.1194" t2="84.9559" s0="1" s1="1" s2="1" q0="0" q1="-0.999923" q2="0" q3="-0.0123915" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="27.9611" t1="10.13" t2="84.3125" s0="1" s1="1" s2="1" q0="0" q1="-0.994406" q2="0" q3="0.105626" id="83" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="24.784" t1="7.81929" t2="84.5419" s0="1" s1="1" s2="1" q0="0" q1="0.122915" q2="0" q3="0.992417" id="80" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_tray_dirty.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="25.041" t1="7.76139" t2="80.163" s0="2.38705" s1="1.2049" s2="2.38811" q0="0" q1="0.0754235" q2="0" q3="0.997152" id="81" color_r="0.121569" color_g="0.0800081" color_b="0.0595925" overbright="0" type_file="Data/Objects/Buildings/basics/soft_platform.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="25.6293" t1="7.74868" t2="83.6092" s0="0.614165" s1="1.2049" s2="1.19185" q0="0" q1="0.0754235" q2="0" q3="0.997152" id="85" color_r="0.121569" color_g="0.0800081" color_b="0.0595925" overbright="0" type_file="Data/Objects/Buildings/basics/soft_platform.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.1401" t1="8.77376" t2="86.4047" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="94" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="19.0684" t1="22.9295" t2="76.9547" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="96" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
         </EnvObject>
     </Group>
 </ActorObjects>
