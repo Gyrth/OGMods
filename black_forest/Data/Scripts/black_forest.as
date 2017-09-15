@@ -246,7 +246,7 @@ class World{
         }
         blocks.removeAt(0);
         array<Block@> new_row;
-        for(int i = 0; i < world_size; i++){
+        for(uint i = 0; i < blocks[blocks.size() - 1].size(); i++){
             Block@ new_block = CreateBlock(blocks[blocks.size() - 1][i], vec3(0.0f, 0.0f, block_size * 2.0f));
             new_row.insertLast(new_block);
         }
@@ -259,7 +259,7 @@ class World{
         }
         blocks.removeLast();
         array<Block@> new_row;
-        for(int i = 0; i < world_size; i++){
+        for(uint i = 0; i < blocks[0].size(); i++){
             Block@ new_block = CreateBlock(blocks[0][i], vec3(0.0f, 0.0f, -block_size * 2.0f));
             new_row.insertLast(new_block);
         }
