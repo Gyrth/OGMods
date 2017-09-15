@@ -147,6 +147,7 @@ class Block{
         return objects_to_spawn;
     }
     array<int> Delete(){
+        deleted = true;
         array<int> garbage;
         for(uint i = 0; i < obj_ids.size(); i++){
             Object@ obj = ReadObjectFromID(obj_ids[i]);
@@ -176,7 +177,6 @@ class Block{
             DeleteObjectID(obj_ids[i]);
         }
         obj_ids.resize(0);
-        deleted = true;
         return garbage;
     }
     void AddObjectID(int id){
