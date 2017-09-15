@@ -1,31 +1,19 @@
 <? xml version="1.0" ?>
 <Mod>
-    <!-- The ID is necessary and should never change between versions of the same mod -->
-    <!-- The id can consist of english alphabet or dash "-" -->
     <Id>airtemple</Id>
-    <!-- The human readable name is presented in UI's -->
     <Name>Airtemple</Name>
-    <!-- Version number, can have any formatting you wish. Can consists of numbers english alphabet, "." or "-" -->
 	<Category>Level Pack</Category>
     <Version>0.1.0</Version>
-    <!-- Your immortal stamp -->
     <Author>Gyrth McMulin</Author>
-    <!-- Thumbnail used in-game, no strict size is defined yet, should be 16:9 -->
     <Thumbnail>Data/Images/airtemple_thumb.png</Thumbnail>
-    <!-- First preview image will be used as preview on steamworks, you can add additional ones -->
     <PreviewImage>Data/Images/airtemple_full.png</PreviewImage>
 	<Description>This is an Overgrowth level based on The Western Airtemple. It's from Avatar The Last Airbender.</Description>
-    <!-- Tags sent to and mainly used by steam workshop -->
-    <Tag>a277</Tag>
-    <Tag>b1</Tag>
+    <Tag>b5</Tag>
     <Tag>level</Tag>
     <Tag>map</Tag>
     <Tag>scripting</Tag>
-
-    <!-- Specification for which version of the game that is supported. It's possible to specify more than one -->
-    <SupportedVersion>b4</SupportedVersion>
-
-    <!-- Indicate whether or not the game needs to restart for the mod to function properly, this will have to be determined via manual testing. -->
+    <Tag>level</Tag>
+    <SupportedVersion>b5</SupportedVersion>
     <NeedsRestart>false</NeedsRestart>
 	<Level title="Airtemple" thumbnail="Images/airtemple_full.png">airtemple.xml</Level>
 </Mod>
