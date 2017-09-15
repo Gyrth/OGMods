@@ -3,6 +3,9 @@
 <Name></Name>
 <Description></Description>
 <Shader>post</Shader>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
 <Terrain>
     <Heightmap>Data/Textures/grass_beach_hm.png</Heightmap>
     <ShaderExtra></ShaderExtra>
@@ -17,18 +20,20 @@
     </DetailMaps>
     <DetailObjects />
 </Terrain>
-<OutOfDate NavMesh="false" NavMeshParamHash="-1674835251" />
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
 <Script>Data/Scripts/airtemplelevelscript.as</Script>
 <LevelScriptParameters>
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Custom Shader" type="string" val="" />
     <parameter name="Extra AO" type="float" val="0" />
-    <parameter name="Fog amount" type="float" val="1.1328" />
-    <parameter name="HDR Black point" type="float" val="0.00781" />
-    <parameter name="HDR Bloom multiplier" type="float" val="1.03516" />
-    <parameter name="HDR White point" type="float" val="0.70312" />
+    <parameter name="Fog amount" type="float" val="1.5" />
+    <parameter name="HDR Black point" type="float" val="0" />
+    <parameter name="HDR Bloom multiplier" type="float" val="0.5" />
+    <parameter name="HDR White point" type="float" val="1" />
     <parameter name="Level Boundaries" type="int" val="1" />
     <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
     <parameter name="Sky Brightness" type="float" val="1" />
     <parameter name="Sky Rotation" type="float" val="0" />
     <parameter name="Sky Tint" type="string" val="255, 255, 255" />
@@ -41,7 +46,7 @@
     <RayToSun r0="0.463964" r1="0.508092" r2="-0.725658" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-299.703" t1="461.53" t2="229.292" s0="1" s1="1" s2="1" q0="-0.143982" q1="-0.692382" q2="0.144021" q3="-0.692195" id="-1">
+    <CameraObject t0="371.791" t1="373.41" t2="298.403" s0="1" s1="1" s2="1" q0="0.0358203" q1="0.91481" q2="-0.0832577" q3="0.393582" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="-175.262" t1="486.253" t2="118.237" s0="2.74617" s1="2.74617" s2="2.74617" q0="0" q1="1" q2="0" q3="-0.0003125" id="1" color_r="0.517647" color_g="0.517647" color_b="0.517647" overbright="0" type_file="Data/Objects/upsidedownhouse.xml">
@@ -597,7 +602,7 @@
     <EnvObject t0="211.853" t1="390.753" t2="372.446" s0="4.82959" s1="4.07938" s2="3.27787" q0="0" q1="0.918508" q2="0" q3="0.395402" id="182" color_r="0.0901961" color_g="0.0901961" color_b="0.0901961" overbright="0" type_file="Data/Objects/hiddenroom.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="164.048" t1="449.57" t2="417.109" s0="3.30302" s1="3.30302" s2="3.30302" q0="0" q1="0" q2="0" q3="1" id="183" type_file="Data/Objects/boulderPushUpHotspot.xml">
+    <Hotspot t0="149.048" t1="449.57" t2="417.109" s0="3.30302" s1="3.30302" s2="3.30302" q0="0" q1="0" q2="0" q3="1" id="183" type_file="Data/Objects/boulderPushUpHotspot.xml">
         <parameters />
     </Hotspot>
     <EnvObject t0="-424.597" t1="521.041" t2="151.853" s0="0.722486" s1="0.722486" s2="0.722486" q0="0" q1="0.993503" q2="0" q3="-0.113804" id="184" color_r="0.0392157" color_g="0.0392157" color_b="0.0392157" overbright="0" type_file="Data/Objects/statue4.xml">
@@ -651,10 +656,10 @@
     <EnvObject t0="318.891" t1="397.513" t2="327.886" s0="6.21096" s1="6.21096" s2="6.21096" q0="0" q1="0.999741" q2="0" q3="-0.0227678" id="199" color_r="0.305882" color_g="0.305882" color_b="0.305882" overbright="0" type_file="Data/Objects/stairs1.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="197.355" t1="387.204" t2="386.181" s0="0.216072" s1="0.707244" s2="0.210149" q0="0" q1="0.367244" q2="0" q3="0.930124" id="200" color_r="0.156863" color_g="0.156863" color_b="0.156863" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+    <EnvObject t0="197.355" t1="385.753" t2="386.181" s0="0.216072" s1="0.707244" s2="0.210149" q0="0" q1="0.367244" q2="0" q3="0.930124" id="200" color_r="0.156863" color_g="0.156863" color_b="0.156863" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="187.387" t1="401.312" t2="395.452" s0="4.84082" s1="4.84082" s2="4.84082" q0="0" q1="0.916984" q2="0" q3="0.398923" id="201" color_r="0.156863" color_g="0.156863" color_b="0.156863" overbright="0" type_file="Data/Objects/hiddenroomstopblock.xml">
+    <EnvObject t0="185.936" t1="394.1" t2="396.903" s0="4.84082" s1="4.84082" s2="4.84082" q0="0" q1="0.916984" q2="0" q3="0.398923" id="201" color_r="0.156863" color_g="0.156863" color_b="0.156863" overbright="0" type_file="Data/Objects/hiddenroomstopblock.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="347.87" t1="447.274" t2="340.629" s0="4.62786" s1="4.62786" s2="4.62786" q0="0" q1="-0.153957" q2="0" q3="0.988078" id="202" color_r="0.305882" color_g="0.305882" color_b="0.305882" overbright="0" type_file="Data/Objects/stairs2_mirror.xml">
