@@ -5,13 +5,11 @@
 //Parameters for user to change
 int world_size = 4;
 float block_size = 10.0f;
-string building_block = "Data/Objects/block_path_straight_horizontal.xml";
 bool rain = false;
 //Variables not to be manually changed
 int rain_sound_id = -1;
 string level_name;
 int player_id = -1;
-bool reset_player = true;
 float floor_height;
 vec2 grid_position;
 bool rebuild_world = false;
@@ -82,25 +80,6 @@ class BlockType{
         path = _path;
         probability = _probability;
     }
-    void Init(){
-        /*@original = ReadObjectFromID(CreateObject(path));
-        original.SetEnabled(false);
-        ScriptParams@ params = original.GetScriptParams();
-        if(params.HasParam("Transpose")){
-            params.Remove("Transpose");
-            array<int> all_obj = GetObjectIDs();
-            for(uint i = 0; i < all_obj.size(); i++){
-                Object@ child = ReadObjectFromID(all_obj[i]);
-                ScriptParams@ child_params = child.GetScriptParams();
-                if(child_params.HasParam("BlockBase")){
-                    child_params.Remove("BlockBase");
-                }
-                if(child_params.HasParam("BlockChild")){
-                    child_params.Remove("BlockChild");
-                }
-            }
-        }*/
-    }
 }
 
 BlockType@ GetRandomBlockType(){
@@ -137,11 +116,6 @@ class Block{
         position = _position;
         SpawnObject new_spawn(GetRandomBlockType(), position, this);
         objects_to_spawn.insertLast(@new_spawn);
-
-        /*int id = CreateObject(building_block);
-        AddObjectID(id);
-        Object@ obj = ReadObjectFromID(id);
-        obj.SetTranslation(position);*/
     }
     array<SpawnObject@> GetObjectsToSpawn(){
         return objects_to_spawn;
@@ -168,8 +142,6 @@ class Block{
                 ItemObject@ item = ReadItemID(obj_ids[i]);
                 vec3 color = vec3(RangedRandomFloat(0.0f, 1.0f), RangedRandomFloat(0.0f, 1.0f), RangedRandomFloat(0.0f, 1.0f));
                 if(distance(item.GetPhysicsPosition(), player.position) < (world_size * block_size / 2.0f)){
-                    /*DebugDrawWireSphere(item.GetPhysicsPosition(), 0.5f, color, _persistent);
-                    DebugDrawWireSphere(player.position, 0.5f, color, _persistent);*/
                     garbage.insertLast(obj_ids[i]);
                     continue;
                 }
@@ -294,7 +266,6 @@ class World{
         blocks.insertAt(0, new_row);
     }
     Block@ CreateBlock(Block@ adjacent_block, vec3 offset){
-        /*DebugDrawLine(adjacent_block.position + offset, adjacent_block.position + offset + vec3(0.0f,20.0f,0.0f), vec3(0.0f), _persistent);*/
         Block new_block(adjacent_block.position + offset);
         objects_to_spawn.insertAt(0, new_block.GetObjectsToSpawn());
         return @new_block;
@@ -311,28 +282,16 @@ class World{
             array<Block@> new_row;
             for(uint j = 0; j < uint(world_size); j++){
                 vec3 new_block_pos = vec3(starting_pos.x + (block_size * float(j) * 2.0f), floor_height, starting_pos.z + (block_size * float(i) * 2.0f));
-                /*DebugDrawText(new_block_pos + vec3(0,10.0f,0), i + ":" + j, 1.0f, true, _persistent);*/
                 Block new_block(new_block_pos);
                 objects_to_spawn.insertAt(0, new_block.GetObjectsToSpawn());
                 new_row.insertLast(@new_block);
             }
             blocks.insertLast(new_row);
         }
-        /*while(objects_to_spawn.size() > 0){
-            UpdateSpawning();
-        }*/
     }
     void UpdateSpawning(){
         if(objects_to_spawn.size() > 0){
             if(!objects_to_spawn[0].owner.deleted){
-
-                /*int id = DuplicateObject(objects_to_spawn[0].block_type.original);
-                Object@ new_block = ReadObjectFromID(id);
-                new_block.SetSelectable(false);
-                /*new_block.SetScale(vec3(10.0f));*/
-                /*new_block.SetTranslation(objects_to_spawn[0].position + vec3(0.0f, new_block.GetBoundingBox().y / 2.0f, 0.0f));*/
-
-                /*int id = DuplicateObject(objects_to_spawn[0].block_type.original);*/
                 //Other scripts can create objects as well. So we first need to mark those as old or else they will get added to the world system.
                 MarkOldObjects();
                 int id = CreateObject(objects_to_spawn[0].block_type.path);
@@ -343,7 +302,6 @@ class World{
                 if(IsGroupDerived(id)){
                     ScriptParams@ params = obj.GetScriptParams();
                     TransposeNewBlock(objects_to_spawn[0]);
-                    /*obj.SetTranslation(objects_to_spawn[0].position + vec3(0.0f, obj.GetScale().y / 2.0f, 0.0f));*/
                 }else{
                     obj.SetTranslation(objects_to_spawn[0].position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f));
                 }
@@ -377,8 +335,6 @@ class World{
         if(!block_base_found){
             DisplayError("Ohno", "No blockbase found in " + spawn_object.block_type.path);
         }
-        /*DebugDrawLine(position, position + vec3(0.0f,20.0f,0.0f), vec3(0.0f), _persistent);*/
-
         //Now set all children with the offset.
         array<EntityType> transpose_types = {_env_object, _movement_object, _item_object, _hotspot_object, _decal_object, _dynamic_light_object, _path_point_object};
         for(uint i = 0; i < all_obj.size(); i++){
@@ -426,7 +382,6 @@ class World{
                     MovementObject@ player = ReadCharacterID(player_id);
                     ItemObject@ item = ReadItemID(garbage[i]);
                     if(distance(item.GetPhysicsPosition(), player.position) > (world_size * block_size)){
-                        /*DebugDrawLine(item.GetPhysicsPosition(), player.position, vec3(1.0f), _persistent);*/
                         DeleteObjectID(garbage[i]);
                         garbage.removeAt(i);
                         i--;
@@ -435,37 +390,10 @@ class World{
             }
         }
     }
-    float timer = RangedRandomFloat(5.0f, 6.0f);
-    void UpdateWeather(){
-        /*if(timer < 0.0f){
-            timer = RangedRandomFloat(5.0f, 6.0f);
-            ScriptParams@ params = level.GetScriptParams();
-            if(rain){
-                params.SetString("GPU Particle Field", "#RAIN");
-                params.SetString("Custom Shader", "#RAINY #ADD_MOON");
-                if(rand() % 2 == 0){
-                    PlaySoundGroup("Data/Sounds/weather/thunder_strike_mike_koenig.xml");
-                }
-                rain_sound_id = PlaySoundLoop("Data/Sounds/weather/rain.wav", 1.0f);
-            }else{
-                if(rain_sound_id != -1){
-                    StopSound(rain_sound_id);
-                    rain_sound_id = -1;
-                }
-                params.SetString("GPU Particle Field", "#BUGS");
-                params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
-            }
-            rain = !rain;
-        }
-        timer -= time_step;*/
-    }
 }
 
 void Init(string p_level_name) {
     level_name = p_level_name;
-    for(uint i = 0; i < block_types.size(); i++){
-        block_types[i].Init();
-    }
     PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
     ReadScriptParameters();
 }
@@ -555,7 +483,6 @@ void Update() {
     }else{
       UpdateMovement();
       world.UpdateSpawning();
-      world.UpdateWeather();
       world.RemoveGarbage();
     }
     UpdateMusic();
@@ -566,31 +493,21 @@ void Update() {
 void UpdateMovement(){
     MovementObject@ player = ReadCharacterID(player_id);
     vec2 new_grid_position = vec2(floor(player.position.x / (2.0f * block_size)), floor(player.position.z / (2.0f * block_size)));
-
-    /*DebugText("awe", "Player pos " + player.position.x + " And " + player.position.z, _delete_on_update);
-    DebugText("awe2", "New grid pos " + new_grid_position.x + " And " + new_grid_position.y, _delete_on_update);*/
-
-    /*vec2 new_grid_position = vec2(floor(player.position.x), floor(player.position.z));*/
     vec2 moved = vec2(0.0f);
     if(grid_position != new_grid_position){
-        /*Print("Grid pos changed\n");*/
       if(new_grid_position.y > grid_position.y){
-          /*Print("Moved up\n");*/
           world.MoveZUp();
           moved += vec2(0.0f, 1.0f);
       }
       if(new_grid_position.y < grid_position.y){
-          /*Print("Moved down\n");*/
           world.MoveZDown();
           moved += vec2(0.0f, -1.0f);
       }
       if(new_grid_position.x > grid_position.x){
-          /*Print("Moved left\n");*/
           world.MoveXUp();
           moved += vec2(1.0f, 0.0f);
       }
       if(new_grid_position.x < grid_position.x){
-          /*Print("Moved right\n");*/
           world.MoveXDown();
           moved += vec2(-1.0f, 0.0f);
       }
