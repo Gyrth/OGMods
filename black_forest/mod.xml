@@ -7,10 +7,12 @@
     <Author>Gyrth McMulin</Author>
     <Thumbnail>Data/Images/black_forest_thumb.jpg</Thumbnail>
     <PreviewImage>Data/Images/black_forest_full.jpg</PreviewImage>
-    <Description>Black Forest.</Description>
+    <Description>Black Forest is an automatically generated level. By using a bunch of prebuild blocks the level will always have something interesting in it. You can enlessly walk in any direction.</Description>
     <Tag>black</Tag>
     <Tag>forest</Tag>
-    <SupportedVersion>*</SupportedVersion>
+    <Tag>level</Tag>
+    <Tag>script</Tag>
+    <SupportedVersion>b5</SupportedVersion>
     <NeedsRestart>false</NeedsRestart>
     <Level title="Black Forest" thumbnail="Images/black_forest_full.jpg">black_forest.xml</Level>
 
