@@ -32,10 +32,10 @@
     <EnvObject t0="40.5772" t1="1.21043" t2="-8.48635" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree1.xml">
         <parameters />
     </EnvObject>
-    <CameraObject t0="53.7025" t1="16.5149" t2="125.033" s0="1" s1="1" s2="1" q0="-0.154292" q1="0.126919" q2="-0.0199896" q3="-0.979636" id="1">
+    <CameraObject t0="16.6867" t1="51.471" t2="116.9" s0="1" s1="1" s2="1" q0="0.309031" q1="-0.00218663" q2="0.000710533" q3="0.951049" id="1">
         <parameters />
     </CameraObject>
-    <EnvObject t0="6.58796" t1="-3.71226" t2="27.5346" s0="44.1639" s1="1" s2="66.229" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="2.44616" t1="-3.71226" t2="24.2194" s0="48.3057" s1="1" s2="69.5442" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="33.4905" t1="0.50065" t2="-9.07423" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree2.xml">
@@ -47,7 +47,22 @@
     <EnvObject t0="28.159" t1="-0.828142" t2="-10.0483" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree4.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-22.4646" t1="6.91839" t2="71.4894" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+    <EnvObject t0="-5.64913" t1="7.38623" t2="80.6192" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_path_straight_vertical.xml">
+        <parameters>
+            <parameter name="BlockBase" type="string" val="1" />
+        </parameters>
+    </EnvObject>
+    <EnvObject t0="-29.1703" t1="6.91839" t2="80.1939" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+        <parameters>
+            <parameter name="BlockBase" type="string" val="1" />
+        </parameters>
+    </EnvObject>
+    <EnvObject t0="16.378" t1="7.1692" t2="80.4135" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_path_straight_horizontal.xml">
+        <parameters>
+            <parameter name="BlockBase" type="string" val="1" />
+        </parameters>
+    </EnvObject>
+    <EnvObject t0="38.4176" t1="7.18654" t2="80.3941" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
         <parameters>
             <parameter name="BlockBase" type="string" val="1" />
         </parameters>
@@ -613,8 +628,6 @@
     <SpawnerItem display_name="Tree Evergreen Log Bleached" path="Data/Objects/plants/trees/temperate/evergreen_log_bleached.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/evergreen_log_bleached.png" />
     <SpawnerItem display_name="Tree Evergreen Log Mossy" path="Data/Objects/plants/trees/temperate/evergreen_log_mossy.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/evergreen_log_mossy.png" />
     <SpawnerItem display_name="Dirt Trench Middle" path="Data/Objects/Environment/camp/trench_middle.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/trench_middle.png" />
-    <SpawnerItem display_name="block_path_straight_vertical" path="Data/Objects/block_path_straight_vertical.xml" thumbnail_path="Data/UI/spawner/icon.png" />
-    <SpawnerItem display_name="block_path_straight_horizontal" path="Data/Objects/block_path_straight_horizontal.xml" thumbnail_path="Data/UI/spawner/icon.png" />
     <SpawnerItem display_name="Basics All" path="Data/Objects/Buildings/basics/all_soft_set_prefab.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/basics_all.png" />
     <SpawnerItem display_name="Spire All" path="Data/Objects/Buildings/spires/spires_all.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/spire_all.png" />
     <SpawnerItem display_name="Ruins All Grouped" path="Data/Objects/Buildings/Ruins/mysterious/ruins_all_objects.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/ruins_all_objects.png" />
@@ -623,4 +636,7 @@
     <SpawnerItem display_name="Camp All Assets" path="Data/Objects/Environment/camp/camp_all_assets.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/camp_all_assets.png" />
     <SpawnerItem display_name="Cave All" path="Data/Objects/Environment/caves/cave_all.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/cave_all.png" />
     <SpawnerItem display_name="Jungle Gym Prefab Set" path="Data/Objects/Buildings/arena/jungle_gym_prefab_set.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/jungle_gym_prefab_set.png" />
+    <SpawnerItem display_name="block_path_straight_vertical" path="Data/Objects/block_path_straight_vertical.xml" thumbnail_path="Data/UI/spawner/icon.png" />
+    <SpawnerItem display_name="block_path_straight_horizontal" path="Data/Objects/block_path_straight_horizontal.xml" thumbnail_path="Data/UI/spawner/icon.png" />
+    <SpawnerItem display_name="block_dent" path="Data/Objects/block_dent.xml" thumbnail_path="Data/UI/spawner/icon.png" />
 </RecentItems>
