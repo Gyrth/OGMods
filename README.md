@@ -25,5 +25,5 @@ These animations can be added to a level then saved and loaded.
 	6: On entering the hotspot it will loop forwards, goes from the last to the first key.
 	7: On entering the hotspot it will loop backwards, goes from the last to the first key.
 
-Last tested and working on beta 4.  
+Last tested and working on beta 5.  
 [Preorder the game here.](http://www.wolfire.com/overgrowth)
