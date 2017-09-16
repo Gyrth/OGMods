@@ -3,12 +3,9 @@
 	<Model>Data/Models/stairblock.obj</Model>
 	<ColorMap>Data/Textures/rooftops_white.png</ColorMap>
 	<NormalMap>Data/Textures/rooftops_normal.png</NormalMap>
-
 	<DetailMaps>
 	<DetailMap colorpath="Data/Textures/rooftops_tile.png" normalpath="Data/Textures/rooftops_normal.png" materialpath="Data/Materials/rocks.xml" />
 	<DetailMap colorpath="Data/Textures/rooftops_tile.png" normalpath="Data/Textures/rooftops_normal.png" materialpath="Data/Materials/rocks.xml" />
    </DetailMaps>
-	<ShaderName>detailmap4</ShaderName>
+	<ShaderName>envobject #DETAILMAP4 #TANGENT #BASE_TANGENT</ShaderName>
 </Object>
-
-
