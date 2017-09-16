@@ -455,18 +455,18 @@ void Reset() {
     this_mo.rigged_object().ClearBoneConstraints();
 }
 
-void Init(string character_path) {
-    /*this_mo.char_path = character_path;
+bool Init(string character_path) {
+    this_mo.char_path = character_path;
     bool success = character_getter.Load(this_mo.char_path);
     if(success){
         this_mo.RecreateRiggedObject(this_mo.char_path);
         this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
     }
-    return success;*/
+    return success;
 
-    character_getter.Load(this_mo.char_path);
+    /*character_getter.Load(this_mo.char_path);
     this_mo.RecreateRiggedObject(this_mo.char_path);
-    this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+    this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);*/
 }
 
 void PostReset() {
@@ -630,7 +630,7 @@ void FixDiscontinuity() {
 
 void PreDrawCameraNoCull(float curr_game_time) {
     if(queue_fix_discontinuity){
-        //this_mo.FixDiscontinuity();
+        this_mo.FixDiscontinuity();
         FinalAnimationMatrixUpdate(1);
         queue_fix_discontinuity = false;
     }
@@ -751,6 +751,6 @@ void SetParameters() {
     if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
         this_mo.RecreateRiggedObject(this_mo.char_path);
         this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
-        //FixDiscontinuity();
+        FixDiscontinuity();
     }
 }
