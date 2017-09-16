@@ -5,5 +5,5 @@ Since the base game doesn't have a weapon switcher I thought I'd make one. Inspi
 ## Howto use the weapon switcher:  
 	1. While controlling a character use the scrollwheel to select a different weapon.  
 
-Last tested and working on beta 4.  
+Last tested and working on beta 5.  
 [Preorder the game here.](http://www.wolfire.com/overgrowth)

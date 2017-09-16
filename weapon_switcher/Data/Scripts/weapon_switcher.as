@@ -1,4 +1,4 @@
-IMGUI imGUI;
+IMGUI@ imGUI;
 array<Weapon@> weapons;
 string toggle_key = "r";
 bool has_ui = false;
@@ -28,6 +28,7 @@ class Weapon{
 }
 
 void Init(string p_level_name) {
+    @imGUI = CreateIMGUI();
     weapons.insertLast(Weapon("Cat Rapier",             "Data/Items/Rapier.xml",                                "UI/spawner/thumbs/Interactive Objects/Cat Rapier.png"));
     weapons.insertLast(Weapon("Cat Gauche",             "Data/Items/MainGauche.xml",                            "UI/spawner/thumbs/Interactive Objects/Main Gauche.png"));
     weapons.insertLast(Weapon("Dog Broad Sword",        "Data/Items/DogWeapons/DogBroadSword.xml",              "UI/spawner/thumbs/Interactive Objects/Dog Broad Sword.png"));
