@@ -1,0 +1,86 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <EnvObject t0="-0.541859" t1="-3.73877" t2="-1.99865" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="96" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+        <parameters>
+            <parameter name="BlockBase" type="int" val="1" />
+        </parameters>
+    </EnvObject>
+    <EnvObject t0="-1.55743" t1="6.45723" t2="0.00785589" s0="2.69524" s1="2.69524" s2="2.69524" q0="0" q1="0" q2="0" q3="1" id="91" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_ash.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-6.32181" t1="6.58487" t2="5.34273" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="92" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-1.18192" t1="7.21028" t2="-3.47462" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="93" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-5.85995" t1="8.34956" t2="1.03527" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="94" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+        <parameters />
+    </EnvObject>
+    <ActorObject t0="-3.06052" t1="9.50652" t2="0.044276" s0="1" s1="1" s2="1" q0="0" q1="0.704369" q2="0" q3="0.709834" id="95" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="guard" />
+        </parameters>
+        <Connections>
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.635294" green="0.403599" blue="0" />
+            <Color label="Fur" channel="1" red="0.498039" green="0.498034" blue="0.498034" />
+            <Color label="Leather" channel="2" red="0.435294" green="0.174118" blue="0" />
+            <Color label="Armor" channel="3" red="0.435294" green="0" blue="0" />
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="3.94618" t1="7.56307" t2="-7.61218" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="98" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-5.6012" t1="7.39538" t2="-6.26034" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="100" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="4.523" t1="7.47801" t2="0.831456" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="140" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+        <parameters />
+    </EnvObject>
+    <ItemObject t0="-1.37325" t1="6.85867" t2="-0.916888" s0="1" s1="1" s2="1" q0="0.347483" q1="0" q2="0" q3="0.937686" id="141" type_file="Data/Items/DogWeapons/DogSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </ItemObject>
+    <Group t0="-1.47908" t1="6.56027" t2="0.00744593" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" id="139" version="1">
+        <parameters />
+        <Hotspot t0="-1.47439" t1="6.56678" t2="0.0233459" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" id="136" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <parameters>
+                <parameter name="Fire Ribbons" type="int" val="4" />
+                <parameter name="Ignite Characters" type="int" val="1" />
+                <parameter name="Light Amplify" type="float" val="1" />
+                <parameter name="Light Distance" type="float" val="2" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="-1.489" t1="6.49143" t2="-0.0157241" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" id="137" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-1.47191" t1="6.51434" t2="-0.0177341" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" id="138" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+    </Group>
+</ActorObjects>
