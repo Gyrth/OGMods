@@ -13,6 +13,7 @@ int player_id = -1;
 float floor_height;
 vec2 grid_position;
 bool rebuild_world = false;
+EntityType _group = EntityType(29);
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -43,6 +44,7 @@ array<BlockType@> block_types = {
                                     BlockType("Data/Objects/block_camp_3.xml", 1.0f),
                                     BlockType("Data/Objects/block_camp_4.xml", 1.0f),
                                     BlockType("Data/Objects/block_camp_5.xml", 1.0f),
+                                    BlockType("Data/Objects/block_camp_6.xml", 1.0f),
 
                                     BlockType("Data/Objects/block_ruins_1.xml", 3.0f),
                                     BlockType("Data/Objects/block_ruins_2.xml", 3.0f),
@@ -124,6 +126,9 @@ class Block{
         deleted = true;
         array<int> garbage;
         for(uint i = 0; i < obj_ids.size(); i++){
+            if(!ObjectExists(obj_ids[i])){
+                continue;
+            }
             Object@ obj = ReadObjectFromID(obj_ids[i]);
             if(obj.GetType() == _movement_object){
                 MovementObject@ char = ReadCharacterID(obj_ids[i]);
@@ -267,7 +272,7 @@ class World{
     }
     Block@ CreateBlock(Block@ adjacent_block, vec3 offset){
         Block new_block(adjacent_block.position + offset);
-        objects_to_spawn.insertAt(0, new_block.GetObjectsToSpawn());
+        objects_to_spawn.insertAt((objects_to_spawn.size()), new_block.GetObjectsToSpawn());
         return @new_block;
     }
     void CreateFloor(){
@@ -283,72 +288,121 @@ class World{
             for(uint j = 0; j < uint(world_size); j++){
                 vec3 new_block_pos = vec3(starting_pos.x + (block_size * float(j) * 2.0f), floor_height, starting_pos.z + (block_size * float(i) * 2.0f));
                 Block new_block(new_block_pos);
-                objects_to_spawn.insertAt(0, new_block.GetObjectsToSpawn());
+                objects_to_spawn.insertAt((objects_to_spawn.size()), new_block.GetObjectsToSpawn());
                 new_row.insertLast(@new_block);
             }
             blocks.insertLast(new_row);
         }
     }
+    bool new_block = false;
     void UpdateSpawning(){
         if(objects_to_spawn.size() > 0){
-            if(!objects_to_spawn[0].owner.deleted){
-                //Other scripts can create objects as well. So we first need to mark those as old or else they will get added to the world system.
-                MarkOldObjects();
-                int id = CreateObject(objects_to_spawn[0].block_type.path);
-
-                objects_to_spawn[0].owner.AddObjectID(id);
-                Object@ obj = ReadObjectFromID(id);
-                vec3 bounds = obj.GetBoundingBox();
-                if(IsGroupDerived(id)){
+            SpawnObject@ spawn_obj = objects_to_spawn[0];
+            if(!spawn_obj.owner.deleted){
+                if(!new_block){
+                    MarkOldObjects();
+                    int id = CreateObject(spawn_obj.block_type.path);
+                    Object@ obj = ReadObjectFromID(id);
                     ScriptParams@ params = obj.GetScriptParams();
-                    TransposeNewBlock(objects_to_spawn[0]);
+                    params.AddInt("Old", 1);
+                    spawn_obj.owner.AddObjectID(id);
+                    AddNewBlockObjects(spawn_obj.owner);
+                    RotateBlock(id);
+                    new_block = true;
                 }else{
-                    obj.SetTranslation(objects_to_spawn[0].position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f));
+                    Block@ owner = spawn_obj.owner;
+                    int id = owner.obj_ids[0];
+                    Object@ obj = ReadObjectFromID(id);
+                    if(IsGroupDerived(id)){
+                        TransposeNewBlock(spawn_obj.owner);
+                    }else{
+                        obj.SetTranslation(spawn_obj.position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f));
+                    }
+                    spawn_obj.owner.ConnectAll();
+                    new_block = false;
+                    objects_to_spawn.removeAt(0);
                 }
+            }else{
+                objects_to_spawn.removeAt(0);
+                new_block = false;
             }
-            objects_to_spawn.removeAt(0);
         }
     }
-    void TransposeNewBlock(SpawnObject@ spawn_object){
-        //Find the main base.
+    void AddNewBlockObjects(Block@ owner){
         array<int> all_obj = GetObjectIDs();
-        vec3 offset = vec3(0.0f);
-        vec3 position = spawn_object.owner.position;
-        vec3 base_pos = vec3(0.0f);
-        bool block_base_found = false;
-
         for(uint i = 0; i < all_obj.size(); i++){
             Object@ obj = ReadObjectFromID(all_obj[i]);
             ScriptParams@ params = obj.GetScriptParams();
+            if(!params.HasParam("Old")){
+                owner.AddObjectID(all_obj[i]);
+                params.AddInt("Old", 1);
+            }
+        }
+    }
+    void RotateBlock(int id){
+        Object@ obj = ReadObjectFromID(id);
+        ScriptParams@ params = obj.GetScriptParams();
+        if(obj.GetType() == _group){
+            float x;
+            float z;
+            switch(rand() % 4){
+                case 0:
+                    x = 1.0f;
+                    z = 0.0f;
+                    break;
+                case 1:
+                    x = 0.0f;
+                    z = 1.0f;
+                    break;
+                case 2:
+                    x = -1.0f;
+                    z = 0.0f;
+                    break;
+                default:
+                    x = 0.0f;
+                    z = -1.0f;
+                    break;
+            }
+            float cur_rotation = atan2(x, z);
+            quaternion rotation(vec4(0,1,0,cur_rotation));
+            obj.SetRotation(rotation);
+        }else{
+            DisplayError("Ohno!", "First block is not a group!");
+        }
+    }
+    void TransposeNewBlock(Block@ owner){
+        vec3 offset = vec3(0.0f);
+        vec3 position = owner.position;
+        vec3 base_pos = vec3(0.0f);
+        bool block_base_found = false;
+        array<int> obj_ids = owner.obj_ids;
+
+        //Find the main base.
+        for(uint i = 0; i < obj_ids.size(); i++){
+            Object@ obj = ReadObjectFromID(obj_ids[i]);
+            ScriptParams@ params = obj.GetScriptParams();
             if(params.HasParam("BlockBase")){
-                //Add the blockbase to the added objects so that it can be removed later.
-                spawn_object.owner.AddObjectID(all_obj[i]);
                 offset = offset - obj.GetTranslation();
-                obj.SetTranslation(position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f));
                 base_pos = position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f);
                 params.Remove("BlockBase");
-                params.AddInt("Old", 1);
                 block_base_found = true;
                 break;
             }
         }
         if(!block_base_found){
-            DisplayError("Ohno", "No blockbase found in " + spawn_object.block_type.path);
+            DisplayError("Ohno", "No blockbase found ");
         }
         //Now set all children with the offset.
         array<EntityType> transpose_types = {_env_object, _movement_object, _item_object, _hotspot_object, _decal_object, _dynamic_light_object, _path_point_object};
-        for(uint i = 0; i < all_obj.size(); i++){
-            Object@ obj = ReadObjectFromID(all_obj[i]);
+        for(uint i = 0; i < obj_ids.size(); i++){
+            Object@ obj = ReadObjectFromID(obj_ids[i]);
             if(transpose_types.find(obj.GetType()) != -1){
                 ScriptParams@ params = obj.GetScriptParams();
-                if(!params.HasParam("Old") && all_obj[i] != player_id){
-                    spawn_object.owner.AddObjectID(all_obj[i]);
-                    params.AddInt("Old", 1);
+                if(obj_ids[i] != player_id){
                     obj.SetTranslation(obj.GetTranslation() + base_pos + offset);
                 }
             }
         }
-        spawn_object.owner.ConnectAll();
     }
 
     void MarkOldObjects(){
