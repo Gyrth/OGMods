@@ -450,6 +450,10 @@ void PostInit(){
                   found_placeholders.insertLast(allObjects[i]);
               }else if(tempParam.GetString("Name") == "animation_child"){
                   children.insertLast(allObjects[i]);
+                  Print("Found child animation object\n");
+              }else if(tempParam.GetString("Name") == "animation_main"){
+                  objectID = allObjects[i];
+                  Print("Found main animation object\n");
               }
           }
       }
@@ -496,7 +500,7 @@ void SetObjectPreview(Object@ spawn, string &in path){
   objectInformation.SetRotationPart(rotation);
   //The mesh is previewed on the pathpoint to show where the animation object will be.
   mat4 scale_mat;
-  float scale = length(spawn.GetScale()) / 2.0f;
+  float scale = (spawn.GetScale().x + spawn.GetScale().y + spawn.GetScale().z ) / 3.0f;
   scale_mat[0] = scale;
   scale_mat[5] = scale;
   scale_mat[10] = scale;
@@ -525,14 +529,12 @@ void CreatePathpoint(){
 
 void CreateMainAnimationObject(){
     MarkAllObjects();
-    string path = params.GetString("Object Path");
-    if(FileExists(path)){
-        Print("exists" + path + "\n");
-    }else{
-        Print("doest exist " + path + "\n");
-    }
-    objectID = CreateObject(path, true);
-    FindChildren();
+    objectID = CreateObject(objectPath, false);
+    Object@ main_object = ReadObjectFromID(objectID);
+    ScriptParams@ object_params = main_object.GetScriptParams();
+    object_params.AddInt("BelongsTo", hotspot.GetID());
+    object_params.AddString("Name", "animation_main");
+    FindNewChildren();
 }
 
 void MarkAllObjects(){
@@ -544,7 +546,7 @@ void MarkAllObjects(){
     }
 }
 
-void FindChildren(){
+void FindNewChildren(){
     array<int> all_ids = GetObjectIDs();
     for(uint i = 0; i < all_ids.size(); i++){
         Object@ obj = ReadObjectFromID(all_ids[i]);

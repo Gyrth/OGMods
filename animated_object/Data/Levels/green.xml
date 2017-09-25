@@ -41,7 +41,7 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="59.464" t1="14.6189" t2="-169.473" s0="1" s1="1" s2="1" q0="-0.0101188" q1="0.98831" q2="-0.131871" q3="-0.075835" id="1">
+    <CameraObject t0="59.464" t1="14.6189" t2="-169.473" s0="1" s1="1" s2="1" q0="0.0101187" q1="-0.98831" q2="0.131871" q3="0.075835" id="1">
         <parameters />
     </CameraObject>
     <ActorObject t0="64.158" t1="8.10367" t2="-172.26" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" id="2" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
@@ -91,6 +91,12 @@
             <parameter name="Seconds" type="float" val="3.087" />
         </parameters>
     </Hotspot>
+    <EnvObject t0="30.2478" t1="8.18414" t2="-156.691" s0="1" s1="1" s2="1" q0="-0.808999" q1="-0.061269" q2="0.11241" q3="0.5737" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/smooth_sphere.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="3" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
     <PlaceholderObject t0="34.1595" t1="7.84458" t2="-150.942" s0="1" s1="1" s2="1" q0="0.193157" q1="-0.118402" q2="0.0504352" q3="-0.97269" id="6" type_file="" special_type="0">
         <parameters>
             <parameter name="BelongsTo" type="int" val="3" />
@@ -178,6 +184,48 @@
             <parameter name="Seconds" type="float" val="5.022" />
         </parameters>
     </Hotspot>
+    <Group t0="73.9515" t1="6.29853" t2="-165.831" s0="1.90483" s1="1.00182" s2="3.1525" q0="0" q1="0" q2="0" q3="1" id="19" version="1">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="11" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+        <EnvObject t0="73.0836" t1="6.31624" t2="-165.821" s0="0.585382" s1="0.585382" s2="0.585382" q0="0" q1="0" q2="0" q3="1" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong2.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="11" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="73.4707" t1="5.8429" t2="-165.871" s0="1" s1="1" s2="1" q0="-0.710567" q1="0" q2="0" q3="0.703629" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="11" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="73.953" t1="5.85509" t2="-164.704" s0="0.970146" s1="1.01067" s2="0.999994" q0="-0.709698" q1="0" q2="0" q3="0.704506" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="11" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="74.4155" t1="5.84322" t2="-165.885" s0="1" s1="1" s2="1" q0="-0.710567" q1="0" q2="0" q3="0.703629" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="11" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="73.9436" t1="5.83777" t2="-167.062" s0="0.960134" s1="0.995389" s2="0.999995" q0="-0.709698" q1="0" q2="0" q3="0.704506" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="11" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="74.7757" t1="6.31167" t2="-165.841" s0="0.585382" s1="0.585382" s2="0.585382" q0="0" q1="0" q2="0" q3="1" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong2.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="11" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+    </Group>
     <PlaceholderObject t0="53.3863" t1="13.0509" t2="-171.95" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.709873" q3="0.70433" id="20" type_file="" special_type="0">
         <parameters>
             <parameter name="BelongsTo" type="int" val="16" />
@@ -428,6 +476,142 @@
     <EnvObject t0="71.018" t1="7.9321" t2="-143.976" s0="1.59848" s1="4.908" s2="2.26209" q0="0" q1="0" q2="0" q3="1" id="76" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
+    <Group t0="53.3863" t1="13.0509" t2="-171.95" s0="6.14175" s1="6.21216" s2="5.55771" q0="0" q1="0" q2="0.0523667" q3="0.998628" id="77" version="1">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="16" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+        <EnvObject t0="53.3571" t1="13.0529" t2="-172.474" s0="2.20564" s1="2.20564" s2="2.20564" q0="0" q1="0" q2="0.0419003" q3="0.999122" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="53.3779" t1="13.0333" t2="-170.233" s0="1.02597" s1="1.09342" s2="1" q0="0" q1="0" q2="0.0419003" q3="0.999122" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_square_board.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="53.2263" t1="14.7467" t2="-170.219" s0="2.84266" s1="3.82421" s2="2.16583" q0="0" q1="0" q2="0.0419003" q3="0.999122" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="55.1204" t1="13.1735" t2="-170.213" s0="2.84282" s1="3.82432" s2="2.16585" q0="0" q1="0" q2="-0.676858" q3="0.736114" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="51.6586" t1="12.8844" t2="-170.222" s0="2.84282" s1="3.82432" s2="2.16585" q0="0" q1="0" q2="0.736114" q3="0.676858" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="53.5229" t1="11.2955" t2="-170.23" s0="2.84266" s1="3.82421" s2="2.16583" q0="0" q1="0" q2="-0.999122" q3="0.0419003" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <Decal t0="51.0374" t1="12.912" t2="-170.211" s0="1.20126" s1="1.20126" s2="1.20126" q0="0" q1="0" q2="0.0419003" q3="0.999122" id="31" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Decal>
+        <Decal t0="53.529" t1="12.1098" t2="-170.628" s0="1.20126" s1="1.20126" s2="1.20126" q0="0.170558" q1="0.00715271" q2="0.0412853" q3="0.984457" id="33" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Decal>
+        <Decal t0="55.8412" t1="13.2777" t2="-170.211" s0="1.20126" s1="1.20126" s2="1.20126" q0="0.175774" q1="0.00737146" q2="0.0412467" q3="0.983539" id="35" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Decal>
+        <Decal t0="53.1777" t1="15.5426" t2="-170.211" s0="1.20126" s1="1.20126" s2="1.20126" q0="0" q1="0" q2="0.0419003" q3="0.999122" id="36" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Decal>
+        <Decal t0="53.611" t1="10.5605" t2="-170.211" s0="1.20126" s1="1.20126" s2="1.20126" q0="0" q1="0" q2="0.0419003" q3="0.999122" id="38" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Decal>
+        <Decal t0="54.6016" t1="13.2416" t2="-170.257" s0="1.20126" s1="1.20126" s2="1.20126" q0="0.170558" q1="0.00715271" q2="0.0412853" q3="0.984457" id="42" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Decal>
+        <Decal t0="53.2876" t1="14.0121" t2="-169.944" s0="1.20126" s1="1.20126" s2="1.20126" q0="0.170558" q1="0.00715271" q2="0.0412853" q3="0.984457" id="43" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Decal>
+        <Decal t0="52.2984" t1="12.9613" t2="-170.288" s0="1.20126" s1="1.20126" s2="1.20126" q0="0.170558" q1="0.00715271" q2="0.0412853" q3="0.984457" id="49" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Decal>
+        <Hotspot t0="51.0477" t1="12.8209" t2="-170.118" s0="0.358108" s1="0.225145" s2="0.14699" q0="0" q1="0" q2="-0.999122" q3="0.0419003" id="67" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Fire Ribbons" type="int" val="25" />
+                <parameter name="Ignite Characters" type="int" val="1" />
+                <parameter name="Light Amplify" type="float" val="7" />
+                <parameter name="Light Distance" type="float" val="25" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Hotspot>
+        <Hotspot t0="55.7299" t1="13.2149" t2="-170.118" s0="0.329728" s1="0.207752" s2="0.14699" q0="0" q1="0" q2="0.0419003" q3="0.999122" id="69" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Fire Ribbons" type="int" val="25" />
+                <parameter name="Ignite Characters" type="int" val="1" />
+                <parameter name="Light Amplify" type="float" val="7" />
+                <parameter name="Light Distance" type="float" val="25" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Hotspot>
+        <Hotspot t0="53.1861" t1="15.4431" t2="-170.075" s0="0.315917" s1="0.228931" s2="0.14699" q0="0" q1="0" q2="0.736114" q3="0.676858" id="73" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Fire Ribbons" type="int" val="25" />
+                <parameter name="Ignite Characters" type="int" val="1" />
+                <parameter name="Light Amplify" type="float" val="7" />
+                <parameter name="Light Distance" type="float" val="25" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Hotspot>
+        <Hotspot t0="53.5802" t1="10.5417" t2="-170.067" s0="0.279363" s1="0.213242" s2="0.14699" q0="0" q1="0" q2="-0.676858" q3="0.736114" id="75" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Fire Ribbons" type="int" val="25" />
+                <parameter name="Ignite Characters" type="int" val="1" />
+                <parameter name="Light Amplify" type="float" val="7" />
+                <parameter name="Light Distance" type="float" val="25" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <EnvObject t0="55.4444" t1="5.42611" t2="-142.93" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="78" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/TrapDoor1.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="37" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
     <EnvObject t0="90.3499" t1="2.32457" t2="-158.331" s0="5.84277" s1="1" s2="4.53387" q0="0" q1="0" q2="0" q3="1" id="85" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
@@ -601,6 +785,78 @@
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
+    <Group t0="96.2603" t1="2.00971" t2="-158.269" s0="0.352781" s1="2.8311" s2="1.4291" q0="0" q1="0" q2="0" q3="1" id="112" version="1">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="45" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+        <EnvObject t0="96.3063" t1="2.03948" t2="-158.822" s0="1.16516" s1="1.16516" s2="1.16516" q0="0" q1="0" q2="0" q3="1" id="79" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.275" t1="1.69366" t2="-158.679" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="80" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_short.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.2643" t1="2.03948" t2="-158.561" s0="1.16516" s1="1.16516" s2="1.16516" q0="0" q1="0.979739" q2="0" q3="0.200277" id="81" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.2833" t1="1.69366" t2="-158.411" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="82" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_short.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.2957" t1="2.03948" t2="-158.311" s0="1.16516" s1="1.16516" s2="1.16516" q0="0" q1="0.581976" q2="0" q3="0.813206" id="83" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.2868" t1="1.69366" t2="-158.141" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="84" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_short.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.3032" t1="2.03948" t2="-157.998" s0="1.16516" s1="1.16516" s2="1.16516" q0="0" q1="-0.521109" q2="0" q3="0.85349" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.2943" t1="1.69366" t2="-157.881" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="92" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_short.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.2311" t1="2.03948" t2="-157.711" s0="1.16516" s1="1.16516" s2="1.16516" q0="0" q1="-0.912776" q2="0" q3="0.408461" id="98" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.2648" t1="0.84215" t2="-158.266" s0="0.880736" s1="0.517827" s2="1" q0="-0.703322" q1="0" q2="0" q3="0.710871" id="100" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.2648" t1="2.2733" t2="-158.272" s0="0.880735" s1="0.517827" s2="1" q0="-0.703322" q1="0" q2="0" q3="0.710871" id="102" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="45" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+    </Group>
     <Hotspot t0="55.3638" t1="5.12945" t2="-142.582" s0="1.44262" s1="1" s2="1.77529" q0="0" q1="0" q2="0" q3="1" id="113" type_file="Data/Objects/animated_hotspot.xml">
         <parameters>
             <parameter name="Const time" type="int" val="1" />
@@ -612,6 +868,12 @@
             <parameter name="Speed" type="float" val="0.030313" />
         </parameters>
     </Hotspot>
+    <EnvObject t0="68.0093" t1="8.86205" t2="-141.945" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="114" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="63" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
     <PlaceholderObject t0="54.9444" t1="0.998915" t2="-142.793" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="115" type_file="" special_type="0">
         <parameters>
             <parameter name="BelongsTo" type="int" val="113" />
@@ -634,6 +896,54 @@
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
+    <EnvObject t0="65.231" t1="8.86017" t2="-141.946" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="117" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="68" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
+    <EnvObject t0="85.6163" t1="10.8051" t2="-154.163" s0="1" s1="1" s2="1" q0="-0.611316" q1="0.774733" q2="0.102772" q3="0.124575" id="118" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/smooth_sphere.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="101" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
+    <EnvObject t0="54.9444" t1="0.998915" t2="-142.793" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="119" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/IGF_Wolf.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="113" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
+    <Group t0="41.3988" t1="24" t2="-95.9191" s0="17.5386" s1="49.0433" s2="66.8311" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="124" version="1">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="133" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+        <EnvObject t0="41.4419" t1="9.71523" t2="-95.9191" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="120" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/ShipHull.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="133" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="39.6359" t1="10.3652" t2="-95.975" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="121" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/ShipDetails.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="133" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="39.1909" t1="29.2439" t2="-95.5696" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="122" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/ShipSails.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="133" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="41.3988" t1="17.6888" t2="-95.9787" s0="4.16672" s1="7.57662" s2="16.7053" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="123" type_file="Data/Objects/moving_hotspot.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="133" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </Hotspot>
+    </Group>
     <Hotspot t0="258.719" t1="17.4404" t2="-45.1125" s0="126.52" s1="4.6205" s2="29.4894" q0="0" q1="0" q2="0" q3="1" id="133" type_file="Data/Objects/animated_hotspot.xml">
         <parameters>
             <parameter name="Const time" type="int" val="1" />
