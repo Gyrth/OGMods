@@ -13,9 +13,9 @@
     <Tag>scripting</Tag>
     <SupportedVersion>*</SupportedVersion>
     <NeedsRestart>false</NeedsRestart>
-    <Item category="Interactive Objects"
-        title="Animated Object"
-        path="Data/Objects/animated_hotspot.xml"
-        thumbnail="Data/UI/spawner/animated_object.png" />
+    <Item category="Interactive Objects" title="Animated Object" path="Data/Objects/animated_hotspot.xml" thumbnail="Data/UI/spawner/animated_object.png" />
+    <Item category="Static Object" title="Elevator" path="Data/Objects/elevator_group.xml" thumbnail="Data/UI/spawner/animated_object.png" />
+    <Item category="Static Object" title="Windmill" path="Data/Objects/windmill_group.xml" thumbnail="Data/UI/spawner/animated_object.png" />
+    <Item category="Static Object" title="Fire group" path="Data/Objects/fire_group.xml" thumbnail="Data/UI/spawner/animated_object.png" />
     <Level title="Anim Showcase" thumbnail="Images/animated_object_full.jpg">green.xml</Level>
 </Mod>

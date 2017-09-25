@@ -1,0 +1,64 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="53.8595" t1="11.9685" t2="-172.294" s0="4.24486" s1="7.5722" s2="4.04636" q0="0" q1="0" q2="0" q3="1" id="133" version="1">
+        <parameters />
+        <Hotspot t0="53.8298" t1="13.7496" t2="-172.312" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="Const time" type="int" val="0" />
+                <parameter name="Model Path" type="string" val="Data/Models/Buildings/Door1.obj" />
+                <parameter name="Number of Keys" type="int" val="4" />
+                <parameter name="Object Path" type="string" val="Data/Objects/Buildings/Door1.xml" />
+                <parameter name="Play mode" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="5.022" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="53.8398" t1="13.7596" t2="-172.302" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.709873" q3="0.70433" id="20" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="53.8398" t1="13.7596" t2="-172.302" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.999953" q3="0.0096935" id="21" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="53.8595" t1="11.128" t2="-172.145" s0="4.64376" s1="4.64376" s2="4.64376" q0="0" q1="0" q2="0" q3="1" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="53.8398" t1="13.7596" t2="-172.302" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.696268" q3="0.717782" id="88" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Index" type="int" val="2" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="53.8398" t1="13.7596" t2="-172.302" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="90" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="int" val="16" />
+                <parameter name="Index" type="int" val="3" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+    </Group>
+</ActorObjects>

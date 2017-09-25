@@ -1,0 +1,19 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-76.779" t1="19.9204" t2="-68.3735" s0="17.5386" s1="49.0433" s2="66.8311" q0="0" q1="0" q2="0" q3="1" id="148" version="1">
+        <parameters />
+        <EnvObject t0="-76.779" t1="5.63563" t2="-68.4166" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="141" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/ShipHull.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.8349" t1="6.28563" t2="-66.6106" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="142" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/ShipDetails.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.4295" t1="25.1643" t2="-66.1656" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="144" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/ShipSails.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-76.8386" t1="13.6092" t2="-68.3735" s0="4.16672" s1="7.57662" s2="16.7053" q0="0" q1="0" q2="0" q3="1" id="146" type_file="Data/Objects/moving_hotspot.xml">
+            <parameters />
+        </Hotspot>
+    </Group>
+</ActorObjects>

@@ -17,7 +17,8 @@ string model_path;
 string objectPath;
 float node_timer = 0.0f;
 bool next_pathpoint = true;
-bool update_all_positions = false;
+array<int> children;
+vec3 old_position = vec3(0.0f);
 
 enum PlayMode{
   kLoopForward = 0,
@@ -49,11 +50,11 @@ void SetParameters() {
   params.AddInt("Play mode", 3);
   params.AddInt("Number of Keys", 2);
   params.AddFloatSlider("Seconds",1.0f,"min:0.1,max:10.0,step:1.0,text_mult:1");
-  params.AddString("Object Path", "Data/Objects/Buildings/Door1.xml");
+  params.AddString("Object Path", "Data/Objects/arrow.xml");
   params.AddIntCheckbox("Const time", true);
   //Unfortunately I can not get the model path from the xml file via scripting.
   //So the model needs to be declared seperatly.
-  params.AddString("Model Path", "Data/Models/Buildings/Door1.obj");
+  params.AddString("Model Path", "Data/Models/arrow.obj");
 }
 
 void HandleEvent(string event, MovementObject @mo){
@@ -65,19 +66,19 @@ void HandleEvent(string event, MovementObject @mo){
 }
 
 void OnEnter(MovementObject @mo) {
-  if(mo.controlled && on_enter && !playing && !done){
-    //Once the user steps into the hotspot the animation will start.
-    playing = true;
-  }
+    if(mo.controlled && on_enter && !playing && !done){
+        //Once the user steps into the hotspot the animation will start.
+        playing = true;
+    }
 }
 
 void OnExit(MovementObject @mo) {
-  if(mo.controlled && on_exit){
-    if(playing && !reverse || !playing && reverse){
-      playing = true;
-      reverse = true;
+    if(mo.controlled && on_exit){
+        if(playing && !reverse || !playing && reverse){
+          playing = true;
+          reverse = true;
+        }
     }
-  }
 }
 
 void Reset(){
@@ -89,16 +90,26 @@ void Reset(){
     next_pathpoint = true;
     node_timer = 0.0f;
     done = false;
+    old_position = vec3(0.0f);
+    /*playing = false;*/
     if(!ObjectExists(node_ids[index])){
       return;
     }
     //Once the level is reset the new paths will be used.
-    model_path = params.GetString("Model Path");
+    if(model_path != params.GetString("Model Path")){
+        if(FileExists(params.GetString("Model Path"))){
+            model_path = params.GetString("Model Path");
+        }
+    }
     if(objectPath != params.GetString("Object Path")){
       if(FileExists(params.GetString("Object Path"))){
         DeleteObjectID(objectID);
+        for(uint i = 0; i < children.size(); i++){
+            DeleteObjectID(children[i]);
+        }
+        children.resize(0);
         objectPath = params.GetString("Object Path");
-        objectID = CreateObject(objectPath);
+        CreateMainAnimationObject();
       }else{
         DisplayError("Error", "Could not find file " + params.GetString("Object Path"));
       }
@@ -109,26 +120,26 @@ void Reset(){
 }
 
 bool CheckObjectsExist(){
-  if(!ObjectExists(objectID)){
-    CreateMainAnimationObject();
-    Reset();
-    return false;
-  }
-
-  if(index > (int(node_ids.size()) - 1) || !ObjectExists(node_ids[index])){
-    Reset();
-    return false;
-  }
-  if(!ObjectExists(node_ids[index])){
-    Reset();
-    return false;
-  }
-  if(prev_node_id != -1){
-    if(!ObjectExists(prev_node_id)){
-      prev_node_id = -1;
+    if(!ObjectExists(objectID)){
+        CreateMainAnimationObject();
+        Reset();
+        return false;
     }
-  }
-  return true;
+
+    if(index > (int(node_ids.size()) - 1) || !ObjectExists(node_ids[index])){
+        Reset();
+        return false;
+    }
+    if(!ObjectExists(node_ids[index])){
+        Reset();
+        return false;
+    }
+    if(prev_node_id != -1){
+        if(!ObjectExists(prev_node_id)){
+            prev_node_id = -1;
+        }
+    }
+    return true;
 }
 
 void Update(){
@@ -216,6 +227,7 @@ void UpdateTransform(){
     Object@ currentPathpoint = ReadObjectFromID(node_ids[index]);
     Object@ previousPathpoint = ReadObjectFromID(prev_node_id);
     Object@ object = ReadObjectFromID(objectID);
+    vec3 mo_velocity = vec3(0.0f);
 
     if(params.GetInt("Const time") == 1){
       //The animation will have a constant speed.
@@ -238,6 +250,10 @@ void UpdateTransform(){
             object.SetTranslation(new_position);
             quaternion relative = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
             object.SetRotation(relative);
+            if(old_position != vec3(0.0f)){
+                mo_velocity = new_position - old_position;
+            }
+            old_position = new_position;
           }
         }else{
           skip_node = true;
@@ -279,18 +295,19 @@ void UpdateTransform(){
       index = 0;
     }
   }
-  UpdateAllPositions();
+  UpdateChildren();
 }
 
-void UpdateAllPositions(){
-  if(update_all_positions){
-    //A hacky way to update the physicstransform of all the objects.
-    array<int> all_env = GetObjectIDsType(_env_object);
-    for(uint i = 0; i < all_env.size(); i++){
-      Object@ obj = ReadObjectFromID(all_env[i]);
-      obj.SetTranslation(obj.GetTranslation());
+void UpdateChildren(){
+    for(uint i = 0; i < children.size(); i++){
+        if(!ObjectExists(children[i])){
+            children.removeAt(i);
+            i--;
+            continue;
+        }
+        Object@ obj = ReadObjectFromID(children[i]);
+        obj.SetTranslation(obj.GetTranslation());
     }
-  }
 }
 
 void PlayAvailableSound(){
@@ -431,6 +448,8 @@ void PostInit(){
               if(tempParam.GetString("Name") == "animation_key"){
                   //These are the pathpoints that the object will follow.
                   found_placeholders.insertLast(allObjects[i]);
+              }else if(tempParam.GetString("Name") == "animation_child"){
+                  children.insertLast(allObjects[i]);
               }
           }
       }
@@ -449,24 +468,24 @@ void PostInit(){
 
 void SetPlaceholderPreviews() {
     if(!EditorModeActive()){
-      return;
+        return;
     }
     vec3 previousPos;
     for(uint i = 0; i < uint(node_ids.length()); ++i){
-      if(ObjectExists(node_ids[i])){
-        Object @obj = ReadObjectFromID(node_ids[i]);
-        SetObjectPreview(obj,objectPath);
-        if(i>0){
-          //Every pathpoint needs to be connected with a line to show the animation path.
-          DebugDrawLine(obj.GetTranslation(), previousPos, vec3(0.5f), _delete_on_update);
+        if(ObjectExists(node_ids[i])){
+            Object @obj = ReadObjectFromID(node_ids[i]);
+            SetObjectPreview(obj,objectPath);
+            if(i>0){
+                //Every pathpoint needs to be connected with a line to show the animation path.
+                DebugDrawLine(obj.GetTranslation(), previousPos, vec3(0.5f), _delete_on_update);
+            }else{
+                //If it's the first pathpoint a line needs to be draw to the main hotspot.
+                DebugDrawLine(main_hotspot.GetTranslation(), obj.GetTranslation(), vec3(0.5f), _delete_on_update);
+            }
+            previousPos = obj.GetTranslation();
         }else{
-          //If it's the first pathpoint a line needs to be draw to the main hotspot.
-          DebugDrawLine(main_hotspot.GetTranslation(), obj.GetTranslation(), vec3(0.5f), _delete_on_update);
+            node_ids.removeAt(i);
         }
-        previousPos = obj.GetTranslation();
-      }else{
-        node_ids.removeAt(i);
-      }
     }
 }
 
@@ -476,7 +495,15 @@ void SetObjectPreview(Object@ spawn, string &in path){
   mat4 rotation = Mat4FromQuaternion(spawn.GetRotation());
   objectInformation.SetRotationPart(rotation);
   //The mesh is previewed on the pathpoint to show where the animation object will be.
-  DebugDrawWireMesh(model_path, objectInformation, vec4(0.5f), _delete_on_update);
+  mat4 scale_mat;
+  float scale = length(spawn.GetScale()) / 2.0f;
+  scale_mat[0] = scale;
+  scale_mat[5] = scale;
+  scale_mat[10] = scale;
+  scale_mat[15] = 1.0f;
+  objectInformation = objectInformation * scale_mat;
+
+  DebugDrawWireMesh(model_path, objectInformation, vec4(0.0f, 0.35f, 0.0f, 0.75f), _delete_on_update);
 }
 
 void CreatePathpoint(){
@@ -486,7 +513,7 @@ void CreatePathpoint(){
   newObj.SetSelectable(true);
   newObj.SetTranslatable(true);
   newObj.SetRotatable(true);
-  newObj.SetScalable(false);
+  newObj.SetScalable(true);
 
   ScriptParams@ placeholderParams = newObj.GetScriptParams();
   //When a new pathpoint is created the hotspot ID is added to it's parameters.
@@ -497,7 +524,41 @@ void CreatePathpoint(){
 }
 
 void CreateMainAnimationObject(){
-  objectID = CreateObject(objectPath);
+    MarkAllObjects();
+    string path = params.GetString("Object Path");
+    if(FileExists(path)){
+        Print("exists" + path + "\n");
+    }else{
+        Print("doest exist " + path + "\n");
+    }
+    objectID = CreateObject(path, true);
+    FindChildren();
+}
+
+void MarkAllObjects(){
+    array<int> all_ids = GetObjectIDs();
+    for(uint i = 0; i < all_ids.size(); i++){
+        Object@ obj = ReadObjectFromID(all_ids[i]);
+        ScriptParams@ params = obj.GetScriptParams();
+        params.AddInt("" + hotspot.GetID(), 1);
+    }
+}
+
+void FindChildren(){
+    array<int> all_ids = GetObjectIDs();
+    for(uint i = 0; i < all_ids.size(); i++){
+        Object@ obj = ReadObjectFromID(all_ids[i]);
+        ScriptParams@ params = obj.GetScriptParams();
+        if(!params.HasParam("" + hotspot.GetID())){
+            children.insertLast(all_ids[i]);
+            params.AddInt("BelongsTo", hotspot.GetID());
+            params.AddString("Name", "animation_child");
+            /*obj.SetSelectable(false);*/
+        }else{
+            params.Remove("" + hotspot.GetID());
+        }
+    }
+    Print("This hotspot has " + children.size() + " children\n");
 }
 
 void WritePlaceholderIndexes(){
