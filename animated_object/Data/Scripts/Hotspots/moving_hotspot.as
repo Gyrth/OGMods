@@ -1,6 +1,7 @@
 bool post_init_done = false;
 array<int> characters;
 vec3 old_position;
+float old_time;
 
 void Init(){
 
@@ -8,6 +9,7 @@ void Init(){
 void SetParameters() {
 
 }
+
 void Update(){
     if(!post_init_done){
         old_position = ReadObjectFromID(hotspot.GetID()).GetTranslation();
@@ -19,9 +21,16 @@ void Update(){
     if(new_position != old_position){
         for(uint i = 0; i < characters.size(); i++){
             MovementObject@ char = ReadCharacterID(characters[i]);
-            char.velocity = distance(new_position, old_position) / time_step;
+            /*vec3 new_vel = (new_position - old_position) / (the_time - old_time);*/
+            if(char.GetBoolVar("on_ground")){
+                /*char.velocity = new_vel;*/
+                char.position += new_position - old_position;
+            }
         }
+        old_time = the_time;
         old_position = new_position;
+    }else{
+        old_time = the_time;
     }
 }
 void HandleEvent(string event, MovementObject @mo){
