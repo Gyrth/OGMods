@@ -52,6 +52,7 @@ void SetParameters() {
   params.AddString("Object Path", "Data/Objects/arrow.xml");
   params.AddIntCheckbox("Const time", true);
   params.AddIntCheckbox("AI trigger", false);
+  params.AddIntCheckbox("Scale Object Preview", true);
   //Unfortunately I can not get the model path from the xml file via scripting.
   //So the model needs to be declared seperatly.
   params.AddString("Model Path", "Data/Models/arrow.obj");
@@ -340,7 +341,7 @@ void UpdatePlaceholders(){
 void UpdatePlayMode(bool ignore_editormode = false){
   if(EditorModeActive() || ignore_editormode){
     if(current_mode != PlayMode(params.GetInt("Play mode")) && EditorModeActive()){
-      Reset();
+      /*Reset();*/
     }
     current_mode = PlayMode(params.GetInt("Play mode"));
     switch(current_mode){
@@ -488,20 +489,21 @@ void SetPlaceholderPreviews() {
 }
 
 void SetObjectPreview(Object@ spawn, string &in path){
-  mat4 objectInformation;
-  objectInformation.SetTranslationPart(spawn.GetTranslation());
-  mat4 rotation = Mat4FromQuaternion(spawn.GetRotation());
-  objectInformation.SetRotationPart(rotation);
-  //The mesh is previewed on the pathpoint to show where the animation object will be.
-  mat4 scale_mat;
-  float scale = (spawn.GetScale().x + spawn.GetScale().y + spawn.GetScale().z ) / 3.0f;
-  scale_mat[0] = scale;
-  scale_mat[5] = scale;
-  scale_mat[10] = scale;
-  scale_mat[15] = 1.0f;
-  objectInformation = objectInformation * scale_mat;
-
-  DebugDrawWireMesh(model_path, objectInformation, vec4(0.0f, 0.35f, 0.0f, 0.75f), _delete_on_update);
+    mat4 objectInformation;
+    objectInformation.SetTranslationPart(spawn.GetTranslation());
+    mat4 rotation = Mat4FromQuaternion(spawn.GetRotation());
+    objectInformation.SetRotationPart(rotation);
+    //The mesh is previewed on the pathpoint to show where the animation object will be.
+    if(params.GetInt("Scale Object Preview") == 1){
+        mat4 scale_mat;
+        float scale = (spawn.GetScale().x + spawn.GetScale().y + spawn.GetScale().z ) / 3.0f;
+        scale_mat[0] = scale;
+        scale_mat[5] = scale;
+        scale_mat[10] = scale;
+        scale_mat[15] = 1.0f;
+        objectInformation = objectInformation * scale_mat;
+    }
+    DebugDrawWireMesh(model_path, objectInformation, vec4(0.0f, 0.35f, 0.0f, 0.75f), _delete_on_update);
 }
 
 void CreatePathpoint(){
