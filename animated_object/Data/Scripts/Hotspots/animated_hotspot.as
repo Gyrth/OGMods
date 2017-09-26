@@ -18,7 +18,6 @@ string objectPath;
 float node_timer = 0.0f;
 bool next_pathpoint = true;
 array<int> children;
-vec3 old_position = vec3(0.0f);
 
 enum PlayMode{
   kLoopForward = 0,
@@ -32,13 +31,13 @@ enum PlayMode{
 }
 
 float CalculateWholeDistance(){
-  float whole = 0.0f;
-  for(uint i = 1; i < node_ids.size(); i++){
-    whole += distance(ReadObjectFromID(node_ids[i - 1]).GetTranslation(), ReadObjectFromID(node_ids[i]).GetTranslation());
-  }
-  //Add the distance between the fist and last node as well.
-  whole += distance(ReadObjectFromID(node_ids[0]).GetTranslation(), ReadObjectFromID(node_ids[(node_ids.size() - 1)]).GetTranslation());
-  return whole;
+    float whole = 0.0f;
+    for(uint i = 1; i < node_ids.size(); i++){
+        whole += distance(ReadObjectFromID(node_ids[i - 1]).GetTranslation(), ReadObjectFromID(node_ids[i]).GetTranslation());
+    }
+    //Add the distance between the fist and last node as well.
+    whole += distance(ReadObjectFromID(node_ids[0]).GetTranslation(), ReadObjectFromID(node_ids[(node_ids.size() - 1)]).GetTranslation());
+    return whole;
 }
 
 PlayMode current_mode;
@@ -52,6 +51,7 @@ void SetParameters() {
   params.AddFloatSlider("Seconds",1.0f,"min:0.1,max:10.0,step:1.0,text_mult:1");
   params.AddString("Object Path", "Data/Objects/arrow.xml");
   params.AddIntCheckbox("Const time", true);
+  params.AddIntCheckbox("AI trigger", false);
   //Unfortunately I can not get the model path from the xml file via scripting.
   //So the model needs to be declared seperatly.
   params.AddString("Model Path", "Data/Models/arrow.obj");
@@ -66,14 +66,14 @@ void HandleEvent(string event, MovementObject @mo){
 }
 
 void OnEnter(MovementObject @mo) {
-    if(mo.controlled && on_enter && !playing && !done){
+    if((mo.controlled || params.GetInt("AI trigger") == 1) && on_enter && !playing && !done){
         //Once the user steps into the hotspot the animation will start.
         playing = true;
     }
 }
 
 void OnExit(MovementObject @mo) {
-    if(mo.controlled && on_exit){
+    if((mo.controlled || params.GetInt("AI trigger") == 1) && on_exit){
         if(playing && !reverse || !playing && reverse){
           playing = true;
           reverse = true;
@@ -90,8 +90,8 @@ void Reset(){
     next_pathpoint = true;
     node_timer = 0.0f;
     done = false;
-    old_position = vec3(0.0f);
     /*playing = false;*/
+    UpdatePlayMode(true);
     if(!ObjectExists(node_ids[index])){
       return;
     }
@@ -144,7 +144,7 @@ bool CheckObjectsExist(){
 
 void Update(){
   PostInit();
-  UpdatePlayMode();
+  /*UpdatePlayMode();*/
   UpdatePlaceholders();
   if(!CheckObjectsExist()){
     return;
@@ -227,7 +227,6 @@ void UpdateTransform(){
     Object@ currentPathpoint = ReadObjectFromID(node_ids[index]);
     Object@ previousPathpoint = ReadObjectFromID(prev_node_id);
     Object@ object = ReadObjectFromID(objectID);
-    vec3 mo_velocity = vec3(0.0f);
 
     if(params.GetInt("Const time") == 1){
       //The animation will have a constant speed.
@@ -250,10 +249,6 @@ void UpdateTransform(){
             object.SetTranslation(new_position);
             quaternion relative = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
             object.SetRotation(relative);
-            if(old_position != vec3(0.0f)){
-                mo_velocity = new_position - old_position;
-            }
-            old_position = new_position;
           }
         }else{
           skip_node = true;
@@ -450,10 +445,8 @@ void PostInit(){
                   found_placeholders.insertLast(allObjects[i]);
               }else if(tempParam.GetString("Name") == "animation_child"){
                   children.insertLast(allObjects[i]);
-                  Print("Found child animation object\n");
               }else if(tempParam.GetString("Name") == "animation_main"){
                   objectID = allObjects[i];
-                  Print("Found main animation object\n");
               }
           }
       }
@@ -468,10 +461,11 @@ void PostInit(){
   }
   UpdatePlayMode(true);
   post_init_done = true;
+  Reset();
 }
 
 void SetPlaceholderPreviews() {
-    if(!EditorModeActive()){
+    if(!EditorModeActive() || MediaMode()){
         return;
     }
     vec3 previousPos;
