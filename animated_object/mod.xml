@@ -14,8 +14,8 @@
     <SupportedVersion>*</SupportedVersion>
     <NeedsRestart>false</NeedsRestart>
     <Item category="Interactive Objects" title="Animated Object" path="Data/Objects/animated_hotspot.xml" thumbnail="Data/UI/spawner/animated_object.png" />
-    <Item category="Static Object" title="Elevator" path="Data/Objects/elevator_group.xml" thumbnail="Data/UI/spawner/animated_object.png" />
-    <Item category="Static Object" title="Windmill" path="Data/Objects/windmill_group.xml" thumbnail="Data/UI/spawner/animated_object.png" />
-    <Item category="Static Object" title="Boat group" path="Data/Objects/boat_group.xml" thumbnail="Data/UI/spawner/animated_object.png" />
-    <Level title="Anim Showcase" thumbnail="Images/animated_object_full.jpg">green.xml</Level>
+    <Item category="Static Objects" title="Elevator" path="Data/Objects/elevator_group.xml" thumbnail="Data/UI/spawner/animated_object.png" />
+    <Item category="Static Objects" title="Windmill" path="Data/Objects/windmill_group.xml" thumbnail="Data/UI/spawner/animated_object.png" />
+    <Item category="Static Objects" title="Boat group" path="Data/Objects/boat_group.xml" thumbnail="Data/UI/spawner/animated_object.png" />
+    <Level title="Anim Showcase" thumbnail="Images/animated_object_full.jpg">anim_showcase.xml</Level>
 </Mod>
