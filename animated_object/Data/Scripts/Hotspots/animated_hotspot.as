@@ -340,9 +340,6 @@ void UpdatePlaceholders(){
 
 void UpdatePlayMode(bool ignore_editormode = false){
   if(EditorModeActive() || ignore_editormode){
-    if(current_mode != PlayMode(params.GetInt("Play mode")) && EditorModeActive()){
-      /*Reset();*/
-    }
     current_mode = PlayMode(params.GetInt("Play mode"));
     switch(current_mode){
       case kLoopForward :
