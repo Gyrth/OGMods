@@ -18,6 +18,7 @@ string objectPath;
 float node_timer = 0.0f;
 bool next_pathpoint = true;
 array<int> children;
+float pi = 3.14159265f;
 
 enum PlayMode{
   kLoopForward = 0,
@@ -49,9 +50,13 @@ void SetParameters() {
   params.AddInt("Play mode", 3);
   params.AddInt("Number of Keys", 2);
   params.AddFloatSlider("Seconds",1.0f,"min:0.1,max:10.0,step:1.0,text_mult:1");
+  params.AddFloatSlider("Interpolation",1.0f,"min:0.0,max:1.0,step:0.1,text_mult:1");
   params.AddString("Object Path", "Data/Objects/arrow.xml");
   params.AddIntCheckbox("Const time", true);
   params.AddIntCheckbox("AI trigger", false);
+  params.AddIntCheckbox("Interpolate", false);
+  params.AddIntCheckbox("Draw preview objects", true);
+  params.AddIntCheckbox("Draw connect lines", true);
   params.AddIntCheckbox("Scale Object Preview", true);
   //Unfortunately I can not get the model path from the xml file via scripting.
   //So the model needs to be declared seperatly.
@@ -223,75 +228,96 @@ void Update(){
 }
 
 void UpdateTransform(){
-  if(playing && prev_node_id != -1){
-    node_timer += time_step;
-    Object@ currentPathpoint = ReadObjectFromID(node_ids[index]);
-    Object@ previousPathpoint = ReadObjectFromID(prev_node_id);
-    Object@ object = ReadObjectFromID(objectID);
+    if(playing && prev_node_id != -1){
+        node_timer += time_step;
+        Object@ currentPathpoint = ReadObjectFromID(node_ids[index]);
+        Object@ previousPathpoint = ReadObjectFromID(prev_node_id);
+        Object@ object = ReadObjectFromID(objectID);
 
-    if(params.GetInt("Const time") == 1){
-      //The animation will have a constant speed.
-      bool skip_node = false;
-      float whole_distance = CalculateWholeDistance();
-      if(whole_distance != 0.0f){
-        float node_distance = distance(currentPathpoint.GetTranslation(), previousPathpoint.GetTranslation());
-        if(node_distance != 0.0f){
-          float node_time = params.GetFloat("Seconds") * (node_distance / whole_distance);
-          float alpha = node_timer / node_time;
-          //Setting the position and rotation:
-          if(alpha >= 1.0f){
-            //Because the alpha isn't always perfect 1.0f at the end let's set the end pos and rot like this.
-            next_pathpoint = true;
-            node_timer = 0.0f;
-            object.SetTranslation(currentPathpoint.GetTranslation());
-            object.SetRotation(currentPathpoint.GetRotation());
-          }else{
+        if(params.GetInt("Const time") == 1){
+            //The animation will have a constant speed.
+            bool skip_node = false;
+            float whole_distance = CalculateWholeDistance();
+            if(whole_distance != 0.0f){
+                float node_distance = distance(currentPathpoint.GetTranslation(), previousPathpoint.GetTranslation());
+                if(node_distance != 0.0f){
+                    float node_time = params.GetFloat("Seconds") * (node_distance / whole_distance);
+                    float alpha = node_timer / node_time;
+                    //Setting the position and rotation:
+                    if(node_timer > node_time){
+                        next_pathpoint = true;
+                        node_timer = 0.0f;
+                    }
+                    quaternion new_rotation;
+                    vec3 new_position;
+                    if(params.GetInt("Interpolate") == 1){
+                        float offset_alpha = sine_wave(alpha, 0.0f, 1.0f, 1.0f);
+
+                        vec3 previous_direction = normalize(previousPathpoint.GetRotation() * vec3(0.0f, 0.0f, 1.0f)) * node_distance * alpha;
+                        vec3 current_direction = normalize(currentPathpoint.GetRotation() * vec3(0.0f, 0.0f, -1.0f)) * (node_distance * (1.0f - alpha));
+                        vec3 new_position_curved = mix(previousPathpoint.GetTranslation() + previous_direction, currentPathpoint.GetTranslation() + current_direction, offset_alpha);
+                        vec3 new_position_straight = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
+                        new_position = mix(new_position_straight, new_position_curved, params.GetFloat("Interpolation"));
+
+                        vec3 end_pos = (new_position);
+                        vec3 start_pos = (object.GetTranslation());
+                        vec3 direction = normalize(end_pos - start_pos);
+                        GetRotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), direction, new_rotation);
+                        float temp_alpha = alpha;
+                        if(temp_alpha > 0.5){
+                            temp_alpha = 1.0f - alpha;
+                        }
+                        /*new_rotation = mix(mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha), new_rotation, temp_alpha);*/
+                    }else{
+                        new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
+                        new_rotation = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
+                    }
+                    DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
+                    object.SetRotation(new_rotation);
+                    object.SetTranslation(new_position);
+                }else{
+                    skip_node = true;
+                }
+            }else{
+                skip_node = true;
+            }
+            if(skip_node){
+                object.SetTranslation(currentPathpoint.GetTranslation());
+                object.SetRotation(currentPathpoint.GetRotation());
+                next_pathpoint = true;
+                node_timer = 0.0f;
+            }
+        }else{
+            //The animation will devide the time between the animation keys.
+            float node_time = params.GetFloat("Seconds") / node_ids.size();
+            //Setting the position and rotation:
+            float alpha = node_timer / node_time;
+            /*alpha = 0.51 * sin((alpha - (pi / 6.0f)) / 0.32f) + 0.5f;*/
+            if(node_timer > node_time){
+                next_pathpoint = true;
+                node_timer = 0.0f;
+            }
             vec3 new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
             object.SetTranslation(new_position);
+            //Rotation
             quaternion relative = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
             object.SetRotation(relative);
-          }
-        }else{
-          skip_node = true;
         }
-      }else{
-        skip_node = true;
-      }
-      if(skip_node){
-        object.SetTranslation(currentPathpoint.GetTranslation());
-        object.SetRotation(currentPathpoint.GetRotation());
-        next_pathpoint = true;
-        node_timer = 0.0f;
-      }
-    }else{
-      //The animation will devide the time between the animation keys.
-      float node_time = params.GetFloat("Seconds") / node_ids.size();
-      //Setting the position and rotation:
-      float alpha = node_timer / node_time;
-      if(alpha >= 1.0f){
-        next_pathpoint = true;
-        node_timer = 0.0f;
-        object.SetTranslation(currentPathpoint.GetTranslation());
-        object.SetRotation(currentPathpoint.GetRotation());
-      }else{
-        vec3 new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
-        object.SetTranslation(new_position);
-        //Rotation
-        quaternion relative = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
-        object.SetRotation(relative);
-      }
+    }else if(done == false && EditorModeActive()){
+        //If the animation is playing but no where to go, just stay at the first key.
+        if(node_ids.size() > 0){
+            Object@ firstPathpoint = ReadObjectFromID(node_ids[0]);
+            Object@ mainObject = ReadObjectFromID(objectID);
+            mainObject.SetTranslation(firstPathpoint.GetTranslation());
+            mainObject.SetRotation(firstPathpoint.GetRotation());
+            index = 0;
+        }
     }
-  }else if(done == false && EditorModeActive()){
-    //If the animation is playing but no where to go, just stay at the first key.
-    if(node_ids.size() > 0){
-      Object@ firstPathpoint = ReadObjectFromID(node_ids[0]);
-      Object@ mainObject = ReadObjectFromID(objectID);
-      mainObject.SetTranslation(firstPathpoint.GetTranslation());
-      mainObject.SetRotation(firstPathpoint.GetRotation());
-      index = 0;
-    }
-  }
-  UpdateChildren();
+    UpdateChildren();
+}
+
+float sine_wave(float t, float b, float c, float d) {
+	return -c/2 * (cos(pi*t/d) - 1) + b;
 }
 
 void UpdateChildren(){
@@ -470,13 +496,17 @@ void SetPlaceholderPreviews() {
     for(uint i = 0; i < uint(node_ids.length()); ++i){
         if(ObjectExists(node_ids[i])){
             Object @obj = ReadObjectFromID(node_ids[i]);
-            SetObjectPreview(obj,objectPath);
-            if(i>0){
-                //Every pathpoint needs to be connected with a line to show the animation path.
-                DebugDrawLine(obj.GetTranslation(), previousPos, vec3(0.5f), _delete_on_update);
-            }else{
-                //If it's the first pathpoint a line needs to be draw to the main hotspot.
-                DebugDrawLine(main_hotspot.GetTranslation(), obj.GetTranslation(), vec3(0.5f), _delete_on_update);
+            if(params.GetInt("Draw preview objects") == 1){
+                SetObjectPreview(obj,objectPath);
+            }
+            if(params.GetInt("Draw connect lines") == 1){
+                if(i>0){
+                    //Every pathpoint needs to be connected with a line to show the animation path.
+                    DebugDrawLine(obj.GetTranslation(), previousPos, vec3(0.5f), _delete_on_update);
+                }else{
+                    //If it's the first pathpoint a line needs to be draw to the main hotspot.
+                    DebugDrawLine(main_hotspot.GetTranslation(), obj.GetTranslation(), vec3(0.5f), _delete_on_update);
+                }
             }
             previousPos = obj.GetTranslation();
         }else{
