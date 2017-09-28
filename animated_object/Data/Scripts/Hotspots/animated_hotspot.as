@@ -54,7 +54,8 @@ void SetParameters() {
   params.AddString("Object Path", "Data/Objects/arrow.xml");
   params.AddIntCheckbox("Const time", true);
   params.AddIntCheckbox("AI trigger", false);
-  params.AddIntCheckbox("Interpolate", false);
+  params.AddIntCheckbox("Interpolate translation", false);
+  params.AddIntCheckbox("Interpolate rotation", false);
   params.AddIntCheckbox("Draw preview objects", true);
   params.AddIntCheckbox("Draw connect lines", true);
   params.AddIntCheckbox("Scale Object Preview", true);
@@ -227,11 +228,14 @@ void Update(){
   UpdateTransform();
 }
 
+Object@ currentPathpoint;
+Object@ previousPathpoint;
+
 void UpdateTransform(){
     if(playing && prev_node_id != -1){
         node_timer += time_step;
-        Object@ currentPathpoint = ReadObjectFromID(node_ids[index]);
-        Object@ previousPathpoint = ReadObjectFromID(prev_node_id);
+        @currentPathpoint = ReadObjectFromID(node_ids[index]);
+        @previousPathpoint = ReadObjectFromID(prev_node_id);
         Object@ object = ReadObjectFromID(objectID);
 
         if(params.GetInt("Const time") == 1){
@@ -247,34 +251,9 @@ void UpdateTransform(){
                     if(node_timer > node_time){
                         next_pathpoint = true;
                         node_timer = 0.0f;
+                        return;
                     }
-                    quaternion new_rotation;
-                    vec3 new_position;
-                    if(params.GetInt("Interpolate") == 1){
-                        float offset_alpha = sine_wave(alpha, 0.0f, 1.0f, 1.0f);
-
-                        vec3 previous_direction = normalize(previousPathpoint.GetRotation() * vec3(0.0f, 0.0f, 1.0f)) * node_distance * alpha;
-                        vec3 current_direction = normalize(currentPathpoint.GetRotation() * vec3(0.0f, 0.0f, -1.0f)) * (node_distance * (1.0f - alpha));
-                        vec3 new_position_curved = mix(previousPathpoint.GetTranslation() + previous_direction, currentPathpoint.GetTranslation() + current_direction, offset_alpha);
-                        vec3 new_position_straight = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
-                        new_position = mix(new_position_straight, new_position_curved, params.GetFloat("Interpolation"));
-
-                        vec3 end_pos = (new_position);
-                        vec3 start_pos = (object.GetTranslation());
-                        vec3 direction = normalize(end_pos - start_pos);
-                        GetRotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), direction, new_rotation);
-                        float temp_alpha = alpha;
-                        if(temp_alpha > 0.5){
-                            temp_alpha = 1.0f - alpha;
-                        }
-                        /*new_rotation = mix(mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha), new_rotation, temp_alpha);*/
-                    }else{
-                        new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
-                        new_rotation = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
-                    }
-                    DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
-                    object.SetRotation(new_rotation);
-                    object.SetTranslation(new_position);
+                    CalculateTransform(object, alpha, node_distance);
                 }else{
                     skip_node = true;
                 }
@@ -292,16 +271,13 @@ void UpdateTransform(){
             float node_time = params.GetFloat("Seconds") / node_ids.size();
             //Setting the position and rotation:
             float alpha = node_timer / node_time;
-            /*alpha = 0.51 * sin((alpha - (pi / 6.0f)) / 0.32f) + 0.5f;*/
+            float node_distance = distance(currentPathpoint.GetTranslation(), previousPathpoint.GetTranslation());
             if(node_timer > node_time){
                 next_pathpoint = true;
                 node_timer = 0.0f;
+                return;
             }
-            vec3 new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
-            object.SetTranslation(new_position);
-            //Rotation
-            quaternion relative = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
-            object.SetRotation(relative);
+            CalculateTransform(object, alpha, node_distance);
         }
     }else if(done == false && EditorModeActive()){
         //If the animation is playing but no where to go, just stay at the first key.
@@ -316,9 +292,50 @@ void UpdateTransform(){
     UpdateChildren();
 }
 
+void CalculateTransform(Object@ object, float alpha, float node_distance){
+    quaternion new_rotation;
+    vec3 new_position;
+    if(params.GetInt("Interpolate translation") == 1){
+        //Current time, start value, change in value, duration
+        float offset_alpha = sine_wave(alpha, 0.0f, 1.0f, 1.0f);
+        /*float offset_alpha = exp_wave(alpha, 0.0f, 1.0f, 1.0f);*/
+        vec3 previous_direction = normalize(previousPathpoint.GetRotation() * vec3(0.0f, 0.0f, 1.0f) * (reverse ? 1 : -1)) * node_distance * alpha;
+        vec3 current_direction = normalize(currentPathpoint.GetRotation() * vec3(0.0f, 0.0f, 1.0f) * (reverse ? -1 : 1)) * (node_distance * (1.0f - alpha));
+        vec3 new_position_curved = mix(previousPathpoint.GetTranslation() + previous_direction, currentPathpoint.GetTranslation() + current_direction, offset_alpha);
+        vec3 new_position_straight = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
+        new_position = mix(new_position_straight, new_position_curved, params.GetFloat("Interpolation"));
+    }else{
+        new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
+    }
+    if(params.GetInt("Interpolate rotation") == 1){
+        vec3 end_pos = (new_position);
+        vec3 start_pos = (object.GetTranslation());
+        vec3 direction = normalize(end_pos - start_pos);
+        GetRotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), direction, new_rotation);
+
+        float temp_alpha = alpha;
+        if(temp_alpha > 0.5){
+            temp_alpha = 1.0f - alpha;
+        }
+        /*new_rotation = mix(mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha), new_rotation, temp_alpha);*/
+    }else{
+        new_rotation = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
+    }
+    DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
+    object.SetRotation(new_rotation);
+    object.SetTranslation(new_position);
+}
+//Current time, start value, change in value, duration
 float sine_wave(float t, float b, float c, float d) {
 	return -c/2 * (cos(pi*t/d) - 1) + b;
 }
+
+float exp_wave(float t, float b, float c, float d) {
+	t /= d/2;
+	if (t < 1) return c/2 * pow( 2, 10 * (t - 1) ) + b;
+	t--;
+	return c/2 * ( -pow( 2, -10 * t) + 2 ) + b;
+};
 
 void UpdateChildren(){
     for(uint i = 0; i < children.size(); i++){
