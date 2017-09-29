@@ -54,10 +54,11 @@ void SetParameters() {
   params.AddString("Object Path", "Data/Objects/arrow.xml");
   params.AddIntCheckbox("Const time", true);
   params.AddIntCheckbox("AI trigger", false);
-  params.AddIntCheckbox("Interpolate translation", false);
-  params.AddIntCheckbox("Interpolate rotation", false);
-  params.AddIntCheckbox("Draw preview objects", true);
-  params.AddIntCheckbox("Draw connect lines", true);
+  params.AddIntCheckbox("Interpolate translation", true);
+  params.AddIntCheckbox("Interpolate rotation", true);
+  params.AddIntCheckbox("Draw preview objects", false);
+  params.AddIntCheckbox("Draw path lines", false);
+  params.AddIntCheckbox("Draw connect lines", false);
   params.AddIntCheckbox("Scale Object Preview", true);
   //Unfortunately I can not get the model path from the xml file via scripting.
   //So the model needs to be declared seperatly.
@@ -261,8 +262,8 @@ void UpdateTransform(){
                 skip_node = true;
             }
             if(skip_node){
-                object.SetTranslation(currentPathpoint.GetTranslation());
-                object.SetRotation(currentPathpoint.GetRotation());
+                /*object.SetTranslation(currentPathpoint.GetTranslation());*/
+                /*object.SetRotation(currentPathpoint.GetRotation());*/
                 next_pathpoint = true;
                 node_timer = 0.0f;
             }
@@ -284,8 +285,8 @@ void UpdateTransform(){
         if(node_ids.size() > 0){
             Object@ firstPathpoint = ReadObjectFromID(node_ids[0]);
             Object@ mainObject = ReadObjectFromID(objectID);
-            mainObject.SetTranslation(firstPathpoint.GetTranslation());
-            mainObject.SetRotation(firstPathpoint.GetRotation());
+            /*mainObject.SetTranslation(firstPathpoint.GetTranslation());*/
+            /*mainObject.SetRotation(firstPathpoint.GetRotation());*/
             index = 0;
         }
     }
@@ -308,11 +309,32 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
         new_position = mix(previousPathpoint.GetTranslation(), currentPathpoint.GetTranslation(), alpha);
     }
     if(params.GetInt("Interpolate rotation") == 1){
-        vec3 end_pos = (new_position);
-        vec3 start_pos = (object.GetTranslation());
-        vec3 direction = normalize(end_pos - start_pos);
-        GetRotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), direction, new_rotation);
+        vec3 path_direction = normalize(new_position - object.GetTranslation());
+        /*path_direction.z = 0.0f;*/
+        vec3 up_direction = normalize(mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha) * vec3(0.0f, 1.0f, 0.0f));
+        quaternion path_quat;
+        quaternion up_quad;
 
+        float rotation_y = atan2(path_direction.z, -path_direction.x) - 90/180.0f*3.1417f;
+        /*float rotation_x = asin(dot(path_direction, up_direction));*/
+        float rotation_x = asin(-path_direction.y);
+        float rotation_z = asin(path_direction.y)/3.14159265f * 180.0f;
+
+        /*float rotation_z = atan2(path_direction.z, -path_direction.x) * 180.0f / 3.1415f + 90.0f;*/
+
+
+        /*new_rotation = quaternion(vec4(0,1,0,rotation_y));*/
+        new_rotation = quaternion(vec4(0,1,0,rotation_y)) * quaternion(vec4(1,0,0,rotation_x));
+
+        /*GetRotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), path_direction, path_quat);
+        GetRotationBetweenVectors(vec3(0.0f, 1.0f, 0.0f), up_direction, up_quad);*/
+        /*new_rotation = new_rotation * up_quad;*/
+        if(params.GetInt("Draw path lines") == 1){
+            DebugDrawLine(object.GetTranslation(), object.GetTranslation() + up_direction, vec3(0.0, 0.0, 1.0f), _fade);
+        }
+        if(params.GetInt("Draw path lines") == 1){
+            DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
+        }
         float temp_alpha = alpha;
         if(temp_alpha > 0.5){
             temp_alpha = 1.0f - alpha;
@@ -321,7 +343,7 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
     }else{
         new_rotation = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
     }
-    DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
+
     object.SetRotation(new_rotation);
     object.SetTranslation(new_position);
 }
