@@ -151,6 +151,11 @@ bool CheckObjectsExist(){
 }
 
 void Update(){
+    Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
+    DebugDrawLine(this_hotspot.GetTranslation(), this_hotspot.GetTranslation() + vec3(1.0f,0.0f,0.0f), vec3(1.0, 0.0, 0.0f), _delete_on_update);
+    DebugDrawLine(this_hotspot.GetTranslation(), this_hotspot.GetTranslation() + vec3(0.0f,1.0f,0.0f), vec3(0.0, 1.0, 0.0f), _delete_on_update);
+    DebugDrawLine(this_hotspot.GetTranslation(), this_hotspot.GetTranslation() + vec3(0.0f,0.0f,1.0f), vec3(0.0, 0.0, 1.0f), _delete_on_update);
+
   PostInit();
   /*UpdatePlayMode();*/
   UpdatePlaceholders();
@@ -313,24 +318,29 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
         /*path_direction.z = 0.0f;*/
         vec3 up_direction = normalize(mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha) * vec3(0.0f, 1.0f, 0.0f));
         quaternion path_quat;
-        quaternion up_quad;
+        quaternion quad;
 
-        float rotation_y = atan2(path_direction.z, -path_direction.x) - 90/180.0f*3.1417f;
-        /*float rotation_x = asin(dot(path_direction, up_direction));*/
-        float rotation_x = asin(-path_direction.y);
-        float rotation_z = asin(path_direction.y)/3.14159265f * 180.0f;
+        float rotation_y = atan2(path_direction.z, -path_direction.x) - 90/180.0f*pi;
+        /*float rotation_x = asin(-path_direction.y);*/
 
-        /*float rotation_z = atan2(path_direction.z, -path_direction.x) * 180.0f / 3.1415f + 90.0f;*/
+        /*float rotation_x = atan2(path_direction.y, path_direction.z);*/
+        vec3 previous_direction = normalize(previousPathpoint.GetRotation() * vec3(0.0f, 0.0f, 1.0f));
+        vec3 current_direction = normalize(currentPathpoint.GetRotation() * vec3(0.0f, 0.0f, 1.0f));
+        float rotation_x;
+        if(path_direction.z < 0.0){
+            rotation_x = asin(path_direction.y) - pi;
+        }else{
+            rotation_x = asin(-path_direction.y);
+        }
+        vec3 roll = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha) * vec3(0.0f, 0.0f, 1.0f);
+        /*float rotation_z = atan2(roll.y, roll.x);*/
+        float rotation_z =  0.0f;
+        new_rotation = quaternion(vec4(1,0,0,rotation_x));
+        /*new_rotation = quaternion(vec4(0,1,0,rotation_y)) * quaternion(vec4(1,0,0,rotation_x)) * quaternion(vec4(0,0,1,rotation_z));*/
 
-
-        /*new_rotation = quaternion(vec4(0,1,0,rotation_y));*/
-        new_rotation = quaternion(vec4(0,1,0,rotation_y)) * quaternion(vec4(1,0,0,rotation_x));
-
-        /*GetRotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), path_direction, path_quat);
-        GetRotationBetweenVectors(vec3(0.0f, 1.0f, 0.0f), up_direction, up_quad);*/
-        /*new_rotation = new_rotation * up_quad;*/
         if(params.GetInt("Draw path lines") == 1){
-            DebugDrawLine(object.GetTranslation(), object.GetTranslation() + up_direction, vec3(0.0, 0.0, 1.0f), _fade);
+            DebugText("awe", "" +path_direction.z, 1.0f);
+            DebugDrawLine(object.GetTranslation(), object.GetTranslation() + (path_direction * 2.0f), vec3(0.0, 0.0, 1.0f), _delete_on_update);
         }
         if(params.GetInt("Draw path lines") == 1){
             DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
