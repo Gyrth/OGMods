@@ -2,6 +2,7 @@ array<int> node_ids;
 int prev_node_id = -1;
 int objectID = -1;
 vec3 small_offset = vec3(0.01f,0.01f,0.01f);
+vec3 connect_lines_color = vec3(0.0f,0.0f,1.0f);
 int index = 0;
 Object@ main_hotspot = ReadObjectFromID(hotspot.GetID());
 bool post_init_done = false;
@@ -47,19 +48,19 @@ void Init() {
 }
 
 void SetParameters() {
-  params.AddInt("Play mode", 3);
+  params.AddInt("Play mode", 0);
   params.AddInt("Number of Keys", 2);
   params.AddFloatSlider("Seconds",1.0f,"min:0.1,max:10.0,step:1.0,text_mult:1");
   params.AddFloatSlider("Interpolation",1.0f,"min:0.0,max:1.0,step:0.1,text_mult:1");
   params.AddString("Object Path", "Data/Objects/arrow.xml");
-  params.AddIntCheckbox("Const time", true);
+  params.AddIntCheckbox("Const speed", true);
   params.AddIntCheckbox("AI trigger", false);
-  params.AddIntCheckbox("Interpolate translation", true);
-  params.AddIntCheckbox("Interpolate rotation", true);
-  params.AddIntCheckbox("Draw preview objects", false);
+  params.AddIntCheckbox("Interpolate translation", false);
+  params.AddIntCheckbox("Interpolate rotation", false);
+  params.AddIntCheckbox("Draw preview objects", true);
   params.AddIntCheckbox("Draw path lines", false);
-  params.AddIntCheckbox("Draw connect lines", false);
-  params.AddIntCheckbox("Scale Object Preview", true);
+  params.AddIntCheckbox("Draw connect lines", true);
+  params.AddIntCheckbox("Scale Object Preview", false);
   //Unfortunately I can not get the model path from the xml file via scripting.
   //So the model needs to be declared seperatly.
   params.AddString("Model Path", "Data/Models/arrow.obj");
@@ -151,11 +152,6 @@ bool CheckObjectsExist(){
 }
 
 void Update(){
-    Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
-    DebugDrawLine(this_hotspot.GetTranslation(), this_hotspot.GetTranslation() + vec3(1.0f,0.0f,0.0f), vec3(1.0, 0.0, 0.0f), _delete_on_update);
-    DebugDrawLine(this_hotspot.GetTranslation(), this_hotspot.GetTranslation() + vec3(0.0f,1.0f,0.0f), vec3(0.0, 1.0, 0.0f), _delete_on_update);
-    DebugDrawLine(this_hotspot.GetTranslation(), this_hotspot.GetTranslation() + vec3(0.0f,0.0f,1.0f), vec3(0.0, 0.0, 1.0f), _delete_on_update);
-
   PostInit();
   /*UpdatePlayMode();*/
   UpdatePlaceholders();
@@ -244,7 +240,7 @@ void UpdateTransform(){
         @previousPathpoint = ReadObjectFromID(prev_node_id);
         Object@ object = ReadObjectFromID(objectID);
 
-        if(params.GetInt("Const time") == 1){
+        if(params.GetInt("Const speed") == 1){
             //The animation will have a constant speed.
             bool skip_node = false;
             float whole_distance = CalculateWholeDistance();
@@ -327,11 +323,8 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
         new_rotation = quaternion(vec4(0,1,0,rotation_y)) * quaternion(vec4(1,0,0,rotation_x)) * quaternion(vec4(0,0,1,rotation_z));
 
         if(params.GetInt("Draw path lines") == 1){
-            DebugText("awe", "" +path_direction.z, 1.0f);
-            DebugDrawLine(object.GetTranslation(), object.GetTranslation() + (path_direction * 2.0f), vec3(0.0, 0.0, 1.0f), _delete_on_update);
+            DebugDrawLine(object.GetTranslation(), object.GetTranslation() + (path_direction * 4.0f), vec3(0.0, 0.0, 1.0f), _delete_on_update);
             DebugDrawLine(object.GetTranslation(), object.GetTranslation() + (up_direction * 4.0f), vec3(0.0, 1.0, 0.0f), _delete_on_update);
-        }
-        if(params.GetInt("Draw path lines") == 1){
             DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
         }
     }else{
@@ -535,10 +528,10 @@ void SetPlaceholderPreviews() {
             if(params.GetInt("Draw connect lines") == 1){
                 if(i>0){
                     //Every pathpoint needs to be connected with a line to show the animation path.
-                    DebugDrawLine(obj.GetTranslation(), previousPos, vec3(0.5f), _delete_on_update);
+                    DebugDrawLine(obj.GetTranslation(), previousPos, connect_lines_color, _delete_on_update);
                 }else{
                     //If it's the first pathpoint a line needs to be draw to the main hotspot.
-                    DebugDrawLine(main_hotspot.GetTranslation(), obj.GetTranslation(), vec3(0.5f), _delete_on_update);
+                    DebugDrawLine(main_hotspot.GetTranslation(), obj.GetTranslation(), connect_lines_color, _delete_on_update);
                 }
             }
             previousPos = obj.GetTranslation();
@@ -580,7 +573,7 @@ void CreatePathpoint(){
   //This will be used when the level is closed and loaded again.
   placeholderParams.AddInt("BelongsTo", hotspot.GetID());
   placeholderParams.AddString("Playsound", "");
-  newObj.SetTranslation(main_hotspot.GetTranslation() + small_offset);
+  newObj.SetTranslation(main_hotspot.GetTranslation() + (node_ids.size() * vec3(0.0f,1.0f,0.0f)));
 }
 
 void CreateMainAnimationObject(){
