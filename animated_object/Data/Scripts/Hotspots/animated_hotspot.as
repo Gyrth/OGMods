@@ -99,33 +99,10 @@ void Reset(){
     next_pathpoint = true;
     node_timer = 0.0f;
     done = false;
-    /*playing = false;*/
-    UpdatePlayMode(true);
-    if(!ObjectExists(node_ids[index])){
-      return;
-    }
-    //Once the level is reset the new paths will be used.
-    if(model_path != params.GetString("Model Path")){
-        if(FileExists(params.GetString("Model Path"))){
-            model_path = params.GetString("Model Path");
-        }
-    }
-    if(objectPath != params.GetString("Object Path")){
-      if(FileExists(params.GetString("Object Path"))){
-        DeleteObjectID(objectID);
-        for(uint i = 0; i < children.size(); i++){
-            DeleteObjectID(children[i]);
-        }
-        children.resize(0);
-        objectPath = params.GetString("Object Path");
-        CreateMainAnimationObject();
-      }else{
-        DisplayError("Error", "Could not find file " + params.GetString("Object Path"));
-      }
-    }
     Object@ object = ReadObjectFromID(objectID);
     object.SetTranslation(ReadObjectFromID(node_ids[index]).GetTranslation());
     object.SetRotation(ReadObjectFromID(node_ids[index]).GetRotation());
+    UpdatePlayMode();
 }
 
 bool CheckObjectsExist(){
@@ -153,8 +130,8 @@ bool CheckObjectsExist(){
 
 void Update(){
   PostInit();
-  /*UpdatePlayMode();*/
   UpdatePlaceholders();
+  CheckParamChanges();
   if(!CheckObjectsExist()){
     return;
   }
@@ -190,7 +167,7 @@ void Update(){
                 if(mult_trigger){
                   index = 0;
                   done = false;
-                  UpdatePlayMode(true);
+                  UpdatePlayMode();
                   return;
                 }else{
                   done = true;
@@ -211,7 +188,7 @@ void Update(){
               if(mult_trigger){
                 index = 1;
                 done = false;
-                UpdatePlayMode(true);
+                UpdatePlayMode();
                 return;
               }
             }else{
@@ -228,6 +205,34 @@ void Update(){
       }
   }
   UpdateTransform();
+}
+
+void CheckParamChanges(){
+    if(EditorModeActive()){
+        if(model_path != params.GetString("Model Path")){
+            if(FileExists(params.GetString("Model Path"))){
+                model_path = params.GetString("Model Path");
+            }
+        }
+        if(objectPath != params.GetString("Object Path")){
+            if(FileExists(params.GetString("Object Path"))){
+                DeleteObjectID(objectID);
+                for(uint i = 0; i < children.size(); i++){
+                    DeleteObjectID(children[i]);
+                }
+                children.resize(0);
+                objectPath = params.GetString("Object Path");
+                CreateMainAnimationObject();
+                Object@ object = ReadObjectFromID(objectID);
+                object.SetTranslation(ReadObjectFromID(node_ids[index]).GetTranslation());
+                object.SetRotation(ReadObjectFromID(node_ids[index]).GetRotation());
+            }
+        }
+        if(current_mode != PlayMode(params.GetInt("Play mode"))){
+            UpdatePlayMode();
+            Reset();
+        }
+    }
 }
 
 Object@ currentPathpoint;
@@ -325,10 +330,13 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
         if(params.GetInt("Draw path lines") == 1){
             DebugDrawLine(object.GetTranslation(), object.GetTranslation() + (path_direction * 4.0f), vec3(0.0, 0.0, 1.0f), _delete_on_update);
             DebugDrawLine(object.GetTranslation(), object.GetTranslation() + (up_direction * 4.0f), vec3(0.0, 1.0, 0.0f), _delete_on_update);
-            DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
         }
     }else{
         new_rotation = mix(previousPathpoint.GetRotation(), currentPathpoint.GetRotation(), alpha);
+    }
+
+    if(params.GetInt("Draw path lines") == 1){
+        DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
     }
 
     object.SetRotation(new_rotation);
@@ -390,8 +398,7 @@ void UpdatePlaceholders(){
   SetPlaceholderPreviews();
 }
 
-void UpdatePlayMode(bool ignore_editormode = false){
-  if(EditorModeActive() || ignore_editormode){
+void UpdatePlayMode(){
     current_mode = PlayMode(params.GetInt("Play mode"));
     switch(current_mode){
       case kLoopForward :
@@ -467,11 +474,10 @@ void UpdatePlayMode(bool ignore_editormode = false){
         reverse_at_end = false;
         break;
       default :
-        params.SetInt("Play mode", kOnEnterSingleForward);
-        current_mode = kOnEnterSingleForward;
+        params.SetInt("Play mode", kLoopForward);
+        current_mode = PlayMode(-1);
         break;
     }
-  }
 }
 
 void PostInit(){
@@ -509,7 +515,7 @@ void PostInit(){
       node_ids[placeholder_params.GetInt("Index")] = found_placeholders[i];
     }
   }
-  UpdatePlayMode(true);
+  UpdatePlayMode();
   post_init_done = true;
   Reset();
 }
