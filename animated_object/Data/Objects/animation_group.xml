@@ -1,16 +1,16 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="2.36637" t1="3.82868" t2="2.15019" s0="4.01" s1="4.51" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="6" version="1">
+    <Group t0="3.50044" t1="1.5341" t2="2.77448" s0="4.01" s1="4.53334" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="9" version="1">
         <parameters />
-        <Hotspot t0="2.36637" t1="4.07868" t2="2.15019" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" type_file="Data/Objects/animated_hotspot.xml">
+        <Hotspot t0="3.50044" t1="1.79576" t2="2.77448" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" type_file="Data/Objects/animated_hotspot.xml">
             <parameters>
                 <parameter name="AI trigger" type="int" val="0" />
                 <parameter name="Const speed" type="int" val="1" />
                 <parameter name="Draw connect lines" type="int" val="1" />
                 <parameter name="Draw path lines" type="int" val="0" />
                 <parameter name="Draw preview objects" type="int" val="1" />
-                <parameter name="Identifier" type="string" val="1430508393" />
+                <parameter name="Identifier" type="string" val="1036188430" />
                 <parameter name="Interpolate rotation" type="int" val="0" />
                 <parameter name="Interpolate translation" type="int" val="0" />
                 <parameter name="Interpolation" type="float" val="1" />
@@ -22,9 +22,9 @@
                 <parameter name="Seconds" type="float" val="1" />
             </parameters>
         </Hotspot>
-        <PlaceholderObject t0="2.36637" t1="2.07868" t2="2.15019" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="4" type_file="" special_type="0">
+        <PlaceholderObject t0="3.50044" t1="-0.204236" t2="2.77448" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" type_file="" special_type="0">
             <parameters>
-                <parameter name="BelongsTo" type="string" val="1430508393" />
+                <parameter name="BelongsTo" type="string" val="1036188430" />
                 <parameter name="Index" type="int" val="0" />
                 <parameter name="Name" type="string" val="animation_key" />
                 <parameter name="Playsound" type="string" val="" />
@@ -33,9 +33,9 @@
                 <Connection id="-1" />
             </Connections>
         </PlaceholderObject>
-        <PlaceholderObject t0="2.36637" t1="5.57868" t2="2.15019" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="5" type_file="" special_type="0">
+        <PlaceholderObject t0="3.50044" t1="3.29576" t2="2.77448" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="8" type_file="" special_type="0">
             <parameters>
-                <parameter name="BelongsTo" type="string" val="1430508393" />
+                <parameter name="BelongsTo" type="string" val="1036188430" />
                 <parameter name="Index" type="int" val="1" />
                 <parameter name="Name" type="string" val="animation_key" />
                 <parameter name="Playsound" type="string" val="" />

@@ -677,6 +677,19 @@ void CreateMainAnimationObject(){
     object_params.AddString("BelongsTo", identifier);
     object_params.AddString("Name", "animation_main");
     FindNewChildren();
+
+    string all;
+    for(uint i = 0; i < children.size(); i++){
+        all += ", " + children[i];
+    }
+    for(uint i = 0; i < node_ids.size(); i++){
+        all += ", " + node_ids[i];
+    }
+
+    all += ", " + objectID;
+
+    params.SetString("All IDS", all);
+
 }
 
 void MarkAllObjects(){
@@ -695,10 +708,8 @@ void FindNewChildren(){
         ScriptParams@ params = obj.GetScriptParams();
         if(!params.HasParam("" + hotspot.GetID())){
             //If this child is already a child of an animation hotspot don't add it.
-            if(params.HasParam("Name")){
-                if(params.GetString("Name") == "animation_child" || params.GetString("Name") == "animation_main"){
-                    continue;
-                }
+            if(params.HasParam("Identifier") || params.HasParam("Name")){
+                continue;
             }
             children.insertLast(all_ids[i]);
             params.AddString("BelongsTo", identifier);

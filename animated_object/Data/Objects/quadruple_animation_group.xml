@@ -1,0 +1,71 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="7.92874" t1="4.81248" t2="3.15759" s0="28.51" s1="6.51" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="48" version="1">
+        <parameters />
+        <Hotspot t0="3.17874" t1="3.56248" t2="3.15759" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="8" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="All IDS" type="string" val=", 16, 17, 18, 19, 30" />
+                <parameter name="Const speed" type="int" val="0" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Identifier" type="string" val="1596248296" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="4" />
+                <parameter name="Object Path" type="string" val="Data/Objects/tripple_animation_group.xml" />
+                <parameter name="Play mode" type="int" val="0" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="7.435" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="21.6787" t1="7.56248" t2="3.15759" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1596248296" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="11.6787" t1="5.56248" t2="3.15759" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="17" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1596248296" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="2.67874" t1="5.56248" t2="3.15759" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="18" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1596248296" />
+                <parameter name="Index" type="int" val="2" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-5.82126" t1="7.06248" t2="3.15759" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="19" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1596248296" />
+                <parameter name="Index" type="int" val="3" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+    </Group>
+</ActorObjects>

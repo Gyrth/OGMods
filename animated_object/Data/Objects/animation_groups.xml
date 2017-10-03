@@ -1,0 +1,254 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="10.4489" t1="0.566796" t2="-2.9974" s0="4.01" s1="4.51" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="9" version="1">
+        <parameters />
+        <Hotspot t0="10.4489" t1="0.816796" t2="-2.9974" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Identifier" type="string" val="1430508393" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="2" />
+                <parameter name="Object Path" type="string" val="Data/Objects/arrow.xml" />
+                <parameter name="Play mode" type="int" val="0" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="1" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="10.4489" t1="-1.1832" t2="-2.9974" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1430508393" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="10.4489" t1="2.3168" t2="-2.9974" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="8" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1430508393" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+    </Group>
+    <EnvObject t0="10.4489" t1="0.275133" t2="-2.9974" s0="1" s1="1" s2="1" q0="0" q1="-0.608761" q2="0" q3="0.793353" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/arrow.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="string" val="1430508393" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
+    <Group t0="10.309" t1="0.0785491" t2="7.08442" s0="4.01" s1="4.51" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="18" version="1">
+        <parameters />
+        <Hotspot t0="10.309" t1="0.328549" t2="7.08442" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="15" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Identifier" type="string" val="790134413" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="2" />
+                <parameter name="Object Path" type="string" val="Data/Objects/arrow.xml" />
+                <parameter name="Play mode" type="int" val="0" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="1" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="10.309" t1="-1.67145" t2="7.08442" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="790134413" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="10.309" t1="1.82855" t2="7.08442" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="17" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="790134413" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+    </Group>
+    <EnvObject t0="10.309" t1="-0.213117" t2="7.08442" s0="1" s1="1" s2="1" q0="0" q1="-0.608761" q2="0" q3="0.793353" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/arrow.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="string" val="790134413" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
+    <Group t0="-0.721367" t1="0.0785487" t2="-1.93923" s0="4.01" s1="4.51" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="27" version="1">
+        <parameters />
+        <Hotspot t0="-0.721367" t1="0.328549" t2="-1.93923" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="24" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Identifier" type="string" val="721840665" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="2" />
+                <parameter name="Object Path" type="string" val="Data/Objects/arrow.xml" />
+                <parameter name="Play mode" type="int" val="0" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="1" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="-0.721367" t1="-1.67145" t2="-1.93923" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="25" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="721840665" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-0.721367" t1="1.82855" t2="-1.93923" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="26" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="721840665" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+    </Group>
+    <EnvObject t0="-0.721367" t1="-0.213117" t2="-1.93923" s0="1" s1="1" s2="1" q0="0" q1="-0.608761" q2="0" q3="0.793353" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/arrow.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="string" val="721840665" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
+    <Group t0="-0.85219" t1="0.0785491" t2="7.44079" s0="4.01" s1="4.51" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="36" version="1">
+        <parameters />
+        <Hotspot t0="-0.85219" t1="0.328549" t2="7.44079" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="33" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Identifier" type="string" val="1036188430" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="2" />
+                <parameter name="Object Path" type="string" val="Data/Objects/arrow.xml" />
+                <parameter name="Play mode" type="int" val="0" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="1" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="-0.85219" t1="-1.67145" t2="7.44079" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="34" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1036188430" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-0.85219" t1="1.82855" t2="7.44079" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="35" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1036188430" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+    </Group>
+    <EnvObject t0="-0.85219" t1="-0.213117" t2="7.44079" s0="1" s1="1" s2="1" q0="0" q1="-0.608761" q2="0" q3="0.793353" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/arrow.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="string" val="1036188430" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
+    <Group t0="5.25355" t1="0.0785477" t2="2.2232" s0="4.01" s1="4.51" s2="4.01" q0="-1" q1="0" q2="0" q3="0" id="45" version="1">
+        <parameters />
+        <Hotspot t0="5.25355" t1="-0.171452" t2="2.2232" s0="1" s1="1" s2="1" q0="-1" q1="0" q2="0" q3="0" id="42" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Identifier" type="string" val="1376682692" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="2" />
+                <parameter name="Object Path" type="string" val="Data/Objects/arrow.xml" />
+                <parameter name="Play mode" type="int" val="0" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="1" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="5.25355" t1="1.82855" t2="2.2232" s0="1" s1="1" s2="1" q0="-1" q1="0" q2="0" q3="0" id="43" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1376682692" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="5.25355" t1="-1.67145" t2="2.2232" s0="1" s1="1" s2="1" q0="0" q1="0" q2="1" q3="0" id="44" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1376682692" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+    </Group>
+    <EnvObject t0="5.25355" t1="0.370217" t2="2.2232" s0="1" s1="1" s2="1" q0="-0.793353" q1="0" q2="0.608761" q3="0" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/arrow.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="string" val="1376682692" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
+</ActorObjects>
