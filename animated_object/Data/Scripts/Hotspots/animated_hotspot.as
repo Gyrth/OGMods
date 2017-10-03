@@ -707,10 +707,6 @@ void FindNewChildren(){
         Object@ obj = ReadObjectFromID(all_ids[i]);
         ScriptParams@ params = obj.GetScriptParams();
         if(!params.HasParam("" + hotspot.GetID())){
-            //If this child is already a child of an animation hotspot don't add it.
-            if(params.HasParam("Identifier") || params.HasParam("Name")){
-                continue;
-            }
             children.insertLast(all_ids[i]);
             params.AddString("BelongsTo", identifier);
             params.AddString("Name", "animation_child");
@@ -736,6 +732,9 @@ void WritePlaceholderIndexes(){
 void Dispose(){
     for(uint i = 0; i < node_ids.size(); i++){
         DeleteObjectID(node_ids[i]);
+    }
+    for(uint i = 0; i < children.size(); i++){
+        DeleteObjectID(children[i]);
     }
     DeleteObjectID(objectID);
 }
