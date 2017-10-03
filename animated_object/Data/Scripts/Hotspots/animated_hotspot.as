@@ -55,14 +55,12 @@ void Init() {
             if(temp_params.GetString("Identifier") == params.GetString("Identifier")){
                 nr_with_ident++;
             }
-        }else if(temp_params.HasParam("BelongsTo")){
-            Print("BelongsTo " + temp_params.GetString("BelongsTo") + "\n");
         }
     }
-    Print("NR with same identifier: " + nr_with_ident + "\n");
-    if(nr_with_ident > 1){
-        MarkAllObjects();
+    if(nr_with_ident == 2){
         rewrite_identifier = true;
+    }else if(nr_with_ident > 2){
+        DisplayError("Uuuuuuhhmmm", "There are more than 2 animation hotspots with the same identifier, how did you manage to do that?");
     }
 }
 
@@ -357,7 +355,7 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
         vec3 path_direction = normalize(new_position - object.GetTranslation());
         vec3 up_direction = normalize(mix(previous_pathpoint.GetRotation(), current_pathpoint.GetRotation(), alpha) * vec3(0.0f, 1.0f, 0.0f));
 
-        float rotation_y = atan2(path_direction.z, -path_direction.x) - 90/180.0f*pi;
+        float rotation_y = atan2(path_direction.z, -path_direction.x) - (90 / 180.0f * pi);
         float rotation_x = asin(-path_direction.y);
 
         vec3 previous_direction = normalize(previous_pathpoint.GetRotation() * vec3(1.0f, 0.0f, 0.0f));
@@ -534,28 +532,38 @@ void PostInit(){
         //The animation hotspot is already added to the level or loaded via group.
         if(rewrite_identifier){
             //The anim is loaded as a group.
-            params.SetString("Identifier", GetUniqueIdentifier());
-            identifier = params.GetString("Identifier");
+            array<int> found_children;
             array<int> found_placeholders;
             array<int> all_objects = GetObjectIDs();
+            //Get all the objects that belong to this identifier.
             for(uint i = 0; i < all_objects.size(); i++){
                 Object@ obj = ReadObjectFromID(all_objects[i]);
                 ScriptParams@ obj_params = obj.GetScriptParams();
-                if(!obj_params.HasParam("" + hotspot.GetID())){
-                    if(obj_params.HasParam("Name")){
-                        if(obj_params.GetString("Name") == "animation_key"){
-                            found_placeholders.insertLast(all_objects[i]);
-                        }else if(obj_params.GetString("Name") == "animation_child"){
-                            children.insertLast(all_objects[i]);
-                        }else if(obj_params.GetString("Name") == "animation_main"){
-                            objectID = all_objects[i];
-                        }
-                        obj_params.SetString("BelongsTo", identifier);
+                if(obj_params.HasParam("BelongsTo") && obj_params.GetString("Name") != "animation_main" && obj_params.GetString("Name") != "animation_child"){
+                    if(obj_params.GetString("BelongsTo") == params.GetString("Identifier")){
+                        found_children.insertLast(all_objects[i]);
                     }
-                }else{
-                    obj_params.Remove("" + hotspot.GetID());
                 }
             }
+            //We got all the children so a new identifier can be generated.
+            params.SetString("Identifier", GetUniqueIdentifier());
+            identifier = params.GetString("Identifier");
+            //Now the last half of those will be the children of the new animation hotspot.
+            for(uint i = found_children.size() / 2; i < found_children.size(); i++){
+                Object@ obj = ReadObjectFromID(found_children[i]);
+                ScriptParams@ obj_params = obj.GetScriptParams();
+                if(obj_params.HasParam("Name")){
+                    if(obj_params.GetString("Name") == "animation_key"){
+                        found_placeholders.insertLast(found_children[i]);
+                    }else if(obj_params.GetString("Name") == "animation_child"){
+                        children.insertLast(found_children[i]);
+                    }else if(obj_params.GetString("Name") == "animation_main"){
+                        objectID = found_children[i];
+                    }
+                }
+                obj_params.SetString("BelongsTo", identifier);
+            }
+
             node_ids.resize(found_placeholders.size());
             //Now put the placeholders back in order.
             for(uint i = 0; i < found_placeholders.size(); i++){
@@ -677,19 +685,6 @@ void CreateMainAnimationObject(){
     object_params.AddString("BelongsTo", identifier);
     object_params.AddString("Name", "animation_main");
     FindNewChildren();
-
-    string all;
-    for(uint i = 0; i < children.size(); i++){
-        all += ", " + children[i];
-    }
-    for(uint i = 0; i < node_ids.size(); i++){
-        all += ", " + node_ids[i];
-    }
-
-    all += ", " + objectID;
-
-    params.SetString("All IDS", all);
-
 }
 
 void MarkAllObjects(){

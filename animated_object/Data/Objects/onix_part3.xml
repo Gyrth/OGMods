@@ -1,0 +1,52 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="13.0507" t1="4.07866" t2="-9.61296" s0="18.2616" s1="18.2616" s2="29.3134" q0="0" q1="0" q2="0" q3="1" id="26" version="1">
+        <parameters />
+        <Hotspot t0="13.0507" t1="4.07866" t2="-4.08708" s0="4.56291" s1="4.56291" s2="4.56291" q0="0" q1="0" q2="0" q3="1" id="15" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="All IDS" type="string" val=", 16, 21, 22, 23, 24, 17, 18, 24" />
+                <parameter name="Const speed" type="int" val="0" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Identifier" type="string" val="988151169" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="2" />
+                <parameter name="Object Path" type="string" val="Data/Objects/onix_part2.xml" />
+                <parameter name="Play mode" type="int" val="1" />
+                <parameter name="Scale Object Preview" type="int" val="1" />
+                <parameter name="Seconds" type="float" val="2" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="13.0507" t1="4.07866" t2="-4.08708" s0="11.3906" s1="11.3906" s2="11.3906" q0="0" q1="0.965926" q2="0" q3="-0.258819" id="17" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="988151169" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="13.0507" t1="4.07866" t2="-4.08708" s0="11.3906" s1="11.3906" s2="11.3906" q0="0" q1="0.965926" q2="0" q3="0.258819" id="18" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="988151169" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="13.3533" t1="3.67459" t2="-18.6546" s0="1" s1="1.5" s2="0.666667" q0="0.707107" q1="0" q2="0" q3="0.707107" id="20" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>
