@@ -253,7 +253,6 @@ void SetParameters() {
     params.AddIntCheckbox("Draw path lines", false);
     params.AddIntCheckbox("Draw connect lines", true);
     params.AddIntCheckbox("Scale Object Preview", false);
-    params.AddInt("Main Object ID", -1);
     //Unfortunately I can not get the model path from the xml file via scripting.
     //So the model needs to be declared seperatly.
     params.AddString("Model Path", "Data/Models/arrow.obj");
@@ -322,7 +321,7 @@ void Reset(){
 
 bool CheckObjectsExist(){
     if(!ObjectExists(objectID)){
-        /*CreateMainAnimationObject();*/
+        CreateMainAnimationObject();
         return false;
     }
 
@@ -597,12 +596,41 @@ void PlayAvailableSound(){
 }
 
 void UpdateAnimationKeys(){
+    bool reset = false;
+    //Check for new animation keys that have been duplicated.
+    array<int> all_placeholders = GetObjectIDsType(_placeholder_object);
+    for(uint i = 0; i < all_placeholders.size(); i++){
+        Object@ obj = ReadObjectFromID(all_placeholders[i]);
+        ScriptParams@ obj_params = obj.GetScriptParams();
+        if(obj_params.HasParam("BelongsTo")){
+            if(obj_params.GetString("BelongsTo") == identifier && node_ids.find(all_placeholders[i]) == -1){
+                node_ids.insertAt(obj_params.GetInt("Index") + 1, all_placeholders[i]);
+                params.SetInt("Number of Keys", params.GetInt("Number of Keys") + 1);
+                WritePlaceholderIndexes();
+                reset = true;
+            }
+        }
+    }
+    //Check for deleted animation keys.
+    for(uint i = 0; i < node_ids.size(); i++){
+        if(!ObjectExists(node_ids[i])){
+            node_ids.removeAt(i);
+            params.SetInt("Number of Keys", node_ids.size());
+            i--;
+            WritePlaceholderIndexes();
+            reset = true;
+        }
+    }
+    //A minimum of 2 keys is needed.
+    if(params.GetInt("Number of Keys") < 2){
+        params.SetInt("Number of Keys", 2);
+    }
     //Create more placeholders if there aren't enough in the scene.
-    if(node_ids.size() != uint(params.GetFloat("Number of Keys"))){
-        if(node_ids.size() < uint(params.GetFloat("Number of Keys"))){
+    if(node_ids.size() != uint(params.GetInt("Number of Keys"))){
+        if(node_ids.size() < uint(params.GetInt("Number of Keys"))){
             CreatePathpoint();
             WritePlaceholderIndexes();
-        }else if(node_ids.size() > uint32(params.GetFloat("Number of Keys"))){
+        }else if(node_ids.size() > uint(params.GetInt("Number of Keys"))){
             for(uint i = 0; i < node_ids.size(); i++){
                 Print(" " + node_ids[i]);
             }
@@ -612,6 +640,9 @@ void UpdateAnimationKeys(){
             node_ids.removeLast();
             WritePlaceholderIndexes();
         }
+        reset = true;
+    }
+    if(reset){
         Reset();
     }
 }
@@ -751,21 +782,23 @@ void CreatePathpoint(){
   newObj.SetTranslatable(true);
   newObj.SetRotatable(true);
   newObj.SetScalable(true);
+  newObj.SetCopyable(true);
+  newObj.SetDeletable(true);
 
   ScriptParams@ placeholderParams = newObj.GetScriptParams();
   //When a new pathpoint is created the hotspot ID is added to it's parameters.
   //This will be used when the level is closed and loaded again.
   placeholderParams.AddString("BelongsTo", identifier);
   placeholderParams.AddString("Playsound", "");
-  newObj.SetTranslation(main_hotspot.GetTranslation() + (node_ids.size() * vec3(0.0f,1.0f,0.0f)));
+  newObj.SetTranslation(main_hotspot.GetTranslation() + ((node_ids.size() - 1) * vec3(0.0f,1.0f,0.0f)));
 }
 
 void CreateMainAnimationObject(){
     Print("Create main object\n");
     MarkAllObjects();
     objectID = CreateObject(objectPath, false);
-    params.SetInt("Main Object ID", objectID);
     Object@ main_object = ReadObjectFromID(objectID);
+    main_object.SetSelectable(false);
     ScriptParams@ object_params = main_object.GetScriptParams();
     object_params.AddString("BelongsTo", identifier);
     object_params.AddString("Name", "animation_main");
@@ -801,7 +834,7 @@ void FindNewChildren(){
 void WritePlaceholderIndexes(){
     for(uint i = 0; i < node_ids.size(); i++){
         if(!ObjectExists(node_ids[i])){
-            return;
+            continue;
         }
         Object@ placeholder = ReadObjectFromID(node_ids[i]);
         ScriptParams@ placeholder_params = placeholder.GetScriptParams();
@@ -812,10 +845,10 @@ void WritePlaceholderIndexes(){
 void Dispose(){
     if(!GetInputDown(0, "z")){
         for(uint i = 0; i < node_ids.size(); i++){
-            DeleteObjectID(node_ids[i]);
+            QueueDeleteObjectID(node_ids[i]);
         }
         for(uint i = 0; i < children.size(); i++){
-            QueueDeleteObjectID(children[i]);
+            DeleteObjectID(children[i]);
         }
         DeleteObjectID(objectID);
     }
