@@ -29,129 +29,16 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <Hotspot t0="-12.8982" t1="-2.42134" t2="14.9872" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" type_file="Data/Objects/animated_hotspot.xml">
-        <parameters>
-            <parameter name="AI trigger" type="int" val="0" />
-            <parameter name="Const speed" type="int" val="1" />
-            <parameter name="Draw connect lines" type="int" val="1" />
-            <parameter name="Draw path lines" type="int" val="0" />
-            <parameter name="Draw preview objects" type="int" val="1" />
-            <parameter name="Forward X" type="int" val="0" />
-            <parameter name="Forward Y" type="int" val="0" />
-            <parameter name="Forward Z" type="float" val="0" />
-            <parameter name="Identifier" type="string" val="1037657849" />
-            <parameter name="Interpolate rotation" type="int" val="0" />
-            <parameter name="Interpolate translation" type="int" val="0" />
-            <parameter name="Interpolation" type="float" val="1" />
-            <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
-            <parameter name="Number of Keys" type="int" val="4" />
-            <parameter name="Object Path" type="string" val="Data/Objects/cart.xml" />
-            <parameter name="Play mode" type="int" val="0" />
-            <parameter name="Scale Object Preview" type="int" val="0" />
-            <parameter name="Seconds" type="float" val="8.41" />
-        </parameters>
-    </Hotspot>
-    <CameraObject t0="-12.2981" t1="3.72267" t2="24.4496" s0="1" s1="1" s2="1" q0="0.189048" q1="-0.0237848" q2="0.00458042" q3="0.981669" id="1">
+    <CameraObject t0="-15.8311" t1="5.15504" t2="28.3987" s0="1" s1="1" s2="1" q0="0.220277" q1="0.179481" q2="-0.0412733" q3="0.957894" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="-25.3592" t1="-3.42112" t2="14.1189" s0="35.2544" s1="1" s2="18.1302" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <PlaceholderObject t0="-9.69598" t1="-1.17927" t2="18.5156" s0="2.45486" s1="2.45486" s2="2.45486" q0="0" q1="-0.25455" q2="0" q3="0.96706" id="4" type_file="" special_type="0">
-        <parameters>
-            <parameter name="BelongsTo" type="string" val="1037657849" />
-            <parameter name="Index" type="int" val="0" />
-            <parameter name="Name" type="string" val="animation_key" />
-            <parameter name="Playsound" type="string" val="" />
-        </parameters>
-        <Connections>
-            <Connection id="-1" />
-        </Connections>
-    </PlaceholderObject>
-    <PlaceholderObject t0="-8.96515" t1="-1.17413" t2="12.3458" s0="2.62199" s1="2.62199" s2="2.62199" q0="0" q1="0.441365" q2="0" q3="0.897328" id="5" type_file="" special_type="0">
-        <parameters>
-            <parameter name="BelongsTo" type="string" val="1037657849" />
-            <parameter name="Index" type="int" val="1" />
-            <parameter name="Name" type="string" val="animation_key" />
-            <parameter name="Playsound" type="string" val="" />
-        </parameters>
-        <Connections>
-            <Connection id="-1" />
-        </Connections>
-    </PlaceholderObject>
-    <PlaceholderObject t0="-14.5263" t1="-1.14269" t2="12.7144" s0="2.71573" s1="2.71573" s2="2.71573" q0="0" q1="0.949491" q2="0" q3="0.313795" id="6" type_file="" special_type="0">
-        <parameters>
-            <parameter name="BelongsTo" type="string" val="1037657849" />
-            <parameter name="Index" type="int" val="2" />
-            <parameter name="Name" type="string" val="animation_key" />
-            <parameter name="Playsound" type="string" val="" />
-        </parameters>
-        <Connections>
-            <Connection id="-1" />
-        </Connections>
-    </PlaceholderObject>
-    <PlaceholderObject t0="-14.7388" t1="-0.946582" t2="18.39" s0="2.88028" s1="2.88028" s2="2.88028" q0="0" q1="-0.916637" q2="0" q3="0.399721" id="7" type_file="" special_type="0">
-        <parameters>
-            <parameter name="BelongsTo" type="string" val="1037657849" />
-            <parameter name="Index" type="int" val="3" />
-            <parameter name="Name" type="string" val="animation_key" />
-            <parameter name="Playsound" type="string" val="" />
-        </parameters>
-        <Connections>
-            <Connection id="-1" />
-        </Connections>
-    </PlaceholderObject>
-    <Group t0="-10.9022" t1="-1.16318" t2="12.4742" s0="1.74779" s1="1.80744" s2="3.45887" q0="0" q1="0.669735" q2="0" q3="0.742601" id="14" version="1">
-        <parameters>
-            <parameter name="BelongsTo" type="string" val="1037657849" />
-            <parameter name="Name" type="string" val="animation_main" />
-        </parameters>
-        <EnvObject t0="-10.8567" t1="-1.68812" t2="12.4714" s0="1.86192" s1="1.86192" s2="1.86192" q0="0.5281" q1="0.470224" q2="-0.470224" q3="0.5281" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
-            <parameters>
-                <parameter name="BelongsTo" type="string" val="1037657849" />
-                <parameter name="Name" type="string" val="animation_child" />
-            </parameters>
-        </EnvObject>
-        <EnvObject t0="-10.9552" t1="-1.84891" t2="13.2143" s0="1" s1="1.24165" s2="1.18139" q0="-0.5281" q1="0.470224" q2="0.470224" q3="0.5281" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
-            <parameters>
-                <parameter name="BelongsTo" type="string" val="1037657849" />
-                <parameter name="Name" type="string" val="animation_child" />
-            </parameters>
-        </EnvObject>
-        <EnvObject t0="-10.7093" t1="-0.993034" t2="12.5198" s0="1.74584" s1="0.786737" s2="1.91577" q0="0" q1="0.664997" q2="0" q3="0.746846" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
-            <parameters>
-                <parameter name="BelongsTo" type="string" val="1037657849" />
-                <parameter name="Name" type="string" val="animation_child" />
-            </parameters>
-        </EnvObject>
-        <EnvObject t0="-10.3788" t1="-0.990633" t2="12.5612" s0="1.7867" s1="0.4667" s2="1.78186" q0="0.5281" q1="0.470224" q2="-0.470224" q3="0.5281" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
-            <parameters>
-                <parameter name="BelongsTo" type="string" val="1037657849" />
-                <parameter name="Name" type="string" val="animation_child" />
-            </parameters>
-        </EnvObject>
-        <EnvObject t0="-10.0456" t1="-1.37403" t2="12.6133" s0="1.68243" s1="0.448179" s2="1.78186" q0="0" q1="0.664997" q2="0" q3="0.746846" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
-            <parameters>
-                <parameter name="BelongsTo" type="string" val="1037657849" />
-                <parameter name="Name" type="string" val="animation_child" />
-            </parameters>
-        </EnvObject>
-        <EnvObject t0="-10.8576" t1="-2.00402" t2="12.4712" s0="1.86192" s1="1.86192" s2="1.86192" q0="0.5281" q1="0.470224" q2="-0.470224" q3="0.5281" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
-            <parameters>
-                <parameter name="BelongsTo" type="string" val="1037657849" />
-                <parameter name="Name" type="string" val="animation_child" />
-            </parameters>
-        </EnvObject>
-        <EnvObject t0="-10.7769" t1="-1.84787" t2="11.725" s0="1" s1="1.21886" s2="1.41679" q0="-0.5281" q1="0.470224" q2="0.470224" q3="0.5281" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
-            <parameters>
-                <parameter name="BelongsTo" type="string" val="1037657849" />
-                <parameter name="Name" type="string" val="animation_child" />
-            </parameters>
-        </EnvObject>
-    </Group>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Animation Group" path="Data/Objects/animation_group.xml" thumbnail_path="Data/UI/spawner/animated_object.png" />
     <SpawnerItem display_name="double_animation_group.xml" path="Data/Objects/double_animation_group.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Animated Object" path="Data/Objects/animated_hotspot.xml" thumbnail_path="Data/UI/spawner/animated_object.png" />
+    <SpawnerItem display_name="quintuple_animation_group.xml" path="Data/Objects/quintuple_animation_group.xml" thumbnail_path="empty_placeholder.png" />
 </RecentItems>
