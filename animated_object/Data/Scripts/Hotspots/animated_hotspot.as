@@ -85,6 +85,7 @@ void Init() {
                 Print("Creating new main animation object " + objectPath + "\n");
                 CreateMainAnimationObject();
             }
+            DisplayError("ed", "Rewrite identifier " + objectPath);
             rewrite_identifier = true;
         }else if(nr_with_ident == 1){
             //The animation group is loaded via a group and this identifier is unique.

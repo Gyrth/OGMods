@@ -1,9 +1,9 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="-4.8982" t1="2.57867" t2="14.4872" s0="4.01" s1="4.01" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="6" version="1">
+    <Group t0="-16.0586" t1="-2.42112" t2="12.6707" s0="11.951" s1="11.951" s2="23.9969" q0="0" q1="0" q2="0" q3="1" id="14" version="1">
         <parameters />
-        <Hotspot t0="-4.8982" t1="2.57867" t2="14.4872" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" type_file="Data/Objects/animated_hotspot.xml">
+        <Hotspot t0="-16.0586" t1="-2.42112" t2="18.6936" s0="2.98526" s1="2.98526" s2="2.98526" q0="0" q1="0" q2="0" q3="1" id="10" type_file="Data/Objects/animated_hotspot.xml">
             <parameters>
                 <parameter name="AI trigger" type="int" val="0" />
                 <parameter name="Const speed" type="int" val="0" />
@@ -18,11 +18,11 @@
                 <parameter name="Number of Keys" type="int" val="2" />
                 <parameter name="Object Path" type="string" val="Data/Objects/onix_part1.xml" />
                 <parameter name="Play mode" type="int" val="0" />
-                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Scale Object Preview" type="int" val="1" />
                 <parameter name="Seconds" type="float" val="2" />
             </parameters>
         </Hotspot>
-        <PlaceholderObject t0="-4.8982" t1="3.57866" t2="14.4872" s0="1" s1="1" s2="1" q0="0" q1="-0.258819" q2="0" q3="0.965926" id="4" type_file="" special_type="0">
+        <PlaceholderObject t0="-16.0586" t1="-1.41226" t2="18.6936" s0="7.66098" s1="7.661" s2="7.66098" q0="0" q1="-0.258819" q2="0" q3="0.965926" id="12" type_file="" special_type="0">
             <parameters>
                 <parameter name="BelongsTo" type="string" val="1037657849" />
                 <parameter name="Index" type="int" val="0" />
@@ -33,7 +33,7 @@
                 <Connection id="-1" />
             </Connections>
         </PlaceholderObject>
-        <PlaceholderObject t0="-4.8982" t1="3.57866" t2="14.4872" s0="1" s1="1" s2="1" q0="0" q1="0.258819" q2="0" q3="0.965926" id="5" type_file="" special_type="0">
+        <PlaceholderObject t0="-16.0586" t1="-1.41226" t2="18.6936" s0="7.661" s1="7.66101" s2="7.66101" q0="0" q1="0.258819" q2="0" q3="0.965926" id="13" type_file="" special_type="0">
             <parameters>
                 <parameter name="BelongsTo" type="string" val="1037657849" />
                 <parameter name="Index" type="int" val="1" />
@@ -44,5 +44,8 @@
                 <Connection id="-1" />
             </Connections>
         </PlaceholderObject>
+        <EnvObject t0="-16.1051" t1="-0.96005" t2="6.82079" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="22" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+            <parameters />
+        </EnvObject>
     </Group>
 </ActorObjects>

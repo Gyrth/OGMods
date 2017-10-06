@@ -1,17 +1,16 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="13.0507" t1="4.07866" t2="-9.61296" s0="18.2616" s1="18.2616" s2="29.3134" q0="0" q1="0" q2="0" q3="1" id="26" version="1">
+    <Group t0="-18.5364" t1="6.59824" t2="8.13247" s0="22.5683" s1="30.2292" s2="44.3615" q0="0" q1="0" q2="0" q3="1" id="22" version="1">
         <parameters />
-        <Hotspot t0="13.0507" t1="4.07866" t2="-4.08708" s0="4.56291" s1="4.56291" s2="4.56291" q0="0" q1="0" q2="0" q3="1" id="15" type_file="Data/Objects/animated_hotspot.xml">
+        <Hotspot t0="-17.6369" t1="-2.54084" t2="24.3377" s0="2.98526" s1="2.98526" s2="2.98526" q0="0" q1="0" q2="0" q3="1" id="11" type_file="Data/Objects/animated_hotspot.xml">
             <parameters>
                 <parameter name="AI trigger" type="int" val="0" />
-                <parameter name="All IDS" type="string" val=", 16, 21, 22, 23, 24, 17, 18, 24" />
                 <parameter name="Const speed" type="int" val="0" />
                 <parameter name="Draw connect lines" type="int" val="1" />
                 <parameter name="Draw path lines" type="int" val="0" />
                 <parameter name="Draw preview objects" type="int" val="1" />
-                <parameter name="Identifier" type="string" val="988151169" />
+                <parameter name="Identifier" type="string" val="1037457849" />
                 <parameter name="Interpolate rotation" type="int" val="0" />
                 <parameter name="Interpolate translation" type="int" val="0" />
                 <parameter name="Interpolation" type="float" val="1" />
@@ -23,9 +22,9 @@
                 <parameter name="Seconds" type="float" val="2" />
             </parameters>
         </Hotspot>
-        <PlaceholderObject t0="13.0507" t1="4.07866" t2="-4.08708" s0="11.3906" s1="11.3906" s2="11.3906" q0="0" q1="0.965926" q2="0" q3="-0.258819" id="17" type_file="" special_type="0">
+        <PlaceholderObject t0="-24.583" t1="-1.53198" t2="24.3688" s0="7.66098" s1="7.661" s2="7.66098" q0="0" q1="-0.258819" q2="0" q3="0.965926" id="19" type_file="" special_type="0">
             <parameters>
-                <parameter name="BelongsTo" type="string" val="988151169" />
+                <parameter name="BelongsTo" type="string" val="1037457849" />
                 <parameter name="Index" type="int" val="0" />
                 <parameter name="Name" type="string" val="animation_key" />
                 <parameter name="Playsound" type="string" val="" />
@@ -34,9 +33,9 @@
                 <Connection id="-1" />
             </Connections>
         </PlaceholderObject>
-        <PlaceholderObject t0="13.0507" t1="4.07866" t2="-4.08708" s0="11.3906" s1="11.3906" s2="11.3906" q0="0" q1="0.965926" q2="0" q3="0.258819" id="18" type_file="" special_type="0">
+        <PlaceholderObject t0="-12.4897" t1="-1.53198" t2="24.2528" s0="7.661" s1="7.66101" s2="7.66101" q0="0" q1="0.258819" q2="0" q3="0.965926" id="20" type_file="" special_type="0">
             <parameters>
-                <parameter name="BelongsTo" type="string" val="988151169" />
+                <parameter name="BelongsTo" type="string" val="1037457849" />
                 <parameter name="Index" type="int" val="1" />
                 <parameter name="Name" type="string" val="animation_key" />
                 <parameter name="Playsound" type="string" val="" />
@@ -45,7 +44,76 @@
                 <Connection id="-1" />
             </Connections>
         </PlaceholderObject>
-        <EnvObject t0="13.3533" t1="3.67459" t2="-18.6546" s0="1" s1="1.5" s2="0.666667" q0="0.707107" q1="0" q2="0" q3="0.707107" id="20" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+        <EnvObject t0="-17.1597" t1="-0.0709095" t2="6.17053" s0="1" s1="1" s2="1" q0="0" q1="-0.00897869" q2="0" q3="0.99996" id="21" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1037457849" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-16.4009" t1="8.45522" t2="-0.905763" s0="1" s1="1" s2="1" q0="0.49998" q1="-0.00777578" q2="0.00448936" q3="0.865991" id="29" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1037457849" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-16.2877" t1="17.9637" t2="-7.21753" s0="1" s1="0.444444" s2="1" q0="0.181339" q1="-0.00882982" q2="0.00162834" q3="0.98338" id="33" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1037457849" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-16.2804" t1="14.2483" t2="-7.6283" s0="1" s1="0.444444" s2="1" q0="-0.0793578" q1="-0.00895038" q2="-0.000712454" q3="0.996806" id="34" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1037457849" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-13.1851" t1="17.317" t2="-11.8168" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.839" t1="17.1039" t2="-11.6364" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.9749" t1="17.9358" t2="-11.7063" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.1707" t1="17.9418" t2="-11.7063" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.052" t1="18.1525" t2="-11.7063" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.8133" t1="17.9094" t2="-11.7063" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.8711" t1="17.6273" t2="-11.7063" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.0216" t1="14.9341" t2="-12.0829" s0="1" s1="1" s2="1" q0="0" q1="-0.134079" q2="0.990971" q3="0" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.7122" t1="15.2522" t2="-12.2908" s0="1" s1="1" s2="1" q0="0" q1="-0.134079" q2="0.990971" q3="0" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.8889" t1="15.1041" t2="-12.0962" s0="1" s1="1" s2="1" q0="0" q1="-0.134079" q2="0.990971" q3="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.0847" t1="15.1101" t2="-12.0962" s0="1" s1="1" s2="1" q0="0" q1="-0.134079" q2="0.990971" q3="0" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.966" t1="15.3208" t2="-12.0962" s0="1" s1="1" s2="1" q0="0" q1="-0.134079" q2="0.990971" q3="0" id="59" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.7273" t1="15.0777" t2="-12.0962" s0="1" s1="1" s2="1" q0="0" q1="-0.134079" q2="0.990971" q3="0" id="60" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.7851" t1="14.7956" t2="-12.0962" s0="1" s1="1" s2="1" q0="0" q1="-0.134079" q2="0.990971" q3="0" id="61" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_stalactite.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.3447" t1="20.0543" t2="-12.1182" s0="0.416915" s1="0.71891" s2="1" q0="0" q1="0" q2="-0.534875" q3="0.844931" id="63" color_r="0.105882" color_g="0.0924953" color_b="0.0411073" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_boulder_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.5318" t1="19.9822" t2="-12.1182" s0="0.416915" s1="0.71891" s2="1" q0="0" q1="0" q2="-0.842606" q3="0.538531" id="65" color_r="0.105882" color_g="0.0924953" color_b="0.0411073" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_boulder_mossy.xml">
             <parameters />
         </EnvObject>
     </Group>
