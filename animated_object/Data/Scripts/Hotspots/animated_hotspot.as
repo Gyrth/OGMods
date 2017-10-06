@@ -614,7 +614,6 @@ void UpdateAnimationKeys(){
         }
         Reset();
     }
-    SetPlaceholderPreviews();
 }
 
 void UpdatePlayMode(){
@@ -699,11 +698,11 @@ void UpdatePlayMode(){
     }
 }
 
-void SetPlaceholderPreviews() {
-    if(!EditorModeActive() || MediaMode()){
+void DrawEditor(){
+    vec3 previousPos;
+    if(MediaMode()){
         return;
     }
-    vec3 previousPos;
     for(uint i = 0; i < uint(node_ids.length()); ++i){
         if(ObjectExists(node_ids[i])){
             Object @obj = ReadObjectFromID(node_ids[i]);
@@ -813,11 +812,11 @@ void WritePlaceholderIndexes(){
 void Dispose(){
     if(!GetInputDown(0, "z")){
         for(uint i = 0; i < node_ids.size(); i++){
-            QueueDeleteObjectID(node_ids[i]);
+            DeleteObjectID(node_ids[i]);
         }
         for(uint i = 0; i < children.size(); i++){
             QueueDeleteObjectID(children[i]);
         }
-        QueueDeleteObjectID(objectID);
+        DeleteObjectID(objectID);
     }
 }
