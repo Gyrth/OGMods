@@ -85,7 +85,7 @@ void Init() {
         }else if(nr_with_ident == 1){
             //The animation group is loaded via a group and this identifier is unique.
             /*RetrieveExistingAnimation();*/
-            if(!GetInputDown(0, "z")){
+            if(!GetInputDown(0, "z") && !GetInputDown(0, "lalt")){
                 Print("Creating new main animation object " + objectPath + "\n");
                 CreateMainAnimationObject();
             }
@@ -163,10 +163,10 @@ void PostInit(){
         objectPath = params.GetString("Object Path");
         model_path = params.GetString("Model Path");
 
-        params.AddString("Identifier", GetUniqueIdentifier());
+        /*params.AddString("Identifier", GetUniqueIdentifier());
         identifier = params.GetString("Identifier");
         Print("Creating new main object because it's a new anim hotspot.");
-        CreateMainAnimationObject();
+        CreateMainAnimationObject();*/
     }
     UpdatePlayMode();
     Reset();
@@ -313,6 +313,17 @@ void Reset(){
     if(node_ids.size() < 2 || objectID == -1){
       return;
     }
+
+    if(objectPath != params.GetString("Object Path")){
+        if(FileExists(params.GetString("Object Path"))){
+            objectPath = params.GetString("Object Path");
+            CreateMainAnimationObject();
+            Object@ object = ReadObjectFromID(objectID);
+            object.SetTranslation(ReadObjectFromID(node_ids[index]).GetTranslation());
+            object.SetRotation(ReadObjectFromID(node_ids[index]).GetRotation());
+        }
+    }
+
     index = 0;
     prev_node_id = -1;
     next_pathpoint = true;
@@ -326,7 +337,6 @@ void Reset(){
 
 bool CheckObjectsExist(){
     if(!ObjectExists(objectID)){
-        CreateMainAnimationObject();
         return false;
     }
 
@@ -417,10 +427,13 @@ void Update(){
     }
     PostInit();
     UpdateAnimationKeys();
-    CheckParamChanges();
-    if(!CheckObjectsExist()){
-    return;
+    if(CheckParamChanges()){
+        return;
     }
+    if(!CheckObjectsExist()){
+        return;
+    }
+
     if(playing && done == false || playing && looping && !on_enter){
       Object@ object = ReadObjectFromID(objectID);
       vec3 nextPathpointPos = ReadObjectFromID(node_ids[index]).GetTranslation();
@@ -493,11 +506,12 @@ void Update(){
     UpdateTransform();
 }
 
-void CheckParamChanges(){
+bool CheckParamChanges(){
     if(EditorModeActive()){
         if(model_path != params.GetString("Model Path")){
             if(FileExists(params.GetString("Model Path"))){
                 model_path = params.GetString("Model Path");
+                return true;
             }
         }
         if(objectPath != params.GetString("Object Path")){
@@ -507,19 +521,17 @@ void CheckParamChanges(){
                     DeleteObjectID(children[i]);
                 }
                 children.resize(0);
-                objectPath = params.GetString("Object Path");
-                CreateMainAnimationObject();
-                Object@ object = ReadObjectFromID(objectID);
-                object.SetTranslation(ReadObjectFromID(node_ids[index]).GetTranslation());
-                object.SetRotation(ReadObjectFromID(node_ids[index]).GetRotation());
+                ResetLevel();
+                return true;
             }
         }
         if(current_mode != PlayMode(params.GetInt("Play mode"))){
             Print("Changed play mode\n");
             UpdatePlayMode();
-            Reset();
+            return true;
         }
     }
+    return false;
 }
 
 Object@ current_pathpoint;
