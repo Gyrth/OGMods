@@ -75,17 +75,16 @@ void Init() {
             }
         }
         Print("Found nr_with_ident " + nr_with_ident + "\n");
-        /*DisplayError("sd" , "Found nr_with_ident " + nr_with_ident);*/
         if(nr_with_ident == 0){
             Print("An empty animation hotspot is loaded\n");
         }else if(nr_with_ident == 2){
             //The anim is loaded as a group, and the identifier is already taken.
-            /*RewriteAnimationGroup();*/
             if(!GetInputDown(0, "z")){
                 Print("Creating new main animation object " + objectPath + "\n");
                 CreateMainAnimationObject();
-            }
-            DisplayError("ed", "Rewrite identifier " + objectPath);
+            };
+            /*DisplayError("Uuuuuuhhmmm", "Rewrite identifier");*/
+            AddRewritingLevelParam();
             rewrite_identifier = true;
         }else if(nr_with_ident == 1){
             //The animation group is loaded via a group and this identifier is unique.
@@ -96,12 +95,47 @@ void Init() {
             }
             retrieve_children = true;
         }else if(nr_with_ident > 2){
-            /*DisplayError("Uuuuuuhhmmm", "There are more than 2 animation hotspots with the same identifier, how did you manage to do that?");*/
+            DisplayError("Uuuuuuhhmmm", "There are more than 2 animation hotspots with the same identifier, how did you manage to do that?");
             /*CreateMainAnimationObject();*/
             /*rewrite_identifier = true;*/
         }
     }
     Print("retrive children " + retrieve_children + "\n");
+}
+
+void AddRewritingLevelParam(){
+    ScriptParams@ level_params = level.GetScriptParams();
+    if(level_params.HasParam("RewritingIdentifier")){
+        level_params.SetString("RewritingIdentifier", level_params.GetString("RewritingIdentifier") + " " + identifier);
+    }else{
+        level_params.AddString("RewritingIdentifier", identifier);
+    }
+}
+
+void RemoveRewriteLevelParam(){
+    ScriptParams@ level_params = level.GetScriptParams();
+    if(!level_params.HasParam("RewritingIdentifier")){
+        return;
+    }
+    array<string> ids = level_params.GetString("RewritingIdentifier").split(" ");
+    for(uint i = 0; i < ids.size(); i++){
+        if(ids[i] == identifier){
+            ids.removeAt(i);
+            i--;
+        }
+    }
+
+    if(ids.size() > 0){
+        //Still some identifiers left to rewrite.
+        string new_param = "";
+        for(uint i = 0; i < ids.size(); i++){
+            new_param += " " + ids[i];
+        }
+        level_params.SetString("RewritingIdentifier", new_param);
+    }else{
+        //No animation identifiers left to rewrite.
+        level_params.Remove("RewritingIdentifier");
+    }
 }
 
 void PostInit(){
@@ -115,6 +149,7 @@ void PostInit(){
         RetrieveExistingAnimation();
         retrieve_children = false;
     }else if(rewrite_identifier){
+        RemoveRewriteLevelParam();
         RewriteAnimationGroup();
         rewrite_identifier = false;
     }else{
@@ -148,6 +183,7 @@ void RewriteAnimationGroup(){
             }
         }
     }
+    Print("Found BelongsTo " + found_children.size() + "\n");
     //We got all the children so a new identifier can be generated.
     params.SetString("Identifier", GetUniqueIdentifier());
     identifier = params.GetString("Identifier");
@@ -176,13 +212,17 @@ void RewriteAnimationGroup(){
     for(uint i = 0; i < found_placeholders.size(); i++){
         ScriptParams@ placeholder_params = ReadObjectFromID(found_placeholders[i]).GetScriptParams();
         if(placeholder_params.HasParam("Index")){
+            Print("adding id " + found_placeholders[i] + " to index " + (placeholder_params.GetInt("Index")) + "\n");
+            if(placeholder_params.GetInt("Index") > int(node_ids.size() - 1)){
+                continue;
+            }
             node_ids[placeholder_params.GetInt("Index")] = found_placeholders[i];
             if(placeholder_params.GetInt("Index") + 1 > size){
                 size = placeholder_params.GetInt("Index") + 1;
             }
-            Print("adding id " + found_placeholders[i] + " to index " + placeholder_params.GetInt("Index") + "\n");
         }
     }
+    Print("size " + size + "\n");
     node_ids.resize(size);
     Print("Done rewriting\n");
     for(uint i = 0; i < node_ids.size(); i++){
@@ -597,6 +637,10 @@ void PlayAvailableSound(){
 }
 
 void UpdateAnimationKeys(){
+    ScriptParams@ level_params = level.GetScriptParams();
+    if(level_params.HasParam("RewritingIdentifier")){
+        return;
+    }
     bool reset = false;
     //Check for new animation keys that have been duplicated.
     array<int> all_placeholders = GetObjectIDsType(_placeholder_object);
@@ -607,7 +651,6 @@ void UpdateAnimationKeys(){
             if(obj_params.GetString("BelongsTo") == identifier && node_ids.find(all_placeholders[i]) == -1){
                 node_ids.insertAt(obj_params.GetInt("Index") + 1, all_placeholders[i]);
                 params.SetInt("Number of Keys", params.GetInt("Number of Keys") + 1);
-                WritePlaceholderIndexes();
                 reset = true;
             }
         }
@@ -618,7 +661,6 @@ void UpdateAnimationKeys(){
             node_ids.removeAt(i);
             params.SetInt("Number of Keys", node_ids.size());
             i--;
-            WritePlaceholderIndexes();
             reset = true;
         }
     }
@@ -630,7 +672,6 @@ void UpdateAnimationKeys(){
     if(node_ids.size() != uint(params.GetInt("Number of Keys"))){
         if(node_ids.size() < uint(params.GetInt("Number of Keys"))){
             CreatePathpoint();
-            WritePlaceholderIndexes();
         }else if(node_ids.size() > uint(params.GetInt("Number of Keys"))){
             for(uint i = 0; i < node_ids.size(); i++){
                 Print(" " + node_ids[i]);
@@ -639,11 +680,11 @@ void UpdateAnimationKeys(){
             Print("Trying to delete " + node_ids[node_ids.size() - 1] + " size " + node_ids.size() + " exists " + ObjectExists(node_ids[node_ids.size() - 1]) + "\n");
             DeleteObjectID(node_ids[node_ids.size() - 1]);
             node_ids.removeLast();
-            WritePlaceholderIndexes();
         }
         reset = true;
     }
     if(reset){
+        WritePlaceholderIndexes();
         Reset();
     }
 }
@@ -846,11 +887,17 @@ void WritePlaceholderIndexes(){
 void Dispose(){
     if(!GetInputDown(0, "z")){
         for(uint i = 0; i < node_ids.size(); i++){
-            QueueDeleteObjectID(node_ids[i]);
+            if(ObjectExists(node_ids[i])){
+                DeleteObjectID(node_ids[i]);
+            }
         }
         for(uint i = 0; i < children.size(); i++){
-            DeleteObjectID(children[i]);
+            if(ObjectExists(children[i])){
+                QueueDeleteObjectID(children[i]);
+            }
         }
-        DeleteObjectID(objectID);
+        if(ObjectExists(objectID)){
+            DeleteObjectID(objectID);
+        }
     }
 }

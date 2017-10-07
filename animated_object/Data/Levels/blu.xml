@@ -29,12 +29,62 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-2.91479" t1="17.643" t2="10.572" s0="1" s1="1" s2="1" q0="0.280646" q1="-0.646148" q2="0.27762" q3="0.653191" id="1">
+    <CameraObject t0="35.4774" t1="4.19255" t2="-0.496295" s0="1" s1="1" s2="1" q0="0.113934" q1="0.696251" q2="-0.113394" q3="0.699568" id="1">
         <parameters />
     </CameraObject>
-    <EnvObject t0="-25.3592" t1="-3.42112" t2="14.1189" s0="35.2544" s1="1" s2="18.1302" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="30.9991" t1="-3.42105" t2="7.14662" s0="91.6144" s1="1" s2="96.5891" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
+    <EnvObject t0="46.2328" t1="2.01228" t2="-0.953076" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/arrow.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="string" val="1585109026" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+    </EnvObject>
+    <Group t0="44.7328" t1="1.4873" t2="-4.38028" s0="4.01" s1="4.01" s2="7.86441" q0="0" q1="0" q2="0" q3="1" id="9" version="1">
+        <parameters />
+        <Hotspot t0="44.7328" t1="1.4873" t2="-6.30749" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="5" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Identifier" type="string" val="1585109026" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="2" />
+                <parameter name="Object Path" type="string" val="Data/Objects/arrow.xml" />
+                <parameter name="Play mode" type="int" val="0" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="1" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="46.2328" t1="1.07895" t2="-0.953076" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1585109026" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="46.2328" t1="2.07895" t2="-0.953076" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="8" type_file="" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1585109026" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+    </Group>
     <EnvObject t0="-44.6373" t1="5.56651" t2="-8.82905" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="23" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_boulder_mossy.xml">
         <parameters />
     </EnvObject>
@@ -50,67 +100,52 @@
     <EnvObject t0="-57.2493" t1="3.60483" t2="-9.72864" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="27" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-17.5092" t1="3.1885" t2="20.4259" s0="0.940515" s1="1.03343" s2="0.883517" q0="0" q1="0.0566928" q2="0" q3="0.998392" id="28" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+    <ActorObject t0="115.062" t1="21.602" t2="23.0956" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="165" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
         <parameters>
-            <parameter name="BelongsTo" type="string" val="1037657849" />
-            <parameter name="Name" type="string" val="animation_main" />
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
         </parameters>
-    </EnvObject>
-    <Group t0="-17.5092" t1="2.17964" t2="14.403" s0="11.951" s1="11.951" s2="23.9969" q0="0" q1="0" q2="0" q3="1" id="32" version="1">
-        <parameters />
-        <Hotspot t0="-17.5092" t1="2.17964" t2="20.4259" s0="2.98526" s1="2.98526" s2="2.98526" q0="0" q1="0" q2="0" q3="1" id="22" type_file="Data/Objects/animated_hotspot.xml">
-            <parameters>
-                <parameter name="AI trigger" type="int" val="0" />
-                <parameter name="Const speed" type="int" val="0" />
-                <parameter name="Draw connect lines" type="int" val="1" />
-                <parameter name="Draw path lines" type="int" val="0" />
-                <parameter name="Draw preview objects" type="int" val="1" />
-                <parameter name="Identifier" type="string" val="1037657849" />
-                <parameter name="Interpolate rotation" type="int" val="0" />
-                <parameter name="Interpolate translation" type="int" val="0" />
-                <parameter name="Interpolation" type="float" val="1" />
-                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
-                <parameter name="Number of Keys" type="int" val="2" />
-                <parameter name="Object Path" type="string" val="Data/Objects/onix_part1.xml" />
-                <parameter name="Play mode" type="int" val="0" />
-                <parameter name="Scale Object Preview" type="int" val="1" />
-                <parameter name="Seconds" type="float" val="2" />
-            </parameters>
-        </Hotspot>
-        <PlaceholderObject t0="-17.5092" t1="3.1885" t2="20.4259" s0="7.66098" s1="7.661" s2="7.66098" q0="0" q1="-0.258819" q2="0" q3="0.965926" id="29" type_file="" special_type="0">
-            <parameters>
-                <parameter name="BelongsTo" type="string" val="1037657849" />
-                <parameter name="Index" type="int" val="0" />
-                <parameter name="Name" type="string" val="animation_key" />
-                <parameter name="Playsound" type="string" val="" />
-            </parameters>
-            <Connections>
-                <Connection id="-1" />
-            </Connections>
-        </PlaceholderObject>
-        <PlaceholderObject t0="-17.5092" t1="3.1885" t2="20.4259" s0="7.661" s1="7.66101" s2="7.66101" q0="0" q1="0.258819" q2="0" q3="0.965926" id="30" type_file="" special_type="0">
-            <parameters>
-                <parameter name="BelongsTo" type="string" val="1037657849" />
-                <parameter name="Index" type="int" val="1" />
-                <parameter name="Name" type="string" val="animation_key" />
-                <parameter name="Playsound" type="string" val="" />
-            </parameters>
-            <Connections>
-                <Connection id="-1" />
-            </Connections>
-        </PlaceholderObject>
-        <EnvObject t0="-17.5557" t1="3.64071" t2="8.55308" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="31" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
-            <parameters />
-        </EnvObject>
-    </Group>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Animation Group" path="Data/Objects/animation_group.xml" thumbnail_path="Data/UI/spawner/animated_object.png" />
-    <SpawnerItem display_name="Animated Object" path="Data/Objects/animated_hotspot.xml" thumbnail_path="Data/UI/spawner/animated_object.png" />
     <SpawnerItem display_name="quintuple_animation_group.xml" path="Data/Objects/quintuple_animation_group.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="double_animation_group.xml" path="Data/Objects/double_animation_group.xml" thumbnail_path="empty_placeholder.png" />
-    <SpawnerItem display_name="onix_part3.xml" path="Data/Objects/onix_part3.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Strata Rock Block Mossy" path="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/strata_rock_block_mossy.png" />
     <SpawnerItem display_name="Strata Rocks All Mossy" path="Data/Objects/Environment/Rocks/strata_rocks/strata_rocks_all_mossy.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/strata_rocks_all_mossy.png" />
     <SpawnerItem display_name="onix_part2.xml" path="Data/Objects/onix_part2.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Cave Stalactite" path="Data/Objects/Environment/caves/cave_stalactite.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/cave_stalactite.png" />
+    <SpawnerItem display_name="onix_part3.xml" path="Data/Objects/onix_part3.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="onix_part4.xml" path="Data/Objects/onix_part4.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Animated Object" path="Data/Objects/animated_hotspot.xml" thumbnail_path="Data/UI/spawner/animated_object.png" />
 </RecentItems>
