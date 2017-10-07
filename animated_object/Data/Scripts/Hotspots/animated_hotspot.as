@@ -23,6 +23,8 @@ float pi = 3.14159265f;
 string identifier;
 bool retrieve_children = false;
 bool rewrite_identifier = false;
+bool wait = false;
+int other_hotspot_id = -1;
 
 enum PlayMode{
   kLoopForward = 0,
@@ -62,13 +64,16 @@ void Init() {
     }else{
         //The hotspot is created while the game is running.
         array<int> all_objects = GetObjectIDs();
-        Print("size " + all_objects.size() + "\n");
         int nr_with_ident = 0;
+        other_hotspot_id = -1;
         if(params.HasParam("Identifier")){
             for(uint32 i = 0; i < all_objects.size(); i++){
                 ScriptParams@ temp_params = ReadObjectFromID(all_objects[i]).GetScriptParams();
                 if(temp_params.HasParam("Identifier")){
                     if(temp_params.GetString("Identifier") == params.GetString("Identifier")){
+                        if(all_objects[i] != hotspot.GetID()){
+                            other_hotspot_id = all_objects[i];
+                        }
                         nr_with_ident++;
                     }
                 }
@@ -77,15 +82,6 @@ void Init() {
         Print("Found nr_with_ident " + nr_with_ident + "\n");
         if(nr_with_ident == 0){
             Print("An empty animation hotspot is loaded\n");
-        }else if(nr_with_ident == 2){
-            //The anim is loaded as a group, and the identifier is already taken.
-            if(!GetInputDown(0, "z")){
-                Print("Creating new main animation object " + objectPath + "\n");
-                CreateMainAnimationObject();
-            };
-            /*DisplayError("Uuuuuuhhmmm", "Rewrite identifier");*/
-            AddRewritingLevelParam();
-            rewrite_identifier = true;
         }else if(nr_with_ident == 1){
             //The animation group is loaded via a group and this identifier is unique.
             /*RetrieveExistingAnimation();*/
@@ -94,6 +90,15 @@ void Init() {
                 CreateMainAnimationObject();
             }
             retrieve_children = true;
+        }else if(nr_with_ident == 2){
+            /*DisplayError("er", "Two with same id " + objectPath);*/
+            //The anim is loaded as a group, and the identifier is already taken.
+            if(!GetInputDown(0, "z") && !GetInputDown(0, "lalt")){
+                Print("Creating new main animation object " + objectPath + "\n");
+                CreateMainAnimationObject();
+            }
+            AddRewritingLevelParam();
+            wait = true;
         }else if(nr_with_ident > 2){
             DisplayError("Uuuuuuhhmmm", "There are more than 2 animation hotspots with the same identifier, how did you manage to do that?");
             /*CreateMainAnimationObject();*/
@@ -170,65 +175,24 @@ void PostInit(){
 }
 
 void RewriteAnimationGroup(){
-    array<int> all_objects = GetObjectIDs();
-    array<int> found_children;
-    array<int> found_placeholders;
-    //Get all the objects that belong to this identifier.
-    for(uint i = 0; i < all_objects.size(); i++){
-        Object@ obj = ReadObjectFromID(all_objects[i]);
-        ScriptParams@ obj_params = obj.GetScriptParams();
-        if(obj_params.HasParam("BelongsTo")){
-            if(obj_params.GetString("BelongsTo") == params.GetString("Identifier")){
-                found_children.insertLast(all_objects[i]);
-            }
-        }
-    }
-    Print("Found BelongsTo " + found_children.size() + "\n");
     //We got all the children so a new identifier can be generated.
     params.SetString("Identifier", GetUniqueIdentifier());
     identifier = params.GetString("Identifier");
-    //Now the last half of those will be the children of the new animation hotspot.
-    for(uint i = found_children.size() / 2; i < found_children.size(); i++){
-        Object@ obj = ReadObjectFromID(found_children[i]);
-        ScriptParams@ obj_params = obj.GetScriptParams();
-        if(obj_params.HasParam("Name")){
-            if(obj_params.GetString("Name") == "animation_key"){
-                if(found_placeholders.find(found_children[i]) == -1){
-                    //Check if the animation key is already added.
-                    found_placeholders.insertLast(found_children[i]);
-                }
-            }else if(obj_params.GetString("Name") == "animation_child"){
-                children.insertLast(found_children[i]);
-            }else if(obj_params.GetString("Name") == "animation_main"){
-                objectID = found_children[i];
-            }
-        }
-        obj_params.SetString("BelongsTo", identifier);
-    }
-    node_ids.resize(found_placeholders.size());
-    int size = 0;
-    Print("Found animation keys " + found_placeholders.size() + "\n");
-    //Now put the placeholders back in order.
-    for(uint i = 0; i < found_placeholders.size(); i++){
-        ScriptParams@ placeholder_params = ReadObjectFromID(found_placeholders[i]).GetScriptParams();
-        if(placeholder_params.HasParam("Index")){
-            Print("adding id " + found_placeholders[i] + " to index " + (placeholder_params.GetInt("Index")) + "\n");
-            if(placeholder_params.GetInt("Index") > int(node_ids.size() - 1)){
-                continue;
-            }
-            node_ids[placeholder_params.GetInt("Index")] = found_placeholders[i];
-            if(placeholder_params.GetInt("Index") + 1 > size){
-                size = placeholder_params.GetInt("Index") + 1;
-            }
-        }
-    }
-    Print("size " + size + "\n");
-    node_ids.resize(size);
-    Print("Done rewriting\n");
+    Print("This anim has " + node_ids.size() + " anim keys\n");
     for(uint i = 0; i < node_ids.size(); i++){
-        Print(" " + node_ids[i]);
+        ScriptParams@ object_params = ReadObjectFromID(node_ids[i]).GetScriptParams();
+        object_params.SetString("BelongsTo", identifier);
     }
-    Print("\n");
+    Print("This anim has " + node_ids.size() + " children\n");
+    for(uint i = 0; i < children.size(); i++){
+        ScriptParams@ object_params = ReadObjectFromID(children[i]).GetScriptParams();
+        object_params.SetString("BelongsTo", identifier);
+    }
+    if(ObjectExists(objectID)){
+        ScriptParams@ main_obj_params = ReadObjectFromID(objectID).GetScriptParams();
+        main_obj_params.SetString("BelongsTo", identifier);
+    }
+    Print("Done rewriting\n");
 }
 
 void RetrieveExistingAnimation(){
@@ -380,14 +344,84 @@ bool CheckObjectsExist(){
     return true;
 }
 
+void ReceiveMessage(string msg){
+    TokenIterator token_iter;
+    token_iter.Init();
+    while(token_iter.FindNextToken(msg)){
+        string token = token_iter.GetToken(msg);
+        /*DisplayError("okay", "Received " + token);*/
+        if(token == "GetNonTakenObjects"){
+            token_iter.FindNextToken(msg);
+            int id = atoi(token_iter.GetToken(msg));
+            SendNonTakenObjects(id);
+        }else if(token == "AddAnimationKey"){
+            /*DisplayError("okay", "Adding AddAnimationKey ");*/
+            token_iter.FindNextToken(msg);
+            node_ids.insertLast(atoi(token_iter.GetToken(msg)));
+        }else if(token == "AddAnimationChild"){
+            token_iter.FindNextToken(msg);
+            children.insertLast(atoi(token_iter.GetToken(msg)));
+        }else if(token == "SetMainObject"){
+            token_iter.FindNextToken(msg);
+            objectID = atoi(token_iter.GetToken(msg));
+        }else if(token == "Done"){
+            wait = false;
+            RemoveRewriteLevelParam();
+            RewriteAnimationGroup();
+            CreateMainAnimationObject();
+        }
+    }
+}
+
+void SendNonTakenObjects(int id){
+    array<int> all_objects = GetObjectIDs();
+    string message = "";
+
+    for(uint32 i = 0; i < all_objects.size(); i++){
+        ScriptParams@ obj_params = ReadObjectFromID(all_objects[i]).GetScriptParams();
+        if(obj_params.HasParam("BelongsTo")){
+            if(obj_params.GetString("BelongsTo") == identifier){
+                Print("Found " + all_objects[i] + "\n");
+                if(obj_params.GetString("Name") == "animation_key"){
+                    if(node_ids.find(all_objects[i]) == -1){
+                        message += "AddAnimationKey " + all_objects[i] + " ";
+                    }
+                }else if(obj_params.GetString("Name") == "animation_child"){
+                    if(children.find(all_objects[i]) == -1){
+                        message += "AddAnimationChild " + all_objects[i] + " ";
+                    }
+                }else if(obj_params.GetString("Name") == "animation_main"){
+                    if(objectID != all_objects[i]){
+                        message += "SetMainObject " + all_objects[i] + " ";
+                    }
+                }
+            }
+        }
+    }
+    message += "Done";
+    Print("Whole message " + message + "\n");
+    Object@ target = ReadObjectFromID(id);
+    target.ReceiveScriptMessage(message);
+}
+
+
+bool send_retrieve = false;
 void Update(){
-  PostInit();
-  UpdateAnimationKeys();
-  CheckParamChanges();
-  if(!CheckObjectsExist()){
+    if(wait){
+        if(other_hotspot_id != -1){
+            Object@ other_hotspot = ReadObjectFromID(other_hotspot_id);
+            other_hotspot.ReceiveScriptMessage("GetNonTakenObjects " + hotspot.GetID());
+            other_hotspot_id = -1;
+        }
+        return;
+    }
+    PostInit();
+    UpdateAnimationKeys();
+    CheckParamChanges();
+    if(!CheckObjectsExist()){
     return;
-  }
-  if(playing && done == false || playing && looping && !on_enter){
+    }
+    if(playing && done == false || playing && looping && !on_enter){
       Object@ object = ReadObjectFromID(objectID);
       vec3 nextPathpointPos = ReadObjectFromID(node_ids[index]).GetTranslation();
       vec3 currentPos = object.GetTranslation();
@@ -455,8 +489,8 @@ void Update(){
           }
           PlayAvailableSound();
       }
-  }
-  UpdateTransform();
+    }
+    UpdateTransform();
 }
 
 void CheckParamChanges(){
