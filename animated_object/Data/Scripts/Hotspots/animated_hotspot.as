@@ -52,10 +52,10 @@ PlayMode current_mode;
 void Init() {
     //Read the parameters on first load so changes can be detected.
     if(params.HasParam("Identifier")){
-        current_mode = PlayMode(params.GetInt("Play mode"));
-        objectPath = params.GetString("Object Path");
         identifier = params.GetString("Identifier");
         model_path = params.GetString("Model Path");
+        current_mode = PlayMode(params.GetInt("Play mode"));
+        objectPath = params.GetString("Object Path");
     }
     if(ui_time == 0.0f){
         //The level is loaded with an existing animation hotspot in it.
@@ -82,6 +82,11 @@ void Init() {
         Print("Found nr_with_ident " + nr_with_ident + "\n");
         if(nr_with_ident == 0){
             Print("An empty animation hotspot is loaded\n");
+            SetParameters();
+            model_path = params.GetString("Model Path");
+            current_mode = PlayMode(params.GetInt("Play mode"));
+            objectPath = params.GetString("Object Path");
+            CreateMainAnimationObject();
         }else if(nr_with_ident == 1){
             //The animation group is loaded via a group and this identifier is unique.
             /*RetrieveExistingAnimation();*/
@@ -129,13 +134,16 @@ void RemoveRewriteLevelParam(){
             i--;
         }
     }
-
     if(ids.size() > 0){
         //Still some identifiers left to rewrite.
         string new_param = "";
         for(uint i = 0; i < ids.size(); i++){
-            new_param += " " + ids[i];
+            new_param += ids[i];
+            if(i != (ids.size() - 1)){
+                new_param += " ";
+            }
         }
+        Print("Writing " + new_param + "\n");
         level_params.SetString("RewritingIdentifier", new_param);
     }else{
         //No animation identifiers left to rewrite.
@@ -218,6 +226,7 @@ void RetrieveExistingAnimation(){
                 }else if(obj_params.GetString("Name") == "animation_main"){
                     Print("BelongsTo " + obj_params.GetString("BelongsTo") + " id " + all_objects[i] + " name " + obj_params.GetString("Name") + "\n");
                     objectID = all_objects[i];
+                    ReadObjectFromID(objectID).SetSelectable(false);
                 }
             }
         }
@@ -378,7 +387,10 @@ void ReceiveMessage(string msg){
             wait = false;
             RemoveRewriteLevelParam();
             RewriteAnimationGroup();
-            CreateMainAnimationObject();
+            params.SetInt("Number of Keys", node_ids.size());
+            if(!ObjectExists(objectID)){
+                CreateMainAnimationObject();
+            }
         }
     }
 }
@@ -685,6 +697,7 @@ void PlayAvailableSound(){
 void UpdateAnimationKeys(){
     ScriptParams@ level_params = level.GetScriptParams();
     if(level_params.HasParam("RewritingIdentifier")){
+        Print(level_params.GetString("RewritingIdentifier") + "return\n");
         return;
     }
     bool reset = false;

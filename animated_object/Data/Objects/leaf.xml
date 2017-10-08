@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/leaf.obj</Model>
+	<ColorMap>Data/Textures/Plants/Trees/temperate/ferns_tall_c.tga</ColorMap>
+	<NormalMap>Data/Textures/Plants/Trees/temperate/ferns_tall_n.tga</NormalMap>
+	<TranslucencyMap>Data/Textures/Plants/Trees/temperate/ferns_low_t.tga</TranslucencyMap>
+	<WindMap>Data/Textures/Plants/Trees/temperate/ferns_low_w.tga</WindMap>
+    <ShaderName>plant</ShaderName>
+    <flags double_sided = "true"/>
+</Object>
