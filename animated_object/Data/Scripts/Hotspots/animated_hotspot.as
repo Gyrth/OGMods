@@ -50,16 +50,8 @@ float CalculateWholeDistance(){
 PlayMode current_mode;
 
 void Init() {
-    //Read the parameters on first load so changes can be detected.
-    if(params.HasParam("Identifier")){
-        identifier = params.GetString("Identifier");
-        model_path = params.GetString("Model Path");
-        current_mode = PlayMode(params.GetInt("Play mode"));
-        objectPath = params.GetString("Object Path");
-    }
     if(ui_time == 0.0f){
         //The level is loaded with an existing animation hotspot in it.
-        identifier = params.GetString("Identifier");
         retrieve_children = true;
     }else{
         //The hotspot is created while the game is running.
@@ -82,24 +74,26 @@ void Init() {
         Print("Found nr_with_ident " + nr_with_ident + "\n");
         if(nr_with_ident == 0){
             Print("An empty animation hotspot is loaded\n");
+            params.AddString("Identifier", GetUniqueIdentifier());
             SetParameters();
-            model_path = params.GetString("Model Path");
-            current_mode = PlayMode(params.GetInt("Play mode"));
-            objectPath = params.GetString("Object Path");
             CreateMainAnimationObject();
         }else if(nr_with_ident == 1){
             //The animation group is loaded via a group and this identifier is unique.
             /*RetrieveExistingAnimation();*/
             if(!GetInputDown(0, "z") && !GetInputDown(0, "lalt")){
                 Print("Creating new main animation object " + objectPath + "\n");
+                identifier = params.GetString("Identifier");
+                SetParameters();
                 CreateMainAnimationObject();
             }
             retrieve_children = true;
         }else if(nr_with_ident == 2){
             /*DisplayError("er", "Two with same id " + objectPath);*/
             //The anim is loaded as a group, and the identifier is already taken.
+            identifier = params.GetString("Identifier");
             if(!GetInputDown(0, "z") && !GetInputDown(0, "lalt")){
                 Print("Creating new main animation object " + objectPath + "\n");
+                SetParameters();
                 CreateMainAnimationObject();
             }
             AddRewritingLevelParam();
@@ -136,14 +130,7 @@ void RemoveRewriteLevelParam(){
     }
     if(ids.size() > 0){
         //Still some identifiers left to rewrite.
-        string new_param = "";
-        for(uint i = 0; i < ids.size(); i++){
-            new_param += ids[i];
-            if(i != (ids.size() - 1)){
-                new_param += " ";
-            }
-        }
-        Print("Writing " + new_param + "\n");
+        string new_param = join(ids, " ");
         level_params.SetString("RewritingIdentifier", new_param);
     }else{
         //No animation identifiers left to rewrite.
@@ -165,19 +152,8 @@ void PostInit(){
         RemoveRewriteLevelParam();
         RewriteAnimationGroup();
         rewrite_identifier = false;
-    }else{
-        //The animation hotspot is new and a new identifier should be applied.
-        current_mode = PlayMode(params.GetInt("Play mode"));
-        objectPath = params.GetString("Object Path");
-        model_path = params.GetString("Model Path");
-
-        /*params.AddString("Identifier", GetUniqueIdentifier());
-        identifier = params.GetString("Identifier");
-        Print("Creating new main object because it's a new anim hotspot.");
-        CreateMainAnimationObject();*/
     }
     UpdatePlayMode();
-    Reset();
     post_init_done = true;
     Print("Postinit done\n");
 }
@@ -211,9 +187,9 @@ void RetrieveExistingAnimation(){
         if(!ObjectExists(all_objects[i])){
             continue;
         }
-        ScriptParams@ obj_params = ReadObjectFromID(all_objects[i]).GetScriptParams();
+        Object@ obj = ReadObjectFromID(all_objects[i]);
+        ScriptParams@ obj_params = obj.GetScriptParams();
         if(obj_params.HasParam("BelongsTo")){
-            Print("identifier " + identifier + "\n");
             if(obj_params.GetString("BelongsTo") == identifier){
                 if(obj_params.GetString("Name") == "animation_key"){
                     //These are the pathpoints that the object will follow.
@@ -223,10 +199,21 @@ void RetrieveExistingAnimation(){
                     }
                 }else if(obj_params.GetString("Name") == "animation_child"){
                     children.insertLast(all_objects[i]);
+                    obj.SetSelectable(false);
+                    obj.SetTranslatable(false);
+                    obj.SetRotatable(false);
+                    obj.SetScalable(false);
+                    obj.SetCopyable(false);
+                    obj.SetDeletable(false);
                 }else if(obj_params.GetString("Name") == "animation_main"){
-                    Print("BelongsTo " + obj_params.GetString("BelongsTo") + " id " + all_objects[i] + " name " + obj_params.GetString("Name") + "\n");
+                    Print("Found main object \n");
                     objectID = all_objects[i];
-                    ReadObjectFromID(objectID).SetSelectable(false);
+                    obj.SetSelectable(false);
+                    obj.SetTranslatable(false);
+                    obj.SetRotatable(false);
+                    obj.SetScalable(false);
+                    obj.SetCopyable(false);
+                    obj.SetDeletable(false);
                 }
             }
         }
@@ -270,6 +257,11 @@ void SetParameters() {
     //Unfortunately I can not get the model path from the xml file via scripting.
     //So the model needs to be declared seperatly.
     params.AddString("Model Path", "Data/Models/arrow.obj");
+
+    identifier = params.GetString("Identifier");
+    model_path = params.GetString("Model Path");
+    current_mode = PlayMode(params.GetInt("Play mode"));
+    objectPath = params.GetString("Object Path");
 }
 
 string GetNewIdentifier(){
@@ -319,8 +311,9 @@ void OnExit(MovementObject @mo) {
 }
 
 void Reset(){
-    if(node_ids.size() < 2 || objectID == -1){
-      return;
+    Print("Resetting\n");
+    if(node_ids.size() < 2){
+        return;
     }
 
     if(objectPath != params.GetString("Object Path")){
@@ -331,6 +324,10 @@ void Reset(){
             object.SetTranslation(ReadObjectFromID(node_ids[index]).GetTranslation());
             object.SetRotation(ReadObjectFromID(node_ids[index]).GetRotation());
         }
+    }
+
+    if(!ObjectExists(objectID)){
+        CreateMainAnimationObject();
     }
 
     index = 0;
@@ -346,6 +343,7 @@ void Reset(){
 
 bool CheckObjectsExist(){
     if(!ObjectExists(objectID)){
+        ResetLevel();
         return false;
     }
 
@@ -369,6 +367,7 @@ void ReceiveMessage(string msg){
     while(token_iter.FindNextToken(msg)){
         string token = token_iter.GetToken(msg);
         /*DisplayError("okay", "Received " + token);*/
+        Print("received " + token + "\n");
         if(token == "GetNonTakenObjects"){
             token_iter.FindNextToken(msg);
             int id = atoi(token_iter.GetToken(msg));
@@ -388,9 +387,7 @@ void ReceiveMessage(string msg){
             RemoveRewriteLevelParam();
             RewriteAnimationGroup();
             params.SetInt("Number of Keys", node_ids.size());
-            if(!ObjectExists(objectID)){
-                CreateMainAnimationObject();
-            }
+            Print("hello\n");
         }
     }
 }
@@ -563,7 +560,8 @@ void UpdateTransform(){
             if(whole_distance != 0.0f){
                 float node_distance = distance(current_pathpoint.GetTranslation(), previous_pathpoint.GetTranslation());
                 if(node_distance != 0.0f){
-                    float node_time = params.GetFloat("Seconds") * (node_distance / whole_distance);
+                    //To make sure the time isn't 0, or else it will devide by zero.
+                    float node_time = max(0.0001f, params.GetFloat("Seconds") * (node_distance / whole_distance));
                     float alpha = node_timer / node_time;
                     //Setting the position and rotation:
                     if(node_timer > node_time){
@@ -586,7 +584,7 @@ void UpdateTransform(){
             }
         }else{
             //The animation will devide the time between the animation keys.
-            float node_time = params.GetFloat("Seconds") / node_ids.size();
+            float node_time = max(0.0001, params.GetFloat("Seconds")) / node_ids.size();
             //Setting the position and rotation:
             float alpha = node_timer / node_time;
             float node_distance = distance(current_pathpoint.GetTranslation(), previous_pathpoint.GetTranslation());
@@ -697,7 +695,6 @@ void PlayAvailableSound(){
 void UpdateAnimationKeys(){
     ScriptParams@ level_params = level.GetScriptParams();
     if(level_params.HasParam("RewritingIdentifier")){
-        Print(level_params.GetString("RewritingIdentifier") + "return\n");
         return;
     }
     bool reset = false;
@@ -896,6 +893,7 @@ void CreatePathpoint(){
 
 void CreateMainAnimationObject(){
     Print("Create main object\n");
+    /*DisplayError("as", "Create main object");*/
     MarkAllObjects();
     objectID = CreateObject(objectPath, false);
     Object@ main_object = ReadObjectFromID(objectID);
