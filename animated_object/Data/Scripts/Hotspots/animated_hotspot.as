@@ -25,7 +25,6 @@ bool retrieve_children = false;
 bool rewrite_identifier = false;
 bool wait = false;
 bool divide_equally = false;
-int other_hotspot_id = -1;
 
 enum PlayMode{
   kLoopForward = 0,
@@ -68,7 +67,7 @@ void Init() {
     }else{
         //The hotspot is created while the game is running.
         array<int> all_objects = GetObjectIDs();
-        other_hotspot_id = -1;
+        int other_hotspot_id = -1;
         if(params.HasParam("Identifier")){
             for(uint32 i = 0; i < all_objects.size(); i++){
                 ScriptParams@ temp_params = ReadObjectFromID(all_objects[i]).GetScriptParams();
@@ -82,29 +81,24 @@ void Init() {
                 }
             }
         }
-        Print(identifier + " Found nr_with_ident " + nr_with_ident + "\n");
         if(GetInputDown(0, "z")){
             //Undo
-            Print("Undoing\n");
             retrieve_children = true;
         }else if(GetInputDown(0, "lalt")){
             //Duplicating.
-            Print("Duplicating\n");
             if(nr_with_ident == 1){
                 retrieve_children = true;
             }else if(nr_with_ident == 2){
                 Object@ other_hotspot = ReadObjectFromID(other_hotspot_id);
                 other_hotspot.ReceiveScriptMessage("RewriteAnimationGroup");
-                other_hotspot_id = -1;
                 retrieve_children = true;
                 AddRewritingLevelParam();
             }else{
-                DisplayError("asd", "Shouldn't get here.");
+                DisplayError("Ohno", "Shouldn't get here.");
             }
         }else{
             //Either new hotspot or spawngroup.
             if(nr_with_ident == 0){
-                Print("An empty animation hotspot is loaded\n");
                 params.AddString("Identifier", GetUniqueIdentifier());
             }else if(nr_with_ident == 1){
                 //The animation group is loaded via a group and this identifier is unique.
@@ -113,11 +107,10 @@ void Init() {
                 //The anim is loaded as a group, and the identifier is already taken.
                 Object@ other_hotspot = ReadObjectFromID(other_hotspot_id);
                 other_hotspot.ReceiveScriptMessage("RewriteAnimationGroup");
-                other_hotspot_id = -1;
                 retrieve_children = true;
                 AddRewritingLevelParam();
             }else if(nr_with_ident > 2){
-                DisplayError("Uuuuuuhhmmm", "There are " + nr_with_ident + " animation hotspots with the same identifier, how did you manage to do that?");
+                DisplayError("Ohno", "There are " + nr_with_ident + " animation hotspots with the same identifier, how did you manage to do that?");
             }
         }
     }
@@ -161,42 +154,31 @@ void PostInit(){
     //When the level first loads, there might already be animations setup
     //So those are retrieved first.
     if(retrieve_children){
-        Print("Loading existing level animation " + ui_time + "\n");
         RetrieveExistingAnimation();
         retrieve_children = false;
         RemoveRewritingLevelParam();
     }
     UpdatePlayMode();
     post_init_done = true;
-    Print("Postinit done\n");
 }
 
 void RewriteAnimationGroup(){
     //We got all the children so a new identifier can be generated.
     params.SetString("Identifier", GetUniqueIdentifier());
     identifier = params.GetString("Identifier");
-    Print("This anim has " + node_ids.size() + " anim keys\n");
     for(uint i = 0; i < node_ids.size(); i++){
         ScriptParams@ object_params = ReadObjectFromID(node_ids[i]).GetScriptParams();
         object_params.SetString("BelongsTo", identifier);
-    }
-    Print("This anim has " + children.size() + " children\n");
-    for(uint i = 0; i < children.size(); i++){
-        /*ScriptParams@ object_params = ReadObjectFromID(children[i]).GetScriptParams();
-        object_params.SetString("BelongsTo", identifier);*/
     }
     if(ObjectExists(objectID)){
         ScriptParams@ main_obj_params = ReadObjectFromID(objectID).GetScriptParams();
         main_obj_params.SetString("BelongsTo", identifier);
     }
-    Print("Main object id " + objectID + " children\n");
-    Print("Done rewriting\n");
 }
 
 void RetrieveExistingAnimation(){
     array<int> all_objects = GetObjectIDs();
     array<int> found_placeholders;
-    Print("retrieve " + params.GetString("Object Path") + "\n");
     for(uint32 i = 0; i < all_objects.size(); i++){
         if(!ObjectExists(all_objects[i])){
             continue;
@@ -207,7 +189,6 @@ void RetrieveExistingAnimation(){
             if(obj_params.GetString("BelongsTo") == identifier){
                 if(obj_params.GetString("Name") == "animation_key"){
                     //These are the pathpoints that the object will follow.
-                    Print("animation keys " + all_objects[i] + " belongs to " + obj_params.GetString("BelongsTo") + "\n");
                     if(found_placeholders.find(all_objects[i]) == -1){
                         //Check if the animation key is already added.
                         found_placeholders.insertLast(all_objects[i]);
@@ -221,7 +202,6 @@ void RetrieveExistingAnimation(){
                     obj.SetCopyable(false);
                     obj.SetDeletable(false);
                 }else if(obj_params.GetString("Name") == "animation_main"){
-                    Print("Found main object \n");
                     objectID = all_objects[i];
                     obj.SetSelectable(false);
                     obj.SetTranslatable(false);
@@ -235,7 +215,6 @@ void RetrieveExistingAnimation(){
     }
     node_ids.resize(found_placeholders.size());
     int size = 0;
-    Print("Found animation keys " + found_placeholders.size() + "\n");
     //Now put the placeholders back in order.
     for(uint i = 0; i < found_placeholders.size(); i++){
         ScriptParams@ placeholder_params = ReadObjectFromID(found_placeholders[i]).GetScriptParams();
@@ -244,16 +223,9 @@ void RetrieveExistingAnimation(){
             if(placeholder_params.GetInt("Index") + 1 > size){
                 size = placeholder_params.GetInt("Index") + 1;
             }
-            Print("hotspot " + hotspot.GetID() + " adding id " + found_placeholders[i] + " to index " + placeholder_params.GetInt("Index") + "\n");
         }
     }
     node_ids.resize(size);
-    params.SetInt("Number of Keys", node_ids.size());
-    Print("Done retrieving\n");
-    for(uint i = 0; i < node_ids.size(); i++){
-        Print(" " + node_ids[i]);
-    }
-    Print("\n");
 }
 
 void SetParameters() {
@@ -291,7 +263,6 @@ string GetUniqueIdentifier(){
     }
     string new_identifier = "";
     while(taken_identifiers.find(new_identifier) != -1){
-        /*DisplayError("ohno", "ID not unique!");*/
         new_identifier = GetNewIdentifier();
     }
     return new_identifier;
@@ -322,7 +293,6 @@ void OnExit(MovementObject @mo) {
 }
 
 void Reset(){
-    Print("Resetting\n");
     if(objectPath != params.GetString("Object Path")){
         if(FileExists(params.GetString("Object Path"))){
             objectPath = params.GetString("Object Path");
@@ -339,11 +309,9 @@ void Reset(){
 }
 
 void ResetAnimation(){
-    Print("reset animation\n");
     if(node_ids.size() < 2 || objectID == -1){
         return;
     }
-
     index = 0;
     prev_node_id = -1;
     next_pathpoint = true;
@@ -357,17 +325,14 @@ void ResetAnimation(){
 
 bool CheckObjectsExist(){
     if(!ObjectExists(objectID)){
-        Print("Resetting because the object doesn't exist.\n");
         ResetLevel();
         return false;
     }
 
     if(index > (int(node_ids.size()) - 1) || !ObjectExists(node_ids[index])){
-        Print("doesn't exist.\n");
         return false;
     }
     if(!ObjectExists(node_ids[index])){
-        Print("doesn't exist.\n");
         return false;
     }
     if(prev_node_id != -1){
@@ -383,7 +348,6 @@ void ReceiveMessage(string msg){
     token_iter.Init();
     while(token_iter.FindNextToken(msg)){
         string token = token_iter.GetToken(msg);
-        Print("received " + token + "\n");
         if(token == "RewriteAnimationGroup"){
             if(!ObjectExists(objectID)){
                 RetrieveExistingAnimation();
@@ -397,13 +361,11 @@ void Update(){
     PostInit();
     UpdateAnimationKeys();
     if(CheckParamChanges()){
-        Print("return\n");
         return;
     }
     if(!CheckObjectsExist()){
         return;
     }
-
     if(playing && done == false || playing && looping && !on_enter){
       Object@ object = ReadObjectFromID(objectID);
       vec3 nextPathpointPos = ReadObjectFromID(node_ids[index]).GetTranslation();
@@ -479,13 +441,11 @@ void Update(){
 bool CheckParamChanges(){
     if(EditorModeActive()){
         if(model_path != params.GetString("Model Path")){
-            Print("Model path not the same \n");
             if(FileExists(params.GetString("Model Path"))){
                 model_path = params.GetString("Model Path");
                 return true;
             }
         }else if(objectPath != params.GetString("Object Path")){
-            Print("obj path not the same \n");
             if(FileExists(params.GetString("Object Path"))){
                 DeleteObjectID(objectID);
                 for(uint i = 0; i < children.size(); i++){
@@ -496,7 +456,6 @@ bool CheckParamChanges(){
                 return true;
             }
         }else if(current_mode != PlayMode(params.GetInt("Play mode"))){
-            Print("Changed play mode\n");
             UpdatePlayMode();
             return true;
         }
@@ -538,8 +497,6 @@ void UpdateTransform(){
                 skip_node = true;
             }
             if(skip_node){
-                /*object.SetTranslation(current_pathpoint.GetTranslation());*/
-                /*object.SetRotation(current_pathpoint.GetRotation());*/
                 next_pathpoint = true;
                 node_timer = 0.0f;
             }
@@ -561,8 +518,6 @@ void UpdateTransform(){
         if(node_ids.size() > 0){
             Object@ firstPathpoint = ReadObjectFromID(node_ids[0]);
             Object@ mainObject = ReadObjectFromID(objectID);
-            /*mainObject.SetTranslation(firstPathpoint.GetTranslation());*/
-            /*mainObject.SetRotation(firstPathpoint.GetRotation());*/
             index = 0;
         }
     }
@@ -575,7 +530,6 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
     if(params.GetInt("Interpolate translation") == 1){
         //Current time, start value, change in value, duration
         float offset_alpha = sine_wave(alpha, 0.0f, 1.0f, 1.0f);
-        /*float offset_alpha = exp_wave(alpha, 0.0f, 1.0f, 1.0f);*/
         vec3 previous_direction = normalize(previous_pathpoint.GetRotation() * vec3(0.0f, 0.0f, 1.0f) * (reverse ? 1 : -1)) * node_distance * alpha;
         vec3 current_direction = normalize(current_pathpoint.GetRotation() * vec3(0.0f, 0.0f, 1.0f) * (reverse ? -1 : 1)) * (node_distance * (1.0f - alpha));
         vec3 new_position_curved = mix(previous_pathpoint.GetTranslation() + previous_direction, current_pathpoint.GetTranslation() + current_direction, offset_alpha);
@@ -690,11 +644,6 @@ void UpdateAnimationKeys(){
         if(node_ids.size() < uint(params.GetInt("Number of Keys"))){
             CreatePathpoint();
         }else if(node_ids.size() > uint(params.GetInt("Number of Keys"))){
-            for(uint i = 0; i < node_ids.size(); i++){
-                Print(" " + node_ids[i]);
-            }
-            Print("\n");
-            Print("Trying to delete " + node_ids[node_ids.size() - 1] + " size " + node_ids.size() + " exists " + ObjectExists(node_ids[node_ids.size() - 1]) + "\n");
             DeleteObjectID(node_ids[node_ids.size() - 1]);
             node_ids.removeLast();
         }
@@ -702,7 +651,6 @@ void UpdateAnimationKeys(){
     }
     if(reset){
         WritePlaceholderIndexes();
-        Print("Resetting animation because the keys or main object have changed.\n");
         ResetAnimation();
     }
 }
@@ -835,28 +783,26 @@ void SetObjectPreview(Object@ spawn, string &in path){
 }
 
 void CreatePathpoint(){
-  int objID = CreateObject("Data/Objects/placeholder.xml", false);
-  node_ids.push_back(objID);
-  Object @newObj = ReadObjectFromID(objID);
-  newObj.SetSelectable(true);
-  newObj.SetTranslatable(true);
-  newObj.SetRotatable(true);
-  newObj.SetScalable(true);
-  newObj.SetCopyable(true);
-  newObj.SetDeletable(true);
+    int objID = CreateObject("Data/Objects/placeholder.xml", false);
+    node_ids.push_back(objID);
+    Object @newObj = ReadObjectFromID(objID);
+    newObj.SetSelectable(true);
+    newObj.SetTranslatable(true);
+    newObj.SetRotatable(true);
+    newObj.SetScalable(true);
+    newObj.SetCopyable(true);
+    newObj.SetDeletable(true);
 
-  ScriptParams@ placeholderParams = newObj.GetScriptParams();
-  //When a new pathpoint is created the hotspot ID is added to it's parameters.
-  //This will be used when the level is closed and loaded again.
-  placeholderParams.AddString("BelongsTo", identifier);
-  placeholderParams.AddString("Name", "animation_key");
-  placeholderParams.AddString("Playsound", "");
-  newObj.SetTranslation(main_hotspot.GetTranslation() + ((node_ids.size() - 1) * vec3(0.0f,1.0f,0.0f)));
+    ScriptParams@ placeholderParams = newObj.GetScriptParams();
+    //When a new pathpoint is created the hotspot ID is added to it's parameters.
+    //This will be used when the level is closed and loaded again.
+    placeholderParams.AddString("BelongsTo", identifier);
+    placeholderParams.AddString("Name", "animation_key");
+    placeholderParams.AddString("Playsound", "");
+    newObj.SetTranslation(main_hotspot.GetTranslation() + ((node_ids.size() - 1) * vec3(0.0f,1.0f,0.0f)));
 }
 
 void CreateMainAnimationObject(){
-    Print("Create main object\n");
-    /*DisplayError("as", "Create main object");*/
     MarkAllObjects();
     objectID = CreateObject(objectPath, false);
     Object@ main_object = ReadObjectFromID(objectID);
@@ -913,7 +859,6 @@ void Dispose(){
         }
         for(uint i = 0; i < children.size(); i++){
             if(ObjectExists(children[i])){
-                /*DeleteObjectID(children[i]);*/
                 QueueDeleteObjectID(children[i]);
             }
         }
