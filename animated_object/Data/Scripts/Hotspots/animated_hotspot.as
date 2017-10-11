@@ -149,6 +149,8 @@ void PostInit(){
     if(post_init_done){
         return;
     }
+    Print("Start recieving " + hotspot.GetID() + "\n");
+    level.ReceiveLevelEvents(hotspot.GetID());
     //When the level first loads, there might already be animations setup
     //So those are retrieved first.
     if(retrieve_children){
@@ -351,6 +353,14 @@ void ReceiveMessage(string msg){
                 RetrieveExistingAnimation();
             }
             RewriteAnimationGroup();
+        }else if(token == "level_event"){
+            token_iter.FindNextToken(msg);
+            string command = token_iter.GetToken(msg);
+            if(command == "added_object"){
+                token_iter.FindNextToken(msg);
+                int id = atoi(token_iter.GetToken(msg));
+                CheckNewAnimationKey(id);
+            }
         }
     }
 }
@@ -605,25 +615,30 @@ void PlayAvailableSound(){
     }
 }
 
+void CheckNewAnimationKey(int id){
+    ScriptParams@ level_params = level.GetScriptParams();
+    if(level_params.HasParam("RewritingIdentifier") || !EditorModeActive()){
+        return;
+    }
+    //Check for new animation keys that have been duplicated.
+    Object@ obj = ReadObjectFromID(id);
+    ScriptParams@ obj_params = obj.GetScriptParams();
+    if(obj_params.HasParam("BelongsTo")){
+        if(obj_params.GetString("BelongsTo") == identifier && animation_keys.find(id) == -1){
+            animation_keys.insertAt(obj_params.GetInt("Index") + 1, id);
+            params.SetInt("Number of Keys", params.GetInt("Number of Keys") + 1);
+            WritePlaceholderIndexes();
+            ResetAnimation();
+        }
+    }
+}
+
 void UpdateAnimationKeys(){
     ScriptParams@ level_params = level.GetScriptParams();
     if(level_params.HasParam("RewritingIdentifier") || !EditorModeActive()){
         return;
     }
     bool reset = false;
-    //Check for new animation keys that have been duplicated.
-    array<int> all_placeholders = GetObjectIDsType(_placeholder_object);
-    for(uint i = 0; i < all_placeholders.size(); i++){
-        Object@ obj = ReadObjectFromID(all_placeholders[i]);
-        ScriptParams@ obj_params = obj.GetScriptParams();
-        if(obj_params.HasParam("BelongsTo")){
-            if(obj_params.GetString("BelongsTo") == identifier && animation_keys.find(all_placeholders[i]) == -1){
-                animation_keys.insertAt(obj_params.GetInt("Index") + 1, all_placeholders[i]);
-                params.SetInt("Number of Keys", params.GetInt("Number of Keys") + 1);
-                reset = true;
-            }
-        }
-    }
     //Check for deleted animation keys.
     for(uint i = 0; i < animation_keys.size(); i++){
         if(!ObjectExists(animation_keys[i])){
@@ -756,8 +771,6 @@ void DrawEditor(){
                 }
             }
             previousPos = obj.GetTranslation();
-        }else{
-            animation_keys.removeAt(i);
         }
     }
 }
@@ -849,19 +862,19 @@ void WritePlaceholderIndexes(){
 }
 
 void Dispose(){
-    if(!GetInputDown(0, "z")){
-        for(uint i = 0; i < animation_keys.size(); i++){
-            if(ObjectExists(animation_keys[i])){
-                DeleteObjectID(animation_keys[i]);
-            }
+    Print("Stop receving " + hotspot.GetID() + "\n");
+    level.StopReceivingLevelEvents(hotspot.GetID());
+    for(uint i = 0; i < animation_keys.size(); i++){
+        if(ObjectExists(animation_keys[i])){
+            DeleteObjectID(animation_keys[i]);
         }
-        for(uint i = 0; i < children.size(); i++){
-            if(ObjectExists(children[i])){
-                DeleteObjectID(children[i]);
-            }
+    }
+    for(uint i = 0; i < children.size(); i++){
+        if(ObjectExists(children[i])){
+            DeleteObjectID(children[i]);
         }
-        if(ObjectExists(main_object)){
-            DeleteObjectID(main_object);
-        }
+    }
+    if(ObjectExists(main_object)){
+        DeleteObjectID(main_object);
     }
 }
