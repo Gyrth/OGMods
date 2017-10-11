@@ -24,6 +24,7 @@ string identifier;
 bool retrieve_children = false;
 bool rewrite_identifier = false;
 bool wait = false;
+bool divide_equally = false;
 int other_hotspot_id = -1;
 
 enum PlayMode{
@@ -37,6 +38,10 @@ enum PlayMode{
   kOnEnterLoopBackward = 7,
 }
 
+string GetTypeString() {
+    return "AnimationHotspot";
+}
+
 float CalculateWholeDistance(){
     float whole = 0.0f;
     for(uint i = 1; i < node_ids.size(); i++){
@@ -48,15 +53,15 @@ float CalculateWholeDistance(){
 }
 
 PlayMode current_mode;
-
+int nr_with_ident = 0;
 void Init() {
     if(ui_time == 0.0f){
         //The level is loaded with an existing animation hotspot in it.
         retrieve_children = true;
     }else{
+        SetParameters();
         //The hotspot is created while the game is running.
         array<int> all_objects = GetObjectIDs();
-        int nr_with_ident = 0;
         other_hotspot_id = -1;
         if(params.HasParam("Identifier")){
             for(uint32 i = 0; i < all_objects.size(); i++){
@@ -71,40 +76,48 @@ void Init() {
                 }
             }
         }
-        Print("Found nr_with_ident " + nr_with_ident + "\n");
-        if(nr_with_ident == 0){
-            Print("An empty animation hotspot is loaded\n");
-            params.AddString("Identifier", GetUniqueIdentifier());
-            SetParameters();
-            CreateMainAnimationObject();
-        }else if(nr_with_ident == 1){
-            //The animation group is loaded via a group and this identifier is unique.
-            /*RetrieveExistingAnimation();*/
-            if(!GetInputDown(0, "z") && !GetInputDown(0, "lalt")){
-                Print("Creating new main animation object " + objectPath + "\n");
-                identifier = params.GetString("Identifier");
-                SetParameters();
-                CreateMainAnimationObject();
-            }
+        Print(identifier + " Found nr_with_ident " + nr_with_ident + "\n");
+        if(GetInputDown(0, "z")){
+            //Undo
+            Print("Undoing\n");
             retrieve_children = true;
-        }else if(nr_with_ident == 2){
-            /*DisplayError("er", "Two with same id " + objectPath);*/
-            //The anim is loaded as a group, and the identifier is already taken.
-            identifier = params.GetString("Identifier");
-            if(!GetInputDown(0, "z") && !GetInputDown(0, "lalt")){
-                Print("Creating new main animation object " + objectPath + "\n");
+        }else if(GetInputDown(0, "lalt")){
+            //Duplicating.
+            Print("Duplicating\n");
+            /*SetParameters();
+            AddRewritingLevelParam();
+            wait = true;*/
+            if(nr_with_ident == 1){
+                retrieve_children = true;
+            }else if(nr_with_ident == 2){
+                SetParameters();
+                AddRewritingLevelParam();
+                wait = true;
+            }else{
+                SetParameters();
+                AddRewritingLevelParam();
+                divide_equally = true;
+            }
+        }else{
+            //Either new hotspot or spawngroup.
+            if(nr_with_ident == 0){
+                Print("An empty animation hotspot is loaded\n");
+                params.AddString("Identifier", GetUniqueIdentifier());
                 SetParameters();
                 CreateMainAnimationObject();
+            }else if(nr_with_ident == 1){
+                //The animation group is loaded via a group and this identifier is unique.
+                retrieve_children = true;
+            }else if(nr_with_ident == 2){
+                //The anim is loaded as a group, and the identifier is already taken.
+                SetParameters();
+                AddRewritingLevelParam();
+                wait = true;
+            }else if(nr_with_ident > 2){
+                DisplayError("Uuuuuuhhmmm", "There are " + nr_with_ident + " animation hotspots with the same identifier, how did you manage to do that?");
             }
-            AddRewritingLevelParam();
-            wait = true;
-        }else if(nr_with_ident > 2){
-            DisplayError("Uuuuuuhhmmm", "There are more than 2 animation hotspots with the same identifier, how did you manage to do that?");
-            /*CreateMainAnimationObject();*/
-            /*rewrite_identifier = true;*/
         }
     }
-    Print("retrive children " + retrieve_children + "\n");
 }
 
 void AddRewritingLevelParam(){
@@ -152,6 +165,11 @@ void PostInit(){
         RemoveRewriteLevelParam();
         RewriteAnimationGroup();
         rewrite_identifier = false;
+    }else if(divide_equally){
+        DivideAnimationObjects();
+        RewriteAnimationGroup();
+        RemoveRewriteLevelParam();
+        divide_equally = false;
     }
     UpdatePlayMode();
     post_init_done = true;
@@ -167,7 +185,7 @@ void RewriteAnimationGroup(){
         ScriptParams@ object_params = ReadObjectFromID(node_ids[i]).GetScriptParams();
         object_params.SetString("BelongsTo", identifier);
     }
-    Print("This anim has " + node_ids.size() + " children\n");
+    Print("This anim has " + children.size() + " children\n");
     for(uint i = 0; i < children.size(); i++){
         ScriptParams@ object_params = ReadObjectFromID(children[i]).GetScriptParams();
         object_params.SetString("BelongsTo", identifier);
@@ -176,6 +194,7 @@ void RewriteAnimationGroup(){
         ScriptParams@ main_obj_params = ReadObjectFromID(objectID).GetScriptParams();
         main_obj_params.SetString("BelongsTo", identifier);
     }
+    Print("Main object id " + objectID + " children\n");
     Print("Done rewriting\n");
 }
 
@@ -193,6 +212,7 @@ void RetrieveExistingAnimation(){
             if(obj_params.GetString("BelongsTo") == identifier){
                 if(obj_params.GetString("Name") == "animation_key"){
                     //These are the pathpoints that the object will follow.
+                    Print("animation keys " + all_objects[i] + " belongs to " + obj_params.GetString("BelongsTo") + "\n");
                     if(found_placeholders.find(all_objects[i]) == -1){
                         //Check if the animation key is already added.
                         found_placeholders.insertLast(all_objects[i]);
@@ -229,7 +249,7 @@ void RetrieveExistingAnimation(){
             if(placeholder_params.GetInt("Index") + 1 > size){
                 size = placeholder_params.GetInt("Index") + 1;
             }
-            Print("adding id " + found_placeholders[i] + " to index " + placeholder_params.GetInt("Index") + "\n");
+            Print("hotspot " + hotspot.GetID() + " adding id " + found_placeholders[i] + " to index " + placeholder_params.GetInt("Index") + "\n");
         }
     }
     node_ids.resize(size);
@@ -312,9 +332,6 @@ void OnExit(MovementObject @mo) {
 
 void Reset(){
     Print("Resetting\n");
-    if(node_ids.size() < 2){
-        return;
-    }
 
     if(objectPath != params.GetString("Object Path")){
         if(FileExists(params.GetString("Object Path"))){
@@ -325,9 +342,16 @@ void Reset(){
             object.SetRotation(ReadObjectFromID(node_ids[index]).GetRotation());
         }
     }
-
     if(!ObjectExists(objectID)){
         CreateMainAnimationObject();
+    }
+    ResetAnimation();
+}
+
+void ResetAnimation(){
+    Print("reset animation\n");
+    if(node_ids.size() < 2 || objectID == -1){
+        return;
     }
 
     index = 0;
@@ -343,6 +367,7 @@ void Reset(){
 
 bool CheckObjectsExist(){
     if(!ObjectExists(objectID)){
+        Print("Resetting because the object doesn't exist.\n");
         ResetLevel();
         return false;
     }
@@ -392,6 +417,53 @@ void ReceiveMessage(string msg){
     }
 }
 
+void DivideAnimationObjects(){
+    nr_with_ident = 0;
+    array<int> all_objects = GetObjectIDs();
+    if(params.HasParam("Identifier")){
+        for(uint32 i = 0; i < all_objects.size(); i++){
+            ScriptParams@ temp_params = ReadObjectFromID(all_objects[i]).GetScriptParams();
+            if(temp_params.HasParam("Identifier")){
+                if(temp_params.GetString("Identifier") == params.GetString("Identifier")){
+                    nr_with_ident++;
+                }
+            }
+        }
+    }
+
+    Print("There are " + nr_with_ident + " other animation hotspots with the same id.\n");
+    /*array<int> all_objects = GetObjectIDs();*/
+    array<int> found_objects;
+    for(uint32 i = 0; i < all_objects.size(); i++){
+        if(!ObjectExists(all_objects[i])){
+            continue;
+        }
+        Object@ obj = ReadObjectFromID(all_objects[i]);
+        ScriptParams@ obj_params = obj.GetScriptParams();
+        if(obj_params.HasParam("BelongsTo")){
+            if(obj_params.GetString("BelongsTo") == identifier){
+                found_objects.insertLast(all_objects[i]);
+            }
+        }
+    }
+    Print("Found " + found_objects.size() + " with the same id.\n");
+    int divided_number = int(found_objects.size()) / nr_with_ident;
+    for(int i = divided_number; i < divided_number * 2; i++){
+        Object@ obj = ReadObjectFromID(found_objects[i]);
+        ScriptParams@ obj_params = obj.GetScriptParams();
+        if(obj_params.GetString("Name") == "animation_key"){
+            node_ids.insertLast(found_objects[i]);
+        }else if(obj_params.GetString("Name") == "animation_child"){
+            children.insertLast(found_objects[i]);
+        }else if(obj_params.GetString("Name") == "animation_main"){
+            objectID = found_objects[i];
+        }
+    }
+    Print("There are " + node_ids.size() + " animation keys.\n");
+    Print("There are " + children.size() + " animation children.\n");
+    Print("The main id " + objectID + "\n");
+}
+
 void SendNonTakenObjects(int id){
     array<int> all_objects = GetObjectIDs();
     string message = "";
@@ -400,7 +472,7 @@ void SendNonTakenObjects(int id){
         ScriptParams@ obj_params = ReadObjectFromID(all_objects[i]).GetScriptParams();
         if(obj_params.HasParam("BelongsTo")){
             if(obj_params.GetString("BelongsTo") == identifier){
-                Print("Found " + all_objects[i] + "\n");
+                Print("Found " + all_objects[i] + " " + obj_params.GetString("BelongsTo") + " " + obj_params.GetString("Name") + "\n");
                 if(obj_params.GetString("Name") == "animation_key"){
                     if(node_ids.find(all_objects[i]) == -1){
                         message += "AddAnimationKey " + all_objects[i] + " ";
@@ -725,7 +797,7 @@ void UpdateAnimationKeys(){
         params.SetInt("Number of Keys", 2);
     }
     //Create more placeholders if there aren't enough in the scene.
-    if(node_ids.size() != uint(params.GetInt("Number of Keys"))){
+    while(node_ids.size() != uint(params.GetInt("Number of Keys"))){
         if(node_ids.size() < uint(params.GetInt("Number of Keys"))){
             CreatePathpoint();
         }else if(node_ids.size() > uint(params.GetInt("Number of Keys"))){
@@ -741,7 +813,8 @@ void UpdateAnimationKeys(){
     }
     if(reset){
         WritePlaceholderIndexes();
-        Reset();
+        Print("Resetting animation because the keys or main object have changed.\n");
+        ResetAnimation();
     }
 }
 
@@ -899,6 +972,7 @@ void CreateMainAnimationObject(){
     Object@ main_object = ReadObjectFromID(objectID);
     main_object.SetSelectable(false);
     ScriptParams@ object_params = main_object.GetScriptParams();
+    object_params.AddInt("" + hotspot.GetID(), 1);
     object_params.AddString("BelongsTo", identifier);
     object_params.AddString("Name", "animation_main");
     FindNewChildren();
@@ -914,20 +988,42 @@ void MarkAllObjects(){
 }
 
 void FindNewChildren(){
-    array<int> all_ids = GetObjectIDs();
-    for(uint i = 0; i < all_ids.size(); i++){
-        Object@ obj = ReadObjectFromID(all_ids[i]);
-        ScriptParams@ params = obj.GetScriptParams();
-        if(!params.HasParam("" + hotspot.GetID())){
-            children.insertLast(all_ids[i]);
-            params.AddString("BelongsTo", identifier);
-            params.AddString("Name", "animation_child");
-            /*obj.SetSelectable(false);*/
+    array<int> all_objects = GetObjectIDs();
+    bool send_animation_objects = false;
+    string message = "";
+    int target_id = -1;
+
+    for(uint i = 0; i < all_objects.size(); i++){
+        Object@ obj = ReadObjectFromID(all_objects[i]);
+        ScriptParams@ obj_params = obj.GetScriptParams();
+        if(!obj_params.HasParam("" + hotspot.GetID())){
+            if(obj_params.HasParam("BelongsTo")){
+                if(obj_params.HasParam("Name")){
+                    if(obj_params.GetString("Name") == "animation_key"){
+                        message += "AddAnimationKey " + all_objects[i] + " ";
+                    }else if(obj_params.GetString("Name") == "animation_child"){
+                        message += "AddAnimationChild " + all_objects[i] + " ";
+                    }else if(obj_params.GetString("Name") == "animation_main"){
+                        message += "SetMainObject " + all_objects[i] + " ";
+                    }
+                }
+            }
+            children.insertLast(all_objects[i]);
+            if(obj.GetType() == _hotspot_object){
+                /*send_animation_objects = true;*/
+                target_id = all_objects[i];
+            }
         }else{
-            params.Remove("" + hotspot.GetID());
+            obj_params.Remove("" + hotspot.GetID());
         }
     }
-    Print("This hotspot has " + children.size() + " children\n");
+
+    message += "Done";
+    if(send_animation_objects){
+        /*DisplayError("awe", "send_animation_objects.");*/
+        Object@ target = ReadObjectFromID(target_id);
+        target.ReceiveScriptMessage(message);
+    }
 }
 
 void WritePlaceholderIndexes(){
@@ -945,16 +1041,17 @@ void Dispose(){
     if(!GetInputDown(0, "z")){
         for(uint i = 0; i < node_ids.size(); i++){
             if(ObjectExists(node_ids[i])){
-                DeleteObjectID(node_ids[i]);
+                QueueDeleteObjectID(node_ids[i]);
             }
         }
         for(uint i = 0; i < children.size(); i++){
             if(ObjectExists(children[i])){
+                /*DeleteObjectID(children[i]);*/
                 QueueDeleteObjectID(children[i]);
             }
         }
         if(ObjectExists(objectID)){
-            DeleteObjectID(objectID);
+            QueueDeleteObjectID(objectID);
         }
     }
 }
