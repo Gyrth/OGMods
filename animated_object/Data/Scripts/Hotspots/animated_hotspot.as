@@ -309,9 +309,6 @@ void Reset(){
                 }
             }
         }
-        Object@ object = ReadObjectFromID(main_object);
-        object.SetTranslation(ReadObjectFromID(animation_keys[index]).GetTranslation());
-        object.SetRotation(ReadObjectFromID(animation_keys[index]).GetRotation());
     }
     ResetAnimation();
 }
