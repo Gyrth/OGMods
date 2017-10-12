@@ -41,7 +41,7 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="67.0329" t1="12.8333" t2="-155.224" s0="1" s1="1" s2="1" q0="-0.026344" q1="0.972603" q2="-0.18465" q3="-0.138761" id="1">
+    <CameraObject t0="47.9421" t1="18.9433" t2="-153.34" s0="1" s1="1" s2="1" q0="0.116976" q1="0.636861" q2="-0.0985875" q3="0.755649" id="1">
         <parameters />
     </CameraObject>
     <ActorObject t0="43.5447" t1="7.05571" t2="-146.69" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" id="2" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
@@ -133,18 +133,12 @@
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
-    <EnvObject t0="62.4247" t1="8.84097" t2="-141.537" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+    <EnvObject t0="65.2471" t1="8.84109" t2="-141.924" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
         <parameters>
             <parameter name="BelongsTo" type="string" val="1923060698" />
             <parameter name="Name" type="string" val="animation_main" />
         </parameters>
     </EnvObject>
-    <Group t0="74.037" t1="6.33803" t2="-165.87" s0="1.90483" s1="1.00182" s2="3.1525" q0="0" q1="0" q2="0" q3="1" id="17" version="1">
-        <parameters>
-            <parameter name="BelongsTo" type="string" val="852412933" />
-            <parameter name="Name" type="string" val="animation_main" />
-        </parameters>
-    </Group>
     <EnvObject t0="33.8034" t1="6.10383" t2="-156.944" s0="7.01135" s1="1" s2="8.24868" q0="0" q1="0" q2="0" q3="1" id="24" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
@@ -342,28 +336,16 @@
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
-    <EnvObject t0="55.4676" t1="4.44348" t2="-144.81" s0="3.11147" s1="1" s2="1.61096" q0="0" q1="0" q2="0" q3="1" id="44" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="74.0235" t1="6.74407" t2="-168.39" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="46" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="55.5722" t1="4.45312" t2="-140.998" s0="3.11147" s1="1" s2="1.61096" q0="0" q1="0" q2="0" q3="1" id="47" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="74.0235" t1="8.6733" t2="-168.405" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="48" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="53.7401" t1="4.45274" t2="-142.563" s0="1.39844" s1="1" s2="0.682081" q0="0" q1="0" q2="0" q3="1" id="50" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="74.0235" t1="10.6016" t2="-168.427" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="51" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="74.0235" t1="12.5308" t2="-168.442" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="52" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="57.2015" t1="4.44841" t2="-142.51" s0="1.44344" s1="1" s2="0.709856" q0="0" q1="0" q2="0" q3="1" id="54" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="74.0235" t1="14.4601" t2="-168.463" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="55" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
@@ -436,7 +418,7 @@
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
-    <EnvObject t0="70.8129" t1="8.83724" t2="-141.549" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+    <EnvObject t0="68.0235" t1="8.84121" t2="-141.936" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
         <parameters>
             <parameter name="BelongsTo" type="string" val="460384005" />
             <parameter name="Name" type="string" val="animation_main" />
@@ -490,11 +472,221 @@
     <EnvObject t0="95.9961" t1="-0.350031" t2="-147.811" s0="11.4695" s1="3.62058" s2="1.24189" q0="0" q1="0" q2="0" q3="1" id="99" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <Group t0="119.735" t1="34.3912" t2="-210.537" s0="38.6724" s1="35.6015" s2="38.0367" q0="0" q1="0.503396" q2="0" q3="0.864056" id="106" version="1">
+    <Group t0="119.734" t1="33.705" t2="-210.537" s0="38.6724" s1="35.6015" s2="38.0367" q0="0" q1="-0.603032" q2="0" q3="0.797718" id="104" version="1">
         <parameters>
             <parameter name="BelongsTo" type="string" val="1978676576" />
             <parameter name="Name" type="string" val="animation_main" />
         </parameters>
+        <EnvObject t0="104.19" t1="32.551" t2="-206.635" s0="0.580369" s1="0.580369" s2="0.580369" q0="0.586288" q1="-0.408326" q2="0.440194" q3="0.543843" id="9" color_r="0.308536" color_g="0.423529" color_b="0.245813" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="119.088" t1="33.5539" t2="-211.328" s0="1.31111" s1="1.31111" s2="1.31111" q0="0" q1="-0.600418" q2="0" q3="0.799687" id="10" color_r="0" color_g="0.611765" color_b="1" overbright="0" type_file="Data/Objects/Crete/sphere_crete_whole.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="111.721" t1="32.7323" t2="-197.614" s0="0.580369" s1="0.580369" s2="0.580369" q0="0.373262" q1="0.365455" q2="0.630856" q3="0.573706" id="11" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="110.442" t1="41.6456" t2="-201.36" s0="0.647069" s1="0.647069" s2="0.647069" q0="-0.129414" q1="0.732964" q2="0.499457" q3="0.443349" id="14" color_r="0.427465" color_g="0.447059" color_b="0.113956" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="121.808" t1="37.2449" t2="-196.227" s0="0.647069" s1="0.647069" s2="0.647069" q0="0.566084" q1="0.422453" q2="0.213553" q3="0.674892" id="40" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="120.082" t1="48.823" t2="-209.249" s0="0.647069" s1="0.647069" s2="0.647069" q0="0.0773655" q1="0.61622" q2="0.0050444" q3="0.783749" id="43" color_r="0.99999" color_g="1" color_b="0.999992" overbright="4.52" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="119.109" t1="18.4079" t2="-212.109" s0="0.747913" s1="0.747913" s2="0.747913" q0="0.989349" q1="0.0143762" q2="0.141579" q3="-0.0303845" id="45" color_r="0.99999" color_g="1" color_b="0.999992" overbright="11.864" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="132.496" t1="34.7617" t2="-203.715" s0="0.647069" s1="0.647069" s2="0.647069" q0="0.412327" q1="0.086871" q2="-0.541419" q3="0.727535" id="49" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="130.255" t1="38.766" t2="-204.145" s0="0.647069" s1="0.647069" s2="0.647069" q0="0.417963" q1="0.0535561" q2="-0.481388" q3="0.768574" id="53" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="133.261" t1="31.8694" t2="-216.655" s0="0.647069" s1="0.647069" s2="0.647069" q0="-0.155192" q1="0.0613375" q2="-0.734173" q3="0.658135" id="57" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="132.772" t1="39.778" t2="-213.451" s0="0.647069" s1="0.647069" s2="0.647069" q0="-0.52233" q1="-0.711147" q2="-0.191687" q3="0.429781" id="66" color_r="0.403952" color_g="0.447059" color_b="0.113956" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="106.79" t1="42.5259" t2="-213.794" s0="0.580369" s1="0.580369" s2="0.580369" q0="0.42107" q1="-0.825166" q2="-0.108873" q3="-0.360476" id="68" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="104.695" t1="33.0129" t2="-216.581" s0="0.580369" s1="0.580369" s2="0.580369" q0="0.516434" q1="-0.64349" q2="0.494044" q3="0.274103" id="69" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="112.28" t1="34.9538" t2="-224.576" s0="0.580369" s1="0.580369" s2="0.580369" q0="0.282065" q1="-0.740922" q2="0.608473" q3="0.0350147" id="70" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="122.717" t1="40.8839" t2="-223.859" s0="0.580369" s1="0.580369" s2="0.580369" q0="-0.00218636" q1="-0.818595" q2="0.525326" q3="-0.232213" id="71" color_r="0.447059" color_g="0.317737" color_b="0.113956" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="123.17" t1="31.5112" t2="-225.961" s0="0.580369" s1="0.580369" s2="0.580369" q0="0.659259" q1="-0.092127" q2="0.321981" q3="-0.673214" id="72" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="125.23" t1="25.1145" t2="-200.375" s0="0.647069" s1="0.647069" s2="0.647069" q0="0.852701" q1="0.344157" q2="0.220223" q3="0.325516" id="73" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="108.857" t1="23.6409" t2="-206.622" s0="0.647069" s1="0.647069" s2="0.647069" q0="0.655838" q1="-0.127096" q2="0.612059" q3="0.423218" id="75" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="112.187" t1="24.5694" t2="-221.472" s0="0.580369" s1="0.580369" s2="0.580369" q0="0.845501" q1="-0.356751" q2="0.290644" q3="-0.270881" id="77" color_r="0.113956" color_g="0.447059" color_b="0.153145" overbright="0" type_file="Data/Objects/Crete/sphere_crete_rubble.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="104.316" t1="43.3049" t2="-209.447" s0="1" s1="1" s2="1" q0="0.356729" q1="-0.627061" q2="0.274145" q3="0.635916" id="78" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="105.186" t1="42.0315" t2="-219.177" s0="1" s1="1" s2="1" q0="0.258291" q1="-0.744852" q2="0.412576" q3="0.456368" id="79" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="105.227" t1="43.5811" t2="-215.704" s0="1" s1="1" s2="1" q0="0.2602" q1="-0.686984" q2="0.372581" q3="0.567041" id="80" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="102.138" t1="31.3127" t2="-215.355" s0="1" s1="1" s2="1" q0="0.052613" q1="-0.211299" q2="0.705451" q3="0.674481" id="81" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="106.942" t1="38.0711" t2="-222.484" s0="1" s1="1" s2="1" q0="-0.0759867" q1="-0.47373" q2="0.602341" q3="0.637964" id="82" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="133.584" t1="34.1758" t2="-222.325" s0="1" s1="1" s2="1" q0="-0.676706" q1="-0.695792" q2="0.112004" q3="0.213092" id="83" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="136.626" t1="34.9535" t2="-213.56" s0="1" s1="1" s2="1" q0="-0.693261" q1="-0.705534" q2="0.0449448" q3="0.140002" id="84" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="134.901" t1="30.6274" t2="-202.883" s0="1" s1="1" s2="1" q0="-0.624698" q1="-0.715789" q2="-0.268925" q3="-0.158382" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="132.213" t1="34.1243" t2="-198.97" s0="1" s1="1" s2="1" q0="-0.613506" q1="-0.701657" q2="-0.297824" q3="-0.2064" id="88" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="123.25" t1="33.2749" t2="-193.566" s0="1" s1="1" s2="1" q0="-0.505732" q1="-0.566148" q2="-0.484251" q3="-0.434998" id="90" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="124.805" t1="39.5226" t2="-195.472" s0="1" s1="1" s2="1" q0="-0.467956" q1="-0.615349" q2="-0.404656" q3="-0.488492" id="92" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="115.542" t1="35.7972" t2="-194.355" s0="1" s1="1" s2="1" q0="-0.360046" q1="-0.466115" q2="-0.55644" q3="-0.586079" id="98" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="106.956" t1="33.3833" t2="-198.728" s0="1.06652" s1="1.06652" s2="1.06652" q0="-0.384236" q1="-0.115152" q2="-0.542083" q3="-0.738415" id="100" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="109.928" t1="36.1777" t2="-196.898" s0="1.06652" s1="1.06652" s2="1.06652" q0="-0.443896" q1="-0.156528" q2="-0.512824" q3="-0.717964" id="101" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="103.093" t1="28.3915" t2="-214.353" s0="1.68069" s1="1.68069" s2="1.68069" q0="-0.418721" q1="0.227235" q2="0.60385" q3="0.639063" id="102" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="103.872" t1="37.2887" t2="-202.782" s0="1.68069" s1="1.68069" s2="1.68069" q0="-0.0314826" q1="0.43156" q2="0.615288" q3="0.658926" id="103" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1978676576" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
     </Group>
     <Hotspot t0="66.7335" t1="5.67272" t2="-144.916" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="108" type_file="Data/Objects/animated_hotspot.xml">
         <parameters>
@@ -537,6 +729,48 @@
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
+    <Group t0="74.037" t1="6.33803" t2="-165.87" s0="1.90483" s1="1.00182" s2="3.1525" q0="0" q1="0" q2="0" q3="1" id="116" version="1">
+        <parameters>
+            <parameter name="BelongsTo" type="string" val="852412933" />
+            <parameter name="Name" type="string" val="animation_main" />
+        </parameters>
+        <EnvObject t0="73.1692" t1="6.35574" t2="-165.86" s0="0.585382" s1="0.585382" s2="0.585382" q0="0" q1="0" q2="0" q3="1" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong2.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="852412933" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="73.5563" t1="5.8824" t2="-165.91" s0="1" s1="1" s2="1" q0="-0.710567" q1="0" q2="0" q3="0.703629" id="111" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="852412933" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="74.0386" t1="5.89459" t2="-164.743" s0="0.970146" s1="1.01067" s2="0.999994" q0="-0.709698" q1="0" q2="0" q3="0.704506" id="112" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="852412933" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="74.501" t1="5.88272" t2="-165.924" s0="1" s1="1" s2="1" q0="-0.710567" q1="0" q2="0" q3="0.703629" id="113" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="852412933" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="74.0291" t1="5.87727" t2="-167.101" s0="0.960134" s1="0.995389" s2="0.999995" q0="-0.709698" q1="0" q2="0" q3="0.704506" id="114" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="852412933" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="74.8613" t1="6.35117" t2="-165.88" s0="0.585382" s1="0.585382" s2="0.585382" q0="0" q1="0" q2="0" q3="1" id="115" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong2.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="852412933" />
+                <parameter name="Name" type="string" val="animation_child" />
+            </parameters>
+        </EnvObject>
+    </Group>
     <EnvObject t0="74.0383" t1="5.65561" t2="-163.981" s0="1.17892" s1="1.01089" s2="0.999967" q0="-0.353553" q1="-0.353553" q2="-0.612372" q3="0.612372" id="137" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
         <parameters />
     </EnvObject>
