@@ -296,17 +296,22 @@ void OnExit(MovementObject @mo) {
 }
 
 void Reset(){
-    if(objectPath != params.GetString("Object Path")){
-        if(FileExists(params.GetString("Object Path"))){
-            objectPath = params.GetString("Object Path");
-            CreateMainAnimationObject();
-            Object@ object = ReadObjectFromID(main_object);
-            object.SetTranslation(ReadObjectFromID(animation_keys[index]).GetTranslation());
-            object.SetRotation(ReadObjectFromID(animation_keys[index]).GetRotation());
-        }
-    }
     if(!ObjectExists(main_object)){
         CreateMainAnimationObject();
+        if(wiremesh_preview == 0){
+            for(uint i = 0; i < animation_keys.size(); i++){
+                Object@ key = ReadObjectFromID(animation_keys[i]);
+                PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(key);
+                if(IsGroupDerived(main_object)){
+                    placeholder_object.SetPreview(default_preview_mesh);
+                }else{
+                    placeholder_object.SetPreview(objectPath);
+                }
+            }
+        }
+        Object@ object = ReadObjectFromID(main_object);
+        object.SetTranslation(ReadObjectFromID(animation_keys[index]).GetTranslation());
+        object.SetRotation(ReadObjectFromID(animation_keys[index]).GetRotation());
     }
     ResetAnimation();
 }
@@ -349,6 +354,7 @@ bool CheckObjectsExist(){
 void ReceiveMessage(string msg){
     TokenIterator token_iter;
     token_iter.Init();
+    Print("received " + msg + "\n");
     while(token_iter.FindNextToken(msg)){
         string token = token_iter.GetToken(msg);
         if(token == "RewriteAnimationGroup"){
@@ -462,6 +468,7 @@ bool CheckParamChanges(){
             }
         }else if(objectPath != params.GetString("Object Path")){
             if(FileExists(params.GetString("Object Path"))){
+                objectPath = params.GetString("Object Path");
                 DeleteObjectID(main_object);
                 for(uint i = 0; i < children.size(); i++){
                     DeleteObjectID(children[i]);
@@ -790,6 +797,9 @@ void DrawEditor(){
     for(uint i = 0; i < uint(animation_keys.length()); ++i){
         if(ObjectExists(animation_keys[i])){
             Object @obj = ReadObjectFromID(animation_keys[i]);
+            if(obj.IsSelected()){
+                DebugDrawText(obj.GetTranslation(), "#" + (i + 1), 50.0f, true, _delete_on_draw);
+            }
             if(params.GetInt("Draw preview objects") == 1 && wiremesh_preview == 1){
                 SetObjectPreview(obj,objectPath);
             }
@@ -917,7 +927,7 @@ void Dispose(){
     if(!GetInputDown(0, "z")){
         for(uint i = 0; i < animation_keys.size(); i++){
             if(ObjectExists(animation_keys[i])){
-                DeleteObjectID(animation_keys[i]);
+                QueueDeleteObjectID(animation_keys[i]);
             }
         }
         for(uint i = 0; i < children.size(); i++){
