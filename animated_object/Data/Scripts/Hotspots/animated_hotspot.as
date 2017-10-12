@@ -22,6 +22,8 @@ array<int> children;
 float pi = 3.14159265f;
 string identifier;
 bool retrieve_children = false;
+int wiremesh_preview = 1;
+string default_preview_mesh = "Data/Objects/arrow.xml";
 
 enum PlayMode{
   kLoopForward = 0,
@@ -58,6 +60,7 @@ void Init() {
     model_path = params.GetString("Model Path");
     current_mode = PlayMode(params.GetInt("Play mode"));
     objectPath = params.GetString("Object Path");
+    wiremesh_preview = params.GetInt("Wiremesh preview");
     if(ui_time == 0.0f){
         //The level is loaded with an existing animation hotspot in it.
         retrieve_children = true;
@@ -234,6 +237,7 @@ void SetParameters() {
     params.AddFloatSlider("Interpolation",1.0f,"min:0.0,max:1.0,step:0.1,text_mult:1");
     params.AddString("Object Path", "Data/Objects/arrow.xml");
     params.AddIntCheckbox("Const speed", true);
+    params.AddIntCheckbox("Wiremesh preview", false);
     params.AddIntCheckbox("AI trigger", false);
     params.AddIntCheckbox("Interpolate translation", false);
     params.AddIntCheckbox("Interpolate rotation", false);
@@ -471,6 +475,28 @@ bool CheckParamChanges(){
             ResetAnimation();
             return true;
         }
+        if(wiremesh_preview != params.GetInt("Wiremesh preview")){
+            wiremesh_preview = params.GetInt("Wiremesh preview");
+            if(params.GetInt("Draw preview objects") == 1 && wiremesh_preview == 0){
+                for(uint i = 0; i < animation_keys.size(); i++){
+                    Object@ key = ReadObjectFromID(animation_keys[i]);
+                    PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(key);
+                    if(IsGroupDerived(main_object)){
+                        placeholder_object.SetPreview(default_preview_mesh);
+                    }else{
+                        placeholder_object.SetPreview(objectPath);
+                    }
+                }
+            }else{
+                for(uint i = 0; i < animation_keys.size(); i++){
+                    Object@ key = ReadObjectFromID(animation_keys[i]);
+                    PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(key);
+                    placeholder_object.SetPreview("");
+                    placeholder_object.SetEditorDisplayName("Animation Key");
+                }
+            }
+            return true;
+        }
     }
     return false;
 }
@@ -530,6 +556,8 @@ void UpdateTransform(){
         if(animation_keys.size() > 0){
             Object@ firstPathpoint = ReadObjectFromID(animation_keys[0]);
             Object@ mainObject = ReadObjectFromID(main_object);
+            mainObject.SetTranslation(firstPathpoint.GetTranslation());
+            mainObject.SetRotation(firstPathpoint.GetRotation());
             index = 0;
         }
     }
@@ -762,7 +790,7 @@ void DrawEditor(){
     for(uint i = 0; i < uint(animation_keys.length()); ++i){
         if(ObjectExists(animation_keys[i])){
             Object @obj = ReadObjectFromID(animation_keys[i]);
-            if(params.GetInt("Draw preview objects") == 1){
+            if(params.GetInt("Draw preview objects") == 1 && wiremesh_preview == 1){
                 SetObjectPreview(obj,objectPath);
             }
             if(params.GetInt("Draw connect lines") == 1){
@@ -815,6 +843,22 @@ void CreatePathpoint(){
     placeholderParams.AddString("Name", "animation_key");
     placeholderParams.AddString("Playsound", "");
     newObj.SetTranslation(main_hotspot.GetTranslation() + ((animation_keys.size() - 1) * vec3(0.0f,1.0f,0.0f)));
+
+    if(params.GetInt("Draw preview objects") == 1){
+        if(params.GetInt("Wiremesh preview") == 0){
+            PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(newObj);
+            if(IsGroupDerived(main_object)){
+                placeholder_object.SetPreview(default_preview_mesh);
+            }else{
+                placeholder_object.SetPreview(objectPath);
+            }
+            placeholder_object.SetEditorDisplayName("Animation Key");
+        }
+    }else{
+        PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(newObj);
+        placeholder_object.SetPreview("");
+        placeholder_object.SetEditorDisplayName("Animation Key");
+    }
 }
 
 void CreateMainAnimationObject(){
