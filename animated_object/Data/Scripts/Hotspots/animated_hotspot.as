@@ -353,6 +353,10 @@ void ReceiveMessage(string msg){
             }
             RewriteAnimationGroup();
         }else if(token == "level_event"){
+            ScriptParams@ level_params = level.GetScriptParams();
+            if(level_params.HasParam("RewritingIdentifier") || !EditorModeActive()){
+                return;
+            }
             token_iter.FindNextToken(msg);
             string command = token_iter.GetToken(msg);
             if(command == "added_object"){
@@ -464,6 +468,7 @@ bool CheckParamChanges(){
             }
         }else if(current_mode != PlayMode(params.GetInt("Play mode"))){
             UpdatePlayMode();
+            ResetAnimation();
             return true;
         }
     }
@@ -840,8 +845,11 @@ void FindNewChildren(){
         ScriptParams@ obj_params = obj.GetScriptParams();
         if(!obj_params.HasParam("" + hotspot.GetID())){
             if(!obj_params.HasParam("Name")){
+                obj_params.AddString("Name", "animation_child");
             }
-            obj_params.AddString("Name", "animation_child");
+            if(!obj_params.HasParam("BelongsTo")){
+                obj_params.SetString("BelongsTo", identifier);
+            }
             children.insertLast(all_objects[i]);
         }else{
             obj_params.Remove("" + hotspot.GetID());
@@ -862,22 +870,24 @@ void WritePlaceholderIndexes(){
 
 void Dispose(){
     level.StopReceivingLevelEvents(hotspot.GetID());
-    for(uint i = 0; i < animation_keys.size(); i++){
-        if(ObjectExists(animation_keys[i])){
-            DeleteObjectID(animation_keys[i]);
-        }
-    }
-    for(uint i = 0; i < children.size(); i++){
-        if(ObjectExists(children[i])){
-            //A work-around deleting manually VS closing the game.
-            if(GetInputDown(0, "delete")){
-                DeleteObjectID(children[i]);
-            }else{
-                QueueDeleteObjectID(children[i]);
+    if(!GetInputDown(0, "z")){
+        for(uint i = 0; i < animation_keys.size(); i++){
+            if(ObjectExists(animation_keys[i])){
+                DeleteObjectID(animation_keys[i]);
             }
         }
-    }
-    if(ObjectExists(main_object)){
-        DeleteObjectID(main_object);
+        for(uint i = 0; i < children.size(); i++){
+            if(ObjectExists(children[i])){
+                //A work-around deleting manually VS closing the game.
+                if(GetInputDown(0, "delete")){
+                    DeleteObjectID(children[i]);
+                }else{
+                    QueueDeleteObjectID(children[i]);
+                }
+            }
+        }
+        if(ObjectExists(main_object)){
+            DeleteObjectID(main_object);
+        }
     }
 }
