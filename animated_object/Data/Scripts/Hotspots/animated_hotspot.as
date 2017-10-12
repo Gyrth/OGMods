@@ -354,7 +354,6 @@ bool CheckObjectsExist(){
 void ReceiveMessage(string msg){
     TokenIterator token_iter;
     token_iter.Init();
-    Print("received " + msg + "\n");
     while(token_iter.FindNextToken(msg)){
         string token = token_iter.GetToken(msg);
         if(token == "RewriteAnimationGroup"){
@@ -589,7 +588,7 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
         vec3 path_direction = normalize(new_position - object.GetTranslation());
         vec3 up_direction = normalize(mix(previous_pathpoint.GetRotation(), current_pathpoint.GetRotation(), alpha) * vec3(0.0f, 1.0f, 0.0f));
 
-        float rotation_y = atan2(path_direction.z, -path_direction.x) - (90 / 180.0f * pi);
+        float rotation_y = atan2(path_direction.z, -path_direction.x) + (90 / 180.0f * pi);
         float rotation_x = asin(-path_direction.y);
 
         vec3 previous_direction = normalize(previous_pathpoint.GetRotation() * vec3(1.0f, 0.0f, 0.0f));
