@@ -1,19 +1,42 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="4.27942" t1="-1.42096" t2="1.33124" s0="7.61983" s1="2.09539" s2="6.33267" q0="0" q1="0" q2="0" q3="1" id="72" version="1">
+    <Group t0="48.2844" t1="10.9775" t2="-203.901" s0="3.601" s1="2.41079" s2="4.0403" q0="0" q1="0" q2="0" q3="1" id="241" version="1">
         <parameters />
-        <Group t0="1.61417" t1="-1.42096" t2="-0.785055" s0="2.08539" s1="2.08539" s2="2.08539" q0="0" q1="0" q2="0" q3="1" id="20" version="1">
+        <Group t0="48.2319" t1="11.2742" t2="-203.977" s0="1.74778" s1="1.80747" s2="3.45863" q0="0" q1="0" q2="0" q3="1" id="176" version="1">
             <parameters />
-            <Hotspot t0="1.61417" t1="-1.42096" t2="-0.785055" s0="0.518846" s1="0.518846" s2="0.518846" q0="0" q1="0" q2="0" q3="1" id="8" type_file="Data/Objects/animated_hotspot.xml">
+            <EnvObject t0="48.2319" t1="10.7495" t2="-203.978" s0="1.86192" s1="1.86192" s2="1.86192" q0="0" q1="0.707107" q2="-0.707107" q3="0" id="167" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="48.9812" t1="10.5887" t2="-203.966" s0="1" s1="1.24165" s2="1.18139" q0="0" q1="0.707107" q2="0.707107" q3="0" id="168" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="48.2631" t1="11.4445" t2="-204.13" s0="1.74584" s1="0.786737" s2="1.91577" q0="0" q1="1" q2="0" q3="0" id="171" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="48.2659" t1="11.4469" t2="-204.463" s0="1.7867" s1="0.4667" s2="1.78186" q0="0" q1="0.707107" q2="-0.707107" q3="0" id="172" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="48.2793" t1="11.0635" t2="-204.8" s0="1.68243" s1="0.448179" s2="1.78186" q0="0" q1="1" q2="0" q3="0" id="173" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="48.2319" t1="10.4336" t2="-203.977" s0="1.86192" s1="1.86192" s2="1.86192" q0="0" q1="0.707107" q2="-0.707107" q3="0" id="174" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="47.4813" t1="10.5897" t2="-203.971" s0="1" s1="1.21886" s2="1.41679" q0="0" q1="0.707107" q2="0.707107" q3="0" id="175" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <Group t0="49.3176" t1="10.5394" t2="-205.148" s0="1.52457" s1="1.52457" s2="1.52456" q0="0" q1="0.707107" q2="0" q3="0.707107" id="180" version="1">
+            <parameters />
+            <Hotspot t0="49.3176" t1="10.5394" t2="-205.148" s0="0.378643" s1="0.378643" s2="0.378643" q0="0" q1="0.707107" q2="0" q3="0.707107" id="177" type_file="Data/Objects/animated_hotspot.xml">
                 <parameters>
                     <parameter name="AI trigger" type="int" val="0" />
-                    <parameter name="All IDS" type="string" val=", 16, 17, 15" />
                     <parameter name="Const speed" type="int" val="0" />
                     <parameter name="Draw connect lines" type="int" val="1" />
                     <parameter name="Draw path lines" type="int" val="0" />
                     <parameter name="Draw preview objects" type="int" val="1" />
-                    <parameter name="Identifier" type="string" val="1176211903" />
+                    <parameter name="Identifier" type="string" val="1502051922" />
                     <parameter name="Interpolate rotation" type="int" val="0" />
                     <parameter name="Interpolate translation" type="int" val="0" />
                     <parameter name="Interpolation" type="float" val="1" />
@@ -23,11 +46,12 @@
                     <parameter name="Play mode" type="int" val="0" />
                     <parameter name="Scale Object Preview" type="int" val="0" />
                     <parameter name="Seconds" type="float" val="1" />
+                    <parameter name="Wiremesh preview" type="int" val="0" />
                 </parameters>
             </Hotspot>
-            <PlaceholderObject t0="1.61417" t1="-1.42096" t2="-0.785055" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" type_file="" special_type="0">
+            <PlaceholderObject t0="49.2718" t1="10.6052" t2="-205.178" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="178" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1176211903" />
+                    <parameter name="BelongsTo" type="string" val="1502051922" />
                     <parameter name="Index" type="int" val="0" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -36,9 +60,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="1.61417" t1="-1.42096" t2="-0.785055" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="17" type_file="" special_type="0">
+            <PlaceholderObject t0="49.2718" t1="10.6052" t2="-205.178" s0="1" s1="1" s2="1" q0="-0.5" q1="0.5" q2="-0.5" q3="0.5" id="179" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1176211903" />
+                    <parameter name="BelongsTo" type="string" val="1502051922" />
                     <parameter name="Index" type="int" val="1" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -47,9 +71,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="1.61417" t1="-1.42096" t2="-0.785054" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-1" q3="0" id="18" type_file="" special_type="0">
+            <PlaceholderObject t0="49.2718" t1="10.6051" t2="-205.178" s0="1" s1="1" s2="1" q0="-0.707107" q1="0" q2="-0.707107" q3="0" id="150" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1176211903" />
+                    <parameter name="BelongsTo" type="string" val="1502051922" />
                     <parameter name="Index" type="int" val="2" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -58,9 +82,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="1.61417" t1="-1.42096" t2="-0.785055" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.707107" q3="0.707107" id="19" type_file="" special_type="0">
+            <PlaceholderObject t0="49.2718" t1="10.6051" t2="-205.178" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="0.5" q3="0.5" id="152" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1176211903" />
+                    <parameter name="BelongsTo" type="string" val="1502051922" />
                     <parameter name="Index" type="int" val="3" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -70,17 +94,16 @@
                 </Connections>
             </PlaceholderObject>
         </Group>
-        <Group t0="7.04164" t1="-1.42096" t2="-0.787406" s0="2.08539" s1="2.08539" s2="2.08539" q0="0" q1="0" q2="0" q3="1" id="44" version="1">
+        <Group t0="49.3176" t1="10.5394" t2="-202.648" s0="1.52457" s1="1.52457" s2="1.52456" q0="0" q1="0.707107" q2="0" q3="0.707107" id="210" version="1">
             <parameters />
-            <Hotspot t0="7.04164" t1="-1.42096" t2="-0.787406" s0="0.518846" s1="0.518846" s2="0.518846" q0="0" q1="0" q2="0" q3="1" id="33" type_file="Data/Objects/animated_hotspot.xml">
+            <Hotspot t0="49.3176" t1="10.5394" t2="-202.648" s0="0.378643" s1="0.378643" s2="0.378643" q0="0" q1="0.707107" q2="0" q3="0.707107" id="201" type_file="Data/Objects/animated_hotspot.xml">
                 <parameters>
                     <parameter name="AI trigger" type="int" val="0" />
-                    <parameter name="All IDS" type="string" val=", 34, 41, 42, 43, 45" />
                     <parameter name="Const speed" type="int" val="0" />
                     <parameter name="Draw connect lines" type="int" val="1" />
                     <parameter name="Draw path lines" type="int" val="0" />
                     <parameter name="Draw preview objects" type="int" val="1" />
-                    <parameter name="Identifier" type="string" val="1983143031" />
+                    <parameter name="Identifier" type="string" val="578383766" />
                     <parameter name="Interpolate rotation" type="int" val="0" />
                     <parameter name="Interpolate translation" type="int" val="0" />
                     <parameter name="Interpolation" type="float" val="1" />
@@ -90,11 +113,12 @@
                     <parameter name="Play mode" type="int" val="0" />
                     <parameter name="Scale Object Preview" type="int" val="0" />
                     <parameter name="Seconds" type="float" val="1" />
+                    <parameter name="Wiremesh preview" type="int" val="0" />
                 </parameters>
             </Hotspot>
-            <PlaceholderObject t0="7.04164" t1="-1.42096" t2="-0.787406" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="34" type_file="" special_type="0">
+            <PlaceholderObject t0="49.2718" t1="10.6052" t2="-202.678" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="202" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1983143031" />
+                    <parameter name="BelongsTo" type="string" val="578383766" />
                     <parameter name="Index" type="int" val="0" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -103,9 +127,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="7.04164" t1="-1.42096" t2="-0.787406" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="41" type_file="" special_type="0">
+            <PlaceholderObject t0="49.2718" t1="10.6052" t2="-202.678" s0="1" s1="1" s2="1" q0="-0.5" q1="0.5" q2="-0.5" q3="0.5" id="203" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1983143031" />
+                    <parameter name="BelongsTo" type="string" val="578383766" />
                     <parameter name="Index" type="int" val="1" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -114,9 +138,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="7.04164" t1="-1.42096" t2="-0.787405" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-1" q3="0" id="42" type_file="" special_type="0">
+            <PlaceholderObject t0="49.2718" t1="10.6051" t2="-202.678" s0="1" s1="1" s2="1" q0="-0.707107" q1="0" q2="-0.707107" q3="0" id="207" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1983143031" />
+                    <parameter name="BelongsTo" type="string" val="578383766" />
                     <parameter name="Index" type="int" val="2" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -125,9 +149,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="7.04164" t1="-1.42096" t2="-0.787406" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.707107" q3="0.707107" id="43" type_file="" special_type="0">
+            <PlaceholderObject t0="49.2718" t1="10.6051" t2="-202.678" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="0.5" q3="0.5" id="209" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1983143031" />
+                    <parameter name="BelongsTo" type="string" val="578383766" />
                     <parameter name="Index" type="int" val="3" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -137,17 +161,16 @@
                 </Connections>
             </PlaceholderObject>
         </Group>
-        <Group t0="6.87885" t1="-1.42096" t2="3.44988" s0="2.08539" s1="2.08539" s2="2.08539" q0="0" q1="0" q2="0" q3="1" id="57" version="1">
+        <Group t0="47.2511" t1="10.548" t2="-202.654" s0="1.52457" s1="1.52457" s2="1.52456" q0="0" q1="0.707107" q2="0" q3="0.707107" id="226" version="1">
             <parameters />
-            <Hotspot t0="6.87885" t1="-1.42096" t2="3.44988" s0="0.518846" s1="0.518846" s2="0.518846" q0="0" q1="0" q2="0" q3="1" id="52" type_file="Data/Objects/animated_hotspot.xml">
+            <Hotspot t0="47.2511" t1="10.548" t2="-202.654" s0="0.378643" s1="0.378643" s2="0.378643" q0="0" q1="0.707107" q2="0" q3="0.707107" id="221" type_file="Data/Objects/animated_hotspot.xml">
                 <parameters>
                     <parameter name="AI trigger" type="int" val="0" />
-                    <parameter name="All IDS" type="string" val=", 53, 54, 55, 56, 58" />
                     <parameter name="Const speed" type="int" val="0" />
                     <parameter name="Draw connect lines" type="int" val="1" />
                     <parameter name="Draw path lines" type="int" val="0" />
                     <parameter name="Draw preview objects" type="int" val="1" />
-                    <parameter name="Identifier" type="string" val="268047566" />
+                    <parameter name="Identifier" type="string" val="366793822" />
                     <parameter name="Interpolate rotation" type="int" val="0" />
                     <parameter name="Interpolate translation" type="int" val="0" />
                     <parameter name="Interpolation" type="float" val="1" />
@@ -157,11 +180,12 @@
                     <parameter name="Play mode" type="int" val="0" />
                     <parameter name="Scale Object Preview" type="int" val="0" />
                     <parameter name="Seconds" type="float" val="1" />
+                    <parameter name="Wiremesh preview" type="int" val="0" />
                 </parameters>
             </Hotspot>
-            <PlaceholderObject t0="6.87885" t1="-1.42096" t2="3.44988" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" type_file="" special_type="0">
+            <PlaceholderObject t0="47.2054" t1="10.6137" t2="-202.683" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="222" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="268047566" />
+                    <parameter name="BelongsTo" type="string" val="366793822" />
                     <parameter name="Index" type="int" val="0" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -170,9 +194,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="6.87885" t1="-1.42096" t2="3.44988" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="54" type_file="" special_type="0">
+            <PlaceholderObject t0="47.2054" t1="10.6137" t2="-202.683" s0="1" s1="1" s2="1" q0="-0.5" q1="0.5" q2="-0.5" q3="0.5" id="223" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="268047566" />
+                    <parameter name="BelongsTo" type="string" val="366793822" />
                     <parameter name="Index" type="int" val="1" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -181,9 +205,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="6.87885" t1="-1.42096" t2="3.44988" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-1" q3="0" id="55" type_file="" special_type="0">
+            <PlaceholderObject t0="47.2054" t1="10.6137" t2="-202.683" s0="1" s1="1" s2="1" q0="-0.707107" q1="0" q2="-0.707107" q3="0" id="224" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="268047566" />
+                    <parameter name="BelongsTo" type="string" val="366793822" />
                     <parameter name="Index" type="int" val="2" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -192,9 +216,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="6.87885" t1="-1.42096" t2="3.44988" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.707107" q3="0.707107" id="56" type_file="" special_type="0">
+            <PlaceholderObject t0="47.2054" t1="10.6137" t2="-202.683" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="0.5" q3="0.5" id="225" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="268047566" />
+                    <parameter name="BelongsTo" type="string" val="366793822" />
                     <parameter name="Index" type="int" val="3" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -204,17 +228,16 @@
                 </Connections>
             </PlaceholderObject>
         </Group>
-        <Group t0="1.51719" t1="-1.42096" t2="3.34412" s0="2.08539" s1="2.08539" s2="2.08539" q0="0" q1="0" q2="0" q3="1" id="70" version="1">
+        <Group t0="47.2511" t1="10.548" t2="-205.154" s0="1.52457" s1="1.52457" s2="1.52456" q0="0" q1="0.707107" q2="0" q3="0.707107" id="239" version="1">
             <parameters />
-            <Hotspot t0="1.51719" t1="-1.42096" t2="3.34412" s0="0.518846" s1="0.518846" s2="0.518846" q0="0" q1="0" q2="0" q3="1" id="65" type_file="Data/Objects/animated_hotspot.xml">
+            <Hotspot t0="47.2511" t1="10.548" t2="-205.154" s0="0.378643" s1="0.378643" s2="0.378643" q0="0" q1="0.707107" q2="0" q3="0.707107" id="234" type_file="Data/Objects/animated_hotspot.xml">
                 <parameters>
                     <parameter name="AI trigger" type="int" val="0" />
-                    <parameter name="All IDS" type="string" val=", 66, 67, 68, 69, 71" />
                     <parameter name="Const speed" type="int" val="0" />
                     <parameter name="Draw connect lines" type="int" val="1" />
                     <parameter name="Draw path lines" type="int" val="0" />
                     <parameter name="Draw preview objects" type="int" val="1" />
-                    <parameter name="Identifier" type="string" val="1802036125" />
+                    <parameter name="Identifier" type="string" val="1565712188" />
                     <parameter name="Interpolate rotation" type="int" val="0" />
                     <parameter name="Interpolate translation" type="int" val="0" />
                     <parameter name="Interpolation" type="float" val="1" />
@@ -224,11 +247,12 @@
                     <parameter name="Play mode" type="int" val="0" />
                     <parameter name="Scale Object Preview" type="int" val="0" />
                     <parameter name="Seconds" type="float" val="1" />
+                    <parameter name="Wiremesh preview" type="int" val="0" />
                 </parameters>
             </Hotspot>
-            <PlaceholderObject t0="1.51719" t1="-1.42096" t2="3.34412" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="66" type_file="" special_type="0">
+            <PlaceholderObject t0="47.2054" t1="10.6137" t2="-205.183" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="235" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1802036125" />
+                    <parameter name="BelongsTo" type="string" val="1565712188" />
                     <parameter name="Index" type="int" val="0" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -237,9 +261,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="1.51719" t1="-1.42096" t2="3.34412" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="67" type_file="" special_type="0">
+            <PlaceholderObject t0="47.2054" t1="10.6137" t2="-205.183" s0="1" s1="1" s2="1" q0="-0.5" q1="0.5" q2="-0.5" q3="0.5" id="236" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1802036125" />
+                    <parameter name="BelongsTo" type="string" val="1565712188" />
                     <parameter name="Index" type="int" val="1" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -248,9 +272,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="1.51719" t1="-1.42096" t2="3.34412" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-1" q3="0" id="68" type_file="" special_type="0">
+            <PlaceholderObject t0="47.2054" t1="10.6137" t2="-205.183" s0="1" s1="1" s2="1" q0="-0.707107" q1="0" q2="-0.707107" q3="0" id="237" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1802036125" />
+                    <parameter name="BelongsTo" type="string" val="1565712188" />
                     <parameter name="Index" type="int" val="2" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
@@ -259,9 +283,9 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="1.51719" t1="-1.42096" t2="3.34412" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.707107" q3="0.707107" id="69" type_file="" special_type="0">
+            <PlaceholderObject t0="47.2054" t1="10.6137" t2="-205.183" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="0.5" q3="0.5" id="238" type_file="Data/Objects/wheel.xml" special_type="0">
                 <parameters>
-                    <parameter name="BelongsTo" type="string" val="1802036125" />
+                    <parameter name="BelongsTo" type="string" val="1565712188" />
                     <parameter name="Index" type="int" val="3" />
                     <parameter name="Name" type="string" val="animation_key" />
                     <parameter name="Playsound" type="string" val="" />
