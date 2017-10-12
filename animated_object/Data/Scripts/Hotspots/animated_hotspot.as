@@ -149,7 +149,6 @@ void PostInit(){
     if(post_init_done){
         return;
     }
-    Print("Start recieving " + hotspot.GetID() + "\n");
     level.ReceiveLevelEvents(hotspot.GetID());
     //When the level first loads, there might already be animations setup
     //So those are retrieved first.
@@ -841,8 +840,8 @@ void FindNewChildren(){
         ScriptParams@ obj_params = obj.GetScriptParams();
         if(!obj_params.HasParam("" + hotspot.GetID())){
             if(!obj_params.HasParam("Name")){
-                obj_params.AddString("Name", "animation_child");
             }
+            obj_params.AddString("Name", "animation_child");
             children.insertLast(all_objects[i]);
         }else{
             obj_params.Remove("" + hotspot.GetID());
@@ -862,7 +861,6 @@ void WritePlaceholderIndexes(){
 }
 
 void Dispose(){
-    Print("Stop receving " + hotspot.GetID() + "\n");
     level.StopReceivingLevelEvents(hotspot.GetID());
     for(uint i = 0; i < animation_keys.size(); i++){
         if(ObjectExists(animation_keys[i])){
@@ -871,7 +869,12 @@ void Dispose(){
     }
     for(uint i = 0; i < children.size(); i++){
         if(ObjectExists(children[i])){
-            DeleteObjectID(children[i]);
+            //A work-around deleting manually VS closing the game.
+            if(GetInputDown(0, "delete")){
+                DeleteObjectID(children[i]);
+            }else{
+                QueueDeleteObjectID(children[i]);
+            }
         }
     }
     if(ObjectExists(main_object)){
