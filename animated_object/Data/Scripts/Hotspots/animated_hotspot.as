@@ -466,10 +466,10 @@ bool CheckParamChanges(){
         }else if(objectPath != params.GetString("Object Path")){
             if(FileExists(params.GetString("Object Path"))){
                 objectPath = params.GetString("Object Path");
-                DeleteObjectID(main_object);
                 for(uint i = 0; i < children.size(); i++){
                     DeleteObjectID(children[i]);
                 }
+                DeleteObjectID(main_object);
                 children.resize(0);
                 ResetLevel();
                 return true;
@@ -578,14 +578,20 @@ void UpdateTransform(){
             }
             CalculateTransform(object, alpha, node_distance);
         }
-    }else if(done == false && EditorModeActive()){
-        //If the animation is playing but no where to go, just stay at the first key.
+    }else if(EditorModeActive() || !playing && prev_node_id == -1){
         if(animation_keys.size() > 0){
             Object@ firstPathpoint = ReadObjectFromID(animation_keys[0]);
             Object@ mainObject = ReadObjectFromID(main_object);
             mainObject.SetTranslation(firstPathpoint.GetTranslation());
             mainObject.SetRotation(firstPathpoint.GetRotation());
-            index = 0;
+        }
+    }else if(prev_node_id != -1 && !playing){
+        //If the animation is playing but no where to go, just stay at the first key.
+        if(animation_keys.size() > 0){
+            Object@ firstPathpoint = ReadObjectFromID(prev_node_id);
+            Object@ mainObject = ReadObjectFromID(main_object);
+            mainObject.SetTranslation(firstPathpoint.GetTranslation());
+            mainObject.SetRotation(firstPathpoint.GetRotation());
         }
     }
     UpdateChildren();
