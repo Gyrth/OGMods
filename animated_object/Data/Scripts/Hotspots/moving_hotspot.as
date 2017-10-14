@@ -22,7 +22,7 @@ void Update(){
         for(uint i = 0; i < characters.size(); i++){
             MovementObject@ char = ReadCharacterID(characters[i]);
             /*vec3 new_vel = (new_position - old_position) / (the_time - old_time);*/
-            if(char.GetBoolVar("on_ground")){
+            if(char.GetBoolVar("on_ground") || char.QueryIntFunction("int IsOnLedge()") == 1){
                 /*char.velocity = new_vel;*/
                 char.position += new_position - old_position;
             }
