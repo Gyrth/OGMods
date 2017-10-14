@@ -863,7 +863,7 @@ void SetObjectPreview(Object@ spawn, string &in path){
 }
 
 void CreatePathpoint(){
-    int objID = CreateObject("Data/Objects/placeholder.xml", false);
+    int objID = CreateObject("Data/Objects/animation_key.xml", false);
     animation_keys.push_back(objID);
     Object @newObj = ReadObjectFromID(objID);
     newObj.SetSelectable(true);
@@ -876,9 +876,7 @@ void CreatePathpoint(){
     ScriptParams@ placeholderParams = newObj.GetScriptParams();
     //When a new pathpoint is created the hotspot ID is added to it's parameters.
     //This will be used when the level is closed and loaded again.
-    placeholderParams.AddString("BelongsTo", identifier);
-    placeholderParams.AddString("Name", "animation_key");
-    placeholderParams.AddString("Playsound", "");
+    placeholderParams.SetString("BelongsTo", identifier);
     newObj.SetTranslation(main_hotspot.GetTranslation() + ((animation_keys.size() - 1) * vec3(0.0f,1.0f,0.0f)));
 
     if(draw_preview_objects && wiremesh_preview == 0){
