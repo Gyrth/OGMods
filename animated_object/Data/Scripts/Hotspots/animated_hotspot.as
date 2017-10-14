@@ -23,6 +23,7 @@ float pi = 3.14159265f;
 string identifier;
 bool retrieve_children = false;
 int wiremesh_preview = 1;
+bool draw_preview_objects = false;
 string default_preview_mesh = "Data/Objects/arrow.xml";
 
 enum PlayMode{
@@ -61,6 +62,8 @@ void Init() {
     current_mode = PlayMode(params.GetInt("Play mode"));
     objectPath = params.GetString("Object Path");
     wiremesh_preview = params.GetInt("Wiremesh preview");
+    draw_preview_objects = (params.GetInt("Draw preview objects") == 1);
+
     if(ui_time == 0.0f){
         //The level is loaded with an existing animation hotspot in it.
         retrieve_children = true;
@@ -161,6 +164,11 @@ void PostInit(){
         RemoveRewritingLevelParam();
     }
     UpdatePlayMode();
+    if(draw_preview_objects){
+        if(wiremesh_preview == 0){
+            AddPlaceholders();
+        }
+    }
     post_init_done = true;
 }
 
@@ -299,15 +307,7 @@ void Reset(){
     if(!ObjectExists(main_object)){
         CreateMainAnimationObject();
         if(wiremesh_preview == 0){
-            for(uint i = 0; i < animation_keys.size(); i++){
-                Object@ key = ReadObjectFromID(animation_keys[i]);
-                PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(key);
-                if(IsGroupDerived(main_object)){
-                    placeholder_object.SetPreview(default_preview_mesh);
-                }else{
-                    placeholder_object.SetPreview(objectPath);
-                }
-            }
+            AddPlaceholders();
         }
     }
     ResetAnimation();
@@ -478,30 +478,53 @@ bool CheckParamChanges(){
             ResetAnimation();
             return true;
         }
+        if(draw_preview_objects != (params.GetInt("Draw preview objects") == 1)){
+            draw_preview_objects = (params.GetInt("Draw preview objects") == 1);
+            if(draw_preview_objects && wiremesh_preview == 0){
+                AddPlaceholders();
+            }else{
+                RemovePlaceholders();
+            }
+            return true;
+        }
+
         if(wiremesh_preview != params.GetInt("Wiremesh preview")){
             wiremesh_preview = params.GetInt("Wiremesh preview");
-            if(params.GetInt("Draw preview objects") == 1 && wiremesh_preview == 0){
-                for(uint i = 0; i < animation_keys.size(); i++){
-                    Object@ key = ReadObjectFromID(animation_keys[i]);
-                    PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(key);
-                    if(IsGroupDerived(main_object)){
-                        placeholder_object.SetPreview(default_preview_mesh);
-                    }else{
-                        placeholder_object.SetPreview(objectPath);
-                    }
-                }
+            if(draw_preview_objects && wiremesh_preview == 0){
+                AddPlaceholders();
             }else{
-                for(uint i = 0; i < animation_keys.size(); i++){
-                    Object@ key = ReadObjectFromID(animation_keys[i]);
-                    PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(key);
-                    placeholder_object.SetPreview("");
-                    placeholder_object.SetEditorDisplayName("Animation Key");
-                }
+                RemovePlaceholders();
             }
             return true;
         }
     }
     return false;
+}
+
+void AddPlaceholders(){
+    for(uint i = 0; i < animation_keys.size(); i++){
+        Object@ key = ReadObjectFromID(animation_keys[i]);
+        AddPlaceholder(key);
+    }
+}
+
+void AddPlaceholder(Object@ key){
+    PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(key);
+    if(IsGroupDerived(main_object)){
+        placeholder_object.SetPreview(default_preview_mesh);
+    }else{
+        placeholder_object.SetPreview(objectPath);
+    }
+    placeholder_object.SetEditorDisplayName("Animation Key");
+}
+
+void RemovePlaceholders(){
+    for(uint i = 0; i < animation_keys.size(); i++){
+        Object@ key = ReadObjectFromID(animation_keys[i]);
+        PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(key);
+        placeholder_object.SetPreview("");
+        placeholder_object.SetEditorDisplayName("Animation Key");
+    }
 }
 
 Object@ current_pathpoint;
@@ -662,6 +685,14 @@ void CheckNewAnimationKey(int id){
         if(obj_params.GetString("BelongsTo") == identifier && animation_keys.find(id) == -1){
             animation_keys.insertAt(obj_params.GetInt("Index") + 1, id);
             params.SetInt("Number of Keys", params.GetInt("Number of Keys") + 1);
+
+            if(draw_preview_objects && wiremesh_preview == 0){
+                AddPlaceholder(obj);
+            }else{
+                PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(obj);
+                placeholder_object.SetEditorDisplayName("Animation Key");
+            }
+
             WritePlaceholderIndexes();
             ResetAnimation();
         }
@@ -796,7 +827,7 @@ void DrawEditor(){
             if(obj.IsSelected()){
                 DebugDrawText(obj.GetTranslation(), "#" + (i + 1), 50.0f, true, _delete_on_draw);
             }
-            if(params.GetInt("Draw preview objects") == 1 && wiremesh_preview == 1){
+            if(draw_preview_objects && wiremesh_preview == 1){
                 SetObjectPreview(obj,objectPath);
             }
             if(params.GetInt("Draw connect lines") == 1){
@@ -850,19 +881,10 @@ void CreatePathpoint(){
     placeholderParams.AddString("Playsound", "");
     newObj.SetTranslation(main_hotspot.GetTranslation() + ((animation_keys.size() - 1) * vec3(0.0f,1.0f,0.0f)));
 
-    if(params.GetInt("Draw preview objects") == 1){
-        if(params.GetInt("Wiremesh preview") == 0){
-            PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(newObj);
-            if(IsGroupDerived(main_object)){
-                placeholder_object.SetPreview(default_preview_mesh);
-            }else{
-                placeholder_object.SetPreview(objectPath);
-            }
-            placeholder_object.SetEditorDisplayName("Animation Key");
-        }
+    if(draw_preview_objects && wiremesh_preview == 0){
+        AddPlaceholder(newObj);
     }else{
         PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(newObj);
-        placeholder_object.SetPreview("");
         placeholder_object.SetEditorDisplayName("Animation Key");
     }
 }
