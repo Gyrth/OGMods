@@ -1,0 +1,77 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-45.6964" t1="13.1931" t2="-196.718" s0="8.6244" s1="10.674" s2="11.6682" q0="0" q1="0" q2="0" q3="1" id="362" version="1">
+        <parameters />
+        <Hotspot t0="-45.0863" t1="12.4708" t2="-200.547" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="267" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Forward" type="float" val="0" />
+                <parameter name="Identifier" type="string" val="1884190442" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="2" />
+                <parameter name="Object Path" type="string" val="Data/Objects/robot_head_lower.xml" />
+                <parameter name="Play mode" type="int" val="0" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="1" />
+                <parameter name="Wiremesh preview" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="-45.8148" t1="9.5486" t2="-193.811" s0="3.375" s1="3.375" s2="3.375" q0="0" q1="0" q2="0" q3="1" id="268" type_file="Data/Objects/arrow.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1884190442" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-45.8148" t1="11.5486" t2="-193.811" s0="3.375" s1="3.375" s2="3.375" q0="0" q1="0" q2="0" q3="1" id="269" type_file="Data/Objects/arrow.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1884190442" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <Group t0="-45.6964" t1="14.4599" t2="-193.635" s0="8.6144" s1="8.13038" s2="5.49206" q0="0" q1="0" q2="0" q3="1" id="288" version="1">
+            <parameters />
+            <EnvObject t0="-49.7217" t1="14.5028" t2="-193.454" s0="67.5404" s1="101.213" s2="73.8201" q0="0" q1="0.707107" q2="0" q3="0.707107" id="425" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="-41.7962" t1="14.3517" t2="-193.536" s0="67.5404" s1="106.493" s2="93.5072" q0="0" q1="0.707107" q2="0" q3="0.707107" id="426" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="-45.7898" t1="15.6992" t2="-195.935" s0="107.665" s1="71.201" s2="65.7698" q0="0" q1="1" q2="0" q3="0" id="427" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="-45.6572" t1="14.3795" t2="-191.234" s0="103.528" s1="106.763" s2="65.7698" q0="0" q1="1" q2="0" q3="0" id="428" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="-45.6119" t1="18.2929" t2="-193.64" s0="111.296" s1="71.0199" s2="60.5708" q0="0" q1="0.707107" q2="-0.707106" q3="0" id="429" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="-45.7758" t1="13.1643" t2="-193.541" s0="108.73" s1="66.0158" s2="78.1817" q0="0" q1="0.707107" q2="-0.707106" q3="0" id="430" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="-43.9498" t1="15.5621" t2="-195.674" s0="49.7277" s1="74.5916" s2="74.5916" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="272" color_r="1" color_g="0" color_b="0" overbright="50" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_stud.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="-47.4498" t1="15.5621" t2="-195.674" s0="49.7277" s1="74.5916" s2="74.5916" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="283" color_r="1" color_g="0" color_b="0" overbright="50" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_stud.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+    </Group>
+</ActorObjects>
