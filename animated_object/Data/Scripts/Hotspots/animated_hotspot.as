@@ -242,6 +242,7 @@ void SetParameters() {
     params.AddInt("Play mode", 0);
     params.AddInt("Number of Keys", 2);
     params.AddFloatSlider("Seconds",1.0f,"min:0.1,max:10.0,step:1.0,text_mult:1");
+    params.AddFloatSlider("Forward",0.0f,"min:0.0,max:360.0,step:1.0,text_mult:1");
     params.AddFloatSlider("Interpolation",1.0f,"min:0.0,max:1.0,step:0.1,text_mult:1");
     params.AddString("Object Path", "Data/Objects/arrow.xml");
     params.AddIntCheckbox("Const speed", true);
@@ -608,7 +609,7 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
         vec3 path_direction = normalize(new_position - object.GetTranslation());
         vec3 up_direction = normalize(mix(previous_pathpoint.GetRotation(), current_pathpoint.GetRotation(), alpha) * vec3(0.0f, 1.0f, 0.0f));
 
-        float rotation_y = atan2(path_direction.z, -path_direction.x) + (90 / 180.0f * pi);
+        float rotation_y = atan2(-path_direction.x, -path_direction.z) + (params.GetFloat("Forward") / 180.0f * pi);
         float rotation_x = asin(-path_direction.y);
 
         vec3 previous_direction = normalize(previous_pathpoint.GetRotation() * vec3(1.0f, 0.0f, 0.0f));
@@ -623,6 +624,8 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
         }
     }else{
         new_rotation = mix(previous_pathpoint.GetRotation(), current_pathpoint.GetRotation(), alpha);
+        float extra_y_rot = (params.GetFloat("Forward") / 180.0f * pi);
+        new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
     }
 
     if(params.GetInt("Draw path lines") == 1){
