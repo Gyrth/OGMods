@@ -56,6 +56,7 @@ class BowAndArrow {
     if(!allowAiming && !WantsToThrowItem()){
       allowAiming = true;
     }
+    HandleBowControls();
   }
 
   void TargetClosestEnemy(){
@@ -126,6 +127,11 @@ class BowAndArrow {
       }
     }
   }
+  void HandleBowControls(){
+      if(GetInputPressed(this_mo.controller_id, misc_key)){
+          SwapWeaponHands();
+      }
+  }
   void BowShoot(){
     if(weapon_slots[primary_weapon_slot] == -1){
       isAiming = false;
@@ -183,7 +189,7 @@ class BowAndArrow {
         case 2: draw_type = "Data/Animations/r_draw_bow_sideways.anm";break;
       }
     }
-    throw_anim = true;
+    throw_anim = false;
     mirrored_stance = false;
     this_mo.SetAnimation(draw_type, 8.0f, flags);
   }
