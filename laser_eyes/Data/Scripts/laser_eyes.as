@@ -67,10 +67,12 @@ void ActivateLaserEyes(){
       }
       MovementObject@ victim = ReadCharacterID(contact.id);
       vec3 force = camera.GetFacing() * 1000.0f;
+      if(!victim.GetBoolVar("on_fire")){
+          victim.Execute("SetOnFire(true);");
+      }
       victim.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
-                      "SetOnFire(true);" +
                       "vec3 pos = vec3("+collision_point.x+", "+collision_point.y+", "+collision_point.z+");" +
-                      "HandleRagdollImpactImpulse(impulse, pos, 5.0f);");
+                      "HandleRagdollImpactImpulse(impulse, pos, 0.0f);");
   } else{
       collision_point = hit;
       if(rand()%2 == 0){
