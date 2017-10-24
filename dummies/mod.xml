@@ -1,0 +1,19 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>dummies-mod</Id>
+    <Name>Dummies Mod</Name>
+    <Version>0.1.0</Version>
+    <Author>Gyrth</Author>
+    <Category>Item Pack</Category>
+    <Thumbnail>Data/Images/dummies_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/dummies_full.jpg</PreviewImage>
+    <Description>Dummy characters you can pratice fighting on.</Description>
+    <Tag>scripting</Tag>
+    <Tag>character</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <Item category="Dummies" title="Dummy Wolf" path="Data/Characters/dummy_wolf.xml" thumbnail="Data/UI/spawner/thumbs/Character/IGF_wolfActor.png" />
+    <Item category="Dummies" title="Dummy Guard" path="Data/Characters/dummy_guard.xml" thumbnail="Data/UI/spawner/thumbs/Object/Male Rabbit Guard.png" />
+    <Item category="Dummies" title="Dummy Dog Soldier" path="Data/Characters/dummy_soldier.xml" thumbnail="Data/UI/spawner/thumbs/Character/light_armored_dog_male_3_actor.png" />
+    <Item category="Dummies" title="Dummy Rabbot" path="Data/Characters/dummy_rabbot.xml" thumbnail="Data/UI/spawner/thumbs/Object/Rabbot.png" />
+    <Level title="Dummies" thumbnail="Images/dummies_full.jpg">dummies.xml</Level>
+</Mod>
