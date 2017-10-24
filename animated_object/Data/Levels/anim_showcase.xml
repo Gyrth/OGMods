@@ -1496,14 +1496,14 @@
                     <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
                     <parameter name="Name" type="string" val="animation_child" />
                     <parameter name="Number of Keys" type="int" val="4" />
-                    <parameter name="Object Path" type="string" val="Data/Objects/wheel.xml" />
+                    <parameter name="Object Path" type="string" val="Data/Objects/small_cart_wheel.xml" />
                     <parameter name="Play mode" type="int" val="0" />
                     <parameter name="Scale Object Preview" type="int" val="0" />
                     <parameter name="Seconds" type="float" val="1" />
                     <parameter name="Wiremesh preview" type="int" val="0" />
                 </parameters>
             </Hotspot>
-            <PlaceholderObject t0="64.2311" t1="6.05488" t2="-196.286" s0="1" s1="1" s2="1" q0="7.27177e-06" q1="0.513714" q2="9.95398e-06" q3="0.858023" id="175" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="64.2311" t1="6.05488" t2="-196.286" s0="1" s1="1" s2="1" q0="7.27177e-06" q1="0.513714" q2="9.95398e-06" q3="0.858023" id="175" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="1502051922" />
                     <parameter name="Index" type="int" val="0" />
@@ -1514,7 +1514,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="64.2311" t1="6.05488" t2="-196.286" s0="1" s1="1" s2="1" q0="-0.363247" q1="0.363257" q2="-0.606707" q3="0.606722" id="176" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="64.2311" t1="6.05488" t2="-196.286" s0="1" s1="1" s2="1" q0="-0.363247" q1="0.363257" q2="-0.606707" q3="0.606722" id="176" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="1502051922" />
                     <parameter name="Index" type="int" val="1" />
@@ -1525,7 +1525,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="64.2311" t1="6.05478" t2="-196.286" s0="1" s1="1" s2="1" q0="-0.513715" q1="7.39098e-06" q2="-0.858025" q3="9.95398e-06" id="177" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="64.2311" t1="6.05478" t2="-196.286" s0="1" s1="1" s2="1" q0="-0.513715" q1="7.39098e-06" q2="-0.858025" q3="9.95398e-06" id="177" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="1502051922" />
                     <parameter name="Index" type="int" val="2" />
@@ -1536,7 +1536,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="64.2311" t1="6.05478" t2="-196.286" s0="1" s1="1" s2="1" q0="0.363256" q1="0.363247" q2="0.606721" q3="0.606707" id="178" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="64.2311" t1="6.05478" t2="-196.286" s0="1" s1="1" s2="1" q0="0.363256" q1="0.363247" q2="0.606721" q3="0.606707" id="178" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="1502051922" />
                     <parameter name="Index" type="int" val="3" />
@@ -1569,14 +1569,14 @@
                     <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
                     <parameter name="Name" type="string" val="animation_child" />
                     <parameter name="Number of Keys" type="int" val="4" />
-                    <parameter name="Object Path" type="string" val="Data/Objects/wheel.xml" />
+                    <parameter name="Object Path" type="string" val="Data/Objects/small_cart_wheel.xml" />
                     <parameter name="Play mode" type="int" val="0" />
                     <parameter name="Scale Object Preview" type="int" val="0" />
                     <parameter name="Seconds" type="float" val="1" />
                     <parameter name="Wiremesh preview" type="int" val="0" />
                 </parameters>
             </Hotspot>
-            <PlaceholderObject t0="63.0497" t1="6.05481" t2="-194.081" s0="1" s1="1" s2="1" q0="7.27177e-06" q1="0.513714" q2="9.95398e-06" q3="0.858023" id="201" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="63.0497" t1="6.05481" t2="-194.081" s0="1" s1="1" s2="1" q0="7.27177e-06" q1="0.513714" q2="9.95398e-06" q3="0.858023" id="201" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="578383766" />
                     <parameter name="Index" type="int" val="0" />
@@ -1587,7 +1587,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="63.0497" t1="6.05481" t2="-194.081" s0="1" s1="1" s2="1" q0="-0.363247" q1="0.363257" q2="-0.606707" q3="0.606722" id="202" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="63.0497" t1="6.05481" t2="-194.081" s0="1" s1="1" s2="1" q0="-0.363247" q1="0.363257" q2="-0.606707" q3="0.606722" id="202" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="578383766" />
                     <parameter name="Index" type="int" val="1" />
@@ -1598,7 +1598,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="63.0497" t1="6.05471" t2="-194.081" s0="1" s1="1" s2="1" q0="-0.513715" q1="7.39098e-06" q2="-0.858025" q3="9.95398e-06" id="203" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="63.0497" t1="6.05471" t2="-194.081" s0="1" s1="1" s2="1" q0="-0.513715" q1="7.39098e-06" q2="-0.858025" q3="9.95398e-06" id="203" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="578383766" />
                     <parameter name="Index" type="int" val="2" />
@@ -1609,7 +1609,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="63.0497" t1="6.05471" t2="-194.081" s0="1" s1="1" s2="1" q0="0.363256" q1="0.363247" q2="0.606721" q3="0.606707" id="207" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="63.0497" t1="6.05471" t2="-194.081" s0="1" s1="1" s2="1" q0="0.363256" q1="0.363247" q2="0.606721" q3="0.606707" id="207" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="578383766" />
                     <parameter name="Index" type="int" val="3" />
@@ -1642,14 +1642,14 @@
                     <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
                     <parameter name="Name" type="string" val="animation_child" />
                     <parameter name="Number of Keys" type="int" val="4" />
-                    <parameter name="Object Path" type="string" val="Data/Objects/wheel.xml" />
+                    <parameter name="Object Path" type="string" val="Data/Objects/small_cart_wheel.xml" />
                     <parameter name="Play mode" type="int" val="0" />
                     <parameter name="Scale Object Preview" type="int" val="0" />
                     <parameter name="Seconds" type="float" val="1" />
                     <parameter name="Wiremesh preview" type="int" val="0" />
                 </parameters>
             </Hotspot>
-            <PlaceholderObject t0="61.2317" t1="6.06331" t2="-195.061" s0="1" s1="1" s2="1" q0="7.27177e-06" q1="0.513714" q2="9.95398e-06" q3="0.858023" id="211" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="61.2317" t1="6.06331" t2="-195.061" s0="1" s1="1" s2="1" q0="7.27177e-06" q1="0.513714" q2="9.95398e-06" q3="0.858023" id="211" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="366793822" />
                     <parameter name="Index" type="int" val="0" />
@@ -1660,7 +1660,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="61.2317" t1="6.06331" t2="-195.061" s0="1" s1="1" s2="1" q0="-0.363247" q1="0.363257" q2="-0.606707" q3="0.606722" id="221" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="61.2317" t1="6.06331" t2="-195.061" s0="1" s1="1" s2="1" q0="-0.363247" q1="0.363257" q2="-0.606707" q3="0.606722" id="221" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="366793822" />
                     <parameter name="Index" type="int" val="1" />
@@ -1671,7 +1671,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="61.2317" t1="6.06331" t2="-195.061" s0="1" s1="1" s2="1" q0="-0.513715" q1="7.39098e-06" q2="-0.858025" q3="9.95398e-06" id="222" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="61.2317" t1="6.06331" t2="-195.061" s0="1" s1="1" s2="1" q0="-0.513715" q1="7.39098e-06" q2="-0.858025" q3="9.95398e-06" id="222" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="366793822" />
                     <parameter name="Index" type="int" val="2" />
@@ -1682,7 +1682,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="61.2317" t1="6.06331" t2="-195.061" s0="1" s1="1" s2="1" q0="0.363256" q1="0.363247" q2="0.606721" q3="0.606707" id="223" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="61.2317" t1="6.06331" t2="-195.061" s0="1" s1="1" s2="1" q0="0.363256" q1="0.363247" q2="0.606721" q3="0.606707" id="223" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="366793822" />
                     <parameter name="Index" type="int" val="3" />
@@ -1715,14 +1715,14 @@
                     <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
                     <parameter name="Name" type="string" val="animation_child" />
                     <parameter name="Number of Keys" type="int" val="4" />
-                    <parameter name="Object Path" type="string" val="Data/Objects/wheel.xml" />
+                    <parameter name="Object Path" type="string" val="Data/Objects/small_cart_wheel.xml" />
                     <parameter name="Play mode" type="int" val="0" />
                     <parameter name="Scale Object Preview" type="int" val="0" />
                     <parameter name="Seconds" type="float" val="1" />
                     <parameter name="Wiremesh preview" type="int" val="0" />
                 </parameters>
             </Hotspot>
-            <PlaceholderObject t0="62.4124" t1="6.06338" t2="-197.266" s0="1" s1="1" s2="1" q0="7.27177e-06" q1="0.513714" q2="9.95398e-06" q3="0.858023" id="226" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="62.4124" t1="6.06338" t2="-197.266" s0="1" s1="1" s2="1" q0="7.27177e-06" q1="0.513714" q2="9.95398e-06" q3="0.858023" id="226" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="1565712188" />
                     <parameter name="Index" type="int" val="0" />
@@ -1733,7 +1733,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="62.4124" t1="6.06338" t2="-197.266" s0="1" s1="1" s2="1" q0="-0.363247" q1="0.363257" q2="-0.606707" q3="0.606722" id="227" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="62.4124" t1="6.06338" t2="-197.266" s0="1" s1="1" s2="1" q0="-0.363247" q1="0.363257" q2="-0.606707" q3="0.606722" id="227" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="1565712188" />
                     <parameter name="Index" type="int" val="1" />
@@ -1744,7 +1744,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="62.4124" t1="6.06338" t2="-197.266" s0="1" s1="1" s2="1" q0="-0.513715" q1="7.39098e-06" q2="-0.858025" q3="9.95398e-06" id="234" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="62.4124" t1="6.06338" t2="-197.266" s0="1" s1="1" s2="1" q0="-0.513715" q1="7.39098e-06" q2="-0.858025" q3="9.95398e-06" id="234" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="1565712188" />
                     <parameter name="Index" type="int" val="2" />
@@ -1755,7 +1755,7 @@
                     <Connection id="-1" />
                 </Connections>
             </PlaceholderObject>
-            <PlaceholderObject t0="62.4124" t1="6.06338" t2="-197.266" s0="1" s1="1" s2="1" q0="0.363256" q1="0.363247" q2="0.606721" q3="0.606707" id="235" type_file="Data/Objects/wheel.xml" special_type="0">
+            <PlaceholderObject t0="62.4124" t1="6.06338" t2="-197.266" s0="1" s1="1" s2="1" q0="0.363256" q1="0.363247" q2="0.606721" q3="0.606707" id="235" type_file="Data/Objects/small_cart_wheel.xml" special_type="0">
                 <parameters>
                     <parameter name="BelongsTo" type="string" val="1565712188" />
                     <parameter name="Index" type="int" val="3" />
@@ -4103,7 +4103,7 @@
     <SpawnerItem display_name="Wooden Post Corners" path="Data/Objects/Buildings/Post1.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/Post1.png" />
     <SpawnerItem display_name="Wooden Post Round" path="Data/Objects/Buildings/PostRound1.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/PostRound1.png" />
     <SpawnerItem display_name="Marble Crete Block Box end" path="Data/Objects/Crete/box_end.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/box_end.png" />
-    <SpawnerItem display_name="Wheel" path="Data/Objects/wheel.xml" thumbnail_path="Data/UI/spawner/animated_object.png" />
+    <SpawnerItem display_name="Wheel" path="Data/Objects/small_cart_wheel.xml" thumbnail_path="Data/UI/spawner/animated_object.png" />
     <SpawnerItem display_name="Hanging Garden Door" path="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/hanging_garden_door.png" />
     <SpawnerItem display_name="Smooth Stone Sphere" path="Data/Objects/primitives/smooth_sphere.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/smooth_sphere.png" />
     <SpawnerItem display_name="small_cart.xml" path="Data/Objects/small_cart.xml" thumbnail_path="empty_placeholder.png" />
