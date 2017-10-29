@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/optimised_halzoids_optimised_grass.obj</Model>
+	<ColorMap>Data/Textures/optimised_halzoids_optimised_grass.png</ColorMap>
+	<NormalMap>Data/Textures/diffusebump.tga</NormalMap>
+	<ShaderName>plant</ShaderName>
+    <flags no_collision = "true" double_sided="true"/>
+    <avg_color r="107" g="107" b="107" />
+</Object>
