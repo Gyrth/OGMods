@@ -49,6 +49,7 @@ class BowAndArrow {
     if(isAiming && state == _ragdoll_state){
       isAiming = false;
       allowAiming = false;
+      SetConfigValueFloat("mouse_sensitivity", orig_sensitivity);
     }
     if(throw_anim && weapon_slots[primary_weapon_slot] == -1){
       throw_anim = false;
@@ -78,6 +79,7 @@ class BowAndArrow {
       if(WantsToSheatheItem()){
         isAiming = false;
         allowAiming = false;
+        SetConfigValueFloat("mouse_sensitivity", orig_sensitivity);
         return;
       }
 
