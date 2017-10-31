@@ -1,19 +1,19 @@
 <? xml version="1.0" ?>
 <Mod>
-    <!-- The ID is necessary and should never change between versions of the same mod -->
-    <!-- The id can consist of english alphabet or dash "-" -->
     <Id>landmine</Id>
-    <!-- The human readable name is presented in UI's -->
     <Name>Landmine Mod</Name>
-    <!-- Version number, can have any formatting you wish. Can consists of numbers english alphabet, "." or "-" -->
-    <Version>0.3.0</Version>
-    <!-- Your immortal stamp -->
+    <Category>Item Pack</Category>
+    <Version>0.4.0</Version>
     <Author>Gyrth McMulin</Author>
-
-    <!-- Specification for which version of the game that is supported. It's possible to specify more than one -->
-    <SupportedVersion>a227</SupportedVersion>
-    <SupportedVersion>b1</SupportedVersion>
-    <SupportedVersion>b2</SupportedVersion>
-
-    <NeedsRestart>false<NeedsRestart>
+    <Thumbnail>Data/Images/landmine_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/landmine_full.jpg</PreviewImage>
+    <Description>A landmine. When you step on it, it goes boom.</Description>
+    <Tag>landmine</Tag>
+    <Tag>item</Tag>
+    <Tag>object</Tag>
+    <Tag>scripting</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <NeedsRestart>false</NeedsRestart>
+    <Item category="Interactive Objects" title="Landmine" path="Data/Objects/landmine_prefab.xml" thumbnail="Data/UI/spawner/landmine.png" />
+    <Level title="Landmine" thumbnail="Images/landmine_full.jpg">landmine.xml</Level>
 </Mod>

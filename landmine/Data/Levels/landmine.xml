@@ -1,8 +1,11 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
-<Name></Name>
+<Name>landmine</Name>
 <Description></Description>
 <Shader>post</Shader>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
 <Terrain>
     <Heightmap>Data/Textures/Terrain/red_hills/red_hills_hm.png</Heightmap>
     <ShaderExtra></ShaderExtra>
@@ -16,7 +19,7 @@
     </DetailMaps>
     <DetailObjects />
 </Terrain>
-<OutOfDate NavMesh="true" />
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
 <Script>challengelevel.as</Script>
 <LevelScriptParameters>
@@ -27,8 +30,10 @@
     <parameter name="HDR White point" type="string" val="0.8" />
     <parameter name="Level Boundaries" type="string" val="1" />
     <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
     <parameter name="Sky Rotation" type="string" val="0" />
 </LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
 <Sky>
     <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
     <SunAngularRad>0.112145</SunAngularRad>
@@ -36,10 +41,7 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="45.4825" t1="40.9516" t2="-107.409" s0="1" s1="1" s2="1" q0="0.529015" q1="-0.199366" q2="0.129466" r0="0.886984" r1="-1.49012e-08" r2="0.461801" r3="0" r4="-0.42187" r5="0.406764" r6="0.810289" r7="0" r8="-0.187844" r9="-0.913533" r10="0.360793" r11="0" r12="0" r13="0" r14="0" r15="1" id="271">
-        <parameters />
-    </CameraObject>
-    <ActorObject t0="47.7552" t1="5.2247" t2="-134.009" s0="1" s1="1" s2="1" q0="5.96046e-08" q1="-0.298372" q2="0" r0="0.821948" r1="-3.55687e-08" r2="0.569562" r3="0" r4="-3.55687e-08" r5="1" r6="1.13779e-07" r7="0" r8="-0.569562" r9="-1.13779e-07" r10="0.821948" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <ActorObject t0="47.7552" t1="5.2247" t2="-134.009" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="string" val="0.5" />
             <parameter name="Attack Damage" type="string" val="1.0" />
@@ -76,18 +78,979 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <Group t0="37.5521" t1="-0.0830354" t2="-106.892" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="279" version="1">
+    <EnvObject t0="32.5003" t1="5.94468" t2="-135.219" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="11" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
         <parameters />
-        <EnvObject t0="37.5521" t1="-0.0830354" t2="-106.892" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="290" color_r="0.933333" color_g="0.933333" color_b="0.933333" type_file="Data/Objects/landmine.xml">
+    </EnvObject>
+    <EnvObject t0="32.5003" t1="5.94468" t2="-127.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="13" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="25.0003" t1="10.288" t2="-127.719" s0="2.25" s1="2.25" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="19" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="32.5003" t1="5.94468" t2="-142.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="22" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="25.0003" t1="10.288" t2="-142.719" s0="2.25" s1="2.25" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="23" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="17.5003" t1="10.288" t2="-127.719" s0="2.25" s1="2.25" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="26" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="17.5003" t1="10.288" t2="-142.719" s0="2.25" s1="2.25" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="27" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="10.0003" t1="10.288" t2="-127.719" s0="2.25" s1="2.25" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="30" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="10.0003" t1="10.288" t2="-142.719" s0="2.25" s1="2.25" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="31" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="2.50028" t1="5.94468" t2="-135.219" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="35" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="2.50028" t1="5.94468" t2="-127.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="36" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="2.50028" t1="5.94468" t2="-142.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="37" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="10.0003" t1="21.4447" t2="-142.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="39" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="10.0003" t1="21.4447" t2="-135.219" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="41" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="10.0003" t1="21.4447" t2="-127.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="43" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="17.5003" t1="21.4447" t2="-142.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="47" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="17.5003" t1="21.4447" t2="-135.219" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="48" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="17.5003" t1="21.4447" t2="-127.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="49" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="25.0003" t1="21.4447" t2="-142.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="53" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="25.0003" t1="21.4447" t2="-135.219" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="54" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="25.0003" t1="21.4447" t2="-127.719" s0="2.25" s1="1" s2="2.25" q0="0" q1="0" q2="0" q3="1" id="55" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="41.9977" t1="1.90473" t2="-135.219" s0="5.0625" s1="1" s2="2.25" q0="0" q1="0" q2="-0.258819" q3="0.965926" id="59" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="41.9977" t1="1.90473" t2="-127.719" s0="5.0625" s1="1" s2="2.25" q0="0" q1="0" q2="-0.258819" q3="0.965926" id="60" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="41.9977" t1="1.90473" t2="-142.719" s0="5.0625" s1="1" s2="2.25" q0="0" q1="0" q2="-0.258819" q3="0.965926" id="61" color_r="0.501961" color_g="0.501956" color_b="0.501956" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <Group t0="25.2366" t1="3.63685" t2="-133.597" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="67" version="1">
+        <parameters />
+        <EnvObject t0="25.2366" t1="3.63685" t2="-133.597" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="65" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
             <parameters />
         </EnvObject>
-        <Hotspot t0="37.5521" t1="-0.0830354" t2="-106.892" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="291" type_file="Data/Objects/landmine_hotspot.xml">
+        <Hotspot t0="25.2366" t1="3.63685" t2="-133.597" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="66" type_file="Data/Objects/landmine_hotspot.xml">
             <parameters>
-                <parameter name="Damage dealt" type="string" val="1.0" />
-                <parameter name="Recovery time" type="string" val="5.0" />
-                <parameter name="Smoke particle amount" type="string" val="15" />
-                <parameter name="Upward force" type="string" val="20.0" />
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="25.2366" t1="3.94445" t2="-135.707" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="73" version="1">
+        <parameters />
+        <EnvObject t0="25.2366" t1="3.94445" t2="-135.707" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="71" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="25.2366" t1="3.94445" t2="-135.707" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="72" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="25.2366" t1="4.23668" t2="-138.097" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="79" version="1">
+        <parameters />
+        <EnvObject t0="25.2366" t1="4.23668" t2="-138.097" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="77" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="25.2366" t1="4.23668" t2="-138.097" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="78" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="22.5162" t1="3.56581" t2="-133.57" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="91" version="1">
+        <parameters />
+        <EnvObject t0="22.5162" t1="3.56581" t2="-133.57" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="89" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="22.5162" t1="3.56581" t2="-133.57" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="90" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="22.5162" t1="3.87341" t2="-135.68" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="94" version="1">
+        <parameters />
+        <EnvObject t0="22.5162" t1="3.87341" t2="-135.68" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="92" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="22.5162" t1="3.87341" t2="-135.68" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="93" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="22.5162" t1="4.16564" t2="-138.069" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="97" version="1">
+        <parameters />
+        <EnvObject t0="22.5162" t1="4.16564" t2="-138.069" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="95" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="22.5162" t1="4.16564" t2="-138.069" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="96" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="19.5162" t1="3.34523" t2="-133.14" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="109" version="1">
+        <parameters />
+        <EnvObject t0="19.5162" t1="3.34523" t2="-133.14" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="107" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="19.5162" t1="3.34523" t2="-133.14" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="108" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="19.5162" t1="3.65282" t2="-135.25" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="112" version="1">
+        <parameters />
+        <EnvObject t0="19.5162" t1="3.65282" t2="-135.25" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="110" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="19.5162" t1="3.65282" t2="-135.25" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="111" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="19.5162" t1="3.94509" t2="-137.639" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="115" version="1">
+        <parameters />
+        <EnvObject t0="19.5162" t1="3.94509" t2="-137.639" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="113" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="19.5162" t1="3.94509" t2="-137.639" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="114" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="15.0279" t1="3.20402" t2="-133.618" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="127" version="1">
+        <parameters />
+        <EnvObject t0="15.0279" t1="3.20402" t2="-133.618" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="125" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="15.0279" t1="3.20402" t2="-133.618" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="126" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="15.0279" t1="3.51161" t2="-135.728" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="130" version="1">
+        <parameters />
+        <EnvObject t0="15.0279" t1="3.51161" t2="-135.728" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="128" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="15.0279" t1="3.51161" t2="-135.728" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="129" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="15.0279" t1="3.80385" t2="-138.117" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="133" version="1">
+        <parameters />
+        <EnvObject t0="15.0279" t1="3.80385" t2="-138.117" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="131" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="15.0279" t1="3.80385" t2="-138.117" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="132" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="11.355" t1="3.07312" t2="-133.28" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="145" version="1">
+        <parameters />
+        <EnvObject t0="11.355" t1="3.07312" t2="-133.28" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="143" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="11.355" t1="3.07312" t2="-133.28" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="144" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="11.3891" t1="3.29266" t2="-135.404" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="148" version="1">
+        <parameters />
+        <EnvObject t0="11.3891" t1="3.29266" t2="-135.404" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="146" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="11.3891" t1="3.29266" t2="-135.404" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="147" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="11.3891" t1="3.58492" t2="-137.793" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="151" version="1">
+        <parameters />
+        <EnvObject t0="11.3891" t1="3.58492" t2="-137.793" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="149" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="11.3891" t1="3.58492" t2="-137.793" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="150" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="8.18662" t1="2.99908" t2="-133.147" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="163" version="1">
+        <parameters />
+        <EnvObject t0="8.18662" t1="2.99908" t2="-133.147" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="161" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.18662" t1="2.99908" t2="-133.147" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="162" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="8.22077" t1="3.21863" t2="-135.271" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="166" version="1">
+        <parameters />
+        <EnvObject t0="8.22077" t1="3.21863" t2="-135.271" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="164" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.22077" t1="3.21863" t2="-135.271" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="165" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="8.22076" t1="3.51089" t2="-137.66" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="169" version="1">
+        <parameters />
+        <EnvObject t0="8.22076" t1="3.51089" t2="-137.66" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="167" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.22076" t1="3.51089" t2="-137.66" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="168" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="25.2366" t1="3.48561" t2="-132.364" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="188" version="1">
+        <parameters />
+        <EnvObject t0="25.2366" t1="3.48561" t2="-132.364" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="186" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="25.2366" t1="3.48561" t2="-132.364" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="187" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="22.5162" t1="3.41457" t2="-132.337" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="191" version="1">
+        <parameters />
+        <EnvObject t0="22.5162" t1="3.41457" t2="-132.337" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="189" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="22.5162" t1="3.41457" t2="-132.337" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="190" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="19.5162" t1="3.19398" t2="-131.907" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="194" version="1">
+        <parameters />
+        <EnvObject t0="19.5162" t1="3.19398" t2="-131.907" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="192" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="19.5162" t1="3.19398" t2="-131.907" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="193" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="15.0279" t1="3.05277" t2="-132.385" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="197" version="1">
+        <parameters />
+        <EnvObject t0="15.0279" t1="3.05277" t2="-132.385" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="195" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="15.0279" t1="3.05277" t2="-132.385" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="196" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="11.355" t1="2.92187" t2="-132.047" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="200" version="1">
+        <parameters />
+        <EnvObject t0="11.355" t1="2.92187" t2="-132.047" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="198" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="11.355" t1="2.92187" t2="-132.047" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="199" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="8.18662" t1="2.84784" t2="-131.914" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="203" version="1">
+        <parameters />
+        <EnvObject t0="8.18662" t1="2.84784" t2="-131.914" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="201" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.18662" t1="2.84784" t2="-131.914" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="202" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="25.2366" t1="3.7795" t2="-134.659" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="222" version="1">
+        <parameters />
+        <EnvObject t0="25.2366" t1="3.7795" t2="-134.659" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="220" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="25.2366" t1="3.7795" t2="-134.659" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="221" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="22.5162" t1="3.70846" t2="-134.632" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="225" version="1">
+        <parameters />
+        <EnvObject t0="22.5162" t1="3.70846" t2="-134.632" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="223" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="22.5162" t1="3.70846" t2="-134.632" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="224" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="19.5162" t1="3.48787" t2="-134.202" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="228" version="1">
+        <parameters />
+        <EnvObject t0="19.5162" t1="3.48787" t2="-134.202" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="226" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="19.5162" t1="3.48787" t2="-134.202" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="227" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="15.0279" t1="3.34666" t2="-134.68" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="231" version="1">
+        <parameters />
+        <EnvObject t0="15.0279" t1="3.34666" t2="-134.68" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="229" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="15.0279" t1="3.34666" t2="-134.68" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="230" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="11.355" t1="3.21576" t2="-134.342" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="234" version="1">
+        <parameters />
+        <EnvObject t0="11.355" t1="3.21576" t2="-134.342" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="232" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="11.355" t1="3.21576" t2="-134.342" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="233" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="8.18662" t1="3.14173" t2="-134.209" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="237" version="1">
+        <parameters />
+        <EnvObject t0="8.18662" t1="3.14173" t2="-134.209" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="235" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.18662" t1="3.14173" t2="-134.209" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="236" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="25.2366" t1="4.04555" t2="-136.85" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="258" version="1">
+        <parameters />
+        <EnvObject t0="25.2366" t1="4.04555" t2="-136.85" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="256" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="25.2366" t1="4.04555" t2="-136.85" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="257" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="22.5162" t1="3.97451" t2="-136.823" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="261" version="1">
+        <parameters />
+        <EnvObject t0="22.5162" t1="3.97451" t2="-136.823" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="259" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="22.5162" t1="3.97451" t2="-136.823" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="260" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="19.5162" t1="3.75393" t2="-136.393" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="264" version="1">
+        <parameters />
+        <EnvObject t0="19.5162" t1="3.75393" t2="-136.393" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="262" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="19.5162" t1="3.75393" t2="-136.393" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="263" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="15.0279" t1="3.61272" t2="-136.871" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="267" version="1">
+        <parameters />
+        <EnvObject t0="15.0279" t1="3.61272" t2="-136.871" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="265" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="15.0279" t1="3.61272" t2="-136.871" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="266" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="11.355" t1="3.48182" t2="-136.533" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="270" version="1">
+        <parameters />
+        <EnvObject t0="11.355" t1="3.48182" t2="-136.533" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="268" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="11.355" t1="3.48182" t2="-136.533" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="269" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <CameraObject t0="32.8671" t1="14.0729" t2="-137.375" s0="1" s1="1" s2="1" q0="0.166036" q1="-0.745377" q2="0.201797" q3="0.613289" id="271">
+        <parameters />
+    </CameraObject>
+    <Group t0="8.18662" t1="3.40779" t2="-136.4" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="274" version="1">
+        <parameters />
+        <EnvObject t0="8.18662" t1="3.40779" t2="-136.4" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="272" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.18662" t1="3.40779" t2="-136.4" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="273" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="23.8026" t1="3.8317" t2="-135.666" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="295" version="1">
+        <parameters />
+        <EnvObject t0="23.8026" t1="3.8317" t2="-135.666" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="293" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="23.8026" t1="3.8317" t2="-135.666" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="294" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="21.0822" t1="3.76066" t2="-135.638" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="298" version="1">
+        <parameters />
+        <EnvObject t0="21.0822" t1="3.76066" t2="-135.638" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="296" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="21.0822" t1="3.76066" t2="-135.638" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="297" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="18.0823" t1="3.54008" t2="-135.208" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="301" version="1">
+        <parameters />
+        <EnvObject t0="18.0823" t1="3.54008" t2="-135.208" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="299" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="18.0823" t1="3.54008" t2="-135.208" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="300" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="13.5939" t1="3.39887" t2="-135.686" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="304" version="1">
+        <parameters />
+        <EnvObject t0="13.5939" t1="3.39887" t2="-135.686" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="302" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="13.5939" t1="3.39887" t2="-135.686" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="303" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="9.92097" t1="3.26797" t2="-135.348" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="307" version="1">
+        <parameters />
+        <EnvObject t0="9.92097" t1="3.26797" t2="-135.348" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="305" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="9.92097" t1="3.26797" t2="-135.348" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="306" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="6.75264" t1="3.19394" t2="-135.215" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="310" version="1">
+        <parameters />
+        <EnvObject t0="6.75264" t1="3.19394" t2="-135.215" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="308" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="6.75264" t1="3.19394" t2="-135.215" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="309" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="23.8026" t1="3.58421" t2="-133.493" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="331" version="1">
+        <parameters />
+        <EnvObject t0="23.8026" t1="3.58421" t2="-133.493" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="329" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="23.8026" t1="3.58421" t2="-133.493" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="330" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="21.0822" t1="3.51316" t2="-133.465" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="334" version="1">
+        <parameters />
+        <EnvObject t0="21.0822" t1="3.51316" t2="-133.465" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="332" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="21.0822" t1="3.51316" t2="-133.465" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="333" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="18.0823" t1="3.29258" t2="-133.035" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="337" version="1">
+        <parameters />
+        <EnvObject t0="18.0823" t1="3.29258" t2="-133.035" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="335" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="18.0823" t1="3.29258" t2="-133.035" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="336" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="13.5939" t1="3.15137" t2="-133.514" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="340" version="1">
+        <parameters />
+        <EnvObject t0="13.5939" t1="3.15137" t2="-133.514" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="338" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="13.5939" t1="3.15137" t2="-133.514" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="339" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="9.92097" t1="3.02047" t2="-133.176" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="343" version="1">
+        <parameters />
+        <EnvObject t0="9.92097" t1="3.02047" t2="-133.176" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="341" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="9.92097" t1="3.02047" t2="-133.176" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="342" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="6.75264" t1="2.94644" t2="-133.042" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="346" version="1">
+        <parameters />
+        <EnvObject t0="6.75264" t1="2.94644" t2="-133.042" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="344" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="6.75264" t1="2.94644" t2="-133.042" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="345" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="23.8026" t1="4.09703" t2="-137.653" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="367" version="1">
+        <parameters />
+        <EnvObject t0="23.8026" t1="4.09703" t2="-137.653" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="365" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="23.8026" t1="4.09703" t2="-137.653" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="366" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="21.0822" t1="4.02599" t2="-137.626" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="370" version="1">
+        <parameters />
+        <EnvObject t0="21.0822" t1="4.02599" t2="-137.626" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="368" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="21.0822" t1="4.02599" t2="-137.626" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="369" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="18.0823" t1="3.80541" t2="-137.196" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="373" version="1">
+        <parameters />
+        <EnvObject t0="18.0823" t1="3.80541" t2="-137.196" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="371" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="18.0823" t1="3.80541" t2="-137.196" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="372" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="13.5939" t1="3.6642" t2="-137.674" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="376" version="1">
+        <parameters />
+        <EnvObject t0="13.5939" t1="3.6642" t2="-137.674" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="374" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="13.5939" t1="3.6642" t2="-137.674" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="375" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="9.92097" t1="3.5333" t2="-137.336" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="379" version="1">
+        <parameters />
+        <EnvObject t0="9.92097" t1="3.5333" t2="-137.336" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="377" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="9.92097" t1="3.5333" t2="-137.336" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="378" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="6.75264" t1="3.45926" t2="-137.203" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="382" version="1">
+        <parameters />
+        <EnvObject t0="6.75264" t1="3.45926" t2="-137.203" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="380" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="6.75264" t1="3.45926" t2="-137.203" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="381" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="20.9308" t1="3.30519" t2="-132.122" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="388" version="1">
+        <parameters />
+        <EnvObject t0="20.9308" t1="3.30519" t2="-132.122" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="386" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="20.9308" t1="3.30519" t2="-132.122" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="387" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="16.9459" t1="3.3206" t2="-133.806" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="394" version="1">
+        <parameters />
+        <EnvObject t0="16.9459" t1="3.3206" t2="-133.806" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="392" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="16.9459" t1="3.3206" t2="-133.806" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="393" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="16.6079" t1="3.67211" t2="-136.969" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="400" version="1">
+        <parameters />
+        <EnvObject t0="16.6079" t1="3.67211" t2="-136.969" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="398" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="16.6079" t1="3.67211" t2="-136.969" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="399" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="17.1877" t1="3.86288" t2="-138.362" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="406" version="1">
+        <parameters />
+        <EnvObject t0="17.1877" t1="3.86288" t2="-138.362" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="404" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="17.1877" t1="3.86288" t2="-138.362" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="405" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="13.4051" t1="3.01774" t2="-132.334" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="412" version="1">
+        <parameters />
+        <EnvObject t0="13.4051" t1="3.01774" t2="-132.334" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="410" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="13.4051" t1="3.01774" t2="-132.334" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="411" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="12.8441" t1="3.27134" t2="-134.764" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="418" version="1">
+        <parameters />
+        <EnvObject t0="12.8441" t1="3.27134" t2="-134.764" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="416" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="12.8441" t1="3.27134" t2="-134.764" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="417" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="16.4803" t1="3.4886" t2="-135.408" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="424" version="1">
+        <parameters />
+        <EnvObject t0="16.4803" t1="3.4886" t2="-135.408" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="422" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="16.4803" t1="3.4886" t2="-135.408" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="423" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="27.2339" t1="4.00036" t2="-135.681" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="430" version="1">
+        <parameters />
+        <EnvObject t0="27.2339" t1="4.00036" t2="-135.681" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="428" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="27.2339" t1="4.00036" t2="-135.681" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="429" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="27.1976" t1="4.34066" t2="-137.909" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="436" version="1">
+        <parameters />
+        <EnvObject t0="27.1976" t1="4.34066" t2="-137.909" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="434" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="27.1976" t1="4.34066" t2="-137.909" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="435" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
+            </parameters>
+        </Hotspot>
+    </Group>
+    <Group t0="26.666" t1="3.78965" t2="-134.274" s0="0.566486" s1="1.68765" s2="0.566486" q0="0" q1="0" q2="0" q3="1" id="442" version="1">
+        <parameters />
+        <EnvObject t0="26.666" t1="3.78965" t2="-134.274" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="440" color_r="0.933333" color_g="0.933333" color_b="0.933333" overbright="0" type_file="Data/Objects/landmine.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="26.666" t1="3.78965" t2="-134.274" s0="0.0784799" s1="0.419412" s2="0.0745007" q0="0" q1="0" q2="0" q3="1" id="441" type_file="Data/Objects/landmine_hotspot.xml">
+            <parameters>
+                <parameter name="Damage dealt" type="float" val="1" />
+                <parameter name="Recovery time" type="float" val="5" />
+                <parameter name="Smoke particle amount" type="int" val="20" />
+                <parameter name="Upward force" type="float" val="20" />
             </parameters>
         </Hotspot>
     </Group>
 </ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="Marble Crete Block Box Full" path="Data/Objects/Crete/box_full.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/box_full.png" />
+    <SpawnerItem display_name="Landmine" path="Data/Objects/landmine_prefab.xml" thumbnail_path="Data/UI/spawner/landmine.png" />
+</RecentItems>
