@@ -17,6 +17,8 @@ int scrollbar_width = 10;
 int padding = 10;
 bool open_header = true;
 int top_bar_height = 32;
+int currently_pressed = -1;
+const int _ragdoll_state = 4;
 
 void ReadAnimationList(){
     JSON file;
@@ -98,10 +100,11 @@ void AddCategory(string category, array<string> items){
 
 void AddItem(string name, int index){
     ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, vec4(1.0f, 0.0f, 1.0f, 0.1f));
-    ImGui_BeginChild(name + "button" + index, vec2(ImGui_GetWindowWidth(), icon_size), false, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_ShowBorders);
-    if(ImGui_Selectable(name, false, ImGuiSelectableFlags_SpanAllColumns, vec2(ImGui_GetWindowWidth(), icon_size))){
+    ImGui_BeginChild(name + "button" + index, vec2(ImGui_GetWindowWidth() - 50, icon_size), false, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_ShowBorders);
+    if(ImGui_Selectable(name, (index == currently_pressed), ImGuiSelectableFlags_SpanAllColumns, vec2(ImGui_GetWindowWidth(), icon_size))){
     /*if(ImGui_Button(animation_paths[index], vec2(ImGui_GetWindowWidth(),icon_size))){*/
         ReceiveMessage("set_animation " + name);
+        currently_pressed = index;
     }
     ImGui_EndChild();
     ImGui_PopStyleColor();
@@ -117,8 +120,10 @@ void ReceiveMessage(string msg){
     string token = token_iter.GetToken(msg);
     if(token == "set_animation"){
         MovementObject@ player = ReadCharacter(0);
-        if(player.GetBoolVar("dialogue_control") != true){
-            vec3 pos = player.position;
+        Object@ player_spawn = ReadObjectFromID(player.GetID());
+        if(player.GetBoolVar("dialogue_control") != true || player.GetIntVar("state") == _ragdoll_state){
+            player.Execute("WakeUp(_wake_stand); EndGetUp(); unragdoll_time = 0.0f;");
+            vec3 pos = player_spawn.GetTranslation();
             player.ReceiveScriptMessage("set_dialogue_position "+pos.x+" "+pos.y+" "+pos.z);
             player.ReceiveMessage("set_dialogue_control true");
         }
@@ -132,6 +137,13 @@ void ReceiveMessage(string msg){
 }
 
 void Update(){
+    MovementObject@ player = ReadCharacter(0);
+    if(GetInputPressed(player.GetID(), "8")){
+        player.ReceiveMessage("set_dialogue_control false");
+        show = false;
+    }else if(GetInputPressed(player.GetID(), "escape")){
+        show = true;
+    }
 }
 
 bool HasFocus(){
