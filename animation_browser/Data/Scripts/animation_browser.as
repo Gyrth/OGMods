@@ -7,12 +7,6 @@ void Init(string str){
     QueryAnimation("");
 }
 
-void ReadAnimationList(){
-    for(uint i = 0; i < 432; i++){
-        all_animation_paths.insertLast(level.GetPath("animation" + i));
-    }
-}
-
 array<string> all_animation_paths;
 array<string> animation_paths;
 bool show = true;
@@ -23,6 +17,20 @@ int scrollbar_width = 10;
 int padding = 10;
 bool open_header = true;
 int top_bar_height = 32;
+
+void ReadAnimationList(){
+    JSON file;
+    file.parseFile("Data/Scripts/animation_browser_paths.json");
+    JSONValue root = file.getRoot();
+    array<string> list_animations = root.getMemberNames();
+    for(uint i = 0; i < list_animations.size(); i++){
+        string new_animation = root[list_animations[i]].asString();
+        if(FileExists(new_animation)){
+            /*Print("exists! " + new_animation + "\n");*/
+            all_animation_paths.insertLast(new_animation);
+        }
+    }
+}
 
 void QueryAnimation(string query){
     animation_paths.resize(0);
