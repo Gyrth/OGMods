@@ -41,10 +41,7 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="50.3316" t1="5.91764" t2="-133.417" s0="1" s1="1" s2="1" q0="0.097263" q1="-0.744737" q2="0.111305" q3="0.650782" id="1">
-        <parameters />
-    </CameraObject>
-    <ActorObject t0="47.7552" t1="5.2247" t2="-134.009" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <ActorObject t0="47.8221" t1="7.46147" t2="-134.106" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="string" val="0.5" />
             <parameter name="Attack Damage" type="string" val="1.0" />
@@ -81,5 +78,13 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
+    <CameraObject t0="50.2438" t1="8.47969" t2="-134.926" s0="1" s1="1" s2="1" q0="0.0900931" q1="-0.829744" q2="0.140345" q3="0.532646" id="2">
+        <parameters />
+    </CameraObject>
+    <EnvObject t0="47.7619" t1="3.45815" t2="-133.987" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
 </ActorObjects>
-<RecentItems />
+<RecentItems>
+    <SpawnerItem display_name="Marble Crete Block Box Full" path="Data/Objects/Crete/box_full.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/box_full.png" />
+</RecentItems>
