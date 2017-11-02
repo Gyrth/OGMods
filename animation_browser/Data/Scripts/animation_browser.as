@@ -9,11 +9,7 @@ void Init(string str){
 
 void ReadAnimationList(){
     for(uint i = 0; i < 432; i++){
-        if(level.GetPath("animation" + i) != ""){
-            all_animation_paths.insertLast(level.GetPath("animation" + i));
-        }else{
-            return;
-        }
+        all_animation_paths.insertLast(level.GetPath("animation" + i));
     }
 }
 
@@ -27,7 +23,6 @@ int scrollbar_width = 10;
 int padding = 10;
 bool open_header = true;
 int top_bar_height = 32;
-bool post_init_done = false;
 
 void QueryAnimation(string query){
     animation_paths.resize(0);
@@ -36,6 +31,7 @@ void QueryAnimation(string query){
             animation_paths.insertLast(all_animation_paths[i]);
         }
     }
+    Print("results: " + animation_paths.size() + "\n");
 }
 
 string ToLowerCase(string input){
@@ -68,7 +64,7 @@ void Display(){
 
         ImGui_PushStyleColor(ImGuiCol_FrameBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
         if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth() - scrollbar_width, ImGui_GetWindowHeight() - (top_bar_height + 30)), ImGuiWindowFlags_AlwaysAutoResize)){
-            ImGui_PopStyleColor(2);
+            ImGui_PopStyleColor();
             AddCategory("Animations", animation_paths);
             ImGui_EndChildFrame();
         }
@@ -83,31 +79,20 @@ void AddCategory(string category, array<string> items){
     ImGui_PushStyleColor(ImGuiCol_Border, vec4(0.0f, 0.5f, 0.5f, 0.5f));
     ImGui_PushStyleColor(ImGuiCol_Header, vec4(1.0f, 0.5f, 0.0f, 0.5f));
     if(ImGui_TreeNodeEx(category, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
-        ImGui_Unindent(32.0f);
-        ImGui_BeginChild(category, vec2(ImGui_GetWindowWidth(), icon_size), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoInputs);
-        float row_size = 0.0f;
+        ImGui_Unindent(22.0f);
         for(uint i = 0; i < items.size(); i++){
-            row_size += icon_size + padding;
-            if(row_size > ImGui_GetWindowWidth()){
-                row_size = icon_size + padding;
-                ImGui_EndChild();
-                ImGui_BeginChild("child " + i, vec2(ImGui_GetWindowWidth(), icon_size), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoInputs);
-                ImGui_Separator();
-            }
             AddItem(items[i], i);
         }
-        ImGui_EndChild();
-        ImGui_Indent(32.0f);
-        ImGui_TreePop();
+        ImGui_Indent(22.0f);
     }
-    ImGui_PopStyleColor();
+    ImGui_PopStyleColor(2);
 }
 
 void AddItem(string name, int index){
     ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, vec4(1.0f, 0.0f, 1.0f, 0.1f));
     ImGui_BeginChild(name + "button" + index, vec2(ImGui_GetWindowWidth(), icon_size), false, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_ShowBorders);
-    /*if(ImGui_Selectable(name, false, ImGuiSelectableFlags_SpanAllColumns, vec2(ImGui_GetWindowWidth(), icon_size))){*/
-    if(ImGui_Button(animation_paths[index], vec2(ImGui_GetWindowWidth(),icon_size))){
+    if(ImGui_Selectable(name, false, ImGuiSelectableFlags_SpanAllColumns, vec2(ImGui_GetWindowWidth(), icon_size))){
+    /*if(ImGui_Button(animation_paths[index], vec2(ImGui_GetWindowWidth(),icon_size))){*/
         ReceiveMessage("set_animation " + name);
     }
     ImGui_EndChild();
@@ -121,25 +106,24 @@ void ReceiveMessage(string msg){
     if(!token_iter.FindNextToken(msg)){
         return;
     }
-
-
     string token = token_iter.GetToken(msg);
     if(token == "set_animation"){
         MovementObject@ player = ReadCharacter(0);
-        if(!post_init_done){
+        if(player.GetBoolVar("dialogue_control") != true){
             vec3 pos = player.position;
             player.ReceiveScriptMessage("set_dialogue_position "+pos.x+" "+pos.y+" "+pos.z);
             player.ReceiveMessage("set_dialogue_control true");
-            post_init_done = true;
         }
         token_iter.FindNextToken(msg);
+        string animation = token_iter.GetToken(msg);
+
         player.rigged_object().anim_client().Reset();
-        player.ReceiveMessage("set_animation " + token_iter.GetToken(msg));
+        player.Execute("ResetLayers();");
+        player.ReceiveMessage("set_animation " + animation);
     }
 }
 
 void Update(){
-
 }
 
 bool HasFocus(){
