@@ -1,0 +1,180 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>rocket</Name>
+<Description></Description>
+<Shader>post</Shader>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/shielded_stands/shielded_stands_hm.png</Heightmap>
+    <ShaderExtra></ShaderExtra>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/shielded_stands/shielded_stands_c.tga</ColorMap>
+    <WeightMap>Data/Textures/Terrain/shielded_stands/shielded_stands_w.tga</WeightMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_normal.png" materialpath="Data/Materials/grass.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass_stones_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_stones_n.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/rubble_rocks_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/rubble_rocks_n.tga" materialpath="Data/Materials/rocks.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/chipped_rock.tga" normalpath="Data/Textures/Terrain/DetailTextures/chipped_rock_normal.tga" materialpath="Data/Materials/rock.xml" />
+    </DetailMaps>
+    <DetailObjects>
+        <DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/WildGrass.xml" weight_path="Data/Textures/Terrain/shielded_stands/shielded_stands_grass.png" normal_conform="0.5" density="10" min_embed="0" max_embed="0.4" min_scale="0.7" max_scale="2" view_distance="40" jitter_degrees="10" overbright="0" tint_weight="1" />
+        <DetailObject obj_path="Data/Objects/Environment/Rocks/lichen_rock_c.xml" weight_path="Data/Textures/Terrain/shielded_stands/shielded_stands_rocks.png" normal_conform="0.9" density="1.2" min_embed="0.4" max_embed="0.6" min_scale="0.2" max_scale="0.8" view_distance="30" jitter_degrees="30" overbright="0.4" tint_weight="1" collision_type="static" />
+    </DetailObjects>
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
+<AmbientSounds />
+<Script></Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Extra AO" type="string" val="0" />
+    <parameter name="HDR Black point" type="string" val="0.005" />
+    <parameter name="HDR Bloom multiplier" type="string" val="1" />
+    <parameter name="HDR White point" type="string" val="0.8" />
+    <parameter name="Level Boundaries" type="string" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
+    <parameter name="Sky Rotation" type="string" val="0" />
+</LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<Sky>
+    <DomeTexture>Data/Textures/skies/Cirrus1.tga</DomeTexture>
+    <SunAngularRad>0.124719</SunAngularRad>
+    <SunColorAngle>39.8456</SunColorAngle>
+    <RayToSun r0="-0.021415" r1="0.352837" r2="0.93544" />
+</Sky>
+<ActorObjects>
+    <EnvObject t0="-466.972" t1="-70.4067" t2="24.8847" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="0.877583" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rocket_obj.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="4" />
+        </parameters>
+    </EnvObject>
+    <EnvObject t0="371.173" t1="25.454" t2="-198.183" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="0.877583" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rocket_obj.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="8" />
+        </parameters>
+    </EnvObject>
+    <EnvObject t0="-68.8886" t1="-39.5715" t2="-489.266" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="0.877583" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rocket_obj.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="18" />
+        </parameters>
+    </EnvObject>
+    <Hotspot t0="208.774" t1="-0.874908" t2="-67.3002" s0="0.759744" s1="0.759744" s2="0.759744" q0="0" q1="0" q2="0" q3="1" id="4" type_file="Data/Objects/rocket_hotspot.xml">
+        <parameters>
+            <parameter name="Cornering" type="float" val="0.01" />
+            <parameter name="Damage dealt" type="string" val="1.0" />
+            <parameter name="Force" type="int" val="50000" />
+            <parameter name="Friendly" type="int" val="0" />
+            <parameter name="Particle Limiter" type="float" val="0.005" />
+            <parameter name="Show DebugLines" type="int" val="0" />
+            <parameter name="Smoke particle amount" type="string" val="15" />
+            <parameter name="Speed" type="float" val="100" />
+            <parameter name="Top height" type="string" val="200" />
+            <parameter name="Upward force" type="string" val="100000" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="86.4252" t1="-14.8127" t2="380.122" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="0.877583" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rocket_obj.xml">
+        <parameters>
+            <parameter name="BelongsTo" type="int" val="20" />
+        </parameters>
+    </EnvObject>
+    <EnvObject t0="198.694" t1="-5.55569" t2="-54.7844" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="0.266667" color_g="0.266664" color_b="0.266664" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="208.774" t1="-0.874909" t2="-54.8002" s0="0.759744" s1="0.759744" s2="0.759744" q0="0" q1="0" q2="0" q3="1" id="8" type_file="Data/Objects/rocket_hotspot.xml">
+        <parameters>
+            <parameter name="Cornering" type="float" val="0.0478" />
+            <parameter name="Damage dealt" type="string" val="1.0" />
+            <parameter name="Force" type="int" val="50000" />
+            <parameter name="Friendly" type="int" val="0" />
+            <parameter name="Particle Limiter" type="float" val="0.005" />
+            <parameter name="Show DebugLines" type="int" val="0" />
+            <parameter name="Smoke particle amount" type="string" val="15" />
+            <parameter name="Speed" type="float" val="150" />
+            <parameter name="Top height" type="int" val="400" />
+            <parameter name="Upward force" type="string" val="100000" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="198.694" t1="-5.55569" t2="-67.7844" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="12" color_r="0.266667" color_g="0.266664" color_b="0.266664" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="208.694" t1="-5.55569" t2="-54.7844" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="14" color_r="0.266667" color_g="0.266664" color_b="0.266664" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="208.694" t1="-5.55569" t2="-67.2844" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" color_r="0.266667" color_g="0.266664" color_b="0.266664" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="198.774" t1="-0.874909" t2="-67.8002" s0="0.759744" s1="0.759744" s2="0.759744" q0="0" q1="0" q2="0" q3="1" id="18" type_file="Data/Objects/rocket_hotspot.xml">
+        <parameters>
+            <parameter name="Cornering" type="float" val="0.1562" />
+            <parameter name="Damage dealt" type="string" val="1.0" />
+            <parameter name="Force" type="int" val="50000" />
+            <parameter name="Friendly" type="int" val="0" />
+            <parameter name="Particle Limiter" type="float" val="0.005" />
+            <parameter name="Show DebugLines" type="int" val="0" />
+            <parameter name="Smoke particle amount" type="string" val="15" />
+            <parameter name="Speed" type="float" val="75" />
+            <parameter name="Top height" type="int" val="50" />
+            <parameter name="Upward force" type="string" val="100000" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="198.774" t1="-0.874909" t2="-54.8002" s0="0.759744" s1="0.759744" s2="0.759744" q0="0" q1="0" q2="0" q3="1" id="20" type_file="Data/Objects/rocket_hotspot.xml">
+        <parameters>
+            <parameter name="Cornering" type="float" val="0.1632" />
+            <parameter name="Damage dealt" type="string" val="1.0" />
+            <parameter name="Force" type="int" val="50000" />
+            <parameter name="Friendly" type="int" val="0" />
+            <parameter name="Particle Limiter" type="float" val="0.005" />
+            <parameter name="Show DebugLines" type="int" val="0" />
+            <parameter name="Smoke particle amount" type="string" val="15" />
+            <parameter name="Speed" type="float" val="100" />
+            <parameter name="Top height" type="int" val="100" />
+            <parameter name="Upward force" type="string" val="100000" />
+        </parameters>
+    </Hotspot>
+    <ActorObject t0="204.11" t1="0.106361" t2="-61.5421" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="409" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="string" val="0.0" />
+            <parameter name="Lives" type="string" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <CameraObject t0="218.674" t1="8.6803" t2="-61.3449" s0="1" s1="1" s2="1" q0="0.241888" q1="-0.579717" q2="0.185575" q3="0.755632" id="2924">
+        <parameters />
+    </CameraObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="Rocket" path="Data/Objects/rocket_hotspot.xml" thumbnail_path="Data/UI/spawner/rocket.png" />
+    <SpawnerItem display_name="Marble Crete Block Box Full" path="Data/Objects/Crete/box_full.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/box_full.png" />
+</RecentItems>
