@@ -2,12 +2,16 @@
 <Mod>
     <Id>rocket</Id>
     <Name>Rocket</Name>
+    <Category>Item Pack</Category>
     <Version>0.2.0</Version>
     <Author>Gyrth McMulin</Author>
     <Thumbnail>Data/Images/rocket_thumb.jpg</Thumbnail>
     <PreviewImage>Data/Images/rocket_full.jpg</PreviewImage>
     <Description>A homing rocket.</Description>
-    <Tag>Animation</Tag>
+    <Tag>Scripting</Tag>
+    <Tag>Hotspot</Tag>
+    <Tag>Rocket</Tag>
+    <Tag>Item</Tag>
     <SupportedVersion>*</SupportedVersion>
     <Item category="Interactive Objects" title="Rocket" path="Data/Objects/rocket_hotspot.xml" thumbnail="Data/UI/spawner/rocket.png" />
     <Level title="Rocket" thumbnail="Images/rocket_full.jpg">rocket.xml</Level>
