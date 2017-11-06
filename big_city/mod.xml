@@ -1,0 +1,16 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>big-city</Id>
+    <Name>Big City Mod</Name>
+    <Category>Level</Category>
+    <Version>0.1.0</Version>
+    <Author>Gyrth McMulin</Author>
+    <Thumbnail>Data/Images/big_city_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/big_city_full.jpg</PreviewImage>
+    <Description>A Big City Map.</Description>
+    <Tag>level</Tag>
+    <Tag>map</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <NeedsRestart>false</NeedsRestart>
+    <Level title="Big City" thumbnail="Images/big_city_full.jpg">big_city.xml</Level>
+</Mod>

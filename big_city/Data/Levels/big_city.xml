@@ -1,0 +1,192 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>big_city</Name>
+<Description></Description>
+<Shader>post</Shader>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/red_hills/red_hills_hm.png</Heightmap>
+    <ShaderExtra></ShaderExtra>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/red_hills/red_hills_c.tga</ColorMap>
+    <ModelOverride>Data/Models/flat.obj</ModelOverride>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_normal.png" materialpath="Data/Materials/dirt.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_dirt_normal.tga" materialpath="Data/Materials/dirt.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate NavMesh="false" NavMeshParamHash="-1674835251" />
+<AmbientSounds />
+<Script></Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="HDR Black point" type="float" val="0.005" />
+    <parameter name="HDR Bloom multiplier" type="float" val="1" />
+    <parameter name="HDR White point" type="float" val="0.7" />
+    <parameter name="Level Boundaries" type="int" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
+</LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
+    <SunAngularRad>0.112145</SunAngularRad>
+    <SunColorAngle>13.4459</SunColorAngle>
+    <RayToSun r0="-0.03252" r1="0.763445" r2="0.645054" />
+</Sky>
+<ActorObjects>
+    <CameraObject t0="166.096" t1="2.19611" t2="-226.095" s0="1" s1="1" s2="1" q0="0.157286" q1="0.0140015" q2="-0.00223021" q3="0.987451" id="-1">
+        <parameters />
+    </CameraObject>
+    <ActorObject t0="166.069" t1="1.61504" t2="-228.878" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="string" val="0.0" />
+            <parameter name="Lives" type="string" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="88.645" t1="22.4027" t2="56.1612" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2" color_r="0.329412" color_g="0.329412" color_b="0.329412" overbright="0" type_file="Data/Objects/watchtowers.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-1.08853" t1="-0.2586" t2="127.24" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="3" color_r="0.360784" color_g="0.360784" color_b="0.360784" overbright="0" type_file="Data/Objects/building6.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="89.6735" t1="19.4201" t2="48.458" s0="1" s1="1" s2="1" q0="-0.0002305" q1="0.000429" q2="-3.45e-05" q3="1" id="4" color_r="0.490196" color_g="0.490196" color_b="0.490196" overbright="0" type_file="Data/Objects/wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.4244" t1="6.8263" t2="48.3211" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="5" color_r="0.478431" color_g="0.478431" color_b="0.478431" overbright="0" type_file="Data/Objects/houses.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="91.9091" t1="0.239586" t2="48.9003" s0="1.01038" s1="1.01038" s2="1.01038" q0="0" q1="0" q2="0" q3="1" id="6" color_r="0.235294" color_g="0.235294" color_b="0.235294" overbright="0" type_file="Data/Objects/floor.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="81.8917" t1="10.4962" t2="47.5797" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="0.247059" color_g="0.247059" color_b="0.247059" overbright="0" type_file="Data/Objects/hills.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.6801" t1="36.9428" t2="212.804" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="8" color_r="0.211765" color_g="0.211765" color_b="0.211765" overbright="0" type_file="Data/Objects/climbtowers.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="89.6177" t1="25.1375" t2="48.2701" s0="1.00005" s1="1.00005" s2="1.00005" q0="0" q1="0" q2="0" q3="1" id="9" color_r="0.690196" color_g="0.690196" color_b="0.690196" overbright="0" type_file="Data/Objects/roofs.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="127.987" t1="11.0121" t2="-52.6557" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="10" color_r="0.305882" color_g="0.305882" color_b="0.305882" overbright="0" type_file="Data/Objects/building1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-2.50906" t1="43.6394" t2="-171.291" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="11" color_r="0.607843" color_g="0.607843" color_b="0.607843" overbright="0" type_file="Data/Objects/building2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="91.7198" t1="24.4179" t2="52.5329" s0="0.999311" s1="0.999311" s2="0.999311" q0="0" q1="0" q2="0" q3="1" id="12" color_r="0.384314" color_g="0.305882" color_b="0.215686" overbright="0" type_file="Data/Objects/wood.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="166.219" t1="21.0332" t2="196.698" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="13" color_r="0.635294" color_g="0.635294" color_b="0.635294" overbright="0" type_file="Data/Objects/building3.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="138.651" t1="9.2652" t2="-106.434" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="14" color_r="0.254902" color_g="0.254902" color_b="0.254902" overbright="0" type_file="Data/Objects/building4.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="201.778" t1="7.76024" t2="285.132" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="15" color_r="0.439216" color_g="0.439216" color_b="0.439216" overbright="0" type_file="Data/Objects/building5.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-3.73804" t1="53.8984" t2="-171.455" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" color_r="0.411765" color_g="0.411765" color_b="0.411765" overbright="0" type_file="Data/Objects/building2extra.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="33.5979" t1="14.7025" t2="197.718" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="17" color_r="0.352941" color_g="0.352941" color_b="0.352941" overbright="0" type_file="Data/Objects/building78.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.6043" t1="19.1565" t2="55.4444" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="18" color_r="0.47451" color_g="0.47451" color_b="0.47451" overbright="0" type_file="Data/Objects/roofthings.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="170.762" t1="1.2167" t2="125.892" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="19" color_r="0.572549" color_g="0.572549" color_b="0.572549" overbright="0" type_file="Data/Objects/building910.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="86.6226" t1="40.6709" t2="-69.1393" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="20" color_r="0.262745" color_g="0.262745" color_b="0.262745" overbright="0" type_file="Data/Objects/towers.xml">
+        <parameters />
+    </EnvObject>
+    <Decal t0="-2.75408" t1="30.0521" t2="-208.955" s0="4.96197" s1="6.39149" s2="4.89471" q0="0.0116764" q1="0.711479" q2="0.702447" q3="-0.0151863" id="21" type_file="Data/Objects/door.xml" color_r="0.352941" color_g="0.352941" color_b="0.352941" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="126.629" t1="4.57766" t2="-77.4129" s0="4.63719" s1="3.38544" s2="3.81057" q0="-0.662291" q1="0.00480425" q2="0.00871151" q3="0.749181" id="21" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="-5.60735" t1="30.0354" t2="-209.127" s0="4.96197" s1="6.39149" s2="4.89471" q0="0.0116764" q1="0.711479" q2="0.702447" q3="-0.0151863" id="22" type_file="Data/Objects/door.xml" color_r="0.352941" color_g="0.352941" color_b="0.352941" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="9.48248" t1="2.487" t2="128.979" s0="4.63719" s1="3.38544" s2="3.81057" q0="0.493612" q1="0.506536" q2="0.502985" q3="-0.496764" id="23" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="107.342" t1="1.92372" t2="248.748" s0="3.29628" s1="2.4065" s2="2.7087" q0="-0.707244" q1="-0.00618793" q2="-0.00144955" q3="0.706941" id="24" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="164.738" t1="15.4235" t2="189.352" s0="4.63719" s1="3.38544" s2="3.81057" q0="-0.707264" q1="0.00296293" q2="0.00769768" q3="0.706901" id="25" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="129.264" t1="4.60232" t2="-77.4074" s0="4.63719" s1="3.38544" s2="3.81057" q0="-0.662291" q1="0.00480425" q2="0.00871151" q3="0.749181" id="26" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="136.606" t1="4.53247" t2="-77.4225" s0="4.63719" s1="3.38544" s2="3.81057" q0="-0.662291" q1="0.00480425" q2="0.00871151" q3="0.749181" id="27" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="139.241" t1="4.55713" t2="-77.4171" s0="4.63719" s1="3.38544" s2="3.81057" q0="-0.662291" q1="0.00480425" q2="0.00871151" q3="0.749181" id="28" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="116.293" t1="4.53506" t2="-77.4226" s0="4.63719" s1="3.38544" s2="3.81057" q0="-0.662291" q1="0.00480425" q2="0.00871151" q3="0.749181" id="29" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="204.441" t1="2.39575" t2="-196.593" s0="4.2562" s1="3.38543" s2="3.61899" q0="-0.502799" q1="0.497063" q2="0.496044" q3="0.504045" id="30" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="118.929" t1="4.55972" t2="-77.4171" s0="4.63719" s1="3.38544" s2="3.81057" q0="-0.662291" q1="0.00480425" q2="0.00871151" q3="0.749181" id="31" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="203.36" t1="2.42222" t2="-194.149" s0="4.2562" s1="3.38543" s2="3.61899" q0="-0.502799" q1="0.497063" q2="0.496044" q3="0.504045" id="32" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="9.60055" t1="2.48095" t2="126.291" s0="4.63719" s1="3.38544" s2="3.81057" q0="0.493612" q1="0.506536" q2="0.502985" q3="-0.496764" id="33" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="167.479" t1="15.4236" t2="189.328" s0="4.63719" s1="3.38544" s2="3.81057" q0="-0.707264" q1="0.00296293" q2="0.00769768" q3="0.706901" id="34" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="-33.1848" t1="13.824" t2="288.347" s0="4.39974" s1="3.21209" s2="3.61545" q0="-0.707244" q1="-0.00618793" q2="-0.00144955" q3="0.706941" id="35" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="-30.6408" t1="13.8487" t2="288.313" s0="4.39974" s1="3.21209" s2="3.61545" q0="-0.707244" q1="-0.00618793" q2="-0.00144955" q3="0.706941" id="36" type_file="Data/Objects/door.xml" color_r="0.603922" color_g="0.603922" color_b="0.603922" overbright="0">
+        <parameters />
+    </Decal>
+</ActorObjects>
+<RecentItems />
