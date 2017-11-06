@@ -1,10 +1,14 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
-<Name></Name>
+<Name>benchmark</Name>
 <Description></Description>
 <Shader>post</Shader>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
 <Terrain>
     <Heightmap>Data/Textures/Terrain/red_desert/red_desert_hm.png</Heightmap>
+    <ShaderExtra></ShaderExtra>
     <DetailMap></DetailMap>
     <ColorMap>Data/Textures/Terrain/red_desert/red_desert_c.tga</ColorMap>
     <WeightMap>Data/Textures/Terrain/red_desert/red_desert_w.png</WeightMap>
@@ -16,24 +20,46 @@
     </DetailMaps>
     <DetailObjects />
 </Terrain>
-<OutOfDate NavMesh="false" />
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
 <Script>benchmark.as</Script>
 <LevelScriptParameters>
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Fog amount" type="float" val="1" />
+    <parameter name="HDR Black point" type="float" val="0.005" />
+    <parameter name="HDR Bloom multiplier" type="float" val="1" />
+    <parameter name="HDR White point" type="float" val="0.7" />
     <parameter name="Level Boundaries" type="int" val="1" />
     <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
+    <parameter name="Sky Brightness" type="float" val="1" />
+    <parameter name="Sky Rotation" type="float" val="0" />
+    <parameter name="Sky Tint" type="string" val="255, 255, 255" />
 </LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
 <Sky>
     <DomeTexture>Data/Textures/skies/bright_dusk.tga</DomeTexture>
     <SunAngularRad>0.153056</SunAngularRad>
     <SunColorAngle>353.589</SunColorAngle>
     <RayToSun r0="0.849746" r1="0.499721" r2="0.167961" />
-    <ExtraAO>0</ExtraAO>
-    <SkyRotation>0</SkyRotation>
 </Sky>
 <ActorObjects>
-    <ActorObject t0="41.5972" t1="13.121" t2="13.8292" s0="1" s1="1" s2="1" r0="-0.835025" r1="0" r2="-0.550212" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.550212" r9="0" r10="-0.835025" r11="0" r12="0" r13="0" r14="0" r15="1" id="8" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <CameraObject t0="102.22" t1="8.24063" t2="-2.70034" s0="1" s1="1" s2="1" q0="0.0454565" q1="-0.182689" q2="0.00845589" q3="0.982083" id="1">
+        <parameters />
+    </CameraObject>
+    <Hotspot t0="89.0635" t1="8.05536" t2="-17.9796" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="5" type_file="Data/Objects/Hotspots/emitter.xml">
+        <parameters>
+            <parameter name="Type" type="string" val="Smoke" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="102.647" t1="-2.7488" t2="-24.2001" s0="11.2359" s1="3.16387" s2="9.57469" q0="0" q1="0" q2="0" q3="1" id="6" type_file="Data/Objects/Hotspots/wet_cube.xml">
+        <parameters>
+            <parameter name="Water Fog" type="float" val="1" />
+            <parameter name="Wave Density" type="float" val="0.25" />
+            <parameter name="Wave Height" type="float" val="0.5" />
+        </parameters>
+    </Hotspot>
+    <ActorObject t0="41.5972" t1="13.121" t2="13.8292" s0="1" s1="1" s2="1" q0="0" q1="0.957869" q2="0" q3="0.287206" id="8" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="string" val="0.5" />
             <parameter name="Attack Damage" type="string" val="1.0" />
@@ -45,11 +71,18 @@
             <parameter name="Damage Resistance" type="string" val="1.0" />
             <parameter name="Ear Size" type="float" val="1" />
             <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
             <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
             <parameter name="Left handed" type="int" val="0" />
             <parameter name="Lives" type="int" val="1" />
             <parameter name="Movement Speed" type="string" val="1.0" />
             <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Teams" type="string" val="turner" />
         </parameters>
@@ -63,4 +96,67 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
+    <PlaceholderObject t0="42.2092" t1="13.1159" t2="19.9198" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="10" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogues/dialogue_test.txt" />
+            <parameter name="DisplayName" type="string" val="One-person test" />
+            <parameter name="NumParticipants" type="int" val="1" />
+            <parameter name="Script" type="string" val='#name &quot;One-person test&quot;&#x0A;#participants 1&#x0A;send_character_message 1 &quot;set_dialogue_control true&quot;&#x0A;set_character_pos 1 -44.0831 26.6523 58.5592 0&#x0A;send_character_message 1 &quot;set_animation \&quot;Data/Animations/r_dialogue_thoughtful.anm\&quot;&quot;&#x0A;send_character_message 1 &quot;set_head_target -42.4076 27.785 58.5388 1&quot;&#x0A;send_character_message 1 &quot;set_torso_target -41.2887 27.917 60.1583 1&quot;&#x0A;send_character_message 1 &quot;set_eye_dir 0 0 1 1&quot;&#x0A;set_cam -43.3936 27.2684 58.8805 7.5 64 0 90&#x0A;say 1 &quot;Chris&quot; &quot;Hello there! [wait 0.2]How can I help you?&quot;&#x0A;set_cam -43.2 27.2 57.4 -1 146 0 90&#x0A;send_character_message 1 &quot;set_animation \&quot;Data/Animations/r_dialogue_facepalm.anm\&quot;&quot;&#x0A;send_character_message 1 &quot;set_head_target -42.4076 27.785 58.5388 0&quot;&#x0A;say 1 &quot;Chris&quot; &quot;Oh, my mistake[wait 0.2] -- I guess I&apos;m talking to myself.&quot;&#x0A;send_character_message 1 &quot;set_dialogue_control false&quot;&#x0A;set_cam_control false&#x0A;set_dialogue_visible false&#x0A;' />
+            <parameter name="obj_1" type="int" val="11" />
+        </parameters>
+        <Connections>
+            <Connection id="10" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="42.2092" t1="13.8159" t2="19.9198" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="11" type_file="" special_type="2">
+        <parameters />
+        <Connections>
+            <Connection id="8" />
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="32.2899" t1="18.2723" t2="25.673" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="12" type_file="Data/Objects/Hotspots/overgrowth_level.xml">
+        <parameters>
+            <parameter name="goal_0" type="string" val="reach 0" />
+            <parameter name="goal_0_pre" type="string" val='dialogue &quot;Start&quot;' />
+            <parameter name="music" type="string" val="slaver" />
+            <parameter name="player_spawn" type="string" val="" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="112.73" t1="2.91862" t2="-12.003" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="20" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="109.973" t1="3.7777" t2="-36.5975" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="21" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_boulder_mossy.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="89.5344" t1="4.45554" t2="-15.8185" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="22" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_capital_mossy.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="88.3547" t1="2.84303" t2="-34.363" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="23" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_facade_mossy.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="118.856" t1="3.44992" t2="-25.911" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="24" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_pillar_mossy.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="93.8157" t1="2.02685" t2="-37.3674" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="25" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
+        <parameters />
+    </EnvObject>
+    <ReflectionCaptureObject t0="22.7272" t1="38.4161" t2="-21.4952" s0="5.55064" s1="5.55064" s2="5.55064" q0="0" q1="0" q2="0" q3="1" id="27" gicoeff00="0.377991" gicoeff01="0.391357" gicoeff02="0.514282" gicoeff03="0.321533" gicoeff04="0.348267" gicoeff05="0.510071" gicoeff06="0.356567" gicoeff07="0.554688" gicoeff08="0.869141" gicoeff09="0.328979" gicoeff10="0.170715" gicoeff11="0.154846" gicoeff12="0.348389" gicoeff13="0.362427" gicoeff14="0.506042" gicoeff15="0.342529" gicoeff16="0.368408" gicoeff17="0.516357">
+        <parameters>
+            <parameter name="Global" type="string" val="1" />
+        </parameters>
+    </ReflectionCaptureObject>
+    <ReflectionCaptureObject t0="101.624" t1="9.81563" t2="-21.9104" s0="4.8439" s1="4.8439" s2="4.8439" q0="0" q1="0" q2="0" q3="1" id="29" gicoeff00="0.278564" gicoeff01="0.358276" gicoeff02="0.493958" gicoeff03="0.237457" gicoeff04="0.318176" gicoeff05="0.482361" gicoeff06="0.34845" gicoeff07="0.546265" gicoeff08="0.855713" gicoeff09="0.111877" gicoeff10="0.114487" gicoeff11="0.137573" gicoeff12="0.259247" gicoeff13="0.329895" gicoeff14="0.479065" gicoeff15="0.246429" gicoeff16="0.336853" gicoeff17="0.495056">
+        <parameters>
+            <parameter name="Global" type="string" val="0" />
+        </parameters>
+    </ReflectionCaptureObject>
 </ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="Particle Emitter" path="Data/Objects/Hotspots/emitter.xml" thumbnail_path="Data/UI/spawner/thumbs/Hotspot/emitter_icon.png" />
+    <SpawnerItem display_name="Water" path="Data/Objects/Hotspots/wet_cube.xml" thumbnail_path="Data/UI/spawner/thumbs/Hotspot/water.png" />
+    <SpawnerItem display_name="Strata Rocks All Mossy" path="Data/Objects/Environment/Rocks/strata_rocks/strata_rocks_all_mossy.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/strata_rocks_all_mossy.png" />
+    <SpawnerItem display_name="Global Reflection" path="Data/Objects/global_reflection_capture.xml" thumbnail_path="Data/UI/spawner/thumbs/Lighting/empty_placeholder.png" />
+    <SpawnerItem display_name="Local Reflection" path="Data/Objects/local_reflection_capture.xml" thumbnail_path="Data/UI/spawner/thumbs/Lighting/empty_placeholder.png" />
+    <SpawnerItem display_name="Start Dialogue" path="Data/Objects/Hotspots/start_dialogue.xml" thumbnail_path="Data/UI/spawner/thumbs/Hotspot/sign_icon.png" />
+    <SpawnerItem display_name="overgrowth_level.xml" path="Data/Objects/Hotspots/overgrowth_level.xml" thumbnail_path="empty_placeholder.png" />
+</RecentItems>

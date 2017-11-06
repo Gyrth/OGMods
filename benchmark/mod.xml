@@ -1,35 +1,14 @@
 <? xml version="1.0" ?>
 <Mod>
-    <!-- The ID is necessary and should never change between versions of the same mod -->
-    <!-- The id can consist of english alphabet or dash "-" -->
-    <Id>benchmark-mod</Id> 
-    <!-- The human readable name is presented in UI's -->
-    <Name>Benchmark Mod</Name> 
-
-    <!-- Thumbnail used in-game, no strict size is defined yet, should be 16:9 -->
-    <Thumbnail>Data/Images/example_tcp_socket_mod_thumb.png</Thumbnail>
-    <!-- First preview image will be used as preview on steamworks, you can add additional ones -->
-    <PreviewImage>Data/Images/example_tcp_socket_mod_full.png</PreviewImage>
-    
+    <Id>benchmark-mod</Id>
+    <Name>Benchmark Mod</Name>
+    <Thumbnail>Data/Images/benchmark_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/benchmark_full.jpg</PreviewImage>
     <Description>Benchmarking.</Description>
-    <!-- Version number, can have any formatting you wish. Can consists of numbers english alphabet, "." or "-" -->
     <Version>1.0.0</Version>
-    <!-- Your immortal stamp -->
     <Author>Gyrth McMulin</Author>
-
-    <!-- Tags sent to and mainly used by steam workshop -->
-    <Tag>a209</Tag>
-    <Tag>a210</Tag>
-    <Tag>Test</Tag>
-    
-    <!-- Specification for which version of the game that is supported. It's possible to specify more than one -->
-    <SupportedVersion>a209</SupportedVersion>
-    <SupportedVersion>a210</SupportedVersion>
-    <!-- Indicate that mod is compatible with __ALL__ versions of overgrowth, use with care, especially with script mods -->
+    <Tag>benchmark</Tag>
     <SupportedVersion>*</SupportedVersion>
-
-    <!-- Indicate whether or not the game needs to restart for the mod to function properly, this will have to be determined via manual testing. -->
     <NeedsRestart>false</NeedsRestart>
-	<LevelHookFile>Data/Scripts/benchmark.as</LevelHookFile>
-	
+	<Level title="Benchmark" thumbnail="Images/benchmark_full.jpg">benchmark.xml</Level>
 </Mod>
