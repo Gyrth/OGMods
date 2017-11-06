@@ -62,6 +62,7 @@ string ToLowerCase(string input){
 
 void Display(){
     if(show){
+        ImGui_SetNextWindowSize(vec2(500, 500), ImGuiSetCond_FirstUseEver);
         ImGui_Begin("Animation Browser", show, ImGuiWindowFlags_NoScrollbar);
         ImGui_BeginChild(99, vec2(ImGui_GetWindowWidth(), top_bar_height), false, ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         ImGui_Columns(2, false);
@@ -99,15 +100,22 @@ void AddCategory(string category, array<string> items){
 }
 
 void AddItem(string name, int index){
-    ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, vec4(1.0f, 0.0f, 1.0f, 0.1f));
-    ImGui_BeginChild(name + "button" + index, vec2(ImGui_GetWindowWidth() - 50, icon_size), false, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_ShowBorders);
-    if(ImGui_Selectable(name, (index == currently_pressed), ImGuiSelectableFlags_SpanAllColumns, vec2(ImGui_GetWindowWidth(), icon_size))){
-    /*if(ImGui_Button(animation_paths[index], vec2(ImGui_GetWindowWidth(),icon_size))){*/
+    bool is_selected = index == currently_pressed;
+    if(is_selected) {
+        // From default style colors for ImGuiCol_Header, ImGuiCol_HeaderHovered, ImGuiCol_HeaderActive
+        // There's ways to get these colors from the API, but it's a PITA,
+        //   and there's no way in OG to easily globally override the default style anyway (yet)
+        ImGui_PushStyleColor(ImGuiCol_Button, vec4(0.40f, 0.40f, 0.90f, 0.45f));
+        ImGui_PushStyleColor(ImGuiCol_ButtonHovered, vec4(0.45f, 0.45f, 0.90f, 0.80f));
+        ImGui_PushStyleColor(ImGuiCol_ButtonActive, vec4(0.53f, 0.53f, 0.87f, 0.80f));
+    }
+    if(ImGui_Button(animation_paths[index], vec2(ImGui_GetWindowWidth() - 50, icon_size))) {
         ReceiveMessage("set_animation " + name);
         currently_pressed = index;
     }
-    ImGui_EndChild();
-    ImGui_PopStyleColor();
+    if(is_selected) {
+        ImGui_PopStyleColor(3);
+    }
 }
 
 void ReceiveMessage(string msg){
