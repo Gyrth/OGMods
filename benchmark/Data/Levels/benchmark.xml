@@ -44,9 +44,48 @@
     <RayToSun r0="0.849746" r1="0.499721" r2="0.167961" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="76.3703" t1="14.5792" t2="27.5133" s0="1" s1="1" s2="1" q0="0.0995592" q1="0.367228" q2="-0.0395707" q3="0.92394" id="1">
+    <CameraObject t0="84.3475" t1="14.8033" t2="4.66229" s0="1" s1="1" s2="1" q0="0.146351" q1="0.320437" q2="-0.0501806" q3="0.93455" id="1">
         <parameters />
     </CameraObject>
+    <ActorObject t0="113.343" t1="7.53035" t2="-14.7743" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="guard" />
+        </parameters>
+        <Connections>
+            <Connection id="67" />
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="19" type="0" mirrored="0" attachment="" />
+        </ItemConnections>
+        <Palette>
+            <Color label="Clothes" channel="0" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="1" red="1" green="1" blue="1" />
+            <Color label="Leather" channel="2" red="1" green="1" blue="1" />
+            <Color label="Armor" channel="3" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
     <PlaceholderObject t0="77.3308" t1="6.78392" t2="-14.118" s0="1" s1="1" s2="1" q0="0" q1="-0.603658" q2="0" q3="0.797243" id="3" type_file="" special_type="0">
         <parameters>
             <parameter name="BelongsTo" type="string" val="2110725890" />
@@ -58,7 +97,7 @@
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
-    <Hotspot t0="89.0635" t1="8.05536" t2="-17.9796" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="5" type_file="Data/Objects/Hotspots/emitter.xml">
+    <Hotspot t0="89.5651" t1="10.0409" t2="-17.5152" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="5" type_file="Data/Objects/Hotspots/emitter.xml">
         <parameters>
             <parameter name="Type" type="string" val="Smoke" />
         </parameters>
@@ -107,7 +146,7 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <PlaceholderObject t0="81.3841" t1="6.78392" t2="-32.6302" s0="1" s1="1" s2="1" q0="0" q1="-0.955646" q2="0" q3="0.29452" id="10" type_file="" special_type="0">
+    <PlaceholderObject t0="118.123" t1="5.50676" t2="-1.30904" s0="1" s1="1" s2="1" q0="0" q1="0.280524" q2="0" q3="0.959847" id="10" type_file="" special_type="0">
         <parameters>
             <parameter name="BelongsTo" type="string" val="2110725890" />
             <parameter name="Name" type="string" val="animation_main" />
@@ -144,7 +183,7 @@
             <parameter name="Object Path" type="string" val="Data/Objects/Placeholder/empty_placeholder.xml" />
             <parameter name="Play mode" type="int" val="0" />
             <parameter name="Scale Object Preview" type="int" val="0" />
-            <parameter name="Seconds" type="float" val="120" />
+            <parameter name="Seconds" type="float" val="30" />
             <parameter name="Wiremesh preview" type="int" val="1" />
         </parameters>
     </Hotspot>
@@ -192,6 +231,9 @@
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
+    <ItemObject t0="111.911" t1="7.58195" t2="-15.8301" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="19" type_file="Data/Items/DogWeapons/DogBroadSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </ItemObject>
     <EnvObject t0="112.73" t1="2.91862" t2="-12.003" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="20" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
         <parameters />
     </EnvObject>
@@ -226,6 +268,9 @@
             <parameter name="Global" type="string" val="1" />
         </parameters>
     </ReflectionCaptureObject>
+    <ItemObject t0="110.161" t1="6.48611" t2="-9.07239" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="28" type_file="Data/Items/DogWeapons/DogSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </ItemObject>
     <ReflectionCaptureObject t0="101.624" t1="9.81563" t2="-21.9104" s0="4.8439" s1="4.8439" s2="4.8439" q0="0" q1="0" q2="0" q3="1" id="29" gicoeff00="0.278564" gicoeff01="0.358276" gicoeff02="0.493958" gicoeff03="0.237457" gicoeff04="0.318176" gicoeff05="0.482361" gicoeff06="0.34845" gicoeff07="0.546265" gicoeff08="0.855713" gicoeff09="0.111877" gicoeff10="0.114487" gicoeff11="0.137573" gicoeff12="0.259247" gicoeff13="0.329895" gicoeff14="0.479065" gicoeff15="0.246429" gicoeff16="0.336853" gicoeff17="0.495056">
         <parameters>
             <parameter name="Global" type="string" val="0" />
@@ -242,6 +287,89 @@
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
+    <ActorObject t0="112.031" t1="6.86255" t2="-8.62546" s0="1" s1="1" s2="1" q0="0" q1="0.998687" q2="0" q3="0.0512221" id="31" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="raider" />
+        </parameters>
+        <Connections>
+            <Connection id="69" />
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="28" type="0" mirrored="1" attachment="" />
+        </ItemConnections>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1" />
+            <Color label="Pants" channel="1" red="1" green="1" blue="1" />
+            <Color label="Shirt" channel="2" red="1" green="1" blue="1" />
+            <Color label="Leather" channel="3" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <Group t0="88.3513" t1="6.53364" t2="-18.5192" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" id="57" version="1">
+        <parameters />
+        <Hotspot t0="88.356" t1="6.54015" t2="-18.5033" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" id="54" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <parameters>
+                <parameter name="Fire Ribbons" type="int" val="4" />
+                <parameter name="Ignite Characters" type="int" val="1" />
+                <parameter name="Light Amplify" type="float" val="1" />
+                <parameter name="Light Distance" type="float" val="2" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="88.3414" t1="6.4648" t2="-18.5423" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" id="55" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="88.3585" t1="6.48771" t2="-18.5444" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" id="56" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+    </Group>
+    <Hotspot t0="97.3627" t1="6.51546" t2="-31.5402" s0="2.14879" s1="1" s2="2.53217" q0="0" q1="0" q2="0" q3="1" id="60" type_file="Data/Objects/Hotspots/emitter.xml">
+        <parameters>
+            <parameter name="Type" type="string" val="Smoke" />
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="116.363" t1="6.51546" t2="-34.0402" s0="2.14879" s1="1" s2="2.53217" q0="0" q1="0" q2="0" q3="1" id="62" type_file="Data/Objects/Hotspots/emitter.xml">
+        <parameters>
+            <parameter name="Type" type="string" val="Smoke" />
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="88.3423" t1="6.56219" t2="-18.5466" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="63" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_wood.xml">
+        <parameters />
+    </EnvObject>
+    <PathPointObject t0="109.925" t1="6.34564" t2="-12.3162" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="67" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections />
+    </PathPointObject>
+    <PathPointObject t0="114.925" t1="6.34564" t2="-11.8162" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="69" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections />
+    </PathPointObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Particle Emitter" path="Data/Objects/Hotspots/emitter.xml" thumbnail_path="Data/UI/spawner/thumbs/Hotspot/emitter_icon.png" />
@@ -252,4 +380,11 @@
     <SpawnerItem display_name="Start Dialogue" path="Data/Objects/Hotspots/start_dialogue.xml" thumbnail_path="Data/UI/spawner/thumbs/Hotspot/sign_icon.png" />
     <SpawnerItem display_name="overgrowth_level.xml" path="Data/Objects/Hotspots/overgrowth_level.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Animated Object" path="Data/Objects/animated_hotspot.xml" thumbnail_path="Data/UI/spawner/animated_object.png" />
+    <SpawnerItem display_name="Male Rabbit Guard" path="Data/Objects/IGF_Characters/base_guard_actor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/base_guard_actor.png" />
+    <SpawnerItem display_name="Dog Broad Sword" path="Data/Items/DogWeapons/DogBroadSword.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/wsword1.png" />
+    <SpawnerItem display_name="Dog Sword" path="Data/Items/DogWeapons/DogSword.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/wsword.png" />
+    <SpawnerItem display_name="Raider Rabbit" path="Data/Objects/characters/raider_rabbit_actor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/raider_rabbit_actor.png" />
+    <SpawnerItem display_name="Fire" path="Data/Objects/fire.xml" thumbnail_path="Data/UI/spawner/thumbs/Lighting/light_placeholder.png" />
+    <SpawnerItem display_name="Fire wood" path="Data/Objects/Environment/camp/fire_wood.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/fire_wood.png" />
+    <SpawnerItem display_name="Path Point" path="Data/Objects/pathpoint/pathpoint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/pathpoint.png" />
 </RecentItems>
