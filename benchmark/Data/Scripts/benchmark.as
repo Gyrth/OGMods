@@ -8,7 +8,8 @@ vec4 color(1,0,0,1);
 IMGUI@ imGUI;
 float screen_height = 1.0f;
 FontSetup small_font("arial", 35, HexColor("#ffffff"), true);
-FontSetup font("arial", 75, HexColor("#ffffff"), true);
+FontSetup normal_font("arial", 55, HexColor("#ffffff"), true);
+FontSetup big_font("arial", 75, HexColor("#ffffff"), true);
 IMText@ onscreen_fps;
 IMText@ onscreen_highest_fps;
 array<uint64> all_fps;
@@ -33,11 +34,12 @@ int bar_graph_width = 700;
 float bar_width = 5.0f;
 vec4 bar_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
 IMText@ highest;
+const float MPI = 3.14159265359;
 
 array<IMImage@> bars;
 array<int> bars_fps;
 
-array<BenchmarkResult@> benchmark_results = {BenchmarkResult("Intel 6600k", "NVidia GTX1060", "Linux", 1337)};
+array<BenchmarkResult@> benchmark_results = {BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", 1337)};
 
 class BenchmarkResult{
 	string cpu;
@@ -62,6 +64,11 @@ void Reset(){
 }
 
 void Init(string p_level_name) {
+
+
+
+
+	ReadHardwareReport();
 	@imGUI = CreateIMGUI();
     level_name = p_level_name;
 	bars.resize(0);
@@ -101,7 +108,7 @@ void Init(string p_level_name) {
 	}
 	bar_graph_holder.append(bar_holder);
 
-	ShowResults();
+	/*ShowResults();*/
 
 
 	/*IMDivider fps_divider("fps_divider", DOHorizontal);
@@ -131,9 +138,11 @@ void ReceiveMessage(string msg) {
         return;
     }
     string token = token_iter.GetToken(msg);
+	Print(token + "!\n");
     if(token == "reset"){
         Reset();
-    }
+    }else if(token == "Back"){
+	}
 }
 
 void DrawGUI() {
@@ -146,7 +155,67 @@ void Update(int paused) {
 	Update();
 }
 
+bool post_init_done = false;
+
+void PostInit(){
+	if(post_init_done){
+		return;
+	}
+	/*camera.SetFlags(kEditorCamera);*/
+	Print("postinit done\n");
+	post_init_done = true;
+}
+
+int camera_id = -1;
+
 void Update() {
+
+	PostInit();
+
+	while( imGUI.getMessageQueueSize() > 0 ) {
+        IMMessage@ message = imGUI.getNextMessage();
+		Print(message.name + "\n");
+        if( message.name == "Back to Main Menu" ) {
+			level.SendMessage("go_to_main_menu");
+		}else if( message.name == "Run Benchmark Again" ) {
+			level.SendMessage("reset");
+		}
+	}
+
+	if(camera_id != -1 && !EditorModeActive()){
+		Object@ cam_obj = ReadObjectFromID(camera_id);
+		/*PlaceholderObject@ placeholder_cam = cast<PlaceholderObject@>(cam_obj);*/
+		camera.SetPos(cam_obj.GetTranslation());
+		camera.SetDistance(0.0f);
+		quaternion rot  = cam_obj.GetRotation();
+		vec3 front = Mult(rot, vec3(0,0,1));
+		float y_rot = atan2(front.x, front.z)*180.0f/MPI;
+		camera.SetYRotation(y_rot);
+		float x_rot = asin(front[1])*-180.0f/MPI;
+		camera.SetXRotation(x_rot);
+		vec3 up = Mult(rot, vec3(0,1,0));
+		vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+		vec3 expected_up = normalize(cross(expected_right, front));
+		float z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/MPI;
+		camera.SetZRotation(z_rot);
+
+		UpdateListener(cam_obj.GetTranslation(),vec3(0.0f),camera.GetFacing(),camera.GetUpVector());
+	}
+	if(camera_id == -1){
+		array<int> cams = GetObjectIDsType(_placeholder_object);
+		for(uint i = 0; i < cams.size(); i++){
+			Object@ cam_obj = ReadObjectFromID(cams[i]);
+			ScriptParams@ cam_params = cam_obj.GetScriptParams();
+			if(cam_params.HasParam("Name")){
+				if(cam_params.GetString("Name") == "animation_main"){
+					camera_id = cams[i];
+					ReadCharacter(0).ReceiveMessage("set_dialogue_control true");
+					Print("found cam id  " + camera_id + "\n");
+				}
+			}
+		}
+	}
+
 	counter += time_step;
 
 	if(counter > update_speed){
@@ -169,7 +238,7 @@ void Update() {
 }
 
 void ScootchBarsLeft(){
-	Print("highest " + highest_value + "\n");
+	/*Print("highest " + highest_value + "\n");*/
 	for(uint i = 0; i < (bars.size() - 1); i++){
 		bars_fps[i] = bars_fps[i + 1];
 		bars[i].setSizeY(bars_fps[i + 1] * bar_graph_height / highest_value);
@@ -182,13 +251,16 @@ void SetWindowDimensions(int w, int h){
 void ShowResults(){
 	IMDivider mainDiv( "mainDiv", DOVertical );
 	level.Execute("has_gui = true;");
-	vec2 menu_size(1000, 500);
+	vec2 menu_size(1200, 1000);
 	vec4 background_color(0,0,0,0.5);
+	vec4 light_background_color(0,0,0,0.25);
 	vec2 button_size(1000, 60);
 	vec2 option_size(900, 60);
 	vec2 connect_button_size(1000, 60);
 	float button_size_offset = 10.0f;
 	float description_width = 200.0f;
+	int player_name_width = 500;
+	int player_character_width = 200;
 
 	IMContainer menu_container(menu_size.x, menu_size.y);
 	menu_container.setAlignment(CACenter, CATop);
@@ -197,91 +269,172 @@ void ShowResults(){
 
 	menu_divider.appendSpacer(10);
 
-	{
-		//Choose a username and character
-		IMContainer container(button_size.x, button_size.y);
-		menu_divider.append(container);
-		IMDivider divider("title_divider", DOHorizontal);
-		divider.setZOrdering(4);
-		container.setElement(divider);
-		IMText title("Choose a username and character.", client_connect_font);
-		divider.append(title);
-		//Background
-		IMImage background(brushstroke_background);
-		background.setZOrdering(2);
-		background.setClip(false);
-		background.setSize(vec2(600, 60));
-		background.setAlpha(0.85f);
-		container.addFloatingElement(background, "background", vec2(container.getSizeX() / 2.0f - background.getSizeX() / 2.0f,0));
-	}
+	//Header
+	IMContainer container(button_size.x, button_size.y);
+	menu_divider.append(container);
+	IMDivider divider("title_divider", DOHorizontal);
+	divider.setZOrdering(4);
+	container.setElement(divider);
+	IMText title("Results", normal_font);
+	divider.append(title);
 
 	menu_divider.appendSpacer(10);
 
 	{
-		//Username input field.
-		IMContainer username_container(option_size.x, option_size.y);
-		IMDivider username_divider("username_divider", DOHorizontal);
-		IMContainer username_parent_container(button_size.x / 2.0f, button_size.y);
-		username_parent_container.sendMouseOverToChildren(true);
-		username_parent_container.sendMouseDownToChildren(true);
-		IMDivider username_parent("username_parent", DOHorizontal);
-		username_parent_container.setElement(username_parent);
-		username_container.setElement(username_divider);
-		username_parent_container.addLeftMouseClickBehavior(IMFixedMessageOnClick("activate_username_field"), "");
+		//Background
+		IMImage background(white_background);
+		background.setColor(background_color);
+		background.setZOrdering(2);
+		background.setClip(false);
+		background.setSize(vec2(menu_size.x / 2, 60));
+		container.addFloatingElement(background, "background", vec2(container.getSizeX() / 2.0f - background.getSizeX() / 2.0f,0));
+	}
 
-		IMContainer description_container(description_width, option_size.y);
-		IMText description_label("Username: ", client_connect_font);
-		description_container.setElement(description_label);
-		description_label.setZOrdering(3);
-		username_divider.append(description_container);
+	{
+		//Table header
+		IMContainer titlebar_container(menu_size.x, connect_button_size.y);
+		menu_divider.append(titlebar_container);
+		IMDivider titlebar_divider("titlebar_divider", DOHorizontal);
+		titlebar_divider.setZOrdering(3);
+		titlebar_container.setElement(titlebar_divider);
 
-		username_divider.appendSpacer(25);
+		IMImage background(white_background);
+		background.setColor(background_color);
+		background.setZOrdering(0);
+		background.setSize(vec2(menu_size.x, 60));
+		titlebar_container.addFloatingElement(background, "background", vec2(0,0));
 
-		IMText username_label("test", client_connect_font);
-		username_label.addMouseOverBehavior(mouseover_fontcolor, "");
-		username_label.setZOrdering(3);
-		username_parent.append(username_label);
-		username_divider.append(username_parent_container);
+		IMContainer gpu_label_container(menu_size.x / 4);
+		IMText gpu_label("GPU", client_connect_font);
+		gpu_label.setZOrdering(3);
+		gpu_label_container.setElement(gpu_label);
+		titlebar_divider.append(gpu_label_container);
 
-		IMImage username_background(white_background);
-		username_background.setZOrdering(0);
-		username_background.setSize(500 - button_size_offset);
-		username_background.setColor(vec4(0,0,0,0.75));
-		username_parent_container.addFloatingElement(username_background, "username_background", vec2(button_size_offset / 2.0f));
+		IMContainer cpu_label_container(menu_size.x / 4);
+		IMText cpu_label("CPU", client_connect_font);
+		cpu_label.setZOrdering(3);
+		cpu_label_container.setElement(cpu_label);
+		titlebar_divider.append(cpu_label_container);
 
-		menu_divider.append(username_container);
+		IMContainer os_label_container(menu_size.x / 4);
+		IMText os_label("OS", client_connect_font);
+		os_label.setZOrdering(3);
+		os_label_container.setElement(os_label);
+		titlebar_divider.append(os_label_container);
+
+		IMContainer score_label_container(menu_size.x / 4);
+		IMText score_label("Score", client_connect_font);
+		score_label.setZOrdering(3);
+		score_label_container.setElement(score_label);
+		titlebar_divider.append(score_label_container);
+
+		menu_divider.appendSpacer(10);
+	}
+
+	menu_divider.appendSpacer(10);
+
+	for(uint i = 0; i < benchmark_results.size(); i++){
+		//Single result
+		IMContainer titlebar_container(menu_size.x, connect_button_size.y);
+		menu_divider.append(titlebar_container);
+		IMDivider titlebar_divider("titlebar_divider", DOHorizontal);
+		titlebar_divider.setZOrdering(3);
+		titlebar_container.setElement(titlebar_divider);
+
+		IMImage background(white_background);
+		background.setColor(light_background_color);
+		background.setZOrdering(0);
+		background.setSize(vec2(menu_size.x, 60));
+		titlebar_container.addFloatingElement(background, "background", vec2(0,0));
+
+		IMContainer gpu_label_container(menu_size.x / 4);
+		IMText gpu_label(benchmark_results[i].gpu, client_connect_font);
+		gpu_label.setZOrdering(3);
+		gpu_label_container.setElement(gpu_label);
+		titlebar_divider.append(gpu_label_container);
+
+		IMContainer cpu_label_container(menu_size.x / 4);
+		IMText cpu_label(benchmark_results[i].cpu, client_connect_font);
+		cpu_label.setZOrdering(3);
+		cpu_label_container.setElement(cpu_label);
+		titlebar_divider.append(cpu_label_container);
+
+		IMContainer os_label_container(menu_size.x / 4);
+		IMText os_label(benchmark_results[i].os, client_connect_font);
+		os_label.setZOrdering(3);
+		os_label_container.setElement(os_label);
+		titlebar_divider.append(os_label_container);
+
+		IMContainer score_label_container(menu_size.x / 4);
+		IMText score_label("" + benchmark_results[i].score, client_connect_font);
+		score_label.setZOrdering(3);
+		score_label_container.setElement(score_label);
+		titlebar_divider.append(score_label_container);
+
+		menu_divider.appendSpacer(10);
+	}
+
+	{
+		//Your results.
+		array<string> var_names = {"Highest FPS", "Lowest FPS", "Average FPS", "VSync"};
+		array<string> var_values = {"1", "2", "3", VsyncOn()};
+
+		IMDivider results_divider("results_divider", DOVertical);
+		int result_width = 250;
+		int result_height = 60;
+		for(uint i = 0; i < var_names.size() && i < var_values.size(); i++){
+			IMDivider horiz_divider("horiz_div", DOHorizontal);
+			results_divider.append(horiz_divider);
+			IMContainer label_container(result_width, result_height);
+			label_container.setAlignment(CALeft, CACenter);
+			horiz_divider.append(label_container);
+			IMContainer value_container(result_width, result_height);
+			value_container.setAlignment(CALeft, CACenter);
+			horiz_divider.append(value_container);
+
+			IMText label_text(var_names[i] + ": ", small_font);
+			label_text.setZOrdering(3);
+			label_container.setElement(label_text);
+			IMText value_text(var_values[i], small_font);
+			value_text.setZOrdering(3);
+			value_container.setElement(value_text);
+		}
+		menu_divider.append(results_divider);
+
 	}
 
 	menu_divider.appendSpacer(20);
 
 	//The button container at the bottom of the UI.
-	IMContainer button_container(connect_button_size.x, connect_button_size.y);
-	button_container.setAlignment(CARight, CACenter);
-	IMDivider button_divider("button_divider", DOHorizontal);
-	button_container.setElement(button_divider);
-	menu_divider.append(button_container);
+	IMContainer main_button_container(connect_button_size.x, connect_button_size.y);
+	IMDivider main_button_divider("button_divider", DOHorizontal);
+	main_button_container.setElement(main_button_divider);
+	menu_divider.append(main_button_container);
 
-	{
+	array<string> buttons = {"Back to Main Menu", "Run Benchmark Again"};
+	for(uint i = 0; i < buttons.size(); i++){
+		int button_width = 300;
+		int button_height = 60;
 		//The next button
-		IMContainer next_button_container(200, connect_button_size.y);
-		next_button_container.sendMouseOverToChildren(true);
-		next_button_container.sendMouseDownToChildren(true);
-		next_button_container.setAlignment(CACenter, CACenter);
-		IMDivider next_button_divider("next_button_divider", DOHorizontal);
-		next_button_divider.setZOrdering(4);
-		next_button_container.setElement(next_button_divider);
-		IMText next_button("Next", client_connect_font);
-		next_button.addMouseOverBehavior(mouseover_fontcolor, "");
-		next_button_divider.append(next_button);
+		IMContainer button_container(button_width, connect_button_size.y);
+		button_container.sendMouseOverToChildren(true);
+		button_container.sendMouseDownToChildren(true);
+		button_container.setAlignment(CACenter, CACenter);
+		IMDivider button_divider("button_divider", DOHorizontal);
+		button_divider.setZOrdering(4);
+		button_container.setElement(button_divider);
+		IMText button(buttons[i], client_connect_font);
+		button.addMouseOverBehavior(mouseover_fontcolor, "");
+		button_divider.append(button);
 
-		IMImage next_button_background(white_background);
-		next_button_background.setZOrdering(0);
-		next_button_background.setSize(vec2(200 - button_size_offset, connect_button_size.y - button_size_offset));
-		next_button_background.setColor(vec4(0,0,0,0.75));
-		next_button_container.addFloatingElement(next_button_background, "next_button_background", vec2(button_size_offset / 2.0f));
+		IMImage button_background(white_background);
+		button_background.setZOrdering(0);
+		button_background.setSize(vec2(button_width - button_size_offset, button_height - button_size_offset));
+		button_background.setColor(vec4(0,0,0,0.75));
+		button_container.addFloatingElement(button_background, "button_background", vec2(button_size_offset / 2.0f));
 
-		next_button_container.addLeftMouseClickBehavior(IMFixedMessageOnClick("next_ui"), "");
-		button_divider.append(next_button_container);
+		button_container.addLeftMouseClickBehavior(IMFixedMessageOnClick(buttons[i]), "");
+		main_button_divider.append(button_container);
 	}
 
 	//The main background
@@ -293,8 +446,39 @@ void ShowResults(){
 	imGUI.getMain().setElement(menu_container);
 }
 
+string gpu = "";
+
+void ReadHardwareReport() {
+	string path = "Data/hwreport.txt";
+    if(!LoadFile(path)){
+        Print("Couldn't load " + path + "\n");
+    } else {
+        string new_str;
+        while(true){
+            new_str = GetFileLine();
+            if(new_str == "end"){
+                break;
+            }
+			if(new_str.findFirst("Vendor: ") != -1){
+				gpu += join(new_str.split("Vendor: "), " ");
+			}else if(new_str.findFirst("GL_Renderer: ") != -1){
+				gpu += join(new_str.split("GL_Renderer: "), " ");
+			}
+        }
+		Print("GPU info " + gpu + "\n");
+    }
+}
+
 void Dispose() {
 	imGUI.clear();
+}
+
+string VsyncOn(){
+	if(GetConfigValueBool("vsync")){
+		return "On";
+	}else{
+		return "Off";
+	}
 }
 
 
