@@ -31,12 +31,10 @@ IMText@ count_down;
 array<IMImage@> bars;
 array<int> bars_fps;
 uint score = 0;
+string benchmark_list_address = "https://raw.githubusercontent.com/OGMP-Gyrth/OGMods/benchmark/benchmark/Data/Scripts/benchmark_results.json";
+string benchmark_list_port = 80;
 
-array<BenchmarkResult@> benchmark_results = {	BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 50100),
-												BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 5020),
-												BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 5200),
-												BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 50),
-												BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 500)};
+array<BenchmarkResult@> benchmark_results = {};
 
 class BenchmarkResult{
 	string cpu;
@@ -51,6 +49,63 @@ class BenchmarkResult{
 		settings = _settings;
 		score = _score;
 	}
+}
+
+void RequestBenchmarkList(){
+	if( main_socket == SOCKET_ID_INVALID ) {
+		main_socket = CreateSocketTCP(benchmark_list_address, benchmark_list_port);
+        if( main_socket != SOCKET_ID_INVALID ) {
+            Log( info, "Connected " + main_socket );
+			array<uint8> message;
+			addToByteArray("GET /index.php HTTP/1.0", @message);
+			if( IsValidSocketTCP(main_socket) ){
+		        SocketTCPSend(main_socket,message);
+			}
+        } else {
+            Log( warning, "Unable to connect" );
+        }
+    }
+}
+
+void ReadBenchmarkList(string whole_list){
+    JSON file;
+    file.parseString(whole_list);
+    JSONValue root = file.getRoot();
+    array<string> list_animations = root.getMemberNames();
+    for(uint i = 0; i < list_animations.size(); i++){
+		JSONValue result = root[list_animations[i]];
+		benchmark_results.insertLast(BenchmarkResult(result["cpu"].asString(), result["gpu"].asString(), result["os"].asString(), result["settings"].asString(), result["score"].asInt()));
+    }
+}
+
+void addToByteArray(string message, array<uint8> @data){
+	uint8 message_length = message.length();
+	data.insertLast(message_length);
+	for(uint i = 0; i < message_length; i++){
+		data.insertLast(message.substr(i, 1)[0]);
+	}
+}
+
+void IncomingTCPData(uint socket, array<uint8>@ data) {
+    for( uint i = 0; i < data.length(); i++ ) {
+		Print(GetString(data) + "\n");
+		/*data_collection.insertLast(data[i]);*/
+    }
+}
+
+string GetString(array<uint8>@ data){
+	array<string> seperated;
+	int string_size = data.size();
+    for( int i = 0; i < data.size(); i++ ) {
+		//Skip if the char is not an actual number/letter/etc
+		/*if(data[start_index] < 32){
+			continue;
+		}*/
+        string s('0');
+        s[0] = data[start_index];
+        seperated.insertLast(s);
+    }
+    return join(seperated, "");
 }
 
 void Initialize(){
@@ -83,6 +138,7 @@ void AddCountDown(){
 }
 
 void Init(string p_level_name) {
+	RequestBenchmarkList();
 	ReadHardwareReport();
 	@imGUI = CreateIMGUI();
     level_name = p_level_name;
