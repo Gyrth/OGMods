@@ -3,9 +3,10 @@ uint64 last_time;
 IMGUI@ imGUI;
 
 FontSetup small_font("arial", 25, HexColor("#ffffff"), true);
+FontSetup normal_font("arial", 35, HexColor("#ffffff"), true);
 FontSetup black_small_font("arial", 25, HexColor("#000000"), false);
-FontSetup normal_font("arial", 55, HexColor("#ffffff"), true);
-FontSetup big_font("arial", 75, HexColor("#ffffff"), true);
+FontSetup big_font("arial", 55, HexColor("#ffffff"), true);
+FontSetup huge_font("arial", 75, HexColor("#ffffff"), true);
 
 array<uint16> fps_collection;
 uint64 fps;
@@ -25,22 +26,29 @@ float bar_width = 5.0f;
 vec4 bar_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
 IMText@ highest_fps_label;
 const float MPI = 3.14159265359;
+IMText@ count_down;
 
 array<IMImage@> bars;
 array<int> bars_fps;
 uint score = 0;
 
-array<BenchmarkResult@> benchmark_results = {	BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", 5000)};
+array<BenchmarkResult@> benchmark_results = {	BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 50100),
+												BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 5020),
+												BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 5200),
+												BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 50),
+												BenchmarkResult("Intel i5 6600k", "NVidia GTX1060", "Linux", "Medium", 500)};
 
 class BenchmarkResult{
 	string cpu;
 	string gpu;
 	string os;
+	string settings;
 	int score;
-	BenchmarkResult(string _cpu, string _gpu, string _os, int _score){
+	BenchmarkResult(string _cpu, string _gpu, string _os, string _settings, int _score){
 		cpu = _cpu;
 		gpu = _gpu;
 		os = _os;
+		settings = _settings;
 		score = _score;
 	}
 }
@@ -64,8 +72,14 @@ void Reset(){
 	imGUI.setHeaderHeight(bar_graph_height + 25.0f);
 	imGUI.setup();
 	AddBarGraph();
+	AddCountDown();
 
 	Print("reset\n");
+}
+
+void AddCountDown(){
+	@count_down = IMText("Seconds left", huge_font);
+	imGUI.getMain().setElement(count_down);
 }
 
 void Init(string p_level_name) {
@@ -75,6 +89,7 @@ void Init(string p_level_name) {
 	imGUI.setHeaderHeight(bar_graph_height + 25.0f);
 	imGUI.setup();
 	AddBarGraph();
+	AddCountDown();
 	last_time = GetPerformanceCounter();
 }
 
@@ -155,12 +170,16 @@ void PostInit(){
 }
 
 int camera_id = -1;
-float duration = 30.0f;
+float duration = 5.0f;
 float duration_timer = 0.0f;
 bool recording = true;
 float fps_timer = 0.0f;
 
 void Update() {
+
+	if(GetInputPressed(0, "o")){
+		imGUI.doScreenResize();
+	}
 
 	PostInit();
 
@@ -214,28 +233,30 @@ void Update() {
 		}
 	}
 
-	if(recording){
-		duration_timer += time_step;
-		fps_timer += time_step;
 
-		if(duration_timer > duration){
-			ShowResults();
-			recording = false;
-			return;
-		}
+	duration_timer += time_step;
+	fps_timer += time_step;
 
-		if(fps_timer > update_speed){
-			fps_timer = 0.0f;
+	if(duration_timer > duration && recording){
+		ShowResults();
+		recording = false;
+		return;
+	}
+
+	if(fps_timer > update_speed){
+		fps_timer = 0.0f;
+		if(recording){
+			count_down.setText("Seconds left: " + int(duration - duration_timer));
 			fps_collection.insertLast(uint16(fps));
-			score += uint(fps);
-			if(fps > highest_fps){
-				highest_fps = fps;
-				highest_fps_label.setText(highest_fps + "fps");
-			}
-			ScootchBarsLeft();
-			bars[bars.size() - 1].setSizeY(fps * bar_graph_height / highest_fps);
-			bars_fps[bars.size() - 1] = fps;
 		}
+		score += uint(fps);
+		if(fps > highest_fps){
+			highest_fps = fps;
+			highest_fps_label.setText(highest_fps + "fps");
+		}
+		ScootchBarsLeft();
+		bars[bars.size() - 1].setSizeY(fps * bar_graph_height / highest_fps);
+		bars_fps[bars.size() - 1] = fps;
 	}
 
 	imGUI.update();
@@ -250,8 +271,18 @@ void ScootchBarsLeft(){
 }
 
 void SetWindowDimensions(int w, int h){
+	Print("SetWindowDimensions\n");
 }
-vec2 menu_size(1400, 1200);
+
+void Resize() {
+	Print("Resize\n");
+}
+
+void ScriptReloaded() {
+	Print("ScriptReloaded\n");
+}
+
+vec2 menu_size(2400, 1100);
 vec4 background_color(0,0,0,0.5);
 vec4 light_background_color(0,0,0,0.25);
 vec2 button_size(1000, 60);
@@ -279,7 +310,7 @@ void ShowResults(){
 	IMDivider divider("title_divider", DOHorizontal);
 	divider.setZOrdering(4);
 	container.setElement(divider);
-	IMText title("Results", normal_font);
+	IMText title("Results", big_font);
 	divider.append(title);
 
 	menu_divider.appendSpacer(5);
@@ -307,26 +338,32 @@ void ShowResults(){
 		background.setSize(vec2(menu_size.x, 60));
 		titlebar_container.addFloatingElement(background, "background", vec2(0,0));
 
-		IMContainer gpu_label_container(menu_size.x / 4);
-		IMText gpu_label("GPU", small_font);
+		IMContainer gpu_label_container(menu_size.x / 5);
+		IMText gpu_label("GPU", normal_font);
 		gpu_label.setZOrdering(3);
 		gpu_label_container.setElement(gpu_label);
 		titlebar_divider.append(gpu_label_container);
 
-		IMContainer cpu_label_container(menu_size.x / 4);
-		IMText cpu_label("CPU", small_font);
+		IMContainer cpu_label_container(menu_size.x / 5);
+		IMText cpu_label("CPU", normal_font);
 		cpu_label.setZOrdering(3);
 		cpu_label_container.setElement(cpu_label);
 		titlebar_divider.append(cpu_label_container);
 
-		IMContainer os_label_container(menu_size.x / 4);
-		IMText os_label("OS", small_font);
+		IMContainer os_label_container(menu_size.x / 5);
+		IMText os_label("OS", normal_font);
 		os_label.setZOrdering(3);
 		os_label_container.setElement(os_label);
 		titlebar_divider.append(os_label_container);
 
-		IMContainer score_label_container(menu_size.x / 4);
-		IMText score_label("Score", small_font);
+		IMContainer settings_label_container(menu_size.x / 5);
+		IMText settings_label("Settings", normal_font);
+		settings_label.setZOrdering(3);
+		settings_label_container.setElement(settings_label);
+		titlebar_divider.append(settings_label_container);
+
+		IMContainer score_label_container(menu_size.x / 5);
+		IMText score_label("Score", normal_font);
 		score_label.setZOrdering(3);
 		score_label_container.setElement(score_label);
 		titlebar_divider.append(score_label_container);
@@ -352,48 +389,12 @@ void ShowResults(){
 	bool new_results_added = false;
 
 	for(uint i = 0; i < results_sorted.size(); i++){
-		if(benchmark_results[results_sorted[i]].score < int(score) && !new_results_added){
+		BenchmarkResult@ result = benchmark_results[results_sorted[i]];
+		if(result.score < int(score) && !new_results_added){
 			AddNewResults(menu_divider);
 			new_results_added = true;
 		}
-		//Single result
-		IMContainer titlebar_container(menu_size.x, connect_button_size.y);
-		menu_divider.append(titlebar_container);
-		IMDivider titlebar_divider("result " + i, DOHorizontal);
-		titlebar_divider.setZOrdering(3);
-		titlebar_container.setElement(titlebar_divider);
-
-		IMImage background(white_background);
-		background.setColor(light_background_color);
-		background.setZOrdering(0);
-		background.setSize(vec2(menu_size.x, 60));
-		titlebar_container.addFloatingElement(background, "background", vec2(0,0));
-
-		IMContainer gpu_label_container(menu_size.x / 4);
-		IMText gpu_label(benchmark_results[results_sorted[i]].gpu, small_font);
-		gpu_label.setZOrdering(3);
-		gpu_label_container.setElement(gpu_label);
-		titlebar_divider.append(gpu_label_container);
-
-		IMContainer cpu_label_container(menu_size.x / 4);
-		IMText cpu_label(benchmark_results[results_sorted[i]].cpu, small_font);
-		cpu_label.setZOrdering(3);
-		cpu_label_container.setElement(cpu_label);
-		titlebar_divider.append(cpu_label_container);
-
-		IMContainer os_label_container(menu_size.x / 4);
-		IMText os_label(benchmark_results[i].os, small_font);
-		os_label.setZOrdering(3);
-		os_label_container.setElement(os_label);
-		titlebar_divider.append(os_label_container);
-
-		IMContainer score_label_container(menu_size.x / 4);
-		IMText score_label("" + benchmark_results[results_sorted[i]].score, small_font);
-		score_label.setZOrdering(3);
-		score_label_container.setElement(score_label);
-		titlebar_divider.append(score_label_container);
-
-		menu_divider.appendSpacer(5);
+		AddSingleResult(menu_divider, result);
 	}
 
 	if(!new_results_added){
@@ -443,33 +444,91 @@ void ShowResults(){
 	imGUI.getMain().setElement(menu_container);
 }
 
+void AddSingleResult(IMDivider@ menu_divider, BenchmarkResult@ result){
+	//Single result
+	IMContainer titlebar_container(menu_size.x, connect_button_size.y);
+	menu_divider.append(titlebar_container);
+	IMDivider titlebar_divider("result ", DOHorizontal);
+	titlebar_divider.setZOrdering(3);
+	titlebar_container.setElement(titlebar_divider);
+
+	IMImage background(white_background);
+	background.setColor(light_background_color);
+	background.setZOrdering(0);
+	background.setSize(vec2(menu_size.x, 60));
+	titlebar_container.addFloatingElement(background, "background", vec2(0,0));
+
+	IMContainer gpu_label_container(menu_size.x / 5);
+	IMText gpu_label(result.gpu, small_font);
+	gpu_label.setZOrdering(3);
+	gpu_label_container.setElement(gpu_label);
+	titlebar_divider.append(gpu_label_container);
+
+	IMContainer cpu_label_container(menu_size.x / 5);
+	IMText cpu_label(result.cpu, small_font);
+	cpu_label.setZOrdering(3);
+	cpu_label_container.setElement(cpu_label);
+	titlebar_divider.append(cpu_label_container);
+
+	IMContainer os_label_container(menu_size.x / 5);
+	IMText os_label(result.os, small_font);
+	os_label.setZOrdering(3);
+	os_label_container.setElement(os_label);
+	titlebar_divider.append(os_label_container);
+
+	IMContainer settings_label_container(menu_size.x / 5);
+	IMText settings_label(result.settings, normal_font);
+	settings_label.setZOrdering(3);
+	settings_label_container.setElement(settings_label);
+	titlebar_divider.append(settings_label_container);
+
+	IMContainer score_label_container(menu_size.x / 5);
+	IMText score_label("" + result.score, small_font);
+	score_label.setZOrdering(3);
+	score_label_container.setElement(score_label);
+	titlebar_divider.append(score_label_container);
+
+	menu_divider.appendSpacer(5);
+}
+
 void AddNewResults(IMDivider@ menu_divider){
 	//Your results.
-	array<string> var_names = {"Highest FPS", "Lowest FPS", "Average FPS", "VSync", "Score"};
-	array<string> var_values = {"" + highest_fps, "" + GetLowestFPS(), "" + GetAverageFPS(), VsyncOn(), "" + score};
+	BenchmarkResult result("NA", gpu, "NA", GetConfigValueString("overall"), score);
 
 	IMContainer results_container(menu_size.x);
 	IMDivider results_divider("results_divider", DOVertical);
 	results_container.setElement(results_divider);
-	int result_width = 250;
-	int result_height = 40;
-	for(uint i = 0; i < var_names.size() && i < var_values.size(); i++){
-		IMDivider horiz_divider("horiz_div", DOHorizontal);
-		results_divider.append(horiz_divider);
-		IMContainer label_container(result_width, result_height);
-		label_container.setAlignment(CALeft, CACenter);
-		horiz_divider.append(label_container);
-		IMContainer value_container(result_width, result_height);
-		value_container.setAlignment(CALeft, CACenter);
-		horiz_divider.append(value_container);
+	AddSingleResult(results_divider, result);
 
-		IMText label_text(var_names[i] + ": ", small_font);
-		label_text.setZOrdering(3);
-		label_container.setElement(label_text);
-		IMText value_text(var_values[i], small_font);
-		value_text.setZOrdering(3);
-		value_container.setElement(value_text);
+	IMDivider horiz_divider("main_horiz_div", DOHorizontal);
+	horiz_divider.setAlignment(CACenter, CATop);
+	results_divider.append(horiz_divider);
+
+	AddStat(results_divider, "Your Score", "" + score, normal_font);
+
+	{
+		IMDivider column_one("column_one", DOVertical);
+		horiz_divider.append(column_one);
+		AddStat(column_one, "Highest FPS", "" + highest_fps, small_font);
+		AddStat(column_one, "Lowest FPS", "" + GetLowestFPS(), small_font);
+		AddStat(column_one, "Average FPS", "" + GetAverageFPS(), small_font);
 	}
+
+	{
+		IMDivider column_two("column_two", DOVertical);
+		horiz_divider.append(column_two);
+		AddStat(column_two, "VSync", VsyncOn(), small_font);
+		AddStat(column_two, "Resolution", GetConfigValueInt("screenwidth") + "x" + GetConfigValueInt("screenheight"), small_font);
+		AddStat(column_two, "Driver version", driver_version, small_font);
+
+	}
+
+	/*{
+		IMDivider column_three("column_three", DOVertical);
+		horiz_divider.append(column_three);
+		AddStat(column_three, "Highest FPS", "" + highest_fps, small_font);
+	}*/
+
 	menu_divider.append(results_container);
 	IMImage background(white_background);
 	background.setZOrdering(0);
@@ -478,7 +537,28 @@ void AddNewResults(IMDivider@ menu_divider){
 	results_container.addFloatingElement(background, "background", vec2(0));
 }
 
+void AddStat(IMDivider@ parent, string name, string value, FontSetup font){
+	int result_width = 250;
+	int result_height = 40;
+	IMDivider horiz_divider("horiz_div", DOHorizontal);
+	parent.append(horiz_divider);
+	IMContainer label_container(result_width, result_height);
+	label_container.setAlignment(CALeft, CACenter);
+	horiz_divider.append(label_container);
+	IMContainer value_container(result_width, result_height);
+	value_container.setAlignment(CALeft, CACenter);
+	horiz_divider.append(value_container);
+
+	IMText label_text(name + ": ", font);
+	label_text.setZOrdering(3);
+	label_container.setElement(label_text);
+	IMText value_text(value, font);
+	value_text.setZOrdering(3);
+	value_container.setElement(value_text);
+}
+
 string gpu = "";
+string driver_version;
 
 void ReadHardwareReport() {
 	string path = "Data/hwreport.txt";
@@ -494,7 +574,9 @@ void ReadHardwareReport() {
 			if(new_str.findFirst("Vendor: ") != -1){
 				gpu += join(new_str.split("Vendor: "), " ");
 			}else if(new_str.findFirst("GL_Renderer: ") != -1){
-				gpu += join(new_str.split("GL_Renderer: "), " ");
+				gpu += join(new_str.split("GL_Renderer: "), " ").substr(0, 20);
+			}else if(new_str.findFirst("Driver version: ") != -1){
+				driver_version = join(new_str.split("Driver version: "), " ");
 			}
         }
 		Print("GPU info " + gpu + "\n");
@@ -517,10 +599,6 @@ int GetAverageFPS(){
 		total += fps_collection[i];
 	}
 	return total / fps_collection.size();
-}
-
-void ScriptReloaded() {
-	Print("reloaded\n");
 }
 
 void Dispose() {
