@@ -62,7 +62,6 @@ void RequestBenchmarkList(){
             Log( info, "Connected " + main_socket );
 			array<uint8> message = toByteArray(benchmark_list_request);
 			if( IsValidSocketTCP(main_socket) ){
-				Print("sending\n");
 		        SocketTCPSend(main_socket,message);
 			}
         } else {
@@ -82,7 +81,6 @@ void ReadBenchmarkList(string whole_message){
     array<string> list_animations = root.getMemberNames();
     for(uint i = 0; i < list_animations.size(); i++){
 		JSONValue result = root[list_animations[i]];
-		Print(result["cpu"].asString() + "\n");
 		benchmark_results.insertLast(BenchmarkResult(result["cpu"].asString(), result["gpu"].asString(), result["os"].asString(), result["settings"].asString(), result["score"].asInt()));
     }
 }
@@ -147,7 +145,6 @@ void Reset(){
 	imGUI.setup();
 	AddBarGraph();
 	AddCountDown();
-	Print("reset\n");
 }
 
 void AddCountDown(){
@@ -238,8 +235,6 @@ void PostInit(){
 			break;
 		}
 	}
-	/*camera.SetFlags(kEditorCamera);*/
-	Print("postinit done\n");
 	post_init_done = true;
 }
 
@@ -255,7 +250,6 @@ void Update() {
 	PostInit();
 	while( imGUI.getMessageQueueSize() > 0 ) {
         IMMessage@ message = imGUI.getNextMessage();
-		Print(message.name + "\n");
         if( message.name == "Back to Main Menu" ) {
 			level.SendMessage("go_to_main_menu");
 		}else if( message.name == "Run Benchmark Again" ) {
@@ -290,7 +284,6 @@ void Update() {
 				if(cam_params.HasParam("Name")){
 					if(cam_params.GetString("Name") == "animation_main"){
 						camera_id = cams[i];
-						Print("found cam id  " + camera_id + "\n");
 					}
 				}
 			}
@@ -344,7 +337,6 @@ void Update() {
 }
 
 void ScootchBarsLeft(){
-	/*Print("highest " + highest_fps + "\n");*/
 	for(uint i = 0; i < (bars.size() - 1); i++){
 		bars_fps[i] = bars_fps[i + 1];
 		bars[i].setSizeY(bars_fps[i + 1] * bar_graph_height / highest_fps);
@@ -373,6 +365,7 @@ float button_size_offset = 10.0f;
 float description_width = 200.0f;
 int player_name_width = 500;
 int player_character_width = 200;
+int max_shown_scores = 10;
 
 void ShowResults(){
 	IMDivider mainDiv( "mainDiv", DOVertical );
@@ -459,23 +452,38 @@ void ShowResults(){
 		results_sorted.insertLast(benchmark_results[i].score);
 	}
 	results_sorted.sortDesc();
+	int result_index = 0;
 	for(uint i = 0; i < results_sorted.size(); i++){
 		for(uint j = 0; j < benchmark_results.size(); j++){
 			if(results_sorted[i] == benchmark_results[j].score){
 				results_sorted[i] = j;
+				if(int(score) < benchmark_results[j].score){
+					result_index++;
+				}
 				break;
 			}
 		}
 	}
 	bool new_results_added = false;
-
-	for(uint i = 0; i < results_sorted.size(); i++){
+	int num_score_counter = 0;
+	//Where to add the new score. Making sure it's in the middle of a few scores if available.
+	int start_at = max(0, result_index - int(max_shown_scores / 2));
+	//If the score is way below on the list then add a few on top to show the same amount.
+	//Add 1 because of the difference between index and size.
+	if((result_index + int(max_shown_scores / 2) + 1 > int(results_sorted.size()))){
+		start_at = max(0, start_at - (result_index + (int(max_shown_scores / 2) + 1 - results_sorted.size())));
+	}
+	for(uint i = start_at; i < results_sorted.size(); i++){
+		num_score_counter++;
 		BenchmarkResult@ result = benchmark_results[results_sorted[i]];
 		if(result.score < int(score) && !new_results_added){
 			AddNewResults(menu_divider);
 			new_results_added = true;
 		}
 		AddSingleResult(menu_divider, result);
+		if(num_score_counter == max_shown_scores){
+			break;
+		}
 	}
 
 	if(!new_results_added){
@@ -521,7 +529,6 @@ void ShowResults(){
 	background.setColor(background_color);
 	background.setSize(menu_size);
 	menu_container.addFloatingElement(background, "background", vec2(0));
-	/*menu_container.showBorder();*/
 	imGUI.getMain().setElement(menu_container);
 }
 
@@ -660,7 +667,6 @@ void ReadHardwareReport() {
 				driver_version = join(new_str.split("Driver version: "), " ");
 			}
         }
-		Print("GPU info " + gpu + "\n");
     }
 }
 
