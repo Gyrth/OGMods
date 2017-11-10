@@ -31,8 +31,12 @@ IMText@ count_down;
 array<IMImage@> bars;
 array<int> bars_fps;
 uint score = 0;
-string benchmark_list_address = "https://raw.githubusercontent.com/OGMP-Gyrth/OGMods/benchmark/benchmark/Data/Scripts/benchmark_results.json";
-string benchmark_list_port = 80;
+
+string benchmark_list_address = "gyrthmcmulin.me";
+string benchmark_list_request = "GET /benchmark_results.json HTTP/1.1\r\nHost: gyrthmcmulin.me\r\n\r\n";
+
+uint16 benchmark_list_port = 80;
+uint main_socket = SOCKET_ID_INVALID;
 
 array<BenchmarkResult@> benchmark_results = {};
 
@@ -56,9 +60,9 @@ void RequestBenchmarkList(){
 		main_socket = CreateSocketTCP(benchmark_list_address, benchmark_list_port);
         if( main_socket != SOCKET_ID_INVALID ) {
             Log( info, "Connected " + main_socket );
-			array<uint8> message;
-			addToByteArray("GET /index.php HTTP/1.0", @message);
+			array<uint8> message = toByteArray(benchmark_list_request);
 			if( IsValidSocketTCP(main_socket) ){
+				Print("sending\n");
 		        SocketTCPSend(main_socket,message);
 			}
         } else {
@@ -67,13 +71,18 @@ void RequestBenchmarkList(){
     }
 }
 
-void ReadBenchmarkList(string whole_list){
+void ReadBenchmarkList(string whole_message){
+	array<string> split_message = whole_message.split("\n");
+	split_message.removeRange(0, 12);
+	string json = join(split_message, "");
+
     JSON file;
-    file.parseString(whole_list);
+    file.parseString(json);
     JSONValue root = file.getRoot();
     array<string> list_animations = root.getMemberNames();
     for(uint i = 0; i < list_animations.size(); i++){
 		JSONValue result = root[list_animations[i]];
+		Print(result["cpu"].asString() + "\n");
 		benchmark_results.insertLast(BenchmarkResult(result["cpu"].asString(), result["gpu"].asString(), result["os"].asString(), result["settings"].asString(), result["score"].asInt()));
     }
 }
@@ -86,23 +95,33 @@ void addToByteArray(string message, array<uint8> @data){
 	}
 }
 
+array<uint8> toByteArray(string message){
+	array<uint8> data;
+	for(uint i = 0; i < message.length(); i++){
+		data.insertLast(message.substr(i, 1)[0]);
+	}
+	return data;
+}
+
+uint counter = 0;
+string whole_message = "";
+
 void IncomingTCPData(uint socket, array<uint8>@ data) {
-    for( uint i = 0; i < data.length(); i++ ) {
-		Print(GetString(data) + "\n");
-		/*data_collection.insertLast(data[i]);*/
-    }
+	counter += data.size();
+	string incoming = GetString(data);
+	whole_message += incoming;
 }
 
 string GetString(array<uint8>@ data){
 	array<string> seperated;
 	int string_size = data.size();
-    for( int i = 0; i < data.size(); i++ ) {
+    for( uint i = 0; i < data.size(); i++ ) {
 		//Skip if the char is not an actual number/letter/etc
-		/*if(data[start_index] < 32){
+		/*if(data[i] < 32){
 			continue;
 		}*/
         string s('0');
-        s[0] = data[start_index];
+        s[0] = data[i];
         seperated.insertLast(s);
     }
     return join(seperated, "");
@@ -128,12 +147,11 @@ void Reset(){
 	imGUI.setup();
 	AddBarGraph();
 	AddCountDown();
-
 	Print("reset\n");
 }
 
 void AddCountDown(){
-	@count_down = IMText("Seconds left", huge_font);
+	@count_down = IMText("Getting benchmark list...", huge_font);
 	imGUI.getMain().setElement(count_down);
 }
 
@@ -230,15 +248,11 @@ float duration = 5.0f;
 float duration_timer = 0.0f;
 bool recording = true;
 float fps_timer = 0.0f;
+float list_timer = 0.0f;
+bool got_list = false;
 
 void Update() {
-
-	if(GetInputPressed(0, "o")){
-		imGUI.doScreenResize();
-	}
-
 	PostInit();
-
 	while( imGUI.getMessageQueueSize() > 0 ) {
         IMMessage@ message = imGUI.getNextMessage();
 		Print(message.name + "\n");
@@ -289,6 +303,16 @@ void Update() {
 		}
 	}
 
+	if(!got_list){
+		list_timer += time_step;
+		if(list_timer > 3.0f){
+			got_list = true;
+			DestroySocketTCP(main_socket);
+			ReadBenchmarkList(whole_message);
+ 		}
+		imGUI.update();
+		return;
+	}
 
 	duration_timer += time_step;
 	fps_timer += time_step;
@@ -296,6 +320,7 @@ void Update() {
 	if(duration_timer > duration && recording){
 		ShowResults();
 		recording = false;
+		imGUI.update();
 		return;
 	}
 
