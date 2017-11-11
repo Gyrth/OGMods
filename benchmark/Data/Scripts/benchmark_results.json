@@ -1,23 +1,51 @@
-{
-  "BenchmarkResult1" : {
+[
+  {
     "cpu" : "Intel i5 6600k",
     "gpu" : "NVidia GTX1060",
     "os" : "Linux",
     "settings" : "Low",
     "score" : 10507
   },
-  "BenchmarkResult2" : {
+  {
     "cpu" : "Intel i5 6600k",
     "gpu" : "NVidia GTX1060",
     "os" : "Linux",
     "settings" : "Medium",
     "score" : 8333
   },
-  "BenchmarkResult3" : {
+  {
     "cpu" : "Intel i5 6600k",
     "gpu" : "NVidia GTX1060",
     "os" : "Linux",
     "settings" : "High",
     "score" : 6407
+  },
+  {
+    "cpu" : "Intel i5 4670K",
+    "gpu" : "NVidia GTX770",
+    "os" : "Windows",
+    "settings" : "Low",
+    "score" : 4928
+  },
+  {
+    "cpu" : "Intel i5 4670K",
+    "gpu" : "NVidia GTX770",
+    "os" : "Windows",
+    "settings" : "Medium",
+    "score" : 4895
+  },
+  {
+    "cpu" : "Intel i5 4670K",
+    "gpu" : "NVidia GTX770",
+    "os" : "Windows",
+    "settings" : "High",
+    "score" : 4694
+  },
+  {
+    "cpu" : "Intel i7 740QM",
+    "gpu" : "NVidia GTX460m",
+    "os" : "Windows",
+    "settings" : "Low",
+    "score" : 1903
   }
-}
+]

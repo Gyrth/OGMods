@@ -78,11 +78,11 @@ void ReadBenchmarkList(string whole_message){
 	string json = join(split_message, "");
 
     JSON file;
+	/*file.parseFile("Data/Scripts/benchmark_results.json");*/
     file.parseString(json);
     JSONValue root = file.getRoot();
-    array<string> list_animations = root.getMemberNames();
-    for(uint i = 0; i < list_animations.size(); i++){
-		JSONValue result = root[list_animations[i]];
+    for(uint i = 0; i < root.size(); i++){
+		JSONValue result = root[i];
 		benchmark_results.insertLast(BenchmarkResult(result["cpu"].asString(), result["gpu"].asString(), result["os"].asString(), result["settings"].asString(), result["score"].asInt()));
     }
 }
