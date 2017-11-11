@@ -9,7 +9,7 @@ FontSetup big_font("arial", 55, HexColor("#ffffff"), true);
 FontSetup huge_font("arial", 75, HexColor("#ffffff"), true);
 
 array<uint16> fps_collection;
-uint64 fps;
+uint64 fps = 0;
 
 string connected_icon = "Images/connected.png";
 string disconnected_icon = "Images/disconnected.png";
@@ -19,10 +19,10 @@ string custom_address_icon = "Textures/ui/menus/main/icon-lock.png";
 IMMouseOverPulseColor mouseover_fontcolor(vec4(1), vec4(1), 5.0f);
 
 uint16 highest_fps = 60;
-float update_speed = 0.05f;
+float update_speed = 1.00f;
 int bar_graph_height = 300;
 int bar_graph_width = 700;
-float bar_width = 5.0f;
+float bar_width = 15.0f;
 vec4 bar_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
 IMText@ highest_fps_label;
 const float MPI = 3.14159265359;
@@ -30,6 +30,8 @@ IMText@ count_down;
 
 array<IMImage@> bars;
 array<int> bars_fps;
+array<int> ai;
+int water_hotspot_id = -1;
 uint score = 0;
 
 string benchmark_list_address = "gyrthmcmulin.me";
@@ -139,6 +141,9 @@ void Reset(){
 	highest_fps = 60.0f;
 	score = 0;
 	last_time = GetPerformanceCounter();
+	reset_timer_started = false;
+	reset_timer = 0.0f;
+	fps = 0;
 
 	imGUI.clear();
 	imGUI.setHeaderHeight(bar_graph_height + 25.0f);
@@ -161,7 +166,13 @@ void Init(string p_level_name) {
 	imGUI.setup();
 	AddBarGraph();
 	AddCountDown();
-	last_time = GetPerformanceCounter();
+
+	for(int i = 0; i < GetNumCharacters(); i++){
+		MovementObject@ char = ReadCharacter(i);
+		if(!char.controlled){
+			ai.insertLast(char.GetID());
+		}
+	}
 }
 
 void AddBarGraph(){
@@ -187,7 +198,7 @@ void AddBarGraph(){
 		new_bar.setSize(vec2(bar_width, 1.0f));
 		new_bar.setColor(bar_color);
 		new_bar.setClip(false);
-		/*new_bar.showBorder();*/
+		new_bar.showBorder();
 		new_bar.setBorderColor(vec4(0.5f, 0.0f, 0.0f, 1.0f));
 		bars.insertLast(new_bar);
 		bars_fps.insertLast(0);
@@ -211,8 +222,9 @@ void ReceiveMessage(string msg) {
 }
 
 void DrawGUI() {
-	fps = GetPerformanceFrequency() / (GetPerformanceCounter() - last_time);
-	last_time = GetPerformanceCounter();
+	if(recording){
+		fps += 1;
+	}
 	imGUI.render();
 }
 
@@ -239,9 +251,9 @@ void PostInit(){
 }
 
 int camera_id = -1;
-float duration = 5.0f;
+float duration = 60.0f;
 float duration_timer = 0.0f;
-bool recording = true;
+bool recording = false;
 float fps_timer = 0.0f;
 float list_timer = 0.0f;
 bool got_list = false;
@@ -254,6 +266,8 @@ void Update() {
 			level.SendMessage("go_to_main_menu");
 		}else if( message.name == "Run Benchmark Again" ) {
 			level.SendMessage("reset");
+		}else if( message.name == "Close" ) {
+			imGUI.getMain().clear();
 		}
 	}
 
@@ -296,10 +310,13 @@ void Update() {
 		}
 	}
 
+	KeepAIAlive();
+
 	if(!got_list){
 		list_timer += time_step;
 		if(list_timer > 3.0f){
 			got_list = true;
+			recording = true;
 			DestroySocketTCP(main_socket);
 			ReadBenchmarkList(whole_message);
  		}
@@ -331,9 +348,44 @@ void Update() {
 		ScootchBarsLeft();
 		bars[bars.size() - 1].setSizeY(fps * bar_graph_height / highest_fps);
 		bars_fps[bars.size() - 1] = fps;
+		fps = 0;
 	}
 
 	imGUI.update();
+}
+
+float reset_timer = 0.0f;
+bool reset_timer_started = false;
+
+void KeepAIAlive(){
+	if(reset_timer_started){
+		reset_timer += time_step;
+		if(reset_timer > 10.0f){
+			for(uint j = 0; j < ai.size(); j++){
+				MovementObject@ char_reset = ReadCharacterID(ai[j]);
+				Object@ char_obj = ReadObjectFromID(ai[j]);
+
+				/*char_reset.Execute("water_id = -1;water_depth = 0.0;");
+				char_reset.Execute("Recover();");
+				char_reset.Execute("Reset();PostReset;");
+				char_reset.Execute("ResetSecondaryAnimation();");*/
+				char_reset.Execute("SwitchCharacter(\"Data/Characters/rabbot.xml\");");
+				char_reset.velocity = vec3(0);
+				char_reset.position = char_obj.GetTranslation();
+				char_reset.velocity = vec3(0);
+			}
+			reset_timer_started = false;
+			reset_timer = 0.0f;
+		}
+	}else{
+		for(uint i = 0; i < ai.size(); i++){
+			MovementObject@ char = ReadCharacterID(ai[i]);
+	        if(char.GetIntVar("knocked_out") != _awake){
+				reset_timer_started = true;
+				return;
+			}
+		}
+	}
 }
 
 void ScootchBarsLeft(){
@@ -498,7 +550,7 @@ void ShowResults(){
 	main_button_container.setElement(main_button_divider);
 	menu_divider.append(main_button_container);
 
-	array<string> buttons = {"Back to Main Menu", "Run Benchmark Again"};
+	array<string> buttons = {"Back to Main Menu", "Run Benchmark Again", "Close"};
 	for(uint i = 0; i < buttons.size(); i++){
 		int button_width = 400;
 		int button_height = 60;
