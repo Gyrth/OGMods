@@ -3,12 +3,18 @@ void DrawGUI() {
 }
 
 void Init(string str){
+    array<ModID> mod_ids = GetActiveModSids();
+    for(uint i = 0; i < mod_ids.size(); i++){
+        active_mods.insertLast(ModGetID(mod_ids[i]));
+    }
+
     ReadAnimationList();
     QueryAnimation("");
 }
 
-array<string> all_animation_paths;
-array<string> animation_paths;
+array<AnimationGroup@> all_animations;
+array<AnimationGroup@> current_animations;
+array<string> active_mods;
 bool show = true;
 int voice_preview = 1;
 bool select = false;
@@ -19,29 +25,57 @@ bool open_header = true;
 int top_bar_height = 32;
 int currently_pressed = -1;
 const int _ragdoll_state = 4;
+int animation_index = 0;
+
+class AnimationGroup{
+    string name;
+    array<string> animations;
+    AnimationGroup(string _name){
+        name = _name;
+    }
+    void AddAnimation(string _animation){
+        animations.insertLast(_animation);
+    }
+}
 
 void ReadAnimationList(){
     JSON file;
     file.parseFile("Data/Scripts/animation_browser_paths.json");
     JSONValue root = file.getRoot();
-    array<string> list_animations = root.getMemberNames();
-    for(uint i = 0; i < list_animations.size(); i++){
-        string new_animation = root[list_animations[i]].asString();
-        if(FileExists(new_animation)){
-            /*Print("exists! " + new_animation + "\n");*/
-            all_animation_paths.insertLast(new_animation);
+    array<string> list_groups = root.getMemberNames();
+    for(uint i = 0; i < list_groups.size(); i++){
+        //Skip this mod if it's not active_slider
+        if(active_mods.find(root[list_groups[i]]["Mod ID"].asString()) == -1){
+            continue;
         }
+        AnimationGroup new_group(list_groups[i]);
+        JSONValue animation_list = root[list_groups[i]]["Animations"];
+        for(uint j = 0; j < animation_list.size(); j++){
+            string new_animation = animation_list[j].asString();
+            if(FileExists(new_animation)){
+                Print("exists! " + new_animation + "\n");
+                new_group.AddAnimation(new_animation);
+            }
+        }
+        all_animations.insertLast(@new_group);
     }
 }
 
 void QueryAnimation(string query){
-    animation_paths.resize(0);
-    for(uint i = 0; i < all_animation_paths.size(); i++){
-        if(ToLowerCase(all_animation_paths[i]).findFirst(ToLowerCase(query)) != -1){
-            animation_paths.insertLast(all_animation_paths[i]);
+    current_animations.resize(0);
+    for(uint i = 0; i < all_animations.size(); i++){
+        AnimationGroup@ current_group = all_animations[i];
+        AnimationGroup new_group(current_group.name);
+        for(uint j = 0; j < current_group.animations.size(); j++){
+            if(ToLowerCase(current_group.animations[j]).findFirst(ToLowerCase(query)) != -1){
+                new_group.AddAnimation(current_group.animations[j]);
+            }
+        }
+        if(new_group.animations.size() > 0){
+            current_animations.insertLast(@new_group);
         }
     }
-    Print("results: " + animation_paths.size() + "\n");
+    Print("results: " + current_animations.size() + "\n");
 }
 
 string ToLowerCase(string input){
@@ -62,6 +96,7 @@ string ToLowerCase(string input){
 
 void Display(){
     if(show){
+        animation_index = 0;
         ImGui_SetNextWindowSize(vec2(500, 500), ImGuiSetCond_FirstUseEver);
         ImGui_Begin("Animation Browser", show, ImGuiWindowFlags_NoScrollbar);
         ImGui_BeginChild(99, vec2(ImGui_GetWindowWidth(), top_bar_height), false, ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
@@ -76,7 +111,9 @@ void Display(){
         ImGui_PushStyleColor(ImGuiCol_FrameBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
         if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth() - scrollbar_width, ImGui_GetWindowHeight() - (top_bar_height + 30)), ImGuiWindowFlags_AlwaysAutoResize)){
             ImGui_PopStyleColor();
-            AddCategory("Animations", animation_paths);
+            for(uint i = 0; i < current_animations.size(); i++){
+                AddCategory(current_animations[i].name, current_animations[i].animations);
+            }
             ImGui_EndChildFrame();
         }
         ImGui_End();
@@ -84,7 +121,7 @@ void Display(){
 }
 
 void AddCategory(string category, array<string> items){
-    if(animation_paths.size() < 1){
+    if(current_animations.size() < 1){
         return;
     }
     ImGui_PushStyleColor(ImGuiCol_Border, vec4(0.0f, 0.5f, 0.5f, 0.5f));
@@ -92,9 +129,11 @@ void AddCategory(string category, array<string> items){
     if(ImGui_TreeNodeEx(category, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
         ImGui_Unindent(22.0f);
         for(uint i = 0; i < items.size(); i++){
-            AddItem(items[i], i);
+            AddItem(items[i], animation_index);
+            animation_index++;
         }
         ImGui_Indent(22.0f);
+        ImGui_TreePop();
     }
     ImGui_PopStyleColor(2);
 }
@@ -109,7 +148,7 @@ void AddItem(string name, int index){
         ImGui_PushStyleColor(ImGuiCol_ButtonHovered, vec4(0.45f, 0.45f, 0.90f, 0.80f));
         ImGui_PushStyleColor(ImGuiCol_ButtonActive, vec4(0.53f, 0.53f, 0.87f, 0.80f));
     }
-    if(ImGui_Button(animation_paths[index], vec2(ImGui_GetWindowWidth() - 50, icon_size))) {
+    if(ImGui_Button(name, vec2(ImGui_GetWindowWidth(), icon_size))) {
         ReceiveMessage("set_animation " + name);
         currently_pressed = index;
     }
