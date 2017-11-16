@@ -47,17 +47,17 @@
 <ActorObjects>
     <EnvObject t0="-466.972" t1="-70.4067" t2="24.8847" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="0.877583" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rocket_obj.xml">
         <parameters>
-            <parameter name="BelongsTo" type="int" val="4" />
+            <parameter name="BelongsTo" type="string" val="4" />
         </parameters>
     </EnvObject>
     <EnvObject t0="371.173" t1="25.454" t2="-198.183" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="0.877583" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rocket_obj.xml">
         <parameters>
-            <parameter name="BelongsTo" type="int" val="8" />
+            <parameter name="BelongsTo" type="string" val="8" />
         </parameters>
     </EnvObject>
     <EnvObject t0="-68.8886" t1="-39.5715" t2="-489.266" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="0.877583" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rocket_obj.xml">
         <parameters>
-            <parameter name="BelongsTo" type="int" val="18" />
+            <parameter name="BelongsTo" type="string" val="18" />
         </parameters>
     </EnvObject>
     <Hotspot t0="208.774" t1="-0.874908" t2="-67.3002" s0="0.759744" s1="0.759744" s2="0.759744" q0="0" q1="0" q2="0" q3="1" id="4" type_file="Data/Objects/rocket_hotspot.xml">
@@ -76,7 +76,7 @@
     </Hotspot>
     <EnvObject t0="86.4252" t1="-14.8127" t2="380.122" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="0.877583" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rocket_obj.xml">
         <parameters>
-            <parameter name="BelongsTo" type="int" val="20" />
+            <parameter name="BelongsTo" type="string" val="20" />
         </parameters>
     </EnvObject>
     <EnvObject t0="198.694" t1="-5.55569" t2="-54.7844" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="0.266667" color_g="0.266664" color_b="0.266664" overbright="0" type_file="Data/Objects/Crete/box_full.xml">

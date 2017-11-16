@@ -22,7 +22,7 @@ void PostInit(){
 		Object@ obj = ReadObjectFromID(all_objects[i]);
 		ScriptParams@ obj_params = obj.GetScriptParams();
 		if(obj_params.HasParam("BelongsTo")){
-			if(obj_params.GetInt("BelongsTo") == hotspot.GetID()){
+			if(obj_params.GetString("BelongsTo") == hotspot.GetID() + ""){
 				rocket_id = all_objects[i];
 				break;
 			}
@@ -33,7 +33,7 @@ void PostInit(){
 		Object@ rocket_hotspot = ReadObjectFromID(hotspot.GetID());
 		Object@ rocket_obj = ReadObjectFromID(rocket_id);
 		ScriptParams@ rocket_params = rocket_obj.GetScriptParams();
-		rocket_params.SetInt("BelongsTo", hotspot.GetID());
+		rocket_params.SetString("BelongsTo", hotspot.GetID() + "");
 		rocket_obj.SetTranslation(rocket_hotspot.GetTranslation());
 		rocket_obj.SetSelectable(true);
 		rocket_obj.SetTranslatable(true);
