@@ -754,3 +754,14 @@ void SetParameters() {
         FixDiscontinuity();
     }
 }
+
+void NotifyItemDetach(int idex){}
+void HandleEditorAttachment(int x, int y, bool mirror){}
+void Contact(){}
+void Collided(float x, float y, float z, float o, float p){}
+void ScriptSwap(){}
+void ForceApplied(vec3 force){}
+float GetTempHealth(){return 1.0f;}
+void AttachWeapon(int id){}
+void SetEnabled(bool on){}
+void UpdatePaused(){}

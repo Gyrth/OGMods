@@ -13,5 +13,5 @@ Put the slime_mod folder inside the [Installation Path]/Data/Mods folder.
 	1. Select the slime box and press U.  
 	2. Dropdown to Script Params and change the values.   
 
-Last tested and working on beta 5.  
+Last tested and working on version 1.1.  
 [Preorder the game here.](http://www.wolfire.com/overgrowth)
