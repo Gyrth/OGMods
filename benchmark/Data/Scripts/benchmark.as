@@ -74,7 +74,7 @@ void RequestBenchmarkList(){
 
 void ReadBenchmarkList(string whole_message){
 	array<string> split_message = whole_message.split("\n");
-	split_message.removeRange(0, 12);
+	split_message.removeRange(0, 13);
 	string json = join(split_message, "");
 
     JSON file;
@@ -158,8 +158,6 @@ void AddCountDown(){
 }
 
 void Init(string p_level_name) {
-	RequestBenchmarkList();
-	ReadHardwareReport();
 	@imGUI = CreateIMGUI();
     level_name = p_level_name;
 	imGUI.setHeaderHeight(bar_graph_height + 25.0f);
@@ -247,6 +245,8 @@ void PostInit(){
 			break;
 		}
 	}
+	RequestBenchmarkList();
+	ReadHardwareReport();
 	post_init_done = true;
 }
 
@@ -633,7 +633,7 @@ void AddSingleResult(IMDivider@ menu_divider, BenchmarkResult@ result){
 
 void AddNewResults(IMDivider@ menu_divider){
 	//Your results.
-	BenchmarkResult result("NA", gpu, "NA", GetConfigValueString("overall"), score);
+	BenchmarkResult result("NA", gpu, os, GetConfigValueString("overall"), score);
 
 	IMContainer results_container(menu_size.x);
 	IMDivider results_divider("results_divider", DOVertical);
@@ -699,6 +699,7 @@ void AddStat(IMDivider@ parent, string name, string value, FontSetup font){
 
 string gpu = "";
 string driver_version;
+string os = "";
 
 void ReadHardwareReport() {
 	string path = "Data/hwreport.txt";
@@ -711,12 +712,14 @@ void ReadHardwareReport() {
             if(new_str == "end"){
                 break;
             }
-			if(new_str.findFirst("Vendor: ") != -1){
-				gpu += join(new_str.split("Vendor: "), " ");
-			}else if(new_str.findFirst("GL_Renderer: ") != -1){
-				gpu += join(new_str.split("GL_Renderer: "), " ").substr(0, 20);
-			}else if(new_str.findFirst("Driver version: ") != -1){
-				driver_version = join(new_str.split("Driver version: "), " ");
+			if(new_str.findFirst("GPU Vendor: ") != -1){
+				gpu += join(new_str.split("GPU Vendor: "), " ");
+			}else if(new_str.findFirst("GL Renderer: ") != -1){
+				gpu += join(new_str.split("GL Renderer: "), " ").substr(0, 20);
+			}else if(new_str.findFirst("GL Driver Version: ") != -1){
+				driver_version = join(new_str.split("GL Driver Version: "), " ");
+			}else if(new_str.findFirst("OS: ") != -1){
+				os = join(new_str.split("OS: "), " ");
 			}
         }
     }
