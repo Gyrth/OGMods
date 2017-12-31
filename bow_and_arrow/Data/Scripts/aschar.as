@@ -18,8 +18,6 @@ vec3 throw_target_pos = -1;
 bool inSlowMo = false;
 
 bool omniscient = false;
-bool throw_targeting = true;
-bool static_char = false;
 bool left_handed = true;
 bool dialogue_control = false;
 vec3 dialogue_position;
@@ -27,6 +25,7 @@ float dialogue_rotation;
 string tutorial = "";
 bool fall_death = false;
 int roll_count = 0;
+float dialogue_stop_time = 0.0;
 
 int num_hit_on_ground = 0;
 int num_strikes = 0;
@@ -853,7 +852,7 @@ void FireUpdate() {
             }
             fire_spark_delay = RangedRandomFloat(0.0f, 0.3f);
         }
-
+        
         smoke_delay -= time_step;
         if(smoke_delay <= 0.0f){
             for(int i=0; i<1; ++i){
@@ -913,7 +912,7 @@ void ParryItem(int id){
     }
     attack_getter2.Load(path);
     StartActiveBlockAnim(attack_getter2.GetReactionPath(), dir_char_to_item * -1.0f);
-
+    
     if(active_block_flinch_layer != -1){
         this_mo.rigged_object().anim_client().RemoveLayer(active_block_flinch_layer, 4.0f);
         active_block_flinch_layer = -1;
@@ -1019,7 +1018,7 @@ void HitByItem(string material, vec3 point, int id, int type) {
         if(species == _dog && type == 2){
             ko_shield = max(0, ko_shield-1);
         }
-        if(species == _wolf){// || (species == _dog && ko_shield>0)){
+        if(species == _wolf){// || (species == _dog && ko_shield>0)){  
             return;
         }
     }
@@ -1029,8 +1028,8 @@ void HitByItem(string material, vec3 point, int id, int type) {
             if(IsAggro() == 0 || io.GetLabel() != "knife"){
                 TakeBloodDamage(force_len / 20.0);
             } else {
-                TakeBloodDamage(RangedRandomFloat(0.6,1.4));
-                ko_shield = max(0, ko_shield - 2);
+                TakeBloodDamage(RangedRandomFloat(0.6,1.4));           
+                ko_shield = max(0, ko_shield - 2); 
             }
         } else {
             TakeDamage(force_len / 30.0f);
@@ -2017,6 +2016,7 @@ float look_time = 0.0;
 float move_time = 0.0;
 int num_jumps = 0;
 float dialogue_request_time = 0.0;
+float note_request_time = 0.0;
 bool tapping_attack = false;
 float hold_attack_time = 0.0;
 
@@ -2030,7 +2030,7 @@ void UpdateDialogueControl(const Timestep &in ts) {
     this_mo.position = dialogue_position;
     {
         vec3 new_facing = Mult(quaternion(vec4(0,1,0,dialogue_rotation*3.1415f/180.0f)), vec3(1,0,0));
-        this_mo.SetRotationFromFacing(new_facing);
+        this_mo.SetRotationFromFacing(new_facing);            
     }
 
     on_ground = true;
@@ -2127,10 +2127,10 @@ void Update(int num_frames) {
             invincible = GetConfigValueBool("player_invincible");
         }
     }
-
+    
     if(this_mo.controlled){
         bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
-        if(knocked_out != _awake){
+        if(knocked_out != _awake) {
             string respawn = "\nPress "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to try again";
 
             if( GetConfigValueBool("tutorials" ) ) {
@@ -2164,24 +2164,28 @@ void Update(int num_frames) {
             } else {
                 level.SendMessage("screen_message "+""+respawn);
             }
+        } else if(!dialogue_control && note_request_time > time - 0.1) {
+            if( CanPlayDialogue() == 1 ) {
+                level.SendMessage("screen_message "+"Press "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to read");  
+            }
         } else if( GetConfigValueBool("tutorials") ) {
             if(tutorial == "basic"){
                 bool knows_how_to_look = (look_time > 2.0);
                 if(!knows_how_to_look){
                     level.SendMessage("tutorial "+"Use "+(use_keyboard?"mouse":"right stick")+" to look around");
                 } else {
-                    level.SendMessage("tutorial "+"Use "+(use_keyboard?(MovementKeys()+" keys"):"left stick")+" to move");
+                    level.SendMessage("tutorial "+"Use "+(use_keyboard?(MovementKeys()+" keys"):"left stick")+" to move");  
                 }
             } else if(tutorial == "jump_climb"){
-                level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+" to jump");
+                level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+" to jump");    
             } else if(tutorial == "walljump"){
                 level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+
                                   " towards a wall to wallrun, then hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+
-                                  " again to walljump");
+                                  " again to walljump");    
             } else if(tutorial == "jump_higher"){
-                level.SendMessage("tutorial "+"HOLD "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+" to jump higher");
+                level.SendMessage("tutorial "+"HOLD "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+" to jump higher");    
             } else if(tutorial == "jump_long"){
-                level.SendMessage("tutorial "+"Rabbits can jump very far");
+                level.SendMessage("tutorial "+"Rabbits can jump very far");    
             } else if(tutorial == "combat"){
                 if(situation.PlayCombatSong()){
                     if(num_strikes < 3){
@@ -2191,9 +2195,9 @@ void Update(int num_frames) {
                     }
                 } else {
                     level.SendMessage("tutorial");
-                }
+                }            
             } else if(tutorial == "jumpkick"){
-                level.SendMessage("tutorial "+"Press "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" in the air to jump-kick");
+                level.SendMessage("tutorial "+"Press "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" in the air to jump-kick");          
             } else if(tutorial == "knife"){
                 bool has_sheathed_weapon = (weapon_slots[_sheathed_right] != -1 || weapon_slots[_sheathed_left] != -1);
                 bool has_sheathe_slot = (weapon_slots[_sheathed_right] == -1 || weapon_slots[_sheathed_left] == -1);
@@ -2222,7 +2226,7 @@ void Update(int num_frames) {
                 } else if(can_unsheathe){
                     level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "item")+" to "+(can_sheathe?"sheathe":"unsheathe")+" knife");
                 } else if(holding_weapon && enemy_characters.size() == 0) {
-                    level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "drop")+" to throw knife at a nearby enemy");
+                    level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "drop")+" to throw knife at a nearby enemy"); 
                 } else {
                     bool has_empty_hand = (weapon_slots[primary_weapon_slot] == -1 || weapon_slots[secondary_weapon_slot] == -1);
                     int nearest_weapon = GetNearestPickupableWeapon(this_mo.position, 4.0);
@@ -2230,7 +2234,7 @@ void Update(int num_frames) {
                     if(weapon_nearby && has_empty_hand){
                         level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "drop")+" to pick up nearby weapons");
                     } else {
-                        level.SendMessage("tutorial");
+                        level.SendMessage("tutorial");  
                     }
                 }
             } else if(tutorial == "throw"){
@@ -2247,13 +2251,13 @@ void Update(int num_frames) {
                     level.SendMessage("tutorial "+"HOLD down "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" right before getting hit to throw ("+throws_needed+"/3)");
                 } else {
                     level.SendMessage("tutorial");
-                }
+                }            
             } else if(tutorial == "flip_roll"){
                 if(situation.PlayCombatSong() || roll_count > 6){
                     level.SendMessage("tutorial");
                 } else {
                     level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "crouch")+" while running or jumping to roll");
-                }
+                }            
             } else if(tutorial == "stealth"){
                 if(!situation.PlayCombatSong()){
                     array<int> player_ids = GetPlayerCharacterIDs();
@@ -2264,7 +2268,7 @@ void Update(int num_frames) {
                     for(int i=0; i<num; ++i){
                         MovementObject@ char = ReadCharacter(i);
                         if(!char.controlled &&
-                           char.GetIntVar("knocked_out") == _awake &&
+                           char.GetIntVar("knocked_out") == _awake && 
                            !player_char.OnSameTeam(char) &&
                            ReadObjectFromID(char.GetID()).GetEnabled())
                         {
@@ -2275,22 +2279,25 @@ void Update(int num_frames) {
                     if(num_threats != 0){
                         level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "crouch")+" and move to sneak, and hold "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" to grab and choke");
                     } else {
-                        level.SendMessage("tutorial");
+                        level.SendMessage("tutorial");                    
                     }
                 } else {
-                DebugText("d", "d: ", 0.5);
-                level.SendMessage("tutorial");
-            }
+                    DebugText("d", "d: ", 0.5);
+                    level.SendMessage("tutorial");
+                }            
             } else if(!dialogue_control && dialogue_request_time > time - 0.1) {
                 if( CanPlayDialogue() == 1 ) {
-                    level.SendMessage("tutorial "+"Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to enter dialogue");
+                    level.SendMessage("tutorial "+"Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to enter dialogue");  
                 } else {
                     level.SendMessage("tutorial "+"Cannot enter dialogue during combat");
                 }
             } else {
-                    level.SendMessage("tutorial "+tutorial);
+                level.SendMessage("tutorial "+tutorial);
             }
+        } else {
+            level.SendMessage("tutorial");            
         }
+
     }
 
     if(this_mo.static_char && updated > 0 && !dialogue_control){
@@ -2397,15 +2404,15 @@ void Update(int num_frames) {
                 case 4: quat.x = atof(token_iter.GetToken(str)); break;
                 case 5: quat.y = atof(token_iter.GetToken(str)); break;
                 case 6: quat.z = atof(token_iter.GetToken(str)); break;
-                case 7: quat.w = atof(token_iter.GetToken(str));
+                case 7: quat.w = atof(token_iter.GetToken(str)); 
                     {
                         mat4 translate_mat;
                         translate_mat.SetTranslationPart(pos);
                         mat4 rotation_mat;
                         rotation_mat = Mat4FromQuaternion(quat);
                         mat4 mat = translate_mat * rotation_mat;
-                        DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone,0)),
-                                      mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone,1)),
+                        DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone,0)), 
+                                      mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone,1)), 
                                       vec4(1.0f), vec4(1.0f), _delete_on_draw);
                         skeleton.SetBoneTransform(bone, mat);
                     }
@@ -2502,6 +2509,8 @@ void Update(int num_frames) {
                 }
             } else if(dialogue_request_time > time - 0.1 && CanPlayDialogue() == 1) {
                 DebugText("tutorial_"+index++, highlight+"Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to enter dialogue", 0.1);
+            } else if(note_request_time > time - 0.1 && CanPlayDialogue() == 1) {
+                DebugText("tutorial_"+index++, highlight+"Press "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to read", 0.1);
             } else {
                 DebugText("tutorial_"+index++, (knows_how_to_look?"":highlight)+"Use "+(use_keyboard?"mouse":"right stick")+" to look around"+(knows_how_to_look?"":" ("+(2.0-look_time)+" seconds)"), 0.1);
                 if(knows_how_to_look){
@@ -2512,7 +2521,7 @@ void Update(int num_frames) {
                             DebugText("tutorial_"+index++, "Use "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "crouch")+" to crouch", 0.1);
                             DebugText("tutorial_"+index++, "Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to attack", 0.1);
                             DebugText("tutorial_"+index++, "Use "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" to block or grab", 0.1);
-
+                            
                             bool has_sheathed_weapon = (weapon_slots[_sheathed_right] != -1 || weapon_slots[_sheathed_left] != -1);
                             bool has_sheathe_slot = (weapon_slots[_sheathed_right] == -1 || weapon_slots[_sheathed_left] == -1);
                             bool holding_weapon = (weapon_slots[primary_weapon_slot] != -1);
@@ -2566,7 +2575,7 @@ void Update(int num_frames) {
     }*/
 
     Breathe(ts);
-
+    
     LeaveTelemetryZone();
 
     EnterTelemetryZone("C");
@@ -2612,13 +2621,13 @@ void Update(int num_frames) {
             //DebugText("weapon_label","Weapon Label: "+item.GetLabel(),0.5f);
         }
     }
-CheckForNANPosAndVel(4);
+    CheckForNANPosAndVel(4);
     if(weapon_slots[primary_weapon_slot] != -1 && weapon_slots[secondary_weapon_slot] != -1){
-      if( ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "arrow" &&
+        if( ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "arrow" &&
           ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "bow"){
-        SwapWeaponHands();
-	}
-}
+           SwapWeaponHands();
+        }
+    }
 
     if(vision_check_time <= time){
         EnterTelemetryZone("UpdateVision");
@@ -2719,13 +2728,13 @@ CheckForNANPosAndVel(4);
 
     HandleSpecialKeyPresses();
     LeaveTelemetryZone();
-    EnterTelemetryZone("UpdateBrain");
+    EnterTelemetryZone("UpdateBrain"); 
     UpdateBrain(ts); //in playercontrol.as or enemycontrol.as
     LeaveTelemetryZone();
     UpdateState(ts);
 
     if(this_mo.controlled){
-        EnterTelemetryZone("Character camera");
+        EnterTelemetryZone("Character camera"); 
         if(this_mo.controller_id == 0){
             UpdateAirWhooshSound();
         }
@@ -2736,7 +2745,7 @@ CheckForNANPosAndVel(4);
     }
 
     if(on_ground){
-        EnterTelemetryZone("Update Friction");
+        EnterTelemetryZone("Update Friction"); 
         new_slide_vel = this_mo.velocity;
         float new_friction = GetFriction(this_mo.position + vec3(0.0f,_leg_sphere_size * -0.4f,0.0f));
         friction = max(0.01f, friction);
@@ -2793,7 +2802,7 @@ void JumpTestEq(const vec3&in initial_pos,
     float length_xy_2 = initial_vel.x*initial_vel.x + initial_vel.z+initial_vel.z;
     float length_xy = 0.0f;
     if( length_xy_2 > 0.0f ) {
-        length_xy = sqrt(length_xy_2);
+        length_xy = sqrt(length_xy_2); 
     }
     vec3 flat_vel = vec3(
         length_xy,
@@ -3189,12 +3198,12 @@ void HandleSpecialKeyPresses() {
                     Object@ obj = ReadObjectFromID(flash_obj_id);
                     flash_obj_ids.push_back(flash_obj_id);
                     obj.SetTranslation(start);
-                    obj.SetTint(vec3(1.0));
+                    obj.SetTint(vec3(1.0));                    
                 }
                 /*
                 for(int i=0; i<20; ++i){
                     float offset = i + RangedRandomFloat(0.0f, 1.0f);
-                    MakeParticle("Data/Particles/metalflash.xml",camera.GetPos() + camera.GetFacing() * (0.3f + offset * 2.0f) - camera.GetUpVector()*0.1f,vec3(0.0));
+                    MakeParticle("Data/Particles/metalflash.xml",camera.GetPos() + camera.GetFacing() * (0.3f + offset * 2.0f) - camera.GetUpVector()*0.1f,vec3(0.0));   
                 }*/
                 vec3 end = camera.GetPos() + camera.GetFacing() * 1000.0f;
                 col.GetObjRayCollision(start, end);
@@ -3215,7 +3224,7 @@ void HandleSpecialKeyPresses() {
                     char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
                                  "vec3 pos = vec3("+hit_pos.x+", "+hit_pos.y+", "+hit_pos.z+");" +
                                  "HandleRagdollImpactImpulse(impulse, pos, 5.0f);");
-                } else if(hit_wall){
+                } else if(hit_wall){  
                     {
                         int flash_obj_id = CreateObject("Data/Objects/default_light.xml", true);
                         Object@ obj = ReadObjectFromID(flash_obj_id);
@@ -3228,12 +3237,12 @@ void HandleSpecialKeyPresses() {
                         Object@ obj = ReadObjectFromID(flash_obj_id);
                         obj.SetTranslation(pos);
                         obj.SetScale(vec3(0.3));
-                        obj.SetTint(vec3(0.0));
+                        obj.SetTint(vec3(0.0));        
                     }
                     for(int i=0; i<10; ++i){
-                        MakeParticle("Data/Particles/metalflash.xml",pos,normal * 10.0f + vec3(RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f)));
+                        MakeParticle("Data/Particles/metalflash.xml",pos,normal * 10.0f + vec3(RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f)));  
                         MakeParticle("Data/Particles/metalspark.xml",pos,normal * 10.0f + vec3(RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f), RangedRandomFloat(-5.0f,5.0f)));
-                    }
+                    }   
                 }
             }
 
@@ -3455,7 +3464,7 @@ void UpdateState(const Timestep &in ts) {
             if(last_collide_time > time - 0.1f){
                 this_mo.rigged_object().skeleton().AddVelocity(GetTargetVelocity() * 5.0f * ts.step());
             } else {
-                this_mo.rigged_object().skeleton().AddVelocity(GetTargetVelocity() * _air_control * ts.step());
+                this_mo.rigged_object().skeleton().AddVelocity(GetTargetVelocity() * _air_control * ts.step());            
             }
         }
     }
@@ -3636,7 +3645,7 @@ void HandleTethering(const Timestep &in ts) {
 
                 //DebugDrawWireSphere(char.rigged_object().GetAvgIKChainPos("head"), 0.1f, vec3(1.0f), _delete_on_update);
                 //DebugDrawWireSphere(this_mo.rigged_object().GetAvgIKChainPos("torso"), 0.1f, vec3(1.0f), _delete_on_update);
-
+                
                 float avg_duck = duck_amount;
                 avg_duck += char.GetFloatVar("duck_amount");
                 avg_duck *= 0.5f;
@@ -4500,7 +4509,7 @@ void Ragdoll(int type){
         SetRagdollType(type);
         injured_ragdoll_time = 0.0;
     }
-
+    
     UnTether();
 }
 
@@ -5069,7 +5078,7 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
     if(char.GetIntVar("species") == _wolf){
         attacker_is_wolf = 1;
         this_mo.rigged_object().Stab(pos, dir, 1, 0);
-
+                    
     } else {
         attacker_is_wolf = 0;
     }
@@ -5182,9 +5191,9 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
                     Object@ obj = ReadObjectFromID(flash_obj_id);
                     flash_obj_ids.push_back(flash_obj_id);
                     obj.SetTranslation(pos);
-                    obj.SetTint(vec3(0.5));
+                    obj.SetTint(vec3(0.5));   
                 }
-                TakeSharpDamage(sharp_damage * attack_damage_mult * 0.5, pos, attacker_id, true);
+                TakeSharpDamage(sharp_damage * attack_damage_mult * 0.5, pos, attacker_id, true);                            
             } else if(metal_armor && !attacking_with_knife) {
                 PlaySoundGroup("Data/Sounds/weapon_foley/cut/flesh_hit.xml", pos, _sound_priority_high);
                 level.SendMessage("cut "+this_mo.getID()+" "+attacker_id);
@@ -5213,7 +5222,7 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
                         sharp_damage = min(0.5, sharp_damage);
                     }
                 }
-                TakeSharpDamage(sharp_damage * attack_damage_mult, pos, attacker_id, true);
+                TakeSharpDamage(sharp_damage * attack_damage_mult, pos, attacker_id, true);     
             }
         }
 		if(sharp_damage == 0.0f || knocked_out != _awake || block_health <= 0){
@@ -5339,10 +5348,10 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
                 if( max_ko_shield > 0 && (((ko_shield + 0.5) / float(max_ko_shield)) < blood_health)){
                     blood_health = (ko_shield + 0.5) / float(max_ko_shield);
                 }
-                TakeSharpDamage(0.1f, pos, attacker_id, false);
+                TakeSharpDamage(0.1f, pos, attacker_id, false);      
                 if(ko_shield > max_ko_shield * blood_health){
                     ko_shield = int(max_ko_shield * blood_health);
-                }
+                }          
             }
         }
         if(can_passive_block && metal_armor && weapon_slots[primary_weapon_slot] == -1){
@@ -5566,12 +5575,12 @@ void SetOnFire(bool val){
     if(val && !on_fire){
         if(zone_killed == 0){
             this_mo.PlaySoundAttached("Data/Sounds/fire/character_catch_fire_small.wav", this_mo.position);
-        } else {
+        } else {            
             this_mo.PlaySoundAttached("Data/Sounds/fire/character_fall_in_lava.wav", this_mo.position);
         }
         on_fire_loop_handle = PlaySoundLoopAtLocation("Data/Sounds/fire/character_on_fire_loop_small.wav",this_mo.position,1.0f);
     } else if(!val && on_fire){
-        this_mo.PlaySoundAttached("Data/Sounds/fire/character_fire_extinguish_small_shortened.wav", this_mo.position);
+        this_mo.PlaySoundAttached("Data/Sounds/fire/character_fire_extinguish_small_shortened.wav", this_mo.position);        
         if(on_fire_loop_handle != -1){
             StopSound(on_fire_loop_handle);
             on_fire_loop_handle = -1;
@@ -5668,6 +5677,7 @@ void ReceiveMessage(string msg){
             Update(1);
             dialogue_control = false;
             blink_mult = 1.0;
+            dialogue_stop_time = time;
             FixDiscontinuity();
         }
     } else if(token == "set_omniscient"){ // params: bool enabled
@@ -5760,7 +5770,7 @@ void ReceiveMessage(string msg){
                     MovementObject@ holder = ReadCharacterID(holder_id);
                     holder.DetachItem(weapon_id);
                 }
-
+                
                 int weapon = weapon_slots[primary_weapon_slot];
                 if(weapon != -1){
                     DropWeapon();
@@ -5839,8 +5849,8 @@ void CharacterDefeated() {
             if(ReadObjectFromID(char.GetID()).GetEnabled() &&
                 !char.controlled &&
                 !char.static_char &&
-               char.GetIntVar("knocked_out") == _awake &&
-               !player_char.OnSameTeam(char) &&
+               char.GetIntVar("knocked_out") == _awake && 
+               !player_char.OnSameTeam(char) && 
                char.QueryIntFunction("int IsAggro()") == 1)
             {
                 ++num_threats;
@@ -5849,7 +5859,7 @@ void CharacterDefeated() {
         Log(info,"Num_threats: "+num_threats);
         const float kDistanceThreshold = 10.0 * 10.0;
         if(zone_killed == 0){
-            if(this_mo.controlled || (IsAggro() == 1 && num_threats == 0 && distance_squared(this_mo.position, player_char.position) < kDistanceThreshold)){
+            if(this_mo.controlled || (IsAggro() == 1 && num_threats == 0 && distance_squared(this_mo.position, player_char.position) < kDistanceThreshold)){       
                 TimedSlowMotion(0.1f,0.7f, 0.05f);
             }
         }
@@ -6033,10 +6043,10 @@ void WeaponRemovedFromBody(int weapon_id, int remover_id) {
     injured_ragdoll_time += 6.0f;
     if(knocked_out != _dead){
         if((species == _wolf || species == _dog) && ko_shield > 1){
-            TakeBloodDamage(0.1);
+            TakeBloodDamage(0.1); 
             ko_shield = max(0, ko_shield - 1);
         } else {
-            TakeBloodDamage(100.0);
+            TakeBloodDamage(100.0); 
             ko_shield = 0;
             if(remover_id != -1 && ObjectExists(remover_id) && ReadCharacterID(remover_id).controlled){
                 TimedSlowMotion(0.1f,0.7f, 0.05f);
@@ -6047,7 +6057,7 @@ void WeaponRemovedFromBody(int weapon_id, int remover_id) {
             this_mo.PlaySoundGroupVoice("death",0.4f);
             AISound(this_mo.position, VERY_LOUD_SOUND_RADIUS, _sound_type_voice);
         }
-
+        
         if(this_mo.controlled){
             AchievementEvent("player_alive_weapon_removed_from_body");
         }else{
@@ -6338,7 +6348,7 @@ void HandleAnimationCombatEvent(const string&in event, const vec3&in world_pos) 
         }
         if(state == _hit_reaction_state && hit_reaction_thrown){
             death_hint = _hint_escape_throw;
-
+            
             ko_shield = max(0, ko_shield - 1);
             level.SendMessage("character_thrown "+this_mo.getID() + " " + attacked_by_id);
             if(ko_shield == 0 && params.HasParam("Throw Trainer") && GetConfigValueBool("tutorials")){
@@ -6624,7 +6634,7 @@ void UpdateGroundMovementControls(const Timestep &in ts) {
 
     vec3 adjusted_vel = WorldToGroundSpace(target_velocity);
 
-
+    
     // Adjust speed based on ground slope
     max_speed = run_speed;
     if(tethered == _TETHERED_REARCHOKE && weapon_slots[primary_weapon_slot] != -1){
@@ -6714,7 +6724,7 @@ float GetAttackRange() {
     if(on_ground){
         return (_attack_range + range_extender)*range_multiplier*this_mo.rigged_object().GetCharScale() - _leg_sphere_size;
     } else {
-        return _attack_range * this_mo.rigged_object().GetCharScale() - _leg_sphere_size;
+        return _attack_range * this_mo.rigged_object().GetCharScale() - _leg_sphere_size;        
     }
 }
 
@@ -6740,7 +6750,7 @@ void UpdateGroundAttackControls(const Timestep &in ts) {
                 attack_id = GetAttackTarget(range, _TC_ENEMY | _TC_CONSCIOUS | _TC_NON_RAGDOLL);
             }
             if(attack_id == -1){
-                attack_id = GetAttackTarget(range, _TC_ENEMY | _TC_CONSCIOUS);
+                attack_id = GetAttackTarget(range, _TC_ENEMY | _TC_CONSCIOUS);                
             }
         }
 
@@ -6920,10 +6930,10 @@ void UpdateAirAttackControls() {
 void UpdateGroundControls(const Timestep &in ts) {
     if(tethered == _TETHERED_FREE){
         UpdateGroundAttackControls(ts);
-    } else if(tethered == _TETHERED_REARCHOKE &&
-              (WantsToThroatCut()) &&
-              !executing &&
-              (weapon_slots[primary_weapon_slot] != -1 && ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() != "staff"))
+    } else if(tethered == _TETHERED_REARCHOKE && 
+              (WantsToThroatCut()) && 
+              !executing && 
+              (weapon_slots[primary_weapon_slot] != -1 && ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() != "staff")) 
     {
     	// Cut victim's throat
         uint8 flags = _ANM_FROM_START;
@@ -7010,16 +7020,16 @@ void ApplyIdle(float speed, bool start){
                             path = "Data/Animations/rat_actionidle.xml";
                             break;
                         default:
-                            if(weapon_slots[primary_weapon_slot] != -1 &&
+                            if(weapon_slots[primary_weapon_slot] != -1 && 
                                ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "knife")
                             {
                                 path = "Data/Animations/r_actionidle_knife.xml";
-                            } else if(weapon_slots[primary_weapon_slot] != -1 &&
+                            } else if(weapon_slots[primary_weapon_slot] != -1 && 
                                ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "sword")
                             {
                                 path = "Data/Animations/r_actionidle_sword.xml";
                             } else {
-                                path = "Data/Animations/r_actionidle.xml";
+                                path = "Data/Animations/r_actionidle.xml";                                
                             }
                             break;
                     }
@@ -7168,7 +7178,7 @@ bool VisibilityCheck(vec3 start, MovementObject@ character) {
     if(character.GetBoolVar("dialogue_control")){
         return false; // Cannot see characters while they are in dialogue mode
     }
-    EnterTelemetryZone("VisibilityCheck");
+    EnterTelemetryZone("VisibilityCheck"); 
     Skeleton @skeleton = character.rigged_object().skeleton();
     int rand_bone = -1;
     while(rand_bone == -1){
@@ -7178,7 +7188,7 @@ bool VisibilityCheck(vec3 start, MovementObject@ character) {
         }
     }
     vec3 end = skeleton.GetBoneTransform(rand_bone).GetTranslationPart();
-    EnterTelemetryZone("GetRayCollision");
+    EnterTelemetryZone("GetRayCollision"); 
     float length = distance(start, end);
     int num_segments = max(1, min(int(length/5), 10));
     vec3 hit;
@@ -7192,7 +7202,7 @@ bool VisibilityCheck(vec3 start, MovementObject@ character) {
     LeaveTelemetryZone();
     bool intersecting = (hit != end);
     bool plant_intersecting = false;
-    EnterTelemetryZone("GetPlantRayCollision");
+    EnterTelemetryZone("GetPlantRayCollision"); 
     col.GetPlantRayCollision(start, hit);
     LeaveTelemetryZone();
     if(sphere_col.NumContacts() != 0){
@@ -7243,7 +7253,7 @@ float last_fov_change = -999.0;
 const string head_string = "head";
 array<int> nearby_characters;
 void GetVisibleCharacters(uint16 flags, array<int> &visible_characters){
-    EnterTelemetryZone("GetVisibleCharacters");
+    EnterTelemetryZone("GetVisibleCharacters"); 
     nearby_characters.resize(0);
     mat4 transform = this_mo.rigged_object().GetAvgIKChainTransform(head_string);
     mat4 transform_offset;
@@ -7252,7 +7262,7 @@ void GetVisibleCharacters(uint16 flags, array<int> &visible_characters){
     string fov_path = "CharacterFOVHullPeripheral"+this_mo.GetID();
 
     if(!fov_hulls_calculated){
-        EnterTelemetryZone("Calculate peripheral FOV hull");
+        EnterTelemetryZone("Calculate peripheral FOV hull"); 
         array<vec3> points;
         GetFOVMesh(fov_peripheral[0], fov_peripheral[1], points);
         for(int i=0, len=points.size(); i<len; ++i){
@@ -7267,7 +7277,7 @@ void GetVisibleCharacters(uint16 flags, array<int> &visible_characters){
     fov_path = "CharacterFOVHullFocus"+this_mo.GetID();
     if(!fov_hulls_calculated)
     {
-        EnterTelemetryZone("Calculate focus FOV hull");
+        EnterTelemetryZone("Calculate focus FOV hull"); 
         array<vec3> points;
         GetFOVMesh(fov_focus[0], fov_focus[1], points);
         for(int i=0, len=points.size(); i<len; ++i){
@@ -7305,7 +7315,7 @@ void GetVisibleCharacters(uint16 flags, array<int> &visible_characters){
                 last_val = nearby_characters_peripheral[a];
             }
             ++a;
-        }
+        } 
     }
 
     //DebugDrawWireMesh("Data/Models/fov.obj", transform, vec4(1.0f), _delete_on_update);
@@ -7647,7 +7657,7 @@ void HandleGroundCollisions(const Timestep &in ts) {
         }
         this_mo.position.y = min(old_pos.y, this_mo.position.y);
         bumper_collision_response.y = min(0.0, bumper_collision_response.y);
-
+        
         bool old_adjust = true;
         for(int contact_index=0; contact_index<sphere_col.NumContacts(); ++contact_index){
             const CollisionPoint contact = sphere_col.GetContact(contact_index);
@@ -7821,8 +7831,8 @@ void HandleAirCollisions(const Timestep &in ts) {
                     closest_dist = dist;
                     closest_point = contact.position;
                     int contact_type = int(contact.custom_normal.y);
-                    if(contact_type == 0 ||
-                       contact_type == 4 ||
+                    if(contact_type == 0 || 
+                       contact_type == 4 || 
                        contact_type == 6 ||
                        contact_type == 9)
                     {
@@ -8081,7 +8091,7 @@ void UpdateDuckAmount(const Timestep &in ts) { // target_duck_amount is 1.0 when
 
 
 void UpdateThreatAmount(const Timestep &in ts) {
-    if(state != _movement_state && state != _attack_state){
+    if((state != _movement_state && state != _attack_state) || (dialogue_stop_time > time - 3.0 && !NeedsCombatPose())){
         threat_amount = 0.0;
         target_threat_amount = 0.0;
     } else {
@@ -8524,7 +8534,7 @@ void UpdateHitReaction(const Timestep &in ts) {
                 }
                 if(ko_shield < max_ko_shield / 2){
                     this_mo.SetAnimation("Data/Animations/w_slashedrighthard.anm",20.0f,flags);
-                } else {
+                } else {                    
                     this_mo.SetAnimation("Data/Animations/w_slashedright.anm",20.0f,flags);
                 }
                 mirrored_stance = !right;
@@ -9160,7 +9170,7 @@ int GetThrowTarget() {
         int known_id = situation.KnownID(targets[i]);
         if(known_id != -1 &&
            situation.known_chars[known_id].last_seen_time > time - 1.0 &&
-           !this_mo.OnSameTeam(mo) && mo.GetIntVar("state") != _ragdoll_state &&
+           !this_mo.OnSameTeam(mo) && mo.GetIntVar("state") != _ragdoll_state && 
            distance_squared(this_mo.position, mo.position) > min_throw_range_squared)
         {
             vec3 cam_dir = normalize(mo.position - camera.GetPos());
@@ -9287,7 +9297,7 @@ bool CanGrabWeaponFromBody(ItemObject@ item_obj){
                char.GetIntVar("species") == _dog ||
                char.GetIntVar("knocked_out") != _awake ||
                char.GetFloatVar("block_stunned") > 0.0f ||
-               char.GetIntVar("state") == _ragdoll_state)
+               char.GetIntVar("state") == _ragdoll_state) 
             {
                 can_take = true;
             }*/
@@ -9300,10 +9310,11 @@ void HandlePickUp() {
     if((WantsToDropItem() && throw_knife_layer_id == -1) || knocked_out != _awake){
         DropWeapon();
     }
-    if(knocked_out != _awake || state == _ragdoll_state || tethered != _TETHERED_FREE){
+    if(knocked_out != _awake || state == _ragdoll_state){
         return;
     }
-    if(active_blocking){
+    if(tethered == _TETHERED_FREE){
+    if(active_blocking || species == _cat){
         int nearest_thrown_id = GetNearestThrownWeapon(this_mo.position, 2.0f);
         if(nearest_thrown_id != -1){
             ItemObject@ io = ReadItemID(nearest_thrown_id);
@@ -9394,6 +9405,7 @@ void HandlePickUp() {
             pickup_layer = -1;
         }
     }
+}
     if(sheathe_layer_id == -1){
         int src;
         if(WantsToSheatheItem() && weapon_slots[primary_weapon_slot] != -1){
@@ -9791,7 +9803,7 @@ void ApplyCameraControls(const Timestep &in ts) {
     if(level_cam_rotation.y < cam_rotation - 180){
         level_cam_rotation.y += 360;
     }
-
+    
     // Apply camera state to actual scene camera
     camera.SetYRotation(mix(cam_rotation + RangedRandomFloat(-camera_vibration, camera_vibration), level_cam_rotation.y, level_cam_weight));
     camera.SetXRotation(mix(cam_rotation2 + RangedRandomFloat(-camera_vibration, camera_vibration), level_cam_rotation.x, level_cam_weight));
@@ -10180,7 +10192,7 @@ void WaterIntersect(int id) {
             vec3 offset = vec3(1,0,0) * ring_size;
             quaternion rotation(vec4(0,1,0,RangedRandomFloat(0.0,6.28)));
             offset = rotation * offset;
-            MakeParticle("Data/Particles/watersplash.xml",transform * pos + offset, vec3(0,2,0)+offset*5.0, vec3(1.0));
+            MakeParticle("Data/Particles/watersplash.xml",transform * pos + offset, vec3(0,2,0)+offset*5.0, vec3(1.0));   
         }
         if(rand()%2==0){
             delayed_splash.push_back(vec4(transform * pos, the_time+0.2));
@@ -10196,7 +10208,7 @@ void WaterIntersect(int id) {
         }
     }
 
-    while(delayed_splash.size() > 0 && delayed_splash[0].a < the_time){
+    while(delayed_splash.size() > 0 && delayed_splash[0].a < the_time){        
         {
             float ring_size = 0.3;
             vec3 offset = vec3(1,0,0) * ring_size;
@@ -10232,7 +10244,7 @@ void WaterIntersect(int id) {
     if(water_penetration > 0.0){
         size = 0.5 - water_penetration;
     } else {
-        size = 0.5 + water_penetration * 0.5;
+        size = 0.5 + water_penetration * 0.5;        
     }
     size *= 0.8;
     vec3 flat_vel = vec3(this_mo.velocity.x, 0.0, this_mo.velocity.z);
@@ -10246,7 +10258,7 @@ void WaterIntersect(int id) {
         this_mo.velocity.x *= mix(1.0, 0.9, depth_slow);
         this_mo.velocity.z *= mix(1.0, 0.9, depth_slow);
         jump_info.jetpack_fuel = min(jump_info.jetpack_fuel, _jump_fuel * mix(1.0, 0.0, depth_slow));
-    }
+    } 
 
     float head_water_penetration;
     vec3 head_pos;
@@ -10281,7 +10293,7 @@ void WaterIntersect(int id) {
     }
 
     if(length(this_mo.velocity) > 1.0 && head_water_penetration > -0.2 && water_depth > 0.25){
-        if(last_sound_time < the_time){
+        if(last_sound_time < the_time){ 
             last_sound_time = the_time + 0.3 / (1.0 + flat_speed * 0.05);
             string sound;
             if(water_depth > 0.7){
@@ -10289,7 +10301,7 @@ void WaterIntersect(int id) {
             } else {
                 sound = "Data/Sounds/water_foley/steps_water.xml";
             }
-            this_mo.PlaySoundGroupAttached(sound,this_mo.position);
+            this_mo.PlaySoundGroupAttached(sound,this_mo.position);     
         }
     }
 
@@ -10568,7 +10580,7 @@ void UpdateAnimation(const Timestep &in ts) {
                         if(weapon_slots[primary_weapon_slot] == -1){
                             if(tether_id != -1 && ReadCharacterID(tether_id).GetIntVar("species") == _rat){
                                 this_mo.SetAnimation("Data/Animations/r_rear_choke_rat_struggle.anm", 5.0f, flags & ~_ANM_MOBILE);
-                            } else {
+                            } else {                                
                                 this_mo.SetAnimation("Data/Animations/r_rear_choke_struggle.anm", 5.0f, flags & ~_ANM_MOBILE);
                             }
                         } else {
@@ -10581,7 +10593,7 @@ void UpdateAnimation(const Timestep &in ts) {
                         if(weap_id == -1){
                             if(species == _rat && char.GetIntVar("species") == _rabbit){
                                 this_mo.SetAnimation("Data/Animations/ra_rear_choked_by_rabbit.anm", 5.0f, flags);
-                            } else {
+                            } else {                                
                                 this_mo.SetAnimation("Data/Animations/r_rear_choked_struggle.anm", 5.0f, flags);
                             }
                         } else {
@@ -11248,7 +11260,7 @@ int skip_ear_physics_counter = 0;
 
 void DrawEar(bool right, const BoneTransform &in head_transform, int num_frames){
     if(true){
-        this_mo.CDrawEar(right, head_transform, num_frames);
+        this_mo.CDrawEar(right, head_transform, num_frames); 
         return;
     }
     EnterTelemetryZone("DrawEar");
@@ -11420,7 +11432,7 @@ array<float> tail_section_length;
 
 void DrawTail(int num_frames){
     if(true){
-        this_mo.CDrawTail(num_frames);
+        this_mo.CDrawTail(num_frames); 
         return;
     }
     EnterTelemetryZone("DrawTail");
@@ -11683,31 +11695,31 @@ void DrawHealthBar() {
     vec3 right = vec3(-facing.z, 0.0f, facing.x);
     float width = 0.5;
     float height = 0.05f;
-    DebugDrawLine(this_mo.position + vec3(0.0, 1.25, 0.0) - right * width,
+    DebugDrawLine(this_mo.position + vec3(0.0, 1.25, 0.0) - right * width, 
                   this_mo.position + vec3(0.0, 1.25, 0.0) + right * width,
                   vec4(0.0, 0.0, 0.0, 0.5), vec4(0.0, 0.0, 0.0, 0.5),
                   _delete_on_draw);
     if(permanent_health > 0.0){
-        DebugDrawLine(this_mo.position + vec3(0.0, 1.25, 0.0) - right * width,
+        DebugDrawLine(this_mo.position + vec3(0.0, 1.25, 0.0) - right * width, 
                       this_mo.position + vec3(0.0, 1.25, 0.0) + right * width * (permanent_health * 2.0 - 1.0),
                       vec3(1.0, 0.0, 0.0),
                       _delete_on_draw);
 
-        DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height, 0.0) - right * width,
+        DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height, 0.0) - right * width, 
                       this_mo.position + vec3(0.0, 1.25+height, 0.0) + right * width * (permanent_health * 2.0 - 1.0),
                       vec4(0.0, 0.0, 0.0, 0.5), vec4(0.0, 0.0, 0.0, 0.5),
                       _delete_on_draw);
         if(temp_health > 0.0){
-            DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height, 0.0) - right * width,
+            DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height, 0.0) - right * width, 
                           this_mo.position + vec3(0.0, 1.25+height, 0.0) + right * width * (temp_health * 2.0 - 1.0),
                           vec3(0.0, 0.0, 1.0),
                           _delete_on_draw);
-            DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) - right * width,
+            DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) - right * width, 
                           this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) + right * width * (temp_health * 2.0 - 1.0),
                           vec4(0.0, 0.0, 0.0, 0.5), vec4(0.0, 0.0, 0.0, 0.5),
                           _delete_on_draw);
             if(block_health > 0.0f){
-                DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) - right * width,
+                DebugDrawLine(this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) - right * width, 
                               this_mo.position + vec3(0.0, 1.25+height*2.0f, 0.0) + right * width * (block_health * 2.0 - 1.0),
                               vec3(0.0, 1.0, 0.0),
                               _delete_on_draw);
@@ -11725,7 +11737,7 @@ void DrawHealthBar() {
                         this_mo.position + vec3(0.0, 1.45, 0.0) + right * (i-max_ko_shield*0.5)*scale,
                             1.0f * scale,
                             vec4(vec3(brightness), 1.0f),
-                          _delete_on_draw);
+                          _delete_on_draw);        
         }
     }
 
@@ -11763,7 +11775,7 @@ void DrawHealthBar() {
         vec3 dir = normalize(target_pos - this_mo.position);
         vec3 adjusted_impact_dir = GetAdjustedImpactDir(temp_attack_getter.GetImpactDir(), dir);
 
-        DebugDrawLine(this_mo.position,
+        DebugDrawLine(this_mo.position, 
                       this_mo.position + adjusted_impact_dir,
                       vec4(0.5, 0.0, 0.0, 1.0), vec4(0.5, 0.0, 0.0, 0.0),
                       _delete_on_draw);
@@ -11830,11 +11842,11 @@ void PreDrawCameraNoCull(float curr_game_time) {
         }
         if(curr_game_time < hit_flash_time + kHitFlashDuration){
             float opac = 0.4;
-            tint*= mix(1.0, 2.0 - (curr_game_time - hit_flash_time) / kHitFlashDuration, opac);
+            tint*= mix(1.0, 2.0 - (curr_game_time - hit_flash_time) / kHitFlashDuration, opac);   
         }
         if(curr_game_time < dark_hit_flash_time + kHitFlashDuration){
             float opac = 0.4;
-            tint *= mix(1.0, (curr_game_time - dark_hit_flash_time) / kHitFlashDuration, opac);
+            tint *= mix(1.0, (curr_game_time - dark_hit_flash_time) / kHitFlashDuration, opac); 
         }
 
         tint = tint * (1.0 - level_blackout);
@@ -11842,12 +11854,12 @@ void PreDrawCameraNoCull(float curr_game_time) {
         camera.SetTint(tint);
 
         //camera.SetDOF(1.0f, distance(camera.GetPos(), this_mo.position)-1.0f, 1.0f, 1.0f, distance(camera.GetPos(), this_mo.position)+1.0f, 2.0f);
-
+        
         //void SetDOF(float near_blur, float near_dist, float near_transition, float far_blur, float far_dist, float far_transition)
         //camera.SetDOF(0.0f, 0.0f, 0.0f, 0.5f, 5.0f, 0.0f);
         if(!dialogue_control){
             //camera.SetDOF(0.0f, distance(camera.GetPos(), this_mo.position)-1.0f, 1.0f, 0.0f, distance(camera.GetPos(), this_mo.position)+1.0f, 2.0f);
-            camera.SetDOF(0.0f, 1.5f, 1.0f, 1.0-min(black_tint,red_tint), 5.0f, 2.0f);
+            camera.SetDOF(0.0f, 1.5f, 1.0f, 1.0-min(black_tint,red_tint), 5.0f, 2.0f);    
             if(GetMenuPaused()){
                 camera.SetDOF(0,0,0, 0.3, 0, 2);
             }
@@ -11865,7 +11877,7 @@ void PreDrawCameraNoCull(float curr_game_time) {
         //send_level_message "set_camera_dof 0 0 0 0.3 3 1"
         //send_level_message "set_camera_dof 0 0 0 0.3 25 1"
         //camera.SetDOF(0.0f, 6.0f, 1.0f, 0.3f, 3.0f, 1.0f);
-        //camera.SetDOF(0.0f, 6.0f, 1.0f, 0.3f, 25.0f, 1.0f);
+        //camera.SetDOF(0.0f, 6.0f, 1.0f, 0.3f, 25.0f, 1.0f);    
     }
 }
 
@@ -12535,8 +12547,8 @@ void FinalAnimationMatrixUpdate(int num_frames) {
         float head_up_val = dot(torso_look, head_up);
         float angle2 = 0.0f;
         float preangle_dot = dot(torso_look, head_up)+chest_tilt_offset;
-
-        if( preangle_dot >= -1.0f && preangle_dot <= 1.0f ) {
+        
+        if( preangle_dot >= -1.0f && preangle_dot <= 1.0f ) { 
             angle2 = asin(preangle_dot);
         }
 
@@ -12651,7 +12663,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
 
         if( head_up_val >= -1.0f && head_up_val <= 1.0f ) {
             angle2 = (asin(head_up_val) + head_tilt_offset);
-        }
+        } 
 
         // Avoid head flip-flopping when trying to look straight back
         float head_range = 1.3f;
@@ -12934,7 +12946,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
                 float angle = -asin(dist);
                 for(int i=0; i<num_frames; ++i){
                     hang_angle = mix(hang_angle, angle, 0.01);
-                }
+                }        
                 hang_angle_vel = 0.0;
                 tilt_back = true;
             } else {
@@ -12947,14 +12959,14 @@ void FinalAnimationMatrixUpdate(int num_frames) {
         if(tilt_back){
             for(int i=0; i<num_frames; ++i){
                 hang_amount = mix(hang_amount, 0.0, 0.05);
-            }
-        } else {
+            }        
+        } else {            
             for(int i=0; i<num_frames; ++i){
                 hang_amount = mix(hang_amount, 1.0, 0.05);
-            }
+            }        
         }
         this_mo.rigged_object().anim_client().SetBlendCoord("leg_support",1.0-hang_amount);
-
+                
         if(hang_angle != 0.0){
             vec3 axis = normalize(cross(vec3(0,1,0),ledge_info.ledge_dir));
             vec3 point = vec3(this_mo.position.x, ledge_info.ledge_height, this_mo.position.z)+ledge_info.ledge_dir * _leg_sphere_size;
@@ -12970,7 +12982,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
                 key_transforms[i].origin += point;
             }
         }
-
+        
         if(kTestNewLedge){
             vec3 offset = vec3(999, 999, 999);
             for(int i=0; i<2; ++i){
@@ -12979,7 +12991,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
                 target_left_hand -= ledge_info.ledge_dir * (dot(target_left_hand, ledge_info.ledge_dir) - dot(this_mo.position, ledge_info.ledge_dir) - _leg_sphere_size);
                 target_left_hand[1] = ledge_info.ledge_height - 0.05;
                 //key_transforms[kLeftArmKey].origin[1] += ledge_info.ledge_height - left_hand[1] - 0.03;
-                vec3 new_offset = target_left_hand - left_hand;
+                vec3 new_offset = target_left_hand - left_hand;            
                 if(new_offset.y < offset.y){
                     offset = new_offset;
                 }
@@ -13265,49 +13277,49 @@ void FinalAnimationMatrixUpdate(int num_frames) {
             int obj_id = 3;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kLeftLegKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kLeftLegIK]]];
+            key_transforms[kLeftLegKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kLeftLegIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 4;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kRightLegKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kRightLegIK]]];
+            key_transforms[kRightLegKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kRightLegIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 5;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kLeftArmKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kLeftArmIK]]];
+            key_transforms[kLeftArmKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kLeftArmIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 7;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kRightArmKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kRightArmIK]]];
+            key_transforms[kRightArmKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kRightArmIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 14;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kHipKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kTorsoIK]+2]];
+            key_transforms[kHipKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kTorsoIK]+2]];            
         }
         {
             BoneTransform temp;
             int obj_id = 17;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kChestKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kTorsoIK]]];
+            key_transforms[kChestKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kTorsoIK]]];            
         }
         {
             BoneTransform temp;
             int obj_id = 45;
             temp.origin = ReadObjectFromID(obj_id).GetTranslation();
             temp.rotation = ReadObjectFromID(obj_id).GetRotation();
-            key_transforms[kHeadKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kHeadIK]]];
+            key_transforms[kHeadKey] = temp * skeleton_bind_transforms[ik_chain_elements[ik_chain_start_index[kHeadIK]]];            
         }
         //key_transforms[kLeftLegKey+j] = rigged_object.GetFrameMatrix(bone) * skeleton_bind_transforms[bone];
             /*
