@@ -19,6 +19,7 @@ float dialogue_rotation;
 string tutorial = "";
 bool fall_death = false;
 int roll_count = 0;
+float dialogue_stop_time = 0.0;
 
 int num_hit_on_ground = 0;
 int num_strikes = 0;
@@ -2031,6 +2032,7 @@ float look_time = 0.0;
 float move_time = 0.0;
 int num_jumps = 0;
 float dialogue_request_time = 0.0;
+float note_request_time = 0.0;
 bool tapping_attack = false;
 float hold_attack_time = 0.0;
 
@@ -2144,7 +2146,7 @@ void Update(int num_frames) {
     
     if(this_mo.controlled){
         bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
-        if(knocked_out != _awake){
+        if(knocked_out != _awake) {
             string respawn = "\nPress "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to try again";
 
             if( GetConfigValueBool("tutorials" ) ) {
@@ -2177,6 +2179,10 @@ void Update(int num_frames) {
                 }
             } else {
                 level.SendMessage("screen_message "+""+respawn);
+            }
+        } else if(!dialogue_control && note_request_time > time - 0.1) {
+            if( CanPlayDialogue() == 1 ) {
+                level.SendMessage("screen_message "+"Press "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to read");  
             }
         } else if( GetConfigValueBool("tutorials") ) {
             if(tutorial == "basic"){
@@ -2292,9 +2298,9 @@ void Update(int num_frames) {
                         level.SendMessage("tutorial");                    
                     }
                 } else {
-                DebugText("d", "d: ", 0.5);
-                level.SendMessage("tutorial");
-            }            
+                    DebugText("d", "d: ", 0.5);
+                    level.SendMessage("tutorial");
+                }            
             } else if(!dialogue_control && dialogue_request_time > time - 0.1) {
                 if( CanPlayDialogue() == 1 ) {
                     level.SendMessage("tutorial "+"Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to enter dialogue");  
@@ -2302,9 +2308,12 @@ void Update(int num_frames) {
                     level.SendMessage("tutorial "+"Cannot enter dialogue during combat");
                 }
             } else {
-                    level.SendMessage("tutorial "+tutorial);
+                level.SendMessage("tutorial "+tutorial);
             }
+        } else {
+            level.SendMessage("tutorial");            
         }
+
     }
 
     if(this_mo.static_char && updated > 0 && !dialogue_control){
@@ -2515,6 +2524,8 @@ void Update(int num_frames) {
                 }
             } else if(dialogue_request_time > time - 0.1 && CanPlayDialogue() == 1) {
                 DebugText("tutorial_"+index++, highlight+"Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to enter dialogue", 0.1);
+            } else if(note_request_time > time - 0.1 && CanPlayDialogue() == 1) {
+                DebugText("tutorial_"+index++, highlight+"Press "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to read", 0.1);
             } else {
                 DebugText("tutorial_"+index++, (knows_how_to_look?"":highlight)+"Use "+(use_keyboard?"mouse":"right stick")+" to look around"+(knows_how_to_look?"":" ("+(2.0-look_time)+" seconds)"), 0.1);
                 if(knows_how_to_look){
@@ -5613,6 +5624,7 @@ void ReceiveMessage(string msg){
             Update(1);
             dialogue_control = false;
             blink_mult = 1.0;
+            dialogue_stop_time = time;
             FixDiscontinuity();
         }
     } else if(token == "set_omniscient"){ // params: bool enabled
@@ -7957,7 +7969,7 @@ void UpdateDuckAmount(const Timestep &in ts) { // target_duck_amount is 1.0 when
 
 
 void UpdateThreatAmount(const Timestep &in ts) {
-    if(state != _movement_state && state != _attack_state){
+    if((state != _movement_state && state != _attack_state) || (dialogue_stop_time > time - 3.0 && !NeedsCombatPose())){
         threat_amount = 0.0;
         target_threat_amount = 0.0;
     } else {
