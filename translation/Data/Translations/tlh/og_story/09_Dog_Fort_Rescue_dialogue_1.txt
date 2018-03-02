@@ -1,0 +1,17 @@
+#name "Start"
+#participants 2
+send_character_message 2 "set_torso_target 224.301 32.1179 -63.6936 0"
+send_character_message 2 "set_head_target 223.195 32.6912 -61.9623 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_color 2 0.7 0.7 1
+set_character_pos 2 225.155 32.7153 -62.2817 141
+set_character_pos 1 222.928 32.4803 -61.8636 91
+set_cam 224.422 33.1862 -59.2959 -12.9 8.09 0.54 57.7195
+say 2 "Sun" "Hoch laH Dalegh, 'ugh rach 'oH."
+send_character_message 2 "set_head_target 223.63 32.7682 -65.9513 1"
+say 2 "Sun" "split teams 'ej cha'-pronged HIv-lo' nab maH"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouchthreat.anm\""
+send_character_message 1 "set_head_target 224.85 32.5301 -62.6917 1"
+say 1 "Turner" "laH ruch jIH je wa' prong 'e' vIHar."

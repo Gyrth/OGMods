@@ -1,0 +1,15 @@
+#name "Note-Outbreak"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -27.5941 -3.60182 -91.9734 -90
+send_character_message 1 "set_head_target -27.6802 -3.45304 -91.1693 1"
+set_cam -29.0328 -3.29631 -92.307 0 -120 0 56.0142
+say 1 "Ghost" "Huomautus, jonka on kirjoittanut yksi sotilaista, [wait 0.3]sanani higher-up."
+set_cam -28.3258 -3.17752 -91.4267 11.57 -78.78 0 56.0142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Reaper pidetään häkissä oli vapautettava tyhjentää perimetre Cinderblood saastaa."
+say 2 "Note" "Vaikka se oli jyrkkä toimenpide, [wait 0.3]se oli täysin välttämätöntä- [wait 0.3]ja yksi että voittivat koko sodan."
+say 2 "Note" "Meillä ei ole aavistustakaan missä Reaper on mennyt, [wait 0.3]mutta arvio jonnekin Itä metsässä."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Se on tehnyt sen luun haarniska ja lyömämiekka [wait 0.3]liian."

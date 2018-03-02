@@ -1,0 +1,13 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -119.616 -42.8558 31.0515 0
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle_glance.anm\""
+set_cam -115.831 -42.4033 30.1147 0 103.2 0 21.3239
+send_level_message "set_camera_dof 0 0 0 0.3 4 2"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -114.684 -40.4267 29.6433 1"
+set_cam -121.901 -42.7323 32.4343 8.94 -69.62 0 34.6028
+send_level_message "set_camera_dof 0.3 4 2 0 0 0"
+say 1 "Ghost" "Näyttää siltä, että olen taas..."

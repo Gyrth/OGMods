@@ -1,0 +1,18 @@
+#name "Note-Cicada"
+#participants 2
+set_character_pos 1 -40.0833 106.178 172.688 0
+send_character_message 1 "set_head_target -39.2955 106.554 172.737 1"
+set_cam -40.7468 106.734 173.762 0 -45.79 0 50.3116
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Vastausta oletettu kirjeeseen..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -39.2995 106.833 173.504 0 33.49 0 32.4243
+say 2 "Note" "Cicada? [wait 0.5]Todella? [wait 0.5]Lentää, [wait 0.3]Tässä Preuwyn? Näytän idiootilta?"
+say 2 "Note" "Tulit joitakin veto ystäviesi kanssa [wait 0.3]Kokeile ja mahdollistaa jopa kaikkein naurettava väite ja Katso, jos kaadun ja se?"
+say 2 "Note" "Tiedän kaksi asiaa Ouran Cicadas: [wait 0.3]Yhden, [wait 0.3]he eivät koskaan mene Preuwyn. [wait 0.5]Kylmä syö heidät hengissä. [wait 0.3]Kaksi, [wait 0.3]he ovat hyvin, [wait 0.3]hyvin harvoin ja noin kun se ei ole Kiima-aika."
+say 2 "Note" "Cicadas, [wait 0.3]Ouran mukaan [wait 0.3]vain kolo seitsemäntoista vuoden välein [wait 0.3]Kun sen paritteluaika on täysi vaikutus. 672 ei pariutumisen kauden vuosi- [wait 0.3]ei edes lähelle."
+say 2 "Note" "Ajatus, että olet nähnyt elossa Ouran Cicada ilman tärykalvot väsyttävä pitäisi antaa sinulle pois, [wait 0.3]Vaikka teidän tarina on totta."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Mennä ryöstää joku muu, [wait 0.3]hedelmä."

@@ -1,0 +1,5 @@
+#name "Unnamed"
+#participants 1
+set_character_pos 1 -3.48802 38.1222 122.307 -180
+send_character_message 1 "set_animation \"Data/Animations/r_rear_choke_struggle.anm\""
+say 1 "Name" "Kirjoita vuoropuhelua täällä."

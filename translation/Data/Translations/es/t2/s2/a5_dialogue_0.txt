@@ -1,0 +1,75 @@
+send_character_message 1 "set_animation \"Data\Animations\bijou_dead.anm\""
+send_character_message 1 "set_torso_target -159.225 -6.44505 152.086 1"
+set_character_pos 1 -159.154 -7.18318 152.261 -103
+send_character_message 1 "set_eye_dir -159.151 -7.06635 151.948 0"
+send_character_message 1 "set_head_target -159.053 -6.88095 151.647 1"
+set_cam -153.36 -7.45928 149.956 0 108.64 0 25.7292
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0.3 5 4 0 0 0"
+say 1 "Ghost" "..."
+set_cam -158.927 -6.12275 153.51 -43.79 6.7 0 25.7292
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+send_level_message "therium2_enable_object 1507"
+send_level_message "therium2_disable_object 1715"
+say 1 "Ghost" "..."
+send_character_message 1 "set_eye_dir -159.151 -7.06635 151.948 0.598627"
+send_character_message 1 "set_head_target -159.271 -7.06136 152.067 1"
+say 1 "Ghost" "[wait 0.3]¿Qué demonios pasó?"
+send_character_message 1 "set_torso_target -159.341 -6.41392 152.623 1"
+send_character_message 1 "set_head_target -159.452 -7.14527 152.602 1"
+set_cam -162.353 -6.79268 153.697 -10.49 -68.24 0 25.7292
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 1 "Ghost" "[wait 0.3]Recuerdo ahora. [wait 0.5]Esos gatos."
+send_character_message 1 "set_head_target -159.322 -7.25002 152.97 1"
+send_character_message 1 "set_torso_target -159.341 -6.41392 152.623 0"
+send_character_message 1 "set_animation \"Data\Animations\injuredfoot.anm\""
+say 1 "Ghost" "Oh, [wait 0.3]maldito."
+send_character_message 1 "set_head_target -159.318 -7.25183 152.971 1"
+send_character_message 1 "set_eye_dir -159.151 -7.06635 151.948 0.598648"
+set_cam -160.783 -7.20783 154.879 0.1 -34.23 0.07 21.5043
+say 1 "Ghost" "Dañaron mi pierna. [wait 0.5]Probablemente por lo que no puedo escapar."
+send_character_message 1 "set_animation \"Data\Animations\woundedsit2.anm\""
+send_character_message 1 "set_eye_dir -158.795 -7.06635 152.007 1"
+send_character_message 1 "set_head_target -158.366 -7.08661 153.152 1"
+say 1 "Ghost" "Definitivamente no puedo pelear como este."
+send_character_message 1 "set_head_target -152.902 -6.76608 148.343 1"
+set_character_pos 1 -159.154 -7.18318 152.261 31
+send_character_message 1 "set_animation \"Data\Animations\r_halfwoundedarmed2.anm\""
+set_cam -160.308 -6.43689 153.602 -3.14 -48.47 0.05 21.5043
+say 1 "Ghost" "...[wait 0.3]¿es Cobus?"
+set_cam -145.748 -5.75845 146.612 -28.2 28.46 -0.38 21.5043
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_eye_dir -147.452 -7.32659 143.727 1"
+send_character_message 1 "set_head_target -147.472 -7.20208 143.969 1"
+set_character_pos 1 -148.485 -7.00002 143.827 12
+set_cam -145.51 -7.17465 147.098 0 36.05 0 25.7292
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "..."
+set_cam -145.363 -7.11183 146.707 0 42.06 0 25.7292
+send_character_message 1 "set_head_target -147.472 -7.20208 143.969 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Ghost" "¿COBUS?"
+send_character_message 1 "set_head_target -147.472 -7.20208 143.969 1"
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+set_cam -145.404 -7.35402 144.879 2.54 66.05 0 25.7292
+send_level_message "set_camera_dof 0.3 1 1 0.3 5 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -147.472 -7.20208 143.969 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Ghost" "Están muertos."
+send_character_message 1 "set_head_target -147.642 -6.72525 143.738 1"
+set_cam -146.89 -6.45675 143.679 0 96.05 0 25.7292
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "Una pesada espada de la herida..."
+send_character_message 1 "set_eye_dir -147.566 -7.26144 143.974 0"
+send_character_message 1 "set_head_target -147.612 -6.72748 143.615 1"
+say 1 "Ghost" "¿Quién hizo esto?"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -147.566 -7.26144 143.974 1"
+send_character_message 1 "set_head_target -147.137 -6.56309 144.076 1"
+say 1 "Ghost" "La sangre todavía está fresca..."
+send_level_message "therium2_disable_object 1507"

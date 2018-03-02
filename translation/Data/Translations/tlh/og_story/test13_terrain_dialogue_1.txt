@@ -1,0 +1,8 @@
+#name "Start"
+#participants 1
+send_character_message 1 "set_eye_dir 113.537 26.7872 102.284 1"
+send_character_message 1 "set_torso_target 113.271 27.011 103.383 0.0917286"
+send_character_message 1 "set_head_target 123.053 40.383 95.362 1"
+set_cam 111.96 26.8061 104.822 20.32 -37.52 6.08 90
+set_character_pos 1 112.219 26.337 103.71 56
+say 1 "Turnaer" "legh rur vay' toS Da'elDI'."

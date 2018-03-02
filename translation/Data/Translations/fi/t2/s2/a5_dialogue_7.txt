@@ -1,0 +1,23 @@
+#name "Note-Cache"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -18.9745 -8.56669 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target -19.3971 -8.84294 155.245 1"
+set_cam -17.5156 -8.54594 155.832 0 78.14 0 48.294
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Note on märkä kaikista sade [wait 0.3]mutta uskon, että voin tehdä ulos sanoja."
+set_cam -19.9914 -8.35759 155.085 0 -121.86 0 41.4636
+set_character_pos 1 -18.9745 -8.51633 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+say 2 "Note" "Tiedät kuka se on. [wait 0.5]Jos tämä on vääriin käsiin [wait 0.3]Minä tiedän. [wait 0.5]Joten askel takaisin, ennen kuin ajatella, tämä on hyvä varastaa."
+say 2 "Note" "Joko niin, [wait 0.3]D, [wait 0.3]Tämä on minun viimeinen lahja. [wait 0.5]Sanoit minulle uudestaan katkaista kaikki siteet jälkeen mitä olet tehnyt, [wait 0.3]ja olen ollut töissä paskat antaa tämän tapahtua."
+say 2 "Note" "Se tuntui kaikki oli menossa kaipaamaan sinua, [wait 0.3]mutta olin varmasti puhua järkeä niihin. [wait 0.5]Voit paremmin ymmärtää, että."
+say 2 "Note" "Ja koska emme voi puhua liikaa henkilökohtaisesti, [wait 0.3]En ole kertoa teille, [wait 0.3]mutta ehdotan et sama-- [wait 0.3]katkaista kaikki siteet [wait 0.3]Tarkoitan."
+say 2 "Note" "C ei tule sinulle anteeksi tahansa pian kaikki otit häneltä, [wait 0.3]ja määrä nukkuminen yrtit voi muuttaa sitä."
+say 2 "Note" "Hän on älykkäämpi kuin hän antaa siitä, [wait 0.3]eikä se ole liian taitava ja ei poimia siitä."
+say 2 "Note" "Ja kerran F löytää sydämesi lyhytfilmi varjostaa [wait 0.3]Hän ei aio olla kanssa iloinen [wait 0.3]joko."
+say 2 "Note" "Jos teet sen koskaan Ouran, [wait 0.3]Toivotan teille onnea. [wait 0.5]Kukaan ei voi löytää sinua siellä. [wait 0.5]Ei edes minua."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "Allekirjoitettu, [wait 0.3]T."

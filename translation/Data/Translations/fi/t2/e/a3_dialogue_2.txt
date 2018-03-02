@@ -1,0 +1,95 @@
+#name "Jairo"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_torso_target 112.009 405.825 225.177 1"
+send_character_message 2 "set_head_target 110.922 406.012 211.481 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_torso_target 110.731 405.08 210.652 1"
+send_character_message 1 "set_head_target 111.847 406.229 223.35 1"
+set_character_pos 2 112.026 405.642 226.14 90
+set_character_pos 1 110.816 405.177 209.717 -90
+set_cam 111.357 405.81 211.874 0 11.35 0 24.0011
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Amos" "Jairo? [wait 0.5]Mitä teet täällä?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 111.695 405.846 228.237 0 -1.35 0 17.5409
+say 2 "Jairo" "Puhut heille. [wait 0.5]Salaliitosta. [wait 0.5]Suunnittelu."
+send_character_message 2 "set_torso_target 112.009 405.171 225.177 1"
+say 2 "Jairo" "Mitä mieltä olet tekemässä? [wait 0.5]Oletko unohtanut, oli tehtävä?"
+send_character_message 1 "set_head_target 111.878 405.671 225.148 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Amos" "Minulla on tärkeämpää tekemistä."
+send_character_message 2 "set_head_target 110.914 405.303 210.653 1"
+send_character_message 2 "set_torso_target 112.009 405.646 225.177 1"
+set_cam 110.842 406.285 224.04 0 -149.66 0 17.5409
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Jairo" "Luuletko, että voit tallentaa isäsi?"
+send_character_message 1 "set_torso_target 110.731 405.569 210.652 1"
+send_character_message 1 "set_head_target 111.878 406.327 225.148 1"
+set_cam 109.365 405.821 211.105 0 -49.32 0 17.5409
+say 1 "Amos" "Osaan. [wait 0.5]Ja minä."
+send_character_message 2 "set_torso_target 112.009 406.174 225.177 1"
+set_cam 110.349 405.524 207.984 0 -172.24 0 17.5409
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "Luuletko todella, että voit jopa päästä istutus ensimmäinen paikka?"
+send_character_message 1 "set_torso_target 110.763 404.678 210.509 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Amos" "Vaikka en voi, [wait 0.3]Minulla on varmuuskopio."
+send_character_message 2 "set_head_target 110.814 405.991 209.896 1"
+send_character_message 2 "set_torso_target 112.009 406.504 225.177 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "Ja uskotteko todella, että isäsi on elossa?"
+send_character_message 1 "set_torso_target 110.867 405.366 210.507 1"
+send_character_message 1 "set_head_target 112.058 406.457 225.215 1"
+set_cam 112.364 405.848 210.509 0 66.92 0 17.5409
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 1 "Amos" "...[wait 0.3]Kyllä [wait 0.3]Kyllä vain."
+set_cam 113.094 406.299 224.031 0 151 0 17.5409
+say 2 "Jairo" "Sinulla ei edes Hoikentaen selviytymismahdollisuudet! [wait 0.5]Katsella niitä touting taaksepäin, mahdollisuus [wait 0.3]kun ne eivät edes ole työvoimaa väijyä sinua!"
+send_character_message 2 "set_torso_target 112.009 406.504 225.177 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 2 "Jairo" "Mikä saa sinut uskomaan heitä? [wait 0.5]Mistä tiedät, he vain tehdä se?"
+send_character_message 2 "set_head_target 110.849 405.624 209.943 1"
+send_character_message 2 "set_torso_target 112.009 406.504 225.177 1"
+say 2 "Jairo" "Tiedämme varmasti, Erno hävittää kasa sisua mätää oja jossakin Therium."
+send_character_message 2 "set_torso_target 112.119 405.678 224.972 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Jairo" "Hänen luunsa on purkanut entisen älykkään lajin edustajaan [wait 0.3]tuskin ajatellen: [wait 0.3]vain palvelevat. [wait 0.5]He ovat jopa kuolleet punaista verellään vielä lämmin."
+send_character_message 2 "set_torso_target 112.117 405.323 225.231 1"
+send_character_message 2 "set_head_target 111.004 406.853 210.06 1"
+say 2 "Jairo" "Niitä käytettiin tehdä tylsää, [wait 0.3]Kolhittu miekka."
+send_character_message 1 "set_torso_target 110.689 405.091 210.433 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 112.437 406.463 227.733 -2.99 9.51 0 17.5409
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Amos" "..."
+send_character_message 2 "set_head_target 110.88 405.764 209.986 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Jairo" "Te tiedätte, se on totta. [wait 0.5]Miksi me olla [wait 0.3]Ghost?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_torso_target 112.117 405.543 225.231 1"
+say 2 "Jairo" "Ja miksi Cinderbreathe kertoa teille kaikki näin Arkaluontoisen tiedon?"
+set_cam 111.256 406.253 224.593 2.84 -152.26 0.93 20.0706
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Jairo" "Se on vain manipuloida sinua. [wait 0.5]Jotta voit seurata kuiskaukset valheita ja salaliitto."
+send_character_message 2 "set_torso_target 112.117 405.705 225.231 1"
+send_character_message 2 "set_head_target 110.947 407.115 210.272 1"
+say 2 "Jairo" "[wait 0.3]Mutta me tarjoamme sinulle valinnanvaraa."
+send_character_message 2 "set_head_target 110.364 405.875 210.362 1"
+say 2 "Jairo" "Voit seurata meitä, [wait 0.3]ja Cinderbreathe salaliitto..."
+send_character_message 2 "set_head_target 110.844 405.176 210.437 1"
+set_character_pos 2 112.026 405.596 226.14 90
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 2 "Jairo" "Tai pidä ole hieman sätkynukke."
+set_cam 110.293 405.796 207.675 0.4 -170.41 0.85 20.0706
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "Mitä sinä valitset? [wait 0.5]Cinderbreathe, [wait 0.5]tai meille?"
+send_character_message 1 "set_head_target 109.497 405.555 213.48 1"
+set_cam 110.734 405.828 211.865 -0.51 1.75 -0.79 20.0706
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Amos" "..."

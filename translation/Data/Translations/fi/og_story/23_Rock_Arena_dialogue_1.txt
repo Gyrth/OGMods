@@ -1,0 +1,28 @@
+#name "End"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 4 0.1"
+send_character_message 2 "set_animation \"Data/Animations/c_actionidle.anm\""
+send_character_message 2 "set_head_target 69.0602 108.742 -60.1116 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_torso_target 63.4041 104.159 -61.4939 1"
+send_character_message 1 "set_head_target 63.5765 104.392 -61.6466 1"
+set_character_pos 2 69.8165 107.87 -60.9075 -170
+set_character_pos 1 61.6861 101.9 -61.4057 0
+set_cam 60.8714 101.987 -61.884 18.71 -105.87 -8.59 48.8705
+send_level_message "music_layer_override -2"
+send_level_message "crowd_override 0"
+say 1 "Turner" "On, että kaikki sinulla, Jade?"
+send_level_message "set_camera_dof 0.3 6 1 0 0 0"
+send_character_message 2 "set_head_target 64.5396 104.208 -61.0304 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_level_message "crowd_override 0.5 0"
+say 2 "Jade" "Kyllä, itse asiassa. Ennen kuin tapan sinut itselleni."
+send_character_message 2 "set_torso_target 68.5787 108.787 -60.6594 1"
+send_character_message 2 "set_head_target 64.294 110.491 -58.8078 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_level_message "crowd_override"
+say 2 "Jade" "Se on kaikki aurinko festivaali, Kaikki! Tule katsomaan minua lähettää Lucky ensi viikonloppuna yhdessä undefeated huippuyritysten."
+send_character_message 2 "set_head_target 68.2086 108.837 -62.305 1"
+send_character_message 2 "set_torso_target 68.7405 108.799 -61.2083 1"
+say 2 "Jade" "Amethystin Puutarha on yksi kaupungin hienoimmista, ja tilaa on rajoitetusti, joten panna sinun arpalippu aikainen!"
+send_global_message "levelwin"

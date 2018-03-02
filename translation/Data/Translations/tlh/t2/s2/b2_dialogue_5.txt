@@ -1,0 +1,17 @@
+#name "Note-JairoP"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -144.354 -1.06943 -5.76928 -45
+send_character_message 1 "set_head_target -143.885 -1.06865 -5.26964 1"
+set_cam -143.174 -0.724854 -7.6918 0 156.77 0 37.9039
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "note. [wait 0.5]torn. [wait 0.3]SuD [wait 0.1]'ej Sov 'Iv chay' qan."
+set_character_pos 1 -144.354 -1.1058 -5.76928 -45
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -143.462 -0.509361 -4.71028 0 37.66 0 37.9039
+say 2 "Note" "Hoch Vas jaj. [wait 0.3]DaH. [wait 0.5]qaSpu' rurbogh Daq wa'DIch 'e' horrify. [wait 0.3]'ach Se' beyond wagh'e'."
+say 2 "Note" "Hoch terrify. [wait 0.3]vISov. [wait 0.5]Hegh ngejtaH Suq SeH 'oH nIS Qu' whoever maHvaD."
+say 2 "Note" "neH naDmo' Hoch vIghel sightings qaStaHvIS ngem vI'Iprup paranoid Vas Hoch jaj."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "[chIm outpost 'e' safer. ghaHDaq law' BERNARDO- [wait 0.5]Men vay'. [wait 0.5]qorDu' lu' neH SoHchoH."

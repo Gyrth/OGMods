@@ -1,0 +1,47 @@
+#name "Deny"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target 108.498 405.754 197.2 1"
+send_character_message 1 "set_torso_target 108.984 405.496 195.905 1"
+send_character_message 1 "set_head_target 110.732 406.399 211.211 1"
+set_character_pos 2 112.026 405.54 226.14 90
+set_character_pos 1 108.422 405.415 196.355 73
+set_cam 108.452 405.88 198.507 0 -4.75 0 21.4412
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Amos" "chay'pen 'e' SupHomwIj.. [wait 0.3]jairo."
+send_character_message 1 "set_torso_target 109.009 405.47 196.099 1"
+send_character_message 1 "set_head_target 110.991 405.337 217.566 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_cam 108.556 405.961 194.483 0 -178 0 16.7595
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "seriously? [wait 0.5]qatlh chaw' SoH …?"
+send_character_message 2 "set_torso_target 112.18 405.503 225.22 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_head_target 110.991 406.337 217.566 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Amos" "vabDot cinderbreathe, shouldn't vIvoq [wait 0.3]vabDot qup vaj qavoq. [wait 0.5]nuq DaSov'a'?"
+send_character_message 2 "set_torso_target 112.18 405.709 225.22 1"
+send_character_message 1 "set_head_target 110.991 405.176 217.566 1"
+say 1 "Amos" "ram. [wait 0.3]Qaw' qotlh arlissian Collective."
+send_character_message 2 "set_head_target 108.51 405.089 197.061 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam 113.461 406.349 225.128 0 120.46 0 16.7595
+say 2 "Jairo" "luq."
+send_character_message 2 "set_head_target 108.568 407.255 196.925 1"
+say 2 "Jairo" "'a [wait 0.3]amos-"
+send_character_message 2 "set_torso_target 112.119 405.336 225.538 1"
+send_character_message 2 "set_head_target 109.837 405.277 197.262 1"
+say 2 "Jairo" "chenmoH Ha' je chaH. [wait 0.5]neH ruch SoH vaj therium colonize reH jatlhqa' not 'e' lunID jatlh chaH."
+send_character_message 2 "set_torso_target 112.178 405.78 225.461 1"
+say 2 "Jairo" "vaj ghewmey SoH. [wait 0.3]bIHegh maH. [wait 0.3]be'nI' je."
+set_cam 111.523 405.609 182.442 0 169.16 0 16.7595
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Amos" "maj. [wait 0.5]chaHvaD jatlh jIH."
+send_character_message 1 "set_head_target 111.446 405.86 188.948 1"
+send_character_message 1 "set_torso_target 108.877 405.47 195.673 1"
+say 1 "Amos" "..."
+send_global_message "levelwin ea4"

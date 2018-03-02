@@ -1,0 +1,17 @@
+#name "FL-B"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 1.69459 -52.472 320.836 159
+send_character_message 1 "set_eye_dir 0.367709 -51.7384 320.332 1"
+send_character_message 1 "set_head_target 0.484181 -51.2071 320.315 1"
+set_cam 2.33808 -52.0977 322.528 0 28.07 0 71.5609
+send_level_message "set_camera_dof 0 0 0 0.3 4 1.5"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 0.484181 -51.2071 320.315 0"
+set_character_pos 1 1.69458 -52.6843 320.836 159
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Tiempo para ver a dónde me llevará este camino."
+send_global_message "levelwin b"

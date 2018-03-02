@@ -1,0 +1,21 @@
+#name "Note-Spirits"
+#participants 2
+set_character_pos 1 -24.2959 420.679 -120.573 85
+send_character_message 1 "set_head_target -24.2018 421.01 -121.37 1"
+set_cam -25.6283 421.221 -119.993 0 -56.31 0 46.8474
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "'op 'avwI' QIn [wait 0.3]Sov 'Iv."
+set_cam -23.4018 421.168 -118.903 0 12.27 0 46.8474
+send_character_message 1 "set_head_target -24.2656 420.958 -121.095 1"
+set_character_pos 1 -24.2959 420.633 -120.573 85
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "jIH qI' up for construction division Qagh. [wait 0.5]vISov. [wait 0.3]muja' ghaH. [wait 0.3]'ach naDev anyway."
+say 2 "Note" "Drowned Streets scouting rIn vItlhap. [wait 0.5]HIja' [wait 0.3]be [wait 0.3]Suq DuQ 'ej moq pong mIw Ha' wanHa' whatever random."
+say 2 "Note" "'ach qaSlaH je Qub 'e' Hoch reH Sov je 'a Hegh QI'yaH Ha' ghewmey vIghoSnIS. [wait 0.3]qa' nuvpu' Hegh."
+say 2 "Note" "wa' bit wej lach jIH. [wait 0.5]neH taQ Hoch DaneH'a' laH jatlh SoHvaD [wait 0.3]'ach lugh jIH vISov."
+say 2 "Note" "Hoch folklore 'ej wIch. [wait 0.3]legend 'ej tale. [wait 0.3]'ach mu' ghItlh. [wait 0.3]bortaS maHvaD Hoch DuQwI' nIH, 'ej maH vo' chaH crete ghaj vISIQlaHbe'bogh therium."
+say 2 "Note" "wa' jaj Sun je Hop. [wait 0.3]'ej Hegh ghaH maHvaD through the use of unpredictable scheme loQ bastards SIS ghaj mangghom luchenmoH."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "jIHvaD laH pong SoH petaQ. [wait 0.5]'ach qaStaHvIS lut. [wait 0.3]reH tlhe' wIch teH. [wait 0.3]'ej bech naysayers. [wait 0.5]wej 'oH lurIHbogh. [wait 0.3]nuq yInmaj 'ach lut tlhaQ?"

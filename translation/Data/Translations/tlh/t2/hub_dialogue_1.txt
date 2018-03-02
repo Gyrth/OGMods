@@ -1,0 +1,10 @@
+#name "ToA"
+#participants 2
+set_character_pos 1 -114.544 118.295 -102.12 0
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+set_cam -115.136 117.919 -101.091 45.25 -49.52 -0.63 64.7752
+set_dialogue_color 0 0 0.52 0.95
+set_dialogue_voice 0 8
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 1 "Ghost" "hopefully wIv lugh ghotvam'e'."
+send_global_message "levelwin a"

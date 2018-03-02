@@ -1,0 +1,9 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 -21.891 44.5523 25.9469 0
+set_cam -21.569 43.4806 31.9262 -4.02 -9.51 4.89 90
+say 1 "Turner" "vIyaj!"
+send_global_message "levelwin"
+
+

@@ -1,0 +1,14 @@
+#name "Door"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 2.48719 -5.85101 132.981 -90
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_cam 3.67839 -5.30068 130.127 0 163.96 0 45.6011
+say 1 "Ghost" "Iloinen, että on ohi..."
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+say 1 "Ghost" "On aika päästä pois täältä."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 1.69287 -5.28524 148.988 -90
+set_cam -0.861888 -4.06741 150.088 0 -152.65 0 75.0137
+say 1 "Ghost" "..."

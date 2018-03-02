@@ -1,0 +1,45 @@
+#name "Turner"
+#participants 3
+set_character_pos 1 -338.558 -8.40492 1.81653 43
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+set_character_pos 3 -322.38 -4.36976 -13.732 103
+send_character_message 3 "set_eye_dir -322.935 -3.03906 -15.7199 1"
+send_character_message 3 "set_torso_target -322.752 -3.37217 -16.7197 1"
+send_character_message 3 "set_head_target -323.005 -3.06487 -16.405 1"
+set_character_pos 2 -323.173 -4.30175 -15.8524 -43
+send_character_message 2 "set_eye_dir -322.425 -3.09195 -14.1528 1"
+send_character_message 2 "set_torso_target -322.255 -3.62594 -13.5513 1"
+send_character_message 2 "set_head_target -322.472 -2.65238 -13.7167 1"
+set_cam -323.24 -4.12546 -12.9885 9.08 -12.65 0 52.2126
+say 2 "Shadow" "naDev maHvaD qar nIS Alpha Hung 'e' DaHar'a'? [wait 0.3]against rabbits?"
+set_character_pos 2 -323.173 -4.30175 -15.8524 -43
+send_character_message 2 "set_head_target -322.472 -2.65238 -13.7167 1"
+send_character_message 2 "set_torso_target -321.477 -3.6261 -13.4483 1"
+send_character_message 3 "set_torso_target -323.218 -3.37217 -16.8184 1"
+send_character_message 3 "set_head_target -323.448 -3.0158 -15.7631 1"
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam -324.251 -4.0989 -16.0218 11.74 -126.85 -8.46 52.2126
+say 3 "Snow" "maHvaD pol Seng jIchegh neH neH ghaH. [wait 0.2]chaq 'op megh catch poStaHvIS DaSovbe' 'oH."
+set_character_pos 2 -323.173 -4.30175 -15.8524 -43
+send_character_message 3 "set_torso_target -322.112 -3.37217 -15.0394 0.981645"
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 3 "set_head_target -323.448 -3.0158 -15.7631 1"
+send_character_message 2 "set_torso_target -322.294 -3.30331 -13.2217 1"
+send_character_message 2 "set_head_target -322.819 -3.45582 -14.4043 1"
+send_character_message 2 "set_animation \"Data\Animations\r_combatidlewild.anm\""
+set_cam -323.24 -4.12546 -12.9885 9.08 -12.65 0 52.2126
+say 2 "Shadow" "'oH vItultaH mojpu' chon jatlhqa'. [wait 0.2]wav'eghchugh vo' mo' Sop."
+set_character_pos 2 -323.173 -4.30175 -15.8524 -43
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_torso_target -321.422 -3.30331 -15.1435 0.999943"
+send_character_message 3 "set_torso_target -323.33 -3.37217 -14.9759 1"
+send_character_message 3 "set_head_target -323.683 -2.29818 -14.557 1"
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -324.251 -4.0989 -16.0218 11.74 -126.85 -8.46 52.2126
+say 3 "Snow" "vaj largh? [wait 0.3]wa' DaSum ghaHlaw'."
+send_character_message 3 "set_torso_target -322.384 -3.37217 -15.2224 1"
+send_character_message 3 "set_head_target -322.679 -2.97936 -15.4958 1"
+send_character_message 2 "set_torso_target -321.422 -3.30331 -15.1435 0"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_jeer.anm\""
+set_cam -323.24 -4.12546 -12.9885 9.08 -12.65 0 52.2126
+say 2 "Shadow" "Ha'."

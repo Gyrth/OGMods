@@ -1,0 +1,81 @@
+send_character_message 1 "set_animation \"Data\Animations\r_halfwoundedarmedcrouch.anm\""
+send_character_message 1 "set_torso_target 209.799 16.8885 -170.725 0"
+set_character_pos 2 218.082 16.7414 -185.039 -114
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_eye_dir 217.809 17.5215 -184.466 0.999823"
+send_character_message 2 "set_torso_target 217.587 17.6722 -184.007 1"
+send_character_message 2 "set_head_target 219.206 17.0828 -186.49 0"
+set_character_pos 1 214.731 16.7325 -180.042 66
+send_character_message 1 "set_eye_dir 210.274 17.4797 -170.583 1"
+send_character_message 1 "set_head_target 210.951 17.2232 -171.392 2.6226e-006"
+set_cam 216.683 16.4153 -184.137 21.3 -65.78 -2.11 86.4701
+#name "Raider Hangout"
+#participants 2
+say 2 "Aspen" "Missä ovat sentries? Mikseivät ne työpaikallaan?"
+send_character_message 1 "set_eye_dir 218.188 17.6475 -185.154 1"
+send_character_message 1 "set_head_target 215.104 17.3899 -180.701 1"
+set_character_pos 1 214.745 16.7325 -180.036 66
+send_character_message 1 "set_animation \"Data\Animations\r_halfwoundedarmed.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_cam 217.118 17.081 -187.162 1.8 -173.43 0.12 76.2877
+say 2 "Aspen" "Ah."
+send_character_message 1 "set_head_target 217.888 17.4794 -184.895 1"
+set_character_pos 1 215.648 16.7325 -181.082 66
+send_character_message 2 "set_torso_target 217.755 16.8538 -184.286 1"
+send_character_message 2 "set_head_target 217.527 16.9104 -183.606 1"
+send_character_message 2 "set_eye_dir 218.229 17.5725 -184.71 2.66731e-005"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+set_cam 213.502 17.5163 -178.811 -0.54 -38.96 0.96 12.3471
+say 2 "Aspen" "Tiesin olisi lähettää lisää sinut alas."
+send_character_message 2 "set_head_target 216.716 17.4868 -182.313 1"
+set_character_pos 1 216.63 16.7325 -182.149 66
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlethreat.anm\""
+send_character_message 1 "set_head_target 218.104 16.9763 -184.996 1"
+set_cam 218.311 17.6692 -186.858 -5.23 167.52 0.77 24.647
+say 1 "Turner" "Tapoit perheeni. Kaikki ystäväni."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_torso_target 217.576 16.5936 -184.065 1"
+send_character_message 2 "set_eye_dir 216.452 16.2728 -184.725 0.601728"
+send_character_message 2 "set_head_target 216.787 16.7573 -184.315 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_cam 213.502 17.5163 -178.811 -0.54 -38.96 0.96 12.3471
+say 2 "Aspen" "Oletan, että tein."
+send_character_message 2 "set_torso_target 217.336 16.3565 -183.839 1"
+send_character_message 2 "set_eye_dir 217.769 17.2924 -184.06 1"
+set_cam 217.795 17.2837 -184.354 5.91 -25.3 -0.06 110.453
+send_character_message 2 "set_head_target 216.693 17.4488 -182.271 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_cam 213.502 17.5163 -178.811 -0.54 -38.96 0.96 12.3471
+say 2 "Aspen" "Etsitkö anteeksi?"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_head_target 217.994 17.5164 -184.943 1"
+send_character_message 1 "set_eye_dir 217.707 17.6287 -184.685 0.773473"
+send_character_message 1 "set_torso_target 216.827 17.5691 -185.535 0"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam 218.311 17.6692 -186.858 -5.23 167.52 0.77 24.647
+say 1 "Turner" "Syy. Miksi?"
+send_character_message 2 "set_eye_dir 217.589 17.5371 -184.102 1"
+send_character_message 2 "set_head_target 217.915 17.592 -184.703 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam 213.502 17.5163 -178.811 -0.54 -38.96 0.96 12.3471
+say 2 "Aspen" "Rahaa, tietenkin. Joilla ei enää ole jakaa."
+send_character_message 1 "set_eye_dir 217.999 17.5739 -185.328 1"
+send_character_message 1 "set_head_target 218.086 17.1895 -184.812 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 218.311 17.6692 -186.858 -5.23 167.52 0.77 24.647
+say 1 "Turner" "Kuka maksaa?"
+send_character_message 2 "set_torso_target 217.283 16.7463 -183.923 1"
+send_character_message 2 "set_eye_dir 217.661 17.8227 -185.587 1"
+send_character_message 2 "set_head_target 217.177 17.742 -184.639 1"
+set_cam 213.502 17.5163 -178.811 -0.54 -38.96 0.96 12.3471
+say 2 "Aspen" "Willow. Ei se asioita."
+set_character_pos 2 218.082 16.4508 -185.039 -114
+set_character_pos 1 209.85 16.3617 -169.692 65
+set_cam 217.521 17.1745 -183.646 2.79 -21.31 0.02 55.6669
+send_character_message 2 "set_torso_target 217.113 17.0969 -183.066 0.155168"
+send_character_message 2 "set_eye_dir 217.436 17.1326 -183.567 0.453213"
+send_character_message 2 "set_head_target 217.507 16.3943 -183.161 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Aspen" "Let's get tämän ajan kanssa."
+send_level_message "make_all_aware"

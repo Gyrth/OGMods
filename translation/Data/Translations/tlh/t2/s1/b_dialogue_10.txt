@@ -1,0 +1,18 @@
+#name "Note-Scout"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 86.6623 -62.7353 303.059 170
+send_character_message 1 "set_head_target 85.9736 -62.3514 302.724 1"
+set_cam 87.3575 -62.1744 302.299 0 118.82 0 65.8249
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "HIjmeH vo' cinderbreathe scout notes."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 85.9205 -62.1048 303.616 0 -32.08 0 65.8249
+say 2 "Note" "mID tlhe' mo' vaj Huj. [wait 0.3]latlh Sar tInqu' ghaj neH terrain puS naQ mojmeH next to maH."
+say 2 "Note" "ngem [wait 0.3]Deb [wait 0.3]HuD [wait 0.3]tundra. [wait 0.5]Hoch 'ach swamp vIleghpu'. [wait 0.5]'oH doesn't Hot natural. [wait 0.3]'ach ghIq jatlhqa'. [wait 0.3]vangbe'choH vIHbe'wI' naDev."
+say 2 "Note" "host lanterns Huj nagh ghaj Hoch chaH Dapon 'e' yI HuD Ha' maH across motlh. [wait 0.5]pagh QaH 'ach Hot rur legh jIH."
+say 2 "Note" "maH neH wochbogh Deb lugh. [wait 0.5]chenmoH no' pIgh QaQ landmarks. [wait 0.3]'a va vaj chaH aren't dusty."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "neH Qong pong Dochmeyvetlh. [wait 0.3]sand wiping Ha' Ha' vIghaj. [wait 0.5]jIchegh nowhere Sum je qab law' ouran. [wait 0.3]pagh."

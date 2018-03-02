@@ -1,0 +1,16 @@
+#name "Turner"
+#participants 2
+set_character_pos 2 -218.414 -3.00507 -343.514 34
+set_character_pos 1 -228.378 10.2686 -322.752 42
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_head_target -226.046 9.7935 -324.298 1"
+set_cam -229.279 12.5582 -319.778 -30.38 -20.78 2.28 18.0837
+say 1 "Turner" "Rose... [wait 0.2]Huhtikuuta... [wait 0.2]Apila... [wait 0.2]Skipper..."
+set_character_pos 2 -218.414 -3.00507 -343.514 -152
+set_cam -217.391 -2.56849 -344.882 -3.13 135.07 0.48 41.7701
+say 1 "Turner" "Tämän raider veitsi ei palata."
+send_character_message 1 "set_head_target -227.74 10.7444 -322.75 1"
+set_character_pos 1 -228.177 10.552 -321.415 90
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -227.264 11.0571 -322.624 6.37 132.55 -5.78 65.7988
+say 1 "Turner" "Mutta se voisi auttaa jopa Pisteet."

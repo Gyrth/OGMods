@@ -1,0 +1,17 @@
+#name "NLG-A"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 0 8
+set_character_pos 1 109.943 -62.1826 -17.6867 94
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir 109.614 -61.3113 -19.2829 1"
+send_character_message 1 "set_head_target 109.733 -60.3373 -19.2477 1"
+set_cam 112.62 -61.6037 -12.9599 0 26.08 0 58.1154
+send_level_message "set_camera_dof 0 0 0 0.3 10 10"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+send_character_message 1 "set_head_target 109.733 -60.3373 -19.2477 0.00105596"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Missä Jairo vie minua tässä...?"
+send_global_message "levelwin a"

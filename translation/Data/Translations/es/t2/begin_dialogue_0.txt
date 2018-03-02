@@ -1,0 +1,87 @@
+#name "Jairo"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 98.9241 -47.1562 215.213 -30
+set_character_pos 1 105.934 -47.7648 217.291 -81
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+send_character_message 1 "set_eye_dir 107.993 -47.9631 229.256 1"
+send_character_message 1 "set_torso_target 105.924 -47.4779 218.399 0"
+send_character_message 1 "set_head_target 109.468 -47.7314 238.076 1"
+set_cam 105.425 -47.0153 215.189 0 -168.55 0 26.7279
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "You" "Hey... ¿Qué es eso allá?"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_head_target 103.59 -46.2257 222.088 1"
+say 2 "???" "Parece un santuario, ¿no?"
+send_character_message 2 "set_head_target 105.522 -47.6472 216.803 1"
+send_character_message 2 "set_eye_dir 102.277 -47.3015 217.482 0"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 101.085 -46.5282 215.229 0 93.03 0 23.0558
+send_character_message 1 "set_eye_dir 99.0012 -46.7564 215.361 1"
+send_character_message 1 "set_head_target 100.613 -46.9047 215.701 1"
+set_character_pos 1 105.934 -47.7648 217.291 166
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "Oh-- [wait 0.5]¿otro guardia?"
+send_character_message 2 "set_head_target 105.265 -46.8536 216.982 1"
+send_character_message 2 "set_eye_dir 105.288 -47.0281 217.196 1"
+say 2 "???" "No; [wait 0.5]me llamo Jairo."
+send_character_message 2 "set_head_target 105.963 -46.5754 217.389 1"
+say 2 "Jairo" "Eres [wait 0.5]perdido [wait 0.2]así que voy a tener que guiarlo."
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 93.1002 -46.8529 216.628 0 -84.59 0 23.0558
+send_level_message "set_camera_dof 0.3 8 2 0 0 0"
+say 1 "You" "Cerrar. [wait 0.3]Acabo aquí."
+send_character_message 2 "set_head_target 105.963 -47.5089 217.389 1"
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+say 2 "Jairo" "No tienes un mapa. [wait 0.3]No hay sentido de dirección."
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 2 "Jairo" "Por eso estoy aquí. [wait 0.2]Para guiarlo."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+set_cam 104.762 -47.0201 218.273 0 -42.09 0 25.8888
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "Seguro, [wait 0.2]pero ahora mismo..."
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 104.762 -47.0201 218.273 0 -42.09 0 25.8888
+send_character_message 1 "set_head_target 100.613 -46.5252 215.701 1"
+say 1 "You" "No tengo ninguna otra opción que ser independiente."
+set_cam 99.5775 -46.8522 216.709 0 26.65 0 16.7478
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.1"
+say 1 "You" "Realmente...[wait 0.5] ¿fue usted el que...?"
+say 2 "Jairo" "No sé cómo has encontrado tu camino en aquí..."
+set_cam 100.059 -46.3715 214.994 0 107.01 0 25.2755
+say 2 "Jairo" "Si usted no puede incluso recordar cómo llegó aquí,"
+send_character_message 2 "set_head_target 105.963 -46.6632 217.389 1"
+say 2 "Jairo" "¿Cómo se navega el Therium?"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam 107.868 -47.0956 217.186 0 85.3 0 25.2755
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "¿Therium? [wait 0.25]¿Qué demonios es eso?"
+set_cam 99.6833 -46.4694 216.114 0 36.98 0 31.0737
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 1.5 0.1"
+say 2 "Jairo" "Es complicado [wait 0.3]pero algunos lo llaman el 'cementerio de los dioses'."
+set_cam 99.6634 -46.4566 215.886 0 48.36 0 31.0737
+send_character_message 2 "set_head_target 105.841 -47.2641 217.552 1"
+say 2 "Jairo" "Mira, aquí está la cosa..."
+set_character_pos 1 105.934 -47.7648 217.291 -92
+set_cam 99.6215 -46.4693 215.88 0 46.34 0 31.0737
+send_character_message 1 "set_head_target 100.643 -46.532 215.747 1"
+send_character_message 1 "set_eye_dir 99.0011 -46.7564 215.361 1"
+send_character_message 1 "set_torso_target 105.924 -47.4779 218.399 0.0541244"
+send_character_message 2 "set_eye_dir 105.288 -47.0281 217.196 0.000392422"
+send_character_message 2 "set_head_target 105.792 -47.5168 217.392 1"
+say 2 "Jairo" "Si quieres salir de aquí vivo..."
+set_cam 105.367 -47.1159 216.467 0 -163.33 0 61.4158
+send_character_message 1 "set_eye_dir 108.735 -47.715 234.138 1"
+send_character_message 1 "set_torso_target 105.114 -47.2621 219.269 1"
+send_character_message 1 "set_head_target 104.917 -47.4089 222.285 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_head_target 105.792 -47.2923 217.392 1"
+send_character_message 2 "set_eye_dir 105.288 -47.0281 217.196 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "Tendrás que seguir los santuarios marcados 'A'."
+send_character_message 1 "set_head_target 107.448 -47.226 221.841 1"
+say 2 "Jairo" "Una vez que suba a él, usted sabrá qué hacer."

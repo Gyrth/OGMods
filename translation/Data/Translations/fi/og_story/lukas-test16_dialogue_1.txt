@@ -1,0 +1,11 @@
+#name "Win"
+#participants 2
+
+set_character_pos 2 -11.2058 -2.05846 -1.95012 -112
+set_character_pos 1 -11.2379 -1.96458 -0.311718 116
+set_cam -12.9249 -1.77116 -1.51304 0 -102.19 0 90
+say 1 "Turner" "Tapoimme heidät kaikki!"
+say 2 "Rat" "Katsotaanpa Jatkakaa."
+send_global_message "levelwin"
+
+

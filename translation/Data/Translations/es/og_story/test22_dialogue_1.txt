@@ -1,0 +1,9 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 5.55225 -1.73035 14.5507 -157
+set_cam 7.03874 -1.08045 15.6379 0 80.8 0 90
+say 1 "Turner" "He matado a todas estas ratas."
+say 1 "Turner" "El esclavista de rata HQ está cercano."
+send_global_message "levelwin"
+

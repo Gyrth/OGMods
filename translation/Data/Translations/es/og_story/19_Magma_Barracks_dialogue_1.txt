@@ -1,0 +1,19 @@
+#name "Guard"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_character_message 2 "set_torso_target -8.57182 -13.4515 6.38987 0.0255266"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target -11.9646 -12.7657 7.79768 1"
+send_character_message 1 "set_head_target -7.8151 -13.0003 7.41537 1"
+set_character_pos 2 -7.74054 -13.9994 6.92131 165
+set_character_pos 1 -9.42582 -14.1789 7.27731 -1
+set_cam -10.3204 -13.135 5.54606 -11 -130.34 2.04 63.1515
+say 2 "Stonewall" "Vamos, perezoso furballs."
+send_character_message 2 "set_torso_target -8.57182 -13.4515 6.38987 0.0255266"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target -12.0897 -13.8622 7.89688 1"
+say 2 "Stonewall" "Vamos a ver cómo los novatos."
+send_character_message 1 "set_head_target -7.36647 -13.0003 8.33994 1"
+send_character_message 2 "set_head_target -8.82768 -12.9765 9.45017 1"
+send_character_message 2 "set_torso_target -8.78317 -13.4515 7.07717 1"
+say 2 "Stonewall" "Usted sabe el taladro, salir de esa puerta."

@@ -1,0 +1,24 @@
+#name "Win"
+#participants 2
+set_character_pos 2 397.176 -1.99877 19.7161 109
+set_character_pos 1 396.687 -2.22842 18.8396 -62
+set_cam 397.168 -1.43508 18.4408 0 161.5 0 90
+say 1 "Turner" "chal."
+say 1 "Turner" "lugh?"
+say 2 "Sky" "chol SoH vo' Sanctuary?"
+say 2 "Sky" "jIH Suq luj."
+say 1 "Turner" "turner."
+say 1 "Turner" "yap DaH."
+say 1 "Turner" "SoHvaD toD jIH."
+say 2 "Sky" "DaH Hegh ghaH, blowdarts, tar Qong bIquv 'op lo' chaH."
+say 2 "Sky" "chay' maHvaD wIQaw'chu'."
+say 2 "Sky" "nuqDaq supply pol chaH vIlegh"
+say 2 "Sky" "vIjaH Qaw' 'ach."
+say 2 "Sky" "vaj sleepy."
+say 1 "Turner" "Qorgh jIH 'oH."
+say 1 "Turner" "'ej vaj tlhap jISaH."
+say 1 "Turner" "jIHvaD qawmoH SoH april."
+say 2 "Sky" "'Iv?"
+say 1 "Turner" "yIqelQo'."
+say 1 "Turner" "QaD HItlhej."
+send_global_message "levelwin"

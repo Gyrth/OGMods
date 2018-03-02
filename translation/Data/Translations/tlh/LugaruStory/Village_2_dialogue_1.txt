@@ -1,0 +1,49 @@
+#name "Clover"
+#participants 2
+send_character_message 2 "set_eye_dir 142.892 -55.7028 297.679 1"
+send_character_message 2 "set_head_target 143.667 -55.3234 297.217 0"
+set_character_pos 2 144.425 -55.3307 296.824 163
+set_character_pos 1 142.774 -55.918 296.59 -13
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_eye_dir 144.47 -54.8175 296.911 1"
+send_character_message 1 "set_torso_target 142.242 -53.7721 293.506 0"
+send_character_message 1 "set_head_target 142.269 -53.6923 293.49 0"
+set_cam 140.541 -55.0448 294.751 0.93 -121.84 0.6 21.0956
+say 2 "Clover" "nuq 'oH Hoch wab?"
+send_character_message 2 "set_head_target 143.667 -55.3234 297.217 0"
+send_character_message 2 "set_eye_dir 142.892 -55.7028 297.679 1"
+set_character_pos 2 144.425 -55.3307 296.824 163
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 146.55 -54.9938 296.239 -0.28 100.9 -1.07 21.0956
+say 1 "Turner" "jIHvaD Sup jInov 'ach ghaH DeS jIH. [wait 0.2]DaH DoH nej jup."
+send_character_message 2 "set_head_target 143.667 -55.3234 297.217 0"
+send_character_message 2 "set_eye_dir 142.892 -55.7028 297.679 1"
+set_character_pos 2 144.425 -55.3307 296.824 163
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_facepalm.anm\""
+set_cam 140.541 -55.0448 294.751 0.93 -121.84 0.6 21.0956
+say 2 "Clover" "'oHbe' qIt."
+send_character_message 2 "set_head_target 143.667 -55.3234 297.217 0"
+send_character_message 2 "set_eye_dir 142.892 -55.7028 297.679 1"
+set_character_pos 2 144.425 -55.3307 296.824 163
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 146.55 -54.9938 296.239 -0.28 100.9 -1.07 21.0956
+say 1 "Turner" "nuq vIghel SoH?"
+send_character_message 2 "set_head_target 143.667 -55.3234 297.217 0"
+send_character_message 2 "set_eye_dir 142.892 -55.7028 297.679 1"
+set_character_pos 2 144.425 -55.3307 296.824 163
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_worriedpose_2.anm\""
+set_cam 140.541 -55.0448 294.751 0.93 -121.84 0.6 21.0956
+say 2 "Clover" "ghaH chay' turner tagh, 'oH! [wait 0.2]nightmare. [wait 0.2]vIchel qabna'Daj 'oH lu'."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target 143.667 -55.3234 297.217 0"
+send_character_message 2 "set_eye_dir 142.892 -55.7028 297.679 1"
+set_character_pos 2 144.425 -55.3307 296.824 163
+set_cam 146.55 -54.9938 296.239 -0.28 100.9 -1.07 21.0956
+say 1 "Turner" "Clover, tInwI' jottaHchugh vay'. [wait 0.2]'oH wasn't real."
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_eye_dir 143.29 -55.5673 297.772 0"
+send_character_message 2 "set_head_target 143.933 -55.3234 296.626 1"
+set_character_pos 2 144.425 -55.8344 296.824 163
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_worriedpose_2.anm\""
+set_cam 140.541 -55.0448 294.751 0.93 -121.84 0.6 21.0956
+say 2 "Clover" "'oH wasn't real. [wait 0.2]'oH wasn't real. [wait 0.2]bIlugh. [wait 0.2]neH leSpalDaj yachtaHvIS."

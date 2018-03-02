@@ -1,0 +1,33 @@
+#name "Obey"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_head_target 111.932 406.424 222.772 1"
+send_character_message 1 "set_torso_target 111.713 406.054 223.555 1"
+send_character_message 1 "set_head_target 111.968 406.429 225.418 1"
+set_character_pos 2 111.952 405.641 226.094 90
+set_cam 111.179 406.229 220.792 0 -163.7 0 34.2955
+set_character_pos 1 111.922 405.668 222.51 -90
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Amos" "alright. [wait 0.3]jairo. [wait 0.5]'oH yIvang."
+send_character_message 1 "set_head_target 111.948 406.674 225.516 1"
+send_character_message 1 "set_torso_target 111.713 405.835 223.555 1"
+say 1 "Amos" "nuqDaq jIHvaD vay' DaneH?"
+send_character_message 2 "set_head_target 111.993 406.087 222.798 1"
+send_character_message 1 "set_head_target 111.928 406.388 225.712 1"
+send_character_message 1 "set_torso_target 111.713 405.459 223.469 1"
+set_cam 112.512 406.228 227.587 0 14.65 0 34.2955
+say 2 "Jairo" "'ach not naQ lutDaj empry. [wait 0.5]bomb reH Daghaj. [wait 0.3]SoHvaD ghewmey?"
+send_character_message 2 "set_head_target 111.993 406.754 222.798 1"
+say 2 "Jairo" "Dubotchugh tu' SoH Hergh yap. [wait 0.5]chaq nIS. [wait 0.3]SoHvaD Dev jIH."
+set_cam 112.996 406.385 225.664 0 107.53 0 23.4866
+send_character_message 2 "set_head_target 111.825 406.309 222.758 1"
+say 2 "Jairo" "lugh decision SoH chenmoH. [wait 0.5]yIDo'."
+send_character_message 1 "set_torso_target 110.068 405.459 222.46 1"
+send_character_message 1 "set_head_target 111.048 406.388 221.277 1"
+set_cam 112.313 406.374 223.903 0 12.8 0 23.4866
+say 1 "Amos" "..."
+send_global_message "levelwin ea4b"

@@ -1,0 +1,28 @@
+#name "Midnight"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_character_message 2 "set_head_target -15.2655 -14.3207 10.9431 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target -14.5083 -14.1223 12.1959 1"
+set_character_pos 2 -14.5457 -15.0289 12.2639 151
+set_character_pos 1 -15.1791 -15.1211 10.9262 -87
+set_cam -17.3916 -14.3655 11.9153 -7.67 -80.66 -0.55 56.9043
+say 1 "Turner" "¿Qué haces aquí, gato? ¿Si eres un guardia, no debería usted estar armado?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 2 "set_head_target -15.3486 -14.6032 11.7475 1"
+say 2 "Midnight" "Yo también estoy preso aquí. Amatista me sorprendió pasar secretos a los conejos de la luna."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "¿Por qué haces eso?"
+send_character_message 1 "set_torso_target -15.4614 -14.6526 11.8725 0.00235122"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target -15.2517 -14.2104 10.9738 1"
+say 2 "Midnight" "La esclavitud es incorrecta. Créalo o no, la mayoría de los gatos se oponía a la esclavitud--amatista funciona la única casa que aún utiliza mano de obra esclava."
+send_character_message 1 "set_torso_target -15.4614 -13.5369 11.8725 1"
+say 1 "Turner" "Son opuestos a él, pero sólo dejar que suceda?"
+send_character_message 1 "set_torso_target -15.4614 -13.5369 11.8725 0.932266"
+send_character_message 2 "set_head_target -14.5886 -14.2104 10.7184 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Midnight" "Amatista es demasiado rico y poderoso, con muchos amigos, para que cualquiera pueda detenerla. Pero sólo no podía sentarse y hacer nada."
+send_character_message 1 "set_torso_target -15.4614 -13.5369 11.8725 0.0216638"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "Creo que usted y yo podríamos conseguir adelante."

@@ -1,0 +1,11 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 24.8858 -2.13181 48.6887 -64
+set_cam 26.7726 -1.38838 47.1979 0 158.14 0 90
+say 1 "Turner" "I-kirjain voitto!"
+send_global_message "levelwin"
+
+
+
+

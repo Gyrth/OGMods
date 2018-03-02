@@ -1,0 +1,21 @@
+#name "Note-Arliss"
+#participants 2
+set_character_pos 1 171.07 -48.8527 157.516 90
+send_character_message 1 "set_head_target 171.186 -48.4564 156.943 1"
+set_cam 172.131 -48.3915 157.726 0 61.86 0 56.5533
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "Ghost" "Kirjan Arlissian kollektiivinen..."
+send_character_message 1 "set_head_target 171.01 -48.4564 156.883 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 171.563 -48.2698 156.333 0 152.82 0 56.5533
+say 2 "Note" "Preuwyn eteläisen mesas kissat ovat joskus väärässä olla mitään muuta kuin viholliset; [wait 0.3]mutta älä mene lankaan.
+say 2 "Note" "Jokin katti, sidoksissa Arliss on pakko huijata, [wait 0.3]hyödynnettävä ja pettää niin kauan kuin se on heidän etujaan."
+say 2 "Note" "Jäsenten Arlissian kollektiivinen ovat jopa tiedetään houkutella viattomia sarjat wilds, [wait 0.3]ehkä ne ja tallentaa ne myöhemmin Servicen Arliss maan sisällä."
+say 2 "Note" "Sieltä [wait 0.3]tukahduttamiseksi, voittaa ja kidutuksen twisted versio nostaa, lapsemme [wait 0.3]jalostukseen entinen Cinderbreathe kanit tulla henkilöstön kissat."
+say 2 "Note" "Rationaalisen ajattelun palanut nämä kaniini [wait 0.3]vain kiinni ottaminen todellisuuden tarjota ravintoa uuden yliherruuteen."
+say 2 "Note" "Mutta riippumatta, [wait 0.3]kanit tiedämme aina lopettamaan tällaista kidutusta; [wait 0.3]väärinkäyttö, aivan alusta [wait 0.3]Tiedämme itse, ryöstää [wait 0.3]hinnalla hyvänsä. [wait 0.5]Jokainen pakki varastettu [wait 0.3]uuden nostaa nyrkin vastaan pahat diktaattorit."
+say 2 "Note" "Arvostella minun puhe [wait 0.3]”Kaicalk” (kuten niitä kutsutaan kielellä) on ensimmäinen askel tuhoamaan Arlissian kollektiivinen ja vallata Cinderbreathe loistokkaan muinaisen Imperiumin määräävää asemaa Preuwyn."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "... inspiroiva."

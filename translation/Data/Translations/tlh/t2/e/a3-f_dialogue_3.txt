@@ -1,0 +1,144 @@
+#name "Ano"
+#participants 4
+set_character_pos 3 113.303 405.582 179.578 -34
+send_character_message 3 "set_animation \"Data/Animations/r_bigswordarmstance.anm\""
+send_character_message 3 "set_torso_target 113.793 406.097 176.754 0"
+send_character_message 3 "set_head_target 114.516 406.284 180.384 1"
+set_character_pos 2 114.626 405.549 180.748 -21
+send_character_message 2 "set_animation \"Data/Animations/leanovertable.anm\""
+send_character_message 2 "set_head_target 115.177 406.137 179.844 1"
+set_character_pos 1 114.407 405.573 178.862 -78
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_torso_target 114.799 405.782 180.265 0"
+send_character_message 1 "set_head_target 114.714 406.126 180.258 1"
+set_cam 112.853 406.13 176.715 0 -156.73 0 39.8669
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.9 0.9 0
+set_dialogue_voice 2 7
+set_dialogue_voice 3 5
+say 2 "???" "ghaH 'ej Duvan. [wait 0.5]chol ghaH 'Iq resistance?"
+send_character_message 2 "set_head_target 115.193 405.969 180.934 1"
+set_cam 116.082 406.101 180.836 0 77.11 0 39.8669
+say 3 "????" "Qo' [wait 0.3]qaH. [wait 0.5]wej ghorgh ghaH DorwI' maH."
+send_character_message 2 "set_head_target 115.184 406.087 180.926 1"
+send_character_message 3 "set_head_target 114.672 405.852 179.795 1"
+say 3 "????" "neH lel ghaH therium bIghHa' 'avwI' wa' Hoch. [wait 0.3]'ej."
+send_character_message 3 "set_head_target 114.812 406.261 180.724 1"
+send_character_message 2 "set_head_target 115.285 406.12 180.94 1"
+say 3 "????" "...[wait 0.3]toH [wait 0.3]for lack of Dunmo' mu'mey, [wait 0.3]ghoS wItI'nISmo' QongDaq."
+send_character_message 3 "set_head_target 114.735 406.125 180.549 1"
+send_character_message 2 "set_head_target 115.259 406.133 180.767 1"
+say 2 "???" "...[wait 0.3]nuq?"
+send_character_message 2 "set_head_target 115.168 406.186 180.592 1"
+set_cam 115.56 406.205 181.884 0 32.72 0 33.115
+say 1 "You" "bImon 'op 'etlhvI'lIj Suq ghaj. [wait 0.3]qaH."
+send_character_message 2 "set_head_target 114.889 405.904 181.451 1"
+say 2 "???" "...[wait 0.3]nowhere neH teywI' qar'a' bIquv maw'."
+set_character_pos 2 114.626 405.549 180.748 -21
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_head_target 114.944 406.173 180.17 1"
+say 2 "???" "toH [wait 0.3]Qo'noS pegh'egh vo' 'e'. [wait 0.3]jIH lIH vIleghjaj. [wait 0.3]'ej qatlh naDev Dara'."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam 113.814 406.219 180.024 0 -31.67 0 33.115
+send_character_message 1 "set_head_target 114.588 406.261 180.528 1"
+send_character_message 2 "set_head_target 114.439 406.345 179.097 1"
+set_character_pos 2 114.626 405.549 180.748 93
+say 1 "You" "guy 'Iv jIH DorwI' naDev. [wait 0.3]nIH?"
+send_character_message 2 "set_torso_target 114.601 405.727 180.277 1"
+set_cam 114.095 406.271 179.418 -4.07 -149.79 0 33.115
+say 2 "???" "vaj lugh. [wait 0.5]empry ra'wI' ano jatlh."
+send_character_message 2 "set_torso_target 114.601 405.727 180.277 0"
+say 2 "Ano" "qIj ngaQHa'moHwI'mey yu'lu'meH chaq naDqu'bogh SoH. [wait 0.5]majQa' meq, bortaS tu'lu'."
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+set_cam 113.223 406.126 183.029 -0.08 -23.37 0.11 23.7211
+say 2 "Ano" "naDev bolaDbe''a' maH Qu'. [wait 0.5]boQoy."
+send_character_message 1 "set_head_target 114.394 406.292 180.548 1"
+send_character_message 2 "set_head_target 113.985 406.037 179.258 1"
+say 2 "Ano" "Ha' je mer [wait 0.3]'a..."
+send_character_message 2 "set_head_target 114.461 405.978 178.968 1"
+set_cam 114.918 406.301 179.441 0.09 163.13 -0.1 19.6493
+say 2 "Ano" "[wait 0.3]vavlI'vaD reH alive."
+send_character_message 1 "set_head_target 114.626 406.3 180.509 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+set_cam 114.983 406.243 180.795 -0.13 17.02 0.03 19.6493
+say 1 "You" "...[wait 0.3]edsel? [wait 0.5]ghaH 'oHbe' seriously Heghpu'?"
+set_cam 114.368 406.261 180.902 0.18 0.92 0.39 16.3454
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "You" "nuqDaq? [wait 0.5]qaS nuq ghaH? [wait 0.5]yIjatlh vIleghjaj!"
+send_character_message 2 "set_torso_target 114.601 405.727 180.277 1"
+send_character_message 2 "set_head_target 114.461 406.155 178.968 1"
+set_cam 113.371 406.268 176.955 -0.02 -157.25 -0.43 16.3454
+say 2 "Ano" "neH tup loS 'ej laH QIj jIH."
+send_character_message 2 "set_head_target 114.461 406.323 178.968 1"
+send_character_message 2 "set_torso_target 114.601 405.727 180.277 0"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+say 2 "Ano" "ghaH luj DIS. [wait 0.3]DaH. [wait 0.5]jIHvaD yIvoqQo' searching maH."
+send_character_message 2 "set_head_target 114.217 405.971 179.4 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+set_cam 115.323 406.201 177.906 -0.28 164.1 -0.32 16.3454
+say 2 "Ano" "asset Hoch QaQ je ghaH. [wait 0.3]wa' mang je talents."
+send_character_message 2 "set_head_target 114.69 406.169 179.085 1"
+say 2 "Ano" "[wait 0.3]vabDot wa' mIw pagh tu' ghaH."
+set_cam 116.169 406.253 179.571 -0.42 124.83 -0.07 16.3454
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target 114.452 406.223 179.115 1"
+say 2 "Ano" "Sam ghaH pa' arlissian Collective. [wait 0.3]qo'vaD tIvnIS toy'wI''a'."
+send_character_message 2 "set_head_target 114.452 406.352 179.115 1"
+send_character_message 2 "set_torso_target 114.682 405.727 180.201 1"
+say 2 "Ano" "qaStaHvIS tlhab ghoplIj wIghom wIneH. [wait 0.25]arlissian Collective Hegh je."
+send_character_message 1 "set_torso_target 114.913 405.563 180.039 1"
+send_character_message 1 "set_head_target 114.423 405.959 180.296 1"
+set_cam 113.802 406.176 183.119 0.26 -13.05 0.33 16.3454
+say 1 "You" "..."
+send_character_message 1 "set_torso_target 114.733 405.563 180.076 1"
+send_character_message 2 "set_torso_target 114.682 405.574 180.201 1"
+send_character_message 2 "set_head_target 114.452 406.022 179.115 1"
+send_character_message 1 "set_head_target 114.67 406.256 180.618 1"
+say 2 "Ano" "wej kidding jIH. [wait 0.3]ghaH alive naQ poH."
+send_character_message 1 "set_head_target 114.578 406.055 180.562 1"
+send_character_message 2 "set_head_target 114.439 406.276 179.192 1"
+send_character_message 2 "set_torso_target 114.682 405.574 180.201 0"
+say 2 "Ano" "location pinpointed wIghaj; [wait 0.3]So' arlissian Collective pol 'aqroS Hung toy'wI''a' Qeb."
+send_character_message 2 "set_torso_target 114.58 405.72 180.214 1"
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_head_target 114.372 406.118 179.127 1"
+set_cam 113.519 406.143 178.771 0.08 -143.82 -0.41 23.7104
+say 2 "Ano" "rabbits uncountable amounts. [wait 0.3]lubaghDI' tlhegh 'ej vay' ngoQ chavlaHbe' daily Ha'DIbaH."
+set_cam 113.472 406.167 179.619 0.21 -125.12 -0.36 28.5276
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 2 "set_torso_target 114.58 405.72 180.214 0"
+send_character_message 2 "set_head_target 114.445 406.413 179.109 1"
+say 2 "Ano" "infiltrate 'ej Qeb toy'wI''a' Qaw'. [wait 0.3]vaj not neH toD edsel. [wait 0.3]'ach crippled arlissian Collective."
+send_character_message 2 "set_head_target 114.341 406.258 179.127 1"
+say 2 "Ano" "originate tlhoS Hoch supplies 'ej workforce vo' chuStaHvIS toy'wI''a'."
+send_character_message 2 "set_head_target 114.451 406.174 179.121 1"
+set_character_pos 2 114.626 405.538 180.748 93
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 2 "Ano" "vIghro' DaSov- [wait 0.3]wa'logh qum weakness lulegh. [wait 0.3]surely Hu' 'ej ghewmey wa'."
+send_character_message 1 "set_torso_target 114.622 405.563 180.124 1"
+set_cam 115.068 406.236 180.308 0.04 19.8 0.42 28.5276
+say 1 "You" "[wait 0.3]vay' edsel tlhab 'ej QaD Suq yIvang. [wait 0.5]neH chay', muja'."
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 116.191 406.011 179.288 -0.38 139.96 -0.18 34.0963
+say 2 "Ano" "maj. [wait 0.5]glad wanI'vam Qo' wIghaj strongarm."
+send_character_message 2 "set_torso_target 114.58 405.72 180.214 1"
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+say 2 "Ano" "wIghaj ghot tu'lu'. mej wej sunrises ngejtaH tagh yot. [wait 0.5]SeQ Sojna' undergo 'ej nuH Hev. [wait 0.3]armour 'ej chach vaj nIS."
+send_character_message 2 "set_head_target 114.386 406.217 179.084 1"
+set_cam 113.018 406.135 180.675 0.38 -90.05 -0.18 34.0963
+send_character_message 2 "set_torso_target 114.554 405.829 180.204 1"
+say 2 "Ano" "jIQuch Davang. [wait 0.5]chay' lo'laH cinderbreathe Qu' bISovbe'chu'."
+send_character_message 1 "set_head_target 114.585 406.268 180.586 1"
+send_character_message 3 "set_head_target 114.735 406.125 180.549 1"
+send_character_message 1 "set_torso_target 114.622 405.563 180.124 0"
+set_cam 113.792 406.166 180.347 0.33 -25.92 0.26 34.0768
+say 1 "You" "ghaytan jatlh. [wait 0.3]vay' edsel toD yIvang."
+send_character_message 1 "set_torso_target 114.86 406.076 180.063 1"
+send_character_message 1 "set_head_target 115.157 405.937 180.341 1"
+say 1 "You" "[wait 0.3]ghorgh qaSchoH ghaH vIleghpu' vabDot vISovbe'."
+send_character_message 4 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+set_character_pos 4 108.116 405.39 195.089 60
+set_cam 116.126 406.416 162.404 -1.64 174.55 -0.36 10.4189
+say 2 "Ano" "Hu'tegh van Qu'. [wait 0.3]Hoch poH Daghajchugh HochDaq tlhejmeH yIjatlh."
+send_global_message "levelwin ea4f"

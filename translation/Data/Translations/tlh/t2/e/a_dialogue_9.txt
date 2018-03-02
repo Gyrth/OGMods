@@ -1,0 +1,12 @@
+#name "Enter"
+#participants 1
+set_character_pos 1 -68.7686 -7.88978 -8.8579 60
+send_character_message 1 "set_head_target -62.9785 -6.59435 -15.9594 1"
+set_cam -70.6649 -7.70546 -7.75538 0 -42.46 0 63.1345
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Ghost" "vaj Hoch Sumqu' ngaQHa'moHwI'mey vItu'."
+set_cam -78.9066 -0.803532 -33.4875 0 -1.89 0 39.1453
+say 1 "Ghost" "ghorgh 'oH 'e' vItu'. [wait 0.3]jImejbej vegh lojmIt waw' ghurqu' je legh."
+set_cam -79.4094 1.60353 -49.3608 13.31 -92.24 0 63.8489
+say 1 "Ghost" "legh vogh jen jatlh jairo."

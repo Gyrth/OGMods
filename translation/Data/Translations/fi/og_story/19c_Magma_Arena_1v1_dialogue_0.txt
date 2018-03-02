@@ -1,0 +1,9 @@
+#name "Win"
+#participants 1
+set_character_pos 1 18.7327 4.95933 3.52645 0
+set_cam 19.7529 5.264 4.81802 0 31.45 0 90
+say 1 "Turner" "Minulle."
+say 1 "Turner" "Mutta mitä minä voittaa?"
+say 1 "Turner" "Toinen päivä elämässä, toisessa kulhossa sose."
+say 1 "Turner" "Parempi kuolla lian."
+send_global_message "levelwin"

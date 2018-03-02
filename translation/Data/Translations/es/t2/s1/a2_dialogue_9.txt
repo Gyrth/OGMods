@@ -1,0 +1,21 @@
+#name "Note-Gunk"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 33.3471 -56.8061 96.374 150
+send_character_message 1 "set_head_target 32.4331 -56.4725 96.3747 1"
+set_cam 34.4648 -56.2468 95.6817 0 102.99 0 60.0752
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Algo de la Empry..."
+set_cam 32.7867 -56.3088 97.6211 0 2.2 0 60.0752
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Avistamientos han sido vistos de un agente de Cinderblood rogue que supuestamente ha sobrevivido a la guerra civil; [wait 0.3]Él se ha informado que dos marcas rojas en la mejilla izquierda, del deporte [wait 0.3]tiene un ojo ciego y al parecer posee una gran [wait 0.3]imponente estatura."
+say 2 "Note" "Informes han llegado en acciones de este hombre: [wait 0.3]Él ha matado a varios miembros de la fuerza de guardia de Cinderbreathe usando excesiva fuerza embotada trauma, [wait 0.3]y puede trabajar con otro terrorista dentro de los terrenos de la Colonia."
+say 2 "Note" "Incluido con este aviso, es una imagen dibujada de uno de los escribas."
+set_cam 33.4976 -55.802 96.1736 -43.47 77.84 -0.37 48.9009
+send_character_message 1 "set_head_target 32.6764 -56.5028 95.8768 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 32.4931 -56.5028 96.3496 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 34.6035 -56.2806 96.27 -0.03 77.59 -0.27 69.8071
+say 2 "Note" "Firmado, [wait 0.3]Ashfur comandante de la Cinderbreathe Empry."

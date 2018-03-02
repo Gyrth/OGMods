@@ -1,0 +1,18 @@
+#name "Note-Scribe"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 21.6836 -11.5197 -187.582 -30
+send_character_message 1 "set_head_target 22.4485 -11.2246 -187.157 1"
+set_cam 19.7725 -11.0949 -185.917 0 -60 0 37.0984
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 1 "Ghost" "Antiikin huomautus. [wait 0.5]Tämä on ollut puhetta, [wait 0.3]arvonalennus kirjurina."
+set_cam 22.6525 -10.854 -186.701 0 40.09 0 37.0984
+set_character_pos 1 21.6836 -11.4775 -187.582 -30
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Hyvät ihmiset, [wait 0.3]Me hankkia ei herkullinen ainoastaan pakenemaan."
+say 2 "Note" "Demoni on kuollut niin monet meistä, [wait 0.3]tuhosi kodeissa, [wait 0.3]palanut tarvikkeita maahan!"
+say 2 "Note" "Jumalten fury on lähes niellyt. [wait 0.3]mitä vaihtoehtoja meillä on vain voit paeta"
+say 2 "Note" "Seuraa meitä, [wait 0.3]Neuvonantajat kultainen tie- [wait 0.3]kohti Altrith luolissa."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Sieltä [wait 0.3]ei voi mutta hengissä Hiiden hyökkäykset ja odottaa Jumalan fury."

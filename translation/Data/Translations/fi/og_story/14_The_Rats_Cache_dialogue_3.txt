@@ -1,0 +1,27 @@
+#name "Eavesdrop"
+#participants 3
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target 59.5122 20.5887 -58.5931 1"
+set_character_pos 1 73.1306 22.6166 -46.0001 121
+set_character_pos 3 59.5778 20.2218 -58.614 15
+set_character_pos 2 60.3833 20.1315 -57.6698 109
+set_dialogue_color 2 0.6 0.8 0.2
+set_dialogue_voice 2 9
+set_cam 62.5623 20.7157 -59.3192 -21.28 108.61 2.24 90
+say 2 "Cypress" "Toivon, että ne sidottu tuota säkki turvallisesti. Me olla pulassa Jos sade puhaltaa pois."
+send_character_message 3 "set_head_target 60.0884 20.8838 -59.471 1"
+say 3 "Gale" "Kyllä, tai saa iski salama."
+send_character_message 2 "set_torso_target 60.4842 20.2741 -58.6678 1"
+send_character_message 2 "set_head_target 60.9563 20.9491 -58.5104 1"
+say 2 "Cypress" "Ainakin meidän ei tarvitse huolehtia joku kiivetä siellä tällä säällä."
+send_character_message 3 "set_head_target 60.5802 20.7753 -57.9296 1"
+say 3 "Gale" "Mistä salama tulevat joka tapauksessa? Taistelee Lilli Khyo?"
+send_character_message 2 "set_torso_target 60.4842 20.2741 -58.6678 0"
+send_character_message 2 "set_head_target 59.803 20.0797 -58.2729 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 2 "Cypress" "..."
+set_character_pos 3 59.6024 20.2218 -58.6133 -1
+set_character_pos 2 60.3833 20.1309 -57.6698 134
+send_character_message 2 "set_animation \"Data/Animations/r_talking_offset.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_talking.anm\""

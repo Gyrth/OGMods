@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+set_character_pos 2 168.127 89.4273 -7.00947 -174
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 165.336 90.1489 -5.70006 0 -49.24 0 90
+say 2 "Rabbit" "¡Nunca he visto alguien lucha contra un lobo solo antes!"
+say 1 "Turner" "Están cubiertos sólo de perros, realmente."
+say 2 "Rabbit" "¿Matan perros, también?
+say 1 "Turner" "Te voy a matar quien intenta herir o esclavizarnos.
+say 2 "Rabbit" "Soy el sol.
+say 2 "Sun" "Mis amigos están luchando contra los esclavistas, también."
+say 2 "Sun" "Estábamos en nuestro camino para asaltar una fortaleza cercana cuando una jauría de perros capturados algunos de nosotros."
+say 2 "Sun" "Si quieres unirte a nuestra causa..."
+say 1 "Turner" "¿Mantienen esclavos en esta fortaleza?"
+say 1 "Turner" "Sólo Muéstrame el camino."
+send_global_message "levelwin"

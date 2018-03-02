@@ -1,0 +1,9 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 6.26163 -1.91226 15.578 0
+set_cam 6.61051 -1.18347 15.8192 0 40.24 0 90
+say 1 "Turner" "Apuesto a que puedo seguir sus huellas a su campamento."
+send_global_message "levelwin"
+
+

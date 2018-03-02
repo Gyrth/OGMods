@@ -1,0 +1,17 @@
+#name "Note-JairoP"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -144.354 -1.06943 -5.76928 -45
+send_character_message 1 "set_head_target -143.885 -1.06865 -5.26964 1"
+set_cam -143.174 -0.724854 -7.6918 0 156.77 0 37.9039
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Es una nota. [wait 0.5]Rasgado, [wait 0.3]amarillo [wait 0.1]y quién sabe cuántos años."
+set_character_pos 1 -144.354 -1.1058 -5.76928 -45
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -143.462 -0.509361 -4.71028 0 37.66 0 37.9039
+say 2 "Note" "Cada día, [wait 0.3]ahora. [wait 0.5]Era horrible pensar que pasaría en primer lugar, [wait 0.3]pero esta frecuencia está más allá de la coincidencia."
+say 2 "Note" "Todo el mundo está aterrorizado. [wait 0.3]Sé que soy. [wait 0.5]Quien está haciendo esto para nosotros tiene que morir antes de que se fuera de control."
+say 2 "Note" "Toda la charla sobre avistamientos hacia fuera en el bosque sólo nos hace más paranoico todos los días."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "La avanzada del desierto parece ser más seguro- [wait 0.5]como si nada. [wait 0.5]Solo espero que mi familia va a estar bien."

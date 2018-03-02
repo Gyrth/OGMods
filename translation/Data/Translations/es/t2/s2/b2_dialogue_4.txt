@@ -1,0 +1,17 @@
+#name "Note-Caravans"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -151.713 -6.4528 -34.5783 59
+send_character_message 1 "set_head_target -151.26 -6.36841 -35.2712 1"
+set_cam -153.652 -6.17921 -34.6382 0 -84.14 0 54.8223
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Una nota antigua. [wait 0.3]Quién sabe cuánto tiempo ha sido aquí."
+set_cam -150.981 -5.83489 -35.1783 0 119.88 0 54.8223
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Nuestras caravanas han sido asediados todos los días [wait 0.3]nuestros desierto puestos han estado muriendo de hambre como resultado."
+say 2 "Note" "Los asesores no pueden soportar [wait 0.3]y tampoco nos va; [wait 0.3]pero ¿qué exactamente nos está golpeando?"
+say 2 "Note" "Los lobos, [wait 0.3]Aunque feroz, [wait 0.3]son inteligentes; [wait 0.3]nos permiten sobrevivir en su propio beneficio."
+say 2 "Note" "Este atacante no muestra piedad. [wait 0.5]Sangre y tripas de las mercancías destruidas, la ducha [wait 0.3]agua y alimentos."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Fueren, [wait 0.3]Prefiero a lobos."

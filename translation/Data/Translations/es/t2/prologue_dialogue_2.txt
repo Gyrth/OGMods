@@ -1,0 +1,11 @@
+#name "ML-Gate"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 37.668 436.284 -36.9124 -90
+send_character_message 1 "set_head_target 37.7808 436.805 -35.5372 1"
+set_cam 39.2798 436.668 -42.3481 0 166.01 0 46.3331
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+say 1 "Ghost" "Esperemos que nadie fuera de oírlo. [wait 0.5]Tiempo para salir de aquí."
+send_global_message "levelwin a"

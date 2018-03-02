@@ -1,0 +1,6 @@
+#name "PlacesBoat"
+#participants 2
+set_character_pos 2 -32.5095 -2.2727 5.44874 -121
+send_character_message 2 "set_animation \"Data/Animations/r_talking_offset.anm\""
+set_character_pos 1 -33.6267 -2.27242 5.71163 4
+send_character_message 1 "set_animation \"Data/Animations/r_talking.anm\""

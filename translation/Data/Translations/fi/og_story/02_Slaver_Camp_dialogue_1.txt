@@ -1,0 +1,80 @@
+#name "Villagers"
+#participants 6
+set_dialogue_color 5 1 0.5 0.5
+set_dialogue_voice 5 8
+send_character_message 3 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_1.anm\""
+send_character_message 5 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 5 "set_head_target -63.4794 -22.1337 -8.04891 0"
+send_character_message 3 "set_torso_target -70.0277 -24.9836 8.07041 0"
+send_character_message 3 "set_head_target -70.0041 -24.8876 7.79702 0"
+send_character_message 1 "set_animation \"Data\Animations\r_crouchtreethreat.anm\""
+send_character_message 5 "set_torso_target -67.2326 -24.0347 -2.43203 0"
+send_character_message 4 "set_torso_target -64.4974 -23.2076 -6.21841 1"
+send_character_message 4 "set_head_target -65.0417 -23.2156 -6.07981 1"
+send_character_message 6 "set_torso_target -66.3648 -23.0785 -3.25648 0"
+send_character_message 6 "set_head_target -66.1611 -23.6872 -4.52646 1"
+send_character_message 4 "set_animation \"Data\Animations\r_dialogue_thoughtful.anm\""
+send_character_message 6 "set_animation \"Data\Animations\r_dialogue_kneelfist.anm\""
+set_character_pos 6 -66.7939 -23.2894 -4.59517 -14
+set_character_pos 5 -67.2407 -23.3439 -2.93461 -120
+set_character_pos 4 -64.5381 -22.9434 -5.45095 133
+set_character_pos 3 -70.4779 -24.1941 0.950692 66
+set_character_pos 2 -69.783 -24.1395 2.09414 67
+set_character_pos 1 -57.4002 -20.6583 -13.8593 -135
+set_cam -56.2424 -20.0083 -14.2663 -20.2 129.27 -1.98 45
+send_level_message "set_camera_dof 0.3 12 10 0 0 0"
+send_level_message "music_layer_override 3"
+say 5 "Feral" "Ketään muuta haluavat kokeilla jotain?"
+set_cam -70.3749 -23.6052 -0.526101 0 -171.91 0 63.1771
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_character_message 3 "set_torso_target -70.5643 -23.6483 -0.595762 0.96346"
+send_character_message 3 "set_head_target -67.4271 -22.7784 -2.68197 1"
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_point.anm\""
+set_character_pos 3 -70.4779 -24.1941 0.950692 57
+say 3 "Sky" "Sinun koskaan ottaa meidät elossa. Tehkää pahin."
+set_cam -70.3749 -23.6052 -0.5261 0 -171.91 0 63.1771
+send_character_message 6 "set_head_target -66.1611 -23.6872 -4.52647 1"
+send_character_message 5 "set_torso_target -67.2325 -24.0346 -2.432 0"
+send_character_message 3 "set_head_target -66.7725 -21.9636 -2.52886 1"
+send_character_message 5 "set_head_target -68.5491 -22.9628 -1.49842 1"
+send_character_message 3 "set_torso_target -69.8452 -24.0778 0.0999955 1"
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 3 "set_head_target -66.7435 -21.9683 -2.50909 1"
+send_character_message 2 "set_head_target -69.3554 -24.3166 8.37831 0"
+send_character_message 4 "set_head_target -65.0419 -23.2156 -6.07976 1"
+send_character_message 4 "set_torso_target -64.5299 -23.1925 -6.20857 1"
+send_character_message 6 "set_torso_target -65.9218 -23.6197 -4.07073 1"
+set_character_pos 6 -66.7936 -23.2894 -4.59511 -14
+send_character_message 5 "set_head_target -68.5491 -22.9628 -1.49842 1"
+send_character_message 6 "set_head_target -66.5584 -23.243 -3.53609 1"
+set_cam -68.4862 -22.9724 -2.45315 0 -56.95 0 63.1771
+send_level_message "set_camera_dof 0 0 0 0.3 5 2"
+say 5 "Feral" "Niin mielellään kuolla? Vain anna periksi."
+set_character_pos 6 -66.9501 -23.2894 -4.63412 -14
+send_character_message 4 "set_head_target -65.333 -22.9544 -4.53524 1"
+send_character_message 4 "set_torso_target -65.4814 -22.9749 -5.53518 1"
+send_character_message 6 "set_head_target -67.2163 -23.243 -3.4396 1"
+send_character_message 6 "set_torso_target -66.4152 -23.6197 -3.57893 1"
+send_character_message 6 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 5 "set_torso_target -68.1915 -23.412 -2.4796 1"
+send_character_message 5 "set_head_target -68.439 -23.371 -1.89012 1"
+send_character_message 5 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+say 5 "Feral" "Olet alakynteen."
+set_character_pos 4 -64.5381 -22.9434 -5.45095 92
+send_character_message 4 "set_head_target -64.2097 -22.6193 -7.20569 1"
+send_character_message 4 "set_torso_target -64.5333 -22.6576 -6.57521 1"
+send_character_message 4 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 6 "set_torso_target -65.0685 -23.6197 -3.20261 1"
+send_character_message 6 "set_head_target -64.7178 -22.1053 -6.36942 1"
+send_character_message 5 "set_torso_target -67.7044 -23.412 -1.99932 1"
+send_character_message 5 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_head_target -67.9911 -23.0746 -0.893309 1"
+send_character_message 3 "set_head_target -68.1338 -23.3259 -1.58573 1"
+send_character_message 5 "set_head_target -66.2417 -23.4862 -0.195522 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -55.7871 -19.815 -14.0446 -18.93 117.22 0 77.471
+say 1 "Turner" "Ei aivan."
+make_participants_aware
+send_level_message "music_layer_override 4"

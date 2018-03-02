@@ -1,0 +1,9 @@
+#name "Win"
+#participants 2
+
+set_character_pos 1 2.61182 -1.96718 2.22745 -48
+set_cam 2.97331 -2.26239 3.89314 23.71 0 0 90
+say 2 "Cat" "ba', wa' toblu'pa'."
+say 2 "Cat" "lughoS barracks DaH."
+send_global_message "levelwin"
+

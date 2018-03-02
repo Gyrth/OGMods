@@ -1,0 +1,141 @@
+#name "Turner"
+#participants 5
+set_character_pos 5 93.2408 28.5981 61.9876 153
+send_character_message 5 "set_animation \"Data\Animations\r_spearstance.anm\""
+send_character_message 5 "set_head_target 89.867 27.9783 62.7759 1"
+set_character_pos 4 93.615 25.4055 63.3919 -166
+send_character_message 4 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+set_character_pos 3 82.7242 30.9491 53.9547 -43
+send_character_message 3 "set_animation \"Data\Animations\r_spearstance.anm\""
+send_character_message 3 "set_head_target 87.1763 26.4636 60.3983 1"
+set_character_pos 2 87.508 25.5633 60.9276 23
+send_character_message 2 "set_eye_dir 89.4362 26.1515 60.8029 1"
+send_character_message 2 "set_torso_target 89.6386 25.3854 60.7971 1"
+send_character_message 2 "set_head_target 89.1155 26.2023 60.8217 1"
+set_character_pos 1 89.0568 25.372 60.683 -158
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_eye_dir 87.1664 26.8139 60.9691 1"
+send_character_message 1 "set_head_target 87.7009 26.8153 61.0752 1"
+set_cam 87.6935 26.2761 73.4049 0 -7.18 0 60.0071
+say 1 "King" "En voi antaa teille kaikki tällä kertaa. [wait 0.2]Minulla on kilpailevia tarjouksia. [wait 0.2]Kissat ovat palanneet."
+send_character_message 2 "set_animation \"Data\Animations\r_combatidlewild.anm\""
+set_cam 89.8802 25.888 61.4417 6.99 67.2 0.63 60.0071
+say 2 "Ash" "Mitä hyötyä on liiketoimintaansa, jos otan elämääsi juuri nyt?"
+send_character_message 1 "set_head_target 87.6805 26.7731 61.0615 1"
+send_character_message 1 "set_eye_dir 87.1857 26.7954 60.9733 1"
+send_character_message 2 "set_head_target 89.1743 26.2097 61.0021 1"
+send_character_message 2 "set_torso_target 89.6144 25.3854 60.7929 1"
+set_character_pos 4 93.567 25.4055 63.4268 -166
+send_character_message 1 "set_torso_target 89.2052 25.6503 65.4294 0.00655133"
+set_character_pos 2 87.1581 25.5633 61.0588 23
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 86.7075 26.4597 62.1672 -10.26 -46.91 -5.07 60.0071
+say 1 "King" "Muiden kani ei käsittele voit. [wait 0.2]Tappaa minut, te nälkään."
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_jeer.anm\""
+send_character_message 1 "set_head_target 87.6805 26.7731 61.0615 1"
+send_character_message 1 "set_eye_dir 87.1857 26.7954 60.9733 1"
+send_character_message 2 "set_head_target 89.1743 26.2097 61.0021 1"
+send_character_message 2 "set_torso_target 89.6144 25.3854 60.7929 0.0854562"
+set_character_pos 4 93.567 25.4055 63.4268 -166
+send_character_message 1 "set_torso_target 89.2052 25.6503 65.4294 0.00655133"
+set_cam 89.8802 25.888 61.4417 6.99 67.2 0.63 60.0071
+set_character_pos 2 87.1581 25.5633 61.0588 23
+say 2 "Ash" "Ainakin minulla on hyvä ateriat ensin."
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 87.6805 26.7731 61.0615 1"
+send_character_message 1 "set_eye_dir 87.1857 26.7954 60.9733 1"
+send_character_message 2 "set_head_target 89.1743 26.2097 61.0021 1"
+set_character_pos 4 93.567 25.4055 63.4268 -166
+send_character_message 1 "set_torso_target 89.2052 25.6503 65.4294 0.00655133"
+send_character_message 2 "set_torso_target 89.6144 25.3854 60.7929 1"
+set_cam 89.8802 25.888 61.4417 6.99 67.2 0.63 60.0071
+set_character_pos 2 87.1581 25.5633 61.0588 23
+say 2 "Ash" "Hienosti. [wait 0.2]Tuokaa heidät tavalliselle paikalleen. [wait 0.2]Voit kiinni tarpeeksi tällä kertaa, minä annan tämän dian."
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_head_target 87.6805 26.7731 61.0615 1"
+send_character_message 1 "set_eye_dir 87.1857 26.7954 60.9733 1"
+send_character_message 2 "set_head_target 89.1743 26.2097 61.0021 1"
+set_character_pos 4 93.567 25.4055 63.4268 -166
+send_character_message 1 "set_torso_target 89.2052 25.6503 65.4294 0.00655133"
+send_character_message 2 "set_torso_target 85.0099 26.0676 60.4067 1"
+set_cam 90.1019 26.0919 60.6838 -4.9 104.03 -0.53 47.7012
+set_character_pos 2 84.7017 25.1258 62.996 151
+say 2 "Ash" "Muista, että vielä on täällä kun he ovat poissa."
+send_character_message 4 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 4 "set_head_target 88.514 25.5482 65.5144 0"
+send_character_message 4 "set_torso_target 88.7649 25.665 65.431 0.0444314"
+send_character_message 4 "set_eye_dir 88.33 25.0788 64.6689 1"
+send_character_message 1 "set_head_target 87.6805 26.7731 61.0615 1"
+send_character_message 1 "set_eye_dir 87.1857 26.7954 60.9733 1"
+send_character_message 2 "set_head_target 89.1743 26.2097 61.0021 1"
+set_character_pos 4 93.567 25.4055 63.4268 -166
+send_character_message 1 "set_torso_target 89.2052 25.6503 65.4294 0.00655133"
+set_cam 82.2699 33.2462 51.3027 -31.68 -150.36 -8.94 47.7012
+set_character_pos 2 58.4196 -73.2226 59.8232 -161
+say 3 "Shanks" "Koskaan saada tottuneet näkemään susia niin lähellä. [wait 0.2]Ne ovat valtavia."
+set_character_pos 1 89.0568 25.372 60.683 -157
+send_character_message 4 "set_torso_target 90.0861 25.665 61.4194 1"
+send_character_message 4 "set_head_target 89.0559 26.1465 60.8345 1"
+send_character_message 4 "set_eye_dir 89.6876 26.0728 61.709 1"
+set_cam 86.8339 26.2186 59.0031 -3.72 -132.14 0.06 15.1098
+send_character_message 1 "set_eye_dir 91.8285 25.9269 63.8897 1"
+send_character_message 1 "set_torso_target 87.8268 25.6503 62.3277 1"
+send_character_message 1 "set_head_target 91.9242 26.1078 64.0081 1"
+send_character_message 2 "set_head_target 88.4133 24.2698 60.9321 1"
+send_character_message 4 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_character_pos 4 91.9952 25.4055 64.0044 132
+say 4 "Turner" "En usko sitä. [wait 0.2]Mutta on totta."
+send_character_message 4 "set_torso_target 91.354 25.812 61.4544 1"
+set_character_pos 1 89.0568 25.372 60.683 -111
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 1 "set_torso_target 89.0095 25.7452 62.7481 0.79185"
+set_cam 93.1521 26.113 65.8942 -3.48 35.88 -1.35 15.1098
+say 1 "King" "Mistä olet kotoisin?"
+send_character_message 4 "set_torso_target 90.027 25.8521 61.3249 1"
+set_cam 86.8215 26.2122 59.0168 -2.75 -132.02 1.14 15.1098
+send_character_message 1 "set_torso_target 89.0052 25.7452 62.7456 0.79185"
+set_character_pos 1 89.0568 25.372 60.683 -116
+send_character_message 1 "set_head_target 91.9363 26.1671 63.9509 1"
+send_character_message 5 "set_torso_target 93.4506 29.0536 62.9795 0.160403"
+send_character_message 5 "set_eye_dir 93.7275 28.6063 63.8536 1"
+say 4 "Turner" "En voi antaa sinulle pelkkiä ihmisiä oman onnensa nojaan."
+send_character_message 4 "set_torso_target 88.3994 25.7518 61.2376 1"
+send_character_message 1 "set_torso_target 89.0052 25.7452 62.7456 0.79185"
+set_character_pos 1 89.0568 25.372 60.683 -116
+send_character_message 5 "set_torso_target 93.4506 29.0536 62.9795 0.160403"
+send_character_message 5 "set_eye_dir 93.7275 28.6063 63.8536 1"
+set_cam 93.0562 26.1209 65.7788 -3.48 35.88 -1.35 15.1098
+send_character_message 1 "set_head_target 91.9363 26.1671 63.9509 1"
+say 1 "King" "Ei päätöstä tehdä. [wait 0.2]Shanks, pilvi, [wait 0.1]tehdä työsi."
+set_character_pos 1 89.0568 25.372 60.683 -98
+send_character_message 5 "set_animation \"Data\Animations\r_spearstance.anm\""
+send_character_message 5 "set_eye_dir 89.2375 26.1171 61.2166 1"
+send_character_message 5 "set_torso_target 92.3234 29.0536 62.2001 1"
+send_character_message 1 "set_torso_target 89.0052 25.7452 62.7456 0.79185"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_head_target 93.1443 29.4089 62.1021 1"
+set_cam 87.8253 25.2242 60.71 32.73 -98.13 -1.39 32.2715
+say 5 "Cloud" "Anteeksi, sir, mutta mielestäni hän on oikeassa."
+send_character_message 4 "set_torso_target 90.0861 25.665 61.4194 0.822236"
+set_character_pos 1 89.0568 25.372 60.683 172
+send_character_message 1 "set_torso_target 87.4013 25.7452 61.7138 0.79185"
+send_character_message 1 "set_head_target 83.1295 31.6796 54.0399 1"
+set_cam 89.6889 25.4158 61.8072 27.73 37.85 1.38 23.0208
+say 3 "Shanks" "Tämä ei ole, keitä me olemme."
+send_character_message 4 "set_torso_target 90.0861 25.665 61.4194 0.822236"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 1 "set_torso_target 89.0316 25.7452 62.4456 0"
+send_character_message 1 "set_head_target 93.3115 29.3477 62.065 1"
+set_character_pos 1 89.0568 25.372 60.683 -39
+set_cam 93.0097 26.0756 65.9878 -3.2 34.79 1.22 17.304
+say 1 "King" "Haluat sudet valita vain meille tulee? [wait 0.2]Tämä on ainoa tapa olla turvallinen."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 4 "set_torso_target 92.1631 25.665 62.4271 1"
+send_character_message 4 "set_animation \"Data\Animations\r_actionidlethreat.anm\""
+send_character_message 1 "set_head_target 92.0321 25.9786 64.04 1"
+set_cam 87.8906 26.1485 59.8589 -4.21 -131.64 -0.32 21.897
+say 4 "Turner" "Olet pelkuri. [wait 0.2]Otan miekka ja lopettaa ne pois itse."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_jeer.anm\""
+set_cam 92.8973 26.05 65.8379 -3.18 33.66 1.28 18.161
+say 1 "King" "Tulkaa hakemaan."
+send_level_message "make_all_aware"

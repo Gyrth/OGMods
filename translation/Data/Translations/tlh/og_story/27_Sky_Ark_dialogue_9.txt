@@ -1,0 +1,28 @@
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 2 "set_head_target -27.8203 78.3469 148.29 1"
+send_character_message 1 "set_head_target -27.1289 78.1054 149.275 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+#name "Builders"
+#participants 3
+set_character_pos 2 -27.9452 77.5078 150.182 72
+set_character_pos 3 -26.383 77.5166 150.039 153
+set_character_pos 1 -27.9837 77.6956 148.486 -40
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+set_cam -25.7383 78.114 147.503 -14.51 139.07 -1.86 90
+say 2 "Rent" "SoHvaD jatlhqa'! naDev Sengvo' 'op Seng vIH"
+send_character_message 1 "set_head_target -28.0495 77.8171 150.276 1"
+say 1 "Turner" "mojpu', HIja'. jIchegh. nuq Davang naDev?"
+send_character_message 3 "set_head_target -27.9729 78.3674 148.461 1"
+say 3 "Cedar" "jobs maluj qaSpu'DI' SoH … DaSov … pIn HoH."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Rent" "qaSpu'DI' nuqDaq ghaH Samta'meH Dara' maH."
+send_character_message 1 "set_head_target -26.3227 78.363 150.05 1"
+say 1 "Turner" "QaH shelter qach tlhab toy'wI''a' laH lo' maH."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 3 "Cedar" "bang, 'ej maH 'ach Qo' maHvaD ghu'vam woDDI' chaH!"
+send_character_message 1 "set_torso_target -27.9469 78.0533 149.436 1"
+send_character_message 1 "set_head_target -30.2917 79.9518 150.051 1"
+say 1 "Turner" "yIjatlh jImejbej!"
+send_character_message 2 "set_head_target -27.8842 78.3805 149.707 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_2handneck.anm\""
+say 2 "Rent" "nIH. yIjatlh. legh porgh SIS vaj, jIH vaj jIH?"

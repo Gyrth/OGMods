@@ -1,0 +1,17 @@
+#name "Start"
+#participants 1
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_dialogue_color 1 0.6 1 0.6
+send_character_message 1 "set_eye_dir -149.713 69.0653 -188.877 1"
+set_character_pos 1 -153.484 65.7352 -186.303 0
+set_cam -154.148 65.99 -187.173 20.4 -107.19 1.75 90
+send_character_message 1 "set_head_target -150.001 67.1871 -186.152 0"
+send_character_message 1 "set_torso_target -148.533 66.8066 -185.941 0"
+say 1 "Turner" "Las pistas paran aquí. El sol debe haber subido."
+send_character_message 1 "set_torso_target -150.594 69.2685 -188.881 0"
+send_character_message 1 "set_head_target -147.649 72.9798 -186.074 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Inteligente como para poner la base arriba, no veo cómo un perro levantaba de allí."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target -147.678 64.4733 -188.829 1"
+say 1 "Turner" "Espero que tengan un fuego allí. Tal vez incluso una sopa. Estoy congelando."

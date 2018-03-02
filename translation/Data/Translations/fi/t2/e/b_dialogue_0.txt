@@ -1,0 +1,101 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 237.946 36.7204 -134.177 -150
+send_character_message 2 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 2 "set_head_target 215.423 26.4312 -114.83 1"
+set_character_pos 1 215.261 25.7464 -114.621 40
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_shade.anm\""
+send_character_message 1 "set_eye_dir 237.203 37.245 -133.72 1"
+send_character_message 1 "set_torso_target 215.958 26.372 -115.052 1"
+send_character_message 1 "set_head_target 237.739 37.5693 -133.967 1"
+set_cam 214.509 26.0173 -113.502 12.72 -42.83 0 35.2887
+say 1 "Ghost" "Jairo, vihdoin! [wait 0.4]Missä olit?"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handneck.anm\""
+say 1 "Ghost" "Olen menettänyt vähän aikaa."
+set_cam 237.339 36.9369 -132.227 0.08 -10.92 0.05 26.1866
+say 2 "Jairo" "Henki, [wait 0.5]Mitä teet?"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 217.273 26.3269 -116.062 -0.09 126.91 0.02 26.1866
+say 1 "Ghost" "..."
+set_character_pos 2 237.946 36.7226 -134.177 -150
+send_character_message 1 "set_head_target 237.741 37.5727 -133.966 1"
+send_character_message 2 "set_torso_target 237.088 37.2673 -133.729 3.92497e-005"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+set_cam 236.085 36.9691 -132.806 0.09 -53.09 -0.02 21.8795
+say 2 "Jairo" "Sinun ei pitäisi olla täällä. [wait 0.2]Et voi olla täällä."
+set_character_pos 2 237.946 36.8301 -134.177 -150
+set_cam 236.085 36.9691 -132.806 0.09 -53.09 -0.02 21.8795
+send_character_message 1 "set_head_target 237.741 37.5727 -133.966 1"
+send_character_message 2 "set_torso_target 237.088 37.2673 -133.729 3.92497e-005"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+say 2 "Jairo" "Sinun piti seuraa pyhäkköjä, merkitty A [wait 0.2]ja tappaa Cinderbreathe voimat. [wait 0.4]Miksi olet täällä?"
+send_character_message 2 "set_torso_target 237.088 37.2673 -133.729 3.92497e-005"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 237.652 37.0765 -133.968 1"
+set_cam 217.258 26.4214 -114.923 -0.07 96.91 0.06 21.8795
+say 1 "Ghost" "Olen menettänyt- [wait 0.5]En vieläkään tiedä, missä olen!"
+send_character_message 2 "set_torso_target 237.088 37.2673 -133.729 3.92497e-005"
+set_cam 236.333 37.5005 -134.34 0.05 -98.94 -0.08 21.8795
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 2 "Jairo" "Se ei ole tekosyy. [wait 0.3]Jätit tietoisesti ohjeita?"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 2 "set_torso_target 237.003 36.0915 -133.593 1"
+say 2 "Jairo" "Polku oli selvästi. [wait 0.3]Teille sanottiin minne mennä. [wait 0.3]Se oli kaikki on selvää!"
+send_character_message 2 "set_torso_target 237.003 36.0915 -133.593 0.985167"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam 238.705 38.1239 -135.152 -21.08 136.87 -0.01 18.3775
+say 1 "Ghost" "Jairo, [wait 0.2]hiljaa hetkeksi!"
+send_character_message 2 "set_torso_target 237.003 36.0915 -133.593 0"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 2 "Jairo" "..."
+send_character_message 1 "set_head_target 216.53 26.8014 -115.405 1"
+send_character_message 2 "set_head_target 215.319 26.2647 -114.756 1"
+send_character_message 1 "set_torso_target 215.958 26.372 -115.052 0"
+set_cam 216.703 26.4381 -115.604 0.15 124.7 -0.04 18.3775
+say 1 "Ghost" "Minulla ei ole aavistustakaan mitä minä teen täällä."
+send_character_message 1 "set_head_target 216.404 26.8695 -115.541 1"
+say 1 "Ghost" "Voitte odottaa minun murhaavat vain pari kymmeniä viattomia ihmisiä [wait 0.15]vain siksi, että joku kertoi minulle?"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 216.703 26.4381 -115.604 0.15 124.7 -0.04 18.3775
+send_character_message 1 "set_head_target 237.432 37.1221 -133.854 1"
+say 1 "Ghost" "Voi olen rikki että vankilasta helposti, [wait 0.2]joka tapauksessa. [wait 0.4]Koko juttu oli käytännössä shanty!"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam 214.021 25.8151 -113.119 18.32 -42.95 0.01 18.3775
+say 2 "Jairo" "Henki, [wait 0.2]Seis."
+send_character_message 1 "set_torso_target 215.958 26.372 -115.052 1"
+say 1 "Ghost" "Ei lopeta, ennen kuin annat minulle vastauksia. [wait 0.3]Ja nyt."
+send_character_message 1 "set_head_target 218.291 26.0497 -118.175 1"
+set_character_pos 1 215.261 25.6913 -114.621 40
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam 213.636 26.4092 -115.836 0.03 -122.62 -0.09 18.3775
+say 1 "Ghost" "En tiedä kuka olet. [wait 0.4]En tiedä, miksi Cinderbreathe kuolla. [wait 0.4]En edes tiedä, missä olemme."
+send_character_message 1 "set_head_target 237.716 37.5337 -133.956 1"
+say 1 "Ghost" "Ja keitä ovat guys? [wait 0.4]Niistä on violetti silmät ja turkis mudan likaa?"
+send_character_message 1 "set_torso_target 215.955 26.3809 -115.052 1"
+say 2 "Jairo" "Ghost..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlethreat.anm\""
+send_character_message 1 "set_torso_target 215.994 26.6246 -114.989 1"
+say 1 "Ghost" "Jos et anna minulle vastaa [wait 0.5]Teen sinulle kertoa."
+send_character_message 2 "set_eye_dir 236.925 36.7942 -132.643 0"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 236.536 37.5999 -134.737 0.04 -113.2 -0.08 18.4163
+say 2 "Jairo" "... hieno."
+send_character_message 2 "set_head_target 221.68 25.6778 -120.8 1"
+say 2 "Jairo" "Jos taistelu suunsa kiinni..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_eye_dir 215.631 26.5734 -114.676 1"
+send_character_message 2 "set_head_target 215.587 26.2737 -114.844 1"
+say 2 "Jairo" "Läpi pyhäkkö on portaiden yläpäässä."
+set_cam 217.202 26.3066 -116.027 -0.09 126.47 0.01 29.3072
+say 1 "Ghost" "Tehdä katoamassa toimia uudelleen?"
+send_character_message 1 "set_head_target 237.444 29.4984 -133.767 1"
+say 1 "Ghost" "Hienosti."
+send_character_message 1 "set_torso_target 216.227 26.0124 -115.046 1"
+send_character_message 1 "set_eye_dir 216.979 25.8706 -115.043 1"
+send_character_message 1 "set_head_target 218.041 26.1255 -115.206 1"
+set_cam 215.687 26.3349 -116.108 -0.07 167.64 -0.05 29.3072
+say 1 "Ghost" "..."

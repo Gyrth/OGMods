@@ -1,0 +1,146 @@
+#name "WinKill"
+#participants 4
+set_character_pos 2 6.82832 31.1182 43.1052 6
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_kneeling_low.anm\""
+send_character_message 2 "set_torso_target 7.41696 30.6524 42.9381 1"
+send_character_message 2 "set_head_target 7.68469 30.8117 43.0693 0.869958"
+set_character_pos 1 11.9893 30.9053 42.63 -176
+send_character_message 1 "set_animation \"Data/Animations/r_combatidle.anm\""
+send_character_message 1 "set_torso_target 11.7994 31.0319 42.5132 0"
+send_character_message 1 "set_head_target 11.7956 31.109 42.4607 0"
+set_cam 13.6011 31.8583 42.0677 -7.05 103.49 0.01 19.3247
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 1.0 0.0 0.0
+set_dialogue_voice 2 6
+set_dialogue_color 3 0.7 0.0 0.95
+set_dialogue_voice 3 3
+say 2 "Gunk" "..."
+send_character_message 2 "set_torso_target 7.41696 30.6524 42.9381 0"
+send_character_message 2 "set_head_target 11.9118 31.7052 42.5831 0.869958"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+say 1 "Amos" "SoHvaD?"
+send_character_message 2 "set_head_target 7.3398 30.6407 43.0317 0.869958"
+set_cam 8.86582 30.9253 49.5565 2.14 14.92 -0.01 8.33255
+say 2 "Gunk" "...[wait 0.5]vabDot Heghpu'."
+send_character_message 2 "set_head_target 7.68993 30.811 42.9586 0.869958"
+say 2 "Gunk" "yap pItlh."
+send_character_message 2 "set_head_target 8.87127 31.1972 43.0405 0.869958"
+say 2 "Gunk" "ghob'e' evacuated Hoch pong DaH. [wait 0.4]chaH wISovlaHbe', wej SoH."
+set_cam 8.0031 31.1257 43.6828 7.31 -73.59 0.02 8.33255
+send_character_message 1 "set_head_target 7.25448 31.0751 43.2281 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Amos" "laH chaH latlh DopDaq preuwyn. [wait 0.2]Hoch jISaH."
+send_character_message 2 "set_animation \"Data/Animations/r_woundedcrouch.anm\""
+set_cam 2.93895 30.9457 42.6636 2.98 -92.91 0.07 10.8315
+say 2 "Gunk" "[wait 0.3]nuq?"
+send_character_message 1 "set_torso_target 11.423 30.8247 42.6079 1"
+send_character_message 1 "set_head_target 7.18415 30.4852 43.2109 1"
+set_cam 10.9229 31.559 40.6682 1.45 -155.16 -0.05 10.8315
+say 1 "Amos" "tuHmoH Qo' boom buSbogh laH."
+send_character_message 2 "set_torso_target 7.41696 30.6524 42.9381 0.000178188"
+send_character_message 2 "set_head_target 8.79121 30.8598 42.9682 0.869958"
+set_cam 10.4182 31.2355 43.0754 2.93 90.09 -0.02 10.8315
+say 2 "Gunk" "[wait 0.6]Qo'..."
+send_character_message 2 "set_torso_target 7.07601 30.5284 43.0663 1"
+send_character_message 2 "set_head_target 7.51736 30.6238 43.2873 0.869958"
+say 2 "Gunk" "..."
+send_character_message 2 "set_animation \"Data/Animations/dialogue_dying_2.anm\""
+send_character_message 1 "set_head_target 7.05104 31.3287 43.3784 1"
+send_character_message 2 "set_torso_target 7.46082 30.8761 42.7977 0"
+send_character_message 2 "set_head_target 7.52416 30.7508 43.1156 0"
+send_character_message 1 "set_torso_target 11.423 30.8247 42.6079 0"
+set_cam 10.6683 31.6046 43.5431 -0.08 -51.65 -0.04 18.5975
+say 1 "Amos" "bye. [wait 0.3]DaH."
+send_character_message 2 "set_head_target 7.26569 30.5433 42.2969 1"
+send_character_message 2 "set_torso_target 6.69424 29.9052 43.3076 1"
+set_cam 7.63383 30.7732 45.5445 2.83 2.52 0.03 18.5975
+say 1 "Amos" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_head_target 7.47922 30.743 42.9719 1"
+set_cam 4.84779 30.9219 43.7779 0.91 -77.26 0.02 18.5975
+say 1 "Amos" "toH [wait 0.4]poH Hoch Qaw'."
+set_cam 14.7107 31.9561 -23.9723 7.77 174.94 0 18.5975
+say 1 "Amos" "vIHtaHbogh poH. [wait 0.3]je."
+send_character_message 1 "set_animation \"Data/Animations/interestingsit.anm\""
+send_character_message 1 "set_torso_target -54.4819 38.0903 351.656 1"
+send_character_message 1 "set_head_target -54.2957 38.0883 351.943 1"
+set_character_pos 1 -54.7069 38.355 351.627 -26
+set_cam -96.8059 38.616 351.658 44.49 97.35 9.93 18.5975
+say 4 "" "..."
+send_character_message 1 "set_head_target -54.2957 38.0883 351.943 1"
+set_cam -56.0138 38.5353 351.859 0.43 -92.49 -0.71 38.1611
+say 1 "Amos" "..."
+set_cam -53.5877 38.3647 350.366 -0.83 140.91 0.08 36.1332
+send_character_message 1 "set_head_target -54.0102 37.9767 351.329 1"
+say 1 "Amos" "toH..."
+send_character_message 1 "set_head_target -53.532 38.1908 351.493 1"
+say 1 "Amos" "[wait 0.5]DaH nuq?"
+send_character_message 3 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 3 "set_head_target -54.7593 38.6164 351.624 1"
+send_character_message 3 "set_torso_target -48.2671 38.6936 358.032 0"
+set_character_pos 3 -47.3171 38.2772 356.843 147
+send_character_message 1 "set_head_target -47.7261 38.6437 356.601 1"
+say 3 "Jairo" "majQa'."
+send_character_message 1 "set_head_target -47.6775 38.5178 356.577 1"
+set_cam -55.6179 38.5767 351.38 0.11 -116.09 -0.83 29.4064
+say 3 "Jairo" "vay' pIHbogh laHwIj exceeded SoH. [wait 0.4]not yIchegh cinderbreathe therium."
+send_character_message 3 "set_head_target -54.7109 38.3225 351.657 1"
+send_character_message 3 "set_torso_target -48.2212 38.5074 356.128 1"
+say 3 "Jairo" "wouldn't Qap qup firepower. [wait 0.5]QIn not Hev chaH."
+send_character_message 1 "set_head_target -47.273 39.0752 356.786 1"
+set_cam -54.8009 38.5444 352.658 0.73 -4.7 0.41 29.4064
+say 1 "Amos" "nothing short of bomb?"
+send_character_message 3 "set_head_target -54.7324 38.473 351.637 1"
+send_character_message 3 "set_torso_target -47.9866 38.0973 356.376 1"
+set_cam -49.5704 38.8932 356.888 0.58 -80.49 -0.61 29.4064
+say 3 "Jairo" "muqtovor je. [wait 0.5]Hoch. [wait 0.2]entirely 'ut."
+send_character_message 1 "set_animation \"Data/Animations/wowanothersit.anm\""
+send_character_message 1 "set_torso_target -54.3155 38.3022 351.876 1"
+send_character_message 1 "set_head_target -53.4533 37.9259 352.165 1"
+set_cam -44.6388 39.3016 358.223 -4.93 58.92 0.84 11.9888
+say 1 "Amos" "...[wait 0.3]toH [wait 0.5]nuq vIta' DaH?"
+send_character_message 3 "set_torso_target -47.9866 38.0973 356.376 0"
+send_character_message 3 "set_head_target -54.6804 38.8032 351.864 1"
+send_character_message 1 "set_head_target -51.2014 38.5635 354.263 1"
+say 3 "Jairo" "Qu'lIj naQmoH wanI'mey. [wait 0.3]jaS mej pagh vay' Data'nISbogh."
+send_character_message 1 "set_head_target -54.5616 38.0028 351.84 1"
+set_cam -53.2986 38.6064 351.422 -4.74 98.36 0.06 25.2283
+say 1 "Amos" "..."
+set_cam -54.4475 38.1929 350.941 26.56 173.33 -0.01 52.9796
+send_character_message 1 "set_head_target -54.7627 38.7549 352.398 1"
+say 1 "Amos" "anywhere vay' bIghoSniSbe'choHmoH jIH. [wait 0.5]wej rur juH vIghaj anymore."
+send_character_message 1 "set_head_target -54.6792 40.4644 354.62 1"
+say 3 "Jairo" "..."
+set_cam -54.4475 38.1928 350.941 26.56 173.33 -0.01 52.9796
+send_character_message 1 "set_head_target -54.5419 37.9157 351.544 1"
+say 1 "Amos" "[wait 0.5]'oH figure jIH 'e' yIQoy. [wait 0.3]loy jIH."
+send_character_message 3 "set_head_target -53.8987 38.3483 351.945 1"
+send_character_message 3 "set_torso_target -47.9866 39.1163 356.376 1"
+set_cam -45.2153 39.3759 358.035 -5.43 57.28 0.11 8.32833
+say 3 "Jairo" "DaH jImej."
+send_character_message 1 "set_torso_target -54.3155 38.3022 351.876 0"
+send_character_message 1 "set_head_target -54.644 37.7058 351.861 1"
+send_character_message 3 "set_torso_target -66.7743 47.0458 367.156 1"
+send_character_message 3 "set_head_target -65.3168 41.7154 362.982 1"
+set_cam -54.9697 38.427 353.553 -0.01 -12.59 0.33 17.5408
+set_character_pos 3 -82.1521 39.2349 362.624 147
+say 1 "Amos" "..."
+send_character_message 1 "set_torso_target -54.3155 38.3022 351.876 1"
+send_character_message 1 "set_head_target -50.1825 38.6035 355.889 1"
+say 1 "Amos" "loS [wait 0.5]jairo …?"
+set_cam -55.1828 38.5608 351.065 0.31 -126.45 -0.12 38.1091
+say 1 "Amos" "...?"
+send_character_message 1 "set_head_target -52.6666 37.5707 353.062 1"
+say 1 "Amos" "..."
+say 4 "" "a-b path ending naQ SoH."
+send_character_message 1 "set_head_target -53.9192 38.0088 352.052 1"
+send_character_message 1 "set_torso_target -54.3155 38.3022 351.876 0"
+say 4 "" "pe'meH pa' rav folder mu'wIj."
+set_cam -46.2477 39.6188 352.4 32.68 -168.29 3.55 38.1091
+say 4 "" "bID cha'DIch austere."
+say 4 "" "bID Suq wa'DIch. [wait 0.2]b path ending naQ."
+say 4 "" "ghorgh cha' tlhIH 'ay' Daghaj. [wait 0.2]reH De' ghap tcrf .zip unlock"
+fade_to_black 1
+say 4 "T2-Dev" "qatlho' therium-2 chu'."
+send_global_message "levelwin"

@@ -1,0 +1,15 @@
+#name "RebelMeeting"
+#participants 2
+
+set_character_pos 2 2.42182 -1.78782 4.42306 76
+set_character_pos 1 2.75714 -1.78782 2.49255 -86
+set_cam 3.37822 -1.25582 2.43758 0 124.04 0 90
+say 1 "Turner" "Esclavistas de gato están en desorden."
+say 1 "Turner" "Necesitamos algún lugar para que conejos ir."
+say 1 "Turner" "He escuchado rumores de un santuario."
+say 2 "Rabbit rebel" "Lejos hacia el este, Let ' s go!."
+set_cam 2.94613 -1.14734 2.72588 0 46.1 0 90
+say 1 "Turner" "Este es el final del nivel."
+send_global_message "levelwin"
+
+

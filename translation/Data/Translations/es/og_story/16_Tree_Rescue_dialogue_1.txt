@@ -1,0 +1,15 @@
+#name "Win"
+#participants 2
+set_character_pos 2 -43.9495 21.4732 -9.53729 -68
+set_character_pos 1 -43.5078 21.2974 -6.76732 84
+set_cam -41.942 21.8467 -5.20717 0 34.88 0 53.6292
+say 2 "Rat" "¡No me hizo daño!"
+say 1 "Turner" "¿Has visto a una chica conejo?"
+say 2 "Rat" "¿Usted la conoce?
+say 2 "Rat" "Ella dijo que tenía que subir más alto, que si ella hizo todo el camino a las nubes, ella sería capaz de volver a casa."
+say 1 "Turner" "¿Qué pasó con ella?"
+say 2 "Rat" "Le arrastró fuera a nuestro campamento principal."
+say 2 "Rat" "Los gatos no importa si sus esclavos están locos."
+say 1 "Turner" "Me dicen donde es, y tal vez no echarte de este árbol."
+say 2 "Rat" "Cuando lo pones de esa manera..."
+send_global_message "levelwin"

@@ -1,0 +1,18 @@
+#name "Win"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 4 0.5"
+send_character_message 2 "set_head_target 15.3129 -1.96469 1.65003 1"
+send_character_message 1 "set_torso_target 15.1193 -1.64133 2.78433 1"
+send_character_message 1 "set_head_target 15.4236 -1.55866 2.35263 1"
+set_character_pos 2 15.5143 -1.80173 2.37684 124
+send_character_message 2 "set_animation \"Data/Animations/r_sit_injuredneck.anm\""
+set_character_pos 1 15.3624 -1.94966 1.02578 -83
+set_cam 13.6919 -1.5045 1.0323 -7.72 -117.15 0 90
+send_level_message "music_layer_override -2"
+say 1 "Turner" "Termino a su misión, medianoche."
+send_character_message 2 "set_head_target 15.1412 -1.19189 1.07133 1"
+say 2 "Midnight" "Sé que será. Hacer este rápido."
+send_character_message 1 "set_torso_target 14.7137 -1.64133 2.60546 1"
+send_character_message 1 "set_head_target 14.8186 -1.87466 1.64232 1"
+say 1 "Turner" "Claro."
+send_global_message "levelwin"

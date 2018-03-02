@@ -1,0 +1,170 @@
+#name "Intro"
+#participants 10
+set_character_pos 3 -5.5812 42.9821 303.668 -90
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_pole.anm\""
+send_character_message 3 "set_torso_target -5.60808 43.6905 305.107 1"
+send_character_message 3 "set_head_target -2.21169 43.8085 310.227 1"
+set_character_pos 2 2.30152 43.0941 303.378 -90
+send_character_message 2 "set_animation \"Data/Animations/swordrelax.anm\""
+send_character_message 2 "set_torso_target 2.18317 43.3905 304.107 0"
+send_character_message 2 "set_head_target -1.5904 43.781 310.304 1"
+set_character_pos 1 -1.87497 43.2147 310.73 90
+send_character_message 1 "set_torso_target -0.919124 43.6136 311.05 0"
+send_character_message 1 "set_head_target -0.908881 43.6906 310.763 0"
+set_cam 4.44689 43.9311 303.963 0 81.56 0 25.2365
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 17
+set_dialogue_color 2 1 1 1
+set_dialogue_color 3 1 1 1
+set_dialogue_color 4 1 1 1
+set_dialogue_color 6 0.7 0.7 0.89
+set_dialogue_voice 6 11
+set_dialogue_color 5 0.9 0.9 0
+set_dialogue_voice 5 7
+set_dialogue_color 7 0.7 0.0 0.95
+set_dialogue_voice 7 3
+set_dialogue_color 8 1 1 1
+set_dialogue_color 9 1 1 1
+say 2 "???" "[wait 0.1]Pysäyttää. [wait 0.3]Valtion liiketoimintaa."
+send_character_message 1 "set_torso_target -1.56041 43.2841 309.744 1"
+send_character_message 1 "set_head_target 1.97792 44.1061 303.96 1"
+set_cam 3.34012 43.8608 300.071 0 157.75 0 17.2861
+say 1 "Ghost" "Kyllä [wait 0.5]Uh- [wait 0.5]Asun täällä."
+send_character_message 3 "set_torso_target -5.45979 43.2571 304.584 1"
+send_character_message 3 "set_head_target 1.52148 43.9282 303.658 1"
+send_character_message 2 "set_head_target -5.0914 44.044 303.862 1"
+send_character_message 2 "set_torso_target 1.5572 43.4336 303.84 1"
+set_cam -8.96578 43.8752 304.822 0 -77.17 0 17.2861
+say 3 "????" "Hei siellä [wait 0.2]Myönnän, että tämä kaveri. [wait 0.5]Hän pitäisi olla kunnossa."
+send_character_message 2 "set_torso_target 1.57181 43.3538 303.952 1"
+set_cam 2.06513 43.9868 306.164 0 -1.22 0 17.0364
+send_character_message 2 "set_head_target -5.13171 44.3684 303.782 1"
+say 2 "???" "Muistan hänet myös [wait 0.2]oikeastaan."
+send_character_message 2 "set_head_target -3.44857 43.9916 304.09 1"
+send_character_message 2 "set_torso_target 1.25732 43.6996 303.702 1"
+say 2 "???" "Muistan hänet raahataan ulos portista, erityisesti [wait 0.3]käsiraudoissa ja johda Ano, itse."
+send_character_message 4 "set_head_target 1.43577 45.3429 310.083 1"
+send_character_message 4 "set_torso_target 49.478 72.8243 300.72 1"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_character_pos 4 49.7557 72.8764 300.658 -164
+send_character_message 2 "set_torso_target 1.9812 43.6093 303.873 0"
+send_character_message 2 "set_head_target -0.893142 43.98 310.633 1"
+send_character_message 3 "set_torso_target -5.83787 43.2594 304.718 1"
+send_character_message 3 "set_head_target -2.07257 43.8298 310.152 1"
+send_character_message 1 "set_head_target -4.24772 43.9742 305.368 1"
+set_cam 0.17075 43.815 313.137 0 34.12 0 17.0364
+say 3 "????" "Mikä? [wait 0.4]Onko se totta?"
+send_character_message 1 "set_head_target 5.43284 47.9997 309.2 1"
+set_cam -5.85042 41.7225 311.243 28.73 -80.37 1.58 6.03969
+say 4 "?????" "Mitä siellä tapahtuu? [wait 0.3]Messenger aiheuttaa ongelmia?"
+send_character_message 2 "set_torso_target 2.59828 43.6093 304.041 1"
+send_character_message 2 "set_head_target 18.0692 53.4954 302.436 1"
+send_character_message 2 "set_animation \"Data/Animations/swordrelax2.anm\""
+set_cam 5.1745 43.899 304.193 0.16 78.42 1.07 28.9799
+say 2 "???" "Olemme pieni ongelma. [wait 0.3]Me tarvitsemme virkamies täällä."
+send_character_message 4 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 4 "set_torso_target 49.478 72.8243 300.72 1"
+set_cam 47.6891 73.3607 302.371 0.73 -50.41 -0.8 28.9799
+say 4 "?????" "Okei, [wait 0.2]Minä hakea Ano heti, kun lopetat puunkorjuun se."
+send_character_message 1 "set_head_target 1.75902 43.6119 304.12 1"
+send_character_message 3 "set_head_target -1.87676 43.6968 310.571 1"
+send_character_message 3 "set_torso_target -5.60511 43.203 304.635 1"
+set_cam -4.62346 43.8951 305.69 0.93 27.85 0.55 29.1207
+say 3 "????" "Pysy täällä. [wait 0.5]Yritä ajaa ja me saalis."
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_head_target -5.4106 43.9087 304.064 1"
+send_character_message 1 "set_torso_target -1.95995 43.2808 309.519 1"
+set_cam -2.44461 43.8151 308.89 -1 -160.15 0 29.1207
+say 1 "Ghost" "Ymmärrän täysin. [wait 0.4]Haluan vain palata kotiin."
+set_character_pos 2 3.72605 31.0633 50.3776 90
+send_character_message 2 "set_torso_target 3.7197 31.5181 51.0241 0"
+send_character_message 2 "set_head_target 3.08909 32.1667 44.8727 1"
+set_character_pos 3 -4.89152 31.1372 48.2498 90
+send_character_message 3 "set_head_target -4.7749 33.0378 33.9075 1"
+send_character_message 3 "set_torso_target -4.91543 31.3581 49.2168 0"
+set_character_pos 1 -13.4158 30.9422 -74.5824 180
+send_character_message 1 "set_head_target -15.8207 31.6795 -74.7078 1"
+send_character_message 1 "set_torso_target -13.3796 30.9822 -75.187 0"
+set_cam -49.4739 40.5588 324.707 26.87 -177.82 1 29.1207
+send_character_message 8 "set_head_target -14.2234 31.5922 -74.0296 1"
+send_character_message 8 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 9 "set_animation \"Data/Animations/r_idle.anm\""
+set_character_pos 9 -14.5095 30.9357 -72.766 60
+say 9 "" "..."
+send_character_message 5 "set_head_target -14.6814 31.36 -73.1486 1"
+set_cam -14.6859 31.6426 -74.9103 0.33 103.75 -0.01 29.1207
+send_character_message 8 "set_head_target -14.6677 31.7441 -72.9488 1"
+say 5 "Ano" "[wait 0.5]Miksi hän on täällä?"
+send_character_message 9 "set_torso_target -14.1375 31.3535 -73.6508 1"
+send_character_message 8 "set_torso_target -14.9873 30.9082 -74.3895 1"
+set_cam -11.4025 31.4593 -72.4131 0.28 73.13 -0.18 29.1207
+send_character_message 9 "set_head_target -15.7963 31.6334 -74.5826 1"
+say 3 "????" "Hän näyttää olevan karannut vanki- [wait 0.5]mitä saattoi itse."
+set_character_pos 8 -15.8954 30.8929 -74.7181 2
+send_character_message 8 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 8 "set_torso_target -15.1018 30.8676 -74.6349 1"
+send_character_message 8 "set_head_target -13.6086 31.6496 -74.5282 1"
+say 5 "Ano" "Tiedän kuka hän on kohtuullinen hienosti. [wait 0.4]Mitä haluan tietää on, mitä hän tekee."
+send_character_message 9 "set_head_target -13.8089 31.694 -74.0731 1"
+set_cam -11.9443 31.369 -90.6077 0.14 170.43 0.3 10.7258
+say 1 "Ghost" "Pääsin että shanty vankila soittaa hienosti. [wait 0.3]Se on melkein kuin halusitte paeta."
+send_character_message 5 "set_torso_target -14.9201 31.3431 -74.736 0"
+send_character_message 8 "set_torso_target -15.1018 31.1913 -74.6349 1"
+say 5 "Ano" "Voin vakuuttaa teille, [wait 0.2]Meillä ei ole."
+send_character_message 1 "set_head_target -15.8207 31.841 -74.7078 1"
+send_character_message 1 "set_torso_target -14.007 31.238 -74.8501 1"
+say 1 "Ghost" "Tiedän, että jotain varmaan et. [wait 0.5]Jotain tärkeää."
+send_character_message 8 "set_head_target -13.5357 31.7299 -74.4515 1"
+send_character_message 8 "set_torso_target -15.1018 30.9273 -74.6349 1"
+set_cam -11.659 31.7798 -74.7743 -2.66 93.3 0 13.882
+say 5 "Ano" "En ole hetkeäkään tinkimistä. [wait 0.2]Vain lävistää se rikki."
+send_character_message 1 "set_torso_target -13.9953 31.5322 -74.6672 1"
+say 1 "Ghost" "On saanut raportteja normaalin näköinen mies vaanii kaukaa? [wait 0.35]Noin keskimääräinen korkeus [wait 0.4]valkoinen ja ruskea turkis [wait 0.5]maalattu paita?"
+send_character_message 8 "set_head_target -13.5416 31.6249 -74.4515 1"
+send_character_message 8 "set_torso_target -15.1018 31.2946 -74.6349 1"
+say 5 "Ano" "...[wait 0.2]Meillä ei ole."
+send_character_message 1 "set_head_target -15.6476 31.6255 -74.9241 1"
+send_character_message 1 "set_torso_target -13.9339 31.2918 -74.6979 1"
+set_cam -14.3063 31.6097 -76.3924 0.07 -158.31 -0.21 22.1417
+say 1 "Ghost" "Että mies nimi on Jairo. [wait 0.5]Hän on se murhaa joka yhden vartijan. [wait 0.3]Ei ole tappanut ketään, [wait 0.5]ja eikä että valtava ruskea kouru ”terroristi” etsit."
+send_character_message 1 "set_head_target -15.3164 32.1124 -73.6413 1"
+say 1 "Ghost" "Joko niin, [wait 0.3]Hän haluaa tappaa jokaisen, joka vaeltaa päälle Therium. [wait 0.5]Hullu [wait 0.3]Jos minulta kysytään."
+send_character_message 1 "set_torso_target -13.8949 31.1018 -74.6979 1"
+send_character_message 1 "set_head_target -15.8228 31.3548 -74.6103 1"
+say 1 "Ghost" "Itse asiassa [wait 0.3]Olen tavannut häntä ennen. [wait 0.3]Hän kertoi minulle hänen [wait 0.1]rikollisen asialistalla. [wait 0.5]Tiedän tarpeeksi tietoa hänestä taistella häntä itse."
+send_character_message 8 "set_head_target -13.5502 31.7593 -74.4342 1"
+send_character_message 8 "set_torso_target -15.2141 31.4379 -74.6349 1"
+set_cam -16.5013 31.5874 -76.7892 0.07 -157.31 -0.21 15.8667
+say 5 "Ano" "Okei, [wait 0.3]se riittää. [wait 0.5]Tämä on keskustella neuvoston."
+send_character_message 9 "set_torso_target -14.351 31.346 -73.6757 1"
+send_character_message 9 "set_head_target -15.3918 31.7931 -74.2761 1"
+send_character_message 8 "set_torso_target -15.2397 31.4379 -74.4987 1"
+send_character_message 8 "set_head_target -14.6888 31.6484 -73.1798 1"
+say 5 "Ano" "Sinulle, [wait 0.3]Escort hänet kotiinsa. [wait 0.5]Hän tietää, missä se on."
+send_character_message 8 "set_head_target -13.7156 31.3984 -74.6681 1"
+send_character_message 9 "set_head_target -13.6869 31.7292 -74.2498 1"
+send_character_message 9 "set_torso_target -14.2355 31.2021 -73.7091 1"
+say 5 "Ano" "Ja sinä, [wait 0.3]pyytää minua Pohjois Gates auringonlaskun. [wait 0.2]Luotan, ei aiheuta ongelmia."
+set_cam -17.4641 31.6546 -75.3078 0.21 -104.75 0 15.8667
+say 1 "Ghost" "En."
+send_character_message 8 "set_head_target -13.7058 31.7245 -74.6681 1"
+send_character_message 1 "set_torso_target -13.9007 31.104 -74.6053 1"
+send_character_message 1 "set_head_target -15.8284 31.6536 -74.6264 1"
+send_character_message 8 "set_torso_target -15.2561 31.2365 -74.6763 1"
+send_character_message 8 "set_animation \"Data/Animations/r_idle.anm\""
+set_character_pos 8 -15.8954 30.8929 -74.7181 2
+say 5 "Ano" "Pois siitä, [wait 0.2]sitten. [wait 0.5]Olen osallistua kokoukseen."
+say 9 "" "..."
+say 1 "Ghost" "Bijou, teet kunnossa?"
+say 6 "Bijou" "I 'm doing fine- [wait 0.3]missä olit?"
+say 6 "Bijou" "Olin... [wait 0.5]etsinyt sinua [wait 0.3]Amos."
+say 1 "Amos" "En ollut missään Empry, [wait 0.3]se on varmaa."
+say 1 "Amos" "[wait 0.2]Tiedätkö mitä Therium on?"
+say 6 "Bijou" "..."
+say 1 "Amos" "[wait 0.4]Mikä on edessä?"
+say 6 "Bijou" "Amos, [wait 0.2]Piilota!"
+say 1 "Amos" "Mikä?"
+say 1 "Amos" "Mitä helvettiä hän tekee tästä!?"
+say 7 "Jairo" "..."
+send_global_message "levelwin eb4b2"

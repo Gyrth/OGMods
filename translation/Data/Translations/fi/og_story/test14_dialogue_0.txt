@@ -1,0 +1,12 @@
+#name "Start"
+#participants 6
+set_cam -36.8142 -1.51772 36.1334 0 -160.39 0 46.4721
+set_character_pos 1 -35.9535 -1.97533 13.7641 -58
+set_character_pos 6 -36.06 -2.03493 39.5614 -25
+set_character_pos 5 -36.2011 -2.03454 42.7943 0
+set_character_pos 4 -35.6803 -2.00691 44.2147 28
+set_character_pos 3 -36.5318 -2.09451 41.2002 0
+set_character_pos 2 -33.644 -2.03687 41.2776 -156
+say 2 "Overseer" "Siirry kävellä partioiden."
+set_cam -35.1999 -1.26779 12.1231 0 171.54 0 46.4721
+say 1 "Turner" "Että koira on iso miekka."

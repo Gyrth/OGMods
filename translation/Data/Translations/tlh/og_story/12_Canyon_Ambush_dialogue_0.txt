@@ -1,0 +1,5 @@
+#name "Alert"
+#participants 3
+send_character_message 1 "set_omniscient true"
+send_character_message 2 "set_omniscient true"
+send_character_message 3 "set_omniscient true"

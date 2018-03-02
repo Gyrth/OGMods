@@ -1,0 +1,61 @@
+#name "Aqueducts"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 3 126.398 -51.674 243.148 -150
+send_character_message 3 "set_animation \"Data/Animations/dialogue_leaning_back_onwall.anm\""
+send_character_message 3 "set_head_target 124.676 -51.1299 245.263 1"
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_head_target 124.671 -51.0996 245.433 1"
+set_character_pos 1 124.672 -52.2139 245.519 87
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_head_target 124.587 -51.0834 244.415 1"
+set_cam 121.745 -51.5721 247.945 0 -37.77 0 30.2839
+say 1 "Amos" "Moi?"
+send_character_message 2 "set_head_target 124.649 -51.0291 245.392 1"
+send_character_message 2 "set_torso_target 124.286 -51.3785 244.383 1"
+set_cam 124.068 -51.1147 245.382 0 25.45 0 30.2839
+say 2 "???" "Hei- [wait 0.3]Olet yksi Preuwyn, oikeus?"
+send_character_message 3 "set_head_target 124.714 -51.2646 245.25 1"
+send_character_message 2 "set_head_target 124.649 -51.0291 245.392 1"
+set_cam 124.543 -50.8762 242.124 0 -122.3 0 20.5196
+say 3 "????" "Kuulin, mitä eilen tapahtui Imperiumille. [wait 0.5]Pahoillani."
+send_character_message 1 "set_head_target 126.301 -50.7888 243.208 1"
+set_cam 122.993 -50.9791 242.883 -4.27 -152.1 0 20.5196
+send_character_message 2 "set_torso_target 124.117 -51.93 243.994 1"
+send_character_message 2 "set_head_target 126.299 -50.8473 243.169 1"
+say 2 "???" "Suusi, kiinni [wait 0.3]Tammi- [wait 0.3]Hän on luultavasti kyllästynyt kuulemaan sitä!"
+send_character_message 1 "set_torso_target 124.467 -51.0005 244.486 1"
+send_character_message 2 "set_head_target 124.519 -51.2604 245.441 1"
+send_character_message 1 "set_head_target 123.599 -51.0232 244.234 1"
+say 1 "Amos" "Hei siellä [wait 0.3]Hei siellä. [wait 0.5]Se on kunnossa."
+send_character_message 1 "set_head_target 120.111 -50.3458 246.078 1"
+set_cam 126.981 -51.4715 244.311 1.04 103.78 -0.11 44.5547
+send_character_message 2 "set_torso_target 124.117 -51.93 243.994 0"
+send_character_message 1 "set_torso_target 124.234 -51.3724 244.836 1"
+say 1 "Amos" "Mietin vain... [wait 0.3]Mitkä ovat ne jättiläinen seinät reikiä siellä?"
+send_character_message 1 "set_head_target 126.485 -50.8236 243.137 1"
+send_character_message 1 "set_torso_target 124.797 -51.3724 244.839 0"
+send_character_message 3 "set_head_target 124.665 -51.0897 245.311 1"
+set_cam 126.263 -50.8838 244.189 -0.41 -3.24 -0.96 44.5547
+say 3 "Oak" "Voi, [wait 0.3]Nämä? [wait 0.5]Nämä ovat vesijohdot."
+send_character_message 2 "set_torso_target 124.014 -51.6385 244.665 1"
+set_cam 122.025 -51.4275 246.992 -0.95 -45 -0.44 44.5547
+say 2 "???" "Niillä vettä vuorilta Oenferd ja muita kyliä matkan varrella."
+send_character_message 3 "set_head_target 124.814 -51.4388 245.288 1"
+send_character_message 3 "set_torso_target 125.488 -50.9709 243.483 1"
+say 3 "Oak" "Cinderbreathe City ovat vesijohdot? [wait 0.5]Miten saada vettä?"
+set_character_pos 2 123.488 -51.8192 244.298 0
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_torso_target 123.919 -51.8644 244.225 1"
+send_character_message 2 "set_head_target 126.344 -50.8599 243.093 1"
+say 2 "???" "Oak!"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_cam 124.701 -51.3087 244.043 0.31 -177.08 1 27.8803
+send_character_message 3 "set_head_target 123.562 -51.0669 244.263 1"
+send_character_message 3 "set_torso_target 125.488 -50.9709 243.483 0"
+send_character_message 2 "set_head_target 125.904 -50.82 243.22 0"
+send_character_message 2 "set_torso_target 123.919 -51.8644 244.225 0"
+send_character_message 2 "set_animation \"Data/Animations/r_talking.anm\""
+set_character_pos 2 123.488 -51.8192 244.298 30
+say 1 "Amos" "...[wait 0.3]Kiitos avusta."

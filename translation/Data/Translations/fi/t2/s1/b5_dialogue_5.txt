@@ -1,0 +1,13 @@
+#name "OneWay"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -11.7391 102.252 -148.269 -90
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 2.17084 101.025 -106.393 1"
+set_cam -12.6729 102.657 -149.062 -11.62 -155.19 0 70.9486
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "Mukava katsella..."
+send_character_message 1 "set_head_target -8.64447 87.8702 -124.371 1"
+set_cam -10.9067 103.427 -149.855 -29.55 169.96 0.01 59.5023
+say 1 "Ghost" "No... [wait 0.3]vain yksi tapa alas."

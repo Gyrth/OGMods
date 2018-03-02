@@ -1,0 +1,15 @@
+#name "Win"
+#participants 2
+set_character_pos 2 -43.9495 21.4732 -9.53729 -68
+set_character_pos 1 -43.5078 21.2974 -6.76732 84
+set_cam -41.942 21.8467 -5.20717 0 34.88 0 53.6292
+say 2 "Rat" "Älä satuta minua!"
+say 1 "Turner" "Oletko nähnyt kani tyttö?"
+say 2 "Rat" "Tunnetko hänet?
+say 2 "Rat" "Hän sanoi, hän oli kiivetä--, että jos hän selvisi aina pilvet, hän voi palata kotiin."
+say 1 "Turner" "Mitä tapahtui hänelle?"
+say 2 "Rat" "Me vedetään pois päävalikkoon leiriin."
+say 2 "Rat" "Kissat eivät välitä, jos niiden orjia ovat hulluja."
+say 1 "Turner" "Kerro minulle missä hän on, ja ehkä ei heittää sinut pois tämä puu."
+say 2 "Rat" "Kun laittaa sen näin..."
+send_global_message "levelwin"

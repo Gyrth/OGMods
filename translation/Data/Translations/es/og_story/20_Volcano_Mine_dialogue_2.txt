@@ -1,0 +1,8 @@
+#name "Top"
+#participants 1
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+send_character_message 1 "set_head_target 25.4717 -2.02084 11.2147 1"
+set_character_pos 1 -32.8539 67.7676 2.56704 0
+set_cam -34.6322 68.8213 3.61194 -44.62 -77 -3.7 90
+say 1 "Turner" "Supongo que tengo que hacer mi camino hacia abajo otra vez."
+set_character_pos 1 -33.2188 67.7676 2.56704 0

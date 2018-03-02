@@ -1,0 +1,63 @@
+#name "Dji"
+#participants 3
+set_character_pos 2 155.531 -56.2519 297.434 144
+send_character_message 2 "set_animation \"Data/Animations/dialogue_sitting_handstogether.anm\""
+send_character_message 2 "set_head_target 154.676 -55.7196 297.042 1"
+set_character_pos 1 152.771 -56.1998 296.177 -16
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target 155.347 -55.5142 297.321 1"
+set_cam 152.164 -55.8783 294.052 2.48 -150.77 0 55.7996
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Amos" "Huh... [wait 0.3]Lugaru koira?"
+send_character_message 2 "set_head_target 153.152 -55.431 296.32 1"
+say 2 "???" "Harvinaista, [wait 0.3]Kyllä [wait 0.3]mutta varokaa tavoista. [wait 0.5]Nimeni on Dji."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+say 1 "Amos" "Anteeksi; [wait 0.3]Halusin vain kysyä jotain. [wait 0.5]Olen uusi täällä-- [wait 0.3]jotta Lugaru, [wait 0.3]Tarkoitan."
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+say 1 "Amos" "Olen kuullut paljon miehestä nimeltä Turner. [wait 0.5]Hän näyttää olevan..."
+send_character_message 2 "set_head_target 153.074 -55.4906 296.152 1"
+set_cam 154.172 -55.6854 297.992 0 -56.3 -0.01 45.4732
+say 2 "Dji" "Antiikin historia, [wait 0.3]mutta annamme se suusta suuhun."
+send_character_message 2 "set_head_target 153.051 -55.7334 296.195 1"
+say 2 "Dji" "Olen varma, olet kuullut kaikki hänen susi kansanmurhan ja tilanahtaus, joka seurasi..."
+send_character_message 2 "set_head_target 152.826 -55.3938 296.433 1"
+send_character_message 2 "set_torso_target 154.746 -55.8969 296.858 1"
+say 2 "Dji" "Mutta ihmiset eivät puhu hänen perheensä."
+set_cam 156.417 -55.6199 297.186 -0.02 86.16 -0.03 53.031
+say 1 "Amos" "Hän oli perheen?"
+send_character_message 1 "set_torso_target 153.42 -55.9064 296.372 1"
+send_character_message 1 "set_head_target 155.347 -55.6355 297.321 1"
+send_character_message 2 "set_torso_target 154.746 -55.8969 296.858 0"
+send_character_message 2 "set_head_target 152.776 -55.0882 296.133 1"
+say 2 "Dji" "Isä. [wait 0.5]Hän oli tytär ja vaimo."
+send_character_message 2 "set_head_target 152.676 -55.3473 296.319 1"
+set_cam 154.267 -55.5601 297.28 0.02 -90.53 0.03 33.425
+say 2 "Dji" "He tappoivat susia, [wait 0.3]joka asettaa hänet raivon."
+send_character_message 2 "set_head_target 153.296 -55.1263 294.866 1"
+say 2 "Dji" "Hän oli niin kulutetaan raivoa, [wait 0.3]Hän tappoi useita lajeja-- [wait 0.3]muut kanit [wait 0.3]ajattelu ne olivat avustaa sudet."
+send_character_message 2 "set_torso_target 154.753 -56.1532 296.666 1"
+send_character_message 2 "set_head_target 153.014 -55.8058 296.386 1"
+say 2 "Dji" "Hän jopa salamurhasi kuninkaan Rocky Hall, [wait 0.3]vakuuttunut siitä, että hän oli suorassa yhteydessä sudet-- [wait 0.3]suunnitelmat ja neuvottelee niiden kanssa."
+send_character_message 1 "set_torso_target 153.42 -55.6857 296.372 1"
+send_character_message 1 "set_head_target 155.347 -55.4541 297.332 1"
+set_cam 153.629 -55.5819 297.458 -0.04 25.66 0 33.425
+say 1 "Amos" "Susi tehdä sopimuksen kani...? [wait 0.5]Tämä kaveri oli hullu."
+set_cam 149.491 -55.7426 296.734 0.02 -88.37 0.03 26.48
+say 2 "Dji" "Hänen hulluutta ajoi häntä eteenpäin: [wait 0.3]Kun hän oli tehnyt, [wait 0.3]sudet kuolivat lähes sukupuuttoon, [wait 0.3]ja ne ovat edelleen."
+send_character_message 2 "set_head_target 153.014 -55.4107 296.386 1"
+say 2 "Dji" "Väsynyt, [wait 0.3]Turner tuli takaisin hänen tuhoutunut kylässä; [wait 0.3]Täällä [wait 0.3]Tämä niitty jossa klaani kin odotti häntä."
+send_character_message 1 "set_head_target 155.299 -55.5762 297.368 1"
+send_character_message 1 "set_torso_target 153.42 -55.6857 296.372 0"
+send_character_message 2 "set_torso_target 154.571 -56.0646 296.743 1"
+say 2 "Dji" "He ottivat kostaa Turner veitsellä, [wait 0.3]keihäs ja miekka, [wait 0.3]ja niin hän on täällä."
+send_character_message 1 "set_head_target 154.555 -56.0066 296.564 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+set_cam 154.381 -55.6794 296.008 5.92 99.66 -0.03 26.48
+say 1 "Amos" "[wait 0.3]En ole kuullut tarina kuin että, koska olin lapsi."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_head_target 155.262 -55.5161 297.407 1"
+send_character_message 2 "set_head_target 153.027 -55.5456 296.243 1"
+send_character_message 2 "set_torso_target 154.571 -56.0646 296.743 0"
+set_cam 150.708 -55.7256 296.219 -0.01 -98.47 0.04 67.0911
+say 2 "Dji" "Ehkä olen tottunut näitä tarinoita lapsille. [wait 0.3]ei paljon nähtävää tässä kylässä enää siitä lähtien, kun Oenferd avasi ovensa"

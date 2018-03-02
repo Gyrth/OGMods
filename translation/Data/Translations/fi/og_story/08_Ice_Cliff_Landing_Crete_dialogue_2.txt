@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+set_character_pos 2 168.127 89.4273 -7.00947 -174
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 165.336 90.1489 -5.70006 0 -49.24 0 90
+say 2 "Rabbit" "En ole koskaan nähnyt kukaan taistella yksin ennen susi!"
+say 1 "Turner" "He vain umpeen koirat todella."
+say 2 "Rabbit" "Tappaa koiria, liian?
+say 1 "Turner" "Minä tapan joku yrittää satuttaa tai orjuuttaa meitä.
+say 2 "Rabbit" "Olen Sun.
+say 2 "Sun" "Ystäväni taistelevat slavers, liian."
+say 2 "Sun" "Olimme matkalla raid lähellä fort, kun pakkaus koirat kiinni, jotkut meistä."
+say 2 "Sun" "Jos haluat liittyä meidän syy..."
+say 1 "Turner" "Ne pitää orjia tämä linnake?"
+say 1 "Turner" "Vain Näytä minulle tie."
+send_global_message "levelwin"

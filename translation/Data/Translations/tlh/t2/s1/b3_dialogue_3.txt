@@ -1,0 +1,12 @@
+#name "Bother"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+send_character_message 1 "set_head_target -31.8273 -5.94865 -143.7 1"
+set_character_pos 1 -32.3782 -6.83608 -143.453 30
+set_cam -34.9392 -6.49424 -140.473 0 -46.49 0 33.2659
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -31.7758 -5.61004 -143.859 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+say 1 "Ghost" "… Qo' budge. [wait 0.5]'oH bot vay' De''e' lojmIt."

@@ -1,0 +1,18 @@
+#name "Note-Transfer"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 20.3913 420.051 -110.579 -82
+send_character_message 1 "set_head_target 20.5423 420.633 -109.84 1"
+set_cam 18.3399 420.755 -110.735 0 -107.72 0 47.1376
+say 1 "Ghost" "bIghHa' Qay QonoS yIqem pong 'avwI'."
+send_character_message 1 "set_head_target 20.5444 420.479 -109.808 1"
+set_cam 20.1248 420.737 -109.45 0 -23.8 0 47.1376
+set_character_pos 1 20.3913 420.092 -110.579 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Qo'noS 40th spurhelm. [wait 0.3]672. [wait 0.5]detained 'ej qaStaHvIS mID mo' qemmeH Sam subject."
+say 2 "Note" "yInbe'taHbogh housing ghaH empry. [wait 0.3]naH jajmeymaj 'oH wouldn't chup 'ej demeanor Hoch."
+say 2 "Note" "'ej QongDaqvo' leather armour SuD hoodie bIQopchugh subject. [wait 0.5]qaSchoH pIq cooperation law' 'ut. [wait 0.3]wej nIS strip search."
+say 2 "Note" "retlhmajDaq. [wait 0.3]wej informed bijou qop. [wait 0.5]bIghHa' je shouldn't je ghaH ghaH. [wait 0.3]'oHchugh je slums yIn patmey lulo'ta' qel."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "vaj much schedule qep presence pong sundown. [wait 0.5]qutluch patlh Sovmo' qaSlaH cha' ghob'e' SaH. [wait 0.5]potlh involvement."

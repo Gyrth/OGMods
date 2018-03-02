@@ -1,0 +1,12 @@
+#name "End"
+#participants 4
+
+set_character_pos 4 46.0848 -2.09148 65.0514 146
+set_character_pos 3 44.6843 -1.92634 64.7707 67
+set_character_pos 2 46.6519 -1.60749 63.2997 170
+set_character_pos 1 43.6953 -2.05662 62.9926 14
+set_cam 44.941 -1.45997 60.5465 0 -177.12 0 90
+say 1 "Turner" "Olet vapaa!"
+say 2 "Prisoner" "Yay!"
+say 3 "Prisoner" "Me viemme sinut meidän perustaa"
+send_global_message "levelwin"

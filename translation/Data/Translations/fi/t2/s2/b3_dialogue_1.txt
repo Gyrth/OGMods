@@ -1,0 +1,18 @@
+#name "Note-Sighting"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 102.661 -11.9977 -167.48 142
+send_character_message 1 "set_head_target 102.109 -11.7565 -167.981 1"
+set_cam 103.217 -11.5485 -169.022 0 142.79 0 51.151
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Antiikin huomautus. [wait 0.5]Ihmettelen, kuinka vanha se on."
+set_character_pos 1 102.661 -12.0549 -167.48 142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 101.414 -11.4191 -167.853 0 -112.73 0 51.151
+say 2 "Note" "Havaitsin erikoinen tapahtuma tänään."
+say 2 "Note" "Kansalainen, [wait 0.3]joka näyttää olleen täysin normaali ja terve eilen [wait 0.3]seurasi jotain näkymätöntä silmämme."
+say 2 "Note" "Minä olen juoksin lausua meidän neuvonantajat tellings hänelle- [wait 0.3]koskaan uskoa kuiskaa pois metsässä [wait 0.3]kuin ne johtavat harhaan- [wait 0.3]mutta olin tyhmä."
+say 2 "Note" "Pelkäsin omasta elämästäni [wait 0.3]ja näin ollen [wait 0.3]yksi meistä on nieltävä kokonaisina asunnon puiden henkiä."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "On puhuttava neuvonantajana tästä. [wait 0.5]En saa sitä pois mielestäni.

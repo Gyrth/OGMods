@@ -1,0 +1,15 @@
+#name "Note-Guardsmen"
+#participants 2
+set_character_pos 1 -287.952 -86.4121 -188.078 -171
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target -288.837 -86.6511 -187.905 1"
+set_cam -287.019 -86.4005 -190.205 0 147 0 32.4078
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "tIQ note. [wait 0.3]letwI' je ghe''or laD qaStaHvIS wov."
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam -286.962 -86.1551 -187.624 0 77.45 0 39.0774
+say 2 "Note" "ghorgh veqlargh tan puS catch SoH. [wait 0.3]be'nalDaj wa' bom vIqawbej 'ej So', 'ej maH 'emvo' nagh."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "ghorgh mej ghaH, [wait 0.3]'In pound 'ej jIchegh maH. [wait 0.5]toDuj onto qa'lI' maH woDlu'chugh. [wait 0.5]chaq SoHvaD 'Iq qa'."

@@ -1,0 +1,28 @@
+#name "Midnight"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_character_message 2 "set_head_target -15.2655 -14.3207 10.9431 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target -14.5083 -14.1223 12.1959 1"
+set_character_pos 2 -14.5457 -15.0289 12.2639 151
+set_character_pos 1 -15.1791 -15.1211 10.9262 -87
+set_cam -17.3916 -14.3655 11.9153 -7.67 -80.66 -0.55 56.9043
+say 1 "Turner" "nuq vIghro' Davang naDev? vaj 'avwI', shouldn't yoDSutmey tuQ SoH?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 2 "set_head_target -15.3486 -14.6032 11.7475 1"
+say 2 "Midnight" "qama' naDev je. ghurbejtaH nuv mIS pegh maS Rabbits caught jIHvaD amethyst."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "qatlh 'e' Data'?"
+send_character_message 1 "set_torso_target -15.4614 -14.6526 11.8725 0.00235122"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target -15.2517 -14.2104 10.9738 1"
+say 2 "Midnight" "slavery QIH. Har 'oH pagh wej, HochHom vIghro', slavery qaD-neH chaH Dapon 'e' yI juH choHwI'maj reH toy'wI''a' labor qet Amethyst."
+send_character_message 1 "set_torso_target -15.4614 -13.5369 11.8725 1"
+say 1 "Turner" "qaD 'ach neH qaS Huplu'taHvIS chaH?"
+send_character_message 1 "set_torso_target -15.4614 -13.5369 11.8725 0.932266"
+send_character_message 2 "set_head_target -14.5886 -14.2104 10.7184 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Midnight" "amethyst mIp: reH je 'ej HoSghaj, jup 'Iq, vay' mev ghaH je. 'ach couldn't neH ba' pagh Qu' jIH."
+send_character_message 1 "set_torso_target -15.4614 -13.5369 11.8725 0.0216638"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "chaq Suq SoH 'ej along 'e' vIHar."

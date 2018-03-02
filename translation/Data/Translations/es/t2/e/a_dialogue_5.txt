@@ -1,0 +1,15 @@
+#name "Note-Outbreak"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -27.5941 -3.60182 -91.9734 -90
+send_character_message 1 "set_head_target -27.6802 -3.45304 -91.1693 1"
+set_cam -29.0328 -3.29631 -92.307 0 -120 0 56.0142
+say 1 "Ghost" "Una nota escrita por uno de los soldados, [wait 0.3]hacer frente a un superior."
+set_cam -28.3258 -3.17752 -91.4267 11.57 -78.78 0 56.0142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "El segador en la jaula que saldrá para despejar la altura de Cinderblood inmundicia."
+say 2 "Note" "Aunque era una medida drástica, [wait 0.3]era totalmente necesaria- [wait 0.3]y que nos ganó la guerra civil."
+say 2 "Note" "No tenemos idea dónde ha ido el segador, [wait 0.3]pero estimamos que en algún lugar en el bosque oriental."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Se ha llevado a su hueso armadura y espada [wait 0.3]demasiado."

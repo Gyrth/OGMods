@@ -1,0 +1,16 @@
+#name "Donatas"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -80.7175 563.206 19.4996 150
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+send_character_message 1 "set_torso_target -80.2847 563.876 21.2491 0"
+send_character_message 1 "set_head_target -81.4943 562.942 18.8156 1"
+set_cam -80.6939 563.17 22.1235 0 13.5 0 31.8901
+say 1 "You" "...[wait 0.3]Miksi se täällä...?"
+send_character_message 1 "set_torso_target -81.2705 562.916 18.7362 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target -80.194 564.201 16.225 1"
+set_cam -72.1939 565.501 23.8456 -8.77 46.07 0 46.7363
+send_level_message "set_camera_dof 0.3 15 10 0 0 0"
+say 1 "You" "Voi katsoa hänen ruumiinsa enää. [wait 0.5]Kodin edessä..."

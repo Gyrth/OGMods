@@ -1,0 +1,20 @@
+#name "Note-Foxglove"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 14.9128 -0.192716 -158.15 -131
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 14.4493 -0.530116 -157.537 1"
+set_cam 15.5444 0.553472 -157.939 -41.45 98.4 -0.01 55.2369
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "recent note. [wait 0.5]ghob'e' ghotvam'e' ghoqwI' empry."
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 15.0395 -0.014715 -156.779 -0.03 2.19 -0.18 40.1399
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 2 "Note" "foxglove naDev."
+say 2 "Note" "roQ biologically rabbit. [wait 0.3]vegh 'ej vegh. [wait 0.3]pagh movements 'ej mannerisms tu'lu'bogh rur wIlegh."
+say 2 "Note" "legh poH ghItlh. [wait 0.3]tu'lu' pagh verbal pagh visible QumpIn SabtaHbogh vIvoqHa' roQ. [wait 0.3]'ej 'ach Hoch action Qu' chaH law' 'e' Quv leghmeH motlhbogh cinderbreathe pagh arliss mang law'."
+say 2 "Note" "legh poH ghItlh. [wait 0.3]neH jaS wa' ta instance roQ 'emvo' Reaper proximity."
+say 2 "Note" "Reaper. [wait 0.3]unlike motlh ghotvam amongst cinderbreathe mang. [wait 0.3]wabmeyvetlh roQ buSHa'."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Ghost" "[wait 0.3]law' entry pe' ngaj."

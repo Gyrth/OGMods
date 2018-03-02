@@ -1,0 +1,16 @@
+#name "Note-Crete"
+#participants 2
+set_character_pos 1 27.5341 15.2194 -123.091 -132
+send_character_message 1 "set_head_target 26.982 15.7246 -122.51 1"
+set_cam 27.1565 15.8698 -124.326 0 -175.08 0 48.9875
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "Analyysi on maailman henki-Jumalan [wait 0.3]olettaen, että ne ovat todellisia."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 26.4049 15.8842 -123.25 0 -110.36 0 33.3467
+say 2 "Note" "Antiikin kirjaa ovat ilmoittaneet meille, että Kreeta (sekä musta ja valkoinen) luodaan ylimääräinen energia otetaan pois toimivaltaa henget (myös vanhin henkemme) kierre hyvin maa jalkojemme toivottavaa muotoihin tai vaikuttaa monia älykkään lajin edustajaan, jotka kansoittavat mantereen Preuwyn."
+say 2 "Note" "Enemmän energiaa, jotka voidaan havaita tietyllä alalla osoittaa suoraan runsaasti ylimääräistä energiaa, joka on keskittynyt kohti hengellinen tehtävä."
+say 2 "Note" "Tämän vuoksi on kohtuullista olettaa, että lisää Kreeta Löysimme alueella, sitä lähempänä olemme vanhin henget hautausmaalla – toisin sanoen Colonial valta Therium."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Katkelma siunausta vanhin henget ja niiden eri konstruktioita, ensimmäinen painos, Authored Herumphal Mandru, valaistu Otto Vendran."

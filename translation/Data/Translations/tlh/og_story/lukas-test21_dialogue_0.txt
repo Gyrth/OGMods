@@ -1,0 +1,15 @@
+#name "RebelMeeting"
+#participants 2
+
+set_character_pos 2 2.42182 -1.78782 4.42306 76
+set_character_pos 1 2.75714 -1.78782 2.49255 -86
+set_cam 3.37822 -1.25582 2.43758 0 124.04 0 90
+say 1 "Turner" "vIghro' slavers neH disarray DaH."
+say 1 "Turner" "nIS maH vogh Rabbits vay'."
+say 1 "Turner" "sanctuary joS vIQoypu'."
+say 2 "Rabbit rebel" "che'bogh chan, Ha'!."
+set_cam 2.94613 -1.14734 2.72588 0 46.1 0 90
+say 1 "Turner" "patlh megh'an ghotvam'e'."
+send_global_message "levelwin"
+
+

@@ -1,0 +1,9 @@
+#name "Win"
+#participants 1
+set_character_pos 1 18.7327 4.95933 3.52645 0
+set_cam 19.7529 5.264 4.81802 0 31.45 0 90
+say 1 "Turner" "Gané."
+say 1 "Turner" "¿Pero lo que gano?"
+say 1 "Turner" "Otro día de vida, otro plato de pasta."
+say 1 "Turner" "Mejor que morir en la tierra."
+send_global_message "levelwin"

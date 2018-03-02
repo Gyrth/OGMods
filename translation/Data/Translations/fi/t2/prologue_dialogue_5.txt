@@ -1,0 +1,21 @@
+#name "Note-Spirits"
+#participants 2
+set_character_pos 1 -24.2959 420.679 -120.573 85
+send_character_message 1 "set_head_target -24.2018 421.01 -121.37 1"
+set_cam -25.6283 421.221 -119.993 0 -56.31 0 46.8474
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Muutamia vartijoita viesti [wait 0.3]Kuka tietää..."
+set_cam -23.4018 421.168 -118.903 0 12.27 0 46.8474
+send_character_message 1 "set_head_target -24.2656 420.958 -121.095 1"
+set_character_pos 1 -24.2959 420.633 -120.573 85
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Ilmoittautuminen construction-divisioonan oli virhe. [wait 0.5]Tiesin, että se olisi, [wait 0.3]Hän kertoi minulle, se olisi, [wait 0.3]mutta täällä olen joka tapauksessa."
+say 2 "Note" "Ottaisin, partio hukkui kaduilla tämän. [wait 0.5]Kyllä [wait 0.3]varma, [wait 0.3]Haluaisin saada puukotti ja voittaa mitä satunnainen crook tulee minun tavalla."
+say 2 "Note" "Mutta ainakin minulla ei käsitellä ajatus, että jokainen koskaan tunsivat ja rakastivat kuolee kamala, [wait 0.3]tulinen kuoleman."
+say 2 "Note" "En liioittele yksi bitti. [wait 0.5]Voit sanoa, että olen vain että outo haluat, [wait 0.3]mutta tiedän, että olen oikeassa."
+say 2 "Note" "On kansanperinteen ja myytti, [wait 0.3]legenda ja tarina, [wait 0.3]mutta minun sanojani; [wait 0.3]Therium henget on kostaa meille jokainen piikki Kreetan olen varastettu niistä."
+say 2 "Note" "Eräänä päivänä mennään liian pitkälle [wait 0.3]ja jumalat hallussa armeijan sade kuoleman ovella avulla arvaamaton juonitteleva pikku paskiaiset."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Voit soittaa minulle idiootti. [wait 0.5]Mutta tarinat, [wait 0.3]myytti osoittautuu aina totta, [wait 0.3]ja naysayers. [wait 0.5]Tämä ei ole poikkeus, [wait 0.3]mitä on elämämme vaan tarina?"

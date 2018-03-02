@@ -1,0 +1,57 @@
+#name "Bother"
+#participants 5
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 15
+set_character_pos 4 108.704 405.559 143.107 27
+send_character_message 4 "set_animation \"Data/Animations/r_sleep.anm\""
+send_character_message 4 "set_head_target 109.34 405.806 142.972 1"
+set_character_pos 3 108.798 405.618 144.931 0
+send_character_message 3 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 3 "set_head_target 110.726 405.96 145.409 1"
+set_character_pos 2 111.149 405.563 144.06 -119
+send_character_message 2 "set_animation \"Data/Animations/r_bigdogswordarmstance.anm\""
+send_character_message 2 "set_torso_target 110.638 405.859 144.81 1"
+send_character_message 2 "set_head_target 109.586 406 144.684 1"
+set_character_pos 1 111.656 405.574 145.378 -94
+send_character_message 1 "set_torso_target 111.196 405.852 145.804 1"
+send_character_message 1 "set_head_target 109.231 405.875 145.061 1"
+set_cam 112.791 406.12 146.346 0 61.42 0 31.347
+say 3 "????" "Hei siellä! [wait 0.5]Hupullinen demon!"
+set_cam 112.791 406.12 146.346 0 61.41 0 31.347
+send_character_message 3 "set_head_target 110.732 405.978 145.407 1"
+send_character_message 3 "set_torso_target 109.535 405.478 145.332 0.00760013"
+set_character_pos 1 111.656 405.502 145.378 -94
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 1 "Ghost" "Mikä?"
+set_character_pos 1 111.656 405.502 145.378 -124
+send_character_message 1 "set_head_target 109.228 405.889 145.064 1"
+send_character_message 1 "set_torso_target 111.195 405.852 145.805 1"
+send_character_message 2 "set_head_target 109.225 406.226 144.935 1"
+send_character_message 2 "set_torso_target 110.635 405.859 144.808 1"
+set_cam 107.631 406.354 145.961 0 -57.03 0 31.347
+send_character_message 3 "set_torso_target 109.597 405.571 145.034 1"
+send_character_message 3 "set_head_target 110.856 406.409 144.134 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 3 "????" "Oletko täällä ottaa meidät pois?"
+send_character_message 3 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+set_character_pos 3 108.798 405.562 144.931 0
+send_character_message 1 "set_head_target 109.151 406.272 144.993 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_torso_target 110.956 405.801 145.25 1"
+set_character_pos 1 111.656 405.502 145.378 -171
+send_character_message 2 "set_head_target 109.31 406.255 144.753 1"
+send_character_message 2 "set_torso_target 110.467 405.859 144.853 1"
+say 2 "???" "Astua pois, [wait 0.3]Kovakuoriainen, [wait 0.3]tai sinulla on satuttaa."
+send_character_message 3 "set_head_target 110.903 406.572 144.119 1"
+send_character_message 3 "set_torso_target 109.371 405.294 144.88 1"
+set_cam 114.22 406.025 141.533 0 133.42 0 31.347
+say 3 "????" "Me emme ei kovakuoriaisia! [wait 0.5]Olemme ylpeitä Oderik järjestystä Urista!"
+send_character_message 1 "set_torso_target 110.997 405.801 145.433 1"
+send_character_message 2 "set_torso_target 110.376 405.859 144.367 1"
+send_character_message 2 "set_head_target 109.21 406.448 144.898 1"
+send_character_message 2 "set_animation \"Data/Animations/r_bigswordarmstance.anm\""
+send_character_message 3 "set_torso_target 109.467 405.566 144.731 1"
+set_character_pos 3 108.798 405.592 144.931 0
+send_character_message 3 "set_animation \"Data/Animations/r_idle.anm\""
+say 2 "???" "Pysy missä olet ja tee äkkinäisiä liikkeitä. [wait 0.5]Emme ole täällä puolestasi."

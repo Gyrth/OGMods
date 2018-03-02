@@ -1,0 +1,15 @@
+#name "Statue-Iren"
+#participants 4
+set_character_pos 2 4.65363 31.0284 17.862 24
+send_character_message 2 "set_head_target 8.21727 33.7839 15.9404 1"
+set_character_pos 1 6.49428 31.0937 16.0844 0
+send_character_message 1 "set_head_target 8.34448 32.3742 16.0949 1"
+set_cam 4.66412 31.7315 14.7328 0 -117.54 0 54.7345
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 10 5"
+say 1 "You" "Merkintä kuuluu..."
+send_character_message 2 "set_head_target 10.9166 39.7065 16.523 1"
+set_cam 4.14282 31.2483 18.525 39.81 -58.98 0.05 53.1691
+send_level_message "set_camera_dof 0.3 3 2 0.3 15 5"
+say 3 "Inscription" "KORKEA KOMENTAJA IREN [wait 0.3]CINDERBREATHE EMPIRE KORKEAN NEUVOSTON YLIKANSLERI."

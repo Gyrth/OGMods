@@ -1,0 +1,45 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 2 -192.663 25.3356 16.8635 70
+send_character_message 2 "set_animation \"Data\Animations\jairoidle.anm\""
+send_character_message 2 "set_eye_dir -191.331 26.6269 13.2357 1"
+send_character_message 2 "set_torso_target -192.576 24.9622 15.7553 1"
+send_character_message 2 "set_head_target -191.372 26.6128 13.3615 1"
+set_character_pos 1 -191.24 25.9241 12.8191 -105
+send_character_message 1 "set_eye_dir -192.503 26.2326 16.3927 1"
+send_character_message 1 "set_torso_target -192.532 25.105 15.4119 1"
+send_character_message 1 "set_head_target -192.581 26.247 16.587 1"
+set_cam -191.26 26.6378 14.4656 -4.03 -0.23 0 43.9267
+say 1 "Ghost" "Hola."
+set_character_pos 1 -191.24 25.9214 12.8191 -105
+send_character_message 1 "set_torso_target -192.32 27.1842 14.8479 0"
+set_cam -191.288 26.8941 11.7002 -14.41 173.59 -0.46 29.9894
+say 2 "???" "..."
+send_character_message 2 "set_torso_target -192.121 25.6347 14.8537 1"
+set_character_pos 1 -191.24 25.8958 12.8191 -105
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+say 1 "Ghost" "¿Me puede decir donde estoy? [wait 0.5]Yo he estado viajando por aquí, y..."
+send_character_message 2 "set_torso_target -191.877 25.3227 14.6706 1"
+send_character_message 2 "set_head_target -191.5 26.3578 12.8322 1"
+set_cam -192.886 26.1241 15.6143 0.41 -164.19 -0.31 29.9894
+say 2 "???" "..."
+send_character_message 2 "set_torso_target -191.877 25.3227 14.6706 0.909302"
+send_character_message 1 "set_head_target -192.574 26.2391 16.5827 1"
+send_character_message 1 "set_torso_target -192.292 27.5024 14.7406 0.99835"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -192.56 26.571 13.7617 0.19 -58.45 0.48 29.9894
+say 1 "Ghost" "¿Qué demonios pasa con los ojos?"
+send_character_message 2 "set_torso_target -191.877 25.3227 14.6706 0"
+send_character_message 1 "set_head_target -192.595 26.4142 16.4412 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam -192.637 26.0951 18.2166 -0.25 -8.25 0.45 29.9894
+send_character_message 1 "set_torso_target -192.292 27.5024 14.7406 0"
+say 1 "Ghost" "¿Cuál es incorrecto con usted? [wait 0.3]¿Me puedes escuchar?"
+set_cam -190.093 26.8002 11.6634 -10.57 145.82 0.64 29.9894
+send_character_message 1 "set_head_target -192.515 25.7988 16.5958 1"
+send_character_message 1 "set_animation \"Data\Animations\r_combatidle.anm\""
+send_character_message 2 "set_animation \"Data\Animations\r_ancientcombatidle.anm\""
+say 1 "Ghost" "...[wait 0.2]¡Oh infierno."
+send_level_message "make_participants_aware"

@@ -1,0 +1,18 @@
+#name "Edsel"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 199.909 -31.984 85.7795 -77
+send_character_message 1 "set_eye_dir 200.23 -32.1437 87.0743 1"
+send_character_message 1 "set_head_target 200.193 -32.0466 86.9034 1"
+set_cam 195.649 -30.9971 83.5431 -9.2 -131.09 0 37.5726
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 199.561 -31.9105 86.9241 1"
+set_cam 198.639 -31.7971 84.945 0 -132.96 0 37.5726
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "...?"
+send_character_message 1 "set_head_target 199.178 -31.9706 87.1017 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+set_cam 199.586 -31.7465 84.6052 -3.4 180 0 37.5726
+say 1 "Ghost" "Mikä on vialla?"

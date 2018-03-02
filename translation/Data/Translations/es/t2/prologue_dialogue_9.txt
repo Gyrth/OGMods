@@ -1,0 +1,17 @@
+#name "Note-Beetles"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 37.3548 420.149 -65.2101 -179
+send_level_message "therium2_enable_object 1869"
+send_character_message 1 "set_head_target 36.6578 420.535 -65.2565 1"
+set_cam 35.4735 420.63 -63.0056 0 -29.84 0 35.1378
+send_level_message "set_camera_dof 0.3 2 0.5 0.3 5 2"
+say 1 "Ghost" "Una página rasgada de periódico pegado en diario de una persona."
+set_cam 36.3475 420.836 -66.1337 0 -140.49 0 35.1378
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Note" "Mientras que cava en el cuadrante C la Therium, Hansel descubrió algo más extraordinario - un clan previamente desconocido de lagomorfos subterráneos que se refieren a sí mismos como escarabajos. Más investigación debe llevarse a cabo, pero de lo poco de nuestro idioma común todavía compartir he recogido que estos escarabajos se separó de nuestra sociedad algunos siglos anteriores sobre mezquinas disputas familiares y luego quedó atrapados de metro cuando las cavernas tomó refugio en comenzó a derrumbarse a su alrededor."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "El Alto Consejo se niega a reconocer su existencia, pero simplemente debo averiguar cómo se las arreglaron para sobrevivir todos estos años por debajo de la superficie."
+send_level_message "therium2_disable_object 1869"

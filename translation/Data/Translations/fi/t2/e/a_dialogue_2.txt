@@ -1,0 +1,41 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -162.805 -18.4073 81.3972 49
+send_character_message 1 "set_eye_dir -161.966 -18.3675 80.5688 1"
+send_character_message 1 "set_torso_target -162.36 -18.5254 81.0873 1"
+send_character_message 1 "set_head_target -161.882 -16.9902 79.9513 1"
+set_cam -163.602 -18.0713 81.605 11.4 -41.71 -0.05 84.6836
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "...[wait 0.3]Lopuksi. [wait 0.5]Olen täällä."
+send_character_message 1 "set_head_target -162.038 -18.2475 80.578 1"
+set_cam -162.727 -18.0237 82.5388 0 -13.68 0 58.5513
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Se on Jairo huomautus..."
+send_character_message 1 "set_eye_dir -162.191 -18.2601 81.0327 1"
+set_character_pos 1 -162.805 -18.6335 81.3972 49
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -161.908 -17.9322 81.2424 0 86.39 0 50.8411
+say 2 "Note" "Ulkopuoli on kevyesti vartioitu. [wait 0.5]Olemme heikentäneet vihollinen."
+say 2 "Note" "Jokainen on aseistettu aseen jonkinlainen- [wait 0.3]broadswords, [wait 0.3]enimmäkseen. [wait 0.5]Älä mene aseettomia."
+say 2 "Note" "Löydät veitsi jonnekin, [wait 0.3]tai miekka yksi vihollisia."
+say 2 "Note" "Jonnekin, [wait 0.3]on avain. [wait 0.5]Käyttää sitä avata oven pohjan torni. [wait 0.5]Sen sijainti on merkitty karttaan."
+say 2 "Note" "Kun avaat oven, [wait 0.3]Seuraa sisätilat, kunnes löydät luola, koristeltu useita uurnat."
+say 2 "Note" "Siellä, [wait 0.3]pitäisi pystyä löytämään komentaja. [wait 0.5]Tappaa hänet, [wait 0.3]ja palaa ulkotiloissa lisäohjeita."
+say 2 "Note" "Pommit, jotka käytämme ovat aivan vieressä tämä huomautus."
+say 2 "Note" "Jos joku yrittää puhua, [wait 0.3]tappaa heidät. [wait 0.5]Ne yrittää valehdella sinulle pysäyttää sinut."
+say 2 "Note" "Avaimeen sijaitsee jossain korkealla."
+send_character_message 1 "set_eye_dir -162.74 -18.5064 80.7398 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Tutkimus kartta. [wait 0.5]Vihollisia mahdolliset sijainnit on merkitty [wait 0.3]sekä sijainti oven."
+send_character_message 1 "set_head_target -162.382 -18.2421 80.2224 1"
+set_cam -162.368 -18.0164 82.2283 0 11.49 0 54.8952
+say 1 "Ghost" "Hän on pitänyt ulkoa kartalla."
+set_cam -162.408 -17.8291 80.1591 -90 180 140.36 65.6732
+say 2 "Note" "..."
+send_character_message 1 "set_torso_target -162.56 -18.6547 81.1626 1"
+send_character_message 1 "set_head_target -161.249 -16.6849 75.4348 1"
+set_cam -162.836 -18.1917 82.7006 14.58 -18.59 0 63.5372
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "No, [wait 0.5]Onnea minulle, [wait 0.2]Arvaan."

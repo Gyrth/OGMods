@@ -1,0 +1,21 @@
+#name "Note-Spirits"
+#participants 2
+set_character_pos 1 -24.2959 420.679 -120.573 85
+send_character_message 1 "set_head_target -24.2018 421.01 -121.37 1"
+set_cam -25.6283 421.221 -119.993 0 -56.31 0 46.8474
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Mensaje de algunos guardias a [wait 0.3]Quién sabe..."
+set_cam -23.4018 421.168 -118.903 0 12.27 0 46.8474
+send_character_message 1 "set_head_target -24.2656 420.958 -121.095 1"
+set_character_pos 1 -24.2959 420.633 -120.573 85
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Mi firma para arriba para la división de construcción fue un error. [wait 0.5]Sabía que sería, [wait 0.3]ella me dijo que sería, [wait 0.3]pero aquí estoy de todos modos."
+say 2 "Note" "Me gustaría tener scouting las calles ahogado sobre esto. [wait 0.5]Sí [wait 0.3]seguro, [wait 0.3]Quisiera conseguir apuñalado y golpeado por cualquier ladrón al azar viene mi manera."
+say 2 "Note" "Pero al menos no tengo que lidiar con la idea de que todo el mundo siempre sabía y amó morirá un horrible, [wait 0.3]muerte ardiente."
+say 2 "Note" "No estoy exagerando un poco. [wait 0.5]Se puede decir que estoy siendo raro todos que quiere, [wait 0.3]pero sé que tengo razón."
+say 2 "Note" "Todo es folklore y mito, [wait 0.3]leyenda y cuento, [wait 0.3]pero mis palabras; [wait 0.3]los espíritus de la Therium tendrá la venganza en nosotros para cada punto de Creta que hemos robado de ellos."
+say 2 "Note" "Un día vamos a ir demasiado lejos, [wait 0.3]y el ejército poseído de los dioses va a llover la muerte sobre nosotros a través del uso de bastardos poco intrigas impredecibles."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Usted puede llamarme idiota. [wait 0.5]Pero en las historias, [wait 0.3]mito siempre resulta verdadero, [wait 0.3]y los pesimistas. [wait 0.5]Esto no será una excepción, [wait 0.3]¿por lo que es nuestra vida sino una historia?"

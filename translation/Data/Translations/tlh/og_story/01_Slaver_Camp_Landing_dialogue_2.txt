@@ -1,0 +1,31 @@
+#name "Civ3_end"
+#participants 2
+set_dialogue_color 2 1 0.7 0.2
+set_dialogue_voice 2 17
+send_character_message 2 "set_animation \"Data/Animations/r_woundedidle.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+set_cam -36.8286 23.5808 -45.437 1.02 70.85 3.57 40
+set_character_pos 1 -39.4629 23.0465 -45.858 116
+set_character_pos 2 -40.2432 23.0977 -47.1307 -72
+send_character_message 1 "set_head_target -40.5239 23.7415 -45.8103 0"
+send_character_message 1 "set_torso_target -40.2534 23.659 -45.8468 0"
+send_character_message 2 "set_head_target -39.5207 23.846 -45.91 1"
+send_character_message 2 "set_torso_target -40.0453 22.9144 -46.4513 1"
+say 1 "Turner" "vaj QaD DaH."
+send_character_message 2 "set_head_target -40.0909 23.4558 -46.191 1"
+send_character_message 2 "set_torso_target -40.1177 22.6673 -46.5427 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Vera" "nuqneH! 'ach wej tIq. cheghpu''a' legh cheghta'DI' ghewmey roD."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "nuqDaq 'oH latlhpu'? wab rur vay' Such yIDIl chaH."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_torso_target -40.2952 23.6805 -46.4671 0"
+send_character_message 2 "set_head_target -41.5839 24.5142 -47.3865 0.972708"
+send_level_message "set_camera_dof 0.3 10 10 0 0 0"
+say 2 "Vera" "rIn meH pa' path NaquvQo'moHMogh couple rep."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 1 "set_torso_target -39.8293 23.659 -46.599 1"
+send_character_message 1 "set_head_target -43.9044 23.7415 -48.0533 1"
+say 1 "Turner" "meH 'oH? toH, nuqneH legh qaSpu'DI' Doch until chaw'a' wItI'nISmo'."
+send_global_message "levelwin"

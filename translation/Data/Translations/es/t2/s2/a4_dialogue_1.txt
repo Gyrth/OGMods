@@ -1,0 +1,203 @@
+#name "Meet"
+#participants 5
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0 0.8 0.8
+set_dialogue_voice 2 16
+set_dialogue_color 3 0.6 0.9 0
+set_dialogue_voice 3 12
+set_dialogue_color 4 0.85 0.5 0
+set_dialogue_voice 4 14
+set_character_pos 4 -84.9878 157.949 174.209 -174
+send_character_message 4 "set_animation \"Data\Animations\interestingsit.anm\""
+send_character_message 4 "set_eye_dir -91.1841 156.872 173.536 1"
+send_character_message 4 "set_head_target -89.6334 157.266 173.603 1"
+set_character_pos 3 -93.1737 157.117 177.807 50
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+send_character_message 3 "set_eye_dir -91.5902 156.928 174.388 1"
+send_character_message 3 "set_head_target -91.521 156.932 174.352 1"
+set_character_pos 2 -94.756 156.661 174.085 0
+send_character_message 2 "set_animation \"Data\Animations\r_smallswordfrontstance.anm\""
+send_character_message 2 "set_eye_dir -91.1978 156.926 173.477 1"
+send_character_message 2 "set_torso_target -94.2427 156.31 173.281 1"
+send_character_message 2 "set_head_target -92.2077 156.875 173.796 1"
+set_character_pos 1 -91.2164 156.079 173.476 -76
+send_character_message 1 "set_eye_dir -94.3577 157.636 174.05 1"
+send_character_message 1 "set_torso_target -91.5222 155.568 174.571 1"
+send_character_message 1 "set_head_target -92.4346 156.867 174.637 1"
+set_cam -92.1632 156.724 174.969 0 -34.61 0 37.1666
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "??" "Un momento. [wait 0.3]No te muevas."
+send_character_message 1 "set_head_target -92.8261 157.762 177.56 1"
+set_cam -91.0282 156.694 172.014 4.38 166.59 0 26.7669
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 3 "???" "¿Quién?"
+send_character_message 1 "set_eye_dir -85.0348 158.299 174.205 1"
+send_character_message 1 "set_head_target -87.1733 157.912 175.277 1"
+send_character_message 2 "set_head_target -85.2391 158.173 174.281 1"
+send_character_message 4 "set_head_target -94.4362 157.494 173.864 1"
+set_cam -84.0596 158.403 173.988 -9.64 92.62 -0.24 27.5097
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 4 "????" "COBUS, [wait 0.4]no utilizar el estoque."
+send_character_message 2 "set_head_target -85.7844 158.067 174.332 1"
+send_character_message 4 "set_head_target -94.4874 157.425 174.175 1"
+send_character_message 1 "set_torso_target -90.7863 155.792 174.648 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 4 "????" "El Imperio huele la sangre de conejo."
+send_character_message 1 "set_torso_target -92.4838 156.496 174.898 1"
+send_character_message 1 "set_head_target -93.3105 157.256 174.804 1"
+say 4 "????" "¿Lo que tenemos que decir entonces? [wait 0.4]¿FESS para arriba en nuestros viajes?"
+send_character_message 1 "set_eye_dir -93.1768 157.969 177.685 1"
+send_character_message 1 "set_head_target -93.033 157.877 176.854 1"
+send_character_message 1 "set_torso_target -91.8015 156.388 175.089 1"
+set_cam -93.3135 158.225 178.813 -15.39 -15.43 -0.29 27.5097
+say 3 "???" "He visto esa cara antes."
+send_character_message 3 "set_head_target -84.9275 158.257 174.236 1"
+say 3 "???" "Ferdi, [wait 0.3]¿tiene el cartel?"
+send_character_message 4 "set_torso_target -85.6451 157.71 174.279 1"
+send_character_message 4 "set_head_target -92.7949 157.83 177.345 1"
+set_cam -85.7065 158.188 173.339 0.16 -139.35 0.74 30.4005
+say 4 "Ferdi" "Aquí mismo, Drika."
+send_character_message 3 "set_head_target -87.0662 156.152 175.276 1"
+send_character_message 2 "set_head_target -87.0694 156.138 174.752 1"
+send_character_message 4 "set_torso_target -87.3024 155.89 174.995 1"
+send_character_message 4 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_character_pos 4 -86.6826 155.419 174.946 -174
+set_cam -45.7234 179.747 77.49 0.44 88.76 -0.61 65.8291
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 3 "Drika" "Eres consciente de ello, [wait 0.5]¿corregir?"
+send_character_message 1 "set_torso_target -91.6516 156.141 175.069 1"
+send_character_message 1 "set_head_target -92.7744 157.672 176.995 1"
+send_character_message 4 "set_head_target -90.445 156.951 173.559 1"
+send_character_message 3 "set_head_target -91.5064 156.916 173.873 1"
+send_character_message 2 "set_head_target -92.1339 156.883 173.544 1"
+set_cam -89.9325 156.62 172.598 0.73 128.21 -0.19 58.4026
+send_level_message "set_camera_dof 0.3 5 4 0 0 0"
+say 3 "Drika" "Suena como que eres peligrosa. [wait 0.3]Tal vez debo reportarlo a los guardias."
+send_character_message 4 "set_head_target -90.447 156.949 173.564 1"
+send_character_message 4 "set_eye_dir -91.1841 156.872 173.536 0.96007"
+send_character_message 4 "set_torso_target -87.1926 155.806 174.636 1"
+set_cam -87.6662 156.121 173.977 0.1 -134.72 0.75 35.916
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 4 "Ferdi" "Drika, [wait 0.4]usted sabe cómo son los conejos."
+send_character_message 4 "set_eye_dir -91.1841 156.872 173.536 0.858496"
+send_character_message 4 "set_head_target -90.8499 156.609 173.45 1"
+say 4 "Ferdi" "Una vez que les dé lo que quieres..."
+send_character_message 4 "set_torso_target -87.2573 155.541 174.606 1"
+send_character_message 4 "set_head_target -90.9757 156.872 173.456 1"
+send_character_message 4 "set_eye_dir -91.1841 156.872 173.536 0.456344"
+say 4 "Ferdi" "Nunca dejarás de oír hablar de él."
+set_cam -91.9314 157.735 177.074 1.92 117.93 0.43 35.916
+say 3 "Drika" "...[wait 0.5]lo que diga, he [wait 0.3]¿terrorista?"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_character_pos 1 -91.2151 156.081 173.471 -76
+send_character_message 1 "set_head_target -92.9821 157.082 177.501 1"
+send_character_message 1 "set_torso_target -91.4778 155.934 174.671 1"
+set_cam -90.988 156.652 175.327 0.23 6.98 -0.61 35.916
+say 1 "Ghost" "[wait 0.2]¿Quién diablos eres? [wait 0.5]¿Arliss?"
+set_character_pos 4 -86.6826 155.344 174.946 -174
+send_character_message 4 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+send_character_message 4 "set_eye_dir -91.1841 156.872 173.536 1"
+send_character_message 4 "set_head_target -91.0256 156.659 173.668 1"
+send_character_message 4 "set_torso_target -87.3872 155.904 174.723 1"
+set_cam -87.9313 156.109 174.125 -0.6 -125.78 0.25 35.916
+say 4 "Ferdi" "¿Podía oler el jabón en la piel?"
+send_character_message 3 "set_head_target -87.0485 156.45 175.11 1"
+send_character_message 2 "set_head_target -91.6678 156.983 173.324 1"
+set_cam -94.7102 157.587 173.068 -0.29 -166.46 0.58 27.0988
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 3 "Drika" "¿Sobre su propio olor a suciedad y zanahorias? [wait 0.3]Poco probable."
+send_character_message 2 "set_head_target -91.7899 157.315 174.214 1"
+send_character_message 3 "set_torso_target -92.8887 157.237 177.334 1"
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 3 "set_head_target -94.7718 157.864 174.609 1"
+say 3 "Drika" "COBUS, [wait 0.2]¿Qué debemos hacer con esta alimaña?"
+send_character_message 2 "set_head_target -91.5677 156.745 173.236 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Cobus" ".[wait 0.3].[wait 0.3]."
+send_character_message 4 "set_eye_dir -94.1934 157.557 174.08 0.52634"
+set_cam -87.8648 156.207 174.018 -0.58 -129.52 0.29 27.0988
+send_character_message 4 "set_head_target -94.4548 157.769 174.088 1"
+say 4 "Ferdi" "Silencio. [wait 0.5]No una sorpresa."
+send_character_message 3 "set_torso_target -93.0003 156.902 177.348 1"
+send_character_message 3 "set_head_target -94.5071 157.592 174.297 1"
+send_character_message 2 "set_head_target -91.507 156.718 173.45 1"
+set_cam -91.3058 157.825 179.729 -4.6 36.39 -0.42 27.0988
+send_character_message 4 "set_head_target -90.3874 156.69 173.708 1"
+send_character_message 4 "set_eye_dir -90.6565 156.776 173.628 1"
+say 3 "Drika" "Cuando hayamos terminados con esta cola de corto, [wait 0.2]COBUS, [wait 0.5]Necesitamos tener un [wait 0.1]'hablar' [wait 0.1]Acerca de esto."
+send_character_message 2 "set_torso_target -94.264 156.562 173.215 1"
+send_character_message 3 "set_torso_target -92.6435 157.132 177.522 1"
+send_character_message 3 "set_head_target -94.5003 157.775 174.224 1"
+say 3 "Drika" "La comunicación es vital para nuestro éxito."
+send_character_message 4 "set_eye_dir -90.6565 156.776 173.628 0.748184"
+send_character_message 4 "set_head_target -89.8314 155.797 173.398 1"
+send_character_message 4 "set_animation \"Data\Animations\r_dialogue_thoughtful.anm\""
+set_cam -88.5751 156.134 174.537 -0.86 -103.56 -0.18 27.0988
+say 4 "Ferdi" "Decir, [wait 0.3]eso me da algo."
+send_character_message 1 "set_head_target -86.9899 156.25 174.832 1"
+send_character_message 1 "set_torso_target -90.6391 156.103 174.419 1"
+send_character_message 4 "set_head_target -90.6227 156.784 173.625 1"
+set_cam -85.7049 156.108 175.67 3.23 63.36 -0.02 27.0988
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "¿Qué? [wait 0.2]¿Listos para volver a sus puestos de rascarse?"
+send_character_message 3 "set_head_target -90.4882 157 174.424 1"
+send_character_message 3 "set_torso_target -92.4011 156.466 177.69 1"
+set_cam -90.8152 157.527 176.887 3.68 109.26 -0.23 27.0988
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 3 "Drika" "La boca en este... [wait 0.3]asqueroso."
+send_character_message 3 "set_head_target -87.8199 156.264 175.304 1"
+say 3 "Drika" "Ferdi, [wait 0.3]hablar su mente."
+send_character_message 4 "set_torso_target -87.3586 156.317 174.748 1"
+send_character_message 4 "set_head_target -90.0772 156.714 174.852 1"
+set_cam -87.5011 156.196 174.021 0.08 -142.61 0.5 27.0988
+say 4 "Ferdi" "Uiduer... [wait 0.5]¿Cuál es la palabra en la lengua de conejo?"
+send_character_message 3 "set_torso_target -92.2877 156.557 177.568 1"
+send_character_message 3 "set_head_target -93.2044 157.518 174.271 1"
+set_cam -94.7038 157.447 172.415 1.99 -168.34 0.42 27.0988
+say 2 "Cobus" "Rescate."
+send_character_message 2 "set_head_target -87.8709 156.326 174.687 1"
+send_character_message 4 "set_head_target -93.7057 157.727 173.98 1"
+send_character_message 4 "set_torso_target -87.3865 155.96 174.921 1"
+send_character_message 4 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -85.6094 156.115 175.358 4.1 76.13 0.51 27.0988
+send_character_message 3 "set_torso_target -92.4629 156.822 177.005 1"
+send_character_message 3 "set_head_target -94.2051 157.539 174.446 1"
+say 4 "Ferdi" "Por último, [wait 0.2]una palabra."
+send_character_message 2 "set_head_target -91.5265 156.891 173.659 1"
+send_character_message 4 "set_head_target -90.3184 156.843 173.697 1"
+say 4 "Ferdi" "Acurrucándose en que dirthole de una casa significa mucho para la cola corta."
+send_character_message 3 "set_torso_target -92.2722 157.19 177.075 1"
+set_cam -91.5043 158.012 179.381 -7.29 37.11 0.56 27.0988
+say 3 "Drika" "COBUS, [wait 0.2]los tome."
+send_character_message 1 "set_animation \"Data\Animations\r_combatidle.anm\""
+send_character_message 1 "set_eye_dir -90.7125 156.894 175.023 0"
+send_character_message 1 "set_torso_target -90.7799 154.754 174.583 1"
+send_character_message 1 "set_head_target -90.5928 156.454 175.343 1"
+set_cam -90.3388 156.676 175.065 0.99 28.86 0.42 27.0988
+say 1 "Ghost" "[wait 0.5]Rayos..."
+send_character_message 1 "set_head_target -91.3358 157.106 175.234 1"
+send_character_message 1 "set_torso_target -91.4697 154.825 174.436 1"
+set_character_pos 1 -91.2151 156.081 173.471 -92
+send_character_message 2 "set_torso_target -92.677 156.046 174.197 1"
+set_character_pos 2 -92.6938 156.298 175.24 50
+send_character_message 3 "set_head_target -91.2708 155.804 172.465 1"
+send_character_message 2 "set_head_target -91.2609 155.783 172.579 1"
+send_character_message 4 "set_head_target -91.2412 155.672 172.513 1"
+send_character_message 4 "set_animation \"Data\Animations\r_combatidle2.anm\""
+send_character_message 4 "set_torso_target -90.1817 155.929 175.654 1"
+set_character_pos 4 -90.0483 155.846 176.718 101
+set_cam -102.512 173.411 168.748 -0.01 -84.41 -1.08 27.0988
+say 5 "" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_blockfrontko.anm\""
+set_cam -89.4697 156.352 172.888 0.36 76.74 1.02 37.2201
+say 5 "" "..."
+set_cam -91.2096 155.717 172.344 15.61 175.02 -1.21 57.8099
+say 5 "" "..."
+set_cam -91.2096 155.717 172.344 5.46 -177.61 -4.74 57.8099
+say 4 "Ferdi" "Por lo que veo en los carteles, que hacen un montón para asegurar le."
+set_cam -91.2096 155.717 172.344 1.9 166.73 -0.9 57.8099
+say 3 "Drika" "Vamos a ver."
+fade_to_black 1
+say 5 "" "..."
+send_global_message "levelwin a"

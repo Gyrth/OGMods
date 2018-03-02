@@ -1,0 +1,25 @@
+#name "Dogs1"
+#participants 3
+send_character_message 3 "set_torso_target -41.6933 96.2737 103.702 1"
+send_character_message 3 "set_head_target -42.8177 96.7654 103.655 0.925162"
+send_character_message 2 "set_animation \"Data/Animations/r_spearstance.anm\""
+send_character_message 2 "set_head_target -41.8694 96.6706 104.669 1"
+send_level_message "set_camera_dof 0 0 0 0.3 6 3"
+set_character_pos 1 -48.56 90.0581 99.2967 -75
+set_character_pos 3 -41.9104 96.0103 104.763 57
+set_character_pos 2 -39.4173 96.0288 105.203 173
+set_dialogue_color 2 0.5 0.5 1.0
+set_dialogue_color 3 1.0 0.5 0.5
+set_dialogue_voice 2 14
+set_dialogue_voice 3 13
+set_cam -41.5454 96.214 98.8326 1.12 -173.58 1.88 56.175
+send_level_message "music_layer_override -1"
+say 2 "Softpaws" "Odio estar aquí en el frío y la oscuridad, mientras que todo el mundo llega a ver las peleas."
+send_character_message 3 "set_torso_target -40.2922 96.2737 103.654 1"
+send_character_message 3 "set_head_target -39.4684 96.7654 105.191 0.925162"
+say 3 "Hardbite" "Es su propia culpa. Si había mantenido sus patas de sus esclavos, amatista no habría asignado aquí y yo a cuidar a los niños le."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Softpaws" "Vale la pena. No puede resistir esas colas poco abombadas."
+send_character_message 3 "set_torso_target -40.966 96.2737 102.981 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 3 "Hardbite" "Eres repugnante."

@@ -1,0 +1,41 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -162.805 -18.4073 81.3972 49
+send_character_message 1 "set_eye_dir -161.966 -18.3675 80.5688 1"
+send_character_message 1 "set_torso_target -162.36 -18.5254 81.0873 1"
+send_character_message 1 "set_head_target -161.882 -16.9902 79.9513 1"
+set_cam -163.602 -18.0713 81.605 11.4 -41.71 -0.05 84.6836
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "...[wait 0.3]tagha'. [wait 0.5]naDev jIH."
+send_character_message 1 "set_head_target -162.038 -18.2475 80.578 1"
+set_cam -162.727 -18.0237 82.5388 0 -13.68 0 58.5513
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "jairo note."
+send_character_message 1 "set_eye_dir -162.191 -18.2601 81.0327 1"
+set_character_pos 1 -162.805 -18.6335 81.3972 49
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -161.908 -17.9322 81.2424 0 86.39 0 50.8411
+say 2 "Note" "lightly 'avwI' qach. [wait 0.5]jagh pujmoH maH."
+say 2 "Note" "yoDSutmey tuQ Hoch je 'op bIquv nuH- [wait 0.3]broadswords. [wait 0.3]mostly. [wait 0.5]wej ghoS nuH luHutlhbogh wejmaH cha'."
+say 2 "Note" "taj vogh laH tu' SoH. [wait 0.3]pagh 'etlh chen jagh wa'."
+say 2 "Note" "vogh [wait 0.3]tu'lu' ngaQHa'moHwI'mey. [wait 0.5]vaj DanoHmeH lojmIt unlock pong ghurqu' je waw'. [wait 0.5]ghItlh location He 'angbogh wItlha'."
+say 2 "Note" "wa'logh lojmIt unlock SoH. [wait 0.3]qoD tlha' until DIS puS urns decorated tu' SoH."
+say 2 "Note" "pa' [wait 0.3]vaj nobmeH ra'wI' ghaH tu'. [wait 0.5]ghaH HoH. [wait 0.3]'ej tIHmey instruction vISangchu'Qo'chugh qach."
+say 2 "Note" "bombs lo' maH 'e' lugh beside note."
+say 2 "Note" "vaj yIjatlh SoH 'e' nID vay'. [wait 0.3]chaH HoH. [wait 0.5]SoH, ghaH SoH mev jIQot lunID."
+say 2 "Note" "Sam ngaQHa'moHwI'mey bImejnIS vogh jen."
+send_character_message 1 "set_eye_dir -162.74 -18.5064 80.7398 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "He 'angbogh wItlha' HaD. [wait 0.5]ghItlhta' chenpu' positions jagh. [wait 0.3]along with position lojmIt."
+send_character_message 1 "set_head_target -162.382 -18.2421 80.2224 1"
+set_cam -162.368 -18.0164 82.2283 0 11.49 0 54.8952
+say 1 "Ghost" "qach QoyDI' ghaH He 'angbogh wItlha' attached ghaH."
+set_cam -162.408 -17.8291 80.1591 -90 180 140.36 65.6732
+say 2 "Note" "..."
+send_character_message 1 "set_torso_target -162.56 -18.6547 81.1626 1"
+send_character_message 1 "set_head_target -161.249 -16.6849 75.4348 1"
+set_cam -162.836 -18.1917 82.7006 14.58 -18.59 0 63.5372
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "toH [wait 0.5]yIghoSDo' jIHvaD. [wait 0.2]loy jIH."

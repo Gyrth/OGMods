@@ -1,0 +1,14 @@
+#name "Win"
+#participants 2
+set_character_pos 2 19.3999 4.91066 3.08065 -97
+set_character_pos 1 18.4647 4.95933 3.72757 0
+set_cam 19.4341 5.64064 4.30153 0 31.45 0 90
+say 1 "Turner" "No estuvo tan mal.
+say 1 "Turner" "No debería ser demasiado difícil sobrevivir aquí."
+say 1 "Turner" "Sólo tenemos que sostener en largo lo suficiente para escapar."
+say 2 "Midnight" "Estoy seguro de que era sólo el acto de apertura, para poner a prueba nuestras habilidades."
+say 2 "Midnight" "En cuanto a escapar... buena suerte.
+say 2 "Midnight" "Amatista es la arena.
+say 2 "Midnight" "Mientras vive, nunca llegaremos lejos."
+say 1 "Turner" "Sólo tendrá que dejar de vivir, entonces."
+send_global_message "levelwin"

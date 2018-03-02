@@ -1,0 +1,19 @@
+#name "Note-Terrorists"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -144.805 3.60233 -104.364 155
+send_character_message 1 "set_head_target -145.56 3.72121 -104.888 1"
+set_cam -143.186 4.01854 -104.73 0 90 0 42.0321
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "note vo' commanding officers wa'."
+set_character_pos 1 -144.805 3.5349 -104.364 155
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -145.462 4.14812 -103.718 0 -20.63 0 42.0321
+say 2 "Note" "Qo'noS 39th spurhelm. [waqit 0.3]671. [wait 0.5]roD lurgh squad ra'wI' mInDu' neH.
+say 2 "Note" "poH ghur terrorist activity ghIthbe' colonial."
+say 2 "Note" "lIq ratlh loD bID je nej vay' pIH nuv campgrounds mej. [wait 0.5]nuqDaq loD direct vaj DaSov."
+send_character_message 1 "set_head_target -144.225 3.60416 -107.097 1"
+set_cam -145.462 4.14801 -103.718 0 -20.63 0 42.0321
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "paranoia mu'tlhegh'e' ja'chuqtaHvIS."

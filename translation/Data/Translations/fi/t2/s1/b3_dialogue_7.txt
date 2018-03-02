@@ -1,0 +1,16 @@
+#name "Note-Gunpowder"
+#pariticipants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 17.8347 31.6095 -116.013 58
+send_character_message 1 "set_head_target 18.1728 31.9015 -116.556 1"
+set_cam 18.6701 32.1478 -115.054 0 30 0 43.359
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 1 "Ghost" "Huomata, [wait 0.3]todennäköisesti kirjoittanut yksi keksijöistä."
+set_character_pos 1 17.8347 31.6095 -116.013 58
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 17.8744 32.1596 -117.355 0 176.96 0 43.359
+say 1 "Note" "Vakoojamme Arlissian kollektiivinen huomautukset ovat tulleet. [wait 0.5]Purku [wait 0.3]Ruuti ja tykkien; [wait 0.3]vähän huolestuttavaa."
+say 1 "Note" "Vaikka se on todennäköisesti he käyttävät sitä rakentamista ja kaivaminen, [wait 0.3]sodan poliittiset sivuvaikutukset eivät ole minun miettiä."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Note" "Esittely-ja Poistotuotteet ovat tulleet, [wait 0.3]joten joudun aloittamaan käänteissuunnittelun aina vähän..."

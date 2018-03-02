@@ -1,0 +1,43 @@
+#name "End"
+#participants 3
+send_character_message 1 "empty_hands"
+send_character_message 2 "empty_hands"
+send_character_message 3 "empty_hands"
+send_character_message 3 "set_torso_target -69.9765 -24.7466 7.74758 0"
+send_character_message 3 "set_head_target -67.9326 -23.496 -0.257242 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_worriedpose_1.anm\""
+set_dialogue_color 3 1 1 0.8
+set_dialogue_voice 3 18
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.1"
+send_level_message "music_layer_override 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 2 "set_torso_target -67.4513 -23.463 0.683046 1"
+send_character_message 2 "set_head_target -65.7266 -22.7612 0.199999 1"
+send_character_message 1 "set_torso_target -68.0967 -23.463 -0.0612452 1"
+send_character_message 1 "set_head_target -68.6849 -23.1258 -0.0748911 1"
+set_character_pos 3 -68.9606 -23.9539 0.428814 4
+set_character_pos 2 -68.1047 -23.9006 0.830667 19
+set_character_pos 1 -65.6724 -23.6923 0.187807 -167
+set_cam -64.246 -22.5171 0.429376 -12.34 89 -1.28 31.5918
+say 2 "Sky" "Pensé que nos eran los únicos dispuestos a luchar, agradable para ver que estaba equivocado."
+send_character_message 1 "set_torso_target -68.0967 -23.463 -0.0612452 1"
+send_character_message 2 "set_head_target -65.7266 -22.7612 0.199999 1"
+send_character_message 2 "set_torso_target -67.623 -23.463 0.741297 1"
+send_character_message 1 "set_head_target -68.0856 -23.1227 0.779791 1"
+say 1 "Turner" "Tuve el mismo pensamiento."
+send_character_message 2 "set_torso_target -67.4173 -23.463 0.790847 1"
+send_character_message 2 "set_head_target -65.5539 -23.2018 0.265785 1"
+say 2 "Sky" "En ese caso, Acompáñame. Está sosteniendo a nuestro amigo adoquín a otro campamento en las colinas."
+send_character_message 3 "set_torso_target -65.7879 -23.8194 1.38886 0.725589"
+send_character_message 3 "set_head_target -68.0711 -23.0733 0.887348 1"
+say 3 "Lightning" "Lo reviso en mi hermano, asegúrese de que está bien."
+send_character_message 3 "set_torso_target -65.7879 -23.8194 1.38883 0.725589"
+send_character_message 1 "set_torso_target -68.0361 -23.3688 -0.762186 1"
+send_character_message 1 "set_head_target -68.2868 -22.4686 -2.56705 1"
+send_character_message 3 "set_head_target -68.0528 -23.099 0.880855 1"
+say 1 "Turner" "Creo que lo vi en el camino. Perdió mucha sangre."
+send_character_message 3 "set_torso_target -66.3679 -23.3657 -1.68184 0.357445"
+send_character_message 2 "set_head_target -65.5539 -22.6319 0.265785 1"
+send_character_message 2 "set_torso_target -67.1747 -23.463 0.935562 1"
+say 2 "Sky" "Vamos. Si no coger para arriba con adoquín esta noche, quién sabe a donde te llevara."
+send_global_message "levelwin"

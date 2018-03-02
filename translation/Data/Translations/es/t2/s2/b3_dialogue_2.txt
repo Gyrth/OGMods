@@ -1,0 +1,18 @@
+#name "Note-Scribe"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 21.6836 -11.5197 -187.582 -30
+send_character_message 1 "set_head_target 22.4485 -11.2246 -187.157 1"
+set_cam 19.7725 -11.0949 -185.917 0 -60 0 37.0984
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 1 "Ghost" "Una nota antigua. [wait 0.5]Esto debe ha sido un discurso, [wait 0.3]escrito por un escribano."
+set_cam 22.6525 -10.854 -186.701 0 40.09 0 37.0984
+set_character_pos 1 21.6836 -11.4775 -187.582 -30
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Buena gente, [wait 0.3]no tenemos ninguna otra opción que huir."
+say 2 "Note" "El demonio ha matado a muchos de nosotros, [wait 0.3]destruyeron nuestros hogares, [wait 0.3]¡habían quemado nuestras fuentes en el suelo!"
+say 2 "Note" "Furia de los dioses casi ha tragado [wait 0.3]¿qué opción tenemos pero al huir?"
+say 2 "Note" "Siga con nosotros, [wait 0.3]los asesores a la ruta oro- [wait 0.3]hacia las cavernas de Altrith."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "A partir de ahí, [wait 0.3]nos puede hacer nada más que sobrevivir a los ataques del demonio y esperar a que la furia de Dios."

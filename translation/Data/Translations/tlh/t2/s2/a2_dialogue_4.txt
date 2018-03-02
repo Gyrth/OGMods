@@ -1,0 +1,19 @@
+#name "Note-Execution"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -111.626 18.0616 168.124 -158
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target -112.617 17.7268 168.456 1"
+set_cam -109.364 18.2246 168.52 -4.29 87.67 0 36.0807
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "QonoS qatlh muHlu'chugh vay'. [wait 0.5]chaH ghob'e' Sum."
+send_character_message 1 "set_head_target -112.563 17.7268 168.456 1"
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam -112.806 18.2129 169.046 0.02 -50.75 0.02 36.0807
+say 2 "Note" "loD tu' DIv multiple HeS bopummeH cinderbreathe empry chut. [wait 0.5]HeS luqoplu' ghaH. [wait 0.3]ghajbogh:"
+say 2 "Note" "jagh wo' harboured. [wait 0.5]DaH nobvam arliss qoch maHlaH vIghro' mech narcotics vIneH."
+say 2 "Note" "Qo'noS QuS luleghpa' nov. [wait 0.5]DaH nobvam arlissian Collective."
+say 2 "Note" "vuv member cinderbreathe 'avwI' raD assaulted."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "sum HeS pong Hegh punishable. [wait 0.5]tlham bopummeH cinderbreathe qutluch patlh Sovmo' gaze tlha'."

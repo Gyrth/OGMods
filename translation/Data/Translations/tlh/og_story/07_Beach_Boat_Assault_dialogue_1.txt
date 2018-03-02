@@ -1,0 +1,35 @@
+#name "End"
+#participants 4
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_1.anm\""
+send_character_message 2 "set_head_target 10.2735 19.1144 167.766 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 2 11.7922 18.3885 166.767 -106
+set_character_pos 3 11.9785 18.3885 167.939 145
+set_character_pos 4 11.1065 18.3885 168.523 92
+set_dialogue_color 2 0.5 1 1
+set_dialogue_voice 2 11
+send_level_message "set_camera_dof 0 0 0 0.3 3.5 1"
+send_level_message "music_layer_override 0"
+send_character_message 1 "set_torso_target 11.7412 19.3968 166.662 0"
+send_character_message 1 "set_head_target 11.7306 19.1197 166.749 1"
+send_character_message 3 "set_torso_target 11.7412 19.3968 166.662 0"
+send_character_message 3 "set_head_target 11.2149 18.859 167.125 1"
+send_character_message 4 "set_torso_target 11.7412 19.3968 166.662 0"
+send_character_message 4 "set_head_target 10.9572 18.9551 167.384 1"
+set_character_pos 1 10.2824 18.8717 167.802 -1
+set_cam 9.78811 18.9592 165.854 -7.53 -141.59 0 72.3716
+say 1 "Turner" "tlhab DaH."
+send_character_message 2 "set_head_target 13.0673 19.619 168.767 1"
+say 2 "Hark" "nuqneH! juH Dub Suq nIS maH 'ach chay' tIghmaj Sovbe'chu' reH vItu'?"
+send_character_message 3 "set_head_target 11.7191 19.2098 166.748 1"
+say 3 "Slate" "bochmeH laH DeS jIH. chay' charts Hov 'ej laD vISov."
+send_character_message 4 "set_head_target 10.3552 19.167 167.774 1"
+say 4 "Sky" "qaS nuqDaq DaH jImej maqarmeH? settle yIn jISaQ je legh, ngengDaq staring DaneH loS veb Duj naQ slavers?"
+send_character_message 1 "set_torso_target 11.749 19.3968 168.622 1"
+send_character_message 1 "set_head_target 11.0976 19.2101 168.529 1"
+send_character_message 3 "set_head_target 11.73 19.1677 166.723 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "jIjatlhpu' bortaS. 'ach jIHvaD vay' be island QaD neH chen ghaHlaw'. Ha' jIH."
+send_global_message "levelwin"

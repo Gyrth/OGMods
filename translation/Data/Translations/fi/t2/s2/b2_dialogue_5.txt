@@ -1,0 +1,17 @@
+#name "Note-JairoP"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -144.354 -1.06943 -5.76928 -45
+send_character_message 1 "set_head_target -143.885 -1.06865 -5.26964 1"
+set_cam -143.174 -0.724854 -7.6918 0 156.77 0 37.9039
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Se on huomata. [wait 0.5]Revitty, [wait 0.3]keltainen [wait 0.1]ja ties kuinka vanha."
+set_character_pos 1 -144.354 -1.1058 -5.76928 -45
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -143.462 -0.509361 -4.71028 0 37.66 0 37.9039
+say 2 "Note" "Joka ikinen päivä [wait 0.3]nyt. [wait 0.5]Oli kauhistuttavaa ajatella, se tapahtuu ensimmäinen paikka [wait 0.3]mutta tämä taajuus on kuin sattuma."
+say 2 "Note" "Kaikki on kauhuissaan. [wait 0.3]Tiedän, että olen. [wait 0.5]Kuka tekee meille täytyy kuolla ennen kuin se saa käsistä."
+say 2 "Note" "Kaikki puhua havaintoja metsässä vain tekee meistä enemmän vainoharhainen joka ikinen päivä."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Desert etuvartio on nähdäkseni jotta olla eheä- [wait 0.5]Jos jokin on. [wait 0.5]Toivon vain, perheeni on kunnossa."

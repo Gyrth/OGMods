@@ -1,0 +1,163 @@
+#name "Finale"
+#participants 6
+set_character_pos 4 -38.025 30.9132 -13.6259 169
+send_character_message 4 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 4 "set_torso_target -37.4336 31.4896 -14.5909 0"
+send_character_message 4 "set_head_target -38.8419 31.6248 -14.8881 1"
+set_character_pos 3 -31.0802 30.8659 -16.3744 180
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_pole.anm\""
+send_character_message 3 "set_torso_target -33.1418 31.6717 -19.2055 0"
+send_character_message 3 "set_head_target -36.96 31.5665 -15.4072 1"
+set_character_pos 2 -33.2515 30.9373 -19.019 -150
+send_character_message 2 "set_animation \"Data/Animations/swordrelax.anm\""
+send_character_message 2 "set_torso_target -31.2135 31.7145 -19.5317 0"
+send_character_message 2 "set_head_target -38.2051 31.6856 -15.5528 1"
+set_character_pos 1 -38.8187 30.8924 -15.1641 180
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+send_character_message 1 "set_torso_target -39.6108 31.4896 -15.1741 7.15256e-007"
+send_character_message 1 "set_head_target -41.0133 30.9153 -15.1287 1"
+set_cam -37.6977 31.6569 -12.147 0 18.22 0 19.4349
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 4 0.7 0.7 0.89
+set_dialogue_voice 4 11
+set_dialogue_voice 3 9
+set_dialogue_color 3 1 1 1
+set_dialogue_color 2 1 1 1
+send_level_message "set_camera_dof 0.3 3 0.5 0 0 0"
+say 1 "You" "Yo todavía no puedo relajarse aquí... [wait 0.3]viendo la espalda de tanto tiempo me ha hecho ansioso."
+send_character_message 4 "set_torso_target -38.6816 31.2877 -13.8661 1"
+send_character_message 1 "set_torso_target -39.4546 31.0867 -15.3908 1"
+send_character_message 4 "set_head_target -40.8519 32.7445 -13.5795 1"
+send_character_message 1 "set_head_target -40.7884 31.2532 -15.8105 1"
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.3"
+say 4 "Bijou" "Fueron murmurando mientras duerme otra vez. [wait 0.5]¿Todo bien?"
+send_character_message 1 "set_torso_target -39.4546 31.0867 -15.3908 0"
+send_character_message 1 "set_head_target -40.2795 31.0975 -15.4985 1"
+send_character_message 4 "set_head_target -39.2801 31.7013 -14.34 1"
+send_level_message "set_camera_dof 0.3 3 0.5 0 0 0"
+say 1 "You" "Sí... [wait 0.3]pesadillas, otra vez."
+send_character_message 1 "set_torso_target -39.4546 31.0867 -15.3908 0.000118971"
+send_character_message 1 "set_head_target -40.6787 32.6225 -15.298 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 4 "set_head_target -38.6773 31.8502 -13.2517 0"
+send_character_message 4 "set_torso_target -38.6009 30.9813 -13.757 1"
+send_character_message 4 "set_animation \"Data/Animations/startled.anm\""
+say 2 "???" "¡Alto!"
+send_character_message 2 "set_animation \"Data/Animations/swordrelax2.anm\""
+send_character_message 1 "set_torso_target -39.3669 31.1779 -15.4659 1"
+send_character_message 1 "set_head_target -37.3195 31.2197 -16.7678 1"
+set_cam -40.2615 31.5539 -14.5813 0 -68.28 0 31.4582
+say 3 "????" "Hemos recibido palabra que está previsto antes del mariscal. [wait 0.5]Venga ahora."
+send_character_message 1 "set_head_target -36.8414 31.6475 -16.5602 1"
+send_character_message 1 "set_torso_target -39.0458 31.4774 -15.6344 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "¿Mente diciéndome Dónde está exactamente esta 'Mariscal'?"
+send_character_message 4 "set_head_target -36.5886 31.6297 -15.8613 1"
+send_character_message 4 "set_torso_target -38.4234 31.3872 -13.5408 0"
+set_character_pos 4 -39.8359 30.9132 -13.7431 19
+send_character_message 1 "set_torso_target -38.0529 31.404 -15.3792 0"
+set_character_pos 1 -38.8187 30.8924 -15.1641 9
+send_character_message 2 "set_head_target -38.1981 31.6849 -15.5556 1"
+send_character_message 2 "set_torso_target -31.2224 31.7131 -19.5254 0"
+send_character_message 3 "set_head_target -36.9563 31.5663 -15.4095 1"
+set_cam -37.7995 31.4798 -15.7935 0 -70.27 0 43.9725
+send_level_message "set_camera_dof 0 0 0 0.2 10 5"
+say 3 "????" "Bueno, [wait 0.3]el despacho dijo que vas a una cárcel..."
+send_character_message 3 "set_head_target -32.7882 32.0632 -18.2417 1"
+send_character_message 2 "set_animation \"Data/Animations/r_bigswordarmstance.anm\""
+send_character_message 2 "set_head_target -31.5771 31.7248 -16.5515 1"
+send_character_message 2 "set_torso_target -34.3712 30.6558 -17.9857 1"
+say 2 "???" "Keung, [wait 0.3]¡Tonto! [wait 0.3]La mano negra no suppo-"
+send_character_message 2 "set_torso_target -34.5396 30.8031 -18.0772 0"
+send_character_message 2 "set_head_target -38.3391 31.4321 -15.209 1"
+set_cam -32.3198 32.0031 -20.1805 -3.57 132.05 0.06 25.7842
+send_level_message "set_camera_dof 0.3 3 0.5 0 0 0"
+say 1 "You" "No voy a una cárcel de silencio."
+send_character_message 2 "set_head_target -38.7749 31.82 -15.2122 1"
+send_character_message 2 "set_animation \"Data/Animations/r_bigdogswordarmstance.anm\""
+send_character_message 2 "set_torso_target -34.3325 30.6549 -18.4313 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 2 "???" "No resistir, [wait 0.3]o nos veremos obligados a dañarle físicamente."
+send_character_message 4 "set_head_target -38.7066 31.471 -15.2601 1"
+send_character_message 4 "set_torso_target -39.0339 31.2887 -13.9246 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_torso_target -38.0529 31.404 -15.3792 1"
+set_cam -40.2416 31.5686 -11.8401 -0.01 -19.08 -0.07 21.9945
+send_level_message "set_camera_dof 0.3 3 0.5 0 0 0"
+say 1 "You" "¿¡Venga, sí!? [wait 0.5]¡Muéstrame lo que tienes!"
+send_character_message 2 "set_torso_target -34.3395 30.4007 -18.509 1"
+send_character_message 2 "set_head_target -33.2117 31.0892 -19.1236 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_spearstance.anm\""
+send_character_message 3 "set_head_target -37.2008 31.521 -15.5067 1"
+set_cam -36.2837 31.6354 -20.2383 -0.07 -119.34 0.02 21.9945
+send_level_message "set_camera_dof 0 0 0 0.3 7 4"
+say 2 "???" "Mira lo que empezaste [wait 0.3]Keung..."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+send_character_message 2 "set_animation \"Data/Animations/swordrelax.anm\""
+send_character_message 2 "set_head_target -20.1805 31.5445 -8.02281 1"
+send_character_message 2 "set_torso_target -20.9483 31.063 -11.0609 0"
+set_character_pos 2 -21.3389 30.9373 -11.9284 -60
+send_character_message 1 "set_head_target -19.9771 30.5551 -8.12762 1"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+send_character_message 4 "set_torso_target -23.772 31.2887 -9.34352 0"
+send_character_message 4 "set_head_target -22.5144 31.471 -8.7219 1"
+set_character_pos 4 -25.0447 30.9132 -9.77256 -17
+set_character_pos 3 -19.5631 30.8671 -11.4626 -91
+send_character_message 3 "set_head_target -19.7306 31.5877 -7.82453 1"
+send_character_message 1 "set_torso_target -20.037 30.9761 -8.26318 0"
+set_character_pos 1 -19.7918 30.8693 -7.49119 117
+set_cam -91.755 97.0474 -72.7822 49.12 3.45 8.19 21.9945
+say 5 "" "..."
+send_level_message "set_camera_dof 0 0 0 0.3 2.5 0.2"
+set_cam -21.0547 31.115 -15.0618 -1.23 -171.28 -0.01 31.3686
+send_level_message "set_camera_dof 0.3 7 5 0 0 0"
+say 1 "You" "Hey, [wait 0.3]Hey-- [wait 0.3]¡Suficiente!"
+send_character_message 1 "set_head_target -20.1417 30.8788 -8.53576 1"
+say 1 "You" "Bellas... [wait 0.3]lléveme a la cárcel maldita."
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 4 "set_torso_target -23.6584 31.0741 -9.38389 1"
+send_character_message 4 "set_head_target -22.2003 31.6275 -10.6791 1"
+send_character_message 1 "set_head_target -20.3044 30.692 -8.48799 1"
+set_cam -18.7161 31.093 -7.60411 -0.03 73.63 -0.04 23.1585
+say 4 "Bijou" "Me voy con él. [wait 0.5]En cualquier lugar toman a mi hermano, [wait 0.3]¡Sigo!"
+send_character_message 3 "set_head_target -20.1156 31.0616 -7.8947 1"
+send_character_message 2 "set_animation \"Data/Animations/r_bigdogswordarmstance.anm\""
+send_character_message 2 "set_head_target -24.9828 31.6232 -9.88547 1"
+send_character_message 2 "set_torso_target -21.7276 30.5847 -11.5027 1"
+set_cam -23.8078 31.7237 -11.3365 0.01 -84.73 0.05 23.1585
+send_level_message "set_camera_dof 0 0 0 0.3 7 4"
+say 2 "???" "Eso no está sucediendo. [wait 0.5]Pedidos por la alta Consejera; [wait 0.3]no quieren meterse con los pedidos."
+send_character_message 1 "set_torso_target -20.1789 29.9463 -7.59237 0.995111"
+send_character_message 1 "set_head_target -20.5715 30.8745 -7.96871 1"
+set_cam -19.2546 30.9891 -9.09708 0.04 156.05 -0.03 26.5639
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.1"
+say 1 "You" "Quedarse aquí, [wait 0.3]Bijou... [wait 0.3]no es vale la pena."
+send_character_message 1 "set_head_target -20.1468 30.5377 -8.41976 1"
+send_character_message 1 "set_torso_target -20.1047 30.8124 -7.8099 0"
+set_cam -20.2441 31.0381 -6.37414 -0.05 -10.16 0.02 26.5639
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 4 "Bijou" "...[wait 0.3]¿Qué?"
+send_character_message 3 "set_torso_target -19.7015 31.1193 -9.9925 1"
+send_character_message 3 "set_head_target -24.1989 31.4725 -9.90629 1"
+say 3 "Keung" "Estamos tomando por su mejora decidir qué hacer con él. [wait 0.5]No hay nada que puedas hacer para detener su juicio."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_pole.anm\""
+send_character_message 3 "set_head_target -19.752 30.9188 -8.89796 1"
+send_character_message 3 "set_torso_target -19.7015 31.1193 -9.9925 1"
+set_character_pos 1 -19.7918 30.941 -7.49119 117
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneeling_low.anm\""
+say 4 "Bijou" "¿Lo que quieren incluso de él?"
+send_character_message 1 "set_head_target -20.0338 30.3816 -8.34781 1"
+set_cam -21.1321 30.3917 -8.37791 22.49 -102.95 0.05 34.4717
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.1"
+say 3 "Keung" "Infierno... [wait 0.3]él es desmayarse. [wait 0.5]No cejar."
+send_character_message 1 "set_head_target -20.1397 29.7699 -8.18376 1"
+send_character_message 1 "set_torso_target -19.7624 29.743 -7.41274 1"
+say 2 "???" "Llevarlo a la escolta, [wait 0.3]Keung."
+set_cam -20.2351 30.6456 -6.90555 -0.03 -9.91 -0.29 20.9421
+send_character_message 1 "set_torso_target -19.3675 29.5022 -7.1664 1"
+send_character_message 1 "set_animation \"Data/Animations/dialogue_dying_2.anm\""
+fade_to_black 1
+say 3 "Keung" "Nada de esto tenía que suceder. [wait 0.5]Espero que lo recuerda."
+send_global_message "levelwin a"

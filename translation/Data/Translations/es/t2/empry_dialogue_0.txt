@@ -1,0 +1,98 @@
+#name "Intro"
+#participants 6
+set_character_pos 5 -9.26505 31.154 82.737 68
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_pole.anm\""
+set_character_pos 4 6.30971 31.1016 82.9169 118
+send_character_message 4 "set_animation \"Data/Animations/swordrelax.anm\""
+set_cam -97.1764 100.891 -67.5817 45.25 -8.82 -3.45 90
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.7 0.89
+set_dialogue_voice 2 11
+set_dialogue_voice 3 5
+say 4 "" "..."
+send_character_message 3 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+set_character_pos 3 -15.8142 30.9375 -72.905 -88
+send_character_message 3 "set_head_target -15.5054 31.0402 -71.1155 1"
+send_character_message 3 "set_torso_target -13.6572 31.3023 -71.0646 0"
+send_character_message 2 "set_head_target -16.0563 31.538 -72.0589 1"
+set_character_pos 2 -17.351 30.8627 -70.7217 93
+send_character_message 2 "set_animation \"Data/Animations/dialogue_sitting_handstogether.anm\""
+send_character_message 1 "set_head_target -15.3757 30.7072 -71.446 1"
+send_character_message 1 "set_torso_target -15.3942 31.6007 -71.2798 0.00672445"
+send_character_message 2 "set_torso_target -15.7597 31.0504 -71.7551 0"
+set_character_pos 1 -15.4597 30.8319 -70.9954 92
+send_character_message 1 "set_animation \"Data/Animations/dialogue_dying_1.anm\""
+say 3 "???" "Hey..."
+say 3 "???" "..."
+set_character_pos 1 -15.4597 30.8319 -70.9954 122
+send_character_message 3 "set_head_target -15.5054 31.0516 -71.1155 1"
+say 3 "???" "¡Despierta!"
+send_character_message 1 "set_head_target -15.6847 31.688 -72.7783 0.999925"
+send_character_message 1 "set_torso_target -15.394 31.5983 -71.2818 1"
+set_cam -13.9679 30.9533 -72.0309 0 116.15 0 27.168
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 1 "You" "[wait 0.3]¿Qué?"
+send_character_message 3 "set_torso_target -15.8083 30.78 -71.9985 1"
+send_character_message 1 "set_torso_target -15.394 31.5983 -71.2818 1"
+send_character_message 1 "set_head_target -15.6847 31.688 -72.7783 0.999925"
+set_cam -14.8059 31.0265 -70.422 5.1 36.14 0 40.9873
+send_level_message "set_camera_dof 0.3 1.5 0.5 0 0 0"
+say 3 "???" "¿Por qué está usted durmiendo aquí? [wait 0.5]Está congelando!"
+send_character_message 1 "set_head_target -15.6847 31.688 -72.7783 0"
+send_character_message 1 "set_torso_target -15.367 31.1352 -71.7775 0"
+set_character_pos 1 -15.4715 30.8319 -71.3349 99
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_yawn.anm\""
+send_character_message 3 "set_head_target -15.5054 31.7383 -71.1155 1"
+set_cam -15.3508 31.6331 -73.9899 -0.39 167.87 0.44 40.9873
+send_level_message "set_camera_dof 0.3 1.5 0.5 0 0 0"
+say 1 "You" "...[wait 0.3]Supongo que no estoy acostumbrado a tener un lugar para quedarse. [wait 0.5]Vagaba solo aquí, [wait 0.3]y..."
+set_character_pos 2 -17.3514 30.8627 -70.7288 93
+send_character_message 2 "set_head_target -16.0539 31.5346 -72.0542 1"
+send_character_message 1 "set_torso_target -15.367 31.1352 -71.7775 1"
+send_character_message 1 "set_head_target -15.7425 31.6935 -72.8319 1"
+send_character_message 3 "set_torso_target -15.8083 30.78 -71.9985 0"
+send_level_message "set_camera_dof 0 0 0 0.3 1 0.5"
+say 3 "???" "Te de tugurios es todos iguales- [wait 0.3]un medio muerto, [wait 0.3]Horda voraz de escoria. [wait 0.5]Mi superior ya piensa que eres un riesgo de seguridad."
+send_character_message 3 "set_head_target -15.3443 31.6107 -71.5472 1"
+set_cam -14.1071 31.5477 -72.0227 0.2 106.82 0.55 24.5869
+send_character_message 1 "set_head_target -15.7425 31.8521 -72.8519 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_torso_target -15.4368 30.9943 -71.8959 1"
+set_character_pos 2 -17.3759 30.8627 -71.1969 93
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 2 "set_head_target -15.852 31.7296 -72.9068 1"
+send_level_message "set_camera_dof 0 0 0 0.3 1.5 0.5"
+say 1 "You" "¿Sí? [wait 0.3]¿Quieres conocer de primera mano lo que significa que el linaje negro?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+send_character_message 1 "set_head_target -16.9312 31.709 -71.413 1"
+send_character_message 1 "set_torso_target -15.5674 30.9943 -71.8972 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 2 "set_torso_target -16.5701 30.8099 -72.2304 1"
+send_character_message 2 "set_head_target -15.6004 31.5849 -71.5862 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Bijou" "Hey... [wait 0.3]vamos a ir. [wait 0.5]No estamos en las calles de ahogado ya."
+send_character_message 2 "set_head_target -15.7945 31.709 -72.7754 1"
+send_character_message 2 "set_torso_target -16.5701 30.8099 -72.2304 0"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target -15.8127 31.7349 -72.9242 1"
+send_character_message 1 "set_torso_target -15.5674 30.9943 -71.8972 0"
+send_level_message "set_camera_dof 0 0 0 0.3 1.5 0.5"
+say 1 "You" "...[wait 0.3]lo que dices, [wait 0.5]Bijou. [wait 0.5]¿Hacia dónde vamos...?"
+send_character_message 3 "set_head_target -19.1412 34.9716 -63.6906 1"
+set_cam 17.0136 31.7868 -84.0886 5.48 126.72 0.59 47.0822
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 3 "???" "El edificio pintado en azul, [wait 0.3]en el patio. [wait 0.5]Entrar antes de que tengamos para darle un recordatorio."
+send_character_message 1 "set_head_target -15.8127 31.5199 -72.9242 1"
+send_character_message 1 "set_torso_target -15.5154 30.8587 -71.9333 1"
+set_cam -16.5564 31.6366 -72.0717 -0.52 -119.86 -0.28 25.7864
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "[wait 0.3]Claramente no ha sido perforado en ti significa que nuestro linaje."
+send_character_message 1 "set_head_target -15.8127 31.7603 -72.9242 1"
+send_character_message 2 "set_head_target -15.8743 31.6015 -72.2595 1"
+send_character_message 1 "set_torso_target -15.5154 30.8587 -71.9333 0"
+set_cam -13.3595 31.4827 -72.2078 0.29 92.28 0.51 55.5205
+send_character_message 3 "set_head_target -15.4475 31.8333 -71.4674 1"
+send_character_message 3 "set_animation \"Data/Animations/r_idle.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 5"
+say 3 "???" "Tu insolencia no siempre impunes, [wait 0.3]alcantarillado-durmiente, [wait 0.3]aunque espero que algún día nos encontraremos en mejores condiciones."

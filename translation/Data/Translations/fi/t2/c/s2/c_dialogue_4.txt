@@ -1,0 +1,7 @@
+#name "Intro"
+#participants 2
+set_cam -121.576 106.925 -16.6744 0 21.18 0 90
+say 2 "Jairo" "Minulla ei ole aavistustakaan mitä teet täällä, mutta mitä"
+send_character_message 1 "set_head_target -104.559 144.151 -32.2114 1"
+set_cam -122.585 106.539 -18.1823 53.68 -55.14 0.02 49.8368
+say 2 "Jairo" "Tornilta huipulle ja kuulustella koira kapteeni"

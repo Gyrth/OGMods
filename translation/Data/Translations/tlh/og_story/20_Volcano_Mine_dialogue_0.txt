@@ -1,0 +1,31 @@
+#name "Win"
+#participants 3
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 3 "set_head_target 20.9155 -2.97163 10.5341 1"
+send_character_message 1 "set_head_target 22.4772 -3.12838 11.24 1"
+send_character_message 2 "set_torso_target 21.4438 -2.27919 10.9657 2.98917e-005"
+send_character_message 2 "set_head_target 20.8785 -2.93017 10.7943 1"
+set_character_pos 1 20.7589 -3.80172 10.518 19
+set_character_pos 3 23.5309 -4.15801 9.67222 177
+set_character_pos 2 22.8562 -4.27937 11.3106 149
+set_cam 23.5919 -3.04407 13.5384 -10.68 31.35 0 90
+say 2 "StoneWall" "yIqIm 'oH chenmoH SoH. not qaS 'e' pa'."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 3 "Trail" "qatlh SoH 'oH pong muSHa'bogh Do' laH vIlegh."
+send_character_message 1 "set_head_target 21.8331 -3.12838 10.7177 0"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 1 "Turner" "..."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target 23.2757 -2.93017 9.71661 1"
+say 2 "Stonewall" "jIQuch vIH maH SIS DIS. Hoch vaHbo' rop."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 3 "set_head_target 22.8086 -3.16999 11.4771 1"
+say 3 "Trail" "'oH vItultaH 'op DIjlu'ta'bogh 'e' doesn't reek sulfur nge'."
+send_character_message 2 "set_head_target 23.2659 -3.18019 10.2875 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 3 "Stonewall" "Ha', 'e' natural pIw ghaHlaw'."
+send_character_message 1 "set_head_target 22.8229 -3.12838 11.3913 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "pagh loS jIH Hoch HoH neH."
+send_global_message "levelwin"

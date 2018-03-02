@@ -1,0 +1,24 @@
+#name "Win"
+#participants 2
+set_character_pos 2 397.176 -1.99877 19.7161 109
+set_character_pos 1 396.687 -2.22842 18.8396 -62
+set_cam 397.168 -1.43508 18.4408 0 161.5 0 90
+say 1 "Turner" "Taivas."
+say 1 "Turner" "Oletko kunnossa?"
+say 2 "Sky" "Sinä tulit Sanctuary?"
+say 2 "Sky" "Eksyin."
+say 1 "Turner" "Olen Turner."
+say 1 "Turner" "Olet kunnossa nyt."
+say 1 "Turner" "Minä säästän teidät."
+say 2 "Sky" "Rats, he käyttivät blowdarts, jonkinlainen nukkuminen myrkkyä."
+say 2 "Sky" "Se on, miten ne kiinni meitä."
+say 2 "Sky" "Olen nähnyt, jossa ne säilyttävät niiden tarjonta"
+say 2 "Sky" "Aioin tuhota sen, mutta..."
+say 2 "Sky" "niin väsynyt..."
+say 1 "Turner" "Minä hoidan sitä."
+say 1 "Turner" "Ja sitten minä hoidan teille."
+say 1 "Turner" "Sinä mieleen huhtikuussa..."
+say 2 "Sky" "Kuka?"
+say 1 "Turner" "Anna olla."
+say 1 "Turner" "Olet turvassa kanssani."
+send_global_message "levelwin"

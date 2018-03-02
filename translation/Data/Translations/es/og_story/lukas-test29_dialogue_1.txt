@@ -1,0 +1,29 @@
+#name "Start"
+#participants 4
+
+set_character_pos 4 27.8208 -1.97832 -4.88104 -144
+set_character_pos 3 20.7288 -1.93497 35.1202 0
+set_character_pos 2 -5.24817 -1.89047 5.12918 0
+set_character_pos 1 6.24234 -1.91226 15.5949 0
+set_cam 6.60956 -1.26868 16.1148 0 28.34 0 90
+say 1 "Turner" "Esta niebla es realmente pesado, que creo que estoy perdido!"
+set_cam 27.3756 -1.57999 -4.96077 0 -113.47 0 90
+say 4 "Rat" "¡Ataque!"
+send_level_message "make_all_aware"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

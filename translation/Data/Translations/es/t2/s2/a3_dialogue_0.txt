@@ -1,0 +1,19 @@
+#name "Note-Relocation"
+#participants 2
+set_character_pos 1 -24.696 2.85019 17.3665 90
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target -24.6229 3.30483 16.513 1"
+set_cam -23.3942 3.46124 18.2741 0 44.12 0 38.5894
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Una carta de un comandante de Empry..."
+set_character_pos 1 -24.696 2.83039 17.3665 90
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -25.1808 3.49697 16.4123 0 -145.65 0 38.5894
+say 2 "Note" "Sí [wait 0.3]han respondido a los peldaños más altos de la Empry. [wait 0.5]Compruebe el sello si lo eres [wait 0.3]'especial' sobre él."
+say 2 "Note" "A todos comandantes de Empry fuera situados en los terrenos de la Colonia, [wait 0.3]las últimas actividades terroristas ha pedido algunas nuevas medidas."
+say 2 "Note" "Adjunta a esta carta es un mapa guía a usted a uno de los búnkers utilizados por nosotros en la Guerra Civil Cinderblood; [wait 0.3]en un estado mayormente dañado, sin duda, [wait 0.3]pero el diseño debe ser lo suficiente para detener a tres conejos de atacar."
+say 2 "Note" "Viajar tan pronto como sea posible. [wait 0.5]Cualquier Empry oficiales y comandantes capturados fuera de los bunkers se verán aliviados temporalmente del mando."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Ser cauteloso y calma. [wait 0.5]Firmado, [wait 0.3]Ano."

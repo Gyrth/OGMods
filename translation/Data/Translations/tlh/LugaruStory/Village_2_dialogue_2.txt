@@ -1,0 +1,31 @@
+#name "Willow"
+#participants 2
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_character_pos 2 129.242 -53.3341 308.861 64
+send_character_message 2 "set_eye_dir 129.993 -52.6485 307.418 1"
+send_character_message 2 "set_head_target 130.014 -52.4089 307.319 1"
+set_character_pos 1 130.007 -53.6776 307.354 -110
+send_character_message 1 "set_eye_dir 129.301 -52.3645 308.817 1"
+send_character_message 1 "set_torso_target 128.486 -51.9347 309.318 0.0803898"
+send_character_message 1 "set_head_target 129.135 -52.2383 309.029 1"
+set_cam 129.859 -52.8289 305.212 2.2 174.53 0 27.2951
+say 2 "Willow" "SoHvaD Suq vay' rile Da'elDI'."
+send_character_message 1 "set_torso_target 128.566 -52.1542 308.503 0.493188"
+send_character_message 1 "set_head_target 128.983 -52.4074 307.824 1"
+send_character_message 2 "set_head_target 130.002 -52.734 307.464 1"
+set_cam 127.06 -52.3195 310.215 -7.14 -49.44 4.21 23.3228
+say 1 "Turner" "raider scout, ghaHlaw'. [wait 0.2]chaq neH. [wait 0.2]HItlhej?"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handneck.anm\""
+send_character_message 1 "set_head_target 129.269 -52.3373 308.731 1"
+send_character_message 1 "set_torso_target 128.566 -52.1542 308.503 0"
+send_character_message 2 "set_head_target 129.494 -53.502 308.508 1"
+set_cam 129.859 -52.8289 305.212 2.2 174.53 0 27.2951
+say 2 "Willow" "DayaHmoH vIta'laH. [wait 0.2]pum qab tlhap wa'Hu' ram ngIv, 'uS 'oy'."
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_head_target 130.014 -52.6412 307.42 1"
+set_cam 127.06 -52.3195 310.215 -7.14 -49.44 4.21 23.3228
+say 1 "Turner" "'uch tInwI' fort, vaj."
+send_character_message 2 "set_eye_dir 130.022 -52.6331 307.135 1"
+set_cam 129.859 -52.8289 305.212 2.2 174.53 0 27.2951
+say 2 "Willow" "laH 'ech, 'ej SoH jIHDaq DaSov. [wait 0.3]neH rur ngo' poH."

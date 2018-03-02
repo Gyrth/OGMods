@@ -1,0 +1,23 @@
+#name "Start"
+#participants 3
+set_character_pos 2 4.44411 -1.76967 0.832846 -176
+set_character_pos 1 0.0412091 -1.82671 1.14381 0
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "maj po, SoH Do' lagomorphs."
+say 3 "Cat" "qatlh jatlh jIH Do'?"
+say 3 "Cat" "SeH jIyIntaH Suq wa'!"
+say 3 "Cat" "luq, Qo' vaj Do' latlh wa'."
+set_cam 0.539544 -1.15159 1.84516 0 32.36 0 90
+say 1 "Turner" "Dochvam nuq?"
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "audition ghotvam'e'."
+say 3 "Cat" "HoS yap taH?"
+set_cam 3.48666 -1.60474 1.88456 7.68 -33.21 0 90
+say 2 "Rabbit" "ghaH."
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "'oH tob. inquisitive vanbogh tochlIj HoH."
+set_cam 0.539544 -1.15159 1.84516 0 32.36 0 90
+say 1 "Turner" "ghob ghewmey wIghaj. laH Qap maH nItebHa'-"
+set_cam 3.48666 -1.60474 1.88456 7.68 -33.21 0 90
+say 2 "Rabbit" "Hegh!"
+make_participants_aware

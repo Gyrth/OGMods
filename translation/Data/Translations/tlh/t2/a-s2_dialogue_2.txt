@@ -1,0 +1,16 @@
+#name "NL-G"
+#participants 2
+set_character_pos 1 -250.671 84.6179 118.415 -84
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -250.51 85.4082 119.58 1"
+send_character_message 1 "set_head_target -250.604 85.9171 119.517 1"
+set_cam -254.259 85.1892 114.837 0 -142.46 0 66.0712
+say 1 "Ghost" "..."
+set_character_pos 1 -250.671 84.5053 118.415 -84
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+send_character_message 1 "set_head_target -250.604 85.9171 119.517 0"
+say 1 "Ghost" "..."
+set_cam -256.406 78.8327 127.228 -33.93 -87.26 0 71.6405
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "qatlh vIchel chaH DoH ghob HIboQ jairo, [wait 0.3]anyway …?"
+send_global_message "levelwin a"

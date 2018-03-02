@@ -1,0 +1,46 @@
+#name "BossMinions"
+#participants 5
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.5"
+send_level_message "music_layer_override 0"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 3 "set_torso_target -105.099 200.01 122.182 1"
+send_character_message 3 "set_head_target -104.464 200.23 122.534 0.847003"
+send_character_message 2 "set_torso_target -104.951 199.82 121.653 0.0313163"
+send_character_message 2 "set_head_target -104.913 199.839 121.656 1"
+set_character_pos 3 -106 199.341 122.885 30
+set_character_pos 2 -104.502 199.293 123.362 158
+set_character_pos 1 -105.709 199.293 138.021 96
+set_dialogue_color 2 0.5 0.5 0.7
+set_dialogue_voice 2 7
+set_cam -105.076 200.027 118.153 -2.85 178.42 1.11 33.1332
+say 3 "Thorn" "laH groundlander tlhe' rabble HarQo' SoH? nagh vaj chagh maH chaH."
+send_character_message 2 "set_torso_target -105.18 199.82 122.557 1"
+send_character_message 2 "set_head_target -105.848 200.277 122.554 1"
+say 2 "Furrow" "jul qaStaHvIS Huj ghob'e' DaHar'a' chaH."
+send_character_message 3 "set_torso_target -105.184 200.01 121.998 1"
+send_character_message 2 "set_torso_target -105.121 199.82 122.547 1"
+send_character_message 3 "set_head_target -105.394 199.755 121.926 0.847003"
+say 3 "Thorn" "ghaH reH vaj emotional, 'IwlIj tIq instead of nach. rabbits Hoch loDnI', be'nI', je feh."
+send_character_message 2 "set_head_target -105.848 200.277 122.554 0.105574"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 2 "Furrow" "ghaH laH qatlho' maH nissaya massacre!"
+send_character_message 2 "set_head_target -105.848 200.277 122.554 0.0449724"
+send_character_message 2 "set_torso_target -105.121 199.82 122.546 1"
+send_character_message 3 "set_torso_target -105.308 200.01 123.895 1"
+send_character_message 3 "set_head_target -105.277 200.141 125.988 0.847003"
+send_level_message "music_layer_override 2"
+say 3 "Thorn" "maH weren't 'e' Suj ghIq 'e' vIHar."
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target -104.955 200.277 123.909 1"
+send_character_message 2 "set_torso_target -105.004 199.82 123.816 0.177185"
+say 2 "Furrow" "SoH 'Iv?"
+send_level_message "set_camera_dof 0.3 7 0.5 0 0 0"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Turner" "groundlander rabble mentioned SoH wa'."
+send_character_message 3 "set_torso_target -105.116 200.01 122.98 1"
+send_character_message 3 "set_head_target -104.464 200.23 122.534 0.847003"
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.5"
+say 3 "Thorn" "ugh. merqu' rIn Dop 'ej ghaH ngeH rom'a' lam nuqDaq vo' ghaH."
+send_level_message "music_layer_override 3"
+set_cam -106.343 200.092 138.337 2.58 -12.69 -1.64 79.2465
+make_participants_aware

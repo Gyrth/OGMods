@@ -1,0 +1,37 @@
+set_character_pos 3 -30.8373 1.20923 295.886 90
+set_character_pos 2 66.1934 4.40945 350.937 90
+set_character_pos 1 66.1816 4.48083 344.232 -90
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir 66.2504 5.26052 347.889 1"
+send_character_message 1 "set_head_target 66.1928 5.19284 348.032 1"
+set_cam 74.9871 7.05855 333.264 -9.34 147.27 0.17 29.1577
+#name "Meet"
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+#participants 4
+say 3 "" "..."
+set_cam 66.6547 4.93815 342.87 0 171.19 0 27.0889
+send_character_message 1 "set_head_target 66.1677 5.03184 349.058 1"
+send_character_message 1 "set_eye_dir 66.2215 5.00341 348.941 1"
+say 3 "" "..."
+send_character_message 1 "set_head_target 66.2476 5.58556 350.493 1"
+send_character_message 1 "set_eye_dir 66.1634 5.19577 349.51 1"
+set_cam 63.4757 4.96827 346.134 0 -58.07 0 13.4002
+say 1 "Ghost" "Bueno, aquí estamos."
+set_cam 66.15 4.99712 346.786 0 0 0 13.4002
+send_character_message 1 "set_head_target 66.0686 4.61019 349.971 1"
+say 1 "Ghost" "Tal vez después de patada en el culo, se puede decir algo."
+set_cam 66.1577 5.04989 346.23 0 0 0 13.4002
+send_character_message 1 "set_head_target 66.0846 5.68406 350.263 1"
+say 1 "Ghost" "Tal vez sin ser tan críptico."
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 70.4974 4.78561 348.125 0 120 0 15.8177
+say 2 "Jairo" "..."
+send_character_message 2 "set_torso_target 66.5059 4.51023 350.753 1"
+send_character_message 2 "set_head_target 66.2505 4.70821 346.221 1"
+send_character_message 2 "set_animation \"Data\Animations\r_combatidle2.anm\""
+say 2 "Jairo" "..."
+send_level_message "make_all_aware"

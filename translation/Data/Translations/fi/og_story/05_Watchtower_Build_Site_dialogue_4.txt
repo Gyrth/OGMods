@@ -1,0 +1,13 @@
+#name "Places"
+#participants 6
+set_character_pos 6 210.175 89.7184 -40.3811 -74
+send_character_message 6 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+set_character_pos 5 199.238 66.5176 22.6426 44
+send_character_message 5 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+set_character_pos 4 205.455 67.9088 -24.9426 40
+send_character_message 4 "set_animation \"Data/Animations/r_hammering_wall_loop.anm\""
+set_character_pos 3 220.431 69.6608 -39.1017 162
+send_character_message 3 "set_animation \"Data/Animations/r_hammering_wall_loop.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_kneeling_low.anm\""
+set_character_pos 1 220.955 67.1638 -24.7016 161
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""

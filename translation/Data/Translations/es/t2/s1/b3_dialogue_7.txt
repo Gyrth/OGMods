@@ -1,0 +1,16 @@
+#name "Note-Gunpowder"
+#pariticipants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 17.8347 31.6095 -116.013 58
+send_character_message 1 "set_head_target 18.1728 31.9015 -116.556 1"
+set_cam 18.6701 32.1478 -115.054 0 30 0 43.359
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 1 "Ghost" "Una nota, [wait 0.3]probablemente escrito por uno de los inventores."
+set_character_pos 1 17.8347 31.6095 -116.013 58
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 17.8744 32.1596 -117.355 0 176.96 0 43.359
+say 1 "Note" "Las observaciones de nuestros espías en el colectivo de Arlissian vienen. [wait 0.5]Demolición, [wait 0.3]pólvora y cañones; [wait 0.3]un poco preocupante."
+say 1 "Note" "Aunque es más probable que estén utilizando para la construcción y excavación, [wait 0.3]las derivaciones políticas de la guerra potencial no son mios a reflexionar."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Note" "Dispositivos de muestra han llegado [wait 0.3]así que voy a tener que comenzar cada pedacito de este de ingeniería inversa..."

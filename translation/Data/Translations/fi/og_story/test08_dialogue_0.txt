@@ -1,0 +1,19 @@
+#name "Win"
+#participants 2
+
+set_cam 32.452 -4.3935 -0.430907 21.53 102.36 0 90
+set_character_pos 1 30.6283 -4.19815 0.7966 95
+set_character_pos 2 30.6593 -4.31396 -0.97704 -73
+say 2 "Dog" "Ei hassumpaa."
+say 2 "Dog" "Ehkä et ole täysin hyödytön."
+say 1 "Turner" "Olet pahin."
+send_global_message "levelwin"
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,248 @@
+#name "Council"
+#participants 10
+set_character_pos 6 13.4325 428.551 -69.7386 -90
+set_cam -4.29496 443.69 -70.9254 -30.65 -139.44 0 64.5844
+set_character_pos 9 13.1989 428.516 -44.2677 90
+set_character_pos 8 20.6031 428.567 -51.7778 -180
+set_character_pos 7 3.07016 428.567 -44.3608 90
+set_character_pos 5 20.8684 428.441 -62.0751 -180
+set_character_pos 3 -4.03518 428.566 -62.2002 0
+set_character_pos 2 3.39864 428.575 -69.624 -90
+send_character_message 2 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+send_character_message 2 "set_head_target 0.077949 429.182 -61.8252 1"
+set_character_pos 1 -4.03927 428.572 -52.0204 0
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 4 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 5 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 6 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 7 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 8 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 9 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_head_target 3.34202 429.456 -69.2138 1"
+send_character_message 3 "set_head_target 3.34202 429.456 -69.2138 1"
+send_character_message 4 "set_head_target 3.34202 429.456 -69.2138 1"
+send_character_message 5 "set_head_target 3.34202 429.456 -69.2138 1"
+send_character_message 6 "set_head_target 3.34202 429.456 -69.2138 1"
+send_character_message 7 "set_head_target 3.34202 429.456 -69.2138 1"
+send_character_message 8 "set_head_target 3.34202 429.456 -69.2138 1"
+send_character_message 9 "set_head_target 3.34202 429.456 -69.2138 1"
+set_dialogue_color 1 0.9 0.9 0
+set_dialogue_voice 1 7
+set_dialogue_voice 2 5
+set_dialogue_color 2 1 1 1
+set_dialogue_voice 3 17
+set_dialogue_color 3 1 1 1
+set_dialogue_voice 4 15
+set_dialogue_color 4 0.8 1 0
+set_dialogue_color 5 1 1 1
+set_dialogue_color 6 1 1 1
+set_dialogue_color 7 1 1 1
+set_dialogue_color 8 1 1 1
+set_dialogue_color 9 1 1 1
+say 8 "" "wa' jaj later."
+set_cam 1.9284 429.157 -68.5873 -0.03 -63.76 -0.12 49.8437
+say 2 "Inel" "'oH wej pIj SoH paS. [wait 0.3]ano."
+set_cam -5.00388 429.232 -52.7496 -0.12 -124.08 -0.03 35.6465
+say 1 "Ano" "arliss toy'wI''a' Qeb concerning ghot'e' scouts wa' consult vIghaj."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam 4.43801 429.313 -70.5351 -0.02 141.9 0.12 36.7929
+say 2 "Inel" "bearing buy' ngop bImatlhba'? [wait 0.5]pagh web qIj bloodline?"
+send_character_message 1 "set_torso_target -3.08392 428.285 -52.1374 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam -3.16904 429.209 -53.1984 -0.03 145.28 0.12 36.7929
+say 1 "Ano" "bait SuD amos. [wait 0.5]script DuD bit bopummeH Dochvam'e' yIteqneS jay' vIghaj. [wait 0.3]pagh; [wait 0.3]'Iw."
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+set_cam -4.96789 429.242 -50.8385 0.04 -32 -0.12 28.3123
+say 2 "Inel" "vaj vIHtaHbogh edsel nep neH DaHutlh'a'?"
+send_character_message 1 "set_torso_target -3.06632 428.82 -52.263 1"
+say 1 "Ano" "vIchel ghojwI'pu'lI' amos tlhe' vIHtaHbogh fame. [wait 0.5]yap 'e' ghaH reuniting je vavDaj qech."
+send_character_message 2 "set_torso_target 3.21704 428.321 -68.8511 1"
+say 2 "Inel" "...[wait 0.3]'ej 'ar nuvpu' HoH?"
+send_character_message 1 "set_torso_target -3.10224 428.82 -52.5056 1"
+set_cam -3.71128 429.331 -63.4192 -0.08 170.83 0.1 28.3123
+send_character_message 2 "set_torso_target 3.21704 428.321 -68.8511 0"
+send_character_message 1 "set_head_target -3.96915 429.379 -61.9685 1"
+say 3 "Elke" "raD HoH ghopDaj, qatlh 'avwI' ghot tu'lu'. mej loSmaH members cinderbreathe deduced maH."
+send_character_message 3 "set_torso_target -3.04296 428.783 -62.3462 1"
+say 3 "Elke" "vo' vImughta' pe' Hoch victim. [wait 0.3]DuQ pagh moq Hegh pong nagh."
+send_character_message 5 "set_torso_target 19.892 428.563 -62.0582 1"
+set_cam 19.1009 429.162 -62.4376 -0.1 -100.88 -0.08 26.3166
+say 5 "Oren" "maw' bastard. [wait 0.3]ghaHtaH. [wait 0.3]'ach 'e' amos chup yab qar pagh wIghaj De''e' chaH wa' Hoch-"
+send_character_message 2 "set_head_target 12.0345 429.753 -63.9954 1"
+set_cam 4.5135 429.246 -67.9606 0.13 35.72 -0.01 26.3166
+say 2 "Inel" "discussion latlh poH ghotvam'e'. [wait 0.5]qaStaHvIS quv, vIchID arliss toy'wI''a' Qeb 'uchtaH qep."
+send_character_message 1 "set_torso_target -3.10224 429.132 -52.5056 1"
+send_character_message 1 "set_head_target 3.06725 429.226 -68.7806 1"
+set_cam -2.80982 429.18 -53.5766 -0.03 141.99 0.12 26.3166
+say 1 "Ano" "'ej topic [wait 0.3]wa'Hu' request, vo' amos 'ej QuQ ghaH vIghaj."
+send_character_message 1 "set_torso_target -3.10224 428.994 -52.5056 1"
+set_character_pos 1 -4.03927 428.563 -52.0204 0
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 1 "Ano" "ghaH wa' je Qu' laj: [wait 0.5]vaj Hoch Ser therium colonizing rIgh bIH maH."
+send_character_message 1 "set_head_target 4.99026 429.524 -66.137 1"
+send_character_message 9 "set_head_target -3.73315 429.302 -51.9797 1"
+send_character_message 8 "set_head_target -3.73315 429.302 -51.9797 1"
+send_character_message 7 "set_head_target -3.73315 429.302 -51.9797 1"
+send_character_message 6 "set_head_target -3.73315 429.302 -51.9797 1"
+send_character_message 5 "set_head_target -3.73315 429.302 -51.9797 1"
+send_character_message 4 "set_head_target -3.73315 429.302 -51.9797 1"
+send_character_message 3 "set_head_target -3.73315 429.302 -51.9797 1"
+send_character_message 2 "set_head_target -2.37373 429.008 -56.1188 1"
+set_cam 2.87655 429.2 -73.9501 -0.09 176.13 0.08 54.5195
+say 2 "Inel" "..."
+send_character_message 6 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_cam 16.9759 428.906 -69.8082 0.07 94.67 0.1 37.6662
+say 6 "Ashfur" "'e' pIpDegh? [wait 0.3]qatlh 'e' wIlo'bogh?"
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+set_cam 20.3339 429.136 -63.9444 -0.1 -172.15 0.06 25.0554
+say 5 "Oren" "contacted ghaH pong Duy arliss 'op? [wait 0.5]chaq 'op rogue cinderblood raQ tlham neH qeng amos?"
+send_character_message 8 "set_torso_target 19.8059 428.865 -52.0945 1"
+send_character_message 3 "set_head_target -3.73316 429.302 -51.9797 1"
+send_character_message 4 "set_head_target 34.6217 450.929 -31.7407 0"
+send_character_message 5 "set_head_target 18.415 429.585 -53.8105 1"
+send_character_message 6 "set_head_target -3.62798 429.302 -51.8207 1"
+send_character_message 7 "set_head_target -3.73256 429.299 -51.9528 1"
+send_character_message 8 "set_head_target 20.7034 429.052 -60.7583 1"
+send_character_message 9 "set_head_target -3.73275 429.296 -51.9377 1"
+say 3 "Elke" "ghaytanHa'. [wait 0.5]lo'maj maH. [wait 0.3]collinpeak massacre taH Duy cinderblood neH cha'."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 1 "set_torso_target -3.03227 428.848 -51.9572 1"
+send_character_message 1 "set_head_target 7.73341 429.524 -56.4494 1"
+set_cam -2.9924 429.265 -50.9065 0.11 37.92 0 25.0554
+say 1 "Ano" "directed vay' arliss pong 'ugh vIHon; [wait 0.3]vaj 'op request vay' lughaj. [wait 0.3]vIHtaHbogh 'oH terrorist not contact chaH."
+send_character_message 7 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 7 "set_torso_target 2.84006 428.961 -45.4817 1"
+send_character_message 1 "set_head_target 1.02267 428.933 -46.9305 1"
+set_cam -4.69433 429.235 -53.3431 -0.11 -144.74 0.01 25.0554
+say 7 "Adal" "'oH wouldn't pu'HIch jIH rIntaH chaH jIH; [wait 0.3]'ach tlhoy weren't involved arliss. [wait 0.3]chaq terrorists qellu'DI', arliss sympathisers?"
+send_character_message 2 "set_torso_target 3.21704 428.321 -68.8511 0.0351477"
+send_character_message 2 "set_head_target 4.31136 431.06 -56.5204 1"
+set_cam 2.12833 429.249 -68.1827 0.01 -43.71 -0.11 25.0554
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_torso_target -3.14625 428.848 -52.3498 1"
+send_character_message 1 "set_head_target 2.96886 428.933 -67.8409 1"
+send_character_message 3 "set_head_target 3.34357 429.355 -69.352 1"
+send_character_message 4 "set_head_target 3.34357 429.355 -69.352 1"
+send_character_message 5 "set_head_target 3.34357 429.355 -69.352 1"
+send_character_message 6 "set_head_target 3.34357 429.355 -69.352 1"
+send_character_message 7 "set_head_target 3.34357 429.355 -69.352 1"
+send_character_message 8 "set_head_target 3.34357 429.355 -69.352 1"
+send_character_message 9 "set_head_target 3.34357 429.355 -69.352 1"
+say 2 "Inel" "either mIw. [wait 0.3]'emvo' mID yav threat bIquv 'op tu'lu'."
+send_character_message 2 "set_torso_target 3.24458 428.66 -68.8401 1"
+send_character_message 2 "set_head_target 8.89906 428.822 -55.7067 1"
+say 2 "Inel" "Gunk vItu' 'ej asap ngaQ nIS maH; [wait 0.3]latlh vIHtaHbogh vaj QeymoHjaj tlhoy qar terrorist network alongside amos 'ay'."
+send_character_message 2 "set_torso_target 3.09029 428.66 -68.727 1"
+send_character_message 2 "set_head_target 1.58612 428.822 -64.9198 1"
+say 2 "Inel" "luq [wait 0.3]loghDaq qaSpu'DI' arlissian Collective contact maH."
+set_cam 2.15831 429.436 -69.2508 -3.65 -82.32 -0.09 25.0554
+send_character_message 2 "set_torso_target 3.79049 428.66 -68.6686 1"
+send_character_message 2 "set_head_target 9.58789 429.017 -69.6925 1"
+say 2 "Inel" "ashfur. [wait 0.3]QIn ghItlh arliss vIHtaHbogh colonization qabna'Daj HaDwI'pu' jatlh. [wait 0.5]confirm, jotlhmeH qech."
+send_character_message 2 "set_torso_target 3.27029 428.66 -68.7056 1"
+send_character_message 2 "set_head_target 2.52705 430.958 -61.5956 1"
+set_cam 1.20754 429.361 -71.3219 -0.36 -135.74 0.33 43.6644
+say 2 "Inel" "qep yejquv veb loSmaH wejDIch spurhelm; [wait 0.3]Dup qech 'ej ja'chuq maH Gunk jon quv, vIchID."
+send_character_message 2 "set_torso_target 3.27029 428.66 -68.7056 0"
+send_character_message 2 "set_head_target 3.70731 429.479 -61.9551 1"
+say 2 "Inel" "dismissed."
+send_character_message 7 "set_torso_target 2.84006 428.961 -45.4817 0"
+send_character_message 7 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 9 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 8 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 5 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 5 "set_torso_target 19.892 428.563 -62.0582 0"
+send_character_message 2 "set_head_target 3.13808 431.211 -61.2436 1"
+send_character_message 2 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 3 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 3 "set_torso_target -3.04296 428.783 -62.3462 0"
+send_character_message 1 "set_torso_target -3.14625 428.848 -52.3498 0"
+send_character_message 1 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+set_cam 4.39489 429.042 -42.1815 0.2 21.55 -0.44 45.4659
+say 2 "Inel" "rI'."
+send_character_message 1 "set_head_target 2.7678 430.528 -68.488 1"
+set_cam -2.48104 429.169 -53.3968 0.35 131.44 0.34 25.9161
+say 1 "Ano" "..."
+set_character_pos 6 -14.9641 450.509 -82.0073 -90
+set_character_pos 2 -20.484 456.313 -86.0597 -90
+send_character_message 4 "set_torso_target -7.18235 428.623 -51.6028 0"
+send_character_message 4 "set_head_target -5.48082 429.185 -50.7509 1"
+send_character_message 3 "set_head_target 3.65593 429.44 -68.9498 1"
+set_character_pos 4 -8.03247 428.625 -52.3032 -42
+set_character_pos 3 33.953 450.465 -83.0237 0
+set_character_pos 5 34.8646 450.367 -82.8891 -180
+set_character_pos 8 34.1802 450.432 -84.082 -180
+set_character_pos 9 34.8772 450.418 -83.6709 90
+set_character_pos 7 33.1954 450.384 -83.9351 90
+send_character_message 1 "set_torso_target -5.6038 428.794 -51.0776 0"
+send_character_message 1 "set_head_target -5.70506 428.753 -51.4884 1"
+send_character_message 1 "set_animation \"Data/Animations/sitledge.anm\""
+set_character_pos 1 -5.48479 428.563 -50.5685 100
+set_cam -7.23755 446.435 -82.4292 -0.48 -83.26 -0.08 25.9161
+say 8 "" "..."
+send_character_message 1 "set_head_target -5.70506 428.61 -51.4884 1"
+set_character_pos 2 -18.0344 450.379 -86.9236 -90
+set_cam -7.45605 428.941 -49.2359 -0.29 -39.79 -0.39 46.3506
+say 1 "Ano" "..."
+send_character_message 1 "set_head_target -6.71998 429.107 -51.5576 1"
+say 4 "Wilen" "qaH [wait 0.3]vay' poQ SoH?"
+send_character_message 4 "set_head_target -5.48049 429.185 -50.75 1"
+set_cam -4.29114 429.055 -50.4437 0.47 70.06 -0.14 27.0421
+say 1 "Ano" "wilen. [wait 0.3]nuq Davang naDev? [wait 0.5]mIchHom DoH vuS."
+set_cam -7.15596 429.277 -52.5646 0.45 110.16 0.2 27.0421
+send_character_message 4 "set_head_target -5.74908 428.951 -50.8795 1"
+say 1 "Ano" "...[wait 0.3]'ej qaS nuq mInDu'?"
+set_character_pos 1 -5.78824 428.563 -50.952 125
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 4 "set_head_target -5.81301 429.252 -51.0997 1"
+say 4 "Wilen" "DaH 'Iv wilen? [wait 0.5]boQwI'?"
+set_cam -8.7097 429.245 -53.2923 -0.36 -136.51 0.33 27.0421
+say 1 "Ano" "wilen. [wait 0.3]jatlh malja' 'ej Qapchu' vIHtaHbogh 'oH ngejtaH SoH personally DorwI' jIH tel."
+set_character_pos 4 -8.03247 428.625 -52.3032 -42
+send_character_message 4 "set_animation \"Data/Animations/jairoidle.anm\""
+set_cam -7.72081 429.088 -50.403 0.06 3.28 -0.48 27.0421
+say 4 "Wilen" "wej wilen. [wait 0.5]'ej ghaH maH [wait 0.3]DorwI'."
+send_character_message 4 "set_head_target -7.91258 428.563 -51.6983 1"
+send_character_message 4 "set_torso_target -7.43669 428.19 -51.8667 1"
+say 4 "Wilen" "wej wIchavmeH qabwIj obedient yab. [wait 0.3]'ej HurDaq genitalia ones. [wait 0.5]'ach Qap nuj wa' neH maj."
+send_character_message 4 "set_head_target -5.84498 429.404 -51.1452 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_cam -7.56289 429.211 -51.4706 -0.48 -103.44 0.08 27.0421
+say 1 "Ano" "nuq vIghel SoH, [wait 0.3]wilen? [wait 0.5]Suq nuq vaj SoH?"
+send_character_message 4 "set_animation \"Data/Animations/jairothreateningsword.anm\""
+send_character_message 4 "set_torso_target -7.43669 428.19 -51.8667 0"
+set_cam -6.86224 429.096 -50.8388 0.31 35.52 -0.38 27.0421
+say 4 "Wilen" "blind naQ ghISDen qaStaH nuq naDev. [wait 0.5]'ach QaS yIghoS vo' therium 'emvo' nIvbogh Daj."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 4 "set_head_target -5.84545 429.401 -51.1452 1"
+send_character_message 4 "set_torso_target -7.83873 427.867 -52.0334 0.999993"
+send_character_message 4 "set_animation \"Data/Animations/jairothreateningswordraise.anm\""
+say 4 "Wilen" "ghob'e' chevoq SoH ghob'e' HubtaHvIS bang maqarmeH. [wait 0.5]'ej bIj nIHwI' rur SoH."
+set_cam -4.34298 429.319 -50.7451 -13.35 74.56 0.2 18.0245
+send_character_message 4 "set_head_target -7.63135 428.158 -51.9226 1"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_kneeling_low.anm\""
+send_character_message 4 "set_torso_target -7.4933 428.541 -52.5573 0"
+say 4 "Wilen" "..."
+send_character_message 4 "set_head_target -7.53628 428.367 -51.8162 1"
+set_cam -8.20265 428.66 -53.5418 -0.03 -153.76 0.07 23.5095
+send_character_message 1 "set_torso_target -7.09988 428.08 -51.4769 1"
+send_character_message 1 "set_head_target -7.51721 428.423 -51.8732 1"
+set_character_pos 1 -6.89569 428.563 -51.4549 146
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+say 1 "Ano" "wilen! [wait 0.5]nuq 'oH muj!?"
+send_character_message 4 "set_head_target -7.42303 428.569 -51.6977 1"
+say 4 "Wilen" "...[wait 0.3]nuq?"
+send_character_message 1 "set_head_target -7.80393 428.824 -52.1587 1"
+set_cam -8.21745 428.786 -53.1989 -0.03 -152.36 0.07 26.499
+send_character_message 4 "set_animation \"Data/Animations/r_crouch.anm\""
+say 4 "Wilen" "jIH... [wait 0.3]neH wab tlhup pab [wait 0.3]'ej."
+send_character_message 1 "set_head_target -7.84147 428.844 -52.1095 1"
+send_character_message 4 "set_head_target -7.3638 428.835 -51.7025 1"
+say 4 "Wilen" "qatlh Doch jatlh jIH?"
+set_cam -5.38466 443.944 -63.232 -36.05 -105.4 0.01 88.2572
+say 8 "" "..."
+say 8 "" "a-a path ending naQ SoH."
+fade_to_black 1
+say 8 "T2-Dev" "qatlho' therium-2 chu'."
+send_global_message "levelwin"

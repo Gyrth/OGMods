@@ -1,0 +1,42 @@
+#name "Start"
+#participants 3
+send_level_message "set_camera_dof 0 0 0 0.3 4 0.5"
+send_character_message 3 "set_animation \"Data/Animations/c_actionidle.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target 18.2177 -1.09138 2.15469 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_character_pos 2 16.9266 -1.80173 3.30221 56
+set_character_pos 1 16.8275 -1.94966 1.82974 -48
+set_cam 15.3861 -1.50606 2.50428 0 -90.39 0 90
+set_character_pos 3 28.6852 -1.91702 3.49284 -168
+set_cam 15.3075 -1.50606 2.82703 0 -90.73 0 49.2024
+set_character_pos 1 17.9746 -1.94966 2.1646 -40
+set_character_pos 2 17.7076 -1.92462 3.52017 64
+say 2 "Midnight" "'oH chenmoH maH! He'mIn'or gardens Jade Hay'ta'. yIjatlh."
+send_character_message 1 "set_head_target 18.6826 -1.43648 2.8007 0.0309421"
+send_character_message 3 "set_head_target 17.7371 -0.933164 3.43411 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+send_level_message "music_layer_override 2"
+say 3 "Amethyst" "yoqvaD nab. chay'pen neH wa' Jade botlhDaq."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 19.4396 -1.43648 2.4063 1"
+say 1 "Turner" "nuq? qatlh?"
+send_character_message 3 "set_head_target 18.4833 -1.18421 2.19708 1"
+send_character_message 3 "set_animation \"Data/Animations/c_actionidle.anm\""
+say 3 "Amethyst" "SeH cha' tlhIH legh jIH moj ghaytanHa' jup, vIghro' je rabbit Qam Dop pong Dop … 'ej 'oH funnier mIw."
+send_character_message 2 "set_head_target 18.1949 -1.5383 2.63309 1"
+send_character_message 3 "set_head_target 18.4796 -1.18915 2.18224 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+say 2 "Midnight" "qechvam vIghIjlu'!"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "Jade botlhDaq Suq 'Iv?"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 3 "Amethyst" "ghob taH whoever."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "jIHvaD ramjep botlhDaq pIH SoH? moQHommeyvetlh 'e' qaS. luq-"
+send_character_message 2 "set_head_target 17.8945 -1.10125 2.30122 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 2 "Midnight" "jIQoS, turner. pagh wIv tu'lu'."
+send_level_message "music_layer_override 4"
+make_participants_aware

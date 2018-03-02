@@ -1,0 +1,9 @@
+#name "Choice"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -126.273 118.15 -106.861 -90
+send_character_message 1 "set_head_target -124.017 118.962 -101.818 1"
+set_cam -129.849 119.032 -109.787 0 -139.73 0 72.6981
+send_level_message "set_camera_dof 0 0 0 0.3 20 1"
+say 1 "Ghost" "[wait 0.3].. .seems elegir entre estas linternas..."

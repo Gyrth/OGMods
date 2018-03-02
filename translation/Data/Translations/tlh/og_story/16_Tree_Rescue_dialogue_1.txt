@@ -1,0 +1,15 @@
+#name "Win"
+#participants 2
+set_character_pos 2 -43.9495 21.4732 -9.53729 -68
+set_character_pos 1 -43.5078 21.2974 -6.76732 84
+set_cam -41.942 21.8467 -5.20717 0 34.88 0 53.6292
+say 2 "Rat" "jIHvaD vay' 'oy'!"
+say 1 "Turner" "rabbit be'Hom Dalegh'a'?"
+say 2 "Rat" "ghaH DaSov?
+say 2 "Rat" "vaj vaj 'oH chenmoH ghaH Hoch SachchoHghach'a' chen, ghaH ghaH nobmeH yIjaH wItI'nISmo' toS veb-ghaj ghaH jatlh ghaH."
+say 1 "Turner" "qaS nuq ghaH?"
+say 2 "Rat" "ghaH dragged maH DoH 'elbogh raQ."
+say 2 "Rat" "Qo' ghojwI'pu'lI' tIvnIS tlhoy maw' toy'wI''a'."
+say 1 "Turner" "nuqDaq ghaH je chaq SoHvaD Qo' chuH jIH Sor yIja'."
+say 2 "Rat" "ghorgh 'oH lan SoH mIw."
+send_global_message "levelwin"

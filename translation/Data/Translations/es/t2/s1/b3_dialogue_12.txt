@@ -1,0 +1,15 @@
+#name "FL-A"
+#participants 2
+set_character_pos 1 -39.3623 -28.2602 -160.718 91
+send_character_message 1 "set_head_target -39.4424 -26.4222 -162.026 0.968158"
+set_cam -33.4389 -28.229 -152.099 0 35.05 0 40.1409
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Ghost" "..."
+set_character_pos 1 -39.3623 -28.2753 -160.718 91
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+send_character_message 1 "set_head_target -39.4424 -26.4222 -162.026 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "Fue muy divertido, [wait 0.3]pero es tiempo en pista..."
+send_global_message "levelwin a"

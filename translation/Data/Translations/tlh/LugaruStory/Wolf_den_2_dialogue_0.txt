@@ -1,0 +1,83 @@
+#name "Turner"
+#participants 2
+send_character_message 2 "set_torso_target 14.1511 10.6261 74.0185 0.076071"
+send_character_message 2 "set_head_target 14.0868 10.5777 74.0123 0.24023"
+set_character_pos 2 10.1378 9.97828 76.3138 4
+set_character_pos 1 20.9113 16.3077 80.5081 139
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_eye_dir 15.6373 11.6701 74.4246 1"
+send_character_message 1 "set_torso_target 17.0558 11.7817 71.2207 0.000209719"
+send_character_message 1 "set_head_target 16.2229 10.5419 74.7652 1"
+set_cam 19.2261 16.543 80.0034 0 -85.61 0 65.897
+say 1 "Ash" "bel, ghobe'."
+send_character_message 2 "set_head_target 14.0868 10.5777 74.0123 0.24023"
+send_character_message 2 "set_torso_target 14.1511 10.6261 74.0185 0.076071"
+send_character_message 1 "set_torso_target 17.0558 11.7817 71.2207 0.000209719"
+send_character_message 1 "set_head_target 17.0599 11.9527 71.5206 0.27429"
+send_character_message 1 "set_eye_dir 16.1534 11.6701 71.6856 1"
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+set_character_pos 1 15.7696 10.2565 75.3399 -102
+set_cam 12.7652 10.3016 73.609 -8.62 -142.85 -1.98 65.897
+say 1 "Ash" "pine. [wait 0.2]lightfoot. [wait 0.2]thunder."
+send_character_message 2 "set_head_target 15.6706 11.4514 75.5885 1"
+send_character_message 2 "set_torso_target 14.1511 10.6261 74.0185 0.076071"
+send_character_message 1 "set_torso_target 12.1004 11.7817 73.9525 0.0729713"
+set_cam 7.83199 10.5066 75.9413 0.75 -90.48 0.52 27.9267
+send_character_message 1 "set_eye_dir 8.77104 10.5968 76.4488 1"
+send_character_message 1 "set_head_target 10.2897 11.4856 76.3616 1"
+set_character_pos 1 15.7696 10.2527 75.3399 -126
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ash" "nuq Davang?"
+send_character_message 2 "set_head_target 15.6475 10.7836 75.2322 1"
+send_character_message 2 "set_torso_target 14.1511 10.6261 74.0185 0.076071"
+send_character_message 1 "set_head_target 10.2897 11.4856 76.3616 1"
+send_character_message 1 "set_torso_target 12.1004 11.7817 73.9525 0.0729713"
+set_character_pos 1 15.7696 10.2527 75.3399 -126
+send_character_message 2 "set_animation \"Data\Animations\r_actionidlethreat.anm\""
+set_cam 18.0794 11.9131 74.2913 -13.37 107.28 -0.29 17.6948
+say 2 "Turner" "rIn, che' vuDmeyvetlh Qongbogh chalDaq tlha' Dat."
+send_character_message 2 "set_torso_target 14.1511 10.6261 74.0185 0.076071"
+send_character_message 2 "set_head_target 14.0868 10.5777 74.0123 0.24023"
+send_character_message 1 "set_head_target 10.2897 11.4856 76.3616 1"
+send_character_message 1 "set_torso_target 12.0957 11.7676 73.9558 0"
+set_character_pos 1 15.7696 10.2527 75.3399 -136
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_jeer.anm\""
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 7.83199 10.5066 75.9413 0.75 -90.48 0.52 27.9267
+say 1 "Ash" "'e' Dajatlh, qaStaHvIS juH, ghaH puq 'Iw ghoQ 'etlh?"
+send_character_message 2 "set_torso_target 13.9576 10.6261 77.5967 1"
+send_character_message 2 "set_head_target 12.3938 9.54404 77.5282 1"
+send_character_message 1 "set_head_target 10.2897 11.4856 76.3616 1"
+send_character_message 1 "set_torso_target 11.8818 10.9965 74.0271 0.588028"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 18.0794 11.9131 74.2913 -13.37 107.28 -0.29 17.6948
+say 2 "Turner" "pagh wIv vIghaj."
+send_character_message 2 "set_torso_target 13.1105 10.6261 76.4979 1"
+send_character_message 2 "set_head_target 15.4458 11.4266 75.3789 1"
+send_character_message 1 "set_head_target 10.2897 11.4856 76.3616 1"
+send_character_message 1 "set_torso_target 11.4979 11.5939 75.9249 0.533032"
+set_cam 7.83199 10.5066 75.9413 0.75 -90.48 0.52 27.9267
+say 1 "Ash" "wIv reH Daghaj."
+send_character_message 1 "set_torso_target 11.4979 11.5939 75.9249 0.533032"
+send_character_message 1 "set_head_target 10.2897 11.4856 76.3616 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+say 1 "Ash" "vaj DaH Hero, nuq?"
+send_character_message 1 "set_torso_target 11.4979 11.5939 75.9249 0.533032"
+send_character_message 1 "set_head_target 10.2897 11.4856 76.3616 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam 18.0794 11.9131 74.2913 -13.37 107.28 -0.29 17.6948
+say 2 "Turner" "HIHIv SoH. [wait 0.2]'ej HoH. [wait 0.2]ghaH chay' ghoS 'oH."
+send_character_message 1 "set_torso_target 11.4979 11.5939 75.9249 0.533032"
+send_character_message 1 "set_head_target 12.8435 10.4688 77.4623 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 7.83199 10.5066 75.9413 0.75 -90.48 0.52 27.9267
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ash" "maj. [wait 0.2]Ha' Qu'."
+set_character_pos 2 10.1378 9.59352 76.3138 4
+send_character_message 1 "set_torso_target 10.9291 10.9472 75.7108 1"
+send_character_message 1 "set_head_target 11.0812 10.3193 75.7502 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ash" "Hap pagh anymore, anyway."
+send_level_message "make_all_aware"

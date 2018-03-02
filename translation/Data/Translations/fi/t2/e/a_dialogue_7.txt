@@ -1,0 +1,15 @@
+#name "Note-Terrorists"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_head_target 18.9121 -2.91274 -51.0854 1"
+set_cam 19.7643 -2.70219 -50.4342 0 54.38 0 44.5848
+set_character_pos 1 18.3414 -3.19008 -51.8931 -48
+say 1 "Ghost" "Huomaa Empry."
+set_cam 17.9858 -2.46313 -50.9874 0 -37.3 0 44.5848
+set_character_pos 1 18.3414 -3.14058 -51.8931 -48
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Kaikki vartijat sijoitettuna Collinpeak: [wait 0.3]terrorist(s) on repimällä tiensä läpi jokaisen meidän tukikohtia."
+say 2 "Note" "Nykyinen sijainti [wait 0.3]Motivaatio ja suunta on tuntematon. [wait 0.5]Joku, joka ajattelee defecting tai käynnissä kotiin rangaistava ja helpottuneita komennon."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Joku pysyy palkitaan ruhtinaallisesti. [wait 0.5]Jokainen, joka syö yksi terroristien on omassa kodissaan Empry. [wait 0.5]Pitää vainoharhaisuus minimiin."

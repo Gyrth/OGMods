@@ -1,0 +1,14 @@
+#name "Win"
+#participants 2
+set_character_pos 2 19.3999 4.91066 3.08065 -97
+set_character_pos 1 18.4647 4.95933 3.72757 0
+set_cam 19.4341 5.64064 4.30153 0 31.45 0 90
+say 1 "Turner" "'e' wasn't vaj qab.
+say 1 "Turner" "shouldn't je let naDev taH."
+say 1 "Turner" "vay' nargh 'uch tIq neH marIHnIS."
+say 2 "Midnight" "pretty be neH opening wanI', laHmey waH ghaH."
+say 2 "Midnight" "as for nargh … yIghoSDo'.
+say 2 "Midnight" "arena qet amethyst.
+say 2 "Midnight" "Hoch nI' law' yIn ghaH, not wej Ha'."
+say 1 "Turner" "yIn, vaj mev neH nuq'e'."
+send_global_message "levelwin"

@@ -1,0 +1,44 @@
+#name "Cat"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 5
+send_character_message 2 "set_head_target 184.547 -58.9426 366.038 1"
+set_character_pos 2 182.781 -58.9105 365.069 -30
+send_character_message 2 "set_animation \"Data/Animations/r_meditate.anm\""
+set_character_pos 1 184.842 -60.3108 356.505 -101
+send_character_message 1 "set_torso_target 184.549 -60.0044 356.925 1"
+send_character_message 1 "set_head_target 183.216 -58.8993 363.264 1"
+send_character_message 1 "set_eye_dir 183.216 -58.8993 363.264 1"
+send_character_message 2 "set_eye_dir 184.547 -58.7254 366.038 0"
+set_cam 183.286 -58.6587 367.764 -4.53 0 0 31.0226
+say 1 "Amos" "..."
+send_character_message 2 "set_head_target 184.547 -58.8751 366.038 1"
+say 2 "???" "¿Tienes algo para mí?"
+send_character_message 1 "set_torso_target 184.569 -59.8466 356.953 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Amos" "¿Qué haces aquí?"
+send_character_message 2 "set_head_target 184.547 -58.9488 366.038 1"
+say 2 "???" "Meditando."
+set_cam 184.889 -59.7669 354.465 4.96 173.17 0 20.3933
+send_character_message 1 "set_torso_target 184.554 -60.0861 357.009 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Amos" "¿Sí? [wait 0.5]¿Vives aquí? [wait 0.5]¿Es usted un Arlissian?"
+send_character_message 2 "set_head_target 184.547 -59.2024 366.038 1"
+say 2 "???" "No. [wait 0.5]Necesario desconfiarme."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 1 "set_torso_target 184.554 -60.0861 357.009 0"
+say 1 "Amos" "Me... [wait 0.3]lo siento."
+send_character_message 2 "set_head_target 184.547 -59.0228 366.038 1"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+say 1 "Amos" "Meditando, [wait 0.3]¿EH?"
+set_cam 198.039 -60.6019 355.171 2.15 121.88 0.01 17.3919
+say 2 "???" "No hay tanta agua en esta laguna..."
+send_character_message 2 "set_head_target 184.547 -58.7301 366.038 1"
+say 2 "???" "Este verano está caliente. [wait 0.5]Más caliente que el anterior."
+send_character_message 2 "set_head_target 183.991 -59.274 365.502 1"
+say 2 "???" "Los peces morirán, [wait 0.3]pero sus huesos alimentarán el suelo."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_head_target 187.034 -58.9241 362.856 1"
+set_cam 183.291 -59.8619 353.044 0.4 -168.21 -0.07 37.6733
+say 1 "Amos" "..."

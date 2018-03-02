@@ -1,0 +1,10 @@
+#name "Lookout"
+#participants 1
+set_character_pos 1 145.156 -56.4148 291.484 90
+send_character_message 1 "set_head_target 143.871 -47.4994 285.406 1"
+set_cam 145.924 -56.4533 292.454 23.18 12.32 0 96.6248
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Amos" "...[wait 0.5]ruinas de mirador."
+send_character_message 1 "set_torso_target 145.235 -55.6065 290.997 1"
+say 1 "Amos" "Impresionante está todavía sosteniendo... [wait 0.5]teniendo en cuenta más de quinientos años de edad."

@@ -1,0 +1,17 @@
+#name "Note-Voices"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 308.276 -1.46393 -1.14145 90
+send_character_message 1 "set_head_target 308.29 -1.33387 -1.87433 1"
+set_cam 310.028 -1.06932 -2.29601 0 114.23 0 34.0902
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Antiikin huomautus. [wait 0.5]Täytyy olla satoja vuosia vanhoja."
+set_cam 308.948 -0.872795 -0.238064 0 26.02 0 34.0902
+set_character_pos 1 308.276 -1.50636 -1.14145 90
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.1"
+say 2 "Note" "Äänet satuttaa. [wait 0.5]Tunnen Jumalan viha kiemurrella tiensä minun aivot [wait 0.3]Whispering makeaa minun korviini."
+say 2 "Note" "Haluan antaa niin pahasti. [wait 0.5]Se tuntuu niin hyvältä. [wait 0.5]Mutta jos annan Jumala sisällä sieluni, [wait 0.3]se murskaa kaiken olen."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "En halua päätyä Eira. [wait 0.5]Mieluummin kuolisin kuin palvella Jumalan kuiskaa."

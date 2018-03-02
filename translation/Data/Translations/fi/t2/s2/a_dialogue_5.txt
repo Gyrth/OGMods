@@ -1,0 +1,16 @@
+#name "Note-Lure"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 62.231 15.2946 -113.151 15
+send_character_message 1 "set_head_target 63.0672 15.716 -113.327 1"
+set_cam 61.6331 15.8967 -114.188 0 -132.66 0 53.9635
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Kirja analysoi suosittu kansanperinne ja henget..."
+set_character_pos 1 62.231 15.3493 -113.151 15
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 63.1816 15.9284 -113.018 0 72.41 0 53.9635
+say 2 "Note" "Legendoja ja tarinoita puhua henkien jolla olentoja ja älykkään lajin edustajaan palvelemaan heidän tahtoaan."
+say 2 "Note" "Ne ovat houkutellaan syrjäisillä seuduilla kanssa rauhoittava kuiskaa, [wait 0.3]Pelaa uhrin syvin haluaa ja synkimpiä salaisuuksia; [wait 0.3]esimerkiksi [wait 0.3]joku fantasiat massa hyväksyntää kuulla suosionosoituksia, [wait 0.3]Ystävällisin terveisin tai kehua, [wait 0.3]Vaikka verenhimoisia kuulla äänet sodan [wait 0.3]verenvuodatusta ja voitto."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Kun uhri on riittävän houkutellaan ja eristyksissä, [wait 0.3]he usein kuolevat, [wait 0.3]tai pahempaa, [wait 0.3]hallussaan sopivaksi henkien tarvitsee ja haluaa."

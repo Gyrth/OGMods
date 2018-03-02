@@ -1,0 +1,14 @@
+#name "Turner"
+#participants 1
+set_character_pos 1 213.211 16.3634 -231.379 -81
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_head_target 213.019 17.0924 -229.657 1"
+set_cam 214.169 16.9835 -233.496 -7.43 178.34 3.22 62.0861
+say 1 "Turner" "qatlh ruch chaH?"
+set_character_pos 1 213.211 16.3634 -231.379 -81
+set_cam 213.034 26.0489 -206.547 -18.15 178.78 -0.95 72.566
+say 1 "Turner" "vIchel tlhappu' anything but yIn."
+set_character_pos 1 213.211 16.3634 -231.379 -81
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlethreat.anm\""
+set_cam 214.051 16.86 -232.092 1.47 154.69 -3.73 72.566
+say 1 "Turner" "poH favor chegh."

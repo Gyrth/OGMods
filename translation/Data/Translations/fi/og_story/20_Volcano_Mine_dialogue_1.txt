@@ -1,0 +1,39 @@
+#name "Start"
+#participants 3
+send_character_message 3 "set_animation \"Data/Animations/r_spearstance.anm\""
+send_character_message 3 "set_head_target 20.9155 -2.97163 10.5341 1"
+send_character_message 1 "set_head_target 22.4772 -3.12838 11.24 1"
+send_character_message 2 "set_torso_target 21.4438 -2.27919 10.9657 2.98917e-005"
+send_character_message 2 "set_head_target 20.8785 -2.93017 10.7943 1"
+set_character_pos 1 20.7589 -3.80172 10.518 -65
+set_character_pos 3 23.5309 -4.15801 9.67222 177
+set_character_pos 2 22.8562 -4.27937 11.3106 149
+set_cam 23.5919 -3.04407 13.5384 -10.68 31.35 0 90
+set_dialogue_color 3 0.8 0.5 0.3
+set_dialogue_voice 3 11
+say 1 "Turner" "Tämä ei Näytä areenalla. "
+send_character_message 1 "set_head_target 22.4728 -3.12582 11.2427 1"
+send_character_message 1 "set_torso_target 19.9691 -3.34065 11.1495 0.19081"
+send_character_message 2 "set_torso_target 21.7788 -1.7913 10.8793 1"
+set_cam 23.0217 -4.30427 12.5348 32.15 44.86 -8.04 90
+send_character_message 2 "set_head_target 20.6393 -0.957081 10.7253 1"
+send_character_message 3 "set_head_target 20.8767 -2.98628 10.5282 1"
+say 2 "Stonewall" "Te taistelette ei tänään. Näet että glowy asia siellä? Ametisti haluaa sitä."
+send_character_message 2 "set_head_target 20.639 -0.964624 10.7253 1"
+send_character_message 1 "set_torso_target 20.172 -3.01088 11.7561 1"
+send_character_message 1 "set_head_target 18.1442 -1.10805 9.85238 1"
+say 1 "Turner" "Miksi? Näyttää melko paljon kuin muut sun kasvit."
+send_character_message 2 "set_torso_target 21.7868 -1.81364 10.8823 0"
+send_character_message 2 "set_head_target 20.7692 -3.06459 10.4569 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Stonewall" "Ei ole väliä, Lucky. Vain tehdä kuten olet kertonut. Älä unohda meillä rotta ystävä."
+send_character_message 2 "set_head_target 20.8398 -3.06459 10.4793 1"
+send_character_message 3 "set_head_target 23.0085 -2.98628 11.3993 1"
+send_character_message 3 "set_torso_target 22.5869 -3.50959 9.98203 1"
+set_cam 23.5919 -3.04407 13.5384 -10.68 31.35 0 90
+say 3 "Trail" "Ihme, jos hän saat kauempana kuin viimeksi kymmeniä kanit."
+send_character_message 2 "set_head_target 23.6421 -3.06459 9.88163 1"
+say 2 "Stonewall" "Epäilen sitä."
+set_character_pos 3 23.1219 -4.06774 8.22687 -163
+set_character_pos 2 23.1395 -4.31085 10.4412 -176
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_shade.anm\""

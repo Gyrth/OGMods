@@ -1,0 +1,16 @@
+#name "Note-Crete"
+#participants 2
+set_character_pos 1 27.5341 15.2194 -123.091 -132
+send_character_message 1 "set_head_target 26.982 15.7246 -122.51 1"
+set_cam 27.1565 15.8698 -124.326 0 -175.08 0 48.9875
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "Un análisis sobre los dioses del espíritu del mundo, [wait 0.3]Suponiendo que son reales."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 26.4049 15.8842 -123.25 0 -110.36 0 33.3467
+say 2 "Note" "Nuestros antiguos registros nos han indicado que Creta (ambos blanco y negro) es creada por el exceso de energía emitido por los poderes de los espíritus (incluyendo nuestro propio espíritu mayor) ya que gire la tierra muy por debajo de nuestros pies en formas más deseables, o afectan a la multitud de seres inteligentes que pueblan el continente de Preuwyn."
+say 2 "Note" "Más la energía que puede ser observada en cualquier área dada es directamente indicativa de una gran cantidad de exceso de energía que se ha enfocado hacia una tarea espiritual."
+say 2 "Note" "Debido a esto, es razonable suponer que la Creta más encontramos dentro de una región, más cerca nos encontramos al cementerio de los espíritus mayores - es decir, el dominio Colonial de la Therium."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Extracto de observancias de los espíritus mayores y su construye varios, primera edición, Authored por Herumphal Mandru, iluminados por Otto Vendran."

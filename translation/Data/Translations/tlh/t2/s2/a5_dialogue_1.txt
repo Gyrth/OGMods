@@ -1,0 +1,17 @@
+set_character_pos 1 -115.018 -6.79781 167.34 30
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+send_character_message 1 "set_head_target -113.802 -7.21318 166.564 1"
+set_cam -112.177 -7.23464 166.575 0 93.39 0 42.7851
+#name "Corpses"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "...[wait 0.3]'oH ferdi."
+send_character_message 1 "set_head_target -113.607 -6.71118 167.114 1"
+set_cam -113.313 -6.90351 167.62 0 78.51 0 31.0413
+say 1 "Ghost" "tlhoy wab shouldn't chenmoH jIH."
+set_character_pos 1 -115.018 -7.09815 167.34 30
+send_character_message 1 "set_head_target -113.297 -6.63211 167.368 1"
+set_cam -113.704 -6.90191 166.93 0 108.51 0 31.0413
+say 1 "Ghost" "chaq drika naDev vogh."

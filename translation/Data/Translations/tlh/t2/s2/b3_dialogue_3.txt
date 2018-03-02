@@ -1,0 +1,16 @@
+#name "Note-Vandal"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 76.5713 -7.42899 -118.014 52
+send_character_message 1 "set_head_target 77.1148 -7.14914 -118.662 1"
+set_cam 77.2817 -6.93414 -115.997 0 8.61 0 36.7931
+say 1 "Ghost" "tIQ note. [wait 0.5]ghob'e' ngabchu' ghu'vam rewbe' wa'vatlh ben."
+set_cam 77.7236 -6.78617 -118.106 0 75.95 0 36.7931
+set_character_pos 1 76.5713 -7.40858 -118.014 52
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "vandal chaDo'maq jIH. [wait 0.5]description ghoghmey ghaH chu'. [wait 0.5]vIH je confidence 'ej wooden DuDwI' qeng."
+say 2 "Note" "ghorgh Soj SIch ghaH. [wait 0.3]vIchel hesitate ghaH qabDaj pa' crouching je Hoch HIjmeH qul."
+say 2 "Note" "veSDujmeymo', [wait 0.3]jIHvaD ghaH 'ej qet jIH Ha' ghaHlaw' je nom Hoch possibly vIta'laH."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "tu'lu' QeH neH mInDu'."

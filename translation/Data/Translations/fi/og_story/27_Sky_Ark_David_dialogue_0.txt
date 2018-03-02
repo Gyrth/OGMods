@@ -1,0 +1,8 @@
+#name "Start"
+#participants 1
+set_character_pos 1 29.0682 112.1 19.1739 -145
+send_character_message 1 "set_head_target 26.8057 114.645 20.6595 1"
+set_cam 30.4165 112.428 19.1813 17.79 114.02 0 90
+say 1 "Turner" "Pyhäkkö."
+say 1 "Turner" "En ole koskaan nähnyt mitään vastaavaa."
+say 1 "Turner" "Kaupungin on oltava rakennettu vuosisatoja sitten muinoin."

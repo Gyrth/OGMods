@@ -1,0 +1,15 @@
+#name "NL-B"
+#participants 1
+set_character_pos 1 -275.449 8.86082 -172.159 -178
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -276.751 10.1022 -172.12 1"
+send_character_message 1 "set_head_target -276.741 10.5575 -172.119 1"
+set_cam -271.16 9.44609 -174.783 0 112.8 0 65.8141
+send_level_message "set_camera_dof 0 0 0 0.3 10 5"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -274.55 9.76775 -181.049 0"
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Suq naDev vIghaj. [wait 0.5]nom."
+send_global_message "levelwin b"

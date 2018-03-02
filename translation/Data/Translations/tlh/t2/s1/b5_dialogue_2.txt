@@ -1,0 +1,17 @@
+#name "ML-G"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 203.27 80.1018 -84.787 60
+send_character_message 1 "set_eye_dir 203.887 81.2853 -85.9128 1"
+send_character_message 1 "set_head_target 203.913 81.8488 -85.954 1"
+set_cam 203.973 80.6746 -79.3264 0 2.29 0 61.3958
+send_level_message "set_camera_dof 0 0 0 0.3 10 5"
+say 1 "Ghost" "..."
+set_character_pos 1 203.27 80.0642 -84.787 60
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+send_character_message 1 "set_head_target 203.913 81.8488 -85.954 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "nuq 'oH sacred Daq …? [wait 0.3]Samta'meH neH wa' mIw."
+send_global_message "levelwin hub"

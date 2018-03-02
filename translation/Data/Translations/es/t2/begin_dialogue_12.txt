@@ -1,0 +1,21 @@
+#name "Note-Arliss"
+#participants 2
+set_character_pos 1 171.07 -48.8527 157.516 90
+send_character_message 1 "set_head_target 171.186 -48.4564 156.943 1"
+set_cam 172.131 -48.3915 157.726 0 61.86 0 56.5533
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "Ghost" "Un libro sobre el colectivo de Arlissian..."
+send_character_message 1 "set_head_target 171.01 -48.4564 156.883 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 171.563 -48.2698 156.333 0 152.82 0 56.5533
+say 2 "Note" "Los gatos en las mesas del sur de Preuwyn a veces se equivocan para ser otra cosa que nuestros enemigos; [wait 0.3]pero no te dejes engañar.
+say 2 "Note" "Cualquier gato afiliado con el Arliss está destinada a engañar, [wait 0.3]explotan y traicionan siempre y cuando sea dentro de sus intereses."
+say 2 "Note" "Miembros del colectivo Arlissian incluso son conocidos por engañar a incautos kits en la selva, [wait 0.3]golpearon y capturar más adelante servicio dentro del país de Arliss."
+say 2 "Note" "A partir de ahí, [wait 0.3]someter, golpearon y torturar a nuestros hijos en su versión distorsionada de la 'crianza', [wait 0.3]crianza de conejos de Cinderbreathe anteriores para convertirse en siervos a los gatos."
+say 2 "Note" "Pensamiento racional ha sido quemado de estos pobres conejos, [wait 0.3]encender la comprensión única realidad a proporcionar nutrición para sus nuevos amos."
+say 2 "Note" "Pero independientemente, [wait 0.3]Sabemos que los conejos siempre hay un final a tal tortura; [wait 0.3]desde el principio del abuso, [wait 0.3]Sabemos que para pegarse para arriba para nosotros mismos, [wait 0.3]sin importar el costo. [wait 0.5]Para cada kit robado de nosotros, [wait 0.3]un nuevo uno levanta un puño contra sus dictadores malvados."
+say 2 "Note" "Marque mis palabras, [wait 0.3]el 'Kaicalk' (como se denominan en su lengua) será el primer paso para destruir al colectivo Arlissian y recuperar la dominación del Imperio glorioso de Cinderbreathe en Preuwyn."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "... inspirador."

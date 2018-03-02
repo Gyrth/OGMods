@@ -1,0 +1,7 @@
+set_character_pos 1 -134.309 118.313 -102.407 180
+send_character_message 1 "set_head_target -137.502 121.706 -102.125 1"
+set_cam -132.378 118.041 -99.7445 17.24 65.62 -0.89 80.5421
+#name "C path"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 2 "" "net poQbej mej 'op Dochmey latlh jaj."

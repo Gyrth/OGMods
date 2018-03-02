@@ -1,0 +1,8 @@
+#name "Test"
+#participants 3
+send_character_message 1 "set_animation \"Data\Animations\Gunk\gunkactionidle.anm\""
+send_character_message 1 "set_eye_dir -36.4914 39.7663 142.096 1"
+set_cam -36.2972 39.1845 143.557 0 72.06 0 30.3227
+set_character_pos 1 -39.4774 38.7352 142.604 0
+say 1 "Auisyudfgeirgepgis" "H[wait -0.1]o[wait -0.1]l[wait -0.1]¡y!"
+say 1 "Auisyudfgeirgepgis" "[wait 0.5]H[wait -0.1]o[wait -0.1]l[wait -0.1]y[wait -0.1]!"

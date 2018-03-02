@@ -1,0 +1,27 @@
+#name "Ask"
+#participants 4
+send_character_message 3 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+send_character_message 3 "set_head_target 114.796 406.237 163.761 1"
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 15
+set_dialogue_voice 3 5
+send_character_message 2 "set_animation \"Data/Animations/r_bigdogswordarmstance.anm\""
+set_character_pos 2 112.486 405.561 161.774 -86
+send_character_message 2 "set_torso_target 112.585 406.135 162.214 1"
+send_character_message 2 "set_head_target 113.35 406.309 162.96 1"
+set_character_pos 1 114.087 405.578 162.988 -90
+send_character_message 1 "set_torso_target 114.07 405.846 163.871 1"
+send_character_message 1 "set_head_target 115.151 406.209 164.356 1"
+set_character_pos 3 116.08 405.574 165.651 -176
+set_cam 110.899 406.446 161.186 0 -123.64 0 33.64
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Ghost" "'Iv ghe''or 'oH Dochvam'e'?"
+send_character_message 3 "set_torso_target 115.112 406.13 165.272 1"
+say 3 "????" "Beetles neH latlh wa'. [wait 0.5]Qo' 'IwlIj chaH. [wait 0.3]chaH Hoch insane."
+send_character_message 1 "set_head_target 113.636 406.209 163.564 1"
+send_character_message 2 "set_head_target 113.641 406.299 162.788 1"
+send_character_message 3 "set_head_target 114.796 406.237 163.761 0"
+send_character_message 3 "set_torso_target 115.112 406.13 165.272 0"
+say 2 "???" "[wait 0.3]loS ano. [wait 0.5]Ha' pol vIH."

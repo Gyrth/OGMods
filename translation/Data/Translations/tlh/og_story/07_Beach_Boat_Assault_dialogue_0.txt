@@ -1,0 +1,38 @@
+#name "Cat"
+#participants 2
+set_dialogue_color 2 0.9 0.9 1
+set_dialogue_voice 2 3
+set_character_pos 2 14.8402 18.2995 162.016 -90
+set_character_pos 1 14.8517 18.3114 168.302 91
+set_cam 14.2406 19.3305 171.685 -2.53 -7.24 0 15.2088
+send_character_message 1 "empty_hands"
+send_character_message 2 "set_torso_target 16.0058 18.108 165.688 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_level_message "music_layer_override 2"
+say 2 "Silver" "wa' Hoch fuss, luH vaj?"
+send_character_message 2 "set_head_target 14.2262 19.6947 162.845 1"
+say 2 "Silver" "nIS yo'SeH lutu'lu'bej?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "vaj vIghro'."
+send_character_message 2 "set_head_target 14.8418 19.2915 168.309 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "nuq trenchant observation. jagh ghewmey jey SoH je rapier 'urmangDaj vIlegh."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Dujvam Sumqu'."
+send_character_message 2 "set_head_target 18.4259 19.0183 166.672 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+say 2 "Silver" "'ej chay' vay' Data'nISbogh Qu'maj nab SoH? sail DoH vaj sunset? pagh moonrise? laH tiller vo' topmast vabDot neH?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "wej qay'. lay' chenmoH jIH jupDaj."
+send_character_message 2 "set_head_target 14.9884 19.1547 167.772 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Silver" "lay' shackles puj, 'ach … SoH HoS. rabbit, He. vaj pop HoS."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "nuq SoH qem DopDaq tlhap 'oH? Huch? parmaqqay? pagh neH latlh 'eb HoH neH?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Turner" "chay' ghot tu'lu'. mej jItlhIjchoHtaH pong pe'meH QIchlIj."
+send_character_message 1 "equip_item 4152"
+send_level_message "music_layer_override 4"
+make_participants_aware

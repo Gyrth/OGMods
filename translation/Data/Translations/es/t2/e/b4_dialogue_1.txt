@@ -1,0 +1,17 @@
+#name "Intro"
+#participants 3
+set_character_pos 2 107.301 -40.9953 272.446 90
+send_character_message 2 "set_animation \"Data/Animations/Gunk/gunksitcrossedlegs.anm\""
+set_cam 86.9881 -18.9047 269.382 0 0 0 90
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 2 "" "Un mes más tarde, [wait 0.3]en Lugaru..."
+set_cam 89.0303 -40.1265 268.107 0 -96.41 0 34.9847
+say 1 "Amos" "..."
+send_character_message 1 "set_head_target 93.6664 -40.0488 268.833 1"
+set_cam 91.5281 -40.1499 269.003 0 48.84 0 34.9847
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 1 "Amos" "Me dijeron que alguien me espera aquí."
+send_character_message 1 "set_head_target 93.8396 -40.0413 268.481 1"
+set_cam 88.0293 -40.419 268.45 0 -91.19 0 48.3781
+say 1 "Amos" "Pero no dije que..."

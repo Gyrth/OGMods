@@ -1,0 +1,7 @@
+#name "Suspicious Guard"
+#participants 2
+
+set_cam 8.10089 1.93596 -84.3991 0 -180 0 90
+say 2 "Guard" "Hei siellä![wait 0.2] Mitä teet täällä?"
+say 1 "Turner" "Vain harhaillessaan[wait 0.1] mitään syytä huoleen."
+say 2 "Guard" "Pysy poissa ongelmia."

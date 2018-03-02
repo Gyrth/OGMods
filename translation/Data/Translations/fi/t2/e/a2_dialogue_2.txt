@@ -1,0 +1,22 @@
+#name "NoKill"
+#participants 2
+set_character_pos 1 -37.7131 133.095 167.56 90
+send_character_message 1 "set_eye_dir -36.8731 120.519 137.117 1"
+send_character_message 1 "set_torso_target -37.1175 131.597 165.084 1"
+send_character_message 1 "set_head_target -35.989 119.766 134.047 1"
+set_cam -37.3873 134.195 169.328 -18.4 2.54 0.12 36.2371
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Älä viitsi [wait 0.2]Tiedän, että olet täällä!"
+send_character_message 1 "set_torso_target -37.2247 131.968 165.128 1"
+send_character_message 1 "set_head_target -36.5854 118.753 134.414 1"
+say 1 "Ghost" "Aion löytää!"
+send_character_message 1 "set_torso_target -36.5966 134.336 163.218 1"
+say 1 "Ghost" "Juuri tullut ulos!"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 1 "set_torso_target -36.5966 134.336 163.218 0"
+send_character_message 1 "set_head_target -37.7041 133.254 163.388 1"
+set_cam -37.2823 133.626 165.77 0.58 164.73 -0.31 29.2565
+say 1 "Ghost" "...[wait 0.4]Perkele."
+send_character_message 1 "set_head_target -38.4402 133.422 163.457 1"
+say 1 "Ghost" "[wait 0.1]Se oli liian lähellä."
+send_global_message "levelwin ea3"

@@ -1,0 +1,11 @@
+#name "Win"
+#participants 2
+set_character_pos 2 199.608 96.3255 -2.18897 107
+set_character_pos 1 199.515 96.3623 -5.33998 -82
+set_cam 200.705 96.8839 -5.97546 0 144.45 0 90
+say 2 "Rebel" "ghIlDeSten! nuqDaq vo' bImatlhba'"
+say 1 "Turner" "naDev jIH neH slavers mev Duj."
+say 2 "Rebel" "chaH mev je 'e' nID maH!"
+say 2 "Rebel" "'op maHvaD jon Ha'DIbaH."
+say 1 "Turner" "pa' yebDu'wIj."
+send_global_message "levelwin"

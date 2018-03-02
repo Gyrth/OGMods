@@ -1,0 +1,11 @@
+#name "Win"
+#participants 2
+set_character_pos 2 199.608 96.3255 -2.18897 107
+set_character_pos 1 199.515 96.3623 -5.33998 -82
+set_cam 200.705 96.8839 -5.97546 0 144.45 0 90
+say 2 "Rebel" "Kiitos! Mistä olet kotoisin?"
+say 1 "Turner" "Tulin tänne lopettaa slavers veneessä."
+say 2 "Rebel" "Me yritämme estää niitä myös!"
+say 2 "Rebel" "Koirat kiinni jotkut meistä."
+say 1 "Turner" "Navigoi sinne."
+send_global_message "levelwin"

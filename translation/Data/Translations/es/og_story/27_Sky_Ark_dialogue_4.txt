@@ -1,0 +1,23 @@
+#name "Nen"
+#participants 2
+send_character_message 2 "set_head_target -96.472 194.266 149.187 1"
+set_character_pos 2 -98.3813 193.413 149.903 0
+set_character_pos 1 -96.748 193.56 149.129 -159
+set_cam -94.3111 193.96 149.593 0 87.65 0 28.3206
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.5"
+set_dialogue_color 2 0.9 0.7 0.5
+set_dialogue_voice 2 6
+say 2 "Nen" "¿Está dejando que la gente?"
+send_character_message 2 "set_head_target -96.5559 194.266 149.411 1"
+send_character_message 1 "set_head_target -97.3157 193.592 150.046 1"
+say 1 "Turner" "No exactamente. Me atacaron sin previo aviso."
+send_character_message 2 "set_head_target -97.2964 194.132 150.859 1"
+say 2 "Nen" "Tratando de hacer otro 'ejemplo', ¿EH? Les falla. ¿Te mandó el cielo?"
+send_character_message 1 "set_head_target -98.0545 194.214 149.919 1"
+say 1 "Turner" "¿Sabes cielo? ¿Lo que está sucediendo aquí?"
+send_character_message 2 "set_head_target -96.616 194.2 149.264 1"
+say 2 "Nen" "Utiliza para que alguien, mientras sabía nuestro lugar, pagado por el privilegio y no les molesta."
+say 2 "Nen" "Nos le molestia de vez en cuando, pero una vez fueron demasiado lejos, y uno de nosotros se defendió. Murió el hijo de una familia importante, y el jefe comenzó a agrietarse."
+say 1 "Turner" "¿Dónde está este jefe?"
+send_character_message 2 "set_head_target -98.3898 194.515 148.719 1"
+say 2 "Nen" "Ella está probablemente en el templo. Bueno, solía ser un templo, ella lo usa más como una casa de baños privado ahora."

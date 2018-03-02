@@ -1,0 +1,11 @@
+#name "End"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 113.517 -41.5834 258.455 67
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_head_target 114.682 -41.0082 252.431 1"
+set_cam 112.729 -41.1164 261.158 0 -19.73 0 42.8042
+say 1 "Ghost" "Aika aloittaa uuden elämän..."
+fade_to_black 1
+send_global_message "levelwin eb5"

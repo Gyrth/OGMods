@@ -1,0 +1,62 @@
+#name "Turner"
+#participants 2
+set_character_pos 2 -67.129 58.6527 4.45921 -180
+send_character_message 2 "set_animation \"Data\Animations\r_spearstanceclose.anm\""
+send_character_message 2 "set_eye_dir -70.8948 61.1494 3.76357 1"
+send_character_message 2 "set_torso_target -69.9239 61.5025 3.75727 1"
+send_character_message 2 "set_head_target -69.0546 60.2943 4.00035 1"
+set_character_pos 1 -69.2171 59.2642 4.15261 0
+send_character_message 1 "set_eye_dir -67.3452 59.3926 4.72655 1"
+send_character_message 1 "set_torso_target -68.0037 59.6789 3.91248 0.00238284"
+send_character_message 1 "set_head_target -67.2233 59.6 4.44252 1"
+set_cam -66.7528 59.5106 4.91446 -0.02 59.08 -0.04 64.3111
+say 1 "Turner" "Willow on kuollut. [wait 0.3]He kaikki kuolleet."
+send_character_message 2 "set_head_target -69.0546 60.2943 4.00035 1"
+send_character_message 2 "set_torso_target -69.9239 61.5025 3.75727 1"
+send_character_message 1 "set_head_target -67.2233 59.6 4.44252 1"
+send_character_message 1 "set_torso_target -68.0037 59.6789 3.91248 0.00238284"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam -69.5509 60.3623 4.49734 -30.13 -75.16 5.49 64.3111
+say 2 "Cloud" "Hunter... [wait 0.2]Softpad... [wait 0.2]tapoit ne kaikki?"
+send_character_message 2 "set_head_target -69.0546 60.2943 4.00035 1"
+send_character_message 2 "set_torso_target -69.9239 61.5025 3.75727 1"
+send_character_message 1 "set_torso_target -68.006 58.8569 3.91283 1"
+send_character_message 1 "set_head_target -67.6281 59.4767 3.26101 1"
+send_character_message 2 "set_animation \"Data\Animations\r_spearstanceclose.anm\""
+set_cam -66.7528 59.5106 4.91446 -0.02 59.08 -0.04 64.3111
+say 1 "Turner" "Minulla ei ollut valinnanvaraa."
+send_character_message 1 "set_head_target -67.6281 59.4767 3.26101 1"
+send_character_message 2 "set_head_target -69.0546 60.2943 4.00035 1"
+send_character_message 2 "set_torso_target -69.7504 60.0466 1.64433 1"
+send_character_message 1 "set_torso_target -67.9872 58.8172 3.94902 1"
+set_cam -69.5509 60.3623 4.49734 -30.13 -75.16 5.49 64.3111
+say 2 "Cloud" "Sinulla on aina valinta. [wait 0.2]Vain kävelymatkan päässä."
+send_character_message 2 "set_head_target -69.0546 60.2943 4.00035 1"
+send_character_message 2 "set_torso_target -68.1441 60.0466 3.88067 1"
+send_character_message 1 "set_torso_target -67.8806 58.8172 4.04327 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target -67.8361 59.76 4.20631 1"
+set_cam -66.7528 59.5106 4.91446 -0.02 59.08 -0.04 64.3111
+say 1 "Turner" "Hän sanoi, kuningas käsittelee sudet. [wait 0.2]Ruokinta ne kanit. [wait 0.2]Tuotannon meille."
+send_character_message 1 "set_torso_target -67.8806 58.8172 4.04327 1"
+send_character_message 2 "set_head_target -69.0546 60.2943 4.00035 1"
+send_character_message 2 "set_torso_target -67.9142 59.999 4.67839 1"
+set_cam -69.5509 60.3623 4.49734 -30.13 -75.16 5.49 64.3111
+say 2 "Cloud" "Olen kuullut huhuja. [wait 0.2]Älä edelleen sitä mieltä."
+send_character_message 2 "set_torso_target -67.9142 59.999 4.67839 1"
+send_character_message 2 "set_head_target -69.0546 60.2943 4.00035 1"
+send_character_message 1 "set_torso_target -67.9613 58.8172 4.78476 1"
+set_cam -66.7528 59.5106 4.91446 -0.02 59.08 -0.04 64.3111
+say 1 "Turner" "Minulle ei ole, mutta meidän täytyy varmistaa."
+send_character_message 2 "set_torso_target -67.7748 59.5842 3.8114 1"
+send_character_message 1 "set_torso_target -68.0306 58.8172 4.79857 1"
+send_character_message 2 "set_head_target -67.0772 60.2943 2.23133 1"
+set_cam -69.5509 60.3623 4.49734 -30.13 -75.16 5.49 64.3111
+say 2 "Cloud" "Hunter mennyt aion olla osa hänen henkilökohtainen vartija."
+send_character_message 2 "set_torso_target -67.8348 59.5842 3.99547 1"
+send_character_message 1 "set_torso_target -68.0084 58.8172 4.77567 1"
+send_character_message 2 "set_head_target -69.1924 60.048 4.21802 1"
+say 2 "Cloud" "Hän on määrä kokoontua pian ja on vaitelias siitä, kuka on kanssa."
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+say 2 "Cloud" "Miksi et seuraa meitä ja tarkistaa sen?"
+send_global_message "levelwin"

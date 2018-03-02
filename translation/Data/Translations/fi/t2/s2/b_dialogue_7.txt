@@ -1,0 +1,18 @@
+#name "Note-Fire"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 280.025 1.59824 19.3282 -30
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 280.778 1.89303 19.7877 1"
+set_cam 282.582 2.15028 19.4746 0 94.04 0 36.2879
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Antiikin huomautus. [wait 0.3]Tuskin lukea sen."
+send_character_message 1 "set_head_target 280.635 1.86179 19.6688 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 280.387 2.21897 20.5761 0 2.37 0 36.2879
+say 2 "Note" "Päivä päivältä [wait 0.3]demoni tappaa meidät. [wait 0.5]Olemme yrittäneet kaikkea seuraavaksi ampumaan, [wait 0.3]ja sekin on keskusteltu."
+say 2 "Note" "En halua nähdä metsiemme polttaa. [wait 0.5]Mutta on mahdollista, meidän on asetettava tuleen vain ajaa hänet ulos."
+say 2 "Note" "Hän on mahdottoman vahva ja ketterä. [wait 0.5]Tämä on kaikkea muuta kuin konna, [wait 0.3]puhumattakaan maan mahtavin susi."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "[wait 0.3]Jumala vapaa armoa."

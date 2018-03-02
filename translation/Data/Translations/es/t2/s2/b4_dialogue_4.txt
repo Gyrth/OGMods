@@ -1,0 +1,20 @@
+#name "Note-Foxglove"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 14.9128 -0.192716 -158.15 -131
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 14.4493 -0.530116 -157.537 1"
+set_cam 15.5444 0.553472 -157.939 -41.45 98.4 -0.01 55.2369
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Una nota reciente. [wait 0.5]Este debe ser un espía de Empry."
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 15.0395 -0.014715 -156.779 -0.03 2.19 -0.18 40.1399
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 2 "Note" "Digital aquí."
+say 2 "Note" "Las criaturas son biológicamente conejo, [wait 0.3]a través de y, [wait 0.3]Aunque sus movimientos y gestos no son nada como hemos visto."
+say 2 "Note" "En el momento de la escritura, [wait 0.3]no ha habido ninguna comunicación verbal o visible entre cualquiera de estas criaturas, [wait 0.3]y sin embargo, cada acción que hacen parece ser más coordinado que el soldado medio de Cinderbreathe o Arliss."
+say 2 "Note" "En el momento de la escritura, [wait 0.3]ha habido solamente un caso registrado de estas criaturas a proximidad de un segador."
+say 2 "Note" "El segador, [wait 0.3]a diferencia de su comportamiento habitual entre los soldados de Cinderbreathe, [wait 0.3]ignorado por completo las criaturas."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Ghost" "[wait 0.3]La entrada parece que se corta..."

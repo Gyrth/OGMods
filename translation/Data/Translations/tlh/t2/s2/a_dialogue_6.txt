@@ -1,0 +1,16 @@
+#name "Note-Crete"
+#participants 2
+set_character_pos 1 27.5341 15.2194 -123.091 -132
+send_character_message 1 "set_head_target 26.982 15.7246 -122.51 1"
+set_cam 27.1565 15.8698 -124.326 0 -175.08 0 48.9875
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "poj qa' luchenmoH qo'- [wait 0.3]chaH real assuming."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 26.4049 15.8842 -123.25 0 -110.36 0 33.3467
+say 2 "Note" "vaj chenmoH crete (cha' tlhIH qIj je chIS) pong lughaj HoS, nob pong qa' (qup qa' DaH nobvam) HoS law' yavDaq tera' bIngvo' qammaj twist vaj vI'Iprup desirable tu'lu'bej pagh ghom'a' Sov wIHutlh chaH nitlhDaj lo'taHvIS boQwI'vaD tu'moH maHvaD tIQ ta sentients 'e' preuwyn mojmeH populate."
+say 2 "Note" "latlh HoS 'e' laH lop qaStaHvIS vay' nob mIchHom Hoch wo' indicative abundance lughaj HoS 'e' focused towards Qu' spiritual."
+say 2 "Note" "because of ghu'vam, 'e' 'emvo' Sep crete neH vItu', Sumbej Hoch wIta'pu' vItu' qup qa' graveyard-'e' Colonial Dominion therium assume reasonable."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "excerpt vo' qa' qup Sar Constructs, wa'DIch edition, authored pong herumphal mandru, 'ej illuminated pong Otto vendran Observances."

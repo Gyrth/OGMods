@@ -1,0 +1,11 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 1.89523 2.87042 96.1397 66
+set_cam 2.78802 3.66247 94.3351 -19.73 153.5 0 90
+say 1 "Turner" "luq toD jup. Ha'."
+set_character_pos 1 1.89523 2.84663 96.1397 66
+send_character_message 1 "set_animation \"Data\Animations\r_sleep.anm\""
+say 1 "Turner" "ouch, dart SuS! jon jIH."
+send_global_message "levelwin"
+

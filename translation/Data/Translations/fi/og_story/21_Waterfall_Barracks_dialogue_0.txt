@@ -1,0 +1,43 @@
+#name "BarracksCutscene"
+#participants 3
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+send_character_message 2 "set_torso_target 14.6072 -1.36606 0.656699 0.0159942"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 2 "set_head_target 14.8285 -1.12387 0.965447 0.883795"
+send_character_message 1 "set_head_target 15.3336 -1.23041 0.757575 1"
+set_character_pos 2 15.5675 -1.78699 0.593721 -142
+set_character_pos 1 15.7763 -1.7918 1.56181 133
+set_cam 14.4329 -0.987662 0.473075 -5.78 -113.45 0 90
+say 1 "Midnight" "Turner! Siellä oli viesti piilotettu ruokani tänään. Huomautus joku nimeltä Sky."
+send_character_message 2 "set_head_target 15.3772 -1.53451 1.4087 0.883795"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Turner" "Näytä minulle."
+send_character_message 1 "set_head_target 14.683 -1.28471 1.04664 1"
+say 1 "Midnight" "Oletko tosissasi? Olen tuhonnut sitä. En halua saada kiinni jotain sellaista."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Turner" "Voit mitä?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 15.4867 -1.12791 0.654499 1"
+say 1 "Midnight" "Älä huoli, muistelin ensin. Hän sanoo hän on työskennellyt kapinallisten kaupungin kanssa ja hän voi auttaa sinua paeta. "
+send_character_message 2 "set_head_target 15.3772 -0.860758 1.4087 0.883795"
+set_character_pos 1 15.7763 -1.7828 1.56181 133
+say 2 "Turner" "Miten?"
+set_character_pos 1 15.7763 -1.76484 1.56181 133
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 1 "Midnight" "Taistelijat, jotka voittaa kolme arena osoittaa joutuvat duel pelaajaa Jade Amethystin puutarhassa. Hän sanoo, että jos olet pääse niin pitkälle, hän voi saada pois"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 2 "set_head_target 15.0511 -1.38676 1.65141 0.883795"
+set_character_pos 1 15.7763 -1.76484 1.56181 133
+send_character_message 2 "set_head_target 14.4793 -1.43403 0.88737 0.883795"
+say 2 "Turner" "Luuletko, että Ametisti on siellä katsella kaksintaistelu? Jos voi tappaa hänet..."
+send_character_message 1 "set_head_target 13.9423 -1.12791 1.52615 1"
+say 1 "Midnight" "Sinulta onnekas tehdä ovi, kestää Turner. Älä pure pois enemmän kuin voit pureskella."
+send_character_message 2 "set_head_target 15.4763 -1.1066 1.5596 0.883795"
+set_character_pos 2 15.5675 -1.78699 0.593721 -142
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Turner" "Kaikki tai ei mitään. Jos me tappaa Ametisti, kaikki muuttuu."
+say 3 "Stonewall" "Toivottavasti pidit viimeinen ateria. Onnekas olet."
+send_character_message 2 "set_torso_target 14.5528 -1.36606 1.34649 1"
+send_character_message 2 "set_head_target 15.4763 -1.55497 1.5596 0.883795"
+say 2 "Turner" "Yksi alas, kaksi jäljellä."
+send_global_message "levelwin"

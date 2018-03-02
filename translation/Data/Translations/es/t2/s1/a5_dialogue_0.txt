@@ -1,0 +1,26 @@
+#name "Intro"
+#participants 9
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_torso_target 2.43232 -5.37802 11.2168 0.0463102"
+send_character_message 1 "set_head_target 1.64211 -4.01896 13.7041 1"
+set_character_pos 7 45.0397 3.3397 113.867 0
+set_character_pos 6 43.3202 3.18182 113.902 0
+set_character_pos 5 35.8092 3.07402 113.879 0
+set_character_pos 4 39.4629 3.21185 113.891 0
+set_character_pos 3 37.6999 3.1195 113.863 0
+set_character_pos 2 41.3975 3.13462 113.855 0
+set_character_pos 1 2.3517 -5.80295 10.2427 -90
+set_cam 2.01319 -5.12049 7.90521 0 -175.47 0 26.3459
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "¿Qué estoy haciendo aquí...?"
+send_character_message 1 "set_torso_target 2.75268 -6.14659 11.726 1"
+send_character_message 1 "set_head_target 4.03232 -2.403 18.2682 1"
+set_cam 16.744 2.30629 55.0789 -13.74 21.54 0 21.3931
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 1 "Ghost" "[wait 0.3]¿Esto es territorio de Arliss!?"
+send_character_message 1 "set_torso_target 2.10445 -5.10743 11.2473 0"
+send_character_message 1 "set_head_target 2.13704 -4.53584 13.9484 1"
+set_cam 2.64256 -5.04874 7.40427 0.44 173.8 -0.24 45.9244
+send_level_message "set_camera_dof 0.3 9 6 0 0 0"
+say 1 "Ghost" "...[wait 0.2]es un jardín, [wait 0.5]sin embargo. [wait 0.5]No veo a nadie aquí..."

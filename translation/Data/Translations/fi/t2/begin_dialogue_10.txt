@@ -1,0 +1,15 @@
+#name "Note-SpiritEnergy"
+#participants 2
+set_character_pos 1 190.052 -48.9326 193.971 -180
+send_character_message 1 "set_head_target 189.297 -48.4541 194.072 1"
+set_cam 190.681 -48.3442 192.828 0 135.86 0 38.5978
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "A revitty sivun kirjan henki legendoja..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 189.05 -48.2701 194.674 0 -40.3 0 38.5978
+say 2 "Note" "Henki, energia, [wait 0.3]kuten kertonut tarinoita, [wait 0.3]on lähes aina elatus ja valjastaa sisällä kivi lyhdyt noin yhtä pitkä kuin keskimäärin aikuisen koiran."
+say 2 "Note" "Jos näitä lyhdyt rikki tai hävitetä millään tavalla, [wait 0.3]henkienergian julkaissut ja tuhottava viipymättä; [wait 0.3]jokin aikoa henget lyhdyn sisäpuolella olen toiminut etukäteen katoaa kokonaan, [wait 0.3]ja sen tehtävä on menetetty lopullisesti ennen."
+say 2 "Note" "Sekä hengen energiaa katoaa pysyvästi [wait 0.3]sinä kirottu lähes välittömästi kardinaali synnistä."
+say 2 "Note" "Näitä henki lyhdyt tarjoavat toimintoja joka ikisen maailman perusperiaatteisiin ja lain."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Vaikka paljon tarinoita mukana maailman henget [wait 0.3]Olen yli taipuvainen uskomaan, nämä eivät ole mitään muuta kuin tarinoita."

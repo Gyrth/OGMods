@@ -1,0 +1,19 @@
+#name "Note-Execution"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -111.626 18.0616 168.124 -158
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target -112.617 17.7268 168.456 1"
+set_cam -109.364 18.2246 168.52 -4.29 87.67 0 36.0807
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Loki miksi henkilö tuomitaan kuolemaan. [wait 0.5]Niiden on oltava lähellä."
+send_character_message 1 "set_head_target -112.563 17.7268 168.456 1"
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam -112.806 18.2129 169.046 0.02 -50.75 0.02 36.0807
+say 2 "Note" "Tämä mies on todettu useita rikoksiin syyllistyneet Cinderbreathe Empry oikeudessa. [wait 0.5]Hän syyllistynyt rikoksiin [wait 0.3]Hän on:"
+say 2 "Note" "Kanna Imperiumin vihollinen. [wait 0.5]Tämä sisältää Arliss liittoutuneiden kissa etsitään kaupankäynnin huumausaineiden."
+say 2 "Note" "Salaliitto ulkovaltojen. [wait 0.5]Tällaisia Arlissian kollektiivinen."
+say 2 "Note" "Pahoinpidelty Cinderbreathe guard-joukkojen kunnioitettu jäsen."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "Kuolemanrangaistukseen tuomitaan summa rikoksiaan. [wait 0.5]Seuraa tilauksen Cinderbreathe virkamiesten katseen alla."

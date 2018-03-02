@@ -1,0 +1,18 @@
+#name "Note-Scout"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 86.6623 -62.7353 303.059 170
+send_character_message 1 "set_head_target 85.9736 -62.3514 302.724 1"
+set_cam 87.3575 -62.1744 302.299 0 118.82 0 65.8249
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Joukko muistiinpanoja Cinderbreathe Scout..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 85.9205 -62.1048 303.616 0 -32.08 0 65.8249
+say 2 "Note" "Siirtomaa-hotellialueella on niin outoa... [wait 0.3]he ovat erilaisia maastossa kuin koko mantereen vierellämme."
+say 2 "Note" "Metsä, [wait 0.3]autiomaassa, [wait 0.3]vuori, [wait 0.3]Tundra... [wait 0.5]Kaikki paitsi suolla olen nähnyt. [wait 0.5]Se ei tunnu luonnollinen, [wait 0.3]mutta sitten taas, [wait 0.3]Mikään tässä ei."
+say 2 "Note" "Jokainen merkittävä hill törmäämme yleensä on isäntä nämä outo kivi lyhdyt. [wait 0.5]Voi auttaa, mutta tuntuu, että olen katsellut."
+say 2 "Note" "Olemme desert venyttää juuri nyt. [wait 0.5]Antiikin rauniot tekevät hyviä maamerkkejä [wait 0.3]mutta Hitto, jos ne eivät ole pölyinen."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Vain nukkuvat näitä asioita [wait 0.3]Minun täytyy käsitellä pyyhkimällä pois hiekkaa... [wait 0.5]luultavasti läheskään niin paha kuin Ouran, [wait 0.3]Vaikka."

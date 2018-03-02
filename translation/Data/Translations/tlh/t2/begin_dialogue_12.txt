@@ -1,0 +1,21 @@
+#name "Note-Arliss"
+#participants 2
+set_character_pos 1 171.07 -48.8527 157.516 90
+send_character_message 1 "set_head_target 171.186 -48.4564 156.943 1"
+set_cam 172.131 -48.3915 157.726 0 61.86 0 56.5533
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "Ghost" "paq vIHtaHbogh arlissian Collective."
+send_character_message 1 "set_head_target 171.01 -48.4564 156.883 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 171.563 -48.2698 156.333 0 152.82 0 56.5533
+say 2 "Note" "rut Qagh vIghro' neH southern mesas preuwyn 'e' vay' qen, Hatlh jagh yoS; [wait 0.3]'ach wej qoH.
+say 2 "Note" "lubaghDI' vay' vIghro' arliss affiliated ngor. [wait 0.3]exploit 'ej magh Hoch nI' law' 'oH 'emvo' Daj."
+say 2 "Note" "unwary kits lure vaj qu'bogh vabDot vISov arlissian Collective members. [wait 0.3]chaH moq 'ej chaHvaD jon later chavmoH 'emvo' arliss Sep."
+say 2 "Note" "pa'vo' pagh. [wait 0.3]subdue, moq je twist version pep, puq be'joy' [wait 0.3]yInbe'taHbogh cinderbreathe rabbits toy'wI' tIvnIS Damoj yergho HurDaq QojmeH."
+say 2 "Note" "meQ rational Qub vIvup rabbits. [wait 0.3]neH 'uch tlhe' reality ghajchugh nenchoH DuHIvDI' chu' overlords."
+say 2 "Note" "'ach regardless. [wait 0.3]tu'lu' reH megh'an vIq be'joy' DISov rabbits; [wait 0.3]tera'vo' majQa' bI'reS ghong. [wait 0.3]DuDwI' Hoch wIta'pu' DISov. [wait 0.3]pagh qaS cost. [wait 0.5]Hoch kit nIH vo' maHvaD. [wait 0.3]against mIgh HI' ro' pep wa' chu'."
+say 2 "Note" "mu' ghItlh. [wait 0.3]kaicalk (Hoch pong'e' pa' Holchaj) ghaH wa'DIch mIw arlissian Collective Qaw' 'ej pujbe' cinderbreathe wo' dominance preuwyn reclaiming."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "… pIlmoH."

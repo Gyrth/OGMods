@@ -1,0 +1,18 @@
+#name "Stealth"
+#participants 1
+send_level_message "music_layer_override 2"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+set_character_pos 1 -44.173 547.012 43.8473 129
+send_character_message 1 "set_head_target -47.0744 547.927 38.3257 1"
+set_cam -43.4788 547.614 48.36 3.02 18.08 0.26 39.6349
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0.3 7 6 0 0 0"
+say 1 "You" "...[wait 0.3]täällä on enemmän ihmisiä..."
+set_cam -55.0538 547.566 38.5439 -0.79 -28 0.05 58.363
+say 1 "You" "Ne satuttaa minua. [wait 0.5]Pitäisi suojautua... [wait 0.3]tarvitse olla huolissaan heistä..."
+send_character_message 1 "set_head_target -47.7206 548.69 37.1304 1"
+send_character_message 1 "set_torso_target -44.5059 546.876 43.2801 1"
+set_cam -41.6438 547.433 46.3657 -0.34 40.48 -0.71 24.232
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "...[wait 0.3]Voisi tappaa heidät."

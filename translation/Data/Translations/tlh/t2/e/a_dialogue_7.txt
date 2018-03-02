@@ -1,0 +1,15 @@
+#name "Note-Terrorists"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_head_target 18.9121 -2.91274 -51.0854 1"
+set_cam 19.7643 -2.70219 -50.4342 0 54.38 0 44.5848
+set_character_pos 1 18.3414 -3.19008 -51.8931 -48
+say 1 "Ghost" "note vo' empry."
+set_cam 17.9858 -2.46313 -50.9874 0 -37.3 0 44.5848
+set_character_pos 1 18.3414 -3.14058 -51.8931 -48
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "HuchjolIj Hoch 'avwI' pa' collinpeak: [wait 0.3]Qorwagh vegh Hoch outposts tearing terrorist(s)."
+say 2 "Note" "Qu'mey potlh location. [wait 0.3]mo' lurgh 'ej Sovbe'lu'bogh Qoylu'. [wait 0.5]severely bIj 'ej Son ra' vay' 'Iv DaHar'a' Duy' joq DoH juH qet."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "pop vay' 'Iv 'emDaq handsomely. [wait 0.5]empry juH chaH lach'eghDI' ghaj 'Iv terrorists wa' jon vay'. [wait 0.5]paranoia mu'tlhegh'e' ja'chuqtaHvIS minimum."

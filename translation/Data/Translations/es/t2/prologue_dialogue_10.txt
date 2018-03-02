@@ -1,0 +1,18 @@
+#name "Note-Transfer"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 20.3913 420.051 -110.579 -82
+send_character_message 1 "set_head_target 20.5423 420.633 -109.84 1"
+set_cam 18.3399 420.755 -110.735 0 -107.72 0 47.1376
+say 1 "Ghost" "Un registro de transferencia de prisión por la guardia."
+send_character_message 1 "set_head_target 20.5444 420.479 -109.808 1"
+set_cam 20.1248 420.737 -109.45 0 -23.8 0 47.1376
+set_character_pos 1 20.3913 420.092 -110.579 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "40 de Spurhelm, [wait 0.3]672. [wait 0.5]Sujeto ha sido detenido y encuentra en la prisión de terrenos de la Colonia."
+say 2 "Note" "Vivienda anterior sería la Empry, [wait 0.3]Aunque su apariencia y comportamiento no sugieren."
+say 2 "Note" "Tema lleva una sudadera azul con capucha y armadura de cuero ligera. [wait 0.5]Ya que su futura cooperación es aparentemente necesario, [wait 0.3]no es necesaria una búsqueda de la tira."
+say 2 "Note" "Su hermana, [wait 0.3]Bijou no ha sido informado de su detención. [wait 0.5]Las condiciones carcelarias no deberían ser demasiado desconcertante para él, [wait 0.3]teniendo en cuenta sus antecedentes y vida en los barrios pobres."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Reunión programada con su presencia debe realizarse por la puesta del sol. [wait 0.5]Por lo menos dos funcionarios deben estar presentes. [wait 0.5]Su participación es importante."

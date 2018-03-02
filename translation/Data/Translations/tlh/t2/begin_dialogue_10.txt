@@ -1,0 +1,15 @@
+#name "Note-SpiritEnergy"
+#participants 2
+set_character_pos 1 190.052 -48.9326 193.971 -180
+send_character_message 1 "set_head_target 189.297 -48.4541 194.072 1"
+set_cam 190.681 -48.3442 192.828 0 135.86 0 38.5978
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "a vo' vIHtaHbogh qa' legends paq page torn."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 189.05 -48.2701 194.674 0 -40.3 0 38.5978
+say 2 "Note" "HoS qa'. [wait 0.3]Hoch jatlh neH tales. [wait 0.3]tlhoS reH pol 'ej 'emvo' ghot tu'lu'. mej je tall je Ha'DIbaH motlhbogh vay' nen, qaStaHvIS nagh lanterns harness."
+say 2 "Note" "vaj qaS lanterns ghor pagh qaStaHvIS vay' mIw Qaw'. [wait 0.3]released 'ej SIbI' Qaw' qa' HoS; [wait 0.3]wabmeyvetlh ngab tungmeH chaq toy' qa' qoD lantern beforehand. [wait 0.3]'ej Qap luj reH until ngaSwI' yuvtlhe' wIngaQmoHta'DI'."
+say 2 "Note" "along with qa' HoS permanently luj. [wait 0.3]'Igh SoH tlhoS SIbI' cardinal yem."
+say 2 "Note" "Hoch Vas wa' qo' basic principles 'ej chut Qap puS DuHIvDI' qa' tlhe' lanterns."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "wa'vatlh pagh qo' vISIQlaHbe'bogh involving mo'mey tales, [wait 0.3]puS inclined jIH roD tu'lu'bogh neH lut vIHar."

@@ -1,0 +1,159 @@
+#name "Intro"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 3 11.721 420.341 -115.586 90
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 3 "set_eye_dir 11.6123 421.326 -117.954 1"
+send_character_message 3 "set_torso_target 10.7229 421.011 -116.449 0"
+send_character_message 3 "set_head_target 11.5527 421.407 -117.861 1"
+set_character_pos 1 11.5156 420.807 -118.07 -90
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_eye_dir 11.757 420.953 -116.077 1"
+send_character_message 1 "set_head_target 11.7016 420.859 -116.143 1"
+set_cam 14.7878 414.193 -134.228 0 0 0 18.3767
+send_level_message "therium2_enable_object 360"
+send_level_message "therium2_enable_object 1868"
+say 3 "????" "Vamos [wait 0.3]luego."
+set_cam 12.2906 420.837 -116.503 0 147.5 0 39.1228
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 3 "????" "Necesitas algo, [wait 0.3]no dude en llamar."
+send_character_message 3 "set_head_target 11.4945 421.372 -117.865 1"
+say 3 "????" "Te brinde un poco de comida por la puesta del sol..."
+set_cam 12.2906 420.837 -116.503 0 147.5 0 39.1228
+send_character_message 1 "set_torso_target 12.3924 421.091 -119.668 0"
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 3 "set_head_target 11.5948 421.448 -117.865 1"
+say 3 "????" "Es decir [wait 0.3]Suponiendo que comió su ración en el camino aquí."
+send_character_message 1 "set_torso_target 11.579 420.65 -117.253 1"
+set_cam 11.3757 421.212 -116.292 0 -9.06 0 39.1228
+send_level_message "set_camera_dof 0.3 1 0.1 0.3 3 1"
+say 1 "You" "Sí [wait 0.3]Así es."
+send_character_message 3 "set_head_target 12.7503 420.988 -115.813 1"
+send_character_message 3 "set_torso_target 12.2641 420.814 -116.282 1"
+set_cam 13.6605 420.803 -114.279 0 41.44 0 39.1228
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 3 "????" "Correcto."
+send_character_message 1 "set_torso_target 11.579 420.65 -117.253 0"
+send_character_message 1 "set_head_target 11.7016 421.155 -116.143 1"
+send_character_message 3 "set_torso_target 12.2641 420.814 -116.282 0.970917"
+send_character_message 3 "set_head_target 11.6893 421.218 -117.267 1"
+say 1 "You" "Y, [wait 0.4]Hey..."
+send_character_message 3 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 3 "set_torso_target 12.2641 420.814 -116.282 0"
+say 3 "????" "[wait 0.3]¿Sí?"
+send_character_message 3 "set_head_target 11.4845 421.342 -117.334 1"
+set_cam 10.471 421.471 -119.554 -6.47 -156.38 0.06 39.1228
+say 1 "You" "¿Me puede decir ¿por qué me trajo aquí?"
+send_character_message 3 "set_head_target 11.4897 421.299 -117.329 1"
+send_level_message "set_camera_dof 0.3 3 0.1 0 0 0"
+say 3 "????" "No."
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 3 "????" "Las órdenes son órdenes. [wait 0.4]Reglas son reglas."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 2.5 1"
+say 1 "You" "Vamos [wait 0.3]¿en serio vas a hacer esto?"
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_thoughtful.anm\""
+send_character_message 3 "set_head_target 11.4897 421.465 -117.329 1"
+set_cam 12.3722 420.894 -116.352 0 137.41 0 39.1228
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 1.5 0.1"
+say 3 "????" "Oh, [wait 0.4]Correcto. [wait 0.5]Se me olvidaba una cosita."
+send_character_message 3 "set_head_target 11.4637 421.232 -117.265 1"
+say 3 "????" "Quejan bastante, [wait 0.3]y voy a"
+send_character_message 3 "set_eye_dir 11.6123 421.326 -117.954 0.642705"
+send_character_message 3 "set_head_target 11.661 421.191 -117.337 1"
+say 3 "????" "[wait 0.2]Confiscar [wait 0.4]algunas de sus pertenencias criminal."
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_torso_target 11.579 420.65 -117.253 1"
+set_cam 10.6218 421.334 -117.684 0 -71.77 0 39.1228
+send_character_message 3 "set_eye_dir 11.6123 421.326 -117.954 1"
+say 1 "You" "..."
+send_character_message 3 "set_head_target 11.661 421.006 -117.337 1"
+set_cam 11.6902 420.928 -116.469 0 -175.55 0 39.1228
+say 3 "????" "Correcto [wait 0.3]luego."
+send_character_message 1 "set_head_target 11.3859 421.287 -117.738 1"
+send_character_message 1 "set_animation \"Data\Animations\sitledge.anm\""
+send_character_message 1 "set_torso_target 10.9389 421.047 -118.57 1"
+set_character_pos 1 10.1419 420.804 -118.739 0
+send_character_message 3 "set_torso_target 12.2641 420.814 -116.282 1"
+send_character_message 3 "set_head_target 13.0324 421.006 -116.416 1"
+say 3 "????" "Nos vemos al atardecer."
+send_character_message 1 "set_eye_dir 11.0709 420.631 -118.809 1"
+send_character_message 1 "set_head_target 11.6459 421.173 -118.744 1"
+set_cam 11.9194 421.101 -116.841 0 34.45 0 39.1228
+set_character_pos 3 10.2652 420.318 -97.9007 90
+send_level_message "therium2_disable_object 360"
+send_level_message "therium2_disable_object 1868"
+send_level_message "set_camera_dof 0.3 1 0.1 0 0 0"
+say 1 "You" "..."
+send_character_message 1 "set_head_target 11.5778 421.004 -118.928 1"
+set_cam 11.2022 421.282 -119.788 0 143.23 0 39.1228
+send_level_message "set_camera_dof 0 0 0 0.3 1.5 1"
+say 1 "You" "¿Qué demonios hacer...?"
+send_character_message 1 "set_eye_dir 11.0709 420.631 -118.809 0"
+send_character_message 1 "set_head_target 11.6089 420.853 -118.735 1"
+say 1 "You" "No se cuentan todas las cosas que hice en los barrios pobres, [wait 0.3]¿Correcto?"
+set_cam 11.2023 421.282 -119.788 0 143.23 0 39.1228
+send_character_message 2 "set_head_target 11.824 421.488 -120.49 1"
+send_character_message 2 "set_eye_dir 8.73353 423.76 -134.721 1"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_torso_target 12.6763 422.986 -121.651 1"
+set_character_pos 2 12.9343 421.046 -123.147 -88
+send_character_message 1 "set_head_target 11.6208 420.91 -118.678 1"
+send_character_message 1 "set_eye_dir 11.0709 420.631 -118.809 1"
+say 1 "You" "Nunca he tenido ninguna opción."
+set_character_pos 2 12.892 421.046 -123.266 -120
+send_character_message 2 "set_torso_target 13.5976 422.09 -121.975 0"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_head_target 10.4486 421.43 -118.923 1"
+send_character_message 2 "set_eye_dir 10.5597 421.38 -118.862 1"
+send_character_message 1 "set_head_target 10.8235 421.031 -118.511 1"
+set_cam 9.91532 421.235 -117.679 0 -30.11 0 39.1228
+send_level_message "set_camera_dof 0.3 5 3 0 0 0"
+say 2 "???" "..."
+send_character_message 1 "set_head_target 10.6331 421.271 -119.194 1"
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "You" "¿Qué?"
+send_character_message 2 "set_head_target 10.4486 421.548 -118.923 1"
+send_character_message 1 "set_head_target 10.6331 421.403 -119.194 1"
+say 1 "You" "¿Quién diablos eres...?"
+send_character_message 2 "set_torso_target 14.6492 419.087 -124.548 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_point.anm\""
+send_level_message "set_camera_dof 0.3 5 3 0 0 0"
+say 2 "???" "..."
+set_character_pos 2 10.1345 423.965 -161.328 -88
+send_character_message 1 "set_eye_dir 12.3585 421.163 -122.415 1"
+send_character_message 1 "set_head_target 12.5814 420.974 -121.58 1"
+set_cam 10.4888 421.235 -120.264 0 179.2 0 39.1228
+send_character_message 1 "set_torso_target 10.8009 421.005 -118.564 1"
+send_character_message 1 "set_animation \"Data\Animations\sitinterested.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "...[wait 0.3]¿Oh?"
+set_character_pos 2 10.1345 421.764 -161.328 -88
+send_character_message 1 "set_head_target 12.5884 420.967 -121.573 1"
+send_character_message 1 "set_eye_dir 12.3588 421.163 -122.414 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_torso_target 10.8009 421.005 -118.564 0.329544"
+set_character_pos 1 11.2196 420.804 -119.228 30
+set_cam 12.2054 421.326 -122.458 -11.9 -74.44 1.08 34.3704
+send_level_message "set_camera_dof 0.5 0.7 0.2 0 0 0"
+say 1 "You" "[wait 0.5]Es una clave."
+send_character_message 1 "set_torso_target 10.8009 421.005 -118.564 0.329544"
+send_character_message 1 "set_eye_dir 12.5939 421.203 -121.656 1"
+send_character_message 1 "set_head_target 13.2964 421.343 -120.053 1"
+set_cam 12.1435 421.287 -120.3 0.27 145.33 -1.15 34.3704
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "Bueno, [wait 0.4]tiempo para un movimiento [wait 0.3]luego."
+send_character_message 1 "set_torso_target 13.1505 421.005 -118.843 1"
+send_character_message 1 "set_eye_dir 13.3638 421.416 -117.943 1"
+send_character_message 1 "set_head_target 13.4182 421.208 -117.586 1"
+say 1 "You" "Me estoy poniendo pies fríos aquí, [wait 0.4]de todos modos."
+send_character_message 1 "set_eye_dir 13.8284 420.888 -114.422 1"
+send_character_message 1 "set_head_target 13.4182 421.208 -117.586 0"
+send_character_message 1 "set_torso_target 13.1505 421.005 -118.843 0"
+set_character_pos 1 13.8258 420.137 -115.436 -90
+set_cam 13.3556 414.728 -128.432 -1.15 55.34 -0.27 34.3704
+say 4 "" "..."

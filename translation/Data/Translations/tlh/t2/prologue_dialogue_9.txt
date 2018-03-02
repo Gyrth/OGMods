@@ -1,0 +1,17 @@
+#name "Note-Beetles"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 37.3548 420.149 -65.2101 -179
+send_level_message "therium2_enable_object 1869"
+send_character_message 1 "set_head_target 36.6578 420.535 -65.2565 1"
+set_cam 35.4735 420.63 -63.0056 0 -29.84 0 35.1378
+send_level_message "set_camera_dof 0.3 2 0.5 0.3 5 2"
+say 1 "Ghost" "tear page vo' De' chu' ghItlh pasted diary vay'."
+set_cam 36.3475 420.836 -66.1337 0 -140.49 0 35.1378
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Note" "wa'vatlh neH [taH jogh therium mol HaghmoHwI' vay' 'ach extraordinary-previously Sovbe'lu'bogh Qoylu' tuq, wutlhDaq leng lagomorphs 'Iv refer bIH'e' je Beetles tu' Hansel. ghob'e' qach 'ach vo' nuq loQ common Hol SoH 'e' split vo' nugh 'op vatlh DIS previous rIn petty familial squabbles 'ej vaj moj von Beetles wej Do' jIH reH chaH ghorgh wutlh latlh Qul ben law' lam chaH SuD around chaH Dej tagh shelter neH."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Dabbogh Hoch'e' acknowledge Qujmey Da'ovQo' yejquv 'ach simply ghob'e' vItu' chay' Hoch DIS below ghor taH vu' chaH!"
+send_level_message "therium2_disable_object 1869"

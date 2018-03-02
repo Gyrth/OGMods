@@ -1,0 +1,14 @@
+#name "Win"
+#participants 2
+set_character_pos 2 19.3999 4.91066 3.08065 -97
+set_character_pos 1 18.4647 4.95933 3.72757 0
+set_cam 19.4341 5.64064 4.30153 0 31.45 0 90
+say 1 "Turner" "Se ei ollut niin paha.
+say 1 "Turner" "Ei pitäisi olla liian vaikea selviytyä tästä."
+say 1 "Turner" "Meidän täytyy vain pitää pitkiä tarpeeksi paeta."
+say 2 "Midnight" "Olen melko varma, se oli vain avajaiset, testata osaamistamme."
+say 2 "Midnight" "Mitä paeta... onnea.
+say 2 "Midnight" "Ametisti toimii areenalla.
+say 2 "Midnight" "Niin kauan kuin hän asuu, emme koskaan saa pois."
+say 1 "Turner" "Hän on vain lopettaa elämän."
+send_global_message "levelwin"

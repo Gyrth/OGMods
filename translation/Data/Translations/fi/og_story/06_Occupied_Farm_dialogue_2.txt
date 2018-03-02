@@ -1,0 +1,52 @@
+#name "Information"
+#participants 2
+set_dialogue_color 2 1 0.4 0.4
+set_dialogue_voice 2 18
+send_level_message "music_layer_override 2"
+send_character_message 1 "equip_item 10705"
+send_character_message 2 "set_head_target -74.1022 -26.3789 -154.098 1"
+set_character_pos 1 -73.9258 -27.8058 -146.705 88
+set_cam -74.8696 -27.2792 -151.274 0 -24.98 0 90
+set_character_pos 2 -73.1478 -27.4603 -153.408 176
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 2 "Steel" "Okei olen tehnyt hänen kanssaan. Hän kertoi minulle kaiken tämän ”Turner” uhan..."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_torso_target -74.0786 -27.0043 -151.994 0.188386"
+send_character_message 2 "set_head_target -73.7464 -26.1382 -153.65 1"
+say 2 "Steel" "Voi vieläkään uskoa, että pieni hopalong otti StoneFist."
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 2 -73.1478 -27.4603 -153.408 -133
+set_cam -73.5254 -27.1047 -143.542 0 3.95 0 24.7099
+send_character_message 2 "set_torso_target -74.0786 -27.0043 -151.994 1"
+send_character_message 2 "set_head_target -74.2243 -27.4614 -147.462 1"
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 2 "Steel" "Oh."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "Kuka sinulle kertoi minusta?"
+send_character_message 2 "set_head_target -74.6112 -26.5198 -152.545 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Steel" "Sinun pikku pooftails samannäköisiä minulle. Tuuli? Cloud? Jotain."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Cloudiin Rocky Hall? Tappoi hänet?"
+send_character_message 2 "set_torso_target -74.0786 -27.0043 -151.994 0.999982"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target -75.5238 -24.5267 -149.075 1"
+say 2 "Steel" "Tarkoita, mutta laji kuolee niin helppoa. Otti vähän työtä saada hänet puhumaan."
+set_character_pos 2 -73.1479 -27.4603 -153.408 -133
+send_character_message 1 "set_head_target -73.0645 -27.6511 -147.515 1"
+say 1 "Turner" "Niin tiedät, mitä tapahtuu, kun satutat ystäväni."
+send_character_message 1 "set_head_target -73.0795 -27.6511 -147.557 1"
+set_character_pos 2 -73.1479 -27.4603 -153.408 -133
+send_character_message 2 "set_head_target -73.8849 -28.4139 -146.736 1"
+send_character_message 2 "set_torso_target -73.5067 -27.0043 -151.607 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Steel" "PFF satuja. Missä ovat loput? Älä teeskentele, otti minun vartijat kupongeista."
+send_character_message 1 "set_head_target -73.1728 -26.5708 -152.927 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "Toivon, että ehdin tapan sinut hitaasti ansaitsette."
+send_character_message 2 "set_head_target -71.9306 -25.6174 -148.725 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Steel" "Se on hyvä! Voi odottaa kertoa hopea tästä. Hän nauraa ja nauraa."
+send_level_message "start_dialogue Places"
+send_level_message "music_layer_override 4"
+make_participants_aware

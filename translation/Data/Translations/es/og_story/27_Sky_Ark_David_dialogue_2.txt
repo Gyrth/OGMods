@@ -1,0 +1,32 @@
+#name "End"
+#participants 6
+set_character_pos 3 -86.9198 191.472 180.728 122
+set_character_pos 2 -87.5575 191.391 181.049 89
+set_character_pos 1 -87.9304 191.512 180.079 -55
+set_cam -87.5747 192.009 179.673 0 -169.31 0 90
+say 3 "Elder Needlegrass" "¡Yo estoy convencido!"
+say 3 "Elder Needlegrass" "Verdaderamente eres un Guerrero sin comparar, bendecida por el Khyo."
+say 3 "Elder Needlegrass" "Traer su gente aquí."
+say 3 "Elder Needlegrass" "A liquidarlos en los niveles inferiores, pero en el tiempo puede aumentar."
+say 2 "Sky" "Iré con usted, Turner."
+say 2 "Sky" "Quiero decirles sobre nuestra ciudad y nuestra historia y nuestras costumbres."
+set_cam -59.193 198.758 223.423 0 20.1 0 90
+say 4 "" "Turner y cielo suben hacia abajo ir al campamento rebelde y conducen a los rebeldes y esclavos de arena volver al Santuario."
+set_character_pos 5 -87.1038 191.973 174.946 -145
+set_character_pos 6 -88.927 191.973 177.545 126
+set_character_pos 3 -89.6308 191.472 175.825 -4
+set_character_pos 2 -89.1582 191.391 177.102 89
+set_character_pos 1 -87.8223 191.512 176.451 168
+set_cam -87.7273 191.84 177.649 0 43.03 0 90
+say 2 "Sky" "¿Qué ha pasado?"
+say 2 "Sky" "¡Que se supone que para estar seguro aquí!"
+say 3 "Elder Needlegrass" "Fuimos atacados..."
+say 3 "Elder Needlegrass" "nuestro pueblo robado..."
+say 3 "Elder Needlegrass" "llegaron desde el cielo..."
+say 2 "Sky" "No."
+say 2 "Sky" "No."
+say 2 "Sky" "Debe haber sido los murciélagos."
+set_cam -88.2982 192.175 176.706 0 -52.51 0 90
+say 1 "Turner" "... ¿Cuáles son los murciélagos?"
+set_cam -173.568 158.148 309.729 0 -52.51 0 90
+say 4 "" "Fin"

@@ -1,0 +1,37 @@
+#name "End"
+#participants 5
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_character_pos 5 195.74 18.1406 -162.791 -68
+send_character_message 1 "empty_hands"
+send_level_message "music_layer_override -2"
+send_character_message 1 "set_eye_dir 194.958 18.8971 -163.608 0.916325"
+send_character_message 1 "set_torso_target 195.259 19.1004 -162.78 0"
+send_character_message 1 "set_head_target 195.207 19.3283 -162.767 0"
+send_character_message 2 "set_torso_target 196.259 19.1004 -162.78 0"
+send_character_message 2 "set_head_target 196.273 19.1802 -162.752 0"
+send_character_message 3 "set_torso_target 195.259 19.1004 -162.78 0"
+send_character_message 3 "set_head_target 195.265 19.3404 -162.788 0"
+send_character_message 4 "set_torso_target 195.259 19.1004 -162.78 0"
+send_character_message 4 "set_head_target 195.352 19.3415 -162.816 0"
+send_character_message 5 "set_torso_target 195.259 19.1004 -162.78 0"
+send_character_message 5 "set_head_target 194.061 19.1565 -161.277 0.907552"
+set_character_pos 4 196.891 18.4284 -160.359 145
+set_character_pos 3 195.835 18.5765 -159.796 126
+set_character_pos 2 197.393 18.2319 -161.547 -166
+set_character_pos 1 194.043 18.4633 -161.186 14
+set_cam 193.025 18.8457 -163.047 0 -122.06 0 90
+say 2 "Sun" "¡Eres un guerrero bendecido por Khyo! Gracias a la resistencia.
+send_character_message 1 "set_head_target 195.301 18.7498 -161.471 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+say 1 "Turner" "Sí..."
+say 1 "Turner" "Esto es lo que estoy mejor."
+send_character_message 5 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 5 "set_torso_target 195.495 19.0481 -161.736 1"
+send_character_message 3 "set_torso_target 195.297 19.2631 -162.836 0"
+send_character_message 4 "set_torso_target 195.224 19.2403 -162.795 0"
+send_character_message 1 "set_torso_target 195.132 19.2861 -162.759 0"
+say 2 "Sun" "Ven a nuestra base; podríamos utilizar alguien con sus habilidades."
+send_global_message "levelwin"

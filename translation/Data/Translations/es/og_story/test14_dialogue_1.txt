@@ -1,0 +1,9 @@
+#name "Boss"
+#participants 2
+send_character_message 1 "equip_item 56"
+set_character_pos 2 -25.3679 -2.06063 36.769 177
+set_character_pos 1 -29.5092 -2.15052 36.4254 0
+set_cam -30.5397 -1.56747 37.5159 0 -63.43 0 90
+say 1 "Turner" "Creo que había otro perro en el edificio."
+say 2 "Boss" "Vamos a luchar!"
+make_participants_aware

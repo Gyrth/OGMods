@@ -1,0 +1,17 @@
+#name "Start"
+#participants 3
+
+set_character_pos 2 4.44411 -2.1528 0.832846 -153
+set_character_pos 1 -0.166595 -2.17188 1.09279 0
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Kuka teistä ovat jo tarpeeksi vahva pitämään hengissä?"
+set_cam 3.48666 -1.60474 1.88456 7.68 -33.21 0 90
+say 2 "Rabbit" "Olen."
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Todista se. Voittaa toinen."
+make_participants_aware
+
+
+
+
+

@@ -1,0 +1,25 @@
+#name "WinDuel"
+#participants 4
+set_character_pos 4 -99.8841 -19.8018 -135.874 105
+send_level_message "music_layer_override 2"
+send_character_message 3 "set_torso_target -98.6484 -18.6957 -140.499 1"
+send_character_message 2 "set_head_target -98.5436 -18.7579 -144.61 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_character_pos 3 -98.504 -19.343 -139.529 90
+set_character_pos 2 -98.0657 -19.3419 -143.059 129
+send_character_message 2 "set_torso_target -98.6498 -19.0797 -144.143 1"
+set_cam -99.0788 -18.6467 -145.242 -1.72 -159.61 0 47.4178
+send_character_message 3 "set_head_target -102.566 -18.1528 -138.599 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 2 "Amethyst" "toH, 'e' unexpected! jade ghaH ngaSwI' yuvtlhe' wIngaQmoHta'DI' let. Do', vIghIjlu' mI'ta' luck."
+say 2 "Amethyst" "strongest rabbit HochDaq reH neH vIghro' Soj je pulse 'ej ghob'e' taH auction. dispose 'avwI', gheD."
+send_character_message 3 "set_torso_target -98.6484 -18.6957 -140.499 0.343323"
+send_character_message 3 "set_head_target -98.0367 -18.3664 -143.137 1"
+send_level_message "set_camera_dof 0.3 3 0.5 0 0 0"
+say 3 "Stonewall" "amethyst, HochHom 'avwI' bISaSchugh QongDI', muj chaHvaD DujlIj vISovbe'-"
+send_character_message 2 "set_torso_target -99.1878 -19.0797 -144.181 1"
+send_character_message 2 "set_head_target -100.442 -18.822 -143.696 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 2 "Amethyst" "'ar highly Do'qu' Ha'DIbaH bImejnIS wa' rabbit? ghaHvaD ghoQ!"
+send_level_message "music_layer_override 4"
+make_participants_aware

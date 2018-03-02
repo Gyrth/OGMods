@@ -1,0 +1,13 @@
+#name "Clover"
+#participants 2
+set_character_pos 2 147.482 -55.7242 298.803 0
+send_character_message 2 "set_animation \"Data\Animations\r_sleep.anm\""
+set_character_pos 1 146.653 -55.8235 297.938 -27
+send_character_message 1 "set_animation \"Data\Animations\r_crouch.anm\""
+send_character_message 1 "set_eye_dir 147.473 -55.7298 297.968 1"
+send_character_message 1 "set_head_target 147.542 -55.9311 298.332 1"
+set_cam 148.927 -55.9272 298.136 -1.66 97.02 -5.24 47.3647
+say 1 "Turner" "Karkea yö?"
+say 2 "Clover" "Sinulla ei ole aavistustakaan."
+say 2 "Clover" "Minulla oli hirvittävä uni... [wait 0.2]halua puhua siitä."
+say 1 "Turner" "Saan, että. [wait 0.2]Olen ollut ärtynyt, tapahtumat"

@@ -1,0 +1,18 @@
+#name "Note-Sighting"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 102.661 -11.9977 -167.48 142
+send_character_message 1 "set_head_target 102.109 -11.7565 -167.981 1"
+set_cam 103.217 -11.5485 -169.022 0 142.79 0 51.151
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Una nota antigua. [wait 0.5]Me pregunto cuántos años tiene."
+set_character_pos 1 102.661 -12.0549 -167.48 142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 101.414 -11.4191 -167.853 0 -112.73 0 51.151
+say 2 "Note" "Hoy vi el evento más peculiar."
+say 2 "Note" "Un ciudadano, [wait 0.3]que parece haber sido completamente normal y sano ayer, [wait 0.3]seguía algo invisible a nuestros ojos."
+say 2 "Note" "Habría corrí para recitar tellings de nuestros asesores le- [wait 0.3]nunca creer susurros en la selva, [wait 0.3]como que te llevará por mal camino- [wait 0.3]pero era necio."
+say 2 "Note" "Temí por mi vida, [wait 0.3]y como consecuencia, [wait 0.3]uno de nosotros ha sido tragada entera por los espíritus morando entre los árboles."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Debo hablar con un asesor sobre esto. [wait 0.5]Yo no puedo salir de mi mente.

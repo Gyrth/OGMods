@@ -1,0 +1,18 @@
+#name "Note-Cicada"
+#participants 2
+set_character_pos 1 -40.0833 106.178 172.688 0
+send_character_message 1 "set_head_target -39.2955 106.554 172.737 1"
+set_cam -40.7468 106.734 173.762 0 -45.79 0 50.3116
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "jang guardsman jabbI'ID."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -39.2995 106.833 173.504 0 33.49 0 32.4243
+say 2 "Note" "Cicada? [wait 0.5]qar? [wait 0.5]puv puS. [wait 0.3]qaStaHvIS preuwyn? vIlegh rur toDSaH?"
+say 2 "Note" "chol SoH 'op bet Dapeghchugh je, [wait 0.3]nID chenmoH woDDI' 'ach ridiculous DoQ qIt 'ej vaj pum jIH legh?"
+say 2 "Note" "cha' Dochmey vIHtaHbogh ouran Cicadas vISov: [wait 0.3]wa'. [wait 0.3]not Hurvo' chaH preuwyn. [wait 0.5]alive chaH Sop bIr. [wait 0.3]cha' [wait 0.3]Dotlhvam. [wait 0.3]SoHvaD rarely 'ej vIHtaHbogh ghorgh maqtagh isn't mating 'oH."
+say 2 "Note" "cicadas. [wait 0.3]ouran DaH nobvam. [wait 0.3]neH burrow Hoch: wa'maH Soch DIS. [wait 0.3]ghorgh mate maqtagh pa' naQ 'angbogh Da. 672 'oHbe' mate maqtagh DIS- [wait 0.3]wej qaSpu'bogh SoQ."
+say 2 "Note" "vaj tlhIHvaD qech 'e' alive ouran Cicada Dalegh HurDaq eardrums tlhuHDaj Ha'. [wait 0.3]vabDot tale teH."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "latlh vay' Hej ghoS [wait 0.3]naH SoH."

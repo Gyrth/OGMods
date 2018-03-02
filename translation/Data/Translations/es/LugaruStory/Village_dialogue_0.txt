@@ -1,0 +1,22 @@
+#name "Skipper"
+#participants 2
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_character_pos 2 100.003 -47.3816 305.189 36
+send_character_message 2 "set_eye_dir 101.694 -46.4613 304.136 1"
+set_character_pos 1 101.142 -46.9821 304.555 -151
+send_character_message 1 "set_eye_dir 100.236 -46.3787 304.424 1"
+set_cam 102.589 -46.6135 304.726 -0.12 93.58 -0.34 31.1566
+say 2 "Skipper" "Todo claramente... [wait 0.2]todavía. [wait 0.2]¿Que todavía tenemos que vigilar en plena luz del día como esto?"
+set_character_pos 1 101.142 -46.9821 304.555 -151
+set_cam 99.4122 -46.4995 306.505 -3.24 -34.27 -0.38 35.3299
+say 1 "Turner" "¿Has olvidado lo que sucedió con la aldea en fragmentos de rojo? [wait 0.2]Esto no puede suceder aquí."
+set_character_pos 1 101.142 -46.9821 304.555 -151
+set_cam 102.589 -46.6135 304.726 -0.12 93.58 -0.34 31.1566
+say 2 "Skipper" "Eso fue hace temporadas. [wait 0.2]¿Seguramente has oído hablar lo que hicieron usted y sauce en la guerra? [wait 0.2]Ya no se atreven."
+set_cam 99.4122 -46.4995 306.505 -3.24 -34.27 -0.38 35.3299
+set_character_pos 1 101.142 -46.9821 304.555 -151
+say 1 "Turner" "Es por eso hurtadillas en nosotros. [wait 0.2]Saben que las pérdidas se toman en una lucha justa."
+set_cam 102.589 -46.6135 304.726 -0.12 93.58 -0.34 31.1566
+set_character_pos 1 101.142 -47.4361 304.555 -151
+say 2 "Skipper" "Por lo menos Willow de tomar su turno pronto, [wait 0.2]mis piernas me están matando."

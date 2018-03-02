@@ -1,0 +1,131 @@
+#name "FinaleF"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_kneeling_low.anm\""
+send_character_message 2 "set_eye_dir -5.96649 5.045 345.063 1"
+send_character_message 2 "set_head_target -5.9444 3.96552 349.069 1"
+set_character_pos 1 -5.94029 4.46988 344.587 -90
+send_character_message 1 "set_animation \"Data\Animations\r_woundedidle.anm\""
+send_character_message 1 "set_eye_dir -5.95308 5.06251 349.599 1"
+send_character_message 1 "set_head_target -5.89503 4.8817 348.891 1"
+set_cam -6.46318 4.41326 342.915 0 -171.93 0 16.4857
+set_character_pos 2 -5.90219 4.3043 349.927 90
+say 1 "" "..."
+set_cam -6.46088 4.41272 342.908 0 -171.93 0 16.4857
+send_character_message 2 "set_head_target -5.90731 4.69467 345.233 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_kneelfist.anm\""
+say 1 "" "..."
+send_character_message 2 "set_head_target -5.89023 4.69446 345.241 1"
+set_cam -8.08224 4.83509 346.377 0 -54.44 0 16.4857
+say 1 "Ghost" "Has...[wait 0.5] ¿dado para arriba?"
+set_cam -7.06544 4.56901 347.998 0 -144.44 0 16.4857
+send_character_message 2 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+say 2 "Jairo" "¿Tienes?"
+send_character_message 1 "set_animation \"Data\Animations\r_woundedidlearmed.anm\""
+set_cam -6.12844 4.54921 347.408 0 -3.32 0 16.4857
+say 1 "Ghost" "...[wait 0.6]jajaja"
+send_character_message 2 "set_head_target -6.04942 4.22105 345.318 1"
+send_character_message 2 "set_eye_dir -5.96649 5.045 345.063 0"
+set_cam -7.85298 4.54921 349.512 0 -93.32 0 16.4857
+say 1 "Jairo" "..."
+send_character_message 2 "set_eye_dir -5.95417 4.28006 348.869 0.742272"
+suny 2 "Juniro" "O[wunit 0.1]k[wunit 0.1]un[wunit 0.1]y[wunit 0.1]."
+send_character_message 2 "set_eye_dir -5.95417 4.28006 348.869 0.941628"
+say 2 "Jairo" "Se [wait 0.5]puede [wait 0.2]Go."
+set_cam -6.39553 4.87675 346.612 0 -12.49 0 16.4857
+say 1 "Gost" "¿Qué?"
+send_character_message 2 "set_head_target -5.97797 3.9206 346.89 1"
+set_cam -6.54248 4.87878 347.763 0 -160.8 0 16.4857
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidle.anm\""
+say 2 "Jairo" "[wait 0.2]Se puede ir."
+say 2 "Jairo" "Vieron el poder de su voluntad... [wait 0.3]en tus ojos."
+send_character_message 2 "set_head_target -5.32876 4.02982 347.026 1"
+say 2 "Jairo" "Has publicado... [wait 0.5]tanta energía de esto."
+set_cam -4.63723 4.9862 346.074 0 45.24 0 16.4857
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Gost" "¿No vas a decirme nada?"
+send_character_message 2 "set_head_target -5.92614 4.06431 347.165 1"
+set_cam -7.07622 4.84041 348.276 0 -138.88 0 16.9326
+say 2 "Jairo" "Largo de aquí. [wait 0.8]Salir de este maldito lugar."
+send_character_message 2 "set_head_target -6.20328 4.72529 346.949 1"
+say 2 "Jairo" "Licencia [wait 0.5]me."
+send_character_message 2 "set_eye_dir -5.95417 4.28006 348.869 0"
+send_character_message 2 "set_head_target -5.87815 4.0442 347.934 1"
+say 2 "Jairo" "Y....[wait 0.8] no volver a la Cinderbreathe."
+set_cam -6.36038 4.84041 351.916 0 -7.21 0 16.9326
+say 1 "Gost" "Maldito lugar.[wait 0.5].[wait 0.5].[wait 0.6]?"
+set_cam -6.36038 4.84041 351.916 0 -7.21 0 16.9326
+send_character_message 1 "set_head_target -5.89572 4.87716 348.891 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+say 1 "Gost" "Jairo.[wait 0.3].[wait 0.3].[wait 0.6] fino."
+send_character_message 1 "set_head_target -5.93923 4.58926 348.894 1"
+set_cam -7.93032 4.9684 345.541 0 -67.21 0 16.9326
+say 1 "Gost" "Bellas. [wait 0.5]¿Bien? [wait 0.2]Voy a dejar."
+send_character_message 1 "set_head_target -5.94656 5.09311 348.967 1"
+say 1 "Gost" "Pero no estoy tocando un Cinderbreathe sola otra vez."
+send_character_message 1 "set_head_target -6.24951 4.87168 348.932 1"
+say 1 "Gost" "No voy a poner un solo dedo sobre ellos."
+send_character_message 1 "set_eye_dir -5.95308 5.06251 349.599 0.0583234"
+send_character_message 1 "set_head_target -5.84219 4.24656 348.827 1"
+say 1 "Gost" "He terminado con todo esto."
+send_character_message 1 "set_eye_dir -5.95308 5.06251 349.599 1"
+send_character_message 1 "set_head_target -5.84219 4.72525 348.827 1"
+say 1 "Gost" "[wait 0.3]Y no voy a pensar otra vez en este lugar."
+send_character_message 1 "set_head_target -5.84219 4.96973 348.827 1"
+say 1 "Gost" "¿Bien?"
+send_character_message 2 "set_head_target -6.29632 4.07265 348.307 1"
+set_cam -4.9254 4.83613 348.45 0 142.79 0 16.9326
+say 2 "Jairo" "[wait 0.2]Hacer lo que usted debe."
+send_character_message 2 "set_eye_dir -5.95417 4.28006 348.869 0.494583"
+send_character_message 2 "set_head_target -6.19875 4.23289 348.134 1"
+say 2 "Jairo" "Ahora... [wait 0.5]licencia."
+send_character_message 2 "set_head_target -6.20321 4.16285 348.105 1"
+send_character_message 2 "set_eye_dir -5.95417 4.28006 348.869 0"
+say 1 "Gost" "..."
+send_character_message 2 "set_eye_dir -5.72101 4.88605 345.102 0.786046"
+set_cam -4.92516 4.8364 348.45 0 142.79 0 16.9326
+send_character_message 2 "set_head_target -5.66021 4.37711 348.205 1"
+say 2 "Jairo" "Por favor."
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidlearmed2.anm\""
+set_cam -5.30945 4.82292 342.513 0 170.24 0 16.9326
+say 1 "Gost" "Muy bien."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+say 1 "Gost" "Nunca verás me otra vez."
+send_character_message 2 "set_head_target -5.78908 4.69565 348.043 1"
+set_cam -4.47313 4.85201 348.272 0 136.57 0 16.9326
+say 2 "Jairo" "Nunca volverá a ver- [wait 0.5]me,[wait 0.3] otra vez."
+send_character_message 2 "set_eye_dir -5.72101 4.88605 345.102 0"
+send_character_message 2 "set_head_target -6.64181 4.48889 347.982 1"
+say 2 "Jairo" "La Cinderbreathe Empry, [wait 0.3]Si puedo recordar..."
+send_character_message 2 "set_head_target -6.494 4.19421 348.084 1"
+say 2 "Jairo" "Creo que es al sureste de aquí."
+send_character_message 2 "set_head_target -6.05769 4.36406 347.914 1"
+say 2 "Jiro" "Viajar a lo largo de [wait 0.1]la costa."
+send_character_message 2 "set_eye_dir -5.72101 4.88605 345.102 0.944975"
+send_character_message 2 "set_head_target -6.0816 5.35521 347.846 1"
+say 2 "Jiro" "...[wait 0.5]por lo menos, [wait 0.3]lo que solía ser la costa."
+send_character_message 2 "set_head_target -6.0753 5.08191 347.886 1"
+send_character_message 2 "set_eye_dir -5.72101 4.88605 345.102 0"
+say 2 "Jiro" "Ha sido tanto tiempo."
+send_character_message 2 "set_head_target -5.7181 4.25852 347.967 1"
+send_character_message 2 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+set_cam -0.877032 6.72061 338.001 -10.95 149.69 0 19.4702
+say 1 "Gost" "..."
+send_character_message 2 "set_head_target -5.8906 3.88003 348.909 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_kneeling_low.anm\""
+say 2 "Jiro" "[wait 0.5]Despedida..."
+set_cam -4.93708 4.23404 347.804 0.14 144.96 -0.01 19.4702
+say 1 "" "..."
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_kneelfist.anm\""
+set_character_pos 2 -5.902 4.30462 349.927 90
+set_character_pos 1 -4.75872 0.644223 345.692 -90
+set_cam -5.00859 4.39444 348.062 0.14 153.9 0.01 19.4702
+send_character_message 2 "set_eye_dir -5.72101 4.88605 345.102 1"
+send_character_message 2 "set_head_target -5.9548 4.11601 348.385 1"
+say 1 "" "..."
+set_cam -5.51885 4.51464 351.389 -0.12 3.9 -0.08 19.4702
+say 1 "" "..."
+send_global_message "levelwin eb4f"

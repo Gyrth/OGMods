@@ -1,0 +1,24 @@
+#name "Note-Advisor"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -49.2068 3.94066 -51.4596 155
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -49.5334 4.0843 -51.4775 1"
+send_character_message 1 "set_torso_target -49.5303 4.01128 -51.6685 1"
+send_character_message 1 "set_head_target -49.8288 4.0906 -51.7879 1"
+set_cam -49.7201 4.26055 -49.6525 0 0 0 49.3169
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Huomautus. [wait 0.3]On jätettävä yksi vartijat."
+send_character_message 1 "set_torso_target -49.5303 3.66408 -51.6685 0"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -50.1317 4.6123 -51.1478 0 -67.69 0 49.3169
+say 2 "Note" "Jos mietit, [wait 0.3]Kyllä [wait 0.3]se on kirjoitettu ash. [wait 0.5]Vaikutti yöllä, [wait 0.3]ja kenenkään fessing jalkeilla."
+say 2 "Note" "[wait 0.5]Mitä symbolit tarkoittavat, [wait 0.3]Minulla ei ole aavistustakaan. [wait 0.5]Ne näyttävät lähes cavedweller runon."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Joko niin, [wait 0.3]Jos olet yksi, joka kiinnitti tämän [wait 0.3]Kerro minulle, ja pyyhi se pois seinään, [wait 0.3]tai minun täytyy tehdä se itse. [wait 0.5]Se varmasti ei auta ahdistus."
+send_character_message 1 "set_torso_target -49.7738 3.86715 -51.5431 1"
+send_character_message 1 "set_eye_dir -48.3626 5.16601 -49.3969 1"
+send_character_message 1 "set_head_target -48.9568 5.06048 -50.1009 1"
+set_cam -50.5785 4.36593 -51.7746 16.33 -121.99 0 62.7333
+say 1 "Ghost" "..."

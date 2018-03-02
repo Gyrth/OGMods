@@ -1,0 +1,18 @@
+#name "Note-Cicada"
+#participants 2
+set_character_pos 1 -40.0833 106.178 172.688 0
+send_character_message 1 "set_head_target -39.2955 106.554 172.737 1"
+set_cam -40.7468 106.734 173.762 0 -45.79 0 50.3116
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Una respuesta a la carta de un guardia..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -39.2995 106.833 173.504 0 33.49 0 32.4243
+say 2 "Note" "¿Una cigarra? [wait 0.5]¿De veras? [wait 0.5]Volando, [wait 0.3]¿en Preuwyn? ¿Parezco un idiota?"
+say 2 "Note" "Surgió con alguna apuesta con sus amigos, [wait 0.3]probar y hacer la reclamación más ridícula posible y ver si caigo para?"
+say 2 "Note" "Sé dos cosas acerca de las cigarras de Ouran: [wait 0.3]Por ejemplo, [wait 0.3]nunca van a Preuwyn. [wait 0.5]El frío come vivos. [wait 0.3]Dos, [wait 0.3]son muy, [wait 0.3]muy raramente fuera de casa cuando no es temporada de apareamiento."
+say 2 "Note" "Cigarras, [wait 0.3]Ouran incluido, [wait 0.3]sólo madriguera cada diecisiete años, [wait 0.3]cuando su época de celo es en efecto completo. 672 no es un año de temporada apareamiento- [wait 0.3]ni de lejos."
+say 2 "Note" "La idea que usted vio una cigarra vivo de Ouran sin romper tímpanos debe darle [wait 0.3]Si tu cuento es cierto."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Ir a robar a otra persona, [wait 0.3]de frutas."

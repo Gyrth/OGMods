@@ -1,0 +1,11 @@
+set_character_pos 1 -126.49 118.355 -94.3435 -91
+send_character_message 1 "set_head_target -126.336 121.439 -90.4703 1"
+set_cam -123.345 118.228 -99.558 9.98 165.82 -1.13 56.9549
+#name "B path"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 20 1"
+say 2 "" "vaj path SoH DawIvpu'."
+say 2 "" "'e' willpower bImejnIS 'e' Sov."
+say 2 "" "vaj path SoH DawIvpu'."
+send_character_message 1 "set_head_target -126.431 119.281 -90.5023 1"
+say 2 "" "forwards mIw."

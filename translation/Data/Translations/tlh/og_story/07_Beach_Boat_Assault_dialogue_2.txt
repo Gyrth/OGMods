@@ -1,0 +1,44 @@
+#name "Start"
+#participants 3
+send_character_message 2 "set_torso_target -192.255 32.7018 185.673 1"
+send_character_message 2 "set_head_target -191.193 33.1663 185.655 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_color 2 0.8 0.7 1
+set_dialogue_color 3 1 0.7 0.5
+set_character_pos 3 -193.712 32.4347 184.752 0
+set_character_pos 2 -192.425 32.2379 184.617 -89
+set_character_pos 1 -192.986 32.3689 186.328 20
+set_cam -194.541 33.0683 185.456 0 -82.63 0 90
+send_level_message "music_layer_override 0"
+say 3 "Slate" "naDev 'oH maH. windcutter. Duj maHvaD qem Daqvam QI'yaH."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 3 -193.712 32.4347 184.752 0
+say 1 "Turner" "'IH."
+send_character_message 2 "set_torso_target -191.672 32.8093 185.655 0"
+send_character_message 2 "set_head_target -192.228 32.4449 185.459 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Sky" "wej. silver gang 'ej pa' 'ej vIbejpu' ghewmey puS suffering SoH."
+send_character_message 1 "set_torso_target -192.203 32.771 185.813 1"
+send_character_message 1 "set_head_target -192.347 32.7693 184.617 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "lutmeyvam Hoch maH."
+send_character_message 2 "set_head_target -193.019 33.0788 186.244 1"
+say 2 "Sky" "leng, vaj toy'wI''a' Suq rop, 'uS ghor chaH chuH overboard 'ej chaHvaD Qal poStaHvIS Hagh beq 'e' nID legh Silver."
+send_character_message 1 "set_head_target -191.757 32.4862 185.39 1"
+say 1 "Turner" "lu'. ghaH pretty qab."
+send_character_message 1 "set_torso_target -192.203 32.771 185.813 0.0350296"
+send_character_message 1 "set_head_target -191.312 32.8166 185.781 0"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+say 1 "Turner" "veng SuvwI' legh, chIm-nuqDaq 'oH Hoch?"
+send_character_message 2 "set_head_target -190.912 33.0788 185.848 1"
+say 2 "Sky" "jatlh worst hired silver 'ej lIq je toy'wI''a' joq HoH Hoch. ghotvam'e' veng SuvwI' DaH."
+send_character_message 2 "set_head_target -193.357 33.0788 185.433 1"
+say 2 "Sky" "qaSlaH Soch collaborators naDev tu'lu'. puS pong laH Dach slate je."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "'oH DeS jIH. mIwwIj Dangevbogh SoH."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 2 "Sky" "maj. neH Suq DujDaq, wej Hoch vay' ngoQ chavlaHbe' 'e' nID maH qaw."
+send_level_message "music_layer_override -1"
+set_character_pos 2 -192.601 32.2379 184.308 -26
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""

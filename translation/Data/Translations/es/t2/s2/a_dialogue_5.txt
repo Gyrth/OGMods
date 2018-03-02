@@ -1,0 +1,16 @@
+#name "Note-Lure"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 62.231 15.2946 -113.151 15
+send_character_message 1 "set_head_target 63.0672 15.716 -113.327 1"
+set_cam 61.6331 15.8967 -114.188 0 -132.66 0 53.9635
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un folklore popular análisis libro y espíritus..."
+set_character_pos 1 62.231 15.3493 -113.151 15
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 63.1816 15.9284 -113.018 0 72.41 0 53.9635
+say 2 "Note" "Leyendas y cuentos hablan de espíritus que poseen las criaturas y seres inteligentes para servir su voluntad."
+say 2 "Note" "Ellos son atraídos hacia fuera a lugares remotos con calmante susurros, [wait 0.3]el juego a la víctima deseos más profundos y más oscuros secretos; [wait 0.3]por ejemplo, [wait 0.3]una persona con fantasías de aprobación masiva podría oír aplausos, [wait 0.3]elogios o palabras de alabanza, [wait 0.3]mientras que el sanguinario escuchará sonidos de guerra, [wait 0.3]derramamiento de sangre y Victoria."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Cuando una víctima es lo suficientemente atraído y aislada, [wait 0.3]a menudo se destruirá, [wait 0.3]o peor aún, [wait 0.3]poseído para satisfacer necesidades y deseos de los espíritus."

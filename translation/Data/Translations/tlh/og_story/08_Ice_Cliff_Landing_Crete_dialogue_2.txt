@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+set_character_pos 2 168.127 89.4273 -7.00947 -174
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 165.336 90.1489 -5.70006 0 -49.24 0 90
+say 2 "Rabbit" "vay' Qongbogh chalDaq tlha' Dat nIteb pa' ghob not vIleghpu'!"
+say 1 "Turner" "neH overgrown chaH Ha'DIbaH, qar."
+say 2 "Rabbit" "Ha'DIbaH, HoH SoH je?
+say 1 "Turner" "vay' qoH'e' 'oy' pagh maHvaD enslave pIHoH jIH.
+say 2 "Rabbit" "jul.
+say 2 "Sun" "SuvmeH jupwI' slavers je."
+say 2 "Sun" "maH tIghmaj Sovbe'chu' fort Sum weH HeghDI' 'op maHvaD jon Ha'DIbaH pack."
+say 2 "Sun" "vaj Hegh'e' muv DaneH'a'."
+say 1 "Turner" "toy'wI''a' pol chaH DeSDu' fort?"
+say 1 "Turner" "neH mIw lughoStaHvIS."
+send_global_message "levelwin"

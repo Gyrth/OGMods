@@ -1,0 +1,95 @@
+#name "Fight"
+#participants 5
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 5
+set_character_pos 4 -187.126 23.2158 42.7253 -47
+send_character_message 4 "set_animation \"Data\Animations\r_woundedidlearmed2.anm\""
+send_character_message 4 "set_eye_dir -183.649 24.2741 44.7981 1"
+send_character_message 4 "set_torso_target -186.597 23.5381 43.2646 1"
+send_character_message 4 "set_head_target -183.612 24.2744 44.8203 1"
+set_character_pos 3 -183.516 23.1097 40.626 -100
+send_character_message 3 "set_animation \"Data\Animations\jairoidle.anm\""
+send_character_message 3 "set_eye_dir -183.413 24.295 44.5912 1"
+send_character_message 3 "set_torso_target -183.519 23.7284 41.3297 1"
+send_character_message 3 "set_head_target -183.716 24.2917 44.7682 1"
+set_character_pos 2 -183.609 23.3405 44.8709 116
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcheck.anm\""
+send_character_message 2 "set_eye_dir -184.219 24.0013 42.7915 1"
+send_character_message 2 "set_torso_target -183.901 23.8194 43.9496 0"
+send_character_message 2 "set_head_target -183.482 23.7972 41.3408 1"
+set_character_pos 1 -187.98 23.0394 34.0649 -130
+send_character_message 1 "set_animation \"Data\Animations\stealthobserve.anm\""
+send_character_message 1 "set_eye_dir -186.543 24.431 39.2261 1"
+send_character_message 1 "set_torso_target -188.695 23.4881 33.9416 0"
+send_character_message 1 "set_head_target -187.71 23.2955 36.62 1"
+set_cam -188.871 23.0567 38.1185 0 -11.53 0 16.3274
+say 1 "Ghost" "...?"
+set_cam -183.749 23.9474 39.5963 0 -174.22 0 21.2757
+say 2 "???" "Hey, [wait 0.3]¿Qué estás haciendo?"
+send_character_message 2 "set_head_target -186.924 24.0097 42.9242 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam -187.836 23.9635 42.1568 0 -125.11 0 21.2757
+say 2 "???" "¡Alto! [wait 0.3]¡Dije: estancia detrás!"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target -186.596 24.8191 43.2463 1"
+set_cam -184.36 24.182 43.0498 0 -157.93 0 21.2757
+say 2 "???" "No tengo nada que darle. [wait 0.3]Ninguna moneda, [wait 0.3]sin armas, [wait 0.4]¡nada!"
+send_character_message 2 "set_torso_target -184.022 24.2278 43.9837 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam -186.066 23.1005 43.2551 17.98 -122.53 0 21.2757
+say 2 "???" "¿Quieres esta armadura? [wait 0.5]Confía en mí [wait 0.3]Tú no. [wait 0.5]Especialmente aquí."
+send_character_message 2 "set_eye_dir -184.219 24.0013 42.7915 0"
+send_character_message 2 "set_head_target -184.116 23.8364 44.2262 1"
+send_character_message 2 "set_torso_target -184.022 24.2278 43.9837 0"
+say 2 "???" "Se siente como si estuviera en fuego en esta maldita cosa. [wait 0.3]No que resistentes, [wait 0.3]cualquiera de los dos."
+set_cam -183.198 24.5438 46.4545 -9.64 9.04 0.19 21.2757
+send_character_message 2 "set_head_target -183.438 23.9437 40.9132 1"
+send_character_message 2 "set_eye_dir -184.219 24.0013 42.7915 1"
+say 3 "????" "..."
+send_character_message 3 "set_head_target -183.658 24.1081 44.7706 1"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 2 "???" "¿Por qué no dices nada? [wait 0.3]¿Entiendes lo que estoy diciendo? [wait 0.3]¿Habla un idioma diferente?"
+send_character_message 2 "set_head_target -186.837 24.0044 43.0291 1"
+say 2 "???" "¿Lo que está mal con usted gente!?"
+send_character_message 1 "set_head_target -187.283 23.7622 41.6031 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+send_character_message 4 "set_torso_target -186.597 23.5381 43.2646 0"
+send_character_message 4 "set_animation \"Data\Animations\r_ancientcombatidle.anm\""
+set_cam -186.301 23.8717 45.1858 0.38 12.89 0.21 21.2757
+say 3 "????" "..."
+send_character_message 2 "set_head_target -187.897 23.8351 34.8608 1"
+send_character_message 3 "set_torso_target -184.172 22.9582 41.4217 1"
+send_character_message 4 "set_torso_target -186.389 22.9487 43.1833 1"
+send_character_message 3 "set_head_target -187.999 23.7595 35.7596 1"
+send_character_message 4 "set_head_target -187.953 23.9258 35.8093 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "¡Hola!"
+send_character_message 2 "set_head_target -188.411 23.9277 34.7088 1"
+set_cam -185.3 24.1805 44.0027 -0.06 -114.24 -0.43 21.2757
+send_character_message 1 "set_head_target -183.953 24.1996 44.1196 1"
+set_character_pos 1 -188.177 23.0374 35.1521 -61
+send_character_message 3 "set_torso_target -184.355 23.2851 39.912 0"
+set_character_pos 3 -183.516 23.1097 40.626 140
+send_character_message 4 "set_torso_target -187.316 23.3323 41.7288 0"
+set_character_pos 4 -187.126 23.2158 42.7253 103
+say 2 "???" "¿Qué? [wait 0.3]¿Quién eres?"
+send_character_message 1 "set_torso_target -187.983 23.1394 35.8747 1"
+send_character_message 1 "set_head_target -183.632 23.8188 44.6766 1"
+set_cam -188.913 23.7408 36.6153 0.42 -29.15 -0.1 21.2757
+say 1 "Ghost" "No escuchan. [wait 0.3]Creo que incluso pueden hablar."
+send_character_message 1 "set_head_target -183.895 23.9198 40.347 1"
+set_cam -189.674 23.767 32.7833 -0.29 -148.36 -0.32 21.2757
+say 3 "????" "..."
+set_character_pos 3 -183.525 23.1097 40.8763 -168
+set_character_pos 4 -188.598 23.2158 42.9448 54
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam -184.356 24.0994 41.9165 -0.38 -166.49 -0.21 21.2757
+say 2 "???" "Es por ti- [wait 0.3]de los carteles buscados..."
+send_character_message 2 "set_head_target -183.902 24.0217 41.1273 1"
+send_character_message 2 "set_animation \"Data\Animations\r_combatidle.anm\""
+send_character_message 3 "set_animation \"Data\Animations\r_ancientcombatidle.anm\""
+send_character_message 1 "set_head_target -185.805 24.7467 42.2555 1"
+set_cam -190.058 23.5301 33.715 -0.3 -148.83 -0.32 58.1361
+say 2 "???" "No importa que! [wait 0.3]¡Me ayuda!"
+send_level_message "make_participants_aware"

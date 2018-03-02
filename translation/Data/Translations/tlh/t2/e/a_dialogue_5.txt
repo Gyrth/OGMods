@@ -1,0 +1,15 @@
+#name "Note-Outbreak"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -27.5941 -3.60182 -91.9734 -90
+send_character_message 1 "set_head_target -27.6802 -3.45304 -91.1693 1"
+set_cam -29.0328 -3.29631 -92.307 0 -120 0 56.0142
+say 1 "Ghost" "note mang wa' ngabchu'. [wait 0.3]higher-up SoQ."
+set_cam -28.3258 -3.17752 -91.4267 11.57 -78.78 0 56.0142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "qopHa' cinderblood filth perimetre Huv ghaj Reaper neH mo' 'uch."
+say 2 "Note" "pagh drastic 'aD. [wait 0.3]wa' wabmeyvetlh 'ut- [wait 0.3]'ej wa' naQ civil veS Qap maHvaD 'e'."
+say 2 "Note" "pagh qech wIghaj HoSDo'Hey Reaper. [wait 0.3]'ach noH maH vogh qaStaHvIS ngem Eastern."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Hom armour broadsword Qu'maj je qeng 'oH. [wait 0.3]je."

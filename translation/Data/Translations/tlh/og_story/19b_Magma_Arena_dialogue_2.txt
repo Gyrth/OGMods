@@ -1,0 +1,56 @@
+#name "Round1End"
+#participants 6
+set_character_pos 6 -33.2935 1.11848 9.51433 111
+set_character_pos 2 -29.0924 1.2409 8.96236 125
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 -46.9335 6.1123 -9.34934 -28
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_cam -47.9338 7.73355 -12.2271 -18.22 -152.44 2.81 37.6726
+send_level_message "music_layer_override -2"
+send_level_message "crowd_override 0.1 1"
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_worriedpose_1.anm\""
+set_character_pos 5 -29.9913 1.23264 -0.216601 -83
+set_character_pos 4 -30.8815 1.20722 -1.08495 -112
+set_character_pos 3 -29.2448 1.23693 -1.16305 -32
+say 1 "Jade" "toH, 'e' unexpected. yay Do' je, ramjep!"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_cam -26.5861 1.28535 10.5678 7.33 51.95 2.59 37.6726
+say 2 "Turner" "pongwIj 'oH turner. vIqawbej"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_level_message "music_layer_override 0"
+send_level_message "crowd_override 0.1 0"
+set_cam -47.9338 7.73355 -12.2271 -18.22 -152.44 2.81 37.6726
+say 1 "Jade" "toH, Do', Ha' Dotlh SoH against bIquv legh."
+say 1 "Jade" "chay'pen SoH 'e' hardfang darkspot 'ej vIDIlmeH, 'ach DaH 'elbogh nay' Sop poHlIj! ngeH neH lotlhwI'. [send_level_message \"crowd_override 1 1\"]"
+send_character_message 2 "set_torso_target -28.965 1.56975 7.90619 0.0156948"
+send_character_message 5 "set_head_target -29.9092 2.30192 0.774899 0"
+send_character_message 5 "set_torso_target -30.1958 2.07587 0.759485 0.000160605"
+send_character_message 2 "set_head_target -28.6415 1.74575 5.82627 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 2 -29.0999 1.18652 8.89139 101
+set_cam -29.3453 2.2136 11.4294 -5.23 1.59 2.1 20.3883
+send_level_message "crowd_override"
+set_cam -27.9818 1.99996 12.1132 -3.45 12.2 -1.81 21.172
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 2 "Turner" "Suq caught SoH jatlhqa'?"
+send_character_message 5 "set_torso_target -29.9569 2.09757 0.844855 1"
+send_character_message 5 "set_head_target -28.8511 1.12001 0.917956 1"
+say 3 "Hark" "jIQoS, turner."
+send_character_message 2 "set_torso_target -28.9681 0.959238 7.64234 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Turner" "vaj raD maH muv, vaj nobmeH-"
+send_character_message 5 "set_torso_target -29.9569 2.09757 0.844855 0.254053"
+send_character_message 5 "set_head_target -29.8031 2.11311 1.4457 1"
+send_character_message 5 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 3 "Hark" "ghotvam'e' chay' 'e' ghaj. Qapchu' Hegh Dunmo' naDev puS wa' neH be'joy' naHnagh slow."
+send_character_message 1 "set_torso_target -45.8749 7.76411 -8.82039 1"
+send_character_message 1 "set_head_target -45.9256 7.76777 -9.11093 1"
+set_cam -47.9338 7.73355 -12.2271 -18.22 -152.44 2.81 37.6726
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+say 1 "Jade" "neH wa' Suq naDev alive. bets lan Qav jatlhpu'!"
+set_cam -28.9821 2.12687 10.2325 -5.38 6.26 1.67 57.3553
+send_level_message "music_layer_override 2"
+make_participants_aware

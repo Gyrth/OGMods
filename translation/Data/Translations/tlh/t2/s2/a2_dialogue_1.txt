@@ -1,0 +1,16 @@
+#name "FL-G"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_head_target -142.421 21.5959 93.7538 1"
+set_character_pos 1 -141.589 19.7447 92.728 -129
+set_cam -143.185 20.5 87.9809 0 -171.78 0 71.2219
+send_level_message "set_camera_dof 0 0 0 0.3 8 1"
+say 1 "Ghost" "..."
+set_character_pos 1 -141.589 19.7638 92.728 -129
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+send_character_message 1 "set_head_target -142.421 21.5959 93.7538 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "whatever excuse vay' HoH Sumqu'. [wait 0.3]'oH vItlhap."
+send_global_message "levelwin s2-fl-a2-g"

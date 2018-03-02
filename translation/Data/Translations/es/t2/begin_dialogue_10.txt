@@ -1,0 +1,15 @@
+#name "Note-SpiritEnergy"
+#participants 2
+set_character_pos 1 190.052 -48.9326 193.971 -180
+send_character_message 1 "set_head_target 189.297 -48.4541 194.072 1"
+set_cam 190.681 -48.3442 192.828 0 135.86 0 38.5978
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "A arrancado la página de un libro sobre leyendas de espíritu..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 189.05 -48.2701 194.674 0 -40.3 0 38.5978
+say 2 "Note" "Energía del espíritu, [wait 0.3]según lo dicho en los cuentos, [wait 0.3]es casi siempre guardado y enjaezado dentro de linternas de piedra casi tan altas como cualquier perro adulto promedio."
+say 2 "Note" "Si estas linternas pasa a ser roto o destruido de alguna manera, [wait 0.3]la energía del espíritu será liberada y destruida inmediatamente; [wait 0.3]cualquier propósito, pueden ha servido previamente los espíritus dentro de la linterna se desvanece completamente, [wait 0.3]y su función se pierde para siempre reemplazado."
+say 2 "Note" "Junto con la energía del espíritu se pierda permanentemente, [wait 0.3]casi de inmediato será maldecidos por este 'cardenal pecado'."
+say 2 "Note" "Estas linternas de alcohol proporcionan funciones para cada uno de los principios básicos y el derecho del mundo."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Una vez allí son un montón de cuentos que implican los espíritus del mundo, [wait 0.3]Me inclino más a creer que estos no son más que historias."

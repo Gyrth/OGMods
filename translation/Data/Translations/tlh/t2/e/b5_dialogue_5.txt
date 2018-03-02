@@ -1,0 +1,16 @@
+#name "Climb"
+#participants 3
+set_character_pos 2 155.506 -56.2406 297.402 139
+send_character_message 2 "set_animation \"Data/Animations/dialogue_sitting_handstogether.anm\""
+send_character_message 2 "set_head_target 145.096 -48.3103 283.025 1"
+set_character_pos 1 143.752 -48.2686 281.201 -97
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_head_target 152.618 -55.2286 294.442 1"
+set_cam 146.19 -55.7138 289.213 41.35 15.27 0 37.5177
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 2 "???" "QI'yaH!"
+set_cam 152.987 -55.6722 296.142 -0.97 -108.62 -1.45 37.5177
+say 2 "???" "SoHvaD qar. [wait 0.3]qar shouldn't 'e' HIja'! [wait 0.5]chay' ngo' nagh DaSov'a'?"
+set_cam 142.568 -47.033 280.592 -27.87 -134.57 -0.06 72.8681
+say 2 "???" "Suq vo' pagh ghaH'e' SoHbe'chugh pupqu'jaj 'ej mong ghor DaneH'a'?"

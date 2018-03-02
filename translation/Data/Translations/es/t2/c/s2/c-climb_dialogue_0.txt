@@ -1,0 +1,7 @@
+#name "Ambush"
+#participants 4
+set_character_pos 3 -4.21967 101.091 83.937 -93
+set_character_pos 2 -3.80584 101.231 93.7622 90
+set_character_pos 1 -13.3754 92.8008 89.0117 0
+say 1 "gpst" "Oh no hay enemigos"
+send_level_message "make_participants_aware"

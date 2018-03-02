@@ -1,0 +1,7 @@
+#name "End"
+#participants 1
+set_character_pos 1 14.4196 -32.5153 148.068 100
+set_cam 15.2311 -31.8977 148.957 0 17.01 0 90
+set_dialogue_color 1 0.6 1 0.6
+say 1 "Turner" "jul ghoch tlha' jIH. naDev Dub pagh meq vay' mIw Hoch yIt ghaH."
+send_global_message "levelwin"

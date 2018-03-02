@@ -1,0 +1,18 @@
+#name "NLG-B"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 0 8
+set_character_pos 1 -49.2618 73.3463 307.827 -90
+send_character_message 1 "set_eye_dir -49.2362 73.881 308.914 1"
+send_character_message 1 "set_head_target -49.2701 74.2021 308.912 0.967449"
+set_cam -53.3745 73.8904 301.981 0 -150.76 0 40.6409
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -49.2701 74.2021 308.912 0"
+set_character_pos 1 -49.2618 73.0803 307.827 -90
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -49.2701 74.2021 308.912 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+say 1 "Ghost" "No estoy recibiendo nada de esto..."
+send_global_message "levelwin b"

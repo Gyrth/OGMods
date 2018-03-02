@@ -1,0 +1,13 @@
+#name "Note-Guests"
+#participants 2
+set_character_pos 1 -19.5612 -0.601232 90.0183 -90
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 1 "set_head_target -19.5951 -0.200392 90.7554 1"
+set_cam -18.5482 0.00605607 89.4453 0 132.46 0 60.58
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Uerta [wait 0.15]uiea [wait 0.15]nei [wait 0.15]yuege [wait 0.15]Naya [wait 0.15]fuiot [wait 0.2]Frey...?"
+send_character_message 1 "set_head_target -19.5951 -0.200392 90.7554 0"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "[wait 0.3]En voi lukea tästä."

@@ -1,0 +1,24 @@
+#name "Note-Advisor"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -49.2068 3.94066 -51.4596 155
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -49.5334 4.0843 -51.4775 1"
+send_character_message 1 "set_torso_target -49.5303 4.01128 -51.6685 1"
+send_character_message 1 "set_head_target -49.8288 4.0906 -51.7879 1"
+set_cam -49.7201 4.26055 -49.6525 0 0 0 49.3169
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Una nota. [wait 0.3]Debe dejarse por uno de los guardias."
+send_character_message 1 "set_torso_target -49.5303 3.66408 -51.6685 0"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -50.1317 4.6123 -51.1478 0 -67.69 0 49.3169
+say 2 "Note" "Si te estás preguntando, [wait 0.3]Sí [wait 0.3]está escrito en ceniza. [wait 0.5]Apareció en la noche, [wait 0.3]y nadie es fessing para arriba."
+say 2 "Note" "[wait 0.5]En cuanto a lo que significan los símbolos, [wait 0.3]Ni idea. [wait 0.5]Se ven casi como las runas cavedweller."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "De cualquier manera, [wait 0.3]Si eres la persona que dibujó [wait 0.3]sólo dime y limpiar la pared, [wait 0.3]o tendré que hacerlo yo mismo. [wait 0.5]Sin duda no ayuda con la ansiedad."
+send_character_message 1 "set_torso_target -49.7738 3.86715 -51.5431 1"
+send_character_message 1 "set_eye_dir -48.3626 5.16601 -49.3969 1"
+send_character_message 1 "set_head_target -48.9568 5.06048 -50.1009 1"
+set_cam -50.5785 4.36593 -51.7746 16.33 -121.99 0 62.7333
+say 1 "Ghost" "..."

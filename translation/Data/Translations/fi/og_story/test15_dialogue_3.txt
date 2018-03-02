@@ -1,0 +1,9 @@
+#name "Boss2"
+#participants 2
+send_character_message 1 "equip_item 54"
+set_character_pos 2 -29.9569 -4.07442 104.748 -150
+set_character_pos 1 -33.5229 -4.2452 106.087 29
+set_cam -33.929 -3.82597 107.75 0 -34.65 0 90
+say 2 "Cat" "En voi uskoa minun täytyy tehdä tämän itse."
+say 1 "Turner" "Olet kissa!"
+make_participants_aware

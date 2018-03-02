@@ -1,0 +1,16 @@
+#name "ML-G"
+#participants 1
+set_dialogue_color 1 0 0.02 0.05
+set_dialogue_voice 1 8
+set_character_pos 1 345.201 0.144115 14.5751 37
+send_character_message 1 "set_eye_dir 346.028 1.12155 13.8894 1"
+send_character_message 1 "set_head_target 345.922 1.76271 13.9752 1"
+set_cam 342.237 0.783486 20.5415 0 -30 0 52.1862
+send_level_message "set_camera_dof 0 0 0 0.3 14 5"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+send_character_message 1 "set_head_target 345.922 1.76271 13.9752 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Suq naDev vIghaj. [wait 0.3]'ej nom."
+send_global_message "levelwin s2-ml-b1-g"

@@ -1,0 +1,23 @@
+#name "Note-Cache"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -18.9745 -8.56669 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target -19.3971 -8.84294 155.245 1"
+set_cam -17.5156 -8.54594 155.832 0 78.14 0 48.294
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "note soggy vo' SIS Hoch. [wait 0.3]'ach chotu' mu' ghaHlaw'."
+set_cam -19.9914 -8.35759 155.085 0 -121.86 0 41.4636
+set_character_pos 1 -18.9745 -8.51633 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+say 2 "Note" "'Iv DaSov. [wait 0.5]tlhoy pa' ghop QIH. [wait 0.3]vISov. [wait 0.5]vaj mIw wItI'nISmo' ngejtaH HIjmeH QaQ nIH DaHar'a'."
+say 2 "Note" "either mIw. [wait 0.3]D. [wait 0.3]Qav nob ghotvam'e'. [wait 0.5]chongaghpa' rIn je rIn Hoch bagh sever qaSpu'DI' nuq SoHvaD Dara'. [wait 0.3]'ej ass DuSaQDaq vay' 'e' qaS."
+say 2 "Note" "'oH law' ghoS Hoch chotlhejbe'mo'. [wait 0.3]'ach juHDaq paw'bej 'op Dapvetlh yIjatlh vaj chaH. [wait 0.5]vaj net poQbej appreciate SoH."
+say 2 "Note" "'ej qaSchoH maH pagh yIjatlh 'Iq qaStaHvIS nuv [wait 0.3]lutmeyvam nobmeH Dara'. [wait 0.3]'ach rap SoHvaD chup jIH- [wait 0.3]Hoch bagh sever. [wait 0.3]qej."
+say 2 "Note" "isn't ghoS [taH tugh be'vam chen SoH ghaH poH vay' forgive. [wait 0.3]'ej 'e' laH 'ej wIQaw'laH herbs Qong amount pagh."
+say 2 "Note" "smarter ta' law' chaw'. [wait 0.3]'ej 'oH isn't valchugh wej pick Da'elDI'."
+say 2 "Note" "'ej wa'logh tIqlIj ngaj tlhuQ tu' f. [wait 0.3]isn't ghoS je Quch. [wait 0.3]vIDablaH. jIwivlaH."
+say 2 "Note" "vaj 'oH reH chenmoH SoH ouran. [wait 0.3]nIvbogh luck DaneHchugh jIH. [wait 0.5]SoHvaD laH tu' maq Dagh cha boraq tu'lu'. [wait 0.5]wej jIH."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "qI'. [wait 0.3]MUDVO'"

@@ -1,0 +1,50 @@
+set_character_pos 2 -331.952 16.8162 117.005 8
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_eye_dir -328.097 16.5895 116.741 1"
+send_character_message 2 "set_torso_target -328.338 16.2507 116.776 1"
+send_character_message 2 "set_head_target -327.89 17.5075 117.131 1"
+set_character_pos 1 -328.509 16.4505 117.91 172
+set_cam -330.688 17.3265 117.671 2.2 57.79 0 90
+#name "Old Base Two"
+#participants 2
+say 2 "Skipper" "Turner![wait 0.4] Olen niin iloinen, olet elossa!"
+set_cam -329.505 17.1165 118.413 -4.5 -54.51 0 58.2264
+set_character_pos 1 -328.505 16.6316 117.934 177
+send_character_message 1 "set_head_target -331.484 17.5823 117.109 1"
+send_character_message 1 "set_eye_dir -331.467 17.5633 117.131 1"
+say 1 "Turner" "...[wait 0.5] Mikä?"
+set_character_pos 1 -328.755 16.3516 117.549 172
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+set_cam -332.366 17.7795 116.318 -13.86 -115.7 -0.81 90
+say 2 "Skipper" "Jack perustettava raid,[wait 0.3] Ei minua![wait 0.4] Hän kertoi siitä,"
+say 2 "Skipper" "mutta vannoi, että kukaan ei olisi loukkaantunut!"
+set_cam -332.87 17.8314 118.65 -2.72 -54.08 0.56 60.7776
+send_character_message 1 "set_eye_dir -330.079 17.2595 117.328 0.7989"
+send_character_message 1 "set_head_target -331.452 17.6626 117.164 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 2 "Skipper" "Hän halusi tappaa minut, jotta ei voisi puhua raiders"
+say 2 "Skipper" "mutta ne pitää minut elossa lunnaita."
+send_character_message 2 "set_head_target -329.386 17.0634 117.476 1"
+send_character_message 2 "set_torso_target -329.497 16.975 117.352 1"
+send_character_message 2 "set_eye_dir -329.716 17.2178 117.323 1"
+send_character_message 1 "set_eye_dir -330.461 17.3517 117.232 0.799923"
+send_character_message 1 "set_head_target -329.692 16.193 117.831 1"
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+set_cam -329.561 16.3944 118.159 7.56 -28.17 -1.26 60.7776
+say 1 "Turner" "Mutta näin Jack kuolee!"
+send_character_message 2 "set_eye_dir -330.018 16.5792 117.129 1"
+send_character_message 2 "set_torso_target -330.3 16.8514 117.351 1"
+send_character_message 2 "set_head_target -329.853 16.6347 117.282 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 1 "set_head_target -330.912 17.4318 117.111 1"
+send_character_message 1 "set_eye_dir -330.364 16.8573 117.227 1"
+set_cam -331.508 17.0595 120.453 3.64 -20.17 -0.11 60.7776
+say 2 "Skipper" "Häh?[wait 0.4] Ei se ei ole mahdollista,[wait 0.3] Hän on on faking se."
+send_character_message 2 "set_eye_dir -329.988 16.8718 117.313 1"
+send_character_message 2 "set_torso_target -330.078 16.7957 117.246 1"
+send_character_message 2 "set_head_target -330.042 17.1136 117.472 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam -333.043 17.7393 118.703 -6.76 -54.45 -0.06 48.7785
+say 1 "Turner" "Menen tarkistaa, jos hänen ruumiinsa on edelleen olemassa."
+send_global_message "levelwin"

@@ -1,0 +1,15 @@
+#name "Vomit"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -203.059 -83.0667 -34.1874 47
+send_character_message 1 "set_torso_target -202.215 -82.9931 -34.5914 1"
+send_character_message 1 "set_head_target -202.467 -82.8045 -34.8328 0"
+set_cam -200.979 -82.6695 -34.1531 0 83.5 0 37.7021
+say 1 "You" "..."
+send_character_message 1 "set_head_target -202.467 -82.8045 -34.8328 1"
+send_character_message 1 "set_torso_target -202.199 -83.3507 -34.4622 1"
+say 1 "You" "...[wait 0.3]¿Qué...?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_footshake.anm\""
+set_cam -201.155 -82.3204 -35.8464 -15.61 128.54 0 47.2379
+say 1 "You" "¿Es vómito?"

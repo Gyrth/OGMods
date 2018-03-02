@@ -1,0 +1,14 @@
+#name "Diary"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -17.6969 -8.50685 158.477 0
+send_character_message 1 "set_animation \"Data\Animations\pickup.anm\""
+send_character_message 1 "set_torso_target -16.7169 -8.14032 158.384 0"
+send_character_message 1 "set_head_target -17.0153 -8.96052 158.45 1"
+set_cam -16.2134 -8.38946 157.893 0 111.51 0 35.4038
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Kielee [wait 0.15]Frei [wait 0.15]uyuer... [wait 0.3]Bayeu [wait 0.15]fui [wait 0.15]Fran [wait 0.15]¿fuiot...?"
+send_character_message 1 "set_head_target -16.784 -8.29674 158.468 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+say 1 "Ghost" "No importa Palacio charla."

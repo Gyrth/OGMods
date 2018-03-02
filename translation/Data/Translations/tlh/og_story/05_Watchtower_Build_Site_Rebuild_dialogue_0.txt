@@ -1,0 +1,7 @@
+#name "Win"
+#participants 1
+set_cam 197.686 69.6159 -30.9482 0 0 0 90
+set_character_pos 1 198.012 69.2468 -33.1715 -144
+say 1 "Turner" "vaj Ha'DIbaH."
+say 1 "Turner" "vaj tu'lu' waw' Sum latlh vIlegh."
+send_global_message "levelwin"

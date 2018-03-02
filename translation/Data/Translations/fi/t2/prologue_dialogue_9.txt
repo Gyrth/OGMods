@@ -1,0 +1,17 @@
+#name "Note-Beetles"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 37.3548 420.149 -65.2101 -179
+send_level_message "therium2_enable_object 1869"
+send_character_message 1 "set_head_target 36.6578 420.535 -65.2565 1"
+set_cam 35.4735 420.63 -63.0056 0 -29.84 0 35.1378
+send_level_message "set_camera_dof 0.3 2 0.5 0.3 5 2"
+say 1 "Ghost" "Revitty sivu sanomalehdestä, liittää jonkun päiväkirja."
+set_cam 36.3475 420.836 -66.1337 0 -140.49 0 35.1378
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Note" "Kun kaivaa Therium C-Quadrant, Hansel löytänyt jotain ylimääräinen - tuntemattomia klaani maanalainen jäniseläinten, jotka kutsuvat itseään kovakuoriaiset. Lisää tutkimusta on tehtävä, mutta päässä vähän yhteisen kielemme, he silti osuus on havaittavissa, että nämä kovakuoriaiset jakaa yhteiskunnaltamme muutama vuosisata edellisen familiaalinen sokeutuneet sitten tuli loukkuun underground kun luolissa ne otti turvakoti alkoi murentua niiden ympärille."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Korkea neuvosto kieltäytyy tunnustamasta niiden olemassaolo, mutta vain on selvitettävä miten he onnistuivat selviytymään kaikki nämä vuodet pinnan alla!"
+send_level_message "therium2_disable_object 1869"

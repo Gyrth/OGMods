@@ -1,0 +1,20 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "therium2_enable_object 1741"
+send_level_message "therium2_enable_object 1742"
+set_character_pos 1 218.297 -53.76 -177.006 -45
+send_character_message 1 "set_eye_dir 221.458 -52.534 -174.482 1"
+send_character_message 1 "set_head_target 224.262 -50.9147 -172.02 1"
+set_cam 217.741 -53.233 -175.942 0 -38.57 0 37.3936
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 228.914 -51.9661 -170.683 1"
+set_cam 220.409 -53.3337 -177.03 0 95.21 0 37.3936
+say 1 "Ghost" "vay' vIHtaHbogh yoS doesn't Hot lugh."
+send_character_message 1 "set_head_target 236.167 -47.7365 -162.751 1"
+set_cam 216.899 -53.2603 -178.575 0 -129.52 0 65.1855
+send_level_message "therium2_disable_object 1741"
+send_level_message "therium2_disable_object 1742"
+say 1 "Ghost" "ghaytan 'e' naDev wej pa' ngaSwI' tu'lu' jIH."

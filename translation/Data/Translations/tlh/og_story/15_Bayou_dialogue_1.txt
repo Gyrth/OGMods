@@ -1,0 +1,26 @@
+#name "Win"
+#participants 3
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+send_level_message "music_layer_override -2"
+send_character_message 1 "empty_hands"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 3 "set_head_target -14.8128 17.1431 92.3663 1"
+send_character_message 1 "set_head_target -14.4601 17.2746 93.9743 1"
+set_character_pos 3 -14.0926 17.6574 92.4262 -169
+send_character_message 3 "set_animation \"Data/Animations/r_sit_injuredneck.anm\""
+set_character_pos 2 -13.9798 17.4164 94.1969 151
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_kneeling_low.anm\""
+set_character_pos 1 -15.5229 17.5103 92.441 -41
+set_cam -17.1444 17.7797 96.4893 -3.8 -36.12 -6.65 59.2516
+say 1 "Turner" "crawl. nuqDaq vang SoH?"
+send_character_message 3 "set_head_target -15.5021 18.3638 92.6702 1"
+say 3 "Coal" "not yIja' maH!"
+send_character_message 2 "set_head_target -15.3467 16.723 93.5088 1"
+say 2 "Snitch" "DeSDu' raQ, chan."
+send_character_message 3 "set_head_target -14.5927 17.4075 93.9718 1"
+say 3 "Coal" "SoHvaD nuch!"
+send_character_message 2 "set_head_target -14.4223 17.1477 93.0324 1"
+say 2 "Snitch" "jIHvaD aren't yIDIl tIvnIS yap Hegh chaHvaD. ram, vaj jup toD 'e' nID, Hegh."
+send_character_message 1 "set_head_target -14.2257 17.5652 94.2961 1"
+say 1 "Turner" "HeghwIj pol predicting nuvpu'. maq Dagh cha boraq lugh 'ach."
+send_global_message "levelwin"

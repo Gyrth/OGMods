@@ -1,0 +1,12 @@
+#name "Door"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -41.4963 103.56 135.935 90
+send_character_message 1 "set_head_target -41.5329 104.83 134.312 1"
+set_cam -39.6691 104.124 139.828 0 21.76 0 45.9469
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+send_character_message 1 "set_head_target -41.5329 104.83 134.312 0"
+say 1 "Ghost" "No... [wait 0.3]Nyt mennään."
+send_global_message "levelwin ea2"

@@ -1,0 +1,12 @@
+#name "Top"
+#participants 3
+set_character_pos 1 156.676 96.3877 -17.4249 0
+set_character_pos 2 198.066 101.894 0.273095 -172
+set_character_pos 3 197.977 96.4318 -5.66173 145
+set_cam 155.707 96.8471 -16.578 0 -68.92 0 90
+say 1 "Turner" "¡Lo hizo!"
+set_cam 189.366 98.0827 -2.72666 1.28 -92.65 -2.13 90
+say 2 "Rebel" "¡Ayuda!"
+set_cam 195.842 96.7604 -6.37169 1.28 -92.65 -2.13 90
+say 3 "Wolf" "¡Te comeré!"
+make_participants_aware

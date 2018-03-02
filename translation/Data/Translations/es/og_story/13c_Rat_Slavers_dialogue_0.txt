@@ -1,0 +1,24 @@
+#name "Win"
+#participants 2
+set_character_pos 2 397.176 -1.99877 19.7161 109
+set_character_pos 1 396.687 -2.22842 18.8396 -62
+set_cam 397.168 -1.43508 18.4408 0 161.5 0 90
+say 1 "Turner" "Cielo."
+say 1 "Turner" "¿Estás bien?"
+say 2 "Sky" "¿Llegaste del Santuario?"
+say 2 "Sky" "Me perdí."
+say 1 "Turner" "Soy Turner."
+say 1 "Turner" "Eres bien ahora."
+say 1 "Turner" "Te ahorrará."
+say 2 "Sky" "Utilizaron ratas, una cerbatana, algún tipo de veneno el dormir."
+say 2 "Sky" "Es cómo nos capturaron."
+say 2 "Sky" "Vi donde guardan su fuente de"
+say 2 "Sky" "Iba a destruirla, pero..."
+say 2 "Sky" "así que sueño..."
+say 1 "Turner" "A cuidar de él."
+say 1 "Turner" "Y luego a cuidar de usted."
+say 1 "Turner" "Me recuerdas a de abril..."
+say 2 "Sky" "¿Quién?"
+say 1 "Turner" "Olvídalo."
+say 1 "Turner" "Estás seguro conmigo."
+send_global_message "levelwin"
