@@ -1,0 +1,15 @@
+#name "Statue-Oren"
+#participants 4
+set_character_pos 2 -5.88353 31.0782 17.2735 163
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+set_character_pos 1 -7.75157 31.1156 16.1275 -180
+send_character_message 1 "set_head_target -10.1614 32.4193 16.1804 1"
+set_cam -5.48467 31.633 18.492 0 53.73 0 38.5381
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 1 "You" "L’inscription se lit..."
+set_cam -15.211 43.9151 18.9434 -55.7 -61.84 -0.04 55.8788
+send_character_message 1 "set_head_target -11.2496 35.9239 16.0043 1"
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 3 "Inscription" "COMMANDANT OREN, [wait 0.3]MINISTRE DES AFFAIRES ÉTRANGÈRES DU CONSEIL SUPÉRIEUR DE L’EMPIRE CINDERBREATHE."

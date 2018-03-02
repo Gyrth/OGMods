@@ -1,0 +1,926 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>Raider Base</Name>
+<Description/>
+<Shader>post</Shader>
+<LoadingScreen>
+    <Image>Data/LevelLoading/LugaruStory/Raider_base.xml_loading.jpg</Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Prototypes/Lugaru/Desert/RaiderBase_Height.png</Heightmap>
+    <ShaderExtra/>
+    <DetailMap/>
+    <ColorMap>Data/Prototypes/Lugaru/Desert/RaiderBase_Color.tga</ColorMap>
+    <WeightMap>Data/Prototypes/Lugaru/Desert/RaiderBase_Weights.png</WeightMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/pebbly_sand.tga" normalpath="Data/Textures/Terrain/DetailTextures/pebbly_sand_normal.tga" materialpath="Data/Materials/sand.xml"/>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/sandwaves.tga" normalpath="Data/Textures/Terrain/DetailTextures/sandwaves_normal.tga" materialpath="Data/Materials/sand.xml"/>
+        <DetailMap colorpath="Data/Prototypes/Lugaru/Desert/DesertRock_Color.tga" normalpath="Data/Prototypes/Lugaru/Desert/DesertRock_Norm.tga" materialpath="Data/Materials/dirtyrock.xml"/>
+        <DetailMap colorpath="Data/Prototypes/Lugaru/Desert/DesertRock2_Color.tga" normalpath="Data/Prototypes/Lugaru/Desert/DesertRock2_Norm.tga" materialpath="Data/Materials/dirt.xml"/>
+    </DetailMaps>
+    <DetailObjects>
+        <DetailObject obj_path="Data/Objects/Plants/groundcover/Grass/tall_wild_grass.xml" weight_path="Data/Prototypes/Lugaru/Desert/RaiderBase_ObjectWeights.tga" normal_conform="0.9" density="2" min_embed="0.1" max_embed="0.2" min_scale="0.2" max_scale="0.5" view_distance="80" jitter_degrees="10" overbright="-0.7" tint_weight="1"/>
+        <DetailObject obj_path="Data/Objects/Environment/Rocks/lichen_rock_e.xml" weight_path="Data/Prototypes/Lugaru/Desert/RaiderBase_ObjectWeights.tga" normal_conform="0.9" density="2" min_embed="0.3" max_embed="0.5" min_scale="0.1" max_scale="0.2" view_distance="80" jitter_degrees="10" overbright="-0.5" tint_weight="1"/>
+    </DetailObjects>
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251"/>
+<AmbientSounds>
+    <Ambient path="Data/Sounds/ambient/amb_grassfield_loop"/>
+</AmbientSounds>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills"/>
+    <parameter name="Fog amount" type="float" val="2.2"/>
+    <parameter name="HDR Black point" type="float" val="0.117"/>
+    <parameter name="HDR Bloom multiplier" type="float" val="0.987"/>
+    <parameter name="HDR White point" type="float" val="0.576"/>
+    <parameter name="Level Boundaries" type="int" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Saturation" type="float" val="1"/>
+    <parameter name="Sky Brightness" type="float" val="1"/>
+    <parameter name="Sky Rotation" type="float" val="81"/>
+    <parameter name="Sky Tint" type="string" val="255, 255, 255"/>
+</LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60"/>
+<Sky>
+    <DomeTexture>Data/Prototypes/Lugaru/Desert/RaiderBase_Dome.tga</DomeTexture>
+    <SunAngularRad>0.159387</SunAngularRad>
+    <SunColorAngle>142.246</SunColorAngle>
+    <RayToSun r0="0.550423" r1="0.620862" r2="0.55818"/>
+</Sky>
+<ActorObjects>
+    <CameraObject t0="227.584" t1="49.6703" t2="-178.375" s0="1" s1="1" s2="1" q0="0.128573" q1="-0.871385" q2="0.330155" q3="0.339345" id="1">
+        <parameters/>
+    </CameraObject>
+    <EnvObject t0="197.945" t1="21.7774" t2="-146.132" s0="0.754782" s1="0.754782" s2="0.754782" q0="0" q1="-0.631478" q2="0" q3="0.775394" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="237.569" t1="21.9735" t2="-150.797" s0="0.664667" s1="0.664667" s2="0.664667" q0="0" q1="-0.977184" q2="0" q3="0.212394" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_3.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="200.708" t1="18.8121" t2="-231.828" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="25" type_file="Data/Objects/Hotspots/lugaru_level.xml">
+        <parameters>
+            <parameter name="music" type="string" val="lugaru_ambient_desert"/>
+            <parameter name="next_level" type="string" val="Data/Levels/LugaruStory/Raider_base_2.xml"/>
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="206.322" t1="15.0372" t2="-238.473" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="26" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/LugaruStory/Raider_base_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Turner"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="27"/>
+        </parameters>
+        <Connections>
+            <Connection id="26"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="206.322" t1="15.7372" t2="-238.473" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="27" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="449"/>
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="208.597" t1="14.0676" t2="-239.46" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="28" type_file="Data/Objects/Hotspots/start_dialogue.xml">
+        <parameters>
+            <parameter name="Automatic" type="string" val="1"/>
+            <parameter name="Dialogue" type="string" val="Turner"/>
+            <parameter name="Visible in game" type="string" val="0"/>
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="197.883" t1="19.2332" t2="-185.789" s0="1.06064" s1="0.863057" s2="1.11172" q0="-0.106124" q1="-0.68987" q2="0.00441593" q3="0.716099" id="32" color_r="1" color_g="0.612501" color_b="0.362501" overbright="0.849667" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="217.138" t1="19.8167" t2="-157.252" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="33" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="640" offmesh_connection_id="1008" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="198.672" t1="20.2031" t2="-171.131" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="34" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="44" offmesh_connection_id="1003" poly_area="8"/>
+            <NavMeshConnection other_object_id="48" offmesh_connection_id="1004" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="222.189" t1="19.7586" t2="-156.707" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="35" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="981" offmesh_connection_id="1018" poly_area="9"/>
+            <NavMeshConnection other_object_id="40" offmesh_connection_id="1001" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="231.553" t1="19.6664" t2="-172.277" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="36" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="986" offmesh_connection_id="1021" poly_area="10"/>
+            <NavMeshConnection other_object_id="985" offmesh_connection_id="1020" poly_area="9"/>
+            <NavMeshConnection other_object_id="41" offmesh_connection_id="1002" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="196.704" t1="18.1952" t2="-182.178" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="38" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="39" offmesh_connection_id="1000" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="198.514" t1="20.2187" t2="-176.036" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="39" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="38" offmesh_connection_id="1000" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="229.254" t1="16.5287" t2="-154.857" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="40" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="35" offmesh_connection_id="1001" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="239.229" t1="17.8063" t2="-168.362" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="41" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="36" offmesh_connection_id="1002" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="186.808" t1="20.3908" t2="-174.854" s0="0.441521" s1="0.983621" s2="4.60152" q0="-0.0745326" q1="-0.274748" q2="0.0447819" q3="0.957577" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="182.93" t1="20.0381" t2="-166.526" s0="0.428993" s1="1.62649" s2="4.55664" q0="-0.0487326" q1="-0.17199" q2="0.0987078" q3="0.978929" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="190.302" t1="18.0216" t2="-169.046" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="44" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="34" offmesh_connection_id="1003" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <ReflectionCaptureObject t0="213.945" t1="52.8731" t2="-164.248" s0="48.0837" s1="48.0837" s2="48.0837" q0="0" q1="0" q2="0" q3="1" id="45" gicoeff00="0.305664" gicoeff01="0.259521" gicoeff02="0.294983" gicoeff03="0.297424" gicoeff04="0.250458" gicoeff05="0.288208" gicoeff06="0.258667" gicoeff07="0.248322" gicoeff08="0.371948" gicoeff09="0.315063" gicoeff10="0.233337" gicoeff11="0.197937" gicoeff12="0.292786" gicoeff13="0.244385" gicoeff14="0.275146" gicoeff15="0.309753" gicoeff16="0.265503" gicoeff17="0.308533">
+        <parameters>
+            <parameter name="Global" type="string" val="0"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <EnvObject t0="217.733" t1="30.181" t2="-124.554" s0="0.428994" s1="1.62649" s2="5.18064" q0="0.0746272" q1="0.747158" q2="0.0464134" q3="0.658811" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="192.01" t1="18.1424" t2="-162.979" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="47" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="48" offmesh_connection_id="1005" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="197.123" t1="19.945" t2="-158.586" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="48" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="47" offmesh_connection_id="1005" poly_area="8"/>
+            <NavMeshConnection other_object_id="34" offmesh_connection_id="1004" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <ReflectionCaptureObject t0="204.103" t1="28.1595" t2="-248.728" s0="0.48742" s1="0.48742" s2="0.48742" q0="0" q1="0" q2="0" q3="1" id="49" gicoeff00="0.317932" gicoeff01="0.270386" gicoeff02="0.301025" gicoeff03="0.306213" gicoeff04="0.25885" gicoeff05="0.293335" gicoeff06="0.260132" gicoeff07="0.249786" gicoeff08="0.372253" gicoeff09="0.340393" gicoeff10="0.255371" gicoeff11="0.213562" gicoeff12="0.303833" gicoeff13="0.253784" gicoeff14="0.280945" gicoeff15="0.31897" gicoeff16="0.274536" gicoeff17="0.313049">
+        <parameters>
+            <parameter name="Global" type="string" val="1"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <NavmeshConnectionObject t0="241.251" t1="20.1937" t2="-154.891" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="71" offmesh_connection_id="1006" poly_area="7"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="191.887" t1="21.206" t2="-172.793" s0="0.670728" s1="0.670728" s2="0.670728" q0="0.059213" q1="-0.254715" q2="0.0269462" q3="0.964825" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_2.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="244.714" t1="19.2084" t2="-153.324" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="71" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="53" offmesh_connection_id="1006" poly_area="7"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="214.779" t1="26.4859" t2="-154.167" s0="1.33828" s1="1.33828" s2="1.33828" q0="0" q1="0" q2="0" q3="1" id="94" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/RaiderBase.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="220.241" t1="20.9977" t2="-149.67" s0="69.4569" s1="24.1691" s2="72.2835" q0="0" q1="0" q2="0" q3="1" id="106" version="1">
+        <parameters/>
+        <Decal t0="209.922" t1="15.9548" t2="-141.805" s0="47.898" s1="14.0733" s2="26.2569" q0="0" q1="0" q2="0" q3="1" id="50" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.105882" color_g="0.105881" color_b="0.105881" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="218.775" t1="15.2959" t2="-158.268" s0="19.6502" s1="5.76836" s2="16.7668" q0="0" q1="0.166197" q2="0" q3="0.986093" id="57" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.0823529" color_g="0.0823521" color_b="0.0823521" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="197.548" t1="15.8144" t2="-155.721" s0="19.6502" s1="5.76836" s2="16.7668" q0="0" q1="0.166197" q2="0" q3="0.986093" id="59" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.129412" color_g="0.12941" color_b="0.12941" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="197.996" t1="17.2741" t2="-173.672" s0="16.9271" s1="4.969" s2="14.4433" q0="0" q1="0.166197" q2="0" q3="0.986093" id="61" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="230.629" t1="16.029" t2="-175.009" s0="16.9271" s1="4.969" s2="14.4433" q0="0" q1="0.305524" q2="0" q3="0.952184" id="63" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.227451" color_g="0.227449" color_b="0.227449" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="238.691" t1="16.7638" t2="-156.475" s0="16.9271" s1="4.969" s2="14.4433" q0="0" q1="0.166197" q2="0" q3="0.986093" id="66" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="212.982" t1="26.0406" t2="-126.661" s0="47.898" s1="14.0733" s2="26.2569" q0="0" q1="0" q2="0" q3="1" id="68" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.141176" color_g="0.141175" color_b="0.141175" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="243.034" t1="20.9104" t2="-151.34" s0="32.2646" s1="9.4799" s2="17.6869" q0="0" q1="0.63137" q2="0" q3="0.775482" id="70" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.141176" color_g="0.141175" color_b="0.141175" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="238.03" t1="18.6191" t2="-150.961" s0="3.10994" s1="4.05953" s2="3.27882" q0="0" q1="0" q2="0" q3="1" id="73" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.301961" color_g="0.301958" color_b="0.301958" overbright="0">
+            <parameters/>
+        </Decal>
+    </Group>
+    <EnvObject t0="227.197" t1="26.2265" t2="-127.727" s0="0.570627" s1="2.48863" s2="5.18063" q0="0.134326" q1="0.826443" q2="-0.034501" q3="0.545672" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="230.183" t1="18.1881" t2="-185.352" s0="0.620459" s1="0.620459" s2="0.620459" q0="0.162538" q1="-0.769051" q2="0.0595688" q3="0.615299" id="139" color_r="1" color_g="0.612501" color_b="0.362501" overbright="0.849667" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="242.858" t1="22.5212" t2="-141.851" s0="0.462613" s1="2.48863" s2="4.44968" q0="0.132943" q1="0.950092" q2="-0.0264306" q3="0.280985" id="166" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="246.315" t1="20.6324" t2="-150.328" s0="0.462624" s1="2.48863" s2="4.96378" q0="0.138239" q1="0.980685" q2="-0.027074" q3="0.135698" id="210" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="241.796" t1="16.9475" t2="-173.383" s0="0.321016" s1="2.48863" s2="4.77283" q0="-0.0920318" q1="-0.961149" q2="0.0226892" q3="0.259245" id="236" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="235.695" t1="16.7315" t2="-181.35" s0="0.321018" s1="2.31004" s2="4.77283" q0="-0.083606" q1="-0.922092" q2="0.0390921" q3="0.375803" id="237" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="227.614" t1="18.1343" t2="-141.589" s0="0.607899" s1="1.18266" s2="4.31575" q0="-0.00203406" q1="-0.449738" q2="-0.0248237" q3="0.892813" id="238" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="218.091" t1="18.9984" t2="-138.428" s0="0.42674" s1="1.73104" s2="5.06086" q0="0.00456117" q1="-0.711093" q2="-0.0110203" q3="0.702997" id="239" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="207.789" t1="19.7424" t2="-139.216" s0="0.44228" s1="2.03865" s2="5.2042" q0="0.0132706" q1="-0.766493" q2="-0.0014503" q3="0.642114" id="240" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="198.656" t1="19.4679" t2="-143.697" s0="0.437116" s1="1.85504" s2="5.46537" q0="0.0199968" q1="-0.923639" q2="0.0133963" q3="0.382507" id="241" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="193.84" t1="18.378" t2="-150.401" s0="0.433038" s1="1.25835" s2="2.4546" q0="0.0273192" q1="-0.986809" q2="0.038496" q3="0.154854" id="242" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="230.77" t1="14.6905" t2="-174.72" s0="1" s1="1" s2="1" q0="0" q1="-0.897274" q2="0" q3="0.441474" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_BlockStack1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="238.552" t1="15.4284" t2="-155.293" s0="1" s1="1" s2="1" q0="0" q1="-0.195221" q2="0" q3="0.980759" id="278" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_BlockStack1.xml">
+        <parameters/>
+    </EnvObject>
+    <ItemObject t0="208.752" t1="14.7804" t2="-238.152" s0="1" s1="1" s2="1" q0="0.0537768" q1="0.575583" q2="0.00659686" q3="0.815947" id="281" type_file="Data/Prototypes/Weapons/FlintKnife_Item.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <EnvObject t0="219.006" t1="14.5527" t2="-157.909" s0="1" s1="1" s2="1" q0="0" q1="0.169709" q2="0" q3="0.985494" id="390" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_BlockStack1.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="226.87" t1="19.8211" t2="-174.612" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="436" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="1007" offmesh_connection_id="1025" poly_area="8"/>
+            <NavMeshConnection other_object_id="962" offmesh_connection_id="1011" poly_area="10"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="198.655" t1="14.9089" t2="-156.236" s0="1" s1="1" s2="1" q0="0" q1="0.893816" q2="0" q3="0.448434" id="437" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_BlockStack1.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="207.431" t1="16.9274" t2="-173.496" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="441" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="638" offmesh_connection_id="1007" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <ActorObject name="Turner" t0="208.794" t1="14.2573" t2="-239.251" s0="1" s1="1" s2="1" q0="0.0280805" q1="0.0653527" q2="-0.00370818" q3="0.99746" id="449" type_file="Data/Objects/IGF_Characters/pale_turner_actor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="2"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="30"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="4"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="Turner, Jack, Clover, Skipper, Sarah, April"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="281" type="1" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.360784" green="0.298039" blue="0.211765"/>
+            <Color label="Ropes" channel="1" red="0.0901961" green="0.0784314" blue="0.0627451"/>
+            <Color label="Pants" channel="2" red="0.145098" green="0.145098" blue="0.145098"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <NavmeshConnectionObject t0="207.073" t1="16.7768" t2="-153.503" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="458" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="640" offmesh_connection_id="1009" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="232.251" t1="19.534" t2="-186.525" s0="0.800665" s1="0.800665" s2="0.800665" q0="-0.0976611" q1="-0.169546" q2="-0.0120401" q3="0.980597" id="467" color_r="1" color_g="0.612501" color_b="0.362501" overbright="0.849667" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="227.792" t1="21.3459" t2="-140.264" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="636" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="642" offmesh_connection_id="1010" poly_area="10"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="202.851" t1="20.1078" t2="-171.926" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="638" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="441" offmesh_connection_id="1007" poly_area="8"/>
+            <NavMeshConnection other_object_id="966" offmesh_connection_id="1014" poly_area="10"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="203.304" t1="19.975" t2="-155.456" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="640" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="458" offmesh_connection_id="1009" poly_area="8"/>
+            <NavMeshConnection other_object_id="33" offmesh_connection_id="1008" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="220.603" t1="19.8076" t2="-154.832" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="642" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="636" offmesh_connection_id="1010" poly_area="10"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <LightProbeObject t0="209.962" t1="24.5655" t2="-131.518" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="808" gicoeff00="0" gicoeff01="0" gicoeff02="0" gicoeff03="0" gicoeff04="0" gicoeff05="0" gicoeff06="0" gicoeff07="0" gicoeff08="0" gicoeff09="0" gicoeff10="0" gicoeff11="0" gicoeff12="0" gicoeff13="0" gicoeff14="0" gicoeff15="0" gicoeff16="0" gicoeff17="0">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <PathPointObject t0="237.506" t1="17.9363" t2="-176.273" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="828" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="829"/>
+            <Connection id="863"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="229.668" t1="17.8253" t2="-182.359" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="829" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="842"/>
+            <Connection id="828"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="195.383" t1="17.2147" t2="-165.636" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="842" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="843"/>
+            <Connection id="829"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="188.992" t1="18.6911" t2="-174.322" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="843" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="860"/>
+            <Connection id="842"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="201.245" t1="18.0666" t2="-180.674" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="860" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="861"/>
+            <Connection id="843"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="212.267" t1="16.9434" t2="-179.098" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="861" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="862"/>
+            <Connection id="860"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="224.46" t1="16.5083" t2="-170.161" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="862" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="863"/>
+            <Connection id="861"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="234.566" t1="16.9824" t2="-166.257" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="863" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="828"/>
+            <Connection id="862"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="212.156" t1="17.3373" t2="-148.003" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="864" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="865"/>
+            <Connection id="867"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="205.589" t1="16.8144" t2="-162.635" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="865" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="866"/>
+            <Connection id="864"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="226.175" t1="16.3971" t2="-167.167" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="866" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="867"/>
+            <Connection id="865"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="230.271" t1="17.0225" t2="-151.333" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="867" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="864"/>
+            <Connection id="866"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="220.677" t1="23.2464" t2="-133.2" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="868" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="869"/>
+            <Connection id="870"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="236.745" t1="19.6703" t2="-144.953" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="869" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="873"/>
+            <Connection id="868"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="197.558" t1="22.8745" t2="-137.836" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="870" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="868"/>
+            <Connection id="871"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="187.506" t1="20.0744" t2="-153.167" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="871" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="870"/>
+            <Connection id="872"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="194.743" t1="17.3194" t2="-166.971" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="872" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="871"/>
+            <Connection id="873"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="210.451" t1="16.4531" t2="-154.054" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="873" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="872"/>
+            <Connection id="869"/>
+        </Connections>
+    </PathPointObject>
+    <ActorObject t0="204.951" t1="16.5137" t2="-186.961" s0="1" s1="1" s2="1" q0="0" q1="-0.988966" q2="0" q3="0.148143" id="874" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.1"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="30"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="1"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.0509804" green="0.0509804" blue="0.0509804"/>
+            <Color label="Pants" channel="1" red="0.156863" green="0.109804" blue="0.0784314"/>
+            <Color label="Shirt" channel="2" red="0.266667" green="0.266667" blue="0.266667"/>
+            <Color label="Leather" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="221.218" t1="16.5143" t2="-188.682" s0="1" s1="1" s2="1" q0="0" q1="-0.943938" q2="0" q3="0.330123" id="875" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.1"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="30"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="1"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.623529" green="0.607843" blue="0.529412"/>
+            <Color label="Pants" channel="1" red="0.207843" green="0.0431373" blue="0.0431373"/>
+            <Color label="Shirt" channel="2" red="0.317647" green="0.317647" blue="0.317647"/>
+            <Color label="Leather" channel="3" red="0" green="0" blue="0"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="201.025" t1="17.2998" t2="-180.426" s0="1" s1="1" s2="1" q0="0" q1="-0.403943" q2="0" q3="0.914784" id="876" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="30"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="1"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="860"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.313726" green="0.168627" blue="0.0588235"/>
+            <Color label="Pants" channel="1" red="0.121569" green="0.184314" blue="0.105882"/>
+            <Color label="Shirt" channel="2" red="0.462745" green="0.203922" blue="0.0941176"/>
+            <Color label="Leather" channel="3" red="0" green="0" blue="0"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="212.181" t1="16.4029" t2="-148.158" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="877" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="30"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="1"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="864"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.0705882" green="0.0705882" blue="0.0705882"/>
+            <Color label="Pants" channel="1" red="0.0431373" green="0.101961" blue="0.0431373"/>
+            <Color label="Shirt" channel="2" red="0.247059" green="0.247059" blue="0.247059"/>
+            <Color label="Leather" channel="3" red="0" green="0" blue="0"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="205.553" t1="23.0898" t2="-135.295" s0="1" s1="1" s2="1" q0="0" q1="0.939719" q2="0" q3="0.341948" id="878" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="30"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="880" type="0" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.223529" green="0.129412" blue="0.0784314"/>
+            <Color label="Pants" channel="1" red="0.121569" green="0.0313726" blue="0.0313726"/>
+            <Color label="Shirt" channel="2" red="0.0392157" green="0.0392157" blue="0.0392157"/>
+            <Color label="Leather" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="220.744" t1="23.28" t2="-133.135" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="879" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="30"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="1"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="868"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="0.945098" blue="0.854902"/>
+            <Color label="Pants" channel="1" red="0.180392" green="0.141176" blue="0.12549"/>
+            <Color label="Shirt" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Leather" channel="3" red="0" green="0" blue="0"/>
+        </Palette>
+    </ActorObject>
+    <ItemObject t0="206.314" t1="23.4346" t2="-134.519" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="880" type_file="Data/Items/gabenife.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <NavmeshConnectionObject t0="221.583" t1="19.6904" t2="-160.988" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="962" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="963" offmesh_connection_id="1012" poly_area="8"/>
+            <NavMeshConnection other_object_id="436" offmesh_connection_id="1011" poly_area="10"/>
+            <NavMeshConnection other_object_id="986" offmesh_connection_id="1022" poly_area="10"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="227.328" t1="16.2426" t2="-164.25" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="963" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="962" offmesh_connection_id="1012" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="217.009" t1="19.6807" t2="-153.687" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="964" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="965" offmesh_connection_id="1013" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="218.771" t1="16.1331" t2="-146.374" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="965" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="964" offmesh_connection_id="1013" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="214.658" t1="19.684" t2="-159.879" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="966" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="967" offmesh_connection_id="1015" poly_area="8"/>
+            <NavMeshConnection other_object_id="638" offmesh_connection_id="1014" poly_area="10"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="209.908" t1="16.7837" t2="-161.459" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="967" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="966" offmesh_connection_id="1015" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="199.534" t1="20.0367" t2="-160.98" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="968" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="969" offmesh_connection_id="1016" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="201.555" t1="16.8606" t2="-165.019" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="969" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="968" offmesh_connection_id="1016" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="198.329" t1="19.9662" t2="-152.281" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="972" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="973" offmesh_connection_id="1017" poly_area="8"/>
+            <NavMeshConnection other_object_id="1030" offmesh_connection_id="1026" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="201.267" t1="17.6009" t2="-147.586" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="973" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="972" offmesh_connection_id="1017" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="234.619" t1="20.4641" t2="-153.538" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="981" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="982" offmesh_connection_id="1019" poly_area="8"/>
+            <NavMeshConnection other_object_id="35" offmesh_connection_id="1018" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="229.64" t1="17.4302" t2="-149.654" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="982" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="981" offmesh_connection_id="1019" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="233.414" t1="16.7911" t2="-163.394" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="985" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="986" offmesh_connection_id="1023" poly_area="8"/>
+            <NavMeshConnection other_object_id="36" offmesh_connection_id="1020" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="236.753" t1="20.4593" t2="-159.035" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="986" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="985" offmesh_connection_id="1023" poly_area="8"/>
+            <NavMeshConnection other_object_id="36" offmesh_connection_id="1021" poly_area="10"/>
+            <NavMeshConnection other_object_id="962" offmesh_connection_id="1022" poly_area="10"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="230.126" t1="19.7265" t2="-178.847" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="998" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="999" offmesh_connection_id="1024" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="227.579" t1="16.9341" t2="-184.155" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="999" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="998" offmesh_connection_id="1024" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="222.116" t1="16.5177" t2="-171.712" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1007" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="436" offmesh_connection_id="1025" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="200.194" t1="22.46" t2="-140.868" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1030" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="972" offmesh_connection_id="1026" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="189.938" t1="20.6643" t2="-151.767" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1031" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="1032" offmesh_connection_id="1027" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="196.125" t1="20.0978" t2="-154.962" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1032" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="1031" offmesh_connection_id="1027" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="198.762" t1="15.1356" t2="-173.356" s0="1" s1="1" s2="1" q0="0" q1="-0.97841" q2="0" q3="0.206673" id="1085" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_BlockStack1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="222.823" t1="17.0266" t2="-160.569" s0="0.708204" s1="0.708204" s2="0.708204" q0="-0.106124" q1="-0.68987" q2="0.00441593" q3="0.716099" id="1209" color_r="1" color_g="0.612501" color_b="0.362501" overbright="0.849667" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="203.505" t1="16.9538" t2="-157.31" s0="0.708204" s1="0.708204" s2="0.708204" q0="-0.096169" q1="-0.0688808" q2="0.0266467" q3="0.992621" id="1210" color_r="1" color_g="0.612501" color_b="0.362501" overbright="0.849667" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="Ambient Shadow" path="Data/Objects/default_env_blob_shadow_decal.xml" thumbnail_path="Data/UI/spawner/thumbs/Lighting/light_placeholder.png"/>
+</RecentItems>

@@ -1,0 +1,7 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 -39.4087 -4.00487 102.211 -80
+set_cam -40.0043 -2.9937 100.983 -15.43 -172.12 0 90
+say 1 "Turner" "Now we can sail back to where the slavers came from."
+send_global_message "levelwin"

@@ -1,0 +1,18 @@
+#name "NLG-B"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 0 8
+set_character_pos 1 93.2651 -44.1739 155.678 -27
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir 94.4705 -43.5466 156.329 1"
+send_character_message 1 "set_head_target 94.5854 -42.7011 156.362 1"
+set_cam 90.6771 -43.8785 151.387 0 -145.53 0 61.6625
+send_level_message "set_camera_dof 0 0 0 0.3 9 2"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 94.5854 -42.7011 156.362 0"
+set_character_pos 1 93.2651 -44.4722 155.678 -27
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Nous allons voir ce que c’est..."
+send_global_message "levelwin b"

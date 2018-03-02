@@ -1,0 +1,59 @@
+#name "Turner"
+#participants 3
+set_character_pos 2 117.552 -54.7874 274.202 90
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 2 "set_head_target 118.452 -53.4454 266.549 1"
+set_character_pos 1 118.8 -54.835 274.172 128
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_torso_target 118.296 -54.4132 273.585 1"
+send_character_message 1 "set_head_target 117.482 -54.0574 273.911 1"
+set_cam 119.907 -54.1723 273.028 0 124.06 0 35.6175
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 9
+say 1 "Amos" "...[wait 0.3]Hé, [wait 0.3]Reed. [wait 0.5]Ce que l’enfer est arrivé ici ?"
+send_character_message 2 "set_head_target 118.694 -54.0469 273.958 1"
+say 2 "Reed" "Quelqu'un a profané la tombe de Turner... [wait 0.3]et aucun des autres tombes ont été touchés."
+set_cam 117.078 -54.787 273.798 10.41 -10.79 0 33.0494
+send_character_message 1 "set_head_target 118.622 -53.4503 266.61 1"
+send_character_message 2 "set_head_target 118.425 -53.4378 266.578 1"
+say 1 "Amos" "Une tête coupée... [wait 0.3]On dirait le résultat d’une attaque de bandit ailleurs."
+set_cam 116.213 -54.0643 273.487 -0.05 -108.57 -0.4 22.6847
+say 2 "Reed" "J’ai été assis ici pendant un certain temps. [wait 0.5]Vous vous demandez ou non de le prendre vers le bas."
+send_character_message 2 "set_head_target 119.412 -54.1437 267.952 1"
+send_character_message 1 "set_head_target 117.661 -54.0149 274.058 1"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+say 1 "Amos" "... pourquoi pas ? [wait 0.5]C’est une tête coupée."
+send_character_message 2 "set_torso_target 117.642 -54.7526 273.293 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target 118.701 -54.05 274.137 1"
+say 2 "Reed" "Bien sûr vous ne savez pas pourquoi. Vous débutez en Lugaru."
+set_cam 121.131 -53.4741 268.141 0.07 68.11 0.4 40.0231
+say 2 "Reed" "Il s’agit de la Turner, [wait 0.3]Amos. [wait 0.5]Celui qui a conduit le génocide contre les loups."
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_cam 119.622 -54.177 272.672 -0.35 138.56 0.2 40.0231
+say 2 "Reed" "Un peu plus quelques jours, [wait 0.3]l’île entière est passée de craignant des attaques de loup et de la mort tous les jours, [wait 0.3]et à la fin..."
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 0"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 117.721 -53.8705 274.078 1"
+say 2 "Reed" "Il est rare de nos jours de voir même un morceau de fourrure de loup."
+send_character_message 1 "set_head_target 117.726 -54.0996 274.148 1"
+send_character_message 1 "set_torso_target 118.252 -54.4132 273.794 1"
+set_cam 116.727 -54.1371 273.127 -0.18 -128.21 -0.36 45.9033
+say 1 "Amos" "Loups étaient terribles-- [wait 0.3]On dirait que c’était un héros."
+send_character_message 2 "set_head_target 117.765 -54.2659 273.28 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 2 "Reed" "Vous Cinderbreathe ne comprendraient jamais combien de sang qui a provoqué un homme. [wait 0.5]Chaque étape, qu'il a pris, mort suivie."
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Reed" "Ce n’est quelques loups- [wait 0.3]d’innombrables lapins qui se trouvait sur son chemin tous assassinés."
+send_character_message 1 "set_head_target 118.527 -53.5143 266.432 1"
+send_character_message 2 "set_head_target 118.476 -53.4275 266.405 1"
+set_cam 117.989 -54.2868 276.362 0.4 -3.13 0.06 45.9033
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 0"
+say 2 "Reed" "Il ne devrait pas être honoré. [wait 0.5]Ses résultats nous a sauvé des Lugarians, mais ses méthodes..."
+send_character_message 1 "set_torso_target 118.252 -54.4132 273.794 0"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 1 "Amos" "...[wait 0.3]Je ne sais pas. [wait 0.5]Je voudrais le nettoyer si j’étais vous. [wait 0.5]Puanteur établira dans très bientôt."

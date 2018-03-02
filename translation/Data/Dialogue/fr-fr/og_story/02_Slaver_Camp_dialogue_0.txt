@@ -1,0 +1,17 @@
+#name "Injured"
+#participants 2
+set_dialogue_color 2 0.2 1 1
+set_dialogue_voice 2 18
+send_character_message 2 "set_head_target 19.7842 -15.7279 -98.6462 1"
+send_character_message 1 "set_head_target 18.8419 -16.0325 -97.6447 1"
+set_character_pos 1 19.5348 -16.1039 -98.6945 -123
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+set_cam 20.7291 -15.9434 -97.7233 -13.9 78.93 -0.73 90
+send_level_message "set_camera_dof 0.3 1.1 0.1 0.3 1.5 0.5"
+set_character_pos 2 18.8729 -16.1476 -97.1644 55
+send_character_message 2 "set_animation \"Data/Animations/r_sit_injuredneck.anm\""
+say 2 "Thunder" "S’il vous plaît aider mes amis--la voie--"
+send_character_message 1 "set_head_target 19.4608 -16.0325 -97.6447 1"
+say 1 "Turner" "Je ne peux pas juste vous laisser ici."
+send_character_message 2 "set_head_target 19.7842 -16.2576 -97.6444 1"
+say 2 "Thunder" "Je serai OK. Juste... fatigué. Allez !"

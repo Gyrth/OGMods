@@ -1,0 +1,16 @@
+#name "Note-Crete"
+#participants 2
+set_character_pos 1 27.5341 15.2194 -123.091 -132
+send_character_message 1 "set_head_target 26.982 15.7246 -122.51 1"
+set_cam 27.1565 15.8698 -124.326 0 -175.08 0 48.9875
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "Une analyse sur les dieux de l’esprit du monde-- [wait 0.3]en supposant qu’ils sont réels."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 26.4049 15.8842 -123.25 0 -110.36 0 33.3467
+say 2 "Note" "Nos annales anciennes nous ont indiqué que la Crète (blancs et noirs) est créée par excès d’énergie dégagée par les puissances des esprits (y compris nos propres esprits aîné) car ils tordent la même terre sous nos pieds dans des formes plus souhaitables, ou affectent la multitude de sentients qui peuplent le continent de Preuwyn."
+say 2 "Note" "Le plus d’énergie que l'on peut observer dans une zone donnée témoigne directement d’une abondance d’énergie excédentaire qui a été porté vers une tâche spirituelle."
+say 2 "Note" "Pour cette raison, il est raisonnable pour nous d’assumer que la Crète plus, nous avons trouvé dans une région, plus nous nous trouvons au cimetière de l’aîné Spirits - c'est-à-dire, la domination coloniale de la Therium."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Extrait d’Observances des mauvais esprits et leurs diverses constructions, première édition, rédigé par Herumphal Mandru, illuminé par Otto Vendran."

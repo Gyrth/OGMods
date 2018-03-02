@@ -1,0 +1,19 @@
+#name "FL-B"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -76.8326 49.8335 75.6075 39
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -75.7394 51.2679 74.7034 1"
+send_character_message 1 "set_head_target -75.8603 51.6833 74.7791 0.989842"
+set_cam -82.6709 50.3764 77.4756 0 -69.42 0 55.8616
+send_level_message "set_camera_dof 0 0 0 0.3 10 2"
+say 1 "Ghost" "..."
+send_character_message 1 "set_torso_target -75.9065 50.2157 75.7575 0"
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch_lethal.anm\""
+set_character_pos 1 -76.8326 49.663 75.6075 39
+send_character_message 1 "set_head_target -75.9501 50.6379 74.834 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Temps de voir où ce sentier me mènera."
+send_global_message "levelwin b"

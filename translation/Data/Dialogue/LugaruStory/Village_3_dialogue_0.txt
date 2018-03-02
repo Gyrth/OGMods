@@ -1,0 +1,27 @@
+#name "Aftermath"
+#participants 1
+set_character_pos 1 132.381 -55.2444 294.917 84
+send_character_message 1 "set_eye_dir 130.91 -55.6633 291.068 1"
+send_character_message 1 "set_torso_target 130.038 -55.064 292.076 0"
+send_character_message 1 "set_head_target 130.822 -55.2053 291.883 0"
+set_cam 132.608 -54.1965 297.39 -8.17 -0.73 0.09 27.4975
+say 1 "Turner" "What have I done?"
+send_character_message 1 "set_head_target 130.822 -55.2053 291.883 0"
+send_character_message 1 "set_torso_target 130.038 -55.064 292.076 0"
+send_character_message 1 "set_eye_dir 133.042 -55.6381 286.839 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+set_cam 129.413 -55.0304 287.372 -6.69 -88.93 -0.58 30.4509
+set_character_pos 1 133.292 -55.2107 287.814 130
+say 1 "Turner" "Please, no."
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_head_target 132.228 -55.4964 279.992 1"
+send_character_message 1 "set_torso_target 131.46 -53.7495 281.56 0"
+send_character_message 1 "set_eye_dir 131.872 -55.4895 280.135 1"
+set_cam 131.035 -55.1511 277.692 -6.62 -149.75 5.56 30.4509
+set_character_pos 1 132.351 -55.2107 280.495 130
+say 1 "Turner" "Rose..."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_kneeling_low.anm\""
+send_character_message 1 "set_head_target 134.239 -55.831 280.031 1"
+set_character_pos 1 134.506 -55.3368 280.822 99
+set_cam 136.295 -54.9594 282.238 -14.5 34.06 -4.44 35.9626
+say 1 "Turner" "April..."

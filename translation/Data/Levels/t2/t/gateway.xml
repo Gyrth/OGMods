@@ -1,0 +1,270 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name/>
+<Description/>
+<Shader>post</Shader>
+<OutOfDate NavMesh="true"/>
+<AmbientSounds/>
+<Script>Data/Scripts/levelscripts/bancients.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_alert, no_injuries"/>
+    <parameter name="Fog amount" type="string" val="1"/>
+    <parameter name="HDR Black point" type="string" val="0.005"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="0"/>
+    <parameter name="HDR White point" type="string" val="1.01"/>
+    <parameter name="Level Boundaries" type="string" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Sky Brightness" type="string" val="1"/>
+    <parameter name="Sky Rotation" type="string" val="143"/>
+    <parameter name="Sky Tint" type="string" val="255, 255, 255"/>
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/bright_dusk.tga</DomeTexture>
+    <SunAngularRad>0.0983086</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.790008" r1="0.6025" r2="0.113494"/>
+</Sky>
+<ActorObjects>
+    <ActorObject t0="-43.179" t1="38.8962" t2="144.32" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="0" type_file="Data\Objects\therium\IGF_Characters\ghostspawn.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="player, Ghost"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <EnvObject t0="-42.7123" t1="36.1455" t2="126.375" s0="1.60028" s1="0.468342" s2="3.171" q0="0" q1="0" q2="0" q3="1" id="1" color_r="0.227451" color_g="0.227451" color_b="0.227451" overbright="0" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-42.9803" t1="35.9298" t2="111.989" s0="2.02081" s1="1" s2="3.30549" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <CameraObject t0="-42.801" t1="42.0295" t2="143.798" s0="1" s1="1" s2="1" q0="0.139657" q1="-0.691283" q2="0.138865" q3="0.695227" id="3">
+        <parameters/>
+    </CameraObject>
+    <EnvObject t0="-43.1369" t1="36.0174" t2="107.512" s0="1.16523" s1="1" s2="1.0533" q0="0" q1="0" q2="0" q3="1" id="4" color_r="0.356863" color_g="0.356863" color_b="0.356863" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.5358" t1="39.5359" t2="108.24" s0="2.02081" s1="1" s2="3.30549" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="-49.3959" t1="41.2685" t2="140.662" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="9" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/t2/t/gateway_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="NLG"/>
+            <parameter name="NumParticipants" type="int" val="3"/>
+            <parameter name="obj_1" type="int" val="10"/>
+            <parameter name="obj_2" type="int" val="12"/>
+            <parameter name="obj_3" type="int" val="13"/>
+        </parameters>
+        <Connections>
+            <Connection id="9"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-49.0459" t1="41.9685" t2="140.662" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="10" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="-42.9803" t1="35.9298" t2="139.542" s0="2.02081" s1="1" s2="3.30549" q0="0" q1="0" q2="0" q3="1" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="-49.3959" t1="41.9685" t2="140.662" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="12" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-49.7459" t1="41.9685" t2="140.662" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="13" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="-43.1071" t1="37.8511" t2="107.47" s0="0.52227" s1="0.264736" s2="0.520702" q0="0" q1="0.707107" q2="0" q3="0.707107" id="14" color_r="0.964706" color_g="0.129412" color_b="0.129412" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="-43.1931" t1="39.837" t2="134.536" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="15" type_file="Data\Objects\therium\Hotspots\gateway_dialogue.xml">
+        <parameters>
+            <parameter name="Lethal Dialogue" type="string" val="FL"/>
+            <parameter name="Medium Dialogue" type="string" val="ML"/>
+            <parameter name="Non Lethal Dialogue" type="string" val="NL"/>
+            <parameter name="Non Lethal Ghost Dialogue" type="string" val="NLG"/>
+            <parameter name="Play If No Combat" type="int" val="1"/>
+            <parameter name="Play Once" type="int" val="0"/>
+            <parameter name="Play Only If Dead" type="int" val="0"/>
+            <parameter name="Play for NPCs" type="int" val="0"/>
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="-43.1369" t1="36.0174" t2="116.434" s0="1.16523" s1="1" s2="1.0533" q0="0" q1="1" q2="0" q3="0" id="16" color_r="0.356863" color_g="0.356863" color_b="0.356863" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="-49.431" t1="41.1923" t2="142.551" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="17" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/t2/t/gateway_dialogue_1.txt"/>
+            <parameter name="DisplayName" type="string" val="NL"/>
+            <parameter name="NumParticipants" type="int" val="2"/>
+            <parameter name="obj_1" type="int" val="18"/>
+            <parameter name="obj_2" type="int" val="19"/>
+        </parameters>
+        <Connections>
+            <Connection id="17"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-49.256" t1="41.8923" t2="142.551" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="18" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-49.606" t1="41.8923" t2="142.551" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="19" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-49.6139" t1="41.3598" t2="146.432" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="20" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/t2/t/gateway_dialogue_2.txt"/>
+            <parameter name="DisplayName" type="string" val="FL"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="21"/>
+        </parameters>
+        <Connections>
+            <Connection id="20"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-49.6139" t1="42.0598" t2="146.432" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="21" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-49.5289" t1="41.3349" t2="144.549" s0="1" s1="1" s2="1" q0="0.0148804" q1="0.0674147" q2="0.0352923" q3="0.99699" id="22" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/t2/t/gateway_dialogue_3.txt"/>
+            <parameter name="DisplayName" type="string" val="ML"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="24"/>
+        </parameters>
+        <Connections>
+            <Connection id="22"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="-3.61237" t1="27.5324" t2="126.194" s0="3.92073" s1="2.33959" s2="3.18653" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="23" color_r="0.0823529" color_g="0.0823529" color_b="0.0823529" overbright="0" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="-49.5768" t1="42.0329" t2="144.573" s0="0.3" s1="0.3" s2="0.3" q0="0.0148804" q1="0.0674147" q2="0.0352923" q3="0.99699" id="24" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="-49.4477" t1="39.4913" t2="146.61" s0="0.454954" s1="0.454954" s2="0.454954" q0="0" q1="0" q2="0" q3="1" id="25" color_r="1" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-49.4477" t1="39.4913" t2="144.61" s0="0.454954" s1="0.454954" s2="0.454954" q0="0" q1="0.707107" q2="0" q3="0.707107" id="26" color_r="1" color_g="0.611765" color_b="0" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-49.4477" t1="39.4913" t2="142.61" s0="0.454954" s1="0.454954" s2="0.454954" q0="-1" q1="0" q2="0" q3="0" id="27" color_r="0" color_g="1" color_b="0.0470588" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-49.4477" t1="39.4913" t2="140.61" s0="0.454954" s1="0.454954" s2="0.454954" q0="0" q1="1" q2="0" q3="0" id="28" color_r="0" color_g="0.211765" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="-36.0473" t1="38.744" t2="147.42" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="29" type_file="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="100"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="0.5058"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="helpme"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <ActorObject t0="-25.6872" t1="38.2383" t2="146.045" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="33" type_file="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="100"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="0.1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="helpme"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <EnvObject t0="-49.4503" t1="39.5364" t2="143.611" s0="0.4365" s1="0.303303" s2="1.07595" q0="0" q1="0" q2="0" q3="1" id="37" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-43.1991" t1="37.8513" t2="134.539" s0="0.52227" s1="0.264736" s2="0.520702" q0="0" q1="0.707107" q2="0" q3="0.707107" id="38" color_r="0.964706" color_g="0.129412" color_b="0.129412" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+</ActorObjects>

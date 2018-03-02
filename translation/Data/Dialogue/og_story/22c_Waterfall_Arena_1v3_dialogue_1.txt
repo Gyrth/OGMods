@@ -1,0 +1,8 @@
+#name "Win"
+#participants 1
+set_character_pos 1 24.3082 94.5828 311.22 -86
+set_cam 24.7542 95.312 311.777 0 37.64 0 90
+say 1 "Turner" "Is that all you've got?"
+say 1 "Turner" "I want to taste cat's blood!"
+say 1 "Turner" "Is Jade afraid to face me?"
+send_global_message "levelwin"

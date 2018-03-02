@@ -1,0 +1,21 @@
+#name "Start"
+#participants 2
+
+set_character_pos 2 -5.61177 -2.17081 -1.06784 -83
+set_character_pos 1 -5.8571 -1.96458 0.523012 56
+set_cam -6.65451 -1.92824 -1.14836 16.14 -123.35 -0.94 90
+say 1 "Turner" "It's a trap!"
+send_level_message "make_all_aware"
+
+
+
+
+
+
+
+
+
+
+
+
+

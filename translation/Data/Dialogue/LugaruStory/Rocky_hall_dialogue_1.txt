@@ -1,0 +1,13 @@
+#name "Turner"
+#participants 1
+set_character_pos 1 -125.132 48.325 -6.03996 0
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handneck.anm\""
+send_character_message 1 "set_torso_target -122.191 48.937 -4.64188 0.252338"
+send_character_message 1 "set_head_target -123.125 49.0489 -4.66613 1"
+set_cam -122.75 48.9883 -7.70985 -0.96 130.52 2.97 27.194
+say 1 "Turner" "Why would Willow hire raiders to kill her friends? I need answers."
+send_character_message 1 "set_torso_target -122.191 48.937 -4.64188 1"
+send_character_message 1 "set_head_target -121.934 51.1295 -5.72394 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -126.735 48.4915 -7.08258 13.31 -104.43 -2.43 70.6179
+say 1 "Turner" "Someone at the Rocky Hall court must know where she went."

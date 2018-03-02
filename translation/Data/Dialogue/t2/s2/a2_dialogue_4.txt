@@ -1,0 +1,19 @@
+#name "Note-Execution"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -111.626 18.0616 168.124 -158
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target -112.617 17.7268 168.456 1"
+set_cam -109.364 18.2246 168.52 -4.29 87.67 0 36.0807
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "A log for why someone's being executed. [wait 0.5]They must be nearby."
+send_character_message 1 "set_head_target -112.563 17.7268 168.456 1"
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam -112.806 18.2129 169.046 0.02 -50.75 0.02 36.0807
+say 2 "Note" "This man has been found guilty of multiple crimes under the Cinderbreathe Empry's law. [wait 0.5]Of the crimes he has committed, [wait 0.3]he has:"
+say 2 "Note" "Harboured an enemy of the Empire. [wait 0.5]This includes an Arliss allied cat wanted for trading narcotics."
+say 2 "Note" "Conspiracy with foreign powers. [wait 0.5]This includes the Arlissian Collective."
+say 2 "Note" "Assaulted a respected member of the Cinderbreathe guard force."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "The sum of his crimes are punishable by death. [wait 0.5]Follow order under the gaze of Cinderbreathe officials."

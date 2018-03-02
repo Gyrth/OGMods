@@ -1,0 +1,23 @@
+#name "Start"
+#participants 3
+set_character_pos 2 4.44411 -1.76967 0.832846 -176
+set_character_pos 1 0.0412091 -1.82671 1.14381 0
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Bonjour, vous les lagomorphes chanceux."
+say 3 "Cat" "Pourquoi dois-je dire chanceux ?"
+say 3 "Cat" "Parce qu’un d'entre vous arrive à vivre !"
+say 3 "Cat" "Bien sûr, il ne sera pas autant de chance pour l’autre."
+set_cam 0.539544 -1.15159 1.84516 0 32.36 0 90
+say 1 "Turner" "Qu'est-ce que c est ?"
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Il s’agit d’une audition."
+say 3 "Cat" "Êtes-vous assez fort pour survivre ?"
+set_cam 3.48666 -1.60474 1.88456 7.68 -33.21 0 90
+say 2 "Rabbit" "Je suis."
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Prouve-le. Tuer votre camarade curieux."
+set_cam 0.539544 -1.15159 1.84516 0 32.36 0 90
+say 1 "Turner" "Nous n’avons pas à lutter. Nous pouvons travailler ensemble--"
+set_cam 3.48666 -1.60474 1.88456 7.68 -33.21 0 90
+say 2 "Rabbit" "La !"
+make_participants_aware

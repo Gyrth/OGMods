@@ -1,0 +1,20 @@
+#name "Note-Foxglove"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 14.9128 -0.192716 -158.15 -131
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 14.4493 -0.530116 -157.537 1"
+set_cam 15.5444 0.553472 -157.939 -41.45 98.4 -0.01 55.2369
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "A recent note. [wait 0.5]This must be an Empry spy."
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 15.0395 -0.014715 -156.779 -0.03 2.19 -0.18 40.1399
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 2 "Note" "Foxglove here."
+say 2 "Note" "The creatures are biologically rabbit, [wait 0.3]through and through, [wait 0.3]though their movements and mannerisms are nothing like we've seen."
+say 2 "Note" "At the time of writing, [wait 0.3]there has been no verbal or visible communication between any of these creatures, [wait 0.3]and yet every action they do seems to be coordinated more than the average Cinderbreathe or Arliss soldier."
+say 2 "Note" "At the time of writing, [wait 0.3]there has only been one recorded instance of these creatures being within proximity of a Reaper."
+say 2 "Note" "The Reaper, [wait 0.3]unlike their usual behaviour amongst Cinderbreathe soldiers, [wait 0.3]completely ignored the creatures."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Ghost" "[wait 0.3]The entry seems to be cut short..."

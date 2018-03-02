@@ -1,0 +1,18 @@
+#name "Note-Cicada"
+#participants 2
+set_character_pos 1 -40.0833 106.178 172.688 0
+send_character_message 1 "set_head_target -39.2955 106.554 172.737 1"
+set_cam -40.7468 106.734 173.762 0 -45.79 0 50.3116
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Une réponse à la lettre d’un membre de la garde..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -39.2995 106.833 173.504 0 33.49 0 32.4243
+say 2 "Note" "Une cigale ? [wait 0.5]Vraiment ? [wait 0.5]Survolés, [wait 0.3]dans Preuwyn ? J’ai ressembler à un idiot ?"
+say 2 "Note" "Es-tu venu vers le haut avec un pari avec vos amis, [wait 0.3]Essayez et composent la revendication plus ridicule possible et voir si je tombe pour elle ?"
+say 2 "Note" "Je sais que deux choses au sujet des cigales Ouran : [wait 0.3]D’une part, [wait 0.3]ils ne vont jamais en Preuwyn. [wait 0.5]Le froid va manger les vivants. [wait 0.3]Deux, [wait 0.3]ils sont très, [wait 0.3]très rarement et quand il n’est pas la saison des amours."
+say 2 "Note" "Cigales, [wait 0.3]Ouran inclus, [wait 0.3]seulement terrier tous les dix-sept ans, [wait 0.3]Lorsque la saison des amours est pleinement en vigueur. 672 n’est pas un accouplement saison an- [wait 0.3]même pas proche."
+say 2 "Note" "L’idée que vous avez vu une cigale Ouran vivant sans vos tympans bouleversante devrait vous donner loin, [wait 0.3]même si votre histoire est vrai."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Aller voler quelqu'un d’autre, [wait 0.3]vous les fruits."

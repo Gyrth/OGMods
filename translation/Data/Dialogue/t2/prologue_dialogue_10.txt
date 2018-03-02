@@ -1,0 +1,18 @@
+#name "Note-Transfer"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 20.3913 420.051 -110.579 -82
+send_character_message 1 "set_head_target 20.5423 420.633 -109.84 1"
+set_cam 18.3399 420.755 -110.735 0 -107.72 0 47.1376
+say 1 "Ghost" "A prison transfer log brought in by the guard."
+send_character_message 1 "set_head_target 20.5444 420.479 -109.808 1"
+set_cam 20.1248 420.737 -109.45 0 -23.8 0 47.1376
+set_character_pos 1 20.3913 420.092 -110.579 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "40th of Spurhelm, [wait 0.3]672. [wait 0.5]Subject has been detained and located in the colony grounds prison."
+say 2 "Note" "Former housing would be the Empry, [wait 0.3]although his appearance and demeanor wouldn't suggest it."
+say 2 "Note" "Subject is wearing a blue hoodie and light leather armour. [wait 0.5]Since his future cooperation is apparently necessary, [wait 0.3]a strip search is not needed."
+say 2 "Note" "His sister, [wait 0.3]Bijou has not been informed of his arrest. [wait 0.5]Prison conditions shouldn't be too unnerving to him, [wait 0.3]considering his background and life in the slums."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Scheduled meeting with his presence should be performed by sundown. [wait 0.5]At least two officials must be present. [wait 0.5]His involvement is important."

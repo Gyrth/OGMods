@@ -1,0 +1,18 @@
+#name "Note-Transfer"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 20.3913 420.051 -110.579 -82
+send_character_message 1 "set_head_target 20.5423 420.633 -109.84 1"
+set_cam 18.3399 420.755 -110.735 0 -107.72 0 47.1376
+say 1 "Ghost" "Un journal de transfert de la prison, apporté par la garde."
+send_character_message 1 "set_head_target 20.5444 420.479 -109.808 1"
+set_cam 20.1248 420.737 -109.45 0 -23.8 0 47.1376
+set_character_pos 1 20.3913 420.092 -110.579 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "40e de Spurhelm, [wait 0.3]672. [wait 0.5]Objet a été placé en détention et situé dans la prison de motifs de colonie."
+say 2 "Note" "Ancien logement serait le Empry, [wait 0.3]Bien que son apparence et le comportement ne dirais il."
+say 2 "Note" "Objet porte un chandail à capuchon bleu et armures de cuir clair. [wait 0.5]Étant donné que sa coopération future est apparemment nécessaire, [wait 0.3]une fouille à nu n’est pas nécessaire."
+say 2 "Note" "Sa sœur, [wait 0.3]Bijou n’a pas été informée de son arrestation. [wait 0.5]Conditions de détention ne devrait pas être trop énervant pour lui, [wait 0.3]compte tenu de ses antécédents et la vie dans les bidonvilles."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Une réunion prévue avec sa présence doit être effectuée au coucher du soleil. [wait 0.5]Au moins deux fonctionnaires doivent être présents. [wait 0.5]Son implication est importante."

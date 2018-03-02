@@ -1,0 +1,23 @@
+#name "Note-Cache"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -18.9745 -8.56669 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target -19.3971 -8.84294 155.245 1"
+set_cam -17.5156 -8.54594 155.832 0 78.14 0 48.294
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Remarque est détrempé de toute la pluie, [wait 0.3]mais je pense que je peux faire les mots."
+set_cam -19.9914 -8.35759 155.085 0 -121.86 0 41.4636
+set_character_pos 1 -18.9745 -8.51633 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+say 2 "Note" "Vous savez qui il est. [wait 0.5]Si c’est entre de mauvaises mains, [wait 0.3]Je le saurai. [wait 0.5]Si l’étape avant que vous pensez que cet ensemble est un bon vol."
+say 2 "Note" "Quoi qu’il en soit, [wait 0.3]D, [wait 0.3]C’est mon cadeau final. [wait 0.5]Vous m’avez dit maintes et maintes de rompre tous les liens après ce que vous avez fait, [wait 0.3]et j’ai travaillé mon cul pour y arriver."
+say 2 "Note" "Il semblait que tout le monde allait manquer de vous, [wait 0.3]mais j’étais certain de parler de certains sens en eux. [wait 0.5]Vous comprends mieux."
+say 2 "Note" "Et puisque nous ne pouvons pas trop parler en personne, [wait 0.3]Je n’ai pas été en mesure de vous dire cela, [wait 0.3]mais je vous suggère de que faire la même chose-- [wait 0.3]rompre tous les liens, [wait 0.3]Je veux dire."
+say 2 "Note" "C ne va pas vous pardonner tout temps bientôt pour tout ce que vous avez pris de lui, [wait 0.3]et aucune quantité de sommeil herbes ne peut changer cela."
+say 2 "Note" "Il est plus intelligent qu’il laisse [wait 0.3]et ce n’est pas trop habile d'entre vous ne pas revenir sur qui."
+say 2 "Note" "Et une fois F Découvre votre coeur pour une queue courte, [wait 0.3]il ne va pas être trop heureux, [wait 0.3]ou l’autre."
+say 2 "Note" "Si jamais vous le faire à Ouran, [wait 0.3]Je vous souhaite bonne chance. [wait 0.5]Personne ne vous pouvez y trouver. [wait 0.5]Pas même moi."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "Signé, [wait 0.3]T."

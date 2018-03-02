@@ -1,0 +1,11 @@
+set_character_pos 1 47.5054 3.98251 -128.469 -84
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 1 "set_torso_target 46.7659 4.94485 -126.125 1"
+send_character_message 1 "set_head_target 47.3088 5.68112 -125.792 1"
+set_cam 48.0567 4.52649 -129.319 7.22 170.33 1.91 72.2282
+#name "Red Shards Intro"
+#participants 1
+
+say 1 "Turner" "I should get to the top of some of these."
+set_cam 19.4237 85.4054 -82.0441 -26.93 170.35 -1.04 72.2282
+say 1 "Turner" "There might be something valuable."

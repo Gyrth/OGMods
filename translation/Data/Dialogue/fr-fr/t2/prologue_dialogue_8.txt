@@ -1,0 +1,70 @@
+#name "Returntocell-NL"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 15
+set_dialogue_voice 3 17
+set_dialogue_voice 4 9
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 1 "set_torso_target 10.4922 420.461 -119.288 1"
+send_character_message 1 "set_head_target 9.84983 420.911 -118.994 1"
+set_character_pos 1 11.1642 420.605 -119.362 -167
+set_cam 14.1824 420.962 -118.425 0 82.34 0 34.6164
+say 1 "You" "... Eh bien, [wait 0.3]maintenant qu’est fait."
+send_character_message 1 "set_head_target 9.80248 421.158 -118.726 1"
+send_character_message 1 "set_torso_target 10.5215 421.189 -119.244 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_2handneck.anm\""
+say 1 "You" "[wait 0.3]Temps de faire une sieste."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target 10.7911 421.186 -118.978 1"
+send_character_message 2 "set_torso_target 11.6053 420.961 -120.995 0"
+set_character_pos 2 12.0372 420.668 -119.833 -159
+send_character_message 3 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+send_character_message 3 "set_head_target 10.0976 420.968 -118.308 1"
+send_character_message 3 "set_torso_target 12.3277 420.874 -121.664 0"
+set_character_pos 3 12.0959 420.665 -118.122 174
+send_character_message 1 "set_head_target 9.68798 421.116 -118.14 1"
+send_character_message 1 "set_torso_target 10.5215 421.189 -119.244 0"
+set_character_pos 1 9.98173 421.205 -118.539 -167
+send_character_message 1 "set_animation \"Data/Animations/r_sleep.anm\""
+set_cam -3.99987 421.679 -139.699 0 22.21 0 34.6164
+say 1 "" "..."
+say 2 "???" "Hé."
+say 1 "???" "..."
+say 2 "???" "[wait 0.3]Amos !"
+send_character_message 1 "set_head_target 10.2906 420.764 -118.002 1"
+send_character_message 1 "set_torso_target 9.70859 420.716 -118.083 1"
+set_cam 8.65544 421.159 -118.243 0 -78.14 0 41.4479
+say 1 "You" "...[wait 0.3]?"
+send_character_message 3 "set_head_target 10.1642 421.037 -118.135 1"
+send_character_message 2 "set_head_target 10.4848 421.078 -118.578 1"
+send_character_message 1 "set_head_target 10.4816 421.017 -118.291 1"
+say 2 "???" "Commandant Ano veut vous voir."
+send_character_message 2 "set_torso_target 11.0605 420.848 -119.476 1"
+send_character_message 3 "set_head_target 10.9653 421.219 -118.624 1"
+send_character_message 1 "set_torso_target 11.0338 420.961 -118.74 0"
+send_character_message 1 "set_head_target 11.4142 421.323 -118.597 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target 11.8057 421.396 -118.86 1"
+set_cam 11.2524 421.293 -120.705 0 -151.42 0 41.4479
+set_character_pos 1 10.6646 420.748 -118.731 0
+say 3 "????" "Permettez-moi de mettre la main sur ce salaud, [wait 0.3]et je vais-"
+set_character_pos 2 12.0372 420.643 -119.833 -159
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 2 "???" "Je suis en colère aussi, [wait 0.3]Alright ? [wait 0.5]Ma tête est absolument de me tuer."
+send_character_message 3 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 3 "set_head_target 11.685 421.278 -119.252 1"
+say 2 "???" "Mais Ano nous a dit ne pas de nuire à la touche noire en toute circonstance."
+send_character_message 2 "set_head_target 11.2294 421.383 -118.947 1"
+send_character_message 3 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+send_character_message 3 "set_head_target 11.3656 421.224 -118.593 1"
+say 3 "????" "Finition. [wait 0.5]Suivez-nous, [wait 0.3]vous déploient."
+send_character_message 1 "set_head_target 11.4142 421.323 -118.597 0"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_yawn.anm\""
+set_cam 14.2738 421.039 -118.505 0 79.62 0 58.0179
+say 1 "You" "[wait 0.3]Oui, [wait 0.3]Finition. [wait 0.5]Comme tu veux."
+send_character_message 1 "set_torso_target 11.154 421.022 -118.8 1"
+send_character_message 1 "set_head_target 11.576 421.393 -119.213 1"
+say 1 "You" "Montrer la voie."

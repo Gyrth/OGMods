@@ -1,0 +1,23 @@
+#name "Top"
+#participants 5
+set_character_pos 5 -89.1295 191.461 176.235 -91
+set_character_pos 4 -96.559 191.567 175.992 -88
+set_character_pos 1 -87.3635 191.325 179.228 156
+set_cam -87.127 192.115 180.008 0 37.63 0 90
+set_character_pos 3 -88.7343 191.987 178.447 -39
+set_character_pos 2 -88.8276 191.973 179.196 -18
+say 2 "Old rabbit" "You're Sky's friend."
+say 2 "Old rabbit" "You're welcome here."
+say 2 "Old rabbit" "I'm Elder Needlegrass."
+say 1 "Turner" "Thank you."
+say 1 "Turner" "I want to bring some of my friends -- they helped me fight the slavers, and helped save Sky, too."
+say 1 "Turner" "They deserve to live here as much as I do."
+say 2 "Elder Needlegrass" "Hmm."
+say 2 "Elder Needlegrass" "Only the best of the best are invited here."
+say 1 "Turner" "They fight as well as I do -- or they will, once I train them."
+say 1 "Turner" "Eventually the cats will find this place, and you'll want good fighters then."
+say 2 "Elder Needlegrass" "Sky speaks highly of your prowess, but I'd like to make my own judgment."
+say 2 "Elder Needlegrass" "Let's see how you fare against our best lookouts and guards."
+set_character_pos 3 -89.3477 191.987 180.924 106
+set_character_pos 2 -88.5044 191.973 180.777 111
+make_participants_aware

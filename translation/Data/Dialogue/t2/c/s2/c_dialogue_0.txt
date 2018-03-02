@@ -1,0 +1,16 @@
+#name "Boss"
+#participants 4
+set_character_pos 3 -65.436 208.018 -54.7181 17
+send_character_message 3 "set_animation \"Data/Animations/bound_standing2.anm\""
+set_character_pos 1 -53.7172 207.98 -62.0237 -90
+set_cam -54.0783 208.725 -63.9284 0 -174.17 0 18.8281
+send_character_message 1 "empty_hands"
+send_character_message 2 "empty_hands"
+set_character_pos 2 -54.0877 208.001 -46.4696 -90
+say 2 "???" "I saw you coming because I saw the corpses"
+say 2 "???" "Or maybe you hid them, I dunno, the scripts aren't implemented yet"
+set_character_pos 2 -54.0874 208.031 -53.9957 90
+send_character_message 1 "equip_item 134"
+send_character_message 2 "equip_item 142"
+say 2 "???" "I'm gonna kill you now"
+send_level_message "make_participants_aware"

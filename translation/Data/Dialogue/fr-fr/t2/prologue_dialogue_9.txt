@@ -1,0 +1,17 @@
+#name "Note-Beetles"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 37.3548 420.149 -65.2101 -179
+send_level_message "therium2_enable_object 1869"
+send_character_message 1 "set_head_target 36.6578 420.535 -65.2565 1"
+set_cam 35.4735 420.63 -63.0056 0 -29.84 0 35.1378
+send_level_message "set_camera_dof 0.3 2 0.5 0.3 5 2"
+say 1 "Ghost" "Une page déchirée d’un journal collé dans le journal intime de quelqu'un."
+set_cam 36.3475 420.836 -66.1337 0 -140.49 0 35.1378
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Note" "En creusant dans le quadrant C de la Therium, Hansel découvert quelque chose de plus extraordinaire - un clan jusqu’alors inconnu de lagomorphes souterraines qui se considèrent comme des coléoptères. Davantage de recherches doivent être menées, mais d’après ce que peu de nos langues communes ils toujours part j’ai glané que ces insectes s’est séparée de notre société quelques siècles précédents disputes mesquines querelles familiales et puis s’est trouvé coincés sous terre quand les cavernes qu’ils a pris refuge dans a commencé à s’effondrer autour d’eux."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Le Haut Conseil refuse de reconnaître leur existence, mais je dois tout simplement savoir comment ils ont réussi à survivre à toutes ces années sous la surface !"
+send_level_message "therium2_disable_object 1869"

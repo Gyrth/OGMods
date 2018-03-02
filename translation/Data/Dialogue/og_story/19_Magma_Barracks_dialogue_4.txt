@@ -1,0 +1,48 @@
+#name "Start"
+#participants 3
+send_character_message 3 "set_head_target -25.3238 -13.0465 2.45514 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 2 "set_head_target -25.3522 -13.147 2.41993 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 1 "set_head_target -24.4833 -13.5874 2.82476 1"
+set_character_pos 3 -23.4794 -13.896 3.75389 166
+set_character_pos 2 -24.9905 -13.686 4.05995 97
+set_character_pos 1 -25.4283 -13.7861 2.44528 0
+set_dialogue_color 2 0.6 0.5 0.2
+set_dialogue_voice 2 11
+send_level_message "set_camera_dof 0 0 0 0.3 4.5 1"
+set_cam -23.2515 -13.3023 5.76217 -9.24 27.25 -3.69 67.892
+send_character_message 2 "set_head_target -25.3483 -13.147 2.41627 1"
+send_character_message 2 "set_torso_target -25.2883 -13.3261 3.04155 1"
+say 1 "Turner" "It's like an oven in here. Every breath tastes like burning sand."
+send_character_message 3 "set_head_target -25.324 -13.0412 2.45498 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 3 "Bait" "Fresh meat, huh? Nice of you to drop in."
+send_character_message 2 "set_torso_target -25.1908 -13.3099 3.04373 1"
+send_character_message 2 "set_head_target -23.5608 -13.0422 3.71576 1"
+say 2 "Pellet" "Very funny."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 3 "set_head_target -25.3248 -13.1477 2.46183 1"
+say 3 "Bait" "The rules here are pretty simple..."
+send_character_message 1 "set_head_target -23.4599 -13.0253 3.70149 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "Forget the rules. Together, we can take these guards and escape."
+send_character_message 3 "set_head_target -25.3248 -13.1477 2.4618 1"
+send_character_message 3 "set_torso_target -24.2438 -12.7187 3.14048 1"
+say 3 "Bait" "Hah. You really are new. I saw a team try that last year. "
+send_character_message 2 "set_head_target -25.2937 -13.0422 2.472 1"
+send_character_message 2 "set_torso_target -25.4008 -14.416 2.93635 1"
+say 2 "Pellet" "I think some of them are still alive. "
+send_character_message 1 "set_head_target -23.4599 -13.0253 3.70148 1"
+set_character_pos 1 -25.4283 -13.7861 2.44529 0
+send_character_message 1 "set_torso_target -24.6101 -13.4979 2.9865 0.13445"
+send_character_message 3 "set_torso_target -24.4274 -13.3628 3.53886 1"
+send_character_message 3 "set_head_target -25.0665 -12.9921 3.94687 1"
+say 3 "Bait" "Pieces of them are still alive, anyway."
+send_character_message 1 "set_head_target -25.0167 -13.0253 4.06506 1"
+send_character_message 1 "set_torso_target -24.5908 -13.4979 3.00455 1"
+set_character_pos 1 -25.4283 -13.7861 2.44526 0
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "They didn't have me. I'm serious. We could escape."
+send_character_message 2 "set_torso_target -25.4008 -12.6621 2.93635 1"
+say 2 "Pellet" "Good luck with that. But leave the rest of us out of it."

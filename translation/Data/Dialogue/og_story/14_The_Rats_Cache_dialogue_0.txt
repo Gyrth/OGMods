@@ -1,0 +1,8 @@
+#name "Start"
+#participants 1
+send_character_message 1 "set_eye_dir 105.454 30.447 -9.70295 1"
+send_character_message 1 "set_torso_target 106.381 31.042 -9.61985 0"
+send_character_message 1 "set_head_target 104.42 30.3995 -9.38301 1"
+set_character_pos 1 105.853 28.9086 -7.60516 109
+set_cam 105.994 29.6739 -6.69228 9.4 22.71 0.38 51.01
+say 1 "Turner" "'Go to the big tree,' he said. Very helpful. He must mean that one."

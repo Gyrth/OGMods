@@ -1,0 +1,10 @@
+#name "ToB"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -126.6 118.222 -93.9046 -89
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+set_cam -121.973 118.054 -102.573 9.93 155.61 0 40.5078
+send_level_message "set_camera_dof 0 0 0 0.3 20 1"
+say 1 "Ghost" "Let's see what this is..."
+send_global_message "levelwin b"

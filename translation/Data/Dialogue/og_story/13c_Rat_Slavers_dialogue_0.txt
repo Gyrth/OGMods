@@ -1,0 +1,24 @@
+#name "Win"
+#participants 2
+set_character_pos 2 397.176 -1.99877 19.7161 109
+set_character_pos 1 396.687 -2.22842 18.8396 -62
+set_cam 397.168 -1.43508 18.4408 0 161.5 0 90
+say 1 "Turner" "Sky."
+say 1 "Turner" "Are you all right?"
+say 2 "Sky" "Did you come from Sanctuary?"
+say 2 "Sky" "I got lost."
+say 1 "Turner" "I'm Turner."
+say 1 "Turner" "You're all right now."
+say 1 "Turner" "I'll save you."
+say 2 "Sky" "The rats, they used blowdarts, some kind of sleeping poison."
+say 2 "Sky" "It's how they captured us."
+say 2 "Sky" "I saw where they keep their supply,"
+say 2 "Sky" "I was going to destroy it, but..."
+say 2 "Sky" "so sleepy..."
+say 1 "Turner" "I'll take care of it."
+say 1 "Turner" "And then I'll take care of you."
+say 1 "Turner" "You remind me of April..."
+say 2 "Sky" "Who?"
+say 1 "Turner" "Never mind."
+say 1 "Turner" "You're safe with me."
+send_global_message "levelwin"

@@ -1,0 +1,56 @@
+#name "Guards"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 3 5
+set_character_pos 3 -74.7289 -43.6152 18.1623 71
+send_character_message 3 "set_animation \"Data/Animations/wowanothersit.anm\""
+send_character_message 3 "set_torso_target -74.3936 -43.0544 20.5878 0"
+send_character_message 3 "set_head_target -72.9278 -43.0261 17.3265 1"
+set_character_pos 2 -72.1628 -43.6309 17.0492 -171
+send_character_message 2 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+send_character_message 2 "set_torso_target -73.2675 -43.3754 17.2123 0.0253798"
+send_character_message 2 "set_head_target -74.5995 -43.2198 17.6377 1"
+set_character_pos 1 -86.2501 -43.6004 23.961 29
+send_character_message 1 "set_animation \"Data/Animations/stealthobserve.anm\""
+send_character_message 1 "set_torso_target -87.5455 -43.029 24.6283 0"
+send_character_message 1 "set_head_target -84.3749 -43.4283 23.0481 1"
+set_cam -84.2524 -43.5633 22.8991 0 114.52 0 25.2301
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "..."
+set_cam -87.5464 -43.377 25.1886 0 -54.26 0 25.2301
+send_level_message "set_camera_dof 0.3 5 3 0 0 0"
+say 2 "???" "Apparemment un prisonnier s’est échappé de la prison."
+send_character_message 2 "set_head_target -74.2721 -43.2591 17.9757 1"
+send_character_message 3 "set_head_target -72.5379 -42.7892 17.2186 1"
+set_cam -70.2136 -42.7591 14.953 -6.7 131.38 0 25.2301
+say 3 "????" "Vous voulez dire que ce gros morceau de roche est utilisé pour autre chose ?"
+send_character_message 2 "set_head_target -74.3803 -43.5572 17.941 1"
+set_cam -74.2634 -42.9502 16.8271 -0.09 -100.73 0.12 25.2301
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "???" "Oui ? [wait 0.5]En raison de son état complètement inachevé, [wait 0.3]le gars a réussi à glisser à droite."
+set_cam -74.2766 -42.9989 16.8318 -0.09 -100.73 0.12 25.2301
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+say 2 "???" "Heureux que je n’étais pas en patrouille quand c’est arrivé. J’ai serait avez obtenu arrimé à coup sûr."
+send_character_message 3 "set_animation \"Data/Animations/interestingsit.anm\""
+set_cam -74.4756 -43.7238 15.1085 0.12 171.43 0.09 25.2301
+send_level_message "set_camera_dof 0.3 2 0.1 0.3 3 1"
+say 3 "????" "Eh bien, [wait 0.3]Je suppose qu’il ne soit pas de leur faute."
+send_character_message 3 "set_head_target -72.5681 -43.0085 16.8305 1"
+say 3 "????" "Que pouvez-vous faire lorsque vous avez à garder un morceau de ferraille comme ça ?"
+send_character_message 3 "set_head_target -72.4525 -42.6691 17.2029 1"
+say 3 "????" "Enfin je l’ai vu, [wait 0.3]il ressemblait il a appartenu à la rue noyé."
+send_character_message 2 "set_head_target -74.4207 -43.0509 16.5295 1"
+set_character_pos 2 -72.1628 -43.6539 17.0492 -171
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_cam -78.6914 -43.5724 18.0494 -0.12 -82.14 0.09 28.9826
+send_level_message "set_camera_dof 0.3 6 3 0 0 0"
+say 2 "???" "Heh. [wait 0.5]Oui."
+send_character_message 3 "set_head_target -72.5299 -42.9102 17.1677 1"
+send_character_message 2 "set_head_target -74.3772 -43.3655 18.1107 1"
+say 2 "???" "Je dois aller finir mes tours vrai rapides. [wait 0.5]Vous savez comment est notre commandant."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+set_cam -91.0185 -43.3858 23.8516 -0.12 -80.27 0.09 35.0059
+send_character_message 3 "set_head_target -74.909 -43.3898 16.557 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+say 3 "????" "Oui. [wait 0.5]A bientôt."

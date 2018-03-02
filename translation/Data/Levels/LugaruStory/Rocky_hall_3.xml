@@ -1,0 +1,2099 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>Rocky Hall 3</Name>
+<Description/>
+<Shader>post</Shader>
+<LoadingScreen>
+    <Image>Data/LevelLoading/LugaruStory/Rocky_hall_3.xml_loading.jpg</Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Prototypes/Lugaru/RockyHall/RockyHall_Height.png</Heightmap>
+    <ShaderExtra/>
+    <DetailMap/>
+    <ColorMap>Data/Prototypes/Lugaru/RockyHall/RockyHall_Color.tga</ColorMap>
+    <WeightMap>Data/Prototypes/Lugaru/RockyHall/RockyHall_Weights.png</WeightMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_normal.png" materialpath="Data/Materials/dirt.xml"/>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dead_grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/dead_grass_normal.tga" materialpath="Data/Materials/grass.xml"/>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dead_leaves_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/dead_leaves_n.tga" materialpath="Data/Materials/dirt.xml"/>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt_rubble.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_rubble_normal.tga" materialpath="Data/Materials/dirtyrock.xml"/>
+    </DetailMaps>
+    <DetailObjects>
+        <DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/WildGrass.xml" weight_path="Data/Prototypes/Lugaru/RockyHall/RockyHall_GrassWeights.tga" normal_conform="1" density="6" min_embed="0.2" max_embed="0.4" min_scale="0.7" max_scale="2" view_distance="30" jitter_degrees="10" overbright="0" tint_weight="1"/>
+        <DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/fall_tall_grass.xml" weight_path="Data/Prototypes/Lugaru/RockyHall/RockyHall_FallGrassWeights.tga" normal_conform="0.9" density="5" min_embed="0" max_embed="0.4" min_scale="0.8" max_scale="1.8" view_distance="60" jitter_degrees="10" overbright="0.2" tint_weight="1"/>
+    </DetailObjects>
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251"/>
+<AmbientSounds>
+    <Ambient path="Data/Sounds/ambient/amb_grassfield_loop"/>
+</AmbientSounds>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills"/>
+    <parameter name="Extra AO" type="string" val="0.1"/>
+    <parameter name="HDR Black point" type="string" val="0.045"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="0.291"/>
+    <parameter name="HDR White point" type="string" val="0.8220000000000001"/>
+    <parameter name="Level Boundaries" type="string" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Saturation" type="float" val="1"/>
+    <parameter name="Sky Rotation" type="string" val="-129"/>
+</LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60"/>
+<Sky>
+    <DomeTexture>Data/Textures/skies/Night1.tga</DomeTexture>
+    <SunAngularRad>0.301653</SunAngularRad>
+    <SunColorAngle>241.278</SunColorAngle>
+    <RayToSun r0="-0.751215" r1="0.454407" r2="-0.478738"/>
+</Sky>
+<ActorObjects>
+    <EnvObject t0="-35.1852" t1="58.0646" t2="9.43668" s0="1" s1="1" s2="1" q0="-0.0273749" q1="-0.125014" q2="-0.00345065" q3="0.991771" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-45.5072" t1="55.8119" t2="9.53888" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="2" color_r="0.227451" color_g="0.227451" color_b="0.227451" overbright="0" type_file="Data/Prototypes/Lugaru/RockyHallRocks_HallPart3.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-19.7723" t1="58.8775" t2="13.8103" s0="23.2648" s1="6.19968" s2="5.56461" q0="0" q1="0.00927825" q2="0" q3="0.999957" id="3" version="1">
+        <parameters/>
+        <EnvObject t0="-15.362" t1="58.8846" t2="15.2769" s0="0.902957" s1="1.02927" s2="0.909267" q0="0" q1="0.0812638" q2="0" q3="0.996693" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-28.8696" t1="57.8579" t2="13.351" s0="1" s1="1" s2="1" q0="-4.11272e-006" q1="-0.286963" q2="0" q3="0.957942" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-10.6841" t1="58.9162" t2="13.9465" s0="1" s1="1.0187" s2="1" q0="-1.66893e-006" q1="0.212287" q2="0" q3="0.977207" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-25.1964" t1="58.9383" t2="15.0451" s0="0.999999" s1="0.999999" s2="1" q0="0" q1="0.9903" q2="0" q3="0.138946" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.4799" t1="58.8705" t2="15.6388" s0="0.902944" s1="1.02927" s2="0.909268" q0="-8.04662e-006" q1="-0.0116743" q2="0" q3="0.999932" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-33.2174" t1="57.3046" t2="-2.32024" s0="0.997513" s1="1" s2="0.997053" q0="-0.00566629" q1="-0.995209" q2="-0.0432436" q3="0.0875039" id="5" color_r="0.854902" color_g="0.847059" color_b="0.847059" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.65714" t1="58.541" t2="-5.02914" s0="1" s1="1" s2="1" q0="0" q1="-0.838473" q2="0" q3="0.544943" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-7.64519" t1="58.8249" t2="11.677" s0="1" s1="1" s2="1" q0="0" q1="-0.549407" q2="0" q3="0.835555" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-49.7666" t1="58.2027" t2="-2.75914" s0="1" s1="1" s2="1" q0="0" q1="-0.999985" q2="0" q3="0.00548094" id="12" color_r="0.47451" color_g="0.47451" color_b="0.47451" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-7.6043" t1="62.1251" t2="12.4133" s0="0.596412" s1="0.596412" s2="0.596412" q0="0.047358" q1="-0.944667" q2="0.25382" q3="0.202329" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.3204" t1="58.7431" t2="-6.19687" s0="0.902935" s1="1.0067" s2="0.909264" q0="0" q1="0.0533981" q2="0" q3="0.998573" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-97.4171" t1="57.6244" t2="-11.9421" s0="1" s1="1" s2="1" q0="0" q1="-0.792815" q2="0" q3="0.609462" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/RockyHallBanner.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject name="Turner" t0="-10.6218" t1="62.3229" t2="4.47903" s0="1" s1="1" s2="1" q0="0" q1="-0.714243" q2="0" q3="0.699898" id="36" type_file="Data/Objects/IGF_Characters/pale_turner_actor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1.0"/>
+            <parameter name="Attack Knockback" type="string" val="1.0"/>
+            <parameter name="Attack Speed" type="string" val="1.0"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1.0"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1.0"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="Turner, Jack, Clover, Skipper, Sarah, April"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="298" type="1" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.360784" green="0.298039" blue="0.211765"/>
+            <Color label="Ropes" channel="1" red="0.0901961" green="0.0784314" blue="0.0627451"/>
+            <Color label="Pants" channel="2" red="0.145098" green="0.145098" blue="0.145098"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+        <EnvObjectAttachments>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="2" num_connections="4" m0="0.996005" m1="-0.00473699" m2="0.0891681" m3="0" m4="0.00598852" m5="0.999887" m6="-0.0137733" m7="0" m8="-0.0890929" m9="0.0142523" m10="0.995921" m11="0" m12="-0.0123596" m13="0.17189" m14="0.0854187" m15="1"/>
+                <BoneConnect bone_id="1" num_connections="2" m0="0.999735" m1="-0.00418213" m2="0.022646" m3="0" m4="0.00474177" m5="0.999683" m6="-0.0247155" m7="0" m8="-0.0225356" m9="0.0248164" m10="0.999438" m11="0" m12="-0.00623322" m13="0.173981" m14="0.0890579" m15="1"/>
+                <BoneConnect bone_id="17" num_connections="1" m0="0.992923" m1="-0.0779654" m2="0.0895876" m3="0" m4="0.0813188" m5="0.996094" m6="-0.0344061" m7="0" m8="-0.0865552" m9="0.0414477" m10="0.995385" m11="0" m12="-0.0263596" m13="0.173111" m14="0.0878601" m15="1"/>
+                <BoneConnect bone_id="4" num_connections="1" m0="0.988567" m1="0.123519" m2="0.0864845" m3="0" m4="-0.120943" m5="0.992062" m6="-0.0344373" m7="0" m8="-0.0900516" m9="0.0235839" m10="0.995658" m11="0" m12="0.0115356" m13="0.17009" m14="0.0879669" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="2" num_connections="4" m0="0.994724" m1="0.000455423" m2="0.102583" m3="0" m4="-0.000433161" m5="1" m6="-0.00023932" m7="0" m8="-0.102583" m9="0.000193628" m10="0.994724" m11="0" m12="0.00510406" m13="0.197296" m14="-0.132286" m15="1"/>
+                <BoneConnect bone_id="1" num_connections="3" m0="0.999974" m1="0.00274374" m2="0.0067151" m3="0" m4="-0.00262094" m5="0.999831" m6="-0.0182281" m7="0" m8="-0.00676399" m9="0.0182101" m10="0.999811" m11="0" m12="-0.00715637" m13="0.195663" m14="-0.13089" m15="1"/>
+                <BoneConnect bone_id="17" num_connections="1" m0="0.991979" m1="-0.0733816" m2="0.10292" m3="0" m4="0.0751342" m5="0.997085" m6="-0.0132513" m7="0" m8="-0.101648" m9="0.0208778" m10="0.994601" m11="0" m12="-0.00721741" m13="0.193558" m14="-0.130936" m15="1"/>
+                <BoneConnect bone_id="4" num_connections="1" m0="0.986734" m1="0.128058" m2="0.0997813" m3="0" m4="-0.12737" m5="0.991767" m6="-0.0132598" m7="0" m8="-0.100658" m9="0.000374725" m10="0.994921" m11="0" m12="0.0255432" m13="0.193848" m14="-0.130859" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="9" num_connections="3" m0="0.962866" m1="0.0673709" m2="0.26144" m3="0" m4="-0.150336" m5="0.938136" m6="0.311929" m7="0" m8="-0.224251" m9="-0.33965" m10="0.913427" m11="0" m12="0.479675" m13="0.163338" m14="-0.0299759" m15="1"/>
+                <BoneConnect bone_id="8" num_connections="1" m0="0.974401" m1="0.0800306" m2="0.210091" m3="0" m4="-0.131184" m5="0.961307" m6="0.242238" m7="0" m8="-0.182575" m9="-0.263597" m10="0.947197" m11="0" m12="0.479935" m13="0.163236" m14="-0.0317764" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="22" num_connections="3" m0="-0.981473" m1="0.101812" m2="0.162312" m3="0" m4="0.0869856" m5="0.991574" m6="-0.0959909" m7="0" m8="-0.170717" m9="-0.0800938" m10="-0.982059" m11="0" m12="-0.508236" m13="0.149796" m14="-0.0272369" m15="1"/>
+                <BoneConnect bone_id="21" num_connections="1" m0="-0.988506" m1="0.106318" m2="0.107486" m3="0" m4="0.0868697" m5="0.981305" m6="-0.171738" m7="0" m8="-0.123735" m9="-0.160427" m10="-0.979261" m11="0" m12="-0.508678" m13="0.149643" m14="-0.0292969" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="4" num_connections="2" m0="0.991915" m1="0.117757" m2="-0.0472918" m3="0" m4="-0.121565" m5="0.988683" m6="-0.0879106" m7="0" m8="0.0364045" m9="0.092949" m10="0.995005" m11="0" m12="0.0997772" m13="0.42926" m14="-0.0213776" m15="1"/>
+                <BoneConnect bone_id="2" num_connections="1" m0="0.998969" m1="-0.00776275" m2="-0.0447161" m3="0" m4="0.00504187" m5="0.998147" m6="-0.0606416" m7="0" m8="0.045104" m9="0.0603537" m10="0.997157" m11="0" m12="0.108292" m13="0.419983" m14="-0.0175972" m15="1"/>
+                <BoneConnect bone_id="6" num_connections="0" m0="0.660285" m1="0.749415" m2="-0.049004" m3="0" m4="-0.750554" m5="0.656185" m6="-0.0780376" m7="0" m8="-0.0263268" m9="0.0883072" m10="0.995745" m11="0" m12="0.0477753" m13="0.365773" m14="-0.016571" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="4" num_connections="3" m0="0.994831" m1="0.0985801" m2="0.0243659" m3="0" m4="-0.0987258" m5="0.995103" m6="0.00484669" m7="0" m8="-0.0237688" m9="-0.00722719" m10="0.999691" m11="0" m12="0.169823" m13="0.389435" m14="-0.0235672" m15="1"/>
+                <BoneConnect bone_id="6" num_connections="1" m0="0.630731" m1="0.77562" m2="0.0243299" m3="0" m4="-0.775918" m5="0.630812" m6="0.00513303" m7="0" m8="-0.0113663" m9="-0.0221155" m10="0.999691" m11="0" m12="0.123074" m13="0.38147" m14="-0.0189495" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="17" num_connections="2" m0="0.996063" m1="-0.07787" m2="0.042373" m3="0" m4="0.0804627" m5="0.994741" m6="-0.0633753" m7="0" m8="-0.037215" m9="0.0665352" m10="0.99709" m11="0" m12="-0.0927391" m13="0.432007" m14="-0.0194168" m15="1"/>
+                <BoneConnect bone_id="2" num_connections="2" m0="0.999116" m1="-0.00269647" m2="0.0419627" m3="0" m4="0.0051549" m5="0.998269" m6="-0.0585885" m7="0" m8="-0.0417321" m9="0.058753" m10="0.9974" m11="0" m12="-0.098175" m13="0.427246" m14="-0.0189056" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="19" num_connections="2" m0="0.705764" m1="-0.705221" m2="-0.0675288" m3="0" m4="0.695234" m5="0.707771" m6="-0.125337" m7="0" m8="0.136185" m9="0.04151" m10="0.989813" m11="0" m12="-0.125626" m13="0.38308" m14="-0.0246048" m15="1"/>
+                <BoneConnect bone_id="17" num_connections="4" m0="0.999658" m1="0.0249382" m2="-0.0079271" m3="0" m4="-0.0254664" m5="0.996817" m6="-0.0755462" m7="0" m8="0.00601783" m9="0.0757222" m10="0.997111" m11="0" m12="-0.174667" m13="0.387726" m14="-0.0269241" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="6" num_connections="1" m0="0.994293" m1="-0.0444433" m2="-0.0969827" m3="0" m4="0.0244222" m5="0.979774" m6="-0.198608" m7="0" m8="0.103848" m9="0.195106" m10="0.975268" m11="0" m12="0.264297" m13="0.299934" m14="-0.036705" m15="1"/>
+                <BoneConnect bone_id="7" num_connections="1" m0="0.987979" m1="-0.0541834" m2="-0.144781" m3="0" m4="0.0108518" m5="0.958561" m6="-0.284681" m7="0" m8="0.154207" m9="0.279688" m10="0.947626" m11="0" m12="0.26416" m13="0.300022" m14="-0.0395203" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="19" num_connections="1" m0="-0.995928" m1="-0.083959" m2="0.0328414" m3="0" m4="0.0875681" m5="-0.987512" m6="0.130964" m7="0" m8="0.0214356" m9="0.133306" m10="0.990843" m11="0" m12="-0.278511" m13="0.300781" m14="-0.0275726" m15="1"/>
+                <BoneConnect bone_id="20" num_connections="1" m0="-0.994598" m1="-0.084488" m2="-0.0603096" m3="0" m4="0.0613374" m5="-0.947048" m6="0.315178" m7="0" m8="-0.083745" m9="0.309776" m10="0.947114" m11="0" m12="-0.279182" m13="0.302094" m14="-0.0352402" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="0.957354" m1="0.0917766" m2="-0.273956" m3="0" m4="-0.0823631" m5="0.995554" m6="0.0456934" m7="0" m8="0.276932" m9="-0.0211808" m10="0.960657" m11="0" m12="0.140167" m13="-0.00817871" m14="-0.0217667" m15="1"/>
+                <BoneConnect bone_id="1" num_connections="1" m0="0.964619" m1="0.0834662" m2="-0.250089" m3="0" m4="-0.0776517" m5="0.996433" m6="0.0330449" m7="0" m8="0.251955" m9="-0.0124558" m10="0.967659" m11="0" m12="0.140526" m13="-0.00938416" m14="-0.0180588" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="1" num_connections="1" m0="0.977975" m1="-0.120322" m2="0.170552" m3="0" m4="0.118284" m5="0.992734" m6="0.0220992" m7="0" m8="-0.171971" m9="-0.00143889" m10="0.985101" m11="0" m12="-0.138062" m13="-0.00311279" m14="-0.0170441" m15="1"/>
+                <BoneConnect bone_id="0" num_connections="1" m0="0.982714" m1="-0.116356" m2="0.143996" m3="0" m4="0.113242" m5="0.993124" m6="0.0296633" m7="0" m8="-0.146458" m9="-0.0128441" m10="0.989134" m11="0" m12="-0.138336" m13="-0.00357056" m14="-0.0135117" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="46" num_connections="2" m0="-0.732064" m1="0.0325683" m2="-0.680456" m3="0" m4="-0.135227" m5="0.972032" m6="0.192007" m7="0" m8="0.667679" m9="0.232578" m10="-0.707186" m11="0" m12="-0.159971" m13="-0.172806" m14="0.0673599" m15="1"/>
+                <BoneConnect bone_id="47" num_connections="1" m0="-0.822544" m1="0.0638517" m2="-0.565105" m3="0" m4="-0.0736426" m5="0.973352" m6="0.217171" m7="0" m8="0.563913" m9="0.220248" m10="-0.795923" m11="0" m12="-0.149645" m13="-0.171402" m14="0.0767822" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="46" num_connections="2" m0="-0.732064" m1="0.0325683" m2="-0.680456" m3="0" m4="-0.135227" m5="0.972032" m6="0.192007" m7="0" m8="0.667679" m9="0.232578" m10="-0.707186" m11="0" m12="-0.118544" m13="-0.168076" m14="0.0988312" m15="1"/>
+                <BoneConnect bone_id="47" num_connections="1" m0="-0.822544" m1="0.0638517" m2="-0.565105" m3="0" m4="-0.0736426" m5="0.973352" m6="0.217171" m7="0" m8="0.563913" m9="0.220248" m10="-0.795923" m11="0" m12="-0.103922" m13="-0.168381" m14="0.101845" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="46" num_connections="2" m0="-0.732064" m1="0.0325683" m2="-0.680456" m3="0" m4="-0.135227" m5="0.972032" m6="0.192007" m7="0" m8="0.667679" m9="0.232578" m10="-0.707186" m11="0" m12="-0.0695019" m13="-0.169632" m14="0.0991592" m15="1"/>
+                <BoneConnect bone_id="47" num_connections="1" m0="-0.822544" m1="0.0638517" m2="-0.565105" m3="0" m4="-0.0736426" m5="0.973352" m6="0.217171" m7="0" m8="0.563913" m9="0.220248" m10="-0.795923" m11="0" m12="-0.0554371" m13="-0.171478" m14="0.0949478" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="39" num_connections="2" m0="0.909422" m1="0.0890255" m2="-0.406234" m3="0" m4="0.0024732" m5="0.975644" m6="0.219347" m7="0" m8="0.415867" m9="-0.200484" m10="0.887052" m11="0" m12="0.0821762" m13="-0.176743" m14="0.0986023" m15="1"/>
+                <BoneConnect bone_id="40" num_connections="1" m0="0.933167" m1="0.104194" m2="-0.34401" m3="0" m4="-0.0266158" m5="0.974467" m6="0.222949" m7="0" m8="0.358456" m9="-0.198892" m10="0.912114" m11="0" m12="0.0758133" m13="-0.177246" m14="0.0977631" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="39" num_connections="2" m0="0.909422" m1="0.0890255" m2="-0.406234" m3="0" m4="0.0024732" m5="0.975644" m6="0.219347" m7="0" m8="0.415867" m9="-0.200484" m10="0.887052" m11="0" m12="0.129745" m13="-0.174225" m14="0.0934448" m15="1"/>
+                <BoneConnect bone_id="40" num_connections="1" m0="0.933167" m1="0.104194" m2="-0.34401" m3="0" m4="-0.0266158" m5="0.974467" m6="0.222949" m7="0" m8="0.358456" m9="-0.198892" m10="0.912114" m11="0" m12="0.123581" m13="-0.174011" m14="0.0958099" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="39" num_connections="2" m0="0.909422" m1="0.0890255" m2="-0.406234" m3="0" m4="0.0024732" m5="0.975644" m6="0.219347" m7="0" m8="0.415867" m9="-0.200484" m10="0.887052" m11="0" m12="0.167374" m13="-0.176758" m14="0.0577316" m15="1"/>
+                <BoneConnect bone_id="40" num_connections="1" m0="0.933167" m1="0.104194" m2="-0.34401" m3="0" m4="-0.0266158" m5="0.974467" m6="0.222949" m7="0" m8="0.358456" m9="-0.198892" m10="0.912114" m11="0" m12="0.163544" m13="-0.175827" m14="0.0626831" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="40" num_connections="3" m0="-0.997673" m1="0.0384982" m2="-0.0562639" m3="0" m4="0.0365229" m5="0.998694" m6="0.0357251" m7="0" m8="0.0575657" m9="0.0335871" m10="-0.997777" m11="0" m12="0.112503" m13="-0.317078" m14="0.127716" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="0.870279" m1="-0.0313774" m2="0.491559" m3="0" m4="0.0214322" m5="0.999436" m6="0.0258519" m7="0" m8="-0.492093" m9="-0.0119632" m10="0.87046" m11="0" m12="-0.100945" m13="-0.0480042" m14="0.0802231" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="0.998493" m1="-0.012438" m2="0.0534542" m3="0" m4="0.00652431" m5="0.993975" m6="0.109413" m7="0" m8="-0.054493" m9="-0.1089" m10="0.992558" m11="0" m12="-0.00203705" m13="-0.0501099" m14="0.104431" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="0.932733" m1="0.0500937" m2="-0.357072" m3="0" m4="-0.00516365" m5="0.992056" m6="0.125687" m7="0" m8="0.360532" m9="-0.115389" m10="0.925582" m11="0" m12="0.0934982" m13="-0.0479279" m14="0.0868073" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="-0.998888" m1="0.0299303" m2="-0.0364275" m3="0" m4="0.0293764" m5="0.999446" m6="0.0156468" m7="0" m8="0.0368756" m9="0.0145593" m10="-0.999214" m11="0" m12="0.0254288" m13="-0.144775" m14="0.0968018" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="-0.998888" m1="0.0299303" m2="-0.0364275" m3="0" m4="0.0293764" m5="0.999446" m6="0.0156468" m7="0" m8="0.0368756" m9="0.0145593" m10="-0.999214" m11="0" m12="-0.0252495" m13="-0.146057" m14="0.0969391" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="47" num_connections="1" m0="-0.995523" m1="-0.00989242" m2="-0.0940006" m3="0" m4="0.00132063" m5="0.992955" m6="-0.118483" m7="0" m8="0.0945103" m9="-0.118077" m10="-0.988497" m11="0" m12="-0.110718" m13="-0.293564" m14="0.111893" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="-0.0098548" m1="-0.999952" m2="9.54481e-005" m3="0" m4="0.156315" m5="-0.00144626" m6="0.987706" m7="0" m8="-0.987658" m9="0.00974845" m10="0.156322" m11="0" m12="0.0469856" m13="-0.0507965" m14="0.104065" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="-0.0098552" m1="-0.999952" m2="9.45321e-005" m3="0" m4="-0.17198" m5="0.00178807" m6="0.985099" m7="0" m8="-0.985051" m9="0.00969198" m10="-0.171989" m11="0" m12="-0.0572472" m13="-0.0504761" m14="0.102066" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="0.134986" m1="-0.984886" m2="-0.108526" m3="0" m4="0.60035" m5="-0.00583993" m6="0.799716" m7="0" m8="-0.788263" m9="-0.173104" m10="0.590488" m11="0" m12="0.139622" m13="-0.0407562" m14="0.065155" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="0" num_connections="1" m0="-0.224462" m1="-0.937551" m2="-0.265735" m3="0" m4="-0.642534" m5="-0.0626281" m6="0.763694" m7="0" m8="-0.732645" m9="0.342164" m10="-0.588351" m11="0" m12="-0.140915" m13="-0.0433502" m14="0.057312" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+        </EnvObjectAttachments>
+        <EnvObject s0="1.09634" s1="1.09634" s2="1.09634" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_breastplate.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="1.08914" s1="1.08914" s2="1.08914" id="103" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_backplate.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.978608" s1="0.978608" s2="0.978608" id="104" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_lower_arm.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.978608" s1="0.978608" s2="0.978608" id="105" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_lower_arm.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="1" s1="1" s2="1" id="106" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_neck.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="1" s1="1" s2="1" id="107" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_shoulder_b.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="-1.0543" s1="1" s2="1.00004" id="108" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_neck.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="-1.0543" s1="1" s2="1.00004" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_shoulder_b.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="1" s1="1" s2="1" id="110" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_shoulder_a.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="1.00003" s1="-0.834908" s2="1.00004" id="111" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_shoulder_a.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="1" s1="1" s2="1" id="219" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_hip_plate.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="-0.807333" s1="0.999926" s2="1" id="220" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_hip_plate.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0611801" s1="0.106201" s2="0.058075" q0="-0.00590576" q1="0.920478" q2="-0.00111784" q3="-0.390748" id="221" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="0.999999" id="222" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="0.999999" id="223" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0570145" s1="0.100739" s2="0.0726624" q0="-0.00590576" q1="0.920478" q2="-0.00111784" q3="-0.390748" id="224" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="225" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="226" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0449066" s1="0.107788" s2="0.0830383" q0="-0.00590576" q1="0.920478" q2="-0.00111784" q3="-0.390748" id="227" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="228" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="229" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0541306" s1="0.102722" s2="0.0648346" q0="-0.000721674" q1="0.836938" q2="-0.00114514" q3="0.547296" id="230" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="0.999999" s2="1" id="231" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="0.999999" s2="1" id="232" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0589218" s1="0.099884" s2="0.0486603" q0="-0.000721674" q1="0.836938" q2="-0.00114514" q3="0.547296" id="233" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="234" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="235" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0500107" s1="0.111511" s2="0.0679321" q0="-0.000721674" q1="0.836938" q2="-0.00114514" q3="0.547296" id="236" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="237" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="238" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.109825" s1="0.182968" s2="0.0782471" q0="0.0481335" q1="-0.707965" q2="0.0875222" q3="0.699149" id="239" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="240" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_straps.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="241" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_straps.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="242" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_bag.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="0.999998" s1="0.999999" s2="1" id="243" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_scale.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="244" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_bag.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="0.999998" s1="0.999999" s2="1" id="245" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_scale.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0757904" s1="0.0742188" s2="0.0188141" q0="-0.00269472" q1="0.503658" q2="-0.0165967" q3="0.86374" id="246" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="247" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="248" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_stud.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="249" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="250" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_stud.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0757904" s1="0.0742188" s2="0.0188141" q0="0.0353667" q1="0.686434" q2="-0.0420304" q3="0.725115" id="251" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="252" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="253" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_stud.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="254" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="255" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_stud.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0757904" s1="0.0742188" s2="0.0188141" q0="0.053453" q1="0.822872" q2="-0.0334716" q3="0.564716" id="256" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="257" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="258" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_stud.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="259" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="260" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_stud.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0484238" s1="0.102631" s2="0.0451355" q0="-0.0158481" q1="-0.720071" q2="0.00509409" q3="0.693701" id="261" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="262" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rope_ball.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="263" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rope_ball.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="264" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="265" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="266" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="267" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="268" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="269" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rope_ball.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="271" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rope_ball.xml">
+                <parameters/>
+            </EnvObject>
+            <Group t0="-10.5311" t1="61.9059" t2="4.43862" s0="0.0484238" s1="0.102631" s2="0.00997925" q0="-0.0158963" q1="-0.720063" q2="0.00514191" q3="0.693708" id="272" version="1">
+                <parameters/>
+                <EnvObject s0="1" s1="1" s2="1" id="273" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                    <parameters/>
+                </EnvObject>
+                <EnvObject s0="1" s1="1" s2="1" id="274" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                    <parameters/>
+                </EnvObject>
+            </Group>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0484238" s1="0.102631" s2="0.0451355" q0="-0.0158481" q1="-0.720071" q2="0.00509409" q3="0.693701" id="275" version="1">
+            <parameters/>
+            <EnvObject s0="1" s1="1" s2="1" id="276" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rope_ball.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="277" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rope_ball.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="278" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="279" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="280" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="282" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="283" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="284" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rope_ball.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="285" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rope_ball.xml">
+                <parameters/>
+            </EnvObject>
+            <Group t0="-10.529" t1="61.9035" t2="4.48955" s0="0.0484238" s1="0.102631" s2="0.00997925" q0="-0.0158963" q1="-0.720063" q2="0.00514191" q3="0.693708" id="286" version="1">
+                <parameters/>
+                <EnvObject s0="1" s1="1" s2="1" id="287" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                    <parameters/>
+                </EnvObject>
+                <EnvObject s0="1" s1="1" s2="1" id="288" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                    <parameters/>
+                </EnvObject>
+            </Group>
+        </Group>
+        <Group t0="0" t1="-999999" t2="0" s0="0.0753949" s1="0.159794" s2="0.0155375" q0="0.0928485" q1="-0.777365" q2="0.150908" q3="0.603581" id="289" version="1">
+            <parameters/>
+            <EnvObject s0="1.55698" s1="1.55698" s2="1.55698" id="290" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject s0="1.55698" s1="1.55698" s2="1.55698" id="291" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_strut.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <EnvObject s0="0.461318" s1="0.344632" s2="0.889506" id="292" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/gear/dog_armor/dog_armor_detail_rope_ball.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.461318" s1="0.344632" s2="0.889506" id="293" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/gear/dog_armor/dog_armor_detail_rope_ball.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.580914" s1="0.344667" s2="0.965513" id="294" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/gear/dog_armor/dog_armor_detail_rope_ball.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.461318" s1="0.344632" s2="0.889506" id="295" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/gear/dog_armor/dog_armor_detail_rope_ball.xml">
+            <parameters/>
+        </EnvObject>
+    </ActorObject>
+    <EnvObject t0="-58.8527" t1="60.8203" t2="7.76685" s0="1" s1="1.0187" s2="1" q0="-0.016194" q1="-0.999703" q2="-0.0181687" q3="0.00126859" id="42" color_r="0.462745" color_g="0.462745" color_b="0.462745" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-68.3793" t1="61.7028" t2="7.99844" s0="1" s1="1.0187" s2="1" q0="0.076699" q1="0.996271" q2="0.0387036" q3="0.00795988" id="43" color_r="0.462745" color_g="0.462745" color_b="0.462745" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-139.153" t1="46.5082" t2="35.7314" s0="3.70913" s1="8.48302" s2="3.52068" q0="0" q1="-0.972747" q2="0" q3="0.231869" id="44" version="1">
+        <parameters/>
+        <EnvObject t0="-139.206" t1="46.1511" t2="35.6609" s0="0.999996" s1="1.03396" s2="0.999996" q0="0" q1="-0.972747" q2="0" q3="0.231869" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-139.226" t1="48.4297" t2="35.7706" s0="0.999996" s1="1.03396" s2="0.999996" q0="0" q1="-0.972747" q2="0" q3="0.231869" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-139.178" t1="46.017" t2="35.7444" s0="0.999996" s1="1.03396" s2="0.999996" q0="0" q1="-0.972747" q2="0" q3="0.231869" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-139.151" t1="44.4715" t2="35.7349" s0="0.999996" s1="1.03396" s2="0.999996" q0="0" q1="-0.972747" q2="0" q3="0.231869" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-83.9166" t1="62.2039" t2="-16.9143" s0="3.78116" s1="8.36371" s2="3.58905" q0="0" q1="-0.968589" q2="0" q3="0.248667" id="49" version="1">
+        <parameters/>
+        <EnvObject t0="-83.9736" t1="61.8519" t2="-16.9842" s0="1.01942" s1="1.01942" s2="1.01942" q0="0" q1="-0.968589" q2="0" q3="0.248667" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-83.9898" t1="64.0984" t2="-16.8718" s0="1.01942" s1="1.01942" s2="1.01942" q0="0" q1="-0.968589" q2="0" q3="0.248667" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-83.9425" t1="61.7197" t2="-16.9001" s0="1.01942" s1="1.01942" s2="1.01942" q0="0" q1="-0.968589" q2="0" q3="0.248667" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-83.9147" t1="60.1959" t2="-16.9108" s0="1.01942" s1="1.01942" s2="1.01942" q0="0" q1="-0.968589" q2="0" q3="0.248667" id="60" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-96.7541" t1="58.7921" t2="-10.2826" s0="3.78116" s1="8.43948" s2="3.58905" q0="0" q1="-0.975498" q2="0" q3="0.220008" id="61" version="1">
+        <parameters/>
+        <EnvObject t0="-96.8069" t1="58.4369" t2="-10.3557" s0="1.01942" s1="1.02866" s2="1.01942" q0="0" q1="-0.975496" q2="0" q3="0.220017" id="62" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-96.8296" t1="60.7037" t2="-10.2444" s0="1.01942" s1="1.02866" s2="1.01942" q0="0" q1="-0.975496" q2="0" q3="0.220017" id="63" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-96.7808" t1="58.3035" t2="-10.2699" s0="1.01942" s1="1.02866" s2="1.01942" q0="0" q1="-0.975496" q2="0" q3="0.220017" id="64" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-96.7523" t1="56.7658" t2="-10.2789" s0="1.01942" s1="1.02866" s2="1.01942" q0="0" q1="-0.975496" q2="0" q3="0.220017" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-113.558" t1="44.4977" t2="-45.1203" s0="3.78116" s1="8.43948" s2="3.58905" q0="0" q1="-0.981223" q2="0" q3="0.192877" id="66" version="1">
+        <parameters/>
+        <EnvObject t0="-113.607" t1="44.1425" t2="-45.1962" s0="1.01942" s1="1.02866" s2="1.01942" q0="0" q1="-0.981221" q2="0" q3="0.192887" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-113.636" t1="46.4093" t2="-45.0864" s0="1.01942" s1="1.02866" s2="1.01942" q0="0" q1="-0.981221" q2="0" q3="0.192887" id="68" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-113.585" t1="44.0091" t2="-45.1091" s0="1.01942" s1="1.02866" s2="1.01942" q0="0" q1="-0.981221" q2="0" q3="0.192887" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-113.556" t1="42.4714" t2="-45.1165" s0="1.01942" s1="1.02866" s2="1.01942" q0="0" q1="-0.981221" q2="0" q3="0.192887" id="73" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-128.544" t1="43.3858" t2="-47.5697" s0="3.78116" s1="8.43948" s2="3.58905" q0="0" q1="-0.00468753" q2="0" q3="0.999989" id="74" version="1">
+        <parameters/>
+        <EnvObject t0="-128.529" t1="43.0306" t2="-47.4809" s0="1.01942" s1="1.02866" s2="1.01942" q0="1.84774e-006" q1="-0.00468728" q2="0" q3="0.999989" id="75" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-128.459" t1="45.2975" t2="-47.5709" s0="1.01942" s1="1.02866" s2="1.01942" q0="1.84774e-006" q1="-0.00468728" q2="0" q3="0.999989" id="76" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-128.514" t1="42.8972" t2="-47.5694" s0="1.01942" s1="1.02866" s2="1.01942" q0="1.84774e-006" q1="-0.00468728" q2="0" q3="0.999989" id="77" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-128.544" t1="41.3596" t2="-47.5738" s0="1.01942" s1="1.02866" s2="1.01942" q0="1.84774e-006" q1="-0.00468728" q2="0" q3="0.999989" id="78" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-151.018" t1="50.7242" t2="-22.394" s0="3.70913" s1="8.4203" s2="3.52068" q0="0" q1="-0.978851" q2="0" q3="0.204574" id="79" version="1">
+        <parameters/>
+        <EnvObject t0="-151.067" t1="50.3698" t2="-22.4673" s0="0.999999" s1="1.02632" s2="0.999999" q0="0" q1="-0.978852" q2="0" q3="0.20457" id="80" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-151.093" t1="52.6315" t2="-22.3589" s0="0.999999" s1="1.02632" s2="0.999999" q0="0" q1="-0.978852" q2="0" q3="0.20457" id="81" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-151.044" t1="50.2367" t2="-22.3823" s0="0.999999" s1="1.02632" s2="0.999999" q0="0" q1="-0.978852" q2="0" q3="0.20457" id="82" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-151.016" t1="48.7025" t2="-22.3903" s0="0.999999" s1="1.02632" s2="0.999999" q0="0" q1="-0.978852" q2="0" q3="0.20457" id="83" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-162.186" t1="53.4984" t2="-15.5649" s0="3.70913" s1="8.46756" s2="3.52068" q0="0" q1="-0.598354" q2="0" q3="0.801232" id="84" version="1">
+        <parameters/>
+        <EnvObject t0="-162.265" t1="53.1421" t2="-15.5248" s0="1" s1="1.03208" s2="1" q0="0" q1="-0.598354" q2="0" q3="0.801232" id="85" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-162.16" t1="55.4165" t2="-15.4858" s0="1" s1="1.03208" s2="1" q0="0" q1="-0.598354" q2="0" q3="0.801232" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-162.178" t1="53.0082" t2="-15.537" s0="1" s1="1.03208" s2="1" q0="0" q1="-0.598354" q2="0" q3="0.801232" id="87" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-162.182" t1="51.4655" t2="-15.566" s0="1" s1="1.03208" s2="1" q0="0" q1="-0.598354" q2="0" q3="0.801232" id="88" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-153.696" t1="47.274" t2="-34.5219" s0="3.70913" s1="8.56973" s2="3.52068" q0="0" q1="-0.989657" q2="0" q3="0.143454" id="89" version="1">
+        <parameters/>
+        <EnvObject t0="-153.736" t1="46.9134" t2="-34.6008" s0="1" s1="1.04453" s2="1" q0="0" q1="-0.989657" q2="0" q3="0.143454" id="90" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-153.775" t1="49.2152" t2="-34.4964" s0="1" s1="1.04453" s2="1" q0="0" q1="-0.989657" q2="0" q3="0.143454" id="91" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-153.723" t1="46.7779" t2="-34.5136" s0="1" s1="1.04453" s2="1" q0="0" q1="-0.989657" q2="0" q3="0.143454" id="92" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-153.694" t1="45.2165" t2="-34.5181" s0="1" s1="1.04453" s2="1" q0="0" q1="-0.989657" q2="0" q3="0.143454" id="93" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-174.021" t1="51.665" t2="-24.4127" s0="3.70913" s1="8.40539" s2="3.52068" q0="0" q1="0.220109" q2="0" q3="0.975475" id="94" version="1">
+        <parameters/>
+        <EnvObject t0="-173.969" t1="51.3112" t2="-24.341" s0="1" s1="1.0245" s2="1" q0="0" q1="0.220108" q2="0" q3="0.975475" id="95" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-173.947" t1="53.5689" t2="-24.4502" s0="1" s1="1.0245" s2="1" q0="0" q1="0.220108" q2="0" q3="0.975475" id="96" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-173.995" t1="51.1783" t2="-24.4252" s0="1" s1="1.0245" s2="1" q0="0" q1="0.220108" q2="0" q3="0.975475" id="97" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-174.023" t1="49.6469" t2="-24.4163" s0="1" s1="1.0245" s2="1" q0="0" q1="0.220108" q2="0" q3="0.975475" id="98" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-169.992" t1="54.6381" t2="-12.1449" s0="3.70913" s1="8.4087" s2="3.52068" q0="0" q1="0.99999" q2="0" q3="0.00447517" id="99" version="1">
+        <parameters/>
+        <EnvObject t0="-170.007" t1="54.2842" t2="-12.232" s0="1" s1="1.0249" s2="1" q0="0" q1="0.999985" q2="0" q3="0.00548094" id="100" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-170.075" t1="56.5427" t2="-12.1437" s0="1" s1="1.0249" s2="1" q0="0" q1="0.999985" q2="0" q3="0.00548094" id="101" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-170.021" t1="54.1512" t2="-12.1451" s0="1" s1="1.0249" s2="1" q0="0" q1="0.999985" q2="0" q3="0.00548094" id="102" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-169.992" t1="52.6192" t2="-12.1409" s0="1" s1="1.0249" s2="1" q0="0" q1="0.999985" q2="0" q3="0.00548094" id="124" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-22.1866" t1="60.6726" t2="-3.38068" s0="1" s1="1" s2="0.76274" q0="0" q1="-0.99779" q2="0" q3="0.0664466" id="112" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-12.3905" t1="57.8286" t2="-2.32756" s0="0.878542" s1="0.660368" s2="0.878542" q0="0" q1="-0.00389944" q2="0" q3="0.999992" id="113" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-24.3198" t1="57.7664" t2="-1.46027" s0="0.662588" s1="0.662588" s2="0.662588" q0="0" q1="0.0770265" q2="0" q3="0.997029" id="114" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-15.9422" t1="60.7626" t2="-4.01854" s0="1" s1="1" s2="0.76274" q0="0" q1="0.999956" q2="0" q3="0.00937958" id="115" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-13.4073" t1="58.9555" t2="-2.35743" s0="0.583381" s1="0.583381" s2="0.583381" q0="0" q1="-0.728451" q2="0" q3="0.685098" id="116" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_support.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshRegionObject t0="-63.4957" t1="62.9617" t2="3.83526" s0="164.185" s1="62.9592" s2="93.1007" q0="0" q1="0" q2="0" q3="1" id="117">
+        <parameters/>
+    </NavmeshRegionObject>
+    <EnvObject t0="-23.314" t1="58.8595" t2="-1.61609" s0="0.583381" s1="0.583381" s2="0.583381" q0="0" q1="0.751462" q2="0" q3="0.659776" id="118" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_support.xml">
+        <parameters/>
+    </EnvObject>
+    <ReflectionCaptureObject t0="-21.712" t1="100.408" t2="6.07225" s0="0.48742" s1="0.48742" s2="0.48742" q0="0" q1="0" q2="0" q3="1" id="120" gicoeff00="0.0560684" gicoeff01="0.0508728" gicoeff02="0.086441" gicoeff03="0.0875549" gicoeff04="0.129822" gicoeff05="0.218414" gicoeff06="0.0751801" gicoeff07="0.108826" gicoeff08="0.219177" gicoeff09="0.0399551" gicoeff10="0.0443192" gicoeff11="0.0603714" gicoeff12="0.052002" gicoeff13="0.0555496" gicoeff14="0.0993347" gicoeff15="0.0883331" gicoeff16="0.118515" gicoeff17="0.196564">
+        <parameters>
+            <parameter name="Global" type="string" val="1"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <ReflectionCaptureObject t0="-16.7364" t1="63.3505" t2="4.44924" s0="17.9007" s1="17.9007" s2="17.9007" q0="0" q1="0" q2="0" q3="1" id="121" gicoeff00="0.0329552" gicoeff01="0.0380554" gicoeff02="0.0679474" gicoeff03="0.0321388" gicoeff04="0.05233" gicoeff05="0.0997314" gicoeff06="0.0415115" gicoeff07="0.0660095" gicoeff08="0.144806" gicoeff09="0.0229416" gicoeff10="0.0275383" gicoeff11="0.0391006" gicoeff12="0.0321999" gicoeff13="0.0402451" gicoeff14="0.0749283" gicoeff15="0.0322609" gicoeff16="0.0483322" gicoeff17="0.0899048">
+        <parameters>
+            <parameter name="Global" type="string" val="0"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <EnvObject t0="-22.5935" t1="62.3601" t2="-5.92149" s0="1.47882" s1="1" s2="0.997053" q0="-0.00802303" q1="-0.995502" q2="-0.0653681" q3="0.068106" id="122" color_r="0.854902" color_g="0.847059" color_b="0.847059" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+        <parameters/>
+    </EnvObject>
+    <ReflectionCaptureObject t0="-55.4029" t1="64.884" t2="2.61964" s0="25.568" s1="25.568" s2="25.568" q0="0" q1="0" q2="0" q3="1" id="123" gicoeff00="0.0107727" gicoeff01="0.0120983" gicoeff02="0.0185661" gicoeff03="0.0220985" gicoeff04="0.0267944" gicoeff05="0.0389252" gicoeff06="0.0140915" gicoeff07="0.0169525" gicoeff08="0.0268021" gicoeff09="0.0137177" gicoeff10="0.0156441" gicoeff11="0.0215645" gicoeff12="0.0151749" gicoeff13="0.0184441" gicoeff14="0.0276299" gicoeff15="0.0130692" gicoeff16="0.0150719" gicoeff17="0.0230064">
+        <parameters>
+            <parameter name="Global" type="string" val="0"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <Group t0="-163.162" t1="54.0395" t2="4.49027" s0="3.70913" s1="8.42112" s2="3.52068" q0="0" q1="0.0240016" q2="0" q3="0.999712" id="125" version="1">
+        <parameters/>
+        <EnvObject t0="-163.142" t1="53.6851" t2="4.5764" s0="1" s1="1.02642" s2="1" q0="-1.2517e-006" q1="0.0240012" q2="0" q3="0.999712" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-163.08" t1="55.947" t2="4.48431" s0="1" s1="1.02642" s2="1" q0="-1.2517e-006" q1="0.0240012" q2="0" q3="0.999712" id="127" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-163.134" t1="53.552" t2="4.48887" s0="1" s1="1.02642" s2="1" q0="-1.2517e-006" q1="0.0240012" q2="0" q3="0.999712" id="128" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-163.163" t1="52.0177" t2="4.48628" s0="1" s1="1.02642" s2="1" q0="-1.2517e-006" q1="0.0240012" q2="0" q3="0.999712" id="129" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-155.462" t1="53.014" t2="13.4713" s0="3.70913" s1="8.38885" s2="3.52068" q0="0" q1="0.225662" q2="0" q3="0.974206" id="130" version="1">
+        <parameters/>
+        <EnvObject t0="-155.41" t1="52.661" t2="13.5424" s0="1" s1="1.02248" s2="1" q0="0" q1="0.225661" q2="0" q3="0.974206" id="131" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-155.389" t1="54.9142" t2="13.433" s0="1" s1="1.02248" s2="1" q0="0" q1="0.225661" q2="0" q3="0.974206" id="132" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-155.436" t1="52.5284" t2="13.4585" s0="1" s1="1.02248" s2="1" q0="0" q1="0.225661" q2="0" q3="0.974206" id="133" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-155.464" t1="50.9999" t2="13.4677" s0="1" s1="1.02248" s2="1" q0="0" q1="0.225661" q2="0" q3="0.974206" id="134" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-179.907" t1="54.2806" t2="2.64039" s0="3.70913" s1="8.45047" s2="3.52068" q0="0" q1="0.0214014" q2="0" q3="0.999771" id="135" version="1">
+        <parameters/>
+        <EnvObject t0="-179.887" t1="53.9249" t2="2.72662" s0="1" s1="1.02999" s2="1" q0="0" q1="0.0214007" q2="0" q3="0.999771" id="136" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-179.824" t1="56.1947" t2="2.63486" s0="1" s1="1.02999" s2="1" q0="0" q1="0.0214007" q2="0" q3="0.999771" id="137" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-179.878" t1="53.7913" t2="2.63914" s0="1" s1="1.02999" s2="1" q0="0" q1="0.0214007" q2="0" q3="0.999771" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-179.907" t1="52.2517" t2="2.63639" s0="1" s1="1.02999" s2="1" q0="0" q1="0.0214007" q2="0" q3="0.999771" id="139" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-182.026" t1="53.2162" t2="15.4591" s0="3.70913" s1="8.3489" s2="3.52068" q0="0" q1="-0.970243" q2="0" q3="0.242133" id="140" version="1">
+        <parameters/>
+        <EnvObject t0="-182.081" t1="52.8648" t2="15.3899" s0="1" s1="1.01761" s2="1" q0="0" q1="-0.970235" q2="0" q3="0.242165" id="141" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-182.098" t1="55.1074" t2="15.4999" s0="1" s1="1.01761" s2="1" q0="0" q1="-0.970235" q2="0" q3="0.242165" id="142" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-182.052" t1="52.7328" t2="15.4728" s0="1" s1="1.01761" s2="1" q0="0" q1="-0.970235" q2="0" q3="0.242165" id="143" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-182.024" t1="51.2117" t2="15.4627" s0="1" s1="1.01761" s2="1" q0="0" q1="-0.970235" q2="0" q3="0.242165" id="144" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-124.733" t1="51.474" t2="3.45725" s0="5.09019" s1="12.7946" s2="6.10158" q0="0" q1="0.104682" q2="0" q3="0.994506" id="145" version="1">
+        <parameters/>
+        <EnvObject t0="-124.937" t1="51.0624" t2="3.46249" s0="0.985994" s1="0.985993" s2="0.985993" q0="0" q1="0.104682" q2="0" q3="0.994506" id="146" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-124.722" t1="48.5957" t2="3.45906" s0="0.985994" s1="0.985993" s2="0.985993" q0="0" q1="0.104682" q2="0" q3="0.994506" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-124.843" t1="50.4965" t2="3.40912" s0="0.985994" s1="0.985993" s2="0.985993" q0="0" q1="0.104682" q2="0" q3="0.994506" id="151" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-124.855" t1="52.1362" t2="3.42592" s0="0.985994" s1="0.985993" s2="0.985993" q0="0" q1="0.104682" q2="0" q3="0.994506" id="152" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-124.871" t1="55.1793" t2="3.6388" s0="0.985994" s1="0.985993" s2="0.985993" q0="0" q1="0.104682" q2="0" q3="0.994506" id="153" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-138.684" t1="51.861" t2="10.0923" s0="5.09019" s1="12.7946" s2="6.10158" q0="0" q1="-0.280309" q2="0" q3="0.95991" id="154" version="1">
+        <parameters/>
+        <EnvObject t0="-138.834" t1="51.4494" t2="9.95251" s0="0.985993" s1="0.985993" s2="0.985993" q0="1.07289e-006" q1="-0.280311" q2="0" q3="0.959909" id="157" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-138.678" t1="48.9827" t2="10.101" s0="0.985993" s1="0.985993" s2="0.985993" q0="1.07289e-006" q1="-0.280311" q2="0" q3="0.959909" id="158" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-138.729" t1="50.8835" t2="9.9808" s0="0.985993" s1="0.985993" s2="0.985993" q0="1.07289e-006" q1="-0.280311" q2="0" q3="0.959909" id="162" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-138.749" t1="52.5232" t2="9.98396" s0="0.985993" s1="0.985993" s2="0.985993" q0="1.07289e-006" q1="-0.280311" q2="0" q3="0.959909" id="163" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-138.91" t1="55.5663" t2="10.125" s0="0.985993" s1="0.985993" s2="0.985993" q0="1.07289e-006" q1="-0.280311" q2="0" q3="0.959909" id="164" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-11.8609" t1="58.7065" t2="-5.87528" s0="0.894218" s1="1.0187" s2="0.931282" q0="0" q1="-0.082634" q2="0" q3="0.99658" id="155" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-45.7694" t1="58.2027" t2="-2.69214" s0="1" s1="1" s2="1" q0="0" q1="-0.0180504" q2="0" q3="0.999837" id="156" color_r="0.47451" color_g="0.47451" color_b="0.47451" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-147.04" t1="51.231" t2="22.9333" s0="5.25244" s1="12.8254" s2="6.29606" q0="0" q1="0.999785" q2="0" q3="0.0207347" id="165" version="1">
+        <parameters/>
+        <EnvObject t0="-146.834" t1="50.8183" t2="22.9806" s0="1.01742" s1="0.988368" s2="1.01742" q0="0" q1="0.999783" q2="0" q3="0.0208322" id="166" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-147.05" t1="48.3457" t2="22.9288" s0="1.01742" s1="0.988368" s2="1.01742" q0="0" q1="0.999783" q2="0" q3="0.0208322" id="167" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-146.942" t1="50.2511" t2="23.0097" s0="1.01742" s1="0.988368" s2="1.01742" q0="0" q1="0.999783" q2="0" q3="0.0208322" id="168" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-146.925" t1="51.8948" t2="22.9961" s0="1.01742" s1="0.988368" s2="1.01742" q0="0" q1="0.999783" q2="0" q3="0.0208322" id="169" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-146.856" t1="54.9452" t2="22.7872" s0="1.01742" s1="0.988368" s2="1.01742" q0="0" q1="0.999783" q2="0" q3="0.0208322" id="170" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-128.651" t1="48.4022" t2="27.3283" s0="5.25244" s1="12.8254" s2="6.29606" q0="0" q1="-0.346115" q2="0" q3="0.938192" id="171" version="1">
+        <parameters/>
+        <EnvObject t0="-128.784" t1="47.9895" t2="27.1641" s0="1.01742" s1="0.988367" s2="1.01742" q0="1.19209e-006" q1="-0.346117" q2="0" q3="0.938191" id="172" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-128.646" t1="45.5169" t2="27.338" s0="1.01742" s1="0.988367" s2="1.01742" q0="1.19209e-006" q1="-0.346117" q2="0" q3="0.938191" id="173" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-128.681" t1="47.4223" t2="27.2079" s0="1.01742" s1="0.988367" s2="1.01742" q0="1.19209e-006" q1="-0.346117" q2="0" q3="0.938191" id="177" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-128.703" t1="49.066" t2="27.2082" s0="1.01742" s1="0.988367" s2="1.01742" q0="1.19209e-006" q1="-0.346117" q2="0" q3="0.938191" id="178" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-128.886" t1="52.1164" t2="27.3294" s0="1.01742" s1="0.988367" s2="1.01742" q0="1.19209e-006" q1="-0.346117" q2="0" q3="0.938191" id="179" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-153.031" t1="56.6404" t2="-8.12511" s0="5.25896" s1="12.8413" s2="6.30387" q0="0" q1="-0.329422" q2="0" q3="0.944183" id="180" version="1">
+        <parameters/>
+        <EnvObject t0="-153.17" t1="56.2272" t2="-8.28469" s0="1.01868" s1="0.989594" s2="1.01868" q0="0" q1="-0.329421" q2="0" q3="0.944183" id="181" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-153.026" t1="53.7516" t2="-8.11558" s0="1.01868" s1="0.989594" s2="1.01868" q0="0" q1="-0.329421" q2="0" q3="0.944183" id="182" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-153.065" t1="55.6593" t2="-8.24447" s0="1.01868" s1="0.989594" s2="1.01868" q0="0" q1="-0.329421" q2="0" q3="0.944183" id="183" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-153.087" t1="57.305" t2="-8.24343" s0="1.01868" s1="0.989594" s2="1.01868" q0="0" q1="-0.329421" q2="0" q3="0.944183" id="184" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-153.266" t1="60.3592" t2="-8.11557" s0="1.01868" s1="0.989594" s2="1.01868" q0="0" q1="-0.329421" q2="0" q3="0.944183" id="185" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-137.224" t1="52.7661" t2="-17.0325" s0="5.25098" s1="12.8218" s2="6.29431" q0="0" q1="-0.28508" q2="0" q3="0.958504" id="189" version="1">
+        <parameters/>
+        <EnvObject t0="-137.376" t1="52.3535" t2="-17.1782" s0="1.01714" s1="0.988094" s2="1.01714" q0="1.78814e-006" q1="-0.285079" q2="0" q3="0.958504" id="190" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-137.217" t1="49.8816" t2="-17.0235" s0="1.01714" s1="0.988094" s2="1.01714" q0="1.78814e-006" q1="-0.285079" q2="0" q3="0.958504" id="191" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-137.269" t1="51.7865" t2="-17.148" s0="1.01714" s1="0.988094" s2="1.01714" q0="1.78814e-006" q1="-0.285079" q2="0" q3="0.958504" id="192" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-137.29" t1="53.4297" t2="-17.1449" s0="1.01714" s1="0.988094" s2="1.01714" q0="1.78814e-006" q1="-0.285079" q2="0" q3="0.958504" id="193" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-137.457" t1="56.4792" t2="-17.0011" s0="1.01714" s1="0.988094" s2="1.01714" q0="1.78814e-006" q1="-0.285079" q2="0" q3="0.958504" id="194" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-46.9137" t1="58.1857" t2="7.11621" s0="1" s1="1" s2="1" q0="0" q1="-0.722569" q2="0" q3="0.691299" id="196" color_r="0.47451" color_g="0.47451" color_b="0.47451" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-25.9242" t1="58.7557" t2="-5.25641" s0="1.00001" s1="1.00001" s2="1.00001" q0="0" q1="-0.986741" q2="0" q3="0.162303" id="197" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-22.6116" t1="59.6496" t2="9.2258" s0="4.56983" s1="7.76365" s2="5.30179" q0="0" q1="0" q2="0" q3="1" id="198" version="1">
+        <parameters/>
+        <EnvObject t0="-22.6185" t1="59.6496" t2="10.6775" s0="0.528069" s1="0.579214" s2="0.758242" q0="0" q1="-0.0309546" q2="0" q3="0.999521" id="119" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_wall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-22.6116" t1="62.9154" t2="8.58921" s0="0.438802" s1="0.565105" s2="0.540181" q0="0" q1="0.677503" q2="0" q3="0.73552" id="201" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-22.514" t1="60.7246" t2="9.03764" s0="1.01393" s1="1.01393" s2="1.01393" q0="0" q1="0.999793" q2="0" q3="0.0203459" id="195" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_support.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-12.9085" t1="56.8247" t2="4.31951" s0="0.54688" s1="0.941817" s2="0.416844" q0="0" q1="0.690807" q2="0" q3="0.723039" id="199" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.3801" t1="59.3892" t2="13.1368" s0="0.592791" s1="0.565105" s2="0.400752" q0="0" q1="0.668425" q2="0" q3="0.74378" id="200" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-23.2567" t1="59.4213" t2="13.043" s0="0.592791" s1="0.565105" s2="0.39085" q0="0" q1="-0.743779" q2="0" q3="0.668426" id="202" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.86949" t1="60.3846" t2="3.73193" s0="2.1673" s1="2.1673" s2="2.1673" q0="0" q1="0" q2="0" q3="1" id="203" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_brick.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-9.09447" t1="60.2766" t2="5.06694" s0="1" s1="1" s2="1" q0="0" q1="0.688175" q2="0" q3="0.725545" id="204" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.1215" t1="59.9392" t2="3.70608" s0="2.1673" s1="2.1673" s2="2.1673" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="205" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_brick.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.03705" t1="59.744" t2="4.98621" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="206" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-7.44712" t1="59.5451" t2="3.73193" s0="2.1673" s1="2.1673" s2="2.1673" q0="0" q1="0" q2="0" q3="1" id="207" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_brick.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-7.36481" t1="59.296" t2="5.08026" s0="1" s1="1" s2="1" q0="-0.709627" q1="0" q2="0.704577" q3="0" id="208" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.3297" t1="58.7177" t2="-6.3133" s0="0.902937" s1="1.0067" s2="0.909258" q0="0" q1="-0.0296224" q2="0" q3="0.999561" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.98042" t1="59.0863" t2="3.91865" s0="2.1673" s1="2.1673" s2="2.1673" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="210" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_brick.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-63.9172" t1="61.1564" t2="7.90264" s0="1" s1="1.0187" s2="1" q0="0.0459859" q1="0.0158002" q2="-0.0488594" q3="0.997621" id="211" color_r="0.462745" color_g="0.462745" color_b="0.462745" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.94249" t1="58.8405" t2="5.20252" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="212" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.32642" t1="58.5643" t2="3.89722" s0="2.1673" s1="2.1673" s2="2.1673" q0="0" q1="0" q2="0" q3="1" id="213" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_brick.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.24411" t1="58.3152" t2="5.24555" s0="1" s1="1" s2="1" q0="-0.709627" q1="0" q2="0.704577" q3="0" id="214" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.7982" t1="58.8887" t2="5.0266" s0="0.423394" s1="1.17623" s2="0.327345" q0="0" q1="0.0394243" q2="0" q3="0.999223" id="215" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.80613" t1="58.9376" t2="4.34973" s0="0.441324" s1="1.23211" s2="0.327345" q0="0" q1="0.999948" q2="0" q3="0.0101956" id="216" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-60.379" t1="59.4195" t2="-2.48474" s0="1.30377" s1="1" s2="1" q0="0.0027101" q1="-0.0452737" q2="-0.0596911" q3="0.997186" id="217" color_r="0.47451" color_g="0.47451" color_b="0.47451" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-15.2276" t1="62.4889" t2="-6.23721" s0="1.47882" s1="1" s2="0.997053" q0="0.0639057" q1="-0.0302648" q2="-0.00215071" q3="0.997495" id="218" color_r="0.854902" color_g="0.847059" color_b="0.847059" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+        <parameters/>
+    </EnvObject>
+    <ItemObject t0="-35.9494" t1="56.6359" t2="5.87486" s0="1.00348" s1="1" s2="1.00003" q0="3.24249e-005" q1="-0.516345" q2="0" q3="0.856381" id="296" type_file="Data/Items/staffbasic.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <ItemObject t0="-35.9507" t1="56.5167" t2="1.25942" s0="1.00348" s1="1" s2="1.00003" q0="2.70605e-005" q1="0" q2="1.68085e-005" q3="1" id="297" type_file="Data/Items/staffbasic.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <ItemObject t0="-12.3668" t1="61.2227" t2="3.16753" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="298" type_file="Data/Prototypes/Weapons/FlintKnife_Item.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <ActorObject t0="13.5268" t1="57.7696" t2="-3.2591" s0="1" s1="1" s2="1" q0="0" q1="0.979722" q2="0" q3="0.200362" id="299" type_file="Data/Objects/characters/rabbits/Male_rabbit_3_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1.8"/>
+            <parameter name="Fat" type="string" val="0.45"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="Hickory, Turner, Guards"/>
+        </parameters>
+        <Connections>
+            <Connection id="372"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="307" type="1" mirrored="0" attachment=""/>
+            <ItemConnection id="306" type="1" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.223529" green="0.223529" blue="0.223529"/>
+            <Color label="Shirt" channel="1" red="0.247059" green="0.164706" blue="0.0901961"/>
+            <Color label="Pants" channel="2" red="0.0392157" green="0.0392157" blue="0.0431373"/>
+            <Color label="Spots" channel="3" red="0.0941176" green="0.0941176" blue="0.0941176"/>
+        </Palette>
+        <EnvObjectAttachments>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="22" num_connections="1" m0="0.153724" m1="-0.0227219" m2="0.987852" m3="0" m4="0.797613" m5="0.592965" m6="-0.110481" m7="0" m8="-0.583252" m9="0.804907" m10="0.109277" m11="0" m12="-0.472202" m13="0.207329" m14="-0.0341187" m15="1"/>
+                <BoneConnect bone_id="21" num_connections="1" m0="0.106926" m1="0.05825" m2="0.992559" m3="0" m4="0.79925" m5="0.588763" m6="-0.120654" m7="0" m8="-0.59141" m9="0.806204" m10="0.0163979" m11="0" m12="-0.47191" m13="0.2062" m14="-0.0374851" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="19" num_connections="1" m0="0.0354193" m1="-0.232456" m2="0.971962" m3="0" m4="0.797128" m5="0.593178" m6="0.112817" m7="0" m8="-0.602771" m9="0.770782" m10="0.206307" m11="0" m12="-0.285877" m13="0.335953" m14="-0.02003" m15="1"/>
+                <BoneConnect bone_id="20" num_connections="1" m0="-0.0592677" m1="-0.0742168" m2="0.995479" m3="0" m4="0.785929" m5="0.611378" m6="0.0923723" m7="0" m8="-0.61547" m9="0.787851" m10="0.0220942" m11="0" m12="-0.286179" m13="0.3368" m14="-0.0299997" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="17" num_connections="2" m0="0.132973" m1="-0.196133" m2="0.971519" m3="0" m4="0.850725" m5="0.525508" m6="-0.0103489" m7="0" m8="-0.508512" m9="0.827872" m10="0.236734" m11="0" m12="-0.164682" m13="0.402756" m14="-0.0112991" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="19" num_connections="1" m0="-0.530161" m1="0.820068" m2="0.215448" m3="0" m4="0.845887" m5="0.529032" m6="0.067829" m7="0" m8="-0.0583546" m9="0.218205" m10="-0.974157" m11="0" m12="-0.279129" m13="0.300301" m14="-0.0850134" m15="1"/>
+                <BoneConnect bone_id="20" num_connections="1" m0="-0.543797" m1="0.838675" m2="0.0301505" m3="0" m4="0.83842" m5="0.541364" m6="0.0630662" m7="0" m8="0.0365695" m9="0.059574" m10="-0.997554" m11="0" m12="-0.273426" m13="0.291313" m14="-0.0875139" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="21" num_connections="1" m0="-0.106926" m1="-0.0582502" m2="-0.992559" m3="0" m4="0.867117" m5="0.482994" m6="-0.121758" m7="0" m8="0.486493" m9="-0.873684" m10="-0.00113478" m11="0" m12="-0.437447" m13="0.153992" m14="-0.0381317" m15="1"/>
+                <BoneConnect bone_id="22" num_connections="1" m0="-0.153724" m1="0.0227218" m2="-0.987853" m3="0" m4="0.864469" m5="0.487327" m6="-0.123315" m7="0" m8="0.478605" m9="-0.872924" m10="-0.094556" m11="0" m12="-0.438238" m13="0.155182" m14="-0.0405998" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="31" num_connections="2" m0="0.999309" m1="-0.0312457" m2="-0.0201447" m3="0" m4="0.0303552" m5="0.99861" m6="-0.0430883" m7="0" m8="0.021463" m9="0.042447" m10="0.998868" m11="0" m12="-0.00101185" m13="0.534508" m14="0.0360909" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+        </EnvObjectAttachments>
+        <EnvObject s0="0.872643" s1="0.872643" s2="0.872643" id="300" color_r="0.0627451" color_g="0.0627451" color_b="0.0627451" overbright="0" type_file="Data/Objects/gear/rabbit_gear/large_wood_plate.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.872643" s1="0.872643" s2="0.872643" id="301" color_r="0.0627451" color_g="0.0627451" color_b="0.0627451" overbright="0" type_file="Data/Objects/gear/rabbit_gear/large_wood_plate.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.964496" s1="0.658499" s2="0.874864" id="302" color_r="0.0627451" color_g="0.0627451" color_b="0.0627451" overbright="0" type_file="Data/Objects/gear/rabbit_gear/large_wood_plate.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.62813" s1="0.743844" s2="0.761871" id="303" color_r="0.0627451" color_g="0.0627451" color_b="0.0627451" overbright="0" type_file="Data/Objects/gear/rabbit_gear/large_wood_plate.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.872638" s1="0.740153" s2="0.909204" id="304" color_r="0.0627451" color_g="0.0627451" color_b="0.0627451" overbright="0" type_file="Data/Objects/gear/rabbit_gear/large_wood_plate.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="1.0249" s1="1.12578" s2="1" id="305" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/gear/dog_armor/dog_armor_head_straps.xml">
+            <parameters/>
+        </EnvObject>
+    </ActorObject>
+    <ItemObject t0="11.7065" t1="57.7688" t2="-4.09255" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="306" type_file="Data/Items/DogWeapons/dogswordscabbard.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <ItemObject t0="11.5995" t1="57.8845" t2="-4.21665" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="307" type_file="Data/Items/DogWeapons/DogSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <ActorObject t0="-34.557" t1="57.0544" t2="1.2675" s0="1" s1="1" s2="1" q0="0" q1="0.760708" q2="0" q3="0.649094" id="308" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="Axle, Hickory, Turner, Fiver"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="297" type="0" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.0392157" green="0.0431373" blue="0.141176"/>
+            <Color label="Fur" channel="1" red="0.741176" green="0.733333" blue="0.611765"/>
+            <Color label="Leather" channel="2" red="0.156863" green="0.105882" blue="0.0588235"/>
+            <Color label="Armor" channel="3" red="0.0901961" green="0.0745098" blue="0.0470588"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-34.2958" t1="56.935" t2="6.27647" s0="1" s1="1" s2="1" q0="0" q1="0.690056" q2="0" q3="0.723756" id="309" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.02"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1.4000000000000001"/>
+            <parameter name="Fat" type="string" val="0.45"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.55"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="Fiver, Axle, Hickory, Turner"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="296" type="0" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.0392157" green="0.0431373" blue="0.141176"/>
+            <Color label="Fur" channel="1" red="0.329412" green="0.329412" blue="0.329412"/>
+            <Color label="Leather" channel="2" red="0.156863" green="0.105882" blue="0.0588235"/>
+            <Color label="Armor" channel="3" red="0.0901961" green="0.0745098" blue="0.0470588"/>
+        </Palette>
+        <EnvObjectAttachments>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="31" num_connections="2" m0="0.998482" m1="-0.0324291" m2="-0.0445156" m3="0" m4="0.0323199" m5="0.999472" m6="-0.00316662" m7="0" m8="0.0445948" m9="0.00172304" m10="0.999003" m11="0" m12="0.000127792" m13="0.516769" m14="0.035881" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+        </EnvObjectAttachments>
+        <EnvObject s0="1.13866" s1="1.27174" s2="1.02355" id="310" color_r="0.0363636" color_g="0.145455" color_b="1" overbright="15.5033" type_file="Data/Objects/gear/dog_armor/dog_armor_head_straps.xml">
+            <parameters/>
+        </EnvObject>
+    </ActorObject>
+    <ActorObject t0="-17.9611" t1="62.6012" t2="-2.30251" s0="1" s1="1" s2="1" q0="0" q1="-0.0188618" q2="0" q3="0.999822" id="311" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="0.98"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1.6"/>
+            <parameter name="Fat" type="string" val="0.55"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="Axle, Hickory, Turner, Fiver"/>
+        </parameters>
+        <Connections>
+            <Connection id="312"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.0392157" green="0.0431373" blue="0.141176"/>
+            <Color label="Fur" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Leather" channel="2" red="0.156863" green="0.105882" blue="0.0588235"/>
+            <Color label="Armor" channel="3" red="0.0901961" green="0.0745098" blue="0.0470588"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="-17.9852" t1="62.1719" t2="-2.2026" s0="1" s1="1" s2="1" q0="0" q1="-0.246412" q2="0" q3="0.969165" id="312" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Sit"/>
+            <parameter name="Wait" type="string" val="1"/>
+        </parameters>
+        <Connections/>
+    </PathPointObject>
+    <ActorObject t0="-21.5117" t1="64.4511" t2="8.00873" s0="1" s1="1" s2="1" q0="0" q1="0.738231" q2="0" q3="0.674548" id="313" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.04"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="0.7000000000000001"/>
+            <parameter name="Fat" type="string" val="0.45"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="string" val="1"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.45"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="Axle, Hickory, Turner, Fiver"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="317" type="0" mirrored="0" attachment=""/>
+            <ItemConnection id="316" type="1" mirrored="1" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.0392157" green="0.0431373" blue="0.141176"/>
+            <Color label="Fur" channel="1" red="0.423529" green="0.231373" blue="0.105882"/>
+            <Color label="Leather" channel="2" red="0.156863" green="0.105882" blue="0.0588235"/>
+            <Color label="Armor" channel="3" red="0.0901961" green="0.0745098" blue="0.0470588"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-13.1724" t1="58.7226" t2="3.39567" s0="1" s1="1" s2="1" q0="0" q1="-0.710392" q2="0" q3="0.703806" id="314" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="0.9"/>
+            <parameter name="Fat" type="string" val="0.45"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.55"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="Axle, Hickory, Turner, Fiver"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="318" type="0" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.105882" green="0.0588235" blue="0.0235294"/>
+            <Color label="Fur" channel="1" red="0.215686" green="0.113725" blue="0.0235294"/>
+            <Color label="Leather" channel="2" red="0.439216" green="0.133333" blue="0.0196078"/>
+            <Color label="Armor" channel="3" red="0.0823529" green="0.0823529" blue="0.0823529"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-13.3114" t1="58.7498" t2="5.60767" s0="1" s1="1" s2="1" q0="0" q1="-0.726849" q2="0" q3="0.686797" id="315" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.06"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1.6"/>
+            <parameter name="Fat" type="string" val="0.55"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.65"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="Axle, Hickory, Turner, Fiver"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="319" type="0" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.14902" green="0.0745098" blue="0.0352941"/>
+            <Color label="Fur" channel="1" red="0.172549" green="0.117647" blue="0.0588235"/>
+            <Color label="Leather" channel="2" red="0.0509804" green="0.0509804" blue="0.0509804"/>
+            <Color label="Armor" channel="3" red="0.054902" green="0.054902" blue="0.054902"/>
+        </Palette>
+    </ActorObject>
+    <ItemObject t0="-22.2966" t1="63.794" t2="8.60108" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="316" type_file="Data/Items/rabbit_weapons/rabbit_throwing_knife.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <ItemObject t0="-21.321" t1="63.5593" t2="8.12106" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="317" type_file="Data/Items/staffbasic.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <ItemObject t0="-14.7049" t1="57.797" t2="2.33257" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="318" type_file="Data/Items/staffbasic.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <ItemObject t0="-12.9767" t1="57.797" t2="5.28187" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="319" type_file="Data/Items/staffbasic.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <Hotspot t0="-10.5868" t1="61.7557" t2="4.5027" s0="0.638005" s1="0.906745" s2="1.09266" q0="0" q1="0.00180417" q2="0" q3="0.999998" id="320" type_file="Data/Objects/Hotspots/start_dialogue.xml">
+        <parameters>
+            <parameter name="Automatic" type="string" val="1"/>
+            <parameter name="Dialogue" type="string" val="King"/>
+            <parameter name="Visible in game" type="string" val="0"/>
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="-21.5751" t1="65.3829" t2="4.13612" s0="1" s1="1" s2="1" q0="0" q1="0.710163" q2="0" q3="0.704037" id="321" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/LugaruStory/Rocky_hall_3_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="King"/>
+            <parameter name="NumParticipants" type="int" val="3"/>
+            <parameter name="obj_1" type="int" val="369"/>
+            <parameter name="obj_2" type="int" val="370"/>
+            <parameter name="obj_3" type="int" val="371"/>
+        </parameters>
+        <Connections>
+            <Connection id="321"/>
+        </Connections>
+    </PlaceholderObject>
+    <Group t0="-140.57" t1="48.9558" t2="-31.5306" s0="5.12972" s1="12.5257" s2="6.14895" q0="0" q1="-0.319768" q2="0" q3="0.947496" id="322" version="1">
+        <parameters/>
+        <EnvObject t0="-140.708" t1="48.5528" t2="-31.6835" s0="0.99365" s1="0.965275" s2="0.99365" q0="0" q1="-0.319767" q2="0" q3="0.947496" id="323" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-140.564" t1="46.1379" t2="-31.5214" s0="0.99365" s1="0.965275" s2="0.99365" q0="0" q1="-0.319767" q2="0" q3="0.947496" id="329" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-140.606" t1="47.9988" t2="-31.6463" s0="0.99365" s1="0.965275" s2="0.99365" q0="0" q1="-0.319767" q2="0" q3="0.947496" id="331" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-140.627" t1="49.6041" t2="-31.6449" s0="0.99365" s1="0.965275" s2="0.99365" q0="0" q1="-0.319767" q2="0" q3="0.947496" id="333" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-140.799" t1="52.5832" t2="-31.5166" s0="0.99365" s1="0.965275" s2="0.99365" q0="0" q1="-0.319767" q2="0" q3="0.947496" id="334" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-3.30861" t1="60.5174" t2="0.664267" s0="0.851115" s1="0.851115" s2="0.851115" q0="0" q1="0.99898" q2="0" q3="0.0451555" id="324" color_r="0.870588" color_g="0.870588" color_b="0.870588" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-5.70542" t1="59.7295" t2="-2.62957" s0="0.997513" s1="1" s2="0.997053" q0="-0.0750555" q1="0.931394" q2="0.0246584" q3="0.355336" id="325" color_r="0.737255" color_g="0.737255" color_b="0.737255" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-4.09707" t1="59.5738" t2="9.8463" s0="1" s1="1" s2="1" q0="0" q1="-0.74732" q2="0" q3="0.664464" id="326" color_r="0.835294" color_g="0.835294" color_b="0.835294" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-69.1936" t1="60.657" t2="-2.8061" s0="1" s1="1.0187" s2="1" q0="0.108845" q1="-0.0396613" q2="-0.0766983" q3="0.990302" id="327" color_r="0.462745" color_g="0.462745" color_b="0.462745" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-10.5699" t1="54.5841" t2="4.28682" s0="0.967296" s1="1" s2="1.2121" q0="0" q1="0.999958" q2="-6.40005e-006" q3="0.00916747" id="328" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-30.2678" t1="51.1546" t2="4.48538" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="330" color_r="0.466667" color_g="0.466667" color_b="0.466667" overbright="0" type_file="Data/Prototypes/Lugaru/RockyHallRocks_HallPart2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-34.8449" t1="64.8134" t2="8.44378" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="332" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/RockyHallRocks_HallPart1.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-114.301" t1="54.8616" t2="-8.77438" s0="5.15685" s1="12.592" s2="6.18148" q0="0" q1="-0.802644" q2="0" q3="0.596458" id="335" version="1">
+        <parameters/>
+        <EnvObject t0="-114.206" t1="54.4564" t2="-8.95854" s0="0.998906" s1="0.970381" s2="0.998906" q0="0" q1="-0.80264" q2="0" q3="0.596464" id="336" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-114.307" t1="52.0288" t2="-8.76595" s0="0.998906" s1="0.970381" s2="0.998906" q0="0" q1="-0.80264" q2="0" q3="0.596464" id="337" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-114.204" t1="53.8995" t2="-8.84862" s0="0.998906" s1="0.970381" s2="0.998906" q0="0" q1="-0.80264" q2="0" q3="0.596464" id="338" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-114.213" t1="55.5133" t2="-8.86795" s0="0.998906" s1="0.970381" s2="0.998906" q0="0" q1="-0.80264" q2="0" q3="0.596464" id="339" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-114.395" t1="58.5082" t2="-8.98528" s0="0.998906" s1="0.970381" s2="0.998906" q0="0" q1="-0.80264" q2="0" q3="0.596464" id="340" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-102.16" t1="51.5882" t2="-28.7823" s0="5.57749" s1="13.6191" s2="6.68569" q0="0" q1="-0.999792" q2="0" q3="0.0203956" id="341" version="1">
+        <parameters/>
+        <EnvObject t0="-101.938" t1="51.15" t2="-28.7503" s0="1.08039" s1="1.04953" s2="1.08038" q0="0" q1="-0.999788" q2="0" q3="0.0205905" id="342" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-102.171" t1="48.5244" t2="-28.7862" s0="1.08039" s1="1.04953" s2="1.08038" q0="0" q1="-0.999788" q2="0" q3="0.0205905" id="343" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-102.05" t1="50.5477" t2="-28.71" s0="1.08039" s1="1.04953" s2="1.08038" q0="0" q1="-0.999788" q2="0" q3="0.0205905" id="344" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-102.034" t1="52.2931" t2="-28.7259" s0="1.08039" s1="1.04953" s2="1.08038" q0="0" q1="-0.999788" q2="0" q3="0.0205905" id="345" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-101.978" t1="55.5322" t2="-28.953" s0="1.08039" s1="1.04953" s2="1.08038" q0="0" q1="-0.999788" q2="0" q3="0.0205905" id="346" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-85.1774" t1="60.9156" t2="-23.2729" s0="5.23862" s1="12.7916" s2="6.2795" q0="0" q1="-0.305463" q2="0" q3="0.952204" id="347" version="1">
+        <parameters/>
+        <EnvObject t0="-85.3233" t1="60.5041" t2="-23.4247" s0="1.01474" s1="0.985767" s2="1.01474" q0="1.49012e-006" q1="-0.305465" q2="0" q3="0.952203" id="348" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-85.1715" t1="58.038" t2="-23.2637" s0="1.01474" s1="0.985767" s2="1.01474" q0="1.49012e-006" q1="-0.305465" q2="0" q3="0.952203" id="349" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-85.2172" t1="59.9383" t2="-23.3899" s0="1.01474" s1="0.985767" s2="1.01474" q0="1.49012e-006" q1="-0.305465" q2="0" q3="0.952203" id="350" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-85.2387" t1="61.5777" t2="-23.3878" s0="1.01474" s1="0.985767" s2="1.01474" q0="1.49012e-006" q1="-0.305465" q2="0" q3="0.952203" id="351" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-85.411" t1="64.62" t2="-23.2515" s0="1.01474" s1="0.985767" s2="1.01474" q0="1.49012e-006" q1="-0.305465" q2="0" q3="0.952203" id="352" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-196.725" t1="55.2884" t2="1.24841" s0="5.18768" s1="12.6672" s2="6.21843" q0="0" q1="0.942592" q2="0" q3="0.333947" id="353" version="1">
+        <parameters/>
+        <EnvObject t0="-196.59" t1="54.8809" t2="1.40713" s0="1.00488" s1="0.976181" s2="1.00488" q0="0" q1="0.942588" q2="0" q3="0.333958" id="354" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.73" t1="52.4387" t2="1.23896" s0="1.00488" s1="0.976181" s2="1.00488" q0="0" q1="0.942588" q2="0" q3="0.333958" id="355" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.692" t1="54.3206" t2="1.36647" s0="1.00488" s1="0.976181" s2="1.00488" q0="0" q1="0.942588" q2="0" q3="0.333958" id="356" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.671" t1="55.944" t2="1.36564" s0="1.00488" s1="0.976181" s2="1.00488" q0="0" q1="0.942588" q2="0" q3="0.333958" id="357" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.493" t1="58.9568" t2="1.24123" s0="1.00488" s1="0.976181" s2="1.00488" q0="0" q1="0.942588" q2="0" q3="0.333958" id="358" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-202.767" t1="51.2101" t2="-30.4784" s0="5.19801" s1="12.6924" s2="6.23081" q0="0" q1="0.00309833" q2="0" q3="0.999995" id="359" version="1">
+        <parameters/>
+        <EnvObject t0="-202.972" t1="50.8017" t2="-30.5154" s0="1.00688" s1="0.978125" s2="1.00688" q0="0" q1="0.00309793" q2="0" q3="0.999995" id="361" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-202.757" t1="48.3548" t2="-30.4744" s0="1.00688" s1="0.978125" s2="1.00688" q0="0" q1="0.00309793" q2="0" q3="0.999995" id="362" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-202.867" t1="50.2404" t2="-30.5492" s0="1.00688" s1="0.978125" s2="1.00688" q0="0" q1="0.00309793" q2="0" q3="0.999995" id="363" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-202.883" t1="51.867" t2="-30.535" s0="1.00688" s1="0.978125" s2="1.00688" q0="0" q1="0.00309793" q2="0" q3="0.999995" id="364" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-202.942" t1="54.8858" t2="-30.3252" s0="1.00688" s1="0.978125" s2="1.00688" q0="0" q1="0.00309793" q2="0" q3="0.999995" id="365" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Hotspot t0="-16.5412" t1="65.7778" t2="10.1776" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="360" type_file="Data/Objects/Hotspots/lugaru_level.xml">
+        <parameters>
+            <parameter name="music" type="string" val="lugaru_ambient_grass"/>
+            <parameter name="next_level" type="string" val=""/>
+        </parameters>
+    </Hotspot>
+    <Group t0="-211.032" t1="52.735" t2="-17.5038" s0="5.3941" s1="13.1713" s2="6.46586" q0="0" q1="0.954161" q2="0" q3="0.299294" id="366" version="1">
+        <parameters/>
+        <EnvObject t0="-210.88" t1="52.3112" t2="-17.3495" s0="1.04486" s1="1.01502" s2="1.04486" q0="0" q1="0.954158" q2="0" q3="0.299303" id="367" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-211.039" t1="49.7719" t2="-17.5132" s0="1.04486" s1="1.01502" s2="1.04486" q0="0" q1="0.954158" q2="0" q3="0.299303" id="368" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-210.99" t1="51.7287" t2="-17.3838" s0="1.04486" s1="1.01502" s2="1.04486" q0="0" q1="0.954158" q2="0" q3="0.299303" id="375" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-210.968" t1="53.4166" t2="-17.3863" s0="1.04486" s1="1.01502" s2="1.04486" q0="0" q1="0.954158" q2="0" q3="0.299303" id="376" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-210.792" t1="56.5493" t2="-17.5289" s0="1.04486" s1="1.01502" s2="1.04486" q0="0" q1="0.954158" q2="0" q3="0.299303" id="377" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <PlaceholderObject t0="-21.5781" t1="66.0829" t2="3.78613" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0.710163" q2="0" q3="0.704037" id="369" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="36"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-21.5751" t1="66.0829" t2="4.13612" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0.710163" q2="0" q3="0.704037" id="370" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="299"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-21.5721" t1="66.0829" t2="4.48611" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0.710163" q2="0" q3="0.704037" id="371" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="309"/>
+        </Connections>
+    </PlaceholderObject>
+    <PathPointObject t0="13.1212" t1="56.8684" t2="-12.7078" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="372" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="373"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="3.66851" t1="44.0672" t2="-64.7101" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="373" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="372"/>
+            <Connection id="374"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="1.54484" t1="2.07903" t2="-244.586" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="374" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="373"/>
+        </Connections>
+    </PathPointObject>
+    <Group t0="-221.282" t1="48.3229" t2="-34.7618" s0="5.50201" s1="12.8177" s2="6.59522" q0="0" q1="0.94172" q2="0" q3="0.336398" id="378" version="1">
+        <parameters/>
+        <EnvObject t0="-221.14" t1="47.9105" t2="-34.5928" s0="1.06577" s1="0.987776" s2="1.06576" q0="0" q1="0.941719" q2="0" q3="0.336401" id="379" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-221.288" t1="45.4393" t2="-34.7719" s0="1.06577" s1="0.987776" s2="1.06576" q0="0" q1="0.941719" q2="0" q3="0.336401" id="380" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-221.249" t1="47.3436" t2="-34.6365" s0="1.06577" s1="0.987776" s2="1.06576" q0="0" q1="0.941719" q2="0" q3="0.336401" id="381" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-221.226" t1="48.9863" t2="-34.6372" s0="1.06577" s1="0.987776" s2="1.06576" q0="0" q1="0.941719" q2="0" q3="0.336401" id="382" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-221.036" t1="52.0348" t2="-34.7682" s0="1.06577" s1="0.987776" s2="1.06576" q0="0" q1="0.941719" q2="0" q3="0.336401" id="383" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-226.058" t1="51.3397" t2="-10.2431" s0="5.50201" s1="12.9903" s2="6.59522" q0="0" q1="-0.998212" q2="0" q3="0.0597731" id="384" version="1">
+        <parameters/>
+        <EnvObject t0="-225.838" t1="50.9218" t2="-10.2288" s0="1.06577" s1="1.00108" s2="1.06576" q0="0" q1="-0.998208" q2="0" q3="0.0598399" id="385" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-226.069" t1="48.4174" t2="-10.246" s0="1.06577" s1="1.00108" s2="1.06576" q0="0" q1="-0.998208" q2="0" q3="0.0598399" id="386" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-225.944" t1="50.3472" t2="-10.1806" s0="1.06577" s1="1.00108" s2="1.06576" q0="0" q1="-0.998208" q2="0" q3="0.0598399" id="387" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-225.929" t1="52.012" t2="-10.1974" s0="1.06577" s1="1.00108" s2="1.06576" q0="0" q1="-0.998208" q2="0" q3="0.0598399" id="388" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-225.892" t1="55.1017" t2="-10.4252" s0="1.06577" s1="1.00108" s2="1.06576" q0="0" q1="-0.998208" q2="0" q3="0.0598399" id="389" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-234.143" t1="49.0722" t2="1.14185" s0="5.44268" s1="12.8502" s2="6.5241" q0="-0.000954926" q1="0.552846" q2="-0.00048089" q3="0.833283" id="390" version="1">
+        <parameters/>
+        <EnvObject t0="-234.264" t1="48.6591" t2="1.3253" s0="1.05427" s1="0.99028" s2="1.05427" q0="-0.000955463" q1="0.552845" q2="-0.00048095" q3="0.833283" id="391" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-234.135" t1="46.1813" t2="1.13988" s0="1.05427" s1="0.99028" s2="1.05427" q0="-0.000955463" q1="0.552845" q2="-0.00048095" q3="0.833283" id="392" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-234.253" t1="48.0905" t2="1.21102" s0="1.05427" s1="0.99028" s2="1.05427" q0="-0.000955463" q1="0.552845" q2="-0.00048095" q3="0.833283" id="393" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-234.246" t1="49.7374" t2="1.22879" s0="1.05427" s1="0.99028" s2="1.05427" q0="-0.000955463" q1="0.552845" q2="-0.00048095" q3="0.833283" id="394" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-234.069" t1="52.794" t2="1.36585" s0="1.05427" s1="0.99028" s2="1.05427" q0="-0.000955463" q1="0.552845" q2="-0.00048095" q3="0.833283" id="395" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-212.594" t1="52.6295" t2="9.45075" s0="5.73963" s1="13.138" s2="6.88004" q0="-0.000516981" q1="0.926649" q2="-0.000935882" q3="0.375926" id="396" version="1">
+        <parameters/>
+        <EnvObject t0="-212.461" t1="52.2072" t2="9.63996" s0="1.11179" s1="1.01246" s2="1.11179" q0="-0.000516266" q1="0.926645" q2="-0.000936031" q3="0.375936" id="397" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-212.598" t1="49.6739" t2="9.44608" s0="1.11179" s1="1.01246" s2="1.11179" q0="-0.000516266" q1="0.926645" q2="-0.000936031" q3="0.375936" id="398" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-212.57" t1="51.626" t2="9.58619" s0="1.11179" s1="1.01246" s2="1.11179" q0="-0.000516266" q1="0.926645" q2="-0.000936031" q3="0.375936" id="399" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-212.547" t1="53.3097" t2="9.58383" s0="1.11179" s1="1.01246" s2="1.11179" q0="-0.000516266" q1="0.926645" q2="-0.000936031" q3="0.375936" id="400" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-212.338" t1="56.4343" t2="9.45781" s0="1.11179" s1="1.01246" s2="1.11179" q0="-0.000516266" q1="0.926645" q2="-0.000936031" q3="0.375936" id="401" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-209.139" t1="52.0387" t2="22.8947" s0="5.68507" s1="12.6346" s2="6.81464" q0="-0.000510901" q1="0.929066" q2="-0.00093922" q3="0.369912" id="402" version="1">
+        <parameters/>
+        <EnvObject t0="-209.004" t1="51.6327" t2="23.0804" s0="1.10122" s1="0.973661" s2="1.10122" q0="-0.000510543" q1="0.929062" q2="-0.000939547" q3="0.369923" id="403" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-209.143" t1="49.1964" t2="22.89" s0="1.10122" s1="0.973661" s2="1.10122" q0="-0.000510543" q1="0.929062" q2="-0.000939547" q3="0.369923" id="404" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-209.113" t1="51.0737" t2="23.0285" s0="1.10122" s1="0.973661" s2="1.10122" q0="-0.000510543" q1="0.929062" q2="-0.000939547" q3="0.369923" id="405" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-209.09" t1="52.693" t2="23.026" s0="1.10122" s1="0.973661" s2="1.10122" q0="-0.000510543" q1="0.929062" q2="-0.000939547" q3="0.369923" id="406" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-208.885" t1="55.6978" t2="22.8987" s0="1.10122" s1="0.973661" s2="1.10122" q0="-0.000510543" q1="0.929062" q2="-0.000939547" q3="0.369923" id="407" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-213.723" t1="54.6065" t2="97.2558" s0="5.58921" s1="13.2682" s2="6.69975" q0="-0.0004583" q1="0.948031" q2="-0.000965864" q3="0.318176" id="408" version="1">
+        <parameters/>
+        <EnvObject t0="-213.571" t1="54.18" t2="97.4228" s0="1.08266" s1="1.02249" s2="1.08266" q0="-0.00045684" q1="0.948029" q2="-0.000966371" q3="0.318182" id="409" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-213.728" t1="51.6217" t2="97.2522" s0="1.08266" s1="1.02249" s2="1.08266" q0="-0.00045684" q1="0.948029" q2="-0.000966371" q3="0.318182" id="410" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-213.683" t1="53.5931" t2="97.3839" s0="1.08266" s1="1.02249" s2="1.08266" q0="-0.00045684" q1="0.948029" q2="-0.000966371" q3="0.318182" id="411" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-213.661" t1="55.2935" t2="97.3787" s0="1.08266" s1="1.02249" s2="1.08266" q0="-0.00045684" q1="0.948029" q2="-0.000966371" q3="0.318182" id="412" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-213.474" t1="58.449" t2="97.2316" s0="1.08266" s1="1.02249" s2="1.08266" q0="-0.00045684" q1="0.948029" q2="-0.000966371" q3="0.318182" id="413" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-200.877" t1="56.4" t2="107.442" s0="5.58922" s1="12.7515" s2="6.69975" q0="-0.00106418" q1="0.0245251" q2="0.000101149" q3="0.999699" id="414" version="1">
+        <parameters/>
+        <EnvObject t0="-201.099" t1="55.9896" t2="107.413" s0="1.08266" s1="0.982675" s2="1.08266" q0="-0.00106323" q1="0.0245245" q2="0.000101507" q3="0.999699" id="415" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-200.865" t1="53.5313" t2="107.452" s0="1.08266" s1="0.982675" s2="1.08266" q0="-0.00106323" q1="0.0245245" q2="0.000101507" q3="0.999699" id="416" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-200.987" t1="55.4255" t2="107.373" s0="1.08266" s1="0.982675" s2="1.08266" q0="-0.00106323" q1="0.0245245" q2="0.000101507" q3="0.999699" id="417" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-201.004" t1="57.0598" t2="107.385" s0="1.08266" s1="0.982675" s2="1.08266" q0="-0.00106323" q1="0.0245245" q2="0.000101507" q3="0.999699" id="418" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-201.059" t1="60.0931" t2="107.607" s0="1.08266" s1="0.982675" s2="1.08266" q0="-0.00106323" q1="0.0245245" q2="0.000101507" q3="0.999699" id="419" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-201.344" t1="55.7698" t2="131.351" s0="5.71876" s1="13.1344" s2="6.85502" q0="-0.000504881" q1="0.931366" q2="-0.00094226" q3="0.364083" id="420" version="1">
+        <parameters/>
+        <EnvObject t0="-201.206" t1="55.3477" t2="131.536" s0="1.10775" s1="1.01218" s2="1.10775" q0="-0.000504315" q1="0.931361" q2="-0.000943602" q3="0.364095" id="421" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Large.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-201.348" t1="52.8151" t2="131.347" s0="1.10775" s1="1.01218" s2="1.10775" q0="-0.000504315" q1="0.931361" q2="-0.000943602" q3="0.364095" id="422" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-201.316" t1="54.7666" t2="131.486" s0="1.10775" s1="1.01218" s2="1.10775" q0="-0.000504315" q1="0.931361" q2="-0.000943602" q3="0.364095" id="423" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-201.293" t1="56.4499" t2="131.483" s0="1.10775" s1="1.01218" s2="1.10775" q0="-0.000504315" q1="0.931361" q2="-0.000943602" q3="0.364095" id="424" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large3.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-201.089" t1="59.5736" t2="131.352" s0="1.10775" s1="1.01218" s2="1.10775" q0="-0.000504315" q1="0.931361" q2="-0.000943602" q3="0.364095" id="425" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Large4.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-187.631" t1="53.5185" t2="8.10634" s0="3.70913" s1="8.37148" s2="3.52068" q0="0" q1="0.787718" q2="0" q3="0.616036" id="426" version="1">
+        <parameters/>
+        <EnvObject t0="-187.55" t1="53.1661" t2="8.06984" s0="1" s1="1.02037" s2="1" q0="0" q1="0.78771" q2="0" q3="0.616046" id="427" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-187.653" t1="55.4147" t2="8.02623" s0="1" s1="1.02037" s2="1" q0="0" q1="0.78771" q2="0" q3="0.616046" id="428" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-187.638" t1="53.0338" t2="8.07819" s0="1" s1="1.02037" s2="1" q0="0" q1="0.78771" q2="0" q3="0.616046" id="429" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-187.635" t1="51.5085" t2="8.1073" s0="1" s1="1.02037" s2="1" q0="0" q1="0.78771" q2="0" q3="0.616046" id="430" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-197.926" t1="52.718" t2="14.8468" s0="3.70913" s1="8.5922" s2="3.52068" q0="0" q1="0.244688" q2="0" q3="0.969602" id="431" version="1">
+        <parameters/>
+        <EnvObject t0="-197.871" t1="52.3564" t2="14.9158" s0="1" s1="1.04727" s2="1" q0="0" q1="0.244684" q2="0" q3="0.969603" id="432" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-197.854" t1="54.6643" t2="14.8057" s0="1" s1="1.04727" s2="1" q0="0" q1="0.244684" q2="0" q3="0.969603" id="433" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-197.9" t1="52.2206" t2="14.833" s0="1" s1="1.04727" s2="1" q0="0" q1="0.244684" q2="0" q3="0.969603" id="434" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-197.928" t1="50.6551" t2="14.8433" s0="1" s1="1.04727" s2="1" q0="0" q1="0.244684" q2="0" q3="0.969603" id="435" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-186.643" t1="54.275" t2="-11.9652" s0="3.70913" s1="8.49246" s2="3.52068" q0="0" q1="-0.999475" q2="0" q3="0.032399" id="436" version="1">
+        <parameters/>
+        <EnvObject t0="-186.665" t1="53.9175" t2="-12.0509" s0="1" s1="1.03511" s2="1" q0="0" q1="-0.999471" q2="0" q3="0.0325221" id="437" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-186.726" t1="56.1986" t2="-11.9578" s0="1" s1="1.03511" s2="1" q0="0" q1="-0.999471" q2="0" q3="0.0325221" id="438" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-186.672" t1="53.7833" t2="-11.9633" s0="1" s1="1.03511" s2="1" q0="0" q1="-0.999471" q2="0" q3="0.0325221" id="439" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-186.643" t1="52.236" t2="-11.9612" s0="1" s1="1.03511" s2="1" q0="0" q1="-0.999471" q2="0" q3="0.0325221" id="440" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-194.249" t1="51.6683" t2="-20.9132" s0="3.70913" s1="8.43434" s2="3.52068" q0="0" q1="-0.977404" q2="0" q3="0.21138" id="441" version="1">
+        <parameters/>
+        <EnvObject t0="-194.3" t1="51.3133" t2="-20.9858" s0="1" s1="1.02803" s2="1" q0="0" q1="-0.977396" q2="0" q3="0.211417" id="442" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-194.324" t1="53.5788" t2="-20.8771" s0="1" s1="1.02803" s2="1" q0="0" q1="-0.977396" q2="0" q3="0.211417" id="443" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-194.276" t1="51.18" t2="-20.9012" s0="1" s1="1.02803" s2="1" q0="0" q1="-0.977396" q2="0" q3="0.211417" id="444" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-194.248" t1="49.6433" t2="-20.9096" s0="1" s1="1.02803" s2="1" q0="0" q1="-0.977396" q2="0" q3="0.211417" id="445" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-210.612" t1="44.9972" t2="-43.2694" s0="3.70913" s1="8.43434" s2="3.52068" q0="0" q1="0.321029" q2="0" q3="0.947069" id="446" version="1">
+        <parameters/>
+        <EnvObject t0="-210.547" t1="44.6422" t2="-43.2101" s0="1" s1="1.02803" s2="1" q0="0" q1="0.321026" q2="0" q3="0.94707" id="447" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-210.547" t1="46.9077" t2="-43.3215" s0="1" s1="1.02803" s2="1" q0="0" q1="0.321026" q2="0" q3="0.94707" id="448" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-210.589" t1="44.5089" t2="-43.2871" s0="1" s1="1.02803" s2="1" q0="0" q1="0.321026" q2="0" q3="0.94707" id="449" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-210.615" t1="42.9722" t2="-43.2726" s0="1" s1="1.02803" s2="1" q0="0" q1="0.321026" q2="0" q3="0.94707" id="450" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-220.113" t1="42.7279" t2="-53.1104" s0="3.70913" s1="8.43434" s2="3.52068" q0="0" q1="0.228581" q2="0" q3="0.973525" id="451" version="1">
+        <parameters/>
+        <EnvObject t0="-220.06" t1="42.3729" t2="-53.0396" s0="1" s1="1.02803" s2="1" q0="0" q1="0.228579" q2="0" q3="0.973525" id="452" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-220.04" t1="44.6384" t2="-53.1491" s0="1" s1="1.02803" s2="1" q0="0" q1="0.228579" q2="0" q3="0.973525" id="453" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-220.087" t1="42.2396" t2="-53.1233" s0="1" s1="1.02803" s2="1" q0="0" q1="0.228579" q2="0" q3="0.973525" id="454" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-220.115" t1="40.7029" t2="-53.114" s0="1" s1="1.02803" s2="1" q0="0" q1="0.228579" q2="0" q3="0.973525" id="455" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-236.302" t1="44.4501" t2="37.6729" s0="3.82708" s1="8.69159" s2="3.63264" q0="0" q1="0.220866" q2="0" q3="0.975304" id="456" version="1">
+        <parameters/>
+        <EnvObject t0="-236.249" t1="44.0843" t2="37.7468" s0="1.0318" s1="1.05938" s2="1.0318" q0="0" q1="0.220864" q2="0" q3="0.975305" id="457" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-236.226" t1="46.4188" t2="37.6341" s0="1.0318" s1="1.05938" s2="1.0318" q0="0" q1="0.220864" q2="0" q3="0.975305" id="458" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-236.275" t1="43.9469" t2="37.66" s0="1.0318" s1="1.05938" s2="1.0318" q0="0" q1="0.220864" q2="0" q3="0.975305" id="459" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-236.304" t1="42.3633" t2="37.6692" s0="1.0318" s1="1.05938" s2="1.0318" q0="0" q1="0.220864" q2="0" q3="0.975305" id="460" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-222.453" t1="46.2869" t2="54.9493" s0="3.82708" s1="8.4696" s2="3.63264" q0="0" q1="-0.999779" q2="0" q3="0.021023" id="461" version="1">
+        <parameters/>
+        <EnvObject t0="-222.473" t1="45.9304" t2="54.8603" s0="1.0318" s1="1.03233" s2="1.0318" q0="0" q1="-0.999767" q2="0" q3="0.0215854" id="462" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-222.539" t1="48.2054" t2="54.9549" s0="1.0318" s1="1.03233" s2="1.0318" q0="0" q1="-0.999767" q2="0" q3="0.0215854" id="463" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-222.483" t1="45.7965" t2="54.9505" s0="1.0318" s1="1.03233" s2="1.0318" q0="0" q1="-0.999767" q2="0" q3="0.0215854" id="464" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-222.453" t1="44.2534" t2="54.9534" s0="1.0318" s1="1.03233" s2="1.0318" q0="0" q1="-0.999767" q2="0" q3="0.0215854" id="465" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-196.252" t1="50.7661" t2="28.8492" s0="3.82708" s1="8.46959" s2="3.63264" q0="0" q1="0.207548" q2="0" q3="0.978225" id="466" version="1">
+        <parameters/>
+        <EnvObject t0="-196.2" t1="50.4097" t2="28.9245" s0="1.0318" s1="1.03233" s2="1.0318" q0="0" q1="0.207544" q2="0" q3="0.978226" id="467" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.175" t1="52.6846" t2="28.8125" s0="1.0318" s1="1.03233" s2="1.0318" q0="0" q1="0.207544" q2="0" q3="0.978226" id="468" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.225" t1="50.2758" t2="28.837" s0="1.0318" s1="1.03233" s2="1.0318" q0="0" q1="0.207544" q2="0" q3="0.978226" id="469" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.254" t1="48.7327" t2="28.8454" s0="1.0318" s1="1.03233" s2="1.0318" q0="0" q1="0.207544" q2="0" q3="0.978226" id="470" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-211.187" t1="52.6564" t2="85.6462" s0="3.82708" s1="8.48567" s2="3.63264" q0="0" q1="0.197935" q2="0" q3="0.980215" id="471" version="1">
+        <parameters/>
+        <EnvObject t0="-211.137" t1="52.2992" t2="85.7225" s0="1.0318" s1="1.03429" s2="1.0318" q0="0" q1="0.197931" q2="0" q3="0.980216" id="472" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-211.109" t1="54.5785" t2="85.6111" s0="1.0318" s1="1.03429" s2="1.0318" q0="0" q1="0.197931" q2="0" q3="0.980216" id="473" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-211.16" t1="52.1651" t2="85.6346" s0="1.0318" s1="1.03429" s2="1.0318" q0="0" q1="0.197931" q2="0" q3="0.980216" id="474" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-211.189" t1="50.619" t2="85.6424" s0="1.0318" s1="1.03429" s2="1.0318" q0="0" q1="0.197931" q2="0" q3="0.980216" id="475" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-196.975" t1="53.5187" t2="96.5583" s0="3.82708" s1="8.51672" s2="3.63264" q0="0" q1="0.183381" q2="0" q3="0.983042" id="476" version="1">
+        <parameters/>
+        <EnvObject t0="-196.928" t1="53.1603" t2="96.6361" s0="1.0318" s1="1.03807" s2="1.0318" q0="1.19209e-006" q1="0.183378" q2="0" q3="0.983042" id="477" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.896" t1="55.4479" t2="96.5255" s0="1.0318" s1="1.03807" s2="1.0318" q0="1.19209e-006" q1="0.183378" q2="0" q3="0.983042" id="478" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.947" t1="53.0256" t2="96.5475" s0="1.0318" s1="1.03807" s2="1.0318" q0="1.19209e-006" q1="0.183378" q2="0" q3="0.983042" id="479" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-196.977" t1="51.4739" t2="96.5544" s0="1.0318" s1="1.03807" s2="1.0318" q0="1.19209e-006" q1="0.183378" q2="0" q3="0.983042" id="480" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-184.671" t1="52.7454" t2="103.585" s0="3.82708" s1="8.4681" s2="3.63264" q0="0" q1="-0.983332" q2="0" q3="0.181819" id="481" version="1">
+        <parameters/>
+        <EnvObject t0="-184.719" t1="52.389" t2="103.507" s0="1.0318" s1="1.03214" s2="1.0318" q0="0" q1="-0.983313" q2="0" q3="0.181922" id="482" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-184.75" t1="54.6635" t2="103.618" s0="1.0318" s1="1.03214" s2="1.0318" q0="0" q1="-0.983313" q2="0" q3="0.181922" id="483" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-184.699" t1="52.2551" t2="103.596" s0="1.0318" s1="1.03214" s2="1.0318" q0="0" q1="-0.983313" q2="0" q3="0.181922" id="484" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-184.67" t1="50.7123" t2="103.589" s0="1.0318" s1="1.03214" s2="1.0318" q0="0" q1="-0.983313" q2="0" q3="0.181922" id="485" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-187" t1="54.7392" t2="117.407" s0="3.82708" s1="8.20003" s2="3.63264" q0="0" q1="0.999942" q2="0" q3="0.0107699" id="486" version="1">
+        <parameters/>
+        <EnvObject t0="-187.015" t1="54.3941" t2="117.317" s0="1.0318" s1="0.99947" s2="1.0318" q0="0" q1="0.999921" q2="0" q3="0.0125679" id="487" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-187.086" t1="56.5966" t2="117.407" s0="1.0318" s1="0.99947" s2="1.0318" q0="0" q1="0.999921" q2="0" q3="0.0125679" id="488" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-187.03" t1="54.2645" t2="117.406" s0="1.0318" s1="0.99947" s2="1.0318" q0="0" q1="0.999921" q2="0" q3="0.0125679" id="489" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-187" t1="52.7704" t2="117.411" s0="1.0318" s1="0.99947" s2="1.0318" q0="0" q1="0.999921" q2="0" q3="0.0125679" id="490" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-179.569" t1="54.4952" t2="139.439" s0="3.82708" s1="8.20003" s2="3.63264" q0="0" q1="-0.321928" q2="0" q3="0.946764" id="491" version="1">
+        <parameters/>
+        <EnvObject t0="-179.611" t1="54.1501" t2="139.52" s0="1.0318" s1="0.99947" s2="1.0318" q0="0" q1="-0.321922" q2="0" q3="0.946766" id="492" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-179.5" t1="56.3526" t2="139.489" s0="1.0318" s1="0.99947" s2="1.0318" q0="0" q1="-0.321922" q2="0" q3="0.946766" id="493" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-179.546" t1="54.0205" t2="139.457" s0="1.0318" s1="0.99947" s2="1.0318" q0="0" q1="-0.321922" q2="0" q3="0.946766" id="494" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-179.567" t1="52.5265" t2="139.436" s0="1.0318" s1="0.99947" s2="1.0318" q0="0" q1="-0.321922" q2="0" q3="0.946766" id="495" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-217.314" t1="53.1944" t2="127.145" s0="3.94875" s1="8.55968" s2="3.74812" q0="0" q1="0.999294" q2="0" q3="0.0375707" id="496" version="1">
+        <parameters/>
+        <EnvObject t0="-217.324" t1="52.8342" t2="127.052" s0="1.0646" s1="1.04331" s2="1.0646" q0="0" q1="0.999275" q2="0" q3="0.0380711" id="497" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-217.403" t1="55.1333" t2="127.141" s0="1.0646" s1="1.04331" s2="1.0646" q0="0" q1="0.999275" q2="0" q3="0.0380711" id="498" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-217.345" t1="52.6988" t2="127.143" s0="1.0646" s1="1.04331" s2="1.0646" q0="0" q1="0.999275" q2="0" q3="0.0380711" id="499" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-217.315" t1="51.1393" t2="127.149" s0="1.0646" s1="1.04331" s2="1.0646" q0="0" q1="0.999275" q2="0" q3="0.0380711" id="500" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-236.488" t1="46.8996" t2="109.271" s0="3.94875" s1="8.41833" s2="3.74812" q0="0" q1="0.245394" q2="0" q3="0.969423" id="501" version="1">
+        <parameters/>
+        <EnvObject t0="-236.429" t1="46.5453" t2="109.344" s0="1.0646" s1="1.02608" s2="1.0646" q0="0" q1="0.245388" q2="0" q3="0.969425" id="502" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-236.411" t1="48.8064" t2="109.227" s0="1.0646" s1="1.02608" s2="1.0646" q0="0" q1="0.245388" q2="0" q3="0.969425" id="503" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-236.46" t1="46.4122" t2="109.256" s0="1.0646" s1="1.02608" s2="1.0646" q0="0" q1="0.245388" q2="0" q3="0.969425" id="504" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-236.49" t1="44.8784" t2="109.267" s0="1.0646" s1="1.02608" s2="1.0646" q0="0" q1="0.245388" q2="0" q3="0.969425" id="505" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-245.199" t1="45.8185" t2="91.3022" s0="3.94875" s1="8.67901" s2="3.74812" q0="0" q1="0.224826" q2="0" q3="0.974399" id="506" version="1">
+        <parameters/>
+        <EnvObject t0="-245.143" t1="45.4532" t2="91.378" s0="1.0646" s1="1.05785" s2="1.0646" q0="0" q1="0.22482" q2="0" q3="0.9744" id="507" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-245.121" t1="47.7844" t2="91.2616" s0="1.0646" s1="1.05785" s2="1.0646" q0="0" q1="0.22482" q2="0" q3="0.9744" id="508" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-245.171" t1="45.316" t2="91.2887" s0="1.0646" s1="1.05785" s2="1.0646" q0="0" q1="0.22482" q2="0" q3="0.9744" id="509" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-245.201" t1="43.7347" t2="91.2984" s0="1.0646" s1="1.05785" s2="1.0646" q0="0" q1="0.22482" q2="0" q3="0.9744" id="510" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-129.701" t1="45.3097" t2="45.6693" s0="3.70913" s1="8.5552" s2="3.52068" q0="0" q1="-0.977225" q2="0" q3="0.212206" id="511" version="1">
+        <parameters/>
+        <EnvObject t0="-129.752" t1="44.9496" t2="45.5967" s0="1" s1="1.04276" s2="1" q0="0" q1="-0.977225" q2="0" q3="0.212206" id="512" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeTrunk_Small.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-129.776" t1="47.2476" t2="45.7055" s0="1" s1="1.04276" s2="1" q0="0" q1="-0.977225" q2="0" q3="0.212206" id="513" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-129.728" t1="44.8144" t2="45.6813" s0="1" s1="1.04276" s2="1" q0="0" q1="-0.977225" q2="0" q3="0.212206" id="514" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-129.7" t1="43.2557" t2="45.6729" s0="1" s1="1.04276" s2="1" q0="0" q1="-0.977225" q2="0" q3="0.212206" id="515" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/CypressTreeLeaves_Small3.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-76.43" t1="57.669" t2="1.919" s0="180.246" s1="47.1789" s2="74.0114" q0="0" q1="0" q2="0" q3="1" id="535" version="1">
+        <parameters/>
+        <Decal t0="-95.3001" t1="52.2961" t2="0.790311" s0="17.8935" s1="17.8935" s2="32.0255" q0="0" q1="0" q2="0" q3="1" id="188" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.733333" color_g="0.733326" color_b="0.733326" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-59.9652" t1="57.669" t2="2.56632" s0="49.1514" s1="47.1689" s2="47.1689" q0="0" q1="0" q2="0" q3="1" id="516" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.360784" color_g="0.360781" color_b="0.360781" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-19.0179" t1="56.7296" t2="-4.97195" s0="23.4161" s1="12.0843" s2="12.0843" q0="0" q1="0" q2="0" q3="1" id="517" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.513726" color_g="0.51372" color_b="0.51372" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-22.625" t1="56.7296" t2="12.7917" s0="11.1096" s1="6.73481" s2="6.73481" q0="0" q1="0" q2="0" q3="1" id="518" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-0.182793" t1="58.6677" t2="4.28486" s0="27.7412" s1="16.8172" s2="16.8172" q0="0" q1="0" q2="0" q3="1" id="519" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.32549" color_g="0.325487" color_b="0.325487" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-128.689" t1="43.07" t2="26.8624" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="520" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-138.597" t1="46.4117" t2="9.71644" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="521" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-125.1" t1="46.3391" t2="3.27296" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="522" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-114.322" t1="49.8445" t2="-8.77741" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="523" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-137.174" t1="47.1055" t2="-16.8956" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="524" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-103.049" t1="47.2653" t2="-27.7171" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="525" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-97.4265" t1="55.3411" t2="-10.4679" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="526" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.419608" color_g="0.416317" color_b="0.416317" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-85.4934" t1="55.4163" t2="-23.1556" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="527" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-84.0576" t1="58.8476" t2="-17.0258" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="528" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-139.141" t1="42.6582" t2="35.4161" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="529" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-146.69" t1="46.1157" t2="22.8375" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="530" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-155.283" t1="49.4285" t2="13.5726" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="531" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-163.044" t1="50.6065" t2="4.60312" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="532" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-152.847" t1="51.3099" t2="-8.23946" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="533" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+        <Decal t0="-140.456" t1="43.9559" t2="-31.5781" s0="7.00705" s1="7.00705" s2="7.00705" q0="0" q1="0" q2="0" q3="1" id="534" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.592157" color_g="0.592151" color_b="0.592151" overbright="0">
+            <parameters/>
+        </Decal>
+    </Group>
+    <CameraObject t0="-102.711" t1="82.2053" t2="0.264645" s0="1" s1="1" s2="1" q0="0.115752" q1="0.71946" q2="-0.123638" q3="0.673567" id="1253">
+        <parameters/>
+    </CameraObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="rocky_hall_shadow.xml" path="C:/Users/david/Desktop/rocky_hall_shadow.xml" thumbnail_path="empty_placeholder.png"/>
+</RecentItems>

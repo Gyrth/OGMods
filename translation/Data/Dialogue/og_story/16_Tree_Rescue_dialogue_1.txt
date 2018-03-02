@@ -1,0 +1,15 @@
+#name "Win"
+#participants 2
+set_character_pos 2 -43.9495 21.4732 -9.53729 -68
+set_character_pos 1 -43.5078 21.2974 -6.76732 84
+set_cam -41.942 21.8467 -5.20717 0 34.88 0 53.6292
+say 2 "Rat" "Don't hurt me!"
+say 1 "Turner" "Have you seen a rabbit girl?"
+say 2 "Rat" "You know her?
+say 2 "Rat" "She said she had to climb higher -- that if she made it all the way to the clouds, she'd be able to go back home."
+say 1 "Turner" "What happened to her?"
+say 2 "Rat" "We dragged her off to our main camp."
+say 2 "Rat" "The cats don't care if their slaves are crazy."
+say 1 "Turner" "Tell me where she is, and maybe I won't throw you out of this tree."
+say 2 "Rat" "When you put it that way..."
+send_global_message "levelwin"

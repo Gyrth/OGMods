@@ -1,0 +1,8 @@
+#name "Start"
+#participants 1
+send_character_message 1 "set_eye_dir -19.5782 -38.5981 55.7405 1"
+send_character_message 1 "set_torso_target -19.8448 -38.3743 56.8391 0.0917286"
+send_character_message 1 "set_head_target -19.4875 -36.3501 56.2236 1"
+set_cam -21.1556 -38.5792 58.2784 20.72 -43.68 6.72 90
+set_character_pos 1 -20.8967 -39.0483 57.1658 50
+say 1 "Turner" "Looks like I have to climb up."

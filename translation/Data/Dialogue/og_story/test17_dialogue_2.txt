@@ -1,0 +1,11 @@
+#name "Win"
+#participants 2
+set_character_pos 2 199.608 96.3255 -2.18897 107
+set_character_pos 1 199.515 96.3623 -5.33998 -82
+set_cam 200.705 96.8839 -5.97546 0 144.45 0 90
+say 2 "Rebel" "Thanks! Where did you come from?"
+say 1 "Turner" "I came here in a boat to stop the slavers."
+say 2 "Rebel" "We're trying to stop them also!"
+say 2 "Rebel" "The dogs captured some of us."
+say 1 "Turner" "Take me there."
+send_global_message "levelwin"

@@ -1,0 +1,17 @@
+#name "Note-JairoP"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -144.354 -1.06943 -5.76928 -45
+send_character_message 1 "set_head_target -143.885 -1.06865 -5.26964 1"
+set_cam -143.174 -0.724854 -7.6918 0 156.77 0 37.9039
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "It's a note. [wait 0.5]Torn, [wait 0.3]yellow [wait 0.1]and who knows how old."
+set_character_pos 1 -144.354 -1.1058 -5.76928 -45
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -143.462 -0.509361 -4.71028 0 37.66 0 37.9039
+say 2 "Note" "Every single day, [wait 0.3]now. [wait 0.5]It was horrifying to think it would happen in the very first place, [wait 0.3]but this frequency is beyond coincidence."
+say 2 "Note" "Everyone's terrified. [wait 0.3]I know I am. [wait 0.5]Whoever is doing this to us needs to die before it gets out of control."
+say 2 "Note" "All the talk about sightings out in the forest is only making us more paranoid every single day."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "The desert outpost seems to be safer - [wait 0.5]as if anything is. [wait 0.5]I just hope my family will be okay."

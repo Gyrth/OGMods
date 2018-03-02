@@ -1,0 +1,1973 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>22b_Waterfall_Arena_1v4</Name>
+<Description/>
+<Shader>post</Shader>
+<Terrain>
+    <Heightmap>Data/Prototypes/WaterfallArena/Demo/WA_hm.png</Heightmap>
+    <ShaderExtra/>
+    <DetailMap/>
+    <ColorMap>Data/Prototypes/WaterfallArena/Demo/WA_Color.tga</ColorMap>
+    <WeightMap>Data/Prototypes/WaterfallArena/Demo/WA_Weights.png</WeightMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Prototypes/WaterfallArena/Demo/Rock_Color.tga" normalpath="Data/Prototypes/WaterfallArena/Demo/Rock_norm.tga" materialpath="Data/Materials/default.xml"/>
+        <DetailMap colorpath="Data/Prototypes/WaterfallArena/Demo/Grass_Color.tga" normalpath="Data/Prototypes/WaterfallArena/Demo/Grass_norm.tga" materialpath="Data/Materials/default.xml"/>
+        <DetailMap colorpath="Data/Prototypes/WaterfallArena/Demo/Pebbles_Color.tga" normalpath="Data/Prototypes/WaterfallArena/Demo/Pebbles_norm.tga" materialpath="Data/Prototypes/Common/Materials/WaterStep.xml"/>
+        <DetailMap colorpath="Data/Prototypes/WaterfallArena/Demo/Dirt_Color.tga" normalpath="Data/Prototypes/WaterfallArena/Demo/Dirt_norm.tga" materialpath="Data/Materials/default.xml"/>
+    </DetailMaps>
+    <DetailObjects/>
+</Terrain>
+<OutOfDate NavMesh="false"/>
+<AmbientSounds>
+    <Ambient path="Data/Sounds/ambient/amb_deadvolcano_loop"/>
+</AmbientSounds>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills"/>
+    <parameter name="Dialogue Colors" type="string" val="Data/Levels/og_story/character_dialogue.txt"/>
+    <parameter name="Fog amount" type="string" val="1.5"/>
+    <parameter name="HDR Black point" type="string" val="0.019"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="0.097"/>
+    <parameter name="HDR White point" type="string" val="0.272"/>
+    <parameter name="Level Boundaries" type="string" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Sky Brightness" type="string" val="1"/>
+    <parameter name="Sky Rotation" type="string" val="0"/>
+    <parameter name="Sky Tint" type="string" val="255, 255, 255"/>
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Prototypes/WaterfallArena/Demo/WA_Dome.tga</DomeTexture>
+    <SunAngularRad>0.12848</SunAngularRad>
+    <SunColorAngle>107.286</SunColorAngle>
+    <RayToSun r0="-0.238554" r1="0.14451" r2="-0.960317"/>
+</Sky>
+<ActorObjects>
+    <NavmeshRegionObject t0="20.3672" t1="92.2683" t2="309.869" s0="31.8432" s1="31.3759" s2="66.6797" q0="0" q1="0" q2="0" q3="1" id="0">
+        <parameters/>
+    </NavmeshRegionObject>
+    <ActorObject t0="24.4151" t1="94.5828" t2="311.439" s0="1" s1="1" s2="1" q0="0" q1="0.0252362" q2="0" q3="0.999682" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="3"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="false"/>
+            <parameter name="Teams" type="string" val="turner"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="395" type="0" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Rope" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Fur" channel="2" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="40.2588" t1="90.3334" t2="310.526" s0="0.871548" s1="0.871548" s2="0.871548" q0="-0.0402789" q1="0.429482" q2="0.0205455" q3="0.901943" id="2" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmall.xml">
+        <parameters/>
+    </EnvObject>
+    <CameraObject t0="24.9363" t1="95.1626" t2="312.523" s0="1" s1="1" s2="1" q0="0.0779443" q1="0.919896" q2="-0.30262" q3="0.236933" id="3">
+        <parameters/>
+    </CameraObject>
+    <EnvObject t0="48.6639" t1="85.5585" t2="281.46" s0="1.26968" s1="1.26968" s2="1.26968" q0="0" q1="0.37447" q2="0" q3="0.927239" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="1.36213" t1="97.8877" t2="223.23" s0="1.06262" s1="1.06262" s2="1.06262" q0="0.0572449" q1="0.136507" q2="0.0264187" q3="0.988631" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="50.539" t1="90.4725" t2="266.705" s0="1" s1="1" s2="1" q0="0.0195288" q1="0.678342" q2="0.0211365" q3="0.734183" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="22.3533" t1="79.6731" t2="284.369" s0="1.36152" s1="1.36152" s2="1.36152" q0="0.0106619" q1="0.998799" q2="0.0352073" q3="0.0323622" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge4.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-7.83002" t1="92.6973" t2="266.101" s0="1.33353" s1="1.33353" s2="1.33353" q0="0.0251473" q1="-0.70846" q2="0.0166494" q3="0.705106" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge4.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-5.15142" t1="96.4861" t2="239.013" s0="1.07582" s1="1.07582" s2="1.07582" q0="0.066344" q1="-0.794748" q2="-0.0938444" q3="0.595959" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="52.0623" t1="89.7147" t2="247.996" s0="1.06262" s1="1.06262" s2="1.06262" q0="0.0180616" q1="0.515517" q2="0.0259879" q3="0.856295" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-15.3352" t1="112.55" t2="241.648" s0="1.38294" s1="1.38294" s2="1.38294" q0="-0.0122251" q1="-0.90184" q2="-0.0557992" q3="0.428278" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-4.1902" t1="117.21" t2="224.072" s0="1.26968" s1="1.26968" s2="1.26968" q0="0" q1="0.15585" q2="0" q3="0.987781" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="22.0434" t1="107.838" t2="312.017" s0="1" s1="1" s2="1" q0="0" q1="-0.00763085" q2="0" q3="0.999971" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Cave.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="31.2151" t1="87.8322" t2="306.01" s0="0.950803" s1="0.950802" s2="0.97174" q0="0" q1="0.0476072" q2="0" q3="0.998866" id="14" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeLongLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="24.2769" t1="87.8453" t2="311.23" s0="0.950802" s1="0.950802" s2="0.950802" q0="0" q1="-0.672642" q2="0" q3="0.739968" id="15" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeLongLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="41.285" t1="90.6485" t2="311.995" s0="0.805363" s1="0.805363" s2="0.805363" q0="-0.0147564" q1="-0.96704" q2="0.0681585" q3="0.244888" id="16" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="16.4722" t1="87.8894" t2="307.334" s0="0.950802" s1="0.950802" s2="0.950802" q0="0" q1="0.0476072" q2="0" q3="0.998866" id="17" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeLongLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="15.2911" t1="85.1806" t2="295.461" s0="0.96879" s1="1.0001" s2="1.00009" q0="0" q1="0.0498239" q2="0" q3="0.998758" id="18" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmallLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="51.9802" t1="105.463" t2="267.752" s0="1" s1="1" s2="1" q0="-1.07288e-006" q1="0.660592" q2="0" q3="0.750745" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="24.4186" t1="93.5291" t2="322.822" s0="1.09947" s1="1.2108" s2="1.2098" q0="0" q1="0.729531" q2="0" q3="0.683948" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="50.4179" t1="100.446" t2="258.835" s0="1" s1="1" s2="1" q0="-0.00946957" q1="0.705238" q2="0.0396277" q3="0.707799" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="51.1356" t1="99.1728" t2="271.69" s0="1" s1="1" s2="1" q0="0.00154495" q1="0.600983" q2="0.0942822" q3="0.79368" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="47.9765" t1="93.4515" t2="268.023" s0="1" s1="1" s2="1" q0="-1.13249e-006" q1="0.707111" q2="0" q3="0.707103" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="47.2882" t1="95.3908" t2="257.162" s0="1" s1="1" s2="1" q0="-1.13249e-006" q1="0.788363" q2="0" q3="0.61521" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="60.7875" t1="105.727" t2="248.56" s0="1.23615" s1="1.23615" s2="1.23615" q0="0.0153244" q1="-0.722771" q2="0.0191681" q3="0.690652" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="57.8538" t1="102.808" t2="266.604" s0="1.46553" s1="1.46553" s2="1.46553" q0="-0.0321406" q1="-0.746412" q2="0.0285957" q3="0.664092" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="47.7829" t1="102.65" t2="318.092" s0="1" s1="1" s2="1" q0="0" q1="0.364236" q2="0" q3="0.931307" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="46.0575" t1="98.884" t2="320.808" s0="1" s1="1" s2="1" q0="-0.108524" q1="0.405583" q2="0.0485666" q3="0.906293" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="46.5441" t1="98.0482" t2="314.894" s0="1" s1="1" s2="1" q0="0" q1="0.828017" q2="0" q3="0.560703" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="42.2288" t1="93.9943" t2="308.174" s0="1" s1="1" s2="1" q0="0.0379688" q1="0.862981" q2="-0.090064" q3="0.495692" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="44.8837" t1="97.3512" t2="323.573" s0="1" s1="1" s2="1" q0="0" q1="0.408217" q2="0" q3="0.912885" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="45.2165" t1="103.315" t2="322.063" s0="1" s1="1" s2="1" q0="0" q1="-0.441944" q2="0" q3="0.897043" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.8472" t1="91.1524" t2="312.366" s0="1" s1="1" s2="1" q0="-0.217118" q1="0.130264" q2="0.158555" q3="0.954333" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="39.1455" t1="90.0417" t2="306.964" s0="1" s1="1" s2="1" q0="-0.104361" q1="0.994244" q2="-0.0153836" q3="0.0187369" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="47.809" t1="102.467" t2="314.99" s0="1" s1="1" s2="1" q0="0" q1="-0.482357" q2="0" q3="0.875975" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="42.7907" t1="103.288" t2="321.534" s0="1" s1="1" s2="1" q0="0" q1="-0.287112" q2="0" q3="0.957897" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="46.3797" t1="102.354" t2="313.353" s0="1" s1="1" s2="1" q0="0" q1="0.796793" q2="0" q3="0.604252" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="42.0424" t1="102.246" t2="314.545" s0="1" s1="1" s2="1" q0="0" q1="-0.706044" q2="0" q3="0.708168" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="41.9282" t1="102.612" t2="316.537" s0="1" s1="1" s2="1" q0="0.126454" q1="0.750259" q2="-0.150283" q3="0.631297" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="40.1586" t1="98.1513" t2="303.909" s0="1" s1="1" s2="1" q0="-0.00167129" q1="0.998319" q2="0.0387323" q3="0.0430844" id="40" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="36.6586" t1="98.0953" t2="292.766" s0="1" s1="1" s2="1" q0="-0.0316032" q1="0.716308" q2="0.0325109" q3="0.69631" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.2793" t1="99.7868" t2="312.121" s0="1" s1="1" s2="1" q0="0" q1="-0.275917" q2="0" q3="0.961181" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="42.5365" t1="91.1086" t2="315.985" s0="0.950712" s1="0.948463" s2="0.950579" q0="-0.0569003" q1="0.128056" q2="-0.0435452" q3="0.989175" id="43" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="31.1676" t1="87.9989" t2="326.976" s0="0.950147" s1="0.950147" s2="0.950147" q0="0" q1="-0.672642" q2="0" q3="0.739968" id="44" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeLongLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="7.22969" t1="90.0488" t2="285.92" s0="1" s1="1" s2="1" q0="-0.018083" q1="0.13753" q2="-0.129102" q3="0.981881" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.2133" t1="89.8895" t2="287.328" s0="1" s1="1" s2="1" q0="-0.0449694" q1="0.422645" q2="0.0695476" q3="0.902503" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="4.9249" t1="90.3198" t2="284.065" s0="1" s1="1" s2="1" q0="-0.0646691" q1="-0.679901" q2="0.0803773" q3="0.726011" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="36.8486" t1="90.27" t2="286.136" s0="6.68658" s1="3.18412" s2="5.98546" q0="0" q1="0" q2="0" q3="1" id="50" version="1">
+        <parameters/>
+        <EnvObject t0="38.1206" t1="90.0657" t2="284.964" s0="1" s1="0.999998" s2="0.999998" q0="-0.0684923" q1="0.139335" q2="-0.0648665" q3="0.985742" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="36.4075" t1="90.27" t2="286.214" s0="1.21835" s1="1.21835" s2="1.21835" q0="-0.124972" q1="0.798585" q2="-0.0572657" q3="0.585973" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="36.8143" t1="89.6282" t2="308.214" s0="0.950711" s1="0.950711" s2="0.950711" q0="-0.0782334" q1="0.49861" q2="0.03592" q3="0.862541" id="51" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-1.49381" t1="103.489" t2="285.476" s0="1.26527" s1="1.26527" s2="1.26527" q0="0.0299564" q1="-0.432395" q2="-0.140433" q3="0.890177" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-3.77035" t1="103.338" t2="283.893" s0="1.54153" s1="1.54153" s2="1.54153" q0="-0.0485107" q1="0.471378" q2="-0.0449479" q3="0.879448" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="19.6415" t1="87.9989" t2="328.077" s0="0.950241" s1="0.950237" s2="0.926419" q0="0" q1="-0.672642" q2="0" q3="0.739968" id="54" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeLongLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="29.8596" t1="84.9651" t2="294.165" s0="1.0001" s1="1.0001" s2="1.0001" q0="0" q1="0.0498239" q2="0" q3="0.998758" id="55" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmallLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="30.1512" t1="92.1601" t2="297.263" s0="1.0001" s1="1.00003" s2="0.865108" q0="-0.255746" q1="0.0481626" q2="0.0127578" q3="0.965459" id="56" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="26.9658" t1="90.5121" t2="294.165" s0="1.0001" s1="1.00009" s2="0.958432" q0="-0.175906" q1="0.715528" q2="0.194378" q3="0.647529" id="57" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="18.3382" t1="90.628" t2="294.881" s0="1.00009" s1="1.00008" s2="1.03931" q0="0.171324" q1="0.716884" q2="-0.189315" q3="0.648757" id="58" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.0247" t1="97.2074" t2="293.678" s0="1" s1="1" s2="1" q0="-0.0507172" q1="-0.0812914" q2="-0.0164965" q3="0.995262" id="59" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="11.4198" t1="98.5723" t2="308.354" s0="1" s1="1" s2="1" q0="0" q1="-0.00807235" q2="0" q3="0.999967" id="60" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.7105" t1="92.6523" t2="297.817" s0="1" s1="1" s2="1" q0="-0.0587144" q1="0.496113" q2="0.0673088" q3="0.863652" id="61" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="32.4345" t1="94.8507" t2="331.863" s0="1" s1="1" s2="1" q0="0" q1="0.215698" q2="0" q3="0.97646" id="62" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="33.7524" t1="92.3537" t2="316.845" s0="1" s1="1" s2="1" q0="-0.069721" q1="0.888044" q2="0.0308457" q3="0.453393" id="63" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="33.3227" t1="92.7421" t2="330.175" s0="1" s1="1" s2="1" q0="-0.0388171" q1="0.996311" q2="0.00348745" q3="0.0764558" id="64" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="16.2406" t1="102.296" t2="332.385" s0="1" s1="1" s2="1" q0="0" q1="-0.406276" q2="0" q3="0.91375" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="14.5768" t1="95.2756" t2="330.289" s0="1" s1="1" s2="1" q0="0" q1="-0.535496" q2="0" q3="0.844538" id="66" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.3798" t1="92.8768" t2="310.117" s0="1" s1="1" s2="1" q0="0" q1="-0.629446" q2="0" q3="0.777044" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.898" t1="89.757" t2="294.458" s0="1" s1="1" s2="1" q0="-0.0788597" q1="-0.750085" q2="-0.0314473" q3="0.655869" id="68" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="29.7899" t1="89.4089" t2="306.038" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.1036" t1="90.125" t2="294.632" s0="1" s1="1" s2="1" q0="0.00628924" q1="0.0806519" q2="0.0774892" q3="0.993706" id="70" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.8088" t1="98.3344" t2="322.525" s0="1" s1="1" s2="1" q0="0" q1="-0.502837" q2="0" q3="0.864381" id="71" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="23.768" t1="94.8297" t2="313.388" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="81" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="143"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="57.9713" t1="105.813" t2="282.771" s0="1.23615" s1="1.23615" s2="1.23615" q0="-0.0118627" q1="0.362271" q2="0.0214832" q3="0.93175" id="82" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRock_Ledge2.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="11.8785" t1="74.618" t2="279.923" s0="6.17166" s1="31.4092" s2="8.56439" q0="-0.0145686" q1="0" q2="0" q3="0.999894" id="83" version="1">
+        <parameters/>
+        <EnvObject t0="11.1925" t1="74.6375" t2="280.115" s0="1.53891" s1="1.64801" s2="1.92195" q0="-0.00275733" q1="-0.98182" q2="0.0143052" q3="0.189254" id="75" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="13.5176" t1="74.6121" t2="279.744" s0="1.54021" s1="1.64942" s2="1.92358" q0="-0.000118396" q1="-0.999861" q2="0.0145681" q3="0.00810826" id="78" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="12.3181" t1="75.0663" t2="279.485" s0="1.49322" s1="1.59908" s2="1.86488" q0="-0.00140319" q1="-0.995245" q2="0.0145009" q3="0.0963078" id="79" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-4.59091" t1="83.8171" t2="265.191" s0="8.02404" s1="38.1331" s2="8.91578" q0="0" q1="-0.603045" q2="0" q3="0.797707" id="84" version="1">
+        <parameters/>
+        <EnvObject t0="-5.02598" t1="83.834" t2="264.388" s0="2.0008" s1="2.0008" s2="2.0008" q0="0" q1="0.897429" q2="0" q3="0.441159" id="85" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-3.83025" t1="83.8163" t2="267.19" s0="2.0025" s1="2.0025" s2="2.0025" q0="0" q1="0.802582" q2="0" q3="0.596542" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-4.00863" t1="84.3767" t2="265.62" s0="1.94139" s1="1.94139" s2="1.94139" q0="0" q1="0.852081" q2="0" q3="0.52341" id="87" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-2.65911" t1="83.8132" t2="274.58" s0="8.40678" s1="38.2585" s2="7.51217" q0="0" q1="0" q2="0" q3="1" id="88" version="1">
+        <parameters/>
+        <EnvObject t0="-2.85641" t1="83.8637" t2="272.974" s0="2.0008" s1="2.0008" s2="2.0008" q0="0" q1="0.737815" q2="0" q3="0.675003" id="89" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-2.50902" t1="83.7486" t2="276.069" s0="2.00249" s1="2.00248" s2="2.00249" q0="0" q1="0.663372" q2="0" q3="0.74829" id="90" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-2.43309" t1="84.4594" t2="274.546" s0="1.9414" s1="1.94139" s2="1.9414" q0="0" q1="0.726801" q2="0" q3="0.686848" id="91" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-5.64849" t1="83.7022" t2="256.44" s0="8.02404" s1="38.1331" s2="8.91578" q0="0" q1="-0.697878" q2="0" q3="0.716217" id="92" version="1">
+        <parameters/>
+        <EnvObject t0="-5.87085" t1="83.7191" t2="255.554" s0="2.0008" s1="2.0008" s2="2.0008" q0="0" q1="0.835363" q2="-1.80304e-006" q3="0.549699" id="93" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-5.40662" t1="83.7014" t2="258.566" s0="2.00251" s1="2.00251" s2="2.0025" q0="0" q1="0.721866" q2="0" q3="0.692033" id="94" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-5.19052" t1="84.2617" t2="257" s0="1.94139" s1="1.94141" s2="1.9414" q0="0" q1="0.780104" q2="0" q3="0.62565" id="95" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="13.2649" t1="92.4555" t2="323.119" s0="1" s1="1" s2="1" q0="0.0109728" q1="-0.99138" q2="-0.0398736" q3="0.12432" id="96" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.7253" t1="92.3407" t2="324.391" s0="1" s1="1" s2="1" q0="0.0555733" q1="-0.328419" q2="-0.0262375" q3="0.942531" id="97" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="23.418" t1="94.8297" t2="313.388" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="98" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="292"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="26.6719" t1="91.9007" t2="337.802" s0="1.48402" s1="0.404694" s2="1.51552" q0="0.00852874" q1="-0.94929" q2="0.0459325" q3="0.310912" id="99" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.6281" t1="92.0705" t2="337.997" s0="1.48402" s1="0.404694" s2="1.51552" q0="0.00852874" q1="-0.94929" q2="0.0459325" q3="0.310912" id="100" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="8.80453" t1="99.2503" t2="303.841" s0="1" s1="1" s2="1" q0="-0.0237461" q1="-0.424917" q2="0.000837445" q3="0.90492" id="101" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="20.2264" t1="74.3712" t2="278.63" s0="1.53891" s1="1.64801" s2="1.92195" q0="0.0144934" q1="0.999532" q2="0.0269163" q3="0.00111879" id="102" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="42.2359" t1="91.87" t2="321.124" s0="0.913501" s1="0.888721" s2="1.10435" q0="0.0408241" q1="0.976793" q2="-0.0654652" q3="0.199808" id="103" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="14.0544" t1="89.8593" t2="312.436" s0="1" s1="1" s2="1" q0="0.0740301" q1="0.996619" q2="-0.0299259" q3="0.0193534" id="104" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.75" t1="94.9566" t2="318.89" s0="1" s1="1" s2="1" q0="-0.103317" q1="0.545918" q2="0.12776" q3="0.82157" id="105" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="38.4347" t1="102.543" t2="298.315" s0="1" s1="1" s2="1" q0="0" q1="0.693019" q2="0" q3="0.720919" id="106" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="39.7043" t1="100.122" t2="287.49" s0="1" s1="1" s2="1" q0="-0.0118125" q1="-0.0629614" q2="0.0885342" q3="0.994011" id="107" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-7.7293" t1="103.3" t2="250.556" s0="1.44581" s1="1.44581" s2="1.44581" q0="0.0350307" q1="-0.812742" q2="-0.170994" q3="0.555864" id="108" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-10.5726" t1="103.472" t2="252.641" s0="1.54153" s1="1.54153" s2="1.54153" q0="0.0709825" q1="0.708937" q2="-0.0224778" q3="0.701331" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.871" t1="105.833" t2="241.215" s0="1" s1="1" s2="1" q0="0.0986861" q1="-0.613386" q2="-0.0231742" q3="0.783251" id="110" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="3.46116" t1="110.736" t2="221.502" s0="1" s1="1" s2="1" q0="-0.159627" q1="-0.944807" q2="0.00236616" q3="0.2861" id="111" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="3.7715" t1="110.167" t2="224.76" s0="1" s1="1" s2="1" q0="0.046629" q1="-0.822094" q2="-0.0321337" q3="0.566528" id="112" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-1.88922" t1="99.3542" t2="240.311" s0="1.39953" s1="1.39953" s2="1.39953" q0="0" q1="-0.862215" q2="0" q3="0.506543" id="113" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.92563" t1="112.734" t2="245.114" s0="1.31136" s1="1.31136" s2="1.31136" q0="0" q1="-0.888862" q2="0" q3="0.458175" id="114" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.13829" t1="106.373" t2="238.664" s0="1" s1="1" s2="1" q0="0.0986861" q1="-0.613386" q2="-0.0231742" q3="0.783251" id="115" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.09929" t1="106.184" t2="239.871" s0="1" s1="1" s2="1" q0="0.000365041" q1="-0.988666" q2="-0.104279" q3="0.108006" id="116" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-3.25017" t1="112.185" t2="230.125" s0="1.39953" s1="1.39953" s2="1.39953" q0="0" q1="-0.928769" q2="0" q3="0.370659" id="117" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.0822" t1="106.083" t2="311.293" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="118" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/Banner2_Thin1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="15.0667" t1="104.822" t2="319.273" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="119" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/Banner2_Thin2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.0141" t1="107.93" t2="326.537" s0="0.843739" s1="0.843739" s2="0.843739" q0="0" q1="0" q2="0" q3="1" id="120" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/Banner2_Wide3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="33.0489" t1="104.714" t2="320.79" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="121" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/Banner2_Thin2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.7207" t1="107.048" t2="310.53" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="122" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/Banner2_Thin1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="30.7716" t1="107.156" t2="326.379" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="123" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/Banner2_Thin1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="26.3524" t1="96.8332" t2="341.681" s0="2.96457" s1="2.85687" s2="2.94664" q0="0" q1="0.999074" q2="0" q3="0.0430256" id="124" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="28.809" t1="97.2014" t2="341.661" s0="2.63284" s1="2.59302" s2="2.65723" q0="0" q1="0.997776" q2="0" q3="0.0666566" id="125" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall_Offset.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.7289" t1="97.2027" t2="340.914" s0="2.63284" s1="2.59302" s2="2.65723" q0="0" q1="-0.995487" q2="0" q3="0.0948982" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall_Offset.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="21.4105" t1="97.3303" t2="341.48" s0="2.65724" s1="2.65724" s2="2.65723" q0="0" q1="0.999074" q2="0" q3="0.0430256" id="127" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="19.1179" t1="96.8279" t2="341.794" s0="2.86344" s1="2.82014" s2="2.88997" q0="0" q1="-0.995487" q2="0" q3="0.0948982" id="128" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall_Offset.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.6228" t1="104.908" t2="307.298" s0="1" s1="1" s2="1" q0="0" q1="0.695444" q2="0" q3="0.71858" id="129" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/Banner2_Wide1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.9738" t1="104.97" t2="303.962" s0="1" s1="1" s2="1" q0="0" q1="-0.770803" q2="0" q3="0.637074" id="130" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/Banner2_Wide2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="26.9118" t1="87.1084" t2="316.252" s0="2.07507" s1="2.09164" s2="1.90029" q0="0" q1="-0.982606" q2="0" q3="0.185703" id="131" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="30.5988" t1="87.0306" t2="315.893" s0="2.05602" s1="2.0411" s2="2.18256" q0="0" q1="-0.98887" q2="0" q3="0.148782" id="132" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall_Offset.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.5503" t1="87.0873" t2="316.416" s0="2.05602" s1="2.0411" s2="1.88696" q0="0" q1="0.983287" q2="0" q3="0.182062" id="133" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall_Offset.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="21.5425" t1="87.1623" t2="316.085" s0="2.07507" s1="2.09164" s2="2.18256" q0="0" q1="0.984624" q2="0" q3="0.174687" id="134" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="18.5447" t1="87.0787" t2="315.786" s0="2.05602" s1="2.0411" s2="2.18256" q0="0" q1="0.999297" q2="0" q3="0.0374897" id="135" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Waterfall_Offset.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="30.3064" t1="89.7487" t2="314.424" s0="1.48402" s1="0.156879" s2="1.51552" q0="0" q1="-0.150031" q2="0" q3="0.988681" id="136" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="26.8476" t1="89.6718" t2="315.307" s0="1.48402" s1="0.278608" s2="1.51552" q0="0" q1="-0.964059" q2="0" q3="0.265688" id="137" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="6.38271" t1="74.4123" t2="281.346" s0="1.5389" s1="1.66158" s2="2.2298" q0="-4.72665e-005" q1="-0.970877" q2="0.000990315" q3="0.239576" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="22.223" t1="89.7372" t2="314.983" s0="1.48402" s1="0.374679" s2="1.51552" q0="0" q1="0.987862" q2="0" q3="0.155334" id="139" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="18.4913" t1="89.7927" t2="314.51" s0="1.48402" s1="0.161526" s2="1.51552" q0="0" q1="-0.156853" q2="0" q3="0.987622" id="140" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="23.068" t1="94.8297" t2="313.388" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="141" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="275"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="5.07497" t1="67.4839" t2="278.668" s0="1.93651" s1="1.09594" s2="1.97762" q0="0" q1="0.506143" q2="0" q3="0.86245" id="142" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="13.6052" t1="93.1966" t2="287.532" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="143" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="3"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="rabbit"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Pants" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="39.0991" t1="93.2829" t2="325.08" s0="0.913501" s1="0.9135" s2="0.853783" q0="0.074319" q1="0.880434" q2="-0.159034" q3="0.440478" id="144" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="19.6459" t1="88.5982" t2="294.635" s0="1.0562" s1="1.28942" s2="0.832193" q0="-0.0105603" q1="0.998966" q2="-0.021578" q3="0.0385982" id="145" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="28.9766" t1="92.0769" t2="338.684" s0="1.48402" s1="0.404694" s2="1.51552" q0="0.00852874" q1="-0.94929" q2="0.0459325" q3="0.310912" id="146" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="23.768" t1="94.1297" t2="313.388" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="147" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/22b_Waterfall_Arena_1v4_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Start"/>
+            <parameter name="NumParticipants" type="int" val="5"/>
+            <parameter name="obj_1" type="int" val="204"/>
+            <parameter name="obj_2" type="int" val="207"/>
+            <parameter name="obj_3" type="int" val="81"/>
+            <parameter name="obj_4" type="int" val="98"/>
+            <parameter name="obj_5" type="int" val="141"/>
+        </parameters>
+        <Connections>
+            <Connection id="147"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="22.5469" t1="91.9866" t2="338.239" s0="1.48402" s1="0.288047" s2="1.51553" q0="-0.0126238" q1="0.98744" q2="-0.034501" q3="0.153664" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="19.7574" t1="92.1348" t2="337.394" s0="1.48402" s1="0.320778" s2="1.51552" q0="-0.0804599" q1="-0.257844" q2="-0.0614863" q3="0.960865" id="149" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.15009" t1="103.692" t2="295.804" s0="2.58365" s1="3.24611" s2="6.99867" q0="-0.701613" q1="0.0879725" q2="0.0879723" q3="0.701613" id="150" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="48.8224" t1="104.698" t2="278.1" s0="2.61159" s1="8.73754" s2="6.99867" q0="-0.686026" q1="-0.171373" q2="-0.171373" q3="0.686025" id="151" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="49.7443" t1="104.698" t2="266.798" s0="2.61159" s1="8.73754" s2="6.99867" q0="-0.706899" q1="-0.0171157" q2="-0.0171154" q3="0.7069" id="152" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.0114" t1="104.648" t2="289.958" s0="1.68942" s1="0.782976" s2="6.99867" q0="-0.697171" q1="0.118123" q2="0.118123" q3="0.69717" id="153" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="27.8549" t1="89.5108" t2="301.273" s0="1.04789" s1="1.14923" s2="0.768465" q0="-0.761454" q1="0.646758" q2="-0.0225855" q3="0.037172" id="154" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="24.4872" t1="91.7268" t2="302.889" s0="0.331963" s1="0.331963" s2="0.331963" q0="-0.182321" q1="-0.19226" q2="-0.0695151" q3="0.96175" id="155" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.8304" t1="92.3577" t2="300.844" s0="1.13144" s1="1.14923" s2="0.7657" q0="0.0066536" q1="-0.617129" q2="0.00285267" q3="0.786829" id="156" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.2246" t1="98.6814" t2="290.661" s0="1" s1="1" s2="1" q0="0" q1="-0.594053" q2="0" q3="0.804426" id="157" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="36.0183" t1="98.6814" t2="294.18" s0="1" s1="1" s2="1" q0="0" q1="-0.628615" q2="0" q3="0.777717" id="158" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="36.0114" t1="98.6814" t2="297.531" s0="1" s1="1" s2="1" q0="0" q1="-0.628615" q2="0" q3="0.777717" id="159" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.725" t1="98.6814" t2="300.193" s0="1" s1="1" s2="1" q0="0" q1="-0.628615" q2="0" q3="0.777717" id="160" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.8191" t1="98.6814" t2="302.768" s0="1" s1="1" s2="1" q0="0" q1="-0.584764" q2="0" q3="0.811203" id="161" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="38.9744" t1="99.806" t2="300.204" s0="1" s1="1" s2="1" q0="0" q1="-0.584764" q2="0" q3="0.811203" id="162" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.9533" t1="99.806" t2="297.021" s0="1" s1="1" s2="1" q0="0" q1="-0.638068" q2="0" q3="0.76998" id="163" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="36.6013" t1="101.265" t2="315.032" s0="1" s1="1" s2="1" q0="0" q1="-0.78881" q2="0" q3="0.614637" id="164" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="36.7819" t1="101.224" t2="319.002" s0="1" s1="1" s2="1" q0="0" q1="-0.696498" q2="0" q3="0.717559" id="165" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.1716" t1="100.493" t2="320.43" s0="1" s1="1" s2="1" q0="0" q1="-0.696498" q2="0" q3="0.717559" id="166" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.9197" t1="100.493" t2="316.473" s0="1" s1="1" s2="1" q0="0" q1="-0.696498" q2="0" q3="0.717559" id="167" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.9102" t1="100.493" t2="313.404" s0="1" s1="1" s2="1" q0="0" q1="-0.829467" q2="0" q3="0.558556" id="168" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.8819" t1="98.4037" t2="312.411" s0="1" s1="1" s2="1" q0="0" q1="0.754205" q2="0" q3="0.656639" id="169" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.56282" t1="99.2737" t2="310.123" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="170" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.847" t1="99.2737" t2="305.657" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="171" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.9739" t1="98.046" t2="296.449" s0="1" s1="1" s2="1" q0="0" q1="0.999968" q2="0" q3="0.00800096" id="172" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.6275" t1="98.0577" t2="300.303" s0="0.999981" s1="1" s2="0.89603" q0="0" q1="-0.997448" q2="0" q3="0.0713964" id="173" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.7959" t1="98.1242" t2="302.091" s0="1" s1="1" s2="1" q0="0" q1="-0.894608" q2="0" q3="0.446852" id="174" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="41.2121" t1="98.1242" t2="305.467" s0="1" s1="1" s2="1" q0="0" q1="-0.657574" q2="0" q3="0.75339" id="175" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.4704" t1="98.0837" t2="303.965" s0="1" s1="1" s2="1" q0="0" q1="0.224304" q2="0" q3="0.974519" id="176" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="33.7126" t1="99.8894" t2="314.577" s0="1" s1="1" s2="1" q0="0" q1="0.999998" q2="0" q3="0.00201324" id="177" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.175" t1="99.8301" t2="319.913" s0="1" s1="1" s2="1" q0="0" q1="0.0606184" q2="0" q3="0.998161" id="178" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.9851" t1="99.8962" t2="322.893" s0="1" s1="1" s2="1" q0="0" q1="-0.725877" q2="0" q3="0.687825" id="179" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.8577" t1="98.3756" t2="308.429" s0="0.74935" s1="0.950701" s2="1.03447" q0="-0.134605" q1="-0.1528" q2="-0.0125272" q3="0.978967" id="180" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.2618" t1="98.0939" t2="291.711" s0="1" s1="1" s2="1" q0="0" q1="-0.983877" q2="0" q3="0.178846" id="181" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="36.8075" t1="98.3015" t2="286.52" s0="0.999981" s1="1" s2="0.89603" q0="0" q1="0.84815" q2="0" q3="0.529756" id="182" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.4476" t1="98.368" t2="288.153" s0="1" s1="1" s2="1" q0="0" q1="0.934214" q2="0" q3="0.356713" id="183" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="40.3328" t1="98.2897" t2="285.66" s0="1" s1="1" s2="1" q0="0" q1="-0.577871" q2="0" q3="0.816128" id="184" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.416" t1="99.9149" t2="311.777" s0="1" s1="1" s2="1" q0="0" q1="0.883553" q2="0" q3="0.468331" id="185" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.0227" t1="97.797" t2="314.95" s0="1" s1="1" s2="1" q0="0" q1="-0.167322" q2="0" q3="0.985902" id="186" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.7528" t1="97.9048" t2="308.721" s0="0.999981" s1="1" s2="0.89603" q0="0" q1="-0.207973" q2="0" q3="0.978135" id="187" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.5459" t1="97.9109" t2="311.058" s0="1" s1="1" s2="1" q0="0" q1="0.075115" q2="0" q3="0.997175" id="188" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.6382" t1="97.3861" t2="297.557" s0="1" s1="1" s2="1" q0="0.000731444" q1="-0.999268" q2="0.0275097" q3="0.0265732" id="189" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.7475" t1="97.7953" t2="306.419" s0="0.999981" s1="1" s2="0.89603" q0="0" q1="-0.989137" q2="0" q3="0.146997" id="190" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.2381" t1="97.7116" t2="302.793" s0="1" s1="1" s2="1" q0="0" q1="0.0304683" q2="0" q3="0.999536" id="191" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.55588" t1="97.2004" t2="292.765" s0="0.999981" s1="1" s2="0.89603" q0="0.035328" q1="0.635236" q2="-0.0291086" q3="0.77096" id="192" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="11.657" t1="97.2039" t2="293.954" s0="1" s1="1" s2="1" q0="-0.0351442" q1="0.354135" q2="0.0133189" q3="0.934439" id="193" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingShort1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="36.9048" t1="98.9905" t2="307.972" s0="0.949604" s1="0.949604" s2="0.949604" q0="-0.0669847" q1="0.975341" q2="-0.147217" q3="0.150167" id="194" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="38.8142" t1="99.0752" t2="308.976" s0="0.949604" s1="0.949604" s2="0.949604" q0="-0.121986" q1="-0.166824" q2="-0.0844606" q3="0.974759" id="195" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_RailingLong1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.7952" t1="99.1556" t2="301.655" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="196" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.22262" t1="99.9814" t2="301.459" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="197" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="15.7116" t1="92.2173" t2="298.524" s0="0.961464" s1="1.00008" s2="0.839771" q0="0.0127579" q1="-0.965459" q2="0.255746" q3="0.0481675" id="198" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="51.2367" t1="106.212" t2="250.284" s0="1" s1="1" s2="1" q0="-1.19209e-006" q1="0.708645" q2="0" q3="0.705565" id="199" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="50.3579" t1="102.301" t2="281.523" s0="1" s1="1" s2="1" q0="-1.13249e-006" q1="0.496473" q2="0" q3="0.868052" id="200" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.37634" t1="99.9814" t2="304.951" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="201" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.7002" t1="98.2989" t2="303.616" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="202" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.8492" t1="98.2989" t2="307.847" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="203" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="24.468" t1="94.8297" t2="313.388" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="204" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="1"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="12.1359" t1="98.1513" t2="299.219" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="205" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.4344" t1="99.141" t2="297.682" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="206" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="24.118" t1="94.8297" t2="313.388" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="207" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="279"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="22.3986" t1="89.6555" t2="285.879" s0="1.44632" s1="0.999866" s2="1.42661" q0="0" q1="-0.671677" q2="0" q3="0.740844" id="208" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.7543" t1="89.9129" t2="287.146" s0="1.18489" s1="1.18489" s2="1.18489" q0="0" q1="0.127942" q2="0" q3="0.991782" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="17.6733" t1="88.7369" t2="280.307" s0="1.15253" s1="1.15253" s2="1.15253" q0="-0.0321029" q1="0.998145" q2="0.0430902" q3="0.0286218" id="210" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="22.3346" t1="87.7743" t2="305.329" s0="1.26631" s1="1.53552" s2="1.29721" q0="0" q1="-0.631757" q2="0" q3="0.775167" id="211" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.9554" t1="88.3196" t2="281.078" s0="1.42951" s1="1.42951" s2="1.42951" q0="0.0859621" q1="-0.348282" q2="0.0427316" q3="0.932461" id="212" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="28.3575" t1="88.962" t2="281.949" s0="0.742065" s1="0.889193" s2="0.888004" q0="0.987305" q1="0.0240248" q2="-0.12726" q3="0.0919594" id="213" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="25.0705" t1="94.1047" t2="313.23" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="214" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/22b_Waterfall_Arena_1v4_dialogue_1.txt"/>
+            <parameter name="DisplayName" type="string" val="Win"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="245"/>
+        </parameters>
+        <Connections>
+            <Connection id="214"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="21.7968" t1="74.4469" t2="278.592" s0="1.53891" s1="1.64801" s2="1.92195" q0="-0.0117427" q1="-0.994652" q2="-0.0282255" q3="0.0986555" id="215" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="24.3433" t1="74.3863" t2="277.82" s0="1.54021" s1="1.6494" s2="1.92358" q0="-0.0120792" q1="-0.995823" q2="-0.0280795" q3="0.0860356" id="216" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.3666" t1="74.843" t2="278.522" s0="1.60419" s1="1.60419" s2="1.60419" q0="0.00108124" q1="-0.986049" q2="0.00680943" q3="0.166312" id="217" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="29.4796" t1="74.3528" t2="277.108" s0="7.63501" s1="31.852" s2="11.2718" q0="-0.0145686" q1="0" q2="0" q3="0.999894" id="218" version="1">
+        <parameters/>
+        <EnvObject t0="29.9906" t1="74.3348" t2="277.34" s0="1.54022" s1="1.65106" s2="1.92036" q0="0.00139181" q1="-0.996441" q2="-0.0167904" q3="0.0825921" id="74" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="28.2157" t1="74.8242" t2="277.094" s0="1.49322" s1="1.60068" s2="2.18032" q0="0.00332138" q1="-0.980237" q2="-0.0165175" q3="0.197108" id="77" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="31.7712" t1="74.6852" t2="277.828" s0="1.49321" s1="1.60066" s2="1.86171" q0="0.000503827" q1="0.999409" q2="0.0168405" q3="0.0299627" id="80" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="38.2499" t1="67.1752" t2="224.909" s0="0.999866" s1="0.999866" s2="0.999866" q0="0" q1="0.728648" q2="0" q3="0.684888" id="219" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="16.0675" t1="65.1947" t2="216.325" s0="1.49619" s1="1.49619" s2="1.49619" q0="0.0934784" q1="-0.9907" q2="-0.0981383" q3="0.0120076" id="220" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="28.516" t1="65.7335" t2="220.202" s0="1.24167" s1="1.24167" s2="1.24167" q0="-0.0367538" q1="0.6122" q2="-0.00879568" q3="0.789799" id="221" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.7789" t1="66.2019" t2="245.173" s0="1.24167" s1="1.24167" s2="1.24167" q0="0.629553" q1="-0.253518" q2="0.332463" q3="0.654874" id="222" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="49.4454" t1="64.9555" t2="229.002" s0="1.49619" s1="1.49619" s2="1.49619" q0="0.0819952" q1="-0.447739" q2="0.0136745" q3="0.890292" id="223" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="15.8742" t1="65.7921" t2="240.273" s0="1.24167" s1="1.24167" s2="1.24167" q0="-0.0885522" q1="-0.592006" q2="-0.800734" q3="0.022638" id="224" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="30.7141" t1="66.2802" t2="256.698" s0="1.24167" s1="1.24167" s2="1.24167" q0="0.982546" q1="0.00902699" q2="-0.182137" q3="0.0367162" id="225" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="8.18381" t1="99.141" t2="294.947" s0="1" s1="1" s2="1" q0="0" q1="0.732194" q2="0" q3="0.681096" id="226" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Characters/fans/mixed_fans.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.84285" t1="88.9816" t2="283.997" s0="0.889191" s1="0.889191" s2="0.889191" q0="0.00894827" q1="0.546745" q2="-0.0258618" q3="0.836852" id="227" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="22.7894" t1="42.6143" t2="212.041" s0="10.3208" s1="49.0477" s2="11.4677" q0="0.0764494" q1="-0.159283" q2="-0.00493056" q3="0.984256" id="228" version="1">
+        <parameters/>
+        <EnvObject t0="21.6192" t1="42.6366" t2="211.927" s0="2.57349" s1="2.57349" s2="2.57349" q0="0.00962253" q1="-0.996624" q2="-0.0760039" q3="0.0295208" id="229" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="25.4666" t1="42.5558" t2="212.674" s0="2.57568" s1="2.57569" s2="2.57568" q0="0.00433088" q1="0.985428" q2="0.0764878" q3="0.151864" id="230" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="23.6558" t1="43.3855" t2="211.846" s0="2.49708" s1="2.49708" s2="2.49708" q0="-0.00244553" q1="0.995012" q2="0.076572" q3="0.0638903" id="231" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="45.1046" t1="41.2156" t2="220.047" s0="13.7953" s1="53.5367" s2="20.094" q0="0" q1="0" q2="0" q3="1" id="232" version="1">
+        <parameters/>
+        <EnvObject t0="41.7262" t1="41.4015" t2="218.774" s0="2.73995" s1="2.73995" s2="2.73995" q0="0.00776416" q1="0.993987" q2="0.0604091" q3="0.090996" id="233" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="47.0098" t1="41.0618" t2="221.157" s0="2.74227" s1="2.74227" s2="2.74228" q0="0.0185938" q1="0.960907" q2="0.0579902" q3="0.270091" id="234" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="44.8492" t1="42.0625" t2="219.377" s0="2.65861" s1="2.6586" s2="2.65861" q0="0.0133996" q1="0.981051" q2="0.0594124" q3="0.183928" id="235" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="12.9721" t1="42.8307" t2="208.647" s0="2.56938" s1="2.56938" s2="2.56938" q0="-0.00489253" q1="0.996543" q2="0.0764517" q3="0.0321432" id="236" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="57.3857" t1="44.3164" t2="225.459" s0="3.27881" s1="2.48392" s2="2.48392" q0="-0.000839442" q1="0.913392" q2="0.0612018" q3="0.402453" id="238" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="35.6731" t1="39.6281" t2="215.06" s0="12.6774" s1="56.8774" s2="21.5094" q0="0" q1="0" q2="0" q3="1" id="240" version="1">
+        <parameters/>
+        <EnvObject t0="33.2626" t1="39.6281" t2="214.477" s0="2.9286" s1="2.9286" s2="2.9286" q0="-0.00120087" q1="0.993835" q2="0.0765987" q3="0.0801451" id="237" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="36.9935" t1="40.2961" t2="215.718" s0="2.84165" s1="2.84164" s2="2.84165" q0="0.00908676" q1="0.974082" q2="0.0760662" q3="0.212828" id="239" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall_Offset.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="13.6959" t1="66.5755" t2="261.782" s0="1.24167" s1="1.24167" s2="1.24167" q0="-0.0247307" q1="0.957878" q2="-0.0285762" q3="0.284678" id="241" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <ReflectionCaptureObject t0="22.6703" t1="100.035" t2="305.968" s0="0.48742" s1="0.48742" s2="0.48742" q0="0" q1="0" q2="0" q3="1" id="242" gicoeff00="0" gicoeff01="0" gicoeff02="0" gicoeff03="0" gicoeff04="0" gicoeff05="0" gicoeff06="0" gicoeff07="0" gicoeff08="0" gicoeff09="0" gicoeff10="0" gicoeff11="0" gicoeff12="0" gicoeff13="0" gicoeff14="0" gicoeff15="0" gicoeff16="0" gicoeff17="0">
+        <parameters>
+            <parameter name="Global" type="string" val="1"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <Hotspot t0="20.5669" t1="58.4102" t2="254.782" s0="15.3754" s1="5.50391" s2="15.523" q0="0" q1="0" q2="0" q3="1" id="243" type_file="Data/Objects/Hotspots/generic_kill.xml">
+        <parameters/>
+    </Hotspot>
+    <Group t0="26.076" t1="90.896" t2="329.544" s0="26.8554" s1="1.91747" s2="24.3043" q0="0" q1="0" q2="0" q3="1" id="244" version="1">
+        <parameters/>
+    </Group>
+    <PlaceholderObject t0="25.0705" t1="94.8047" t2="313.23" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="245" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="1"/>
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="25.1969" t1="98.9794" t2="310.858" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="246" type_file="Data\Objects\Hotspots\overgrowth_level.xml">
+        <parameters>
+            <parameter name="goal_0" type="string" val="defeat 292 279 275 143"/>
+            <parameter name="goal_0_post" type="string" val="dialogue Win"/>
+            <parameter name="goal_0_pre" type="string" val="dialogue Start"/>
+            <parameter name="music" type="string" val="lugaru_ambient_grass"/>
+            <parameter name="next_level" type="string" val=""/>
+            <parameter name="player_spawn" type="string" val=""/>
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="29.1908" t1="91.1318" t2="317.643" s0="1.21276" s1="1" s2="1.00481" q0="0" q1="0.101201" q2="0" q3="0.994866" id="247" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="16.8363" t1="91.073" t2="317.674" s0="1" s1="1" s2="1" q0="-0.544751" q1="-0.684" q2="-0.478074" q3="0.0826772" id="248" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="25.204" t1="91.355" t2="317.72" s0="1.53414" s1="1.11606" s2="0.966447" q0="0.0243068" q1="-0.0674634" q2="0.00424733" q3="0.997416" id="249" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="19.6351" t1="91.1476" t2="317.81" s0="1" s1="1" s2="1" q0="0.386856" q1="-0.151436" q2="-0.150542" q3="0.897077" id="250" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="32.9344" t1="91.188" t2="317.743" s0="0.70363" s1="0.70363" s2="0.70363" q0="0.310755" q1="0.377136" q2="-0.846049" q3="0.213075" id="251" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="19.856" t1="89.928" t2="315.069" s0="0.70363" s1="0.70363" s2="0.70363" q0="0.310755" q1="0.377136" q2="-0.846049" q3="0.213075" id="252" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="25.6274" t1="89.525" t2="315.564" s0="1" s1="1" s2="1" q0="-0.544751" q1="-0.684" q2="-0.478074" q3="0.0826772" id="253" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.5681" t1="67.4839" t2="278.549" s0="1.93651" s1="1.09594" s2="1.97762" q0="0" q1="-0.978149" q2="0" q3="0.207905" id="254" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="32.8492" t1="67.5644" t2="275.085" s0="1.93652" s1="1.09594" s2="1.97763" q0="0" q1="-0.150031" q2="0" q3="0.988681" id="255" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="29.4217" t1="67.1377" t2="274.793" s0="1.93651" s1="1.09594" s2="1.97762" q0="0" q1="-0.964059" q2="0" q3="0.265688" id="256" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.8207" t1="67.3677" t2="274.922" s0="1.93651" s1="1.09594" s2="1.97762" q0="0" q1="-0.964059" q2="0" q3="0.265688" id="257" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="20.7472" t1="67.4839" t2="276.06" s0="1.93651" s1="1.09594" s2="1.97762" q0="0" q1="0.987862" q2="0" q3="0.155334" id="258" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.9356" t1="67.318" t2="277.224" s0="1.93651" s1="1.09594" s2="1.97762" q0="0" q1="-0.156853" q2="0" q3="0.987622" id="259" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-0.977534" t1="67.4364" t2="277.451" s0="1.72648" s1="0.977073" s2="1.76313" q0="0" q1="0.694045" q2="0" q3="0.719932" id="260" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-1.19006" t1="67.4364" t2="273.451" s0="1.72648" s1="0.977073" s2="1.76313" q0="0" q1="-0.44612" q2="0" q3="0.894973" id="261" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-2.76642" t1="67.4364" t2="267.089" s0="1.72648" s1="0.977073" s2="1.76313" q0="0" q1="-0.720676" q2="0" q3="0.693272" id="262" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-3.78961" t1="67.4364" t2="263.192" s0="1.72648" s1="0.977073" s2="1.76313" q0="0" q1="0.835917" q2="0" q3="0.548856" id="263" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-3.60313" t1="67.4364" t2="258.091" s0="1.72648" s1="0.977073" s2="1.76313" q0="0" q1="0.694045" q2="0" q3="0.719932" id="264" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-3.89552" t1="67.4364" t2="254.353" s0="1.72648" s1="0.977073" s2="1.76313" q0="0" q1="-0.44612" q2="0" q3="0.894973" id="265" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Splash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="31.8535" t1="87.4346" t2="311.986" s0="1" s1="1" s2="1" q0="0.000219941" q1="0.741333" q2="-0.000242949" q3="0.671137" id="266" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_EndLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="17.1754" t1="87.4947" t2="313.416" s0="1" s1="1" s2="1" q0="0.000219941" q1="0.741333" q2="-0.000242949" q3="0.671137" id="267" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_EndLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="24.715" t1="87.8339" t2="315.768" s0="0.951975" s1="0.951975" s2="1.0184" q0="0" q1="0.0497823" q2="0" q3="0.99876" id="268" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShortLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="27.6457" t1="92.9222" t2="322.421" s0="1.02601" s1="1.39233" s2="1.14106" q0="1" q1="0" q2="0" q3="0" id="269" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="24.872" t1="92.7986" t2="325.026" s0="1" s1="1.39233" s2="1" q0="0" q1="0.731413" q2="0" q3="0.681935" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="24.8219" t1="92.7744" t2="319.878" s0="1.06635" s1="1.39233" s2="1.29212" q0="0" q1="-0.637541" q2="0" q3="0.770416" id="271" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="15.7109" t1="94.7436" t2="328.492" s0="1" s1="1" s2="1" q0="0" q1="0.730313" q2="0" q3="0.683113" id="275" type_file="Data/Objects/characters/rabbits/female_rabbit_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="3"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="rabbit"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Pants" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="35.5005" t1="90.4101" t2="279.97" s0="1" s1="1" s2="1" q0="0" q1="-0.175101" q2="0" q3="0.98455" id="279" type_file="Data/Objects/characters/rabbits/male_rabbit_1_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="3"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="rabbit"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Pants" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="23.0236" t1="107.836" t2="344.773" s0="6.7069" s1="6.60676" s2="2.14643" q0="0" q1="0" q2="0" q3="1" id="283" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="21.2088" t1="65.818" t2="255.548" s0="65.4226" s1="0.544481" s2="72.639" q0="0" q1="-0.16571" q2="0" q3="0.986175" id="284" version="1">
+        <parameters/>
+        <EnvObject t0="21.2048" t1="65.8185" t2="255.699" s0="32.5843" s1="0.271118" s2="36.0949" q0="0" q1="-0.16571" q2="0" q3="0.986175" id="286" color_r="0.0666667" color_g="0.392157" color_b="0.0666667" overbright="0" type_file="Data/Objects/water_test.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="44.5444" t1="106.389" t2="318.103" s0="4.01822" s1="6.46816" s2="4.24323" q0="-0.707107" q1="0" q2="0" q3="0.707107" id="285" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.0494" t1="39.5942" t2="214.869" s0="2.9286" s1="2.9286" s2="2.9286" q0="0.0017826" q1="0.989961" q2="0.0765874" q3="0.118779" id="287" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="20.1709" t1="42.642" t2="211.752" s0="2.57349" s1="2.57349" s2="2.57349" q0="-0.00710317" q1="0.997056" q2="0.0762803" q3="0.00320187" id="288" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="26.0736" t1="74.2842" t2="278.153" s0="1.20283" s1="1.65467" s2="1.67568" q0="-0.0114316" q1="-0.999171" q2="-0.00502867" q3="0.0387469" id="289" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="22.4173" t1="92.4107" t2="289.386" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="290" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="359" offmesh_connection_id="1000" poly_area="9"/>
+            <NavMeshConnection other_object_id="436" offmesh_connection_id="1022" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="38.8853" t1="88.7057" t2="282.605" s0="1.4375" s1="1.22897" s2="1.22708" q0="-0.941593" q1="-0.0534328" q2="0.331149" q3="0.0297982" id="291" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="39.127" t1="90.9576" t2="309.581" s0="1" s1="1" s2="1" q0="0" q1="-0.772791" q2="0" q3="0.634661" id="292" type_file="Data/Objects/characters/rabbits/female_rabbit_1_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="3"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="rabbit"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Pants" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="30.4056" t1="88.8448" t2="283.576" s0="0.83236" s1="0.846864" s2="0.496285" q0="0.791888" q1="-0.0570998" q2="0.584708" q3="0.166642" id="293" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.0762" t1="87.7014" t2="302.306" s0="1.98534" s1="1.7308" s2="2.24596" q0="0" q1="0.728021" q2="0" q3="0.685555" id="295" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.7009" t1="88.0804" t2="299.884" s0="1.47421" s1="1.52353" s2="2.09975" q0="0" q1="-0.644039" q2="0" q3="0.764993" id="296" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="60.1954" t1="127.568" t2="234.425" s0="1" s1="0.984932" s2="1" q0="0" q1="0" q2="0" q3="1" id="297" gicoeff00="0.127258" gicoeff01="0.229095" gicoeff02="0.312561" gicoeff03="0.177551" gicoeff04="0.286469" gicoeff05="0.360962" gicoeff06="0.219086" gicoeff07="0.402527" gicoeff08="0.555542" gicoeff09="0.0722504" gicoeff10="0.0948486" gicoeff11="0.104416" gicoeff12="0.113541" gicoeff13="0.200287" gicoeff14="0.275024" gicoeff15="0.207428" gicoeff16="0.32959" gicoeff17="0.406799">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="15.0647" t1="74.5021" t2="279.69" s0="1.65468" s1="1.65469" s2="1.65468" q0="0" q1="-0.99717" q2="0" q3="0.0751802" id="298" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="-27.9003" t1="136.069" t2="188.422" s0="1" s1="0.984932" s2="1" q0="0" q1="0" q2="0" q3="1" id="299" gicoeff00="0.142303" gicoeff01="0.242798" gicoeff02="0.325012" gicoeff03="0.204834" gicoeff04="0.319153" gicoeff05="0.395264" gicoeff06="0.225861" gicoeff07="0.411255" gicoeff08="0.565552" gicoeff09="0.101349" gicoeff10="0.123642" gicoeff11="0.130981" gicoeff12="0.15799" gicoeff13="0.247009" gicoeff14="0.319824" gicoeff15="0.209412" gicoeff16="0.333374" gicoeff17="0.412476">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="10.4702" t1="74.5021" t2="280.736" s0="1.65468" s1="1.65469" s2="1.65468" q0="0" q1="-0.977112" q2="0" q3="0.212726" id="300" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="40.1728" t1="91.4277" t2="310.31" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="301" gicoeff00="0.00451708" gicoeff01="0.00669956" gicoeff02="0.00910282" gicoeff03="0.0203533" gicoeff04="0.0239372" gicoeff05="0.0237694" gicoeff06="0.0219803" gicoeff07="0.0291367" gicoeff08="0.0337486" gicoeff09="0.00435925" gicoeff10="0.0042305" gicoeff11="0.00381279" gicoeff12="0.0085268" gicoeff13="0.0103416" gicoeff14="0.0120277" gicoeff15="0.0169716" gicoeff16="0.021265" gicoeff17="0.022007">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="42.3211" t1="100.442" t2="308.717" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="302" gicoeff00="0.00369596" gicoeff01="0.00575638" gicoeff02="0.00755596" gicoeff03="0.0101852" gicoeff04="0.010582" gicoeff05="0.0097332" gicoeff06="0.00557041" gicoeff07="0.00770378" gicoeff08="0.0089798" gicoeff09="0.00517559" gicoeff10="0.00510693" gicoeff11="0.00478411" gicoeff12="0.0104294" gicoeff13="0.0129414" gicoeff14="0.0145302" gicoeff15="0.00332165" gicoeff16="0.00415754" gicoeff17="0.00429153">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="41.9526" t1="100.418" t2="324.604" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="303" gicoeff00="0.00199032" gicoeff01="0.00371075" gicoeff02="0.0051322" gicoeff03="0.0030694" gicoeff04="0.00353241" gicoeff05="0.00357151" gicoeff06="0.00232935" gicoeff07="0.00411606" gicoeff08="0.00552273" gicoeff09="0.00237751" gicoeff10="0.00273848" gicoeff11="0.00287485" gicoeff12="0.00237179" gicoeff13="0.00262547" gicoeff14="0.00259638" gicoeff15="0.00276279" gicoeff16="0.0049324" gicoeff17="0.00667191">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="34.3609" t1="101.974" t2="329.997" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="304" gicoeff00="0.0186386" gicoeff01="0.0183487" gicoeff02="0.0160084" gicoeff03="0.0147018" gicoeff04="0.0164948" gicoeff05="0.0160751" gicoeff06="0.0117645" gicoeff07="0.0125008" gicoeff08="0.0115776" gicoeff09="0.0217476" gicoeff10="0.0219231" gicoeff11="0.0194893" gicoeff12="0.0227242" gicoeff13="0.0217743" gicoeff14="0.0188522" gicoeff15="0.0169487" gicoeff16="0.020298" gicoeff17="0.0202141">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="28.4706" t1="89.0147" t2="284.419" s0="1.04789" s1="1.14923" s2="0.768465" q0="-0.0127781" q1="0.998539" q2="0.0363021" q3="0.0379315" id="305" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="22.2776" t1="98.6516" t2="329.308" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="306" gicoeff00="0.0201569" gicoeff01="0.0266342" gicoeff02="0.0295334" gicoeff03="0.00970268" gicoeff04="0.0158005" gicoeff05="0.019207" gicoeff06="0.0163326" gicoeff07="0.0251617" gicoeff08="0.0304184" gicoeff09="0.0082407" gicoeff10="0.0114193" gicoeff11="0.0128174" gicoeff12="0.0116501" gicoeff13="0.018425" gicoeff14="0.0238457" gicoeff15="0.0262299" gicoeff16="0.038353" gicoeff17="0.043129">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="5.27934" t1="74.6754" t2="281.462" s0="1.65327" s1="1.65795" s2="1.65328" q0="0.000243694" q1="-0.941397" q2="-0.0439377" q3="0.334426" id="307" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="27.1147" t1="92.3661" t2="325.168" s0="0.574776" s1="0.735898" s2="0.504426" q0="0" q1="0.742907" q2="0" q3="0.669395" id="308" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="30.3528" t1="93.3594" t2="299.278" s0="1.0001" s1="1.00008" s2="0.572743" q0="-0.291288" q1="0.0476577" q2="0.0145307" q3="0.955337" id="309" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="15.9092" t1="93.3934" t2="300.499" s0="0.961463" s1="1.00011" s2="0.572741" q0="0.0145307" q1="-0.955337" q2="0.291288" q3="0.0476594" id="310" color_r="0.709804" color_g="0.596078" color_b="0.478431" overbright="0" type_file="Data/Prototypes/Common/Wood_SquareSmall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="22.3553" t1="89.9869" t2="289.386" s0="1.09278" s1="0.692016" s2="0.907797" q0="0.0724893" q1="0.739362" q2="0.0653164" q3="0.6662" id="311" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="22.7482" t1="87.5613" t2="294.589" s0="1.68275" s1="1.04125" s2="2.05422" q0="0" q1="0.742907" q2="0" q3="0.669395" id="312" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="18.4201" t1="94.8433" t2="327.974" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="313" gicoeff00="0.0166569" gicoeff01="0.0242195" gicoeff02="0.0286942" gicoeff03="0.00793123" gicoeff04="0.012929" gicoeff05="0.0157032" gicoeff06="0.0155926" gicoeff07="0.024929" gicoeff08="0.0309372" gicoeff09="0.00570059" gicoeff10="0.00820732" gicoeff11="0.00946617" gicoeff12="0.00575161" gicoeff13="0.00941467" gicoeff14="0.0124073" gicoeff15="0.026619" gicoeff16="0.0413361" gicoeff17="0.0492249">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="14.4171" t1="95.2172" t2="320.882" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="314" gicoeff00="0.0170021" gicoeff01="0.0253754" gicoeff02="0.0308914" gicoeff03="0.00627279" gicoeff04="0.0101976" gicoeff05="0.0130816" gicoeff06="0.0149822" gicoeff07="0.0238152" gicoeff08="0.0301056" gicoeff09="0.00508928" gicoeff10="0.00753021" gicoeff11="0.0091486" gicoeff12="0.00508022" gicoeff13="0.00747967" gicoeff14="0.00933647" gicoeff15="0.0251884" gicoeff16="0.0402603" gicoeff17="0.0503845">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="10.9658" t1="101.024" t2="311.449" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="315" gicoeff00="0.0159397" gicoeff01="0.0228767" gicoeff02="0.0273361" gicoeff03="0.00329137" gicoeff04="0.00509214" gicoeff05="0.00645924" gicoeff06="0.00970078" gicoeff07="0.0149841" gicoeff08="0.0187645" gicoeff09="0.00501537" gicoeff10="0.00697565" gicoeff11="0.00827694" gicoeff12="0.00347042" gicoeff13="0.00384521" gicoeff14="0.00401592" gicoeff15="0.0194054" gicoeff16="0.0305977" gicoeff17="0.0382919">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="32.2591" t1="106.063" t2="314.966" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="316" gicoeff00="0.0290604" gicoeff01="0.0290718" gicoeff02="0.0252495" gicoeff03="0.0207329" gicoeff04="0.0246506" gicoeff05="0.0243645" gicoeff06="0.0265732" gicoeff07="0.0287666" gicoeff08="0.0265503" gicoeff09="0.0201416" gicoeff10="0.021019" gicoeff11="0.0189133" gicoeff12="0.0213814" gicoeff13="0.020256" gicoeff14="0.016964" gicoeff15="0.0390091" gicoeff16="0.0467987" gicoeff17="0.0461121">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="8.19687" t1="99.999" t2="294.758" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="317" gicoeff00="0.0363922" gicoeff01="0.0596008" gicoeff02="0.0769958" gicoeff03="0.01122" gicoeff04="0.01859" gicoeff05="0.0236664" gicoeff06="0.0328293" gicoeff07="0.0587234" gicoeff08="0.0791626" gicoeff09="0.0106544" gicoeff10="0.0150528" gicoeff11="0.017664" gicoeff12="0.00517416" gicoeff13="0.00650978" gicoeff14="0.00744438" gicoeff15="0.0518951" gicoeff16="0.0880432" gicoeff17="0.114044">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="51.2096" t1="100.18" t2="266.885" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="318" gicoeff00="0.0303154" gicoeff01="0.0396957" gicoeff02="0.0440292" gicoeff03="0.0982513" gicoeff04="0.147491" gicoeff05="0.17778" gicoeff06="0.117737" gicoeff07="0.183563" gicoeff08="0.228912" gicoeff09="0.0178585" gicoeff10="0.0228119" gicoeff11="0.0242558" gicoeff12="0.0355072" gicoeff13="0.0476723" gicoeff14="0.0552177" gicoeff15="0.107071" gicoeff16="0.153458" gicoeff17="0.176529">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="51.9006" t1="113.032" t2="275.063" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="319" gicoeff00="0.0529022" gicoeff01="0.0643234" gicoeff02="0.0683594" gicoeff03="0.130951" gicoeff04="0.187683" gicoeff05="0.220551" gicoeff06="0.141312" gicoeff07="0.220032" gicoeff08="0.275391" gicoeff09="0.0569763" gicoeff10="0.0598755" gicoeff11="0.0552368" gicoeff12="0.061615" gicoeff13="0.0729218" gicoeff14="0.0781021" gicoeff15="0.132751" gicoeff16="0.18924" gicoeff17="0.217499">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="49.1246" t1="105.843" t2="246.101" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="320" gicoeff00="0.0775146" gicoeff01="0.102371" gicoeff02="0.116974" gicoeff03="0.130676" gicoeff04="0.202728" gicoeff05="0.248901" gicoeff06="0.159958" gicoeff07="0.265778" gicoeff08="0.345581" gicoeff09="0.0517273" gicoeff10="0.0596848" gicoeff11="0.0607834" gicoeff12="0.0589752" gicoeff13="0.0831528" gicoeff14="0.101669" gicoeff15="0.170746" gicoeff16="0.250427" gicoeff17="0.293884">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="-2.53597" t1="65.6531" t2="274.206" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="321" gicoeff00="0.00302076" gicoeff01="0.00432587" gicoeff02="0.00499058" gicoeff03="0.00306034" gicoeff04="0.00463772" gicoeff05="0.00535774" gicoeff06="0.00347996" gicoeff07="0.00526142" gicoeff08="0.00613594" gicoeff09="0.00289106" gicoeff10="0.00425673" gicoeff11="0.00494528" gicoeff12="0.00108004" gicoeff13="0.00133729" gicoeff14="0.00141764" gicoeff15="0.00641823" gicoeff16="0.00984001" gicoeff17="0.0115547">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="11.2487" t1="104.341" t2="229.46" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="322" gicoeff00="0.0839844" gicoeff01="0.143524" gicoeff02="0.195038" gicoeff03="0.016964" gicoeff04="0.0293999" gicoeff05="0.041214" gicoeff06="0.0638275" gicoeff07="0.132233" gicoeff08="0.200165" gicoeff09="0.0358162" gicoeff10="0.0412827" gicoeff11="0.0422096" gicoeff12="0.0506744" gicoeff13="0.0830536" gicoeff14="0.113297" gicoeff15="0.046257" gicoeff16="0.0810928" gicoeff17="0.109985">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="-1.89163" t1="100.157" t2="237.34" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="323" gicoeff00="0.056221" gicoeff01="0.0957184" gicoeff02="0.131393" gicoeff03="0.00862694" gicoeff04="0.0146732" gicoeff05="0.0207767" gicoeff06="0.0454102" gicoeff07="0.0936584" gicoeff08="0.142639" gicoeff09="0.019165" gicoeff10="0.0224171" gicoeff11="0.0235977" gicoeff12="0.0330009" gicoeff13="0.0527649" gicoeff14="0.0711823" gicoeff15="0.0249786" gicoeff16="0.0448036" gicoeff17="0.0629196">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="12.9188" t1="108.702" t2="289.898" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="324" gicoeff00="0.0558319" gicoeff01="0.0871429" gicoeff02="0.109329" gicoeff03="0.0290985" gicoeff04="0.0443497" gicoeff05="0.0523605" gicoeff06="0.0617752" gicoeff07="0.10408" gicoeff08="0.134338" gicoeff09="0.0217934" gicoeff10="0.0277576" gicoeff11="0.0300007" gicoeff12="0.00919533" gicoeff13="0.0115767" gicoeff14="0.0129843" gicoeff15="0.091217" gicoeff16="0.144852" gicoeff17="0.17865">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="19.1498" t1="89.702" t2="311.226" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="325" gicoeff00="0.0170097" gicoeff01="0.0281639" gicoeff02="0.0358925" gicoeff03="0.0112963" gicoeff04="0.0190525" gicoeff05="0.0238514" gicoeff06="0.0247841" gicoeff07="0.0422935" gicoeff08="0.054657" gicoeff09="0.0050745" gicoeff10="0.00806379" gicoeff11="0.00988007" gicoeff12="0.00345755" gicoeff13="0.00506496" gicoeff14="0.00623894" gicoeff15="0.0338669" gicoeff16="0.0575714" gicoeff17="0.0728455">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="22.1078" t1="94.8494" t2="311.533" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="326" gicoeff00="0.0258331" gicoeff01="0.0369415" gicoeff02="0.0429611" gicoeff03="0.0194645" gicoeff04="0.0297699" gicoeff05="0.0346413" gicoeff06="0.0363312" gicoeff07="0.0549393" gicoeff08="0.0651321" gicoeff09="0.00808144" gicoeff10="0.0112076" gicoeff11="0.0125322" gicoeff12="0.00973129" gicoeff13="0.0116043" gicoeff14="0.0122967" gicoeff15="0.05056" gicoeff16="0.0791626" gicoeff17="0.094223">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <ReflectionCaptureObject t0="53.8671" t1="116.738" t2="188.494" s0="0.48742" s1="0.48742" s2="0.48742" q0="0" q1="0" q2="0" q3="1" id="327" gicoeff00="0" gicoeff01="0" gicoeff02="0" gicoeff03="0" gicoeff04="0" gicoeff05="0" gicoeff06="0" gicoeff07="0" gicoeff08="0" gicoeff09="0" gicoeff10="0" gicoeff11="0" gicoeff12="0" gicoeff13="0" gicoeff14="0" gicoeff15="0" gicoeff16="0" gicoeff17="0">
+        <parameters>
+            <parameter name="Global" type="string" val="1"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <LightProbeObject t0="15.286" t1="96.1319" t2="304.587" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="328" gicoeff00="0.0304298" gicoeff01="0.0474472" gicoeff02="0.0587082" gicoeff03="0.0160866" gicoeff04="0.026041" gicoeff05="0.0316505" gicoeff06="0.0366516" gicoeff07="0.0603714" gicoeff08="0.0766296" gicoeff09="0.00874329" gicoeff10="0.0127964" gicoeff11="0.0148106" gicoeff12="0.00794697" gicoeff13="0.00951958" gicoeff14="0.00999069" gicoeff15="0.052063" gicoeff16="0.086441" gicoeff17="0.108215">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="5.61276" t1="89.2875" t2="284.796" s0="0.478885" s1="0.598954" s2="0.565024" q0="0.997625" q1="-0.0616528" q2="-0.0231654" q3="0.0201664" id="329" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="35.9972" t1="90.3216" t2="308.248" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="330" gicoeff00="0.0301895" gicoeff01="0.0285301" gicoeff02="0.0254135" gicoeff03="0.0429611" gicoeff04="0.047966" gicoeff05="0.0458794" gicoeff06="0.0409241" gicoeff07="0.0508728" gicoeff08="0.0527267" gicoeff09="0.0401688" gicoeff10="0.0324211" gicoeff11="0.0244904" gicoeff12="0.0244904" gicoeff13="0.0207977" gicoeff14="0.0171318" gicoeff15="0.0663223" gicoeff16="0.0756378" gicoeff17="0.072937">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="36.3384" t1="92.9572" t2="311.061" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="331" gicoeff00="0.0295601" gicoeff01="0.0317039" gicoeff02="0.0292702" gicoeff03="0.043045" gicoeff04="0.0500259" gicoeff05="0.0485687" gicoeff06="0.0493164" gicoeff07="0.057251" gicoeff08="0.0564346" gicoeff09="0.0288849" gicoeff10="0.0300026" gicoeff11="0.0261002" gicoeff12="0.0404129" gicoeff13="0.0385361" gicoeff14="0.0321236" gicoeff15="0.051796" gicoeff16="0.0647354" gicoeff17="0.0657272">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="31.1463" t1="91.2784" t2="321.799" s0="0.70363" s1="0.70363" s2="0.70363" q0="0.310755" q1="0.377136" q2="-0.846049" q3="0.213075" id="332" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="32.3534" t1="89.6485" t2="300.051" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="333" gicoeff00="0.0170631" gicoeff01="0.0246944" gicoeff02="0.0287514" gicoeff03="0.0226803" gicoeff04="0.0352287" gicoeff05="0.0415382" gicoeff06="0.0296173" gicoeff07="0.0456619" gicoeff08="0.0556183" gicoeff09="0.012639" gicoeff10="0.0187607" gicoeff11="0.0214291" gicoeff12="0.00749779" gicoeff13="0.00904655" gicoeff14="0.00971222" gicoeff15="0.0441589" gicoeff16="0.0686646" gicoeff17="0.0808716">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="30.0341" t1="89.602" t2="294.87" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="334" gicoeff00="0.0230064" gicoeff01="0.0313416" gicoeff02="0.034893" gicoeff03="0.0266151" gicoeff04="0.0400162" gicoeff05="0.0455132" gicoeff06="0.0320663" gicoeff07="0.0469208" gicoeff08="0.0534973" gicoeff09="0.0135469" gicoeff10="0.0198612" gicoeff11="0.0227661" gicoeff12="0.00792027" gicoeff13="0.00880146" gicoeff14="0.00886154" gicoeff15="0.057251" gicoeff16="0.0865784" gicoeff17="0.0995636">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="22.0013" t1="88.3301" t2="311.194" s0="0.999281" s1="1" s2="1.02861" q0="-0.000917375" q1="0" q2="0" q3="1" id="336" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_test_waterfall_arena.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="59.1803" t1="56.2344" t2="239.746" s0="1" s1="0.984932" s2="1" q0="0" q1="0" q2="0" q3="1" id="337" gicoeff00="0.152496" gicoeff01="0.228546" gicoeff02="0.286621" gicoeff03="0.19928" gicoeff04="0.244812" gicoeff05="0.245422" gicoeff06="0.128555" gicoeff07="0.210358" gicoeff08="0.275482" gicoeff09="0.203003" gicoeff10="0.229706" gicoeff11="0.216431" gicoeff12="0.0952759" gicoeff13="0.160278" gicoeff14="0.205261" gicoeff15="0.333252" gicoeff16="0.384705" gicoeff17="0.385925">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="-8.03026" t1="64.7359" t2="207.333" s0="1" s1="0.984932" s2="1" q0="0" q1="0" q2="0" q3="1" id="338" gicoeff00="0.11734" gicoeff01="0.191803" gicoeff02="0.250214" gicoeff03="0.174622" gicoeff04="0.278656" gicoeff05="0.335266" gicoeff06="0.18576" gicoeff07="0.328125" gicoeff08="0.442139" gicoeff09="0.0879517" gicoeff10="0.127975" gicoeff11="0.139282" gicoeff12="0.106628" gicoeff13="0.172913" gicoeff14="0.217285" gicoeff15="0.189026" gicoeff16="0.298096" gicoeff17="0.365112">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="26.6851" t1="89.78" t2="295.002" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="339" gicoeff00="0.0134792" gicoeff01="0.0189686" gicoeff02="0.021862" gicoeff03="0.0122662" gicoeff04="0.0188141" gicoeff05="0.0221233" gicoeff06="0.0129375" gicoeff07="0.0190105" gicoeff08="0.0225143" gicoeff09="0.0115719" gicoeff10="0.0178089" gicoeff11="0.0212059" gicoeff12="0.00428534" gicoeff13="0.00529289" gicoeff14="0.00558949" gicoeff15="0.0296631" gicoeff16="0.0449753" gicoeff17="0.0532532">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="22.7498" t1="90.5304" t2="294.803" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="340" gicoeff00="0.0297852" gicoeff01="0.0494003" gicoeff02="0.0638542" gicoeff03="0.035408" gicoeff04="0.057888" gicoeff05="0.0715714" gicoeff06="0.0719147" gicoeff07="0.120331" gicoeff08="0.154846" gicoeff09="0.00673532" gicoeff10="0.0110226" gicoeff11="0.0136185" gicoeff12="0.00713253" gicoeff13="0.010602" gicoeff14="0.012743" gicoeff15="0.068161" gicoeff16="0.113678" gicoeff17="0.144073">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="24.0309" t1="94.2017" t2="299.616" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="341" gicoeff00="0.0354538" gicoeff01="0.0538712" gicoeff02="0.0654221" gicoeff03="0.0391197" gicoeff04="0.0583649" gicoeff05="0.0671463" gicoeff06="0.0685196" gicoeff07="0.105606" gicoeff08="0.127365" gicoeff09="0.0121918" gicoeff10="0.0177479" gicoeff11="0.0207939" gicoeff12="0.0117874" gicoeff13="0.0142879" gicoeff14="0.0152359" gicoeff15="0.0821228" gicoeff16="0.127853" gicoeff17="0.152802">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="34.7838" t1="100.948" t2="293.737" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="342" gicoeff00="0.0211849" gicoeff01="0.0283337" gicoeff02="0.0302658" gicoeff03="0.0593567" gicoeff04="0.0846405" gicoeff05="0.0946426" gicoeff06="0.0654373" gicoeff07="0.0962677" gicoeff08="0.109665" gicoeff09="0.0192089" gicoeff10="0.022541" gicoeff11="0.0221424" gicoeff12="0.0123768" gicoeff13="0.0137978" gicoeff14="0.0135899" gicoeff15="0.0870361" gicoeff16="0.12326" gicoeff17="0.135757">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="44.6533" t1="97.0953" t2="318.042" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="343" gicoeff00="0.00802755" gicoeff01="0.0161057" gicoeff02="0.0244846" gicoeff03="0.0142517" gicoeff04="0.0230789" gicoeff05="0.0304222" gicoeff06="0.0327301" gicoeff07="0.0646439" gicoeff08="0.0956421" gicoeff09="0.00241899" gicoeff10="0.00309229" gicoeff11="0.00381184" gicoeff12="0.00710392" gicoeff13="0.0133018" gicoeff14="0.0196533" gicoeff15="0.0170898" gicoeff16="0.0283165" gicoeff17="0.0378418">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="42.0908" t1="100.877" t2="318.068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="345" gicoeff00="0.0263329" gicoeff01="0.0612183" gicoeff02="0.0960846" gicoeff03="0.00545979" gicoeff04="0.0105753" gicoeff05="0.0157175" gicoeff06="0.0368423" gicoeff07="0.084259" gicoeff08="0.13324" gicoeff09="0.0029192" gicoeff10="0.00500107" gicoeff11="0.00691605" gicoeff12="0.0157509" gicoeff13="0.0343628" gicoeff14="0.0535545" gicoeff15="0.014349" gicoeff16="0.0322037" gicoeff17="0.04953">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="46.8565" t1="101.304" t2="315.072" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="346" gicoeff00="0.0122623" gicoeff01="0.026989" gicoeff02="0.0421867" gicoeff03="0.0213203" gicoeff04="0.0434723" gicoeff05="0.0645752" gicoeff06="0.0470734" gicoeff07="0.101196" gicoeff08="0.155457" gicoeff09="0.00281906" gicoeff10="0.00469351" gicoeff11="0.00638676" gicoeff12="0.0242462" gicoeff13="0.0521469" gicoeff14="0.0796661" gicoeff15="0.0112867" gicoeff16="0.0226002" gicoeff17="0.033638">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="44.0604" t1="102.314" t2="321.348" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="347" gicoeff00="0.0226688" gicoeff01="0.0509033" gicoeff02="0.0776749" gicoeff03="0.011219" gicoeff04="0.0215759" gicoeff05="0.0311584" gicoeff06="0.0422745" gicoeff07="0.0910492" gicoeff08="0.138397" gicoeff09="0.00309372" gicoeff10="0.00523663" gicoeff11="0.00691271" gicoeff12="0.00998116" gicoeff13="0.0214214" gicoeff14="0.0331039" gicoeff15="0.0231361" gicoeff16="0.0483665" gicoeff17="0.0712357">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="1.98804" t1="65.8595" t2="234.51" s0="2.12454" s1="2.12454" s2="2.12454" q0="-0.0958407" q1="-0.881738" q2="-0.278967" q3="0.368144" id="348" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="35.2117" t1="94.7244" t2="326.18" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="349" gicoeff00="0.0136566" gicoeff01="0.0155277" gicoeff02="0.0160561" gicoeff03="0.0202942" gicoeff04="0.0227051" gicoeff05="0.021759" gicoeff06="0.0214348" gicoeff07="0.0265083" gicoeff08="0.0278587" gicoeff09="0.0134888" gicoeff10="0.0113735" gicoeff11="0.00887203" gicoeff12="0.0217361" gicoeff13="0.0210266" gicoeff14="0.0185814" gicoeff15="0.0222893" gicoeff16="0.02808" gicoeff17="0.0291977">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="28.3612" t1="88.8686" t2="308.999" s0="0.703684" s1="0.703684" s2="0.703684" q0="0.232482" q1="0.600632" q2="-0.704626" q3="0.297818" id="350" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="32.6318" t1="95.9402" t2="334.613" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="351" gicoeff00="0.0252342" gicoeff01="0.0526581" gicoeff02="0.0788498" gicoeff03="0.0143814" gicoeff04="0.0246582" gicoeff05="0.032486" gicoeff06="0.0408325" gicoeff07="0.0843201" gicoeff08="0.127548" gicoeff09="0.00545406" gicoeff10="0.00888729" gicoeff11="0.0109148" gicoeff12="0.0132551" gicoeff13="0.030117" gicoeff14="0.0481949" gicoeff15="0.0311813" gicoeff16="0.0519028" gicoeff17="0.0656662">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="22.2038" t1="111.846" t2="331.326" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="352" gicoeff00="0.00402975" gicoeff01="0.00473833" gicoeff02="0.00488186" gicoeff03="0.00151861" gicoeff04="0.00223541" gicoeff05="0.0026803" gicoeff06="0.000938773" gicoeff07="0.00142789" gicoeff08="0.00176406" gicoeff09="0.00518131" gicoeff10="0.00623035" gicoeff11="0.0065155" gicoeff12="0.00209808" gicoeff13="0.00303364" gicoeff14="0.003685" gicoeff15="0.00424862" gicoeff16="0.0051775" gicoeff17="0.00535202">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="23.2264" t1="112.408" t2="343.707" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="353" gicoeff00="0.00621223" gicoeff01="0.00963688" gicoeff02="0.0120316" gicoeff03="0.00756359" gicoeff04="0.0126419" gicoeff05="0.0164738" gicoeff06="0.00786495" gicoeff07="0.0127268" gicoeff08="0.0163574" gicoeff09="0.00501633" gicoeff10="0.00824928" gicoeff11="0.0105419" gicoeff12="0.0175438" gicoeff13="0.0281219" gicoeff14="0.0360413" gicoeff15="0.00209403" gicoeff16="0.00310946" gicoeff17="0.00359488">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="19.6645" t1="113.643" t2="304.166" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="354" gicoeff00="0.0196362" gicoeff01="0.0235825" gicoeff02="0.0249252" gicoeff03="0.00593805" gicoeff04="0.00807381" gicoeff05="0.00923347" gicoeff06="0.00862885" gicoeff07="0.0120983" gicoeff08="0.0143147" gicoeff09="0.0142593" gicoeff10="0.0160866" gicoeff11="0.0159206" gicoeff12="0.00590992" gicoeff13="0.00592232" gicoeff14="0.00538349" gicoeff15="0.0252953" gicoeff16="0.0344467" gicoeff17="0.03936">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="19.5904" t1="117.407" t2="291.028" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="355" gicoeff00="0.0452271" gicoeff01="0.062767" gicoeff02="0.0727081" gicoeff03="0.0343742" gicoeff04="0.0466957" gicoeff05="0.0511398" gicoeff06="0.0465775" gicoeff07="0.0682526" gicoeff08="0.0797195" gicoeff09="0.0284576" gicoeff10="0.0333557" gicoeff11="0.0337677" gicoeff12="0.00919533" gicoeff13="0.0098629" gicoeff14="0.00974274" gicoeff15="0.0883942" gicoeff16="0.126038" gicoeff17="0.14386">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="17.2591" t1="108.542" t2="314.966" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="356" gicoeff00="0.0139217" gicoeff01="0.0174732" gicoeff02="0.019043" gicoeff03="0.00417614" gicoeff04="0.00594473" gicoeff05="0.00709057" gicoeff06="0.00626326" gicoeff07="0.00897121" gicoeff08="0.0107613" gicoeff09="0.00849152" gicoeff10="0.0103607" gicoeff11="0.0109777" gicoeff12="0.00351763" gicoeff13="0.00387239" gicoeff14="0.00392056" gicoeff15="0.0195503" gicoeff16="0.0272675" gicoeff17="0.0316467">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="19.0635" t1="88.8247" t2="310.226" s0="0.70363" s1="0.70363" s2="0.70363" q0="-0.440401" q1="0.57971" q2="-0.562324" q3="0.392142" id="357" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="30.1002" t1="93.8617" t2="298.869" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="358" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="359" offmesh_connection_id="1001" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="23.7117" t1="94.0936" t2="300.915" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="359" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="358" offmesh_connection_id="1001" poly_area="8"/>
+            <NavMeshConnection other_object_id="360" offmesh_connection_id="1002" poly_area="8"/>
+            <NavMeshConnection other_object_id="362" offmesh_connection_id="1004" poly_area="9"/>
+            <NavMeshConnection other_object_id="363" offmesh_connection_id="1005" poly_area="9"/>
+            <NavMeshConnection other_object_id="361" offmesh_connection_id="1003" poly_area="9"/>
+            <NavMeshConnection other_object_id="367" offmesh_connection_id="1006" poly_area="8"/>
+            <NavMeshConnection other_object_id="368" offmesh_connection_id="1007" poly_area="9"/>
+            <NavMeshConnection other_object_id="290" offmesh_connection_id="1000" poly_area="9"/>
+            <NavMeshConnection other_object_id="437" offmesh_connection_id="1023" poly_area="7"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="16.439" t1="94.7625" t2="302.832" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="360" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="359" offmesh_connection_id="1002" poly_area="8"/>
+            <NavMeshConnection other_object_id="437" offmesh_connection_id="1024" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="31.2576" t1="94.5772" t2="307.637" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="361" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="359" offmesh_connection_id="1003" poly_area="9"/>
+            <NavMeshConnection other_object_id="437" offmesh_connection_id="1025" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="16.6505" t1="94.7625" t2="308.962" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="362" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="359" offmesh_connection_id="1004" poly_area="9"/>
+            <NavMeshConnection other_object_id="437" offmesh_connection_id="1026" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="24.4173" t1="94.6347" t2="311.202" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="363" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="359" offmesh_connection_id="1005" poly_area="9"/>
+            <NavMeshConnection other_object_id="382" offmesh_connection_id="1010" poly_area="9"/>
+            <NavMeshConnection other_object_id="437" offmesh_connection_id="1027" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="16.0388" t1="88.7881" t2="303.651" s0="0.70363" s1="0.70363" s2="0.70363" q0="-0.440401" q1="0.57971" q2="-0.562324" q3="0.392142" id="364" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="18.9899" t1="91.1938" t2="321.152" s0="0.70363" s1="0.70363" s2="0.70363" q0="-0.73243" q1="0.502112" q2="-0.140843" q3="0.437714" id="365" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-52.1723" t1="100.67" t2="279.005" s0="94.7525" s1="3.11826" s2="46.6904" q0="0" q1="0.0746399" q2="0" q3="0.997211" id="366" version="1">
+        <parameters/>
+        <EnvObject t0="-52.0936" t1="100.672" t2="279.086" s0="47.1924" s1="1.5527" s2="23.2008" q0="1.72853e-006" q1="0.0746402" q2="0" q3="0.997211" id="396" color_r="0.2" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_test.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <NavmeshConnectionObject t0="29.0229" t1="91.8583" t2="294.918" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="367" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="359" offmesh_connection_id="1006" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="16.5186" t1="92.1902" t2="294.958" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="368" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="359" offmesh_connection_id="1007" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="22.4594" t1="92.4837" t2="286.38" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="369" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="370" offmesh_connection_id="1008" poly_area="8"/>
+            <NavMeshConnection other_object_id="371" offmesh_connection_id="1009" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="29.2768" t1="90.9148" t2="284.964" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="370" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="369" offmesh_connection_id="1008" poly_area="8"/>
+            <NavMeshConnection other_object_id="640" offmesh_connection_id="1034" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="13.6233" t1="93.1219" t2="286.824" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="371" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="369" offmesh_connection_id="1009" poly_area="8"/>
+            <NavMeshConnection other_object_id="639" offmesh_connection_id="1033" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshHintObject t0="25.6477" t1="91.1808" t2="292.791" s0="1.01255" s1="5.04961" s2="0.0826758" q0="0" q1="0.0560211" q2="0" q3="0.99843" id="372">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="19.0952" t1="91.1808" t2="293.347" s0="1.01255" s1="5.04961" s2="0.0826758" q0="0" q1="0.0560212" q2="0" q3="0.99843" id="373">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshConnectionObject t0="14.4801" t1="94.8882" t2="319.599" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="374" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="382" offmesh_connection_id="1011" poly_area="9"/>
+            <NavMeshConnection other_object_id="383" offmesh_connection_id="1012" poly_area="9"/>
+            <NavMeshConnection other_object_id="389" offmesh_connection_id="1019" poly_area="8"/>
+            <NavMeshConnection other_object_id="388" offmesh_connection_id="1018" poly_area="9"/>
+            <NavMeshConnection other_object_id="612" offmesh_connection_id="1032" poly_area="9"/>
+            <NavMeshConnection other_object_id="773" offmesh_connection_id="1037" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <Group t0="19.8477" t1="102.032" t2="425.236" s0="69.2457" s1="80.8396" s2="28.1121" q0="0" q1="0" q2="0" q3="1" id="375" version="1">
+        <parameters/>
+        <Group t0="19.8477" t1="137.699" t2="425.236" s0="69.2357" s1="9.49622" s2="28.102" q0="0" q1="0" q2="0" q3="1" id="376" version="1">
+            <parameters/>
+            <LightProbeObject t0="53.9605" t1="133.448" t2="438.782" s0="1" s1="0.984932" s2="1" q0="0" q1="0" q2="0" q3="1" id="377" gicoeff00="0.145721" gicoeff01="0.255859" gicoeff02="0.346619" gicoeff03="0.196289" gicoeff04="0.313965" gicoeff05="0.392334" gicoeff06="0.223907" gicoeff07="0.410217" gicoeff08="0.565552" gicoeff09="0.0939789" gicoeff10="0.12645" gicoeff11="0.141083" gicoeff12="0.143463" gicoeff13="0.238495" gicoeff14="0.316467" gicoeff15="0.217438" gicoeff16="0.3479" gicoeff17="0.431885">
+                <parameters>
+                    <parameter name="Negative" type="int" val="0"/>
+                </parameters>
+            </LightProbeObject>
+            <LightProbeObject t0="-14.2651" t1="141.95" t2="411.69" s0="1" s1="0.984932" s2="1" q0="0" q1="0" q2="0" q3="1" id="378" gicoeff00="0.141296" gicoeff01="0.251129" gicoeff02="0.342651" gicoeff03="0.19223" gicoeff04="0.312042" gicoeff05="0.394104" gicoeff06="0.224884" gicoeff07="0.41217" gicoeff08="0.568237" gicoeff09="0.0747681" gicoeff10="0.107849" gicoeff11="0.127579" gicoeff12="0.137802" gicoeff13="0.235748" gicoeff14="0.318237" gicoeff15="0.213684" gicoeff16="0.343506" gicoeff17="0.428162">
+                <parameters>
+                    <parameter name="Negative" type="int" val="0"/>
+                </parameters>
+            </LightProbeObject>
+        </Group>
+        <Group t0="19.8477" t1="66.3655" t2="425.236" s0="69.2357" s1="9.49622" s2="28.102" q0="0" q1="0" q2="0" q3="1" id="379" version="1">
+            <parameters/>
+            <LightProbeObject t0="53.9605" t1="62.1148" t2="438.782" s0="1" s1="0.984932" s2="1" q0="0" q1="0" q2="0" q3="1" id="380" gicoeff00="0.135635" gicoeff01="0.247009" gicoeff02="0.340515" gicoeff03="0.19516" gicoeff04="0.331787" gicoeff05="0.412537" gicoeff06="0.203369" gicoeff07="0.378967" gicoeff08="0.526489" gicoeff09="0.101563" gicoeff10="0.163574" gicoeff11="0.189606" gicoeff12="0.146088" gicoeff13="0.257477" gicoeff14="0.342957" gicoeff15="0.190582" gicoeff16="0.323181" gicoeff17="0.407471">
+                <parameters>
+                    <parameter name="Negative" type="int" val="0"/>
+                </parameters>
+            </LightProbeObject>
+            <LightProbeObject t0="-14.2651" t1="70.6162" t2="411.69" s0="1" s1="0.984932" s2="1" q0="0" q1="0" q2="0" q3="1" id="381" gicoeff00="0.129593" gicoeff01="0.234222" gicoeff02="0.32074" gicoeff03="0.202606" gicoeff04="0.341187" gicoeff05="0.422424" gicoeff06="0.20636" gicoeff07="0.381592" gicoeff08="0.527527" gicoeff09="0.101959" gicoeff10="0.163239" gicoeff11="0.188232" gicoeff12="0.144348" gicoeff13="0.255676" gicoeff14="0.341492" gicoeff15="0.195374" gicoeff16="0.32373" gicoeff17="0.401184">
+                <parameters>
+                    <parameter name="Negative" type="int" val="0"/>
+                </parameters>
+            </LightProbeObject>
+        </Group>
+    </Group>
+    <NavmeshConnectionObject t0="24.6773" t1="96.8476" t2="322.497" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="382" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="363" offmesh_connection_id="1010" poly_area="9"/>
+            <NavMeshConnection other_object_id="374" offmesh_connection_id="1011" poly_area="9"/>
+            <NavMeshConnection other_object_id="383" offmesh_connection_id="1013" poly_area="8"/>
+            <NavMeshConnection other_object_id="384" offmesh_connection_id="1014" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="18.5144" t1="94.719" t2="328.106" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="383" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="374" offmesh_connection_id="1012" poly_area="9"/>
+            <NavMeshConnection other_object_id="382" offmesh_connection_id="1013" poly_area="8"/>
+            <NavMeshConnection other_object_id="387" offmesh_connection_id="1016" poly_area="8"/>
+            <NavMeshConnection other_object_id="389" offmesh_connection_id="1020" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="27.6568" t1="94.719" t2="327.501" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="384" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="382" offmesh_connection_id="1014" poly_area="8"/>
+            <NavMeshConnection other_object_id="387" offmesh_connection_id="1017" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="32.9766" t1="92.2756" t2="318.712" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="385" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="386" offmesh_connection_id="1015" poly_area="8"/>
+            <NavMeshConnection other_object_id="611" offmesh_connection_id="1031" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="27.5587" t1="94.8728" t2="321.39" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="386" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="385" offmesh_connection_id="1015" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="23.8895" t1="92.4612" t2="334.581" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="387" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="383" offmesh_connection_id="1016" poly_area="8"/>
+            <NavMeshConnection other_object_id="384" offmesh_connection_id="1017" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="23.8056" t1="94.7656" t2="319.649" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="388" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="389" offmesh_connection_id="1021" poly_area="8"/>
+            <NavMeshConnection other_object_id="374" offmesh_connection_id="1018" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="19.0143" t1="92.4439" t2="321.223" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="389" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="388" offmesh_connection_id="1021" poly_area="8"/>
+            <NavMeshConnection other_object_id="383" offmesh_connection_id="1020" poly_area="8"/>
+            <NavMeshConnection other_object_id="374" offmesh_connection_id="1019" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="23.7676" t1="91.2854" t2="334.609" s0="0.974383" s1="0.787366" s2="0.703629" q0="-0.573288" q1="0.336859" q2="0.55875" q3="0.495646" id="390" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="28.9929" t1="91.175" t2="332.543" s0="0.70363" s1="0.70363" s2="0.70363" q0="-0.854366" q1="0.142054" q2="0.422752" q3="0.266759" id="391" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.6177" t1="104.648" t2="290.771" s0="1.68942" s1="3.29348" s2="6.99867" q0="-0.697171" q1="0.118123" q2="0.118123" q3="0.69717" id="392" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="23.1563" t1="88.9801" t2="299.306" s0="35.3881" s1="0.991338" s2="39.2628" q0="0" q1="0" q2="0" q3="1" id="393" version="1">
+        <parameters/>
+    </Group>
+    <EnvObject t0="35.8298" t1="104.648" t2="296.826" s0="0.920774" s1="2.7707" s2="6.99867" q0="-0.707073" q1="-0.00687768" q2="-0.0068776" q3="0.707074" id="394" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <ItemObject t0="23.2092" t1="94.7206" t2="311.604" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="395" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <EnvObject t0="-8.97787" t1="100.69" t2="261.77" s0="1.49619" s1="1.49619" s2="1.49619" q0="0.085335" q1="-0.723866" q2="0.0570237" q3="0.682264" id="397" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.69585" t1="101.591" t2="251.667" s0="1.24167" s1="1.24167" s2="1.24167" q0="0.989125" q1="0.0183862" q2="-0.145914" q3="0.00165584" id="398" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-5.72534" t1="83.7191" t2="254.474" s0="1.93081" s1="2.0008" s2="2.19694" q0="0" q1="0.804854" q2="-1.77324e-006" q3="0.593473" id="399" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-5.38339" t1="101.967" t2="270.138" s0="1.05642" s1="1.37093" s2="0.704371" q0="-0.0760138" q1="0.00989028" q2="-0.991796" q3="0.102297" id="400" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-2.17012" t1="83.8637" t2="277.503" s0="2.0008" s1="2.0008" s2="2.0008" q0="0" q1="0.722065" q2="0" q3="0.691825" id="401" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-1.87008" t1="83.8637" t2="278.377" s0="2.0008" s1="2.0008" s2="2.0008" q0="0" q1="0.775956" q2="0" q3="0.630787" id="402" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/WaterfallTall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-4.11705" t1="101.165" t2="284.697" s0="1.49619" s1="1.76933" s2="1.49619" q0="0.103565" q1="-0.993442" q2="0.0332685" q3="0.0352198" id="403" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Flat.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.7701" t1="104.367" t2="300.041" s0="1.26022" s1="1.14391" s2="6.99867" q0="-0.705133" q1="0.0527904" q2="0.0527905" q3="0.705134" id="404" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="36.5821" t1="104.648" t2="301.182" s0="1.26024" s1="1.41792" s2="6.99867" q0="-0.629862" q1="0.321363" q2="0.321363" q3="0.629861" id="405" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="39.0282" t1="104.648" t2="304.188" s0="2.20263" s1="1.50377" s2="6.99867" q0="-0.372032" q1="0.601326" q2="0.601326" q3="0.37203" id="406" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="11.2266" t1="94.2641" t2="328.331" s0="1.80416" s1="1.79745" s2="1.60828" q0="0" q1="0.803606" q2="0" q3="0.595162" id="407" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="14.3883" t1="88.9898" t2="328.587" s0="0.785535" s1="0.785535" s2="0.785535" q0="-0.000327289" q1="-0.998767" q2="1.63019e-005" q3="0.0496417" id="408" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_EndLegs.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.9581" t1="104.703" t2="307.904" s0="4.74654" s1="1.35145" s2="6.30261" q0="-0.614188" q1="0.500547" q2="0.350389" q3="0.499453" id="409" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.1074" t1="106.293" t2="312.657" s0="1.26023" s1="1.47175" s2="6.99867" q0="-0.350631" q1="0.61405" q2="0.61405" q3="0.350633" id="410" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="34.6961" t1="106.293" t2="314.856" s0="2.2979" s1="1.36551" s2="6.99867" q0="-0.502882" q1="0.497101" q2="0.497101" q3="0.502883" id="412" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="22.2776" t1="101.489" t2="253.226" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="413" gicoeff00="0.0962067" gicoeff01="0.151581" gicoeff02="0.195709" gicoeff03="0.0784302" gicoeff04="0.127319" gicoeff05="0.162933" gicoeff06="0.147919" gicoeff07="0.270081" gicoeff08="0.375732" gicoeff09="0.0528717" gicoeff10="0.0588074" gicoeff11="0.057373" gicoeff12="0.0607986" gicoeff13="0.0872498" gicoeff14="0.109558" gicoeff15="0.135071" gicoeff16="0.217834" gicoeff17="0.274475">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="35.6934" t1="106.293" t2="320.098" s0="3.24635" s1="2.08451" s2="6.99866" q0="-0.470048" q1="0.528257" q2="0.528257" q3="0.470047" id="414" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.563" t1="92.1212" t2="305.277" s0="1.80415" s1="1.4551" s2="1.59281" q0="0" q1="0.77157" q2="0" q3="0.636144" id="415" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.1855" t1="104.124" t2="297.785" s0="2.7343" s1="3.10401" s2="7.56595" q0="-0.706646" q1="0.0255185" q2="0.0255186" q3="0.706646" id="416" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.8821" t1="104.259" t2="304.364" s0="2.66826" s1="3.6048" s2="7.1039" q0="-0.706646" q1="0.0255185" q2="0.0255186" q3="0.706646" id="417" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="11.5345" t1="104.364" t2="307.58" s0="2.65094" s1="1.8373" s2="6.99867" q0="-0.699404" q1="-0.104092" q2="-0.104093" q3="0.699402" id="418" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="11.0662" t1="104.364" t2="311.236" s0="2.66493" s1="1.54642" s2="6.99867" q0="-0.705189" q1="0.052042" q2="0.0520421" q3="0.705189" id="419" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.7169" t1="104.364" t2="314.168" s0="2.73894" s1="2.75546" s2="6.99867" q0="-0.697874" q1="-0.113891" q2="-0.113891" q3="0.697875" id="420" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <LightProbeObject t0="-78.3327" t1="123.431" t2="272.306" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="421" gicoeff00="0.0715637" gicoeff01="0.141479" gicoeff02="0.206451" gicoeff03="0.0753098" gicoeff04="0.144623" gicoeff05="0.205994" gicoeff06="0.138672" gicoeff07="0.281677" gicoeff08="0.416443" gicoeff09="0.017065" gicoeff10="0.0296593" gicoeff11="0.0405731" gicoeff12="0.0836029" gicoeff13="0.154388" gicoeff14="0.218048" gicoeff15="0.0624542" gicoeff16="0.125061" gicoeff17="0.182007">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="-79.0627" t1="136.45" t2="230.564" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="422" gicoeff00="0.128815" gicoeff01="0.230316" gicoeff02="0.317932" gicoeff03="0.182281" gicoeff04="0.296234" gicoeff05="0.375916" gicoeff06="0.222443" gicoeff07="0.407166" gicoeff08="0.561523" gicoeff09="0.0651855" gicoeff10="0.0924683" gicoeff11="0.111801" gicoeff12="0.125336" gicoeff13="0.219299" gicoeff14="0.301392" gicoeff15="0.202789" gicoeff16="0.323059" gicoeff17="0.402405">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="-110.697" t1="115.562" t2="320.97" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="423" gicoeff00="0.0725784" gicoeff01="0.13472" gicoeff02="0.189667" gicoeff03="0.0585251" gicoeff04="0.100525" gicoeff05="0.133591" gicoeff06="0.135651" gicoeff07="0.258087" gicoeff08="0.368164" gicoeff09="0.0150776" gicoeff10="0.0231895" gicoeff11="0.0284996" gicoeff12="0.0573807" gicoeff13="0.103043" gicoeff14="0.145401" gicoeff15="0.0922546" gicoeff16="0.159454" gicoeff17="0.208893">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="-176.969" t1="137.165" t2="308.258" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="424" gicoeff00="0.120972" gicoeff01="0.217651" gicoeff02="0.301025" gicoeff03="0.178162" gicoeff04="0.289734" gicoeff05="0.367249" gicoeff06="0.220703" gicoeff07="0.40448" gicoeff08="0.55835" gicoeff09="0.0547791" gicoeff10="0.0757599" gicoeff11="0.0886536" gicoeff12="0.117218" gicoeff13="0.206757" gicoeff14="0.284332" gicoeff15="0.198273" gicoeff16="0.315369" gicoeff17="0.392517">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="75.7945" t1="76.355" t2="223.381" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="425" gicoeff00="0.111664" gicoeff01="0.189972" gicoeff02="0.255219" gicoeff03="0.239746" gicoeff04="0.293335" gicoeff05="0.310974" gicoeff06="0.197632" gicoeff07="0.334534" gicoeff08="0.44458" gicoeff09="0.169708" gicoeff10="0.170074" gicoeff11="0.151764" gicoeff12="0.129349" gicoeff13="0.155518" gicoeff14="0.174469" gicoeff15="0.219788" gicoeff16="0.32428" gicoeff17="0.385498">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="34.6216" t1="61.4626" t2="214.011" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="426" gicoeff00="0.392639" gicoeff01="0.435425" gicoeff02="0.433655" gicoeff03="0.402283" gicoeff04="0.429932" gicoeff05="0.40155" gicoeff06="0.23645" gicoeff07="0.351501" gicoeff08="0.434937" gicoeff09="0.531677" gicoeff10="0.501099" gicoeff11="0.409851" gicoeff12="0.579285" gicoeff13="0.560059" gicoeff14="0.478394" gicoeff15="0.242188" gicoeff16="0.333923" gicoeff17="0.381714">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <ReflectionCaptureObject t0="44.1738" t1="94.2593" t2="317.979" s0="8.57483" s1="8.57483" s2="16.0783" q0="0" q1="0" q2="0" q3="1" id="432" gicoeff00="0" gicoeff01="0" gicoeff02="0" gicoeff03="0" gicoeff04="0" gicoeff05="0" gicoeff06="0" gicoeff07="0" gicoeff08="0" gicoeff09="0" gicoeff10="0" gicoeff11="0" gicoeff12="0" gicoeff13="0" gicoeff14="0" gicoeff15="0" gicoeff16="0" gicoeff17="0">
+        <parameters>
+            <parameter name="Global" type="string" val="0"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <ReflectionCaptureObject t0="21.9042" t1="92.9551" t2="296.741" s0="34.4952" s1="28.5308" s2="24.1148" q0="0" q1="0" q2="0" q3="1" id="433" gicoeff00="0" gicoeff01="0" gicoeff02="0" gicoeff03="0" gicoeff04="0" gicoeff05="0" gicoeff06="0" gicoeff07="0" gicoeff08="0" gicoeff09="0" gicoeff10="0" gicoeff11="0" gicoeff12="0" gicoeff13="0" gicoeff14="0" gicoeff15="0" gicoeff16="0" gicoeff17="0">
+        <parameters>
+            <parameter name="Global" type="string" val="0"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <ReflectionCaptureObject t0="24.4302" t1="94.1793" t2="329.42" s0="27.8669" s1="19.9018" s2="19.4811" q0="0" q1="0" q2="0" q3="1" id="434" gicoeff00="0" gicoeff01="0" gicoeff02="0" gicoeff03="0" gicoeff04="0" gicoeff05="0" gicoeff06="0" gicoeff07="0" gicoeff08="0" gicoeff09="0" gicoeff10="0" gicoeff11="0" gicoeff12="0" gicoeff13="0" gicoeff14="0" gicoeff15="0" gicoeff16="0" gicoeff17="0">
+        <parameters>
+            <parameter name="Global" type="string" val="0"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <NavmeshConnectionObject t0="22.7927" t1="90.4825" t2="294.471" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="436" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="290" offmesh_connection_id="1022" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="22.4916" t1="92.0943" t2="305.186" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="437" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="440" offmesh_connection_id="1030" poly_area="8"/>
+            <NavMeshConnection other_object_id="439" offmesh_connection_id="1029" poly_area="8"/>
+            <NavMeshConnection other_object_id="438" offmesh_connection_id="1028" poly_area="8"/>
+            <NavMeshConnection other_object_id="361" offmesh_connection_id="1025" poly_area="9"/>
+            <NavMeshConnection other_object_id="363" offmesh_connection_id="1027" poly_area="8"/>
+            <NavMeshConnection other_object_id="362" offmesh_connection_id="1026" poly_area="8"/>
+            <NavMeshConnection other_object_id="360" offmesh_connection_id="1024" poly_area="8"/>
+            <NavMeshConnection other_object_id="359" offmesh_connection_id="1023" poly_area="7"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="28.3095" t1="90.1459" t2="309.084" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="438" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="437" offmesh_connection_id="1028" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="19.1268" t1="90.0652" t2="310.392" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="439" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="437" offmesh_connection_id="1029" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="16.1564" t1="90.0633" t2="303.639" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="440" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="437" offmesh_connection_id="1030" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <LightProbeObject t0="22.2776" t1="99.1566" t2="320.104" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="442" gicoeff00="0.0226974" gicoeff01="0.0297661" gicoeff02="0.0324783" gicoeff03="0.0132637" gicoeff04="0.0199814" gicoeff05="0.023138" gicoeff06="0.021801" gicoeff07="0.0312805" gicoeff08="0.0357513" gicoeff09="0.00960922" gicoeff10="0.0130844" gicoeff11="0.0144081" gicoeff12="0.0128403" gicoeff13="0.0162601" gicoeff14="0.0179787" gicoeff15="0.0360947" gicoeff16="0.0536575" gicoeff17="0.0614471">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="14.3186" t1="87.418" t2="321.336" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="443" gicoeff00="0.029129" gicoeff01="0.0449295" gicoeff02="0.0543671" gicoeff03="0.0814667" gicoeff04="0.130234" gicoeff05="0.14682" gicoeff06="0.0257378" gicoeff07="0.0409241" gicoeff08="0.0501785" gicoeff09="0.0663834" gicoeff10="0.103836" gicoeff11="0.111847" gicoeff12="0.06987" gicoeff13="0.110703" gicoeff14="0.131836" gicoeff15="0.0371552" gicoeff16="0.0570145" gicoeff17="0.0615234">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="26.8186" t1="87.418" t2="321.336" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="444" gicoeff00="0.0289917" gicoeff01="0.0454025" gicoeff02="0.0555573" gicoeff03="0.0630646" gicoeff04="0.100037" gicoeff05="0.108566" gicoeff06="0.0173702" gicoeff07="0.0273285" gicoeff08="0.0327835" gicoeff09="0.0625153" gicoeff10="0.0979004" gicoeff11="0.105087" gicoeff12="0.0559769" gicoeff13="0.0891876" gicoeff14="0.105057" gicoeff15="0.0338058" gicoeff16="0.0519485" gicoeff17="0.0557861">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="33.1981" t1="89.5994" t2="293.617" s0="0.525935" s1="0.382609" s2="0.331318" q0="-0.806715" q1="0.0853712" q2="0.43665" q3="0.388921" id="448" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_3.xml">
+        <parameters/>
+    </EnvObject>
+    <LightVolumeObject t0="25.3322" t1="102.225" t2="313.268" s0="34.5821" s1="21.6567" s2="38.2913" q0="0" q1="0" q2="0" q3="1" id="454">
+        <parameters/>
+    </LightVolumeObject>
+    <LightProbeObject t0="22.2776" t1="99.1566" t2="274.874" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="516" gicoeff00="0.0812836" gicoeff01="0.118225" gicoeff02="0.145004" gicoeff03="0.0682068" gicoeff04="0.111404" gicoeff05="0.142105" gicoeff06="0.129837" gicoeff07="0.225586" gicoeff08="0.30365" gicoeff09="0.0521927" gicoeff10="0.0566025" gicoeff11="0.0537415" gicoeff12="0.0380936" gicoeff13="0.0501938" gicoeff14="0.0588684" gicoeff15="0.124161" gicoeff16="0.198517" gicoeff17="0.24881">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="22.2776" t1="99.1566" t2="293.307" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="524" gicoeff00="0.0510712" gicoeff01="0.0744476" gicoeff02="0.089119" gicoeff03="0.0491943" gicoeff04="0.0750732" gicoeff05="0.0878143" gicoeff06="0.0853424" gicoeff07="0.136917" gicoeff08="0.170044" gicoeff09="0.0224323" gicoeff10="0.0274963" gicoeff11="0.0284462" gicoeff12="0.011322" gicoeff13="0.0135841" gicoeff14="0.0143242" gicoeff15="0.109543" gicoeff16="0.166534" gicoeff17="0.19809">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="22.2776" t1="99.1566" t2="311.104" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="532" gicoeff00="0.0283394" gicoeff01="0.0382957" gicoeff02="0.0428581" gicoeff03="0.0192299" gicoeff04="0.0286903" gicoeff05="0.0329094" gicoeff06="0.0331497" gicoeff07="0.0484543" gicoeff08="0.0560989" gicoeff09="0.0109835" gicoeff10="0.014679" gicoeff11="0.0160465" gicoeff12="0.0112171" gicoeff13="0.0126858" gicoeff14="0.0127335" gicoeff15="0.0522766" gicoeff16="0.079071" gicoeff17="0.0922546">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="16.4845" t1="94.9468" t2="335.387" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="534" gicoeff00="0.0131054" gicoeff01="0.0195293" gicoeff02="0.0236282" gicoeff03="0.00515938" gicoeff04="0.00901413" gicoeff05="0.0109167" gicoeff06="0.0104227" gicoeff07="0.0170593" gicoeff08="0.0215607" gicoeff09="0.00496721" gicoeff10="0.00803852" gicoeff11="0.00967884" gicoeff12="0.00316906" gicoeff13="0.00606823" gicoeff14="0.00838184" gicoeff15="0.0203323" gicoeff16="0.031559" gicoeff17="0.0376358">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="22.2971" t1="105.016" t2="355.344" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="535" gicoeff00="0.0530319" gicoeff01="0.111313" gicoeff02="0.165863" gicoeff03="0.0452461" gicoeff04="0.0805435" gicoeff05="0.109985" gicoeff06="0.115967" gicoeff07="0.228882" gicoeff08="0.334229" gicoeff09="0.00978279" gicoeff10="0.018734" gicoeff11="0.0260849" gicoeff12="0.0420799" gicoeff13="0.0863419" gicoeff14="0.12886" gicoeff15="0.0631332" gicoeff16="0.114532" gicoeff17="0.156662">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="34.0304" t1="116.469" t2="352.544" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="536" gicoeff00="0.0998688" gicoeff01="0.192932" gicoeff02="0.275574" gicoeff03="0.107437" gicoeff04="0.194183" gicoeff05="0.260101" gicoeff06="0.18576" gicoeff07="0.355835" gicoeff08="0.503052" gicoeff09="0.0237923" gicoeff10="0.0423126" gicoeff11="0.056778" gicoeff12="0.0867004" gicoeff13="0.166412" gicoeff14="0.237946" gicoeff15="0.126099" gicoeff16="0.222443" gicoeff17="0.293732">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="5.18138" t1="122.167" t2="367.347" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="537" gicoeff00="0.104828" gicoeff01="0.201538" gicoeff02="0.285889" gicoeff03="0.117905" gicoeff04="0.205719" gicoeff05="0.26889" gicoeff06="0.193237" gicoeff07="0.36438" gicoeff08="0.510254" gicoeff09="0.0306206" gicoeff10="0.054451" gicoeff11="0.071434" gicoeff12="0.085022" gicoeff13="0.164063" gicoeff14="0.234222" gicoeff15="0.148926" gicoeff16="0.253754" gicoeff17="0.327087">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="37.9099" t1="96.3168" t2="323.975" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="538" gicoeff00="0.00505447" gicoeff01="0.00919628" gicoeff02="0.0130596" gicoeff03="0.00626278" gicoeff04="0.00667858" gicoeff05="0.00625324" gicoeff06="0.00798798" gicoeff07="0.0126152" gicoeff08="0.0165005" gicoeff09="0.00302529" gicoeff10="0.00330973" gicoeff11="0.00330496" gicoeff12="0.00942039" gicoeff13="0.010006" gicoeff14="0.00964355" gicoeff15="0.00334406" gicoeff16="0.0069294" gicoeff17="0.0101814">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="35.2538" t1="98.1445" t2="310.074" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="539" gicoeff00="0.0335846" gicoeff01="0.033699" gicoeff02="0.0296555" gicoeff03="0.0411148" gicoeff04="0.0483627" gicoeff05="0.0471268" gicoeff06="0.0531693" gicoeff07="0.058609" gicoeff08="0.0545273" gicoeff09="0.0222015" gicoeff10="0.0232697" gicoeff11="0.0214119" gicoeff12="0.0450363" gicoeff13="0.0415726" gicoeff14="0.0340729" gicoeff15="0.050766" gicoeff16="0.0647202" gicoeff17="0.0657654">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="36.3542" t1="106.967" t2="310.992" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="540" gicoeff00="0.0293007" gicoeff01="0.0286217" gicoeff02="0.0249634" gicoeff03="0.0259285" gicoeff04="0.0286636" gicoeff05="0.0273399" gicoeff06="0.0296631" gicoeff07="0.030899" gicoeff08="0.0282211" gicoeff09="0.0221024" gicoeff10="0.0219002" gicoeff11="0.0191422" gicoeff12="0.0257339" gicoeff13="0.0242577" gicoeff14="0.020359" gicoeff15="0.0354004" gicoeff16="0.040062" gicoeff17="0.0388947">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="32.4688" t1="94.7381" t2="303.668" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="541" gicoeff00="0.0236168" gicoeff01="0.030838" gicoeff02="0.0330391" gicoeff03="0.0416641" gicoeff04="0.0568161" gicoeff05="0.0607529" gicoeff06="0.0576553" gicoeff07="0.0789108" gicoeff08="0.0858154" gicoeff09="0.0114317" gicoeff10="0.0138159" gicoeff11="0.0138397" gicoeff12="0.015543" gicoeff13="0.015852" gicoeff14="0.0144768" gicoeff15="0.0678482" gicoeff16="0.096817" gicoeff17="0.10643">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="31.7036" t1="90.1507" t2="291.564" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="542" gicoeff00="0.0379105" gicoeff01="0.055687" gicoeff02="0.0660744" gicoeff03="0.0638962" gicoeff04="0.0947342" gicoeff05="0.112396" gicoeff06="0.0913849" gicoeff07="0.14386" gicoeff08="0.179352" gicoeff09="0.0207214" gicoeff10="0.0278587" gicoeff11="0.0306168" gicoeff12="0.0172062" gicoeff13="0.0190811" gicoeff14="0.0193291" gicoeff15="0.106522" gicoeff16="0.162628" gicoeff17="0.194214">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="36.4351" t1="101.322" t2="298.17" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="543" gicoeff00="0.0105" gicoeff01="0.0120401" gicoeff02="0.0114822" gicoeff03="0.0412445" gicoeff04="0.054245" gicoeff05="0.0569382" gicoeff06="0.0403061" gicoeff07="0.0524597" gicoeff08="0.0543289" gicoeff09="0.0118408" gicoeff10="0.0132427" gicoeff11="0.0126791" gicoeff12="0.0132008" gicoeff13="0.0131912" gicoeff14="0.011692" gicoeff15="0.0483398" gicoeff16="0.0636749" gicoeff17="0.0666504">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="37.6698" t1="102.396" t2="307.554" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="544" gicoeff00="0.0101395" gicoeff01="0.0102882" gicoeff02="0.00930405" gicoeff03="0.0369682" gicoeff04="0.0411911" gicoeff05="0.0390892" gicoeff06="0.0316887" gicoeff07="0.0351219" gicoeff08="0.0331001" gicoeff09="0.0156059" gicoeff10="0.0144043" gicoeff11="0.0122051" gicoeff12="0.0219231" gicoeff13="0.0195732" gicoeff14="0.0156879" gicoeff15="0.0345306" gicoeff16="0.0423431" gicoeff17="0.0426407">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <LightProbeObject t0="45.4528" t1="92.4028" t2="317.45" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="545" gicoeff00="0.00333953" gicoeff01="0.00567007" gicoeff02="0.00862885" gicoeff03="0.00943947" gicoeff04="0.0136909" gicoeff05="0.0166321" gicoeff06="0.0164795" gicoeff07="0.0285225" gicoeff08="0.0392838" gicoeff09="0.00136256" gicoeff10="0.00169444" gicoeff11="0.00262737" gicoeff12="0.00336385" gicoeff13="0.00551653" gicoeff14="0.00813866" gicoeff15="0.01015" gicoeff16="0.0147095" gicoeff17="0.0180759">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <EnvObject t0="36.7797" t1="92.663" t2="328.116" s0="1.09947" s1="0.552065" s2="1.2098" q0="0" q1="0.729531" q2="0" q3="0.683948" id="587" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="35.7632" t1="92.663" t2="326.165" s0="1.10494" s1="0.552065" s2="0.776688" q0="0" q1="0.920883" q2="0" q3="0.389839" id="588" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.6434" t1="92.348" t2="325.691" s0="0.931859" s1="0.443844" s2="0.514305" q0="0" q1="0.920883" q2="0" q3="0.389839" id="589" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="40.2223" t1="93.2091" t2="327.291" s0="1.12507" s1="0.79321" s2="0.447347" q0="-0.0118321" q1="-0.945197" q2="-0.0271215" q3="0.325157" id="592" color_r="0.752941" color_g="0.752941" color_b="0.752941" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="43.1437" t1="93.0608" t2="325.778" s0="1.12499" s1="0.793156" s2="0.49252" q0="0.0255284" q1="0.210865" q2="-0.0149625" q3="0.977067" id="593" color_r="0.752941" color_g="0.752941" color_b="0.752941" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="40.9851" t1="97.1564" t2="327.819" s0="1.12499" s1="1.19566" s2="0.492525" q0="-0.0206048" q1="-0.94342" q2="-0.0878102" q3="0.319098" id="594" color_r="0.752941" color_g="0.752941" color_b="0.752941" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="27.8553" t1="94.4917" t2="311.17" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="611" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="385" offmesh_connection_id="1031" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="21.7034" t1="94.4918" t2="311.43" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="612" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="374" offmesh_connection_id="1032" poly_area="9"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="43.875" t1="96.0864" t2="326.236" s0="1.12499" s1="0.793156" s2="0.49252" q0="0.0847502" q1="0.205064" q2="-0.0308647" q3="0.974584" id="627" color_r="0.752941" color_g="0.752941" color_b="0.752941" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="39.3115" t1="91.8642" t2="325.174" s0="0.931859" s1="0.443844" s2="0.514305" q0="0" q1="0.943568" q2="0" q3="0.331179" id="629" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="15.0523" t1="92.2551" t2="295.207" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="639" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="371" offmesh_connection_id="1033" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="29.9605" t1="92.0191" t2="293.763" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="640" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="370" offmesh_connection_id="1034" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="33.309" t1="94.7506" t2="326.648" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="649" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="651" offmesh_connection_id="1035" poly_area="8"/>
+            <NavMeshConnection other_object_id="652" offmesh_connection_id="1036" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="31.2294" t1="92.6665" t2="321.958" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="651" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="649" offmesh_connection_id="1035" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="28.9794" t1="92.429" t2="332.513" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="652" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="649" offmesh_connection_id="1036" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshHintObject t0="26.0778" t1="91.1808" t2="295.571" s0="0.578612" s1="5.04961" s2="0.0826494" q0="0" q1="0.0560211" q2="0" q3="0.99843" id="710">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="18.99" t1="91.9035" t2="296.317" s0="0.566293" s1="3.45409" s2="0.0826681" q0="0" q1="0.0560212" q2="0" q3="0.99843" id="711">
+        <parameters/>
+    </NavmeshHintObject>
+    <EnvObject t0="30.7066" t1="88.8174" t2="285.197" s0="0.83236" s1="0.846864" s2="0.496285" q0="0.748973" q1="-0.0913912" q2="0.641395" q3="0.138923" id="772" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshConnectionObject t0="17.053" t1="94.4918" t2="311.994" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="773" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="374" offmesh_connection_id="1037" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="27.3908" t1="88.9091" t2="283.828" s0="0.83236" s1="0.846864" s2="0.496285" q0="0.637875" q1="0.115994" q2="-0.753074" q3="0.111984" id="774" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="27.9868" t1="88.9282" t2="285.873" s0="0.832361" s1="0.767265" s2="0.496285" q0="0.585796" q1="0.161768" q2="-0.791046" q3="0.0701453" id="775" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="29.6252" t1="88.9645" t2="286.731" s0="0.964594" s1="0.74776" s2="0.527465" q0="0.113707" q1="-0.146558" q2="0.981425" q3="0.0489537" id="776" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshHintObject t0="38.7902" t1="94.1365" t2="321.883" s0="1.09683" s1="5.04961" s2="2.08332" q0="0" q1="0.196745" q2="0" q3="0.980455" id="856">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshConnectionObject t0="41.9946" t1="92.3402" t2="321.022" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="857" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="866" offmesh_connection_id="1038" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="36.4769" t1="92.1888" t2="323.258" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="866" type_file="">
+        <parameters/>
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="857" offmesh_connection_id="1038" poly_area="8"/>
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="8.32578" t1="103.692" t2="295.768" s0="3.09797" s1="3.12825" s2="6.99867" q0="-0.692179" q1="-0.144529" q2="-0.144529" q3="0.692178" id="889" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="41.2733" t1="104.698" t2="287.726" s0="2.61158" s1="5.78522" s2="6.99867" q0="-0.560286" q1="-0.431369" q2="-0.431369" q3="0.560287" id="890" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="15.0872" t1="111.508" t2="297.045" s0="1.18442" s1="0.447971" s2="0.589181" q0="0.905661" q1="0.0932674" q2="-0.0165468" q3="0.413286" id="893" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Misc.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="14.2429" t1="91.7911" t2="319.586" s0="1.54187" s1="1.11386" s2="1.55434" q0="0" q1="0.691319" q2="0" q3="0.72255" id="1196" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="22.8162" t1="86.9358" t2="295.143" s0="2.13652" s1="1.15144" s2="2.68773" q0="0.019066" q1="-0.596261" q2="0.0116219" q3="0.80248" id="1197" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/GreyRockSmall_Block.xml">
+        <parameters/>
+    </EnvObject>
+</ActorObjects>
+<RecentItems/>

@@ -1,0 +1,72 @@
+#name "Execution"
+#participants 5
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 15
+set_character_pos 4 -99.57 18.4115 106.326 -150
+send_character_message 4 "set_animation \"Data\Animations\r_bigdogswordarmstance.anm\""
+send_character_message 4 "set_head_target -108.621 19.2772 108.631 1"
+set_character_pos 3 -108.913 18.4062 109.757 171
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+send_character_message 3 "set_torso_target -110.211 18.3863 109.568 1"
+send_character_message 3 "set_head_target -111.246 18.7854 109.331 1"
+set_character_pos 2 -111.805 18.4161 109.24 0
+send_character_message 2 "set_animation \"Data\Animations\r_sit_cross_legged.anm\""
+send_character_message 2 "set_head_target -110.803 18.3908 109.277 1"
+set_character_pos 1 -84.6799 17.9864 113.399 151
+send_character_message 1 "set_animation \"Data\Animations\stealthobserve.anm\""
+send_character_message 1 "set_torso_target -86.82 18.5401 115.173 0"
+send_character_message 1 "set_head_target -86.865 18.6171 115.201 0"
+set_cam -103.851 18.9492 105.584 0 -105.25 0 21.9763
+send_level_message "set_camera_dof 0.3 15 5 0 0 0"
+say 1 "Ghost" "..."
+set_cam -81.1722 18.2097 113.536 0 82.58 0 12.1522
+say 3 "???" "Are you aware of your crimes against the Cinderbreathe people?"
+send_character_message 2 "set_torso_target -110.92 18.3718 109.301 1"
+send_character_message 2 "set_head_target -110.259 19.0227 109.541 1"
+set_cam -109.996 18.4928 106.935 0 143.84 0 16.3334
+send_level_message "set_camera_dof 0 0 0 .3 4 1"
+say 2 "????" "I've done nothing bad."
+send_character_message 2 "set_torso_target -110.92 18.2288 109.301 1"
+send_character_message 2 "set_head_target -110.27 18.9497 109.531 1"
+say 2 "????" "I only acted for the better of Preuwyn."
+send_character_message 3 "set_torso_target -109.866 17.745 109.612 1"
+send_character_message 3 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam -111.402 18.9936 108.438 0 -118.75 0 16.3334
+say 3 "???" "...[wait 0.3]perhaps you need a reminder of your actions."
+set_cam -106.887 18.3846 106.805 0 141.48 0 16.3334
+say 3 "???" "You are here for harbouring enemies of the Empire."
+send_character_message 3 "set_torso_target -109.91 17.981 109.927 1"
+say 3 "???" "This includes a member of the Arlissian Collective, [wait 0.3]previously wanted for the trading of grown narcotics."
+send_character_message 2 "set_head_target -110.155 19.1371 109.53 1"
+send_character_message 2 "set_torso_target -110.921 18.0532 109.311 1"
+set_cam -108.204 18.3848 111.528 0 53.82 0 16.3334
+send_character_message 3 "set_torso_target -109.924 18.2216 109.661 0"
+send_level_message "set_camera_dof 0 0 0 .3 5 0.5"
+say 3 "???" "You are also accused of conspiracy with foreign powers."
+set_character_pos 1 -84.5591 17.9864 112.778 163
+set_cam -108.204 18.3848 111.528 0 53.85 0 16.3334
+send_character_message 2 "set_head_target -110.168 19.1173 109.608 1"
+send_character_message 2 "set_torso_target -110.921 18.0532 109.311 0"
+say 3 "???" "Along with that, [wait 0.5]you are charged with assaulting a member of the Cinderbreathe City guard force."
+send_character_message 2 "set_torso_target -110.921 18.0532 109.311 0.00839487"
+send_character_message 2 "set_head_target -110.168 19.1148 109.608 1"
+send_character_message 3 "set_torso_target -109.924 18.2216 109.661 0.00044474"
+send_character_message 1 "set_head_target -93.752 18.5181 111.709 1"
+set_cam -113.312 18.6209 108.735 0 -103.77 0 16.3334
+say 3 "???" "You are punished to death."
+send_character_message 3 "set_torso_target -109.924 19.0179 109.661 1"
+send_character_message 2 "set_torso_target -111.037 17.7568 109.246 1"
+send_character_message 2 "set_head_target -110.877 18.2185 109.293 1"
+say 2 "????" "..."
+send_character_message 4 "set_torso_target -100.377 18.9331 106.913 1"
+send_character_message 4 "set_head_target -108.439 19.3649 109.737 1"
+set_cam -111.162 19.0951 110.166 0 -75.37 0 16.3334
+say 3 "???" "An official hasn't arrived to oversee the execution. [wait 0.3]We cannot begin it just yet."
+send_character_message 3 "set_head_target -111.272 18.6209 109.334 1"
+send_character_message 3 "set_torso_target -109.924 19.0179 109.661 0"
+say 3 "???" "So, in the meantime, [wait 0.3]stay right there. [wait 0.5]You will be watched every minute up to your death."
+send_character_message 4 "set_head_target -108.44 19.4033 109.687 1"
+send_character_message 3 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 3 "set_head_target -111.272 18.8113 109.334 1"
+say 3 "???" "Hail."

@@ -1,0 +1,27 @@
+#name "Intro"
+#participants 2
+send_level_message "music_layer_override 0"
+set_character_pos 1 11.8206 533.666 -5.45802 -90
+send_character_message 1 "set_animation \"Data/Animations/dialogue_dying_2.anm\""
+send_character_message 1 "set_torso_target 11.6452 533.301 -4.51393 1"
+set_cam -22.9322 551.176 -8.51423 -26.5 -101.74 0.06 30.1635
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 2 "" "..."
+send_character_message 1 "set_head_target 12.5569 532.65 -5.12834 0.00481981"
+set_cam 7.72555 533.637 -6.70519 0 -111.36 0 25.2789
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 1 "You" "..."
+send_character_message 1 "set_head_target 11.7367 533.304 -4.72597 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+say 1 "You" "..."
+send_character_message 1 "set_torso_target 11.6967 533.318 -4.54881 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target 9.72745 534.612 -2.31826 1"
+say 1 "You" "...[wait 0.3]dammit..."
+set_cam 9.84568 533.968 -8.61216 6.12 -157.79 0 53.1167
+send_character_message 1 "set_head_target 13.7198 536.065 7.09708 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+send_character_message 1 "set_torso_target 11.6967 533.318 -4.54881 0"
+send_level_message "set_camera_dof 0 0 0 0.3 4 5"
+say 1 "You" "I have to get out of here. [wait 0.5]As soon as possible."

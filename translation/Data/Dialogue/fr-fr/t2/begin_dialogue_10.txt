@@ -1,0 +1,15 @@
+#name "Note-SpiritEnergy"
+#participants 2
+set_character_pos 1 190.052 -48.9326 193.971 -180
+send_character_message 1 "set_head_target 189.297 -48.4541 194.072 1"
+set_cam 190.681 -48.3442 192.828 0 135.86 0 38.5978
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "A déchiré les pages d’un livre sur les légendes de l’esprit..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 189.05 -48.2701 194.674 0 -40.3 0 38.5978
+say 2 "Note" "Énergie spirituelle, [wait 0.3]comme dit dans les contes, [wait 0.3]est presque toujours gardé et harnachés dans les lanternes de Pierre environ aussi grands que n’importe quel chien adulte moyen."
+say 2 "Note" "Si ces lanternes arrive d’être cassé ou détruit en quelque sorte, [wait 0.3]l’énergie de l’esprit sera libéré et immédiatement détruit ; [wait 0.3]n’importe quel but que les esprits à l’intérieur de la lanterne pourraient avoir servi au préalable disparaît complètement, [wait 0.3]et sa fonction est perdue à jamais jusqu’au remplacement."
+say 2 "Note" "Ainsi que l’énergie de l’esprit étant définitivement perdu, [wait 0.3]vous seront maudits presque immédiatement pour ce « péché capital »."
+say 2 "Note" "Ces lanternes esprit offrent des fonctions de chacun des principes fondamentaux et du droit du monde."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Tandis que là sont beaucoup d’histoires impliquant les esprits du monde [wait 0.3]Je suis plus enclin à croire que ce sont rien de plus que les histoires."

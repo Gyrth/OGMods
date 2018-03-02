@@ -1,0 +1,19 @@
+#name "Note-Architect"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 38.0803 420.149 -72.0033 -82
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 38.1103 420.621 -71.3041 1"
+set_cam 36.9619 420.657 -72.8254 0 -139.86 0 41.1643
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Une note un peu récente. [wait 0.5]Doit être écrit par un architecte."
+send_character_message 1 "set_head_target 38.1392 420.469 -71.3407 1"
+set_cam 37.6155 420.763 -70.7852 0 -28.15 0 41.1643
+set_character_pos 1 38.0803 420.096 -72.0033 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Je me retrouve plus en plus préoccupés par la hausse des coûts et l’ampleur de cette prison complexe."
+say 2 "Note" "J’ai été contracté pour construire une forteresse impénétrable, mais avec les températures arctiques, la qualité médiocre de la Crète noire et les tremblements incessants qui menacent de se séparent du sol en dessous de nous, je crains qu'il ne se terminera jamais complètement."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 38.156 420.703 -71.2229 1"
+say 2 "Note" "Un cauchemar fait réalité et ma plus grande honte en tant qu’architecte d’être incapable de terminer cette monstruosité."

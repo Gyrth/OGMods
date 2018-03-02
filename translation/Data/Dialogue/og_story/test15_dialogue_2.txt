@@ -1,0 +1,8 @@
+#name "Boss1"
+#participants 2
+send_character_message 1 "equip_item 54"
+set_character_pos 2 -29.9538 -4.05963 103.783 179
+set_character_pos 1 -32.3411 -4.113 104.84 26
+set_cam -31.1525 -3.60613 107.692 0 0 0 90
+say 2 "Boss" "I can't let you have this ship."
+make_participants_aware

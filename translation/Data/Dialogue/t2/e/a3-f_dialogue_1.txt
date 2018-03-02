@@ -1,0 +1,41 @@
+#name "Intro"
+#participants 9
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 15
+set_character_pos 8 114.609 405.55 180.769 -16
+send_character_message 8 "set_animation \"Data/Animations/leanovertable.anm\""
+send_character_message 8 "set_head_target 115.127 405.815 181.124 1"
+set_character_pos 7 116.031 405.588 165.699 180
+send_character_message 7 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+set_character_pos 6 108.7 405.523 143.174 0
+send_character_message 6 "set_animation \"Data/Animations/r_sleep.anm\""
+set_character_pos 5 108.832 405.55 145.176 -32
+send_character_message 5 "set_animation \"Data/Animations/interestingsit.anm\""
+send_character_message 5 "set_head_target 109.355 405.732 145.852 1"
+set_character_pos 4 108.932 405.564 124.609 73
+send_character_message 4 "set_animation \"Data/Animations/r_bigswordarmstance.anm\""
+send_character_message 4 "set_head_target 110.423 406.362 121.007 1"
+set_character_pos 3 116.131 405.567 124.452 102
+send_character_message 3 "set_animation \"Data/Animations/r_bigswordarmstance.anm\""
+send_character_message 3 "set_head_target 115.299 406.334 122.108 1"
+set_character_pos 2 111.373 405.547 108.556 -84
+send_character_message 2 "set_animation \"Data/Animations/r_bigdogswordarmstance.anm\""
+send_character_message 2 "set_head_target 112.183 406.317 109.861 1"
+set_character_pos 1 112.265 405.523 110.064 -90
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_head_target 112.998 407.068 113.901 1"
+set_cam 113.388 406.154 107.429 0 166.35 0 38.3432
+say 1 "Ghost" "...[wait 0.3]woah. [wait 0.5]Where are we?"
+send_character_message 1 "set_head_target 111.458 406.283 111.349 1"
+set_cam 112.465 406.315 111.187 0 15.23 0 38.3432
+say 2 "???" "Empry Commander Ano is currently off site for reasons that will be explained."
+send_character_message 1 "set_head_target 112.15 406.43 111.713 1"
+say 1 "Ghost" "...[wait 0.3]right."
+send_character_message 1 "set_torso_target 111.97 405.944 110.863 1"
+send_character_message 1 "set_head_target 111.119 406.488 109.405 1"
+set_cam 111.757 406.349 106.945 0 179.5 0 33.8329
+say 1 "Ghost" "So I'll just go talk to him?"
+send_character_message 1 "set_head_target 112.477 406.226 115.684 1"
+send_character_message 1 "set_torso_target 111.97 405.944 110.863 0"
+say 2 "???" "You will be under our gaze, [wait 0.3]but yes."

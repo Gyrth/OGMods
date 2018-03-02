@@ -1,0 +1,17 @@
+#name "Note-Beetles"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 37.3548 420.149 -65.2101 -179
+send_level_message "therium2_enable_object 1869"
+send_character_message 1 "set_head_target 36.6578 420.535 -65.2565 1"
+set_cam 35.4735 420.63 -63.0056 0 -29.84 0 35.1378
+send_level_message "set_camera_dof 0.3 2 0.5 0.3 5 2"
+say 1 "Ghost" "A torn page from a newspaper pasted into someone's diary."
+set_cam 36.3475 420.836 -66.1337 0 -140.49 0 35.1378
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Note" "While digging in the C quadrant of the Therium, Hansel discovered something most extraordinary - a previously unknown clan of subterranean lagomorphs who refer to themselves as Beetles. More research must be conducted, but from what little of our common languages they still share I have gleaned that these Beetles split from our society some centuries previous over petty familial squabbles, and then became trapped underground when the caverns they took shelter in began to collapse around them."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "The High Council refuses to acknowledge their existence, but I simply must find out how they managed to survive all these years below the surface!"
+send_level_message "therium2_disable_object 1869"

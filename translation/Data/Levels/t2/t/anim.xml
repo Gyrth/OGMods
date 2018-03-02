@@ -1,0 +1,174 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name/>
+<Description/>
+<Shader>post</Shader>
+<LoadingScreen>
+    <Image/>
+</LoadingScreen>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251"/>
+<AmbientSounds/>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_alert, no_injuries"/>
+    <parameter name="HDR Black point" type="string" val="0.005"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="0"/>
+    <parameter name="HDR White point" type="string" val="0.99"/>
+    <parameter name="Level Boundaries" type="string" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Saturation" type="float" val="1"/>
+    <parameter name="Sky Rotation" type="string" val="143"/>
+</LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60"/>
+<Sky>
+    <DomeTexture>Data/Textures/skies/bright_dusk.tga</DomeTexture>
+    <SunAngularRad>0.0983086</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.790008" r1="0.6025" r2="0.113494"/>
+</Sky>
+<ActorObjects>
+    <ActorObject t0="-43.1149" t1="38.807" t2="145.415" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="0" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="100"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="turner"/>
+        </parameters>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Rope" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Fur" channel="2" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="-42.7123" t1="36.1455" t2="126.375" s0="1.60028" s1="0.468342" s2="3.171" q0="0" q1="0" q2="0" q3="1" id="1" color_r="0.227451" color_g="0.227451" color_b="0.227451" overbright="0" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-42.9803" t1="35.9298" t2="111.989" s0="2.02081" s1="1" s2="3.30549" q0="0" q1="0" q2="0" q3="1" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <CameraObject t0="-33.8894" t1="39.9499" t2="152.301" s0="1" s1="1" s2="1" q0="-0.107676" q1="0.0326119" q2="-0.00353397" q3="-0.993645" id="3">
+        <parameters/>
+    </CameraObject>
+    <EnvObject t0="-43.1369" t1="36.0174" t2="107.512" s0="1.16523" s1="1" s2="1.0533" q0="0" q1="0" q2="0" q3="1" id="4" color_r="0.356863" color_g="0.356863" color_b="0.356863" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="-35.9707" t1="38.762" t2="141.827" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="8" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/t2/t/anim_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Test"/>
+            <parameter name="NumParticipants" type="int" val="3"/>
+            <parameter name="obj_1" type="int" val="9"/>
+            <parameter name="obj_2" type="int" val="10"/>
+            <parameter name="obj_3" type="int" val="12"/>
+        </parameters>
+        <Connections>
+            <Connection id="8"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-35.6207" t1="39.462" t2="141.827" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="9" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-35.9707" t1="39.462" t2="141.827" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="10" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="-42.9803" t1="35.9298" t2="139.542" s0="2.02081" s1="1" s2="3.30549" q0="0" q1="0" q2="0" q3="1" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="-36.3207" t1="39.462" t2="141.827" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="12" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="-38.4495" t1="39.3368" t2="141.784" s0="0.666667" s1="0.666667" s2="0.666667" q0="0" q1="0" q2="0" q3="1" id="13" type_file="Data/Objects/Hotspots/start_dialogue.xml">
+        <parameters>
+            <parameter name="Automatic" type="int" val="1"/>
+            <parameter name="Dialogue" type="string" val="Test"/>
+            <parameter name="Visible in game" type="int" val="1"/>
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="-13.6665" t1="35.3539" t2="108.874" s0="1.16523" s1="1" s2="1.0533" q0="0" q1="0" q2="0" q3="1" id="14" color_r="0.356863" color_g="0.356863" color_b="0.356863" overbright="0" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-41.941" t1="39.5213" t2="132.753" s0="0.599412" s1="1.27567" s2="0.495328" q0="0" q1="0.707107" q2="0" q3="0.707107" id="20" color_r="0.329412" color_g="0.329412" color_b="0.329412" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-3.61237" t1="27.5324" t2="126.194" s0="3.92073" s1="2.33959" s2="3.18653" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="23" color_r="0.0823529" color_g="0.0823529" color_b="0.0823529" overbright="0" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-40.0429" t1="38.679" t2="135.153" s0="0.599412" s1="0.433392" s2="1.40261" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="25" color_r="0.329412" color_g="0.329412" color_b="0.329412" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-40.0429" t1="38.679" t2="132.754" s0="0.599412" s1="0.433392" s2="1.40261" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="26" color_r="0.329412" color_g="0.329412" color_b="0.329412" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-36.9157" t1="38.6444" t2="144.553" s0="0.444746" s1="0.965387" s2="0.448263" q0="0" q1="0.707107" q2="0" q3="0.707107" id="40" version="1">
+        <parameters/>
+        <EnvObject t0="-37.1015" t1="38.8388" t2="144.552" s0="0.5428" s1="0.635384" s2="1" q0="-0.5" q1="0.5" q2="-0.5" q3="0.5" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_short_board.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-36.9157" t1="38.3753" t2="144.553" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_stool.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-35.46" t1="38.4806" t2="144.672" s0="1.85318" s1="0.997672" s2="3.04473" q0="0" q1="0.707107" q2="0" q3="0.707107" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_tall_table.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-34.4255" t1="38.6444" t2="144.56" s0="0.444746" s1="0.965387" s2="0.448263" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="44" version="1">
+        <parameters/>
+        <EnvObject t0="-34.2397" t1="38.8388" t2="144.561" s0="0.5428" s1="0.635384" s2="1" q0="0.5" q1="-0.5" q2="-0.5" q3="0.5" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_short_board.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-34.4255" t1="38.3753" t2="144.56" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_stool.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-35.732" t1="38.6444" t2="143.294" s0="0.444746" s1="0.965387" s2="0.448263" q0="0" q1="0.0269964" q2="0" q3="0.999636" id="47" version="1">
+        <parameters/>
+        <EnvObject t0="-35.7411" t1="38.8388" t2="143.109" s0="0.5428" s1="0.635384" s2="1" q0="-0.0190895" q1="0.0190894" q2="-0.706849" q3="0.706849" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_short_board.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-35.7324" t1="38.3753" t2="143.294" s0="1" s1="1" s2="1" q0="0" q1="0.0269964" q2="0" q3="0.999636" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_stool.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="default Turner" path="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_TurnerActor.png"/>
+    <SpawnerItem display_name="Start Dialogue" path="Data/Objects/Hotspots/start_dialogue.xml" thumbnail_path="Data/UI/spawner/thumbs/Hotspot/sign_icon.png"/>
+    <SpawnerItem display_name="SkyRabbit.xml" path="Data/Characters/Campaign/SkyRabbit.xml" thumbnail_path="empty_placeholder.png"/>
+    <SpawnerItem display_name="Rabbit_Sky.xml" path="Data/Characters/prefabs/Rabbit_Sky.xml" thumbnail_path="empty_placeholder.png"/>
+    <SpawnerItem display_name="Rat_Zurka.xml" path="Data/Characters/prefabs/Rat_Zurka.xml" thumbnail_path="empty_placeholder.png"/>
+    <SpawnerItem display_name="Cat_Kotke.xml" path="Data/Characters/prefabs/Cat_Kotke.xml" thumbnail_path="empty_placeholder.png"/>
+    <SpawnerItem display_name="Rabbit_Hassli.xml" path="Data/Characters/prefabs/Rabbit_Hassli.xml" thumbnail_path="empty_placeholder.png"/>
+    <SpawnerItem display_name="Cat_Yata.xml" path="Data/Characters/prefabs/Cat_Yata.xml" thumbnail_path="empty_placeholder.png"/>
+</RecentItems>

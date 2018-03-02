@@ -1,0 +1,95 @@
+#name "Jairo"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_torso_target 112.009 405.825 225.177 1"
+send_character_message 2 "set_head_target 110.922 406.012 211.481 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_torso_target 110.731 405.08 210.652 1"
+send_character_message 1 "set_head_target 111.847 406.229 223.35 1"
+set_character_pos 2 112.026 405.642 226.14 90
+set_character_pos 1 110.816 405.177 209.717 -90
+set_cam 111.357 405.81 211.874 0 11.35 0 24.0011
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Amos" "Jairo? [wait 0.5]What are you doing here?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 111.695 405.846 228.237 0 -1.35 0 17.5409
+say 2 "Jairo" "You're talking to them. [wait 0.5]Conspiring. [wait 0.5]Planning."
+send_character_message 2 "set_torso_target 112.009 405.171 225.177 1"
+say 2 "Jairo" "What do you think you are doing? [wait 0.5]Did you forget you had a mission?"
+send_character_message 1 "set_head_target 111.878 405.671 225.148 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Amos" "I have more important things to do."
+send_character_message 2 "set_head_target 110.914 405.303 210.653 1"
+send_character_message 2 "set_torso_target 112.009 405.646 225.177 1"
+set_cam 110.842 406.285 224.04 0 -149.66 0 17.5409
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Jairo" "You think you can save your father?"
+send_character_message 1 "set_torso_target 110.731 405.569 210.652 1"
+send_character_message 1 "set_head_target 111.878 406.327 225.148 1"
+set_cam 109.365 405.821 211.105 0 -49.32 0 17.5409
+say 1 "Amos" "I can. [wait 0.5]And I will."
+send_character_message 2 "set_torso_target 112.009 406.174 225.177 1"
+set_cam 110.349 405.524 207.984 0 -172.24 0 17.5409
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "Do you really think you can even get into the plantation in the first place?"
+send_character_message 1 "set_torso_target 110.763 404.678 210.509 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Amos" "Even if I can't, [wait 0.3]I have backup."
+send_character_message 2 "set_head_target 110.814 405.991 209.896 1"
+send_character_message 2 "set_torso_target 112.009 406.504 225.177 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "And do you really believe your father is alive?"
+send_character_message 1 "set_torso_target 110.867 405.366 210.507 1"
+send_character_message 1 "set_head_target 112.058 406.457 225.215 1"
+set_cam 112.364 405.848 210.509 0 66.92 0 17.5409
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 1 "Amos" "...[wait 0.3]yes, [wait 0.3]I do."
+set_cam 113.094 406.299 224.031 0 151 0 17.5409
+say 2 "Jairo" "You don't even have the slimmest chance of survival! [wait 0.5]Look at them touting the possibility of backup, [wait 0.3]when they don't even have the manpower to ambush you!"
+send_character_message 2 "set_torso_target 112.009 406.504 225.177 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 2 "Jairo" "What makes you believe them? [wait 0.5]How can you know they're not just making it up?"
+send_character_message 2 "set_head_target 110.849 405.624 209.943 1"
+send_character_message 2 "set_torso_target 112.009 406.504 225.177 1"
+say 2 "Jairo" "We know for certain that Edsel's discarded pile of guts are rotting in a ditch somewhere in the Therium."
+send_character_message 2 "set_torso_target 112.119 405.678 224.972 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Jairo" "His bones have been taken apart by former sentients, [wait 0.3]barely thinking, [wait 0.3]only serving. [wait 0.5]They're even died red with his blood, still warm."
+send_character_message 2 "set_torso_target 112.117 405.323 225.231 1"
+send_character_message 2 "set_head_target 111.004 406.853 210.06 1"
+say 2 "Jairo" "They were used to make a dull, [wait 0.3]dented sword."
+send_character_message 1 "set_torso_target 110.689 405.091 210.433 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 112.437 406.463 227.733 -2.99 9.51 0 17.5409
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Amos" "..."
+send_character_message 2 "set_head_target 110.88 405.764 209.986 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Jairo" "You know it's true. [wait 0.5]Why would we lie to you, [wait 0.3]Ghost?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_torso_target 112.117 405.543 225.231 1"
+say 2 "Jairo" "And why would the Cinderbreathe tell you all of that sensitive information?"
+set_cam 111.256 406.253 224.593 2.84 -152.26 0.93 20.0706
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Jairo" "It's all just to manipulate you. [wait 0.5]To make you follow their whispers of lies and conspiracy."
+send_character_message 2 "set_torso_target 112.117 405.705 225.231 1"
+send_character_message 2 "set_head_target 110.947 407.115 210.272 1"
+say 2 "Jairo" "[wait 0.3]But we're offering you a choice."
+send_character_message 2 "set_head_target 110.364 405.875 210.362 1"
+say 2 "Jairo" "You can follow us, [wait 0.3]and refuse the Cinderbreathe conspiracy..."
+send_character_message 2 "set_head_target 110.844 405.176 210.437 1"
+set_character_pos 2 112.026 405.596 226.14 90
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 2 "Jairo" "Or you can keep being their little puppet."
+set_cam 110.293 405.796 207.675 0.4 -170.41 0.85 20.0706
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "What do you choose? [wait 0.5]The Cinderbreathe, [wait 0.5]or us?"
+send_character_message 1 "set_head_target 109.497 405.555 213.48 1"
+set_cam 110.734 405.828 211.865 -0.51 1.75 -0.79 20.0706
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Amos" "..."

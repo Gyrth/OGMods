@@ -1,0 +1,18 @@
+#name "Note-Bleeding"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 299.413 2.70343 36.1188 -90
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 299.345 2.82007 36.8789 1"
+set_cam 300.976 3.19253 37.4423 0 60 0 33.9423
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "An ancient note, [wait 0.3]torn and weathered. [wait 0.5]Can barely read it."
+send_character_message 1 "set_head_target 299.467 2.86558 36.8146 1"
+set_cam 300.268 3.35349 37.3426 0 38.06 0 33.9423
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "The demon is bleeding. [wait 0.5]His blood went into the forest nearby. [wait 0.5]We couldn't see him past all the bushes and leaves."
+say 2 "Note" "His shirt, [wait 0.3]though we lobbed a knife at him, [wait 0.3]is still completely intact. [wait 0.5]So is his fur and skin."
+say 2 "Note" "The god must be angry at us. [wait 0.5]For what reason, [wait 0.3]I have no idea. [wait 0.5]He must be the messenger of the god's fury, [wait 0.3]powerful and undefeatable.
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "[wait 0.3]I am very scared."

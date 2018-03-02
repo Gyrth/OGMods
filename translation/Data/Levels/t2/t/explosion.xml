@@ -1,0 +1,164 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name/>
+<Description/>
+<Shader>post</Shader>
+<OutOfDate NavMesh="false"/>
+<AmbientSounds/>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_alert, no_injuries"/>
+    <parameter name="Fog amount" type="string" val="1"/>
+    <parameter name="HDR Black point" type="string" val="0.005"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="0"/>
+    <parameter name="HDR White point" type="string" val="1.01"/>
+    <parameter name="Level Boundaries" type="string" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Sky Brightness" type="string" val="1"/>
+    <parameter name="Sky Rotation" type="string" val="143"/>
+    <parameter name="Sky Tint" type="string" val="7, 7, 7"/>
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/bright_dusk.tga</DomeTexture>
+    <SunAngularRad>0.0983086</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.790008" r1="0.6025" r2="0.113494"/>
+</Sky>
+<ActorObjects>
+    <CameraObject t0="-32.873" t1="42.1657" t2="144.866" s0="1" s1="1" s2="1" q0="-0.0918757" q1="-0.0979051" q2="-0.00907768" r0="0.980664" r1="-1.67638e-008" r2="0.195697" r3="0" r4="0.0359804" r5="0.982953" r6="-0.180303" r7="0" r8="-0.192361" r9="0.183858" r10="0.963947" r11="0" r12="0" r13="0" r14="0" r15="1" id="3">
+        <parameters/>
+    </CameraObject>
+    <EnvObject t0="-42.7123" t1="36.1455" t2="126.375" s0="1.60028" s1="0.468342" s2="3.171" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" color_r="0.227451" color_g="0.227451" color_b="0.227451" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-42.9803" t1="35.9298" t2="111.989" s0="2.02081" s1="1" s2="3.30549" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="2" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-43.1369" t1="36.0174" t2="107.512" s0="1.16523" s1="1" s2="1.0533" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="4" color_r="0.356863" color_g="0.356863" color_b="0.356863" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-42.9803" t1="35.9298" t2="139.542" s0="2.02081" s1="1" s2="3.30549" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="11" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-3.61237" t1="27.5324" t2="126.194" s0="3.92073" s1="2.33959" s2="3.18653" q0="0" q1="-0.707107" q2="0" r0="-5.96046e-007" r1="0" r2="1" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-1" r9="-0" r10="-5.96046e-007" r11="0" r12="0" r13="0" r14="0" r15="1" id="23" color_r="0.0823529" color_g="0.0823529" color_b="0.0823529" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="-35.4368" t1="38.7441" t2="142.223" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="9" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/t2/t/explosion_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Test"/>
+            <parameter name="NumParticipants" type="int" val="3"/>
+            <parameter name="obj_1" type="int" val="10"/>
+            <parameter name="obj_2" type="int" val="12"/>
+            <parameter name="obj_3" type="int" val="13"/>
+        </parameters>
+        <Connections>
+            <Connection id="9"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-35.0868" t1="39.4441" t2="142.223" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="10" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-35.4368" t1="39.4441" t2="142.223" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="12" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-35.7868" t1="39.4441" t2="142.223" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="13" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="-17.5358" t1="39.5359" t2="108.24" s0="2.02081" s1="1" s2="3.30549" q0="0" q1="-0.707107" q2="0" r0="-5.96046e-007" r1="0" r2="1" r3="0" r4="-0" r5="1" r6="0" r7="0" r8="-1" r9="-0" r10="-5.96046e-007" r11="0" r12="0" r13="0" r14="0" r15="1" id="8" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-43.1071" t1="37.8511" t2="107.47" s0="0.52227" s1="0.264736" s2="0.520702" q0="-0" q1="0.707107" q2="-0" r0="-5.96046e-007" r1="-0" r2="-1" r3="0" r4="0" r5="1" r6="-0" r7="0" r8="1" r9="0" r10="-5.96046e-007" r11="0" r12="0" r13="0" r14="0" r15="1" id="14" color_r="0.964706" color_g="0.129412" color_b="0.129412" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-43.1369" t1="36.0174" t2="116.434" s0="1.16523" s1="1" s2="1.0533" q0="1.39091e-008" q1="1" q2="-0" r0="-1" r1="2.78182e-008" r2="-0" r3="0" r4="2.78182e-008" r5="1" r6="0" r7="0" r8="0" r9="-0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="16" color_r="0.356863" color_g="0.356863" color_b="0.356863" type_file="Data/Objects/Buildings/cat_town/short_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="-43.2009" t1="56.5737" t2="107.326" s0="1" s1="1" s2="1" q0="4.47035e-008" q1="-0.985164" q2="1.49012e-008" r0="-0.941095" r1="-8.29659e-008" r2="0.338143" r3="0" r4="-9.31951e-008" r5="1" r6="-1.40164e-008" r7="0" r8="-0.338143" r9="-4.4704e-008" r10="-0.941095" r11="0" r12="0" r13="0" r14="0" r15="1" id="18" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="0.1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="1"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.129412" green="0.109804" blue="0.101961"/>
+            <Color label="Shirt" channel="1" red="0.0941176" green="0.0705882" blue="0.0705882"/>
+            <Color label="Pants" channel="2" red="0.101961" green="0.0666667" blue="0.0666667"/>
+            <Color label="Spots" channel="3" red="0.0784314" green="0.0705882" blue="0.0666667"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-43.179" t1="39.2735" t2="144.32" s0="1" s1="1" s2="1" q0="1.39091e-008" q1="1" q2="-0" r0="-1" r1="2.78182e-008" r2="-0" r3="0" r4="2.78182e-008" r5="1" r6="0" r7="0" r8="0" r9="-0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="0" type_file="Data\Objects\therium\IGF_Characters\ghostspawn.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="player, Ghost"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <Hotspot t0="-43.0374" t1="39.6174" t2="107.483" s0="0.634023" s1="0.634023" s2="0.634023" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="20" type_file="Data\Objects\therium\Hotspots\explosive.xml">
+        <parameters>
+            <parameter name="Damage dealt" type="string" val="0.0"/>
+            <parameter name="Recovery time" type="string" val="5.0"/>
+            <parameter name="Smoke particle amount" type="string" val="15"/>
+            <parameter name="Upward force" type="string" val="0.0"/>
+        </parameters>
+    </Hotspot>
+</ActorObjects>

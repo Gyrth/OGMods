@@ -1,0 +1,16 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>translation-mod</Id>
+    <Name>Translation Mod</Name>
+	<Category>Scripting</Category>
+    <Version>0.1.0</Version>
+    <Author>Gyrth McMulin</Author>
+    <Thumbnail>Data/Images/translation_thumb.png</Thumbnail>
+    <PreviewImage>Data/Images/translation_full.png</PreviewImage>
+	<Description>Translation Mod.</Description>
+    <Tag>level</Tag>
+    <Tag>scripting</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <NeedsRestart>false</NeedsRestart>
+    <LevelHookFile>Data/Scripts/language_select.as</LevelHookFile>
+</Mod>

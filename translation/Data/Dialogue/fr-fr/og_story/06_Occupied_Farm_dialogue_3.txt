@@ -1,0 +1,35 @@
+#name "End"
+#participants 3
+send_character_message 2 "set_torso_target -74.5552 -26.3074 -145.602 3.74913e-005"
+send_character_message 2 "set_head_target -74.6555 -26.9137 -147.324 0.730831"
+send_character_message 1 "set_torso_target -74.0255 -26.7714 -146.309 0"
+send_character_message 1 "set_head_target -74.1768 -27.9147 -146.564 1"
+set_character_pos 3 -73.6657 -27.9156 -147.576 145
+set_character_pos 2 -75.2892 -27.8149 -147.516 54
+set_character_pos 1 -74.3796 -27.8385 -148.249 -99
+set_cam -73.8221 -27.1767 -146.886 -2.88 3.75 0.26 77.1293
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+send_level_message "music_layer_override -2"
+say 1 "Turner" "Nuage..."
+send_character_message 3 "set_head_target -74.3762 -27.1988 -148.241 1"
+say 3 "Slate" "Nous avons besoin de bouger. Si nous manquons le navire, ça pourrait être des mois avant celle qui suit."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "On s'en fout. Rien n’importe plus. Comment jamais oublier qui ?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Combats... c’est juste reporter mort."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target -74.2097 -27.0785 -148.337 0.730831"
+set_cam -75.222 -27.1767 -146.78 0 -14.6 0 63.5261
+say 2 "Sky" "Vous pensez que je n’ai pas perdu amis ? Vous pensez que je ne pense pas que le trou où ils ont l’habitude d’être ?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sky" "Cloud vous asseoir ici voudrait se plaindre lors de son évasion de tueurs ?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target -75.4137 -27.0716 -147.642 1"
+say 1 "Turner" "J’ai essayé une fois vengeance. Il n’a pas aidé. Vous vous retrouvez juste sanglante et seul."
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target -74.4275 -27.6481 -148.627 0.730831"
+send_character_message 3 "set_head_target -74.3846 -27.2408 -148.249 1"
+say 2 "Sky" "Puis au moins nous aider à rentrer la maison. Nous ne pouvons pas prendre le contrôle du navire sans vous."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Amende. Je vais vous présenter qui jusqu'à maintenant."
+send_global_message "levelwin"

@@ -1,0 +1,10 @@
+#name "Boss"
+#participants 2
+
+set_cam -5.36588 -1.20289 20.35 0 71.37 0 90
+set_character_pos 1 -7.18965 -1.97483 18.4742 -143
+set_character_pos 2 -11.8499 -1.97289 21.8988 42
+say 2 "Boss" "Ugh, rabbit guards couldn't even handle one rebel."
+say 2 "Boss" "I'll handle this myself."
+make_participants_aware
+

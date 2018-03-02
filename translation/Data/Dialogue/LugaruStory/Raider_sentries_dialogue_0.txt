@@ -1,0 +1,11 @@
+#name "Turner"
+#participants 1
+set_character_pos 1 -211.381 24.5603 126.132 -11
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_head_target -214.278 24.978 128.372 0"
+set_cam -217.534 26.834 130.835 -10.69 -68.73 0 90
+say 1 "Turner" "Sentry towers ... "
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target -208.363 25.6792 128.082 1"
+set_cam -210.854 24.7039 127.895 1.51 -7.96 0.94 90
+say 1 "Turner" "Must be getting close."

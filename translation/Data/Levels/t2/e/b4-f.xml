@@ -1,0 +1,2001 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>E-B4-F</Name>
+<Description>You pressed the F key, and now look at what you have done...</Description>
+<Shader>post</Shader>
+<LoadingScreen>
+    <Image>Data/LevelLoading/t2/e/b4.jpg</Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Textures/black.tga</Heightmap>
+    <ShaderExtra/>
+    <DetailMap/>
+    <ColorMap>Data/Textures/black.tga</ColorMap>
+    <WeightMap>Data/Textures/black.tga</WeightMap>
+    <ModelOverride>Data/Models/flat.obj</ModelOverride>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/black.tga" normalpath="Data/Textures/normal.tga" materialpath="Data/Materials/rocks.xml"/>
+        <DetailMap colorpath="Data/Textures/black.tga" normalpath="Data/Textures/normal.tga" materialpath="Data/Materials/gravel.xml"/>
+        <DetailMap colorpath="Data/Textures/black.tga" normalpath="Data/Textures/normal.tga" materialpath="Data/Materials/sand.xml"/>
+        <DetailMap colorpath="Data/Textures/black.tga" normalpath="Data/Textures/normal.tga" materialpath="Data/Materials/rock.xml"/>
+    </DetailMaps>
+    <DetailObjects/>
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251"/>
+<AmbientSounds/>
+<Script>levelscripts/therium_per_level_script.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="no_injuries"/>
+    <parameter name="Custom Shader" type="string" val="#VOLCANO"/>
+    <parameter name="Fog amount" type="float" val="0"/>
+    <parameter name="GPU Particle Field" type="string" val="#ASH"/>
+    <parameter name="HDR Black point" type="float" val="0.61745"/>
+    <parameter name="HDR Bloom multiplier" type="float" val="0.34"/>
+    <parameter name="HDR White point" type="float" val="0.20134"/>
+    <parameter name="Level Boundaries" type="int" val="1"/>
+    <parameter name="Load Tip" type="string" val="You really should not have done that."/>
+    <parameter name="Objectives" type="string" val="destroy_all, must_visit_trigger"/>
+    <parameter name="Saturation" type="float" val="1"/>
+    <parameter name="Sky Brightness" type="float" val="0"/>
+    <parameter name="Sky Rotation" type="float" val="0"/>
+    <parameter name="Sky Tint" type="string" val="255, 255, 255"/>
+</LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60"/>
+<Sky>
+    <DomeTexture>Data/Textures/Skies/interior.tga</DomeTexture>
+    <SunAngularRad>0.16407</SunAngularRad>
+    <SunColorAngle>316.819</SunColorAngle>
+    <RayToSun r0="-0.0815079" r1="0.28555" r2="0.954892"/>
+</Sky>
+<ActorObjects>
+    <CameraObject t0="101.978" t1="-52.4904" t2="245.588" s0="1" s1="1" s2="1" q0="0.699925" q1="-0.00230843" q2="0.00226226" q3="0.714209" id="1">
+        <parameters/>
+    </CameraObject>
+    <ActorObject t0="90.3218" t1="-40.6629" t2="268.086" s0="1" s1="1" s2="1" q0="0" q1="0.389131" q2="0" q3="0.921182" id="2" type_file="Data/Objects/therium/IGF_Characters/ghost.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="2"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="10"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="0.4"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="player, Ghost"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+        <EnvObjectAttachments>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="24" num_connections="1" m0="0.0520945" m1="0.484226" m2="0.873387" m3="0" m4="-0.860446" m5="-0.422129" m6="0.285365" m7="0" m8="0.506862" m9="-0.76637" m10="0.394664" m11="0" m12="-0.845398" m13="-0.0540409" m14="0.0482712" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="11" num_connections="1" m0="0.468456" m1="0.872902" m2="-0.136345" m3="0" m4="0.87585" m5="-0.438597" m6="0.201293" m7="0" m8="0.115909" m9="-0.213715" m10="-0.969995" m11="0" m12="0.824066" m13="-0.0619202" m14="0.0308685" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1"/>
+            </EnvObjectAttachment>
+        </EnvObjectAttachments>
+        <EnvObject s0="0.40808" s1="0.869896" s2="0.408066" id="538" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/Cone.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject s0="0.40808" s1="0.869896" s2="0.408066" id="536" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/Cone.xml">
+            <parameters/>
+        </EnvObject>
+    </ActorObject>
+    <PlaceholderObject t0="110.028" t1="-40.1506" t2="271.82" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="1" q2="0" q3="0" id="3" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="83.7593" t1="-39.3324" t2="264.437" s0="1" s1="1" s2="1" q0="-0.0202588" q1="-0.69852" q2="-0.0209948" q3="0.714996" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/burrow/Burrow_TunnelBend2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="91.7233" t1="-39.019" t2="270.173" s0="1" s1="0.999994" s2="0.999993" q0="0" q1="0.335131" q2="0" q3="0.942172" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/burrow/Burrow_Room.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="107.794" t1="-41.0838" t2="274.662" s0="0.600343" s1="0.546621" s2="0.35552" q0="-0.0591628" q1="0.609267" q2="-0.0574213" q3="0.788667" id="9" version="1">
+        <parameters/>
+        <EnvObject t0="107.792" t1="-41.0839" t2="274.662" s0="1" s1="2.15352" s2="1" q0="-0.0591624" q1="0.609268" q2="-0.0574213" q3="0.788667" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="107.793" t1="-41.1143" t2="274.668" s0="0.242408" s1="0.621975" s2="0.515237" q0="0.51584" q1="0.390214" q2="-0.471421" q3="0.599503" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="105.956" t1="-39.1808" t2="269.973" s0="0.999998" s1="0.999999" s2="0.999999" q0="0" q1="0.699387" q2="0" q3="0.714743" id="11" color_r="0.690196" color_g="0.690196" color_b="0.690196" overbright="0" type_file="Data/Objects/therium/burrow/Burrow_Room.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.174" t1="-39.1175" t2="279.606" s0="1" s1="1" s2="1" q0="-0.00623107" q1="-0.967608" q2="-0.0513466" q3="0.247102" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/burrow/Burrow_TunnelSlope.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.6063" t1="-38.0389" t2="281.514" s0="0.975552" s1="0.999999" s2="0.98185" q0="0" q1="0.983982" q2="0" q3="0.178268" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/burrow/Burrow_TunnelSlope2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.518" t1="-40.5639" t2="270.598" s0="0.308055" s1="0.308055" s2="0.308055" q0="0" q1="0" q2="0.0175463" q3="0.999846" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/candle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="103.773" t1="-40.5201" t2="274.062" s0="1" s1="1" s2="1" q0="0" q1="-0.356172" q2="0" q3="0.93442" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="104.063" t1="-40.4722" t2="274.35" s0="1.16666" s1="1.16666" s2="1.16666" q0="0" q1="0.992855" q2="0" q3="0.119327" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkSack.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.202" t1="-41.0645" t2="273.945" s0="0.608213" s1="0.608213" s2="0.608213" q0="-0.045534" q1="-0.233374" q2="-0.0182526" q3="0.971149" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.298" t1="-41.3721" t2="271.19" s0="1" s1="1" s2="1" q0="0" q1="-0.840086" q2="0" q3="0.542453" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_wood_hot.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="89.6903" t1="-41.0511" t2="271.786" s0="0.600343" s1="0.546621" s2="0.35552" q0="0.0120948" q1="0.795264" q2="-0.0123745" q3="0.606016" id="20" version="1">
+        <parameters/>
+        <EnvObject t0="89.6884" t1="-41.0511" t2="271.787" s0="1" s1="2.15352" s2="1" q0="0.0120948" q1="0.795266" q2="-0.0123745" q3="0.606014" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.6894" t1="-41.0821" t2="271.787" s0="0.242408" s1="0.621975" s2="0.515237" q0="0.437072" q1="0.553588" q2="-0.571088" q3="0.419961" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="114.434" t1="-39.476" t2="257.951" s0="0.210425" s1="0.209007" s2="0.199484" q0="0.00481521" q1="0.97884" q2="-0.000100374" q3="0.20457" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="114.694" t1="-39.9571" t2="259.104" s0="0.300009" s1="0.297987" s2="0.284409" q0="0.00541043" q1="0.489264" q2="-0.00148968" q3="0.872118" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="116.25" t1="-41.078" t2="252.279" s0="1.15329" s1="1.15329" s2="1.15329" q0="0.652397" q1="-0.382569" q2="0.408102" q3="0.511343" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="116.341" t1="-41.048" t2="252.652" s0="1.15329" s1="1.15329" s2="1.15329" q0="-0.403505" q1="0.468883" q2="0.674747" q3="0.402553" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="116.189" t1="-40.2846" t2="252.715" s0="1.15329" s1="1.15329" s2="1.15329" q0="-0.424489" q1="0.411376" q2="0.673986" q3="0.443082" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="116.474" t1="-40.8991" t2="253.75" s0="1.15329" s1="1.15329" s2="1.15329" q0="0.782168" q1="-0.613945" q2="0.0469353" q3="0.095299" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="115.708" t1="-40.4783" t2="251.411" s0="1.15329" s1="1.15329" s2="1.15329" q0="-0.255228" q1="0.441128" q2="0.743218" q3="0.433465" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="116.099" t1="-42.5172" t2="254.184" s0="1.15329" s1="1.15329" s2="1.15329" q0="-0.0647271" q1="0.9829" q2="-0.0584083" q3="0.162192" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.325" t1="-41.4641" t2="272.324" s0="0.698993" s1="0.918124" s2="0.999991" q0="-0.702398" q1="-0.0012166" q2="0.00123286" q3="0.711782" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.767" t1="-41.2277" t2="267.795" s0="1" s1="1" s2="1" q0="0.00787543" q1="-0.349058" q2="-0.0498403" q3="0.935742" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/wood_pile.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="103.017" t1="-41.2235" t2="267.492" s0="1" s1="1" s2="1" q0="0.068769" q1="0.971764" q2="0.0350503" q3="0.222973" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/wood_pile.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.924" t1="-41.3743" t2="267.969" s0="1" s1="1" s2="1" q0="-0.88094" q1="0.0754975" q2="-0.466894" q3="0.0159609" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/wood_pile.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.25" t1="-39.9027" t2="275.476" s0="0.202792" s1="0.202792" s2="0.202792" q0="-0.0313903" q1="0.0190268" q2="-0.00214921" q3="0.999324" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/candlelit.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.412" t1="-40.0912" t2="275.497" s0="1" s1="1" s2="1" q0="-0.0239271" q1="0.0820098" q2="-0.00467762" q3="0.996333" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_knob.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="107.347" t1="-41.7232" t2="271.235" s0="0.200588" s1="0.105724" s2="0.200588" q0="0" q1="0" q2="0" q3="1" id="37" type_file="Data/Objects/Hotspots/fire_test.xml">
+        <parameters>
+            <parameter name="Fire Ribbons" type="int" val="4"/>
+            <parameter name="Ignite Characters" type="int" val="1"/>
+            <parameter name="Light Amplify" type="float" val="1"/>
+            <parameter name="Light Distance" type="float" val="2"/>
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="107.309" t1="-41.4582" t2="271.162" s0="1.06381" s1="1" s2="1.0607" q0="0" q1="0" q2="0.0166793" q3="0.999861" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_ash.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.353" t1="-41.467" t2="271.164" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.0166793" q3="0.999861" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.183" t1="-40.524" t2="275.534" s0="1" s1="1" s2="1" q0="-0.116445" q1="0.766578" q2="0.111912" q3="0.62151" id="40" color_r="0.458824" color_g="0.545098" color_b="0.47451" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="113.186" t1="-40.0821" t2="259.619" s0="1.00004" s1="1.00004" s2="1.00004" q0="-0.144237" q1="-0.218886" q2="-0.0282456" q3="0.964617" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/burrow/Burrow_TunnelSlope.xml">
+        <parameters/>
+    </EnvObject>
+    <DynamicLightObject t0="107.404" t1="-40.8826" t2="271.217" s0="59.4366" s1="59.4366" s2="59.4366" q0="-0.000699698" q1="0" q2="0.00144207" q3="0.999999" id="42" color_r="0.541176" color_g="0" color_b="1" overbright="50">
+        <parameters/>
+    </DynamicLightObject>
+    <EnvObject t0="110.08" t1="12.1246" t2="240.595" s0="9.17764" s1="29.3783" s2="53.641" q0="-0.709061" q1="-0.000740692" q2="0.000417291" q3="0.705147" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.521" t1="-40.5527" t2="270.702" s0="0.344416" s1="0.344416" s2="0.344416" q0="-0.0153703" q1="0.765018" q2="0.00895865" q3="0.643763" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/candle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.325" t1="-40.584" t2="271.377" s0="0.223743" s1="0.223743" s2="0.223743" q0="0.00663847" q1="-0.529493" q2="0.0165047" q3="0.848128" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/candle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.288" t1="-40.5719" t2="271.722" s0="0.266904" s1="0.266904" s2="0.266904" q0="-0.0161881" q1="0.448011" q2="0.0136413" q3="0.893777" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/candle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.353" t1="-40.5599" t2="271.675" s0="0.303587" s1="0.303587" s2="0.303587" q0="0.0166623" q1="-0.983284" q2="0.00623232" q3="0.181207" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/candle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="114.186" t1="-40.8371" t2="253.505" s0="1" s1="1" s2="1" q0="-0.0451312" q1="-0.992457" q2="0.0782211" q3="0.0829083" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/burrow/Burrow_TunnelBend2.xml">
+        <parameters/>
+    </EnvObject>
+    <DynamicLightObject t0="113.332" t1="-41.6248" t2="250.094" s0="23.4777" s1="23.4777" s2="23.4777" q0="0" q1="0" q2="0.000174046" q3="1" id="49" color_r="0.541176" color_g="0" color_b="1" overbright="50">
+        <parameters/>
+    </DynamicLightObject>
+    <EnvObject t0="105.099" t1="-40.6289" t2="265.181" s0="1" s1="1" s2="1" q0="0.0222021" q1="0.34597" q2="0.06007" q3="0.936057" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolChisel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.136" t1="-40.6273" t2="265.248" s0="1" s1="1" s2="1" q0="0" q1="0.224976" q2="0" q3="0.974364" id="51" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolAwl.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.354" t1="-40.6345" t2="265.04" s0="1" s1="1" s2="1" q0="-0.0655276" q1="0.704064" q2="0.704066" q3="0.0655062" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Weapons/rabbit_weapons/rabbit_knife.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.549" t1="-40.6012" t2="264.896" s0="1" s1="1" s2="1" q0="0.0217546" q1="-0.0735315" q2="0.00124978" q3="0.997055" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/inkpot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.67" t1="-40.5953" t2="264.885" s0="1.09468" s1="1.09468" s2="1.09468" q0="0.00979926" q1="0.947705" q2="0.0166071" q3="0.318565" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/inkpot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.774" t1="-40.6322" t2="264.965" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/feather.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.264" t1="-40.5779" t2="264.989" s0="1.14807" s1="1.14807" s2="1.14807" q0="0" q1="-0.187936" q2="0" q3="0.982181" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rabbit_skull.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.881" t1="-40.1917" t2="266.986" s0="1" s1="1" s2="1" q0="-0.0262621" q1="0.998551" q2="0.00908446" q3="0.0460831" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bottle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.931" t1="-40.1899" t2="267.046" s0="1" s1="1" s2="1" q0="0.0273102" q1="-0.994515" q2="-0.00513552" q3="0.100835" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bottle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.963" t1="-39.8517" t2="267.21" s0="0.0268701" s1="0.0267915" s2="0.0259608" q0="0" q1="0.946898" q2="0" q3="0.321534" id="59" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/mug.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.938" t1="-40.9754" t2="267.025" s0="0.713718" s1="0.713718" s2="0.713718" q0="0.0717555" q1="-0.599997" q2="0.0525696" q3="0.795042" id="60" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_Table1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.319" t1="-40.3486" t2="267.693" s0="0.250488" s1="0.250488" s2="0.250488" q0="-0.0386827" q1="0.675026" q2="0.0809532" q3="0.732318" id="61" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/lantern.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="102.783" t1="-41.7283" t2="269.847" s0="1.93174" s1="0.873605" s2="2.43457" q0="0" q1="0" q2="0" q3="1" id="64" type_file="Data/Objects/Decals/rugs/red_trim_rug.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="100.499" t1="-41.2115" t2="269.877" s0="1" s1="1" s2="1.5" q0="-0.0346743" q1="-0.707348" q2="0.703177" q3="0.0632348" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="100.582" t1="-41.1823" t2="269.255" s0="1" s1="1" s2="1.5" q0="0.750207" q1="-0.0304514" q2="-0.0618903" q3="0.657595" id="66" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="114.551" t1="-39.1173" t2="258.147" s0="1.83505" s1="1.83031" s2="1.4169" q0="-0.17521" q1="0.174229" q2="0.891973" q3="0.378589" id="67" type_file="Data/Objects/Decals/ThickMoss.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="110.766" t1="-40.6612" t2="267.899" s0="1" s1="1" s2="1" q0="-0.0676068" q1="0.919771" q2="0.054313" q3="0.382754" id="68" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.659" t1="-40.7105" t2="265.086" s0="0.470728" s1="0.283943" s2="0.446613" q0="0" q1="0.148971" q2="0" q3="0.988841" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.434" t1="-40.2026" t2="275.507" s0="1" s1="1" s2="1" q0="-0.00748965" q1="-0.979512" q2="0.0232011" q3="0.199905" id="70" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_knob.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="108.349" t1="-40.9493" t2="274.863" s0="1" s1="1" s2="1" q0="0.00365668" q1="0.992269" q2="-0.030155" q3="0.120331" id="71" color_r="0.556863" color_g="0.541176" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/shop_bin_painted.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="112.412" t1="-40.2215" t2="269.633" s0="1.81245" s1="0.525724" s2="2.41136" q0="0.542455" q1="-0.443628" q2="0.538858" q3="0.467513" id="72" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="109.713" t1="-41.5399" t2="269.771" s0="4.57142" s1="0.38812" s2="5.03973" q0="0.0197937" q1="-0.98751" q2="0.000960346" q3="0.156305" id="73" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" color_r="0.360784" color_g="0.258824" color_b="0.207843" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="105.503" t1="-41.04" t2="265.455" s0="1" s1="1" s2="1" q0="-0.375871" q1="0.129407" q2="0.0564712" q3="0.915853" id="74" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/TestBackpack.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="114.26" t1="-42.8747" t2="251.532" s0="2.9821" s1="1.54291" s2="2.9821" q0="0" q1="-0.939377" q2="0" q3="0.342886" id="75" type_file="Data/Objects/Decals/fall_leaves.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="116.539" t1="-40.8409" t2="252.102" s0="3.70978" s1="2.8992" s2="3.70977" q0="0.110801" q1="0.198911" q2="0.745438" q3="0.626482" id="76" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.294118" color_g="0.294118" color_b="0.294118" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="114.689" t1="-41.468" t2="250.312" s0="3.70978" s1="3.70978" s2="3.70978" q0="0.745438" q1="-0.626482" q2="-0.110801" q3="0.198911" id="77" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.294118" color_g="0.294118" color_b="0.294118" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="116.55" t1="-40.7626" t2="254.528" s0="3.70977" s1="1.65362" s2="3.70977" q0="0.722063" q1="-0.684775" q2="0.0370381" q3="0.0913037" id="78" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.294118" color_g="0.294118" color_b="0.294118" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="112.571" t1="-41.6451" t2="260.763" s0="2.92332" s1="1.81529" s2="2.92332" q0="0" q1="-0.22435" q2="0" q3="0.974509" id="79" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="0.537255" color_g="0.384314" color_b="0.32549" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="113.707" t1="-41.8605" t2="258.446" s0="2.92332" s1="1.13573" s2="2.92332" q0="0" q1="0.974509" q2="0" q3="0.224348" id="80" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="0.537255" color_g="0.384314" color_b="0.32549" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="114.606" t1="-42.1103" t2="256.747" s0="2.92332" s1="1.03481" s2="2.92332" q0="0" q1="-0.22435" q2="0" q3="0.974509" id="81" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="0.537255" color_g="0.384314" color_b="0.32549" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="115.004" t1="-41.6388" t2="254.818" s0="2.92332" s1="1.81529" s2="2.92332" q0="0" q1="0.999774" q2="0" q3="0.0212599" id="82" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="0.537255" color_g="0.384314" color_b="0.32549" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="115.826" t1="-40.9476" t2="252.827" s0="4.26737" s1="3.15066" s2="3.72468" q0="-0.450301" q1="0.571596" q2="0.591523" q3="0.347286" id="83" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="0.345098" color_g="0.345098" color_b="0.345098" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="114.814" t1="-41.2165" t2="250.644" s0="4.2022" s1="3.15065" s2="3.6735" q0="0.644657" q1="-0.231481" q2="0.326443" q3="0.651359" id="84" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="0.345098" color_g="0.345098" color_b="0.345098" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="106.842" t1="-38.6631" t2="274.067" s0="4.40761" s1="1.21425" s2="4.29247" q0="-0.549051" q1="0.285467" q2="-0.696929" q3="0.362411" id="85" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="110.722" t1="-40.4754" t2="266.476" s0="1" s1="1" s2="1" q0="0.0175729" q1="0.0172114" q2="0.0893799" q3="0.995694" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.98" t1="-40.4501" t2="266.836" s0="1" s1="1" s2="1" q0="-0.0345202" q1="0.641511" q2="0.0809297" q3="0.762051" id="87" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/potrice.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="98.9264" t1="-40.8808" t2="269.946" s0="2.69232" s1="2.69232" s2="2.69232" q0="0" q1="0" q2="0" q3="1" id="88" type_file="Data/Objects/Decals/dark_rocks_red_dirt.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="105.017" t1="-41.6735" t2="267.887" s0="3.44057" s1="0.587941" s2="3.378" q0="0.0285526" q1="0.276267" q2="-0.00821149" q3="0.960622" id="89" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" color_r="0.360784" color_g="0.258824" color_b="0.207843" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="107.757" t1="-41.6472" t2="266.876" s0="3.73046" s1="0.64007" s2="4.11264" q0="-0.00171792" q1="0.99616" q2="0.0200892" q3="0.0851984" id="90" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" color_r="0.360784" color_g="0.258824" color_b="0.207843" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="109.547" t1="-41.5985" t2="273.177" s0="3.73044" s1="0.737484" s2="4.11264" q0="-0.0244884" q1="0.916611" q2="0.00879683" q3="0.398933" id="91" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" color_r="0.360784" color_g="0.258824" color_b="0.207843" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="105.611" t1="-41.6622" t2="273.061" s0="3.42856" s1="0.609903" s2="4.03479" q0="-0.0318696" q1="-0.933702" q2="0.0195324" q3="0.356095" id="92" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" color_r="0.360784" color_g="0.258824" color_b="0.207843" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="104.72" t1="-41.6332" t2="271.172" s0="3.64814" s1="0.533454" s2="4.29322" q0="0.0133409" q1="0.985599" q2="-0.0184126" q3="0.167564" id="93" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" color_r="0.360784" color_g="0.258824" color_b="0.207843" overbright="0">
+        <parameters/>
+    </Decal>
+    <ReflectionCaptureObject t0="109.662" t1="-39.7124" t2="265.97" s0="0.373042" s1="0.373042" s2="0.373042" q0="0" q1="0" q2="0" q3="1" id="94" gicoeff00="2.14941" gicoeff01="0.20993" gicoeff02="0.0175591" gicoeff03="2.42822" gicoeff04="0.284424" gicoeff05="0.0359879" gicoeff06="2.07959" gicoeff07="0.2099" gicoeff08="0.021553" gicoeff09="2.0813" gicoeff10="0.207458" gicoeff11="0.0202217" gicoeff12="2.56543" gicoeff13="0.317444" gicoeff14="0.0300484" gicoeff15="2.12744" gicoeff16="0.204132" gicoeff17="0.0195122">
+        <parameters>
+            <parameter name="Global" type="string" val="1"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <EnvObject t0="100.455" t1="-41.2183" t2="270.478" s0="1" s1="1" s2="1.5" q0="-0.750685" q1="0.0297924" q2="-0.0311014" q3="0.659255" id="96" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="106.155" t1="-40.5805" t2="264.728" s0="0.223743" s1="0.223743" s2="0.223743" q0="0.0117169" q1="-0.52815" q2="-0.0150563" q3="0.848937" id="97" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/candle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="106.071" t1="-40.552" t2="264.761" s0="0.34229" s1="0.34229" s2="0.34229" q0="0.014568" q1="-0.0271206" q2="-0.00619326" q3="0.999507" id="98" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/candlelit.xml">
+        <parameters/>
+    </EnvObject>
+    <DynamicLightObject t0="106.185" t1="-40.2653" t2="265.118" s0="4.35053" s1="4.35053" s2="4.35053" q0="0" q1="0" q2="0.000174046" q3="1" id="99" color_r="0.541176" color_g="0" color_b="1" overbright="50">
+        <parameters/>
+    </DynamicLightObject>
+    <NavmeshRegionObject t0="109.451" t1="14.7525" t2="240.988" s0="8.44316" s1="8.44316" s2="8.44316" q0="0" q1="0" q2="0" q3="1" id="100">
+        <parameters/>
+    </NavmeshRegionObject>
+    <EnvObject t0="102.473" t1="-40.404" t2="268.245" s0="1" s1="1" s2="1" q0="-0.366486" q1="0.202606" q2="-0.605962" q3="0.67635" id="101" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.468" t1="-40.5781" t2="271.045" s0="0.024946" s1="0.024946" s2="0.024946" q0="-0.0127182" q1="0.582841" q2="0.015952" q3="0.81233" id="102" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/apple.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.549" t1="-40.5756" t2="270.948" s0="0.024946" s1="0.024946" s2="0.024946" q0="0.0187001" q1="-0.935501" q2="0.00815618" q3="0.352735" id="103" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/apple.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.316" t1="-40.1301" t2="267.473" s0="0.790322" s1="0.992923" s2="0.790236" q0="-0.196672" q1="0.663504" q2="0.680083" q3="0.242012" id="104" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.021" t1="-40.4825" t2="267.269" s0="1.00002" s1="1.00007" s2="0.925898" q0="0.23379" q1="-0.72058" q2="0.621429" q3="0.199832" id="105" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.037" t1="-40.5848" t2="265.067" s0="1" s1="1" s2="1" q0="0" q1="0.465695" q2="0" q3="0.884945" id="106" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/cat_skull.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="106.002" t1="-41.2861" t2="265.545" s0="0.733057" s1="0.733057" s2="0.733057" q0="-0.71363" q1="-0.677993" q2="0.0620554" q3="0.164945" id="107" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/stick.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.794" t1="-40.6094" t2="267.319" s0="0.0673544" s1="0.0673544" s2="0.0673544" q0="0.594362" q1="0.398654" q2="-0.244393" q3="0.654279" id="108" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/carrot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.838" t1="-40.6095" t2="267.407" s0="0.0673544" s1="0.0673544" s2="0.0673544" q0="-0.677885" q1="0.153417" q2="0.338388" q3="0.634373" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/carrot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.652" t1="-40.5966" t2="266.848" s0="1" s1="1" s2="1" q0="0.0287654" q1="-0.0298994" q2="0.0861187" q3="0.995421" id="110" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.676" t1="-40.5249" t2="266.859" s0="1" s1="1" s2="1" q0="0.0840505" q1="-0.972989" q2="-0.00766174" q3="0.21487" id="111" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book4.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.954" t1="-40.1445" t2="267.158" s0="0.723701" s1="0.723701" s2="0.723701" q0="0.686839" q1="0.173537" q2="-0.168055" q3="0.685489" id="112" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.978" t1="-40.1549" t2="267.212" s0="0.564114" s1="1.00249" s2="0.633787" q0="0.691337" q1="0.195697" q2="-0.148505" q3="0.679487" id="113" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.019" t1="-40.1332" t2="267.256" s0="0.770518" s1="0.770518" s2="0.770518" q0="-0.690917" q1="0.140139" q2="0.17534" q3="0.687205" id="114" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book6.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.446" t1="-40.6159" t2="270.9" s0="0.0673544" s1="0.0673544" s2="0.0673544" q0="-0.0880072" q1="-0.697028" q2="-0.706854" q3="0.0822446" id="115" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/carrot.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="96.5753" t1="-39.6987" t2="271.823" s0="0.199056" s1="3.3506" s2="1.17589" q0="0.0281533" q1="-0.26233" q2="-0.0922147" q3="0.960149" id="116" version="1">
+        <parameters/>
+        <EnvObject t0="96.3377" t1="-39.7014" t2="272.226" s0="1" s1="1.22575" s2="0.999996" q0="0.0851121" q1="0.493431" q2="-0.0452977" q3="0.864425" id="125" color_r="0.4" color_g="0.4" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="96.5291" t1="-39.8571" t2="271.83" s0="0.999966" s1="1" s2="0.380432" q0="0.0281528" q1="-0.262328" q2="-0.092214" q3="0.96015" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="96.4403" t1="-40.3933" t2="271.773" s0="0.999966" s1="1" s2="0.380432" q0="0.0281528" q1="-0.262328" q2="-0.092214" q3="0.96015" id="127" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="96.3596" t1="-40.8824" t2="271.723" s0="0.999966" s1="1" s2="0.380432" q0="0.0281528" q1="-0.262328" q2="-0.092214" q3="0.96015" id="131" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="96.7679" t1="-38.4136" t2="271.98" s0="0.999966" s1="1" s2="0.380432" q0="0.0281528" q1="-0.262328" q2="-0.092214" q3="0.96015" id="133" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="96.6791" t1="-38.9497" t2="271.924" s0="0.999966" s1="1" s2="0.380432" q0="0.0281528" q1="-0.262328" q2="-0.092214" q3="0.96015" id="134" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="96.5984" t1="-39.4388" t2="271.873" s0="0.999966" s1="1" s2="0.380432" q0="0.0281528" q1="-0.262328" q2="-0.092214" q3="0.96015" id="135" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="96.8135" t1="-39.6961" t2="271.421" s0="1" s1="1.22575" s2="0.999996" q0="0.0851121" q1="0.493431" q2="-0.0452977" q3="0.864425" id="136" color_r="0.4" color_g="0.4" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="88.4836" t1="-40.7006" t2="270.592" s0="1" s1="1" s2="1" q0="-0.702473" q1="-0.702473" q2="0.0808163" q3="0.0808216" id="117" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/barrel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.7422" t1="-41.1212" t2="271.696" s0="1.24237" s1="1.71362" s2="1.9707" q0="0.0808163" q1="-0.702473" q2="0.702473" q3="0.080822" id="118" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.6476" t1="-40.7006" t2="271.295" s0="1" s1="1" s2="1" q0="-0.553869" q1="-0.439578" q2="-0.439578" q3="0.55387" id="119" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/barrel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.8107" t1="-40.7006" t2="271.995" s0="1" s1="1" s2="1" q0="0.553869" q1="-0.439578" q2="0.439578" q3="0.55387" id="120" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/barrel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.9848" t1="-40.7006" t2="272.741" s0="1" s1="1" s2="1" q0="0.0808163" q1="0.0808164" q2="0.702473" q3="0.702474" id="121" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/barrel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.7422" t1="-40.2315" t2="271.696" s0="1.24237" s1="1.71362" s2="1.9707" q0="0.0808163" q1="-0.702473" q2="0.702473" q3="0.080822" id="122" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.7422" t1="-39.3292" t2="271.696" s0="1.24237" s1="1.71362" s2="1.9707" q0="0.0808163" q1="-0.702473" q2="0.702473" q3="0.080822" id="123" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.7422" t1="-38.4395" t2="271.696" s0="1.24237" s1="1.71362" s2="1.9707" q0="0.0808163" q1="-0.702473" q2="0.702473" q3="0.080822" id="124" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.908" t1="-39.8171" t2="272.412" s0="1" s1="1" s2="1" q0="0.553869" q1="-0.439578" q2="0.439578" q3="0.55387" id="128" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/barrel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.4836" t1="-38.9206" t2="270.592" s0="1" s1="1" s2="1" q0="0.0808163" q1="0.0808164" q2="0.702473" q3="0.702474" id="129" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/barrel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.7636" t1="-38.9206" t2="271.793" s0="1" s1="1" s2="1" q0="0.702473" q1="-0.702473" q2="-0.0808163" q3="0.0808216" id="130" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/barrel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.9848" t1="-38.9206" t2="272.741" s0="1" s1="1" s2="1" q0="0.0808163" q1="0.0808164" q2="0.702473" q3="0.702474" id="132" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/barrel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="89.6072" t1="-39.7946" t2="273.138" s0="1" s1="1.13549" s2="1" q0="0" q1="-0.621657" q2="0" q3="0.78329" id="137" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.866" t1="-39.8517" t2="267.038" s0="0.0268701" s1="0.0267915" s2="0.0259608" q0="0" q1="-0.555653" q2="0" q3="0.831414" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/mug.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.8826" t1="-39.7946" t2="270.031" s0="1" s1="1.13549" s2="1" q0="0" q1="-0.621657" q2="0" q3="0.78329" id="139" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.5457" t1="-39.7946" t2="273.386" s0="1" s1="1.13549" s2="1" q0="0" q1="-0.621657" q2="0" q3="0.78329" id="140" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="87.8211" t1="-39.7946" t2="270.278" s0="1" s1="1.13549" s2="1" q0="0" q1="-0.621657" q2="0" q3="0.78329" id="141" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.862" t1="-40.1952" t2="267.115" s0="1" s1="1" s2="1" q0="0.0254461" q1="-0.406964" q2="0.022132" q3="0.912821" id="142" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bottle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.944" t1="-40.5461" t2="267.105" s0="0.344416" s1="0.344416" s2="0.344416" q0="-0.0164626" q1="0.786829" q2="0.020812" q3="0.6166" id="143" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/candle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.702" t1="-40.6645" t2="267.746" s0="1" s1="1" s2="1" q0="-0.50722" q1="-0.021601" q2="-0.857444" q3="0.0839709" id="144" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.369" t1="-40.1433" t2="267.434" s0="0.72042" s1="0.753259" s2="0.720446" q0="0.232479" q1="0.682535" q2="-0.664827" q3="0.195204" id="145" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book4.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="93.7773" t1="-41.1365" t2="267.616" s0="0.199056" s1="4.6889" s2="1.17586" q0="-0.0486209" q1="-0.172651" q2="0.706769" q3="0.684328" id="146" version="1">
+        <parameters/>
+        <EnvObject t0="93.6346" t1="-41.2195" t2="268.054" s0="1" s1="1.71681" s2="0.999997" q0="-0.534146" q1="0.361815" q2="0.465385" q3="0.605966" id="147" color_r="0.4" color_g="0.4" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="94.5588" t1="-41.1443" t2="267.902" s0="0.999966" s1="1" s2="0.380432" q0="-0.0486213" q1="-0.172653" q2="0.706775" q3="0.684322" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="95.0781" t1="-41.1422" t2="268.072" s0="0.999966" s1="1" s2="0.380432" q0="-0.0486213" q1="-0.172653" q2="0.706775" q3="0.684322" id="149" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="95.5518" t1="-41.1404" t2="268.226" s0="0.999966" s1="1" s2="0.380432" q0="-0.0486213" q1="-0.172653" q2="0.706775" q3="0.684322" id="150" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="93.1607" t1="-41.1498" t2="267.445" s0="0.999966" s1="1" s2="0.380432" q0="-0.0486213" q1="-0.172653" q2="0.706775" q3="0.684322" id="151" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="93.6799" t1="-41.1478" t2="267.615" s0="0.999966" s1="1" s2="0.380432" q0="-0.0486213" q1="-0.172653" q2="0.706775" q3="0.684322" id="152" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="94.1536" t1="-41.1459" t2="267.769" s0="0.999966" s1="1" s2="0.380432" q0="-0.0486213" q1="-0.172653" q2="0.706775" q3="0.684322" id="153" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.7595" t1="-41.1554" t2="266.987" s0="0.999966" s1="1" s2="0.380432" q0="-0.0486213" q1="-0.172653" q2="0.706775" q3="0.684322" id="154" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="92.2787" t1="-41.1533" t2="267.157" s0="0.999966" s1="1" s2="0.380432" q0="-0.0486213" q1="-0.172653" q2="0.706775" q3="0.684322" id="155" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="92.7525" t1="-41.1515" t2="267.312" s0="0.999966" s1="1" s2="0.380432" q0="-0.0486213" q1="-0.172653" q2="0.706775" q3="0.684322" id="156" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="93.9199" t1="-41.0535" t2="267.179" s0="1" s1="1.71681" s2="0.999997" q0="-0.534146" q1="0.361815" q2="0.465385" q3="0.605966" id="157" color_r="0.4" color_g="0.4" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Decal t0="92.3638" t1="-41.4382" t2="271.611" s0="8.09576" s1="0.555487" s2="8.09576" q0="-0.00290138" q1="-0.0952969" q2="0.00184971" q3="0.995443" id="158" type_file="Data/Objects/Decals/PeakRock.xml" color_r="0.305882" color_g="0.2" color_b="0.164706" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="96.9244" t1="-40.3448" t2="268.82" s0="1" s1="1" s2="1" q0="0.685937" q1="0.611115" q2="0.102881" q3="0.381372" id="159" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="96.5215" t1="-40.2653" t2="268.322" s0="1" s1="1" s2="1" q0="-0.355103" q1="-0.170621" q2="0.61603" q3="0.682127" id="160" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="89.2265" t1="-40.1628" t2="271.962" s0="1" s1="1" s2="1" q0="0.00908542" q1="0.632589" q2="-0.00742173" q3="0.774399" id="161" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.3038" t1="-40.0569" t2="270.885" s0="1" s1="1" s2="1" q0="0" q1="-0.735209" q2="0" q3="0.677841" id="162" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/DogLitter.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="89.0207" t1="-40.0465" t2="271.747" s0="1" s1="1" s2="1" q0="0" q1="0.0946932" q2="0" q3="0.995507" id="163" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="88.8412" t1="-40.0465" t2="271.407" s0="1" s1="1" s2="1" q0="0" q1="-0.982842" q2="0" q3="0.184449" id="164" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.474" t1="-40.5561" t2="268.591" s0="1" s1="1" s2="1" q0="0.0058062" q1="-0.0110316" q2="0.0651391" q3="0.997798" id="165" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkPouch.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.453" t1="-40.5576" t2="268.685" s0="1" s1="1" s2="1" q0="-0.00841105" q1="0.171547" q2="0.0659618" q3="0.982929" id="166" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkBottle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.485" t1="-40.4842" t2="273.808" s0="1" s1="1" s2="1" q0="-0.00715745" q1="-0.0668359" q2="0.0506122" q3="0.996454" id="167" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkSack.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.532" t1="-39.9475" t2="275.478" s0="1" s1="1" s2="1" q0="0.674458" q1="0.122856" q2="-0.138183" q3="0.714785" id="168" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkTag.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.51" t1="-39.9436" t2="275.54" s0="1" s1="1" s2="1" q0="-0.0399999" q1="-0.726918" q2="-0.684887" q3="0.0303324" id="169" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkTag.xml">
+        <parameters/>
+    </EnvObject>
+    <DynamicLightObject t0="107.278" t1="-39.8204" t2="275.363" s0="2.55595" s1="2.47477" s2="2.45784" q0="0.067034" q1="-0.0967701" q2="0.0120063" q3="0.992974" id="170" color_r="0.541176" color_g="0" color_b="1" overbright="50">
+        <parameters/>
+    </DynamicLightObject>
+    <EnvObject t0="107.4" t1="-39.9184" t2="275.497" s0="1" s1="1" s2="1" q0="-0.066015" q1="0.72651" q2="0.681412" q3="0.0591859" id="171" color_r="0.556863" color_g="0.517647" color_b="0.388235" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/medium_bags.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.281" t1="-40.2471" t2="275.503" s0="1" s1="1" s2="1" q0="-0.023436" q1="-0.727941" q2="-0.684933" q3="0.0204816" id="172" color_r="0.458824" color_g="0.545098" color_b="0.47451" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.457" t1="-40.601" t2="275.521" s0="1.22644" s1="1.12394" s2="1.53589" q0="-0.0413472" q1="0.727879" q2="0.683117" q3="0.0428228" id="173" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/Gear/dog_armour_grey/dog_armor_bag.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.329" t1="-40.6004" t2="275.519" s0="-1.22644" s1="1.12394" s2="1.53589" q0="-0.0345825" q1="-0.728231" q2="-0.683864" q3="0.0285248" id="174" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/Gear/dog_armour_grey/dog_armor_bag.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="103.528" t1="-40.4973" t2="273.838" s0="0.625102" s1="0.625102" s2="0.625102" q0="-0.00956661" q1="-0.0415217" q2="-0.0110045" q3="0.999031" id="175" color_r="0.317647" color_g="0.317647" color_b="0.317647" overbright="0" type_file="Data/Objects/Environment/pots/sun_pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="103.262" t1="-40.4939" t2="273.574" s0="1" s1="1" s2="1" q0="-0.00239897" q1="0.658727" q2="-0.0191609" q3="0.752134" id="176" color_r="0.141176" color_g="0.317647" color_b="0.14902" overbright="0" type_file="Data/Objects/Environment/pots/coffee_pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.774" t1="-40.4439" t2="275.215" s0="1" s1="1" s2="1" q0="-0.0607594" q1="-0.130688" q2="-0.0244188" q3="0.989259" id="177" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/SmallGourd.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.419" t1="-40.4503" t2="271.496" s0="0.550474" s1="0.550474" s2="0.550474" q0="-0.000240982" q1="0.0403943" q2="0.0182609" q3="0.999017" id="178" color_r="0.12549" color_g="0.227451" color_b="0.121569" overbright="0" type_file="Data/Objects/Environment/pots/paw_pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.421" t1="-40.463" t2="271.2" s0="0.766059" s1="0.766059" s2="0.766059" q0="0.00181616" q1="-0.235165" q2="0.019893" q3="0.97175" id="179" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/pots/slim_pitcher.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.364" t1="-40.1299" t2="267.367" s0="0.796748" s1="0.796748" s2="0.796748" q0="0.222338" q1="0.681571" q2="-0.671242" q3="0.188311" id="180" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.465" t1="-40.1386" t2="267.226" s0="0.737439" s1="0.737439" s2="0.737439" q0="0.199275" q1="0.630714" q2="-0.73605" q3="0.143943" id="181" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.365" t1="-39.827" t2="267.449" s0="0.455719" s1="0.455719" s2="0.455719" q0="-0.00249033" q1="-0.862528" q2="-0.0131484" q3="0.505832" id="182" color_r="0.301961" color_g="0.301961" color_b="0.301961" overbright="0" type_file="Data/Objects/Environment/pots/tree_pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.382" t1="-40.4735" t2="267.419" s0="0.629934" s1="0.629934" s2="0.629934" q0="0.00978243" q1="-0.313189" q2="-0.0320839" q3="0.949098" id="183" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/LargeGourd.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="103.435" t1="-40.4468" t2="266.144" s0="0.788261" s1="0.788261" s2="0.788261" q0="-0.00817055" q1="-0.880162" q2="-0.0591584" q3="0.470902" id="184" color_r="0.658824" color_g="0.968627" color_b="0.635294" overbright="0" type_file="Data/Objects/Environment/pots/bomb_pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="113.539" t1="-40.771" t2="256.154" s0="0.51586" s1="0.512384" s2="0.489037" q0="0.00481521" q1="0.97884" q2="-0.000100374" q3="0.20457" id="185" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="114.717" t1="-40.428" t2="258.141" s0="0.314843" s1="0.314843" s2="0.314843" q0="-0.00706618" q1="0.906707" q2="-0.00655108" q3="0.421651" id="186" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="114.517" t1="-40.3377" t2="257.753" s0="-0.355294" s1="0.350679" s2="0.331117" q0="-0.00706618" q1="0.906707" q2="-0.00655108" q3="0.421651" id="187" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.851" t1="-39.3656" t2="279.04" s0="1" s1="1" s2="1" q0="0" q1="0.217407" q2="0" q3="0.976081" id="188" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/burrow/Burrow_Door.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="110.848" t1="-38.4924" t2="276.969" s0="2.84234" s1="1.55851" s2="1.764" q0="0" q1="0.211476" q2="0" q3="0.977383" id="191" version="1">
+        <parameters/>
+        <EnvObject t0="110.848" t1="-38.4924" t2="276.969" s0="2.23512" s1="1.92337" s2="1.92337" q0="0.59443" q1="-0.382953" q2="0.382953" q3="0.59443" id="189" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.848" t1="-38.4924" t2="276.969" s0="2.23483" s1="1.92312" s2="1.92312" q0="0.382953" q1="0.59443" q2="-0.59443" q3="0.382953" id="190" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="109.55" t1="-40.2432" t2="276.749" s0="0.999953" s1="0.740019" s2="0.711415" q0="0" q1="0.217834" q2="0" q3="0.975986" id="192" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.536" t1="-40.2432" t2="275.847" s0="0.999953" s1="0.740019" s2="0.711415" q0="0" q1="0.217834" q2="0" q3="0.975986" id="193" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.147" t1="-40.2432" t2="277.189" s0="0.999953" s1="0.740019" s2="0.711415" q0="0" q1="0.217834" q2="0" q3="0.975986" id="194" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.159" t1="-40.2432" t2="278.091" s0="0.999958" s1="0.740019" s2="0.773651" q0="0" q1="0.217834" q2="0" q3="0.975986" id="195" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.897" t1="-40.5365" t2="275.68" s0="0.652029" s1="0.459419" s2="1.02856" q0="0.154032" q1="0.154032" q2="0.690126" q3="0.690126" id="196" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.897" t1="-39.8032" t2="275.68" s0="0.652029" s1="0.459419" s2="1.02856" q0="0.690126" q1="-0.690126" q2="-0.154032" q3="0.154034" id="197" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.523" t1="-40.5365" t2="277.012" s0="0.652029" s1="0.459419" s2="1.02856" q0="0.154032" q1="0.154032" q2="0.690126" q3="0.690126" id="198" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.523" t1="-39.8032" t2="277.012" s0="0.652029" s1="0.459419" s2="1.02856" q0="0.690126" q1="-0.690126" q2="-0.154032" q3="0.154034" id="199" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.215" t1="-40.5365" t2="276.896" s0="0.652029" s1="0.459419" s2="1.02856" q0="0.154032" q1="0.154032" q2="0.690126" q3="0.690126" id="200" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.215" t1="-39.8032" t2="276.896" s0="0.652029" s1="0.459419" s2="1.02856" q0="0.690126" q1="-0.690126" q2="-0.154032" q3="0.154034" id="201" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.841" t1="-40.5365" t2="278.228" s0="0.652029" s1="0.459419" s2="1.02856" q0="0.154032" q1="0.154032" q2="0.690126" q3="0.690126" id="202" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.841" t1="-39.8032" t2="278.228" s0="0.652029" s1="0.459419" s2="1.02856" q0="0.690126" q1="-0.690126" q2="-0.154032" q3="0.154034" id="203" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.537" t1="-39.8098" t2="275.846" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.208077" q2="0" q3="0.978112" id="204" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.537" t1="-40.5347" t2="275.846" s0="1.64657" s1="1.64676" s2="1.06591" q0="0.208077" q1="0" q2="0.978112" q3="0" id="205" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.134" t1="-39.8098" t2="277.185" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.208077" q2="0" q3="0.978112" id="206" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.134" t1="-40.5347" t2="277.185" s0="1.64657" s1="1.64676" s2="1.06591" q0="0.208077" q1="0" q2="0.978112" q3="0" id="207" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.545" t1="-39.8098" t2="276.734" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.208077" q2="0" q3="0.978112" id="208" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.545" t1="-40.5347" t2="276.734" s0="1.64657" s1="1.64676" s2="1.06591" q0="0.208077" q1="0" q2="0.978112" q3="0" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.142" t1="-39.8098" t2="278.073" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.208077" q2="0" q3="0.978112" id="210" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.142" t1="-40.5347" t2="278.073" s0="1.64657" s1="1.64676" s2="1.06591" q0="0.208077" q1="0" q2="0.978112" q3="0" id="211" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.545" t1="-39.2669" t2="276.749" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="0.258819" q2="0" q3="0.965926" id="212" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.53" t1="-39.2669" t2="275.847" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="0.258819" q2="0" q3="0.965926" id="213" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.154" t1="-39.2669" t2="278.09" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="0.258819" q2="0" q3="0.965926" id="214" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.139" t1="-39.2669" t2="277.187" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="0.258819" q2="0" q3="0.965926" id="215" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.553" t1="-38.7652" t2="276.289" s0="0.327819" s1="0.591452" s2="0.670965" q0="-0.183013" q1="0.183013" q2="-0.683013" q3="0.683012" id="216" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.163" t1="-38.7652" t2="277.617" s0="0.327819" s1="0.591452" s2="0.670965" q0="-0.183013" q1="0.183013" q2="-0.683013" q3="0.683012" id="217" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.491" t1="-38.9453" t2="275.88" s0="2.37869" s1="1.89906" s2="1.62044" q0="0.05211" q1="0.199824" q2="0.246902" q3="0.946781" id="218" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.584" t1="-38.961" t2="276.704" s0="2.37869" s1="1.89906" s2="1.62044" q0="0.05211" q1="0.199824" q2="0.246902" q3="0.946781" id="219" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.135" t1="-38.9227" t2="277.196" s0="2.37869" s1="1.89906" s2="1.62044" q0="0.05211" q1="0.199824" q2="0.246902" q3="0.946781" id="220" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.177" t1="-38.9488" t2="278.062" s0="2.37869" s1="1.89906" s2="1.62044" q0="0.05211" q1="0.199824" q2="0.246902" q3="0.946781" id="221" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.53" t1="-41.0945" t2="275.84" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="0.232675" q2="0" q3="0.972555" id="222" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.534" t1="-41.0945" t2="276.764" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="0.232675" q2="0" q3="0.972555" id="223" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.144" t1="-40.9609" t2="277.186" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="0.232675" q2="0" q3="0.972555" id="224" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.145" t1="-40.9609" t2="278.085" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="0.232675" q2="0" q3="0.972555" id="225" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.838" t1="-40.1441" t2="276.508" s0="0.648433" s1="0.528233" s2="0.629708" q0="0.690126" q1="0.154032" q2="-0.154032" q3="0.690126" id="226" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.838" t1="-39.473" t2="276.508" s0="0.648433" s1="0.528233" s2="0.629708" q0="0.690126" q1="0.154032" q2="-0.154032" q3="0.690126" id="227" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.854" t1="-40.1441" t2="277.44" s0="0.648433" s1="0.528233" s2="0.629708" q0="0.690126" q1="0.154032" q2="-0.154032" q3="0.690126" id="228" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.852" t1="-39.473" t2="277.441" s0="0.648433" s1="0.528233" s2="0.629708" q0="0.690126" q1="0.154032" q2="-0.154032" q3="0.690126" id="229" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.537" t1="-39.463" t2="275.846" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.838762" q2="0" q3="0.544498" id="230" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.537" t1="-40.1419" t2="275.846" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.838762" q2="0" q3="0.544498" id="231" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.141" t1="-39.463" t2="277.2" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.838762" q2="0" q3="0.544498" id="232" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.141" t1="-40.1419" t2="277.2" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.838762" q2="0" q3="0.544498" id="233" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.567" t1="-39.463" t2="276.743" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.544498" q2="0" q3="0.838762" id="234" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.567" t1="-40.1418" t2="276.743" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.544498" q2="0" q3="0.838762" id="235" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.163" t1="-39.463" t2="278.081" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.544498" q2="0" q3="0.838762" id="236" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.163" t1="-40.1418" t2="278.081" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.544498" q2="0" q3="0.838762" id="237" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="111.084" t1="-38.1333" t2="268.576" s0="3.47975" s1="1.80396" s2="4.23936" q0="0.135988" q1="0.0407457" q2="0.903987" q3="0.403305" id="238" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="110.668" t1="-41.5994" t2="276.573" s0="3.03835" s1="1.14035" s2="3.03834" q0="-0.0314529" q1="-0.530701" q2="0.042883" q3="0.845889" id="239" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="0.537255" color_g="0.384314" color_b="0.32549" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="111.457" t1="-41.4043" t2="278.052" s0="3.03837" s1="1.13585" s2="3.03835" q0="-0.0203275" q1="0.848018" q2="-0.0128284" q3="0.529422" id="240" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="0.537255" color_g="0.384314" color_b="0.32549" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="111.464" t1="-38.2923" t2="270.51" s0="3.47975" s1="2.08343" s2="4.23933" q0="-0.886968" q1="0.458793" q2="0.0443783" q3="0.028761" id="241" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="107.325" t1="-36.1629" t2="269.847" s0="7.90122" s1="4.1979" s2="7.90122" q0="-1" q1="0" q2="0" q3="0" id="242" type_file="Data/Objects/Decals/PineBase.xml" color_r="0.396078" color_g="0.278431" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="103.745" t1="-38.8484" t2="272.698" s0="4.26374" s1="1.17511" s2="4.65567" q0="-0.806886" q1="-0.418578" q2="0.385689" q3="0.158023" id="243" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="104.39" t1="-38.6233" t2="267.179" s0="4.26374" s1="1.17511" s2="4.65567" q0="0.379508" q1="-0.174518" q2="-0.821798" q3="0.387512" id="244" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="106.641" t1="-38.9633" t2="265.892" s0="4.26374" s1="1.17511" s2="4.65567" q0="0.747028" q1="0.342603" q2="0.505098" q3="0.263531" id="245" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="110.661" t1="-41.2666" t2="275.186" s0="1" s1="1" s2="1.5" q0="0.612683" q1="-0.324528" q2="0.417457" q3="0.587393" id="246" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.099" t1="-41.3133" t2="275.452" s0="1" s1="1" s2="1.5" q0="-0.621249" q1="-0.387844" q2="-0.340828" q3="0.58946" id="247" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.548" t1="-41.285" t2="275.732" s0="1.00838" s1="1.02108" s2="1.49993" q0="0.367401" q1="0.560401" q2="-0.645058" q3="0.367243" id="248" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="111.777" t1="-40.257" t2="272.809" s0="2.2681" s1="0.868638" s2="2.45924" q0="-0.585558" q1="0.401381" q2="0.402979" q3="0.577601" id="249" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="112.063" t1="-40.203" t2="268.001" s0="1.14627" s1="0.357799" s2="1.84094" q0="0.58081" q1="-0.391194" q2="0.409415" q3="0.584813" id="250" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="107.365" t1="-40.452" t2="264.748" s0="1.81467" s1="0.52171" s2="1.85911" q0="0.686537" q1="0.0328639" q2="-0.0357502" q3="0.725471" id="251" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="104.346" t1="-40.3749" t2="265.769" s0="1.47531" s1="0.41923" s2="1.8883" q0="-0.210844" q1="-0.677875" q2="-0.669473" q3="0.218715" id="252" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="103.086" t1="-40.3129" t2="266.735" s0="1.29408" s1="0.36277" s2="1.7039" q0="0.631198" q1="0.308411" q2="-0.30931" q3="0.640936" id="253" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Group t0="110.993" t1="-39.7413" t2="263.931" s0="4.5338" s1="3.55678" s2="3.26635" q0="0" q1="-0.471924" q2="0" q3="0.881639" id="303" version="1">
+        <parameters/>
+        <EnvObject t0="110.432" t1="-40.498" t2="262.719" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.268539" q2="0" q3="0.963269" id="254" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.284" t1="-40.498" t2="263.872" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.268539" q2="0" q3="0.963269" id="255" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.506" t1="-40.498" t2="265.124" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.268539" q2="0" q3="0.963269" id="256" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.653" t1="-40.498" t2="263.97" s0="0.999959" s1="0.740019" s2="0.773652" q0="0" q1="-0.268539" q2="0" q3="0.963269" id="257" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.624" t1="-40.7913" t2="264.08" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.189886" q1="-0.189886" q2="0.681134" q3="0.681134" id="258" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.624" t1="-40.058" t2="264.08" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.681134" q1="0.681134" q2="-0.189886" q3="0.189885" id="259" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.862" t1="-40.7913" t2="265.339" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.189886" q1="-0.189886" q2="0.681134" q3="0.681134" id="260" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.862" t1="-40.058" t2="265.339" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.681134" q1="0.681134" q2="-0.189886" q3="0.189885" id="261" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.125" t1="-40.7913" t2="262.522" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.189886" q1="-0.189886" q2="0.681134" q3="0.681134" id="262" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.125" t1="-40.058" t2="262.522" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.681134" q1="0.681134" q2="-0.189886" q3="0.189885" id="263" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.363" t1="-40.7913" t2="263.782" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.189886" q1="-0.189886" q2="0.681134" q3="0.681134" id="264" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.363" t1="-40.058" t2="263.782" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.681134" q1="0.681134" q2="-0.189886" q3="0.189885" id="265" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.286" t1="-40.0646" t2="263.872" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.278146" q2="0" q3="0.960539" id="266" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.286" t1="-40.7895" t2="263.872" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.278146" q1="0" q2="0.960539" q3="0" id="267" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.503" t1="-40.0646" t2="265.111" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.278146" q2="0" q3="0.960539" id="268" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.503" t1="-40.7895" t2="265.111" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.278146" q1="0" q2="0.960539" q3="0" id="269" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.442" t1="-40.0646" t2="262.707" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.278146" q2="0" q3="0.960539" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.442" t1="-40.7895" t2="262.707" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.278146" q1="0" q2="0.960539" q3="0" id="271" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.659" t1="-40.0646" t2="263.946" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.278146" q2="0" q3="0.960539" id="272" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.659" t1="-40.7895" t2="263.946" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.278146" q1="0" q2="0.960539" q3="0" id="273" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.429" t1="-39.5217" t2="262.715" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="-0.227658" q2="0" q3="0.973741" id="274" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.281" t1="-39.5216" t2="263.866" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="-0.227658" q2="0" q3="0.973741" id="275" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.651" t1="-39.5216" t2="263.966" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="-0.227658" q2="0" q3="0.973741" id="276" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.503" t1="-39.5216" t2="265.117" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="-0.227658" q2="0" q3="0.973741" id="277" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.372" t1="-39.0199" t2="263.299" s0="0.327819" s1="0.591452" s2="0.670965" q0="0.160979" q1="-0.160979" q2="-0.688539" q3="0.688539" id="278" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.604" t1="-39.0199" t2="264.543" s0="0.327819" s1="0.591452" s2="0.670965" q0="0.160979" q1="-0.160979" q2="-0.688539" q3="0.688539" id="279" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.232" t1="-39.2001" t2="263.852" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.0705768" q1="-0.270636" q2="0.242271" q3="0.929021" id="280" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.488" t1="-39.2158" t2="262.723" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.0705768" q1="-0.270636" q2="0.242271" q3="0.929021" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.494" t1="-39.1775" t2="265.119" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.0705768" q1="-0.270636" q2="0.242271" q3="0.929021" id="282" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.687" t1="-39.2035" t2="263.97" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.0705768" q1="-0.270636" q2="0.242271" q3="0.929021" id="283" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.287" t1="-41.3493" t2="263.863" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.253836" q2="0" q3="0.967247" id="284" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.411" t1="-41.3493" t2="262.715" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.253836" q2="0" q3="0.967247" id="285" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.507" t1="-41.2157" t2="265.121" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.253836" q2="0" q3="0.967247" id="286" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.651" t1="-41.2157" t2="263.955" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.253836" q2="0" q3="0.967247" id="287" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.902" t1="-40.3989" t2="264.49" s0="0.648433" s1="0.528233" s2="0.629708" q0="0.681134" q1="-0.189886" q2="0.189886" q3="0.681134" id="288" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.902" t1="-39.7278" t2="264.49" s0="0.648433" s1="0.528233" s2="0.629708" q0="0.681134" q1="-0.189886" q2="0.189886" q3="0.681134" id="289" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.026" t1="-40.3989" t2="263.356" s0="0.648433" s1="0.528233" s2="0.629708" q0="0.681134" q1="-0.189886" q2="0.189886" q3="0.681134" id="290" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.024" t1="-39.7278" t2="263.355" s0="0.648433" s1="0.528233" s2="0.629708" q0="0.681134" q1="-0.189886" q2="0.189886" q3="0.681134" id="291" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.286" t1="-39.7178" t2="263.872" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.482525" q2="0" q3="0.875882" id="292" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="112.286" t1="-40.3966" t2="263.872" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.482525" q2="0" q3="0.875882" id="293" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.494" t1="-39.7178" t2="265.125" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.482525" q2="0" q3="0.875882" id="294" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.494" t1="-40.3966" t2="265.125" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.482525" q2="0" q3="0.875882" id="295" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.447" t1="-39.7178" t2="262.73" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.875883" q2="0" q3="0.482524" id="296" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="110.447" t1="-40.3966" t2="262.73" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.875883" q2="0" q3="0.482524" id="297" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.664" t1="-39.7178" t2="263.969" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.875883" q2="0" q3="0.482524" id="298" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="109.664" t1="-40.3966" t2="263.969" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.875883" q2="0" q3="0.482524" id="299" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="110.969" t1="-38.7472" t2="263.922" s0="2.84234" s1="1.55851" s2="1.764" q0="0" q1="-0.274804" q2="0" q3="0.9615" id="300" version="1">
+            <parameters/>
+            <EnvObject t0="110.969" t1="-38.7472" t2="263.922" s0="2.23512" s1="1.92337" s2="1.92337" q0="0.343348" q1="-0.618153" q2="0.618152" q3="0.343347" id="301" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="110.969" t1="-38.7472" t2="263.922" s0="2.23483" s1="1.92312" s2="1.92312" q0="0.618152" q1="0.343348" q2="-0.343348" q3="0.618152" id="302" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <EnvObject t0="103.609" t1="-38.8996" t2="266.527" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="0.464622" q1="0.377079" q2="-0.172054" q3="0.782519" id="304" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="104.796" t1="-38.4083" t2="266.222" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="0.184865" q1="-0.123035" q2="0.962431" q3="0.156249" id="305" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="106.721" t1="-38.9194" t2="264.989" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="0.252214" q1="0.116639" q2="0.843435" q3="0.459783" id="306" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="106.067" t1="-39.0475" t2="265.042" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="-0.0639475" q1="-0.909925" q2="-0.386133" q3="0.13729" id="307" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.017" t1="-38.9266" t2="268.603" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="-0.108907" q1="0.643129" q2="0.478222" q3="0.588071" id="308" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.34" t1="-38.487" t2="267.516" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="0.818744" q1="-0.217892" q2="-0.0891584" q3="0.523672" id="309" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.427" t1="-39.6075" t2="265.92" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="0.894962" q1="-0.444429" q2="-0.0379864" q3="0.00910222" id="310" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="109.162" t1="-39.8827" t2="264.26" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="0.297886" q1="-0.109366" q2="-0.827434" q3="0.46331" id="311" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="116.321" t1="-40.7452" t2="252.228" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="0.700848" q1="-0.287906" q2="-0.569973" q3="0.317888" id="312" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="116.65" t1="-40.8845" t2="254.16" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="-0.469103" q1="-0.238281" q2="0.667137" q3="0.527345" id="313" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="115.684" t1="-41.5364" t2="250.804" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="0.205848" q1="-0.421136" q2="0.0261785" q3="0.882942" id="314" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="116.735" t1="-41.9203" t2="253.807" s0="0.0911548" s1="0.0911538" s2="0.10035" q0="-0.000889845" q1="0.766664" q2="0.0436434" q3="0.640563" id="315" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.675" t1="-39.0748" t2="272.377" s0="0.0911544" s1="0.0911544" s2="0.0911544" q0="-0.57773" q1="-0.264524" q2="0.55325" q3="0.538674" id="316" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="103.898" t1="-38.5956" t2="273.189" s0="0.0911544" s1="0.0911544" s2="0.0911544" q0="0.869361" q1="0.421567" q2="0.0452788" q3="0.253856" id="317" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="106.035" t1="-39.2402" t2="275.015" s0="0.0975188" s1="0.0975188" s2="0.0975188" q0="0.292419" q1="0.890154" q2="-0.341487" q3="0.0741862" id="318" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="111.184" t1="-37.858" t2="270.307" s0="0.0591032" s1="0.0648382" s2="0.0453163" q0="-0.569246" q1="0.313201" q2="0.460245" q3="0.605011" id="319" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Land/jagged_outcrop.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.623" t1="-38.6082" t2="275.033" s0="0.0975188" s1="0.0975188" s2="0.0975188" q0="-0.481972" q1="-0.127563" q2="-0.070627" q3="0.863969" id="320" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="108.29" t1="-38.0818" t2="274.477" s0="0.0975188" s1="0.0975188" s2="0.0975188" q0="0.904128" q1="0.399727" q2="-0.146952" q3="0.0342929" id="321" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="104.715" t1="-39.5621" t2="274.691" s0="0.0975188" s1="0.0975188" s2="0.0975188" q0="-0.483653" q1="-0.200896" q2="0.479363" q3="0.704224" id="322" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.37" t1="-37.8781" t2="270.446" s0="0.0975188" s1="0.0975188" s2="0.0975188" q0="0.430507" q1="0.684815" q2="-0.563051" q3="0.16931" id="323" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="101.185" t1="-39.265" t2="271.274" s0="0.0975188" s1="0.0975188" s2="0.0975188" q0="-0.812319" q1="0.412346" q2="-0.391536" q3="0.129647" id="324" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="100.697" t1="-39.542" t2="268.37" s0="0.0975188" s1="0.0975185" s2="0.172099" q0="0.317244" q1="0.371269" q2="0.607953" q3="0.626026" id="325" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="99.7409" t1="-39.3376" t2="268.61" s0="0.097519" s1="0.0699174" s2="0.172099" q0="0.586826" q1="-0.289178" q2="-0.656599" q3="0.375352" id="326" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="98.9651" t1="-39.6996" t2="271.522" s0="0.097519" s1="0.0699174" s2="0.172099" q0="-0.719713" q1="0.504509" q2="-0.388896" q3="0.276123" id="327" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="100.198" t1="-39.6848" t2="269.862" s0="4.5338" s1="3.55678" s2="3.26635" q0="0" q1="-0.849518" q2="0" q3="0.52756" id="328" version="1">
+        <parameters/>
+        <EnvObject t0="100.967" t1="-40.4414" t2="268.77" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.714197" q2="0" q3="0.699945" id="329" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.895" t1="-40.4414" t2="270.95" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.714197" q2="0" q3="0.699945" id="330" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4211" t1="-40.4414" t2="270.903" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.714197" q2="0" q3="0.699945" id="331" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4943" t1="-40.4414" t2="268.721" s0="0.999958" s1="0.740019" s2="0.773652" q0="0" q1="-0.714197" q2="0" q3="0.699945" id="332" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.884" t1="-40.7347" t2="271.349" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.505013" q1="-0.505013" q2="0.494936" q3="0.494937" id="333" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.884" t1="-40.0014" t2="271.349" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.494936" q1="0.494936" q2="-0.505013" q3="0.505013" id="334" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.413" t1="-40.7347" t2="271.319" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.505013" q1="-0.505013" q2="0.494936" q3="0.494937" id="335" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.413" t1="-40.0014" t2="271.319" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.494936" q1="0.494936" q2="-0.505013" q3="0.505013" id="336" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.984" t1="-40.7347" t2="268.406" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.505013" q1="-0.505013" q2="0.494936" q3="0.494937" id="337" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.984" t1="-40.0014" t2="268.406" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.494936" q1="0.494936" q2="-0.505013" q3="0.505013" id="338" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.5123" t1="-40.7347" t2="268.376" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.505013" q1="-0.505013" q2="0.494936" q3="0.494937" id="339" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.5123" t1="-40.0014" t2="268.376" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.494936" q1="0.494936" q2="-0.505013" q3="0.505013" id="340" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.895" t1="-40.0081" t2="270.952" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.721151" q2="0" q3="0.692778" id="341" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.895" t1="-40.733" t2="270.952" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.721151" q1="0" q2="0.692778" q3="0" id="342" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4306" t1="-40.0081" t2="270.893" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.721151" q2="0" q3="0.692778" id="343" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4306" t1="-40.733" t2="270.893" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.721151" q1="0" q2="0.692778" q3="0" id="344" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.983" t1="-40.0081" t2="268.773" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.721151" q2="0" q3="0.692778" id="345" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.983" t1="-40.733" t2="268.773" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.721151" q1="0" q2="0.692778" q3="0" id="346" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.5181" t1="-40.0081" t2="268.714" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.721151" q2="0" q3="0.692778" id="347" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.5181" t1="-40.733" t2="268.714" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.721151" q1="0" q2="0.692778" q3="0" id="348" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.969" t1="-39.4651" t2="268.766" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="-0.684029" q2="0" q3="0.729455" id="349" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.898" t1="-39.4651" t2="270.945" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="-0.684029" q2="0" q3="0.729455" id="350" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.497" t1="-39.4651" t2="268.717" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="-0.684029" q2="0" q3="0.729455" id="351" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4261" t1="-39.4651" t2="270.897" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="-0.684029" q2="0" q3="0.729455" id="352" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.935" t1="-38.9634" t2="269.874" s0="0.327819" s1="0.591452" s2="0.670965" q0="0.483681" q1="-0.483681" q2="-0.515803" q3="0.515803" id="353" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4736" t1="-38.9634" t2="269.831" s0="0.327819" s1="0.591452" s2="0.670965" q0="0.483681" q1="-0.483681" q2="-0.515803" q3="0.515803" id="354" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.886" t1="-39.1435" t2="270.895" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.182256" q1="-0.698888" q2="0.174524" q3="0.669238" id="355" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.992" t1="-39.1592" t2="268.821" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.182256" q1="-0.698888" q2="0.174524" q3="0.669238" id="356" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4202" t1="-39.121" t2="270.89" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.182256" q1="-0.698888" q2="0.174524" q3="0.669238" id="357" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.5119" t1="-39.147" t2="268.75" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.182256" q1="-0.698888" q2="0.174524" q3="0.669238" id="358" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.904" t1="-41.2927" t2="270.949" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.703452" q2="0" q3="0.710743" id="359" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.96" t1="-41.2927" t2="268.75" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.703452" q2="0" q3="0.710743" id="360" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4248" t1="-41.1591" t2="270.902" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.703452" q2="0" q3="0.710743" id="361" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.5059" t1="-41.1591" t2="268.711" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.703452" q2="0" q3="0.710743" id="362" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.168" t1="-40.3423" t2="270.929" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.494936" q1="-0.505013" q2="0.505013" q3="0.494936" id="363" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.168" t1="-39.6712" t2="270.928" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.494936" q1="-0.505013" q2="0.505013" q3="0.494936" id="364" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.213" t1="-40.3423" t2="268.737" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.494936" q1="-0.505013" q2="0.505013" q3="0.494936" id="365" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.213" t1="-39.6712" t2="268.734" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.494936" q1="-0.505013" q2="0.505013" q3="0.494936" id="366" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.895" t1="-39.6613" t2="270.952" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.0200622" q2="0" q3="0.999799" id="367" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.895" t1="-40.3401" t2="270.952" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.0200622" q2="0" q3="0.999799" id="368" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4142" t1="-39.6613" t2="270.893" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.0200622" q2="0" q3="0.999799" id="369" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.4142" t1="-40.3401" t2="270.893" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.0200622" q2="0" q3="0.999799" id="370" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.965" t1="-39.6612" t2="268.788" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.999799" q2="0" q3="0.0200478" id="371" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.965" t1="-40.3401" t2="268.788" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.999799" q2="0" q3="0.0200478" id="372" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.5009" t1="-39.6612" t2="268.729" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.999799" q2="0" q3="0.0200478" id="373" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="99.5009" t1="-40.3401" t2="268.729" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.999799" q2="0" q3="0.0200478" id="374" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="100.194" t1="-38.6906" t2="269.837" s0="2.84234" s1="1.55851" s2="1.764" q0="0" q1="-0.718738" q2="0" q3="0.695281" id="375" version="1">
+            <parameters/>
+            <EnvObject t0="100.194" t1="-38.6906" t2="269.837" s0="2.23512" s1="1.92337" s2="1.92337" q0="0.0117276" q1="0.70701" q2="-0.70701" q3="0.0116754" id="376" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="100.194" t1="-38.6906" t2="269.837" s0="2.23483" s1="1.92312" s2="1.92312" q0="0.70701" q1="-0.0117283" q2="0.0117286" q3="0.707009" id="377" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <Decal t0="113.785" t1="-39.4347" t2="256.892" s0="1.25021" s1="1.83032" s2="1.27947" q0="0.080805" q1="0.010748" q2="-0.864962" q3="0.495173" id="378" type_file="Data/Objects/Decals/ThickMoss.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="116.003" t1="-41.0359" t2="251.819" s0="2.02582" s1="1.87029" s2="1.70668" q0="0.654716" q1="-0.690127" q2="-0.262742" q3="0.161364" id="379" type_file="Data/Objects/Decals/ThickMoss.xml" color_r="0.52549" color_g="0.52549" color_b="0.52549" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="104.402" t1="-41.027" t2="266.54" s0="0.608213" s1="0.608213" s2="0.608213" q0="0.100224" q1="0.272431" q2="-0.0342538" q3="0.956328" id="380" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="108.478" t1="-40.6802" t2="274.838" s0="1" s1="1" s2="1" q0="0" q1="0.630944" q2="0" q3="0.775828" id="381" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="104.034" t1="-40.5809" t2="274.142" s0="0.0261754" s1="0.0261754" s2="0.0261754" q0="0" q1="0.589012" q2="0" q3="0.808124" id="382" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/applebit.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="103.545" t1="-40.6286" t2="273.705" s0="1.64649" s1="1.70818" s2="1.0671" q0="0.0265346" q1="0.726767" q2="-0.02812" q3="0.685795" id="383" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="111.192" t1="-40.8705" t2="267.726" s0="0.444746" s1="0.965387" s2="0.448263" q0="0.0813769" q1="-0.985766" q2="-0.0191249" q3="0.145868" id="384" version="1">
+        <parameters/>
+        <EnvObject t0="111.215" t1="-40.6815" t2="267.916" s0="0.5428" s1="0.635384" s2="1" q0="0.754584" q1="-0.639499" q2="-0.11667" q3="0.0896219" id="385" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_short_board.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="111.234" t1="-41.1357" t2="267.709" s0="1" s1="1" s2="1" q0="0.0813768" q1="-0.985765" q2="-0.0191251" q3="0.145875" id="386" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_stool.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="105.153" t1="-41.0447" t2="266.013" s0="0.632719" s1="0.632719" s2="0.632719" q0="0.0618594" q1="0.210135" q2="-0.0136563" q3="0.975618" id="387" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="101.758" t1="-40.5499" t2="271.779" s0="1" s1="1" s2="1" q0="-0.0350799" q1="0.00779402" q2="-0.0442147" q3="0.998376" id="388" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/RopeBall1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.392" t1="-40.5367" t2="275.532" s0="-1.22644" s1="1.12394" s2="1.53589" q0="-0.538501" q1="-0.491461" q2="-0.464307" q3="0.502893" id="389" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/Gear/dog_armour_grey/dog_armor_bag.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.272" t1="-40.226" t2="275.507" s0="1" s1="1" s2="1" q0="-0.0132135" q1="0.728198" q2="0.685096" q3="0.0140206" id="390" color_r="0.458824" color_g="0.545098" color_b="0.47451" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="108.431" t1="-40.5735" t2="264.43" s0="1" s1="1" s2="1" q0="-0.623232" q1="0.0922504" q2="0.0619125" q3="0.774105" id="391" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_bag.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="108.437" t1="-40.4721" t2="264.452" s0="1" s1="1" s2="1" q0="0.0202961" q1="0.629695" q2="0.776104" q3="0.0271095" id="392" color_r="0.580392" color_g="0.952941" color_b="0.541176" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_bag.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="102.464" t1="-39.8258" t2="267.302" s0="0.455719" s1="0.455719" s2="0.455719" q0="0.0106571" q1="0.0679914" q2="-0.0080938" q3="0.997596" id="393" color_r="0.301961" color_g="0.301961" color_b="0.301961" overbright="0" type_file="Data/Objects/Environment/pots/tree_pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="103.889" t1="-40.5719" t2="274.277" s0="0.0261754" s1="0.0261754" s2="0.0261754" q0="0" q1="-0.994362" q2="0" q3="0.106039" id="394" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/applebit.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="105.231" t1="-40.3366" t2="264.956" s0="0.787365" s1="0.22424" s2="0.859727" q0="0.447282" q1="-0.33619" q2="-0.681111" q3="0.472232" id="395" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="105.814" t1="-40.3291" t2="264.788" s0="0.787364" s1="0.192343" s2="0.859734" q0="0.646449" q1="0.430079" q2="0.511947" q3="0.367486" id="396" type_file="Data/Objects/Decals/ChunkyRockPatchy.xml" color_r="0.254902" color_g="0.188235" color_b="0.156863" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="106.921" t1="-41.5657" t2="270.963" s0="0.317933" s1="0.317933" s2="0.317933" q0="0" q1="0" q2="0" q3="1" id="397" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/lichen_rock_e.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.128" t1="-41.568" t2="270.785" s0="0.24027" s1="0.24027" s2="0.24027" q0="0" q1="-0.856386" q2="0" q3="0.516336" id="398" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/lichen_rock_e.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.808" t1="-41.5067" t2="270.966" s0="0.161689" s1="0.161689" s2="0.161689" q0="0" q1="0" q2="0" q3="1" id="399" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/lichen_rock_c.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.506" t1="-41.5291" t2="271.633" s0="0.161689" s1="0.161689" s2="0.161689" q0="0" q1="-0.989597" q2="0" q3="0.143867" id="400" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/lichen_rock_c.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.013" t1="-41.501" t2="271.572" s0="0.0861441" s1="0.0861441" s2="0.0861441" q0="0" q1="0.954685" q2="0" q3="0.297618" id="401" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/medium_lichen_rock.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="83.9843" t1="0.848742" t2="256.641" s0="24.1855" s1="2.1854" s2="24.1336" q0="0" q1="0" q2="0" q3="1" id="402" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="116.311" t1="-39.9683" t2="254.127" s0="1.15329" s1="1.15329" s2="1.15329" q0="0.195979" q1="-0.147617" q2="0.791476" q3="0.559792" id="403" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="114.828" t1="-39.2812" t2="258.088" s0="1.15329" s1="1.15329" s2="1.15329" q0="0.325301" q1="-0.191479" q2="0.842761" q3="0.383756" id="404" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="114.337" t1="-38.8456" t2="258.189" s0="1.15329" s1="1.15329" s2="1.15329" q0="-0.878269" q1="0.282697" q2="0.366551" q3="0.119859" id="405" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="106.073" t1="-40.467" t2="264.764" s0="0.000908077" s1="0.00182797" s2="0.0010598" q0="0" q1="0" q2="0" q3="1" id="406" color_r="1" color_g="0" color_b="0.941176" overbright="88" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="107.251" t1="-39.8517" t2="275.472" s0="0.000908077" s1="0.00182797" s2="0.0010598" q0="0" q1="0" q2="0" q3="1" id="407" color_r="1" color_g="0" color_b="0.941176" overbright="88" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <DynamicLightObject t0="110.206" t1="-39.3918" t2="267.931" s0="3.6598" s1="3.6598" s2="3.6598" q0="0" q1="0" q2="0.000174046" q3="1" id="408" color_r="0.541176" color_g="0" color_b="1" overbright="50">
+        <parameters/>
+    </DynamicLightObject>
+    <EnvObject t0="113.76" t1="-40.5989" t2="253.726" s0="1.15329" s1="1.15329" s2="1.15329" q0="-0.690655" q1="-0.42797" q2="-0.485332" q3="0.32294" id="409" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="112.044" t1="-43.4356" t2="247.634" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="411" type_file="Data/Objects/therium/IGF_Characters/JairoActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.77536"/>
+            <parameter name="Focus FOV distance" type="float" val="100"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="1"/>
+            <parameter name="Teams" type="string" val="guard, turner, player"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <EnvObject t0="115.817" t1="-39.1403" t2="285.817" s0="2.59264" s1="2.59131" s2="2.5919" q0="0" q1="0.258819" q2="0" q3="0.965926" id="412" color_r="1" color_g="0" color_b="0.941176" overbright="88" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <DynamicLightObject t0="114.551" t1="-39.6572" t2="283.18" s0="11.5715" s1="11.5715" s2="11.5715" q0="0" q1="-0.5" q2="0" q3="0.866025" id="413" color_r="0.541176" color_g="0" color_b="1" overbright="50">
+        <parameters/>
+    </DynamicLightObject>
+    <Decal t0="107.307" t1="-41.3204" t2="271.145" s0="0.64542" s1="0.305397" s2="0.64542" q0="0" q1="0.72923" q2="0" q3="0.684269" id="414" type_file="Data/Objects/Decals/flame_base.xml" color_r="0.999998" color_g="0.99999" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Hotspot t0="114.133" t1="15.8406" t2="238.568" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="415" type_file="Data/Objects/therium/Hotspots/therium_level.xml">
+        <parameters>
+            <parameter name="music" type="string" val="bfending"/>
+        </parameters>
+    </Hotspot>
+    <Group t0="84.985" t1="-39.7653" t2="263.744" s0="4.5338" s1="3.55678" s2="3.26635" q0="0" q1="-0.907114" q2="0" q3="0.420885" id="416" version="1">
+        <parameters/>
+        <EnvObject t0="85.9938" t1="-40.5219" t2="262.869" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.793648" q2="0" q3="0.608377" id="417" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.4002" t1="-40.5219" t2="264.968" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.793648" q2="0" q3="0.608377" id="418" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.9807" t1="-40.5219" t2="264.568" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.793648" q2="0" q3="0.608377" id="419" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.576" t1="-40.5219" t2="262.468" s0="0.999958" s1="0.740019" s2="0.773652" q0="0" q1="-0.793648" q2="0" q3="0.608377" id="420" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.2937" t1="-40.8152" t2="265.353" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.561193" q1="-0.561193" q2="0.430189" q3="0.430189" id="421" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.2937" t1="-40.0819" t2="265.353" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.430189" q1="0.430189" q2="-0.561193" q3="0.561193" id="422" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.873" t1="-40.8152" t2="264.97" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.561193" q1="-0.561193" q2="0.430189" q3="0.430189" id="423" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.873" t1="-40.0819" t2="264.97" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.430189" q1="0.430189" q2="-0.561193" q3="0.561193" id="424" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="86.0978" t1="-40.8152" t2="262.52" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.561193" q1="-0.561193" q2="0.430189" q3="0.430189" id="425" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="86.0978" t1="-40.0819" t2="262.52" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.430189" q1="0.430189" q2="-0.561193" q3="0.561193" id="426" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.6764" t1="-40.8152" t2="262.137" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.561193" q1="-0.561193" q2="0.430189" q3="0.430189" id="427" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.6764" t1="-40.0819" t2="262.137" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.430189" q1="0.430189" q2="-0.561193" q3="0.561193" id="428" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.3997" t1="-40.0886" t2="264.97" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.799683" q2="0" q3="0.600422" id="429" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.3997" t1="-40.8135" t2="264.97" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.799683" q1="0" q2="0.600422" q3="0.000732422" id="430" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.9924" t1="-40.0886" t2="264.561" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.799683" q2="0" q3="0.600422" id="431" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.9924" t1="-40.8135" t2="264.561" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.799683" q1="0" q2="0.600422" q3="0.000732422" id="432" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="86.0086" t1="-40.0886" t2="262.876" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.799683" q2="0" q3="0.600422" id="433" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="86.0086" t1="-40.8135" t2="262.876" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.799683" q1="0" q2="0.600422" q3="0.000732422" id="434" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.6008" t1="-40.0886" t2="262.467" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.799683" q2="0" q3="0.600422" id="435" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.6008" t1="-40.8135" t2="262.467" s0="1.64657" s1="1.64676" s2="1.06591" q0="-0.799683" q1="0" q2="0.600422" q3="0.000732422" id="436" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.9967" t1="-39.5456" t2="262.866" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="-0.767272" q2="0" q3="0.641322" id="437" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.4043" t1="-39.5456" t2="264.964" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="-0.767272" q2="0" q3="0.641322" id="438" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.5796" t1="-39.5456" t2="262.464" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="-0.767272" q2="0" q3="0.641322" id="439" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.987" t1="-39.5456" t2="264.564" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="-0.767272" q2="0" q3="0.641322" id="440" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.6975" t1="-39.0439" t2="263.933" s0="0.327819" s1="0.591452" s2="0.670965" q0="0.542543" q1="-0.542543" q2="-0.453483" q3="0.453484" id="441" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.2893" t1="-39.0439" t2="263.54" s0="0.327819" s1="0.591452" s2="0.670965" q0="0.542543" q1="-0.542543" q2="-0.453483" q3="0.453484" id="442" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.4047" t1="-39.224" t2="264.912" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.202035" q1="-0.774735" q2="0.151187" q3="0.57975" id="443" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="86.0058" t1="-39.2397" t2="262.924" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.202035" q1="-0.774735" q2="0.151187" q3="0.57975" id="444" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.983" t1="-39.2015" t2="264.555" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.202035" q1="-0.774735" q2="0.151187" q3="0.57975" id="445" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.5861" t1="-39.2275" t2="262.5" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.202035" q1="-0.774735" q2="0.151187" q3="0.57975" id="446" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.4092" t1="-41.3732" t2="264.969" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.784288" q2="0" q3="0.620397" id="447" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.9918" t1="-41.3732" t2="262.848" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.784288" q2="0" q3="0.620397" id="448" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.9846" t1="-41.2396" t2="264.568" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.784288" q2="0" q3="0.620397" id="449" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.5897" t1="-41.2396" t2="262.461" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.784288" q2="0" q3="0.620397" id="450" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.6995" t1="-40.4228" t2="264.773" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.430189" q1="-0.561193" q2="0.561193" q3="0.430189" id="451" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.6998" t1="-39.7517" t2="264.772" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.430189" q1="-0.561193" q2="0.561193" q3="0.430189" id="452" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.2698" t1="-40.4228" t2="262.656" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.430189" q1="-0.561193" q2="0.561193" q3="0.430189" id="453" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.2705" t1="-39.7517" t2="262.653" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.430189" q1="-0.561193" q2="0.561193" q3="0.430189" id="454" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.3997" t1="-39.7418" t2="264.97" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.140898" q2="0" q3="0.990024" id="455" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.3997" t1="-40.4206" t2="264.97" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.140898" q2="0" q3="0.990024" id="456" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.9765" t1="-39.7418" t2="264.557" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.140898" q2="0" q3="0.990024" id="457" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="83.9765" t1="-40.4206" t2="264.557" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.140898" q2="0" q3="0.990024" id="458" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.9875" t1="-39.7417" t2="262.886" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.990026" q2="0" q3="0.140885" id="459" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="85.9875" t1="-40.4206" t2="262.886" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.990026" q2="0" q3="0.140885" id="460" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.5805" t1="-39.7417" t2="262.477" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.990026" q2="0" q3="0.140885" id="461" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="84.5805" t1="-40.4206" t2="262.477" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.990026" q2="0" q3="0.140885" id="462" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="84.9871" t1="-38.7711" t2="263.719" s0="2.84234" s1="1.55851" s2="1.764" q0="0" q1="-0.797591" q2="0" q3="0.603199" id="463" version="1">
+            <parameters/>
+            <EnvObject t0="84.9871" t1="-38.7711" t2="263.719" s0="2.23512" s1="1.92337" s2="1.92337" q0="0.0971952" q1="0.700402" q2="-0.700396" q3="0.0971367" id="464" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="84.9871" t1="-38.7711" t2="263.719" s0="2.23483" s1="1.92312" s2="1.92312" q0="0.700396" q1="-0.0971957" q2="0.097196" q3="0.700394" id="465" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <Group t0="90.219" t1="-39.5599" t2="277.493" s0="4.5338" s1="3.55678" s2="3.26635" q0="0" q1="-0.339177" q2="0" q3="0.940723" id="466" version="1">
+        <parameters/>
+        <EnvObject t0="89.3338" t1="-40.3165" t2="276.492" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.12611" q2="0" q3="0.992016" id="467" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.4384" t1="-40.3165" t2="277.065" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.12611" q2="0" q3="0.992016" id="468" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.0528" t1="-40.3165" t2="278.489" s0="0.999953" s1="0.740019" s2="0.711416" q0="0" q1="-0.12611" q2="0" q3="0.992016" id="469" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9465" t1="-40.3165" t2="277.914" s0="0.999958" s1="0.740019" s2="0.773652" q0="0" q1="-0.12611" q2="0" q3="0.992016" id="470" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.8241" t1="-40.6098" t2="277.168" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.0891728" q1="-0.0891724" q2="0.701461" q3="0.701462" id="471" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.8241" t1="-39.8765" t2="277.168" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.701462" q1="0.701462" q2="-0.0891726" q3="0.0891655" id="472" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.4557" t1="-40.6098" t2="278.592" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.0891728" q1="-0.0891724" q2="0.701461" q3="0.701462" id="473" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.4557" t1="-39.8765" t2="278.592" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.701462" q1="0.701462" q2="-0.0891726" q3="0.0891655" id="474" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9836" t1="-40.6098" t2="276.392" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.0891728" q1="-0.0891724" q2="0.701461" q3="0.701462" id="475" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9836" t1="-39.8765" t2="276.392" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.701462" q1="0.701462" q2="-0.0891726" q3="0.0891655" id="476" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.6149" t1="-40.6098" t2="277.817" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.0891728" q1="-0.0891724" q2="0.701461" q3="0.701462" id="477" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.6149" t1="-39.8765" t2="277.817" s0="0.652029" s1="0.459419" s2="1.02856" q0="-0.701462" q1="0.701462" q2="-0.0891726" q3="0.0891655" id="478" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.4404" t1="-39.8832" t2="277.066" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.13601" q2="0" q3="0.990707" id="479" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.4404" t1="-40.6081" t2="277.066" s0="1.64657" s1="1.64676" s2="1.06591" q0="0.13601" q1="0" q2="-0.990707" q3="0.000976563" id="480" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.0452" t1="-39.8832" t2="278.477" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.13601" q2="0" q3="0.990707" id="481" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.0452" t1="-40.6081" t2="278.477" s0="1.64657" s1="1.64676" s2="1.06591" q0="0.13601" q1="0" q2="-0.990707" q3="0.000976563" id="482" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.3404" t1="-39.8832" t2="276.478" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.13601" q2="0" q3="0.990707" id="483" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.3404" t1="-40.6081" t2="276.478" s0="1.64657" s1="1.64676" s2="1.06591" q0="0.13601" q1="0" q2="-0.990707" q3="0.000976563" id="484" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9451" t1="-39.8832" t2="277.889" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.13601" q2="0" q3="0.990707" id="485" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9451" t1="-40.6081" t2="277.889" s0="1.64657" s1="1.64676" s2="1.06591" q0="0.13601" q1="0" q2="-0.990707" q3="0.000976563" id="486" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.3304" t1="-39.3402" t2="276.49" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="-0.0841428" q2="0" q3="0.996454" id="487" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.4343" t1="-39.3402" t2="277.061" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="-0.0841428" q2="0" q3="0.996454" id="488" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9432" t1="-39.3402" t2="277.911" s0="0.492652" s1="0.492656" s2="0.371193" q0="0" q1="-0.0841428" q2="0" q3="0.996454" id="489" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.0481" t1="-39.3402" t2="278.482" s0="0.492661" s1="0.492665" s2="0.3712" q0="0" q1="-0.0841428" q2="0" q3="0.996454" id="490" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="90.4007" t1="-38.8385" t2="276.778" s0="0.327819" s1="0.591452" s2="0.670965" q0="0.0594971" q1="-0.0594973" q2="-0.704599" q3="0.704599" id="491" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="90.0218" t1="-38.8385" t2="278.19" s0="0.327819" s1="0.591452" s2="0.670965" q0="0.0594971" q1="-0.0594973" q2="-0.704599" q3="0.704599" id="492" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/rope around stump.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.3828" t1="-39.0186" t2="277.061" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.034722" q1="-0.133147" q2="0.249941" q3="0.958434" id="493" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.3892" t1="-39.0343" t2="276.48" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.034722" q1="-0.133147" q2="0.249941" q3="0.958434" id="494" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.0399" t1="-38.9961" t2="278.487" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.034722" q1="-0.133147" q2="0.249941" q3="0.958434" id="495" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9787" t1="-39.0221" t2="277.904" s0="2.37869" s1="1.89906" s2="1.62044" q0="-0.034722" q1="-0.133147" q2="0.249941" q3="0.958434" id="496" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rope/knot.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.4395" t1="-41.1678" t2="277.056" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.110985" q2="0" q3="0.993822" id="497" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.3127" t1="-41.1678" t2="276.495" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.110985" q2="0" q3="0.993822" id="498" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.0526" t1="-41.0342" t2="278.485" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.110985" q2="0" q3="0.993822" id="499" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9394" t1="-41.0342" t2="277.901" s0="0.592066" s1="0.592066" s2="0.592066" q0="0" q1="-0.110985" q2="0" q3="0.993822" id="500" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.2503" t1="-40.2174" t2="277.768" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.701461" q1="-0.0891725" q2="0.0891727" q3="0.701462" id="501" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.2494" t1="-39.5463" t2="277.768" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.701461" q1="-0.0891725" q2="0.0891727" q3="0.701462" id="502" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.1278" t1="-40.2174" t2="277.219" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.701461" q1="-0.0891725" q2="0.0891727" q3="0.701462" id="503" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.1249" t1="-39.5463" t2="277.218" s0="0.648434" s1="0.528233" s2="0.629708" q0="0.701461" q1="-0.0891725" q2="0.0891727" q3="0.701462" id="504" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.4404" t1="-39.5364" t2="277.066" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.604363" q2="0" q3="0.796709" id="505" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.4404" t1="-40.2152" t2="277.066" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.604363" q2="0" q3="0.796709" id="506" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.0414" t1="-39.5364" t2="278.493" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.604363" q2="0" q3="0.796709" id="507" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="91.0414" t1="-40.2152" t2="278.493" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="0.604363" q2="0" q3="0.796709" id="508" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.3509" t1="-39.5363" t2="276.499" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.796701" q2="0" q3="0.604374" id="509" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.3509" t1="-40.2152" t2="276.499" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.796701" q2="0" q3="0.604374" id="510" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9558" t1="-39.5363" t2="277.91" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.796701" q2="0" q3="0.604374" id="511" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="88.9558" t1="-40.2152" t2="277.91" s0="1.64657" s1="1.64676" s2="1.06591" q0="0" q1="-0.796701" q2="0" q3="0.604374" id="512" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="90.1938" t1="-38.5657" t2="277.491" s0="2.84234" s1="1.55851" s2="1.764" q0="0" q1="-0.132565" q2="0" q3="0.991174" id="513" version="1">
+            <parameters/>
+            <EnvObject t0="90.1938" t1="-38.5657" t2="277.491" s0="2.23512" s1="1.92337" s2="1.92337" q0="0.429306" q1="-0.561836" q2="0.56187" q3="0.429347" id="514" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="90.1938" t1="-38.5657" t2="277.491" s0="2.23483" s1="1.92312" s2="1.92312" q0="0.56187" q1="0.429305" q2="-0.429305" q3="0.561869" id="515" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <EnvObject t0="87.4182" t1="-36.4802" t2="284.956" s0="1" s1="1" s2="1" q0="0" q1="-0.152274" q2="0" q3="0.988338" id="516" color_r="1" color_g="1" color_b="1" overbright="5" type_file="Data/Objects/therium/burrow/Burrow_Door.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="79.8729" t1="-39.0908" t2="265.127" s0="0.998018" s1="1.10635" s2="1.00002" q0="0" q1="-0.461983" q2="0" q3="0.886889" id="517" color_r="1" color_g="1" color_b="1" overbright="5" type_file="Data/Objects/therium/burrow/Burrow_Door.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="105.435" t1="-40.6227" t2="265.024" s0="1" s1="1" s2="1" q0="-0.705571" q1="-0.0465735" q2="-0.0465734" q3="0.705572" id="518" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Weapons/FlintKnife.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="112.771" t1="-41.5126" t2="249.699" s0="1.06108" s1="1.17064" s2="1.00003" q0="0" q1="0.399066" q2="0" q3="0.916922" id="520" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/burrow/Burrow_Door.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="117.423" t1="2.05493" t2="259.964" s0="29.3271" s1="5.00673" s2="29.3271" q0="0" q1="0" q2="0" q3="1" id="521" type_file="Data/Objects/therium/Decals/secret.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Group t0="95.0567" t1="-40.2805" t2="266.507" s0="0.610067" s1="0.414343" s2="0.373159" q0="0" q1="-0.258819" q2="0" q3="0.965926" id="522" version="1">
+        <parameters/>
+        <EnvObject t0="95.0577" t1="-40.2805" t2="266.505" s0="1" s1="1.62264" s2="1" q0="0" q1="-0.240496" q2="0" q3="0.97065" id="523" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="95.0562" t1="-40.2987" t2="266.507" s0="0.242408" s1="0.621975" s2="0.515237" q0="0.686354" q1="-0.170056" q2="0.170056" q3="0.686353" id="524" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="95.6058" t1="-40.2804" t2="266.9" s0="0.610067" s1="0.414343" s2="0.373159" q0="0" q1="0.837118" q2="0" q3="0.547022" id="525" version="1">
+        <parameters/>
+        <EnvObject t0="95.6039" t1="-40.2804" t2="266.901" s0="1" s1="1.62264" s2="1" q0="0" q1="0.847319" q2="0" q3="0.531084" id="526" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="95.606" t1="-40.2986" t2="266.9" s0="0.242408" s1="0.621975" s2="0.515237" q0="0.375533" q1="0.599145" q2="-0.599145" q3="0.375534" id="527" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="94.7652" t1="-40.2667" t2="276.005" s0="0.610067" s1="0.414343" s2="0.373159" q0="0" q1="0.205129" q2="0" q3="0.978735" id="528" version="1">
+        <parameters/>
+        <EnvObject t0="94.7644" t1="-40.2667" t2="276.004" s0="1" s1="1.62264" s2="1" q0="0" q1="0.223612" q2="0" q3="0.974678" id="529" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="94.7647" t1="-40.2849" t2="276.006" s0="0.242408" s1="0.621975" s2="0.515237" q0="0.689202" q1="0.158117" q2="-0.158117" q3="0.689201" id="530" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="92.0028" t1="-40.8128" t2="275.692" s0="1" s1="1" s2="1" q0="-0.0662058" q1="0.0928002" q2="0.0229443" q3="0.993216" id="531" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_covered.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.869" t1="-40.6168" t2="267.7" s0="1" s1="1" s2="1" q0="0.0189968" q1="-0.242185" q2="0.126934" q3="0.961703" id="532" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolChisel.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.791" t1="-40.6383" t2="267.74" s0="1" s1="1" s2="1" q0="0.036235" q1="-0.367721" q2="0.0636296" q3="0.927049" id="533" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolAwl.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="98.4245" t1="-39.1186" t2="268.894" s0="0.097519" s1="0.0699174" s2="0.172099" q0="0.575737" q1="-0.266436" q2="-0.681309" q3="0.365181" id="534" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.594" t1="-44.3459" t2="247.711" s0="2.5842" s1="5.43688" s2="9.52883" q0="-0.709061" q1="-0.000740693" q2="0.000417292" q3="0.705147" id="535" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="107.321" t1="-40.8591" t2="272.083" s0="1" s1="1" s2="1" q0="0" q1="0.99998" q2="0" q3="0.00632885" id="537" type_file="Data/Objects/therium/IGF_Characters/gunk.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1.3"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.04"/>
+            <parameter name="Damage Resistance" type="string" val="22222222222222222222222222222222222222222222222222222222"/>
+            <parameter name="Ear Size" type="string" val="0.8"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="3"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.6000000000000001"/>
+            <parameter name="Name" type="string" val="Gunk"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="1"/>
+            <parameter name="Teams" type="string" val="turner, player, ghost"/>
+        </parameters>
+        <Connections>
+            <Connection id="544"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <Hotspot t0="113.338" t1="-43.8093" t2="259.135" s0="0.900156" s1="2.40441" s2="0.47248" q0="0" q1="-0.252818" q2="0" q3="0.967514" id="541" type_file="Data/Objects/Hotspots/levelwin.xml">
+        <parameters>
+            <parameter name="branch" type="string" val="begin"/>
+        </parameters>
+    </Hotspot>
+    <DynamicLightObject t0="112.048" t1="-40.3475" t2="271.07" s0="1.88741" s1="1.88741" s2="1.88741" q0="0" q1="0" q2="0.000174046" q3="1" id="542" color_r="0.541176" color_g="0" color_b="1" overbright="50">
+        <parameters/>
+    </DynamicLightObject>
+    <PathPointObject t0="107.197" t1="-41.1892" t2="272.305" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="544" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Sit"/>
+            <parameter name="Wait" type="string" val="1"/>
+        </parameters>
+        <Connections/>
+    </PathPointObject>
+    <PlaceholderObject t0="109.503" t1="-40.8506" t2="271.82" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="545" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/t2/e/b4-f_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Poop"/>
+            <parameter name="Name" type="string" val="Houdini"/>
+            <parameter name="NumParticipants" type="int" val="4"/>
+            <parameter name="obj_1" type="int" val="546"/>
+            <parameter name="obj_2" type="int" val="547"/>
+            <parameter name="obj_3" type="int" val="548"/>
+            <parameter name="obj_4" type="int" val="3"/>
+        </parameters>
+        <Connections>
+            <Connection id="545"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="108.978" t1="-40.1506" t2="271.82" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="1" q2="0" q3="0" id="546" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="2"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="109.328" t1="-40.1506" t2="271.82" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="1" q2="0" q3="0" id="547" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="537"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="109.678" t1="-40.1506" t2="271.82" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="1" q2="0" q3="0" id="548" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="411"/>
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="100.615" t1="-39.6355" t2="270.105" s0="0.397665" s1="0.923057" s2="0.884186" q0="0" q1="0" q2="0" q3="1" id="549" type_file="Data/Objects/Hotspots/start_dialogue.xml">
+        <parameters>
+            <parameter name="Automatic" type="string" val="1"/>
+            <parameter name="Dialogue" type="string" val="Poop"/>
+            <parameter name="Visible in game" type="string" val="0"/>
+        </parameters>
+    </Hotspot>
+    <Decal t0="101.505" t1="-68.7909" t2="243.34" s0="12.505" s1="0.737609" s2="12.505" q0="0" q1="0" q2="0" q3="1" id="551" type_file="Data/Objects/therium/Decals/ya.xml" color_r="0.992157" color_g="0.992154" color_b="0.992147" overbright="24.294">
+        <parameters/>
+    </Decal>
+    <Hotspot t0="102.868" t1="-44.5907" t2="247.471" s0="2.02802" s1="0.0694406" s2="2.5329" q0="0" q1="0" q2="0" q3="1" id="552" type_file="Data/Objects/Hotspots/generic_kill.xml">
+        <parameters>
+            <parameter name="KillNPC" type="int" val="1"/>
+            <parameter name="KillPlayer" type="int" val="1"/>
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="120.573" t1="-66.3808" t2="237.551" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="553" type_file="Data/Objects/Hotspots/must_visit_trigger.xml">
+        <parameters/>
+    </Hotspot>
+    <EnvObject t0="110.801" t1="-40.6521" t2="267.832" s0="1" s1="1" s2="1" q0="0.067834" q1="-0.575634" q2="0.0540025" q3="0.813098" id="554" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.804" t1="-40.6435" t2="267.836" s0="1" s1="1" s2="1" q0="-0.995748" q1="-0.0839845" q2="0.0311182" q3="0.0215467" id="555" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="110.795" t1="-40.6365" t2="267.822" s0="1" s1="1" s2="1" q0="0.661167" q1="0.073337" q2="-0.745212" q3="0.0462484" id="556" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="116.198" t1="-41.6201" t2="252.015" s0="0.85762" s1="0.85762" s2="0.85762" q0="-0.171458" q1="0.359757" q2="0.712162" q3="0.577929" id="557" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="115.849" t1="-41.0691" t2="251.434" s0="0.645091" s1="0.645091" s2="0.645091" q0="0.0889019" q1="0.198929" q2="0.705104" q3="0.674798" id="558" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="115.871" t1="-41.5639" t2="251.531" s0="0.389655" s1="0.389655" s2="0.389655" q0="0.772236" q1="-0.567156" q2="-0.00354834" q3="0.286309" id="559" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="113.368" t1="-39.5183" t2="256.669" s0="1.18288" s1="1.15332" s2="0.950595" q0="0.866408" q1="0.430979" q2="-0.0560454" q3="0.245872" id="560" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="107.288" t1="-41.0551" t2="272.198" s0="0.294414" s1="0.294414" s2="0.294414" q0="0" q1="0" q2="0" q3="1" id="561" type_file="Data/Objects/therium/Hotspots/gankarm.xml">
+        <parameters>
+            <parameter name="Name" type="string" val="Gunk"/>
+        </parameters>
+    </Hotspot>
+    <Decal t0="112.591" t1="-40.7932" t2="251.312" s0="1.66133" s1="0.674958" s2="1.66132" q0="0.234585" q1="0.464931" q2="-0.845451" q3="0.118374" id="562" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="101.824" t1="-71.1041" t2="246.919" s0="21.1374" s1="44.4708" s2="77.9408" q0="-0.709061" q1="-0.000740693" q2="0.000417292" q3="0.705147" id="563" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="89.728" t1="-41.0553" t2="271.209" s0="0.600343" s1="0.546621" s2="0.35552" q0="0.0021311" q1="0.265869" q2="-0.0171718" q3="0.963854" id="564" version="1">
+        <parameters/>
+        <EnvObject t0="89.7265" t1="-41.0553" t2="271.207" s0="1" s1="2.15352" s2="1" q0="0.0021311" q1="0.265872" q2="-0.0171719" q3="0.963853" id="565" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="89.7262" t1="-41.0863" t2="271.209" s0="0.242408" s1="0.621975" s2="0.515237" q0="0.683057" q1="0.17586" q2="-0.20014" q3="0.680037" id="566" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Hotspot t0="109.392" t1="-41.0475" t2="272.37" s0="0.102211" s1="0.102211" s2="0.102211" q0="0" q1="0" q2="0" q3="1" id="579" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+        <parameters>
+            <parameter name="Delay Max" type="float" val="10"/>
+            <parameter name="Delay Min" type="float" val="3"/>
+            <parameter name="Fade Distance" type="float" val="1"/>
+            <parameter name="Gain" type="float" val="1"/>
+            <parameter name="Global" type="int" val="0"/>
+            <parameter name="Sound Path" type="string" val="Data/Sounds/voice/kill_intent_1.wav"/>
+            <parameter name="Wind Scale" type="int" val="0"/>
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="116.166" t1="-34.5613" t2="285.725" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="583" type_file="Data/Objects/therium/Hotspots/remove_object.xml">
+        <parameters>
+            <parameter name="Object name to disappear" type="string" val="Houdini"/>
+        </parameters>
+    </Hotspot>
+    <Group t0="102.449" t1="-69.2758" t2="250.902" s0="9.4305" s1="1.59354" s2="3.88494" q0="0" q1="0" q2="0" q3="1" id="584" version="1">
+        <parameters/>
+        <EnvObject t0="97.908" t1="-69.2758" t2="251.003" s0="0.16918" s1="0.791768" s2="1.60908" q0="0" q1="0" q2="0" q3="1" id="567" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.263" t1="-69.2758" t2="251.028" s0="0.16918" s1="0.791768" s2="1.60908" q0="0" q1="0" q2="0" q3="1" id="568" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="98.8853" t1="-69.2758" t2="250.265" s0="0.14911" s1="0.791768" s2="1.25605" q0="0" q1="0.404823" q2="0" q3="0.914395" id="569" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="98.8672" t1="-69.2758" t2="251.761" s0="0.14911" s1="0.791768" s2="1.25605" q0="0" q1="0.904413" q2="0" q3="0.426658" id="570" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.936" t1="-69.2758" t2="249.586" s0="0.16197" s1="0.791768" s2="0.552401" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="571" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.936" t1="-69.2758" t2="250.951" s0="0.16197" s1="0.791768" s2="0.552401" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="572" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="100.936" t1="-69.2758" t2="252.485" s0="0.16197" s1="0.791768" s2="0.552401" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="573" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="102.312" t1="-69.2758" t2="250.975" s0="0.16918" s1="0.791768" s2="1.60908" q0="0" q1="-0.0572969" q2="0" q3="0.998357" id="574" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="102.988" t1="-69.2758" t2="250.915" s0="0.16918" s1="0.791768" s2="1.60908" q0="0" q1="0.117743" q2="0" q3="0.993044" id="575" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="102.668" t1="-69.2758" t2="250.992" s0="0.16197" s1="0.791768" s2="0.552401" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="576" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="104.371" t1="-69.2758" t2="249.457" s0="0.16197" s1="0.791768" s2="0.552401" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="577" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="104.387" t1="-69.2758" t2="251.185" s0="0.16918" s1="0.791768" s2="1.60908" q0="0" q1="0" q2="0" q3="1" id="578" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="105.553" t1="-69.2758" t2="251.179" s0="0.16918" s1="0.791768" s2="1.60908" q0="0" q1="0" q2="0" q3="1" id="580" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="106.233" t1="-69.2758" t2="250.917" s0="0.16197" s1="0.791768" s2="0.552401" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="581" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="106.975" t1="-69.2758" t2="250.902" s0="0.183947" s1="0.791768" s2="1.93747" q0="0" q1="0" q2="0" q3="1" id="582" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Hotspot t0="102.48" t1="-76.2016" t2="245.945" s0="6.40726" s1="15.3228" s2="6.40726" q0="0" q1="0" q2="0" q3="1" id="585" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+        <parameters>
+            <parameter name="Delay Max" type="float" val="10"/>
+            <parameter name="Delay Min" type="float" val="3"/>
+            <parameter name="Fade Distance" type="float" val="1"/>
+            <parameter name="Gain" type="float" val="1"/>
+            <parameter name="Global" type="int" val="0"/>
+            <parameter name="Sound Path" type="string" val="Data/Objects/therium/characters/rabbits/jumpscare.wav"/>
+            <parameter name="Wind Scale" type="int" val="0"/>
+        </parameters>
+    </Hotspot>
+    <Decal t0="101.448" t1="-68.5951" t2="245.804" s0="23.972" s1="23.972" s2="23.972" q0="0" q1="0" q2="0" q3="1" id="586" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="97.5582" t1="-37.7263" t2="275.686" s0="0.250435" s1="0.250436" s2="0.0386053" q0="0.626341" q1="-0.321362" q2="0.321087" q3="0.633502" id="588" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/coast_rock_large.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="98.8557" t1="-36.6634" t2="276.84" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="589" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="100"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="1"/>
+            <parameter name="Teams" type="string" val="tiaewjitwET"/>
+        </parameters>
+        <Connections>
+            <Connection id="589"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Clothes" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Fur" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Leather" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Armor" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <Prefab t0="120.1" t1="-66.4023" t2="248.506" s0="4.01" s1="4.01" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="594" version="1" prefab_locked="true" prefab_path="Data/Prefabs/hotspot_jumpwounded.xml" os0="4.01" os1="4.01" os2="4.01">
+        <parameters/>
+        <Hotspot t0="120.1" t1="-66.4023" t2="248.506" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" type_file="Data/Objects/therium/Hotspots/player_jump_height.xml">
+            <parameters>
+                <parameter name="Initial Jetpack Fuel" type="int" val="1"/>
+                <parameter name="Initial Jump Velocity Multiplier" type="float" val="0.65217"/>
+            </parameters>
+        </Hotspot>
+    </Prefab>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="Male Civilian Rabbit" path="Data/Objects/therium/IGF_Characters/JairoActor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_RabbitCivActor.png"/>
+    <SpawnerItem display_name="Ambient sound hotspot" path="Data/Objects/Hotspots/ambient_sound.xml" thumbnail_path="Data/UI/spawner/thumbs/Sounds/speaker_icon.png"/>
+    <SpawnerItem display_name="ya.xml" path="Data/Objects/therium/Decals/ya.xml" thumbnail_path="empty_placeholder.png"/>
+    <SpawnerItem display_name="Edged Stone Cube" path="Data/Objects/primitives/edged_cube.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/edged_cube.png"/>
+    <SpawnerItem display_name="Blood Spatter" path="Data/Objects/Decals/bloodspatter.xml" thumbnail_path="Data/UI/spawner/thumbs/Decal/bloodspatter.png"/>
+    <SpawnerItem display_name="Male Rabbit Guard" path="Data/Objects/IGF_Characters/base_guard_actor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/base_guard_actor.png"/>
+    <SpawnerItem display_name="hotspot_jumpwounded.xml" path="Data/Prefabs/hotspot_jumpwounded.xml" thumbnail_path="empty_placeholder.png"/>
+</RecentItems>

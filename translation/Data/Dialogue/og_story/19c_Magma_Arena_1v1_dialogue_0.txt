@@ -1,0 +1,9 @@
+#name "Win"
+#participants 1
+set_character_pos 1 18.7327 4.95933 3.52645 0
+set_cam 19.7529 5.264 4.81802 0 31.45 0 90
+say 1 "Turner" "I won."
+say 1 "Turner" "But what did I win?"
+say 1 "Turner" "Another day of life, another bowl of mush."
+say 1 "Turner" "Better than dying in the dirt."
+send_global_message "levelwin"

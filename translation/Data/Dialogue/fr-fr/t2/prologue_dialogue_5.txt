@@ -1,0 +1,21 @@
+#name "Note-Spirits"
+#participants 2
+set_character_pos 1 -24.2959 420.679 -120.573 85
+send_character_message 1 "set_head_target -24.2018 421.01 -121.37 1"
+set_cam -25.6283 421.221 -119.993 0 -56.31 0 46.8474
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Message de quelques gardes à [wait 0.3]Qui sait..."
+set_cam -23.4018 421.168 -118.903 0 12.27 0 46.8474
+send_character_message 1 "set_head_target -24.2656 420.958 -121.095 1"
+set_character_pos 1 -24.2959 420.633 -120.573 85
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Signature de moi-même pour la division de la construction était une erreur. [wait 0.5]Je savais que ce serait, [wait 0.3]elle m’a dit que ce serait, [wait 0.3]mais ici je suis de toute façon."
+say 2 "Note" "Je prendrais du Scoutisme dans les rues noyées au cours de cette. [wait 0.5]Oui, [wait 0.3]bien sûr, [wait 0.3]J’obtiendrais poignardé et battu par quelque escroc au hasard vient à ma rencontre."
+say 2 "Note" "Mais au moins je n’ai pas à faire face à la pensée que tout le monde j’ai jamais connu et aimé mourra un horrible, [wait 0.3]mort certaine."
+say 2 "Note" "Je n’exagère pas un peu. [wait 0.5]Vous pouvez dire que je vais être bizarre tous souhaitée, [wait 0.3]mais je sais que j’ai raison."
+say 2 "Note" "C’est tous de folklore et de mythe, [wait 0.3]légende et conte, [wait 0.3]mais croyez-moi ; [wait 0.3]les esprits de la Therium aura se venger sur nous pour chaque pic de la Crète, que nous avons volé à eux."
+say 2 "Note" "Un jour nous allons aller trop loin, [wait 0.3]et l’armée possédait des dieux va pleuvoir la mort sur nous par le biais d’imprévisibles intrigant petits bâtards."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Vous pouvez m’appeler un idiot. [wait 0.5]Mais dans les histoires, [wait 0.3]mythe toujours s’avère vrai, [wait 0.3]et les opposants souffrent. [wait 0.5]Ce ne sera pas une exception, [wait 0.3]pour ce qui est notre vie, mais une histoire ?"

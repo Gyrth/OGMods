@@ -1,0 +1,23 @@
+#name "Start"
+#participants 2
+send_character_message 1 "set_head_target -18.9099 92.8563 13.1368 0.000351012"
+send_level_message "set_camera_dof 0.3 10 10 0 0 0"
+send_level_message "set_camera_dof 0.3 10 10 0 0 0"
+set_character_pos 2 -14.6507 111.923 12.5357 -160
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+set_character_pos 1 -15.3538 111.639 14.9765 127
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+set_cam -14.294 112.991 11.0793 -44.47 140.23 5.08 90
+say 2 "Midnight" "C’est aussi proche que je peux vous emmener. Ils sont réunis au fond de cette grotte."
+send_character_message 1 "set_head_target -15.0615 112.224 12.4745 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Turner" "Je vais prendre soin d’eux."
+send_character_message 2 "set_head_target -15.8966 111.51 14.5898 1"
+say 2 "Midnight" "Soyez prudent et revenez quand vous avez terminé. Si améthyste apprend que garde est à nos côtés..."
+send_character_message 1 "set_head_target -15.9688 110.851 13.7438 1"
+say 1 "Turner" "Je sais. Elle va mourir, mais pas avant qu’elle a torturés et forcés à abandonner les noms de chaque sympathisant elle sait."
+send_character_message 2 "set_head_target -16.4926 110.852 14.0467 1"
+say 2 "Midnight" "Et ne pas se laisser distraire, tuant les gardes. Restez concentré sur la mission."
+send_character_message 1 "set_head_target -15.6032 111.969 12.6427 1"
+say 1 "Turner" "Je vais essayer, mais pas de promesses."
+set_character_pos 1 -17.9719 92.4009 13.1218 180

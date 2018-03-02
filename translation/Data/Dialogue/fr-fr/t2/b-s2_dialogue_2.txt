@@ -1,0 +1,13 @@
+#name "NotAlive"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "empty_hands"
+set_character_pos 1 -167.013 23.2144 70.3798 -60
+send_character_message 1 "set_eye_dir -164.209 24.9302 74.9732 1"
+send_character_message 1 "set_head_target -165.166 23.716 73.4391 1"
+set_cam -167.773 23.9386 71.8605 0 -30.25 0 48.7522
+say 1 "Ghost" "Qui diable étaient-ils ?"
+send_character_message 1 "set_head_target -155.846 23.1514 83.3744 1"
+set_cam -168.47 24.4449 69.4343 -16.77 -134.48 0 58.1838
+say 1 "Ghost" "Incrustés dans la saleté, [wait 0.3]et les griffes comme des loups..."

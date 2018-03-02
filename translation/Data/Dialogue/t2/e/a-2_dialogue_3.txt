@@ -1,0 +1,18 @@
+#name "Note-Cicada"
+#participants 2
+set_character_pos 1 -40.0833 106.178 172.688 0
+send_character_message 1 "set_head_target -39.2955 106.554 172.737 1"
+set_cam -40.7468 106.734 173.762 0 -45.79 0 50.3116
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "A reply to a guardsman's letter..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -39.2995 106.833 173.504 0 33.49 0 32.4243
+say 2 "Note" "A Cicada? [wait 0.5]Really? [wait 0.5]Flying overhead, [wait 0.3]in Preuwyn? Do I look like an idiot?"
+say 2 "Note" "Did you come up with some bet with your friends, [wait 0.3]try and make up the most ridiculous claim possible and see if I fall for it?"
+say 2 "Note" "I know two things about the Ouran Cicadas: [wait 0.3]For one, [wait 0.3]they never go into Preuwyn. [wait 0.5]The cold will eat them alive. [wait 0.3]Two, [wait 0.3]they're very, [wait 0.3]very rarely out and about when it isn't mating season."
+say 2 "Note" "Cicadas, [wait 0.3]Ouran included, [wait 0.3]only burrow out every seventeen years, [wait 0.3]when its mating season is in full effect. 672 is not a mating season year - [wait 0.3]not even close."
+say 2 "Note" "The idea that you saw an alive Ouran Cicada without your eardrums shattering should give you away, [wait 0.3]even if your tale is true."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Go rob someone else, [wait 0.3]you fruit."

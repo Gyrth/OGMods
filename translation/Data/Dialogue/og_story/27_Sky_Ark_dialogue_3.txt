@@ -1,0 +1,25 @@
+#name "GuardFight"
+#participants 3
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+set_character_pos 3 -85.1176 191.472 179.343 -31
+set_character_pos 2 -85.5132 191.391 180.274 16
+set_character_pos 1 -83.7147 191.512 180.437 177
+set_dialogue_color 2 0.7 0.7 1.0
+set_dialogue_color 3 0.6 0.6 0.6
+set_cam -82.1918 192.009 179.685 0 97 0 60.5819
+send_level_message "set_camera_dof 0 0 0 0.3 6 3"
+say 2 "Dot" "Ugh, another groundling. They never learn."
+send_character_message 3 "set_head_target -85.5066 192.255 180.236 1"
+send_character_message 2 "set_head_target -81.1505 193.819 179.701 0"
+say 3 "Pine" "What's gotten into them?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "The cats..."
+send_character_message 2 "set_head_target -83.6624 192.293 180.504 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Dot" "Forget it. We've heard all your sob stories. So boring."
+send_character_message 3 "set_head_target -83.6692 192.252 180.387 1"
+say 3 "Pine" "Let's make an example out of this one."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 2 "Dot" "Good idea! Haven't seen a rabbit fly in a while."
+make_participants_aware

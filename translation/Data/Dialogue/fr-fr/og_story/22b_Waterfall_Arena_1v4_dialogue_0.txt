@@ -1,0 +1,13 @@
+#name "Start"
+#participants 5
+set_character_pos 5 15.7109 94.7436 328.492 63
+set_character_pos 4 39.127 90.9576 309.581 168
+set_character_pos 3 13.6052 93.1966 287.532 -62
+set_character_pos 2 35.5005 90.4101 279.97 -126
+set_character_pos 1 24.4151 94.5828 311.439 -85
+set_cam 24.9363 95.1626 312.523 0 29.14 0 90
+say 1 "Turner" "Ce n’est pas juste."
+say 1 "Turner" "Il y a quatre d'entre vous..."
+say 1 "Turner" "Seulement quatre d'entre vous."
+say 1 "Turner" "Et j’ai une lance."
+make_participants_aware

@@ -1,0 +1,18 @@
+#name "NLG-ToB"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 107.871 -47.9299 253.993 -87
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir 107.948 -47.1462 255.217 1"
+send_character_message 1 "set_head_target 107.923 -46.7691 255.09 1"
+set_cam 103.731 -47.4096 248.854 0 -146.41 0 52.4723
+send_level_message "set_camera_dof 0 0 0 0.3 10 2"
+say 1 "You" "..."
+send_character_message 1 "set_head_target 107.923 -46.7691 255.09 0"
+set_character_pos 1 107.871 -47.991 253.993 -87
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+say 1 "You" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+say 1 "You" "Alright, [wait 0.3]let's see what this does..."
+send_global_message "levelwin b"

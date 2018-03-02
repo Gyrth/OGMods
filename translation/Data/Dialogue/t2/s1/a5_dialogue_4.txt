@@ -1,0 +1,13 @@
+#name "Note-Racism"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -10.5661 -5.71948 74.8505 -96
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target -10.6798 -5.49618 75.7174 1"
+set_cam -9.99867 -5.14357 76.5166 0.74 16.45 -0.42 35.1181
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Fure [wait 0.1]uiea [wait 0.1]yeu [wait 0.1]nue [wait 0.1]fuiot [wait 0.1]frei [wait 0.1]uerta [wait 0.1]buionc? [wait 0.5]I have no idea what this is saying."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam -10.01 -4.41081 74.4014 -41.27 144.86 1.49 25.8642
+say 1 "Ghost" "...[wait 0.3]well at least I can read the cover."

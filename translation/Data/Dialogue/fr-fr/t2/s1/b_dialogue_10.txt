@@ -1,0 +1,18 @@
+#name "Note-Scout"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 86.6623 -62.7353 303.059 170
+send_character_message 1 "set_head_target 85.9736 -62.3514 302.724 1"
+set_cam 87.3575 -62.1744 302.299 0 118.82 0 65.8249
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un ensemble de notes de l’éclaireur de le Cinderbreathe..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 85.9205 -62.1048 303.616 0 -32.08 0 65.8249
+say 2 "Note" "Ces motifs de colonie sont si étranges... [wait 0.3]ils ont plus de variété dans un terrain que le continent tout entier à côté de nous."
+say 2 "Note" "Forêt, [wait 0.3]désert, [wait 0.3]montagne, [wait 0.3]toundra... [wait 0.5]tous sauf les marais que j’ai vu. [wait 0.5]Il ne se sent pas naturel, [wait 0.3]mais là encore, [wait 0.3]rien ici ne."
+say 2 "Note" "Chaque colline majeur que nous rencontrons habituellement a une foule de ces lanternes de Pierre étranges. [wait 0.5]Je ne peux pas m’empêcher de me sentir comme je suis surveillé."
+say 2 "Note" "Nous sommes maintenant dans la ligne droite du désert. [wait 0.5]Les ruines antiques font de bons points de repère, [wait 0.3]Sacrebleu mais si ils ne sont pas poussiéreux."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Juste dormir par ces choses, [wait 0.3]Je dois traiter avec essuyage loin le sable... [wait 0.5]probablement loin d’être aussi mauvais que Ouran, [wait 0.3]Cependant."

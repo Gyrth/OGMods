@@ -1,0 +1,21 @@
+#name "Note-Arliss"
+#participants 2
+set_character_pos 1 171.07 -48.8527 157.516 90
+send_character_message 1 "set_head_target 171.186 -48.4564 156.943 1"
+set_cam 172.131 -48.3915 157.726 0 61.86 0 56.5533
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "Ghost" "Un livre sur le collectif Arlissian..."
+send_character_message 1 "set_head_target 171.01 -48.4564 156.883 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 171.563 -48.2698 156.333 0 152.82 0 56.5533
+say 2 "Note" "Les chats dans les mesas du sud de Preuwyn sont trompent parfois pour être autre chose que nos ennemis ; [wait 0.3]mais ne soyez pas dupe.
+say 2 "Note" "Tout chat affilié à la Arliss est lié à la triche, [wait 0.3]exploiter et trahir aussi longtemps que c’est dans leurs intérêts."
+say 2 "Note" "Membres du collectif Arlissian sont même connues pour attirer les kits imprudents dans les déserts, [wait 0.3]les battre et capturer pour servir plus tard dans le pays Arliss."
+say 2 "Note" "A partir de là, [wait 0.3]ils soumettent, beat et torturent nos enfants dans leur version tordue de « élever », [wait 0.3]ancien Cinderbreathe lapins pour devenir serviteurs pour les chats d’élevage."
+say 2 "Note" "Pensée rationnelle a été brûlée sur ces pauvres lapins, [wait 0.3]allumer leur portée seule réalité à fournir la nourriture pour leurs nouveaux maîtres."
+say 2 "Note" "Mais peu importe, [wait 0.3]nous les lapins savent qu'il y a toujours une fin à ces actes de torture ; [wait 0.3]dès le début des violences, [wait 0.3]Nous savons en tenir vers le haut pour nous-mêmes, [wait 0.3]peu importe le coût. [wait 0.5]Pour chaque kit volé chez nous, [wait 0.3]une nouvelle déclenche un coup de poing contre leurs dictateurs maléfiques."
+say 2 "Note" "Croyez-moi, [wait 0.3]le « Kaicalk » (comme ils appellent dans leur langue) sera la première étape en détruisant le collectif Arlissian et libère de la domination de l’Empire glorieux de Cinderbreathe sur Preuwyn."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "... source d’inspiration."

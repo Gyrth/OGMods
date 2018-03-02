@@ -1,0 +1,11 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 4.39504 -1.94966 4.45151 0
+set_cam 5.78498 -1.54821 4.72248 0 77.37 0 90
+say 1 "Turner" "I won! Now I can go to the cat duel."
+send_global_message "levelwin"
+
+
+
+

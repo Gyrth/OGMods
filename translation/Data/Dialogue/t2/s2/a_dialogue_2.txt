@@ -1,0 +1,32 @@
+#name "Bother"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 12.0978 21.9939 -156.46 18
+send_character_message 2 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 2 "set_eye_dir 18.7364 17.1012 -160.294 1"
+send_character_message 2 "set_head_target 19.5318 16.8566 -160.623 1"
+set_character_pos 1 19.5979 15.9746 -159.335 -159
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir 16.6517 16.5739 -159.562 1"
+send_character_message 1 "set_head_target 16.9053 16.3849 -159.64 1"
+set_cam 18.2842 16.267 -162.406 0 -160.63 0 26.4038
+send_level_message "set_camera_dof 0 0 0 0.3 9 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 13.0371 21.9154 -156.813 1"
+send_character_message 1 "set_eye_dir 12.8591 22.1457 -156.771 1"
+say 2 "Jairo" "Are they dead yet?"
+set_cam 20.8181 15.8165 -159.516 30 109.37 0 26.4038
+send_level_message "set_camera_dof 0.3 4 1 0 0 0"
+say 2 "Jairo" "One alive?"
+send_character_message 1 "set_head_target 13.0371 22.5169 -156.813 1"
+send_character_message 2 "set_head_target 18.3324 17.2884 -158.711 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "No, [wait 0.2]not yet."
+set_character_pos 1 21.5385 15.9746 -160.08 -159
+send_character_message 1 "set_eye_dir 21.1 15.9791 -155.974 1"
+send_character_message 1 "set_head_target 17.8538 16.5431 -156.998 1"
+set_cam 20.6062 16.3783 -161.559 0 -156.21 0 26.4038
+say 1 "Ghost" "Just looking around here."

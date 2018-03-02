@@ -1,0 +1,18 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 30.6125 35.6552 -58.7975 -178
+send_character_message 1 "set_torso_target 29.8421 35.8082 -59.2138 1"
+send_character_message 1 "set_head_target 20.828 35.3937 -64.7637 1"
+set_cam 33.9819 35.9132 -51.8713 0 34.37 0 33.0771
+send_level_message "set_camera_dof 0.3 14 3 0 0 0"
+say 1 "Ghost" "Woah..."
+set_cam 72.4871 11.1654 -82.1615 12.77 86.75 0 58.7693
+send_level_message "set_camera_dof 0.3 50 25 0 0 0"
+say 1 "Ghost" "Comment sont forment les roches comme ça ?"
+send_character_message 1 "set_torso_target 29.6518 35.5653 -59.0547 1"
+send_character_message 1 "set_head_target 20.8603 36.7286 -57.4876 1"
+set_cam 30.1563 35.8994 -60.9217 0 -175.1 0 58.7693
+send_level_message "set_camera_dof 0 0 0 0.3 14 3"
+say 1 "Ghost" "Je ne vois pas nulle part de Jairo. [wait 0.5]Ne devrait pas être un problème, [wait 0.3]Cependant."

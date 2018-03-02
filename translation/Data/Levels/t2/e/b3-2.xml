@@ -1,0 +1,836 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>E-B3-2</Name>
+<Description>Desperate, you search for Bijou in the Cinderbreathe Empry...</Description>
+<Shader>post</Shader>
+<LoadingScreen>
+    <Image>Data/LevelLoading/t2/e/b3-2.jpg</Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Textures/black.tga</Heightmap>
+    <ShaderExtra/>
+    <DetailMap/>
+    <ColorMap>Data/Textures/black.tga</ColorMap>
+    <WeightMap>Data/Textures/black.tga</WeightMap>
+    <ModelOverride>Data/Models/flat.obj</ModelOverride>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/black.tga" normalpath="Data/Textures/normal.tga" materialpath="Data/Materials/rocks.xml"/>
+        <DetailMap colorpath="Data/Textures/black.tga" normalpath="Data/Textures/normal.tga" materialpath="Data/Materials/gravel.xml"/>
+        <DetailMap colorpath="Data/Textures/black.tga" normalpath="Data/Textures/normal.tga" materialpath="Data/Materials/sand.xml"/>
+        <DetailMap colorpath="Data/Textures/black.tga" normalpath="Data/Textures/normal.tga" materialpath="Data/Materials/rock.xml"/>
+    </DetailMaps>
+    <DetailObjects/>
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251"/>
+<AmbientSounds>
+    <Ambient path="Data/Sounds/ambient/amb_ice_wind"/>
+</AmbientSounds>
+<Script>levelscripts/therium_per_level_script.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills"/>
+    <parameter name="Fog amount" type="string" val="0"/>
+    <parameter name="HDR Black point" type="string" val="0.019"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="0.8250000000000001"/>
+    <parameter name="HDR White point" type="string" val="1.165"/>
+    <parameter name="Level Boundaries" type="string" val="0"/>
+    <parameter name="Load Tip" type="string" val="Ghost and Bijou's spot in the Empry was formerly held for Edsel, their father."/>
+    <parameter name="Objectives" type="string" val="destroy_all, must_visit_trigger"/>
+    <parameter name="Saturation" type="float" val="1"/>
+    <parameter name="Sky Brightness" type="string" val="0.11"/>
+    <parameter name="Sky Rotation" type="string" val="-136"/>
+    <parameter name="Sky Tint" type="string" val="255, 255, 255"/>
+    <parameter name="cold_breath" type="string" val="true"/>
+</LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60"/>
+<Sky>
+    <DomeTexture>Data/Textures/skies/stormy1.tga</DomeTexture>
+    <SunAngularRad>0.288792</SunAngularRad>
+    <SunColorAngle>296.401</SunColorAngle>
+    <RayToSun r0="-0.598927" r1="0.103527" r2="-0.794084"/>
+</Sky>
+<ActorObjects>
+    <CameraObject t0="-20.2764" t1="320.954" t2="9.44608" s0="1" s1="1" s2="1" q0="0.0184748" q1="-0.98151" q2="0.131902" q3="0.137474" id="1">
+        <parameters/>
+    </CameraObject>
+    <EnvObject t0="-18.7326" t1="312.505" t2="20.3403" s0="1" s1="1" s2="1" q0="0" q1="-0.951855" q2="0" q3="0.306549" id="2" color_r="1" color_g="1" color_b="1" overbright="1" type_file="Data/Objects/Buildings/cat_town/hut_large.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="-16.8633" t1="313.176" t2="23.039" s0="1" s1="1" s2="1" q0="0" q1="-0.938289" q2="0" q3="0.345852" id="3" type_file="Data/Objects/therium/IGF_Characters/ghostnojump.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="2"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="0"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="10"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Movement Speed" type="string" val="0.4"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="0"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="player, Ghost, turner"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <PlaceholderObject t0="-18.9197" t1="310.889" t2="24.7145" s0="0.271914" s1="0.271914" s2="0.271914" q0="0" q1="-0.258819" q2="0" q3="0.965926" id="4" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-20.0013" t1="310.691" t2="23.7993" s0="0.287295" s1="0.287295" s2="0.287295" q0="0" q1="0.258819" q2="0" q3="0.965926" id="5" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+    </PlaceholderObject>
+    <Decal t0="-15.3733" t1="316.093" t2="21.3003" s0="1" s1="1" s2="1" q0="0" q1="-0.951855" q2="0" q3="0.306549" id="7" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <ReflectionCaptureObject t0="-15.5311" t1="316.431" t2="20.6537" s0="0.48742" s1="0.48742" s2="0.48742" q0="0" q1="-0.951855" q2="0" q3="0.306549" id="8" gicoeff00="0.0254326" gicoeff01="0.019989" gicoeff02="0.0188675" gicoeff03="0.0176125" gicoeff04="0.0154552" gicoeff05="0.0150318" gicoeff06="0.0199394" gicoeff07="0.0259018" gicoeff08="0.0296402" gicoeff09="0.028698" gicoeff10="0.0137424" gicoeff11="0.00836563" gicoeff12="0.0383835" gicoeff13="0.0224075" gicoeff14="0.01754" gicoeff15="0.0122795" gicoeff16="0.0155048" gicoeff17="0.0170155">
+        <parameters>
+            <parameter name="Global" type="string" val="1"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <EnvObject t0="-16.1676" t1="310.717" t2="23.8226" s0="1.14513" s1="1.31892" s2="0.999996" q0="0" q1="-0.926282" q2="0" q3="0.376831" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Door1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.948" t1="310.617" t2="18.9968" s0="0.274752" s1="0.274752" s2="0.274752" q0="0" q1="-0.191066" q2="0" q3="0.981577" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/lantern.xml">
+        <parameters/>
+    </EnvObject>
+    <DynamicLightObject t0="-20.8888" t1="310.775" t2="18.9648" s0="75.3193" s1="75.3193" s2="75.3193" q0="-0.00181961" q1="0.00191231" q2="0.000844836" q3="0.999996" id="11" color_r="10.6" color_g="3.90745" color_b="0" overbright="1">
+        <parameters/>
+    </DynamicLightObject>
+    <EnvObject t0="-22.7207" t1="310.556" t2="20.4145" s0="0.0434043" s1="0.0434043" s2="0.0434043" q0="0" q1="-0.998266" q2="0" q3="-0.0588732" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/mug.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.1464" t1="309.811" t2="17.4162" s0="1" s1="1" s2="1" q0="-0.384673" q1="0.286223" q2="0.127401" q3="0.868258" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bed.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.2022" t1="309.439" t2="19.7153" s0="1.24237" s1="1.71362" s2="1.9707" q0="0.635244" q1="-0.310588" q2="0.310588" q3="0.635244" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.7867" t1="309.552" t2="16.6768" s0="1" s1="1" s2="1" q0="0" q1="-0.461571" q2="0" q3="0.887103" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bed.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.2841" t1="309.588" t2="16.7748" s0="1.11784" s1="1" s2="2.81709" q0="0" q1="-0.454137" q2="0" q3="0.890932" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_tall_table.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.2321" t1="309.588" t2="22.6885" s0="1.23851" s1="1" s2="5.0157" q0="0" q1="0.365644" q2="0" q3="0.930755" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_tall_table.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.2022" t1="310.328" t2="19.7153" s0="1.24237" s1="1.71362" s2="1.9707" q0="-0.635245" q1="-0.310588" q2="-0.310588" q3="0.635244" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.2022" t1="311.231" t2="19.7153" s0="1.24237" s1="1.71362" s2="1.9707" q0="0.310588" q1="0.635245" q2="-0.635245" q3="0.310586" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.63" t1="313.948" t2="18.4752" s0="1.95324" s1="2.11504" s2="4.81062" q0="-0.412198" q1="0" q2="0.911094" q3="0.000690534" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.3815" t1="310.561" t2="20.4153" s0="0.0434043" s1="0.0434043" s2="0.0434043" q0="0" q1="0.202052" q2="0" q3="0.979375" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/mug.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.9233" t1="309.301" t2="19.4837" s0="1" s1="1" s2="1" q0="0.284598" q1="0.654553" q2="-0.649522" q3="0.262067" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Weapons/gabenife.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="-21.6238" t1="309.958" t2="21.7441" s0="0.0289263" s1="0.119251" s2="0.127396" q0="0" q1="-0.443449" q2="0" q3="0.8963" id="23" type_file="Data/Objects/Decals/hex_crete_damage.xml" color_r="0.0705882" color_g="0.0627451" color_b="0.054902" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-21.6163" t1="309.958" t2="21.8631" s0="0.0289263" s1="0.119251" s2="0.127396" q0="0" q1="0.851819" q2="0" q3="0.523836" id="24" type_file="Data/Objects/Decals/hex_crete_damage.xml" color_r="0.0705882" color_g="0.0627451" color_b="0.054902" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-21.6788" t1="309.958" t2="21.8646" s0="0.0289263" s1="0.119251" s2="0.127396" q0="0" q1="-0.380854" q2="0" q3="0.924635" id="25" type_file="Data/Objects/Decals/hex_crete_damage.xml" color_r="0.0705882" color_g="0.0627451" color_b="0.054902" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="-19.6004" t1="309.296" t2="22.7583" s0="1" s1="1" s2="1" q0="0.883699" q1="0" q2="-0.468054" q3="0" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bowl.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.5511" t1="309.978" t2="23.0004" s0="1" s1="1" s2="1" q0="0" q1="-0.866025" q2="0" q3="0.500001" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/plate.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.3224" t1="309.978" t2="22.049" s0="1" s1="1" s2="1" q0="0" q1="0.980601" q2="0" q3="0.196014" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/plate.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.5676" t1="309.99" t2="23.1159" s0="0.0345537" s1="0.0345537" s2="0.0345537" q0="0.70234" q1="0.0161281" q2="-0.0053221" q3="0.711639" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/carrot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.5862" t1="309.989" t2="23.0598" s0="0.0345537" s1="0.0345537" s2="0.0345537" q0="-0.704008" q1="-0.104071" q2="-0.0919646" q3="0.69648" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/carrot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.4605" t1="309.989" t2="22.9028" s0="0.0345537" s1="0.0345537" s2="0.0345537" q0="-0.364074" q1="0.598707" q2="0.609391" q3="0.371002" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/carrot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.5143" t1="310.012" t2="22.9942" s0="0.0174284" s1="0.0174284" s2="0.0174284" q0="-0.00467672" q1="0.858724" q2="0.00289587" q3="0.512409" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/applebit.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.2552" t1="311.153" t2="18.3258" s0="1" s1="1.42006" s2="1" q0="0" q1="0.324657" q2="0" q3="0.945832" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.1506" t1="312.634" t2="19.675" s0="1.24237" s1="1.71362" s2="1.9707" q0="-0.329145" q1="0.594873" q2="0.673199" q3="0.290849" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-23.7736" t1="311.153" t2="20.2856" s0="1" s1="1.42006" s2="1" q0="0" q1="0.324657" q2="0" q3="0.945832" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.5858" t1="311.153" t2="19.186" s0="1" s1="1.42006" s2="1" q0="0" q1="0.324657" q2="0" q3="0.945832" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-23.1042" t1="311.153" t2="21.1458" s0="1" s1="1.42006" s2="1" q0="0" q1="0.324657" q2="0" q3="0.945832" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.975" t1="309.268" t2="17.5133" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.8838" t1="309.533" t2="19.1268" s0="1" s1="1" s2="1" q0="0" q1="0.885254" q2="0" q3="0.465108" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.892" t1="309.599" t2="19.1175" s0="1" s1="1" s2="1" q0="0" q1="0.90038" q2="0" q3="0.435104" id="40" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.5844" t1="311.941" t2="18.1974" s0="0.821078" s1="0.975908" s2="1.00001" q0="-0.0109081" q1="0.370176" q2="-0.0173764" q3="0.928735" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.5987" t1="312.756" t2="18.2026" s0="0.821078" s1="0.975908" s2="1.00001" q0="0.00716591" q1="-0.92887" q2="0.00112459" q3="0.370335" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-19.6453" t1="312.038" t2="15.9037" s0="0.821078" s1="0.975908" s2="1.00001" q0="0.967273" q1="-0.0281869" q2="-0.252019" q3="0.00865237" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-19.6052" t1="312.749" t2="15.8795" s0="0.821078" s1="0.975908" s2="1.00001" q0="0.0235408" q1="0.251059" q2="0.0945307" q3="0.963057" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.5788" t1="309.518" t2="24.6652" s0="1.23851" s1="0.809233" s2="5.0157" q0="0" q1="0.908411" q2="0" q3="0.418078" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_tall_table.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.4198" t1="309.307" t2="19.8099" s0="2.10589" s1="2.28936" s2="1.57839" q0="0" q1="0.305856" q2="0" q3="0.952078" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rug.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-19.4646" t1="313.948" t2="19.8011" s0="1.95324" s1="2.11504" s2="4.81062" q0="-0.291468" q1="-0.291468" q2="0.644241" q3="0.644241" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.9653" t1="313.948" t2="22.6446" s0="1.95324" s1="2.11504" s2="4.81062" q0="0" q1="-0.412198" q2="0" q3="0.911094" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.1307" t1="313.948" t2="21.3187" s0="1.95324" s1="2.11504" s2="4.81062" q0="0" q1="-0.412198" q2="0" q3="0.911094" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.5871" t1="313.948" t2="21.9373" s0="1.95324" s1="2.11504" s2="4.81062" q0="0.412198" q1="0" q2="-0.911094" q3="0.000690534" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.7783" t1="313.948" t2="20.582" s0="1.95324" s1="2.11504" s2="4.81062" q0="0.911094" q1="0" q2="0.412198" q3="0.000690534" id="51" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.0465" t1="313.948" t2="19.1391" s0="1.95324" s1="2.11504" s2="4.81062" q0="0.291468" q1="-0.291468" q2="-0.644241" q3="0.644241" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.5673" t1="314.131" t2="20.8783" s0="1.82803" s1="2.29188" s2="1.56561" q0="0.243752" q1="-0.663766" q2="0.663766" q3="0.24375" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.0463" t1="314.131" t2="18.9586" s0="1.82803" s1="2.29188" s2="1.56561" q0="-0.666106" q1="-0.237282" q2="-0.237282" q3="0.666106" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.0241" t1="313.964" t2="23.7081" s0="1.49667" s1="2.77751" s2="2.87324" q0="-0.283299" q1="-0.283299" q2="0.647875" q3="0.647874" id="55" color_r="0.741176" color_g="0.741169" color_b="0.741169" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-15.3989" t1="313.964" t2="17.5469" s0="1.49667" s1="2.77751" s2="2.47445" q0="-0.326653" q1="-0.326653" q2="0.627135" q3="0.627134" id="56" color_r="0.741176" color_g="0.741169" color_b="0.741169" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.5215" t1="309.275" t2="17.6264" s0="1.33928" s1="1.33928" s2="1.33928" q0="0.707107" q1="0" q2="0" q3="0.707107" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bottle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-19.1133" t1="309.937" t2="25.2725" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/pot.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-18.76" t1="309.457" t2="24.1287" s0="0.444746" s1="0.965387" s2="0.448263" q0="-0.171049" q1="0.171049" q2="-0.686106" q3="0.686107" id="59" version="1">
+        <parameters/>
+        <EnvObject t0="-18.676" t1="309.456" t2="23.8735" s0="0.5428" s1="0.635384" s2="1" q0="-0.241899" q1="0" q2="-0.970301" q3="0" id="62" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_short_board.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-18.9975" t1="309.458" t2="24.2549" s0="1" s1="1" s2="1" q0="-0.171049" q1="0.171049" q2="-0.686106" q3="0.686107" id="63" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_stool.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-18.1946" t1="309.938" t2="23.9093" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="60" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/potrice.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.4682" t1="309.861" t2="24.2559" s0="0.75038" s1="0.75038" s2="0.75038" q0="0" q1="-0.241419" q2="0" q3="0.970421" id="61" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bowl.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.8474" t1="309.729" t2="20.7073" s0="1" s1="1" s2="1" q0="0" q1="-0.068808" q2="0" q3="0.99763" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/pots/slim_pitcher.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.5306" t1="309.443" t2="22.6258" s0="1" s1="1" s2="1" q0="0.637797" q1="-0.305312" q2="0.305312" q3="0.637796" id="66" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_stool.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.8638" t1="309.302" t2="20.5473" s0="1" s1="1" s2="1" q0="0.689338" q1="-0.157521" q2="0.157521" q3="0.689338" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/pots/fat_pitcher.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.4752" t1="309.615" t2="19.0419" s0="1" s1="1" s2="1" q0="-0.506201" q1="0.493721" q2="0.493721" q3="0.506201" id="68" color_r="0.141176" color_g="0.25098" color_b="0.145098" overbright="0" type_file="Data/Objects/Environment/pots/coffee_pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.069" t1="309.443" t2="21.8867" s0="1" s1="1" s2="1" q0="0" q1="0.959545" q2="0" q3="0.281555" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_stool.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.9844" t1="309.764" t2="19.1072" s0="1" s1="1" s2="1" q0="0" q1="-0.938729" q2="0" q3="0.344657" id="70" color_r="0.25098" color_g="0.454902" color_b="0.556863" overbright="0" type_file="Data/Objects/Environment/pots/large_pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-23.2268" t1="310.666" t2="20.2555" s0="1" s1="1" s2="1" q0="0" q1="-0.903153" q2="0" q3="0.429319" id="71" color_r="0.670588" color_g="0.2" color_b="0.2" overbright="0" type_file="Data/Objects/Environment/pots/tree_pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.7856" t1="310.043" t2="16.8673" s0="1.33928" s1="1.33928" s2="1.33928" q0="0" q1="-0.398375" q2="0" q3="0.917223" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bottle.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.9026" t1="314.131" t2="22.4084" s0="1.82803" s1="2.29188" s2="1.56561" q0="0.653902" q1="0.269094" q2="-0.269094" q3="0.653903" id="73" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-20.5406" t1="311.527" t2="24.4856" s0="0.199056" s1="4.6889" s2="1.17586" q0="0.0162953" q1="0.363923" q2="0.0461439" q3="0.930143" id="74" version="1">
+        <parameters/>
+        <EnvObject t0="-20.2233" t1="311.528" t2="24.8291" s0="1" s1="1.71681" s2="0.999998" q0="-0.0211062" q1="0.915043" q2="0.0441513" q3="0.400377" id="75" color_r="0.4" color_g="0.4" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.4628" t1="310.699" t2="24.4584" s0="0.999966" s1="1" s2="0.380432" q0="0.0162954" q1="0.363923" q2="0.0461439" q3="0.930143" id="76" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.4224" t1="310.155" t2="24.4235" s0="0.999966" s1="1" s2="0.380432" q0="0.0162954" q1="0.363923" q2="0.0461439" q3="0.930143" id="77" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.3855" t1="309.659" t2="24.3916" s0="0.999966" s1="1" s2="0.380432" q0="0.0162954" q1="0.363923" q2="0.0461439" q3="0.930143" id="78" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.5716" t1="312.162" t2="24.5524" s0="0.999966" s1="1" s2="0.380432" q0="0.0162954" q1="0.363923" q2="0.0461439" q3="0.930143" id="79" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.5312" t1="311.619" t2="24.5175" s0="0.999966" s1="1" s2="0.380432" q0="0.0162954" q1="0.363923" q2="0.0461439" q3="0.930143" id="80" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.4943" t1="311.123" t2="24.4856" s0="0.999966" s1="1" s2="0.380432" q0="0.0162954" q1="0.363923" q2="0.0461439" q3="0.930143" id="81" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.6807" t1="313.629" t2="24.6466" s0="0.999966" s1="1" s2="0.380432" q0="0.0162954" q1="0.363923" q2="0.0461439" q3="0.930143" id="82" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.6402" t1="313.086" t2="24.6117" s0="0.999966" s1="1" s2="0.380432" q0="0.0162954" q1="0.363923" q2="0.0461439" q3="0.930143" id="83" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.6034" t1="312.59" t2="24.5798" s0="0.999966" s1="1" s2="0.380432" q0="0.0162954" q1="0.363923" q2="0.0461439" q3="0.930143" id="84" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-20.8578" t1="311.525" t2="24.1421" s0="1" s1="1.71681" s2="0.999998" q0="-0.0211062" q1="0.915043" q2="0.0441513" q3="0.400377" id="85" color_r="0.4" color_g="0.4" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-21.6128" t1="309.604" t2="18.7529" s0="1.54272" s1="1.54272" s2="1.54272" q0="0" q1="-0.00451022" q2="0" q3="0.99999" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkPouch.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.5541" t1="309.604" t2="18.6232" s0="1.54272" s1="1.54272" s2="1.54272" q0="0" q1="0.771931" q2="0" q3="0.635706" id="87" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkPouch.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.4236" t1="309.666" t2="18.5681" s0="1.12798" s1="1.12798" s2="1.12798" q0="0" q1="-0.613167" q2="0" q3="0.789953" id="88" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkSack.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.6592" t1="310.406" t2="19.3857" s0="1" s1="1" s2="1" q0="0" q1="0.268828" q2="0" q3="0.963188" id="89" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/plate.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.6592" t1="310.428" t2="19.3857" s0="1" s1="1" s2="1" q0="0" q1="-0.956268" q2="0" q3="0.292493" id="90" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/plate.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.8953" t1="309.82" t2="23.8931" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="91" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.8931" t1="309.828" t2="23.8904" s0="1" s1="1" s2="1" q0="0" q1="-0.866025" q2="0" q3="0.500001" id="92" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.8995" t1="309.836" t2="23.8823" s0="1" s1="1" s2="1" q0="0" q1="0.23613" q2="0" q3="0.971721" id="93" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.4181" t1="310.404" t2="23.0195" s0="1.24237" s1="1.71362" s2="1.9707" q0="0.454495" q1="-0.146828" q2="-0.550479" q3="0.684725" id="94" color_r="0.564706" color_g="0.564706" color_b="0.564706" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-15.8292" t1="309.694" t2="21.3153" s0="1.01682" s1="0.949559" s2="5.88545" q0="0.684482" q1="-0.684482" q2="-0.177438" q3="0.177439" id="95" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/shop_tall_table.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="-18.3077" t1="318.413" t2="20.3076" s0="1" s1="1" s2="1" q0="0" q1="0.886115" q2="0" q3="0.463465" id="96" type_file="Data/Objects/therium/IGF_Characters/ancient.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1.4000000000000001"/>
+            <parameter name="Attack Speed" type="string" val="1.2000000000000002"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.30000000000000004"/>
+            <parameter name="Character Scale" type="string" val="1.1600000000000001"/>
+            <parameter name="Damage Resistance" type="string" val="1.6"/>
+            <parameter name="Ear Size" type="string" val="1.1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="2"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.6000000000000001"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="1"/>
+            <parameter name="Teams" type="string" val="turner"/>
+            <parameter name="dead_body" type="string" val="0 -18.3233 309.45 20.0437 -0.00840062 -0.356176 -0.0458934 0.933253 1 -18.4696 309.448 20.1459 -0.0616118 -0.547318 0.145498 0.821874 2 -18.68 309.419 20.2158 0.0820122 -0.607758 0.0464609 0.788508 4 -18.8256 309.476 20.1582 -0.030439 0.928169 0.00979348 -0.370783 6 -18.839 309.373 20.0081 0.242377 0.955247 -0.0900548 0.143693 7 -18.8066 309.339 19.876 0.242375 0.955242 -0.0900665 0.143719 8 -18.771 309.323 19.7593 0.219882 0.958389 0.0495141 0.175186 9 -18.7322 309.325 19.6581 0.219882 0.958389 0.0495141 0.175186 11 -18.7052 309.325 19.5885 0.226196 0.954862 0.0102044 0.192276 13 -18.6542 309.321 19.4512 0.225171 0.954462 0.0149276 0.195136 15 -18.628 309.373 19.5423 0.0674287 0.837988 0.226898 0.491678 17 -18.7571 309.473 20.3427 0.0194309 0.0260851 0.025141 0.999155 19 -18.6606 309.372 20.4599 -0.0250132 0.459449 -0.245508 0.853233 20 -18.549 309.346 20.5407 -0.0250153 0.459449 -0.245507 0.853233 21 -18.4481 309.329 20.611 -0.0744773 0.467824 -0.219147 0.852976 22 -18.3581 309.321 20.6707 -0.0744774 0.467824 -0.219147 0.852977 24 -18.296 309.313 20.7115 -0.0385718 0.481957 -0.236402 0.842819 26 -18.1756 309.295 20.7932 -0.0426748 0.48467 -0.233875 0.84177 28 -18.2026 309.354 20.7064 -0.190752 0.732649 -0.00500942 0.65331 30 -18.8585 309.388 20.2584 -0.0166259 -0.637181 0.123586 0.760559 31 -18.9764 309.365 20.2885 -0.0143616 -0.595388 0.210838 0.775148 33 -19.1211 309.312 20.2657 -0.104295 -0.741383 -0.0286265 0.66231 34 -19.2468 309.343 20.2491 -0.143654 -0.73848 -0.0724457 0.654799 36 -19.0951 309.323 20.3945 0.0607304 -0.550953 0.0881169 0.827646 37 -19.2147 309.316 20.444 -0.0548609 -0.557889 0.0104727 0.828034 39 -18.3286 309.465 19.8677 -0.354474 0.911646 -0.105639 0.179138 40 -18.2743 309.457 19.7441 -0.354474 0.911646 -0.105639 0.179138 41 -18.1914 309.435 19.6177 -0.331537 0.872646 -0.220008 0.28314 42 -18.0801 309.401 19.4884 -0.331537 0.872646 -0.220008 0.283139 43 -17.9693 309.394 19.3127 -0.364568 0.901896 -0.0458939 0.227083 44 -17.9396 309.454 19.1404 0.896245 -0.257672 -0.246585 -0.263715 46 -18.148 309.453 20.0283 0.388661 0.787441 0.204543 0.432483 47 -18.0343 309.451 19.9549 0.38866 0.787441 0.204543 0.432484 48 -17.9415 309.427 19.8422 0.479522 0.840244 -0.0122662 0.252781 49 -17.8696 309.381 19.6905 0.479522 0.840244 -0.0122661 0.252781 50 -17.7294 309.369 19.5479 0.368247 0.795704 0.245607 0.413432 51 -17.5572 309.421 19.5051 -0.289932 0.5206 0.0286747 0.802554 "/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.235294" green="0.172549" blue="0.141176"/>
+            <Color label="Ropes" channel="1" red="0.0784314" green="0.129412" blue="0.0705882"/>
+            <Color label="Pants" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Spots" channel="3" red="0" green="0" blue="0"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-14.8481" t1="309.681" t2="21.492" s0="1" s1="1" s2="1" q0="0" q1="-0.948879" q2="0" q3="0.31564" id="99" type_file="Data/Objects/therium/characters/rabbits/bijou_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="0.6000000000000001"/>
+            <parameter name="Fat" type="string" val="0.45"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="No Look Around" type="string" val=""/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="0.04393"/>
+            <parameter name="Static" type="int" val="1"/>
+            <parameter name="Teams" type="string" val="player, ghost"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <Decal t0="-18.9789" t1="309.287" t2="19.9262" s0="1.49492" s1="0.412349" s2="1.49492" q0="0" q1="-0.637331" q2="0" q3="0.77059" id="100" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-18.3738" t1="309.222" t2="19.9555" s0="1.49492" s1="0.283983" s2="1.49492" q0="0" q1="-0.974544" q2="0" q3="0.224196" id="101" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-18.8388" t1="309.182" t2="20.3556" s0="0.945066" s1="0.338997" s2="0.945066" q0="0" q1="-0.703973" q2="0" q3="0.710227" id="102" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Hotspot t0="-14.0783" t1="320.099" t2="1.02703" s0="1" s1="1" s2="1" q0="0" q1="0.258819" q2="0" q3="0.965926" id="106" type_file="Data/Objects/Hotspots/must_visit_trigger.xml">
+        <parameters/>
+    </Hotspot>
+    <EnvObject t0="-16.5673" t1="309.264" t2="23.4089" s0="1" s1="1" s2="1" q0="0.650662" q1="0.276838" q2="-0.276838" q3="0.650662" id="107" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.7418" t1="309.264" t2="22.6612" s0="1" s1="1" s2="1" q0="-0.565079" q1="-0.425071" q2="-0.425071" q3="0.56508" id="108" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.3957" t1="312.281" t2="24.2343" s0="0.821078" s1="0.975908" s2="1.00001" q0="-0.0166329" q1="0.906415" q2="0.00994" q3="0.421944" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.3751" t1="313.065" t2="24.2977" s0="0.821078" s1="0.975908" s2="1.00001" q0="0.0203238" q1="-0.42157" q2="-0.00568497" q3="0.90655" id="110" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="-17.0304" t1="309.29" t2="21.4531" s0="2.12205" s1="0.585333" s2="2.12205" q0="0" q1="-0.9752" q2="0" q3="0.221325" id="111" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.5493" t1="309.233" t2="19.4295" s0="1.10968" s1="0.306088" s2="1.10968" q0="-0.0443156" q1="-0.82208" q2="0.00279426" q3="0.567638" id="112" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-19.0401" t1="309.309" t2="20.1997" s0="1.08045" s1="0.205248" s2="1.08045" q0="0" q1="-0.731881" q2="0" q3="0.681432" id="113" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-18.6034" t1="309.134" t2="20.0624" s0="1.07161" s1="0.487235" s2="0.819103" q0="0" q1="-0.545414" q2="0" q3="0.838167" id="114" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.9854" t1="309.273" t2="19.3188" s0="0.133967" s1="0.136225" s2="0.13931" q0="0" q1="-0.545414" q2="0" q3="0.838167" id="115" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.8681" t1="309.275" t2="19.3024" s0="0.142198" s1="0.144596" s2="0.14787" q0="0" q1="0.453166" q2="0" q3="0.891426" id="116" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.9165" t1="309.243" t2="19.2633" s0="0.0907557" s1="0.0922858" s2="0.0943756" q0="0" q1="0.838167" q2="0" q3="0.545414" id="117" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.985" t1="309.243" t2="19.2313" s0="0.0768413" s1="0.0781367" s2="0.0799061" q0="0" q1="-0.999766" q2="0" q3="0.0216323" id="118" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="-15.7096" t1="310.388" t2="22.3411" s0="1.24237" s1="1.25281" s2="1.97074" q0="-0.043066" q1="-0.480617" q2="-0.0209532" q3="0.875622" id="119" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="-14.6217" t1="311.652" t2="17.7176" s0="-4.51011" s1="1.13646" s2="4.51012" q0="-0.330245" q1="0.614973" q2="0.642748" q3="0.315629" id="120" type_file="Data/Objects/Decals/signs/glyph_rabbit.xml" color_r="0.121569" color_g="0.121569" color_b="0.121569" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="-19.1043" t1="309.25" t2="22.911" s0="0.0345537" s1="0.0345537" s2="0.0345537" q0="-0.0807081" q1="-0.710847" q2="-0.696931" q3="0.0496981" id="121" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/carrot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.8147" t1="309.397" t2="22.454" s0="1" s1="1" s2="1" q0="-0.678848" q1="-0.197901" q2="-0.197901" q3="0.678849" id="122" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/pot.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.7569" t1="309.24" t2="19.0223" s0="1" s1="1" s2="1" q0="0" q1="0.834263" q2="0" q3="0.551367" id="123" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.5883" t1="309.24" t2="18.9119" s0="1" s1="1" s2="1" q0="-0.514849" q1="0" q2="-0.857281" q3="0" id="124" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.3457" t1="309.259" t2="18.7765" s0="0.227345" s1="1.17057" s2="1.2976" q0="0.666022" q1="-0.666022" q2="-0.237519" q3="0.237517" id="125" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkSack.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.4328" t1="309.24" t2="19.0875" s0="1" s1="1" s2="1" q0="-0.485002" q1="0" q2="0.874513" q3="0.000345267" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.6335" t1="309.24" t2="18.9786" s0="1" s1="1" s2="1" q0="0.0308053" q1="0" q2="0.999525" q3="0.000880262" id="127" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.5797" t1="309.24" t2="19.0283" s0="1" s1="1" s2="1" q0="-0.942646" q1="0" q2="-0.333793" q3="0.000845728" id="128" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.5768" t1="309.248" t2="18.9029" s0="1" s1="1" s2="1" q0="0" q1="-0.333793" q2="0" q3="0.942646" id="129" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.4966" t1="309.241" t2="18.9122" s0="1" s1="1" s2="1" q0="0" q1="0.665368" q2="0" q3="0.746516" id="130" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.567" t1="309.241" t2="19.1205" s0="1" s1="1" s2="1" q0="0" q1="0.146409" q2="0" q3="0.989224" id="131" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.5814" t1="309.248" t2="19.0781" s0="1" s1="1" s2="1" q0="0" q1="-0.889426" q2="0" q3="0.457079" id="132" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.8869" t1="309.241" t2="18.9256" s0="1" s1="1" s2="1" q0="0" q1="-0.889426" q2="0" q3="0.457079" id="133" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.7073" t1="309.241" t2="19.1873" s0="1" s1="1" s2="1" q0="0" q1="0.952123" q2="0" q3="0.305715" id="134" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.4955" t1="309.241" t2="19.3955" s0="1" s1="1" s2="1" q0="-0.635108" q1="0" q2="0.772423" q3="0.000732422" id="135" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.6431" t1="309.241" t2="19.0502" s0="1" s1="1" s2="1" q0="-0.635108" q1="0" q2="0.772423" q3="0.000732422" id="136" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.6436" t1="309.248" t2="19.0038" s0="1" s1="1" s2="1" q0="-0.990745" q1="0" q2="0.135733" q3="0.000945553" id="137" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.8862" t1="309.241" t2="19.2626" s0="1" s1="1" s2="1" q0="0" q1="-0.774745" q2="0" q3="0.632274" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-28.4537" t1="312.845" t2="32.6145" s0="2.15836" s1="1.38027" s2="1.30375" q0="0" q1="-0.5" q2="0" q3="0.866025" id="139" color_r="0.352941" color_g="0.352941" color_b="0.352941" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-24.0186" t1="312.493" t2="6.75359" s0="1.81203" s1="1.30375" s2="1.30375" q0="0" q1="-0.965926" q2="0" q3="0.258818" id="140" color_r="0.352941" color_g="0.352941" color_b="0.352941" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-16.67" t1="309.256" t2="18.995" s0="1" s1="1" s2="1" q0="0" q1="0.665368" q2="0" q3="0.746516" id="141" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="-18.645" t1="310.255" t2="24.8731" s0="0.90638" s1="0.90638" s2="0.90638" q0="0" q1="-0.258819" q2="0" q3="0.965926" id="142" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/t2/e/b3-2_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Meet"/>
+            <parameter name="NumParticipants" type="int" val="3"/>
+            <parameter name="obj_1" type="int" val="143"/>
+            <parameter name="obj_2" type="int" val="144"/>
+            <parameter name="obj_3" type="int" val="4"/>
+        </parameters>
+        <Connections>
+            <Connection id="142"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-18.3703" t1="310.889" t2="25.0317" s0="0.271914" s1="0.271914" s2="0.271914" q0="0" q1="-0.258819" q2="0" q3="0.965926" id="143" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="3"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-18.645" t1="310.889" t2="24.8731" s0="0.271914" s1="0.271914" s2="0.271914" q0="0" q1="-0.258819" q2="0" q3="0.965926" id="144" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="99"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-19.711" t1="310.021" t2="23.6317" s0="0.957651" s1="0.957651" s2="0.957651" q0="0" q1="0.258819" q2="0" q3="0.965926" id="145" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/t2/e/b3-2_dialogue_1.txt"/>
+            <parameter name="DisplayName" type="string" val="Escape"/>
+            <parameter name="NumParticipants" type="int" val="3"/>
+            <parameter name="obj_1" type="int" val="146"/>
+            <parameter name="obj_2" type="int" val="147"/>
+            <parameter name="obj_3" type="int" val="5"/>
+        </parameters>
+        <Connections>
+            <Connection id="145"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-19.4207" t1="310.691" t2="23.4641" s0="0.287295" s1="0.287295" s2="0.287295" q0="0" q1="0.258819" q2="0" q3="0.965926" id="146" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="3"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-19.711" t1="310.691" t2="23.6317" s0="0.287295" s1="0.287295" s2="0.287295" q0="0" q1="0.258819" q2="0" q3="0.965926" id="147" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="99"/>
+        </Connections>
+    </PlaceholderObject>
+    <Decal t0="-24.1322" t1="313.01" t2="44.5629" s0="9.72819" s1="0.834093" s2="9.72819" q0="0.612372" q1="-0.353553" q2="0.353553" q3="0.612373" id="148" type_file="Data/Objects/therium/Decals/secret.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="-1.43863" t1="-34.6114" t2="-80.3752" s0="2.08149" s1="1.38027" s2="1.30375" q0="0" q1="-0.5" q2="0" q3="0.866025" id="149" color_r="0.352941" color_g="0.352941" color_b="0.352941" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="5.7317" t1="-34.578" t2="-69.3018" s0="13.0026" s1="4.47241" s2="13.0026" q0="0.353553" q1="0.612372" q2="-0.612373" q3="0.353554" id="150" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="1.19285" t1="-34.578" t2="-77.1634" s0="13.0026" s1="4.47241" s2="13.0026" q0="0.353553" q1="0.612372" q2="-0.612373" q3="0.353554" id="151" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-3.25196" t1="-34.578" t2="-84.862" s0="13.0026" s1="4.47241" s2="13.0026" q0="0.353553" q1="0.612372" q2="-0.612373" q3="0.353554" id="152" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Hotspot t0="-20.3506" t1="320.715" t2="46.6465" s0="1" s1="1" s2="1" q0="0" q1="0.258819" q2="0" q3="0.965926" id="153" type_file="Data/Objects/therium/Hotspots/therium_level.xml">
+        <parameters>
+            <parameter name="music" type="string" val="e-b3"/>
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="-22.3232" t1="309.666" t2="19.2174" s0="1.12798" s1="1.12798" s2="1.12798" q0="0" q1="0.215715" q2="0" q3="0.976456" id="154" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkSack.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="-19.6871" t1="309.253" t2="21.6063" s0="1.76416" s1="0.211082" s2="1.76416" q0="0" q1="0.0941504" q2="0" q3="0.995558" id="155" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-7.60953" t1="-34.578" t2="-92.4096" s0="13.0026" s1="4.47241" s2="13.0026" q0="0.353553" q1="0.612372" q2="-0.612373" q3="0.353554" id="156" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="2.66249" t1="-34.578" t2="-67.5298" s0="13.0026" s1="4.47241" s2="13.0026" q0="0.612372" q1="-0.353553" q2="0.353554" q3="0.612373" id="157" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-1.87636" t1="-34.578" t2="-75.3914" s0="13.0026" s1="4.47241" s2="13.0026" q0="0.612372" q1="-0.353553" q2="0.353554" q3="0.612373" id="158" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-6.32117" t1="-34.578" t2="-83.09" s0="13.0026" s1="4.47241" s2="13.0026" q0="0.612372" q1="-0.353553" q2="0.353554" q3="0.612373" id="159" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-10.6787" t1="-34.578" t2="-90.6376" s0="13.0026" s1="4.47241" s2="13.0026" q0="0.612372" q1="-0.353553" q2="0.353554" q3="0.612373" id="160" type_file="Data/Objects/therium/Decals/ya.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.3896" t1="309.269" t2="19.2842" s0="0.0997266" s1="0.101408" s2="0.103704" q0="0" q1="-0.965552" q2="0" q3="0.26021" id="161" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.4553" t1="309.269" t2="19.2917" s0="0.0792492" s1="0.0805857" s2="0.0824103" q0="0" q1="-0.606852" q2="0" q3="0.794815" id="162" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.559" t1="309.263" t2="20.1534" s0="0.0523728" s1="0.053256" s2="0.0544618" q0="0" q1="-0.606852" q2="0" q3="0.794815" id="163" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.4916" t1="309.263" t2="20.145" s0="0.0598932" s1="0.0609032" s2="0.0622822" q0="0" q1="-0.27858" q2="0" q3="0.960413" id="164" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.2839" t1="309.263" t2="20.1843" s0="0.0703399" s1="0.0715261" s2="0.0731456" q0="0" q1="0.821642" q2="0" q3="0.570004" id="165" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.5211" t1="309.254" t2="20.1289" s0="0.043848" s1="0.0445874" s2="0.045597" q0="0" q1="0.912379" q2="0" q3="0.409346" id="166" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="-13.2264" t1="311.716" t2="20.6903" s0="1.49667" s1="1.87549" s2="2.97653" q0="0" q1="-0.41548" q2="0" q3="0.909602" id="167" color_r="0.741176" color_g="0.741169" color_b="0.741169" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-19.5713" t1="311.716" t2="26.3139" s0="1.49667" s1="1.87549" s2="2.97653" q0="0" q1="-0.45246" q2="0" q3="0.891785" id="168" color_r="0.741176" color_g="0.741169" color_b="0.741169" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.0029" t1="311.716" t2="15.3168" s0="1.49667" s1="1.87549" s2="2.97653" q0="0" q1="-0.477019" q2="0" q3="0.878893" id="169" color_r="0.741176" color_g="0.741169" color_b="0.741169" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-24.417" t1="311.762" t2="20.6245" s0="1.49667" s1="1.87549" s2="2.97653" q0="0" q1="-0.406742" q2="0" q3="0.913543" id="170" color_r="0.741176" color_g="0.741169" color_b="0.741169" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.6624" t1="309.504" t2="18.6561" s0="1" s1="1" s2="1" q0="0" q1="0.969417" q2="0" q3="0.24542" id="171" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-21.6448" t1="309.504" t2="18.5693" s0="1" s1="1" s2="1" q0="0.217091" q1="0" q2="0.976151" q3="0.000880262" id="172" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-23.2879" t1="309.518" t2="20.3271" s0="1" s1="1" s2="1" q0="0" q1="0.993675" q2="0" q3="0.112292" id="173" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/hatchet.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="-16.6598" t1="313.242" t2="23.0677" s0="0.666032" s1="0.578843" s2="0.678505" q0="0" q1="0.356023" q2="0" q3="0.934477" id="174" type_file="Data/Objects/Hotspots/start_dialogue.xml">
+        <parameters>
+            <parameter name="Automatic" type="string" val="1"/>
+            <parameter name="Dialogue" type="string" val="Meet"/>
+            <parameter name="Visible in game" type="string" val="0"/>
+        </parameters>
+    </Hotspot>
+    <Decal t0="-13.8431" t1="309.263" t2="20.9507" s0="0.103181" s1="0.104921" s2="0.107297" q0="0" q1="-0.27858" q2="0" q3="0.960413" id="175" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-13.9146" t1="309.263" t2="20.8718" s0="0.074567" s1="0.0758245" s2="0.0775414" q0="0" q1="0.296698" q2="0" q3="0.954971" id="176" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-13.8132" t1="309.263" t2="20.7488" s0="0.0626665" s1="0.0637233" s2="0.0651661" q0="0" q1="0.933973" q2="0" q3="0.357344" id="177" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-13.7902" t1="309.254" t2="20.7778" s0="0.0520576" s1="0.0529355" s2="0.054134" q0="0" q1="-0.890153" q2="0" q3="0.455662" id="178" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.058" t1="309.248" t2="20.7468" s0="0.041123" s1="0.0418164" s2="0.0427633" q0="0" q1="-0.890153" q2="0" q3="0.455662" id="179" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.0924" t1="309.248" t2="20.782" s0="0.0339225" s1="0.0344945" s2="0.0352756" q0="0" q1="-0.0330926" q2="0" q3="0.999452" id="180" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.1319" t1="309.248" t2="20.7868" s0="0.0238802" s1="0.0242829" s2="0.0248327" q0="0" q1="0.7116" q2="0" q3="0.702585" id="181" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Hotspot t0="-16.4689" t1="310.395" t2="23.6359" s0="0.548324" s1="0.791472" s2="0.402722" q0="0" q1="0.356023" q2="0" q3="0.934477" id="182" type_file="Data/Objects/Hotspots/start_dialogue.xml">
+        <parameters>
+            <parameter name="Automatic" type="string" val="1"/>
+            <parameter name="Dialogue" type="string" val="Escape"/>
+            <parameter name="Visible in game" type="string" val="0"/>
+        </parameters>
+    </Hotspot>
+    <EnvObject t0="-14.2106" t1="309.668" t2="21.3048" s0="1" s1="1" s2="1" q0="0" q1="0.399023" q2="0" q3="0.916941" id="184" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_covered.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-14.1148" t1="309.668" t2="19.8866" s0="1" s1="1" s2="1" q0="0" q1="0.874275" q2="0" q3="0.485431" id="185" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_covered.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-35.0661" t1="312.778" t2="29.2467" s0="1.12009" s1="1.03599" s2="0.729754" q0="0" q1="-0.5" q2="0" q3="0.866025" id="186" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_wall.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-14.1445" t1="309.247" t2="20.9246" s0="1" s1="1" s2="1" q0="0.276069" q1="-0.648767" q2="0.651261" q3="0.280618" id="187" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Weapons/gabenife.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="-14.2665" t1="309.281" t2="20.8072" s0="0.204914" s1="0.0699161" s2="0.338591" q0="0" q1="-0.900115" q2="0" q3="0.435652" id="188" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.2085" t1="309.281" t2="20.8617" s0="0.204914" s1="0.0699161" s2="0.338591" q0="0" q1="0.460611" q2="0" q3="0.887602" id="189" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-18.6334" t1="309.344" t2="20.1421" s0="1.1883" s1="0.215589" s2="1.1883" q0="-0.00896692" q1="0.80672" q2="-0.000386298" q3="0.590866" id="190" type_file="Data/Objects/Decals/crete_stains/pooled_stain.xml" color_r="0.356863" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.1233" t1="309.273" t2="19.2911" s0="0.22516" s1="0.228956" s2="0.234141" q0="0" q1="0.00407168" q2="0" q3="0.999992" id="191" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.2853" t1="309.273" t2="19.3" s0="0.204286" s1="0.207729" s2="0.212433" q0="0" q1="0.451449" q2="0" q3="0.892297" id="192" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.7328" t1="309.355" t2="19.5815" s0="0.204286" s1="0.207729" s2="0.212433" q0="0" q1="0.451449" q2="0" q3="0.892297" id="193" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.8347" t1="309.355" t2="19.5637" s0="0.204286" s1="0.207729" s2="0.212433" q0="0" q1="0.0925516" q2="0" q3="0.995708" id="194" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.8515" t1="309.355" t2="19.6477" s0="0.301939" s1="0.307028" s2="0.313981" q0="0" q1="0.590496" q2="0" q3="0.807041" id="195" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-17.1405" t1="309.355" t2="19.4467" s0="0.181128" s1="0.18418" s2="0.188351" q0="0" q1="0.959585" q2="0" q3="0.281419" id="196" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-17.1672" t1="309.355" t2="19.4428" s0="0.181128" s1="0.18418" s2="0.188351" q0="0" q1="0.886826" q2="0" q3="0.462104" id="197" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-17.3651" t1="309.329" t2="19.2069" s0="0.0878557" s1="0.0893365" s2="0.0913596" q0="0" q1="0.723515" q2="0" q3="0.690309" id="198" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-17.289" t1="309.316" t2="19.2043" s0="0.123361" s1="0.12544" s2="0.128281" q0="0" q1="0.986146" q2="0" q3="0.16588" id="199" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-17.0967" t1="309.355" t2="19.9191" s0="0.192144" s1="0.195382" s2="0.199807" q0="0" q1="0.733027" q2="0" q3="0.680199" id="200" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.0835" t1="309.713" t2="21.5079" s0="1.60395" s1="1.69945" s2="2.83594" q0="0" q1="0.258819" q2="0" q3="0.965926" id="201" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.419608" color_g="0.419604" color_b="0.419604" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.3195" t1="310.151" t2="22.1625" s0="0.810952" s1="0.430514" s2="0.80717" q0="0" q1="0.258819" q2="0" q3="0.965926" id="202" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-15.2774" t1="309.279" t2="22.1864" s0="0.810952" s1="0.430514" s2="0.80717" q0="0" q1="0.258819" q2="0" q3="0.965926" id="203" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.1659" t1="309.26" t2="20.8917" s0="0.125531" s1="0.0428309" s2="0.207423" q0="0" q1="0.253385" q2="0" q3="0.967366" id="204" type_file="Data/Objects/Decals/bloodspatter.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.7728" t1="309.263" t2="20.9701" s0="0.132215" s1="0.134445" s2="0.137489" q0="0" q1="0.296698" q2="0" q3="0.954971" id="205" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.7041" t1="309.263" t2="20.9798" s0="0.118089" s1="0.120081" s2="0.1228" q0="0" q1="0.77896" q2="0" q3="0.627074" id="206" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.8241" t1="309.263" t2="20.7833" s0="0.176017" s1="0.178986" s2="0.183039" q0="0" q1="0.999943" q2="0" q3="-0.0106329" id="207" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.7289" t1="309.263" t2="20.8111" s0="0.121873" s1="0.123929" s2="0.126735" q0="0" q1="0.980089" q2="0" q3="0.198559" id="208" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-14.7696" t1="309.263" t2="20.7651" s0="0.065894" s1="0.0670052" s2="0.0685224" q0="0" q1="0.760809" q2="0" q3="0.648975" id="209" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.8069" t1="309.347" t2="19.7004" s0="0.123229" s1="0.125306" s2="0.128144" q0="0" q1="0.879156" q2="0" q3="0.476533" id="210" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="-16.9682" t1="309.294" t2="18.9557" s0="0.0760555" s1="0.0773374" s2="0.0790888" q0="0" q1="-0.20086" q2="0" q3="0.97962" id="211" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="1" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="-19.9621" t1="309.834" t2="16.8065" s0="1" s1="1" s2="1" q0="-0.344115" q1="0.832608" q2="-0.134826" q3="0.412509" id="212" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-23.4462" t1="309.24" t2="20.2236" s0="1" s1="1" s2="1" q0="-0.192002" q1="-0.000106454" q2="0.981394" q3="0.000328511" id="213" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-14.9563" t1="309.239" t2="18.5488" s0="1" s1="1" s2="1" q0="0.000279307" q1="0.992547" q2="0.000203013" q3="-0.12186" id="216" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="-17.6139" t1="320.286" t2="24.7195" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="217" type_file="Data/Objects/therium/Hotspots/goal_level.xml">
+        <parameters>
+            <parameter name="music" type="string" val=""/>
+            <parameter name="player_spawn" type="string" val=""/>
+        </parameters>
+    </Hotspot>
+    <Prefab t0="-22.061" t1="319.365" t2="24.9573" s0="4.01" s1="4.01" s2="4.01" q0="0" q1="0" q2="0" q3="1" id="218" version="1" prefab_locked="true" prefab_path="Data/Prefabs/hotspot_jumpwounded.xml" os0="4.01" os1="4.01" os2="4.01">
+        <parameters/>
+        <Hotspot t0="-22.061" t1="319.365" t2="24.9573" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" type_file="Data/Objects/therium/Hotspots/player_jump_height.xml">
+            <parameters>
+                <parameter name="Initial Jetpack Fuel" type="int" val="1"/>
+                <parameter name="Initial Jump Velocity Multiplier" type="float" val="0.65217"/>
+            </parameters>
+        </Hotspot>
+    </Prefab>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="book2.xml" path="Data/Objects/therium/book2.xml" thumbnail_path="empty_placeholder.png"/>
+    <SpawnerItem display_name="Ambient Shadow" path="Data/Objects/default_env_blob_shadow_decal.xml" thumbnail_path="Data/UI/spawner/thumbs/Lighting/light_placeholder.png"/>
+    <SpawnerItem display_name="hotspot_jumpwounded.xml" path="Data/Prefabs/hotspot_jumpwounded.xml" thumbnail_path="empty_placeholder.png"/>
+    <SpawnerItem display_name="goal_level.xml" path="Data/Objects/therium/Hotspots/goal_level.xml" thumbnail_path="empty_placeholder.png"/>
+</RecentItems>

@@ -1,0 +1,24 @@
+#name "Win"
+#participants 2
+set_character_pos 2 397.176 -1.99877 19.7161 109
+set_character_pos 1 396.687 -2.22842 18.8396 -62
+set_cam 397.168 -1.43508 18.4408 0 161.5 0 90
+say 1 "Turner" "Ciel."
+say 1 "Turner" "Ça va ?"
+say 2 "Sky" "Es-tu venu du sanctuaire ?"
+say 2 "Sky" "Je suis perdu."
+say 1 "Turner" "Je suis Turner."
+say 1 "Turner" "Vous êtes maintenant tout droit."
+say 1 "Turner" "Je vais vous épargner."
+say 2 "Sky" "Les rats, ils ont utilisé des fléchettes, une sorte de poison de couchage."
+say 2 "Sky" "C’est comment ils nous capturés."
+say 2 "Sky" "J’ai vu où ils gardent leur approvisionnement,"
+say 2 "Sky" "Je m’apprêtais à détruire, mais..."
+say 2 "Sky" "tellement sommeil..."
+say 1 "Turner" "Je vais prendre soin d’elle."
+say 1 "Turner" "Et puis je vais prendre soin de vous."
+say 1 "Turner" "Vous me rappelez d’avril..."
+say 2 "Sky" "Qui ?"
+say 1 "Turner" "C'est pas grave."
+say 1 "Turner" "Vous êtes en sécurité avec moi."
+send_global_message "levelwin"

@@ -1,0 +1,7 @@
+#name "Talk"
+#participants 2
+send_character_message 2 "set_animation \"Data/Animations/r_hammering_wall_loop.anm\""
+set_character_pos 1 50.9255 116.004 -20.1087 90
+set_cam 48.2589 116.624 -18.7041 0 -45.04 0 58.3578
+say 1 "Ghost" "Sup de bourgeon"
+say 2 "Cat" "Je vais avoir comme dialogue chemin différent selon la détermination de la létalité mais que ce soit"

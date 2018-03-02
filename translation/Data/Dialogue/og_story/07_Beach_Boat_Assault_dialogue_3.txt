@@ -1,0 +1,28 @@
+#name "Bodyguard"
+#participants 2
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_dialogue_color 2 1 0.4 0.4
+set_dialogue_voice 2 14
+send_level_message "music_layer_override 1"
+send_character_message 1 "equip_item 4152"
+send_character_message 1 "set_torso_target 14.865 19.0467 168.066 0"
+send_character_message 1 "set_head_target 14.5848 19.1246 168.026 0"
+set_character_pos 2 14.566 18.4177 162.95 -91
+set_character_pos 1 14.3393 18.632 168.939 88
+set_cam 13.4402 19.1328 171.801 0 -12.37 0 22.3411
+say 2 "SharpClaw" "A slave bunny with a sword?"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "SharpClaw" "Ha!"
+send_character_message 2 "set_head_target 15.0571 20.3236 164.803 0.865796"
+say 2 "SharpClaw" "That's like a dog with..."
+send_character_message 2 "set_head_target 13.5088 18.4911 164.625 0.865796"
+say 2 "SharpClaw" "With..."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_point.anm\""
+send_character_message 2 "set_head_target 14.6375 19.466 165.045 1"
+say 2 "SharpClaw" "A carrot!"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "I'm commandeering this ship. Is that word too big for you? It means I'm taking it."
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "SharpClaw" "The boss wouldn't like that."
+send_level_message "music_layer_override 4"
+make_participants_aware

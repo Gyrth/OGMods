@@ -1,0 +1,20 @@
+#name "Note-Foxglove"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 14.9128 -0.192716 -158.15 -131
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 14.4493 -0.530116 -157.537 1"
+set_cam 15.5444 0.553472 -157.939 -41.45 98.4 -0.01 55.2369
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Une note récente. [wait 0.5]Il doit s’agir d’un espion Empry."
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 15.0395 -0.014715 -156.779 -0.03 2.19 -0.18 40.1399
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 2 "Note" "Foxglove ici."
+say 2 "Note" "Les créatures sont biologiquement lapin, [wait 0.3]à travers et à travers, [wait 0.3]Bien que leurs mouvements et les manières ne sont rien, comme nous l’avons vu."
+say 2 "Note" "Au moment de l’écriture, [wait 0.3]il n’y a eu aucune communication verbale ou visible entre une de ces créatures, [wait 0.3]et encore toutes les actions qu’ils font semblent être plus coordonnée que les soldats Cinderbreathe ou Arliss."
+say 2 "Note" "Au moment de l’écriture, [wait 0.3]Il y a seulement eu un cas enregistré de ces créatures étant situé à proximité de faucheur."
+say 2 "Note" "Le Faucheur, [wait 0.3]Contrairement à leur comportement habituel parmi les soldats Cinderbreathe, [wait 0.3]complètement ignoré les créatures."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Ghost" "[wait 0.3]L’entrée semble être écourtée..."

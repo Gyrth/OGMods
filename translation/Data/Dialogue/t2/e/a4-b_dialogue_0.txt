@@ -1,0 +1,81 @@
+#name "Intro"
+#participants 4
+set_character_pos 3 -41.3966 71.4818 -2.06134 -12
+send_character_message 3 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+send_character_message 3 "set_head_target -5.18174 33.9477 11.9746 1"
+set_character_pos 2 -2.19543 31.1179 20.6194 90
+send_character_message 2 "set_animation \"Data/Animations/Gunk/gunkactionidle.anm\""
+send_character_message 2 "set_torso_target -2.10183 31.5889 19.6572 0.00726208"
+send_character_message 2 "set_head_target -2.16346 31.913 8.6513 1"
+set_character_pos 1 -2.17159 31.1234 8.47687 -90
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_head_target -2.17812 31.9965 20.5841 1"
+set_cam -2.67526 35.8263 -8.688 18.83 180 0 69.3204
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 1.0 0.0 0.0
+set_dialogue_voice 2 6
+say 4 "" "..."
+set_cam -15.7087 42.1859 13.2085 -33.74 -125.28 0.13 23.6431
+say 4 "" "..."
+set_character_pos 1 -2.17159 31.1234 8.47687 -90
+send_character_message 2 "set_torso_target -1.93583 31.1298 19.8965 1"
+set_cam -2.74539 31.9246 18.2021 -3.52 -162.32 0 23.4321
+say 2 "???" "Stop it, [wait 0.3]Amos."
+set_character_pos 1 -2.17159 31.076 8.47687 -90
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_cam -1.69271 32.0286 23.2709 -2.6 6.02 0.02 17.4081
+say 1 "Amos" "Who the hell are you?"
+send_character_message 2 "set_torso_target -2.15937 31.5495 19.9301 1"
+send_character_message 2 "set_head_target -1.93159 32.7801 9.80498 1"
+say 2 "???" "Call me Gunk. [wait 0.5]I'm the one who's going to kill you."
+send_character_message 1 "set_head_target -2.15872 32.471 20.5841 1"
+send_character_message 1 "set_torso_target -2.15198 30.8676 9.45671 1"
+say 1 "Amos" "Really, [wait 0.3]Gunk? [wait 0.5]Is that what's going to happen?"
+send_character_message 1 "set_head_target -2.21014 31.9399 20.5996 1"
+send_character_message 1 "set_torso_target -2.15198 30.8676 9.45671 0"
+send_character_message 2 "set_head_target -1.99652 31.5708 19.1975 1"
+send_character_message 2 "set_torso_target -2.13814 31.0713 19.9016 1"
+set_cam -2.87098 31.9088 18.5842 -0.02 -158.57 0.04 16.191
+say 2 "Gunk" "I would reject the idea of murder, [wait 0.3]but for someone like you..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 2 "set_torso_target -2.13807 31.0727 19.9021 1"
+send_character_message 2 "set_head_target -2.19436 31.8702 8.76028 1"
+say 2 "Gunk" "You deserve more than death. [wait 0.5]You deserve a lot more than death."
+send_character_message 1 "set_head_target -8.13191 37.5871 6.91602 1"
+set_cam -1.16974 30.9123 8.90899 43.05 72.88 0.1 11.3715
+send_character_message 2 "set_torso_target -1.94274 31.0532 19.6255 1"
+send_character_message 2 "set_head_target -2.1374 32.4562 8.58862 1"
+say 2 "Gunk" "If you don't give up what you're going to try doing right now, [wait 0.3]I'll make it slow."
+send_character_message 2 "set_head_target -36.373 66.7764 0.978823 1"
+set_cam -1.16974 30.9123 8.90899 42.92 72.88 0.1 11.3715
+send_character_message 3 "set_torso_target -56.1487 73.0258 -6.7621 0"
+send_character_message 1 "set_torso_target -2.59706 31.5124 8.99318 1"
+send_character_message 3 "set_head_target -4.57475 33.5103 7.75696 1"
+send_character_message 3 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Amos" "Hey! [wait 0.5]What're you looking at!?"
+send_character_message 1 "set_torso_target -2.60145 31.5124 8.98435 1"
+send_character_message 2 "set_torso_target -1.94369 31.0558 19.6185 1"
+send_character_message 3 "set_torso_target -40.8405 71.3142 -1.85265 1"
+set_cam -39.2619 71.7124 -3.94744 -0.37 136.68 -0.59 11.8603
+say 2 "Gunk" "Get away! [wait 0.5]I'll handle him myself!"
+send_character_message 2 "set_torso_target -2.39539 31.5316 19.8514 1"
+set_cam -42.7659 73.483 -2.61918 -45.67 -110.2 2.44 11.8603
+say 2 "Gunk" "Just stay with the others! [wait 0.5]Don't make any noise!"
+send_character_message 2 "set_torso_target -2.44865 31.6824 19.0994 1"
+send_character_message 1 "set_torso_target -2.69272 31.5124 8.83864 1"
+set_cam -2.6322 31.9314 5.40159 -1.09 -175.2 0.05 11.8603
+say 1 "Amos" "Whoever you are, [wait 0.3]don't do anything stupid!"
+send_character_message 1 "set_torso_target -2.57718 31.4443 8.97474 1"
+send_character_message 1 "set_head_target -2.22402 31.7639 19.548 1"
+send_character_message 2 "set_torso_target -2.04053 31.0837 19.8594 1"
+send_character_message 2 "set_head_target -2.26835 31.9094 9.25354 1"
+say 2 "Gunk" "You have no idea how much fear you have caused."
+set_cam -3.07274 31.7978 10.7463 -0.04 -25.38 -0.04 16.4332
+say 1 "Amos" "Regardless, [wait 0.3]it's time to end it all."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Amos" "Time to see how dangerous you really are."
+set_cam -2.81051 31.6819 5.30785 0.01 -172.54 0.06 51.2382
+send_character_message 2 "set_animation \"Data/Animations/r_combatidle.anm\""
+say 2 "Gunk" "[wait 0.2]Stay quiet and die."
+send_level_message "make_participants_aware"

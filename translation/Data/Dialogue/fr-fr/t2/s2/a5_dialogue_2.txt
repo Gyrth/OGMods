@@ -1,0 +1,20 @@
+#name "Meet2"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 2 57.453 -7.60227 119.168 -90
+send_level_message "therium2_enable_object 1715"
+send_character_message 2 "set_animation \"Data/Animations/r_bigdogswordarmstance.anm\""
+send_character_message 2 "set_head_target 62.4339 -6.54011 123.673 1"
+set_character_pos 1 68.0926 -7.09692 136.723 129
+send_character_message 1 "set_animation \"Data/Animations/stealthobserve.anm\""
+send_character_message 1 "set_torso_target 71.9565 -6.75854 139.865 0"
+send_character_message 1 "set_head_target 61.6722 -6.22774 125.708 1"
+set_cam 66.0519 -6.99723 136.189 0 -107.05 0 31.8716
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "..."
+send_character_message 2 "set_head_target 54.4086 -5.81936 127.249 1"
+set_cam 68.7618 -6.8846 138.988 0 24.95 0 23.0886
+send_level_message "set_camera_dof 0.3 6 3 0 0 0"
+say 1 "Ghost" "[wait 0.2]C’est la même chose [wait 0.1]chose..."
+send_level_message "therium2_disable_object 1715"

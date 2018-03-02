@@ -1,0 +1,21 @@
+#name "Eyes"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -47.1512 132.917 204.203 -14
+send_character_message 1 "set_eye_dir -45.5242 132.754 204.688 1"
+send_character_message 1 "set_torso_target -46.6254 132.516 204.437 1"
+send_character_message 1 "set_head_target -45.389 132.871 204.686 1"
+set_cam -45.7328 133.357 203.866 0 106.92 0 38.9354
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "[wait 0.2]Est-ce que je pense que c’est ?"
+set_cam -45.9196 132.943 203.977 -16.48 -148.57 0.01 21.8839
+say 1 "Ghost" "..."
+send_character_message 1 "set_torso_target -46.6254 132.516 204.437 0"
+set_character_pos 1 -47.1512 132.763 204.203 -14
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam -45.4445 133.389 204.056 -0.01 94.8 0.34 34.5989
+say 1 "Ghost" "Ew. [wait 0.5]Oui."
+send_character_message 1 "set_head_target -45.5374 133.513 204.913 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "C'est vrai."

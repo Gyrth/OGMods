@@ -1,0 +1,36 @@
+#name "Finale"
+#participants 2
+set_character_pos 1 -145.123 552.619 -45.0173 150
+send_character_message 1 "set_animation \"Data/Animations/r_cold_idle_offset.anm\""
+send_character_message 1 "set_torso_target -144.57 553.289 -43.6619 0"
+send_character_message 1 "set_head_target -144.573 553.366 -43.7145 0"
+set_cam -133.298 553.335 -31.1121 0 29.54 0 59.0632
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "You"  "...[wait 0.3]Salut !?"
+send_character_message 1 "set_head_target -145.614 553.672 -45.7423 1"
+send_character_message 1 "set_torso_target -145.353 552.509 -45.7635 1"
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch_timid.anm\""
+set_cam -146.016 553.187 -43.793 0 -23.89 0 38.2038
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "Bijou!? ... [wait 0.5]Papa ?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+send_character_message 1 "set_head_target -145.964 552.903 -45.7829 1"
+send_character_message 1 "set_torso_target -145.353 552.509 -45.7635 0"
+say 1 "You" "La porte est verrouillée..."
+send_level_message "set_camera_dof 1 1 1 1.3 35 1"
+set_character_pos 1 -145.338 552.619 -45.1414 150
+send_character_message 1 "set_animation \"Data/Animations/amos_door1.anm\""
+set_cam -133.24 562.051 -50.28 -34.08 109.99 -0.01 51.7568
+send_character_message 1 "set_head_target -145.555 553.055 -45.3144 0"
+say 1 "You" "[wait 0.3]Laisse-moi entrer !"
+send_level_message "set_camera_dof 1 1 1 1.3 25 1"
+send_character_message 1 "set_animation \"Data/Animations/amos_door3.anm\""
+say 1 "You" "S’il vous plaît, [wait 0.3]quelqu'un me laisser !"
+send_character_message 1 "set_head_target -145.686 552.96 -45.6828 1"
+send_character_message 1 "set_torso_target -145.446 552.234 -45.4895 1"
+send_character_message 1 "set_animation \"Data/Animations/amos_door4.anm\""
+send_level_message "set_camera_dof 1 1 1 1.3 10 1"
+fade_to_black 1
+say 1 "You" "[wait 0.3]..."
+send_global_message "levelwin empry"

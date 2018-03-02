@@ -1,0 +1,37 @@
+#name "Tower"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+send_character_message 2 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 1 "set_torso_target -247.548 85.0279 117.71 0"
+set_character_pos 2 -250.926 84.2236 114.673 -38
+send_character_message 2 "set_head_target -250.74 84.4221 113.803 0.000685126"
+set_character_pos 1 -248.527 84.5123 117.73 1
+send_character_message 1 "set_head_target -244.018 83.0213 117.959 1"
+set_cam -250.002 85.8401 116.947 -21.6 -102.26 0.07 41.2916
+say 1 "Ghost" "Eh bien, [wait 0.3]C’est un enfer d’une montée."
+set_cam -250.002 85.8401 116.947 -21.6 -102.26 0.07 41.2916
+set_character_pos 1 -248.527 84.5123 117.73 1
+send_character_message 2 "set_head_target -248.556 85.3609 117.534 1"
+send_character_message 1 "set_torso_target -247.643 85.0279 117.594 0.967929"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target -248.672 85.4746 117.137 1"
+say 2 "Jairo" "Que faites-vous faire ici ?"
+send_character_message 1 "set_head_target -250.874 85.0029 114.712 1"
+send_character_message 1 "set_torso_target -247.643 85.0279 117.594 0"
+set_character_pos 1 -248.527 84.5123 117.73 135
+set_cam -247.014 85.3468 118.639 -3.61 51.72 -0.05 30.2087
+say 1 "Ghost" "...[wait 0.3]hein ?"
+send_character_message 1 "set_head_target -250.552 85.4174 117.529 1"
+set_character_pos 1 -248.085 84.5123 117.453 -174
+send_character_message 2 "set_animation \"Data/Animations/r_ancientcombatidle.anm\""
+set_cam -249.04 84.9149 114.408 -2.22 101.33 0.05 19.0735
+say 2 "Jairo" "Vous avez eu à faire. [wait 0.5]Ce qui fait croire que vous devriez aller escalade ?"
+set_character_pos 1 -248.085 84.6086 117.453 -174
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcheck.anm\""
+set_cam -250.265 85.2172 117.026 2.02 -101.79 -0.92 19.0735
+say 1 "Ghost" "...[wait 0.3]Jairo, [wait 0.3]s’en tirer !"
+send_level_message "start_dialogue Fly"

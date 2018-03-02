@@ -1,0 +1,23 @@
+#name "Top"
+#participants 5
+set_character_pos 5 -89.1295 191.461 176.235 -91
+set_character_pos 4 -96.559 191.567 175.992 -88
+set_character_pos 1 -87.3635 191.325 179.228 156
+set_cam -87.127 192.115 180.008 0 37.63 0 90
+set_character_pos 3 -88.7343 191.987 178.447 -39
+set_character_pos 2 -88.8276 191.973 179.196 -18
+say 2 "Old rabbit" "Vous êtes un ami de Sky."
+say 2 "Old rabbit" "Vous êtes les bienvenus ici."
+say 2 "Old rabbit" "Je suis stipe aîné."
+say 1 "Turner" "Merci."
+say 1 "Turner" "Je tiens à attirer certains de mes amis--ils m’a aidé à lutter contre les esclavagistes et contribué à sauver ciel, trop."
+say 1 "Turner" "Ils méritent de vivre ici comme je le fais."
+say 2 "Elder Needlegrass" "Hmm."
+say 2 "Elder Needlegrass" "Seuls les meilleurs des meilleurs sont invités ici."
+say 1 "Turner" "Ils se battent comme je le fais--ou ils seront, une fois que je m’entraîne à eux."
+say 1 "Turner" "Finalement les chats seront trouve à cet endroit, et vous aurez envie de bons combattants ensuite."
+say 2 "Elder Needlegrass" "Sky parle beaucoup de vos prouesses, mais je voudrais faire mon propre jugement."
+say 2 "Elder Needlegrass" "Nous allons voir comment vous tarif contre nos meilleurs guetteurs et gardes."
+set_character_pos 3 -89.3477 191.987 180.924 106
+set_character_pos 2 -88.5044 191.973 180.777 111
+make_participants_aware

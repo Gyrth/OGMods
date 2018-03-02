@@ -1,0 +1,80 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 1 35.0616 58.5318 37.2809 -32
+send_character_message 1 "set_eye_dir 41.3519 58.9775 33.3134 1"
+send_character_message 1 "set_torso_target 35.8131 58.6574 37.4068 1"
+send_character_message 1 "set_head_target 38.3622 58.5134 34.9737 1"
+set_cam 34.0183 59.067 38.658 0 -46.08 0 39.1087
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "..."
+set_cam 33.5733 59.067 36.8123 0 -106.81 0 39.1087
+send_character_message 2 "set_head_target 34.9508 59.2216 37.2557 1"
+send_character_message 2 "set_torso_target 26.167 59.6214 32.0835 1"
+send_character_message 2 "set_eye_dir 34.8688 59.2517 37.1835 1"
+set_character_pos 2 25.3894 60.152 31.4037 -35
+send_character_message 1 "set_eye_dir 30.589 59.6382 34.5405 1"
+send_character_message 1 "set_torso_target 34.9766 58.8751 38.0772 1"
+send_character_message 1 "set_head_target 33.3482 59.5347 38.0377 1"
+say 1 "Ghost" "Ce qui ? [wait 0.5]Jairo ?"
+send_character_message 1 "set_head_target 25.4566 60.9371 31.4509 1"
+send_character_message 1 "set_torso_target 34.078 59.6928 36.6797 0"
+set_character_pos 1 35.0616 58.5318 37.2809 148
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+set_cam 25.8712 60.5184 32.9457 8.36 13.42 0 39.1087
+say 2 "Jairo" "Qu'est-ce que tu fais [wait 0.2]Fantôme ? [wait 0.4]Où vas-tu ?"
+send_character_message 1 "set_torso_target 34.1195 59.7059 36.6025 1"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 24.7257 61.0657 31.1723 -8.71 -116 -0.63 31.9906
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "J’étais juste sur mon chemin..."
+send_character_message 1 "set_torso_target 34.3424 58.3879 36.6619 0"
+send_character_message 2 "set_torso_target 26.167 59.6214 32.0835 0"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Jairo" "Vous avez pris le sanctuaire du mal. [wait 0.3]Vous n’êtes pas censé pour être ici."
+send_character_message 1 "set_head_target 25.4551 60.5771 31.494 1"
+send_character_message 2 "set_head_target 34.8876 58.9331 37.1908 1"
+send_character_message 2 "set_torso_target 26.167 60.3623 32.0835 1"
+say 2 "Jairo" "Vous êtes censé pour être attaquer le Cinderbreathe Empire. [wait 0.35]De la tuer. [wait 0.35]Leur meurtre."
+send_character_message 1 "set_torso_target 34.3424 58.3879 36.6619 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam 35.2072 59.4718 35.545 -13.64 170.53 0.77 31.9906
+say 1 "Ghost" "Mais ne sont pas ces gars-là Cinderbreathe ?"
+send_character_message 2 "set_eye_dir 34.8688 59.2517 37.1835 0.761558"
+send_character_message 2 "set_head_target 34.8876 59.3959 37.1908 1"
+send_character_message 2 "set_torso_target 26.2705 61.2055 31.9927 1"
+set_cam 26.5803 60.8709 31.3158 0.67 95.88 0.4 31.9906
+say 2 "Jairo" "Ils ont seulement des scouts. [wait 0.5]Forces non réutilisables. [wait 0.3]Ils ne sont pas importants pour l’Empire."
+send_character_message 2 "set_head_target 34.8876 58.5195 37.1908 1"
+send_character_message 2 "set_torso_target 26.2705 61.2055 31.9927 0"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_eye_dir 34.8688 59.2517 37.1835 1"
+say 2 "Jairo" "Vous devez être frappant où ça fait mal. [wait 0.3]Où il paralysera eux. [wait 0.3]Les affaiblir."
+send_character_message 1 "set_torso_target 34.3424 58.3879 36.6619 0"
+send_character_message 1 "set_head_target 25.4551 61.0037 31.494 1"
+send_character_message 2 "set_head_target 34.8876 59.145 37.1908 1"
+set_cam 36.3227 58.9869 37.7004 5.74 63.93 -0.02 31.9906
+say 1 "Ghost" "..."
+send_character_message 2 "set_eye_dir 34.8688 59.2517 37.1835 0"
+send_character_message 2 "set_head_target 34.4403 58.4581 37.0256 1"
+set_cam 25.2249 60.6661 32.7193 10.32 -16.67 -1.45 31.9906
+say 2 "Jairo" "Il n’y a qu’un seul temple à venir. [wait 0.5]Il vous mènera à un lieu sacré."
+set_character_pos 1 35.0616 58.5318 37.2809 121
+send_character_message 2 "set_head_target 34.9513 59.2057 37.1929 1"
+send_character_message 2 "set_eye_dir 34.8688 59.2517 37.1835 0.779643"
+say 2 "Jairo" "Nous espérons que vous ferez la bonne décision."
+send_character_message 1 "set_torso_target 34.9895 58.8442 35.7562 1"
+send_character_message 1 "set_head_target 46.3201 60.2427 29.3255 1"
+set_cam 33.593 59.0894 37.733 3.41 -61.02 -1.87 31.9906
+say 1 "Ghost" "..."
+set_character_pos 2 57.5713 14.1283 26.0348 -35
+send_character_message 1 "set_head_target 24.9453 61.4867 31.7962 1"
+send_character_message 1 "set_torso_target 34.368 58.9445 35.8504 1"
+say 1 "Ghost" "[wait 0.3]Un lieu sacré ?"
+set_cam 37.1071 58.9988 38.9252 1.61 56.34 0.96 55.5653
+send_character_message 1 "set_torso_target 33.9136 58.9282 36.4088 1"
+set_character_pos 1 35.0616 58.5318 37.2809 144
+say 1 "Ghost" "...?"

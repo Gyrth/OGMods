@@ -1,0 +1,48 @@
+#name "End"
+#participants 2
+send_character_message 1 "empty_hands"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_dialogue_color 2 0.7 0.7 1
+set_dialogue_color 1 0.6 1 0.6
+set_character_pos 2 166.906 89.381 -6.79138 -168
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 164.906 90.1769 -5.84498 -4.88 -54.47 0.05 59.9152
+send_level_message "set_camera_dof 0 0 0 0.3 8 1"
+send_level_message "music_layer_override -2"
+say 2 "Sun" "You killed a wolf."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 1 165.673 89.5185 -6.67694 5
+say 1 "Turner" "I'm here to fight the slavers, this wolf was just in my way."
+send_character_message 2 "set_torso_target 168.003 89.2716 -6.22902 0"
+send_character_message 2 "set_head_target 165.462 89.9456 -6.06861 1"
+say 2 "Sun" "You killed a wolf."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "Yeah, you just said that."
+send_character_message 2 "set_head_target 165.605 90.3064 -6.68404 1"
+say 2 "Sun" "I didn't know they could be killed."
+send_character_message 1 "set_head_target 166.296 90.0646 -6.35018 1"
+say 1 "Turner" "Anyone can be killed. This is number ten for me, maybe eleven?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 166.296 90.0646 -6.35018 1"
+say 2 "Sun" "People you've killed?"
+send_character_message 1 "set_head_target 166.801 90.2375 -6.6265 1"
+set_character_pos 2 166.906 89.3808 -6.79144 -168
+say 1 "Turner" "Just wolves. Lost count of people a long time ago."
+send_character_message 2 "set_head_target 165.963 89.7931 -6.00655 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Sun" "Oh. I killed a dog once. People usually find that impressive."
+send_character_message 1 "set_head_target 166.755 90.2011 -6.89417 1"
+say 1 "Turner" "Why were you fighting dogs? Are you with the Rabbits of the Moon?"
+send_character_message 2 "set_head_target 165.698 90.3467 -6.69959 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sun" "Are we famous already? That was a while ago, when we got the drop on a dog patrol."
+send_character_message 2 "set_head_target 166.192 89.8633 -6.3671 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+say 2 "Sun" "This morning we were about to raid a fort -- we thought it was lightly defended, but they were waiting for us. Someone must have tipped them off. I escaped, but my friends.."
+send_character_message 1 "set_head_target 166.901 90.2635 -5.9252 1"
+say 1 "Turner" "Where is this fort?"
+send_character_message 2 "set_head_target 165.693 90.2787 -6.63642 1"
+set_character_pos 2 166.906 89.3807 -6.79142 -168
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sun" "I'll take you there. If my friends are alive, they'll be locked up inside."
+send_global_message "levelwin"

@@ -1,0 +1,27 @@
+#name "Bother"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 24.9602 6.8366 6.41156 -48
+send_character_message 2 "set_torso_target 24.9805 6.47594 6.90073 1"
+send_character_message 2 "set_head_target 23.4431 3.05086 9.77387 1"
+set_character_pos 1 23.4789 2.61881 11.057 6
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle_glance.anm\""
+send_character_message 1 "set_torso_target 24.3306 2.78054 11.2686 0"
+send_character_message 1 "set_head_target 24.6017 3.23555 12.237 0.0335821"
+set_cam 31.1706 2.92738 9.12035 0 104.6 0 23.3577
+send_level_message "set_camera_dof 0 0 0 0.3 8 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_torso_target 25.1795 2.80412 10.7142 1"
+send_character_message 1 "set_head_target 24.6093 6.53035 7.61022 1"
+say 2 "Jairo" "Vous avez éliminé chaque ennemi, [wait 0.3]encore ?"
+set_cam 23.6119 1.94654 13.249 32.9 -4.52 0 23.3577
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "...[wait 0.3]N° [wait 0.3]Pas encore."
+send_character_message 1 "set_head_target 24.881 6.9746 7.51615 1"
+send_character_message 2 "set_torso_target 25.2655 6.65851 7.19515 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "Retourner une fois que vous avez terminé."

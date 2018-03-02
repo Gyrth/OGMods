@@ -1,0 +1,15 @@
+#name "FL-B"
+#participants 2
+send_character_message 1 "set_head_target -26.8893 -26.5438 -162.286 1"
+set_character_pos 1 -26.8631 -28.3735 -160.889 90
+set_cam -23.2817 -28.204 -154.652 0 26.29 0 56.8271
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Ghost" "..."
+set_character_pos 1 -26.8631 -28.3042 -160.889 90
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+send_character_message 1 "set_head_target -26.8893 -26.5438 -162.286 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "Felt like a waste of time. [wait 0.5]Let's get on with it..."
+send_global_message "levelwin b"

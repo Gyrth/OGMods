@@ -1,0 +1,1033 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>lukas-test17</Name>
+<Description/>
+<Shader>post</Shader>
+<OutOfDate NavMesh="true"/>
+<AmbientSounds/>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills"/>
+    <parameter name="HDR Black point" type="string" val="0.005"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="1"/>
+    <parameter name="HDR White point" type="string" val="0.971"/>
+    <parameter name="Level Boundaries" type="string" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Sky Brightness" type="string" val="1"/>
+    <parameter name="Sky Rotation" type="string" val="-62"/>
+    <parameter name="Sky Tint" type="string" val="255, 255, 255"/>
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue4.tga</DomeTexture>
+    <SunAngularRad>0.153056</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.843168" r1="0.508385" r2="0.174962"/>
+</Sky>
+<ActorObjects>
+    <ActorObject t0="3.32815" t1="6.87459" t2="-13.8835" s0="1" s1="1" s2="1" q0="0" q1="0.00154844" q2="0" r0="0.999995" r1="0" r2="-0.00309688" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.00309688" r9="0" r10="0.999995" r11="0" r12="0" r13="0" r14="0" r15="1" id="0" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="3"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="false"/>
+            <parameter name="Teams" type="string" val="turner"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Rope" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Fur" channel="2" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="2.14558" t1="-3.42134" t2="71.5378" s0="75.7893" s1="0.999996" s2="82.1022" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <CameraObject t0="8.84126" t1="9.17538" t2="95.573" s0="1" s1="1" s2="1" q0="0.175239" q1="-0.656248" q2="0.160586" r0="0.0871025" r1="0" r2="0.996199" r3="0" r4="-0.460001" r5="0.887007" r6="0.0402201" r7="0" r8="-0.883636" r9="-0.461756" r10="0.0772606" r11="0" r12="0" r13="0" r14="0" r15="1" id="2">
+        <parameters/>
+    </CameraObject>
+    <EnvObject t0="-30.5768" t1="-1.50662" t2="24.0071" s0="1.24829" s1="10.1987" s2="-1.21898" q0="-0.134921" q1="0.132845" q2="-0.688911" r0="0.0155076" r1="-0.99988" r2="0" r3="0" r4="0.928185" r5="0.0143958" r6="-0.371839" r7="0" r8="0.371795" r9="0.0057659" r10="0.928297" r11="0" r12="0" r13="0" r14="0" r15="1" id="4" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="33.2921" t1="-1.80313" t2="44.4513" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="6" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.20109" t1="1.07858" t2="-13.3277" s0="47.9818" s1="5.49992" s2="6.25275" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="7" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="38.7485" t1="-0.237355" t2="32.3676" s0="2.04907" s1="10.0708" s2="-0.342853" q0="0.61765" q1="-0.352929" q2="0.602555" r0="0.0247372" r1="-1.19209e-006" r2="0.999694" r3="0" r4="-0.871945" r5="-0.489128" r6="0.0215756" r7="0" r8="0.488978" r9="-0.872212" r10="-0.0121007" r11="0" r12="0" r13="0" r14="0" r15="1" id="8" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-28.8036" t1="-1.80313" t2="34.3867" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="9" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="50.2559" t1="4.70392" t2="57.2877" s0="2.04908" s1="27.295" s2="-0.342845" q0="0.011013" q1="-0.707021" q2="0.707021" r0="-0.999515" r1="0" r2="0.0311463" r3="0" r4="-0.0311463" r5="0" r6="-0.999515" r7="0" r8="0" r9="-1" r10="0" r11="0" r12="0" r13="0" r14="0" r15="1" id="10" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-37.8152" t1="1.07858" t2="-3.07453" s0="7.5697" s1="5.49992" s2="-7.81871" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="11" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="62.5126" t1="1.07858" t2="-4.1998" s0="7.5697" s1="5.49992" s2="-7.81871" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="12" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="38.2615" t1="5.77733" t2="10.4207" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="13" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.20109" t1="10.2031" t2="-25.3831" s0="47.9818" s1="5.49992" s2="6.25275" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="14" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="18.1852" t1="5.77733" t2="21.9403" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="15" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="47.7453" t1="5.77734" t2="79.7409" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="16" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="20.2356" t1="5.77734" t2="94.166" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="17" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="43.6896" t1="5.77734" t2="123.335" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="18" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.0048" t1="5.77734" t2="142.956" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="19" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-12.0758" t1="5.77734" t2="126.304" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="20" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-27.9213" t1="5.77734" t2="142.308" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="21" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-35.8708" t1="5.77733" t2="74.515" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="22" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-42.373" t1="5.77733" t2="22.2214" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="23" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.7058" t1="5.77733" t2="1.52677" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="24" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-12.6493" t1="5.77732" t2="21.7512" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="25" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="64.5061" t1="6.06483" t2="105.255" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="26" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-39.5745" t1="5.77734" t2="108.589" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="27" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.5337" t1="5.79132" t2="72.0608" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="28" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-45.9688" t1="5.77733" t2="54.7024" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="29" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-17.7314" t1="5.77733" t2="3.68972" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="30" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="51.0432" t1="5.77734" t2="29.9388" s0="1.24829" s1="10.1987" s2="-1.21898" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="31" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="0.760328" t1="-2.21965" t2="17.4708" s0="1.60521" s1="1.496" s2="1.78025" q0="0.213889" q1="-0.324347" q2="-0.0847195" r0="0.775243" r1="-0.294215" r2="0.558959" r3="0" r4="0.0167179" r5="0.894148" r6="0.447459" r7="0" r8="-0.631441" r9="-0.337545" r10="0.698101" r11="0" r12="0" r13="0" r14="0" r15="1" id="32" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.90573" t1="-2.1804" t2="19.143" s0="1.60521" s1="1.496" s2="1.78025" q0="0.273594" q1="0.427822" q2="0.508708" r0="0.116369" r1="0.941427" r2="-0.316502" r3="0" r4="-0.473229" r5="0.332725" r6="0.815689" r7="0" r8="0.87322" r9="0.0548569" r10="0.484229" r11="0" r12="0" r13="0" r14="0" r15="1" id="33" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="1.12778" t1="5.47294" t2="106.466" s0="8.64341" s1="4.03765" s2="7.22771" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="34" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="32.7239" t1="-1.80314" t2="61.1443" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="35" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-29.2931" t1="-1.80314" t2="51.4775" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="36" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-29.1999" t1="-1.80314" t2="65.7881" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="37" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="32.7426" t1="-1.80313" t2="75.0087" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="38" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.8893" t1="-1.80313" t2="41.16" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="39" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.3211" t1="-1.80314" t2="57.853" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="40" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="12.3398" t1="-1.80313" t2="71.7175" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="41" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.21025" t1="-1.80313" t2="38.1335" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="42" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.77843" t1="-1.80314" t2="54.8264" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="43" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-8.75975" t1="-1.80313" t2="68.6909" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="44" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="22.5421" t1="-2.09282" t2="58.3987" s0="0.230083" s1="0.201624" s2="0.217361" q0="1" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="45" type_file="Data\Objects\Hotspots\fire_test.xml">
+        <parameters/>
+    </Hotspot>
+    <EnvObject t0="-20.5141" t1="-1.18811" t2="19.7665" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.34197" r0="0.766113" r1="-0.642706" r2="0" r3="0" r4="0.642706" r5="0.766113" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="47" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="-20.6208" t1="-2.06006" t2="52.3399" s0="0.230083" s1="0.201624" s2="0.217361" q0="1" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="-1" r6="0" r7="0" r8="0" r9="0" r10="-1" r11="0" r12="0" r13="0" r14="0" r15="1" id="49" type_file="Data\Objects\Hotspots\fire_test.xml">
+        <parameters/>
+    </Hotspot>
+    <EnvObject t0="4.10235" t1="-3.09758" t2="106.737" s0="24.9146" s1="5.49992" s2="14.1862" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="51" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-3.04926" t1="-5.52958" t2="84.1565" s0="9.38062" s1="5.49992" s2="10.1291" q0="-0.130268" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="0.96606" r6="-0.258316" r7="0" r8="0" r9="0.258316" r10="0.96606" r11="0" r12="0" r13="0" r14="0" r15="1" id="52" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="40.4628" t1="-0.193155" t2="82.9069" s0="2.04907" s1="10.0708" s2="-0.342853" q0="0.61765" q1="-0.352929" q2="0.602555" r0="0.0247372" r1="-1.19209e-006" r2="0.999694" r3="0" r4="-0.871945" r5="-0.489128" r6="0.0215756" r7="0" r8="0.488978" r9="-0.872212" r10="-0.0121007" r11="0" r12="0" r13="0" r14="0" r15="1" id="53" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="-30.0126" t1="-2.04271" t2="60.2347" s0="0.999795" s1="0.999795" s2="0.999795" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="54" type_file="Data\Objects\characters\rats\female_rat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.3"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="40"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="false"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="82"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Patches" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Suit" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Skin" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="50.4913" t1="5.53476" t2="65.1905" s0="0.999795" s1="0.999795" s2="0.999795" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="58" type_file="Data\Objects\characters\rats\female_rat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.3"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="40"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="false"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="79"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Patches" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Suit" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Skin" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <PlaceholderObject t0="-4.78747" t1="3.31652" t2="92.6347" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="61" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/lukas-test17_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Boss"/>
+            <parameter name="NumParticipants" type="int" val="3"/>
+            <parameter name="obj_1" type="int" val="254"/>
+            <parameter name="obj_2" type="int" val="255"/>
+            <parameter name="obj_3" type="int" val="256"/>
+        </parameters>
+        <Connections>
+            <Connection id="61"/>
+        </Connections>
+    </PlaceholderObject>
+    <ActorObject t0="-20.1901" t1="-2.0995" t2="51.1552" s0="0.999795" s1="0.999795" s2="0.999795" q0="0" q1="-0.0788329" q2="0" r0="0.987571" r1="0" r2="0.157175" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.157175" r9="0" r10="0.987571" r11="0" r12="0" r13="0" r14="0" r15="1" id="66" type_file="Data\Objects\characters\rats\female_rat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.3"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="40"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="false"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Patches" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Suit" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Skin" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="22.853" t1="-2.07671" t2="56.9868" s0="0.999795" s1="0.999795" s2="0.999795" q0="0" q1="-0.136277" q2="0" r0="0.962857" r1="0" r2="0.270011" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.270011" r9="0" r10="0.962857" r11="0" r12="0" r13="0" r14="0" r15="1" id="70" type_file="Data\Objects\characters\rats\female_rat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.3"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="40"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="false"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Patches" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Suit" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Skin" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="10.6329" t1="-1.89606" t2="63.6236" s0="0.999795" s1="0.999795" s2="0.999795" q0="0" q1="-0.996216" q2="0" r0="-0.984893" r1="0" r2="0.173166" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.173166" r9="0" r10="-0.984893" r11="0" r12="0" r13="0" r14="0" r15="1" id="74" type_file="Data\Objects\characters\rats\female_rat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.3"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="40"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="false"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="87"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Patches" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Suit" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Skin" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <Group t0="7.92316" t1="-1.3217" t2="38.3397" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="0.656017" q2="0" r0="0.139283" r1="0" r2="-0.990253" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.990253" r9="0" r10="0.139283" r11="0" r12="0" r13="0" r14="0" r15="1" id="77" version="1">
+        <parameters/>
+        <EnvObject t0="7.92316" t1="-2.42134" t2="38.3397" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="0.635155" q2="0" r0="0.193156" r1="0" r2="-0.981168" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.981168" r9="0" r10="0.193156" r11="0" r12="0" r13="0" r14="0" r15="1" id="75" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="7.94656" t1="-1.3217" t2="38.3523" s0="3.75451" s1="6.6301" s2="0.362798" q0="0" q1="-0.111784" q2="0" r0="0.975009" r1="0" r2="0.222167" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.222167" r9="0" r10="0.975009" r11="0" r12="0" r13="0" r14="0" r15="1" id="76">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <PathPointObject t0="51.27" t1="5.37289" t2="82.3033" s0="1" s1="1" s2="1" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="78" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="79"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="49.2837" t1="5.04673" t2="32.755" s0="1" s1="1" s2="1" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="79" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="78"/>
+        </Connections>
+    </PathPointObject>
+    <EnvObject t0="-8.38103" t1="-1.42557" t2="42.6131" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="80" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <PathPointObject t0="-33.7309" t1="-2.42134" t2="46.4967" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="81" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="84"/>
+            <Connection id="82"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-30.2522" t1="-2.42134" t2="58.8591" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="82" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="81"/>
+            <Connection id="83"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="14.1943" t1="-2.42134" t2="64.9904" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="83" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="82"/>
+            <Connection id="84"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="37.9799" t1="-2.42134" t2="61.1225" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="84" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="81"/>
+            <Connection id="83"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-17.5799" t1="-2.24445" t2="51.0134" s0="1" s1="1" s2="1" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="85" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="87"/>
+            <Connection id="86"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="48.5761" t1="5.04676" t2="35.6898" s0="1" s1="1" s2="1" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="86" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="85"/>
+            <Connection id="156"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="0.84877" t1="2.40234" t2="93.5411" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="87" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="85"/>
+            <Connection id="156"/>
+        </Connections>
+    </PathPointObject>
+    <NavmeshHintObject t0="5.95852" t1="0.195922" t2="76.5731" s0="1.67756" s1="5.59281" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="88">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="-12.2723" t1="-1.39277" t2="76.3964" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="89">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="-12.3893" t1="-1.30945" t2="78.6477" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="90">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="6.06848" t1="-1.19975" t2="79.0579" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="91">
+        <parameters/>
+    </NavmeshHintObject>
+    <EnvObject t0="40.6436" t1="-2.42134" t2="81.7667" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="92" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <NavmeshHintObject t0="22.495" t1="-2.42134" t2="58.3493" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="93">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="-20.5702" t1="-2.42134" t2="52.3326" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="94">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="35.4647" t1="-1.71366" t2="34.417" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="95">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="35.3649" t1="-1.71612" t2="30.5644" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="96">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="36.8955" t1="-2.42133" t2="80.8388" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="97">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="36.8433" t1="-1.8575" t2="84.9425" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="98">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="0.79514" t1="-1.63376" t2="19.6421" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="99">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="0.546679" t1="-0.681791" t2="17.749" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="100">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="-0.122703" t1="-1.1483" t2="18.7063" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="101">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="1.75719" t1="-1.24757" t2="18.8344" s0="1.67756" s1="6.6301" s2="1.58512" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="102">
+        <parameters/>
+    </NavmeshHintObject>
+    <EnvObject t0="31.565" t1="-1.00362" t2="40.5262" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="103" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="1.36839" t1="6.77599" t2="-8.0951" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="104" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="4.17669" t1="6.61974" t2="-8.35925" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="105" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="47.3982" t1="-1.42557" t2="76.7747" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="106" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.5831" t1="-1.42581" t2="46.6835" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="107" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.5957" t1="-1.42557" t2="53.0575" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="108" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="11.031" t1="-1.42557" t2="44.9497" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="109" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="10.288" t1="-1.42557" t2="67.8301" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="110" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-7.05922" t1="-1.42557" t2="64.8846" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="111" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-10.6507" t1="-1.42557" t2="64.8532" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="112" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-28.3996" t1="-1.42558" t2="55.3278" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="113" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-43.3418" t1="-1.42558" t2="56.5557" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="114" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-25.4485" t1="-1.42557" t2="69.6817" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="115" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.9162" t1="-1.42558" t2="74.5373" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="116" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-26.2369" t1="-1.42557" t2="30.4648" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="117" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.26335" t1="-1.42557" t2="42.339" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="118" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="4.4759" t1="-1.42557" t2="17.972" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="119" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="5.99343" t1="-0.950344" t2="19.4476" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="120" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="15.641" t1="-1.42557" t2="20.5491" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="121" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-9.67199" t1="-1.42557" t2="21.0063" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="122" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="28.3974" t1="-1.42558" t2="90.1673" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="123" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="17.5423" t1="3.39811" t2="93.2458" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="124" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-39.1347" t1="-1.42557" t2="37.288" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="125" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-13.7733" t1="7.29888" t2="22.9702" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="126" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="18.8761" t1="9.40454" t2="23.1593" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="127" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="49.061" t1="6.82083" t2="29.2664" s0="1" s1="1" s2="1" q0="0" q1="-0.486459" q2="0" r0="0.526715" r1="0" r2="0.850042" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.850042" r9="0" r10="0.526715" r11="0" r12="0" r13="0" r14="0" r15="1" id="128" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-41.1247" t1="6.0251" t2="21.925" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="129" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-39.9877" t1="-1.42557" t2="20.6942" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="130" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="5.95431" t1="3.39811" t2="92.5563" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="131" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-2.75781" t1="-1.32174" t2="36.18" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="0.656017" q2="0" r0="0.139283" r1="0" r2="-0.990253" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.990253" r9="0" r10="0.139283" r11="0" r12="0" r13="0" r14="0" r15="1" id="132" version="1">
+        <parameters/>
+        <EnvObject t0="-2.75781" t1="-2.42137" t2="36.18" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="0.635155" q2="0" r0="0.193156" r1="0" r2="-0.981168" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.981168" r9="0" r10="0.193156" r11="0" r12="0" r13="0" r14="0" r15="1" id="148" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="-2.73442" t1="-1.32174" t2="36.1926" s0="3.75451" s1="6.6301" s2="0.362798" q0="0" q1="-0.111784" q2="0" r0="0.975009" r1="0" r2="0.222167" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.222167" r9="0" r10="0.975009" r11="0" r12="0" r13="0" r14="0" r15="1" id="149">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <EnvObject t0="16.9176" t1="-1.97021" t2="50.2306" s0="1.29584" s1="1.496" s2="2.29952" q0="0" q1="-0.141517" q2="0" r0="0.959946" r1="0" r2="0.280185" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.280185" r9="0" r10="0.959946" r11="0" r12="0" r13="0" r14="0" r15="1" id="133" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="57.8331" t1="-2.1797" t2="43.9444" s0="1.15294" s1="1.496" s2="1.42425" q0="0" q1="-0.943431" q2="0" r0="-0.780124" r1="0" r2="0.625625" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.625625" r9="0" r10="-0.780124" r11="0" r12="0" r13="0" r14="0" r15="1" id="134" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="58.44" t1="-1.66746" t2="46.3761" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="135" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="51.4962" t1="-1.64758" t2="61.8334" s0="1" s1="1" s2="1" q0="0" q1="0.142733" q2="0" r0="0.959255" r1="0" r2="-0.282543" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.282543" r9="0" r10="0.959255" r11="0" r12="0" r13="0" r14="0" r15="1" id="136" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="52.6169" t1="-1.64758" t2="63.8775" s0="1" s1="1" s2="1" q0="0" q1="0.142733" q2="0" r0="0.959255" r1="0" r2="-0.282543" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.282543" r9="0" r10="0.959255" r11="0" r12="0" r13="0" r14="0" r15="1" id="137" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="54.3562" t1="-1.64758" t2="61.5539" s0="1" s1="1" s2="1" q0="0" q1="0.142733" q2="0" r0="0.959255" r1="0" r2="-0.282543" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.282543" r9="0" r10="0.959255" r11="0" r12="0" r13="0" r14="0" r15="1" id="138" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="49.1346" t1="-1.71854" t2="31.9994" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="139" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="52.6279" t1="-1.60166" t2="30.6405" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="140" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="45.2278" t1="-2.17969" t2="54.1483" s0="1.15294" s1="1.496" s2="1.42425" q0="0" q1="-0.666463" q2="0" r0="0.111654" r1="0" r2="0.993747" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.993747" r9="0" r10="0.111654" r11="0" r12="0" r13="0" r14="0" r15="1" id="141" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="46.383" t1="-1.41495" t2="51.7608" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="142" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.56921" t1="-2.36658" t2="53.0805" s0="0.309618" s1="1.09963" s2="2.23703" q0="0" q1="-0.0273163" q2="0" r0="0.998508" r1="0" r2="0.0546122" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0546122" r9="0" r10="0.998508" r11="0" r12="0" r13="0" r14="0" r15="1" id="143" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="9.96356" t1="-2.36658" t2="45.9174" s0="0.309618" s1="1.09963" s2="2.23703" q0="0" q1="-0.0273163" q2="0" r0="0.998508" r1="0" r2="0.0546122" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0546122" r9="0" r10="0.998508" r11="0" r12="0" r13="0" r14="0" r15="1" id="144" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.18975" t1="-2.36658" t2="59.3088" s0="0.309618" s1="1.09963" s2="2.23703" q0="0" q1="-0.0273163" q2="0" r0="0.998508" r1="0" r2="0.0546122" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0546122" r9="0" r10="0.998508" r11="0" r12="0" r13="0" r14="0" r15="1" id="145" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-24.1337" t1="-2.36658" t2="49.5372" s0="0.309618" s1="1.09963" s2="2.23703" q0="0" q1="-0.734491" q2="0" r0="-0.078954" r1="0" r2="0.996878" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.996878" r9="0" r10="-0.078954" r11="0" r12="0" r13="0" r14="0" r15="1" id="146" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-33.2734" t1="-2.36658" t2="36.4479" s0="0.309618" s1="1.09963" s2="2.23703" q0="0" q1="-0.734491" q2="0" r0="-0.078954" r1="0" r2="0.996878" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.996878" r9="0" r10="-0.078954" r11="0" r12="0" r13="0" r14="0" r15="1" id="147" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="30.1402" t1="-2.36658" t2="56.466" s0="0.309618" s1="1.09963" s2="2.23703" q0="0" q1="-0.0273163" q2="0" r0="0.998508" r1="0" r2="0.0546122" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0546122" r9="0" r10="0.998508" r11="0" r12="0" r13="0" r14="0" r15="1" id="150" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="31.5787" t1="-1.49352" t2="57.3684" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="151" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="16.8832" t1="-2.36658" t2="68.8514" s0="0.309618" s1="1.09963" s2="2.23703" q0="0" q1="0.705615" q2="0" r0="0.004215" r1="0" r2="-0.999991" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999991" r9="0" r10="0.004215" r11="0" r12="0" r13="0" r14="0" r15="1" id="152" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="8.74958" t1="-2.36658" t2="62.4526" s0="0.309618" s1="1.09963" s2="2.23703" q0="0" q1="0.988363" q2="0" r0="-0.953723" r1="0" r2="-0.300687" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.300687" r9="0" r10="-0.953723" r11="0" r12="0" r13="0" r14="0" r15="1" id="153" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="7.30385" t1="-1.42941" t2="36.821" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="154" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-1.96015" t1="-1.6086" t2="37.9422" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="155" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <PathPointObject t0="49.984" t1="5.04677" t2="76.3016" s0="1" s1="1" s2="1" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="156" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="86"/>
+            <Connection id="87"/>
+        </Connections>
+    </PathPointObject>
+    <NavmeshHintObject t0="30.1525" t1="-1.31286" t2="56.2691" s0="3.84724" s1="6.6301" s2="0.674918" q0="0" q1="-0.711978" q2="0" r0="-0.0138254" r1="0" r2="0.999904" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999904" r9="0" r10="-0.0138254" r11="0" r12="0" r13="0" r14="0" r15="1" id="157">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="9.61318" t1="-1.26695" t2="52.7411" s0="3.84724" s1="6.6301" s2="0.674918" q0="0" q1="-0.711978" q2="0" r0="-0.0138254" r1="0" r2="0.999904" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999904" r9="0" r10="-0.0138254" r11="0" r12="0" r13="0" r14="0" r15="1" id="158">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="10.0275" t1="0.0280304" t2="46.124" s0="3.84724" s1="6.6301" s2="0.674918" q0="0" q1="-0.711978" q2="0" r0="-0.0138254" r1="0" r2="0.999904" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999904" r9="0" r10="-0.0138254" r11="0" r12="0" r13="0" r14="0" r15="1" id="159">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="8.7943" t1="-1.26695" t2="62.3405" s0="3.75451" s1="6.6301" s2="0.362798" q0="0" q1="-0.805062" q2="0" r0="-0.29625" r1="0" r2="0.955111" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.955111" r9="0" r10="-0.29625" r11="0" r12="0" r13="0" r14="0" r15="1" id="160">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="16.6878" t1="-1.26694" t2="68.8022" s0="3.75451" s1="6.6301" s2="0.362798" q0="0" q1="0.999849" q2="0" r0="-0.999396" r1="0" r2="-0.0347486" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0347486" r9="0" r10="-0.999396" r11="0" r12="0" r13="0" r14="0" r15="1" id="161">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="-6.19897" t1="-1.26694" t2="59.3337" s0="3.75451" s1="6.6301" s2="0.362798" q0="0" q1="-0.736274" q2="0" r0="-0.0841988" r1="0" r2="0.996449" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.996449" r9="0" r10="-0.0841988" r11="0" r12="0" r13="0" r14="0" r15="1" id="162">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="-23.8215" t1="-1.26694" t2="49.5143" s0="3.75451" s1="6.6301" s2="0.362798" q0="0" q1="0.999155" q2="0" r0="-0.996621" r1="0" r2="-0.0821331" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0821331" r9="0" r10="-0.996621" r11="0" r12="0" r13="0" r14="0" r15="1" id="163">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="-33.4306" t1="-1.26695" t2="36.3667" s0="3.75451" s1="6.6301" s2="0.362798" q0="0" q1="0.999155" q2="0" r0="-0.996621" r1="0" r2="-0.0821331" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0821331" r9="0" r10="-0.996621" r11="0" r12="0" r13="0" r14="0" r15="1" id="164">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="10.6493" t1="-0.892559" t2="18.2274" s0="2.41465" s1="6.6301" s2="1.45062" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="165">
+        <parameters/>
+    </NavmeshHintObject>
+    <EnvObject t0="28.8429" t1="-1.77328" t2="78.5089" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="166" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="-0.422517" t1="3.16283" t2="98.1177" s0="0.999795" s1="0.999795" s2="0.999795" q0="0" q1="-0.999998" q2="0" r0="-0.999992" r1="0" r2="0.00402646" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.00402646" r9="0" r10="-0.999992" r11="0" r12="0" r13="0" r14="0" r15="1" id="167" type_file="Data\Objects\characters\rats\female_rat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.4"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="50"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="2"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="false"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="176"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="177" type="0" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Patches" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Suit" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Skin" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-1.96183" t1="2.97062" t2="98.3592" s0="0.999795" s1="0.999795" s2="0.999795" q0="0" q1="-0.999998" q2="0" r0="-0.999992" r1="0" r2="0.00402646" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.00402646" r9="0" r10="-0.999992" r11="0" r12="0" r13="0" r14="0" r15="1" id="171" type_file="Data\Objects\characters\rats\female_rat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1.4"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="50"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="2"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="false"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="176"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Patches" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Suit" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Skin" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="3.68369" t1="-2.42134" t2="51.8753" s0="1" s1="1" s2="1" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="172" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="176"/>
+            <Connection id="173"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-0.277135" t1="-2.42134" t2="51.1041" s0="1" s1="1" s2="1" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="173" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="172"/>
+            <Connection id="176"/>
+        </Connections>
+    </PathPointObject>
+    <EnvObject t0="36.967" t1="-1.63734" t2="16.0939" s0="3.07112" s1="1.496" s2="2.58251" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="174" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-1.12196" t1="3.25778" t2="100.107" s0="1.94984" s1="1.82249" s2="0.998337" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="175" color_r="0" color_g="0" color_b="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <PathPointObject t0="1.09183" t1="-2.42135" t2="55.7041" s0="1" s1="1" s2="1" q0="0" q1="-0.698306" q2="0" r0="0.0247374" r1="0" r2="0.999694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.999694" r9="0" r10="0.0247374" r11="0" r12="0" r13="0" r14="0" r15="1" id="176" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="172"/>
+            <Connection id="173"/>
+        </Connections>
+    </PathPointObject>
+    <ItemObject t0="-0.943396" t1="2.50234" t2="95.932" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="177" type_file="Data/Items/gabenife.xml" color_r="1" color_g="1" color_b="1">
+        <parameters/>
+    </ItemObject>
+    <Hotspot t0="-1.81258" t1="7.95779" t2="-11.0741" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="179" type_file="Data\Objects\Hotspots\overgrowth_level.xml">
+        <parameters>
+            <parameter name="goal_0" type="string" val="defeat 54 58 66 70 74"/>
+            <parameter name="goal_0_pre" type="string" val="dialogue Start"/>
+            <parameter name="goal_1" type="string" val="spawn_defeat 167 171"/>
+            <parameter name="goal_1_post" type="string" val="dialogue Win"/>
+            <parameter name="goal_1_pre" type="string" val="dialogue Boss"/>
+            <parameter name="music" type="string" val="lugaru_ambient_grass"/>
+            <parameter name="next_level" type="string" val=""/>
+            <parameter name="player_spawn" type="string" val="212"/>
+        </parameters>
+    </Hotspot>
+    <Group t0="31.5534" t1="-1.3217" t2="17.6586" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="0.656017" q2="0" r0="0.139283" r1="0" r2="-0.990253" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.990253" r9="0" r10="0.139283" r11="0" r12="0" r13="0" r14="0" r15="1" id="180" version="1">
+        <parameters/>
+        <EnvObject t0="31.5534" t1="-2.42134" t2="17.6586" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="0.635155" q2="0" r0="0.193156" r1="0" r2="-0.981168" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.981168" r9="0" r10="0.193156" r11="0" r12="0" r13="0" r14="0" r15="1" id="181" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="31.5768" t1="-1.3217" t2="17.6712" s0="3.75451" s1="6.6301" s2="0.362798" q0="0" q1="-0.111784" q2="0" r0="0.975009" r1="0" r2="0.222167" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.222167" r9="0" r10="0.975009" r11="0" r12="0" r13="0" r14="0" r15="1" id="182">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <EnvObject t0="29.1932" t1="-1.72445" t2="17.7237" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="183" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="52.3191" t1="2.32218" t2="28.7236" s0="0.241936" s1="1.97665" s2="-0.236255" q0="-0.224334" q1="0.265291" q2="-0.585137" r0="0.174471" r1="-0.976535" r2="-0.126247" r3="0" r4="0.73848" r5="0.214578" r6="-0.639221" r7="0" r8="0.651312" r9="0.0182943" r10="0.75859" r11="0" r12="0" r13="0" r14="0" r15="1" id="184" color_r="0.141176" color_g="0.188235" color_b="0.0588235" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="17.5408" t1="-1.58467" t2="37.8267" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="185" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-13.1451" t1="-1.32174" t2="35.5688" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="0.656017" q2="0" r0="0.139283" r1="0" r2="-0.990253" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.990253" r9="0" r10="0.139283" r11="0" r12="0" r13="0" r14="0" r15="1" id="186" version="1">
+        <parameters/>
+        <EnvObject t0="-13.1451" t1="-2.42137" t2="35.5688" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="0.635155" q2="0" r0="0.193156" r1="0" r2="-0.981168" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.981168" r9="0" r10="0.193156" r11="0" r12="0" r13="0" r14="0" r15="1" id="187" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="-13.1217" t1="-1.32174" t2="35.5814" s0="3.75451" s1="6.6301" s2="0.362795" q0="0" q1="-0.111784" q2="0" r0="0.975009" r1="0" r2="0.222167" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.222167" r9="0" r10="0.975009" r11="0" r12="0" r13="0" r14="0" r15="1" id="188">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <EnvObject t0="-18.5408" t1="-1.97021" t2="65.6055" s0="1.29584" s1="1.496" s2="2.29952" q0="0" q1="-0.126189" q2="0" r0="0.968153" r1="0" r2="0.250361" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.250361" r9="0" r10="0.968153" r11="0" r12="0" r13="0" r14="0" r15="1" id="189" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-31.6885" t1="-1.32174" t2="46.7808" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="-0.0423122" q2="0" r0="0.996419" r1="0" r2="0.0845486" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0845486" r9="0" r10="0.996419" r11="0" r12="0" r13="0" r14="0" r15="1" id="190" version="1">
+        <parameters/>
+        <EnvObject t0="-31.6885" t1="-2.42137" t2="46.7808" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="-0.0695887" q2="0" r0="0.990315" r1="0" r2="0.13884" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.13884" r9="0" r10="0.990315" r11="0" r12="0" r13="0" r14="0" r15="1" id="191" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="-31.6998" t1="-1.32174" t2="46.8049" s0="3.75451" s1="6.6301" s2="0.362797" q0="0" q1="-0.764247" q2="0" r0="-0.168147" r1="0" r2="0.985762" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.985762" r9="0" r10="-0.168147" r11="0" r12="0" r13="0" r14="0" r15="1" id="192">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <Group t0="-32.143" t1="-1.32174" t2="55.1902" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="-0.0423122" q2="0" r0="0.996419" r1="0" r2="0.0845486" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0845486" r9="0" r10="0.996419" r11="0" r12="0" r13="0" r14="0" r15="1" id="193" version="1">
+        <parameters/>
+        <EnvObject t0="-32.143" t1="-2.42137" t2="55.1902" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="-0.0695887" q2="0" r0="0.990315" r1="0" r2="0.13884" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.13884" r9="0" r10="0.990315" r11="0" r12="0" r13="0" r14="0" r15="1" id="194" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="-32.1543" t1="-1.32174" t2="55.2142" s0="3.75451" s1="6.6301" s2="0.3628" q0="0" q1="-0.764247" q2="0" r0="-0.168147" r1="0" r2="0.985762" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.985762" r9="0" r10="-0.168147" r11="0" r12="0" r13="0" r14="0" r15="1" id="195">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <Group t0="-26.455" t1="-1.32174" t2="61.1496" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="-0.0423122" q2="0" r0="0.996419" r1="0" r2="0.0845486" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0845486" r9="0" r10="0.996419" r11="0" r12="0" r13="0" r14="0" r15="1" id="196" version="1">
+        <parameters/>
+        <EnvObject t0="-26.455" t1="-2.42137" t2="61.1496" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="-0.0695887" q2="0" r0="0.990315" r1="0" r2="0.13884" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.13884" r9="0" r10="0.990315" r11="0" r12="0" r13="0" r14="0" r15="1" id="197" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="-26.4663" t1="-1.32174" t2="61.1736" s0="3.75451" s1="6.6301" s2="0.362797" q0="0" q1="-0.764247" q2="0" r0="-0.168147" r1="1.00128e-006" r2="0.985762" r3="0" r4="0" r5="1" r6="-1.0933e-006" r7="0" r8="-0.985762" r9="0" r10="-0.168147" r11="0" r12="0" r13="0" r14="0" r15="1" id="198">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <Group t0="-3.72666" t1="-1.32174" t2="70.2926" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="-0.65757" q2="0" r0="0.135203" r1="0" r2="0.990818" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.990818" r9="0" r10="0.135203" r11="0" r12="0" r13="0" r14="0" r15="1" id="199" version="1">
+        <parameters/>
+        <EnvObject t0="-3.72666" t1="-2.42137" t2="70.2926" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="-0.677905" q2="0" r0="0.0808901" r1="0" r2="0.996723" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.996723" r9="0" r10="0.0808901" r11="0" r12="0" r13="0" r14="0" r15="1" id="200" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="-3.7526" t1="-1.32174" t2="70.2868" s0="3.75451" s1="6.6301" s2="0.362793" q0="0" q1="-0.999671" q2="0" r0="-0.998684" r1="0" r2="0.0512829" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.0512829" r9="0" r10="-0.998684" r11="0" r12="0" r13="0" r14="0" r15="1" id="201">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <Group t0="7.0917" t1="-1.32174" t2="71.8095" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="-0.792739" q2="0" r0="-0.25687" r1="0" r2="0.966446" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.966446" r9="0" r10="-0.25687" r11="0" r12="0" r13="0" r14="0" r15="1" id="202" version="1">
+        <parameters/>
+        <EnvObject t0="7.0917" t1="-2.42137" t2="71.8095" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="-0.809094" q2="0" r0="-0.309266" r1="0" r2="0.950975" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.950975" r9="0" r10="-0.309266" r11="0" r12="0" r13="0" r14="0" r15="1" id="203" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="7.06999" t1="-1.32174" t2="71.7942" s0="3.75451" s1="6.6301" s2="0.362802" q0="0" q1="0.985237" q2="0" r0="-0.941384" r1="0" r2="-0.337337" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.337337" r9="0" r10="-0.941384" r11="0" r12="0" r13="0" r14="0" r15="1" id="204">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <EnvObject t0="-6.9883" t1="-1.67164" t2="72.0427" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="205" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="36.7443" t1="-1.3217" t2="22.942" s0="0.872651" s1="6.6401" s2="4.51121" q0="0" q1="0.698709" q2="0" r0="0.0236114" r1="0" r2="-0.999721" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.999721" r9="0" r10="0.0236114" r11="0" r12="0" r13="0" r14="0" r15="1" id="206" version="1">
+        <parameters/>
+        <EnvObject t0="36.7443" t1="-2.42134" t2="22.942" s0="0.309618" s1="1.09964" s2="2.23703" q0="0" q1="0.678905" q2="0" r0="0.0781758" r1="0" r2="-0.99694" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.99694" r9="0" r10="0.0781758" r11="0" r12="0" r13="0" r14="0" r15="1" id="207" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <NavmeshHintObject t0="36.769" t1="-1.3217" t2="22.9518" s0="3.75451" s1="6.6301" s2="0.3628" q0="0" q1="-0.0539303" q2="0" r0="0.994183" r1="0" r2="0.107704" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.107704" r9="0" r10="0.994183" r11="0" r12="0" r13="0" r14="0" r15="1" id="208">
+            <parameters/>
+        </NavmeshHintObject>
+    </Group>
+    <EnvObject t0="33.4193" t1="-0.955252" t2="22.479" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="209" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="2.99486" t1="-1.73147" t2="25.2371" s0="1" s1="1" s2="1" q0="0" q1="0.0243184" q2="0" r0="0.998817" r1="0" r2="-0.0486224" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.0486224" r9="0" r10="0.998817" r11="0" r12="0" r13="0" r14="0" r15="1" id="212" type_file="Data/Objects/IGF_Characters/pale_turner.xml" special_type="0">
+        <parameters/>
+        <Connections>
+            <Connection id="212"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="24.9728" t1="-1.32807" t2="28.8966" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="213" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="21.7788" t1="-1.20326" t2="28.3243" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="214" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="41.6293" t1="-1.34266" t2="18.4094" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="215" color_r="1" color_g="1" color_b="1" type_file="Data\Objects\Plants\Trees\temperate\green_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="6.12448" t1="7.81788" t2="-11.9298" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="252" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/lukas-test17_dialogue_1.txt"/>
+            <parameter name="DisplayName" type="string" val="Start"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="253"/>
+        </parameters>
+        <Connections>
+            <Connection id="252"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="6.12448" t1="8.51788" t2="-11.9298" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="253" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-4.43747" t1="4.01652" t2="92.6347" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="254" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-4.78747" t1="4.01652" t2="92.6347" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="255" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="171"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-5.13747" t1="4.01652" t2="92.6347" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="256" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="167"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="3.00603" t1="3.30657" t2="94.7702" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="258" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/lukas-test17_dialogue_2.txt"/>
+            <parameter name="DisplayName" type="string" val="Win"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="259"/>
+        </parameters>
+        <Connections>
+            <Connection id="258"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="3.00603" t1="4.00657" t2="94.7702" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="259" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+</ActorObjects>

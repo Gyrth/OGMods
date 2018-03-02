@@ -1,0 +1,14 @@
+#name "Win"
+#participants 2
+set_character_pos 2 19.3999 4.91066 3.08065 -97
+set_character_pos 1 18.4647 4.95933 3.72757 0
+set_cam 19.4341 5.64064 4.30153 0 31.45 0 90
+say 1 "Turner" "Ce n’était pas si mal.
+say 1 "Turner" "Il ne devrait pas être trop difficile de survivre ici."
+say 1 "Turner" "Il suffit de tenir le long assez pour s’échapper."
+say 2 "Midnight" "Je suis sûr que c’était juste la cérémonie d’ouverture, afin de tester nos compétences."
+say 2 "Midnight" "En ce qui concerne l’évasion... bonne chance.
+say 2 "Midnight" "Améthyste s’exécute à l’arène.
+say 2 "Midnight" "Tant qu’elle vit, nous n’arriverons jamais loin."
+say 1 "Turner" "Elle aura juste de cesser de vivre, alors."
+send_global_message "levelwin"

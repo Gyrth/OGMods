@@ -1,0 +1,6 @@
+#name "End"
+#participants 1
+set_cam 12.3432 -11.8525 12.0238 16.58 -60.37 -1.35 90
+set_character_pos 1 13.8476 -11.4711 10.7851 0
+say 1 "Turner" "Nous allons obtenir ce avec."
+send_global_message "levelwin"

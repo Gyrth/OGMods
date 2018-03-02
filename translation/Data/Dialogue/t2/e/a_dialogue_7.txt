@@ -1,0 +1,15 @@
+#name "Note-Terrorists"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_head_target 18.9121 -2.91274 -51.0854 1"
+set_cam 19.7643 -2.70219 -50.4342 0 54.38 0 44.5848
+set_character_pos 1 18.3414 -3.19008 -51.8931 -48
+say 1 "Ghost" "A note from the Empry."
+set_cam 17.9858 -2.46313 -50.9874 0 -37.3 0 44.5848
+set_character_pos 1 18.3414 -3.14058 -51.8931 -48
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "To all guards stationed in Collinpeak: [wait 0.3]the terrorist(s) have been tearing their way through each of our outposts."
+say 2 "Note" "Current location, [wait 0.3]motivation and direction are unknown. [wait 0.5]Anyone who is thinking of defecting or running off home will be punished severely and relieved of command."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Anyone who stays will be rewarded handsomely. [wait 0.5]Anyone who captures one of the terrorists will have their own home in the Empry. [wait 0.5]Keep paranoia to a minimum."

@@ -1,0 +1,38 @@
+#name "Cat"
+#participants 2
+set_dialogue_color 2 0.9 0.9 1
+set_dialogue_voice 2 3
+set_character_pos 2 14.8402 18.2995 162.016 -90
+set_character_pos 1 14.8517 18.3114 168.302 91
+set_cam 14.2406 19.3305 171.685 -2.53 -7.24 0 15.2088
+send_character_message 1 "empty_hands"
+send_character_message 2 "set_torso_target 16.0058 18.108 165.688 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_level_message "music_layer_override 2"
+say 2 "Silver" "Tu es la seule cause de toute cette agitation, puis ?"
+send_character_message 2 "set_head_target 14.2262 19.6947 162.845 1"
+say 2 "Silver" "Interférer avec nos opérations locales ?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "Si vous êtes un chat."
+send_character_message 2 "set_head_target 14.8418 19.2915 168.309 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "Ce qu’une observation incisive. Je vois que vous ne pas vaincre vos ennemis avec votre esprit de rapière."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "J’ai besoin de ce navire."
+send_character_message 2 "set_head_target 18.4259 19.0183 166.672 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+say 2 "Silver" "Et que comptez-vous faire avec elle ? Naviguer au large vers le soleil couchant ? Ou le lever de la lune ? Tu peux même un motoculteur d’une Hune ?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "Pas mon problème. J’ai fait une promesse à un ami."
+send_character_message 2 "set_head_target 14.9884 19.1547 167.772 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Silver" "Les promesses sont des manilles pour les faibles, mais vous... vous êtes fort. Pour un lapin, bien sûr. La force devrait être récompensée."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "Que faudrait-il pour vous apporter à mes côtés ? Argent ? Compagnons ? Ou juste plus d’occasions de tuer ?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Turner" "Que diriez-vous, j’ai commencer par couper la langue."
+send_character_message 1 "equip_item 4152"
+send_level_message "music_layer_override 4"
+make_participants_aware

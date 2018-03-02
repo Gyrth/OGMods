@@ -1,0 +1,929 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>test18</Name>
+<Description/>
+<Shader>post</Shader>
+<OutOfDate NavMesh="true"/>
+<AmbientSounds/>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills"/>
+    <parameter name="Dialogue Colors" type="string" val="Data/Levels/og_story/character_dialogue.txt"/>
+    <parameter name="Fog amount" type="float" val="1"/>
+    <parameter name="HDR Black point" type="float" val="0.005"/>
+    <parameter name="HDR Bloom multiplier" type="float" val="1"/>
+    <parameter name="HDR White point" type="float" val="0.80519"/>
+    <parameter name="Level Boundaries" type="int" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Sky Brightness" type="float" val="2.27273"/>
+    <parameter name="Sky Rotation" type="float" val="-62"/>
+    <parameter name="Sky Tint" type="string" val="43, 41, 50"/>
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue4.tga</DomeTexture>
+    <SunAngularRad>0.279761</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.716493" r1="0.623448" r2="0.312971"/>
+</Sky>
+<ActorObjects>
+    <ActorObject t0="-15.4741" t1="3.18785" t2="9.88911" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="int" val="1"/>
+            <parameter name="Teams" type="string" val="a"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Pants" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="23.3983" t1="-3.42134" t2="28.1785" s0="95.5108" s1="1" s2="128.008" q0="0" q1="0" q2="0" q3="1" id="1" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <CameraObject t0="3.89888" t1="7.66485" t2="32.2677" s0="1" s1="1" s2="1" q0="0.0284718" q1="-0.36218" q2="0.011069" q3="0.931608" id="2">
+        <parameters/>
+    </CameraObject>
+    <ActorObject t0="-17.3686" t1="3.54245" t2="12.4732" s0="1" s1="1" s2="1" q0="0" q1="0.714173" q2="0" q3="0.699969" id="3" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="a"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="72" type="1" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Rope" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Fur" channel="2" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="34.7062" t1="1.81345" t2="41.5992" s0="17.6018" s1="4.99462" s2="1.80369" q0="0" q1="0" q2="0" q3="1" id="10" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-20.0032" t1="-0.82335" t2="28.627" s0="4.55238" s1="3.92925" s2="21.1598" q0="0" q1="-0.201619" q2="0" q3="0.979464" id="11" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="74.4476" t1="1.81345" t2="41.7825" s0="14.3189" s1="4.99462" s2="1.80369" q0="0" q1="0" q2="0" q3="1" id="12" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="51.8432" t1="1.81345" t2="92.9629" s0="37.9884" s1="4.99462" s2="1.80369" q0="0" q1="0" q2="0" q3="1" id="13" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="16.2061" t1="1.69643" t2="65.5579" s0="26.1866" s1="4.8776" s2="1.28755" q0="0" q1="-0.715867" q2="0" q3="0.698237" id="14" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="87.4791" t1="1.67722" t2="67.7579" s0="1.44103" s1="4.85838" s2="25.5479" q0="0" q1="0" q2="0" q3="1" id="15" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="75.2941" t1="0.660377" t2="62.7036" s0="5.27539" s1="3.50023" s2="4.71233" q0="0" q1="0" q2="0" q3="1" id="16" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="56.2832" t1="0.953361" t2="41.7239" s0="3.88064" s1="4.99462" s2="1.11657" q0="0" q1="0" q2="0" q3="1" id="17" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="59.3021" t1="3.35727" t2="5.11554" s0="0.861726" s1="7.39853" s2="0.925932" q0="0" q1="0" q2="0" q3="1" id="18" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="13.2253" t1="3.35727" t2="5.11554" s0="0.861726" s1="7.39853" s2="0.925932" q0="0" q1="0" q2="0" q3="1" id="19" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="42.3418" t1="3.35727" t2="-37.8514" s0="0.861726" s1="7.39853" s2="0.925932" q0="0" q1="0" q2="0" q3="1" id="20" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.1085" t1="3.35727" t2="-43.4404" s0="0.861726" s1="7.39853" s2="0.925932" q0="0" q1="0" q2="0" q3="1" id="21" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-24.5475" t1="3.35727" t2="103.815" s0="0.861726" s1="7.39853" s2="0.925932" q0="0" q1="0" q2="0" q3="1" id="22" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="91.3199" t1="3.35727" t2="143.6" s0="0.861726" s1="7.39853" s2="0.925932" q0="0" q1="0" q2="0" q3="1" id="23" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="30.5153" t1="3.35727" t2="112.399" s0="0.861726" s1="7.39853" s2="0.925932" q0="0" q1="0" q2="0" q3="1" id="24" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-6.81354" t1="3.35727" t2="140.067" s0="0.861726" s1="7.39853" s2="0.925932" q0="0" q1="0" q2="0" q3="1" id="25" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="61.8596" t1="0.31907" t2="77.1187" s0="5.27539" s1="3.50023" s2="4.71233" q0="0" q1="0" q2="0" q3="1" id="28" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="33.8231" t1="0.31907" t2="54.0739" s0="5.27539" s1="3.50023" s2="4.71233" q0="0" q1="0" q2="0" q3="1" id="29" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="27.5871" t1="-0.393811" t2="71.5658" s0="5.27539" s1="2.78735" s2="0.495113" q0="0" q1="0" q2="0" q3="1" id="30" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="27.5871" t1="-0.504715" t2="81.007" s0="5.27539" s1="2.67645" s2="0.495113" q0="0" q1="0" q2="0" q3="1" id="31" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="23.221" t1="-0.620276" t2="76.4774" s0="0.48917" s1="2.68709" s2="4.48449" q0="0" q1="0" q2="0" q3="1" id="32" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="31.8712" t1="-0.411573" t2="79.2864" s0="0.48917" s1="2.8958" s2="1.67545" q0="0" q1="0" q2="0" q3="1" id="33" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="31.8712" t1="-0.558641" t2="73.5216" s0="0.48917" s1="3.06232" s2="1.67545" q0="0" q1="0" q2="0" q3="1" id="34" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="31.9813" t1="-2.64493" t2="76.4114" s0="0.142089" s1="4.99462" s2="1.16879" q0="0" q1="0" q2="0" q3="1" id="35" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="29.2504" t1="-2.43583" t2="78.4549" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="36" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="int" val="1"/>
+            <parameter name="Teams" type="string" val="a"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Pants" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="6.19295" t1="-1.42134" t2="59.857" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="38" type_file="Data/Objects/characters/dogs/light_armored_dog_male_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="43"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Armor" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Fur patches" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="5.81325" t1="-2.42134" t2="79.8834" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="42" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="43"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="6.0935" t1="-2.42134" t2="39.8203" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="42"/>
+        </Connections>
+    </PathPointObject>
+    <ActorObject t0="41.62" t1="-2.29009" t2="82.8659" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="48" type_file="Data/Objects/characters/dogs/light_armored_dog_male_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="58"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Armor" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Fur patches" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="56.8419" t1="-2.42134" t2="61.4039" s0="1" s1="1" s2="1" q0="0" q1="-0.510025" q2="0" q3="0.86016" id="51" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Sit"/>
+            <parameter name="Wait" type="string" val="5"/>
+        </parameters>
+        <Connections/>
+    </PathPointObject>
+    <ActorObject t0="38.5144" t1="-1.85671" t2="46.695" s0="1" s1="1" s2="1" q0="0" q1="0.595129" q2="0" q3="0.80363" id="52" type_file="Data/Objects/characters/dogs/light_armored_dog_male_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Armor" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Fur patches" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="20.7384" t1="-2.42134" t2="47.933" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="55" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="4"/>
+        </parameters>
+        <Connections>
+            <Connection id="57"/>
+        </Connections>
+    </PathPointObject>
+    <ActorObject t0="58.1095" t1="-2.14342" t2="58.9593" s0="1" s1="1" s2="1" q0="0" q1="0.212864" q2="0" q3="0.977082" id="56" type_file="Data/Objects/characters/dogs/light_armored_dog_male_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="63"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Armor" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Fur patches" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="19.9897" t1="-2.42134" t2="82.5232" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="57" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="4"/>
+        </parameters>
+        <Connections>
+            <Connection id="55"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="38.2481" t1="-2.42134" t2="67.602" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="58" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="5"/>
+        </parameters>
+        <Connections>
+            <Connection id="59"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="51.4743" t1="-2.42134" t2="68.7905" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="59" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="5"/>
+        </parameters>
+        <Connections>
+            <Connection id="58"/>
+        </Connections>
+    </PathPointObject>
+    <ActorObject t0="56.7655" t1="-2.51974" t2="61.6596" s0="1" s1="1" s2="1" q0="0" q1="0.736317" q2="0" q3="0.676637" id="60" type_file="Data/Objects/characters/dogs/light_armored_dog_male_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="51"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Armor" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Fur patches" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="52.1386" t1="-2.42134" t2="87.5693" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="61" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="5"/>
+        </parameters>
+        <Connections>
+            <Connection id="62"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="75.0716" t1="-2.42134" t2="87.5239" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="62" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="5"/>
+        </parameters>
+        <Connections>
+            <Connection id="61"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="58.2439" t1="-2.42134" t2="59.3159" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="63" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Sit"/>
+            <parameter name="Wait" type="string" val="5"/>
+        </parameters>
+        <Connections/>
+    </PathPointObject>
+    <PlaceholderObject t0="59.9991" t1="-2.04915" t2="65.8194" s0="1" s1="1" s2="1" q0="0.00203991" q1="0.32678" q2="-0.00589889" q3="0.94508" id="68" type_file="Data/Objects/IGF_Characters/pale_turner.xml" special_type="0">
+        <parameters>
+            <parameter name="Name" type="string" val="player_spawn"/>
+        </parameters>
+        <Connections>
+            <Connection id="68"/>
+        </Connections>
+    </PlaceholderObject>
+    <ActorObject t0="25.1801" t1="-2.28498" t2="79.075" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="71" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="int" val="1"/>
+            <parameter name="Teams" type="string" val="a"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Pants" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ItemObject t0="-5.25677" t1="3.06232" t2="55.9657" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="72" type_file="Data/Items/DogWeapons/DogSword.xml" color_r="1" color_g="1" color_b="1">
+        <parameters/>
+    </ItemObject>
+    <EnvObject t0="72.3463" t1="-1.1022" t2="50.3883" s0="2.33615" s1="2.0157" s2="2.08681" q0="0" q1="0" q2="0" q3="1" id="73" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="29.9479" t1="-1.10217" t2="64.9471" s0="2.33615" s1="2.0157" s2="2.08681" q0="0" q1="0" q2="0" q3="1" id="74" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="78.5377" t1="-2.17639" t2="87.6541" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="80" type_file="Data/Objects/characters/dogs/light_armored_dog_male_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="62"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Armor" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Fur patches" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <Hotspot t0="27.4584" t1="-2.4212" t2="76.0771" s0="1.81549" s1="1.81549" s2="1.81549" q0="0" q1="0" q2="0" q3="1" id="81" type_file="Data\Objects\Hotspots\start_dialogue.xml">
+        <parameters>
+            <parameter name="Automatic" type="int" val="0"/>
+            <parameter name="Dialogue" type="string" val="Prisoners"/>
+            <parameter name="Visible in game" type="int" val="0"/>
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="28.2004" t1="3.34507" t2="80.5119" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="82" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/test18_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Prisoners"/>
+            <parameter name="NumParticipants" type="int" val="4"/>
+            <parameter name="obj_1" type="int" val="84"/>
+            <parameter name="obj_2" type="int" val="85"/>
+            <parameter name="obj_3" type="int" val="86"/>
+            <parameter name="obj_4" type="int" val="89"/>
+        </parameters>
+        <Connections>
+            <Connection id="82"/>
+        </Connections>
+    </PlaceholderObject>
+    <ActorObject t0="27.8384" t1="-2.00063" t2="75.2049" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="83" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="0"/>
+            <parameter name="Left handed" type="string" val="false"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="int" val="1"/>
+            <parameter name="Teams" type="string" val="a"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Pants" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <PlaceholderObject t0="28.7254" t1="4.04507" t2="80.5119" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="84" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="3"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="28.3754" t1="4.04507" t2="80.5119" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="85" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="36"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="28.0254" t1="4.04507" t2="80.5119" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="86" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="71"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="44.9793" t1="-1.10217" t2="75.0495" s0="2.33615" s1="2.0157" s2="2.08681" q0="0" q1="0" q2="0" q3="1" id="87" color_r="0.537255" color_g="0.537255" color_b="0.537255" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject t0="21.7981" t1="-1.94224" t2="62.7928" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="88" type_file="Data/Objects/characters/dogs/light_armored_dog_male_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="57"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Armor" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Fur patches" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <PlaceholderObject t0="27.6754" t1="4.04507" t2="80.5119" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="89" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="83"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-13.0256" t1="3.1059" t2="12.0684" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="90" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/test18_dialogue_1.txt"/>
+            <parameter name="DisplayName" type="string" val="Start"/>
+            <parameter name="NumParticipants" type="int" val="2"/>
+            <parameter name="obj_1" type="int" val="91"/>
+            <parameter name="obj_2" type="int" val="96"/>
+        </parameters>
+        <Connections>
+            <Connection id="90"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-12.8506" t1="3.8059" t2="12.0684" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="91" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="3"/>
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="58.9631" t1="-1.77245" t2="61.8923" s0="0.166397" s1="0.247698" s2="0.203629" q0="-0.0379014" q1="-0.0204643" q2="0.998145" q3="0.0430263" id="92" type_file="Data\Objects\Hotspots\fire_test.xml">
+        <parameters/>
+    </Hotspot>
+    <Hotspot t0="-14.4507" t1="12.5749" t2="14.5484" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="93" type_file="Data\Objects\Hotspots\overgrowth_level.xml">
+        <parameters>
+            <parameter name="goal_0" type="string" val="defeat 38"/>
+            <parameter name="goal_0_pre" type="string" val="dialogue Start"/>
+            <parameter name="goal_1" type="string" val="reach_skippable 0"/>
+            <parameter name="goal_2" type="string" val="defeat 48 52 56 60 80 88"/>
+            <parameter name="goal_3" type="string" val="spawn_defeat 121"/>
+            <parameter name="goal_3_post" type="string" val="dialogue End"/>
+            <parameter name="goal_3_pre" type="string" val="dialogue Boss"/>
+            <parameter name="music" type="string" val="lugaru_ambient_grass"/>
+            <parameter name="next_level" type="string" val=""/>
+            <parameter name="player_spawn" type="string" val="95 99 68"/>
+        </parameters>
+    </Hotspot>
+    <ReflectionCaptureObject t0="49.5877" t1="11.4091" t2="27.6871" s0="0.48742" s1="0.48742" s2="0.48742" q0="0" q1="0" q2="0" q3="1" id="94" gicoeff00="0" gicoeff01="0" gicoeff02="0" gicoeff03="0" gicoeff04="0" gicoeff05="0" gicoeff06="0" gicoeff07="0" gicoeff08="0" gicoeff09="0" gicoeff10="0" gicoeff11="0" gicoeff12="0" gicoeff13="0" gicoeff14="0" gicoeff15="0" gicoeff16="0" gicoeff17="0">
+        <parameters>
+            <parameter name="Global" type="string" val="1"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <PlaceholderObject t0="1.06295" t1="-1.96732" t2="56.06" s0="1" s1="1" s2="1" q0="0.00415802" q1="0.666142" q2="-0.004655" q3="0.745799" id="95" type_file="Data/Objects/IGF_Characters/pale_turner.xml" special_type="0">
+        <parameters>
+            <parameter name="Name" type="string" val="player_spawn"/>
+        </parameters>
+        <Connections>
+            <Connection id="95"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-13.2006" t1="3.8059" t2="12.0684" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="96" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <Group t0="10.6697" t1="3.35727" t2="58.8617" s0="1.73345" s1="14.8071" s2="5.49605" q0="0" q1="0" q2="0" q3="1" id="98" version="1">
+        <parameters/>
+        <EnvObject t0="10.6697" t1="3.35727" t2="60.6788" s0="0.861726" s1="7.39853" s2="0.925932" q0="0" q1="0" q2="0" q3="1" id="26" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="10.7026" t1="3.45297" t2="58.1075" s0="0.304332" s1="0.311332" s2="1.98882" q0="0" q1="0" q2="0" q3="1" id="27" color_r="0.235294" color_g="0.164706" color_b="0.0705882" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <PlaceholderObject t0="16.8029" t1="6.87464" t2="58.0428" s0="1" s1="1" s2="1" q0="0.00415802" q1="0.666142" q2="-0.004655" q3="0.745799" id="99" type_file="Data/Objects/IGF_Characters/pale_turner.xml" special_type="0">
+        <parameters>
+            <parameter name="Name" type="string" val="player_spawn"/>
+        </parameters>
+        <Connections>
+            <Connection id="99"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="45.3751" t1="-1.44838" t2="63.4013" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="101" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/test18_dialogue_2.txt"/>
+            <parameter name="DisplayName" type="string" val="End"/>
+            <parameter name="NumParticipants" type="int" val="4"/>
+            <parameter name="obj_1" type="int" val="102"/>
+            <parameter name="obj_2" type="int" val="103"/>
+            <parameter name="obj_3" type="int" val="108"/>
+            <parameter name="obj_4" type="int" val="109"/>
+        </parameters>
+        <Connections>
+            <Connection id="101"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="45.9001" t1="-0.74838" t2="63.4013" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="102" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="3"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="45.5501" t1="-0.74838" t2="63.4013" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="103" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="36"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="58.8918" t1="-2.76434" t2="61.9134" s0="0.401755" s1="0.444694" s2="0.332506" q0="0" q1="0" q2="0" q3="1" id="104" color_r="0.321569" color_g="0.235294" color_b="0.105882" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="16.5222" t1="8.29796" t2="59.1874" s0="0.710567" s1="1" s2="5.37595" q0="0" q1="-0.0114476" q2="0" q3="0.999934" id="107" type_file="Data\Objects\Hotspots\overgrowth_level_checkpoint.xml">
+        <parameters>
+            <parameter name="checkpoint_id" type="int" val="0"/>
+            <parameter name="level_hotspot_id" type="int" val="93"/>
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="45.2001" t1="-0.74838" t2="63.4013" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="108" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="71"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="44.8501" t1="-0.74838" t2="63.4013" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="109" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="83"/>
+        </Connections>
+    </PlaceholderObject>
+    <Decal t0="85.3555" t1="-1.36514" t2="69.1532" s0="25.3894" s1="19.1556" s2="87.3885" q0="0" q1="0" q2="0" q3="1" id="112" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.27451" color_g="0.274507" color_b="0.274507">
+        <parameters/>
+    </Decal>
+    <PlaceholderObject t0="65.9027" t1="-0.753401" t2="66.5927" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="113" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/test18_dialogue_3.txt"/>
+            <parameter name="DisplayName" type="string" val="Boss"/>
+            <parameter name="NumParticipants" type="int" val="2"/>
+            <parameter name="obj_1" type="int" val="114"/>
+            <parameter name="obj_2" type="int" val="120"/>
+        </parameters>
+        <Connections>
+            <Connection id="113"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="66.0777" t1="-0.0534008" t2="66.5927" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="114" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="3"/>
+        </Connections>
+    </PlaceholderObject>
+    <Decal t0="47.1979" t1="-1.36514" t2="88.0096" s0="29.0275" s1="19.1556" s2="106.826" q0="0" q1="-0.701447" q2="0" q3="0.712722" id="115" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.27451" color_g="0.274507" color_b="0.274507">
+        <parameters/>
+    </Decal>
+    <Decal t0="61.8816" t1="-3.18864" t2="76.7" s0="19.1556" s1="19.1556" s2="19.1556" q0="0" q1="0" q2="0" q3="1" id="116" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.12549" color_g="0.125489" color_b="0.125489">
+        <parameters/>
+    </Decal>
+    <Decal t0="73.8011" t1="-4.15446" t2="62.1438" s0="19.1556" s1="19.1556" s2="19.1556" q0="0" q1="0" q2="0" q3="1" id="117" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.12549" color_g="0.125489" color_b="0.125489">
+        <parameters/>
+    </Decal>
+    <Decal t0="32.6494" t1="-4.15446" t2="53.0989" s0="19.1556" s1="19.1556" s2="19.1556" q0="0" q1="0" q2="0" q3="1" id="118" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.12549" color_g="0.125489" color_b="0.125489">
+        <parameters/>
+    </Decal>
+    <Decal t0="29.3483" t1="-4.15446" t2="64.6732" s0="9.70888" s1="9.70888" s2="9.70888" q0="0" q1="0" q2="0" q3="1" id="119" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.12549" color_g="0.125489" color_b="0.125489">
+        <parameters/>
+    </Decal>
+    <PlaceholderObject t0="65.7277" t1="-0.0534008" t2="66.5927" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="120" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="121"/>
+        </Connections>
+    </PlaceholderObject>
+    <ActorObject t0="62.2522" t1="-1.85671" t2="70.9479" s0="1" s1="1" s2="1" q0="0" q1="-0.987368" q2="0" q3="0.158444" id="121" type_file="Data/Objects/characters/dogs/light_armored_dog_male_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="0"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="130" type="0" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Fur" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Shirt" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Armor" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Fur patches" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <Decal t0="44.6487" t1="-4.15272" t2="74.9342" s0="9.70888" s1="9.70888" s2="9.70888" q0="0" q1="0" q2="0" q3="1" id="122" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.12549" color_g="0.125489" color_b="0.125489">
+        <parameters/>
+    </Decal>
+    <Decal t0="71.8562" t1="-4.15272" t2="50.1655" s0="9.70888" s1="9.70888" s2="9.70888" q0="0" q1="0" q2="0" q3="1" id="123" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.12549" color_g="0.125489" color_b="0.125489">
+        <parameters/>
+    </Decal>
+    <Decal t0="14.3184" t1="-0.880556" t2="65.4831" s0="10.6591" s1="16.2529" s2="81.18" q0="0" q1="0" q2="0" q3="1" id="124" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.509804" color_g="0.509799" color_b="0.509799">
+        <parameters/>
+    </Decal>
+    <Decal t0="51.1488" t1="-0.880556" t2="37.4848" s0="14.1149" s1="16.2529" s2="91.6057" q0="0" q1="-0.705916" q2="0" q3="0.708296" id="125" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.364706" color_g="0.364702" color_b="0.364702">
+        <parameters/>
+    </Decal>
+    <Decal t0="10.3992" t1="-4.5841" t2="60.3138" s0="4.38936" s1="18.923" s2="5.45448" q0="0" q1="0" q2="0" q3="1" id="126" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.364706" color_g="0.364702" color_b="0.364702">
+        <parameters/>
+    </Decal>
+    <Decal t0="-23.8124" t1="-4.67388" t2="26.8439" s0="7.52087" s1="18.923" s2="60.5781" q0="0" q1="-0.194416" q2="0" q3="0.980919" id="127" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.364706" color_g="0.364702" color_b="0.364702">
+        <parameters/>
+    </Decal>
+    <ItemObject t0="64.2551" t1="-1.54302" t2="71.1491" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="130" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1">
+        <parameters/>
+    </ItemObject>
+    <Decal t0="13.6442" t1="1.01826" t2="60.9037" s0="10.0092" s1="19.7776" s2="18.4236" q0="0" q1="0" q2="0" q3="1" id="131" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.501961" color_g="0.501956" color_b="0.501956">
+        <parameters/>
+    </Decal>
+    <Decal t0="27.3808" t1="-1.96478" t2="75.844" s0="20.2092" s1="13.0806" s2="18.395" q0="0" q1="-0.701447" q2="0" q3="0.712722" id="135" type_file="Data\Objects\Decals\env_blob_shadow.xml" color_r="0.4" color_g="0.399996" color_b="0.399996">
+        <parameters/>
+    </Decal>
+</ActorObjects>

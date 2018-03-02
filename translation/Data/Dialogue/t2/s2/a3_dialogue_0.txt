@@ -1,0 +1,19 @@
+#name "Note-Relocation"
+#participants 2
+set_character_pos 1 -24.696 2.85019 17.3665 90
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target -24.6229 3.30483 16.513 1"
+set_cam -23.3942 3.46124 18.2741 0 44.12 0 38.5894
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "A letter from an Empry commander..."
+set_character_pos 1 -24.696 2.83039 17.3665 90
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -25.1808 3.49697 16.4123 0 -145.65 0 38.5894
+say 2 "Note" "Yes, [wait 0.3]the higher rungs of the Empry have answered. [wait 0.5]Check the seal if you're so [wait 0.3]'particular' about it."
+say 2 "Note" "To all off-site Empry commanders located in the colony grounds, [wait 0.3]the latest terrorist activities has called for some new measures."
+say 2 "Note" "Attached to this letter is a map guiding to you to one of the bunkers used by us in the Cinderblood Civil War; [wait 0.3]in a mostly damaged state, sure, [wait 0.3]but the layout should be enough to stop just three rabbits from attacking."
+say 2 "Note" "Travel there as soon as possible. [wait 0.5]Any Empry officers and commanders caught outside the bunkers will be temporarily relieved of command."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Be wary and calm. [wait 0.5]Signed, [wait 0.3]Ano."

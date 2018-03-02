@@ -1,0 +1,13 @@
+#name "Finish"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 2.2825 -2.71046 52.3203 -90
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 0.278529 -2.18868 55.3968 1"
+set_cam 4.52201 -2.35881 57.2847 0 24.82 0 40.4673
+send_level_message "set_camera_dof 0 0 0 0.3 6 3"
+say 1 "Ghost" "...[wait 0.3]that's all of them, [wait 0.3]I think."
+send_character_message 1 "set_head_target 2.37342 -1.72212 59.9625 1"
+set_cam 3.57136 -0.523644 46.9901 -12.21 173.21 -0.02 36.4197
+say 1 "Ghost" "Time to get out of here."

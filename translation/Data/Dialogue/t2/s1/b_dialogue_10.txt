@@ -1,0 +1,18 @@
+#name "Note-Scout"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 86.6623 -62.7353 303.059 170
+send_character_message 1 "set_head_target 85.9736 -62.3514 302.724 1"
+set_cam 87.3575 -62.1744 302.299 0 118.82 0 65.8249
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "A set of notes from a Cinderbreathe scout..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 85.9205 -62.1048 303.616 0 -32.08 0 65.8249
+say 2 "Note" "These colony grounds are so strange... [wait 0.3]they've more variety in terrain than the entire continent next to us."
+say 2 "Note" "Forest, [wait 0.3]desert, [wait 0.3]mountain, [wait 0.3]tundra... [wait 0.5]all but swamp I've seen. [wait 0.5]It doesn't feel natural, [wait 0.3]but then again, [wait 0.3]nothing here does."
+say 2 "Note" "Every major hill we come across usually has a host of those strange stone lanterns. [wait 0.5]I can't help but feel like I'm being watched."
+say 2 "Note" "We're in the stretch of desert right now. [wait 0.5]The ancient ruins make for good landmarks, [wait 0.3]but damn it if they aren't dusty."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Just sleeping by these things, [wait 0.3]I have to deal with wiping away the sand... [wait 0.5]probably nowhere near as bad as Ouran, [wait 0.3]though."

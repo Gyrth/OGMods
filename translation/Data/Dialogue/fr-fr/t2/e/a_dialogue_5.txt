@@ -1,0 +1,15 @@
+#name "Note-Outbreak"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -27.5941 -3.60182 -91.9734 -90
+send_character_message 1 "set_head_target -27.6802 -3.45304 -91.1693 1"
+set_cam -29.0328 -3.29631 -92.307 0 -120 0 56.0142
+say 1 "Ghost" "Une note écrite par l’un des soldats, [wait 0.3]s’adressant à un plus-haut."
+set_cam -28.3258 -3.17752 -91.4267 11.57 -78.78 0 56.0142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Le moissonneur qui s’est tenu dans la cage avait d’être libéré pour effacer le périmètre des saletés Cinderblood."
+say 2 "Note" "S’il s’agissait d’une mesure radicale, [wait 0.3]qu’elle soit complètement nécessaire- [wait 0.3]et celui qui nous a valu toute la guerre de sécession."
+say 2 "Note" "Nous ne savons pas où la faucheuse est allé, [wait 0.3]mais nous estimons que quelque part dans la forêt de l’est."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Il a porté son armure osseuse et le sabre avec elle, [wait 0.3]trop."

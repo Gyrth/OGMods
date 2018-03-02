@@ -1,0 +1,40 @@
+#name "Willow"
+#participants 2
+send_character_message 2 "set_eye_dir 128.112 -52.1874 312.002 1"
+set_character_pos 2 129.485 -50.9078 311.986 -179
+send_character_message 2 "set_animation \"Data\Animations\r_sit_cross_legged.anm\""
+send_character_message 2 "set_head_target 127.478 -51.6666 311.834 1"
+set_character_pos 1 127.414 -52.5377 311.866 0
+send_character_message 1 "set_torso_target 128.838 -51.6196 313.334 0.1003"
+send_character_message 1 "set_head_target 129.436 -50.6028 311.963 1"
+set_cam 127.165 -51.5577 314.343 0 -25.58 -0.02 90
+say 2 "Willow" "Nice day, isn't it?"
+send_character_message 2 "set_torso_target 128.595 -50.9812 311.973 0"
+send_character_message 1 "set_eye_dir 129.203 -50.6927 312.008 1"
+send_character_message 2 "set_eye_dir 127.515 -51.15 312.037 1"
+set_cam 131.856 -49.4352 314.331 -25.38 53.64 -0.99 22.5011
+send_character_message 1 "set_torso_target 128.2 -50.9439 312.679 0"
+send_character_message 1 "set_head_target 128.731 -50.6856 311.929 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Turner" "Bright and clear. [wait 0.2]We can see far enough, hard to sneak up on us."
+send_character_message 2 "set_torso_target 128.584 -51.0195 311.74 1"
+send_character_message 2 "set_eye_dir 128.492 -50.382 312.001 1"
+set_cam 125.131 -52.2207 312.987 13.87 -72.37 2.64 28.4332
+say 2 "Willow" "Enough with the raiders already! [wait 0.2]They're not coming here."
+send_character_message 2 "set_eye_dir 128.498 -50.3791 312.003 1"
+set_cam 131.856 -49.4352 314.331 -25.38 53.64 -0.99 22.5011
+say 1 "Turner" "Bet that's what they thought at Red Shards."
+send_character_message 2 "set_eye_dir 129.155 -50.5141 310.076 1"
+send_character_message 2 "set_torso_target 128.586 -51.2585 311.271 1"
+send_character_message 2 "set_head_target 127.852 -50.851 309.001 1"
+send_character_message 1 "set_head_target 128.734 -50.6786 311.945 1"
+set_cam 125.131 -52.2207 312.987 13.87 -72.37 2.64 28.4332
+say 2 "Willow" "What do we even have that they'd want? [wait 0.2]Grass?"
+send_character_message 2 "set_eye_dir 127.798 -51.6306 312.025 1"
+send_character_message 2 "set_head_target 126.624 -51.4762 311.671 1"
+send_character_message 2 "set_torso_target 128.339 -51.4846 311.951 1"
+set_cam 131.856 -49.4352 314.331 -25.38 53.64 -0.99 22.5011
+say 1 "Turner" "We have bodies. [wait 0.2]They've been taking slaves."
+send_character_message 2 "set_eye_dir 127.848 -52.1846 311.961 1"
+set_cam 125.131 -52.2207 312.987 13.87 -72.37 2.64 28.4332
+say 2 "Willow" "Nonsense. [wait 0.2]You spend too much time gossipping at the Rocky Hall."

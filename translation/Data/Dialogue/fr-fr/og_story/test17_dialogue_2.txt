@@ -1,0 +1,11 @@
+#name "Win"
+#participants 2
+set_character_pos 2 199.608 96.3255 -2.18897 107
+set_character_pos 1 199.515 96.3623 -5.33998 -82
+set_cam 200.705 96.8839 -5.97546 0 144.45 0 90
+say 2 "Rebel" "Merci ! D'où vous vient ?"
+say 1 "Turner" "Je suis venu ici dans un bateau à arrêter les esclavagistes."
+say 2 "Rebel" "Nous essayons de les arrêter aussi !"
+say 2 "Rebel" "Les chiens capturé certains d'entre nous."
+say 1 "Turner" "M’y emmener."
+send_global_message "levelwin"

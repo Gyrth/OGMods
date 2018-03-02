@@ -1,0 +1,15 @@
+#name "Note-Outbreak"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -27.5941 -3.60182 -91.9734 -90
+send_character_message 1 "set_head_target -27.6802 -3.45304 -91.1693 1"
+set_cam -29.0328 -3.29631 -92.307 0 -120 0 56.0142
+say 1 "Ghost" "A note written by one of the soldiers, [wait 0.3]addressing a higher-up."
+set_cam -28.3258 -3.17752 -91.4267 11.57 -78.78 0 56.0142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "The Reaper held in the cage had to be released to clear the perimetre of Cinderblood filth."
+say 2 "Note" "Though it was a drastic measure, [wait 0.3]it was a completely necessary one - [wait 0.3]and one that won us the entire civil war."
+say 2 "Note" "We have no idea where the Reaper has gone, [wait 0.3]but we estimate somewhere in the Eastern forest."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "It's carried its bone armour and broadsword with it, [wait 0.3]too."

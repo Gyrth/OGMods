@@ -1,0 +1,42 @@
+#name "Win"
+#participants 2
+send_character_message 2 "set_head_target 216.021 68.026 -20.4327 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 214.831 68.0747 -20.3678 1"
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_voice 1 0
+set_dialogue_color 2 0.8 0.7 1
+set_dialogue_voice 2 14
+set_cam 215.24 67.8825 -22.0156 0 -173.53 0 84.0038
+set_character_pos 2 214.788 67.4465 -20.3219 40
+set_character_pos 1 216.069 67.4311 -20.3421 166
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_level_message "music_layer_override 0"
+send_character_message 1 "equip_item 78"
+say 1 "Turner" "Voici le dos du couteau."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Sky" "Gardez-le. Si vous ne pouvez pas arrêter de se battre, pourrait ainsi faire armés."
+send_character_message 1 "set_torso_target 215.146 67.851 -20.7258 1"
+send_character_message 1 "set_head_target 215.209 67.668 -20.7218 0.998426"
+say 1 "Turner" "J’ai essayé de l’arrêter. Mais partout où que je vais, il semble que la violence est la seule réponse."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sky" "Je connais un endroit où vous pouvez trouver la paix. C’est une île dans les nuages, un lapin seul refuge peut atteindre."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 1 "Turner" "Ah. Je vois pas pourquoi nous nous entendons maintenant. Nous sommes tous les deux complètement fou."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Sky" "Non, c’est vrai ! Je vais te montrer."
+send_character_message 1 "set_head_target 214.873 68.9191 -20.4222 0.998426"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "Une ville dans les nuages, hein ? Pas sur la lune ?"
+say 2 "Sky" "On peut prendre un bateau, une fois que nous libérer mon ami ardoise--elle est un navigateur et peut nous montrer le chemin retraverser la mer."
+send_character_message 1 "set_head_target 214.832 68.0283 -20.3146 0.998426"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Nous ? Je ne vais pas avec vous. Certainement pas à quelque part qui n’existe pas. Les bandits sont partis, Stonefist a disparu, drapeaux blancs est sans danger. J'ai fini."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sky" "Oh, ma douce summer kit. Bien sûr il n’est pas sûr. Nous avons seulement ébréchée au large de la pointe de l’iceberg ici."
+say 2 "Sky" "Vous pensez que l’île Lugaru est le monde entier, mais c’est juste un point sur la carte, d'où je suis originaire."
+say 1 "Turner" "De quoi tu parles ?"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Sky" "Ne prenez pas mon mot pour lui. Je vais le prouver. Viens avec moi."
+send_global_message "levelwin"

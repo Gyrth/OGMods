@@ -1,0 +1,98 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 -7.81197 -67.274 223.446 -150
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_eye_dir -13.5704 -67.9535 229.858 1"
+send_character_message 2 "set_torso_target -8.10396 -67.2378 223.62 0"
+send_character_message 2 "set_head_target -13.6976 -67.7923 230.003 1"
+set_character_pos 1 -13.7522 -68.6625 230.056 44
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_shade.anm\""
+send_character_message 1 "set_eye_dir -7.50228 -66.9428 223.331 1"
+send_character_message 1 "set_torso_target -13.2237 -68.0116 229.72 1"
+send_character_message 1 "set_head_target -7.83967 -66.5947 223.491 1"
+set_cam -14.1522 -67.95 231.028 0 -31.47 0 45.6333
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "Er, [wait 0.5]Jairo?"
+send_character_message 1 "set_torso_target -13.2237 -68.0116 229.72 0"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "What the hell just happened?"
+send_character_message 2 "set_head_target -13.5883 -68.0481 229.997 1"
+send_character_message 2 "set_torso_target -8.12396 -67.1454 223.656 1"
+set_cam -7.99678 -66.7007 224.3 0 -7.49 0 45.6333
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Jairo" "You were at the prison, [wait 0.3]and you are now here."
+send_character_message 1 "set_torso_target -13.2579 -68.0101 229.686 1"
+set_character_pos 1 -13.7522 -68.6336 230.056 44
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam -11.8056 -68.3123 227.928 0 137.9 0 45.6333
+say 1 "You" "Well, [wait 0.2]yeah - [wait 0.5]but how? [wait 0.3]And how far did that shrine take me?"
+send_character_message 2 "set_head_target -13.9195 -67.794 229.796 1"
+send_character_message 2 "set_torso_target -8.12396 -67.1454 223.656 0"
+set_cam -8.87688 -67.0359 223.836 13.67 -77.27 0 45.6333
+say 2 "Jairo" "Not too far. [wait 0.3]The Therium is a large place."
+say 1 "You" "The... [wait 0.5]the what?"
+send_character_message 2 "set_eye_dir -13.5704 -67.9535 229.858 0"
+send_character_message 2 "set_head_target -15.6561 -66.2586 228.078 1"
+say 2 "Jairo" "It's complicated. [wait 0.5]You don't need to know."
+send_character_message 1 "set_torso_target -13.2579 -68.0101 229.686 0"
+send_character_message 1 "set_head_target -7.83967 -66.2605 223.491 1"
+set_cam -12.943 -67.8904 230.305 0.04 65.83 -0.03 41.0113
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target -13.7344 -67.8343 229.992 1"
+send_character_message 2 "set_eye_dir -13.5704 -67.9535 229.858 1"
+say 1 "You" "I kind of need to know where I am, [wait 0.3]Jairo."
+send_character_message 2 "set_eye_dir -13.5704 -67.9535 229.858 0"
+send_character_message 2 "set_head_target -12.7582 -68.8262 229.744 1"
+set_cam -6.68291 -67.6292 224.644 28.72 50.69 0.53 36.0405
+say 2 "Jairo" "..."
+send_character_message 2 "set_head_target -16.3741 -66.8719 225.205 1"
+send_character_message 2 "set_eye_dir -13.5704 -67.9535 229.858 1"
+say 2 "Jairo" "In the north are two inactive volcanoes, [wait 0.3]a large forest, [wait 0.3]and the Cinderbreathe prison."
+send_character_message 2 "set_torso_target -8.12396 -67.1454 223.656 1"
+send_character_message 2 "set_head_target -15.3687 -66.1017 228.813 1"
+say 2 "Jairo" "To the south is more desert sand, [wait 0.3]and eventually some small mountains will border the Arlissian Collective."
+send_character_message 2 "set_head_target -13.7199 -67.7338 230.016 1"
+send_character_message 2 "set_torso_target -8.12396 -66.8099 223.656 1"
+say 2 "Jairo" "In order to get back to the Cinderbreathe Empry, [wait 0.5]you'll need to follow the lantern shrines marked with 'A'."
+send_character_message 1 "set_torso_target -13.2579 -68.0101 229.686 1"
+send_character_message 1 "set_head_target -7.83967 -67.5518 223.491 1"
+set_cam -13.9528 -67.8591 229.107 -0.36 -161.06 -0.33 36.0405
+say 1 "You" "So... [wait 0.5]since I went into the shrine marked with 'B'...?"
+send_character_message 2 "set_torso_target -8.12396 -66.8099 223.656 0"
+set_cam -8.6195 -66.6753 223.234 0.03 -110.3 -0.49 36.0405
+say 2 "Jairo" "You went into the wrong one."
+send_character_message 1 "set_torso_target -13.2579 -68.0101 229.686 0"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -14.8061 -67.943 230.708 0.44 -49.45 -0.21 36.0405
+say 1 "You" "Alright..."
+send_character_message 2 "set_torso_target -8.22103 -67.3187 223.703 1"
+send_character_message 1 "set_head_target -7.90486 -66.5866 223.548 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "And before you leave..."
+send_character_message 2 "set_torso_target -8.3195 -67.6363 223.704 1"
+say 2 "Jairo" "Who are you?"
+send_character_message 1 "set_eye_dir -15.1078 -67.8059 229.23 1"
+send_character_message 1 "set_head_target -10.6742 -67.848 223.816 1"
+set_cam -14.0946 -68.0539 229.164 11.37 -148.3 -0.41 36.0405
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "..."
+send_character_message 1 "set_head_target -8.09525 -66.2764 223.621 1"
+send_character_message 1 "set_eye_dir -7.90881 -66.8147 223.588 1"
+say 1 "You" "Call me Ghost."
+send_character_message 2 "set_torso_target -8.3195 -67.6363 223.704 0"
+set_cam -14.9115 -68.0009 230.743 0.5 -51.02 -0.72 64.7787
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "Alright, [wait 0.5]Ghost."
+set_cam -16.0712 -67.2863 218.763 -0.76 -146.35 -0.43 64.7787
+set_character_pos 1 -13.7522 -68.6336 230.056 -46
+send_character_message 2 "set_head_target -13.8568 -68.3084 229.888 1"
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 2 "Jairo" "Good luck."

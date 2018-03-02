@@ -1,0 +1,1279 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>test36</Name>
+<Description/>
+<Shader>post</Shader>
+<OutOfDate NavMesh="true"/>
+<AmbientSounds/>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills"/>
+    <parameter name="HDR Black point" type="string" val="0.005"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="1"/>
+    <parameter name="HDR White point" type="string" val="0.971"/>
+    <parameter name="Level Boundaries" type="string" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Sky Brightness" type="string" val="1"/>
+    <parameter name="Sky Rotation" type="string" val="-62"/>
+    <parameter name="Sky Tint" type="string" val="255, 255, 255"/>
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue4.tga</DomeTexture>
+    <SunAngularRad>0.081</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.843168" r1="0.508385" r2="0.174962"/>
+</Sky>
+<ActorObjects>
+    <ActorObject t0="-5.01428" t1="-2.40388" t2="38.1279" s0="1" s1="1" s2="1" q0="0" q1="0.819336" q2="0" q3="0.573314" id="0" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="4"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="turner"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Rope" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Fur" channel="2" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="11.0868" t1="-3.42087" t2="26.9307" s0="26.6288" s1="1" s2="36.1367" q0="0" q1="0" q2="0" q3="1" id="1" color_r="0.117647" color_g="0.380392" color_b="0.0666667" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <CameraObject t0="24.2865" t1="9.16712" t2="34.7353" s0="1" s1="1" s2="1" q0="0.272628" q1="-0.54401" q2="0.192661" q3="0.769811" id="2">
+        <parameters/>
+    </CameraObject>
+    <ActorObject t0="8.99255" t1="-1.8809" t2="15.4054" s0="1" s1="1" s2="1" q0="0" q1="0.875968" q2="0" q3="0.482369" id="9" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="44.134"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="1"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.266067" green="0.150665" blue="0.396078"/>
+            <Color label="Fur" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Leather" channel="2" red="0.113725" green="0.113724" blue="0.113724"/>
+            <Color label="Armor" channel="3" red="0.145098" green="0.137132" blue="0.137132"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="13.728" t1="-1.8809" t2="11.0502" s0="1" s1="1" s2="1" q0="0" q1="0.775707" q2="0" q3="0.631093" id="12" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="44.693"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="1"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.584663" green="0.454902" blue="1"/>
+            <Color label="Fur" channel="1" red="0.168627" green="0.168626" blue="0.168626"/>
+            <Color label="Leather" channel="2" red="0.172549" green="0.172547" blue="0.172547"/>
+            <Color label="Armor" channel="3" red="0.254902" green="0.254899" blue="0.254899"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="3.97607" t1="-2.12524" t2="6.93654" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="13" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="49.721"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="1"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="46"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.180392" green="0.18039" blue="0.18039"/>
+            <Color label="Fur" channel="1" red="0.364706" green="0.190505" blue="0.0743714"/>
+            <Color label="Leather" channel="2" red="0.321217" green="0.188235" blue="0.470588"/>
+            <Color label="Armor" channel="3" red="0.205447" green="0.149204" blue="0.388235"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="18.4151" t1="-1.99698" t2="29.639" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="17" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="4"/>
+        </parameters>
+        <Connections>
+            <Connection id="33"/>
+            <Connection id="21"/>
+        </Connections>
+    </PathPointObject>
+    <PlaceholderObject t0="-6.18968" t1="-1.38954" t2="32.622" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="19" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/test36_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Start"/>
+            <parameter name="NumParticipants" type="int" val="3"/>
+            <parameter name="obj_1" type="int" val="22"/>
+            <parameter name="obj_2" type="int" val="31"/>
+            <parameter name="obj_3" type="int" val="32"/>
+        </parameters>
+        <Connections>
+            <Connection id="19"/>
+        </Connections>
+    </PlaceholderObject>
+    <ActorObject t0="8.57293" t1="-1.92858" t2="24.9248" s0="1.00021" s1="1.00021" s2="1.00021" q0="0" q1="0.875968" q2="0" q3="0.482369" id="20" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="47.486"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="1"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="17"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.360784" green="0.360781" blue="0.360781"/>
+            <Color label="Fur" channel="1" red="0.47451" green="0.320382" blue="0.260515"/>
+            <Color label="Leather" channel="2" red="0.164526" green="0.0800923" blue="0.243137"/>
+            <Color label="Armor" channel="3" red="0.136682" green="0.0512111" blue="0.176471"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="10.4015" t1="-1.99698" t2="17.7616" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="21" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="17"/>
+            <Connection id="35"/>
+        </Connections>
+    </PathPointObject>
+    <PlaceholderObject t0="-5.83968" t1="-0.68954" t2="32.622" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="22" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="4.94551" t1="-2.42172" t2="10.3648" s0="0.173817" s1="0.267816" s2="0.270904" q0="0" q1="-0.0380813" q2="0" q3="0.999275" id="25" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_dirty.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="18.7767" t1="3.81781" t2="-3.61111" s0="11.006" s1="22.2177" s2="10.9251" q0="0" q1="0" q2="0" q3="1" id="28" version="1">
+        <parameters/>
+        <EnvObject t0="19.0626" t1="3.30969" t2="-4.07218" s0="1.03958" s1="1.03958" s2="1.03958" q0="0" q1="-0.5306" q2="0" q3="0.847622" id="29" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="18.6006" t1="13.1934" t2="-4.33094" s0="0.708653" s1="0.708653" s2="0.708653" q0="-0.129155" q1="-0.036445" q2="-0.649503" q3="0.748423" id="164" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="17.6839" t1="11.8934" t2="-3.42865" s0="0.708653" s1="0.708653" s2="0.708653" q0="0" q1="0.249086" q2="0" q3="0.968481" id="165" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="20.2727" t1="11.8926" t2="-4.55661" s0="0.708653" s1="0.708653" s2="0.708653" q0="0" q1="-0.973303" q2="0" q3="0.229524" id="166" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="18.8229" t1="12.467" t2="-5.13649" s0="0.708652" s1="0.708652" s2="0.708653" q0="0.217463" q1="-0.570005" q2="-0.28243" q3="0.740296" id="167" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="18.0508" t1="10.9967" t2="-5.18491" s0="0.908764" s1="0.908765" s2="0.908765" q0="0.00671434" q1="-0.390356" q2="-0.0548231" q3="0.919006" id="168" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="17.2752" t1="10.6264" t2="-4.02345" s0="0.908766" s1="0.908765" s2="0.908765" q0="0.027642" q1="0.000597689" q2="-0.047818" q3="0.998473" id="169" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="19.9632" t1="10.9688" t2="-2.79366" s0="0.908765" s1="0.908765" s2="0.908765" q0="0" q1="0.912348" q2="0" q3="0.409416" id="170" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="20.75" t1="10.5908" t2="-3.94491" s0="0.908764" s1="0.908763" s2="0.908763" q0="0" q1="0.999809" q2="0" q3="0.0195419" id="171" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="20.1874" t1="10.5908" t2="-5.50648" s0="0.908765" s1="0.908764" s2="0.908765" q0="0" q1="-0.88417" q2="0" q3="0.467165" id="172" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="16.8385" t1="8.89537" t2="-4.84586" s0="1.44343" s1="1.44343" s2="1.44343" q0="0.0165946" q1="-0.115667" q2="0.100741" q3="0.988027" id="173" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="17.4361" t1="8.80921" t2="-3.06064" s0="1.07912" s1="1.07912" s2="1.07912" q0="-0.0241709" q1="0.280383" q2="0.0991961" q3="0.954443" id="174" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="21.211" t1="9.32877" t2="-3.13769" s0="1.2889" s1="1.28889" s2="1.2889" q0="0" q1="0.990673" q2="0" q3="0.136261" id="175" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="20.7487" t1="8.90237" t2="-4.93603" s0="1.07912" s1="1.07912" s2="1.07912" q0="0" q1="-0.96494" q2="0" q3="0.26247" id="176" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="19.1853" t1="8.90237" t2="-6.13628" s0="1.07912" s1="1.07912" s2="1.07912" q0="0" q1="-0.717067" q2="0" q3="0.697004" id="177" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="18.0282" t1="4.38498" t2="-1.64561" s0="1.46737" s1="1.46737" s2="1.46737" q0="0" q1="0.602987" q2="0" q3="0.797751" id="178" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="21.0428" t1="1.99194" t2="-4.06918" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.999456" q2="0" q3="0.0329807" id="179" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="20.1729" t1="1.99194" t2="-5.86658" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.858424" q2="0" q3="0.512941" id="180" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="17.8214" t1="2.44542" t2="-5.51187" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.379668" q2="0" q3="0.925123" id="181" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="16.9666" t1="1.99064" t2="-4.06848" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="0.0128276" q2="0" q3="0.999918" id="182" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="17.5256" t1="5.93067" t2="-2.53479" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="0.435092" q2="0" q3="0.900386" id="183" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="20.5243" t1="5.92925" t2="-5.39236" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="-0.908969" q2="0" q3="0.416864" id="184" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="17.1532" t1="5.44682" t2="-5.11278" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="-0.230807" q2="0" q3="0.973" id="185" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="17.0202" t1="7.42488" t2="-3.19157" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="0.249571" q2="0" q3="0.968357" id="186" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="20.9831" t1="7.42342" t2="-4.70814" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="-0.973188" q2="0" q3="0.230011" id="187" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="19.763" t1="6.915" t2="-6.13232" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="-0.805454" q2="0" q3="0.592658" id="188" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="18.7644" t1="-0.232939" t2="-3.54383" s0="2.74792" s1="1.16375" s2="1.75607" q0="0" q1="0" q2="0" q3="1" id="189" version="1">
+            <parameters/>
+            <EnvObject t0="19.4904" t1="0.185404" t2="-3.4755" s0="0.369371" s1="0.369371" s2="0.369371" q0="0.652348" q1="-0.226062" q2="0.273665" q3="0.669661" id="190" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="18.2304" t1="-0.604524" t2="-3.54383" s0="0.498663" s1="0.498663" s2="0.498663" q0="0.266194" q1="-0.692581" q2="0.594354" q3="0.310187" id="191" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="19.9349" t1="4.00189" t2="-4.46254" s0="1.90069" s1="1.16375" s2="1.99391" q0="0" q1="0" q2="0" q3="1" id="192" version="1">
+            <parameters/>
+            <EnvObject t0="19.2501" t1="4.42023" t2="-4.82292" s0="0.369371" s1="0.369371" s2="0.369371" q0="0.516405" q1="0.518763" q2="-0.483503" q3="0.480037" id="193" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="20.0381" t1="3.6303" t2="-3.83731" s0="0.498663" s1="0.498663" s2="0.498663" q0="0.651241" q1="0" q2="0" q3="0.758871" id="194" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <Group t0="10.9456" t1="7.72718" t2="31.1387" s0="15.1045" s1="30.4915" s2="14.9936" q0="-0.00941038" q1="-0.329325" q2="-0.00817871" q3="0.944134" id="30" version="1">
+        <parameters/>
+        <EnvObject t0="11.6311" t1="7.01178" t2="30.896" s0="1.42671" s1="1.42671" s2="1.42671" q0="-0.012316" q1="-0.780085" q2="-0.00193903" q3="0.625549" id="130" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="11.649" t1="20.5695" t2="30.0556" s0="0.97255" s1="0.97255" s2="0.97255" q0="0.0846156" q1="-0.285934" q2="-0.661517" q3="0.688097" id="131" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="9.85549" t1="18.8263" t2="30.2646" s0="0.97255" s1="0.97255" s2="0.97255" q0="-0.00707662" q1="-0.0837736" q2="-0.0102648" q3="0.996407" id="132" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="13.5996" t1="18.7564" t2="31.2626" s0="0.97255" s1="0.97255" s2="0.97255" q0="0.01012" q1="0.994497" q2="-0.00728188" q3="0.104021" id="133" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="12.5535" t1="19.5445" t2="29.3921" s0="0.97255" s1="0.97255" s2="0.972549" q0="0.286692" q1="-0.78638" q2="-0.195722" q3="0.510986" id="134" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="11.7216" t1="17.5355" t2="28.706" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.0125526" q1="-0.671758" q2="-0.053391" q3="0.738737" id="135" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="9.88626" t1="17.0743" t2="29.2982" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.0324535" q1="-0.328928" q2="-0.0442144" q3="0.942761" id="136" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="11.7354" t1="17.549" t2="32.9083" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.00360888" q1="0.726533" q2="-0.0119339" q3="0.687018" id="137" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="13.5519" t1="16.9838" t2="32.3494" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.00799303" q1="0.937498" q2="-0.00956831" q3="0.347767" id="138" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="14.2797" t1="16.9414" t2="30.1913" s0="1.24718" s1="1.24718" s2="1.24718" q0="-0.0116275" q1="-0.988604" q2="0.00449954" q3="0.150022" id="139" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="10.0672" t1="14.6788" t2="28.0711" s0="1.98095" s1="1.98095" s2="1.98095" q0="-0.0277522" q1="-0.433766" q2="0.0935837" q3="0.895723" id="140" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="9.18362" t1="14.6097" t2="30.5009" s0="1.48098" s1="1.48098" s2="1.48098" q0="-0.0621757" q1="-0.0484716" q2="0.0752481" q3="0.994043" id="141" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="13.3211" t1="15.2722" t2="33.6317" s0="1.76887" s1="1.76887" s2="1.76887" q0="0.00681992" q1="0.890436" q2="-0.0104368" q3="0.454938" id="142" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="14.346" t1="14.6359" t2="31.312" s0="1.48098" s1="1.48098" s2="1.48098" q0="0.0103617" q1="0.997451" q2="-0.00693375" q3="0.070257" id="143" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="13.6901" t1="14.6176" t2="28.6879" s0="1.48098" s1="1.48098" s2="1.48098" q0="-0.0124236" q1="-0.90653" q2="0.00104743" q3="0.421957" id="144" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="8.48114" t1="8.57727" t2="32.602" s0="2.01381" s1="2.01381" s2="2.01381" q0="-0.00257558" q1="0.306574" q2="-0.0121987" q3="0.951765" id="145" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="13.7172" t1="5.17883" t2="32.612" s0="1.50038" s1="1.50038" s2="1.50038" q0="0.00848437" q1="0.95446" q2="-0.00913566" q3="0.298078" id="146" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="14.316" t1="5.13274" t2="29.9381" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.0118476" q1="-0.979372" q2="0.00388284" q3="0.20168" id="147" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="11.5001" t1="5.79601" t2="28.3042" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.0118107" q1="-0.66311" q2="-0.0039933" q3="0.748418" id="148" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="9.33656" t1="5.22879" t2="29.1331" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.00930482" q1="-0.317181" q2="-0.00829863" q3="0.948283" id="149" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="8.74568" t1="10.676" t2="31.1913" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.00491428" q1="0.114263" q2="-0.0114582" q3="0.993372" id="150" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="14.4059" t1="10.5452" t2="30.6807" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.0113569" q1="-0.995452" q2="0.00514433" q3="0.0944452" id="151" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="10.5308" t1="9.93499" t2="28.1116" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.0110437" q1="-0.538335" q2="-0.0057857" q3="0.842639" id="152" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="8.80732" t1="12.7116" t2="30.0287" s0="1.67735" s1="1.67735" s2="1.67735" q0="-0.00707126" q1="-0.0832743" q2="-0.0102682" q3="0.996449" id="153" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="14.3595" t1="12.6111" t2="31.7821" s0="1.67735" s1="1.67735" s2="1.67735" q0="0.0101237" q1="0.994549" q2="-0.00727684" q3="0.103523" id="154" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="14.2485" t1="11.8838" t2="29.219" s0="1.67735" s1="1.67735" s2="1.67735" q0="-0.0121644" q1="-0.955615" q2="0.0027324" q3="0.294354" id="155" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="10.7547" t1="2.17198" t2="31.2693" s0="3.77123" s1="1.59712" s2="2.41002" q0="-0.00941014" q1="-0.329319" q2="-0.00817832" q3="0.944136" id="156" version="1">
+            <parameters/>
+            <EnvObject t0="11.4888" t1="2.73889" t2="31.9553" s0="0.506922" s1="0.506922" s2="0.506922" q0="0.51757" q1="-0.436681" q2="0.469809" q3="0.566313" id="157" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="10.1698" t1="1.66895" t2="30.8197" s0="0.684363" s1="0.684362" s2="0.684362" q0="0.0469986" q1="-0.752541" q2="0.652722" q3="0.073669" id="158" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="12.922" t1="7.93797" t2="31.2094" s0="2.6085" s1="1.59712" s2="2.73643" q0="-0.00941014" q1="-0.329319" q2="-0.00817832" q3="0.944136" id="159" version="1">
+            <parameters/>
+            <EnvObject t0="12.506" t1="8.50916" t2="30.2305" s0="0.506922" s1="0.506922" s2="0.506922" q0="0.646438" q1="0.322884" q2="-0.295202" q3="0.625076" id="160" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="12.4884" t1="7.44673" t2="31.9756" s0="0.684362" s1="0.684362" s2="0.684362" q0="0.60765" q1="-0.255213" q2="0.208241" q3="0.722678" id="161" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <PlaceholderObject t0="-6.18968" t1="-0.68954" t2="32.622" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="31" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="45"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-6.53968" t1="-0.68954" t2="32.622" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="32" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="49"/>
+        </Connections>
+    </PlaceholderObject>
+    <PathPointObject t0="28.8218" t1="-1.99698" t2="20.9638" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="33" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="4"/>
+        </parameters>
+        <Connections>
+            <Connection id="35"/>
+            <Connection id="17"/>
+        </Connections>
+    </PathPointObject>
+    <NavmeshHintObject t0="16.4754" t1="-1.46877" t2="1.4957" s0="3.35825" s1="3" s2="5.18335" q0="0" q1="0" q2="0" q3="1" id="34">
+        <parameters/>
+    </NavmeshHintObject>
+    <PathPointObject t0="22.2292" t1="-1.99698" t2="12.2016" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="35" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="3"/>
+        </parameters>
+        <Connections>
+            <Connection id="21"/>
+            <Connection id="33"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="25.3822" t1="-1.99698" t2="8.86596" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="36" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="4"/>
+        </parameters>
+        <Connections>
+            <Connection id="43"/>
+            <Connection id="46"/>
+        </Connections>
+    </PathPointObject>
+    <EnvObject t0="6.53885" t1="-2.42087" t2="25.5527" s0="0.173817" s1="0.267816" s2="0.270904" q0="0" q1="0.242363" q2="0" q3="0.970186" id="38" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_dirty.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-5.63578" t1="-2.42087" t2="25.0962" s0="0.173817" s1="0.267816" s2="0.270904" q0="0" q1="0.240399" q2="0" q3="0.970674" id="39" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_dirty.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="8.04333" t1="-2.46684" t2="42.1556" s0="0.173817" s1="0.267816" s2="0.270904" q0="0" q1="0.31865" q2="0" q3="0.947872" id="40" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_dirty.xml">
+        <parameters/>
+    </EnvObject>
+    <PathPointObject t0="24.455" t1="-1.99698" t2="-6.79388" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="5"/>
+        </parameters>
+        <Connections>
+            <Connection id="36"/>
+            <Connection id="44"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="12.0842" t1="-1.99698" t2="-3.47978" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="44" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="43"/>
+            <Connection id="46"/>
+        </Connections>
+    </PathPointObject>
+    <ActorObject t0="-2.46978" t1="-1.8809" t2="33.8071" s0="1" s1="1" s2="1" q0="0" q1="-0.363212" q2="0" q3="0.931707" id="45" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="1"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.119954" green="0.129597" blue="0.254902"/>
+            <Color label="Fur" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Leather" channel="2" red="0.156863" green="0.156861" blue="0.156861"/>
+            <Color label="Armor" channel="3" red="0.231373" green="0.23137" blue="0.23137"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="9.24219" t1="-1.99698" t2="5.38799" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="46" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="36"/>
+            <Connection id="44"/>
+        </Connections>
+    </PathPointObject>
+    <ActorObject t0="-0.891883" t1="-1.83324" t2="36.4037" s0="1" s1="1" s2="1" q0="0" q1="-0.589661" q2="0" q3="0.807651" id="49" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="1"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.186609" green="0.131273" blue="0.345098"/>
+            <Color label="Fur" channel="1" red="0.262745" green="0.262742" blue="0.262742"/>
+            <Color label="Leather" channel="2" red="0.831373" green="0.831364" blue="0.831364"/>
+            <Color label="Armor" channel="3" red="0.85098" green="0.850972" blue="0.850972"/>
+        </Palette>
+    </ActorObject>
+    <Group t0="24.2596" t1="11.7097" t2="41.0249" s0="15.1045" s1="30.4915" s2="14.9936" q0="-0.00941041" q1="-0.329325" q2="-0.00817874" q3="0.944134" id="50" version="1">
+        <parameters/>
+        <EnvObject t0="24.9451" t1="10.9943" t2="40.7822" s0="1.42671" s1="1.42671" s2="1.42671" q0="-0.0123159" q1="-0.780082" q2="-0.00193909" q3="0.625553" id="265" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="24.963" t1="24.5521" t2="39.9418" s0="0.972549" s1="0.972549" s2="0.97255" q0="0.084615" q1="-0.285932" q2="-0.661515" q3="0.6881" id="266" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="23.1695" t1="22.8088" t2="40.1508" s0="0.97255" s1="0.97255" s2="0.97255" q0="-0.00707644" q1="-0.0837733" q2="-0.0102647" q3="0.996407" id="267" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="26.9137" t1="22.739" t2="41.1488" s0="0.97255" s1="0.97255" s2="0.97255" q0="0.0101201" q1="0.994493" q2="-0.00728194" q3="0.104059" id="268" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="25.8675" t1="23.527" t2="39.2783" s0="0.97255" s1="0.97255" s2="0.97255" q0="0.286691" q1="-0.786377" q2="-0.195722" q3="0.510992" id="269" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="25.0356" t1="21.5181" t2="38.5923" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.0125523" q1="-0.671755" q2="-0.0533908" q3="0.73874" id="270" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="23.2003" t1="21.0568" t2="39.1844" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.0324531" q1="-0.328926" q2="-0.0442144" q3="0.942762" id="271" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="25.0494" t1="21.5316" t2="42.7945" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.00360876" q1="0.72653" q2="-0.0119338" q3="0.687022" id="272" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="26.8659" t1="20.9664" t2="42.2356" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.00799301" q1="0.937494" q2="-0.00956835" q3="0.347778" id="273" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.5937" t1="20.9239" t2="40.0775" s0="1.24718" s1="1.24718" s2="1.24718" q0="-0.0116274" q1="-0.988601" q2="0.00449951" q3="0.150042" id="274" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="23.3812" t1="18.6613" t2="37.9573" s0="1.98095" s1="1.98095" s2="1.98095" q0="-0.0277522" q1="-0.433765" q2="0.0935834" q3="0.895723" id="275" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="22.4976" t1="18.5923" t2="40.3871" s0="1.48098" s1="1.48098" s2="1.48098" q0="-0.0621751" q1="-0.0484712" q2="0.0752478" q3="0.994044" id="276" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="26.6351" t1="19.2547" t2="43.518" s0="1.76887" s1="1.76887" s2="1.76887" q0="0.00681975" q1="0.890433" q2="-0.0104369" q3="0.454944" id="277" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.66" t1="18.6184" t2="41.1983" s0="1.48098" s1="1.48098" s2="1.48098" q0="0.0103617" q1="0.997447" q2="-0.00693375" q3="0.0703138" id="278" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.0042" t1="18.6001" t2="38.5741" s0="1.48098" s1="1.48098" s2="1.48098" q0="-0.0124236" q1="-0.906527" q2="0.00104746" q3="0.421964" id="279" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="21.7952" t1="12.5598" t2="42.4882" s0="2.01381" s1="2.01381" s2="2.01381" q0="-0.00257552" q1="0.306573" q2="-0.0121987" q3="0.951766" id="280" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.0312" t1="9.16137" t2="42.4982" s0="1.50038" s1="1.50038" s2="1.50038" q0="0.00848438" q1="0.954456" q2="-0.00913561" q3="0.298091" id="281" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.63" t1="9.11529" t2="39.8244" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.0118475" q1="-0.979369" q2="0.00388282" q3="0.201695" id="282" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="24.8141" t1="9.77855" t2="38.1904" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.0118108" q1="-0.663108" q2="-0.00399336" q3="0.74842" id="283" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="22.6506" t1="9.21134" t2="39.0194" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.00930494" q1="-0.31718" q2="-0.00829869" q3="0.948283" id="284" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="22.0597" t1="14.6586" t2="41.0775" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.00491434" q1="0.114263" q2="-0.0114582" q3="0.993372" id="285" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.7199" t1="14.5278" t2="40.5669" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.0113568" q1="-0.995449" q2="0.00514431" q3="0.0944767" id="286" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="23.8448" t1="13.9175" t2="37.9979" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.0110438" q1="-0.538333" q2="-0.00578558" q3="0.84264" id="287" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="22.1213" t1="16.6941" t2="39.9149" s0="1.67735" s1="1.67735" s2="1.67735" q0="-0.00707137" q1="-0.083274" q2="-0.0102681" q3="0.996449" id="288" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.6735" t1="16.5936" t2="41.6684" s0="1.67735" s1="1.67735" s2="1.67735" q0="0.0101237" q1="0.994545" q2="-0.00727685" q3="0.103561" id="289" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.5625" t1="15.8663" t2="39.1052" s0="1.67735" s1="1.67735" s2="1.67735" q0="-0.0121643" q1="-0.955611" q2="0.00273234" q3="0.294367" id="290" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="24.0687" t1="6.15452" t2="41.1555" s0="3.77123" s1="1.59712" s2="2.41002" q0="-0.00940996" q1="-0.329318" q2="-0.00817862" q3="0.944137" id="291" version="1">
+            <parameters/>
+            <EnvObject t0="24.8029" t1="6.72143" t2="41.8416" s0="0.506922" s1="0.506922" s2="0.506922" q0="0.517549" q1="-0.436662" q2="0.469788" q3="0.566364" id="292" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="23.4838" t1="5.65149" t2="40.7059" s0="0.684363" s1="0.684362" s2="0.684362" q0="0.0469964" q1="-0.75251" q2="0.652693" q3="0.0742424" id="293" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="26.236" t1="11.9205" t2="41.0956" s0="2.6085" s1="1.59712" s2="2.73643" q0="-0.00940996" q1="-0.329318" q2="-0.00817862" q3="0.944137" id="294" version="1">
+            <parameters/>
+            <EnvObject t0="25.8201" t1="12.4917" t2="40.1167" s0="0.506922" s1="0.506922" s2="0.506922" q0="0.646411" q1="0.32287" q2="-0.295189" q3="0.625117" id="295" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="25.8024" t1="11.4293" t2="41.8618" s0="0.684362" s1="0.684362" s2="0.684362" q0="0.607625" q1="-0.255202" q2="0.208231" q3="0.722706" id="296" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <Group t0="-12.6236" t1="5.9347" t2="37.0712" s0="11.006" s1="22.2177" s2="10.9251" q0="0" q1="0" q2="0" q3="1" id="52" version="1">
+        <parameters/>
+        <EnvObject t0="-12.3377" t1="5.42658" t2="36.6101" s0="1.03958" s1="1.03958" s2="1.03958" q0="0" q1="-0.5306" q2="0" q3="0.847622" id="55" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-12.7997" t1="15.3103" t2="36.3513" s0="0.708653" s1="0.708653" s2="0.708653" q0="-0.129155" q1="-0.036445" q2="-0.649503" q3="0.748423" id="64" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-13.7165" t1="14.0103" t2="37.2536" s0="0.708653" s1="0.708653" s2="0.708653" q0="0" q1="0.249086" q2="0" q3="0.968481" id="310" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-11.1276" t1="14.0095" t2="36.1257" s0="0.708653" s1="0.708653" s2="0.708653" q0="0" q1="-0.973303" q2="0" q3="0.229524" id="311" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-12.5775" t1="14.5839" t2="35.5458" s0="0.708652" s1="0.708652" s2="0.708653" q0="0.217463" q1="-0.570005" q2="-0.28243" q3="0.740296" id="312" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-13.3495" t1="13.1136" t2="35.4974" s0="0.908764" s1="0.908765" s2="0.908765" q0="0.00671434" q1="-0.390356" q2="-0.0548231" q3="0.919006" id="313" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-14.1251" t1="12.7433" t2="36.6588" s0="0.908766" s1="0.908765" s2="0.908765" q0="0.027642" q1="0.000597689" q2="-0.047818" q3="0.998473" id="314" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-11.4372" t1="13.0857" t2="37.8886" s0="0.908765" s1="0.908765" s2="0.908765" q0="0" q1="0.912348" q2="0" q3="0.409416" id="315" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-10.6504" t1="12.7077" t2="36.7374" s0="0.908764" s1="0.908763" s2="0.908763" q0="0" q1="0.999809" q2="0" q3="0.0195419" id="316" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-11.2129" t1="12.7077" t2="35.1758" s0="0.908765" s1="0.908764" s2="0.908765" q0="0" q1="-0.88417" q2="0" q3="0.467165" id="317" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-14.5619" t1="11.0123" t2="35.8364" s0="1.44343" s1="1.44343" s2="1.44343" q0="0.0165946" q1="-0.115667" q2="0.100741" q3="0.988027" id="318" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-13.9643" t1="10.9261" t2="37.6216" s0="1.07912" s1="1.07912" s2="1.07912" q0="-0.0241709" q1="0.280383" q2="0.0991961" q3="0.954443" id="319" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-10.1893" t1="11.4457" t2="37.5446" s0="1.2889" s1="1.28889" s2="1.2889" q0="0" q1="0.990673" q2="0" q3="0.136261" id="320" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-10.6517" t1="11.0193" t2="35.7462" s0="1.07912" s1="1.07912" s2="1.07912" q0="0" q1="-0.96494" q2="0" q3="0.26247" id="321" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-12.2151" t1="11.0193" t2="34.546" s0="1.07912" s1="1.07912" s2="1.07912" q0="0" q1="-0.717067" q2="0" q3="0.697004" id="322" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-13.3721" t1="6.50187" t2="39.0367" s0="1.46737" s1="1.46737" s2="1.46737" q0="0" q1="0.602987" q2="0" q3="0.797751" id="323" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-10.3575" t1="4.10882" t2="36.6131" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.999456" q2="0" q3="0.0329807" id="324" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-11.2274" t1="4.10882" t2="34.8157" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.858424" q2="0" q3="0.512941" id="325" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-13.5789" t1="4.5623" t2="35.1704" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.379668" q2="0" q3="0.925123" id="326" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-14.4337" t1="4.10753" t2="36.6138" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="0.0128276" q2="0" q3="0.999918" id="327" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-13.8747" t1="8.04756" t2="38.1475" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="0.435092" q2="0" q3="0.900386" id="328" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-10.8761" t1="8.04614" t2="35.2899" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="-0.908969" q2="0" q3="0.416864" id="329" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-14.2471" t1="7.5637" t2="35.5695" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="-0.230807" q2="0" q3="0.973" id="330" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-14.3802" t1="9.54176" t2="37.4907" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="0.249571" q2="0" q3="0.968357" id="331" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-10.4173" t1="9.54031" t2="35.9741" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="-0.973188" q2="0" q3="0.230011" id="332" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-11.6374" t1="9.03188" t2="34.5499" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="-0.805454" q2="0" q3="0.592658" id="333" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="-12.6359" t1="1.88395" t2="37.1384" s0="2.74792" s1="1.16375" s2="1.75607" q0="0" q1="0" q2="0" q3="1" id="334" version="1">
+            <parameters/>
+            <EnvObject t0="-11.91" t1="2.30229" t2="37.2068" s0="0.369371" s1="0.369371" s2="0.369371" q0="0.652348" q1="-0.226062" q2="0.273665" q3="0.669661" id="335" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="-13.17" t1="1.51236" t2="37.1384" s0="0.498663" s1="0.498663" s2="0.498663" q0="0.266194" q1="-0.692581" q2="0.594354" q3="0.310187" id="336" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="-11.4655" t1="6.11877" t2="36.2197" s0="1.90069" s1="1.16375" s2="1.99391" q0="0" q1="0" q2="0" q3="1" id="337" version="1">
+            <parameters/>
+            <EnvObject t0="-12.1503" t1="6.53712" t2="35.8594" s0="0.369371" s1="0.369371" s2="0.369371" q0="0.516405" q1="0.518763" q2="-0.483503" q3="0.480037" id="338" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="-11.3623" t1="5.74719" t2="36.845" s0="0.498663" s1="0.498663" s2="0.498663" q0="0.651241" q1="0" q2="0" q3="0.758871" id="339" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <Group t0="-1.10329" t1="9.34819" t2="56.1698" s0="15.1045" s1="30.4915" s2="14.9936" q0="-0.00941041" q1="-0.329325" q2="-0.00817874" q3="0.944134" id="53" version="1">
+        <parameters/>
+        <EnvObject t0="-0.417776" t1="8.63279" t2="55.9271" s0="1.42671" s1="1.42671" s2="1.42671" q0="-0.0123159" q1="-0.780082" q2="-0.00193909" q3="0.625553" id="233" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.399852" t1="22.1905" t2="55.0867" s0="0.972549" s1="0.972549" s2="0.97255" q0="0.084615" q1="-0.285932" q2="-0.661515" q3="0.6881" id="234" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-2.19339" t1="20.4473" t2="55.2957" s0="0.97255" s1="0.97255" s2="0.97255" q0="-0.00707644" q1="-0.0837733" q2="-0.0102647" q3="0.996407" id="235" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.55076" t1="20.3775" t2="56.2937" s0="0.97255" s1="0.97255" s2="0.97255" q0="0.0101201" q1="0.994493" q2="-0.00728194" q3="0.104059" id="236" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="0.504652" t1="21.1655" t2="54.4232" s0="0.97255" s1="0.97255" s2="0.97255" q0="0.286691" q1="-0.786377" q2="-0.195722" q3="0.510992" id="237" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.327276" t1="19.1565" t2="53.7371" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.0125523" q1="-0.671755" q2="-0.0533908" q3="0.73874" id="238" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-2.16262" t1="18.6953" t2="54.3293" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.0324531" q1="-0.328926" q2="-0.0442144" q3="0.942762" id="239" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.313464" t1="19.17" t2="57.9394" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.00360876" q1="0.72653" q2="-0.0119338" q3="0.687022" id="240" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.503" t1="18.6049" t2="57.3805" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.00799301" q1="0.937494" q2="-0.00956835" q3="0.347778" id="241" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.23086" t1="18.5624" t2="55.2224" s0="1.24718" s1="1.24718" s2="1.24718" q0="-0.0116274" q1="-0.988601" q2="0.00449951" q3="0.150042" id="242" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-1.98168" t1="16.2998" t2="53.1022" s0="1.98095" s1="1.98095" s2="1.98095" q0="-0.0277522" q1="-0.433765" q2="0.0935834" q3="0.895723" id="243" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-2.86526" t1="16.2307" t2="55.532" s0="1.48098" s1="1.48098" s2="1.48098" q0="-0.0621751" q1="-0.0484712" q2="0.0752478" q3="0.994044" id="244" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.27218" t1="16.8932" t2="58.6628" s0="1.76887" s1="1.76887" s2="1.76887" q0="0.00681975" q1="0.890433" q2="-0.0104369" q3="0.454944" id="245" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.29707" t1="16.2569" t2="56.3431" s0="1.48098" s1="1.48098" s2="1.48098" q0="0.0103617" q1="0.997447" q2="-0.00693375" q3="0.0703138" id="246" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.64126" t1="16.2386" t2="53.7189" s0="1.48098" s1="1.48098" s2="1.48098" q0="-0.0124236" q1="-0.906527" q2="0.00104746" q3="0.421964" id="247" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-3.56773" t1="10.1983" t2="57.633" s0="2.01381" s1="2.01381" s2="2.01381" q0="-0.00257552" q1="0.306573" q2="-0.0121987" q3="0.951766" id="248" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.66831" t1="6.79984" t2="57.6431" s0="1.50038" s1="1.50038" s2="1.50038" q0="0.00848438" q1="0.954456" q2="-0.00913561" q3="0.298091" id="249" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.26713" t1="6.75375" t2="54.9692" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.0118475" q1="-0.979369" q2="0.00388282" q3="0.201695" id="250" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.548794" t1="7.41702" t2="53.3353" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.0118108" q1="-0.663108" q2="-0.00399336" q3="0.74842" id="251" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-2.71232" t1="6.8498" t2="54.1642" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.00930494" q1="-0.31718" q2="-0.00829869" q3="0.948283" id="252" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-3.3032" t1="12.297" t2="56.2223" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.00491434" q1="0.114263" q2="-0.0114582" q3="0.993372" id="253" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.35703" t1="12.1662" t2="55.7118" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.0113568" q1="-0.995449" q2="0.00514431" q3="0.0944767" id="254" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-1.51812" t1="11.556" t2="53.1427" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.0110438" q1="-0.538333" q2="-0.00578558" q3="0.84264" id="255" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-3.24156" t1="14.3326" t2="55.0598" s0="1.67735" s1="1.67735" s2="1.67735" q0="-0.00707137" q1="-0.083274" q2="-0.0102681" q3="0.996449" id="256" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.31059" t1="14.2321" t2="56.8132" s0="1.67735" s1="1.67735" s2="1.67735" q0="0.0101237" q1="0.994545" q2="-0.00727685" q3="0.103561" id="257" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.19961" t1="13.5048" t2="54.2501" s0="1.67735" s1="1.67735" s2="1.67735" q0="-0.0121643" q1="-0.955611" q2="0.00273234" q3="0.294367" id="258" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="-1.29421" t1="3.79298" t2="56.3004" s0="3.77123" s1="1.59712" s2="2.41002" q0="-0.00940996" q1="-0.329318" q2="-0.00817862" q3="0.944137" id="259" version="1">
+            <parameters/>
+            <EnvObject t0="-0.560032" t1="4.3599" t2="56.9864" s0="0.506922" s1="0.506922" s2="0.506922" q0="0.517549" q1="-0.436662" q2="0.469788" q3="0.566364" id="260" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="-1.87912" t1="3.28996" t2="55.8508" s0="0.684363" s1="0.684362" s2="0.684362" q0="0.0469964" q1="-0.75251" q2="0.652693" q3="0.0742424" id="261" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="0.873101" t1="9.55898" t2="56.2405" s0="2.6085" s1="1.59712" s2="2.73643" q0="-0.00940996" q1="-0.329318" q2="-0.00817862" q3="0.944137" id="262" version="1">
+            <parameters/>
+            <EnvObject t0="0.457167" t1="10.1302" t2="55.2616" s0="0.506922" s1="0.506922" s2="0.506922" q0="0.646411" q1="0.32287" q2="-0.295189" q3="0.625117" id="263" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="0.439505" t1="9.06774" t2="57.0067" s0="0.684362" s1="0.684362" s2="0.684362" q0="0.607625" q1="-0.255202" q2="0.208231" q3="0.722706" id="264" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <Group t0="3.20944" t1="3.64417" t2="42.3156" s0="11.006" s1="22.2177" s2="10.9251" q0="0" q1="0" q2="0" q3="1" id="54" version="1">
+        <parameters/>
+        <EnvObject t0="3.49535" t1="3.13605" t2="41.8546" s0="1.03958" s1="1.03958" s2="1.03958" q0="0" q1="-0.5306" q2="0" q3="0.847622" id="201" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="3.03336" t1="13.0198" t2="41.5958" s0="0.708653" s1="0.708653" s2="0.708653" q0="-0.129155" q1="-0.036445" q2="-0.649503" q3="0.748423" id="202" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.1166" t1="11.7198" t2="42.4981" s0="0.708653" s1="0.708653" s2="0.708653" q0="0" q1="0.249086" q2="0" q3="0.968481" id="203" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="4.70545" t1="11.7189" t2="41.3701" s0="0.708653" s1="0.708653" s2="0.708653" q0="0" q1="-0.973303" q2="0" q3="0.229524" id="204" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="3.25557" t1="12.2933" t2="40.7902" s0="0.708652" s1="0.708652" s2="0.708653" q0="0.217463" q1="-0.570005" q2="-0.28243" q3="0.740296" id="205" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.48353" t1="10.823" t2="40.7418" s0="0.908764" s1="0.908765" s2="0.908765" q0="0.00671434" q1="-0.390356" q2="-0.0548231" q3="0.919006" id="206" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.70796" t1="10.4528" t2="41.9033" s0="0.908766" s1="0.908765" s2="0.908765" q0="0.027642" q1="0.000597689" q2="-0.047818" q3="0.998473" id="207" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="4.39592" t1="10.7952" t2="43.1331" s0="0.908765" s1="0.908765" s2="0.908765" q0="0" q1="0.912348" q2="0" q3="0.409416" id="208" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="5.1827" t1="10.4172" t2="41.9818" s0="0.908764" s1="0.908763" s2="0.908763" q0="0" q1="0.999809" q2="0" q3="0.0195419" id="209" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="4.62013" t1="10.4172" t2="40.4203" s0="0.908765" s1="0.908764" s2="0.908765" q0="0" q1="-0.88417" q2="0" q3="0.467165" id="210" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.27117" t1="8.72173" t2="41.0809" s0="1.44343" s1="1.44343" s2="1.44343" q0="0.0165946" q1="-0.115667" q2="0.100741" q3="0.988027" id="211" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.8688" t1="8.63557" t2="42.8661" s0="1.07912" s1="1.07912" s2="1.07912" q0="-0.0241709" q1="0.280383" q2="0.0991961" q3="0.954443" id="212" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="5.64374" t1="9.15513" t2="42.789" s0="1.2889" s1="1.28889" s2="1.2889" q0="0" q1="0.990673" q2="0" q3="0.136261" id="213" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="5.18139" t1="8.72873" t2="40.9907" s0="1.07912" s1="1.07912" s2="1.07912" q0="0" q1="-0.96494" q2="0" q3="0.26247" id="214" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="3.61801" t1="8.72873" t2="39.7905" s0="1.07912" s1="1.07912" s2="1.07912" q0="0" q1="-0.717067" q2="0" q3="0.697004" id="215" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.46093" t1="4.21134" t2="44.2811" s0="1.46737" s1="1.46737" s2="1.46737" q0="0" q1="0.602987" q2="0" q3="0.797751" id="216" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="5.47556" t1="1.81829" t2="41.8576" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.999456" q2="0" q3="0.0329807" id="217" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="4.60563" t1="1.81829" t2="40.0602" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.858424" q2="0" q3="0.512941" id="218" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.25413" t1="2.27177" t2="40.4149" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.379668" q2="0" q3="0.925123" id="219" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.39933" t1="1.817" t2="41.8583" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="0.0128276" q2="0" q3="0.999918" id="220" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.95834" t1="5.75703" t2="43.3919" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="0.435092" q2="0" q3="0.900386" id="221" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="4.95702" t1="5.75561" t2="40.5344" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="-0.908969" q2="0" q3="0.416864" id="222" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.58596" t1="5.27317" t2="40.8139" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="-0.230807" q2="0" q3="0.973" id="223" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.4529" t1="7.25124" t2="42.7352" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="0.249571" q2="0" q3="0.968357" id="224" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="5.4158" t1="7.24978" t2="41.2186" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="-0.973188" q2="0" q3="0.230011" id="225" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="4.19571" t1="6.74135" t2="39.7944" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="-0.805454" q2="0" q3="0.592658" id="226" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="3.19714" t1="-0.406582" t2="42.3829" s0="2.74792" s1="1.16375" s2="1.75607" q0="0" q1="0" q2="0" q3="1" id="227" version="1">
+            <parameters/>
+            <EnvObject t0="3.92311" t1="0.0117603" t2="42.4512" s0="0.369371" s1="0.369371" s2="0.369371" q0="0.652348" q1="-0.226062" q2="0.273665" q3="0.669661" id="228" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="2.66307" t1="-0.778167" t2="42.3829" s0="0.498663" s1="0.498663" s2="0.498663" q0="0.266194" q1="-0.692581" q2="0.594354" q3="0.310187" id="229" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="4.3676" t1="3.82824" t2="41.4642" s0="1.90069" s1="1.16375" s2="1.99391" q0="0" q1="0" q2="0" q3="1" id="230" version="1">
+            <parameters/>
+            <EnvObject t0="3.68279" t1="4.24659" t2="41.1038" s0="0.369371" s1="0.369371" s2="0.369371" q0="0.516405" q1="0.518763" q2="-0.483503" q3="0.480037" id="231" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="4.47081" t1="3.45666" t2="42.0894" s0="0.498663" s1="0.498663" s2="0.498663" q0="0.651241" q1="0" q2="0" q3="0.758871" id="232" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <PlaceholderObject t0="7.8391" t1="-1.64131" t2="19.9832" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="59" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/test36_dialogue_1.txt"/>
+            <parameter name="DisplayName" type="string" val="End"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="60"/>
+        </parameters>
+        <Connections>
+            <Connection id="59"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="7.8391" t1="-0.94131" t2="19.9832" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" id="60" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="0"/>
+        </Connections>
+    </PlaceholderObject>
+    <Group t0="0.579567" t1="5.66065" t2="13.9596" s0="11.006" s1="22.2177" s2="10.9251" q0="0" q1="0" q2="0" q3="1" id="61" version="1">
+        <parameters/>
+        <EnvObject t0="0.865477" t1="5.15253" t2="13.4986" s0="1.03958" s1="1.03958" s2="1.03958" q0="0" q1="-0.5306" q2="0" q3="0.847622" id="62" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="0.403486" t1="15.0362" t2="13.2398" s0="0.708653" s1="0.708653" s2="0.708653" q0="-0.129155" q1="-0.036445" q2="-0.649503" q3="0.748423" id="63" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.513269" t1="13.7362" t2="14.1421" s0="0.708653" s1="0.708653" s2="0.708653" q0="0" q1="0.249086" q2="0" q3="0.968481" id="67" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.07558" t1="13.7354" t2="13.0141" s0="0.708653" s1="0.708653" s2="0.708653" q0="0" q1="-0.973303" q2="0" q3="0.229524" id="68" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="0.625698" t1="14.3098" t2="12.4342" s0="0.708652" s1="0.708652" s2="0.708653" q0="0.217463" q1="-0.570005" q2="-0.28243" q3="0.740296" id="69" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.146341" t1="12.8395" t2="12.3858" s0="0.908764" s1="0.908765" s2="0.908765" q0="0.00671434" q1="-0.390356" q2="-0.0548231" q3="0.919006" id="70" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.921914" t1="12.4692" t2="13.5473" s0="0.908766" s1="0.908765" s2="0.908765" q0="0.027642" q1="0.000597689" q2="-0.047818" q3="0.998473" id="71" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.76604" t1="12.8117" t2="14.7771" s0="0.908765" s1="0.908765" s2="0.908765" q0="0" q1="0.912348" q2="0" q3="0.409416" id="72" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.55282" t1="12.4336" t2="13.6258" s0="0.908764" s1="0.908763" s2="0.908764" q0="0" q1="0.999809" q2="0" q3="0.0195419" id="73" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.99026" t1="12.4336" t2="12.0643" s0="0.908765" s1="0.908764" s2="0.908765" q0="0" q1="-0.88417" q2="0" q3="0.467165" id="74" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-1.3587" t1="10.7382" t2="12.7249" s0="1.44343" s1="1.44343" s2="1.44343" q0="0.0165946" q1="-0.115667" q2="0.100741" q3="0.988027" id="75" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.761076" t1="10.6521" t2="14.5101" s0="1.07912" s1="1.07912" s2="1.07912" q0="-0.0241709" q1="0.280383" q2="0.0991961" q3="0.954443" id="76" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="3.01387" t1="11.1716" t2="14.433" s0="1.2889" s1="1.28889" s2="1.2889" q0="0" q1="0.990673" q2="0" q3="0.136261" id="77" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.55151" t1="10.7452" t2="12.6347" s0="1.07912" s1="1.07912" s2="1.07912" q0="0" q1="-0.96494" q2="0" q3="0.26247" id="78" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="0.988135" t1="10.7452" t2="11.4345" s0="1.07912" s1="1.07912" s2="1.07912" q0="0" q1="-0.717067" q2="0" q3="0.697004" id="79" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.168944" t1="6.22782" t2="15.9251" s0="1.46737" s1="1.46737" s2="1.46737" q0="0" q1="0.602987" q2="0" q3="0.797751" id="80" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.84568" t1="3.83478" t2="13.5015" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.999456" q2="0" q3="0.0329807" id="81" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.97576" t1="3.83478" t2="11.7042" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.858424" q2="0" q3="0.512941" id="82" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.375746" t1="4.28826" t2="12.0589" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="-0.379668" q2="0" q3="0.925123" id="83" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-1.23054" t1="3.83348" t2="13.5023" s0="1.09326" s1="1.09326" s2="1.09326" q0="0" q1="0.0128276" q2="0" q3="0.999918" id="84" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-0.671528" t1="7.77351" t2="15.0359" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="0.435092" q2="0" q3="0.900386" id="85" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.32714" t1="7.77209" t2="12.1784" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="-0.908969" q2="0" q3="0.416864" id="86" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-1.04392" t1="7.28965" t2="12.458" s0="1.19311" s1="1.19311" s2="1.19311" q0="0" q1="-0.230807" q2="0" q3="0.973" id="87" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-1.17697" t1="9.26772" t2="14.3792" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="0.249571" q2="0" q3="0.968357" id="88" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.78593" t1="9.26626" t2="12.8626" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="-0.973188" q2="0" q3="0.230011" id="89" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="1.56583" t1="8.75783" t2="11.4384" s0="1.22221" s1="1.22221" s2="1.22221" q0="0" q1="-0.805454" q2="0" q3="0.592658" id="90" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="0.567271" t1="1.6099" t2="14.0269" s0="2.74792" s1="1.16375" s2="1.75607" q0="0" q1="0" q2="0" q3="1" id="91" version="1">
+            <parameters/>
+            <EnvObject t0="1.29323" t1="2.02824" t2="14.0952" s0="0.369371" s1="0.369371" s2="0.369371" q0="0.652348" q1="-0.226062" q2="0.273665" q3="0.669661" id="92" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="0.0331991" t1="1.23831" t2="14.0269" s0="0.498663" s1="0.498663" s2="0.498663" q0="0.266194" q1="-0.692581" q2="0.594354" q3="0.310187" id="93" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="1.73772" t1="5.84472" t2="13.1082" s0="1.90069" s1="1.16375" s2="1.99391" q0="0" q1="0" q2="0" q3="1" id="94" version="1">
+            <parameters/>
+            <EnvObject t0="1.05292" t1="6.26307" t2="12.7478" s0="0.369371" s1="0.369371" s2="0.369371" q0="0.516405" q1="0.518763" q2="-0.483503" q3="0.480037" id="95" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="1.84094" t1="5.47314" t2="13.7334" s0="0.498663" s1="0.498663" s2="0.498663" q0="0.651241" q1="0" q2="0" q3="0.758871" id="96" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <Hotspot t0="-8.38271" t1="6.86652" t2="34.1068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="65" type_file="Data\Objects\Hotspots\overgrowth_level.xml">
+        <parameters>
+            <parameter name="goal_0" type="string" val="defeat 45 49"/>
+            <parameter name="goal_0_pre" type="string" val="dialogue Start"/>
+            <parameter name="goal_1" type="string" val="defeat 9 12 13 20"/>
+            <parameter name="goal_1_post" type="string" val="dialogue End"/>
+            <parameter name="music" type="string" val="lugaru_ambient_grass"/>
+            <parameter name="next_level" type="string" val=""/>
+            <parameter name="player_spawn" type="string" val="66"/>
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="-3.93753" t1="-2.23448" t2="28.9102" s0="1" s1="1" s2="1" q0="0" q1="0.855763" q2="0" q3="0.517368" id="66" type_file="Data/Objects/IGF_Characters/pale_turner.xml" special_type="0">
+        <parameters/>
+        <Connections>
+            <Connection id="66"/>
+        </Connections>
+    </PlaceholderObject>
+    <Group t0="27.174" t1="8.89909" t2="13.8874" s0="15.1045" s1="30.4915" s2="14.9936" q0="0.0153272" q1="-0.482439" q2="0.0395729" q3="0.874901" id="97" version="1">
+        <parameters/>
+        <EnvObject t0="27.9745" t1="8.26676" t2="13.8891" s0="1.42671" s1="1.42671" s2="1.42671" q0="0.033989" q1="-0.873148" q2="0.0254104" q3="0.485604" id="98" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="26.797" t1="21.7708" t2="13.0093" s0="0.97255" s1="0.97255" s2="0.97255" q0="0.213261" q1="-0.38811" q2="-0.601502" q3="0.664895" id="99" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="25.2346" t1="19.8441" t2="12.6273" s0="0.97255" s1="0.97255" s2="0.97255" q0="0.00498676" q1="-0.249308" q2="0.0421435" q3="0.967494" id="100" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="28.4275" t1="20.1371" t2="14.8042" s0="0.972551" s1="0.97255" s2="0.972551" q0="-0.0420344" q1="0.962275" q2="0.00583497" q3="0.268749" id="101" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.9748" t1="20.8659" t2="12.6881" s0="0.972549" s1="0.972549" s2="0.972549" q0="0.360418" q1="-0.842911" q2="-0.121626" q3="0.380535" id="102" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.6374" t1="18.802" t2="11.7798" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.0618566" q1="-0.783781" q2="-0.0143409" q3="0.617783" id="103" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="25.7708" t1="18.1341" t2="11.737" s0="1.24718" s1="1.24718" s2="1.24718" q0="0.0625334" q1="-0.479353" q2="0.0110209" q3="0.875322" id="104" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="26.2688" t1="18.6935" t2="15.7515" s0="1.24718" s1="1.24718" s2="1.24718" q0="-0.0298293" q1="0.600696" q2="0.0301857" q3="0.79835" id="105" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="28.218" t1="18.3381" t2="15.8265" s0="1.24718" s1="1.24718" s2="1.24718" q0="-0.0392658" q1="0.865304" q2="0.0160979" q3="0.499448" id="106" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="29.6143" t1="18.4353" t2="14.0293" s0="1.24718" s1="1.24718" s2="1.24718" q0="-0.0421495" q1="0.99894" q2="-0.00493522" q3="0.0178306" id="107" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="26.6033" t1="15.8077" t2="10.6545" s0="1.98096" s1="1.98096" s2="1.98096" q0="-0.0143619" q1="-0.578747" q2="0.133471" q3="0.804383" id="108" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="24.9838" t1="15.5753" t2="12.6576" s0="1.48098" s1="1.48098" s2="1.48098" q0="-0.0654697" q1="-0.217631" q2="0.117193" q3="0.966756" id="109" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.7659" t1="16.5748" t2="16.9727" s0="1.76887" s1="1.76887" s2="1.76887" q0="-0.0371153" q1="0.801003" q2="0.0205766" q3="0.597154" id="110" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="29.5584" t1="16.1175" t2="15.1249" s0="1.48098" s1="1.48098" s2="1.48098" q0="-0.0422084" q1="0.970853" q2="0.00440314" q3="0.235889" id="111" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="29.8068" t1="16.1078" t2="12.4314" s0="1.48098" s1="1.48098" s2="1.48098" q0="0.0390596" q1="-0.963625" q2="0.0165918" q3="0.263867" id="112" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="24.2889" t1="9.44338" t2="14.4506" s0="2.01381" s1="2.01381" s2="2.01381" q0="-0.0116348" q1="0.142687" q2="0.0408114" q3="0.988858" id="113" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="29.567" t1="6.61252" t2="16.2093" s0="1.50038" s1="1.50038" s2="1.50038" q0="-0.0400568" q1="0.890332" q2="0.0140141" q3="0.45333" id="114" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="31.012" t1="6.70785" t2="13.8827" s0="1.50038" s1="1.50038" s2="1.50038" q0="0.0418323" q1="-0.998499" q2="0.00714131" q3="0.0346241" id="115" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="28.8345" t1="7.12058" t2="11.4073" s0="1.50038" s1="1.50038" s2="1.50038" q0="0.029204" q1="-0.778487" q2="0.0307905" q3="0.626224" id="116" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="26.5938" t1="6.30605" t2="11.4806" s0="1.50038" s1="1.50038" s2="1.50038" q0="0.0148183" q1="-0.471177" q2="0.039766" q3="0.881017" id="117" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="24.7728" t1="11.5988" t2="13.1917" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.00341743" q1="-0.0537186" q2="0.0422999" q3="0.997654" id="118" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="30.2656" t1="12.0759" t2="14.5765" s0="1.63742" s1="1.63742" s2="1.63742" q0="-0.0423599" q1="0.996369" q2="-0.0025645" q3="0.0738101" id="119" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="27.5394" t1="11.1393" t2="10.8778" s0="1.63742" s1="1.63742" s2="1.63742" q0="0.0240472" q1="-0.671346" q2="0.0349668" q3="0.739928" id="120" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="24.9916" t1="13.6629" t2="12.1007" s0="1.67735" s1="1.67735" s2="1.67735" q0="0.00496566" q1="-0.248824" q2="0.0421457" q3="0.967619" id="121" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="29.6362" t1="14.0923" t2="15.587" s0="1.67735" s1="1.67735" s2="1.67735" q0="-0.0420373" q1="0.96241" q2="0.00581399" q3="0.268265" id="122" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="30.4527" t1="13.433" t2="13.1355" s0="1.67735" s1="1.67735" s2="1.67735" q0="0.0409579" q1="-0.990614" q2="0.0111078" q3="0.129934" id="123" color_r="1" color_g="0.764706" color_b="0.764706" type_file="Data/Objects/Plants/simple/simple_conifer_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="27.5543" t1="3.35296" t2="13.9856" s0="3.77123" s1="1.59712" s2="2.41002" q0="0.0153272" q1="-0.482439" q2="0.0395729" q3="0.874901" id="124" version="1">
+            <parameters/>
+            <EnvObject t0="27.9564" t1="3.97318" t2="14.8714" s0="0.506922" s1="0.506922" s2="0.506922" q0="0.457923" q1="-0.499232" q2="0.577183" q3="0.455997" id="125" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="27.2077" t1="2.80492" t2="13.3718" s0="0.684362" s1="0.684362" s2="0.684362" q0="0.0216843" q1="0.754162" q2="-0.650083" q3="0.0903413" id="126" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+        <Group t0="28.9823" t1="9.31331" t2="14.6042" s0="2.6085" s1="1.59712" s2="2.73643" q0="0.0153272" q1="-0.482439" q2="0.0395729" q3="0.874901" id="127" version="1">
+            <parameters/>
+            <EnvObject t0="28.8516" t1="9.86635" t2="13.539" s0="0.506922" s1="0.506922" s2="0.506922" q0="0.671893" q1="0.250123" q2="-0.146936" q3="0.681475" id="128" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="28.3771" t1="8.75713" t2="15.188" s0="0.684362" s1="0.684362" s2="0.684362" q0="0.581403" q1="-0.340337" q2="0.344215" q3="0.653955" id="129" color_r="0.556863" color_g="0.505882" color_b="0.505882" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_rotting.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <EnvObject t0="2.05504" t1="-0.603439" t2="25.7118" s0="1.21197" s1="1.21197" s2="1.21197" q0="-0.218422" q1="0.229928" q2="0.0598043" q3="0.946493" id="297" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-2.90404" t1="-2.49153" t2="11.4259" s0="0.173817" s1="0.267816" s2="0.270904" q0="0" q1="-0.0380813" q2="0" q3="0.999275" id="298" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_dirty.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-0.26096" t1="-2.1243" t2="27.2106" s0="1.21197" s1="1.21197" s2="1.21197" q0="-0.0560142" q1="-0.929601" q2="-0.230981" q3="0.281695" id="309" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="6.6025" t1="-2.42173" t2="0.733381" s0="0.173817" s1="0.267816" s2="0.270904" q0="0" q1="-0.264115" q2="0" q3="0.964491" id="340" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_dirty.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="15.9036" t1="-4.22118" t2="16.8122" s0="9.33671" s1="9.67401" s2="8.57216" q0="0" q1="0" q2="0" q3="1" id="350" version="1">
+        <parameters/>
+        <EnvObject t0="15.9036" t1="-4.22118" t2="16.8122" s0="1.15505" s1="1" s2="0.792278" q0="0.219792" q1="0.0697334" q2="-0.136387" q3="0.963446" id="348" color_r="0.361087" color_g="0.20346" color_b="0.576471" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="16.6108" t1="-1.54354" t2="16.2277" s0="1" s1="1" s2="1" q0="-0.745257" q1="0" q2="0" q3="0.666777" id="8" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="13.404" t1="-1.8546" t2="18.7762" s0="1" s1="1" s2="1" q0="-0.745257" q1="0" q2="0" q3="0.666777" id="349" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="16.7826" t1="-4.51825" t2="2.44396" s0="9.33671" s1="9.67401" s2="8.57216" q0="0" q1="0.679645" q2="0" q3="0.733541" id="352" version="1">
+        <parameters/>
+        <EnvObject t0="16.7826" t1="-4.51825" t2="2.44396" s0="1.15505" s1="1" s2="0.792279" q0="0.0685312" q1="0.705953" q2="-0.249426" q3="0.659333" id="353" color_r="0.26765" color_g="0.0767705" color_b="0.376471" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="16.2537" t1="-1.84061" t2="1.69429" s0="1" s1="1" s2="1" q0="-0.546677" q1="0.453172" q2="0.50651" q3="0.489108" id="354" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="18.5505" t1="-2.15167" t2="5.08591" s0="1" s1="1" s2="1" q0="-0.546677" q1="0.453172" q2="0.50651" q3="0.489108" id="355" color_r="1" color_g="1" color_b="1" type_file="Data/Objects/Buildings/PostRound1.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+</ActorObjects>

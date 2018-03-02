@@ -1,0 +1,727 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>Raider Camp</Name>
+<Description/>
+<Shader>post</Shader>
+<LoadingScreen>
+    <Image>Data/LevelLoading/LugaruStory/Raider_camp.xml_loading.jpg</Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Prototypes/Lugaru/Desert/Desert_Height.png</Heightmap>
+    <ShaderExtra>#HEIGHT_BLEND</ShaderExtra>
+    <DetailMap/>
+    <ColorMap>Data/Prototypes/Lugaru/Desert/Desert_Color.tga</ColorMap>
+    <WeightMap>Data/Prototypes/Lugaru/Desert/Desert_Weights.png</WeightMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/pebbly_sand.tga" normalpath="Data/Textures/Terrain/DetailTextures/pebbly_sand_normal.tga" materialpath="Data/Materials/sand.xml"/>
+        <DetailMap colorpath="Data/Prototypes/Lugaru/Desert/Sandwaves_Color.tga" normalpath="Data/Prototypes/Lugaru/Desert/Sandwaves_Norm.tga" materialpath="Data/Materials/sand.xml"/>
+        <DetailMap colorpath="Data/Prototypes/Lugaru/Desert/DesertRock_Color.tga" normalpath="Data/Prototypes/Lugaru/Desert/DesertRock_Norm.tga" materialpath="Data/Materials/dirtyrock.xml"/>
+        <DetailMap colorpath="Data/Prototypes/Lugaru/Desert/DesertRock2_Color.tga" normalpath="Data/Prototypes/Lugaru/Desert/DesertRock2_Norm.tga" materialpath="Data/Materials/dirt.xml"/>
+    </DetailMaps>
+    <DetailObjects>
+        <DetailObject obj_path="Data/Objects/Plants/groundcover/Grass/tall_wild_grass.xml" weight_path="Data/Prototypes/Lugaru/Desert/Desert_ObjectWeights.tga" normal_conform="0.9" density="2" min_embed="0.1" max_embed="0.2" min_scale="0.2" max_scale="0.5" view_distance="25" jitter_degrees="10" overbright="-0.7" tint_weight="1"/>
+        <DetailObject obj_path="Data/Objects/Environment/Rocks/lichen_rock_e.xml" weight_path="Data/Prototypes/Lugaru/Desert/Desert_ObjectWeights.tga" normal_conform="0.9" density="2" min_embed="0.3" max_embed="0.5" min_scale="0.1" max_scale="0.2" view_distance="35" jitter_degrees="10" overbright="-0.5" tint_weight="1"/>
+    </DetailObjects>
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251"/>
+<AmbientSounds/>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills"/>
+    <parameter name="Fog amount" type="string" val="1.2000000000000002"/>
+    <parameter name="HDR Black point" type="string" val="0.045"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="0.502"/>
+    <parameter name="HDR White point" type="string" val="0.505"/>
+    <parameter name="Level Boundaries" type="string" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Saturation" type="float" val="1"/>
+    <parameter name="Sky Brightness" type="string" val="1"/>
+    <parameter name="Sky Rotation" type="string" val="105"/>
+    <parameter name="Sky Tint" type="string" val="255, 255, 255"/>
+</LevelScriptParameters>
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60"/>
+<Sky>
+    <DomeTexture>Data/Prototypes/Lugaru/Desert/Camp_Dome.tga</DomeTexture>
+    <SunAngularRad>0.304984</SunAngularRad>
+    <SunColorAngle>334.065</SunColorAngle>
+    <RayToSun r0="0.740213" r1="0.179996" r2="0.647832"/>
+</Sky>
+<ActorObjects>
+    <EnvObject t0="37.5526" t1="10.09" t2="90.3723" s0="1" s1="1" s2="1" q0="0.108833" q1="0.520371" q2="0.0971857" q3="0.841382" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="39.1784" t1="17.4629" t2="60.0679" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_Camp3.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="62.038" t1="42.0882" t2="47.1756" s0="5.32932" s1="3.98253" s2="5.02004" q0="0.0287886" q1="-0.0357047" q2="-0.0356273" q3="0.998312" id="4" version="1">
+        <parameters/>
+        <EnvObject t0="61.0945" t1="42.1093" t2="45.6864" s0="0.404026" s1="0.404026" s2="0.404026" q0="-0.341792" q1="0.742836" q2="-0.0541838" q3="0.573094" id="1308" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="60.9837" t1="42.8756" t2="45.4726" s0="0.362806" s1="0.362806" s2="0.362806" q0="0.108194" q1="-0.371851" q2="-0.0311238" q3="0.92144" id="1309" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_leaf.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="61.6104" t1="41.155" t2="46.0743" s0="0.508622" s1="0.254001" s2="0.570986" q0="-0.140128" q1="-0.944098" q2="0.134408" q3="0.266416" id="1310" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="61.7677" t1="41.0114" t2="46.6741" s0="0.360779" s1="0.251513" s2="0.405017" q0="0.0835477" q1="-0.560947" q2="-0.400112" q3="0.719909" id="1311" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="60.5456" t1="42.2875" t2="45.9269" s0="0.464693" s1="0.464693" s2="0.464693" q0="-0.654206" q1="0.657682" q2="0.369784" q3="0.052237" id="1312" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_leaf.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="62.3527" t1="41.5975" t2="47.5381" s0="0.360779" s1="0.251513" s2="0.405017" q0="-0.545832" q1="-0.153994" q2="0.663366" q3="0.488159" id="1313" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="62.4316" t1="41.9901" t2="45.8337" s0="0.563016" s1="0.563016" s2="0.563016" q0="-0.260263" q1="-0.647172" q2="-0.413162" q3="0.58543" id="1314" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_leaf.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="61.7582" t1="41.8699" t2="45.4143" s0="0.331444" s1="0.331444" s2="0.331444" q0="-0.556592" q1="0.0822334" q2="-0.285929" q3="0.775685" id="1315" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_leaf.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="62.7305" t1="42.3855" t2="48.1816" s0="0.610767" s1="0.610767" s2="0.610767" q0="0.361676" q1="0.143561" q2="-0.29878" q3="0.871385" id="1316" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_leaf.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="62.2898" t1="41.5654" t2="46.4148" s0="0.569145" s1="0.569146" s2="0.569146" q0="-0.0335655" q1="-0.395812" q2="-0.416204" q3="0.817912" id="1317" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_leaf.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="62.4808" t1="42.1238" t2="48.2216" s0="0.359574" s1="0.359574" s2="0.359575" q0="0.538652" q1="-0.294151" q2="0.0133607" q3="0.789399" id="1318" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_leaf.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="61.6251" t1="41.4768" t2="46.3698" s0="0.395192" s1="0.395192" s2="0.395192" q0="0.124847" q1="-0.205972" q2="-0.0483344" q3="0.969357" id="1319" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_leaf.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="63.259" t1="41.9254" t2="47.481" s0="0.563017" s1="0.563016" s2="0.563018" q0="-0.514104" q1="-0.605451" q2="-0.137872" q3="0.591707" id="1321" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/joshua/joshua_leaf.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="8.36713" t1="13.7997" t2="53.5221" s0="1" s1="1" s2="1" q0="0" q1="0" q2="1" q3="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_SmallBlockABroken.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="17.2579" t1="13.7947" t2="55.3746" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_Camp1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="24.9021" t1="13.4412" t2="61.5526" s0="0.778631" s1="0.778631" s2="0.778631" q0="0.0684981" q1="0" q2="0" q3="0.997651" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_SmallBlockTall.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="38.9911" t1="5.47531" t2="91.9918" s0="5.70467" s1="5.21463" s2="6.66676" q0="0.293853" q1="0" q2="0" q3="0.955851" id="13" version="1">
+        <parameters/>
+        <EnvObject t0="39.5467" t1="5.62235" t2="93.2852" s0="0.831364" s1="0.562573" s2="0.810998" q0="0.187036" q1="0.151664" q2="0.100959" q3="0.96531" id="396" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="38.9811" t1="6.01887" t2="91.1913" s0="0.831367" s1="0.712188" s2="0.831599" q0="-0.272934" q1="0.411806" q2="0.296278" q3="0.8174" id="402" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="-31.5445" t1="30.826" t2="46.2893" s0="0.878934" s1="0.878934" s2="0.878934" q0="0" q1="0.0322326" q2="0" q3="0.99948" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-34.4841" t1="30.151" t2="52.5662" s0="0.871118" s1="0.871118" s2="0.871118" q0="0.0937609" q1="0.635719" q2="0.111797" q3="0.758005" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_2.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-60.9101" t1="42.8712" t2="46.2214" s0="17.2252" s1="15.9719" s2="14.7819" q0="0" q1="0" q2="0" q3="1" id="24" version="1">
+        <parameters/>
+        <EnvObject t0="-58.3611" t1="43.5153" t2="43.7996" s0="1.76156" s1="1.76156" s2="1.76156" q0="0.361772" q1="0.910266" q2="-0.108679" q3="0.169487" id="412" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-61.1762" t1="44.0779" t2="44.4556" s0="0.871629" s1="1.19199" s2="0.805458" q0="-0.421638" q1="0.489642" q2="-0.361683" q3="0.672055" id="414" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-62.6337" t1="41.0038" t2="46.4759" s0="1.69524" s1="1.69524" s2="1.69524" q0="0.101742" q1="0.125778" q2="-0.452204" q3="0.87712" id="415" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-60.8039" t1="40.9109" t2="48.289" s0="1.69524" s1="1.69524" s2="1.69524" q0="-0.0229898" q1="0.626748" q2="-0.1829" q3="0.757104" id="416" color_r="0.372549" color_g="0.329412" color_b="0.235294" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-60.5907" t1="39.6489" t2="43.2276" s0="1.01091" s1="1.01091" s2="1.01091" q0="-0.614884" q1="0.699579" q2="-0.361572" q3="0.0421013" id="417" color_r="0.372549" color_g="0.329412" color_b="0.235294" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-63.2601" t1="44.3427" t2="47.3979" s0="1.85221" s1="1.85221" s2="1.85221" q0="-0.00283045" q1="0.511838" q2="0.314635" q3="0.799386" id="418" color_r="0.313726" color_g="0.278431" color_b="0.2" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-61.3858" t1="37.8536" t2="44.8428" s0="0.61603" s1="0.461869" s2="0.54262" q0="0.0054794" q1="0.571939" q2="0.00620556" q3="0.820254" id="419" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-61.441" t1="41.5962" t2="46.5548" s0="0.602679" s1="0.336961" s2="0.408483" q0="0.25034" q1="0.332252" q2="0.293187" q3="0.860802" id="420" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-60.8142" t1="41.5593" t2="44.0102" s0="0.602679" s1="0.336961" s2="0.408483" q0="0.0549413" q1="0.412363" q2="-0.167261" q3="0.893847" id="421" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Branch.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <EnvObject t0="32.8508" t1="22.7788" t2="52.1681" s0="1.1242" s1="1.1242" s2="1.1242" q0="0" q1="-0.303461" q2="0" q3="0.952844" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="21.0217" t1="21.121" t2="44.3087" s0="0.878934" s1="0.878934" s2="0.878934" q0="0" q1="0.0485327" q2="0" q3="0.998822" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_1.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="-58.5501" t1="22.5389" t2="101.645" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="31" type_file="Data/Objects/Hotspots/lugaru_level.xml">
+        <parameters>
+            <parameter name="music" type="string" val="lugaru_ambient_desert"/>
+            <parameter name="next_level" type="string" val="Data/Levels/LugaruStory/Raider_sentries.xml"/>
+        </parameters>
+    </Hotspot>
+    <Decal t0="-3.02296" t1="7.69908" t2="80.6475" s0="0.342959" s1="0.342959" s2="0.342959" q0="0" q1="0" q2="0" q3="1" id="32" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </Decal>
+    <PlaceholderObject t0="-65.1725" t1="19.682" t2="114.944" s0="1.00014" s1="1.00014" s2="1.00014" q0="0" q1="0" q2="0" q3="1" id="34" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/LugaruStory/Raider_camp_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Night Camp"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="36"/>
+        </parameters>
+        <Connections>
+            <Connection id="34"/>
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="65.1509" t1="26.235" t2="67.9036" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_Camp2.xml">
+        <parameters/>
+    </EnvObject>
+    <PlaceholderObject t0="-65.1725" t1="20.3821" t2="114.944" s0="0.300042" s1="0.300042" s2="0.300042" q0="0" q1="0" q2="0" q3="1" id="36" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="449"/>
+        </Connections>
+    </PlaceholderObject>
+    <NavmeshHintObject t0="-2.97927" t1="9.03395" t2="80.5971" s0="1.05225" s1="5.30266" s2="1.08431" q0="0" q1="0" q2="0" q3="1" id="37">
+        <parameters/>
+    </NavmeshHintObject>
+    <Hotspot t0="-3.02895" t1="7.80737" t2="80.6442" s0="0.0975497" s1="0.158009" s2="0.112977" q0="-0.653423" q1="0.000342727" q2="0.755816" q3="0.0421947" id="38" type_file="Data/Objects/Hotspots/fire_test.xml">
+        <parameters>
+            <parameter name="Fire Ribbons" type="int" val="4"/>
+            <parameter name="Ignite Characters" type="int" val="1"/>
+            <parameter name="Light Amplify" type="float" val="1"/>
+            <parameter name="Light Distance" type="float" val="2"/>
+        </parameters>
+    </Hotspot>
+    <LightProbeObject t0="67.4782" t1="17.5491" t2="96.4475" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="39" gicoeff00="0" gicoeff01="0" gicoeff02="0" gicoeff03="0" gicoeff04="0" gicoeff05="0" gicoeff06="0" gicoeff07="0" gicoeff08="0" gicoeff09="0" gicoeff10="0" gicoeff11="0" gicoeff12="0" gicoeff13="0" gicoeff14="0" gicoeff15="0" gicoeff16="0" gicoeff17="0">
+        <parameters>
+            <parameter name="Negative" type="int" val="0"/>
+        </parameters>
+    </LightProbeObject>
+    <Decal t0="-62.3912" t1="16.8969" t2="120.617" s0="2.9993" s1="2.9993" s2="2.9993" q0="0" q1="0" q2="0" q3="1" id="40" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0" color_g="0" color_b="0" overbright="0">
+        <parameters/>
+    </Decal>
+    <Hotspot t0="-2.99156" t1="13.6052" t2="80.5156" s0="0.0798628" s1="2.28418" s2="0.111396" q0="0" q1="0" q2="0" q3="1" id="41" type_file="Data/Objects/Hotspots/emitter.xml">
+        <parameters>
+            <parameter name="Type" type="string" val="Smoke"/>
+        </parameters>
+    </Hotspot>
+    <Hotspot t0="-2.80839" t1="20.9586" t2="81.7557" s0="1.92954" s1="1.46085" s2="2.84623" q0="0" q1="0" q2="0" q3="1" id="42" type_file="Data/Objects/Hotspots/emitter.xml">
+        <parameters>
+            <parameter name="Type" type="string" val="Smoke"/>
+        </parameters>
+    </Hotspot>
+    <Decal t0="36.0158" t1="16.1543" t2="56.9679" s0="13.8848" s1="13.8848" s2="13.8848" q0="0" q1="0" q2="0" q3="1" id="55" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.431373" color_g="0.431368" color_b="0.431368" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="33.6286" t1="16.3237" t2="50.8756" s0="7.67682" s1="7.67682" s2="7.67682" q0="0" q1="0" q2="0" q3="1" id="57" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.572549" color_g="0.572543" color_b="0.572543" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="55.718" t1="15.3215" t2="76.1285" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_Block1.xml">
+        <parameters/>
+    </EnvObject>
+    <Decal t0="37.635" t1="14.2438" t2="56.4222" s0="9.58634" s1="9.58634" s2="9.58634" q0="0" q1="0" q2="0" q3="1" id="60" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.243137" color_g="0.21644" color_b="0.21644" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="17.781" t1="14.2339" t2="55.6485" s0="8.18566" s1="8.18598" s2="8.187" q0="0" q1="0" q2="0" q3="1" id="62" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.431373" color_g="0.431368" color_b="0.431368" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="24.8668" t1="13.6743" t2="61.4923" s0="3.28744" s1="3.28757" s2="3.28798" q0="0" q1="0" q2="0" q3="1" id="64" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.431373" color_g="0.431368" color_b="0.431368" overbright="0">
+        <parameters/>
+    </Decal>
+    <Decal t0="20.6571" t1="17.1795" t2="44.541" s0="6.07925" s1="6.07925" s2="6.07925" q0="0" q1="0" q2="0" q3="1" id="65" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0.556863" color_g="0.556857" color_b="0.556857" overbright="0">
+        <parameters/>
+    </Decal>
+    <EnvObject t0="-29.8714" t1="13.8054" t2="162.842" s0="1.79574" s1="1.79574" s2="1.79574" q0="0.274904" q1="0.298161" q2="0.248506" q3="0.879643" id="91" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-28.955" t1="14.3412" t2="160.034" s0="0.888546" s1="1.21512" s2="0.82109" q0="0.100328" q1="-0.346041" q2="-0.554601" q3="0.750072" id="92" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-30.0427" t1="11.2247" t2="157.714" s0="1.72814" s1="1.72814" s2="1.72814" q0="0.432705" q1="-0.707442" q2="-0.140114" q3="0.540981" id="93" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-32.5894" t1="11.2023" t2="158.366" s0="1.72814" s1="1.72814" s2="1.72814" q0="0.140835" q1="-0.351976" q2="-0.121848" q3="0.917296" id="94" color_r="0.372549" color_g="0.329412" color_b="0.235294" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="4.076" t1="7.8492" t2="79.763" s0="1.61285" s1="1.01001" s2="1.59458" q0="0" q1="0" q2="0" q3="1" id="95" version="1">
+        <parameters/>
+        <Decal t0="4.076" t1="7.8492" t2="79.763" s0="0.815006" s1="1" s2="1.43932" q0="2.02656e-006" q1="0.392221" q2="0" q3="0.919871" id="104" type_file="Data/Objects/Decals/rugs/thick_tan_rug.xml" color_r="0.329412" color_g="0.709804" color_b="0.254902" overbright="0">
+            <parameters/>
+        </Decal>
+    </Group>
+    <ActorObject t0="-3.54664" t1="7.29218" t2="83.1783" s0="1" s1="1" s2="1" q0="0" q1="0.995477" q2="0" q3="0.0950027" id="97" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="100"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="499"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.254902" green="0.129412" blue="0.0196078"/>
+            <Color label="Pants" channel="1" red="0.254902" green="0.0745098" blue="0.027451"/>
+            <Color label="Shirt" channel="2" red="0.25098" green="0.25098" blue="0.254902"/>
+            <Color label="Leather" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="4.09597" t1="8.01331" t2="79.7809" s0="1" s1="1" s2="1" q0="0.0155175" q1="0.947652" q2="0.0062735" q3="0.318866" id="98" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="100"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="501"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.266667" green="0.266667" blue="0.266667"/>
+            <Color label="Pants" channel="1" red="0.976471" green="0.658824" blue="0.443137"/>
+            <Color label="Shirt" channel="2" red="1" green="1" blue="1"/>
+            <Color label="Leather" channel="3" red="0.254902" green="0.239216" blue="0.203922"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-1.34865" t1="9.49161" t2="73.1505" s0="1" s1="1" s2="1" q0="0" q1="-0.280083" q2="0" q3="0.959976" id="99" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="100"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="500"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.792157" green="0.792157" blue="0.694118"/>
+            <Color label="Pants" channel="1" red="0.313726" green="0.219608" blue="0.180392"/>
+            <Color label="Shirt" channel="2" red="0.313726" green="0.313726" blue="0.313726"/>
+            <Color label="Leather" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="-9.09821" t1="9.78542" t2="73.6493" s0="1" s1="1" s2="1" q0="0" q1="-0.941436" q2="0" q3="0.337192" id="100" type_file="Data/Objects/characters/raider_rabbit_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="62.800000000000004"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="102"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="109" type="1" mirrored="1" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.0901961" green="0.0901961" blue="0.0901961"/>
+            <Color label="Pants" channel="1" red="0.501961" green="0.384314" blue="0.266667"/>
+            <Color label="Shirt" channel="2" red="1" green="0.894118" blue="0.529412"/>
+            <Color label="Leather" channel="3" red="0.552941" green="0.552941" blue="0.552941"/>
+        </Palette>
+    </ActorObject>
+    <PathPointObject t0="26.0822" t1="14.029" t2="69.4668" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="101" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="108"/>
+            <Connection id="102"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="9.66936" t1="13.4106" t2="55.2986" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="102" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="103"/>
+            <Connection id="101"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-3.36301" t1="14.6601" t2="52.6723" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="103" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="2"/>
+        </parameters>
+        <Connections>
+            <Connection id="105"/>
+            <Connection id="102"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-18.9318" t1="10.5665" t2="79.5549" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="105" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="4"/>
+        </parameters>
+        <Connections>
+            <Connection id="106"/>
+            <Connection id="103"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-5.45602" t1="6.05265" t2="92.9007" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="106" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="107"/>
+            <Connection id="105"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="8.16109" t1="2.45612" t2="101.135" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="107" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="108"/>
+            <Connection id="106"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="18.6551" t1="5.41424" t2="91.2153" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="108" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="string" val="1"/>
+        </parameters>
+        <Connections>
+            <Connection id="101"/>
+            <Connection id="107"/>
+        </Connections>
+    </PathPointObject>
+    <ItemObject t0="-10.7786" t1="10.1428" t2="71.5702" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="109" type_file="Data/Prototypes/Weapons/FlintKnife_Item.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <Group t0="-3.01404" t1="7.57034" t2="80.573" s0="1.46583" s1="0.459377" s2="1.48275" q0="0.0201846" q1="-0.0647081" q2="-0.025072" q3="0.997385" id="110" version="1">
+        <parameters/>
+        <EnvObject t0="-3.05163" t1="7.57675" t2="80.5951" s0="1.06381" s1="1" s2="1.0607" q0="0.104451" q1="0.272936" q2="0.0203993" q3="0.956128" id="116" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_ash.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-3.01404" t1="7.57034" t2="80.573" s0="0.999999" s1="1" s2="0.999998" q0="0.104451" q1="0.272936" q2="0.0203993" q3="0.956128" id="117" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-3.0301" t1="7.64747" t2="80.549" s0="0.999999" s1="0.999999" s2="0.999999" q0="0.0201843" q1="-0.0647083" q2="-0.0250723" q3="0.997385" id="771" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_wood_hot.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <Group t0="-4.64949" t1="9.69622" t2="72.3771" s0="1.23887" s1="1.01001" s2="1.63334" q0="0" q1="0" q2="0" q3="1" id="111" version="1">
+        <parameters/>
+        <Decal t0="-4.64949" t1="9.69622" t2="72.3771" s0="0.815005" s1="1" s2="1.43932" q0="1.49012e-006" q1="0.987049" q2="1.10269e-006" q3="0.160419" id="503" type_file="Data/Objects/Decals/rugs/thick_tan_rug.xml" color_r="0.258824" color_g="0.396078" color_b="0.713726" overbright="0">
+            <parameters/>
+        </Decal>
+    </Group>
+    <EnvObject t0="-35.5919" t1="20.2349" t2="74.2383" s0="0.819951" s1="0.819951" s2="0.819951" q0="0" q1="0.929836" q2="0" q3="0.367974" id="112" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_1.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-45.3831" t1="16.6915" t2="125.313" s0="1" s1="1" s2="1" q0="0" q1="0.845407" q2="0" q3="0.534123" id="118" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_1.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="-3.61955" t1="7.20491" t2="83.327" s0="1.08065" s1="0.861746" s2="1.25976" q0="0" q1="0.293895" q2="0" q3="0.955838" id="120" version="1">
+        <parameters/>
+    </Group>
+    <EnvObject t0="-29.3006" t1="11.2399" t2="131.951" s0="1" s1="1" s2="1" q0="0" q1="-0.9048" q2="0" q3="0.425837" id="121" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-61.7292" t1="21.5984" t2="119.814" s0="0.843251" s1="0.843251" s2="0.843251" q0="0" q1="0.767272" q2="0" q3="0.641322" id="122" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-30.5641" t1="18.2957" t2="83.9807" s0="0.920526" s1="0.920526" s2="0.920526" q0="0.0937609" q1="0.635719" q2="0.111797" q3="0.758005" id="123" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-104.385" t1="32.3698" t2="73.7234" s0="1.18815" s1="1.18815" s2="1.18815" q0="0" q1="0.767272" q2="0" q3="0.641322" id="150" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_3.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="2.62571" t1="1.56759" t2="110.307" s0="0.796711" s1="0.796711" s2="0.796711" q0="0.0809196" q1="-0.996035" q2="0.0109265" q3="0.0353119" id="228" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="37.4913" t1="8.40753" t2="87.2223" s0="0.699234" s1="0.699234" s2="0.699234" q0="0.0433968" q1="-0.991759" q2="0.0321314" q3="0.116183" id="230" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <Group t0="39.6014" t1="14.5965" t2="87.6261" s0="13.9294" s1="18.1045" s2="13.1393" q0="0" q1="0" q2="0" q3="1" id="259" version="1">
+        <parameters/>
+        <EnvObject t0="39.3501" t1="11.8898" t2="85.7471" s0="1.69524" s1="1.69524" s2="1.69524" q0="-0.496573" q1="0.816589" q2="0.292789" q3="0.029534" id="403" color_r="0.372549" color_g="0.329412" color_b="0.235294" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="37.8611" t1="16.8216" t2="85.1491" s0="0.871626" s1="1.19199" s2="0.805455" q0="-0.562286" q1="0.805978" q2="0.00206985" q3="0.185012" id="404" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="39.7021" t1="13.7862" t2="86.8991" s0="1.69524" s1="1.69524" s2="1.69524" q0="-0.226419" q1="0.666848" q2="-0.405825" q3="0.582541" id="405" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="41.7572" t1="13.7152" t2="85.3411" s0="1.69523" s1="1.69523" s2="1.69523" q0="-0.14517" q1="0.968097" q2="-0.12482" q3="0.16166" id="406" color_r="0.372549" color_g="0.329412" color_b="0.235294" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="40.4751" t1="17.1418" t2="87.6261" s0="1.8522" s1="1.8522" s2="1.8522" q0="0.196224" q1="0.91275" q2="0.238769" q3="0.267157" id="408" color_r="0.313726" color_g="0.278431" color_b="0.2" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="38.3111" t1="10.6052" t2="85.4501" s0="0.616031" s1="0.461869" s2="0.54262" q0="0" q1="0.969583" q2="0" q3="0.244763" id="409" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Trunk.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="39.9402" t1="14.375" t2="85.7231" s0="0.602678" s1="0.33696" s2="0.408482" q0="0.37362" q1="0.818156" q2="0.0582175" q3="0.433174" id="410" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="37.5092" t1="14.2947" t2="84.7431" s0="0.60268" s1="0.336961" s2="0.408484" q0="-0.0762518" q1="0.896191" q2="-0.16198" q3="0.405943" id="411" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="34.8226" t1="7.9443" t2="85.2885" s0="0.511636" s1="0.511636" s2="0.511636" q0="-0.133832" q1="0.787302" q2="-0.0485061" q3="0.59991" id="945" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="34.008" t1="7.0764" t2="86.2391" s0="0.438201" s1="0.438202" s2="0.438201" q0="0.329425" q1="-0.702177" q2="0.164431" q3="0.609417" id="946" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <ItemObject t0="-64.4344" t1="17.7263" t2="118.57" s0="1" s1="1" s2="1" q0="-0.00102609" q1="-0.0424055" q2="0.00217521" q3="0.999098" id="281" type_file="Data/Prototypes/Weapons/FlintKnife_Item.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters/>
+    </ItemObject>
+    <EnvObject t0="-1.59253" t1="23.052" t2="42.9672" s0="1" s1="1" s2="1" q0="-0.0173516" q1="0.987756" q2="0.144874" q3="0.0552136" id="290" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/JoshuaTree_2.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-104.26" t1="28.0525" t2="72.0228" s0="1.87965" s1="1.37572" s2="1.82082" q0="-0.170347" q1="-0.888396" q2="0.115923" q3="0.410239" id="393" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-99.7714" t1="26.8554" t2="73.7808" s0="0.999999" s1="1" s2="1" q0="-0.156731" q1="-0.890899" q2="0.109631" q3="0.411965" id="394" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-101.431" t1="27.0338" t2="76.2589" s0="1" s1="1" s2="1" q0="-0.0571837" q1="-0.895896" q2="-0.234993" q3="0.372664" id="395" color_r="0.501961" color_g="0.307451" color_b="0.181961" overbright="0" type_file="Data/Objects/plants/trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <ActorObject name="Turner" t0="-63.8169" t1="18.0072" t2="119.633" s0="1" s1="1" s2="1" q0="-0.00294366" q1="0.854879" q2="-0.0281701" q3="0.518054" id="449" type_file="Data/Objects/IGF_Characters/pale_turner_actor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="10"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="string" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Lives" type="string" val="1"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="Turner, Jack, Clover, Skipper, Sarah, April"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="281" type="1" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Fur" channel="0" red="0.360784" green="0.298039" blue="0.211765"/>
+            <Color label="Ropes" channel="1" red="0.0901961" green="0.0784314" blue="0.0627451"/>
+            <Color label="Pants" channel="2" red="0.145098" green="0.145098" blue="0.145098"/>
+            <Color label="Spots" channel="3" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <Group t0="-1.89078" t1="11.0194" t2="114.074" s0="16.9737" s1="21.1864" s2="17.6427" q0="0" q1="0" q2="0" q3="1" id="490" version="1">
+        <parameters/>
+        <EnvObject t0="0.355219" t1="8.56505" t2="110.34" s0="0.729221" s1="0.407711" s2="0.49425" q0="-0.0672096" q1="-0.7546" q2="0.185996" q3="0.625673" id="238" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Branch.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="2.54222" t1="12.3414" t2="116.433" s0="2.03185" s1="2.77865" s2="1.8776" q0="-0.200732" q1="0.568184" q2="-0.412685" q3="0.683055" id="249" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+            <parameters/>
+        </EnvObject>
+        <Group t0="-1.89078" t1="11.0194" t2="114.074" s0="16.9737" s1="21.1864" s2="17.6427" q0="0" q1="0" q2="0" q3="1" id="469" version="1">
+            <parameters/>
+            <EnvObject t0="0.470224" t1="6.03435" t2="113.062" s0="2.2468" s1="2.2468" s2="2.2468" q0="-0.563551" q1="0.58036" q2="-0.121323" q3="0.575216" id="241" color_r="0.372549" color_g="0.329412" color_b="0.235294" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="1.93322" t1="11.0255" t2="109.563" s0="1.15522" s1="1.57982" s2="1.06752" q0="-0.389984" q1="0.472553" q2="-0.612598" q3="0.499329" id="244" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="-1.01278" t1="8.54775" t2="113.651" s0="2.2468" s1="2.2468" s2="2.2468" q0="0.10861" q1="0.0954237" q2="-0.451845" q3="0.880304" id="245" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="1.26623" t1="8.45365" t2="116.198" s0="2.2468" s1="2.2468" s2="2.2468" q0="-0.0221271" q1="0.602192" q2="-0.19017" q3="0.775055" id="248" color_r="0.372549" color_g="0.329412" color_b="0.235294" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="1.58322" t1="5.74725" t2="109.349" s0="2.2468" s1="2.2468" s2="2.2468" q0="-0.661805" q1="0.352477" q2="-0.5438" q3="0.376903" id="251" color_r="0.372549" color_g="0.329412" color_b="0.235294" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="-1.89078" t1="12.9952" t2="114.75" s0="2.45484" s1="2.45484" s2="2.45484" q0="-0.0175754" q1="0.48999" q2="0.308554" q3="0.815104" id="252" color_r="0.313726" color_g="0.278431" color_b="0.2" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="0.75123" t1="4.33175" t2="111.658" s0="0.81646" s1="0.612141" s2="0.719166" q0="0" q1="0.546954" q2="0" q3="0.837163" id="239" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Trunk.xml">
+                <parameters/>
+            </EnvObject>
+            <EnvObject t0="0.566217" t1="9.32815" t2="113.839" s0="0.798766" s1="0.446594" s2="0.541386" q0="0.235233" q1="0.307913" q2="0.296052" q3="0.873045" id="240" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Branch.xml">
+                <parameters/>
+            </EnvObject>
+        </Group>
+    </Group>
+    <Hotspot t0="-63.2545" t1="18.0242" t2="118.909" s0="1" s1="1.0726" s2="1" q0="0" q1="0" q2="0" q3="1" id="496" type_file="Data/Objects/Hotspots/start_dialogue.xml">
+        <parameters>
+            <parameter name="Automatic" type="string" val="1"/>
+            <parameter name="Dialogue" type="string" val="Night Camp"/>
+            <parameter name="Visible in game" type="string" val="0"/>
+        </parameters>
+    </Hotspot>
+    <Group t0="-3.66431" t1="7.79057" t2="79.6476" s0="1.06093" s1="0.333015" s2="0.63678" q0="0.0621363" q1="0.298352" q2="-0.017254" q3="0.952275" id="498" version="1">
+        <parameters/>
+        <EnvObject t0="-3.45358" t1="7.81789" t2="79.6113" s0="0.999999" s1="0.999999" s2="0.999999" q0="0.0279892" q1="0.923123" q2="0.0989187" q3="0.370507" id="176" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/wood_pile.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-3.75804" t1="7.75729" t2="79.8705" s0="1" s1="0.999999" s2="0.999999" q0="0.0972651" q1="-0.419749" q2="-0.0332876" q3="0.901799" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/wood_pile.xml">
+            <parameters/>
+        </EnvObject>
+        <EnvObject t0="-3.69333" t1="7.79192" t2="79.5846" s0="0.781536" s1="0.781534" s2="0.781536" q0="0.305742" q1="0.101032" q2="0.92329" q3="0.209404" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/wood_pile.xml">
+            <parameters/>
+        </EnvObject>
+    </Group>
+    <PathPointObject t0="-3.48768" t1="7.00731" t2="83.1794" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="499" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Sit"/>
+            <parameter name="Wait" type="string" val="1"/>
+        </parameters>
+        <Connections/>
+    </PathPointObject>
+    <PathPointObject t0="-1.36635" t1="9.50427" t2="73.2538" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="500" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Sleep"/>
+            <parameter name="Wait" type="string" val="1&#10;"/>
+        </parameters>
+        <Connections/>
+    </PathPointObject>
+    <PathPointObject t0="4.10601" t1="7.91551" t2="79.774" s0="1" s1="1" s2="1" q0="0" q1="0.293895" q2="0" q3="0.955838" id="501" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Sleep"/>
+            <parameter name="Wait" type="string" val="1"/>
+        </parameters>
+        <Connections/>
+    </PathPointObject>
+    <Group t0="-1.32121" t1="9.5331" t2="73.4047" s0="1.65435" s1="1.01" s2="1.51211" q0="0.037666" q1="-0.0196013" q2="-0.0415157" q3="0.998235" id="583" version="1">
+        <parameters/>
+        <Decal t0="-1.32121" t1="9.5331" t2="73.4047" s0="0.815005" s1="1" s2="1.43932" q0="0.0524539" q1="0.437847" q2="-0.019767" q3="0.8973" id="586" type_file="Data/Objects/Decals/rugs/thick_tan_rug.xml" color_r="0.713726" color_g="0.698039" color_b="0.258824" overbright="0">
+            <parameters/>
+        </Decal>
+    </Group>
+    <Group t0="1.54459" t1="7.39172" t2="81.6406" s0="1.15821" s1="1.01" s2="1.60709" q0="0" q1="0" q2="0" q3="1" id="587" version="1">
+        <parameters/>
+        <Decal t0="1.54459" t1="7.39172" t2="81.6406" s0="0.815005" s1="0.999999" s2="1.43932" q0="0" q1="0.992069" q2="0" q3="0.125694" id="729" type_file="Data/Objects/Decals/rugs/thick_tan_rug.xml" color_r="0.709804" color_g="0.34902" color_b="0.141176" overbright="0">
+            <parameters/>
+        </Decal>
+    </Group>
+    <Group t0="-3.48911" t1="7.17601" t2="83.1115" s0="0.979134" s1="1.01" s2="1.10103" q0="0" q1="0" q2="0" q3="1" id="730" version="1">
+        <parameters/>
+        <Decal t0="-3.48911" t1="7.17601" t2="83.1115" s0="0.761087" s1="0.999998" s2="0.930632" q0="0" q1="0.992069" q2="0" q3="0.125694" id="733" type_file="Data/Objects/Decals/rugs/thick_tan_rug.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters/>
+        </Decal>
+    </Group>
+    <CameraObject t0="20.3187" t1="23.6293" t2="71.8919" s0="1" s1="1" s2="1" q0="-0.10866" q1="0.874735" q2="-0.230637" q3="-0.412115" id="734">
+        <parameters/>
+    </CameraObject>
+    <EnvObject t0="-30.4279" t1="14.6351" t2="156.668" s0="1.88816" s1="1.88816" s2="1.88816" q0="-0.283143" q1="-0.439014" q2="0.142243" q3="0.840752" id="1271" color_r="0.313726" color_g="0.278431" color_b="0.2" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-29.3584" t1="8.00305" t2="159.678" s0="0.627986" s1="0.470833" s2="0.553152" q0="-0.010722" q1="-0.431596" q2="-0.00344401" q3="0.901997" id="1272" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Trunk.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-30.7208" t1="11.8518" t2="158.714" s0="0.614376" s1="0.343501" s2="0.416412" q0="-0.141324" q1="-0.582425" q2="0.353969" q3="0.717993" id="1273" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Branch.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-28.8241" t1="11.7718" t2="160.597" s0="0.614375" s1="0.343501" s2="0.416412" q0="0.162866" q1="-0.57677" q2="-0.0441872" q3="0.799286" id="1274" color_r="0.486275" color_g="0.423529" color_b="0.278431" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Branch.xml">
+        <parameters/>
+    </EnvObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="Ambient Shadow" path="Data/Objects/default_env_blob_shadow_decal.xml" thumbnail_path="Data/UI/spawner/thumbs/Lighting/light_placeholder.png"/>
+</RecentItems>

@@ -1,0 +1,7 @@
+#name "Suspicious Guard"
+#participants 2
+
+set_cam 8.10089 1.93596 -84.3991 0 -180 0 90
+say 2 "Guard" "Hey![wait 0.2] What are you doing here?"
+say 1 "Turner" "Just wandering around,[wait 0.1] nothing to worry about."
+say 2 "Guard" "Stay out of trouble."

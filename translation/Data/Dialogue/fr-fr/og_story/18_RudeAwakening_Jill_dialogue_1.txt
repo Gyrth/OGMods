@@ -1,0 +1,16 @@
+#name "Win"
+#participants 2
+set_character_pos 1 2.33919 -1.59552 2.65984 -48
+set_cam 2.70068 -1.89073 4.32553 23.71 0 0 90
+say 2 "Cat" "Si vous êtes le chanceux !"
+say 2 "Cat" "Je pense que je vais vous appeler que : votre nom est Lucky maintenant."
+set_cam 2.4854 -0.796747 3.27843 0 0 0 90
+say 1 "Turner" "Mon nom est Turner."
+set_cam 2.70068 -1.89073 4.32553 23.71 0 0 90
+say 2 "Cat" "Votre nom est tout ce que je dis que c’est."
+set_cam 2.4854 -0.796747 3.27843 0 0 0 90
+say 1 "Turner" "Il y avait une fille, nommée Sky--"
+set_cam 2.70068 -1.89073 4.32553 23.71 0 0 90
+say 2 "Cat" "Tout ce qui est derrière vous maintenant, Lucky."
+say 2 "Cat" "Rendre à la caserne."
+send_global_message "levelwin"

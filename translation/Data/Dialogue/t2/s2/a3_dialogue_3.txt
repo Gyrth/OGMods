@@ -1,0 +1,47 @@
+#name "Complete"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 25.1852 6.83695 6.19465 -90
+send_character_message 2 "set_torso_target 25.1387 6.88175 6.51964 1"
+send_character_message 2 "set_head_target 23.7434 3.42809 11.043 1"
+set_character_pos 1 23.6272 2.59572 11.7403 80
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_torso_target 24.0816 3.63926 10.8809 1"
+send_character_message 1 "set_head_target 24.7741 7.0565 7.07549 1"
+set_cam 26.3183 3.12892 11.5597 0 90 0 22.5904
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Okay, [wait 0.3]Jairo. [wait 0.5]I've eliminated every enemy. [wait 0.5]The coast is clear."
+send_character_message 1 "set_head_target 25.0599 7.08658 7.06423 1"
+set_character_pos 2 25.1569 6.83658 6.36686 -62
+set_cam 23.5777 2.12276 13.6417 30 -6.74 0 22.5904
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Jairo" "Right. [wait 0.5]Good work."
+set_cam 30.1795 4.80499 4.63109 -7.4 147.48 0 47.7974
+send_character_message 1 "set_torso_target 23.7617 3.69913 11.3238 1"
+send_character_message 2 "set_head_target 22.7394 3.65891 10.9939 1"
+say 2 "Jairo" "If you go to the other side of the bunker, [wait 0.3]there should be a door."
+set_cam 20.6424 2.12264 34.4106 0 144.29 0 70
+send_character_message 1 "set_head_target 24.9682 7.3819 7.01281 1"
+send_character_message 1 "set_torso_target 23.8082 3.76914 11.3377 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Yeah, [wait 0.3]I saw it."
+send_character_message 2 "set_head_target 23.6286 3.37163 11.5466 1"
+send_character_message 2 "set_torso_target 25.1387 6.75216 6.51964 1"
+set_cam 27.6349 7.22009 8.06213 0 59.67 0 22.5904
+say 2 "Jairo" "...[wait 0.3]leave through that."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam 25.1576 3.09057 8.8978 0 154.83 0 22.5904
+say 1 "Ghost" "[wait 0.3]No lantern or anything?"
+send_character_message 2 "set_head_target 23.6625 3.62374 11.5732 1"
+send_character_message 2 "set_torso_target 25.1397 6.90991 6.60805 1"
+set_cam 25.7583 7.19778 9.09298 0 14.12 0 22.5904
+say 2 "Jairo" "No. [wait 0.5]Just follow the dirt path after the door. [wait 0.3]It should lead you to where you need to go."
+send_character_message 1 "set_head_target 23.0624 3.89475 21.5092 1"
+send_character_message 1 "set_torso_target 25.0105 2.61058 11.6353 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 26.981 4.18201 6.69654 -6.48 152.5 0.56 31.9287
+send_level_message "set_camera_dof 0.2 30 30 0 0 0"
+say 1 "Ghost" "..."

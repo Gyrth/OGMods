@@ -1,0 +1,18 @@
+#name "Note-Scribe"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 21.6836 -11.5197 -187.582 -30
+send_character_message 1 "set_head_target 22.4485 -11.2246 -187.157 1"
+set_cam 19.7725 -11.0949 -185.917 0 -60 0 37.0984
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 1 "Ghost" "Une ancienne note. [wait 0.5]Cela doit avoir été un discours, [wait 0.3]écrit par un scribe."
+set_cam 22.6525 -10.854 -186.701 0 40.09 0 37.0984
+set_character_pos 1 21.6836 -11.4775 -187.582 -30
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Bonnes gens, [wait 0.3]Nous n’avons pas d’autre choix que de fuir."
+say 2 "Note" "Le démon a tué beaucoup d'entre nous, [wait 0.3]détruit nos maisons, [wait 0.3]brûlé nos approvisionnements au sol !"
+say 2 "Note" "Fureur des dieux a avalé près de nous ; [wait 0.3]quel choix avons-nous que de fuir ?"
+say 2 "Note" "Suivez-nous, [wait 0.3]les conseillers le chemin or- [wait 0.3]vers les cavernes de Altrith."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "A partir de là, [wait 0.3]On ne peut rien faire, mais survivre à des attaques du démon et attendre dehors la fureur de Dieu."

@@ -1,0 +1,478 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>test12</Name>
+<Description/>
+<Shader>post</Shader>
+<OutOfDate NavMesh="true"/>
+<AmbientSounds/>
+<Script/>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills"/>
+    <parameter name="Dialogue Colors" type="string" val="Data/Levels/og_story/character_dialogue.txt"/>
+    <parameter name="Fog amount" type="string" val="1"/>
+    <parameter name="HDR Black point" type="string" val="0.005"/>
+    <parameter name="HDR Bloom multiplier" type="string" val="1"/>
+    <parameter name="HDR White point" type="string" val="0.971"/>
+    <parameter name="Level Boundaries" type="string" val="1"/>
+    <parameter name="Objectives" type="string" val="destroy_all"/>
+    <parameter name="Sky Brightness" type="string" val="1"/>
+    <parameter name="Sky Rotation" type="string" val="-62"/>
+    <parameter name="Sky Tint" type="string" val="104, 104, 104"/>
+</LevelScriptParameters>
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue4.tga</DomeTexture>
+    <SunAngularRad>0.297481</SunAngularRad>
+    <SunColorAngle>353.589</SunColorAngle>
+    <RayToSun r0="0.795602" r1="0.598235" r2="0.0955658"/>
+</Sky>
+<ActorObjects>
+    <ActorObject t0="-12.1991" t1="-4.39846" t2="12.0926" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="0" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="60.800000000000004"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="107"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <EnvObject t0="-8.07895" t1="-5.70196" t2="16.0073" s0="19.4192" s1="1" s2="20.3121" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="1" color_r="0.2" color_g="0.313726" color_b="0.172549" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <CameraObject t0="1.4163" t1="7.78671" t2="-5.51851" s0="1" s1="1" s2="1" q0="0.0824637" q1="-0.916178" q2="0.302146" r0="-0.86135" r1="0" r2="0.508012" r3="0" r4="-0.302206" r5="0.803815" r6="-0.5124" r7="0" r8="-0.408347" r9="-0.59488" r10="-0.692366" r11="0" r12="0" r13="0" r14="0" r15="1" id="2">
+        <parameters/>
+    </CameraObject>
+    <ActorObject t0="-8.93703" t1="-4.23582" t2="11.9718" s0="1" s1="1" s2="1" q0="0" q1="-0.165586" q2="0" r0="0.945163" r1="0" r2="0.3266" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.3266" r9="0" r10="0.945163" r11="0" r12="0" r13="0" r14="0" r15="1" id="6" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="55.400000000000006"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="106"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <ActorObject t0="-8.97784" t1="-4.44062" t2="16.035" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="10" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="53"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="114"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <ActorObject t0="-11.2068" t1="-4.41388" t2="16.5263" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="14" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="60.1"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="2"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="148"/>
+        </Connections>
+        <ItemConnections/>
+        <Palette/>
+    </ActorObject>
+    <ActorObject t0="-4.72292" t1="-4.06767" t2="-1.25757" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="18" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5"/>
+            <parameter name="Attack Damage" type="float" val="1"/>
+            <parameter name="Attack Knockback" type="float" val="1"/>
+            <parameter name="Attack Speed" type="float" val="1"/>
+            <parameter name="Block Follow-up" type="float" val="0.5"/>
+            <parameter name="Block Skill" type="float" val="0.5"/>
+            <parameter name="Character Scale" type="float" val="1"/>
+            <parameter name="Damage Resistance" type="float" val="1"/>
+            <parameter name="Ear Size" type="float" val="1"/>
+            <parameter name="Fat" type="float" val="0.5"/>
+            <parameter name="Focus FOV distance" type="float" val="10"/>
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834"/>
+            <parameter name="Focus FOV vertical" type="float" val="0.62834"/>
+            <parameter name="Ground Aggression" type="float" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="4"/>
+            <parameter name="Left handed" type="int" val="0"/>
+            <parameter name="Movement Speed" type="float" val="1"/>
+            <parameter name="Muscle" type="float" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="float" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376"/>
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376"/>
+            <parameter name="Static" type="int" val="0"/>
+            <parameter name="Teams" type="string" val="turner"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="23" type="1" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1"/>
+            <Color label="Rope" channel="1" red="1" green="1" blue="1"/>
+            <Color label="Fur" channel="2" red="1" green="1" blue="1"/>
+        </Palette>
+    </ActorObject>
+    <ItemObject t0="-5.40055" t1="-4.0129" t2="-1.97518" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="23" type_file="Data/Items/DogWeapons/DogKnife.xml" color_r="1" color_g="1" color_b="1">
+        <parameters/>
+    </ItemObject>
+    <ActorObject t0="-4.76524" t1="-4.33737" t2="12.0489" s0="1" s1="1" s2="1" q0="0" q1="-0.793376" q2="0" r0="-0.258891" r1="0" r2="0.965907" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.965907" r9="0" r10="-0.258891" r11="0" r12="0" r13="0" r14="0" r15="1" id="24" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5"/>
+            <parameter name="Attack Damage" type="string" val="1"/>
+            <parameter name="Attack Knockback" type="string" val="1"/>
+            <parameter name="Attack Speed" type="string" val="1"/>
+            <parameter name="Block Follow-up" type="string" val="0.5"/>
+            <parameter name="Block Skill" type="string" val="0.5"/>
+            <parameter name="Character Scale" type="string" val="1"/>
+            <parameter name="Damage Resistance" type="string" val="1"/>
+            <parameter name="Ear Size" type="string" val="1"/>
+            <parameter name="Fat" type="string" val="0.5"/>
+            <parameter name="Focus FOV distance" type="string" val="55.400000000000006"/>
+            <parameter name="Focus FOV horizontal" type="string" val="0.63"/>
+            <parameter name="Focus FOV vertical" type="string" val="0.63"/>
+            <parameter name="Ground Aggression" type="string" val="0.5"/>
+            <parameter name="Knockout Shield" type="int" val="4"/>
+            <parameter name="Left handed" type="string" val="0"/>
+            <parameter name="Movement Speed" type="string" val="1"/>
+            <parameter name="Muscle" type="string" val="0.5"/>
+            <parameter name="Peripheral FOV distance" type="string" val="4"/>
+            <parameter name="Peripheral FOV horizontal" type="string" val="1.4100000000000001"/>
+            <parameter name="Peripheral FOV vertical" type="string" val="1.4100000000000001"/>
+            <parameter name="Static" type="string" val="0"/>
+            <parameter name="Teams" type="string" val="guard"/>
+        </parameters>
+        <Connections>
+            <Connection id="-1"/>
+        </Connections>
+        <ItemConnections>
+            <ItemConnection id="29" type="1" mirrored="0" attachment=""/>
+        </ItemConnections>
+        <Palette/>
+    </ActorObject>
+    <Hotspot t0="-11.9603" t1="2.13858" t2="-2.91908" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="25" type_file="Data\Objects\Hotspots\overgrowth_level.xml">
+        <parameters>
+            <parameter name="goal_0" type="string" val="defeat 0 6 10 14"/>
+            <parameter name="goal_0_pre" type="string" val="dialogue Start"/>
+            <parameter name="goal_1" type="string" val="spawn_defeat 24"/>
+            <parameter name="goal_1_post" type="string" val="dialogue Win"/>
+            <parameter name="goal_1_pre" type="string" val="dialogue Boss"/>
+            <parameter name="music" type="string" val="lugaru_ambient_grass"/>
+            <parameter name="next_level" type="string" val=""/>
+            <parameter name="player_spawn" type="string" val="30"/>
+        </parameters>
+    </Hotspot>
+    <PlaceholderObject t0="-8.43389" t1="-4.11034" t2="9.14567" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="26" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/test12_dialogue_0.txt"/>
+            <parameter name="DisplayName" type="string" val="Boss"/>
+            <parameter name="NumParticipants" type="int" val="2"/>
+            <parameter name="obj_1" type="int" val="27"/>
+            <parameter name="obj_2" type="int" val="28"/>
+        </parameters>
+        <Connections>
+            <Connection id="26"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-8.25889" t1="-3.41034" t2="9.14567" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="27" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="18"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-8.60889" t1="-3.41034" t2="9.14567" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="28" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="24"/>
+        </Connections>
+    </PlaceholderObject>
+    <ItemObject t0="-5.81904" t1="-4.60196" t2="10.8373" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="29" type_file="Data/Items/DogWeapons/DogKnife.xml" color_r="1" color_g="1" color_b="1">
+        <parameters/>
+    </ItemObject>
+    <PlaceholderObject t0="-6.37994" t1="-4.21051" t2="5.90345" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="30" type_file="Data/Objects/IGF_Characters/pale_turner.xml" special_type="0">
+        <parameters>
+            <parameter name="Name" type="string" val="player_spawn"/>
+        </parameters>
+        <Connections>
+            <Connection id="30"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-11.3916" t1="-4.13932" t2="9.08331" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="33" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/test12_dialogue_1.txt"/>
+            <parameter name="DisplayName" type="string" val="Win"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="34"/>
+        </parameters>
+        <Connections>
+            <Connection id="33"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-11.3916" t1="-3.43932" t2="9.08331" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="34" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="18"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-2.53395" t1="-3.92743" t2="-0.326745" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="48" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Data/Dialogue/og_story/test12_dialogue_2.txt"/>
+            <parameter name="DisplayName" type="string" val="Start"/>
+            <parameter name="NumParticipants" type="int" val="1"/>
+            <parameter name="obj_1" type="int" val="49"/>
+        </parameters>
+        <Connections>
+            <Connection id="48"/>
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="-2.53395" t1="-3.22743" t2="-0.326745" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="49" type_file="" special_type="2">
+        <parameters/>
+        <Connections>
+            <Connection id="18"/>
+        </Connections>
+    </PlaceholderObject>
+    <PathPointObject t0="-8.97242" t1="-4.36094" t2="12.3904" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="106" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Sit"/>
+            <parameter name="Wait" type="string" val="1"/>
+        </parameters>
+        <Connections/>
+    </PathPointObject>
+    <PathPointObject t0="-11.8139" t1="-4.36095" t2="12.263" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="107" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Sleep"/>
+            <parameter name="Wait" type="string" val="1"/>
+        </parameters>
+        <Connections/>
+    </PathPointObject>
+    <NavmeshHintObject t0="-10.6169" t1="-3.6569" t2="14.3663" s0="1.45649" s1="3.17773" s2="1.45649" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="108">
+        <parameters/>
+    </NavmeshHintObject>
+    <EnvObject t0="-5.83085" t1="-4.22242" t2="-0.596863" s0="1.5763" s1="0.630053" s2="0.4837" q0="-0.00635159" q1="-0.173398" q2="0.00322807" r0="0.939845" r1="0.00856088" r2="0.341493" r3="0" r4="-0.00415547" r5="0.999898" r6="-0.0136299" r7="0" r8="-0.341575" r9="0.0113909" r10="0.939786" r11="0" r12="0" r13="0" r14="0" r15="1" id="112" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <PathPointObject t0="-5.29713" t1="-4.70196" t2="17.0713" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="114" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="137"/>
+            <Connection id="143"/>
+        </Connections>
+    </PathPointObject>
+    <EnvObject t0="0.902061" t1="-4.17834" t2="6.23875" s0="1.57631" s1="0.552982" s2="0.4837" q0="-0.00617236" q1="-0.225134" q2="0.00355881" r0="0.898604" r1="0.00971393" r2="0.438653" r3="0" r4="-0.00415549" r5="0.999898" r6="-0.0136299" r7="0" r8="-0.438741" r9="0.0104251" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="115" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-12.8605" t1="-4.26449" t2="6.24723" s0="1.57631" s1="0.523916" s2="0.4837" q0="-0.00699127" q1="0.101846" q2="0.00137293" r0="0.979251" r1="0.00130745" r2="-0.202647" r3="0" r4="-0.00415558" r5="0.999898" r6="-0.0136298" r7="0" r8="0.202608" r9="0.0141891" r10="0.979157" r11="0" r12="0" r13="0" r14="0" r15="1" id="116" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="0.168159" t1="-0.380349" t2="10.8316" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="117" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="7.74698" t1="-0.509941" t2="5.10656" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="118" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-15.7042" t1="-0.213152" t2="2.60118" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="119" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-24.5584" t1="-0.0340743" t2="14.6597" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="120" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.8181" t1="-0.147018" t2="7.45444" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="121" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-22.54" t1="-0.141049" t2="-0.92438" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="122" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="8.73908" t1="-0.498154" t2="9.93594" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="123" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="1.98541" t1="-0.348155" t2="21.7344" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="124" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="5.06279" t1="-0.358581" t2="27.5967" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="125" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-18.9091" t1="-0.0334201" t2="29.2625" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="126" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <EnvObject t0="-12.4913" t1="-0.139163" t2="25.19" s0="4.58329" s1="0.512971" s2="0.569526" q0="0.156402" q1="-0.162055" q2="-0.693066" r0="-0.0132046" r1="-0.9999" r2="0.00515316" r3="0" r4="0.898517" r5="-0.00960416" r6="0.438834" r7="0" r8="-0.438741" r9="0.0104249" r10="0.898553" r11="0" r12="0" r13="0" r14="0" r15="1" id="127" color_r="0.223529" color_g="0.207843" color_b="0.101961" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+    <Hotspot t0="-10.7331" t1="-4.49496" t2="14.3312" s0="0.124966" s1="0.124966" s2="0.124966" q0="0.0813877" q1="-0.0359028" q2="-0.995711" r0="-0.985459" r1="-0.05648" r2="-0.160251" r3="0" r4="0.0447918" r5="-0.996129" r6="0.0756365" r7="0" r8="-0.163903" r9="0.0673587" r10="0.984174" r11="0" r12="0" r13="0" r14="0" r15="1" id="128" type_file="Data\Objects\Hotspots\fire_test.xml">
+        <parameters/>
+    </Hotspot>
+    <ReflectionCaptureObject t0="-0.794583" t1="-0.634485" t2="17.0118" s0="0.48742" s1="0.48742" s2="0.48742" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="130" gicoeff00="0" gicoeff01="0" gicoeff02="0" gicoeff03="0" gicoeff04="0" gicoeff05="0" gicoeff06="0" gicoeff07="0" gicoeff08="0" gicoeff09="0" gicoeff10="0" gicoeff11="0" gicoeff12="0" gicoeff13="0" gicoeff14="0" gicoeff15="0" gicoeff16="0" gicoeff17="0">
+        <parameters>
+            <parameter name="Global" type="string" val="1"/>
+        </parameters>
+    </ReflectionCaptureObject>
+    <PathPointObject t0="4.23928" t1="-4.70196" t2="15.7736" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="137" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="114"/>
+            <Connection id="141"/>
+        </Connections>
+    </PathPointObject>
+    <NavmeshHintObject t0="-5.76758" t1="-4.32634" t2="-0.678382" s0="3.20156" s1="2.52112" s2="0.363672" q0="0" q1="-0.198336" q2="0" r0="0.921326" r1="0" r2="0.388792" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.388792" r9="0" r10="0.921326" r11="0" r12="0" r13="0" r14="0" r15="1" id="138">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="0.82581" t1="-4.32634" t2="6.19868" s0="3.20157" s1="2.52112" s2="0.248142" q0="0" q1="-0.21585" q2="0" r0="0.906818" r1="0" r2="0.421523" r3="0" r4="0" r5="1" r6="0" r7="0" r8="-0.421523" r9="0" r10="0.906818" r11="0" r12="0" r13="0" r14="0" r15="1" id="139">
+        <parameters/>
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="-12.9284" t1="-4.35697" t2="6.17371" s0="3.20157" s1="2.52112" s2="0.248142" q0="0" q1="0.090559" q2="0" r0="0.983598" r1="0" r2="-0.180374" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0.180374" r9="0" r10="0.983598" r11="0" r12="0" r13="0" r14="0" r15="1" id="140">
+        <parameters/>
+    </NavmeshHintObject>
+    <PathPointObject t0="6.82239" t1="-4.70196" t2="23.1684" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="141" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="137"/>
+            <Connection id="143"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-2.99866" t1="-4.70196" t2="32.6136" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="143" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="141"/>
+            <Connection id="114"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-15.7829" t1="-4.70196" t2="19.0584" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="148" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="155"/>
+            <Connection id="166"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-23.827" t1="-4.70196" t2="28.0206" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="155" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="148"/>
+            <Connection id="162"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-20.4571" t1="-4.70196" t2="34.285" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="162" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="155"/>
+            <Connection id="166"/>
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="-13.5562" t1="-4.70196" t2="31.8028" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" r0="1" r1="0" r2="0" r3="0" r4="0" r5="1" r6="0" r7="0" r8="0" r9="0" r10="1" r11="0" r12="0" r13="0" r14="0" r15="1" id="166" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand"/>
+            <parameter name="Wait" type="float" val="0"/>
+        </parameters>
+        <Connections>
+            <Connection id="162"/>
+            <Connection id="148"/>
+        </Connections>
+    </PathPointObject>
+    <EnvObject t0="-2.02594" t1="-4.72903" t2="14.0958" s0="2.15454" s1="0.755829" s2="0.661133" q0="0.350531" q1="-0.208021" q2="0.0820135" r0="0.900002" r1="0.00334144" r2="0.435873" r3="0" r4="-0.295013" r5="0.740804" r6="0.603471" r7="0" r8="-0.32088" r9="-0.671713" r10="0.667711" r11="0" r12="0" r13="0" r14="0" r15="1" id="266" color_r="0.423529" color_g="0.215686" color_b="0.541176" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters/>
+    </EnvObject>
+</ActorObjects>

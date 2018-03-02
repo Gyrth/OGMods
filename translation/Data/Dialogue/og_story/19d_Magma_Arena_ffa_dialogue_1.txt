@@ -1,0 +1,12 @@
+#name "Start"
+#participants 6
+set_character_pos 6 19.0375 5.22463 9.00296 90
+set_character_pos 5 18.9212 5.00187 -2.33967 -91
+set_character_pos 4 12.4437 -8.87455 -2.15755 -43
+set_character_pos 3 25.1214 -8.923 -2.48265 -138
+set_character_pos 2 24.0527 -8.91219 9.97754 134
+set_character_pos 1 12.505 -8.8102 9.2693 35
+set_cam 12.7957 -8.00986 10.1576 0 -7.9 0 90
+say 1 "Turner" "We don't have to fight each other."
+say 1 "Turner" "If we joined forces we could overwhelm the guards--"
+make_participants_aware

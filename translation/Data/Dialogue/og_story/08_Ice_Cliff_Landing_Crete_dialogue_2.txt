@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+set_character_pos 2 168.127 89.4273 -7.00947 -174
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 165.336 90.1489 -5.70006 0 -49.24 0 90
+say 2 "Rabbit" "I've never seen anyone fight a wolf alone before!"
+say 1 "Turner" "They're just overgrown dogs, really."
+say 2 "Rabbit" "You kill dogs, too?
+say 1 "Turner" "I'll kill anyone who tries to hurt or enslave us.
+say 2 "Rabbit" "I'm Sun.
+say 2 "Sun" "My friends are fighting against the slavers, too."
+say 2 "Sun" "We were on our way to raid a nearby fort when a pack of dogs captured some of us."
+say 2 "Sun" "If you want to join our cause..."
+say 1 "Turner" "They keep slaves at this fort?"
+say 1 "Turner" "Just show me the way."
+send_global_message "levelwin"

@@ -1,0 +1,18 @@
+#name "Note-Post"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -77.9202 -2.58762 -52.8139 152
+send_character_message 1 "set_head_target -78.5406 -2.29084 -53.2077 1"
+send_character_message 1 "set_eye_dir -78.5406 -2.29084 -53.2077 1"
+set_cam -76.5136 -1.99173 -53.4539 0 98.64 0 55.8922
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Une note écrite par l’un des commandants, [wait 0.3]pour les gardes."
+send_character_message 1 "set_eye_dir -78.3151 -2.29084 -53.0645 1"
+set_cam -78.4043 -1.88984 -53.7585 0 -171.41 0 55.8922
+set_character_pos 1 -77.9202 -2.52716 -52.8139 152
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Note" "Garder cette porte gardée. Personne n’est autorisé à venir ici à moins d’avoir l’autorisation expresse d’un commandant ou capitaine."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Toute « Beetle » cavernes trouvé s’échappant de cette porte, [wait 0.3]vous avez l’autorisation de tuer et/ou détenir."

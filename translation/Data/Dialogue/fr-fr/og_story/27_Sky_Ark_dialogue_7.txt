@@ -1,0 +1,21 @@
+#name "Guard"
+#participants 2
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target -97.6655 136.755 114.752 0.199565"
+set_character_pos 2 -96.6213 136.299 114.804 -172
+set_character_pos 1 -98.6163 136.299 114.587 2
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+set_cam -99.8521 137.103 113.673 -5.07 -117.55 2.15 56.6852
+say 2 "Eagle" "Je me dis vous les gens, que vous n’êtes pas bienvenue ici."
+send_character_message 2 "set_head_target -97.6655 136.755 114.752 0.199565"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "Nous n’avons pas le choix. Ils vont nous tuer autrement."
+send_character_message 2 "set_head_target -97.6655 136.755 114.752 0.199565"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Eagle" "Pas. Nos. Problème."
+send_character_message 2 "set_head_target -97.6655 136.755 114.752 0.199565"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Nous disposons des compétences qui peuvent vous aider."
+send_character_message 2 "set_head_target -96.5844 138.236 116.372 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Eagle" "Regardez, si vous le voulez vraiment, vous pouvez monter sur place et obtenir tourné vers le bas par le chef en personne."

@@ -1,0 +1,8 @@
+#name "Leave"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 1.5598 -37.504 211.432 -160
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+set_cam 9.02222 -36.8742 207.669 0 110.44 0 42.3012
+say 1 "You" "Je devrais la tête en arrière. [wait 0.5]Je ne sais pas mon chemin ici..."

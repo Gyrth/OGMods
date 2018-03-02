@@ -1,0 +1,6 @@
+#name "Places1"
+#participants 2
+set_character_pos 2 34.3314 13.5403 -9.47306 -99
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+set_character_pos 1 33.6475 13.4211 -8.39386 62
+send_character_message 1 "set_animation \"Data/Animations/r_sit_injuredneck.anm\""

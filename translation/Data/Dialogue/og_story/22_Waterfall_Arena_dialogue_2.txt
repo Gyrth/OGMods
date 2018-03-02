@@ -1,0 +1,54 @@
+#name "Round2"
+#participants 3
+send_level_message "set_camera_dof 0 0 0 0.2 2 0.5"
+set_character_pos 1 34.2974 98.0871 290.295 -136
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 3 32.0081 95.0956 310.357 -160
+set_character_pos 2 24.1006 94.4579 312.536 0
+set_cam 34.2644 99.376 289.044 -20.65 156.68 -0.95 74.6325
+send_level_message "music_layer_override 0"
+set_dialogue_color 3 0.5 0.5 0.5
+send_level_message "crowd_override 0.4 1.1"
+say 1 "Jade" "Oh well. That's what happens when uppity hoppers forget their place. Lucky fights more like predator than prey. Maybe he's part dog?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+set_character_pos 2 24.1006 94.4579 312.536 76
+set_cam 22.6422 94.6049 313.224 9.1 -44.93 5.19 74.6325
+send_level_message "crowd_override"
+say 2 "Turner" "Is that all? Hurry up. Let's get this over with."
+send_character_message 1 "set_head_target 33.3672 99.0574 291.197 1"
+send_character_message 1 "set_torso_target 33.1471 98.6696 290.463 1"
+send_character_message 3 "set_head_target 32.1231 99.5529 291.017 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_animation \"Data/Animations/c_actionidle.anm\""
+set_character_pos 1 35.1678 98.0875 290.171 -129
+set_character_pos 3 34.7965 98.0709 291.067 154
+set_cam 34.6532 99.29 289.061 -19.21 176.54 -2.51 74.6325
+send_level_message "crowd_override 0.4 0"
+say 1 "Jade" "Are you so eager to die, Lucky? Give a warm welcome to General Raff Stormwind of New Rakan.[send_level_message \"crowd_override 1 0\"] 
+say 1 "Jade" "If he wins tonight, his clan wins the honor of protecting Amethyst's estate for a whole year!"
+send_character_message 1 "set_torso_target 33.1545 98.6696 290.48 1"
+send_character_message 1 "set_head_target 33.3816 99.0574 291.195 1"
+send_character_message 3 "set_torso_target 34.0998 98.8484 290.393 0.889373"
+send_character_message 3 "set_head_target 34.8058 99.211 290.021 1"
+send_level_message "crowd_override"
+say 3 "Raff" "You're putting me up against an unarmed rabbit? Are you serious? This is insulting."
+send_character_message 1 "set_torso_target 33.8974 98.6696 292.131 1"
+send_character_message 1 "set_head_target 34.7965 99.3385 290.887 1"
+say 1 "Jade" "Those are the rules! You have to defeat the reigning champion."
+send_character_message 3 "set_torso_target 32.953 98.8484 290.295 0.889373"
+send_character_message 3 "set_head_target 33.0213 99.211 291.278 1"
+send_level_message "crowd_override 0.4 0"
+say 3 "Raff" "Fine. Here, take my sword. I won't need it.[send_level_message \"crowd_override 1 0\"]"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+set_character_pos 2 24.2097 94.4579 312.165 42
+send_character_message 3 "set_head_target 26.7378 95.9661 309.88 1"
+send_character_message 1 "set_head_target 31.9525 98.6574 294.01 1"
+send_character_message 3 "set_torso_target 24.9623 94.9111 310.439 0.260595"
+send_character_message 1 "set_torso_target 31.1311 98.4019 291.485 1"
+set_cam 21.3805 94.9621 312.413 1.25 -78.96 -0.21 28.4168
+set_character_pos 3 28.1691 94.5283 310.412 -165
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+send_level_message "crowd_override"
+say 2 "Turner" "Too bad. I was hoping for a challenge."
+send_level_message "music_layer_override 3"
+make_participants_aware

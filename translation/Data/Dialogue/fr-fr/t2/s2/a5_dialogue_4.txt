@@ -1,0 +1,52 @@
+set_character_pos 2 -55.9247 -7.06376 165.788 150
+send_character_message 2 "set_animation \"Data/Animations/r_bigdogswordarmstance.anm\""
+send_character_message 2 "set_head_target -57.1969 -6.28894 164.555 1"
+set_character_pos 1 -63.9811 -7.01589 168.296 94
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+send_character_message 1 "set_head_target -62.7852 -6.7018 167.174 1"
+send_level_message "therium2_enable_object 1572"
+send_level_message "therium2_enable_object 1573"
+set_cam -64.2534 -6.77182 165.754 0 -168.87 0 16.8612
+#name "Meet"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Ghost" "..."
+set_cam -66.191 -6.7271 168.394 0 -78.87 0 16.8612
+send_level_message "set_camera_dof 0.3 6 1 0 0 0"
+say 1 "Ghost" "..."
+send_character_message 2 "set_head_target -56.727 -6.19659 164.044 1"
+set_cam -60.048 -6.41406 164.504 0 -108.87 0 16.8612
+send_level_message "set_camera_dof 0 0 0 0.3 6 1"
+say 2 "???" "..."
+send_character_message 1 "set_head_target -65.3406 -6.59957 168.128 1"
+set_character_pos 1 -64.1263 -7.01589 168.556 154
+send_character_message 2 "set_eye_dir -61.3764 -6.57087 166.35 1"
+send_character_message 2 "set_head_target -61.0315 -6.19659 165.715 1"
+say 2 "???" "..."
+send_character_message 1 "set_head_target -63.4873 -6.62854 167.52 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+set_cam -67.465 -6.85059 168.704 0 -78.87 0 16.8612
+say 1 "Ghost" "(Qui l’enfer est-ce... ?)"
+send_character_message 1 "set_head_target -65.0816 -6.92515 167.924 1"
+say 1 "Ghost" "[wait 0.5](Ce que l’enfer est-ce ?)"
+send_character_message 2 "set_torso_target -55.44 -6.65013 164.77 1"
+send_character_message 2 "set_head_target -55.1934 -6.28493 164.003 1"
+set_character_pos 2 -55.9247 -7.06376 165.788 90
+set_cam -52.2272 -6.55243 164.118 0 106.99 0 23.1027
+say 2 "???" "..."
+send_character_message 2 "set_head_target -55.0524 -6.28493 164.046 1"
+send_character_message 2 "set_torso_target -55.4401 -6.65013 164.77 1"
+set_cam -64.5265 -6.72835 170.77 0 -7.56 0 23.1027
+send_character_message 1 "set_head_target -64.2422 -6.92515 163.247 1"
+set_character_pos 1 -63.8288 -7.00481 168.052 124
+say 1 "Ghost" "..."
+send_character_message 2 "set_head_target -54.341 -6.28493 164.372 1"
+send_character_message 2 "set_torso_target -55.7568 -6.65013 164.702 1"
+set_cam -58.808 -6.47873 166.645 0 -67.56 0 23.1027
+say 1 "Ghost" "..."
+send_character_message 2 "set_head_target -57.0863 -6.28493 158.963 1"
+set_character_pos 1 -64.8659 -7.00481 170.7 124
+say 1 "Ghost" "Je ne veux pas aller n’importe où près de cette chose..."
+send_level_message "therium2_disable_object 1573"
+send_level_message "therium2_disable_object 1572"

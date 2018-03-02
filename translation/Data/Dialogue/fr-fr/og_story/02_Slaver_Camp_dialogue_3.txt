@@ -1,0 +1,22 @@
+#name "Places"
+#participants 6
+send_character_message 3 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_1.anm\""
+send_character_message 5 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 5 "set_head_target -63.4794 -22.1337 -8.04891 0"
+send_character_message 3 "set_torso_target -70.0277 -24.9836 8.07041 0"
+send_character_message 3 "set_head_target -70.0041 -24.8876 7.79702 0"
+send_character_message 1 "set_animation \"Data\Animations\r_crouchtreethreat.anm\""
+send_character_message 5 "set_torso_target -67.2326 -24.0347 -2.43203 0"
+send_character_message 4 "set_torso_target -64.4974 -23.2076 -6.21841 1"
+send_character_message 4 "set_head_target -65.0417 -23.2156 -6.07981 1"
+send_character_message 6 "set_torso_target -66.3648 -23.0785 -3.25648 0"
+send_character_message 6 "set_head_target -66.1611 -23.6872 -4.52646 1"
+send_character_message 4 "set_animation \"Data\Animations\r_dialogue_thoughtful.anm\""
+send_character_message 6 "set_animation \"Data\Animations\r_dialogue_kneelfist.anm\""
+set_character_pos 6 -66.782 -23.3558 -4.60934 -14
+set_character_pos 5 -67.2208 -23.6054 -2.91267 -120
+set_character_pos 4 -64.5381 -22.9434 -5.45095 133
+set_character_pos 3 -70.4779 -24.3166 0.950692 57
+set_character_pos 2 -69.783 -24.3051 2.09414 67
+set_character_pos 1 -57.4002 -20.6583 -13.8593 -135

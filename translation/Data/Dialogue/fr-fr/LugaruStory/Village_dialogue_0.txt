@@ -1,0 +1,22 @@
+#name "Skipper"
+#participants 2
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_character_pos 2 100.003 -47.3816 305.189 36
+send_character_message 2 "set_eye_dir 101.694 -46.4613 304.136 1"
+set_character_pos 1 101.142 -46.9821 304.555 -151
+send_character_message 1 "set_eye_dir 100.236 -46.3787 304.424 1"
+set_cam 102.589 -46.6135 304.726 -0.12 93.58 -0.34 31.1566
+say 2 "Skipper" "Clair du tout... [wait 0.2]encore. [wait 0.2]Vous assurer que nous avons encore besoin de surveiller en plein jour comme ça ?"
+set_character_pos 1 101.142 -46.9821 304.555 -151
+set_cam 99.4122 -46.4995 306.505 -3.24 -34.27 -0.38 35.3299
+say 1 "Turner" "Vous avez oublié ce qui est arrivé au village à éclats rouge ? [wait 0.2]Qui ne peut pas arriver ici."
+set_character_pos 1 101.142 -46.9821 304.555 -151
+set_cam 102.589 -46.6135 304.726 -0.12 93.58 -0.34 31.1566
+say 2 "Skipper" "C’était il y a de saisons. [wait 0.2]Sûrement qu’ils ont entendu ce que vous et le saule fait à la guerre ? [wait 0.2]Ils n’osent pas."
+set_cam 99.4122 -46.4995 306.505 -3.24 -34.27 -0.38 35.3299
+set_character_pos 1 101.142 -46.9821 304.555 -151
+say 1 "Turner" "C’est pourquoi ils seraient faufiler sur nous. [wait 0.2]Ils savent les pertes qu’ils prendraient dans un combat loyal."
+set_cam 102.589 -46.6135 304.726 -0.12 93.58 -0.34 31.1566
+set_character_pos 1 101.142 -47.4361 304.555 -151
+say 2 "Skipper" "Au moins Willow de prendre son quart de travail bientôt, [wait 0.2]mes jambes me tuent."

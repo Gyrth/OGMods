@@ -1,0 +1,38 @@
+#name "Win"
+#participants 2
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+set_character_pos 2 -36.0178 84.4164 48.4166 79
+set_character_pos 1 -34.9697 84.6056 46.984 -29
+send_character_message 1 "set_torso_target -33.862 84.0833 46.9268 0"
+send_character_message 1 "set_head_target -34.0825 84.154 47.5359 1"
+set_cam -36.5821 84.5653 47.889 -2.18 -58.05 -1.12 70
+set_character_pos 2 -35.5205 84.4164 46.3495 19
+send_level_message "set_camera_dof 0 0 0 0.3 3.5 1"
+send_level_message "music_layer_override 0"
+say 1 "Turner" "Hey, can you hear me?"
+set_dialogue_color 3 0.7 0.7 0.7
+say 3 "Rabbits" "..."
+send_character_message 2 "set_torso_target -34.3479 84.7303 46.8129 1"
+send_character_message 2 "set_head_target -34.7096 84.7328 47.2057 1"
+say 2 "Crawl" "They've been heavily dosed with sleeping poison. They must have fought back hard."
+send_character_message 1 "set_head_target -34.1844 84.6606 46.7981 1"
+send_character_message 2 "set_head_target -34.6817 84.7949 47.1923 1"
+say 1 "Turner" "Will they live?"
+send_character_message 2 "set_torso_target -34.3479 84.7303 46.3459 1"
+send_character_message 2 "set_head_target -34.4223 84.5899 46.2286 1"
+say 2 "Crawl" "They might, but not if we leave them like this. We'll have to take care of them for at least a day or so."
+send_character_message 1 "set_head_target -34.424 84.5754 48.0549 1"
+say 1 "Turner" "We don't have time for this. How many more rabbits will be captured while we try to save these? We have to look at the big picture."
+send_character_message 2 "set_head_target -34.5545 85.0995 46.9149 1"
+send_character_message 2 "set_torso_target -34.7149 85.4157 46.3459 1"
+say 2 "Crawl" "I'm in no shape for fighting anyway. You go ahead, and I'll catch up when they're better."
+send_character_message 1 "set_head_target -34.1672 84.985 47.1143 1"
+say 1 "Turner" "Just point me in the right direction."
+send_character_message 2 "set_torso_target -34.6236 85.4157 46.9525 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Crawl" "It's pretty simple from here: head east to the rabbit statue, and then northeast to the big tree."
+send_character_message 2 "set_head_target -34.4186 85.4601 46.2062 1"
+send_character_message 2 "set_torso_target -34.6236 85.4157 46.9525 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Crawl" "We can meet up again at my place in the swamp, a bit further in the same direction. Look for a tree split by lightning, and I'll be nearby."
+send_global_message "levelwin"

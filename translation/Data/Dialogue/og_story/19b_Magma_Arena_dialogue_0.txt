@@ -1,0 +1,40 @@
+send_character_message 1 "set_torso_target -46.3167 6.79036 -8.59819 0.0560055"
+send_character_message 1 "set_head_target -45.0473 6.74779 -8.457 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+#name "Round1Start"
+#participants 5
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_2handneck.anm\""
+set_cam -49.1557 8.56539 -12.9077 -25.91 -136.47 0 43.5115
+set_character_pos 1 -46.6751 6.10958 -8.92232 -34
+set_character_pos 5 -32.0554 1.14541 8.95825 92
+set_character_pos 4 -29.0999 1.22947 8.89139 113
+set_character_pos 3 -34.7227 1.23732 -2.43434 -139
+set_character_pos 2 -31.5632 1.30814 -2.27396 -46
+send_level_message "music_layer_override 0"
+send_level_message "crowd_override 0.1 0"
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+say 1 "Jade" "And now to reward these two loyal soldiers for that fine display, they get to dispose of Midnight[send_level_message \"crowd_override 1 1\"], the traitor..."
+send_character_message 1 "set_head_target -44.1685 7.25652 -5.54337 1"
+send_character_message 1 "set_torso_target -46.1388 7.62866 -8.00731 1"
+say 1 "Jade" "[send_level_message \"crowd_override 0.2 0\"]and Lucky, a disgraced rabbit 'king' from a faraway land.[send_level_message \"crowd_override 0.2 0.5\"]"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+set_character_pos 2 -31.5632 1.30814 -2.27396 -117
+set_character_pos 3 -32.4868 1.23732 -2.65408 -74
+set_cam -31.4866 1.70178 0.825527 4.87 8.62 0.61 51.9569
+set_dialogue_color 2 1.0 1.0 0.6
+set_dialogue_voice 2 13
+say 2 "Hardfang" "Are you ready for blood?[send_level_message \"crowd_override 1 0\"]"
+send_character_message 4 "set_torso_target -31.967 0.774611 7.26539 1"
+send_character_message 4 "set_head_target -31.5906 1.93531 8.23961 1"
+set_character_pos 5 -31.9516 1.14541 8.7284 76
+set_character_pos 4 -30.9144 1.22947 8.55387 136
+send_level_message "crowd_override"
+set_cam -31.2496 1.94939 11.213 -1.87 7.58 -1.29 43.5115
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 4 "Turner" "Ever killed a dog before?"
+send_character_message 5 "set_head_target -31.3918 1.86107 8.20952 1"
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 5 "Midnight" "Is it anything like killing rats?"
+send_level_message "music_layer_override 1"
+make_participants_aware

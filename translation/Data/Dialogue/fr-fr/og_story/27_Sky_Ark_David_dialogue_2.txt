@@ -1,0 +1,32 @@
+#name "End"
+#participants 6
+set_character_pos 3 -86.9198 191.472 180.728 122
+set_character_pos 2 -87.5575 191.391 181.049 89
+set_character_pos 1 -87.9304 191.512 180.079 -55
+set_cam -87.5747 192.009 179.673 0 -169.31 0 90
+say 3 "Elder Needlegrass" "Je suis convaincu !"
+say 3 "Elder Needlegrass" "Tu es vraiment un guerrier sans comparaison, bénie par Khyo."
+say 3 "Elder Needlegrass" "Apportez vos gens d’ici."
+say 3 "Elder Needlegrass" "Nous allons les régler sur les niveaux inférieurs, pour commencer, mais dans le temps, ils peuvent grimper."
+say 2 "Sky" "Je vais aller avec vous, Turner."
+say 2 "Sky" "Je tiens à vous dire sur notre ville, notre histoire et nos moyens."
+set_cam -59.193 198.758 223.423 0 20.1 0 90
+say 4 "" "Turner et ciel grimpent vers le bas, allez dans le camp rebelle et entraîner les rebelles et les esclaves de l’arène de retour au sanctuaire."
+set_character_pos 5 -87.1038 191.973 174.946 -145
+set_character_pos 6 -88.927 191.973 177.545 126
+set_character_pos 3 -89.6308 191.472 175.825 -4
+set_character_pos 2 -89.1582 191.391 177.102 89
+set_character_pos 1 -87.8223 191.512 176.451 168
+set_cam -87.7273 191.84 177.649 0 43.03 0 90
+say 2 "Sky" "Que s'est-il passé ?"
+say 2 "Sky" "Nous sommes censés pour être en sécurité ici !"
+say 3 "Elder Needlegrass" "Nous avons été attaqués..."
+say 3 "Elder Needlegrass" "notre peuple volé..."
+say 3 "Elder Needlegrass" "ils descendirent du ciel..."
+say 2 "Sky" "N °"
+say 2 "Sky" "Oh, pas."
+say 2 "Sky" "Il a dû les chauves-souris."
+set_cam -88.2982 192.175 176.706 0 -52.51 0 90
+say 1 "Turner" "Quels sont... les chauves-souris ?"
+set_cam -173.568 158.148 309.729 0 -52.51 0 90
+say 4 "" "La fin"

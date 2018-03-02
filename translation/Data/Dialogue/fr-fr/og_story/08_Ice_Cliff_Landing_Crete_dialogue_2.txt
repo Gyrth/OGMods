@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+set_character_pos 2 168.127 89.4273 -7.00947 -174
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 165.336 90.1489 -5.70006 0 -49.24 0 90
+say 2 "Rabbit" "Je n’ai jamais vu quelqu'un se battre un loup seul avant !"
+say 1 "Turner" "Ils sont juste envahis chiens, vraiment."
+say 2 "Rabbit" "Vous tuez les chiens, trop ?
+say 1 "Turner" "Je vais tuer quiconque tente de blesser ou de nous asservir.
+say 2 "Rabbit" "Je suis le soleil.
+say 2 "Sun" "Mes amis sont battent contre les esclavagistes, trop."
+say 2 "Sun" "Nous étions en route pour razzier un fort voisin quand une meute de chiens capturé certains d'entre nous."
+say 2 "Sun" "Si vous souhaitez rejoindre notre cause..."
+say 1 "Turner" "Elles tiennent des esclaves à ce fort ?"
+say 1 "Turner" "Juste me montrer le chemin."
+send_global_message "levelwin"

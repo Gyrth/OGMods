@@ -1,0 +1,21 @@
+#name "Note-Arliss"
+#participants 2
+set_character_pos 1 171.07 -48.8527 157.516 90
+send_character_message 1 "set_head_target 171.186 -48.4564 156.943 1"
+set_cam 172.131 -48.3915 157.726 0 61.86 0 56.5533
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "Ghost" "A book about the Arlissian Collective..."
+send_character_message 1 "set_head_target 171.01 -48.4564 156.883 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 171.563 -48.2698 156.333 0 152.82 0 56.5533
+say 2 "Note" "The cats in the southern mesas of Preuwyn are sometimes mistaken to be anything other than our enemies; [wait 0.3]but do not be fooled.
+say 2 "Note" "Any cat affiliated with the Arliss is bound to cheat, [wait 0.3]exploit and betray as long as it is within their interests."
+say 2 "Note" "Members of the Arlissian Collective are even known to lure unwary kits into the wilds, [wait 0.3]beat them and capture them for later service within the Arliss country."
+say 2 "Note" "From there, [wait 0.3]they subdue, beat and torture our children in their twisted version of 'raising', [wait 0.3]breeding former Cinderbreathe rabbits to become servants to the cats."
+say 2 "Note" "Rational thought has been burnt out of these poor rabbits, [wait 0.3]turning their only grasp on reality to providing nourishment for their new overlords."
+say 2 "Note" "But regardless, [wait 0.3]we rabbits know there's always an end to such torture; [wait 0.3]from the very beginning of abuse, [wait 0.3]we know to stick up for ourselves, [wait 0.3]no matter the cost. [wait 0.5]For every kit stolen from us, [wait 0.3]a new one raises a fist against their evil dictators."
+say 2 "Note" "Mark my words, [wait 0.3]the 'Kaicalk' (as they are called in their language) will be the first step in destroying the Arlissian Collective and reclaiming the glorious Cinderbreathe Empire's dominance on Preuwyn."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "...inspiring."

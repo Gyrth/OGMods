@@ -1,0 +1,10 @@
+#name "Win"
+#participants 1
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+send_character_message 1 "set_eye_dir 35.2626 60.5795 -115.322 1"
+send_character_message 1 "set_torso_target 35.7824 60.7763 -114.509 0"
+send_character_message 1 "set_head_target 36.0525 61.04 -114.275 1"
+set_character_pos 1 33.9822 62.5798 -114.658 -10
+set_cam 36.4813 65.3963 -111.649 -45.43 30.56 1.5 90
+say 1 "Turner" "Ugh, this stuff smells terrible. Better in a sack on my back than in a dart in my neck, I guess."
+send_global_message "levelwin"

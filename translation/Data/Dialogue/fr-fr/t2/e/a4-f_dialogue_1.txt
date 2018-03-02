@@ -1,0 +1,26 @@
+#name "Intro"
+#participants 1
+set_character_pos 1 -202.449 -83.0492 -27.5634 138
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target -203.345 -82.6951 -29.4432 1"
+set_cam -202.667 -82.9462 -26.2265 0 6.32 0 41.2678
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "therium2_disable_object 383"
+say 1 "You" "..."
+set_cam -202.129 -82.5503 -29.3911 0 166.86 0 35.5234
+send_character_message 1 "set_torso_target -202.986 -82.8157 -28.6919 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target -202.762 -82.4891 -30.2824 1"
+say 1 "You" "-Très bien, [wait 0.3]aucun des gardes m’a vu."
+send_character_message 1 "set_torso_target -203.087 -82.9482 -28.6494 1"
+send_character_message 1 "set_head_target -204.399 -82.31 -30.4649 1"
+say 1 "You" "Au moins [wait 0.3]aucun qui sont vivants..."
+set_cam -202.829 -82.6444 -25.8198 0 3.44 0 51.2862
+say 1 "You" "Temps de planter ces accusations."
+set_cam -208.182 -82.7423 -30.4268 0 6.52 0 66.28
+say 1 "You" "...[wait 0.3]Il s’agit de la première place."
+send_character_message 1 "set_torso_target -203.026 -82.9776 -28.4697 1"
+send_character_message 1 "set_head_target -206.373 -82.31 -34.8984 1"
+set_cam -201.609 -82.4797 -27.1324 0 48.34 0 57.6147
+say 1 "You" "Je dois juste la déposez lentement et avec soin..."

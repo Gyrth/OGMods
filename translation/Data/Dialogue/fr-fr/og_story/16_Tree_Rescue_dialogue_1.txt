@@ -1,0 +1,15 @@
+#name "Win"
+#participants 2
+set_character_pos 2 -43.9495 21.4732 -9.53729 -68
+set_character_pos 1 -43.5078 21.2974 -6.76732 84
+set_cam -41.942 21.8467 -5.20717 0 34.88 0 53.6292
+say 2 "Rat" "Ne pas me blesser !"
+say 1 "Turner" "Avez-vous vu une fille de lapin ?"
+say 2 "Rat" "Vous la connaissez ?
+say 2 "Rat" "Elle a dit qu’elle devait grimper plus haut--que si elle fait tout le chemin vers les nuages, elle serait en mesure de rentrer à la maison."
+say 1 "Turner" "Ce qui lui est arrivé ?"
+say 2 "Rat" "Nous lui traîné à notre camp principal."
+say 2 "Rat" "Les chats ne se soucient pas si leurs esclaves sont fous."
+say 1 "Turner" "Dites-moi où elle est, et peut-être que je ne te jette hors de cet arbre."
+say 2 "Rat" "Quand vous le mettez comme ça..."
+send_global_message "levelwin"

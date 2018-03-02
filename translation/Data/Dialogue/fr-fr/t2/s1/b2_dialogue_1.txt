@@ -1,0 +1,18 @@
+#name "NLG-A"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -129.972 29.9862 152.472 -180
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -131.479 30.7281 152.489 1"
+send_character_message 1 "set_head_target -131.442 31.3102 152.439 1"
+set_cam -125.728 30.9165 155.1 0 62.56 0 62.488
+send_level_message "set_camera_dof 0 0 0 0.3 10 2"
+say 1 "Ghost" "..."
+set_character_pos 1 -129.972 29.8999 152.472 -180
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+send_character_message 1 "set_head_target -131.442 31.3102 152.439 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Si c’est ce que veut Jairo..."
+send_global_message "levelwin a"

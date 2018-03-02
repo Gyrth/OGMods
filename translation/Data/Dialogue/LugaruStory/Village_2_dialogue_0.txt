@@ -1,0 +1,37 @@
+#name "Rose"
+#participants 2
+send_character_message 2 "set_eye_dir 121.083 -54.1077 281.157 1"
+send_character_message 2 "set_torso_target 121.266 -54.4942 281.215 0.177058"
+send_character_message 2 "set_head_target 121.297 -54.5574 281.299 0.00105461"
+set_character_pos 2 121.052 -54.5273 282.409 79
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_character_pos 1 121.048 -55.1242 281.072 -91
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_eye_dir 121.094 -54.0906 282.331 1"
+send_character_message 1 "set_head_target 120.074 -54.5394 281.005 0.178417"
+set_cam 120.17 -54.2433 279.225 1.49 -160.12 2.69 26.1429
+say 2 "Rose" "Turner! [wait 0.2]Are you alright? [wait 0.2]What happened?"
+send_character_message 2 "set_head_target 121.297 -54.5574 281.299 0.00105461"
+send_character_message 2 "set_torso_target 121.266 -54.4942 281.215 0.177058"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_head_target 121.059 -54.2269 281.869 1"
+send_character_message 1 "set_eye_dir 121.024 -53.6853 282.387 1"
+set_cam 120.015 -54.0945 283.877 -2.97 -25.98 -0.8 26.1429
+say 1 "Turner" "I'm fine. [wait 0.2]He'll live... [wait 0.2]probably."
+send_character_message 2 "set_torso_target 120.247 -54.4942 281.721 0.631909"
+send_character_message 2 "set_head_target 119.702 -53.6392 281.418 1"
+send_character_message 1 "set_eye_dir 121.072 -54.1107 282.374 1"
+send_character_message 1 "set_head_target 121.059 -54.2269 281.869 1"
+set_cam 120.17 -54.2433 279.225 1.49 -160.12 2.69 26.1429
+say 2 "Rose" "Let's go check if there's more of them."
+send_character_message 2 "set_torso_target 120.247 -54.4942 281.721 0.112163"
+send_character_message 2 "set_head_target 121.23 -54.0338 281.134 1"
+send_character_message 1 "set_eye_dir 121.821 -53.301 282.013 1"
+send_character_message 1 "set_head_target 121.894 -53.2754 282.015 1"
+set_cam 120.015 -54.0945 283.877 -2.97 -25.98 -0.8 26.1429
+say 1 "Turner" "We can't leave April alone. [wait 0.2]I think you should stay here with her."
+set_character_pos 2 121.052 -55.1319 282.409 79
+send_character_message 1 "set_eye_dir 121.035 -54.0696 282.481 1"
+send_character_message 1 "set_head_target 121.023 -54.0675 282.367 1"
+set_cam 120.17 -54.2433 279.225 1.49 -160.12 2.69 26.1429
+say 2 "Rose" "I'll keep her safe. [wait 0.2]Be careful."

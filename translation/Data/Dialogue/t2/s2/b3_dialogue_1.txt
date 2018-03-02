@@ -1,0 +1,18 @@
+#name "Note-Sighting"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 102.661 -11.9977 -167.48 142
+send_character_message 1 "set_head_target 102.109 -11.7565 -167.981 1"
+set_cam 103.217 -11.5485 -169.022 0 142.79 0 51.151
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "An ancient note. [wait 0.5]I wonder how old it is."
+set_character_pos 1 102.661 -12.0549 -167.48 142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 101.414 -11.4191 -167.853 0 -112.73 0 51.151
+say 2 "Note" "I spotted the most peculiar event today."
+say 2 "Note" "A citizen, [wait 0.3]who seems to have been completely normal and sane yesterday, [wait 0.3]was following something invisible to our eyes."
+say 2 "Note" "I would've ran to recite our Advisors' tellings to him - [wait 0.3]to never believe whispers out in the forest, [wait 0.3]as they will lead you astray - [wait 0.3]but I was foolish."
+say 2 "Note" "I feared for my own life, [wait 0.3]and as a consequence, [wait 0.3]one of us has been swallowed whole by the spirits dwelling amongst the trees."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "I must speak with an advisor about this. [wait 0.5]I can't get it out of my mind.

@@ -1,0 +1,16 @@
+#name "Note-Lure"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 62.231 15.2946 -113.151 15
+send_character_message 1 "set_head_target 63.0672 15.716 -113.327 1"
+set_cam 61.6331 15.8967 -114.188 0 -132.66 0 53.9635
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un folklore populaire analyse de livre et les esprits..."
+set_character_pos 1 62.231 15.3493 -113.151 15
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 63.1816 15.9284 -113.018 0 72.41 0 53.9635
+say 2 "Note" "Contes et légendes parlent d’esprits qui possèdent les créatures et sentients pour servir leur volonté."
+say 2 "Note" "Ils sont attirés à éloignée avec apaisante de murmures, [wait 0.3]le jeu de la victime désirs les plus profonds et plus sombres secrets ; [wait 0.3]par exemple, [wait 0.3]quelqu'un avec des fantasmes d’approbation massive peut-être entendre des applaudissements, [wait 0.3]des compliments ou des paroles de louange, [wait 0.3]alors que le sanguinaire va entendre des bruits de guerre, [wait 0.3]sang et la victoire."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Quand une victime est suffisamment attirés et isolé, [wait 0.3]ils seront souvent tués, [wait 0.3]ou pire, [wait 0.3]a possédé pour adapter les besoins et les désirs des esprits."

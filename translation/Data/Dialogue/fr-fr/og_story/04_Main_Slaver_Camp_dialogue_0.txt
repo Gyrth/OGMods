@@ -1,0 +1,29 @@
+#name "Boss"
+#participants 2
+set_dialogue_color 2 1 0.5 0.5
+set_dialogue_voice 2 12
+send_level_message "music_layer_override 3"
+send_character_message 1 "equip_item 2995"
+set_character_pos 1 109.224 -45.9763 22.7041 -34
+send_character_message 1 "set_torso_target 110.17 -45.4217 22.7139 0"
+send_character_message 1 "set_head_target 110.077 -45.3834 22.7287 0"
+set_character_pos 2 112.951 -45.6124 25.74 142
+set_cam 107.673 -44.9908 20.0148 0.04 -141.02 1.98 32.854
+send_level_message "set_camera_dof 0.3 6 1 0 0 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Lockjaw" "Enfin, une personne vaut combats !"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Lockjaw" "Vous ferez améthyste beaucoup d’argent dans l’arène."
+send_character_message 2 "set_head_target 108.707 -45.2721 22.0844 0.0756338"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" " Qui est améthyste ?"
+send_character_message 2 "set_head_target 111.442 -44.3349 24.4565 0"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Lockjaw" "Vous découvrirez assez tôt."
+send_character_message 2 "set_head_target 111.495 -45.0047 24.5218 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_knifestancerearthreat.anm\""
+say 2 "Lockjaw" "Je vais essayer d’éviter toute les artères principales."
+send_level_message "music_layer_override 4"
+make_participants_aware
