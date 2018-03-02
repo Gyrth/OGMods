@@ -1,0 +1,20 @@
+#name "Note-Foxglove"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 14.9128 -0.192716 -158.15 -131
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 14.4493 -0.530116 -157.537 1"
+set_cam 15.5444 0.553472 -157.939 -41.45 98.4 -0.01 55.2369
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Uma nota recente. [wait 0.5]Este deve ser um espião de Empry."
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 15.0395 -0.014715 -156.779 -0.03 2.19 -0.18 40.1399
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 2 "Note" "Dedaleira aqui."
+say 2 "Note" "As criaturas são biologicamente coelho, [wait 0.3]através de e, [wait 0.3]Apesar de seus movimentos e maneirismos não são nada como já vimos."
+say 2 "Note" "No momento da escrita, [wait 0.3]Não houve nenhuma comunicação verbal ou visível entre qualquer uma destas criaturas, [wait 0.3]e ainda todas as ações que eles fazem parecem ser mais coordenada do que o soldado médio Cinderbreathe ou Arliss."
+say 2 "Note" "No momento da escrita, [wait 0.3]Só houve uma das ocorrências dessas criaturas sendo próximo de um anjo da morte."
+say 2 "Note" "O anjo da morte, [wait 0.3]ao contrário de seu comportamento habitual entre os soldados de Cinderbreathe, [wait 0.3]completamente ignorado as criaturas."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Ghost" "[wait 0.3]A entrada parece ser cortado curto..."

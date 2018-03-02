@@ -1,0 +1,59 @@
+#name "Turner"
+#participants 3
+set_character_pos 2 117.552 -54.7874 274.202 90
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 2 "set_head_target 118.452 -53.4454 266.549 1"
+set_character_pos 1 118.8 -54.835 274.172 128
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_torso_target 118.296 -54.4132 273.585 1"
+send_character_message 1 "set_head_target 117.482 -54.0574 273.911 1"
+set_cam 119.907 -54.1723 273.028 0 124.06 0 35.6175
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 9
+say 1 "Amos" "...[wait 0.3]Hallöchen [wait 0.3]Reed. [wait 0.5]Was zum Teufel passiert hier?"
+send_character_message 2 "set_head_target 118.694 -54.0469 273.958 1"
+say 2 "Reed" "Jemand hat Turner Grab geschändet... [wait 0.3]und keiner von den anderen Gräbern wurden berührt."
+set_cam 117.078 -54.787 273.798 10.41 -10.79 0 33.0494
+send_character_message 1 "set_head_target 118.622 -53.4503 266.61 1"
+send_character_message 2 "set_head_target 118.425 -53.4378 266.578 1"
+say 1 "Amos" "Ein abgetrennter Kopf... [wait 0.3]Das Ergebnis von einigen Räuberüberfall irgendwo anders aussieht."
+set_cam 116.213 -54.0643 273.487 -0.05 -108.57 -0.4 22.6847
+say 2 "Reed" "Ich habe hier für eine Weile gesessen. [wait 0.5]Frage mich, ob es zu entfernen."
+send_character_message 2 "set_head_target 119.412 -54.1437 267.952 1"
+send_character_message 1 "set_head_target 117.661 -54.0149 274.058 1"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+say 1 "Amos" "... Warum nicht? [wait 0.5]Es ist ein abgetrennter Kopf."
+send_character_message 2 "set_torso_target 117.642 -54.7526 273.293 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target 118.701 -54.05 274.137 1"
+say 2 "Reed" "Natürlich weiß man nicht warum. Du bist neu bei Lugaru."
+set_cam 121.131 -53.4741 268.141 0.07 68.11 0.4 40.0231
+say 2 "Reed" "Dies ist der Turner, [wait 0.3]Amos. [wait 0.5]Derjenige, der den Völkermord gegen die Wölfe führte."
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_cam 119.622 -54.177 272.672 -0.35 138.56 0.2 40.0231
+say 2 "Reed" "Nur in ein paar Tagen, [wait 0.3]die gesamte Insel ging von Wolf Angriffe und Tod täglich fürchten, [wait 0.3]und am Ende..."
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 0"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 117.721 -53.8705 274.078 1"
+say 2 "Reed" "Es ist selten heutzutage, sogar ein Stück Wolf Pelz zu sehen."
+send_character_message 1 "set_head_target 117.726 -54.0996 274.148 1"
+send_character_message 1 "set_torso_target 118.252 -54.4132 273.794 1"
+set_cam 116.727 -54.1371 273.127 -0.18 -128.21 -0.36 45.9033
+say 1 "Amos" "Wölfe waren schrecklich-- [wait 0.3]klingt wie er ein Held war."
+send_character_message 2 "set_head_target 117.765 -54.2659 273.28 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 2 "Reed" "Sie Cinderbreathe würde nie verstehen, wie viel Blut, die ein Mann verursacht. [wait 0.5]Jeder Schritt, den er nahm, Tod folgten."
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Reed" "Es war nicht nur Wölfe- [wait 0.3]unzählige Kaninchen, die ihm im Weg stand wurden alle ermordet."
+send_character_message 1 "set_head_target 118.527 -53.5143 266.432 1"
+send_character_message 2 "set_head_target 118.476 -53.4275 266.405 1"
+set_cam 117.989 -54.2868 276.362 0.4 -3.13 0.06 45.9033
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 0"
+say 2 "Reed" "Er sollte nicht geehrt werden. [wait 0.5]Seine Ergebnisse hat uns gerettet, Lugarians, aber seine Methoden..."
+send_character_message 1 "set_torso_target 118.252 -54.4132 273.794 0"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 1 "Amos" "...[wait 0.3]Ich möchte nicht wissen. [wait 0.5]Ich würde es aufräumen, wenn ich du wäre. [wait 0.5]Gestank wird wirklich bald inmitten."

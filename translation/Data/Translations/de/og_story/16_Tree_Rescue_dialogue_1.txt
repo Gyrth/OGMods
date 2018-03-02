@@ -1,0 +1,15 @@
+#name "Win"
+#participants 2
+set_character_pos 2 -43.9495 21.4732 -9.53729 -68
+set_character_pos 1 -43.5078 21.2974 -6.76732 84
+set_cam -41.942 21.8467 -5.20717 0 34.88 0 53.6292
+say 2 "Rat" "Nicht mir weh!"
+say 1 "Turner" "Haben Sie eine Kaninchen Mädchen gesehen?"
+say 2 "Rat" "Du kennst sie?
+say 2 "Rat" "Sie sagte, dass sie höher--, daß wenn sie es ganz bis zu den Wolken gemacht, sie in der Lage wäre, wieder nach Hause gehen musste."
+say 1 "Turner" "Was ist mit ihr geschehen?"
+say 2 "Rat" "Wir zog sie sich an unser Hauptlager."
+say 2 "Rat" "Die Katzen egal nicht, wenn ihre Sklaven verrückt sind."
+say 1 "Turner" "Sagen Sie mir wo sie ist, und vielleicht wird nicht ich Sie aus diesem Baum zu werfen."
+say 2 "Rat" "Wenn man es so ausdrücken..."
+send_global_message "levelwin"

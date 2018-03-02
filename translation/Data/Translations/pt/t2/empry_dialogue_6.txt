@@ -1,0 +1,23 @@
+#name "Statue-Ano"
+#participants 4
+set_character_pos 2 3.41831 31.0225 -46.3359 8
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+send_character_message 2 "set_head_target -15.4264 31.3109 -71.8752 0"
+set_character_pos 1 5.90819 31.0878 -47.2502 0
+send_character_message 1 "set_head_target 8.37031 32.3824 -47.0911 1"
+set_cam 1.9133 31.8257 -46.5126 0 -86.39 0 33.7294
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.7 0.89
+set_dialogue_voice 2 11
+send_level_message "set_camera_dof 0.3 3 1 0.3 10 5"
+say 1 "You" "A inscrição diz..."
+send_character_message 1 "set_head_target 10.2939 39.0077 -46.9099 1"
+set_cam 1.3855 31.4008 -37.1865 17.14 -34.51 0 64.8502
+send_level_message "set_camera_dof 0 0 0 0.3 15 10"
+say 3 "Inscription" "ANO DO COMANDANTE, [wait 0.3]MARSHAL MILITAR DO CONSELHO SUPREMO DO IMPÉRIO CINDERBREATHE."
+send_character_message 1 "set_head_target 7.02954 31.6769 -47.7608 1"
+send_character_message 2 "set_head_target 5.87138 31.8659 -47.264 1"
+set_cam 7.43553 31.7949 -48.3889 -0.43 123.2 0.17 23.0322
+send_level_message "set_camera_dof 0.3 3 1.5 0.3 10 3"
+say 2 "Bijou" "...[wait 0.3]Estou feliz que não faziam uma estátua do pai. [wait 0.5]Ele teria odiado isso."

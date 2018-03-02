@@ -1,0 +1,11 @@
+set_character_pos 1 -117.381 118.194 -102.374 0
+send_character_message 1 "set_head_target -114.643 122.052 -102.469 1"
+set_cam -121.265 117.774 -105.626 20.4 -111.63 -0.1 56.0106
+#name "A path"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 2 "" "Se você escolher este caminho..."
+say 2 "" "Sei que você vai precisar de força."
+say 2 "" "Se você escolher este caminho..."
+send_character_message 1 "set_head_target -113.969 119.355 -102.24 1"
+say 2 "" "Passo em frente."

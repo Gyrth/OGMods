@@ -1,0 +1,48 @@
+#name "End"
+#participants 2
+send_character_message 1 "empty_hands"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_dialogue_color 2 0.7 0.7 1
+set_dialogue_color 1 0.6 1 0.6
+set_character_pos 2 166.906 89.381 -6.79138 -168
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 164.906 90.1769 -5.84498 -4.88 -54.47 0.05 59.9152
+send_level_message "set_camera_dof 0 0 0 0.3 8 1"
+send_level_message "music_layer_override -2"
+say 2 "Sun" "Você matou um lobo."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 1 165.673 89.5185 -6.67694 5
+say 1 "Turner" "Estou aqui para lutar contra os traficantes de escravos, este lobo era só no meu caminho."
+send_character_message 2 "set_torso_target 168.003 89.2716 -6.22902 0"
+send_character_message 2 "set_head_target 165.462 89.9456 -6.06861 1"
+say 2 "Sun" "Você matou um lobo."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "Sim, você só disse isso."
+send_character_message 2 "set_head_target 165.605 90.3064 -6.68404 1"
+say 2 "Sun" "Não sabia que eles podiam ser mortos."
+send_character_message 1 "set_head_target 166.296 90.0646 -6.35018 1"
+say 1 "Turner" "Ninguém pode ser morto. Este é o número 10 para mim, talvez onze?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 166.296 90.0646 -6.35018 1"
+say 2 "Sun" "Pessoas que você matou?"
+send_character_message 1 "set_head_target 166.801 90.2375 -6.6265 1"
+set_character_pos 2 166.906 89.3808 -6.79144 -168
+say 1 "Turner" "Apenas lobos. Perdi a conta das pessoas há muito tempo."
+send_character_message 2 "set_head_target 165.963 89.7931 -6.00655 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Sun" "Ah. Eu matei um cachorro uma vez. Geralmente, as pessoas acham tão impressionantes."
+send_character_message 1 "set_head_target 166.755 90.2011 -6.89417 1"
+say 1 "Turner" "Por que você luta de cães? Você está com os coelhos da lua?"
+send_character_message 2 "set_head_target 165.698 90.3467 -6.69959 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sun" "Já estamos famosos? Foi um tempo atrás, quando temos a gota em uma patrulha de cão."
+send_character_message 2 "set_head_target 166.192 89.8633 -6.3671 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+say 2 "Sun" "Esta manhã estávamos prestes a atacar um forte..--pensávamos estava levemente defendida, mas eles estavam esperando por nós. Alguém deve tê-los avisado. Eu escapei, mas os meus amigos..."
+send_character_message 1 "set_head_target 166.901 90.2635 -5.9252 1"
+say 1 "Turner" "Onde está este forte?"
+send_character_message 2 "set_head_target 165.693 90.2787 -6.63642 1"
+set_character_pos 2 166.906 89.3807 -6.79142 -168
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sun" "Eu vou te levar lá. Se meus amigos estão vivos, eles vai ser trancados por dentro."
+send_global_message "levelwin"

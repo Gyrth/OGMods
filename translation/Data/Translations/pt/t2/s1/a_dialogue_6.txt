@@ -1,0 +1,17 @@
+#name "ML-A"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -60.7369 67.7773 374.054 -87
+send_character_message 1 "set_eye_dir -60.666 68.5632 375.303 1"
+send_character_message 1 "set_head_target -60.7118 68.7204 375.234 0.999525"
+set_cam -63.8954 68.1485 369.316 0 -153.55 0 61.026
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -60.7118 68.7204 375.234 0"
+set_character_pos 1 -60.7369 67.6986 374.054 -87
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+say 1 "Ghost" "Acho que vou continuar a seguir esses santuários..."
+send_global_message "levelwin a"

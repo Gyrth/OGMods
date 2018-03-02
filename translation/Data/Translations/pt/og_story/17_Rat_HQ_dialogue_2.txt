@@ -1,0 +1,27 @@
+#name "Win"
+#participants 2
+send_character_message 1 "empty_hands"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_torso_target 0.753461 3.45669 102.119 1"
+send_character_message 1 "set_head_target 1.74426 4.94444 103.657 1"
+set_character_pos 2 2.22249 1.2052 103.139 118
+set_character_pos 1 0.630974 3.24363 101.779 -7
+set_cam 2.50205 4.39109 99.7421 -18.11 145.35 -5.12 59.6223
+say 2 "Crawl" "Turner! Corra! É uma armadilha!"
+send_character_message 1 "set_head_target 1.87263 4.51841 102.45 1"
+send_character_message 1 "set_torso_target 1.51356 2.89999 101.604 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_animation \"Data\Animations\r_sleep.anm\""
+say 1 "Turner" "Rastreamento? Onde você está?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+say 1 "Turner" "Gah!"
+send_character_message 1 "set_head_target 1.87263 4.51841 102.45 0.513762"
+send_character_message 1 "set_torso_target 1.51356 2.89999 101.604 0"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneeling_low.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 2.5 0.2"
+say 1 "Turner" "Um blowdart!"
+send_character_message 1 "set_head_target 1.87263 4.51841 102.45 0"
+send_character_message 1 "set_animation \"Data\Animations\r_sleep.anm\""
+send_level_message "set_camera_dof 0 0 0 1 1 1"
+say 1 "Turner" "Precisa..... lutar......"
+send_global_message "levelwin"

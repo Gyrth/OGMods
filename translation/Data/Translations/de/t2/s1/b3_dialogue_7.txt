@@ -1,0 +1,16 @@
+#name "Note-Gunpowder"
+#pariticipants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 17.8347 31.6095 -116.013 58
+send_character_message 1 "set_head_target 18.1728 31.9015 -116.556 1"
+set_cam 18.6701 32.1478 -115.054 0 30 0 43.359
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 1 "Ghost" "Eine Notiz [wait 0.3]wahrscheinlich von einem der Erfinder geschrieben."
+set_character_pos 1 17.8347 31.6095 -116.013 58
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 17.8744 32.1596 -117.355 0 176.96 0 43.359
+say 1 "Note" "Die Beobachtungen von unsere Spione im Arlissian Kollektiv sind eingetroffen. [wait 0.5]Abriss, [wait 0.3]Pulver und Kanonen; [wait 0.3]ein bisschen beunruhigend."
+say 1 "Note" "Obwohl es wahrscheinlicher ist, verwenden sie es für Bau und Aushub, [wait 0.3]die politischen Konsequenzen eines möglichen Krieges sind nicht von mir, darüber nachzudenken."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Note" "Probe-Geräte gekommen, [wait 0.3]Also musst ich Reverse engineering-jedes Stück davon beginnen..."

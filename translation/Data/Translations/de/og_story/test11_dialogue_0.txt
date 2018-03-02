@@ -1,0 +1,15 @@
+#name "Start"
+#participants 6
+
+set_character_pos 6 6.6249 -2.13873 5.80271 -51
+set_character_pos 5 9.53669 -1.98639 5.84259 -78
+set_character_pos 4 10.9312 -2.07789 4.43018 -73
+set_character_pos 3 8.91045 -2.12111 10.3906 85
+set_character_pos 2 11.7872 -2.08227 9.50458 125
+set_character_pos 1 14.7821 -2.04768 7.41294 -179
+set_cam 17.4832 -1.05467 8.59071 0 79.64 0 59.5862
+say 2 "Villager" "Wir würden lieber sterben, als Sklaven zu sein."
+say 4 "Slaver" "Okay."
+say 1 "Turner" "Ich helfe die Sklavenhändlern zu kämpfen."
+make_participants_aware
+

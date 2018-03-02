@@ -1,0 +1,25 @@
+#name "Skipper"
+#participants 2
+set_character_pos 2 103.95 -55.672 293.029 0
+send_character_message 2 "set_animation \"Data\Animations\r_sit_cross_legged.anm\""
+send_character_message 2 "set_torso_target 103.996 -55.6553 292.604 0.0323129"
+send_character_message 2 "set_head_target 104.305 -55.8876 293.528 1"
+set_character_pos 1 105.1 -54.5144 290.788 -143
+send_character_message 1 "set_animation \"Data\Animations\r_crouch.anm\""
+send_character_message 1 "set_eye_dir 103.86 -55.2147 292.334 1"
+send_character_message 1 "set_head_target 103.855 -55.4599 293.088 1"
+set_cam 104.13 -55.9801 295.829 10.28 -2.36 2.98 30.7744
+say 2 "Skipper" "Das kann nicht wahr sein."
+send_character_message 1 "set_head_target 103.855 -55.4599 293.088 1"
+send_character_message 2 "set_torso_target 104.077 -55.3925 292.271 0.406993"
+send_character_message 2 "set_head_target 104.927 -54.2225 290.856 1"
+say 1 "Turner" "Was machst du da?"
+send_character_message 2 "set_head_target 104.682 -54.7572 293.103 1"
+send_character_message 1 "set_head_target 103.855 -55.4599 293.088 1"
+say 2 "Skipper" "Oh... [wait 0.2]Ich bin gerade... [wait 0.2]Es scheint sicherer."
+send_character_message 2 "set_head_target 104.927 -54.2225 290.856 1"
+send_character_message 1 "set_head_target 103.855 -55.4599 293.088 1"
+say 1 "Turner" "Reiß dich zusammen. [wait 0.2]Wir brauchen Ihre Hilfe."
+send_character_message 2 "set_head_target 104.594 -55.8532 292.966 1"
+send_character_message 1 "set_head_target 103.94 -55.5453 293.109 1"
+say 2 "Skipper" "Ich werde es versuchen. [wait 0.2]Gib mir nur eine Minute."

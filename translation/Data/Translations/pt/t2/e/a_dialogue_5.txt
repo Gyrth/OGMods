@@ -1,0 +1,15 @@
+#name "Note-Outbreak"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -27.5941 -3.60182 -91.9734 -90
+send_character_message 1 "set_head_target -27.6802 -3.45304 -91.1693 1"
+set_cam -29.0328 -3.29631 -92.307 0 -120 0 56.0142
+say 1 "Ghost" "Uma nota escrita por um dos soldados, [wait 0.3]abordando um reporte."
+set_cam -28.3258 -3.17752 -91.4267 11.57 -78.78 0 56.0142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "O Reaper realizado na gaiola tinha que ser lançado para limpar o perímetro da sujeira de Cinderblood."
+say 2 "Note" "Apesar de ter sido uma medida drástica, [wait 0.3]era completamente necessário- [wait 0.3]e uma que ganhamos a guerra civil."
+say 2 "Note" "Não fazemos ideia de onde o anjo foi embora, [wait 0.3]mas estimamos que em algum lugar na floresta Oriental."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Carrega seu osso armadura e espada [wait 0.3]também."

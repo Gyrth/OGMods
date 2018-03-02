@@ -1,0 +1,16 @@
+#name "Note-Lure"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 62.231 15.2946 -113.151 15
+send_character_message 1 "set_head_target 63.0672 15.716 -113.327 1"
+set_cam 61.6331 15.8967 -114.188 0 -132.66 0 53.9635
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Um folclore popular análise do livro e os espíritos..."
+set_character_pos 1 62.231 15.3493 -113.151 15
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 63.1816 15.9284 -113.018 0 72.41 0 53.9635
+say 2 "Note" "Contos e lendas falam de espíritos, possuindo as criaturas e seres para servir a sua vontade."
+say 2 "Note" "Eles são atraídos para locais remotos com suaves sussurros, [wait 0.3]jogando em desejos mais profundos da vítima e segredos mais obscuros; [wait 0.3]por exemplo, [wait 0.3]alguém com fantasias de aprovação em massa poderia ouvir aplausos, [wait 0.3]elogios ou palavras de louvor, [wait 0.3]enquanto o sanguinário vai ouvir sons de guerra, [wait 0.3]derramamento de sangue e vitória."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Quando uma vítima é suficientemente lurado e isolado, [wait 0.3]muitas vezes eles vão morrer, [wait 0.3]ou pior, [wait 0.3]possuíam para caber necessidades e desejos dos espíritos."

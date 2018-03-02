@@ -1,0 +1,15 @@
+#name "Win"
+#participants 2
+set_character_pos 2 -43.9495 21.4732 -9.53729 -68
+set_character_pos 1 -43.5078 21.2974 -6.76732 84
+set_cam -41.942 21.8467 -5.20717 0 34.88 0 53.6292
+say 2 "Rat" "Não me machuque!"
+say 1 "Turner" "Você viu uma garota de coelho?"
+say 2 "Rat" "Você a conhece?
+say 2 "Rat" "Ela disse que ela tinha que subir mais alto..--que se ela chegou até as nuvens, ela seria capaz de voltar para casa."
+say 1 "Turner" "O que aconteceu com ela?"
+say 2 "Rat" "Nós arrastou-a para o nosso acampamento principal."
+say 2 "Rat" "Os gatos não importa se seus escravos são loucos."
+say 1 "Turner" "Me diga onde ela está, e talvez não vai jogá-la fora esta árvore."
+say 2 "Rat" "Quando você coloca assim..."
+send_global_message "levelwin"

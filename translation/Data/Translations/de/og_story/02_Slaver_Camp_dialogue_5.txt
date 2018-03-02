@@ -1,0 +1,21 @@
+#name "VillAlert"
+#participants 2
+set_dialogue_color 2 0.2 1 1
+set_dialogue_voice 2 18
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+send_character_message 1 "set_head_target 128.03 -32.3118 -165.481 1"
+set_cam 125.564 -31.7793 -164.602 -15.13 -80.04 -2.56 90
+set_character_pos 1 126.871 -32.6432 -164.15 47
+say 1 "Turner" "Ich denke, das seine "letzten Catch" drüben. Arme Seele."
+set_cam 125.937 -31.8791 -162.32 -8.82 -14.97 1.1 90
+send_level_message "set_camera_dof 0.2 3 1 0 0 0"
+send_character_message 1 "set_torso_target 128.125 -32.0443 -166.101 1"
+send_character_message 1 "set_head_target 125.37 -31.7557 -167.752 1"
+say 1 "Turner" "Es gibt zu viele Vorräte hier--muss mehr davon. Mag es nicht verlassen der Arbeit halb fertig."
+set_character_pos 1 126.871 -32.6432 -164.15 108
+send_character_message 1 "set_torso_target 126.173 -32.0443 -165.863 1"
+send_character_message 1 "set_head_target 123.856 -31.5433 -161.094 1"
+send_level_message "set_camera_dof 0.3 10 5 0 0 0"
+set_cam 128.601 -31.9624 -164.389 4.97 108.03 0 60
+say 2 "Voice" "Hilfe!"
+send_level_message "start_dialogue Places"

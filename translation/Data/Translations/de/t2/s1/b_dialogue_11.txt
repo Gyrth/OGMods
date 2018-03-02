@@ -1,0 +1,19 @@
+#name "Note-Energy"
+#participants 2
+set_character_pos 1 64.2583 -61.2897 294.631 -120
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 63.729 -61.5753 295.365 1"
+set_cam 63.8905 -61.1484 292.644 0 -179.84 0 41.8232
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Ein persönliches Tagebuch von einer Wache-- [wait 0.3]Seiten zu öffnen, [wait 0.3]ganz sorglos..."
+send_character_message 1 "set_head_target 63.8142 -61.7003 295.309 1"
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 63.1048 -61.2089 294.844 0 -89.54 0 49.631
+say 2 "Note" "Hier ist eine seltsame Erfahrung. [wait 0.5]Auf ersten Blick, [wait 0.3]Diese Kolonie Gründe sind nichts Besonderes."
+say 2 "Note" "Unberechenbar, wenn es darum geht, Biom, [wait 0.3]sicher, [wait 0.3]aber letztlich durchschnittlich Strecken des Landes."
+say 2 "Note" "Noch erwacht etwas in mir. [wait 0.5]Manchmal, [wait 0.3]Ich fühle mich, als ob eine steife Brise durch mich fließt, [wait 0.3]und mein Fell steht am Ende."
+say 2 "Note" "Ich bin kein Dichter. [wait 0.5]Tatsächlich [wait 0.3]Ich hasse die Idee sogar eins zu imitieren.
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "Aber hier macht mir weglaufen und meine Seele schützen wollen. [wait 0.5]Es ist schwer zu erklären."

@@ -1,0 +1,19 @@
+#name "Note-Terrorists"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -144.805 3.60233 -104.364 155
+send_character_message 1 "set_head_target -145.56 3.72121 -104.888 1"
+set_cam -143.186 4.01854 -104.73 0 90 0 42.0321
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Eine Anmerkung von einer der kommandierende Offiziere."
+set_character_pos 1 -144.805 3.5349 -104.364 155
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -145.462 4.14812 -103.718 0 -20.63 0 42.0321
+say 2 "Note" "39. der Spurhelm [waqit 0.3]671. [wait 0.5]Das sind Anweisungen für den Kader des Kommandanten nur Augen.
+say 2 "Note" "Terroristischer Aktivitäten auf dem kolonialen Gelände steigt stetig."
+say 2 "Note" "Rund die Hälfte Ihrer restlichen Männer und lassen Sie die Campingplätze, verdächtige Personen zu suchen. [wait 0.5]Sie sollten wissen, wo Ihre Männer zu lenken."
+send_character_message 1 "set_head_target -144.225 3.60416 -107.097 1"
+set_cam -145.462 4.14801 -103.718 0 -20.63 0 42.0321
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Paranoia zu halten."

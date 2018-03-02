@@ -1,0 +1,73 @@
+#name "Guards"
+#participants 5
+set_character_pos 4 -41.8524 103.577 150.269 89
+send_character_message 4 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 4 "set_torso_target -41.8017 103.989 149.697 0"
+send_character_message 4 "set_head_target -40.725 104.221 148.073 1"
+set_character_pos 3 -40.0282 103.559 146.814 174
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 3 "set_head_target -43.096 104.315 146.027 1"
+set_character_pos 2 -43.3296 103.575 145.906 -21
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+send_character_message 2 "set_head_target -40.1597 104.274 146.799 1"
+set_character_pos 1 -47.3186 106.188 163.459 27
+send_character_message 1 "set_head_target -45.9291 106.258 159.809 1"
+set_cam -47.2693 107.698 166.44 -15.38 -9.37 0 26.4941
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.2 0.4 0.6
+set_dialogue_voice 2 1
+set_dialogue_color 3 0.9 0.9 0
+set_dialogue_voice 3 7
+send_level_message "set_camera_dof 0.3 10 10 0 0 0"
+say 2 "???" "Es wurde eine Sicherheitslücke?"
+set_cam -42.5236 103.768 145.898 9.34 -115.47 -0.08 26.4941
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 3 "????" "Einer der Wächter hat einen Eindringling entdeckt."
+send_character_message 3 "set_torso_target -40.7223 103.488 146.553 1"
+send_character_message 3 "set_head_target -43.0915 104.068 145.911 1"
+say 3 "????" "Wir müssen hier raus, bevor er seinen Weg in den Turm findet."
+send_character_message 2 "set_head_target -42.6336 104.274 143.359 1"
+set_cam -43.2115 104.322 147.564 0.02 -4.34 0.16 22.5388
+say 2 "???" "Gehen wir in die...?"
+send_character_message 2 "set_head_target -40.0182 104.418 146.821 1"
+say 3 "????" "Wir haben keine andere Wahl. [wait 0.5]Ich bin sicher, dass die Höhlenbewohner nichts dagegen, wenn wir erklären."
+send_character_message 4 "set_head_target -42.7378 104.14 147.267 1"
+send_character_message 2 "set_head_target -41.8795 104.319 150.201 1"
+send_character_message 3 "set_torso_target -40.7223 103.488 146.553 0"
+send_character_message 3 "set_head_target -41.3511 104.068 148.686 1"
+set_cam -43.2612 104.292 144.234 0.01 -173.45 -0.16 22.5388
+say 2 "???" "Sie. [wait 0.5]Wie heißen Sie?"
+send_character_message 4 "set_head_target -42.9324 104.559 146.632 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 4 "?????" "Mein Name ist do."
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 3 "set_head_target -41.4308 104.717 149.178 1"
+set_cam -39.145 104.317 147.515 -0.13 63.59 0.08 22.5388
+send_level_message "set_camera_dof 0 0 0 0.3 1 1"
+say 2 "???" "Bleiben Sie hier und sehen für den Eindringling. [wait 0.5]Verwenden Sie Kraft nötig."
+send_character_message 4 "set_head_target -43.0947 104.028 146.326 1"
+send_character_message 3 "set_head_target -41.401 104.235 149.4 1"
+set_cam -41.9588 104.262 152.081 0 4.83 0.16 22.5388
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 4 "Thu" "Ich hab es. [wait 0.5]Sie können auf mich zählen."
+send_character_message 4 "set_head_target -43.0947 104.636 146.326 1"
+send_character_message 2 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+set_cam -41.3723 103.909 140.534 -0.02 176.14 -0.16 43.8939
+send_character_message 4 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 3 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 10 10"
+say 2 "???" "Seid gegrüßt."
+set_cam -41.2536 103.943 147.849 7.95 162.98 -0.15 12.0227
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "..."
+send_character_message 4 "set_head_target -31.5989 105.745 151.554 1"
+set_character_pos 4 -41.8524 103.577 150.269 -7
+send_character_message 4 "set_animation \"Data/Animations/r_idle.anm\""
+set_character_pos 2 -35.6486 112.027 135.045 -21
+set_character_pos 3 -32.3472 112.011 135.953 174
+send_character_message 1 "set_head_target -46.0536 106.545 159.662 1"
+send_character_message 1 "set_torso_target -46.7486 106.657 163.155 1"
+set_cam -43.8337 106.85 163.434 -0.16 88.51 0.02 12.0227
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "...[wait 0.3]Sie muss der Kommandant."

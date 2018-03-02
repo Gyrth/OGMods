@@ -1,0 +1,129 @@
+#name "Charge"
+#participants 7
+set_character_pos 6 -231.445 -56.0277 -31.6885 0
+set_character_pos 5 -227.445 -56.5272 -31.5743 0
+set_character_pos 4 -226.132 -57.024 -35.0583 0
+set_character_pos 3 -221.243 -55.446 -29.6041 0
+send_character_message 1 "set_torso_target -208.327 -83.496 -36.2882 0"
+set_character_pos 1 -208.004 -83.0994 -35.5495 138
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target -208.81 -82.5593 -36.4323 1"
+set_cam -207.773 -82.9236 -29.9081 0 5.76 0 32.7253
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_dialogue_color 7 0 0.52 0.95
+set_dialogue_voice 7 8
+say 1 "You" "... ...also dies schafft einen Fluchtweg für die Sklaven..."
+set_cam -208.605 -82.951 -37.084 0 -156.79 0 33.733
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+send_character_message 1 "set_head_target -209.019 -83.4725 -36.4997 1"
+say 1 "You" "..."
+set_character_pos 1 -208.004 -83.1471 -35.5495 138
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+send_character_message 1 "set_head_target -209.096 -83.4725 -36.2467 1"
+say 1 "You" "... und... [wait 0.3]dort."
+send_character_message 1 "set_head_target -208.508 -83.4145 -36.3585 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "You" "Licht die Sicherung, [wait 0.3]und es gehe aus vor--"
+set_cam -208.605 -82.6774 -37.084 0 -156.79 0 19.1722
+set_character_pos 6 -209.909 -83.0521 -37.2465 -44
+send_character_message 1 "set_animation \"Data/Animations/r_blockfrontko.anm\""
+say 1 "You" "...[wait 0.3]!"
+send_character_message 7 "set_head_target -217.614 -52.7044 -28.2893 1"
+set_cam -218.479 -52.135 -31.6166 2.14 -156.79 0 48.3732
+send_character_message 7 "set_torso_target -216.043 -53.7389 -26.9948 1"
+send_character_message 7 "set_animation \"Data/Animations/dialogue_dying_2.anm\""
+set_character_pos 7 -217.159 -51.9816 -27.844 138
+say 5 "" "..."
+send_character_message 7 "set_torso_target -219.304 -51.6565 -29.7783 0"
+send_character_message 7 "set_animation \"Data/Animations/r_dialogue_kneeling_low.anm\""
+say 5 "" "..."
+send_character_message 7 "set_head_target -217.722 -52.7325 -28.6149 1"
+set_cam -217.568 -52.0863 -29.6767 2 -178.66 -0.77 48.3732
+say 7 "You" "..."
+send_character_message 7 "set_head_target -217.225 -52.4595 -28.2793 1"
+set_cam -217.625 -52.0982 -29.693 2.11 -168.04 -0.39 46.4585
+set_character_pos 7 -217.157 -51.7475 -27.8426 138
+send_character_message 7 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+say 7 "You" "Ow... [wait 0.3]alles... [wait 0.3]tut weh..."
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_head_target -217.795 -51.9572 -28.3355 1"
+send_character_message 2 "set_torso_target -218.326 -52.0448 -29.2666 0"
+set_character_pos 2 -218.842 -52.509 -28.9869 -36
+set_cam -217.856 -51.8352 -28.0039 -5.51 -106.43 1.68 46.4585
+send_character_message 7 "set_head_target -217.232 -52.3608 -28.2665 1"
+set_character_pos 7 -216.781 -52.0292 -27.6651 138
+send_character_message 7 "set_animation \"Data/Animations/dialogue_dying_1.anm\""
+say 7 "You" "Die Sicherung...! [wait 0.5]Warum es...?"
+send_character_message 7 "set_head_target -217.235 -52.362 -28.2626 1"
+send_character_message 2 "set_head_target -217.784 -51.959 -28.3294 1"
+set_cam -214.632 -52.3648 -32.0379 1.42 140.32 -0.92 36.2926
+say 7 "You" "..."
+send_character_message 7 "set_head_target -217.643 -52.2946 -28.1847 1"
+send_character_message 2 "set_head_target -217.37 -52.0332 -27.978 1"
+say 2 "???" "Du kannst nicht dein Schicksal entkommen."
+send_character_message 7 "set_head_target -218.559 -51.6261 -28.7377 1"
+set_cam -219.4 -51.9978 -30.6798 1.34 -149.11 1.03 36.2926
+say 7 "You" "W-was? [wait 0.5]Du bist..."
+send_character_message 2 "set_head_target -217.274 -51.8276 -27.9378 1"
+send_character_message 7 "set_head_target -218.521 -52.1321 -28.8194 1"
+say 7 "You" "Sie erzählten mir... [wait 0.3]bleiben Sie weg von Ihnen!"
+send_character_message 2 "set_torso_target -218.387 -52.2868 -28.6846 1"
+set_cam -217.542 -51.7686 -29.0879 0.51 100.84 -1.61 28.2555
+say 2 "???" "Sie haben versucht, uns zu betrügen, [wait 0.3]und du läufst jetzt Weg?"
+send_character_message 2 "set_head_target -217.257 -51.6795 -27.9644 1"
+say 2 "???" "Ihr gesamte Leben wurde vor Ihnen ausgebreitet. [wait 0.5]Alle Ihre Probleme würden behoben werden. [wait 0.5]Nicht an Bedingungen geknüpft."
+send_character_message 2 "set_head_target -217.257 -51.9133 -27.9644 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_torso_target -218.458 -52.374 -28.6909 1"
+say 2 "???" "Was dachten Sie?! [wait 0.5]Wir gaben Sie Ihren Schlüssel als einen Akt der Partnerschaft, [wait 0.3]und Sie haben es alle weggeworfen!"
+set_character_pos 7 -216.781 -51.9019 -27.6651 138
+send_character_message 7 "set_animation \"Data/Animations/r_sit_injuredneck.anm\""
+send_character_message 7 "set_head_target -218.438 -52.3879 -28.5133 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+set_cam -221.252 -51.9837 -29.2368 0.21 -103.94 1.68 28.2555
+say 7 "You" "..."
+send_character_message 2 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+say 2 "???" "Aber lasst uns nicht wohnen, auf was wir nicht ändern können. [wait 0.5]Die Arlissians wird zu reorganisieren, [wait 0.3]und zerstören Ihre dumme kleinen Reich."
+send_character_message 7 "set_head_target -217.368 -52.3177 -28.0666 1"
+send_character_message 2 "set_torso_target -218.458 -52.7881 -28.6909 1"
+send_character_message 2 "set_head_target -217.257 -51.6579 -27.9644 1"
+say 2 "???" "Nach dem nächsten Krieg [wait 0.3]nie wieder werden unsere heiligen Hallen von fühlenden Gestank behaftet sein."
+set_cam -221.434 -51.9542 -27.2732 -0.76 -70.32 1.52 39.7518
+say 7 "You" "...[wait 0.3]?"
+send_character_message 2 "set_torso_target -218.458 -52.7881 -28.6909 0"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+say 2 "???" "Ruhe in Frieden, [wait 0.3]Sie Obst."
+send_character_message 6 "set_head_target -218.073 -52.1513 -29.9407 1"
+send_character_message 5 "set_head_target -218.627 -52.1455 -30.6674 1"
+send_character_message 6 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+set_character_pos 6 -227.204 -54.4132 -43.8646 -53
+send_character_message 5 "set_animation \"Data/Animations/c_actionidle.anm\""
+set_character_pos 5 -225.753 -54.4583 -43.678 -67
+send_character_message 3 "set_head_target -217.031 -51.7847 -27.9675 1"
+send_character_message 4 "set_head_target -219.151 -52.0446 -30.2814 1"
+send_character_message 4 "set_animation \"Data/Animations/r_spearstance.anm\""
+set_character_pos 4 -222.904 -53.6986 -34.3205 -48
+send_character_message 3 "set_animation \"Data/Animations/c_actionidle.anm\""
+set_character_pos 3 -221.222 -52.9438 -30.4474 -30
+send_character_message 7 "set_head_target -216.896 -52.215 -28.2525 1"
+send_character_message 2 "set_head_target -219.19 -50.9272 -35.7201 1"
+set_cam -217.742 -51.8976 -28.8873 1.17 -140.45 1.23 32.4762
+set_character_pos 2 -217.756 -55.2636 -33.1924 -36
+say 7 "You" "..."
+send_character_message 7 "set_head_target -217.152 -51.8394 -28.1109 1"
+send_character_message 7 "set_animation \"Data/Animations/dialogue_dying_1.anm\""
+say 7 "You" "...[wait 0.3]w-warten!"
+set_character_pos 5 -228.902 -54.0317 -40.3137 -67
+set_character_pos 6 -230.353 -53.9866 -40.5003 -53
+set_character_pos 4 -220.527 -53.1652 -32.0211 -48
+set_character_pos 3 -220.697 -52.9438 -30.5088 -34
+set_cam -217.159 -51.6805 -27.9913 -9.38 46.61 -0.75 26.0617
+say 7 "You" "...[wait 0.3]LOC"
+fade_to_black 1
+say 5 "" "..."
+say 5 "" "Sie haben die Endung Prolog abgeschlossen."
+say 5 "T2-Dev" "Vielen Dank für die Wiedergabe von Therium-2."
+send_global_message "levelwin"

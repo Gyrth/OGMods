@@ -1,0 +1,22 @@
+#name "Skipper"
+#participants 2
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_character_pos 2 100.003 -47.3816 305.189 36
+send_character_message 2 "set_eye_dir 101.694 -46.4613 304.136 1"
+set_character_pos 1 101.142 -46.9821 304.555 -151
+send_character_message 1 "set_eye_dir 100.236 -46.3787 304.424 1"
+set_cam 102.589 -46.6135 304.726 -0.12 93.58 -0.34 31.1566
+say 2 "Skipper" "Alles klar... [wait 0.2]nach wie vor. [wait 0.2]Sie sicher, dass wir noch bei hellem Tageslicht beobachten müssen, wie dies?"
+set_character_pos 1 101.142 -46.9821 304.555 -151
+set_cam 99.4122 -46.4995 306.505 -3.24 -34.27 -0.38 35.3299
+say 1 "Turner" "Haben Sie vergessen, was das Dorf am roten Scherben passiert ist? [wait 0.2]Das kann nicht hier geschehen."
+set_character_pos 1 101.142 -46.9821 304.555 -151
+set_cam 102.589 -46.6135 304.726 -0.12 93.58 -0.34 31.1566
+say 2 "Skipper" "Das war vor Jahren. [wait 0.2]Sicherlich haben sie gehört, was Sie und Willow im Krieg haben? [wait 0.2]Sie würde es nicht wagen."
+set_cam 99.4122 -46.4995 306.505 -3.24 -34.27 -0.38 35.3299
+set_character_pos 1 101.142 -46.9821 304.555 -151
+say 1 "Turner" "Thats, warum sie würde schleichen sich auf uns. [wait 0.2]Sie kennen die Verluste, die sie in einem fairen Kampf mitnehmen würde."
+set_cam 102.589 -46.6135 304.726 -0.12 93.58 -0.34 31.1566
+set_character_pos 1 101.142 -47.4361 304.555 -151
+say 2 "Skipper" "Mindestens Willow ist ihrer Schicht bald nehmen [wait 0.2]meine Beine werden mich töten."

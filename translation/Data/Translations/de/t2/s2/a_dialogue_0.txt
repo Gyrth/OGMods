@@ -1,0 +1,41 @@
+#name "Failure"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 12.5285 22.066 -156.551 30
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_eye_dir 19.9204 17.0226 -160.211 1"
+send_character_message 2 "set_torso_target 16.9287 17.4294 -158.534 1"
+send_character_message 2 "set_head_target 18.4039 17.1906 -159.34 1"
+set_character_pos 1 20.0153 15.8307 -160.032 -162
+send_character_message 1 "set_eye_dir 17.4058 19.279 -159.314 1"
+send_character_message 1 "set_head_target 18.4265 16.8428 -160.92 1"
+set_cam 24.0815 16.4547 -164.871 0 130.29 0 27.2149
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 1 "" "..."
+send_character_message 1 "set_head_target 18.8505 16.6011 -160.169 1"
+say 1 "Ghost" "[wait 0.2]Jairo!"
+send_character_message 1 "set_head_target 19.5612 17.0548 -158.718 1"
+say 1 "Ghost" "Du kannst jetzt rauskommen!"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam 21.4416 15.6868 -160.299 30 108.64 0 27.2149
+send_character_message 1 "set_head_target 14.2087 21.9617 -157.186 1"
+send_level_message "set_camera_dof 0.3 5 1 0 0 0"
+say 2 "Jairo" "Geist, [wait 0.1]Was hast zum Teufel du gemacht!?"
+send_character_message 1 "set_head_target 15.0126 17.8951 -157.277 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handneck.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "Ich, [wait 0.2]äh..."
+set_character_pos 2 12.5285 21.9704 -156.551 30
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam 14.0133 22.5526 -158.051 0 138.64 0 27.2149
+say 2 "Jairo" "Sie sollten um zu einem lebendig zu halten!"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_facepalm.anm\""
+say 2 "Jairo" "Sie Idioten!"
+set_character_pos 1 31.3095 13.0381 -161.934 -162
+set_cam 32.3959 8.41525 -166.636 0 168.64 0 3.00075
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "" "..."
+send_level_message "resetlevel"

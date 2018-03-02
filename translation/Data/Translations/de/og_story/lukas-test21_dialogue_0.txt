@@ -1,0 +1,15 @@
+#name "RebelMeeting"
+#participants 2
+
+set_character_pos 2 2.42182 -1.78782 4.42306 76
+set_character_pos 1 2.75714 -1.78782 2.49255 -86
+set_cam 3.37822 -1.25582 2.43758 0 124.04 0 90
+say 1 "Turner" "Katze Sklavenhändler sind jetzt in Unordnung."
+say 1 "Turner" "Wir müssen irgendwo für Kaninchen zu gehen."
+say 1 "Turner" "Ich habe Gerüchte über ein Heiligtum gehört."
+say 2 "Rabbit rebel" "Es ist weit in den Osten, lass uns gehen!."
+set_cam 2.94613 -1.14734 2.72588 0 46.1 0 90
+say 1 "Turner" "Dies ist das Ende des Levels."
+send_global_message "levelwin"
+
+

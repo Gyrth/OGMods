@@ -1,0 +1,20 @@
+#name "Start"
+#participants 3
+
+set_character_pos 2 14.4305 -1.55593 0.365621 -18
+set_character_pos 1 16.7386 -1.80098 6.74091 152
+set_cam 15.8037 -1.3945 5.95471 0 -121.76 0 90
+say 1 "Cat Friend" "Hey, Turner! aus irgendeinem Grund bin ich wütend auf Sie!"
+set_character_pos 2 14.4284 -1.55464 0.366987 -116
+set_cam 14.3299 -1.10152 0.873714 0 -1.35 0 90
+say 2 "Rat Friend" "Katze Freund beruhigen, lassen Sie uns dies auszureden."
+set_cam 16.2314 -1.1011 6.61855 0 -105.28 0 90
+say 1 "Cat Friend" "Bleiben Sie aus dieser Ratte-Freund, das ist zwischen mir und Turner!"
+say 1 "Cat Friend" "Ich werde Sie bewusstlos, Turner Rendern!"
+set_cam 1.37316 -1.21726 0.225238 0 33.1 0 90
+say 3 "Turner" "Woah!"
+send_level_message "make_all_aware"
+
+
+
+

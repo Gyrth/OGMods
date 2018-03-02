@@ -1,0 +1,8 @@
+#name "Boss"
+#participants 2
+set_cam 214.367 70.5749 -39.7983 0 71.37 0 90
+set_character_pos 1 212.544 69.803 -41.6743 -143
+set_character_pos 2 207.883 69.8049 -38.2493 42
+say 2 "Boss" "Ach, konnte Kaninchen Wachen sogar ein Rebell nicht umgehen."
+say 2 "Boss" "Ich werde diese selbst behandeln."
+make_participants_aware

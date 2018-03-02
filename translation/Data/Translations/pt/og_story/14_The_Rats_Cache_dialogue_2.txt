@@ -1,0 +1,6 @@
+#name "StartClimb"
+#participants 1
+send_character_message 1 "set_head_target 36.3593 17.5852 -92.8972 1"
+set_cam 37.8237 14.559 -90.8524 40.73 43.26 3.03 90
+set_character_pos 1 36.6176 14.9037 -91.2896 120
+say 1 "Turner" "Okey, agora tudo o que tenho que fazer é subir até lá. Para obter o veneno. No meio da tempestade."

@@ -1,0 +1,24 @@
+#name "Turner"
+#participants 2
+set_character_pos 2 -5.9201 5.64087 104.268 137
+send_character_message 2 "set_torso_target -8.40804 5.77917 102.127 0.0919109"
+send_character_message 2 "set_head_target -6.20163 8.00943 100.78 1"
+set_character_pos 1 16.6496 7.89663 102.486 175
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_head_target 1.60006 9.13708 97.217 1"
+set_cam 19.0968 8.53855 101.169 -6.85 94.39 1.25 60.5025
+say 1 "Turner" "Nunca vi um lobo tão a sul."
+send_character_message 2 "set_torso_target -13.427 6.38464 104.808 1"
+send_character_message 2 "set_head_target -13.5349 7.07081 104.869 1"
+send_character_message 1 "set_head_target 4.64822 6.68278 102.97 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+say 1 "Turner" "Má sorte de tropeçar nela de contra o vento."
+send_character_message 2 "set_head_target -6.63716 7.83937 103.914 1"
+send_character_message 2 "set_torso_target -13.6816 5.69254 104.203 1"
+set_cam -10.6658 6.12313 107.924 -0.65 -63.71 -0.41 38.6381
+say 2 "Smoke" "Tem cheiro de coelho. [wait 0.3]Finalmente."
+send_character_message 2 "set_head_target -7.21498 5.97169 102.217 1"
+send_character_message 2 "set_torso_target -9.01254 5.8772 102.467 1"
+send_character_message 2 "set_animation \"Data\Animations\r_combatidlewild.anm\""
+say 2 "Smoke" "Estou morrendo de fome!"
+send_level_message "make_all_aware"

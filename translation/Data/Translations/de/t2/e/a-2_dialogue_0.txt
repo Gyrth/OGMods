@@ -1,0 +1,19 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_cam -83.8428 98.9577 178.331 0 -150 0 27.0819
+set_character_pos 1 -82.7659 98.384 180.32 90
+send_level_message "therium2_disable_object 419"
+send_level_message "therium2_enable_object 418"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_glance.anm\""
+send_character_message 1 "set_head_target -82.8043 99.0322 179.174 0.514304"
+say 1 "Ghost" "...[wait 0.3]ist niemand hier?"
+send_level_message "therium2_disable_object 418"
+send_level_message "therium2_enable_object 419"
+set_cam -82.6087 99.0023 181.683 0 -0.93 0 59.966
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+send_character_message 1 "set_head_target -81.1468 99.0322 169.411 1"
+say 1 "Ghost" "Ich habe nur zu finden und den Kommandanten zu töten."
+send_level_message "therium2_disable_object 419"

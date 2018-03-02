@@ -1,0 +1,27 @@
+#name "Showdown"
+#participants 2
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target -98.0629 -18.4371 -140.029 1"
+send_level_message "music_layer_override 2"
+set_character_pos 2 -98.051 -19.2692 -143.308 -85
+set_character_pos 1 -98.0305 -19.2307 -140.062 89
+send_level_message "set_camera_dof 0 0 0 0.3 8 0.5"
+set_cam -97.4843 -18.3826 -137.708 -0.44 9.34 0 16.3246
+say 2 "Amethyst" "Lucky... warten. Wir können diese arbeiten. "
+send_character_message 1 "set_head_target -97.9496 -18.4634 -141.287 1"
+say 1 "Turner" "Mein Name ist Lucky nicht."
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target -99.0137 -19.0827 -141.606 1"
+say 2 "Amethyst" "Natürlich! Es war... Churner, nicht wahr? Ich meine keine Respektlosigkeit--"
+send_character_message 1 "set_head_target -96.8437 -18.0439 -141.138 1"
+say 1 "Turner" "Wie viel für ihre Hände? Sie würden gute Rücken-Scratcher machen."
+send_character_message 2 "set_head_target -97.9852 -18.4581 -140.109 1"
+say 2 "Amethyst" "Das ist absurd. Ich bin nicht zum Verkauf."
+send_character_message 1 "set_head_target -101.179 -17.8957 -141.847 1"
+say 1 "Turner" "Ihre Schnurrhaare würde gute Pfeifenreiniger machen. Sie können ihr Mut für Violine Streicher. Beginnen wir die Ausschreibung?"
+set_cam -97.484 -18.3826 -137.708 -0.44 9.34 0 16.3246
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 2 "set_head_target -97.9852 -19.122 -140.109 1"
+say 2 "Amethyst" "Genug!"
+send_level_message "music_layer_override 3"
+make_participants_aware

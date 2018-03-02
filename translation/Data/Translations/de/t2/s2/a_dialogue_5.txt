@@ -1,0 +1,16 @@
+#name "Note-Lure"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 62.231 15.2946 -113.151 15
+send_character_message 1 "set_head_target 63.0672 15.716 -113.327 1"
+set_cam 61.6331 15.8967 -114.188 0 -132.66 0 53.9635
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Ein Buch analysieren beliebten Folklore und Spirituosen..."
+set_character_pos 1 62.231 15.3493 -113.151 15
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 63.1816 15.9284 -113.018 0 72.41 0 53.9635
+say 2 "Note" "Sagen und Legenden sprechen von Spirituosen Kreaturen und Sentients zu besitzen, ihren Willen zu dienen."
+say 2 "Note" "Sie werden gelockt an remote-Standorten mit beruhigenden Flüstern, [wait 0.3]in tiefsten Wünsche und dunkelsten Geheimnisse des Opfers zu spielen; [wait 0.3]Zum Beispiel [wait 0.3]jemand mit Phantasien von Massengenehmigung könnte Beifall hören, [wait 0.3]Komplimente oder Worte des Lobes, [wait 0.3]während die blutrünstigen Krieg hören wird, [wait 0.3]Blutvergießen und Sieg."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Wann ist ein Opfer ausreichend gelockt und isoliert, [wait 0.3]Sie werden oft getötet werden, [wait 0.3]oder noch schlimmer, [wait 0.3]besaß die Geister Bedürfnissen und Wünschen passen."

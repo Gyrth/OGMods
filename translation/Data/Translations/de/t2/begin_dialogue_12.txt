@@ -1,0 +1,21 @@
+#name "Note-Arliss"
+#participants 2
+set_character_pos 1 171.07 -48.8527 157.516 90
+send_character_message 1 "set_head_target 171.186 -48.4564 156.943 1"
+set_cam 172.131 -48.3915 157.726 0 61.86 0 56.5533
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "Ghost" "Ein Buch über das Arlissian Kollektiv..."
+send_character_message 1 "set_head_target 171.01 -48.4564 156.883 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 171.563 -48.2698 156.333 0 152.82 0 56.5533
+say 2 "Note" "Die Katzen in den südlichen Mesas des Preuwyn werden oft verwechselt, um etwas anderes als unsere Feinde zu sein; [wait 0.3]aber nicht täuschen lassen.
+say 2 "Note" "Jede Katze die Arliss angegliedert ist verpflichtet, zu betrügen, [wait 0.3]zu nutzen Sie und zu verraten Sie, solange es in ihrem Interesse ist."
+say 2 "Note" "Mitglieder des Kollektivs Arlissian sind sogar bekannt, um unvorsichtige Kits in die Wildnis zu locken, [wait 0.3]Sie schlagen und für späteren Service innerhalb des Landes Arliss zu erfassen."
+say 2 "Note" "Von dort aus [wait 0.3]Sie unterwerfen, schlagen und quälen unsere Kinder in ihre verdrehte Version von "raising", [wait 0.3]ehemalige Cinderbreathe Kaninchen Diener, um die Katzen zu züchten."
+say 2 "Note" "Rationales Denken hat aus diesen armen Kaninchen verbrannt worden, [wait 0.3]Realität zu bieten Nahrung für ihre neuen Herren Einschalten ihre einzige Griff."
+say 2 "Note" "Aber egal, [wait 0.3]Wir Kaninchen wissen, dass es immer ein Ende wie Folter; [wait 0.3]von Anfang des Missbrauchs, [wait 0.3]Wir wissen, bleiben für uns, [wait 0.3]Egal um welchen Preis. [wait 0.5]Für jeden von uns gestohlen-Kit, [wait 0.3]eine neue wirft eine Faust gegen ihre bösen Diktatoren."
+say 2 "Note" "Merkt euch meine Worte, [wait 0.3]die "Kaicalk" wird (wie sie in ihrer Sprache genannt) der erste Schritt in das Arlissian Kollektiv zu zerstören und Rückeroberung der glorreiche Cinderbreathe Reich Dominanz auf Preuwyn sein."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "... begeistern."

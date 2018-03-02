@@ -1,0 +1,20 @@
+#name "Start"
+#participants 2
+set_character_pos 2 197.227 41.9456 252.901 112
+send_level_message "music_layer_override 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_voice 1 0
+set_character_pos 1 196.031 42.2143 253.091 99
+set_cam 197.047 42.9923 254.369 0 14.92 0 86.0086
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Cobble" "Aí está."
+send_character_message 1 "set_torso_target 196.351 42.7551 252.184 1"
+send_character_message 1 "set_head_target 197.419 42.7013 252.415 1"
+send_level_message "set_camera_dof 0 0 0 0.3 4 0.1"
+say 1 "Turner" "Obrigado. Eu vê-lo voltar às bandeiras brancas quando libertei os prisioneiros."
+send_character_message 2 "set_torso_target 196.754 42.0369 252.145 1"
+send_character_message 2 "set_head_target 196.102 43.0691 252.959 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Cobble" "Boa sorte. Você vai precisar dele."
+send_level_message "start_dialogue PlacesBridge"

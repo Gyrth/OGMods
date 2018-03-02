@@ -1,0 +1,17 @@
+#name "Win"
+#participants 2
+
+set_character_pos 2 -43.9495 21.4732 -9.53729 -68
+set_character_pos 1 -43.5078 21.2974 -6.76732 84
+set_cam -41.942 21.8467 -5.20717 0 34.88 0 53.6292
+say 1 "Turner" "Ich möchte den Cache."
+say 2 "Rat" "Hier gehen Sie."
+say 1 "Turner" "Cool."
+send_global_message "levelwin"
+
+
+
+
+
+
+

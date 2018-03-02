@@ -1,0 +1,21 @@
+#name "Note-Spirits"
+#participants 2
+set_character_pos 1 -24.2959 420.679 -120.573 85
+send_character_message 1 "set_head_target -24.2018 421.01 -121.37 1"
+set_cam -25.6283 421.221 -119.993 0 -56.31 0 46.8474
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Einige Wachen Nachricht an [wait 0.3]Wer weiß..."
+set_cam -23.4018 421.168 -118.903 0 12.27 0 46.8474
+send_character_message 1 "set_head_target -24.2656 420.958 -121.095 1"
+set_character_pos 1 -24.2959 420.633 -120.573 85
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Anmeldung selbst für die Division Bau war ein Fehler. [wait 0.5]Ich wusste, dass es sein würde, [wait 0.3]Sie erzählte mir, dass es sein würde, [wait 0.3]aber hier bin ich sowieso."
+say 2 "Note" "Ich würde nehmen, ertrunken Straßen über das scouting. [wait 0.5]Ja, [wait 0.3]sicher, [wait 0.3]Ich würde erstochen und von irgendeinem zufälligen Gauner kommt mein Weg geschlagen."
+say 2 "Note" "Aber zumindest habe ich nicht mit dem Gedanken befassen, dass jeder die ich je kannte und liebte ein schreckliches sterben wird, [wait 0.3]Feuertod."
+say 2 "Note" "Ich bin nicht ein bisschen übertrieben. [wait 0.5]Man kann sagen, ich bin nur komisch alle gewünschten, [wait 0.3]aber ich weiß, dass ich Recht habe."
+say 2 "Note" "Es ist alle Folklore und Mythos, [wait 0.3]Legende und Geschichte [wait 0.3]aber merkt euch meine Worte; [wait 0.3]die Geister der Therium haben Rache an uns für jede Spitze Kretas, die wir ihnen gestohlen haben."
+say 2 "Note" "Eines Tages werden wir zu weit gehen, [wait 0.3]und die besessene Armee der Götter wird Tod über uns durch den Einsatz von unvorhersehbaren intriganten kleinen Bastarde regnen."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Nennt mich einen Idioten. [wait 0.5]Aber in den Geschichten, [wait 0.3]Mythos stellt sich immer heraus wahr, [wait 0.3]und die Neinsager leiden. [wait 0.5]Dies wird keine Ausnahme sein, [wait 0.3]denn was ist unser Leben, sondern eine Geschichte?"

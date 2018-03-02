@@ -1,0 +1,41 @@
+#name "Stranger"
+#participants 3
+set_dialogue_color 1 0.2 1 1
+set_dialogue_voice 1 6
+set_dialogue_color 2 1 0.6 0.6
+set_dialogue_voice 2 5
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_sit_injuredneck.anm\""
+set_character_pos 2 35.4557 13.2411 -9.71616 -116
+send_level_message "music_layer_override 2"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_character_message 2 "set_head_target 34.6165 13.2362 -8.9311 1"
+send_character_message 1 "set_head_target 35.251 14.0504 -9.94595 1"
+set_character_pos 3 51.4428 14.3134 -9.64214 -168
+set_character_pos 1 34.6593 13.2198 -8.94489 50
+set_cam 36.5749 13.9584 -8.57254 -18.03 64.04 0.02 73.1317
+say 1 "Aloe" "Ich gehe nie mit dir!"
+say 2 "Falcon" "Sie können Fuß, oder wir können Sie durch Ihre Ohren ziehen."
+set_character_pos 2 35.4557 13.2411 -9.71616 -77
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 3 "set_torso_target 41.8712 13.7232 -13.974 1"
+send_character_message 3 "set_head_target 50.1527 15.0414 -10.5201 1"
+send_character_message 2 "set_torso_target 32.6292 13.6399 -14.7478 0"
+send_character_message 2 "set_head_target 39.5328 14.3371 -8.87281 1"
+send_character_message 1 "set_head_target 40.5827 13.1558 -9.47385 1"
+set_cam 56.9935 15.2932 -10.687 -4.68 95.97 -2.89 19.9209
+send_level_message "set_camera_dof 0 0 0 0.3 25 1"
+say 3 "Turner" "Hallöchen!"
+send_character_message 2 "set_torso_target 38.9278 14.5533 -9.49127 1"
+say 2 "Falcon" "Hmm, sehen Sie groß und stark. Sollte einen guten Preis zu holen."
+send_character_message 3 "set_head_target 50.1527 15.0414 -10.5201 0.0434573"
+send_character_message 3 "set_torso_target 47.1963 13.7232 -15.3458 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 3 "Turner" "Schade, daß Sie sich nicht leisten können."
+send_character_message 2 "set_animation \"Data/Animations/r_combatidle2threat.anm\""
+say 2 "Falcon" "Wir werden mal sehen."
+make_participants_aware
+send_character_message 1 "set_animation \"Data/Animations/r_combatcrouch.anm\""
+send_character_message 2 "activate"
+send_level_message "music_layer_override 3"
+send_level_message "start_dialogue Places2"

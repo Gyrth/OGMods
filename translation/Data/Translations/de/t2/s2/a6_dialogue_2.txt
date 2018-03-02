@@ -1,0 +1,15 @@
+#name "Note-Guardsmen"
+#participants 2
+set_character_pos 1 -287.952 -86.4121 -188.078 -171
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target -288.837 -86.6511 -187.905 1"
+set_cam -287.019 -86.4005 -190.205 0 147 0 32.4078
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Eine antike Note... [wait 0.3]hart wie die Hölle, in diesem Licht zu lesen."
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam -286.962 -86.1551 -187.624 0 77.45 0 39.0774
+say 2 "Note" "Wenn Sie die Tan Dämon erblicken, [wait 0.3]klingeln Sie bitte und wir werden in den Felsen verstecken."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "Wenn er verlassen hat, [wait 0.3]die Trommel schlagen und wir kommen wieder. [wait 0.5]Wir gießen Tapferkeit auf eure Seelen. [wait 0.5]Die Geister können Sie ersparen."

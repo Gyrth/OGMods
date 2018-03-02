@@ -1,0 +1,14 @@
+#name "Win"
+#participants 2
+set_character_pos 2 19.3999 4.91066 3.08065 -97
+set_character_pos 1 18.4647 4.95933 3.72757 0
+set_cam 19.4341 5.64064 4.30153 0 31.45 0 90
+say 1 "Turner" "Das war nicht so schlimm.
+say 1 "Turner" "Es sollte nicht zu hart, um hier zu überleben sein."
+say 1 "Turner" "Wir müssen nur lange genug, um zu entkommen zu halten."
+say 2 "Midnight" "Ich bin mir ziemlich sicher, das war nur der Eröffnungsveranstaltung, um unsere Fähigkeiten zu testen."
+say 2 "Midnight" "Für Flucht... viel Glück.
+say 2 "Midnight" "Amethyst läuft die Arena.
+say 2 "Midnight" "Solange sie lebt, werden wir nie weg bekommen."
+say 1 "Turner" "Sie müssen nur aufhören zu leben, dann."
+send_global_message "levelwin"

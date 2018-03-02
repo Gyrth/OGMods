@@ -19,6 +19,7 @@ available_languages_path = '/V2/Http.svc/GetLanguagesForTranslate'
 language_names_path = '/V2/Http.svc/GetLanguageNames'
 
 target = 'fr-fr'
+source_language = "en"
 text = 'Hello'
 params = '?to=' + target + '&text=' + urllib.parse.quote (text)
 
@@ -76,25 +77,12 @@ def get_friendly_name(langauge_code):
         all_languages.append(language.text)
 
 def read_level_files(level_info):
-    languages = ["fr-fr"]
-
-    for language in languages:
-        for info in level_info:
-            try:
-                with open(info[0]) as f:
-
-                    path = "translation/Data/Levels/" + info[1]
-                    #print("fulll path ", info[0])
-                    #print("level_path ", path + "/" + info[2])
-                    #print("language ", language)
-                    #os.makedirs(path, exist_ok=True)
-                    remove_dialogue(info[0], info[1], info[2], language)
-                    #translate_level(info[0], path + "/" + info[2], language)
-
-                    #tree = etree.ElementTree(new_element)
-                    #tree.write(path + info[2], pretty_print=True, xml_declaration=True, encoding='utf-8', method="xml")
-            except IOError:
-                pass
+    for info in level_info:
+        try:
+            with open(info[0]) as f:
+                remove_dialogue(info[0], info[1], info[2], language)
+        except IOError:
+            pass
 
 def remove_dialogue(full_level_path, relative_path, file, language):
     with open(full_level_path) as f:
@@ -155,8 +143,8 @@ def remove_dialogue(full_level_path, relative_path, file, language):
 
             #tree.write(new_level_path + "/" + file, pretty_print=True, xml_declaration=True, encoding='utf-8', method="xml")
 
-def get_translation(text, language):
-    params = '?to=' + language + '&text=' + urllib.parse.quote (text)
+def get_translation(text, to_language):
+    params = '?from=' + source_language + '&to=' + to_language + '&text=' + urllib.parse.quote (text)
     headers = {'Ocp-Apim-Subscription-Key': subscriptionKey}
     conn = http.client.HTTPSConnection(host)
     conn.request ("GET", translation_path + params, None, headers)
@@ -164,7 +152,7 @@ def get_translation(text, language):
 
     new_element = etree.fromstring(response.read())
     tree = etree.ElementTree(new_element)
-    print(text, new_element.text)
+    #print(text, new_element.text)
 
     return new_element.text
 
@@ -230,14 +218,13 @@ def translate_txt(full_level_path, relative_path, file, language):
                         # No [ or ] found in this line
                         dialogue.append(dia)
                 for orig_text in dialogue:
-                    #print("Going to translate " + orig_text)
                     translation = get_translation(orig_text, language)
                     if not translation is None:
+                        print( orig_text + " --------- " + translation)
                         line = line.replace(orig_text, translation)
-                print(line)
                 lines[line_index] = line
 
-        dialogue_path = "translation/Data/Dialogue/" + language
+        dialogue_path = "translation/Data/Translations/" + language
         os.makedirs(dialogue_path + "/" + relative_path, exist_ok=True)
 
         new_file_path = "/" + relative_path + "/" + file
@@ -256,9 +243,9 @@ def translate_txt(full_level_path, relative_path, file, language):
 dialogue_info = []
 find_dialogue_txt("translation/Data/Dialogue/", dialogue_info)
 for info in dialogue_info:
-    translate_txt(info[0], info[1], info[2], "fr-fr")
+    translate_txt(info[0], info[1], info[2], "de")
 
-#translate_txt()
+#get_translation("hello", "en", "pt")
 
 #get_supported_languages()
 #get_friendly_names("ko")

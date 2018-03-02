@@ -1,0 +1,18 @@
+#name "Note-Cicada"
+#participants 2
+set_character_pos 1 -40.0833 106.178 172.688 0
+send_character_message 1 "set_head_target -39.2955 106.554 172.737 1"
+set_cam -40.7468 106.734 173.762 0 -45.79 0 50.3116
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Eine Antwort auf ein Gardist Brief..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -39.2995 106.833 173.504 0 33.49 0 32.4243
+say 2 "Note" "Eine Zikade? [wait 0.5]Wirklich? [wait 0.5]Über Kopf fliegen, [wait 0.3]in Preuwyn? Sehe ich aus wie einen Idioten?"
+say 2 "Note" "Mit einigen Wette kamst mit deinen Freunden du, [wait 0.3]versuchen, die lächerlichste Behauptung machen möglich und sehen, ob ich darauf hereinfallen?"
+say 2 "Note" "Ich weiß zwei Dinge über Ouran Zikaden: [wait 0.3]Zum einen [wait 0.3]Sie gehen nie in Preuwyn. [wait 0.5]Die Kälte wird sie lebendig zu essen. [wait 0.3]Zwei, [wait 0.3]Sie sind sehr, [wait 0.3]sehr selten unterwegs wenn es Paarungszeit ist nicht."
+say 2 "Note" "Zikaden, [wait 0.3]Ouran enthalten, [wait 0.3]nur alle siebzehn Jahre Graben, [wait 0.3]Wann ist die Paarungszeit in vollem Umfang wirksam. 672 ist keine Paarung Saisonjahr- [wait 0.3]nicht einmal annähernd."
+say 2 "Note" "Die Idee, dass Sie ein lebendig Ouran Zikade ohne Ihr Trommelfell vernichtende gesehen sollten Sie verschenken, [wait 0.3]selbst wenn deine Geschichte wahr ist."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Gehen Sie, jemand zu berauben, [wait 0.3]Sie Obst."

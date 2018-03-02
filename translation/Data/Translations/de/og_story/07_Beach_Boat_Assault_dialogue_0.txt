@@ -1,0 +1,38 @@
+#name "Cat"
+#participants 2
+set_dialogue_color 2 0.9 0.9 1
+set_dialogue_voice 2 3
+set_character_pos 2 14.8402 18.2995 162.016 -90
+set_character_pos 1 14.8517 18.3114 168.302 91
+set_cam 14.2406 19.3305 171.685 -2.53 -7.24 0 15.2088
+send_character_message 1 "empty_hands"
+send_character_message 2 "set_torso_target 16.0058 18.108 165.688 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_level_message "music_layer_override 2"
+say 2 "Silver" "Du bist derjenige dann all diese Aufregung verursacht?"
+send_character_message 2 "set_head_target 14.2262 19.6947 162.845 1"
+say 2 "Silver" "Unsere lokalen Aktivitäten stören?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "Du bist also eine Katze."
+send_character_message 2 "set_head_target 14.8418 19.2915 168.309 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "Was für eine scharfe Beobachtung. Ich sehe Sie nicht besiegen Ihre Feinde mit Ihrem Rapier Witz."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Ich brauche dieses Schiff."
+send_character_message 2 "set_head_target 18.4259 19.0183 166.672 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+say 2 "Silver" "Und was wollen Sie tun? Segeln in den Sonnenuntergang? Oder den Mondaufgang? Können Sie sogar eine Pinne aus einem Topmast erzählen?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "Nicht mein Problem. Ich habe ein Versprechen an einem Freund."
+send_character_message 2 "set_head_target 14.9884 19.1547 167.772 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Silver" "Versprechen sind Fesseln für die schwachen, aber du... du bist stark. Für ein Kaninchen, natürlich. Stärke sollte belohnt werden."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "Was würde es dauern, bis um Sie auf meine Seite zu bringen? Geld? Gefährten? Oder einfach mehr Möglichkeiten, zu töten?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Turner" "Wie starte ich durch Herausschneiden der Zunge."
+send_character_message 1 "equip_item 4152"
+send_level_message "music_layer_override 4"
+make_participants_aware

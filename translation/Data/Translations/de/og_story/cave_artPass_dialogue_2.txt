@@ -1,0 +1,32 @@
+#name "Boss"
+#participants 3
+send_character_message 3 "set_torso_target -210.95 139.192 110.708 0.0206504"
+send_character_message 3 "set_head_target -214.01 140.147 104.198 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target -212 139.612 110.42 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+send_character_message 3 "set_animation \"Data/Animations/c_actionidle.anm\""
+send_level_message "music_layer_override -2"
+set_character_pos 1 -202.894 133.456 123.886 121
+set_character_pos 3 -212.077 138.719 110.363 0
+set_character_pos 2 -209.162 137.533 110.091 -163
+set_dialogue_color 3 0.7 0.4 1.0
+set_dialogue_voice 3 12
+set_cam -196.148 134.76 129.842 -3.43 38.38 6.69 43.3988
+say 1 "Turner" "Es gibt Schiefer--das treffen muss."
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+set_cam -206.965 138.069 111.888 4.59 63.46 -0.07 43.3988
+say 2 "Slate" "Warum sind wir hier? Ich kann mich mit diesem rauschenden Wasser denken nicht hören."
+send_character_message 3 "set_head_target -209.301 138.379 110.048 1"
+send_character_message 3 "set_torso_target -211.232 139.098 111.048 1"
+say 3 "Hyacinth" "Sie haben nur Ihre eigene Frage beantwortet. Amethyst mag nicht Lauscher."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 3 "set_torso_target -211.087 139.098 111.022 0.952325"
+say 2 "Slate" "Ich habe etwas großes für Sie diesmal. Wenn ich Ihnen sage, müssen Sie meine Kinder loslassen."
+send_character_message 3 "set_torso_target -211.087 139.098 111.022 0"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 3 "Hyacinth" "Ich habe nicht alles Flop-Ohren zu tun. Sag mir, was Sie wissen."
+set_character_pos 2 -210.078 137.734 110.123 -163
+send_character_message 2 "set_animation \"Data/Animations/r_talking_offset.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_talking.anm\""
+set_character_pos 3 -211.645 138.719 110.063 4

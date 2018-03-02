@@ -1,0 +1,23 @@
+#name "Start"
+#participants 3
+set_character_pos 2 4.44411 -1.76967 0.832846 -176
+set_character_pos 1 0.0412091 -1.82671 1.14381 0
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Guten Morgen, du glückliche Gliedmaßen."
+say 3 "Cat" "Warum sage ich Glück?"
+say 3 "Cat" "Da man von Ihnen bekommt zu leben!"
+say 3 "Cat" "Natürlich ist es so viel Glück, für das andere nicht."
+set_cam 0.539544 -1.15159 1.84516 0 32.36 0 90
+say 1 "Turner" "Direkthilfe?"
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Dies ist ein Vorsingen."
+say 3 "Cat" "Bist du stark genug, um zu überleben?"
+set_cam 3.48666 -1.60474 1.88456 7.68 -33.21 0 90
+say 2 "Rabbit" "Ich bin."
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Beweisen Sie es. Ihre neugierige Kameraden zu töten."
+set_cam 0.539544 -1.15159 1.84516 0 32.36 0 90
+say 1 "Turner" "Wir müssen nicht kämpfen. Wir können zusammen - arbeiten"
+set_cam 3.48666 -1.60474 1.88456 7.68 -33.21 0 90
+say 2 "Rabbit" "Sterben!"
+make_participants_aware

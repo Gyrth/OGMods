@@ -1,0 +1,18 @@
+#name "Note-Cicada"
+#participants 2
+set_character_pos 1 -40.0833 106.178 172.688 0
+send_character_message 1 "set_head_target -39.2955 106.554 172.737 1"
+set_cam -40.7468 106.734 173.762 0 -45.79 0 50.3116
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Uma resposta à carta de um guarda..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -39.2995 106.833 173.504 0 33.49 0 32.4243
+say 2 "Note" "Uma cigarra? [wait 0.5]Realmente? [wait 0.5]Voando de sobrecarga, [wait 0.3]em Preuwyn? Eu pareço um idiota?"
+say 2 "Note" "Veio com uma aposta com seus amigos, [wait 0.3]tentar fazer a afirmação mais ridícula possível e ver se eu cair nessa?"
+say 2 "Note" "Eu sei duas coisas sobre as cigarras Ouran: [wait 0.3]Por um lado, [wait 0.3]Eles nunca vão para Preuwyn. [wait 0.5]O frio vai comê-los vivos. [wait 0.3]Dois, [wait 0.3]Eles são muito, [wait 0.3]muito raramente para fora e aproximadamente quando não é temporada de acasalamento."
+say 2 "Note" "Cigarras, [wait 0.3]Ouran incluído, [wait 0.3]só toca em dezessete anos, [wait 0.3]Quando a sua época de acasalamento está em pleno vigor. 672 não é um ano de temporada acasalamento- [wait 0.3]Nem de perto."
+say 2 "Note" "A ideia que você viu uma cigarra de Ouran vivo sem seus tímpanos estilhaçando deveria dar-te, [wait 0.3]mesmo que sua história é verdadeira."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Roubar a outra pessoa, [wait 0.3]Você é fruta."

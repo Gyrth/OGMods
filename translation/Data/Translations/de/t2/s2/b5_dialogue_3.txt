@@ -1,0 +1,14 @@
+#name "Empry"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -0.904313 85.3194 52.8777 -51
+send_character_message 1 "set_torso_target -0.36788 85.5392 54.0251 1"
+send_character_message 1 "set_head_target 1.10885 86.6539 57.6686 1"
+set_cam -2.87722 85.8259 51.6345 0 -132.21 0 43.4758
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_torso_target -0.242106 85.8214 53.9781 1"
+send_character_message 1 "set_head_target 3.66838 86.3729 57.288 1"
+say 1 "Ghost" "Auf meinem Weg nach Hause..."
+send_global_message "levelwin eb4"

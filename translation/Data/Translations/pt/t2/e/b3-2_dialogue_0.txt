@@ -1,0 +1,90 @@
+#name "Meet"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.7 0.89
+set_dialogue_voice 2 11
+set_character_pos 2 -15.7424 309.746 20.2063 120
+send_character_message 2 "set_animation \"Data\Animations\r_woundedarmedcrouch.anm\""
+send_character_message 2 "set_eye_dir -17.0319 310.327 20.3228 1"
+send_character_message 2 "set_torso_target -15.5314 309.177 20.6059 1"
+send_character_message 2 "set_head_target -16.5814 309.615 20.0384 1"
+set_character_pos 1 -17.4328 309.724 22.2247 129
+send_character_message 1 "set_torso_target -18.1078 310.16 21.7423 0.0434558"
+send_character_message 1 "set_head_target -17.5544 310.417 19.6103 1"
+set_cam -18.5401 310.209 24.5137 0 -6.12 0 73.8658
+say 1 "Ghost" "..."
+send_character_message 1 "set_torso_target -17.8772 309.763 21.3083 1"
+send_character_message 1 "set_head_target -18.4391 309.632 20.3302 1"
+say 1 "Ghost" "O que diabos aconteceu aqui?"
+send_character_message 1 "set_head_target -18.4339 309.635 20.325 1"
+send_character_message 2 "set_head_target -16.5871 309.616 20.0351 1"
+send_character_message 2 "set_torso_target -15.5366 309.186 20.5932 1"
+set_cam -15.0266 309.824 19.4961 0 108.9 0 42.7666
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_torso_target -17.8772 309.763 21.3083 0.00380564"
+set_character_pos 1 -18.0315 309.724 20.4941 150
+say 1 "Ghost" "Onde foi Bijou?"
+set_character_pos 1 -18.0315 309.724 20.4941 148
+set_cam -14.7941 309.869 19.4975 0 108.9 0 42.7666
+send_character_message 1 "set_torso_target -18.6128 309.6 19.971 0.00459528"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target -17.8514 309.953 19.6271 1"
+send_character_message 2 "set_head_target -17.3575 310.142 19.7868 1"
+send_character_message 2 "set_torso_target -16.5084 310.079 19.5605 1"
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidlearmedthreat.anm\""
+say 2 "Bijou" "[wait 0.4]D[wait0.2]se mexa!"
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidlearmed.anm\""
+send_character_message 2 "set_torso_target -16.1941 309.402 19.6941 1"
+send_character_message 1 "set_torso_target -17.0209 309.989 19.8447 1"
+send_character_message 1 "set_head_target -16.524 310.407 20.3867 1"
+set_character_pos 1 -18.0295 309.724 20.4952 68
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Bijou! [wait 0.3]O que aconteceu?"
+set_cam -16.2915 310.349 20.0903 0 -0.75 0 39.8983
+send_character_message 1 "set_head_target -16.6183 310.407 19.6689 1"
+send_character_message 1 "set_torso_target -18.3396 310.17 18.9445 0"
+set_character_pos 1 -18.0295 309.724 20.4952 34
+send_character_message 2 "set_head_target -17.6647 310.332 20.4321 1"
+send_character_message 2 "set_torso_target -17.3362 310.408 19.9931 1"
+set_character_pos 2 -16.0384 309.746 19.431 -157
+say 2 "Bijou" "[wait 0.5]Amos!?"
+set_cam -16.4705 310.44 20.0751 0 -28.16 0 39.8983
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 2 "Bijou" "Amos, [wait 0.2]Onde você esteve? [wait 0.3]Você sabe o que está acontecendo?"
+send_character_message 1 "set_eye_dir -16.3611 310.426 19.4759 1"
+set_cam -16.8709 310.379 20.3431 0 98.81 0 40.8759
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+say 1 "Amos" "Eu ia te perguntar isso. [wait 0.2]Mas está tudo bem."
+send_character_message 1 "set_eye_dir -18.2749 309.805 19.1419 1"
+send_character_message 1 "set_head_target -17.5828 310.136 19.3615 1"
+say 1 "Amos" "Tanto quanto sei, [wait 0.3]Eles tudo estão sob controle. [wait 0.4]Os monstros, [wait 0.1]Eu quero dizer."
+set_cam -17.0822 310.278 19.6509 0 -78.21 0 55.1584
+send_character_message 2 "set_torso_target -16.9055 310.311 19.8271 1"
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidlearmed2.anm\""
+say 2 "Bijou" "[wait 0.3]Por quem? [wait 0.3]Os guardas?"
+send_character_message 1 "set_torso_target -17.1847 309.702 19.9433 0.746633"
+send_character_message 1 "set_eye_dir -16.2662 310.282 19.5272 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_head_target -16.544 310.219 19.7484 1"
+set_cam -17.7007 310.278 19.4815 0 166.83 0 45.7791
+say 1 "Amos" "N- [wait 0.2]os guardas estão mortos. [wait 0.2]Tanto quanto sei, [wait 0.4]nenhum sobreviveu."
+send_character_message 2 "set_eye_dir -16.2849 310.283 19.3111 1"
+set_cam -17.0602 310.239 19.3204 0 -99.55 0 45.7791
+say 1 "Amos" "Seu ombro; [wait 0.3]Você está bem?"
+send_character_message 2 "set_eye_dir -17.0063 310.526 19.4746 1"
+send_character_message 2 "set_torso_target -16.7648 309.591 19.5399 1"
+set_cam -16.3931 310.392 20.0216 0 -20.91 0 45.7791
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_worriedpose_1.anm\""
+say 2 "Bijou" "Estou coberto de sangue, [wait 0.2]com medo da minha cabeça, [wait 0.4]e tinha que matar alguma coisa de monstro assassino insano."
+send_character_message 2 "set_head_target -17.6647 310.491 20.4321 1"
+send_character_message 2 "set_torso_target -16.9471 311.699 19.9742 1"
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidlearmed2.anm\""
+say 2 "Bijou" "Mas, [wait 0.2]Não [wait 0.3]Estou bem [wait 0.1]realmente."
+set_cam -15.7998 310.326 18.9444 0 133.67 0 39.4109
+send_character_message 1 "set_torso_target -17.5703 310.023 19.398 0"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+say 1 "Amos" "[wait 0.3]As ligaduras segurando bem?"
+send_character_message 2 "set_eye_dir -16.1314 310.345 18.9909 1"
+send_character_message 2 "set_head_target -16.9724 310.133 19.3715 1"
+say 2 "Bijou" "Não no começo. [wait 0.3]Mas tenho que parar o sangramento. [wait 0.1]Estou bem. [wait 0.4]Temos que sair daqui."

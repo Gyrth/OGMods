@@ -1,0 +1,27 @@
+#name "Dog"
+#participants 2
+send_character_message 1 "set_head_target 215.297 87.6391 -32.178 1"
+send_character_message 2 "set_torso_target 214.59 87.2852 -32.801 1"
+send_character_message 2 "set_head_target 213.329 86.3808 -34.6267 1"
+set_dialogue_color 2 1 0.4 0.4
+set_dialogue_voice 2 9
+set_character_pos 2 215.487 86.6398 -32.2088 -172
+set_character_pos 1 208.468 80.916 -36.0266 -23
+set_cam 217.375 88.6209 -32.0752 -34.88 77.01 1.06 41.5768
+send_level_message "music_layer_override 2"
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 1 "Turner" "Sie müssen StoneFist sein."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Stonefist" "Sehr clever. Ich erinnere mich nicht, welcher Slave seid. Sie alle sehen gleich aus. Nun gehe wieder an die Arbeit, bevor ich Sie die Treppe hinunter zu treten."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Turner" "So sind Sie einen "Hund" genannt. Sieht eher aus wie ein Wolf, gepaart mit einer Ratte. Welche war deine Mutter?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Stonefist" "Oh ich verstehe. Sie wollen kämpfen. Sie haben keine Ahnung, wie viele von euch habe ich schon gegessen?"
+set_character_pos 1 209.057 80.916 -35.6463 -23
+set_cam 208.142 80.9907 -36.6224 25.96 -131.36 -3.11 41.5768
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "Vielleicht ich werde Schlitz offen Ihren Bauch und Count."
+send_level_message "music_layer_override 4"
+make_participants_aware
+send_level_message "start_dialogue Places"
+send_character_message 2 "activate"

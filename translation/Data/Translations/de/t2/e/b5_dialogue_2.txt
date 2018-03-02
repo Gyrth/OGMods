@@ -1,0 +1,18 @@
+#name "Hammer"
+#participants 3
+set_character_pos 2 108.268 -53.8238 296.357 175
+send_character_message 2 "set_animation \"Data/Animations/r_hammering_wall_loop.anm\""
+set_character_pos 1 109.34 -53.9554 294.799 -123
+send_character_message 1 "set_head_target 108.207 -52.832 296.275 1"
+set_cam 109.252 -53.3507 292.996 0 171.69 0 40.0857
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Amos" "Hölle, [wait 0.3]Ich beneide Sie nicht."
+send_character_message 2 "set_head_target 109.023 -53.2275 294.635 1"
+say 2 "???" "Oh, ist es nicht so schlimm. [wait 0.5]Arbeiten ins Schwitzen ist gut für Sie."
+send_character_message 1 "set_head_target 107.91 -52.8155 295.243 1"
+send_character_message 2 "set_head_target 107.812 -53.1486 296.334 1"
+say 2 "???" "Schichten über Schichten von remade Stein für eine hundert Jahre alte Stiftung zu reparieren versuchen, [wait 0.3]aber..."
+send_character_message 1 "set_head_target 108.278 -52.8714 296.277 1"
+send_character_message 2 "set_head_target 107.758 -52.7023 296.101 1"
+say 2 "???" "Nicht das beste für Ihre Geduld."

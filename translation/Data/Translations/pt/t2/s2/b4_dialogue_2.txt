@@ -1,0 +1,51 @@
+#name "Gate"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 13
+set_dialogue_color 2 1 1 1
+set_dialogue_color 3 0 0.52 0.95
+set_character_pos 2 74.2221 6.46984 -126.007 80
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidle.anm\""
+send_character_message 2 "set_torso_target 74.3541 6.26543 -126.524 1"
+send_character_message 2 "set_head_target 74.3141 6.84904 -126.963 1"
+set_character_pos 1 74.4294 6.4501 -127.759 -90
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_torso_target 74.4538 6.65118 -127.024 1"
+send_character_message 1 "set_head_target 74.2924 7.14237 -126.177 1"
+set_cam 72.6056 6.88574 -124.62 0 -38.7 0 30.061
+send_level_message "set_camera_dof 0 0 0 0.3 4 2"
+say 1 "Ghost" "Como está suas feridas?"
+send_character_message 2 "set_torso_target 74.3655 6.9539 -126.587 1"
+send_character_message 2 "set_head_target 74.4425 7.1793 -127.387 1"
+say 2 "???" "Só ter sido machucado. [wait 0.5]Eles não me mataram como os outros..."
+send_character_message 1 "set_head_target 74.2716 7.06587 -126.198 1"
+send_character_message 1 "set_torso_target 74.4538 6.65118 -127.024 0"
+send_character_message 2 "set_head_target 74.4133 6.98524 -127.348 1"
+send_character_message 2 "set_torso_target 74.321 6.7572 -126.512 1"
+say 2 "???" "Mas dói tanto."
+send_character_message 1 "set_head_target 75.2258 7.45148 -126.713 1"
+set_cam 71.5433 6.79803 -129.625 0 -132.22 0 30.061
+say 1 "Ghost" "Você sabe como usar estes santuários?"
+send_character_message 2 "set_head_target 74.4133 6.81366 -127.348 1"
+send_character_message 2 "set_torso_target 74.321 6.60348 -126.512 1"
+send_character_message 1 "set_torso_target 74.4538 6.65118 -127.024 1"
+send_character_message 1 "set_head_target 74.3521 6.99771 -126.514 1"
+say 2 "???" "Sim, [wait 0.3]Eu só descobri isso. [wait 0.5]E uma vez que passei, [wait 0.3]Eles estavam esperando por mim..."
+send_character_message 2 "set_head_target 73.8464 6.94366 -127.243 1"
+say 2 "???" "Como saberiam algo assim?"
+send_character_message 2 "set_torso_target 74.3356 6.34928 -126.489 1"
+send_character_message 2 "set_head_target 74.4716 7.15075 -127.453 1"
+set_cam 75.4513 7.1511 -126.482 -6.53 100.61 0 30.061
+say 2 "???" "E - [wait 0.3]Você! [wait 0.5]Siga-me por aqui. [wait 0.5]Eu vou te levar de volta para o acampamento."
+send_character_message 1 "set_head_target 74.1124 6.86336 -126.561 1"
+send_character_message 1 "set_torso_target 74.4538 6.65118 -127.024 0"
+set_cam 74.7427 7.0061 -125.085 0 16.07 -0.05 30.061
+send_level_message "set_camera_dof 0.3 1.5 1 0.3 3 1"
+say 3 "Ghost (Thinking)" "... ele não sabe quem eu sou."
+send_character_message 1 "set_head_target 74.4345 6.96514 -126.709 1"
+say 3 "Ghost (Thinking)" "Nesse caso, [wait 0.3]Aposto que o resto de sua tripulação também não sabe..."
+send_character_message 1 "set_torso_target 74.4594 7.02181 -127.068 1"
+send_character_message 1 "set_head_target 74.4345 7.0797 -126.709 1"
+say 1 "Ghost" "Tudo bem. [wait 0.5]Vamos repassar."
+send_global_message "levelwin b"

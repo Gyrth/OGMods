@@ -1,0 +1,82 @@
+#name "Victory"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 12.2548 22.0998 -156.598 31
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.940494"
+send_character_message 2 "set_head_target 18.2406 16.412 -158.864 1"
+set_character_pos 1 19.3725 15.9727 -159.199 -161
+send_character_message 1 "set_eye_dir 13.3725 22.8778 -157.355 1"
+send_character_message 1 "set_head_target 16.4585 16.6055 -158.065 1"
+set_cam 20.4916 16.391 -160.525 0 130.35 0 28.7572
+say 1 "" "..."
+set_cam 20.4916 16.391 -160.525 0 130.35 0 28.7572
+send_character_message 2 "set_head_target 18.2406 16.412 -158.864 1"
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.940494"
+set_character_pos 2 12.2548 22.0998 -156.598 31
+send_character_message 1 "set_head_target 15.9084 18.2522 -158.529 1"
+say 1 "Ghost" "[wait 0.2]Jairo!"
+set_cam 20.4916 16.391 -160.525 0 130.35 0 28.7572
+send_character_message 2 "set_head_target 18.2406 16.412 -158.864 1"
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.940494"
+set_character_pos 2 12.2548 22.0998 -156.598 31
+send_character_message 1 "set_head_target 16.353 18.6928 -156.961 1"
+say 1 "Ghost" "Du kannst jetzt rauskommen!"
+send_character_message 1 "set_head_target 16.353 18.6928 -156.961 1"
+send_character_message 2 "set_head_target 14.3797 15.6139 -157.604 1"
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.416991"
+set_character_pos 2 12.2548 21.9503 -156.598 31
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam 15.3621 20.0244 -158.924 30 130.35 0 28.7572
+say 2 "Jairo" "Was..."
+send_character_message 1 "set_head_target 14.1296 22.0149 -157.348 1"
+set_cam 13.5727 21.475 -157.638 30 130.35 0 28.7572
+send_character_message 2 "set_head_target 18.9149 16.5787 -159.015 1"
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.849944"
+say 2 "Jairo" "Was hast du gemacht?"
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.849944"
+send_character_message 2 "set_head_target 18.9149 16.5787 -159.015 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+set_cam 18.0114 16.459 -158.965 0 -79.65 0 28.7572
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "Ich neutralisiert sie."
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.75604"
+send_character_message 2 "set_head_target 18.9148 20.3254 -159.015 1"
+set_cam 13.3219 22.6433 -157.496 0 130.35 0 28.7572
+say 2 "Jairo" "Ja, [wait 0.2]"aber...""
+set_cam 13.3219 22.6433 -157.496 0 130.35 0 28.7572
+send_character_message 2 "set_head_target 18.7068 19.2569 -159.319 1"
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.606377"
+say 2 "Jairo" "Keiner von ihnen sind tot?"
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.606377"
+send_character_message 2 "set_head_target 18.7068 19.2569 -159.319 1"
+set_cam 18.1146 16.483 -158.797 0 -71.33 0 28.7572
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+say 1 "Ghost" "[wait 0.3]Also?"
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.304926"
+send_character_message 2 "set_head_target 18.5803 20.3522 -161.624 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+set_cam 13.5294 22.6512 -156.918 0 103.94 0 25.2778
+say 2 "Jairo" "...[wait 0.3]feine."
+set_cam 13.5294 22.6512 -156.918 0 103.94 0 25.2778
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 0.304926"
+send_character_message 2 "set_head_target 18.8912 19.2765 -160.609 1"
+say 2 "Jairo" "Möchten Sie diese Scumbags, für einen anderen Tag zu leben..."
+send_character_message 1 "set_head_target 14.1296 22.0132 -157.348 1"
+send_character_message 1 "set_eye_dir 13.3725 22.8778 -157.355 0.999757"
+set_cam 13.5294 22.6512 -156.918 0 103.94 0 25.2778
+send_character_message 2 "set_eye_dir 18.1324 15.9225 -159.414 1"
+send_character_message 2 "set_head_target 18.695 16.8078 -159.153 1"
+say 2 "Jairo" "Dann ist das auf Sie."
+send_character_message 1 "set_head_target 14.1296 22.0132 -157.348 1"
+send_character_message 1 "set_eye_dir 13.3725 22.8778 -157.355 0.999757"
+set_cam 19.2137 16.4662 -160.879 0 -175.8 0 25.2778
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Es ist nicht notwendig, sie zu töten."
+send_character_message 1 "set_eye_dir 19.0126 16.1883 -159.24 0"
+send_character_message 1 "set_head_target 14.9898 15.8652 -157.374 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+say 1 "Ghost" "wie auch immer, [wait 0.3]Wir werden eine verhören, [wait 0.3]oder nicht?"
+send_global_message "levelwin nl"

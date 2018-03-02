@@ -1,0 +1,18 @@
+#name "Note-Transfer"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 20.3913 420.051 -110.579 -82
+send_character_message 1 "set_head_target 20.5423 420.633 -109.84 1"
+set_cam 18.3399 420.755 -110.735 0 -107.72 0 47.1376
+say 1 "Ghost" "Einem Gefängnis Übertragungsprotokoll im durch die Wache gebracht."
+send_character_message 1 "set_head_target 20.5444 420.479 -109.808 1"
+set_cam 20.1248 420.737 -109.45 0 -23.8 0 47.1376
+set_character_pos 1 20.3913 420.092 -110.579 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "40. der Spurhelm, [wait 0.3]672. [wait 0.5]Thema wurde festgenommen und befindet sich in der Kolonie Gründen Gefängnis."
+say 2 "Note" "Ehemalige Gehäuse wäre der Empry, [wait 0.3]Obwohl sein Aussehen und Verhalten würde nicht es vorschlagen."
+say 2 "Note" "Thema ist ein blauer Hoodie und leichte Lederrüstungen tragen. [wait 0.5]Da seine künftige Zusammenarbeit offenbar notwendig ist, [wait 0.3]eine Leibesvisitation ist nicht erforderlich."
+say 2 "Note" "Seine Schwester, [wait 0.3]Bijou wurde nicht von seiner Festnahme informiert. [wait 0.5]Bedingungen in den Gefängnissen sollte nicht zu nervig zu ihm sein, [wait 0.3]in Anbetracht seiner Herkunft und Leben in den Slums."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Geplante Besprechung mit seiner Anwesenheit sollte bei Sonnenuntergang durchgeführt werden. [wait 0.5]Mindestens zwei Beamte müssen vorhanden sein. [wait 0.5]Sein Engagement ist wichtig."

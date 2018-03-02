@@ -1,0 +1,110 @@
+#name "Meet"
+#participants 4
+set_character_pos 1 0.493515 420.276 -85.6699 -15
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_head_target 15.3297 420.411 -83.6625 1"
+set_character_pos 3 17.0052 420.103 -83.428 -103
+send_character_message 3 "set_animation \"Data\Animations\sitledge.anm\""
+send_character_message 3 "set_eye_dir 16.4 420.813 -81.48 0.995635"
+send_character_message 3 "set_head_target 16.6355 420.584 -82.2086 1"
+set_character_pos 2 16.4226 420.124 -81.1992 92
+send_character_message 2 "set_animation \"Data\Animations\leanovertable.anm\""
+send_character_message 2 "set_eye_dir 17.0058 420.715 -83.1355 1"
+send_character_message 2 "set_head_target 16.5195 420.589 -81.9414 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+set_cam -1.50605 420.367 -86.192 0 -103.05 0 14.797
+say 2 "???" "Es gibt eine Sache, die ich hier nicht verstehe..."
+send_character_message 3 "set_head_target 16.6355 420.584 -82.2086 1"
+send_character_message 2 "set_head_target 16.6715 420.664 -82.0715 1"
+set_cam 15.5817 420.615 -84.1288 0 -163.05 0 18.9691
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "???" "Warum ihn?"
+send_character_message 2 "set_eye_dir 17.005 420.715 -83.1357 1"
+send_character_message 3 "set_animation \"Data\Animations\sitinterested.anm\""
+send_character_message 2 "set_head_target 16.9574 420.676 -83.1121 1"
+send_character_message 3 "set_head_target 16.388 420.8 -81.5764 1"
+set_cam 16.795 420.65 -79.5826 0 3.18 0 18.9691
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 3 "????" "Die blaue Jacke?"
+send_character_message 2 "set_eye_dir 17.005 420.715 -83.1357 1"
+set_cam 16.795 420.65 -79.5826 0 3.18 0 18.9691
+send_character_message 3 "set_head_target 16.5113 420.794 -81.57 1"
+send_character_message 2 "set_head_target 16.3257 420.676 -82.581 1"
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 2 "???" "Ja- [wait 0.3]derjenige mit der Hand Narbe. [wait 0.5]Unangenehme Arbeit, [wait 0.3]dort."
+send_character_message 2 "set_eye_dir 17.005 420.715 -83.1357 1"
+send_character_message 2 "set_head_target 16.6126 420.669 -82.6163 1"
+set_cam 17 420.78 -82.7562 0 153.48 0 18.8831
+say 2 "???" "Ich habe ihn noch nie selbst gesehen."
+send_character_message 3 "set_torso_target 16.8509 420.563 -83.3984 0.0262226"
+set_cam 17 420.78 -82.7562 0 153.48 0 18.8831
+send_character_message 2 "set_eye_dir 15.8936 420.724 -83.2702 0.656287"
+send_character_message 2 "set_head_target 16.2378 420.511 -82.3445 1"
+say 2 "???" "Ich wette meine linke Pfote, er hat nicht gesehen, das Innere der ein lebenswertes Zuhause "ist das ganze Leben."
+send_character_message 3 "set_torso_target 16.8334 419.595 -83.0186 1"
+send_character_message 3 "set_animation \"Data\Animations\sitledge.anm\""
+set_cam 18.6063 420.622 -82.0166 0 54.11 0 18.8831
+send_character_message 2 "set_eye_dir 16.9232 420.7 -83.0405 1"
+say 3 "????" "Dann wieder, [wait 0.3]Ich sah ihn in der Empry. [wait 0.5]Ein bisschen Ruhe [wait 0.3]Wenn Sie mich Fragen..."
+send_character_message 2 "set_eye_dir 16.9232 420.7 -83.0405 0.967307"
+send_character_message 2 "set_torso_target 15.8053 420.566 -81.361 7.48038e-006"
+send_character_message 3 "set_head_target 16.5119 420.794 -81.5674 1"
+set_cam 17.5857 420.749 -84.1977 0 154.33 0 18.8831
+send_character_message 2 "set_head_target 16.9205 420.666 -82.9249 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_thoughtful.anm\""
+send_character_message 3 "set_torso_target 16.8657 420.504 -82.6365 0"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "???" "Wirklich? [wait 0.5]Er kann nicht "Ave kommen durch ein Ticket ehrlich."
+send_character_message 2 "set_eye_dir 16.9232 420.7 -83.0405 0"
+send_character_message 2 "set_torso_target 15.8053 420.566 -81.361 7.48038e-006"
+send_character_message 2 "set_head_target 16.433 420.489 -82.4083 1"
+send_character_message 3 "set_head_target 16.5119 420.794 -81.5674 1"
+send_character_message 3 "set_animation \"Data\Animations\dialogue_sitting_armsapart.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 3 "????" "Ich werde sagen. [wait 0.5]Habe nicht gesehen, nichts als Adlige und Legenden Leben in diesem Bezirk."
+send_character_message 2 "set_eye_dir 16.9232 420.7 -83.0405 0.967307"
+send_character_message 2 "set_torso_target 15.8053 420.566 -81.361 7.48038e-006"
+send_character_message 2 "set_head_target 16.7458 420.657 -82.8043 1"
+send_character_message 3 "set_head_target 16.4869 420.486 -81.5237 1"
+send_character_message 3 "set_animation \"Data\Animations\sitledge.anm\""
+say 3 "????" "Ich kann nicht jemanden wie ihn Givin ' eine Rede vorstellen. [wait 0.3]Auf jeden Fall ist nicht im Ruhestand."
+send_character_message 2 "set_head_target 16.7458 420.657 -82.8043 1"
+send_character_message 2 "set_eye_dir 16.9232 420.7 -83.0405 0.842735"
+send_character_message 2 "set_torso_target 16.7306 421.331 -82.9437 0.982619"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+say 2 "???" "Ich kann nicht jemanden wie ihn Givin ' eine Rede vorstellen. [wait 0.5]Es gibt keine Möglichkeit, die er dort gehört."
+set_cam 15.3 420.835 -82.1825 0 -129.78 0 18.8831
+send_character_message 2 "set_eye_dir 16.9232 420.7 -83.0405 1"
+send_character_message 2 "set_head_target 16.2106 420.762 -82.6189 1"
+send_character_message 2 "set_torso_target 16.7306 421.331 -82.9437 0"
+say 2 "???" "Geerbt haben könnte. [wait 0.5]Immer einige Kauz quaken in jenen Teilen."
+send_character_message 3 "set_head_target 16.3879 420.902 -81.2806 1"
+set_character_pos 3 16.4341 420.103 -83.3694 -79
+send_character_message 3 "set_animation \"Data\Animations\dialogue_leaning_onpost.anm\""
+set_cam 15.81 420.772 -79.8466 0 -15.03 0 18.8831
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 3 "????" "Wir leben in merkwürdigen Zeiten, [wait 0.3]Orin."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 15.8159 420.772 -79.8623 0 -15.03 0 18.8831
+send_character_message 1 "set_head_target 15.3244 420.414 -83.6401 1"
+set_character_pos 1 6.76201 420.276 -82.5844 -43
+set_character_pos 2 16.4178 420.124 -81.1849 92
+set_character_pos 3 16.4227 420.103 -83.3829 -79
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 2 "Orin" "Eine Tasse zu heben. [wait 0.5]Ich selbst weiß nicht, ob dieser Kerl hier bleiben soll, [wait 0.3]entweder."
+set_cam 5.39951 420.772 -82.5297 0 -101.53 0 30.852
+send_character_message 1 "set_head_target 10.457 420.736 -81.6702 1"
+set_character_pos 1 6.72616 420.276 -82.4383 -20
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_character_pos 2 16.0747 420.124 -80.1681 92
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_character_pos 3 16.0083 420.103 -84.5355 -90
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Orin" "Solange wir auf unsere Beiträge halten, [wait 0.3]Wir werden in Ordnung sein, [wait 0.3]Dashta."
+send_character_message 1 "set_torso_target 7.46442 420.528 -81.8045 1"
+send_character_message 1 "set_head_target 9.49669 421.365 -77.6314 1"
+set_cam 4.44001 420.717 -83.4221 0 -127.49 0 53.9563
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "...[wait 0.5]Ich sollte nicht nehmen, diese Jungs den Kopf auf."

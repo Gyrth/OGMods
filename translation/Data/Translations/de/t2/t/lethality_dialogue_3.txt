@@ -1,0 +1,7 @@
+#name "Suspicious Guard"
+#participants 2
+
+set_cam 8.10089 1.93596 -84.3991 0 -180 0 90
+say 2 "Guard" "Hallöchen![wait 0.2] Was machst du hier?"
+say 1 "Turner" "Nur umher,[wait 0.1] nichts zu befürchten."
+say 2 "Guard" "Bleiben Sie aus der Patsche."

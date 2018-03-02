@@ -1,0 +1,12 @@
+#name "End"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.2 6 2"
+send_level_message "music_layer_override 0"
+send_level_message "crowd_override 0.5 0"
+set_character_pos 2 23.2472 94.4579 310.444 78
+send_character_message 2 "set_head_target 34.0705 99.101 289.701 1"
+set_character_pos 1 34.5333 98.2273 289.486 -140
+set_cam 35.1121 99.7448 286.941 -17.41 158.23 -1.62 34.3432
+say 1 "Jade" "Unsere glücklichen Meister bleibt ungeschlagen! Dies ist beispiellos! Beide Anwärter auf der königlichen Garde, durch eine bloße Vorspeise niedrig gelegt."
+say 1 "Jade" "Besuchen Sie uns wieder zu sehen, mehr Geschichte in der Herstellung, bei der Feier der Sonne!"
+send_global_message "levelwin"

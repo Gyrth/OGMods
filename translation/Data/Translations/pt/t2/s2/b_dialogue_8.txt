@@ -1,0 +1,18 @@
+#name "Note-Bleeding"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 299.413 2.70343 36.1188 -90
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 299.345 2.82007 36.8789 1"
+set_cam 300.976 3.19253 37.4423 0 60 0 33.9423
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Uma nota antiga, [wait 0.3]rasgadas e desgastadas pelo tempo. [wait 0.5]Mal dá para ler isso."
+send_character_message 1 "set_head_target 299.467 2.86558 36.8146 1"
+set_cam 300.268 3.35349 37.3426 0 38.06 0 33.9423
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "O demônio está sangrando. [wait 0.5]Seu sangue foi para a floresta nas proximidades. [wait 0.5]Não o vermos passar todos os arbustos e folhas."
+say 2 "Note" "Sua camisa, [wait 0.3]Embora nós arremessou uma faca nele, [wait 0.3]ainda está intacta. [wait 0.5]Então é o seu pelo e pele."
+say 2 "Note" "O Deus deve estar com raiva de nós. [wait 0.5]Por que razão, [wait 0.3]Não faço a menor ideia. [wait 0.5]Ele deve ser o mensageiro da fúria de Deus, [wait 0.3]poderoso e invencível.
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "[wait 0.3]Estou com muito medo."

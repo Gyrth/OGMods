@@ -1,0 +1,87 @@
+#name "Returntocell"
+#participants 5
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 15
+set_dialogue_voice 3 17
+set_dialogue_voice 4 9
+set_character_pos 1 11.6185 420.68 -119.409 -173
+send_character_message 1 "set_head_target 9.92229 421.401 -119.287 1"
+set_cam 12.5482 421.335 -121.321 -3.89 144.47 0 31.7148
+say 1 "You" "Agora que está feito e sobre com..."
+send_character_message 1 "set_head_target 10.0153 421.222 -118.648 1"
+say 1 "You" "...[wait 0.3]hora de tirar um cochilo."
+send_character_message 4 "set_torso_target 12.4553 420.723 -115.442 1"
+send_character_message 4 "set_animation \"Data/Animations/r_bigswordarmstance.anm\""
+send_character_message 2 "set_torso_target 11.7858 420.939 -119.682 1"
+send_character_message 2 "set_head_target 10.2724 421.009 -118.616 1"
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 3 "set_torso_target 11.5903 421.01 -118.492 1"
+send_character_message 3 "set_head_target 10.1956 420.959 -118.346 1"
+send_character_message 3 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+set_character_pos 2 12.2059 420.686 -119.883 -156
+set_character_pos 3 11.9701 420.687 -118.374 166
+send_character_message 4 "set_head_target 11.2266 421.026 -116.976 1"
+set_character_pos 4 12.5927 420.141 -114.808 109
+send_character_message 1 "set_torso_target 9.45185 420.869 -118.347 1"
+send_character_message 1 "set_head_target 9.57546 421.007 -117.832 1"
+set_character_pos 1 10.0599 421.209 -118.641 -173
+send_character_message 1 "set_animation \"Data/Animations/r_sleep.anm\""
+set_cam 14.6165 427.508 -135.925 -0.02 50.82 -0.29 31.7148
+say 1 "" "..."
+say 2 "???" "Amos! [wait 0.5]Acordar!"
+send_character_message 1 "set_head_target 9.72858 421.013 -118.132 1"
+set_cam 8.94125 421.076 -118.231 -0.22 -75.83 0.19 37.9051
+say 1 "You" "...[wait 0.3]?"
+send_character_message 1 "set_head_target 11.6193 421.394 -118.907 1"
+send_character_message 1 "set_torso_target 11.1778 420.869 -118.795 1"
+set_character_pos 1 10.7891 420.672 -118.738 7
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_torso_target 11.8932 420.939 -119.704 1"
+send_character_message 2 "set_head_target 11.0769 421.315 -119.033 1"
+send_character_message 3 "set_head_target 11.048 421.378 -118.62 1"
+set_cam 11.5453 421.502 -117.85 -4.6 -29.24 -0.03 40.9703
+say 3 "????" "Larguem as armas e vem com a gente. [wait 0.5]Não faça movimentos bruscos."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_yawn.anm\""
+send_character_message 1 "set_torso_target 11.1666 420.822 -118.759 0"
+send_character_message 1 "set_head_target 11.7693 421.401 -118.656 0.784335"
+set_cam 12.6781 421.314 -120.753 -0.18 147.66 0.04 40.9703
+say 1 "You" "Não se preocupe [wait 0.3]oficial. [wait 0.5]Eu só estava tirando uma soneca. [wait 0.5]Precisar de alguma coisa?"
+send_character_message 3 "set_head_target 11.4827 421.366 -119.096 1"
+send_character_message 3 "set_torso_target 11.6167 420.95 -118.516 1"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_head_target 11.7438 421.449 -118.498 1"
+send_character_message 2 "set_head_target 11.0889 421.383 -118.846 1"
+send_character_message 2 "set_torso_target 11.9078 420.83 -119.703 1"
+say 2 "???" "...[wait 0.3]Que diabo...?"
+set_cam 11.3329 421.524 -119.467 -5.03 -157.96 -0.12 38.2108
+send_character_message 3 "set_head_target 10.9046 421.426 -118.665 1"
+say 3 "????" "Só... [wait 0.3]Não faça nada estúpido, [wait 0.3]Tudo bem? [wait 0.5]Não queremos machucá-lo."
+send_character_message 1 "set_torso_target 11.1666 420.822 -118.759 1"
+set_cam 11.577 421.333 -117.855 0.32 36.13 0.2 38.2108
+say 1 "You" "Não será necessário. [wait 0.5]Leva-me onde quer que você precisa."
+send_character_message 3 "set_torso_target 11.6617 420.883 -118.545 1"
+send_character_message 3 "set_head_target 11.9619 421.422 -119.056 1"
+send_character_message 2 "set_head_target 11.9825 421.404 -118.485 1"
+set_cam 11.4038 421.481 -117.718 -3.9 -30.81 -0.22 38.2108
+say 2 "???" "Isto é uma armadilha [wait 0.3]ou o que?"
+send_character_message 3 "set_torso_target 11.7006 420.975 -118.577 1"
+say 3 "????" "Bem, nós temos que trazer de volta de qualquer maneira. [wait 0.5]Não pode vir vazio entregue."
+set_cam 11.4037 421.481 -117.718 -3.9 -30.81 -0.22 38.2108
+send_character_message 4 "set_head_target 11.2291 421.026 -116.977 1"
+send_character_message 1 "set_torso_target 11.1666 420.822 -118.759 0"
+send_character_message 2 "set_head_target 11.0033 421.499 -118.62 1"
+send_character_message 1 "set_head_target 11.7427 421.433 -118.407 1"
+send_character_message 3 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 3 "set_torso_target 11.5983 421.007 -118.499 0.0730928"
+send_character_message 3 "set_head_target 11.0814 421.52 -118.383 1"
+say 3 "????" "Só... [wait 0.5]Não tentes nos matar."
+send_character_message 4 "set_torso_target 12.49 420.851 -115.52 1"
+send_character_message 2 "set_torso_target 11.9317 420.973 -119.682 1"
+send_character_message 3 "set_torso_target 11.5983 421.007 -118.499 1"
+send_character_message 1 "set_torso_target 11.1675 421.176 -118.7 1"
+send_character_message 4 "set_head_target 12.1688 421.254 -117.509 1"
+set_cam 13.3511 421.173 -113.938 -0.08 28.88 -0.57 31.1209
+say 1 "You" "Não há problema. [wait 0.3]Liderar o caminho."
+fade_to_black 1
+send_global_message "levelwin e"

@@ -1,0 +1,7 @@
+#name "End"
+#participants 1
+
+set_character_pos 1 12.0574 -1.91038 16.2992 -137
+set_cam 11.4963 -1.47038 17.9304 0 0 0 90
+say 1 "Turner" "Tempo para verificar a aldeia vizinha."
+send_global_message "levelwin"

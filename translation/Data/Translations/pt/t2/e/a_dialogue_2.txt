@@ -1,0 +1,41 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -162.805 -18.4073 81.3972 49
+send_character_message 1 "set_eye_dir -161.966 -18.3675 80.5688 1"
+send_character_message 1 "set_torso_target -162.36 -18.5254 81.0873 1"
+send_character_message 1 "set_head_target -161.882 -16.9902 79.9513 1"
+set_cam -163.602 -18.0713 81.605 11.4 -41.71 -0.05 84.6836
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "...[wait 0.3]Finalmente. [wait 0.5]Estou aqui."
+send_character_message 1 "set_head_target -162.038 -18.2475 80.578 1"
+set_cam -162.727 -18.0237 82.5388 0 -13.68 0 58.5513
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "É a nota do Jairo..."
+send_character_message 1 "set_eye_dir -162.191 -18.2601 81.0327 1"
+set_character_pos 1 -162.805 -18.6335 81.3972 49
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -161.908 -17.9322 81.2424 0 86.39 0 50.8411
+say 2 "Note" "O exterior é levemente guardado. [wait 0.5]Podemos ter enfraquecido o inimigo."
+say 2 "Note" "Todo mundo está armado com uma arma de algum tipo- [wait 0.3]eficincia, [wait 0.3]na maior parte. [wait 0.5]Não ir desarmado."
+say 2 "Note" "Você pode encontrar uma faca em algum lugar, [wait 0.3]ou pegar uma espada de um dos inimigos."
+say 2 "Note" "Em algum lugar, [wait 0.3]Vai haver uma chave. [wait 0.5]Use isso para desbloquear uma porta pela base da torre. [wait 0.5]Sua localização é marcada no mapa."
+say 2 "Note" "Uma vez que você abre a porta, [wait 0.3]Siga os interiores até encontrar uma caverna decorada com várias urnas."
+say 2 "Note" "Lá, [wait 0.3]Você deve ser capaz de encontrar o comandante. [wait 0.5]Matá-la, [wait 0.3]e voltar para os exteriores por novas instruções."
+say 2 "Note" "As bombas que usaremos são bem ao seu lado esta nota."
+say 2 "Note" "Se alguém tentar falar com você, [wait 0.3]matá-los. [wait 0.5]Eles vão tentar mentir para você para pará-lo."
+say 2 "Note" "A chave que você precisa está localizada em algum lugar alto."
+send_character_message 1 "set_eye_dir -162.74 -18.5064 80.7398 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Estude o mapa. [wait 0.5]As possíveis posições de inimigos foram marcadas por você, [wait 0.3]juntamente com a posição da porta."
+send_character_message 1 "set_head_target -162.382 -18.2421 80.2224 1"
+set_cam -162.368 -18.0164 82.2283 0 11.49 0 54.8952
+say 1 "Ghost" "Ele atribuiu um mapa do exterior."
+set_cam -162.408 -17.8291 80.1591 -90 180 140.36 65.6732
+say 2 "Note" "..."
+send_character_message 1 "set_torso_target -162.56 -18.6547 81.1626 1"
+send_character_message 1 "set_head_target -161.249 -16.6849 75.4348 1"
+set_cam -162.836 -18.1917 82.7006 14.58 -18.59 0 63.5372
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "Bem, [wait 0.5]Boa sorte para mim, [wait 0.2]Eu suponho."

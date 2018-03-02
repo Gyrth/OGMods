@@ -1,0 +1,23 @@
+#name "Note-Cache"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -18.9745 -8.56669 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target -19.3971 -8.84294 155.245 1"
+set_cam -17.5156 -8.54594 155.832 0 78.14 0 48.294
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Hinweis ist vor dem Regen durchnässt, [wait 0.3]aber ich denke, dass ich die Worte machen kann."
+set_cam -19.9914 -8.35759 155.085 0 -121.86 0 41.4636
+set_character_pos 1 -18.9745 -8.51633 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+say 2 "Note" "Sie wissen, wer es ist. [wait 0.5]Wenn dies in den falschen Händen ist, [wait 0.3]Ich werde wissen. [wait 0.5]Also Schritt zurück, bevor Sie denken, dieses Set ist ein gutes Schnäppchen."
+say 2 "Note" "So oder so, [wait 0.3]D, [wait 0.3]Dies ist mein letztes Geschenk. [wait 0.5]Sie sagten mir immer wieder, alle Verbindungen zu trennen, nach was du getan hast, [wait 0.3]und ich arbeite mir den Arsch ab um das zu erreichen."
+say 2 "Note" "Es schien, dass jeder war gonna miss you, [wait 0.3]aber ich war mir sicher, einen Sinn in ihnen zu sprechen. [wait 0.5]Sie schätzen, besser."
+say 2 "Note" "Und da wir nicht zuviel persönlich sprechen können, [wait 0.3]Ich habe nicht in der Lage, Ihnen dies zu sagen, [wait 0.3]aber ich schlage vor, dass Sie das gleiche tun-- [wait 0.3]trennen Sie alle Bindungen, [wait 0.3]Ich meine."
+say 2 "Note" "C't gonna Sie jederzeit bald für alles verzeihen, die Sie von ihm nahm, [wait 0.3]und keine Menge Kräuter schlafen kann das ändern."
+say 2 "Note" "Er ist klüger als er lässt auf, [wait 0.3]und es ist nicht zu klug von dir, nicht das aufgreifen."
+say 2 "Note" "Und einmal F entdeckt Ihr Herz für kurze Schweife, [wait 0.3]Er wird nicht allzu glücklich sein, [wait 0.3]entweder."
+say 2 "Note" "Wenn Sie jemals an Ouran vornehmen, [wait 0.3]Ich wünsche Ihnen viel Glück. [wait 0.5]Niemand kann Sie dort finden. [wait 0.5]Nicht einmal ich."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "Unterzeichnet, [wait 0.3]T."

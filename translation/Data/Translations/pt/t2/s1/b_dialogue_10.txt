@@ -1,0 +1,18 @@
+#name "Note-Scout"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 86.6623 -62.7353 303.059 170
+send_character_message 1 "set_head_target 85.9736 -62.3514 302.724 1"
+set_cam 87.3575 -62.1744 302.299 0 118.82 0 65.8249
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Um conjunto de notas de um batedor de Cinderbreathe..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 85.9205 -62.1048 303.616 0 -32.08 0 65.8249
+say 2 "Note" "Essas terras da colônia não sejam tão estranhas... [wait 0.3]Eles têm mais variedade em terreno que o continente inteiro do nosso lado."
+say 2 "Note" "Floresta, [wait 0.3]deserto, [wait 0.3]montanha, [wait 0.3]tundra... [wait 0.5]todos menos o pântano que vi. [wait 0.5]Não parece natural, [wait 0.3]Mas então, novamente, [wait 0.3]nada aqui funciona."
+say 2 "Note" "Cada grande colina que nos deparamos geralmente tem uma série daquelas estranhas lanternas de pedra. [wait 0.5]Não posso ajudar, mas sinto que estou sendo observado."
+say 2 "Note" "Estamos agora no trecho de deserto. [wait 0.5]As antigas ruínas compensar boas Marcos, [wait 0.3]Mas droga se eles não estão empoeirados."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Só dormindo por estas coisas, [wait 0.3]Eu tenho que lidar com enxugando a areia... [wait 0.5]Provavelmente nem de perto tão ruim quanto Ouran, [wait 0.3]no entanto."

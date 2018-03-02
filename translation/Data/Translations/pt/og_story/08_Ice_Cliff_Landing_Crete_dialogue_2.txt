@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+set_character_pos 2 168.127 89.4273 -7.00947 -174
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 165.336 90.1489 -5.70006 0 -49.24 0 90
+say 2 "Rabbit" "Nunca vi ninguém lutar sozinho antes de um lobo!"
+say 1 "Turner" "Eles só estão cheio de cães, realmente."
+say 2 "Rabbit" "Matar cães, também?
+say 1 "Turner" "Eu vou matar quem tentar machucar ou escravizar-nos.
+say 2 "Rabbit" "Eu sou o sol.
+say 2 "Sun" "Meus amigos estão lutando contra os traficantes de escravos, também."
+say 2 "Sun" "Estávamos a caminho de um forte nas proximidades de raid quando uma matilha de cães capturados alguns de nós."
+say 2 "Sun" "Se você quer se juntar à nossa causa..."
+say 1 "Turner" "Eles mantêm escravos no forte?"
+say 1 "Turner" "Apenas me mostre o caminho."
+send_global_message "levelwin"

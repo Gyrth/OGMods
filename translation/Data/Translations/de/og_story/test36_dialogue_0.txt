@@ -1,0 +1,10 @@
+#name "Start"
+#participants 3
+set_cam -6.47387 -1.38954 37.8557 0 -68.25 0 71.0362
+set_character_pos 2 -2.99293 -1.8809 34.2983 -136
+set_character_pos 3 -1.85244 -1.83324 35.5077 -147
+set_character_pos 1 -4.9482 -2.03591 37.8532 50
+say 2 "Slaver" "Sieht aus wie dieser versuchte, uns anschleichen."
+say 3 "Slaver" "Eine weitere für unsere Kollektion."
+say 1 "Turner" "Ich glaube nicht."
+make_participants_aware

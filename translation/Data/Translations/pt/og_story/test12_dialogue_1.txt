@@ -1,0 +1,9 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 -8.52006 -4.28673 14.0125 13
+set_cam -7.52794 -3.31282 14.6653 -22.87 77.82 0 90
+say 1 "Turner" "Fresco. Próximo nível."
+send_global_message "levelwin"
+
+

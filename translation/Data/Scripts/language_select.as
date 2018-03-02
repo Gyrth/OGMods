@@ -1,6 +1,7 @@
 bool show = false;
 int chosen_item = 0;
-array<string> language_options = {"en", "fr-fr"};
+array<string> language_options = {"English", "French", "Portuguese", "German"};
+array<string> language_codes = {"en", "fr", "pt", "de"};
 string current_language = "";
 
 void DrawGUI() {
@@ -18,7 +19,7 @@ void Display(){
         ImGui_Combo("Language", chosen_item, language_options);
 
         if(ImGui_Button("Choose")) {
-            current_language = language_options[chosen_item];
+            current_language = language_codes[chosen_item];
             level.Execute("dialogue.SetLanguage(\"" + current_language + "\");");
             Log(info, "choose " + current_language + " " + chosen_item);
             SaveLanguage();
@@ -54,8 +55,8 @@ void SaveLanguage(){
 void LoadLanguage(){
     SavedLevel@ global_save = save_file.GetSave("","global","");
     current_language = global_save.GetValue("language");
-    for (uint i = 0; i < language_options.size(); i++){
-        if(language_options[i] == current_language){
+    for (uint i = 0; i < language_codes.size(); i++){
+        if(language_codes[i] == current_language){
             chosen_item = i;
             Log(info, "Current index " + chosen_item);
             Log(info, "Language " + current_language);

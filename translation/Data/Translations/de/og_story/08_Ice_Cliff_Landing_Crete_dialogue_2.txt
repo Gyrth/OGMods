@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+set_character_pos 2 168.127 89.4273 -7.00947 -174
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 165.336 90.1489 -5.70006 0 -49.24 0 90
+say 2 "Rabbit" "Ich habe nie gesehen, dass jemand einen Wolf allein vor kämpfen!"
+say 1 "Turner" "Sie sind einfach überwuchert Hunde, wirklich."
+say 2 "Rabbit" "Sie töten Hunde, auch?
+say 1 "Turner" "Ich werde niemanden töten, der versucht zu verletzen oder uns zu versklaven.
+say 2 "Rabbit" "Ich bin die Sonne.
+say 2 "Sun" "Meine Freunde kämpfen gegen die Sklavenhändler."
+say 2 "Sun" "Wir waren auf dem Weg zu einem nahegelegenen Fort zu überfallen, als ein Rudel Hunde, die einige von uns gefangen."
+say 2 "Sun" "Möchten Sie unserer Sache anzuschließen..."
+say 1 "Turner" "Sie halten Sklaven in diesem Fort?"
+say 1 "Turner" "Nur zeigt mir den Weg."
+send_global_message "levelwin"

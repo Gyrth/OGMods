@@ -1,0 +1,14 @@
+#name "Boss"
+#participants 3
+
+set_character_pos 3 -0.422517 3.16283 98.1177 89
+set_character_pos 2 -1.96183 2.97062 98.3592 85
+set_character_pos 1 -0.262847 2.52884 91.9375 -96
+set_cam 0.231172 3.36658 93.0699 0 36.23 0 90
+say 1 "Turner" "Ich möchte meinen Freund zurück."
+set_cam -0.53669 3.36658 96.3674 0 168.16 0 90
+say 2 "Boss" "NAW."
+make_participants_aware
+
+
+

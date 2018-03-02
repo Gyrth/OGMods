@@ -1,0 +1,14 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -101.262 166.761 51.601 -60
+send_character_message 1 "set_head_target -98.5684 167.248 57.7515 1"
+set_cam -104.111 167.213 51.2352 0 -104.13 0 28.9298
+send_level_message "set_camera_dof 0 0 0 0.3 3 10"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -96.0163 168.388 56.1336 1"
+say 1 "Ghost" "Jairo?"
+send_character_message 1 "set_head_target -99.1397 167.201 58.6485 1"
+set_cam -102.283 167.604 49.8404 -5.16 -158.16 0 35.6754
+say 1 "Ghost" "Onde ele está...?"

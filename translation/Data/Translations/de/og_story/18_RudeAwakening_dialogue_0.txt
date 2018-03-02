@@ -1,0 +1,64 @@
+#name "Start"
+#participants 3
+send_level_message "music_layer_override -2"
+send_character_message 2 "set_torso_target -0.119852 -1.90987 2.18985 0.0146364"
+send_character_message 2 "set_head_target -0.0764758 -1.89299 2.13617 4.20213e-006"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneeling_low.anm\""
+send_character_message 1 "set_head_target -1.58045 -1.85998 2.7232 1"
+set_character_pos 2 4.44411 -1.76967 0.832846 -174
+set_character_pos 1 0.058174 -1.93774 1.49958 -103
+set_character_pos 3 1.11209 1.90659 9.43174 82
+set_cam 0.98098 -2.134 3.2011 -3.36 60.42 6.91 90
+set_dialogue_color 2 0.5 0.5 1.0
+say 1 "Turner" "Ach... das sieht nicht gut aus."
+send_character_message 2 "set_head_target -0.57463 -1.84639 2.233 1"
+send_character_message 2 "set_torso_target -0.612804 -1.9307 2.40631 1"
+set_character_pos 2 4.44411 -1.76967 0.832846 -158
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+send_character_message 1 "set_head_target 1.53854 -1.85122 2.76354 1"
+set_cam -1.13153 -1.57743 3.63281 -7.1 -46.19 -0.08 55.4847
+say 2 "Dahlia" "Erzähl mir davon. Wie würden sie Sie?"
+send_character_message 3 "set_head_target 1.27944 1.8646 8.37386 0.0705955"
+send_character_message 2 "set_torso_target -0.612804 -1.9307 2.40631 0.997533"
+send_character_message 1 "set_head_target 1.16353 2.04602 8.92777 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 4.8236 -1.8148 -1.97539 16.59 166.31 -1.38 22.4824
+send_character_message 3 "set_torso_target -0.076389 -0.660766 5.40235 1"
+send_character_message 3 "set_head_target 0.253135 -1.04543 1.01493 1"
+send_character_message 2 "set_head_target 1.01182 2.07112 9.04612 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_level_message "music_layer_override 2"
+say 3 "Amethyst" "Ah, Ihr seid beide wach, mein Glück Gliedmaßen."
+send_character_message 2 "set_torso_target 1.23733 -1.72146 3.05622 1"
+say 2 "Dahlia" "Fühle mich nicht so viel Glück."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 3 "set_head_target 3.78634 -1.08948 0.670815 1"
+say 3 "Amethyst" "Ach ja, aber Sie sind, weil einer von Ihnen wird zu leben! Zumindest für einen anderen Tag."
+set_character_pos 1 0.058174 -1.93774 1.49958 -45
+set_cam 0.277298 -2.18084 -1.13994 17.64 -179.05 1.39 28.6383
+say 1 "Turner" "... Eine?"
+send_character_message 3 "set_torso_target -0.076389 -0.660766 5.40235 0"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 3 "set_head_target -0.0906501 -1.14482 0.991261 1"
+say 3 "Amethyst" "Betrachten Sie dies als ein Vorsingen. Bist du stark genug, um zu überleben?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam 4.8236 -1.8148 -1.97539 16.59 166.31 -1.38 22.4824
+say 2 "Dahlia" "Ich habe dies schlimmer überlebt."
+set_character_pos 1 0.0581741 -1.93774 1.49958 -103
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 1 "set_head_target 1.16334 2.04326 8.9282 1"
+send_character_message 1 "set_torso_target -0.459432 -1.54725 2.34003 0.0312383"
+send_character_message 3 "set_head_target 4.2701 -1.13218 0.827571 1"
+say 3 "Amethyst" "Beweisen Sie es. Ihre neugierige Kameraden zu töten. "
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 1 0.0581741 -1.93774 1.49958 -44
+send_character_message 1 "set_torso_target 1.2915 -1.3556 2.53147 0.51442"
+send_character_message 1 "set_head_target 4.45708 -0.825616 0.822132 1"
+set_cam -1.13153 -1.57743 3.63281 -7.1 -46.19 -0.08 55.4847
+say 1 "Turner" "Wir müssen nicht kämpfen. Wir können zusammen - arbeiten"
+send_character_message 2 "set_torso_target 2.97575 -1.61511 0.620421 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 2 "set_head_target 0.0453343 -1.17962 1.34681 1"
+say 2 "Dahlia" "Tut mir leid, Freund. Keine andere Wahl."
+send_level_message "music_layer_override 3"
+make_participants_aware

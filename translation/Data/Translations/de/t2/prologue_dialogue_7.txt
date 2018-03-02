@@ -1,0 +1,19 @@
+#name "Note-Architect"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 38.0803 420.149 -72.0033 -82
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 38.1103 420.621 -71.3041 1"
+set_cam 36.9619 420.657 -72.8254 0 -139.86 0 41.1643
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Ein wenig den letzten Hinweis. [wait 0.5]Muss von einem Architekten geschrieben werden."
+send_character_message 1 "set_head_target 38.1392 420.469 -71.3407 1"
+set_cam 37.6155 420.763 -70.7852 0 -28.15 0 41.1643
+set_character_pos 1 38.0803 420.096 -72.0033 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Ich finde mich zunehmend über die steigenden Kosten und das Ausmaß dieses Gefängnisses Komplex."
+say 2 "Note" "Ich wurde beauftragt, eine uneinnehmbare Festung zu bauen, aber mit den arktischen Temperaturen, die unterdurchschnittliche Qualität schwarz Kretas und die unaufhörlichen Erschütterungen, die drohen, den Boden unter uns gespalten fürchte ich, dass es nie vollständig abgeschlossen sein wird."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 38.156 420.703 -71.2229 1"
+say 2 "Note" "Ein Albtraum gemacht Realität und meine größte Schande als Architekt nicht möglich sein, diese Ungeheuerlichkeit zu vervollständigen."

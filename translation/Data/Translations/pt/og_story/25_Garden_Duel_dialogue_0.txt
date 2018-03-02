@@ -1,0 +1,49 @@
+#name "Win"
+#participants 4
+send_level_message "music_layer_override 0"
+send_character_message 1 "empty_hands"
+send_character_message 1 "set_head_target 49.1152 -30.2131 83.803 1"
+send_character_message 4 "set_head_target 47.0481 -25.8023 120.872 0.0523647"
+send_character_message 3 "set_head_target 49.0036 -25.8634 121.599 0.0365451"
+send_character_message 2 "set_head_target 50.6724 -25.4578 121.182 0"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+set_character_pos 4 43.4694 -26.6459 121.156 0
+set_character_pos 3 46.276 -26.32 123.36 120
+set_character_pos 2 45.0334 -26.5305 123.684 72
+set_character_pos 1 43.9894 -26.5919 122.345 -4
+set_cam 47.2708 -25.9324 118.714 0 144.73 0 90
+send_character_message 2 "set_head_target 45.125 -26.2098 121.65 1"
+send_character_message 3 "set_head_target 45.0706 -26.2589 122.532 1"
+send_character_message 4 "set_head_target 44.8055 -26.2379 121.362 1"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_worriedpose_1.anm\""
+set_cam 53.681 -29.4498 90.8302 0 35.05 0 47.2607
+set_character_pos 3 45.9473 -26.3647 123.056 156
+set_character_pos 4 44.25 -26.5277 123.205 44
+set_character_pos 1 44.0624 -26.5919 122.363 29
+set_character_pos 2 45.1984 -26.481 123.226 119
+set_character_pos 1 53.1318 -29.6561 89.0468 -126
+send_level_message "set_camera_dof 0 0 0 0.3 3 2"
+say 1 "Turner" "Acho que deve ser seguro, agora tempo para se encontrar com meus amigos."
+send_character_message 1 "set_head_target 44.3109 -25.7112 123.181 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 43.9894 -26.5919 122.345 -4
+set_cam 46.1584 -26.2029 121.38 0 144.73 0 90
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 1 "Turner" "Ametista não hospedando qualquer mais batalhas de arena."
+send_character_message 2 "set_head_target 44.0253 -25.7206 122.303 1"
+say 2 "Sky" "Eu consegui libertar o rastreamento e os outros prisioneiros no caos, mas nós temos que sair daqui."
+send_character_message 3 "set_head_target 45.2112 -25.7483 123.274 1"
+say 3 "Crawl" "Os nobres de gato não ficarão felizes com a morte de um deles. Alguns deles odiavam ametista, mas não podem deixar um insulto tão sem resposta."
+send_character_message 4 "set_head_target 45.4761 -25.6783 123.093 1"
+say 4 "Sun" "Nós pode escaramuça com seus caçadores, mas não podemos ficar para uma expedição militar. Os coelhos da lua vão ser abatidos."
+send_character_message 2 "set_head_target 44.249 -25.7445 123.101 1"
+say 2 "Sky" "Há apenas um lugar que podemos ir para ser realmente seguro, mas não será fácil."
+send_character_message 4 "set_head_target 45.1066 -26.3549 121.8 1"
+say 4 "Sun" "Quer levá-los ao santuário? Os Twinleafs nunca permitirá."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sky" "Vamos ter que convencê-los. Os cães serão capazes de encontrar-nos em qualquer outro lugar."
+send_character_message 1 "set_head_target 45.5091 -25.8683 121.112 1"
+send_character_message 3 "set_head_target 45.227 -25.7483 123.296 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Vamos."
+send_global_message "levelwin"

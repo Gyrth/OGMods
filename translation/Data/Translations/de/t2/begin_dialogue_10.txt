@@ -1,0 +1,15 @@
+#name "Note-SpiritEnergy"
+#participants 2
+set_character_pos 1 190.052 -48.9326 193.971 -180
+send_character_message 1 "set_head_target 189.297 -48.4541 194.072 1"
+set_cam 190.681 -48.3442 192.828 0 135.86 0 38.5978
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Eine Seite aus einem Buch über Geist Legenden herausgerissen..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 189.05 -48.2701 194.674 0 -40.3 0 38.5978
+say 2 "Note" "Geist-Energie, [wait 0.3]wie in den Geschichten erzählt, [wait 0.3]ist fast immer gepflegt und in etwa so groß wie alle durchschnittlichen Erwachsenen Hund Steinlaternen nutzbar gemacht."
+say 2 "Note" "Wenn diese Laternen geschehen, gebrochen oder in irgendeiner Weise zerstört werden, [wait 0.3]die Geist-Energie wird freigesetzt und sofort zerstört; [wait 0.3]jeden Zweck diente die Geister in der Laterne im Vorfeld haben könnte verschwindet vollständig, [wait 0.3]und seine Funktion ist für immer verloren, bis ersetzt."
+say 2 "Note" "Zusammen mit der Geist-Energie dauerhaft verloren gehen, [wait 0.3]Sie werden fast sofort für diese "Todsünde" verflucht zu sein."
+say 2 "Note" "Diese Geist-Laternen bieten Funktionen für jeden einzelnen der grundlegenden Prinzipien und Gesetze der Welt."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Während dieser Zeit sind viele Geschichten die Geister der Welt an denen, [wait 0.3]Ich bin mehr als geneigt zu glauben, dass dies nichts anderes als Geschichten sind."

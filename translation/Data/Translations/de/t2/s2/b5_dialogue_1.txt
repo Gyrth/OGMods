@@ -1,0 +1,22 @@
+#name "Take"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 5
+send_character_message 2 "set_animation \"Data\Animations\sitledge.anm\""
+send_character_message 2 "set_torso_target -13.4275 85.9702 32.5054 1"
+send_character_message 2 "set_head_target -14.9103 86.4148 34.8496 1"
+set_character_pos 1 -18.1421 86.022 36.1208 -49
+send_character_message 1 "set_animation \"Data\Animations\pickup.anm\""
+send_character_message 1 "set_torso_target -17.5624 85.8974 36.4894 0"
+send_character_message 1 "set_head_target -17.2431 85.9263 35.9981 1"
+set_cam -11.7372 86.1235 32.4272 0 128.85 0 28.3952
+set_character_pos 2 -12.544 85.5813 33.5353 135
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Brandt" "Hey- [wait 0.5]Wir geben Ihnen nicht das Zeug."
+send_character_message 2 "set_torso_target -13.4275 85.9702 32.5054 0"
+send_character_message 1 "set_torso_target -17.1783 86.0243 36.3441 1"
+send_character_message 1 "set_head_target -13.2414 86.2582 34.0042 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "...[wait 0.3]Richting [wait 0.5]Tut mir Leid."

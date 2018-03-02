@@ -1,0 +1,62 @@
+#name "NL"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 5
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_torso_target -16.6641 15.5944 -59.5533 0"
+set_character_pos 2 -17.8312 15.5134 -58.3991 -150
+send_character_message 2 "set_animation \"Data\Animations\wowanothersit.anm\""
+send_character_message 2 "set_torso_target -18.3319 15.4232 -58.0016 0"
+send_character_message 2 "set_head_target -18.7982 15.3848 -57.7868 1"
+set_character_pos 1 -14.9809 15.4421 -59.4075 -159
+send_character_message 1 "set_head_target -17.42 15.5418 -58.5367 1"
+set_cam -11.8678 15.7203 -59.0643 0 92.45 0 31.9915
+send_level_message "set_camera_dof 0.3 4 1 0 0 0"
+say 2 "???" "..."
+send_character_message 2 "set_head_target -18.8216 15.5697 -57.9639 1"
+send_character_message 1 "set_head_target -17.42 15.7246 -58.5367 1"
+send_level_message "set_camera_dof 0 0 0 0.3 4 0.5"
+say 1 "Ghost" "Você é um inventor?"
+send_character_message 2 "set_head_target -18.6523 15.4526 -58.1456 1"
+set_cam -19.1645 15.6434 -56.9374 0 -48.71 0 31.9915
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 2 "???" "Sim, [wait 0.3]Você poderia me chamar isso. [wait 0.5]Estás aqui para quê?"
+send_character_message 2 "set_head_target -18.6234 15.4101 -58.109 1"
+send_character_message 1 "set_torso_target -16.4394 15.5944 -58.94 1"
+send_character_message 1 "set_head_target -17.4469 15.8301 -58.3564 1"
+send_level_message "set_camera_dof 0.3 4 1 0 0 0"
+say 1 "Ghost" "Eu estava visitando este lugar para depositar algumas tecnologias Arliss para um de vocês para examinar. [wait 0.5]Mas não por que eu estou falando com você."
+send_character_message 2 "set_head_target -18.3833 15.6749 -57.8822 1"
+set_cam -18.9746 15.5983 -57.4913 0 -57.52 0 31.9915
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 2 "???" "Então vá frente. [wait 0.5]Pare de desperdiçar meu tempo."
+set_character_pos 1 -14.9809 15.4039 -59.4075 -159
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+send_character_message 2 "set_head_target -18.5247 15.3882 -58.0605 1"
+send_level_message "set_camera_dof 0.3 4 1 0 0 0"
+say 1 "Ghost" "...[wait 0.3]Disseram-me que tinha algo para abrir o portão."
+set_character_pos 2 -22.7208 7.28357 -56.8874 -150
+send_character_message 2 "set_head_target -20.3154 15.7881 -61.6471 1"
+set_cam -14.6371 16.071 -58.0369 0 22.97 0 31.9915
+say 2 "???" "Claro, [wait 0.3]Certo. [wait 0.5]Deixei-a em cima da mesa, [wait 0.3]lá."
+set_character_pos 2 -21.6921 6.33644 -54.6143 -150
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -16.6804 15.9679 -58.0283 0 -45.1 0 31.9915
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 1 "Ghost" "Tudo bem, [wait 0.3]Obrigado."
+set_cam -15.3969 15.9616 -61.4271 0 59.69 0 31.9915
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+send_character_message 1 "set_head_target -17.5205 15.7266 -62.9268 1"
+send_character_message 1 "set_torso_target -17.1145 15.0813 -62.4095 1"
+set_character_pos 1 -17.1449 15.4937 -62.0673 120
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_torso_target -17.8534 15.7629 -62.6287 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target -17.9535 15.9971 -60.1339 1"
+set_cam -17.2589 16.136 -63.5226 0 175.45 0 31.9915
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 1 "Ghost" "Como eu armar isso...?"
+send_character_message 1 "set_torso_target -17.8534 15.7629 -62.6287 0"
+say 1 "Ghost" "...[wait 0.3]Acho que ela deixou."

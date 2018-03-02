@@ -1,0 +1,20 @@
+#name "Note-Cleanup"
+#participants 2
+set_character_pos 1 20.37 1.38351 38.2585 0
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 1 "set_head_target 21.2743 1.57836 38.2768 1"
+set_cam 19.7642 1.83985 37.1022 0 -138.82 0 55.5313
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Ein Brief von einem Leutnant Empry..."
+set_cam 21.5266 2.00173 38.1179 0 94.85 0 40.5844
+set_character_pos 1 20.37 1.35849 38.2585 0
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Der Bürgerkrieg war nicht so lange her, [wait 0.3]und Sie haben nicht vergessen, dass. [wait 0.5]Es gibt Cinderbreathe und Cinderblood Bunker überall noch."
+say 2 "Note" "Die meisten von ihnen wurden auf jeden Fall sauber von zufälligen Müllmännern abgeholt, [wait 0.3]Was ist der Punkt von uns versucht, alles zu reinigen?"
+say 2 "Note" "Ja, [wait 0.3]sicher, [wait 0.3]Es könnte Basen für Banditen oder Räuber hosten, [wait 0.3]aber konnte nicht das niedrigen Priorität über die Arliss Abwehr angesehen werden?"
+say 2 "Note" "Ich vermute, reinigen wir die Bunker, die wir im Falle von Terroristen verwenden, [wait 0.3]aber das wirft eine noch wichtigere Frage: [wait 0.5]Warum verschwenden die Manpower Beton fegt, wenn eine unbekannte Kraft unsere Truppen erschlagen ist?"
+say 2 "Note" "Habe vielleicht ich einige Briefe mit der bitte diese gleichen Fragen übersehen, [wait 0.3]und in diesem Fall [wait 0.3]Verzeih mir."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Bleiben Sie meine Hand, [wait 0.3]Off-Site-Empry Leutnant Querida."

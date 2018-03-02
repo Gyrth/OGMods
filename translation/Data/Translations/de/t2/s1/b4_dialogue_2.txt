@@ -1,0 +1,14 @@
+#name "NL-G"
+#participants 2
+set_character_pos 1 49.9344 -34.3229 27.7385 -90
+send_character_message 1 "set_head_target 49.895 -32.8023 29.0029 1"
+set_cam 54.6672 -33.6335 22.7146 0 141.19 0 51.4503
+send_level_message "set_camera_dof 0 0 0 0.3 10 3"
+say 1 "Ghost" "..."
+set_character_pos 1 49.9344 -34.365 27.7385 -90
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+send_character_message 1 "set_head_target 49.895 -32.8023 29.0029 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "Sie sind ihre Ausrüstung wird aktualisiert... [wait 0.3]Ich besser sein vorsichtig..."
+send_global_message "levelwin b"

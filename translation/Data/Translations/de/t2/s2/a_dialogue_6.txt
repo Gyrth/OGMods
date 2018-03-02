@@ -1,0 +1,16 @@
+#name "Note-Crete"
+#participants 2
+set_character_pos 1 27.5341 15.2194 -123.091 -132
+send_character_message 1 "set_head_target 26.982 15.7246 -122.51 1"
+set_cam 27.1565 15.8698 -124.326 0 -175.08 0 48.9875
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "Eine Analyse auf der Geist-Götter der Welt-- [wait 0.3]vorausgesetzt, sie sind echt."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 26.4049 15.8842 -123.25 0 -110.36 0 33.3467
+say 2 "Note" "Unsere alten Aufzeichnungen haben uns gezeigt, dass Kreta (schwarz und weiß) durch die überschüssige Energie, die durch die Kräfte der Geister entsteht (einschließlich unserer eigenen Elder Spirituosen) gegeben wie sie drehen Sie die Erde unter unseren Füßen in wünschenswerter Formen oder Einfluss auf die Vielzahl der Sentients, die den Kontinent von Preuwyn bevölkern."
+say 2 "Note" "Je mehr Energie, die in einem bestimmten Gebiet beobachtet werden können ist direkt bezeichnend für eine Fülle von überschüssige Energie, der in Richtung einer spirituellen Aufgabe konzentriert hat."
+say 2 "Note" "Aus diesem Grund ist es sinnvoll, dass wir davon ausgehen, dass mehr Kreta fanden wir in einer Region, desto näher befinden wir uns auf die Elder Geister Friedhof - das heißt, der kolonialen Herrschaft der Therium."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Auszug aus Beobachtungen von Elder Geister und ihre verschiedenen Konstrukte, Erstausgabe, autorisiert durch Herumphal Mandru, beleuchtet von Otto Vendran."

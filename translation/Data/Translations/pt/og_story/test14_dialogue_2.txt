@@ -1,0 +1,8 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 -30.4368 -2.15052 38.385 -44
+set_cam -30.0386 -1.4972 40.3254 0 0 0 90
+say 1 "Turner" "Acho que vejo um barco na distância."
+say 1 "Turner" "É uma pena estas espadas são grandes demais para trazer."
+send_global_message "levelwin"

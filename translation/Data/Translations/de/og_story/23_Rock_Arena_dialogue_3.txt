@@ -1,0 +1,65 @@
+#name "Round3Start"
+#participants 5
+send_level_message "set_camera_dof 0 0 0 0.3 8 0.1"
+set_dialogue_color 2 0.7 0.7 1.0
+set_dialogue_color 3 0.5 0.4 0.2
+send_character_message 2 "set_head_target 50.1832 102.789 -48.9882 1"
+send_character_message 3 "set_animation \"Data/Animations/r_combatcrouchwild.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_character_pos 1 70.1143 107.458 -60.8058 -179
+set_cam 72.8979 109.45 -63.6206 -16.73 129.26 3.55 24.6135
+set_character_pos 3 51.109 102.151 -47.4382 119
+set_character_pos 2 49.4612 101.704 -48.3291 15
+send_character_message 3 "set_head_target 52.2715 103.526 -52.5737 1"
+send_level_message "music_layer_override 0"
+send_level_message "crowd_override 0.5 0.0"
+say 1 "Jade" "Nicht so ein glücklicher Tag für die Ratten! Und nun zu den letzten Kampf des Tages."
+say 1 "Jade" "Wenn Lucky herrscht, werde er die Ehre vor mir im Zweikampf habe! Alles, was er zu tun hat ist Niederlage unserer neue Preis erfasst, sabbern und Spotty."
+send_character_message 2 "set_head_target 52.4273 104.584 -49.6671 1"
+set_cam 51.1424 102.076 -49.86 0 156.55 0 90
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.1"
+send_level_message "crowd_override 0.5 0.7"
+say 2 "Drool" "Das ist nicht mein Name, Sie Idioten."
+send_character_message 3 "set_torso_target 51.0575 101.741 -48.0756 0.147671"
+send_character_message 3 "set_head_target 52.2644 103.526 -52.5719 1"
+set_cam 72.8979 109.45 -63.6206 -16.73 129.26 3.55 24.6135
+send_level_message "set_camera_dof 0 0 0 0.3 8 0.1"
+send_level_message "crowd_override"
+say 1 "Jade" "Es ist natürlich, Drool, schauen Sie sich Ihr sabbern Gesicht. Töten Sie jetzt diese Kaninchen."
+send_character_message 3 "set_torso_target 50.2667 101.357 -48.3984 1"
+send_character_message 3 "set_head_target 49.5512 102.992 -48.5384 1"
+set_cam 51.1424 102.076 -49.86 0 156.55 0 90
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.1"
+say 3 "Spotty" "Wir haben nicht in einer Woche, Eis gegessen, lasst es einfach."
+send_character_message 2 "set_head_target 50.5483 102.271 -51.068 1"
+send_character_message 2 "set_torso_target 50.6905 102.52 -48.6938 1"
+say 2 "Drool" "Fein."
+send_character_message 4 "set_head_target 55.3184 102.399 -70.6786 0.0921266"
+send_character_message 4 "set_torso_target 55.29 102.32 -70.3971 0.0508174"
+send_character_message 5 "set_head_target 57.99 102.516 -70.1055 0.196055"
+send_character_message 5 "set_torso_target 57.986 102.444 -69.8176 0.237398"
+send_character_message 5 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+set_character_pos 4 55.4884 101.542 -70.7198 -78
+set_character_pos 5 56.6719 101.563 -70.6587 -93
+set_cam 56.3369 102.183 -71.8888 0 174.59 0 90
+say 4 "Turner" "Zwei Wölfe? Na gut, also zuerst wir--"
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 5 "set_torso_target 55.756 102.343 -69.582 1"
+send_character_message 5 "set_head_target 54.7348 102.619 -70.2986 1"
+say 5 "Bait" "WÖLFE!?"
+send_character_message 4 "set_torso_target 55.7217 102.32 -69.5332 1"
+send_character_message 4 "set_head_target 56.3132 102.474 -70.0889 1"
+send_character_message 4 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 4 "Turner" "Wir müssen nur--"
+send_character_message 4 "set_torso_target 55.7217 102.32 -69.5332 0.999521"
+send_character_message 5 "set_torso_target 56.7831 103.965 -68.9645 1"
+send_character_message 5 "set_head_target 56.3973 104.333 -68.8491 1"
+send_character_message 4 "set_head_target 56.3132 102.518 -70.0889 0.924862"
+say 5 "Bait" "WIR GEHEN ZU STERBEN!"
+send_character_message 4 "set_head_target 55.8724 102.324 -69.5242 0"
+send_character_message 4 "set_torso_target 55.7217 102.32 -69.5332 0"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 4 "Turner" "Oder ich kann nur darum kümmern mich. "
+send_level_message "music_layer_override 4"
+make_participants_aware

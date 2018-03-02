@@ -1,0 +1,8 @@
+#name "Test"
+#participants 3
+send_character_message 1 "set_eye_dir -36.8142 39.3272 142.669 1"
+set_cam -39.3101 39.4896 143.445 0 0 0 30.3227
+set_character_pos 1 -39.4774 39.0261 142.604 0
+set_dialogue_color 1 0 0.02 0.05
+set_dialogue_voice 1 8
+say 1 "Ghost" "Auisyudfgeirgepgis, [wait 0.3]Esta é a canção do meu povo! [wait 0.5]Oswildeafarlockerinia!"

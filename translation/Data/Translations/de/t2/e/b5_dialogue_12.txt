@@ -1,0 +1,63 @@
+#name "Dji"
+#participants 3
+set_character_pos 2 155.531 -56.2519 297.434 144
+send_character_message 2 "set_animation \"Data/Animations/dialogue_sitting_handstogether.anm\""
+send_character_message 2 "set_head_target 154.676 -55.7196 297.042 1"
+set_character_pos 1 152.771 -56.1998 296.177 -16
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target 155.347 -55.5142 297.321 1"
+set_cam 152.164 -55.8783 294.052 2.48 -150.77 0 55.7996
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Amos" "Huh... [wait 0.3]ein Hund in Lugaru?"
+send_character_message 2 "set_head_target 153.152 -55.431 296.32 1"
+say 2 "???" "Ungewöhnlich, [wait 0.3]Ja, [wait 0.3]aber das stört Ihre Manieren. [wait 0.5]Mein Name ist Dji."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+say 1 "Amos" "Tut mir leid; [wait 0.3]Ich wollte nur etwas Fragen. [wait 0.5]Ich bin neu hier-- [wait 0.3]zu Lugaru, [wait 0.3]Ich meine."
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+say 1 "Amos" "Ich habe viel über einen Mann namens Turner gehört. [wait 0.5]Er scheint zu sein..."
+send_character_message 2 "set_head_target 153.074 -55.4906 296.152 1"
+set_cam 154.172 -55.6854 297.992 0 -56.3 -0.01 45.4732
+say 2 "Dji" "Alte Geschichte, [wait 0.3]aber wir überliefern es von Mund zu Mund."
+send_character_message 2 "set_head_target 153.051 -55.7334 296.195 1"
+say 2 "Dji" "Ich bin sicher, dass Sie gehört haben, alles über seine Wolf-Völkermord und die Überbevölkerung, die folgten..."
+send_character_message 2 "set_head_target 152.826 -55.3938 296.433 1"
+send_character_message 2 "set_torso_target 154.746 -55.8969 296.858 1"
+say 2 "Dji" "Aber Leute reden nicht über seine Familie."
+set_cam 156.417 -55.6199 297.186 -0.02 86.16 -0.03 53.031
+say 1 "Amos" "Er hatte eine Familie?"
+send_character_message 1 "set_torso_target 153.42 -55.9064 296.372 1"
+send_character_message 1 "set_head_target 155.347 -55.6355 297.321 1"
+send_character_message 2 "set_torso_target 154.746 -55.8969 296.858 0"
+send_character_message 2 "set_head_target 152.776 -55.0882 296.133 1"
+say 2 "Dji" "Vater. [wait 0.5]Er hatte eine Tochter und Frau."
+send_character_message 2 "set_head_target 152.676 -55.3473 296.319 1"
+set_cam 154.267 -55.5601 297.28 0.02 -90.53 0.03 33.425
+say 2 "Dji" "Sie wurden von Wölfen getötet, [wait 0.3]die Aufrechnung ihn in Rage."
+send_character_message 2 "set_head_target 153.296 -55.1263 294.866 1"
+say 2 "Dji" "Er war so in Wut verbraucht, [wait 0.3]Er tötete mehrere seiner Spezies-- [wait 0.3]anderen Kaninchen [wait 0.3]denken, sie waren die Wölfe unterstützen."
+send_character_message 2 "set_torso_target 154.753 -56.1532 296.666 1"
+send_character_message 2 "set_head_target 153.014 -55.8058 296.386 1"
+say 2 "Dji" "Er ermordet sogar den König von Rocky Hall, [wait 0.3]davon überzeugt, dass er in direkten Kontakt mit den Wölfen war-- [wait 0.3]Pläne machen und mit ihnen zu verhandeln."
+send_character_message 1 "set_torso_target 153.42 -55.6857 296.372 1"
+send_character_message 1 "set_head_target 155.347 -55.4541 297.332 1"
+set_cam 153.629 -55.5819 297.458 -0.04 25.66 0 33.425
+say 1 "Amos" "Ein Wolf mit einem Kaninchen... einen deal machen? [wait 0.5]Dieser Kerl war verrückt."
+set_cam 149.491 -55.7426 296.734 0.02 -88.37 0.03 26.48
+say 2 "Dji" "Sein Wahnsinn trieb ihn nach vorne: [wait 0.3]zu der Zeit war er fertig, [wait 0.3]Wölfe wurde fast ausgestorben, [wait 0.3]und immer noch sind."
+send_character_message 2 "set_head_target 153.014 -55.4107 296.386 1"
+say 2 "Dji" "Müde, [wait 0.3]Turner kam zurück, um seinem zerstörten Dorf; [wait 0.3]hier, [wait 0.3]auf dieser Wiese, wo ein Clan von Kin auf ihn wartete."
+send_character_message 1 "set_head_target 155.299 -55.5762 297.368 1"
+send_character_message 1 "set_torso_target 153.42 -55.6857 296.372 0"
+send_character_message 2 "set_torso_target 154.571 -56.0646 296.743 1"
+say 2 "Dji" "Sie nahmen Rache an Turner mit Messern, [wait 0.3]Speer und Schwert, [wait 0.3]und so liegt er hier."
+send_character_message 1 "set_head_target 154.555 -56.0066 296.564 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+set_cam 154.381 -55.6794 296.008 5.92 99.66 -0.03 26.48
+say 1 "Amos" "[wait 0.3]Ich habe nicht so eine Geschichte gehört, seit ich ein Kind war."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_head_target 155.262 -55.5161 297.407 1"
+send_character_message 2 "set_head_target 153.027 -55.5456 296.243 1"
+send_character_message 2 "set_torso_target 154.571 -56.0646 296.743 0"
+set_cam 150.708 -55.7256 296.219 -0.01 -98.47 0.04 67.0911
+say 2 "Dji" "Vielleicht bin ich verwendet, um den Kindern diese Geschichten zu erzählen; [wait 0.3]nicht viele bleiben in diesem Dorf mehr, seitdem Oenferd seine Pforten geöffnet..."

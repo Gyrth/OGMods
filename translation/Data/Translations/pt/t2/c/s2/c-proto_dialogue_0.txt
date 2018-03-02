@@ -1,0 +1,9 @@
+#name "Intro"
+#participants 2
+set_character_pos 2 -47.4909 40.1547 76.0878 19
+set_character_pos 1 -44.9565 40.1625 75.1259 -165
+set_cam -43.8351 40.5105 76.2653 0 64.18 0 90
+say 1 "Ghost" "Oi Jairo."
+say 2 "Jairo" "Não sei por que está aqui, mas okey. Ajuda-me."
+set_cam -35.3047 41.3514 78.1817 22.35 17.88 0.27 90
+say 2 "Jairo" "Subir até o topo daquele moinho de vento e falar com ele. Há Arliss guardas por toda parte."

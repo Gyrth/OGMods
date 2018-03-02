@@ -1,0 +1,46 @@
+#name "BossMinions"
+#participants 5
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.5"
+send_level_message "music_layer_override 0"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 3 "set_torso_target -105.099 200.01 122.182 1"
+send_character_message 3 "set_head_target -104.464 200.23 122.534 0.847003"
+send_character_message 2 "set_torso_target -104.951 199.82 121.653 0.0313163"
+send_character_message 2 "set_head_target -104.913 199.839 121.656 1"
+set_character_pos 3 -106 199.341 122.885 30
+set_character_pos 2 -104.502 199.293 123.362 158
+set_character_pos 1 -105.709 199.293 138.021 96
+set_dialogue_color 2 0.5 0.5 0.7
+set_dialogue_voice 2 7
+set_cam -105.076 200.027 118.153 -2.85 178.42 1.11 33.1332
+say 3 "Thorn" "Können Sie glauben, diese Groundlander Gesindel? Wir sollten Felsen auf sie fallen lassen."
+send_character_message 2 "set_torso_target -105.18 199.82 122.557 1"
+send_character_message 2 "set_head_target -105.848 200.277 122.554 1"
+say 2 "Furrow" "Sie müssen denken, dass die Sonne immer noch das sagen hat."
+send_character_message 3 "set_torso_target -105.184 200.01 121.998 1"
+send_character_message 2 "set_torso_target -105.121 199.82 122.547 1"
+send_character_message 3 "set_head_target -105.394 199.755 121.926 0.847003"
+say 3 "Thorn" "Sie war immer so emotional, hören auf ihr Herz statt Kopf. "Alle Kaninchen sind Brüder und Schwestern," Feh."
+send_character_message 2 "set_head_target -105.848 200.277 122.554 0.105574"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 2 "Furrow" "Wir können ihr für das Massaker von Nissaya danken!"
+send_character_message 2 "set_head_target -105.848 200.277 122.554 0.0449724"
+send_character_message 2 "set_torso_target -105.121 199.82 122.546 1"
+send_character_message 3 "set_torso_target -105.308 200.01 123.895 1"
+send_character_message 3 "set_head_target -105.277 200.141 125.988 0.847003"
+send_level_message "music_layer_override 2"
+say 3 "Thorn" "Ich dachte, ich sagte, dass wir nicht gestört werden."
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target -104.955 200.277 123.909 1"
+send_character_message 2 "set_torso_target -105.004 199.82 123.816 0.177185"
+say 2 "Furrow" "Wer bist du?"
+send_level_message "set_camera_dof 0.3 7 0.5 0 0 0"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Turner" "Ich gehöre zu jenen Groundlander Gesindel, die Sie erwähnt."
+send_character_message 3 "set_torso_target -105.116 200.01 122.98 1"
+send_character_message 3 "set_head_target -104.464 200.23 122.534 0.847003"
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.5"
+say 3 "Thorn" "Pfui. Werfen Sie ihn über die Seite und schickt ihn zurück in den Dreck, wo er herkam."
+send_level_message "music_layer_override 3"
+set_cam -106.343 200.092 138.337 2.58 -12.69 -1.64 79.2465
+make_participants_aware

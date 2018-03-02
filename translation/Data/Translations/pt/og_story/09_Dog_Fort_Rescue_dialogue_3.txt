@@ -1,0 +1,24 @@
+#name "Boss"
+#participants 2
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+set_dialogue_color 2 1 0.5 0.5
+set_dialogue_voice 2 18
+send_level_message "music_layer_override 3"
+send_character_message 2 "set_eye_dir 191.309 17.1907 -173.703 1"
+send_character_message 2 "set_torso_target 191.465 17.5838 -172.624 0"
+send_character_message 2 "set_head_target 191.841 17.6182 -173.021 0.000186116"
+send_character_message 1 "set_eye_dir 193.245 17.4224 -174.424 1"
+send_character_message 1 "set_torso_target 192.648 17.5397 -173.403 0"
+send_character_message 1 "set_head_target 192.968 17.3546 -173.711 0"
+set_cam 189.626 17.9572 -170.467 -6.89 -37.47 1.42 21.9748
+set_character_pos 1 191.449 16.9232 -173.281 41
+set_character_pos 2 195.783 16.4325 -177.244 -102
+say 2 "LongTooth" "Desapareceram todos. Meu maço inteiro. Minha família."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "Eles eram-"
+send_character_message 2 "set_head_target 191.465 17.7373 -173.319 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "LongTooth" "Você vai pagar por isso!"
+send_level_message "music_layer_override 4"
+send_character_message 1 "equip_item 72"
+make_participants_aware

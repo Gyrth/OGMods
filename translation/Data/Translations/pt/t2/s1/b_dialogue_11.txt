@@ -1,0 +1,19 @@
+#name "Note-Energy"
+#participants 2
+set_character_pos 1 64.2583 -61.2897 294.631 -120
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 63.729 -61.5753 295.365 1"
+set_cam 63.8905 -61.1484 292.644 0 -179.84 0 41.8232
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Um diário pessoal de um guarda... [wait 0.3]abrem páginas, [wait 0.3]muito descuidado..."
+send_character_message 1 "set_head_target 63.8142 -61.7003 295.309 1"
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 63.1048 -61.2089 294.844 0 -89.54 0 49.631
+say 2 "Note" "Estar aqui é uma experiência estranha. [wait 0.5]De primeira vista, [wait 0.3]essas terras da colônia não sejam nada de especial."
+say 2 "Note" "Imprevisível, quando se trata do bioma, [wait 0.3]Claro, [wait 0.3]Mas acabará por se esticar uma média da terra."
+say 2 "Note" "Algo dentro de mim ainda está se mexendo. [wait 0.5]Às vezes, [wait 0.3]Sinto como se uma brisa forte flui através de mim, [wait 0.3]e minha pele fica na extremidade."
+say 2 "Note" "Eu não sou um poeta. [wait 0.5]Na verdade [wait 0.3]Eu odeio a ideia de até mesmo imitando um.
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "Mas estar aqui me dá vontade de fugir e proteja minha alma. [wait 0.5]É difícil de explicar."

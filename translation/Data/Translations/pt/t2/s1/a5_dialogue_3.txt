@@ -1,0 +1,15 @@
+#name "NL-G"
+#participants 2
+send_character_message 1 "set_head_target 1.55661 -2.61446 155.368 1"
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 1.55222 -4.34803 153.62 -90
+set_cam 2.98519 -3.78129 151.543 0 157.92 0 73.312
+say 1 "Ghost" "Espero que eles não lembre-se que quando eles acordam..."
+send_character_message 1 "set_head_target 1.55661 -2.61446 155.368 0"
+set_character_pos 1 1.55222 -4.39658 153.62 -90
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "É hora de sair daqui."
+send_global_message "levelwin hub"

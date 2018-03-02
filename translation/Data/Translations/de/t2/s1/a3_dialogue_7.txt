@@ -1,0 +1,15 @@
+#name "FL-B"
+#participants 1
+set_character_pos 1 -275.169 8.85485 -172.182 -179
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -276.753 10.4564 -172.102 1"
+send_character_message 1 "set_head_target -276.643 10.4813 -172.12 1"
+set_cam -270.336 9.41578 -174.738 0 109.94 0 65.8141
+send_level_message "set_camera_dof 0 0 0 0.3 10 5"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -274.55 9.76775 -181.049 0"
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch_lethal.anm\""
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Mal sehen, wohin dies führt mich..."
+send_global_message "levelwin b"

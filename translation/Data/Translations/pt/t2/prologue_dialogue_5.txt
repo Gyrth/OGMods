@@ -1,0 +1,21 @@
+#name "Note-Spirits"
+#participants 2
+set_character_pos 1 -24.2959 420.679 -120.573 85
+send_character_message 1 "set_head_target -24.2018 421.01 -121.37 1"
+set_cam -25.6283 421.221 -119.993 0 -56.31 0 46.8474
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Mensagem de alguns dos guardas para [wait 0.3]Quem sabe..."
+set_cam -23.4018 421.168 -118.903 0 12.27 0 46.8474
+send_character_message 1 "set_head_target -24.2656 420.958 -121.095 1"
+set_character_pos 1 -24.2959 420.633 -120.573 85
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Inscrever-me para a divisão de construção foi um erro. [wait 0.5]Eu sabia que seria, [wait 0.3]Ela me disse que seria, [wait 0.3]Mas aqui estou eu, de qualquer forma."
+say 2 "Note" "Eu levaria o escotismo nas ruas se afogou por causa disto. [wait 0.5]Sim, [wait 0.3]Claro, [wait 0.3]Esfaqueado e espancado por qualquer bandido aleatório vem a caminho."
+say 2 "Note" "Mas pelo menos não tenho que lidar com o pensamento de que todo mundo que eu já conhecia e amava morrerá um horrível, [wait 0.3]morte ardente."
+say 2 "Note" "Não estou a exagerar um pouco. [wait 0.5]Você pode dizer que estou sendo estranho tudo que quiser, [wait 0.3]Mas eu sei que estou certo."
+say 2 "Note" "É tudo folclore e mito, [wait 0.3]lenda e história, [wait 0.3]Mas guarde minhas palavras; [wait 0.3]os espíritos da Therium terá a vingança em nós para cada pico de Creta que já roubamos deles."
+say 2 "Note" "Um dia nós iremos longe demais, [wait 0.3]e o exército possuído dos deuses vai chover morte sobre nós através do uso de intrigas imprevisíveis pequenos bastardos."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Você pode me chamar de idiota. [wait 0.5]Mas nas histórias, [wait 0.3]mito acontece sempre verdadeiro, [wait 0.3]e os pessimistas sofrem. [wait 0.5]Esta não será uma exceção, [wait 0.3]para o que é a nossa vida, mas uma história?"

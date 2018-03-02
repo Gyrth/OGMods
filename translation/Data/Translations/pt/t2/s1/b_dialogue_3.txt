@@ -1,0 +1,17 @@
+#name "ML-A"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 81.8774 -60.2826 339.766 -79
+send_character_message 1 "set_eye_dir 82.1244 -59.3782 341.043 1"
+send_character_message 1 "set_head_target 82.106 -59.2037 340.965 1"
+set_cam 84.7139 -59.8725 343.579 0 40.21 0 33.7878
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+say 1 "Ghost" "..."
+set_character_pos 1 81.8774 -60.4481 339.766 -79
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+send_character_message 1 "set_head_target 82.106 -59.2037 340.965 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Não estou com humor para mais areia, [wait 0.3]de qualquer forma."
+send_global_message "levelwin a"

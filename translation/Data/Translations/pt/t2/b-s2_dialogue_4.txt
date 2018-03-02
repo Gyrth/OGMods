@@ -1,0 +1,113 @@
+#name "Gunk"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 1.0 0.0 0.0
+set_dialogue_voice 2 6
+send_character_message 1 "empty_hands"
+set_character_pos 3 -109.954 0.812494 137.591 0
+set_character_pos 2 -92.2435 3.61111 150.211 132
+send_character_message 2 "set_animation \"Data\Animations\Gunk\gunksitcrossedlegs.anm\""
+send_character_message 2 "set_eye_dir -94.5593 4.16351 147.873 1"
+send_character_message 2 "set_head_target -94.2038 4.0505 147.5 1"
+set_character_pos 1 -94.7159 3.3621 147.738 -42
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -92.3682 3.86853 150.08 1"
+send_character_message 1 "set_torso_target -94.293 3.35356 149.251 0"
+send_character_message 1 "set_head_target -92.806 4.49607 149.425 1"
+set_cam -93.1246 3.94681 147.623 0 100.12 0 33.8672
+say 1 "Ghost" "Ei, [wait 0.3]Você está bem?"
+send_character_message 2 "set_eye_dir -94.5593 4.16351 147.873 0.792059"
+send_character_message 2 "set_head_target -94.6148 4.29284 147.847 1"
+set_cam -93.0531 4.04445 147.788 -8.13 -162.09 0 21.1377
+say 2 "???" "Eu ouvi uma briga lá em cima."
+send_character_message 2 "set_head_target -94.5622 3.95639 147.852 1"
+send_character_message 2 "set_eye_dir -94.5593 4.16351 147.873 1"
+say 2 "???" "A pergunta mais importante é, [wait 0.3]Você está bem?"
+send_character_message 1 "set_head_target -92.2795 3.68919 150.073 1"
+send_character_message 1 "set_animation \"Data\Animations\r_crouch.anm\""
+set_cam -92.6158 3.27264 148.206 8.45 80.84 0.16 19.0183
+say 1 "Ghost" "Eu estou perfeitamente bem, [wait 0.3]Obrigado."
+send_character_message 2 "set_eye_dir -92.5854 3.8374 150.509 1"
+send_character_message 2 "set_head_target -92.7235 3.64149 150.387 1"
+set_cam -93.7969 3.7745 149.893 -0.16 -102.7 -0.15 25.5022
+say 1 "Ghost" "O que aconteceu com seu braço?"
+send_character_message 2 "set_head_target -92.7989 3.69115 150.343 1"
+send_character_message 2 "set_eye_dir -94.4649 3.82168 148.042 1"
+say 2 "???" "Isto não é uma ferida de nova, [wait 0.3]Confie em mim. [wait 0.3]Estou assim há anos."
+send_character_message 2 "set_head_target -94.381 4.43207 148.052 1"
+say 2 "???" "Meu nome é lamaçal. [wait 0.3]Qual é o seu?"
+send_character_message 1 "set_head_target -92.3448 3.95408 150.165 1"
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+set_cam -95.3018 4.02437 149.555 0.12 -23.23 -0.18 25.5022
+say 1 "Ghost" "Me chame de fantasma. [wait 0.3]Deixe-me tirar você daí..."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 1 "set_eye_dir -90.0959 4.18173 152.795 1"
+send_character_message 2 "set_torso_target -90.9681 3.76195 153.291 0"
+send_character_message 2 "set_eye_dir -92.1399 4.17038 154.366 1"
+send_character_message 1 "set_torso_target -91.5409 3.81844 154.019 0"
+send_character_message 2 "set_head_target -92.089 4.16599 154.281 1"
+set_character_pos 1 -92.1938 3.52506 154.37 35
+send_character_message 1 "set_head_target -90.1032 4.1707 152.83 1"
+send_character_message 2 "set_animation \"Data\Animations\Gunk\gunkactionidle.anm\""
+set_character_pos 2 -90.0325 3.38007 152.74 -108
+set_cam -74.1699 -0.308035 124.813 0.13 87.06 0.17 25.5022
+say 4 "" "..."
+send_character_message 1 "set_head_target -90.0093 3.93132 153.001 1"
+set_cam -90.3248 3.90159 154.279 0.13 87.06 0.17 42.3449
+say 1 "Ghost" "O que você estava fazendo lá?"
+set_cam -91.9786 3.15715 153.785 19.15 -66.4 -0.16 30.2926
+send_character_message 2 "set_head_target -92.2073 4.04642 154.347 1"
+send_character_message 1 "set_head_target -90.1776 4.15263 152.847 1"
+say 2 "Gunk" "Bem, [wait 0.3]Não é como iria me trancar lá dentro por vontade própria."
+send_character_message 2 "set_head_target -91.9741 3.87211 154.31 1"
+say 2 "Gunk" "Já estive lá desde o nascer do sol, [wait 0.3]Só esperando por alguém como você para vir junto."
+send_character_message 1 "set_head_target -90.0865 3.90351 153.152 1"
+set_cam -90.9201 4.07354 154.327 -0.05 90.1 0.19 25.5022
+say 1 "Ghost" "Quem eram eles?"
+set_cam -91.9069 3.61853 157.637 0.2 -8.65 0.02 45.4982
+say 2 "Gunk" "Não faço a menor ideia. [wait 0.3]Acho que nem são reais pessoas mais."
+send_character_message 2 "set_torso_target -90.4275 3.10374 153.569 1"
+say 2 "Gunk" "É como se fossem andar, [wait 0.3]cadáveres de respiração."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_thoughtful.anm\""
+send_character_message 1 "set_head_target -90.2043 3.9895 152.881 1"
+set_cam -91.7249 4.09716 153.23 -0.2 160.57 0.02 25.5022
+say 1 "Ghost" "E eles embalam um inferno de um soco."
+send_character_message 2 "set_torso_target -91.0108 4.32732 153.92 1"
+set_cam -90.7734 4.02016 154.405 0.2 -23.9 -0.04 25.5022
+say 2 "Gunk" "Eles me dominaram, [wait 0.3]e me segurou. [wait 0.3]Não sei o teria feito para mim. Obrigado."
+send_character_message 1 "set_torso_target -91.3885 3.42967 154.172 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -90.5884 3.99889 155.219 0.06 59.01 0.19 25.5015
+say 1 "Ghost" "Sem problema. [wait 0.3]Nós provavelmente devemos sair daqui."
+send_character_message 1 "set_torso_target -91.3885 3.42967 154.172 0.988216"
+set_character_pos 1 -92.1938 3.52501 154.37 35
+send_character_message 2 "set_head_target -90.0689 4.27316 155.741 1"
+send_character_message 2 "set_torso_target -90.9216 3.14726 154.144 1"
+set_cam -88.6015 4.0713 152.209 -0.13 118.85 0.15 25.5015
+say 2 "Gunk" "Eu vou estar no meu caminho, [wait 0.3]Então..."
+send_character_message 2 "set_head_target -91.9017 4.31397 154.278 1"
+set_character_pos 1 -92.1938 3.34305 154.37 35
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+send_character_message 1 "set_torso_target -91.3885 3.42967 154.172 0"
+say 1 "Ghost" "Ei, [wait 0.3]Espera- [wait 0.5]Você sabe onde o Cinderbreathe Empry é daqui?"
+send_character_message 2 "set_torso_target -90.9216 3.14726 154.144 0"
+send_character_message 2 "set_head_target -92.0551 4.06697 154.661 1"
+set_cam -91.6767 3.6278 153.341 15.85 -70.84 -0.18 25.5015
+say 2 "Gunk" "Não tenho ideia. [wait 0.3]Eles quebraram minha bússola."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -91.6766 3.62778 153.341 15.85 -70.84 -0.18 25.5015
+send_character_message 2 "set_torso_target -91.2167 4.30091 153.862 1"
+say 2 "Gunk" "De qualquer maneira, [wait 0.3]Temos que sair daqui, [wait 0.3]antes de mais, eles vêm."
+send_character_message 1 "set_torso_target -91.3837 3.40392 154.066 1"
+send_character_message 2 "set_torso_target -91.0075 3.25856 153.783 1"
+set_cam -87.5591 3.80574 152.952 0.36 95.13 0.08 39.6954
+say 1 "Ghost" "Certo."
+send_character_message 1 "set_head_target -90.2115 4.15793 152.771 1"
+send_character_message 2 "set_head_target -91.8577 4.48077 153.918 1"
+say 2 "Gunk" "Se eu te ver, [wait 0.3]Fico te devendo."
+send_character_message 1 "set_torso_target -91.2035 3.4064 154.412 1"
+send_character_message 1 "set_head_target -79.6013 2.8743 169.965 1"
+set_cam -93.0297 4.01598 152.79 -0.25 -143.99 0.27 23.3753
+say 1 "Ghost" "...[wait 0.3]é hora de ir."
+send_global_message "levelwin b"

@@ -1,0 +1,251 @@
+#name "Intro"
+#participants 5
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_dialogue_color 3 0.7 0.7 0.89
+set_dialogue_voice 3 11
+set_dialogue_color 4 0.7 0.7 0.89
+set_dialogue_voice 4 11
+set_character_pos 2 -23.2805 399.727 16.9433 0
+send_character_message 2 "set_eye_dir -21.3826 399.931 17.0547 1"
+send_character_message 2 "set_head_target -22.3233 400.187 16.9718 0"
+set_character_pos 3 -28.8743 399.703 8.57286 -52
+send_character_message 3 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+send_character_message 3 "set_eye_dir -26.7882 400.497 12.7995 1"
+send_character_message 3 "set_head_target -26.5974 400.461 13.035 1"
+set_character_pos 1 -29.847 399.844 9.54185 -45
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_eye_dir -26.5527 400.378 13.1536 1"
+send_character_message 1 "set_head_target -26.3752 399.831 13.0245 1"
+set_cam -29.2976 399.9 11.3099 0 14.77 0 29.2216
+say 1 "Amos" "..."
+send_character_message 1 "set_head_target -26.8436 400.324 13.4003 1"
+send_character_message 3 "set_head_target -26.6966 399.463 12.9776 1"
+set_character_pos 3 -28.8743 399.758 8.57286 -52
+send_character_message 3 "set_animation \"Data\Animations\r_crouch.anm\""
+set_cam -27.5461 399.941 8.40538 0 113.43 0 36.4064
+say 1 "Amos" "..."
+send_character_message 1 "set_eye_dir -28.9264 400.135 8.6732 1"
+send_character_message 1 "set_head_target -28.4567 399.777 9.60254 1"
+send_character_message 3 "set_eye_dir -29.3628 400.25 9.41492 1"
+send_character_message 3 "set_head_target -29.3478 400.084 9.62285 1"
+say 3 "Bijou" "Que diabos foi isso? [wait 0.5]O que você entende por 'ele'? Você o conhece?"
+set_character_pos 3 -28.8743 399.758 8.57286 -52
+send_character_message 2 "set_head_target -22.3233 400.187 16.9718 0"
+send_character_message 2 "set_eye_dir -21.3826 399.931 17.0547 1"
+set_character_pos 2 -23.2805 399.727 16.9433 0
+send_character_message 3 "set_torso_target -27.7039 400.21 9.13344 0.00011912"
+send_character_message 1 "set_eye_dir -28.8939 399.761 10.4202 1"
+send_character_message 1 "set_head_target -27.0467 399.388 11.4593 1"
+set_cam -30.0223 399.941 11.3312 0 -18.15 0 30.699
+say 1 "Amos" "Que é Jairo- [wait 0.25]Ele está aqui para matar todos. [wait 0.4]Só precisamos manter a calma e certifique-se que ele não ver ou ouvir-nos."
+set_cam -30.0223 399.941 11.3312 0 -18.15 0 30.699
+set_character_pos 3 -28.8743 399.758 8.57286 -52
+send_character_message 2 "set_head_target -22.3233 400.187 16.9718 0"
+send_character_message 2 "set_eye_dir -21.3826 399.931 17.0547 1"
+set_character_pos 2 -23.2805 399.727 16.9433 0
+send_character_message 1 "set_eye_dir -28.9694 400.083 9.21785 1"
+send_character_message 1 "set_head_target -29.0502 399.938 9.52338 1"
+send_character_message 3 "set_torso_target -29.0698 398.04 8.07745 1"
+send_character_message 3 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+say 3 "Bijou" "Como você o conhece? [wait 0.5]Por que você o conhece?"
+set_cam -30.0223 399.941 11.3312 0 -18.15 0 30.7031
+set_character_pos 3 -28.8743 399.758 8.57286 -52
+send_character_message 2 "set_head_target -22.3233 400.187 16.9718 0"
+send_character_message 2 "set_eye_dir -21.3826 399.931 17.0547 1"
+set_character_pos 2 -23.2805 399.727 16.9433 0
+send_character_message 3 "set_head_target -29.4279 399.996 9.48142 1"
+send_character_message 1 "set_head_target -29.005 400.064 9.48463 1"
+say 1 "Amos" "Fique tranquila."
+set_cam -30.0223 399.941 11.3312 0 -18.15 0 30.699
+set_character_pos 3 -28.8743 399.758 8.57286 -52
+send_character_message 2 "set_head_target -22.3233 400.187 16.9718 0"
+send_character_message 2 "set_eye_dir -21.3826 399.931 17.0547 1"
+set_character_pos 2 -23.2805 399.727 16.9433 0
+send_character_message 1 "set_torso_target -29.5784 399.63 9.80065 1"
+send_character_message 1 "set_eye_dir -26.7232 400.209 12.9405 1"
+send_character_message 1 "set_head_target -26.7727 400.454 13.0606 1"
+send_character_message 3 "set_eye_dir -27.1683 400.308 12.4409 1"
+send_character_message 3 "set_head_target -27.8216 400.198 10.6605 1"
+send_character_message 3 "set_torso_target -28.6312 398.639 8.93299 0"
+say 3 "Bijou" "..."
+set_cam -30.0223 399.941 11.3312 0 -18.15 0 30.699
+send_character_message 2 "set_eye_dir -29.6607 400.063 9.86277 1"
+send_character_message 2 "set_animation \"Data\Animations\jairoidle.anm\""
+send_character_message 2 "set_head_target -29.4052 400.062 10.207 0.999878"
+set_character_pos 2 -26.941 399.866 12.7967 134
+set_character_pos 3 -28.8743 399.675 8.57286 -52
+send_character_message 3 "set_animation \"Data\Animations\startledcrouch.anm\""
+send_character_message 1 "set_torso_target -29.2594 399.695 10.4683 0.9999"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+say 2 "Jairo" "Acho que não vimos [wait 0.3]Fantasma."
+send_character_message 1 "set_torso_target -29.2594 399.695 10.4683 0"
+send_character_message 2 "set_head_target -29.4052 400.062 10.207 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouchthreat.anm\""
+set_cam -30.3049 400.138 8.93335 0 -142.36 0 19.6188
+say 1 "Amos" "Jairo, [wait 0.2]Afastem-se! [wait 0.4]Não nos machuque!"
+send_character_message 2 "set_animation \"Data\Animations\jairowelcome.anm\""
+set_cam -29.6557 400.229 11.847 0 -103.24 0 22.04
+say 2 "Jairo" "Por que fugiu? [wait 0.5]Precisamos de terminar tudo nós mesmos?"
+send_character_message 1 "set_head_target -27.1173 399.981 12.6781 1"
+set_cam -28.0182 400.004 10.2948 0 72.13 0 22.04
+say 1 "Amos" "Quem é você? [wait 0.2]O que é que está a fazer?"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data\Animations\jairobeckon.anm\""
+set_cam -26.1293 399.708 10.0525 8.78 158.07 0 24.3428
+say 2 "Jairo" "Dissemos para matá-los. [wait 0.3]Dissemos à greve onde estão tentando construir e colonizar."
+send_character_message 1 "set_head_target -27.0283 400.336 12.558 1"
+send_character_message 1 "set_torso_target -29.2594 399.695 10.4683 1"
+set_cam -27.5095 400.405 10.1311 -0.03 77.18 0.19 20.3948
+say 1 "Amos" "Quem é você [wait 0.2]de qualquer forma? [wait 0.5]E o que você entende por 'nós'!?"
+send_character_message 2 "set_head_target -29.5256 399.673 9.99347 1"
+send_character_message 2 "set_animation \"Data\Animations\jairothreateningsword.anm\""
+set_cam -29.3576 400.086 11.0968 4.7 -121 -0.16 15.513
+say 2 "Jairo" "Você não é permitido no Therium. [wait 0.3]Nenhum de vocês jamais deveria ter vindo."
+send_character_message 1 "set_head_target -26.9092 400.546 12.5538 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 3 "set_eye_dir -29.9121 400.573 9.13464 1"
+send_character_message 3 "set_head_target -28.8028 400.675 9.91912 1"
+set_cam -30.3121 400.883 10.8461 -16.99 -28.96 0.2 21.2047
+say 1 "Amos" "Está! [wait 0.3]É, tudo bem!? [wait 0.2]Ninguém vai para o Therium- [wait 0.2]Não depois disto!"
+send_character_message 2 "set_animation \"Data\Animations\jairothreateningswordraise.anm\""
+send_character_message 2 "set_head_target -29.2271 399.538 10.0666 1"
+set_cam -28.311 400.371 11.6356 0.21 -124.12 0.19 21.2047
+say 2 "Jairo" "É melhor ter certeza."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_worriedpose_2.anm\""
+set_cam -28.9405 400.573 10.7215 -0.26 37.44 -0.11 21.2047
+say 1 "Amos" "O que... [wait 0.5]o que vai fazer [wait 0.2]Jairo?"
+send_character_message 3 "set_eye_dir -27.1497 400.477 12.1311 1"
+send_character_message 3 "set_head_target -26.9814 400.33 12.3943 1"
+send_character_message 2 "set_head_target -29.0119 399.687 8.61276 1"
+set_character_pos 3 -28.5338 399.675 9.00861 -52
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_shockedback.anm\""
+send_character_message 2 "set_torso_target -27.2375 399.242 12.1782 1"
+send_character_message 2 "set_eye_dir -29.4354 400.175 9.5012 1"
+set_cam -28.0879 400.372 13.253 -0.11 -52.56 0.26 21.2047
+say 2 "Jairo" "Nós vamos ter certeza de que você tem uma história para contar."
+send_character_message 3 "set_head_target -27.1361 400.6 12.1539 1"
+send_character_message 1 "set_head_target -27.0398 400.435 12.4569 1"
+set_cam -27.5192 400.509 8.99559 -0.15 72.65 -0.24 21.2047
+say 3 "Bijou" "N-[wait 0.3]Não!"
+send_character_message 2 "set_head_target -22.4086 400.054 14.6756 1"
+set_character_pos 2 -32.6769 411.167 32.3345 113
+send_character_message 2 "set_eye_dir -22.5009 400.021 14.4316 1"
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+send_character_message 1 "set_head_target -28.5441 399.682 7.98453 1"
+send_character_message 1 "set_eye_dir -28.6301 399.805 8.03978 1"
+send_character_message 1 "set_torso_target -28.9832 399.75 8.19901 0"
+set_character_pos 1 -29.0232 399.808 8.24407 32
+send_character_message 4 "set_animation \"Data/Animations/bijou1.anm\""
+send_character_message 4 "set_torso_target -28.1945 399.78 8.58951 0"
+send_character_message 4 "set_head_target -28.5321 399.627 8.26139 1"
+send_character_message 4 "set_eye_dir -27.9426 399.674 9.66599 0.518842"
+set_character_pos 4 -28.2314 399.718 8.98639 106
+send_character_message 2 "set_torso_target -22.2289 399.624 15.1533 0"
+send_character_message 2 "set_animation \"Data\Animations\jairothreateningsword.anm\""
+send_character_message 3 "set_eye_dir -29.0061 408.091 10.2855 1"
+send_character_message 3 "set_head_target -28.0007 407.601 10.3025 1"
+send_character_message 3 "set_torso_target -27.9698 407.443 10.8461 0"
+set_character_pos 3 -28.9546 407.9 10.3543 -52
+set_cam -46.1775 400.935 25.0498 -0.05 -65.45 0.28 21.2047
+say 5 "" "..."
+set_character_pos 2 -32.6769 409.363 32.3345 113
+set_cam -26.8139 399.489 8.53582 6.44 78.18 -0.26 29.0514
+say 1 "Amos" "Bijou! [wait 0.5]Bijou, [wait 0.3]Sem essa [wait 0.3]Você vai sobreviver a isso!"
+send_character_message 1 "set_head_target -28.6171 399.692 7.96096 1"
+send_character_message 4 "set_head_target -28.5504 399.77 8.2311 1"
+say 3 "Bijou" "..."
+send_character_message 4 "set_head_target -28.5049 399.663 8.19704 1"
+send_character_message 1 "set_head_target -28.5117 399.733 7.92052 1"
+set_cam -28.8971 400.649 9.3888 -34.24 -11.99 -0.49 29.0514
+say 1 "Amos" "Eu tentei lutar com ele como o melhor que pude, [wait 0.3]Eu prometo!"
+set_character_pos 1 -29.0232 399.807 8.24407 32
+set_cam -29.0961 399.648 9.63447 0.31 -15.09 -0.42 29.0514
+send_character_message 4 "set_torso_target -28.2882 399.728 8.59168 0"
+send_character_message 4 "set_animation \"Data/Animations/bijou2.anm\""
+send_character_message 4 "set_head_target -28.4924 399.704 8.16943 1"
+say 1 "Amos" "Sem essa [wait 0.3]Podemos encontrar algumas ataduras, [wait 0.3]pano, [wait 0.4]algo..."
+send_character_message 4 "set_eye_dir -27.9426 399.674 9.66599 0"
+send_character_message 4 "set_head_target -28.484 399.689 8.17331 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 3 "Bijou" "..."
+set_cam -27.5258 399.747 9.60217 0.52 37.62 0 29.0514
+send_character_message 1 "set_head_target -28.591 399.687 7.78583 1"
+send_character_message 4 "set_head_target -28.5127 399.584 8.38745 1"
+send_character_message 4 "set_eye_dir -28.7549 399.653 9.53808 0.452391"
+say 1 "Amos" "[wait 0.3]Você está bem? [wait 0.5]Por que não falas?"
+send_character_message 4 "set_animation \"Data/Animations/bijou3.anm\""
+say 4 "Bijou" "[wait 0.3]* Chiado *"
+send_character_message 1 "set_head_target -28.5912 399.688 7.78579 1"
+set_character_pos 4 -28.2314 399.72 8.98639 106
+send_character_message 1 "set_torso_target -28.6721 399.75 8.13182 0.999971"
+send_character_message 4 "set_torso_target -28.4739 399.687 8.29234 0.994862"
+send_character_message 4 "set_eye_dir -28.6925 399.846 7.78958 0.601643"
+send_character_message 4 "set_head_target -28.5649 399.882 7.81006 1"
+set_cam -28.1721 401.184 9.03205 -54.34 32.56 -0.08 29.0514
+say 1 "Amos" "Ele deve ter cortado através de seus pulmões..."
+set_character_pos 1 -29.0232 399.703 8.24407 32
+send_character_message 4 "set_torso_target -28.4739 399.687 8.29234 0.994862"
+set_character_pos 4 -28.2314 399.72 8.98639 106
+set_cam -27.1832 399.96 8.97343 -10.92 59.97 0.2 36.4972
+send_character_message 4 "set_eye_dir -28.4853 399.566 8.08785 0.601643"
+send_character_message 4 "set_head_target -28.4922 399.807 8.21615 0.990081"
+send_character_message 1 "set_head_target -28.5123 399.63 8.02364 0.999984"
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_torso_target -28.8756 399.75 8.18364 0"
+say 1 "Amos" "Só... [wait 0.3]Tente salvar a sua força..."
+set_character_pos 4 -28.2314 399.71 8.98639 106
+send_character_message 4 "set_animation \"Data/Animations/bijou4.anm\""
+send_character_message 4 "set_head_target -28.4922 399.807 8.21615 0"
+send_character_message 1 "set_head_target -28.5123 399.63 8.02364 1"
+send_character_message 4 "set_torso_target -28.3378 399.591 8.72836 0"
+say 3 "Bijou" "..."
+send_character_message 4 "set_eye_dir -28.4853 399.566 8.08785 0.846341"
+send_character_message 4 "set_animation \"Data/Animations/bijou5.anm\""
+set_cam -26.9901 399.681 8.29323 0.1 82.97 0.15 36.4972
+set_character_pos 1 -29.023 399.808 8.24662 32
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+send_character_message 1 "set_head_target -28.7059 399.454 7.91083 1"
+say 3 "Bijou" "..."
+set_character_pos 2 -33.1774 409.382 31.9776 113
+send_character_message 4 "set_animation \"Data/Animations/bijou6.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Amos" "[wait 0.3]Bijou... [wait 0.5]Bijou!?"
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+set_character_pos 1 142.38 22.9621 -69.095 -24
+send_character_message 1 "set_torso_target 142.735 23.1014 -69.4815 0"
+send_character_message 1 "set_head_target 143.399 22.8021 -68.5855 1"
+send_character_message 1 "set_eye_dir 144.006 22.6192 -68.719 0"
+send_character_message 4 "set_eye_dir -26.8139 408.338 8.10163 0"
+send_character_message 4 "set_head_target -27.157 407.316 9.13212 0"
+send_character_message 4 "set_torso_target -25.8017 408.114 9.19324 0"
+set_character_pos 4 -28.1676 407.241 8.46113 -74
+set_cam -44.9907 401.32 24.7515 0.3 -58.84 -0.12 34.747
+say 5 "" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+set_cam 151.768 23.6944 -52.1225 -3.89 24.96 -0.03 15.4535
+say 5 "" "..."
+send_character_message 1 "set_head_target 143.226 22.7046 -68.3765 1"
+set_cam 143.372 23.0285 -65.1986 0.17 11.23 -0.07 21.6904
+say 1 "Amos" "..."
+send_character_message 1 "set_head_target 143.58 22.6783 -68.6627 1"
+send_character_message 1 "set_eye_dir 142.916 22.8898 -68.5416 0.694995"
+say 1 "Amos" "Desculpa [wait 0.6]Bijou."
+send_character_message 1 "set_animation \"Data\Animations\r_crouch.anm\""
+set_cam 138.064 23.3541 -64.2523 -1.4 -51.39 -0.18 32.4315
+say 1 "Amos" "...[wait 0.5]Quem me dera que eu poderia ter feito algo sobre ele."
+send_character_message 1 "set_head_target 142.923 22.7121 -68.7226 1"
+send_character_message 1 "set_eye_dir 142.916 22.8898 -68.5416 0"
+set_cam 139.482 23.0913 -66.0261 3.05 -54.4 -0.34 32.4315
+say 1 "Amos" "..."
+send_character_message 1 "set_eye_dir 142.916 22.8898 -68.5416 0.0270108"
+set_cam 144.321 23.5323 -69.9185 -0.13 116.72 -0.37 38.4899
+send_character_message 1 "set_head_target 143.456 23.582 -68.3224 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_yawn.anm\""
+send_character_message 1 "set_eye_dir 142.916 22.8898 -68.5416 0.687925"
+say 5 "" "Completou o final do caminho de B-B."
+fade_to_black 1
+say 5 "T2-Dev" "Obrigado por jogar Therium-2."
+send_global_message "levelwin"

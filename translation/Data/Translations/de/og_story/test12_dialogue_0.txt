@@ -1,0 +1,11 @@
+#name "Boss"
+#participants 2
+
+set_character_pos 2 -4.76524 -4.33737 12.0489 164
+set_character_pos 1 -9.83407 -4.35848 10.6299 -16
+set_cam -10.5101 -3.49077 7.61562 0 -149.42 0 61.4199
+say 2 "Boss" "Was ist all das für ein Geräusch?"
+say 1 "Turner" "Ich werde Sie jetzt töten."
+make_participants_aware
+
+

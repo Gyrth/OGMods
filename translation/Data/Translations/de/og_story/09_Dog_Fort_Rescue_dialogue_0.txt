@@ -1,0 +1,30 @@
+#name "Prisoners"
+#participants 4
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 228.068 17.6501 -162.859 1"
+set_dialogue_color 2 0.4 1 1
+set_dialogue_voice 2 11
+set_dialogue_color 3 1 0.8 0.7
+set_dialogue_voice 3 3
+set_character_pos 4 228.134 16.897 -162.963 -176
+set_character_pos 3 225.177 16.896 -158.857 89
+set_character_pos 2 229.177 17.0516 -159.498 139
+set_character_pos 1 225.225 16.8731 -163.096 -40
+set_cam 229.39 17.5824 -161.609 -4.4 64.54 -2.14 62.7786
+say 1 "Turner" "Ich bin hier um zu helfen. Sonne brachte mich."
+set_cam 229.39 17.5824 -161.609 -4.4 64.55 -2.14 62.7786
+send_character_message 4 "set_head_target 225.552 17.9054 -159.129 1"
+say 2 "Gray" "Siehst du, dass ich dir gesagt, dass sie ausgeführt wurde, um Hilfe zu erhalten! Sie ist keine Coward."
+send_character_message 3 "set_head_target 227.351 17.2382 -161.467 1"
+set_character_pos 3 225.177 16.896 -158.857 89
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_cam 229.416 17.904 -163.313 -11.4 116.08 -1.01 62.7786
+say 3 "Daisy" "Für einmal bin ich gerne widerlegt werden."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 229.39 17.5824 -161.609 -4.4 64.54 -2.14 62.7786
+say 1 "Turner" "Lass uns hier raus."
+send_character_message 4 "set_head_target 225.587 17.7781 -162.979 1"
+say 2 "Gray" "Wir können nicht überall mit unseren Beinen wie dies eingesperrt."
+send_character_message 4 "set_head_target 225.587 19.569 -162.979 1"
+say 2 "Gray" "Einer der wachen muss die Schlüssel haben."

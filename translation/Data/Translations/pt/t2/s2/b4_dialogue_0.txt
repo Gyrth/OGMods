@@ -1,0 +1,63 @@
+#name "Intro"
+#participants 5
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 13
+send_character_message 4 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 4 "set_torso_target -6.16843 -6.63419 -116.811 1"
+send_character_message 4 "set_head_target -5.66673 -6.23641 -116.608 1"
+set_character_pos 4 -6.23957 -6.80773 -117.688 -60
+set_character_pos 2 -5.69664 -6.75461 -116.599 -62
+send_character_message 2 "set_animation \"Data\Animations\r_halfwoundedarmed2.anm\""
+send_character_message 2 "set_torso_target -4.87534 -5.98335 -114.875 1"
+send_character_message 2 "set_head_target -5.22512 -6.51684 -115.49 1"
+set_character_pos 1 -43.0573 -6.53412 -113.977 -5
+send_character_message 1 "set_animation \"Data\Animations\stealthobserve.anm\""
+send_character_message 1 "set_torso_target -42.4088 -6.8473 -113.865 0"
+send_character_message 1 "set_head_target -40.3414 -6.13045 -113.228 1"
+set_cam -44.438 -6.39463 -115.259 0 -117.74 0 30.4018
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "...[wait 0.3]outra antiga fortaleza."
+send_character_message 1 "set_torso_target -42.2417 -6.69083 -113.709 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+set_cam -41.9786 -6.33251 -112.499 0 28.69 0 30.4018
+send_character_message 1 "set_head_target -39.6886 -6.1043 -114.193 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "...?"
+send_character_message 2 "set_head_target -5.22515 -6.51685 -115.49 1"
+send_character_message 2 "set_torso_target -5.0243 -5.96438 -115.065 1"
+set_character_pos 4 -6.23957 -6.80987 -117.688 -60
+send_character_message 4 "set_head_target -5.66675 -6.23641 -116.608 1"
+send_character_message 4 "set_torso_target -6.16843 -6.63419 -116.811 0.924477"
+send_character_message 1 "set_animation \"Data\Animations\stealthobserve.anm\""
+send_character_message 1 "set_torso_target -42.2971 -6.47043 -114.016 0"
+set_cam -44.6537 -6.35449 -113.486 0 -80.27 0 17.0096
+send_level_message "set_camera_dof 0.3 10 7 0 0 0"
+say 2 "???" "..."
+set_character_pos 4 -6.23957 -6.80987 -117.688 -60
+send_character_message 4 "set_torso_target -6.21645 -6.88884 -116.788 0.924477"
+send_character_message 2 "set_head_target -5.97214 -6.554 -115.209 1"
+send_character_message 2 "set_torso_target -4.92542 -6.68102 -114.83 1"
+set_cam -8.93545 -6.42637 -112.573 0 -34.84 0 20.5219
+send_level_message "set_camera_dof 0 0 0 0.3 6 1"
+say 2 "???" "Eu não sou quem você procura, [wait 0.4]Eu juro!"
+send_character_message 2 "set_torso_target -5.45154 -7.07907 -115.48 1"
+set_character_pos 4 -6.23957 -6.95531 -117.688 -60
+send_character_message 4 "set_torso_target -5.42877 -7.20596 -117.088 1"
+send_character_message 4 "set_animation \"Data\Animations\ghostsword_swordpoint.anm\""
+send_character_message 2 "set_head_target -6.3388 -6.61794 -115.484 1"
+say 3 "????" "..."
+send_character_message 2 "set_torso_target -4.87075 -7.21601 -115.88 1"
+send_character_message 4 "set_head_target -5.70418 -6.30614 -116.639 1"
+send_character_message 4 "set_torso_target -5.70422 -6.74524 -117.014 1"
+send_character_message 2 "set_head_target -4.88817 -6.95753 -115.468 1"
+say 2 "???" "...[wait 0.2]bem..."
+set_cam -6.49512 -6.35136 -112.534 0 86.2 0 5.53584
+set_character_pos 2 54.885 1.11281 -82.0019 -88
+set_character_pos 4 17.8788 4.15405 -68.8013 90
+send_level_message "set_camera_dof 0.3 10 1 0 0 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -39.5559 -6.83168 -113.901 1"
+set_cam -40.759 -6.43559 -111.671 0 39.87 0 11.3109
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Eu preciso encontrar onde estão o levando. [wait 0.5]Ele deve saber como sair daqui."

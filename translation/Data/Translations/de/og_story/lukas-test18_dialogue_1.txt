@@ -1,0 +1,13 @@
+#name "Start"
+#participants 2
+
+set_character_pos 2 22.7067 4.75232 3.4177 -176
+set_character_pos 1 16.3056 4.77468 3.65813 0
+set_cam 17.4387 5.32064 2.96454 0 116.73 0 90
+say 1 "Turner" "Oh große. Ein Wolf."
+set_cam 21.016 5.36039 2.34941 0 -125.14 0 90
+say 2 "Wolf" "Oh große! Ein Kaninchen!"
+make_participants_aware
+
+
+

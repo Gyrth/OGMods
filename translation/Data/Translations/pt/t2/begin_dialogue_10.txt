@@ -1,0 +1,15 @@
+#name "Note-SpiritEnergy"
+#participants 2
+set_character_pos 1 190.052 -48.9326 193.971 -180
+send_character_message 1 "set_head_target 189.297 -48.4541 194.072 1"
+set_cam 190.681 -48.3442 192.828 0 135.86 0 38.5978
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Uma arrancada de página de um livro sobre lendas de espírito..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 189.05 -48.2701 194.674 0 -40.3 0 38.5978
+say 2 "Note" "Energia de espírito, [wait 0.3]Como disse nos contos, [wait 0.3]é quase sempre mantido e aproveitado dentro de lanternas de pedra quase tão altas quanto qualquer cão adulto médio."
+say 2 "Note" "Se estas lanternas acontecem ser quebrado ou destruída de alguma forma, [wait 0.3]a energia do espírito será lançada e imediatamente destruída; [wait 0.3]qualquer finalidade que os espíritos dentro da lanterna podem já cumpriu antecipadamente desaparece completamente, [wait 0.3]e sua função é perdida para sempre até substituído."
+say 2 "Note" "Juntamente com a energia do espírito ser permanentemente perdida, [wait 0.3]será condenada quase imediatamente para este 'pecado original'."
+say 2 "Note" "Estas lanternas espírito oferecem funções para cada um dos princípios básicos e a lei do mundo."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Enquanto lá são abundância de contos envolvendo os espíritos do mundo, [wait 0.3]Mais do que estou inclinado a acreditar que estes não são nada mais do que histórias."

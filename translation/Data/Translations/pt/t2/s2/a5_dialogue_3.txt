@@ -1,0 +1,30 @@
+#name "Leave"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.6 0.9 0
+set_dialogue_voice 2 12
+set_character_pos 2 226.447 -6.52946 159.395 141
+send_character_message 2 "set_animation \"Data\Animations\injuredfoot.anm\""
+send_character_message 2 "set_eye_dir 225.728 -6.67325 158.716 0.347221"
+send_character_message 2 "set_torso_target 226.231 -7.0428 158.52 0"
+send_character_message 2 "set_head_target 225.415 -6.85785 158.393 1"
+set_character_pos 1 227.985 -6.64961 153.056 5
+send_character_message 1 "set_eye_dir 226.059 -6.43466 158.319 1"
+send_character_message 1 "set_torso_target 228.287 -6.39993 153.478 1"
+send_character_message 1 "set_head_target 226.233 -6.47741 158.826 1"
+set_cam 227.289 -5.91169 154.4 0 -31.62 0 32.6744
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 229.23 -5.58034 151.386 1"
+send_character_message 1 "set_torso_target 228.707 -6.44454 152.845 1"
+say 1 "Ghost" "..."
+send_character_message 2 "set_head_target 225.966 -6.83721 157.971 1"
+set_cam 225.201 -6.99644 160.314 8.08 -26.22 0 32.6744
+send_character_message 1 "set_torso_target 228.44 -6.57413 152.447 1"
+set_character_pos 1 227.985 -6.6496 153.056 51
+say 1 "Ghost" "..."
+send_character_message 1 "set_torso_target 228.501 -5.89601 152.499 1"
+set_cam 211.916 -21.9628 164.9 0.01 63.3 1.02 32.6744
+say 3 "" "..."
+send_global_message "levelwin a"

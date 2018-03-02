@@ -1,0 +1,19 @@
+#name "Note-Relocation"
+#participants 2
+set_character_pos 1 -24.696 2.85019 17.3665 90
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target -24.6229 3.30483 16.513 1"
+set_cam -23.3942 3.46124 18.2741 0 44.12 0 38.5894
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Ein Brief von Kommandeur einer Empry..."
+set_character_pos 1 -24.696 2.83039 17.3665 90
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -25.1808 3.49697 16.4123 0 -145.65 0 38.5894
+say 2 "Note" "Ja, [wait 0.3]die höheren Sprossen der Empry beantwortet haben. [wait 0.5]Prüfen Sie Dichtung, wenn du so bist [wait 0.3]"besonderen" darüber."
+say 2 "Note" "Für alle externen Empry Kommandanten befindet sich auf dem Gelände der Kolonie, [wait 0.3]die neuesten terroristischen Aktivitäten hat einige neue Maßnahmen gefordert."
+say 2 "Note" "Diesem Schreiben beigefügt ist eine Karte, um Sie in einem der Bunker, die von uns verwendeten im Cinderblood Bürgerkrieg; [wait 0.3]in einem meist beschädigten Zustand sicher [wait 0.3]aber das Layout sollte ausreichen, um nur drei Kaninchen von einem Angriff zu stoppen."
+say 2 "Note" "So schnell wie möglich dorthin reisen. [wait 0.5]Jede Empry Offiziere und Kommandanten gefangen außerhalb der Bunker werden der Befehl vorübergehend entlastet werden."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Seien Sie vorsichtig und ruhig. [wait 0.5]Unterzeichnet, [wait 0.3]Ano."

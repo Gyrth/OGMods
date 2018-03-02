@@ -1,0 +1,17 @@
+#name "Note-Caravans"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -151.713 -6.4528 -34.5783 59
+send_character_message 1 "set_head_target -151.26 -6.36841 -35.2712 1"
+set_cam -153.652 -6.17921 -34.6382 0 -84.14 0 54.8223
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Eine antike Note. [wait 0.3]Wer weiß, wie lange dies hier gewesen."
+set_cam -150.981 -5.83489 -35.1783 0 119.88 0 54.8223
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Unsere Wohnwagen haben jetzt jeden zweiten Tag belagert worden; [wait 0.3]Unsere einsamen Außenposten haben infolgedessen verhungert."
+say 2 "Note" "Der Berater können nicht dafür stehen, [wait 0.3]und keiner wird wir; [wait 0.3]aber was genau trifft uns aus?"
+say 2 "Note" "Die Wölfe [wait 0.3]Obwohl heftig, [wait 0.3]sind intelligent; [wait 0.3]Sie ermöglichen es uns, zu ihrem eigenen Vorteil zu überleben."
+say 2 "Note" "Diese Angreifer zeigt keine Gnade. [wait 0.5]Blut und Eingeweide Dusche zerstörten waren, [wait 0.3]Wasser und Nahrung."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Wer sind sie, [wait 0.3]Ich bevorzuge Wölfe."

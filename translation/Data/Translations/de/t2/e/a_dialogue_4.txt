@@ -1,0 +1,28 @@
+#name "Flying"
+#participants 2
+set_character_pos 2 -98.9995 42.2756 -39.3909 73
+send_character_message 2 "set_animation \"Data/Animations/trailersit.anm\""
+set_cam -93.6322 41.5542 -40.0828 0 86.32 0 44.0389
+set_character_pos 1 -97.2955 41.1327 -41.1713 -130
+send_character_message 1 "set_torso_target -95.5658 41.5358 -41.2815 0"
+send_character_message 1 "set_head_target -99.0575 42.8183 -39.2781 1"
+say 1 "Ghost" "...[wait 0.3]Was machst du hier?"
+send_character_message 2 "set_head_target -97.3291 41.9102 -40.9807 1"
+say 2 "???" "Fragen sollte nicht ich Sie, die?"
+send_character_message 2 "set_head_target -97.8542 41.756 -41.1061 1"
+set_cam -100.109 42.4918 -39.3896 0 -94.72 0 34.2173
+say 2 "???" "Name ist Thomas. [wait 0.5]Ich bin nur eine Pause nach dem Aufstieg der..."
+send_character_message 2 "set_head_target -98.236 42.4381 -42.7398 1"
+say 2 "???" "Wei▀t du... [wait 0.3]Flug der Treppe."
+send_character_message 1 "set_head_target -98.9259 42.3564 -40.5613 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_cam -97.7429 41.7529 -39.4932 0 -13.33 0 26.9277
+send_character_message 2 "set_head_target -97.4328 41.8906 -41.0037 1"
+say 1 "Ghost" "...[wait 0.5]Oh. [wait 0.5]Ja, [wait 0.3]Diese."
+set_cam -94.1041 41.8045 -42.2696 0 116.47 0 26.9277
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 2 "set_head_target -97.4135 41.7893 -41.0412 1"
+send_character_message 1 "set_head_target -98.8567 42.8158 -39.3579 1"
+say 2 "???" "Ihr habt nie wirklich fliegen Arten, [wait 0.3]wie auch immer."
+send_character_message 2 "set_head_target -97.4135 41.7893 -41.0412 0"
+say 2 "???" "In der Regel Absturz Sie nur in Dinge."

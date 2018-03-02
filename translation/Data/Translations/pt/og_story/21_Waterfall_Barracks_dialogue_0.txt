@@ -1,0 +1,43 @@
+#name "BarracksCutscene"
+#participants 3
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+send_character_message 2 "set_torso_target 14.6072 -1.36606 0.656699 0.0159942"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 2 "set_head_target 14.8285 -1.12387 0.965447 0.883795"
+send_character_message 1 "set_head_target 15.3336 -1.23041 0.757575 1"
+set_character_pos 2 15.5675 -1.78699 0.593721 -142
+set_character_pos 1 15.7763 -1.7918 1.56181 133
+set_cam 14.4329 -0.987662 0.473075 -5.78 -113.45 0 90
+say 1 "Midnight" "Turner! Havia uma mensagem escondida na minha comida hoje. Uma nota de alguém chamado céu."
+send_character_message 2 "set_head_target 15.3772 -1.53451 1.4087 0.883795"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Turner" "Mostre-me."
+send_character_message 1 "set_head_target 14.683 -1.28471 1.04664 1"
+say 1 "Midnight" "Você está brincando? Destruí-lo. Não quero ser pego com algo assim."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Turner" "Você o que?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 15.4867 -1.12791 0.654499 1"
+say 1 "Midnight" "Não se preocupe, eu memorizei isso primeiro. Ela diz que ela tem trabalhado com os rebeldes na cidade, e ela pode ajudá-lo escapar. "
+send_character_message 2 "set_head_target 15.3772 -0.860758 1.4087 0.883795"
+set_character_pos 1 15.7763 -1.7828 1.56181 133
+say 2 "Turner" "Como?"
+set_character_pos 1 15.7763 -1.76484 1.56181 133
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 1 "Midnight" "Lutadores que ganhar três shows de arena são forçados a duelar contra Jade, nos jardins do ametista. Ela diz que se você chegar lá, ela pode te tirar"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 2 "set_head_target 15.0511 -1.38676 1.65141 0.883795"
+set_character_pos 1 15.7763 -1.76484 1.56181 133
+send_character_message 2 "set_head_target 14.4793 -1.43403 0.88737 0.883795"
+say 2 "Turner" "Você acha que ametista vai estar lá para assistir o duelo? Se pode matá-la..."
+send_character_message 1 "set_head_target 13.9423 -1.12791 1.52615 1"
+say 1 "Midnight" "Você vai ter sorte para correr para a porta, Turner. Não morda mais do que pode mastigar."
+send_character_message 2 "set_head_target 15.4763 -1.1066 1.5596 0.883795"
+set_character_pos 2 15.5675 -1.78699 0.593721 -142
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Turner" "Tudo ou nada. Se matamos ametista, tudo muda."
+say 3 "Stonewall" "Espero que tenha gostado de sua última refeição. Sorte, que é a tua vez."
+send_character_message 2 "set_torso_target 14.5528 -1.36606 1.34649 1"
+send_character_message 2 "set_head_target 15.4763 -1.55497 1.5596 0.883795"
+say 2 "Turner" "Um já foi, faltam dois."
+send_global_message "levelwin"

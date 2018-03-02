@@ -700,7 +700,7 @@ class Dialogue {
 
                         string dialogue_path = params.GetString("Dialogue");
                         array<string> split = dialogue_path.split("Data/Dialogue");
-                        string translated_path = "Data/Dialogue/" + language_code + join(split, "");
+                        string translated_path = "Data/Translations/" + language_code + join(split, "");
 
                         Log(info, language_code);
 

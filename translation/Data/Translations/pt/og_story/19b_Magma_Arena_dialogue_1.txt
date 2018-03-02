@@ -1,0 +1,23 @@
+#name "End"
+#participants 7
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+set_character_pos 7 -33.2935 1.2628 9.51433 84
+send_character_message 7 "set_animation \"Data/Animations/c_actionidle.anm\""
+set_character_pos 1 -46.9335 6.1123 -9.34934 -26
+set_character_pos 5 -30.4137 1.80468 8.14293 -32
+set_character_pos 4 -29.8125 1.80494 7.3374 -64
+set_character_pos 2 -28.6498 1.80494 8.07479 -115
+set_character_pos 3 -29.1961 1.79351 9.00612 116
+set_character_pos 5 -30.4028 1.80468 8.16052 -31
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_cam -48.1552 7.75192 -12.1047 -18.4 -146.79 1.03 37.6726
+send_level_message "music_override 8"
+say 1 "Jade" "Concordo, isso foi impressionante! Parece que vamos precisar pegar um novo lobo."
+say 1 "Jade" "Isso é para Festival de Khyo este ano o. Nos vemos na próxima aula, oferecer a chuva!"
+set_cam -29.1536 1.88712 10.4134 3.5 6.66 -2.47 48.4278
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Stonewall" "Venha com a gente. Encomendas especiais."
+send_character_message 3 "set_head_target -29.7376 1.74737 8.50772 1"
+say 3 "Turner" "E agora?"
+send_global_message "levelwin"

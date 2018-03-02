@@ -1,0 +1,14 @@
+#name "Glaive"
+#participants 2
+set_character_pos 2 -99.0019 42.2741 -39.4081 78
+send_character_message 2 "set_animation \"Data/Animations/trailersit.anm\""
+set_character_pos 1 -99.9167 41.0763 -41.734 -116
+send_character_message 1 "set_head_target -99.201 42.4299 -39.3666 1"
+set_cam -102.209 41.3639 -43.4953 2.01 -139.02 0 38.6465
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Ghost" "Ei, [wait 0.3]se importa se eu levar isso?"
+send_character_message 1 "set_torso_target -100.444 40.9831 -41.1941 1"
+send_character_message 1 "set_head_target -100.581 41.1644 -40.8699 1"
+send_character_message 2 "set_head_target -99.6629 41.8204 -41.6977 1"
+say 2 "Thomas" "Sim, [wait 0.3]Tenho certeza. [wait 0.5]Vá em frente. [wait 0.5]Não vai ser usada caso contrário."

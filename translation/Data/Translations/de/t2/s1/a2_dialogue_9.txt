@@ -1,0 +1,21 @@
+#name "Note-Gunk"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 33.3471 -56.8061 96.374 150
+send_character_message 1 "set_head_target 32.4331 -56.4725 96.3747 1"
+set_cam 34.4648 -56.2468 95.6817 0 102.99 0 60.0752
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Etwas von der Empry..."
+set_cam 32.7867 -56.3088 97.6211 0 2.2 0 60.0752
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Sichtungen wurden eines Schurken Cinderblood Agenten gesichtet, die angeblich den Bürgerkrieg überlebt hat; [wait 0.3]Er ist berichtet worden, um zwei rote Flecken auf seiner linken Wange sport, [wait 0.3]haben Sie ein Auge zugedrückt und anscheinend besitzt einen großen, [wait 0.3]imposante Statur."
+say 2 "Note" "Berichte in dieser Mann Maßnahmen gekommen: [wait 0.3]Er hat mehrere Mitglieder der Cinderbreathe Wache Truppe mit Trauma stumpfe Gewalt getötet, [wait 0.3]und kann mit einem anderen Terroristen auf dem Gelände der Kolonie arbeiten."
+say 2 "Note" "Dieser Hinweis im Lieferumfang ist eine gezeichnete Bild eines unserer Schreiber."
+set_cam 33.4976 -55.802 96.1736 -43.47 77.84 -0.37 48.9009
+send_character_message 1 "set_head_target 32.6764 -56.5028 95.8768 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 32.4931 -56.5028 96.3496 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 34.6035 -56.2806 96.27 -0.03 77.59 -0.27 69.8071
+say 2 "Note" "Unterzeichnet, [wait 0.3]Kommandant Aschenpelz des Cinderbreathe Empry."

@@ -1,0 +1,12 @@
+#name "Meet"
+#participants 2
+set_character_pos 2 -43.3124 77.9884 7.18825 -180
+send_character_message 2 "set_animation \"Data/Animations/d_actionidle.anm\""
+set_character_pos 1 -48.3133 77.9926 7.10921 0
+set_cam -49.9114 78.6793 7.81566 0 -75.8 0 32.0293
+say 2 "???" "Ich sah Sie kommen, weil ich die Leichen gesehen."
+say 2 "???" "Oder vielleicht Sie versteckte die Leichen, die ich weiß nicht, dass die Skripte sind nicht implementiert"
+send_character_message 2 "equip_item 276"
+send_character_message 1 "equip_item 237"
+say 2 "???" "I ' MMA dich töten"
+send_level_message "make_participants_aware"

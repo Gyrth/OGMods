@@ -1,0 +1,32 @@
+#name "End"
+#participants 6
+set_character_pos 3 -86.9198 191.472 180.728 122
+set_character_pos 2 -87.5575 191.391 181.049 89
+set_character_pos 1 -87.9304 191.512 180.079 -55
+set_cam -87.5747 192.009 179.673 0 -169.31 0 90
+say 3 "Elder Needlegrass" "Estou convencido!"
+say 3 "Elder Needlegrass" "Você realmente é um guerreiro sem comparar, abençoado por Khyo."
+say 3 "Elder Needlegrass" "Traga seu povo aqui."
+say 3 "Elder Needlegrass" "Nós vamos resolvê-las nos níveis inferiores, para começar com, mas na hora eles podem subir."
+say 2 "Sky" "Eu vou com você, Turner."
+say 2 "Sky" "Eu quero te dizer sobre nossa cidade, nossa história e nossos costumes."
+set_cam -59.193 198.758 223.423 0 20.1 0 90
+say 4 "" "Turner e céu volta a descer, ir para o acampamento rebelde e liderar os rebeldes e escravos arena de volta ao santuário."
+set_character_pos 5 -87.1038 191.973 174.946 -145
+set_character_pos 6 -88.927 191.973 177.545 126
+set_character_pos 3 -89.6308 191.472 175.825 -4
+set_character_pos 2 -89.1582 191.391 177.102 89
+set_character_pos 1 -87.8223 191.512 176.451 168
+set_cam -87.7273 191.84 177.649 0 43.03 0 90
+say 2 "Sky" "O que aconteceu?"
+say 2 "Sky" "É suposto para ser seguro aqui!"
+say 3 "Elder Needlegrass" "Fomos atacados..."
+say 3 "Elder Needlegrass" "nosso povo roubado..."
+say 3 "Elder Needlegrass" "Eles desceram do céu..."
+say 2 "Sky" "Não."
+say 2 "Sky" "Ah, não."
+say 2 "Sky" "Deve ter sido os morcegos."
+set_cam -88.2982 192.175 176.706 0 -52.51 0 90
+say 1 "Turner" "O que são... morcegos?"
+set_cam -173.568 158.148 309.729 0 -52.51 0 90
+say 4 "" "Fim"

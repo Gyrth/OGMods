@@ -1,0 +1,38 @@
+#name "Start"
+#participants 4
+set_dialogue_color 2 0.8 0.6 0.1
+set_dialogue_voice 2 12
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 4 "set_head_target -77.5102 17.1394 135.871 0.198247"
+send_character_message 3 "set_head_target -71.1417 17.2389 137.089 0.116256"
+send_character_message 2 "set_head_target -77.9532 16.7137 139.153 0.583079"
+set_character_pos 3 -86.3694 18.4406 135.534 -46
+set_character_pos 2 -86.7349 17.5996 138.754 69
+set_character_pos 4 -84.9749 18.3143 135.714 -123
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 3 "set_head_target -85.1823 18.954 135.78 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target -85.2574 18.3612 137.103 1"
+set_character_pos 2 -86.7383 17.5745 138.741 69
+set_character_pos 3 -86.3694 18.457 135.534 -46
+set_character_pos 4 -84.9749 18.4718 135.714 -123
+send_character_message 1 "set_eye_dir -118.882 18.6822 147.897 1"
+send_character_message 1 "set_torso_target -118.338 18.0809 147.043 0"
+send_character_message 1 "set_head_target -118.754 18.282 147.032 0"
+set_character_pos 1 -117.202 17.4894 143.939 26
+set_cam -120.536 18.3589 146.08 -4.02 -67.12 -2.56 32.5936
+say 1 "Turner" "Das sieht aus wie der Ort. Froh, dass ich hier lebe nicht--diese Bugs sind mir lebendig Essen."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target -87.0822 19.2503 135.579 1"
+set_cam -93.1714 18.4358 140.88 -2.1 -61.74 -1.38 32.5938
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 2 "Retch" "Denke, dass dieser Verräter, die wir gefangen die Wahrheit gesagt hat? Dieser Mord Häschen kommt hier?"
+send_character_message 4 "set_head_target -77.5102 17.1394 135.871 0.198247"
+send_character_message 3 "set_head_target -86.7041 18.3003 138.923 1"
+send_character_message 2 "set_head_target -85.524 19.0715 136.113 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 3 "Snitch" "Glaube nicht, dass er das Herz mit einem Messer an seinem Freund Hals liegen würde."
+send_character_message 2 "set_head_target -85.543 19.033 136.094 1"
+send_character_message 4 "set_head_target -85.9791 18.4948 135.535 1"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 4 "Coal" "Pssst! vergessen, wir sind Hinterhalte ein Kaninchen? Er hört uns. Aufgeteilt und finden ihn. Leise!"

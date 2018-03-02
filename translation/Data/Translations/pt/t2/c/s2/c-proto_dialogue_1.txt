@@ -1,0 +1,12 @@
+#name "Meet"
+#participants 2
+set_character_pos 2 -43.3124 77.9884 7.18825 -180
+send_character_message 2 "set_animation \"Data/Animations/d_actionidle.anm\""
+set_character_pos 1 -48.3133 77.9926 7.10921 0
+set_cam -49.9114 78.6793 7.81566 0 -75.8 0 32.0293
+say 2 "???" "Eu vi você saindo porque eu vi os cadáveres."
+say 2 "???" "Ou talvez você escondeu os corpos que eu não sei que os scripts não são implementados"
+send_character_message 2 "equip_item 276"
+send_character_message 1 "equip_item 237"
+say 2 "???" "Eu vou te matar."
+send_level_message "make_participants_aware"

@@ -1,0 +1,42 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 22.7964 1.51124 14.5994 71
+send_character_message 2 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 2 "set_torso_target 23.401 0.555699 13.0742 0"
+send_character_message 2 "set_head_target 25.0462 1.34717 5.36665 1"
+set_character_pos 1 25.6017 0.87702 3.80159 -113
+send_character_message 1 "set_torso_target 25.2597 1.1575 4.50274 1"
+send_character_message 1 "set_head_target 23.5496 1.70241 11.5325 1"
+set_cam 25.6107 1.47097 2.04682 0 172.84 0 27.681
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_level_message "therium2_enable_object 530"
+send_level_message "therium2_enable_object 535"
+say 1 "Ghost" "Was soll ich hier jetzt, [wait 0.3]Jairo?"
+set_cam 22.5698 1.70335 12.5195 0 -170.54 0 23.6202
+send_character_message 2 "set_head_target 25.2255 1.59199 5.33601 1"
+say 2 "Jairo" "Sie müssen nur Ihren Weg durch machen."
+send_character_message 2 "set_head_target 25.1269 1.72939 4.46403 1"
+say 2 "Jairo" "Beseitigen Sie alle Feinde, wie Sie es für richtig halten, [wait 0.3]Allerdings würde ich raten töten Sie sie alle."
+send_character_message 2 "set_head_target 25.3239 1.06857 4.40868 1"
+say 2 "Jairo" "Sie erhalten weitere Anweisungen in das nächste Tor."
+send_character_message 1 "set_head_target 23.8127 1.57062 11.8016 1"
+send_character_message 1 "set_torso_target 25.2806 1.02191 4.45769 1"
+set_cam 26.0504 1.37414 6.41778 0 10.78 0 23.6202
+say 1 "Ghost" "Gibt es hier nur ein Gateway?"
+send_character_message 1 "set_torso_target 24.8835 1.02191 1.66553 1"
+set_character_pos 1 25.6017 0.87702 3.80159 127
+set_cam 24.3668 1.73008 14.1486 0 96.59 0 23.6202
+say 2 "Jairo" "Es ist auf der anderen Seite dieser Höhle."
+send_character_message 2 "set_head_target 25.466 1.68959 4.29085 1"
+say 2 "Jairo" "Es hat Feinde ringsum bewaffnet, [wait 0.3]Obwohl. [wait 0.5]Beobachten Sie sich selbst und seien Sie vorsichtig."
+send_character_message 1 "set_head_target 20.949 1.57062 -3.3402 1"
+send_character_message 1 "set_torso_target 23.8255 1.02191 -0.589828 1"
+set_character_pos 1 24.1576 0.87702 0.541245 123
+set_cam 25.5717 1.48328 3.2369 0 32.71 0 23.6202
+say 1 "Ghost" "Ich hab es."
+send_level_message "therium2_disable_object 530"
+send_level_message "therium2_disable_object 535"

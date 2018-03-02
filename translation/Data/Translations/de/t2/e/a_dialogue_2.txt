@@ -1,0 +1,41 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -162.805 -18.4073 81.3972 49
+send_character_message 1 "set_eye_dir -161.966 -18.3675 80.5688 1"
+send_character_message 1 "set_torso_target -162.36 -18.5254 81.0873 1"
+send_character_message 1 "set_head_target -161.882 -16.9902 79.9513 1"
+set_cam -163.602 -18.0713 81.605 11.4 -41.71 -0.05 84.6836
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "...[wait 0.3]Schließlich. [wait 0.5]Ich bin hier."
+send_character_message 1 "set_head_target -162.038 -18.2475 80.578 1"
+set_cam -162.727 -18.0237 82.5388 0 -13.68 0 58.5513
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Es ist Jairo Hinweis..."
+send_character_message 1 "set_eye_dir -162.191 -18.2601 81.0327 1"
+set_character_pos 1 -162.805 -18.6335 81.3972 49
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -161.908 -17.9322 81.2424 0 86.39 0 50.8411
+say 2 "Note" "Das äußere ist leicht bewacht. [wait 0.5]Wir haben den Feind geschwächt."
+say 2 "Note" "Jeder ist bewaffnet mit einer Waffe in irgendeiner Form- [wait 0.3]Castles, [wait 0.3]vor allem. [wait 0.5]Gehen Sie nicht unbewaffnet."
+say 2 "Note" "Hier finden Sie ein Messer irgendwo, [wait 0.3]oder nehmen Sie ein Schwert von einem der Feinde."
+say 2 "Note" "Irgendwo, [wait 0.3]Es wird ein Schlüssel sein. [wait 0.5]Verwenden Sie, um eine Tür durch die Basis des Turms zu entsperren. [wait 0.5]Seine Lage ist auf der Karte markiert."
+say 2 "Note" "Sobald Sie die Tür zu entriegeln, [wait 0.3]Folgen Sie die Innenräume, bis eine mit mehreren Urnen verziert Höhle."
+say 2 "Note" "Dort, [wait 0.3]Sie sollten in der Lage, den Kommandanten zu finden sein. [wait 0.5]Töten, [wait 0.3]und wieder die Außenaufnahmen für weitere Anweisungen."
+say 2 "Note" "Die Bomben, die wir verwenden werden sind direkt neben diesem Hinweis."
+say 2 "Note" "Wenn jemand versucht, mit Ihnen zu sprechen, [wait 0.3]Tötet sie. [wait 0.5]Sie werden versuchen, du musst Sie aufhalten liegen."
+say 2 "Note" "Die Schlüssel müssen Sie liegt irgendwo hoch."
+send_character_message 1 "set_eye_dir -162.74 -18.5064 80.7398 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Studieren Sie die Karte. [wait 0.5]Die möglichen Positionen der Feinde wurden für Sie markiert, [wait 0.3]zusammen mit der Position der Tür."
+send_character_message 1 "set_head_target -162.382 -18.2421 80.2224 1"
+set_cam -162.368 -18.0164 82.2283 0 11.49 0 54.8952
+say 1 "Ghost" "Er hat eine Karte von der Außenseite angebracht."
+set_cam -162.408 -17.8291 80.1591 -90 180 140.36 65.6732
+say 2 "Note" "..."
+send_character_message 1 "set_torso_target -162.56 -18.6547 81.1626 1"
+send_character_message 1 "set_head_target -161.249 -16.6849 75.4348 1"
+set_cam -162.836 -18.1917 82.7006 14.58 -18.59 0 63.5372
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "Na ja, [wait 0.5]Viel Glück für mich, [wait 0.2]Ich vermute."

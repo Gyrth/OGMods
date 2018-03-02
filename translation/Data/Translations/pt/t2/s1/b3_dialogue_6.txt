@@ -1,0 +1,16 @@
+#name "Note-Blueprint"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -16.8915 15.3449 -64.0512 -157
+send_character_message 1 "set_head_target -17.5433 15.5569 -63.7052 1"
+set_cam -15.0188 15.7735 -63.1777 0 78.66 0 47.8194
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 1 "Ghost" "Eu mal posso entender patavina disto... [wait 0.3]Eu não sou nenhum alquimista. [wait 0.5]Não é um cego, também."
+set_character_pos 1 -16.8915 15.2758 -64.0512 -157
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -18.0006 15.9157 -63.6524 0 -77.67 0 47.8194
+say 1 "Ghost" "Mas ele diz que em algum lugar aqui que, quando concluída, [wait 0.3]Você poderia arrumar suficiente força explosiva para destruir uma torre em uma mochila."
+send_character_message 1 "set_head_target -17.5073 15.932 -63.6465 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "Deve ser baseado fora Arliss tecnologia..."

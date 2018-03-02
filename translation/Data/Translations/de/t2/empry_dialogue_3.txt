@@ -1,0 +1,71 @@
+#name "Black Hand"
+#participants 5
+set_character_pos 4 3.62501 31.134 32.2319 -55
+send_character_message 4 "set_torso_target 4.49337 31.6004 33.5746 0"
+send_character_message 4 "set_head_target 4.43977 31.6734 33.5572 0"
+set_character_pos 3 6.18434 31.1076 31.988 -69
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 3 "set_head_target 5.13674 31.7944 33.3597 1"
+set_character_pos 2 7.20789 31.1335 34.6101 105
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_head_target 5.32098 31.7721 33.5891 1"
+set_character_pos 1 4.7301 31.0894 33.5397 -51
+send_character_message 1 "set_torso_target 5.00355 31.4426 34.0624 1"
+send_character_message 1 "set_head_target 6.53604 31.8182 34.4148 1"
+set_cam 2.07202 31.4529 27.3026 0 -149.8 0 29.9068
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 3 5
+send_level_message "set_camera_dof 0 0 0 0.3 10 5"
+say 2 "???" "Blick; [wait 0.3]die schwarze Hand."
+send_character_message 1 "set_head_target 6.15274 31.896 32.4446 1"
+send_character_message 1 "set_torso_target 5.26083 31.2288 33.8429 1"
+set_cam 8.00366 31.7679 30.9608 0 125.63 0 17.9739
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.1"
+say 3 "????" "Bin ich falsch in der Annahme Sie zwei Kinder von Edsel zu sein?"
+set_character_pos 1 4.7301 31.0894 33.5397 -50
+send_character_message 4 "set_head_target 4.44025 31.6734 33.5556 0.000320494"
+set_character_pos 4 3.62501 31.134 32.2319 -53
+send_character_message 1 "set_head_target 6.03243 31.7097 32.1373 1"
+send_character_message 1 "set_torso_target 5.33769 31.2058 33.6573 0.954357"
+send_level_message "set_camera_dof 0.3 3 0.1 0.3 10 5"
+say 1 "You" "Das sind wir. [wait 0.5]Was ist damit?"
+send_character_message 2 "set_torso_target 6.95249 31.1636 33.7838 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam 5.01495 31.8079 30.4848 0 -147.69 0 17.9739
+send_character_message 4 "set_head_target 4.45191 31.9058 32.7819 1"
+send_character_message 4 "set_animation \"Data/Animations/r_idle.anm\""
+set_character_pos 4 3.62501 31.134 32.2319 -24
+set_character_pos 1 4.7301 31.0894 33.5397 -17
+send_character_message 1 "set_head_target 6.6335 31.9625 34.1118 1"
+send_character_message 1 "set_torso_target 5.33769 31.2058 33.6573 0"
+say 2 "???" "Wenn einer von euch zufällig auf dem Weg Ihren Vater nahm, [wait 0.3]Was würden Sie davon?"
+send_character_message 1 "set_head_target 6.63775 31.7666 34.3738 1"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+set_cam 8.72824 31.9575 34.8713 -3.76 70.92 0 24.5543
+say 1 "You" "... gut. [wait 0.5]Ich denke."
+send_character_message 3 "set_head_target 4.99719 31.8375 33.2564 1"
+send_character_message 3 "set_torso_target 6.22128 31.5014 32.9952 1"
+send_character_message 3 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 4 "set_torso_target 4.77104 31.6649 32.5189 1"
+send_character_message 4 "set_head_target 4.95956 31.9068 32.1248 1"
+send_character_message 1 "set_torso_target 5.37473 31.4876 33.4742 1"
+send_character_message 1 "set_head_target 5.9116 31.9317 32.4152 1"
+set_cam 0.951988 31.6509 33.4035 -0.27 -78.8 -0.16 35.6182
+send_level_message "set_camera_dof 0.3 5 1 0.3 10 5"
+say 3 "????" "Ach ja, [wait 0.3]gut. [wait 0.5]Das ist wirklich gut."
+send_character_message 3 "set_head_target 4.99719 32.0027 33.2564 1"
+send_character_message 3 "set_torso_target 5.84912 31.5062 32.948 1"
+say 3 "????" "Edsel war ein guter Mann. [wait 0.5]Ganze Bücher widmen, was er für das Cinderbreathe Reich hat, [wait 0.3]Weißt du."
+send_character_message 2 "set_torso_target 6.95249 31.1636 33.7838 0"
+send_character_message 3 "set_torso_target 5.84912 31.5062 32.948 0"
+send_character_message 2 "set_head_target 5.32098 31.7721 33.5891 0"
+send_character_message 3 "set_head_target 5.00908 31.973 33.3008 0"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_torso_target 5.37473 31.4876 33.4742 0"
+send_character_message 1 "set_head_target 5.93245 31.9598 34.2826 1"
+send_character_message 4 "set_head_target 4.37491 31.9978 33.0377 1"
+set_cam 1.30509 31.4992 34.037 -0.25 -73.02 -0.18 57.8213
+send_level_message "set_camera_dof 0.1 5 1 0.3 10 5"
+say 2 "???" "Nie lächelte. [wait 0.5]Eine Schande."
+send_character_message 3 "set_animation \"Data/Animations/r_talking_offset.anm\""

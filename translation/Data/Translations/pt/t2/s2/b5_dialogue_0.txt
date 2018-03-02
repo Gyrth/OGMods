@@ -1,0 +1,16 @@
+#name "Onwards"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -29.4539 85.6063 -19.7419 91
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_shade.anm\""
+send_character_message 1 "set_torso_target -29.3861 85.9637 -20.1032 1"
+send_character_message 1 "set_head_target -29.1545 86.7067 -25.4969 1"
+set_cam -28.9712 85.6245 -17.4103 6.26 7.14 -0.03 32.8093
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_head_target -29.86 85.8492 -27.0449 1"
+send_character_message 1 "set_torso_target -29.3861 85.9637 -20.1032 0"
+say 1 "Ghost" "É hora de terminar as coisas, [wait 0.3]Jairo..."
+send_global_message "levelwin eb1"

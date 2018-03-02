@@ -1,0 +1,13 @@
+#name "Knife"
+#participants 2
+set_character_pos 1 118.174 -54.2266 267.276 68
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+send_character_message 1 "set_head_target 118.322 -53.7979 266.946 0"
+set_cam 118.71 -53.5829 268.284 -25.44 11.88 0.1 35.1929
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Amos" "... não, não preciso disso."
+send_character_message 1 "set_head_target 118.463 -54.5378 266.625 1"
+set_cam 118.71 -53.5828 268.284 -25.44 11.88 0.1 35.1929
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+say 1 "Amos" "Parece que a única coisa que pode cortar hoje em dia é vegetais, [wait 0.3]de qualquer forma."

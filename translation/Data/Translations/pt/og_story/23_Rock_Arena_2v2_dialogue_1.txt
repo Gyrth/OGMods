@@ -1,0 +1,8 @@
+#name "Win"
+#participants 2
+set_character_pos 1 53.422 102.589 -57.7698 -107
+set_cam 53.5959 102.891 -56.3006 0 0 0 90
+say 1 "Turner" "Lutou bem."
+say 1 "Turner" "Se eu tenho que encará-lo mais tarde, eu vou fazer certeza de que sua morte é rápida."
+say 2 "Rabbit" "Hum... obrigado?"
+send_global_message "levelwin"

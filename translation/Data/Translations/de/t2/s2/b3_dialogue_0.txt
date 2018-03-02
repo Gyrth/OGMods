@@ -1,0 +1,16 @@
+#name "NLG-G"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -67.6089 -9.28514 -220.917 169
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -68.1709 -8.14339 -221.472 1"
+send_character_message 1 "set_head_target -69.192 -7.78921 -221.084 1"
+set_cam -63.9705 -8.60446 -217.937 0 58.64 0 66.3989
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -183.19 10.5367 74.5312 0"
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch_timid.anm\""
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Sie scheinen auf die antiken Ruinen verstreut überall auf der Welt zu leben..."
+send_global_message "levelwin s2-nlg-b3-g"

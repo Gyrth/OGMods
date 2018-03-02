@@ -1,0 +1,38 @@
+#name "Cat"
+#participants 2
+set_dialogue_color 2 0.9 0.9 1
+set_dialogue_voice 2 3
+set_character_pos 2 14.8402 18.2995 162.016 -90
+set_character_pos 1 14.8517 18.3114 168.302 91
+set_cam 14.2406 19.3305 171.685 -2.53 -7.24 0 15.2088
+send_character_message 1 "empty_hands"
+send_character_message 2 "set_torso_target 16.0058 18.108 165.688 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_level_message "music_layer_override 2"
+say 2 "Silver" "Você é quem causou toda essa confusão, então?"
+send_character_message 2 "set_head_target 14.2262 19.6947 162.845 1"
+say 2 "Silver" "Interferir com as nossas operações locais?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "Então você é um gato."
+send_character_message 2 "set_head_target 14.8418 19.2915 168.309 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "Que observação mordaz. Vejo que você não derrota seus inimigos com sua sagacidade de florete."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Eu preciso desta nave."
+send_character_message 2 "set_head_target 18.4259 19.0183 166.672 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+say 2 "Silver" "E o que você pretende fazer com ele? Navegar no pôr do sol? Ou o nascer da lua? Pode mesmo dizer um rebento de um topmast?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "Não é problema meu. Eu fiz uma promessa a um amigo."
+send_character_message 2 "set_head_target 14.9884 19.1547 167.772 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Silver" "Promessas são algemas para os fracos, mas tu és forte. Para um coelho, claro. Força deve ser recompensada."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "O que levaria para levá-lo ao meu lado? Dinheiro? Companheiros? Ou só mais oportunidades para matar?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Turner" "Que tal começar por cortar a sua língua."
+send_character_message 1 "equip_item 4152"
+send_level_message "music_layer_override 4"
+make_participants_aware

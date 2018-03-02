@@ -1,0 +1,7 @@
+#name "Test"
+#participants 3
+set_character_pos 1 -34.4623 38.6318 146.968 0
+set_cam -34.2771 39.4791 148.431 0.55 2.45 0 22.1537
+set_dialogue_color 1 0.8 0.5 0.2
+set_dialogue_voice 1 12
+say 1 "Yata" "Teste! [wait 0.3]Dakka dakka dakka dakka, [wait 0.3]Dakka dakka dakka!"

@@ -1,0 +1,10 @@
+#name "Civ3_end"
+#participants 2
+
+set_character_pos 2 24.1323 24.908 -39.3971 -72
+set_character_pos 1 25.6127 25.0588 -36.5965 103
+set_cam 24.0964 25.5594 -35.1394 0 -27.5 0 90
+say 1 "Turner" "Tenho-os todos."
+say 2 "Civilian" "Há um acampamento nas proximidades."
+say 1 "Turner" "Eu vou lá. Tchau."
+send_global_message "levelwin"

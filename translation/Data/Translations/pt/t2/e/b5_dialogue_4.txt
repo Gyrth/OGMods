@@ -1,0 +1,8 @@
+#name "Oenferd"
+#participants 1
+set_character_pos 1 113.353 -42.2825 207.584 90
+send_character_message 1 "set_head_target 109.949 -35.8321 195.947 1"
+set_cam 115.112 -42.7375 211.023 22.93 12.42 0.09 72.5346
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Ghost" "Vou voltar. [wait 0.5]Não tenho negócios em Oenferd..."

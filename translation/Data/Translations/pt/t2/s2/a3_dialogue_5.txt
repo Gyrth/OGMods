@@ -1,0 +1,20 @@
+#name "Note-Cleanup"
+#participants 2
+set_character_pos 1 20.37 1.38351 38.2585 0
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 1 "set_head_target 21.2743 1.57836 38.2768 1"
+set_cam 19.7642 1.83985 37.1022 0 -138.82 0 55.5313
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Uma carta de um tenente de Empry..."
+set_cam 21.5266 2.00173 38.1179 0 94.85 0 40.5844
+set_character_pos 1 20.37 1.35849 38.2585 0
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "A guerra civil que não faz muito tempo, [wait 0.3]e você tem que lembrar disso. [wait 0.5]Há Cinderbreathe e Cinderblood em todos os lugares, ainda depósitos."
+say 2 "Note" "A maioria deles têm sido escolhida limpos por catadores aleatórios Enfim, [wait 0.3]Então, qual é o ponto de nós tentando limpar tudo?"
+say 2 "Note" "Sim, [wait 0.3]Claro, [wait 0.3]Ele pode hospedar bases para bandidos ou salteadores, [wait 0.3]Mas que não podia ser considerado baixa prioridade sobre defesa contra o Arliss?"
+say 2 "Note" "Acho que podemos limpar os bunkers que usamos no caso dos terroristas, [wait 0.3]Mas isso levanta uma questão ainda maior: [wait 0.5]Por que desperdiçar recursos humanos varrer concreto quando uma força desconhecida está matando nossas tropas?"
+say 2 "Note" "Perdi algumas cartas fazendo estas mesmas perguntas, [wait 0.3]e nesse caso, [wait 0.3]Perdoe-me."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Parar a minha mão, [wait 0.3]Off-site Empry Tenente Querida."

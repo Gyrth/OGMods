@@ -1,0 +1,40 @@
+#name "Start"
+#participants 4
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_torso_target -98.6222 -18.4179 -144.078 1"
+send_character_message 2 "set_head_target -99.2789 -18.2599 -143.834 1"
+set_character_pos 2 -98.2433 -19.3472 -142.9 102
+set_dialogue_color 3 0.4 0.4 1.0
+set_cam -97.1298 -17.2394 -139.855 -28.98 42.44 2.97 63.4427
+send_level_message "set_camera_dof 0 0 0 0.3 9 0.4"
+send_level_message "music_layer_override 2"
+say 2 "Amethyst" "Distintos convidados, nós temos um grande prazer para você esta noite!"
+say 2 "Amethyst" "Permitam-me que Lucky presente, rei de uma ilha distante governado pelo fracasso-orelhas, onde os gatos não são nada além de lendas, temido e reverenciado como deuses."
+send_character_message 2 "set_head_target -99.2789 -18.2598 -143.834 1"
+send_character_message 2 "set_torso_target -98.6221 -18.4179 -144.078 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 3 "set_head_target -89.5467 -18.7256 -144.925 1"
+set_cam -104.784 -17.6408 -142.209 -11.18 -77.71 -1.67 29.9318
+send_level_message "set_camera_dof 0.3 10 0.5 0 0 0"
+set_character_pos 3 -81.2715 -20.4972 -150.243 -162
+say 3 "Sapphire" "Eu vou te dar 20 escravos para os pés de sorte!"
+send_character_message 2 "set_head_target -93.1382 -18.955 -146.41 1"
+send_character_message 2 "set_torso_target -97.8277 -18.4179 -144.078 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 10 0.5"
+set_character_pos 1 -106.978 -28.1073 -151.02 0
+set_character_pos 4 -94.4753 -28.2295 -150.722 176
+say 2 "Amethyst" "Paciência, safira. Não seja rude. Licitação não começa até depois da luta."
+send_character_message 2 "set_head_target -94.6273 -21.594 -149.025 1"
+send_character_message 2 "set_torso_target -97.7968 -18.6953 -144.644 1"
+say 2 "Amethyst" "E do outro lado..."
+send_character_message 4 "set_animation \"Data/Animations/c_actionidle.anm\""
+set_cam -109.861 -27.5106 -151.717 -2.22 -98.45 1.14 23.9831
+send_level_message "set_camera_dof 0.4 6 1 0 0 0"
+say 4 "Jade" "Eu não precisa de introdução. Hoje vou demonstrar que mesmo o melhor lutador do flop-orelha não é páreo para um verdadeiro felino esgrimista."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 9 0.4"
+say 1 "Turner" "Não preciso de me gabar. Minha história fala por si. Vamos acabar com isso."
+send_level_message "music_layer_override 3"
+send_character_message 1 "equip_item 817"
+make_participants_aware

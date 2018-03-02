@@ -1,0 +1,20 @@
+#name "Note-Foxglove"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 14.9128 -0.192716 -158.15 -131
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 14.4493 -0.530116 -157.537 1"
+set_cam 15.5444 0.553472 -157.939 -41.45 98.4 -0.01 55.2369
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Eine aktuelle Note. [wait 0.5]Dies muss ein Empry Spion sein."
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 15.0395 -0.014715 -156.779 -0.03 2.19 -0.18 40.1399
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 2 "Note" "Fingerhut hier."
+say 2 "Note" "Die Kreaturen sind biologisch Kaninchen, [wait 0.3]durch und durch, [wait 0.3]Obwohl ihre Bewegungen und Manieren nichts sind, wie wir gesehen haben."
+say 2 "Note" "Zum Zeitpunkt des Schreibens [wait 0.3]Es wurde keine mündliche oder sichtbare Kommunikation zwischen jedem dieser Geschöpfe, [wait 0.3]und doch scheint jede Aktion, die sie tun mehr als der durchschnittliche Cinderbreathe oder Arliss Soldat abzustimmen."
+say 2 "Note" "Zum Zeitpunkt des Schreibens [wait 0.3]Es wurde nur eine aufgezeichnete Instanz dieser Kreaturen in der Nähe ein Reaper wird."
+say 2 "Note" "Der Schnitter [wait 0.3]im Gegensatz zu ihren üblichen Verhalten unter Cinderbreathe Soldaten [wait 0.3]völlig ignoriert die Kreaturen."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Ghost" "[wait 0.3]Der Eintrag scheint zu kurz geschnitten werden..."

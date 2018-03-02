@@ -1,0 +1,13 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -218.749 17.6466 177.672 22
+send_character_message 1 "set_head_target -209.187 20.1528 169.578 1"
+set_cam -219.878 17.5755 178.808 19.9 -54 0 36.0069
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "...[wait 0.3]estranho."
+send_character_message 1 "set_head_target -210.748 19.6111 173.182 1"
+say 1 "Ghost" "Jairo não está aqui."
+send_character_message 1 "set_head_target -206.496 26.4178 169.302 1"
+say 1 "Ghost" "Que lugar é esse...?"

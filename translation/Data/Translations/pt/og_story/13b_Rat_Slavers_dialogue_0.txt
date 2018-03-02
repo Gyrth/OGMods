@@ -1,0 +1,14 @@
+#name "Start"
+#participants 1
+send_level_message "music_layer_override -2"
+send_level_message "set_camera_dof 0 0 0 0.3 3.5 2"
+set_character_pos 1 -59.5418 96.4117 -15.357 -24
+send_character_message 1 "set_torso_target -58.1632 96.9831 -13.983 1"
+send_character_message 1 "set_head_target -53.6355 97.9761 -11.847 1"
+set_cam -59.1327 97.1999 -16.4994 0 177.11 0 90
+say 1 "Turner" "Acho que o Oriente é assim..."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 1 "set_torso_target -58.7079 97.0475 -14.2583 1"
+send_character_message 1 "set_head_target -58.3977 97.5041 -13.3346 1"
+say 1 "Turner" "Ou é assim? Este nevoeiro é tão grosso..."
+send_level_message "music_layer_override 0"

@@ -1,0 +1,24 @@
+#name "Win"
+#participants 2
+set_character_pos 2 397.176 -1.99877 19.7161 109
+set_character_pos 1 396.687 -2.22842 18.8396 -62
+set_cam 397.168 -1.43508 18.4408 0 161.5 0 90
+say 1 "Turner" "Himmel."
+say 1 "Turner" "Geht es dir gut?"
+say 2 "Sky" "Kommst du aus Heiligtum?"
+say 2 "Sky" "Ich habe mich verlaufen."
+say 1 "Turner" "Ich bin Turner."
+say 1 "Turner" "Du bist jetzt in Ordnung."
+say 1 "Turner" "Ich rette dich."
+say 2 "Sky" "Die Ratten, verwendeten sie Blowdarts, eine Art des Schlafens Poison."
+say 2 "Sky" "Es ist, wie sie uns gefangen genommen."
+say 2 "Sky" "Ich sah, wo sie ihre Versorgung halten"
+say 2 "Sky" "Ich wollte zu zerstören, aber..."
+say 2 "Sky" "so schläfrig..."
+say 1 "Turner" "Ich kümmern uns um sie."
+say 1 "Turner" "Und dann kümmere ich mich von euch."
+say 1 "Turner" "Du erinnerst mich an April..."
+say 2 "Sky" "Wer?"
+say 1 "Turner" "Macht nichts."
+say 1 "Turner" "Du bist bei mir sicher."
+send_global_message "levelwin"

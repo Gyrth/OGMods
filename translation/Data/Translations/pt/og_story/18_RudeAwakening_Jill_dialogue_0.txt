@@ -1,0 +1,23 @@
+#name "Start"
+#participants 3
+set_character_pos 2 4.44411 -1.76967 0.832846 -176
+set_character_pos 1 0.0412091 -1.82671 1.14381 0
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Bom dia, você sorte lagomorfos."
+say 3 "Cat" "Por que eu digo sorte?"
+say 3 "Cat" "Porque um de vocês vai viver!"
+say 3 "Cat" "Claro, ele não terá tanta sorte para o outro."
+set_cam 0.539544 -1.15159 1.84516 0 32.36 0 90
+say 1 "Turner" "O que é isto?"
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Este é um teste."
+say 3 "Cat" "Você é forte o suficiente para sobreviver?"
+set_cam 3.48666 -1.60474 1.88456 7.68 -33.21 0 90
+say 2 "Rabbit" "Eu sou."
+set_cam -0.521866 -1.87334 4.61685 7.68 -33.21 0 90
+say 3 "Cat" "Prová-lo. Mate seu camarada inquisitiva."
+set_cam 0.539544 -1.15159 1.84516 0 32.36 0 90
+say 1 "Turner" "Não temos que lutar. Podemos trabalhar juntos..."
+set_cam 3.48666 -1.60474 1.88456 7.68 -33.21 0 90
+say 2 "Rabbit" "Morra!"
+make_participants_aware

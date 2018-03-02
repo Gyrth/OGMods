@@ -1,0 +1,29 @@
+#name "Sky"
+#participants 2
+send_character_message 2 "set_head_target 201.3 65.9851 22.5558 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_voice 1 0
+set_dialogue_color 2 0.8 0.7 1
+set_dialogue_voice 2 14
+set_cam 201.077 66.7985 25.568 -11.4 4.35 0 90
+set_character_pos 2 200.17 66.109 23.7797 45
+set_character_pos 1 201.385 66.424 24.5451 143
+send_level_message "music_layer_override -1"
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "Turner" "Céu? Como você chegou aqui?"
+send_character_message 2 "set_head_target 201.319 66.6512 23.9421 1"
+say 2 "Sky" "Apanharam-me ontem à noite, mas escapei."
+send_character_message 2 "set_head_target 200.891 66.7406 23.0548 1"
+say 2 "Sky" "Eu estou Mapeando seus padrões de patrulha, para que quando escurece..."
+send_character_message 1 "set_head_target 200.171 65.8752 22.0274 1"
+send_character_message 2 "set_head_target 200.892 66.7305 23.0601 1"
+say 1 "Turner" "Por que desperdiçar a luz do dia? Eu aguento agora, se você não se importa de me deixar usar a faca para mais alguns minutos."
+send_character_message 2 "set_head_target 200.889 65.9616 23.4146 1"
+say 2 "Sky" "Isso é uma péssima ideia há pelo menos três guardas, para não mencionar Stonefist si mesma."
+send_character_message 2 "set_head_target 201.29 66.5044 23.9829 1"
+say 2 "Sky" "Você já viu um cachorro?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouchthreat.anm\""
+say 1 "Turner" "Só três? Eu estava esperando mais exercício do que isso."
+send_level_message "start_dialogue Places"

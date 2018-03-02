@@ -1,0 +1,18 @@
+#name "Note-Bleeding"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 299.413 2.70343 36.1188 -90
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 299.345 2.82007 36.8789 1"
+set_cam 300.976 3.19253 37.4423 0 60 0 33.9423
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Eine antike note [wait 0.3]zerrissen und verwittert. [wait 0.5]Kann es kaum lesen."
+send_character_message 1 "set_head_target 299.467 2.86558 36.8146 1"
+set_cam 300.268 3.35349 37.3426 0 38.06 0 33.9423
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Der Dämon blutet. [wait 0.5]Sein Blut ging in den Wald in der Nähe. [wait 0.5]Wir konnten nicht ihn hinter den Büschen und Blätter sehen."
+say 2 "Note" "Sein Hemd [wait 0.3]Obwohl wir ein Messer auf ihn warfen, [wait 0.3]ist noch völlig intakt. [wait 0.5]So ist sein Fell und Haut."
+say 2 "Note" "Der Gott muss uns verärgert sein. [wait 0.5]Aus welchem Grund [wait 0.3]Keine Ahnung. [wait 0.5]Er muss der Gesandte Gottes Zorn sei, [wait 0.3]stark und unbesiegbar.
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "[wait 0.3]Ich bin sehr erschrocken."

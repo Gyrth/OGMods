@@ -1,0 +1,46 @@
+#name "Map"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 5
+set_character_pos 2 -12.6537 85.6078 33.7025 135
+send_character_message 2 "set_animation \"Data\Animations\sitledge.anm\""
+send_character_message 2 "set_head_target -14.1192 86.1009 33.3045 1"
+set_character_pos 1 -17.2125 85.3408 32.5782 0
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_torso_target -16.3092 85.4474 32.6952 1"
+send_character_message 1 "set_head_target -13.8286 86.0338 33.2094 1"
+set_cam -18.4334 85.826 31.4718 0 -120 0 40.9333
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Oi. [wait 0.5]Disseram-me que você tem um mapa da área nas proximidades?"
+send_character_message 1 "set_head_target -13.8854 86.071 33.4462 1"
+send_character_message 2 "set_head_target -14.1643 85.8948 33.3031 1"
+send_character_message 1 "set_torso_target -16.3092 85.4474 32.6952 0"
+send_character_message 2 "set_torso_target -13.5111 85.9425 32.8993 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 2 "Brandt" "Sim, [wait 0.3]Eu ouvi."
+send_character_message 1 "set_torso_target -16.3278 85.6083 32.4786 1"
+send_character_message 2 "set_torso_target -13.5111 85.9425 32.8993 0"
+send_character_message 2 "set_head_target -14.4854 86.0462 33.6585 1"
+say 2 "Brandt" "Vá em frente. [wait 0.5]Nós temos um sobressalente."
+set_character_pos 1 -17.2125 85.3408 32.5782 -1
+send_character_message 1 "set_torso_target -16.4024 85.5689 32.6409 0.999899"
+send_character_message 1 "set_head_target -17.1109 85.9382 34.4272 1"
+set_cam -16.717 85.8553 31.2477 0 169.67 0 40.9333
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -18.2315 85.747 35.4193 1"
+send_character_message 1 "set_torso_target -17.9691 85.9295 35.5218 0"
+send_character_message 1 "set_animation \"Data\Animations\leanovertable.anm\""
+set_character_pos 1 -18.6383 85.3402 35.0146 -62
+set_cam -18.6383 86.3172 34.5204 -30 -160.73 0 40.9333
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 1 "Ghost" "...[wait 0.3]mapa da Therium. [wait 0.5]Só o que eu precisei."
+send_character_message 1 "set_head_target -14.7891 86.1411 36.9607 1"
+set_cam -19.5005 86.063 27.2179 0 -153.32 0 54.8525
+say 1 "Ghost" "Eu posso encontrar meu caminho de volta para o Empry com isso... [wait 0.5]sobre o tempo."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 -19.4397 85.0582 33.0421 53
+send_character_message 1 "set_torso_target -18.1137 85.8626 35.7946 0"
+set_cam -17.8907 85.8845 36.6933 0 11.05 0 40.9333
+send_character_message 1 "set_head_target -20.2043 86.1333 15.777 1"
+say 1 "Ghost" "Mas... [wait 0.3]Talvez eu deveria lidar com Jairo."

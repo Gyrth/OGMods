@@ -1,0 +1,21 @@
+#name "Note-Arliss"
+#participants 2
+set_character_pos 1 171.07 -48.8527 157.516 90
+send_character_message 1 "set_head_target 171.186 -48.4564 156.943 1"
+set_cam 172.131 -48.3915 157.726 0 61.86 0 56.5533
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "Ghost" "Um livro sobre o coletivo de Arlissian..."
+send_character_message 1 "set_head_target 171.01 -48.4564 156.883 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 171.563 -48.2698 156.333 0 152.82 0 56.5533
+say 2 "Note" "Os gatos em do Sul mesas de Preuwyn são às vezes confundidos para ser nada além de nossos inimigos; [wait 0.3]Mas não se engane.
+say 2 "Note" "Qualquer gato filiado a Arliss está vinculado para enganar, [wait 0.3]explorar e trair enquanto está dentro de seus interesses."
+say 2 "Note" "Membros do coletivo Arlissian nem são conhecidos para atrair incautos kits para a vida selvagem, [wait 0.3]vencê-los e capturá-los para posterior serviço dentro do país Arliss."
+say 2 "Note" "A partir daí, [wait 0.3]subjugar, bateram e torturar nossos filhos em sua versão distorcida de 'levantar', [wait 0.3]reprodução antiga Cinderbreathe coelhos para se tornarem servos para os gatos."
+say 2 "Note" "O pensamento racional tem sido queimado fora estes pobres coelhos, [wait 0.3]transformando sua compreensão única na realidade para fornecer alimento para seus novos governantes."
+say 2 "Note" "Mas independentemente, [wait 0.3]coelhos sabemos que há sempre um fim a tal tortura; [wait 0.3]desde o início do abuso, [wait 0.3]sabemos algo para nós mesmos, [wait 0.3]Não importa o custo. [wait 0.5]Para cada kit roubado de nós, [wait 0.3]um novo gera um punho contra seus ditadores maus."
+say 2 "Note" "Guarde minhas palavras, [wait 0.3]o 'Kaicalk' (como são chamados na sua língua) será o primeiro passo para destruir o coletivo Arlissian e recuperar o domínio do Império Glorioso Cinderbreathe na Preuwyn."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "... inspirador."

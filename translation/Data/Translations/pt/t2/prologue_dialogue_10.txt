@@ -1,0 +1,18 @@
+#name "Note-Transfer"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 20.3913 420.051 -110.579 -82
+send_character_message 1 "set_head_target 20.5423 420.633 -109.84 1"
+set_cam 18.3399 420.755 -110.735 0 -107.72 0 47.1376
+say 1 "Ghost" "Um log de transferência de prisão trazido pela guarda."
+send_character_message 1 "set_head_target 20.5444 420.479 -109.808 1"
+set_cam 20.1248 420.737 -109.45 0 -23.8 0 47.1376
+set_character_pos 1 20.3913 420.092 -110.579 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "40 anos de Spurhelm, [wait 0.3]672. [wait 0.5]Assunto foi detido e localizado na prisão de terras da colônia."
+say 2 "Note" "Antiga habitação seria o Empry, [wait 0.3]Apesar de sua aparência e comportamento não iria sugerir isso."
+say 2 "Note" "Sujeito está usando um capuz azul e armadura de couro leve. [wait 0.5]Desde que sua futura cooperação é aparentemente necessária, [wait 0.3]uma revista não é necessário."
+say 2 "Note" "Sua irmã, [wait 0.3]Bijou não tenha sido informado da sua detenção. [wait 0.5]Condições de prisão não deveriam ser muito angustiante para ele, [wait 0.3]Considerando seu fundo e a vida nas favelas."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Reunião agendada com a sua presença deve ser realizada por do sol. [wait 0.5]Pelo menos dois funcionários devem estar presentes. [wait 0.5]Sua participação é importante."

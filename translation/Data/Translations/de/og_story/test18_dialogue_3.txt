@@ -1,0 +1,9 @@
+#name "Boss"
+#participants 2
+set_cam 66.4487 -1.30103 65.013 0 120.78 0 90
+set_character_pos 1 62.2505 -2.12517 65.7854 -91
+set_character_pos 2 62.2522 -1.85671 70.9479 88
+say 1 "Boss" "Ich habe einen Speer."
+say 1 "Boss" "Ich werde Sie stecken."
+say 2 "Turner" "Nein."
+make_participants_aware
