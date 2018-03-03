@@ -1,0 +1,17 @@
+#name "Note-Beetles"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 37.3548 420.149 -65.2101 -179
+send_level_message "therium2_enable_object 1869"
+send_character_message 1 "set_head_target 36.6578 420.535 -65.2565 1"
+set_cam 35.4735 420.63 -63.0056 0 -29.84 0 35.1378
+send_level_message "set_camera_dof 0.3 2 0.5 0.3 5 2"
+say 1 "Ghost" "Una pagina strappata da un giornale incollato nel diario di qualcuno."
+set_cam 36.3475 420.836 -66.1337 0 -140.49 0 35.1378
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Note" "Scavando nel quadrante C della Therium, Hansel scoperto qualcosa di più straordinario - un clan precedentemente sconosciuto di lagomorfi sotterranei che si riferiscono a se stessi come coleotteri. Più ricerca deve essere condotta, ma da quel poco delle nostre lingue comuni sono ancora condivisione che ho spigolato che questi coleotteri diviso dalla nostra società alcuni secoli precedenti sopra battibecchi familiari e poi rimase intrappolati metropolitana quando le caverne hanno ha preso rifugio in cominciarono a crollare intorno a loro."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "L'alto Consiglio si rifiuta di riconoscere la loro esistenza, ma semplicemente devo scoprire come sono riusciti a sopravvivere tutti questi anni sotto la superficie!"
+send_level_message "therium2_disable_object 1869"

@@ -1,0 +1,8 @@
+#name "Win"
+#participants 1
+set_character_pos 1 24.3082 94.5828 311.22 -86
+set_cam 24.7542 95.312 311.777 0 37.64 0 90
+say 1 "Turner" "È che tutto quello che hai?"
+say 1 "Turner" "Voglio assaggiare il sangue del gatto!"
+say 1 "Turner" "Jade è paura di guardarmi in faccia?"
+send_global_message "levelwin"

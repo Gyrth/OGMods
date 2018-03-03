@@ -1,0 +1,16 @@
+#name "Note-Lure"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 62.231 15.2946 -113.151 15
+send_character_message 1 "set_head_target 63.0672 15.716 -113.327 1"
+set_cam 61.6331 15.8967 -114.188 0 -132.66 0 53.9635
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un libro folklore popolare per analizzare e spiriti..."
+set_character_pos 1 62.231 15.3493 -113.151 15
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 63.1816 15.9284 -113.018 0 72.41 0 53.9635
+say 2 "Note" "Leggende e racconti parlano di spiriti che possiedono creature e senzienti per servire la loro volontà."
+say 2 "Note" "Hanno sei attirato fuori a postazioni remote con lenitivo sussurri, [wait 0.3]il gioco della vittima desideri più profondi e più oscuri segreti; [wait 0.3]Per esempio [wait 0.3]qualcuno con fantasie di massa approvazione potrebbe sentire applausi, [wait 0.3]complimenti o parole di lode, [wait 0.3]mentre il sanguinario si sentirà suoni di guerra, [wait 0.3]spargimento di sangue e vittoria."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Quando una vittima è sufficientemente lured e isolato, [wait 0.3]Essi saranno spesso uccisi, [wait 0.3]o peggio, [wait 0.3]ha posseduto per soddisfare bisogni e desideri degli spiriti."

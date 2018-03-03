@@ -1,0 +1,36 @@
+#name "Wanderer"
+#participants 2
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_head_target 95.4535 -54.0767 278.601 0.0261264"
+set_character_pos 1 96.5757 -54.7113 279.695 144
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlethreat.anm\""
+send_character_message 1 "set_eye_dir 95.0792 -53.3778 278.82 1"
+send_character_message 1 "set_torso_target 98.7709 -53.9783 281.336 0"
+send_character_message 1 "set_head_target 95.4142 -54.3317 279.19 1"
+set_cam 92.5919 -53.8947 278.522 -2.25 -97.34 0 29.4581
+say 1 "Turner" "Qual è il vostro business?"
+send_character_message 1 "set_head_target 94.8449 -53.769 278.816 1"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_head_target 96.4197 -53.9002 279.673 0.988067"
+set_cam 97.6076 -54.1452 281.156 -0.4 43.66 -1.42 29.4581
+say 2 "Wanderer" "Che è quello che passa per l'ospitalità qui?"
+send_character_message 1 "set_torso_target 98.7709 -53.9783 281.336 0.18728"
+send_character_message 1 "set_head_target 96.2253 -54.0615 278.12 1"
+send_character_message 2 "set_head_target 96.5382 -53.9507 279.7 0.988067"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 92.5919 -53.8947 278.522 -2.25 -97.34 0 29.4581
+say 1 "Turner" "Io sono fresco di qualcuno che sta cercando di battere me a morte per dire Ciao."
+send_character_message 2 "set_head_target 96.538 -53.9507 279.7 0.988067"
+send_character_message 2 "set_torso_target 95.3751 -54.1455 279.091 0.00599331"
+send_character_message 1 "set_head_target 94.5352 -54.0409 278.683 1"
+send_character_message 1 "set_torso_target 98.7709 -53.9783 281.336 0"
+say 1 "Turner" "Avrà a che fare."
+send_character_message 2 "set_torso_target 95.6412 -54.1455 277.907 1"
+send_character_message 2 "set_head_target 94.8064 -52.9119 277.204 0.988067"
+set_cam 97.6076 -54.1452 281.156 -0.4 43.66 -1.42 29.4581
+say 2 "Wanderer" "Ho notato un campo scout piccolo sulla strada qui [wait 0.2]-ha preso un lungo giro."
+send_character_message 2 "set_torso_target 95.6412 -54.1455 277.907 0.295745"
+send_character_message 2 "set_head_target 95.916 -53.8246 279.626 0.988067"
+set_cam 92.5919 -53.8947 278.522 -2.25 -97.34 0 29.4581
+say 1 "Turner" "Mi ci porti."
+send_global_message "levelwin"

@@ -1,0 +1,14 @@
+#name "Top"
+#participants 3
+set_character_pos 1 133.491 94.9076 -13.41 0
+set_character_pos 3 173.224 88.4173 -13.494 145
+set_character_pos 2 173.343 94.4654 -7.60174 -172
+set_cam 132.522 95.367 -12.5631 0 -68.92 0 90
+say 1 "Turner" "Come ha fatto quel lupo arrivare qui?"
+set_cam 164.61 91.3857 -10.2423 1.28 -92.65 -2.13 90
+say 2 "Rabbit" "Correre!"
+say 2 "Rabbit" "Salva te stesso!"
+set_cam 171.861 89.3721 -13.5683 1.57 -84.36 -1.92 90
+say 3 "Wolf" "Un altro hop-hop?"
+say 3 "Wolf" "Andrò a dormire con la pancia piena di carne stasera."
+make_participants_aware

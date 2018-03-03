@@ -1,0 +1,16 @@
+#name "Note-Gunpowder"
+#pariticipants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 17.8347 31.6095 -116.013 58
+send_character_message 1 "set_head_target 18.1728 31.9015 -116.556 1"
+set_cam 18.6701 32.1478 -115.054 0 30 0 43.359
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+say 1 "Ghost" "Una nota, [wait 0.3]probabilmente scritto da uno degli inventori."
+set_character_pos 1 17.8347 31.6095 -116.013 58
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 17.8744 32.1596 -117.355 0 176.96 0 43.359
+say 1 "Note" "Le osservazioni da nostre spie nel collettivo Arlissian venuti. [wait 0.5]Demolizione, [wait 0.3]polvere da sparo e cannoni; [wait 0.3]un po' preoccupante."
+say 1 "Note" "Anche se è più probabile che si usano per edilizia e scavo, [wait 0.3]le ramificazioni politiche di potenziale guerra non sono mie su cui riflettere."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Note" "Dispositivi di campione sono venuti in, [wait 0.3]così dovrò iniziare decodificazione ogni po ' di questo..."

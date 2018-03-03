@@ -1,0 +1,19 @@
+#name "Note-Execution"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -111.626 18.0616 168.124 -158
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target -112.617 17.7268 168.456 1"
+set_cam -109.364 18.2246 168.52 -4.29 87.67 0 36.0807
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un registro per perché qualcuno è in esecuzione. [wait 0.5]Devono essere nelle vicinanze."
+send_character_message 1 "set_head_target -112.563 17.7268 168.456 1"
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam -112.806 18.2129 169.046 0.02 -50.75 0.02 36.0807
+say 2 "Note" "Quest'uomo è stato trovato colpevole dei crimini più diritto di Cinderbreathe Empry. [wait 0.5]I crimini che ha commesso, [wait 0.3]Ha:"
+say 2 "Note" "Nutriva un nemico dell'Impero. [wait 0.5]Questo include un gatto alleato Arliss ricercato per trading narcotici."
+say 2 "Note" "Cospirazione con le potenze straniere. [wait 0.5]Questo include il collettivo Arlissian."
+say 2 "Note" "Aggredito un membro rispettato della forza guardia Cinderbreathe."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "La somma dei suoi crimini sono punibili con la morte. [wait 0.5]Seguire l'ordine sotto lo sguardo dei funzionari Cinderbreathe."

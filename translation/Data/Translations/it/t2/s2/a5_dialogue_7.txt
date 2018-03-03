@@ -1,0 +1,23 @@
+#name "Note-Cache"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -18.9745 -8.56669 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 1 "set_head_target -19.3971 -8.84294 155.245 1"
+set_cam -17.5156 -8.54594 155.832 0 78.14 0 48.294
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Nota è fradicia da tutta la pioggia, [wait 0.3]ma penso che posso fare le parole."
+set_cam -19.9914 -8.35759 155.085 0 -121.86 0 41.4636
+set_character_pos 1 -18.9745 -8.51633 155.981 125
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+say 2 "Note" "Sai chi è. [wait 0.5]Se questo è nelle mani sbagliate, [wait 0.3]Lo saprò. [wait 0.5]Così passo indietro prima di pensare che questo set è un buon affare."
+say 2 "Note" "In entrambi i casi, [wait 0.3]S, [wait 0.3]Questo è il mio regalo finale. [wait 0.5]Mi hai detto più e più volte di recidere ogni legame dopo quello che hai fatto, [wait 0.3]e ho lavorato il mio culo per assicurarsi che ciò accada."
+say 2 "Note" "Sembrava che tutti era mi mancherai, [wait 0.3]ma ero certo di farlo ragionare in loro. [wait 0.5]È che apprezzare al meglio."
+say 2 "Note" "E poiché non possiamo parlare troppo in persona, [wait 0.3]Non sono in grado di dirvi questo, [wait 0.3]ma ti suggerisco di che fare lo stesso... [wait 0.3]tagliare tutti i legami, [wait 0.3]Voglio dire."
+say 2 "Note" "C non ha intenzione di perdonare qualsiasi momento presto per tutto quello che preso da lui, [wait 0.3]e nessuna quantità di erbe di sonno può cambiare la situazione."
+say 2 "Note" "Lui è più intelligente di quanto si lascia [wait 0.3]e non è troppo intelligente di voi a non salire su che."
+say 2 "Note" "E una volta F scopre il tuo cuore per coda corta, [wait 0.3]Egli non sara ' troppo felice, [wait 0.3]entrambi."
+say 2 "Note" "Se mai lo fanno per Ouran, [wait 0.3]Vi auguro buona fortuna. [wait 0.5]Nessuno può trovare lì. [wait 0.5]Nemmeno io."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 2 "Note" "Firmato, [wait 0.3]T."

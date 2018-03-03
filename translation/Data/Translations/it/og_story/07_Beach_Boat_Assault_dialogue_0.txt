@@ -1,0 +1,38 @@
+#name "Cat"
+#participants 2
+set_dialogue_color 2 0.9 0.9 1
+set_dialogue_voice 2 3
+set_character_pos 2 14.8402 18.2995 162.016 -90
+set_character_pos 1 14.8517 18.3114 168.302 91
+set_cam 14.2406 19.3305 171.685 -2.53 -7.24 0 15.2088
+send_character_message 1 "empty_hands"
+send_character_message 2 "set_torso_target 16.0058 18.108 165.688 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_level_message "music_layer_override 2"
+say 2 "Silver" "Sei tu quella causa di tutto questo polverone, poi?"
+send_character_message 2 "set_head_target 14.2262 19.6947 162.845 1"
+say 2 "Silver" "Interferire con le nostre operazioni locali?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "Quindi sei un gatto."
+send_character_message 2 "set_head_target 14.8418 19.2915 168.309 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "Che cosa un'osservazione sferzante. Vedo che non sconfiggere i tuoi nemici con il tuo spirito a pinze."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Ho bisogno di questa nave."
+send_character_message 2 "set_head_target 18.4259 19.0183 166.672 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+say 2 "Silver" "E cosa pensi di fare con esso? Salpare al tramonto? O il sorgere della luna? Puoi anche dire una barra del timone da un accompagnatore?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "Non è un problema mio. Ho fatto una promessa ad un amico."
+send_character_message 2 "set_head_target 14.9884 19.1547 167.772 1"
+send_character_message 2 "set_torso_target 16.2213 18.2716 165.705 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Silver" "Le promesse sono catene per i deboli, ma tu sei forte. Per un coniglio, naturalmente. Forza dovrebbe essere ricompensato."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Silver" "Cosa sarebbe necessario per portarvi al mio fianco? Soldi? Compagni? O solo più opportunità di uccidere?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Turner" "Che ne dici iniziare tagliando fuori la lingua."
+send_character_message 1 "equip_item 4152"
+send_level_message "music_layer_override 4"
+make_participants_aware

@@ -1,0 +1,75 @@
+#name "Arch"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 74.093 75.3728 34.9695 -119
+send_character_message 2 "set_eye_dir 71.8665 75.4922 37.4882 1"
+send_character_message 2 "set_torso_target 73.6052 75.5653 35.4905 1"
+send_character_message 2 "set_head_target 71.7888 75.1326 37.3744 1"
+set_character_pos 1 69.9905 74.1747 40.435 -105
+send_character_message 1 "set_animation \"Data\Animations\interestingsit.anm\""
+send_character_message 1 "set_eye_dir 68.3645 67.875 55.8633 1"
+send_character_message 1 "set_torso_target 71.7147 75.2587 36.7382 0"
+send_character_message 1 "set_head_target 65.7764 61.0997 63.8802 1"
+set_cam 73.2828 71.6742 44.9073 0.18 177.24 0.03 38.3812
+say 1 "" "..."
+set_cam 69.624 75.0748 39.0544 -28.09 -173.49 0.06 38.3812
+say 1 "Ghost" "..."
+send_character_message 2 "set_torso_target 73.5958 75.2815 35.5242 1"
+send_character_message 2 "set_eye_dir 71.7877 74.9778 38.0864 1"
+send_character_message 2 "set_head_target 70.5339 74.4871 39.7273 1"
+set_cam 69.7738 74.2086 41.1484 9.05 -30.84 -0.01 38.3812
+send_character_message 1 "set_torso_target 70.1702 73.8137 41.2328 1"
+send_character_message 1 "set_head_target 70.9767 74.7092 39.929 1"
+send_character_message 1 "set_eye_dir 73.8108 75.9191 35.2307 1"
+say 2 "Jairo" "Fantasma?"
+send_character_message 2 "set_head_target 70.5307 74.4838 39.7265 1"
+send_character_message 2 "set_torso_target 73.5963 75.2813 35.523 1"
+send_character_message 1 "set_head_target 71.0464 74.8102 39.8319 1"
+say 1 "Ghost" "Oh- [wait 0.3]Ehi."
+send_character_message 2 "set_torso_target 73.8227 74.9229 35.2398 1"
+send_character_message 2 "set_head_target 70.4781 74.2106 39.7427 1"
+say 2 "Jairo" "Cosa ci fai quassù?"
+send_character_message 1 "set_eye_dir 68.3848 73.7409 44.6446 0.736936"
+send_character_message 2 "set_eye_dir 70.2535 74.4917 40.1001 1"
+send_character_message 1 "set_head_target 70.0584 74.2834 40.9913 1"
+set_cam 71.3268 74.5316 39.9641 -11.86 113.81 -0.04 38.3812
+say 1 "Ghost" "[wait 0.4]Ho solo pensato vorrei cercare di salire quassù."
+send_character_message 2 "set_animation \"Data\Animations\r_crouch.anm\""
+send_character_message 2 "set_head_target 70.2513 73.644 45.3828 1"
+send_character_message 2 "set_torso_target 71.4834 73.9258 39.2886 1"
+set_character_pos 2 71.5029 74.6477 39.2273 -93
+send_character_message 1 "set_head_target 69.5869 74.3836 41.8047 1"
+say 1 "Ghost" "Basta avere una bella vista."
+send_character_message 1 "set_eye_dir 68.5252 70.2176 45.5661 0.736936"
+send_character_message 1 "set_head_target 69.1406 72.5094 45.3259 1"
+send_character_message 2 "set_head_target 68.9852 73.1525 45.3673 1"
+set_cam 69.2797 74.3273 41.8559 0.37 -32.48 0.3 38.3812
+say 2 "Jairo" "..."
+send_character_message 1 "set_eye_dir 70.8276 72.9254 45.4261 0.736936"
+send_character_message 1 "set_head_target 70.5368 73.6571 45.3551 1"
+send_character_message 2 "set_head_target 70.5497 74.453 39.9786 1"
+say 2 "Jairo" "[wait 0.2]Fa' con calma."
+send_character_message 1 "set_eye_dir 67.9496 68.6023 48.3383 0.736936"
+send_character_message 1 "set_head_target 68.643 71.7498 47.5346 1"
+send_character_message 2 "set_head_target 70.9472 73.2055 46.5882 1"
+say 2 "Jairo" "Assicuratevi solo di che non rompere la gamba sul vostro cammino verso il basso."
+send_character_message 1 "set_torso_target 69.962 73.7756 41.2545 1"
+set_cam 71.1258 74.2025 41.3543 -0.26 51.57 0.4 38.3812
+say 1 "Ghost" "..."
+set_cam 70.3152 74.7191 39.7816 -29.52 172.56 -0.61 38.3812
+say 1 "Ghost" "..."
+set_cam 72.6108 75.0304 39.3546 -15.54 104.43 0.54 38.3812
+say 1 "Ghost" "..."
+send_character_message 2 "set_head_target 70.2005 74.1144 40.8877 1"
+say 2 "Jairo" "In entrambi i casi, [wait 0.3]Vi consiglio di che iniziare presto."
+send_character_message 1 "set_head_target 72.1202 74.1527 41.8186 1"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+say 2 "Jairo" "Il tempo è a portata di mano."
+send_character_message 2 "set_torso_target 71.4834 73.9258 39.2886 0"
+send_character_message 1 "set_torso_target 69.8624 74.5225 41.1091 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_head_target 65.7934 75.5561 43.2003 1"
+say 1 "Ghost" "..."

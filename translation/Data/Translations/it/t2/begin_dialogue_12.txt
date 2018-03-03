@@ -1,0 +1,21 @@
+#name "Note-Arliss"
+#participants 2
+set_character_pos 1 171.07 -48.8527 157.516 90
+send_character_message 1 "set_head_target 171.186 -48.4564 156.943 1"
+set_cam 172.131 -48.3915 157.726 0 61.86 0 56.5533
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 1 "Ghost" "Un libro sul collettivo Arlissian..."
+send_character_message 1 "set_head_target 171.01 -48.4564 156.883 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 171.563 -48.2698 156.333 0 152.82 0 56.5533
+say 2 "Note" "I gatti nelle mesas meridionale di Preuwyn sono a volte scambiati per essere qualcosa di diverso da nostri nemici; [wait 0.3]ma non fatevi ingannare.
+say 2 "Note" "Qualsiasi gatto affiliato con la Arliss è associato a imbrogliare, [wait 0.3]sfruttare e tradire, purché esso sia all'interno dei loro interessi."
+say 2 "Note" "Membri del collettivo Arlissian sono anche noti per attirare incauti kit in terre selvagge, [wait 0.3]batterli e catturarli per poi servizio all'interno del paese di Arliss."
+say 2 "Note" "Da lì, [wait 0.3]sottomettere, batterono e torturare i nostri figli nella loro versione distorta di 'sensibilizzazione', [wait 0.3]conigli di razza ex Cinderbreathe per diventare servi ai gatti."
+say 2 "Note" "Pensiero razionale è bruciato fuori questi poveri conigli, [wait 0.3]accendere loro comprensione unica realtà a fornire nutrimento per loro nuovi padroni."
+say 2 "Note" "Ma a prescindere, [wait 0.3]conigli sappiamo che c'è sempre una fine a tale tortura; [wait 0.3]fin dall'inizio dell'abuso, [wait 0.3]sappiamo a bastone per noi stessi, [wait 0.3]non importa il costo. [wait 0.5]Per ogni kit rubato da noi, [wait 0.3]una nuova genera un pugno contro i loro dittatori male."
+say 2 "Note" "Ricorda le mie parole, [wait 0.3]'Kaicalk' (come si chiamano nella loro lingua) sarà il primo passo per distruggere il collettivo Arlissian e bonifica dominanza dell'impero glorioso Cinderbreathe su Preuwyn."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Ghost" "... stimolante."

@@ -1,0 +1,15 @@
+#name "ML-G"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -26.4183 -0.384276 -53.9546 -132
+send_character_message 1 "set_head_target -27.2564 0.84715 -52.9473 1"
+set_cam -25.0699 -0.35001 -59.8754 0 164.46 0 62.7526
+say 1 "Ghost" "..."
+set_character_pos 1 -26.4183 -0.590372 -53.9546 -132
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+send_character_message 1 "set_head_target -27.2564 0.84715 -52.9473 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "I Cinderbreathe stanno intensificando il loro gioco, [wait 0.3]Questo è sicuro..."
+send_global_message "levelwin a"

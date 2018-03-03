@@ -1,0 +1,24 @@
+#name "Top"
+#participants 3
+send_character_message 3 "set_animation \"Data/Animations/r_combatidlewild.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_dialogue_color 3 1 0.5 0.5
+set_dialogue_voice 3 17
+set_character_pos 1 133.491 94.9076 -13.41 0
+set_character_pos 3 173.224 88.259 -13.494 -117
+set_character_pos 2 171.941 94.5345 -7.64695 161
+set_cam 162.997 91.7862 -10.3008 -7.4 -92.33 -2.15 90
+send_level_message "music_layer_override 3"
+say 2 "Sun" "Attento, c'è un lupo!"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Sun" "Salva te stesso!"
+send_character_message 3 "set_torso_target 171.92 89.1787 -12.6429 0.998902"
+send_character_message 3 "set_head_target 170.739 89.2724 -14.7697 1"
+set_cam 171.805 88.7321 -12.9678 8.44 -84.59 -1.94 90
+send_level_message "set_camera_dof 0 0 0 0.3 3.5 1"
+say 3 "Frost" "Un altro hop-hop?"
+send_character_message 3 "set_head_target 171.396 88.8077 -13.4855 1"
+send_character_message 3 "set_torso_target 172.134 88.2902 -13.4497 0"
+say 3 "Frost" "Io dormirò con la pancia piena stasera."
+send_level_message "music_layer_override 4"
+make_participants_aware

@@ -1,0 +1,51 @@
+#name "Win"
+#participants 6
+send_character_message 6 "set_torso_target -84.0324 201.168 96.1541 0.971295"
+send_character_message 6 "set_head_target -85.664 201.64 93.9952 1"
+send_character_message 5 "set_torso_target -80.5415 202.506 96.9927 1"
+send_character_message 5 "set_head_target -80.0417 202.423 97.5966 0.937068"
+send_character_message 4 "set_torso_target -85.6184 201.164 93.4119 0.276317"
+send_character_message 4 "set_head_target -85.4223 201.317 93.631 0.271093"
+send_character_message 3 "set_head_target -86.5167 201.756 94.7592 1"
+send_character_message 6 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 4 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_character_pos 1 -95.5381 199.691 93.4986 27
+set_character_pos 2 -79.3392 202.394 95.7022 172
+set_character_pos 3 -85.6515 200.943 93.9332 -154
+set_character_pos 4 -84.8538 200.907 92.7995 -122
+set_character_pos 5 -79.3701 202.306 96.5071 -173
+set_character_pos 6 -83.6347 200.723 97.1115 138
+set_cam -96.8989 200.184 92.781 -0.5 -105.35 0 39.6559
+send_level_message "set_camera_dof 0.3 6 0.1 0 0 0"
+send_level_message "music_layer_override 1"
+say 3 "Sun" "Non ho mai pensato di che rivedere questo posto."
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle_yawn.anm\""
+say 2 "Cedar" "Quella salita era faticosa! Magari che potrei essere tirato come ricerca per indicizzazione."
+send_character_message 4 "set_head_target -85.7481 201.317 93.5486 1"
+send_character_message 4 "set_torso_target -85.7412 201.164 93.3767 1"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+say 4 "Crawl" "Sono ancora stordito dal oscillante su quella corda."
+send_character_message 1 "set_torso_target -94.5761 199.775 93.3471 1"
+send_character_message 1 "set_head_target -94.8363 199.875 92.6857 1"
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.1"
+say 1 "Turner" "Non siamo ancora fuori pericolo. Questo posto non sarà mai sicuro fino a quando io sono qui. I gatti non smetterà mai a cercarmi."
+send_character_message 5 "set_torso_target -80.5415 202.506 96.9927 0.0645882"
+send_character_message 5 "set_head_target -80.378 202.561 96.2157 1"
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_level_message "set_camera_dof 0.3 6 0.1 0 0 0"
+say 5 "Flint" "Ci mancherai!"
+send_character_message 6 "set_torso_target -84.9205 201.168 96.7049 1"
+send_character_message 6 "set_head_target -85.0096 201.234 96.784 1"
+say 6 "Sky" "Non andare. Possiamo prendere il rischio. Ti dobbiamo così tanto! Forse se tingiamo tua pelliccia..."
+send_character_message 1 "set_torso_target -94.2724 199.646 93.0653 1"
+send_character_message 1 "set_head_target -93.668 200.27 92.8736 1"
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.1"
+say 1 "Turner" "Qui sarete al sicuro. Sarò ok. Conosco un posto dove non succede mai niente."
+fade_to_black 1
+send_level_message "music_layer_override 2"
+say 99 "" "Avete completato la storia di crescita eccessiva! Successivamente, si può provare la storia di Lugaru, o qualsiasi altre mods incorporato nel menu Mods."
+say 99 "" "O guardare lo Steam workshop di provare mods creati da altri giocatori!"
+say 99 "" "È inoltre possibile leggere il fumetto di crescita eccessiva alle wolfire.com/comic"
+send_global_message "levelwin"

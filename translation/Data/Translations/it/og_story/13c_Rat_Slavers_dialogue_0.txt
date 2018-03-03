@@ -1,0 +1,24 @@
+#name "Win"
+#participants 2
+set_character_pos 2 397.176 -1.99877 19.7161 109
+set_character_pos 1 396.687 -2.22842 18.8396 -62
+set_cam 397.168 -1.43508 18.4408 0 161.5 0 90
+say 1 "Turner" "Cielo."
+say 1 "Turner" "Stai bene?"
+say 2 "Sky" "Sei venuto dal Santuario?"
+say 2 "Sky" "Mi sono perso."
+say 1 "Turner" "Sono Turner."
+say 1 "Turner" "Stai bene ora."
+say 1 "Turner" "Ti salverò."
+say 2 "Sky" "I ratti, hanno usato il blowdarts, una sorta di veleno di sonno."
+say 2 "Sky" "È come ci catturarono."
+say 2 "Sky" "Ho visto dove tengono la loro fornitura,"
+say 2 "Sky" "Stavo per distruggerlo, ma..."
+say 2 "Sky" "così tanto sonno..."
+say 1 "Turner" "Ci occuperemo di esso."
+say 1 "Turner" "E poi mi prenderò cura di te."
+say 1 "Turner" "Mi ricordi di aprile..."
+say 2 "Sky" "Chi?"
+say 1 "Turner" "Non importa."
+say 1 "Turner" "Sei al sicuro con me."
+send_global_message "levelwin"

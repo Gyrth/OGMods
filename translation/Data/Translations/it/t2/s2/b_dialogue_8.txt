@@ -1,0 +1,18 @@
+#name "Note-Bleeding"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 299.413 2.70343 36.1188 -90
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 299.345 2.82007 36.8789 1"
+set_cam 300.976 3.19253 37.4423 0 60 0 33.9423
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un'antica nota, [wait 0.3]strappati e rovinati dalle intemperie. [wait 0.5]Può a malapena leggere."
+send_character_message 1 "set_head_target 299.467 2.86558 36.8146 1"
+set_cam 300.268 3.35349 37.3426 0 38.06 0 33.9423
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Il demone è il sanguinamento. [wait 0.5]Suo sangue è andato nella foresta nelle vicinanze. [wait 0.5]Non abbiamo potuto vedere lui passato tutti i cespugli e le foglie."
+say 2 "Note" "La camicia, [wait 0.3]anche se abbiamo rinvii di un coltello addosso, [wait 0.3]è ancora completamente intatta. [wait 0.5]Così è la sua pelliccia e pelle."
+say 2 "Note" "Il Dio deve essere arrabbiato con noi. [wait 0.5]Per quale motivo, [wait 0.3]Non ne ho idea. [wait 0.5]Dev'essere il Messaggero di ira di Dio, [wait 0.3]potente e invincibile.
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "[wait 0.3]Sono molto spaventata."

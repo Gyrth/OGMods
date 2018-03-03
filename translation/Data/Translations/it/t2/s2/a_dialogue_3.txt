@@ -1,0 +1,44 @@
+#name "Success"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 11.7471 22.1299 -156.356 30
+send_character_message 2 "set_eye_dir 18.7825 16.6623 -159.107 1"
+send_character_message 2 "set_head_target 17.9328 16.789 -158.734 1"
+set_character_pos 1 19.4651 15.9204 -159.27 -157
+send_character_message 1 "set_eye_dir 15.3966 22.3765 -157.835 1"
+send_character_message 1 "set_head_target 18.1505 16.2979 -159.013 1"
+set_cam 22.1061 16.3711 -161.072 0 120 0 18.761
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 1 "" "..."
+set_character_pos 2 12.1695 22.1299 -156.582 30
+set_cam 22.0978 16.3671 -161.065 0 120 0 18.761
+send_character_message 1 "set_head_target 17.8338 16.727 -159.509 1"
+say 1 "Ghost" "[wait 0.2]Jairo!"
+set_cam 22.0978 16.3671 -161.065 0 120 0 18.761
+send_character_message 1 "set_head_target 18.495 16.7891 -158.178 1"
+say 1 "Ghost" "Ora puoi venire!"
+set_cam 22.0978 16.3671 -161.065 0 120 0 18.761
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target 13.5877 21.9074 -157.033 1"
+say 2 "Jairo" "Ben fatto [wait 0.15]Fantasma."
+set_cam 21.0089 15.3508 -160.45 32.41 120 0 18.761
+send_level_message "set_camera_dof 0.3 5 1 0 0 0"
+say 2 "Jairo" "Io porterò uno di loro."
+say 2 "Jairo" "Quella viva, che è."
+set_cam 14.3518 22.4837 -158.093 2.01 126.47 0.23 18.761
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 2 "Jairo" "Si, [wait 0.2]trasportare i cadaveri."
+send_character_message 2 "set_head_target 17.7287 23.0617 -156.888 1"
+say 2 "Jairo" "Ti mostrerò dove stash."
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 2 "set_eye_dir 18.7825 16.6623 -159.107 0.304063"
+send_character_message 2 "set_head_target 17.7928 21.888 -158.192 1"
+say 2 "Jairo" "[wait 0.1]Lui sarà in un inferno di uno shock quando si sveglia."
+send_character_message 1 "set_head_target 16.0774 16.552 -158.041 1"
+set_cam 20.9836 16.364 -160.409 2.02 120.82 0.03 18.761
+say 1 "" "..."
+send_global_message "levelwin a"

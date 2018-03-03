@@ -1,0 +1,100 @@
+#name "Intro"
+#participants 3
+set_character_pos 2 5.44016 43.1477 304.042 180
+send_character_message 2 "set_animation \"Data/Animations/dialogue_dying_1.anm\""
+send_character_message 2 "set_torso_target 4.69515 43.2203 303.823 0"
+send_character_message 2 "set_head_target 4.76786 43.1121 304.002 1"
+set_character_pos 1 -23.0637 38.2315 395.243 74
+send_character_message 1 "set_torso_target -22.5377 38.2372 394.307 1"
+send_character_message 1 "set_head_target -22.8105 39.0264 393.784 1"
+set_cam -23.0384 38.9187 392.201 0 -177.58 0 15.5688
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 17
+say 1 "Ghost" "Infine, [wait 0.3]Torna alla Empry... [wait 0.2]'casa'."
+send_character_message 1 "set_head_target -22.4748 41.1027 387.326 1"
+set_cam -22.631 38.5943 397.13 10.19 -0.94 0.04 31.9411
+say 1 "Ghost" "...[wait 0.3]che cosa è successo qui?"
+set_cam -23.8775 38.7819 397.258 5.32 -17.32 0 17.5144
+send_character_message 1 "set_torso_target -22.3589 38.2245 394.301 1"
+send_character_message 1 "set_head_target -20.924 40.1709 387.026 1"
+say 1 "Ghost" "..."
+set_cam -5.77903 42.9144 312.219 -0.09 -54.46 0.01 10.8225
+say 1 "Ghost" "Deve avere qualcosa da dire..."
+set_cam 4.04249 43.2539 301.276 0.03 -156.89 0.09 17.8057
+say 2 "???" "..."
+send_character_message 1 "set_head_target 5.41595 43.4758 304.002 1"
+send_character_message 1 "set_torso_target 3.42579 43.0197 304.282 1"
+set_character_pos 1 2.28979 43.1725 304.064 0
+send_character_message 2 "set_head_target 4.61752 43.3525 303.873 1"
+say 1 "Ghost" "Ehi!"
+send_character_message 2 "set_head_target 2.50113 43.8854 304.039 1"
+set_cam 5.94914 43.4873 303.784 0.08 99.81 -0.05 36.7519
+say 1 "Ghost" "Stai bene?"
+send_character_message 2 "set_head_target 2.49963 43.5445 303.996 1"
+set_cam 4.82104 43.3872 303.121 0.03 -154.95 0.09 36.7519
+say 2 "???" "[wait 0.5]Lo fa [wait 0.1]sguardo [wait 0.2]come esso?"
+send_character_message 1 "set_torso_target 3.42579 43.694 304.282 1"
+set_cam 2.99758 43.3619 305.687 11.14 13.18 0.03 36.7519
+say 1 "Ghost" "Cosa diavolo ti è successo?"
+send_character_message 1 "set_torso_target 3.42579 44.0728 304.435 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Ghost" "Ha invaso la Arliss!?"
+send_character_message 2 "set_head_target 4.68112 42.9002 303.623 1"
+set_cam 3.82281 43.3131 303.385 0.01 -116.62 -0.03 36.7519
+say 2 "???" "No [wait 0.3]Non credo..."
+send_character_message 2 "set_torso_target 4.55453 43.2981 304.005 1"
+send_character_message 2 "set_head_target 2.8474 43.9424 303.992 1"
+say 2 "???" "Ma abbassa la voce!"
+send_character_message 2 "set_head_target 3.41755 43.0424 304.167 1"
+set_cam 5.30102 43.3174 305.186 5.18 3.26 0.02 28.8516
+say 2 "???" "Ho [wait 0.1]Non ne ho idea [wait 0.1]che cosa [wait 0.1]queste cose sono..."
+send_character_message 2 "set_head_target 3.1532 43.354 303.937 1"
+say 2 "???" "Ho [wait 0.3]potrebbe essere l'unico vivo."
+set_character_pos 1 2.28803 43.1185 304.064 0
+send_character_message 1 "set_torso_target 3.42574 44.0706 304.435 0"
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+set_cam 0.121658 43.3384 304.925 0.13 -74.48 0.04 18.8157
+say 1 "Ghost" "...[wait 0.2]mantenere la vostra forza, [wait 0.3]per favore."
+send_character_message 1 "set_torso_target 2.84631 42.672 304.057 1"
+say 1 "Ghost" "Dimmi solo cosa diavolo è successo qui."
+send_character_message 2 "set_head_target 4.71662 42.8976 303.991 1"
+set_cam 5.47051 44.0353 327.751 -0.01 3.64 0.14 33.5555
+say 2 "???" "Sono venuti tutti a frotte..."
+send_character_message 2 "set_head_target 4.85247 42.8976 303.227 1"
+say 2 "???" "Questo folle [wait 0.3]sguardo [wait 0.2]nei loro occhi..."
+send_character_message 2 "set_head_target 2.56612 43.4716 304.067 1"
+say 2 "???" "[wait 0.3]Come qualcosa che aveva [wait 0.1]ottenuto nelle loro menti e strappato loro [wait 0.1]salute mentale [wait 0.1]dentro-fuori."
+send_character_message 1 "set_torso_target 2.84631 42.672 304.057 0"
+set_cam 3.35887 43.3579 304.555 -0.12 57.07 0.08 33.5555
+say 1 "Ghost" "Tenere la poesia per più tardi. [wait 0.4]Devo trovare mia sorella."
+send_character_message 2 "set_torso_target 4.56212 42.7619 303.985 1"
+send_character_message 2 "set_head_target 2.5784 43.5915 304.067 1"
+set_cam 0.0261126 43.3857 304.686 0.14 -79.66 0.02 13.3791
+say 2 "???" "...[wait 0.4]ha [wait 0.2]si!"
+send_character_message 2 "set_torso_target 4.72938 42.866 303.803 1"
+say 2 "???" "Questo [wait 0.2]deve essere colpa tua..."
+send_character_message 1 "set_torso_target 2.84631 42.672 304.057 1"
+say 1 "Ghost" "Che cosa?"
+send_character_message 2 "set_head_target 3.25647 43.2576 303.734 1"
+set_cam 3.90542 43.4611 305.191 0.11 -50.02 0.09 13.3791
+say 2 "???" "[wait 0.3]Arrestato e portato per la [wait 0.1]Cimitero degli dèi..."
+send_character_message 2 "set_head_target 2.96314 43.2659 304.143 1"
+say 2 "???" "tre giorni [wait 0.3]più tardi, [wait 0.1]Questo [wait 0.2]succede."
+send_character_message 1 "set_head_target 5.422 43.7142 304.002 1"
+send_character_message 1 "set_torso_target 2.84631 42.672 304.057 0"
+set_cam 3.80799 43.2651 305.121 -0.11 52.81 0.09 33.4553
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Ghost" "Non dare in superstizione."
+send_character_message 2 "set_head_target 4.15203 43.0718 303.966 0"
+set_cam 4.59244 43.4249 311.204 -0.01 5.63 0.14 33.4553
+say 2 "???" "[wait 0.3]Io sto per morire..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 2 "set_torso_target 4.72938 42.866 303.803 0"
+say 1 "Ghost" "Solo riposo per ora."
+send_character_message 1 "set_head_target -9.17527 55.5631 147.111 1"
+set_character_pos 1 2.28803 43.1185 304.064 73
+set_cam 2.79549 43.9018 306.226 -0.01 5.63 0.14 54.1543
+say 1 "Ghost" "... This deve essere come i mostri entrato nella Empry."
+set_cam -18.6536 41.9386 292.522 0.07 -29.84 0.12 102.731
+say 1 "Ghost" "Dovrò salire la Creta..."

@@ -1,0 +1,15 @@
+#name "Note-SpiritEnergy"
+#participants 2
+set_character_pos 1 190.052 -48.9326 193.971 -180
+send_character_message 1 "set_head_target 189.297 -48.4541 194.072 1"
+set_cam 190.681 -48.3442 192.828 0 135.86 0 38.5978
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un strappato fuori pagina da un libro sulle leggende di spirito..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 189.05 -48.2701 194.674 0 -40.3 0 38.5978
+say 2 "Note" "Energia di spirito, [wait 0.3]come detto nei racconti, [wait 0.3]è quasi sempre tenuto e imbrigliato all'interno di lanterne di pietra circa alti come qualsiasi cane adulto medio."
+say 2 "Note" "Se queste lanterne capita di essere rotto o distrutto in qualche modo, [wait 0.3]l'energia di spirito sarà rilasciato e immediatamente distrutte; [wait 0.3]qualsiasi scopo che gli spiriti dentro la lanterna potrebbero aver servito in anticipo svanisce completamente, [wait 0.3]e la sua funzione è perduta per sempre, fino alla sostituzione."
+say 2 "Note" "Insieme con l'energia di spirito essere definitivamente persa, [wait 0.3]sarete dannata quasi immediatamente per questo 'peccato'."
+say 2 "Note" "Queste lanterne di spirito forniscono funzioni per ogni singolo uno dei principi fondamentali e del diritto del mondo."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Mentre ci sono un sacco di storie che coinvolgono gli spiriti del mondo, [wait 0.3]Più che sono propenso a credere che queste sono nient'altro che storie."

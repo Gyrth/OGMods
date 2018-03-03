@@ -1,0 +1,30 @@
+#name "Ambush"
+#participants 4
+send_level_message "music_layer_override 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3.5 2"
+send_character_message 4 "set_head_target 23.3118 100.549 -12.8486 0.028192"
+set_character_pos 4 24.2716 100.671 -12.8594 -166
+set_character_pos 2 23.3202 100.497 -12.1884 175
+set_character_pos 3 21.0934 100.39 -13.841 -153
+set_character_pos 1 14.2472 99.0836 -10.1309 121
+set_cam 16.4196 99.7788 -8.60853 0 35.71 0 62.712
+say 1 "Turner" "Questo non è solo una statua di coniglio. Si tratta di un altare al Khyo."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+set_character_pos 1 14.3095 99.008 -10.1268 44
+set_cam 14.2373 99.6037 -7.44292 0 -25.19 0 62.712
+say 1 "Turner" "Ricerca per indicizzazione? È che voi?"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+set_cam 20.2017 100.876 -13.65 -5.82 -94.36 0 62.712
+set_dialogue_color 3 0.7 0.4 0.4
+set_dialogue_voice 3 1
+send_level_message "music_layer_override 3"
+say 3 "Peat" "Un nuovo sacrificio!"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_point.anm\""
+set_dialogue_color 2 0.6 0.5 0.7
+set_dialogue_voice 2 6
+say 2 "Brack" "È la guerra-coniglio. Ametista pagherà anche per la sua testa!"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 4 "set_head_target 23.3118 100.549 -12.8486 0"
+set_dialogue_color 4 0.8 0.8 0.7
+say 4 "Molar" "Posso tenere le orecchie?"
+make_participants_aware

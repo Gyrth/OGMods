@@ -1,0 +1,72 @@
+#name "Meet2"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 66.4987 5.3979 355.162 -59
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_eye_dir 74.5138 0.357441 363.913 1"
+send_character_message 2 "set_head_target 74.5079 0.783705 364.662 1"
+set_character_pos 1 75.0265 0.652568 364.852 -152
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+send_character_message 1 "set_eye_dir 67.3071 0.655182 364.157 1"
+send_character_message 1 "set_torso_target 66.7014 2.33762 323.103 0"
+send_character_message 1 "set_head_target 68.4254 1.11562 365.062 1"
+set_cam 73.7348 0.634712 365.489 0 -51.23 0 42.9296
+say 1 "Ghost" "..."
+send_character_message 1 "set_eye_dir 66.5488 5.17918 356.069 1"
+set_character_pos 1 75.0265 0.320738 364.852 -168
+send_character_message 1 "set_animation \"Data\Animations\startledcrouch.anm\""
+send_character_message 1 "set_torso_target 73.9925 0.616643 364.848 0"
+send_character_message 1 "set_head_target 69.1116 4.06789 359.137 1"
+say 1 "Ghost" "...[wait 0.5]Oh."
+send_character_message 1 "set_eye_dir 66.7267 5.67574 355.758 1"
+send_character_message 1 "set_head_target 67.1764 5.73609 355.796 1"
+set_character_pos 1 75.0265 0.320738 364.852 150
+set_cam 75.6793 0.381609 365.795 17.84 38.77 0 27.5498
+say 2 "Jairo" "Che stai facendo?"
+send_character_message 1 "set_head_target 69.207 1.05527 361.309 1"
+set_character_pos 1 75.0265 0.690495 364.852 150
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handneck.anm\""
+set_cam 75.0497 1.25199 363.558 -0.09 178.02 0.08 27.5498
+say 1 "Ghost" "Ero[wait 0.3] messaggistica unificata."
+send_character_message 2 "set_torso_target 66.5924 5.63185 355.339 1"
+set_cam 65.9346 6.29801 354.752 -25.57 -132.06 -0.02 27.5498
+send_character_message 1 "set_head_target 66.9884 5.62019 355.794 1"
+say 2 "Jairo" "Stavi cercando di sgattaiolare in giro?"
+send_character_message 1 "set_torso_target 74.2048 0.307038 364.104 1"
+send_character_message 1 "set_head_target 66.9884 6.00819 355.794 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "[wait 0.2]No."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 1 "set_torso_target 74.2048 0.307038 364.104 0"
+set_cam 73.2443 1.19042 365.002 -0.72 -83.33 -0.85 27.5498
+send_character_message 2 "set_torso_target 66.5924 5.63185 355.339 0"
+say 2 "Jairo" "Allora che cosa stavi cercando di fare?"
+send_character_message 1 "set_torso_target 74.2048 0.307038 364.104 1"
+say 1 "Ghost" "Solo... [wait 0.2]sempre qui."
+send_character_message 2 "set_eye_dir 74.5138 0.357441 363.913 0"
+send_character_message 2 "set_head_target 74.5079 0.783705 364.662 0"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_facepalm.anm\""
+set_cam 75.5947 0.877996 365.799 14.73 40.05 -0.14 27.5498
+say 2 "Jairo" "Saresti potuta andare l'altro senso."
+send_character_message 1 "set_eye_dir 74.4055 0.246815 363.975 0.748388"
+send_character_message 1 "set_head_target 66.2388 4.97473 357.679 1"
+send_character_message 1 "set_torso_target 74.2048 0.307038 364.104 0"
+set_cam 73.9448 1.17435 365.302 -0.18 -58.66 -0.25 27.5498
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_head_target 66.6418 5.89965 355.766 1"
+send_character_message 1 "set_eye_dir 66.6079 5.80282 355.695 0.748388"
+send_character_message 1 "set_torso_target 74.2048 0.307038 364.104 1"
+say 1 "Ghost" "...[wait 0.5]bene."
+send_character_message 1 "set_animation \"Data\Animations\r_combatidle.anm\""
+say 1 "Ghost" "Forse dopo ti calci nel culo, [wait 0.2]si può dire qualcosa."
+send_character_message 2 "set_head_target 74.8065 1.0393 364.645 1"
+send_character_message 2 "set_animation \"Data\Animations\r_combatidle2.anm\""
+send_character_message 1 "set_torso_target 74.2048 0.307038 364.104 0"
+say 1 "Ghost" "Senza essere così criptico."
+set_cam 76.9794 0.612218 365.489 9.08 61.04 -0.03 43.8675
+say 2 "Jairo" "Mhm."
+send_level_message "make_all_aware"

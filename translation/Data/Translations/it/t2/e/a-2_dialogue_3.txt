@@ -1,0 +1,18 @@
+#name "Note-Cicada"
+#participants 2
+set_character_pos 1 -40.0833 106.178 172.688 0
+send_character_message 1 "set_head_target -39.2955 106.554 172.737 1"
+set_cam -40.7468 106.734 173.762 0 -45.79 0 50.3116
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Una risposta alla lettera di una guardia..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -39.2995 106.833 173.504 0 33.49 0 32.4243
+say 2 "Note" "Una cicala? [wait 0.5]Davvero? [wait 0.5]Volare sopra la testa, [wait 0.3]in Preuwyn? Ti sembro un idiota?"
+say 2 "Note" "Vieni con qualche scommessa con i tuoi amici [wait 0.3]provare e compongono l'affermazione più ridicola possibile e vedere se cado per esso?"
+say 2 "Note" "So due cose su Ouran cicale: [wait 0.3]Per uno, [wait 0.3]non vanno mai in Preuwyn. [wait 0.5]Il freddo li mangerà vivo. [wait 0.3]Due, [wait 0.3]sono molto, [wait 0.3]molto raramente in giro quando esso non è la stagione degli amori."
+say 2 "Note" "Cicale, [wait 0.3]Ouran incluso, [wait 0.3]solo tana ogni diciassette anni, [wait 0.3]Quando la stagione degli amori è in pieno effetto. 672 non è un anno di stagione degli amori- [wait 0.3]non è nemmeno vicino."
+say 2 "Note" "L'idea che hai visto una cicala di Ouran vivo senza i timpani sconvolgenti dovrebbe dare via, [wait 0.3]anche se il tuo racconto è vero."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Andare a rapinare qualcun altro, [wait 0.3]è frutta."

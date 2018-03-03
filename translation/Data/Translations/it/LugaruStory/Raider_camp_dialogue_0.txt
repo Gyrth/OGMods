@@ -1,0 +1,13 @@
+set_character_pos 1 -63.7132 17.5885 119.5 38
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 1 "set_eye_dir -63.0222 18.5397 119.042 1"
+send_character_message 1 "set_torso_target -61.8087 17.1341 118.527 1"
+send_character_message 1 "set_head_target -62.6095 18.616 118.752 1"
+set_cam -66.9979 18.19 120.35 -4.82 -65.28 -0.2 50.5488
+#name "Night Camp"
+#participants 1
+say 1 "Turner" "Solo una sentinella."
+set_character_pos 1 -63.7132 17.3497 119.5 38
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+set_cam -6.72412 7.2299 83.8737 6.05 -61.97 -3.3 69.6856
+say 1 "Turner" "Loro errore."

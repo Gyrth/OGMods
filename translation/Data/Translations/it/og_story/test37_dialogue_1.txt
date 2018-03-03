@@ -1,0 +1,11 @@
+#name "End"
+#participants 2
+
+set_character_pos 2 26.2763 35.7489 14.3656 -94
+set_character_pos 1 26.2125 35.8904 16.3589 73
+set_cam 24.1501 36.1581 15.5472 0 -88.25 0 90
+say 1 "Turner" "Ce l'ho fatta!"
+say 2 "Rat" "Ciao."
+say 1 "Turner" "Ratto!"
+say 2 "Rat" "Andiamo a fermare i collaboratori di schiavista del ratto."
+send_global_message "levelwin"

@@ -1,0 +1,18 @@
+#name "Hammer"
+#participants 3
+set_character_pos 2 108.268 -53.8238 296.357 175
+send_character_message 2 "set_animation \"Data/Animations/r_hammering_wall_loop.anm\""
+set_character_pos 1 109.34 -53.9554 294.799 -123
+send_character_message 1 "set_head_target 108.207 -52.832 296.275 1"
+set_cam 109.252 -53.3507 292.996 0 171.69 0 40.0857
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Amos" "Inferno, [wait 0.3]Non ti invidio."
+send_character_message 2 "set_head_target 109.023 -53.2275 294.635 1"
+say 2 "???" "Oh, non è cosi ' male. [wait 0.5]Lavorare un sudore va bene per te."
+send_character_message 1 "set_head_target 107.91 -52.8155 295.243 1"
+send_character_message 2 "set_head_target 107.812 -53.1486 296.334 1"
+say 2 "???" "Cercando di riparare strati su strati di pietra rifatto per una fondazione di 500 anni fa, [wait 0.3]Tuttavia..."
+send_character_message 1 "set_head_target 108.278 -52.8714 296.277 1"
+send_character_message 2 "set_head_target 107.758 -52.7023 296.101 1"
+say 2 "???" "Non è la migliore per la vostra pazienza."

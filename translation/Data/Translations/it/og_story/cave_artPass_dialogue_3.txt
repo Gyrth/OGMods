@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+send_character_message 2 "set_head_target -212.533 138.469 114.916 1"
+send_character_message 1 "set_torso_target -210.965 137.682 113.978 0.606543"
+send_character_message 1 "set_head_target -211.581 137.717 114.348 1"
+send_character_message 2 "set_animation \"Data/Animations/r_sit_injuredneck.anm\""
+set_cam -210.692 137.607 115.987 4.62 40.14 0 72.2695
+set_character_pos 2 -211.486 137.598 114.371 -138
+set_character_pos 1 -212.702 137.718 114.856 43
+send_level_message "music_layer_override 0"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Slate" "Devi uccidere me, Turner. Ti puniscono i miei figli se sparisco. Non voglio immaginare come."
+send_character_message 1 "set_torso_target -211.026 137.682 114.414 1"
+send_character_message 1 "set_head_target -212.113 137.629 114.38 1"
+say 1 "Turner" "Lo so. Io a trovarli e assicurarsi che si sono presi cura di. Promesso."
+send_global_message "levelwin"

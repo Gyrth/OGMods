@@ -1,0 +1,23 @@
+#name "Begin Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 217.828 -50.2573 133.316 -124
+send_character_message 1 "set_animation \"Data/Animations/r_cold_idle.anm\""
+send_character_message 1 "set_head_target 215.233 -49.4477 136.563 0"
+set_cam 218.143 -49.761 134.968 0 13.64 0 47.9693
+say 1 "You" "Accidenti..."
+send_character_message 1 "set_head_target 214.607 -49.743 136.86 1"
+set_cam 218.336 -49.6531 131.859 0 152.5 0 47.9693
+say 1 "You" "Dove sono?"
+set_cam 220.721 -49.7974 132.447 0 124.07 0 58.7751
+send_character_message 1 "set_head_target 215.584 -48.683 138.004 1"
+say 1 "You" "Non so la strada verso il Empry..."
+send_character_message 1 "set_head_target 214.346 -49.2228 137.633 1"
+say 1 "You" "Non da qui."
+set_cam 224.064 -49.8282 134.33 0 106.91 0 78.9166
+send_character_message 1 "set_head_target 214.345 -49.2231 137.634 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+say 1 "You" "Oh cavolo..."
+send_character_message 1 "set_head_target 213.112 -48.1351 137.227 1"
+say 1 "You" "Mi sono perso."

@@ -1,0 +1,14 @@
+#name "Intro"
+#participants 3
+set_character_pos 2 113.206 405.56 180.789 90
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+send_character_message 2 "set_head_target 112.707 406.012 151.413 1"
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 112.321 405.531 108.953 -90
+send_character_message 1 "set_head_target 116.024 407.166 124.675 1"
+set_cam 111.922 406.227 107.991 0 -165.44 0 31.352
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "...[wait 0.3]che cosa è questo posto?"
+set_cam 111.071 406.337 141.155 0 -174.05 0 13.0622
+say 1 "Ghost" "È lei?"

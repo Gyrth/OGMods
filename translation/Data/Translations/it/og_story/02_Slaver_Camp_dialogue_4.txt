@@ -1,0 +1,25 @@
+#name "Start"
+#participants 2
+set_dialogue_color 2 1 0.6 0.6
+set_dialogue_voice 2 12
+send_level_message "music_layer_override -2"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_level_message "set_camera_dof 0.3 10 10 0 0 0"
+set_character_pos 2 186.909 -20.8959 -184.074 -35
+set_character_pos 1 195.302 -22.1896 -180.349 178
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_kneelfist.anm\""
+set_cam 197.369 -21.3663 -181.026 -1.43 89.24 -0.69 49.9576
+say 1 "Turner" "Sembra fumo fuoco. Devo essere vicini."
+send_character_message 1 "set_head_target 187.833 -19.7693 -184.977 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_level_message "music_layer_override 2"
+say 2 "Snake" "Il mio giorno fortunato! Avevo bisogno di uno schiavo in più per riempire la mia quota per il mese."
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 187.422 -18.5523 -184.283 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "Per fortuna che sono arrivata io."
+send_character_message 2 "set_animation \"Data/Animations/r_combatidle2threat.anm\""
+say 2 "Snake" "Non resistere. Rotti gli schiavi non valgono tanto. Mia ultima cattura non neanche rendono al mercato."
+send_level_message "music_layer_override 3"
+make_participants_aware
+send_level_message "start_dialogue Places"

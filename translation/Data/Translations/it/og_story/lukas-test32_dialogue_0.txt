@@ -1,0 +1,40 @@
+#name "Start"
+#participants 5
+
+set_character_pos 5 46.1213 101.599 -44.8084 56
+set_character_pos 4 48.2019 101.619 -43.7322 72
+set_character_pos 3 57.0141 101.624 -68.5434 -110
+set_character_pos 2 54.2289 101.518 -69.3624 -102
+set_character_pos 1 55.8017 101.684 -69.4126 -109
+set_cam 56.1197 102.323 -71.3918 0 162.32 0 90
+say 1 "Turner" "Due lupi!?"
+set_cam 53.7159 102.323 -69.0579 0 -75.53 0 90
+say 2 "Team mate 1" "LUPI!?"
+set_cam 57.2722 102.323 -67.9362 0 37.04 0 90
+say 3 "Team mate 2" "TUTTI STIAMO ANDANDO A MORIRE!"
+set_cam 54.3372 102.358 -68.8835 0 14.4 0 90
+say 2 "Team mate 1" "CORRERE PER LA TUA VITA!"
+set_cam 55.9202 102.353 -68.8624 0 14.4 0 90
+say 1 "Turner" "Maledettamente."
+make_participants_aware
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,96 @@
+#name "Knock"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 26.4361 15.3885 -127.709 -51
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_eye_dir 27.0626 15.8402 -125.738 1"
+send_character_message 2 "set_torso_target 26.6876 15.9728 -126.104 1"
+send_character_message 2 "set_head_target 27.0728 15.9585 -125.839 1"
+set_character_pos 1 27.357 15.2833 -125.385 -180
+send_character_message 1 "set_animation \"Data\Animations\r_combatidle.anm\""
+send_character_message 1 "set_eye_dir 24.8095 15.5644 -124.827 1"
+send_character_message 1 "set_torso_target 25.3167 15.3658 -125.589 1"
+send_character_message 1 "set_head_target 24.209 15.4952 -124.6 1"
+set_cam 29.4405 15.7655 -126.503 0 110.97 0 31.8825
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 2 "Jairo" "Va bene, [wait 0.2]Fantasma. [wait 0.5]Che farò."
+set_character_pos 1 27.357 15.2833 -125.385 150
+send_character_message 2 "set_torso_target 26.697 15.9774 -126.115 1"
+set_cam 29.4405 15.7655 -126.503 0 110.97 0 31.8825
+send_character_message 1 "set_torso_target 25.8147 15.3863 -126.624 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 1 "set_eye_dir 27.1683 16.2956 -127.592 1"
+send_character_message 1 "set_head_target 26.5639 16.2306 -127.538 1"
+say 1 "Ghost" "Quando hai una bomba?"
+send_character_message 2 "set_head_target 27.0728 16.0017 -125.839 1"
+send_character_message 1 "set_torso_target 25.8147 15.3863 -126.624 1"
+set_character_pos 1 27.357 15.2833 -125.385 150
+send_character_message 2 "set_torso_target 27.1782 16.0643 -126.501 1"
+set_cam 27.5984 16.0917 -126.565 0 50.97 0 31.8825
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 2 "Jairo" "Questo è il piano, [wait 0.3]Fantasma. [wait 0.5]Distruggiamo Collinpeak."
+send_character_message 2 "set_head_target 27.0728 16.0638 -125.839 1"
+send_character_message 1 "set_animation \"Data\Animations\r_combatidle.anm\""
+send_character_message 1 "set_torso_target 26.779 15.4616 -127.059 1"
+set_character_pos 1 27.357 15.2833 -125.385 120
+set_cam 27.5984 16.0917 -126.565 0 50.97 0 31.8825
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+say 2 "Jairo" "E il Cinderbreathe non fare un passo nella Therium nuovamente."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 27.127 16.0773 -124.365 0 3.89 0 31.8825
+say 1 "Ghost" "[wait 0.2]Ma..."
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+say 2 "Jairo" "Avete problemi con questo, Ghost?"
+send_character_message 1 "set_eye_dir 27.4422 15.1187 -124.775 0.700523"
+send_character_message 1 "set_head_target 26.6115 16.0043 -126.94 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 26.3056 16.0596 -125.866 0 -108.48 0 31.8825
+say 1 "Ghost" "...[wait 0.5]No."
+set_cam 26.4775 16.0596 -126.18 0 3.28 0 31.8825
+send_character_message 1 "set_eye_dir 26.5809 15.9992 -127.001 1"
+say 2 "Jairo" "Buona."
+send_character_message 2 "set_head_target 27.3564 16.1501 -127.176 1"
+send_character_message 1 "set_head_target 26.684 16.1075 -126.952 1"
+say 2 "Jairo" "Ci sono voluti un sacco di coordinamento per poter raggiungere questo stadio."
+send_character_message 2 "set_head_target 26.8319 16.2339 -126.687 1"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 2 "Jairo" "Per quanto riguarda la bomba, [wait 0.4]Lo darò a voi quando si è pronti."
+send_character_message 2 "set_torso_target 26.9167 16.0643 -126.423 1"
+send_character_message 1 "set_torso_target 26.7915 15.4616 -127.023 1"
+send_character_message 2 "set_head_target 25.816 15.9449 -126.243 1"
+send_character_message 1 "set_head_target 24.9011 15.6829 -125.459 1"
+set_cam 27.9643 15.7213 -131.599 0 163.33 0 31.7332
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 2 "Jairo" "Per quanto riguarda [wait 0.2]lui..."
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target 27.0884 16.1093 -126.25 1"
+say 2 "Jairo" "Confido che sai cosa fare con lui."
+send_character_message 1 "set_head_target 26.6621 15.9677 -126.899 1"
+set_cam 27.5188 16.1531 -127.76 0 103.33 0 31.7332
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 2 "Jairo" "Quando hai finito con Brantley..."
+send_character_message 2 "set_head_target 27.0884 16.2663 -126.25 1"
+say 2 "Jairo" "A piedi al Santuario. [wait 0.4]Quello che è venuto su."
+send_character_message 2 "set_head_target 26.6953 16.1826 -126.116 1"
+say 2 "Jairo" "Inserirlo e si dovrebbe essere in grado di trovare la strada per Collinpeak."
+send_character_message 2 "set_head_target 27.1804 16.2308 -126.315 1"
+say 2 "Jairo" "Basta dirigersi verso sud a ovest di qui."
+send_character_message 1 "set_eye_dir 28.2496 15.3352 -124.683 1"
+send_character_message 1 "set_torso_target 27.6501 15.6984 -127.198 1"
+send_character_message 1 "set_head_target 28.3648 15.7295 -125.852 1"
+set_character_pos 1 27.3522 15.2782 -125.391 120
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 27.5489 16.3691 -126.881 -17.92 -178.36 0 31.7332
+say 1 "Ghost" "Dove vuoi andare?"
+set_character_pos 2 32.2926 -30.9172 -161.894 -51
+send_character_message 2 "set_torso_target 26.7108 16.1659 -126.382 1"
+send_character_message 2 "set_eye_dir 27.0951 16.1286 -126.024 1"
+send_character_message 1 "set_eye_dir 26.8583 16.1451 -127.178 1"
+send_character_message 2 "set_head_target 27.1804 15.8763 -126.315 1"
+set_cam 28.964 15.3972 -127.493 -8.05 167.79 0 23.1023
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+say 2 "Jairo" "[wait 0.3]Le cose saranno organizzate."
+send_global_message "levelwin a"

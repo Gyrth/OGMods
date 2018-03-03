@@ -1,7 +1,7 @@
 bool show = false;
 int chosen_item = 0;
-array<string> language_options = {"English", "French", "Portuguese", "German", "Spanish", "Klingon", "Finnish"};
-array<string> language_codes = {"en", "fr", "pt", "de", "es", "tlh", "fi"};
+array<string> language_options = {"English", "French", "Portuguese", "German", "Spanish", "Klingon", "Finnish", "Italian"};
+array<string> language_codes = {"en", "fr", "pt", "de", "es", "tlh", "fi", "it"};
 string current_language = "";
 
 void DrawGUI() {

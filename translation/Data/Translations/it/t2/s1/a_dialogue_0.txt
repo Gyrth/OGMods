@@ -1,0 +1,99 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 -74.3119 49.3836 243.807 40
+send_character_message 2 "set_animation \"Data\Animations\interestingsit.anm\""
+send_character_message 2 "set_eye_dir -68.3543 49.6446 240.377 1"
+send_character_message 2 "set_head_target -68.9934 49.5794 240.738 1"
+set_character_pos 1 -68.1949 49.0598 240.278 -145
+send_character_message 1 "set_eye_dir -70.3577 48.8378 241.784 1"
+send_character_message 1 "set_torso_target -69.94 49.209 241.545 0.998318"
+send_character_message 1 "set_head_target -69.9047 49.6643 240.16 1"
+set_cam -68.0136 49.5281 241.801 0 11.17 0 27.0757
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "You" "Er, [wait 0.3]Jairo?"
+send_character_message 1 "set_eye_dir -74.248 49.6315 243.72 0.641651"
+send_character_message 1 "set_head_target -73.4039 49.7397 243.288 1"
+say 1 "You" "Cosa diavolo è successo?"
+send_character_message 2 "set_head_target -68.8161 49.2484 240.39 1"
+set_cam -73.9379 49.4965 242.019 0 167.14 0 27.0757
+send_character_message 1 "set_eye_dir -74.248 49.6315 243.72 1"
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.1"
+say 2 "Jairo" "Il gateway di santuario ti ha portato qui."
+set_character_pos 1 -68.1949 48.835 240.278 -145
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+send_character_message 1 "set_head_target -74.0142 49.3008 243.642 1"
+set_cam -69.6318 49.2933 240.081 10.62 -100.48 0 27.0757
+send_character_message 1 "set_torso_target -69.94 49.209 241.545 0"
+say 1 "You" "Sì, [wait 0.2]ma- [wait 0.4]come?"
+send_character_message 2 "set_head_target -68.4661 49.7881 240.542 1"
+set_cam -75.6364 49.6868 244.143 -4.77 -69.68 0.08 26.7885
+say 2 "Jairo" "Gli spiriti si di riporto. [wait 0.3]Tu avrai affidamento su di loro un sacco durante tutto il viaggio."
+send_character_message 2 "set_head_target -68.515 49.7228 240.427 1"
+send_character_message 1 "set_torso_target -69.8689 50.27 241.522 1"
+send_character_message 1 "set_head_target -74.3372 49.7085 243.815 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "You" "Il mio viaggio?"
+send_character_message 1 "set_torso_target -69.8689 50.27 241.522 0.153414"
+send_character_message 1 "set_head_target -74.2984 49.4934 243.844 1"
+send_character_message 2 "set_head_target -68.7796 49.2513 240.397 1"
+say 1 "Jairo" "..."
+send_character_message 1 "set_head_target -73.975 49.6661 244.098 1"
+send_character_message 1 "set_torso_target -69.7239 48.6969 241.269 1"
+say 1 "You" "[wait 0.3]Sei una specie di rana pescatrice, [wait 0.2]o qualcosa del genere?"
+set_cam -67.2226 49.7695 239.424 -5.71 126.45 -0.29 26.7885
+say 2 "Jairo" "No."
+send_character_message 2 "set_head_target -68.6655 49.7481 240.41 1"
+say 2 "Jairo" "Ma chi sei tu?"
+send_character_message 1 "set_torso_target -69.7239 48.6969 241.269 0"
+set_cam -67.2226 49.7695 239.424 -5.71 126.45 -0.29 26.7885
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.1"
+say 1 "You" "Che vuoi dire [wait 0.3]Chi sono?"
+send_character_message 2 "set_head_target -68.6135 49.4135 240.45 1"
+set_cam -74.3096 49.5389 242.26 0.36 177.08 -0.02 26.7885
+say 2 "Jairo" "Come ti chiami?"
+send_character_message 2 "set_torso_target -73.1907 48.9351 243.107 1"
+set_character_pos 2 -74.3478 49.0038 243.778 29
+send_character_message 2 "set_animation \"Data\Animations\sitledge.anm\""
+send_character_message 1 "set_torso_target -69.7239 48.6969 241.269 0.0413942"
+send_character_message 1 "set_eye_dir -69.224 48.9234 241.187 1"
+send_character_message 1 "set_head_target -72.3741 49.1814 242.24 1"
+set_cam -69.241 49.618 239.805 0.17 -117.25 0.32 26.7885
+say 1 "You" "..."
+send_character_message 1 "set_torso_target -69.7239 48.6969 241.269 0.938167"
+send_character_message 1 "set_head_target -74.3552 49.6537 243.803 1"
+send_character_message 1 "set_eye_dir -74.323 49.6388 243.321 1"
+say 1 "You" "Chiamami... [wait 0.5]Fantasma."
+send_character_message 2 "set_eye_dir -68.3543 49.6446 240.377 0.720056"
+send_character_message 2 "set_head_target -68.4408 49.3173 240.709 1"
+set_cam -72.625 49.5448 244.453 -0.18 61.83 -0.32 26.7885
+send_character_message 1 "set_torso_target -69.7239 48.6969 241.269 0"
+say 2 "Jairo" "Molto bene [wait 0.2]Fantasma."
+send_character_message 2 "set_head_target -68.5729 49.7294 240.574 1"
+send_character_message 2 "set_eye_dir -68.3543 49.6446 240.377 1"
+say 2 "Jairo" "Si può uccidere persone?"
+send_character_message 1 "set_head_target -73.1437 48.9922 243.268 1"
+send_character_message 2 "set_torso_target -73.1907 48.9351 243.107 0"
+set_character_pos 2 -73.4567 48.3568 243.402 29
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_torso_target -69.7239 48.6969 241.269 1"
+set_cam -68.9567 49.6488 241.2 -0.27 -40.93 0.25 26.7885
+say 1 "Ghost" "Immagino che posso, [wait 0.3]Se ho bisogno di."
+send_character_message 2 "set_head_target -68.489 49.2829 240.631 1"
+set_cam -72.0477 48.8373 244.028 -0.18 62.66 -0.32 26.7885
+say 2 "Jairo" "Sta andando ad avere bisogno di. [wait 0.3]Sei ricercato dall'Impero Cinderbreathe ora."
+send_character_message 2 "set_head_target -68.489 49.6432 240.631 1"
+say 2 "Jairo" "Se si desidera uscire il Therium vivo, [wait 0.3]ti devono seguire le indicazioni e difendersi. [wait 0.5]Capito?"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_torso_target -69.7239 48.6969 241.269 0"
+set_cam -67.1336 49.8131 240.063 -9.2 110.65 -0.35 26.7885
+say 1 "Ghost" "Sì, [wait 0.5]Suppongo."
+set_character_pos 1 -68.1949 48.835 240.278 -106
+set_cam -62.9247 50.161 232.388 -4.65 140.64 -0.04 20.8054
+send_character_message 2 "set_head_target -68.4728 49.4729 240.376 1"
+send_level_message "set_camera_dof 0.3 2 1 0 0 0"
+say 2 "Jairo" "Basta seguire i santuari contrassegnati con 'A', [wait 0.3]e si dovrebbe andare bene."

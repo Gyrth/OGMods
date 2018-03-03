@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+set_character_pos 2 168.127 89.4273 -7.00947 -174
+set_character_pos 1 165.673 89.8841 -6.67694 5
+set_cam 165.336 90.1489 -5.70006 0 -49.24 0 90
+say 2 "Rabbit" "Non ho mai visto nessuno combattere un lupo solo prima!"
+say 1 "Turner" "Essi stanno appena invaso cani, davvero."
+say 2 "Rabbit" "Uccidi i cani, troppo?
+say 1 "Turner" "Ucciderò chiunque provi a male o ci rendono schiavi.
+say 2 "Rabbit" "Io sono il sole.
+say 2 "Sun" "I miei amici stanno combattendo contro gli schiavisti, troppo."
+say 2 "Sun" "Eravamo sul nostro modo di raid un forte vicino quando un branco di cani catturati alcuni di noi."
+say 2 "Sun" "Se si desidera unirsi alla nostra causa..."
+say 1 "Turner" "Tengono gli schiavi a questo forte?"
+say 1 "Turner" "Mostrami la via."
+send_global_message "levelwin"

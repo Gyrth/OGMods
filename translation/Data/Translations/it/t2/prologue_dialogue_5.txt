@@ -1,0 +1,21 @@
+#name "Note-Spirits"
+#participants 2
+set_character_pos 1 -24.2959 420.679 -120.573 85
+send_character_message 1 "set_head_target -24.2018 421.01 -121.37 1"
+set_cam -25.6283 421.221 -119.993 0 -56.31 0 46.8474
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Messaggio di alcune guardie a [wait 0.3]Chissà..."
+set_cam -23.4018 421.168 -118.903 0 12.27 0 46.8474
+send_character_message 1 "set_head_target -24.2656 420.958 -121.095 1"
+set_character_pos 1 -24.2959 420.633 -120.573 85
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Firma me stesso per la divisione di costruzione, è stato un errore. [wait 0.5]Sapevo che sarebbe stato, [wait 0.3]Lei mi ha detto che sarebbe stato, [wait 0.3]ma comunque io sono qui."
+say 2 "Note" "Vorrei prendere scouting le strade annegato su questo. [wait 0.5]Sì, [wait 0.3]Certo, [wait 0.3]Vorrei avere accoltellato e picchiato da qualunque truffatore casuale viene a modo mio."
+say 2 "Note" "Ma almeno non ho a che fare con il pensiero che ognuno che abbia mai conosciuto e amato morirà un orribile, [wait 0.3]morte ardente."
+say 2 "Note" "Non sto esagerando un po'. [wait 0.5]Si può dire che sono solo di essere strano tutti i che desideri, [wait 0.3]ma so che ho ragione."
+say 2 "Note" "È tutto folclore e mito, [wait 0.3]leggenda e storia, [wait 0.3]ma ricorda le mie parole; [wait 0.3]gli spiriti del Therium avrà la vendetta su di noi per ogni spuntone di Creta che abbiamo rubato da loro."
+say 2 "Note" "Un giorno andremo troppo lontano, [wait 0.3]e l'esercito posseduto degli dèi pioverà morte su di noi attraverso l'uso di imprevedibile intrigante piccoli bastardi."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Puoi chiamarmi idiota. [wait 0.5]Ma nelle storie, [wait 0.3]mito risulta sempre true, [wait 0.3]e soffrono gli oppositori. [wait 0.5]Questo non sarà un'eccezione, [wait 0.3]che cos'è la nostra vita ma una storia?"

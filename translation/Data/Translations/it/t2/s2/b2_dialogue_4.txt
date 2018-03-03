@@ -1,0 +1,17 @@
+#name "Note-Caravans"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -151.713 -6.4528 -34.5783 59
+send_character_message 1 "set_head_target -151.26 -6.36841 -35.2712 1"
+set_cam -153.652 -6.17921 -34.6382 0 -84.14 0 54.8223
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un'antica nota. [wait 0.3]Chi sa quanto tempo questo è stato qui."
+set_cam -150.981 -5.83489 -35.1783 0 119.88 0 54.8223
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Le nostre roulotte sono stati assediati ogni altro giorno ora; [wait 0.3]nostri avamposti nel deserto sono state morendo di fame di conseguenza."
+say 2 "Note" "I consulenti eventualmente non sopporta per questo, [wait 0.3]e neppure noi; [wait 0.3]ma che cosa esattamente è colpire noi off?"
+say 2 "Note" "I lupi, [wait 0.3]anche se feroce, [wait 0.3]sono intelligenti; [wait 0.3]Essi consentono di sopravvivere per il proprio beneficio."
+say 2 "Note" "Questo attaccante non mostra pietà. [wait 0.5]Sangue e budella doccia la merce distrutta, [wait 0.3]acqua e cibo."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Chiunque essi siano, [wait 0.3]Io preferisco lupi."

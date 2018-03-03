@@ -1,0 +1,17 @@
+#name "Note-JairoP"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -144.354 -1.06943 -5.76928 -45
+send_character_message 1 "set_head_target -143.885 -1.06865 -5.26964 1"
+set_cam -143.174 -0.724854 -7.6918 0 156.77 0 37.9039
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "È una nota. [wait 0.5]Strappato, [wait 0.3]giallo [wait 0.1]e chissà quanti anni."
+set_character_pos 1 -144.354 -1.1058 -5.76928 -45
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -143.462 -0.509361 -4.71028 0 37.66 0 37.9039
+say 2 "Note" "Ogni singolo giorno, [wait 0.3]in questo momento. [wait 0.5]E ' stato orribile pensare che sarebbe successo in primo luogo, [wait 0.3]ma questa frequenza è oltre la coincidenza."
+say 2 "Note" "Tutti sono terrorizzati. [wait 0.3]So che io sono. [wait 0.5]Chiunque stia facendo questo a noi deve morire prima che vada fuori controllo."
+say 2 "Note" "Tutti i discorsi di avvistamenti fuori nella foresta sono solo rendendoci più paranoico ogni singolo giorno."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "L'avamposto del deserto sembra essere più sicuro- [wait 0.5]come se nulla fosse. [wait 0.5]Spero solo che la mia famiglia sarà a posto."

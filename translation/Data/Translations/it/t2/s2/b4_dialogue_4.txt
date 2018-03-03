@@ -1,0 +1,20 @@
+#name "Note-Foxglove"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 14.9128 -0.192716 -158.15 -131
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 14.4493 -0.530116 -157.537 1"
+set_cam 15.5444 0.553472 -157.939 -41.45 98.4 -0.01 55.2369
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Una recente nota. [wait 0.5]Questo deve essere una spia di Empry."
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 15.0395 -0.014715 -156.779 -0.03 2.19 -0.18 40.1399
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+say 2 "Note" "Foxglove qui."
+say 2 "Note" "Le creature sono biologicamente coniglio, [wait 0.3]attraverso e attraverso, [wait 0.3]anche se i loro movimenti e manierismi sono nulla di quello che abbiamo visto."
+say 2 "Note" "Al momento della scrittura, [wait 0.3]C'è stata alcuna comunicazione verbale o visibile tra una qualsiasi di queste creature, [wait 0.3]e ancora ogni azione che fanno sembra essere più coordinato rispetto il soldato medio Cinderbreathe o Arliss."
+say 2 "Note" "Al momento della scrittura, [wait 0.3]C'è stato solo un caso registrato di queste creature essendo nelle immediate vicinanze di un mietitore."
+say 2 "Note" "Il mietitore, [wait 0.3]a differenza di loro comportamento usuale tra i soldati di Cinderbreathe, [wait 0.3]completamente ignorato le creature."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+say 1 "Ghost" "[wait 0.3]La voce sembra essere tagliato corto..."

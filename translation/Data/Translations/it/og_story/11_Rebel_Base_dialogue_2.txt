@@ -1,0 +1,21 @@
+#name "Halt"
+#participants 3
+set_cam -69.289 122.521 -170.418 -11.88 -4.38 1.22 75.6107
+set_dialogue_color 3 0.7 0.7 1
+set_dialogue_voice 3 12
+set_character_pos 2 -63.9348 121.479 -178.668 -128
+set_character_pos 1 -69.7489 121.483 -172.233 64
+set_character_pos 3 -68.7339 121.432 -174.72 -100
+send_level_message "set_camera_dof 0 0 0 0.3 8.5 0.3"
+send_level_message "music_layer_override 3"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 3 "Peak" "Alt!"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+say 2 "Sun" "Turner?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_level_message "music_layer_override 1"
+say 2 "Sun" "Va bene, lui è con me."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 3 "Peak" "Se lo dici tu."
+send_character_message 3 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""

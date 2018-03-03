@@ -1,0 +1,6 @@
+#name "PlacesBridge"
+#participants 2
+set_character_pos 2 115.282 36.1913 170.58 55
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+set_character_pos 1 116.985 36.7295 167.971 -111
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""

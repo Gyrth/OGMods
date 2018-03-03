@@ -1,0 +1,54 @@
+#name "Round2Start"
+#participants 6
+send_level_message "set_camera_dof 0 0 0 0.3 8 1"
+send_character_message 1 "set_head_target 56.0311 102.133 -69.0335 1"
+set_character_pos 2 56.2733 101.684 -69.4962 -125
+set_character_pos 1 55.3253 101.616 -69.6197 -76
+set_character_pos 3 70.1143 107.409 -60.8058 -141
+send_character_message 6 "set_head_target 51.8275 101.675 -50.0137 1"
+send_character_message 4 "set_head_target 51.1915 101.934 -48.4155 1"
+send_character_message 5 "set_head_target 50.6937 101.831 -48.0172 1"
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 6 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 4 51.0831 102.255 -47.5107 124
+set_character_pos 6 50.4806 101.675 -48.6461 7
+set_character_pos 5 50.0341 101.722 -47.5177 28
+set_cam 56.368 102.362 -70.7891 0 155.73 0 64.3799
+send_level_message "music_layer_override 1"
+send_level_message "crowd_override"
+say 1 "Turner" "Ha combattuto bene. Se devo affrontare in seguito, mi assicurerò che la morte è rapida."
+send_character_message 2 "set_head_target 55.3358 102.415 -69.3639 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Bait" "Ehm... grazie?"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+set_cam 72.2508 108.172 -63.1716 -3.24 130.09 3.4 44.0255
+say 3 "Jade" "Beh, zaffiro, sembra che il vostro meglio non era abbastanza! Non lo è mai quando ti trovi contro ametista, mi dispiace dirlo."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_cam 72.8979 109.45 -63.6206 -16.73 129.26 3.55 24.6135
+send_level_message "crowd_override 0.5 0.5"
+say 3 "Jade" "Il nostro prossimi combattenti sono un trattamento speciale..--una truppa di collettori che 'fuori luogo' loro rifornimento del veleno a dormire!
+say 3 "Jade" "Let ' s vedere come se la caveranno contro i nemici che sono svegli!"
+send_character_message 5 "set_head_target 50.726 101.831 -48.0208 1"
+send_character_message 4 "set_head_target 50.5475 102.099 -48.7582 1"
+set_cam 52.2307 102.064 -49.7339 -8.55 136.3 -2.78 64.3799
+send_level_message "crowd_override"
+say 4 "Gale" "Ancora non posso credere che qualcuno è salito quell'albero. Pioveva ancora più difficile di questo!"
+send_character_message 6 "set_head_target 51.3784 102.288 -48.064 1"
+say 6 "Coal" "Messa a fuoco. Stiamo per combattere per la nostra vita."
+send_character_message 5 "set_head_target 50.705 102.117 -48.7675 1"
+say 5 "Snitch" "Ho paura."
+send_character_message 6 "set_torso_target 51.7693 101.984 -48.9957 1"
+send_character_message 6 "set_head_target 52.1886 102.288 -50.6486 1"
+say 6 "Coal" "Quello marrone è forte..--concentrarsi su di lui. L'altro è solo una distrazione."
+send_character_message 3 "set_head_target 68.2608 108.526 -61.8432 1"
+send_character_message 3 "set_torso_target 69.1777 109.222 -60.4672 1"
+set_cam 72.2508 108.172 -63.1716 -3.24 130.09 3.4 44.0255
+send_level_message "crowd_override 0.5 0"
+say 3 "Jade" "Spero che questa è una lezione a tutti che voi ratti guardando! Quando ametista ti dà un lavoro, sarebbe meglio farlo bene, altrimenti potrà essere trasformato in divertimento!"
+set_cam 52.2307 102.064 -49.7339 -8.55 136.3 -2.78 64.3799
+send_level_message "crowd_override"
+send_level_message "music_layer_override 7"
+say 6 "Coal" "Andiamo!"
+make_participants_aware

@@ -1,0 +1,34 @@
+#name "Round1"
+#participants 5
+send_level_message "set_camera_dof 0 0 0 0.2 2 0.5"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 1 34.3563 98.0872 290.48 -127
+set_character_pos 5 24.7491 93.8567 299.857 -79
+set_character_pos 4 23.6251 93.7757 301.873 -71
+set_character_pos 3 22.5946 93.7866 299.968 -49
+set_character_pos 2 24.6601 94.4579 312.482 101
+set_character_pos 3 22.5946 93.7866 299.968 -103
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+set_character_pos 5 24.3373 93.8967 300.569 -33
+set_character_pos 2 24.6602 94.4582 312.482 81
+set_dialogue_color 2 1.0 0.6 0.6
+set_cam 34.2644 99.376 289.044 -20.65 156.68 -0.95 74.6325
+send_level_message "music_layer_override 0"
+say 1 "Jade" "Hanno reso questo lontano, ma è il nostro intrepido trio più fortunato di fortunato?
+say 1 "Jade" "Si sono già affrontati ratti, essi ' ve combattuto lupi, ma può esse detronizzare il nostro campione di ritorno? "
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_level_message "crowd_override 0.3 0.8"
+say 1 "Jade" "Questa è la sfida finale, trio. Sconfiggere questo coniglio e pagato il tuo debito, e ha vinto la libertà."
+send_character_message 4 "set_head_target 26.4588 93.3082 303.193 1"
+set_character_pos 4 23.6251 93.7757 301.873 -50
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_cam 25.9817 95.6546 317.194 -6.99 9.98 -0.5 17.3007
+send_level_message "set_camera_dof 0.3 10 0.5 0 0 0"
+send_level_message "crowd_override"
+say 2 "Cherry" "Tre contro uno? Questo non è affatto giusto."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 10 0.5"
+say 3 "Turner" "Hai ragione. Mi dispiace."
+send_level_message "music_layer_override 4"
+make_participants_aware

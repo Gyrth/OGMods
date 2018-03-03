@@ -1,0 +1,23 @@
+#name "Top"
+#participants 5
+set_character_pos 5 -89.1295 191.461 176.235 -91
+set_character_pos 4 -96.559 191.567 175.992 -88
+set_character_pos 1 -87.3635 191.325 179.228 156
+set_cam -87.127 192.115 180.008 0 37.63 0 90
+set_character_pos 3 -88.7343 191.987 178.447 -39
+set_character_pos 2 -88.8276 191.973 179.196 -18
+say 2 "Old rabbit" "Tu sei amico di cielo."
+say 2 "Old rabbit" "Sei il benvenuto qui."
+say 2 "Old rabbit" "Io sono anziano Needlegrass."
+say 1 "Turner" "Grazie."
+say 1 "Turner" "Ho voglia di portare alcuni dei miei amici... mi ha aiutato a combattere i mercanti di schiavi e ha contribuito a salvare cielo, troppo."
+say 1 "Turner" "Che meritano di vivere qui come fare."
+say 2 "Elder Needlegrass" "Hmm."
+say 2 "Elder Needlegrass" "Solo il meglio del meglio è invitato qui."
+say 1 "Turner" "Combattono come faccio-- o che lo faranno, una volta che mi alleno li."
+say 1 "Turner" "Alla fine i gatti troveranno questo posto, e si vorrà quindi buoni combattenti."
+say 2 "Elder Needlegrass" "Cielo parla molto della vostra abilità, ma mi piacerebbe fare il mio giudizio personale."
+say 2 "Elder Needlegrass" "Vediamo come e ' andata contro i nostri migliori vedette e guardie."
+set_character_pos 3 -89.3477 191.987 180.924 106
+set_character_pos 2 -88.5044 191.973 180.777 111
+make_participants_aware

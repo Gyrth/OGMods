@@ -1,0 +1,164 @@
+#name "Intro"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 4 0.7 0.0 0.95
+set_dialogue_voice 4 3
+set_dialogue_voice 2 15
+set_dialogue_color 2 1 1 1
+set_dialogue_color 3 1 1 1
+set_character_pos 4 -192.839 -59.0752 -3.21913 -60
+send_character_message 4 "set_animation \"Data/Animations/interestingsit.anm\""
+send_character_message 4 "set_head_target -192.396 -59.2488 -2.33653 1"
+set_character_pos 3 -175.099 -62.1117 26.3444 136
+send_character_message 3 "set_animation \"Data\Animations\wowanothersit.anm\""
+send_character_message 3 "set_eye_dir -176.074 -61.9047 26.5051 1"
+send_character_message 3 "set_torso_target -175.927 -61.8 24.9568 0"
+send_character_message 3 "set_head_target -175.927 -61.9626 25.9706 1"
+set_character_pos 2 -177.838 -62.2114 29.6462 31
+send_character_message 2 "set_animation \"Data\Animations\dialogue_leaning_back_onwall.anm\""
+send_character_message 2 "set_eye_dir -177.085 -61.9666 29.2526 1"
+send_character_message 2 "set_torso_target -177.187 -61.8413 29.5919 0"
+send_character_message 2 "set_head_target -176.169 -61.9221 29.2048 1"
+set_character_pos 1 -161.392 -45.0156 -7.40668 -175
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_eye_dir -184.121 -55.0895 -4.61861 1"
+send_character_message 1 "set_torso_target -162.866 -45.7565 -7.36527 1"
+send_character_message 1 "set_head_target -182.879 -54.3304 -4.32537 1"
+set_cam -160.174 -44.6911 -7.29369 -27.23 89.94 0 25.4215
+send_level_message "set_camera_dof 0.3 6 1 0 0 0"
+say 1 "Ghost" "Ehi, c'e ' Jairo..."
+send_character_message 1 "set_torso_target -161.914 -45.7714 -7.29237 1"
+send_character_message 1 "set_head_target -172.814 -53.6806 13.6131 1"
+send_character_message 1 "set_eye_dir -174.056 -54.4397 13.3198 1"
+set_cam -161.162 -44.4953 -9.47695 -23.48 158.5 -0.41 19.9532
+send_level_message "set_camera_dof 0.3 24 10 0 0 0"
+say 1 "Ghost" "...[wait 0.3]e non c'è alcuni soldati di Cinderbreathe, [wait 0.3]Anche."
+send_character_message 1 "set_head_target -175.309 -50.8004 8.43427 1"
+send_character_message 1 "set_torso_target -161.943 -45.2922 -7.12745 0"
+set_cam -162.913 -45.4595 -5.44578 -0.13 -33.61 0.41 19.9532
+send_level_message "set_camera_dof 0 0 0 0.3 4 0.1"
+say 1 "Ghost" "Speriamo che lui non è entrare in alcun problema."
+send_character_message 2 "set_head_target -177.41 -61.0786 28.1414 1"
+set_cam -182.333 -60.368 12.9676 -5.71 -158.43 -0.13 19.9532
+send_level_message "set_camera_dof 0 0 0 0.3 20 1"
+say 1 "" "..."
+send_character_message 2 "set_torso_target -177.138 -61.7149 29.5211 1"
+send_character_message 3 "set_head_target -176.587 -61.6599 24.0248 1"
+send_character_message 2 "set_eye_dir -175.257 -61.5733 26.9187 1"
+send_character_message 2 "set_head_target -175.678 -61.624 27.3864 1"
+set_cam -175.091 -61.5782 28.9787 -0.11 101.34 0.14 26.3357
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "???" "Ehi, [wait 0.3]riesci a vederlo?"
+send_character_message 3 "set_torso_target -175.739 -62.4824 25.8543 1"
+send_character_message 3 "set_eye_dir -177.244 -61.3906 29.355 1"
+send_character_message 3 "set_head_target -177.703 -62.2313 27.8774 1"
+set_cam -174.709 -61.8503 27.4566 0.1 27.88 0.15 26.3357
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 3 "????" "Sì- [wait 0.3]Chiediamolo a lui circa i terroristi."
+send_character_message 2 "set_torso_target -176.984 -61.9301 29.1589 1"
+send_character_message 2 "set_head_target -175.594 -61.4474 26.4009 1"
+set_cam -175.931 -61.5924 28.5736 -0.16 120.5 0.09 37.1581
+send_character_message 3 "set_animation \"Data\Animations\r_idle.anm\""
+say 2 "???" "Ho a disposizione, il poster ricercato di quello nuovo [wait 0.3]Anche."
+send_character_message 2 "set_head_target -177.286 -60.8747 23.3185 1"
+send_character_message 3 "set_head_target -176.737 -61.2609 22.9956 1"
+set_cam -178.229 -61.7199 19.7591 -0.13 -165.65 -0.13 37.1581
+send_level_message "set_camera_dof 0 0 0 0.3 20 1"
+say 3 "????" "Pensare bene."
+send_character_message 1 "set_head_target -185.914 -60.0959 8.25236 1"
+send_character_message 1 "set_torso_target -181.415 -61.6758 16.1692 0"
+set_character_pos 1 -181.315 -61.4762 16.3276 119
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 3 "set_head_target -192.121 -59.0275 -2.57048 1"
+send_character_message 2 "set_head_target -192.759 -58.8587 -2.26151 1"
+send_character_message 3 "set_eye_dir -191.583 -58.5932 5.34346 1"
+send_character_message 2 "set_torso_target -192.523 -59.0621 -0.295372 0.00012207"
+send_character_message 3 "set_torso_target -190.437 -59.1342 -0.712188 1"
+send_character_message 2 "set_eye_dir -192.357 -59.0626 -2.33408 1"
+set_character_pos 2 -192.887 -59.4564 0.932117 91
+set_character_pos 3 -190.103 -59.4229 -0.34495 130
+send_character_message 4 "set_head_target -192.233 -58.8396 -2.32741 1"
+set_cam -191.668 -59.0973 -1.98547 0.05 44.35 0.18 37.1581
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "???" "Saluti. [wait 0.3]Ti sei perso?"
+send_character_message 4 "set_head_target -192.265 -59.2584 -1.89458 1"
+set_cam -194.267 -58.9801 -6.70085 -1.26 -157.65 -0.15 30.2496
+send_level_message "set_camera_dof 0 0 0 0.3 10 2"
+say 4 "Jairo" "No. [wait 0.3]Appena sto vagando attraverso queste parti, [wait 0.3]appena deciso che questo sarebbe un buon posto per riposare le mie ginocchia."
+send_character_message 2 "set_head_target -192.75 -58.8482 0.495548 1"
+set_character_pos 2 -192.887 -59.3716 0.932117 91
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_cam -192.122 -58.7571 -0.264112 -0.55 144.83 0.59 30.2496
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "???" "Se ci potessi aiutare per un po '..."
+set_cam -67.5946 -6.00028 12.6593 0.79 1.89 -0.14 30.2496
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 2 "???" "Avete visto questa persona?"
+send_character_message 2 "set_head_target -192.958 -58.7058 -1.4284 1"
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 3 "set_torso_target -190.51 -59.2559 -0.7934 1"
+send_character_message 3 "set_head_target -192.157 -58.8243 -2.56153 1"
+send_character_message 3 "set_eye_dir -192.359 -58.9102 -2.42132 1"
+set_cam -190.631 -58.7248 -2.01133 -0.8 -165.13 -0.04 30.2496
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 3 "????" "Per lo più di media altezza, [wait 0.3]costruire un po' magro..."
+send_character_message 3 "set_torso_target -190.431 -59.2559 -0.856837 1"
+send_character_message 3 "set_head_target -192.192 -58.6589 -2.59068 1"
+set_cam -189.277 -58.6834 -1.2708 -0.36 128.7 0.72 30.2496
+send_level_message "set_camera_dof 0.3 3 1 0.3 5 0.5"
+say 2 "???" "Pelliccia bianca, [wait 0.3]Felpa blu, [wait 0.3]flairs giallo?"
+send_character_message 3 "set_head_target -192.345 -58.5121 -2.64353 1"
+send_character_message 2 "set_head_target -192.09 -58.8371 -1.41172 1"
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 3 "????" "La faccia è un po ' sul lato carne, [wait 0.3]Anche."
+send_character_message 4 "set_head_target -192.479 -58.8556 -1.73216 1"
+set_cam -193.239 -58.9322 -2.27182 0.66 -23.34 -0.47 30.2496
+say 4 "Jairo" "Non ho visto nessuno che la descrizione di montaggio."
+send_character_message 2 "set_eye_dir -191.147 -58.5901 -0.0985248 1"
+send_character_message 3 "set_eye_dir -190.38 -58.4138 -0.100012 1"
+send_character_message 3 "set_head_target -193.083 -58.3378 -1.44651 1"
+set_cam -194.998 -58.5695 1.06421 -3.42 -79.68 -0.81 20.7749
+send_level_message "set_camera_dof 0.3 3 1 0.3 6 0.5"
+say 3 "????" "Che ne dici questo determinato altra persona..."
+send_character_message 2 "set_torso_target -192.901 -59.0621 -0.328253 1"
+send_character_message 2 "set_head_target -192.879 -58.7236 -1.72516 1"
+send_character_message 3 "set_torso_target -190.548 -59.3184 -0.857904 1"
+send_character_message 3 "set_eye_dir -192.603 -58.3469 -2.91143 1"
+send_character_message 3 "set_head_target -192.205 -58.8131 -2.63288 1"
+send_character_message 2 "set_eye_dir -192.76 -58.7931 -2.50419 1"
+say 3 "????" "Alto, [wait 0.3]muscolare, [wait 0.3]pelliccia marrone scuro..."
+send_character_message 3 "set_torso_target -190.624 -59.3184 -0.817396 1"
+send_character_message 2 "set_eye_dir -191.621 -59.0969 2.79261 1"
+send_character_message 2 "set_head_target -192.881 -58.7251 -1.73021 1"
+send_character_message 2 "set_torso_target -192.901 -59.062 -0.328253 1"
+send_character_message 3 "set_head_target -191.71 -58.7006 -0.461509 1"
+say 3 "????" "Due strisce rosse sotto l'occhio sinistro..."
+send_character_message 3 "set_torso_target -190.685 -59.3184 -0.611673 1"
+send_character_message 3 "set_head_target -190.428 -58.7052 0.772087 1"
+set_cam -193.538 -58.6742 -4.90755 -4.39 -150.15 -0.16 20.7749
+send_character_message 2 "set_head_target -192.829 -58.932 -2.22663 1"
+send_character_message 2 "set_torso_target -192.901 -59.329 -0.328253 1"
+say 2 "???" "Cieco nel suo occhio di destra, [wait 0.3]cicatrici in tutta sua museruola..."
+send_character_message 3 "set_head_target -189.722 -58.7377 1.09675 1"
+send_character_message 3 "set_torso_target -190.711 -59.5227 -0.449878 1"
+send_character_message 3 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_level_message "set_camera_dof 0.3 6 1 0 0 0"
+say 2 "???" "... cosa state guardando?"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 3 "set_head_target -188.817 -58.986 2.78494 1"
+send_character_message 3 "set_torso_target -189.935 -59.7084 0.556615 1"
+set_character_pos 3 -190.103 -59.4229 -0.34495 -80
+send_character_message 2 "set_head_target -189.992 -58.9758 4.54628 1"
+send_character_message 4 "set_head_target -191.806 -58.8556 -1.28515 1"
+send_character_message 2 "set_torso_target -192.244 -59.329 1.93476 1"
+set_character_pos 2 -192.887 -59.3716 0.932117 -59
+set_cam -184.822 -59.4104 11.536 0.67 29.71 0.16 20.7749
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 3 "????" "Ehi! [wait 0.3]È lui! [wait 0.3]Quello nuovo!"
+send_character_message 2 "set_animation \"Data/Animations/r_combatidle.anm\""
+send_character_message 3 "set_animation \"Data/Animations/r_combatidle.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+set_cam -178.545 -61.6029 18.5494 2.52 41.03 0.29 36.399
+say 2 "???" "Ottenere lui prima che lui corre!"
+send_level_message "make_all_aware"

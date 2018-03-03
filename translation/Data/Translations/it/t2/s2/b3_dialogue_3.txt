@@ -1,0 +1,16 @@
+#name "Note-Vandal"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 76.5713 -7.42899 -118.014 52
+send_character_message 1 "set_head_target 77.1148 -7.14914 -118.662 1"
+set_cam 77.2817 -6.93414 -115.997 0 8.61 0 36.7931
+say 1 "Ghost" "Un'antica nota. [wait 0.5]Questo deve aver scritto da un cittadino di centinaia di anni fa."
+set_cam 77.7236 -6.78617 -118.106 0 75.95 0 36.7931
+set_character_pos 1 76.5713 -7.40858 -118.014 52
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Ho notato il vandalo. [wait 0.5]Egli si adatta perfettamente alla descrizione. [wait 0.5]Si trasferisce con fiducia e trasportato un bastone di legno."
+say 2 "Note" "Quando ha raggiunto il nostro cibo, [wait 0.3]Egli non ha esitato a tutti prima accovacciato e dar fuoco a tutto."
+say 2 "Note" "Per un momento, [wait 0.3]Ho pensato che mi ha visto e sono scappato più velocemente possibile."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "C'era rabbia nei suoi occhi."

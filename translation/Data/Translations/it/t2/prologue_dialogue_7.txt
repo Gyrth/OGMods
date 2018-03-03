@@ -1,0 +1,19 @@
+#name "Note-Architect"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 38.0803 420.149 -72.0033 -82
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 38.1103 420.621 -71.3041 1"
+set_cam 36.9619 420.657 -72.8254 0 -139.86 0 41.1643
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Una nota piuttosto recente. [wait 0.5]Deve essere scritto da un architetto."
+send_character_message 1 "set_head_target 38.1392 420.469 -71.3407 1"
+set_cam 37.6155 420.763 -70.7852 0 -28.15 0 41.1643
+set_character_pos 1 38.0803 420.096 -72.0033 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Mi trovo sempre più interessato con l'aumento del costo e la scala di questa prigione complesse."
+say 2 "Note" "Che è stato contratto per costruire una fortezza impenetrabile, ma con le temperature artiche, la scadente qualità del nero Creta e i tremori incessanti che minacciano di spaccare in due la terra sotto di noi temo che mai completamente sarà completata."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 38.156 420.703 -71.2229 1"
+say 2 "Note" "Un incubo fatto realtà e la mia più grande vergogna come un architetto per essere in grado di completare questa mostruosità."

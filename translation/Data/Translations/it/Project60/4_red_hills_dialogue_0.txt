@@ -1,0 +1,13 @@
+set_character_pos 1 17.531 83.9527 -77.8105 64
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_eye_dir 16.4076 85.715 -82.1976 1"
+send_character_message 1 "set_torso_target 16.1016 85.8923 -81.3986 0"
+send_character_message 1 "set_head_target 18.1593 83.5915 -79.2745 0.999967"
+set_cam 16.0436 85.4226 -77.3998 -32.47 -49.34 -3.32 63.9589
+#name "Red Shards Outro"
+#participants 1
+
+say 1 "Turner" "Questo appare come materiale prezioso."
+send_character_message 1 "set_head_target 17.8919 83.9824 -79.2947 0.999967"
+set_cam 15.024 85.1607 -79.4084 -21.11 -99.08 0.49 63.9589
+say 1 "Turner" "I cani saranno felici."

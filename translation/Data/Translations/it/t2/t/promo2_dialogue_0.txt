@@ -1,0 +1,40 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0 0.52 0.95
+set_dialogue_voice 2 8
+set_character_pos 2 -283.859 -56.9156 -248.127 0
+set_character_pos 1 -280.843 -85.3055 -249.475 129
+send_character_message 1 "set_animation \"Data\Animations\r_sleep.anm\""
+send_character_message 1 "set_eye_dir -281.28 -85.5579 -250.413 0"
+send_character_message 1 "set_torso_target -280.584 -85.2085 -249.737 0"
+send_character_message 1 "set_head_target -280.9 -85.2087 -249.594 0"
+set_cam -284.123 -85.1193 -252.847 -6.42 -144.1 0.08 20.9462
+say 1 "Ghost" "..."
+send_character_message 1 "set_eye_dir -281.28 -85.5579 -250.413 0.631819"
+set_cam -282.339 -85.4407 -250.811 -6.5 -138.31 -0.36 20.9462
+say 1 "Ghost" "..."
+send_character_message 1 "set_eye_dir -281.524 -84.8723 -250.045 0.81458"
+send_character_message 1 "set_animation \"Data\Animations\r_sit_injuredneck.anm\""
+set_cam -283.547 -85.143 -250.558 -0.67 -108.7 -0.79 13.5446
+say 1 "Ghost" "Dove sono?"
+send_character_message 1 "set_eye_dir -281.311 -85.3548 -249.646 0.81458"
+send_character_message 1 "set_head_target -281.56 -85.3618 -250.211 1"
+send_character_message 1 "set_animation \"Data\Animations\r_sit_cross_legged.anm\""
+say 1 "Ghost" "...[wait 0.5]Ok[wait 0.2] il lago."
+send_character_message 1 "set_head_target -281.56 -85.6688 -250.211 1"
+send_character_message 1 "set_eye_dir -281.311 -85.3562 -249.646 0"
+say 1 "Ghost" "Che bestia e i gatti..."
+send_character_message 1 "set_eye_dir -281.436 -84.939 -249.898 0.697189"
+send_character_message 1 "set_head_target -281.56 -85.2696 -250.211 1"
+say 1 "Ghost" "Devo andati qui a dormire."
+send_character_message 2 "set_eye_dir -277.191 -82.711 -249.231 1"
+send_character_message 2 "set_head_target -278.556 -84.1522 -250.113 1"
+set_character_pos 1 -320.919 -50.8765 -274.122 129
+set_character_pos 2 -280.859 -85.0132 -249.539 130
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -281.895 -85.1318 -249.915 26.28 -99.13 -1.94 34.1872
+send_character_message 1 "set_head_target -279.39 -83.8643 -249.811 1"
+send_character_message 1 "set_eye_dir -280.717 -84.1905 -250.238 1"
+say 2 "Ghost" "Non credo che posso uscire di qui..."

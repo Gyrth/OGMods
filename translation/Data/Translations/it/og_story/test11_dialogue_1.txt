@@ -1,0 +1,11 @@
+#name "End"
+#participants 3
+
+set_character_pos 3 10.9724 -2.09694 8.19091 50
+set_character_pos 2 12.4187 -2.06188 8.42587 103
+set_character_pos 1 11.733 -2.03515 6.3077 -95
+set_cam 13.5387 -1.4197 5.68802 0 137.74 0 90
+say 1 "Villager" "Grazie, ecco un coltello."
+say 2 "Turner" "Userò questo per tagliare schiavisti."
+say 3 "Villager" "Ecco che cosa avevo intenzione di fare con esso."
+send_global_message "levelwin"

@@ -1,0 +1,42 @@
+#name "Rose"
+#participants 2
+send_character_message 1 "set_eye_dir 117.039 -53.9836 285.499 1"
+send_character_message 2 "set_eye_dir 118.209 -53.9369 285.365 1"
+set_character_pos 2 117.266 -54.9784 285.405 0
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_torso_target 118.25 -54.3133 285.362 0.0133886"
+send_character_message 2 "set_head_target 118.153 -54.324 285.605 0.211565"
+set_character_pos 1 118.329 -54.9507 285.245 -170
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_torso_target 118.292 -54.4252 285.333 0.000516117"
+send_character_message 1 "set_head_target 118.334 -54.4152 285.399 0"
+set_cam 119.861 -54.0816 285.896 -1.05 75.14 0 26.585
+say 2 "Rose" "Turner, sono finalmente fatto con la vostra pattuglia molto importante?"
+send_character_message 2 "set_eye_dir 118.284 -53.9881 285.304 1"
+send_character_message 1 "set_head_target 118.334 -54.4152 285.399 0"
+send_character_message 1 "set_torso_target 118.292 -54.4252 285.333 0.000516117"
+send_character_message 2 "set_head_target 118.153 -54.324 285.605 0.211565"
+send_character_message 2 "set_torso_target 118.25 -54.3133 285.362 0.0133886"
+set_cam 116.165 -54.0105 286.122 -2.69 -63.03 0.4 26.585
+say 1 "Turner" "Mi sto solo preoccupando per voi e per aprile."
+send_character_message 2 "set_eye_dir 118.257 -54.0381 285.263 1"
+set_cam 119.861 -54.0816 285.896 -1.05 75.14 0 26.585
+send_character_message 1 "set_head_target 118.334 -54.4152 285.399 0"
+send_character_message 1 "set_torso_target 118.292 -54.4252 285.333 0.000516117"
+send_character_message 2 "set_head_target 118.153 -54.324 285.605 0.211565"
+send_character_message 2 "set_torso_target 118.25 -54.3133 285.362 0.0133886"
+say 2 "Rose" "Lo so. [wait 0.2]Lo so. [wait 0.2]Ci manchi, [wait 0.1]è tutto."
+send_character_message 2 "set_eye_dir 117.652 -53.5226 285.513 1"
+send_character_message 1 "set_head_target 118.334 -54.4152 285.399 0"
+send_character_message 1 "set_torso_target 118.292 -54.4252 285.333 0.000516117"
+send_character_message 2 "set_torso_target 118.25 -54.3133 285.362 0.0133886"
+send_character_message 2 "set_head_target 119.129 -51.6987 285.686 1"
+set_cam 116.447 -54.873 286.177 28.12 -56.41 3.27 50.1541
+say 2 "Rose" "Se avete un secondo, potresti parlare di nostra figlia? [wait 0.2]Ha scalato le rovine e non verrà giù."
+send_character_message 1 "set_eye_dir 119.705 -52.7502 285.231 1"
+send_character_message 2 "set_eye_dir 118.448 -53.5074 285.363 1"
+send_character_message 1 "set_torso_target 117.951 -54.4252 285.926 1"
+send_character_message 2 "set_torso_target 118 -54.3133 285.552 0"
+send_character_message 1 "set_head_target 118.66 -53.1969 286.489 1"
+set_cam 116.165 -54.0105 286.122 -2.69 -63.03 0.4 26.585
+say 1 "Turner" "Ancora una volta? [wait 0.3]Vedrò cosa posso fare."

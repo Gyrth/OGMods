@@ -1,0 +1,20 @@
+#name "Win"
+#participants 2
+send_level_message "music_layer_override 2"
+set_character_pos 2 1.21088 1.87104 9.5475 87
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 2 "set_head_target 2.81599 -0.951234 1.31462 1"
+set_character_pos 1 0.909468 -2.06283 1.61263 -85
+set_cam 1.2744 -2.06057 -0.64899 18.09 -177.38 0.99 30.8747
+say 2 "Amethyst" "Quindi sei fortunato! Penso che ti chiamerò che..--il tuo nome ' Lucky in questo momento."
+send_character_message 1 "set_head_target 1.75017 2.38908 7.58878 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+set_character_pos 1 0.909386 -2.06292 1.61247 -85
+say 1 "Turner" "Mi chiamo Turner."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 2 "Amethyst" "Il tuo nome è tutto quello che dico che è. "
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 1 "Turner" "Cosa è successo a ricerca per indicizzazione?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Amethyst" "Oh, abbiamo lui e la sua famiglia sano e salvo, come si fa come diciamo. Ora passare attraverso quella porta in caserma. Spero vi piaccia caldo!"
+send_global_message "levelwin"

@@ -1,0 +1,17 @@
+#name "Note-Voices"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 308.276 -1.46393 -1.14145 90
+send_character_message 1 "set_head_target 308.29 -1.33387 -1.87433 1"
+set_cam 310.028 -1.06932 -2.29601 0 114.23 0 34.0902
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un'antica nota. [wait 0.5]Devono essere centinaia di anni."
+set_cam 308.948 -0.872795 -0.238064 0 26.02 0 34.0902
+set_character_pos 1 308.276 -1.50636 -1.14145 90
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.1"
+say 2 "Note" "Le voci del male. [wait 0.5]Mi sento la rabbia di Dio sverminazione sua strada nel mio cervello, [wait 0.3]sussurrando cose dolci nelle mie orecchie."
+say 2 "Note" "Voglio dare così male. [wait 0.5]Si sentirebbe così buono. [wait 0.5]Ma se lascio il Dio all'interno della mia anima, [wait 0.3]Essa ti schiaccerà tutto quello che ho."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Non voglio finire come Eira. [wait 0.5]Morirei piuttosto che servire i sussurri di Dio."

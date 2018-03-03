@@ -1,0 +1,9 @@
+#name "Win"
+#participants 1
+
+set_cam -7.90693 -1.51145 24.216 0 0 0 90
+set_character_pos 1 -7.58003 -1.88054 21.9927 -144
+say 1 "Turner" "Così che era un cane."
+say 1 "Turner" "Vedrò se c'è un'altra base nelle vicinanze."
+send_global_message "levelwin"
+

@@ -1,0 +1,69 @@
+#name "Start"
+#participants 7
+set_dialogue_color 2 1 0.6 0.6
+set_dialogue_voice 2 8
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 3 "set_torso_target -98.767 -27.2511 -129.445 0"
+send_character_message 1 "set_torso_target -98.0734 -27.4446 -130.268 0.412452"
+send_character_message 1 "set_head_target -97.9416 -27.3654 -130.519 0"
+send_character_message 3 "set_head_target -98.8453 -27.0602 -129.116 1"
+set_character_pos 3 -99.7222 -27.891 -129.789 0
+set_character_pos 6 -75.5042 -27.8972 -137.035 69
+set_character_pos 5 -76.4124 -27.851 -138.015 35
+set_character_pos 4 -74.3031 -27.8934 -137.058 108
+set_character_pos 7 -73.2495 -27.9232 -138.36 156
+set_character_pos 2 -74.9655 -28.0464 -139.263 -85
+set_character_pos 1 -98.8118 -27.8645 -130.912 -22
+send_level_message "set_camera_dof 0.3 10 5 0 0 0"
+send_character_message 2 "set_head_target -76.1578 -26.8968 -138.188 1"
+send_character_message 2 "set_torso_target -75.2252 -27.2794 -138.3 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 7 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 6 "set_animation \"Data/Animations/r_sit_cross_legged.anm\""
+set_cam -100.528 -27.0479 -130.37 0 -96.66 0 90
+say 3 "Sky" "Ardesia è là fuori nel campo, uno accovacciato."
+send_character_message 1 "set_torso_target -97.792 -27.4446 -130.682 1"
+send_character_message 1 "set_head_target -96.2688 -27.2541 -131.831 1"
+set_cam -101.178 -27.0481 -130.633 0 -74.42 0 40.888
+set_cam -77.3776 -27.39 -135.319 0 -38.63 0 59.0206
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 2 "Spike" "Ametista ha urlato il mio capo, e ha urlato in faccia, così ora ti sto urlando addosso."
+send_character_message 3 "set_animation \"Data/Animations/r_actionidle.anm\"" 
+send_character_message 2 "set_torso_target -75.1401 -27.0671 -137.905 0.0208591"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 2 "set_head_target -74.6284 -27.0703 -137.041 1"
+say 2 "Spike" "Qualcuno ha razziato i nostri campi e sembra che si sta allontanando in questo modo." 
+send_character_message 2 "set_head_target -76.078 -27.5578 -136.946 1"
+send_character_message 2 "set_torso_target -75.1327 -26.3311 -138.498 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_point.anm\""
+say 2 "Spike" "Li voglio trovato e ucciso prima che lasci la nave successiva!"
+send_character_message 3 "set_head_target -98.4539 -27.0602 -131.052 1"
+send_character_message 3 "set_torso_target -98.6288 -27.327 -129.785 1"
+set_cam -97.6892 -27.2285 -131.111 0 112.87 0 49.5342
+say 1 "Turner" "Ok. Sembra che questo è più grande di quanto pensavo."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 3 "Sky" "Finché questi schiavisti arriva su quelle navi, bandiere bianche non sarà mai sicuro."
+send_character_message 1 "set_torso_target -97.6018 -27.4446 -130.162 1"
+send_character_message 1 "set_head_target -97.9112 -27.1602 -129.081 1"
+send_character_message 3 "set_head_target -98.7999 -27.0602 -131.09 1"
+say 1 "Turner" "Così come li fermiamo?"
+send_character_message 3 "set_head_target -98.0956 -26.9206 -129.234 1"
+send_character_message 3 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 3 "Sky" "Dovremo riprendere quella nave alla terraferma e tagliarli fuori alla fonte. E abbiamo bisogno di ardesia per arrivarci."
+send_character_message 1 "set_head_target -95.7876 -27.1602 -132.246 1"
+send_character_message 3 "set_head_target -98.1148 -26.9207 -129.206 1"
+say 1 "Turner" "Dobbiamo prendere queste guardie, o verranno dopo di noi."
+send_character_message 3 "set_head_target -98.8474 -27.0137 -130.834 1"
+say 3 "Sky" " Ho pensato che la nave aveva lasciato già..--deve essere in ritardo. Non abbiamo molto tempo."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+set_character_pos 4 -75.3725 -27.8934 -138.036 108
+set_character_pos 7 -72.2181 -27.9232 -138.111 156
+set_character_pos 6 -73.4852 -27.8972 -139.481 69
+set_character_pos 5 -72.5407 -27.851 -136.109 35
+set_character_pos 2 -75.1242 -28.0464 -135.766 -85
+send_character_message 3 "set_torso_target -98.6288 -27.327 -129.785 0"
+say 1 "Turner" "Ti fanno di questo rapido."
+send_level_message "start_dialogue Places"
+set_cam -100.528 -27.0479 -130.37 0 -96.66 0 90

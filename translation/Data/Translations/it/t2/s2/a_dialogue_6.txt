@@ -1,0 +1,16 @@
+#name "Note-Crete"
+#participants 2
+set_character_pos 1 27.5341 15.2194 -123.091 -132
+send_character_message 1 "set_head_target 26.982 15.7246 -122.51 1"
+set_cam 27.1565 15.8698 -124.326 0 -175.08 0 48.9875
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+say 1 "Ghost" "Un'analisi sugli dèi lo spirito del mondo... [wait 0.3]Supponendo che sono reali."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 26.4049 15.8842 -123.25 0 -110.36 0 33.3467
+say 2 "Note" "I nostri antichi annali hanno indicato a noi che Creta (sia bianco e nero) è creato da eccesso energia emanata dai poteri degli spiriti (compresi i nostri spiriti per anziani), quanto la terra sotto i nostri piedi di torsione in forme più desiderabile, o influenzare la moltitudine di senzienti che popolano il continente di Preuwyn."
+say 2 "Note" "Più energia che può essere osservata in un determinato territorio è direttamente indicativo di un'abbondanza di energia in eccesso che si è concentrata verso un lavoro spirituale."
+say 2 "Note" "Per questo motivo, è ragionevole per noi supporre che la Creta più abbiamo trovato all'interno di una regione, quanto più ci troviamo a cimitero degli spiriti per anziani - vale a dire, il dominio coloniale della Therium."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Estratto di osservanze di spiriti per anziani e loro vari costrutti, prima edizione, Authored by Herumphal Mandru, illuminato da Otto Vendran."

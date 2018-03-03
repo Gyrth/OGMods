@@ -1,0 +1,15 @@
+set_cam 121.932 -54.0247 289.318 -30 -150 0 90
+set_character_pos 1 122.858 -54.9274 289.679 -90
+send_character_message 1 "set_eye_dir 122.715 -55.094 291.465 1"
+send_character_message 1 "set_head_target 122.764 -54.6636 291.406 1"
+#name "Jack's Gone"
+#participants 1
+send_character_message 1 "empty_hands"
+say 1 "Turner" "Cosa...[wait 0.4] È andato!"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+set_cam 123.768 -54.5647 290.002 7.27 74.04 0 55.9831
+send_character_message 1 "set_torso_target 123.023 -53.6857 290.785 1"
+send_character_message 1 "set_head_target 123.52 -54.165 290.638 1"
+send_character_message 1 "set_eye_dir 123.629 -53.3514 289.702 1"
+say 1 "Turner" "Forse è andato al corridoio di Rocky."
+send_global_message "levelwin"

@@ -1,0 +1,39 @@
+#name "Start"
+#participants 3
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 2 "set_torso_target -34.3653 -1.53933 1.35399 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+send_character_message 1 "set_torso_target -33.2684 -1.79023 2.49515 1"
+send_character_message 2 "set_head_target -33.744 -1.42834 3.49223 1"
+set_character_pos 3 -32.9489 -2.27503 2.43036 -99
+set_character_pos 2 -33.9248 -2.23294 3.46876 123
+send_character_message 1 "set_head_target -33.2549 -0.860348 2.18994 0.363477"
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_color 2 0.8 0.7 1
+set_dialogue_color 3 1 0.7 0.5
+send_level_message "set_camera_dof 0 0 0 0.3 3.5 1"
+set_cam -35.1772 -1.54067 2.95789 0 -83.49 0 89.9999
+set_character_pos 1 -34.3736 -2.09332 2.34036 0
+send_character_message 3 "set_head_target -30.6729 -0.902754 2.50944 1"
+say 1 "Turner" "E ho pensato che le montagne di tornare a casa erano fredde."
+send_character_message 2 "set_torso_target -34.602 -1.80958 2.40263 1"
+send_character_message 2 "set_head_target -34.3747 -1.43533 2.63394 1"
+say 2 "Sky" "Siamo vicino ai conigli del campo di luna. Dovrebbe incontrarsi con loro, e io lavoro su come organizzare la resistenza all'interno delle città."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_torso_target -33.3826 -1.75992 2.7729 1"
+send_character_message 1 "set_head_target -33.8709 -1.41491 3.39672 1"
+say 1 "Turner" "Non vuoi venire con me?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Sky" "Ne ho avuto abbastanza di stare seduti sul lato, guardando a uccidere la gente. Potrai fare più di una differenza in questo modo. Usate le vostre abilità, e potrai usare la mia."
+send_character_message 3 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 3 "set_head_target -34.0624 -1.46721 3.42999 1"
+say 3 "Slate" "Sono io l'unico che vede questa rupe enorme, mortale di ghiaccio qui? Come si può eventualmente ottenere ci vivo?"
+send_character_message 2 "set_head_target -33.0267 -1.43533 2.44399 1"
+say 2 "Sky" "Questo è l'unico luogo dove le vedette non vedono. Noi non possiamo molto bene ancorare nel porto di ametista."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target -32.1871 -0.431841 2.34877 1"
+send_character_message 3 "set_head_target -34.178 -1.46721 3.53477 1"
+say 1 "Turner" "Penso che riesco a trovare un modo a."
+send_character_message 1 "set_head_target -33.3485 -1.80783 3.35249 1"
+send_level_message "start_dialogue PlacesBoat"

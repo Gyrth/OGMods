@@ -1,0 +1,15 @@
+#name "Win"
+#participants 2
+set_character_pos 2 -43.9495 21.4732 -9.53729 -68
+set_character_pos 1 -43.5078 21.2974 -6.76732 84
+set_cam -41.942 21.8467 -5.20717 0 34.88 0 53.6292
+say 2 "Rat" "Non farmi del male!"
+say 1 "Turner" "Hai visto una ragazza di coniglio?"
+say 2 "Rat" "La conosci?
+say 2 "Rat" "Ha detto che doveva salire più in alto..--che se l'ha fatta tutta la strada per le nuvole, lei sarebbe in grado di tornare a casa."
+say 1 "Turner" "Quello che è successo a lei?"
+say 2 "Rat" "Lei abbiamo trascinato fuori al nostro campo principale."
+say 2 "Rat" "I gatti non importa se loro schiavi sono pazzi."
+say 1 "Turner" "Dimmi dov'e ', e forse non ti butto fuori questo albero."
+say 2 "Rat" "Se la metti cosi '..."
+send_global_message "levelwin"

@@ -1,0 +1,8 @@
+#name "Escape"
+#participants 1
+send_character_message 1 "set_torso_target -99.1325 -18.7651 -137.421 0"
+send_character_message 1 "set_head_target -99.6599 -18.7861 -138.45 1"
+send_character_message 1 "set_eye_dir -99.8654 -18.7664 -138.066 1"
+set_character_pos 1 -99.5799 -19.5764 -139.171 -35
+set_cam -100.688 -18.8448 -139.459 -5.92 -129.08 0.36 77.7429
+say 1 "Turner" "Meglio trovare un modo fuori di questa città. L'intero esercito cercherà per me presto."

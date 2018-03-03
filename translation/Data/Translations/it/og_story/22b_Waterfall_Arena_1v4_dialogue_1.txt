@@ -1,0 +1,7 @@
+#name "Win"
+#participants 1
+set_character_pos 1 24.3082 94.5828 311.22 -86
+set_cam 24.7542 95.312 311.777 0 37.64 0 90
+say 1 "Turner" "Quali sono le prospettive?"
+say 1 "Turner" "Ho voglia di passeggiare nel giardino e l'odore dei fiori."
+send_global_message "levelwin"

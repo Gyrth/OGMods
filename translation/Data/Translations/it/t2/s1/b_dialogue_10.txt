@@ -1,0 +1,18 @@
+#name "Note-Scout"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 86.6623 -62.7353 303.059 170
+send_character_message 1 "set_head_target 85.9736 -62.3514 302.724 1"
+set_cam 87.3575 -62.1744 302.299 0 118.82 0 65.8249
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Un insieme di note da un talent scout di Cinderbreathe..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 85.9205 -62.1048 303.616 0 -32.08 0 65.8249
+say 2 "Note" "Questi giardini di Colonia sono così strani... [wait 0.3]hanno più varietà di terreno rispetto a tutto il continente accanto a noi."
+say 2 "Note" "Foresta, [wait 0.3]deserto, [wait 0.3]montagna, [wait 0.3]Tundra... [wait 0.5]tutti, ma ho visto di palude. [wait 0.5]Non sembra naturale, [wait 0.3]ma poi di nuovo, [wait 0.3]niente qui."
+say 2 "Note" "Ogni collina principale che ci imbattiamo in genere ha una miriade di quegli strani lanterne di pietra. [wait 0.5]Non posso fare a meno di sentire come osservato."
+say 2 "Note" "Siamo nel tratto di deserto in questo momento. [wait 0.5]Le antiche rovine rendono buoni punti di riferimento, [wait 0.3]ma dannazione se essi non sono polverosi."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Solo per dormire da queste cose, [wait 0.3]Ho a che fare con asciugandosi la sabbia... [wait 0.5]probabilmente da nessuna parte vicino così male come Ouran, [wait 0.3]anche se."
