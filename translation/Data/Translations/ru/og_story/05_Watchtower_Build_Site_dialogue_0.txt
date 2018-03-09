@@ -1,0 +1,50 @@
+#name "Builders"
+#participants 3
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 3 "set_head_target 115.288 36.8284 170.434 1"
+send_character_message 2 "set_torso_target 115.433 37.2674 169.283 1"
+send_character_message 2 "set_head_target 117.268 37.2123 170.881 1"
+send_character_message 1 "set_head_target 116.724 37.0083 170.816 1"
+set_character_pos 3 116.845 36.0905 170.925 122
+set_character_pos 2 115.12 36.8321 167.957 -111
+set_character_pos 1 115.345 36.2522 170.675 -21
+set_cam 119.831 36.8961 169.304 -4.26 111.57 -1.68 26.7188
+send_level_message "set_camera_dof 0 0 0 0.3 8 1"
+say 1 "Rent" "Ой! Что теперь хочет Stonefist? Мы не сделали геодезия повреждения."
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 3 "Turner" "Чем ты занимаешься?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 1 "Rent" "Что я? Как насчет я укусить вас, до тех пор, пока вы понять это?"
+send_character_message 1 "set_head_target 116.382 37.0083 169.841 1"
+send_character_message 2 "set_head_target 115.348 36.6419 170.636 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam 116.195 36.3175 172.24 8.71 21.76 -3.71 30.9018
+say 2 "Cedar" "Оставайтесь спокойными, он вероятно как раз никогда не увидел крысу до. Вы знаете, что большинство этих кроликов никогда не покидали свои деревни."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 116.445 36.5739 170.374 1"
+say 1 "Rent" "Уроженец? Га. Я не привыкли видеть эти unchained."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 116.523 36.991 170.963 1"
+send_character_message 3 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+set_cam 119.831 36.8961 169.304 -4.26 111.57 -1.68 26.7188
+say 3 "Turner" "Затем вы работаете с slavers."
+set_character_pos 2 114.746 36.8026 167.718 -47
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target 116.856 37.0995 170.992 1"
+send_character_message 3 "set_head_target 115.318 37.4855 168.605 1"
+send_character_message 1 "set_head_target 116.348 37.0635 170.955 1"
+set_cam 119.158 36.7463 172.608 1.9 47.9 -3.14 28.3446
+set_character_pos 1 115.345 36.2522 170.675 -21
+say 2 "Cedar" "Подождите, мы строители, не работорговцы! Stonefist «нанял» нас, но у нас не было много выбора. Мы должны были работать с ней, или умереть."
+send_character_message 3 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 3 "set_torso_target 116.656 36.7304 170.149 1"
+say 3 "Turner" "Кто такой этот «Stonefist»?"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_torso_target 116.649 37.3168 169.38 1"
+send_character_message 2 "set_head_target 118.848 37.8965 169.408 1"
+say 2 "Cedar" "Она, вероятно, все еще вверх в башне."
+send_character_message 2 "set_head_target 116.055 36.7313 169.54 1"
+send_character_message 2 "set_torso_target 116.121 36.7981 169.506 1"
+say 2 "Cedar" "Я бы направить ясно, если я вам. Незнакомцы, проходя через есть способ в конечном итоге в ее цепи банды."
+send_level_message "start_dialogue PlacesBridge"

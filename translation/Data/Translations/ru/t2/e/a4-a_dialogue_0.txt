@@ -1,0 +1,243 @@
+#name "Intro"
+#participants 6
+set_character_pos 6 -245.589 -43.2681 -143.423 -27
+send_character_message 6 "set_animation \"Data/Animations/c_actionidle.anm\""
+set_character_pos 4 -212.099 -50.8613 -109.638 -117
+send_character_message 4 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 15
+set_character_pos 3 -172.201 -51.4329 -139.842 -111
+send_character_message 3 "set_animation \"Data\Animations\r_spearstance.anm\""
+send_character_message 3 "set_torso_target -172.742 -51.4006 -138.497 0.0291983"
+send_character_message 3 "set_head_target -172.095 -50.8258 -136.852 1"
+set_character_pos 2 -170.133 -51.4009 -136.79 -163
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_worriedpose_2.anm\""
+send_character_message 2 "set_eye_dir -172.089 -51.1668 -136.226 1"
+send_character_message 2 "set_torso_target -171.074 -51.6705 -136.74 0.937247"
+send_character_message 2 "set_head_target -171.414 -50.9224 -136.714 1"
+set_character_pos 1 -174.895 -51.3323 -106.324 -160
+send_character_message 1 "set_eye_dir -176.429 -51.1303 -107.27 1"
+send_character_message 1 "set_torso_target -176.124 -51.4305 -106.342 0"
+send_character_message 1 "set_head_target -175.884 -50.9727 -106.147 0"
+set_cam -333.282 -46.2411 -49.3413 0.94 -84.5 -0.03 57.7905
+say 6 "" "..."
+set_cam -173.107 -49.4585 -77.7581 1.22 -28.96 0 44.4642
+say 6 "" "..."
+set_cam -262.4 -51.3083 -98.9624 17.04 119.99 -0.25 41.2094
+say 6 "" "..."
+set_cam -230.981 -51.9707 -144.813 0.34 -96.23 0.05 10.9818
+send_level_message "set_camera_dof 0.3 20 10 0 0 0"
+say 6 "" "..."
+send_character_message 2 "set_head_target -171.472 -50.9645 -136.513 1"
+set_cam -172.203 -50.7374 -138.099 0.32 -124.13 -0.11 17.7467
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "???" "Что-то чувствует себя неправильно."
+send_character_message 3 "set_torso_target -172.411 -51.3747 -138.577 1"
+send_character_message 3 "set_head_target -170.527 -50.6222 -137.301 1"
+set_cam -170.135 -50.8699 -139.369 0 86.87 0 32.7239
+say 3 "????" "Yoeur нервы, говорить снова."
+send_character_message 3 "set_torso_target -171.579 -51.5259 -138.54 1"
+say 3 "????" "Если Kaicalk даже думать о беспорядках, [wait 0.3]у нас их заблокировать."
+send_character_message 2 "set_eye_dir -172.089 -51.1668 -136.226 1"
+send_character_message 2 "set_torso_target -171.074 -51.6705 -136.74 0"
+send_character_message 2 "set_head_target -171.662 -50.8237 -138.38 1"
+set_cam -170.241 -50.8699 -138.349 0 172.21 0 32.7239
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 3 "set_head_target -170.385 -50.8542 -137.243 1"
+send_character_message 3 "set_torso_target -171.579 -51.5259 -138.54 0"
+say 3 "????" "Существует нечего беспокоиться о."
+send_character_message 2 "set_torso_target -170.922 -51.5798 -136.459 1"
+send_character_message 2 "set_head_target -171.514 -49.7188 -129.589 1"
+say 2 "???" "Эй- [wait 0.5]узнали ли вы что?"
+send_character_message 2 "set_torso_target -170.947 -51.3067 -136.848 1"
+send_character_message 2 "set_head_target -174.021 -51.0759 -134.81 1"
+send_character_message 3 "set_torso_target -172.084 -51.487 -138.605 1"
+set_cam -174.493 -50.9465 -140.991 0 -126.38 0 27.7676
+send_level_message "set_camera_dof 0 0 0 0.3 4 0.5"
+say 3 "????" "Я ничего не слышал."
+send_character_message 2 "set_torso_target -170.892 -51.5079 -136.958 1"
+send_character_message 2 "set_head_target -171.239 -50.7705 -138.463 1"
+send_level_message "set_camera_dof 0.3 4 1 0 0 0"
+say 2 "???" "Я мог бы присягнуть я услышал от изумления там... [wait 0.3]и возможно некоторые боевые действия."
+send_character_message 3 "set_torso_target -172.084 -51.487 -138.605 0"
+send_character_message 3 "set_head_target -172.773 -50.0274 -135.589 1"
+set_cam -173.551 -50.7366 -138.592 0 -52.26 0 27.7676
+send_level_message "set_camera_dof 0 0 0 0.3 4 0.5"
+say 3 "????" "Я буду проверить это, [wait 0.3]Если это действительно заставляет вас чувствовать себя лучше."
+send_character_message 3 "set_eye_dir -170.258 -50.2555 -142.649 1"
+set_character_pos 3 -176.145 -51.3747 -107.048 -31
+send_character_message 3 "set_torso_target -170.947 -51.5662 -141.553 0"
+send_character_message 3 "set_head_target -169.557 -49.9716 -141.138 0"
+send_character_message 2 "set_eye_dir -172.089 -51.1668 -136.226 0.709453"
+send_character_message 2 "set_head_target -172.601 -51.1887 -138.245 1"
+send_character_message 2 "set_torso_target -171.148 -51.1717 -137.013 1"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+set_character_pos 2 -170.133 -51.4013 -136.789 -163
+set_cam -171.267 -50.7938 -138.488 0 -147.72 0 27.7676
+say 2 "???" "Спасибо, [wait 0.3]Я..."
+set_character_pos 1 -175.188 -51.4137 -107.154 157
+set_character_pos 3 -176.158 -51.3753 -107.704 -31
+set_cam -170.16 -50.7939 -138.583 0 175.12 0 23.1836
+send_character_message 2 "set_head_target -170.792 -50.646 -133.841 1"
+send_character_message 2 "set_torso_target -170.481 -51.0516 -135.894 1"
+set_character_pos 2 -170.133 -51.4013 -136.789 -109
+send_level_message "set_camera_dof 0.3 5 2 0 0 0"
+say 2 "???" "..."
+set_character_pos 1 -174.835 -51.4137 -107.004 157
+send_character_message 1 "set_eye_dir -178.15 -51.4962 -108.917 1"
+send_character_message 1 "set_head_target -177.878 -51.5944 -109.407 1"
+send_character_message 1 "set_animation \"Data\Animations\r_smallswordthrust.anm\""
+send_character_message 3 "set_animation \"Data\Animations\r_blockfrontko.anm\""
+send_character_message 2 "set_torso_target -170.481 -51.0516 -135.894 0"
+send_character_message 2 "set_head_target -170.692 -50.5109 -133.601 1"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 2 "???" "...!"
+send_character_message 2 "set_head_target -170.692 -50.5108 -133.601 1"
+send_character_message 2 "set_torso_target -170.498 -51.5123 -136.235 0.980621"
+say 2 "???" "Что это было!?"
+send_character_message 1 "set_eye_dir -170.235 -50.6651 -136.339 1"
+send_character_message 1 "set_torso_target -175.034 -51.5018 -114.627 0"
+send_character_message 2 "set_torso_target -170.364 -51.3274 -136.315 1"
+send_character_message 2 "set_head_target -172.988 -50.9995 -122.478 1"
+send_character_message 1 "set_head_target -172.484 -50.8999 -125.239 1"
+send_character_message 1 "set_animation \"Data\Animations\ghostsword_idle.anm\""
+set_character_pos 1 -175.292 -51.4556 -113.442 68
+send_character_message 2 "set_eye_dir -172.089 -51.1668 -136.226 1"
+set_cam -169.185 -50.8064 -135.501 0 41.94 0 27.7676
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "???" "Bonifaas? [wait 0.3]У Вас всё в порядке?"
+send_character_message 1 "set_head_target -172.836 -51.4568 -125.02 1"
+send_character_message 2 "set_head_target -172.988 -50.9995 -122.478 1"
+set_cam -173.73 -51.0129 -116.892 0 154.32 0 27.7676
+send_character_message 1 "set_torso_target -174.567 -51.1742 -114.419 1"
+set_character_pos 1 -175.292 -51.4541 -113.442 68
+send_character_message 1 "set_animation \"Data\Animations\ghostsword_idle.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 4 2"
+say 1 "Amos" "Если сволочь просто ударил ножом был Bonifaas..."
+send_character_message 1 "set_torso_target -174.567 -51.1742 -114.419 0"
+send_character_message 1 "set_head_target -174.195 -50.5397 -118.341 1"
+say 1 "Amos" "Нет. [wait 0.3]Они не хорошо."
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_head_target -173.08 -50.293 -122.272 1"
+send_character_message 2 "set_torso_target -170.364 -50.813 -136.315 1"
+set_cam -169.202 -50.843 -135.066 0 34.3 0 27.7676
+say 2 "???" "...!"
+send_character_message 2 "set_animation \"Data\Animations\r_combatidle2.anm\""
+set_cam -169.533 -50.8395 -138.206 0 162.66 0 20.73
+say 2 "???" "Остановка прямо здесь! [wait 0.3]Чем вы занимаетесь!?"
+set_character_pos 5 -215.626 -53.0926 -26.6432 -45
+send_character_message 1 "set_head_target -174.106 -50.954 -118.382 1"
+set_cam -174.389 -50.8692 -116.373 0 162.02 0 20.73
+say 1 "Amos" "..."
+send_character_message 1 "set_animation \"Data\Animations\ghostsword_welcome.anm\""
+send_character_message 1 "set_torso_target -174.404 -51.3705 -114.419 1"
+send_character_message 1 "set_head_target -174.119 -50.7229 -118.352 1"
+say 1 "Amos" "Именем Эдсел раб. [wait 0.5]Где он?"
+set_character_pos 5 -338.941 -47.5009 -50.4909 -42
+send_character_message 1 "set_animation \"Data\Animations\ghostsword_idle.anm\""
+send_character_message 1 "set_torso_target -174.437 -51.1578 -114.373 1"
+send_character_message 2 "set_torso_target -170.825 -50.9483 -136.42 1"
+send_character_message 2 "set_head_target -183.829 -49.8901 -131.49 1"
+set_cam -207.298 -49.6348 -141.763 0 129.57 0 20.73
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 6 "" "..."
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -167.454 -50.9263 -138.606 0 119.32 0 20.73
+send_level_message "set_camera_dof 0.3 10 5 0 0 0"
+say 6 "" "..."
+send_character_message 2 "set_animation \"Data\Animations\r_combatidle2.anm\""
+send_character_message 2 "set_torso_target -170.825 -50.9483 -136.42 0"
+send_character_message 2 "set_head_target -173.674 -51.2711 -121.135 1"
+set_cam -175.418 -50.7919 -111.041 0 -8.81 0 20.73
+set_character_pos 5 -338.941 -45.2912 -50.4909 -42
+say 2 "???" "Я понятия не имею, кто вы говорите о. [wait 0.3]Остановите сейчас!"
+send_character_message 1 "set_animation \"Data\Animations\ghostsword_swordpoint.anm\""
+send_character_message 1 "set_torso_target -175.382 -51.6487 -114.384 1"
+send_level_message "set_camera_dof 0 0 0 0.3 5 2"
+say 1 "Amos" "Я не собираюсь остановить до тех пор, пока я отсюда... [wait 0.3]с Эдсел."
+send_character_message 2 "set_torso_target -170.584 -51.3904 -136.388 1"
+send_character_message 2 "set_head_target -173.806 -50.6793 -119.105 1"
+set_cam -170.744 -50.9915 -133.706 0 -11.84 0 20.73
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 2 "???" "Отвали!"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_kneelfist.anm\""
+set_character_pos 1 -196.145 -50.6446 -120.412 108
+send_character_message 1 "set_eye_dir -197.048 -50.0582 -122.334 1"
+send_character_message 2 "set_head_target -196.354 -50.2573 -120.75 1"
+send_character_message 1 "set_head_target -197.021 -50.2049 -122.441 1"
+send_character_message 2 "set_torso_target -197.074 -51.008 -121.987 1"
+send_character_message 2 "set_eye_dir -196.94 -50.5199 -121.492 1"
+set_character_pos 2 -197.147 -50.9 -122.651 -66
+send_character_message 1 "set_torso_target -196.235 -50.8392 -121.354 0"
+set_cam -173.447 -42.8399 -108.788 0 -27.64 0 20.73
+say 6 "" "..."
+set_character_pos 5 -339.375 -44.8776 -49.9234 -42
+set_cam -196.079 -50.5088 -122.783 -0.4 176.01 0.55 20.73
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.1"
+say 1 "Amos" "... черт побери."
+send_character_message 2 "set_eye_dir -196.94 -50.5199 -121.492 0.743814"
+set_character_pos 5 -340.169 -47.509 -50.0874 -42
+send_character_message 2 "set_torso_target -197.151 -50.9971 -121.966 1"
+send_character_message 2 "set_head_target -196.354 -50.4047 -120.75 1"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -195.485 -50.1989 -120.958 0.68 46.28 -0.04 20.73
+say 2 "???" "..."
+send_character_message 2 "set_eye_dir -196.94 -50.5199 -121.492 1"
+send_character_message 2 "set_torso_target -196.999 -50.9712 -122.009 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+say 2 "???" "Как получить взрывчатых веществ до конца?"
+send_character_message 2 "set_torso_target -197.267 -50.7291 -122.095 1"
+send_character_message 2 "set_head_target -196.173 -50.5448 -120.734 1"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidlethreat.anm\""
+say 2 "???" "Рабы собираются бежать!"
+send_character_message 1 "set_head_target -197.047 -50.3764 -122.512 1"
+send_character_message 1 "set_torso_target -196.384 -52.0515 -120.339 1"
+set_cam -197.718 -50.4594 -122.399 -0.67 -138.51 0.1 20.73
+say 1 "Amos" "Они заслуживают того, чтобы быть свободным, [wait 0.3]Вы нечисть."
+send_character_message 2 "set_head_target -196.173 -50.1977 -120.734 1"
+set_cam -195.479 -50.12 -123.039 0.36 107.45 0.57 20.73
+say 2 "???" "Defiant до самого конца..."
+send_character_message 2 "set_head_target -196.173 -50.7501 -120.734 1"
+say 2 "???" "Сейчас умирают."
+send_character_message 2 "set_torso_target -197.746 -50.8031 -122.293 1"
+set_character_pos 2 -197.391 -50.9 -122.897 -119
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 4 "set_torso_target -207.429 -50.1905 -122.139 1"
+send_character_message 4 "set_head_target -198.649 -50.1905 -122.549 1"
+send_character_message 4 "set_eye_dir -206.612 -50.3812 -122.26 1"
+send_character_message 4 "set_animation \"Data\Animations\jairoidle.anm\""
+set_character_pos 4 -208.162 -50.8258 -122.025 7
+send_character_message 1 "set_eye_dir -195.813 -50.7611 -119.676 0.599266"
+send_character_message 1 "set_head_target -196.006 -50.8658 -120.21 1"
+send_character_message 2 "set_head_target -196.005 -50.5723 -119.983 1"
+send_character_message 1 "set_torso_target -196.006 -50.9208 -120.304 1"
+set_character_pos 1 -195.832 -50.6446 -119.492 108
+send_character_message 1 "set_animation \"Data\Animations\woundedsit2.anm\""
+set_cam -174.069 -42.8878 -107.809 0.05 -36.34 -0.67 20.73
+say 6 "" "..."
+set_cam -197.051 -50.6972 -123.113 -0.58 -160.88 0.34 24.0264
+send_level_message "set_camera_dof 0.3 3.5 1 0 0 0"
+say 1 "Amos" "..."
+send_character_message 2 "set_torso_target -197.64 -50.7683 -122.268 1"
+send_character_message 2 "set_head_target -196.646 -50.4056 -120.16 1"
+set_cam -195.218 -50.1179 -123.445 0.42 101.22 0.53 19.3054
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 4 "????" "Бенте! [wait 0.3]Здесь! [wait 0.5]Kaicalk беспорядки!"
+send_character_message 4 "set_head_target -197.845 -49.5976 -123.053 1"
+send_character_message 4 "set_torso_target -207.464 -49.7876 -122.135 1"
+set_cam -194.904 -50.0462 -123.609 -1.19 101.21 0.53 15.6529
+send_character_message 2 "set_torso_target -198.159 -50.3159 -122.534 1"
+send_character_message 2 "set_head_target -199.469 -49.9781 -122.611 1"
+say 2 "Bente" "Я иду [wait 0.3]Подожди!"
+set_character_pos 5 -83.7913 -51.6584 -238.407 -42
+send_character_message 1 "set_eye_dir -196.284 -50.5531 -119.883 0.599266"
+send_character_message 1 "set_head_target -196.123 -50.7065 -120.318 1"
+set_cam -198.26 -50.5615 -122.347 -0.69 -139.76 0.15 15.6529
+say 1 "Amos" "..."
+set_character_pos 5 -79.031 -52.0421 -240.856 -42
+send_character_message 1 "set_head_target -195.988 -50.9979 -119.966 1"
+send_character_message 1 "set_eye_dir -196.029 -50.6643 -119.726 0"
+say 1 "Amos" "..."
+send_global_message "levelwin ea4a2"

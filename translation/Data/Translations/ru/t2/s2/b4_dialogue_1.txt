@@ -1,0 +1,19 @@
+#name "Pickup"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 15.2478 -0.228481 -159.005 79
+send_character_message 1 "set_torso_target 16.2639 0.396853 -157.698 0"
+send_character_message 1 "set_head_target 15.5672 0.236146 -160.101 1"
+set_cam 15.9384 0.27536 -157.867 0 18.2 0 46.9996
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 15.5404 -0.00855884 -160.164 1"
+send_character_message 1 "set_torso_target 15.9298 -0.662689 -159.645 1"
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch_lethal.anm\""
+set_cam 15.6951 0.427705 -160.093 0 165.01 0 46.9996
+say 1 "Ghost" "... черт."
+send_character_message 1 "set_head_target 15.5907 0.241021 -160.081 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_torso_target 15.962 -0.336168 -159.195 0"
+say 1 "Ghost" "Он застрял. [wait 0.5]Не быть в состоянии использовать это."

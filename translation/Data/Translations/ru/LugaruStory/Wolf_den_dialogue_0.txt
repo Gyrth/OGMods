@@ -1,0 +1,16 @@
+#name "Turner"
+#participants 1
+set_character_pos 1 -19.1337 22.7506 46.6303 -21
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_eye_dir -22.7496 22.7273 44.3305 1"
+set_cam -20.3324 23.5726 45.0414 -12.83 -118.11 -3.55 66.8763
+say 1 "Turner" "Я сделал это здесь до пепла-- [wait 0.2]не так много времени."
+send_character_message 1 "set_eye_dir -22.7496 22.7273 44.3305 1"
+set_character_pos 1 -19.1337 22.7506 46.6303 21
+set_cam 14.1175 11.2376 70.0693 -5.58 -167.03 -0.86 66.8763
+say 1 "Turner" "Щенки находятся здесь. [wait 0.2]Хорошо."
+send_character_message 1 "set_head_target -18.225 22.67 44.3218 1"
+set_character_pos 1 -19.5188 22.7506 45.545 49
+send_character_message 1 "set_eye_dir -17.9227 22.6255 45.3783 1"
+set_cam -19.7715 22.916 44.4529 -4.85 -144.91 -2.9 66.8763
+say 1 "Turner" "Слишком плохо золы не здесь, чтобы увидеть это."

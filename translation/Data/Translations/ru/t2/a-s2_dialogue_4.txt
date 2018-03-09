@@ -1,0 +1,60 @@
+#name "Beat"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 -192.839 -59.0584 -3.21288 -56
+send_character_message 2 "set_animation \"Data\Animations\wowanothersit.anm\""
+send_character_message 2 "set_eye_dir -191.331 -58.6865 -0.909704 1"
+send_character_message 2 "set_head_target -191.625 -58.7637 -1.26762 1"
+set_character_pos 1 -213.035 -51.7934 10.2524 128
+send_character_message 1 "set_eye_dir -192.675 -58.7863 -3.02874 1"
+send_character_message 1 "set_torso_target -192.003 -59.3947 -1.91357 0"
+send_character_message 1 "set_head_target -192.318 -58.7607 -2.45619 1"
+set_cam -192.504 -58.918 -2.18654 0 13.24 0 42.9196
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 2 "Jairo" "Ты невредимым?"
+set_character_pos 1 -191.197 -59.5056 -0.717343 128
+send_character_message 2 "set_head_target -191.333 -58.6532 -1.23329 1"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_head_target -192.702 -59.0966 -2.94662 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+set_cam -192.079 -58.7409 -1.09526 0 -106.94 0 42.9196
+say 1 "Ghost" "О, да [wait 0.3]Все нормально. [wait 0.5]Спасибо за помощь, [wait 0.3]Кстати."
+send_character_message 2 "set_torso_target -192.296 -59.2727 -2.74351 1"
+send_character_message 2 "set_head_target -191.288 -58.8362 -1.1371 1"
+set_cam -192.016 -59.2159 -4.09902 36.06 146.41 0.16 34.1131
+say 2 "Jairo" "...[wait 0.3]Призрак, [wait 0.3]У меня есть план."
+send_character_message 1 "set_head_target -192.702 -58.6262 -2.94662 1"
+send_character_message 1 "set_torso_target -191.61 -59.6422 -1.51681 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -192.016 -59.2159 -4.09902 36.06 146.41 0.16 34.1131
+send_character_message 2 "set_head_target -193.484 -56.4317 1.08272 1"
+send_character_message 2 "set_torso_target -192.362 -58.7011 -2.61805 1"
+send_level_message "set_camera_dof 0.3 6 1 0 0 0"
+say 2 "Jairo" "Вам нужно будет ввести храм на самом верху башни, Крит. [wait 0.5]Будьте осторожны, что вы не попадают."
+send_character_message 1 "set_head_target -192.702 -58.4103 -2.94662 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam -190.958 -58.817 -2.40084 0.51 168.65 -0.13 34.1131
+send_character_message 2 "set_head_target -191.461 -58.6753 -1.0818 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Что? [wait 0.3]Почему?"
+send_character_message 2 "set_head_target -191.461 -58.5056 -1.0818 1"
+send_character_message 2 "set_torso_target -192.362 -58.3156 -2.61805 1"
+set_cam -192.717 -58.332 -2.13953 -0.53 4.45 -0.01 34.1131
+say 2 "Jairo" "Вы увидите, как только вы получите на другую сторону. [wait 0.3]Вы будете земли на окраине леса."
+send_character_message 2 "set_torso_target -192.404 -58.5611 -2.49179 1"
+send_character_message 2 "set_head_target -191.865 -58.5688 -0.881494 1"
+say 2 "Jairo" "После того, как вы там, [wait 0.3]Вы будете проинформированы вам на то, что мы будем делать."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_head_target -193.441 -58.5322 -0.276494 1"
+send_character_message 1 "set_torso_target -191.61 -59.6422 -1.51681 0"
+set_character_pos 1 -191.197 -59.4953 -0.717343 -126
+send_character_message 2 "set_head_target -191.372 -58.6767 -1.0923 1"
+send_character_message 2 "set_torso_target -192.233 -58.5381 -2.51731 1"
+say 2 "Jairo" "Скоро увидимся."
+send_character_message 1 "set_head_target -192.852 -56.2255 2.6895 1"
+set_cam -191.066 -59.5251 -1.80309 38.57 160.61 2.66 34.1131
+send_level_message "set_camera_dof 0.3 6 1 0 0 0"
+say 1 "Ghost" "..."

@@ -1,0 +1,43 @@
+#name "BarracksCutscene"
+#participants 3
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+send_character_message 2 "set_torso_target 14.6072 -1.36606 0.656699 0.0159942"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 2 "set_head_target 14.8285 -1.12387 0.965447 0.883795"
+send_character_message 1 "set_head_target 15.3336 -1.23041 0.757575 1"
+set_character_pos 2 15.5675 -1.78699 0.593721 -142
+set_character_pos 1 15.7763 -1.7918 1.56181 133
+set_cam 14.4329 -0.987662 0.473075 -5.78 -113.45 0 90
+say 1 "Midnight" "Тернер! Там было сообщение скрытые в еду сегодня. Записка от кто-то назвал небо."
+send_character_message 2 "set_head_target 15.3772 -1.53451 1.4087 0.883795"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Turner" "Показать."
+send_character_message 1 "set_head_target 14.683 -1.28471 1.04664 1"
+say 1 "Midnight" "Вы шутите? Я уничтожил его. Я не хочу попасть с что-то подобное."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Turner" "Ты что?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 15.4867 -1.12791 0.654499 1"
+say 1 "Midnight" "Не волнуйтесь, я запомнил его впервые. Она говорит, она работает с повстанцами в городе, и она может помочь вам избежать. "
+send_character_message 2 "set_head_target 15.3772 -0.860758 1.4087 0.883795"
+set_character_pos 1 15.7763 -1.7828 1.56181 133
+say 2 "Turner" "Каким образом?"
+set_character_pos 1 15.7763 -1.76484 1.56181 133
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 1 "Midnight" "Бойцы, которые выиграли три Арена шоу вынуждены поединок против нефрита, в садах аметист. Она говорит, если вы сделать это так далеко, она может получить вас"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 2 "set_head_target 15.0511 -1.38676 1.65141 0.883795"
+set_character_pos 1 15.7763 -1.76484 1.56181 133
+send_character_message 2 "set_head_target 14.4793 -1.43403 0.88737 0.883795"
+say 2 "Turner" "Вы думаете, что аметист будет там смотреть дуэль? Если я могу убить ее..."
+send_character_message 1 "set_head_target 13.9423 -1.12791 1.52615 1"
+say 1 "Midnight" "Вы будете просто посчастливилось сделать баллотироваться на двери, Тёрнер. Не в свои сани не садись."
+send_character_message 2 "set_head_target 15.4763 -1.1066 1.5596 0.883795"
+set_character_pos 2 15.5675 -1.78699 0.593721 -142
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Turner" "Все или ничего. Если мы убиваем аметист, все меняется."
+say 3 "Stonewall" "Надеюсь, вам понравилась ваша последняя трапеза. Повезло, ты вверх."
+send_character_message 2 "set_torso_target 14.5528 -1.36606 1.34649 1"
+send_character_message 2 "set_head_target 15.4763 -1.55497 1.5596 0.883795"
+say 2 "Turner" "Один вниз, два идти."
+send_global_message "levelwin"

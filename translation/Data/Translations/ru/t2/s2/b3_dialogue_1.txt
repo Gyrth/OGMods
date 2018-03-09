@@ -1,0 +1,18 @@
+#name "Note-Sighting"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 102.661 -11.9977 -167.48 142
+send_character_message 1 "set_head_target 102.109 -11.7565 -167.981 1"
+set_cam 103.217 -11.5485 -169.022 0 142.79 0 51.151
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Древний записку. [wait 0.5]Интересно, сколько лет это."
+set_character_pos 1 102.661 -12.0549 -167.48 142
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 101.414 -11.4191 -167.853 0 -112.73 0 51.151
+say 2 "Note" "Сегодня я увидел самых необычных событий."
+say 2 "Note" "Гражданин, [wait 0.3]кто, как представляется, вчера, были совершенно нормально и здравом уме [wait 0.3]по чем-то невидимым для наших глаз."
+say 2 "Note" "Я бы побежал читать наши консультанты пересказы ему- [wait 0.3]никогда не верить шепчет в лесу, [wait 0.3]как они будут вести вас в заблуждение- [wait 0.3]но я был глуп."
+say 2 "Note" "Я опасалась за свою собственную жизнь, [wait 0.3]и, как следствие, [wait 0.3]один из нас был проглатывать целиком духами, жилище среди деревьев."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Я должен говорить с советником по этому поводу. [wait 0.5]Я не могу получить его из моего разума.

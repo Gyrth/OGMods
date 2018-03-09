@@ -1,0 +1,49 @@
+#name "Win"
+#participants 4
+send_level_message "music_layer_override 0"
+send_character_message 1 "empty_hands"
+send_character_message 1 "set_head_target 49.1152 -30.2131 83.803 1"
+send_character_message 4 "set_head_target 47.0481 -25.8023 120.872 0.0523647"
+send_character_message 3 "set_head_target 49.0036 -25.8634 121.599 0.0365451"
+send_character_message 2 "set_head_target 50.6724 -25.4578 121.182 0"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+set_character_pos 4 43.4694 -26.6459 121.156 0
+set_character_pos 3 46.276 -26.32 123.36 120
+set_character_pos 2 45.0334 -26.5305 123.684 72
+set_character_pos 1 43.9894 -26.5919 122.345 -4
+set_cam 47.2708 -25.9324 118.714 0 144.73 0 90
+send_character_message 2 "set_head_target 45.125 -26.2098 121.65 1"
+send_character_message 3 "set_head_target 45.0706 -26.2589 122.532 1"
+send_character_message 4 "set_head_target 44.8055 -26.2379 121.362 1"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_worriedpose_1.anm\""
+set_cam 53.681 -29.4498 90.8302 0 35.05 0 47.2607
+set_character_pos 3 45.9473 -26.3647 123.056 156
+set_character_pos 4 44.25 -26.5277 123.205 44
+set_character_pos 1 44.0624 -26.5919 122.363 29
+set_character_pos 2 45.1984 -26.481 123.226 119
+set_character_pos 1 53.1318 -29.6561 89.0468 -126
+send_level_message "set_camera_dof 0 0 0 0.3 3 2"
+say 1 "Turner" "Я думаю, что я должна быть безопасной сейчас... время встретиться с моими друзьями."
+send_character_message 1 "set_head_target 44.3109 -25.7112 123.181 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 43.9894 -26.5919 122.345 -4
+set_cam 46.1584 -26.2029 121.38 0 144.73 0 90
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 1 "Turner" "Аметист не хостинг каких-либо более сражения арены."
+send_character_message 2 "set_head_target 44.0253 -25.7206 122.303 1"
+say 2 "Sky" "Мне удалось освободить обхода и других заключенных в хаос, но мы должны выбраться отсюда."
+send_character_message 3 "set_head_target 45.2112 -25.7483 123.274 1"
+say 3 "Crawl" "Дворяне кошка не будут счастливы о смерти одного из своих собственных. Некоторые из них ненавидели аметист, но они не могут выпускать такое оскорбление остаются без ответа."
+send_character_message 4 "set_head_target 45.4761 -25.6783 123.093 1"
+say 4 "Sun" "Мы можем перестрелка с их охотников, но мы не можем стоять до полной военной экспедиции. Кролики Луны собираемся быть вырезаны."
+send_character_message 2 "set_head_target 44.249 -25.7445 123.101 1"
+say 2 "Sky" "Существует только одно место, мы можем перейти к действительно безопасными, но он не будет легким."
+send_character_message 4 "set_head_target 45.1066 -26.3549 121.8 1"
+say 4 "Sun" "Вы хотите принять их в святилище? Twinleafs никогда не позволит ему."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sky" "Мы просто должны убедить их. Собак будет в состоянии найти нас нигде."
+send_character_message 1 "set_head_target 45.5091 -25.8683 121.112 1"
+send_character_message 3 "set_head_target 45.227 -25.7483 123.296 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Поехали."
+send_global_message "levelwin"

@@ -1,0 +1,53 @@
+#name "Pounce"
+#participants 9
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 9
+set_dialogue_voice 3 9
+set_dialogue_voice 4 9
+set_dialogue_voice 5 9
+set_dialogue_voice 6 9
+set_dialogue_voice 7 9
+set_dialogue_voice 8 9
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+set_character_pos 7 19.8237 -2.56462 84.0984 -180
+set_character_pos 6 -15.1137 -2.58973 51.7671 0
+set_character_pos 5 2.87417 -11.0589 30.8362 -90
+set_character_pos 4 2.41225 -11.326 100.637 90
+set_character_pos 3 -23.3844 -0.227938 81.3359 0
+set_character_pos 2 28.9122 -0.183367 58.5676 180
+set_character_pos 1 2.49 -5.85942 132.83 -90
+set_cam 1.20366 -5.26777 131.314 0 -150.88 0 40.4499
+say 1 "Ghost" "Эта дверь разблокирована. Я должен быть в состоянии пройти через..."
+send_character_message 7 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+send_character_message 3 "set_head_target -13.3714 -1.03387 84.335 1"
+send_character_message 7 "set_head_target -16.1039 -0.105102 84.8307 1"
+set_character_pos 7 -11.2399 -2.56462 84.0974 -180
+set_character_pos 3 -18.0831 -0.514573 84.8154 0
+set_cam -20.4072 0.703259 86.1458 -17.24 -68.5 0 40.4499
+say 2 "???" "Alue, preu uina erua."
+send_character_message 1 "set_animation \"Data\Animations\stealthobserve.anm\""
+set_character_pos 1 -1.36642 -5.83038 118.305 90
+set_cam -2.49918 -5.77792 115.644 0 -157.35 -0.07 30.075
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "... Арлисс охранников!"
+send_character_message 7 "set_head_target -16.3807 -0.288836 84.4296 1"
+send_character_message 7 "set_animation \"Data\Animations\r_dialogue_thoughtful.anm\""
+set_cam -12.3144 -2.08858 86.3079 0.05 -20.05 0.05 30.075
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 7 "????" "Uerta Брин uina eai uaoi fuiot? Juerta?"
+send_character_message 1 "set_head_target -3.79781 -4.69538 113.232 1"
+send_character_message 1 "set_animation \"Data\Animations\r_crouch.anm\""
+set_cam -0.359866 -5.83659 119.716 5.2 24.51 0.07 30.075
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+say 1 "Ghost" "... Я угадываю что они не знают, что я здесь."
+send_character_message 1 "set_head_target -0.963989 -4.84645 113.582 1"
+send_character_message 1 "set_torso_target -0.547421 -5.86392 116.585 1"
+set_cam 1.19636 -5.22872 117.51 -0.02 101.69 0.22 30.075
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_character_pos 4 2.40328 -11.326 92.744 -90
+set_character_pos 3 -23.3515 -0.218978 81.3281 0
+set_character_pos 7 19.8074 -2.56861 84.0883 -180
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Я должен заботиться о них..."

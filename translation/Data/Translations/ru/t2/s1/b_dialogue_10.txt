@@ -1,0 +1,18 @@
+#name "Note-Scout"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_character_pos 1 86.6623 -62.7353 303.059 170
+send_character_message 1 "set_head_target 85.9736 -62.3514 302.724 1"
+set_cam 87.3575 -62.1744 302.299 0 118.82 0 65.8249
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Набор нот от Cinderbreathe scout..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 85.9205 -62.1048 303.616 0 -32.08 0 65.8249
+say 2 "Note" "Эти основания колонии так странно... [wait 0.3]они уже больше разнообразия в местности чем весь континент рядом с нами."
+say 2 "Note" "Лес, [wait 0.3]пустыня, [wait 0.3]Гора, [wait 0.3]тундра... [wait 0.5]все, но я видел болото. [wait 0.5]Он не чувствует себя естественно, [wait 0.3]но затем снова, [wait 0.3]Здесь ничего не делает."
+say 2 "Note" "Каждый основных Хилл, котор мы come across обычно имеет множество эти странные каменные фонари. [wait 0.5]Я не могу помочь, но чувствую, что я являюсь следят."
+say 2 "Note" "Мы находимся в участок пустыни прямо сейчас. [wait 0.5]Древние руины сделать для хорошей достопримечательности, [wait 0.3]Но черт возьми, если они не пыльно."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Просто спать, эти вещи, [wait 0.3]Мне приходится иметь дело с вытирая песок... [wait 0.5]скорее всего нигде вблизи, как плохо, как Оран, [wait 0.3]Хотя."

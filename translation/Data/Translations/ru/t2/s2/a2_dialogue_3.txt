@@ -1,0 +1,16 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -192.535 32.5177 190.25 12
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_torso_target -191.633 32.9047 189.922 0"
+send_character_message 1 "set_head_target -181.267 31.5434 187.719 1"
+set_cam -195.268 33.2424 191.345 -4.18 -74.52 0 26.6102
+send_level_message "set_camera_dof 0.3 12 9 0 0 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -181.358 32.5555 185.969 1"
+say 1 "Ghost" "Я никогда не был это рядом с пляжем раньше."
+send_character_message 1 "set_head_target -183.066 32.7361 182.183 1"
+set_cam -194.374 33.3503 192.502 -4.99 -49.6 -0.13 37.0615
+say 1 "Ghost" ".. но я должен держать мои глаза на задаче под рукой."

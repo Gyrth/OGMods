@@ -1,0 +1,88 @@
+#name "Kaja"
+#participants 3
+set_character_pos 2 53.5453 -50.8309 237.587 -165
+send_character_message 2 "set_animation \"Data/Animations/r_gardening.anm\""
+set_character_pos 1 53.6147 -51.0496 239.32 106
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_head_target 53.7416 -50.0404 238.174 1"
+set_cam 53.1316 -50.2762 240.563 0 -6.08 0 40.5977
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+say 1 "Amos" "Эй Кая. [wait 0.5]Отель Bijou сказал мне, что вам нужна помощь здесь."
+send_character_message 2 "set_head_target 53.6122 -50.1246 239.192 1"
+send_character_message 2 "set_torso_target 53.0283 -50.6571 238.048 0"
+say 2 "Kaja" "Да. [wait 0.5]Амос, [wait 0.3]Правильно?"
+send_character_message 2 "set_torso_target 53.0283 -50.4888 238.048 1"
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+say 2 "Kaja" "Это будет ваш первый раз многих в этих областях. [wait 0.5]Вы из Preuwyn, право?"
+send_character_message 1 "set_torso_target 53.3995 -50.6886 238.468 1"
+say 1 "Amos" "Да. [wait 0.5]Город Cinderbreathe."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_character_pos 1 53.6147 -51.0496 239.32 106
+set_cam 52.3344 -49.9817 237.37 0 -108.17 0 40.5977
+say 2 "Kaja" "OOF. [wait 0.5]Мои соболезнования."
+send_character_message 1 "set_torso_target 53.5762 -50.6241 238.493 1"
+set_cam 54.5985 -50.3173 238.191 0 129.4 0 43.4515
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Amos" "У меня было время, чтобы подумать, [wait 0.3]Прекрасно. [wait 0.5]Что мы здесь делаем?"
+set_cam 52.2765 -49.9557 237.867 0 -87.52 0 43.4515
+send_character_message 1 "set_torso_target 53.5762 -50.6241 238.493 0"
+set_character_pos 1 53.6147 -51.0496 239.32 -172
+send_character_message 2 "set_animation \"Data/Animations/r_gardening.anm\""
+send_character_message 2 "set_torso_target 53.0283 -50.4888 238.048 0"
+send_character_message 2 "set_head_target 52.8518 -49.8005 238.231 1"
+say 2 "Kaja" "Нужно посадить остальной части этих семян перед дождем ногами; [wait 0.3]увидеть облака?"
+send_character_message 1 "set_animation \"Data/Animations/r_gardening.anm\""
+send_character_message 2 "set_head_target 52.9984 -50.1644 238.611 1"
+set_cam 56.9899 -50.2967 237.12 0 111.77 0 43.4515
+say 1 "Amos" "Похоже, это будет хороший урожай."
+send_character_message 2 "set_head_target 53.022 -50.0837 238.916 1"
+say 2 "Kaja" "Как Lugaru лечения вы?"
+set_cam 52.7457 -50.2297 240.775 0 -19.02 0 32.5652
+say 1 "Amos" "Ошибка укусов [wait 0.3]потоотделение под этот балахон..."
+send_character_message 2 "set_torso_target 53.0283 -50.4888 238.048 1"
+set_character_pos 2 53.5453 -50.6756 237.587 -165
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 2 "Kaja" "Хех. [wait 0.5]Мальчик города."
+send_character_message 2 "set_animation \"Data/Animations/r_gardening_offset.anm\""
+send_character_message 2 "set_head_target 53.022 -50.0837 238.916 0"
+send_character_message 2 "set_torso_target 53.0283 -50.4888 238.048 0"
+say 2 "Kaja" "...[wait 0.3]Извините."
+set_cam 52.941 -50.2391 237.686 0 -156.42 0 32.5652
+send_character_message 1 "set_torso_target 52.9436 -50.6241 239.004 1"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+say 1 "Amos" "Я говорил тебе [wait 0.3]Прекрасно. [wait 0.5]Почему вы извиняться так много?"
+send_character_message 1 "set_head_target 53.1888 -50.0005 238.142 1"
+send_character_message 2 "set_head_target 53.6073 -50.1149 239.159 1"
+set_cam 52.1769 -49.8558 235.971 -6.95 -151.61 0 32.5652
+say 2 "Kaja" "Ну... [wait 0.3]Город Cinderbreathe, [wait 0.3]он..."
+set_cam 55.9865 -50.3649 240.921 -0.02 48.18 -0.01 32.5652
+send_character_message 1 "set_head_target 53.2446 -49.8347 238.175 1"
+say 1 "Amos" "Да, [wait 0.3]он упал... [wait 0.3]но я не знаю, кто стоит говорить там. [wait 0.5]Только не это."
+set_cam 52.1524 -49.9231 238.241 0 -70.43 0.02 32.5652
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+say 2 "Kaja" "Да, [wait 0.3]но... [wait 0.3]чувствуете вы и Бижу... [wait 0.3]одиноко?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+set_cam 52.8972 -50.2177 238.081 0.02 -148.1 0 32.5652
+say 1 "Amos" "Нет...[wait 0.3]?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+set_cam 62.0132 -50.5321 234.83 3.41 113.05 -0.02 32.5652
+say 2 "Kaja" "Ну, [wait 0.5]ты только те, Cinderbreathe кровь."
+send_character_message 2 "set_torso_target 53.0283 -50.4888 238.048 1"
+send_character_message 1 "set_head_target 52.6776 -50.4331 239.541 1"
+send_character_message 1 "set_torso_target 52.9436 -50.6241 239.004 0"
+say 1 "Amos" "...[wait 0.3]Понятия не имел."
+send_character_message 2 "set_animation \"Data/Animations/r_gardening.anm\""
+send_character_message 2 "set_head_target 53.6073 -50.1149 239.159 0"
+send_character_message 2 "set_torso_target 53.0283 -50.4888 238.048 0"
+send_character_message 1 "set_head_target 52.6776 -50.4331 239.541 0"
+send_character_message 1 "set_animation \"Data/Animations/r_gardening_offset.anm\""
+set_cam 52.34 -50.2641 241.319 0.04 -23.61 0.07 32.5652
+say 2 "Kaja" "[wait 0.3]Извините еще раз."
+send_character_message 1 "set_head_target 53.2204 -50.0429 237.787 1"
+say 1 "Amos" "Вам не придется жалеть. [wait 0.5]Давайте просто заботиться о этом урожая."
+set_cam 135.068 -48.8322 315.877 -0.05 40.8 0.07 83.831
+send_character_message 1 "set_head_target 53.2204 -50.0429 237.787 0"
+say 0 "" "..."
+fade_to_black 1
+send_global_message "levelwin"

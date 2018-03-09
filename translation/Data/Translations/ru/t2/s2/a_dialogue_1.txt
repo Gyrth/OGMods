@@ -1,0 +1,180 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 24.0055 17.7001 -60.1403 -120
+send_character_message 2 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 2 "set_eye_dir 23.0231 18.127 -57.1751 1"
+send_character_message 2 "set_head_target 23.0126 18.1513 -56.8649 1"
+set_character_pos 1 22.9108 17.509 -56.4484 88
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir 23.4305 18.2254 -58.5706 1"
+send_character_message 1 "set_head_target 23.5552 18.1025 -58.9466 1"
+set_cam 25.8347 17.8983 -53.3206 0 28.21 0 38.901
+send_level_message "set_camera_dof 0 0 0 0.3 10 2"
+say 1 "Ghost" "Ох, [wait 0.2]Хайро-"
+send_character_message 1 "set_head_target 23.5552 18.1025 -58.9466 1"
+send_character_message 1 "set_eye_dir 23.4305 18.2254 -58.5706 1"
+set_character_pos 2 24.0055 17.7001 -60.1403 -120
+set_cam 23.9597 17.7139 -58.548 0 10.18 0 27.7797
+send_character_message 2 "set_head_target 23.0126 18.3748 -56.865 1"
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 2 "Jairo" "Призрак, [wait 0.3]Вам нужно держать ваш голос."
+set_cam 23.9597 17.7139 -58.548 0 10.18 0 27.7797
+send_character_message 1 "set_head_target 23.5552 18.1025 -58.9466 1"
+send_character_message 1 "set_eye_dir 23.4305 18.2254 -58.5706 1"
+set_character_pos 2 24.0055 17.7001 -60.1403 -120
+send_character_message 2 "set_head_target 21.7172 18.0897 -58.2819 1"
+say 2 "Jairo" "Есть враги повсюду."
+set_cam 23.9597 17.7139 -58.548 0 10.18 0 27.7797
+send_character_message 1 "set_head_target 23.5552 18.1025 -58.9466 1"
+send_character_message 1 "set_eye_dir 23.4305 18.2254 -58.5706 1"
+set_character_pos 2 24.0055 17.7001 -60.1403 -120
+send_character_message 2 "set_head_target 22.8456 18.1093 -57.4368 1"
+say 2 "Jairo" "Они были осведомлены о вашем присутствии, [wait 0.25]по меньшей мере."
+send_character_message 2 "set_head_target 22.8456 18.1093 -57.4368 1"
+set_character_pos 2 24.0055 17.7001 -60.1403 -120
+send_character_message 1 "set_eye_dir 21.4809 18.2254 -59.5519 1"
+send_character_message 1 "set_head_target 21.4336 18.1025 -59.1023 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+set_cam 24.137 18.0278 -57.6323 0 130.18 0 24.01
+say 1 "Ghost" "Вы имеете в виду...?"
+send_character_message 2 "set_head_target 22.8456 18.1093 -57.4368 1"
+set_character_pos 2 24.0055 17.7001 -60.1403 -120
+send_character_message 1 "set_eye_dir 23.8277 18.2254 -59.0169 0.776612"
+send_character_message 1 "set_head_target 23.6879 18.1187 -58.4212 1"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 23.2153 18.0278 -54.6715 0 -0.02 0 27.7797
+send_level_message "set_camera_dof 0 0 0 0.3 8 1"
+say 2 "Jairo" "Я насчитал четыре врагов, [wait 0.3]и почти каждый из них вооружены."
+set_cam 23.2153 18.0278 -54.6715 0 -0.02 0 27.7797
+send_character_message 1 "set_head_target 23.6879 18.1187 -58.4212 1"
+send_character_message 1 "set_eye_dir 23.8277 18.2254 -59.0169 0.776612"
+set_character_pos 2 24.0055 17.7001 -60.1403 -120
+send_character_message 2 "set_head_target 22.8428 18.5441 -57.4376 1"
+say 2 "Jairo" "Существует еще один носить доспехи."
+send_character_message 2 "set_head_target 22.8428 18.5441 -57.4376 1"
+set_character_pos 2 24.0055 17.7001 -60.1403 -120
+send_character_message 1 "set_head_target 23.6879 18.3828 -58.4212 1"
+send_character_message 1 "set_eye_dir 23.8277 18.2254 -59.0169 0.000392348"
+set_cam 24.171 18.1051 -56.8317 0 104.85 0 25.2593
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 1 "Ghost" "Один из [wait 0.1]Эти [wait 0.1]ребята..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 24.171 18.1051 -56.8317 0 104.85 0 25.2593
+send_character_message 2 "set_head_target 22.8428 18.5441 -57.4376 1"
+set_character_pos 2 24.0055 17.7001 -60.1403 -120
+send_character_message 1 "set_eye_dir 23.8471 17.9625 -59.8174 1"
+send_character_message 1 "set_head_target 23.6879 18.2207 -58.4212 1"
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 1 "Ghost" "Я буду держать глаз."
+send_character_message 2 "set_head_target 23.0284 18.199 -56.8975 1"
+set_character_pos 2 24.0055 17.493 -60.1403 -120
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam 24.353 18.2004 -58.3771 0 14.85 0 25.2593
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 2 "Jairo" "Вы лучше быть хорошо на разоружение."
+send_character_message 1 "set_head_target 23.6873 18.2198 -58.4248 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_eye_dir 23.0231 18.127 -57.1751 0.895154"
+set_cam 24.353 18.2004 -58.3771 0 14.85 0 25.2593
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_head_target 22.1686 18.1383 -59.1881 1"
+say 2 "Jairo" "Если необходимо, вы вероятно можете скрыть в кустах."
+send_character_message 2 "set_head_target 22.1686 18.1383 -59.1881 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_eye_dir 23.0231 18.127 -57.1751 0.895154"
+send_character_message 1 "set_head_target 21.1334 18.8755 -59.4278 1"
+set_cam 23.0851 18.0759 -57.9001 0 176.72 0 25.2593
+say 1 "Ghost" "...[wait 0.2]Есть ли шлюз поблизости?"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_eye_dir 23.0231 18.127 -57.1751 0.895154"
+set_cam 23.9559 18.1793 -61.3693 0 174.83 0 25.2593
+send_character_message 2 "set_head_target 23.1156 18.3477 -56.8168 1"
+send_character_message 1 "set_head_target 23.8184 18.0814 -59.4231 1"
+send_level_message "set_camera_dof 0 0 0 0.3 8 1"
+say 2 "Jairo" "Нет. [wait 0.3]Ты здесь по другой причине."
+send_character_message 1 "set_head_target 23.8184 18.0814 -59.4231 1"
+send_character_message 2 "set_head_target 23.1156 18.3477 -56.8168 1"
+set_cam 23.9559 18.1793 -61.3693 0 174.83 0 25.2593
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_eye_dir 23.0231 18.127 -57.1751 0.895154"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_thoughtful.anm\""
+say 1 "Ghost" "?"
+send_character_message 1 "set_head_target 23.8184 18.0814 -59.4231 1"
+send_character_message 2 "set_head_target 23.1156 18.3477 -56.8168 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_eye_dir 23.0231 18.127 -57.1751 0.895154"
+set_cam 24.3063 18.2093 -58.7049 0 18.96 0 28.5412
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 2 "Jairo" "Необходимо устранить каждый один враг здесь."
+set_cam 24.3063 18.2093 -58.7049 0 18.96 0 28.5412
+send_character_message 1 "set_head_target 23.8184 18.0814 -59.4231 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_head_target 22.8718 18.8203 -57.5336 1"
+send_character_message 2 "set_eye_dir 23.0231 18.127 -57.1751 1"
+say 2 "Jairo" "Но есть одна важная вещь."
+send_character_message 2 "set_head_target 22.8718 18.8203 -57.5336 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 1 "set_head_target 23.8353 18.2723 -59.4105 1"
+set_cam 23.6869 18.1092 -57.4067 0 138.96 0 28.5412
+say 1 "Ghost" "[wait 0.1]И что это такое?"
+send_character_message 1 "set_head_target 23.8353 18.2723 -59.4105 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_head_target 23.021 18.0749 -56.8077 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam 23.4862 18.1663 -62.275 0 -175.18 0 27.6383
+send_level_message "set_camera_dof 0 0 0 0.3 8 1"
+say 2 "Jairo" "Вам нужно оставить по крайней мере один живой."
+set_cam 23.4862 18.1663 -62.275 0 -175.18 0 27.6383
+send_character_message 2 "set_head_target 23.021 18.0749 -56.8077 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 1 "set_head_target 24.4375 18.0671 -58.8284 1"
+say 2 "Jairo" "Вы можете убить остальных."
+set_cam 23.4862 18.1663 -62.275 0 -175.18 0 27.6383
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_head_target 23.021 18.2429 -56.8077 1"
+send_character_message 1 "set_head_target 23.801 18.2449 -59.0986 1"
+say 2 "Jairo" "На самом деле [wait 0.1]Вы [wait 0.05]следует [wait 0.05]убить остальных."
+send_character_message 1 "set_head_target 23.801 18.2449 -59.0986 1"
+set_cam 23.4862 18.1663 -62.275 0 -175.18 0 27.6383
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_head_target 23.021 17.9576 -56.8077 1"
+say 2 "Jairo" "Но просто оставить один нокаут."
+send_character_message 2 "set_head_target 23.021 17.9576 -56.8077 1"
+send_character_message 1 "set_head_target 23.801 18.2449 -59.0986 1"
+set_cam 23.4862 18.1663 -62.275 0 -175.18 0 27.6383
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Ли мы допрашивать их, [wait 0.3]или что-то?"
+send_character_message 1 "set_head_target 23.801 18.2449 -59.0986 1"
+set_cam 23.4862 18.1663 -62.275 0 -175.18 0 27.6383
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_head_target 23.021 17.7971 -56.8077 1"
+say 2 "Jairo" "Что мы являемся."
+send_character_message 2 "set_head_target 23.021 17.7971 -56.8077 1"
+send_character_message 1 "set_head_target 23.801 18.2449 -59.0986 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+set_cam 27.4227 16.1142 -119.909 0 20.65 0 70
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+say 2 "Jairo" "Когда вы закончите с ними все..."
+send_character_message 2 "set_head_target 23.021 17.7971 -56.8077 1"
+send_character_message 1 "set_head_target 23.801 18.2449 -59.0986 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+set_cam 22.0532 16.8078 -164.339 0 159.26 0 80
+say 2 "Jairo" "Перейдите к статуе уединенный кролика. [wait 0.2]Арки."
+send_character_message 1 "set_head_target 23.801 18.2449 -59.0986 1"
+send_character_message 1 "set_eye_dir 23.847 17.9625 -59.8175 1"
+send_character_message 2 "set_head_target 23.021 18.1589 -56.8077 1"
+set_cam 24.2808 18.2798 -59.0823 0 17.45 0 27.6383
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+say 2 "Jairo" "Приступить к работе."
+send_character_message 1 "set_eye_dir 20.0969 17.9625 -61.8301 1"
+send_character_message 1 "set_head_target 21.3311 18.2449 -60.5773 1"
+set_cam 23.8884 18.0651 -57.592 0 141.21 0 27.6383
+say 1 "Ghost" "[wait 0.2]Правильно. [wait 0.3]Стучите один [wait 0.3]убить остальных."
+send_level_message

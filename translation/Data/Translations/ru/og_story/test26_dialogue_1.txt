@@ -1,0 +1,8 @@
+#name "End"
+#participants 1
+
+set_character_pos 1 -3.74608 -2.01827 68.6663 86
+set_cam -4.11342 -1.2843 66.5021 0 -160.69 0 90
+say 1 "Turner" "Я убил всех собак."
+say 1 "Turner" "Теперь я могу проверить базу повстанцев."
+send_global_message "levelwin"

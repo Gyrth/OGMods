@@ -1,0 +1,19 @@
+#name "Note-Architect"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 38.0803 420.149 -72.0033 -82
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 38.1103 420.621 -71.3041 1"
+set_cam 36.9619 420.657 -72.8254 0 -139.86 0 41.1643
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Несколько недавних Примечание. [wait 0.5]Должен быть написан архитектором."
+send_character_message 1 "set_head_target 38.1392 420.469 -71.3407 1"
+set_cam 37.6155 420.763 -70.7852 0 -28.15 0 41.1643
+set_character_pos 1 38.0803 420.096 -72.0033 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Я считаю себя все более заинтересованными с ростом стоимости и масштабов этой тюрьмы комплекса."
+say 2 "Note" "Я был контракт строить непроходимые крепость, но с арктические температуры, неудовлетворительных качество Черный Крит и непрекращающихся подземных толчков, которые угрожают разделить на части землю под нас я боюсь, что он будет никогда полностью не завершен."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 38.156 420.703 -71.2229 1"
+say 2 "Note" "Кошмар сделал реальностью и мой величайший позор как архитектор сможет завершить это чудовище."

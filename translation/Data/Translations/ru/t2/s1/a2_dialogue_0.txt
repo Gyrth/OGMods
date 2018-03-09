@@ -1,0 +1,31 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 15.2815 -52.3061 215.868 121
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_eye_dir 11.2197 -53.0758 208.602 1"
+send_character_message 2 "set_head_target 11.3193 -53.0819 208.742 1"
+set_character_pos 1 11.2861 -53.7211 208.665 -55
+send_character_message 1 "set_eye_dir 15.2618 -51.6524 215.846 1"
+send_character_message 1 "set_torso_target 11.5298 -53.7982 209.353 1"
+send_character_message 1 "set_head_target 15.2287 -51.6887 215.766 1"
+set_cam 11.1867 -53.2762 210.352 0 -10.57 0 41.6912
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Эй, Хайро. [wait 0.3]Получил ничего нового сказать мне?"
+send_character_message 2 "set_torso_target 14.7532 -52.5619 214.931 0"
+send_character_message 2 "set_head_target 11.4914 -53.5252 209.093 1"
+set_cam 14.6673 -51.9298 215.328 13.12 -131.76 0 41.6912
+say 2 "Jairo" "Cinderbreathe приняли уведомление о вас, [wait 0.3]и реагируют соответственно."
+send_character_message 2 "set_torso_target 14.7532 -52.5619 214.931 1"
+say 2 "Jairo" "Большинство из них теперь вооружены оружием. [wait 0.3]Видимо есть элитный солдат носить толстые металлические доспехи, [wait 0.3]но это маловероятно, что вы вскоре столкнуться с любой."
+set_character_pos 1 11.2861 -53.7211 208.665 52
+send_character_message 1 "set_eye_dir 22.8281 -52.8751 188.782 1"
+send_character_message 1 "set_head_target 16.0057 -52.6042 201.781 1"
+send_character_message 2 "set_head_target 11.9486 -53.4815 208.954 1"
+send_character_message 1 "set_torso_target 12.2453 -53.7049 208.245 1"
+set_cam 10.1981 -53.2736 212.958 -0.07 -26.23 0.26 41.6912
+send_level_message "set_camera_dof 0.3 6 1 0 0 0"
+say 1 "Ghost" "Спасибо. [wait 0.3]Я буду держать мои глаза открытым."

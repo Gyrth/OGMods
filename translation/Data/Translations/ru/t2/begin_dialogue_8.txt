@@ -1,0 +1,15 @@
+#name "NLG-ToA"
+#participants 2
+set_character_pos 1 118.193 -46.9272 250.548 -30
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_head_target 118.835 -45.7867 250.793 1"
+set_cam 115.801 -46.1937 242.262 0 -164.04 0 42.8912
+send_level_message "set_camera_dof 0 0 0 0.3 10 2"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 118.793 -45.8149 250.863 0"
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch.anm\""
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target 118.837 -45.8643 250.934 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+say 1 "Ghost" "Ну, [wait 0.5]Я мог бы также сделать то, что он говорит..."
+send_global_message "levelwin a"

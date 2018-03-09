@@ -1,0 +1,18 @@
+#name "Note-Transfer"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 20.3913 420.051 -110.579 -82
+send_character_message 1 "set_head_target 20.5423 420.633 -109.84 1"
+set_cam 18.3399 420.755 -110.735 0 -107.72 0 47.1376
+say 1 "Ghost" "Журнал передачи тюрьмы, принес гвардии."
+send_character_message 1 "set_head_target 20.5444 420.479 -109.808 1"
+set_cam 20.1248 420.737 -109.45 0 -23.8 0 47.1376
+set_character_pos 1 20.3913 420.092 -110.579 -82
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "40 Spurhelm, [wait 0.3]672. [wait 0.5]Тема задержан и находится в тюрьме основания колонии."
+say 2 "Note" "Бывший жилищного строительства будет Empry, [wait 0.3]Хотя он не хотел бы предложить его внешний вид и поведение."
+say 2 "Note" "Тема носит голубые балахон и легкие кожаные доспехи. [wait 0.5]Поскольку его будущего сотрудничества явно необходима, [wait 0.3]полосы поиска не требуется."
+say 2 "Note" "Его сестра, [wait 0.3]Отель Bijou не сообщили о его аресте. [wait 0.5]Условия содержания в тюрьмах не должно быть слишком огорчая ему, [wait 0.3]учитывая его фоне и жизни в трущобах."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Запланированная встреча с его присутствие должно выполняться закаты. [wait 0.5]Должны присутствовать по крайней мере два должностных лица. [wait 0.5]Его участие имеет важное значение."

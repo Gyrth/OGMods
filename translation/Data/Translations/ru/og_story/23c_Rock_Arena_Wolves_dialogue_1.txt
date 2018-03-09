@@ -1,0 +1,8 @@
+#name "Win"
+#participants 1
+set_character_pos 1 53.422 102.589 -57.7698 -107
+set_cam 53.5959 102.891 -56.3006 0 0 0 90
+say 1 "Turner" "Что дальше?"
+say 1 "Turner" "Аллигаторы?"
+say 1 "Turner" "Змей?"
+send_global_message "levelwin"

@@ -1,0 +1,17 @@
+#name "Note-Caravans"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -151.713 -6.4528 -34.5783 59
+send_character_message 1 "set_head_target -151.26 -6.36841 -35.2712 1"
+set_cam -153.652 -6.17921 -34.6382 0 -84.14 0 54.8223
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Древний записку. [wait 0.3]Кто знает, как долго это был здесь."
+set_cam -150.981 -5.83489 -35.1783 0 119.88 0 54.8223
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Наши фургоны был осажден каждый день теперь; [wait 0.3]в результате голодали наши пустыни аванпостов."
+say 2 "Note" "Советники не может стоять возможно для этого, [wait 0.3]и не будем; [wait 0.3]но что точно бьет нас?"
+say 2 "Note" "Волков, [wait 0.3]Несмотря на ожесточенное, [wait 0.3]умные; [wait 0.3]они позволяют нам выжить в своих собственных интересах."
+say 2 "Note" "Этот злоумышленник без всякой пощады. [wait 0.5]Кровь и кишки душ разрушенного изделия, [wait 0.3]воды и пищи."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Кем они являются, [wait 0.3]Я предпочитаю волков."

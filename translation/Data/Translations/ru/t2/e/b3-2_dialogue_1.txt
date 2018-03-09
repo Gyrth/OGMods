@@ -1,0 +1,48 @@
+#name "Escape"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.7 0.89
+set_dialogue_voice 2 11
+set_character_pos 2 -16.743 309.949 22.2113 -70
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidlearmed2.anm\""
+send_character_message 2 "set_eye_dir -17.3527 310.364 23.307 1"
+send_character_message 2 "set_torso_target -16.6378 310.881 23.1626 1"
+send_character_message 2 "set_head_target -17.0227 310.309 23.3516 1"
+set_character_pos 1 -17.3503 309.78 23.4357 13
+send_character_message 1 "set_eye_dir -16.3426 310.271 22.5657 1"
+send_character_message 1 "set_torso_target -16.6318 310.091 23.0975 1"
+send_character_message 1 "set_head_target -16.8474 310.357 22.6392 1"
+set_cam -17.193 310.357 24.2107 0 -2.68 0 46.8695
+say 1 "Amos" "Мы должны выбраться отсюда. [wait 0.3]В настоящее время."
+send_character_message 2 "set_torso_target -16.6716 309.671 22.8686 0.927191"
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidle.anm\""
+set_character_pos 2 -16.7431 309.949 22.2113 -70
+say 2 "Bijou" "[wait 0.3]Я только [wait 0.05]нужен еще один момент."
+send_character_message 2 "set_head_target -16.2142 310.135 22.9963 1"
+send_character_message 2 "set_torso_target -16.3528 309.595 22.9106 1"
+say 2 "Bijou" "[wait 0.1]Каждый шаг чувствует, как я иду к краху."
+send_character_message 2 "set_head_target -16.8798 310.312 23.2053 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+send_character_message 1 "set_torso_target -17.0838 311.353 23.202 0"
+set_character_pos 1 -17.3503 309.676 23.4357 73
+set_cam -16.7477 310.357 21.7194 0 172.78 0 38.5179
+say 1 "Amos" "[wait 0.2]Нужно ли мне нести вас?"
+send_character_message 2 "set_torso_target -16.6194 310.081 22.9294 1"
+send_character_message 2 "set_animation \"Data\Animations\r_halfwoundedidle.anm\""
+say 2 "Bijou" "[wait 0.5]Штрафа. [wait 0.3]Я буду ходить."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -16.5053 310.347 22.9846 0 24.98 0 42.0804
+send_character_message 2 "set_torso_target -16.69 311.571 22.9075 1"
+send_character_message 2 "set_animation \"Data\Animations\r_halfwoundedarmed2.anm\""
+say 2 "Bijou" "Просто дайте мне опереться на вас, и все будет в порядке."
+send_character_message 1 "set_torso_target -16.6516 310.194 23.2002 1"
+send_character_message 1 "set_head_target -16.7215 310.479 22.798 1"
+set_cam -17.0713 310.423 22.6995 0 160.7 0 42.0804
+say 1 "Amos" "Я понятия не имею, где мы должны пойти..."
+send_character_message 2 "set_head_target -17.2333 310.312 23.092 1"
+set_cam -18.2363 310.243 23.344 0 -61.87 0 42.0804
+say 2 "Bijou" "Где-то теплее."
+set_cam -36.2714 313.715 31.6031 0 -61.87 0 71.1321
+say 1 "" "..."
+send_global_message "levelwin eb4"

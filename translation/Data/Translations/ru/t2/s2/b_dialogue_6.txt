@@ -1,0 +1,17 @@
+#name "Note-Voices"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 308.276 -1.46393 -1.14145 90
+send_character_message 1 "set_head_target 308.29 -1.33387 -1.87433 1"
+set_cam 310.028 -1.06932 -2.29601 0 114.23 0 34.0902
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Древний записку. [wait 0.5]Должно быть сотни лет."
+set_cam 308.948 -0.872795 -0.238064 0 26.02 0 34.0902
+set_character_pos 1 308.276 -1.50636 -1.14145 90
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.1"
+say 2 "Note" "Голоса больно. [wait 0.5]Я чувствую себя гнев Бога, гельминтов свой путь в моем мозгу, [wait 0.3]шепчет сладкие вещи в моих ушах."
+say 2 "Note" "Я хочу дать так плохо. [wait 0.5]Он будет чувствовать себя так хорошо. [wait 0.5]Но если Бог внутри моей души, [wait 0.3]Он будет подавить все, у меня есть."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Я не хочу, чтобы в конечном итоге как Eira. [wait 0.5]Я бы скорее умереть, чем служить Бог шепчет."

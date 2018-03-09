@@ -1,0 +1,27 @@
+#name "Boss"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_torso_target -103.614 199.881 122.46 1"
+send_character_message 2 "set_head_target -105.5 200.361 123.115 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_torso_target -103.538 199.129 121.874 0"
+send_character_message 1 "set_head_target -107.081 200.391 123.095 1"
+set_cam -104.62 199.953 122.188 0 125.98 0 61.4325
+set_character_pos 2 -107.163 199.284 123.203 0
+set_character_pos 1 -105.532 199.175 123.165 -178
+send_level_message "music_layer_override 2"
+send_character_message 1 "empty_hands"
+say 2 "Thorn" "Кто... кто ты?"
+say 1 "Turner" "Те, кто слушает его сердца больше, чем его голову."
+send_character_message 2 "set_head_target -105.5 200.361 122.027 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+say 2 "Thorn" "Бьюсь об заклад, что солнце послал вас. Или ее дочь."
+send_character_message 2 "set_head_target -105.584 200.137 123.104 1"
+say 2 "Thorn" "Один раз я показать милосердия, и это заканчивается, как это. Я должен был им убит вместо просто сослан."
+send_character_message 2 "set_torso_target -103.614 199.881 122.46 0"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+say 2 "Thorn" "Я не буду делать ту же ошибку с вами."
+send_level_message "music_layer_override 4"
+make_participants_aware
+send_character_message 2 "activate"

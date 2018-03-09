@@ -1,0 +1,11 @@
+#name "Fly"
+#participants 2
+set_cam -197.317 -9.85332 95.1219 49.11 117.21 4.2 47.8781
+send_character_message 2 "set_animation \"Data/Animations/r_wolfslap.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_blockfrontko.anm\""
+send_character_message 1 "set_torso_target -247.548 85.0279 117.71 0"
+set_character_pos 2 -249.208 84.5377 117.977 9
+send_character_message 2 "set_head_target -250.74 84.4221 113.803 0.000685126"
+set_character_pos 1 -247.946 84.5123 117.649 -155
+send_character_message 1 "set_head_target -244.018 83.0213 117.959 0"
+say 3 "" "..."

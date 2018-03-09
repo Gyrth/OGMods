@@ -1,0 +1,85 @@
+#name "Meet"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 -235.128 -78.0813 -80.5965 126
+send_character_message 2 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 2 "set_eye_dir -253.168 -85.4086 -104.306 1"
+send_character_message 2 "set_torso_target -236.423 -79.5998 -82.1882 1"
+send_character_message 2 "set_head_target -239.592 -79.4318 -86.4402 1"
+set_character_pos 1 -254.286 -86.2991 -105.556 -17
+send_character_message 1 "set_eye_dir -236.22 -76.8211 -81.8022 1"
+send_character_message 1 "set_head_target -238.487 -80.1518 -84.9761 1"
+set_cam -255.927 -86.3336 -107.991 12.1 -144.32 0.4 10.9311
+send_level_message "set_camera_dof 0.3 10 1 0 0 0"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -236.131 -78.2603 -82.0842 1"
+say 1 "Ghost" "...[wait 0.5]Хайро?"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+set_cam -236.809 -77.5355 -83.2066 1.07 -146.23 0 10.9311
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 2 "Jairo" "Вы можете бороться?"
+set_cam -251.923 -85.6989 -104.333 -0.93 63.77 -0.54 10.9311
+say 1 "Ghost" "...[wait 0.5]Я думаю..."
+send_character_message 1 "set_eye_dir -236.22 -76.8211 -81.8022 0.517368"
+send_character_message 1 "set_head_target -250.202 -85.7111 -100.298 1"
+say 1 "Ghost" "Это больно, но..."
+send_character_message 1 "set_head_target -249.586 -83.5138 -100.334 1"
+set_cam -237.535 -77.4846 -79.2265 0 -56.23 1.08 10.9311
+say 2 "Jairo" "Вы должны восстановить к тому времени, вы получите там."
+send_character_message 1 "set_head_target -249.803 -83.5808 -99.7195 1"
+set_cam -233.995 -76.6427 -78.4633 -17.25 33.77 0 10.9311
+send_level_message "set_camera_dof 0.3 10 1 0 0 0"
+say 1 "Ghost" "[wait 0.5]Куда я иду?"
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 2 "Jairo" "Башня Collinpeak."
+send_character_message 2 "set_head_target -239.721 -78.7539 -86.1453 1"
+say 2 "Jairo" "У нас есть бомба."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target -239.379 -79.5414 -86.0704 1"
+say 1 "Ghost" "Что? [wait 0.5]У вас еще есть что вещь!?"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -235.299 -77.429 -82.9834 -0.61 -176.23 0.35 10.9311
+say 2 "Jairo" "Вы будете иметь, чтобы зажечь ее в Collinpeak."
+send_character_message 2 "set_head_target -239.379 -78.7973 -86.0704 1"
+say 2 "Jairo" "Вы не можете пропустить это;[wait 0.3] Это большая башня."
+send_character_message 2 "set_head_target -239.379 -79.2369 -86.0704 1"
+say 2 "Jairo" "Взрывчатые вещества находятся в мешке, [wait 0.2]Наряду с достаточно, чтобы начать огонь."
+send_character_message 2 "set_head_target -241.637 -79.2369 -82.5588 1"
+say 2 "Jairo" "Он расположен к востоку от здесь.[wait 0.2] Просто путешествия через долину."
+send_character_message 2 "set_head_target -241.316 -79.2369 -86.2925 1"
+say 2 "Jairo" "Там быть записку на входе."
+send_character_message 2 "set_head_target -241.316 -77.9224 -86.2925 1"
+say 2 "Jairo" "Она будет иметь много информации."
+set_character_pos 1 -254.442 -86.5023 -105.247 -17
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam -252.847 -85.735 -107.007 -0.21 141.06 0.67 10.9311
+send_character_message 2 "set_head_target -240.01 -79.8889 -86.7476 1"
+say 1 "Ghost" "Хайро...[wait 0.5] Знаете ли вы, что случилось со мной?"
+set_character_pos 1 -254.418 -86.5721 -105.247 -17
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam -256.411 -86.4907 -107.418 12.27 -140.11 1.25 10.9311
+send_level_message "set_camera_dof 0.3 10 1 0 0 0"
+say 2 "Jairo" "На берегу озера?"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+say 1 "Ghost" "Это зверь и Арлисс кошек..."
+set_cam -236.341 -77.5464 -82.0707 -2.09 -140.42 1.22 10.9311
+say 2 "Jairo" "Это не зверь."
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+say 2 "Jairo" "Вы должны соблюдать эти существа."
+send_character_message 2 "set_eye_dir -253.168 -85.4086 -104.306 0"
+set_cam -237.613 -77.3014 -81.053 -2.37 -98.45 -0.49 10.9311
+say 2 "Jairo" "..."
+send_character_message 2 "set_head_target -240.01 -78.6778 -86.7476 1"
+send_character_message 2 "set_eye_dir -253.168 -85.4086 -104.306 1"
+say 2 "Jairo" "Вы лучше быть на вашем пути."
+send_character_message 2 "set_head_target -240.01 -79.3926 -86.7476 1"
+say 2 "Jairo" "Просто путешествия через долину с ваш свет выкл."
+send_character_message 1 "set_head_target -249.785 -83.4715 -101.265 1"
+set_cam -256.987 -86.8944 -107.066 19.68 -127.66 1.24 9.9792
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -249.378 -85.0953 -101.802 1"
+send_global_message "levelwin newmeet"

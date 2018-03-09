@@ -1,0 +1,42 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 -185.117 19.0812 -17.2883 -44
+send_character_message 2 "set_animation \"Data\Animations\wowanothersit.anm\""
+send_character_message 2 "set_eye_dir -180.811 21.0393 -13.9864 1"
+send_character_message 2 "set_head_target -180.62 21.1995 -13.9989 1"
+set_character_pos 1 -179.415 20.3801 -12.9651 143
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_worriedpose_2.anm\""
+send_character_message 1 "set_eye_dir -184.985 19.8708 -17.1653 1"
+send_character_message 1 "set_torso_target -180.195 19.7432 -13.8759 1"
+send_character_message 1 "set_head_target -185 19.8718 -17.1909 1"
+set_cam -183.336 19.3028 -16.6927 -4.95 72.85 0.06 39.2181
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.2"
+say 2 "Jairo "Ghost."
+send_character_message 1 "set_torso_target -180.195 18.9288 -13.8759 1"
+set_cam -179.354 20.9724 -14.0832 -0.1 171.1 0.29 39.2181
+say 1 "Ghost" "..."
+send_character_message 2 "set_head_target -180.1 21.036 -12.6494 1"
+set_cam -178.882 21.2881 -12.2369 -15.06 45.84 0.01 27.0482
+send_level_message "set_camera_dof 0.3 3 0.2 0 0 0"
+say 2 "Jairo" "Есть пару тяжело бронированных охранники не далеко отсюда."
+send_character_message 2 "set_head_target -179.044 20.8196 -14.3612 1"
+say 2 "Jairo" "Вы можете признать их от Empry. [wait 0.5]Красные мундиры. [wait 0.3]Черный палаши Крит."
+send_character_message 1 "set_torso_target -180.195 18.9288 -13.8759 0"
+send_character_message 1 "set_head_target -184.927 19.2975 -17.0102 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.2"
+say 1 "Ghost" "Это звучит как их."
+set_cam -185.781 19.7435 -16.1675 2.18 -34.59 0.56 27.0482
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+say 2 "Jairo" "Они положить вверх довольно оборонительного периметра. [wait 0.5]Я не удивлюсь, если они настраиваете нечто важное."
+send_character_message 2 "set_head_target -179.67 21.1192 -12.9655 1"
+say 2 "Jairo" "Сразу же после их лагерь, [wait 0.25]Там будет только один шлюз. [wait 0.3]Вы должны знать, что делать, когда вы через него."
+send_character_message 2 "set_head_target -179.781 20.321 -13.2687 1"
+say 2 "Jairo" "Приступить к работе."
+send_character_message 1 "set_head_target -182.108 20.7044 -18.2756 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -181.129 20.6882 -13.4455 0.58 -104.22 0.04 54.2015
+say 1 "Ghost" "...[wait 0.3]Правильно."

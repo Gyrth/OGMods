@@ -1,0 +1,44 @@
+#name "Start"
+#participants 3
+send_character_message 2 "set_torso_target -192.255 32.7018 185.673 1"
+send_character_message 2 "set_head_target -191.193 33.1663 185.655 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_color 2 0.8 0.7 1
+set_dialogue_color 3 1 0.7 0.5
+set_character_pos 3 -193.712 32.4347 184.752 0
+set_character_pos 2 -192.425 32.2379 184.617 -89
+set_character_pos 1 -192.986 32.3689 186.328 20
+set_cam -194.541 33.0683 185.456 0 -82.63 0 90
+send_level_message "music_layer_override 0"
+say 3 "Slate" "А вот и мы. Windcutter. Корабль, который привел нас в этом ужасном месте."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 3 -193.712 32.4347 184.752 0
+say 1 "Turner" "Это красиво."
+send_character_message 2 "set_torso_target -191.672 32.8093 185.655 0"
+send_character_message 2 "set_head_target -192.228 32.4449 185.459 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Sky" "Не для меня. Серебро и его банды есть, и ее удержание видел больше, чем свою долю страданий."
+send_character_message 1 "set_torso_target -192.203 32.771 185.813 1"
+send_character_message 1 "set_head_target -192.347 32.7693 184.617 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Не все мы."
+send_character_message 2 "set_head_target -193.019 33.0788 186.244 1"
+say 2 "Sky" "На рейсе если раб заболел, серебро будет разорвать их ноги и бросить их за борт и смотреть их пытаются плавать в то время как экипаж рассмеялся."
+send_character_message 1 "set_head_target -191.757 32.4862 185.39 1"
+say 1 "Turner" "Хорошо. Это очень плохо."
+send_character_message 1 "set_torso_target -192.203 32.771 185.813 0.0350296"
+send_character_message 1 "set_head_target -191.312 32.8166 185.781 0"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+say 1 "Turner" "Этот город выглядит пустынный--где это все?"
+send_character_message 2 "set_head_target -190.912 33.0788 185.848 1"
+say 2 "Sky" "Серебряный нанял худшие из них, и остальные были округлены как рабов, или убиты. Теперь это его город."
+send_character_message 2 "set_head_target -193.357 33.0788 185.433 1"
+say 2 "Sky" "Существует по меньшей мере семь сотрудников здесь. Шифер и я мог бы отвлечь несколько по..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+say 1 "Turner" "Я буду обрабатывать его. Я не в настроении, чтобы поделиться."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 2 "Sky" "Штрафа. Просто помните, что мы пытаемся попасть на корабль, не режут каждый."
+send_level_message "music_layer_override -1"
+set_character_pos 2 -192.601 32.2379 184.308 -26
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""

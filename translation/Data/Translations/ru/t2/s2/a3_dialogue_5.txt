@@ -1,0 +1,20 @@
+#name "Note-Cleanup"
+#participants 2
+set_character_pos 1 20.37 1.38351 38.2585 0
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 1 "set_head_target 21.2743 1.57836 38.2768 1"
+set_cam 19.7642 1.83985 37.1022 0 -138.82 0 55.5313
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Письмо от лейтенанта Empry..."
+set_cam 21.5266 2.00173 38.1179 0 94.85 0 40.5844
+set_character_pos 1 20.37 1.35849 38.2585 0
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+say 2 "Note" "Гражданской войны было не так давно, [wait 0.3]и вы должны помнить, что. [wait 0.5]Есть Cinderbreathe и Cinderblood бункеры везде, до сих пор."
+say 2 "Note" "Большинство из них были выбраны чистые мусорщиками случайных так или иначе, [wait 0.3]что такое точка нас пытаются очистить его все вверх?"
+say 2 "Note" "Да, [wait 0.3]Конечно, [wait 0.3]Он может разместить базы для бандитов или Индиана Джонс, [wait 0.3]но не смог это считается низким приоритетом над защитой против Арлисс?"
+say 2 "Note" "Я полагаю, что мы можем очистить бункеры, которые мы используем в отношении террористов, [wait 0.3]но что напрашивается даже больше вопрос: [wait 0.5]Зачем тратить силы, подметали бетона, когда неизвестные силы убийство наши войска?"
+say 2 "Note" "Возможно, я упустил некоторые письма, эти же вопросы, [wait 0.3]и в этом случае, [wait 0.3]Прости."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Пребывание моей руке, [wait 0.3]Внеофисной Empry лейтенант Querida."

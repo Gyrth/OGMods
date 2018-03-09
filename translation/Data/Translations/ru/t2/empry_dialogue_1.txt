@@ -1,0 +1,15 @@
+#name "Statue-Elke"
+#participants 4
+set_character_pos 2 -7.83896 31.1363 -48.8109 -145
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+set_character_pos 1 -8.38275 31.1464 -47.0656 -180
+send_character_message 1 "set_head_target -10.1661 32.3514 -47.0365 1"
+set_cam -6.0088 31.5926 -49.3182 0 120.12 0 45.1054
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 10 5"
+say 1 "You" "Надпись гласит..."
+send_character_message 1 "set_head_target -12.4944 37.292 -46.6346 1"
+set_cam -8.26812 39.1717 -44.6214 0.31 63.91 0.14 39.2627
+send_level_message "set_camera_dof 0 0 0 0.3 7 3"
+say 3 "Inscription" "КОМАНДИР ELKE, [wait 0.3]ЛОРД КАЗНАЧЕЙ ВЫСШЕГО СОВЕТА В CINDERBREATHE ИМПЕРИИ."

@@ -1,0 +1,59 @@
+#name "Turner"
+#participants 3
+set_character_pos 2 117.552 -54.7874 274.202 90
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 2 "set_head_target 118.452 -53.4454 266.549 1"
+set_character_pos 1 118.8 -54.835 274.172 128
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_torso_target 118.296 -54.4132 273.585 1"
+send_character_message 1 "set_head_target 117.482 -54.0574 273.911 1"
+set_cam 119.907 -54.1723 273.028 0 124.06 0 35.6175
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 9
+say 1 "Amos" "...[wait 0.3]Эй [wait 0.3]Рид. [wait 0.5]Что ад здесь произошло?"
+send_character_message 2 "set_head_target 118.694 -54.0469 273.958 1"
+say 2 "Reed" "Кто-то осквернил могилу Тернера... [wait 0.3]и ни один из других захоронений были затронуты."
+set_cam 117.078 -54.787 273.798 10.41 -10.79 0 33.0494
+send_character_message 1 "set_head_target 118.622 -53.4503 266.61 1"
+send_character_message 2 "set_head_target 118.425 -53.4378 266.578 1"
+say 1 "Amos" "Отрубленная голова... [wait 0.3]выглядит как результат некоторых бандитского нападения где-нибудь еще."
+set_cam 116.213 -54.0643 273.487 -0.05 -108.57 -0.4 22.6847
+say 2 "Reed" "Я сидел здесь на некоторое время. [wait 0.5]Интересно ли или не взять его вниз."
+send_character_message 2 "set_head_target 119.412 -54.1437 267.952 1"
+send_character_message 1 "set_head_target 117.661 -54.0149 274.058 1"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+say 1 "Amos" ".. .why не? [wait 0.5]Это отрубленную голову."
+send_character_message 2 "set_torso_target 117.642 -54.7526 273.293 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target 118.701 -54.05 274.137 1"
+say 2 "Reed" "Конечно, вы не знаете почему. Вы новичок в Lugaru."
+set_cam 121.131 -53.4741 268.141 0.07 68.11 0.4 40.0231
+say 2 "Reed" "Это Тернер, [wait 0.3]Амос. [wait 0.5]Тот, который привел геноцида против волков."
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_cam 119.622 -54.177 272.672 -0.35 138.56 0.2 40.0231
+say 2 "Reed" "Всего за пару дней, [wait 0.3]весь остров пошел от опасаясь нападения волка и смерти ежедневно, [wait 0.3]и в конце..."
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 0"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 117.721 -53.8705 274.078 1"
+say 2 "Reed" "Это редко сегодня, чтобы увидеть даже лома мех волка."
+send_character_message 1 "set_head_target 117.726 -54.0996 274.148 1"
+send_character_message 1 "set_torso_target 118.252 -54.4132 273.794 1"
+set_cam 116.727 -54.1371 273.127 -0.18 -128.21 -0.36 45.9033
+say 1 "Amos" "Волки были ужасно-- [wait 0.3]Похоже, он был героем."
+send_character_message 2 "set_head_target 117.765 -54.2659 273.28 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 2 "Reed" "Вы Cinderbreathe бы никогда не понять как много крови, вызвавшего один человек. [wait 0.5]Каждый шаг, который он взял, вслед за смертью."
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Reed" "Это не просто волки- [wait 0.3]бесчисленные кроликов, которые стояли на своем пути все были убиты."
+send_character_message 1 "set_head_target 118.527 -53.5143 266.432 1"
+send_character_message 2 "set_head_target 118.476 -53.4275 266.405 1"
+set_cam 117.989 -54.2868 276.362 0.4 -3.13 0.06 45.9033
+send_character_message 2 "set_torso_target 117.76 -54.7048 273.3 0"
+say 2 "Reed" "Он не должен выполняться. [wait 0.5]Его результаты, спас нас, Lugarians, но его методы..."
+send_character_message 1 "set_torso_target 118.252 -54.4132 273.794 0"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+say 1 "Amos" "...[wait 0.3]Я не знаю. [wait 0.5]Я бы очистить его вверх, если я вам. [wait 0.5]Вонь установит реальный скоро."

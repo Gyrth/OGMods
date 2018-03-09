@@ -1,0 +1,8 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 -30.4368 -2.15052 38.385 -44
+set_cam -30.0386 -1.4972 40.3254 0 0 0 90
+say 1 "Turner" "Я думаю, что я вижу лодку на расстоянии."
+say 1 "Turner" "Слишком плохо эти мечи слишком велики, чтобы принести."
+send_global_message "levelwin"

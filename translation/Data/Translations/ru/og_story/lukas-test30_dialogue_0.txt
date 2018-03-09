@@ -1,0 +1,14 @@
+#name "Win"
+#participants 1
+
+set_character_pos 1 396.324 -2.2305 17.1152 -62
+set_cam 396.861 -1.43716 17.3608 0 80.01 0 90
+say 1 "Turner" "Что будем показывать Эм!"
+say 1 "Turner" "Я думаю, что я могу найти свой путь здесь."
+say 1 "Turner" "Давайте перейдем к Test29."
+send_global_message "levelwin"
+
+
+
+
+

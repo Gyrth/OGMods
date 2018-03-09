@@ -1,0 +1,41 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -162.805 -18.4073 81.3972 49
+send_character_message 1 "set_eye_dir -161.966 -18.3675 80.5688 1"
+send_character_message 1 "set_torso_target -162.36 -18.5254 81.0873 1"
+send_character_message 1 "set_head_target -161.882 -16.9902 79.9513 1"
+set_cam -163.602 -18.0713 81.605 11.4 -41.71 -0.05 84.6836
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "...[wait 0.3]и наконец. [wait 0.5]Я здесь."
+send_character_message 1 "set_head_target -162.038 -18.2475 80.578 1"
+set_cam -162.727 -18.0237 82.5388 0 -13.68 0 58.5513
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Примечание Это Хайро..."
+send_character_message 1 "set_eye_dir -162.191 -18.2601 81.0327 1"
+set_character_pos 1 -162.805 -18.6335 81.3972 49
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -161.908 -17.9322 81.2424 0 86.39 0 50.8411
+say 2 "Note" "Снаружи слегка охраняется. [wait 0.5]Мы ослабили противника."
+say 2 "Note" "Каждый человек вооружен оружием какой- [wait 0.3]палаши, [wait 0.3]главным образом. [wait 0.5]Не ходите безоружных."
+say 2 "Note" "Вы можете найти где-нибудь, нож [wait 0.3]или взять меч от одного из врагов."
+say 2 "Note" "Где-то, [wait 0.3]Там будет ключ. [wait 0.5]Используйте это, чтобы разблокировать дверь от основания башни. [wait 0.5]На карте отмечена его расположение."
+say 2 "Note" "Как только вы разблокировать дверь, [wait 0.3]Следуйте интерьеры, пока не найдете пещере оформлены с несколькими урны."
+say 2 "Note" "Там, [wait 0.3]Вы должны быть в состоянии найти командир. [wait 0.5]Убей её [wait 0.3]и вернуться в экстерьерах для дальнейшего обучения."
+say 2 "Note" "Бомбы, которые мы будем использовать рядом с настоящей записки."
+say 2 "Note" "Если кто-то пытается поговорить с вами, [wait 0.3]Убей их. [wait 0.5]Они будут пытаться лгать вам, чтобы остановить вас."
+say 2 "Note" "Ключ, что вам нужно находится где-то высоко."
+send_character_message 1 "set_eye_dir -162.74 -18.5064 80.7398 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Изучите карту. [wait 0.5]Для вас, были отмечены возможные позиции врагов [wait 0.3]Наряду с позиции дверь."
+send_character_message 1 "set_head_target -162.382 -18.2421 80.2224 1"
+set_cam -162.368 -18.0164 82.2283 0 11.49 0 54.8952
+say 1 "Ghost" "Он придавал карте экстерьера."
+set_cam -162.408 -17.8291 80.1591 -90 180 140.36 65.6732
+say 2 "Note" "..."
+send_character_message 1 "set_torso_target -162.56 -18.6547 81.1626 1"
+send_character_message 1 "set_head_target -161.249 -16.6849 75.4348 1"
+set_cam -162.836 -18.1917 82.7006 14.58 -18.59 0 63.5372
+send_level_message "set_camera_dof 0.3 20 20 0 0 0"
+say 1 "Ghost" "Ну, [wait 0.5]Удачи мне, [wait 0.2]Наверное."

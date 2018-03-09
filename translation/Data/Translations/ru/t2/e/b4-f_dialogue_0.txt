@@ -1,0 +1,195 @@
+#name "Poop"
+#participants 4
+set_dialogue_color 1 1 0 1
+set_dialogue_voice 1 8
+set_dialogue_color 2 0 1 1
+set_dialogue_voice 2 6
+set_dialogue_color 3 1 1 0
+set_dialogue_voice 3 3
+set_character_pos 2 107.321 -40.8591 272.083 90
+send_character_message 2 "set_animation \"Data\Animations\r_archwrithe.anm\""
+set_cam 108.429 -41.05 270.494 0 131.25 0 90
+say 4 "???" "..."
+set_cam 106.693 -40.8593 270.668 0 -155.5 0 90
+send_character_message 1 "set_animation \"Data\Animations\r_heldweaponswap.anm\""
+send_character_message 2 "set_head_target 106.306 -39.8784 271.959 1"
+send_character_message 2 "set_torso_target 108.156 -41.0286 272.941 1"
+set_character_pos 1 102.498 -40.915 270.053 -8
+say 4 "???" "..."
+send_character_message 1 "set_head_target 105.929 -40.1404 271.407 1"
+send_character_message 1 "set_torso_target 103.366 -37.6575 270.557 1"
+set_cam 103.353 -40.5384 270.383 0 63.86 0 90
+say 1 "Amos" "?"
+set_cam 107.386 -40.2896 271.282 0 168.62 0 90
+send_character_message 2 "set_torso_target 108.496 -41.2162 272.415 1"
+send_character_message 2 "set_animation \"Data\Animations\r_grabface.anm\""
+say 2 "???" "Что является довольно злобной."
+set_cam 106.794 -40.5962 270.393 0 12.99 0 90
+send_character_message 1 "set_head_target 106.962 -40.3602 271.034 1"
+set_character_pos 1 106.632 -40.7091 269.714 -74
+say 1 "Amos" "Хорошо."
+send_character_message 1 "set_torso_target 107.919 -41.3153 271.146 1"
+send_character_message 1 "set_animation \"Data\Animations\r_painflinch.anm\""
+say 1 "Amos" "?"
+send_character_message 1 "set_animation \"Data\Animations\r_sneaky_run.anm\""
+say 1 "Amos" "?"
+send_character_message 2 "set_animation \"Data\Animations\r_dragstance.anm\""
+set_cam 107.1 -40.9277 269.45 0 145.3 0 150
+say 2 "Gunk" "?"
+set_cam 106.858 -40.8243 271.547 0 -106.16 -180 150
+say 2 "Gunk" "Вы плоды."
+send_character_message 2 "set_animation \"Data\Animations\r_fetal.anm\""
+set_character_pos 2 107.32 -41.4738 272.082 90
+set_cam 106.898 -40.9584 272.572 0 -11.65 0 72.9989
+say 2 "Gunk" "Убедитесь, что не идти на сталкеров в режиме редактора- [wait 0.4]Это будет вызывать спойлеры."
+set_character_pos 1 106.632 -40.7091 269.713 -74
+set_cam 106.675 -40.6186 270.084 0 4.44 0 150
+say 1 "Amos" "К сожалению я не мог реализовать уровней сложности."
+set_cam 106.13 -40.6224 271.495 0 -115.56 0 17.3684
+say 2 "Gunk" "?"
+set_character_pos 1 106.632 -42.0195 269.713 -74
+send_character_message 1 "set_animation \"Data\Animations\r_jump.anm\""
+set_cam 106.04 -41.2837 270.894 0 -30.56 0 60.166
+say 1 "Amos" "Хорошо."
+send_character_message 1 "set_head_target 105.999 -42.0745 270.259 1"
+say 1 "Amos" "Только вы можете объяснить знания для себя."
+send_character_message 1 "set_torso_target 104.239 -41.213 269.342 0.961478"
+send_character_message 1 "set_head_target 106.783 -40.6761 270.285 1"
+say 1 "Amos" "Если у вас есть некоторые теории для рассказа в вашей голове, [wait 0.2]но вы не уверены, если они правильно, [wait 0.3]PM меня на форумах!"
+set_cam 107.286 -41.2571 270.068 9.91 179.44 0 60.166
+send_character_message 2 "set_animation \"Data\Animations\r_flail.anm\""
+set_character_pos 2 107.323 -41.466 272.074 90
+say 2 "Gunk" "Что является довольно злобной."
+set_character_pos 1 106.61 -40.6229 269.636 -74
+send_character_message 1 "set_animation \"Data\Animations\r_roll.anm\""
+set_cam 106.455 -40.722 270.141 -0.8 -35.52 0.56 150
+say 1 "Amos" "Ирландский завтрак чай."
+set_character_pos 1 106.61 -41.4991 269.636 -74
+send_character_message 1 "set_animation \"Data\Animations\r_flailfall.anm\""
+set_cam 106.204 -40.6931 270.526 -0.8 -35.52 0.56 83.2574
+say 1 "Amos" "ayy ДБЯ вы горячий и все, но мне нужно, чтобы закончить мой кофе"
+set_character_pos 1 106.61 -41.4991 269.636 -66
+set_cam 107 -40.9363 271.185 0.88 -155.51 0.41 83.2574
+set_character_pos 2 107.323 -41.2391 272.074 90
+send_character_message 2 "set_animation \"Data\Animations\r_duckwalk.anm\""
+say 2 "Gunk" "Есть пещера поблизости, [wait 0.2]и что может означать только одно. [wait 0.5]Эта область почти определенно заполняется жуков."
+set_character_pos 1 106.61 -41.4991 269.636 135
+send_character_message 1 "set_animation \"Data\Animations\r_jablow.anm\""
+set_cam 107.274 -40.9488 268.862 0.9 157.75 -0.36 83.2574
+say 2 "Gunk" "Я слишком острое зрение и слух, чтобы охранник."
+send_character_message 2 "set_animation \"Data\Animations\r_slowerwolfslap.anm\""
+set_character_pos 2 107.271 -40.2372 272.387 90
+send_character_message 1 "set_torso_target 108.135 -40.8093 270.124 0.961478"
+set_character_pos 1 106.61 -40.3065 269.636 135
+send_character_message 1 "set_animation \"Data\Animations\bijou_dead.anm\""
+say 1 "Amos" "Я серьёзен. [wait 0.3]Сделать его звук, как ты сорок восемь Лун старый."
+send_character_message 1 "set_head_target 106.09 -39.9499 268.878 1"
+send_character_message 1 "set_torso_target 104.629 -40.8344 269.886 0.961478"
+set_cam 107.471 -40.8855 269.846 0.65 132.05 -0.71 150
+send_character_message 2 "set_head_target 109.081 -40.2732 271.331 1"
+send_character_message 2 "set_torso_target 105.747 -37.6289 271.057 1"
+say 2 "Gunk" "Что является довольно злобной."
+set_cam 107.068 -40.3288 271.67 -0.92 17.52 -0.3 17.9736
+send_character_message 1 "set_head_target 107.643 -39.903 272.185 1"
+send_character_message 1 "set_animation \"Data\Animations\r_plantavoid.anm\""
+set_character_pos 1 106.344 -40.7109 270.409 -15
+say 1 "Amos" "..."
+send_character_message 1 "set_torso_target 108.499 -39.3336 269.607 0.961478"
+send_character_message 1 "set_head_target 107.592 -39.5033 270.912 1"
+send_character_message 2 "set_head_target 106.527 -40.134 270.351 1"
+set_character_pos 2 107.271 -40.8347 272.387 90
+send_character_message 2 "set_animation \"Data\Animations\r_windmill.anm\""
+send_character_message 1 "set_animation \"Data\Animations\r_tuck.anm\""
+set_cam 106.61 -40.4972 269.793 0.96 -175.06 0.09 62.0824
+say 1 "Amos" "Я почувствовал мозг клеток ухудшается только сейчас."
+set_cam 108.034 -40.7315 270.445 0.56 124.94 -0.79 150
+set_character_pos 2 107.271 -39.9261 272.387 90
+send_character_message 1 "set_torso_target 107.076 -39.7043 272.164 0.961478"
+say 1 "Amos" "debug_keys 1"
+set_cam 106.934 -39.3575 272.161 0.58 -127.25 -89.23 150
+say 2 "Gunk" "?"
+send_character_message 2 "set_animation \"Data\Animations\r_hitrightflip.anm\""
+set_cam 109.342 -41.0382 272.39 -0.23 75.87 -0.94 68.4111
+say 2 "Gunk" "Хорошо."
+send_character_message 1 "set_torso_target 106.612 -39.161 268.912 0.961478"
+send_character_message 1 "set_animation \"Data\Animations\r_protecthead.anm\""
+say 1 "Amos" "..."
+set_character_pos 2 107.271 -39.9261 272.387 92
+send_character_message 1 "set_head_target 105.67 -38.8695 271.105 1"
+send_character_message 1 "set_animation \"Data\Animations\r_archwrithe.anm\""
+say 1 "Amos" "Святой курит, [wait 0.2]Это делает меня звук, как я-герой!"
+send_character_message 3 "set_animation \"Data\Animations\r_run5.anm\""
+send_character_message 3 "set_head_target 108.157 -40.1705 266.656 1"
+send_character_message 3 "set_torso_target 110.217 -39.625 265.534 1"
+set_character_pos 3 110.499 -40.6677 264.67 -136
+set_cam 105.07 -40.4022 270.909 -0.6 -36.69 0.57 18.4047
+send_character_message 1 "set_head_target 108.893 -40.636 266.375 1"
+set_character_pos 1 106.344 -40.7109 270.409 45
+send_character_message 1 "set_animation \"Data\Animations\r_hitspinright.anm\""
+say 3 "Jared" "Просто смотрите на вас. [wait 0.5]Ты страшная белый."
+set_character_pos 3 110.499 -40.6677 264.67 -136
+send_character_message 1 "set_animation \"Data\Animations\r_run.anm\""
+set_cam 106.638 -40.3576 270.058 0.32 137.03 -0.61 150
+say 1 "Amos" "...[wait 0.2]так что?"
+send_character_message 3 "set_head_target 109.849 -40.2911 266.342 1"
+send_character_message 3 "set_torso_target 110.1 -40.5867 266.274 1"
+set_character_pos 3 110.742 -40.2295 264.727 -136
+send_character_message 3 "set_animation \"Data\Animations\r_stomachcut.anm\""
+set_cam 109.951 -40.2891 266.176 -0.55 -17.54 90.41 43.0136
+say 3 "Jared" "Вам будет казаться призрак среди них."
+set_cam 107.609 -40.8764 267.792 0.55 162.12 -0.41 43.0136
+send_character_message 1 "set_animation \"Data\Animations\r_doghammeridle.anm\""
+say 1 "Amos" "Позвони мне [wait 0.2]«Ghost»."
+send_character_message 3 "set_torso_target 111.347 -39.1083 266.151 1"
+send_character_message 3 "set_head_target 108.992 -39.3267 265.045 1"
+set_cam 105.763 -40.2016 267.163 0.02 -72.95 0.69 35.466
+set_character_pos 3 110.723 -40.3033 264.717 -136
+send_character_message 3 "set_animation \"Data\Animations\r_catchfallback.anm\""
+say 3 "Jared" "Сорока Миссисипи, [wait 0.3]тридцать девять Миссисипи..."
+send_character_message 2 "set_head_target 106.368 -40.0745 270.289 1"
+send_character_message 1 "set_torso_target 108.577 -39.1808 270.259 0.961478"
+send_character_message 1 "set_animation \"Data\Animations\r_doghammergripsharp.anm\""
+set_cam 107.543 -40.5591 268.917 0.37 140.73 -0.59 35.466
+say 1 "Amos" "Хорошо."
+set_cam 106.887 -40.5825 266.708 0.49 -116.55 0.49 35.466
+send_character_message 3 "set_head_target 106.731 -40.5047 267.632 1"
+send_character_message 3 "set_animation \"Data\Animations\r_grabstomach.anm\""
+set_character_pos 3 108.257 -40.479 267.219 -174
+say 3 "Jared" "Как поворот сюжета показывает itselfc"
+send_character_message 3 "set_head_target 107.24 -40.8589 268.949 1"
+send_character_message 3 "set_torso_target 107.61 -41.1557 267.925 1"
+send_character_message 3 "set_animation \"Data\Animations\r_painflinch.anm\""
+set_cam 108.712 -40.4463 268.134 -0.65 38.82 -0.25 35.466
+say 3 "Jared" "Вы обнаружите, что вы играли poopy игра! [wait 0.4]Poopiest игра когда-либо!!!"
+send_character_message 3 "set_animation \"Data\Animations\r_archwrithe.anm\""
+say 3 "Jared" "Хорошо. [wait 0.2]?"
+send_character_message 1 "set_torso_target 107.178 -41.0692 269.229 0.961478"
+send_character_message 3 "set_torso_target 108.798 -39.8071 267.198 1"
+send_character_message 1 "set_animation \"Data\Animations\r_run.anm\""
+set_cam 106.701 -40.4397 268.768 0.66 179.58 179.78 35.466
+say 1 "Amos" "Что является довольно злобной."
+send_character_message 1 "set_animation \"Data\Animations\r_bigswordarmstancesneak.anm\""
+say 4 "Jackie" "Woah!"
+set_cam 107.022 -40.2112 267.155 0.22 -90.42 120.66 35.466
+say 3 "Jared" "Вау, [wait 0.3]Моя работа-это так тяжело, я оживить взрыв!"
+send_character_message 1 "set_head_target 108.158 -37.4346 268.022 1"
+send_character_message 1 "set_torso_target 107.556 -40.7817 270.272 0.961478"
+set_cam 106.933 -40.8783 268.937 0.62 171.42 -0.31 35.9396
+say 1 "Amos" "Ой. [wait 0.4]Это не то, что диалог редактора ассигнования."
+set_cam 109.016 -40.7387 267.868 -0.69 25.43 -0.09 150
+send_character_message 3 "set_animation \"Data\Animations\r_hitspinright.anm\""
+set_character_pos 3 108.257 -40.479 267.219 -114
+say 3 "Jared" "Я ЗНАЮ, УТРА, Я ЕЩЕ ПРОХЛАДНО"
+say 4 "" "Вы завершили путь F."
+say 4 "" "Вы нашли секретный окончание: GG."
+send_character_message 3 "set_animation \"Data\Animations\r_blockfrontko.anm\""
+say 4 "" "Почему он ждать!?"
+set_cam 106.597 -40.8314 269.933 0.42 145.43 59.45 150
+say 4 "David Rosen" "Спасибо за игру Therium-ПОО."
+say 4 "David Rosen" "Эй [wait 0.4]На самом деле [wait 0.2]как насчет игры аварии?"
+set_cam 106.742 -40.7172 269.669 0.42 145.43 89.45 21.6668
+say 4 "David Rosen" "Это было бы супер круто. [wait 0.5]Да, [wait 0.2]Хорошо."
+say 4 "David Rosen" "Я буду аварии вашей игры. [wait 0.4]Capish?"
+set_character_pos 1 116.078 -34.607 285.63 45
+say 4 "David Rosen" "[wait 0.2]Подождите, [wait 0.1]Я изменил свое мнение. [wait 0.2]Не аварии игры!"
+say 4 "David Rosen" "Что является довольно злобной."

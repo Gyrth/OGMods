@@ -1,0 +1,16 @@
+#name "Stranger"
+#participants 2
+set_character_pos 1 42.3065 13.1591 -8.51332 -175
+set_character_pos 2 35.037 13.0942 -7.82447 0
+set_cam 43.7981 13.8694 -5.8936 -5.56 52.52 0 90
+say 1 "Turner" "Эй!"
+say 2 "Stranger" "Бой!"
+say 1 "Turner" "Yo!"
+make_participants_aware
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+#name "Win"
+#participants 2
+send_character_message 2 "set_animation \"Data/Animations/r_woundedcrouch.anm\""
+send_character_message 1 "set_head_target -17.5248 -1.92105 24.2761 1"
+send_character_message 2 "set_torso_target -18.256 -2.36874 24.8642 0"
+send_character_message 2 "set_head_target -18.9248 -2.23514 24.5086 1"
+set_character_pos 2 -17.6056 -2.57151 24.154 -112
+set_character_pos 1 -17.6377 -2.51762 25.7924 116
+set_cam -19.2127 -2.13957 24.6131 0 -102.19 0 90
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_level_message "music_layer_override -2"
+say 1 "Turner" "Вы наконец сможете... что?"
+send_character_message 2 "set_head_target -17.7063 -1.59149 25.7142 1"
+send_character_message 2 "set_animation \"Data/Animations/r_woundedidle.anm\""
+say 2 "Crawl" "Что?"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "Вы говорили что-то, прежде чем мы были прерваны."
+send_character_message 2 "set_head_target -17.8993 -1.63569 25.5434 1"
+send_character_message 2 "set_animation \"Data/Animations/r_woundedidlethreat.anm\""
+say 2 "Crawl" "Мы просто убили семь человек, и это то, что вы думаете о?"
+send_character_message 1 "set_head_target -17.8199 -1.9148 25.3073 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Они напали на нас. Мы даже не торговать оскорбления. Зачем останавливаться на них?"
+send_character_message 2 "set_head_target -17.656 -1.82673 25.7325 1"
+send_character_message 2 "set_animation \"Data/Animations/r_woundedidle.anm\""
+say 2 "Crawl" "Ну я рад, что вы на нашей стороне. Давайте двигаться."
+send_level_message "music_layer_override 0"
+send_global_message "levelwin"

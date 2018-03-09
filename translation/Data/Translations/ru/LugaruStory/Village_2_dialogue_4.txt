@@ -1,0 +1,31 @@
+#name "April"
+#participants 2
+set_character_pos 2 133.344 -38.1853 278.964 14
+send_character_message 2 "set_animation \"Data\Animations\r_combatidle.anm\""
+send_character_message 2 "set_eye_dir 134.895 -37.0825 278.798 1"
+send_character_message 2 "set_head_target 134.518 -36.6759 278.565 1"
+set_character_pos 1 134.526 -38.0854 278.679 -175
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_eye_dir 132.879 -37.6389 278.943 1"
+send_character_message 1 "set_torso_target 133.39 -37.4357 279.66 0.061132"
+send_character_message 1 "set_head_target 133.303 -37.5 278.901 1"
+set_cam 136.186 -37.119 279.302 -8.74 79.44 5.76 33.5278
+say 2 "April" "Это было удивительно![wait 0.2] Я не знаю, что вы могли бы бороться как это!"
+set_character_pos 2 133.344 -38.1853 278.964 14
+send_character_message 1 "set_head_target 133.303 -37.5 278.901 1"
+send_character_message 2 "set_head_target 134.602 -37.0079 278.611 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+set_cam 132.367 -37.5318 279.789 2.11 -59.6 2.91 33.5278
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+say 1 "Turner" "Я буду делать больше времени, чтобы научить вас, [wait 0.1]Обещаю."
+set_character_pos 2 133.344 -38.1853 278.964 14
+send_character_message 1 "set_head_target 133.102 -36.8194 277.096 1"
+send_character_message 2 "set_head_target 134.661 -37.1974 278.739 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+say 1 "Turner" "Просто нужно убедиться, что не существует больше из них."
+send_character_message 2 "set_head_target 134.649 -37.0974 278.733 1"
+send_character_message 1 "set_head_target 133.129 -37.4855 278.956 1"
+set_character_pos 2 133.35 -38.1044 278.962 14
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam 136.186 -37.119 279.302 -8.74 79.44 5.76 33.5278
+say 2 "April" "Вы можете это сделать!"

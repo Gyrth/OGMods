@@ -1,0 +1,19 @@
+#name "Note-Relocation"
+#participants 2
+set_character_pos 1 -24.696 2.85019 17.3665 90
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target -24.6229 3.30483 16.513 1"
+set_cam -23.3942 3.46124 18.2741 0 44.12 0 38.5894
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Письмо от командира Empry..."
+set_character_pos 1 -24.696 2.83039 17.3665 90
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -25.1808 3.49697 16.4123 0 -145.65 0 38.5894
+say 2 "Note" "Да, [wait 0.3]ответили на более высоких ступенях Empry. [wait 0.5]Проверить герметичность, если вы так [wait 0.3]«особенности» о нем."
+say 2 "Note" "Командирам всех внеофисной Empry расположен на территории колонии [wait 0.3]некоторые новые меры призывает последних террористической деятельности."
+say 2 "Note" "К настоящему письму прилагается карта, направляя к вам одного из бункеров, используемые нами в Cinderblood гражданской войны; [wait 0.3]в основном в поврежденном состоянии, конечно, [wait 0.3]но макет должен быть достаточно, чтобы остановить только три кролика от нападения."
+say 2 "Note" "Путешествие там как можно скорее. [wait 0.5]Любой Empry офицеров и командиров, оказавшихся за пределами бункеры будет временно освобожден от командования."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Note" "Быть осторожны и спокойным. [wait 0.5]Подписано, [wait 0.3]АНО."

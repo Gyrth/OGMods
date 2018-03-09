@@ -1,0 +1,42 @@
+#name "Win"
+#participants 2
+send_character_message 2 "set_head_target 216.021 68.026 -20.4327 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 214.831 68.0747 -20.3678 1"
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_voice 1 0
+set_dialogue_color 2 0.8 0.7 1
+set_dialogue_voice 2 14
+set_cam 215.24 67.8825 -22.0156 0 -173.53 0 84.0038
+set_character_pos 2 214.788 67.4465 -20.3219 40
+set_character_pos 1 216.069 67.4311 -20.3421 166
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_level_message "music_layer_override 0"
+send_character_message 1 "equip_item 78"
+say 1 "Turner" "Вот ваш нож обратно."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Sky" "Держите его. Если вы не можете остановить боевые действия, а также может сделать это вооруженных."
+send_character_message 1 "set_torso_target 215.146 67.851 -20.7258 1"
+send_character_message 1 "set_head_target 215.209 67.668 -20.7218 0.998426"
+say 1 "Turner" "Я пытался остановить. Но везде я иду, кажется, что насилие является единственным ответом."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sky" "Я знаю место, где вы можете найти мир. Это остров в облаках, может достигать убежище только кроликов."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+say 1 "Turner" "Ач. Я вижу, почему мы ладите сейчас. Мы оба полностью невменяемым."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+say 2 "Sky" "Нет, это реально! Я Вам покажу."
+send_character_message 1 "set_head_target 214.873 68.9191 -20.4222 0.998426"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 1 "Turner" "Город в облаках, да? Не на Луне?"
+say 2 "Sky" "Мы можем взять корабль там, после того, как мы бесплатно мой друг Шифер - она является навигатор и может показать нам путь обратно через море."
+send_character_message 1 "set_head_target 214.832 68.0283 -20.3146 0.998426"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 1 "Turner" "Мы? Я не буду с вами. Конечно не для где-то, не существует. Бандиты ушли, Stonefist нет, белые флаги является безопасным. Я сделал."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+say 2 "Sky" "Ох мой сладкий летний комплект. Конечно, это не безопасно. Мы только отколото айсберга здесь."
+say 2 "Sky" "Вы думаете Lugaru остров является весь мир, но это просто точка на карте, где я родом."
+say 1 "Turner" "О чем ты говоришь?"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+say 2 "Sky" "Не примите мое слово для его. Я докажу это. Просто прийти со мной."
+send_global_message "levelwin"

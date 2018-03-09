@@ -1,0 +1,16 @@
+#name "End"
+#participants 2
+set_character_pos 1 -36.5605 133.368 170.896 90
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 1 "set_eye_dir -36.0354 129.209 155.126 1"
+send_character_message 1 "set_head_target -36.6011 131.523 162.58 1"
+set_cam -36.1738 134.274 171.863 -13.03 11.61 -0.57 40.4905
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+say 1 "Ghost" "Давай [wait 0.2]Я знаю, что ты здесь!"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+say 1 "Ghost" "Я собираюсь найти вас..."
+send_character_message 1 "set_head_target -36.6011 132.259 162.58 1"
+say 1 "Ghost" "И я убью тебя!"
+set_cam -36.1479 134.043 169.805 -0.32 164.87 0.78 40.4905
+say 1 "Ghost" "...[wait 0.4]черт."
+send_global_message "levelwin ea3"

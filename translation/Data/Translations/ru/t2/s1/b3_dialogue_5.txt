@@ -1,0 +1,70 @@
+#name "Overhear"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 17
+set_character_pos 3 -28.5656 33.0932 -88.5928 167
+send_character_message 3 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 3 "set_torso_target -28.492 33.8656 -89.3637 0"
+send_character_message 3 "set_head_target -30.349 33.7128 -89.1463 1"
+set_character_pos 2 -31.201 33.0087 -89.4376 -18
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_torso_target -30.3696 33.3105 -89.2879 0"
+send_character_message 2 "set_head_target -29.2415 33.8425 -88.765 1"
+set_character_pos 1 -25.1632 37.9747 -64.5733 109
+send_character_message 1 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+send_character_message 1 "set_torso_target -26.4105 38.7845 -64.5988 0"
+send_character_message 1 "set_head_target -27.1072 38.2902 -70.1345 1"
+set_cam -25.2485 38.5021 -53.985 0 2.57 0 20.8899
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+say 3 "????" "Добрый вечер [wait 0.3]сэр."
+send_character_message 2 "set_head_target -28.967 33.8495 -88.6869 1"
+send_character_message 3 "set_head_target -30.7842 33.7952 -89.2542 1"
+send_character_message 2 "set_torso_target -30.3598 33.2632 -89.0824 1"
+set_cam -27.2228 38.7168 -66.4245 -13.41 6.54 0 14.6648
+say 1 "Ghost" "..."
+send_character_message 2 "set_head_target -29.0105 33.6269 -88.7586 1"
+set_cam -27.4158 33.7926 -87.7042 0 60.38 0 20.8899
+send_level_message "set_camera_dof 0.3 2 0.5 0 0 0"
+say 2 "???" "Не удается открыть ворота?"
+send_character_message 3 "set_head_target -30.7612 33.9192 -89.2992 1"
+send_character_message 2 "set_head_target -28.9208 33.8527 -88.7504 1"
+send_character_message 2 "set_torso_target -30.3723 33.1803 -89.1441 1"
+send_character_message 3 "set_torso_target -29.2711 33.9608 -88.8085 1"
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+say 3 "????" "Мы уже пробовали так сложно, как мы могли бы, [wait 0.3]сэр."
+send_character_message 3 "set_head_target -30.7333 33.7578 -89.3125 1"
+send_character_message 3 "set_torso_target -29.2711 33.7466 -88.8085 1"
+send_character_message 2 "set_head_target -28.9111 33.6713 -88.742 1"
+send_character_message 2 "set_torso_target -30.3723 32.8536 -89.1441 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_level_message "set_camera_dof 0.3 2 0.5 0 0 0"
+say 2 "???" "У нас уже есть специалист, размещены здесь для расследования святыни. [wait 0.5]Нам нужно открыть его завтра."
+send_character_message 3 "set_head_target -30.7756 33.6402 -89.2355 1"
+send_character_message 3 "set_torso_target -29.323 33.466 -88.7392 1"
+set_cam -31.297 33.7541 -87.5961 0 -69.47 0 20.8899
+send_level_message "set_camera_dof 0 0 0 0.3 4 0.5"
+say 3 "????" "[wait 0.3]Там, кажется, что-то блокирует ворота изнутри."
+send_character_message 2 "set_head_target -28.9111 33.5221 -88.742 1"
+send_character_message 2 "set_torso_target -30.3723 33.2663 -89.1441 1"
+set_cam -31.0458 33.7343 -87.6862 0 -0.2 0 20.8899
+say 2 "???" "Я не думаю, один из изобретателей, выяснили решение?"
+send_character_message 3 "set_head_target -30.8446 33.7766 -89.396 1"
+send_character_message 3 "set_torso_target -29.2905 33.5667 -89.0033 1"
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -31.2561 33.6873 -88.7978 0 -93.2 0 20.8899
+say 3 "????" "Один из них имеет, [wait 0.3]но я не связался с ними на нем."
+send_character_message 1 "set_head_target -28.8395 36.5772 -74.0237 1"
+set_character_pos 1 -27.9527 38.1091 -66.9024 96
+send_character_message 2 "set_head_target -29.0463 33.4499 -88.5777 1"
+set_cam -30.4736 33.7324 -87.9857 0 21.55 0 20.8899
+say 2 "???" "Совещание за этот вечер, [wait 0.3]в любом случае. [wait 0.5]Мы свяжемся с ее тогда."
+set_cam -34.7516 33.5443 -88.2887 0 -79.69 0 25.8717
+send_character_message 2 "set_head_target -28.9187 33.6749 -88.7753 1"
+send_level_message "set_camera_dof 0 0 0 0.3 7 3"
+say 3 "????" "Понимать."
+send_character_message 3 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 2 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+say 3 "????" "Град."
+set_cam -27.1528 39.0658 -65.0741 -16.37 11.31 0 24.0504
+say 1 "Ghost" "...[wait 0.3]Я должен поговорить с этой изобретатель, [wait 0.3]везде, где она находится."
