@@ -1,0 +1,15 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>challenge-level-mod</Id>
+    <Name>Challenge Level Mod</Name>
+	<Category>Scripting</Category>
+    <Version>0.1.0</Version>
+    <Author>Gyrth McMulin</Author>
+    <Thumbnail>Data/Images/challenge_level_thumb.png</Thumbnail>
+    <PreviewImage>Data/Images/challenge_level_full.png</PreviewImage>
+	<Description>Challenge Level Mod.</Description>
+    <Tag>level</Tag>
+    <Tag>scripting</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <NeedsRestart>true</NeedsRestart>
+</Mod>
