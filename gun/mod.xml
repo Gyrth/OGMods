@@ -1,0 +1,20 @@
+<? xml version="1.0" ?>
+<Mod>
+	<Id>gun</Id>
+	<Name>Gun Mod</Name>
+	<Category>Item Pack</Category>>
+	<Version>0.1.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Thumbnail>Data/Images/gun_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/gun_full.jpg</PreviewImage>
+	<Description>Gun Mod.</Description>
+	<Tag>weapon</Tag>
+	<Tag>scripting</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<NeedsRestart>false</NeedsRestart>
+	<Item 	category="Interactive Objects"
+			title="Gun"
+			path="Data/Objects/gun_hotspot.xml"
+			thumbnail="Data/UI/spawner/gun.png" />
+	<LevelHookFile>Data/Scripts/gun.as</LevelHookFile>
+</Mod>
