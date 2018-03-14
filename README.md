@@ -6,5 +6,5 @@ A laser eyes mod that can burn your enemies and send them flying.
 ## How to use the laser eyes:  
 	1. Press and hold the F key to shoot lasers out of your eyes.  
 
-Last tested and working on version 1.1.  
+Last tested and working on version 1.2.  
 [Preorder the game here.](http://www.wolfire.com/overgrowth)
