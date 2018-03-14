@@ -268,6 +268,7 @@ const int _invalid = 4;
 const int _going_to_dodge = 5;
 
 bool startled = false;
+bool g_cannot_be_disarmed = false;
 const float drop_weapon_probability = 0.2f;
 
 // whether the character is in the ground or in the air, and how long time has passed since the status changed.
@@ -1766,6 +1767,9 @@ void CheckForNANVec3(const vec3 &in vec, int num){
 }
 
 void DisplayMatrixUpdate(){
+    if(frozen && knocked_out == _dead && !this_mo.controlled) {
+        return;
+    }
     //if(!animated){
     //    Print("Testing ragdoll!\n");
     //}
@@ -1980,7 +1984,7 @@ string HexFromDec(int val){
 }
 
 string HexFromColor(vec4 col){
-    return "##" + HexFromDec(int(col.x * 255)) + HexFromDec(int(col.y * 255)) + HexFromDec(int(col.z * 255)) + HexFromDec(int(col.a * 255));
+    return "\x1B" + HexFromDec(int(col.x * 255)) + HexFromDec(int(col.y * 255)) + HexFromDec(int(col.z * 255)) + HexFromDec(int(col.a * 255));
 }
 
 string MovementKeys(){
@@ -2058,7 +2062,7 @@ void UpdateDialogueControl(const Timestep &in ts) {
     HandleFootStance(ts);
 
     if(this_mo.controlled){
-        if(this_mo.controller_id == 0){
+        if(this_mo.focused_character){
             UpdateAirWhooshSound();
         }
     }
@@ -2111,6 +2115,9 @@ void UpdateMouth(const Timestep &in ts) {
 bool was_controlled = false;
 bool was_editor_mode = false;
 void Update(int num_frames) {
+    if(frozen && !this_mo.controlled) {
+        return;
+    }
     //DebugText("pos"+this_mo.GetID(), "Pos"+this_mo.GetID()+": "+this_mo.position, 0.5);
     //DebugText("num_hit_on_ground"+this_mo.GetID(), "num_hit_on_ground"+this_mo.GetID()+": "+num_hit_on_ground, 0.5);
     if(this_mo.position.y < -99){
@@ -2583,6 +2590,7 @@ void Update(int num_frames) {
     // Cinematic posing
     if(dialogue_control){
         UpdateDialogueControl(ts);
+        LeaveTelemetryZone();
         return;
     }
     CheckForNANPosAndVel(3);
@@ -2682,7 +2690,7 @@ void Update(int num_frames) {
     // Simplified loop for testing out animations
     if(in_animation){
         if(this_mo.controlled){
-            if(this_mo.controller_id == 0){
+            if(this_mo.focused_character){
                 UpdateAirWhooshSound();
             }
             if(this_mo.controller_id == 0 || GetSplitscreen()){
@@ -2692,6 +2700,7 @@ void Update(int num_frames) {
         ApplyPhysics(ts);
         HandleCollisions(ts);
         HandleSpecialKeyPresses();
+        LeaveTelemetryZone();
         return;
     }
     LeaveTelemetryZone();
@@ -2735,7 +2744,7 @@ void Update(int num_frames) {
 
     if(this_mo.controlled){
         EnterTelemetryZone("Character camera"); 
-        if(this_mo.controller_id == 0){
+        if(this_mo.focused_character){
             UpdateAirWhooshSound();
         }
         if(this_mo.controller_id == 0 || GetSplitscreen()){
@@ -2848,6 +2857,9 @@ void RecoverHealth() {
     roll_recovery_time = 0.0f;
     zone_killed = 0;
     ko_shield = max_ko_shield;
+    ragdoll_static_time = 0.0f;
+    frozen = false;
+    no_freeze = false;
 }
 
 void Recover() {
@@ -3029,7 +3041,12 @@ void HandleSpecialKeyPresses() {
         Ragdoll(_RGDL_LIMP);
     }
     if(GetInputDown(this_mo.controller_id, recover_key)){
-        Recover();
+        int num_chars = GetNumCharacters();
+
+        for(int char_index = 0; char_index < num_chars; ++char_index) {
+            MovementObject@ target_char = ReadCharacter(char_index);
+            target_char.QueueScriptMessage("full_revive");
+        }
     }
 
     if(this_mo.controlled){
@@ -3081,7 +3098,8 @@ void HandleSpecialKeyPresses() {
                 }
                 vec3 force = normalize(char.position - this_mo.position) * 40000.0f;
                 force.y += 1000.0f;
-                char.Execute("ko_shield = 0;" +
+                char.Execute("this_mo.static_char = false;" +
+                             "ko_shield = 0;" +
                              "vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
                              "HandleRagdollImpactImpulse(impulse, this_mo.rigged_object().GetAvgIKChainPos(\"torso\"), 5.0f);"+
                              "ragdoll_limp_stun = 1.0f;"+
@@ -3180,7 +3198,7 @@ void HandleSpecialKeyPresses() {
             }
 
 
-            const bool kTestVisible = false;
+            const bool kTestVisible = true;
             if(kTestVisible){
                 this_mo.visible = !this_mo.visible;
             }
@@ -3515,18 +3533,21 @@ void UpdateState(const Timestep &in ts) {
         if(!flip_info.IsRolling()){
             num_hit_on_ground = 0;
         }
+        LeaveTelemetryZone();
         break;
     case _ground_state:
         EnterTelemetryZone("UpdateGroundState");
         UpdateDuckAmount(ts);
         HandleAccelTilt(ts);
         UpdateGroundState(ts);
+        LeaveTelemetryZone();
         break;
     case _attack_state:
         EnterTelemetryZone("UpdateAttackState");
         HandleAccelTilt(ts);
         UpdateAttacking(ts);
         HandleCollisions(ts);
+        LeaveTelemetryZone();
         break;
     case _hit_reaction_state:
         EnterTelemetryZone("UpdateHitReactionState");
@@ -3537,9 +3558,9 @@ void UpdateState(const Timestep &in ts) {
         HandleThrow();
         HandleAccelTilt(ts);
         HandleCollisions(ts);
+        LeaveTelemetryZone();
         break;
     }
-    LeaveTelemetryZone();
 
     HandlePlantCollisions(ts);
 
@@ -5058,6 +5079,7 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
                 }
             }
             AchievementEvent("leg_cannon_hit");
+            got_hit_by_leg_cannon_count += 1;
         }
     }
 
@@ -5171,6 +5193,7 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
     }
 
     if(!can_passive_block){
+        frozen = false;
         if(_draw_combat_debug){
             DebugDrawWireSphere(pos, 0.4f, vec3(1.0, 0.0, 0.0), _fade);
         }
@@ -5290,7 +5313,7 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
     }
     if(sharp_damage <= 0.0f){
         if(knocked_over){
-            if(RangedRandomFloat(0.0f,1.0f) < drop_weapon_probability){
+            if(RangedRandomFloat(0.0f,1.0f) < drop_weapon_probability && !g_cannot_be_disarmed){
                 int item_id = DropWeapon();
                 if(item_id != -1){
                     ItemObject@ item_obj = ReadItemID(item_id);
@@ -5364,7 +5387,7 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
             obj.SetTint(vec3(0.5));
         }
         AISound(pos, QUIET_SOUND_RADIUS, _sound_type_combat);
-        if(RangedRandomFloat(0.0f,1.0f) < drop_weapon_probability){
+        if(RangedRandomFloat(0.0f,1.0f) < drop_weapon_probability && !g_cannot_be_disarmed){
             HandleWeaponCollision(attacker_id);
             int item_id = DropWeapon();
             if(item_id != -1){
@@ -5623,6 +5646,8 @@ void ReceiveMessage(string msg){
     string token = token_iter.GetToken(msg);
     if(token == "restore_health"){
         RecoverHealth();
+    } else if(token == "full_revive") {
+        Recover();
 	} else if(token == "fall_death"){
         fall_death = true;
     } else if(token == "tutorial"){
@@ -5714,7 +5739,10 @@ void ReceiveMessage(string msg){
     } else if(token == "set_animation"){ // params: string path
         token_iter.FindNextToken(msg);
         token = token_iter.GetToken(msg);
-        dialogue_anim = token;
+        if(FileExists(token))
+            dialogue_anim = token;
+        else
+            Log(error, "Couldn't find file \"" + token + "\"");
     } else if(token == "set_eye_dir"){
         // Get params
         token_iter.FindNextToken(msg);
@@ -6439,6 +6467,7 @@ void HandleAnimationCombatEvent(const string&in event, const vec3&in world_pos) 
                 range_extend = 0.0;
             }
             range_extend += mix(1.0, 0.0, game_difficulty);
+            range_extend *= mix(1.0, 0.0, game_difficulty);
         }
         if(event == "attackblocked" || distance(this_mo.position, target_pos) < (_attack_range + range_extend) * this_mo.rigged_object().GetCharScale()){
             vec3 facing = this_mo.GetFacing();
@@ -6774,9 +6803,11 @@ void UpdateGroundAttackControls(const Timestep &in ts) {
         }
     }
     if(WantsToThrowEnemy()){
-        float temp_range = range;
-        if(!this_mo.controlled){
-            temp_range = range + 1.0;
+        float temp_range;
+        if(this_mo.controlled && game_difficulty < 0.5f) {
+            temp_range = range + 1.0f;
+        } else {
+            temp_range = GetCloseAttackRange();
         }
         throw_id = GetClosestCharacterID(temp_range, _TC_ENEMY | _TC_CONSCIOUS | _TC_NON_RAGDOLL | _TC_THROWABLE);
         sneak_throw_id = GetClosestCharacterID(range, _TC_ENEMY | _TC_CONSCIOUS | _TC_NON_RAGDOLL | _TC_UNAWARE);
@@ -8327,13 +8358,16 @@ void UpdateAttacking(const Timestep &in ts) {
                 this_mo.position = mix(this_mo.position, target_pos - dir * _leg_sphere_size * 2.0f, 0.1f);
             }
         }
+
+        // If mid-attack, and farther than 3x leg sphere away, magnet towards target
         if(this_mo.rigged_object().anim_client().GetTimeUntilEvent("attackimpact") > 0 &&
            distance(this_mo.position, target_pos) > _leg_sphere_size * 3.0f)
         {
             vec3 dir = normalize(target_pos - this_mo.position);
             vec3 offset = (target_pos - dir * _leg_sphere_size * 3.0f) - this_mo.position;
             if(length(offset) < 1.0){
-                this_mo.position = mix(this_mo.position, target_pos - dir * _leg_sphere_size * 3.0f, 0.1f);
+                float magnet_scale = max(0.0f, min(1.0f, 1.0 - game_difficulty * 2.0f));
+                this_mo.position = mix(this_mo.position, target_pos - dir * _leg_sphere_size * 3.0f, 0.1f * magnet_scale);
             }
         }
     }
@@ -8654,11 +8688,7 @@ void WakeUp(int how) {
         SetState(_ground_state);
         PlayStandAnimation(how == _wake_block_stand);
         ragdoll_cam_recover_speed = 2.0f;
-        if(how != _wake_block_stand){
-            ragdoll_fade_speed = 1.0f;
-        } else {
-            ragdoll_fade_speed = 40.0f;
-        }
+        ragdoll_fade_speed = 1.0f;
         target_duck_amount = 0.0f;
     } else if(how == _wake_fall){
         SetOnGround(true);
@@ -9847,7 +9877,7 @@ void ApplyCameraControls(const Timestep &in ts) {
     camera.SetFOV(mix(current_fov, level_cam_fov, level_cam_weight));
     camera.SetPos(mix(cam_pos, level_cam_pos, level_cam_weight));
     camera.SetDistance(mix(cam_distance, 0.0f, level_cam_weight));
-    if(this_mo.controller_id == 0){
+    if(this_mo.focused_character) {
         UpdateListener(camera.GetPos(),vec3(0,0,0),camera.GetFacing(),camera.GetUpVector());
     }
     camera.SetInterpSteps(ts.frames());
@@ -9993,19 +10023,40 @@ void ResetLayers() {
 }
 
 void CheckSpecies() {
-    if(character_getter.GetTag("species") == "rabbit"){
-        species = _rabbit;
-    } else if(character_getter.GetTag("species") == "wolf"){
-        species = _wolf;
-    } else if(character_getter.GetTag("species") == "dog"){
-        species = _dog;
-    } else if(character_getter.GetTag("species") == "rat"){
-        species = _rat;
-    } else if(character_getter.GetTag("species") == "cat"){
-        species = _cat;
+    string[] species_names = {
+        "rabbit",
+        "wolf",
+        "dog",
+        "rat",
+        "cat",
+    };
+    int[] species_values = {
+        _rabbit,
+        _wolf,
+        _dog,
+        _rat,
+        _cat,
+    };
+
+    string species_name_from_tag = character_getter.GetTag("species");
+    params.AddString("Species", species_name_from_tag);
+
+    string species_name_from_params = params.GetString("Species");
+
+    int index = species_names.find(species_name_from_params);
+
+    if(index != -1) {
+        species = species_values[index];
     } else {
-        species = -1;
+        index = species_names.find(species_name_from_tag);
+
+        if(index != -1) {
+            species = species_values[index];
+        } else {
+            species = -1;
+        }
     }
+
     BrainSpeciesUpdate();
 }
 
@@ -13535,6 +13586,8 @@ void ApplyPhysics(const Timestep &in ts) {
 }
 
 void SetParameters() {
+    CheckSpecies();
+
     params.AddIntSlider("Knockout Shield",0,"min:0,max:10");
     max_ko_shield = max(0, params.GetInt("Knockout Shield"));
     ko_shield = max_ko_shield;
@@ -13573,6 +13626,9 @@ void SetParameters() {
 
     params.AddIntCheckbox("Static",false);
     this_mo.static_char = (params.GetInt("Static") != 0);
+
+    params.AddIntCheckbox("Cannot Be Disarmed", false);
+    g_cannot_be_disarmed = params.GetInt("Cannot Be Disarmed") != 0;
 
     if(params.HasParam("Invisible When Stationary") && params.GetInt("Invisible When Stationary") != 0){
         invisible_when_stationary = 1;

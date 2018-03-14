@@ -10,5 +10,5 @@ Put the bow_and_arrow folder inside the [Installation Path]/Data/Mods folder.
 
 If, for some reason, you don't see the icons in the spawner menu, you should check the Mods page in the main menu. It will show you colliding mods. Remove the mod from the Mods folder that is colliding with and restart the game.  
 
-Last tested and working on version 1.1.  
+Last tested and working on version 1.2.  
 [Preorder the game here.](http://www.wolfire.com/overgrowth)
