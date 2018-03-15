@@ -42,10 +42,10 @@
     <RayToSun r0="0.849746" r1="0.499721" r2="0.167961" />
 </Sky>
 <ActorObjects>
-    <EnvObject t0="53.6263" t1="6.98564" t2="8.32358" s0="2.44315" s1="1" s2="1.78279" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="1" color_r="0.494118" color_g="0.494113" color_b="0.494113" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_block.xml">
+    <EnvObject t0="53.6263" t1="6.98564" t2="8.32358" s0="2.44315" s1="1" s2="1.78279" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="1" color_r="0.494118" color_g="0.494113" color_b="0.494113" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_block.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="53.5478" t1="12.2733" t2="-2.77832" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="5" type_file="Data/Characters/dummy_wolf.xml" is_player="0">
+    <ActorObject t0="53.5478" t1="12.2733" t2="-2.77832" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="5" type_file="Data/Characters/dummy_wolf.xml" npc_script_path="dummy.as" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Teams" type="string" val="dummy" />
@@ -56,7 +56,7 @@
         <ItemConnections />
         <Palette />
     </ActorObject>
-    <ActorObject t0="53.2374" t1="12.275" t2="1.34228" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="6" type_file="Data/Characters/dummy_guard.xml" is_player="0">
+    <ActorObject t0="53.2374" t1="12.275" t2="1.34228" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="6" type_file="Data/Characters/dummy_guard.xml" npc_script_path="dummy.as" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Teams" type="string" val="dummy" />
@@ -72,7 +72,7 @@
             <Color label="Armor" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <ActorObject t0="53.4988" t1="12.2736" t2="4.46076" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="7" type_file="Data/Characters/dummy_soldier.xml" is_player="0">
+    <ActorObject t0="53.4988" t1="12.2736" t2="4.46076" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="7" type_file="Data/Characters/dummy_soldier.xml" npc_script_path="dummy.as" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Teams" type="string" val="dummy" />
@@ -88,7 +88,7 @@
             <Color label="Fur patches" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <ActorObject t0="41.4553" t1="13.121" t2="9.53721" s0="1" s1="1" s2="1" q0="0" q1="0.957869" q2="0" q3="0.287205" id="8" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <ActorObject t0="41.4553" t1="13.121" t2="9.53721" s0="1" s1="1" s2="1" q0="0" q1="0.957869" q2="0" q3="0.287205" euler_x="3.14159" euler_y="0.582615" euler_z="3.14159" id="8" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="string" val="0.5" />
             <parameter name="Attack Damage" type="string" val="1.0" />
@@ -96,6 +96,7 @@
             <parameter name="Attack Speed" type="string" val="1.0" />
             <parameter name="Block Follow-up" type="string" val="0.5" />
             <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Damage Resistance" type="string" val="1.0" />
             <parameter name="Ear Size" type="float" val="1" />
@@ -112,6 +113,7 @@
             <parameter name="Peripheral FOV distance" type="float" val="4" />
             <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
             <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Teams" type="string" val="turner" />
         </parameters>
@@ -125,16 +127,16 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <ItemObject t0="49.3884" t1="11.3962" t2="-1.05391" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="9" type_file="Data/Items/DogWeapons/DogBroadSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="49.3884" t1="11.3962" t2="-1.05391" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="9" type_file="Data/Items/DogWeapons/DogBroadSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
-    <CameraObject t0="45.3682" t1="16.5778" t2="3.72222" s0="1" s1="1" s2="1" q0="0.253428" q1="0.64648" q2="-0.241719" q3="0.677798" id="10">
+    <CameraObject t0="47.1481" t1="15.3347" t2="0.312931" s0="1" s1="1" s2="1" q0="0.191619" q1="0.67673" q2="-0.189249" q3="0.685203" euler_x="0.54537" euler_y="1.55836" euler_z="-2.39507e-06" id="10">
         <parameters />
     </CameraObject>
-    <ItemObject t0="49.2748" t1="11.3968" t2="-0.252526" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="11" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="49.2748" t1="11.3968" t2="-0.252526" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="11" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
-    <ActorObject t0="53.2833" t1="12.2753" t2="7.77317" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="12" type_file="Data/Characters/dummy_rabbot.xml" is_player="0">
+    <ActorObject t0="53.2833" t1="12.2753" t2="7.77317" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="12" type_file="Data/Characters/dummy_rabbot.xml" npc_script_path="dummy.as" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Teams" type="string" val="dummy" />
@@ -145,13 +147,13 @@
         <ItemConnections />
         <Palette />
     </ActorObject>
-    <ItemObject t0="49.2838" t1="11.3968" t2="0.658252" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="13" type_file="Data/Items/DogWeapons/DogGlaive.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="49.2838" t1="11.3968" t2="0.658252" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="13" type_file="Data/Items/DogWeapons/DogGlaive.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
-    <ItemObject t0="49.204" t1="11.3972" t2="1.33259" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="14" type_file="Data/Items/rabbit_weapons/rabbit_knife.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="49.204" t1="11.3972" t2="1.33259" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="14" type_file="Data/Items/rabbit_weapons/rabbit_knife.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
-    <ItemObject t0="49.1758" t1="11.3974" t2="1.85446" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" id="15" type_file="Data/Items/DogWeapons/DogKnife.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="49.1758" t1="11.3974" t2="1.85446" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="15" type_file="Data/Items/DogWeapons/DogKnife.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
 </ActorObjects>
