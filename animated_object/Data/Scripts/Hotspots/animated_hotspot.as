@@ -950,23 +950,21 @@ void WritePlaceholderIndexes(){
 void Dispose(){
     level.StopReceivingLevelEvents(hotspot.GetID());
     if(!GetInputDown(0, "z")){
-        for(uint i = 0; i < animation_keys.size(); i++){
-            if(ObjectExists(animation_keys[i])){
-                QueueDeleteObjectID(animation_keys[i]);
-            }
-        }
-        for(uint i = 0; i < children.size(); i++){
-            if(ObjectExists(children[i])){
-                //A work-around deleting manually VS closing the game.
-                if(GetInputDown(0, "delete")){
-                    DeleteObjectID(children[i]);
-                }else{
-                    QueueDeleteObjectID(children[i]);
+        if(GetInputDown(0, "delete")){
+            for(uint i = 0; i < animation_keys.size(); i++){
+                if(ObjectExists(animation_keys[i])){
+                    QueueDeleteObjectID(animation_keys[i]);
                 }
             }
-        }
-        if(ObjectExists(main_object)){
-            DeleteObjectID(main_object);
+            for(uint i = 0; i < children.size(); i++){
+                if(ObjectExists(children[i])){
+                    //A work-around deleting manually.
+                        DeleteObjectID(children[i]);
+                    }
+                }
+            if(ObjectExists(main_object)){
+                DeleteObjectID(main_object);
+            }
         }
     }
 }
