@@ -11,6 +11,7 @@
 	<attachments>
 		<attachment>Data/Items/attachments/righthip.xml</attachment>
 	</attachments>
+	<anim_override movement = "Data/Animations/gunmovestance.xml"/>
 	<points>
 		<top x="0" y="-0.25" z="0"/>
 		<bottom x="0" y="0.25" z="0"/>
