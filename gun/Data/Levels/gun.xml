@@ -19,9 +19,9 @@
     </DetailMaps>
     <DetailObjects />
 </Terrain>
-<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
+<OutOfDate NavMesh="false" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
-<Script></Script>
+<Script>challengelevel.as</Script>
 <LevelScriptParameters>
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
     <parameter name="Extra AO" type="string" val="0" />
@@ -49,6 +49,7 @@
             <parameter name="Attack Speed" type="string" val="1.0" />
             <parameter name="Block Follow-up" type="string" val="0.5" />
             <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Damage Resistance" type="string" val="1.0" />
             <parameter name="Ear Size" type="float" val="1" />
@@ -65,6 +66,7 @@
             <parameter name="Peripheral FOV distance" type="float" val="4" />
             <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
             <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Teams" type="string" val="turner" />
         </parameters>
@@ -78,50 +80,17 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <Hotspot t0="47.0201" t1="3.63644" t2="-129.51" s0="0.1" s1="0.1" s2="0.1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" type_file="Data/Objects/gun_hotspot.xml">
+    <ItemObject t0="45.689" t1="4.04078" t2="-132.279" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" type_file="Data/Items/gun.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
-    </Hotspot>
-    <EnvObject t0="33.6417" t1="11.5108" t2="-153.799" s0="2.27026" s1="2.27026" s2="2.27026" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+    </ItemObject>
+    <EnvObject t0="19.5285" t1="-30.7388" t2="-133.423" s0="1.53066" s1="1.53066" s2="1.53066" q0="0" q1="0.866026" q2="0" q3="0.499999" euler_x="3.14159" euler_y="1.0472" euler_z="3.14159" id="23" color_r="0.611765" color_g="0.058824" color_b="0.058824" overbright="0" type_file="Data/Objects/Crete/hex_crete_tall.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="13.9481" t1="4.10761" t2="-133.537" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
-        <parameters>
-            <parameter name="Aggression" type="float" val="0.5" />
-            <parameter name="Attack Damage" type="float" val="1" />
-            <parameter name="Attack Knockback" type="float" val="1" />
-            <parameter name="Attack Speed" type="float" val="1" />
-            <parameter name="Block Follow-up" type="float" val="0.5" />
-            <parameter name="Block Skill" type="float" val="0.5" />
-            <parameter name="Character Scale" type="float" val="1" />
-            <parameter name="Damage Resistance" type="float" val="1" />
-            <parameter name="Ear Size" type="float" val="1" />
-            <parameter name="Fat" type="float" val="0.5" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
-            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
-            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
-            <parameter name="Ground Aggression" type="float" val="0.5" />
-            <parameter name="Knockout Shield" type="int" val="0" />
-            <parameter name="Left handed" type="int" val="0" />
-            <parameter name="Movement Speed" type="float" val="1" />
-            <parameter name="Muscle" type="float" val="0.5" />
-            <parameter name="Peripheral FOV distance" type="float" val="4" />
-            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
-            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
-            <parameter name="Static" type="int" val="0" />
-            <parameter name="Teams" type="string" val="guard" />
-        </parameters>
-        <Connections>
-            <Connection id="8" />
-        </Connections>
-        <ItemConnections />
-        <Palette />
-    </ActorObject>
-    <CameraObject t0="37.9715" t1="17.3248" t2="-116.825" s0="1" s1="1" s2="1" q0="0.236588" q1="-0.101441" q2="0.0248449" q3="0.965981" euler_x="0.480383" euler_y="-0.20926" euler_z="0" id="271">
+    <CameraObject t0="51.8791" t1="8.51155" t2="-130.391" s0="1" s1="1" s2="1" q0="0.218202" q1="-0.344564" q2="0.082684" q3="0.9093" euler_x="0.471028" euler_y="-0.724428" euler_z="0" id="271">
         <parameters />
     </CameraObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Gun" path="Data/Objects/gun_hotspot.xml" thumbnail_path="Data/UI/spawner/gun.png" />
-    <SpawnerItem display_name="Crete Block Marble Standard" path="Data/Objects/Crete/crete_block_marble_standard.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/crete_block_marble_standard.png" />
-    <SpawnerItem display_name="Male Rabbit Guard Brown" path="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_GuardActor_reddy.png" />
+    <SpawnerItem display_name="Gun" path="Data/Items/gun.xml" thumbnail_path="Data/UI/spawner/gun.png" />
 </RecentItems>

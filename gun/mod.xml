@@ -14,7 +14,7 @@
 	<NeedsRestart>false</NeedsRestart>
 	<Item 	category="Interactive Objects"
 			title="Gun"
-			path="Data/Objects/gun_hotspot.xml"
+			path="Data/Items/gun.xml"
 			thumbnail="Data/UI/spawner/gun.png" />
-	<LevelHookFile>Data/Scripts/gun.as</LevelHookFile>
+	<Level title="Gun Testing" thumbnail="Images/gun_full.jpg">gun.xml</Level>
 </Mod>
