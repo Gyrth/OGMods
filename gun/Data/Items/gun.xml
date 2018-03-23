@@ -11,7 +11,10 @@
 	<attachments>
 		<attachment>Data/Items/attachments/righthip.xml</attachment>
 	</attachments>
-	<anim_override movement = "Data/Animations/gunmovestance.xml"/>
+	<!-- <anim_blend idle = "Data/Animations/gunidle.xml"
+		movement = "Data/Animations/gunmove.xml"/> -->
+	<anim_override idle = "Data/Animations/r_weaponidlestance.xml"
+		movement = "Data/Animations/gunmovestance.xml"/>
 	<points>
 		<top x="0" y="-0.25" z="0"/>
 		<bottom x="0" y="0.25" z="0"/>

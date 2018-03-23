@@ -3466,7 +3466,7 @@ float ragdoll_air_start = 0.0;
 void UpdateState(const Timestep &in ts) {
     //For the gun.
     //When the character starts walking again after shooting an arrow the normal fov and camera offset need to be set.
-    if(length_squared(this_mo.velocity) > 1.0f && !gun.aiming){
+    if(!gun.aiming){
         //Slowly change the fov back to 90.
         if(fov < 90){
           fov += 0.75;

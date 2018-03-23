@@ -48,59 +48,65 @@ class Gun{
 		}
 		DebugText("key", "aiming " + aiming, _fade);
 		bool can_trigger = true;
-		if(trigger_time_out > 0.0){
+		if(trigger_time_out > 0.0 || !this_mo.controlled){
 			trigger_time_out -= time_step;
 			can_trigger = false;
 		}
 
-		if(aiming && weapon_slots[primary_weapon_slot] != -1){
+		if(weapon_slots[primary_weapon_slot] != -1){
 			ItemObject@ gun_item = ReadItemID(weapon_slots[primary_weapon_slot]);
 			vec3 cam_facing = camera.GetFacing();
 			Object@ charObject = ReadObjectFromID(this_mo.GetID());
 
+			mat4 gun_transform = gun_item.GetPhysicsTransform();
+			quaternion quat = QuaternionFromMat4(gun_transform);
+			vec3 direction = normalize(quat * vec3(-1,0,0));
+
 			if(GetInputDown(this_mo.controller_id, "attack") && can_trigger){
 				trigger_time_out = time_out_length;
 				PlaySound("Data/Sounds/Revolver.wav", this_mo.position);
-				bullets.insertLast(Bullet(gun_item.GetPhysicsPosition(), cam_facing));
+				camera_shake += 0.25f;
+				bullets.insertLast(Bullet(gun_item.GetPhysicsPosition(), direction));
 			}
 
-			vec3 facing = camera.GetFacing();
-			vec3 start = facing * 5.0f;
-			//Limited aim enabled.
-			vec3 end = vec3(facing.x, max(-0.9, min(0.5f, facing.y)), facing.z) * 30.0f;
-			//Collision check for non player objects
-			vec3 hit = col.GetRayCollision(camera.GetPos(), camera.GetPos() + end);
-			//Collision check for player objects.
-			col.CheckRayCollisionCharacters(camera.GetPos(), camera.GetPos() + end);
-			SetConfigValueFloat("mouse_sensitivity", aim_sensitivity);
+			if(aiming){
+				vec3 facing = direction;
+				vec3 start = facing * 5.0f;
+				//Limited aim enabled.
+				vec3 end = vec3(facing.x, max(-0.9, min(0.5f, facing.y)), facing.z) * 30.0f;
+				//Collision check for non player objects
+				vec3 hit = col.GetRayCollision(gun_transform.GetTranslationPart(), gun_transform.GetTranslationPart() + end);
+				//Collision check for player objects.
+				col.CheckRayCollisionCharacters(gun_transform.GetTranslationPart(), gun_transform.GetTranslationPart() + end);
+				SetConfigValueFloat("mouse_sensitivity", aim_sensitivity);
 
-			throw_target_pos = hit;
-			if(sphere_col.NumContacts() != 0){
-				for(int i = 0; i < sphere_col.NumContacts(); i++){
-					const CollisionPoint contact = sphere_col.GetContact(i);
-					if(contact.id != this_mo.GetID() && contact.position != vec3(0,0,0) && distance(camera.GetPos(), throw_target_pos) > distance(camera.GetPos() ,contact.position)){
-						throw_target_pos = contact.position;
+				throw_target_pos = hit;
+				if(sphere_col.NumContacts() != 0){
+					for(int i = 0; i < sphere_col.NumContacts(); i++){
+						const CollisionPoint contact = sphere_col.GetContact(i);
+						if(contact.id != this_mo.GetID() && contact.position != vec3(0,0,0) && distance(camera.GetPos(), throw_target_pos) > distance(camera.GetPos() ,contact.position)){
+							throw_target_pos = contact.position;
+						}
 					}
 				}
-			}
 
-			aim_particle = MakeParticle("Data/Particles/gun_aim.xml", throw_target_pos, vec3(0));
-			fov = max(fov - ((time - start_throwing_time)), 40.0f);
+				aim_particle = MakeParticle("Data/Particles/gun_aim.xml", throw_target_pos, vec3(0));
+				fov = max(fov - ((time - start_throwing_time)), 30.0f);
 
-			cam_pos_offset = vec3(cam_facing.z * -0.5, 0, cam_facing.x * 0.5);
-			DebugText("key1", "offset " + cam_pos_offset, _fade);
-			int8 flags = 0;
+				cam_pos_offset = vec3(cam_facing.z * -0.5, 0.15, cam_facing.x * 0.5);
+				int8 flags = 0;
 
-			if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
-				this_mo.SetAnimation("Data/Animations/gun_aim_middle.anm", 20.0f, flags);
-				this_mo.rigged_object().anim_client().RemoveLayer(gun_aim_anim, 20.0f);
-				if(this_mo.GetFacing().y > 0){
-					gun_aim_anim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/gun_aim_up.anm",(60*cam_facing.y),flags);
-				}else{
-					gun_aim_anim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/gun_aim_down.anm",-(60*cam_facing.y),flags);
-				}
-				if(cam_facing.y > -1.0f){
-					this_mo.SetRotationFromFacing(normalize(cam_facing + vec3(cam_facing.z * -0.5, 0, cam_facing.x * 0.5)));
+				if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
+					this_mo.SetAnimation("Data/Animations/gun_aim_middle.anm", 20.0f, flags);
+					this_mo.rigged_object().anim_client().RemoveLayer(gun_aim_anim, 20.0f);
+					if(this_mo.GetFacing().y > 0){
+						gun_aim_anim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/gun_aim_up.anm",(60*cam_facing.y),flags);
+					}else{
+						gun_aim_anim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/gun_aim_down.anm",-(60*cam_facing.y),flags);
+					}
+					if(cam_facing.y > -1.0f){
+						this_mo.SetRotationFromFacing(normalize(cam_facing + vec3(cam_facing.z * -0.15, 0, cam_facing.x * 0.15)));
+					}
 				}
 			}
 		}
@@ -113,7 +119,7 @@ class Gun{
 			vec3 start = bullet.starting_position;
 			vec3 end = bullet.starting_position + (bullet.direction * bullet_speed * time_step);
 			bool colliding = CheckCollisions(start, end);
-			DebugDrawLine(start, end, vec3(1), _fade);
+			DebugDrawLine(start, end, vec3(1), vec3(0.15), _fade);
 			bullet.SetStartingPoint(end);
 			if (bullet.distance_done > max_bullet_distance || colliding){
 				bullets.removeAt(i);
