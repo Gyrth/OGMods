@@ -123,6 +123,8 @@ void Display(){
 			for(uint i = 0; i < category_names.size(); i++){
 				AddCategory(category_names[i], sorted_items[i]);
 			}
+			TextureAssetRef youdied_texture = LoadTexture("Data/Images/youdied.png");
+			ImGui_Image(youdied_texture, vec2(ImGui_GetWindowWidth(), ImGui_GetWindowWidth() / 4.75f));
 			ImGui_EndChildFrame();
 		}
 		ImGui_End();
@@ -175,7 +177,7 @@ void AddItem(SpawnerItem item, int index){
 		ImGui_PushStyleColor(ImGuiCol_Button, vec4(0.0f));
 	}
 
-	if (ImGui_ImageButton(image_texture, vec2(icon_size - title_height,icon_size - title_height), vec2(0,0), vec2(1,1), 0, vec4(0))){
+	if (ImGui_ImageButton(image_texture, vec2(icon_size - title_height,icon_size - title_height))){
 		if(currently_selected == item.GetTitle()){
 			currently_selected = "";
 			spawn = false;
