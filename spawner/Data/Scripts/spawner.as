@@ -167,8 +167,8 @@ void AddItem(SpawnerItem item, int index){
 
 	ImGui_Text(item.GetTitle());
 
-	TextureAssetRef image_texture = LoadTexture("Data/UI/spawner/thumbs/Static Objects/sphere_crete_rubble.png");
-	/*TextureAssetRef image_texture = LoadTexture(item.GetThumbnail());*/
+	/*TextureAssetRef image_texture = LoadTexture("Data/UI/spawner/thumbs/Static Objects/sphere_crete_rubble.png");*/
+	TextureAssetRef image_texture = LoadTexture(item.GetThumbnail());
 
 	if(currently_selected == item.GetTitle()){
 		ImGui_PushStyleColor(ImGuiCol_Button, vec4(1.0f, 0.0f, 1.0f, 0.5f));
