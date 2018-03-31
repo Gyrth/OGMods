@@ -1,15 +1,18 @@
 <? xml version="1.0" ?>
 <Mod>
-    <Id>spawner</Id>
-    <Name>Spawner Mod</Name>
-    <Category>Item Pack</Category>
-    <Version>0.1.0</Version>
-    <Author>Gyrth McMulin</Author>
-    <Thumbnail>Data/Images/spawner_thumb.jpg</Thumbnail>
-    <PreviewImage>Data/Images/spawner_full.jpg</PreviewImage>
-    <Description>Spawner.</Description>
-    <Tag>no</Tag>
-    <SupportedVersion>*</SupportedVersion>
-    <NeedsRestart>false</NeedsRestart>
-    <LevelHookFile>Data/Scripts/spawner.as</LevelHookFile>
+	<Id>spawner</Id>
+	<Name>Spawner Mod</Name>
+	<Category>Item Pack</Category>
+	<Version>0.1.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Thumbnail>Data/Images/spawner_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/spawner_full.jpg</PreviewImage>
+	<Description>The spawner from the older version of Overgrowth remake in DearIMGUI.</Description>
+	<Tag>March2018jam</Tag>
+	<Tag>Scripting</Tag>
+	<Tag>Tool</Tag>
+	<Tag>Editor</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<NeedsRestart>false</NeedsRestart>
+	<LevelHookFile>Data/Scripts/spawner.as</LevelHookFile>
 </Mod>
