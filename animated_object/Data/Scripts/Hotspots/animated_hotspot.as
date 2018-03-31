@@ -254,6 +254,9 @@ void SetParameters() {
     params.AddIntCheckbox("Draw path lines", false);
     params.AddIntCheckbox("Draw connect lines", true);
     params.AddIntCheckbox("Scale Object Preview", false);
+
+    params.AddIntCheckbox("Item trigger", false);
+
     //Unfortunately I can not get the model path from the xml file via scripting.
     //So the model needs to be declared seperatly.
     params.AddString("Model Path", "Data/Models/arrow.obj");
