@@ -2,6 +2,20 @@ void DrawGUI() {
 	Display();
 }
 
+bool show = false;
+int voice_preview = 1;
+bool select = false;
+int icon_size = 155;
+int title_height = 10;
+int scrollbar_width = 10;
+int padding = 10;
+bool open_header = true;
+int top_bar_height = 32;
+bool spawn = false;
+string currently_selected = "";
+string load_item_path = "";
+array<string> category_names;
+array<array<SpawnerItem>> sorted_items;
 array<SpawnerItem> all_items;
 array<SpawnerItem> query_result;
 
@@ -10,43 +24,46 @@ void Init(string str){
 	QuerySpawnerItems("");
 }
 
-bool spawn = false;
-string default_object_path = "Data/Objects/placeholder/empty_placeholder.xml";
-string load_item_path = "";
-
 void Update(int paused){
-	if(GetInputPressed(0, "mouse0")){
-	/*if(ImGui_IsMouseClicked(0)){*/
-		if(spawn){
-			Print(camera.GetMouseRay() + "spawn\n");
-			int id = -1;
-			if(load_item_path != ""){
-				 id = CreateObject(load_item_path);
-			}else{
-				id = CreateObject(default_object_path);
+	if(EditorModeActive()){
+		if(GetInputPressed(0, "mouse0")){
+		/*if(ImGui_IsMouseClicked(0)){*/
+			if(spawn){
+				int id = -1;
+				if(FileExists(load_item_path)){
+					id = CreateObject(load_item_path);
+					Object@ obj = ReadObjectFromID(id);
+					obj.SetTranslation(camera.GetPos() + (camera.GetMouseRay() * 5.0f));
+					obj.SetSelectable(true);
+					obj.SetTranslatable(true);
+					obj.SetScalable(true);
+					obj.SetRotatable(true);
+					obj.SetDeletable(true);
+					DeselectAll();
+					obj.SetSelected(true);
+				}else{
+					DisplayError("Error", "This xml file does not exist: " + load_item_path);
+				}
+				Log(info, "Creating object " + load_item_path);
+				load_item_path = "";
+				currently_selected = "";
+				spawn = false;
 			}
-			load_item_path = "";
-			Object@ obj = ReadObjectFromID(id);
-			obj.SetTranslation(camera.GetPos() + (camera.GetMouseRay() * 5.0f));
-			obj.SetSelectable(true);
-			obj.SetTranslatable(true);
-			obj.SetScalable(true);
-			obj.SetRotatable(true);
-			obj.SetDeletable(true);
-			UnmarkAll();
+		}else if(GetInputPressed(0, "i")){
+			show = !show;
 		}
-		spawn = false;
+	}else if(show){
+		show = false;
 	}
 }
 
 void QuerySpawnerItems(string query){
 	query_result.resize(0);
 	for(uint i = 0; i < all_items.size(); i++){
-		if(ToLowerCase(all_items[i].GetTitle()).findFirst(ToLowerCase(query)) != -1){
+		if(ToLowerCase(all_items[i].GetTitle()).findFirst(ToLowerCase(query)) != -1 || ToLowerCase(all_items[i].GetCategory()).findFirst(ToLowerCase(query)) != -1){
 			query_result.insertLast(all_items[i]);
 		}
 	}
-	toggles.resize(query_result.size());
 }
 
 string ToLowerCase(string input){
@@ -65,16 +82,21 @@ string ToLowerCase(string input){
 	return output;
 }
 
-bool show = true;
-int voice_preview = 1;
-bool select = false;
-int icon_size = 155;
-int title_height = 10;
-int scrollbar_width = 10;
-int padding = 10;
-array<bool> toggles;
-bool open_header = true;
-int top_bar_height = 32;
+void SortIntoCategories(){
+	category_names.resize(0);
+	sorted_items.resize(0);
+
+	for(uint i = 0; i < query_result.size(); i++){
+		int category_index = category_names.find(query_result[i].GetCategory());
+		if(category_index == -1){
+			category_names.insertLast(query_result[i].GetCategory());
+			array<SpawnerItem> new_category = {query_result[i]};
+			sorted_items.insertLast(new_category);
+		}else{
+			sorted_items[category_index].insertLast(query_result[i]);
+		}
+	}
+}
 
 void Display(){
 	if(show){
@@ -87,9 +109,8 @@ void Display(){
 		ImGui_NextColumn();
 		if(ImGui_Button("Load Item...")){
 			string path = GetUserPickedReadPath("xml", "Data/Objects");
-			if(path != ""){
-				ReceiveMessage("load_object \""+path+"\"");
-			}
+			load_item_path = path;
+			spawn = true;
 		}
 		ImGui_NextColumn();
 		ImGui_DragInt("Icon Size", icon_size, 1.0f, 75, 500, "%.0f");
@@ -98,7 +119,10 @@ void Display(){
 		ImGui_PushStyleColor(ImGuiCol_FrameBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
 		if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth() - scrollbar_width, ImGui_GetWindowHeight() - (top_bar_height + 30)), ImGuiWindowFlags_AlwaysAutoResize)){
 			ImGui_PopStyleColor(2);
-			AddCategory("category1", query_result);
+			SortIntoCategories();
+			for(uint i = 0; i < category_names.size(); i++){
+				AddCategory(category_names[i], sorted_items[i]);
+			}
 			ImGui_EndChildFrame();
 		}
 		ImGui_End();
@@ -144,7 +168,7 @@ void AddItem(SpawnerItem item, int index){
 	TextureAssetRef image_texture = LoadTexture("Data/UI/spawner/thumbs/Static Objects/sphere_crete_rubble.png");
 	/*TextureAssetRef image_texture = LoadTexture(item.GetThumbnail());*/
 
-	if(toggles[index]){
+	if(currently_selected == item.GetTitle()){
 		ImGui_PushStyleColor(ImGuiCol_Button, vec4(1.0f, 0.0f, 1.0f, 0.5f));
 	}
 	else{
@@ -152,38 +176,16 @@ void AddItem(SpawnerItem item, int index){
 	}
 
 	if (ImGui_ImageButton(image_texture, vec2(icon_size - title_height,icon_size - title_height), vec2(0,0), vec2(1,1), 0, vec4(0))){
-		if(toggles[index]){
+		if(currently_selected == item.GetTitle()){
+			currently_selected = "";
 			spawn = false;
 		}else{
-			ReceiveMessage("load_object " + item.GetPath());
-			UnmarkAll();
+			currently_selected = item.GetTitle();
+			load_item_path = item.GetPath();
 			spawn = true;
 		}
-		toggles[index] = !toggles[index];
 	}
 	ImGui_PopStyleColor();
-
 	ImGui_EndChild();
 	ImGui_PopStyleColor();
-}
-
-void UnmarkAll(){
-	for(uint i = 0; i < toggles.size(); i++){
-		toggles[i] = false;
-	}
-}
-
-void ReceiveMessage(string msg){
-	Print("received " + msg + "\n");
-	TokenIterator token_iter;
-	token_iter.Init();
-	if(!token_iter.FindNextToken(msg)){
-		return;
-	}
-	string token = token_iter.GetToken(msg);
-	if(token == "load_object"){
-		token_iter.FindNextToken(msg);
-		load_item_path = token_iter.GetToken(msg);
-		spawn = true;
-	}
 }
