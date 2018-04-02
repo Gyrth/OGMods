@@ -16,6 +16,8 @@ bool reverse_at_end = false;
 bool mult_trigger = false;
 string model_path;
 string objectPath;
+string itemPath;
+int itemID;
 float node_timer = 0.0f;
 bool next_pathpoint = true;
 array<int> children;
@@ -61,6 +63,7 @@ void Init() {
     model_path = params.GetString("Model Path");
     current_mode = PlayMode(params.GetInt("Play mode"));
     objectPath = params.GetString("Object Path");
+	itemPath = params.GetString("Item Label");
     wiremesh_preview = params.GetInt("Wiremesh preview");
     draw_preview_objects = (params.GetInt("Draw preview objects") == 1);
 
@@ -254,12 +257,11 @@ void SetParameters() {
     params.AddIntCheckbox("Draw path lines", false);
     params.AddIntCheckbox("Draw connect lines", true);
     params.AddIntCheckbox("Scale Object Preview", false);
-
-    params.AddIntCheckbox("Item trigger", false);
-
     //Unfortunately I can not get the model path from the xml file via scripting.
     //So the model needs to be declared seperatly.
     params.AddString("Model Path", "Data/Models/arrow.obj");
+	params.AddIntCheckbox("Check for Item", false);
+	params.AddString("Item Label", "knife");
 }
 
 string GetNewIdentifier(){
@@ -294,7 +296,26 @@ void HandleEvent(string event, MovementObject @mo){
 void OnEnter(MovementObject @mo) {
     if((mo.controlled || params.GetInt("AI trigger") == 1) && on_enter && !playing && !done){
         //Once the user steps into the hotspot the animation will start.
-        playing = true;
+		if(params.GetInt("Check for Item") == 1){
+			bool hasItem = false;
+			for (int i = 0; i < 2; i++){
+				if((hasItem == false)&&(mo.GetArrayIntVar("weapon_slots", i) != -1)){
+					itemID = mo.GetArrayIntVar("weapon_slots", i);
+					ItemObject@ weapon = ReadItemID(itemID);
+					string weaponPath = weapon.GetLabel();
+					if(weaponPath == itemPath){
+						hasItem = true;
+					}
+				}
+			}
+			if (hasItem){
+				playing = true;
+			} else {
+				playing = false;
+			}
+		} else {
+			playing = true;
+		}
     }
 }
 
@@ -481,7 +502,10 @@ bool CheckParamChanges(){
             UpdatePlayMode();
             ResetAnimation();
             return true;
-        }
+        } else if(itemPath != params.GetString("Item Label")){
+            itemPath = params.GetString("Item Label");
+            return true;
+		}
         if(draw_preview_objects != (params.GetInt("Draw preview objects") == 1)){
             draw_preview_objects = (params.GetInt("Draw preview objects") == 1);
             if(draw_preview_objects && wiremesh_preview == 0){
