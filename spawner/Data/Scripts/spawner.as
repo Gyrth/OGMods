@@ -6,7 +6,7 @@ bool show = false;
 int voice_preview = 1;
 bool select = false;
 int icon_size = 155;
-int title_height = 10;
+int title_height = 25;
 int scrollbar_width = 10;
 int padding = 10;
 bool open_header = true;
@@ -14,14 +14,50 @@ int top_bar_height = 32;
 bool spawn = false;
 string currently_selected = "";
 string load_item_path = "";
-array<string> category_names;
-array<array<SpawnerItem>> sorted_items;
-array<SpawnerItem> all_items;
-array<SpawnerItem> query_result;
+
+TextureAssetRef youdied_texture = LoadTexture("Data/Images/youdied.png");
+
+array<GUISpawnerItem@> all_items;
+array<GUISpawnerCategory@> categories;
+
+class GUISpawnerItem{
+	string title;
+	string category;
+	string path;
+	TextureAssetRef icon;
+	SpawnerItem spawner_item;
+
+	GUISpawnerItem(string _category, string _title, string _path, TextureAssetRef _icon, SpawnerItem _spawner_item){
+		category = _category;
+		icon = _icon;
+		spawner_item = _spawner_item;
+		title = _title;
+		path = _path;
+	}
+}
+
+class GUISpawnerCategory{
+	string category_name;
+	array<GUISpawnerItem@> spawner_items;
+	GUISpawnerCategory(string _category_name){
+		category_name = _category_name;
+	}
+	void AddItem(GUISpawnerItem@ item){
+		spawner_items.insertLast(@item);
+	}
+}
 
 void Init(string str){
-	all_items = ModGetAllSpawnerItems();
-	QuerySpawnerItems("");
+	GetAllSpawnerItems();
+	categories = SortIntoCategories(QuerySpawnerItems(""));
+}
+
+void GetAllSpawnerItems(){
+	array<SpawnerItem> spawner_items = ModGetAllSpawnerItems();
+	for(uint i = 0; i < spawner_items.size(); i++){
+		TextureAssetRef icon_texture = LoadTexture(spawner_items[i].GetThumbnail());
+		all_items.insertLast(@GUISpawnerItem(spawner_items[i].GetCategory(), spawner_items[i].GetTitle(), spawner_items[i].GetPath(), icon_texture, spawner_items[i]));
+	}
 }
 
 void Update(int paused){
@@ -57,13 +93,14 @@ void Update(int paused){
 	}
 }
 
-void QuerySpawnerItems(string query){
-	query_result.resize(0);
+array<GUISpawnerItem@> QuerySpawnerItems(string query){
+	array<GUISpawnerItem@> new_list;
 	for(uint i = 0; i < all_items.size(); i++){
-		if(ToLowerCase(all_items[i].GetTitle()).findFirst(ToLowerCase(query)) != -1 || ToLowerCase(all_items[i].GetCategory()).findFirst(ToLowerCase(query)) != -1){
-			query_result.insertLast(all_items[i]);
+		if(ToLowerCase(all_items[i].title).findFirst(ToLowerCase(query)) != -1 || ToLowerCase(all_items[i].category).findFirst(ToLowerCase(query)) != -1){
+			new_list.insertLast(@all_items[i]);
 		}
 	}
+	return new_list;
 }
 
 string ToLowerCase(string input){
@@ -82,20 +119,27 @@ string ToLowerCase(string input){
 	return output;
 }
 
-void SortIntoCategories(){
-	category_names.resize(0);
-	sorted_items.resize(0);
+array<GUISpawnerCategory@> SortIntoCategories(array<GUISpawnerItem@> unsorted){
+	array<GUISpawnerCategory@> sorted;
 
-	for(uint i = 0; i < query_result.size(); i++){
-		int category_index = category_names.find(query_result[i].GetCategory());
+	for(uint i = 0; i < unsorted.size(); i++){
+
+		int category_index = -1;
+		for(uint j = 0; j < sorted.size(); j++){
+			if (sorted[j].category_name == unsorted[i].category){
+				category_index = j;
+			}
+		}
+
 		if(category_index == -1){
-			category_names.insertLast(query_result[i].GetCategory());
-			array<SpawnerItem> new_category = {query_result[i]};
-			sorted_items.insertLast(new_category);
+			GUISpawnerCategory new_category(unsorted[i].category);
+			new_category.AddItem(@unsorted[i]);
+			sorted.insertLast(@new_category);
 		}else{
-			sorted_items[category_index].insertLast(query_result[i]);
+			sorted[category_index].AddItem(@unsorted[i]);
 		}
 	}
+	return sorted;
 }
 
 void Display(){
@@ -104,7 +148,7 @@ void Display(){
 		ImGui_BeginChild(99, vec2(ImGui_GetWindowWidth(), top_bar_height), false, ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 		ImGui_Columns(3, false);
 		if(ImGui_InputText("Search", ImGuiInputTextFlags_AutoSelectAll)){
-			QuerySpawnerItems(ImGui_GetTextBuf());
+			categories = SortIntoCategories(QuerySpawnerItems(ImGui_GetTextBuf()));
 		}
 		ImGui_NextColumn();
 		if(ImGui_Button("Load Item...")){
@@ -119,29 +163,28 @@ void Display(){
 		ImGui_PushStyleColor(ImGuiCol_FrameBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
 		if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth() - scrollbar_width, ImGui_GetWindowHeight() - (top_bar_height + 30)), ImGuiWindowFlags_AlwaysAutoResize)){
 			ImGui_PopStyleColor(2);
-			SortIntoCategories();
-			for(uint i = 0; i < category_names.size(); i++){
-				AddCategory(category_names[i], sorted_items[i]);
+
+			for(uint i = 0; i < categories.size(); i++){
+				AddCategory(categories[i]);
 			}
-			TextureAssetRef youdied_texture = LoadTexture("Data/Images/youdied.png");
-			ImGui_Image(youdied_texture, vec2(ImGui_GetWindowWidth(), ImGui_GetWindowWidth() / 4.75f));
+			ImGui_Image(youdied_texture, vec2(ImGui_GetWindowWidth() - padding, ImGui_GetWindowWidth() / 4.75f - padding));
 			ImGui_EndChildFrame();
 		}
 		ImGui_End();
 	}
 }
 
-void AddCategory(string category, array<SpawnerItem> items){
-	if(items.size() < 1){
+void AddCategory(GUISpawnerCategory@ category){
+	if(category.spawner_items.size() < 1){
 		return;
 	}
 	ImGui_PushStyleColor(ImGuiCol_Border, vec4(0.0f, 0.5f, 0.5f, 0.5f));
 	ImGui_PushStyleColor(ImGuiCol_Header, vec4(1.0f, 0.5f, 0.0f, 0.5f));
-	if(ImGui_TreeNodeEx(category, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
+	if(ImGui_TreeNodeEx(category.category_name, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
 		ImGui_Unindent(30.0f);
-		ImGui_BeginChild(category, vec2(ImGui_GetWindowWidth(), icon_size), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoInputs);
+		ImGui_BeginChild(category.category_name, vec2(ImGui_GetWindowWidth(), icon_size), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoInputs);
 		float row_size = 0.0f;
-		for(uint i = 0; i < items.size(); i++){
+		for(uint i = 0; i < category.spawner_items.size(); i++){
 			row_size += icon_size + padding;
 			if(row_size > ImGui_GetWindowWidth()){
 				row_size = icon_size + padding;
@@ -152,7 +195,7 @@ void AddCategory(string category, array<SpawnerItem> items){
 				ImGui_BeginChild("child " + i, vec2(ImGui_GetWindowWidth(), icon_size), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoInputs);
 			}
 			ImGui_SameLine();
-			AddItem(items[i], i);
+			AddItem(category.spawner_items[i]);
 		}
 		ImGui_EndChild();
 		ImGui_Indent(30.0f);
@@ -161,32 +204,32 @@ void AddCategory(string category, array<SpawnerItem> items){
 	ImGui_PopStyleColor();
 }
 
-void AddItem(SpawnerItem item, int index){
+void AddItem(GUISpawnerItem@ spawner_item){
 	ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, vec4(1.0f, 0.0f, 1.0f, 0.1f));
-	ImGui_BeginChild(item.GetTitle() + "button" + index, vec2(icon_size), false, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_ShowBorders);
+	ImGui_BeginChild(spawner_item.title + "button", vec2(icon_size), true, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar);
 
-	ImGui_Text(item.GetTitle());
+	ImGui_Text(spawner_item.title);
 
-	/*TextureAssetRef image_texture = LoadTexture("Data/UI/spawner/thumbs/Static Objects/sphere_crete_rubble.png");*/
-	TextureAssetRef image_texture = LoadTexture(item.GetThumbnail());
-
-	if(currently_selected == item.GetTitle()){
+	if(currently_selected == spawner_item.title){
 		ImGui_PushStyleColor(ImGuiCol_Button, vec4(1.0f, 0.0f, 1.0f, 0.5f));
 	}
 	else{
 		ImGui_PushStyleColor(ImGuiCol_Button, vec4(0.0f));
 	}
 
-	if (ImGui_ImageButton(image_texture, vec2(icon_size - title_height,icon_size - title_height))){
-		if(currently_selected == item.GetTitle()){
+	ImGui_Indent((title_height / 2.0f) - (padding / 2.0f));
+	if (ImGui_ImageButton(spawner_item.icon, vec2(icon_size - title_height,icon_size - title_height))){
+		if(currently_selected == spawner_item.title){
 			currently_selected = "";
 			spawn = false;
 		}else{
-			currently_selected = item.GetTitle();
-			load_item_path = item.GetPath();
+			currently_selected = spawner_item.title;
+			load_item_path = spawner_item.path;
 			spawn = true;
 		}
 	}
+	ImGui_Unindent((title_height / 2.0f) - (padding / 2.0f));
+
 	ImGui_PopStyleColor();
 	ImGui_EndChild();
 	ImGui_PopStyleColor();
