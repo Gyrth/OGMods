@@ -15,7 +15,7 @@ bool spawn = false;
 string currently_selected = "";
 string load_item_path = "";
 
-TextureAssetRef youdied_texture = LoadTexture("Data/Images/youdied.png");
+TextureAssetRef youdied_texture = LoadTexture("Data/Images/youdied.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
 array<GUISpawnerItem@> all_items;
 array<GUISpawnerCategory@> categories;
@@ -55,7 +55,7 @@ void Init(string str){
 void GetAllSpawnerItems(){
 	array<SpawnerItem> spawner_items = ModGetAllSpawnerItems();
 	for(uint i = 0; i < spawner_items.size(); i++){
-		TextureAssetRef icon_texture = LoadTexture(spawner_items[i].GetThumbnail());
+		TextureAssetRef icon_texture = LoadTexture(spawner_items[i].GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 		all_items.insertLast(@GUISpawnerItem(spawner_items[i].GetCategory(), spawner_items[i].GetTitle(), spawner_items[i].GetPath(), icon_texture, spawner_items[i]));
 	}
 }
