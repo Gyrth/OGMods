@@ -12,6 +12,9 @@ int padding = 10;
 bool open_header = true;
 int top_bar_height = 32;
 bool spawn = false;
+bool retrieved_item_list = false;
+bool retrieved_thumbnails = false;
+uint thumbnail_retrieve_index = 0;
 string currently_selected = "";
 string load_item_path = "";
 
@@ -38,6 +41,23 @@ class GUISpawnerItem{
 		path = _path;
 		id = _id;
 	}
+	void SetThumbnail(){
+		//If no thumbnail was set, use the default one.
+		if(spawner_item.GetThumbnail() == ""){
+			return;
+		}else{
+			icon = LoadTexture(spawner_item.GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+		}
+	}
+}
+
+void GetNextThumbnail(){
+	thumbnail_retrieve_index++;
+	if(thumbnail_retrieve_index >= all_items.size()){
+		retrieved_thumbnails = true;
+		return;
+	}
+	all_items[thumbnail_retrieve_index].SetThumbnail();
 }
 
 class GUISpawnerCategory{
@@ -52,20 +72,13 @@ class GUISpawnerCategory{
 }
 
 void Init(string str){
-	GetAllSpawnerItems();
-	categories = SortIntoCategories(QuerySpawnerItems(""));
+
 }
 
 void GetAllSpawnerItems(){
 	array<SpawnerItem> spawner_items = ModGetAllSpawnerItems();
 	for(uint i = 0; i < spawner_items.size(); i++){
-		TextureAssetRef icon_texture;
-		//If no thumbnail was set, use the default one.
-		if(spawner_items[i].GetThumbnail() == ""){
-			icon_texture = default_texture;
-		}else{
-			icon_texture = LoadTexture(spawner_items[i].GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
-		}
+		TextureAssetRef icon_texture = default_texture;
 		all_items.insertLast(@GUISpawnerItem(spawner_items[i].GetCategory(), spawner_items[i].GetTitle(), spawner_items[i].GetPath(), i, icon_texture, spawner_items[i]));
 	}
 }
@@ -97,6 +110,13 @@ void Update(int paused){
 			}
 		}else if(GetInputPressed(0, "i")){
 			show = !show;
+		}
+		if(show && !retrieved_item_list){
+			GetAllSpawnerItems();
+			categories = SortIntoCategories(QuerySpawnerItems(""));
+			retrieved_item_list = true;
+		}else if (show && !retrieved_thumbnails){
+			GetNextThumbnail();
 		}
 	}else if(show){
 		show = false;
