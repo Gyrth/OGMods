@@ -17,6 +17,8 @@ string load_item_path = "";
 
 TextureAssetRef youdied_texture = LoadTexture("Data/Images/youdied.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
+TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/whaleman.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+
 array<GUISpawnerItem@> all_items;
 array<GUISpawnerCategory@> categories;
 
@@ -24,15 +26,17 @@ class GUISpawnerItem{
 	string title;
 	string category;
 	string path;
+	uint id;
 	TextureAssetRef icon;
 	SpawnerItem spawner_item;
 
-	GUISpawnerItem(string _category, string _title, string _path, TextureAssetRef _icon, SpawnerItem _spawner_item){
+	GUISpawnerItem(string _category, string _title, string _path, int _id, TextureAssetRef _icon, SpawnerItem _spawner_item){
 		category = _category;
 		icon = _icon;
 		spawner_item = _spawner_item;
 		title = _title;
 		path = _path;
+		id = _id;
 	}
 }
 
@@ -55,8 +59,14 @@ void Init(string str){
 void GetAllSpawnerItems(){
 	array<SpawnerItem> spawner_items = ModGetAllSpawnerItems();
 	for(uint i = 0; i < spawner_items.size(); i++){
-		TextureAssetRef icon_texture = LoadTexture(spawner_items[i].GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
-		all_items.insertLast(@GUISpawnerItem(spawner_items[i].GetCategory(), spawner_items[i].GetTitle(), spawner_items[i].GetPath(), icon_texture, spawner_items[i]));
+		TextureAssetRef icon_texture;
+		//If no thumbnail was set, use the default one.
+		if(spawner_items[i].GetThumbnail() == ""){
+			icon_texture = default_texture;
+		}else{
+			icon_texture = LoadTexture(spawner_items[i].GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+		}
+		all_items.insertLast(@GUISpawnerItem(spawner_items[i].GetCategory(), spawner_items[i].GetTitle(), spawner_items[i].GetPath(), i, icon_texture, spawner_items[i]));
 	}
 }
 
@@ -206,7 +216,7 @@ void AddCategory(GUISpawnerCategory@ category){
 
 void AddItem(GUISpawnerItem@ spawner_item){
 	ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, vec4(1.0f, 0.0f, 1.0f, 0.1f));
-	ImGui_BeginChild(spawner_item.title + "button", vec2(icon_size), true, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar);
+	ImGui_BeginChild(spawner_item.id + "button", vec2(icon_size), true, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar);
 
 	ImGui_Text(spawner_item.title);
 
