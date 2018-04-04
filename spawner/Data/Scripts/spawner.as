@@ -52,12 +52,12 @@ class GUISpawnerItem{
 }
 
 void GetNextThumbnail(){
+	all_items[thumbnail_retrieve_index].SetThumbnail();
 	thumbnail_retrieve_index++;
 	if(thumbnail_retrieve_index >= all_items.size()){
 		retrieved_thumbnails = true;
 		return;
 	}
-	all_items[thumbnail_retrieve_index].SetThumbnail();
 }
 
 class GUISpawnerCategory{
