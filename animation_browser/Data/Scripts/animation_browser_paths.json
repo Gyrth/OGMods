@@ -1,6 +1,6 @@
 {
     "Overgrowth Core": {
-        "Number of animations": 540,
+        "Number of animations": 541,
         "Mod ID": "com-wolfire-overgrowth-core",
         "Animations": [
             "Data/Animations/amos_door1.anm",
@@ -205,6 +205,7 @@
             "Data/Animations/r_lowkick.anm",
             "Data/Animations/r_lowkickblocked.anm",
             "Data/Animations/r_macuahuitlgrip.anm",
+            "Data/Animations/r_meditate.anm",
             "Data/Animations/r_misc_right_chest.anm",
             "Data/Animations/r_misc_right_front_hip.anm",
             "Data/Animations/r_misc_right_hip.anm",
@@ -679,6 +680,13 @@
             "Data/animations/alien_warrior/w_wolfslapfollowthrough.anm"
         ]
     },
+    "RabbitZ": {
+        "Number of animations": 1,
+        "Mod ID": "rabbitz-sum",
+        "Animations": [
+            "Data/Custom/twowolves/rabbitz/Animations/run.anm"
+        ]
+    },
     "Dismemeberment": {
         "Number of animations": 22,
         "Mod ID": "ded",
@@ -705,26 +713,6 @@
             "Data/Animations/r_twinkicklow.anm",
             "Data/Animations/r_walk_3.anm",
             "Data/Animations/r_writhe.anm"
-        ]
-    },
-    "Animalrun": {
-        "Number of animations": 1,
-        "Mod ID": "animalrun-edo",
-        "Animations": [
-            "Data/Animations/animalrun.anm"
-        ]
-    },
-    "New Animations": {
-        "Number of animations": 7,
-        "Mod ID": "animations",
-        "Animations": [
-            "Data/Animations/Assassincrouch1.anm",
-            "Data/Animations/Assassincrouch2.anm",
-            "Data/Animations/r_ledge_barely_reach.anm",
-            "Data/Animations/r_ledge_climb_fast.anm",
-            "Data/Animations/r_standfromback2.anm",
-            "Data/Animations/r_standfromfront.anm",
-            "Data/Animations/totallysecretanimation.anm"
         ]
     },
     "Bow and Arrow Mod": {
@@ -796,6 +784,57 @@
         "Mod ID": "halzoidjam",
         "Animations": [
             "Data/Animations/HalzoidDialogueposes_Downloadformorelikethis.anm"
+        ]
+    },
+    "Animalrun": {
+        "Number of animations": 1,
+        "Mod ID": "animalrun-edo",
+        "Animations": [
+            "Data/Animations/animalrun.anm"
+        ]
+    },
+    "Drika's Story": {
+        "Number of animations": 25,
+        "Mod ID": "const-marchtwentyeighteen",
+        "Animations": [
+            "Data/Animations/const_freefallarm.anm",
+            "Data/Animations/const_freefallbreath.anm",
+            "Data/Animations/const_freefallstart.anm",
+            "Data/Animations/const_freefallstep.anm",
+            "Data/Animations/dialogue_sitting_sad.anm",
+            "Data/Animations/drika_fromsit.anm",
+            "Data/Animations/folti_bow.anm",
+            "Data/Animations/folti_fromdrink.anm",
+            "Data/Animations/folti_fromsit.anm",
+            "Data/Animations/folti_hand.anm",
+            "Data/Animations/folti_idle.anm",
+            "Data/Animations/folti_oneleg.anm",
+            "Data/Animations/folti_onelegdrink.anm",
+            "Data/Animations/folti_raise.anm",
+            "Data/Animations/folti_rapieridle.anm",
+            "Data/Animations/folti_read.anm",
+            "Data/Animations/folti_spit.anm",
+            "Data/Animations/folti_tosit.anm",
+            "Data/Animations/folti_tospit.anm",
+            "Data/Animations/gabber.anm",
+            "Data/Animations/joker_hand.anm",
+            "Data/Animations/joker_idle.anm",
+            "Data/Animations/joker_laugh.anm",
+            "Data/Animations/joker_offer.anm",
+            "Data/Animations/joker_offerback.anm"
+        ]
+    },
+    "New Animations": {
+        "Number of animations": 7,
+        "Mod ID": "animations",
+        "Animations": [
+            "Data/Animations/Assassincrouch1.anm",
+            "Data/Animations/Assassincrouch2.anm",
+            "Data/Animations/r_ledge_barely_reach.anm",
+            "Data/Animations/r_ledge_climb_fast.anm",
+            "Data/Animations/r_standfromback2.anm",
+            "Data/Animations/r_standfromfront.anm",
+            "Data/Animations/totallysecretanimation.anm"
         ]
     }
 }
