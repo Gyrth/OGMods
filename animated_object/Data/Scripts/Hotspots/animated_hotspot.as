@@ -385,7 +385,7 @@ void ReceiveMessage(string msg){
 			RewriteAnimationGroup();
 		}else if(token == "level_event"){
 			ScriptParams@ level_params = level.GetScriptParams();
-			if(level_params.HasParam("RewritingIdentifier") || !EditorModeActive()){
+			if(level_params.HasParam("RewritingIdentifier")){
 				return;
 			}
 			token_iter.FindNextToken(msg);
@@ -394,6 +394,12 @@ void ReceiveMessage(string msg){
 				token_iter.FindNextToken(msg);
 				int id = atoi(token_iter.GetToken(msg));
 				CheckNewAnimationKey(id);
+			}else if(command == "trigger_hotspot"){
+				token_iter.FindNextToken(msg);
+				int id = atoi(token_iter.GetToken(msg));
+				if(id == hotspot.GetID()){
+					playing = true;
+				}
 			}
 		}
 	}
