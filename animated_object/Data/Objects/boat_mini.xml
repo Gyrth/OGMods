@@ -1,0 +1,20 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="17.7095" t1="6.97187" t2="-200.125" s0="0.0400522" s1="0.111998" s2="0.152619" q0="0" q1="-0.00703996" q2="0" q3="0.999975" euler_x="0" euler_y="-0.01408" euler_z="0" id="570" version="1">
+        <parameters />
+        <EnvObject t0="17.7095" t1="6.93925" t2="-200.125" s0="0.00228366" s1="0.00228366" s2="0.00228366" q0="0" q1="-0.00703996" q2="0" q3="0.999975" euler_x="0" euler_y="-0.01408" euler_z="0" id="571" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/ShipHull.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="17.7093" t1="6.94073" t2="-200.121" s0="0.00228366" s1="0.00228366" s2="0.00228366" q0="0" q1="-0.00703996" q2="0" q3="0.999975" euler_x="0" euler_y="-0.01408" euler_z="0" id="572" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/ShipDetails.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="17.7102" t1="6.98385" t2="-200.12" s0="0.00228366" s1="0.00228366" s2="0.00228366" q0="0" q1="-0.00703996" q2="0" q3="0.999975" euler_x="0" euler_y="-0.01408" euler_z="0" id="573" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/ShipSails.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="17.7093" t1="6.95746" t2="-200.125" s0="0.00951536" s1="0.0173024" s2="0.0381492" q0="0" q1="-0.00703996" q2="0" q3="0.999975" euler_x="0" euler_y="-0.01408" euler_z="0" id="574" type_file="Data/Objects/moving_hotspot.xml">
+            <parameters />
+            <Connections />
+        </Hotspot>
+    </Group>
+</ActorObjects>
