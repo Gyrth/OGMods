@@ -93,6 +93,7 @@ void Update(int paused){
 					id = CreateObject(load_item_path);
 					Object@ obj = ReadObjectFromID(id);
 					obj.SetTranslation(camera.GetPos() + (camera.GetMouseRay() * 5.0f));
+					obj.SetCopyable(true);
 					obj.SetSelectable(true);
 					obj.SetTranslatable(true);
 					obj.SetScalable(true);
