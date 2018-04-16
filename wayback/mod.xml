@@ -1,0 +1,18 @@
+<? xml version="1.0" ?>
+<Mod>
+	<Id>wayback</Id>
+	<Name>Wayback Levelpack</Name>
+	<Category>Level</Category>
+	<Version>0.1.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Thumbnail>Data/Images/wayback_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/wayback_thumb.jpg</PreviewImage>
+	<Description>A collection of levels made a long time ago.</Description>
+	<Tag>level</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<Level title="Foothold" thumbnail="Images/foothold_thumb.jpg">Foothold.xml</Level>
+	<Level title="Kohlbrinia" thumbnail="Images/kohlbrinia_thumb.jpg">Kohlbrinia.xml</Level>
+	<Level title="Shaleguard" thumbnail="Images/shaleguard_thumb.jpg">shaleguard.xml</Level>
+	<Level title="Valley" thumbnail="Images/valley_thumb.jpg">Valley.xml</Level>
+	<Level title="RiverHurst" thumbnail="Images/riverhurst_thumb.jpg">RiverHurst.xml</Level>
+</Mod>
