@@ -1,22 +1,15 @@
+#include "music_load.as"
+
+MusicLoad ml("Data/Music/menu.xml");
+
 string level_name = "";
 IMGUI@ imGUI;
 
-FontSetup small_font("arial", 25, HexColor("#ffffff"), true);
-FontSetup normal_font("arial", 35, HexColor("#ffffff"), true);
-FontSetup black_small_font("arial", 25, HexColor("#000000"), false);
-FontSetup big_font("arial", 55, HexColor("#ffffff"), true);
-FontSetup huge_font("arial", 75, HexColor("#ffffff"), true);
-
-string connected_icon = "Images/connected.png";
-string disconnected_icon = "Images/disconnected.png";
-string white_background = "Textures/ui/menus/main/white_square.png";
-string brushstroke_background = "Textures/ui/menus/main/brushStroke.png";
-string custom_address_icon = "Textures/ui/menus/main/icon-lock.png";
 string arrow = "Textures/ui/menus/main/icon-navigation.png";
 vec4 mouseover_color = vec4(0.75, 0.75, 0.75, 0.85);
 IMMouseOverPulseColor mouseover(mouseover_color, mouseover_color, 5.0f);
 
-int move_in_time = 500;
+int comic_move_duration = 500;
 vec2 image_size = vec2(1920, 1200);
 
 int image_index = 0;
@@ -25,17 +18,10 @@ float arrow_size = 200.0;
 
 JSON file;
 int nr_paths = 0;
-
-bool post_init = false;
+array<BackgroundObject@> bgobjects;
 
 void Initialize(){
 	Init("this_level");
-}
-
-bool PostInit(){
-	Log(info, "ok");
-	level.Execute("has_gui = true;");
-	return true;
 }
 
 void AddUI(){
@@ -71,7 +57,7 @@ void AddUI(){
 			IMImage new_image(images[i]["path"].asString());
 			new_image.setClip(false);
 			new_image.setZOrdering(-1);
-			new_image.addUpdateBehavior(IMMoveIn ( move_in_time, vec2(image_size.x * direction, 0), inOutQuartTween ), "");
+			new_image.addUpdateBehavior(IMMoveIn ( comic_move_duration, vec2(image_size.x * direction, 0), inOutQuartTween ), "");
 			new_image.scaleToSizeY(1200);
 			menu_container.addFloatingElement(new_image, "image " + i, vec2(image_x_position, 0));
 			image_x_position += image_size.x;
@@ -85,10 +71,23 @@ void Reset(){
 	ReloadUI();
 }
 
+bool CanGoBack(){
+	return true;
+}
+
 void Init(string p_level_name) {
+	@imGUI = CreateIMGUI();
+	PlaySong("menu-lugaru");
+
+	imGUI.setup();
+	setBackGround();
+
+	if(GetInterlevelData("comic_progress") != ""){
+		image_index = atoi(GetInterlevelData("comic_progress"));
+	}
+
 	file.parseFile("Data/Scripts/comic_paths.json");
 	nr_paths = file.getRoot().size();
-	@imGUI = CreateIMGUI();
 	level_name = p_level_name;
 	ReloadUI();
 }
@@ -112,8 +111,6 @@ void DrawGUI() {
 }
 
 void ReloadUI(){
-	imGUI.clear();
-	imGUI.setup();
 	AddUI();
 }
 
@@ -122,16 +119,9 @@ void Update(int paused) {
 }
 
 void Update() {
-	if(!post_init){
-		post_init = PostInit();
-	}
 	while( imGUI.getMessageQueueSize() > 0 ) {
 		IMMessage@ message = imGUI.getNextMessage();
-		if( message.name == "Back to Main Menu" ) {
-			level.SendMessage("go_to_main_menu");
-		}else if( message.name == "Run Benchmark Again" ) {
-			level.SendMessage("reset");
-		}else if( message.name == "Close" ) {
+		if( message.name == "Close" ) {
 			imGUI.getMain().clear();
 		}else if( message.name == "next" ) {
 			NextPage();
@@ -158,8 +148,8 @@ void NextPage(){
 		image_index -= 1;
 	}else{
 		direction = 1;
+		SetInterlevelData("comic_progress", "" + image_index);
 		ReloadUI();
-		level.Execute("has_gui = true;");
 	}
 }
 
@@ -169,8 +159,8 @@ void PreviousPage(){
 		image_index += 1;
 	}else{
 		direction = -1;
+		SetInterlevelData("comic_progress", "" + image_index);
 		ReloadUI();
-		level.Execute("has_gui = true;");
 	}
 }
 
@@ -179,7 +169,7 @@ void SetWindowDimensions(int w, int h){
 }
 
 void Resize() {
-	Print("Resize\n");
+	imGUI.doScreenResize();
 }
 
 void ScriptReloaded() {
@@ -196,4 +186,85 @@ void Dispose() {
 
 bool HasFocus(){
 	return false;
+}
+
+// keep track of the math for our backgrounds
+class BackgroundObject {
+	int z;          // z ordering
+	vec2 startPos; // where does it start rendering?
+	float sizeX;     // how big is this in the x direction?
+	vec2 shiftSize; // how much to shift it by for parallax
+	string filename;// what file to load for this
+	string GUIname; // name used to find this in the GUI
+	float alpha;    // alpha value
+	bool fadeIn;    // should we fade in
+
+	BackgroundObject( string _fileName, string _GUIname, int _z,
+					  vec2 _startPos, float _sizeX, vec2 _shiftSize, float _alpha,
+					  bool _fadeIn ) {
+		z = _z;
+		startPos = _startPos;
+		sizeX = _sizeX;
+		shiftSize = _shiftSize;
+		filename = _fileName;
+		GUIname = _GUIname;
+		alpha = _alpha;
+		fadeIn = _fadeIn;
+	}
+
+	void addToGUI( IMGUI@ theGUI ) {
+		// Set it to our background image
+		IMImage backgroundImage( filename );
+
+		backgroundImage.setSkipAspectFitting(true);
+		backgroundImage.setCenter(true);
+
+		if((backgroundImage.getSizeX() / backgroundImage.getSizeY()) > (screenMetrics.getScreenWidth() / screenMetrics.getScreenHeight())) {
+			backgroundImage.scaleToSizeY(screenMetrics.getScreenHeight());
+		} else {
+			backgroundImage.scaleToSizeX(screenMetrics.getScreenWidth());
+		}
+
+		backgroundImage.setAlpha(alpha);
+
+		if(fadeIn) {
+			backgroundImage.addUpdateBehavior( IMFadeIn( 2000, inSineTween ), filename + "-fadeIn" );
+		}
+
+		// Now set this as the element in the background container, this will center it
+		theGUI.getBackgroundLayer().addFloatingElement( backgroundImage,
+														   GUIname,
+														   startPos,
+														   z );
+	}
+
+	void adjustPositionByMouse( IMGUI@ theGUI ) {
+		vec2 mouseRatio = vec2( theGUI.guistate.mousePosition.x/screenMetrics.GUISpace.x,
+								theGUI.guistate.mousePosition.y/screenMetrics.GUISpace.y );
+
+		vec2 shiftPosition = vec2( shiftSize.x * mouseRatio.x,
+								   0 );//int( float(shiftSize.y) * mouseRatio.y ) );
+
+		theGUI.getBackgroundLayer().moveElement( GUIname, startPos + shiftPosition );
+	}
+
+}
+
+// Draw the picture for the background
+void setBackGround(float alpha = 1.0) {
+	// Clear the current background
+	bgobjects.resize(0);
+	imGUI.getBackgroundLayer( 0 ).clear();
+
+	bgobjects.insertLast(BackgroundObject( GetInterlevelData("background"),
+											"Background",
+											1,
+											vec2(0,0),
+											screenMetrics.GUISpace.x,
+											vec2(0,0),
+											alpha,
+											false ));
+	for( uint i = 0; i < bgobjects.length(); ++i ) {
+		bgobjects[i].addToGUI( imGUI );
+	}
 }

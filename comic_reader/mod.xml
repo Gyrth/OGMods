@@ -11,7 +11,5 @@
 	<Tag>comic</Tag>
 	<SupportedVersion>*</SupportedVersion>
 	<NeedsRestart>false</NeedsRestart>
-	<Level title="Comic Reader" thumbnail="Images/comic_reader_full.jpg">comic_reader.xml</Level>
-	<!-- <MenuItem title="Comic Reader" category="main">Data/Scripts/comic_reader.as</MenuItem>
-	<MenuItem title="Comic Reader" category="sub">Data/Scripts/comic_reader.as</MenuItem> -->
+	<MenuItem title="Comic Reader" category="play">Data/Scripts/comic_reader.as</MenuItem>
 </Mod>
