@@ -487,35 +487,6 @@ void Update(){
 	  }
 	}
 	UpdateTransform();
-	if (params.GetInt("Animate Camera") == 1) {
-		Object@ object = ReadObjectFromID(main_object);
-		PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(object);
-
-		UpdateCameraPreview(placeholder_object);
-
-		if(playing && !EditorModeActive()){
-			vec3 direction;
-			vec3 position = object.GetTranslation();
-
-			vec3 pos = object.GetTranslation();
-			vec4 v = object.GetRotationVec4();
-			quaternion rot(v.x,v.y,v.z,v.a);
-			// Set camera euler angles from rotation matrix
-			vec3 front = Mult(rot, vec3(0,0,1));
-			float y_rot = atan2(front.x, front.z)*180.0f/MPI;
-			float x_rot = asin(front[1])*-180.0f/MPI;
-			vec3 up = Mult(rot, vec3(0,1,0));
-			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
-			vec3 expected_up = normalize(cross(expected_right, front));
-			float z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/MPI;
-			direction.x = floor(x_rot*100.0f+0.5f)/100.0f;
-			direction.y = floor(y_rot*100.0f+0.5f)/100.0f;
-			direction.z = floor(z_rot*100.0f+0.5f)/100.0f;
-
-			level.Execute("dialogue.cam_pos = vec3(" + position.x + ", " + position.y + ", " + position.z + ");");
-			level.Execute("dialogue.cam_rot = vec3(" + direction.x + "," + direction.y + "," + direction.z + ");");
-		}
-	}
 }
 
 void UpdateCameraPreview(PlaceholderObject@ placeholder_object){
@@ -683,6 +654,35 @@ void UpdateTransform(){
 		}
 	}
 	UpdateChildren();
+	if (params.GetInt("Animate Camera") == 1) {
+		Object@ object = ReadObjectFromID(main_object);
+		PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(object);
+
+		UpdateCameraPreview(placeholder_object);
+
+		if(playing && !EditorModeActive()){
+			vec3 direction;
+			vec3 position = object.GetTranslation();
+
+			vec3 pos = object.GetTranslation();
+			vec4 v = object.GetRotationVec4();
+			quaternion rot(v.x,v.y,v.z,v.a);
+			// Set camera euler angles from rotation matrix
+			vec3 front = Mult(rot, vec3(0,0,1));
+			float y_rot = atan2(front.x, front.z)*180.0f/MPI;
+			float x_rot = asin(front[1])*-180.0f/MPI;
+			vec3 up = Mult(rot, vec3(0,1,0));
+			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+			vec3 expected_up = normalize(cross(expected_right, front));
+			float z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/MPI;
+			direction.x = floor(x_rot*100.0f+0.5f)/100.0f;
+			direction.y = floor(y_rot*100.0f+0.5f)/100.0f;
+			direction.z = floor(z_rot*100.0f+0.5f)/100.0f;
+
+			level.Execute("dialogue.cam_pos = vec3(" + position.x + ", " + position.y + ", " + position.z + ");");
+			level.Execute("dialogue.cam_rot = vec3(" + direction.x + "," + direction.y + "," + direction.z + ");");
+		}
+	}
 }
 
 void CalculateTransform(Object@ object, float alpha, float node_distance){
