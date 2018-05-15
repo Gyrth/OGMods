@@ -108,6 +108,13 @@ void ForgetCharacter(int id){
     }
 }
 
+class Garbage{
+    array<int> item_objects;
+    array<int> movement_objects;
+    array<int> groups;
+    Garbage(){}
+}
+
 class Block{
     array<int> obj_ids;
     int main_block_id = -1;
@@ -122,9 +129,10 @@ class Block{
     array<SpawnObject@> GetObjectsToSpawn(){
         return objects_to_spawn;
     }
-    array<int> Delete(){
+    Garbage Delete(){
         deleted = true;
-        array<int> garbage;
+        Garbage garbage();
+        array<int> groups;
         for(uint i = 0; i < obj_ids.size(); i++){
             if(!ObjectExists(obj_ids[i])){
                 continue;
@@ -134,7 +142,7 @@ class Block{
                 MovementObject@ char = ReadCharacterID(obj_ids[i]);
                 MovementObject@ player = ReadCharacterID(player_id);
                 if(distance(char.position, player.position) < (world_size * block_size / 2.0f)){
-                    garbage.insertLast(obj_ids[i]);
+                    garbage.movement_objects.insertLast(obj_ids[i]);
                     continue;
                 }else{
                     //MovementObject need to be queued or else the ItemObject they hold is going to reset position in the same update.
@@ -147,9 +155,12 @@ class Block{
                 ItemObject@ item = ReadItemID(obj_ids[i]);
                 vec3 color = vec3(RangedRandomFloat(0.0f, 1.0f), RangedRandomFloat(0.0f, 1.0f), RangedRandomFloat(0.0f, 1.0f));
                 if(distance(item.GetPhysicsPosition(), player.position) < (world_size * block_size / 2.0f)){
-                    garbage.insertLast(obj_ids[i]);
+                    garbage.item_objects.insertLast(obj_ids[i]);
                     continue;
                 }
+            }else if(obj.GetType() == _group){
+                garbage.groups.insertLast(obj_ids[i]);
+                continue;
             }
             DeleteObjectID(obj_ids[i]);
         }
@@ -210,23 +221,30 @@ class SpawnObject{
 class World{
     array<array<Block@>> blocks;
     array<SpawnObject@> objects_to_spawn;
-    array<int> garbage;
+    array<Garbage> garbages;
     World(){}
     void Reset(){
         for(uint i = 0; i < blocks.size(); i++){
             for(uint j = 0; j < blocks[i].size(); j++){
-                blocks[i][j].Delete();
+                //Delete all the existing blocks and their garbage.
+                Garbage garbage = blocks[i][j].Delete();
+                for(uint k = 0; k < garbage.groups.size(); k++){
+                    DeleteObjectID(garbage.groups[k]);
+                }
             }
         }
-        for(uint i = 0; i < garbage.size(); i++){
-            DeleteObjectID(garbage[i]);
+        //Delete all the garbage that's already collected.
+        for(uint i = 0; i < garbages.size(); i++){
+            for(uint j = 0; j < garbages[i].groups.size(); j++){
+                DeleteObjectID(garbages[i].groups[j]);
+            }
         }
         blocks.resize(0);
-        garbage.resize(0);
+        garbages.resize(0);
     }
     void MoveXUp(){
         for(uint i = 0; i < blocks.size(); i++){
-            garbage.insertAt(0, blocks[i][0].Delete());
+            garbages.insertAt(0, blocks[i][0].Delete());
             blocks[i].removeAt(0);
         }
         for(uint i = 0; i < blocks.size(); i++){
@@ -237,7 +255,7 @@ class World{
     void MoveXDown(){
         //Remove all the blocks on the left side so we can move to the right.
         for(uint i = 0; i < blocks.size(); i++){
-            garbage.insertAt(0, blocks[i][blocks[i].size() - 1].Delete());
+            garbages.insertAt(0, blocks[i][blocks[i].size() - 1].Delete());
             blocks[i].removeAt(blocks[i].size() - 1);
         }
         for(uint i = 0; i < blocks.size(); i++){
@@ -247,7 +265,7 @@ class World{
     }
     void MoveZUp(){
         for(uint i = 0; i < blocks[0].size(); i++){
-            garbage.insertAt(0, blocks[0][i].Delete());
+            garbages.insertAt(0, blocks[0][i].Delete());
         }
         blocks.removeAt(0);
         array<Block@> new_row;
@@ -260,7 +278,7 @@ class World{
     void MoveZDown(){
         //Remove the bottom row.
         for(uint i = 0; i < blocks[blocks.size() - 1].size(); i++){
-            garbage.insertAt(0, blocks[blocks.size() - 1][i].Delete());
+            garbages.insertAt(0, blocks[blocks.size() - 1][i].Delete());
         }
         blocks.removeLast();
         array<Block@> new_row;
@@ -420,26 +438,36 @@ class World{
         garbage_timer -= time_step;
         if(garbage_timer < 0.0f){
             garbage_timer = 1.0f;
-            for(uint i = 0; i < garbage.size(); i++){
-                Object@ obj = ReadObjectFromID(garbage[i]);
-                if(obj.GetType() == _movement_object){
-                    MovementObject@ char = ReadCharacterID(garbage[i]);
-                    MovementObject@ player = ReadCharacterID(player_id);
+            for(uint i = 0; i < garbages.size(); i++){
+                MovementObject@ player = ReadCharacterID(player_id);
+                Garbage@ current_garbage = garbages[i];
+
+                for(uint j = 0; j < current_garbage.item_objects.size(); j++){
+                    ItemObject@ item = ReadItemID(current_garbage.item_objects[j]);
+                    if(distance(item.GetPhysicsPosition(), player.position) > (world_size * block_size)){
+                        DeleteObjectID(current_garbage.item_objects[j]);
+                        current_garbage.item_objects.removeAt(j);
+                        j--;
+                    }
+                }
+
+                for(uint j = 0; j < current_garbage.movement_objects.size(); j++){
+                    MovementObject@ char = ReadCharacterID(current_garbage.movement_objects[j]);
                     if(distance(char.position, player.position) > (world_size * block_size)){
                         //MovementObject need to be queued or else the ItemObject they hold is going to reset position in the same update.
-                        QueueDeleteObjectID(garbage[i]);
-                        ForgetCharacter(garbage[i]);
-                        garbage.removeAt(i);
-                        i--;
+                        QueueDeleteObjectID(current_garbage.movement_objects[j]);
+                        ForgetCharacter(current_garbage.movement_objects[j]);
+                        current_garbage.movement_objects.removeAt(j);
+                        j--;
                     }
-                }else if(obj.GetType() == _item_object){
-                    MovementObject@ player = ReadCharacterID(player_id);
-                    ItemObject@ item = ReadItemID(garbage[i]);
-                    if(distance(item.GetPhysicsPosition(), player.position) > (world_size * block_size)){
-                        DeleteObjectID(garbage[i]);
-                        garbage.removeAt(i);
-                        i--;
+                }
+
+                if (current_garbage.movement_objects.size() == 0 && current_garbage.item_objects.size() == 0) {
+                    for (uint j = 0; j < current_garbage.groups.size(); j++) {
+                        DeleteObjectID(current_garbage.groups[j]);
                     }
+                    garbages.removeAt(i);
+                    i--;
                 }
             }
         }
