@@ -259,7 +259,8 @@ void SetParameters() {
 	params.AddIntCheckbox("Draw path lines", false);
 	params.AddIntCheckbox("Draw connect lines", true);
 	params.AddIntCheckbox("Scale Object Preview", false);
-	params.AddIntCheckbox("Animate Camera", false);
+    params.AddIntCheckbox("Animate Camera", false);
+	params.AddIntCheckbox("Animate Scale", false);
 	//Unfortunately I can not get the model path from the xml file via scripting.
 	//So the model needs to be declared seperatly.
 	params.AddString("Model Path", "Data/Models/arrow.obj");
@@ -679,6 +680,12 @@ void UpdateTransform(){
 			direction.y = floor(y_rot*100.0f+0.5f)/100.0f;
 			direction.z = floor(z_rot*100.0f+0.5f)/100.0f;
 
+			if(params.GetInt("Animate Scale") == 1){
+				const float zoom_sensitivity = 3.5f;
+				float zoom = min(150.0f, 90.0f / max(0.001f,(1.0f+(object.GetScale().x-1.0f)*zoom_sensitivity)));
+				level.Execute("dialogue.cam_zoom = " + zoom + ";");
+			}
+
 			level.Execute("dialogue.cam_pos = vec3(" + position.x + ", " + position.y + ", " + position.z + ");");
 			level.Execute("dialogue.cam_rot = vec3(" + direction.x + "," + direction.y + "," + direction.z + ");");
 		}
@@ -724,6 +731,11 @@ void CalculateTransform(Object@ object, float alpha, float node_distance){
 
 	if(params.GetInt("Draw path lines") == 1){
 		DebugDrawLine(object.GetTranslation(), new_position, vec3(1, 0, 0), _fade);
+	}
+
+	if(params.GetInt("Animate Scale") == 1){
+		vec3 scale = mix(previous_pathpoint.GetScale(), current_pathpoint.GetScale(), alpha);
+		object.SetScale(scale);
 	}
 
 	object.SetRotation(new_rotation);
