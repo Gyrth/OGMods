@@ -84,6 +84,16 @@ class BlockType{
 	}
 }
 
+void PreloadBlocks(){
+	array<int> block_ids;
+	for(uint i = 0; i < block_types.size(); i++){
+		block_ids.insertLast(CreateObject(block_types[i].path));
+	}
+	for(uint i = 0; i < block_ids.size(); i++){
+		DeleteObjectID(block_ids[i]);
+	}
+}
+
 BlockType@ GetRandomBlockType(){
 	float sum = 0.0f;
 	for(uint i = 0; i < block_types.size(); i++){
@@ -332,7 +342,7 @@ class World{
 					int id = owner.obj_ids[0];
 					Object@ obj = ReadObjectFromID(id);
 					if(IsGroupDerived(id)){
-						TransposeNewBlock(spawn_obj.owner);
+						TransposeNewBlock(spawn_obj.owner, spawn_obj.block_type.path);
 					}else{
 						obj.SetTranslation(spawn_obj.position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f));
 					}
@@ -388,7 +398,7 @@ class World{
 			DisplayError("Ohno!", "First block is not a group!");
 		}
 	}
-	void TransposeNewBlock(Block@ owner){
+	void TransposeNewBlock(Block@ owner, string path){
 		vec3 offset = vec3(0.0f);
 		vec3 position = owner.position;
 		vec3 base_pos = vec3(0.0f);
@@ -408,7 +418,7 @@ class World{
 			}
 		}
 		if(!block_base_found){
-			DisplayError("Ohno", "No blockbase found ");
+			DisplayError("Ohno", "No blockbase found in " + path);
 		}
 		//Now set all children with the offset.
 		array<EntityType> transpose_types = {_env_object, _movement_object, _item_object, _hotspot_object, _decal_object, _dynamic_light_object, _path_point_object};
@@ -476,6 +486,7 @@ class World{
 
 void Init(string p_level_name) {
 	level_name = p_level_name;
+	PreloadBlocks();
 	PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
 	ReadScriptParameters();
 }
