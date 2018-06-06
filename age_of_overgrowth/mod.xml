@@ -1,0 +1,15 @@
+<? xml version="1.0" ?>
+<Mod>
+	<Id>age-of-overgrowth</Id>
+	<Name>Age of Overgrowth</Name>
+	<Category>Level</Category>
+	<Thumbnail>Data/Images/age_of_overgrowth_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/age_of_overgrowth_full.jpg</PreviewImage>
+	<Description>Age of Overgrowth.</Description>
+	<Version>1.0.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Tag>june2018jam</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<NeedsRestart>false</NeedsRestart>
+	<Level title="Age of Overgrowth" thumbnail="Images/age_of_overgrowth_full.jpg">age_of_overgrowth.xml</Level>
+</Mod>
