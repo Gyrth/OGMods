@@ -36,9 +36,12 @@ void Reset(){
 		Log(warning, "deleting " + ground_decals[i]);
 		DeleteObjectID(ground_decals[i]);
 	}
+	imGUI.clear();
+	imGUI.setup();
 	ground_decals.resize(0);
 	selected_character_ids.resize(0);
-	ResetCharacters();
+	/* ResetCharacters(); */
+	post_init_done = false;
 }
 
 void ResetCharacters(){
@@ -90,19 +93,23 @@ void PostInit(){
 	array<int> characters = GetObjectIDsType(_movement_object);
 	for(uint i = 0; i < characters.size(); i++){
 		MovementObject@ char = ReadCharacterID(characters[i]);
-		char.Execute("PostInit();");
 		if(char.controlled){
 			player_id = characters[i];
+			break;
 		}
 	}
-	MovementObject@ player = ReadCharacterID(player_id);
-	camera_position = player.position + vec3(0.0, camera_ground_distance, 0.0);
-
 	@selection_box = IMContainer(20.0, 20.0);
 	selection_box.showBorder();
 	imGUI.getMain().addFloatingElement(selection_box, "selection_box", vec2(0,0));
 	post_init_done = true;
 	level.Execute("has_gui = true;");
+	SetInitialCameraPosition();
+}
+
+void SetInitialCameraPosition(){
+	MovementObject@ player = ReadCharacterID(player_id);
+	vec3 initial_camera_offset = vec3(5.0, 0.0, 5.0);
+	camera_position = player.position + vec3(0.0, camera_ground_distance, 0.0) + initial_camera_offset;
 }
 
 void Update() {
@@ -141,8 +148,8 @@ void UpdateSelectionControls(){
 			player.Execute("selecting = false");
 			selection_box.setVisible(false);
 			if(select_timer < select_threshold){
-				Log(warning, "QuickClick");
-				if(!CheckForEnemy()){
+				Log(warning, "click");
+				if(!CheckForEnemy() && !CheckForWeapons()){
 					CharactersMarch();
 				}
 			}
@@ -204,7 +211,6 @@ void UpdateSelectionControls(){
 }
 
 void DeselectAllCharacters(){
-	Log(info, "deselectall");
 	for(uint i = 0; i < selected_character_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(selected_character_ids[i]);
 		char.Execute("SetDecalColor(false);");
@@ -212,17 +218,68 @@ void DeselectAllCharacters(){
 	selected_character_ids.resize(0);
 }
 
+bool CheckForWeapons(){
+	vec3 location = col.GetRayCollision(camera.GetPos(), camera.GetPos() + camera.GetMouseRay() * 200.0);
+	int num_items = GetNumItems();
+	int closest_id = -1;
+	float max_dist = 2.0;
+	float closest_dist = 0.0f;
+	for(int i=0; i<num_items; i++){
+		ItemObject@ item_obj = ReadItem(i);
+		if(IsItemPickupable(item_obj)){
+			vec3 item_pos = item_obj.GetPhysicsPosition();
+			Log(warning, "dist " + distance(location, item_pos));
+			if(closest_id == -1 || distance(location, item_pos) < closest_dist){
+				closest_dist = distance(location, item_pos);
+				closest_id = item_obj.GetID();
+			}
+		}
+	}
+	if(closest_dist < max_dist && closest_id != -1){
+		GetWeapon(closest_id);
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool IsItemPickupable(ItemObject@ item_obj) {
+	if(item_obj.GetType() == _misc){
+		return false;
+	}
+	if(item_obj.IsHeld()){
+		int holder_id = item_obj.HeldByWhom();
+		if(holder_id == -1){
+			return false;
+		}
+		MovementObject@ holder = ReadCharacterID(holder_id);
+		if(holder.GetIntVar("knocked_out") == _awake){
+			return false;
+		}
+	}
+	return true;
+}
+
+void GetWeapon(int weapon_id){
+	for(uint i = 0; i < selected_character_ids.size(); i++){
+		MovementObject@ char = ReadCharacterID(selected_character_ids[i]);
+		Log(warning, i + "get wepaon " + weapon_id);
+		char.Execute("wants_to_get_weapon = true; weapon_target_id = " + weapon_id + ";");
+	}
+}
+
 bool CheckForEnemy(){
 	vec3 location = col.GetRayCollision(camera.GetPos(), camera.GetPos() + camera.GetMouseRay() * 200.0);
 	array<int> character_ids;
-	DebugDrawWireScaledSphere(location, 2.0, vec3(1.0), vec3(1.0), _fade);
+	/* DebugDrawWireScaledSphere(location, 2.0, vec3(1.0), vec3(1.0), _fade); */
 	GetCharactersInSphere(location, 2.0, character_ids);
 	MovementObject@ player = ReadCharacterID(player_id);
 
 	for(uint i = 0; i < character_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(character_ids[i]);
-		if(!char.OnSameTeam(player)){
+		if(!char.OnSameTeam(player) and char.GetIntVar("knocked_out") == _awake){
 			AttackCharacter(character_ids[i]);
+			Log(warning, "enemy");
 			return true;
 		}
 	}
@@ -238,6 +295,7 @@ void AttackCharacter(int character_id){
 }
 
 void CharactersMarch(){
+	Log(warning, "march");
 	vec3 march_location = col.GetRayCollision(camera.GetPos(), camera.GetPos() + camera.GetMouseRay() * 200.0);
 	for(uint i = 0; i < selected_character_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(selected_character_ids[i]);
@@ -285,7 +343,7 @@ void UpdateCameraControls(){
 		camera_position += down * time_step * camera_movement_speed;
 	}
 
-	vec3 new_facing = vec3(1.0, -2.0, 1.0);
+	vec3 new_facing = vec3(-1.0, -2.0, -1.0);
 
 	if(camera_position.y < minimum_camera_height){
 		vec3 camera_position_override = vec3(camera_position.x, minimum_camera_height, camera_position.z);

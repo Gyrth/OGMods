@@ -118,9 +118,7 @@ int decal_id = -1;
 bool selecting = false;
 vec3 selection_center;
 float selection_scale;
-
-void PostInit(){
-}
+bool wants_to_get_weapon = false;
 
 void CreateGroundDecal(){
 	decal_id = CreateObject(decal_path);
@@ -128,7 +126,7 @@ void CreateGroundDecal(){
 	@decal_object = obj;
 	obj.SetDeletable(true);
 	obj.SetSelectable(true);
-	obj.SetScale(vec3(2.0));
+	obj.SetScale(vec3(1.5));
 	obj.SetTint(unselected_tint);
 	level.SendMessage("register_ground_decal " + decal_id);
 }
@@ -1029,56 +1027,22 @@ int GetClosestKnownThreat() {
 
 void CheckForNearbyWeapons() {
     if(species != _wolf && get_weapon_time < kMaxGetWeaponTime){
-        bool wants_to_get_weapon = false;
+        /* bool wants_to_get_weapon = false; */
         if(weapon_slots[primary_weapon_slot] == -1 && hostile){
-            /*int nearest_weapon = -1;
-            float nearest_dist = 0.0f;
-            const float _max_dist = 30.0f;
-            for(int i=0, len=situation.known_items.size(); i<len; ++i){
-                ItemObject @item_obj = ReadItemID(situation.known_items[i].id);
-                if(item_obj.IsHeld() || item_obj.GetType() != _weapon){
-                    continue;
-                }
-                vec3 pos = situation.known_items[i].last_known_position;
-                float dist = distance_squared(pos, this_mo.position);
-                if(dist > _max_dist * _max_dist){
-                    continue;
-                }
-                //Verify that the item atelast is on a walkable surface.
-                if(!IsOnNavMesh(item_obj,pos))
-                {
-                    continue;
-                }
-                if(nearest_weapon == -1 || dist < nearest_dist){
-                    nearest_weapon = item_obj.GetID();
-                    nearest_dist = dist;
-                }
-
-            }*/
-            int nearest_weapon = GetNearestPickupableWeapon(this_mo.position, 10.0);
-            if(nearest_weapon != -1){
-                ItemObject@ io = ReadItemID(nearest_weapon);
-                int stuck_id = io.StuckInWhom();
-                if(stuck_id == -1 || ReadCharacterID(stuck_id).GetIntVar("knocked_out") != _awake){
-                    NavPath path = GetPath(this_mo.position, ReadItemID(nearest_weapon).GetPhysicsPosition(), inclusive_flags, exclusive_flags);
-                    if(path.success){
-                        wants_to_get_weapon = true;
-                        weapon_target_id = nearest_weapon;
-                    }
-                }
-            }
-        }
-        if(wants_to_get_weapon){
-            if(get_weapon_delay >= 0.0f){
-                get_weapon_delay -= time_step;
-            } else {
-                old_goal = goal;
-                old_sub_goal = sub_goal;
-                SetGoal(_get_weapon);
-            }
-        } else {
-            get_weapon_delay = kGetWeaponDelay;
-        }
+	        if(wants_to_get_weapon){
+	            if(get_weapon_delay >= 0.0f){
+	                get_weapon_delay -= time_step;
+	            } else {
+	                old_goal = goal;
+	                old_sub_goal = sub_goal;
+	                SetGoal(_get_weapon);
+	            }
+	        } else {
+	            get_weapon_delay = kGetWeaponDelay;
+	        }
+		}else{
+			wants_to_get_weapon = false;
+		}
     }
 }
 
@@ -1144,6 +1108,7 @@ bool StuckToNavMesh() {
 void UpdateBrain(const Timestep &in ts){
 	UpdateMinimumCameraHeight();
 	UpdateDecal();
+	CheckForNearbyWeapons();
     if(knocked_out != _awake){
         return;
     }
@@ -1444,7 +1409,6 @@ void UpdateBrain(const Timestep &in ts){
                     }
                 }
             }
-            CheckForNearbyWeapons();
             if(sub_goal_pick_time + 10.0 < time){
                 SetGoal(_patrol);
             }
@@ -1682,8 +1646,6 @@ void UpdateBrain(const Timestep &in ts){
             DebugText(this_mo.getID()+"Known allies: ", this_mo.getID()+" Known allies: "+allies, 0.5f);
         }
 
-        /* CheckForNearbyWeapons(); */
-
         /* if(!omniscient && time - target_history.LastUpdated() > 2.0){
             SetGoal(_investigate);
             SetSubGoal(_investigate_attack);
@@ -1700,7 +1662,6 @@ void UpdateBrain(const Timestep &in ts){
             SetGoal(_attack);
             char.ReceiveScriptMessage("escort_me "+this_mo.getID());
         }
-        CheckForNearbyWeapons();
         break; }
     case _get_weapon:
         if(weapon_slots[primary_weapon_slot] != -1 ||
