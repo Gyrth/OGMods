@@ -2782,7 +2782,7 @@ vec3 GetBaseTargetVelocity() {
     } else if(goal == _escort){
         return GetMovementToPoint(ReadCharacterID(escort_id).position, 2.0f);
     } else if(goal == _navigate){
-        DebugDrawWireSphere(nav_target, 0.2f, vec3(1.0f), _fade);
+        /* DebugDrawWireSphere(nav_target, 0.2f, vec3(1.0f), _fade); */
         return GetMovementToPoint(nav_target, 1.0f);
     } else if(goal == _investigate){
         float speed = 0.2f;

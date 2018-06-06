@@ -119,6 +119,8 @@ vec2 selection_starting_point;
 vec3 physical_selection_starting_point;
 float selection_sphere_radius = 1.0;
 array<uint> selected_character_ids;
+float select_timer = 0.0;
+float select_threshold = 0.2;
 
 void UpdateSelectionControls(){
 	MovementObject@ player = ReadCharacterID(player_id);
@@ -131,13 +133,20 @@ void UpdateSelectionControls(){
 			physical_selection_starting_point = camera.GetMouseRay();
 		}
 		selecting = true;
+		select_timer += time_step;
 	}else{
 		if(selecting){
 			player.Execute("selecting = false");
 			selection_box.setVisible(false);
+			if(select_timer < select_threshold){
+				Log(warning, "QuickClick");
+				CharactersMarch();
+			}
 		}
 		selecting = false;
+		select_timer = 0.0;
 	}
+
 	if(selecting){
 		vec2 box_size = imGUI.guistate.mousePosition - selection_starting_point;
 
@@ -156,34 +165,47 @@ void UpdateSelectionControls(){
 
 			imGUI.getMain().moveElement("selection_box", negative_position);
 		}
-		vec3 current_physical_selection_point = camera.GetMouseRay();
-		vec3 selection_center = (physical_selection_starting_point + current_physical_selection_point ) / 2.0f;
-		selection_sphere_radius = min(abs(box_size.x), abs(box_size.y));
 
-		vec3 collision_point = col.GetRayCollision(camera.GetPos(), camera.GetPos() + selection_center * 200.0);
-		float collision_distance = distance(camera.GetPos(), collision_point);
+		if(select_timer > select_threshold){
+			vec3 current_physical_selection_point = camera.GetMouseRay();
+			vec3 selection_center = (physical_selection_starting_point + current_physical_selection_point ) / 2.0f;
+			selection_sphere_radius = min(abs(box_size.x), abs(box_size.y));
 
-		/* DebugDrawWireScaledSphere(collision_point, selection_sphere_radius / 1500.0f * collision_distance, vec3(1.0), vec3(1.0), _delete_on_draw); */
+			vec3 collision_point = col.GetRayCollision(camera.GetPos(), camera.GetPos() + selection_center * 200.0);
+			float collision_distance = distance(camera.GetPos(), collision_point);
 
-		array<int> character_ids;
-		GetCharactersInSphere(collision_point, selection_sphere_radius / 1500.0f * collision_distance, character_ids);
-		for(uint i = 0; i < character_ids.size(); i++){
-			//Add a selected character when not already selected.
-			if(selected_character_ids.find(character_ids[i]) == -1){
-				MovementObject@ char = ReadCharacterID(character_ids[i]);
-				char.Execute("SetDecalColor(true);");
-				selected_character_ids.insertLast(character_ids[i]);
+			/* DebugDrawWireScaledSphere(collision_point, selection_sphere_radius / 1500.0f * collision_distance, vec3(1.0), vec3(1.0), _delete_on_draw); */
+
+			array<int> character_ids;
+			GetCharactersInSphere(collision_point, selection_sphere_radius / 1500.0f * collision_distance, character_ids);
+			for(uint i = 0; i < character_ids.size(); i++){
+				//Add a selected character when not already selected.
+				if(selected_character_ids.find(character_ids[i]) == -1){
+					MovementObject@ char = ReadCharacterID(character_ids[i]);
+					char.Execute("SetDecalColor(true);");
+					selected_character_ids.insertLast(character_ids[i]);
+				}
+			}
+			for(uint j = 0; j < selected_character_ids.size(); j++){
+				//A selected character is no longer inside selection sphere.
+				if(character_ids.find(selected_character_ids[j]) == -1){
+					MovementObject@ char = ReadCharacterID(selected_character_ids[j]);
+					char.Execute("SetDecalColor(false);");
+					selected_character_ids.removeAt(j);
+					return;
+				}
 			}
 		}
-		for(uint j = 0; j < selected_character_ids.size(); j++){
-			//A selected character is no longer inside selection sphere.
-			if(character_ids.find(selected_character_ids[j]) == -1){
-				MovementObject@ char = ReadCharacterID(selected_character_ids[j]);
-				char.Execute("SetDecalColor(false);");
-				selected_character_ids.removeAt(j);
-				return;
-			}
-		}
+	}
+}
+
+void CharactersMarch(){
+	vec3 march_location = col.GetRayCollision(camera.GetPos(), camera.GetPos() + camera.GetMouseRay() * 200.0);
+	for(uint i = 0; i < selected_character_ids.size(); i++){
+		MovementObject@ char = ReadCharacterID(selected_character_ids[i]);
+		char.Execute("goal = _navigate;" +
+					"nav_target = vec3(" + march_location.x + "," + march_location.y + "," + march_location.z + ");");
+
 	}
 }
 
@@ -217,11 +239,11 @@ void UpdateCameraControls(){
 
 	if(GetInputDown(0, "mousescrollup")){
 		if(camera_position.y > minimum_camera_height){
-			vec3 up = vec3(0.0f, -10.0f, 0.0f);
+			vec3 up = vec3(0.0f, -5.0f, 0.0f);
 			camera_position += up * time_step * camera_movement_speed;
 		}
 	}else if(GetInputDown(0, "mousescrolldown")){
-		vec3 down = vec3(0.0f, 10.0f, 0.0f);
+		vec3 down = vec3(0.0f, 5.0f, 0.0f);
 		camera_position += down * time_step * camera_movement_speed;
 	}
 
