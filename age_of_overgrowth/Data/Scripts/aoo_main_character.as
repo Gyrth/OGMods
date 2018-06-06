@@ -525,6 +525,7 @@ void Startle() {
 }
 
 void Notice(int character_id){
+
     MovementObject@ char = ReadCharacterID(character_id);
     if(char.static_char){
         return;
@@ -555,12 +556,13 @@ void Notice(int character_id){
             SetGoal(_flee);
         }
         SetChaseTarget(character_id);
+		Log(warning, "attack " + character_id);
     }
     situation.Notice(character_id);
 }
 
 void NotifySound(int created_by_id, vec3 pos, SoundType type) {
-    if(created_by_id == -1 ||
+    /* if(created_by_id == -1 ||
        ObjectExists(created_by_id) == false ||
        !listening || this_mo.static_char ||
        awake_time < AWAKE_NOTICE_THRESHOLD || knocked_out != _awake ||
@@ -639,7 +641,7 @@ void NotifySound(int created_by_id, vec3 pos, SoundType type) {
                 }
             }
         }
-    }
+    } */
 }
 
 void HandleAIEvent(AIEvent event){
@@ -660,7 +662,6 @@ void HandleAIEvent(AIEvent event){
         }
         break;
     case _defeated:
-        AllyInfo();
         break;
     case _climbed_up:
         if(trying_to_climb == _climb_up){
@@ -833,12 +834,12 @@ void MindReceiveMessage(string msg){
         Log(info, "Received notice message");
         token_iter.FindNextToken(msg);
         int id = atoi(token_iter.GetToken(msg));
-        situation.Notice(id);
-        Notice(id);
+        /* situation.Notice(id);
+        Notice(id); */
     } else if(token == "collided"){
         token_iter.FindNextToken(msg);
         int id = atoi(token_iter.GetToken(msg));
-        NotifySound(id, this_mo.position + normalize(ReadCharacterID(id).position-this_mo.position) * 5.0, _sound_type_foley);
+        /* NotifySound(id, this_mo.position + normalize(ReadCharacterID(id).position-this_mo.position) * 5.0, _sound_type_foley); */
     } else if(token == "nearby_sound"){
         vec3 pos;
         float max_range;
@@ -861,9 +862,9 @@ void MindReceiveMessage(string msg){
         if(params.HasParam("Hearing Modifier")){
             max_range *= params.GetFloat("Hearing Modifier");
         }
-        if(distance(this_mo.position, pos) < max_range){
+        /* if(distance(this_mo.position, pos) < max_range){
             NotifySound(id, pos, type);
-        }
+        } */
     }
 }
 
@@ -1120,53 +1121,6 @@ void AIEndAttack(){
     }
 }
 
-void AllyInfo() {
-    if(goal == _escort && ReadCharacterID(escort_id).GetIntVar("knocked_out") != _awake){
-        random_look_delay = 1.0f;
-        random_look_dir = ReadCharacterID(escort_id).position - this_mo.position;
-        SetGoal(_investigate);
-        SetSubGoal(_investigate_urgent);
-        investigate_target_id = escort_id;
-    }
-    if(goal == _attack && knocked_out == _awake){
-        if(group_leader == -1 && followers.size() == 0){
-            for(int i=0, len=GetNumCharacters(); i<len; ++i){
-                MovementObject@ char = ReadCharacter(i);
-                if(char.GetID() != this_mo.GetID() &&
-                  !char.controlled &&
-                  this_mo.OnSameTeam(char) &&
-                   char.QueryIntFunction("int IsAggro()") == 1 &&
-                   char.GetIntVar("knocked_out") == _awake &&
-                   char.GetIntVar("state") != _ragdoll_state &&
-                   char.GetIntVar("group_leader") == -1 &&
-                   distance_squared(char.position, ReadCharacterID(chase_target_id).position) < 9.0)
-                {
-                    char.Execute("AddFollower("+this_mo.GetID()+");");
-                    group_leader = char.GetID();
-                    break;
-                }
-            }
-        } else if(group_leader != -1){
-            MovementObject@ char = ReadCharacterID(group_leader);
-            if(char.GetIntVar("knocked_out") != _awake || char.GetIntVar("state") == _ragdoll_state || char.GetIntVar("group_leader") != -1 || distance_squared(char.position, ReadCharacterID(chase_target_id).position) > 9.0){
-                char.Execute("RemoveFollower("+this_mo.GetID()+");");
-                group_leader = -1;
-            }
-        } else if(rand()%100==0){
-            StopBeingGroupLeader();
-        }
-    } else {
-        if(followers.size() != 0){
-            StopBeingGroupLeader();
-        }
-        if(group_leader != -1){
-            MovementObject@ char = ReadCharacterID(group_leader);
-            char.Execute("RemoveFollower("+this_mo.GetID()+");");
-            group_leader = -1;
-        }
-    }
-}
-
 bool StuckToNavMesh() {
     if(state != _movement_state || flip_info.IsRolling() || tethered != _TETHERED_FREE){
         return false;
@@ -1216,8 +1170,6 @@ void UpdateBrain(const Timestep &in ts){
         }
     }
 
-    AllyInfo();
-
     suspicious_amount = max(0.0f, suspicious_amount - ts.step() * kSuspicionFadeSpeed);
     move_delay = max(0.0f, move_delay - ts.step());
     jump_delay = max(0.0f, jump_delay - ts.step());
@@ -1248,7 +1200,7 @@ void UpdateBrain(const Timestep &in ts){
                 }
             }
 
-            array<int> visible_characters;
+            /* array<int> visible_characters;
             if(!omniscient){
                 GetVisibleCharacters(0, visible_characters);
             } else {
@@ -1260,8 +1212,8 @@ void UpdateBrain(const Timestep &in ts){
                         }
                     }
                 }
-            }
-            int num_enemies_visible = 0;
+            } */
+            /* int num_enemies_visible = 0;
             for(int i=0, len=visible_characters.size(); i<len; ++i){
                 int id = visible_characters[i];
                 MovementObject@ char = ReadCharacterID(id);
@@ -1283,6 +1235,26 @@ void UpdateBrain(const Timestep &in ts){
                             this_mo.PlaySoundGroupVoice("suspicious",0.0f);
                             AISound(this_mo.position, VERY_LOUD_SOUND_RADIUS, _sound_type_voice);
                             random_look_delay = 1.0f;
+                            t num_enemies_visible = 0;
+            for(int i=0, len=visible_characters.size(); i<len; ++i){
+                int id = visible_characters[i];
+                MovementObject@ char = ReadCharacterID(id);
+                if(id == chase_target_id){
+                    target_history.Update(char.position, char.velocity, time);
+                    situation.Notice(id);
+                }
+                if(this_mo.OnSameTeam(char)){
+                    if(char.GetIntVar("knocked_out") != _awake && goal == _patrol){
+                        // Check if we already know that this character is unconscious
+                        bool already_known = false;
+                        int known_id = situation.KnownID(id);
+                        if(known_id != -1 && situation.known_chars[known_id].knocked_out != _awake){
+                            already_known = true;
+                        }
+                        if(!already_known){
+                            // Investigate body of ally
+                            Startle();
+                            this_mo.PlaySoundGroupVoice("suspicious",0.0f);
                             random_look_dir = char.position - this_mo.position;
                             SetGoal(_investigate);
                             SetSubGoal(_investigate_urgent);
@@ -1318,9 +1290,9 @@ void UpdateBrain(const Timestep &in ts){
             }
             if(num_enemies_visible == 0){
                 enemy_seen = max(0.0f, enemy_seen - 0.25f * kEnemySeenFadeSpeed);
-            }
+            } */
             // Notice enemy if alerted above threshold
-            if(enemy_seen >= 1.0f){
+            /* if(enemy_seen >= 1.0f){
                 array<int> enemies;
                 GetMatchingCharactersInArray(visible_characters, enemies, _TC_ENEMY | _TC_CONSCIOUS);
                 int closest_id = GetClosestCharacterInArray(this_mo.position, enemies, 0.0f);
@@ -1339,7 +1311,7 @@ void UpdateBrain(const Timestep &in ts){
                     SetSubGoal(_investigate_slow);
                     investigate_target_id = -1;
                 }
-            }
+            } */
             //DebugText("a", "num_enemies_visible: "+num_enemies_visible, 0.5f);
             //DebugText("b", "enemy_seen: "+enemy_seen, 0.5f);
         }
@@ -1710,12 +1682,12 @@ void UpdateBrain(const Timestep &in ts){
             DebugText(this_mo.getID()+"Known allies: ", this_mo.getID()+" Known allies: "+allies, 0.5f);
         }
 
-        CheckForNearbyWeapons();
+        /* CheckForNearbyWeapons(); */
 
-        if(!omniscient && time - target_history.LastUpdated() > 2.0){
+        /* if(!omniscient && time - target_history.LastUpdated() > 2.0){
             SetGoal(_investigate);
             SetSubGoal(_investigate_attack);
-        }
+        } */
 
         break;}
     case _get_help: {

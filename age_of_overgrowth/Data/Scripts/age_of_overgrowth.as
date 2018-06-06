@@ -18,7 +18,7 @@ IMMouseOverPulseColor mouseover_fontcolor(vec4(1), vec4(1), 5.0f);
 bool post_init_done = false;
 bool has_camera_control = true;
 int player_id = -1;
-float camera_movement_speed = 30.0f;
+float camera_movement_speed = 20.0f;
 vec3 camera_position;
 vec3 camera_facing = vec3(1.0, -1.0, 0.0);
 float camera_ground_distance = 10.0;
@@ -134,13 +134,17 @@ void UpdateSelectionControls(){
 		}
 		selecting = true;
 		select_timer += time_step;
+	}else if(GetInputPressed(0, "grab")){
+		DeselectAllCharacters();
 	}else{
 		if(selecting){
 			player.Execute("selecting = false");
 			selection_box.setVisible(false);
 			if(select_timer < select_threshold){
 				Log(warning, "QuickClick");
-				CharactersMarch();
+				if(!CheckForEnemy()){
+					CharactersMarch();
+				}
 			}
 		}
 		selecting = false;
@@ -196,6 +200,40 @@ void UpdateSelectionControls(){
 				}
 			}
 		}
+	}
+}
+
+void DeselectAllCharacters(){
+	Log(info, "deselectall");
+	for(uint i = 0; i < selected_character_ids.size(); i++){
+		MovementObject@ char = ReadCharacterID(selected_character_ids[i]);
+		char.Execute("SetDecalColor(false);");
+	}
+	selected_character_ids.resize(0);
+}
+
+bool CheckForEnemy(){
+	vec3 location = col.GetRayCollision(camera.GetPos(), camera.GetPos() + camera.GetMouseRay() * 200.0);
+	array<int> character_ids;
+	DebugDrawWireScaledSphere(location, 2.0, vec3(1.0), vec3(1.0), _fade);
+	GetCharactersInSphere(location, 2.0, character_ids);
+	MovementObject@ player = ReadCharacterID(player_id);
+
+	for(uint i = 0; i < character_ids.size(); i++){
+		MovementObject@ char = ReadCharacterID(character_ids[i]);
+		if(!char.OnSameTeam(player)){
+			AttackCharacter(character_ids[i]);
+			return true;
+		}
+	}
+	return false;
+}
+
+void AttackCharacter(int character_id){
+	for(uint i = 0; i < selected_character_ids.size(); i++){
+		MovementObject@ char = ReadCharacterID(selected_character_ids[i]);
+		char.Execute("Notice(" + character_id + ");");
+		char.Execute("SetGoal(_attack);");
 	}
 }
 
