@@ -111,7 +111,7 @@ float last_dodged_time = 0.0;
 vec3 unselected_tint = vec3(0.0, 0.0, 0.0);
 vec3 selected_tint = vec3(0.0, 0.0, 1.0);
 float minimum_camera_height = 0.0f;
-string decal_path = "Data/Objects/Decals/WolfireLogo.xml";
+string decal_path = "Data/Objects/Decals/Hay_01.xml";
 Object@ decal_object;
 int decal_id = -1;
 
@@ -137,6 +137,10 @@ void SetDecalColor(bool selected){
 	}else{
 		decal_object.SetTint(unselected_tint);
 	}
+}
+
+int CombatSong() {
+	return situation.PlayCombatSong()?1:0;
 }
 
 void ResetAOOCharacter(){
@@ -1037,11 +1041,16 @@ void CheckForNearbyWeapons() {
 	                old_sub_goal = sub_goal;
 	                SetGoal(_get_weapon);
 	            }
+				if(!IsItemPickupable(ReadItemID(weapon_target_id))){
+					wants_to_get_weapon = false;
+					SetGoal(_investigate);
+				}
 	        } else {
 	            get_weapon_delay = kGetWeaponDelay;
 	        }
 		}else{
 			wants_to_get_weapon = false;
+			SetGoal(_investigate);
 		}
     }
 }

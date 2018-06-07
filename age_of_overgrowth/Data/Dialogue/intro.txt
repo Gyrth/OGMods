@@ -1,0 +1,5 @@
+#name "Intro"
+#participants 2
+send_character_message 1 "set_dialogue_control true"
+set_cam 399.9 -1.31055 45.0925 -22.56 -13.9 0 90
+say 1 "Thanatos" "Our armies are getting thinner by the minute. At this rate we'll never get Helen back."

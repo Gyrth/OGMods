@@ -75,6 +75,8 @@ void ReceiveMessage(string msg) {
 		token_iter.FindNextToken(msg);
 		int obj_id = atoi(token_iter.GetToken(msg));
 		ground_decals.insertLast(obj_id);
+	} else if(token == "start_dialogue"){
+		has_camera_control = false;
 	}
 }
 
@@ -100,6 +102,7 @@ void PostInit(){
 	}
 	@selection_box = IMContainer(20.0, 20.0);
 	selection_box.showBorder();
+	selection_box.setVisible(false);
 	imGUI.getMain().addFloatingElement(selection_box, "selection_box", vec2(0,0));
 	post_init_done = true;
 	level.Execute("has_gui = true;");
@@ -115,7 +118,10 @@ void SetInitialCameraPosition(){
 void Update() {
 	PostInit();
 	imGUI.update();
-	if(EditorModeActive()){
+	if(!has_camera_control && !level.DialogueCameraControl()){
+		has_camera_control = true;
+	}
+	if(EditorModeActive() || !has_camera_control){
 		return;
 	}
 	UpdateCameraControls();
@@ -353,6 +359,7 @@ void UpdateCameraControls(){
 		camera.SetPos(camera_position);
 		camera.LookAt(camera_position + new_facing);
 	}
+	UpdateListener(camera.GetPos(),vec3(0,0,0),camera.GetFacing(),camera.GetUpVector());
 }
 
 float GetMinimumCameraHeight(){
