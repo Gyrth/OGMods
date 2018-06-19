@@ -1,61 +1,63 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="-22.4634" t1="10.9133" t2="72.0173" s0="20.01" s1="28.0024" s2="21.0761" q0="0" q1="0" q2="0" q3="1" id="72" version="1">
+    <Group t0="1.86548" t1="-2.01278" t2="24.0899" s0="20.01" s1="28.0024" s2="21.0762" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="32" version="1">
         <parameters />
-        <EnvObject t0="-22.4634" t1="6.9171" t2="71.4842" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+        <EnvObject t0="1.86548" t1="-6.00898" t2="23.5568" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
             <parameters>
                 <parameter name="BlockBase" type="string" val="1" />
             </parameters>
         </EnvObject>
-        <EnvObject t0="-15.4141" t1="16.4503" t2="79.6781" s0="1" s1="1" s2="1" q0="0.258819" q1="0" q2="0" q3="0.965926" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
+        <EnvObject t0="8.91478" t1="3.52422" t2="31.7507" s0="1" s1="1" s2="1" q0="0.258819" q1="0" q2="0" q3="0.965926" euler_x="0.523599" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="-15.4142" t1="14.58" t2="68.621" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShortLegs.xml">
+        <EnvObject t0="8.91468" t1="1.65392" t2="20.6936" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShortLegs.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="-15.4132" t1="19.515" t2="74.3459" s0="1" s1="1" s2="1" q0="0.258819" q1="0" q2="0" q3="0.965926" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
+        <EnvObject t0="8.91568" t1="6.58892" t2="26.4185" s0="1" s1="1" s2="1" q0="0.258819" q1="0" q2="0" q3="0.965926" euler_x="0.523599" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="-15.3776" t1="14.3839" t2="71.6276" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_EndLegs.xml">
+        <EnvObject t0="8.95128" t1="1.45782" t2="23.7002" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_EndLegs.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="-19.3592" t1="22.3447" t2="67.2923" s0="1" s1="1" s2="1" q0="0.183013" q1="0.683013" q2="-0.183013" q3="0.683013" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
+        <EnvObject t0="4.96968" t1="9.41862" t2="19.3649" s0="1" s1="1" s2="1" q0="0.183013" q1="0.683013" q2="-0.183013" q3="0.683013" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShort.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="-23.6444" t1="17.4188" t2="68.8464" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShortLegs.xml">
+        <EnvObject t0="0.684481" t1="4.49272" t2="20.919" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Common/Wood_BridgeShortLegs.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="-23.8223" t1="16.958" t2="73.16" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.0166793" q3="0.999861" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
+        <EnvObject t0="0.50658" t1="4.03192" t2="25.2326" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.0166793" q3="0.999861" euler_x="0" euler_y="0" euler_z="0.0333601" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="-22.6278" t1="17.0008" t2="74.5838" s0="1" s1="1" s2="1" q0="-0.00930122" q1="0.945572" q2="-0.000783682" q3="-0.325278" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/bed_roll.xml">
+        <EnvObject t0="1.70108" t1="4.07472" t2="26.6564" s0="1" s1="1" s2="1" q0="-0.00930122" q1="0.945572" q2="-0.000783682" q3="-0.325278" euler_x="3.1358" euler_y="-0.662592" euler_z="-3.11993" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/bed_roll.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="-23.7521" t1="17.2935" t2="73.2148" s0="1" s1="1" s2="1" q0="0" q1="-0.402523" q2="0" q3="0.91541" id="40" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/cook_tripod.xml">
+        <EnvObject t0="0.57678" t1="4.36742" t2="25.2874" s0="1" s1="1" s2="1" q0="0" q1="-0.402523" q2="0" q3="0.91541" euler_x="0" euler_y="-0.828543" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/cook_tripod.xml">
             <parameters />
         </EnvObject>
-        <Group t0="-23.7875" t1="16.9413" t2="73.1542" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" id="62" version="1">
+        <Group t0="0.541301" t1="4.01523" t2="25.2268" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" version="1">
             <parameters />
-            <Hotspot t0="-23.7829" t1="16.9478" t2="73.1701" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" id="45" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <Hotspot t0="0.54598" t1="4.02172" t2="25.2427" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" euler_x="0" euler_y="0" euler_z="-3.1405" id="15" type_file="Data/Objects/Hotspots/fire_test.xml">
                 <parameters>
                     <parameter name="Fire Ribbons" type="int" val="4" />
                     <parameter name="Ignite Characters" type="int" val="1" />
                     <parameter name="Light Amplify" type="float" val="1" />
                     <parameter name="Light Distance" type="float" val="2" />
                 </parameters>
+                <Connections />
+                <ConnectionsFrom />
             </Hotspot>
-            <EnvObject t0="-23.7975" t1="16.8725" t2="73.131" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" id="46" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+            <EnvObject t0="0.53138" t1="3.94642" t2="25.2036" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
                 <parameters />
             </EnvObject>
-            <Decal t0="-23.7804" t1="16.8954" t2="73.129" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" id="61" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <Decal t0="0.548481" t1="3.96932" t2="25.2016" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
                 <parameters />
             </Decal>
         </Group>
-        <EnvObject t0="-23.7959" t1="16.9333" t2="73.1557" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_wood.xml">
+        <EnvObject t0="0.53298" t1="4.00722" t2="25.2283" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_wood.xml">
             <parameters />
         </EnvObject>
-        <ActorObject t0="-21.1642" t1="17.9171" t2="77.1746" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="68" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
+        <ActorObject t0="3.16468" t1="4.99102" t2="29.2472" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
             <parameters>
                 <parameter name="Aggression" type="float" val="0.5" />
                 <parameter name="Attack Damage" type="float" val="1" />
@@ -63,6 +65,7 @@
                 <parameter name="Attack Speed" type="float" val="1" />
                 <parameter name="Block Follow-up" type="float" val="0.5" />
                 <parameter name="Block Skill" type="float" val="0.5" />
+                <parameter name="Cannot Be Disarmed" type="int" val="0" />
                 <parameter name="Character Scale" type="float" val="1" />
                 <parameter name="Damage Resistance" type="float" val="1" />
                 <parameter name="Ear Size" type="float" val="1" />
@@ -78,69 +81,75 @@
                 <parameter name="Peripheral FOV distance" type="float" val="4" />
                 <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
                 <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+                <parameter name="Species" type="string" val="rabbit" />
                 <parameter name="Static" type="int" val="0" />
                 <parameter name="Teams" type="string" val="guard" />
             </parameters>
             <Connections>
+                <Connection id="-1" />
             </Connections>
-            <ItemConnections />
             <Palette>
                 <Color label="Clothes" channel="0" red="1" green="1" blue="1" />
                 <Color label="Fur" channel="1" red="1" green="1" blue="1" />
                 <Color label="Leather" channel="2" red="1" green="1" blue="1" />
                 <Color label="Armor" channel="3" red="1" green="1" blue="1" />
             </Palette>
+            <EnvObjectAttachments>
+                <EnvObjectAttachment>
+                    <BoneConnect bone_id="2" num_connections="1" m0="-0.992232" m1="0.00281831" m2="0.124365" m3="0" m4="0.00727746" m5="0.999346" m6="0.0354156" m7="0" m8="-0.124184" m9="0.0360456" m10="-0.991604" m11="0" m12="-0.0379105" m13="0.286496" m14="-0.208239" m15="1" />
+                    <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                    <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                    <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                </EnvObjectAttachment>
+            </EnvObjectAttachments>
+            <EnvObject s0="1" s1="1" s2="1" id="31" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/TestBackpack.xml">
+                <parameters />
+            </EnvObject>
         </ActorObject>
-        <ItemObject t0="-18.8825" t1="17.8359" t2="72.9136" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="81" type_file="Data/Items/DogWeapons/DogBroadSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <ItemObject t0="5.44638" t1="4.90982" t2="24.9862" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" type_file="Data/Items/DogWeapons/DogBroadSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
             <parameters />
         </ItemObject>
-        <PathPointObject t0="-23.0884" t1="17.3616" t2="74.0914" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="83" type_file="">
+        <PathPointObject t0="1.24048" t1="4.43552" t2="26.164" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Sit" />
                 <parameter name="Wait" type="float" val="5" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
-        <PathPointObject t0="-19.0094" t1="17.2803" t2="80.159" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="85" type_file="">
+        <PathPointObject t0="5.31948" t1="4.35422" t2="32.2316" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
-        <PathPointObject t0="-15.4009" t1="17.2803" t2="80.2481" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="94" type_file="">
+        <PathPointObject t0="8.92798" t1="4.35422" t2="32.3207" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
-        <PathPointObject t0="-15.3615" t1="21.6062" t2="67.4398" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="96" type_file="">
+        <PathPointObject t0="8.96738" t1="8.68012" t2="19.5124" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
-        <PathPointObject t0="-23.7282" t1="24.4095" t2="67.2543" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="98" type_file="">
+        <PathPointObject t0="0.600679" t1="11.4834" t2="19.3269" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="25" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
-        <PathPointObject t0="-23.5903" t1="24.4095" t2="71.1095" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="100" type_file="">
+        <PathPointObject t0="0.738581" t1="11.4834" t2="23.1821" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="26" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="5" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
     </Group>
 </ActorObjects>

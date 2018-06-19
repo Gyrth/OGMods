@@ -121,7 +121,7 @@ void ForgetCharacter(int id){
 class Garbage{
 	array<int> item_objects;
 	array<int> movement_objects;
-	array<int> groups;
+	int group = -1;
 	Garbage(){}
 }
 
@@ -169,7 +169,10 @@ class Block{
 					continue;
 				}
 			}else if(obj.GetType() == _group){
-				garbage.groups.insertLast(obj_ids[i]);
+				//The first group is the only one to delete, the rest will be inside this group, so ignore those.
+				if(garbage.group == -1){
+					garbage.group = obj_ids[i];
+				}
 				continue;
 			}
 			DeleteObjectID(obj_ids[i]);
@@ -238,15 +241,15 @@ class World{
 			for(uint j = 0; j < blocks[i].size(); j++){
 				//Delete all the existing blocks and their garbage.
 				Garbage garbage = blocks[i][j].Delete();
-				for(uint k = 0; k < garbage.groups.size(); k++){
-					DeleteObjectID(garbage.groups[k]);
+				if(garbage.group != -1){
+					DeleteObjectID(garbage.group);
 				}
 			}
 		}
 		//Delete all the garbage that's already collected.
 		for(uint i = 0; i < garbages.size(); i++){
-			for(uint j = 0; j < garbages[i].groups.size(); j++){
-				DeleteObjectID(garbages[i].groups[j]);
+			if(garbages[i].group != -1){
+				DeleteObjectID(garbages[i].group);
 			}
 		}
 		blocks.resize(0);
@@ -331,6 +334,9 @@ class World{
 					MarkOldObjects();
 					int id = CreateObject(spawn_obj.block_type.path);
 					Object@ obj = ReadObjectFromID(id);
+					obj.SetSelectable(true);
+					obj.SetDeletable(true);
+					obj.SetTranslatable(true);
 					ScriptParams@ params = obj.GetScriptParams();
 					params.AddInt("Old", 1);
 					spawn_obj.owner.AddObjectID(id);
@@ -455,8 +461,10 @@ class World{
 				for(uint j = 0; j < current_garbage.item_objects.size(); j++){
 					ItemObject@ item = ReadItemID(current_garbage.item_objects[j]);
 					if(distance(item.GetPhysicsPosition(), player.position) > (world_size * block_size)){
-						DeleteObjectID(current_garbage.item_objects[j]);
-						current_garbage.item_objects.removeAt(j);
+						if(ObjectExists(current_garbage.item_objects[j])){
+							DeleteObjectID(current_garbage.item_objects[j]);
+							current_garbage.item_objects.removeAt(j);
+						}
 						j--;
 					}
 				}
@@ -465,16 +473,18 @@ class World{
 					MovementObject@ char = ReadCharacterID(current_garbage.movement_objects[j]);
 					if(distance(char.position, player.position) > (world_size * block_size)){
 						//MovementObject need to be queued or else the ItemObject they hold is going to reset position in the same update.
-						QueueDeleteObjectID(current_garbage.movement_objects[j]);
-						ForgetCharacter(current_garbage.movement_objects[j]);
+						if(ObjectExists(current_garbage.movement_objects[j])){
+							QueueDeleteObjectID(current_garbage.movement_objects[j]);
+							ForgetCharacter(current_garbage.movement_objects[j]);
+						}
 						current_garbage.movement_objects.removeAt(j);
 						j--;
 					}
 				}
 
 				if (current_garbage.movement_objects.size() == 0 && current_garbage.item_objects.size() == 0) {
-					for (uint j = 0; j < current_garbage.groups.size(); j++) {
-						DeleteObjectID(current_garbage.groups[j]);
+					if(current_garbage.group != -1 && ObjectExists(current_garbage.group)){
+						QueueDeleteObjectID(current_garbage.group);
 					}
 					garbages.removeAt(i);
 					i--;

@@ -1,14 +1,14 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="7.00619" t1="-1.7015" t2="2.28682" s0="20.01" s1="22.341" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="18" version="1">
+    <Group t0="-18.3693" t1="-8.66073" t2="7.36701" s0="20.01" s1="22.341" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" version="1">
         <parameters />
-        <EnvObject t0="7.00619" t1="-2.867" t2="2.28682" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+        <EnvObject t0="-18.3693" t1="-9.82623" t2="7.36701" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
             <parameters>
                 <parameter name="BlockBase" type="int" val="1" />
             </parameters>
         </EnvObject>
-        <ActorObject t0="5.90996" t1="8.24538" t2="2.6408" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="12" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+        <ActorObject t0="-19.4655" t1="1.28615" t2="7.72099" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
             <parameters>
                 <parameter name="Aggression" type="float" val="0.5" />
                 <parameter name="Attack Damage" type="float" val="1" />
@@ -16,6 +16,7 @@
                 <parameter name="Attack Speed" type="float" val="1" />
                 <parameter name="Block Follow-up" type="float" val="0.5" />
                 <parameter name="Block Skill" type="float" val="0.5" />
+                <parameter name="Cannot Be Disarmed" type="int" val="0" />
                 <parameter name="Character Scale" type="float" val="1" />
                 <parameter name="Damage Resistance" type="float" val="1" />
                 <parameter name="Ear Size" type="float" val="1" />
@@ -31,39 +32,61 @@
                 <parameter name="Peripheral FOV distance" type="float" val="4" />
                 <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
                 <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+                <parameter name="Species" type="string" val="rabbit" />
                 <parameter name="Static" type="int" val="0" />
                 <parameter name="Teams" type="string" val="guard" />
             </parameters>
             <Connections>
+                <Connection id="-1" />
             </Connections>
             <ItemConnections />
             <Palette />
+            <EnvObjectAttachments>
+                <EnvObjectAttachment>
+                    <BoneConnect bone_id="4" num_connections="1" m0="0.914929" m1="-0.0955314" m2="-0.392166" m3="0" m4="-0.229337" m5="0.676481" m6="-0.699843" m7="0" m8="0.332152" m9="0.73024" m10="0.597026" m11="0" m12="0.145009" m13="0.363246" m14="-0.0596046" m15="1" />
+                    <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                    <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                    <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                </EnvObjectAttachment>
+                <EnvObjectAttachment>
+                    <BoneConnect bone_id="17" num_connections="1" m0="-0.989313" m1="0.0951615" m2="0.110471" m3="0" m4="0.0927548" m5="0.99533" m6="-0.0267355" m7="0" m8="-0.112499" m9="-0.0162031" m10="-0.99352" m11="0" m12="-0.143542" m13="0.374924" m14="-0.0321999" m15="1" />
+                    <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                    <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                    <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                </EnvObjectAttachment>
+            </EnvObjectAttachments>
+            <EnvObject s0="1" s1="1" s2="1" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_shoulder_a.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject s0="1" s1="1" s2="1" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_shoulder_a.xml">
+                <parameters />
+            </EnvObject>
         </ActorObject>
-        <ItemObject t0="3.90358" t1="8.6442" t2="2.9803" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="13" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <ItemObject t0="-21.4719" t1="1.68497" t2="8.06049" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
             <parameters />
         </ItemObject>
-        <PathPointObject t0="-0.242127" t1="7.91758" t2="-5.2884" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="14" type_file="">
+        <PathPointObject t0="-25.6176" t1="0.958353" t2="-0.208212" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
             <Connections />
         </PathPointObject>
-        <PathPointObject t0="-0.283487" t1="7.91758" t2="10.2365" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="15" type_file="">
+        <PathPointObject t0="-25.659" t1="0.958353" t2="15.3167" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
             <Connections />
         </PathPointObject>
-        <PathPointObject t0="14.5601" t1="7.91758" t2="10.1532" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="16" type_file="">
+        <PathPointObject t0="-10.8154" t1="0.958353" t2="15.2334" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
             <Connections />
         </PathPointObject>
-        <PathPointObject t0="13.9045" t1="7.91758" t2="-5.23167" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="17" type_file="">
+        <PathPointObject t0="-11.471" t1="0.958353" t2="-0.151482" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
