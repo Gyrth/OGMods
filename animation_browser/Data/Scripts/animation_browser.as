@@ -23,9 +23,9 @@ int scrollbar_width = 10;
 int padding = 10;
 bool open_header = true;
 int top_bar_height = 32;
-int currently_pressed = -1;
 const int _ragdoll_state = 4;
 int animation_index = 0;
+string selected_animation = "";
 
 class AnimationGroup{
     string name;
@@ -94,16 +94,39 @@ string ToLowerCase(string input){
 	return output;
 }
 
+string buffer1 = "";
+string buffer2 = "";
+string dialogue_buffer = "";
+bool update_dialogue_buffer = false;
+
 void Display(){
+	if(update_dialogue_buffer){
+		Log(info, "Update diag");
+		update_dialogue_buffer = false;
+		ImGui_SetTextBuf(dialogue_buffer);
+		level.Execute("dialogue.HandleSelectedString(" + previous_dialogue_line + ");");
+	}else{
+		dialogue_buffer = ImGui_GetTextBuf();
+	}
     if(show){
         animation_index = 0;
-        ImGui_SetNextWindowSize(vec2(500, 500), ImGuiSetCond_FirstUseEver);
+        ImGui_SetNextWindowSize(vec2(500, 500), ImGuiSetCond_FirstUseEver | ImGuiWindowFlags_NoBringToFrontOnFocus);
         ImGui_Begin("Animation Browser", show, ImGuiWindowFlags_NoScrollbar);
         ImGui_BeginChild(99, vec2(ImGui_GetWindowWidth(), top_bar_height), false, ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         ImGui_Columns(2, false);
+
+		ImGui_SetTextBuf(buffer1);
         if(ImGui_InputText("Search", ImGuiInputTextFlags_AutoSelectAll)){
+			buffer1 = ImGui_GetTextBuf();
             QueryAnimation(ImGui_GetTextBuf());
         }
+		ImGui_SameLine();
+		ImGui_SetTextBuf(buffer2);
+		if(ImGui_InputText("Search2")){
+			buffer2 = ImGui_GetTextBuf();
+		}
+
+
         ImGui_NextColumn();
         ImGui_DragInt("Icon Size", icon_size, 1.0f, 35, 500, "%.0f");
         ImGui_EndChild();
@@ -118,6 +141,7 @@ void Display(){
         }
         ImGui_End();
     }
+	ImGui_SetTextBuf(dialogue_buffer);
 }
 
 void AddCategory(string category, array<string> items){
@@ -139,22 +163,11 @@ void AddCategory(string category, array<string> items){
 }
 
 void AddItem(string name, int index){
-    bool is_selected = index == currently_pressed;
-    if(is_selected) {
-        // From default style colors for ImGuiCol_Header, ImGuiCol_HeaderHovered, ImGuiCol_HeaderActive
-        // There's ways to get these colors from the API, but it's a PITA,
-        //   and there's no way in OG to easily globally override the default style anyway (yet)
-        ImGui_PushStyleColor(ImGuiCol_Button, vec4(0.40f, 0.40f, 0.90f, 0.45f));
-        ImGui_PushStyleColor(ImGuiCol_ButtonHovered, vec4(0.45f, 0.45f, 0.90f, 0.80f));
-        ImGui_PushStyleColor(ImGuiCol_ButtonActive, vec4(0.53f, 0.53f, 0.87f, 0.80f));
-    }
-    if(ImGui_Button(name, vec2(ImGui_GetWindowWidth(), icon_size))) {
-        ReceiveMessage("set_animation " + name);
-        currently_pressed = index;
-    }
-    if(is_selected) {
-        ImGui_PopStyleColor(3);
-    }
+    bool is_selected = name == selected_animation;
+	if(ImGui_SelectableToggle(name, is_selected, 0, vec2(ImGui_GetWindowWidth(), icon_size) )){
+		selected_animation = name;
+		SetCurrentAnimation();
+	}
 }
 
 void ReceiveMessage(string msg){
@@ -183,14 +196,58 @@ void ReceiveMessage(string msg){
     }
 }
 
+void SetCurrentAnimation(){
+	array<string> split_dialogue = dialogue_buffer.split("\n");
+	array<string> split_line = split_dialogue[previous_dialogue_line].split(" ");
+	Log(info, "Update diag " + previous_dialogue_line);
+	if(split_line.size() >= 3){
+		if(split_line[2] == "\"set_animation"){
+			string new_line = split_line[0] + " " + split_line[1] + " " + split_line[2] + " " + "\\\""+ selected_animation +"\\\"";
+			split_dialogue[previous_dialogue_line] = new_line;
+			dialogue_buffer = join(split_dialogue, "\n");
+			update_dialogue_buffer = true;
+			/* level.SendMessage("save_selected_dialogue"); */
+			/* level.Execute("dialogue.UpdateScriptFromStrings();"); */
+		}
+	}
+}
+
+int dialogue_character_position = 0;
+int previous_character_position = 0;
+int current_dialogue_line = 0;
+int previous_dialogue_line = 0;
+
 void Update(){
-    MovementObject@ player = ReadCharacter(0);
-    if(GetInputPressed(player.GetID(), "8")){
-        player.ReceiveMessage("set_dialogue_control false");
-        show = false;
-    }else if(GetInputPressed(player.GetID(), "escape")){
-        show = true;
-    }
+	if(dialogue_character_position != imgui_text_input_CursorPos){
+		//The cursor position has changed.
+		previous_dialogue_line = current_dialogue_line;
+		previous_character_position = dialogue_character_position;
+
+		dialogue_character_position = imgui_text_input_CursorPos;
+		array<string> split_dialogue = dialogue_buffer.split("\n");
+		int new_dialogue_line = 0;
+		int counter = 0;
+		for(uint i = 0; i < split_dialogue.size(); i++){
+			counter += split_dialogue[i].length() + 1;
+			Log(info, "Dialogue line " + split_dialogue[i]);
+			if(counter > dialogue_character_position){
+				break;
+			}
+			new_dialogue_line += 1;
+		}
+		current_dialogue_line = new_dialogue_line;
+		//send_character_message 1 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+
+		array<string> split_line = split_dialogue[current_dialogue_line].split(" ");
+		if(split_line.size() >= 3){
+			Log(info, "Dialogue line " + imgui_text_input_CursorPos + " " + current_dialogue_line + split_line[2]);
+			if(split_line[2] == "\"set_animation"){
+				show = true;
+			}else{
+				show = false;
+			}
+		}
+	}
 }
 
 bool HasFocus(){
