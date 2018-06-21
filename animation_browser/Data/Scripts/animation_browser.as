@@ -26,6 +26,14 @@ int top_bar_height = 32;
 const int _ragdoll_state = 4;
 int animation_index = 0;
 string selected_animation = "";
+int dialogue_character_position = 0;
+int current_dialogue_line = 0;
+int previous_dialogue_line = 0;
+bool on_animation_line = false;
+
+string search_buffer = "";
+string dialogue_buffer = "";
+bool update_dialogue_buffer = false;
 
 class AnimationGroup{
 	string name;
@@ -92,10 +100,6 @@ string ToLowerCase(string input){
 	}
 	return output;
 }
-
-string search_buffer = "";
-string dialogue_buffer = "";
-bool update_dialogue_buffer = false;
 
 void Display(){
 	UpdateCursor();
@@ -167,7 +171,7 @@ void AddCategory(string category, array<string> items){
 
 void AddItem(string name, int index){
 	bool is_selected = name == selected_animation;
-	if(ImGui_SelectableToggle(name, is_selected, 0, vec2(ImGui_GetWindowWidth(), icon_size) )){
+	if(ImGui_SelectableToggle(name, is_selected, 0, vec2(ImGui_GetWindowWidth(), 0.0) )){
 		selected_animation = name;
 		SetCurrentAnimation();
 	}
@@ -190,18 +194,13 @@ void SetCurrentAnimation(){
 	array<string> split_line = split_dialogue[previous_dialogue_line].split(" ");
 	if(split_line.size() >= 3){
 		if(split_line[2] == "\"set_animation"){
-			string new_line = split_line[0] + " " + split_line[1] + " " + split_line[2] + " " + "\\\""+ selected_animation +"\\\"";
+			string new_line = split_line[0] + " " + split_line[1] + " " + split_line[2] + " " + "\\\""+ selected_animation +"\\\"\"";
 			split_dialogue[previous_dialogue_line] = new_line;
 			dialogue_buffer = join(split_dialogue, "\n");
 			update_dialogue_buffer = true;
 		}
 	}
 }
-
-int dialogue_character_position = 0;
-int current_dialogue_line = 0;
-int previous_dialogue_line = 0;
-bool on_animation_line = false;
 
 void Update(){
 
@@ -244,9 +243,15 @@ void UpdateCursor(){
 string GetAnimationPathFromString(string input){
 	string output;
 	output = join(input.split("\\\""), "");
+	output = join(output.split("\""), "");
 	return output;
 }
 
 bool HasFocus(){
+	return false;
+}
+
+
+bool DialogueCameraControl() {
 	return false;
 }

@@ -1,14 +1,15 @@
 <? xml version="1.0" ?>
 <Mod>
-    <Id>animation-browser</Id>
-    <Name>Animation Browser Mod</Name>
-    <Category>Item Pack</Category>
-    <Version>0.1.0</Version>
-    <Author>Gyrth McMulin</Author>
-    <Thumbnail>Data/Images/animation_browser_thumb.jpg</Thumbnail>
-    <PreviewImage>Data/Images/animation_browser_full.jpg</PreviewImage>
-    <Description>Animation Browser.</Description>
-    <Tag>Animation</Tag>
-    <SupportedVersion>*</SupportedVersion>
-    <Level title="Animation Browser" thumbnail="Images/animation_browser_full.jpg">animation_browser.xml</Level>
+	<Id>animation-browser</Id>
+	<Name>Animation Browser Mod</Name>
+	<Category>Item Pack</Category>
+	<Version>0.1.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Thumbnail>Data/Images/animation_browser_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/animation_browser_full.jpg</PreviewImage>
+	<Description>Animation Browser that pops up when you are editing dialogue.</Description>
+	<Tag>Animation</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<LevelHookFile>Data/Scripts/animation_browser.as</LevelHookFile>
+	<!-- <Level title="AnimationBrowser"thumbnail="Images/animation_browser_full.jpg">animation_browser.xml</Level> -->
 </Mod>
