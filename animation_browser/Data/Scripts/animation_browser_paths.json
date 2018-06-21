@@ -1,6 +1,6 @@
 {
     "Overgrowth Core": {
-        "Number of animations": 541,
+        "Number of animations": 550,
         "Mod ID": "com-wolfire-overgrowth-core",
         "Animations": [
             "Data/Animations/amos_door1.anm",
@@ -543,7 +543,16 @@
             "Data/Animations/bow/r_draw_bow_stance_aim_down.anm",
             "Data/Animations/bow/r_draw_bow_stance_aim_up.anm",
             "Data/Animations/Gunk/gunkactionidle.anm",
-            "Data/Animations/Gunk/gunksitcrossedlegs.anm"
+            "Data/Animations/Gunk/gunkcombatcrouch.anm",
+            "Data/Animations/Gunk/gunkcombatcrouchthreat.anm",
+            "Data/Animations/Gunk/gunkcombatidle.anm",
+            "Data/Animations/Gunk/gunkcombatidlethreat.anm",
+            "Data/Animations/Gunk/gunkcrouch.anm",
+            "Data/Animations/Gunk/gunkrun.anm",
+            "Data/Animations/Gunk/gunksitcrossedlegs.anm",
+            "Data/Animations/Gunk/gunksneakrun.anm",
+            "Data/Animations/Gunk/gunkwalk.anm",
+            "Data/Animations/Gunk/sneakwalk.anm"
         ]
     },
     "Animated Object Mod": {
@@ -829,6 +838,47 @@
         "Mod ID": "xx-lugaru-xxx",
         "Animations": [
             "Data/XMLStuff/ADDAKS/dabattack.anm"
+        ]
+    },
+    "Improved Gyrth's Bow and Arrow Mod": {
+        "Number of animations": 28,
+        "Mod ID": "updated-bow-and-arrow",
+        "Animations": [
+            "Data/Animations/r_arrow_crouch_move_threat.anm",
+            "Data/Animations/bow_and_arrow_aim_neutral.anm",
+            "Data/Animations/quiver_sheathed.anm",
+            "Data/Animations/r_arrow_crouch_idle.anm",
+            "Data/Animations/r_arrow_crouch_idle_threat.anm",
+            "Data/Animations/r_arrow_crouch_move.anm",
+            "Data/Animations/r_arrow_grip.anm",
+            "Data/Animations/r_arrow_idle_stand.anm",
+            "Data/Animations/r_arrow_idle_stand_threat.anm",
+            "Data/Animations/r_arrow_idle_stand_threat_close.anm",
+            "Data/Animations/r_arrow_run.anm",
+            "Data/Animations/r_arrow_sheathe.anm",
+            "Data/Animations/r_arrow_sheathed.anm",
+            "Data/Animations/r_arrow_sheathe_sameside.anm",
+            "Data/Animations/r_arrow_stand_idle.anm",
+            "Data/Animations/r_arrow_unsheathe.anm",
+            "Data/Animations/r_arrow_unsheathe_sameside.anm",
+            "Data/Animations/r_bow_grip.anm",
+            "Data/Animations/r_bow_sheathe.anm",
+            "Data/Animations/r_bow_sheathed.anm",
+            "Data/Animations/r_draw_bow.anm",
+            "Data/Animations/r_draw_bow_askew.anm",
+            "Data/Animations/r_draw_bow_running.anm",
+            "Data/Animations/r_draw_bow_short.anm",
+            "Data/Animations/r_draw_bow_sideways.anm",
+            "Data/Animations/r_draw_bow_stance.anm",
+            "Data/Animations/r_draw_bow_stance_aim_down.anm",
+            "Data/Animations/r_draw_bow_stance_aim_up.anm"
+        ]
+    },
+    "Undergrowth": {
+        "Number of animations": 1,
+        "Mod ID": "undergrowth",
+        "Animations": [
+            "Data/Animations/deathclaw/r_animalrun.anm"
         ]
     },
     "New Animations": {
