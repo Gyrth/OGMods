@@ -1,0 +1,4 @@
+#name "AnimationBrowser"
+#participants 1
+say 1 "Name" "Type your dialogue here."
+send_character_message 1 "set_animation \"Data/Animations/ancientrun.anm\""

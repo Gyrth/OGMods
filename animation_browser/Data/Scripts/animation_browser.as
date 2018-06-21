@@ -10,12 +10,13 @@ void Init(string str){
 
 	ReadAnimationList();
 	QueryAnimation("");
+	build_version = GetBuildVersionShort();
 }
 
 array<AnimationGroup@> all_animations;
 array<AnimationGroup@> current_animations;
 array<string> active_mods;
-bool show = true;
+bool show = false;
 int voice_preview = 1;
 bool select = false;
 int icon_size = 25;
@@ -34,6 +35,7 @@ bool on_animation_line = false;
 string search_buffer = "";
 string dialogue_buffer = "";
 bool update_dialogue_buffer = false;
+string build_version = "";
 
 class AnimationGroup{
 	string name;
@@ -113,11 +115,21 @@ void Display(){
 		if(update_dialogue_buffer){
 			update_dialogue_buffer = false;
 			ImGui_SetTextBuf(dialogue_buffer);
+
+			string extra_line = "";
+			if(build_version == "1.2.3"){
+				//The next line is used in non-internal_testing, should be removed in the next release.
+				extra_line = "dialogue.SaveScriptToParams();";
+			}else{
+				//The line is used in internal_testing.
+				extra_line = "dialogue.modified = true;";
+			}
+
 			level.Execute(	"int previous_selected_line = dialogue.selected_line;" +
 							"dialogue.ClearSpawnedObjects();" +
 							"dialogue.UpdateStringsFromScript(ImGui_GetTextBuf());" +
 							"dialogue.AddInvisibleStrings();" +
-							"dialogue.modified = true;" +
+							extra_line +
 							"dialogue.selected_line = previous_selected_line;" +
 							"dialogue.HandleSelectedString(dialogue.selected_line);");
 		}else{
@@ -171,7 +183,7 @@ void AddCategory(string category, array<string> items){
 
 void AddItem(string name, int index){
 	bool is_selected = name == selected_animation;
-	if(ImGui_SelectableToggle(name, is_selected, 0, vec2(ImGui_GetWindowWidth(), 0.0) )){
+	if(ImGui_Selectable(name, is_selected)){
 		selected_animation = name;
 		SetCurrentAnimation();
 	}
@@ -190,12 +202,19 @@ void ReceiveMessage(string msg){
 }
 
 void SetCurrentAnimation(){
+	int index;
+	if(build_version == "1.2.3"){
+		index = current_dialogue_line;
+	}else{
+		index = previous_dialogue_line;
+	}
 	array<string> split_dialogue = dialogue_buffer.split("\n");
-	array<string> split_line = split_dialogue[previous_dialogue_line].split(" ");
+	array<string> split_line = split_dialogue[index].split(" ");
+
 	if(split_line.size() >= 3){
 		if(split_line[2] == "\"set_animation"){
 			string new_line = split_line[0] + " " + split_line[1] + " " + split_line[2] + " " + "\\\""+ selected_animation +"\\\"\"";
-			split_dialogue[previous_dialogue_line] = new_line;
+			split_dialogue[index] = new_line;
 			dialogue_buffer = join(split_dialogue, "\n");
 			update_dialogue_buffer = true;
 		}

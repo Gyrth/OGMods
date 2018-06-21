@@ -3,7 +3,6 @@
 <Name>animation_browser</Name>
 <Description></Description>
 <Shader>post</Shader>
-<Shadows>true</Shadows>
 <LoadingScreen>
     <Image></Image>
 </LoadingScreen>
@@ -35,7 +34,7 @@
     <parameter name="Saturation" type="float" val="1" />
     <parameter name="Sky Rotation" type="string" val="0" />
 </LevelScriptParameters>
-<NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<NavMeshParameters cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
 <Sky>
     <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
     <SunAngularRad>0.112145</SunAngularRad>
@@ -82,70 +81,25 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <CameraObject t0="-14.1857" t1="-4.33494" t2="11.0578" s0="1" s1="1" s2="1" q0="0.188392" q1="-0.283443" q2="0.0568926" q3="0.93858" euler_x="0.396175" euler_y="-0.586566" euler_z="0" id="2">
+    <CameraObject t0="-14.3243" t1="-5.20474" t2="10.9659" s0="1" s1="1" s2="1" q0="0.210837" q1="-0.264074" q2="0.0592741" q3="0.939308" euler_x="0.441601" euler_y="-0.548125" euler_z="0" id="2">
         <parameters />
     </CameraObject>
     <EnvObject t0="-17.8645" t1="-10.1936" t2="8.92546" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="0.188235" color_g="0.188233" color_b="0.188233" overbright="0" type_file="Data/Objects/Crete/box_full.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="-18.8468" t1="-5.82658" t2="9.73015" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" euler_x="0" euler_y="-0.605973" euler_z="0" id="7" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="0">
-        <parameters>
-            <parameter name="Aggression" type="string" val="0.5" />
-            <parameter name="Attack Damage" type="string" val="1.0" />
-            <parameter name="Attack Knockback" type="string" val="1.0" />
-            <parameter name="Attack Speed" type="string" val="1.0" />
-            <parameter name="Block Follow-up" type="string" val="0.5" />
-            <parameter name="Block Skill" type="string" val="0.5" />
-            <parameter name="Cannot Be Disarmed" type="int" val="0" />
-            <parameter name="Character Scale" type="float" val="1" />
-            <parameter name="Damage Resistance" type="string" val="1.0" />
-            <parameter name="Ear Size" type="float" val="1" />
-            <parameter name="Fat" type="float" val="0.5" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
-            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
-            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
-            <parameter name="Ground Aggression" type="float" val="0.5" />
-            <parameter name="Knockout Shield" type="int" val="0" />
-            <parameter name="Left handed" type="string" val="0.0" />
-            <parameter name="Lives" type="string" val="1" />
-            <parameter name="Movement Speed" type="string" val="1.0" />
-            <parameter name="Muscle" type="float" val="0.5" />
-            <parameter name="Peripheral FOV distance" type="float" val="4" />
-            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
-            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
-            <parameter name="Species" type="string" val="rabbit" />
-            <parameter name="Static" type="int" val="0" />
-            <parameter name="Teams" type="string" val="turner" />
-        </parameters>
-        <Connections>
-            <Connection id="7" />
-        </Connections>
-        <ItemConnections />
-        <Palette>
-            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
-            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
-            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
-        </Palette>
-    </ActorObject>
-    <PlaceholderObject t0="-15.3065" t1="-5.47946" t2="7.22493" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" type_file="" special_type="2">
-        <parameters />
-        <Connections>
-            <Connection id="7" />
-        </Connections>
-    </PlaceholderObject>
     <PlaceholderObject t0="-15.1315" t1="-6.17946" t2="7.22493" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" type_file="" special_type="0">
         <parameters>
-            <parameter name="Dialogue" type="string" val="Data/Dialogues/og_story/01_Slaver_Camp_Landing/Start.txt" />
-            <parameter name="DisplayName" type="string" val="Start" />
-            <parameter name="NumParticipants" type="int" val="2" />
+            <parameter name="Dialogue" type="string" val="empty" />
+            <parameter name="DisplayName" type="string" val="AnimationBrowser" />
+            <parameter name="NumParticipants" type="int" val="1" />
+            <parameter name="Script" type="string" val='#name &quot;AnimationBrowser&quot;&#x0A;#participants 1&#x0A;say 1 &quot;Name&quot; &quot;Type your dialogue here.&quot;&#x0A;send_character_message 1 &quot;set_animation \&quot;Data/Animations/ancientrun.anm\&quot;&quot;&#x0A;' />
             <parameter name="obj_1" type="int" val="15" />
-            <parameter name="obj_2" type="int" val="11" />
         </parameters>
         <Connections>
             <Connection id="14" />
         </Connections>
     </PlaceholderObject>
-    <PlaceholderObject t0="-14.9565" t1="-5.47946" t2="7.22493" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="" special_type="2">
+    <PlaceholderObject t0="-15.1315" t1="-5.47946" t2="7.22493" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="" special_type="2">
         <parameters />
         <Connections>
             <Connection id="1" />
