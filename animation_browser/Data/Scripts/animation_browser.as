@@ -225,8 +225,6 @@ void UpdateCursor(){
 		}
 		current_dialogue_line = new_dialogue_line;
 
-		//send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
-
 		array<string> split_line = split_dialogue[current_dialogue_line].split(" ");
 		if(split_line.size() >= 3){
 			if(split_line[2] == "\"set_animation"){
