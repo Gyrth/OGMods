@@ -2,6 +2,12 @@
 #include "situationawareness.as"
 #include "enemycontroldebug.as"
 
+bool aoo_init_done = AOOInit();
+bool AOOInit(){
+	params.SetInt("aoo_character", 1);
+	return true;
+}
+
 Situation situation;
 int got_hit_by_leg_cannon_count = 0;
 
@@ -826,12 +832,12 @@ void MindReceiveMessage(string msg){
     } else if(token == "set_combat_allowed"){
         token_iter.FindNextToken(msg);
         string second_token = token_iter.GetToken(msg);
-        if(second_token == "true"){
+        /* if(second_token == "true"){
             combat_allowed = true;
             SetGoal(_attack);
         } else if(second_token == "false"){
             combat_allowed = false;
-        }
+        } */
     } else if(token == "notice"){
         Log(info, "Received notice message");
         token_iter.FindNextToken(msg);
@@ -1032,7 +1038,7 @@ int GetClosestKnownThreat() {
 void CheckForNearbyWeapons() {
     if(species != _wolf && get_weapon_time < kMaxGetWeaponTime){
         /* bool wants_to_get_weapon = false; */
-        if(weapon_slots[primary_weapon_slot] == -1 && hostile){
+        if(weapon_slots[primary_weapon_slot] == -1){
 	        if(wants_to_get_weapon){
 	            if(get_weapon_delay >= 0.0f){
 	                get_weapon_delay -= time_step;
@@ -1679,8 +1685,8 @@ void UpdateBrain(const Timestep &in ts){
            distance_squared(ReadItemID(weapon_target_id).GetPhysicsPosition(), this_mo.position) > 15.0*15.0 ||
            get_weapon_time > kMaxGetWeaponTime)
         {
-            SetGoal(old_goal);
-            SetSubGoal(old_sub_goal);
+            /* SetGoal(old_goal);
+            SetSubGoal(old_sub_goal); */
         }
         get_weapon_time += ts.step();
         if(length_squared(this_mo.velocity) < 1.0){
@@ -1897,10 +1903,11 @@ bool WantsToJump() {
 }
 
 bool WantsToAttack() {
-    if(species == _wolf && block_stunned > 0.5){
+    /* if(species == _wolf && block_stunned > 0.5){
         return false;
-    }
-    if(ai_attacking && !startled && combat_allowed){
+    } */
+    if(ai_attacking){
+		Log(info, "attack " + ai_attacking);
         return true;
     } else {
         return false;
@@ -2719,6 +2726,7 @@ vec3 GetBaseTargetVelocity() {
     } else if(goal == _get_help){
         return GetMovementToPoint(ReadCharacterID(ally_id).position, 1.0f);
     } else if(goal == _get_weapon){
+		Log(info, "getting weapon");
         vec3 pos = ReadItemID(weapon_target_id).GetPhysicsPosition();
         return GetMovementToPoint(pos, 0.0f);
     } else if(goal == _escort){

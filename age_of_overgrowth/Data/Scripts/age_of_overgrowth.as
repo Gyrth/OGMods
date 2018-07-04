@@ -23,9 +23,50 @@ vec3 camera_position;
 vec3 camera_facing = vec3(1.0, -1.0, 0.0);
 float camera_ground_distance = 10.0;
 array<int> ground_decals;
+array<int> click_decals;
+array<float> click_decal_timers;
 
 bool selecting = false;
 IMContainer@ selection_box;
+string click_decal_path = "Data/Objects/Decals/Hay_01.xml";
+vec3 click_decal_start_color = vec3(1.0, 1.0, 1.0);
+vec3 click_decal_end_color = vec3(0.0, 0.0, 0.0);
+float click_decal_start_size = 0.0;
+float click_decal_end_size = 2.0;
+
+void AddClickDecal(vec3 position){
+	Log(info, position + "");
+	int new_click_decal_id = CreateObject(click_decal_path);
+	Object@ new_click_decal = ReadObjectFromID(new_click_decal_id);
+
+	new_click_decal.SetTranslation(position);
+	new_click_decal.SetScale(vec3(click_decal_start_size, click_decal_start_size, click_decal_start_size));
+	new_click_decal.SetTint(click_decal_start_color);
+
+	click_decals.insertLast(new_click_decal_id);
+	click_decal_timers.insertLast(0.0f);
+}
+
+void UpdateClickDecals(){
+	for(uint i = 0; i < click_decals.size(); i++){
+		Object@ current_click_decal = ReadObjectFromID(click_decals[i]);
+		vec3 tint = current_click_decal.GetTint();
+		click_decal_timers[i] += time_step;
+
+		float new_scale = mix(click_decal_start_size, click_decal_end_size, click_decal_timers[i]);
+		current_click_decal.SetScale(vec3(new_scale, new_scale, new_scale));
+
+		vec3 new_tint = mix(click_decal_start_color, click_decal_end_color, click_decal_timers[i]);
+		current_click_decal.SetTint(new_tint);
+
+		if(click_decal_timers[i] > 1.0f){
+			QueueDeleteObjectID(click_decals[i]);
+			click_decals.removeAt(i);
+			click_decal_timers.removeAt(i);
+			return;
+		}
+	}
+}
 
 void Initialize(){
 	Init("this_level");
@@ -41,6 +82,7 @@ void Reset(){
 	ground_decals.resize(0);
 	selected_character_ids.resize(0);
 	/* ResetCharacters(); */
+	level.Execute("has_gui = true;");
 	post_init_done = false;
 }
 
@@ -76,6 +118,7 @@ void ReceiveMessage(string msg) {
 		int obj_id = atoi(token_iter.GetToken(msg));
 		ground_decals.insertLast(obj_id);
 	} else if(token == "start_dialogue"){
+		Log(warning, "start_dialogue ");
 		has_camera_control = false;
 	}
 }
@@ -126,6 +169,7 @@ void Update() {
 	}
 	UpdateCameraControls();
 	UpdateSelectionControls();
+	UpdateClickDecals();
 }
 
 vec2 selection_starting_point;
@@ -199,8 +243,12 @@ void UpdateSelectionControls(){
 				//Add a selected character when not already selected.
 				if(selected_character_ids.find(character_ids[i]) == -1){
 					MovementObject@ char = ReadCharacterID(character_ids[i]);
-					char.Execute("SetDecalColor(true);");
-					selected_character_ids.insertLast(character_ids[i]);
+					Object@ char_obj = ReadObjectFromID(character_ids[i]);
+					ScriptParams@ params = char_obj.GetScriptParams();
+					if(params.HasParam("aoo_character")){
+						char.Execute("SetDecalColor(true);");
+						selected_character_ids.insertLast(character_ids[i]);
+					}
 				}
 			}
 			for(uint j = 0; j < selected_character_ids.size(); j++){
@@ -234,7 +282,6 @@ bool CheckForWeapons(){
 		ItemObject@ item_obj = ReadItem(i);
 		if(IsItemPickupable(item_obj)){
 			vec3 item_pos = item_obj.GetPhysicsPosition();
-			Log(warning, "dist " + distance(location, item_pos));
 			if(closest_id == -1 || distance(location, item_pos) < closest_dist){
 				closest_dist = distance(location, item_pos);
 				closest_id = item_obj.GetID();
@@ -269,7 +316,7 @@ bool IsItemPickupable(ItemObject@ item_obj) {
 void GetWeapon(int weapon_id){
 	for(uint i = 0; i < selected_character_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(selected_character_ids[i]);
-		Log(warning, i + "get wepaon " + weapon_id);
+		Log(warning, i + " get weapon " + weapon_id);
 		char.Execute("wants_to_get_weapon = true; weapon_target_id = " + weapon_id + ";");
 	}
 }
@@ -295,17 +342,21 @@ bool CheckForEnemy(){
 void AttackCharacter(int character_id){
 	for(uint i = 0; i < selected_character_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(selected_character_ids[i]);
+		char.Execute("ResetMind();");
+		char.Execute("situation.Notice(" + character_id + ");");
 		char.Execute("Notice(" + character_id + ");");
 		char.Execute("SetGoal(_attack);");
+		char.Execute("SetSubGoal(_rush_and_attack);");
 	}
 }
 
 void CharactersMarch(){
 	Log(warning, "march");
 	vec3 march_location = col.GetRayCollision(camera.GetPos(), camera.GetPos() + camera.GetMouseRay() * 200.0);
+	AddClickDecal(march_location);
 	for(uint i = 0; i < selected_character_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(selected_character_ids[i]);
-		char.Execute("goal = _navigate;" +
+		char.Execute("goal = _navigate;SetSubGoal(_investigate_urgent);" +
 					"nav_target = vec3(" + march_location.x + "," + march_location.y + "," + march_location.z + ");");
 
 	}
@@ -389,5 +440,9 @@ bool DialogueCameraControl() {
 }
 
 bool HasFocus(){
-	return false;
+	if(GetMenuPaused()){
+		return false;
+	}else{
+		return true;
+	}
 }
