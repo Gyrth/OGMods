@@ -1,0 +1,25 @@
+#name "Boatride"
+#participants 6
+send_level_message "start_dialogue"
+set_character_pos 2 279.163 -13.5834 -114.88 88
+send_character_message 2 "set_eye_dir 278.738 -15.4912 -115.521 1"
+send_character_message 2 "set_torso_target 279.285 -15.2445 -115.599 0"
+send_character_message 2 "set_head_target 279.208 -14.9062 -115.439 0"
+set_character_pos 1 278.729 -17.7696 -119.638 -80
+set_cam 280.903 -12.5469 -116.017 -19.2 98.37 0 90
+send_character_message 2 "set_head_target 279.208 -15.6309 -117.331 1"
+send_character_message 1 "set_head_target 278.499 -14.2333 -116.727 1"
+send_character_message 1 "set_eye_dir 277.94 -16.8251 -118.354 1"
+say 2 "Thanatos" "Hey you! We need to speak to Hades. Bring us to the other side!"
+set_cam 279.18 -17.5291 -117.558 -0.35 22.92 1.33 90
+say 1 "Boat dude" "Alright, what can you give me to make it worth my time?"
+set_cam 279.304 -14.1592 -116.4 24.08 168.61 -1.42 90
+say 2 "Thanatos" "How about your life? Now stfu and row the damn boat."
+set_cam 275.648 -16.0141 -118.07 -35.75 -63.56 -2.26 90
+say 1 "Boat dude" "Ok, jezus, calm the fuck down..."
+set_character_pos 2 277.949 -18.2208 -120.993 -80
+set_character_pos 3 275.913 -18.0089 -121.482 -80
+set_character_pos 4 275.618 -18.0543 -120.307 -80
+set_character_pos 5 274.668 -18.0901 -121.171 -80
+set_character_pos 6 279.193 -18.1614 -120.588 -80
+send_global_message "trigger_hotspot 3035"

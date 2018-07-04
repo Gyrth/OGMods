@@ -1,0 +1,18 @@
+#name "Dogs"
+#participants 4
+send_level_message "start_dialogue"
+send_character_message 3 "set_head_target 325.463 -1.29567 21.3009 1"
+send_character_message 2 "set_head_target 325.283 -1.46045 21.2064 1"
+send_character_message 1 "set_head_target 325.354 -1.50755 21.1699 1"
+set_character_pos 4 330.779 -4.0887 21.3005 179
+set_character_pos 3 322.803 -1.76467 19.8178 0
+set_character_pos 2 322.922 -2.05754 22.7824 0
+set_character_pos 1 321.874 -2.2193 21.2719 0
+set_cam 325.434 -1.68847 22.8099 0 60.77 0 90
+say 1 "Dog" "No one is allowed in hell! Go away!"
+set_cam 328.859 -4.37317 21.5616 10.8 -85.3 0 90
+say 4 "Thanatos" "We need to speak to Hades!"
+set_cam 330.272 -3.81589 21.9457 7.49 -38.86 2.35 90
+say 4 "Thanatos" "Aren't you supposed to be a three headed dog instead of three seperate dogs?"
+set_cam 322.396 -1.26953 21.4191 11.37 71.68 -2.28 89.9997
+say 1 "Dog" "Shut up!"

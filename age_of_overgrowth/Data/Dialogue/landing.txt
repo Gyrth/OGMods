@@ -1,0 +1,18 @@
+#name "Landing"
+#participants 6
+send_level_message "start_dialogue"
+set_character_pos 1 142.37 -18.1566 -141.565 -145
+send_character_message 2 "set_torso_target 134.407 -16.8402 -135.854 0"
+send_character_message 2 "set_head_target 134.148 -16.8102 -135.813 0"
+send_character_message 2 "set_eye_dir 132.856 -17.8436 -137.084 1"
+set_character_pos 2 133.213 -17.9345 -135.446 0
+set_character_pos 3 131.578 -18.0978 -136.254 0
+set_character_pos 4 131.751 -18.1416 -133.478 0
+set_character_pos 5 130.343 -18.2949 -135.527 0
+set_character_pos 6 129.909 -18.0216 -134.068 0
+set_cam 135.123 -17.7787 -134.707 0 56.43 0 90
+say 1 "Thanatos" "Finally. I think we're almost at the end."
+set_cam 142.003 -17.7787 -137.51 0 3.72 0 90
+say 2 "BoatDude" "You're welcome!"
+set_cam 132.644 -17.7787 -134.211 0 -48.97 0 90
+say 1 "Thanatos" "Piss off."
