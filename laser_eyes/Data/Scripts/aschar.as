@@ -35,6 +35,7 @@ enum Species {
     _cat = 4
 };
 
+// Duplicated in overgrowth_level
 enum DeathHint {
     _hint_none,
     _hint_deflect_thrown,
@@ -45,7 +46,8 @@ enum DeathHint {
     _hint_roll_stand,
     _hint_vary_attacks,
     _hint_one_at_a_time,
-    _hint_avoid_spikes
+    _hint_avoid_spikes,
+    _hint_stealth
 };
 
 DeathHint death_hint = _hint_none;
@@ -771,6 +773,10 @@ void Dispose() {
 }
 
 void FirePreDraw(float curr_game_time) {
+    if(fire_object_id == -1) {
+        Log(warning, "fire_object_id is -1");
+        return;
+    }
     EnterTelemetryZone("FirePreDraw");
     float delta_time = curr_game_time - last_game_time;
     if(on_fire){
@@ -1020,7 +1026,11 @@ void HitByItem(string material, vec3 point, int id, int type) {
     level.SendMessage("item_hit "+this_mo.getID());
 
     if(this_mo.controlled){
-        death_hint = _hint_deflect_thrown;
+        if(tutorial == "stealth") {
+            death_hint = _hint_stealth;
+        } else {
+            death_hint = _hint_deflect_thrown;
+        }
     }
 
     int old_knocked_out = knocked_out;
@@ -2132,6 +2142,11 @@ bool was_controlled = false;
 bool was_editor_mode = false;
 void Update(int num_frames) {
     if(frozen && !this_mo.controlled) {
+        if(knocked_out != _dead) {
+            Timestep ts(time_step, num_frames);
+            time += ts.step();
+            Breathe(ts);
+        }
         return;
     }
     //DebugText("pos"+this_mo.GetID(), "Pos"+this_mo.GetID()+": "+this_mo.position, 0.5);
@@ -2152,175 +2167,142 @@ void Update(int num_frames) {
     }
     
     if(this_mo.controlled){
-        bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
-        if(knocked_out != _awake) {
-            string respawn = "\nPress "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to try again";
-
-            if( GetConfigValueBool("tutorials" ) ) {
-                if(tutorial == "stealth") {
-                    level.SendMessage("tutorial Sometimes sneak attacks are much easier than direct combat."+respawn);
-                } else {
-                    switch(death_hint){
-                    case _hint_deflect_thrown:
-                        level.SendMessage("tutorial "+"Press "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" just before impact to catch or deflect projectiles."+respawn);
-                        break;
-                    case _hint_escape_throw:
-                        level.SendMessage("tutorial "+"Press "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" to escape from throws."+respawn);
-                        break;
-                    case _hint_cant_swim:
-                        level.SendMessage("tutorial "+"Rabbits don't know how to swim."+respawn);
-                        break;
-                    case _hint_extinguish:
-                        level.SendMessage("tutorial "+"If you catch on fire, you can roll to put yourself out."+respawn);
-                        break;
-                    case _hint_roll_stand:
-                        level.SendMessage("tutorial "+"When knocked down, press "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "crouch")+" to roll to your feet"+respawn);
-                        //level.SendMessage("tutorial "+"When knocked down, you can still block attacks by pressing "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" just before impact"+respawn);
-                        break;
-                    case _hint_vary_attacks:
-                        level.SendMessage("tutorial "+"Mix up your attacks to get through enemy defenses"+respawn);
-                        break;
-                    default:
-                        level.SendMessage("tutorial "+""+respawn);
-                    }
-                }
-            } else {
-                level.SendMessage("screen_message "+""+respawn);
-            }
-        } else if(!dialogue_control && note_request_time > time - 0.1) {
-            if( CanPlayDialogue() == 1 ) {
-                level.SendMessage("screen_message "+"Press "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to read");  
-            }
-        } else if( GetConfigValueBool("tutorials") ) {
-            if(tutorial == "basic"){
-                bool knows_how_to_look = (look_time > 2.0);
-                if(!knows_how_to_look){
-                    level.SendMessage("tutorial "+"Use "+(use_keyboard?"mouse":"right stick")+" to look around");
-                } else {
-                    level.SendMessage("tutorial "+"Use "+(use_keyboard?(MovementKeys()+" keys"):"left stick")+" to move");  
-                }
-            } else if(tutorial == "jump_climb"){
-                level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+" to jump");    
-            } else if(tutorial == "walljump"){
-                level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+
-                                  " towards a wall to wallrun, then hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+
-                                  " again to walljump");    
-            } else if(tutorial == "jump_higher"){
-                level.SendMessage("tutorial "+"HOLD "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+" to jump higher");    
-            } else if(tutorial == "jump_long"){
-                level.SendMessage("tutorial "+"Rabbits can jump very far");    
-            } else if(tutorial == "combat"){
-                if(situation.PlayCombatSong()){
-                    if(num_strikes < 3){
-                        level.SendMessage("tutorial "+"HOLD down "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to attack");
-                    } else {
-                        level.SendMessage("tutorial "+"Choose your strike by varying your height, distance, and movement direction.");
-                    }
-                } else {
-                    level.SendMessage("tutorial");
-                }            
-            } else if(tutorial == "jumpkick"){
-                level.SendMessage("tutorial "+"Press "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" in the air to jump-kick");          
-            } else if(tutorial == "knife"){
-                bool has_sheathed_weapon = (weapon_slots[_sheathed_right] != -1 || weapon_slots[_sheathed_left] != -1);
-                bool has_sheathe_slot = (weapon_slots[_sheathed_right] == -1 || weapon_slots[_sheathed_left] == -1);
-                bool holding_weapon = (weapon_slots[primary_weapon_slot] != -1);
-                bool can_sheathe = (holding_weapon && has_sheathe_slot);
-                bool can_unsheathe = (!holding_weapon && has_sheathed_weapon);
-
-                array<int> nearby_characters;
-                GetCharactersInSphere(this_mo.position, 4.0f, nearby_characters);
-                array<int> enemy_characters;
-                GetMatchingCharactersInArray(nearby_characters, enemy_characters, _TC_ENEMY | _TC_CONSCIOUS);
-
-                bool disarm_tutorial = false;
-                if(enemy_characters.size() != 0){
-                    for(int i=0, len=enemy_characters.size(); i<len; ++i){
-                        MovementObject@ char = ReadCharacterID(enemy_characters[i]);
-                        if(GetCharPrimaryWeapon(char) != -1){
-                            disarm_tutorial = true;
-                            break;
-                        }
-                    }
-                }
-
-                if(disarm_tutorial){
-                    level.SendMessage("tutorial "+"Dodge enemy attacks by suddenly moving away, then hold "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" to disarm");
-                } else if(can_unsheathe){
-                    level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "item")+" to "+(can_sheathe?"sheathe":"unsheathe")+" knife");
-                } else if(holding_weapon && enemy_characters.size() == 0) {
-                    level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "drop")+" to throw knife at a nearby enemy"); 
-                } else {
-                    bool has_empty_hand = (weapon_slots[primary_weapon_slot] == -1 || weapon_slots[secondary_weapon_slot] == -1);
-                    int nearest_weapon = GetNearestPickupableWeapon(this_mo.position, 4.0);
-                    bool weapon_nearby = (nearest_weapon!=-1);
-                    if(weapon_nearby && has_empty_hand){
-                        level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "drop")+" to pick up nearby weapons");
-                    } else {
-                        level.SendMessage("tutorial");  
-                    }
-                }
-            } else if(tutorial == "throw"){
-                if(situation.PlayCombatSong()){
-                    int num = GetNumCharacters();
-                    int throws_needed = 0;
-                    for(int i=0; i<num; ++i){
-                        MovementObject@ char = ReadCharacter(i);
-                        if(ReadObjectFromID(char.GetID()).GetScriptParams().HasParam("Throw Trainer"))
-                        {
-                            throws_needed = char.GetIntVar("max_ko_shield") - char.GetIntVar("ko_shield");
-                        }
-                    }
-                    level.SendMessage("tutorial "+"HOLD down "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" right before getting hit to throw ("+throws_needed+"/3)");
-                } else {
-                    level.SendMessage("tutorial");
-                }            
-            } else if(tutorial == "flip_roll"){
-                if(situation.PlayCombatSong() || roll_count > 6){
-                    level.SendMessage("tutorial");
-                } else {
-                    level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "crouch")+" while running or jumping to roll");
-                }            
-            } else if(tutorial == "stealth"){
-                if(!situation.PlayCombatSong()){
-                    array<int> player_ids = GetPlayerCharacterIDs();
-                    MovementObject@ player_char = ReadCharacterID(player_ids[0]);
-
-                    int num = GetNumCharacters();
-                    int num_threats = 0;
-                    for(int i=0; i<num; ++i){
-                        MovementObject@ char = ReadCharacter(i);
-                        if(!char.controlled &&
-                           char.GetIntVar("knocked_out") == _awake && 
-                           !player_char.OnSameTeam(char) &&
-                           ReadObjectFromID(char.GetID()).GetEnabled())
-                        {
-                            ++num_threats;
-                        }
-                    }
-                    const float kDistanceThreshold = 10.0 * 10.0;
-                    if(num_threats != 0){
-                        level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "crouch")+" and move to sneak, and hold "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" to grab and choke");
-                    } else {
-                        level.SendMessage("tutorial");                    
-                    }
-                } else {
-                    DebugText("d", "d: ", 0.5);
-                    level.SendMessage("tutorial");
-                }            
-            } else if(!dialogue_control && dialogue_request_time > time - 0.1) {
+        if(knocked_out == _awake) {
+            bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
+            if(!dialogue_control && note_request_time > time - 0.1) {
                 if( CanPlayDialogue() == 1 ) {
-                    level.SendMessage("tutorial "+"Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to enter dialogue");  
+                    level.SendMessage("screen_message "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack")+" to read");
+                }
+            } else if( GetConfigValueBool("tutorials") ) {
+                if(tutorial == "basic"){
+                    bool knows_how_to_look = (look_time > 2.0);
+                    if(!knows_how_to_look){
+                        level.SendMessage("tutorial "+"Use "+(use_keyboard?"mouse":"right stick (default)")+" to look around");
+                    } else {
+                        level.SendMessage("tutorial "+"Use "+(use_keyboard?(MovementKeys()+" keys"):"left stick (default)")+" to move");
+                    }
+                } else if(tutorial == "jump_climb"){
+                    level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "jump")+" to jump");    
+                } else if(tutorial == "walljump"){
+                    level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "jump")+
+                                    " towards a wall to wallrun, then hold "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "jump")+
+                                    " again to walljump");    
+                } else if(tutorial == "jump_higher"){
+                    level.SendMessage("tutorial "+"HOLD "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "jump")+" to jump higher");    
+                } else if(tutorial == "jump_long"){
+                    level.SendMessage("tutorial "+"Rabbits can jump very far");    
+                } else if(tutorial == "combat"){
+                    if(situation.PlayCombatSong()){
+                        if(num_strikes < 3){
+                            level.SendMessage("tutorial "+"HOLD down "+(GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack"))+" to attack");
+                        } else {
+                            level.SendMessage("tutorial "+"Choose your strike by varying your height, distance, and movement direction.");
+                        }
+                    } else {
+                        level.SendMessage("tutorial");
+                    }            
+                } else if(tutorial == "jumpkick"){
+                    level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack")+" in the air to jump-kick");
+                } else if(tutorial == "knife"){
+                    bool has_sheathed_weapon = (weapon_slots[_sheathed_right] != -1 || weapon_slots[_sheathed_left] != -1);
+                    bool has_sheathe_slot = (weapon_slots[_sheathed_right] == -1 || weapon_slots[_sheathed_left] == -1);
+                    bool holding_weapon = (weapon_slots[primary_weapon_slot] != -1);
+                    bool can_sheathe = (holding_weapon && has_sheathe_slot);
+                    bool can_unsheathe = (!holding_weapon && has_sheathed_weapon);
+
+                    array<int> nearby_characters;
+                    GetCharactersInSphere(this_mo.position, 4.0f, nearby_characters);
+                    array<int> enemy_characters;
+                    GetMatchingCharactersInArray(nearby_characters, enemy_characters, _TC_ENEMY | _TC_CONSCIOUS);
+
+                    bool disarm_tutorial = false;
+                    if(enemy_characters.size() != 0){
+                        for(int i=0, len=enemy_characters.size(); i<len; ++i){
+                            MovementObject@ char = ReadCharacterID(enemy_characters[i]);
+                            if(GetCharPrimaryWeapon(char) != -1){
+                                disarm_tutorial = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if(disarm_tutorial){
+                        level.SendMessage("tutorial "+"Dodge enemy attacks by suddenly moving away, then hold "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "grab")+" to disarm");
+                    } else if(can_unsheathe){
+                        level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "item")+" to "+(can_sheathe?"sheathe":"unsheathe")+" knife");
+                    } else if(holding_weapon && enemy_characters.size() == 0) {
+                        level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "drop")+" to throw knife at a nearby enemy"); 
+                    } else {
+                        bool has_empty_hand = (weapon_slots[primary_weapon_slot] == -1 || weapon_slots[secondary_weapon_slot] == -1);
+                        int nearest_weapon = GetNearestPickupableWeapon(this_mo.position, 4.0);
+                        bool weapon_nearby = (nearest_weapon!=-1);
+                        if(weapon_nearby && has_empty_hand){
+                            level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "drop")+" to pick up nearby weapons");
+                        } else {
+                            level.SendMessage("tutorial");  
+                        }
+                    }
+                } else if(tutorial == "throw"){
+                    if(situation.PlayCombatSong()){
+                        int num = GetNumCharacters();
+                        int throws_needed = 0;
+                        for(int i=0; i<num; ++i){
+                            MovementObject@ char = ReadCharacter(i);
+                            if(ReadObjectFromID(char.GetID()).GetScriptParams().HasParam("Throw Trainer"))
+                            {
+                                throws_needed = char.GetIntVar("max_ko_shield") - char.GetIntVar("ko_shield");
+                            }
+                        }
+                        level.SendMessage("tutorial "+"HOLD down "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "grab")+" right before getting hit to throw ("+throws_needed+"/3)");
+                    } else {
+                        level.SendMessage("tutorial");
+                    }            
+                } else if(tutorial == "flip_roll"){
+                    if(situation.PlayCombatSong() || roll_count > 6){
+                        level.SendMessage("tutorial");
+                    } else {
+                        level.SendMessage("tutorial "+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "crouch")+" while running or jumping to roll");
+                    }            
+                } else if(tutorial == "stealth"){
+                    if(!situation.PlayCombatSong()){
+                        array<int> player_ids = GetPlayerCharacterIDs();
+                        MovementObject@ player_char = ReadCharacterID(player_ids[0]);
+
+                        int num = GetNumCharacters();
+                        int num_threats = 0;
+                        for(int i=0; i<num; ++i){
+                            MovementObject@ char = ReadCharacter(i);
+                            if(!char.controlled &&
+                            char.GetIntVar("knocked_out") == _awake && 
+                            !player_char.OnSameTeam(char) &&
+                            ReadObjectFromID(char.GetID()).GetEnabled())
+                            {
+                                ++num_threats;
+                            }
+                        }
+                        const float kDistanceThreshold = 10.0 * 10.0;
+                        if(num_threats != 0){
+                            level.SendMessage("tutorial "+"Hold "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "crouch")+" and move to sneak, and hold "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "grab")+" to grab and choke");
+                        } else {
+                            level.SendMessage("tutorial");                    
+                        }
+                    } else {
+                        DebugText("d", "d: ", 0.5);
+                        level.SendMessage("tutorial");
+                    }            
+                } else if(!dialogue_control && dialogue_request_time > time - 0.1) {
+                    if( CanPlayDialogue() == 1 ) {
+                        level.SendMessage("tutorial "+"Use "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack")+" to enter dialogue");
+                    } else {
+                        level.SendMessage("tutorial "+"Cannot enter dialogue during combat");
+                    }
                 } else {
-                    level.SendMessage("tutorial "+"Cannot enter dialogue during combat");
+                    level.SendMessage("tutorial "+tutorial);
                 }
             } else {
-                level.SendMessage("tutorial "+tutorial);
+                level.SendMessage("tutorial");            
             }
-        } else {
-            level.SendMessage("tutorial");            
         }
-
     }
 
     if(this_mo.static_char && updated > 0 && !dialogue_control){
@@ -2500,7 +2482,7 @@ void Update(int num_frames) {
             if(remaining < 0.0){
                 tapping_attack = false;
             } else {
-                DebugText("tutorial_"+index++, highlight + "HOLD down "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to attack, don't tap it ("+remaining+" seconds)", 0.1);
+                DebugText("tutorial_"+index++, highlight + "HOLD down "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack")+" to attack, don't tap it ("+remaining+" seconds)", 0.1);
             }
         }
         if(GetInputPressed(0, "attack")){
@@ -2525,24 +2507,24 @@ void Update(int num_frames) {
             DebugText("tutorial_"+index++, " ", 0.1);
             DebugText("tutorial_"+index++, use_keyboard?"KEYBOARD AND MOUSE":"CONTROLLER", 0.1);
             if(dialogue_control){
-                DebugText("tutorial_"+index++, highlight+"Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to progress dialogue", 0.1);
+                DebugText("tutorial_"+index++, highlight+"Use "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack")+" to progress dialogue", 0.1);
                 if(use_keyboard){
                     DebugText("tutorial_"+index++, "Press return to skip", 0.1);
                 }
             } else if(dialogue_request_time > time - 0.1 && CanPlayDialogue() == 1) {
-                DebugText("tutorial_"+index++, highlight+"Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to enter dialogue", 0.1);
+                DebugText("tutorial_"+index++, highlight+"Use "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack")+" to enter dialogue", 0.1);
             } else if(note_request_time > time - 0.1 && CanPlayDialogue() == 1) {
-                DebugText("tutorial_"+index++, highlight+"Press "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to read", 0.1);
+                DebugText("tutorial_"+index++, highlight+"Press "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack")+" to read", 0.1);
             } else {
-                DebugText("tutorial_"+index++, (knows_how_to_look?"":highlight)+"Use "+(use_keyboard?"mouse":"right stick")+" to look around"+(knows_how_to_look?"":" ("+(2.0-look_time)+" seconds)"), 0.1);
+                DebugText("tutorial_"+index++, (knows_how_to_look?"":highlight)+"Use "+(use_keyboard?"mouse":"right stick (default)")+" to look around"+(knows_how_to_look?"":" ("+(2.0-look_time)+" seconds)"), 0.1);
                 if(knows_how_to_look){
-                    DebugText("tutorial_"+index++, (knows_how_to_move?"":highlight)+"Use "+(use_keyboard?(MovementKeys()+" keys"):"left stick")+" to move"+(knows_how_to_move?"":" ("+(2.0-move_time)+" seconds)"), 0.1);
+                    DebugText("tutorial_"+index++, (knows_how_to_move?"":highlight)+"Use "+(use_keyboard?(MovementKeys()+" keys"):"left stick (default)")+" to move"+(knows_how_to_move?"":" ("+(2.0-move_time)+" seconds)"), 0.1);
                     if(knows_how_to_move){
-                        DebugText("tutorial_"+index++, (knows_how_to_jump?"":highlight)+"Use "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "jump")+" to jump"+(knows_how_to_jump?"":" ("+(4 - num_jumps)+" jumps)"), 0.1);
+                        DebugText("tutorial_"+index++, (knows_how_to_jump?"":highlight)+"Use "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "jump")+" to jump"+(knows_how_to_jump?"":" ("+(4 - num_jumps)+" jumps)"), 0.1);
                         if(knows_how_to_jump){
-                            DebugText("tutorial_"+index++, "Use "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "crouch")+" to crouch", 0.1);
-                            DebugText("tutorial_"+index++, "Use "+(use_keyboard?"left mouse button":GetStringDescriptionForBinding("xbox", "attack"))+" to attack", 0.1);
-                            DebugText("tutorial_"+index++, "Use "+(use_keyboard?"right mouse button":GetStringDescriptionForBinding("xbox", "grab"))+" to block or grab", 0.1);
+                            DebugText("tutorial_"+index++, "Use "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "crouch")+" to crouch", 0.1);
+                            DebugText("tutorial_"+index++, "Use "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack")+" to attack", 0.1);
+                            DebugText("tutorial_"+index++, "Use "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "grab")+" to block or grab", 0.1);
                             
                             bool has_sheathed_weapon = (weapon_slots[_sheathed_right] != -1 || weapon_slots[_sheathed_left] != -1);
                             bool has_sheathe_slot = (weapon_slots[_sheathed_right] == -1 || weapon_slots[_sheathed_left] == -1);
@@ -2550,7 +2532,7 @@ void Update(int num_frames) {
                             bool can_sheathe = (holding_weapon && has_sheathe_slot);
                             bool can_unsheathe = (!holding_weapon && has_sheathed_weapon);
                             if(can_sheathe || can_unsheathe){
-                                DebugText("tutorial_"+index++, "Use "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "item")+" to "+(can_sheathe?"sheathe":"unsheathe")+" item", 0.1);
+                                DebugText("tutorial_"+index++, "Use "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "item")+" to "+(can_sheathe?"sheathe":"unsheathe")+" item", 0.1);
                             }
 
                             bool has_empty_hand = (weapon_slots[primary_weapon_slot] == -1 || weapon_slots[secondary_weapon_slot] == -1);
@@ -2558,7 +2540,7 @@ void Update(int num_frames) {
                             bool weapon_nearby = (nearest_weapon!=-1);
                             if(weapon_nearby && has_empty_hand){
                                 bool can_pickup_now = distance(this_mo.position, ReadItemID(nearest_weapon).GetPhysicsPosition()) < _pick_up_range;
-                                DebugText("tutorial_"+index++, (can_pickup_now?highlight:"")+"Use "+GetStringDescriptionForBinding(use_keyboard?"key":"xbox", "drop")+" to pick up item", 0.1);
+                                DebugText("tutorial_"+index++, (can_pickup_now?highlight:"")+"Use "+GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "drop")+" to pick up item", 0.1);
                             }
                         }
                     }
@@ -2579,7 +2561,11 @@ void Update(int num_frames) {
                 AISound(this_mo.position, VERY_LOUD_SOUND_RADIUS, _sound_type_voice);
                 blood_health = 0.0f;
                 SetKnockedOut(_dead);
-                death_hint = _hint_extinguish;
+                if(tutorial == "stealth") {
+                    death_hint = _hint_stealth;
+                } else {
+                    death_hint = _hint_extinguish;
+                }
             }
         }
     }
@@ -2869,6 +2855,8 @@ void RecoverHealth() {
     roll_recovery_time = 0.0f;
     zone_killed = 0;
     ko_shield = max_ko_shield;
+    got_hit_by_leg_cannon_count = 0;
+    this_mo.ClearAttackHistory();
     ragdoll_static_time = 0.0f;
     frozen = false;
     no_freeze = false;
@@ -4990,7 +4978,11 @@ int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float att
     ReceiveMessage("notice "+attacker_id);
 
     if(this_mo.controlled && (state == _ragdoll_state || state == _ground_state) && knocked_out == _awake){
-        death_hint = _hint_roll_stand;
+        if(tutorial == "stealth") {
+            death_hint = _hint_stealth;
+        } else {
+            death_hint = _hint_roll_stand;
+        }
     }
 
     if(flip_info.IsRolling() || state == _ground_state || state == _ragdoll_state){
@@ -5603,6 +5595,11 @@ void ReceiveMessage(string msg){
         string tutorial_state = token_iter.GetToken(msg);
         if(tutorial_state == "enter"){
             tutorial = tutorial_msg;
+            if(tutorial_msg == "stealth") {
+                death_hint = _hint_stealth;
+            } else {
+                death_hint = _hint_none;
+            }
         } else {
             tutorial = "";
         }
@@ -6248,7 +6245,11 @@ void HandleAnimationCombatEvent(const string&in event, const vec3&in world_pos) 
             AchievementEvent("player_was_hit");
         }
         if(state == _hit_reaction_state && hit_reaction_thrown){
-            death_hint = _hint_escape_throw;
+            if(tutorial == "stealth") {
+                death_hint = _hint_stealth;
+            } else {
+                death_hint = _hint_escape_throw;
+            }
             
             ko_shield = max(0, ko_shield - 1);
             level.SendMessage("character_thrown "+this_mo.getID() + " " + attacked_by_id);
@@ -9403,48 +9404,50 @@ void ApplyCameraControls(const Timestep &in ts) {
         if(target_id != -1){
             // Look at target character
             MovementObject @char = ReadCharacterID(target_id);
-            float dist = distance(char.position, this_mo.position);
-            vec3 target_facing = (char.position - this_mo.position)/dist;
-            // We want more of a side view at close range, and more of a straight view in the distance
-            float target_angle = max(0.2f, 1.2f / max(1.0f,dist));
-            if(autocam.target_weight == 0.0f){
-                autocam.angle = target_angle;
-            } else {
-                autocam.angle = mix(target_angle, autocam.angle, pow(0.98f, ts.frames()));
-            }
-            mat4 rotation_y;
-            rotation_y.SetRotationY(autocam.angle);
-            vec3 target_facing_right = rotation_y * target_facing;
-            rotation_y.SetRotationY(-autocam.angle);
-            vec3 target_facing_left = rotation_y * target_facing;
+            if(char.GetIntVar("knocked_out") == _awake) {
+                float dist = distance(char.position, this_mo.position);
+                vec3 target_facing = (char.position - this_mo.position)/dist;
+                // We want more of a side view at close range, and more of a straight view in the distance
+                float target_angle = max(0.2f, 1.2f / max(1.0f,dist));
+                if(autocam.target_weight == 0.0f){
+                    autocam.angle = target_angle;
+                } else {
+                    autocam.angle = mix(target_angle, autocam.angle, pow(0.98f, ts.frames()));
+                }
+                mat4 rotation_y;
+                rotation_y.SetRotationY(autocam.angle);
+                vec3 target_facing_right = rotation_y * target_facing;
+                rotation_y.SetRotationY(-autocam.angle);
+                vec3 target_facing_left = rotation_y * target_facing;
 
-            // Check which side angle is closest to the current camera angle
-            if(dot(target_facing_left, facing) > dot(target_facing_right, facing)){
-                target_facing = target_facing_left;
-                if(autocam.target_weight == 0.0f){
-                    autocam.target_side_weight = 0.0f;
+                // Check which side angle is closest to the current camera angle
+                if(dot(target_facing_left, facing) > dot(target_facing_right, facing)){
+                    target_facing = target_facing_left;
+                    if(autocam.target_weight == 0.0f){
+                        autocam.target_side_weight = 0.0f;
+                    } else {
+                        autocam.target_side_weight = mix(0.0f, autocam.target_side_weight, pow(0.95f, ts.frames()));
+                    }
                 } else {
-                    autocam.target_side_weight = mix(0.0f, autocam.target_side_weight, pow(0.95f, ts.frames()));
+                    if(autocam.target_weight == 0.0f){
+                        autocam.target_side_weight = 1.0f;
+                    } else {
+                        autocam.target_side_weight = mix(1.0f, autocam.target_side_weight, pow(0.95f, ts.frames()));
+                    }
                 }
-            } else {
-                if(autocam.target_weight == 0.0f){
-                    autocam.target_side_weight = 1.0f;
-                } else {
-                    autocam.target_side_weight = mix(1.0f, autocam.target_side_weight, pow(0.95f, ts.frames()));
+                target_facing = mix(target_facing_left, target_facing_right, autocam.target_side_weight);
+                // Character target is applied more strongly the closer it is
+                float target_target_weight = 1.0f/dist;
+                target_target_weight = max(0.0f,min(1.0f,target_target_weight*3.0f));
+                if(target_target_weight <= 0.3f){
+                    target_target_weight = 0.0f;
                 }
+                autocam.target_weight = mix(target_target_weight, autocam.target_weight, pow(0.98f, ts.frames()));
+                if(autocam.target_weight < 0.01f && target_target_weight == 0.0f){
+                    autocam.target_weight = 0.0f;
+                }
+                facing = InterpDirections(facing, target_facing, autocam.target_weight);
             }
-            target_facing = mix(target_facing_left, target_facing_right, autocam.target_side_weight);
-            // Character target is applied more strongly the closer it is
-            float target_target_weight = 1.0f/dist;
-            target_target_weight = max(0.0f,min(1.0f,target_target_weight*3.0f));
-            if(target_target_weight <= 0.3f){
-                target_target_weight = 0.0f;
-            }
-            autocam.target_weight = mix(target_target_weight, autocam.target_weight, pow(0.98f, ts.frames()));
-            if(autocam.target_weight < 0.01f && target_target_weight == 0.0f){
-                autocam.target_weight = 0.0f;
-            }
-            facing = InterpDirections(facing, target_facing, autocam.target_weight);
        }
 
        // Store current target rotations in case we want to override autocam changes
@@ -9474,7 +9477,7 @@ void ApplyCameraControls(const Timestep &in ts) {
         target_rotation2 = mix(target_rotation2, old_tr2, min(1.0f,auto_cam_override));
 
         // Apply manual camera rotation input
-        if(cam_input){
+        if(!level.HasFocus() && cam_input){
             target_rotation -= GetLookXAxis(this_mo.controller_id);
             target_rotation2 -= GetLookYAxis(this_mo.controller_id);
         }
@@ -10146,7 +10149,11 @@ void WaterIntersect(int id) {
             TakeDamage(1.0f);
             Ragdoll(_RGDL_FALL);
             hit_flash_time = the_time;
-            death_hint = _hint_cant_swim;
+            if(tutorial == "stealth") {
+                death_hint = _hint_stealth;
+            } else {
+                death_hint = _hint_cant_swim;
+            }
         }
     }
 
