@@ -1,0 +1,16 @@
+
+<? xml version="1.0" ?>
+<Mod>
+    <Id>ladder</Id>
+    <Name>Ladder</Name>
+    <Version>1.0.0</Version>
+    <Author>Gyrth McMulin, Kavika, Buster Charlie</Author>
+    <Thumbnail>Data/Images/ladder_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/ladder_full.jpg</PreviewImage>
+    <Description>Ladder.</Description>
+    <Tag>scripting</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <NeedsRestart>false</NeedsRestart>
+    <Item category="Interactive Objects" title="Ladder" path="Data/Objects/ladder_hotspot.xml" thumbnail="Data/UI/spawner/ladder.png" />
+    <Level title="Ladder Testing" thumbnail="Images/ladder_full.jpg">ladder_testing.xml</Level>
+</Mod>
