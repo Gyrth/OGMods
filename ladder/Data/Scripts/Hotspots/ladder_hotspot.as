@@ -16,7 +16,19 @@ class StepType{
 	}
 }
 
+class User{
+	int id = -1;
+	int controller_id;
+	vec3 current_position;
+	User(MovementObject@ mo){
+		id = mo.GetID();
+		controller_id = mo.controller_id;
+		current_position = mo.position;
+	}
+}
+
 array<StepType@> step_types = {		StepType("Data/Objects/ladder2_mid.xml")};
+array<User@> users;
 
 void SetEnabled(bool is_enabled) { }
 
@@ -41,6 +53,19 @@ void Update() {
 			RemoveStep();
 		}
 		UpdateStepPositions();
+	}
+	UpdateUsers();
+}
+
+void UpdateUsers(){
+	for (uint i = 0; i < users.size(); i++){
+		if(GetInputDown(users[i].controller_id, "w") && !GetInputDown(users[i].controller_id, "s")){
+			users[i].current_position += vec3(0.0, 1.0, 0.0) * time_step;
+		}else if(!GetInputDown(users[i].controller_id, "w") && GetInputDown(users[i].controller_id, "s")){
+			users[i].current_position -= vec3(0.0, 1.0, 0.0) * time_step;
+		}
+		MovementObject@ mo = ReadCharacterID(users[i].id);
+		mo.ReceiveMessage("set_dialogue_position " + users[i].current_position.x + " " +  users[i].current_position.y + " " + users[i].current_position.z);
 	}
 }
 
@@ -77,7 +102,27 @@ void ClearSteps(){
 	steps.resize(0);
 }
 
-void HandleEvent(string event, MovementObject @mo) { }
+void HandleEvent(string event, MovementObject @mo) {
+	if(event == "enter"){
+		mo.ReceiveMessage("set_dialogue_control true");
+		mo.ReceiveMessage("set_animation \"Data/Animations/r_sneakwalk.anm\"");
+		vec3 current_position = mo.position;
+		mo.ReceiveMessage("set_dialogue_position " + current_position.x + " " +  current_position.y + " " + current_position.z);
+		users.insertLast(User(mo));
+	}else if(event == "exit"){
+		RemoveUser(mo);
+	}
+}
+
+void RemoveUser(MovementObject@ mo){
+	mo.ReceiveMessage("set_dialogue_control false");
+	for(uint i = 0; i < users.size(); i++){
+		if(users[i].id == mo.GetID()){
+			users.removeAt(i);
+			return;
+		}
+	}
+}
 
 void HandleEventItem(string event, ItemObject @obj) { }
 
