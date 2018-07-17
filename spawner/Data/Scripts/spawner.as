@@ -56,7 +56,7 @@ class GUISpawnerItem{
 	}
 	void SetThumbnail(){
 		//If no thumbnail was set, use the default one.
-		if(spawner_item.GetThumbnail() == ""){
+		if(spawner_item.GetThumbnail() == "" || !FileExists(spawner_item.GetThumbnail())){
 			return;
 		}else{
 			icon = LoadTexture(spawner_item.GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
