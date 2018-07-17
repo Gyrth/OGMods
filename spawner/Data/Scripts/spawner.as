@@ -426,6 +426,12 @@ void AddItem(GUISpawnerItem@ spawner_item){
 }
 
 void SetPlaceholderModel(){
+	if(!FileExists(load_item_path)){
+		Object@ placeholder_box = ReadObjectFromID(placeholder_id);
+		PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder_box);
+		placeholder_object.SetPreview("");
+		return;
+	}
 	int id = CreateObject(load_item_path);
 	Object@ obj = ReadObjectFromID(id);
 	Object@ placeholder_box = ReadObjectFromID(placeholder_id);
