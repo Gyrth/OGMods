@@ -1,0 +1,677 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-11.4697" t1="0.500471" t2="2.9223" s0="21.1618" s1="8.38606" s2="28.594" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="57" version="1">
+        <parameters />
+        <Hotspot t0="-5.50798" t1="-1.27435" t2="-2.97925" s0="0.549018" s1="0.549018" s2="0.549018" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="0" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Animate Camera" type="int" val="0" />
+                <parameter name="Animate Scale" type="int" val="0" />
+                <parameter name="Check for Item" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="0" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Forward" type="int" val="0" />
+                <parameter name="Identifier" type="string" val="147767770" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Item Label" type="string" val="knife" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="4" />
+                <parameter name="Object Path" type="string" val="Data/Objects/broken_wall_01.xml" />
+                <parameter name="Play mode" type="int" val="3" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="5" />
+                <parameter name="Wiremesh preview" type="int" val="0" />
+            </parameters>
+            <Connections />
+            <ConnectionsFrom />
+        </Hotspot>
+        <PlaceholderObject t0="-1.40284" t1="-0.42134" t2="0.267799" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/broken_wall_01.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="147767770" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-3.53213" t1="-0.813244" t2="-0.726962" s0="1" s1="1" s2="1" q0="0.0505536" q1="-0.267406" q2="0.17875" q3="0.945509" euler_x="0" euler_y="-0.551238" euler_z="0.373693" id="4" type_file="Data/Objects/broken_wall_01.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="147767770" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <Hotspot t0="-10.4849" t1="-1.45265" t2="5.23429" s0="0.564812" s1="0.564812" s2="0.564812" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Animate Camera" type="int" val="0" />
+                <parameter name="Animate Scale" type="int" val="0" />
+                <parameter name="Check for Item" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Forward" type="float" val="0" />
+                <parameter name="Identifier" type="string" val="1580573633" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Item Label" type="string" val="knife" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="6" />
+                <parameter name="Object Path" type="string" val="Data/Objects/broken_wall_02.xml" />
+                <parameter name="Play mode" type="int" val="3" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="5" />
+                <parameter name="Wiremesh preview" type="int" val="0" />
+            </parameters>
+            <Connections />
+            <ConnectionsFrom />
+        </Hotspot>
+        <PlaceholderObject t0="-1.39383" t1="1.68999" t2="1.07324" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" type_file="Data/Objects/broken_wall_02.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1580573633" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-3.33934" t1="3.08448" t2="1.70939" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.755362" q3="0.655308" euler_x="0" euler_y="0" euler_z="-1.71241" id="8" type_file="Data/Objects/broken_wall_02.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1580573633" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <Hotspot t0="-13.9995" t1="-1.40363" t2="0.0632467" s0="0.531768" s1="0.531768" s2="0.531768" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Animate Camera" type="int" val="0" />
+                <parameter name="Animate Scale" type="int" val="0" />
+                <parameter name="Check for Item" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Forward" type="float" val="0" />
+                <parameter name="Identifier" type="string" val="897071155" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Item Label" type="string" val="knife" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="6" />
+                <parameter name="Object Path" type="string" val="Data/Objects/broken_wall_03.xml" />
+                <parameter name="Play mode" type="int" val="3" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="5" />
+                <parameter name="Wiremesh preview" type="int" val="0" />
+            </parameters>
+            <Connections />
+            <ConnectionsFrom />
+        </Hotspot>
+        <PlaceholderObject t0="-1.39685" t1="1.24629" t2="1.45279" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" type_file="Data/Objects/broken_wall_03.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="897071155" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-4.61431" t1="0.290088" t2="0.434695" s0="1" s1="1" s2="1" q0="0.0056597" q1="-0.475036" q2="-0.734839" q3="0.484068" euler_x="0.908559" euler_y="-0.468537" euler_z="-2.20864" id="12" type_file="Data/Objects/broken_wall_03.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="897071155" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="-1.39685" t1="1.24629" t2="1.45279" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/broken_wall_03.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="897071155" />
+                <parameter name="Name" type="string" val="animation_main" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="-7.21998" t1="-2.35423" t2="15.881" s0="0.666667" s1="0.666667" s2="0.666667" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Animate Camera" type="int" val="0" />
+                <parameter name="Animate Scale" type="int" val="0" />
+                <parameter name="Check for Item" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Forward" type="float" val="0" />
+                <parameter name="Identifier" type="string" val="236676447" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Item Label" type="string" val="knife" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="6" />
+                <parameter name="Object Path" type="string" val="Data/Objects/broken_wall_04.xml" />
+                <parameter name="Play mode" type="int" val="3" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="5" />
+                <parameter name="Wiremesh preview" type="int" val="0" />
+            </parameters>
+            <Connections />
+            <ConnectionsFrom />
+        </Hotspot>
+        <PlaceholderObject t0="-1.40217" t1="-0.458669" t2="2.14276" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="Data/Objects/broken_wall_04.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="236676447" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-2.43348" t1="0.0894681" t2="3.77212" s0="1" s1="1" s2="1" q0="0.385115" q1="0.0107502" q2="0.296651" q3="0.873824" euler_x="0.768245" euler_y="-0.21127" euler_z="0.568892" id="16" type_file="Data/Objects/broken_wall_04.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="236676447" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="-1.40217" t1="-0.458669" t2="2.14276" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/broken_wall_04.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="236676447" />
+                <parameter name="Name" type="string" val="animation_main" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="-15.0706" t1="-1.75634" t2="14.8682" s0="0.571407" s1="0.571407" s2="0.571407" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Animate Camera" type="int" val="0" />
+                <parameter name="Animate Scale" type="int" val="0" />
+                <parameter name="Check for Item" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Forward" type="float" val="0" />
+                <parameter name="Identifier" type="string" val="759194275" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Item Label" type="string" val="knife" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="7" />
+                <parameter name="Object Path" type="string" val="Data/Objects/broken_wall_05.xml" />
+                <parameter name="Play mode" type="int" val="3" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="5" />
+                <parameter name="Wiremesh preview" type="int" val="0" />
+            </parameters>
+            <Connections />
+            <ConnectionsFrom />
+        </Hotspot>
+        <PlaceholderObject t0="-1.39623" t1="1.06475" t2="2.56206" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="Data/Objects/broken_wall_05.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="759194275" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-4.59525" t1="2.13444" t2="5.42806" s0="1" s1="1" s2="1" q0="-0.139821" q1="0.329632" q2="-0.414983" q3="0.83641" euler_x="-0.598866" euler_y="0.450447" euler_z="-1.06235" id="20" type_file="Data/Objects/broken_wall_05.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="759194275" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="-1.39623" t1="1.06475" t2="2.56206" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/broken_wall_05.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="759194275" />
+                <parameter name="Name" type="string" val="animation_main" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="-21.0551" t1="-1.37234" t2="-3.37033" s0="0.495262" s1="0.495262" s2="0.495262" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Animate Camera" type="int" val="0" />
+                <parameter name="Animate Scale" type="int" val="0" />
+                <parameter name="Check for Item" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Forward" type="float" val="0" />
+                <parameter name="Identifier" type="string" val="696308526" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Item Label" type="string" val="knife" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="6" />
+                <parameter name="Object Path" type="string" val="Data/Objects/broken_wall_06.xml" />
+                <parameter name="Play mode" type="int" val="3" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="5" />
+                <parameter name="Wiremesh preview" type="int" val="0" />
+            </parameters>
+            <Connections />
+            <ConnectionsFrom />
+        </Hotspot>
+        <PlaceholderObject t0="-1.39727" t1="0.587522" t2="-0.709394" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" type_file="Data/Objects/broken_wall_06.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="696308526" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-7.73613" t1="0.618271" t2="-1.7288" s0="1" s1="1" s2="1" q0="-0.753675" q1="0.639117" q2="0.00210643" q3="0.153282" euler_x="-2.90641" euler_y="0.200445" euler_z="-1.3829" id="24" type_file="Data/Objects/broken_wall_06.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="696308526" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="-1.39727" t1="0.587522" t2="-0.709394" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/broken_wall_06.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="696308526" />
+                <parameter name="Name" type="string" val="animation_main" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="-11.7242" t1="-1.7181" t2="-10.3279" s0="0.520891" s1="0.520891" s2="0.520891" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="26" type_file="Data/Objects/animated_hotspot.xml">
+            <parameters>
+                <parameter name="AI trigger" type="int" val="0" />
+                <parameter name="Animate Camera" type="int" val="0" />
+                <parameter name="Animate Scale" type="int" val="0" />
+                <parameter name="Check for Item" type="int" val="0" />
+                <parameter name="Const speed" type="int" val="1" />
+                <parameter name="Draw connect lines" type="int" val="1" />
+                <parameter name="Draw path lines" type="int" val="0" />
+                <parameter name="Draw preview objects" type="int" val="1" />
+                <parameter name="Forward" type="float" val="0" />
+                <parameter name="Identifier" type="string" val="194353515" />
+                <parameter name="Interpolate rotation" type="int" val="0" />
+                <parameter name="Interpolate translation" type="int" val="0" />
+                <parameter name="Interpolation" type="float" val="1" />
+                <parameter name="Item Label" type="string" val="knife" />
+                <parameter name="Model Path" type="string" val="Data/Models/arrow.obj" />
+                <parameter name="Number of Keys" type="int" val="6" />
+                <parameter name="Object Path" type="string" val="Data/Objects/broken_wall_07.xml" />
+                <parameter name="Play mode" type="int" val="3" />
+                <parameter name="Scale Object Preview" type="int" val="0" />
+                <parameter name="Seconds" type="float" val="5" />
+                <parameter name="Wiremesh preview" type="int" val="0" />
+            </parameters>
+            <Connections />
+            <ConnectionsFrom />
+        </Hotspot>
+        <PlaceholderObject t0="-1.40073" t1="1.44496" t2="-0.916767" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" type_file="Data/Objects/broken_wall_07.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="194353515" />
+                <parameter name="Index" type="int" val="0" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-3.12829" t1="2.64615" t2="-3.09527" s0="1" s1="1" s2="1" q0="0.104025" q1="-0.368083" q2="-0.25128" q3="0.88913" euler_x="0.481881" euler_y="-0.646339" euler_z="-0.715074" id="28" type_file="Data/Objects/broken_wall_07.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="194353515" />
+                <parameter name="Index" type="int" val="1" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="-1.40073" t1="1.44496" t2="-0.916767" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/broken_wall_07.xml">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="194353515" />
+                <parameter name="Name" type="string" val="animation_main" />
+            </parameters>
+        </EnvObject>
+        <PlaceholderObject t0="-5.44208" t1="-1.45347" t2="-1.73904" s0="1" s1="1" s2="1" q0="-0.177895" q1="-0.179871" q2="0.669082" q3="0.698805" euler_x="-0.511366" euler_y="-0.0133371" euler_z="1.53083" id="30" type_file="Data/Objects/broken_wall_01.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="147767770" />
+                <parameter name="Index" type="int" val="2" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-6.53022" t1="-1.46318" t2="-2.34971" s0="1" s1="1" s2="1" q0="-0.177895" q1="-0.179871" q2="0.669082" q3="0.698805" euler_x="-0.511366" euler_y="-0.0133371" euler_z="1.53083" id="31" type_file="Data/Objects/broken_wall_01.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="147767770" />
+                <parameter name="Index" type="int" val="3" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-5.83072" t1="3.99818" t2="3.07084" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.960072" q3="-0.279754" euler_x="0" euler_y="0" euler_z="2.57452" id="32" type_file="Data/Objects/broken_wall_02.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1580573633" />
+                <parameter name="Index" type="int" val="2" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-8.27262" t1="2.02497" t2="3.95975" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.347322" q3="-0.937746" euler_x="0" euler_y="0" euler_z="0.709427" id="33" type_file="Data/Objects/broken_wall_02.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1580573633" />
+                <parameter name="Index" type="int" val="3" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-10.6454" t1="-1.35104" t2="5.13857" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.330038" q3="-0.943968" euler_x="0" euler_y="0" euler_z="-0.672688" id="34" type_file="Data/Objects/broken_wall_02.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1580573633" />
+                <parameter name="Index" type="int" val="4" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-10.9329" t1="-1.99006" t2="5.27353" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.723488" q3="-0.690337" euler_x="0" euler_y="0" euler_z="-1.61768" id="35" type_file="Data/Objects/broken_wall_02.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="1580573633" />
+                <parameter name="Index" type="int" val="5" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-7.566" t1="-0.647539" t2="0.740329" s0="1" s1="1" s2="1" q0="-0.452493" q1="-0.144711" q2="0.247302" q3="0.844483" euler_x="-0.989948" euler_y="-0.0206093" euler_z="0.580883" id="36" type_file="Data/Objects/broken_wall_03.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="897071155" />
+                <parameter name="Index" type="int" val="2" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-10.1587" t1="-1.80156" t2="0.334118" s0="1" s1="1" s2="1" q0="-0.233059" q1="-0.238465" q2="0.686704" q3="0.645954" euler_x="-0.679811" euler_y="0.0120108" euler_z="1.62769" id="37" type_file="Data/Objects/broken_wall_03.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="897071155" />
+                <parameter name="Index" type="int" val="3" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-11.5086" t1="-1.86678" t2="-0.180809" s0="1" s1="1" s2="1" q0="0.217818" q1="0.238852" q2="0.686569" q3="0.651251" euler_x="0.658246" euler_y="0.012011" euler_z="1.62769" id="38" type_file="Data/Objects/broken_wall_03.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="897071155" />
+                <parameter name="Index" type="int" val="4" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-13.8208" t1="-1.99325" t2="0.251863" s0="1" s1="1" s2="1" q0="0.649807" q1="0.690643" q2="0.226804" q3="0.222089" euler_x="2.49565" euler_y="0.012011" euler_z="1.62769" id="39" type_file="Data/Objects/broken_wall_03.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="897071155" />
+                <parameter name="Index" type="int" val="5" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-5.34524" t1="3.10547" t2="-5.31046" s0="1" s1="1" s2="1" q0="0.296452" q1="-0.241706" q2="-0.716102" q3="0.58386" euler_x="0.774652" euler_y="0.14282" euler_z="-1.71521" id="40" type_file="Data/Objects/broken_wall_07.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="194353515" />
+                <parameter name="Index" type="int" val="2" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-8.69985" t1="1.90698" t2="-6.90556" s0="1" s1="1" s2="1" q0="0.382196" q1="-0.0152415" q2="-0.923222" q3="0.0368174" euler_x="0.0794008" euler_y="0.781832" euler_z="-3.02914" id="41" type_file="Data/Objects/broken_wall_07.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="194353515" />
+                <parameter name="Index" type="int" val="3" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-10.9871" t1="-2.0825" t2="-9.19098" s0="1" s1="1" s2="1" q0="0.269657" q1="0.271277" q2="-0.651375" q3="-0.65529" euler_x="-0.784991" euler_y="-0.00423495" euler_z="1.56656" id="42" type_file="Data/Objects/broken_wall_07.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="194353515" />
+                <parameter name="Index" type="int" val="4" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-11.7661" t1="-2.07516" t2="-10.1443" s0="1" s1="1" s2="1" q0="-0.0941154" q1="-0.0907548" q2="-0.699746" q3="-0.702326" euler_x="0.262207" euler_y="-0.00423495" euler_z="1.56656" id="43" type_file="Data/Objects/broken_wall_07.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="194353515" />
+                <parameter name="Index" type="int" val="5" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-11.9146" t1="-0.537266" t2="-3.09047" s0="1" s1="1" s2="1" q0="-0.618396" q1="0.505636" q2="-0.326188" q3="-0.505487" euler_x="2.32269" euler_y="-1.15454" euler_z="-0.819911" id="44" type_file="Data/Objects/broken_wall_06.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="696308526" />
+                <parameter name="Index" type="int" val="2" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-14.1179" t1="-1.61285" t2="-3.26433" s0="1" s1="1" s2="1" q0="-0.032545" q1="-0.0751193" q2="-0.408314" q3="-0.90916" euler_x="0.121557" euler_y="0.110237" euler_z="0.850941" id="45" type_file="Data/Objects/broken_wall_06.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="696308526" />
+                <parameter name="Index" type="int" val="3" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-16.4937" t1="-1.88276" t2="-3.36388" s0="1" s1="1" s2="1" q0="-0.00361161" q1="-0.00382835" q2="-0.964604" q3="0.263634" euler_x="0.00548164" euler_y="-0.00898623" euler_z="-2.60803" id="46" type_file="Data/Objects/broken_wall_06.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="696308526" />
+                <parameter name="Index" type="int" val="4" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-20.4204" t1="-1.94345" t2="-3.44767" s0="1" s1="1" s2="1" q0="-0.00461656" q1="0.00252725" q2="0.0113954" q3="0.999917" euler_x="-0.009175" euler_y="0.00515932" euler_z="0.0227679" id="47" type_file="Data/Objects/broken_wall_06.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="696308526" />
+                <parameter name="Index" type="int" val="5" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-6.37912" t1="2.61964" t2="7.27472" s0="1" s1="1" s2="1" q0="-0.315392" q1="0.169512" q2="-0.847224" q3="0.392434" euler_x="-0.623482" euler_y="-0.413014" euler_z="-2.13923" id="48" type_file="Data/Objects/broken_wall_05.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="759194275" />
+                <parameter name="Index" type="int" val="2" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-9.62856" t1="0.899127" t2="10.0997" s0="1" s1="1" s2="1" q0="-0.311454" q1="-0.0970826" q2="-0.79499" q3="-0.511432" euler_x="0.541025" euler_y="-0.407051" euler_z="1.88393" id="49" type_file="Data/Objects/broken_wall_05.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="759194275" />
+                <parameter name="Index" type="int" val="3" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-11.9661" t1="-1.12758" t2="12.2572" s0="1" s1="1" s2="1" q0="-0.128046" q1="-0.216008" q2="-0.521151" q3="-0.815688" euler_x="0.460982" euler_y="0.220715" euler_z="1.18907" id="50" type_file="Data/Objects/broken_wall_05.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="759194275" />
+                <parameter name="Index" type="int" val="4" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-13.6575" t1="-2.00389" t2="13.7353" s0="1" s1="1" s2="1" q0="-0.224497" q1="-0.23583" q2="-0.674195" q3="-0.662908" euler_x="0.663227" euler_y="0.00995679" euler_z="1.59111" id="51" type_file="Data/Objects/broken_wall_05.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="759194275" />
+                <parameter name="Index" type="int" val="5" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-15.2667" t1="-2.02852" t2="14.9927" s0="1" s1="1" s2="1" q0="-0.506568" q1="-0.521844" q2="-0.487681" q3="-0.482945" euler_x="1.6287" euler_y="0.00995673" euler_z="1.59111" id="52" type_file="Data/Objects/broken_wall_05.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="759194275" />
+                <parameter name="Index" type="int" val="6" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-3.86324" t1="0.631208" t2="6.49329" s0="1" s1="1" s2="1" q0="0.655873" q1="-0.147162" q2="0.514799" q3="0.532123" euler_x="1.39629" euler_y="-0.982528" euler_z="0.693756" id="53" type_file="Data/Objects/broken_wall_04.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="236676447" />
+                <parameter name="Index" type="int" val="2" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-4.99614" t1="-0.259863" t2="8.83997" s0="1" s1="1" s2="1" q0="0.505151" q1="-0.597819" q2="0.533833" q3="0.320083" euler_x="-2.19149" euler_y="-1.17331" euler_z="-2.3973" id="54" type_file="Data/Objects/broken_wall_04.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="236676447" />
+                <parameter name="Index" type="int" val="3" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-6.06834" t1="-2.14516" t2="12.1882" s0="1" s1="1" s2="1" q0="0.725208" q1="-0.669627" q2="0.119286" q3="-0.10696" euler_x="-2.8211" euler_y="-0.029772" euler_z="-1.49595" id="55" type_file="Data/Objects/broken_wall_04.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="236676447" />
+                <parameter name="Index" type="int" val="4" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-7.32192" t1="-2.08396" t2="16.0851" s0="1" s1="1" s2="1" q0="0.649395" q1="-0.611697" q2="-0.297417" q3="0.340078" euler_x="2.20438" euler_y="-0.0297719" euler_z="-1.49595" id="56" type_file="Data/Objects/broken_wall_04.xml" special_type="0">
+            <parameters>
+                <parameter name="BelongsTo" type="string" val="236676447" />
+                <parameter name="Index" type="int" val="5" />
+                <parameter name="Name" type="string" val="animation_key" />
+                <parameter name="Playsound" type="string" val="" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/broken_wall_03.obj</Model>
+    <ColorMap>Data/Textures/blank_c.tga</ColorMap>
+	<NormalMap>Data/Textures/normal.tga</NormalMap>
+	<WeightMap>Data/Textures/blank_random_w.tga</WeightMap>
+	<DetailMaps>
+	<DetailMap colorpath="Data/Textures/buildings/detail_textures/tight_bricks_c.tga" normalpath="Data/Textures/buildings/detail_textures/tight_bricks_n.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/buildings/detail_textures/messy_brick_c.tga" normalpath="Data/Textures/buildings/detail_textures/messy_brick_n.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/buildings/detail_textures/plaster_bricks_c.tga" normalpath="Data/Textures/buildings/detail_textures/plaster_bricks_n.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/buildings/detail_textures/tight_bricks_c.tga" normalpath="Data/Textures/buildings/detail_textures/tight_bricks_n.tga" materialpath="Data/Materials/rocks.xml" />
+    </DetailMaps>
+	<ShaderName>detailmap4tangent</ShaderName>
+</Object>
