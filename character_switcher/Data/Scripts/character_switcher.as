@@ -27,30 +27,42 @@ class Character{
 
 void Init(string p_level_name) {
     @imGUI = CreateIMGUI();
+	ScanForPlayableCharacters();
+}
 
+void ScanForPlayableCharacters(){
 	array<SpawnerItem>@ spawner_items = ModGetAllSpawnerItems();
 	for(uint i = 0; i < spawner_items.size(); i++){
-		if(spawner_items[i].GetCategory() == "Character"){
+		if(ContainsActor(spawner_items[i].GetPath())){
 			string thumbnail = join(spawner_items[i].GetThumbnail().split("Data/"), "");
 			characters.insertLast(Character(spawner_items[i].GetTitle(), spawner_items[i].GetPath(), thumbnail));
 		}
 	}
 
-	CheckCharacterPaths();
 }
 
-void CheckCharacterPaths(){
-	for(uint i = 0; i < characters.size(); i++){
-		if(!FileExists(characters[i].character_path)){
-			characters.removeAt(i);
-			i--;
+bool ContainsActor(string path){
+	if(FileExists(path)){
+		if(LoadFile(path)){
+			for(uint i = 0; i < 7; i++){
+				string new_str = GetFileLine();
+				if(new_str.findFirst("<Actor>") != -1){
+					return true;
+				}else if(new_str.findFirst("is_player") != -1){
+					return true;
+				}else if(new_str == "end"){
+					break;
+				}
+			}
 		}
 	}
+	return false;
 }
 
 void DrawGUI() {
 	imGUI.render();
 }
+
 void AddUI(){
     imGUI.setup();
     IMDivider main( "main", DOVertical );
