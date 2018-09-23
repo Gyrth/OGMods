@@ -3,8 +3,7 @@ array<Character@> characters;
 bool has_ui = false;
 int nr_shown_characters = 3;
 int current_character = -1;
-int current_character_ui = -1;
-int new_character = -1;
+int current_character_ui = 0;
 int whole_height = 1440;
 bool fade_in = true;
 int fade_in_time = 150;
@@ -28,57 +27,16 @@ class Character{
 
 void Init(string p_level_name) {
     @imGUI = CreateIMGUI();
-	characters.insertLast(Character("Guard",						"Data/Characters/guard.xml",					"UI/spawner/thumbs/Character/base_guard_actor.png"));
-	characters.insertLast(Character("Raider Rabbit",				"Data/Characters/raider_rabbit.xml",			"UI/spawner/thumbs/Character/raider_rabbit_actor.png"));
-	characters.insertLast(Character("Pale Turner",					"Data/Characters/pale_turner.xml",				"UI/spawner/thumbs/Character/pale_turner_actor.png"));
-	characters.insertLast(Character("Turner",						"Data/Characters/turner.xml",					"UI/spawner/thumbs/Object/default Turner.png"));
-	characters.insertLast(Character("Male Rabbit 1",				"Data/Characters/male_rabbit_1.xml",			"UI/spawner/thumbs/Character/Male_rabbit_1_actor.png"));
-	characters.insertLast(Character("Male Rabbit 2",				"Data/Characters/male_rabbit_2.xml",			"UI/spawner/thumbs/Character/Male_rabbit_2_actor.png"));
-	characters.insertLast(Character("Male Rabbit 3",				"Data/Characters/male_rabbit_3.xml",			"UI/spawner/thumbs/Character/Male_rabbit_3_actor.png"));
 
-	characters.insertLast(Character("Female Rabbit 1",				"Data/Characters/female_rabbit_1.xml",			"UI/spawner/thumbs/Character/female_rabbit_1_actor.png"));
-	characters.insertLast(Character("Female Rabbit 2",				"Data/Characters/female_rabbit_2.xml",			"UI/spawner/thumbs/Character/female_rabbit_2_actor.png"));
-	characters.insertLast(Character("Female Rabbit 3",				"Data/Characters/female_rabbit_3.xml",			"UI/spawner/thumbs/Character/female_rabbit_3_actor.png"));
-
-	characters.insertLast(Character("Pale Rabbit Civ",				"Data/Characters/pale_rabbit_civ.xml",			"UI/spawner/thumbs/Character/pale_rabbit_civ_actor.png"));
-	characters.insertLast(Character("Fancy Striped Cat",			"Data/Characters/fancy_striped_cat.xml",		"UI/spawner/thumbs/Character/fancy_striped_cat_actor.png"));
-	characters.insertLast(Character("Female Cat",					"Data/Characters/female_cat.xml",				"UI/spawner/thumbs/Character/female_cat_actor.png"));
-	characters.insertLast(Character("Male Cat",						"Data/Characters/male_cat.xml",					"UI/spawner/thumbs/Character/male_cat_actor.png"));
-	characters.insertLast(Character("Striped Cat",					"Data/Characters/striped_cat.xml",				"UI/spawner/thumbs/Object/Striped Cat.png"));
-
-	characters.insertLast(Character("Rat",							"Data/Characters/rat.xml",						"UI/spawner/thumbs/Character/rat_actor.png"));
-	characters.insertLast(Character("Hooded Rat",					"Data/Characters/hooded_rat.xml",				"UI/spawner/thumbs/Character/Hooded_rat_actor.png"));
-    characters.insertLast(Character("Female Rat",					"Data/Characters/female_rat.xml",				"UI/spawner/thumbs/Character/female_rat_actor.png"));
-
-	characters.insertLast(Character("Wolf",							"Data/Characters/wolf.xml",						"UI/spawner/thumbs/Character/IGF_wolfActor.png"));
-	characters.insertLast(Character("Male Wolf",					"Data/Characters/male_wolf.xml",				"UI/spawner/thumbs/Character/male_wolf_actor.png"));
-
-	characters.insertLast(Character("Light Armored Dog Big",		"Data/Characters/lt_dog_big.xml",				"UI/spawner/thumbs/Character/light_armored_dog_male_3_actor.png"));
-	characters.insertLast(Character("Light Armored Dog Female",		"Data/Characters/lt_dog_female.xml",			"UI/spawner/thumbs/Character/light_armored_dog_female_actor.png"));
-	characters.insertLast(Character("Light Armored Dog Male 1",		"Data/Characters/lt_dog_male_1.xml",			"UI/spawner/thumbs/Character/light_armored_dog_male_1_actor.png"));
-	characters.insertLast(Character("Light Armored Dog Male 2",		"Data/Characters/lt_dog_male_2.xml",			"UI/spawner/thumbs/Character/light_armored_dog_male_2_actor.png"));
-
-	characters.insertLast(Character("Rabbot",						"Data/Characters/rabbot.xml",					"UI/spawner/thumbs/Object/Rabbot.png"));
-
-	CheckCharacterPaths();
-}
-
-void GetCurrentCharacter(){
-	int player_id = GetPlayerCharacterID();
-    if(player_id == -1){
-        return;
-    }
-    Object@ player = ReadObjectFromID(player_id);
-    MovementObject@ player_mo = ReadCharacterID(player_id);
-	for(uint i = 0; i < characters.size(); i++){
-		Log(info, player_mo.char_path);
-		if(player_mo.char_path == characters[i].character_path){
-			current_character = i;
-			current_character_ui = i;
-			new_character = i;
-			break;
+	array<SpawnerItem>@ spawner_items = ModGetAllSpawnerItems();
+	for(uint i = 0; i < spawner_items.size(); i++){
+		if(spawner_items[i].GetCategory() == "Character"){
+			string thumbnail = join(spawner_items[i].GetThumbnail().split("Data/"), "");
+			characters.insertLast(Character(spawner_items[i].GetTitle(), spawner_items[i].GetPath(), thumbnail));
 		}
 	}
+
+	CheckCharacterPaths();
 }
 
 void CheckCharacterPaths(){
@@ -157,7 +115,7 @@ void AddSingleCharacterUI(IMDivider@ parent, vec2 size, string thumb_path, strin
         thumb.addUpdateBehavior(IMFadeIn( fade_in_time, inSineTween ), "");
         title.addUpdateBehavior(IMFadeIn( fade_in_time, inSineTween ), "");
     }else if(direction){
-        character_container.addUpdateBehavior(IMMoveIn (  150.0f, vec2(0, size.y), inOutQuartTween ), "");
+        character_container.addUpdateBehavior(IMMoveIn ( 150.0f, vec2(0, size.y), inOutQuartTween ), "");
     }else{
         character_container.addUpdateBehavior(IMMoveIn ( 150.0f, vec2(0, size.y * -1), inOutQuartTween ), "");
     }
@@ -178,10 +136,8 @@ void SetWindowDimensions(int w, int h)
 }
 
 void Update(int paused) {
-	if(current_character == -1){
-		GetCurrentCharacter();
-	}
     if(has_ui){
+		int new_character = current_character_ui;
         if(GetInputDown(0, "mousescrolldown") && !EditorModeActive()){
             direction = true;
     		new_character = min(current_character_ui+1, characters.size() -1);
@@ -221,8 +177,26 @@ void SwitchToCharacter(){
         return;
     }
     Object@ player = ReadObjectFromID(player_id);
+	vec3 translation = player.GetTranslation();
+
     MovementObject@ player_mo = ReadCharacterID(player_id);
-	player_mo.Execute("SwitchCharacter(\"" + characters[current_character].character_path + "\");");
+	vec3 position = player_mo.position;
+	vec3 velocity = player_mo.velocity;
+
+	int new_character_id = CreateObject(characters[current_character].character_path);
+	Object@ new_player = ReadObjectFromID(new_character_id);
+	MovementObject@ new_player_mo = ReadCharacterID(new_character_id);
+	new_player.SetPlayer(true);
+	QueueDeleteObjectID(player_id);
+	new_player.SetTranslation(translation);
+	new_player_mo.position = position;
+	new_player_mo.velocity = velocity;
+	new_player.SetCopyable(true);
+	new_player.SetSelectable(true);
+	new_player.SetDeletable(true);
+	new_player.SetScalable(true);
+	new_player.SetTranslatable(true);
+	new_player.SetRotatable(true);
 }
 
 int GetPlayerCharacterID() {
