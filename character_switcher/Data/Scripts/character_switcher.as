@@ -34,7 +34,10 @@ void ScanForPlayableCharacters(){
 	array<SpawnerItem>@ spawner_items = ModGetAllSpawnerItems();
 	for(uint i = 0; i < spawner_items.size(); i++){
 		if(ContainsActor(spawner_items[i].GetPath())){
-			string thumbnail = join(spawner_items[i].GetThumbnail().split("Data/"), "");
+			string thumbnail = empty;
+			if(FileExists(spawner_items[i].GetThumbnail())){
+				thumbnail = join(spawner_items[i].GetThumbnail().split("Data/"), "");
+			}
 			characters.insertLast(Character(spawner_items[i].GetTitle(), spawner_items[i].GetPath(), thumbnail));
 		}
 	}
