@@ -1,0 +1,7 @@
+#name "Intro"
+#participants 1
+set_cam -67.0877 11.7943 203.068 0 -150 0 90
+vo "Data/VoiceOver/t2/c/s3/c4-proto/Intro0.wav"
+say 1 "ghost" "alright im off the boat  lets get outta here"
+vo "Data/VoiceOver/t2/c/s3/c4-proto/Intro1.wav"
+say 1 "ghost" "let's visit the uritede t emple"

@@ -1,0 +1,184 @@
+#name "Intro"
+#participants 6
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 13
+set_dialogue_voice 3 17
+set_dialogue_voice 4 15
+set_dialogue_voice 5 9
+set_character_pos 5 -63.0988 85.131 37.1759 78
+send_character_message 5 "set_animation \"Data\Animations\interestingsit.anm\""
+send_character_message 5 "set_head_target -62.9489 85.1055 35.8171 1"
+set_character_pos 4 -60.5235 85.6112 33.9275 169
+send_character_message 4 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 4 "set_torso_target -61.4896 85.8772 33.8935 1"
+send_character_message 4 "set_head_target -62.4747 86.1985 33.3578 1"
+set_character_pos 3 -64.3948 85.683 32.6816 -13
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_thoughtful.anm\""
+send_character_message 3 "set_head_target -62.3682 85.7602 33.0921 0.945481"
+set_character_pos 2 -75.1513 85.7219 35.1011 6
+send_character_message 2 "set_torso_target -75.9404 85.9381 36.1228 0"
+send_character_message 2 "set_head_target -73.4862 86.3145 34.929 1"
+set_character_pos 1 -78.3143 85.8262 38.1439 71
+send_character_message 1 "set_animation \"Data\Animations\dialogue_leaning_back_onwall.anm\""
+send_character_message 1 "set_torso_target -77.0677 86.4694 36.8408 0"
+send_character_message 1 "set_head_target -76.315 86.5436 36.8831 1"
+set_cam -60.8338 85.1921 34.1228 10.05 60.84 0 25.6682
+send_level_message "set_camera_dof 0.3 3 1 0.3 4 1"
+send_level_message "therium2_enable_object 563"
+send_level_message "therium2_enable_object 576"
+vo "Data/VoiceOver/t2/s2/b5/Intro0.wav"
+say 3 "????" "Where is he...?"
+send_character_message 3 "set_head_target -61.6472 86.1668 33.5706 0.945481"
+vo "Data/VoiceOver/t2/s2/b5/Intro1.wav"
+say 3 "????" "I checked a hundred times, [wait 0.3]all around that weird shrine thing. [wait 0.5]Bastard disappeared on us."
+set_cam -66.0049 86.6704 30.6094 -10.41 -148.16 0.16 27.6335
+send_character_message 5 "set_head_target -63.8095 85.9898 34.8345 1"
+send_character_message 3 "set_head_target -63.18 85.5209 35.9482 0.945481"
+send_character_message 4 "set_head_target -62.4751 85.7648 35.319 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+vo "Data/VoiceOver/t2/s2/b5/Intro2.wav"
+say 5 "??????" "What about footprints?"
+send_character_message 3 "set_torso_target -63.7072 85.8466 33.164 1"
+send_character_message 3 "set_head_target -63.2555 85.7813 36.1387 0.945481"
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_worriedpose_2.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/b5/Intro3.wav"
+say 3 "????" "Like I said, [wait 0.3]I checked everything. [wait 0.5]And I didn't see any trace of him."
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 2 "set_head_target -72.8899 86.1425 34.8208 1"
+send_character_message 4 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 3 "set_head_target -65.5641 86.6042 33.6568 0.945481"
+send_character_message 3 "set_torso_target -64.0955 85.8562 33.3278 1"
+send_character_message 4 "set_head_target -64.1299 86.2678 34.2314 1"
+set_cam -54.9339 85.9929 32.6783 0.2 96.43 0.05 15.7853
+send_level_message "set_camera_dof 0.3 15 10 0 0 0"
+vo "Data/VoiceOver/t2/s2/b5/Intro4.wav"
+say 2 "???" "Looking for me?"
+send_character_message 4 "set_torso_target -61.5596 85.7633 33.6178 1"
+set_cam -68.2733 86.1631 32.5822 -0.21 -95.41 -0.01 15.7853
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+send_character_message 3 "set_head_target -69.2068 86.0278 33.7513 0.945481"
+send_character_message 3 "set_torso_target -65.4317 85.4528 32.6809 1"
+set_character_pos 3 -64.3948 85.683 32.6816 -174
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/b5/Intro5.wav"
+say 3 "????" "Now where did you go? [wait 0.5]We were worried sick."
+send_character_message 4 "set_head_target -64.1314 86.0696 34.1964 1"
+send_character_message 4 "set_torso_target -61.6162 86.1399 33.6607 1"
+send_level_message "set_camera_dof 0.3 4.5 1 0 0 0"
+vo "Data/VoiceOver/t2/s2/b5/Intro6.wav"
+say 4 "?????" "Are you wounded? [wait 0.5]You don't look too well."
+send_character_message 4 "set_head_target -64.1314 86.0696 34.1965 1"
+send_character_message 3 "set_head_target -69.2066 86.0278 33.7524 0.945481"
+send_character_message 2 "set_head_target -72.8897 86.1425 34.8231 1"
+send_character_message 5 "set_head_target -63.8395 86.0006 34.8426 1"
+send_character_message 1 "set_head_target -76.2105 86.5558 36.859 1"
+send_character_message 1 "set_torso_target -77.0677 86.4694 36.8408 0.00511956"
+send_character_message 2 "set_torso_target -75.9404 85.9381 36.1228 0.01363"
+set_character_pos 2 -75.1513 85.602 35.1011 6
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam -69.3032 86.127 31.702 0.16 123.39 0.14 15.7853
+send_level_message "set_camera_dof 0 0 0 0.3 7 1"
+vo "Data/VoiceOver/t2/s2/b5/Intro7.wav"
+say 2 "???" "Well, [wait 0.3t]to tell the truth, [wait 0.3]this fellow saved me."
+send_character_message 2 "set_torso_target -73.8144 86.1337 35.2683 1"
+send_character_message 4 "set_head_target -72.4996 86.171 36.2838 1"
+send_character_message 3 "set_head_target -70.5463 85.878 35.1446 0.945481"
+send_character_message 5 "set_head_target -73.8152 85.5462 36.6813 1"
+send_character_message 1 "set_torso_target -77.0677 86.4694 36.8408 1"
+send_character_message 1 "set_head_target -74.6439 86.5957 37.0203 1"
+send_character_message 2 "set_head_target -75.4889 86.36 36.0857 1"
+send_level_message "set_camera_dof 0.3 8 1 0 0 0"
+vo "Data/VoiceOver/t2/s2/b5/Intro8.wav"
+say 1 "Ghost" "..."
+send_character_message 4 "set_torso_target -61.5807 86.0939 33.9385 1"
+set_cam -81.6724 86.5989 38.0535 -3.59 -78.6 -0.07 35.7945
+vo "Data/VoiceOver/t2/s2/b5/Intro9.wav"
+say 3 "????" "Greetings, [wait 0.3]friend. [wait 0.5]Thank you for saving Tashaun."
+send_character_message 4 "set_head_target -72.6555 86.1972 36.9688 1"
+vo "Data/VoiceOver/t2/s2/b5/Intro10.wav"
+say 4 "????" "You must have quite the story to tell."
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_head_target -76.6138 86.5124 36.5166 1"
+send_character_message 2 "set_torso_target -73.8144 86.1337 35.2683 0.00263613"
+set_character_pos 2 -75.1513 85.602 35.1011 -142
+send_character_message 1 "set_head_target -74.494 86.312 36.9564 1"
+send_character_message 1 "set_torso_target -77.2778 86.3953 36.8382 0"
+set_cam -76.4801 86.538 38.5291 -0.07 77.12 0.11 25.1949
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/b5/Intro11.wav"
+say 1 "Ghost" "I'd sit down with you, [wait 0.3]but I have to get moving."
+send_character_message 1 "set_torso_target -77.2778 86.3953 36.8382 0.00352162"
+send_character_message 1 "set_head_target -75.6608 86.2833 35.5098 1"
+send_character_message 2 "set_torso_target -75.653 85.8576 35.2258 1"
+set_cam -72.9875 86.2479 34.2243 -0.13 119.64 0.03 25.1949
+vo "Data/VoiceOver/t2/s2/b5/Intro12.wav"
+say 2 "Tashaun" "Not without some reward! [wait 0.5]At least take a few petals."
+send_character_message 2 "set_torso_target -75.6534 85.8576 35.2262 1"
+send_character_message 1 "set_head_target -75.6601 86.2833 35.5145 1"
+set_character_pos 2 -75.1791 85.602 35.1122 -142
+send_character_message 2 "set_head_target -76.631 86.5124 36.5217 1"
+set_character_pos 1 -78.3143 85.8262 38.1438 71
+send_character_message 1 "set_torso_target -77.3659 85.8692 36.8433 0.989521"
+set_cam -76.6986 86.5428 38.0109 -0.1 91.21 0.09 25.1949
+vo "Data/VoiceOver/t2/s2/b5/Intro13.wav"
+say 1 "Ghost" "...[wait 0.3]well, [wait 0.3]I wouldn't mind a few coins."
+set_cam -75.1461 86.5664 36.3716 -0.12 107.87 0.06 25.1949
+send_character_message 1 "set_torso_target -77.3659 85.8692 36.8433 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+send_character_message 2 "set_head_target -77.3196 86.5321 37.1453 1"
+send_character_message 1 "set_head_target -77.3605 86.4407 37.1534 1"
+send_character_message 2 "set_torso_target -77.3029 85.4752 37.4147 1"
+set_character_pos 2 -76.8164 85.7852 36.7108 -138
+set_character_pos 1 -78.1491 85.8262 37.7808 63
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+vo "Data/VoiceOver/t2/s2/b5/Intro14.wav"
+say 2 "Tashaun" "Here. [wait 0.5]It's not much, [wait 0.3]but it should be enough to buy you a good sword."
+set_character_pos 3 -64.3948 85.6828 32.6816 -174
+send_character_message 2 "set_head_target -77.2486 86.5342 37.0811 1"
+send_character_message 3 "set_torso_target -65.3996 85.5197 32.9986 1"
+send_character_message 3 "set_head_target -72.5246 86.0678 36.0294 0.945481"
+send_character_message 4 "set_head_target -72.934 86.3231 36.5725 1"
+send_character_message 4 "set_torso_target -61.5467 85.8371 33.9834 1"
+send_character_message 3 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_torso_target -77.4037 85.7788 37.178 0"
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam -78.5887 86.5502 36.3473 -0.05 -156.2 -0.12 25.1949
+send_character_message 1 "set_head_target -77.0529 86.5676 36.7214 1"
+send_character_message 1 "set_torso_target -77.2885 85.1922 37.6745 1"
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch_lethal.anm\""
+vo "Data/VoiceOver/t2/s2/b5/Intro15.wav"
+say 1 "Ghost" "Thanks. [wait 0.3]Can I get directions to the Empry?"
+set_character_pos 3 -64.3948 85.4032 32.6816 -174
+send_character_message 3 "set_torso_target -65.5154 85.5821 32.8837 1"
+send_character_message 3 "set_head_target -72.61 86.3752 35.9565 0.945481"
+set_cam -67.8381 86.1042 32.9354 0.09 -91.99 -0.1 25.1949
+vo "Data/VoiceOver/t2/s2/b5/Intro16.wav"
+say 3 "????" "You'll need to talk to Brandt for that, [wait 0.2]by our tents. [wait 0.5]He has a map."
+send_character_message 3 "set_torso_target -65.454 85.5821 33.0048 1"
+set_cam -67.8382 86.104 32.9352 0.09 -91.99 -0.1 25.1949
+send_character_message 2 "set_head_target -72.3294 86.3801 34.9237 0.972324"
+send_character_message 1 "set_head_target -76.1206 86.6317 36.4036 1"
+set_character_pos 2 -74.9697 85.7852 35.2827 1
+set_character_pos 1 -78.5082 85.8262 37.2646 15
+send_character_message 1 "set_torso_target -77.1086 85.7417 37.6911 0.0264687"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 4 "set_head_target -73.2104 86.1379 36.326 1"
+send_character_message 4 "set_animation \"Data\Animations\r_dialogue_worriedpose_1.anm\""
+send_level_message "set_camera_dof 0.3 6 1 0 0 0"
+vo "Data/VoiceOver/t2/s2/b5/Intro17.wav"
+say 4 "?????" "Thank you again for saving Tashaun. [wait 0.5]Feel free to join in at any time."
+send_character_message 5 "set_head_target -63.1047 85.4752 36.0814 1"
+send_character_message 2 "set_head_target -72.3294 86.3801 34.9237 0"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle_yawn.anm\""
+send_character_message 1 "set_head_target -74.1299 86.5679 36.3619 1"
+send_character_message 1 "set_torso_target -77.7835 86.5251 37.1499 1"
+send_character_message 4 "set_animation \"Data\Animations\r_idle.anm\""
+set_character_pos 3 -64.3948 85.683 32.6816 -24
+set_cam -80.4967 86.4521 37.2505 0.11 -79.68 -0.08 25.1949
+send_level_message "set_camera_dof 0 0 0 0.3 6 1"
+vo "Data/VoiceOver/t2/s2/b5/Intro18.wav"
+say 2 "Tashaun" "Now, [wait 0.3]about that story..."
+send_level_message "therium2_disable_object 563"
+send_level_message "therium2_disable_object 576"

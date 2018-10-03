@@ -1,0 +1,25 @@
+#name "Civ2"
+#participants 2
+set_dialogue_color 2 1.0 0.7 0.4
+set_dialogue_voice 2 3
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_character_message 1 "set_torso_target 15.1731 13.6826 -15.9256 0"
+send_character_message 1 "set_head_target 15.1345 13.7622 -15.6455 0"
+send_character_message 2 "set_torso_target 15.2924 13.5439 -14.5871 0"
+set_character_pos 2 15.6151 13.2499 -13.3607 -54
+send_character_message 2 "set_head_target 16.1149 14.3107 -12.7647 1"
+set_character_pos 1 16.1918 13.1734 -12.122 147
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_1.anm\""
+set_cam 17.5493 13.9556 -12.3462 -0.52 75.29 0.92 77.8275
+vo "Data/VoiceOver/og_story/01_Slaver_Camp_Landing/Civ20.wav"
+say 1 "Turner" "Are you all right?"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target 16.2432 13.9095 -12.7398 1"
+send_character_message 2 "set_torso_target 15.2924 13.5898 -14.5871 0"
+vo "Data/VoiceOver/og_story/01_Slaver_Camp_Landing/Civ21.wav"
+say 2 "Ginger" "There's going to be trouble when they tell their boss we're resisting. We should just do what they say."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target 15.5854 14.1587 -13.5893 1"
+vo "Data/VoiceOver/og_story/01_Slaver_Camp_Landing/Civ22.wav"
+say 1 "Turner" "White Flags is an apt name for this place. Why not just call it 'Surrender Village'? I'll show you how you deal with bandits."

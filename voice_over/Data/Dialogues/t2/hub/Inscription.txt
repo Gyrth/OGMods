@@ -1,0 +1,24 @@
+#name "Inscription"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -112.379 109.266 -132.386 90
+send_character_message 1 "set_head_target -112.664 111.105 -138.334 1"
+set_cam -111.458 108.894 -131.555 30.59 13.23 0 77.3712
+vo "Data/VoiceOver/t2/hub/Inscription0.wav"
+say 1 "Ghost" "Text written on the wall in ash. [wait 0.3]Who did this?"
+send_character_message 1 "set_head_target -112.278 119.546 -139.096 1"
+vo "Data/VoiceOver/t2/hub/Inscription1.wav"
+say 1 "Ghost" "You will need..."
+send_character_message 1 "set_head_target -112.528 116.599 -139.288 1"
+vo "Data/VoiceOver/t2/hub/Inscription2.wav"
+say 1 "Ghost" "A: Strength."
+send_character_message 1 "set_head_target -112.631 114.521 -139.698 1"
+vo "Data/VoiceOver/t2/hub/Inscription3.wav"
+say 1 "Ghost" "B: Willpower."
+send_character_message 1 "set_head_target -112.514 112.62 -140.31 1"
+vo "Data/VoiceOver/t2/hub/Inscription4.wav"
+say 1 "Ghost" "C: Clear Vision."
+send_character_message 1 "set_head_target -112.877 110.807 -140.391 1"
+vo "Data/VoiceOver/t2/hub/Inscription5.wav"
+say 1 "Ghost" "D: Truth."

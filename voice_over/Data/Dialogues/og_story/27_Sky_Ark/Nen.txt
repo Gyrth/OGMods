@@ -1,0 +1,31 @@
+#name "Nen"
+#participants 2
+send_character_message 2 "set_head_target -96.472 194.266 149.187 1"
+set_character_pos 2 -98.3813 193.413 149.903 0
+set_character_pos 1 -96.748 193.56 149.129 -159
+set_cam -94.3111 193.96 149.593 0 87.65 0 28.3206
+send_level_message "set_camera_dof 0 0 0 0.3 6 0.5"
+set_dialogue_color 2 0.9 0.7 0.5
+set_dialogue_voice 2 6
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Nen0.wav"
+say 2 "Nen" "They're letting people in?"
+send_character_message 2 "set_head_target -96.5559 194.266 149.411 1"
+send_character_message 1 "set_head_target -97.3157 193.592 150.046 1"
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Nen1.wav"
+say 1 "Turner" "Not exactly. They attacked me without warning."
+send_character_message 2 "set_head_target -97.2964 194.132 150.859 1"
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Nen2.wav"
+say 2 "Nen" "Trying to make another 'example', huh? Serves them right. Did Sky send you?"
+send_character_message 1 "set_head_target -98.0545 194.214 149.919 1"
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Nen3.wav"
+say 1 "Turner" "How do you know Sky? What's going on here?"
+send_character_message 2 "set_head_target -96.616 194.2 149.264 1"
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Nen4.wav"
+say 2 "Nen" "They used to let anyone in, as long as we knew our place, paid for the privilege, and didn't bother them."
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Nen5.wav"
+say 2 "Nen" "They would hassle us occasionally, but once they went too far, and one of us fought back. The son of an important family died, and the chief started cracking down."
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Nen6.wav"
+say 1 "Turner" "Where is this chief?"
+send_character_message 2 "set_head_target -98.3898 194.515 148.719 1"
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Nen7.wav"
+say 2 "Nen" "She's probably in the temple. Well, it used to be a temple -- she uses it more like a private bathhouse now."

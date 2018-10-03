@@ -1,0 +1,39 @@
+#name "Gates"
+#participants 5
+set_character_pos 4 -2.2995 31.0501 74.2318 -91
+send_character_message 4 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 4 "set_torso_target -2.44617 31.6265 73.8857 0"
+send_character_message 4 "set_head_target 2.1514 32.0465 81.4652 1"
+set_character_pos 3 -9.26505 31.101 82.737 68
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_pole.anm\""
+send_character_message 3 "set_head_target -2.07994 31.6171 76.9104 1"
+set_character_pos 2 6.30973 31.1016 82.9169 116
+send_character_message 2 "set_animation \"Data/Animations/swordrelax.anm\""
+send_character_message 2 "set_head_target -1.1431 31.7345 76.2661 1"
+set_character_pos 1 -1.2425 31.1154 76.2078 -90
+send_character_message 1 "set_torso_target -0.65626 31.5488 76.2232 0"
+send_character_message 1 "set_head_target 6.10511 31.8728 82.6247 1"
+set_cam 8.1022 31.9386 83.8132 0 55.94 0 23.4226
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 3 17
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/empry/Gates0.wav"
+say 2 "???" "Hey. [wait 0.5]We can't let you leave."
+send_character_message 1 "set_head_target 5.76297 31.2881 82.6245 1"
+send_character_message 1 "set_torso_target -1.20666 31.455 76.8293 1"
+set_cam 0.357785 31.7298 75.4304 0 122.86 0 23.4226
+vo "Data/VoiceOver/t2/empry/Gates1.wav"
+say 1 "You" "...[wait 0.3]why not?"
+send_character_message 1 "set_head_target -5.93183 31.5159 80.1529 1"
+send_character_message 3 "set_head_target -1.4462 31.9783 76.4206 1"
+send_character_message 3 "set_torso_target -8.74236 31.2117 82.3293 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+vo "Data/VoiceOver/t2/empry/Gates2.wav"
+say 3 "????" "Sensitive information practically flies all around the air here. [wait 0.5]Letting you go into the city, [wait 0.3]let alone the chance of you talking to the Arlissian Collective, [wait 0.3]would be stupid."
+send_character_message 1 "set_torso_target -1.20666 31.455 76.8293 0"
+send_character_message 1 "set_head_target 4.69329 31.928 80.7413 1"
+set_cam -3.30368 31.6304 75.2059 0 -129.23 0 73.2908
+send_level_message "set_camera_dof 0.3 10 10 0 0 0"
+vo "Data/VoiceOver/t2/empry/Gates3.wav"
+say 2 "???" "Don't take offense. [wait 0.5]They're just the rules, [wait 0.3]is all."

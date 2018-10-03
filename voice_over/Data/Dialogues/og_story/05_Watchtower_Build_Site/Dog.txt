@@ -1,0 +1,32 @@
+#name "Dog"
+#participants 2
+send_character_message 1 "set_head_target 215.297 87.6391 -32.178 1"
+send_character_message 2 "set_torso_target 214.59 87.2852 -32.801 1"
+send_character_message 2 "set_head_target 213.329 86.3808 -34.6267 1"
+set_dialogue_color 2 1 0.4 0.4
+set_dialogue_voice 2 9
+set_character_pos 2 215.487 86.6398 -32.2088 -172
+set_character_pos 1 208.468 80.916 -36.0266 -23
+set_cam 217.375 88.6209 -32.0752 -34.88 77.01 1.06 41.5768
+send_level_message "music_layer_override 2"
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+vo "Data/VoiceOver/og_story/05_Watchtower_Build_Site/Dog0.wav"
+say 1 "Turner" "You must be StoneFist."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+vo "Data/VoiceOver/og_story/05_Watchtower_Build_Site/Dog1.wav"
+say 2 "Stonefist" "Very clever. I don't remember which slave you are. You all look the same. Now get back to work before I kick you down the stairs."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+vo "Data/VoiceOver/og_story/05_Watchtower_Build_Site/Dog2.wav"
+say 1 "Turner" "So you're called a 'dog'. Looks more like a wolf mated with a rat. Which one was your mother?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+vo "Data/VoiceOver/og_story/05_Watchtower_Build_Site/Dog3.wav"
+say 2 "Stonefist" "Oh, I see. You want to fight. Do you have any idea how many of you I've eaten already?"
+set_character_pos 1 209.057 80.916 -35.6463 -23
+set_cam 208.142 80.9907 -36.6224 25.96 -131.36 -3.11 41.5768
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+vo "Data/VoiceOver/og_story/05_Watchtower_Build_Site/Dog4.wav"
+say 1 "Turner" "Maybe I'll slit open your belly and count."
+send_level_message "music_layer_override 4"
+make_participants_aware
+send_level_message "start_dialogue Places"
+send_character_message 2 "activate"

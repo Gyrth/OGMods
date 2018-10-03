@@ -1,0 +1,8 @@
+#name "Test"
+#participants 3
+
+set_character_pos 1 -39.4774 39.0261 142.604 0
+vo "Data/VoiceOver/t2/t/heavy/Test0.wav"
+say 1 "Auisyudfgeirgepgis" "Test!"
+vo "Data/VoiceOver/t2/t/heavy/Test1.wav"
+say 1 "Auisyudfgeirgepgis" "..."

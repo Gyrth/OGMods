@@ -1,0 +1,31 @@
+#name "Fight"
+#participants 3
+set_character_pos 2 -135.39 549.977 -45.055 -28
+send_character_message 2 "set_head_target -134.787 550.014 -43.8867 0"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 1 "set_torso_target -130.766 550.736 -42.9155 1"
+set_cam -132.966 550.609 -42.7798 0 -90.05 0 23.1262
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "music_layer_override 2"
+send_character_message 1 "set_head_target -134.669 550.4 -44.9684 1"
+set_character_pos 1 -130.246 550.051 -42.6134 159
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/tutorial/Fight0.wav"
+say 1 "You" "...[wait 0.3]huh!?"
+send_character_message 2 "set_animation \"Data/Animations/r_combatidle.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_cam -135.626 550.211 -50.632 0 -162.72 0 50.4492
+send_level_message "set_camera_dof 0 0 0 0.3 10 10"
+vo "Data/VoiceOver/t2/tutorial/Fight1.wav"
+say 1 "You" "You're here to steal someone from me!"
+send_character_message 1 "set_animation \"Data/Animations/r_combatidlethreat.anm\""
+send_character_message 2 "set_head_target -130.337 550.795 -42.647 1"
+send_character_message 1 "set_head_target -135.374 550.665 -45.1004 1"
+send_character_message 1 "set_torso_target -130.766 550.736 -42.9155 0"
+set_cam -127.098 550.448 -42.4508 0 75.92 0 67.2104
+send_level_message "set_camera_dof 0 0 0 0.3 3 2"
+vo "Data/VoiceOver/t2/tutorial/Fight2.wav"
+say 1 "You" "No more... [wait 0.3]just let me go home!"
+send_level_message "music_layer_override 4"
+send_level_message "make_participants_aware"

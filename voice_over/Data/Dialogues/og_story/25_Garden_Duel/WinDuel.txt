@@ -1,0 +1,29 @@
+#name "WinDuel"
+#participants 4
+set_character_pos 4 -99.8841 -19.8018 -135.874 105
+send_level_message "music_layer_override 2"
+send_character_message 3 "set_torso_target -98.6484 -18.6957 -140.499 1"
+send_character_message 2 "set_head_target -98.5436 -18.7579 -144.61 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_character_pos 3 -98.504 -19.343 -139.529 90
+set_character_pos 2 -98.0657 -19.3419 -143.059 129
+send_character_message 2 "set_torso_target -98.6498 -19.0797 -144.143 1"
+set_cam -99.0788 -18.6467 -145.242 -1.72 -159.61 0 47.4178
+send_character_message 3 "set_head_target -102.566 -18.1528 -138.599 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+vo "Data/VoiceOver/og_story/25_Garden_Duel/WinDuel0.wav"
+say 2 "Amethyst" "Well, that was unexpected! Jade will be hard to replace. Lucky, I'm afraid your luck has run out."
+vo "Data/VoiceOver/og_story/25_Garden_Duel/WinDuel1.wav"
+say 2 "Amethyst" "The strongest rabbit in the world is still just cat food with a pulse, and the auction must go on. Guards, dispose of this prey."
+send_character_message 3 "set_torso_target -98.6484 -18.6957 -140.499 0.343323"
+send_character_message 3 "set_head_target -98.0367 -18.3664 -143.137 1"
+send_level_message "set_camera_dof 0.3 3 0.5 0 0 0"
+vo "Data/VoiceOver/og_story/25_Garden_Duel/WinDuel2.wav"
+say 3 "Stonewall" "Amethyst, most of the guards are falling asleep, I don't know what's wrong with them --"
+send_character_message 2 "set_torso_target -99.1878 -19.0797 -144.181 1"
+send_character_message 2 "set_head_target -100.442 -18.822 -143.696 1"
+send_level_message "set_camera_dof 0 0 0 0.3 3 0.5"
+vo "Data/VoiceOver/og_story/25_Garden_Duel/WinDuel3.wav"
+say 2 "Amethyst" "How many highly trained dogs do you need for one rabbit? Just kill him!"
+send_level_message "music_layer_override 4"
+make_participants_aware

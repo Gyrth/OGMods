@@ -1,0 +1,17 @@
+#name "Ritual2"
+#participants 7
+set_character_pos 3 16.9659 15.5108 390.854 48
+set_character_pos 6 4.38177 15.5195 382.065 -30
+set_character_pos 5 5.27706 15.4719 400.172 30
+set_character_pos 4 28.7181 15.4711 398.605 150
+set_character_pos 2 26.2561 15.4948 380.835 -150
+set_character_pos 1 41.5921 31.5445 343.075 -90
+set_cam 26.8056 16.0826 378.649 0 150 0 90
+vo "Data/VoiceOver/t2/c/s3/c4-proto/Ritual20.wav"
+say 2 "beetle" "we're gonna kill you  because you're a bad khoen"
+vo "Data/VoiceOver/t2/c/s3/c4-proto/Ritual21.wav"
+say 3 "khoen" "im g onan duie"
+set_character_pos 7 16.697 42.1721 413.786 90
+set_cam 41.3128 31.9189 341.18 0 161.81 0 90
+vo "Data/VoiceOver/t2/c/s3/c4-proto/Ritual22.wav"
+say 1 "ghost" " alright t lets get out of h ere"

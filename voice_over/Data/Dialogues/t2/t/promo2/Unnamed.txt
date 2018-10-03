@@ -1,0 +1,6 @@
+#name "Unnamed"
+#participants 2
+set_character_pos 2 -236.765 -78.0762 -78.6841 -164
+send_character_message 2 "set_animation \"Data/Animations/trailersit.anm\""
+set_character_pos 1 -234.855 -78.1831 -78.2879 -51
+send_character_message 1 "set_animation \"Data/Animations/trailergaze.anm\""

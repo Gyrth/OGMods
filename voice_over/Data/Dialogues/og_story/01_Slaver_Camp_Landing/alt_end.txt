@@ -1,0 +1,9 @@
+#name "alt_end"
+#participants 1
+set_cam -153.266 72.0162 -52.6981 17.81 101.34 0 90
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_voice 1 0
+set_character_pos 1 -154.464 72.2257 -51.8344 172
+vo "Data/VoiceOver/og_story/01_Slaver_Camp_Landing/alt_end0.wav"
+say 1 "Turner" "I guess I'll leave my backpack here for now, and go this way."
+send_global_message "levelwin"

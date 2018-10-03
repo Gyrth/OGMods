@@ -1,0 +1,326 @@
+#name "Gunk"
+#participants 4
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 1.0 0.0 0.0
+set_dialogue_voice 2 6
+set_dialogue_color 3 0.7 0.7 0.89
+set_dialogue_voice 3 11
+set_character_pos 2 107.28 -40.9958 272.087 90
+send_character_message 2 "set_animation \"Data\Animations\Gunk\gunksitcrossedlegs.anm\""
+send_character_message 2 "set_eye_dir 107.286 -41.0194 271.136 0"
+send_character_message 2 "set_head_target 107.338 -41.0425 271.25 1"
+set_character_pos 1 99.5964 -40.4889 269.891 0
+send_character_message 1 "set_eye_dir 91.6126 -41.0299 269.299 1"
+send_character_message 1 "set_torso_target 91.1205 -40.4345 268.699 0"
+send_character_message 1 "set_head_target 91 -40.5546 268.693 0.0232987"
+set_cam 107.971 -40.0041 273.761 -8.07 157.26 0 40.3088
+vo "Data/VoiceOver/t2/e/b4/Gunk0.wav"
+say 2 "???" "..."
+set_cam 110.053 -41.063 268.175 0 144.54 0 40.3088
+send_character_message 1 "set_head_target 91 -40.5546 268.693 0.0232987"
+send_character_message 1 "set_torso_target 91.1205 -40.4345 268.699 0"
+send_character_message 1 "set_eye_dir 91.6126 -41.0299 269.299 1"
+set_character_pos 1 99.5964 -40.4889 269.891 0
+send_character_message 2 "set_eye_dir 107.286 -41.0194 271.136 0.127909"
+send_character_message 2 "set_head_target 107.347 -41.1793 271.233 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk1.wav"
+say 2 "???" "..."
+set_cam 108.102 -41.1629 270.093 0 150.3 0 40.3088
+send_character_message 1 "set_torso_target 104.913 -40.4667 270.479 0"
+send_character_message 1 "set_eye_dir 106.557 -40.8762 271.7 1"
+send_character_message 1 "set_head_target 106.305 -40.4121 270.394 1"
+set_character_pos 1 100.383 -40.6669 269.812 0
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_head_target 106.946 -40.8951 271.144 1"
+send_character_message 2 "set_eye_dir 105.234 -40.7694 271.31 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk2.wav"
+say 1 "Amos" "[wait 0.3]Hello?"
+send_character_message 2 "set_eye_dir 105.234 -40.7694 271.31 1"
+set_character_pos 1 100.383 -40.6669 269.812 0
+send_character_message 1 "set_eye_dir 106.557 -40.8762 271.7 1"
+send_character_message 2 "set_head_target 104.761 -40.766 271.029 1"
+send_character_message 1 "set_head_target 106.17 -41.037 271.74 1"
+set_cam 108.596 -41.139 272.039 0 79.23 0 40.3088
+vo "Data/VoiceOver/t2/e/b4/Gunk3.wav"
+say 1 "Amos" "You wanted to see me?"
+set_cam 108.596 -41.1406 272.043 0 79.23 0 40.3088
+send_character_message 1 "set_head_target 106.17 -41.037 271.74 1"
+send_character_message 2 "set_eye_dir 105.234 -40.7694 271.31 1"
+set_character_pos 1 100.383 -40.6669 269.812 0
+send_character_message 1 "set_eye_dir 106.557 -40.8762 271.7 1"
+send_character_message 2 "set_head_target 104.852 -41.1307 271.063 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk4.wav"
+say 2 "???" "Amos, [wait 0.2]please."
+set_cam 108.449 -41.0027 271.833 0 90.49 0 40.3088
+send_character_message 1 "set_head_target 106.17 -41.037 271.74 1"
+send_character_message 2 "set_eye_dir 105.234 -40.7694 271.31 1"
+set_character_pos 1 100.383 -40.6669 269.812 0
+send_character_message 1 "set_eye_dir 106.557 -40.8762 271.7 1"
+send_character_message 2 "set_head_target 107.221 -41.1266 271.201 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk5.wav"
+say 2 "???" "Come in."
+send_character_message 2 "set_head_target 107.221 -41.1266 271.201 1"
+set_cam 107.094 -41.2197 270.508 0 -170.49 0 40.3088
+send_character_message 2 "set_eye_dir 105.087 -40.5091 270.464 0.497844"
+send_character_message 1 "set_eye_dir 107.178 -40.9633 271.878 1"
+send_character_message 1 "set_head_target 107.238 -40.9957 272.023 1"
+set_character_pos 1 104.961 -40.9535 270.017 -27
+vo "Data/VoiceOver/t2/e/b4/Gunk6.wav"
+say 1 "Amos" "...[wait 0.5]Gunk?"
+send_character_message 1 "set_head_target 107.238 -40.9957 272.023 1"
+send_character_message 1 "set_eye_dir 107.178 -40.9633 271.878 1"
+send_character_message 2 "set_eye_dir 105.087 -40.5091 270.464 0.497844"
+set_character_pos 1 104.961 -40.9535 270.017 -27
+set_cam 107.094 -41.2197 270.508 0 -170.49 0 40.3088
+send_character_message 2 "set_head_target 107.111 -40.9419 271.214 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk7.wav"
+say 2 "Gunk" "It's me."
+send_character_message 1 "set_head_target 107.238 -40.9957 272.023 1"
+send_character_message 1 "set_eye_dir 107.178 -40.9633 271.878 1"
+send_character_message 2 "set_head_target 107.111 -40.9419 271.214 1"
+send_character_message 2 "set_eye_dir 105.087 -40.5091 270.464 0.497844"
+set_character_pos 1 104.961 -41.0538 270.017 -27
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_handhips.anm\""
+set_cam 106.23 -40.5168 270.489 0 71.6 0 40.3088
+vo "Data/VoiceOver/t2/e/b4/Gunk8.wav"
+say 1 "Amos" "[wait 0.3]Hell, [wait 0.4]it's really you!?"
+send_character_message 1 "set_head_target 107.238 -40.9957 272.023 1"
+send_character_message 1 "set_eye_dir 107.178 -40.9633 271.878 1"
+send_character_message 2 "set_eye_dir 105.087 -40.5091 270.464 0.497844"
+send_character_message 2 "set_head_target 106.421 -40.6746 270.77 1"
+set_cam 106.308 -40.859 271.862 0 -89.62 0 40.3088
+vo "Data/VoiceOver/t2/e/b4/Gunk9.wav"
+say 2 "Gunk" "Where else would I go?"
+send_character_message 1 "set_head_target 107.238 -40.9957 272.023 1"
+send_character_message 1 "set_eye_dir 107.178 -40.9633 271.878 1"
+set_cam 106.308 -40.859 271.862 0 -89.62 0 40.3088
+send_character_message 2 "set_eye_dir 105.087 -40.5091 270.464 0.0914507"
+send_character_message 2 "set_head_target 106.354 -41.1369 270.842 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk10.wav"
+say 2 "Gunk" "The Arliss would kill me. [wait 0.3]Kairan is unstable. [wait 0.4]The Cinderbreathe Empire is dead."
+send_character_message 1 "set_head_target 107.238 -40.9957 272.023 1"
+send_character_message 1 "set_eye_dir 107.178 -40.9633 271.878 1"
+set_cam 106.308 -40.859 271.862 0 -89.62 0 40.3088
+send_character_message 2 "set_head_target 106.24 -40.9865 270.823 1"
+send_character_message 2 "set_eye_dir 105.087 -40.5091 270.464 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk11.wav"
+say 1 "Amos" "[wait 0.4]The Cinderbreathe..."
+send_character_message 1 "set_head_target 107.238 -40.9957 272.023 1"
+send_character_message 1 "set_eye_dir 107.178 -40.9633 271.878 1"
+set_cam 106.308 -40.859 271.862 0 -89.62 0 40.3088
+send_character_message 2 "set_head_target 105.897 -40.7429 270.906 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk12.wav"
+say 2 "Gunk" "Do you not know what happened?"
+send_character_message 1 "set_head_target 106.871 -40.861 272.776 1"
+send_character_message 1 "set_eye_dir 106.761 -40.9453 271.854 1"
+set_cam 105.148 -40.39 270.878 0 3.52 0 40.3088
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+vo "Data/VoiceOver/t2/e/b4/Gunk13.wav"
+say 1 "Amos" "Oh, [wait 0.2]I know..."
+set_cam 105.148 -40.39 270.878 0 3.52 0 40.3088
+send_character_message 1 "set_head_target 106.847 -40.677 272.812 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk14.wav"
+say 1 "Amos" "[wait 0.1]I was there."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_head_target 107.321 -40.7095 272.241 1"
+set_cam 107.993 -40.8411 272.301 0 63.51 0 40.3088
+vo "Data/VoiceOver/t2/e/b4/Gunk15.wav"
+say 2 "Gunk" "Really?"
+send_character_message 1 "set_head_target 107.316 -41.0269 272.058 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk16.wav"
+say 1 "Amos" "I was travelling back to the Empry, [wait 0.1]once I escaped the 'Therium'."
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 106.252 -40.4544 270.771 0 56.89 0 40.3088
+send_character_message 1 "set_head_target 107.311 -40.8363 271.757 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk17.wav"
+say 1 "Amos" "[wait 0.2]Whatever the hell that [wait 0.4]cursed place [wait 0.3]is."
+send_character_message 1 "set_head_target 107.007 -40.6043 271.522 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk18.wav"
+say 1 "Amos" "And once I got to the Empry..."
+send_character_message 1 "set_torso_target 105.89 -40.0838 270.718 0"
+set_character_pos 1 107.454 -41.0538 269.725 -92
+send_character_message 2 "set_eye_dir 107.124 -40.2279 269.865 1"
+send_character_message 2 "set_head_target 107.148 -40.4272 269.918 1"
+set_cam 107.795 -40.836 271.359 0 142.34 0 40.3088
+vo "Data/VoiceOver/t2/e/b4/Gunk19.wav"
+say 2 "Gunk" "Them."
+set_cam 105.962 -41.1678 272.053 -5.11 -67.3 0 40.3088
+vo "Data/VoiceOver/t2/e/b4/Gunk20.wav"
+say 1 "Amos" "They were all over the place. [wait 0.3]Armed with those swords."
+send_character_message 2 "set_torso_target 107.411 -41.0415 271.271 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk21.wav"
+say 1 "Amos" "That same wild look in their eyes..."
+send_character_message 1 "set_eye_dir 107.37 -41.0954 270.838 1"
+set_cam 105.763 -40.8686 273.027 0 -39.87 0 40.3088
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+vo "Data/VoiceOver/t2/e/b4/Gunk22.wav"
+say 1 "Amos" "[wait 0.3]Maybe even more wild than I remembered."
+send_character_message 2 "set_head_target 107.546 -40.4972 270.168 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk23.wav"
+say 2 "Gunk" "Is your family alright?"
+set_cam 106.874 -40.0857 265.931 -18.5 50.13 0 35.3875
+vo "Data/VoiceOver/t2/e/b4/Gunk24.wav"
+say 1 "Amos" "All that survives of my own family is my sister, [wait 0.2]Bijou."
+set_cam 110.39 -40.4121 268.065 -29.46 -54.07 0.31 40.2127
+vo "Data/VoiceOver/t2/e/b4/Gunk25.wav"
+say 1 "Amos" "I had to get her out of there. [wait 0.2]From the fire."
+send_character_message 1 "set_head_target 107.035 -40.812 271.534 1"
+set_cam 106.879 -40.3851 270.291 0.45 -38.31 0.41 40.2127
+vo "Data/VoiceOver/t2/e/b4/Gunk26.wav"
+say 1 "Amos" "[wait 0.4]The rest of my family was already long dead, [wait 0.2]though."
+send_character_message 2 "set_head_target 107.449 -40.7594 270.278 1"
+send_character_message 1 "set_head_target 107.424 -40.8225 271.485 1"
+set_cam 107.087 -40.1402 269.252 -19.3 -164.81 -0.64 40.2127
+vo "Data/VoiceOver/t2/e/b4/Gunk27.wav"
+say 2 "Gunk" "[wait 0.3]I didn't even know they celebrated Hearthsbreath in the Empry."
+send_character_message 2 "set_head_target 107.541 -40.332 270.193 1"
+send_character_message 1 "set_head_target 107.246 -40.5728 271.747 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk28.wav"
+say 1 "Amos" "Why do you say that?"
+set_cam 106.826 -40.8161 271.439 -0.71 -138.46 -1.03 40.2127
+send_character_message 2 "set_head_target 107.371 -40.917 270.597 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk29.wav"
+say 2 "Gunk" "Well, [wait 0.3]how else would things have caught on fire?"
+send_character_message 2 "set_head_target 107.49 -40.8605 270.535 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk30.wav"
+say 2 "Gunk" "I always knew that burning all that wood for such a tradition would lead to a terrible incident."
+set_cam 107.482 -40.3128 270.451 1.14 9.93 0.51 40.2127
+vo "Data/VoiceOver/t2/e/b4/Gunk31.wav"
+say 1 "Amos" "This was before Hearthsbreath."
+send_character_message 1 "set_head_target 106.859 -40.7696 271.493 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk32.wav"
+say 1 "Amos" "I'm sure the Empry still had plenty of firewood after shipping it to the city square..."
+send_character_message 1 "set_head_target 107.105 -40.7393 271.777 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk33.wav"
+say 1 "Amos" "But nobody would start burning everything for Hearthsbreath. [wait 0.4]Not in the Empry."
+send_character_message 2 "set_head_target 107.481 -40.6674 270.518 1"
+set_cam 107.135 -41.1589 269.06 -1.14 -170.07 -0.51 40.2127
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+vo "Data/VoiceOver/t2/e/b4/Gunk34.wav"
+say 2 "Gunk" "So [wait 0.5]those monsters [wait 0.2]started the fire?"
+send_character_message 1 "set_torso_target 107.492 -41.2897 270.428 1"
+send_character_message 1 "set_head_target 107.336 -41.0592 271.345 1"
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+set_cam 105.463 -41.0065 273.005 1.06 -45.95 -0.65 40.2127
+vo "Data/VoiceOver/t2/e/b4/Gunk35.wav"
+say 1 "Amos" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_worriedpose_2.anm\""
+vo "Data/VoiceOver/t2/e/b4/Gunk36.wav"
+say 1 "Amos" "I [wait 0.2]don't know what's so [wait 0.1]disturbing about that..."
+send_character_message 1 "set_head_target 107.751 -40.9022 271.018 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk37.wav"
+say 1 "Amos" "They just felt so [wait 0.2]lifeless..."
+send_character_message 1 "set_torso_target 107.322 -40.4158 271.266 1"
+set_cam 106.729 -40.3686 270.015 0.55 -78.16 -1.11 40.2127
+send_character_message 3 "set_head_target 110.844 -43.0392 248.265 0"
+send_character_message 3 "set_eye_dir 111.221 -43.3694 249.085 1"
+set_character_pos 3 110.427 -42.9637 247.443 0
+send_character_message 2 "set_head_target 107.392 -40.4116 270.536 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk38.wav"
+say 2 "Gunk" "Like they weren't capable of any thought beyond killing?"
+send_character_message 2 "set_head_target 107.392 -40.4116 270.536 1"
+send_character_message 3 "set_head_target 110.844 -43.0392 248.265 0"
+send_character_message 3 "set_eye_dir 111.221 -43.3694 249.085 1"
+set_character_pos 3 110.427 -42.9637 247.443 0
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_worriedpose_2.anm\""
+send_character_message 1 "set_head_target 107.131 -40.7663 271.462 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk39.wav"
+say 1 "Amos" "Yeah. [wait 0.2]Exactly."
+send_character_message 1 "set_head_target 107.132 -40.7641 271.464 1"
+set_cam 107.343 -40.4795 270.805 1.24 -16.16 -0.04 26.7111
+send_character_message 3 "set_head_target 113.215 -40.5512 258.167 1"
+send_character_message 3 "set_eye_dir 113.434 -40.639 258.128 1"
+set_character_pos 3 114.194 -41.4529 256.02 -100
+send_character_message 1 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_head_target 107.392 -40.9241 270.536 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk40.wav"
+say 2 "Gunk" "..."
+send_character_message 3 "set_head_target 113.206 -40.2957 258.148 1"
+send_character_message 1 "set_head_target 108.208 -40.589 271.579 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk41.wav"
+say 3 "Bijou" "Hey, [wait 0.3]Amos!"
+set_cam 112.695 -41.4602 261.018 3.58 -19.83 -0.12 22.2579
+vo "Data/VoiceOver/t2/e/b4/Gunk42.wav"
+say 1 "Amos" "Hey, Bijou!"
+send_character_message 3 "set_animation \"Data\Animations\r_idle.anm\""
+vo "Data/VoiceOver/t2/e/b4/Gunk43.wav"
+say 3 "Bijou" "Kaja said she needed your help in the farms."
+send_character_message 3 "set_head_target 113.619 -40.9268 256.328 1"
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_worriedpose_1.anm\""
+vo "Data/VoiceOver/t2/e/b4/Gunk44.wav"
+say 3 "Bijou" "I'd do it myself, [wait 0.2]but..."
+send_character_message 3 "set_head_target 113.531 -40.7841 257.624 1"
+send_character_message 1 "set_eye_dir 109.412 -40.6283 266.209 1"
+set_cam 107.293 -40.3537 270.529 1.23 -20.97 -0.15 39.2509
+send_character_message 1 "set_head_target 108.737 -40.326 267.847 1"
+send_character_message 1 "set_torso_target 108.244 -40.4211 269.884 1"
+set_character_pos 1 107.454 -41.0538 269.725 -30
+vo "Data/VoiceOver/t2/e/b4/Gunk45.wav"
+say 1 "Amos" "Alright, [wait 0.2]I'll get to that real soon."
+send_character_message 3 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 1 "set_head_target 108.273 -40.5724 270.919 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk46.wav"
+say 3 "Bijou" "[wait 0.3]Who is he? [wait 0.3]By the fire?"
+send_character_message 1 "set_head_target 108.347 -40.5054 268.291 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk47.wav"
+say 1 "Amos" "[wait 0.4]I'm just meeting with an [wait 0.1]old friend."
+send_character_message 3 "set_head_target 113.522 -40.6794 257.607 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk48.wav"
+say 3 "Bijou" "Alright..."
+send_character_message 2 "set_eye_dir 107.124 -40.7433 269.865 0"
+send_character_message 2 "set_head_target 107.392 -41.3009 270.536 1"
+send_character_message 1 "set_head_target 108.354 -40.5054 268.306 1"
+send_character_message 1 "set_torso_target 108.151 -40.436 270.19 1"
+set_cam 107.294 -40.355 270.54 1.23 -20.97 -0.15 39.2509
+send_character_message 1 "set_eye_dir 109.414 -40.6244 266.252 1"
+send_character_message 3 "set_animation \"Data\Animations\r_actionidle.anm\""
+vo "Data/VoiceOver/t2/e/b4/Gunk49.wav"
+say 3 "Bijou" "I'll see you later."
+set_character_pos 3 102.956 -43.2934 246.654 -100
+send_character_message 1 "set_eye_dir 107.389 -40.6104 271.134 1"
+send_character_message 1 "set_torso_target 108.004 -40.4196 270.339 1"
+send_character_message 1 "set_head_target 107.393 -40.5047 271.382 1"
+set_cam 111.264 -40.6708 269.738 -0.57 103.4 1.1 44.5747
+vo "Data/VoiceOver/t2/e/b4/Gunk50.wav"
+say 1 "Amos" "..."
+set_character_pos 3 104.558 -44.7002 248.458 -100
+set_cam 107.586 -40.8156 271.295 -1.24 163.37 0.06 44.5747
+vo "Data/VoiceOver/t2/e/b4/Gunk51.wav"
+say 2 "Gunk" "[wait 0.5]Life in the farm..."
+send_character_message 1 "set_torso_target 107.66 -40.4594 271.014 1"
+set_character_pos 1 107.454 -41.0538 269.725 -90
+set_cam 107.586 -40.8156 271.295 -1.24 163.25 0.07 44.5747
+send_character_message 2 "set_head_target 107.407 -41.0113 270.531 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk52.wav"
+say 2 "Gunk" "It's better than the violence."
+send_character_message 1 "set_eye_dir 107.857 -41.0921 270.853 1"
+send_character_message 1 "set_head_target 107.92 -40.6284 271.22 1"
+set_character_pos 3 109.009 -43.3438 248.107 -100
+set_cam 107.316 -40.2941 270.474 1.23 -20.26 -0.14 39.3492
+vo "Data/VoiceOver/t2/e/b4/Gunk53.wav"
+say 1 "Amos" "[wait 0.2]I'm just glad that time is over."
+send_character_message 2 "set_eye_dir 107.124 -40.7433 269.865 1"
+send_character_message 1 "set_head_target 108.756 -40.3422 269.911 1"
+send_character_message 1 "set_torso_target 108.062 -40.409 269.385 1"
+set_character_pos 1 107.454 -41.0538 269.725 30
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_head_target 107.322 -41.2888 271.181 1"
+set_cam 107.321 -41.3609 270.356 8.02 178.41 -0.26 39.3492
+vo "Data/VoiceOver/t2/e/b4/Gunk54.wav"
+say 2 "Gunk" "Let's hope it lasts as long as it can."
+send_character_message 1 "set_torso_target 108.06 -40.4315 269.329 1"
+send_character_message 1 "set_head_target 108.687 -40.3206 269.974 1"
+set_cam 107.352 -40.2957 270.442 -0.27 -20.08 0.36 39.3801
+vo "Data/VoiceOver/t2/e/b4/Gunk55.wav"
+say 4 "" "..."
+send_character_message 1 "set_torso_target 107.874 -40.4036 269.181 1"
+send_character_message 1 "set_head_target 108.616 -40.3422 267.726 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk56.wav"
+say 4 "" "..."
+send_character_message 1 "set_head_target 108.69 -40.0952 267.723 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk57.wav"
+say 4 "" "You've completed the B path ending."
+send_character_message 1 "set_head_target 108.592 -40.2572 267.579 1"
+vo "Data/VoiceOver/t2/e/b4/Gunk58.wav"
+say 4 "T2-Dev" "Thank you for playing Therium-2."

@@ -1,0 +1,25 @@
+#name "Note-Energy"
+#participants 2
+set_character_pos 1 64.2583 -61.2897 294.631 -120
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_head_target 63.729 -61.5753 295.365 1"
+set_cam 63.8905 -61.1484 292.644 0 -179.84 0 41.8232
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s1/b/Note-Energy0.wav"
+say 1 "Ghost" "A personal journal from a guard -- [wait 0.3]pages open, [wait 0.3]quite careless..."
+send_character_message 1 "set_head_target 63.8142 -61.7003 295.309 1"
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+set_cam 63.1048 -61.2089 294.844 0 -89.54 0 49.631
+vo "Data/VoiceOver/t2/s1/b/Note-Energy1.wav"
+say 2 "Note" "Being in here is a strange experience. [wait 0.5]From first glance, [wait 0.3]these colony grounds are nothing special."
+vo "Data/VoiceOver/t2/s1/b/Note-Energy2.wav"
+say 2 "Note" "Unpredictable when it comes to biome, [wait 0.3]sure, [wait 0.3]but ultimately an average stretch of land."
+vo "Data/VoiceOver/t2/s1/b/Note-Energy3.wav"
+say 2 "Note" "Yet something within me is stirring. [wait 0.5]Sometimes, [wait 0.3]I feel as if a stiff breeze flows through me, [wait 0.3]and my fur stands on end."
+vo "Data/VoiceOver/t2/s1/b/Note-Energy4.wav"
+say 2 "Note" "I'm no poet. [wait 0.5]In fact, [wait 0.3]I hate the idea of even imitating one.
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+vo "Data/VoiceOver/t2/s1/b/Note-Energy5.wav"
+say 2 "Note" "But being here makes me want to run away and protect my soul. [wait 0.5]It's hard to explain."

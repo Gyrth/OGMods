@@ -1,0 +1,79 @@
+#name "Guards"
+#participants 5
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 5
+set_dialogue_voice 3 9
+set_dialogue_voice 4 17
+set_character_pos 3 6.2705 -0.088001 -7.42916 -152
+send_character_message 3 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 3 "set_torso_target 5.28056 -0.132574 -6.97491 0"
+send_character_message 3 "set_head_target 5.1357 0.0624106 -6.5713 1"
+set_character_pos 2 4.26227 -0.778867 -5.77687 18
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_torso_target 5.26112 -0.102457 -5.81712 0"
+send_character_message 2 "set_head_target 5.7803 0.514994 -7.08648 1"
+set_character_pos 1 18.1773 0.808334 -6.28826 -180
+send_character_message 1 "set_animation \"Data/Animations/stealthobserve.anm\""
+send_character_message 1 "set_torso_target 18.8043 1.28888 -7.22242 0"
+send_character_message 1 "set_head_target 12.0698 0.703754 -5.22975 1"
+set_cam 20.7525 1.27111 -6.73417 -5.84 93.42 0.1 26.8244
+send_level_message "set_camera_dof 0.3 5 1 0 0 0"
+vo "Data/VoiceOver/t2/s1/a4/Guards0.wav"
+say 1 "Ghost" "..."
+send_character_message 2 "set_head_target 4.15189 0.262411 -7.9896 1"
+set_cam 4.89679 -0.110376 -4.0418 0.02 12.78 0.5 26.8244
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+vo "Data/VoiceOver/t2/s1/a4/Guards1.wav"
+say 2 "???" "What's in the water? [wait 0.5]One of our ships?"
+send_character_message 3 "set_torso_target 5.24584 0.0425946 -7.09147 1"
+send_character_message 3 "set_head_target 4.79869 0.451358 -8.57458 1"
+send_character_message 2 "set_head_target 4.6356 0.357592 -7.40895 1"
+send_character_message 2 "set_torso_target 5.05735 -0.282332 -6.20914 1"
+set_cam 2.99574 -0.18541 -5.39031 6.1 -64.71 0.09 26.8244
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+vo "Data/VoiceOver/t2/s1/a4/Guards2.wav"
+say 3 "????" "Oh, [wait 0.3]no. [wait 0.5]Not ours. [wait 0.5]Not by a long shot."
+send_character_message 3 "set_head_target 5.45743 0.234515 -6.75337 1"
+send_character_message 2 "set_head_target 5.35519 0.241014 -6.62457 1"
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+vo "Data/VoiceOver/t2/s1/a4/Guards3.wav"
+say 2 "???" "Whose is it, [wait 0.3]then? [wait 0.5]And how long 'as it been there?"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam 5.38121 0.442505 -8.34841 0.22 -145.17 -0.79 26.8244
+vo "Data/VoiceOver/t2/s1/a4/Guards4.wav"
+say 3 "????" "Looks like it was built by dogs. [wait 0.5]The clan make hasn't been decided, [wait 0.3]though."
+send_character_message 2 "set_head_target 5.42681 0.299446 -6.78107 1"
+send_character_message 2 "set_torso_target 5.05735 -0.282332 -6.20914 0.116548"
+set_cam 5.82328 -0.045355 -5.91208 -0.78 91.22 0.25 26.8244
+vo "Data/VoiceOver/t2/s1/a4/Guards5.wav"
+say 2 "???" "Is it a recent ship?"
+send_character_message 2 "set_head_target 3.69706 -0.0527936 -8.52732 1"
+set_cam 6.81191 -5.11125 -43.5558 -0.33 43.12 0.15 81.9072
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+vo "Data/VoiceOver/t2/s1/a4/Guards6.wav"
+say 2 "" "..."
+send_character_message 4 "set_head_target 3.69964 -0.18017 -14.3031 1"
+send_character_message 4 "set_animation \"Data/Animations/r_bigswordarmstance.anm\""
+set_character_pos 4 1.8801 -1.26189 -21.8047 -73
+send_character_message 3 "set_head_target 5.16113 0.230478 -6.55549 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+set_cam 5.81955 -0.0453551 -5.91608 -0.78 91.22 0.25 26.8244
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+vo "Data/VoiceOver/t2/s1/a4/Guards7.wav"
+say 2 "???" "...[wait 0.3]yeah, [wait 0.3]maybe that was a stupid question."
+send_character_message 2 "set_torso_target 5.05735 -0.282332 -6.20914 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_head_target 3.77006 -0.0313636 -9.87789 1"
+send_character_message 3 "set_head_target 4.80372 0.287792 -11.9377 1"
+set_cam 6.72185 0.418946 3.1102 -3.12 8.93 0.81 18.0237
+send_level_message "set_camera_dof 0.3 20 5 0 0 0"
+vo "Data/VoiceOver/t2/s1/a4/Guards8.wav"
+say 4 "?????" "Enough babbling, [wait 0.3]already! [wait 0.5]A highly dangerous enemy of the empire is almost definitely passing through here!"
+send_character_message 2 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_character_message 4 "set_head_target 4.27706 -0.0564037 -14.4857 1"
+send_character_message 2 "set_head_target 3.84515 -0.161066 -9.86959 1"
+send_character_message 3 "set_animation \"Data/Animations/cinderbreathesalute.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 15 3"
+vo "Data/VoiceOver/t2/s1/a4/Guards9.wav"
+say 3 "????" "Yes, [wait 0.3]sir!"

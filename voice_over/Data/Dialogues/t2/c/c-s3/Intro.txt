@@ -1,0 +1,8 @@
+#name "Intro"
+#participants 2
+set_character_pos 2 10.6235 -6.28793 54.4619 -134
+set_character_pos 1 5.99086 -3.29958 59.4737 46
+set_cam 6.06793 -2.30381 61.2923 -23.45 -23.9 3.22 90
+vo "Data/VoiceOver/t2/c/c-s3/Intro0.wav"
+say 1 "ghos" "o no"
+send_level_message "make_participants_aware"

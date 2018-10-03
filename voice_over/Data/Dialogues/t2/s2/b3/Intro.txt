@@ -1,0 +1,13 @@
+#name "Intro"
+#participants 2
+set_character_pos 1 239.786 1.00774 -75.2346 -126
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_glance.anm\""
+set_cam 241.374 1.67935 -69.756 0 30.61 0 79.5243
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+vo "Data/VoiceOver/t2/s2/b3/Intro0.wav"
+say 1 "Ghost" "...[wait 0.3]what the hell is this architecture?"
+send_character_message 1 "set_head_target 227.014 1.48109 -64.6428 1"
+send_character_message 1 "set_torso_target 239.215 1.15331 -74.5818 1"
+vo "Data/VoiceOver/t2/s2/b3/Intro1.wav"
+say 1 "Ghost" "Nevermind. [wait 0.5]Time to get a move on."

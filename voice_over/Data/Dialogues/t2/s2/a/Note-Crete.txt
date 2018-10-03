@@ -1,0 +1,21 @@
+#name "Note-Crete"
+#participants 2
+set_character_pos 1 27.5341 15.2194 -123.091 -132
+send_character_message 1 "set_head_target 26.982 15.7246 -122.51 1"
+set_cam 27.1565 15.8698 -124.326 0 -175.08 0 48.9875
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 5 1"
+vo "Data/VoiceOver/t2/s2/a/Note-Crete0.wav"
+say 1 "Ghost" "An analysis on the spirit gods of the world -- [wait 0.3]assuming they're real."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 26.4049 15.8842 -123.25 0 -110.36 0 33.3467
+vo "Data/VoiceOver/t2/s2/a/Note-Crete1.wav"
+say 2 "Note" "Our ancient records have indicated to us that crete (both black and white) is created by excess energy given off by the powers of spirits (including our own Elder Spirits) as they twist the very earth beneath our feet into more desirable shapes, or affect the multitude of sentients that populate the continent of Preuwyn."
+vo "Data/VoiceOver/t2/s2/a/Note-Crete2.wav"
+say 2 "Note" "The more energy that can be observed in any given area is directly indicative of an abundance of excess energy that has been focused towards a spiritual task."
+vo "Data/VoiceOver/t2/s2/a/Note-Crete3.wav"
+say 2 "Note" "Because of this, it is reasonable for us to assume that the more crete we found within a region, the closer we find ourselves to the Elder Spirits' graveyard - That is to say, the Colonial Dominion of the Therium."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s2/a/Note-Crete4.wav"
+say 2 "Note" "Excerpt from Observances of the Elder Spirits and their Various Constructs, First Edition, Authored by Herumphal Mandru, Illuminated by Otto Vendran."

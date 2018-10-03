@@ -1,0 +1,19 @@
+#name "ML-G"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -67.6089 -9.28514 -220.917 169
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -68.1709 -8.14339 -221.472 1"
+send_character_message 1 "set_head_target -69.192 -7.78921 -221.084 1"
+set_cam -63.9705 -8.60446 -217.937 0 58.64 0 66.3989
+vo "Data/VoiceOver/Gateways/s2/ml/b3-g0.wav"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -183.19 10.5367 74.5312 0"
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch_timid.anm\""
+vo "Data/VoiceOver/Gateways/s2/ml/b3-g1.wav"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+vo "Data/VoiceOver/Gateways/s2/ml/b3-g2.wav"
+say 1 "Ghost" "Come on, [wait 0.3]work your magic..."
+send_global_message "levelwin s2-ml-b3-g"

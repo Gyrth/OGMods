@@ -1,0 +1,26 @@
+#name "Guard"
+#participants 2
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 2 "set_head_target -97.6655 136.755 114.752 0.199565"
+set_character_pos 2 -96.6213 136.299 114.804 -172
+set_character_pos 1 -98.6163 136.299 114.587 2
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+set_cam -99.8521 137.103 113.673 -5.07 -117.55 2.15 56.6852
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Guard0.wav"
+say 2 "Eagle" "I keep telling you people, you aren't welcome here."
+send_character_message 2 "set_head_target -97.6655 136.755 114.752 0.199565"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Guard1.wav"
+say 1 "Turner" "We have no choice. They'll kill us otherwise."
+send_character_message 2 "set_head_target -97.6655 136.755 114.752 0.199565"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Guard2.wav"
+say 2 "Eagle" "Not. Our. Problem."
+send_character_message 2 "set_head_target -97.6655 136.755 114.752 0.199565"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Guard3.wav"
+say 1 "Turner" "We have skills that can help you."
+send_character_message 2 "set_head_target -96.5844 138.236 116.372 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+vo "Data/VoiceOver/og_story/27_Sky_Ark/Guard4.wav"
+say 2 "Eagle" "Look, if you really want, you can climb on up and get turned down by the chief in person."

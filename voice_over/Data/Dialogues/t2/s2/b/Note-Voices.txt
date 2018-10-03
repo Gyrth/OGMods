@@ -1,0 +1,21 @@
+#name "Note-Voices"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 308.276 -1.46393 -1.14145 90
+send_character_message 1 "set_head_target 308.29 -1.33387 -1.87433 1"
+set_cam 310.028 -1.06932 -2.29601 0 114.23 0 34.0902
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/b/Note-Voices0.wav"
+say 1 "Ghost" "An ancient note. [wait 0.5]Must be hundreds of years old."
+set_cam 308.948 -0.872795 -0.238064 0 26.02 0 34.0902
+set_character_pos 1 308.276 -1.50636 -1.14145 90
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.1"
+vo "Data/VoiceOver/t2/s2/b/Note-Voices1.wav"
+say 2 "Note" "The voices hurt. [wait 0.5]I feel the god's anger worming its way into my brain, [wait 0.3]whispering sweet things into my ears."
+vo "Data/VoiceOver/t2/s2/b/Note-Voices2.wav"
+say 2 "Note" "I want to give in so badly. [wait 0.5]It would feel so good. [wait 0.5]But if I let the god inside of my soul, [wait 0.3]it will crush everything I have."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s2/b/Note-Voices3.wav"
+say 2 "Note" "I don't want to end up like Eira. [wait 0.5]I'd rather die than serve the god's whispers."

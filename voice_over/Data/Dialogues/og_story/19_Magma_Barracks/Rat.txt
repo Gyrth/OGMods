@@ -1,0 +1,17 @@
+#name "Rat"
+#participants 2
+send_character_message 2 "set_animation \"Data\Animations\r_sit_cross_legged.anm\""
+send_character_message 2 "set_head_target -17.3997 -15.1378 6.52982 1"
+set_character_pos 2 -17.1854 -15.0417 6.13246 -132
+set_character_pos 1 -18.4498 -15.0937 7.57905 45
+set_cam -17.8518 -15.1177 6.34615 0 -85.22 0 57.8892
+send_level_message "set_camera_dof 0 0 0 0.3 1 0.5"
+set_dialogue_color 2 1.0 0.6 0.4
+set_dialogue_voice 2 5
+vo "Data/VoiceOver/og_story/19_Magma_Barracks/Rat0.wav"
+say 2 "Smear" "It's not so bad down here."
+vo "Data/VoiceOver/og_story/19_Magma_Barracks/Rat1.wav"
+say 2 "Smear" "Fight well, and you'll be rewarded."
+send_character_message 2 "set_head_target -17.39 -15.4953 6.582 1"
+vo "Data/VoiceOver/og_story/19_Magma_Barracks/Rat2.wav"
+say 2 "Smear" "It's better to be a cat toy than cat food"

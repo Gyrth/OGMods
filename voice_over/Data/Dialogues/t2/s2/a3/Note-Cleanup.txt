@@ -1,0 +1,27 @@
+#name "Note-Cleanup"
+#participants 2
+set_character_pos 1 20.37 1.38351 38.2585 0
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 1 "set_head_target 21.2743 1.57836 38.2768 1"
+set_cam 19.7642 1.83985 37.1022 0 -138.82 0 55.5313
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/a3/Note-Cleanup0.wav"
+say 1 "Ghost" "A letter from an Empry lieutenant..."
+set_cam 21.5266 2.00173 38.1179 0 94.85 0 40.5844
+set_character_pos 1 20.37 1.35849 38.2585 0
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+vo "Data/VoiceOver/t2/s2/a3/Note-Cleanup1.wav"
+say 2 "Note" "The civil war wasn't that long ago, [wait 0.3]and you have to remember that. [wait 0.5]There are Cinderbreathe and Cinderblood bunkers everywhere, still."
+vo "Data/VoiceOver/t2/s2/a3/Note-Cleanup2.wav"
+say 2 "Note" "Most of them have been picked clean by random scavengers anyways, [wait 0.3]so what's the point of us trying to clean it all up?"
+vo "Data/VoiceOver/t2/s2/a3/Note-Cleanup3.wav"
+say 2 "Note" "Yeah, [wait 0.3]sure, [wait 0.3]it could host bases for bandits or raiders, [wait 0.3]but couldn't that be considered low priority over defending against the Arliss?"
+vo "Data/VoiceOver/t2/s2/a3/Note-Cleanup4.wav"
+say 2 "Note" "I suppose we can clean the bunkers we use in the case of terrorists, [wait 0.3]but that begs an even bigger question: [wait 0.5]Why waste the manpower sweeping up concrete when an unknown force is slaying our troops?"
+vo "Data/VoiceOver/t2/s2/a3/Note-Cleanup5.wav"
+say 2 "Note" "I may have missed some letters asking these same questions, [wait 0.3]and in that case, [wait 0.3]forgive me."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s2/a3/Note-Cleanup6.wav"
+say 2 "Note" "Stay my hand, [wait 0.3]Off-Site Empry Lieutenant Querida."

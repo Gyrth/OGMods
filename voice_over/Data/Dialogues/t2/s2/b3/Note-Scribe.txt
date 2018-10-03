@@ -1,0 +1,24 @@
+#name "Note-Scribe"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 21.6836 -11.5197 -187.582 -30
+send_character_message 1 "set_head_target 22.4485 -11.2246 -187.157 1"
+set_cam 19.7725 -11.0949 -185.917 0 -60 0 37.0984
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+vo "Data/VoiceOver/t2/s2/b3/Note-Scribe0.wav"
+say 1 "Ghost" "An ancient note. [wait 0.5]This must've been a speech, [wait 0.3]written down by a scribe."
+set_cam 22.6525 -10.854 -186.701 0 40.09 0 37.0984
+set_character_pos 1 21.6836 -11.4775 -187.582 -30
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+vo "Data/VoiceOver/t2/s2/b3/Note-Scribe1.wav"
+say 2 "Note" "Good people, [wait 0.3]we have no choice but to flee."
+vo "Data/VoiceOver/t2/s2/b3/Note-Scribe2.wav"
+say 2 "Note" "The demon has killed so many of us, [wait 0.3]destroyed our homes, [wait 0.3]burnt our supplies to the ground!"
+vo "Data/VoiceOver/t2/s2/b3/Note-Scribe3.wav"
+say 2 "Note" "The gods' fury has almost swallowed us; [wait 0.3]what choice do we have but to flee?"
+vo "Data/VoiceOver/t2/s2/b3/Note-Scribe4.wav"
+say 2 "Note" "Follow us, [wait 0.3]the Advisors to the golden path - [wait 0.3]towards the Altrith caverns."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s2/b3/Note-Scribe5.wav"
+say 2 "Note" "From there, [wait 0.3]we can do nothing but survive the demon's attacks and wait out the god's fury."

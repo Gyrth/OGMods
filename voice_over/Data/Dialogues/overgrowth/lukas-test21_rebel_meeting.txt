@@ -1,0 +1,17 @@
+#name "RebelMeeting"
+#participants 2
+
+set_character_pos 2 2.42182 -1.78782 4.42306 76
+set_character_pos 1 2.75714 -1.78782 2.49255 -86
+set_cam 3.37822 -1.25582 2.43758 0 124.04 0 90
+vo "Data/VoiceOver/overgrowth/lukas-test21_rebel_meeting0.wav"
+say 1 "Turner" "Cat slavers are in disarray now."
+vo "Data/VoiceOver/overgrowth/lukas-test21_rebel_meeting1.wav"
+say 1 "Turner" "We need somewhere for Rabbits to go."
+vo "Data/VoiceOver/overgrowth/lukas-test21_rebel_meeting2.wav"
+say 1 "Turner" "I've heard rumors of a sanctuary."
+vo "Data/VoiceOver/overgrowth/lukas-test21_rebel_meeting3.wav"
+say 2 "Rabbit rebel" "It's far to the east, let's go!."
+set_cam 2.94613 -1.14734 2.72588 0 46.1 0 90
+vo "Data/VoiceOver/overgrowth/lukas-test21_rebel_meeting4.wav"
+say 1 "Turner" "This is the end of the level."

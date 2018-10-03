@@ -1,0 +1,12 @@
+#name "Ritual"
+#participants 2
+set_character_pos 1 -6.78655 11.3267 328.202 0
+set_cam -1.98883 16.9693 318.106 0 -165.91 0 35.8781
+vo "Data/VoiceOver/t2/c/s3/c4-proto/Ritual0.wav"
+say 1 "gost" "wow whats g oing on there weurd"
+set_cam -12.2612 11.9125 328.274 0 -96.17 0 35.8781
+vo "Data/VoiceOver/t2/c/s3/c4-proto/Ritual1.wav"
+say 1 "ghost" "whatrever i should sneak around them"
+set_cam 35.7321 19.5622 316.681 0 -145.08 0 89.4149
+vo "Data/VoiceOver/t2/c/s3/c4-proto/Ritual2.wav"
+say 1 "gost" "that scaffolding looks promising"

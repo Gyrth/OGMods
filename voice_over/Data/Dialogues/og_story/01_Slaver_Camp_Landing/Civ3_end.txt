@@ -1,0 +1,36 @@
+#name "Civ3_end"
+#participants 2
+set_dialogue_color 2 1 0.7 0.2
+set_dialogue_voice 2 17
+send_character_message 2 "set_animation \"Data/Animations/r_woundedidle.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 6 2"
+set_cam -36.8286 23.5808 -45.437 1.02 70.85 3.57 40
+set_character_pos 1 -39.4629 23.0465 -45.858 116
+set_character_pos 2 -40.2432 23.0977 -47.1307 -72
+send_character_message 1 "set_head_target -40.5239 23.7415 -45.8103 0"
+send_character_message 1 "set_torso_target -40.2534 23.659 -45.8468 0"
+send_character_message 2 "set_head_target -39.5207 23.846 -45.91 1"
+send_character_message 2 "set_torso_target -40.0453 22.9144 -46.4513 1"
+vo "Data/VoiceOver/og_story/01_Slaver_Camp_Landing/Civ3_end0.wav"
+say 1 "Turner" "You should be safe now."
+send_character_message 2 "set_head_target -40.0909 23.4558 -46.191 1"
+send_character_message 2 "set_torso_target -40.1177 22.6673 -46.5427 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/og_story/01_Slaver_Camp_Landing/Civ3_end1.wav"
+say 2 "Vera" "Thank you! But not for long. The rest will come looking when these don't return."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+vo "Data/VoiceOver/og_story/01_Slaver_Camp_Landing/Civ3_end2.wav"
+say 1 "Turner" "Where are the others? Sounds like I'll have to pay them a visit."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_torso_target -40.2952 23.6805 -46.4671 0"
+send_character_message 2 "set_head_target -41.5839 24.5142 -47.3865 0.972708"
+send_level_message "set_camera_dof 0.3 10 10 0 0 0"
+vo "Data/VoiceOver/og_story/01_Slaver_Camp_Landing/Civ3_end3.wav"
+say 2 "Vera" "Over that bridge there, a couple hours down the path."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 1 "set_torso_target -39.8293 23.659 -46.599 1"
+send_character_message 1 "set_head_target -43.9044 23.7415 -48.0533 1"
+vo "Data/VoiceOver/og_story/01_Slaver_Camp_Landing/Civ3_end4.wav"
+say 1 "Turner" "That's a bridge? Well, please look after my things until I get back."
+send_global_message "levelwin"

@@ -1,0 +1,29 @@
+#name "Note-Spirits"
+#participants 2
+set_character_pos 1 -24.2959 420.679 -120.573 85
+send_character_message 1 "set_head_target -24.2018 421.01 -121.37 1"
+set_cam -25.6283 421.221 -119.993 0 -56.31 0 46.8474
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/prologue/Note-Spirits0.wav"
+say 1 "Ghost" "Some guards' message to [wait 0.3]who knows..."
+set_cam -23.4018 421.168 -118.903 0 12.27 0 46.8474
+send_character_message 1 "set_head_target -24.2656 420.958 -121.095 1"
+set_character_pos 1 -24.2959 420.633 -120.573 85
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+vo "Data/VoiceOver/t2/prologue/Note-Spirits1.wav"
+say 2 "Note" "Signing myself up for the construction division was a mistake. [wait 0.5]I knew it would be, [wait 0.3]she told me it would be, [wait 0.3]but here I am anyways."
+vo "Data/VoiceOver/t2/prologue/Note-Spirits2.wav"
+say 2 "Note" "I would take scouting the Drowned Streets over this. [wait 0.5]Yeah, [wait 0.3]sure, [wait 0.3]I'd get stabbed and beaten by whatever random crook comes my way."
+vo "Data/VoiceOver/t2/prologue/Note-Spirits3.wav"
+say 2 "Note" "But at least I don't have to deal with the thought that everyone I ever knew and loved will die a horrible, [wait 0.3]fiery death."
+vo "Data/VoiceOver/t2/prologue/Note-Spirits4.wav"
+say 2 "Note" "I'm not exaggerating one bit. [wait 0.5]You can say I'm just being weird all you want, [wait 0.3]but I know I'm right."
+vo "Data/VoiceOver/t2/prologue/Note-Spirits5.wav"
+say 2 "Note" "It's all folklore and myth, [wait 0.3]legend and tale, [wait 0.3]but mark my words; [wait 0.3]the spirits of the Therium will have revenge on us for every spike of crete we've stolen from them."
+vo "Data/VoiceOver/t2/prologue/Note-Spirits6.wav"
+say 2 "Note" "One day we'll go too far, [wait 0.3]and the possessed army of the gods will rain death upon us through the use of unpredictable scheming little bastards."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/prologue/Note-Spirits7.wav"
+say 2 "Note" "You can call me an idiot. [wait 0.5]But in the stories, [wait 0.3]myth always turns out true, [wait 0.3]and the naysayers suffer. [wait 0.5]This will not be an exception, [wait 0.3]for what is our life but a story?"

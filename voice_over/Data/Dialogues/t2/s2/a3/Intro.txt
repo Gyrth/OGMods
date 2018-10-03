@@ -1,0 +1,72 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 1.44911 13.7487 4.45419 120
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_kneelfist.anm\""
+send_character_message 2 "set_torso_target 2.38435 13.8838 5.87171 0"
+send_character_message 2 "set_head_target 0.0626704 6.77926 -0.227514 1"
+set_character_pos 1 -0.122621 5.98459 -1.42074 -90
+send_character_message 1 "set_animation \"Data\Animations\ghostsword_idle.anm\""
+send_character_message 1 "set_torso_target -0.602605 6.16391 0.0941693 0"
+send_character_message 1 "set_head_target -0.280846 5.88691 4.50475 1"
+set_cam 1.17128 6.2037 3.92396 0 12.16 0 26.8248
+vo "Data/VoiceOver/t2/s2/a3/Intro0.wav"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -0.753649 9.06214 4.28075 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s2/a3/Intro1.wav"
+say 2 "Jairo" "Ghost."
+set_character_pos 2 1.44911 13.4534 4.45419 120
+send_character_message 1 "set_torso_target -0.14843 7.65508 -0.497379 1"
+send_character_message 1 "set_head_target 1.01908 11.3163 2.85078 1"
+set_cam -0.86245 5.84748 -2.2073 43.53 -148.96 0 26.8248
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/a3/Intro2.wav"
+say 1 "Ghost" "Are there enemies nearby?"
+send_character_message 2 "set_head_target 0.144177 6.82187 -1.33526 1"
+send_character_message 2 "set_torso_target 1.16512 11.6625 3.87055 1"
+set_character_pos 2 1.44911 13.4273 4.45419 120
+send_character_message 2 "set_animation \"Data\Animations\r_crouch.anm\""
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+vo "Data/VoiceOver/t2/s2/a3/Intro3.wav"
+say 2 "Jairo" "All over the place. [wait 0.5]They know you're going to travel through here. [wait 0.5]They just don't know how."
+send_character_message 1 "set_torso_target -0.0311636 7.64663 -0.479119 1"
+send_character_message 2 "set_torso_target 0.544972 12.0884 3.17219 0"
+send_character_message 2 "set_head_target -0.149056 6.40953 -1.12384 1"
+vo "Data/VoiceOver/t2/s2/a3/Intro4.wav"
+say 2 "Jairo" "Every single guard is armed with a weapon of some kind. [wait 0.4]Most are equipped with armour."
+send_character_message 1 "set_torso_target -0.0290368 8.42088 -0.304782 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_shade.anm\""
+set_cam -0.123686 6.5745 1.28239 0.2 -2.71 -0.13 26.8248
+send_level_message "set_camera_dof 0 0 0 0 0 0"
+vo "Data/VoiceOver/t2/s2/a3/Intro5.wav"
+say 1 "Ghost" "Should I just find the lantern and get out...?"
+send_character_message 2 "set_torso_target 1.00306 9.36842 3.55962 1"
+set_cam 0.553596 13.4195 0.244908 -0.22 -171.4 0.09 18.9155
+send_level_message "set_camera_dof 0 0 0 0.3 6 1"
+vo "Data/VoiceOver/t2/s2/a3/Intro6.wav"
+say 2 "Jairo" "No. [wait 0.4]Not yet."
+send_character_message 2 "set_torso_target 1.00306 9.36842 3.55962 0"
+send_character_message 2 "set_head_target 0.0771782 6.81927 -1.29816 1"
+vo "Data/VoiceOver/t2/s2/a3/Intro7.wav"
+say 2 "Jairo" "You need to eliminate every single guard here. [wait 0.5]It doesn't matter how you do it."
+send_character_message 2 "set_head_target -0.291836 6.91251 -1.06417 1"
+vo "Data/VoiceOver/t2/s2/a3/Intro8.wav"
+say 2 "Jairo" "When you're done, [wait 0.3]come to the balcony on your left. [wait 0.5]By the water."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_torso_target 1.00306 9.36842 3.55962 1"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidlecrouch.anm\""
+vo "Data/VoiceOver/t2/s2/a3/Intro9.wav"
+say 2 "Jairo" "Be careful out there."
+send_character_message 1 "set_head_target -0.16047 5.31867 5.4776 1"
+send_character_message 2 "set_torso_target 24.5543 7.07565 6.15761 0"
+send_character_message 2 "set_head_target 25.8325 9.70159 6.79768 0.0285803"
+send_character_message 1 "set_torso_target -0.0290368 8.42088 -0.304782 0"
+set_cam 0.133802 7.00069 -2.1885 -14.09 176.1 0.14 38.7097
+set_character_pos 2 25.0914 6.90256 2.56021 -90
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+vo "Data/VoiceOver/t2/s2/a3/Intro10.wav"
+say 1 "Ghost" "..."

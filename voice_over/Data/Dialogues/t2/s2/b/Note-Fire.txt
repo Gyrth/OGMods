@@ -1,0 +1,23 @@
+#name "Note-Fire"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 280.025 1.59824 19.3282 -30
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 1 "set_head_target 280.778 1.89303 19.7877 1"
+set_cam 282.582 2.15028 19.4746 0 94.04 0 36.2879
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/b/Note-Fire0.wav"
+say 1 "Ghost" "An ancient note. [wait 0.3]Can barely read it."
+send_character_message 1 "set_head_target 280.635 1.86179 19.6688 1"
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 280.387 2.21897 20.5761 0 2.37 0 36.2879
+vo "Data/VoiceOver/t2/s2/b/Note-Fire1.wav"
+say 2 "Note" "Day by day, [wait 0.3]the demon kills us. [wait 0.5]We have tried everything next to fire, [wait 0.3]and even that has been discussed."
+vo "Data/VoiceOver/t2/s2/b/Note-Fire2.wav"
+say 2 "Note" "I don't want to see our forest burn. [wait 0.5]But it's possible we have to set it on fire just to flush him out."
+vo "Data/VoiceOver/t2/s2/b/Note-Fire3.wav"
+say 2 "Note" "He's impossibly strong and agile. [wait 0.5]This is nothing like a miscreant, [wait 0.3]let alone the grandest wolf in the country."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s2/b/Note-Fire4.wav"
+say 2 "Note" "[wait 0.3]God spare mercy."

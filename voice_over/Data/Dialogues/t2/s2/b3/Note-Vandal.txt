@@ -1,0 +1,21 @@
+#name "Note-Vandal"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 76.5713 -7.42899 -118.014 52
+send_character_message 1 "set_head_target 77.1148 -7.14914 -118.662 1"
+set_cam 77.2817 -6.93414 -115.997 0 8.61 0 36.7931
+vo "Data/VoiceOver/t2/s2/b3/Note-Vandal0.wav"
+say 1 "Ghost" "An ancient note. [wait 0.5]This must've been written by a citizen hundreds of years ago."
+set_cam 77.7236 -6.78617 -118.106 0 75.95 0 36.7931
+set_character_pos 1 76.5713 -7.40858 -118.014 52
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+vo "Data/VoiceOver/t2/s2/b3/Note-Vandal1.wav"
+say 2 "Note" "I've spotted the vandal. [wait 0.5]He fits the description perfectly. [wait 0.5]He moved with confidence and carried a wooden stick."
+vo "Data/VoiceOver/t2/s2/b3/Note-Vandal2.wav"
+say 2 "Note" "When he reached our food, [wait 0.3]he didn't hesitate at all before crouching down and setting everything on fire."
+vo "Data/VoiceOver/t2/s2/b3/Note-Vandal3.wav"
+say 2 "Note" "For a moment, [wait 0.3]I thought he saw me and I ran away as fast as I possibly could."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s2/b3/Note-Vandal4.wav"
+say 2 "Note" "There was anger in his eyes."

@@ -1,0 +1,36 @@
+#name "Round1Start"
+#participants 5
+set_character_pos 5 51.3501 102.112 -48.1002 72
+send_level_message "set_camera_dof 0 0 0 0.3 10 1"
+send_level_message "music_layer_override 0"
+send_level_message "crowd_override 0.5 0.5"
+send_character_message 5 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_character_pos 4 51.4089 102.05 -47.0858 19
+send_character_message 4 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 1 70.1143 107.354 -60.8058 -153
+set_cam 72.8979 109.45 -63.6206 -16.73 129.26 3.55 24.6135
+vo "Data/VoiceOver/og_story/23_Rock_Arena/Round1Start0.wav"
+say 1 "Jade" "Sapphire's team has shown skill and determination, but are they good enough to best Amethyst’'s unlikely champion, Lucky? And his friend, of course."
+send_character_message 3 "set_head_target 55.0471 102.309 -69.7464 1"
+send_character_message 2 "set_head_target 54.9668 102.267 -70.76 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_character_pos 4 47.4256 101.919 -44.4628 56
+set_character_pos 5 45.6653 102.295 -46.0204 32
+set_character_pos 2 56.0171 101.66 -71.1141 -106
+set_character_pos 3 54.7835 101.854 -71.0465 -54
+set_cam 55.371 102.224 -72.2682 4.27 -174.92 -2.58 90
+send_level_message "crowd_override"
+vo "Data/VoiceOver/og_story/23_Rock_Arena/Round1Start1.wav"
+say 2 "Bait" "I wouldn't say we're friends..."
+send_character_message 3 "set_torso_target 55.6405 102.126 -69.7628 1"
+send_character_message 3 "set_head_target 56.2806 102.253 -70.186 1"
+vo "Data/VoiceOver/og_story/23_Rock_Arena/Round1Start2.wav"
+say 3 "Turner" "I've got your back if you've got mine."
+set_cam 72.2508 108.172 -63.1716 -3.24 130.09 3.4 44.0255
+send_level_message "crowd_override 0.5 0"
+vo "Data/VoiceOver/og_story/23_Rock_Arena/Round1Start3.wav"
+say 1 "Jade" "Place your bets! Who will win? We're about to find out!"
+send_level_message "crowd_override"
+send_level_message "music_layer_override 3"
+make_participants_aware

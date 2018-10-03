@@ -1,0 +1,63 @@
+#name "Gaze"
+#participants 4
+send_character_message 2 "set_eye_dir 82.7562 -53.369 268.825 1"
+set_character_pos 3 53.5453 -50.7693 237.587 -164
+send_character_message 3 "set_animation \"Data/Animations/r_gardening_offset.anm\""
+set_character_pos 2 88.9242 -54.1259 279.271 129
+send_character_message 2 "set_animation \"Data/Animations/dialogue_leaning_left_onwall.anm\""
+send_character_message 2 "set_head_target 73.7349 -52.2208 262.193 1"
+set_character_pos 1 90.0951 -54.2524 279.329 140
+send_character_message 1 "set_head_target 88.8676 -53.3279 279.233 1"
+set_cam 87.8222 -53.6733 276.965 0 -146.8 0 31.0962
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 15
+vo "Data/VoiceOver/t2/e/b5/Gaze0.wav"
+say 1 "Amos" "Greetings."
+send_character_message 1 "set_head_target 88.8339 -53.4241 279.218 1"
+vo "Data/VoiceOver/t2/e/b5/Gaze1.wav"
+say 2 "???" "..."
+send_character_message 1 "set_torso_target 89.6613 -54.1367 278.945 1"
+send_character_message 1 "set_head_target 88.8705 -53.49 279.246 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handneck.anm\""
+vo "Data/VoiceOver/t2/e/b5/Gaze2.wav"
+say 1 "Amos" "Hello...?"
+send_character_message 2 "set_eye_dir 89.7115 -53.4726 279.269 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 2 "set_torso_target 88.4925 -54.0516 278.21 1"
+send_character_message 2 "set_head_target 88.7313 -53.7327 278.058 1"
+vo "Data/VoiceOver/t2/e/b5/Gaze3.wav"
+say 2 "???" "Oh -- [wait 0.3]sorry. [wait 0.5]Had my mind on other things."
+send_character_message 1 "set_head_target 88.9084 -53.3705 279.278 1"
+send_character_message 2 "set_head_target 89.4136 -53.3662 278.914 1"
+vo "Data/VoiceOver/t2/e/b5/Gaze4.wav"
+say 1 "Amos" "Other things?"
+send_character_message 2 "set_eye_dir 82.7555 -52.5537 269.452 1"
+send_character_message 2 "set_head_target 85.1066 -53.0751 274.841 1"
+send_character_message 2 "set_torso_target 88.4925 -54.0516 278.21 0"
+set_cam 91.2797 -53.5693 277.909 0 129.62 0 31.0962
+vo "Data/VoiceOver/t2/e/b5/Gaze5.wav"
+say 2 "???" "It's obvious, [wait 0.3]isn't it?"
+send_character_message 1 "set_torso_target 89.6613 -54.1367 278.945 0"
+send_character_message 2 "set_torso_target 88.4518 -53.4644 278.343 1"
+send_character_message 2 "set_head_target 85.091 -52.6361 274.751 1"
+vo "Data/VoiceOver/t2/e/b5/Gaze6.wav"
+say 2 "???" "I know I'd probably never even chance a conversation, [wait 0.3]let alone..."
+send_character_message 3 "set_head_target 52.8226 -50.7934 237.767 0.000564665"
+send_character_message 3 "set_animation \"Data/Animations/r_actionidle_yawn.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_head_target 82.5745 -52.7313 271.107 1"
+set_cam 94.643 -53.862 285.014 2.08 41.86 0 9.17819
+vo "Data/VoiceOver/t2/e/b5/Gaze7.wav"
+say 1 "Amos" "Ahh. [wait 0.5]Kaja."
+send_character_message 3 "set_animation \"Data/Animations/r_gardening.anm\""
+send_character_message 3 "set_head_target 44.8161 -47.2604 244.342 1"
+send_character_message 2 "set_torso_target 88.4518 -53.4644 278.343 0"
+send_character_message 2 "set_head_target 85.091 -53.1358 274.751 1"
+send_character_message 1 "set_head_target 88.8437 -53.4214 279.208 1"
+set_cam 86.4901 -53.4944 277.698 -1.94 -116.79 -0.76 22.8075
+vo "Data/VoiceOver/t2/e/b5/Gaze8.wav"
+say 2 "???" "She probably doesn't even have enough time to talk. [wait 0.5]But even if I were just in the fields with her..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+vo "Data/VoiceOver/t2/e/b5/Gaze9.wav"
+say 1 "Amos" "...[wait 0.3]hmm. [wait 0.5]Can't relate."

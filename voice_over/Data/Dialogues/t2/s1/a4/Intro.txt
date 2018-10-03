@@ -1,0 +1,50 @@
+#name "Intro"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.0 0.95
+set_dialogue_voice 2 3
+set_character_pos 2 22.7964 1.51124 14.5994 71
+send_character_message 2 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 2 "set_torso_target 23.401 0.555699 13.0742 0"
+send_character_message 2 "set_head_target 25.0462 1.34717 5.36665 1"
+set_character_pos 1 25.6017 0.87702 3.80159 -113
+send_character_message 1 "set_torso_target 25.2597 1.1575 4.50274 1"
+send_character_message 1 "set_head_target 23.5496 1.70241 11.5325 1"
+set_cam 25.6107 1.47097 2.04682 0 172.84 0 27.681
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+send_level_message "therium2_enable_object 530"
+send_level_message "therium2_enable_object 535"
+vo "Data/VoiceOver/t2/s1/a4/Intro0.wav"
+say 1 "Ghost" "What am I here for now, [wait 0.3]Jairo?"
+set_cam 22.5698 1.70335 12.5195 0 -170.54 0 23.6202
+send_character_message 2 "set_head_target 25.2255 1.59199 5.33601 1"
+vo "Data/VoiceOver/t2/s1/a4/Intro1.wav"
+say 2 "Jairo" "You just have to make your way through."
+send_character_message 2 "set_head_target 25.1269 1.72939 4.46403 1"
+vo "Data/VoiceOver/t2/s1/a4/Intro2.wav"
+say 2 "Jairo" "Eliminate any enemies as you see fit, [wait 0.3]though I'd advise you kill them all."
+send_character_message 2 "set_head_target 25.3239 1.06857 4.40868 1"
+vo "Data/VoiceOver/t2/s1/a4/Intro3.wav"
+say 2 "Jairo" "You'll receive further instructions in the next gateway."
+send_character_message 1 "set_head_target 23.8127 1.57062 11.8016 1"
+send_character_message 1 "set_torso_target 25.2806 1.02191 4.45769 1"
+set_cam 26.0504 1.37414 6.41778 0 10.78 0 23.6202
+vo "Data/VoiceOver/t2/s1/a4/Intro4.wav"
+say 1 "Ghost" "Is there only one gateway here?"
+send_character_message 1 "set_torso_target 24.8835 1.02191 1.66553 1"
+set_character_pos 1 25.6017 0.87702 3.80159 127
+set_cam 24.3668 1.73008 14.1486 0 96.59 0 23.6202
+vo "Data/VoiceOver/t2/s1/a4/Intro5.wav"
+say 2 "Jairo" "It's on the other side of this cavern."
+send_character_message 2 "set_head_target 25.466 1.68959 4.29085 1"
+vo "Data/VoiceOver/t2/s1/a4/Intro6.wav"
+say 2 "Jairo" "There's armed enemies all around, [wait 0.3]though. [wait 0.5]Watch yourself and be wary."
+send_character_message 1 "set_head_target 20.949 1.57062 -3.3402 1"
+send_character_message 1 "set_torso_target 23.8255 1.02191 -0.589828 1"
+set_character_pos 1 24.1576 0.87702 0.541245 123
+set_cam 25.5717 1.48328 3.2369 0 32.71 0 23.6202
+vo "Data/VoiceOver/t2/s1/a4/Intro7.wav"
+say 1 "Ghost" "Got it."
+send_level_message "therium2_disable_object 530"
+send_level_message "therium2_disable_object 535"

@@ -1,0 +1,9 @@
+#name "BeginningDoor"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 2.62986 -5.76951 2.00718 90
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+set_cam 0.651899 -5.27741 12.2597 0 -16.58 0 42.3425
+vo "Data/VoiceOver/t2/s1/a5/BeginningDoor0.wav"
+say 1 "Ghost" "Oh hell... [wait 0.3]the door's locked."

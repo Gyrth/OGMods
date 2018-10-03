@@ -1,0 +1,12 @@
+#name "BarracksCutscene"
+#participants 2
+
+set_character_pos 1 16.7398 -1.80174 6.74013 170
+set_cam 16.1857 -1.10017 6.58726 0 -108.17 0 90
+vo "Data/VoiceOver/overgrowth/lukas-test20_barracks_cutscene0.wav"
+say 1 "Cat Friend" "This is some important information which will drive the plot forward."
+set_cam 1.46888 -1.15721 0.197361 0 51.22 0 90
+vo "Data/VoiceOver/overgrowth/lukas-test20_barracks_cutscene1.wav"
+say 2 "Turner" "Thank you for this valuable information."
+vo "Data/VoiceOver/overgrowth/lukas-test20_barracks_cutscene2.wav"
+say 2 "Turner" "This is the end of the level."

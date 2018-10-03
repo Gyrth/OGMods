@@ -1,0 +1,59 @@
+#name "Raiders"
+#participants 3
+set_character_pos 3 -153.031 23.031 64.971 -67
+send_character_message 3 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 3 "set_eye_dir -154.191 23.6777 65.9374 1"
+send_character_message 3 "set_torso_target -153.583 23.3546 66.7369 1"
+send_character_message 3 "set_head_target -154.281 23.6998 66.0299 1"
+set_character_pos 2 -154.103 23.2107 65.8759 -14
+send_character_message 2 "set_animation \"Data\Animations\r_idle.anm\""
+send_character_message 2 "set_eye_dir -152.851 23.6049 64.9147 1"
+send_character_message 2 "set_torso_target -154.598 24.3584 66.5421 0"
+send_character_message 2 "set_head_target -152.849 23.5896 65.0197 1"
+set_character_pos 1 -165.546 23.5656 65.9793 16
+send_character_message 1 "set_animation \"Data\Animations\r_crouch_sad.anm\""
+send_character_message 1 "set_eye_dir -163.998 23.6929 65.7033 1"
+send_character_message 1 "set_head_target -163.772 23.5753 65.7784 1"
+set_cam -153.447 23.4208 67.8451 -0.55 0.97 -0.17 47.3807
+vo "Data/VoiceOver/LugaruStory/Raider_patrol/Raiders0.wav"
+say 3 "Hawk" "Too easy. [wait 0.3]Thought the boss said there was some kind of war hero there."
+set_character_pos 3 -153.031 22.6825 64.971 -67
+set_character_pos 2 -154.103 22.7016 65.8759 11
+send_character_message 2 "set_torso_target -153.274 23.234 65.9069 1"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_cam -151.192 23.4289 64.851 0 104.63 0 35.0279
+send_character_message 3 "set_animation \"Data\Animations\r_idle.anm\""
+vo "Data/VoiceOver/LugaruStory/Raider_patrol/Raiders1.wav"
+say 2 "Snivel" "He just walked right into our trap. [wait 0.2]He's done."
+send_character_message 2 "set_torso_target -153.274 23.234 65.9069 1"
+send_character_message 3 "set_torso_target -152.787 23.1037 66.1368 1"
+send_character_message 3 "set_head_target -152.693 23.6233 66.0739 1"
+send_character_message 2 "set_head_target -152.939 23.5822 64.9966 1"
+set_cam -154.249 23.4542 67.5624 -0.58 -16.08 0 39.2518
+vo "Data/VoiceOver/LugaruStory/Raider_patrol/Raiders2.wav"
+say 3 "Hawk" "Better hope so. [wait 0.2]Don't think he'd like what you did with his family."
+send_character_message 3 "set_torso_target -153.162 23.1037 66.0248 1"
+send_character_message 2 "set_torso_target -153.274 23.234 65.9069 1"
+send_character_message 3 "set_head_target -153.716 23.4448 66.2759 1"
+send_character_message 2 "set_head_target -153.126 24.2422 66.1075 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_2handneck.anm\""
+set_cam -151.192 23.4289 64.851 0 104.63 0 35.0279
+vo "Data/VoiceOver/LugaruStory/Raider_patrol/Raiders3.wav"
+say 2 "Snivel" "Heh. [wait 0.2]You hear how she screamed his name at the end?"
+send_character_message 2 "set_head_target -152.89 23.493 65.5513 1"
+send_character_message 2 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_torso_target -153.297 23.4054 66.0576 1"
+send_character_message 3 "set_torso_target -152.752 22.5173 65.9114 1"
+send_character_message 3 "set_head_target -152.807 23.2145 66.1189 1"
+set_cam -154.249 23.4542 67.5624 -0.58 -16.08 0 39.2518
+vo "Data/VoiceOver/LugaruStory/Raider_patrol/Raiders4.wav"
+say 3 "Hawk" "Lot of good that did."
+send_character_message 3 "set_head_target -154.105 23.5043 65.8583 1"
+send_character_message 3 "set_torso_target -153.493 23.2514 65.7392 0.999628"
+set_character_pos 1 -165.471 23.0403 65.9577 16
+send_character_message 2 "set_head_target -153.01 23.5396 65.0787 1"
+send_character_message 2 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 2 "set_torso_target -153.291 23.234 65.9532 1"
+set_cam -168.524 23.3503 65.1487 0 -91.54 0 38.3036
+vo "Data/VoiceOver/LugaruStory/Raider_patrol/Raiders5.wav"
+say 2 "Snivel" "Just sorry he wasn't there to see it."

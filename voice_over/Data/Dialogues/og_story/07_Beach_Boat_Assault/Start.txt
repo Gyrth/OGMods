@@ -1,0 +1,55 @@
+#name "Start"
+#participants 3
+send_character_message 2 "set_torso_target -192.255 32.7018 185.673 1"
+send_character_message 2 "set_head_target -191.193 33.1663 185.655 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+set_dialogue_color 1 0.6 1 0.6
+set_dialogue_color 2 0.8 0.7 1
+set_dialogue_color 3 1 0.7 0.5
+set_character_pos 3 -193.712 32.4347 184.752 0
+set_character_pos 2 -192.425 32.2379 184.617 -89
+set_character_pos 1 -192.986 32.3689 186.328 20
+set_cam -194.541 33.0683 185.456 0 -82.63 0 90
+send_level_message "music_layer_override 0"
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start0.wav"
+say 3 "Slate" "Here we are. The Windcutter. The ship that brought us to this horrible place."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+set_character_pos 3 -193.712 32.4347 184.752 0
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start1.wav"
+say 1 "Turner" "It's... beautiful."
+send_character_message 2 "set_torso_target -191.672 32.8093 185.655 0"
+send_character_message 2 "set_head_target -192.228 32.4449 185.459 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start2.wav"
+say 2 "Sky" "Not to me. Silver and his gang are there, and its hold has seen more than its share of suffering."
+send_character_message 1 "set_torso_target -192.203 32.771 185.813 1"
+send_character_message 1 "set_head_target -192.347 32.7693 184.617 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start3.wav"
+say 1 "Turner" "Haven't we all."
+send_character_message 2 "set_head_target -193.019 33.0788 186.244 1"
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start4.wav"
+say 2 "Sky" "On the voyage, if a slave got sick, Silver would break their legs and throw them overboard, and watch them try to swim while the crew laughed."
+send_character_message 1 "set_head_target -191.757 32.4862 185.39 1"
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start5.wav"
+say 1 "Turner" "Okay. That's pretty bad."
+send_character_message 1 "set_torso_target -192.203 32.771 185.813 0.0350296"
+send_character_message 1 "set_head_target -191.312 32.8166 185.781 0"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start6.wav"
+say 1 "Turner" "This town looks deserted -- where is everyone?"
+send_character_message 2 "set_head_target -190.912 33.0788 185.848 1"
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start7.wav"
+say 2 "Sky" "Silver hired the worst of them, and the rest were rounded up as slaves, or killed. This is his town now."
+send_character_message 2 "set_head_target -193.357 33.0788 185.433 1"
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start8.wav"
+say 2 "Sky" "There's at least seven collaborators here. Slate and I could distract a few by..."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start9.wav"
+say 1 "Turner" "I'll handle it. I'm not in the mood to share."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+vo "Data/VoiceOver/og_story/07_Beach_Boat_Assault/Start10.wav"
+say 2 "Sky" "Fine. Just remember, we're trying to get on the ship, not slaughter everyone."
+send_level_message "music_layer_override -1"
+set_character_pos 2 -192.601 32.2379 184.308 -26
+send_character_message 2 "set_animation \"Data/Animations/r_actionidlecrouch.anm\""

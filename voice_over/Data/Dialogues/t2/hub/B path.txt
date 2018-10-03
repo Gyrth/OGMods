@@ -1,0 +1,15 @@
+set_character_pos 1 -126.49 118.355 -94.3435 -91
+send_character_message 1 "set_head_target -126.336 121.439 -90.4703 1"
+set_cam -123.345 118.228 -99.558 9.98 165.82 -1.13 56.9549
+#name "B path"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 20 1"
+vo "Data/VoiceOver/t2/hub/B path0.wav"
+say 2 "" "If you choose this path..."
+vo "Data/VoiceOver/t2/hub/B path1.wav"
+say 2 "" "Know that you will need willpower."
+vo "Data/VoiceOver/t2/hub/B path2.wav"
+say 2 "" "If you choose this path..."
+send_character_message 1 "set_head_target -126.431 119.281 -90.5023 1"
+vo "Data/VoiceOver/t2/hub/B path3.wav"
+say 2 "" "Step forward."

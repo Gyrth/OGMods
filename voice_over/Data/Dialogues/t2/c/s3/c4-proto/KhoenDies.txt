@@ -1,0 +1,14 @@
+#name "KhoenDies"
+#participants 7
+set_character_pos 3 16.706 42.1849 413.813 90
+set_character_pos 1 36.198 34.3467 361.294 -90
+set_cam 16.6171 42.3652 411.44 0 180 0 90
+vo "Data/VoiceOver/t2/c/s3/c4-proto/KhoenDies0.wav"
+say 3 "advisor" "conga r ats on kiling the bad khoen"
+set_cam 35.7347 34.3955 363.974 0 0 0 90
+vo "Data/VoiceOver/t2/c/s3/c4-proto/KhoenDies1.wav"
+say 3 "adviosroo" "later nerds"
+set_character_pos 3 15.7028 53.6138 424.086 90
+set_cam 36.8952 35.2086 360.179 0 145.16 0 71.7069
+vo "Data/VoiceOver/t2/c/s3/c4-proto/KhoenDies2.wav"
+say 1 "Ghost" "i can  jump on these spikes"

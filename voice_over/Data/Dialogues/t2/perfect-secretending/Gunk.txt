@@ -1,0 +1,46 @@
+#name "Gunk"
+#participants 3
+set_character_pos 2 266.4 -12.2035 -58.6463 61
+send_character_message 2 "set_animation \"Data/Animations/Gunk/gunkactionidle.anm\""
+set_character_pos 1 267.43 -12.4108 -60.9091 -108
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 1 "set_head_target 267.445 -11.8725 -59.9785 0"
+set_cam 266.438 -11.3729 -57.1368 -7.6 -7.48 0 35.2019
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 1.0 0.0 0.0
+set_dialogue_voice 2 6
+vo "Data/VoiceOver/t2/perfect-secretending/Gunk0.wav"
+say 1 "Ghost" "Hey, [wait 0.3]Gunk, [wait 0.3]what am I doing here?"
+send_character_message 2 "set_torso_target 266.998 -11.9653 -59.2761 1"
+send_character_message 2 "set_head_target 267.52 -11.6463 -60.71 1"
+set_cam 267.173 -11.4638 -59.4773 -0.98 136.91 0.7 35.2019
+vo "Data/VoiceOver/t2/perfect-secretending/Gunk1.wav"
+say 2 "Gunk" "You tell me. [wait 0.5]You're the one who loaded the level file."
+send_character_message 2 "set_head_target 267.52 -11.3895 -60.71 1"
+send_character_message 2 "set_torso_target 266.998 -11.4689 -59.2761 1"
+vo "Data/VoiceOver/t2/perfect-secretending/Gunk2.wav"
+say 2 "Gunk" "In fact, [wait 0.3]that was a really bad idea. [wait 0.5]You could've completely spoiled yourself."
+set_cam 267.581 -11.7068 -59.7675 1.13 12.03 0.4 35.2019
+send_character_message 1 "set_head_target 266.406 -11.3888 -58.8167 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+vo "Data/VoiceOver/t2/perfect-secretending/Gunk3.wav"
+say 1 "Ghost" "Well, [wait 0.3]I didn't want to find out how to get here. [wait 0.5]I'm busy enough as it is."
+set_cam 265.383 -11.5421 -59.2379 -0.4 -116.83 -1.13 35.2019
+vo "Data/VoiceOver/t2/perfect-secretending/Gunk4.wav"
+say 2 "Gunk" "Fine. [wait 0.5]While you're at it, [wait 0.3]maybe you should try using the F key on the Jairo fight. [wait 0.5]See how that goes."
+send_character_message 2 "set_head_target 265.332 -11.5149 -59.2639 1"
+send_character_message 1 "set_head_target 266.215 -11.3971 -58.874 1"
+send_character_message 2 "set_torso_target 265.929 -12.0555 -59.0703 1"
+vo "Data/VoiceOver/t2/perfect-secretending/Gunk5.wav"
+say 2 "Gunk" "Oops! [wait 0.5]Spoilers!"
+send_character_message 2 "set_torso_target 266.788 -11.6995 -59.1577 1"
+send_character_message 2 "set_head_target 267.605 -11.5149 -60.706 1"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 1 "set_head_target 266.461 -11.8737 -58.7092 1"
+set_cam 266.597 -11.6923 -60.4076 0.67 -63.87 -1 47.3132
+vo "Data/VoiceOver/t2/perfect-secretending/Gunk6.wav"
+say 1 "Ghost" "Wow, [wait 0.3]that was a pretty big plot twist you just ruined."
+set_cam 267.708 -11.6297 -62.8656 -1.2 168.55 0.08 64.1945
+vo "Data/VoiceOver/t2/perfect-secretending/Gunk7.wav"
+say 2 "Gunk" "Your fault, [wait 0.3]not mine."

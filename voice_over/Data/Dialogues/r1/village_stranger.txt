@@ -1,0 +1,19 @@
+#name "Stranger"
+#participants 2
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_welcome.anm\""
+send_character_message 1 "set_eye_dir 102.196 -50.2359 250.411 1"
+set_character_pos 2 102.03 -51.6488 250.434 0
+set_character_pos 1 104.568 -52.2126 249.929 -146
+send_character_message 1 "set_torso_target 103.063 -51.2395 250.331 0"
+send_character_message 1 "set_head_target 101.952 -50.31 250.284 1"
+set_cam 99.1278 -50.8047 249.574 -6.42 -100.03 -2.43 24.2712
+vo "Data/VoiceOver/r1/village_stranger0.wav"
+say 1 "Turner" "Lost, friend?"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 2 "set_eye_dir 104.521 -51.2325 249.946 1"
+send_character_message 2 "set_head_target 103.261 -51.485 250.543 1"
+send_character_message 2 "set_animation \"Data\Animations\r_combatidle2threat.anm\""
+set_cam 107.158 -51.3692 248.344 0.49 117.07 6.17 19.9803
+vo "Data/VoiceOver/r1/village_stranger1.wav"
+say 2 "Stranger" "..."
+send_level_message "make_all_aware"

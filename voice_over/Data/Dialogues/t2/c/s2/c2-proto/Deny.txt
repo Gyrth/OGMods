@@ -1,0 +1,9 @@
+#name "Deny"
+#participants 2
+set_character_pos 2 -11.1986 53.2254 88.5703 90
+set_character_pos 1 -10.9713 53.2045 86.6444 -90
+vo "Data/VoiceOver/t2/c/s2/c2-proto/Deny0.wav"
+say 1 "Ghost" "I don't want you to help me."
+set_character_pos 2 27.0375 59.1726 145.844 90
+vo "Data/VoiceOver/t2/c/s2/c2-proto/Deny1.wav"
+say 2 "Jairo" "k"

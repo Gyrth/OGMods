@@ -1,0 +1,20 @@
+#name "NL-G"
+#participants 1
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -184.646 8.84513 74.0562 -16
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_eye_dir -185.208 9.98688 73.5013 1"
+send_character_message 1 "set_head_target -183.19 10.5367 74.5312 1"
+set_cam -185.83 9.5746 70.9311 0 -150.31 0 66.3989
+send_level_message "set_camera_dof 0 0 0 0.3 10 2"
+vo "Data/VoiceOver/t2/s2/b2/NL-G0.wav"
+say 1 "Ghost" "..."
+send_character_message 1 "set_head_target -183.19 10.5367 74.5312 0"
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+vo "Data/VoiceOver/t2/s2/b2/NL-G1.wav"
+say 1 "Ghost" "..."
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s2/b2/NL-G2.wav"
+say 1 "Ghost" "Why are they here...?"
+send_global_message "levelwin s2-nl-b2-g"

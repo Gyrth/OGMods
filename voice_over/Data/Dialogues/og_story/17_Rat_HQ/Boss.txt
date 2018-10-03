@@ -1,0 +1,19 @@
+#name "Boss"
+#participants 3
+send_character_message 3 "set_head_target 1.8988 3.87135 93.5621 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle_crouch_knife_threat.anm\""
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 1 "set_head_target 2.87215 3.57983 100.825 1"
+set_character_pos 3 2.67686 3.16283 100.676 122
+set_character_pos 2 1.40025 3.21446 100.98 94
+set_character_pos 1 1.74518 3.01496 93.812 -70
+set_cam 2.68987 3.63914 91.0655 0 171.09 0 33.0317
+vo "Data/VoiceOver/og_story/17_Rat_HQ/Boss0.wav"
+say 1 "Turner" "I just want my friend. You don't have to die."
+send_character_message 3 "set_head_target 2.37689 2.7459 98.1341 1"
+send_character_message 3 "set_animation \"Data/Animations/r_actionidle_knife_threat.anm\""
+set_dialogue_color 3 1.0 0.5 0.1
+vo "Data/VoiceOver/og_story/17_Rat_HQ/Boss1.wav"
+say 3 "Cuspid" "This is rat business, long-ears. You have no right to interfere."
+send_level_message "music_layer_override 4"
+make_participants_aware

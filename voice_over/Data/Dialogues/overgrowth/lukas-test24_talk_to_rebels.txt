@@ -1,0 +1,17 @@
+#name "TalkToRebels"
+#participants 2
+
+set_character_pos 2 -74.5456 74.5985 127.705 72
+set_character_pos 1 -73.3289 74.3583 124.963 -100
+set_cam -73.2506 75.2536 126.812 0 139.47 0 90
+vo "Data/VoiceOver/overgrowth/lukas-test24_talk_to_rebels0.wav"
+say 2 "Rabbit rebel" "You're back!"
+set_cam -73.2069 75.1145 125.392 0 23.82 0 90
+vo "Data/VoiceOver/overgrowth/lukas-test24_talk_to_rebels1.wav"
+say 1 "Turner" "Yes, the sanctuary is safe now."
+set_cam -74.2523 75.3302 127.444 0 118 0 90
+vo "Data/VoiceOver/overgrowth/lukas-test24_talk_to_rebels2.wav"
+say 2 "Rabbit rebel" "Neat!"
+set_cam -73.2863 75.1019 125.247 0 6.86 0 90
+vo "Data/VoiceOver/overgrowth/lukas-test24_talk_to_rebels3.wav"
+say 1 "Turner" "This is the end of the level."

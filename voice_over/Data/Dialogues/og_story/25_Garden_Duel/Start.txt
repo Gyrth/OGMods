@@ -1,0 +1,47 @@
+#name "Start"
+#participants 4
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_character_message 2 "set_torso_target -98.6222 -18.4179 -144.078 1"
+send_character_message 2 "set_head_target -99.2789 -18.2599 -143.834 1"
+set_character_pos 2 -98.2433 -19.3472 -142.9 102
+set_dialogue_color 3 0.4 0.4 1.0
+set_cam -97.1298 -17.2394 -139.855 -28.98 42.44 2.97 63.4427
+send_level_message "set_camera_dof 0 0 0 0.3 9 0.4"
+send_level_message "music_layer_override 2"
+vo "Data/VoiceOver/og_story/25_Garden_Duel/Start0.wav"
+say 2 "Amethyst" "Distinguished guests, we have such a treat for you tonight!"
+vo "Data/VoiceOver/og_story/25_Garden_Duel/Start1.wav"
+say 2 "Amethyst" "Allow me to present Lucky, king of a distant island ruled by flop-ears, where cats are nothing but legends, feared and revered as gods."
+send_character_message 2 "set_head_target -99.2789 -18.2598 -143.834 1"
+send_character_message 2 "set_torso_target -98.6221 -18.4179 -144.078 1"
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 3 "set_head_target -89.5467 -18.7256 -144.925 1"
+set_cam -104.784 -17.6408 -142.209 -11.18 -77.71 -1.67 29.9318
+send_level_message "set_camera_dof 0.3 10 0.5 0 0 0"
+set_character_pos 3 -81.2715 -20.4972 -150.243 -162
+vo "Data/VoiceOver/og_story/25_Garden_Duel/Start2.wav"
+say 3 "Sapphire" "I'll give you 20 slaves for his lucky feet!"
+send_character_message 2 "set_head_target -93.1382 -18.955 -146.41 1"
+send_character_message 2 "set_torso_target -97.8277 -18.4179 -144.078 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 10 0.5"
+set_character_pos 1 -106.978 -28.1073 -151.02 0
+set_character_pos 4 -94.4753 -28.2295 -150.722 176
+vo "Data/VoiceOver/og_story/25_Garden_Duel/Start3.wav"
+say 2 "Amethyst" "Patience, Sapphire. Don't be uncouth. Bidding doesn't start until after the fight."
+send_character_message 2 "set_head_target -94.6273 -21.594 -149.025 1"
+send_character_message 2 "set_torso_target -97.7968 -18.6953 -144.644 1"
+vo "Data/VoiceOver/og_story/25_Garden_Duel/Start4.wav"
+say 2 "Amethyst" "And on the other side..."
+send_character_message 4 "set_animation \"Data/Animations/c_actionidle.anm\""
+set_cam -109.861 -27.5106 -151.717 -2.22 -98.45 1.14 23.9831
+send_level_message "set_camera_dof 0.4 6 1 0 0 0"
+vo "Data/VoiceOver/og_story/25_Garden_Duel/Start5.wav"
+say 4 "Jade" "I need no introduction. Today I will demonstrate that even the best flop-ear fighter is no match for a true feline fencer."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_level_message "set_camera_dof 0 0 0 0.3 9 0.4"
+vo "Data/VoiceOver/og_story/25_Garden_Duel/Start6.wav"
+say 1 "Turner" "I don't need to boast. My history speaks for itself. Let's get this over with."
+send_level_message "music_layer_override 3"
+send_character_message 1 "equip_item 817"
+make_participants_aware

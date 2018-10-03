@@ -1,0 +1,9 @@
+#name "Talk"
+#participants 2
+send_character_message 2 "set_animation \"Data/Animations/r_hammering_wall_loop.anm\""
+set_character_pos 1 50.9255 116.004 -20.1087 90
+set_cam 48.2589 116.624 -18.7041 0 -45.04 0 58.3578
+vo "Data/VoiceOver/t2/c/s2/c/Talk0.wav"
+say 1 "Ghost" "sup bud"
+vo "Data/VoiceOver/t2/c/s2/c/Talk1.wav"
+say 2 "Cat" "I'll have like way different dialogue depending on lethality but whatever"

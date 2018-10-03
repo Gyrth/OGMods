@@ -1,0 +1,64 @@
+#name "Save-ML"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 15
+send_character_message 2 "set_animation \"Data/Animations/r_sit_cross_legged.anm\""
+send_character_message 2 "set_head_target -111.2 18.1384 109.269 1"
+set_character_pos 1 -110.483 18.3872 108.958 -165
+send_character_message 1 "set_torso_target -110.976 18.7035 109.003 0"
+send_character_message 1 "set_head_target -111.637 18.5849 109.24 1"
+set_cam -110.545 18.3907 110.171 0 49.26 0 29.0013
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+send_level_message "set_camera_dof 0 0 0 0.3 2 0.5"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML0.wav"
+say 2 "????" "..."
+send_character_message 1 "set_torso_target -110.976 18.7035 109.003 1"
+send_character_message 2 "set_head_target -111.096 18.5269 109.153 1"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML1.wav"
+say 2 "????" "...[wait 0.3]?"
+send_character_message 1 "set_torso_target -110.976 18.7035 109.003 0"
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 2 "set_head_target -110.771 18.6981 109.054 1"
+set_cam -112.333 18.6011 109.817 0 -56.4 0 29.0013
+vo "Data/VoiceOver/t2/s2/a2/Save-ML2.wav"
+say 1 "Ghost" "You're fine. [wait 0.5]They won't be bothering you."
+send_character_message 2 "set_torso_target -111.376 17.9109 109.263 1"
+set_cam -110.537 18.4989 110.068 0 49.41 0 29.0013
+send_character_message 2 "set_head_target -111.064 18.3998 109.304 1"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML3.wav"
+say 2 "????" "Short-tails got what they deserved, [wait 0.3]hmm..."
+send_character_message 2 "set_torso_target -111.309 18.0539 109.27 0"
+send_character_message 2 "set_head_target -110.777 18.6749 108.995 1"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML4.wav"
+say 2 "????" "Who the hell are you?"
+send_character_message 1 "set_torso_target -110.694 18.0213 108.998 1"
+send_character_message 1 "set_head_target -111.607 18.4681 109.249 1"
+send_character_message 2 "set_torso_target -111.321 18.1024 109.27 1"
+set_cam -111.185 18.7595 106.605 -8.2 -178.05 0 35.7947
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML5.wav"
+say 1 "Ghost" "I'm just looking out for you. [wait 0.5]What happened?"
+send_character_message 2 "set_head_target -110.703 18.5798 109.33 1"
+set_cam -111.825 18.2645 108.339 19.38 -167.04 -0.06 35.7947
+vo "Data/VoiceOver/t2/s2/a2/Save-ML6.wav"
+say 2 "????" "I'm dissenting from the Empire. [wait 0.5]Tired of being the little guy."
+send_character_message 2 "set_torso_target -111.317 18.1859 109.292 0"
+send_character_message 2 "set_head_target -110.877 18.5117 108.996 1"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML7.wav"
+say 1 "Ghost" "Where are you going to go, [wait 0.3]then?"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML8.wav"
+say 2 "????" "I know a guy or two. [wait 0.5]I'm gonna get into the Arliss."
+send_character_message 2 "set_head_target -110.916 18.3894 109.179 1"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML9.wav"
+say 2 "????" "Even being a slave for life is better than sitting around with Cinderbreathe filth."
+send_character_message 1 "set_torso_target -110.943 18.4422 108.985 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_character_message 2 "set_head_target -110.876 18.8015 109.128 1"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML10.wav"
+say 2 "????" "The Arlissian Collective will prevail, [wait 0.5]and so will I."
+set_cam -109.223 18.5524 107.16 -0.04 137.33 -0.04 29.6394
+send_character_message 2 "set_head_target -110.885 18.3434 109.218 1"
+vo "Data/VoiceOver/t2/s2/a2/Save-ML11.wav"
+say 1 "Ghost" "..."

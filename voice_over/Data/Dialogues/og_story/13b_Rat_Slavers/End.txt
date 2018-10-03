@@ -1,0 +1,21 @@
+#name "End"
+#participants 2
+send_level_message "set_camera_dof 0 0 0 0.3 2.5 1"
+send_level_message "music_layer_override 0"
+send_character_message 1 "empty_hands"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+send_character_message 1 "set_head_target 14.3393 99.5868 -12.7647 1"
+set_character_pos 2 14.7674 99.5059 -12.7888 -105
+send_character_message 2 "set_animation \"Data/Animations/r_sit_injuredneck.anm\""
+set_character_pos 1 13.8688 99.1426 -10.7573 85
+set_cam 12.6434 100.127 -12.8254 -22.44 -124.76 -5.87 90
+vo "Data/VoiceOver/og_story/13b_Rat_Slavers/End0.wav"
+say 1 "Turner" "You're so small... this must be how wolves feel when they fight rabbits."
+set_dialogue_color 2 0.7 0.4 0.4
+set_dialogue_voice 2 1
+vo "Data/VoiceOver/og_story/13b_Rat_Slavers/End1.wav"
+say 2 "Peat" "Please... kill me. If I die in battle, Khyo will smile on me."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+vo "Data/VoiceOver/og_story/13b_Rat_Slavers/End2.wav"
+say 1 "Turner" "I can do that. But first, which way is northeast?"
+send_global_message "levelwin"

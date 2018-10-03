@@ -1,0 +1,27 @@
+#name "Key"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 2 -2.44891 -28.6912 -12.7517 60
+set_character_pos 1 -20.0019 15.0941 -43.5011 156
+send_character_message 1 "set_eye_dir -14.6089 9.9976 -41.9804 1"
+send_character_message 1 "set_head_target -20.7482 15.2509 -43.5934 1"
+set_cam -19.7558 15.9378 -42.063 -16.75 26.16 0.07 50.4814
+send_level_message "therium2_enable_object 1404"
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/e/a/Key0.wav"
+say 1 "Ghost" "This must be that key Jairo was talking about..."
+set_character_pos 2 -2.34 -32.6269 -12.2635 60
+send_character_message 1 "set_head_target -14.6464 9.86245 -42.0189 1"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_jeer.anm\""
+set_cam -14.2575 10.3221 -42.4246 0.68 113.72 0.87 50.4814
+vo "Data/VoiceOver/t2/e/a/Key1.wav"
+say 1 "Ghost" "..."
+send_level_message "therium2_disable_object 1404"
+set_cam -18.5352 16.1049 -43.0216 -13.26 78.77 0.96 65.9527
+send_character_message 1 "set_eye_dir -27.825 15.1352 -44.5753 1"
+send_character_message 1 "set_head_target -31.4497 13.4845 -43.3949 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_level_message "set_camera_dof 0.3 50 50 0 0 0"
+vo "Data/VoiceOver/t2/e/a/Key2.wav"
+say 1 "Ghost" "Now to get to that door..."

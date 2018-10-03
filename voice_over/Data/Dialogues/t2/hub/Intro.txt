@@ -1,0 +1,19 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -126.725 109.14 -145.385 -92
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_glance.anm\""
+set_cam -125.668 109.532 -143.168 0 27.12 0 30.6093
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/hub/Intro0.wav"
+say 1 "Ghost" "...[wait 0.3]woah."
+send_character_message 1 "set_head_target -126.479 112.298 -139.891 1"
+set_cam -128.182 109.576 -148.175 3.18 -163.84 -0.05 54.8129
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+send_level_message "set_camera_dof 0.3 5 1 0 0 0"
+vo "Data/VoiceOver/t2/hub/Intro1.wav"
+say 1 "Ghost" "This place feels... [wait 0.3]ancient..."
+send_character_message 1 "set_head_target -131.032 111.201 -138.023 1"
+vo "Data/VoiceOver/t2/hub/Intro2.wav"
+say 1 "Ghost" "Like it's been around for centuries."

@@ -1,0 +1,23 @@
+#name "Note-Shipment"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -156.381 -0.213876 -124.003 180
+send_character_message 1 "set_head_target -157.32 0.138389 -124.02 1"
+set_cam -154.961 0.330741 -125.206 0 120 0 41.0258
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s1/a3/Note-Shipment0.wav"
+say 1 "Ghost" "A log for transporting goods."
+set_cam -157.63 0.382917 -124.43 0 -107.25 0 41.0258
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+vo "Data/VoiceOver/t2/s1/a3/Note-Shipment1.wav"
+say 2 "Note" "22nd of Sailhelm, [wait 0.3]672. The contents of this shipment are as follows:"
+vo "Data/VoiceOver/t2/s1/a3/Note-Shipment2.wav"
+say 2 "Note" "6 knives. [wait 0.3]5 broadswords. [wait 0.3]9 spears. [wait 0.3]4 glaives."
+vo "Data/VoiceOver/t2/s1/a3/Note-Shipment3.wav"
+say 2 "Note" "Building materials made out of wood and metal. [wait 0.3]Includes tools."
+vo "Data/VoiceOver/t2/s1/a3/Note-Shipment4.wav"
+say 2 "Note" "Your current orders are to begin construction at the designated location. [wait 0.3]More men are due to appear and assist by the afternoon."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s1/a3/Note-Shipment5.wav"
+say 1 "Ghost" "Charming as ever, [wait 0.3]the Empry..."

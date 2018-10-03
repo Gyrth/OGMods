@@ -1,0 +1,25 @@
+#name "Win"
+#participants 2
+send_level_message "music_layer_override 2"
+set_character_pos 2 1.21088 1.87104 9.5475 87
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_jeer.anm\""
+send_character_message 2 "set_head_target 2.81599 -0.951234 1.31462 1"
+set_character_pos 1 0.909468 -2.06283 1.61263 -85
+set_cam 1.2744 -2.06057 -0.64899 18.09 -177.38 0.99 30.8747
+vo "Data/VoiceOver/og_story/18_RudeAwakening/Win0.wav"
+say 2 "Amethyst" "So you're the lucky one! I think I'll call you that -- your name is Lucky now."
+send_character_message 1 "set_head_target 1.75017 2.38908 7.58878 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidlethreat.anm\""
+set_character_pos 1 0.909386 -2.06292 1.61247 -85
+vo "Data/VoiceOver/og_story/18_RudeAwakening/Win1.wav"
+say 1 "Turner" "My name is Turner."
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+vo "Data/VoiceOver/og_story/18_RudeAwakening/Win2.wav"
+say 2 "Amethyst" "Your name is whatever I say it is. "
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+vo "Data/VoiceOver/og_story/18_RudeAwakening/Win3.wav"
+say 1 "Turner" "What happened to Crawl?"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+vo "Data/VoiceOver/og_story/18_RudeAwakening/Win4.wav"
+say 2 "Amethyst" "Oh, we have him and his family safe and sound, as long as you do as we say. Now go through that door to the barracks. Hope you like it hot!"
+send_global_message "levelwin"

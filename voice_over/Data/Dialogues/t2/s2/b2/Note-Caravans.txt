@@ -1,0 +1,23 @@
+#name "Note-Caravans"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -151.713 -6.4528 -34.5783 59
+send_character_message 1 "set_head_target -151.26 -6.36841 -35.2712 1"
+set_cam -153.652 -6.17921 -34.6382 0 -84.14 0 54.8223
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/b2/Note-Caravans0.wav"
+say 1 "Ghost" "An ancient note. [wait 0.3]Who knows how long this has been here."
+set_cam -150.981 -5.83489 -35.1783 0 119.88 0 54.8223
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+vo "Data/VoiceOver/t2/s2/b2/Note-Caravans1.wav"
+say 2 "Note" "Our caravans have been sieged every other day now; [wait 0.3]our desert outposts have been starving as a result."
+vo "Data/VoiceOver/t2/s2/b2/Note-Caravans2.wav"
+say 2 "Note" "The Advisors cannot possibly stand for this, [wait 0.3]and neither will we; [wait 0.3]but what exactly is hitting us off?"
+vo "Data/VoiceOver/t2/s2/b2/Note-Caravans3.wav"
+say 2 "Note" "The wolves, [wait 0.3]although fierce, [wait 0.3]are smart; [wait 0.3]they allow us to survive for their own benefit."
+vo "Data/VoiceOver/t2/s2/b2/Note-Caravans4.wav"
+say 2 "Note" "This attacker shows no mercy. [wait 0.5]Blood and guts shower the destroyed wares, [wait 0.3]water and food."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s2/b2/Note-Caravans5.wav"
+say 2 "Note" "Whoever they are, [wait 0.3]I prefer wolves."

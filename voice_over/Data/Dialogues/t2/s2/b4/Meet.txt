@@ -1,0 +1,69 @@
+#name "Meet"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_voice 2 13
+set_character_pos 2 54.8435 1.10086 -81.6728 -88
+send_character_message 2 "set_animation \"Data\Animations\interestingsit.anm\""
+send_character_message 2 "set_head_target 54.8306 0.85098 -81.027 1"
+set_character_pos 1 55.0915 1.1108 -77.7052 90
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+send_character_message 1 "set_torso_target 55.416 1.42185 -78.4129 0"
+send_character_message 1 "set_head_target 54.9552 1.18033 -80.4102 1"
+set_cam 55.647 1.71765 -75.952 -5.01 12.56 0 21.6
+send_level_message "set_camera_dof 0 0 0 0.3 2 1"
+vo "Data/VoiceOver/t2/s2/b4/Meet0.wav"
+say 1 "Ghost" "Hey, [wait 0.3]are you alright?"
+send_character_message 2 "set_head_target 54.9371 1.39636 -80.4914 1"
+send_level_message "set_camera_dof 0.3 3 1 0 0 0"
+vo "Data/VoiceOver/t2/s2/b4/Meet1.wav"
+say 2 "???" "...[wait 0.3]what?"
+send_character_message 1 "set_animation \"Data\Animations\r_dialogue_armcross.anm\""
+set_cam 55.472 1.43074 -81.2593 -0.09 173.28 0.03 21.6
+vo "Data/VoiceOver/t2/s2/b4/Meet2.wav"
+say 1 "Ghost" "I'm here to help you. [wait 0.5]We need to get out of here."
+send_character_message 2 "set_head_target 54.7011 1.64034 -79.55 1"
+set_cam 56.1156 1.12479 -79.7912 -0.09 33.73 -0.13 21.6
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s2/b4/Meet3.wav"
+say 2 "???" "I didn't expect anyone to actually save me..."
+set_cam 56.1156 1.12479 -79.7912 -0.09 33.89 -0.13 21.6
+send_character_message 1 "set_torso_target 55.4159 1.42178 -78.4129 0.0138849"
+send_character_message 2 "set_head_target 55.1675 0.592506 -79.9256 1"
+vo "Data/VoiceOver/t2/s2/b4/Meet4.wav"
+say 2 "???" "Have the gods spared one shred of mercy?"
+send_character_message 2 "set_head_target 55.176 0.600857 -79.9134 1"
+set_character_pos 1 55.0915 1.11091 -77.7052 90
+send_character_message 2 "set_torso_target 55.6858 1.07077 -81.8393 0"
+set_character_pos 2 54.8434 1.10087 -81.6728 -88
+send_character_message 1 "set_torso_target 55.1687 0.886977 -78.45 0.999118"
+set_cam 56.4121 1.58349 -78.7136 0.13 123.31 -0.09 21.6
+vo "Data/VoiceOver/t2/s2/b4/Meet5.wav"
+say 1 "Ghost" "Probably not."
+set_cam 56.4121 1.58349 -78.7136 0.13 123.29 -0.09 21.6
+send_character_message 2 "set_torso_target 56.8075 1.52737 -77.9078 0.967974"
+send_character_message 2 "set_head_target 56.2263 1.53088 -77.8052 0.990558"
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidlearmed2.anm\""
+set_character_pos 2 57.4181 0.938154 -78.5818 -128
+set_character_pos 1 55.0915 0.89438 -77.7052 90
+send_character_message 1 "set_animation \"Data\Animations\lanterntouch_lethal.anm\""
+send_character_message 1 "set_torso_target 55.1687 0.886977 -78.45 0"
+vo "Data/VoiceOver/t2/s2/b4/Meet6.wav"
+say 1 "Ghost" "Come on. [wait 0.5]Follow me."
+send_character_message 1 "set_head_target 56.5489 1.66297 -77.2291 1"
+send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
+set_character_pos 1 54.9853 0.89438 -76.207 60
+send_character_message 2 "set_head_target 56.2263 1.53088 -77.8052 1"
+send_character_message 2 "set_torso_target 56.8075 1.52737 -77.9078 1"
+send_character_message 2 "set_animation \"Data\Animations\r_woundedidlearmed2.anm\""
+set_cam 56.7652 1.45037 -75.9998 -0.16 -10.9 -0.03 21.6
+vo "Data/VoiceOver/t2/s2/b4/Meet7.wav"
+say 2 "???" "...the lantern shrine! [wait 0.3]Up there! [wait 0.5]Take me there."
+send_character_message 2 "set_head_target 55.6773 1.4154 -76.8049 1"
+send_character_message 2 "set_torso_target 56.8075 1.52737 -77.9078 0"
+send_character_message 2 "set_animation \"Data\Animations\r_halfwoundedidle.anm\""
+send_character_message 1 "set_head_target 57.0422 2.06645 -79.864 1"
+set_cam 54.4487 1.11803 -72.6944 2.97 -17.17 -0.01 29.3762
+send_level_message "set_camera_dof 0.3 15 10 0 0 0"
+vo "Data/VoiceOver/t2/s2/b4/Meet8.wav"
+say 1 "Ghost" "..."

@@ -1,0 +1,10 @@
+#name "Gate"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 11.522 1.34803 48.1029 -90
+send_character_message 1 "set_animation \"Data/Animations/lanterntouch.anm\""
+set_cam 9.10962 2.06507 46.3435 0 -140.01 0 50.6977
+vo "Data/VoiceOver/t2/s2/a3/Gate0.wav"
+say 1 "Ghost" "A dirt road? [wait 0.5]Really? [wait 0.5]Hope I don't get lost..."
+send_global_message "levelwin a"

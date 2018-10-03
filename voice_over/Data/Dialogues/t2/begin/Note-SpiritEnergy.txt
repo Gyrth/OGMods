@@ -1,0 +1,21 @@
+#name "Note-SpiritEnergy"
+#participants 2
+set_character_pos 1 190.052 -48.9326 193.971 -180
+send_character_message 1 "set_head_target 189.297 -48.4541 194.072 1"
+set_cam 190.681 -48.3442 192.828 0 135.86 0 38.5978
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/begin/Note-SpiritEnergy0.wav"
+say 1 "Ghost" "A torn out page from a book about spirit legends..."
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam 189.05 -48.2701 194.674 0 -40.3 0 38.5978
+vo "Data/VoiceOver/t2/begin/Note-SpiritEnergy1.wav"
+say 2 "Note" "Spirit energy, [wait 0.3]as told in tales, [wait 0.3]is almost always kept and harnessed within stone lanterns about as tall as any average adult dog."
+vo "Data/VoiceOver/t2/begin/Note-SpiritEnergy2.wav"
+say 2 "Note" "If these lanterns happen to be broken or destroyed in any way, [wait 0.3]the spirit energy will be released and immediately destroyed; [wait 0.3]any purpose the spirits inside the lantern might've served beforehand vanishes completely, [wait 0.3]and its function is lost forever until replaced."
+vo "Data/VoiceOver/t2/begin/Note-SpiritEnergy3.wav"
+say 2 "Note" "Along with the spirit energy being permanently lost, [wait 0.3]you will be cursed almost immediately for this 'cardinal sin'."
+vo "Data/VoiceOver/t2/begin/Note-SpiritEnergy4.wav"
+say 2 "Note" "These spirit lanterns provide functions for every single one of the world's basic principles and law."
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/begin/Note-SpiritEnergy5.wav"
+say 2 "Note" "While there are plenty of tales involving the spirits of the world, [wait 0.3]I am more than inclined to believe these are nothing more than stories."

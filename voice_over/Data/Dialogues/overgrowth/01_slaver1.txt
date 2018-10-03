@@ -1,0 +1,10 @@
+#name "Stranger"
+#participants 2
+set_character_pos 1 42.3065 13.7056 -8.51332 -175
+set_character_pos 2 35.0427 13.3975 -8.12381 0
+set_cam 43.7981 13.8694 -5.8936 -5.56 52.52 0 90
+vo "Data/VoiceOver/overgrowth/01_slaver10.wav"
+say 1 "Turner" "Hey!"
+vo "Data/VoiceOver/overgrowth/01_slaver11.wav"
+say 2 "Stranger" "Fight!"
+make_participants_aware

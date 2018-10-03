@@ -1,0 +1,24 @@
+#name "Note-Terrorists"
+#participants 2
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -144.805 3.60233 -104.364 155
+send_character_message 1 "set_head_target -145.56 3.72121 -104.888 1"
+set_cam -143.186 4.01854 -104.73 0 90 0 42.0321
+send_level_message "set_camera_dof 0 0 0 0.3 3 1"
+vo "Data/VoiceOver/t2/s1/a3/Note-Terrorists0.wav"
+say 1 "Ghost" "A note from one of the commanding officers."
+set_character_pos 1 -144.805 3.5349 -104.364 155
+send_character_message 1 "set_animation \"Data/Animations/leanovertable.anm\""
+set_cam -145.462 4.14812 -103.718 0 -20.63 0 42.0321
+vo "Data/VoiceOver/t2/s1/a3/Note-Terrorists1.wav"
+say 2 "Note" "39th of Spurhelm, [waqit 0.3]671. [wait 0.5]These are directions for the squad commander's eyes only.
+vo "Data/VoiceOver/t2/s1/a3/Note-Terrorists2.wav"
+say 2 "Note" "Terrorist activity in the colonial grounds is steadily increasing."
+vo "Data/VoiceOver/t2/s1/a3/Note-Terrorists3.wav"
+say 2 "Note" "Round up half of your remaining men and leave the campgrounds to search for any suspicious persons. [wait 0.5]You should know where to direct your men."
+send_character_message 1 "set_head_target -144.225 3.60416 -107.097 1"
+set_cam -145.462 4.14801 -103.718 0 -20.63 0 42.0321
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/t2/s1/a3/Note-Terrorists4.wav"
+say 2 "Note" "Keep paranoia down."

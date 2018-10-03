@@ -1,0 +1,27 @@
+#name "Intro"
+#participants 4
+set_character_pos 4 182.781 -58.9105 365.069 -30
+send_character_message 4 "set_animation \"Data/Animations/r_meditate.anm\""
+send_character_message 4 "set_eye_dir 183.314 -58.5926 365.363 0"
+set_character_pos 3 98.8683 -54.4148 284.397 60
+send_character_message 3 "set_animation \"Data/Animations/r_dialogue_pole.anm\""
+send_character_message 2 "set_head_target 115.559 -51.9433 309.12 1"
+set_character_pos 1 115.561 -52.6095 309.214 44
+send_character_message 2 "set_animation \"Data/Animations/interestingsit.anm\""
+send_character_message 1 "set_head_target 117.96 -51.0068 313.247 1"
+set_character_pos 2 118.821 -50.9456 314.44 94
+set_cam 115.275 -52.5503 307.1 8.91 -161.61 0.73 25.0101
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_dialogue_color 2 0.7 0.7 0.89
+set_dialogue_voice 2 11
+vo "Data/VoiceOver/t2/e/b5/Intro0.wav"
+say 1 "Amos" "Hey Bijou, [wait 0.3]where'd Kaja go?"
+send_character_message 2 "set_head_target 115.852 -52.3244 309.437 1"
+vo "Data/VoiceOver/t2/e/b5/Intro1.wav"
+say 2 "Bijou" "She's in the farm right now. [wait 0.5]Started without you."
+send_character_message 1 "set_head_target 116.098 -51.1677 305.449 1"
+set_cam 116.035 -52.2397 311.413 -0.68 -1.79 -0.52 90.6447
+send_character_message 2 "set_head_target 118.985 -51.5073 313.774 1"
+vo "Data/VoiceOver/t2/e/b5/Intro2.wav"
+say 1 "Amos" "Alright, [wait 0.3]I'll get right to it."

@@ -1,0 +1,14 @@
+#name "Intro"
+#participants 4
+set_character_pos 1 -24.6601 36.5256 92.0712 -90
+set_cam -24.5491 36.7798 94.9783 0 0 0 66.3964
+vo "Data/VoiceOver/t2/c/s3/c2-proto/Intro0.wav"
+say 1 "Ghost" "i'm herew hat is this place"
+set_character_pos 3 -37.1685 36.5126 103.359 -90
+set_character_pos 2 -34.7045 36.5253 103.756 180
+set_cam -31.6362 36.7798 103 0 90 0 66.3964
+vo "Data/VoiceOver/t2/c/s3/c2-proto/Intro1.wav"
+say 2 "???" "blahblahblah"
+set_cam -22.9911 37.2301 89.4519 0 152.95 0 66.3964
+vo "Data/VoiceOver/t2/c/s3/c2-proto/Intro2.wav"
+say 1 "Ghost" "i shouldn't fight them maybe i should just follow them around"

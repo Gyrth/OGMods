@@ -1,0 +1,37 @@
+#name "Bomb"
+#participants 3
+set_dialogue_color 1 0 0.52 0.95
+set_dialogue_voice 1 8
+set_character_pos 1 -33.9417 -6.83812 -143.392 20
+send_character_message 1 "set_animation \"Data/Animations/pickup.anm\""
+send_character_message 1 "set_torso_target -35.3127 -5.97052 -141.84 0"
+send_character_message 1 "set_head_target -33.2425 -7.08881 -143.625 1"
+set_cam -35.5229 -6.68858 -141.591 0 -46.24 0 20.889
+vo "Data/VoiceOver/t2/s1/b3/Bomb0.wav"
+say 1 "Ghost" "...[wait 0.3]well, [wait 0.3]alright. [wait 0.5]Let's see if this works."
+set_character_pos 2 -30.6349 -4.90485 -144.423 0
+set_cam -32.7216 -6.34382 -139.868 0 45.01 0 29.3725
+send_character_message 1 "set_head_target -33.0648 -6.11888 -143.513 1"
+send_character_message 1 "set_animation \"Data/Animations/r_idle.anm\""
+set_character_pos 1 -35.8496 -6.83812 -142.247 26
+send_level_message "set_camera_dof 0 0 0 0.3 4 1"
+vo "Data/VoiceOver/t2/s1/b3/Bomb1.wav"
+say 1 "Ghost" "..."
+send_character_message 1 "set_torso_target -35.2259 -6.03404 -142.59 1"
+send_character_message 1 "set_head_target -35.5203 -6.29062 -143.299 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcheck.anm\""
+set_character_pos 2 -30.635 -6.65228 -144.423 0
+vo "Data/VoiceOver/t2/s1/b3/Bomb2.wav"
+say 1 "Ghost" "...[wait 0.3]damn!"
+send_character_message 1 "set_head_target -33.7164 -5.77909 -143.092 0"
+send_character_message 1 "set_torso_target -35.2259 -6.03404 -142.59 0"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_swatbugs.anm\""
+vo "Data/VoiceOver/t2/s1/b3/Bomb3.wav"
+say 1 "Ghost" "That's loud..."
+set_cam -32.7222 -29.2598 -147.279 0 1.64 0 76.0157
+set_character_pos 1 -32.8695 -29.6875 -149.192 90
+send_character_message 1 "set_head_target -32.6816 -28.4013 -153.146 1"
+send_character_message 1 "set_animation \"Data/Animations/r_actionidle_extended.anm\""
+send_level_message "set_camera_dof 0.3 5 5 0 0 0"
+vo "Data/VoiceOver/t2/s1/b3/Bomb4.wav"
+say 1 "Ghost" "It's time I get out of here before anyone comes..."

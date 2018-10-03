@@ -1,0 +1,22 @@
+#name "One-person test"
+#participants 1
+
+send_character_message 1 "set_dialogue_control true"
+set_character_pos 1 -44.0831 26.6523 58.5592 0
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 1 "set_head_target -42.4076 27.785 58.5388 1"
+send_character_message 1 "set_torso_target -41.2887 27.917 60.1583 1"
+send_character_message 1 "set_eye_dir 0 0 1 1"
+set_cam -43.3936 27.2684 58.8805 7.5 -296 0 90
+vo "Data/VoiceOver//dialogue_test0.wav"
+say 1 "Chris" "Hello there! [wait 0.2]How can I help you?"
+
+set_cam -43.2 27.2 57.4 -1 -214 0 90
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+send_character_message 1 "set_head_target -42.4076 27.785 58.5388 0"
+vo "Data/VoiceOver//dialogue_test1.wav"
+say 1 "Chris" "Oh, my mistake[wait 0.2] -- I guess I'm talking to myself."
+
+send_character_message 1 "set_dialogue_control false"
+set_cam_control false
+set_dialogue_visible false
