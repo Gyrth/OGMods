@@ -23,6 +23,7 @@ int voice_over_id = -1;
 
 void PlayVoiceOver(string path){
 	if(FileExists(path)){
+		StopSound(voice_over_id);
 		voice_over_id = PlaySound(path);
 	}
 }
