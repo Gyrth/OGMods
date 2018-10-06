@@ -209,7 +209,7 @@ void ReceiveMessage(string msg){
 
 void SpawnObject(string load_item_path){
 	if(FileExists(load_item_path)){
-		int id = CreateObject(load_item_path);
+		int id = CreateObject(load_item_path, false);
 		/* Log(info, "Creating object " + load_item_path); */
 		Object@ obj = ReadObjectFromID(id);
 		if(paint){
