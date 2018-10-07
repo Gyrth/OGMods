@@ -283,11 +283,12 @@ array<vec3> weap_points;
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
     time += ts.step();
-    /* ApplyPhysics(ts);
+    ApplyPhysics(ts);
     HandleCollisions(ts);
-    UpdateJumping();
+    /* UpdateJumping(); */
+	this_mo.rigged_object().SetMorphTargetWeight("wide", 1.0, 1.0f);
     UpdateFacing(ts);
-    UpdateMultiplying(); */
+    UpdateMultiplying();
 }
 
 float multiply_timer = 0.0f;
@@ -349,11 +350,12 @@ float long_offset = 3.14f;
 float long_magnitude = 0.0f;
 float wide_offset = 3.14f;
 bool allow_jumping = true;
+float jump_multiplier = 0.5;
 void UpdateJumping(){
     if(on_ground && allow_jumping){
         jump_wait -= time_step;
         if(jump_wait < 0.0f){
-            jump_wait = RangedRandomFloat(0.25f, 0.50f);
+            jump_wait = RangedRandomFloat(0.1f, 0.30f);
             float jump_mult = 5.0f;
             vec3 jump_vel;
 
@@ -366,6 +368,7 @@ void UpdateJumping(){
                 jump_vel.x = RangedRandomFloat(-1.0f, 1.0f);
                 jump_vel.z = RangedRandomFloat(-1.0f, 1.0f);
             }
+			jump_vel *= jump_multiplier;
 
             this_mo.velocity += jump_vel * jump_mult;
             long_magnitude = length(this_mo.velocity) * 0.075f;
@@ -690,10 +693,10 @@ int GetPlayerCharacterID() {
 }
 
 void SetParameters() {
-    params.AddIntCheckbox("Follow Player",false);
+    params.AddIntCheckbox("Follow Player",true);
     targeted_jump = (params.GetInt("Follow Player") != 0);
 
-    params.AddIntCheckbox("Multiply",false);
+    params.AddIntCheckbox("Multiply",true);
     multiply = (params.GetInt("Multiply") != 0);
 
     string team_str;
@@ -719,3 +722,4 @@ float GetTempHealth(){return 1.0f;}
 void AttachWeapon(int id){}
 void SetEnabled(bool on){}
 void UpdatePaused(){}
+void LayerRemoved(int id){}
