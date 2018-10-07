@@ -377,6 +377,29 @@ void UpdateJumping(){
             this_mo.velocity += jump_vel * jump_mult;
             long_magnitude = length(this_mo.velocity) * 0.075f;
             long_offset = 0.0f;
+
+			string sound;
+			switch(rand()%9){
+				case 0:
+					sound = "Data/Sounds/voice/animal/wolf_attack_2.wav"; break;
+				case 1:
+					sound = "Data/Sounds/voice/animal/wolf_attack_3.wav"; break;
+				case 2:
+					sound = "Data/Sounds/voice/animal/wolf_attack_4.wav"; break;
+				case 3:
+					sound = "Data/Sounds/voice/animal/wolf_attack_5.wav"; break;
+				case 4:
+					sound = "Data/Sounds/voice/animal/wolf_attack_6.wav"; break;
+				case 5:
+					sound = "Data/Sounds/voice/animal/wolf_attack_7.wav"; break;
+				case 6:
+					sound = "Data/Sounds/voice/animal/wolf_attack_8.wav"; break;
+				case 7:
+					sound = "Data/Sounds/voice/animal/wolf_attack_9.wav"; break;
+				default:
+					sound = "Data/Sounds/voice/animal/wolf_attack_1.wav"; break;
+			}
+			PlaySound(sound, this_mo.position);
         }
     }
     if(long_offset < 3.14f){
