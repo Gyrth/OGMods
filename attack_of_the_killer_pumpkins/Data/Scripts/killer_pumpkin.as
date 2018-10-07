@@ -285,7 +285,8 @@ void Update(int num_frames) {
     time += ts.step();
     ApplyPhysics(ts);
     HandleCollisions(ts);
-    UpdateJumping();
+	this_mo.rigged_object().SetMorphTargetWeight("wide",1.0f, 1.0f);
+    /* UpdateJumping(); */
     UpdateFacing(ts);
     /* UpdateMultiplying(); */
 }
