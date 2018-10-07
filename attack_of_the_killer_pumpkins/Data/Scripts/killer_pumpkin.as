@@ -285,10 +285,12 @@ void Update(int num_frames) {
     time += ts.step();
     ApplyPhysics(ts);
     HandleCollisions(ts);
-	this_mo.rigged_object().SetMorphTargetWeight("wide",1.0f, 1.0f);
-    /* UpdateJumping(); */
+    UpdateJumping();
     UpdateFacing(ts);
     /* UpdateMultiplying(); */
+	/* this_mo.rigged_object().SetMorphTargetWeight("long", params.GetFloat("Long"), 1.0f);
+	this_mo.rigged_object().SetMorphTargetWeight("wide", params.GetFloat("Wide"), 1.0f);
+	this_mo.rigged_object().SetMorphTargetWeight("deep", params.GetFloat("Deep"), 1.0f); */
 }
 
 float multiply_timer = 0.0f;
@@ -312,7 +314,7 @@ void UpdateMultiplying(){
             }
             params.SetFloat("Character Scale", character_scale);
             this_mo.RecreateRiggedObject(this_mo.char_path);
-            this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+            this_mo.SetAnimation("Data/Animations/killer_pumpkin_default.anm", 20.0f, 0);
             this_mo.SetRotationFromFacing(old_facing);
             FixDiscontinuity();
         }
@@ -352,45 +354,41 @@ float wide_offset = 3.14f;
 bool allow_jumping = true;
 float jump_multiplier = 0.5;
 void UpdateJumping(){
+	if(jump_wait > 0.0f){
+		jump_wait -= time_step;
+	}
     if(on_ground && allow_jumping){
-        jump_wait -= time_step;
         if(jump_wait < 0.0f){
-            jump_wait = RangedRandomFloat(0.1f, 0.30f);
+            jump_wait = RangedRandomFloat(0.1f, 0.5f);
             float jump_mult = 5.0f;
             vec3 jump_vel;
 
             if(targeted_jump && GetPlayerCharacterID() != -1){
                 MovementObject@ char = ReadCharacterID(GetPlayerCharacterID());
                 jump_vel = normalize(char.position - this_mo.position);
-                jump_vel.y = RangedRandomFloat(1.0f, 2.0f);
+                jump_vel.y = RangedRandomFloat(0.5f, 1.5f);
+				jump_vel *= min(1.0, distance(char.position, this_mo.position) * 0.5);
             }else{
                 jump_vel.y = RangedRandomFloat(1.0f, 2.0f);
                 jump_vel.x = RangedRandomFloat(-1.0f, 1.0f);
                 jump_vel.z = RangedRandomFloat(-1.0f, 1.0f);
             }
-			jump_vel *= jump_multiplier;
-
+			/* jump_vel *= jump_multiplier; */
             this_mo.velocity += jump_vel * jump_mult;
             long_magnitude = length(this_mo.velocity) * 0.075f;
             long_offset = 0.0f;
-            on_ground = false;
         }
     }
     if(long_offset < 3.14f){
         long_offset += time_step * 50.0f;
-        this_mo.rigged_object().SetMorphTargetWeight("long",pow(sin(long_offset), 2.0f), long_magnitude);
-    }else{
-        this_mo.rigged_object().SetMorphTargetWeight("long",0.0f, 1.0f);
+        this_mo.rigged_object().SetMorphTargetWeight("long",pow(sin(long_offset), 2.0f), 1.0);
     }
-    float damping_time = 20.0f;
+    float damping_time = 10.0f;
     if(wide_offset < damping_time){
-        wide_offset += time_step * 40.0f;
-        float weight = (damping_time - wide_offset) * 0.01f * pow(sin(wide_offset), 2.0f);
-        this_mo.rigged_object().SetMorphTargetWeight("wide", weight, min(1.0f, land_magnitude));
-        this_mo.rigged_object().SetMorphTargetWeight("deep", weight, min(1.0f, land_magnitude));
-    }else{
-        this_mo.rigged_object().SetMorphTargetWeight("wide",0.0f, 1.0f);
-        this_mo.rigged_object().SetMorphTargetWeight("deep",0.0f, 1.0f);
+        wide_offset += time_step * 30.0f;
+        float weight = (damping_time - wide_offset) * 0.05f * pow(sin(wide_offset), 0.5f);
+        this_mo.rigged_object().SetMorphTargetWeight("wide", weight, 1.0f);
+        this_mo.rigged_object().SetMorphTargetWeight("deep", weight, 1.0f);
     }
 }
 
@@ -429,10 +427,12 @@ bool Init(string character_path) {
     this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);*/
 }
 
-void PostReset() {
-}
-
 void ApplyPhysics(const Timestep &in ts) {
+	if(sphere_col.NumContacts() > 0){
+		on_ground = true;
+	}else{
+		on_ground = false;
+	}
     if(!on_ground){
         this_mo.velocity += physics.gravity_vector * ts.step();
     }
@@ -469,9 +469,6 @@ void HandleGroundCollisions(const Timestep &in ts) {
     }
     this_mo.position = sphere_col.adjusted_position;
     bool in_air = HandleStandingCollision();
-    if(in_air){
-        on_ground = false;
-    }
 }
 
 bool HandleStandingCollision() {
@@ -521,16 +518,12 @@ void HandleAirCollisions(const Timestep &in ts) {
                     if(length(this_mo.velocity) > 3.0f){
                         this_mo.velocity = reflect(this_mo.velocity, contact.normal) * bounciness;
                     }
-                }else{
-                    //A wall
-                    this_mo.velocity = reflect(this_mo.velocity, contact.normal);
                 }
         }
     }
     if(landing){
         //Print("Land " + length(this_mo.velocity) + "\n");
         wide_offset = 0.0f;
-        on_ground = true;
     }
 }
 
@@ -597,17 +590,15 @@ void PreDrawCameraNoCull(float curr_game_time) {
 }
 
 void FinalAnimationMatrixUpdate(int num_frames) {
-
-    vec3 scale;
-    float size;
-    GetCollisionSphere(scale, size);
-
     RiggedObject@ rigged_object = this_mo.rigged_object();
     BoneTransform local_to_world;
+
     vec3 offset = this_mo.position;
-    offset.y -= size;
+    offset.y -= character_scale;
+
     vec3 facing = this_mo.GetFacing();
     float cur_rotation = atan2(facing.x, facing.z);
+
     quaternion rotation(vec4(0,1,0,cur_rotation));
     local_to_world.rotation = rotation;
     local_to_world.origin = offset;
@@ -703,11 +694,15 @@ void SetParameters() {
     character_getter.GetTeamString(team_str);
     params.AddString("Teams",team_str);
 
+	params.AddFloatSlider("Long", 0.0, "min:0.0,max:1.0,step:0.01,text_mult:1");
+	params.AddFloatSlider("Wide", 0.0, "min:0.0,max:1.0,step:0.01,text_mult:1");
+	params.AddFloatSlider("Deep", 0.0, "min:0.0,max:1.0,step:0.01,text_mult:1");
+
     params.AddFloatSlider("Character Scale",0.25,"min:0.25,max:2.0,step:0.02,text_mult:100");
     character_scale = params.GetFloat("Character Scale");
     if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
         this_mo.RecreateRiggedObject(this_mo.char_path);
-        this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+        this_mo.SetAnimation("Data/Animations/killer_pumpkin_default.anm", 20.0f, 0);
         FixDiscontinuity();
     }
 }
@@ -723,3 +718,4 @@ void AttachWeapon(int id){}
 void SetEnabled(bool on){}
 void UpdatePaused(){}
 void LayerRemoved(int id){}
+void PostReset(){}
