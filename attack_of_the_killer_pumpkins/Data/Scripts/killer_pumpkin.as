@@ -421,10 +421,6 @@ bool Init(string character_path) {
         this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
     }
     return success;
-
-    /*character_getter.Load(this_mo.char_path);
-    this_mo.RecreateRiggedObject(this_mo.char_path);
-    this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);*/
 }
 
 void ApplyPhysics(const Timestep &in ts) {
@@ -543,11 +539,32 @@ int WasHit(string type, string attack_path, vec3 dir, vec3 pos, int attacker_id,
 
 int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float attack_damage_mult, float attack_knockback_mult) {
     this_mo.velocity += (attack_attacker.GetForce() * dir * attack_damage_mult * attack_knockback_mult) * 0.0004f * (2.1f - character_scale);
+	Died();
     return 0;
 }
 
 int AboutToBeHitByItem(int id){
     return 1;
+}
+
+void Died(){
+	vec3 pumpkin_color(0.82f, 0.3f, 0.0);
+	for(uint i = 0; i < 10; i++){
+		vec3 direction = vec3(RangedRandomFloat(-1.0, 1.0), RangedRandomFloat(-1.0, 1.0), RangedRandomFloat(-1.0, 1.0));
+		MakeParticle("Data/Particles/bloodcloud.xml", this_mo.position, direction, pumpkin_color);
+		MakeParticle("Data/Particles/pumpkin_blood.xml", this_mo.position, direction, pumpkin_color);
+	}
+	string path;
+	switch(rand()%3){
+        case 0:
+            path = "Data/Sounds/hit/hit_splatter_1.wav"; break;
+        case 1:
+			path = "Data/Sounds/hit/hit_splatter_2.wav"; break;
+        default:
+			path = "Data/Sounds/hit/hit_splatter_3.wav"; break;
+    }
+	PlaySound(path, this_mo.position);
+	QueueDeleteObjectID(this_mo.GetID());
 }
 
 void HitByItem(string material, vec3 point, int id, int type) {
@@ -557,6 +574,7 @@ void HitByItem(string material, vec3 point, int id, int type) {
     vec3 force = (lin_vel - this_mo.velocity) * io.GetMass() * 0.25f;
     // Apply force to character velocity
     this_mo.velocity += force;
+	Died();
 }
 
 void ImpactSound(float magnitude, vec3 position) {
