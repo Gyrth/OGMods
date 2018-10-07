@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<character>
+    <appearance obj_path = "Data/Objects/killer_pumpkin.xml"
+                skeleton = "Data/Skeletons/killer_pumpkin.xml"/>
+    <animations/>
+    <attacks/>
+    <team>killer_pumpkin</team>
+    <morphs>
+        <long />
+        <wide />
+        <deep />
+    </morphs>
+    <voice path = "Data/Sounds/voice/rabbit2.xml"
+           pitch = "1.0"/>
+    <clothing>Data/Materials/cloth_fabric.xml</clothing>
+    <tags/>
+ </character>
