@@ -432,7 +432,8 @@ void CheckAttack(){
 		return;
 	}
 	MovementObject@ char = ReadCharacterID(player_id);
-	if(distance(char.position, this_mo.position) < (character_scale * 2.0)){
+	/* DebugDrawLine(this_mo.position, this_mo.position + normalize(char.position - this_mo.position) * (character_scale * 2.0) , vec3(1.0), _fade); */
+	if(distance(char.position, this_mo.position) < character_scale){
 		vec3 direction = normalize(this_mo.velocity);
 		int hit = char.WasHit("attackimpact", attack_path, direction, this_mo.position, this_mo.getID(), p_attack_damage_mult, p_attack_knockback_mult);
 	}
@@ -464,7 +465,7 @@ bool Init(string character_path) {
     bool success = character_getter.Load(this_mo.char_path);
     if(success){
         this_mo.RecreateRiggedObject(this_mo.char_path);
-        this_mo.SetAnimation("Data/Animations/default.anm", 20.0f, 0);
+        this_mo.SetAnimation("Data/Animations/killer_pumpkin_default.anm", 20.0f, 0);
     }
     return success;
 }
@@ -580,13 +581,12 @@ int WasHit(string type, string attack_path, vec3 dir, vec3 pos, int attacker_id,
         PlaySoundGroup("Data/Sounds/hit/hit_block.xml", pos, _sound_priority_high);
         return HitByAttack(dir, pos, attacker_id, attack_damage_mult, attack_knockback_mult);
     }
-    return 0;
+    return 2;
 }
 
 int HitByAttack(const vec3&in dir, const vec3&in pos, int attacker_id, float attack_damage_mult, float attack_knockback_mult) {
-    this_mo.velocity += (attack_attacker.GetForce() * dir * attack_damage_mult * attack_knockback_mult) * 0.0004f * (2.1f - character_scale);
 	Died();
-    return 0;
+    return 2;
 }
 
 int AboutToBeHitByItem(int id){
@@ -617,12 +617,6 @@ void Died(){
 }
 
 void HitByItem(string material, vec3 point, int id, int type) {
-    // Get force of object movement
-    ItemObject@ io = ReadItemID(id);
-    vec3 lin_vel = io.GetLinearVelocity();
-    vec3 force = (lin_vel - this_mo.velocity) * io.GetMass() * 0.25f;
-    // Apply force to character velocity
-    this_mo.velocity += force;
 	Died();
 }
 
@@ -689,7 +683,7 @@ int IsIdle() {
 }
 
 int IsAggressive() {
-    return 0;
+    return 1;
 }
 
 void Notice(int character_id){
