@@ -152,12 +152,18 @@ void SpawnKillerPumpking(){
 		Log(info, "No spawnpoints found");
 		return;
 	}
-	int random_spawnpoint_id = spawnpoint_ids[rand() % spawnpoint_ids.size()];
-	Object@ spawn_obj = ReadObjectFromID(random_spawnpoint_id);
-
 	MovementObject@ player_character = ReadCharacter(GetPlayerCharacterID());
-	if(distance(player_character.position, spawn_obj.GetTranslation()) < 10.0){
-		return;
+	Object@ spawn_obj;
+
+	for(uint i = 0; i <= 10; i++){
+		int random_spawnpoint_id = spawnpoint_ids[rand() % spawnpoint_ids.size()];
+		@spawn_obj = ReadObjectFromID(random_spawnpoint_id);
+		//Player is too close to the spawnpoint to use this spawnpoint.
+		if(distance(player_character.position, spawn_obj.GetTranslation()) > 10.0){
+			break;
+		}else if(i == 10){
+			return;
+		}
 	}
 
 	int new_killer_pumpkin_id = CreateObject("Data/Characters/killer_pumpkin_actor.xml");
