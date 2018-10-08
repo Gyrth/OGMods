@@ -433,7 +433,7 @@ void CheckAttack(){
 	}
 	MovementObject@ char = ReadCharacterID(player_id);
 	/* DebugDrawLine(this_mo.position, this_mo.position + normalize(char.position - this_mo.position) * (character_scale * 2.0) , vec3(1.0), _fade); */
-	if(distance(char.position, this_mo.position) < character_scale){
+	if(distance(char.position, this_mo.position) < (character_scale * 1.75)){
 		vec3 direction = normalize(this_mo.velocity);
 		int hit = char.WasHit("attackimpact", attack_path, direction, this_mo.position, this_mo.getID(), p_attack_damage_mult, p_attack_knockback_mult);
 	}
@@ -471,7 +471,14 @@ bool Init(string character_path) {
 }
 
 void ApplyPhysics(const Timestep &in ts) {
-	if(sphere_col.NumContacts() > 0){
+	bool collision_below = false;
+	for(int i = 0; i < sphere_col.NumContacts(); i++){
+		if(sphere_col.GetContact(i).position.y < this_mo.position.y){
+			collision_below = true;
+			break;
+		}
+	}
+	if(sphere_col.NumContacts() > 0 && collision_below){
 		on_ground = true;
 	}else{
 		on_ground = false;
@@ -595,7 +602,7 @@ int AboutToBeHitByItem(int id){
 
 void Died(){
 	vec3 pumpkin_color(0.82f, 0.3f, 0.0);
-	for(uint i = 0; i < 10; i++){
+	for(uint i = 0; i < 5; i++){
 		vec3 direction = vec3(RangedRandomFloat(-1.0, 1.0), RangedRandomFloat(-1.0, 1.0), RangedRandomFloat(-1.0, 1.0));
 		MakeParticle("Data/Particles/bloodcloud.xml", this_mo.position, direction, pumpkin_color);
 		MakeParticle("Data/Particles/pumpkin_blood.xml", this_mo.position, direction, pumpkin_color);
