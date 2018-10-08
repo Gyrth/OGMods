@@ -9,15 +9,16 @@ MusicLoad ml("Data/Music/killer_pumpkin.xml");
 IMGUI@ imGUI;
 IMText@ kill_counter;
 float header_height = 30.0f;
-FontSetup main_font("arial", 125, HexColor("#ffffff"), true);
+FontSetup main_font("OptimusPrinceps", 125, HexColor("#ffffff"), true);
 array<int> spawnpoint_ids;
 float spawn_timer = 15.0;
 float starting_spawn_frequency = 15.0;
 float spawn_frequency = starting_spawn_frequency;
-float frequency_ramp = 0.5;
+float frequency_ramp = 0.25;
 int nr_kills = 0;
 string kill_label_text = "Pumpkins squashed: ";
 array<int> forget_character_ids;
+float death_timeout = 0.0;
 
 void ForgetCharacter(int id){
 	array<int> mos = GetObjectIDsType(_movement_object);
@@ -60,6 +61,7 @@ void Reset(){
 	imGUI.clear();
 	imGUI.setHeaderHeight(header_height);
 	imGUI.setup();
+	nr_kills = 0;
 	AddCounter();
 	GetSpawnPoints();
 	spawn_frequency = starting_spawn_frequency;
@@ -71,7 +73,7 @@ void DeletePumpkins(){
 		MovementObject@ char = ReadCharacter(i);
 		if(!char.controlled){
 			QueueDeleteObjectID(char.GetID());
-			/* forget_character_ids.insertLast(char.GetID()); */
+			forget_character_ids.insertLast(char.GetID());
 		}
 	}
 }
@@ -89,7 +91,7 @@ void ReceiveMessage(string msg) {
 		token_iter.FindNextToken(msg);
         token = token_iter.GetToken(msg);
         int pumpkin_id = atoi(token);
-		/* forget_character_ids.insertLast(pumpkin_id); */
+		forget_character_ids.insertLast(pumpkin_id);
 		nr_kills += 1;
 		kill_counter.setText(kill_label_text + nr_kills);
 	}
@@ -159,7 +161,7 @@ void UpdateSpawning(){
 	}
 	if(spawn_timer > spawn_frequency){
 		spawn_timer = 0.0;
-		spawn_frequency = max(0.5, spawn_frequency - frequency_ramp);
+		spawn_frequency = max(1.0, spawn_frequency - frequency_ramp);
 		Log(info, "spawn rate " + spawn_frequency);
 		SpawnKillerPumpking();
 	}else{
@@ -179,7 +181,7 @@ void SpawnKillerPumpking(){
 		int random_spawnpoint_id = spawnpoint_ids[rand() % spawnpoint_ids.size()];
 		@spawn_obj = ReadObjectFromID(random_spawnpoint_id);
 		//Player is too close to the spawnpoint to use this spawnpoint.
-		if(distance(player_character.position, spawn_obj.GetTranslation()) > 10.0){
+		if(distance(player_character.position, spawn_obj.GetTranslation()) > 25.0){
 			break;
 		}else if(i == 10){
 			return;
@@ -231,8 +233,16 @@ void UpdateReviving(){
 	int player_id = GetPlayerCharacterID();
 	if(player_id != -1){
 		MovementObject@ player = ReadCharacter(player_id);
-		if(!EditorModeActive() && player.GetIntVar("knocked_out") == _dead && GetInputPressed(0, "mouse0")){
-			Reset();
+		if(!EditorModeActive() && player.GetIntVar("knocked_out") == _dead){
+			if(death_timeout <= 5.0){
+				death_timeout += time_step;
+				if(death_timeout > 5.0){
+					kill_counter.setText("Click LMB to restart.");
+				}
+			}else if(GetInputPressed(0, "mouse0")){
+				death_timeout = 0.0;
+				Reset();
+			}
 		}
 	}
 }
