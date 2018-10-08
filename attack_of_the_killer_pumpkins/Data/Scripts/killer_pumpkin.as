@@ -610,6 +610,7 @@ void Died(){
 			path = "Data/Sounds/hit/hit_splatter_3.wav"; break;
     }
 	PlaySound(path, this_mo.position);
+	this_mo.DetachAllItems();
 	QueueDeleteObjectID(this_mo.GetID());
 	MovementObjectDeleted(this_mo.GetID());
 	level.SendMessage("pumpkin_died " + this_mo.GetID());
