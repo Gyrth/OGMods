@@ -103,8 +103,6 @@ float p_block_skill;
 float p_block_followup;
 float p_attack_speed_mult;
 float p_speed_mult;
-float p_attack_damage_mult;
-float p_attack_knockback_mult;
 float p_fat;
 float p_muscle;
 float p_ear_size;
@@ -288,15 +286,13 @@ void Update(int num_frames) {
     UpdateJumping();
     UpdateFacing(ts);
     /* UpdateMultiplying(); */
-	/* this_mo.rigged_object().SetMorphTargetWeight("long", params.GetFloat("Long"), 1.0f);
-	this_mo.rigged_object().SetMorphTargetWeight("wide", params.GetFloat("Wide"), 1.0f);
-	this_mo.rigged_object().SetMorphTargetWeight("deep", params.GetFloat("Deep"), 1.0f); */
 }
 
 float multiply_timer = 0.0f;
 bool multiply = false;
+
 void UpdateMultiplying(){
-    if(multiply && length(this_mo.velocity) < 0.5f){
+    if(multiply){
         multiply_timer += time_step;
         if(multiply_timer > 0.5f){
             multiply_timer = 0.0f;
@@ -321,12 +317,22 @@ void UpdateMultiplying(){
     }
 }
 
+void SetScale(float new_character_scale){
+	character_scale = new_character_scale;
+	vec3 old_facing = this_mo.GetFacing();
+	params.SetFloat("Character Scale", character_scale);
+	this_mo.RecreateRiggedObject(this_mo.char_path);
+	this_mo.SetAnimation("Data/Animations/killer_pumpkin_default.anm", 20.0f, 0);
+	this_mo.SetRotationFromFacing(old_facing);
+	FixDiscontinuity();
+}
+
 float wiggle_wait = 0.0f;
 float wave = 1.0f;
 bool targeted_jump = false;
 
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
-    float distance_threshold = character_scale * 2.0f;
+    float distance_threshold = character_scale * 1.25f;
     vec3 this_com = this_mo.rigged_object().skeleton().GetCenterOfMass();
     vec3 other_com = other.rigged_object().skeleton().GetCenterOfMass();
     this_com.y = this_mo.position.y;
@@ -347,33 +353,33 @@ void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
     }
 }
 
-float jump_wait = 1.0f;
+float jump_wait = 0.1f;
 float long_offset = 3.14f;
 float long_magnitude = 0.0f;
 float wide_offset = 3.14f;
 bool allow_jumping = true;
-float jump_multiplier = 0.5;
+
 void UpdateJumping(){
 	if(jump_wait > 0.0f){
 		jump_wait -= time_step;
 	}
     if(on_ground && allow_jumping){
         if(jump_wait < 0.0f){
-            jump_wait = RangedRandomFloat(0.1f, 0.5f);
+            jump_wait = RangedRandomFloat(0.1f, 0.25f);
             float jump_mult = 5.0f;
             vec3 jump_vel;
 
             if(targeted_jump && GetPlayerCharacterID() != -1){
                 MovementObject@ char = ReadCharacterID(GetPlayerCharacterID());
-                jump_vel = normalize(char.position - this_mo.position);
-                jump_vel.y = RangedRandomFloat(0.5f, 1.5f);
-				jump_vel *= min(1.0, distance(char.position, this_mo.position) * 0.5);
+				float distance_to_target = distance(char.position, this_mo.position);
+				vec3 direction = normalize(char.position - this_mo.position);
+                jump_vel = direction * min(1.0, distance_to_target);
+				jump_vel.y = min(1.0, distance_to_target * 0.15);
             }else{
                 jump_vel.y = RangedRandomFloat(1.0f, 2.0f);
                 jump_vel.x = RangedRandomFloat(-1.0f, 1.0f);
                 jump_vel.z = RangedRandomFloat(-1.0f, 1.0f);
             }
-			/* jump_vel *= jump_multiplier; */
             this_mo.velocity += jump_vel * jump_mult;
             long_magnitude = length(this_mo.velocity) * 0.075f;
             long_offset = 0.0f;
@@ -400,6 +406,7 @@ void UpdateJumping(){
 					sound = "Data/Sounds/voice/animal/wolf_attack_1.wav"; break;
 			}
 			PlaySound(sound, this_mo.position);
+			CheckAttack();
         }
     }
     if(long_offset < 3.14f){
@@ -413,6 +420,22 @@ void UpdateJumping(){
         this_mo.rigged_object().SetMorphTargetWeight("wide", weight, 1.0f);
         this_mo.rigged_object().SetMorphTargetWeight("deep", weight, 1.0f);
     }
+}
+
+string attack_path = "Data/Attacks/knifeslash.xml";
+float p_attack_damage_mult = 1.0;
+float p_attack_knockback_mult = 1.0;
+
+void CheckAttack(){
+	int player_id = GetPlayerCharacterID();
+	if(player_id == -1){
+		return;
+	}
+	MovementObject@ char = ReadCharacterID(player_id);
+	if(distance(char.position, this_mo.position) < (character_scale * 2.0)){
+		vec3 direction = normalize(this_mo.velocity);
+		int hit = char.WasHit("attackimpact", attack_path, direction, this_mo.position, this_mo.getID(), p_attack_damage_mult, p_attack_knockback_mult);
+	}
 }
 
 void UpdateFacing(const Timestep &in ts){
@@ -588,6 +611,8 @@ void Died(){
     }
 	PlaySound(path, this_mo.position);
 	QueueDeleteObjectID(this_mo.GetID());
+	MovementObjectDeleted(this_mo.GetID());
+	level.SendMessage("pumpkin_died " + this_mo.GetID());
 }
 
 void HitByItem(string material, vec3 point, int id, int type) {
@@ -725,10 +750,10 @@ int GetPlayerCharacterID() {
 }
 
 void SetParameters() {
-    params.AddIntCheckbox("Follow Player",true);
+    params.AddIntCheckbox("Follow Player", true);
     targeted_jump = (params.GetInt("Follow Player") != 0);
 
-    params.AddIntCheckbox("Multiply",true);
+    params.AddIntCheckbox("Multiply", false);
     multiply = (params.GetInt("Multiply") != 0);
 
     string team_str;
