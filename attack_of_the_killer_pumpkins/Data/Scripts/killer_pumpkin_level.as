@@ -12,15 +12,18 @@ float header_height = 30.0f;
 FontSetup main_font("arial", 125, HexColor("#ffffff"), true);
 array<int> spawnpoint_ids;
 float spawn_timer = 15.0;
-float spawn_frequency = 15.0;
-float frequency_ramp = 0.01;
+float starting_spawn_frequency = 15.0;
+float spawn_frequency = starting_spawn_frequency;
+float frequency_ramp = 0.5;
 int nr_kills = 0;
 string kill_label_text = "Pumpkins squashed: ";
+array<int> forget_character_ids;
 
 void ForgetCharacter(int id){
-	for(int i = 0; i < GetNumCharacters(); i++){
-		MovementObject@ char = ReadCharacter(i);
-		char.Execute("MovementObjectDeleted(" + id + ");");
+	array<int> mos = GetObjectIDsType(_movement_object);
+	for(uint i = 0; i < mos.size(); i++){
+		MovementObject@ char = ReadCharacterID(mos[i]);
+		char.Execute("situation.MovementObjectDeleted(" + id + ");");
 	}
 }
 
@@ -59,6 +62,18 @@ void Reset(){
 	imGUI.setup();
 	AddCounter();
 	GetSpawnPoints();
+	spawn_frequency = starting_spawn_frequency;
+	DeletePumpkins();
+}
+
+void DeletePumpkins(){
+	for(int i = 0; i < GetNumCharacters(); i++){
+		MovementObject@ char = ReadCharacter(i);
+		if(!char.controlled){
+			QueueDeleteObjectID(char.GetID());
+			forget_character_ids.insertLast(char.GetID());
+		}
+	}
 }
 
 void ReceiveMessage(string msg) {
@@ -74,7 +89,7 @@ void ReceiveMessage(string msg) {
 		token_iter.FindNextToken(msg);
         token = token_iter.GetToken(msg);
         int pumpkin_id = atoi(token);
-		/* ForgetCharacter(pumpkin_id); */
+		forget_character_ids.insertLast(pumpkin_id);
 		nr_kills += 1;
 		kill_counter.setText(kill_label_text + nr_kills);
 	}
@@ -100,6 +115,10 @@ void Update() {
 	}
 	UpdateSpawning();
 	SetPlaceholderPreviews();
+	if(forget_character_ids.size() > 0){
+		ForgetCharacter(forget_character_ids[0]);
+		forget_character_ids.removeAt(0);
+	}
 }
 
 // Attach a specific preview path to a given placeholder object
@@ -141,6 +160,7 @@ void UpdateSpawning(){
 	if(spawn_timer > spawn_frequency){
 		spawn_timer = 0.0;
 		spawn_frequency = max(0.5, spawn_frequency - frequency_ramp);
+		Log(info, "spawn rate " + spawn_frequency);
 		SpawnKillerPumpking();
 	}else{
 		spawn_timer += time_step;
@@ -171,7 +191,7 @@ void SpawnKillerPumpking(){
 	new_killer_pumpkin.SetTranslation(spawn_obj.GetTranslation());
 
 	ScriptParams@ pumpkin_params = new_killer_pumpkin.GetScriptParams();
-	pumpkin_params.SetFloat("Character Scale", RangedRandomFloat(0.15, 1.5));
+	pumpkin_params.SetFloat("Character Scale", RangedRandomFloat(0.25, 1.5));
 	ReadCharacterID(new_killer_pumpkin_id).Execute("SetParameters();");
 }
 
