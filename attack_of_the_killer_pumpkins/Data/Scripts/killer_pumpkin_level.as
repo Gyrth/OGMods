@@ -71,7 +71,7 @@ void DeletePumpkins(){
 		MovementObject@ char = ReadCharacter(i);
 		if(!char.controlled){
 			QueueDeleteObjectID(char.GetID());
-			forget_character_ids.insertLast(char.GetID());
+			/* forget_character_ids.insertLast(char.GetID()); */
 		}
 	}
 }
@@ -89,7 +89,7 @@ void ReceiveMessage(string msg) {
 		token_iter.FindNextToken(msg);
         token = token_iter.GetToken(msg);
         int pumpkin_id = atoi(token);
-		forget_character_ids.insertLast(pumpkin_id);
+		/* forget_character_ids.insertLast(pumpkin_id); */
 		nr_kills += 1;
 		kill_counter.setText(kill_label_text + nr_kills);
 	}
