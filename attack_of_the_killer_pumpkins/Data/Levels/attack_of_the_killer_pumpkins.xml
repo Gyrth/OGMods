@@ -5,7 +5,7 @@
 <Shader>post</Shader>
 <Shadows>true</Shadows>
 <LoadingScreen>
-    <Image></Image>
+    <Image>Data/Images/attack_of_the_killer_pumpkins_full.jpg</Image>
 </LoadingScreen>
 <Terrain>
     <Heightmap>Data/Textures/Terrain/tree_canyon/tree_canyon_hm.png</Heightmap>
@@ -36,7 +36,7 @@
     <parameter name="HDR Bloom multiplier" type="float" val="0" />
     <parameter name="HDR White point" type="float" val="2" />
     <parameter name="Level Boundaries" type="int" val="1" />
-    <parameter name="Load Tip" type="string" val="" />
+    <parameter name="Load Tip" type="string" val="Make pumpkins go splat!" />
     <parameter name="Objectives" type="string" val="destroy_all" />
     <parameter name="Saturation" type="float" val="1" />
     <parameter name="Sky Brightness" type="float" val="5" />
@@ -231,7 +231,7 @@
     <EnvObject t0="200.078" t1="168.184" t2="-223.021" s0="1" s1="1" s2="1" q0="0" q1="0.161519" q2="0" q3="0.98687" euler_x="0" euler_y="0.324459" euler_z="0" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/elm/elm_branch.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="196.48" t1="164.605" t2="-229.548" s0="1" s1="1" s2="1" q0="0" q1="-0.0551153" q2="0" q3="0.99848" euler_x="0" euler_y="-0.110286" euler_z="0" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_mossy.xml">
+    <EnvObject t0="196.558" t1="165.392" t2="-229.762" s0="1" s1="1" s2="1" q0="0" q1="-0.0551153" q2="0" q3="0.99848" euler_x="0" euler_y="-0.110286" euler_z="0" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_mossy.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="234.461" t1="167.743" t2="-192.554" s0="1" s1="1" s2="1" q0="0" q1="-0.259142" q2="0" q3="0.965839" euler_x="0" euler_y="-0.524267" euler_z="0" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_mossy.xml">
@@ -243,7 +243,7 @@
     <EnvObject t0="248.291" t1="169.675" t2="-208.029" s0="1" s1="1" s2="1" q0="0" q1="-0.189819" q2="0" q3="0.981819" euler_x="0" euler_y="-0.381956" euler_z="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_mossy.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="202.849" t1="164.79" t2="-255.152" s0="1" s1="1" s2="1" q0="0" q1="0.27199" q2="0" q3="0.9623" euler_x="0" euler_y="0.550921" euler_z="0" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_mossy.xml">
+    <EnvObject t0="202.388" t1="165.618" t2="-253.984" s0="1" s1="1" s2="1" q0="0" q1="0.27199" q2="0" q3="0.9623" euler_x="0" euler_y="0.550921" euler_z="0" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_mossy.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="189.039" t1="166.081" t2="-306.826" s0="1" s1="1" s2="1" q0="0" q1="0.402089" q2="0" q3="0.915601" euler_x="0" euler_y="0.827595" euler_z="0" id="59" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_mossy.xml">
@@ -950,7 +950,7 @@
     <EnvObject t0="188.695" t1="166.877" t2="-166.247" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="292" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
         <parameters />
     </EnvObject>
-    <CameraObject t0="221.498" t1="170.394" t2="-268.662" s0="1" s1="1" s2="1" q0="-0.0953934" q1="0.111268" q2="-0.0107307" q3="-0.989143" euler_x="0.192286" euler_y="-0.224036" euler_z="0" id="541">
+    <CameraObject t0="194.406" t1="167.852" t2="-255.439" s0="1" s1="1" s2="1" q0="0.0870147" q1="0.773201" q2="-0.108748" q3="0.618678" euler_x="-2.86213" euler_y="1.34967" euler_z="3.14159" id="541">
         <parameters />
     </CameraObject>
     <ActorObject t0="180.355" t1="165.386" t2="-215.469" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="885" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
@@ -1167,7 +1167,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <EnvObject t0="221.484" t1="169.209" t2="-279.513" s0="0.568543" s1="4.01055" s2="10.0697" q0="-1.28746e-05" q1="0.000837773" q2="0.0165312" q3="0.999863" euler_x="1.95306e-06" euler_y="0.00167574" euler_z="0.0330639" id="1065" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+    <EnvObject t0="221.484" t1="169.209" t2="-279.513" s0="0.568543" s1="4.01055" s2="10.0697" q0="-1.28746e-05" q1="0.000837773" q2="0.0165312" q3="0.999863" euler_x="1.95312e-06" euler_y="0.00167574" euler_z="0.0330639" id="1065" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
         <parameters />
     </EnvObject>
     <ItemObject t0="222.903" t1="168.067" t2="-286.429" s0="1" s1="1" s2="1" q0="-0.947049" q1="0.0581179" q2="-0.279476" q3="0.147033" euler_x="-2.77108" euler_y="-0.537819" euler_z="-0.225783" id="1066" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
