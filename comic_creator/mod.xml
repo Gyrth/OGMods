@@ -1,0 +1,18 @@
+<? xml version="1.0" ?>
+<Mod>
+	<Id>comic-creator</Id>
+	<Name>Comic Creator</Name>
+	<Category>Item Pack</Category>
+	<Version>0.1.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Thumbnail>Data/Images/comic_creator_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/comic_creator_full.jpg</PreviewImage>
+	<Description>Comic Creator.</Description>
+	<Tag>Scripting</Tag>
+	<Tag>Tool</Tag>
+	<Tag>Editor</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<NeedsRestart>false</NeedsRestart>
+	<!-- <Level title="Comic Creator" thumbnail="Images/comic_creator_full.jpg">comic_creator.xml</Level> -->
+	<MenuItem title="Comic Creator" category="play">Data/Scripts/comic_creator.as</MenuItem>
+</Mod>
