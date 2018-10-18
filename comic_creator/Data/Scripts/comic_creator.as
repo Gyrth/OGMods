@@ -18,6 +18,7 @@ int grabber_size = 100;
 enum grabber_types { scaler, mover };
 enum creator_states { editing, playing };
 enum editing_states { edit_image };
+enum comic_element_types { none, grabber, comic_image };
 
 creator_states creator_state = editing;
 
@@ -26,12 +27,14 @@ Grabber@ current_grabber = null;
 string comic_path = "Data/Comics/example.txt";
 
 class ComicElement{
+	comic_element_types comic_element_type = none;
 	void AddPosition(vec2 added_positon){}
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
 	Grabber@ GetGrabber(string grabber_name){return null;}
 	void Select(){}
 	void UnSelect(){}
 	string GetSaveString(){return "";}
+	void AddUpdateBehavior(IMUpdateBehavior@ behavior){};
 }
 
 class Grabber : ComicElement{
@@ -43,6 +46,8 @@ class Grabber : ComicElement{
 		IMImage grabber_image("Textures/ui/eclipse.tga");
 		@image = grabber_image;
 		grabber_type = _grabber_type;
+
+		comic_element_type = grabber;
 
 		direction_x = _direction_x;
 		direction_y = _direction_y;
@@ -75,12 +80,14 @@ class ComicImage : ComicElement{
 	string path;
 	vec2 location;
 	vec2 size;
+	int behavior_counter = 0;
 
 	ComicImage(string _path, vec2 _location, vec2 _size, int _index){
 		path = _path;
 		index = _index;
 		location = _location;
 		size = _size;
+		comic_element_type = comic_image;
 		IMImage new_image(path);
 		@image = new_image;
 		new_image.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
@@ -163,6 +170,7 @@ class ComicImage : ComicElement{
 		edit_mode = false;
 		Update();
 	}
+
 	void Select(){
 		edit_mode = true;
 		Update();
@@ -170,6 +178,11 @@ class ComicImage : ComicElement{
 
 	string GetSaveString(){
 		return "add_image " + path + " " + location.x + " " + location.y + " " + size.x + " " + size.y;
+	}
+
+	void AddUpdateBehavior(IMUpdateBehavior@ behavior){
+		image.addUpdateBehavior(behavior, "behavior" + behavior_counter);
+		behavior_counter += 1;
 	}
 }
 
@@ -208,8 +221,25 @@ void InterpComic(){
 			vec2 position = vec2(atoi(line_elements[2]), atoi(line_elements[3]));
 			vec2 size = vec2(atoi(line_elements[4]), atoi(line_elements[5]));
 			comic_elements.insertLast(ComicImage(line_elements[1], position, size, i));
+		}else if(line_elements[0] == "fade_in"){
+			IMFadeIn new_fade(atoi(line_elements[1]), inSineTween);
+			AddBehaviorToLastElement(new_fade);
+			comic_elements.insertLast(ComicElement());
+		}else if(line_elements[0] == "move_in"){
+			IMMoveIn new_move(atoi(line_elements[1]), vec2(atoi(line_elements[2]), atoi(line_elements[3])), inSineTween);
+			AddBehaviorToLastElement(new_move);
+			comic_elements.insertLast(ComicElement());
 		}else{
 			comic_elements.insertLast(ComicElement());
+		}
+	}
+}
+
+void AddBehaviorToLastElement(IMUpdateBehavior@ behavior){
+	for(int i = comic_elements.size() -1; i > -1; i--){
+		if(comic_elements[i].comic_element_type == comic_image){
+			comic_elements[i].AddUpdateBehavior(behavior);
+			break;
 		}
 	}
 }
