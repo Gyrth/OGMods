@@ -7,7 +7,7 @@ IMGUI@ imGUI;
 
 bool show = true;
 bool textbox_active = false;
-int current_line = 0;
+int current_line = -1;
 
 TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/whaleman.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
@@ -25,16 +25,63 @@ creator_states creator_state = editing;
 vec2 drag_position;
 Grabber@ current_grabber = null;
 string comic_path = "Data/Comics/example.txt";
+int update_behavior_counter = 0;
 
 class ComicElement{
 	comic_element_types comic_element_type = none;
+	bool visible;
 	void AddPosition(vec2 added_positon){}
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
 	Grabber@ GetGrabber(string grabber_name){return null;}
-	void Select(){}
-	void UnSelect(){}
+	void SetEdit(bool editing){}
 	string GetSaveString(){return "";}
-	void AddUpdateBehavior(IMUpdateBehavior@ behavior){};
+	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){};
+	void RemoveUpdateBehavior(string behavior_name){};
+	void SetVisible(bool visible){}
+}
+
+class ComicFadeIn : ComicElement{
+	ComicElement@ target;
+	int duration;
+	string name;
+	ComicFadeIn(ComicElement@ _target, int _duration){
+		duration = _duration;
+		@target = _target;
+		name = "fadein" + update_behavior_counter;
+		update_behavior_counter += 1;
+	}
+	void SetVisible(bool _visible){
+		visible = _visible;
+		if(visible){
+			IMFadeIn new_fade(duration, inSineTween);
+			target.AddUpdateBehavior(new_fade, name);
+		}else{
+			target.RemoveUpdateBehavior(name);
+		}
+	}
+}
+
+class ComicMoveIn : ComicElement{
+	ComicElement@ target;
+	int duration;
+	vec2 offset;
+	string name;
+	ComicMoveIn(ComicElement@ _target, int _duration, vec2 _offset){
+		duration = _duration;
+		offset = _offset;
+		@target = _target;
+		name = "movein" + update_behavior_counter;
+		update_behavior_counter += 1;
+	}
+	void SetVisible(bool _visible){
+		visible = _visible;
+		if(visible){
+			IMMoveIn new_move(duration, offset, inSineTween);
+			target.AddUpdateBehavior(new_move, name);
+		}else{
+			target.RemoveUpdateBehavior(name);
+		}
+	}
 }
 
 class Grabber : ComicElement{
@@ -62,7 +109,8 @@ class Grabber : ComicElement{
 		grabber_image.setSize(vec2(grabber_size));
 		imGUI.getMain().addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0), 4);
 	}
-	void setVisible(bool visible){
+	void SetVisible(bool _visible){
+		visible = _visible;
 		image.setVisible(visible);
 		image.setPauseBehaviors(!visible);
 	}
@@ -80,7 +128,6 @@ class ComicImage : ComicElement{
 	string path;
 	vec2 location;
 	vec2 size;
-	int behavior_counter = 0;
 
 	ComicImage(string _path, vec2 _location, vec2 _size, int _index){
 		path = _path;
@@ -106,11 +153,13 @@ class ComicImage : ComicElement{
 
 	void Update(){
 		image.showBorder(edit_mode);
-		grabber_top_left.setVisible(edit_mode);
-		grabber_top_right.setVisible(edit_mode);
-		grabber_bottom_left.setVisible(edit_mode);
-		grabber_bottom_right.setVisible(edit_mode);
-		grabber_center.setVisible(edit_mode);
+		grabber_top_left.SetVisible(edit_mode);
+		grabber_top_right.SetVisible(edit_mode);
+		grabber_bottom_left.SetVisible(edit_mode);
+		grabber_bottom_right.SetVisible(edit_mode);
+		grabber_center.SetVisible(edit_mode);
+
+		image.setVisible(visible);
 
 		vec2 location = imGUI.getMain().getElementPosition("image" + index);
 		vec2 size = image.getSize();
@@ -166,13 +215,8 @@ class ComicImage : ComicElement{
 		}
 	}
 
-	void UnSelect(){
-		edit_mode = false;
-		Update();
-	}
-
-	void Select(){
-		edit_mode = true;
+	void SetEdit(bool editing){
+		edit_mode = editing;
 		Update();
 	}
 
@@ -180,9 +224,19 @@ class ComicImage : ComicElement{
 		return "add_image " + path + " " + location.x + " " + location.y + " " + size.x + " " + size.y;
 	}
 
-	void AddUpdateBehavior(IMUpdateBehavior@ behavior){
-		image.addUpdateBehavior(behavior, "behavior" + behavior_counter);
-		behavior_counter += 1;
+	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
+		Log(info, "add " + name);
+		image.addUpdateBehavior(behavior, name);
+	}
+
+	void RemoveUpdateBehavior(string name){
+		Log(info, "remove " + name);
+		image.removeUpdateBehavior(name);
+	}
+
+	void SetVisible(bool _visible){
+		visible = _visible;
+		Update();
 	}
 }
 
@@ -191,7 +245,7 @@ void Initialize(){
 	PlaySong("menu-lugaru");
 
 	imGUI.setup();
-	AddBackground();
+	/* AddBackground(); */
 	LoadComic(comic_path);
 }
 
@@ -222,26 +276,22 @@ void InterpComic(){
 			vec2 size = vec2(atoi(line_elements[4]), atoi(line_elements[5]));
 			comic_elements.insertLast(ComicImage(line_elements[1], position, size, i));
 		}else if(line_elements[0] == "fade_in"){
-			IMFadeIn new_fade(atoi(line_elements[1]), inSineTween);
-			AddBehaviorToLastElement(new_fade);
-			comic_elements.insertLast(ComicElement());
+			comic_elements.insertLast(ComicFadeIn(GetLastElement(), atoi(line_elements[1])));
 		}else if(line_elements[0] == "move_in"){
-			IMMoveIn new_move(atoi(line_elements[1]), vec2(atoi(line_elements[2]), atoi(line_elements[3])), inSineTween);
-			AddBehaviorToLastElement(new_move);
-			comic_elements.insertLast(ComicElement());
+			comic_elements.insertLast(ComicMoveIn(GetLastElement(), atoi(line_elements[1]), vec2(atoi(line_elements[2]), atoi(line_elements[3]))));
 		}else{
 			comic_elements.insertLast(ComicElement());
 		}
 	}
 }
 
-void AddBehaviorToLastElement(IMUpdateBehavior@ behavior){
+ComicElement@ GetLastElement(){
 	for(int i = comic_elements.size() -1; i > -1; i--){
 		if(comic_elements[i].comic_element_type == comic_image){
-			comic_elements[i].AddUpdateBehavior(behavior);
-			break;
+			return comic_elements[i];
 		}
 	}
+	return null;
 }
 
 void AddBackground(){
@@ -293,16 +343,36 @@ void Update(){
 		}
 	}
 	UpdateGrabber();
-	UpdateEditState();
+	UpdateProgress();
 	imGUI.update();
 }
 
-void UpdateEditState(){
+void UpdateProgress(){
 	int new_line = GetLineNumber(ImGui_GetTextBuf());
 	if(new_line != current_line){
-		comic_elements[current_line].UnSelect();
-		current_line = new_line;
-		comic_elements[current_line].Select();
+		if(creator_state == editing && current_line != -1){
+			comic_elements[current_line].SetEdit(false);
+		}
+		while(true){
+			// Move down the script.
+			if(new_line < current_line){
+				comic_elements[current_line].SetVisible(false);
+				current_line -= 1;
+				comic_elements[current_line].SetVisible(true);
+			// Move up.
+			}else if(new_line > current_line){
+				current_line += 1;
+				comic_elements[current_line].SetVisible(true);
+			// At the correct line.
+			}else{
+				/* comic_elements[current_line].SetVisible(true); */
+				break;
+			}
+		}
+
+		if(creator_state == editing){
+			comic_elements[current_line].SetEdit(true);
+		}
 	}
 }
 
