@@ -11,24 +11,27 @@ int current_line = -1;
 
 TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/whaleman.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
-string background_path = "Textures/grid.png";
+string grid_background = "Textures/grid.png";
+string black_background = "Textures/black.tga";
 array<ComicElement@> comic_elements;
 int grabber_size = 100;
 
 enum grabber_types { scaler, mover };
 enum creator_states { editing, playing };
 enum editing_states { edit_image };
-enum comic_element_types { none, grabber, comic_image };
+enum comic_element_types { none, grabber, comic_image, comic_page };
 
 creator_states creator_state = editing;
 
 vec2 drag_position;
 Grabber@ current_grabber = null;
+ComicElement@ current_page = null;
 string comic_path = "Data/Comics/example.txt";
 int update_behavior_counter = 0;
 
 class ComicElement{
 	comic_element_types comic_element_type = none;
+	ComicElement@ on_page = null;
 	bool visible;
 	void AddPosition(vec2 added_positon){}
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
@@ -38,6 +41,33 @@ class ComicElement{
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){};
 	void RemoveUpdateBehavior(string behavior_name){};
 	void SetVisible(bool visible){}
+	void AddElement(ComicElement@ element){}
+	void ShowPage(){}
+	void HidePage(){}
+}
+
+class ComicPage : ComicElement{
+	array<ComicElement@> elements;
+	ComicPage(){
+		comic_element_type = comic_page;
+	}
+	void SetVisible(bool _visible){
+		visible = _visible;
+	}
+	void AddElement(ComicElement@ element){
+		elements.insertLast(element);
+	}
+	void ShowPage(){
+		for(uint i = 0; i < elements.size(); i++){
+			elements[i].SetVisible(true);
+		}
+	}
+	void HidePage(){
+		Log(info, "Hide page");
+		for(uint i = 0; i < elements.size(); i++){
+			elements[i].SetVisible(false);
+		}
+	}
 }
 
 class ComicFadeIn : ComicElement{
@@ -280,10 +310,20 @@ void InterpComic(){
 			comic_elements.insertLast(ComicFadeIn(GetLastElement(), atoi(line_elements[1])));
 		}else if(line_elements[0] == "move_in"){
 			comic_elements.insertLast(ComicMoveIn(GetLastElement(), atoi(line_elements[1]), vec2(atoi(line_elements[2]), atoi(line_elements[3]))));
+		}else if(line_elements[0] == "new_page"){
+			Log(info, "add page");
+			ComicPage new_page = ComicPage();
+			@current_page = new_page;
+			comic_elements.insertLast(@new_page);
 		}else{
 			comic_elements.insertLast(ComicElement());
 		}
+		@comic_elements[comic_elements.size() - 1].on_page = current_page;
+		if(@current_page != null){
+			current_page.AddElement(comic_elements[comic_elements.size() - 1]);
+		}
 	}
+	@current_page = null;
 }
 
 ComicElement@ GetLastElement(){
@@ -304,6 +344,12 @@ void AddBackground(){
 		IMDivider horizontal("horizontal" + i, DOHorizontal);
 		vertical.append(horizontal);
 		for(int j = 0; j < horizontal_amount; j++){
+			string background_path;
+			if(creator_state == editing){
+				background_path = grid_background;
+			}else{
+				background_path = black_background;
+			}
 			IMImage background(background_path);
 			background.scaleToSizeX(320);
 			horizontal.append(background);
@@ -357,11 +403,24 @@ void UpdateProgress(){
 		while(true){
 			// Move down the script.
 			if(new_line < current_line){
+				if(comic_elements[current_line].comic_element_type == comic_page){
+					Log(info, "Going to previous page");
+					comic_elements[current_line - 1].on_page.ShowPage();
+					@current_page = comic_elements[current_line - 1].on_page;
+				}
 				comic_elements[current_line].SetVisible(false);
 				current_line -= 1;
 				comic_elements[current_line].SetVisible(true);
 			// Move up.
 			}else if(new_line > current_line){
+				if(comic_elements[current_line + 1].comic_element_type == comic_page){
+					Log(info, "Going to next page");
+					if(@current_page != null){
+						Log(info, "trying to hide");
+						current_page.HidePage();
+					}
+					@current_page = comic_elements[current_line + 1];
+				}
 				current_line += 1;
 				comic_elements[current_line].SetVisible(true);
 			// At the correct line.

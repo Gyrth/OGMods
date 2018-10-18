@@ -1,3 +1,4 @@
+new_page
 add_image Textures/example_comic_background.png 0 0 2560 1440
 add_image Textures/example_comic_1.png 20 40 2520 660
 move_in 1000 0 -500
@@ -8,4 +9,13 @@ fade_in 1500
 add_image Textures/example_comic_3.png 1140 700 1360 700
 fade_in 1500
 move_in 1000 1000 0
-next_page
+new_page
+add_image Textures/example_comic_background.png 0 0 2560 1440
+add_image Textures/example_comic_3.png 1140 700 1360 700
+fade_in 1500
+move_in 1000 1000 0
+new_page
+add_image Textures/example_comic_background.png 0 0 2560 1440
+add_image Textures/example_comic_3.png 1140 700 1360 700
+fade_in 1500
+move_in 1000 1000 0
