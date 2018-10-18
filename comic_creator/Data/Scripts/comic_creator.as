@@ -5,7 +5,7 @@ MusicLoad ml("Data/Music/menu.xml");
 string level_name = "";
 IMGUI@ imGUI;
 
-bool show = true;
+bool editor_open = true;
 bool textbox_active = false;
 int current_line = -1;
 
@@ -19,7 +19,7 @@ int grabber_size = 100;
 enum grabber_types { scaler, mover };
 enum creator_states { editing, playing };
 enum editing_states { edit_image };
-enum comic_element_types { none, grabber, comic_image, comic_page, comic_text };
+enum comic_element_types { none, grabber, comic_image, comic_page, comic_text, wait_click };
 
 creator_states creator_state = editing;
 
@@ -52,6 +52,12 @@ class ComicElement{
 	void SetEdit(bool editing){
 		edit_mode = editing;
 		Update();
+	}
+}
+
+class ComicWaitClick : ComicElement{
+	ComicWaitClick(){
+		comic_element_type = wait_click;
 	}
 }
 
@@ -143,7 +149,6 @@ class ComicPage : ComicElement{
 		}
 	}
 	void HidePage(){
-		Log(info, "Hide page");
 		for(uint i = 0; i < elements.size(); i++){
 			elements[i].SetVisible(false);
 		}
@@ -222,6 +227,7 @@ class Grabber : ComicElement{
 	void SetVisible(bool _visible){
 		visible = _visible;
 		image.setVisible(visible);
+		Log(info, "set grabber pause " + !visible);
 		image.setPauseBehaviors(!visible);
 	}
 }
@@ -329,12 +335,10 @@ class ComicImage : ComicElement{
 	}
 
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
-		Log(info, "add " + name);
 		image.addUpdateBehavior(behavior, name);
 	}
 
 	void RemoveUpdateBehavior(string name){
-		Log(info, "remove " + name);
 		image.removeUpdateBehavior(name);
 	}
 
@@ -398,6 +402,8 @@ void InterpComic(){
 			Log(info, "addtext");
 			ComicText new_text(line_elements[1], current_font, vec2(atoi(line_elements[2]), atoi(line_elements[3])), i);
 			comic_elements.insertLast(@new_text);
+		}else if(line_elements[0] == "wait_click"){
+			comic_elements.insertLast(ComicWaitClick());
 		}else{
 			comic_elements.insertLast(ComicElement());
 		}
@@ -454,8 +460,12 @@ void Resize() {
 }
 
 void Update(){
-	if(GetInputPressed(0, "i")){
-		show = !show;
+	if(GetInputPressed(0, "f1")){
+		editor_open = !editor_open;
+	}
+	if(!editor_open && creator_state == editing){
+		current_line = 0;
+		creator_state = playing;
 	}
 	while( imGUI.getMessageQueueSize() > 0 ) {
 		IMMessage@ message = imGUI.getNextMessage();
@@ -477,17 +487,57 @@ void Update(){
 	imGUI.update();
 }
 
+int play_direction = 1.0;
+
+bool CanPlayForward(){
+	for(uint i = current_line + 1; i < comic_elements.size(); i++){
+		if(comic_elements[i].comic_element_type == wait_click){
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CanPlayBackward(){
+	for(int i = (current_line - 1); i >= 0; i--){
+		if(comic_elements[i].comic_element_type == wait_click){
+			return true;
+		}
+	}
+	return false;
+}
+
 void UpdateProgress(){
-	int new_line = GetLineNumber(ImGui_GetTextBuf());
+	int new_line = current_line;
+	if(creator_state == playing){
+		if(comic_elements[current_line].comic_element_type == wait_click){
+			bool can_play_forward = CanPlayForward();
+			bool can_play_backward = CanPlayBackward();
+			if(GetInputPressed(0, "mouse0") && can_play_forward){
+				new_line = current_line + 1;
+				play_direction = 1;
+			}else if(GetInputPressed(0, "grab") && can_play_backward){
+				new_line = current_line - 1;
+				play_direction = -1;
+			}
+		}else{
+			if(play_direction == 1){
+				new_line = current_line + 1;
+			}else if(play_direction == -1){
+				new_line = current_line - 1;
+			}
+		}
+	}else{
+		new_line = GetLineNumber(ImGui_GetTextBuf());
+	}
 	if(new_line != current_line){
-		if(creator_state == editing && current_line != -1){
+		if(current_line != -1){
 			comic_elements[current_line].SetEdit(false);
 		}
 		while(true){
 			// Move down the script.
 			if(new_line < current_line){
 				if(comic_elements[current_line].comic_element_type == comic_page){
-					Log(info, "Going to previous page");
 					comic_elements[current_line - 1].on_page.ShowPage();
 					@current_page = comic_elements[current_line - 1].on_page;
 				}
@@ -497,9 +547,7 @@ void UpdateProgress(){
 			// Move up.
 			}else if(new_line > current_line){
 				if(comic_elements[current_line + 1].comic_element_type == comic_page){
-					Log(info, "Going to next page");
 					if(@current_page != null){
-						Log(info, "trying to hide");
 						current_page.HidePage();
 					}
 					@current_page = comic_elements[current_line + 1];
@@ -512,7 +560,6 @@ void UpdateProgress(){
 				break;
 			}
 		}
-
 		if(creator_state == editing){
 			comic_elements[current_line].SetEdit(true);
 		}
@@ -543,6 +590,7 @@ void UpdateGrabber(){
 	if(dragging){
 		if(!GetInputDown(0, "mouse0")){
 			dragging = false;
+			@current_grabber = null;
 		}else{
 			vec2 new_position = imGUI.guistate.mousePosition;
 			if(new_position != drag_position){
@@ -577,7 +625,7 @@ void UpdateGrabber(){
 			}
 		}
 	}else{
-		if(GetInputDown(0, "mouse0")){
+		if(GetInputDown(0, "mouse0") && @current_grabber != null){
 			drag_position = imGUI.guistate.mousePosition;
 			dragging = true;
 		}
@@ -620,7 +668,7 @@ string ToLowerCase(string input){
 
 void DrawGUI(){
 	ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
-	ImGui_Begin("Comic Creator", show, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar);
+	ImGui_Begin("Comic Creator", editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar);
 	if(ImGui_BeginMenuBar()){
 		if(ImGui_BeginMenu("File")){
 			if(ImGui_MenuItem("Save")){

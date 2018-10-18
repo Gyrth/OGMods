@@ -3,22 +3,28 @@ add_image Textures/example_comic_background.png 0 0 2560 1440
 add_image Textures/example_comic_1.png 20 40 2520 660
 move_in 1000 0 -500
 fade_in 1500
+wait_click
 add_text hello 1440 200
 fade_in 1500
+wait_click
 add_image Textures/example_comic_2.png 60 700 1080 700
 move_in 1000 0 500
 fade_in 1500
+wait_click
 set_font edosz 75 #491349 true
 add_text world 660 780
 move_in 1000 0 -500
+wait_click
 add_image Textures/example_comic_3.png 1140 700 1360 700
 fade_in 1500
 move_in 1000 1000 0
+wait_click
 new_page
 add_image Textures/example_comic_background.png 0 0 2560 1440
 add_image Textures/example_comic_3.png 1140 700 1360 700
 fade_in 1500
 move_in 1000 1000 0
+wait_click
 new_page
 add_image Textures/example_comic_background.png 0 0 2560 1440
 add_image Textures/example_comic_3.png 1140 700 1360 700
