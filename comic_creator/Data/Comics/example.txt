@@ -1,4 +1,7 @@
-add_image "Textures/fire.png" 200 200
+add_image Textures/example_comic_background.png 0 0 2560 1440
+add_image Textures/example_comic_1.png 20 40 2520 660
+add_image Textures/example_comic_2.png 60 700 1080 700
+add_image Textures/example_comic_3.png 1140 700 1360 700
 move_in 0.0 100.0
 fade_in 5.0
 next_page

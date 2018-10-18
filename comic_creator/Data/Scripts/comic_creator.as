@@ -6,19 +6,35 @@ string level_name = "";
 IMGUI@ imGUI;
 
 bool show = true;
+bool textbox_active = false;
+int current_line = 0;
 
 TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/whaleman.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
 string background_path = "Textures/grid.png";
-int nr_background_tiles = 10;
-array<ComicImage@> images;
+array<ComicElement@> comic_elements;
 int grabber_size = 100;
 
 enum grabber_types { scaler, mover };
 enum creator_states { editing, playing };
 enum editing_states { edit_image };
 
-class Grabber{
+creator_states creator_state = editing;
+
+vec2 drag_position;
+Grabber@ current_grabber = null;
+string comic_path = "Data/Comics/example.txt";
+
+class ComicElement{
+	void AddPosition(vec2 added_positon){}
+	void AddSize(vec2 added_size, int direction_x, int direction_y){}
+	Grabber@ GetGrabber(string grabber_name){return null;}
+	void Select(){}
+	void UnSelect(){}
+	string GetSaveString(){return "";}
+}
+
+class Grabber : ComicElement{
 	IMImage@ image;
 	int direction_x;
 	int direction_y;
@@ -43,10 +59,11 @@ class Grabber{
 	}
 	void setVisible(bool visible){
 		image.setVisible(visible);
+		image.setPauseBehaviors(!visible);
 	}
 }
 
-class ComicImage{
+class ComicImage : ComicElement{
 	bool edit_mode = false;
 	IMImage@ image;
 	Grabber@ grabber_top_left;
@@ -55,12 +72,17 @@ class ComicImage{
 	Grabber@ grabber_bottom_right;
 	Grabber@ grabber_center;
 	int index;
+	string path;
+	vec2 location;
+	vec2 size;
 
-	ComicImage(string path, vec2 size, vec2 location, bool _edit_mode, int _index){
+	ComicImage(string _path, vec2 _location, vec2 _size, int _index){
+		path = _path;
+		index = _index;
+		location = _location;
+		size = _size;
 		IMImage new_image(path);
 		@image = new_image;
-		edit_mode = _edit_mode;
-		index = _index;
 		new_image.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 
 		@grabber_top_left = Grabber(index, "top_left", -1, -1, scaler);
@@ -70,6 +92,7 @@ class ComicImage{
 		@grabber_center = Grabber(index, "center", 1, 1, mover);
 
 		new_image.setSize(size);
+		Log(info, " " + path );
 		imGUI.getMain().addFloatingElement(new_image, "image" + index, location, 2);
 		Update();
 	}
@@ -80,6 +103,7 @@ class ComicImage{
 		grabber_top_right.setVisible(edit_mode);
 		grabber_bottom_left.setVisible(edit_mode);
 		grabber_bottom_right.setVisible(edit_mode);
+		grabber_center.setVisible(edit_mode);
 
 		vec2 location = imGUI.getMain().getElementPosition("image" + index);
 		vec2 size = image.getSize();
@@ -94,21 +118,28 @@ class ComicImage{
 	void AddSize(vec2 added_size, int direction_x, int direction_y){
 		if(direction_x == 1){
 			image.setSizeX(image.getSizeX() + added_size.x);
+			size.x += added_size.x;
 		}else{
 			image.setSizeX(image.getSizeX() - added_size.x);
+			size.x -= added_size.x;
 			imGUI.getMain().moveElementRelative("image" + index, vec2(added_size.x, 0.0));
+			location.x += added_size.x;
 		}
 		if(direction_y == 1){
 			image.setSizeY(image.getSizeY() + added_size.y);
+			size.y += added_size.y;
 		}else{
 			image.setSizeY(image.getSizeY() - added_size.y);
+			size.y -= added_size.y;
 			imGUI.getMain().moveElementRelative("image" + index, vec2(0.0, added_size.y));
+			location.y += added_size.y;
 		}
 		Update();
 	}
 
 	void AddPosition(vec2 added_positon){
 		imGUI.getMain().moveElementRelative("image" + index, added_positon);
+		location += added_positon;
 		Update();
 	}
 
@@ -127,6 +158,19 @@ class ComicImage{
 			return null;
 		}
 	}
+
+	void UnSelect(){
+		edit_mode = false;
+		Update();
+	}
+	void Select(){
+		edit_mode = true;
+		Update();
+	}
+
+	string GetSaveString(){
+		return "add_image " + path + " " + location.x + " " + location.y + " " + size.x + " " + size.y;
+	}
 }
 
 void Initialize(){
@@ -135,34 +179,56 @@ void Initialize(){
 
 	imGUI.setup();
 	AddBackground();
+	LoadComic(comic_path);
+}
 
-	string collection;
-	if(LoadFile("Data/Comics/example.txt")){
+string comic_content;
+void LoadComic(string path){
+	comic_content = "";
+	if(LoadFile(path)){
 		string new_line;
-	    while(true){
-	        new_line = GetFileLine();
+		while(true){
+			new_line = GetFileLine();
 			if(new_line == "end"){
 				break;
 			}
-			collection += new_line + "\n";
+			comic_content += new_line + "\n";
 		}
 	}
-	ImGui_SetTextBuf(collection);
-	images.insertLast(ComicImage("Textures/fire.png", vec2(500, 500), vec2(500, 500), true, 0));
+	ImGui_SetTextBuf(comic_content);
+	InterpComic();
+}
+
+void InterpComic(){
+	array<string> lines = comic_content.split("\n");
+
+	for(uint i = 0; i < lines.size(); i++){
+		array<string> line_elements = lines[i].split(" ");
+		if(line_elements[0] == "add_image"){
+			vec2 position = vec2(atoi(line_elements[2]), atoi(line_elements[3]));
+			vec2 size = vec2(atoi(line_elements[4]), atoi(line_elements[5]));
+			comic_elements.insertLast(ComicImage(line_elements[1], position, size, i));
+		}else{
+			comic_elements.insertLast(ComicElement());
+		}
+	}
 }
 
 void AddBackground(){
+	int vertical_amount = 5;
+	int horizontal_amount = 8;
 	IMDivider vertical("vertical", DOVertical);
-	for(int i = 0; i < nr_background_tiles; i++){
+	vertical.setZOrdering(-1);
+	for(int i = 0; i < vertical_amount; i++){
 		IMDivider horizontal("horizontal" + i, DOHorizontal);
 		vertical.append(horizontal);
-		for(int j = 0; j < nr_background_tiles; j++){
+		for(int j = 0; j < horizontal_amount; j++){
 			IMImage background(background_path);
 			background.scaleToSizeX(320);
 			horizontal.append(background);
 		}
 	}
-	imGUI.getMain().addFloatingElement(vertical, "Background", vec2(0,0), -1);
+	imGUI.getMain().addFloatingElement(vertical, "Background", vec2(0,0));
 }
 
 bool CanGoBack(){
@@ -177,10 +243,6 @@ void Resize() {
 	imGUI.doScreenResize();
 }
 
-vec2 drag_position;
-ComicImage@ current_image = null;
-Grabber@ current_grabber = null;
-
 void Update(){
 	if(GetInputPressed(0, "i")){
 		show = !show;
@@ -192,14 +254,11 @@ void Update(){
 			imGUI.getMain().clear();
 		}else if( message.name == "grabber_activate" ) {
 			if(!dragging){
-				@current_image = images[message.getInt(0)];
-				@current_grabber = current_image.GetGrabber(message.getString(0));
+				@current_grabber = comic_elements[current_line].GetGrabber(message.getString(0));
 				Log(info, "message " + message.getString(0));
 			}
 		}else if( message.name == "grabber_deactivate" ) {
-			if(!dragging){
-				@current_image = null;
-			}
+
 		}else if( message.name == "grabber_move_check" ) {
 		}
 	}
@@ -208,12 +267,12 @@ void Update(){
 	imGUI.update();
 }
 
-int current_line = -1;
 void UpdateEditState(){
 	int new_line = GetLineNumber(ImGui_GetTextBuf());
 	if(new_line != current_line){
+		comic_elements[current_line].UnSelect();
 		current_line = new_line;
-		Log(info, "" + GetLineNumber(ImGui_GetTextBuf()));
+		comic_elements[current_line].Select();
 	}
 }
 
@@ -221,61 +280,72 @@ int GetLineNumber(string input){
 	array<string> split_input = input.split("\n");
 	int counter = 0;
 
-	for(uint i = 0; i < split_input.size(); i++){
-		counter += split_input[i].length() + 1;
-		if(imgui_text_input_CursorPos < counter){
-			return i;
+	if(!textbox_active){
+		return current_line;
+	}else{
+		for(uint i = 0; i < split_input.size(); i++){
+			counter += split_input[i].length() + 1;
+			if(imgui_text_input_CursorPos < counter){
+				return i;
+			}
 		}
+		return 0;
 	}
-	return 0;
 }
 
 bool dragging = false;
 int snap_scale = 20;
 
 void UpdateGrabber(){
-	if(@current_image != null){
-		if(dragging){
-			if(!GetInputDown(0, "mouse0")){
-				dragging = false;
-				@current_image = null;
-			}else{
-				vec2 new_position = imGUI.guistate.mousePosition;
-				if(new_position != drag_position){
-					vec2 difference = (new_position - drag_position);
-					int direction_x = (difference.x > 0.0) ? 1 : -1;
-					int direction_y = (difference.y > 0.0) ? 1 : -1;
-					int steps_x = int(abs(difference.x) / snap_scale);
-					int steps_y = int(abs(difference.y) / snap_scale);
-					Log(info, steps_x + "");
-					if(current_grabber.grabber_type == scaler){
-						if(abs(difference.x) >= snap_scale){
-							current_image.AddSize(vec2(snap_scale * direction_x * steps_x, 0.0), current_grabber.direction_x, current_grabber.direction_y);
-							drag_position.x += snap_scale * direction_x * steps_x;
-						}
-						if(abs(difference.y) >= snap_scale){
-							current_image.AddSize(vec2(0.0, snap_scale * direction_y * steps_y), current_grabber.direction_x, current_grabber.direction_y);
-							drag_position.y += snap_scale * direction_y * steps_y;
-						}
-					}else if(current_grabber.grabber_type == mover){
-						if(abs(difference.x) >= snap_scale){
-							current_image.AddPosition(vec2(snap_scale * direction_x * steps_x, 0.0));
-							drag_position.x += snap_scale * direction_x * steps_x;
-						}
-						if(abs(difference.y) >= snap_scale){
-							current_image.AddPosition(vec2(0.0, snap_scale * direction_y * steps_y));
-							drag_position.y += snap_scale * direction_y * steps_y;
-						}
+	if(dragging){
+		if(!GetInputDown(0, "mouse0")){
+			dragging = false;
+		}else{
+			vec2 new_position = imGUI.guistate.mousePosition;
+			if(new_position != drag_position){
+				vec2 difference = (new_position - drag_position);
+				int direction_x = (difference.x > 0.0) ? 1 : -1;
+				int direction_y = (difference.y > 0.0) ? 1 : -1;
+				int steps_x = int(abs(difference.x) / snap_scale);
+				int steps_y = int(abs(difference.y) / snap_scale);
+				if(current_grabber.grabber_type == scaler){
+					if(abs(difference.x) >= snap_scale){
+						comic_elements[current_line].AddSize(vec2(snap_scale * direction_x * steps_x, 0.0), current_grabber.direction_x, current_grabber.direction_y);
+						drag_position.x += snap_scale * direction_x * steps_x;
+						SetCurrentLineContent();
+					}
+					if(abs(difference.y) >= snap_scale){
+						comic_elements[current_line].AddSize(vec2(0.0, snap_scale * direction_y * steps_y), current_grabber.direction_x, current_grabber.direction_y);
+						drag_position.y += snap_scale * direction_y * steps_y;
+						SetCurrentLineContent();
+					}
+				}else if(current_grabber.grabber_type == mover){
+					if(abs(difference.x) >= snap_scale){
+						comic_elements[current_line].AddPosition(vec2(snap_scale * direction_x * steps_x, 0.0));
+						drag_position.x += snap_scale * direction_x * steps_x;
+						SetCurrentLineContent();
+					}
+					if(abs(difference.y) >= snap_scale){
+						comic_elements[current_line].AddPosition(vec2(0.0, snap_scale * direction_y * steps_y));
+						drag_position.y += snap_scale * direction_y * steps_y;
+						SetCurrentLineContent();
 					}
 				}
 			}
-		}else{
-			if(GetInputDown(0, "mouse0")){
-				drag_position = imGUI.guistate.mousePosition;
-				dragging = true;
-			}
+		}
+	}else{
+		if(GetInputDown(0, "mouse0")){
+			drag_position = imGUI.guistate.mousePosition;
+			dragging = true;
 		}
 	}
+}
+
+void SetCurrentLineContent(){
+	array<string> lines = comic_content.split("\n");
+	lines[current_line] = comic_elements[current_line].GetSaveString();
+	comic_content = join(lines, "\n");
+	ImGui_SetTextBuf(comic_content);
 }
 
 void ReceiveMessage(string msg){
@@ -307,14 +377,41 @@ string ToLowerCase(string input){
 
 void DrawGUI(){
 	ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
-	ImGui_Begin("Comic Creator", show, ImGuiWindowFlags_NoScrollbar);
+	ImGui_Begin("Comic Creator", show, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar);
+	if(ImGui_BeginMenuBar()){
+		if(ImGui_BeginMenu("File")){
+			if(ImGui_MenuItem("Save")){
+				SaveComic();
+			}
+			if(ImGui_MenuItem("Save to file")){
 
+			}
+			ImGui_EndMenu();
+		}
+		ImGui_EndMenuBar();
+	}
 	if(ImGui_InputTextMultiline("##TEST", vec2(-1.0, -1.0))){
         /* SetCurrentAction(ImGui_GetTextBuf()); */
 		Log(info, "" + GetLineNumber(ImGui_GetTextBuf()));
 	}
+	textbox_active = ImGui_IsItemActive();
+
 	ImGui_End();
 	imGUI.render();
+}
+
+void SaveComic(){
+	Log(info, FindFilePath(comic_path));
+	StartWriteFile();
+	array<string> lines = comic_content.split("\n");
+
+	for(uint i = 0; i < lines.size(); i++){
+		AddFileString(lines[i]);
+		if(i != lines.size() - 1){
+			AddFileString("\n");
+		}
+	}
+	WriteFileKeepBackup(FindFilePath(comic_path));
 }
 
 void SetCurrentAction(string strings){
