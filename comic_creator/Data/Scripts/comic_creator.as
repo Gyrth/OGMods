@@ -19,40 +19,120 @@ int grabber_size = 100;
 enum grabber_types { scaler, mover };
 enum creator_states { editing, playing };
 enum editing_states { edit_image };
-enum comic_element_types { none, grabber, comic_image, comic_page };
+enum comic_element_types { none, grabber, comic_image, comic_page, comic_text };
 
 creator_states creator_state = editing;
 
 vec2 drag_position;
 Grabber@ current_grabber = null;
 ComicElement@ current_page = null;
+ComicFont@ current_font = null;
+FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 string comic_path = "Data/Comics/example.txt";
 int update_behavior_counter = 0;
 
 class ComicElement{
 	comic_element_types comic_element_type = none;
 	ComicElement@ on_page = null;
+	bool edit_mode = false;
 	bool visible;
 	void AddPosition(vec2 added_positon){}
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
 	Grabber@ GetGrabber(string grabber_name){return null;}
-	void SetEdit(bool editing){}
 	string GetSaveString(){return "";}
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){};
 	void RemoveUpdateBehavior(string behavior_name){};
-	void SetVisible(bool visible){}
 	void AddElement(ComicElement@ element){}
 	void ShowPage(){}
 	void HidePage(){}
+	void Update(){}
+	void SetVisible(bool _visible){
+		visible = _visible;
+	}
+	void SetEdit(bool editing){
+		edit_mode = editing;
+		Update();
+	}
+}
+
+class ComicFont : ComicElement{
+	FontSetup font("edosz", 75, HexColor("#CCCCCC"), true);
+	ComicFont(string _font_name, int _font_size, string _font_color, bool _shadowed){
+		font.fontName = _font_name;
+		font.size = _font_size;
+		font.color = HexColor(_font_color);
+		font.shadowed = _shadowed;
+	}
+}
+
+class ComicText : ComicElement{
+	IMText@ text;
+	string content;
+	vec2 location;
+	int index;
+	Grabber@ grabber_center;
+	ComicText(string _content, ComicFont@ _comic_font, vec2 _location, int _index){
+		comic_element_type = comic_text;
+		if(_comic_font is null){
+			@text = IMText(_content, default_font);
+		}else{
+			@text = IMText(_content, _comic_font.font);
+		}
+		content = _content;
+		location = _location;
+		index = _index;
+		@grabber_center = Grabber(index, "center", 1, 1, mover);
+		imGUI.getMain().addFloatingElement(text, "text" + index, location);
+		Update();
+	}
+
+	void Update(){
+		text.showBorder(edit_mode);
+		text.setVisible(visible);
+		grabber_center.SetVisible(edit_mode);
+
+		vec2 location = imGUI.getMain().getElementPosition("text" + index);
+		vec2 size = text.getSize();
+
+		imGUI.getMain().moveElement("grabber" + index + "center", location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+	}
+
+	void SetVisible(bool _visible){
+		visible = _visible;
+		Update();
+	}
+
+	Grabber@ GetGrabber(string grabber_name){
+		if(grabber_name == "center"){
+			return grabber_center;
+		}else{
+			return null;
+		}
+	}
+
+	void AddPosition(vec2 added_positon){
+		imGUI.getMain().moveElementRelative("text" + index, added_positon);
+		location += added_positon;
+		Update();
+	}
+
+	string GetSaveString(){
+		return "add_text " + content + " " + location.x + " " + location.y;
+	}
+
+	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
+		text.addUpdateBehavior(behavior, name);
+	}
+
+	void RemoveUpdateBehavior(string name){
+		text.removeUpdateBehavior(name);
+	}
 }
 
 class ComicPage : ComicElement{
 	array<ComicElement@> elements;
 	ComicPage(){
 		comic_element_type = comic_page;
-	}
-	void SetVisible(bool _visible){
-		visible = _visible;
 	}
 	void AddElement(ComicElement@ element){
 		elements.insertLast(element);
@@ -147,7 +227,6 @@ class Grabber : ComicElement{
 }
 
 class ComicImage : ComicElement{
-	bool edit_mode = false;
 	IMImage@ image;
 	Grabber@ grabber_top_left;
 	Grabber@ grabber_top_right;
@@ -245,11 +324,6 @@ class ComicImage : ComicElement{
 		}
 	}
 
-	void SetEdit(bool editing){
-		edit_mode = editing;
-		Update();
-	}
-
 	string GetSaveString(){
 		return "add_image " + path + " " + location.x + " " + location.y + " " + size.x + " " + size.y;
 	}
@@ -315,6 +389,15 @@ void InterpComic(){
 			ComicPage new_page = ComicPage();
 			@current_page = new_page;
 			comic_elements.insertLast(@new_page);
+		}else if(line_elements[0] == "set_font"){
+			ComicFont new_font(line_elements[1], atoi(line_elements[2]), line_elements[3], line_elements[4] == "true");
+			Log(info, "addfont");
+			comic_elements.insertLast(@new_font);
+			@current_font = new_font;
+		}else if(line_elements[0] == "add_text"){
+			Log(info, "addtext");
+			ComicText new_text(line_elements[1], current_font, vec2(atoi(line_elements[2]), atoi(line_elements[3])), i);
+			comic_elements.insertLast(@new_text);
 		}else{
 			comic_elements.insertLast(ComicElement());
 		}
@@ -328,7 +411,7 @@ void InterpComic(){
 
 ComicElement@ GetLastElement(){
 	for(int i = comic_elements.size() -1; i > -1; i--){
-		if(comic_elements[i].comic_element_type == comic_image){
+		if(comic_elements[i].comic_element_type == comic_image || comic_elements[i].comic_element_type == comic_text){
 			return comic_elements[i];
 		}
 	}
