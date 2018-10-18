@@ -107,7 +107,7 @@ class Grabber : ComicElement{
 
 		grabber_image.addMouseOverBehavior(IMFixedMessageOnMouseOver( on_enter, on_over, on_exit ), "");
 		grabber_image.setSize(vec2(grabber_size));
-		imGUI.getMain().addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0), 4);
+		imGUI.getMain().addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0), 2);
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;
@@ -147,7 +147,7 @@ class ComicImage : ComicElement{
 
 		new_image.setSize(size);
 		Log(info, " " + path );
-		imGUI.getMain().addFloatingElement(new_image, "image" + index, location, 2);
+		imGUI.getMain().addFloatingElement(new_image, "image" + index, location);
 		Update();
 	}
 
@@ -245,7 +245,8 @@ void Initialize(){
 	PlaySong("menu-lugaru");
 
 	imGUI.setup();
-	/* AddBackground(); */
+
+	AddBackground();
 	LoadComic(comic_path);
 }
 
@@ -295,8 +296,8 @@ ComicElement@ GetLastElement(){
 }
 
 void AddBackground(){
-	int vertical_amount = 5;
-	int horizontal_amount = 8;
+	int vertical_amount = 4;
+	int horizontal_amount = 7;
 	IMDivider vertical("vertical", DOVertical);
 	vertical.setZOrdering(-1);
 	for(int i = 0; i < vertical_amount; i++){
@@ -308,7 +309,7 @@ void AddBackground(){
 			horizontal.append(background);
 		}
 	}
-	imGUI.getMain().addFloatingElement(vertical, "Background", vec2(0,0));
+	imGUI.getMain().setElement(vertical);
 }
 
 bool CanGoBack(){
