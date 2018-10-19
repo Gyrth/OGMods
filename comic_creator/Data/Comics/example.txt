@@ -1,25 +1,23 @@
 new_page
+set_font Underdog-Regular 35 #282828 false
 add_image Textures/example_comic_background.png 0 0 2560 1440
 add_image Textures/example_comic_1.png 20 40 2520 660
 move_in 1000 0 -500
 fade_in 1500
 wait_click
-set_font Underdog-Regular 40 #24631b false
-add_text 1380 140 I first saw him on the save\npyramid of new Rakan-\nabout to make the worst\ndecision of his life.
+add_text 1400 160 I first saw him on the save\npyramid of new Rakan-\nabout to make the worst\ndecision of his life.
 fade_in 1500
 wait_click
 add_image Textures/example_comic_2.png 60 700 1080 700
 move_in 1000 0 500
 fade_in 1500
 wait_click
-set_font edosz 50 #491349 true
-add_text 560 760 You misunderstand the\ncode, wolfblood.
+add_text 580 780 You misunderstand the\ncode, wolfblood.
 move_in 1000 0 -500
 wait_click
 add_image Textures/example_comic_3.png 1140 700 1360 700
 fade_in 1500
 move_in 1000 1000 0
-set_font Underdog-Regular 35 #282828 false
 play_sound Data/Sounds/voice/animal3/voice_dog_exertion_2.wav
 add_text 1620 780 You must wait at\nleast a month\nbefore challenging\nme again.
 fade_in 500
@@ -55,7 +53,27 @@ fade_in 500
 move_in 500 1000 100
 wait_click
 new_page
-add_image Textures/example_comic_background.png 0 0 2560 1440
-add_image Textures/example_comic_3.png 0 40 1360 700
+add_image Textures/example_comic_background.png 0 20 340 260
+add_image Textures/example_comic_8.png 20 80 560 420
+fade_in 250
+add_image Textures/example_comic_9.png 20 60 2520 1360
+fade_in 250
+add_image Textures/example_comic_10.png 20 60 2520 1360
 fade_in 1500
-move_in 500 1000 -1000
+move_in 500 1000 1000
+wait_click
+new_page
+add_image Textures/example_comic_background.png 0 20 180 220
+add_image Textures/example_comic_11.png 140 80 700 1300
+fade_in 250
+add_text 240 1200 Still so slow. 
+fade_in 250
+add_image Textures/example_comic_12.png 840 100 1700 540
+fade_in 250
+add_text 1560 520 And so unbalanced. 
+fade_in 250
+add_image Textures/example_comic_13.png 840 600 640 760
+fade_in 1500
+add_image Textures/example_comic_14.png 1460 620 1020 740
+fade_in 1500
+move_in 500 1000 1000
