@@ -30,6 +30,7 @@ ComicFont@ current_font = null;
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 string comic_path = "Data/Comics/example.txt";
 int update_behavior_counter = 0;
+vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
 
 class ComicElement{
 	comic_element_types comic_element_type = none;
@@ -72,38 +73,57 @@ class ComicFont : ComicElement{
 }
 
 class ComicText : ComicElement{
-	IMText@ text;
+	IMDivider@ holder;
+	array<IMText@> text_elements;
 	string content;
 	vec2 location;
 	int index;
 	Grabber@ grabber_center;
 	ComicText(string _content, ComicFont@ _comic_font, vec2 _location, int _index){
 		comic_element_type = comic_text;
-		if(_comic_font is null){
-			@text = IMText(_content, default_font);
-		}else{
-			@text = IMText(_content, _comic_font.font);
+
+		IMDivider text_holder("textholder" + index, DOVertical);
+		text_holder.setBorderColor(edit_outline_color);
+		text_holder.setAlignment(CALeft, CATop);
+		text_holder.setClip(false);
+		array<string> lines = _content.split("\\n");
+		for(uint i = 0; i < lines.size(); i++){
+			if(_comic_font is null){
+				IMText new_text(lines[i], default_font);
+				text_elements.insertLast(@new_text);
+				text_holder.append(new_text);
+			}else{
+				IMText new_text(lines[i], _comic_font.font);
+				text_elements.insertLast(@new_text);
+				text_holder.append(new_text);
+			}
 		}
 		content = _content;
 		location = _location;
 		index = _index;
 		@grabber_center = Grabber(index, "center", 1, 1, mover);
-		imGUI.getMain().addFloatingElement(text, "text" + index, location);
+		@holder = text_holder;
+		imGUI.getMain().addFloatingElement(text_holder, "text" + index, location, 6);
 		Update();
 	}
 
 	void Update(){
-		text.showBorder(edit_mode);
-		text.setVisible(visible);
+		holder.showBorder(edit_mode);
+		Log(info, visible + content);
+		holder.setVisible(visible);
+		for(uint i = 0; i < text_elements.size(); i++){
+			text_elements[i].setVisible(visible);
+		}
 		grabber_center.SetVisible(edit_mode);
 
 		vec2 location = imGUI.getMain().getElementPosition("text" + index);
-		vec2 size = text.getSize();
+		vec2 size = holder.getSize();
 
 		imGUI.getMain().moveElement("grabber" + index + "center", location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
 	}
 
 	void SetVisible(bool _visible){
+		/* Log(info, _visible + content); */
 		visible = _visible;
 		Update();
 	}
@@ -123,15 +143,15 @@ class ComicText : ComicElement{
 	}
 
 	string GetSaveString(){
-		return "add_text " + content + " " + location.x + " " + location.y;
+		return "add_text " + location.x + " " + location.y + " " + content;
 	}
 
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
-		text.addUpdateBehavior(behavior, name);
+		holder.addUpdateBehavior(behavior, name);
 	}
 
 	void RemoveUpdateBehavior(string name){
-		text.removeUpdateBehavior(name);
+		holder.removeUpdateBehavior(name);
 	}
 }
 
@@ -149,6 +169,7 @@ class ComicPage : ComicElement{
 		}
 	}
 	void HidePage(){
+		Log(info, "hidepage");
 		for(uint i = 0; i < elements.size(); i++){
 			elements[i].SetVisible(false);
 		}
@@ -222,12 +243,11 @@ class Grabber : ComicElement{
 
 		grabber_image.addMouseOverBehavior(IMFixedMessageOnMouseOver( on_enter, on_over, on_exit ), "");
 		grabber_image.setSize(vec2(grabber_size));
-		imGUI.getMain().addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0), 2);
+		imGUI.getMain().addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0), 4);
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;
 		image.setVisible(visible);
-		Log(info, "set grabber pause " + !visible);
 		image.setPauseBehaviors(!visible);
 	}
 }
@@ -252,7 +272,7 @@ class ComicImage : ComicElement{
 		comic_element_type = comic_image;
 		IMImage new_image(path);
 		@image = new_image;
-		new_image.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
+		new_image.setBorderColor(edit_outline_color);
 
 		@grabber_top_left = Grabber(index, "top_left", -1, -1, scaler);
 		@grabber_top_right = Grabber(index, "top_right", 1, -1, scaler);
@@ -262,7 +282,7 @@ class ComicImage : ComicElement{
 
 		new_image.setSize(size);
 		Log(info, " " + path );
-		imGUI.getMain().addFloatingElement(new_image, "image" + index, location);
+		imGUI.getMain().addFloatingElement(new_image, "image" + index, location, 0);
 		Update();
 	}
 
@@ -381,12 +401,15 @@ void InterpComic(){
 	for(uint i = 0; i < lines.size(); i++){
 		array<string> line_elements = lines[i].split(" ");
 		if(line_elements[0] == "add_image"){
+			Log(info, "addimage");
 			vec2 position = vec2(atoi(line_elements[2]), atoi(line_elements[3]));
 			vec2 size = vec2(atoi(line_elements[4]), atoi(line_elements[5]));
 			comic_elements.insertLast(ComicImage(line_elements[1], position, size, i));
 		}else if(line_elements[0] == "fade_in"){
+			Log(info, "addfadein");
 			comic_elements.insertLast(ComicFadeIn(GetLastElement(), atoi(line_elements[1])));
 		}else if(line_elements[0] == "move_in"){
+			Log(info, "addmovein");
 			comic_elements.insertLast(ComicMoveIn(GetLastElement(), atoi(line_elements[1]), vec2(atoi(line_elements[2]), atoi(line_elements[3]))));
 		}else if(line_elements[0] == "new_page"){
 			Log(info, "add page");
@@ -400,15 +423,22 @@ void InterpComic(){
 			@current_font = new_font;
 		}else if(line_elements[0] == "add_text"){
 			Log(info, "addtext");
-			ComicText new_text(line_elements[1], current_font, vec2(atoi(line_elements[2]), atoi(line_elements[3])), i);
+			string complete_text = "";
+			for(uint j = 3; j < line_elements.size(); j++){
+				complete_text += line_elements[j] + " ";
+			}
+			ComicText new_text(complete_text, current_font, vec2(atoi(line_elements[1]), atoi(line_elements[2])), i);
 			comic_elements.insertLast(@new_text);
 		}else if(line_elements[0] == "wait_click"){
+			Log(info, "addwait");
 			comic_elements.insertLast(ComicWaitClick());
 		}else{
+			Log(info, "addelement");
 			comic_elements.insertLast(ComicElement());
 		}
 		@comic_elements[comic_elements.size() - 1].on_page = current_page;
 		if(@current_page != null){
+			Log(info, "addtopage");
 			current_page.AddElement(comic_elements[comic_elements.size() - 1]);
 		}
 	}
@@ -464,8 +494,10 @@ void Update(){
 		editor_open = !editor_open;
 	}
 	if(!editor_open && creator_state == editing){
-		current_line = 0;
+		/* current_line = -1; */
 		creator_state = playing;
+	}else if(editor_open && creator_state == playing){
+		creator_state = editing;
 	}
 	while( imGUI.getMessageQueueSize() > 0 ) {
 		IMMessage@ message = imGUI.getNextMessage();
@@ -490,12 +522,11 @@ void Update(){
 int play_direction = 1.0;
 
 bool CanPlayForward(){
-	for(uint i = current_line + 1; i < comic_elements.size(); i++){
-		if(comic_elements[i].comic_element_type == wait_click){
-			return true;
-		}
+	if(current_line + 1 < int(comic_elements.size())){
+		return true;
+	}else{
+		return false;
 	}
-	return false;
 }
 
 bool CanPlayBackward(){
@@ -510,17 +541,19 @@ bool CanPlayBackward(){
 void UpdateProgress(){
 	int new_line = current_line;
 	if(creator_state == playing){
-		if(comic_elements[current_line].comic_element_type == wait_click){
-			bool can_play_forward = CanPlayForward();
-			bool can_play_backward = CanPlayBackward();
-			if(GetInputPressed(0, "mouse0") && can_play_forward){
-				new_line = current_line + 1;
-				play_direction = 1;
-			}else if(GetInputPressed(0, "grab") && can_play_backward){
-				new_line = current_line - 1;
-				play_direction = -1;
+		if(current_line != -1 && comic_elements[current_line].comic_element_type == wait_click || current_line == int(comic_elements.size() - 1)){
+			if(GetInputPressed(0, "mouse0")){
+				if(CanPlayForward()){
+					new_line = current_line + 1;
+					play_direction = 1;
+				}
+			}else if(GetInputPressed(0, "grab")){
+				if(CanPlayBackward()){
+					new_line = current_line - 1;
+					play_direction = -1;
+				}
 			}
-		}else{
+		}else if(current_line < int(comic_elements.size() - 1)){
 			if(play_direction == 1){
 				new_line = current_line + 1;
 			}else if(play_direction == -1){
@@ -531,11 +564,10 @@ void UpdateProgress(){
 		new_line = GetLineNumber(ImGui_GetTextBuf());
 	}
 	if(new_line != current_line){
-		if(current_line != -1){
+		if(creator_state == editing && current_line != -1){
 			comic_elements[current_line].SetEdit(false);
 		}
 		while(true){
-			// Move down the script.
 			if(new_line < current_line){
 				if(comic_elements[current_line].comic_element_type == comic_page){
 					comic_elements[current_line - 1].on_page.ShowPage();
@@ -544,15 +576,18 @@ void UpdateProgress(){
 				comic_elements[current_line].SetVisible(false);
 				current_line -= 1;
 				comic_elements[current_line].SetVisible(true);
-			// Move up.
+
 			}else if(new_line > current_line){
 				if(comic_elements[current_line + 1].comic_element_type == comic_page){
 					if(@current_page != null){
 						current_page.HidePage();
+					}else{
+						Log(info, "current_page null");
 					}
 					@current_page = comic_elements[current_line + 1];
 				}
 				current_line += 1;
+				/* Log(info, "current line" + current_line); */
 				comic_elements[current_line].SetVisible(true);
 			// At the correct line.
 			}else{
@@ -667,27 +702,29 @@ string ToLowerCase(string input){
 }
 
 void DrawGUI(){
-	ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
-	ImGui_Begin("Comic Creator", editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar);
-	if(ImGui_BeginMenuBar()){
-		if(ImGui_BeginMenu("File")){
-			if(ImGui_MenuItem("Save")){
-				SaveComic();
-			}
-			if(ImGui_MenuItem("Save to file")){
+	if(editor_open){
+		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
+		ImGui_Begin("Comic Creator", editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar);
+		if(ImGui_BeginMenuBar()){
+			if(ImGui_BeginMenu("File")){
+				if(ImGui_MenuItem("Save")){
+					SaveComic();
+				}
+				if(ImGui_MenuItem("Save to file")){
 
+				}
+				ImGui_EndMenu();
 			}
-			ImGui_EndMenu();
+			ImGui_EndMenuBar();
 		}
-		ImGui_EndMenuBar();
-	}
-	if(ImGui_InputTextMultiline("##TEST", vec2(-1.0, -1.0))){
-        /* SetCurrentAction(ImGui_GetTextBuf()); */
-		Log(info, "" + GetLineNumber(ImGui_GetTextBuf()));
-	}
-	textbox_active = ImGui_IsItemActive();
+		if(ImGui_InputTextMultiline("##TEST", vec2(-1.0, -1.0))){
+	        /* SetCurrentAction(ImGui_GetTextBuf()); */
+			Log(info, "" + GetLineNumber(ImGui_GetTextBuf()));
+		}
+		textbox_active = ImGui_IsItemActive();
 
-	ImGui_End();
+		ImGui_End();
+	}
 	imGUI.render();
 }
 
