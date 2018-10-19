@@ -31,6 +31,13 @@ FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 string comic_path = "Data/Comics/example.txt";
 int update_behavior_counter = 0;
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
+uint image_layer = 0;
+uint text_layer = 0;
+uint grabber_layer = 2;
+
+IMContainer@ image_container;
+IMContainer@ text_container;
+IMContainer@ grabber_container;
 
 class ComicElement{
 	comic_element_types comic_element_type = none;
@@ -103,7 +110,7 @@ class ComicText : ComicElement{
 		index = _index;
 		@grabber_center = Grabber(index, "center", 1, 1, mover);
 		@holder = text_holder;
-		imGUI.getMain().addFloatingElement(text_holder, "text" + index, location, 6);
+		text_container.addFloatingElement(text_holder, "text" + index, location);
 		Update();
 	}
 
@@ -116,10 +123,10 @@ class ComicText : ComicElement{
 		}
 		grabber_center.SetVisible(edit_mode);
 
-		vec2 location = imGUI.getMain().getElementPosition("text" + index);
+		vec2 location = text_container.getElementPosition("text" + index);
 		vec2 size = holder.getSize();
 
-		imGUI.getMain().moveElement("grabber" + index + "center", location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement("grabber" + index + "center", location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
 	}
 
 	void SetVisible(bool _visible){
@@ -137,7 +144,7 @@ class ComicText : ComicElement{
 	}
 
 	void AddPosition(vec2 added_positon){
-		imGUI.getMain().moveElementRelative("text" + index, added_positon);
+		text_container.moveElementRelative("text" + index, added_positon);
 		location += added_positon;
 		Update();
 	}
@@ -243,7 +250,7 @@ class Grabber : ComicElement{
 
 		grabber_image.addMouseOverBehavior(IMFixedMessageOnMouseOver( on_enter, on_over, on_exit ), "");
 		grabber_image.setSize(vec2(grabber_size));
-		imGUI.getMain().addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0), 4);
+		grabber_container.addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0));
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;
@@ -281,8 +288,7 @@ class ComicImage : ComicElement{
 		@grabber_center = Grabber(index, "center", 1, 1, mover);
 
 		new_image.setSize(size);
-		Log(info, " " + path );
-		imGUI.getMain().addFloatingElement(new_image, "image" + index, location, 0);
+		image_container.addFloatingElement(new_image, "image" + index, location);
 		Update();
 	}
 
@@ -296,14 +302,14 @@ class ComicImage : ComicElement{
 
 		image.setVisible(visible);
 
-		vec2 location = imGUI.getMain().getElementPosition("image" + index);
+		vec2 location = image_container.getElementPosition("image" + index);
 		vec2 size = image.getSize();
 
-		imGUI.getMain().moveElement("grabber" + index + "top_left", location - vec2(grabber_size / 2.0));
-		imGUI.getMain().moveElement("grabber" + index + "top_right", location + vec2(size.x, 0) - vec2(grabber_size / 2.0));
-		imGUI.getMain().moveElement("grabber" + index + "bottom_left", location + vec2(0, size.y) - vec2(grabber_size / 2.0));
-		imGUI.getMain().moveElement("grabber" + index + "bottom_right", location + vec2(size.x, size.y) - vec2(grabber_size / 2.0));
-		imGUI.getMain().moveElement("grabber" + index + "center", location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement("grabber" + index + "top_left", location - vec2(grabber_size / 2.0));
+		grabber_container.moveElement("grabber" + index + "top_right", location + vec2(size.x, 0) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement("grabber" + index + "bottom_left", location + vec2(0, size.y) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement("grabber" + index + "bottom_right", location + vec2(size.x, size.y) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement("grabber" + index + "center", location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
 	}
 
 	void AddSize(vec2 added_size, int direction_x, int direction_y){
@@ -313,7 +319,7 @@ class ComicImage : ComicElement{
 		}else{
 			image.setSizeX(image.getSizeX() - added_size.x);
 			size.x -= added_size.x;
-			imGUI.getMain().moveElementRelative("image" + index, vec2(added_size.x, 0.0));
+			image_container.moveElementRelative("image" + index, vec2(added_size.x, 0.0));
 			location.x += added_size.x;
 		}
 		if(direction_y == 1){
@@ -322,14 +328,14 @@ class ComicImage : ComicElement{
 		}else{
 			image.setSizeY(image.getSizeY() - added_size.y);
 			size.y -= added_size.y;
-			imGUI.getMain().moveElementRelative("image" + index, vec2(0.0, added_size.y));
+			image_container.moveElementRelative("image" + index, vec2(0.0, added_size.y));
 			location.y += added_size.y;
 		}
 		Update();
 	}
 
 	void AddPosition(vec2 added_positon){
-		imGUI.getMain().moveElementRelative("image" + index, added_positon);
+		image_container.moveElementRelative("image" + index, added_positon);
 		location += added_positon;
 		Update();
 	}
@@ -373,6 +379,18 @@ void Initialize(){
 	PlaySong("menu-lugaru");
 
 	imGUI.setup();
+	imGUI.setBackgroundLayers(1);
+
+	imGUI.getMain().setZOrdering(-1);
+
+	@text_container = IMContainer(2560, 1440);
+	imGUI.getMain().addFloatingElement(text_container, "text_container", vec2(0), 0);
+
+	@image_container = IMContainer(2560, 1440);
+	imGUI.getMain().addFloatingElement(image_container, "image_container", vec2(0), 1);
+
+	@grabber_container = IMContainer(2560, 1440);
+	imGUI.getMain().addFloatingElement(grabber_container, "grabber_container", vec2(0), 2);
 
 	AddBackground();
 	LoadComic(comic_path);
@@ -458,7 +476,6 @@ void AddBackground(){
 	int vertical_amount = 4;
 	int horizontal_amount = 7;
 	IMDivider vertical("vertical", DOVertical);
-	vertical.setZOrdering(-1);
 	for(int i = 0; i < vertical_amount; i++){
 		IMDivider horizontal("horizontal" + i, DOHorizontal);
 		vertical.append(horizontal);
@@ -474,7 +491,7 @@ void AddBackground(){
 			horizontal.append(background);
 		}
 	}
-	imGUI.getMain().setElement(vertical);
+	imGUI.getBackgroundLayer(0).setElement(vertical);
 }
 
 bool CanGoBack(){

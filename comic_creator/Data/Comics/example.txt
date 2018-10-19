@@ -24,6 +24,7 @@ add_text 1620 780 You must wait at\nleast a month\nbefore challenging\nme again.
 fade_in 500
 wait_click
 new_page
+add_image Textures/example_comic_background.png 0 0 2560 840
 add_image Textures/example_comic_4.png 60 60 1020 1360
 fade_in 500
 move_in 500 1000 500
@@ -34,16 +35,16 @@ add_image Textures/example_comic_5.png 1140 80 660 1320
 fade_in 500
 move_in 500 -500 -500
 wait_click
-add_text 1220 200 You dare speak of the\ncode! My whole clan died\ndefending this place, while\nyou stayed back and hid\nlike the coward you are.
+add_text 1240 140 You dare speak of the\ncode! My whole clan died\ndefending this place, while\nyou stayed back and hid\nlike the coward you are. 
 fade_in 500
 wait_click
-add_text 1300 1060 With every breath you\ntake you dishoner their\nsavrifice, so you will\nbreathe no more.\nThe code offers no\nprotection for cowards!
+add_text 1240 1120 With every breath you\ntake you dishoner their\nsavrifice, so you will\nbreathe no more.\nThe code offers no\nprotection for cowards! 
 fade_in 500
 wait_click
 add_image Textures/example_comic_6.png 1820 80 660 860
 fade_in 500
 move_in 500 -1000 1500
-add_text 2160 340 Let's get\nthis over\nwith.
+add_text 2180 360 Let's get\nthis over\nwith. 
 fade_in 500
 wait_click
 add_image Textures/example_comic_7.png 1840 880 620 520
