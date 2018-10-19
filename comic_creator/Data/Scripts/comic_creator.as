@@ -162,6 +162,19 @@ class ComicText : ComicElement{
 	}
 }
 
+class ComicSound : ComicElement{
+	string path;
+	ComicSound(string _path){
+		path = _path;
+	}
+	void SetVisible(bool _visible){
+		visible = _visible;
+		if(visible){
+			PlaySound(path);
+		}
+	}
+}
+
 class ComicPage : ComicElement{
 	array<ComicElement@> elements;
 	ComicPage(){
@@ -450,6 +463,8 @@ void InterpComic(){
 		}else if(line_elements[0] == "wait_click"){
 			Log(info, "addwait");
 			comic_elements.insertLast(ComicWaitClick());
+		}else if(line_elements[0] == "play_sound"){
+			comic_elements.insertLast(ComicSound(line_elements[1]));
 		}else{
 			Log(info, "addelement");
 			comic_elements.insertLast(ComicElement());

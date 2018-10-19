@@ -20,6 +20,7 @@ add_image Textures/example_comic_3.png 1140 700 1360 700
 fade_in 1500
 move_in 1000 1000 0
 set_font Underdog-Regular 35 #282828 false
+play_sound Data/Sounds/voice/animal3/voice_dog_exertion_2.wav
 add_text 1620 780 You must wait at\nleast a month\nbefore challenging\nme again.
 fade_in 500
 wait_click
@@ -35,16 +36,18 @@ add_image Textures/example_comic_5.png 1140 80 660 1320
 fade_in 500
 move_in 500 -500 -500
 wait_click
-add_text 1240 140 You dare speak of the\ncode! My whole clan died\ndefending this place, while\nyou stayed back and hid\nlike the coward you are. 
+play_sound Data/Sounds/voice/animal3/voice_dog_attack_2.wav
+add_text 1240 140 You dare speak of the\ncode! My whole clan died\ndefending this place, while\nyou stayed back and hid\nlike the coward you are.
 fade_in 500
 wait_click
-add_text 1240 1120 With every breath you\ntake you dishoner their\nsavrifice, so you will\nbreathe no more.\nThe code offers no\nprotection for cowards! 
+play_sound Data/Sounds/voice/animal3/voice_dog_attack_3.wav
+add_text 1240 1120 With every breath you\ntake you dishoner their\nsacrifice, so you will\nbreathe no more.\nThe code offers no\nprotection for cowards!
 fade_in 500
 wait_click
 add_image Textures/example_comic_6.png 1820 80 660 860
 fade_in 500
 move_in 500 -1000 1500
-add_text 2180 360 Let's get\nthis over\nwith. 
+add_text 2180 360 Let's get\nthis over\nwith.
 fade_in 500
 wait_click
 add_image Textures/example_comic_7.png 1840 880 620 520
