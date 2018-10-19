@@ -383,14 +383,14 @@ void Initialize(){
 
 	imGUI.getMain().setZOrdering(-1);
 
-	@text_container = IMContainer(2560, 1440);
-	imGUI.getMain().addFloatingElement(text_container, "text_container", vec2(0), 0);
-
 	@image_container = IMContainer(2560, 1440);
-	imGUI.getMain().addFloatingElement(image_container, "image_container", vec2(0), 1);
+	imGUI.getMain().addFloatingElement(image_container, "image_container", vec2(0));
+
+	@text_container = IMContainer(2560, 1440);
+	imGUI.getMain().addFloatingElement(text_container, "text_container", vec2(0));
 
 	@grabber_container = IMContainer(2560, 1440);
-	imGUI.getMain().addFloatingElement(grabber_container, "grabber_container", vec2(0), 2);
+	imGUI.getMain().addFloatingElement(grabber_container, "grabber_container", vec2(0));
 
 	AddBackground();
 	LoadComic(comic_path);
