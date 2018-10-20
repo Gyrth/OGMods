@@ -42,6 +42,9 @@ uint image_layer = 0;
 uint text_layer = 0;
 uint grabber_layer = 2;
 
+bool dragging = false;
+int snap_scale = 20;
+
 IMContainer@ image_container;
 IMContainer@ text_container;
 IMContainer@ grabber_container;
@@ -299,9 +302,6 @@ int GetLineNumber(string input){
 	}
 }
 
-bool dragging = false;
-int snap_scale = 20;
-
 void UpdateGrabber(){
 	if(dragging){
 		if(!GetInputDown(0, "mouse0")){
@@ -385,15 +385,22 @@ string ToLowerCase(string input){
 void DrawGUI(){
 	if(editor_open){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
-		ImGui_Begin("Comic Creator", editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar);
+		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings);
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
 				if(ImGui_MenuItem("Save")){
 					SaveComic();
 				}
 				if(ImGui_MenuItem("Save to file")){
-
+					string new_path = GetUserPickedWritePath("txt", "Data");
+					if(new_path != ""){
+						SaveComic(new_path);
+					}
 				}
+				ImGui_EndMenu();
+			}
+			if(ImGui_BeginMenu("Settings")){
+				ImGui_DragInt("Snap Scale", snap_scale, 1.0f, 1, 50, "%.0f");
 				ImGui_EndMenu();
 			}
 			ImGui_EndMenuBar();
@@ -409,7 +416,10 @@ void DrawGUI(){
 	imGUI.render();
 }
 
-void SaveComic(){
+void SaveComic(string path = ""){
+	if(path != ""){
+		comic_path = path;
+	}
 	Log(info, FindFilePath(comic_path));
 	StartWriteFile();
 
