@@ -22,6 +22,6 @@ class ComicCrawlIn : ComicElement{
 		}
 	}
 	string GetSaveString(){
-		return "crawl_in " + duration;
+		return "crawl_in " + int(duration * 1000);
 	}
 }
