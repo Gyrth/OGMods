@@ -8,6 +8,7 @@
 #include "comic_sound.as"
 #include "comic_text.as"
 #include "comic_wait_click.as"
+#include "comic_crawl_in.as"
 #include "music_load.as"
 
 MusicLoad ml("Data/Music/menu.xml");
@@ -129,6 +130,8 @@ void InterpComic(){
 			comic_elements.insertLast(ComicWaitClick());
 		}else if(line_elements[0] == "play_sound"){
 			comic_elements.insertLast(ComicSound(line_elements[1]));
+		}else if(line_elements[0] == "crawl_in"){
+			comic_elements.insertLast(ComicCrawlIn(GetLastElement(), atoi(line_elements[1])));
 		}else{
 			comic_elements.insertLast(ComicElement());
 		}
@@ -227,7 +230,7 @@ bool CanPlayForward(){
 
 bool CanPlayBackward(){
 	for(int i = (current_line - 1); i >= 0; i--){
-		if(comic_elements[i].comic_element_type == comic_wait_click){
+		if(comic_elements[i].comic_element_type == comic_wait_click || comic_elements[i].comic_element_type == comic_crawl_in){
 			return true;
 		}
 	}
@@ -237,7 +240,7 @@ bool CanPlayBackward(){
 void UpdateProgress(){
 	int new_line = current_line;
 	if(creator_state == playing){
-		if(current_line != -1 && comic_elements[current_line].comic_element_type == comic_wait_click || current_line == int(comic_elements.size() - 1)){
+		if(current_line != -1 && (comic_elements[current_line].comic_element_type == comic_wait_click || comic_elements[current_line].comic_element_type == comic_crawl_in) || current_line == int(comic_elements.size() - 1)){
 			if(GetInputPressed(0, "mouse0")){
 				if(CanPlayForward()){
 					new_line = current_line + 1;
@@ -259,8 +262,12 @@ void UpdateProgress(){
 	}else{
 		new_line = GetLineNumber(ImGui_GetTextBuf());
 	}
+	if(current_line != -1){
+		comic_elements[current_line].Update();
+	}
 	if(new_line != current_line){
 		if(current_line != -1){
+			comic_elements[current_line].SetCurrent(false);
 			comic_elements[current_line].SetEdit(false);
 		}
 		while(true){
@@ -287,6 +294,7 @@ void UpdateProgress(){
 				break;
 			}
 		}
+		comic_elements[current_line].SetCurrent(true);
 		if(creator_state == editing){
 			comic_elements[current_line].SetEdit(true);
 		}
@@ -414,7 +422,7 @@ void DrawGUI(){
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Settings")){
-				ImGui_DragInt("Snap Scale", snap_scale, 1.0f, 1, 50, "%.0f");
+				ImGui_DragInt("Snap Scale", snap_scale, 0.5f, 1, 50, "%.0f");
 				ImGui_EndMenu();
 			}
 			ImGui_EndMenuBar();

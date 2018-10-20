@@ -7,7 +7,7 @@ fade_in 1500
 wait_click
 add_text 1400 160 I first saw him on the save\npyramid of new Rakan-\nabout to make the worst\ndecision of his life.
 fade_in 1500
-wait_click
+crawl_in 1000
 add_image Textures/example_comic_2.png 60 700 1080 700
 move_in 1000 0 500
 fade_in 1500
@@ -22,7 +22,7 @@ wait_click
 play_sound Data/Sounds/voice/animal3/voice_dog_exertion_2.wav
 add_text 1620 780 You must wait at\nleast a month\nbefore challenging\nme again.
 fade_in 500
-wait_click
+crawl_in 1000
 new_page
 add_image Textures/example_comic_background.png 0 0 2560 1440
 add_image Textures/example_comic_4.png 60 60 1020 1360
@@ -39,18 +39,18 @@ wait_click
 play_sound Data/Sounds/voice/animal3/voice_dog_attack_2.wav
 add_text 1240 140 You dare speak of the\ncode! My whole clan died\ndefending this place, while\nyou stayed back and hid\nlike the coward you are.
 fade_in 500
-wait_click
+crawl_in 3000
 play_sound Data/Sounds/voice/animal3/voice_dog_attack_3.wav
 add_text 1240 1120 With every breath you\ntake you dishoner their\nsacrifice, so you will\nbreathe no more.\nThe code offers no\nprotection for cowards!
 fade_in 500
-wait_click
+crawl_in 3000
 add_image Textures/example_comic_6.png 1820 80 660 860
 fade_in 500
 move_in 500 -1000 1500
 wait_click
 add_text 2180 360 Let's get\nthis over\nwith.
 fade_in 500
-wait_click
+crawl_in 250
 add_image Textures/example_comic_7.png 1840 880 620 520
 fade_in 500
 move_in 500 1000 100

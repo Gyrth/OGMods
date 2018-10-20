@@ -31,10 +31,10 @@ class ComicImage : ComicElement{
 		new_image.setSize(size);
 		Log(info, "adding image " + index);
 		image_container.addFloatingElement(new_image, "image" + index, location, index);
-		Update();
+		UpdateContent();
 	}
 
-	void Update(){
+	void UpdateContent(){
 		image.showBorder(edit_mode);
 		grabber_top_left.SetVisible(edit_mode);
 		grabber_top_right.SetVisible(edit_mode);
@@ -73,13 +73,13 @@ class ComicImage : ComicElement{
 			image_container.moveElementRelative("image" + index, vec2(0.0, added_size.y));
 			location.y += added_size.y;
 		}
-		Update();
+		UpdateContent();
 	}
 
 	void AddPosition(vec2 added_positon){
 		image_container.moveElementRelative("image" + index, added_positon);
 		location += added_positon;
-		Update();
+		UpdateContent();
 	}
 
 	ComicGrabber@ GetGrabber(string grabber_name){
@@ -111,11 +111,11 @@ class ComicImage : ComicElement{
 
 	void SetVisible(bool _visible){
 		visible = _visible;
-		Update();
+		UpdateContent();
 	}
 
 	void SetEdit(bool editing){
 		edit_mode = editing;
-		Update();
+		UpdateContent();
 	}
 }
