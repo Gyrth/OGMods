@@ -74,6 +74,14 @@ void Initialize(){
 string comic_content;
 void LoadComic(string path){
 	comic_content = "";
+	comic_path = path;
+	image_container.clear();
+	text_container.clear();
+	grabber_container.clear();
+	current_line = -1;
+	@current_font = null;
+	@current_grabber = null;
+	comic_elements.resize(0);
 	if(LoadFile(path)){
 		string new_line;
 		while(true){
@@ -388,6 +396,12 @@ void DrawGUI(){
 		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings);
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
+				if(ImGui_MenuItem("Load file")){
+					string new_path = GetUserPickedReadPath("txt", "Data");
+					if(new_path != ""){
+						LoadComic(new_path);
+					}
+				}
 				if(ImGui_MenuItem("Save")){
 					SaveComic();
 				}
