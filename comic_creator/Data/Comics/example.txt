@@ -28,6 +28,7 @@ add_image Textures/example_comic_background.png 0 0 2560 1440
 add_image Textures/example_comic_4.png 60 60 1020 1360
 fade_in 500
 move_in 500 1000 500
+wait_click
 add_text 620 180 If you train,\nand train hard,\nmaybe you will\nbe able to rise\nabove the limitations\nof your breed -\nand finally pose\na threat to me.
 fade_in 500
 wait_click
@@ -46,6 +47,7 @@ wait_click
 add_image Textures/example_comic_6.png 1820 80 660 860
 fade_in 500
 move_in 500 -1000 1500
+wait_click
 add_text 2180 360 Let's get\nthis over\nwith.
 fade_in 500
 wait_click
@@ -57,28 +59,34 @@ new_page
 add_image Textures/example_comic_background.png 0 20 2560 1420
 add_image Textures/example_comic_8.png 20 80 560 420
 fade_in 250
+play_sound Data/Sounds/Footsteps-Rock2.wav
 wait_click
 add_image Textures/example_comic_9.png 20 60 2520 1360
 fade_in 250
+play_sound Data/Sounds/whoosh/hit_whoosh_1.wav
 wait_click
 add_image Textures/example_comic_10.png 20 60 2520 1360
 fade_in 250
 move_in 500 1000 1000
+play_sound Data/Sounds/cloth_foley/cloth_fabric_edge_grab_3.wav
 wait_click
 new_page
 add_image Textures/example_comic_background.png 0 20 2560 1420
 add_image Textures/example_comic_11.png 140 80 700 1300
 fade_in 250
+play_sound Data/Sounds/whoosh/hit_whoosh_5.wav
 wait_click
 add_text 240 1200 Still so slow.
 fade_in 250
 wait_click
 add_image Textures/example_comic_12.png 840 100 1700 540
 fade_in 250
+play_sound Data/Sounds/weapon_foley/impact/weapon_metal_hit_metal_strong_8.wav
 wait_click
 add_text 1560 520 And so unbalanced.
 fade_in 250
 wait_click
+play_sound Data/Sounds/weapon_foley/impact/weapon_staff_hit_staff_strong_5.wav
 add_image Textures/example_comic_13.png 840 600 640 760
 fade_in 1500
 add_image Textures/example_comic_14.png 1460 620 1020 740
