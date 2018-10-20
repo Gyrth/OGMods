@@ -26,9 +26,11 @@ string black_background = "Textures/black.tga";
 array<ComicElement@> comic_elements;
 int grabber_size = 50;
 
+enum environment_states { in_game, in_menu };
 enum creator_states { editing, playing };
 enum editing_states { edit_image };
 
+environment_states environment_state;
 creator_states creator_state = editing;
 bool editor_open = creator_state == editing;
 
@@ -36,7 +38,7 @@ vec2 drag_position;
 ComicGrabber@ current_grabber = null;
 ComicFont@ current_font = null;
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
-string comic_path = "Data/Comics/example.txt";
+string comic_path;
 int update_behavior_counter = 0;
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
 uint image_layer = 0;
@@ -50,10 +52,29 @@ IMContainer@ image_container;
 IMContainer@ text_container;
 IMContainer@ grabber_container;
 
+// This init is used when loaded from the main menu.
 void Initialize(){
-	@imGUI = CreateIMGUI();
+	environment_state = in_menu;
+	comic_path = "Data/Comics/example_in_menu.txt";
 	PlaySong("menu-lugaru");
+	CreateComicUI();
+	AddBackground();
+	LoadComic(comic_path);
+}
 
+// This init is used when loaded in-game.
+void Init(string level_name){
+	environment_state = in_game;
+	editor_open = false;
+	CreateComicUI();
+}
+
+void Menu(){
+	ImGui_Checkbox("Comic Creator", editor_open);
+}
+
+void CreateComicUI(){
+	@imGUI = CreateIMGUI();
 	imGUI.setup();
 	imGUI.setBackgroundLayers(1);
 
@@ -67,9 +88,10 @@ void Initialize(){
 
 	@grabber_container = IMContainer(2560, 1440);
 	imGUI.getMain().addFloatingElement(grabber_container, "grabber_container", vec2(0));
+}
 
-	AddBackground();
-	LoadComic(comic_path);
+bool DialogueCameraControl(){
+	return (editor_open || creator_state == playing);
 }
 
 string comic_content;
@@ -188,7 +210,7 @@ void Resize() {
 }
 
 void Update(){
-	if(GetInputPressed(0, "f1")){
+	if(GetInputPressed(0, "f1") && (environment_state == in_menu || EditorModeActive())){
 		editor_open = !editor_open;
 		if(!editor_open){
 			creator_state = playing;
@@ -238,6 +260,9 @@ bool CanPlayBackward(){
 }
 
 void UpdateProgress(){
+	if(comic_elements.size() == 0){
+		return;
+	}
 	if(creator_state == playing){
 		GoToLine(GetPlayingProgress());
 	}else{
@@ -251,7 +276,6 @@ void GoToLine(int new_line){
 	if(new_line == current_line){
 		return;
 	}
-	comic_elements[current_line].SetCurrent(false);
 	comic_elements[current_line].SetEdit(false);
 
 	while(true){
@@ -276,9 +300,12 @@ void GoToLine(int new_line){
 		}else{
 			break;
 		}
+		if(creator_state == playing){
+			comic_elements[current_line].SetCurrent();
+		}
 	}
-	comic_elements[current_line].SetCurrent(true);
 	if(creator_state == editing){
+		comic_elements[current_line].SetCurrent();
 		comic_elements[current_line].SetEdit(true);
 	}
 }
@@ -386,8 +413,11 @@ void ReceiveMessage(string msg){
 	token_iter.Init();
 	while(token_iter.FindNextToken(msg)){
 		string token = token_iter.GetToken(msg);
-		if(token == "notify_deleted"){
-
+		if(token == "show_comic"){
+			current_line = 0;
+			token_iter.FindNextToken(msg);
+			LoadComic(token_iter.GetToken(msg));
+			creator_state = playing;
 		}
 	}
 }

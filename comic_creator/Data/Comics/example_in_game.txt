@@ -1,0 +1,90 @@
+new_page
+set_font Underdog-Regular 35 #282828 false
+add_image Textures/example_comic_1.png 20 40 2520 660
+move_in 1000 0 -500
+fade_in 1500
+wait_click
+add_text 1400 160 I first saw him on the save\npyramid of new Rakan-\nabout to make the worst\ndecision of his life.
+fade_in 1500
+crawl_in 1000
+add_image Textures/example_comic_2.png 60 700 1080 700
+move_in 1000 0 500
+fade_in 1500
+wait_click
+add_text 560 780 You misunderstand the\ncode, wolfblood.
+move_in 1000 0 -500
+wait_click
+add_image Textures/example_comic_3.png 1140 700 1360 700
+fade_in 1500
+move_in 1000 1000 0
+wait_click
+play_sound Data/Sounds/voice/animal3/voice_dog_exertion_2.wav
+add_text 1620 780 You must wait at\nleast a month\nbefore challenging\nme again.
+fade_in 500
+crawl_in 1000
+new_page
+add_image Textures/example_comic_4.png 60 60 1020 1360
+fade_in 500
+move_in 500 1000 500
+wait_click
+add_text 640 180 If you train,\nand train hard,\nmaybe you will\nbe able to rise\nabove the limitations\nof your breed -\nand finally pose\na threat to me.
+fade_in 10000
+crawl_in 2000
+add_image Textures/example_comic_5.png 1140 80 660 1320
+fade_in 500
+move_in 500 -500 -500
+wait_click
+play_sound Data/Sounds/voice/animal3/voice_dog_attack_2.wav
+add_text 1240 140 You dare speak of the\ncode! My whole clan died\ndefending this place, while\nyou stayed back and hid\nlike the coward you are.
+fade_in 500
+crawl_in 3000
+play_sound Data/Sounds/voice/animal3/voice_dog_attack_3.wav
+add_text 1240 1120 With every breath you\ntake you dishoner their\nsacrifice, so you will\nbreathe no more.\nThe code offers no\nprotection for cowards!
+fade_in 500
+crawl_in 3000
+add_image Textures/example_comic_6.png 1820 80 660 860
+fade_in 500
+move_in 500 -1000 1500
+wait_click
+add_text 2180 360 Let's get\nthis over\nwith.
+fade_in 500
+crawl_in 250
+add_image Textures/example_comic_7.png 1840 880 620 520
+fade_in 500
+move_in 500 1000 100
+wait_click
+new_page
+add_image Textures/example_comic_8.png 20 80 560 420
+fade_in 250
+play_sound Data/Sounds/Footsteps-Rock2.wav
+wait_click
+add_image Textures/example_comic_9.png 20 60 2520 1360
+fade_in 250
+play_sound Data/Sounds/whoosh/hit_whoosh_1.wav
+wait_click
+add_image Textures/example_comic_10.png 20 60 2520 1360
+fade_in 250
+move_in 500 1000 1000
+play_sound Data/Sounds/cloth_foley/cloth_fabric_edge_grab_3.wav
+wait_click
+new_page
+add_image Textures/example_comic_11.png 140 80 700 1300
+fade_in 250
+play_sound Data/Sounds/whoosh/hit_whoosh_5.wav
+wait_click
+add_text 240 1200 Still so slow.
+fade_in 250
+wait_click
+add_image Textures/example_comic_12.png 840 100 1700 540
+fade_in 250
+play_sound Data/Sounds/weapon_foley/impact/weapon_metal_hit_metal_strong_8.wav
+wait_click
+add_text 1560 520 And so unbalanced.
+fade_in 250
+wait_click
+play_sound Data/Sounds/weapon_foley/impact/weapon_staff_hit_staff_strong_5.wav
+add_image Textures/example_comic_13.png 840 600 640 760
+fade_in 1500
+add_image Textures/example_comic_14.png 1460 620 1020 740
+fade_in 1500
+move_in 500 1000 1000

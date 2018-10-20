@@ -13,6 +13,7 @@
 	<Tag>Editor</Tag>
 	<SupportedVersion>*</SupportedVersion>
 	<NeedsRestart>false</NeedsRestart>
-	<!-- <Level title="Comic Creator" thumbnail="Images/comic_creator_full.jpg">comic_creator.xml</Level> -->
+	<Level title="Comic Creator" thumbnail="Images/comic_creator_full.jpg">comic_creator.xml</Level>
 	<MenuItem title="Comic Creator" category="play">Data/Scripts/comic_creator.as</MenuItem>
+	<LevelHookFile>Data/Scripts/comic_creator.as</LevelHookFile>
 </Mod>
