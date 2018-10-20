@@ -1,4 +1,3 @@
-
 enum comic_element_types { 	none,
 							comic_grabber,
 							comic_image,
@@ -28,8 +27,5 @@ class ComicElement{
 	void SetVisible(bool _visible){
 		visible = _visible;
 	}
-	void SetEdit(bool editing){
-		edit_mode = editing;
-		Update();
-	}
+	void SetEdit(bool editing){}
 }

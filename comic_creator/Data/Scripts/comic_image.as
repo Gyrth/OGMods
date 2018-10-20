@@ -107,12 +107,15 @@ class ComicImage : ComicElement{
 	}
 
 	void RemoveUpdateBehavior(string name){
-		/* image.removeUpdateBehavior(name); */
-		/* image.clearUpdateBehaviors(); */
 	}
 
 	void SetVisible(bool _visible){
 		visible = _visible;
+		Update();
+	}
+
+	void SetEdit(bool editing){
+		edit_mode = editing;
 		Update();
 	}
 }

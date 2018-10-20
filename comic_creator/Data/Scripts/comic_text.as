@@ -57,6 +57,11 @@ class ComicText : ComicElement{
 		Update();
 	}
 
+	void SetEdit(bool editing){
+		edit_mode = editing;
+		Update();
+	}
+
 	ComicGrabber@ GetGrabber(string grabber_name){
 		if(grabber_name == "center"){
 			return grabber_center;
