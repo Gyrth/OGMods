@@ -12,7 +12,7 @@ add_image Textures/example_comic_2.png 60 700 1080 700
 move_in 1000 0 500
 fade_in 1500
 wait_click
-add_text 580 780 You misunderstand the\ncode, wolfblood.
+add_text 560 780 You misunderstand the\ncode, wolfblood.
 move_in 1000 0 -500
 wait_click
 add_image Textures/example_comic_3.png 1140 700 1360 700

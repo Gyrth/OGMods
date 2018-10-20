@@ -67,15 +67,30 @@ class ComicWaitClick : ComicElement{
 	ComicWaitClick(){
 		comic_element_type = wait_click;
 	}
+	string GetSaveString(){
+		return "wait_click";
+	}
 }
 
 class ComicFont : ComicElement{
+	string font_name;
+	int font_size;
+	string font_color;
+	bool shadowed;
 	FontSetup font("edosz", 75, HexColor("#CCCCCC"), true);
 	ComicFont(string _font_name, int _font_size, string _font_color, bool _shadowed){
+		font_name = _font_name;
+		font_size = _font_size;
+		font_color = _font_color;
+		shadowed = _shadowed;
+
 		font.fontName = _font_name;
 		font.size = _font_size;
 		font.color = HexColor(_font_color);
 		font.shadowed = _shadowed;
+	}
+	string GetSaveString(){
+		return "set_font " + font_name + " " + font_size + " " + font_color + " " + (shadowed ? "true" : "false");
 	}
 }
 
@@ -91,6 +106,8 @@ class ComicText : ComicElement{
 		content = _content;
 		location = _location;
 		index = _index;
+
+		Log(info, content);
 
 		IMDivider text_holder("textholder" + index, DOVertical);
 		text_holder.showBorder();
@@ -173,6 +190,9 @@ class ComicSound : ComicElement{
 			PlaySound(path);
 		}
 	}
+	string GetSaveString(){
+		return "play_sound " + path;
+	}
 }
 
 class ComicPage : ComicElement{
@@ -194,6 +214,9 @@ class ComicPage : ComicElement{
 			elements[i].SetVisible(false);
 		}
 	}
+	string GetSaveString(){
+		return "new_page";
+	}
 }
 
 class ComicFadeIn : ComicElement{
@@ -214,6 +237,9 @@ class ComicFadeIn : ComicElement{
 		}else{
 			target.RemoveUpdateBehavior(name);
 		}
+	}
+	string GetSaveString(){
+		return "fade_in " + duration;
 	}
 }
 
@@ -237,6 +263,9 @@ class ComicMoveIn : ComicElement{
 		}else{
 			target.RemoveUpdateBehavior(name);
 		}
+	}
+	string GetSaveString(){
+		return "move_in " + duration + " " + offset.x + " " + offset.y;
 	}
 }
 
@@ -458,7 +487,7 @@ void InterpComic(){
 			Log(info, "addtext");
 			string complete_text = "";
 			for(uint j = 3; j < line_elements.size(); j++){
-				complete_text += line_elements[j] + " ";
+				complete_text += line_elements[j] + (j==line_elements.size()-1? "" : " ");
 			}
 			ComicText new_text(complete_text, current_font, vec2(atoi(line_elements[1]), atoi(line_elements[2])), i);
 			comic_elements.insertLast(@new_text);
@@ -532,6 +561,8 @@ void Update(){
 		}else if(editor_open){
 			creator_state = editing;
 		}
+	}else if(GetInputDown(0, "lctrl") && GetInputPressed(0, "s")){
+		SaveComic();
 	}
 	while( imGUI.getMessageQueueSize() > 0 ) {
 		IMMessage@ message = imGUI.getNextMessage();
@@ -751,7 +782,7 @@ void DrawGUI(){
 			}
 			ImGui_EndMenuBar();
 		}
-		if(ImGui_InputTextMultiline("##TEST", vec2(-1.0, -1.0))){
+		if(ImGui_InputTextMultiline("##TEST", vec2(-1,-1))){
 	        /* SetCurrentAction(ImGui_GetTextBuf()); */
 			Log(info, "" + GetLineNumber(ImGui_GetTextBuf()));
 		}
@@ -765,11 +796,10 @@ void DrawGUI(){
 void SaveComic(){
 	Log(info, FindFilePath(comic_path));
 	StartWriteFile();
-	array<string> lines = comic_content.split("\n");
 
-	for(uint i = 0; i < lines.size(); i++){
-		AddFileString(lines[i]);
-		if(i != lines.size() - 1){
+	for(uint i = 0; i < comic_elements.size(); i++){
+		AddFileString(comic_elements[i].GetSaveString());
+		if(i != comic_elements.size() - 1){
 			AddFileString("\n");
 		}
 	}
