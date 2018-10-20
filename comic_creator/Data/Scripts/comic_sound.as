@@ -4,7 +4,7 @@ class ComicSound : ComicElement{
 		comic_element_type = comic_sound;
 		path = _path;
 	}
-	void SetCurrent(){
+	void SetCurrent(bool _current){
 		PlaySound(path);
 	}
 	string GetSaveString(){

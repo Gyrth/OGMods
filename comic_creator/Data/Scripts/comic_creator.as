@@ -92,6 +92,7 @@ void CreateComicUI(){
 
 bool DialogueCameraControl(){
 	return (editor_open || creator_state == playing);
+	/* return false; */
 }
 
 string comic_content;
@@ -209,8 +210,8 @@ void Resize() {
 	imGUI.doScreenResize();
 }
 
-void Update(){
-	if(GetInputPressed(0, "f1") && (environment_state == in_menu || EditorModeActive())){
+void Update(int is_paused){
+	if(GetInputPressed(0, "f1") && environment_state == in_menu){
 		editor_open = !editor_open;
 		if(!editor_open){
 			creator_state = playing;
@@ -219,6 +220,9 @@ void Update(){
 		}
 	}else if(GetInputDown(0, "lctrl") && GetInputPressed(0, "s")){
 		SaveComic();
+	}else if(GetInputDown(0, "l") && environment_state == in_game){
+		CloseComic();
+		SetPaused(false);
 	}
 	while( imGUI.getMessageQueueSize() > 0 ) {
 		IMMessage@ message = imGUI.getNextMessage();
@@ -238,6 +242,19 @@ void Update(){
 	UpdateGrabber();
 	UpdateProgress();
 	imGUI.update();
+}
+
+void CloseComic(){
+	comic_content = "";
+	comic_path = "";
+	image_container.clear();
+	text_container.clear();
+	grabber_container.clear();
+	current_line = 0;
+	@current_font = null;
+	@current_grabber = null;
+	comic_elements.resize(0);
+	creator_state = editing;
 }
 
 int play_direction = 1.0;
@@ -263,18 +280,21 @@ void UpdateProgress(){
 	if(comic_elements.size() == 0){
 		return;
 	}
+	comic_elements[current_line].Update();
 	if(creator_state == playing){
 		GoToLine(GetPlayingProgress());
 	}else{
 		GoToLine(GetLineNumber(ImGui_GetTextBuf()));
 	}
-	comic_elements[current_line].Update();
 }
 
 void GoToLine(int new_line){
 	// Don't do anything if already at target line.
 	if(new_line == current_line){
 		return;
+	}
+	if(creator_state == playing){
+		comic_elements[current_line].SetCurrent(false);
 	}
 	comic_elements[current_line].SetEdit(false);
 
@@ -301,11 +321,11 @@ void GoToLine(int new_line){
 			break;
 		}
 		if(creator_state == playing){
-			comic_elements[current_line].SetCurrent();
+			comic_elements[current_line].SetCurrent(true);
 		}
 	}
 	if(creator_state == editing){
-		comic_elements[current_line].SetCurrent();
+		comic_elements[current_line].SetCurrent(true);
 		comic_elements[current_line].SetEdit(true);
 	}
 }
@@ -327,6 +347,10 @@ int GetPlayingProgress(){
 			if(CanPlayForward()){
 				new_line = current_line + 1;
 				play_direction = 1;
+			}else if(environment_state == in_game){
+				CloseComic();
+				SetPaused(false);
+				return 0;
 			}
 		}else if(GetInputPressed(0, "grab")){
 			if(CanPlayBackward()){
@@ -418,6 +442,7 @@ void ReceiveMessage(string msg){
 			token_iter.FindNextToken(msg);
 			LoadComic(token_iter.GetToken(msg));
 			creator_state = playing;
+			SetPaused(true);
 		}
 	}
 }

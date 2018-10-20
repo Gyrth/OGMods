@@ -11,7 +11,6 @@ class ComicCrawlIn : ComicElement{
 		if(_current){
 			timer = 0.0;
 		}else{
-			Log(info, "progress 100" );
 			target.SetProgress(100);
 		}
 	}

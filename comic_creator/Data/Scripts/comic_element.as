@@ -28,7 +28,7 @@ class ComicElement{
 	void Update(){}
 	void SetEdit(bool editing){}
 	void SetProgress(int _progress){}
-	void SetCurrent(){}
+	void SetCurrent(bool _current){}
 	void SetVisible(bool _visible){
 		visible = _visible;
 	}

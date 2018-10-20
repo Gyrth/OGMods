@@ -9,7 +9,7 @@ send_character_message 1 "set_eye_dir 0 0 1 1"
 set_cam 3.17977 -1.51289 3.429 5.47 20.69 -2.59 90
 say 1 "Bob" "Hello there! [wait 0.2]Let's read a comic!"
 send_level_message "show_comic Data/Comics/example_in_game.txt"
-say 1 "Bob" "Hmmm interesting"
 send_character_message 1 "set_dialogue_control false"
 set_cam_control false
 set_dialogue_visible false
+wait_for_click
