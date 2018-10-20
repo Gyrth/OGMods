@@ -87,10 +87,14 @@ class ComicText : ComicElement{
 	}
 
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
-		holder.addUpdateBehavior(behavior, name);
+		for(uint i = 0; i < text_elements.size(); i++){
+			text_elements[i].addUpdateBehavior(behavior, name);
+		}
 	}
 
 	void RemoveUpdateBehavior(string name){
-		holder.removeUpdateBehavior(name);
+		for(uint i = 0; i < text_elements.size(); i++){
+			text_elements[i].removeUpdateBehavior(name);
+		}
 	}
 }
