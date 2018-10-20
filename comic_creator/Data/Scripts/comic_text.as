@@ -7,6 +7,7 @@ class ComicText : ComicElement{
 	ComicGrabber@ grabber_center;
 	ComicText(string _content, ComicFont@ _comic_font, vec2 _location, int _index){
 		comic_element_type = comic_text;
+
 		content = _content;
 		location = _location;
 		index = _index;

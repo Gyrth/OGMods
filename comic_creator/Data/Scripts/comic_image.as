@@ -11,11 +11,13 @@ class ComicImage : ComicElement{
 	vec2 size;
 
 	ComicImage(string _path, vec2 _location, vec2 _size, int _index){
+		comic_element_type = comic_image;
+
 		path = _path;
 		index = _index;
 		location = _location;
 		size = _size;
-		comic_element_type = comic_image;
+
 		IMImage new_image(path);
 		@image = new_image;
 		new_image.setBorderColor(edit_outline_color);

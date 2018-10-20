@@ -5,6 +5,8 @@ class ComicFont : ComicElement{
 	bool shadowed;
 	FontSetup font("edosz", 75, HexColor("#CCCCCC"), true);
 	ComicFont(string _font_name, int _font_size, string _font_color, bool _shadowed){
+		comic_element_type = comic_font;
+
 		font_name = _font_name;
 		font_size = _font_size;
 		font_color = _font_color;

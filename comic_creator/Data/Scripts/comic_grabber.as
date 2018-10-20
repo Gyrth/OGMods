@@ -1,14 +1,16 @@
+enum grabber_types { scaler, mover };
+
 class ComicGrabber : ComicElement{
 	IMImage@ image;
 	int direction_x;
 	int direction_y;
 	grabber_types grabber_type;
 	ComicGrabber(int image_index, string name, int _direction_x, int _direction_y, grabber_types _grabber_type){
-		IMImage grabber_image("Textures/ui/eclipse.tga");
-		@image = grabber_image;
+		comic_element_type = comic_grabber;
 		grabber_type = _grabber_type;
 
-		comic_element_type = grabber;
+		IMImage grabber_image("Textures/ui/eclipse.tga");
+		@image = grabber_image;
 
 		direction_x = _direction_x;
 		direction_y = _direction_y;

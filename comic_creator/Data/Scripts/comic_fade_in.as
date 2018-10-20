@@ -3,6 +3,8 @@ class ComicFadeIn : ComicElement{
 	int duration;
 	string name;
 	ComicFadeIn(ComicElement@ _target, int _duration){
+		comic_element_type = comic_fade_in;
+
 		duration = _duration;
 		@target = _target;
 		name = "fadein" + update_behavior_counter;

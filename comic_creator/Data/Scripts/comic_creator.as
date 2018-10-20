@@ -25,17 +25,14 @@ string black_background = "Textures/black.tga";
 array<ComicElement@> comic_elements;
 int grabber_size = 50;
 
-enum grabber_types { scaler, mover };
 enum creator_states { editing, playing };
 enum editing_states { edit_image };
-enum comic_element_types { none, grabber, comic_image, comic_page, comic_text, wait_click };
 
 creator_states creator_state = playing;
 bool editor_open = creator_state == editing;
 
 vec2 drag_position;
 ComicGrabber@ current_grabber = null;
-ComicElement@ current_page = null;
 ComicFont@ current_font = null;
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 string comic_path = "Data/Comics/example.txt";
@@ -93,29 +90,24 @@ void InterpComic(){
 
 	for(uint i = 0; i < lines.size(); i++){
 		array<string> line_elements = lines[i].split(" ");
+		Log(info, "add " + line_elements[0]);
 		if(line_elements[0] == "add_image"){
-			Log(info, "addimage");
 			vec2 position = vec2(atoi(line_elements[2]), atoi(line_elements[3]));
 			vec2 size = vec2(atoi(line_elements[4]), atoi(line_elements[5]));
 			comic_elements.insertLast(ComicImage(line_elements[1], position, size, i));
 		}else if(line_elements[0] == "fade_in"){
-			Log(info, "addfadein");
 			comic_elements.insertLast(ComicFadeIn(GetLastElement(), atoi(line_elements[1])));
 		}else if(line_elements[0] == "move_in"){
-			Log(info, "addmovein");
 			comic_elements.insertLast(ComicMoveIn(GetLastElement(), atoi(line_elements[1]), vec2(atoi(line_elements[2]), atoi(line_elements[3]))));
 		}else if(line_elements[0] == "new_page"){
-			Log(info, "add page");
 			ComicPage new_page = ComicPage();
-			@current_page = new_page;
+			@new_page.on_page = new_page;
 			comic_elements.insertLast(@new_page);
 		}else if(line_elements[0] == "set_font"){
 			ComicFont new_font(line_elements[1], atoi(line_elements[2]), line_elements[3], line_elements[4] == "true");
-			Log(info, "addfont");
 			comic_elements.insertLast(@new_font);
 			@current_font = new_font;
 		}else if(line_elements[0] == "add_text"){
-			Log(info, "addtext");
 			string complete_text = "";
 			for(uint j = 3; j < line_elements.size(); j++){
 				complete_text += line_elements[j] + (j==line_elements.size()-1? "" : " ");
@@ -123,21 +115,18 @@ void InterpComic(){
 			ComicText new_text(complete_text, current_font, vec2(atoi(line_elements[1]), atoi(line_elements[2])), i);
 			comic_elements.insertLast(@new_text);
 		}else if(line_elements[0] == "wait_click"){
-			Log(info, "addwait");
 			comic_elements.insertLast(ComicWaitClick());
 		}else if(line_elements[0] == "play_sound"){
 			comic_elements.insertLast(ComicSound(line_elements[1]));
 		}else{
-			Log(info, "addelement");
 			comic_elements.insertLast(ComicElement());
 		}
-		@comic_elements[comic_elements.size() - 1].on_page = current_page;
-		if(@current_page != null){
-			Log(info, "addtopage");
-			current_page.AddElement(comic_elements[comic_elements.size() - 1]);
+
+		if(comic_elements[comic_elements.size() - 1].comic_element_type != comic_page){
+			@comic_elements[comic_elements.size() - 1].on_page = comic_elements[comic_elements.size() - 2].on_page;
+			comic_elements[comic_elements.size() - 1].on_page.AddElement(comic_elements[comic_elements.size() - 1]);
 		}
 	}
-	@current_page = null;
 }
 
 ComicElement@ GetLastElement(){
@@ -227,7 +216,7 @@ bool CanPlayForward(){
 
 bool CanPlayBackward(){
 	for(int i = (current_line - 1); i >= 0; i--){
-		if(comic_elements[i].comic_element_type == wait_click){
+		if(comic_elements[i].comic_element_type == comic_wait_click){
 			return true;
 		}
 	}
@@ -237,7 +226,7 @@ bool CanPlayBackward(){
 void UpdateProgress(){
 	int new_line = current_line;
 	if(creator_state == playing){
-		if(current_line != -1 && comic_elements[current_line].comic_element_type == wait_click || current_line == int(comic_elements.size() - 1)){
+		if(current_line != -1 && comic_elements[current_line].comic_element_type == comic_wait_click || current_line == int(comic_elements.size() - 1)){
 			if(GetInputPressed(0, "mouse0")){
 				if(CanPlayForward()){
 					new_line = current_line + 1;
@@ -267,7 +256,6 @@ void UpdateProgress(){
 			if(new_line < current_line){
 				if(comic_elements[current_line].comic_element_type == comic_page){
 					comic_elements[current_line - 1].on_page.ShowPage();
-					@current_page = comic_elements[current_line - 1].on_page;
 				}
 				comic_elements[current_line].SetVisible(false);
 				current_line -= 1;
@@ -275,19 +263,16 @@ void UpdateProgress(){
 
 			}else if(new_line > current_line){
 				if(comic_elements[current_line + 1].comic_element_type == comic_page){
-					if(@current_page != null){
-						current_page.HidePage();
+					if(current_line > 0){
+						comic_elements[current_line].on_page.HidePage();
 					}else{
 						Log(info, "current_page null");
 					}
-					@current_page = comic_elements[current_line + 1];
 				}
 				current_line += 1;
-				/* Log(info, "current line" + current_line); */
 				comic_elements[current_line].SetVisible(true);
 			// At the correct line.
 			}else{
-				/* comic_elements[current_line].SetVisible(true); */
 				break;
 			}
 		}

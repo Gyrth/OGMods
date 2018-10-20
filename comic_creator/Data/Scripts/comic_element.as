@@ -1,3 +1,15 @@
+
+enum comic_element_types { 	none,
+							comic_grabber,
+							comic_image,
+							comic_page,
+						 	comic_fade_in,
+							comic_move_in,
+							comic_font,
+							comic_sound,
+							comic_text,
+							comic_wait_click};
+
 class ComicElement{
 	comic_element_types comic_element_type = none;
 	ComicElement@ on_page = null;

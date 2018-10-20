@@ -4,6 +4,8 @@ class ComicMoveIn : ComicElement{
 	vec2 offset;
 	string name;
 	ComicMoveIn(ComicElement@ _target, int _duration, vec2 _offset){
+		comic_element_type = comic_move_in;
+
 		duration = _duration;
 		offset = _offset;
 		@target = _target;
