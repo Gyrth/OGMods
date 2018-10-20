@@ -29,9 +29,9 @@ add_image Textures/example_comic_4.png 60 60 1020 1360
 fade_in 500
 move_in 500 1000 500
 wait_click
-add_text 620 180 If you train,\nand train hard,\nmaybe you will\nbe able to rise\nabove the limitations\nof your breed -\nand finally pose\na threat to me.
-fade_in 500
-wait_click
+add_text 640 180 If you train,\nand train hard,\nmaybe you will\nbe able to rise\nabove the limitations\nof your breed -\nand finally pose\na threat to me.
+fade_in 10000
+crawl_in 2000
 add_image Textures/example_comic_5.png 1140 80 660 1320
 fade_in 500
 move_in 500 -500 -500

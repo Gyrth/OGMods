@@ -17,7 +17,7 @@ string level_name = "";
 IMGUI@ imGUI;
 
 bool textbox_active = false;
-int current_line = -1;
+int current_line = 0;
 
 TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/whaleman.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
@@ -29,7 +29,7 @@ int grabber_size = 50;
 enum creator_states { editing, playing };
 enum editing_states { edit_image };
 
-creator_states creator_state = playing;
+creator_states creator_state = editing;
 bool editor_open = creator_state == editing;
 
 vec2 drag_position;
@@ -79,7 +79,7 @@ void LoadComic(string path){
 	image_container.clear();
 	text_container.clear();
 	grabber_container.clear();
-	current_line = -1;
+	current_line = 0;
 	@current_font = null;
 	@current_grabber = null;
 	comic_elements.resize(0);
@@ -238,67 +238,77 @@ bool CanPlayBackward(){
 }
 
 void UpdateProgress(){
-	int new_line = current_line;
 	if(creator_state == playing){
-		if(current_line != -1 && (comic_elements[current_line].comic_element_type == comic_wait_click || comic_elements[current_line].comic_element_type == comic_crawl_in) || current_line == int(comic_elements.size() - 1)){
-			if(GetInputPressed(0, "mouse0")){
-				if(CanPlayForward()){
-					new_line = current_line + 1;
-					play_direction = 1;
-				}
-			}else if(GetInputPressed(0, "grab")){
-				if(CanPlayBackward()){
-					new_line = current_line - 1;
-					play_direction = -1;
-				}
-			}
-		}else if(current_line < int(comic_elements.size() - 1)){
-			if(play_direction == 1){
-				new_line = current_line + 1;
-			}else if(play_direction == -1){
-				new_line = current_line - 1;
-			}
-		}
+		GoToLine(GetPlayingProgress());
 	}else{
-		new_line = GetLineNumber(ImGui_GetTextBuf());
+		GoToLine(GetLineNumber(ImGui_GetTextBuf()));
 	}
-	if(current_line != -1){
-		comic_elements[current_line].Update();
-	}
-	if(new_line != current_line){
-		if(current_line != -1){
-			comic_elements[current_line].SetCurrent(false);
-			comic_elements[current_line].SetEdit(false);
-		}
-		while(true){
-			if(new_line < current_line){
-				if(comic_elements[current_line].comic_element_type == comic_page){
-					comic_elements[current_line - 1].on_page.ShowPage();
-				}
-				comic_elements[current_line].SetVisible(false);
-				current_line -= 1;
-				comic_elements[current_line].SetVisible(true);
+	comic_elements[current_line].Update();
+}
 
-			}else if(new_line > current_line){
-				if(comic_elements[current_line + 1].comic_element_type == comic_page){
-					if(current_line > 0){
-						comic_elements[current_line].on_page.HidePage();
-					}else{
-						Log(info, "current_page null");
-					}
-				}
-				current_line += 1;
-				comic_elements[current_line].SetVisible(true);
-			// At the correct line.
-			}else{
-				break;
+void GoToLine(int new_line){
+	// Don't do anything if already at target line.
+	if(new_line == current_line){
+		return;
+	}
+	comic_elements[current_line].SetCurrent(false);
+	comic_elements[current_line].SetEdit(false);
+
+	while(true){
+		// Going to a previous line in the script.
+		if(new_line < current_line){
+			// Show the previous page.
+			if(comic_elements[current_line].comic_element_type == comic_page){
+				comic_elements[current_line - 1].on_page.ShowPage();
+			}
+			comic_elements[current_line].SetVisible(false);
+			current_line -= 1;
+			comic_elements[current_line].SetVisible(true);
+		// Going to the next line in the script.
+		}else if(new_line > current_line){
+			// Hide the current page to go to the next page.
+			if(comic_elements[current_line + 1].comic_element_type == comic_page){
+				comic_elements[current_line].on_page.HidePage();
+			}
+			current_line += 1;
+			comic_elements[current_line].SetVisible(true);
+		// At the correct line.
+		}else{
+			break;
+		}
+	}
+	comic_elements[current_line].SetCurrent(true);
+	if(creator_state == editing){
+		comic_elements[current_line].SetEdit(true);
+	}
+}
+
+bool waiting_for_input = false;
+
+int GetPlayingProgress(){
+	int new_line = current_line;
+	while(true){
+		if(new_line == int(comic_elements.size() -1) || comic_elements[new_line].comic_element_type == comic_wait_click || comic_elements[new_line].comic_element_type == comic_crawl_in){
+			break;
+		}else{
+			new_line += play_direction;
+		}
+	}
+	if(new_line == current_line){
+		// Waiting for input to progress.
+		if(GetInputPressed(0, "mouse0")){
+			if(CanPlayForward()){
+				new_line = current_line + 1;
+				play_direction = 1;
+			}
+		}else if(GetInputPressed(0, "grab")){
+			if(CanPlayBackward()){
+				new_line = current_line - 1;
+				play_direction = -1;
 			}
 		}
-		comic_elements[current_line].SetCurrent(true);
-		if(creator_state == editing){
-			comic_elements[current_line].SetEdit(true);
-		}
 	}
+	return new_line;
 }
 
 int GetLineNumber(string input){
@@ -428,7 +438,6 @@ void DrawGUI(){
 			ImGui_EndMenuBar();
 		}
 		if(ImGui_InputTextMultiline("##TEST", vec2(-1,-1))){
-	        /* SetCurrentAction(ImGui_GetTextBuf()); */
 			Log(info, "" + GetLineNumber(ImGui_GetTextBuf()));
 		}
 		textbox_active = ImGui_IsItemActive();
@@ -452,9 +461,4 @@ void SaveComic(string path = ""){
 		}
 	}
 	WriteFileKeepBackup(FindFilePath(comic_path));
-}
-
-void SetCurrentAction(string strings){
-	/* int new_cursor_pos = imgui_text_input_CursorPos;
-	if(new_cursor_pos != old_cursor_pos){ */
 }
