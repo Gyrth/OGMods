@@ -4,9 +4,8 @@ class ComicSound : ComicElement{
 		comic_element_type = comic_sound;
 		path = _path;
 	}
-	void SetVisible(bool _visible){
-		visible = _visible;
-		if(visible){
+	void SetCurrent(bool _current){
+		if(_current){
 			PlaySound(path);
 		}
 	}
