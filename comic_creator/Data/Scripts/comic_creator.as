@@ -5,7 +5,6 @@ MusicLoad ml("Data/Music/menu.xml");
 string level_name = "";
 IMGUI@ imGUI;
 
-bool editor_open = true;
 bool textbox_active = false;
 int current_line = -1;
 
@@ -14,14 +13,15 @@ TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/
 string grid_background = "Textures/grid.png";
 string black_background = "Textures/black.tga";
 array<ComicElement@> comic_elements;
-int grabber_size = 100;
+int grabber_size = 50;
 
 enum grabber_types { scaler, mover };
 enum creator_states { editing, playing };
 enum editing_states { edit_image };
 enum comic_element_types { none, grabber, comic_image, comic_page, comic_text, wait_click };
 
-creator_states creator_state = editing;
+creator_states creator_state = playing;
+bool editor_open = creator_state == editing;
 
 vec2 drag_position;
 Grabber@ current_grabber = null;
@@ -88,29 +88,30 @@ class ComicText : ComicElement{
 	Grabber@ grabber_center;
 	ComicText(string _content, ComicFont@ _comic_font, vec2 _location, int _index){
 		comic_element_type = comic_text;
+		content = _content;
+		location = _location;
+		index = _index;
 
 		IMDivider text_holder("textholder" + index, DOVertical);
+		text_holder.showBorder();
 		text_holder.setBorderColor(edit_outline_color);
 		text_holder.setAlignment(CALeft, CATop);
 		text_holder.setClip(false);
 		array<string> lines = _content.split("\\n");
 		for(uint i = 0; i < lines.size(); i++){
+			IMText@ new_text;
 			if(_comic_font is null){
-				IMText new_text(lines[i], default_font);
-				text_elements.insertLast(@new_text);
-				text_holder.append(new_text);
+				@new_text = IMText(lines[i], default_font);
 			}else{
-				IMText new_text(lines[i], _comic_font.font);
-				text_elements.insertLast(@new_text);
-				text_holder.append(new_text);
+				@new_text = IMText(lines[i], _comic_font.font);
 			}
+			text_elements.insertLast(@new_text);
+			text_holder.append(new_text);
+			new_text.setZOrdering(index);
 		}
-		content = _content;
-		location = _location;
-		index = _index;
 		@grabber_center = Grabber(index, "center", 1, 1, mover);
 		@holder = text_holder;
-		text_container.addFloatingElement(text_holder, "text" + index, location);
+		text_container.addFloatingElement(text_holder, "text" + index, location, index);
 		Update();
 	}
 
@@ -130,7 +131,6 @@ class ComicText : ComicElement{
 	}
 
 	void SetVisible(bool _visible){
-		/* Log(info, _visible + content); */
 		visible = _visible;
 		Update();
 	}
@@ -263,7 +263,7 @@ class Grabber : ComicElement{
 
 		grabber_image.addMouseOverBehavior(IMFixedMessageOnMouseOver( on_enter, on_over, on_exit ), "");
 		grabber_image.setSize(vec2(grabber_size));
-		grabber_container.addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0));
+		grabber_container.addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0), image_index);
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;
@@ -301,7 +301,8 @@ class ComicImage : ComicElement{
 		@grabber_center = Grabber(index, "center", 1, 1, mover);
 
 		new_image.setSize(size);
-		image_container.addFloatingElement(new_image, "image" + index, location);
+		Log(info, "adding image " + index);
+		image_container.addFloatingElement(new_image, "image" + index, location, index);
 		Update();
 	}
 
@@ -378,7 +379,8 @@ class ComicImage : ComicElement{
 	}
 
 	void RemoveUpdateBehavior(string name){
-		image.removeUpdateBehavior(name);
+		/* image.removeUpdateBehavior(name); */
+		/* image.clearUpdateBehaviors(); */
 	}
 
 	void SetVisible(bool _visible){
@@ -488,8 +490,8 @@ ComicElement@ GetLastElement(){
 }
 
 void AddBackground(){
-	int vertical_amount = 4;
-	int horizontal_amount = 7;
+	int vertical_amount = 5;
+	int horizontal_amount = 8;
 	IMDivider vertical("vertical", DOVertical);
 	for(int i = 0; i < vertical_amount; i++){
 		IMDivider horizontal("horizontal" + i, DOHorizontal);
@@ -506,6 +508,7 @@ void AddBackground(){
 			horizontal.append(background);
 		}
 	}
+	imGUI.getBackgroundLayer(0).setClip(true);
 	imGUI.getBackgroundLayer(0).setElement(vertical);
 }
 
@@ -524,12 +527,11 @@ void Resize() {
 void Update(){
 	if(GetInputPressed(0, "f1")){
 		editor_open = !editor_open;
-	}
-	if(!editor_open && creator_state == editing){
-		/* current_line = -1; */
-		creator_state = playing;
-	}else if(editor_open && creator_state == playing){
-		creator_state = editing;
+		if(!editor_open){
+			creator_state = playing;
+		}else if(editor_open){
+			creator_state = editing;
+		}
 	}
 	while( imGUI.getMessageQueueSize() > 0 ) {
 		IMMessage@ message = imGUI.getNextMessage();
@@ -596,7 +598,7 @@ void UpdateProgress(){
 		new_line = GetLineNumber(ImGui_GetTextBuf());
 	}
 	if(new_line != current_line){
-		if(creator_state == editing && current_line != -1){
+		if(current_line != -1){
 			comic_elements[current_line].SetEdit(false);
 		}
 		while(true){
