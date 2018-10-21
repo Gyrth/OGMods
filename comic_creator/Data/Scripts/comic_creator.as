@@ -68,7 +68,6 @@ void Init(string level_name){
 	environment_state = in_game;
 	editor_open = false;
 	CreateComicUI();
-	ImGui_SetTextBuf("");
 }
 
 void Menu(){
@@ -117,9 +116,6 @@ void LoadComic(string path){
 			}
 			comic_content += new_line + "\n";
 		}
-	}
-	if(creator_state == editing){
-		ImGui_SetTextBuf(comic_content);
 	}
 	InterpComic();
 }
@@ -438,7 +434,6 @@ void SetCurrentLineContent(){
 	array<string> lines = comic_content.split("\n");
 	lines[current_line] = comic_elements[current_line].GetSaveString();
 	comic_content = join(lines, "\n");
-	ImGui_SetTextBuf(comic_content);
 }
 
 void ReceiveMessage(string msg){
@@ -472,10 +467,28 @@ string ToLowerCase(string input){
 	return output;
 }
 
+bool edit_element = false;
+bool open = true;
+
 void DrawGUI(){
 	if(editor_open){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
 		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar);
+
+        if(ImGui_BeginPopupModal("Edit Element")){
+			if(ImGui_InputText("text")){
+
+			}
+			if(ImGui_Button("Cancel")){
+				ImGui_CloseCurrentPopup();
+			}
+			ImGui_SameLine(0);
+			if(ImGui_Button("Set")){
+				ImGui_CloseCurrentPopup();
+			}
+			ImGui_EndPopup();
+		}
+
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
 				if(ImGui_MenuItem("Load file")){
@@ -499,14 +512,34 @@ void DrawGUI(){
 				ImGui_DragInt("Snap Scale", snap_scale, 0.5f, 1, 50, "%.0f");
 				ImGui_EndMenu();
 			}
+			if(ImGui_BeginMenu("Add")){
+				if(ImGui_MenuItem("New Page")){
+				}
+				if(ImGui_MenuItem("Image")){
+				}
+				if(ImGui_MenuItem("Text")){
+				}
+				if(ImGui_MenuItem("Crawl In")){
+				}
+				if(ImGui_MenuItem("Fade In")){
+				}
+				if(ImGui_MenuItem("Font")){
+				}
+				if(ImGui_MenuItem("Wait Click")){
+				}
+				ImGui_EndMenu();
+			}
 			ImGui_EndMenuBar();
 		}
 
 		int line_counter = 0;
 		for(uint i = 0; i < comic_elements.size(); i++){
-			if(ImGui_Selectable(line_counter + ".  " + comic_elements[i].GetDisplayString(), current_line == int(i) )){
+			if(ImGui_Selectable(line_counter + ".  " + comic_elements[i].GetDisplayString(), current_line == int(i), ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
 					Log(info, "double");
+					ImGui_SetTextBuf(comic_elements[i].GetDisplayString());
+					ImGui_OpenPopup("Edit Element");
+					edit_element = true;
 				}else{
 					Log(info, "single");
 					target_line = int(i);
@@ -533,7 +566,6 @@ void DrawGUI(){
 			}
 			line_counter += 1;
 		}
-
 		ImGui_End();
 	}
 	imGUI.render();
