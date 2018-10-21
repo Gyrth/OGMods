@@ -116,7 +116,9 @@ void LoadComic(string path){
 			comic_content += new_line + "\n";
 		}
 	}
-	ImGui_SetTextBuf(comic_content);
+	if(creator_state == editing){
+		ImGui_SetTextBuf(comic_content);
+	}
 	InterpComic();
 }
 
