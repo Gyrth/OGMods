@@ -212,6 +212,10 @@ void Resize() {
 	imGUI.doScreenResize();
 }
 
+void Update(){
+	Update(0);
+}
+
 void Update(int is_paused){
 	if(GetInputPressed(0, "f1") && environment_state == in_menu){
 		editor_open = !editor_open;
