@@ -67,6 +67,7 @@ void Init(string level_name){
 	environment_state = in_game;
 	editor_open = false;
 	CreateComicUI();
+	ImGui_SetTextBuf("");
 }
 
 void Menu(){
@@ -472,7 +473,7 @@ string ToLowerCase(string input){
 void DrawGUI(){
 	if(editor_open){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
-		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings);
+		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar);
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
 				if(ImGui_MenuItem("Load file")){
