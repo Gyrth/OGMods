@@ -102,6 +102,10 @@ class ComicImage : ComicElement{
 		return "add_image " + path + " " + location.x + " " + location.y + " " + size.x + " " + size.y;
 	}
 
+	string GetDisplayString(){
+		return "Add Image " + path;
+	}
+
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
 		image.addUpdateBehavior(behavior, name);
 	}

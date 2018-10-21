@@ -30,4 +30,7 @@ class ComicGrabber : ComicElement{
 		image.setVisible(visible);
 		image.setPauseBehaviors(!visible);
 	}
+	string GetDisplayString(){
+		return "Grabber";
+	}
 }

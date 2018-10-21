@@ -24,4 +24,7 @@ class ComicMoveIn : ComicElement{
 	string GetSaveString(){
 		return "move_in " + duration + " " + offset.x + " " + offset.y;
 	}
+	string GetDisplayString(){
+		return "Move In " + duration;
+	}
 }

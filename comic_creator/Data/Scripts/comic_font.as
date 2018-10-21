@@ -20,4 +20,7 @@ class ComicFont : ComicElement{
 	string GetSaveString(){
 		return "set_font " + font_name + " " + font_size + " " + font_color + " " + (shadowed ? "true" : "false");
 	}
+	string GetDisplayString(){
+		return "Set Font " + font_name + " size:" + font_size + " color:" + font_color + " shadowed:" + (shadowed ? "true" : "false");
+	}
 }

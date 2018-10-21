@@ -20,4 +20,7 @@ class ComicPage : ComicElement{
 	string GetSaveString(){
 		return "new_page";
 	}
+	string GetDisplayString(){
+		return "New Page";
+	}
 }

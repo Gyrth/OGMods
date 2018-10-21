@@ -5,4 +5,8 @@ class ComicWaitClick : ComicElement{
 	string GetSaveString(){
 		return "wait_click";
 	}
+
+	string GetDisplayString(){
+		return "Wait Click";
+	}
 }

@@ -47,6 +47,7 @@ uint grabber_layer = 2;
 
 bool dragging = false;
 int snap_scale = 20;
+int target_line = 0;
 
 IMContainer@ image_container;
 IMContainer@ text_container;
@@ -291,7 +292,7 @@ void UpdateProgress(){
 	if(creator_state == playing){
 		GoToLine(GetPlayingProgress());
 	}else{
-		GoToLine(GetLineNumber(ImGui_GetTextBuf()));
+		GoToLine(target_line);
 	}
 }
 
@@ -300,6 +301,7 @@ void GoToLine(int new_line){
 	if(new_line == current_line){
 		return;
 	}
+	Log(info, "goto line " + new_line);
 	if(creator_state == playing){
 		comic_elements[current_line].SetCurrent(false);
 	}
@@ -473,7 +475,7 @@ string ToLowerCase(string input){
 void DrawGUI(){
 	if(editor_open){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
-		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar);
+		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar);
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
 				if(ImGui_MenuItem("Load file")){
@@ -499,10 +501,38 @@ void DrawGUI(){
 			}
 			ImGui_EndMenuBar();
 		}
-		if(ImGui_InputTextMultiline("##TEST", vec2(-1,-1))){
-			Log(info, "" + GetLineNumber(ImGui_GetTextBuf()));
+
+		int line_counter = 0;
+		for(uint i = 0; i < comic_elements.size(); i++){
+			if(ImGui_Selectable(line_counter + ".  " + comic_elements[i].GetDisplayString(), current_line == int(i) )){
+				if(ImGui_IsMouseDoubleClicked(0)){
+					Log(info, "double");
+				}else{
+					Log(info, "single");
+					target_line = int(i);
+				}
+			}
+			if(ImGui_IsItemActive() && !ImGui_IsItemHovered()){
+				float drag_dy = ImGui_GetMouseDragDelta(0).y;
+				if(drag_dy < -15.0 && i > 0){
+					// Swap
+					ComicElement@  first_element = comic_elements[i];
+					ComicElement@  second_element = comic_elements[i - 1];
+					@comic_elements[i] = second_element;
+					@comic_elements[i - 1] = first_element;
+					target_line = i - 1;
+					ImGui_ResetMouseDragDelta();
+				}else if(drag_dy > 15.0 && i < comic_elements.size() - 1){
+					ComicElement@  first_element = comic_elements[i];
+					ComicElement@  second_element = comic_elements[i + 1];
+					@comic_elements[i] = second_element;
+					@comic_elements[i + 1] = first_element;
+					target_line = i + 1;
+					ImGui_ResetMouseDragDelta();
+				}
+			}
+			line_counter += 1;
 		}
-		textbox_active = ImGui_IsItemActive();
 
 		ImGui_End();
 	}

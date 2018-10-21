@@ -10,4 +10,7 @@ class ComicSound : ComicElement{
 	string GetSaveString(){
 		return "play_sound " + path;
 	}
+	string GetDisplayString(){
+		return "Play Sound " + path;
+	}
 }

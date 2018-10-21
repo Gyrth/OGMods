@@ -16,4 +16,11 @@
 	<Level title="Comic Creator" thumbnail="Images/comic_creator_full.jpg">comic_creator.xml</Level>
 	<MenuItem title="Comic Creator" category="play">Data/Scripts/comic_creator_inmenu.as</MenuItem>
 	<LevelHookFile>Data/Scripts/comic_creator.as</LevelHookFile>
+
+	<Campaign title="Comics" thumbnail="Images/comic_creator_full.jpg">
+	</Campaign>
+	<Parameter name="root" type="table">
+	<Parameter name="credits" value="theriumcredits.as"/>
+	</Parameter>
+
 </Mod>

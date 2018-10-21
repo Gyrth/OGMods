@@ -86,6 +86,10 @@ class ComicText : ComicElement{
 		return "add_text " + location.x + " " + location.y + " " + join(content, "\\n");
 	}
 
+	string GetDisplayString(){
+		return "Add Text " + join(content, "\\n");
+	}
+
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
 		for(uint i = 0; i < text_elements.size(); i++){
 			text_elements[i].addUpdateBehavior(behavior, name);

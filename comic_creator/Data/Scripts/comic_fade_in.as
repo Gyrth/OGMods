@@ -22,4 +22,7 @@ class ComicFadeIn : ComicElement{
 	string GetSaveString(){
 		return "fade_in " + duration;
 	}
+	string GetDisplayString(){
+		return "Fade In " + duration;
+	}
 }

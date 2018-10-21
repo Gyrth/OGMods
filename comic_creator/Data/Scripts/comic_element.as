@@ -20,6 +20,7 @@ class ComicElement{
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
 	ComicGrabber@ GetGrabber(string grabber_name){return null;}
 	string GetSaveString(){return "";}
+	string GetDisplayString(){return "";};
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){};
 	void RemoveUpdateBehavior(string behavior_name){};
 	void AddElement(ComicElement@ element){}
