@@ -21,6 +21,6 @@ class ComicPage : ComicElement{
 		return "new_page";
 	}
 	string GetDisplayString(){
-		return "New Page";
+		return "NewPage";
 	}
 }

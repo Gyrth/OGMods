@@ -15,6 +15,7 @@ class ComicElement{
 	ComicElement@ on_page = null;
 	bool edit_mode = false;
 	bool visible;
+	bool has_settings = false;
 
 	void AddPosition(vec2 added_positon){}
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
@@ -29,6 +30,8 @@ class ComicElement{
 	void Update(){}
 	void SetEdit(bool editing){}
 	void SetProgress(int _progress){}
+	void AddSettings(){}
+	void EditDone(){}
 	void SetCurrent(bool _current){}
 	void SetVisible(bool _visible){
 		visible = _visible;

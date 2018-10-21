@@ -139,7 +139,7 @@ void InterpComic(){
 			@new_page.on_page = new_page;
 			comic_elements.insertLast(@new_page);
 		}else if(line_elements[0] == "set_font"){
-			ComicFont new_font(line_elements[1], atoi(line_elements[2]), line_elements[3], line_elements[4] == "true");
+			ComicFont new_font(line_elements[1], atoi(line_elements[2]), vec3(atoi(line_elements[3]), atoi(line_elements[4]), atoi(line_elements[5])), line_elements[6] == "true");
 			comic_elements.insertLast(@new_font);
 			@current_font = new_font;
 		}else if(line_elements[0] == "add_text"){
@@ -220,6 +220,7 @@ void Update(int is_paused){
 		if(!editor_open){
 			creator_state = playing;
 		}else if(editor_open){
+			target_line = current_line;
 			creator_state = editing;
 		}
 	}else if(GetInputDown(0, "lctrl") && GetInputPressed(0, "s")){
@@ -298,9 +299,6 @@ void GoToLine(int new_line){
 		return;
 	}
 	Log(info, "goto line " + new_line);
-	if(creator_state == playing){
-		comic_elements[current_line].SetCurrent(false);
-	}
 	comic_elements[current_line].SetEdit(false);
 
 	while(true){
@@ -311,26 +309,26 @@ void GoToLine(int new_line){
 				comic_elements[current_line - 1].on_page.ShowPage();
 			}
 			comic_elements[current_line].SetVisible(false);
+			comic_elements[current_line].SetCurrent(false);
 			current_line -= 1;
 			comic_elements[current_line].SetVisible(true);
+			comic_elements[current_line].SetCurrent(true);
 		// Going to the next line in the script.
 		}else if(new_line > current_line){
+			comic_elements[current_line].SetCurrent(false);
 			// Hide the current page to go to the next page.
 			if(comic_elements[current_line + 1].comic_element_type == comic_page){
 				comic_elements[current_line].on_page.HidePage();
 			}
 			current_line += 1;
 			comic_elements[current_line].SetVisible(true);
+			comic_elements[current_line].SetCurrent(true);
 		// At the correct line.
 		}else{
 			break;
 		}
-		if(creator_state == playing){
-			comic_elements[current_line].SetCurrent(true);
-		}
 	}
 	if(creator_state == editing){
-		comic_elements[current_line].SetCurrent(true);
 		comic_elements[current_line].SetEdit(true);
 	}
 }
@@ -467,28 +465,26 @@ string ToLowerCase(string input){
 	return output;
 }
 
-bool edit_element = false;
-bool open = true;
-
 void DrawGUI(){
 	if(editor_open){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
 		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar);
-
-        if(ImGui_BeginPopupModal("Edit Element")){
-			if(ImGui_InputText("text")){
-
-			}
-			if(ImGui_Button("Cancel")){
+		ImGui_PopStyleVar();
+		ImGui_SetNextWindowSize(vec2(600.0f, 500.0f), ImGuiSetCond_FirstUseEver);
+        if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar)){
+			ImGui_BeginChild("Element Settings", vec2(-1, ImGui_GetWindowHeight() - 65));
+			comic_elements[current_line].AddSettings();
+			ImGui_EndChild();
+			ImGui_BeginChild("Modal Buttons", vec2(-1, 65));
+			if(ImGui_Button("Close")){
+				comic_elements[current_line].EditDone();
 				ImGui_CloseCurrentPopup();
 			}
-			ImGui_SameLine(0);
-			if(ImGui_Button("Set")){
-				ImGui_CloseCurrentPopup();
-			}
+			ImGui_EndChild();
 			ImGui_EndPopup();
 		}
 
+		/* ImGui_SetNextWindowSize(vec2(-1)); */
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
 				if(ImGui_MenuItem("Load file")){
@@ -534,12 +530,15 @@ void DrawGUI(){
 
 		int line_counter = 0;
 		for(uint i = 0; i < comic_elements.size(); i++){
-			if(ImGui_Selectable(line_counter + ".  " + comic_elements[i].GetDisplayString(), current_line == int(i), ImGuiSelectableFlags_AllowDoubleClick)){
+			string line_number = line_counter + ".  ";
+			for(uint j = 0; j < (line_number.length() - 5); j++){
+				line_number += " ";
+			}
+			if(ImGui_Selectable(line_number + comic_elements[i].GetDisplayString(), current_line == int(i), ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
-					Log(info, "double");
-					ImGui_SetTextBuf(comic_elements[i].GetDisplayString());
-					ImGui_OpenPopup("Edit Element");
-					edit_element = true;
+					if(comic_elements[i].has_settings){
+						ImGui_OpenPopup("Edit");
+					}
 				}else{
 					Log(info, "single");
 					target_line = int(i);

@@ -2,38 +2,55 @@ class ComicText : ComicElement{
 	IMDivider@ holder;
 	array<IMText@> text_elements;
 	array<string> content;
+	string joined_content;
+	string display_content;
 	int whole_length = 0;
 	vec2 location;
 	int index;
+	ComicFont@ comic_font;
 	ComicGrabber@ grabber_center;
 	ComicText(string _content, ComicFont@ _comic_font, vec2 _location, int _index){
 		comic_element_type = comic_text;
+		has_settings = true;
 
 		location = _location;
 		index = _index;
+		@comic_font = _comic_font;
+
+		comic_font.texts.insertLast(this);
 
 		IMDivider text_holder("textholder" + index, DOVertical);
+		@holder = text_holder;
 		text_holder.showBorder();
 		text_holder.setBorderColor(edit_outline_color);
 		text_holder.setAlignment(CALeft, CATop);
 		text_holder.setClip(false);
 		content = _content.split("\\n");
+		joined_content = join(content, "\n");
+		display_content = join(content, " ");
+		SetNewText();
+
+		@grabber_center = ComicGrabber("center", 1, 1, mover, index);
+		text_container.addFloatingElement(text_holder, "text" + index, location, index);
+		UpdateContent();
+	}
+
+	void SetNewText(){
+		text_elements.resize(0);
+		holder.clear();
+		holder.setSize(vec2(0,0));
 		for(uint i = 0; i < content.size(); i++){
 			IMText@ new_text;
-			if(_comic_font is null){
+			if(comic_font is null){
 				@new_text = IMText(content[i], default_font);
 			}else{
-				@new_text = IMText(content[i], _comic_font.font);
+				@new_text = IMText(content[i], comic_font.font);
 			}
 			text_elements.insertLast(@new_text);
-			text_holder.append(new_text);
+			holder.append(new_text);
 			new_text.setZOrdering(index);
 		}
 		whole_length = join(content, "").length();
-		@grabber_center = ComicGrabber("center", 1, 1, mover, index);
-		@holder = text_holder;
-		text_container.addFloatingElement(text_holder, "text" + index, location, index);
-		UpdateContent();
 	}
 
 	void SetProgress(int progress){
@@ -87,7 +104,7 @@ class ComicText : ComicElement{
 	}
 
 	string GetDisplayString(){
-		return "Add Text " + join(content, "\\n");
+		return "AddText " + display_content;
 	}
 
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
@@ -100,5 +117,16 @@ class ComicText : ComicElement{
 		for(uint i = 0; i < text_elements.size(); i++){
 			text_elements[i].removeUpdateBehavior(name);
 		}
+	}
+
+	void AddSettings(){
+		if(ImGui_InputTextMultiline("", joined_content, 512, vec2(-1, -1))){
+		}
+	}
+
+	void EditDone(){
+		content = joined_content.split("\n");
+		display_content = join(content, " ");
+		SetNewText();
 	}
 }

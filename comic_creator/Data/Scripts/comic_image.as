@@ -12,6 +12,7 @@ class ComicImage : ComicElement{
 
 	ComicImage(string _path, vec2 _location, vec2 _size, int _index){
 		comic_element_type = comic_image;
+		has_settings = true;
 
 		path = _path;
 		index = _index;
@@ -32,6 +33,12 @@ class ComicImage : ComicElement{
 		Log(info, "adding image " + index);
 		image_container.addFloatingElement(new_image, "image" + index, location, index);
 		UpdateContent();
+	}
+
+	void SetNewImage(){
+		vec2 old_size = image.getSize();
+		image.setImageFile(path);
+		image.setSize(old_size);
 	}
 
 	void UpdateContent(){
@@ -103,7 +110,7 @@ class ComicImage : ComicElement{
 	}
 
 	string GetDisplayString(){
-		return "Add Image " + path;
+		return "AddImage " + path;
 	}
 
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
@@ -116,6 +123,19 @@ class ComicImage : ComicElement{
 	void SetVisible(bool _visible){
 		visible = _visible;
 		UpdateContent();
+	}
+
+	void AddSettings(){
+		ImGui_Text("Current Image : " + path);
+		if(ImGui_Button("Set Image")){
+			string new_path = GetUserPickedReadPath("png", "Data/Textures");
+			if(new_path != ""){
+				array<string> split_path = new_path.split("/");
+				split_path.removeAt(0);
+				path = join(split_path, "/");
+				SetNewImage();
+			}
+		}
 	}
 
 	void SetEdit(bool editing){

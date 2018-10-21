@@ -5,6 +5,7 @@ class ComicMoveIn : ComicElement{
 	string name;
 	ComicMoveIn(ComicElement@ _target, int _duration, vec2 _offset){
 		comic_element_type = comic_move_in;
+		has_settings = true;
 
 		duration = _duration;
 		offset = _offset;
@@ -25,6 +26,9 @@ class ComicMoveIn : ComicElement{
 		return "move_in " + duration + " " + offset.x + " " + offset.y;
 	}
 	string GetDisplayString(){
-		return "Move In " + duration;
+		return "MoveIn " + duration;
+	}
+	void AddSettings(){
+		ImGui_DragInt("Duration", duration, 1.0, 1, 10000);
 	}
 }

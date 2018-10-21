@@ -1,9 +1,11 @@
 class ComicFadeIn : ComicElement{
 	ComicElement@ target;
 	int duration;
+	float new_duration;
 	string name;
 	ComicFadeIn(ComicElement@ _target, int _duration){
 		comic_element_type = comic_fade_in;
+		has_settings = true;
 
 		duration = _duration;
 		@target = _target;
@@ -23,6 +25,9 @@ class ComicFadeIn : ComicElement{
 		return "fade_in " + duration;
 	}
 	string GetDisplayString(){
-		return "Fade In " + duration;
+		return "FadeIn " + duration;
+	}
+	void AddSettings(){
+		ImGui_DragInt("Duration", duration, 1.0, 1, 10000);
 	}
 }
