@@ -30,7 +30,7 @@ class ComicText : ComicElement{
 			new_text.setZOrdering(index);
 		}
 		whole_length = join(content, "").length();
-		@grabber_center = ComicGrabber(index, "center", 1, 1, mover);
+		@grabber_center = ComicGrabber("center", 1, 1, mover, index);
 		@holder = text_holder;
 		text_container.addFloatingElement(text_holder, "text" + index, location, index);
 		UpdateContent();

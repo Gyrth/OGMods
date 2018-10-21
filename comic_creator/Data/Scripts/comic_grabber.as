@@ -5,7 +5,7 @@ class ComicGrabber : ComicElement{
 	int direction_x;
 	int direction_y;
 	grabber_types grabber_type;
-	ComicGrabber(int image_index, string name, int _direction_x, int _direction_y, grabber_types _grabber_type){
+	ComicGrabber(string name, int _direction_x, int _direction_y, grabber_types _grabber_type, int parent_index){
 		comic_element_type = comic_grabber;
 		grabber_type = _grabber_type;
 
@@ -16,14 +16,14 @@ class ComicGrabber : ComicElement{
 		direction_y = _direction_y;
 
 	    IMMessage on_enter("grabber_activate");
-		on_enter.addInt(image_index);
+		on_enter.addInt(parent_index);
 		on_enter.addString(name);
 	    IMMessage on_over("grabber_move_check");
 		IMMessage on_exit("grabber_deactivate");
 
 		grabber_image.addMouseOverBehavior(IMFixedMessageOnMouseOver( on_enter, on_over, on_exit ), "");
 		grabber_image.setSize(vec2(grabber_size));
-		grabber_container.addFloatingElement(grabber_image, "grabber" + image_index + name, vec2(grabber_size / 2.0), image_index);
+		grabber_container.addFloatingElement(grabber_image, "grabber" + parent_index + name, vec2(grabber_size / 2.0), parent_index + 1);
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;

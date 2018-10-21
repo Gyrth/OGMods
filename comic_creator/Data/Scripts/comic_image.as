@@ -22,11 +22,11 @@ class ComicImage : ComicElement{
 		@image = new_image;
 		new_image.setBorderColor(edit_outline_color);
 
-		@grabber_top_left = ComicGrabber(index, "top_left", -1, -1, scaler);
-		@grabber_top_right = ComicGrabber(index, "top_right", 1, -1, scaler);
-		@grabber_bottom_left = ComicGrabber(index, "bottom_left", -1, 1, scaler);
-		@grabber_bottom_right = ComicGrabber(index, "bottom_right", 1, 1, scaler);
-		@grabber_center = ComicGrabber(index, "center", 1, 1, mover);
+		@grabber_top_left = ComicGrabber("top_left", -1, -1, scaler, index);
+		@grabber_top_right = ComicGrabber("top_right", 1, -1, scaler, index);
+		@grabber_bottom_left = ComicGrabber("bottom_left", -1, 1, scaler, index);
+		@grabber_bottom_right = ComicGrabber("bottom_right", 1, 1, scaler, index);
+		@grabber_center = ComicGrabber("center", 1, 1, mover, index);
 
 		new_image.setSize(size);
 		Log(info, "adding image " + index);
