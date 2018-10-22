@@ -4,16 +4,18 @@ class ComicSound : ComicElement{
 		comic_element_type = comic_sound;
 		has_settings = true;
 		path = _path;
+		display_color = HexColor("#916342");
 	}
 	void SetCurrent(bool _current){
-		if(creator_state == playing && play_direction == 1){
-			PlaySound(path);
-		}else if(creator_state == editing && _current){
+		if(creator_state == editing && _current){
 			PlaySound(path);
 		}
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;
+		if(visible && creator_state == playing && play_direction == 1){
+			PlaySound(path);
+		}
 	}
 	string GetSaveString(){
 		return "play_sound " + path;
@@ -22,7 +24,8 @@ class ComicSound : ComicElement{
 		return "PlaySound " + path;
 	}
 	void AddSettings(){
-		ImGui_Text("Current Sound : " + path);
+		ImGui_Text("Current Sound : ");
+		ImGui_Text(path);
 		if(ImGui_Button("Set Sound")){
 			string new_path = GetUserPickedReadPath("wav", "Data/Sounds");
 			if(new_path != ""){

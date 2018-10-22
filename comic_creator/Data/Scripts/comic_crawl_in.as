@@ -7,6 +7,7 @@ class ComicCrawlIn : ComicElement{
 		has_settings = true;
 		@target = _target;
 		duration = _duration;
+		display_color = HexColor("#4e887c");
 	}
 	void SetCurrent(bool _current){
 		if(_current){

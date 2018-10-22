@@ -6,6 +6,7 @@ class ComicMoveIn : ComicElement{
 	ComicMoveIn(ComicElement@ _target, int _duration, vec2 _offset){
 		comic_element_type = comic_move_in;
 		has_settings = true;
+		display_color = HexColor("#987150");
 
 		duration = _duration;
 		offset = _offset;

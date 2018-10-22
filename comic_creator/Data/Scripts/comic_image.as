@@ -13,6 +13,7 @@ class ComicImage : ComicElement{
 	ComicImage(string _path, vec2 _location, vec2 _size, int _index){
 		comic_element_type = comic_image;
 		has_settings = true;
+		display_color = HexColor("#6e5eb4");
 
 		path = _path;
 		index = _index;
@@ -126,7 +127,8 @@ class ComicImage : ComicElement{
 	}
 
 	void AddSettings(){
-		ImGui_Text("Current Image : " + path);
+		ImGui_Text("Current Image : ");
+		ImGui_Text(path);
 		if(ImGui_Button("Set Image")){
 			string new_path = GetUserPickedReadPath("png", "Data/Textures");
 			if(new_path != ""){

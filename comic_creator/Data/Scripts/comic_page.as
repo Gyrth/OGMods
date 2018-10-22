@@ -2,6 +2,7 @@ class ComicPage : ComicElement{
 	array<ComicElement@> elements;
 	ComicPage(){
 		comic_element_type = comic_page;
+		display_color = HexColor("#7b5c85");
 	}
 	void AddElement(ComicElement@ element){
 		elements.insertLast(element);

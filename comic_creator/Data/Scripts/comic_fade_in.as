@@ -6,6 +6,7 @@ class ComicFadeIn : ComicElement{
 	ComicFadeIn(ComicElement@ _target, int _duration){
 		comic_element_type = comic_fade_in;
 		has_settings = true;
+		display_color = HexColor("#587a93");
 
 		duration = _duration;
 		@target = _target;

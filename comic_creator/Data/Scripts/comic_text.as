@@ -12,6 +12,7 @@ class ComicText : ComicElement{
 	ComicText(string _content, ComicFont@ _comic_font, vec2 _location, int _index){
 		comic_element_type = comic_text;
 		has_settings = true;
+		display_color = HexColor("#558366");
 
 		location = _location;
 		index = _index;

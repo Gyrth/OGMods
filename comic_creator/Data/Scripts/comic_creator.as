@@ -48,6 +48,11 @@ uint grabber_layer = 2;
 bool dragging = false;
 int snap_scale = 20;
 int target_line = 0;
+vec4 background_color(0.25, 0.25, 0.25, 0.98);
+vec4 titlebar_color(0.15, 0.15, 0.15, 0.98);
+vec4 item_hovered(0.2, 0.2, 0.2, 0.98);
+vec4 item_clicked(0.1, 0.1, 0.1, 0.98);
+vec4 text_color(0.7, 0.7, 0.7, 1.0);
 
 IMContainer@ image_container;
 IMContainer@ text_container;
@@ -301,6 +306,7 @@ void GoToLine(int new_line){
 	Log(info, "goto line " + new_line);
 	comic_elements[current_line].SetEdit(false);
 
+	comic_elements[current_line].SetCurrent(false);
 	while(true){
 		// Going to a previous line in the script.
 		if(new_line < current_line){
@@ -309,25 +315,22 @@ void GoToLine(int new_line){
 				comic_elements[current_line - 1].on_page.ShowPage();
 			}
 			comic_elements[current_line].SetVisible(false);
-			comic_elements[current_line].SetCurrent(false);
 			current_line -= 1;
 			comic_elements[current_line].SetVisible(true);
-			comic_elements[current_line].SetCurrent(true);
 		// Going to the next line in the script.
 		}else if(new_line > current_line){
-			comic_elements[current_line].SetCurrent(false);
 			// Hide the current page to go to the next page.
 			if(comic_elements[current_line + 1].comic_element_type == comic_page){
 				comic_elements[current_line].on_page.HidePage();
 			}
 			current_line += 1;
 			comic_elements[current_line].SetVisible(true);
-			comic_elements[current_line].SetCurrent(true);
 		// At the correct line.
 		}else{
 			break;
 		}
 	}
+	comic_elements[current_line].SetCurrent(true);
 	if(creator_state == editing){
 		comic_elements[current_line].SetEdit(true);
 	}
@@ -468,9 +471,27 @@ string ToLowerCase(string input){
 void DrawGUI(){
 	if(editor_open){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
+
+		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
+		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
+		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_TitleBg, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
+		ImGui_PushStyleColor(ImGuiCol_Header, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_HeaderHovered, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_HeaderActive, item_clicked);
+		ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, background_color);
+		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrab, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
+		ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
+
 		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar);
 		ImGui_PopStyleVar();
-		ImGui_SetNextWindowSize(vec2(600.0f, 500.0f), ImGuiSetCond_FirstUseEver);
+
+		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
+		ImGui_SetNextWindowSize(vec2(300.0f, 150.0f), ImGuiSetCond_FirstUseEver);
         if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar)){
 			ImGui_BeginChild("Element Settings", vec2(-1, ImGui_GetWindowHeight() - 65));
 			comic_elements[current_line].AddSettings();
@@ -483,8 +504,8 @@ void DrawGUI(){
 			ImGui_EndChild();
 			ImGui_EndPopup();
 		}
+		ImGui_PopStyleVar();
 
-		/* ImGui_SetNextWindowSize(vec2(-1)); */
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
 				if(ImGui_MenuItem("Load file")){
@@ -534,16 +555,17 @@ void DrawGUI(){
 			for(uint j = 0; j < (line_number.length() - 5); j++){
 				line_number += " ";
 			}
+			ImGui_PushStyleColor(ImGuiCol_Text, comic_elements[i].display_color);
 			if(ImGui_Selectable(line_number + comic_elements[i].GetDisplayString(), current_line == int(i), ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
 					if(comic_elements[i].has_settings){
 						ImGui_OpenPopup("Edit");
 					}
 				}else{
-					Log(info, "single");
 					target_line = int(i);
 				}
 			}
+			ImGui_PopStyleColor();
 			if(ImGui_IsItemActive() && !ImGui_IsItemHovered()){
 				float drag_dy = ImGui_GetMouseDragDelta(0).y;
 				if(drag_dy < -15.0 && i > 0){
@@ -566,6 +588,7 @@ void DrawGUI(){
 			line_counter += 1;
 		}
 		ImGui_End();
+		ImGui_PopStyleColor(9);
 	}
 	imGUI.render();
 }

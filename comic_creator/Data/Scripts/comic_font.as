@@ -11,6 +11,7 @@ class ComicFont : ComicElement{
 	ComicFont(string _font_name, int _font_size, vec3 _font_color, bool _shadowed){
 		comic_element_type = comic_font;
 		has_settings = true;
+		display_color = HexColor("#908f40");
 
 		font_name = _font_name;
 		font_size = _font_size;

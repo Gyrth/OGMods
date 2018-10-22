@@ -16,6 +16,7 @@ class ComicElement{
 	bool edit_mode = false;
 	bool visible;
 	bool has_settings = false;
+	vec4 display_color = vec4(1.0);
 
 	void AddPosition(vec2 added_positon){}
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
