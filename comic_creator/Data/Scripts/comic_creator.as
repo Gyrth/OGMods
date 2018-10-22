@@ -25,6 +25,7 @@ string grid_background = "Textures/grid.png";
 string black_background = "Textures/black.tga";
 string default_image = "Textures/ui/menus/credits/overgrowth.png";
 array<ComicElement@> comic_elements;
+array<int> comic_indexes;
 int grabber_size = 50;
 
 enum environment_states { in_game, in_menu };
@@ -164,7 +165,7 @@ void InterpComic(){
 		}else{
 			comic_elements.insertLast(ComicElement());
 		}
-
+		comic_indexes.insertLast(i);
 		if(comic_elements[comic_elements.size() - 1].comic_element_type != comic_page){
 			@comic_elements[comic_elements.size() - 1].on_page = comic_elements[comic_elements.size() - 2].on_page;
 			comic_elements[comic_elements.size() - 1].on_page.AddElement(comic_elements[comic_elements.size() - 1]);
@@ -469,6 +470,10 @@ string ToLowerCase(string input){
 	return output;
 }
 
+int line_index = 0;
+int test_index = 0;
+array<string> test_array = {"one", "two", "three", "four"};
+
 void DrawGUI(){
 	if(editor_open){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
@@ -584,33 +589,44 @@ void DrawGUI(){
 			for(uint j = 0; j < (line_number.length() - 5); j++){
 				line_number += " ";
 			}
-			ImGui_PushStyleColor(ImGuiCol_Text, comic_elements[i].display_color);
-			if(ImGui_Selectable(line_number + comic_elements[i].GetDisplayString(), current_line == int(i), ImGuiSelectableFlags_AllowDoubleClick)){
+			int item_no = comic_indexes[i];
+			ImGui_Text(line_number + comic_elements[item_no].GetDisplayString());
+			ImGui_SameLine(0.0, 0.0);
+			ImGui_PushStyleColor(ImGuiCol_Text, comic_elements[item_no].display_color);
+			if(ImGui_Selectable(item_no + "", line_index == int(item_no), ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
 					if(comic_elements[i].has_settings){
 						ImGui_OpenPopup("Edit");
 					}
 				}else{
-					target_line = int(i);
+					line_index = int(item_no);
+					target_line = int(item_no);
 				}
 			}
 			ImGui_PopStyleColor();
+			if(ImGui_IsItemActive()){
+				Log(info, i + "" + rand());
+			}
 			if(ImGui_IsItemActive() && !ImGui_IsItemHovered()){
 				float drag_dy = ImGui_GetMouseDragDelta(0).y;
-				if(drag_dy < -15.0 && i > 0){
+				if(drag_dy < 0.0 && i > 0){
 					// Swap
-					ComicElement@  first_element = comic_elements[i];
+					/* ComicElement@  first_element = comic_elements[i];
 					ComicElement@  second_element = comic_elements[i - 1];
 					@comic_elements[i] = second_element;
-					@comic_elements[i - 1] = first_element;
-					target_line = i - 1;
+					@comic_elements[i - 1] = first_element; */
+					/* target_line = i - 1; */
+					comic_indexes[i] = comic_indexes[i-1];
+            		comic_indexes[i-1] = item_no;
 					ImGui_ResetMouseDragDelta();
-				}else if(drag_dy > 15.0 && i < comic_elements.size() - 1){
-					ComicElement@  first_element = comic_elements[i];
+				}else if(drag_dy > 0.0 && i < comic_elements.size() - 1){
+					/* ComicElement@  first_element = comic_elements[i];
 					ComicElement@  second_element = comic_elements[i + 1];
 					@comic_elements[i] = second_element;
-					@comic_elements[i + 1] = first_element;
-					target_line = i + 1;
+					@comic_elements[i + 1] = first_element; */
+					/* target_line = i + 1; */
+					comic_indexes[i] = comic_indexes[i+1];
+            		comic_indexes[i+1] = item_no;
 					ImGui_ResetMouseDragDelta();
 				}
 			}
