@@ -32,7 +32,7 @@ class ComicFont : ComicElement{
 	}
 
 	void AddSettings(){
-		ImGui_Text("Current Font : " + font_name);
+		ImGui_Text("Font : " + font_name);
 		ImGui_SameLine();
 		if(ImGui_Button("Pick Font")){
 			string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");

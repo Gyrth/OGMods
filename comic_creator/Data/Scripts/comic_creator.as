@@ -23,6 +23,7 @@ TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/
 
 string grid_background = "Textures/grid.png";
 string black_background = "Textures/black.tga";
+string default_image = "Textures/ui/menus/credits/overgrowth.png";
 array<ComicElement@> comic_elements;
 int grabber_size = 50;
 
@@ -487,16 +488,20 @@ void DrawGUI(){
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
 		ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
 
-		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar);
+		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
 		ImGui_PopStyleVar();
+
+		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Delete))){
+			comic_elements.removeAt(current_line);
+		}
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
 		ImGui_SetNextWindowSize(vec2(300.0f, 150.0f), ImGuiSetCond_FirstUseEver);
-        if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar)){
-			ImGui_BeginChild("Element Settings", vec2(-1, ImGui_GetWindowHeight() - 65));
+        if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
+			ImGui_BeginChild("Element Settings", vec2(-1, ImGui_GetWindowHeight() - 60));
 			comic_elements[current_line].AddSettings();
 			ImGui_EndChild();
-			ImGui_BeginChild("Modal Buttons", vec2(-1, 65));
+			ImGui_BeginChild("Modal Buttons", vec2(-1, 60));
 			if(ImGui_Button("Close")){
 				comic_elements[current_line].EditDone();
 				ImGui_CloseCurrentPopup();
@@ -531,22 +536,46 @@ void DrawGUI(){
 			}
 			if(ImGui_BeginMenu("Add")){
 				if(ImGui_MenuItem("New Page")){
+					ComicPage new_page();
+					@new_page.on_page = new_page;
+					comic_elements.insertAt(current_line, @new_page);
 				}
 				if(ImGui_MenuItem("Image")){
+					ComicImage new_image(default_image, vec2(500, 500), vec2(720, 255), 0);
+					comic_elements.insertAt(current_line, @new_image);
 				}
 				if(ImGui_MenuItem("Text")){
+					ComicText new_text("Example text", current_font, vec2(200, 200), 0);
+					comic_elements.insertAt(current_line, @new_text);
 				}
 				if(ImGui_MenuItem("Crawl In")){
+					ComicCrawlIn new_crawl_in(GetLastElement(), 1000);
+					comic_elements.insertAt(current_line, @new_crawl_in);
 				}
 				if(ImGui_MenuItem("Fade In")){
+					ComicFadeIn new_fade_in(GetLastElement(), 1000);
+					comic_elements.insertAt(current_line, @new_fade_in);
 				}
 				if(ImGui_MenuItem("Font")){
+					ComicFont new_font("Underdog-Regular", 35, vec3(1.0), false);
+					comic_elements.insertAt(current_line, @new_font);
 				}
 				if(ImGui_MenuItem("Wait Click")){
+					comic_elements.insertAt(current_line, ComicWaitClick());
 				}
 				ImGui_EndMenu();
 			}
 			ImGui_EndMenuBar();
+		}
+
+		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
+			if(current_line > 0){
+				target_line -= 1;
+			}
+		}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow))){
+			if(current_line < int(comic_elements.size() - 1)){
+				target_line += 1;
+			}
 		}
 
 		int line_counter = 0;
@@ -588,7 +617,7 @@ void DrawGUI(){
 			line_counter += 1;
 		}
 		ImGui_End();
-		ImGui_PopStyleColor(9);
+		ImGui_PopStyleColor(14);
 	}
 	imGUI.render();
 }
