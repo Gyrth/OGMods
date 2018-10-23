@@ -46,6 +46,7 @@ uint text_layer = 0;
 uint grabber_layer = 2;
 
 bool dragging = false;
+bool unsaved = false;
 int snap_scale = 20;
 int target_line = 0;
 
@@ -64,11 +65,16 @@ vec4 text_color(0.7, 0.7, 0.7, 1.0);
 // This init is used when loaded from the main menu.
 void Initialize(){
 	environment_state = in_menu;
-	comic_path = "Data/Comics/example_in_menu.txt";
 	PlaySong("menu-lugaru");
 	CreateComicUI();
 	AddBackground();
-	LoadComic(comic_path);
+
+	/* comic_path = "Data/Comics/example_in_menu.txt";
+	LoadComic(comic_path); */
+
+	unsaved = true;
+	comic_path = "New Comic";
+
 }
 
 // This init is used when loaded in-game.
@@ -114,6 +120,8 @@ void LoadComic(string path){
 	@current_font = null;
 	@current_grabber = null;
 	comic_elements.resize(0);
+	comic_indexes.resize(0);
+	unsaved = false;
 	if(LoadFile(path)){
 		string new_line;
 		while(true){
@@ -132,7 +140,6 @@ void InterpComic(){
 
 	for(uint index = 0; index < lines.size(); index++){
 		array<string> line_elements = lines[index].split(" ");
-		Log(info, "add " + line_elements[0]);
 
 		if(line_elements[0] == "add_image"){
 			vec2 position = vec2(atoi(line_elements[2]), atoi(line_elements[3]));
@@ -325,9 +332,11 @@ void CloseComic(){
 	text_container.clear();
 	grabber_container.clear();
 	current_line = 0;
+	target_line = 0;
 	@current_font = null;
 	@current_grabber = null;
 	comic_elements.resize(0);
+	comic_indexes.resize(0);
 	creator_state = editing;
 }
 
@@ -365,7 +374,6 @@ void GoToLine(int new_line){
 	if(new_line == current_line){
 		return;
 	}
-	Log(info, "goto line " + new_line);
 
 	GetCurrentElement().SetEdit(false);
 	GetCurrentElement().SetCurrent(false);
@@ -451,23 +459,19 @@ void UpdateGrabber(){
 					if(abs(difference.x) >= snap_scale){
 						GetCurrentElement().AddSize(vec2(snap_scale * direction_x * steps_x, 0.0), current_grabber.direction_x, current_grabber.direction_y);
 						drag_position.x += snap_scale * direction_x * steps_x;
-						SetCurrentLineContent();
 					}
 					if(abs(difference.y) >= snap_scale){
 						GetCurrentElement().AddSize(vec2(0.0, snap_scale * direction_y * steps_y), current_grabber.direction_x, current_grabber.direction_y);
 						drag_position.y += snap_scale * direction_y * steps_y;
-						SetCurrentLineContent();
 					}
 				}else if(current_grabber.grabber_type == mover){
 					if(abs(difference.x) >= snap_scale){
 						GetCurrentElement().AddPosition(vec2(snap_scale * direction_x * steps_x, 0.0));
 						drag_position.x += snap_scale * direction_x * steps_x;
-						SetCurrentLineContent();
 					}
 					if(abs(difference.y) >= snap_scale){
 						GetCurrentElement().AddPosition(vec2(0.0, snap_scale * direction_y * steps_y));
 						drag_position.y += snap_scale * direction_y * steps_y;
-						SetCurrentLineContent();
 					}
 				}
 			}
@@ -478,12 +482,6 @@ void UpdateGrabber(){
 			dragging = true;
 		}
 	}
-}
-
-void SetCurrentLineContent(){
-	array<string> lines = comic_content.split("\n");
-	lines[current_line] = GetCurrentElement().GetSaveString();
-	comic_content = join(lines, "\n");
 }
 
 void ReceiveMessage(string msg){
@@ -524,8 +522,6 @@ bool update_scroll = false;
 
 void DrawGUI(){
 	if(editor_open){
-		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
-
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
@@ -540,8 +536,11 @@ void DrawGUI(){
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
 		ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
+		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
 
-		ImGui_Begin("Comic Creator " + comic_path, editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
+		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
+		ImGui_SetNextWindowPos(vec2(100.0f, 100.0f), ImGuiSetCond_FirstUseEver);
+		ImGui_Begin("Comic Creator " + comic_path + (unsaved?" * " : "") + "###Comic Creator", editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings);
 		ImGui_PopStyleVar();
 
 		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Delete))){
@@ -562,6 +561,7 @@ void DrawGUI(){
 				}else{
 					display_index = comic_indexes[current_line];
 				}
+				unsaved = true;
 				ReorderElements();
 			}
 		}
@@ -584,6 +584,11 @@ void DrawGUI(){
 
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
+				if(ImGui_MenuItem("New file")){
+					CloseComic();
+					unsaved = true;
+					comic_path = "New Comic";
+				}
 				if(ImGui_MenuItem("Load file")){
 					string new_path = GetUserPickedReadPath("txt", "Data");
 					if(new_path != ""){
@@ -591,13 +596,14 @@ void DrawGUI(){
 					}
 				}
 				if(ImGui_MenuItem("Save")){
-					SaveComic();
+					if(!FileExists(comic_path)){
+						SaveComicToFile();
+					}else{
+						SaveComic();
+					}
 				}
 				if(ImGui_MenuItem("Save to file")){
-					string new_path = GetUserPickedWritePath("txt", "Data");
-					if(new_path != ""){
-						SaveComic(new_path);
-					}
+					SaveComicToFile();
 				}
 				ImGui_EndMenu();
 			}
@@ -711,21 +717,35 @@ void DrawGUI(){
 
 void InsertElement(ComicElement@ new_element){
 	comic_elements.insertLast(new_element);
-	comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
-	target_line += 1;
-	display_index = comic_indexes[current_line + 1];
+	if(comic_indexes.size() < 1){
+		comic_indexes.insertAt(current_line, comic_elements.size() - 1);
+		target_line = 0;
+		display_index = comic_indexes[current_line];
+	}else{
+		comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
+		target_line += 1;
+		display_index = comic_indexes[current_line + 1];
+	}
+	unsaved = true;
 	ReorderElements();
+}
+
+void SaveComicToFile(){
+	string new_path = GetUserPickedWritePath("txt", "Data");
+	if(new_path != ""){
+		SaveComic(new_path);
+	}
 }
 
 void SaveComic(string path = ""){
 	if(path != ""){
 		comic_path = path;
 	}
-	Log(info, FindFilePath(comic_path));
+	unsaved = false;
 	StartWriteFile();
 
-	for(uint i = 0; i < comic_elements.size(); i++){
-		AddFileString(comic_elements[i].GetSaveString());
+	for(uint i = 0; i < comic_indexes.size(); i++){
+		AddFileString(comic_elements[comic_indexes[i]].GetSaveString());
 		if(i != comic_elements.size() - 1){
 			AddFileString("\n");
 		}

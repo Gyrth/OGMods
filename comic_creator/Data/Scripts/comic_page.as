@@ -17,7 +17,6 @@ class ComicPage : ComicElement{
 		}
 	}
 	void HidePage(){
-		Log(info, "hidepage");
 		for(uint i = 0; i < elements.size(); i++){
 			elements[i].SetVisible(false);
 		}

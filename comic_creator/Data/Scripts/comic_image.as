@@ -31,7 +31,6 @@ class ComicImage : ComicElement{
 		@grabber_center = ComicGrabber("center", 1, 1, mover, index);
 
 		new_image.setSize(size);
-		Log(info, "adding image " + index);
 
 		image_name = "image" + element_counter;
 		element_counter += 1;

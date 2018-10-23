@@ -18,7 +18,6 @@ class ComicFont : ComicElement{
 		font_size = _font_size;
 		font_color = vec4(_font_color / 255.0, 1.0);
 		shadowed = _shadowed;
-		Log(info, font_color.x + " " + font_color.y + " " + font_color.z);
 
 		font.fontName = _font_name;
 		font.size = _font_size;
@@ -48,7 +47,6 @@ class ComicFont : ComicElement{
 			if(new_path != ""){
 				array<string> path_split = new_path.split("/");
 				for(uint i = 0; i < path_split.size(); i++){
-					Log(info, path_split[i]);
 					if(path_split[i].findFirst(".ttf") != -1){
 						string new_font_name = join(path_split[i].split(".ttf"), "");
 						font_name = new_font_name;

@@ -31,6 +31,7 @@ class ComicText : ComicElement{
 		holder_name = "text" + element_counter;
 		element_counter += 1;
 		text_container.addFloatingElement(text_holder, holder_name, location, index);
+		SetNewText();
 		UpdateContent();
 	}
 
@@ -48,7 +49,6 @@ class ComicText : ComicElement{
 	}
 
 	void SetNewText(){
-		Log(info, "set text  " + index);
 		text_elements.resize(0);
 		holder.clear();
 		holder.setSize(vec2(0,0));
@@ -64,6 +64,8 @@ class ComicText : ComicElement{
 			new_text.setZOrdering(index);
 		}
 		whole_length = join(content, "").length();
+		// imgui needs to update once or else the position of the grabber isn't calculated correctly.
+		imGUI.update();
 	}
 
 	void SetProgress(int progress){
@@ -85,7 +87,6 @@ class ComicText : ComicElement{
 		vec2 location = text_container.getElementPosition(holder_name);
 		vec2 size = holder.getSize();
 		if(size.x + size.y > 0.0){
-			Log(info, "grabber size " + size.x + " " + size.y);
 			grabber_container.moveElement(grabber_center.grabber_name, location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
 		}
 	}
@@ -143,5 +144,6 @@ class ComicText : ComicElement{
 		content = joined_content.split("\n");
 		display_content = join(content, " ");
 		SetNewText();
+		UpdateContent();
 	}
 }

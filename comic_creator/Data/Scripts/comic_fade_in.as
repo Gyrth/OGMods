@@ -18,7 +18,6 @@ class ComicFadeIn : ComicElement{
 		if(@target != null){
 			if(visible){
 				IMFadeIn new_fade(duration, inSineTween);
-				Log(info, "adding effect");
 				target.AddUpdateBehavior(new_fade, name);
 			}else{
 				target.RemoveUpdateBehavior(name);
