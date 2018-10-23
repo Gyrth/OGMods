@@ -12,11 +12,11 @@ enum comic_element_types { 	none,
 
 class ComicElement{
 	comic_element_types comic_element_type = none;
-	ComicElement@ on_page = null;
 	bool edit_mode = false;
 	bool visible;
 	bool has_settings = false;
 	vec4 display_color = vec4(1.0);
+	int index = -1;
 
 	void AddPosition(vec2 added_positon){}
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
@@ -25,7 +25,6 @@ class ComicElement{
 	string GetDisplayString(){return "";};
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){};
 	void RemoveUpdateBehavior(string behavior_name){};
-	void AddElement(ComicElement@ element){}
 	void ShowPage(){}
 	void HidePage(){}
 	void Update(){}
@@ -37,4 +36,6 @@ class ComicElement{
 	void SetVisible(bool _visible){
 		visible = _visible;
 	}
+	void SetTarget(ComicElement@ element){}
+	void ClearTarget(){}
 }

@@ -3,24 +3,28 @@ class ComicFadeIn : ComicElement{
 	int duration;
 	float new_duration;
 	string name;
-	ComicFadeIn(ComicElement@ _target, int _duration){
+	ComicFadeIn(int _duration, int _index){
+		index = _index;
 		comic_element_type = comic_fade_in;
 		has_settings = true;
 		display_color = HexColor("#587a93");
 
 		duration = _duration;
-		@target = _target;
-		name = "fadein" + update_behavior_counter;
-		update_behavior_counter += 1;
+		name = "fadein" + element_counter;
+		element_counter += 1;
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;
 		if(visible){
 			IMFadeIn new_fade(duration, inSineTween);
+			Log(info, "adding effect");
 			target.AddUpdateBehavior(new_fade, name);
 		}else{
 			target.RemoveUpdateBehavior(name);
 		}
+	}
+	void SetTarget(ComicElement@ element){
+		@target = element;
 	}
 	string GetSaveString(){
 		return "fade_in " + duration;

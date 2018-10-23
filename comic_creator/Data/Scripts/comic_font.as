@@ -8,11 +8,12 @@ class ComicFont : ComicElement{
 	vec4 new_color;
 
 	FontSetup font("edosz", 75, HexColor("#CCCCCC"), true);
-	ComicFont(string _font_name, int _font_size, vec3 _font_color, bool _shadowed){
+	ComicFont(string _font_name, int _font_size, vec3 _font_color, bool _shadowed, int _index){
 		comic_element_type = comic_font;
 		has_settings = true;
 		display_color = HexColor("#908f40");
 
+		index = _index;
 		font_name = _font_name;
 		font_size = _font_size;
 		font_color = vec4(_font_color / 255.0, 1.0);
@@ -29,6 +30,14 @@ class ComicFont : ComicElement{
 	}
 	string GetDisplayString(){
 		return "SetFont " + font_name + " " + font_size + (shadowed ? " shadowed" : "");
+	}
+
+	void SetTarget(ComicElement@ element){
+		ComicText@ new_text = cast<ComicText>(element);
+		@new_text.comic_font = this;
+		new_text.SetNewText();
+		new_text.UpdateContent();
+		texts.insertLast(new_text);
 	}
 
 	void AddSettings(){
@@ -61,10 +70,6 @@ class ComicFont : ComicElement{
 	}
 
 	void EditDone(){
-		for(uint i = 0; i < texts.size(); i++){
-			// Updating the text also refreshes the font.
-			texts[i].SetNewText();
-			texts[i].UpdateContent();
-		}
+		ReorderElements();
 	}
 }

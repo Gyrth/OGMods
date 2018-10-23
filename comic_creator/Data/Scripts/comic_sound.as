@@ -1,6 +1,7 @@
 class ComicSound : ComicElement{
 	string path;
-	ComicSound(string _path){
+	ComicSound(string _path, int _index){
+		index = _index;
 		comic_element_type = comic_sound;
 		has_settings = true;
 		path = _path;

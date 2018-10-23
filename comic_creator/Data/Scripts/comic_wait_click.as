@@ -1,5 +1,6 @@
 class ComicWaitClick : ComicElement{
-	ComicWaitClick(){
+	ComicWaitClick(int _index){
+		index = _index;
 		comic_element_type = comic_wait_click;
 		display_color = HexColor("#7b828a");
 	}

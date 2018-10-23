@@ -2,10 +2,10 @@ class ComicCrawlIn : ComicElement{
 	ComicElement@ target = null;
 	int duration;
 	float timer = 0.0;
-	ComicCrawlIn(ComicElement@ _target, int _duration){
+	ComicCrawlIn(int _duration, int _index){
+		index = _index;
 		comic_element_type = comic_crawl_in;
 		has_settings = true;
-		@target = _target;
 		duration = _duration;
 		display_color = HexColor("#4e887c");
 	}
@@ -15,6 +15,9 @@ class ComicCrawlIn : ComicElement{
 		}else{
 			target.SetProgress(100);
 		}
+	}
+	void SetTarget(ComicElement@ element){
+		@target = element;
 	}
 	void Update(){
 		if(timer < duration){

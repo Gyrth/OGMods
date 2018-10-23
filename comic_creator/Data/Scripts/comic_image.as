@@ -5,10 +5,10 @@ class ComicImage : ComicElement{
 	ComicGrabber@ grabber_bottom_left;
 	ComicGrabber@ grabber_bottom_right;
 	ComicGrabber@ grabber_center;
-	int index;
 	string path;
 	vec2 location;
 	vec2 size;
+	string image_name;
 
 	ComicImage(string _path, vec2 _location, vec2 _size, int _index){
 		comic_element_type = comic_image;
@@ -32,7 +32,11 @@ class ComicImage : ComicElement{
 
 		new_image.setSize(size);
 		Log(info, "adding image " + index);
-		image_container.addFloatingElement(new_image, "image" + index, location, index);
+
+		image_name = "image" + element_counter;
+		element_counter += 1;
+
+		image_container.addFloatingElement(new_image, image_name, location, index);
 		UpdateContent();
 	}
 
@@ -52,14 +56,14 @@ class ComicImage : ComicElement{
 
 		image.setVisible(visible);
 
-		vec2 location = image_container.getElementPosition("image" + index);
+		vec2 location = image_container.getElementPosition(image_name);
 		vec2 size = image.getSize();
 
-		grabber_container.moveElement("grabber" + index + "top_left", location - vec2(grabber_size / 2.0));
-		grabber_container.moveElement("grabber" + index + "top_right", location + vec2(size.x, 0) - vec2(grabber_size / 2.0));
-		grabber_container.moveElement("grabber" + index + "bottom_left", location + vec2(0, size.y) - vec2(grabber_size / 2.0));
-		grabber_container.moveElement("grabber" + index + "bottom_right", location + vec2(size.x, size.y) - vec2(grabber_size / 2.0));
-		grabber_container.moveElement("grabber" + index + "center", location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_top_left.grabber_name, location - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_top_right.grabber_name, location + vec2(size.x, 0) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_bottom_left.grabber_name, location + vec2(0, size.y) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_bottom_right.grabber_name, location + vec2(size.x, size.y) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_center.grabber_name, location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
 	}
 
 	void AddSize(vec2 added_size, int direction_x, int direction_y){
@@ -69,7 +73,7 @@ class ComicImage : ComicElement{
 		}else{
 			image.setSizeX(image.getSizeX() - added_size.x);
 			size.x -= added_size.x;
-			image_container.moveElementRelative("image" + index, vec2(added_size.x, 0.0));
+			image_container.moveElementRelative(image_name, vec2(added_size.x, 0.0));
 			location.x += added_size.x;
 		}
 		if(direction_y == 1){
@@ -78,14 +82,14 @@ class ComicImage : ComicElement{
 		}else{
 			image.setSizeY(image.getSizeY() - added_size.y);
 			size.y -= added_size.y;
-			image_container.moveElementRelative("image" + index, vec2(0.0, added_size.y));
+			image_container.moveElementRelative(image_name, vec2(0.0, added_size.y));
 			location.y += added_size.y;
 		}
 		UpdateContent();
 	}
 
 	void AddPosition(vec2 added_positon){
-		image_container.moveElementRelative("image" + index, added_positon);
+		image_container.moveElementRelative(image_name, added_positon);
 		location += added_positon;
 		UpdateContent();
 	}

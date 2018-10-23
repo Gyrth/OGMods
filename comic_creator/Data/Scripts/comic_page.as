@@ -1,10 +1,11 @@
 class ComicPage : ComicElement{
 	array<ComicElement@> elements;
-	ComicPage(){
+	ComicPage(int _index){
+		index = _index;
 		comic_element_type = comic_page;
 		display_color = HexColor("#7b5c85");
 	}
-	void AddElement(ComicElement@ element){
+	void SetTarget(ComicElement@ element){
 		elements.insertLast(element);
 	}
 	void ShowPage(){
