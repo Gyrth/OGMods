@@ -673,8 +673,9 @@ void DrawGUI(){
 		int line_counter = 0;
 		for(uint i = 0; i < comic_indexes.size(); i++){
 			int item_no = comic_indexes[i];
-			string line_number = comic_elements[item_no].index + ".  ";
-			for(uint j = 0; j < (line_number.length() - 5); j++){
+			string line_number = comic_elements[item_no].index + ".";
+			int initial_length = max(1, (7 - line_number.length()));
+			for(int j = 0; j < initial_length; j++){
 				line_number += " ";
 			}
 			ImGui_PushStyleColor(ImGuiCol_Text, comic_elements[item_no].display_color);
