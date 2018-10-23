@@ -34,7 +34,16 @@ class ComicText : ComicElement{
 		UpdateContent();
 	}
 
+	void SetIndex(int _index){
+		index = _index;
+		holder.setZOrdering(index);
+		for(uint i = 0; i < text_elements.size(); i++){
+			text_elements[i].setZOrdering(index);
+		}
+	}
+
 	void SetNewText(){
+		Log(info, "set text  " + index);
 		text_elements.resize(0);
 		holder.clear();
 		holder.setSize(vec2(0,0));
@@ -70,8 +79,9 @@ class ComicText : ComicElement{
 
 		vec2 location = text_container.getElementPosition(holder_name);
 		vec2 size = holder.getSize();
-
-		grabber_container.moveElement(grabber_center.grabber_name, location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+		if(size.x + size.y != 0.0){
+			grabber_container.moveElement(grabber_center.grabber_name, location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+		}
 	}
 
 	void SetVisible(bool _visible){

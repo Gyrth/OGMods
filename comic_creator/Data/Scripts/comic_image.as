@@ -40,6 +40,11 @@ class ComicImage : ComicElement{
 		UpdateContent();
 	}
 
+	void SetIndex(int _index){
+		index = _index;
+		image.setZOrdering(index);
+	}
+
 	void SetNewImage(){
 		vec2 old_size = image.getSize();
 		image.setImageFile(path);

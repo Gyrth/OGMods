@@ -33,6 +33,9 @@ class ComicElement{
 	void AddSettings(){}
 	void EditDone(){}
 	void SetCurrent(bool _current){}
+	void SetIndex(int _index){
+		index = _index;
+	}
 	void SetVisible(bool _visible){
 		visible = _visible;
 	}

@@ -170,6 +170,7 @@ void InterpComic(){
 void ReorderElements(){
 	for(uint index = 0; index < comic_indexes.size(); index++){
 		ComicElement@ current_element = comic_elements[comic_indexes[index]];
+		current_element.SetIndex(index);
 		current_element.ClearTarget();
 		if(current_element.comic_element_type == comic_page){
 			// A page needs to get all the comic elements untill it finds different page.
@@ -538,7 +539,11 @@ void DrawGUI(){
 		ImGui_PopStyleVar();
 
 		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Delete))){
-			comic_elements.removeAt(current_line);
+			Log(info, "Delete " + comic_indexes[current_line]);
+			/* comic_elements.removeAt(comic_indexes[current_line]); */
+			comic_indexes.removeAt(current_line);
+			Log(info, "size " + comic_indexes.size());
+			ReorderElements();
 		}
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
@@ -585,26 +590,31 @@ void DrawGUI(){
 					ComicPage new_page(current_line);
 					comic_elements.insertLast(@new_page);
 					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
+					ReorderElements();
 				}
 				if(ImGui_MenuItem("Image")){
 					ComicImage new_image(default_image, vec2(500, 500), vec2(720, 255), current_line);
 					comic_elements.insertLast(@new_image);
 					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
+					ReorderElements();
 				}
 				if(ImGui_MenuItem("Text")){
 					ComicText new_text("Example text", vec2(200, 200), current_line);
 					comic_elements.insertLast(@new_text);
 					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
+					ReorderElements();
 				}
 				if(ImGui_MenuItem("Crawl In")){
 					ComicCrawlIn new_crawl_in(1000, current_line);
 					comic_elements.insertLast(@new_crawl_in);
 					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
+					ReorderElements();
 				}
 				if(ImGui_MenuItem("Fade In")){
 					ComicFadeIn new_fade_in(1000, current_line);
 					comic_elements.insertLast(@new_fade_in);
 					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
+					ReorderElements();
 				}
 				if(ImGui_MenuItem("Font")){
 					ComicFont new_font("Underdog-Regular", 35, vec3(1.0), false, current_line);
@@ -615,6 +625,7 @@ void DrawGUI(){
 				if(ImGui_MenuItem("Wait Click")){
 					comic_elements.insertLast(ComicWaitClick(current_line));
 					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
+					ReorderElements();
 				}
 				ImGui_EndMenu();
 			}
@@ -624,17 +635,17 @@ void DrawGUI(){
 		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
 			if(current_line > 0){
 				target_line -= 1;
-				display_index -= 1;
+				display_index = comic_indexes[current_line - 1];
 			}
 		}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow))){
 			if(current_line < int(comic_elements.size() - 1)){
 				target_line += 1;
-				display_index += 1;
+				display_index = comic_indexes[current_line + 1];
 			}
 		}
 
 		int line_counter = 0;
-		for(uint i = 0; i < comic_elements.size(); i++){
+		for(uint i = 0; i < comic_indexes.size(); i++){
 			int item_no = comic_indexes[i];
 			string line_number = comic_elements[item_no].index + ".  ";
 			for(uint j = 0; j < (line_number.length() - 5); j++){
@@ -656,13 +667,13 @@ void DrawGUI(){
 				float drag_dy = ImGui_GetMouseDragDelta(0).y;
 				if(drag_dy < 0.0 && i > 0){
 					// Swap
-					target_line = i - 1;
+					/* target_line = i - 1; */
 					comic_indexes[i] = comic_indexes[i-1];
             		comic_indexes[i-1] = item_no;
 					reorded = true;
 					ImGui_ResetMouseDragDelta();
 				}else if(drag_dy > 0.0 && i < comic_elements.size() - 1){
-					target_line = i + 1;
+					/* target_line = i + 1; */
 					comic_indexes[i] = comic_indexes[i+1];
             		comic_indexes[i+1] = item_no;
 					reorded = true;
@@ -676,16 +687,9 @@ void DrawGUI(){
 	}
 	if(reorded && !ImGui_IsMouseDragging(0)){
 		reorded = false;
-		UpdateLineNumbers();
+		ReorderElements();
 	}
 	imGUI.render();
-}
-
-void UpdateLineNumbers(){
-	for(uint i = 0; i < comic_indexes.size(); i++){
-		comic_elements[comic_indexes[i]].index = i;
-	}
-	ReorderElements();
 }
 
 void SaveComic(string path = ""){
