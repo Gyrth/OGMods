@@ -16,15 +16,20 @@ class ComicMoveIn : ComicElement{
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;
-		if(visible){
-			IMMoveIn new_move(duration, offset, inSineTween);
-			target.AddUpdateBehavior(new_move, name);
-		}else{
-			target.RemoveUpdateBehavior(name);
+		if(@target != null){	
+			if(visible){
+				IMMoveIn new_move(duration, offset, inSineTween);
+				target.AddUpdateBehavior(new_move, name);
+			}else{
+				target.RemoveUpdateBehavior(name);
+			}
 		}
 	}
 	void SetTarget(ComicElement@ element){
 		@target = element;
+	}
+	void ClearTarget(){
+		@target = null;
 	}
 	string GetSaveString(){
 		return "move_in " + duration + " " + offset.x + " " + offset.y;

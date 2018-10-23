@@ -34,6 +34,11 @@ class ComicText : ComicElement{
 		UpdateContent();
 	}
 
+	void Delete(){
+		text_container.removeElement(holder_name);
+		grabber_center.Delete();
+	}
+
 	void SetIndex(int _index){
 		index = _index;
 		holder.setZOrdering(index);
@@ -79,7 +84,8 @@ class ComicText : ComicElement{
 
 		vec2 location = text_container.getElementPosition(holder_name);
 		vec2 size = holder.getSize();
-		if(size.x + size.y != 0.0){
+		if(size.x + size.y > 0.0){
+			Log(info, "grabber size " + size.x + " " + size.y);
 			grabber_container.moveElement(grabber_center.grabber_name, location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
 		}
 	}

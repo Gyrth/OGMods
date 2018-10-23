@@ -29,6 +29,9 @@ class ComicGrabber : ComicElement{
 		grabber_image.setSize(vec2(grabber_size));
 		grabber_container.addFloatingElement(grabber_image, grabber_name, vec2(grabber_size / 2.0), parent_index + 1);
 	}
+	void Delete(){
+		grabber_container.removeElement(grabber_name);
+	}
 	void SetVisible(bool _visible){
 		visible = _visible;
 		image.setVisible(visible);

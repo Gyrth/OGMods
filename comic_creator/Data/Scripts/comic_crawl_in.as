@@ -10,17 +10,22 @@ class ComicCrawlIn : ComicElement{
 		display_color = HexColor("#4e887c");
 	}
 	void SetCurrent(bool _current){
-		if(_current){
-			timer = 0.0;
-		}else{
-			target.SetProgress(100);
+		if(@target != null){
+			if(_current){
+				timer = 0.0;
+			}else{
+				target.SetProgress(100);
+			}
 		}
+	}
+	void ClearTarget(){
+		@target = null;
 	}
 	void SetTarget(ComicElement@ element){
 		@target = element;
 	}
 	void Update(){
-		if(timer < duration){
+		if(@target != null && timer < duration){
 			timer += time_step * 1000.0;
 			target.SetProgress(int(timer * 100.0 / duration));
 		}

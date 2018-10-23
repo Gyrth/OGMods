@@ -40,6 +40,15 @@ class ComicImage : ComicElement{
 		UpdateContent();
 	}
 
+	void Delete(){
+		image_container.removeElement(image_name);
+		grabber_top_left.Delete();
+		grabber_top_right.Delete();
+		grabber_bottom_left.Delete();
+		grabber_bottom_right.Delete();
+		grabber_center.Delete();
+	}
+
 	void SetIndex(int _index){
 		index = _index;
 		image.setZOrdering(index);

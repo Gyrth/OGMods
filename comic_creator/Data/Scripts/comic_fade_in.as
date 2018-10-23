@@ -15,13 +15,18 @@ class ComicFadeIn : ComicElement{
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;
-		if(visible){
-			IMFadeIn new_fade(duration, inSineTween);
-			Log(info, "adding effect");
-			target.AddUpdateBehavior(new_fade, name);
-		}else{
-			target.RemoveUpdateBehavior(name);
+		if(@target != null){
+			if(visible){
+				IMFadeIn new_fade(duration, inSineTween);
+				Log(info, "adding effect");
+				target.AddUpdateBehavior(new_fade, name);
+			}else{
+				target.RemoveUpdateBehavior(name);
+			}
 		}
+	}
+	void ClearTarget(){
+		@target = null;
 	}
 	void SetTarget(ComicElement@ element){
 		@target = element;

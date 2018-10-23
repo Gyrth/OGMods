@@ -5,6 +5,9 @@ class ComicPage : ComicElement{
 		comic_element_type = comic_page;
 		display_color = HexColor("#7b5c85");
 	}
+	void ClearTarget(){
+		elements.resize(0);
+	}
 	void SetTarget(ComicElement@ element){
 		elements.insertLast(element);
 	}

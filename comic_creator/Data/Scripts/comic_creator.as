@@ -172,6 +172,8 @@ void ReorderElements(){
 		ComicElement@ current_element = comic_elements[comic_indexes[index]];
 		current_element.SetIndex(index);
 		current_element.ClearTarget();
+		current_element.SetVisible(false);
+		current_element.SetEdit(false);
 		if(current_element.comic_element_type == comic_page){
 			// A page needs to get all the comic elements untill it finds different page.
 			for(uint j = index + 1; j < comic_indexes.size(); j++){
@@ -217,6 +219,8 @@ void ReorderElements(){
 			}
 		}
 	}
+	// Run the whole script again from the beginning to fix any ordering problems.
+	current_line = 0;
 }
 
 ComicElement@ GetNextElementOfType(comic_element_types type){
@@ -403,7 +407,7 @@ void GoToLine(int new_line){
 int GetPlayingProgress(){
 	int new_line = current_line;
 	while(true){
-		if(new_line == int(comic_elements.size() -1) || comic_elements[new_line].comic_element_type == comic_wait_click || comic_elements[new_line].comic_element_type == comic_crawl_in){
+		if(new_line == int(comic_elements.size() -1) || comic_elements[comic_indexes[new_line]].comic_element_type == comic_wait_click || comic_elements[comic_indexes[new_line]].comic_element_type == comic_crawl_in){
 			break;
 		}else{
 			new_line += play_direction;
@@ -515,6 +519,7 @@ string ToLowerCase(string input){
 
 bool reorded = false;
 int display_index = 0;
+int drag_target_line = 0;
 
 void DrawGUI(){
 	if(editor_open){
@@ -539,11 +544,23 @@ void DrawGUI(){
 		ImGui_PopStyleVar();
 
 		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Delete))){
-			Log(info, "Delete " + comic_indexes[current_line]);
-			/* comic_elements.removeAt(comic_indexes[current_line]); */
-			comic_indexes.removeAt(current_line);
-			Log(info, "size " + comic_indexes.size());
-			ReorderElements();
+			if(comic_elements.size() > 0){
+				GetCurrentElement().Delete();
+				int current_index = comic_indexes[current_line];
+				comic_elements.removeAt(current_index);
+				comic_indexes.removeAt(current_line);
+				for(uint i = 0; i < comic_indexes.size(); i++){
+					if(comic_indexes[i] > current_index){
+						comic_indexes[i] -= 1;
+					}
+				}
+				// If the last element is deleted then the target needs to be the previous element.
+				if(current_line > 0 && current_line == int(comic_elements.size())){
+					target_line -= 1;
+					display_index = comic_indexes[current_line - 1];
+				}
+				ReorderElements();
+			}
 		}
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
@@ -588,44 +605,35 @@ void DrawGUI(){
 			if(ImGui_BeginMenu("Add")){
 				if(ImGui_MenuItem("New Page")){
 					ComicPage new_page(current_line);
-					comic_elements.insertLast(@new_page);
-					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
-					ReorderElements();
+					InsertElement(@new_page);
 				}
 				if(ImGui_MenuItem("Image")){
 					ComicImage new_image(default_image, vec2(500, 500), vec2(720, 255), current_line);
-					comic_elements.insertLast(@new_image);
-					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
-					ReorderElements();
+					InsertElement(@new_image);
 				}
 				if(ImGui_MenuItem("Text")){
 					ComicText new_text("Example text", vec2(200, 200), current_line);
-					comic_elements.insertLast(@new_text);
-					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
-					ReorderElements();
+					InsertElement(@new_text);
 				}
 				if(ImGui_MenuItem("Crawl In")){
 					ComicCrawlIn new_crawl_in(1000, current_line);
-					comic_elements.insertLast(@new_crawl_in);
-					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
-					ReorderElements();
+					InsertElement(@new_crawl_in);
 				}
 				if(ImGui_MenuItem("Fade In")){
 					ComicFadeIn new_fade_in(1000, current_line);
-					comic_elements.insertLast(@new_fade_in);
-					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
-					ReorderElements();
+					InsertElement(@new_fade_in);
+				}
+				if(ImGui_MenuItem("Move In")){
+					ComicMoveIn new_move_in(1000, vec2(0, 200), current_line);
+					InsertElement(@new_move_in);
 				}
 				if(ImGui_MenuItem("Font")){
 					ComicFont new_font("Underdog-Regular", 35, vec3(1.0), false, current_line);
-					comic_elements.insertLast(@new_font);
-					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
-					ReorderElements();
+					InsertElement(@new_font);
 				}
 				if(ImGui_MenuItem("Wait Click")){
-					comic_elements.insertLast(ComicWaitClick(current_line));
-					comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
-					ReorderElements();
+					ComicWaitClick new_wait_click(current_line);
+					InsertElement(@new_wait_click);
 				}
 				ImGui_EndMenu();
 			}
@@ -670,12 +678,14 @@ void DrawGUI(){
 					/* target_line = i - 1; */
 					comic_indexes[i] = comic_indexes[i-1];
             		comic_indexes[i-1] = item_no;
+					drag_target_line = i-1;
 					reorded = true;
 					ImGui_ResetMouseDragDelta();
 				}else if(drag_dy > 0.0 && i < comic_elements.size() - 1){
 					/* target_line = i + 1; */
 					comic_indexes[i] = comic_indexes[i+1];
             		comic_indexes[i+1] = item_no;
+					drag_target_line = i+1;
 					reorded = true;
 					ImGui_ResetMouseDragDelta();
 				}
@@ -690,6 +700,14 @@ void DrawGUI(){
 		ReorderElements();
 	}
 	imGUI.render();
+}
+
+void InsertElement(ComicElement@ new_element){
+	comic_elements.insertLast(new_element);
+	comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
+	target_line += 1;
+	display_index = comic_indexes[current_line + 1];
+	ReorderElements();
 }
 
 void SaveComic(string path = ""){
