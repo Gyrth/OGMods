@@ -520,6 +520,7 @@ string ToLowerCase(string input){
 bool reorded = false;
 int display_index = 0;
 int drag_target_line = 0;
+bool update_scroll = false;
 
 void DrawGUI(){
 	if(editor_open){
@@ -558,6 +559,8 @@ void DrawGUI(){
 				if(current_line > 0 && current_line == int(comic_elements.size())){
 					target_line -= 1;
 					display_index = comic_indexes[current_line - 1];
+				}else{
+					display_index = comic_indexes[current_line];
 				}
 				ReorderElements();
 			}
@@ -644,11 +647,13 @@ void DrawGUI(){
 			if(current_line > 0){
 				target_line -= 1;
 				display_index = comic_indexes[current_line - 1];
+				update_scroll = true;
 			}
 		}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow))){
 			if(current_line < int(comic_elements.size() - 1)){
 				target_line += 1;
 				display_index = comic_indexes[current_line + 1];
+				update_scroll = true;
 			}
 		}
 
@@ -670,19 +675,21 @@ void DrawGUI(){
 					target_line = int(i);
 				}
 			}
+			if(update_scroll && display_index == int(item_no)){
+				update_scroll = false;
+				ImGui_SetScrollHere(0.5);
+			}
 			ImGui_PopStyleColor();
 			if(ImGui_IsItemActive() && !ImGui_IsItemHovered()){
 				float drag_dy = ImGui_GetMouseDragDelta(0).y;
 				if(drag_dy < 0.0 && i > 0){
 					// Swap
-					/* target_line = i - 1; */
 					comic_indexes[i] = comic_indexes[i-1];
             		comic_indexes[i-1] = item_no;
 					drag_target_line = i-1;
 					reorded = true;
 					ImGui_ResetMouseDragDelta();
 				}else if(drag_dy > 0.0 && i < comic_elements.size() - 1){
-					/* target_line = i + 1; */
 					comic_indexes[i] = comic_indexes[i+1];
             		comic_indexes[i+1] = item_no;
 					drag_target_line = i+1;
