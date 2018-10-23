@@ -13,7 +13,11 @@
 	<Tag>Editor</Tag>
 	<SupportedVersion>*</SupportedVersion>
 	<NeedsRestart>false</NeedsRestart>
-	<Level title="Comic Creator" thumbnail="Images/comic_creator_full.jpg">comic_creator.xml</Level>
+	<!-- <Level title="Comic Creator" thumbnail="Images/comic_creator_full.jpg">comic_creator.xml</Level> -->
 	<MenuItem title="Comic Creator" category="play">Data/Scripts/comic_creator_inmenu.as</MenuItem>
+	<MenuItem title="Comic Reader" category="play" thumbnail="Images/comic_reader_full.jpg">Data/Scripts/comic_reader.as</MenuItem>
 	<LevelHookFile>Data/Scripts/comic_creator.as</LevelHookFile>
+
+	<MenuItem title="Example Comic" category="comic" thumbnail="Images/comic_reader_full.jpg">Data/Comics/example_in_menu.txt</MenuItem>
+
 </Mod>

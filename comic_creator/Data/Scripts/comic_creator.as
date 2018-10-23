@@ -67,14 +67,21 @@ void Initialize(){
 	environment_state = in_menu;
 	PlaySong("menu-lugaru");
 	CreateComicUI();
-	AddBackground();
 
 	/* comic_path = "Data/Comics/example_in_menu.txt";
 	LoadComic(comic_path); */
 
-	unsaved = true;
-	comic_path = "New Comic";
-
+	string new_comic_path = GetInterlevelData("load_comic");
+	if(new_comic_path != ""){
+		creator_state = playing;
+		editor_open = false;
+		LoadComic(new_comic_path);
+		SetInterlevelData("load_comic", "");
+	}else{
+		unsaved = true;
+		comic_path = "New Comic";
+	}
+	AddBackground();
 }
 
 // This init is used when loaded in-game.
