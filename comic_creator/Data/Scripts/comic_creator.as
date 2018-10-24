@@ -631,6 +631,10 @@ void DrawGUI(){
 					ComicText new_text("Example text", vec2(200, 200), current_line);
 					InsertElement(@new_text);
 				}
+				if(ImGui_MenuItem("Sound")){
+					ComicSound new_sound("Data/Sounds/FistImpact_1.wav", current_line);
+					InsertElement(@new_sound);
+				}
 				if(ImGui_MenuItem("Crawl In")){
 					ComicCrawlIn new_crawl_in(1000, current_line);
 					InsertElement(@new_crawl_in);
