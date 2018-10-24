@@ -7,7 +7,7 @@
 	<Author>Gyrth McMulin</Author>
 	<Thumbnail>Data/Images/comic_creator_thumb.jpg</Thumbnail>
 	<PreviewImage>Data/Images/comic_creator_full.jpg</PreviewImage>
-	<Description>Comic Creator.</Description>
+	<Description>A tool to create comics that can be played back in Overgrowth. With effects such as fade-in, move-in and sound effects.</Description>
 	<Tag>Scripting</Tag>
 	<Tag>Tool</Tag>
 	<Tag>Editor</Tag>
@@ -17,7 +17,5 @@
 	<MenuItem title="Comic Creator" category="play">Data/Scripts/comic_creator_inmenu.as</MenuItem>
 	<MenuItem title="Comic Reader" category="play" thumbnail="Images/comic_reader_full.jpg">Data/Scripts/comic_reader.as</MenuItem>
 	<LevelHookFile>Data/Scripts/comic_creator.as</LevelHookFile>
-
 	<MenuItem title="Example Comic" category="comic" thumbnail="Images/comic_reader_full.jpg">Data/Comics/example_in_menu.txt</MenuItem>
-
 </Mod>
