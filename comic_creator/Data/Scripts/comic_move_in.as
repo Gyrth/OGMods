@@ -1,8 +1,9 @@
 class ComicMoveIn : ComicElement{
 	ComicElement@ target;
 	int duration;
-	vec2 offset;
 	string name;
+	int x_offset;
+	int y_offset;
 	ComicMoveIn(int _duration, vec2 _offset, int _index){
 		index = _index;
 		comic_element_type = comic_move_in;
@@ -10,15 +11,16 @@ class ComicMoveIn : ComicElement{
 		display_color = HexColor("#987150");
 
 		duration = _duration;
-		offset = _offset;
+		x_offset = int(_offset.x);
+		y_offset = int(_offset.y);
 		name = "movein" + element_counter;
 		element_counter += 1;
 	}
 	void SetVisible(bool _visible){
 		visible = _visible;
-		if(@target != null){	
+		if(@target != null){
 			if(visible){
-				IMMoveIn new_move(duration, offset, inSineTween);
+				IMMoveIn new_move(duration, vec2(x_offset, y_offset), inSineTween);
 				target.AddUpdateBehavior(new_move, name);
 			}else{
 				target.RemoveUpdateBehavior(name);
@@ -32,12 +34,14 @@ class ComicMoveIn : ComicElement{
 		@target = null;
 	}
 	string GetSaveString(){
-		return "move_in " + duration + " " + offset.x + " " + offset.y;
+		return "move_in " + duration + " " + x_offset + " " + y_offset;
 	}
 	string GetDisplayString(){
-		return "MoveIn " + duration;
+		return "MoveIn " + duration + " " + x_offset + " " + y_offset;
 	}
 	void AddSettings(){
 		ImGui_DragInt("Duration", duration, 1.0, 1, 10000);
+		ImGui_DragInt("X Offset", x_offset, 1.0, -10000, 10000);
+		ImGui_DragInt("Y Offset", y_offset, 1.0, -10000, 10000);
 	}
 }
