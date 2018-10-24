@@ -685,7 +685,7 @@ void DrawGUI(){
 			ImGui_PushStyleColor(ImGuiCol_Text, comic_elements[item_no].display_color);
 			if(ImGui_Selectable(line_number + comic_elements[item_no].GetDisplayString(), display_index == int(item_no), ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
-					if(comic_elements[i].has_settings){
+					if(comic_elements[comic_indexes[i]].has_settings){
 						ImGui_OpenPopup("Edit");
 					}
 				}else{
