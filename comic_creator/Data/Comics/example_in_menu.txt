@@ -75,20 +75,96 @@ add_image Textures/example_comic_background.png 0 20 2560 1420
 add_image Textures/example_comic_11.png 140 80 700 1300
 fade_in 250
 play_sound Data/Sounds/whoosh/hit_whoosh_5.wav
-wait_click
 add_text 240 1200 Still so slow.
 fade_in 250
-wait_click
+crawl_in 1000
 add_image Textures/example_comic_12.png 840 100 1700 540
 fade_in 250
 play_sound Data/Sounds/weapon_foley/impact/weapon_metal_hit_metal_strong_8.wav
-wait_click
 add_text 1560 520 And so unbalanced.
 fade_in 250
-wait_click
-play_sound Data/Sounds/weapon_foley/impact/weapon_staff_hit_staff_strong_5.wav
+crawl_in 1000
 add_image Textures/example_comic_13.png 840 600 640 760
 fade_in 1500
+wait_click
+play_sound Data/Sounds/weapon_foley/impact/weapon_staff_hit_staff_strong_5.wav
 add_image Textures/example_comic_14.png 1460 620 1020 740
-fade_in 1500
+fade_in 708
 move_in 500 1000 1000
+wait_click
+new_page
+add_image Textures/example_comic_background.png 0 40 2560 1395
+add_image Textures/example_comic_15.png 40 80 2480 1315
+fade_in 366
+play_sound Data/Sounds/weapon_foley/impact/weapon_metal_hit_metal_strong_9.wav
+wait_click
+add_image Textures/example_comic_16.png 1240 660 520 215
+move_in 250 -200 200
+play_sound Data/Sounds/voice/animal3/voice_dog_attack_1.wav
+fade_in 1000
+wait_click
+new_page
+add_image Textures/example_comic_17.png 100 120 740 1195
+move_in 1000 -300 0
+fade_in 1000
+play_sound Data/Sounds/weapon_foley/grab/weapon_grap_metal_leather_glove_5.wav
+wait_click
+add_image Textures/example_comic_18.png 0 20 2560 695
+move_in 1000 0 -200
+fade_in 1000
+play_sound Data/Sounds/weapon_foley/swoosh/weapon_whoos_big_3.wav
+wait_click
+add_image Textures/example_comic_19.png 0 720 2560 715
+move_in 1000 0 200
+fade_in 1000
+play_sound Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_3.wav
+play_sound Data/Sounds/voice/animal3/voice_dog_get_hit_1.wav
+wait_click
+new_page
+add_image Textures/example_comic_20.png 0 20 860 1415
+play_sound Data/Sounds/voice/animal3/voice_dog_exertion_1.wav
+play_sound Data/Sounds/weapon_foley/pickup/knife_remove_2.wav
+move_in 1000 0 400
+fade_in 1000
+wait_click
+add_image Textures/example_comic_21.png 860 20 800 1415
+play_sound Data/Sounds/voice/animal3/voice_dog_exertion_3.wav
+move_in 1000 0 -400
+fade_in 1000
+wait_click
+add_image Textures/example_comic_22.png 1660 20 900 1415
+play_sound Data/Sounds/voice/animal3/voice_dog_death_1.wav
+play_sound Data/Sounds/weapon_foley/impact/soft_bag_on_wood_2.wav
+move_in 1000 0 200
+fade_in 1000
+wait_click
+new_page
+add_image Textures/example_comic_23.png 0 20 1260 1415
+play_sound Data/Sounds/voice/animal3/voice_dog_attack_1.wav
+fade_in 1000
+wait_click
+add_image Textures/example_comic_24.png 800 100 880 1235
+fade_in 1000
+play_sound Data/Sounds/voice/animal3/voice_dog_attack_6.wav
+wait_click
+add_image Textures/example_comic_25.png 1260 20 1300 1415
+move_in 500 -400 400
+play_sound Data/Sounds/hit/spear_hit_flesh_1.wav
+play_sound Data/Sounds/blood/spatter_hard_3.wav
+wait_click
+new_page
+add_image Textures/example_comic_background.png 0 20 2560 1415
+add_image Textures/example_comic_26.png 40 60 1460 1335
+play_sound Data/Sounds/weapon_foley/grab/weapon_grap_metal_leather_glove_2.wav
+fade_in 420
+wait_click
+add_image Textures/example_comic_27.png 1500 80 1040 735
+play_sound Data/Sounds/weapon_foley/pickup/knife_remove_1.wav
+wait_click
+add_image Textures/example_comic_28.png 1500 820 1020 575
+wait_click
+add_image Textures/example_comic_background.png 0 20 2560 1415
+play_sound Data/Sounds/weapon_foley/impact/soft_bag_on_wood_3.wav
+play_sound Data/Sounds/voice/animal3/voice_dog_death_1.wav
+play_sound Data/Sounds/voice/animal3/voice_dog_breath_loop.wav
+fade_in 5000
