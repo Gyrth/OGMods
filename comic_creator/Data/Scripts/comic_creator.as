@@ -586,6 +586,7 @@ void DrawGUI(){
 			ImGui_EndChild();
 			ImGui_BeginChild("Modal Buttons", vec2(-1, 60));
 			if(ImGui_Button("Close")){
+				unsaved = true;
 				GetCurrentElement().EditDone();
 				ImGui_CloseCurrentPopup();
 			}
@@ -690,17 +691,19 @@ void DrawGUI(){
 			ImGui_EndMenuBar();
 		}
 
-		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
-			if(current_line > 0){
-				target_line -= 1;
-				display_index = comic_indexes[current_line - 1];
-				update_scroll = true;
-			}
-		}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow))){
-			if(current_line < int(comic_elements.size() - 1)){
-				target_line += 1;
-				display_index = comic_indexes[current_line + 1];
-				update_scroll = true;
+		if(!ImGui_IsPopupOpen("Edit") && !ImGui_IsPopupOpen("Confirm")){
+			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
+				if(current_line > 0){
+					target_line -= 1;
+					display_index = comic_indexes[current_line - 1];
+					update_scroll = true;
+				}
+			}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow))){
+				if(current_line < int(comic_elements.size() - 1)){
+					target_line += 1;
+					display_index = comic_indexes[current_line + 1];
+					update_scroll = true;
+				}
 			}
 		}
 
