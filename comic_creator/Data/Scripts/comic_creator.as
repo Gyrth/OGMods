@@ -47,6 +47,7 @@ uint grabber_layer = 2;
 
 bool dragging = false;
 bool unsaved = false;
+bool at_correct_line = false;
 int snap_scale = 20;
 int target_line = 0;
 
@@ -388,6 +389,7 @@ void GoToLine(int new_line){
 
 	GetCurrentElement().SetEdit(false);
 	GetCurrentElement().SetCurrent(false);
+	at_correct_line = false;
 	while(true){
 		// Going to a previous line in the script.
 		if(new_line < current_line){
@@ -417,6 +419,7 @@ void GoToLine(int new_line){
 			break;
 		}
 	}
+	at_correct_line = true;
 	GetCurrentElement().SetCurrent(true);
 	if(creator_state == editing){
 		GetCurrentElement().SetEdit(true);
@@ -757,7 +760,9 @@ void DrawGUI(){
 		reorded = false;
 		ReorderElements();
 	}
-	imGUI.render();
+	if(at_correct_line){
+		imGUI.render();
+	}
 }
 
 void InsertElement(ComicElement@ new_element){
