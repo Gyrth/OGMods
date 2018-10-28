@@ -123,12 +123,17 @@ void LoadComic(string path){
 	image_container.clear();
 	text_container.clear();
 	grabber_container.clear();
-	current_line = 0;
 	@current_font = null;
 	@current_grabber = null;
 	comic_elements.resize(0);
 	comic_indexes.resize(0);
 	unsaved = false;
+	current_line = 0;
+
+	if(StorageHasInt32("progress_" + comic_path)){
+		target_line = StorageGetInt32("progress_" + path);
+	}
+
 	if(LoadFile(path)){
 		string new_line;
 		while(true){
@@ -427,6 +432,7 @@ void GoToLine(int new_line){
 		}
 	}
 	at_correct_line = true;
+	StorageSetInt32("progress_" + comic_path, current_line);
 	GetCurrentElement().SetCurrent(true);
 	if(creator_state == editing){
 		GetCurrentElement().SetEdit(true);
@@ -442,6 +448,10 @@ int GetPlayingProgress(){
 			new_line += play_direction;
 		}
 	}
+	if(target_line != -1){
+		new_line = target_line;
+		target_line = -1;
+	}
 	if(new_line == current_line){
 		// Waiting for input to progress.
 		if(GetInputPressed(0, "mouse0")){
@@ -454,6 +464,7 @@ int GetPlayingProgress(){
 					new_line = current_line + 1;
 					play_direction = 1;
 				}else if(current_line == int(comic_indexes.size() - 1)){
+					StorageSetInt32("progress_" + comic_path, 0);
 					this_ui.SendCallback("back");
 				}
 			}
