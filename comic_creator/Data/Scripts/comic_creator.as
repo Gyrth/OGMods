@@ -288,6 +288,9 @@ void AddBackground(){
 
 bool CanGoBack(){
 	if(unsaved){
+		if(!editor_open){
+			editor_open = true;
+		}
 		show_confirm = true;
 		return false;
 	}else{
@@ -442,13 +445,17 @@ int GetPlayingProgress(){
 	if(new_line == current_line){
 		// Waiting for input to progress.
 		if(GetInputPressed(0, "mouse0")){
-			if(CanPlayForward()){
-				new_line = current_line + 1;
-				play_direction = 1;
-			}else if(environment_state == in_game){
+			if(environment_state == in_game){
 				CloseComic();
 				SetPaused(false);
 				return 0;
+			}else{
+				if(CanPlayForward()){
+					new_line = current_line + 1;
+					play_direction = 1;
+				}else if(current_line == int(comic_indexes.size() - 1)){
+					this_ui.SendCallback("back");
+				}
 			}
 		}else if(GetInputPressed(0, "grab")){
 			if(CanPlayBackward()){
