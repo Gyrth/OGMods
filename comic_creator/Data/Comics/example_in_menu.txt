@@ -1,4 +1,6 @@
 new_page
+add_music Data/Music/lugaru.xml
+play_song lugaru_ambient-tense
 set_font Underdog-Regular 35 36 36 36 false
 add_image Textures/example_comic_background.png 0 0 2560 1440
 add_image Textures/example_comic_1.png 20 40 2520 660
@@ -12,6 +14,7 @@ add_image Textures/example_comic_2.png 60 700 1080 700
 move_in 1000 0 500
 fade_in 1500
 wait_click
+play_song lugaru_ambient-happy
 add_text 560 780 You misunderstand the\ncode, wolfblood.
 move_in 1000 0 -500
 wait_click
@@ -19,6 +22,7 @@ add_image Textures/example_comic_3.png 1140 700 1360 700
 fade_in 1500
 move_in 1000 1000 0
 wait_click
+play_song lugaru_combat
 play_sound Data/Sounds/voice/animal3/voice_dog_exertion_2.wav
 add_text 1620 780 You must wait at\nleast a month\nbefore challenging\nme again.
 fade_in 500
@@ -29,6 +33,7 @@ add_image Textures/example_comic_4.png 60 60 1020 1360
 fade_in 500
 move_in 500 1000 500
 wait_click
+play_song lugaru_ambient_snow
 add_text 640 180 If you train,\nand train hard,\nmaybe you will\nbe able to rise\nabove the limitations\nof your breed -\nand finally pose\na threat to me.
 fade_in 10000
 crawl_in 2000

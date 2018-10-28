@@ -8,7 +8,9 @@ enum comic_element_types { 	none,
 							comic_sound,
 							comic_text,
 							comic_wait_click,
-							comic_crawl_in};
+							comic_crawl_in,
+							comic_music,
+							comic_song};
 
 class ComicElement{
 	comic_element_types comic_element_type = none;

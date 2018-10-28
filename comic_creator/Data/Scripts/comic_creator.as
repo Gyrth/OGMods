@@ -9,9 +9,9 @@
 #include "comic_text.as"
 #include "comic_wait_click.as"
 #include "comic_crawl_in.as"
+#include "comic_music.as"
+#include "comic_song.as"
 #include "music_load.as"
-
-MusicLoad ml("Data/Music/menu.xml");
 
 string level_name = "";
 IMGUI@ imGUI;
@@ -172,6 +172,10 @@ void InterpComic(){
 			comic_elements.insertLast(ComicSound(line_elements[1], index));
 		}else if(line_elements[0] == "crawl_in"){
 			comic_elements.insertLast(ComicCrawlIn(atoi(line_elements[1]), index));
+		}else if(line_elements[0] == "add_music"){
+			comic_elements.insertLast(ComicMusic(line_elements[1], index));
+		}else if(line_elements[0] == "play_song"){
+			comic_elements.insertLast(ComicSong(line_elements[1], index));
 		}else{
 			//Either an empty line or an unknown command is in the comic.
 			continue;
@@ -688,6 +692,14 @@ void DrawGUI(){
 				if(ImGui_MenuItem("Wait Click")){
 					ComicWaitClick new_wait_click(current_line);
 					InsertElement(@new_wait_click);
+				}
+				if(ImGui_MenuItem("Music")){
+					ComicMusic new_music("Data/Music/lugaru.xml", current_line);
+					InsertElement(@new_music);
+				}
+				if(ImGui_MenuItem("Song")){
+					ComicSong new_song("lugaru_menu", current_line);
+					InsertElement(@new_song);
 				}
 				ImGui_EndMenu();
 			}
