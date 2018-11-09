@@ -589,8 +589,8 @@
             "Data/Custom/timbles/therium-2/Animations/dialogue_breathless.anm",
             "Data/Custom/timbles/therium-2/Animations/dialogue_dying_1.anm",
             "Data/Custom/timbles/therium-2/Animations/dialogue_dying_2.anm",
-            "Data/Custom/timbles/therium-2/Animations/dialogue_guard.anm",
             "Data/Custom/timbles/therium-2/Animations/dialogue_guard_spear.anm",
+            "Data/Custom/timbles/therium-2/Animations/dialogue_guard_spearprevoked.anm",
             "Data/Custom/timbles/therium-2/Animations/dialogue_guard_sword.anm",
             "Data/Custom/timbles/therium-2/Animations/dialogue_guard_swordprevoked.anm",
             "Data/Custom/timbles/therium-2/Animations/dialogue_leaning_back_onwall.anm",
@@ -603,8 +603,8 @@
             "Data/Custom/timbles/therium-2/Animations/ghostsword_idle.anm",
             "Data/Custom/timbles/therium-2/Animations/ghostsword_swordpoint.anm",
             "Data/Custom/timbles/therium-2/Animations/ghostsword_welcome.anm",
-            "Data/Custom/timbles/therium-2/Animations/heavyblock.anm",
             "Data/Custom/timbles/therium-2/Animations/impaled.anm",
+            "Data/Custom/timbles/therium-2/Animations/injuredfoot.anm",
             "Data/Custom/timbles/therium-2/Animations/interestingsit.anm",
             "Data/Custom/timbles/therium-2/Animations/jairobeckon.anm",
             "Data/Custom/timbles/therium-2/Animations/jairoidle.anm",
@@ -619,8 +619,8 @@
             "Data/Custom/timbles/therium-2/Animations/noose_sheathed.anm",
             "Data/Custom/timbles/therium-2/Animations/oldlanterntouch.anm",
             "Data/Custom/timbles/therium-2/Animations/oldlanterntouch_lethal.anm",
-            "Data/Custom/timbles/therium-2/Animations/oldlanterntouch_timid.anm",
             "Data/Custom/timbles/therium-2/Animations/pickup.anm",
+            "Data/Custom/timbles/therium-2/Animations/promosneak.anm",
             "Data/Custom/timbles/therium-2/Animations/promotalk.anm",
             "Data/Custom/timbles/therium-2/Animations/r_ancientcombatidle.anm",
             "Data/Custom/timbles/therium-2/Animations/r_dialogue_pole.anm",
@@ -642,9 +642,9 @@
             "Data/Custom/timbles/therium-2/Animations/woundedshoulder.anm",
             "Data/Custom/timbles/therium-2/Animations/woundedsit2.anm",
             "Data/Custom/timbles/therium-2/Animations/wowanothersit.anm",
-            "Data/Custom/timbles/therium-2/Animations/dialogue_guard_spearprevoked.anm",
-            "Data/Custom/timbles/therium-2/Animations/injuredfoot.anm",
-            "Data/Custom/timbles/therium-2/Animations/promosneak.anm",
+            "Data/Custom/timbles/therium-2/Animations/dialogue_guard.anm",
+            "Data/Custom/timbles/therium-2/Animations/heavyblock.anm",
+            "Data/Custom/timbles/therium-2/Animations/oldlanterntouch_timid.anm",
             "Data/Custom/timbles/therium-2/Animations/Gunk/gunkactionidle.anm",
             "Data/Custom/timbles/therium-2/Animations/Gunk/gunksitcrossedlegs.anm"
         ]
@@ -653,12 +653,12 @@
         "Number of animations": 6,
         "Mod ID": "bastion",
         "Animations": [
-            "Data/Animations/bastion/bastion_actionidlecrouch.anm",
-            "Data/Animations/bastion/bastion_actionidlecrouch_grab.anm",
-            "Data/Animations/bastion/bastion_actionidlecrouch_threat.anm",
-            "Data/Animations/bastion/bastion_actionidle_extended.anm",
-            "Data/Animations/bastion/bastion_actionidle_grab.anm",
-            "Data/Animations/bastion/bastion_actionidle_threat.anm"
+            "Data/animations/bastion/bastion_actionidlecrouch.anm",
+            "Data/animations/bastion/bastion_actionidlecrouch_grab.anm",
+            "Data/animations/bastion/bastion_actionidlecrouch_threat.anm",
+            "Data/animations/bastion/bastion_actionidle_extended.anm",
+            "Data/animations/bastion/bastion_actionidle_grab.anm",
+            "Data/animations/bastion/bastion_actionidle_threat.anm"
         ]
     },
     "Genji": {
@@ -677,16 +677,23 @@
         "Number of animations": 10,
         "Mod ID": "alienwarrior",
         "Animations": [
-            "Data/animations/alien_warrior/a_flailfall.anm",
-            "Data/animations/alien_warrior/a_jump.anm",
-            "Data/animations/alien_warrior/a_ledge.anm",
-            "Data/animations/alien_warrior/a_ledge_hang.anm",
-            "Data/animations/alien_warrior/a_ledge_hang_active.anm",
-            "Data/animations/alien_warrior/a_tuck.anm",
-            "Data/animations/alien_warrior/r_animalrun.anm",
-            "Data/animations/alien_warrior/w_slashedright.anm",
-            "Data/animations/alien_warrior/w_slashedrighthard.anm",
-            "Data/animations/alien_warrior/w_wolfslapfollowthrough.anm"
+            "Data/Animations/Alien_warrior/a_flailfall.anm",
+            "Data/Animations/Alien_warrior/a_jump.anm",
+            "Data/Animations/Alien_warrior/a_ledge.anm",
+            "Data/Animations/Alien_warrior/a_ledge_hang.anm",
+            "Data/Animations/Alien_warrior/a_ledge_hang_active.anm",
+            "Data/Animations/Alien_warrior/a_tuck.anm",
+            "Data/Animations/Alien_warrior/r_animalrun.anm",
+            "Data/Animations/Alien_warrior/w_slashedright.anm",
+            "Data/Animations/Alien_warrior/w_slashedrighthard.anm",
+            "Data/Animations/Alien_warrior/w_wolfslapfollowthrough.anm"
+        ]
+    },
+    "Deathclaw from Fallout 4": {
+        "Number of animations": 1,
+        "Mod ID": "deathclaw",
+        "Animations": [
+            "Data/Animations/deathclaw/r_animalrun.anm"
         ]
     },
     "RabbitZ": {
@@ -694,6 +701,175 @@
         "Mod ID": "rabbitz-sum",
         "Animations": [
             "Data/Custom/twowolves/rabbitz/Animations/run.anm"
+        ]
+    },
+    "Faith from Mirrors edge": {
+        "Number of animations": 6,
+        "Mod ID": "faith",
+        "Animations": [
+            "Data/Animations/faith/r_backhand.anm",
+            "Data/Animations/faith/r_backhandblocked.anm",
+            "Data/Animations/faith/r_backhandlow.anm",
+            "Data/Animations/faith/r_sidekick.anm",
+            "Data/Animations/faith/r_sidekickblocked.anm",
+            "Data/Animations/faith/r_sidekicklow.anm"
+        ]
+    },
+    "phantom rabbit": {
+        "Number of animations": 3,
+        "Mod ID": "phantom-rabbit",
+        "Animations": [
+            "Data/Animations/phantomRabbit/phantom_rabbit2.anm",
+            "Data/Animations/phantomRabbit/PR_grip_attack.anm",
+            "Data/Animations/phantomRabbit/PR_Walk.anm"
+        ]
+    },
+    "Improved Gyrth's Bow and Arrow Mod": {
+        "Number of animations": 28,
+        "Mod ID": "updated-bow-and-arrow",
+        "Animations": [
+            "Data/Animations/r_arrow_crouch_move_threat.anm",
+            "Data/Animations/bow_and_arrow_aim_neutral.anm",
+            "Data/Animations/quiver_sheathed.anm",
+            "Data/Animations/r_arrow_crouch_idle.anm",
+            "Data/Animations/r_arrow_crouch_idle_threat.anm",
+            "Data/Animations/r_arrow_crouch_move.anm",
+            "Data/Animations/r_arrow_grip.anm",
+            "Data/Animations/r_arrow_idle_stand.anm",
+            "Data/Animations/r_arrow_idle_stand_threat.anm",
+            "Data/Animations/r_arrow_idle_stand_threat_close.anm",
+            "Data/Animations/r_arrow_run.anm",
+            "Data/Animations/r_arrow_sheathe.anm",
+            "Data/Animations/r_arrow_sheathed.anm",
+            "Data/Animations/r_arrow_sheathe_sameside.anm",
+            "Data/Animations/r_arrow_stand_idle.anm",
+            "Data/Animations/r_arrow_unsheathe.anm",
+            "Data/Animations/r_arrow_unsheathe_sameside.anm",
+            "Data/Animations/r_bow_grip.anm",
+            "Data/Animations/r_bow_sheathe.anm",
+            "Data/Animations/r_bow_sheathed.anm",
+            "Data/Animations/r_draw_bow.anm",
+            "Data/Animations/r_draw_bow_askew.anm",
+            "Data/Animations/r_draw_bow_running.anm",
+            "Data/Animations/r_draw_bow_short.anm",
+            "Data/Animations/r_draw_bow_sideways.anm",
+            "Data/Animations/r_draw_bow_stance.anm",
+            "Data/Animations/r_draw_bow_stance_aim_down.anm",
+            "Data/Animations/r_draw_bow_stance_aim_up.anm"
+        ]
+    },
+    "Undergrowth": {
+        "Number of animations": 2,
+        "Mod ID": "undergrowth",
+        "Animations": [
+            "Data/Animations/r_arrow_sheathed.anm",
+            "Data/Animations/deathclaw/r_animalrun.anm"
+        ]
+    },
+    "Emotional expansion pack": {
+        "Number of animations": 1,
+        "Mod ID": "bc-mng-emo",
+        "Animations": [
+            "Data/Animations/bc_mng_emo/dialogue_sitting_sad.anm"
+        ]
+    },
+    "God of Death": {
+        "Number of animations": 29,
+        "Mod ID": "god",
+        "Animations": [
+            "Data/Animations/r_arrow_crouch_idle_threat.anm",
+            "Data/Animations/animalrun.anm",
+            "Data/Animations/bow_and_arrow_aim_neutral.anm",
+            "Data/Animations/quiver_sheathed.anm",
+            "Data/Animations/r_arrow_crouch_idle.anm",
+            "Data/Animations/r_arrow_crouch_move.anm",
+            "Data/Animations/r_arrow_crouch_move_threat.anm",
+            "Data/Animations/r_arrow_grip.anm",
+            "Data/Animations/r_arrow_idle_stand.anm",
+            "Data/Animations/r_arrow_idle_stand_threat.anm",
+            "Data/Animations/r_arrow_idle_stand_threat_close.anm",
+            "Data/Animations/r_arrow_run.anm",
+            "Data/Animations/r_arrow_sheathe.anm",
+            "Data/Animations/r_arrow_sheathed.anm",
+            "Data/Animations/r_arrow_sheathe_sameside.anm",
+            "Data/Animations/r_arrow_stand_idle.anm",
+            "Data/Animations/r_arrow_unsheathe.anm",
+            "Data/Animations/r_arrow_unsheathe_sameside.anm",
+            "Data/Animations/r_bow_grip.anm",
+            "Data/Animations/r_bow_sheathe.anm",
+            "Data/Animations/r_bow_sheathed.anm",
+            "Data/Animations/r_draw_bow.anm",
+            "Data/Animations/r_draw_bow_askew.anm",
+            "Data/Animations/r_draw_bow_running.anm",
+            "Data/Animations/r_draw_bow_short.anm",
+            "Data/Animations/r_draw_bow_sideways.anm",
+            "Data/Animations/r_draw_bow_stance.anm",
+            "Data/Animations/r_draw_bow_stance_aim_down.anm",
+            "Data/Animations/r_draw_bow_stance_aim_up.anm"
+        ]
+    },
+    "Haunted Canyon": {
+        "Number of animations": 14,
+        "Mod ID": "const-halloweenjameighteen",
+        "Animations": [
+            "Data/Animations/r_const_ghost_g1.anm",
+            "Data/Animations/r_const_ghost_g2.anm",
+            "Data/Animations/r_const_ghost_g3.anm",
+            "Data/Animations/r_const_ghost_name.anm",
+            "Data/Animations/r_const_ghost_sword.anm",
+            "Data/Animations/r_const_ghost_w1.anm",
+            "Data/Animations/r_const_ghost_w2.anm",
+            "Data/Animations/r_const_ghost_w3.anm",
+            "Data/Animations/r_const_ghost_w4.anm",
+            "Data/Animations/r_const_ghost_w5.anm",
+            "Data/Animations/r_const_ghost_w6.anm",
+            "Data/Animations/r_const_ledgeclimb_turner.anm",
+            "Data/Animations/r_const_turnerfromsit.anm",
+            "Data/Animations/r_halloweenpray.anm"
+        ]
+    },
+    "New Animations": {
+        "Number of animations": 7,
+        "Mod ID": "animations",
+        "Animations": [
+            "Data/Animations/Assassincrouch1.anm",
+            "Data/Animations/Assassincrouch2.anm",
+            "Data/Animations/r_ledge_barely_reach.anm",
+            "Data/Animations/r_ledge_climb_fast.anm",
+            "Data/Animations/r_standfromback2.anm",
+            "Data/Animations/r_standfromfront.anm",
+            "Data/Animations/totallysecretanimation.anm"
+        ]
+    },
+    "Drika's Story": {
+        "Number of animations": 25,
+        "Mod ID": "const-marchtwentyeighteen",
+        "Animations": [
+            "Data/Animations/const_freefallarm.anm",
+            "Data/Animations/const_freefallbreath.anm",
+            "Data/Animations/const_freefallstart.anm",
+            "Data/Animations/const_freefallstep.anm",
+            "Data/Animations/dialogue_sitting_sad.anm",
+            "Data/Animations/drika_fromsit.anm",
+            "Data/Animations/folti_bow.anm",
+            "Data/Animations/folti_fromdrink.anm",
+            "Data/Animations/folti_fromsit.anm",
+            "Data/Animations/folti_hand.anm",
+            "Data/Animations/folti_idle.anm",
+            "Data/Animations/folti_oneleg.anm",
+            "Data/Animations/folti_onelegdrink.anm",
+            "Data/Animations/folti_raise.anm",
+            "Data/Animations/folti_rapieridle.anm",
+            "Data/Animations/folti_read.anm",
+            "Data/Animations/folti_spit.anm",
+            "Data/Animations/folti_tosit.anm",
+            "Data/Animations/folti_tospit.anm",
+            "Data/Animations/gabber.anm",
+            "Data/Animations/joker_hand.anm",
+            "Data/Animations/joker_idle.anm",
+            "Data/Animations/joker_laugh.anm",
+            "Data/Animations/joker_offer.anm",
+            "Data/Animations/joker_offerback.anm"
         ]
     },
     "Dismemeberment": {
@@ -722,6 +898,13 @@
             "Data/Animations/r_twinkicklow.anm",
             "Data/Animations/r_walk_3.anm",
             "Data/Animations/r_writhe.anm"
+        ]
+    },
+    "Animalrun": {
+        "Number of animations": 1,
+        "Mod ID": "animalrun-edo",
+        "Animations": [
+            "Data/Animations/animalrun.anm"
         ]
     },
     "Bow and Arrow Mod": {
@@ -795,103 +978,11 @@
             "Data/Animations/HalzoidDialogueposes_Downloadformorelikethis.anm"
         ]
     },
-    "Animalrun": {
-        "Number of animations": 1,
-        "Mod ID": "animalrun-edo",
-        "Animations": [
-            "Data/Animations/animalrun.anm"
-        ]
-    },
-    "Drika's Story": {
-        "Number of animations": 25,
-        "Mod ID": "const-marchtwentyeighteen",
-        "Animations": [
-            "Data/Animations/const_freefallarm.anm",
-            "Data/Animations/const_freefallbreath.anm",
-            "Data/Animations/const_freefallstart.anm",
-            "Data/Animations/const_freefallstep.anm",
-            "Data/Animations/dialogue_sitting_sad.anm",
-            "Data/Animations/drika_fromsit.anm",
-            "Data/Animations/folti_bow.anm",
-            "Data/Animations/folti_fromdrink.anm",
-            "Data/Animations/folti_fromsit.anm",
-            "Data/Animations/folti_hand.anm",
-            "Data/Animations/folti_idle.anm",
-            "Data/Animations/folti_oneleg.anm",
-            "Data/Animations/folti_onelegdrink.anm",
-            "Data/Animations/folti_raise.anm",
-            "Data/Animations/folti_rapieridle.anm",
-            "Data/Animations/folti_read.anm",
-            "Data/Animations/folti_spit.anm",
-            "Data/Animations/folti_tosit.anm",
-            "Data/Animations/folti_tospit.anm",
-            "Data/Animations/gabber.anm",
-            "Data/Animations/joker_hand.anm",
-            "Data/Animations/joker_idle.anm",
-            "Data/Animations/joker_laugh.anm",
-            "Data/Animations/joker_offer.anm",
-            "Data/Animations/joker_offerback.anm"
-        ]
-    },
     "LMao Lugaru xDD": {
         "Number of animations": 1,
         "Mod ID": "xx-lugaru-xxx",
         "Animations": [
             "Data/XMLStuff/ADDAKS/dabattack.anm"
-        ]
-    },
-    "Improved Gyrth's Bow and Arrow Mod": {
-        "Number of animations": 28,
-        "Mod ID": "updated-bow-and-arrow",
-        "Animations": [
-            "Data/Animations/r_arrow_crouch_move_threat.anm",
-            "Data/Animations/bow_and_arrow_aim_neutral.anm",
-            "Data/Animations/quiver_sheathed.anm",
-            "Data/Animations/r_arrow_crouch_idle.anm",
-            "Data/Animations/r_arrow_crouch_idle_threat.anm",
-            "Data/Animations/r_arrow_crouch_move.anm",
-            "Data/Animations/r_arrow_grip.anm",
-            "Data/Animations/r_arrow_idle_stand.anm",
-            "Data/Animations/r_arrow_idle_stand_threat.anm",
-            "Data/Animations/r_arrow_idle_stand_threat_close.anm",
-            "Data/Animations/r_arrow_run.anm",
-            "Data/Animations/r_arrow_sheathe.anm",
-            "Data/Animations/r_arrow_sheathed.anm",
-            "Data/Animations/r_arrow_sheathe_sameside.anm",
-            "Data/Animations/r_arrow_stand_idle.anm",
-            "Data/Animations/r_arrow_unsheathe.anm",
-            "Data/Animations/r_arrow_unsheathe_sameside.anm",
-            "Data/Animations/r_bow_grip.anm",
-            "Data/Animations/r_bow_sheathe.anm",
-            "Data/Animations/r_bow_sheathed.anm",
-            "Data/Animations/r_draw_bow.anm",
-            "Data/Animations/r_draw_bow_askew.anm",
-            "Data/Animations/r_draw_bow_running.anm",
-            "Data/Animations/r_draw_bow_short.anm",
-            "Data/Animations/r_draw_bow_sideways.anm",
-            "Data/Animations/r_draw_bow_stance.anm",
-            "Data/Animations/r_draw_bow_stance_aim_down.anm",
-            "Data/Animations/r_draw_bow_stance_aim_up.anm"
-        ]
-    },
-    "Undergrowth": {
-        "Number of animations": 1,
-        "Mod ID": "undergrowth",
-        "Animations": [
-            "Data/Animations/deathclaw/r_animalrun.anm"
-        ]
-    },
-    "New Animations": {
-        "Number of animations": 7,
-        "Mod ID": "animations",
-        "Animations": [
-            "Data/Animations/Assassincrouch1.anm",
-            "Data/Animations/Assassincrouch2.anm",
-            "Data/Animations/r_ledge_barely_reach.anm",
-            "Data/Animations/r_ledge_climb_fast.anm",
-            "Data/Animations/r_standfromback2.anm",
-            "Data/Animations/r_standfromfront.anm",
-            "Data/Animations/totallysecretanimation.anm"
         ]
     }
 }

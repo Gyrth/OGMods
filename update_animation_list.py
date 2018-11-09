@@ -4,8 +4,8 @@ import json
 import xml.etree.ElementTree as etree
 from lxml import etree
 
-main_path = "/run/Hyperdisk/SteamLibraryLinux/steamapps/common/Overgrowth/"
-custom_animations_path = "/run/Hyperdisk/SteamLibraryLinux/steamapps/workshop/content/25000/"
+main_path = "/run/HyperDisk/SteamLibraryLinux/steamapps/common/Overgrowth/"
+custom_animations_path = "/run/HyperDisk/SteamLibraryLinux/steamapps/workshop/content/25000/"
 
 index = 0
 root_element = etree.Element('root')
