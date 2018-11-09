@@ -455,7 +455,8 @@ int GetPlayingProgress(){
 	if(new_line == current_line){
 		// Waiting for input to progress.
 		if(GetInputPressed(0, "mouse0")){
-			if(environment_state == in_game){
+			if(environment_state == in_game && current_line == int(comic_indexes.size() - 1)){
+				StorageSetInt32("progress_" + comic_path, 0);
 				CloseComic();
 				SetPaused(false);
 				return 0;
@@ -465,7 +466,7 @@ int GetPlayingProgress(){
 					play_direction = 1;
 				}else if(current_line == int(comic_indexes.size() - 1)){
 					StorageSetInt32("progress_" + comic_path, 0);
-					this_ui.SendCallback("back");
+					imGUI.receiveMessage(IMMessage("Back"));
 				}
 			}
 		}else if(GetInputPressed(0, "grab")){
@@ -629,7 +630,7 @@ void DrawGUI(){
 			ImGui_SameLine();
 			if(ImGui_Button("Yes")){
 				unsaved = false;
-				this_ui.SendCallback("back");
+				imGUI.receiveMessage(IMMessage("Back"));
 			}
 			ImGui_SameLine(0.0, 25.0);
 			if(ImGui_Button("No")){
