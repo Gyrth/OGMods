@@ -1,0 +1,17 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>drika-hotspot</Id>
+    <Name>Drika Hotspot</Name>
+    <Category>Item Pack</Category>
+    <Version>0.1.0</Version>
+    <Author>Gyrth McMulin</Author>
+    <Thumbnail>Data/Images/drika_hotspot_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/drika_hotspot_full.jpg</PreviewImage>
+    <Description>drika_hotspot.</Description>
+    <Tag>b5</Tag>
+    <Tag>scripting</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <NeedsRestart>false</NeedsRestart>
+    <Level title="Drika Hotspot Testing" thumbnail="Images/drika_hotspot_full.jpg">drika_hotspot_testing.xml</Level>
+	<Item category="Hotspots" title="Drika Hotspot" path="Data/Objects/drika_hotspot.xml" thumbnail="Data/Images/drika_hotspot_thumb.jpg" />
+</Mod>
