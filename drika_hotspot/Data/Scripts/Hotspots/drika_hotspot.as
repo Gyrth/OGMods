@@ -286,7 +286,9 @@ void DrawEditor(){
 		}
 		ImGui_End();
 		ImGui_PopStyleColor(17);
-		GetCurrentElement().DrawEditing();
+		if(drika_elements.size() > 0){
+			GetCurrentElement().DrawEditing();
+		}
 	}
 	if(reorded && !ImGui_IsMouseDragging(0)){
 		reorded = false;
@@ -307,7 +309,9 @@ void ReorderElements(){
 }
 
 void InsertElement(DrikaElement@ new_element){
-	GetCurrentElement().EditDone();
+	if(drika_elements.size() > 0){
+		GetCurrentElement().EditDone();
+	}
 	drika_elements.insertLast(new_element);
 	if(drika_indexes.size() < 1){
 		drika_indexes.insertAt(current_line, drika_elements.size() - 1);

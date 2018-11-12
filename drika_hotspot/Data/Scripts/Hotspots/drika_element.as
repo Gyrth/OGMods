@@ -43,7 +43,7 @@ class DrikaElement{
 	}
 
 	void CreatePlaceholder(){
-		placeholder_id = CreateObject("Data/Objects/vertex.xml", false);
+		placeholder_id = CreateObject("Data/Objects/drika_hotspot_cube.xml", false);
 		@placeholder = ReadObjectFromID(placeholder_id);
 		placeholder.SetSelectable(true);
 		placeholder.SetTranslatable(true);

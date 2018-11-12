@@ -40,7 +40,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="-0.630766" t1="-0.464899" t2="-0.449331" s0="1" s1="1" s2="1" q0="-0.147135" q1="0.106729" q2="-0.0159717" q3="-0.983212" euler_x="0.297091" euler_y="-0.216256" euler_z="0" id="1">
+    <CameraObject t0="-3.42846" t1="0.951201" t2="8.90499" s0="1" s1="1" s2="1" q0="0.187735" q1="0.422133" q2="-0.0898187" q3="0.882322" euler_x="0.419294" euler_y="0.892493" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="3.42549" t1="-3.42134" t2="2.37398" s0="6.46988" s1="1" s2="6.38524" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -122,7 +122,7 @@
             <parameters />
         </EnvObject>
     </ActorObject>
-    <EnvObject t0="4.22978" t1="-1.5415" t2="6.66536" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="4.23981" t1="-1.84797" t2="7.37965" s0="0.989014" s1="0.587103" s2="1.99515" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="4.92015" t1="-2.13485" t2="-1.02331" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
@@ -167,7 +167,20 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <EnvObject t0="-0.918588" t1="-1.04452" t2="-2.46463" s0="0.30352" s1="0.30352" s2="0.30352" q0="0" q1="0" q2="0.709906" q3="0.704297" euler_x="0" euler_y="0" euler_z="1.57873" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject t0="-0.953931" t1="-0.995977" t2="-2.41433" s0="0.30352" s1="0.30352" s2="0.30352" q0="0.0770607" q1="0.094198" q2="0.634554" q3="0.763237" euler_x="0.239719" euler_y="0.0460087" euler_z="1.39273" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="-0.0427046" t1="-0.873965" t2="9.78697" s0="0.18562" s1="0.18562" s2="0.18562" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Script Data" type="string" val="wait 1000&#x0A;create_particle 20 5 Data/Particles/blooddrop.xml 5 0,1,0.0975609, false&#x0A;go_to_line 0" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
+    <EnvObject t0="-1.88727" t1="-2.08102" t2="7.30327" s0="0.25" s1="0.25" s2="0.25" q0="0.645052" q1="0.305069" q2="-0.259769" q3="-0.650667" euler_x="-1.58915" euler_y="-0.0619067" euler_z="0.82275" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-2.12073" t1="-2.34754" t2="7.30584" s0="0.0265075" s1="0.454408" s2="0.0497455" q0="0.0180302" q1="0.0067848" q2="-0.352125" q3="0.935755" euler_x="0.0289789" euler_y="0.0253983" euler_z="-0.719452" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
 </ActorObjects>
@@ -179,4 +192,5 @@
     <SpawnerItem display_name="Dog Spear" path="Data/Items/DogWeapons/DogSpear.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/wspear.png" />
     <SpawnerItem display_name="Dog Spear" path="Data/Objects/Weapons/DogWeapons/DogSpear.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/DogSpear.png" />
     <SpawnerItem display_name="Dog Knife" path="Data/Objects/Weapons/DogWeapons/DogKnife.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/DogKnife.png" />
+    <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
 </RecentItems>
