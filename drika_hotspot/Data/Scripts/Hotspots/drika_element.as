@@ -7,7 +7,8 @@ enum drika_element_types { 	none,
 							drika_play_sound,
 							drika_go_to_line,
 							drika_on_character_enter,
-							drika_on_item_enter};
+							drika_on_item_enter,
+							drika_send_level_message};
 
 class DrikaElement{
 	drika_element_types drika_element_type = none;

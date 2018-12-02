@@ -8,6 +8,7 @@
 #include "hotspots/drika_go_to_line.as"
 #include "hotspots/drika_on_character_enter.as"
 #include "hotspots/drika_on_item_enter.as"
+#include "hotspots/drika_send_level_message.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -70,6 +71,8 @@ void InterpData(){
 			drika_elements.insertLast(DrikaOnCharacterEnter(atoi(line_elements[1]), line_elements[2]));
 		}else if(line_elements[0] == "on_item_enter"){
 			drika_elements.insertLast(DrikaOnItemEnter(atoi(line_elements[1]), line_elements[2]));
+		}else if(line_elements[0] == "send_level_message"){
+			drika_elements.insertLast(DrikaSendLevelMessage(line_elements[1]));
 		}else{
 			//Either an empty line or an unknown command is in the comic.
 			continue;
@@ -204,6 +207,10 @@ void DrawEditor(){
 				if(ImGui_MenuItem("On Item Enter")){
 					DrikaOnItemEnter new_on_item_enter();
 					InsertElement(@new_on_item_enter);
+				}
+				if(ImGui_MenuItem("Send Level Message")){
+					DrikaSendLevelMessage new_send_level_message();
+					InsertElement(@new_send_level_message);
 				}
 				ImGui_EndMenu();
 			}
