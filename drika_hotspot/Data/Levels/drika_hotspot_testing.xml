@@ -40,13 +40,13 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="-3.42846" t1="0.951201" t2="8.90499" s0="1" s1="1" s2="1" q0="0.187735" q1="0.422133" q2="-0.0898187" q3="0.882322" euler_x="0.419294" euler_y="0.892493" euler_z="0" id="1">
+    <CameraObject t0="17.8225" t1="-0.525293" t2="6.47813" s0="1" s1="1" s2="1" q0="-0.0636446" q1="0.933175" q2="-0.207094" q3="-0.286786" euler_x="-2.70482" euler_y="-0.596322" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
-    <EnvObject t0="3.42549" t1="-3.42134" t2="2.37398" s0="6.46988" s1="1" s2="6.38524" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="-1.23962" t1="-0.621201" t2="2.89905" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <ActorObject t0="6.85678" t1="-0.621201" t2="13.1113" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -177,10 +177,26 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <EnvObject t0="-1.88727" t1="-2.08102" t2="7.30327" s0="0.25" s1="0.25" s2="0.25" q0="0.645052" q1="0.305069" q2="-0.259769" q3="-0.650667" euler_x="-1.58915" euler_y="-0.0619067" euler_z="0.82275" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject t0="-1.88727" t1="-2.08102" t2="7.30327" s0="0.25" s1="0.25" s2="0.25" q0="0.645052" q1="0.305069" q2="-0.259769" q3="-0.650667" euler_x="-1.58915" euler_y="-0.0619072" euler_z="0.822751" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-2.12073" t1="-2.34754" t2="7.30584" s0="0.0265075" s1="0.454408" s2="0.0497455" q0="0.0180302" q1="0.0067848" q2="-0.352125" q3="0.935755" euler_x="0.0289789" euler_y="0.0253983" euler_z="-0.719452" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="-2.12073" t1="-2.34754" t2="7.30584" s0="0.0265075" s1="0.454408" s2="0.0497455" q0="0.0180302" q1="0.0067848" q2="-0.352125" q3="0.935755" euler_x="0.0289789" euler_y="0.0253983" euler_z="-0.719453" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="13.8909" t1="-0.612318" t2="10.2304" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="13.8909" t1="-0.612318" t2="10.2304" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Script Data" type="string" val="on_character_enter 3 turner&#x0A;create_particle 30 5 Data/Particles/breath_fog.xml 16 0,0.590476,0.0112471, false&#x0A;play_sound 24 Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line 0" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
+    <EnvObject t0="13.7892" t1="-2.74726" t2="10.1012" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="13.9512" t1="-2.25667" t2="9.91173" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0.729917" q3="0.683536" euler_x="0" euler_y="0" euler_z="1.6364" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
 </ActorObjects>

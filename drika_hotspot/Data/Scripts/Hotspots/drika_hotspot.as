@@ -6,6 +6,7 @@
 #include "hotspots/drika_create_particle.as"
 #include "hotspots/drika_play_sound.as"
 #include "hotspots/drika_go_to_line.as"
+#include "hotspots/drika_on_character_enter.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -64,6 +65,8 @@ void InterpData(){
 			drika_elements.insertLast(DrikaPlaySound(atoi(line_elements[1]), line_elements[2]));
 		}else if(line_elements[0] == "go_to_line"){
 			drika_elements.insertLast(DrikaGoToLine(atoi(line_elements[1])));
+		}else if(line_elements[0] == "on_character_enter"){
+			drika_elements.insertLast(DrikaOnCharacterEnter(atoi(line_elements[1]), line_elements[2]));
 		}else{
 			//Either an empty line or an unknown command is in the comic.
 			continue;
@@ -191,6 +194,10 @@ void DrawEditor(){
 				if(ImGui_MenuItem("Go To Line")){
 					DrikaGoToLine new_go_to_line();
 					InsertElement(@new_go_to_line);
+				}
+				if(ImGui_MenuItem("On Character Enter")){
+					DrikaOnCharacterEnter new_on_character_enter();
+					InsertElement(@new_on_character_enter);
 				}
 				ImGui_EndMenu();
 			}
@@ -339,6 +346,27 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		string message = token_iter.GetToken(msg);
 		GetCurrentElement().ReceiveMessage(message);
+	}
+}
+
+void HandleEvent(string event, MovementObject @mo){
+	if(event == "enter"){
+		if(!script_finished && drika_indexes.size() > 0){
+			GetCurrentElement().ReceiveMessage("CharacterEnter", mo.GetID());
+			ScriptParams@ char_params = ReadObjectFromID(mo.GetID()).GetScriptParams();
+			if(char_params.HasParam("Teams")) {
+    			string team = char_params.GetString("Teams");
+				GetCurrentElement().ReceiveMessage("CharacterEnter", team);
+			}
+		}
+	}
+}
+
+void HandleEventItem(string event, ItemObject @obj){
+	if(event == "enter"){
+		if(!script_finished && drika_indexes.size() > 0){
+			GetCurrentElement().ReceiveMessage("ItemEnter", obj.GetID());
+		}
 	}
 }
 

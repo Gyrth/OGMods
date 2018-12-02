@@ -5,7 +5,8 @@ enum drika_element_types { 	none,
 							drika_set_character,
 							drika_create_particle,
 							drika_play_sound,
-							drika_go_to_line};
+							drika_go_to_line,
+							drika_on_character_enter};
 
 class DrikaElement{
 	drika_element_types drika_element_type = none;
@@ -29,6 +30,8 @@ class DrikaElement{
 	void SetCurrent(bool _current){}
 	void Delete(){}
 	void ReceiveMessage(string message){}
+	void ReceiveMessage(string message, int param){}
+	void ReceiveMessage(string message, string param){}
 	void SetIndex(int _index){
 		index = _index;
 	}
