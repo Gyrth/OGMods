@@ -21,7 +21,6 @@ class DrikaWait : DrikaElement{
 	}
 	bool Trigger(){
 		if(timer <= 0.0){
-			Log(info, "timer  done");
 			Reset();
 			return true;
 		}else{

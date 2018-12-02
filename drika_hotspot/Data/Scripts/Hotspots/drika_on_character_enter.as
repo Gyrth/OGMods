@@ -1,11 +1,11 @@
-enum trigger_types {	check_id,
-						check_team};
+enum character_trigger_types {	check_id,
+								check_team};
 
 class DrikaOnCharacterEnter : DrikaElement{
 	string character_team;
 	int character_id;
 	int current_item = 0;
-	trigger_types trigger_type;
+	character_trigger_types trigger_type;
 	bool triggered = false;
 
 	DrikaOnCharacterEnter(int _character_id = 0, string _character_team = ""){
@@ -34,7 +34,7 @@ class DrikaOnCharacterEnter : DrikaElement{
 	}
 
 	void AddSettings(){
-		if(ImGui_Combo("Check for: ", current_item, {"Check ID", "Check Team"})){
+		if(ImGui_Combo("Check for", current_item, {"Check ID", "Check Team"})){
 			if(current_item == 0){
 				trigger_type = check_id;
 			}else{

@@ -7,6 +7,7 @@
 #include "hotspots/drika_play_sound.as"
 #include "hotspots/drika_go_to_line.as"
 #include "hotspots/drika_on_character_enter.as"
+#include "hotspots/drika_on_item_enter.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -67,6 +68,8 @@ void InterpData(){
 			drika_elements.insertLast(DrikaGoToLine(atoi(line_elements[1])));
 		}else if(line_elements[0] == "on_character_enter"){
 			drika_elements.insertLast(DrikaOnCharacterEnter(atoi(line_elements[1]), line_elements[2]));
+		}else if(line_elements[0] == "on_item_enter"){
+			drika_elements.insertLast(DrikaOnItemEnter(atoi(line_elements[1]), line_elements[2]));
 		}else{
 			//Either an empty line or an unknown command is in the comic.
 			continue;
@@ -96,7 +99,6 @@ void Update(){
 	}
 	if(!script_finished && drika_indexes.size() > 0 && !EditorModeActive()){
 		if(GetCurrentElement().Trigger()){
-			Log(info, "Go to next line");
 			if(current_line == int(drika_indexes.size() - 1)){
 				script_finished = true;
 			}else{
@@ -198,6 +200,10 @@ void DrawEditor(){
 				if(ImGui_MenuItem("On Character Enter")){
 					DrikaOnCharacterEnter new_on_character_enter();
 					InsertElement(@new_on_character_enter);
+				}
+				if(ImGui_MenuItem("On Item Enter")){
+					DrikaOnItemEnter new_on_item_enter();
+					InsertElement(@new_on_item_enter);
 				}
 				ImGui_EndMenu();
 			}
@@ -363,9 +369,11 @@ void HandleEvent(string event, MovementObject @mo){
 }
 
 void HandleEventItem(string event, ItemObject @obj){
+	Log(info, "on item work!");
 	if(event == "enter"){
 		if(!script_finished && drika_indexes.size() > 0){
 			GetCurrentElement().ReceiveMessage("ItemEnter", obj.GetID());
+			GetCurrentElement().ReceiveMessage("ItemEnter", obj.GetLabel());
 		}
 	}
 }
