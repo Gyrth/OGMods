@@ -70,7 +70,7 @@ void InterpData(){
 		}else if(line_elements[0] == "go_to_line"){
 			drika_elements.insertLast(DrikaGoToLine(atoi(line_elements[1])));
 		}else if(line_elements[0] == "on_character_enter"){
-			drika_elements.insertLast(DrikaOnCharacterEnter(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3]));
+			drika_elements.insertLast(DrikaOnCharacterEnter(atoi(line_elements[1]), line_elements[2]));
 		}else if(line_elements[0] == "on_item_enter"){
 			drika_elements.insertLast(DrikaOnItemEnter(atoi(line_elements[1]), line_elements[2]));
 		}else if(line_elements[0] == "send_level_message"){
