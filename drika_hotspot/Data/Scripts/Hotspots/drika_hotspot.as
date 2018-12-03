@@ -10,6 +10,7 @@
 #include "hotspots/drika_on_item_enter.as"
 #include "hotspots/drika_send_level_message.as"
 #include "hotspots/drika_start_dialogue.as"
+#include "hotspots/drika_set_object_param.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -76,6 +77,8 @@ void InterpData(){
 			drika_elements.insertLast(DrikaSendLevelMessage(line_elements[1]));
 		}else if(line_elements[0] == "start_dialogue"){
 			drika_elements.insertLast(DrikaStartDialogue(line_elements[1]));
+		}else if(line_elements[0] == "set_object_param"){
+			drika_elements.insertLast(DrikaSetObjectParam(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], line_elements[4], line_elements[5]));
 		}else{
 			//Either an empty line or an unknown command is in the comic.
 			continue;
@@ -218,6 +221,10 @@ void DrawEditor(){
 				if(ImGui_MenuItem("Start Dialogue")){
 					DrikaStartDialogue new_start_dialogue();
 					InsertElement(@new_start_dialogue);
+				}
+				if(ImGui_MenuItem("Set Object Parameter")){
+					DrikaSetObjectParam new_set_object_param();
+					InsertElement(@new_set_object_param);
 				}
 				ImGui_EndMenu();
 			}

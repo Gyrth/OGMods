@@ -40,7 +40,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="3.24128" t1="4.84089" t2="17.5124" s0="1" s1="1" s2="1" q0="0.222308" q1="0.553244" q2="-0.156185" q3="0.787468" euler_x="0.550294" euler_y="1.22488" euler_z="0" id="1">
+    <CameraObject t0="18.657" t1="1.08145" t2="15.8336" s0="1" s1="1" s2="1" q0="0.133222" q1="-0.83241" q2="0.227512" q3="0.487426" euler_x="-2.60799" euler_y="-1.05947" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -66,7 +66,7 @@
             <parameter name="Knockout Shield" type="int" val="0" />
             <parameter name="Left handed" type="int" val="0" />
             <parameter name="Movement Speed" type="float" val="1" />
-            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Muscle" type="float" val="0.322035" />
             <parameter name="Peripheral FOV distance" type="float" val="4" />
             <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
             <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
@@ -188,7 +188,7 @@
     </EnvObject>
     <Hotspot t0="13.8909" t1="-0.612318" t2="10.2304" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter 3 turner&#x0A;create_particle 30 5 Data/Particles/breath_fog.xml 16 0,0.590476,0.0112471, false&#x0A;play_sound 24 Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line 0" />
+            <parameter name="Script Data" type="string" val="on_character_enter 0 3 turner&#x0A;create_particle 30 5 Data/Particles/breath_fog.xml 16 0,0.590476,0.0112471, false&#x0A;play_sound 24 Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -199,9 +199,9 @@
     <EnvObject t0="13.9225" t1="-2.198" t2="10.0199" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0.729917" q3="0.683536" euler_x="0" euler_y="0" euler_z="1.6364" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="14.0898" t1="-2.31318" t2="18.5313" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="40" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot t0="14.0898" t1="-2.31318" t2="18.5313" s0="1" s1="1" s2="1" q0="-0.0110927" q1="0.0603472" q2="0.00696302" q3="0.998092" euler_x="-0.021461" euler_y="0.120913" euler_z="0.0126534" id="40" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter 0 turner&#x0A;create_particle 43 5 Data/Particles/blooddrop.xml 12 1,1,1, true&#x0A;send_level_message level_message&#x0A;drika_start_dialogue DrikaTest" />
+            <parameter name="Script Data" type="string" val="on_character_enter 1 0 turner&#x0A;create_particle 43 5 Data/Particles/blooddrop.xml 12 1,1,1, true&#x0A;set_object_param 72 2 Muscle 100.123 200.421" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -212,10 +212,10 @@
     <ItemObject t0="8.80698" t1="-2.32134" t2="18.4569" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="42" type_file="Data/Items/gear/dogtools/dogtoolhammer.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
-    <EnvObject t0="14.0898" t1="-0.977215" t2="18.4762" s0="0.25" s1="0.25" s2="0.25" q0="0.671292" q1="0.511547" q2="0.515335" q3="-0.148744" euler_x="2.48457" euler_y="-1.00481" euler_z="1.6726" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject t0="14.3257" t1="-0.940252" t2="19.1556" s0="0.25" s1="0.25" s2="0.25" q0="0.671292" q1="0.511547" q2="0.515335" q3="-0.148744" euler_x="2.48457" euler_y="-1.00481" euler_z="1.6726" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="14.096" t1="-1.61848" t2="21.6652" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="14.0548" t1="-1.6061" t2="22.0165" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
 </ActorObjects>

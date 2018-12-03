@@ -9,7 +9,8 @@ enum drika_element_types { 	none,
 							drika_on_character_enter,
 							drika_on_item_enter,
 							drika_send_level_message,
-							drika_start_dialogue};
+							drika_start_dialogue,
+							drika_set_object_param};
 
 class DrikaElement{
 	drika_element_types drika_element_type = none;
