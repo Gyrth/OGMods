@@ -11,9 +11,9 @@ class DrikaSetEnabled : DrikaElement{
 		has_settings = true;
 		if(ObjectExists(object_id)){
 			@object = ReadObjectFromID(object_id);
-		}
-		if(enabled == true){
-			object.SetCollisionEnabled(false);
+			if(enabled == true){
+				object.SetCollisionEnabled(false);
+			}
 		}
 		Reset();
 	}
