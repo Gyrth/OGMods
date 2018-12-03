@@ -1,7 +1,3 @@
-enum param_types { 	string_param = 0,
-					int_param = 1,
-					float_param = 2}
-
 class DrikaSetObjectParam : DrikaElement{
 	int object_id;
 	int current_type;

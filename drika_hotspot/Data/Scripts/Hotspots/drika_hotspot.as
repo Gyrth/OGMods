@@ -11,6 +11,7 @@
 #include "hotspots/drika_send_level_message.as"
 #include "hotspots/drika_start_dialogue.as"
 #include "hotspots/drika_set_object_param.as"
+#include "hotspots/drika_set_level_param.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -79,6 +80,8 @@ void InterpData(){
 			drika_elements.insertLast(DrikaStartDialogue(line_elements[1]));
 		}else if(line_elements[0] == "set_object_param"){
 			drika_elements.insertLast(DrikaSetObjectParam(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], line_elements[4], line_elements[5]));
+		}else if(line_elements[0] == "set_level_param"){
+			drika_elements.insertLast(DrikaSetLevelParam(atoi(line_elements[1]), line_elements[2], line_elements[3]));
 		}else{
 			//Either an empty line or an unknown command is in the comic.
 			continue;
@@ -210,10 +213,10 @@ void DrawEditor(){
 					DrikaOnCharacterEnter new_on_character_enter();
 					InsertElement(@new_on_character_enter);
 				}
-				if(ImGui_MenuItem("On Item Enter")){
+				/* if(ImGui_MenuItem("On Item Enter")){
 					DrikaOnItemEnter new_on_item_enter();
 					InsertElement(@new_on_item_enter);
-				}
+				} */
 				if(ImGui_MenuItem("Send Level Message")){
 					DrikaSendLevelMessage new_send_level_message();
 					InsertElement(@new_send_level_message);
@@ -225,6 +228,10 @@ void DrawEditor(){
 				if(ImGui_MenuItem("Set Object Parameter")){
 					DrikaSetObjectParam new_set_object_param();
 					InsertElement(@new_set_object_param);
+				}
+				if(ImGui_MenuItem("Set Level Parameter")){
+					DrikaSetLevelParam new_set_level_param();
+					InsertElement(@new_set_level_param);
 				}
 				ImGui_EndMenu();
 			}

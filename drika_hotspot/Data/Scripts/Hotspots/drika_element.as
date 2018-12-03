@@ -10,7 +10,8 @@ enum drika_element_types { 	none = 0,
 							drika_on_item_enter = 9,
 							drika_send_level_message = 10,
 							drika_start_dialogue = 11,
-							drika_set_object_param = 12};
+							drika_set_object_param = 12,
+							drika_set_level_param = 13};
 
 array<vec4> display_colors = {	vec4(1.0),
 								vec4(110, 94, 180, 255),
@@ -24,8 +25,14 @@ array<vec4> display_colors = {	vec4(1.0),
 								vec4(148, 69, 64, 255),
 								vec4(132, 150, 75, 255),
 								vec4(196, 145, 145, 255),
+								vec4(90, 154, 191, 255),
 								vec4(90, 154, 191, 255)
 								};
+
+enum param_types { 	string_param = 0,
+					int_param = 1,
+					float_param = 2,
+					vec3_param = 3}
 
 class DrikaElement{
 	drika_element_types drika_element_type = none;
