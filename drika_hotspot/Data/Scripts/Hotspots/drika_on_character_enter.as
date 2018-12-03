@@ -4,23 +4,29 @@ enum character_trigger_types {	check_id = 0,
 class DrikaOnCharacterEnter : DrikaElement{
 	string character_team;
 	int character_id;
-	int current_item;
+	int current_combo_item;
 	character_trigger_types trigger_type;
 	bool triggered = false;
 
-	DrikaOnCharacterEnter(int _trigger_type = 0, int _character_id = -1, string _character_team = ""){
-		character_id = _character_id;
-		character_team = _character_team;
+	DrikaOnCharacterEnter(int _trigger_type = 0, string _param = "-1"){
 		trigger_type = character_trigger_types(_trigger_type);
-		current_item = _trigger_type;
-
 		drika_element_type = drika_on_character_enter;
 
+		if(trigger_type == check_id){
+			character_id = atoi(_param);
+			current_combo_item = _trigger_type;
+		}else{
+			character_team = _param;
+		}
 		has_settings = true;
 	}
 
 	string GetSaveString(){
-		return "on_character_enter " + int(trigger_type) + " " + character_id + " " + character_team;
+		if(trigger_type == check_id){
+			return "on_character_enter " + int(trigger_type) + " " + character_id;
+		}else{
+			return "on_character_enter " + int(trigger_type) + " " + character_team;
+		}
 	}
 
 	string GetDisplayString(){
@@ -32,8 +38,8 @@ class DrikaOnCharacterEnter : DrikaElement{
 	}
 
 	void AddSettings(){
-		if(ImGui_Combo("Check for", current_item, {"Check ID", "Check Team"})){
-			trigger_type = character_trigger_types(current_item);
+		if(ImGui_Combo("Check for", current_combo_item, {"Check ID", "Check Team"})){
+			trigger_type = character_trigger_types(current_combo_item);
 		}
 		if(trigger_type == check_id){
 			ImGui_InputInt("ID", character_id);
