@@ -9,7 +9,7 @@ class DrikaStartDialogue : DrikaElement{
 	}
 
 	string GetSaveString(){
-		return "drika_start_dialogue " + dialogue_name;
+		return "start_dialogue " + dialogue_name;
 	}
 
 	string GetDisplayString(){

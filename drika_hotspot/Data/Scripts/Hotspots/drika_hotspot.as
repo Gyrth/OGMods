@@ -74,7 +74,7 @@ void InterpData(){
 			drika_elements.insertLast(DrikaOnItemEnter(atoi(line_elements[1]), line_elements[2]));
 		}else if(line_elements[0] == "send_level_message"){
 			drika_elements.insertLast(DrikaSendLevelMessage(line_elements[1]));
-		}else if(line_elements[0] == "drika_start_dialogue"){
+		}else if(line_elements[0] == "start_dialogue"){
 			drika_elements.insertLast(DrikaStartDialogue(line_elements[1]));
 		}else{
 			//Either an empty line or an unknown command is in the comic.
