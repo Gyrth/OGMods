@@ -13,6 +13,8 @@ class DrikaSetCharacter : DrikaElement{
 		has_settings = true;
 		if(MovementObjectExists(character_id)){
 			@character = ReadCharacterID(character_id);
+		}else{
+			Log(warning, "Character does not exist with id " + character_id);
 		}
 	}
 
@@ -41,8 +43,7 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	bool Trigger(){
-		if(!MovementObjectExists(character_id)){
-			Log(info, "Character does not exist with id " + character_id);
+		if(character_id == -1 || !MovementObjectExists(character_id)){
 			return false;
 		}
 		original_character_path = character.char_path;
