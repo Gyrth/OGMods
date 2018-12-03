@@ -13,7 +13,7 @@ class DrikaStartDialogue : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "DrikaStartDialogue " + dialogue_name;
+		return "StartDialogue " + dialogue_name;
 	}
 
 	void AddSettings(){
