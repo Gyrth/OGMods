@@ -44,7 +44,7 @@ class DrikaSetEnabled : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(ObjectExists(object_id)){
+		if(object_id != -1 && ObjectExists(object_id)){
 			DebugDrawLine(object.GetTranslation(), this_hotspot.GetTranslation(), vec3(1.0), _delete_on_update);
 		}
 	}

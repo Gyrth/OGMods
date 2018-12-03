@@ -56,7 +56,7 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(MovementObjectExists(character_id)){
+		if(character_id != -1 && MovementObjectExists(character_id)){
 			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(1.0), _delete_on_update);
 		}
 	}
