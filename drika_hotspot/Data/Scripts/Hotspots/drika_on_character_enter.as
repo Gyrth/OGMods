@@ -8,7 +8,7 @@ class DrikaOnCharacterEnter : DrikaElement{
 	character_trigger_types trigger_type;
 	bool triggered = false;
 
-	DrikaOnCharacterEnter(int _trigger_type = 0, int _character_id = 0, string _character_team = ""){
+	DrikaOnCharacterEnter(int _trigger_type = 0, int _character_id = -1, string _character_team = ""){
 		character_id = _character_id;
 		character_team = _character_team;
 		trigger_type = character_trigger_types(_trigger_type);

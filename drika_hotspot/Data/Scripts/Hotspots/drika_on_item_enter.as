@@ -8,7 +8,7 @@ class DrikaOnItemEnter : DrikaElement{
 	item_trigger_types trigger_type;
 	bool triggered = false;
 
-	DrikaOnItemEnter(int _item_id = 0, string _item_label = ""){
+	DrikaOnItemEnter(int _item_id = -1, string _item_label = ""){
 		item_id = _item_id;
 		item_label = _item_label;
 		drika_element_type = drika_on_item_enter;
