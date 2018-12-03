@@ -1,27 +1,32 @@
-enum item_trigger_types {	check_id,
-						check_label};
+enum item_trigger_types {	check_id = 0,
+							check_label = 1};
 
 class DrikaOnItemEnter : DrikaElement{
 	string item_label;
 	int item_id;
-	int current_item = 0;
+	int current_combo_item = 0;
 	item_trigger_types trigger_type;
 	bool triggered = false;
 
-	DrikaOnItemEnter(int _item_id = -1, string _item_label = ""){
-		item_id = _item_id;
-		item_label = _item_label;
+	DrikaOnItemEnter(int _trigger_type = 0, string _param = "-1"){
 		drika_element_type = drika_on_item_enter;
 		has_settings = true;
-		if(item_label == ""){
-			trigger_type = check_id;
+		trigger_type = item_trigger_types(_trigger_type);
+
+		if(trigger_type == check_id){
+			item_id = atoi(_param);
+			current_combo_item = _trigger_type;
 		}else{
-			trigger_type = check_label;
+			item_label = _param;
 		}
 	}
 
 	string GetSaveString(){
-		return "on_item_enter " + item_id + " " + item_label;
+		if(trigger_type == check_id){
+			return "on_item_enter " + int(trigger_type) + " " + item_id;
+		}else{
+			return "on_item_enter " + int(trigger_type) + " " + item_label;
+		}
 	}
 
 	string GetDisplayString(){
@@ -33,12 +38,8 @@ class DrikaOnItemEnter : DrikaElement{
 	}
 
 	void AddSettings(){
-		if(ImGui_Combo("Check for", current_item, {"Check ID", "Check Label"})){
-			if(current_item == 0){
-				trigger_type = check_id;
-			}else{
-				trigger_type = check_label;
-			}
+		if(ImGui_Combo("Check for", current_combo_item, {"Check ID", "Check Label"})){
+			trigger_type = item_trigger_types(current_combo_item);
 		}
 		if(trigger_type == check_id){
 			ImGui_InputInt("ID", item_id);
@@ -48,7 +49,6 @@ class DrikaOnItemEnter : DrikaElement{
 	}
 
 	void ReceiveMessage(string message, int param){
-		Log(info, "item enter " + message + param);
 		if(trigger_type == check_id && message == "ItemEnter"){
 			if(param == item_id){
 				triggered = true;
@@ -57,7 +57,6 @@ class DrikaOnItemEnter : DrikaElement{
 	}
 
 	void ReceiveMessage(string message, string param){
-		Log(info, "item enter " + message + param);
 		if(trigger_type == check_label && message == "ItemEnter"){
 			if(param == item_label){
 				triggered = true;
