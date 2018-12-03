@@ -25,7 +25,6 @@ class DrikaSetObjectParam : DrikaElement{
 		current_type = param_type;
 
 		drika_element_type = drika_set_object_param;
-		display_color = vec4(110, 94, 180, 255);
 		has_settings = true;
 
 		string_param_before = _param_before;

@@ -12,7 +12,6 @@ class DrikaOnItemEnter : DrikaElement{
 		item_id = _item_id;
 		item_label = _item_label;
 		drika_element_type = drika_on_item_enter;
-		display_color = vec4(110, 94, 180, 255);
 		has_settings = true;
 		if(item_label == ""){
 			trigger_type = check_id;

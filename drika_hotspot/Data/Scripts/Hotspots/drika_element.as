@@ -1,22 +1,36 @@
-enum drika_element_types { 	none,
-							drika_wait_level_message,
-							drika_wait,
-							drika_set_enabled,
-							drika_set_character,
-							drika_create_particle,
-							drika_play_sound,
-							drika_go_to_line,
-							drika_on_character_enter,
-							drika_on_item_enter,
-							drika_send_level_message,
-							drika_start_dialogue,
-							drika_set_object_param};
+enum drika_element_types { 	none = 0,
+							drika_wait_level_message = 1,
+							drika_wait = 2,
+							drika_set_enabled = 3,
+							drika_set_character = 4,
+							drika_create_particle = 5,
+							drika_play_sound = 6,
+							drika_go_to_line = 7,
+							drika_on_character_enter = 8,
+							drika_on_item_enter = 9,
+							drika_send_level_message = 10,
+							drika_start_dialogue = 11,
+							drika_set_object_param = 12};
+
+array<vec4> display_colors = {	vec4(1.0),
+								vec4(110, 94, 180, 255),
+								vec4(152, 113, 80, 255),
+								vec4(88, 122, 147, 255),
+								vec4(78, 136, 124, 255),
+								vec4(85, 131, 102, 255),
+								vec4(145, 99, 66, 255),
+								vec4(152, 113, 80, 255),
+								vec4(110, 94, 180, 255),
+								vec4(110, 94, 180, 255),
+								vec4(110, 94, 180, 255),
+								vec4(110, 94, 180, 255),
+								vec4(110, 94, 180, 255)
+								};
 
 class DrikaElement{
 	drika_element_types drika_element_type = none;
 	bool visible;
 	bool has_settings = false;
-	vec4 display_color = vec4(1.0);
 	int index = -1;
 	int placeholder_id;
 	Object@ placeholder;
@@ -47,6 +61,10 @@ class DrikaElement{
 	vec3 StringToVec3(string value){
 		array<string> values = value.split(",");
 		return vec3(atof(values[0]), atof(values[1]), atof(values[2]));
+	}
+
+	vec4 GetDisplayColor(){
+		return display_colors[drika_element_type];
 	}
 
 	void CreatePlaceholder(){

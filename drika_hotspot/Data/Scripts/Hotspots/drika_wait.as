@@ -5,7 +5,6 @@ class DrikaWait : DrikaElement{
 		duration = _duration;
 		timer = duration / 1000.0;
 		drika_element_type = drika_wait;
-		display_color = vec4(152, 113, 80, 255);
 		has_settings = true;
 	}
 	string GetSaveString(){

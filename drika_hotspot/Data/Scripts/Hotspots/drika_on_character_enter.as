@@ -16,7 +16,6 @@ class DrikaOnCharacterEnter : DrikaElement{
 
 		drika_element_type = drika_on_character_enter;
 
-		display_color = vec4(110, 94, 180, 255);
 		has_settings = true;
 	}
 

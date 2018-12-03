@@ -7,7 +7,6 @@ class DrikaSetEnabled : DrikaElement{
 		object_id = _object_id;
 		enabled = _enabled;
 		drika_element_type = drika_set_enabled;
-		display_color = vec4(88, 122, 147, 255);
 		has_settings = true;
 		if(ObjectExists(object_id)){
 			@object = ReadObjectFromID(object_id);

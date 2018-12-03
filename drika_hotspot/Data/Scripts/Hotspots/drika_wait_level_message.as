@@ -4,7 +4,6 @@ class DrikaWaitLevelMessage : DrikaElement{
 	DrikaWaitLevelMessage(string _message = "continue_drika_hotspot"){
 		message = _message;
 		drika_element_type = drika_wait_level_message;
-		display_color = vec4(110, 94, 180, 255);
 		has_settings = true;
 	}
 	string GetSaveString(){

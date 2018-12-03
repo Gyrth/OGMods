@@ -4,7 +4,6 @@ class DrikaStartDialogue : DrikaElement{
 	DrikaStartDialogue(string _dialogue_name = "drika_dialogue"){
 		dialogue_name = _dialogue_name;
 		drika_element_type = drika_start_dialogue;
-		display_color = vec4(110, 94, 180, 255);
 		has_settings = true;
 	}
 

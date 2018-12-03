@@ -278,7 +278,7 @@ void DrawEditor(){
 			for(int j = 0; j < initial_length; j++){
 				line_number += " ";
 			}
-			vec4 text_color = drika_elements[item_no].display_color;
+			vec4 text_color = drika_elements[item_no].GetDisplayColor();
 			text_color.x /= 255;
 			text_color.y /= 255;
 			text_color.z /= 255;
@@ -347,12 +347,15 @@ void InsertElement(DrikaElement@ new_element){
 		GetCurrentElement().EditDone();
 	}
 	drika_elements.insertLast(new_element);
+	//There are no functions in the list yet.
 	if(drika_indexes.size() < 1){
-		drika_indexes.insertAt(current_line, drika_elements.size() - 1);
-		display_index = drika_indexes[current_line];
+		drika_indexes.insertLast(drika_elements.size() - 1);
+		display_index = drika_indexes[0];
+	//Add a the new function to the next line and make that line the current one.
 	}else{
 		drika_indexes.insertAt(current_line + 1, drika_elements.size() - 1);
 		display_index = drika_indexes[current_line + 1];
+		current_line += 1;
 	}
 	ReorderElements();
 }

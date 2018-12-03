@@ -4,7 +4,6 @@ class DrikaGoToLine : DrikaElement{
 	DrikaGoToLine(int _line = 0){
 		line = _line;
 		drika_element_type = drika_go_to_line;
-		display_color = vec4(152, 113, 80, 255);
 		has_settings = true;
 	}
 	string GetSaveString(){

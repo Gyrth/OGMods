@@ -14,7 +14,6 @@ class DrikaCreateParticle : DrikaElement{
 		use_blood_tint = _use_blood_tint;
 
 		drika_element_type = drika_create_particle;
-		display_color = vec4(85, 131, 102, 255);
 		has_settings = true;
 
 		if(ObjectExists(placeholder_id)){

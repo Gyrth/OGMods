@@ -6,7 +6,6 @@ class DrikaSendLevelMessage : DrikaElement{
 		message = _message;
 		SetDisplayMessage();
 		drika_element_type = drika_send_level_message;
-		display_color = vec4(110, 94, 180, 255);
 		has_settings = true;
 	}
 

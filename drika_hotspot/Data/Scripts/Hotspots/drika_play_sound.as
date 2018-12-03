@@ -5,7 +5,6 @@ class DrikaPlaySound : DrikaElement{
 		placeholder_id = _placeholder_id;
 		sound_path = _sound_path;
 		drika_element_type = drika_play_sound;
-		display_color = vec4(145, 99, 66, 255);
 		has_settings = true;
 
 		if(ObjectExists(placeholder_id)){

@@ -10,7 +10,6 @@ class DrikaSetCharacter : DrikaElement{
 		character_id = _character_id;
 		character_path = _character_path;
 		drika_element_type = drika_set_character;
-		display_color = vec4(78, 136, 124, 255);
 		has_settings = true;
 		if(MovementObjectExists(character_id)){
 			@character = ReadCharacterID(character_id);
