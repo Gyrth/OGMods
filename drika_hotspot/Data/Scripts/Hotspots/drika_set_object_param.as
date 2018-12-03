@@ -80,8 +80,7 @@ class DrikaSetObjectParam : DrikaElement{
 			ImGui_InputInt("After", int_param_after);
 		}else{
 			ImGui_SliderFloat("Before", float_param_before, -1000.0f, 1000.0f, "%.4f");
-			/* ImGui_InputFloat("Before", float_param_before); */
-			ImGui_InputFloat("After", float_param_after);
+			ImGui_SliderFloat("After", float_param_after, -1000.0f, 1000.0f, "%.4f");
 		}
 	}
 
