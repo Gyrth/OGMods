@@ -35,7 +35,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		if(character_trigger_type == check_id){
 			return "on_character_enter_exit " + int(character_trigger_type) + " " + character_id + " " + int(hotspot_trigger_type);
 		}else{
-			return "on_character_enter " + int(character_trigger_type) + " " + character_team + " " + int(hotspot_trigger_type);
+			return "on_character_enter_exit " + int(character_trigger_type) + " " + character_team + " " + int(hotspot_trigger_type);
 		}
 	}
 
