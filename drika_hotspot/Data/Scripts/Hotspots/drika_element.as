@@ -62,7 +62,7 @@ class DrikaElement{
 	}
 
 	string Vec3ToString(vec3 value){
-		return value.x + "," + value.y + "," + value.z + ",";
+		return value.x + "," + value.y + "," + value.z;
 	}
 
 	vec3 StringToVec3(string value){
