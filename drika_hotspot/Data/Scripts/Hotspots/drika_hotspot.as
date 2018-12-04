@@ -6,7 +6,7 @@
 #include "hotspots/drika_create_particle.as"
 #include "hotspots/drika_play_sound.as"
 #include "hotspots/drika_go_to_line.as"
-#include "hotspots/drika_on_character_enter.as"
+#include "hotspots/drika_on_character_enter_exit.as"
 #include "hotspots/drika_on_item_enter.as"
 #include "hotspots/drika_send_level_message.as"
 #include "hotspots/drika_start_dialogue.as"
@@ -70,8 +70,8 @@ void InterpData(){
 			drika_elements.insertLast(DrikaPlaySound(atoi(line_elements[1]), line_elements[2]));
 		}else if(line_elements[0] == "go_to_line"){
 			drika_elements.insertLast(DrikaGoToLine(atoi(line_elements[1])));
-		}else if(line_elements[0] == "on_character_enter"){
-			drika_elements.insertLast(DrikaOnCharacterEnter(atoi(line_elements[1]), line_elements[2]));
+		}else if(line_elements[0] == "on_character_enter_exit"){
+			drika_elements.insertLast(DrikaOnCharacterEnterExit(atoi(line_elements[1]), line_elements[2], atoi(line_elements[3])));
 		}else if(line_elements[0] == "on_item_enter"){
 			drika_elements.insertLast(DrikaOnItemEnter(atoi(line_elements[1]), line_elements[2]));
 		}else if(line_elements[0] == "send_level_message"){
@@ -210,9 +210,9 @@ void DrawEditor(){
 					DrikaGoToLine new_go_to_line();
 					InsertElement(@new_go_to_line);
 				}
-				if(ImGui_MenuItem("On Character Enter")){
-					DrikaOnCharacterEnter new_on_character_enter();
-					InsertElement(@new_on_character_enter);
+				if(ImGui_MenuItem("On Character Enter Exit")){
+					DrikaOnCharacterEnterExit new_on_character_enter_exit();
+					InsertElement(@new_on_character_enter_exit);
 				}
 				/* if(ImGui_MenuItem("On Item Enter")){
 					DrikaOnItemEnter new_on_item_enter();
@@ -388,14 +388,13 @@ void ReceiveMessage(string msg){
 }
 
 void HandleEvent(string event, MovementObject @mo){
-	if(event == "enter"){
-		if(!script_finished && drika_indexes.size() > 0){
-			GetCurrentElement().ReceiveMessage("CharacterEnter", mo.GetID());
-			ScriptParams@ char_params = ReadObjectFromID(mo.GetID()).GetScriptParams();
-			if(char_params.HasParam("Teams")) {
-    			string team = char_params.GetString("Teams");
-				GetCurrentElement().ReceiveMessage("CharacterEnter", team);
-			}
+	bool on_enter = (event == "enter");
+	if(!script_finished && drika_indexes.size() > 0){
+		GetCurrentElement().ReceiveMessage(on_enter?"CharacterEnter":"CharacterExit", mo.GetID());
+		ScriptParams@ char_params = ReadObjectFromID(mo.GetID()).GetScriptParams();
+		if(char_params.HasParam("Teams")) {
+			string team = char_params.GetString("Teams");
+			GetCurrentElement().ReceiveMessage(on_enter?"CharacterEnter":"CharacterExit", team);
 		}
 	}
 }

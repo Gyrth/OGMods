@@ -41,7 +41,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="20.1711" t1="3.7359" t2="-10.8107" s0="1" s1="1" s2="1" q0="0.270048" q1="0.649771" q2="-0.266378" q3="0.658722" euler_x="0.778114" euler_y="1.55712" euler_z="-8.71342e-06" id="1">
+    <CameraObject t0="20.0889" t1="0.667027" t2="10.5129" s0="1" s1="1" s2="1" q0="0.114212" q1="-0.656733" q2="0.101571" q3="0.738472" euler_x="0.306891" euler_y="-1.45376" euler_z="-1.02089e-06" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -186,7 +186,7 @@
     </EnvObject>
     <Hotspot t0="-6.38881" t1="0.700009" t2="26.5142" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="set_character -1 Data/Characters/guard.xml&#x0A;set_enabled -1 true&#x0A;wait_level_message continue_drika_hotspot&#x0A;wait 1000&#x0A;create_particle 23 5 Data/Particles/blooddrop.xml 0 1,1,1 true&#x0A;play_sound 25 Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line 0&#x0A;on_character_enter 0 -1&#x0A;on_item_enter -1 &#x0A;send_level_message level_message&#x0A;start_dialogue drika_dialogue&#x0A;set_object_param -1 0 drika_param drika_value_before drika_value_after&#x0A;set_level_param 13 0,0,0 0,0,0" />
+            <parameter name="Script Data" type="string" val="set_character -1 Data/Characters/guard.xml&#x0A;set_enabled -1 true&#x0A;wait_level_message continue_drika_hotspot&#x0A;wait 1000&#x0A;create_particle 23 5 Data/Particles/blooddrop.xml 0 1,1,1 true&#x0A;play_sound 25 Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line 0&#x0A;on_character_enter_exit 0 -1 0&#x0A;on_item_enter -1 &#x0A;send_level_message level_message&#x0A;start_dialogue drika_dialogue&#x0A;set_object_param -1 0 drika_param drika_value_before drika_value_after&#x0A;set_level_param 13 0,0,0 0,0,0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -208,7 +208,7 @@
     </EnvObject>
     <Hotspot t0="13.8909" t1="-0.612318" t2="10.2304" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter 0 3&#x0A;create_particle 30 5 Data/Particles/breath_fog.xml 16 0,0.590476,0.0112471 false&#x0A;play_sound 24 Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line 0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 0 3 1&#x0A;create_particle 30 5 Data/Particles/breath_fog.xml 16 0,0.590476,0.0112471 false&#x0A;play_sound 24 Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -221,14 +221,14 @@
     </EnvObject>
     <Hotspot t0="25.838" t1="-2.31318" t2="-5.48664" s0="0.511278" s1="0.511278" s2="0.511278" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter 1 turner&#x0A;set_level_param 1  #RAINY&#x0A;go_to_line 0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 1  #RAINY&#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <Hotspot t0="25.7493" t1="-2.31318" t2="-1.03694" s0="0.511278" s1="0.511278" s2="0.511278" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="32" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot t0="25.7493" t1="-2.03099" t2="-0.955613" s0="0.511278" s1="0.511278" s2="0.511278" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="32" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter 1 turner&#x0A;set_level_param 1  &#x0A;go_to_line 0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 1  &#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -238,7 +238,7 @@
     </EnvObject>
     <Hotspot t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter 1 turner&#x0A;set_level_param 13 1,1,1 0,0.125017,1&#x0A;go_to_line 0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 13 1,1,1 0,0.125017,1&#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -248,7 +248,7 @@
     </EnvObject>
     <Hotspot t0="14.0898" t1="-2.31318" t2="18.5313" s0="1" s1="1" s2="1" q0="-0.0110927" q1="0.0603472" q2="0.00696302" q3="0.998092" euler_x="-0.021461" euler_y="0.120913" euler_z="0.0126534" id="40" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter 1 turner&#x0A;create_particle 43 5 Data/Particles/blooddrop.xml 12 1,1,1 true&#x0A;create_particle 39 5 Data/Particles/blooddrop.xml 5 1,1,1 true&#x0A;create_particle 44 5 Data/Particles/blooddrop.xml 5 1,1,1 true&#x0A;create_particle 45 5 Data/Particles/blooddrop.xml 5 1,1,1 true" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;create_particle 43 5 Data/Particles/blooddrop.xml 12 1,1,1 true&#x0A;create_particle 39 5 Data/Particles/blooddrop.xml 5 1,1,1 true&#x0A;create_particle 44 5 Data/Particles/blooddrop.xml 5 1,1,1 true&#x0A;create_particle 45 5 Data/Particles/blooddrop.xml 5 1,1,1 true" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -278,7 +278,7 @@
     </EnvObject>
     <Hotspot t0="26.3758" t1="-2.31318" t2="-13.6989" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="126" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter 1 turner&#x0A;set_level_param 15 0.987429,0.997067,1 1,0,0&#x0A;go_to_line 0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 15 0.987429,0.997067,1 1,0,0&#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
