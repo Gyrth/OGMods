@@ -41,7 +41,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="19.8963" t1="3.72958" t2="-3.34765" s0="1" s1="1" s2="1" q0="0.264156" q1="0.66402" q2="-0.272216" q3="0.644359" euler_x="-2.36349" euler_y="1.54075" euler_z="3.14159" id="1">
+    <CameraObject t0="20.1711" t1="3.7359" t2="-10.8107" s0="1" s1="1" s2="1" q0="0.270048" q1="0.649771" q2="-0.266378" q3="0.658722" euler_x="0.778114" euler_y="1.55712" euler_z="-8.71342e-06" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -278,7 +278,7 @@
     </EnvObject>
     <Hotspot t0="26.3758" t1="-2.31318" t2="-13.6989" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="126" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter 1 turner&#x0A;set_level_param 13 1,1,1 0.99999,0.999991,1&#x0A;go_to_line 0" />
+            <parameter name="Script Data" type="string" val="on_character_enter 1 turner&#x0A;set_level_param 15 0.987429,0.997067,1 1,0,0&#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />

@@ -32,7 +32,8 @@ array<vec4> display_colors = {	vec4(1.0),
 enum param_types { 	string_param = 0,
 					int_param = 1,
 					float_param = 2,
-					vec3_param = 3}
+					vec3_param = 3,
+					vec3color_param = 4}
 
 class DrikaElement{
 	drika_element_types drika_element_type = none;
