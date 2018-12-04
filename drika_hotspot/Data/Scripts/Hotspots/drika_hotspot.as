@@ -46,7 +46,6 @@ void SetParameters(){
 
 void InterpData(){
 	array<string> lines = params.GetString("Script Data").split("\n");
-	Log(info, "Data " + params.GetString("Script Data"));
 
 	for(uint index = 0; index < lines.size(); index++){
 		array<string> line_elements = lines[index].split(" ");
@@ -83,11 +82,14 @@ void InterpData(){
 		}else if(line_elements[0] == "set_level_param"){
 			drika_elements.insertLast(DrikaSetLevelParam(atoi(line_elements[1]), line_elements[2], line_elements[3]));
 		}else{
+			Log(warning, "Unknown command found: " + line_elements[0]);
 			//Either an empty line or an unknown command is in the comic.
 			continue;
 		}
 		drika_indexes.insertLast(index);
 	}
+	Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID());
+
 	ReorderElements();
 }
 
