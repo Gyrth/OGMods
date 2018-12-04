@@ -105,6 +105,7 @@ void Update(){
 	}
 
 	if(EditorModeActive()){
+		DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(1.0), _delete_on_update);
 		if(this_hotspot.IsSelected() && GetInputPressed(0, "u")){
 			editor_open = true;
 		}
