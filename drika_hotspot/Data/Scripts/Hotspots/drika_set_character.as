@@ -46,11 +46,13 @@ class DrikaSetCharacter : DrikaElement{
 		if(character_id == -1 || !MovementObjectExists(character_id)){
 			return false;
 		}
+		if(triggered){
+			return true;
+		}
 		original_character_path = character.char_path;
 		character.char_path = character_path;
 		character.Execute(	"character_getter.Load(this_mo.char_path);" +
 							"this_mo.RecreateRiggedObject(this_mo.char_path);");
-		Log(info, "Done setting character ");
 		triggered = true;
 		return true;
 	}
