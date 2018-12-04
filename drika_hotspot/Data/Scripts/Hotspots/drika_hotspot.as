@@ -78,9 +78,9 @@ void InterpData(){
 		}else if(line_elements[0] == "start_dialogue"){
 			drika_elements.insertLast(DrikaStartDialogue(line_elements[1]));
 		}else if(line_elements[0] == "set_object_param"){
-			drika_elements.insertLast(DrikaSetObjectParam(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], line_elements[4], line_elements[5]));
+			drika_elements.insertLast(DrikaSetObjectParam(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], line_elements[4]));
 		}else if(line_elements[0] == "set_level_param"){
-			drika_elements.insertLast(DrikaSetLevelParam(atoi(line_elements[1]), line_elements[2], line_elements[3]));
+			drika_elements.insertLast(DrikaSetLevelParam(atoi(line_elements[1]), line_elements[2]));
 		}else{
 			Log(warning, "Unknown command found: " + line_elements[0]);
 			//Either an empty line or an unknown command is in the comic.

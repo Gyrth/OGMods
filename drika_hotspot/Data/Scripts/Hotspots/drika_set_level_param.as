@@ -47,11 +47,10 @@ array<string> param_names = {	"Achievements",
 class DrikaSetLevelParam : DrikaElement{
 	int current_type;
 	string param_name;
+	bool has_function = false;
 
 	string string_param_before;
 	string string_param_after;
-
-	bool has_function = false;
 
 	float float_param_before;
 	float float_param_after;
@@ -65,7 +64,7 @@ class DrikaSetLevelParam : DrikaElement{
 	level_params level_param;
 	param_types param_type;
 
-	DrikaSetLevelParam(int _level_param = 0, string _param_before = "flawless", string _param_after = "no_kills"){
+	DrikaSetLevelParam(int _level_param = 0, string _param_after = "no_kills"){
 
 		level_param = level_params(_level_param);
 		current_type = level_param;
@@ -73,11 +72,13 @@ class DrikaSetLevelParam : DrikaElement{
 		drika_element_type = drika_set_level_param;
 		has_settings = true;
 
-		string_param_before = _param_before;
 		string_param_after = _param_after;
+
+		Log(info, string_param_after);
 
 		SetParamType();
 		InterpParam();
+		GetBeforeParam();
 		param_name = param_names[current_type];
 	}
 
@@ -102,29 +103,23 @@ class DrikaSetLevelParam : DrikaElement{
 
 	void InterpParam(){
 		if(param_type == vec3_param || param_type == vec3color_param){
-			vec3_param_before = StringToVec3(string_param_before);
 			vec3_param_after = StringToVec3(string_param_after);
 		}else if(param_type == float_param){
-			float_param_before = atof(string_param_before);
 			float_param_after = atof(string_param_after);
 		}else if(param_type == int_param){
-			int_param_before = atoi(string_param_before);
 			int_param_after = atoi(string_param_after);
 		}
 	}
 
 	string GetSaveString(){
 		if(param_type == vec3_param || param_type == vec3color_param){
-			string_param_before = Vec3ToString(vec3_param_before);
 			string_param_after = Vec3ToString(vec3_param_after);
 		}else if(param_type == float_param){
-			string_param_before = "" + float_param_before;
 			string_param_after = "" + float_param_after;
 		}else if(param_type == int_param){
-			string_param_before = "" + int_param_before;
 			string_param_after = "" + int_param_after;
 		}
-		return "set_level_param " + int(level_param) + " " + string_param_before + " " + string_param_after;
+		return "set_level_param " + int(level_param) + " " + string_param_after;
 	}
 
 	string GetDisplayString(){
@@ -136,57 +131,45 @@ class DrikaSetLevelParam : DrikaElement{
 			level_param = level_params(current_type);
 			param_name = param_names[current_type];
 			SetParamType();
-			GetParameter();
+			GetBeforeParam();
 		}
 
 		if(param_type == string_param){
-			ImGui_InputText("Before", string_param_before, 64);
 			ImGui_InputText("After", string_param_after, 64);
 		}else if(param_type == float_param){
-			ImGui_SliderFloat("Before", float_param_before, -1000.0f, 1000.0f, "%.4f");
 			ImGui_SliderFloat("After", float_param_after, -1000.0f, 1000.0f, "%.4f");
 		}else if(param_type == vec3_param){
-			ImGui_InputFloat3("Before", vec3_param_before);
 			ImGui_InputFloat3("After", vec3_param_after);
 		}else if(param_type == vec3color_param){
-			ImGui_ColorPicker3("Before", vec3_param_before, 0);
 			ImGui_ColorPicker3("After", vec3_param_after, 0);
 		}else if(param_type == int_param){
-			ImGui_InputInt("Before", int_param_before);
 			ImGui_InputInt("After", int_param_after);
 		}
 	}
 
-	void GetParameter(){
+	void GetBeforeParam(){
 		if(has_function){
 			switch(level_param){
 				case sun_position:
 					vec3_param_before = GetSunPosition();
-					vec3_param_after = GetSunPosition();
 					break;
 				case sun_color:
 					vec3_param_before = GetSunColor();
-					vec3_param_after = GetSunColor();
 					break;
 				case sun_intensity:
 					float_param_before = GetSunAmbient();
-					float_param_after = GetSunAmbient();
 					break;
 				case sky_tint:
 					vec3_param_before = GetSkyTint();
-					vec3_param_after = GetSkyTint();
 					break;
 				case hdr_black_point:
 					float_param_before = GetHDRBlackPoint();
-					float_param_after = GetHDRBlackPoint();
 					break;
 				case hdr_bloom_multiplier:
 					float_param_before = GetHDRBloomMult();
-					float_param_after = GetHDRBloomMult();
 					break;
 				case hdr_white_point:
 					float_param_before = GetHDRWhitePoint();
-					float_param_after = GetHDRWhitePoint();
 					break;
 				default:
 					Log(warning, "Found a non standard parameter type. " + param_type);
@@ -199,19 +182,16 @@ class DrikaSetLevelParam : DrikaElement{
 					params.AddString(param_name, "");
 				}
 				string_param_before = params.GetString(param_name);
-				string_param_after = string_param_before;
 			}else if(param_type == float_param){
 				if(!params.HasParam(param_name)){
 					params.AddFloat(param_name, 0.0f);
 				}
 				float_param_before = params.GetFloat(param_name);
-				float_param_after = float_param_before;
 			}else if(param_type == float_param){
 				if(!params.HasParam(param_name)){
 					params.AddInt(param_name, 0);
 				}
 				int_param_before = params.GetInt(param_name);
-				int_param_after = int_param_before;
 			}
 		}
 	}
