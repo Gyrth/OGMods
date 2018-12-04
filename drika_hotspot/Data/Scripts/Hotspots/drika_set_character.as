@@ -27,17 +27,18 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	void AddSettings(){
+		if(ImGui_InputInt("Character ID", character_id)){
+			if(MovementObjectExists(character_id)){
+				@character = ReadCharacterID(character_id);
+			}
+		}
 		ImGui_Text("Set To Character : ");
+		ImGui_SameLine();
 		ImGui_Text(character_path);
 		if(ImGui_Button("Set Character File")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Characters");
 			if(new_path != ""){
 				character_path = new_path;
-			}
-		}
-		if(ImGui_InputInt("Character ID", character_id)){
-			if(MovementObjectExists(character_id)){
-				@character = ReadCharacterID(character_id);
 			}
 		}
 	}

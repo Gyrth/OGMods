@@ -25,10 +25,10 @@ class DrikaSetEnabled : DrikaElement{
 	}
 
 	void AddSettings(){
+		ImGui_InputInt("Object ID", object_id);
 		ImGui_Text("Set To : ");
 		ImGui_SameLine();
 		ImGui_Checkbox("", enabled);
-		ImGui_InputInt("Object ID", object_id);
 	}
 
 	bool Trigger(){
