@@ -8,7 +8,7 @@ class DrikaWait : DrikaElement{
 		has_settings = true;
 	}
 	string GetSaveString(){
-		return "wait " + duration;
+		return "wait" + param_delimiter + duration;
 	}
 
 	string GetDisplayString(){

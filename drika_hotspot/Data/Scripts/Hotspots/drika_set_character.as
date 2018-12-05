@@ -19,7 +19,7 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	string GetSaveString(){
-		return "set_character " + character_id + " " + character_path;
+		return "set_character" + param_delimiter + character_id + param_delimiter + character_path;
 	}
 
 	string GetDisplayString(){

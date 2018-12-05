@@ -26,7 +26,7 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	string GetSaveString(){
-		return "create_particle " + placeholder_id + " " + amount + " " + particle_path + " " + velocity + " " + Vec3ToString(tint) + " " + use_blood_tint;
+		return "create_particle" + param_delimiter + placeholder_id + param_delimiter + amount + param_delimiter + particle_path + param_delimiter + velocity + param_delimiter + Vec3ToString(tint) + param_delimiter + use_blood_tint;
 	}
 
 	string GetDisplayString(){

@@ -7,7 +7,7 @@ class DrikaGoToLine : DrikaElement{
 		has_settings = true;
 	}
 	string GetSaveString(){
-		return "go_to_line " + line;
+		return "go_to_line" + param_delimiter + line;
 	}
 
 	string GetDisplayString(){

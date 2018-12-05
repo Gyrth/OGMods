@@ -33,9 +33,9 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 	string GetSaveString(){
 		if(character_trigger_type == check_id){
-			return "on_character_enter_exit " + int(character_trigger_type) + " " + character_id + " " + int(hotspot_trigger_type);
+			return "on_character_enter_exit" + param_delimiter + int(character_trigger_type) + param_delimiter + character_id + param_delimiter + int(hotspot_trigger_type);
 		}else{
-			return "on_character_enter_exit " + int(character_trigger_type) + " " + character_team + " " + int(hotspot_trigger_type);
+			return "on_character_enter_exit" + param_delimiter + int(character_trigger_type) + param_delimiter + character_team + param_delimiter + int(hotspot_trigger_type);
 		}
 	}
 
@@ -62,6 +62,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	void ReceiveMessage(string message, int param){
+		Log(info, "Received " + message + " " + param);
 		if((character_trigger_type == check_id && hotspot_trigger_type == on_enter && message == "CharacterEnter") ||
 			(character_trigger_type == check_id && hotspot_trigger_type == on_exit && message == "CharacterExit")){
 			if(param == character_id){
@@ -81,6 +82,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 	bool Trigger(){
 		if(triggered){
+			Log(info, "Triggered on character enter exit");
 			triggered = false;
 			return true;
 		}else{

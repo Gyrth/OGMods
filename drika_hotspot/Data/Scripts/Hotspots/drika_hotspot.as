@@ -21,6 +21,8 @@ array<DrikaElement@> drika_elements;
 array<int> drika_indexes;
 bool post_init_done = false;
 Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
+string func_delimiter = "\n";
+string param_delimiter = "|";
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -60,10 +62,10 @@ void SetParameters(){
 }
 
 void InterpData(){
-	array<string> lines = params.GetString("Script Data").split("\n");
+	array<string> lines = params.GetString("Script Data").split(func_delimiter);
 
 	for(uint index = 0; index < lines.size(); index++){
-		array<string> line_elements = lines[index].split(" ");
+		array<string> line_elements = lines[index].split(param_delimiter);
 		if(line_elements[0] == ""){
 			continue;
 		}
@@ -283,7 +285,7 @@ void DrawEditor(){
 			}
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
-					array<string> line_elements = GetCurrentElement().GetSaveString().split(" ");
+					array<string> line_elements = GetCurrentElement().GetSaveString().split(param_delimiter);
 					InsertElement(InterpElement(line_elements));
 					ReorderElements();
 				}
@@ -414,13 +416,14 @@ void ReceiveMessage(string msg){
 }
 
 void HandleEvent(string event, MovementObject @mo){
-	bool on_enter = (event == "enter");
-	if(!script_finished && drika_indexes.size() > 0){
-		GetCurrentElement().ReceiveMessage(on_enter?"CharacterEnter":"CharacterExit", mo.GetID());
-		ScriptParams@ char_params = ReadObjectFromID(mo.GetID()).GetScriptParams();
-		if(char_params.HasParam("Teams")) {
-			string team = char_params.GetString("Teams");
-			GetCurrentElement().ReceiveMessage(on_enter?"CharacterEnter":"CharacterExit", team);
+	if(event == "enter" || event == "exit"){
+		if(!script_finished && drika_indexes.size() > 0){
+			GetCurrentElement().ReceiveMessage((event == "enter")?"CharacterEnter":"CharacterExit", mo.GetID());
+			ScriptParams@ char_params = ReadObjectFromID(mo.GetID()).GetScriptParams();
+			if(char_params.HasParam("Teams")) {
+				string team = char_params.GetString("Teams");
+				GetCurrentElement().ReceiveMessage((event == "enter")?"CharacterEnter":"CharacterExit", team);
+			}
 		}
 	}
 }
@@ -449,7 +452,7 @@ void Save(){
 	for(uint i = 0; i < drika_indexes.size(); i++){
 		data += drika_elements[drika_indexes[i]].GetSaveString();
 		if(i != drika_elements.size() - 1){
-			data += "\n";
+			data += func_delimiter;
 		}
 	}
 	params.SetString("Script Data", data);

@@ -10,7 +10,7 @@ class DrikaSendLevelMessage : DrikaElement{
 	}
 
 	string GetSaveString(){
-		return "send_level_message " + message;
+		return "send_level_message" + param_delimiter + message;
 	}
 
 	string GetDisplayString(){

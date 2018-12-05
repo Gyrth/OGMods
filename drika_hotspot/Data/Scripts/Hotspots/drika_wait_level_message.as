@@ -7,7 +7,7 @@ class DrikaWaitLevelMessage : DrikaElement{
 		has_settings = true;
 	}
 	string GetSaveString(){
-		return "wait_level_message " + message;
+		return "wait_level_message" + param_delimiter + message;
 	}
 
 	string GetDisplayString(){

@@ -23,9 +23,9 @@ class DrikaOnItemEnter : DrikaElement{
 
 	string GetSaveString(){
 		if(trigger_type == check_id){
-			return "on_item_enter " + int(trigger_type) + " " + item_id;
+			return "on_item_enter" + param_delimiter + int(trigger_type) + param_delimiter + item_id;
 		}else{
-			return "on_item_enter " + int(trigger_type) + " " + item_label;
+			return "on_item_enter" + param_delimiter + int(trigger_type) + param_delimiter + item_label;
 		}
 	}
 

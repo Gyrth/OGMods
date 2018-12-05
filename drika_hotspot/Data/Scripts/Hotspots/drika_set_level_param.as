@@ -50,7 +50,6 @@ class DrikaSetLevelParam : DrikaElement{
 	int current_type;
 	string param_name;
 	bool has_function = false;
-	string other_param_name;
 
 	string string_param_before;
 	string string_param_after;
@@ -75,12 +74,12 @@ class DrikaSetLevelParam : DrikaElement{
 		drika_element_type = drika_set_level_param;
 		has_settings = true;
 		SetParamType();
+		GetBeforeParam();
 
 		if(level_param == other){
 			array<string> split_param = _param_after.split(";");
 			if(split_param.size() == 2){
-				other_param_name = split_param[0];
-				param_name = other_param_name;
+				param_name = split_param[0];
 				string_param_after = split_param[1];
 			}
 		}else{
@@ -89,7 +88,6 @@ class DrikaSetLevelParam : DrikaElement{
 		}
 
 		InterpParam();
-		GetBeforeParam();
 	}
 
 	void SetParamType(){
@@ -123,8 +121,10 @@ class DrikaSetLevelParam : DrikaElement{
 
 	string GetSaveString(){
 		string save_string;
-		if(level_param == other){
-			save_string = other_param_name + ";" + string_param_after;
+		if(level_param == string_param){
+			save_string = string_param_after;
+		}else if(level_param == other){
+			save_string = param_name + ";" + string_param_after;
 		}else if(param_type == vec3_param || param_type == vec3color_param){
 			save_string = Vec3ToString(vec3_param_after);
 		}else if(param_type == float_param){
@@ -132,7 +132,7 @@ class DrikaSetLevelParam : DrikaElement{
 		}else if(param_type == int_param){
 			save_string = "" + int_param_after;
 		}
-		return "set_level_param " + int(level_param) + " " + save_string;
+		return "set_level_param" + param_delimiter + int(level_param) + param_delimiter + save_string;
 	}
 
 	string GetDisplayString(){
@@ -145,11 +145,23 @@ class DrikaSetLevelParam : DrikaElement{
 			param_name = param_names[current_type];
 			SetParamType();
 			GetBeforeParam();
+			if(param_type == string_param){
+				string_param_after = string_param_before;
+			}else if(param_type == float_param){
+				float_param_after = float_param_before;
+				string_param_after = "" + float_param_after;
+			}else if(param_type == int_param){
+				int_param_after = int_param_before;
+				string_param_after = "" + int_param_after;
+			}else if(param_type == vec3_param || param_type == vec3color_param){
+				vec3_param_after = vec3_param_before;
+				string_param_after = vec3_param_after.x + "," + vec3_param_after.y + "," + vec3_param_after.z;
+			}
 		}
 
 		if(param_type == string_param){
 			if(level_param == other){
-				ImGui_InputText("Param Name", other_param_name, 64);
+				ImGui_InputText("Param Name", param_name, 64);
 			}
 			ImGui_InputText("After", string_param_after, 64);
 		}else if(param_type == float_param){
@@ -195,17 +207,17 @@ class DrikaSetLevelParam : DrikaElement{
 			ScriptParams@ params = level.GetScriptParams();
 			if(param_type == string_param){
 				if(!params.HasParam(param_name)){
-					params.AddString(param_name, "");
+					params.AddString(param_name, string_param_after);
 				}
 				string_param_before = params.GetString(param_name);
 			}else if(param_type == float_param){
 				if(!params.HasParam(param_name)){
-					params.AddFloat(param_name, 0.0f);
+					params.AddFloat(param_name, float_param_after);
 				}
 				float_param_before = params.GetFloat(param_name);
-			}else if(param_type == float_param){
+			}else if(param_type == int_param){
 				if(!params.HasParam(param_name)){
-					params.AddInt(param_name, 0);
+					params.AddInt(param_name, int_param_after);
 				}
 				int_param_before = params.GetInt(param_name);
 			}

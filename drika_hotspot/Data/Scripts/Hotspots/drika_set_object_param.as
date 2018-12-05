@@ -69,7 +69,7 @@ class DrikaSetObjectParam : DrikaElement{
 		}else if(param_type == float_param){
 			string_param_after = "" + float_param_after;
 		}
-		return "set_object_param " + object_id + " " + int(param_type) + " " + param_name + " " + string_param_after;
+		return "set_object_param" + param_delimiter + object_id + param_delimiter + int(param_type) + param_delimiter + param_name + param_delimiter + string_param_after;
 	}
 
 	string GetDisplayString(){

@@ -17,7 +17,7 @@ class DrikaSetEnabled : DrikaElement{
 		Reset();
 	}
 	string GetSaveString(){
-		return "set_enabled " + object_id + " " + enabled;
+		return "set_enabled" + param_delimiter + object_id + param_delimiter + enabled;
 	}
 
 	string GetDisplayString(){
@@ -33,10 +33,9 @@ class DrikaSetEnabled : DrikaElement{
 
 	bool Trigger(){
 		if(!ObjectExists(object_id)){
-			Log(info, "Object does not exist with id " + object_id);
+			Log(warning, "Object does not exist with id " + object_id);
 			return false;
 		}else{
-			Log(info, "set " + object_id + " " + enabled);
 			object.SetEnabled(enabled);
 			return true;
 		}

@@ -17,7 +17,7 @@ class DrikaPlaySound : DrikaElement{
 	}
 
 	string GetSaveString(){
-		return "play_sound " + placeholder_id + " " + sound_path;
+		return "play_sound" + param_delimiter + placeholder_id + param_delimiter + sound_path;
 	}
 
 	string GetDisplayString(){
