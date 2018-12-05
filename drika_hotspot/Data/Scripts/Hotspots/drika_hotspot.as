@@ -31,9 +31,17 @@ vec4 item_clicked(0.1, 0.1, 0.1, 0.98);
 vec4 text_color(0.7, 0.7, 0.7, 1.0);
 
 TextureAssetRef delete_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Delete.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Copy.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
 void Init() {
     level.ReceiveLevelEvents(hotspot.GetID());
+
+	DrikaElement first_element();
+	first_element.index = 5;
+	DrikaElement second_element = first_element;
+	first_element.index = 1;
+	Log(info, "First : " + first_element.index);
+	Log(info, "Second : " + second_element.index);
 }
 
 void Dispose() {
@@ -49,48 +57,50 @@ void InterpData(){
 
 	for(uint index = 0; index < lines.size(); index++){
 		array<string> line_elements = lines[index].split(" ");
-
-		if(line_elements[0] == "set_character"){
-			int character_id = atoi(line_elements[1]);
-			drika_elements.insertLast(DrikaSetCharacter(character_id, line_elements[2]));
-		}else if(line_elements[0] == "set_enabled"){
-			int object_id = atoi(line_elements[1]);
-			bool enabled = line_elements[2] == "true";
-			drika_elements.insertLast(DrikaSetEnabled(object_id, enabled));
-		}else if(line_elements[0] == "wait"){
-			int duration = atoi(line_elements[1]);
-			drika_elements.insertLast(DrikaWait(duration));
-		}else if(line_elements[0] == "wait_level_message"){
-			drika_elements.insertLast(DrikaWaitLevelMessage(line_elements[1]));
-		}else if(line_elements[0] == "create_particle"){
-			bool use_blood_tint = line_elements[6] == "true";
-			drika_elements.insertLast(DrikaCreateParticle(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], atof(line_elements[4]), line_elements[5], use_blood_tint));
-		}else if(line_elements[0] == "play_sound"){
-			drika_elements.insertLast(DrikaPlaySound(atoi(line_elements[1]), line_elements[2]));
-		}else if(line_elements[0] == "go_to_line"){
-			drika_elements.insertLast(DrikaGoToLine(atoi(line_elements[1])));
-		}else if(line_elements[0] == "on_character_enter_exit"){
-			drika_elements.insertLast(DrikaOnCharacterEnterExit(atoi(line_elements[1]), line_elements[2], atoi(line_elements[3])));
-		}else if(line_elements[0] == "on_item_enter"){
-			drika_elements.insertLast(DrikaOnItemEnter(atoi(line_elements[1]), line_elements[2]));
-		}else if(line_elements[0] == "send_level_message"){
-			drika_elements.insertLast(DrikaSendLevelMessage(line_elements[1]));
-		}else if(line_elements[0] == "start_dialogue"){
-			drika_elements.insertLast(DrikaStartDialogue(line_elements[1]));
-		}else if(line_elements[0] == "set_object_param"){
-			drika_elements.insertLast(DrikaSetObjectParam(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], line_elements[4]));
-		}else if(line_elements[0] == "set_level_param"){
-			drika_elements.insertLast(DrikaSetLevelParam(atoi(line_elements[1]), line_elements[2]));
-		}else{
-			Log(warning, "Unknown command found: " + line_elements[0]);
-			//Either an empty line or an unknown command is in the comic.
-			continue;
-		}
+		drika_elements.insertLast(InterpElement(line_elements));
 		drika_indexes.insertLast(index);
 	}
 	Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID());
-
 	ReorderElements();
+}
+
+DrikaElement@ InterpElement(array<string> &in line_elements){
+	if(line_elements[0] == "set_character"){
+		int character_id = atoi(line_elements[1]);
+		return DrikaSetCharacter(character_id, line_elements[2]);
+	}else if(line_elements[0] == "set_enabled"){
+		int object_id = atoi(line_elements[1]);
+		bool enabled = line_elements[2] == "true";
+		return DrikaSetEnabled(object_id, enabled);
+	}else if(line_elements[0] == "wait"){
+		int duration = atoi(line_elements[1]);
+		return DrikaWait(duration);
+	}else if(line_elements[0] == "wait_level_message"){
+		return DrikaWaitLevelMessage(line_elements[1]);
+	}else if(line_elements[0] == "create_particle"){
+		bool use_blood_tint = line_elements[6] == "true";
+		return DrikaCreateParticle(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], atof(line_elements[4]), line_elements[5], use_blood_tint);
+	}else if(line_elements[0] == "play_sound"){
+		return DrikaPlaySound(atoi(line_elements[1]), line_elements[2]);
+	}else if(line_elements[0] == "go_to_line"){
+		return DrikaGoToLine(atoi(line_elements[1]));
+	}else if(line_elements[0] == "on_character_enter_exit"){
+		return DrikaOnCharacterEnterExit(atoi(line_elements[1]), line_elements[2], atoi(line_elements[3]));
+	}else if(line_elements[0] == "on_item_enter"){
+		return DrikaOnItemEnter(atoi(line_elements[1]), line_elements[2]);
+	}else if(line_elements[0] == "send_level_message"){
+		return DrikaSendLevelMessage(line_elements[1]);
+	}else if(line_elements[0] == "start_dialogue"){
+		return DrikaStartDialogue(line_elements[1]);
+	}else if(line_elements[0] == "set_object_param"){
+		return DrikaSetObjectParam(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], line_elements[4]);
+	}else if(line_elements[0] == "set_level_param"){
+		return DrikaSetLevelParam(atoi(line_elements[1]), line_elements[2]);
+	}else{
+		//Either an empty line or an unknown command is in the comic.
+		Log(warning, "Unknown command found: " + line_elements[0]);
+		return DrikaElement();
+	}
 }
 
 void Update(){
@@ -107,7 +117,7 @@ void Update(){
 	}
 
 	if(EditorModeActive()){
-		DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(1.0), _delete_on_update);
+		DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_update);
 		if(this_hotspot.IsSelected() && GetInputPressed(0, "u")){
 			editor_open = true;
 		}
@@ -258,6 +268,13 @@ void DrawEditor(){
 					}else if(drika_elements.size() > 0){
 						display_index = drika_indexes[current_line];
 					}
+					ReorderElements();
+				}
+			}
+			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
+				if(drika_elements.size() > 0){
+					array<string> line_elements = GetCurrentElement().GetSaveString().split(" ");
+					InsertElement(InterpElement(line_elements));
 					ReorderElements();
 				}
 			}
