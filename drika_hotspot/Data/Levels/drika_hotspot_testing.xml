@@ -42,7 +42,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="21.6878" t1="0.706209" t2="-11.6871" s0="1" s1="1" s2="1" q0="0.0869592" q1="0.69996" q2="-0.086513" q3="0.70357" euler_x="0.245933" euler_y="1.56564" euler_z="-1.30352e-05" id="1">
+    <CameraObject t0="19.4685" t1="1.30996" t2="-4.00897" s0="1" s1="1" s2="1" q0="0.176499" q1="0.677498" q2="-0.172585" q3="0.692863" euler_x="0.498869" euler_y="1.54837" euler_z="1.32911e-06" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -220,12 +220,26 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
+    <Hotspot t0="25.9314" t1="-2.31318" t2="-5.44237" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="34" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 1 #RAINY&#x0A;go_to_line 0" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <EnvObject t0="26.2798" t1="-2.74726" t2="-9.67234" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="35" color_r="0.0941176" color_g="1" color_b="0" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <Hotspot t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 13 0,0.0476313,1&#x0A;go_to_line 0" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
+    <Hotspot t0="25.8345" t1="-2.31318" t2="-1.05836" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="37" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 1 &#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
