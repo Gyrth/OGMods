@@ -41,9 +41,9 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 	string GetDisplayString(){
 		if(character_trigger_type == check_id){
-			return "OnCharacterEnterExit " + character_id;
+			return "OnCharacter" + ((hotspot_trigger_type == on_enter)?"Enter":"Exit") + " " + character_id;
 		}else{
-			return "OnCharacterEnterExit " + character_team;
+			return "OnCharacter" + ((hotspot_trigger_type == on_enter)?"Enter":"Exit") + " " + character_team;
 		}
 	}
 
