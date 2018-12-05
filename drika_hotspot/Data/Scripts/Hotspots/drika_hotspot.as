@@ -64,6 +64,9 @@ void InterpData(){
 
 	for(uint index = 0; index < lines.size(); index++){
 		array<string> line_elements = lines[index].split(" ");
+		if(line_elements[0] == ""){
+			continue;
+		}
 		drika_elements.insertLast(InterpElement(line_elements));
 		drika_indexes.insertLast(index);
 	}
