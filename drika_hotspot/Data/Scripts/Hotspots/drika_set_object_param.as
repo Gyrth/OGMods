@@ -21,6 +21,7 @@ class DrikaSetObjectParam : DrikaElement{
 		current_type = param_type;
 
 		drika_element_type = drika_set_object_param;
+		string_param_after = _param_after;
 		has_settings = true;
 
 		InterpParam();
@@ -41,17 +42,17 @@ class DrikaSetObjectParam : DrikaElement{
 			ScriptParams@ params = level.GetScriptParams();
 			if(param_type == string_param){
 				if(!params.HasParam(param_name)){
-					params.AddString(param_name, "");
+					params.AddString(param_name, string_param_after);
 				}
 				string_param_before = params.GetString(param_name);
 			}else if(param_type == float_param){
 				if(!params.HasParam(param_name)){
-					params.AddFloat(param_name, 0.0f);
+					params.AddFloat(param_name, float_param_after);
 				}
 				float_param_before = params.GetFloat(param_name);
 			}else if(param_type == float_param){
 				if(!params.HasParam(param_name)){
-					params.AddInt(param_name, 0);
+					params.AddInt(param_name, int_param_after);
 				}
 				int_param_before = params.GetInt(param_name);
 			}
