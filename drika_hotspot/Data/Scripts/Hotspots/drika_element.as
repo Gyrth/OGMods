@@ -13,7 +13,7 @@ enum drika_element_types { 	none = 0,
 							drika_set_object_param = 12,
 							drika_set_level_param = 13};
 
-array<vec4> display_colors = {	vec4(1.0),
+array<vec4> display_colors = {	vec4(255),
 								vec4(110, 94, 180, 255),
 								vec4(152, 113, 80, 255),
 								vec4(88, 122, 147, 255),

@@ -40,8 +40,15 @@ void Init() {
 	first_element.index = 5;
 	DrikaElement second_element = first_element;
 	first_element.index = 1;
-	Log(info, "First : " + first_element.index);
-	Log(info, "Second : " + second_element.index);
+	ConvertDisplayColors();
+}
+
+void ConvertDisplayColors(){
+	for(uint i = 0; i < display_colors.size(); i++){
+		display_colors[i].x /= 255;
+		display_colors[i].y /= 255;
+		display_colors[i].z /= 255;
+	}
 }
 
 void Dispose() {
@@ -306,9 +313,6 @@ void DrawEditor(){
 				line_number += " ";
 			}
 			vec4 text_color = drika_elements[item_no].GetDisplayColor();
-			text_color.x /= 255;
-			text_color.y /= 255;
-			text_color.z /= 255;
 			ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 			if(ImGui_Selectable(line_number + drika_elements[item_no].GetDisplayString(), display_index == int(item_no), ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){

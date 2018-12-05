@@ -74,8 +74,6 @@ class DrikaSetLevelParam : DrikaElement{
 
 		string_param_after = _param_after;
 
-		Log(info, string_param_after);
-
 		SetParamType();
 		InterpParam();
 		GetBeforeParam();
