@@ -15,9 +15,10 @@ enum level_params { 	achievements = 0,
 						sun_position = 14,
 						sun_color = 15,
 						sun_intensity = 16,
+						other = 17,
 					}
 
-array<int> string_parameters = {achievements, custom_shaders, gpu_particle_field, load_tip, objectives};
+array<int> string_parameters = {achievements, custom_shaders, gpu_particle_field, load_tip, objectives, other};
 array<int> float_parameters = {fog_amount, hdr_black_point, hdr_bloom_multiplier, hdr_white_point, saturation, sky_brightness, sky_rotation, sun_intensity};
 array<int> vec3_parameters = {sun_position};
 array<int> vec3color_parameters = {sky_tint, sun_color};
@@ -40,7 +41,8 @@ array<string> param_names = {	"Achievements",
 								"Sky Tint",
 								"Sun Position",
 								"Sun Color",
-								"Sun Intensity"
+								"Sun Intensity",
+								"Other..."
 							};
 
 
@@ -48,6 +50,7 @@ class DrikaSetLevelParam : DrikaElement{
 	int current_type;
 	string param_name;
 	bool has_function = false;
+	string other_param_name;
 
 	string string_param_before;
 	string string_param_after;
@@ -71,13 +74,22 @@ class DrikaSetLevelParam : DrikaElement{
 
 		drika_element_type = drika_set_level_param;
 		has_settings = true;
-
-		string_param_after = _param_after;
-
 		SetParamType();
+
+		if(level_param == other){
+			array<string> split_param = _param_after.split(";");
+			if(split_param.size() == 2){
+				other_param_name = split_param[0];
+				param_name = other_param_name;
+				string_param_after = split_param[1];
+			}
+		}else{
+			string_param_after = _param_after;
+			param_name = param_names[current_type];
+		}
+
 		InterpParam();
 		GetBeforeParam();
-		param_name = param_names[current_type];
 	}
 
 	void SetParamType(){
@@ -110,14 +122,17 @@ class DrikaSetLevelParam : DrikaElement{
 	}
 
 	string GetSaveString(){
-		if(param_type == vec3_param || param_type == vec3color_param){
-			string_param_after = Vec3ToString(vec3_param_after);
+		string save_string;
+		if(level_param == other){
+			save_string = other_param_name + ";" + string_param_after;
+		}else if(param_type == vec3_param || param_type == vec3color_param){
+			save_string = Vec3ToString(vec3_param_after);
 		}else if(param_type == float_param){
-			string_param_after = "" + float_param_after;
+			save_string = "" + float_param_after;
 		}else if(param_type == int_param){
-			string_param_after = "" + int_param_after;
+			save_string = "" + int_param_after;
 		}
-		return "set_level_param " + int(level_param) + " " + string_param_after;
+		return "set_level_param " + int(level_param) + " " + save_string;
 	}
 
 	string GetDisplayString(){
@@ -133,6 +148,9 @@ class DrikaSetLevelParam : DrikaElement{
 		}
 
 		if(param_type == string_param){
+			if(level_param == other){
+				ImGui_InputText("Param Name", other_param_name, 64);
+			}
 			ImGui_InputText("After", string_param_after, 64);
 		}else if(param_type == float_param){
 			ImGui_SliderFloat("After", float_param_after, -1000.0f, 1000.0f, "%.4f");

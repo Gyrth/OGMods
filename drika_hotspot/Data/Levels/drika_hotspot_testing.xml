@@ -11,8 +11,8 @@
 <AmbientSounds />
 <Script></Script>
 <LevelScriptParameters>
-    <parameter name="" type="string" val="" />
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Buster" type="string" val="" />
     <parameter name="Custom Shader" type="string" val="" />
     <parameter name="Fog amount" type="float" val="1" />
     <parameter name="GPU Particle Field" type="string" val="" />
@@ -22,6 +22,7 @@
     <parameter name="Level Boundaries" type="int" val="1" />
     <parameter name="Load Tip" type="string" val="" />
     <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Other..." type="string" val="" />
     <parameter name="Saturation" type="float" val="1" />
     <parameter name="Sky Brightness" type="float" val="1" />
     <parameter name="Sky Rotation" type="float" val="-62" />
@@ -42,7 +43,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="-1.02004" t1="7.34291" t2="16.9065" s0="1" s1="1" s2="1" q0="-0.175985" q1="0.718435" q2="-0.196429" q3="-0.643658" euler_x="-2.60781" euler_y="-1.46111" euler_z="3.14159" id="1">
+    <CameraObject t0="22.0598" t1="2.69359" t2="-3.94034" s0="1" s1="1" s2="1" q0="0.236111" q1="0.687107" q2="-0.254124" q3="0.638402" euler_x="-2.4331" euler_y="1.49734" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -187,7 +188,7 @@
     </EnvObject>
     <Hotspot t0="-12.7317" t1="1.2468" t2="27.6389" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="set_character -1 Data/Characters/guard.xml&#x0A;set_enabled -1 true&#x0A;wait_level_message continue_drika_hotspot&#x0A;wait 1000&#x0A;create_particle 32 5 Data/Particles/blooddrop.xml 0 1,1,1 true&#x0A;play_sound 33 Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line 0&#x0A;on_character_enter_exit 0 -1 0&#x0A;send_level_message level_message&#x0A;start_dialogue drika_dialogue&#x0A;set_object_param -1 0 drika_param &#x0A;set_level_param 0 no_kills" />
+            <parameter name="Script Data" type="string" val="set_character -1 Data/Characters/guard.xml&#x0A;set_enabled -1 true&#x0A;wait_level_message continue_drika_hotspot&#x0A;wait 1000&#x0A;create_particle 32 5 Data/Particles/blooddrop.xml 0 1,1,1 true&#x0A;play_sound 33 Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line 0&#x0A;on_character_enter_exit 0 -1 0&#x0A;send_level_message level_message&#x0A;start_dialogue drika_dialogue&#x0A;set_object_param -1 0 drika_param &#x0A;set_level_param 0 " />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -235,7 +236,7 @@
     </EnvObject>
     <Hotspot t0="25.9314" t1="-2.31318" t2="-5.44237" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="34" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 1 #RAINY&#x0A;go_to_line 0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 17 Buster;Charlie&#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -252,7 +253,7 @@
     </Hotspot>
     <Hotspot t0="25.8345" t1="-2.31318" t2="-1.05836" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="37" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 1 &#x0A;go_to_line 0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit 1 turner 0&#x0A;set_level_param 17 Buster;Not&#x0A;go_to_line 0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
