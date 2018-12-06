@@ -62,7 +62,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	void ReceiveMessage(string message, int param){
-		Log(info, "Received " + message + " " + param);
 		if((character_trigger_type == check_id && hotspot_trigger_type == on_enter && message == "CharacterEnter") ||
 			(character_trigger_type == check_id && hotspot_trigger_type == on_exit && message == "CharacterExit")){
 			if(param == character_id){
@@ -82,7 +81,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 	bool Trigger(){
 		if(triggered){
-			Log(info, "Triggered on character enter exit");
 			triggered = false;
 			return true;
 		}else{
