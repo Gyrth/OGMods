@@ -11,7 +11,9 @@ enum drika_element_types { 	none = 0,
 							drika_send_level_message = 10,
 							drika_start_dialogue = 11,
 							drika_set_object_param = 12,
-							drika_set_level_param = 13};
+							drika_set_level_param = 13,
+							drika_set_camera_param = 14
+						};
 
 array<vec4> display_colors = {	vec4(255),
 								vec4(110, 94, 180, 255),
@@ -26,6 +28,7 @@ array<vec4> display_colors = {	vec4(255),
 								vec4(132, 150, 75, 255),
 								vec4(196, 145, 145, 255),
 								vec4(90, 154, 191, 255),
+								vec4(90, 154, 191, 255),
 								vec4(90, 154, 191, 255)
 								};
 
@@ -33,7 +36,9 @@ enum param_types { 	string_param = 0,
 					int_param = 1,
 					float_param = 2,
 					vec3_param = 3,
-					vec3color_param = 4}
+					vec3_color_param = 4,
+					float_array_param = 5
+				};
 
 class DrikaElement{
 	drika_element_types drika_element_type = none;
@@ -69,6 +74,23 @@ class DrikaElement{
 	vec3 StringToVec3(string value){
 		array<string> values = value.split(",");
 		return vec3(atof(values[0]), atof(values[1]), atof(values[2]));
+	}
+
+	string FloatArrayToString(array<float> values){
+		string return_value = "";
+		for(uint i = 0; i < values.size(); i++){
+			return_value += ((i == 0)?"":";") + values[i];
+		}
+		return return_value;
+	}
+
+	array<float> StringToFloatArray(string value){
+		array<string> values = value.split(";");
+		array<float> return_value;
+		for(uint i = 0; i < values.size(); i++){
+			return_value.insertLast(atof(values[i]));
+		}
+		return return_value;
 	}
 
 	vec4 GetDisplayColor(){

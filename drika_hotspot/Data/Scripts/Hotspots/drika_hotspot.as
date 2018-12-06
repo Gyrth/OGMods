@@ -12,6 +12,7 @@
 #include "hotspots/drika_start_dialogue.as"
 #include "hotspots/drika_set_object_param.as"
 #include "hotspots/drika_set_level_param.as"
+#include "hotspots/drika_set_camera_param.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -108,6 +109,8 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 		return DrikaSetObjectParam(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], line_elements[4]);
 	}else if(line_elements[0] == "set_level_param"){
 		return DrikaSetLevelParam(atoi(line_elements[1]), line_elements[2]);
+	}else if(line_elements[0] == "set_camera_param"){
+		return DrikaSetCameraParam(atoi(line_elements[1]), line_elements[2]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -207,56 +210,60 @@ void DrawEditor(){
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("Add")){
 				if(ImGui_MenuItem("Set Character")){
-					DrikaSetCharacter new_set_character();
-					InsertElement(@new_set_character);
+					DrikaSetCharacter new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("Set Enabled")){
-					DrikaSetEnabled new_set_enabled();
-					InsertElement(@new_set_enabled);
+					DrikaSetEnabled new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("Wait For Level Message")){
-					DrikaWaitLevelMessage new_wait_level_message();
-					InsertElement(@new_wait_level_message);
+					DrikaWaitLevelMessage new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("Wait")){
-					DrikaWait new_wait();
-					InsertElement(@new_wait);
+					DrikaWait new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("Create Particle")){
-					DrikaCreateParticle new_create_particle();
-					InsertElement(@new_create_particle);
+					DrikaCreateParticle new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("Play Sound")){
-					DrikaPlaySound new_play_sound();
-					InsertElement(@new_play_sound);
+					DrikaPlaySound new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("Go To Line")){
-					DrikaGoToLine new_go_to_line();
-					InsertElement(@new_go_to_line);
+					DrikaGoToLine new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("On Character Enter Exit")){
-					DrikaOnCharacterEnterExit new_on_character_enter_exit();
-					InsertElement(@new_on_character_enter_exit);
+					DrikaOnCharacterEnterExit new_param();
+					InsertElement(@new_param);
 				}
 				/* if(ImGui_MenuItem("On Item Enter")){
-					DrikaOnItemEnter new_on_item_enter();
-					InsertElement(@new_on_item_enter);
+					DrikaOnItemEnter new_param();
+					InsertElement(@new_param);
 				} */
 				if(ImGui_MenuItem("Send Level Message")){
-					DrikaSendLevelMessage new_send_level_message();
-					InsertElement(@new_send_level_message);
+					DrikaSendLevelMessage new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("Start Dialogue")){
-					DrikaStartDialogue new_start_dialogue();
-					InsertElement(@new_start_dialogue);
+					DrikaStartDialogue new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("Set Object Parameter")){
-					DrikaSetObjectParam new_set_object_param();
-					InsertElement(@new_set_object_param);
+					DrikaSetObjectParam new_param();
+					InsertElement(@new_param);
 				}
 				if(ImGui_MenuItem("Set Level Parameter")){
-					DrikaSetLevelParam new_set_level_param();
-					InsertElement(@new_set_level_param);
+					DrikaSetLevelParam new_param();
+					InsertElement(@new_param);
+				}
+				if(ImGui_MenuItem("Set Camera Parameter")){
+					DrikaSetCameraParam new_param();
+					InsertElement(@new_param);
 				}
 				ImGui_EndMenu();
 			}

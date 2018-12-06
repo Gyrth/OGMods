@@ -43,7 +43,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="22.1421" t1="1.35802" t2="-3.84517" s0="1" s1="1" s2="1" q0="0.181217" q1="0.701056" q2="-0.191763" q3="0.662501" euler_x="-2.60759" euler_y="1.51426" euler_z="3.14159" id="1">
+    <CameraObject t0="11.9002" t1="2.31683" t2="3.63714" s0="1" s1="1" s2="1" q0="0.0197007" q1="0.980125" q2="-0.129939" q3="0.148602" euler_x="-2.87798" euler_y="0.300939" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -210,7 +210,7 @@
     </EnvObject>
     <Hotspot t0="13.8909" t1="-0.612318" t2="10.2304" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|1&#x0A;create_particle|30|5|Data/Particles/breath_fog.xml|16|0,0.590476,0.0112471|false&#x0A;play_sound|24|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line|0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|0&#x0A;start_dialogue|CameraParams&#x0A;wait|500&#x0A;play_sound|24|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;set_camera_param|3|0.3;9.0;10.0;2.3;110.0;10.0&#x0A;go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -223,7 +223,7 @@
     </EnvObject>
     <Hotspot t0="26.1872" t1="-2.31318" t2="-13.7538" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|1&#x0A;set_level_param|13|0.99999,0.99999,1&#x0A;go_to_line|0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|1&#x0A;set_level_param|13|0,1.85966e-05,1&#x0A;go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -246,7 +246,7 @@
     </EnvObject>
     <Hotspot t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|1&#x0A;set_level_param|13|0,0.0476313,1&#x0A;go_to_line|0" />
+            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|1&#x0A;set_level_param|13|0.99999,0.999991,1&#x0A;go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -258,6 +258,9 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
+    <EnvObject t0="26.4826" t1="-2.74726" t2="-17.1659" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="38" color_r="0.682353" color_g="0" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject t0="14.2696" t1="0.0183691" t2="18.4258" s0="0.25" s1="0.25" s2="0.25" q0="-0.0125263" q1="-0.598173" q2="0.184041" q3="0.779847" euler_x="-0.700926" euler_y="-1.18997" euler_z="0.948582" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -289,6 +292,31 @@
     <EnvObject t0="-12.7317" t1="1.2468" t2="27.6389" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <PlaceholderObject t0="13.8309" t1="-0.223857" t2="10.206" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="53" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="empty" />
+            <parameter name="DisplayName" type="string" val="CameraParams" />
+            <parameter name="NumParticipants" type="string" val="1" />
+            <parameter name="Script" type="string" val='#name &quot;CameraParams&quot;&#x0A;#participants 1&#x0A;set_character_pos 1 14.0065 -1.81446 9.94124 -133&#x0A;set_cam 10.5302 0.558399 12.0778 -42.77 -52.4 0 90&#x0A;say 1 &quot;Name&quot; &quot;Type your dialogue here.&quot;&#x0A;' />
+            <parameter name="obj_1" type="int" val="55" />
+        </parameters>
+        <Connections>
+            <Connection id="53" />
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="26.3395" t1="-2.31318" t2="-17.0909" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="54" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|0&#x0A;set_camera_param|3|0.3;9;10;2.3;110;10&#x0A;on_character_enter_exit|0|3|1&#x0A;set_camera_param|3|0;0;0;0;0;0;0&#x0A;go_to_line|0" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
+    <PlaceholderObject t0="13.8309" t1="0.476143" t2="10.206" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="55" type_file="" special_type="2">
+        <parameters />
+        <Connections>
+            <Connection id="3" />
+        </Connections>
+    </PlaceholderObject>
     <EnvObject t0="14.0548" t1="-1.6061" t2="22.0165" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters>
             <parameter name="Muscle" type="float" val="200.421" />
