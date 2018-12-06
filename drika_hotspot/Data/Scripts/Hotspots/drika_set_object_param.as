@@ -59,7 +59,7 @@ class DrikaSetObjectParam : DrikaElement{
 		}
 	}
 
-	void EditDone(){
+	void ApplySettings(){
 		GetBeforeParam();
 	}
 
