@@ -1,10 +1,8 @@
 class DrikaSetCharacter : DrikaElement{
-	bool enabled;
 	int character_id;
 	string character_path;
 	string original_character_path;
 	MovementObject@ character;
-	bool triggered = false;
 
 	DrikaSetCharacter(int _character_id = -1, string _character_path = "Data/Characters/guard.xml"){
 		character_id = _character_id;
@@ -13,6 +11,7 @@ class DrikaSetCharacter : DrikaElement{
 		has_settings = true;
 		if(MovementObjectExists(character_id)){
 			@character = ReadCharacterID(character_id);
+			GetOriginalCharacter();
 		}else{
 			Log(warning, "Character does not exist with id " + character_id);
 		}
@@ -26,10 +25,17 @@ class DrikaSetCharacter : DrikaElement{
 		return "SetCharacter " + character_id + " " + character_path;
 	}
 
+	void GetOriginalCharacter(){
+		if(character_id != -1 && MovementObjectExists(character_id)){
+			original_character_path = character.char_path;
+		}
+	}
+
 	void AddSettings(){
 		if(ImGui_InputInt("Character ID", character_id)){
 			if(MovementObjectExists(character_id)){
 				@character = ReadCharacterID(character_id);
+				GetOriginalCharacter();
 			}
 		}
 		ImGui_Text("Set To Character : ");
@@ -47,14 +53,7 @@ class DrikaSetCharacter : DrikaElement{
 		if(character_id == -1 || !MovementObjectExists(character_id)){
 			return false;
 		}
-		if(triggered){
-			return true;
-		}
-		original_character_path = character.char_path;
-		character.char_path = character_path;
-		character.Execute(	"character_getter.Load(this_mo.char_path);" +
-							"this_mo.RecreateRiggedObject(this_mo.char_path);");
-		triggered = true;
+		SetParameter(false);
 		return true;
 	}
 
@@ -64,12 +63,18 @@ class DrikaSetCharacter : DrikaElement{
 		}
 	}
 
-	void Reset(){
-		if(MovementObjectExists(character_id) && triggered){
-			triggered = false;
-			character.char_path = original_character_path;
+	void SetParameter(bool reset){
+		if(character_id != -1 && MovementObjectExists(character_id)){
+			character.char_path = reset?original_character_path:character_path;
 			character.Execute(	"character_getter.Load(this_mo.char_path);" +
-								"this_mo.RecreateRiggedObject(this_mo.char_path);");
+								"this_mo.RecreateRiggedObject(this_mo.char_path);" +
+								"ResetSecondaryAnimation(true);" +
+						        "ResetLayers();" +
+						        "CacheSkeletonInfo();");
 		}
+	}
+
+	void Reset(){
+		SetParameter(true);
 	}
 }
