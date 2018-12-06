@@ -23,6 +23,7 @@ array<int> drika_indexes;
 bool post_init_done = false;
 Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
 string param_delimiter = "|";
+array<string> messages;
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -136,6 +137,12 @@ void Update(){
 		}
 	}
 	if(!script_finished && drika_indexes.size() > 0 && !EditorModeActive()){
+		if(messages.size() > 0){
+			for(uint i = 0; i < messages.size(); i++){
+				GetCurrentElement().ReceiveMessage(messages[i]);
+			}
+			messages.resize(0);
+		}
 		if(GetCurrentElement().Trigger()){
 			if(current_line == int(drika_indexes.size() - 1)){
 				script_finished = true;
@@ -416,7 +423,7 @@ void ReceiveMessage(string msg){
 	if(token == "level_event" and !script_finished && drika_indexes.size() > 0){
 		token_iter.FindNextToken(msg);
 		string message = token_iter.GetToken(msg);
-		GetCurrentElement().ReceiveMessage(message);
+		messages.insertLast(message);
 	}
 }
 
