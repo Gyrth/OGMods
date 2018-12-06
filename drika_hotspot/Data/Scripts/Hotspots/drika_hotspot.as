@@ -22,7 +22,6 @@ array<DrikaElement@> drika_elements;
 array<int> drika_indexes;
 bool post_init_done = false;
 Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
-string func_delimiter = "\n";
 string param_delimiter = "|";
 
 // Coloring options
@@ -59,19 +58,18 @@ void Dispose() {
 }
 
 void SetParameters(){
-	params.AddString("Script Data", "");
 }
 
 void InterpData(){
-	array<string> lines = params.GetString("Script Data").split(func_delimiter);
-
-	for(uint index = 0; index < lines.size(); index++){
-		array<string> line_elements = lines[index].split(param_delimiter);
+	int line_index = 0;
+	while(params.HasParam("" + line_index)){
+		array<string> line_elements = params.GetString("" + line_index).split(param_delimiter);
 		if(line_elements[0] == ""){
 			continue;
 		}
 		drika_elements.insertLast(InterpElement(line_elements));
-		drika_indexes.insertLast(index);
+		drika_indexes.insertLast(drika_elements.size() - 1);
+		line_index += 1;
 	}
 	Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID());
 	ReorderElements();
@@ -455,12 +453,8 @@ void Reset(){
 }
 
 void Save(){
-	string data = "";
 	for(uint i = 0; i < drika_indexes.size(); i++){
-		data += drika_elements[drika_indexes[i]].GetSaveString();
-		if(i != drika_elements.size() - 1){
-			data += func_delimiter;
-		}
+		string data = drika_elements[drika_indexes[i]].GetSaveString();
+		params.SetString("" + drika_elements[drika_indexes[i]].index, data);
 	}
-	params.SetString("Script Data", data);
 }

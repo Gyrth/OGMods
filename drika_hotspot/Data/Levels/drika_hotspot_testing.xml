@@ -38,12 +38,16 @@
 <ActorObjects>
     <Hotspot t0="8.35993" t1="-0.554863" t2="1.42537" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="0" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="wait_level_message|continue_drika_hotspot&#x0A;play_sound|13|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;create_particle|15|5|Data/Particles/blooddrop.xml|3|0,0.0833433,1|false&#x0A;set_enabled|12|true&#x0A;set_character|3|Data/Characters/guard.xml" />
+            <parameter name="0" type="string" val="wait_level_message|continue_drika_hotspot" />
+            <parameter name="1" type="string" val="play_sound|13|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav" />
+            <parameter name="2" type="string" val="create_particle|15|5|Data/Particles/blooddrop.xml|3|0,0.0833433,1|false" />
+            <parameter name="3" type="string" val="set_enabled|12|true" />
+            <parameter name="4" type="string" val="set_character|3|Data/Characters/guard.xml" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="11.9002" t1="2.31683" t2="3.63714" s0="1" s1="1" s2="1" q0="0.0197007" q1="0.980125" q2="-0.129939" q3="0.148602" euler_x="-2.87798" euler_y="0.300939" euler_z="-3.14159" id="1">
+    <CameraObject t0="28.7294" t1="3.40263" t2="1.33154" s0="1" s1="1" s2="1" q0="0.346228" q1="-0.208223" q2="0.0791075" q3="0.911324" euler_x="0.726151" euler_y="-0.449256" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -165,7 +169,9 @@
     </EnvObject>
     <Hotspot t0="-1.8749" t1="-0.923473" t2="-2.94753" s0="0.132667" s1="0.132667" s2="0.132667" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="wait|1000&#x0A;create_particle|18|5|Data/Particles/smoke.xml|5|1,1,1|false&#x0A;go_to_line|0" />
+            <parameter name="0" type="string" val="wait|1000" />
+            <parameter name="1" type="string" val="create_particle|18|5|Data/Particles/smoke.xml|5|1,1,1|false" />
+            <parameter name="2" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -175,7 +181,9 @@
     </EnvObject>
     <Hotspot t0="-0.0427046" t1="-0.873965" t2="9.78697" s0="0.18562" s1="0.18562" s2="0.18562" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="wait|1000&#x0A;create_particle|20|5|Data/Particles/blooddrop.xml|5|0,1,0.0975609|false&#x0A;go_to_line|0" />
+            <parameter name="0" type="string" val="wait|1000" />
+            <parameter name="1" type="string" val="create_particle|20|5|Data/Particles/blooddrop.xml|5|0,1,0.0975609|false" />
+            <parameter name="2" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -188,7 +196,18 @@
     </EnvObject>
     <Hotspot t0="-12.7317" t1="1.2468" t2="27.6389" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="set_character|-1|Data/Characters/guard.xml&#x0A;set_enabled|-1|true&#x0A;wait_level_message|continue_drika_hotspot&#x0A;wait|1000&#x0A;create_particle|46|5|Data/Particles/blooddrop.xml|0|1,1,1|true&#x0A;play_sound|47|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;go_to_line|0&#x0A;on_character_enter_exit|0|-1|0&#x0A;send_level_message|level_message&#x0A;start_dialogue|drika_dialogue&#x0A;set_object_param|-1|0|drika_param|drika_new_value&#x0A;set_level_param|17|;" />
+            <parameter name="0" type="string" val="set_character|-1|Data/Characters/guard.xml" />
+            <parameter name="1" type="string" val="set_enabled|-1|true" />
+            <parameter name="10" type="string" val="set_object_param|-1|0|drika_param|drika_new_value" />
+            <parameter name="11" type="string" val="set_level_param|17|;" />
+            <parameter name="2" type="string" val="wait_level_message|continue_drika_hotspot" />
+            <parameter name="3" type="string" val="wait|1000" />
+            <parameter name="4" type="string" val="create_particle|46|5|Data/Particles/blooddrop.xml|0|1,1,1|true" />
+            <parameter name="5" type="string" val="play_sound|47|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav" />
+            <parameter name="6" type="string" val="go_to_line|0" />
+            <parameter name="7" type="string" val="on_character_enter_exit|0|-1|0" />
+            <parameter name="8" type="string" val="send_level_message|level_message" />
+            <parameter name="9" type="string" val="start_dialogue|drika_dialogue" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -210,7 +229,12 @@
     </EnvObject>
     <Hotspot t0="13.8909" t1="-0.612318" t2="10.2304" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|0&#x0A;start_dialogue|CameraParams&#x0A;wait|500&#x0A;play_sound|24|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&#x0A;set_camera_param|3|0.3;9.0;10.0;2.3;110.0;10.0&#x0A;go_to_line|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="1" type="string" val="start_dialogue|CameraParams" />
+            <parameter name="2" type="string" val="wait|500" />
+            <parameter name="3" type="string" val="play_sound|24|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav" />
+            <parameter name="4" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
+            <parameter name="5" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -223,7 +247,9 @@
     </EnvObject>
     <Hotspot t0="26.1872" t1="-2.31318" t2="-13.7538" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|1&#x0A;set_level_param|13|0,1.85966e-05,1&#x0A;go_to_line|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|1" />
+            <parameter name="1" type="string" val="set_level_param|13|0,1.85966e-05,1" />
+            <parameter name="2" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -236,7 +262,9 @@
     </EnvObject>
     <Hotspot t0="25.9314" t1="-2.31318" t2="-5.44237" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="34" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|1|turner|0&#x0A;set_level_param|17|Buster;Charlie&#x0A;go_to_line|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0" />
+            <parameter name="1" type="string" val="set_level_param|17|Buster;Charlie" />
+            <parameter name="2" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -246,14 +274,18 @@
     </EnvObject>
     <Hotspot t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|1&#x0A;set_level_param|13|0.99999,0.999991,1&#x0A;go_to_line|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|1" />
+            <parameter name="1" type="string" val="set_level_param|13|0.99999,0.999991,1" />
+            <parameter name="2" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
     <Hotspot t0="25.8345" t1="-2.31318" t2="-1.05836" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="37" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|1|turner|0&#x0A;set_level_param|17|Buster;Not Charlie&#x0A;go_to_line|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0" />
+            <parameter name="1" type="string" val="set_level_param|17|Buster;Not Charlie" />
+            <parameter name="2" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -264,9 +296,12 @@
     <EnvObject t0="14.2696" t1="0.0183691" t2="18.4258" s0="0.25" s1="0.25" s2="0.25" q0="-0.0125263" q1="-0.598173" q2="0.184041" q3="0.779847" euler_x="-0.700926" euler_y="-1.18997" euler_z="0.948582" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="14.0898" t1="-2.31318" t2="18.5313" s0="1" s1="1" s2="1" q0="-0.0110927" q1="0.0603472" q2="0.00696302" q3="0.998092" euler_x="-0.021461" euler_y="0.120913" euler_z="0.0126534" id="40" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot t0="14.0654" t1="-0.706542" t2="18.4978" s0="1" s1="1" s2="1" q0="-0.0110927" q1="0.0603472" q2="0.00696302" q3="0.998092" euler_x="-0.021461" euler_y="0.120913" euler_z="0.0126534" id="40" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|1|turner|0&#x0A;create_particle|43|5|Data/Particles/blooddrop.xml|12|1,1,1|true&#x0A;create_particle|39|5|Data/Particles/blooddrop.xml|5|1,1,1|true&#x0A;create_particle|44|5|Data/Particles/blooddrop.xml|5|1,1,1|true&#x0A;create_particle|45|5|Data/Particles/blooddrop.xml|5|1,1,1|true" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="1" type="string" val="set_character|3|Data/Characters/ferdi.xml" />
+            <parameter name="2" type="string" val="on_character_enter_exit|0|3|1" />
+            <parameter name="3" type="string" val="set_character|3|Data/Characters/drika.xml" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -306,7 +341,11 @@
     </PlaceholderObject>
     <Hotspot t0="26.3395" t1="-2.31318" t2="-17.0909" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="54" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val="on_character_enter_exit|0|3|0&#x0A;set_camera_param|3|0.3;9;10;2.3;110;10&#x0A;on_character_enter_exit|0|3|1&#x0A;set_camera_param|3|0;0;0;0;0;0;0&#x0A;go_to_line|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="1" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
+            <parameter name="2" type="string" val="on_character_enter_exit|0|3|1" />
+            <parameter name="3" type="string" val="set_camera_param|3|0;0;0;0;0;0;0" />
+            <parameter name="4" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
