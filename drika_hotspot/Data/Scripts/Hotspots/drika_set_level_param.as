@@ -15,8 +15,8 @@ enum level_params { 	achievements = 0,
 						sun_position = 14,
 						sun_color = 15,
 						sun_intensity = 16,
-						other = 17,
-					}
+						other = 17
+					};
 
 class DrikaSetLevelParam : DrikaElement{
 	int current_type;
@@ -45,6 +45,8 @@ class DrikaSetLevelParam : DrikaElement{
 	array<int> int_parameters = {level_boundaries};
 	array<int> function_parameters = {sky_tint, hdr_black_point, hdr_bloom_multiplier, hdr_white_point, sun_position, sun_color, sun_intensity};
 
+	array<int> mult_100_params = {hdr_black_point, hdr_bloom_multiplier, hdr_white_point, saturation, sky_brightness};
+
 	array<string> param_names = {	"Achievements",
 	 								"Custom Shader",
 									"Fog amount",
@@ -66,27 +68,16 @@ class DrikaSetLevelParam : DrikaElement{
 								};
 
 	DrikaSetLevelParam(string _level_param = "0", string _param_after = "no_kills"){
-
 		level_param = level_params(atoi(_level_param));
 		current_type = level_param;
 
 		drika_element_type = drika_set_level_param;
 		has_settings = true;
 		SetParamType();
-		GetBeforeParam();
-
-		if(level_param == other){
-			array<string> split_param = _param_after.split(";");
-			if(split_param.size() == 2){
-				param_name = split_param[0];
-				string_param_after = split_param[1];
-			}
-		}else{
-			string_param_after = _param_after;
-			param_name = param_names[current_type];
-		}
-
+		param_name = param_names[current_type];
+		string_param_after = _param_after;
 		InterpParam();
+		GetBeforeParam();
 	}
 
 	void SetParamType(){
@@ -115,15 +106,21 @@ class DrikaSetLevelParam : DrikaElement{
 			float_param_after = atof(string_param_after);
 		}else if(param_type == int_param){
 			int_param_after = atoi(string_param_after);
+		}else if(level_param == other){
+			array<string> split_param = string_param_after.split(";");
+			if(split_param.size() == 2){
+				param_name = split_param[0];
+				string_param_after = split_param[1];
+			}
 		}
 	}
 
 	string GetSaveString(){
 		string save_string;
-		if(level_param == string_param){
-			save_string = string_param_after;
-		}else if(level_param == other){
+		if(level_param == other){
 			save_string = param_name + ";" + string_param_after;
+		}else if(param_type == string_param){
+			save_string = string_param_after;
 		}else if(param_type == vec3_param || param_type == vec3_color_param){
 			save_string = Vec3ToString(vec3_param_after);
 		}else if(param_type == float_param){
@@ -139,7 +136,6 @@ class DrikaSetLevelParam : DrikaElement{
 	}
 
 	void ApplySettings(){
-		Log(info, "Edit done, Updating display string.");
 		UpdateDisplayString();
 	}
 
@@ -203,13 +199,13 @@ class DrikaSetLevelParam : DrikaElement{
 					vec3_param_before = GetSkyTint();
 					break;
 				case hdr_black_point:
-					float_param_before = GetHDRBlackPoint();
+					float_param_before = GetHDRBlackPoint() * 100.0f;
 					break;
 				case hdr_bloom_multiplier:
-					float_param_before = GetHDRBloomMult();
+					float_param_before = GetHDRBloomMult() * 100.0f;
 					break;
 				case hdr_white_point:
-					float_param_before = GetHDRWhitePoint();
+					float_param_before = GetHDRWhitePoint() * 100.0f;
 					break;
 				default:
 					Log(warning, "Found a non standard parameter type. " + param_type);
@@ -226,7 +222,11 @@ class DrikaSetLevelParam : DrikaElement{
 				if(!params.HasParam(param_name)){
 					params.AddFloat(param_name, float_param_after);
 				}
-				float_param_before = params.GetFloat(param_name);
+				float current_value = params.GetFloat(param_name);
+				if(mult_100_params.find(level_param) != -1){
+					current_value *= 100.0f;
+				}
+				float_param_before = current_value;
 			}else if(param_type == int_param){
 				if(!params.HasParam(param_name)){
 					params.AddInt(param_name, int_param_after);
@@ -244,7 +244,12 @@ class DrikaSetLevelParam : DrikaElement{
 		if(has_function){
 			switch(level_param){
 				case sky_tint:
-					SetSkyTint(reset?vec3_param_before:vec3_param_after);
+					{
+						ScriptParams@ params = level.GetScriptParams();
+						vec3 new_color = reset?vec3_param_before:vec3_param_after;
+						params.SetString("Sky Tint", int(new_color.x * 255) + ", " + int(new_color.y * 255) + ", " + int(new_color.z * 255));
+						SetSkyTint(new_color);
+					}
 					break;
 				case sun_position:
 					SetSunPosition(reset?vec3_param_before:vec3_param_after);
@@ -256,13 +261,13 @@ class DrikaSetLevelParam : DrikaElement{
 					SetSunAmbient(reset?float_param_before:float_param_after);
 					break;
 				case hdr_black_point:
-					SetHDRBlackPoint(reset?float_param_before:float_param_after);
+					SetHDRBlackPoint((reset?float_param_before:float_param_after) / 100.0f);
 					break;
 				case hdr_bloom_multiplier:
-					SetHDRBloomMult(reset?float_param_before:float_param_after);
+					SetHDRBloomMult((reset?float_param_before:float_param_after) / 100.0f);
 					break;
 				case hdr_white_point:
-					SetHDRWhitePoint(reset?float_param_before:float_param_after);
+					SetHDRWhitePoint((reset?float_param_before:float_param_after) / 100.0f);
 					break;
 				default:
 					Log(warning, "Found a non standard parameter type. " + param_type);
@@ -271,19 +276,14 @@ class DrikaSetLevelParam : DrikaElement{
 		}else{
 			ScriptParams@ params = level.GetScriptParams();
 			if(param_type == string_param){
-				if(reset && params.GetString(param_name) != string_param_after){
-					return false;
-				}
 				params.SetString(param_name, reset?string_param_before:string_param_after);
 			}else if(param_type == float_param){
-				if(reset && params.GetFloat(param_name) != float_param_after){
-					return false;
+				float new_value = reset?float_param_before:float_param_after;
+				if(mult_100_params.find(level_param) != -1){
+					new_value /= 100.0f;
 				}
-				params.SetFloat(param_name, reset?float_param_before:float_param_after);
+				params.SetFloat(param_name, new_value);
 			}else if(param_type == int_param){
-				if(reset && params.GetInt(param_name) != int_param_after){
-					return false;
-				}
 				params.SetInt(param_name, reset?int_param_before:int_param_after);
 			}
 		}

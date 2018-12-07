@@ -15,7 +15,7 @@
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
     <parameter name="Buster" type="string" val="" />
     <parameter name="Custom Shader" type="string" val="" />
-    <parameter name="Fog amount" type="float" val="1" />
+    <parameter name="Fog amount" type="float" val="0" />
     <parameter name="GPU Particle Field" type="string" val="" />
     <parameter name="HDR Black point" type="float" val="0.005" />
     <parameter name="HDR Bloom multiplier" type="float" val="1" />
@@ -47,7 +47,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="16.3271" t1="4.85026" t2="9.19476" s0="1" s1="1" s2="1" q0="0.360382" q1="-0.378902" q2="0.163217" q3="0.836611" euler_x="0.813485" euler_y="-0.850526" euler_z="0" id="1">
+    <CameraObject t0="30.8709" t1="-0.469971" t2="-1.40242" s0="1" s1="1" s2="1" q0="-0.0859277" q1="0.620434" q2="-0.0686566" q3="-0.776508" euler_x="0.220422" euler_y="-1.34827" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -199,7 +199,6 @@
             <parameter name="0" type="string" val="set_character|-1|Data/Characters/guard.xml" />
             <parameter name="1" type="string" val="set_enabled|-1|true" />
             <parameter name="10" type="string" val="set_object_param|-1|0|drika_param|drika_new_value" />
-            <parameter name="11" type="string" val="set_level_param|17|;" />
             <parameter name="2" type="string" val="wait_level_message|continue_drika_hotspot" />
             <parameter name="3" type="string" val="wait|1000" />
             <parameter name="4" type="string" val="create_particle|46|5|Data/Particles/blooddrop.xml|0|1,1,1|true" />
@@ -251,8 +250,6 @@
     <Hotspot t0="26.1872" t1="-2.31318" t2="-13.7538" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|1" />
-            <parameter name="1" type="string" val="set_level_param|13|0,1.85966e-05,1" />
-            <parameter name="2" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -266,8 +263,6 @@
     <Hotspot t0="25.9314" t1="-2.31318" t2="-5.44237" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="34" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0" />
-            <parameter name="1" type="string" val="set_level_param|17|Buster;Charlie" />
-            <parameter name="2" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -278,17 +273,32 @@
     <Hotspot t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|1" />
-            <parameter name="1" type="string" val="set_level_param|13|0.99999,0.999991,1" />
-            <parameter name="2" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <Hotspot t0="25.8345" t1="-2.31318" t2="-1.05836" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="37" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot t0="25.8345" t1="-2.31318" t2="-1.05836" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.015097" q1="0.0319734" q2="-0.118511" q3="0.992323" euler_x="0.0224362" euler_y="0.0670844" euler_z="-0.236977" id="37" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0" />
-            <parameter name="1" type="string" val="set_level_param|17|Buster;Not Charlie" />
-            <parameter name="2" type="string" val="go_to_line|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="1" type="string" val="set_level_param|0|nothing" />
+            <parameter name="10" type="string" val="set_level_param|9|nothing" />
+            <parameter name="11" type="string" val="set_level_param|10|200" />
+            <parameter name="12" type="string" val="set_level_param|11|500" />
+            <parameter name="13" type="string" val="set_level_param|12|0" />
+            <parameter name="14" type="string" val="set_level_param|13|0.99,0,0" />
+            <parameter name="15" type="string" val="set_level_param|14|1,1,1" />
+            <parameter name="16" type="string" val="set_level_param|15|0,0.766676,1" />
+            <parameter name="17" type="string" val="set_level_param|16|3" />
+            <parameter name="18" type="string" val="set_level_param|17|Buster;Charlie" />
+            <parameter name="19" type="string" val="go_to_line|0" />
+            <parameter name="2" type="string" val="set_level_param|1|#RAINY" />
+            <parameter name="3" type="string" val="set_level_param|2|25" />
+            <parameter name="4" type="string" val="set_level_param|3|#RAIN" />
+            <parameter name="5" type="string" val="set_level_param|4|12" />
+            <parameter name="6" type="string" val="set_level_param|5|500" />
+            <parameter name="7" type="string" val="set_level_param|6|145" />
+            <parameter name="8" type="string" val="set_level_param|7|0" />
+            <parameter name="9" type="string" val="set_level_param|8|new load tip" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -330,40 +340,6 @@
     <EnvObject t0="-12.7317" t1="1.2468" t2="27.6389" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="13.7926" t1="-1.42134" t2="-2.06436" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="50" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
-        <parameters>
-            <parameter name="Aggression" type="float" val="0.5" />
-            <parameter name="Attack Damage" type="float" val="1" />
-            <parameter name="Attack Knockback" type="float" val="1" />
-            <parameter name="Attack Speed" type="float" val="1" />
-            <parameter name="Block Follow-up" type="float" val="0.5" />
-            <parameter name="Block Skill" type="float" val="0.5" />
-            <parameter name="Cannot Be Disarmed" type="int" val="0" />
-            <parameter name="Character Scale" type="float" val="1" />
-            <parameter name="Damage Resistance" type="float" val="1" />
-            <parameter name="Ear Size" type="float" val="1" />
-            <parameter name="Fat" type="float" val="0.5" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
-            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
-            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
-            <parameter name="Ground Aggression" type="float" val="0.5" />
-            <parameter name="Knockout Shield" type="int" val="0" />
-            <parameter name="Left handed" type="int" val="0" />
-            <parameter name="Movement Speed" type="float" val="1" />
-            <parameter name="Muscle" type="float" val="0.5" />
-            <parameter name="Peripheral FOV distance" type="float" val="4" />
-            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
-            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
-            <parameter name="Species" type="string" val="rabbit" />
-            <parameter name="Static" type="int" val="0" />
-            <parameter name="Teams" type="string" val="guard" />
-        </parameters>
-        <Connections>
-            <Connection id="50" />
-        </Connections>
-        <ItemConnections />
-        <Palette />
-    </ActorObject>
     <PlaceholderObject t0="13.8309" t1="-0.223857" t2="10.206" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="53" type_file="" special_type="0">
         <parameters>
             <parameter name="Dialogue" type="string" val="empty" />
