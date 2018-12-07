@@ -47,7 +47,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="21.6801" t1="2.26858" t2="-2.41216" s0="1" s1="1" s2="1" q0="0.186928" q1="0.691276" q2="-0.192607" q3="0.670893" euler_x="-2.59812" euler_y="1.54088" euler_z="-3.14159" id="1">
+    <CameraObject t0="23.1528" t1="1.281" t2="-12.962" s0="1" s1="1" s2="1" q0="-0.200681" q1="-0.705157" q2="0.219901" q3="-0.643524" euler_x="-2.53701" euler_y="1.47946" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -249,7 +249,11 @@
     </EnvObject>
     <Hotspot t0="26.1872" t1="-2.31318" t2="-13.7538" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|1" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="1" type="string" val="set_camera_param|0|1,0,0" />
+            <parameter name="2" type="string" val="set_camera_param|1|0,0.125005,1" />
+            <parameter name="3" type="string" val="set_camera_param|2|120" />
+            <parameter name="4" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -282,7 +286,14 @@
     </EnvObject>
     <Hotspot t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|1" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="1" type="string" val="go_to_line|5" />
+            <parameter name="2" type="string" val="wait|1000" />
+            <parameter name="3" type="string" val="wait|1000" />
+            <parameter name="4" type="string" val="wait|1000" />
+            <parameter name="5" type="string" val="send_level_message|continue_this_hotspot" />
+            <parameter name="6" type="string" val="wait_level_message|continue_this_hotspot" />
+            <parameter name="7" type="string" val="play_sound|56|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -388,6 +399,9 @@
             <Connection id="3" />
         </Connections>
     </PlaceholderObject>
+    <EnvObject t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject t0="14.0548" t1="-1.6061" t2="22.0165" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters>
             <parameter name="Muscle" type="float" val="200.421" />

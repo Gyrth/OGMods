@@ -2,7 +2,7 @@ class DrikaSendLevelMessage : DrikaElement{
 	string message;
 	string display_message;
 
-	DrikaSendLevelMessage(string _message = "level_message"){
+	DrikaSendLevelMessage(string _message = "continue_drika_hotspot"){
 		message = _message;
 		SetDisplayMessage();
 		drika_element_type = drika_send_level_message;
