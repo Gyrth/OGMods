@@ -65,6 +65,9 @@ class DrikaSetCharacter : DrikaElement{
 
 	void SetParameter(bool reset){
 		if(character_id != -1 && MovementObjectExists(character_id)){
+			if(character.char_path == (reset?original_character_path:character_path)){
+				return;
+			}
 			character.char_path = reset?original_character_path:character_path;
 			character.Execute(	"character_getter.Load(this_mo.char_path);" +
 								"this_mo.RecreateRiggedObject(this_mo.char_path);" +
