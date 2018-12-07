@@ -126,7 +126,6 @@ void Update(){
 	}
 
 	if(EditorModeActive()){
-		DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_update);
 		if(this_hotspot.IsSelected() && GetInputPressed(0, "u")){
 			editor_open = true;
 		}
@@ -165,6 +164,7 @@ int drag_target_line = 0;
 bool update_scroll = false;
 
 void DrawEditor(){
+	DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_update);
 	if(editor_open){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
