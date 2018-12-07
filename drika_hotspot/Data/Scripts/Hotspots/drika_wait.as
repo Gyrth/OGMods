@@ -1,8 +1,8 @@
 class DrikaWait : DrikaElement{
 	float timer;
 	int duration;
-	DrikaWait(int _duration = 1000){
-		duration = _duration;
+	DrikaWait(string _duration = "1000"){
+		duration = atoi(_duration);
 		timer = duration / 1000.0;
 		drika_element_type = drika_wait;
 		has_settings = true;

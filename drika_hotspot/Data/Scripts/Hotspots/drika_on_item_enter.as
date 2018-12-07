@@ -8,14 +8,14 @@ class DrikaOnItemEnter : DrikaElement{
 	item_trigger_types trigger_type;
 	bool triggered = false;
 
-	DrikaOnItemEnter(int _trigger_type = 0, string _param = "-1"){
+	DrikaOnItemEnter(string _trigger_type = "0", string _param = "-1"){
 		drika_element_type = drika_on_item_enter;
 		has_settings = true;
-		trigger_type = item_trigger_types(_trigger_type);
+		trigger_type = item_trigger_types(atoi(_trigger_type));
+		current_combo_item = int(trigger_type);
 
 		if(trigger_type == check_id){
 			item_id = atoi(_param);
-			current_combo_item = _trigger_type;
 		}else{
 			item_label = _param;
 		}

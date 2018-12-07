@@ -78,38 +78,33 @@ void InterpData(){
 
 DrikaElement@ InterpElement(array<string> &in line_elements){
 	if(line_elements[0] == "set_character"){
-		int character_id = atoi(line_elements[1]);
-		return DrikaSetCharacter(character_id, line_elements[2]);
+		return DrikaSetCharacter(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "set_enabled"){
-		int object_id = atoi(line_elements[1]);
-		bool enabled = line_elements[2] == "true";
-		return DrikaSetEnabled(object_id, enabled);
+		return DrikaSetEnabled(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "wait"){
-		int duration = atoi(line_elements[1]);
-		return DrikaWait(duration);
+		return DrikaWait(line_elements[1]);
 	}else if(line_elements[0] == "wait_level_message"){
 		return DrikaWaitLevelMessage(line_elements[1]);
 	}else if(line_elements[0] == "create_particle"){
-		bool use_blood_tint = line_elements[6] == "true";
-		return DrikaCreateParticle(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], atof(line_elements[4]), line_elements[5], use_blood_tint);
+		return DrikaCreateParticle(line_elements[1], line_elements[2], line_elements[3], line_elements[4], line_elements[5], line_elements[6]);
 	}else if(line_elements[0] == "play_sound"){
-		return DrikaPlaySound(atoi(line_elements[1]), line_elements[2]);
+		return DrikaPlaySound(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "go_to_line"){
-		return DrikaGoToLine(atoi(line_elements[1]));
+		return DrikaGoToLine(line_elements[1]);
 	}else if(line_elements[0] == "on_character_enter_exit"){
-		return DrikaOnCharacterEnterExit(atoi(line_elements[1]), line_elements[2], atoi(line_elements[3]));
+		return DrikaOnCharacterEnterExit(line_elements[1], line_elements[2], line_elements[3]);
 	}else if(line_elements[0] == "on_item_enter"){
-		return DrikaOnItemEnter(atoi(line_elements[1]), line_elements[2]);
+		return DrikaOnItemEnter(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "send_level_message"){
 		return DrikaSendLevelMessage(line_elements[1]);
 	}else if(line_elements[0] == "start_dialogue"){
 		return DrikaStartDialogue(line_elements[1]);
 	}else if(line_elements[0] == "set_object_param"){
-		return DrikaSetObjectParam(atoi(line_elements[1]), atoi(line_elements[2]), line_elements[3], line_elements[4]);
+		return DrikaSetObjectParam(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
 	}else if(line_elements[0] == "set_level_param"){
-		return DrikaSetLevelParam(atoi(line_elements[1]), line_elements[2]);
+		return DrikaSetLevelParam(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "set_camera_param"){
-		return DrikaSetCameraParam(atoi(line_elements[1]), line_elements[2]);
+		return DrikaSetCameraParam(line_elements[1], line_elements[2]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);

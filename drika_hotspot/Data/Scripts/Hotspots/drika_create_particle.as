@@ -5,13 +5,13 @@ class DrikaCreateParticle : DrikaElement{
 	float velocity;
 	bool use_blood_tint;
 
-	DrikaCreateParticle(int _placeholder_id = -1, int _amount = 5, string _particle_path = "Data/Particles/blooddrop.xml", float _velocity = 0.0, string _tint = "1,1,1", bool _use_blood_tint = true){
-		amount = _amount;
-		placeholder_id = _placeholder_id;
+	DrikaCreateParticle(string _placeholder_id = "-1", string _amount = "5", string _particle_path = "Data/Particles/blooddrop.xml", string _velocity = "0.0", string _tint = "1,1,1", string _use_blood_tint = "true"){
+		amount = atoi(_amount);
+		placeholder_id = atoi(_placeholder_id);
 		particle_path = _particle_path;
 		tint = StringToVec3(_tint);
-		velocity = _velocity;
-		use_blood_tint = _use_blood_tint;
+		velocity = atof(_velocity);
+		use_blood_tint = (_use_blood_tint == "true");
 
 		drika_element_type = drika_create_particle;
 		has_settings = true;

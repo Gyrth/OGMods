@@ -14,10 +14,10 @@ class DrikaSetObjectParam : DrikaElement{
 
 	param_types param_type;
 
-	DrikaSetObjectParam(int _object_id = -1, int _param_type = 0, string _param_name = "drika_param", string _param_after = "drika_new_value"){
-		object_id = _object_id;
+	DrikaSetObjectParam(string _object_id = "-1", string _param_type = "0", string _param_name = "drika_param", string _param_after = "drika_new_value"){
+		object_id = atoi(_object_id);
 		param_name = _param_name;
-		param_type = param_types(_param_type);
+		param_type = param_types(atoi(_param_type));
 		current_type = param_type;
 
 		drika_element_type = drika_set_object_param;

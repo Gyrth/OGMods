@@ -1,8 +1,8 @@
 class DrikaGoToLine : DrikaElement{
 	int line;
 
-	DrikaGoToLine(int _line = 0){
-		line = _line;
+	DrikaGoToLine(string _line = "0"){
+		line = atoi(_line);
 		drika_element_type = drika_go_to_line;
 		has_settings = true;
 	}

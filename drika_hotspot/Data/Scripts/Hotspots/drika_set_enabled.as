@@ -3,9 +3,9 @@ class DrikaSetEnabled : DrikaElement{
 	int object_id;
 	Object@ object;
 
-	DrikaSetEnabled(int _object_id = -1, bool _enabled = true){
-		object_id = _object_id;
-		enabled = _enabled;
+	DrikaSetEnabled(string _object_id = "-1", string _enabled = "true"){
+		object_id = atoi(_object_id);
+		enabled = (_enabled == "true");
 		drika_element_type = drika_set_enabled;
 		has_settings = true;
 		if(ObjectExists(object_id)){

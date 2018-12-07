@@ -65,9 +65,9 @@ class DrikaSetLevelParam : DrikaElement{
 									"Other..."
 								};
 
-	DrikaSetLevelParam(int _level_param = 0, string _param_after = "no_kills"){
+	DrikaSetLevelParam(string _level_param = "0", string _param_after = "no_kills"){
 
-		level_param = level_params(_level_param);
+		level_param = level_params(atoi(_level_param));
 		current_type = level_param;
 
 		drika_element_type = drika_set_level_param;

@@ -33,8 +33,8 @@ class DrikaSetCameraParam : DrikaElement{
 									"DOF"
 								};
 
-	DrikaSetCameraParam(int _camera_param = 0, string _param_after = "1,1,1"){
-		camera_param = camera_params(_camera_param);
+	DrikaSetCameraParam(string _camera_param = "0", string _param_after = "1,1,1"){
+		camera_param = camera_params(atoi(_camera_param));
 		current_type = camera_param;
 		param_name = param_names[current_type];
 

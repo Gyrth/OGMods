@@ -19,9 +19,9 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 	bool triggered = false;
 
-	DrikaOnCharacterEnterExit(int _character_trigger_type = 0, string _param = "-1", int _hotspot_trigger_type = int(on_enter)){
-		character_trigger_type = character_trigger_types(_character_trigger_type);
-		hotspot_trigger_type = hotspot_trigger_types(_hotspot_trigger_type);
+	DrikaOnCharacterEnterExit(string _character_trigger_type = "0", string _param = "-1", string _hotspot_trigger_type = "0"){
+		character_trigger_type = character_trigger_types(atoi(_character_trigger_type));
+		hotspot_trigger_type = hotspot_trigger_types(atoi(_hotspot_trigger_type));
 		new_hotspot_trigger_type = hotspot_trigger_type;
 		new_character_trigger_type = character_trigger_type;
 

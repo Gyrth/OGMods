@@ -4,8 +4,8 @@ class DrikaSetCharacter : DrikaElement{
 	string original_character_path;
 	MovementObject@ character;
 
-	DrikaSetCharacter(int _character_id = -1, string _character_path = "Data/Characters/guard.xml"){
-		character_id = _character_id;
+	DrikaSetCharacter(string _character_id = "-1", string _character_path = "Data/Characters/guard.xml"){
+		character_id = atoi(_character_id);
 		character_path = _character_path;
 		drika_element_type = drika_set_character;
 		has_settings = true;
