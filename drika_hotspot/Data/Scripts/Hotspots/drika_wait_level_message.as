@@ -23,7 +23,7 @@ class DrikaWaitLevelMessage : DrikaElement{
 
 	void ReceiveMessage(string _message){
 		if(_message == message){
-			Log(info, "Received correct message");
+			Log(info, "Received correct message " + message);
 			received_message = true;
 		}
 	}

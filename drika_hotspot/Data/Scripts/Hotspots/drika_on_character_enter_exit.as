@@ -1,5 +1,9 @@
 enum character_trigger_types {	check_id = 0,
-								check_team = 1};
+								check_team = 1,
+								any_character = 2,
+								any_player = 3,
+								any_npc = 4
+							};
 
 enum hotspot_trigger_types {	on_enter = 0,
 								on_exit = 1};
@@ -19,12 +23,12 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		character_trigger_type = character_trigger_types(_character_trigger_type);
 		hotspot_trigger_type = hotspot_trigger_types(_hotspot_trigger_type);
 		new_hotspot_trigger_type = hotspot_trigger_type;
+		new_character_trigger_type = character_trigger_type;
 
 		drika_element_type = drika_on_character_enter_exit;
 
 		if(character_trigger_type == check_id){
 			character_id = atoi(_param);
-			new_character_trigger_type = character_trigger_type;
 		}else{
 			character_team = _param;
 		}
@@ -40,15 +44,23 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	string GetDisplayString(){
+		string trigger_message = "";
 		if(character_trigger_type == check_id){
-			return "OnCharacter" + ((hotspot_trigger_type == on_enter)?"Enter":"Exit") + " " + character_id;
-		}else{
-			return "OnCharacter" + ((hotspot_trigger_type == on_enter)?"Enter":"Exit") + " " + character_team;
+			trigger_message = "" + character_id;
+		}else if(character_trigger_type == check_team){
+			trigger_message = character_team;
+		}else if(character_trigger_type == any_character){
+			trigger_message = "Any Character";
+		}else if(character_trigger_type == any_player){
+			trigger_message = "Any Player";
+		}else if(character_trigger_type == any_npc){
+			trigger_message = "Any NPC";
 		}
+		return "OnCharacter" + ((hotspot_trigger_type == on_enter)?"Enter":"Exit") + " " + trigger_message;
 	}
 
 	void AddSettings(){
-		if(ImGui_Combo("Check for", new_character_trigger_type, {"Check ID", "Check Team"})){
+		if(ImGui_Combo("Check for", new_character_trigger_type, {"Check ID", "Check Team", "Any Character", "Any Player", "Any NPC"})){
 			character_trigger_type = character_trigger_types(new_character_trigger_type);
 		}
 		if(ImGui_Combo("Trigger when", new_hotspot_trigger_type, {"On Enter", "On Exit"})){
@@ -56,16 +68,32 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		}
 		if(character_trigger_type == check_id){
 			ImGui_InputInt("ID", character_id);
-		}else{
+		}else if(character_trigger_type == check_team){
 			ImGui_InputText("Team", character_team, 64);
 		}
 	}
 
+	void DrawEditing(){
+		if(character_trigger_type == check_id && character_id != -1 && MovementObjectExists(character_id)){
+			MovementObject@ character = ReadCharacterID(character_id);
+			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(1.0), _delete_on_update);
+		}
+	}
+
 	void ReceiveMessage(string message, int param){
-		if((character_trigger_type == check_id && hotspot_trigger_type == on_enter && message == "CharacterEnter") ||
-			(character_trigger_type == check_id && hotspot_trigger_type == on_exit && message == "CharacterExit")){
-			if(param == character_id){
-				triggered = true;
+		if((hotspot_trigger_type == on_enter && message == "CharacterEnter") ||
+			(hotspot_trigger_type == on_exit && message == "CharacterExit")){
+			Log(info, "character " + param);
+			if(MovementObjectExists(param)){
+				MovementObject@ character = ReadCharacterID(param);
+				Log(info, int(character_trigger_type) + " MovementObjectExists " + character.controlled);
+				if(	character_trigger_type == check_id && character_id == param ||
+					character_trigger_type == any_character ||
+					character_trigger_type == any_player && character.controlled ||
+					character_trigger_type == any_npc && !character.controlled){
+					Log(info, "OnEnterExit triggered");
+					triggered = true;
+				}
 			}
 		}
 	}
@@ -73,7 +101,11 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	void ReceiveMessage(string message, string param){
 		if((character_trigger_type == check_team && hotspot_trigger_type == on_enter && message == "CharacterEnter") ||
 			(character_trigger_type == check_team && hotspot_trigger_type == on_exit && message == "CharacterExit")){
-			if(param == character_team){
+			//Removed all the spaces.
+			string no_spaces_param = join(param.split(" "), "");
+			//Teams are , seperated.
+			array<string> teams = no_spaces_param.split(",");
+			if(teams.find(character_team) != -1){
 				triggered = true;
 			}
 		}
