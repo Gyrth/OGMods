@@ -24,6 +24,7 @@ bool post_init_done = false;
 Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
 string param_delimiter = "|";
 array<string> messages;
+bool is_selected = false;
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -125,11 +126,6 @@ void Update(){
 		SwitchToPlaying();
 	}
 
-	if(EditorModeActive()){
-		if(this_hotspot.IsSelected() && GetInputPressed(0, "u")){
-			editor_open = true;
-		}
-	}
 	if(!script_finished && drika_indexes.size() > 0 && !EditorModeActive()){
 		if(messages.size() > 0){
 			for(uint i = 0; i < messages.size(); i++){
@@ -158,12 +154,23 @@ void SwitchToPlaying(){
 	editing = false;
 }
 
+void SelectedChanged(){
+	is_selected = this_hotspot.IsSelected();
+	if(is_selected){
+		editor_open = true;
+		level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
+	}
+}
+
 bool reorded = false;
 int display_index = 0;
 int drag_target_line = 0;
 bool update_scroll = false;
 
 void DrawEditor(){
+	if(this_hotspot.IsSelected() != is_selected){
+		SelectedChanged();
+	}
 	DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_update);
 	if(editor_open){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
@@ -403,10 +410,6 @@ void InsertElement(DrikaElement@ new_element){
 	ReorderElements();
 }
 
-void LaunchCustomGUI(){
-	editor_open = true;
-}
-
 void ReceiveMessage(string msg){
     TokenIterator token_iter;
     token_iter.Init();
@@ -415,10 +418,18 @@ void ReceiveMessage(string msg){
         return;
     }
     string token = token_iter.GetToken(msg);
-	if(token == "level_event" and !script_finished && drika_indexes.size() > 0){
+	if(token == "level_event"){
 		token_iter.FindNextToken(msg);
 		string message = token_iter.GetToken(msg);
-		messages.insertLast(message);
+		if(!script_finished && drika_indexes.size() > 0){
+			messages.insertLast(message);
+		}
+		if(message == "drika_hotspot_editing" && token_iter.FindNextToken(msg)){
+			int id = atoi(token_iter.GetToken(msg));
+			if(id != this_hotspot.GetID()){
+				editor_open = false;
+			}
+		}
 	}
 }
 
