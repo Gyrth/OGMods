@@ -87,7 +87,7 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 	}else if(line_elements[0] == "wait_level_message"){
 		return DrikaWaitLevelMessage(line_elements[1]);
 	}else if(line_elements[0] == "create_particle"){
-		return DrikaCreateParticle(line_elements[1], line_elements[2], line_elements[3], line_elements[4], line_elements[5], line_elements[6]);
+		return DrikaCreateParticle(line_elements[1], line_elements[2], line_elements[3], line_elements[4], line_elements[5], line_elements[6], line_elements[7]);
 	}else if(line_elements[0] == "play_sound"){
 		return DrikaPlaySound(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "go_to_line"){
