@@ -20,18 +20,7 @@ class DrikaStartDialogue : DrikaElement{
 	}
 
 	bool Trigger(){
-		bool player_in_valid_state = false;
-		for(int i = 0, len = GetNumCharacters(); i < len; i++){
-			MovementObject@ mo = ReadCharacter(i);
-			if(mo.controlled && mo.QueryIntFunction("int CanPlayDialogue()") == 1){
-				player_in_valid_state = true;
-			}
-		}
-		if(player_in_valid_state){
-			level.SendMessage("start_dialogue \"" + dialogue_name + "\"");
-			return true;
-		}else{
-			return false;
-		}
+		level.SendMessage("start_dialogue \"" + dialogue_name + "\"");
+		return true;
 	}
 }
