@@ -13,6 +13,7 @@
 #include "hotspots/drika_set_object_param.as"
 #include "hotspots/drika_set_level_param.as"
 #include "hotspots/drika_set_camera_param.as"
+#include "hotspots/drika_create_object.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -106,6 +107,8 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 		return DrikaSetLevelParam(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "set_camera_param"){
 		return DrikaSetCameraParam(line_elements[1], line_elements[2]);
+	}else if(line_elements[0] == "create_object"){
+		return DrikaCreateObject(line_elements[1], line_elements[2]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -270,6 +273,10 @@ void DrawEditor(){
 				}
 				if(ImGui_MenuItem("Set Camera Parameter")){
 					DrikaSetCameraParam new_param();
+					InsertElement(@new_param);
+				}
+				if(ImGui_MenuItem("Create Object")){
+					DrikaCreateObject new_param();
 					InsertElement(@new_param);
 				}
 				ImGui_EndMenu();

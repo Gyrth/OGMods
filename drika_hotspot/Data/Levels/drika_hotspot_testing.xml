@@ -47,7 +47,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="16.9888" t1="2.56016" t2="4.96771" s0="1" s1="1" s2="1" q0="0.0533985" q1="-0.926401" q2="0.143867" q3="0.343849" euler_x="-2.83346" euler_y="-0.710811" euler_z="3.14159" id="1">
+    <CameraObject t0="23.1115" t1="0.735126" t2="-19.5552" s0="1" s1="1" s2="1" q0="0.152026" q1="0.798602" q2="-0.226259" q3="0.536591" euler_x="-2.58943" euler_y="1.18325" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -169,9 +169,8 @@
     </EnvObject>
     <Hotspot t0="-1.8749" t1="-0.923473" t2="-2.94753" s0="0.132667" s1="0.132667" s2="0.132667" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="wait|1000" />
-            <parameter name="1" type="string" val="create_particle|18|5|Data/Particles/smoke.xml|5|1,1,1|false|0" />
-            <parameter name="2" type="string" val="go_to_line|0" />
+            <parameter name="0" type="string" val="wait_level_message|set_to_guard" />
+            <parameter name="1" type="string" val="set_character|3|Data/Characters/guard.xml" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -238,7 +237,7 @@
             <parameter name="6" type="string" val="set_character|3|Data/Characters/guard.xml" />
             <parameter name="7" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
             <parameter name="8" type="string" val="set_camera_param|0|1,1,1" />
-            <parameter name="9" type="string" val="set_camera_param|1|0.0,0.0,0.0" />
+            <parameter name="9" type="string" val="set_camera_param|1|0,0,0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -249,13 +248,14 @@
     <EnvObject t0="13.9225" t1="-2.198" t2="10.0199" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0.729917" q3="0.683536" euler_x="0" euler_y="0" euler_z="1.6364" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="26.1872" t1="-2.31318" t2="-13.7538" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot t0="26.9597" t1="-1.47566" t2="-14.1442" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
             <parameter name="1" type="string" val="set_camera_param|0|0.498055,0.263562,0.263562" />
             <parameter name="2" type="string" val="set_camera_param|1|0.146997,0.16413,0.284047" />
             <parameter name="3" type="string" val="set_camera_param|2|120" />
             <parameter name="4" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
+            <parameter name="5" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -269,16 +269,17 @@
     <Hotspot t0="25.9314" t1="-2.31318" t2="-5.44237" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="34" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0" />
-            <parameter name="1" type="string" val="play_sound|50|Data/Sounds/DirtImpact1.wav" />
-            <parameter name="10" type="string" val="play_sound|49|Data/Sounds/explosives/explosion3.wav" />
-            <parameter name="2" type="string" val="wait|1000" />
-            <parameter name="3" type="string" val="play_sound|50|Data/Sounds/DirtImpact1.wav" />
-            <parameter name="4" type="string" val="wait|1000" />
-            <parameter name="5" type="string" val="play_sound|50|Data/Sounds/DirtImpact1.wav" />
-            <parameter name="6" type="string" val="wait|1000" />
-            <parameter name="7" type="string" val="play_sound|50|Data/Sounds/DirtImpact1.wav" />
-            <parameter name="8" type="string" val="wait|1000" />
-            <parameter name="9" type="string" val="create_particle|51|10|Data/Particles/metalspark.xml|5|1,0,0|false|0.5" />
+            <parameter name="1" type="string" val="send_level_message|set_to_guard" />
+            <parameter name="10" type="string" val="create_particle|51|10|Data/Particles/metalspark.xml|5|1,0,0|false|0.5" />
+            <parameter name="11" type="string" val="play_sound|49|Data/Sounds/explosives/explosion3.wav" />
+            <parameter name="2" type="string" val="play_sound|50|Data/Sounds/DirtImpact1.wav" />
+            <parameter name="3" type="string" val="wait|1000" />
+            <parameter name="4" type="string" val="play_sound|50|Data/Sounds/DirtImpact1.wav" />
+            <parameter name="5" type="string" val="wait|1000" />
+            <parameter name="6" type="string" val="play_sound|50|Data/Sounds/DirtImpact1.wav" />
+            <parameter name="7" type="string" val="wait|1000" />
+            <parameter name="8" type="string" val="play_sound|50|Data/Sounds/DirtImpact1.wav" />
+            <parameter name="9" type="string" val="wait|1000" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -313,7 +314,6 @@
             <parameter name="16" type="string" val="set_level_param|15|0,0.766676,1" />
             <parameter name="17" type="string" val="set_level_param|16|3" />
             <parameter name="18" type="string" val="set_level_param|17|Buster;Charlie" />
-            <parameter name="19" type="string" val="go_to_line|0" />
             <parameter name="2" type="string" val="set_level_param|1|#RAINY" />
             <parameter name="3" type="string" val="set_level_param|2|25" />
             <parameter name="4" type="string" val="set_level_param|3|#RAIN" />
@@ -363,6 +363,12 @@
     <EnvObject t0="-12.7317" t1="1.2468" t2="27.6389" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <PlaceholderObject t0="28.314" t1="-1.98286" t2="-16.9635" s0="1.35453" s1="1.35453" s2="1.35453" q0="0" q1="0" q2="0.204841" q3="0.978795" euler_x="0" euler_y="0" euler_z="0.412603" id="48" type_file="Data/Objects/primitives/edged_cone.xml" special_type="0">
+        <parameters />
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
     <EnvObject t0="25.9314" t1="-2.31318" t2="-5.44237" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -387,10 +393,7 @@
     <Hotspot t0="26.3395" t1="-2.31318" t2="-17.0909" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="54" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
-            <parameter name="1" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
-            <parameter name="2" type="string" val="on_character_enter_exit|0|3|1" />
-            <parameter name="3" type="string" val="set_camera_param|3|0;0;0;0;0;0;0" />
-            <parameter name="4" type="string" val="go_to_line|0" />
+            <parameter name="1" type="string" val="create_object|48|Data/Objects/primitives/edged_cone.xml" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
