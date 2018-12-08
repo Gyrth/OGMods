@@ -466,6 +466,11 @@ void Reset(){
 }
 
 void Save(){
+	int line_index = 0;
+	while(params.HasParam("" + line_index)){
+		params.Remove("" + line_index);
+		line_index += 1;
+	}
 	for(uint i = 0; i < drika_indexes.size(); i++){
 		string data = drika_elements[drika_indexes[i]].GetSaveString();
 		params.SetString("" + drika_elements[drika_indexes[i]].index, data);
