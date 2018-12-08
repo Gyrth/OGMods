@@ -27,6 +27,10 @@ class DrikaCreateParticle : DrikaElement{
 		placeholder.SetSelectable(false);
 	}
 
+	~DrikaCreateParticle(){
+		QueueDeleteObjectID(placeholder_id);
+	}
+
 	string GetSaveString(){
 		return "create_particle" + param_delimiter + placeholder_id + param_delimiter + amount + param_delimiter + particle_path + param_delimiter + velocity + param_delimiter + Vec3ToString(tint) + param_delimiter + use_blood_tint + param_delimiter + spread;
 	}

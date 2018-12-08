@@ -61,7 +61,6 @@ class DrikaElement{
 	void Editing(){}
 	void DrawEditing(){}
 	void SetCurrent(bool _current){}
-	void Delete(){}
 	void ReceiveMessage(string message){}
 	void ReceiveMessage(string message, int param){}
 	void ReceiveMessage(string message, string param){}

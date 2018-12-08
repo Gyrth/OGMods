@@ -18,9 +18,10 @@ class DrikaCreateObject : DrikaElement{
 		placeholder.SetSelectable(false);
 	}
 
-	void Delete(){
-		QueueDeleteObjectID(placeholder_id);
-	}
+	~DrikaCreateObject()
+    {
+	  QueueDeleteObjectID(placeholder_id);
+    }
 
 	string GetSaveString(){
 		return "create_object" + param_delimiter + placeholder_id + param_delimiter + object_path;

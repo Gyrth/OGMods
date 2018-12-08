@@ -16,6 +16,10 @@ class DrikaPlaySound : DrikaElement{
 		placeholder.SetSelectable(false);
 	}
 
+	~DrikaPlaySound(){
+		QueueDeleteObjectID(placeholder_id);
+	}
+
 	string GetSaveString(){
 		return "play_sound" + param_delimiter + placeholder_id + param_delimiter + sound_path;
 	}
