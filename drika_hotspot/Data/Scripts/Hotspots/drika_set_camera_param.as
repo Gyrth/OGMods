@@ -156,14 +156,19 @@ class DrikaSetCameraParam : DrikaElement{
 	bool SetParameter(bool reset){
 		switch(camera_param){
 			case tint:
-				Log(info, "Setting tint to " + vec3_param_after.x + " " + vec3_param_after.y + " " + vec3_param_after.z);
 				camera.SetTint(reset?vec3_param_before:vec3_param_after);
 				break;
 			case vignette_tint:
-				camera.SetVignetteTint(reset?vec3_param_before:vec3_param_after);
+				{
+					camera.SetVignetteTint(reset?vec3_param_before:vec3_param_after);
+				}
 				break;
 			case fov:
-				camera.SetFOV(reset?float_param_before:float_param_after);
+				if(level.DialogueCameraControl()){
+					level.Execute("dialogue.cam_zoom = " + float_param_after + ";");
+				}else{
+					camera.SetFOV(reset?float_param_before:float_param_after);
+				}
 				break;
 			case dof:
 				{

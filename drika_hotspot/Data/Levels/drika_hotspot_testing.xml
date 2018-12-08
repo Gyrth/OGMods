@@ -47,7 +47,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="23.1528" t1="1.281" t2="-12.962" s0="1" s1="1" s2="1" q0="-0.200681" q1="-0.705157" q2="0.219901" q3="-0.643524" euler_x="-2.53701" euler_y="1.47946" euler_z="3.14159" id="1">
+    <CameraObject t0="16.9888" t1="2.56016" t2="4.96771" s0="1" s1="1" s2="1" q0="0.0533985" q1="-0.926401" q2="0.143867" q3="0.343849" euler_x="-2.83346" euler_y="-0.710811" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -228,15 +228,17 @@
     </EnvObject>
     <Hotspot t0="13.8909" t1="-0.612318" t2="10.2304" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|4||0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|2||0" />
             <parameter name="1" type="string" val="start_dialogue|CameraParams" />
-            <parameter name="2" type="string" val="wait|500" />
+            <parameter name="10" type="string" val="set_camera_param|2|120" />
+            <parameter name="2" type="string" val="wait|1000" />
             <parameter name="3" type="string" val="send_level_message|change_character" />
             <parameter name="4" type="string" val="wait_level_message|change_character" />
             <parameter name="5" type="string" val="play_sound|24|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav" />
             <parameter name="6" type="string" val="set_character|3|Data/Characters/guard.xml" />
             <parameter name="7" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
-            <parameter name="8" type="string" val="go_to_line|0" />
+            <parameter name="8" type="string" val="set_camera_param|0|1,1,1" />
+            <parameter name="9" type="string" val="set_camera_param|1|0.0,0.0,0.0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -250,8 +252,8 @@
     <Hotspot t0="26.1872" t1="-2.31318" t2="-13.7538" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
-            <parameter name="1" type="string" val="set_camera_param|0|1,0,0" />
-            <parameter name="2" type="string" val="set_camera_param|1|0,0.125005,1" />
+            <parameter name="1" type="string" val="set_camera_param|0|0.498055,0.263562,0.263562" />
+            <parameter name="2" type="string" val="set_camera_param|1|0.146997,0.16413,0.284047" />
             <parameter name="3" type="string" val="set_camera_param|2|120" />
             <parameter name="4" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
         </parameters>
@@ -374,7 +376,7 @@
         <parameters>
             <parameter name="Dialogue" type="string" val="empty" />
             <parameter name="DisplayName" type="string" val="CameraParams" />
-            <parameter name="NumParticipants" type="int" val="1" />
+            <parameter name="NumParticipants" type="string" val="1" />
             <parameter name="Script" type="string" val='#name &quot;CameraParams&quot;&#x0A;#participants 1&#x0A;set_character_pos 1 14.0065 -1.81446 9.94124 -133&#x0A;set_cam 13.4303 -0.527944 10.4762 -42.77 -52.4 0 90&#x0A;say 1 &quot;Turner&quot; &quot;Changing character in 3 2 1...&quot;&#x0A;' />
             <parameter name="obj_1" type="int" val="55" />
         </parameters>
