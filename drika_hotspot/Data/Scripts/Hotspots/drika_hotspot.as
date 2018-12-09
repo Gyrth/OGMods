@@ -27,6 +27,7 @@ string param_delimiter = "|";
 array<string> messages;
 bool is_selected = false;
 const int _ragdoll_state = 4;
+dictionary object_references;
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -47,6 +48,36 @@ void Init() {
 	DrikaElement second_element = first_element;
 	first_element.index = 1;
 	ConvertDisplayColors();
+}
+
+string RegisterObject(int id, string reference){
+	Log(warning, "RegisterObject! " + reference);
+	if(object_references.exists(reference)){
+		Log(warning, "Object reference already exists! " + reference);
+		int i = 0;
+		while(object_references.exists(reference + i)){
+			i += 1;
+		}
+		object_references[reference + i] = id;
+		return (reference + i);
+	}else{
+		object_references[reference] = id;
+		return reference;
+	}
+}
+
+void DeRegisterObject(string reference){
+	Log(warning, "DeRegisterObject! " + reference);
+	object_references.delete(reference);
+}
+
+int GetRegisteredObjectID(string reference){
+	Log(warning, "GetRegisteredObjectID! " + reference);
+	if(object_references.exists(reference)){
+		return int(object_references[reference]);
+	}else{
+		return -1;
+	}
 }
 
 void ConvertDisplayColors(){
@@ -103,13 +134,13 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 	}else if(line_elements[0] == "start_dialogue"){
 		return DrikaStartDialogue(line_elements[1]);
 	}else if(line_elements[0] == "set_object_param"){
-		return DrikaSetObjectParam(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
+		return DrikaSetObjectParam(line_elements[1], line_elements[2], line_elements[3], line_elements[4], line_elements[5]);
 	}else if(line_elements[0] == "set_level_param"){
 		return DrikaSetLevelParam(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "set_camera_param"){
 		return DrikaSetCameraParam(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "create_object"){
-		return DrikaCreateObject(line_elements[1], line_elements[2]);
+		return DrikaCreateObject(line_elements[1], line_elements[2], line_elements[3]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);

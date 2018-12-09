@@ -27,6 +27,7 @@
     <parameter name="Sky Brightness" type="float" val="1" />
     <parameter name="Sky Rotation" type="float" val="-62" />
     <parameter name="Sky Tint" type="string" val="255, 255, 255" />
+    <parameter name="drika_param" type="string" val="drika_new_value" />
 </LevelScriptParameters>
 <NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
 <Sky>
@@ -47,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="20.6799" t1="3.36892" t2="16.5282" s0="1" s1="1" s2="1" q0="-0.181693" q1="0.709006" q2="-0.197539" q3="-0.652132" euler_x="-2.59815" euler_y="-1.48728" euler_z="3.14159" id="1">
+    <CameraObject t0="24.0637" t1="0.919512" t2="-19.0473" s0="1" s1="1" s2="1" q0="0.13098" q1="0.80061" q2="-0.189592" q3="0.553102" euler_x="-2.67654" euler_y="1.20912" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -197,7 +198,7 @@
         <parameters>
             <parameter name="0" type="string" val="set_character|-1|Data/Characters/guard.xml|true" />
             <parameter name="1" type="string" val="set_enabled|-1|true" />
-            <parameter name="10" type="string" val="set_object_param|-1|0|drika_param|drika_new_value" />
+            <parameter name="10" type="string" val="set_object_param|0|-1|0|drika_param|drika_new_value" />
             <parameter name="2" type="string" val="wait_level_message|continue_drika_hotspot" />
             <parameter name="3" type="string" val="wait|1000" />
             <parameter name="4" type="string" val="create_particle|46|5|Data/Particles/blooddrop.xml|0|1,1,1|true|0" />
@@ -393,7 +394,8 @@
     <Hotspot t0="26.3395" t1="-2.31318" t2="-17.0909" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="54" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
-            <parameter name="1" type="string" val="create_object|48|Data/Objects/primitives/edged_cone.xml" />
+            <parameter name="1" type="string" val="create_object|48|Data/Objects/primitives/edged_cone.xml|edged_cone" />
+            <parameter name="2" type="string" val="set_object_param|1|edged_cone|0|drika_param|drika_new_value" />
         </parameters>
         <Connections />
         <ConnectionsFrom />

@@ -1,6 +1,12 @@
+enum identifier_types {	id = 0,
+						reference = 1
+					};
+
 class DrikaSetObjectParam : DrikaElement{
 	int object_id;
+	string reference_string;
 	int current_type;
+	int current_idenifier_type;
 	string param_name;
 
 	string string_param_before;
@@ -13,12 +19,20 @@ class DrikaSetObjectParam : DrikaElement{
 	float float_param_after = 0.0;
 
 	param_types param_type;
+	identifier_types identifier_type;
 
-	DrikaSetObjectParam(string _object_id = "-1", string _param_type = "0", string _param_name = "drika_param", string _param_after = "drika_new_value"){
-		object_id = atoi(_object_id);
+	DrikaSetObjectParam(string _identifier_type = "0", string _identifier = "-1", string _param_type = "0", string _param_name = "drika_param", string _param_after = "drika_new_value"){
 		param_name = _param_name;
 		param_type = param_types(atoi(_param_type));
+		identifier_type = identifier_types(atoi(_identifier_type));
 		current_type = param_type;
+		current_idenifier_type = identifier_type;
+
+		if(identifier_type == id){
+			object_id = atoi(_identifier);
+		}else if(identifier_type == reference){
+			reference_string = _identifier;
+		}
 
 		drika_element_type = drika_set_object_param;
 		string_param_after = _param_after;
@@ -69,7 +83,7 @@ class DrikaSetObjectParam : DrikaElement{
 		}else if(param_type == float_param){
 			string_param_after = "" + float_param_after;
 		}
-		return "set_object_param" + param_delimiter + object_id + param_delimiter + int(param_type) + param_delimiter + param_name + param_delimiter + string_param_after;
+		return "set_object_param" + param_delimiter + int(identifier_type) + param_delimiter + object_id + param_delimiter + int(param_type) + param_delimiter + param_name + param_delimiter + string_param_after;
 	}
 
 	string GetDisplayString(){
@@ -77,7 +91,15 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	void AddSettings(){
-		ImGui_InputInt("Object ID", object_id);
+		if(ImGui_Combo("Identifier Type", current_idenifier_type, {"ID", "Reference"})){
+			identifier_type = identifier_types(current_idenifier_type);
+		}
+
+		if(identifier_type == id){
+			ImGui_InputInt("Object ID", object_id);
+		}else if (identifier_type == reference){
+			ImGui_InputText("Reference", reference_string, 64);
+		}
 		ImGui_InputText("Param Name", param_name, 64);
 
 		if(ImGui_Combo("Param Type", current_type, {"String", "Integer", "Float"})){
@@ -99,7 +121,20 @@ class DrikaSetObjectParam : DrikaElement{
 
 	bool SetParameter(bool reset){
 		if(ObjectExists(object_id)){
-			ScriptParams@ params = ReadObjectFromID(object_id).GetScriptParams();
+			Object@ target_object;
+
+			if(identifier_type == id){
+				@target_object = ReadObjectFromID(object_id);
+			}else if (identifier_type == reference){
+				int registered_object_id = GetRegisteredObjectID(reference_string);
+				if(registered_object_id == -1){
+					return true;
+				}
+				@target_object = ReadObjectFromID(registered_object_id);
+			}
+
+			ScriptParams@ params = target_object.GetScriptParams();
+
 			if(!params.HasParam(param_name)){
 				if(param_type == string_param){
 					params.AddString(param_name, reset?string_param_before:string_param_after);
