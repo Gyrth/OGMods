@@ -500,7 +500,7 @@ void Reset(){
 	GetCurrentElement().EditDone();
 	current_line = 0;
 	script_finished = false;
-	for(uint i = 0; i < drika_indexes.size(); i++){
+	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
 		drika_elements[drika_indexes[i]].Reset();
 	}
 }
