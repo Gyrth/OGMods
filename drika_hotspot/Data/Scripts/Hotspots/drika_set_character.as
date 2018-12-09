@@ -78,8 +78,12 @@ class DrikaSetCharacter : DrikaElement{
 			character.char_path = reset?original_character_path:character_path;
 			string command =	"character_getter.Load(this_mo.char_path);" +
 								"this_mo.RecreateRiggedObject(this_mo.char_path);";
+
 			if(cache_skeleton_info){
 				command += "CacheSkeletonInfo();";
+			}
+			if(character.GetIntVar("state") == _ragdoll_state){
+				command += "Recover();";
 			}
 			character.Execute(command);
 		}
