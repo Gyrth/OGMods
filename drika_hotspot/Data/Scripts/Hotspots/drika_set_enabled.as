@@ -16,7 +16,11 @@ class DrikaSetEnabled : DrikaElement{
 		}
 		Reset();
 	}
-	
+
+	void Delete(){
+		Reset();
+	}
+
 	string GetSaveString(){
 		return "set_enabled" + param_delimiter + object_id + param_delimiter + enabled;
 	}

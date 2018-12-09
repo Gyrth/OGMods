@@ -316,6 +316,7 @@ void DrawEditor(){
 			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
 					params.Remove("" + current_line);
+					GetCurrentElement().Delete();
 					int current_index = drika_indexes[current_line];
 					drika_elements.removeAt(current_index);
 					drika_indexes.removeAt(current_line);

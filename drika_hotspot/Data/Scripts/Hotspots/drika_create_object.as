@@ -25,8 +25,7 @@ class DrikaCreateObject : DrikaElement{
 		placeholder.SetSelectable(false);
 	}
 
-	~DrikaCreateObject()
-    {
+	void Delete(){
 		Log(warning, "Destructor DrikaCreateObject");
 		QueueDeleteObjectID(placeholder_id);
     }

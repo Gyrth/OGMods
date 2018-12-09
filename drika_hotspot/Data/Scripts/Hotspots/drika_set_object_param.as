@@ -42,6 +42,10 @@ class DrikaSetObjectParam : DrikaElement{
 		GetBeforeParam();
 	}
 
+	void Delete(){
+		SetParameter(true);
+	}
+
 	void InterpParam(){
 		//No need to interp the string param since the input is already a string.
 		if(param_type == float_param){

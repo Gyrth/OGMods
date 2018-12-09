@@ -48,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="24.0637" t1="0.919512" t2="-19.0473" s0="1" s1="1" s2="1" q0="0.13098" q1="0.80061" q2="-0.189592" q3="0.553102" euler_x="-2.67654" euler_y="1.20912" euler_z="3.14159" id="1">
+    <CameraObject t0="30.8383" t1="3.96497" t2="3.81392" s0="1" s1="1" s2="1" q0="0.144197" q1="-0.399779" q2="0.0638434" q3="0.902944" euler_x="0.316719" euler_y="-0.833619" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -179,19 +179,7 @@
     <EnvObject t0="-0.953931" t1="-0.995977" t2="-2.41433" s0="0.30352" s1="0.30352" s2="0.30352" q0="0.0770607" q1="0.094198" q2="0.634554" q3="0.763237" euler_x="0.239719" euler_y="0.0460087" euler_z="1.39273" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="-0.0427046" t1="-0.873965" t2="9.78697" s0="0.18562" s1="0.18562" s2="0.18562" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
-        <parameters>
-            <parameter name="0" type="string" val="wait|1000" />
-            <parameter name="1" type="string" val="create_particle|20|5|Data/Particles/blooddrop.xml|5|0,1,0.0975609|false|0" />
-            <parameter name="2" type="string" val="go_to_line|0" />
-        </parameters>
-        <Connections />
-        <ConnectionsFrom />
-    </Hotspot>
     <EnvObject t0="-1.88727" t1="-2.08102" t2="7.30327" s0="0.25" s1="0.25" s2="0.25" q0="0.645052" q1="0.305069" q2="-0.259769" q3="-0.650667" euler_x="-1.58915" euler_y="-0.0619072" euler_z="0.822751" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="-2.12073" t1="-2.34754" t2="7.30584" s0="0.0265075" s1="0.454408" s2="0.0497455" q0="0.0180302" q1="0.0067848" q2="-0.352125" q3="0.935755" euler_x="0.0289789" euler_y="0.0253983" euler_z="-0.719453" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <Hotspot t0="-12.7317" t1="1.2468" t2="27.6389" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
@@ -395,7 +383,7 @@
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
             <parameter name="1" type="string" val="create_object|48|Data/Objects/primitives/edged_cone.xml|edged_cone" />
-            <parameter name="2" type="string" val="set_object_param|1|edged_cone|0|drika_param|drika_new_value" />
+            <parameter name="2" type="string" val="set_object_param|1|0|0|drika_param|drika_new_value" />
         </parameters>
         <Connections />
         <ConnectionsFrom />

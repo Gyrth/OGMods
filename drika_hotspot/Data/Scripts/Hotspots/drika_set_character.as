@@ -19,9 +19,9 @@ class DrikaSetCharacter : DrikaElement{
 		}
 	}
 
-	~DrikaSetCharacter(){
+	void Delete(){
 		Log(warning, "Destructor DrikaSetCharacter");
-		/* SetParameter(true); */
+		SetParameter(true);
 	}
 
 	string GetSaveString(){

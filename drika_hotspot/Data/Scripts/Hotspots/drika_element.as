@@ -55,6 +55,7 @@ class DrikaElement{
 	void Update(){}
 	bool Trigger(){return false;}
 	void Reset(){}
+	void Delete(){}
 	void AddSettings(){}
 	void ApplySettings(){}
 	void EditDone(){}

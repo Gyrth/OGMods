@@ -80,6 +80,10 @@ class DrikaSetLevelParam : DrikaElement{
 		GetBeforeParam();
 	}
 
+	void Delete(){
+		SetParameter(true);
+	}
+
 	void SetParamType(){
 		if(string_parameters.find(level_param) != -1){
 			param_type = string_param;
