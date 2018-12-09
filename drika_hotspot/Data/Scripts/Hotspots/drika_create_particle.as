@@ -28,6 +28,7 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	~DrikaCreateParticle(){
+		Log(warning, "Destructor DrikaCreateParticle");
 		QueueDeleteObjectID(placeholder_id);
 	}
 

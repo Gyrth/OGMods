@@ -20,7 +20,8 @@ class DrikaCreateObject : DrikaElement{
 
 	~DrikaCreateObject()
     {
-	  QueueDeleteObjectID(placeholder_id);
+		Log(warning, "Destructor DrikaCreateObject");
+		QueueDeleteObjectID(placeholder_id);
     }
 
 	string GetSaveString(){

@@ -26,6 +26,7 @@ Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
 string param_delimiter = "|";
 array<string> messages;
 bool is_selected = false;
+const int _ragdoll_state = 4;
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
