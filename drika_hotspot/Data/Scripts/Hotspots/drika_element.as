@@ -13,7 +13,8 @@ enum drika_element_types { 	none = 0,
 							drika_set_object_param = 12,
 							drika_set_level_param = 13,
 							drika_set_camera_param = 14,
-							drika_create_object = 15
+							drika_create_object = 15,
+							drika_transform_object = 16
 						};
 
 array<vec4> display_colors = {	vec4(255),
@@ -28,6 +29,7 @@ array<vec4> display_colors = {	vec4(255),
 								vec4(148, 69, 64, 255),
 								vec4(132, 150, 75, 255),
 								vec4(196, 145, 145, 255),
+								vec4(90, 154, 191, 255),
 								vec4(90, 154, 191, 255),
 								vec4(90, 154, 191, 255),
 								vec4(90, 154, 191, 255),

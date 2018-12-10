@@ -11,7 +11,7 @@ class DrikaTransformObject : DrikaElement{
 	vec3 before_scale;
 
 	DrikaTransformObject(string _placeholder_id = "-1", string _identifier_type = "0", string _identifier = "-1"){
-		drika_element_type = drika_set_enabled;
+		drika_element_type = drika_transform_object;
 		placeholder_id = atoi(_placeholder_id);
 		identifier_type = identifier_types(atoi(_identifier_type));
 		current_idenifier_type = identifier_type;
