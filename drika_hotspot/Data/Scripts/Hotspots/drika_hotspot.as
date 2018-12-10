@@ -176,8 +176,6 @@ void Update(){
 				current_line += 1;
 			}
 		}
-	}else if(drika_indexes.size() > 0 && EditorModeActive()){
-		GetCurrentElement().Editing();
 	}
 }
 
@@ -385,6 +383,7 @@ void DrawEditor(){
 					GetCurrentElement().EditDone();
 					display_index = int(item_no);
 					current_line = int(i);
+					GetCurrentElement().StartEdit();
 				}
 			}
 			if(update_scroll && display_index == int(item_no)){
@@ -451,6 +450,7 @@ void InsertElement(DrikaElement@ new_element){
 		current_line += 1;
 	}
 	ReorderElements();
+	GetCurrentElement().StartEdit();
 }
 
 void ReceiveMessage(string msg){
@@ -501,11 +501,15 @@ void HandleEventItem(string event, ItemObject @obj){
 
 void Reset(){
 	GetCurrentElement().EditDone();
-	current_line = 0;
+	//If the user is editing the script then stay with the current line to edit.
+	if(!editing){
+		current_line = 0;
+	}
 	script_finished = false;
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
 		drika_elements[drika_indexes[i]].Reset();
 	}
+	GetCurrentElement().StartEdit();
 }
 
 void Save(){

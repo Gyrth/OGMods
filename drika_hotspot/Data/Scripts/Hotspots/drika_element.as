@@ -69,7 +69,7 @@ class DrikaElement{
 	void AddSettings(){}
 	void ApplySettings(){}
 	void EditDone(){}
-	void Editing(){}
+	void StartEdit(){}
 	void DrawEditing(){}
 	void SetCurrent(bool _current){}
 	void ReceiveMessage(string message){}

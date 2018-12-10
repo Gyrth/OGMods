@@ -28,7 +28,6 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	void Delete(){
-		Log(warning, "Destructor DrikaCreateParticle");
 		QueueDeleteObjectID(placeholder_id);
 	}
 
@@ -58,11 +57,18 @@ class DrikaCreateParticle : DrikaElement{
 		}
 	}
 
-	void Editing(){
+	void StartEdit(){
 		if(ObjectExists(placeholder_id)){
 			placeholder.SetSelectable(true);
 		}else{
 			CreatePlaceholder();
+		}
+	}
+
+	void EditDone(){
+		if(ObjectExists(placeholder_id)){
+			placeholder.SetSelected(false);
+			placeholder.SetSelectable(false);
 		}
 	}
 
@@ -72,13 +78,6 @@ class DrikaCreateParticle : DrikaElement{
 			DebugDrawLine(placeholder.GetTranslation(), placeholder.GetTranslation() + (forward_direction * (velocity / 10.0)), vec3(1, 0, 0), _delete_on_update);
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			DebugDrawBillboard("Data/Textures/ui/stealth_debug/zzzz.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
-		}
-	}
-
-	void EditDone(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelected(false);
-			placeholder.SetSelectable(false);
 		}
 	}
 

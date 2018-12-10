@@ -90,7 +90,7 @@ class DrikaTransformObject : DrikaElement{
 		}
 	}
 
-	void Editing(){
+	void StartEdit(){
 		if(ObjectExists(placeholder_id)){
 			placeholder.SetSelectable(true);
 		}else{

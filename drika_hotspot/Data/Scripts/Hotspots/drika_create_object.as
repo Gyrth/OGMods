@@ -57,11 +57,18 @@ class DrikaCreateObject : DrikaElement{
 		}
 	}
 
-	void Editing(){
+	void StartEdit(){
 		if(ObjectExists(placeholder_id)){
 			placeholder.SetSelectable(true);
 		}else{
 			CreatePlaceholder();
+		}
+	}
+
+	void EditDone(){
+		if(ObjectExists(placeholder_id)){
+			placeholder.SetSelected(false);
+			placeholder.SetSelectable(false);
 		}
 	}
 
@@ -93,13 +100,6 @@ class DrikaCreateObject : DrikaElement{
 			placeholder_object.SetPreview(object_path);
 		}
 		QueueDeleteObjectID(new_object_id);
-	}
-
-	void EditDone(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelected(false);
-			placeholder.SetSelectable(false);
-		}
 	}
 
 	void Reset(){
