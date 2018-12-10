@@ -34,6 +34,10 @@ array<vec4> display_colors = {	vec4(255),
 								vec4(90, 154, 191, 255)
 							};
 
+enum identifier_types {	id = 0,
+						reference = 1
+					};
+
 enum param_types { 	string_param = 0,
 					int_param = 1,
 					float_param = 2,

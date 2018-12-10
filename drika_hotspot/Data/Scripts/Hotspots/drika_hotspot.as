@@ -114,7 +114,7 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 	if(line_elements[0] == "set_character"){
 		return DrikaSetCharacter(line_elements[1], line_elements[2], line_elements[3]);
 	}else if(line_elements[0] == "set_enabled"){
-		return DrikaSetEnabled(line_elements[1], line_elements[2]);
+		return DrikaSetEnabled(line_elements[1], line_elements[2], line_elements[3]);
 	}else if(line_elements[0] == "wait"){
 		return DrikaWait(line_elements[1]);
 	}else if(line_elements[0] == "wait_level_message"){

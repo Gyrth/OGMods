@@ -1,7 +1,3 @@
-enum identifier_types {	id = 0,
-						reference = 1
-					};
-
 class DrikaSetObjectParam : DrikaElement{
 	int object_id;
 	string reference_string;
@@ -82,16 +78,22 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	string GetSaveString(){
+		string save_identifier;
+		if(identifier_type == id){
+			save_identifier = "" + object_id;
+		}else if(identifier_type == reference){
+			save_identifier = "" + reference_string;
+		}
 		if(param_type == int_param){
 			string_param_after = "" + int_param_after;
 		}else if(param_type == float_param){
 			string_param_after = "" + float_param_after;
 		}
-		return "set_object_param" + param_delimiter + int(identifier_type) + param_delimiter + object_id + param_delimiter + int(param_type) + param_delimiter + param_name + param_delimiter + string_param_after;
+		return "set_object_param" + param_delimiter + int(identifier_type) + param_delimiter + save_identifier + param_delimiter + int(param_type) + param_delimiter + param_name + param_delimiter + string_param_after;
 	}
 
 	string GetDisplayString(){
-		return "SetObjectParam " + string_param_after;
+		return "SetObjectParam " + param_name + " " + string_param_after;
 	}
 
 	void AddSettings(){
@@ -116,6 +118,13 @@ class DrikaSetObjectParam : DrikaElement{
 			ImGui_InputInt("After", int_param_after);
 		}else{
 			ImGui_SliderFloat("After", float_param_after, -1000.0f, 1000.0f, "%.4f");
+		}
+	}
+
+	void DrawEditing(){
+		if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
+			Object@ target_object = ReadObjectFromID(object_id);
+			DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(1.0), _delete_on_update);
 		}
 	}
 

@@ -42,13 +42,13 @@
             <parameter name="0" type="string" val="wait_level_message|continue_drika_hotspot" />
             <parameter name="1" type="string" val="play_sound|13|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav" />
             <parameter name="2" type="string" val="create_particle|15|5|Data/Particles/blooddrop.xml|3|0,0.0833433,1|false|0" />
-            <parameter name="3" type="string" val="set_enabled|12|true" />
+            <parameter name="3" type="string" val="set_enabled|0|12|true" />
             <parameter name="4" type="string" val="set_character|3|Data/Characters/guard.xml|true" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="30.8383" t1="3.96497" t2="3.81392" s0="1" s1="1" s2="1" q0="0.144197" q1="-0.399779" q2="0.0638434" q3="0.902944" euler_x="0.316719" euler_y="-0.833619" euler_z="0" id="1">
+    <CameraObject t0="24.9251" t1="1.65344" t2="-22.4285" s0="1" s1="1" s2="1" q0="0.0523863" q1="0.945689" q2="-0.193722" q3="0.255732" euler_x="-2.73749" euler_y="0.528205" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -179,13 +179,16 @@
     <EnvObject t0="-0.953931" t1="-0.995977" t2="-2.41433" s0="0.30352" s1="0.30352" s2="0.30352" q0="0.0770607" q1="0.094198" q2="0.634554" q3="0.763237" euler_x="0.239719" euler_y="0.0460087" euler_z="1.39273" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <DynamicLightObject t0="27.6818" t1="-0.677884" t2="-16.9596" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
+        <parameters />
+    </DynamicLightObject>
     <EnvObject t0="-1.88727" t1="-2.08102" t2="7.30327" s0="0.25" s1="0.25" s2="0.25" q0="0.645052" q1="0.305069" q2="-0.259769" q3="-0.650667" euler_x="-1.58915" euler_y="-0.0619072" euler_z="0.822751" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <Hotspot t0="-12.7317" t1="1.2468" t2="27.6389" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="set_character|-1|Data/Characters/guard.xml|true" />
-            <parameter name="1" type="string" val="set_enabled|-1|true" />
+            <parameter name="1" type="string" val="set_enabled|0|-1|true" />
             <parameter name="10" type="string" val="set_object_param|0|-1|0|drika_param|drika_new_value" />
             <parameter name="2" type="string" val="wait_level_message|continue_drika_hotspot" />
             <parameter name="3" type="string" val="wait|1000" />
@@ -384,6 +387,13 @@
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
             <parameter name="1" type="string" val="create_object|48|Data/Objects/primitives/edged_cone.xml|edged_cone" />
             <parameter name="2" type="string" val="set_object_param|1|0|0|drika_param|drika_new_value" />
+            <parameter name="3" type="string" val="wait|200" />
+            <parameter name="4" type="string" val="set_enabled|1|edged_cone|false" />
+            <parameter name="5" type="string" val="set_enabled|0|19|false" />
+            <parameter name="6" type="string" val="wait|200" />
+            <parameter name="7" type="string" val="set_enabled|1|edged_cone|true" />
+            <parameter name="8" type="string" val="set_enabled|0|19|true" />
+            <parameter name="9" type="string" val="go_to_line|3" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -417,4 +427,5 @@
     <SpawnerItem display_name="Hammer" path="Data/Items/gear/dogtools/dogtoolhammer.xml" thumbnail_path="" />
     <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
     <SpawnerItem display_name="Male Rabbit Guard Brown" path="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_GuardActor_reddy.png" />
+    <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
 </RecentItems>
