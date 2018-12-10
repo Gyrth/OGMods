@@ -82,6 +82,15 @@ class DrikaElement{
 		return vec3(atof(values[0]), atof(values[1]), atof(values[2]));
 	}
 
+	quaternion StringToQuat(string value){
+		array<string> values = value.split(",");
+		return quaternion(atof(values[0]), atof(values[1]), atof(values[2]), atof(values[3]));
+	}
+
+	string QuatToString(quaternion value){
+		return value.x + "," + value.y + "," + value.z + "," + value.w;
+	}
+
 	string FloatArrayToString(array<float> values){
 		string return_value = "";
 		for(uint i = 0; i < values.size(); i++){

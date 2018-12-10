@@ -1,5 +1,3 @@
-string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
-
 class DrikaCreateObject : DrikaElement{
 	string object_path;
 	int spawned_object_id = -1;
@@ -46,6 +44,7 @@ class DrikaCreateObject : DrikaElement{
 			string new_path = GetUserPickedReadPath("xml", "Data/Objects");
 			if(new_path != ""){
 				object_path = new_path;
+				SetPreviewMesh();
 			}
 		}
 		ImGui_Checkbox("Set Reference", show_reference_option);
@@ -71,13 +70,16 @@ class DrikaCreateObject : DrikaElement{
 	void CreatePlaceholder(){
 		placeholder_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml", false);
 		@placeholder = ReadObjectFromID(placeholder_id);
-		placeholder.SetEditorLabel("Drika Create Object Helper");
 		placeholder.SetSelectable(true);
 		placeholder.SetTranslatable(true);
 		placeholder.SetScalable(true);
 		placeholder.SetRotatable(true);
 		placeholder.SetScale(vec3(0.25));
 		placeholder.SetTranslation(this_hotspot.GetTranslation());
+		SetPreviewMesh();
+	}
+
+	void SetPreviewMesh(){
 		PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder);
 		int new_object_id = CreateObject(object_path);
 		Object@ main_object = ReadObjectFromID(new_object_id);

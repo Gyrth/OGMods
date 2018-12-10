@@ -14,6 +14,7 @@
 #include "hotspots/drika_set_level_param.as"
 #include "hotspots/drika_set_camera_param.as"
 #include "hotspots/drika_create_object.as"
+#include "hotspots/drika_transform_object.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -28,6 +29,7 @@ array<string> messages;
 bool is_selected = false;
 const int _ragdoll_state = 4;
 dictionary object_references;
+string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -141,6 +143,8 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 		return DrikaSetCameraParam(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "create_object"){
 		return DrikaCreateObject(line_elements[1], line_elements[2], line_elements[3]);
+	}else if(line_elements[0] == "transform_object"){
+		return DrikaTransformObject(line_elements[1], line_elements[2], line_elements[3]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -309,6 +313,10 @@ void DrawEditor(){
 				}
 				if(ImGui_MenuItem("Create Object")){
 					DrikaCreateObject new_param();
+					InsertElement(@new_param);
+				}
+				if(ImGui_MenuItem("Transform Object")){
+					DrikaTransformObject new_param();
 					InsertElement(@new_param);
 				}
 				ImGui_EndMenu();
