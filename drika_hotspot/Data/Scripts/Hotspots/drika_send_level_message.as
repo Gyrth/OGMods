@@ -18,7 +18,7 @@ class DrikaSendLevelMessage : DrikaElement{
 	}
 
 	void AddSettings(){
-		if( ImGui_InputTextMultiline("", message, 64, vec2(-1.0, -1.0)) ){
+		if(ImGui_InputText("Message", message, 64)){
 			SetDisplayMessage();
 		}
 	}
@@ -31,7 +31,6 @@ class DrikaSendLevelMessage : DrikaElement{
 	}
 
 	bool Trigger(){
-		Log(info, "Send level message " + message);
 		level.SendMessage(message);
 		return true;
 	}

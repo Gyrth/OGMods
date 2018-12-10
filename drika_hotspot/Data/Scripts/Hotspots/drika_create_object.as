@@ -24,7 +24,6 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void Delete(){
-		Log(warning, "Destructor DrikaCreateObject");
 		QueueDeleteObjectID(placeholder_id);
     }
 

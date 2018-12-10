@@ -13,14 +13,12 @@ class DrikaSetCharacter : DrikaElement{
 		cache_skeleton_info = ((_cache_skeleton_info == "true")?true:false);
 		if(MovementObjectExists(character_id)){
 			@character = ReadCharacterID(character_id);
-			GetOriginalCharacter();
 		}else{
 			Log(warning, "Character does not exist with id " + character_id);
 		}
 	}
 
 	void Delete(){
-		Log(warning, "Destructor DrikaSetCharacter");
 		SetParameter(true);
 	}
 
@@ -42,7 +40,6 @@ class DrikaSetCharacter : DrikaElement{
 		if(ImGui_InputInt("Character ID", character_id)){
 			if(MovementObjectExists(character_id)){
 				@character = ReadCharacterID(character_id);
-				GetOriginalCharacter();
 			}
 		}
 		ImGui_Text("Set To Character : ");
@@ -61,13 +58,17 @@ class DrikaSetCharacter : DrikaElement{
 		if(character_id == -1 || !MovementObjectExists(character_id)){
 			return false;
 		}
+		if(!triggered){
+			GetOriginalCharacter();
+		}
+		triggered = true;
 		SetParameter(false);
 		return true;
 	}
 
 	void DrawEditing(){
 		if(character_id != -1 && MovementObjectExists(character_id)){
-			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(1.0), _delete_on_update);
+			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
@@ -91,6 +92,9 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	void Reset(){
-		SetParameter(true);
+		if(triggered){
+			triggered = false;
+			SetParameter(true);
+		}
 	}
 }

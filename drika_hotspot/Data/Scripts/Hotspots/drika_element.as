@@ -51,10 +51,14 @@ enum param_types { 	string_param = 0,
 class DrikaElement{
 	drika_element_types drika_element_type = none;
 	bool visible;
+	bool triggered = false;
 	bool has_settings = false;
 	int index = -1;
 	int placeholder_id;
 	Object@ placeholder;
+	int object_id;
+	string reference_string;
+	identifier_types identifier_type;
 
 	string GetSaveString(){return "";}
 	string GetDisplayString(){return "";};
@@ -123,5 +127,25 @@ class DrikaElement{
 		placeholder.SetRotatable(true);
 		placeholder.SetScale(vec3(0.25));
 		placeholder.SetTranslation(this_hotspot.GetTranslation());
+	}
+
+	Object@ GetTargetObject(){
+		Object@ target_object;
+		if(identifier_type == id){
+			if(object_id == -1 || !ObjectExists(object_id)){
+				Log(warning, "Object does not exist with id " + object_id);
+				return null;
+			}else{
+				@target_object = ReadObjectFromID(object_id);
+			}
+		}else if (identifier_type == reference){
+			int registered_object_id = GetRegisteredObjectID(reference_string);
+			if(registered_object_id == -1){
+				Log(warning, "Object does not exist with reference " + reference_string);
+				return null;
+			}
+			@target_object = ReadObjectFromID(registered_object_id);
+		}
+		return target_object;
 	}
 }

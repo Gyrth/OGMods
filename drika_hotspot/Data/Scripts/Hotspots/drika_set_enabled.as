@@ -1,9 +1,7 @@
 class DrikaSetEnabled : DrikaElement{
 	bool enabled;
-	int object_id;
-	string reference_string;
+	bool before_enabled;
 	int current_idenifier_type;
-	identifier_types identifier_type;
 
 	DrikaSetEnabled(string _identifier_type = "0", string _identifier = "-1", string _enabled = "true"){
 		enabled = (_enabled == "true");
@@ -18,7 +16,6 @@ class DrikaSetEnabled : DrikaElement{
 		}
 
 		has_settings = true;
-		Reset();
 	}
 
 	void Delete(){
@@ -61,7 +58,19 @@ class DrikaSetEnabled : DrikaElement{
 	}
 
 	bool Trigger(){
+		if(!triggered){
+			GetBeforeParam();
+		}
+		triggered = true;
 		return ApplyEnabled(false);
+	}
+
+	void GetBeforeParam(){
+		Object@ target_object = GetTargetObject();
+		if(target_object is null){
+			return;
+		}
+		before_enabled = target_object.GetEnabled();
 	}
 
 	void DrawEditing(){
@@ -72,27 +81,18 @@ class DrikaSetEnabled : DrikaElement{
 	}
 
 	bool ApplyEnabled(bool reset){
-		Object@ target_object;
-		if(identifier_type == id){
-			if(object_id == -1 || !ObjectExists(object_id)){
-				Log(warning, "Object does not exist with id " + object_id);
-				return false;
-			}else{
-				@target_object = ReadObjectFromID(object_id);
-			}
-		}else if (identifier_type == reference){
-			int registered_object_id = GetRegisteredObjectID(reference_string);
-			if(registered_object_id == -1){
-				Log(warning, "Object does not exist with reference " + reference_string);
-				return false;
-			}
-			@target_object = ReadObjectFromID(registered_object_id);
+		Object@ target_object = GetTargetObject();
+		if(target_object is null){
+			return false;
 		}
-		target_object.SetEnabled(reset?!enabled:enabled);
+		target_object.SetEnabled(reset?before_enabled:enabled);
 		return true;
 	}
 
 	void Reset(){
-		ApplyEnabled(true);
+		if(triggered){
+			triggered = false;
+			ApplyEnabled(true);
+		}
 	}
 }

@@ -1,6 +1,4 @@
 class DrikaSetObjectParam : DrikaElement{
-	int object_id;
-	string reference_string;
 	int current_type;
 	int current_idenifier_type;
 	string param_name;
@@ -15,7 +13,6 @@ class DrikaSetObjectParam : DrikaElement{
 	float float_param_after = 0.0;
 
 	param_types param_type;
-	identifier_types identifier_type;
 
 	DrikaSetObjectParam(string _identifier_type = "0", string _identifier = "-1", string _param_type = "0", string _param_name = "drika_param", string _param_after = "drika_new_value"){
 		param_name = _param_name;

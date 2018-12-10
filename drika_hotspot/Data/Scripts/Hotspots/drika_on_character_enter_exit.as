@@ -17,8 +17,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	character_trigger_types character_trigger_type;
 	hotspot_trigger_types hotspot_trigger_type;
 
-	bool triggered = false;
-
 	DrikaOnCharacterEnterExit(string _character_trigger_type = "0", string _param = "-1", string _hotspot_trigger_type = "0"){
 		character_trigger_type = character_trigger_types(atoi(_character_trigger_type));
 		hotspot_trigger_type = hotspot_trigger_types(atoi(_hotspot_trigger_type));
@@ -76,7 +74,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	void DrawEditing(){
 		if(character_trigger_type == check_id && character_id != -1 && MovementObjectExists(character_id)){
 			MovementObject@ character = ReadCharacterID(character_id);
-			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(1.0), _delete_on_update);
+			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 

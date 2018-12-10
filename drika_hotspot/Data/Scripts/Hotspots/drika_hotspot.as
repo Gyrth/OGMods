@@ -53,7 +53,6 @@ void Init() {
 }
 
 string RegisterObject(int id, string reference){
-	Log(warning, "RegisterObject! " + reference);
 	if(object_references.exists(reference)){
 		Log(warning, "Object reference already exists! " + reference);
 		int i = 0;
@@ -69,12 +68,10 @@ string RegisterObject(int id, string reference){
 }
 
 void DeRegisterObject(string reference){
-	Log(warning, "DeRegisterObject! " + reference);
 	object_references.delete(reference);
 }
 
 int GetRegisteredObjectID(string reference){
-	Log(warning, "GetRegisteredObjectID! " + reference);
 	if(object_references.exists(reference)){
 		return int(object_references[reference]);
 	}else{
@@ -333,8 +330,6 @@ void DrawEditor(){
 							drika_indexes[i] -= 1;
 						}
 					}
-					Log(info, "Size " + drika_elements.size());
-					Log(info, "Size indexes " + drika_indexes.size());
 					// If the last element is deleted then the target needs to be the previous element.
 					if(current_line > 0 && current_line == int(drika_elements.size())){
 						display_index = drika_indexes[current_line - 1];
@@ -495,7 +490,7 @@ void HandleEvent(string event, MovementObject @mo){
 }
 
 void HandleEventItem(string event, ItemObject @obj){
-	Log(info, "on item work!");
+	Log(info, "on item works!");
 	if(event == "enter"){
 		if(!script_finished && drika_indexes.size() > 0){
 			GetCurrentElement().ReceiveMessage("ItemEnter", obj.GetID());

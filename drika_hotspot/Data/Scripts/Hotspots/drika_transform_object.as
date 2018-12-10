@@ -1,10 +1,6 @@
 class DrikaTransformObject : DrikaElement{
 	bool enabled;
-	int object_id;
-	string reference_string;
 	int current_idenifier_type;
-	identifier_types identifier_type;
-	bool triggered = false;
 
 	vec3 before_translation;
 	quaternion before_rotation;
@@ -127,29 +123,7 @@ class DrikaTransformObject : DrikaElement{
 
 	void SetPreviewMesh(){
 		PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder);
-		int target_id;
-		if(identifier_type == id){
-			if(object_id == -1 || !ObjectExists(object_id)){
-				Log(warning, "Object does not exist with id " + object_id);
-				return;
-			}else{
-				target_id = object_id;
-			}
-		}else if (identifier_type == reference){
-			int registered_object_id = GetRegisteredObjectID(reference_string);
-			if(registered_object_id == -1){
-				Log(warning, "Object does not exist with reference " + reference_string);
-				return;
-			}
-			target_id = registered_object_id;
-		}
-		if(IsGroupDerived(target_id)){
-			placeholder_object.SetPreview(default_preview_mesh);
-		}else{
-			//Need a way to get Object xml path to make this work.
-			/* placeholder_object.SetPreview(target_id); */
-			placeholder_object.SetPreview(default_preview_mesh);
-		}
+		placeholder_object.SetPreview(default_preview_mesh);
 	}
 
 	bool Trigger(){
@@ -168,22 +142,9 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	bool ApplyTransform(bool reset){
-		Log(info, "ApplyTransform! " + reset + "  " + triggered);
-		Object@ target_object;
-		if(identifier_type == id){
-			if(object_id == -1 || !ObjectExists(object_id)){
-				Log(warning, "Object does not exist with id " + object_id);
-				return false;
-			}else{
-				@target_object = ReadObjectFromID(object_id);
-			}
-		}else if (identifier_type == reference){
-			int registered_object_id = GetRegisteredObjectID(reference_string);
-			if(registered_object_id == -1){
-				Log(warning, "Object does not exist with reference " + reference_string);
-				return false;
-			}
-			@target_object = ReadObjectFromID(registered_object_id);
+		Object@ target_object = GetTargetObject();
+		if(target_object is null){
+			return false;
 		}
 		target_object.SetTranslation(reset?before_translation:placeholder.GetTranslation());
 		target_object.SetRotation(reset?before_rotation:placeholder.GetRotation());

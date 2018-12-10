@@ -50,7 +50,7 @@ class DrikaPlaySound : DrikaElement{
 
 	void DrawEditing(){
 		if(ObjectExists(placeholder_id)){
-			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(1.0), _delete_on_update);
+			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			DebugDrawBillboard("Data/Textures/ui/speaker.png", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
 		}
 	}

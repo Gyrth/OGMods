@@ -16,7 +16,7 @@ class DrikaGoToLine : DrikaElement{
 	}
 
 	void AddSettings(){
-		ImGui_DragInt("Line", line, 1.0, 1, 10000);
+		ImGui_InputInt("Line", line);
 	}
 
 	bool Trigger(){
@@ -24,7 +24,7 @@ class DrikaGoToLine : DrikaElement{
 			current_line = line;
 			return false;
 		}else{
-			Log(info, "The GoToLine isn't valid");
+			Log(info, "The GoToLine isn't valid " + line);
 			return false;
 		}
 	}

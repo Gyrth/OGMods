@@ -6,7 +6,6 @@ class DrikaOnItemEnter : DrikaElement{
 	int item_id;
 	int current_combo_item = 0;
 	item_trigger_types trigger_type;
-	bool triggered = false;
 
 	DrikaOnItemEnter(string _trigger_type = "0", string _param = "-1"){
 		drika_element_type = drika_on_item_enter;
