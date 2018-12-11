@@ -49,7 +49,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="-6.41608" t1="2.25051" t2="26.1255" s0="1" s1="1" s2="1" q0="0.111259" q1="-0.699727" q2="0.111728" q3="0.696793" euler_x="-2.82493" euler_y="-1.5666" euler_z="-3.14159" id="1">
+    <CameraObject t0="-6.86405" t1="2.95371" t2="24.4452" s0="1" s1="1" s2="1" q0="0.044504" q1="-0.742825" q2="0.0496258" q3="0.666159" euler_x="-3.00818" euler_y="-1.46208" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -195,7 +195,7 @@
     <Hotspot t0="-13.2147" t1="2.65755" t2="27.6892" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="wait|3000" />
-            <parameter name="1" type="string" val="transform_object|59|0|16" />
+            <parameter name="1" type="string" val="transform_object|32|0|16" />
             <parameter name="10" type="string" val="start_dialogue|drika_dialogue" />
             <parameter name="11" type="string" val="set_object_param|0|-1|0|drika_param|drika_new_value" />
             <parameter name="12" type="string" val="set_level_param|0|no_kills" />
@@ -263,6 +263,9 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
+    <EnvObject name="Transform Object Helper" t0="-0.962996" t1="0.0656506" t2="-1.74105" s0="0.320787" s1="2.04152" s2="0.461876" q0="0.932366" q1="0" q2="0" q3="0.361517" euler_x="2.4018" euler_y="0" euler_z="0" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <Hotspot t0="25.9314" t1="-2.31318" t2="-5.44237" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="34" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0" />
@@ -354,13 +357,13 @@
     <EnvObject t0="14.2058" t1="-0.238425" t2="18.5313" s0="0.25" s1="0.25" s2="0.25" q0="0.0915613" q1="-0.72229" q2="-0.086208" q3="0.68006" euler_x="1.80784" euler_y="-1.31167" euler_z="-1.80021" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-14.2257" t1="1.23738" t2="22.8153" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Create Particle Helper" t0="-14.2257" t1="1.23738" t2="22.8153" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="-13.1537" t1="2.32093" t2="22.7786" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <PlaceholderObject t0="28.314" t1="-1.98286" t2="-16.9635" s0="1.35453" s1="1.35453" s2="1.35453" q0="0" q1="0" q2="0.204841" q3="0.978795" euler_x="0" euler_y="0" euler_z="0.412602" id="48" type_file="Data/Objects/primitives/edged_cone.xml" special_type="0">
+    <PlaceholderObject name="Create Object Helper" t0="28.314" t1="-1.98286" t2="-16.9635" s0="1.35453" s1="1.35453" s2="1.35453" q0="0" q1="0" q2="0.204841" q3="0.978795" euler_x="0" euler_y="0" euler_z="0.412602" id="48" type_file="Data/Objects/primitives/edged_cone.xml" special_type="0">
         <parameters />
         <Connections>
             <Connection id="-1" />
@@ -372,10 +375,10 @@
     <EnvObject t0="25.9314" t1="-2.31318" t2="-5.44237" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="25.8362" t1="-1.26439" t2="-5.44237" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0.72915" q3="0.684354" euler_x="0" euler_y="0" euler_z="1.63416" id="51" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Create Particle Helper" t0="25.8362" t1="-1.26439" t2="-5.44237" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0.72915" q3="0.684354" euler_x="0" euler_y="0" euler_z="1.63416" id="51" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <PlaceholderObject t0="29.907" t1="0.299473" t2="-17.1072" s0="0.888708" s1="1.01839" s2="0.971096" q0="-0.163449" q1="0.167403" q2="0.677222" q3="0.697589" euler_x="-0.00146257" euler_y="0.472304" euler_z="1.54082" id="52" type_file="Data/Objects/primitives/edged_cone.xml" special_type="0">
+    <PlaceholderObject name="Transform Object Helper" t0="29.907" t1="0.299473" t2="-17.1072" s0="0.888708" s1="1.01839" s2="0.971096" q0="-0.163449" q1="0.167403" q2="0.677222" q3="0.697589" euler_x="-0.00146257" euler_y="0.472304" euler_z="1.54082" id="52" type_file="Data/Objects/primitives/edged_cone.xml" special_type="0">
         <parameters />
         <Connections>
             <Connection id="-1" />
@@ -420,19 +423,13 @@
     <EnvObject t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <PlaceholderObject t0="29.9769" t1="0.340907" t2="-17.0424" s0="2.00264" s1="0.891058" s2="2.24743" q0="0.0100605" q1="-0.0196053" q2="0.716848" q3="0.696872" euler_x="-0.014099" euler_y="-0.0417606" euler_z="1.59934" id="57" type_file="Data/Objects/primitives/edged_cone.xml" special_type="0">
+    <PlaceholderObject name="Transform Object Helper" t0="29.9769" t1="0.340907" t2="-17.0424" s0="2.00264" s1="0.891058" s2="2.24743" q0="0.0100605" q1="-0.0196053" q2="0.716848" q3="0.696872" euler_x="-0.014099" euler_y="-0.0417606" euler_z="1.59934" id="57" type_file="Data/Objects/primitives/edged_cone.xml" special_type="0">
         <parameters />
         <Connections>
             <Connection id="-1" />
         </Connections>
     </PlaceholderObject>
-    <PlaceholderObject t0="-14.1646" t1="0.915542" t2="21.9169" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="58" type_file="Data/Objects/primitives/edged_cone.xml" special_type="0">
-        <parameters />
-        <Connections>
-            <Connection id="-1" />
-        </Connections>
-    </PlaceholderObject>
-    <PlaceholderObject t0="-0.898928" t1="-0.418728" t2="-1.79118" s0="0.320787" s1="1.48451" s2="0.440144" q0="0.741198" q1="0" q2="0" q3="0.671286" euler_x="1.66971" euler_y="0" euler_z="0" id="59" type_file="" special_type="0">
+    <PlaceholderObject name="Create Object Helper" t0="-14.1646" t1="0.915542" t2="21.9169" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="58" type_file="Data/Objects/primitives/edged_cone.xml" special_type="0">
         <parameters />
         <Connections>
             <Connection id="-1" />

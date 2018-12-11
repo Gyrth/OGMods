@@ -7,6 +7,7 @@ class DrikaCreateObject : DrikaElement{
 
 	DrikaCreateObject(string _placeholder_id = "-1", string _object_path = default_preview_mesh, string _reference = ""){
 		placeholder_id = atoi(_placeholder_id);
+		placeholder_name = "Create Object Helper";
 		object_path = _object_path;
 		drika_element_type = drika_create_object;
 		has_settings = true;
@@ -16,11 +17,10 @@ class DrikaCreateObject : DrikaElement{
 		}
 
 		if(ObjectExists(placeholder_id)){
-			@placeholder = ReadObjectFromID(placeholder_id);
+			RetrievePlaceholder();
 		}else{
 			CreatePlaceholder();
 		}
-		placeholder.SetSelectable(false);
 	}
 
 	void Delete(){

@@ -3,6 +3,7 @@ class DrikaPlaySound : DrikaElement{
 
 	DrikaPlaySound(string _placeholder_id = "-1", string _sound_path = "Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav"){
 		placeholder_id = atoi(_placeholder_id);
+		placeholder_name = "Play Sound Helper";
 		sound_path = _sound_path;
 		drika_element_type = drika_play_sound;
 		has_settings = true;

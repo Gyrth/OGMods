@@ -9,6 +9,7 @@ class DrikaTransformObject : DrikaElement{
 	DrikaTransformObject(string _placeholder_id = "-1", string _identifier_type = "0", string _identifier = "-1"){
 		drika_element_type = drika_transform_object;
 		placeholder_id = atoi(_placeholder_id);
+		placeholder_name = "Transform Object Helper";
 		identifier_type = identifier_types(atoi(_identifier_type));
 		current_idenifier_type = identifier_type;
 
@@ -19,11 +20,10 @@ class DrikaTransformObject : DrikaElement{
 		}
 
 		if(ObjectExists(placeholder_id)){
-			@placeholder = ReadObjectFromID(placeholder_id);
+			RetrievePlaceholder();
 		}else{
 			CreatePlaceholder();
 		}
-		placeholder.SetSelectable(false);
 
 		has_settings = true;
 	}
@@ -103,17 +103,6 @@ class DrikaTransformObject : DrikaElement{
 			placeholder.SetSelected(false);
 			placeholder.SetSelectable(false);
 		}
-	}
-
-	void CreatePlaceholder(){
-		placeholder_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml", false);
-		@placeholder = ReadObjectFromID(placeholder_id);
-		placeholder.SetSelectable(true);
-		placeholder.SetTranslatable(true);
-		placeholder.SetScalable(true);
-		placeholder.SetRotatable(true);
-		placeholder.SetScale(vec3(1.0));
-		placeholder.SetTranslation(this_hotspot.GetTranslation());
 	}
 
 	bool Trigger(){

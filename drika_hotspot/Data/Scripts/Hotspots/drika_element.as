@@ -58,6 +58,7 @@ class DrikaElement{
 	Object@ placeholder;
 	int object_id;
 	string reference_string;
+	string placeholder_name;
 	identifier_types identifier_type;
 
 	string GetSaveString(){return "";}
@@ -121,12 +122,19 @@ class DrikaElement{
 	void CreatePlaceholder(){
 		placeholder_id = CreateObject("Data/Objects/drika_hotspot_cube.xml", false);
 		@placeholder = ReadObjectFromID(placeholder_id);
-		placeholder.SetSelectable(true);
+		placeholder.SetName(placeholder_name);
+		placeholder.SetSelectable(false);
 		placeholder.SetTranslatable(true);
 		placeholder.SetScalable(true);
 		placeholder.SetRotatable(true);
 		placeholder.SetScale(vec3(0.25));
 		placeholder.SetTranslation(this_hotspot.GetTranslation());
+	}
+
+	void RetrievePlaceholder(){
+		@placeholder = ReadObjectFromID(placeholder_id);
+		placeholder.SetName(placeholder_name);
+		placeholder.SetSelectable(false);
 	}
 
 	Object@ GetTargetObject(){

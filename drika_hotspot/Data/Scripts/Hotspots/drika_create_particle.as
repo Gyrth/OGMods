@@ -9,6 +9,7 @@ class DrikaCreateParticle : DrikaElement{
 	DrikaCreateParticle(string _placeholder_id = "-1", string _amount = "5", string _particle_path = "Data/Particles/blooddrop.xml", string _velocity = "0.0", string _tint = "1,1,1", string _use_blood_tint = "true", string _spread = "0.0"){
 		amount = atoi(_amount);
 		placeholder_id = atoi(_placeholder_id);
+		placeholder_name = "Create Particle Helper";
 		particle_path = _particle_path;
 		tint = StringToVec3(_tint);
 		velocity = atof(_velocity);
@@ -19,12 +20,10 @@ class DrikaCreateParticle : DrikaElement{
 		has_settings = true;
 
 		if(ObjectExists(placeholder_id)){
-			@placeholder = ReadObjectFromID(placeholder_id);
+			RetrievePlaceholder();
 		}else{
 			CreatePlaceholder();
 		}
-		placeholder.SetEditorLabel("Drika Particle Helper");
-		placeholder.SetSelectable(false);
 	}
 
 	void Delete(){
