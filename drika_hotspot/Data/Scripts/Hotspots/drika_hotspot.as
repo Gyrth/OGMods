@@ -15,6 +15,7 @@
 #include "hotspots/drika_set_camera_param.as"
 #include "hotspots/drika_create_object.as"
 #include "hotspots/drika_transform_object.as"
+#include "hotspots/drika_set_color.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -142,6 +143,8 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 		return DrikaCreateObject(line_elements[1], line_elements[2], line_elements[3]);
 	}else if(line_elements[0] == "transform_object"){
 		return DrikaTransformObject(line_elements[1], line_elements[2], line_elements[3]);
+	}else if(line_elements[0] == "set_color"){
+		return DrikaSetColor(line_elements[1], line_elements[2], line_elements[3], line_elements[4], line_elements[5]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -312,6 +315,10 @@ void DrawEditor(){
 				}
 				if(ImGui_MenuItem("Transform Object")){
 					DrikaTransformObject new_param();
+					InsertElement(@new_param);
+				}
+				if(ImGui_MenuItem("Set Color")){
+					DrikaSetColor new_param();
 					InsertElement(@new_param);
 				}
 				ImGui_EndMenu();

@@ -49,7 +49,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="25.0188" t1="0.466379" t2="-21.6444" s0="1" s1="1" s2="1" q0="0.0450539" q1="0.907228" q2="-0.100696" q3="0.405917" euler_x="-2.92051" euler_y="0.841423" euler_z="3.14159" id="1">
+    <CameraObject t0="22.31" t1="1.03715" t2="-10.517" s0="1" s1="1" s2="1" q0="0.132718" q1="0.756204" q2="-0.161887" q3="0.619947" euler_x="-2.7198" euler_y="1.37341" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -290,13 +290,17 @@
     <Hotspot t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
-            <parameter name="1" type="string" val="go_to_line|5" />
-            <parameter name="2" type="string" val="wait|1000" />
-            <parameter name="3" type="string" val="wait|1000" />
-            <parameter name="4" type="string" val="wait|1000" />
-            <parameter name="5" type="string" val="send_level_message|continue_this_hotspot" />
-            <parameter name="6" type="string" val="wait_level_message|continue_this_hotspot" />
-            <parameter name="7" type="string" val="play_sound|56|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav" />
+            <parameter name="1" type="string" val="set_color|0|3|1|0|1,0.455253,0.455253" />
+            <parameter name="10" type="string" val="wait|1000" />
+            <parameter name="11" type="string" val="go_to_line|1" />
+            <parameter name="2" type="string" val="set_color|0|3|1|1|0.455253,0.425139,0" />
+            <parameter name="3" type="string" val="set_color|0|3|1|2|0.494412,0.817121,0.464201" />
+            <parameter name="4" type="string" val="set_color|0|35|0|0|1,0,0" />
+            <parameter name="5" type="string" val="wait|1000" />
+            <parameter name="6" type="string" val="set_color|0|3|1|0|1,0,0" />
+            <parameter name="7" type="string" val="set_color|0|3|1|1|0,0.455253,0.396796" />
+            <parameter name="8" type="string" val="set_color|0|3|1|2|0.126043,0.227714,0.719844" />
+            <parameter name="9" type="string" val="set_color|0|35|0|0|0.928563,0,1" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -411,9 +415,6 @@
             <Connection id="3" />
         </Connections>
     </PlaceholderObject>
-    <EnvObject t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject name="Transform Object Helper" t0="3.57175" t1="-1.66983" t2="-13.2911" s0="0.320787" s1="2.04152" s2="0.461876" q0="0.963824" q1="0" q2="0" q3="-0.266543" euler_x="-2.60198" euler_y="0" euler_z="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
