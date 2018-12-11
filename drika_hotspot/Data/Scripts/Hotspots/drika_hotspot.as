@@ -19,6 +19,7 @@
 
 bool editor_open = false;
 bool editing = false;
+bool closed = true;
 bool script_finished = false;
 int current_line = 0;
 array<DrikaElement@> drika_elements;
@@ -160,6 +161,15 @@ void Update(){
 		return;
 	}
 
+	if(!editor_open && !closed){
+		closed = true;
+		if(drika_elements.size() > 0){
+			GetCurrentElement().EditDone();
+		}
+	}else if(editor_open){
+		closed = false;
+	}
+
 	if(EditorModeActive() && editing == false){
 		SwitchToEditing();
 	}else if(!EditorModeActive() && editing == true){
@@ -196,6 +206,9 @@ void SelectedChanged(){
 	is_selected = this_hotspot.IsSelected();
 	if(is_selected){
 		editor_open = true;
+		if(drika_elements.size() != 0){
+			GetCurrentElement().StartEdit();
+		}
 		level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
 	}
 }
@@ -484,7 +497,6 @@ void ReceiveMessage(string msg){
 			int id = atoi(token_iter.GetToken(msg));
 			if(id != this_hotspot.GetID()){
 				editor_open = false;
-				GetCurrentElement().EditDone();
 			}
 		}
 	}
@@ -514,6 +526,9 @@ void HandleEventItem(string event, ItemObject @obj){
 }
 
 void Reset(){
+	if(drika_elements.size() == 0){
+		return;
+	}
 	GetCurrentElement().EditDone();
 	//If the user is editing the script then stay with the current line to edit.
 	if(!editing){
