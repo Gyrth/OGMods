@@ -130,43 +130,32 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	bool SetParameter(bool reset){
-		if(ObjectExists(object_id)){
-			Object@ target_object;
-
-			if(identifier_type == id){
-				@target_object = ReadObjectFromID(object_id);
-			}else if (identifier_type == reference){
-				int registered_object_id = GetRegisteredObjectID(reference_string);
-				if(registered_object_id == -1){
-					return true;
-				}
-				@target_object = ReadObjectFromID(registered_object_id);
-			}
-
-			ScriptParams@ params = target_object.GetScriptParams();
-
-			if(!params.HasParam(param_name)){
-				if(param_type == string_param){
-					params.AddString(param_name, reset?string_param_before:string_param_after);
-				}else if(param_type == int_param){
-					params.AddInt(param_name, reset?int_param_before:int_param_after);
-				}else if(param_type == float_param){
-					params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
-				}
-			}else{
-				if(param_type == string_param){
-					params.SetString(param_name, reset?string_param_before:string_param_after);
-				}else if(param_type == int_param){
-					params.SetInt(param_name, reset?int_param_before:int_param_after);
-				}else if(param_type == float_param){
-					params.Remove(param_name);
-					params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
-					/* params.SetFloat(param_name, reset?float_param_before:float_param_after); */
-				}
-			}
-			return true;
+		Object@ target_object = GetTargetObject();
+		if(target_object is null){
+			return false;
 		}
-		return false;
+		ScriptParams@ params = target_object.GetScriptParams();
+
+		if(!params.HasParam(param_name)){
+			if(param_type == string_param){
+				params.AddString(param_name, reset?string_param_before:string_param_after);
+			}else if(param_type == int_param){
+				params.AddInt(param_name, reset?int_param_before:int_param_after);
+			}else if(param_type == float_param){
+				params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
+			}
+		}else{
+			if(param_type == string_param){
+				params.SetString(param_name, reset?string_param_before:string_param_after);
+			}else if(param_type == int_param){
+				params.SetInt(param_name, reset?int_param_before:int_param_after);
+			}else if(param_type == float_param){
+				params.Remove(param_name);
+				params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
+				/* params.SetFloat(param_name, reset?float_param_before:float_param_after); */
+			}
+		}
+		return true;
 	}
 
 	void Reset(){
