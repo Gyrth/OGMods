@@ -123,7 +123,7 @@ class DrikaElement{
 		placeholder_id = CreateObject("Data/Objects/drika_hotspot_cube.xml", false);
 		@placeholder = ReadObjectFromID(placeholder_id);
 		placeholder.SetName(placeholder_name);
-		placeholder.SetSelectable(false);
+		placeholder.SetSelectable(true);
 		placeholder.SetTranslatable(true);
 		placeholder.SetScalable(true);
 		placeholder.SetRotatable(true);
@@ -156,4 +156,38 @@ class DrikaElement{
 		}
 		return target_object;
 	}
+
+	void DrawGizmo(Object@ target){
+		mat4 gizmo_transform_y;
+		gizmo_transform_y.SetTranslationPart(target.GetTranslation());
+		gizmo_transform_y.SetRotationPart(Mat4FromQuaternion(target.GetRotation()));
+		mat4 gizmo_transform_x = gizmo_transform_y;
+		mat4 gizmo_transform_z = gizmo_transform_y;
+
+		mat4 scale_mat_y;
+		scale_mat_y[0] = 1.0;
+		scale_mat_y[5] = target.GetScale().y;
+		scale_mat_y[10] = 1.0;
+		scale_mat_y[15] = 1.0f;
+		gizmo_transform_y = gizmo_transform_y * scale_mat_y;
+
+		mat4 scale_mat_x;
+		scale_mat_x[0] = target.GetScale().x;
+		scale_mat_x[5] = 1.0;
+		scale_mat_x[10] = 1.0;
+		scale_mat_x[15] = 1.0f;
+		gizmo_transform_x = gizmo_transform_x * scale_mat_x;
+
+		mat4 scale_mat_z;
+		scale_mat_z[0] = 1.0;
+		scale_mat_z[5] = 1.0;
+		scale_mat_z[10] = target.GetScale().z;
+		scale_mat_z[15] = 1.0f;
+		gizmo_transform_z = gizmo_transform_z * scale_mat_z;
+
+		DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, vec4(0.0f, 0.0f, 0.5f, 0.15f), _delete_on_update);
+		DebugDrawWireMesh("Data/Models/drika_gizmo_x.obj", gizmo_transform_x, vec4(0.5f, 0.0f, 0.0f, 0.15f), _delete_on_update);
+		DebugDrawWireMesh("Data/Models/drika_gizmo_z.obj", gizmo_transform_z, vec4(0.0f, 0.5, 0.0f, 0.15f), _delete_on_update);
+	}
+
 }

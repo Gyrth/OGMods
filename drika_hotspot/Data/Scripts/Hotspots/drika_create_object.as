@@ -43,7 +43,6 @@ class DrikaCreateObject : DrikaElement{
 			string new_path = GetUserPickedReadPath("xml", "Data/Objects");
 			if(new_path != ""){
 				object_path = new_path;
-				SetPreviewMesh();
 			}
 		}
 		ImGui_Checkbox("Set Reference", show_reference_option);
@@ -62,6 +61,7 @@ class DrikaCreateObject : DrikaElement{
 			placeholder.SetSelectable(true);
 		}else{
 			CreatePlaceholder();
+			StartEdit();
 		}
 	}
 
@@ -75,31 +75,8 @@ class DrikaCreateObject : DrikaElement{
 	void DrawEditing(){
 		if(ObjectExists(placeholder_id)){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			DrawGizmo(placeholder);
 		}
-	}
-
-	void CreatePlaceholder(){
-		placeholder_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml", false);
-		@placeholder = ReadObjectFromID(placeholder_id);
-		placeholder.SetSelectable(true);
-		placeholder.SetTranslatable(true);
-		placeholder.SetScalable(true);
-		placeholder.SetRotatable(true);
-		placeholder.SetScale(vec3(0.25));
-		placeholder.SetTranslation(this_hotspot.GetTranslation());
-		SetPreviewMesh();
-	}
-
-	void SetPreviewMesh(){
-		PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder);
-		int new_object_id = CreateObject(object_path);
-		Object@ main_object = ReadObjectFromID(new_object_id);
-		if(IsGroupDerived(new_object_id)){
-			placeholder_object.SetPreview(default_preview_mesh);
-		}else{
-			placeholder_object.SetPreview(object_path);
-		}
-		QueueDeleteObjectID(new_object_id);
 	}
 
 	void Reset(){
