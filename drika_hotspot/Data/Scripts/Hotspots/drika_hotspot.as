@@ -184,8 +184,8 @@ void SwitchToEditing(){
 }
 
 void SwitchToPlaying(){
-	Reset();
 	editing = false;
+	Reset();
 }
 
 void SelectedChanged(){
@@ -318,11 +318,14 @@ void DrawEditor(){
 			}
 			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
-					params.Remove("" + current_line);
 					GetCurrentElement().Delete();
 					int current_index = drika_indexes[current_line];
+
+					drika_elements[drika_indexes[current_line]];
+
 					drika_elements.removeAt(current_index);
 					drika_indexes.removeAt(current_line);
+
 					for(uint i = 0; i < drika_indexes.size(); i++){
 						if(drika_indexes[i] > current_index){
 							drika_indexes[i] -= 1;
@@ -336,6 +339,8 @@ void DrawEditor(){
 						display_index = drika_indexes[current_line];
 					}
 					ReorderElements();
+					//Remove the last one since all the saved elements have been saved down one index.
+					params.Remove("" + drika_elements.size());
 				}
 			}
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
