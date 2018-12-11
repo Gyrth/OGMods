@@ -10,8 +10,10 @@ class DrikaCreateObject : DrikaElement{
 		placeholder_name = "Create Object Helper";
 		object_path = _object_path;
 		drika_element_type = drika_create_object;
-		has_settings = true;
 		reference = _reference;
+		default_placeholder_scale = vec3(1.0);
+		has_settings = true;
+
 		if(reference != ""){
 			show_reference_option = true;
 		}

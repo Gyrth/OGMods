@@ -49,7 +49,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="25.2019" t1="0.586738" t2="-21.0878" s0="1" s1="1" s2="1" q0="0.121548" q1="0.86537" q2="-0.253575" q3="0.414802" euler_x="-2.5715" euler_y="0.893959" euler_z="-3.14159" id="1">
+    <CameraObject t0="25.0188" t1="0.466379" t2="-21.6444" s0="1" s1="1" s2="1" q0="0.0450539" q1="0.907228" q2="-0.100696" q3="0.405917" euler_x="-2.92051" euler_y="0.841423" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -131,7 +131,7 @@
             <parameters />
         </EnvObject>
     </ActorObject>
-    <EnvObject name="Create Object Helper" t0="28.8308" t1="-1.24396" t2="-17.7494" s0="1.26562" s1="1.26562" s2="1.26562" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Create Object Helper" t0="29.266" t1="-1.90674" t2="-17.4572" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="3.54364" t1="-2.75197" t2="2.67709" s0="1.73095" s1="0.587103" s2="1.74308" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">

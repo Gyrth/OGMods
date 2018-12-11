@@ -60,6 +60,7 @@ class DrikaElement{
 	string reference_string;
 	string placeholder_name;
 	identifier_types identifier_type;
+	vec3 default_placeholder_scale = vec3(0.25);
 
 	string GetSaveString(){return "";}
 	string GetDisplayString(){return "";};
@@ -127,7 +128,7 @@ class DrikaElement{
 		placeholder.SetTranslatable(true);
 		placeholder.SetScalable(true);
 		placeholder.SetRotatable(true);
-		placeholder.SetScale(vec3(0.25));
+		placeholder.SetScale(default_placeholder_scale);
 		placeholder.SetTranslation(this_hotspot.GetTranslation());
 	}
 
