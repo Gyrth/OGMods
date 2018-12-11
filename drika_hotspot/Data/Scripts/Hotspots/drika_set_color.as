@@ -66,10 +66,13 @@ class DrikaSetColor : DrikaElement{
 			if(target_object is null){
 				return;
 			}
-			num_palette_colors = target_object.GetNumPaletteColors();
 			palette_indexes.resize(0);
-			for(int i = 0; i < num_palette_colors; i++){
-				palette_indexes.insertLast("" + i);
+			num_palette_colors = 0;
+			if(target_object.GetType() == _movement_object){
+				num_palette_colors = target_object.GetNumPaletteColors();
+				for(int i = 0; i < num_palette_colors; i++){
+					palette_indexes.insertLast("" + i);
+				}
 			}
 		}
 	}
