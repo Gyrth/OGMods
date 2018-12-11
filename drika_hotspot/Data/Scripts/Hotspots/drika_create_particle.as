@@ -19,11 +19,7 @@ class DrikaCreateParticle : DrikaElement{
 		drika_element_type = drika_create_particle;
 		has_settings = true;
 
-		if(ObjectExists(placeholder_id)){
-			RetrievePlaceholder();
-		}else{
-			CreatePlaceholder();
-		}
+		RetrievePlaceholder();
 	}
 
 	void Delete(){
@@ -59,8 +55,6 @@ class DrikaCreateParticle : DrikaElement{
 	void StartEdit(){
 		if(ObjectExists(placeholder_id)){
 			placeholder.SetSelectable(true);
-		}else{
-			CreatePlaceholder();
 		}
 	}
 
@@ -77,6 +71,9 @@ class DrikaCreateParticle : DrikaElement{
 			DebugDrawLine(placeholder.GetTranslation(), placeholder.GetTranslation() + (forward_direction * (velocity / 10.0)), vec3(1, 0, 0), _delete_on_update);
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			DebugDrawBillboard("Data/Textures/ui/stealth_debug/zzzz.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
+		}else{
+			CreatePlaceholder();
+			StartEdit();
 		}
 	}
 

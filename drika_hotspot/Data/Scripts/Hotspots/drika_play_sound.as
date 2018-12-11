@@ -8,13 +8,7 @@ class DrikaPlaySound : DrikaElement{
 		drika_element_type = drika_play_sound;
 		has_settings = true;
 
-		if(ObjectExists(placeholder_id)){
-			@placeholder = ReadObjectFromID(placeholder_id);
-		}else{
-			CreatePlaceholder();
-		}
-		placeholder.SetEditorLabel("Drika Play Sound Helper");
-		placeholder.SetSelectable(false);
+		RetrievePlaceholder();
 	}
 
 	void Delete(){
@@ -45,14 +39,15 @@ class DrikaPlaySound : DrikaElement{
 		if(ObjectExists(placeholder_id)){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			DebugDrawBillboard("Data/Textures/ui/speaker.png", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
+		}else{
+			CreatePlaceholder();
+			StartEdit();
 		}
 	}
 
 	void StartEdit(){
 		if(ObjectExists(placeholder_id)){
 			placeholder.SetSelectable(true);
-		}else{
-			CreatePlaceholder();
 		}
 	}
 

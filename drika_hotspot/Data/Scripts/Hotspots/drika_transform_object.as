@@ -9,9 +9,11 @@ class DrikaTransformObject : DrikaElement{
 	DrikaTransformObject(string _placeholder_id = "-1", string _identifier_type = "0", string _identifier = "-1"){
 		drika_element_type = drika_transform_object;
 		placeholder_id = atoi(_placeholder_id);
+		default_placeholder_scale = vec3(1.0);
 		placeholder_name = "Transform Object Helper";
 		identifier_type = identifier_types(atoi(_identifier_type));
 		current_idenifier_type = identifier_type;
+		has_settings = true;
 
 		if(identifier_type == id){
 			object_id = atoi(_identifier);
@@ -19,13 +21,7 @@ class DrikaTransformObject : DrikaElement{
 			reference_string = _identifier;
 		}
 
-		if(ObjectExists(placeholder_id)){
-			RetrievePlaceholder();
-		}else{
-			CreatePlaceholder();
-		}
-
-		has_settings = true;
+		RetrievePlaceholder();
 	}
 
 	void GetBeforeParam(){
@@ -70,7 +66,11 @@ class DrikaTransformObject : DrikaElement{
 		}
 		placeholder.SetTranslation(target_object.GetTranslation());
 		placeholder.SetRotation(target_object.GetRotation());
-		placeholder.SetScale(target_object.GetBoundingBox() * target_object.GetScale());
+		vec3 bounds = target_object.GetBoundingBox();
+		if(bounds == vec3(0.0)){
+			bounds = vec3(1.0);
+		}
+		placeholder.SetScale(bounds * target_object.GetScale());
 	}
 
 	void AddSettings(){
@@ -92,10 +92,6 @@ class DrikaTransformObject : DrikaElement{
 	void StartEdit(){
 		if(ObjectExists(placeholder_id)){
 			placeholder.SetSelectable(true);
-		}else{
-			CreatePlaceholder();
-			GetNewTransform();
-			StartEdit();
 		}
 	}
 
@@ -118,10 +114,16 @@ class DrikaTransformObject : DrikaElement{
 		if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
 			Object@ object = ReadObjectFromID(object_id);
 			DebugDrawLine(object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			DebugDrawLine(object.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			if(ObjectExists(placeholder_id)){
+				DebugDrawLine(object.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			}
 		}
 		if(ObjectExists(placeholder_id)){
 			DrawGizmo(placeholder);
+		}else{
+			CreatePlaceholder();
+			GetNewTransform();
+			StartEdit();
 		}
 	}
 
@@ -134,6 +136,10 @@ class DrikaTransformObject : DrikaElement{
 		target_object.SetRotation(reset?before_rotation:placeholder.GetRotation());
 		vec3 scale = placeholder.GetScale();
 		vec3 bounds = target_object.GetBoundingBox();
+		Log(info, "bounds " + bounds.x + " " + bounds.y + " " + bounds.z);
+		if(bounds == vec3(0.0)){
+			bounds = vec3(1.0);
+		}
 		vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
 		target_object.SetScale(reset?before_scale:new_scale);
 		return true;

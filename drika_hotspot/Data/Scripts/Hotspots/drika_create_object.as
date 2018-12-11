@@ -17,12 +17,7 @@ class DrikaCreateObject : DrikaElement{
 		if(reference != ""){
 			show_reference_option = true;
 		}
-
-		if(ObjectExists(placeholder_id)){
-			RetrievePlaceholder();
-		}else{
-			CreatePlaceholder();
-		}
+		RetrievePlaceholder();
 	}
 
 	void Delete(){
@@ -61,9 +56,6 @@ class DrikaCreateObject : DrikaElement{
 	void StartEdit(){
 		if(ObjectExists(placeholder_id)){
 			placeholder.SetSelectable(true);
-		}else{
-			CreatePlaceholder();
-			StartEdit();
 		}
 	}
 
@@ -78,6 +70,9 @@ class DrikaCreateObject : DrikaElement{
 		if(ObjectExists(placeholder_id)){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			DrawGizmo(placeholder);
+		}else{
+			CreatePlaceholder();
+			StartEdit();
 		}
 	}
 

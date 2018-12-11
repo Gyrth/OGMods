@@ -31,6 +31,7 @@ bool is_selected = false;
 const int _ragdoll_state = 4;
 dictionary object_references;
 string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
+bool duplicating = false;
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -150,7 +151,12 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 void Update(){
 	if(!post_init_done){
 		post_init_done = true;
+		//When the user duplicates a hotspot the editormode is active and the left alt is pressed.
+		if(EditorModeActive() && GetInputDown(0, "lalt")){
+			duplicating = true;
+		}
 		InterpData();
+		duplicating = false;
 		return;
 	}
 
@@ -478,6 +484,7 @@ void ReceiveMessage(string msg){
 			int id = atoi(token_iter.GetToken(msg));
 			if(id != this_hotspot.GetID()){
 				editor_open = false;
+				GetCurrentElement().EditDone();
 			}
 		}
 	}

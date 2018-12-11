@@ -135,9 +135,15 @@ class DrikaElement{
 	}
 
 	void RetrievePlaceholder(){
-		@placeholder = ReadObjectFromID(placeholder_id);
-		placeholder.SetName(placeholder_name);
-		placeholder.SetSelectable(false);
+		if(duplicating){
+			placeholder_id = -1;
+			return;
+		}
+		if(ObjectExists(placeholder_id)){
+			@placeholder = ReadObjectFromID(placeholder_id);
+			placeholder.SetName(placeholder_name);
+			placeholder.SetSelectable(false);
+		}
 	}
 
 	Object@ GetTargetObject(){
