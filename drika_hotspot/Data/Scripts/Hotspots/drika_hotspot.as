@@ -45,11 +45,6 @@ TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/
 
 void Init() {
     level.ReceiveLevelEvents(hotspot.GetID());
-
-	DrikaElement first_element();
-	first_element.index = 5;
-	DrikaElement second_element = first_element;
-	first_element.index = 1;
 	ConvertDisplayColors();
 }
 
