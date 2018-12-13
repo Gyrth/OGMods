@@ -373,9 +373,11 @@ void DrawEditor(){
 			}
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
+					duplicating = true;
 					array<string> line_elements = GetCurrentElement().GetSaveString().split(param_delimiter);
 					InsertElement(InterpElement(line_elements));
 					ReorderElements();
+					duplicating = false;
 				}
 			}
 			ImGui_EndMenuBar();
