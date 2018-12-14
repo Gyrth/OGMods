@@ -32,7 +32,6 @@ class DrikaSetObjectParam : DrikaElement{
 		has_settings = true;
 
 		InterpParam();
-		GetBeforeParam();
 	}
 
 	void Delete(){
@@ -126,6 +125,10 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	bool Trigger(){
+		if(!triggered){
+			GetBeforeParam();
+		}
+		triggered = true;
 		return SetParameter(false);
 	}
 
@@ -155,10 +158,17 @@ class DrikaSetObjectParam : DrikaElement{
 				/* params.SetFloat(param_name, reset?float_param_before:float_param_after); */
 			}
 		}
+		if(target_object.GetType() == _movement_object){
+			MovementObject@ char = ReadCharacterID(target_object.GetID());
+			char.Execute("SetParameters();");
+		}
 		return true;
 	}
 
 	void Reset(){
-		SetParameter(true);
+		if(triggered){
+			triggered = false;
+			SetParameter(true);
+		}
 	}
 }
