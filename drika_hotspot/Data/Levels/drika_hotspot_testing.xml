@@ -13,6 +13,7 @@
 <LevelScriptParameters>
     <parameter name="" type="string" val="" />
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Attack Knockback" type="float" val="0" />
     <parameter name="Buster" type="string" val="" />
     <parameter name="Custom Shader" type="string" val="" />
     <parameter name="Fog amount" type="float" val="0" />
@@ -49,7 +50,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="4.42294" t1="6.71831" t2="-3.06163" s0="1" s1="1" s2="1" q0="0.224443" q1="0.407802" q2="-0.104139" q3="0.878907" euler_x="0.500045" euler_y="0.86885" euler_z="0" id="1">
+    <CameraObject t0="-1.37932" t1="1.34934" t2="-22.7891" s0="1" s1="1" s2="1" q0="0.0326696" q1="0.931958" q2="-0.0868698" q3="0.350486" euler_x="-2.95571" euler_y="0.719426" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -74,7 +75,7 @@
             <parameter name="Ground Aggression" type="float" val="0.5" />
             <parameter name="Knockout Shield" type="int" val="0" />
             <parameter name="Left handed" type="int" val="0" />
-            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Movement Speed" type="float" val="0" />
             <parameter name="Muscle" type="float" val="0.322035" />
             <parameter name="Peripheral FOV distance" type="float" val="4" />
             <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
@@ -637,7 +638,8 @@
             <parameter name="6" type="string" val="transform_object|127|0|119" />
             <parameter name="7" type="string" val="transform_object|124|0|120" />
             <parameter name="8" type="string" val="transform_object|132|0|131" />
-            <parameter name="9" type="string" val="set_object_param|0|3|2|Movement Speed|2" />
+            <parameter name="9" type="string" val="set_character_param|3|0|0" />
+            <parameter name="Attack Knockback" type="float" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />

@@ -17,6 +17,7 @@
 #include "hotspots/drika_transform_object.as"
 #include "hotspots/drika_set_color.as"
 #include "hotspots/drika_play_music.as"
+#include "hotspots/drika_set_character_param.as"
 
 bool editor_open = false;
 bool editing = false;
@@ -145,6 +146,8 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 		return DrikaSetColor(line_elements[1], line_elements[2], line_elements[3], line_elements[4], line_elements[5]);
 	}else if(line_elements[0] == "play_music"){
 		return DrikaPlayMusic(line_elements[1], line_elements[2]);
+	}else if(line_elements[0] == "set_character_param"){
+		return DrikaSetCharacterParam(line_elements[1], line_elements[2], line_elements[3]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -340,6 +343,10 @@ void DrawEditor(){
 				}
 				if(ImGui_MenuItem("Play Music")){
 					DrikaPlayMusic new_param();
+					InsertElement(@new_param);
+				}
+				if(ImGui_MenuItem("Set Character Parameter")){
+					DrikaSetCharacterParam new_param();
 					InsertElement(@new_param);
 				}
 				ImGui_EndMenu();
