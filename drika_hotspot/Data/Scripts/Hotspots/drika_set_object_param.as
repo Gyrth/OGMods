@@ -60,7 +60,7 @@ class DrikaSetObjectParam : DrikaElement{
 					params.AddFloat(param_name, float_param_after);
 				}
 				float_param_before = params.GetFloat(param_name);
-			}else if(param_type == float_param){
+			}else if(param_type == int_param){
 				if(!params.HasParam(param_name)){
 					params.AddInt(param_name, int_param_after);
 				}
@@ -157,10 +157,6 @@ class DrikaSetObjectParam : DrikaElement{
 				params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
 				/* params.SetFloat(param_name, reset?float_param_before:float_param_after); */
 			}
-		}
-		if(target_object.GetType() == _movement_object){
-			MovementObject@ char = ReadCharacterID(target_object.GetID());
-			char.Execute("SetParameters();");
 		}
 		return true;
 	}
