@@ -16,24 +16,26 @@ enum character_params { 	aggression = 0,
 							knocked_out_shield = 15,
 							left_handed = 16,
 							movement_speed = 17,
-							muscle = 19,
-							peripheral_fov_distance = 20,
-							peripheral_fov_horizontal = 21,
-							peripheral_fov_vertical = 22,
-							species = 23,
-							static_char = 24,
-							teams = 25
+							muscle = 18,
+							peripheral_fov_distance = 19,
+							peripheral_fov_horizontal = 20,
+							peripheral_fov_vertical = 21,
+							species = 22,
+							static_char = 23,
+							teams = 24
 					};
 
 class DrikaSetCharacterParam : DrikaElement{
 	int current_type;
-	int character_id;
 
 	string string_param_before;
 	string string_param_after;
 
 	int int_param_before = 0;
 	int int_param_after = 0;
+
+	bool bool_param_before = false;
+	bool bool_param_after = false;
 
 	float float_param_before = 0.0;
 	float float_param_after = 0.0;
@@ -76,13 +78,14 @@ class DrikaSetCharacterParam : DrikaElement{
 
 	DrikaSetCharacterParam(string _identifier = "-1", string _param_type = "0", string _param_after = "50.0"){
 		character_param = character_params(atoi(_param_type));
-		character_id = atoi(_identifier);
+		object_id = atoi(_identifier);
 		current_type = param_type;
 
 		drika_element_type = drika_set_character_param;
-		string_param_after = _param_after;
 		has_settings = true;
+
 		SetParamType();
+		InterpParam(_param_after);
 		SetParamName();
 	}
 
@@ -93,8 +96,20 @@ class DrikaSetCharacterParam : DrikaElement{
 			param_type = float_param;
 		}else if(int_parameters.find(character_param) != -1){
 			param_type = int_param;
-		}else if(int_parameters.find(character_param) != -1){
+		}else if(bool_parameters.find(character_param) != -1){
 			param_type = bool_param;
+		}
+	}
+
+	void InterpParam(string _param){
+		if(param_type == float_param){
+			float_param_after = atof(_param);
+		}else if(param_type == int_param){
+			int_param_after = atoi(_param);
+		}else if(param_type == bool_param){
+			bool_param_after = (_param == "true")?true:false;
+		}else if(param_type == string_param){
+			string_param_after = _param;
 		}
 	}
 
@@ -107,51 +122,64 @@ class DrikaSetCharacterParam : DrikaElement{
 	}
 
 	void GetBeforeParam(){
-		if(ObjectExists(character_id)){
-			ScriptParams@ params = level.GetScriptParams();
-			if(param_type == string_param){
-				if(!params.HasParam(param_name)){
-					params.AddString(param_name, string_param_after);
-				}
-				string_param_before = params.GetString(param_name);
-			}else if(param_type == float_param){
-				if(!params.HasParam(param_name)){
-					params.AddFloat(param_name, float_param_after);
-				}
-				float_param_before = params.GetFloat(param_name);
-			}else if(param_type == int_param){
-				if(!params.HasParam(param_name)){
-					params.AddInt(param_name, int_param_after);
-				}
-				int_param_before = params.GetInt(param_name);
-			}else if(param_type == bool_param){
-				if(!params.HasParam(param_name)){
-					params.AddInt(param_name, int_param_after);
-				}
-				int_param_before = params.GetInt(param_name);
-			}
+		Object@ target_object = GetTargetObject();
+		if(target_object is null){
+			return;
 		}
-	}
-
-	void ApplySettings(){
-		GetBeforeParam();
+		ScriptParams@ params = target_object.GetScriptParams();
+		if(param_type == string_param){
+			if(!params.HasParam(param_name)){
+				params.AddString(param_name, string_param_after);
+			}
+			string_param_before = params.GetString(param_name);
+		}else if(param_type == float_param){
+			if(!params.HasParam(param_name)){
+				params.AddFloat(param_name, float_param_after);
+			}
+			float_param_before = params.GetFloat(param_name);
+		}else if(param_type == int_param){
+			if(!params.HasParam(param_name)){
+				params.AddInt(param_name, int_param_after);
+			}
+			int_param_before = params.GetInt(param_name);
+		}else if(param_type == bool_param){
+			if(!params.HasParam(param_name)){
+				params.AddIntCheckbox(param_name, bool_param_after);
+			}
+			bool_param_before = (params.GetInt(param_name) == 1);
+		}
 	}
 
 	string GetSaveString(){
+		string saved_string;
 		if(param_type == int_param){
-			string_param_after = "" + int_param_after;
+			saved_string = "" + int_param_after;
 		}else if(param_type == float_param){
-			string_param_after = "" + float_param_after;
+			saved_string = "" + float_param_after;
+		}else if(param_type == bool_param){
+			saved_string = bool_param_after?"true":"false";
+		}else if(param_type == string_param){
+			saved_string = string_param_after;
 		}
-		return "set_character_param" + param_delimiter + character_id + param_delimiter + int(character_param) + param_delimiter + string_param_after;
+		return "set_character_param" + param_delimiter + object_id + param_delimiter + int(character_param) + param_delimiter + saved_string;
 	}
 
 	string GetDisplayString(){
-		return "SetCharacterParam " + character_id + " " + string_param_after;
+		string display_string;
+		if(param_type == int_param){
+			display_string = "" + int_param_after;
+		}else if(param_type == float_param){
+			display_string = "" + float_param_after;
+		}else if(param_type == bool_param){
+			display_string = bool_param_after?"true":"false";
+		}else if(param_type == string_param){
+			display_string = string_param_after;
+		}
+		return "SetCharacterParam " + object_id + " " + display_string;
 	}
 
 	void AddSettings(){
-		ImGui_InputInt("Character ID", character_id);
+		ImGui_InputInt("Character ID", object_id);
 
 		if(ImGui_Combo("Param Type", current_type, param_names)){
 			character_param = character_params(current_type);
@@ -161,79 +189,79 @@ class DrikaSetCharacterParam : DrikaElement{
 
 		switch(character_param){
 			case aggression:
-				ImGui_SliderFloat("Aggression", float_param_after, 0.0, 1.0, "%.3f");
+				ImGui_SliderFloat("Aggression", float_param_after, 0.0, 100.0, "%.2f");
 				break;
 			case attack_damage:
-				ImGui_SliderFloat("Attack Damage", float_param_after, 0.0, 2.0, "%.2f");
+				ImGui_SliderFloat("Attack Damage", float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case attack_knockback:
-				ImGui_SliderFloat("Attack Knockback", float_param_after, 0.0, 2.0, "%.2f");
+				ImGui_SliderFloat("Attack Knockback", float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case attack_speed:
-				ImGui_SliderFloat("Attack Speed", float_param_after, 0.0, 2.0, "%.2f");
+				ImGui_SliderFloat("Attack Speed", float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case block_followup:
-				ImGui_SliderFloat("Block Follow-up", float_param_after, 0.0, 1.0, "%.2f");
+				ImGui_SliderFloat("Block Follow-up", float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case block_skill:
-				ImGui_SliderFloat("Block Skill", float_param_after, 0.0, 1.0, "%.2f");
+				ImGui_SliderFloat("Block Skill", float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case cannot_be_disarmed:
-				params.AddIntCheckbox("Cannot Be Disarmed", (int_param_after == 1)?true:false);
+				ImGui_Checkbox("Cannot Be Disarmed", bool_param_after);
 				break;
 			case character_scale:
-				ImGui_SliderFloat("Character Scale", float_param_after, 0.6, 1.4, "%.2f");
+				ImGui_SliderFloat("Character Scale", float_param_after, 60, 140, "%.2f");
 				break;
 			case damage_resistance:
-				ImGui_SliderFloat("Damage Resistance", float_param_after, 0.0, 2.0, "%.2f");
+				ImGui_SliderFloat("Damage Resistance", float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case ear_size:
-				ImGui_SliderFloat("Ear Size", float_param_after, 0.0, 3.0, "%.2f");
+				ImGui_SliderFloat("Ear Size", float_param_after, 0.0, 300.0, "%.1f");
 				break;
 			case fat:
-				ImGui_SliderFloat("Fat", float_param_after, 0.0, 1.0, "%.2f");
+				ImGui_SliderFloat("Fat", float_param_after, 0.0, 200.0, "%.3f");
 				break;
 			case focus_fov_distance:
-				ImGui_SliderFloat("Focus FOV distance", float_param_after, 0.0, 100.0, "%.2f");
+				ImGui_SliderFloat("Focus FOV distance", float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case focus_fov_horizontal:
-				ImGui_SliderFloat("Focus FOV horizontal", float_param_after, 0.01, 1.570796, "%.2f");
+				ImGui_SliderFloat("Focus FOV horizontal", float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case focus_fov_vertical:
-				ImGui_SliderFloat("Focus FOV vertical", float_param_after, 0.01, 1.570796, "%.2f");
+				ImGui_SliderFloat("Focus FOV vertical", float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case ground_aggression:
-				ImGui_SliderFloat("Ground Aggression", float_param_after, 0.0, 1.0, "%.2f");
+				ImGui_SliderFloat("Ground Aggression", float_param_after, 0.0, 100.0, "%.2f");
 				break;
 			case knocked_out_shield:
-				params.AddIntSlider("Knockout Shield", int_param_after,"min:0,max:10");
+				ImGui_SliderInt("Knockout Shield", int_param_after, 0, 10);
 				break;
 			case left_handed:
-				params.AddIntCheckbox("Left handed", (int_param_after == 1)?true:false);
+				ImGui_Checkbox("Left handed", bool_param_after);
 				break;
 			case movement_speed:
-				ImGui_SliderFloat("Movement Speed", float_param_after, 0.1, 1.5, "%.2f");
+				ImGui_SliderFloat("Movement Speed", float_param_after, 10.0, 150.0, "%.1f");
 				break;
 			case muscle:
-				ImGui_SliderFloat("Muscle", float_param_after, 0.0, 1.0, "%.2f");
+				ImGui_SliderFloat("Muscle", float_param_after, 0.0, 200.0, "%.3f");
 				break;
 			case peripheral_fov_distance:
-				ImGui_SliderFloat("Peripheral FOV distance", float_param_after, 0.0, 100.0, "%.2f");
+				ImGui_SliderFloat("Peripheral FOV distance", float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case peripheral_fov_horizontal:
-				ImGui_SliderFloat("Peripheral FOV horizontal", float_param_after, 0.01, 1.570796, "%.2f");
+				ImGui_SliderFloat("Peripheral FOV horizontal", float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case peripheral_fov_vertical:
-				ImGui_SliderFloat("Peripheral FOV vertical", float_param_after, 0.01, 1.570796, "%.2f");
+				ImGui_SliderFloat("Peripheral FOV vertical", float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case species:
-				params.AddString("Species", string_param_after);
+				ImGui_InputText("Species", string_param_after, 64);
 				break;
 			case static_char:
-				params.AddIntCheckbox("Static", (int_param_after == 1)?true:false);
+				ImGui_Checkbox("Static", bool_param_after);
 				break;
 			case teams:
-				params.AddString("Teams", string_param_after);
+				ImGui_InputText("Teams", string_param_after, 64);
 				break;
 			default:
 				Log(warning, "Found a non standard parameter type. " + param_type);
@@ -242,8 +270,8 @@ class DrikaSetCharacterParam : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(identifier_type == id && character_id != -1 && ObjectExists(character_id)){
-			Object@ target_object = ReadObjectFromID(character_id);
+		if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
+			Object@ target_object = ReadObjectFromID(object_id);
 			DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
@@ -270,20 +298,98 @@ class DrikaSetCharacterParam : DrikaElement{
 				params.AddInt(param_name, reset?int_param_before:int_param_after);
 			}else if(param_type == float_param){
 				params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
+			}else if(param_type == bool_param){
+				params.AddIntCheckbox(param_name, reset?bool_param_before:bool_param_after);
 			}
 		}else{
-			if(param_type == string_param){
-				params.SetString(param_name, reset?string_param_before:string_param_after);
-			}else if(param_type == int_param){
-				params.SetInt(param_name, reset?int_param_before:int_param_after);
-			}else if(param_type == float_param){
-				params.Remove(param_name);
-				params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
-				/* params.SetFloat(param_name, reset?float_param_before:float_param_after); */
+			switch(character_param){
+				case aggression:
+					params.SetFloat("Aggression", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case attack_damage:
+					params.SetFloat("Attack Damage", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case attack_knockback:
+					params.SetFloat("Attack Knockback", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case attack_speed:
+					params.SetFloat("Attack Speed", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case block_followup:
+					params.SetFloat("Block Follow-up", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case block_skill:
+					params.SetFloat("Block Skill", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case cannot_be_disarmed:
+					params.SetInt("Cannot Be Disarmed", (reset?bool_param_before:bool_param_after)?1:0);
+					break;
+				case character_scale:
+					params.SetFloat("Character Scale", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case damage_resistance:
+					params.SetFloat("Damage Resistance", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case ear_size:
+					params.SetFloat("Ear Size", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case fat:
+					params.SetFloat("Fat", reset?float_param_before:float_param_after / 200.0);
+					break;
+				case focus_fov_distance:
+					params.SetFloat("Focus FOV distance", reset?float_param_before:float_param_after);
+					break;
+				case focus_fov_horizontal:
+					params.SetFloat("Focus FOV horizontal", reset?float_param_before:float_param_after / 57.2957);
+					break;
+				case focus_fov_vertical:
+					params.SetFloat("Focus FOV vertical", reset?float_param_before:float_param_after / 57.2957);
+					break;
+				case ground_aggression:
+					params.SetFloat("Ground Aggression", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case knocked_out_shield:
+					params.SetInt("Ground Aggression", reset?int_param_before:int_param_after);
+					break;
+				case left_handed:
+					params.SetInt("Left handed", (reset?bool_param_before:bool_param_after)?1:0);
+					break;
+				case movement_speed:
+					Log(info, "set movement speed to " + (reset?float_param_before:float_param_after / 100.0));
+					params.SetFloat("Movement Speed", reset?float_param_before:float_param_after / 100.0);
+					break;
+				case muscle:
+					params.SetFloat("Muscle", reset?float_param_before:float_param_after / 200.0);
+					break;
+				case peripheral_fov_distance:
+					params.SetFloat("Peripheral FOV distance", reset?float_param_before:float_param_after);
+					break;
+				case peripheral_fov_horizontal:
+					params.SetFloat("Peripheral FOV horizontal", reset?float_param_before:float_param_after / 57.2957);
+					break;
+				case peripheral_fov_vertical:
+					params.SetFloat("Peripheral FOV vertical", reset?float_param_before:float_param_after / 57.2957);
+					break;
+				case species:
+					params.SetString("Species", reset?string_param_before:string_param_after);
+					break;
+				case static_char:
+					params.SetInt("Static", (reset?bool_param_before:bool_param_after)?1:0);
+					break;
+				case teams:
+					params.SetString("Teams", reset?string_param_before:string_param_after);
+					break;
+				default:
+					Log(warning, "Found a non standard parameter type. " + param_type);
+					break;
 			}
 		}
+
+		Log(info, "Type " + target_object.GetType());
+		//To make sure the parameters are being used, refresh them in aschar.
 		if(target_object.GetType() == _movement_object){
 			MovementObject@ char = ReadCharacterID(target_object.GetID());
+			Log(info, "Calling SetParameters");
 			char.Execute("SetParameters();");
 		}
 		return true;
