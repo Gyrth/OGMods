@@ -67,6 +67,29 @@ string RegisterObject(int id, string reference){
 	}
 }
 
+bool AcceptConnectionsTo(Object @other){
+	if(drika_elements.size() > 0){
+		if(GetCurrentElement().connection_types.find(other.GetType()) != -1){
+			return true;
+		}
+	}
+	return false;
+}
+
+bool ConnectTo(Object @other){
+	if(drika_elements.size() > 0){
+		return GetCurrentElement().ConnectTo(other);
+	}
+	return false;
+}
+
+bool Disconnect(Object @other){
+	if(drika_elements.size() > 0){
+		return GetCurrentElement().Disconnect(other);
+	}
+	return false;
+}
+
 void DeRegisterObject(string reference){
 	object_references.delete(reference);
 }

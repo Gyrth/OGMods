@@ -68,6 +68,7 @@ class DrikaElement{
 	string placeholder_name;
 	identifier_types identifier_type;
 	vec3 default_placeholder_scale = vec3(0.25);
+	array<EntityType> connection_types;
 
 	string GetSaveString(){return "";}
 	string GetDisplayString(){return "";};
@@ -86,6 +87,22 @@ class DrikaElement{
 	void ReceiveMessage(string message, string param){}
 	void SetIndex(int _index){
 		index = _index;
+	}
+
+	bool ConnectTo(Object @other){
+		if(object_id != -1 && ObjectExists(object_id)){
+			hotspot.Disconnect(ReadObjectFromID(object_id));
+		}
+		object_id = other.GetID();
+		return true;
+	}
+
+	bool Disconnect(Object @other){
+		if(other.GetID() == object_id){
+			object_id = -1;
+			return true;
+		}
+		return false;
 	}
 
 	string Vec3ToString(vec3 value){

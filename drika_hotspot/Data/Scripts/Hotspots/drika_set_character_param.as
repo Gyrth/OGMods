@@ -83,6 +83,7 @@ class DrikaSetCharacterParam : DrikaElement{
 
 		drika_element_type = drika_set_character_param;
 		has_settings = true;
+		connection_types = {_movement_object};
 
 		SetParamType();
 		InterpParam(_param_after);
@@ -266,13 +267,6 @@ class DrikaSetCharacterParam : DrikaElement{
 			default:
 				Log(warning, "Found a non standard parameter type. " + param_type);
 				break;
-		}
-	}
-
-	void DrawEditing(){
-		if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
-			Object@ target_object = ReadObjectFromID(object_id);
-			DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
