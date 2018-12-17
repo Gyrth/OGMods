@@ -10,7 +10,6 @@ enum hotspot_trigger_types {	on_enter = 0,
 
 class DrikaOnCharacterEnterExit : DrikaElement{
 	string character_team;
-	int character_id;
 	int new_character_trigger_type;
 	int new_hotspot_trigger_type;
 
@@ -24,9 +23,10 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		new_character_trigger_type = character_trigger_type;
 
 		drika_element_type = drika_on_character_enter_exit;
+		connection_types = {_movement_object};
 
 		if(character_trigger_type == check_id){
-			character_id = atoi(_param);
+			object_id = atoi(_param);
 		}else{
 			character_team = _param;
 		}
@@ -35,7 +35,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 	string GetSaveString(){
 		if(character_trigger_type == check_id){
-			return "on_character_enter_exit" + param_delimiter + int(character_trigger_type) + param_delimiter + character_id + param_delimiter + int(hotspot_trigger_type);
+			return "on_character_enter_exit" + param_delimiter + int(character_trigger_type) + param_delimiter + object_id + param_delimiter + int(hotspot_trigger_type);
 		}else{
 			return "on_character_enter_exit" + param_delimiter + int(character_trigger_type) + param_delimiter + character_team + param_delimiter + int(hotspot_trigger_type);
 		}
@@ -44,7 +44,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	string GetDisplayString(){
 		string trigger_message = "";
 		if(character_trigger_type == check_id){
-			trigger_message = "" + character_id;
+			trigger_message = "" + object_id;
 		}else if(character_trigger_type == check_team){
 			trigger_message = character_team;
 		}else if(character_trigger_type == any_character){
@@ -65,15 +65,15 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 			hotspot_trigger_type = hotspot_trigger_types(new_hotspot_trigger_type);
 		}
 		if(character_trigger_type == check_id){
-			ImGui_InputInt("ID", character_id);
+			ImGui_InputInt("ID", object_id);
 		}else if(character_trigger_type == check_team){
 			ImGui_InputText("Team", character_team, 64);
 		}
 	}
 
 	void DrawEditing(){
-		if(character_trigger_type == check_id && character_id != -1 && MovementObjectExists(character_id)){
-			MovementObject@ character = ReadCharacterID(character_id);
+		if(character_trigger_type == check_id && object_id != -1 && MovementObjectExists(object_id)){
+			MovementObject@ character = ReadCharacterID(object_id);
 			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
@@ -85,7 +85,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 			if(MovementObjectExists(param)){
 				MovementObject@ character = ReadCharacterID(param);
 				Log(info, int(character_trigger_type) + " MovementObjectExists " + character.controlled);
-				if(	character_trigger_type == check_id && character_id == param ||
+				if(	character_trigger_type == check_id && object_id == param ||
 					character_trigger_type == any_character ||
 					character_trigger_type == any_player && character.controlled ||
 					character_trigger_type == any_npc && !character.controlled){

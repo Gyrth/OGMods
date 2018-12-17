@@ -56,19 +56,6 @@ class DrikaCreateObject : DrikaElement{
 		}
 	}
 
-	void StartEdit(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelectable(true);
-		}
-	}
-
-	void EditDone(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelected(false);
-			placeholder.SetSelectable(false);
-		}
-	}
-
 	void DrawEditing(){
 		if(ObjectExists(placeholder_id)){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);

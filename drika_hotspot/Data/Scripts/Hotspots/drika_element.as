@@ -61,7 +61,7 @@ class DrikaElement{
 	bool triggered = false;
 	bool has_settings = false;
 	int index = -1;
-	int placeholder_id;
+	int placeholder_id = -1;
 	Object@ placeholder;
 	int object_id;
 	string reference_string;
@@ -79,8 +79,7 @@ class DrikaElement{
 	void Delete(){}
 	void AddSettings(){}
 	void ApplySettings(){}
-	void EditDone(){}
-	void StartEdit(){}
+	void ConnectedChanged(){}
 	void DrawEditing(){}
 	void SetCurrent(bool _current){}
 	void ReceiveMessage(string message){}
@@ -90,27 +89,39 @@ class DrikaElement{
 		index = _index;
 	}
 
-	bool InitConnect(Object @other){
-		Log(info, "Hotspot id " + this_hotspot.GetID());
-		Log(info, "Connect to " + other.GetID() + " " + object_id);
-		if(object_id == other.GetID()){
-			return true;
+	void StartEdit(){
+		if(ObjectExists(placeholder_id)){
+			this_hotspot.SetSelected(false);
+			placeholder.SetSelectable(true);
+			placeholder.SetSelected(true);
+		}else{
+			this_hotspot.SetSelected(true);
 		}
-		return false;
+	}
+
+	void EditDone(){
+		if(ObjectExists(placeholder_id)){
+			placeholder.SetSelected(false);
+			placeholder.SetSelectable(false);
+		}
 	}
 
 	bool ConnectTo(Object @other){
+		if(other.GetID() == object_id){
+			return false;
+		}
 		if(object_id != -1 && ObjectExists(object_id)){
 			hotspot.Disconnect(ReadObjectFromID(object_id));
 		}
 		object_id = other.GetID();
-		return true;
+		ConnectedChanged();
+		return false;
 	}
 
 	bool Disconnect(Object @other){
 		if(other.GetID() == object_id){
 			object_id = -1;
-			return true;
+			return false;
 		}
 		return false;
 	}

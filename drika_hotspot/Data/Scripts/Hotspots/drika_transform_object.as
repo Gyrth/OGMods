@@ -14,6 +14,7 @@ class DrikaTransformObject : DrikaElement{
 		identifier_type = identifier_types(atoi(_identifier_type));
 		current_idenifier_type = identifier_type;
 		has_settings = true;
+		connection_types = {_movement_object, _env_object, _decal_object, _item_object};
 
 		if(identifier_type == id){
 			object_id = atoi(_identifier);
@@ -91,17 +92,8 @@ class DrikaTransformObject : DrikaElement{
 		}
 	}
 
-	void StartEdit(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelectable(true);
-		}
-	}
-
-	void EditDone(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelected(false);
-			placeholder.SetSelectable(false);
-		}
+	void ConnectedChanged(){
+		GetNewTransform();
 	}
 
 	bool Trigger(){
@@ -138,7 +130,6 @@ class DrikaTransformObject : DrikaElement{
 		target_object.SetRotation(reset?before_rotation:placeholder.GetRotation());
 		vec3 scale = placeholder.GetScale();
 		vec3 bounds = target_object.GetBoundingBox();
-		Log(info, "bounds " + bounds.x + " " + bounds.y + " " + bounds.z);
 		if(bounds == vec3(0.0)){
 			bounds = vec3(1.0);
 		}

@@ -20,6 +20,7 @@ class DrikaSetObjectParam : DrikaElement{
 		identifier_type = identifier_types(atoi(_identifier_type));
 		current_type = param_type;
 		current_idenifier_type = identifier_type;
+		connection_types = {_env_object};
 
 		if(identifier_type == id){
 			object_id = atoi(_identifier);
@@ -38,12 +39,11 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	void InterpParam(string _param){
-		//No need to interp the string param since the input is already a string.
 		if(param_type == float_param){
 			float_param_after = atof(_param);
 		}else if(param_type == int_param){
 			int_param_after = atoi(_param);
-		}else if(param_type == int_param){
+		}else if(param_type == string_param){
 			string_param_after = _param;
 		}
 	}
@@ -81,16 +81,33 @@ class DrikaSetObjectParam : DrikaElement{
 		}else if(identifier_type == reference){
 			save_identifier = "" + reference_string;
 		}
-		if(param_type == int_param){
-			string_param_after = "" + int_param_after;
+		string save_string;
+		if(param_type == string_param){
+			save_string = string_param_after;
 		}else if(param_type == float_param){
-			string_param_after = "" + float_param_after;
+			save_string = "" + float_param_after;
+		}else if(param_type == int_param){
+			save_string = "" + int_param_after;
 		}
-		return "set_object_param" + param_delimiter + int(identifier_type) + param_delimiter + save_identifier + param_delimiter + int(param_type) + param_delimiter + param_name + param_delimiter + string_param_after;
+		return "set_object_param" + param_delimiter + int(identifier_type) + param_delimiter + save_identifier + param_delimiter + int(param_type) + param_delimiter + param_name + param_delimiter + save_string;
 	}
 
 	string GetDisplayString(){
-		return "SetObjectParam " + param_name + " " + string_param_after;
+		string display_identifier;
+		if(identifier_type == id){
+			display_identifier = "" + object_id;
+		}else if(identifier_type == reference){
+			display_identifier = "" + reference_string;
+		}
+		string display_string;
+		if(param_type == string_param){
+			display_string = string_param_after;
+		}else if(param_type == float_param){
+			display_string = "" + float_param_after;
+		}else if(param_type == int_param){
+			display_string = "" + int_param_after;
+		}
+		return "SetObjectParam " + display_identifier + " " + param_name + " " + display_string;
 	}
 
 	void AddSettings(){
@@ -121,7 +138,7 @@ class DrikaSetObjectParam : DrikaElement{
 	void DrawEditing(){
 		if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
 			Object@ target_object = ReadObjectFromID(object_id);
-			DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(1.0), _delete_on_update);
+			DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 

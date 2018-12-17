@@ -47,19 +47,6 @@ class DrikaPlaySound : DrikaElement{
 		}
 	}
 
-	void StartEdit(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelectable(true);
-		}
-	}
-
-	void EditDone(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelected(false);
-			placeholder.SetSelectable(false);
-		}
-	}
-
 	bool Trigger(){
 		if(ObjectExists(placeholder_id)){
 			PlaySound(sound_path, placeholder.GetTranslation());

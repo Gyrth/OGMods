@@ -79,10 +79,6 @@ class DrikaSetLevelParam : DrikaElement{
 		GetBeforeParam();
 	}
 
-	void Delete(){
-		SetParameter(true);
-	}
-
 	void SetParamType(){
 		if(string_parameters.find(level_param) != -1){
 			param_type = string_param;
@@ -239,6 +235,10 @@ class DrikaSetLevelParam : DrikaElement{
 	}
 
 	bool Trigger(){
+		if(!triggered){
+			GetBeforeParam();
+		}
+		triggered = true;
 		return SetParameter(false);
 	}
 
@@ -293,6 +293,9 @@ class DrikaSetLevelParam : DrikaElement{
 	}
 
 	void Reset(){
-		SetParameter(true);
+		if(triggered){
+			triggered = false;
+			SetParameter(true);
+		}
 	}
 }

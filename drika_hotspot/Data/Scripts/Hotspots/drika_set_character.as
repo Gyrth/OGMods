@@ -1,23 +1,20 @@
 class DrikaSetCharacter : DrikaElement{
-	int character_id;
 	string character_path;
 	string original_character_path;
 	bool cache_skeleton_info = true;
-	MovementObject@ character;
 
-	DrikaSetCharacter(string _character_id = "-1", string _character_path = "Data/Characters/guard.xml", string _cache_skeleton_info = "true"){
-		character_id = atoi(_character_id);
+	DrikaSetCharacter(string _object_id = "-1", string _character_path = "Data/Characters/guard.xml", string _cache_skeleton_info = "true"){
+		object_id = atoi(_object_id);
 		character_path = _character_path;
 		drika_element_type = drika_set_character;
 		has_settings = true;
 		cache_skeleton_info = ((_cache_skeleton_info == "true")?true:false);
+		connection_types = {_movement_object};
 	}
 
 	void PostInit(){
-		if(MovementObjectExists(character_id)){
-			@character = ReadCharacterID(character_id);
-		}else{
-			Log(warning, "Character does not exist with id " + character_id);
+		if(!MovementObjectExists(object_id)){
+			Log(warning, "Character does not exist with id " + object_id);
 		}
 	}
 
@@ -26,24 +23,23 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	string GetSaveString(){
-		return "set_character" + param_delimiter + character_id + param_delimiter + character_path + param_delimiter + (cache_skeleton_info?"true":"false");
+		return "set_character" + param_delimiter + object_id + param_delimiter + character_path + param_delimiter + (cache_skeleton_info?"true":"false");
 	}
 
 	string GetDisplayString(){
-		return "SetCharacter " + character_id + " " + character_path;
+		return "SetCharacter " + object_id + " " + character_path;
 	}
 
 	void GetOriginalCharacter(){
-		if(character_id != -1 && MovementObjectExists(character_id)){
+		if(object_id != -1 && MovementObjectExists(object_id)){
+			MovementObject@ character = ReadCharacterID(object_id);
 			original_character_path = character.char_path;
 		}
 	}
 
 	void AddSettings(){
-		if(ImGui_InputInt("Character ID", character_id)){
-			if(MovementObjectExists(character_id)){
-				@character = ReadCharacterID(character_id);
-			}
+		if(ImGui_InputInt("Character ID", object_id)){
+
 		}
 		ImGui_Text("Set To Character : ");
 		ImGui_SameLine();
@@ -58,7 +54,7 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	bool Trigger(){
-		if(character_id == -1 || !MovementObjectExists(character_id)){
+		if(object_id == -1 || !MovementObjectExists(object_id)){
 			return false;
 		}
 		if(!triggered){
@@ -70,13 +66,15 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(character_id != -1 && MovementObjectExists(character_id)){
+		if(object_id != -1 && MovementObjectExists(object_id)){
+			MovementObject@ character = ReadCharacterID(object_id);
 			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
 	void SetParameter(bool reset){
-		if(character_id != -1 && MovementObjectExists(character_id)){
+		if(object_id != -1 && MovementObjectExists(object_id)){
+			MovementObject@ character = ReadCharacterID(object_id);
 			if(character.char_path == (reset?original_character_path:character_path)){
 				return;
 			}

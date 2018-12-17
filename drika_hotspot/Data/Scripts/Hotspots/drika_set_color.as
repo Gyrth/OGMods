@@ -18,6 +18,7 @@ class DrikaSetColor : DrikaElement{
 		palette_slot = atoi(_palette_slot);
 		identifier_type = identifier_types(atoi(_identifier_type));
 		current_idenifier_type = identifier_type;
+		connection_types = {_movement_object, _env_object, _decal_object, _item_object};
 
 		if(identifier_type == id){
 			object_id = atoi(_identifier);
@@ -51,11 +52,12 @@ class DrikaSetColor : DrikaElement{
 		}else if(identifier_type == reference){
 			identifier = "" + reference_string;
 		}
-		return "SetColor " + identifier;
+		return "SetColor " + identifier + " " + Vec3ToString(after_color);
 	}
 
 	void StartEdit(){
 		GetNumPaletteColors();
+		DrikaElement::StartEdit();
 	}
 
 	void GetNumPaletteColors(){
@@ -104,7 +106,7 @@ class DrikaSetColor : DrikaElement{
 	void DrawEditing(){
 		if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
 			Object@ target_object = ReadObjectFromID(object_id);
-			DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(1.0), _delete_on_update);
+			DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 

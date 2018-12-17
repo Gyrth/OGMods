@@ -83,14 +83,8 @@ bool AcceptConnectionsTo(Object @other){
 }
 
 bool ConnectTo(Object @other){
-	Log(info, "Connect to " + other.GetID());
 	if(!post_init_done){
-		Log(info, "Nr of elements " + drika_elements.size());
-		for(uint i = 0; i < drika_elements.size(); i++){
-			if(drika_elements[i].InitConnect(other)){
-				return true;
-			}
-		}
+
 	}else{
 		if(drika_elements.size() > 0){
 			return GetCurrentElement().ConnectTo(other);
@@ -186,7 +180,7 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 	}else if(line_elements[0] == "play_music"){
 		return DrikaPlayMusic(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "set_character_param"){
-		return DrikaSetCharacterParam(line_elements[1], line_elements[2], line_elements[3]);
+		return DrikaSetCharacterParam(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -240,6 +234,9 @@ void SwitchToEditing(){
 }
 
 void SwitchToPlaying(){
+	if(this_hotspot.IsSelected()){
+		this_hotspot.SetSelected(false);
+	}
 	editing = false;
 	Reset();
 }
@@ -247,10 +244,10 @@ void SwitchToPlaying(){
 void SelectedChanged(){
 	is_selected = this_hotspot.IsSelected();
 	if(is_selected){
-		editor_open = true;
-		if(drika_elements.size() != 0){
+		if(!editor_open && drika_elements.size() != 0){
 			GetCurrentElement().StartEdit();
 		}
+		editor_open = true;
 		level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
 	}
 }
@@ -418,8 +415,9 @@ void DrawEditor(){
 				if(drika_elements.size() > 0){
 					duplicating = true;
 					array<string> line_elements = GetCurrentElement().GetSaveString().split(param_delimiter);
-					InsertElement(InterpElement(line_elements));
-					ReorderElements();
+					DrikaElement@ new_element = InterpElement(line_elements);
+					new_element.PostInit();
+					InsertElement(new_element);
 					duplicating = false;
 				}
 			}
@@ -528,7 +526,9 @@ void InsertElement(DrikaElement@ new_element){
 		current_line += 1;
 	}
 	ReorderElements();
-	GetCurrentElement().StartEdit();
+	if(post_init_done){
+		GetCurrentElement().StartEdit();
+	}
 }
 
 void ReceiveMessage(string msg){

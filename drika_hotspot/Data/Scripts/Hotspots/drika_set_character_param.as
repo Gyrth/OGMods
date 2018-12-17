@@ -27,6 +27,7 @@ enum character_params { 	aggression = 0,
 
 class DrikaSetCharacterParam : DrikaElement{
 	int current_type;
+	int current_idenifier_type;
 
 	string string_param_before;
 	string string_param_after;
@@ -76,14 +77,21 @@ class DrikaSetCharacterParam : DrikaElement{
 									"Teams"
 								};
 
-	DrikaSetCharacterParam(string _identifier = "-1", string _param_type = "0", string _param_after = "50.0"){
+	DrikaSetCharacterParam(string _identifier_type = "0", string _identifier = "-1", string _param_type = "0", string _param_after = "50.0"){
 		character_param = character_params(atoi(_param_type));
-		object_id = atoi(_identifier);
+		identifier_type = identifier_types(atoi(_identifier_type));
+		current_idenifier_type = identifier_type;
 		current_type = character_param;
 
 		drika_element_type = drika_set_character_param;
 		has_settings = true;
 		connection_types = {_movement_object};
+
+		if(identifier_type == id){
+			object_id = atoi(_identifier);
+		}else if(identifier_type == reference){
+			reference_string = _identifier;
+		}
 
 		SetParamType();
 		InterpParam(_param_after);
@@ -114,8 +122,15 @@ class DrikaSetCharacterParam : DrikaElement{
 		}
 	}
 
+	void DrawEditing(){
+		if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
+			Object@ object = ReadObjectFromID(object_id);
+			DebugDrawLine(object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		}
+	}
+
 	void SetParamName(){
-		param_name = param_names[param_type];
+		param_name = param_names[character_param];
 	}
 
 	void Delete(){
@@ -162,7 +177,13 @@ class DrikaSetCharacterParam : DrikaElement{
 		}else if(param_type == string_param){
 			saved_string = string_param_after;
 		}
-		return "set_character_param" + param_delimiter + object_id + param_delimiter + int(character_param) + param_delimiter + saved_string;
+		string save_identifier;
+		if(identifier_type == id){
+			save_identifier = "" + object_id;
+		}else if(identifier_type == reference){
+			save_identifier = "" + reference_string;
+		}
+		return "set_character_param" + param_delimiter + identifier_type + param_delimiter + save_identifier + param_delimiter + int(character_param) + param_delimiter + saved_string;
 	}
 
 	string GetDisplayString(){
@@ -176,11 +197,19 @@ class DrikaSetCharacterParam : DrikaElement{
 		}else if(param_type == string_param){
 			display_string = string_param_after;
 		}
-		return "SetCharacterParam " + object_id + " " + display_string;
+		return "SetCharacterParam " + object_id + " " + param_name + " " + display_string;
 	}
 
 	void AddSettings(){
-		ImGui_InputInt("Character ID", object_id);
+		if(ImGui_Combo("Identifier Type", current_idenifier_type, {"ID", "Reference"})){
+			identifier_type = identifier_types(current_idenifier_type);
+		}
+
+		if(identifier_type == id){
+			ImGui_InputInt("Object ID", object_id);
+		}else if (identifier_type == reference){
+			ImGui_InputText("Reference", reference_string, 64);
+		}
 
 		if(ImGui_Combo("Param Type", current_type, param_names)){
 			character_param = character_params(current_type);
@@ -349,7 +378,6 @@ class DrikaSetCharacterParam : DrikaElement{
 					params.SetInt("Left handed", (reset?bool_param_before:bool_param_after)?1:0);
 					break;
 				case movement_speed:
-					Log(info, "set movement speed to " + (reset?float_param_before:float_param_after / 100.0));
 					params.SetFloat("Movement Speed", reset?float_param_before:float_param_after / 100.0);
 					break;
 				case muscle:
@@ -379,11 +407,9 @@ class DrikaSetCharacterParam : DrikaElement{
 			}
 		}
 
-		Log(info, "Type " + target_object.GetType());
 		//To make sure the parameters are being used, refresh them in aschar.
 		if(target_object.GetType() == _movement_object){
 			MovementObject@ char = ReadCharacterID(target_object.GetID());
-			Log(info, "Calling SetParameters");
 			char.Execute("SetParameters();");
 		}
 		return true;

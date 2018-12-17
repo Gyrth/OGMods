@@ -58,19 +58,6 @@ class DrikaCreateParticle : DrikaElement{
 		}
 	}
 
-	void StartEdit(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelectable(true);
-		}
-	}
-
-	void EditDone(){
-		if(ObjectExists(placeholder_id)){
-			placeholder.SetSelected(false);
-			placeholder.SetSelectable(false);
-		}
-	}
-
 	void DrawEditing(){
 		if(ObjectExists(placeholder_id)){
 			vec3 forward_direction = placeholder.GetRotation() * vec3(1, 0, 0);

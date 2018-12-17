@@ -8,6 +8,7 @@ class DrikaSetEnabled : DrikaElement{
 		drika_element_type = drika_set_enabled;
 		identifier_type = identifier_types(atoi(_identifier_type));
 		current_idenifier_type = identifier_type;
+		connection_types = {_env_object};
 
 		if(identifier_type == id){
 			object_id = atoi(_identifier);
