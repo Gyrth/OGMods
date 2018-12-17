@@ -20,7 +20,7 @@ class DrikaSetObjectParam : DrikaElement{
 		identifier_type = identifier_types(atoi(_identifier_type));
 		current_type = param_type;
 		current_idenifier_type = identifier_type;
-		connection_types = {_env_object};
+		connection_types = {_env_object, _movement_object};
 
 		if(identifier_type == id){
 			object_id = atoi(_identifier);
