@@ -5,8 +5,10 @@ class DrikaCreateParticle : DrikaElement{
 	float velocity;
 	float spread = 0.0f;
 	bool use_blood_tint;
+	bool connect_particles = false;
+	int previous_particle_id = -1;
 
-	DrikaCreateParticle(string _placeholder_id = "-1", string _amount = "5", string _particle_path = "Data/Particles/blooddrop.xml", string _velocity = "0.0", string _tint = "1,1,1", string _use_blood_tint = "true", string _spread = "0.0"){
+	DrikaCreateParticle(string _placeholder_id = "-1", string _amount = "5", string _particle_path = "Data/Particles/blooddrop.xml", string _velocity = "0.0", string _tint = "1,1,1", string _use_blood_tint = "true", string _spread = "0.0", string _connect_particles = "false"){
 		amount = atoi(_amount);
 		placeholder_id = atoi(_placeholder_id);
 		placeholder_name = "Create Particle Helper";
@@ -15,6 +17,7 @@ class DrikaCreateParticle : DrikaElement{
 		velocity = atof(_velocity);
 		spread = atof(_spread);
 		use_blood_tint = (_use_blood_tint == "true");
+		connect_particles = (_connect_particles == "true");
 
 		drika_element_type = drika_create_particle;
 		has_settings = true;
@@ -27,7 +30,7 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	string GetSaveString(){
-		return "create_particle" + param_delimiter + placeholder_id + param_delimiter + amount + param_delimiter + particle_path + param_delimiter + velocity + param_delimiter + Vec3ToString(tint) + param_delimiter + use_blood_tint + param_delimiter + spread;
+		return "create_particle" + param_delimiter + placeholder_id + param_delimiter + amount + param_delimiter + particle_path + param_delimiter + velocity + param_delimiter + Vec3ToString(tint) + param_delimiter + use_blood_tint + param_delimiter + spread + param_delimiter + connect_particles;
 	}
 
 	string GetDisplayString(){
@@ -46,6 +49,7 @@ class DrikaCreateParticle : DrikaElement{
 		ImGui_InputInt("Amount", amount);
 		ImGui_DragFloat("Velocity", velocity, 1.0f, 0.0f, 1000.0f);
 		ImGui_DragFloat("Spread", spread, 0.001f, 0.0f, 1.0f, "%.3f");
+		ImGui_Checkbox("Connect Particles", connect_particles);
 		ImGui_Checkbox("Use Blood Tint", use_blood_tint);
 		if(!use_blood_tint){
 			ImGui_ColorPicker3("Particle Tint", tint, 0);
@@ -77,6 +81,10 @@ class DrikaCreateParticle : DrikaElement{
 		}
 	}
 
+	void Reset(){
+		previous_particle_id = -1;
+	}
+
 	bool Trigger(){
 		if(ObjectExists(placeholder_id)){
 			vec3 particle_tint = GetBloodTint();
@@ -87,7 +95,15 @@ class DrikaCreateParticle : DrikaElement{
 			for(int i = 0; i < amount; i++){
 				vec3 added_spread = vec3(RangedRandomFloat(-spread,spread), RangedRandomFloat(-spread,spread), RangedRandomFloat(-spread,spread));
 				vec3 particle_velocity = normalize(forward_direction + added_spread) * velocity;
-				MakeParticle(particle_path, placeholder.GetTranslation(), particle_velocity + added_spread, particle_tint);
+				int new_particle_id = MakeParticle(particle_path, placeholder.GetTranslation(), particle_velocity + added_spread, particle_tint);
+
+				//Connecting particles are used to create bloodspurts.
+				if(connect_particles){
+					if(previous_particle_id != -1){
+						ConnectParticles(previous_particle_id, new_particle_id);
+					}
+					previous_particle_id = new_particle_id;
+				}
 			}
 			return true;
 		}else{
