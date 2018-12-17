@@ -70,13 +70,12 @@ class DrikaSetLevelParam : DrikaElement{
 	DrikaSetLevelParam(string _level_param = "0", string _param_after = "no_kills"){
 		level_param = level_params(atoi(_level_param));
 		current_type = level_param;
+		param_name = param_names[current_type];
 
 		drika_element_type = drika_set_level_param;
 		has_settings = true;
 		SetParamType();
-		param_name = param_names[current_type];
-		string_param_after = _param_after;
-		InterpParam();
+		InterpParam(_param_after);
 		GetBeforeParam();
 	}
 
@@ -103,15 +102,17 @@ class DrikaSetLevelParam : DrikaElement{
 		}
 	}
 
-	void InterpParam(){
+	void InterpParam(string _param){
 		if(param_type == vec3_param || param_type == vec3_color_param){
-			vec3_param_after = StringToVec3(string_param_after);
+			vec3_param_after = StringToVec3(_param);
 		}else if(param_type == float_param){
-			float_param_after = atof(string_param_after);
+			float_param_after = atof(_param);
 		}else if(param_type == int_param){
-			int_param_after = atoi(string_param_after);
+			int_param_after = atoi(_param);
+		}else if(level_param == string_param){
+			string_param_after = _param;
 		}else if(level_param == other){
-			array<string> split_param = string_param_after.split(";");
+			array<string> split_param = _param.split(";");
 			if(split_param.size() == 2){
 				param_name = split_param[0];
 				string_param_after = split_param[1];
@@ -136,21 +137,19 @@ class DrikaSetLevelParam : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetLevelParam " + param_name + " " + string_param_after;
-	}
-
-	void ApplySettings(){
-		UpdateDisplayString();
-	}
-
-	void UpdateDisplayString(){
-		if(param_type == float_param){
-			string_param_after = "" + float_param_after;
-		}else if(param_type == int_param){
-			string_param_after = "" + int_param_after;
+		string display_string;
+		if(level_param == other){
+			display_string = param_name + ";" + string_param_after;
+		}else if(param_type == string_param){
+			display_string = string_param_after;
 		}else if(param_type == vec3_param || param_type == vec3_color_param){
-			string_param_after = vec3_param_after.x + "," + vec3_param_after.y + "," + vec3_param_after.z;
+			display_string = Vec3ToString(vec3_param_after);
+		}else if(param_type == float_param){
+			display_string = "" + float_param_after;
+		}else if(param_type == int_param){
+			display_string = "" + int_param_after;
 		}
+		return "SetLevelParam " + param_name + " " + display_string;
 	}
 
 	void AddSettings(){
@@ -168,7 +167,6 @@ class DrikaSetLevelParam : DrikaElement{
 			}else if(param_type == vec3_param || param_type == vec3_color_param){
 				vec3_param_after = vec3_param_before;
 			}
-			UpdateDisplayString();
 		}
 
 		if(param_type == string_param){

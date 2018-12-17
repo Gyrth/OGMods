@@ -28,22 +28,23 @@ class DrikaSetObjectParam : DrikaElement{
 		}
 
 		drika_element_type = drika_set_object_param;
-		string_param_after = _param_after;
 		has_settings = true;
 
-		InterpParam();
+		InterpParam(_param_after);
 	}
 
 	void Delete(){
 		SetParameter(true);
 	}
 
-	void InterpParam(){
+	void InterpParam(string _param){
 		//No need to interp the string param since the input is already a string.
 		if(param_type == float_param){
-			float_param_after = atof(string_param_after);
+			float_param_after = atof(_param);
 		}else if(param_type == int_param){
-			int_param_after = atoi(string_param_after);
+			int_param_after = atoi(_param);
+		}else if(param_type == int_param){
+			string_param_after = _param;
 		}
 	}
 

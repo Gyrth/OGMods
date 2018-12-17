@@ -79,7 +79,7 @@ class DrikaSetCharacterParam : DrikaElement{
 	DrikaSetCharacterParam(string _identifier = "-1", string _param_type = "0", string _param_after = "50.0"){
 		character_param = character_params(atoi(_param_type));
 		object_id = atoi(_identifier);
-		current_type = param_type;
+		current_type = character_param;
 
 		drika_element_type = drika_set_character_param;
 		has_settings = true;

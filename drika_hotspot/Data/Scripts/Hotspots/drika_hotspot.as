@@ -50,6 +50,12 @@ TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/
 void Init() {
     level.ReceiveLevelEvents(hotspot.GetID());
 	ConvertDisplayColors();
+	//When the user duplicates a hotspot the editormode is active and the left alt is pressed.
+	if(EditorModeActive() && GetInputDown(0, "lalt")){
+		duplicating = true;
+	}
+	InterpData();
+	duplicating = false;
 }
 
 string RegisterObject(int id, string reference){
@@ -77,8 +83,18 @@ bool AcceptConnectionsTo(Object @other){
 }
 
 bool ConnectTo(Object @other){
-	if(drika_elements.size() > 0){
-		return GetCurrentElement().ConnectTo(other);
+	Log(info, "Connect to " + other.GetID());
+	if(!post_init_done){
+		Log(info, "Nr of elements " + drika_elements.size());
+		for(uint i = 0; i < drika_elements.size(); i++){
+			if(drika_elements[i].InitConnect(other)){
+				return true;
+			}
+		}
+	}else{
+		if(drika_elements.size() > 0){
+			return GetCurrentElement().ConnectTo(other);
+		}
 	}
 	return false;
 }
@@ -181,12 +197,9 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 void Update(){
 	if(!post_init_done){
 		post_init_done = true;
-		//When the user duplicates a hotspot the editormode is active and the left alt is pressed.
-		if(EditorModeActive() && GetInputDown(0, "lalt")){
-			duplicating = true;
+		for(uint i = 0; i < drika_elements.size(); i++){
+			drika_elements[i].PostInit();
 		}
-		InterpData();
-		duplicating = false;
 		return;
 	}
 

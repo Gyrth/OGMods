@@ -50,7 +50,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="11.0791" t1="-0.109795" t2="-16.674" s0="1" s1="1" s2="1" q0="0.110085" q1="0.545464" q2="-0.0725477" q3="0.8277" euler_x="0.264451" euler_y="1.16537" euler_z="0" id="1">
+    <CameraObject t0="-0.11815" t1="2.24508" t2="-23.6923" s0="1" s1="1" s2="1" q0="0.0605912" q1="0.854498" q2="-0.102394" q3="0.505645" euler_x="-2.90307" euler_y="1.06866" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -194,7 +194,7 @@
         <parameters>
             <parameter name="0" type="string" val="wait|3000" />
             <parameter name="1" type="string" val="set_character|-1|Data/Characters/guard.xml|true" />
-            <parameter name="10" type="string" val="set_object_param|0|-1|0|drika_param|drika_new_value" />
+            <parameter name="10" type="string" val="set_object_param|0|-1|0|drika_param|" />
             <parameter name="11" type="string" val="set_level_param|0|no_kills" />
             <parameter name="12" type="string" val="set_camera_param|0|1,1,1" />
             <parameter name="13" type="string" val="create_object|58|Data/Objects/primitives/edged_cone.xml|" />
@@ -312,7 +312,7 @@
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
             <parameter name="1" type="string" val="set_level_param|0|nothing" />
-            <parameter name="10" type="string" val="set_level_param|9|nothing" />
+            <parameter name="10" type="string" val="set_level_param|9|" />
             <parameter name="11" type="string" val="set_level_param|10|200" />
             <parameter name="12" type="string" val="set_level_param|11|500" />
             <parameter name="13" type="string" val="set_level_param|12|0" />
@@ -321,14 +321,14 @@
             <parameter name="16" type="string" val="set_level_param|15|0,0.766676,1" />
             <parameter name="17" type="string" val="set_level_param|16|3" />
             <parameter name="18" type="string" val="set_level_param|17|Buster;Charlie" />
-            <parameter name="2" type="string" val="set_level_param|1|#RAINY" />
+            <parameter name="2" type="string" val="set_level_param|1|" />
             <parameter name="3" type="string" val="set_level_param|2|25" />
-            <parameter name="4" type="string" val="set_level_param|3|#RAIN" />
+            <parameter name="4" type="string" val="set_level_param|3|" />
             <parameter name="5" type="string" val="set_level_param|4|12" />
             <parameter name="6" type="string" val="set_level_param|5|500" />
             <parameter name="7" type="string" val="set_level_param|6|145" />
             <parameter name="8" type="string" val="set_level_param|7|0" />
-            <parameter name="9" type="string" val="set_level_param|8|new load tip" />
+            <parameter name="9" type="string" val="set_level_param|8|" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -403,7 +403,7 @@
             <parameter name="1" type="string" val="create_object|4|Data/Objects/primitives/edged_cone.xml|edged_cone" />
             <parameter name="10" type="string" val="set_enabled|0|19|true" />
             <parameter name="11" type="string" val="go_to_line|3" />
-            <parameter name="2" type="string" val="set_object_param|1|0|0|drika_param|drika_new_value" />
+            <parameter name="2" type="string" val="set_object_param|1|0|0|drika_param|" />
             <parameter name="3" type="string" val="wait|200" />
             <parameter name="4" type="string" val="set_enabled|1|edged_cone|false" />
             <parameter name="5" type="string" val="transform_object|52|0|16" />
@@ -631,6 +631,7 @@
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0" />
             <parameter name="1" type="string" val="transform_object|122|0|118" />
+            <parameter name="10" type="string" val="set_character_param|133|17|33.1" />
             <parameter name="2" type="string" val="wait|1000" />
             <parameter name="3" type="string" val="transform_object|126|0|118" />
             <parameter name="4" type="string" val="transform_object|123|0|119" />
@@ -638,10 +639,11 @@
             <parameter name="6" type="string" val="transform_object|127|0|119" />
             <parameter name="7" type="string" val="transform_object|124|0|120" />
             <parameter name="8" type="string" val="transform_object|132|0|131" />
-            <parameter name="9" type="string" val="set_character_param|3|17|300" />
-            <parameter name="Attack Knockback" type="float" val="0" />
+            <parameter name="9" type="string" val="set_character_param|133|17|300" />
         </parameters>
-        <Connections />
+        <Connections>
+            <Connection id="133" />
+        </Connections>
         <ConnectionsFrom />
     </Hotspot>
     <EnvObject name="Transform Object Helper" t0="5.9047" t1="5.12464" t2="-32.0459" s0="16.4361" s1="0.47295" s2="5.17684" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="122" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
@@ -753,15 +755,6 @@
             <parameters />
         </EnvObject>
     </ActorObject>
-    <Hotspot t0="15.9295" t1="-0.639193" t2="-22.9705" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="141" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
-        <parameters>
-            <parameter name="0" type="string" val="wait|50" />
-            <parameter name="1" type="string" val="create_particle|142|2|Data/Particles/blooddrop.xml|5|1,1,1|true|0|true" />
-            <parameter name="2" type="string" val="go_to_line|0" />
-        </parameters>
-        <Connections />
-        <ConnectionsFrom />
-    </Hotspot>
     <EnvObject name="Create Particle Helper" t0="15.2823" t1="-2.17221" t2="-17.5558" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0.701496" q3="0.712674" euler_x="0" euler_y="0" euler_z="1.55499" id="142" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>

@@ -8,8 +8,11 @@ class DrikaPlayMusic : DrikaElement{
 		music_path = _music_path;
 		song = _song;
 		drika_element_type = drika_play_music;
-		AddMusic(music_path);
 		has_settings = true;
+	}
+
+	void PostInit(){
+		AddMusic(music_path);
 	}
 
 	string GetSaveString(){

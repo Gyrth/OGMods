@@ -11,6 +11,9 @@ class DrikaSetCharacter : DrikaElement{
 		drika_element_type = drika_set_character;
 		has_settings = true;
 		cache_skeleton_info = ((_cache_skeleton_info == "true")?true:false);
+	}
+
+	void PostInit(){
 		if(MovementObjectExists(character_id)){
 			@character = ReadCharacterID(character_id);
 		}else{

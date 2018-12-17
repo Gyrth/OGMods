@@ -7,7 +7,9 @@ class DrikaPlaySound : DrikaElement{
 		sound_path = _sound_path;
 		drika_element_type = drika_play_sound;
 		has_settings = true;
+	}
 
+	void PostInit(){
 		RetrievePlaceholder();
 	}
 

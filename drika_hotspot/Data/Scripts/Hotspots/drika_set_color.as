@@ -28,8 +28,6 @@ class DrikaSetColor : DrikaElement{
 		drika_element_type = drika_set_color;
 		after_color = StringToVec3(_color);
 		has_settings = true;
-
-		GetBeforeColor();
 	}
 
 	void Delete(){

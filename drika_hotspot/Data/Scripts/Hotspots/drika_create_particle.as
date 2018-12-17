@@ -21,7 +21,9 @@ class DrikaCreateParticle : DrikaElement{
 
 		drika_element_type = drika_create_particle;
 		has_settings = true;
+	}
 
+	void PostInit(){
 		RetrievePlaceholder();
 	}
 

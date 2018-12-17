@@ -20,7 +20,9 @@ class DrikaTransformObject : DrikaElement{
 		}else if(identifier_type == reference){
 			reference_string = _identifier;
 		}
+	}
 
+	void PostInit(){
 		RetrievePlaceholder();
 	}
 

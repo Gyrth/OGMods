@@ -73,6 +73,7 @@ class DrikaElement{
 	string GetSaveString(){return "";}
 	string GetDisplayString(){return "";};
 	void Update(){}
+	void PostInit(){}
 	bool Trigger(){return false;}
 	void Reset(){}
 	void Delete(){}
@@ -87,6 +88,15 @@ class DrikaElement{
 	void ReceiveMessage(string message, string param){}
 	void SetIndex(int _index){
 		index = _index;
+	}
+
+	bool InitConnect(Object @other){
+		Log(info, "Hotspot id " + this_hotspot.GetID());
+		Log(info, "Connect to " + other.GetID() + " " + object_id);
+		if(object_id == other.GetID()){
+			return true;
+		}
+		return false;
 	}
 
 	bool ConnectTo(Object @other){

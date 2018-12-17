@@ -17,6 +17,9 @@ class DrikaCreateObject : DrikaElement{
 		if(reference != ""){
 			show_reference_option = true;
 		}
+	}
+
+	void PostInit(){
 		RetrievePlaceholder();
 	}
 

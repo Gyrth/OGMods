@@ -42,8 +42,7 @@ class DrikaSetCameraParam : DrikaElement{
 		has_settings = true;
 		SetParamType();
 		GetBeforeParam();
-		string_param_after = _param_after;
-		InterpParam();
+		InterpParam(_param_after);
 	}
 
 	void SetParamType(){
@@ -56,13 +55,13 @@ class DrikaSetCameraParam : DrikaElement{
 		}
 	}
 
-	void InterpParam(){
+	void InterpParam(string _param){
 		if(param_type == vec3_color_param){
-			vec3_param_after = StringToVec3(string_param_after);
+			vec3_param_after = StringToVec3(_param);
 		}else if(param_type == float_param){
-			float_param_after = atof(string_param_after);
+			float_param_after = atof(_param);
 		}else if(param_type == float_array_param){
-			float_array_param_after = StringToFloatArray(string_param_after);
+			float_array_param_after = StringToFloatArray(_param);
 		}
 	}
 
@@ -79,24 +78,18 @@ class DrikaSetCameraParam : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetCameraParam " + param_name + " " + string_param_after;
-	}
-
-	void ApplySettings(){
-		UpdateDisplayString();
-	}
-
-	void UpdateDisplayString(){
+		string display_string;
 		if(param_type == float_param){
-			string_param_after = "" + float_param_after;
+			display_string = "" + float_param_after;
 		}else if(param_type == float_array_param){
-			string_param_after = "";
+			display_string = "";
 			for(uint i = 0; i < float_array_param_after.size(); i++){
-				string_param_after += ((i == 0)?"":" ") + float_array_param_after[i];
+				display_string += ((i == 0)?"":" ") + float_array_param_after[i];
 			}
 		}else if(param_type == vec3_color_param){
-			string_param_after = vec3_param_after.x + "," + vec3_param_after.y + "," + vec3_param_after.z;
+			display_string = vec3_param_after.x + "," + vec3_param_after.y + "," + vec3_param_after.z;
 		}
+		return "SetCameraParam " + param_name + " " + display_string;
 	}
 
 	void AddSettings(){
@@ -112,7 +105,6 @@ class DrikaSetCameraParam : DrikaElement{
 			}else if(param_type == vec3_color_param){
 				vec3_param_after = vec3_param_before;
 			}
-			UpdateDisplayString();
 		}
 
 		if(param_type == float_param){
