@@ -590,7 +590,9 @@ void Reset(){
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
 		drika_elements[drika_indexes[i]].Reset();
 	}
-	GetCurrentElement().StartEdit();
+	if(editing){
+		GetCurrentElement().StartEdit();
+	}
 }
 
 void Save(){
