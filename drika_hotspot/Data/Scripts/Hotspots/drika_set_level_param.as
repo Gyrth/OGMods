@@ -22,6 +22,7 @@ class DrikaSetLevelParam : DrikaElement{
 	int current_type;
 	string param_name;
 	bool has_function = false;
+	bool delete_before = false;
 
 	string string_param_before;
 	string string_param_after;
@@ -105,13 +106,15 @@ class DrikaSetLevelParam : DrikaElement{
 			float_param_after = atof(_param);
 		}else if(param_type == int_param){
 			int_param_after = atoi(_param);
-		}else if(level_param == string_param){
-			string_param_after = _param;
-		}else if(level_param == other){
-			array<string> split_param = _param.split(";");
-			if(split_param.size() == 2){
-				param_name = split_param[0];
-				string_param_after = split_param[1];
+		}else if(param_type == string_param){
+			if(level_param == other){
+				array<string> split_param = _param.split(";");
+				if(split_param.size() == 2){
+					param_name = split_param[0];
+					string_param_after = split_param[1];
+				}
+			}else{
+				string_param_after = _param;
 			}
 		}
 	}
@@ -135,7 +138,7 @@ class DrikaSetLevelParam : DrikaElement{
 	string GetDisplayString(){
 		string display_string;
 		if(level_param == other){
-			display_string = param_name + ";" + string_param_after;
+			display_string = string_param_after;
 		}else if(param_type == string_param){
 			display_string = string_param_after;
 		}else if(param_type == vec3_param || param_type == vec3_color_param){
@@ -211,6 +214,14 @@ class DrikaSetLevelParam : DrikaElement{
 			}
 		}else{
 			ScriptParams@ params = level.GetScriptParams();
+
+			if(!params.HasParam(param_name)){
+				delete_before = true;
+				return;
+			}else{
+				delete_before = false;
+			}
+
 			if(param_type == string_param){
 				if(!params.HasParam(param_name)){
 					params.AddString(param_name, string_param_after);
@@ -277,6 +288,12 @@ class DrikaSetLevelParam : DrikaElement{
 			}
 		}else{
 			ScriptParams@ params = level.GetScriptParams();
+
+			if(reset && delete_before){
+				params.Remove(param_name);
+				return true;
+			}
+
 			if(param_type == string_param){
 				params.SetString(param_name, reset?string_param_before:string_param_after);
 			}else if(param_type == float_param){

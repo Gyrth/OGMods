@@ -11,8 +11,7 @@
 <AmbientSounds />
 <Script></Script>
 <LevelScriptParameters>
-    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
-    <parameter name="Attack Knockback" type="float" val="0" />
+    <parameter name="Achievements" type="string" val="nothing" />
     <parameter name="Custom Shader" type="string" val="" />
     <parameter name="Fog amount" type="float" val="0" />
     <parameter name="GPU Particle Field" type="string" val="" />
@@ -47,7 +46,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="23.737" t1="1.50399" t2="4.06517" s0="1" s1="1" s2="1" q0="0.190735" q1="0.688018" q2="-0.195156" q3="0.672433" euler_x="-2.58882" euler_y="1.54788" euler_z="3.14159" id="1">
+    <CameraObject t0="18.2619" t1="1.93511" t2="-0.576304" s0="1" s1="1" s2="1" q0="0.0744953" q1="0.886715" q2="-0.153768" q3="0.429583" euler_x="-2.79818" euler_y="0.902286" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -309,8 +308,8 @@
     <Hotspot t0="25.9878" t1="-2.32088" t2="-0.915076" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="37" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
-            <parameter name="1" type="string" val="set_level_param|0|nothing" />
-            <parameter name="10" type="string" val="set_level_param|9|" />
+            <parameter name="1" type="string" val="set_level_param|0|NEWACHIEVEMENT" />
+            <parameter name="10" type="string" val="set_level_param|9|NO_OBJECIVE" />
             <parameter name="11" type="string" val="set_level_param|10|200" />
             <parameter name="12" type="string" val="set_level_param|11|500" />
             <parameter name="13" type="string" val="set_level_param|12|0" />
@@ -319,14 +318,14 @@
             <parameter name="16" type="string" val="set_level_param|15|0,0.766676,1" />
             <parameter name="17" type="string" val="set_level_param|16|3" />
             <parameter name="18" type="string" val="set_level_param|17|Buster;Charlie" />
-            <parameter name="2" type="string" val="set_level_param|1|" />
+            <parameter name="2" type="string" val="set_level_param|1|#RAIN" />
             <parameter name="3" type="string" val="set_level_param|2|25" />
-            <parameter name="4" type="string" val="set_level_param|3|" />
+            <parameter name="4" type="string" val="set_level_param|3|#RAINY" />
             <parameter name="5" type="string" val="set_level_param|4|12" />
             <parameter name="6" type="string" val="set_level_param|5|500" />
             <parameter name="7" type="string" val="set_level_param|6|145" />
             <parameter name="8" type="string" val="set_level_param|7|0" />
-            <parameter name="9" type="string" val="set_level_param|8|" />
+            <parameter name="9" type="string" val="set_level_param|8|NEWLOWADTIP" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
