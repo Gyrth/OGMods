@@ -2,6 +2,7 @@ class DrikaSetObjectParam : DrikaElement{
 	int current_type;
 	int current_idenifier_type;
 	string param_name;
+	bool delete_before = false;
 
 	string string_param_before;
 	string string_param_after;
@@ -54,20 +55,18 @@ class DrikaSetObjectParam : DrikaElement{
 			return;
 		}
 		ScriptParams@ params = target_object.GetScriptParams();
+		//If the param does not exist then just remove it when resetting.
+		if(!params.HasParam(param_name)){
+			delete_before = true;
+			return;
+		}else{
+			delete_before = false;
+		}
 		if(param_type == string_param){
-			if(!params.HasParam(param_name)){
-				params.AddString(param_name, string_param_after);
-			}
 			string_param_before = params.GetString(param_name);
 		}else if(param_type == float_param){
-			if(!params.HasParam(param_name)){
-				params.AddFloat(param_name, float_param_after);
-			}
 			float_param_before = params.GetFloat(param_name);
 		}else if(param_type == int_param){
-			if(!params.HasParam(param_name)){
-				params.AddInt(param_name, int_param_after);
-			}
 			int_param_before = params.GetInt(param_name);
 		}
 	}
@@ -154,6 +153,11 @@ class DrikaSetObjectParam : DrikaElement{
 			return false;
 		}
 		ScriptParams@ params = target_object.GetScriptParams();
+
+		if(reset && delete_before){
+			params.Remove(param_name);
+			return true;
+		}
 
 		if(!params.HasParam(param_name)){
 			if(param_type == string_param){
