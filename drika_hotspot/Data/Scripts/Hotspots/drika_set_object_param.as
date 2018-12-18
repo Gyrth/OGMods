@@ -49,29 +49,27 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	void GetBeforeParam(){
-		if(ObjectExists(object_id)){
-			ScriptParams@ params = level.GetScriptParams();
-			if(param_type == string_param){
-				if(!params.HasParam(param_name)){
-					params.AddString(param_name, string_param_after);
-				}
-				string_param_before = params.GetString(param_name);
-			}else if(param_type == float_param){
-				if(!params.HasParam(param_name)){
-					params.AddFloat(param_name, float_param_after);
-				}
-				float_param_before = params.GetFloat(param_name);
-			}else if(param_type == int_param){
-				if(!params.HasParam(param_name)){
-					params.AddInt(param_name, int_param_after);
-				}
-				int_param_before = params.GetInt(param_name);
-			}
+		Object@ target_object = GetTargetObject();
+		if(target_object is null){
+			return;
 		}
-	}
-
-	void ApplySettings(){
-		GetBeforeParam();
+		ScriptParams@ params = target_object.GetScriptParams();
+		if(param_type == string_param){
+			if(!params.HasParam(param_name)){
+				params.AddString(param_name, string_param_after);
+			}
+			string_param_before = params.GetString(param_name);
+		}else if(param_type == float_param){
+			if(!params.HasParam(param_name)){
+				params.AddFloat(param_name, float_param_after);
+			}
+			float_param_before = params.GetFloat(param_name);
+		}else if(param_type == int_param){
+			if(!params.HasParam(param_name)){
+				params.AddInt(param_name, int_param_after);
+			}
+			int_param_before = params.GetInt(param_name);
+		}
 	}
 
 	string GetSaveString(){
