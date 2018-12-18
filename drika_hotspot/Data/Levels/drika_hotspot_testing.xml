@@ -11,10 +11,8 @@
 <AmbientSounds />
 <Script></Script>
 <LevelScriptParameters>
-    <parameter name="" type="string" val="" />
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
     <parameter name="Attack Knockback" type="float" val="0" />
-    <parameter name="Buster" type="string" val="" />
     <parameter name="Custom Shader" type="string" val="" />
     <parameter name="Fog amount" type="float" val="0" />
     <parameter name="GPU Particle Field" type="string" val="" />
@@ -28,7 +26,6 @@
     <parameter name="Sky Brightness" type="float" val="1" />
     <parameter name="Sky Rotation" type="float" val="-62" />
     <parameter name="Sky Tint" type="string" val="255, 255, 255" />
-    <parameter name="drika_param" type="string" val="drika_new_value" />
 </LevelScriptParameters>
 <NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
 <Sky>
@@ -50,7 +47,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="30.9091" t1="2.75379" t2="5.91395" s0="1" s1="1" s2="1" q0="-0.219864" q1="0.294112" q2="-0.0697175" q3="-0.927522" euler_x="0.465496" euler_y="-0.61413" euler_z="0" id="1">
+    <CameraObject t0="23.737" t1="1.50399" t2="4.06517" s0="1" s1="1" s2="1" q0="0.190735" q1="0.688018" q2="-0.195156" q3="0.672433" euler_x="-2.58882" euler_y="1.54788" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">

@@ -21,7 +21,6 @@
 
 bool editor_open = false;
 bool editing = false;
-bool closed = true;
 bool script_finished = false;
 int current_line = 0;
 array<DrikaElement@> drika_elements;
@@ -197,13 +196,14 @@ void Update(){
 		return;
 	}
 
-	if(!editor_open && !closed){
-		closed = true;
-		if(drika_elements.size() > 0){
+	if(this_hotspot.IsSelected() && GetInputPressed(0, "o")){
+		editor_open = !editor_open;
+		if(!editor_open && drika_elements.size() > 0){
 			GetCurrentElement().EditDone();
+		}else if(editor_open){
+			GetCurrentElement().StartEdit();
+			level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
 		}
-	}else if(editor_open){
-		closed = false;
 	}
 
 	if(EditorModeActive() && editing == false){
@@ -258,9 +258,6 @@ int drag_target_line = 0;
 bool update_scroll = false;
 
 void DrawEditor(){
-	if(this_hotspot.IsSelected() != is_selected){
-		SelectedChanged();
-	}
 	DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_update);
 	if(editor_open){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
@@ -549,6 +546,9 @@ void ReceiveMessage(string msg){
 			int id = atoi(token_iter.GetToken(msg));
 			if(id != this_hotspot.GetID()){
 				editor_open = false;
+				if(drika_elements.size() > 0){
+					GetCurrentElement().EditDone();
+				}
 			}
 		}
 	}
@@ -590,7 +590,7 @@ void Reset(){
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
 		drika_elements[drika_indexes[i]].Reset();
 	}
-	if(editing){
+	if(editing && editor_open){
 		GetCurrentElement().StartEdit();
 	}
 }
