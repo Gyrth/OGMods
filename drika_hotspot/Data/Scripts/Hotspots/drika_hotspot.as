@@ -130,6 +130,7 @@ void SetParameters(){
 	params.AddString("Name", display_name);
 	show_name = (params.GetInt("Show Name") == 1);
 	display_name = params.GetString("Name");
+	this_hotspot.SetName(display_name);
 }
 
 void InterpData(){
@@ -397,6 +398,7 @@ void DrawEditor(){
 				if(show_name){
 					if(ImGui_InputText("Name", display_name, 64)){
 						params.SetString("Name", display_name);
+						this_hotspot.SetName(display_name);
 					}
 				}
 				ImGui_EndMenu();
