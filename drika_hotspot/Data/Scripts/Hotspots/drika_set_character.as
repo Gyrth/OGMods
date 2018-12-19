@@ -18,10 +18,6 @@ class DrikaSetCharacter : DrikaElement{
 		}
 	}
 
-	void Delete(){
-		SetParameter(true);
-	}
-
 	string GetSaveString(){
 		return "set_character" + param_delimiter + object_id + param_delimiter + character_path + param_delimiter + (cache_skeleton_info?"true":"false");
 	}

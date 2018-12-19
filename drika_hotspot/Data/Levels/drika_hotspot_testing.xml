@@ -48,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="4.93916" t1="6.20377" t2="-19.2933" s0="1" s1="1" s2="1" q0="0.286275" q1="0.148127" q2="-0.0448462" q3="0.945565" euler_x="0.587966" euler_y="0.310783" euler_z="0" id="1">
+    <CameraObject t0="18.3893" t1="7.07544" t2="14.0696" s0="1" s1="1" s2="1" q0="-0.11042" q1="0.862245" q2="-0.44579" q3="-0.213573" euler_x="-2.18727" euler_y="-0.485616" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -352,12 +352,13 @@
     <EnvObject t0="14.2696" t1="0.0183691" t2="18.4258" s0="0.25" s1="0.25" s2="0.25" q0="-0.0125263" q1="-0.598173" q2="0.184041" q3="0.779847" euler_x="-0.700926" euler_y="-1.18997" euler_z="0.948582" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot name="Drika Hotspot" t0="14.0654" t1="-0.706542" t2="18.4978" s0="1" s1="1" s2="1" q0="-0.0110927" q1="0.0603472" q2="0.00696302" q3="0.998092" euler_x="-0.021461" euler_y="0.120913" euler_z="0.0126534" id="40" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot name="Drika Hotspot" t0="14.5129" t1="-0.711907" t2="17.9259" s0="1.21949" s1="1" s2="1.26964" q0="-0.0107272" q1="0.00988086" q2="0.0075142" q3="0.999866" euler_x="-0.0213089" euler_y="0.0199216" euler_z="0.0148179" id="40" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
-            <parameter name="1" type="string" val="set_character|3|Data/Characters/ferdi.xml|true" />
+            <parameter name="1" type="string" val="transform_object|147|0|41" />
             <parameter name="2" type="string" val="on_character_enter_exit|0|3|1" />
-            <parameter name="3" type="string" val="set_character|3|Data/Characters/drika.xml|true" />
+            <parameter name="3" type="string" val="transform_object|150|0|41" />
+            <parameter name="4" type="string" val="go_to_line|0" />
             <parameter name="Name" type="string" val="Drika Hotspot" />
             <parameter name="Show Name" type="int" val="0" />
         </parameters>
@@ -786,6 +787,9 @@
     <DynamicLightObject t0="12.8009" t1="3.70381" t2="-26.6873" s0="1.87809" s1="1.87809" s2="1.87809" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="146" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
         <parameters />
     </DynamicLightObject>
+    <EnvObject name="Transform Object Helper" t0="14.0159" t1="-2.24726" t2="18.5145" s0="4.88749" s1="0.868163" s2="4.85605" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <Hotspot name="Buster&apos;s Hotspot" t0="26.1601" t1="-1.77817" t2="6.00436" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="148" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
@@ -797,6 +801,9 @@
         <ConnectionsFrom />
     </Hotspot>
     <EnvObject t0="26.2372" t1="-2.74726" t2="5.93567" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="149" color_r="0.186021" color_g="0" color_b="0.282353" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Transform Object Helper" t0="14.0159" t1="-2.74726" t2="18.5145" s0="4.88749" s1="0.868163" s2="4.85605" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="150" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
 </ActorObjects>
