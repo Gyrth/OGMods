@@ -113,7 +113,9 @@ bool ConnectTo(Object @other){
 
 	}else{
 		if(drika_elements.size() > 0){
-			return GetCurrentElement().ConnectTo(other);
+			bool return_value = GetCurrentElement().ConnectTo(other);
+			Save();
+			return return_value;
 		}
 	}
 	return false;
@@ -249,7 +251,7 @@ void Update(){
 		SwitchToPlaying();
 	}
 
-	if(!script_finished && drika_indexes.size() > 0 && !EditorModeActive()){
+	if(!script_finished && drika_indexes.size() > 0 && !show_editor){
 		if(messages.size() > 0){
 			for(uint i = 0; i < messages.size(); i++){
 				GetCurrentElement().ReceiveMessage(messages[i]);
@@ -261,6 +263,7 @@ void Update(){
 				script_finished = true;
 			}else{
 				current_line += 1;
+				display_index = drika_indexes[current_line];
 			}
 		}
 	}
@@ -557,7 +560,6 @@ void ReorderElements(){
 		DrikaElement@ current_element = drika_elements[drika_indexes[index]];
 		current_element.SetIndex(index);
 	}
-	Save();
 }
 
 void InsertElement(DrikaElement@ new_element){
@@ -636,9 +638,9 @@ void Reset(){
 	}
 	GetCurrentElement().EditDone();
 	//If the user is editing the script then stay with the current line to edit.
-	if(!editing){
-		current_line = 0;
-	}
+	current_line = 0;
+	display_index = drika_indexes[current_line];
+
 	script_finished = false;
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
 		drika_elements[drika_indexes[i]].Reset();
@@ -649,6 +651,7 @@ void Reset(){
 }
 
 void Save(){
+	Log(info, "Safe!");
 	for(uint i = 0; i < drika_indexes.size(); i++){
 		string data = drika_elements[drika_indexes[i]].GetSaveString();
 		params.SetString("" + drika_elements[drika_indexes[i]].index, data);

@@ -27,17 +27,20 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 		if(character_trigger_type == check_id){
 			object_id = atoi(_param);
-		}else{
+		}else if(character_trigger_type == check_team){
 			character_team = _param;
 		}
 		has_settings = true;
 	}
 
 	string GetSaveString(){
+		Log(info, "trigger type " + character_trigger_type);
 		if(character_trigger_type == check_id){
 			return "on_character_enter_exit" + param_delimiter + int(character_trigger_type) + param_delimiter + object_id + param_delimiter + int(hotspot_trigger_type);
-		}else{
+		}else if(character_trigger_type == check_team){
 			return "on_character_enter_exit" + param_delimiter + int(character_trigger_type) + param_delimiter + character_team + param_delimiter + int(hotspot_trigger_type);
+		}else{
+			return "on_character_enter_exit" + param_delimiter + int(character_trigger_type) + param_delimiter + "" + param_delimiter + int(hotspot_trigger_type);
 		}
 	}
 
@@ -83,10 +86,8 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	void ReceiveMessage(string message, int param){
 		if((hotspot_trigger_type == on_enter && message == "CharacterEnter") ||
 			(hotspot_trigger_type == on_exit && message == "CharacterExit")){
-			Log(info, "character " + param);
 			if(MovementObjectExists(param)){
 				MovementObject@ character = ReadCharacterID(param);
-				Log(info, int(character_trigger_type) + " MovementObjectExists " + character.controlled);
 				if(	character_trigger_type == check_id && object_id == param ||
 					character_trigger_type == any_character ||
 					character_trigger_type == any_player && character.controlled ||
@@ -106,6 +107,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 			//Teams are , seperated.
 			array<string> teams = no_spaces_param.split(",");
 			if(teams.find(character_team) != -1){
+				Log(info, "OnEnterExit triggered");
 				triggered = true;
 			}
 		}

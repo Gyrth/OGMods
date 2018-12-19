@@ -48,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="-3.15013" t1="3.56027" t2="34.3368" s0="1" s1="1" s2="1" q0="-0.0112526" q1="-0.217928" q2="-0.00251283" q3="0.975897" euler_x="-0.02306" euler_y="-0.439411" euler_z="0" id="1">
+    <CameraObject t0="12.6797" t1="5.08094" t2="12.1314" s0="1" s1="1" s2="1" q0="0.0744857" q1="0.925175" q2="-0.275861" q3="0.249808" euler_x="-2.56204" euler_y="0.527446" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -354,9 +354,9 @@
     </EnvObject>
     <Hotspot name="Drika Hotspot" t0="14.5129" t1="-0.711907" t2="17.9259" s0="1.21949" s1="1" s2="1.26964" q0="-0.0107272" q1="0.00988086" q2="0.0075142" q3="0.999866" euler_x="-0.0213089" euler_y="0.0199216" euler_z="0.0148179" id="40" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|133|0" />
             <parameter name="1" type="string" val="transform_object|147|0|41" />
-            <parameter name="2" type="string" val="on_character_enter_exit|0|3|1" />
+            <parameter name="2" type="string" val="on_character_enter_exit|0|133|1" />
             <parameter name="3" type="string" val="transform_object|150|0|41" />
             <parameter name="4" type="string" val="go_to_line|0" />
             <parameter name="Name" type="string" val="Drika Hotspot" />
@@ -699,7 +699,7 @@
     <EnvObject name="Transform Object Helper" t0="3.61545" t1="-11.4075" t2="-25.4229" s0="32.9488" s1="4.9195" s2="0.697604" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="132" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="19.8015" t1="-0.748265" t2="-5.33957" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="133" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="0">
+    <ActorObject t0="22.4528" t1="-0.748265" t2="12.6731" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="133" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="0">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -728,7 +728,7 @@
             <parameter name="Teams" type="string" val="turner" />
         </parameters>
         <Connections>
-            <Connection id="133" />
+            <Connection id="151" />
         </Connections>
         <ItemConnections />
         <Palette>
@@ -806,6 +806,13 @@
     <EnvObject name="Transform Object Helper" t0="14.0159" t1="-2.74726" t2="18.5145" s0="4.88749" s1="0.868163" s2="4.85605" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="150" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <PathPointObject t0="14.1764" t1="-2.42134" t2="19.621" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="151" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections />
+    </PathPointObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="drika_hotspot.xml" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="empty_placeholder.png" />
@@ -820,4 +827,5 @@
     <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
     <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
     <SpawnerItem display_name="Spike" path="Data/Objects/Hotspots/spike.xml" thumbnail_path="Data/UI/spawner/thumbs/Interactive Objects/spike_2.png" />
+    <SpawnerItem display_name="Path Point" path="Data/Objects/pathpoint/pathpoint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/pathpoint.png" />
 </RecentItems>
