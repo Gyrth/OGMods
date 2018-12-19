@@ -96,11 +96,7 @@ class DrikaElement{
 
 	void StartEdit(){
 		if(placeholder_id != -1 && ObjectExists(placeholder_id)){
-			this_hotspot.SetSelected(false);
 			placeholder.SetSelectable(true);
-			placeholder.SetSelected(true);
-		}else{
-			this_hotspot.SetSelected(true);
 		}
 	}
 

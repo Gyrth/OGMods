@@ -19,7 +19,8 @@
 #include "hotspots/drika_play_music.as"
 #include "hotspots/drika_set_character_param.as"
 
-bool editor_open = false;
+bool show_editor = false;
+bool has_closed = true;
 bool editing = false;
 bool show_name = false;
 string display_name = "Drika Hotspot";
@@ -98,7 +99,9 @@ array<string> GetReferences(){
 
 bool AcceptConnectionsTo(Object @other){
 	if(drika_elements.size() > 0){
-		if(GetCurrentElement().connection_types.find(other.GetType()) != -1){
+		if(GetCurrentElement().placeholder_id == other.GetID()){
+			return false;
+		}else if(GetCurrentElement().connection_types.find(other.GetType()) != -1){
 			return true;
 		}
 	}
@@ -226,12 +229,17 @@ void Update(){
 	}
 
 	if(this_hotspot.IsSelected() && GetInputPressed(0, "o")){
-		editor_open = !editor_open;
-		if(!editor_open && drika_elements.size() > 0){
-			GetCurrentElement().EditDone();
-		}else if(editor_open){
+		show_editor = !show_editor;
+		if(show_editor){
+			has_closed = false;
 			GetCurrentElement().StartEdit();
 			level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
+		}
+	}
+	if(!show_editor && !has_closed){
+		has_closed = true;
+		if(drika_elements.size() > 0){
+			GetCurrentElement().EditDone();
 		}
 	}
 
@@ -273,10 +281,10 @@ void SwitchToPlaying(){
 void SelectedChanged(){
 	is_selected = this_hotspot.IsSelected();
 	if(is_selected){
-		if(!editor_open && drika_elements.size() != 0){
+		if(!show_editor && drika_elements.size() != 0){
 			GetCurrentElement().StartEdit();
 		}
-		editor_open = true;
+		show_editor = true;
 		level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
 	}
 }
@@ -291,7 +299,7 @@ void DrawEditor(){
 		DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.5, 0), display_name, 1.0, false, _delete_on_draw);
 	}
 	DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_update);
-	if(editor_open){
+	if(show_editor){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
@@ -313,7 +321,7 @@ void DrawEditor(){
 
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
 		ImGui_SetNextWindowPos(vec2(100.0f, 100.0f), ImGuiSetCond_FirstUseEver);
-		ImGui_Begin("Drika Hotspot " + (show_name?" - " + display_name:"") + "###Drika Hotspot", editor_open, ImGuiWindowFlags_MenuBar);
+		ImGui_Begin("Drika Hotspot " + (show_name?" - " + display_name:"") + "###Drika Hotspot", show_editor, ImGuiWindowFlags_MenuBar);
 		ImGui_PopStyleVar();
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
@@ -590,7 +598,7 @@ void ReceiveMessage(string msg){
 		if(message == "drika_hotspot_editing" && token_iter.FindNextToken(msg)){
 			int id = atoi(token_iter.GetToken(msg));
 			if(id != this_hotspot.GetID()){
-				editor_open = false;
+				show_editor = false;
 				if(drika_elements.size() > 0){
 					GetCurrentElement().EditDone();
 				}
@@ -635,7 +643,7 @@ void Reset(){
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
 		drika_elements[drika_indexes[i]].Reset();
 	}
-	if(editing && editor_open){
+	if(editing && show_editor){
 		GetCurrentElement().StartEdit();
 	}
 }
