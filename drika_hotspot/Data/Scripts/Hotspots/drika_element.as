@@ -186,6 +186,8 @@ class DrikaElement{
 			@placeholder = ReadObjectFromID(placeholder_id);
 			placeholder.SetName(placeholder_name);
 			placeholder.SetSelectable(false);
+		}else{
+			CreatePlaceholder();
 		}
 	}
 

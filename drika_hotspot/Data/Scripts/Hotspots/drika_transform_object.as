@@ -97,11 +97,16 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	bool Trigger(){
-		if(!triggered){
-			GetBeforeParam();
+		if(ObjectExists(placeholder_id)){
+			if(!triggered){
+				GetBeforeParam();
+			}
+			triggered = true;
+			return ApplyTransform(false);
+		}else{
+			CreatePlaceholder();
+			return false;
 		}
-		triggered = true;
-		return ApplyTransform(false);
 	}
 
 	void DrawEditing(){
