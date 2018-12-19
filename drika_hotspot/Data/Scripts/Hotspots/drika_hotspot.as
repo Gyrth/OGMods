@@ -232,7 +232,7 @@ void Update(){
 
 	if(this_hotspot.IsSelected() && GetInputPressed(0, "o")){
 		show_editor = !show_editor;
-		if(show_editor){
+		if(show_editor && drika_elements.size() > 0){
 			has_closed = false;
 			GetCurrentElement().StartEdit();
 			level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
@@ -578,7 +578,7 @@ void InsertElement(DrikaElement@ new_element){
 		current_line += 1;
 	}
 	ReorderElements();
-	if(post_init_done){
+	if(post_init_done && drika_elements.size() > 0){
 		GetCurrentElement().StartEdit();
 	}
 }
@@ -651,7 +651,6 @@ void Reset(){
 }
 
 void Save(){
-	Log(info, "Safe!");
 	for(uint i = 0; i < drika_indexes.size(); i++){
 		string data = drika_elements[drika_indexes[i]].GetSaveString();
 		params.SetString("" + drika_elements[drika_indexes[i]].index, data);

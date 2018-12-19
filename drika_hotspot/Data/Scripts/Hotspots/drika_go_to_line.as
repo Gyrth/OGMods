@@ -22,6 +22,7 @@ class DrikaGoToLine : DrikaElement{
 	bool Trigger(){
 		if(line < int(drika_elements.size())){
 			current_line = line;
+			display_index = drika_indexes[line];
 			return false;
 		}else{
 			Log(info, "The GoToLine isn't valid " + line);

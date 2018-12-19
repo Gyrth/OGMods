@@ -48,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="12.6797" t1="5.08094" t2="12.1314" s0="1" s1="1" s2="1" q0="0.0744857" q1="0.925175" q2="-0.275861" q3="0.249808" euler_x="-2.56204" euler_y="0.527446" euler_z="-3.14159" id="1">
+    <CameraObject t0="10.0324" t1="4.24914" t2="17.2312" s0="1" s1="1" s2="1" q0="-0.249645" q1="-0.750271" q2="0.439335" q3="-0.426328" euler_x="-2.08211" euler_y="1.03347" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -766,6 +766,15 @@
             <parameters />
         </EnvObject>
     </ActorObject>
+    <PathPointObject t0="9.22505" t1="-2.42134" t2="17.9797" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="134" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="151" />
+        </Connections>
+    </PathPointObject>
     <EnvObject t0="12.82" t1="0.349311" t2="-27.3281" s0="0.683989" s1="0.319388" s2="0.348802" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="140" color_r="1" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
@@ -811,7 +820,9 @@
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
         </parameters>
-        <Connections />
+        <Connections>
+            <Connection id="134" />
+        </Connections>
     </PathPointObject>
 </ActorObjects>
 <RecentItems>
