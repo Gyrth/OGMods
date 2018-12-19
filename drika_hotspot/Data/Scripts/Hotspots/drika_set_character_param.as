@@ -27,7 +27,6 @@ enum character_params { 	aggression = 0,
 
 class DrikaSetCharacterParam : DrikaElement{
 	int current_type;
-	int current_idenifier_type;
 
 	string string_param_before;
 	string string_param_after;
@@ -79,20 +78,11 @@ class DrikaSetCharacterParam : DrikaElement{
 
 	DrikaSetCharacterParam(string _identifier_type = "0", string _identifier = "-1", string _param_type = "0", string _param_after = "50.0"){
 		character_param = character_params(atoi(_param_type));
-		identifier_type = identifier_types(atoi(_identifier_type));
-		current_idenifier_type = identifier_type;
 		current_type = character_param;
-
 		drika_element_type = drika_set_character_param;
 		has_settings = true;
 		connection_types = {_movement_object};
-
-		if(identifier_type == id){
-			object_id = atoi(_identifier);
-		}else if(identifier_type == reference){
-			reference_string = _identifier;
-		}
-
+		InterpIdentifier(_identifier_type, _identifier);
 		SetParamType();
 		InterpParam(_param_after);
 		SetParamName();
@@ -200,16 +190,8 @@ class DrikaSetCharacterParam : DrikaElement{
 		return "SetCharacterParam " + object_id + " " + param_name + " " + display_string;
 	}
 
-	void AddSettings(){
-		if(ImGui_Combo("Identifier Type", current_idenifier_type, {"ID", "Reference"})){
-			identifier_type = identifier_types(current_idenifier_type);
-		}
-
-		if(identifier_type == id){
-			ImGui_InputInt("Object ID", object_id);
-		}else if (identifier_type == reference){
-			ImGui_InputText("Reference", reference_string, 64);
-		}
+	void DrawSettings(){
+		DrawSelectTargetUI();
 
 		if(ImGui_Combo("Param Type", current_type, param_names)){
 			character_param = character_params(current_type);

@@ -23,7 +23,7 @@ class DrikaPlayMusic : DrikaElement{
 		return "PlayMusic " + music_path + " " + song;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_Text("Music Path : ");
 		ImGui_SameLine();
 		ImGui_Text(music_path);

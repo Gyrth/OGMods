@@ -1,6 +1,5 @@
 class DrikaTransformObject : DrikaElement{
 	bool enabled;
-	int current_idenifier_type;
 
 	vec3 before_translation;
 	quaternion before_rotation;
@@ -11,16 +10,9 @@ class DrikaTransformObject : DrikaElement{
 		placeholder_id = atoi(_placeholder_id);
 		default_placeholder_scale = vec3(1.0);
 		placeholder_name = "Transform Object Helper";
-		identifier_type = identifier_types(atoi(_identifier_type));
-		current_idenifier_type = identifier_type;
 		has_settings = true;
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object};
-
-		if(identifier_type == id){
-			object_id = atoi(_identifier);
-		}else if(identifier_type == reference){
-			reference_string = _identifier;
-		}
+		InterpIdentifier(_identifier_type, _identifier);
 	}
 
 	void PostInit(){
@@ -76,20 +68,12 @@ class DrikaTransformObject : DrikaElement{
 		placeholder.SetScale(bounds * target_object.GetScale());
 	}
 
-	void AddSettings(){
-		if(ImGui_Combo("Identifier Type", current_idenifier_type, {"ID", "Reference"})){
-			identifier_type = identifier_types(current_idenifier_type);
-		}
+	void DrawSettings(){
+		DrawSelectTargetUI();
+	}
 
-		if(identifier_type == id){
-			if(ImGui_InputInt("Object ID", object_id)){
-				GetNewTransform();
-			}
-		}else if (identifier_type == reference){
-			if(ImGui_InputText("Reference", reference_string, 64)){
-				GetNewTransform();
-			}
-		}
+	void TargetChanged(){
+		GetNewTransform();
 	}
 
 	void ConnectedChanged(){

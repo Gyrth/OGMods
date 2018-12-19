@@ -92,8 +92,8 @@ class DrikaSetCameraParam : DrikaElement{
 		return "SetCameraParam " + param_name + " " + display_string;
 	}
 
-	void AddSettings(){
-		if(ImGui_Combo("Param Type", current_type, param_names)){
+	void DrawSettings(){
+		if(ImGui_Combo("Param Type", current_type, param_names, param_names.size())){
 			camera_param = camera_params(current_type);
 			param_name = param_names[current_type];
 			SetParamType();

@@ -3,7 +3,6 @@ class DrikaCreateObject : DrikaElement{
 	int spawned_object_id = -1;
 	Object@ spawned_object;
 	string reference;
-	bool show_reference_option = show_reference_option;
 
 	DrikaCreateObject(string _placeholder_id = "-1", string _object_path = default_preview_mesh, string _reference = ""){
 		placeholder_id = atoi(_placeholder_id);
@@ -35,7 +34,7 @@ class DrikaCreateObject : DrikaElement{
 		return "CreateObject " + object_path;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_Text("Object Path : ");
 		ImGui_SameLine();
 		ImGui_Text(object_path);

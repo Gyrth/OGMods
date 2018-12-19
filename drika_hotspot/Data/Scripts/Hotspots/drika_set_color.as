@@ -7,7 +7,6 @@ class DrikaSetColor : DrikaElement{
 	int palette_slot;
 	vec3 before_color;
 	vec3 after_color;
-	int current_idenifier_type;
 	int current_color_type;
 	color_types color_type;
 	array<string> palette_indexes;
@@ -16,16 +15,8 @@ class DrikaSetColor : DrikaElement{
 		color_type = color_types(atoi(_color_type));
 		current_color_type = color_type;
 		palette_slot = atoi(_palette_slot);
-		identifier_type = identifier_types(atoi(_identifier_type));
-		current_idenifier_type = identifier_type;
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object};
-
-		if(identifier_type == id){
-			object_id = atoi(_identifier);
-		}else if(identifier_type == reference){
-			reference_string = _identifier;
-		}
-
+		InterpIdentifier(_identifier_type, _identifier);
 		drika_element_type = drika_set_color;
 		after_color = StringToVec3(_color);
 		has_settings = true;
@@ -77,20 +68,14 @@ class DrikaSetColor : DrikaElement{
 		}
 	}
 
-	void AddSettings(){
-		if(ImGui_Combo("Identifier Type", current_idenifier_type, {"ID", "Reference"})){
-			identifier_type = identifier_types(current_idenifier_type);
-		}
-		if(identifier_type == id){
-			if(ImGui_InputInt("Object ID", object_id)){
-				GetNumPaletteColors();
-			}
-		}else if (identifier_type == reference){
-			if(ImGui_InputText("Reference", reference_string, 64)){
-				GetNumPaletteColors();
-			}
-		}
-		if(ImGui_Combo("Color Type", current_color_type, {"Tint", "Palette Color"})){
+	void TargetChanged(){
+		GetNumPaletteColors();
+	}
+
+	void DrawSettings(){
+		DrawSelectTargetUI();
+		array<string> color_type_choices = {"Tint", "Palette Color"};
+		if(ImGui_Combo("Color Type", current_color_type, color_type_choices, color_type_choices.size())){
 			color_type = color_types(current_color_type);
 			GetNumPaletteColors();
 		}
@@ -98,7 +83,7 @@ class DrikaSetColor : DrikaElement{
 			if(num_palette_colors == 0){
 				return;
 			}
-			ImGui_Combo("Palette Slot", palette_slot, palette_indexes);
+			ImGui_Combo("Palette Slot", palette_slot, palette_indexes, palette_indexes.size());
 		}
 		ImGui_ColorPicker3("Color", after_color, 0);
 	}

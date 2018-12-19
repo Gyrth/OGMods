@@ -1,6 +1,5 @@
 class DrikaSetObjectParam : DrikaElement{
 	int current_type;
-	int current_idenifier_type;
 	string param_name;
 	bool delete_before = false;
 
@@ -18,17 +17,9 @@ class DrikaSetObjectParam : DrikaElement{
 	DrikaSetObjectParam(string _identifier_type = "0", string _identifier = "-1", string _param_type = "0", string _param_name = "drika_param", string _param_after = "drika_new_value"){
 		param_name = _param_name;
 		param_type = param_types(atoi(_param_type));
-		identifier_type = identifier_types(atoi(_identifier_type));
 		current_type = param_type;
-		current_idenifier_type = identifier_type;
 		connection_types = {_env_object, _movement_object};
-
-		if(identifier_type == id){
-			object_id = atoi(_identifier);
-		}else if(identifier_type == reference){
-			reference_string = _identifier;
-		}
-
+		InterpIdentifier(_identifier_type, _identifier);
 		drika_element_type = drika_set_object_param;
 		has_settings = true;
 
@@ -107,19 +98,12 @@ class DrikaSetObjectParam : DrikaElement{
 		return "SetObjectParam " + display_identifier + " " + param_name + " " + display_string;
 	}
 
-	void AddSettings(){
-		if(ImGui_Combo("Identifier Type", current_idenifier_type, {"ID", "Reference"})){
-			identifier_type = identifier_types(current_idenifier_type);
-		}
+	void DrawSettings(){
+		DrawSelectTargetUI();
 
-		if(identifier_type == id){
-			ImGui_InputInt("Object ID", object_id);
-		}else if (identifier_type == reference){
-			ImGui_InputText("Reference", reference_string, 64);
-		}
 		ImGui_InputText("Param Name", param_name, 64);
-
-		if(ImGui_Combo("Param Type", current_type, {"String", "Integer", "Float"})){
+		array<string> param_type_choices = {"String", "Integer", "Float"};
+		if(ImGui_Combo("Param Type", current_type, param_type_choices, param_type_choices.size())){
 			param_type = param_types(current_type);
 		}
 

@@ -15,7 +15,7 @@ class DrikaStartDialogue : DrikaElement{
 		return "StartDialogue " + dialogue_name;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_InputText("Dialogue Name", dialogue_name, 64);
 	}
 

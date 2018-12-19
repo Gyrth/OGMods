@@ -33,7 +33,7 @@ class DrikaSetCharacter : DrikaElement{
 		}
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		if(ImGui_InputInt("Character ID", object_id)){
 
 		}

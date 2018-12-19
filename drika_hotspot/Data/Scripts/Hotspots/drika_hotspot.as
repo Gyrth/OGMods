@@ -74,6 +74,28 @@ string RegisterObject(int id, string reference){
 	}
 }
 
+bool HasReferences(){
+	for(uint i = 0; i < drika_elements.size(); i++){
+		DrikaCreateObject @current_element = cast<DrikaCreateObject>(drika_elements[i]);
+	    if(current_element !is null && drika_elements[i].show_reference_option){
+			return true;
+		}
+	}
+	return false;
+}
+
+
+array<string> GetReferences(){
+	array<string> reference_strings;
+	for(uint i = 0; i < drika_elements.size(); i++){
+		DrikaCreateObject @current_element = cast<DrikaCreateObject>(drika_elements[i]);
+	    if(current_element !is null && drika_elements[i].show_reference_option){
+			reference_strings.insertLast(current_element.reference);
+		}
+	}
+	return reference_strings;
+}
+
 bool AcceptConnectionsTo(Object @other){
 	if(drika_elements.size() > 0){
 		if(GetCurrentElement().connection_types.find(other.GetType()) != -1){
@@ -298,7 +320,7 @@ void DrawEditor(){
 		ImGui_SetNextWindowSize(vec2(450.0f, 250.0f), ImGuiSetCond_FirstUseEver);
         if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
 			ImGui_BeginChild("Element Settings", vec2(-1, ImGui_GetWindowHeight() - 60));
-			GetCurrentElement().AddSettings();
+			GetCurrentElement().DrawSettings();
 			ImGui_EndChild();
 			ImGui_BeginChild("Modal Buttons", vec2(-1, 60));
 			if(ImGui_Button("Close")){
@@ -472,6 +494,7 @@ void DrawEditor(){
 			if(ImGui_Selectable(line_number + drika_elements[item_no].GetDisplayString(), display_index == int(item_no), ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
 					if(drika_elements[drika_indexes[i]].has_settings){
+						GetCurrentElement().StartSettings();
 						ImGui_OpenPopup("Edit");
 					}
 				}else{

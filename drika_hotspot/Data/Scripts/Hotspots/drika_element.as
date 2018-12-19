@@ -64,11 +64,15 @@ class DrikaElement{
 	int placeholder_id = -1;
 	Object@ placeholder;
 	int object_id;
-	string reference_string;
+	string reference_string = "";
 	string placeholder_name;
 	identifier_types identifier_type;
+	int current_idenifier_type;
+	int current_reference;
 	vec3 default_placeholder_scale = vec3(0.25);
 	array<EntityType> connection_types;
+	array<string> available_references;
+	bool show_reference_option = false;
 
 	string GetSaveString(){return "";}
 	string GetDisplayString(){return "";};
@@ -77,10 +81,11 @@ class DrikaElement{
 	bool Trigger(){return false;}
 	void Reset(){}
 	void Delete(){}
-	void AddSettings(){}
+	void DrawSettings(){}
 	void ApplySettings(){}
 	void ConnectedChanged(){}
 	void DrawEditing(){}
+	void TargetChanged(){}
 	void SetCurrent(bool _current){}
 	void ReceiveMessage(string message){}
 	void ReceiveMessage(string message, int param){}
@@ -188,6 +193,60 @@ class DrikaElement{
 			placeholder.SetSelectable(false);
 		}else{
 			CreatePlaceholder();
+		}
+	}
+
+	void InterpIdentifier(string _identifier_type, string _identifier){
+		identifier_type = identifier_types(atoi(_identifier_type));
+		current_idenifier_type = identifier_type;
+		if(identifier_type == id){
+			object_id = atoi(_identifier);
+		}else if(identifier_type == reference){
+			reference_string = _identifier;
+		}
+	}
+
+	void StartSettings(){
+		if(HasReferences()){
+			show_reference_option = true;
+			available_references = GetReferences();
+			if(identifier_type == reference){
+				//Find the index of the chosen reference.
+				for(uint i = 0; i < available_references.size(); i++){
+					if(available_references[i] == reference_string){
+						current_reference = i;
+						return;
+					}
+				}
+			}
+			//By default pick the first one.
+			reference_string = available_references[current_reference];
+		}else{
+			show_reference_option = false;
+			//Force the identifier type to id when no references are available.
+			if(identifier_type == reference){
+				current_idenifier_type = id;
+				identifier_type = identifier_types(current_idenifier_type);
+			}
+		}
+	}
+
+	void DrawSelectTargetUI(){
+		if(show_reference_option){
+			array<string> identifier_choices = {"ID", "Reference"};
+			if(ImGui_Combo("Identifier Type", current_idenifier_type, identifier_choices, identifier_choices.size())){
+				identifier_type = identifier_types(current_idenifier_type);
+			}
+		}
+		if(identifier_type == id){
+			if(ImGui_InputInt("Object ID", object_id)){
+				TargetChanged();
+			}
+		}else if(identifier_type == reference){
+			if(ImGui_Combo("Reference", current_reference, available_references, available_references.size())){
+				reference_string = available_references[current_reference];
+				TargetChanged();
+			}
 		}
 	}
 

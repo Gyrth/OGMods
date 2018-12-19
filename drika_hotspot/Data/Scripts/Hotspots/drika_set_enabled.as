@@ -1,21 +1,12 @@
 class DrikaSetEnabled : DrikaElement{
 	bool enabled;
 	bool before_enabled;
-	int current_idenifier_type;
 
 	DrikaSetEnabled(string _identifier_type = "0", string _identifier = "-1", string _enabled = "true"){
 		enabled = (_enabled == "true");
 		drika_element_type = drika_set_enabled;
-		identifier_type = identifier_types(atoi(_identifier_type));
-		current_idenifier_type = identifier_type;
 		connection_types = {_env_object};
-
-		if(identifier_type == id){
-			object_id = atoi(_identifier);
-		}else if(identifier_type == reference){
-			reference_string = _identifier;
-		}
-
+		InterpIdentifier(_identifier_type, _identifier);
 		has_settings = true;
 	}
 
@@ -43,16 +34,8 @@ class DrikaSetEnabled : DrikaElement{
 		return "SetEnabled " + display_string + " " + enabled;
 	}
 
-	void AddSettings(){
-		if(ImGui_Combo("Identifier Type", current_idenifier_type, {"ID", "Reference"})){
-			identifier_type = identifier_types(current_idenifier_type);
-		}
-
-		if(identifier_type == id){
-			ImGui_InputInt("Object ID", object_id);
-		}else if (identifier_type == reference){
-			ImGui_InputText("Reference", reference_string, 64);
-		}
+	void DrawSettings(){
+		DrawSelectTargetUI();
 		ImGui_Text("Set To : ");
 		ImGui_SameLine();
 		ImGui_Checkbox("", enabled);

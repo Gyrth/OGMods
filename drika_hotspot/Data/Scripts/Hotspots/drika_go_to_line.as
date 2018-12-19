@@ -15,7 +15,7 @@ class DrikaGoToLine : DrikaElement{
 		return "GoToLine " + line;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_InputInt("Line", line);
 	}
 

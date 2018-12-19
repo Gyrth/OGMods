@@ -151,7 +151,7 @@ class DrikaSetLevelParam : DrikaElement{
 		return "SetLevelParam " + param_name + " " + display_string;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		if(ImGui_Combo("Param Type", current_type, param_names)){
 			level_param = level_params(current_type);
 			param_name = param_names[current_type];

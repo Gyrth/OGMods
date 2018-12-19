@@ -57,11 +57,13 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		return "OnCharacter" + ((hotspot_trigger_type == on_enter)?"Enter":"Exit") + " " + trigger_message;
 	}
 
-	void AddSettings(){
-		if(ImGui_Combo("Check for", new_character_trigger_type, {"Check ID", "Check Team", "Any Character", "Any Player", "Any NPC"})){
+	void DrawSettings(){
+		array<string> character_trigger_choices = {"Check ID", "Check Team", "Any Character", "Any Player", "Any NPC"};
+		if(ImGui_Combo("Check for", new_character_trigger_type, character_trigger_choices, character_trigger_choices.size())){
 			character_trigger_type = character_trigger_types(new_character_trigger_type);
 		}
-		if(ImGui_Combo("Trigger when", new_hotspot_trigger_type, {"On Enter", "On Exit"})){
+		array<string> hotspot_trigger_choices = {"On Enter", "On Exit"};
+		if(ImGui_Combo("Trigger when", new_hotspot_trigger_type, hotspot_trigger_choices, hotspot_trigger_choices.size())){
 			hotspot_trigger_type = hotspot_trigger_types(new_hotspot_trigger_type);
 		}
 		if(character_trigger_type == check_id){

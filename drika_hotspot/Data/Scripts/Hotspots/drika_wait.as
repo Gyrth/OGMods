@@ -15,7 +15,7 @@ class DrikaWait : DrikaElement{
 	string GetDisplayString(){
 		return "Wait " + duration;
 	}
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_Text("Wait in ms : ");
 		ImGui_InputInt("Duration", duration);
 	}

@@ -16,7 +16,7 @@ class DrikaWaitLevelMessage : DrikaElement{
 		return "WaitLevelMessage " + message;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_Text("Wait for message : ");
 		ImGui_InputText("Message", message, 64);
 	}

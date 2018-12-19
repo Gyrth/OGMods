@@ -48,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="18.3893" t1="7.07544" t2="14.0696" s0="1" s1="1" s2="1" q0="-0.11042" q1="0.862245" q2="-0.44579" q3="-0.213573" euler_x="-2.18727" euler_y="-0.485616" euler_z="-3.14159" id="1">
+    <CameraObject t0="-3.15013" t1="3.56027" t2="34.3368" s0="1" s1="1" s2="1" q0="-0.0112526" q1="-0.217928" q2="-0.00251283" q3="0.975897" euler_x="-0.02306" euler_y="-0.439411" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -194,7 +194,7 @@
         <parameters>
             <parameter name="0" type="string" val="wait|3000" />
             <parameter name="1" type="string" val="set_character|-1|Data/Characters/guard.xml|true" />
-            <parameter name="10" type="string" val="set_object_param|0|-1|0|drika_param|" />
+            <parameter name="10" type="string" val="set_object_param|0|-1|0|drika_param|drika_new_value" />
             <parameter name="11" type="string" val="set_level_param|0|no_kills" />
             <parameter name="12" type="string" val="set_camera_param|0|1,1,1" />
             <parameter name="13" type="string" val="create_object|58|Data/Objects/primitives/edged_cone.xml|" />

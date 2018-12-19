@@ -25,7 +25,7 @@ class DrikaPlaySound : DrikaElement{
 		return "PlaySound " + sound_path;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_Text("Sound Path : ");
 		ImGui_SameLine();
 		ImGui_Text(sound_path);
