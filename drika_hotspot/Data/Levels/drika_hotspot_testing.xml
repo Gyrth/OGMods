@@ -42,11 +42,13 @@
             <parameter name="3" type="string" val="create_particle|15|5|Data/Particles/blooddrop.xml|3|0,0.0833433,1|false|0|false" />
             <parameter name="4" type="string" val="set_enabled|0|12|true" />
             <parameter name="5" type="string" val="set_character|3|Data/Characters/guard.xml|true" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="18.2619" t1="1.93511" t2="-0.576304" s0="1" s1="1" s2="1" q0="0.0744953" q1="0.886715" q2="-0.153768" q3="0.429583" euler_x="-2.79818" euler_y="0.902286" euler_z="-3.14159" id="1">
+    <CameraObject t0="22.8047" t1="-0.419784" t2="5.8863" s0="1" s1="1" s2="1" q0="0.0527169" q1="0.67255" q2="-0.048133" q3="0.7366" euler_x="0.142891" euler_y="1.47995" euler_z="-1.23193e-06" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -173,6 +175,8 @@
         <parameters>
             <parameter name="0" type="string" val="wait_level_message|set_to_guard" />
             <parameter name="1" type="string" val="set_character|3|Data/Characters/guard.xml|true" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -206,6 +210,8 @@
             <parameter name="7" type="string" val="on_character_enter_exit|0|-1|0" />
             <parameter name="8" type="string" val="send_level_message|level_message" />
             <parameter name="9" type="string" val="start_dialogue|drika_dialogue" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -238,6 +244,8 @@
             <parameter name="7" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
             <parameter name="8" type="string" val="set_camera_param|0|1,1,1" />
             <parameter name="9" type="string" val="set_camera_param|1|0,0,0" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -256,6 +264,8 @@
             <parameter name="3" type="string" val="set_camera_param|2|120" />
             <parameter name="4" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
             <parameter name="5" type="string" val="set_camera_param|3|0.3;9;10;2.3;110;10" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -280,6 +290,8 @@
             <parameter name="7" type="string" val="wait|1000" />
             <parameter name="8" type="string" val="play_sound|50|Data/Sounds/DirtImpact1.wav" />
             <parameter name="9" type="string" val="wait|1000" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -301,6 +313,8 @@
             <parameter name="7" type="string" val="set_color|0|3|1|1|0,0.455253,0.396796" />
             <parameter name="8" type="string" val="set_color|0|3|1|2|0.126043,0.227714,0.719844" />
             <parameter name="9" type="string" val="set_color|0|35|0|0|0.928563,0,1" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -326,6 +340,8 @@
             <parameter name="7" type="string" val="set_level_param|6|145" />
             <parameter name="8" type="string" val="set_level_param|7|0" />
             <parameter name="9" type="string" val="set_level_param|8|NEWLOWADTIP" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -342,6 +358,8 @@
             <parameter name="1" type="string" val="set_character|3|Data/Characters/ferdi.xml|true" />
             <parameter name="2" type="string" val="on_character_enter_exit|0|3|1" />
             <parameter name="3" type="string" val="set_character|3|Data/Characters/drika.xml|true" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -408,6 +426,8 @@
             <parameter name="7" type="string" val="wait|200" />
             <parameter name="8" type="string" val="set_enabled|1|edged_cone|true" />
             <parameter name="9" type="string" val="transform_object|57|0|16" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -426,6 +446,8 @@
             <parameter name="3" type="string" val="play_music|Data/Music/lugaru.xml|lugaru_sad" />
             <parameter name="4" type="string" val="wait|5000" />
             <parameter name="5" type="string" val="go_to_line|1" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -637,6 +659,8 @@
             <parameter name="7" type="string" val="transform_object|124|0|120" />
             <parameter name="8" type="string" val="transform_object|132|0|147" />
             <parameter name="9" type="string" val="set_character_param|0|3|17|300" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -769,6 +793,8 @@
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
             <parameter name="1" type="string" val="set_object_param|0|3|0|drika_param|drika_new_value" />
+            <parameter name="Name" type="string" val="Drika Hotspot" />
+            <parameter name="Show Name" type="int" val="1" />
         </parameters>
         <Connections />
         <ConnectionsFrom />

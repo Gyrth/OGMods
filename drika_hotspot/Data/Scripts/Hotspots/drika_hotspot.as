@@ -21,6 +21,8 @@
 
 bool editor_open = false;
 bool editing = false;
+bool show_name = false;
+string display_name = "Drika Hotspot";
 bool script_finished = false;
 int current_line = 0;
 array<DrikaElement@> drika_elements;
@@ -124,6 +126,10 @@ void Dispose() {
 }
 
 void SetParameters(){
+	params.AddIntCheckbox("Show Name", show_name);
+	params.AddString("Name", display_name);
+	show_name = (params.GetInt("Show Name") == 1);
+	display_name = params.GetString("Name");
 }
 
 void InterpData(){
@@ -258,6 +264,9 @@ int drag_target_line = 0;
 bool update_scroll = false;
 
 void DrawEditor(){
+	if(show_name){
+		DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.5, 0), display_name, 1.0, false, _delete_on_draw);
+	}
 	DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_update);
 	if(editor_open){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
@@ -378,6 +387,17 @@ void DrawEditor(){
 				if(ImGui_MenuItem("Set Character Parameter")){
 					DrikaSetCharacterParam new_param();
 					InsertElement(@new_param);
+				}
+				ImGui_EndMenu();
+			}
+			if(ImGui_BeginMenu("Settings")){
+				if(ImGui_Checkbox("Show Name", show_name)){
+					params.SetInt("Show Name", show_name?1:0);
+				}
+				if(show_name){
+					if(ImGui_InputText("Name", display_name, 64)){
+						params.SetString("Name", display_name);
+					}
 				}
 				ImGui_EndMenu();
 			}
