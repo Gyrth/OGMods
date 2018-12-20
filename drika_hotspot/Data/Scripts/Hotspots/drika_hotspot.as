@@ -254,9 +254,7 @@ void Update(){
 	}
 	if(!show_editor && !has_closed){
 		has_closed = true;
-		if(drika_elements.size() > 0){
-			GetCurrentElement().EditDone();
-		}
+		Reset();
 	}
 
 	if(EditorModeActive() && editing == false){
@@ -696,7 +694,7 @@ void Draw(){
 			screen_dims.y - (image_dims.y * image_scale)) * 0.5f;
 
 		image.scale = vec3(image_scale, image_scale, 0.0f);
-		image.position = vec3(image_pos.x, image_pos.y, 0.0f);
+		image.position = vec3(image_pos.x, image_pos.y, -2.0f);
 		image.color = g_tint;
 	}
 }

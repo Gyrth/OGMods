@@ -48,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="21.3322" t1="0.862199" t2="5.95231" s0="1" s1="1" s2="1" q0="0.153019" q1="0.769131" q2="-0.200413" q3="0.587246" euler_x="-2.63179" euler_y="1.30419" euler_z="3.14159" id="1">
+    <CameraObject t0="21.3332" t1="0.865818" t2="5.94414" s0="1" s1="1" s2="1" q0="-0.0130231" q1="0.976703" q2="-0.205018" q3="-0.0620419" euler_x="-2.72778" euler_y="-0.126873" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -828,6 +828,25 @@
             <Connection id="134" />
         </Connections>
     </PathPointObject>
+    <Group t0="26.3015" t1="-0.860198" t2="8.68376" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="153" version="1">
+        <parameters />
+        <Hotspot t0="26.3062" t1="-0.853688" t2="8.69966" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" euler_x="0" euler_y="0" euler_z="-3.1405" id="154" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <parameters>
+                <parameter name="Fire Ribbons" type="int" val="4" />
+                <parameter name="Ignite Characters" type="int" val="1" />
+                <parameter name="Light Amplify" type="float" val="1" />
+                <parameter name="Light Distance" type="float" val="2" />
+            </parameters>
+            <Connections />
+            <ConnectionsFrom />
+        </Hotspot>
+        <EnvObject t0="26.2916" t1="-0.929038" t2="8.66059" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="155" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="26.3087" t1="-0.906128" t2="8.65858" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="156" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+    </Group>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="drika_hotspot.xml" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="empty_placeholder.png" />
@@ -843,4 +862,5 @@
     <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
     <SpawnerItem display_name="Spike" path="Data/Objects/Hotspots/spike.xml" thumbnail_path="Data/UI/spawner/thumbs/Interactive Objects/spike_2.png" />
     <SpawnerItem display_name="Path Point" path="Data/Objects/pathpoint/pathpoint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/pathpoint.png" />
+    <SpawnerItem display_name="Fire" path="Data/Objects/fire.xml" thumbnail_path="" />
 </RecentItems>
