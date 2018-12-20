@@ -62,6 +62,8 @@ TextureAssetRef delete_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Del
 TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Copy.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
 void Init() {
+	show_name = (this_hotspot.GetName() != "");
+	display_name = this_hotspot.GetName();
     level.ReceiveLevelEvents(hotspot.GetID());
 	ConvertDisplayColors();
 	//When the user duplicates a hotspot the editormode is active and the left alt is pressed.
@@ -164,11 +166,7 @@ void Dispose() {
 }
 
 void SetParameters(){
-	params.AddIntCheckbox("Show Name", show_name);
-	params.AddString("Name", display_name);
-	show_name = (params.GetInt("Show Name") == 1);
-	display_name = params.GetString("Name");
-	this_hotspot.SetName(display_name);
+
 }
 
 void InterpData(){
@@ -459,7 +457,6 @@ void DrawEditor(){
 			}
 			if(ImGui_BeginMenu("Settings")){
 				if(ImGui_Checkbox("Show Name", show_name)){
-					params.SetInt("Show Name", show_name?1:0);
 					if(!show_name){
 						this_hotspot.SetName("");
 					}else{
@@ -468,7 +465,6 @@ void DrawEditor(){
 				}
 				if(show_name){
 					if(ImGui_InputText("Name", display_name, 64)){
-						params.SetString("Name", display_name);
 						this_hotspot.SetName(display_name);
 					}
 				}
