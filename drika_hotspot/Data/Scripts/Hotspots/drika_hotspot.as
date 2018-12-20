@@ -39,10 +39,15 @@ const int _ragdoll_state = 4;
 dictionary object_references;
 string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
 bool duplicating = false;
-float g_scale;
-vec4 g_tint;
-string g_image_path;
+float image_scale;
+vec4 image_tint;
+string image_path;
 bool show_image = false;
+string text;
+int font_size;
+string font_path;
+bool show_text = false;
+float text_opacity = 1.0;
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -220,7 +225,7 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 	}else if(line_elements[0] == "set_character_param"){
 		return DrikaSetCharacterParam(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
 	}else if(line_elements[0] == "display_text"){
-		return DrikaDisplayText(line_elements[1]);
+		return DrikaDisplayText(line_elements[1], line_elements[2], line_elements[3]);
 	}else if(line_elements[0] == "display_image"){
 		return DrikaDisplayImage(line_elements[1], line_elements[2], line_elements[3]);
 	}else{
@@ -675,9 +680,18 @@ void Reset(){
 }
 
 void Draw(){
+	if(show_text){
+		vec2 pos(GetScreenWidth() *0.5, GetScreenHeight() *0.2);
+		TextMetrics metrics = GetTextAtlasMetrics(font_path, font_size, 0, text);
+		pos.x -= metrics.bounds_x * 0.5;
+		DrawTextAtlas(font_path, font_size, 0, text,
+					  int(pos.x+2), int(pos.y+2), vec4(vec3(0.0f), text_opacity * 0.5));
+		DrawTextAtlas(font_path, font_size, 0, text,
+					  int(pos.x), int(pos.y), vec4(vec3(1.0f), text_opacity));
+	}
 	if(show_image){
 		HUDImage@ image = hud.AddImage();
-		image.SetImageFromPath(g_image_path);
+		image.SetImageFromPath(image_path);
 
 		vec2 screen_dims = vec2(GetScreenWidth(), GetScreenHeight());
 		float screen_aspect_ratio = screen_dims.x / screen_dims.y;
@@ -689,25 +703,36 @@ void Draw(){
 			screen_dims.x / image_dims.x :
 			screen_dims.y / image_dims.y;
 
-		float image_scale = g_scale * fill_scale;
+		float new_image_scale = image_scale * fill_scale;
 		vec2 image_pos = vec2(
-			screen_dims.x - (image_dims.x * image_scale),
-			screen_dims.y - (image_dims.y * image_scale)) * 0.5f;
+			screen_dims.x - (image_dims.x * new_image_scale),
+			screen_dims.y - (image_dims.y * new_image_scale)) * 0.5f;
 
-		image.scale = vec3(image_scale, image_scale, 0.0f);
-		image.position = vec3(image_pos.x, image_pos.y, -2.0f);
-		image.color = g_tint;
+		image.scale = vec3(new_image_scale, new_image_scale, 0.0f);
+		image.position = vec3(image_pos.x, image_pos.y, 5.0f);
+		image.color = image_tint;
 	}
 }
 
-void ShowImage(string path, vec4 tint, float scale){
-	if(path == ""){
+void ShowImage(string _image_path, vec4 _image_tint, float _image_scale){
+	if(_image_path == ""){
 		show_image = false;
 	}else{
-		g_scale = scale;
-		g_tint = tint;
-		g_image_path = path;
+		image_scale = _image_scale;
+		image_tint = _image_tint;
+		image_path = _image_path;
 		show_image = true;
+	}
+}
+
+void ShowText(string _text, int _font_size, string _font_path){
+	if(_text == ""){
+		show_text = false;
+	}else{
+		text = _text;
+		font_size = _font_size;
+		font_path = _font_path;
+		show_text = true;
 	}
 }
 

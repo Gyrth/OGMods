@@ -48,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="22.9127" t1="4.10154" t2="10.7294" s0="1" s1="1" s2="1" q0="0.160581" q1="-0.796866" q2="0.241422" q3="0.530032" euler_x="-2.55325" euler_y="-1.1739" euler_z="3.14159" id="1">
+    <CameraObject t0="23.8007" t1="1.16931" t2="5.07344" s0="1" s1="1" s2="1" q0="0.12344" q1="0.827573" q2="-0.200459" q3="0.509609" euler_x="-2.6663" euler_y="1.10389" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -365,7 +365,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <EnvObject t0="14.0159" t1="-2.74726" t2="18.5145" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="14.0159" t1="-2.24726" t2="18.5145" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <ItemObject t0="8.80698" t1="-2.32134" t2="18.4569" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="42" type_file="Data/Items/gear/dogtools/dogtoolhammer.xml" color_r="1" color_g="1" color_b="1" overbright="0">
@@ -802,11 +802,10 @@
     <Hotspot name="Buster&apos;s Hotspot" t0="26.1601" t1="-1.77817" t2="6.00436" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="148" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
-            <parameter name="1" type="string" val="display_image|Data/Textures/drika_hotspot.png|1,1,1,1|1" />
-            <parameter name="2" type="string" val="display_text|Drika Display Message" />
+            <parameter name="1" type="string" val="display_text|First thing when the level &#x0A;starts it plays my reset dialogue &#x0A;this sends a level message to a &#x0A;drika&apos;s hotspot that &#x0A;disables the doppleganger character &#x0A;and enables the normal &#x0A;character, it wiggles the  global &#x0A;lighting capture to make &#x0A;sure the lighting resets properly &#x0A;on restart. It sets the &#x0A;guard back to Team Turner (in case &#x0A;he was aggro) and makes &#x0A;him not afraid on sight anymore (in &#x0A;case he was) Then the &#x0A;guard patrols through 1 or 4 Drika&apos;s &#x0A;hot spot, each one &#x0A;translates a dialogue hotspot in &#x0A;and out of the level near &#x0A;the guard&apos;s patrol point as he &#x0A;stops there, each dialogue has &#x0A;a variety of options. Once the &#x0A;guard moves on the dialogue can&apos;t &#x0A;be triggered until the guard is &#x0A;standing in the drika&apos;s hotspot .&#x0A;Each dialogue hotspot has unique &#x0A;options, whenever you commit to a &#x0A;option, it disables the drika&apos;s &#x0A;hotspots by moving them under the &#x0A;level, using a send level command, &#x0A;this makes it so all the dialogue &#x0A;hotspots stay forever outside &#x0A;of bounds and can&apos;t be triggers anymore. &#x0A;But this only happens if you &#x0A;commit to a choice, if you hit enter &#x0A;to skip out of dialogue it won&apos;t do this.|20|Data/Fonts/Cella.ttf" />
+            <parameter name="2" type="string" val="display_image|Data/Textures/Decals/rugs/thick_tan_rug_c.tga_converted.dds|1,1,1,1|1" />
             <parameter name="3" type="string" val="set_object_param|0|3|0|drika_param|drika_new_value" />
             <parameter name="4" type="string" val="wait|1000" />
-            <parameter name="5" type="string" val="display_text|" />
             <parameter name="Name" type="string" val="Buster&apos;s Hotspot" />
             <parameter name="Show Name" type="int" val="1" />
         </parameters>
