@@ -48,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="10.0324" t1="4.24914" t2="17.2312" s0="1" s1="1" s2="1" q0="-0.249645" q1="-0.750271" q2="0.439335" q3="-0.426328" euler_x="-2.08211" euler_y="1.03347" euler_z="3.14159" id="1">
+    <CameraObject t0="23.1683" t1="2.3448" t2="5.64633" s0="1" s1="1" s2="1" q0="0.258705" q1="0.709419" q2="-0.321099" q3="0.57157" euler_x="-2.29153" euler_y="1.3564" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -365,7 +365,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <EnvObject t0="14.0159" t1="-2.74726" t2="18.5145" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="14.0159" t1="-2.24726" t2="18.5145" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <ItemObject t0="8.80698" t1="-2.32134" t2="18.4569" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="42" type_file="Data/Items/gear/dogtools/dogtoolhammer.xml" color_r="1" color_g="1" color_b="1" overbright="0">
@@ -444,7 +444,7 @@
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
             <parameter name="1" type="string" val="play_music|Data/Music/lugaru.xml|lugaru_menu" />
             <parameter name="2" type="string" val="wait|5000" />
-            <parameter name="3" type="string" val="play_music|Data/Music/lugaru.xml|lugaru_sad" />
+            <parameter name="3" type="string" val="play_music|Data/Music/therium.xml|therium_combat" />
             <parameter name="4" type="string" val="wait|5000" />
             <parameter name="5" type="string" val="go_to_line|1" />
             <parameter name="Name" type="string" val="Drika Hotspot" />
@@ -802,7 +802,8 @@
     <Hotspot name="Buster&apos;s Hotspot" t0="26.1601" t1="-1.77817" t2="6.00436" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="148" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
-            <parameter name="1" type="string" val="set_object_param|0|3|0|drika_param|drika_new_value" />
+            <parameter name="1" type="string" val="display_text|Drika Display Message" />
+            <parameter name="2" type="string" val="set_object_param|0|3|0|drika_param|drika_new_value" />
             <parameter name="Name" type="string" val="Buster&apos;s Hotspot" />
             <parameter name="Show Name" type="int" val="1" />
         </parameters>

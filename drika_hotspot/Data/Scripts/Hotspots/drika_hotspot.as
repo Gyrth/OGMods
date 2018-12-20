@@ -18,6 +18,7 @@
 #include "hotspots/drika_set_color.as"
 #include "hotspots/drika_play_music.as"
 #include "hotspots/drika_set_character_param.as"
+#include "hotspots/drika_display_text.as"
 
 bool show_editor = false;
 bool has_closed = true;
@@ -214,6 +215,8 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 		return DrikaPlayMusic(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "set_character_param"){
 		return DrikaSetCharacterParam(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
+	}else if(line_elements[0] == "display_text"){
+		return DrikaDisplayText(line_elements[1]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -420,6 +423,10 @@ void DrawEditor(){
 				}
 				if(ImGui_MenuItem("Set Character Parameter")){
 					DrikaSetCharacterParam new_param();
+					InsertElement(@new_param);
+				}
+				if(ImGui_MenuItem("Display Text")){
+					DrikaDisplayText new_param();
 					InsertElement(@new_param);
 				}
 				ImGui_EndMenu();
