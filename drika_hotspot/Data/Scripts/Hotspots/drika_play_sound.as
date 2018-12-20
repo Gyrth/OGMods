@@ -26,9 +26,8 @@ class DrikaPlaySound : DrikaElement{
 	}
 
 	void DrawSettings(){
-		ImGui_Text("Sound Path : ");
+		ImGui_Text("Sound Path : " + sound_path);
 		ImGui_SameLine();
-		ImGui_Text(sound_path);
 		if(ImGui_Button("Set Sound Path")){
 			string new_path = GetUserPickedReadPath("wav", "Data/Sounds");
 			if(new_path != ""){

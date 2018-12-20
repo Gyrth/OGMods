@@ -19,7 +19,8 @@ enum drika_element_types { 	none = 0,
 							drika_play_music = 18,
 							drika_set_character_param = 19,
 							drika_display_text = 20,
-							drika_display_image = 21
+							drika_display_image = 21,
+							drika_load_level = 22
 						};
 
 array<vec4> display_colors = {	vec4(255),
@@ -40,6 +41,7 @@ array<vec4> display_colors = {	vec4(255),
 								vec4(61, 96, 40, 255),
 								vec4(96, 47, 40, 255),
 								vec4(96, 40, 62, 255),
+								vec4(40, 93, 96, 255),
 								vec4(40, 93, 96, 255),
 								vec4(40, 93, 96, 255),
 								vec4(40, 93, 96, 255),

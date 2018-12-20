@@ -48,7 +48,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="23.8007" t1="1.16931" t2="5.07344" s0="1" s1="1" s2="1" q0="0.12344" q1="0.827573" q2="-0.200459" q3="0.509609" euler_x="-2.6663" euler_y="1.10389" euler_z="-3.14159" id="1">
+    <CameraObject t0="21.9566" t1="2.23135" t2="4.14495" s0="1" s1="1" s2="1" q0="0.120017" q1="0.802179" q2="-0.172239" q3="0.558962" euler_x="-2.71859" euler_y="1.21716" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -365,7 +365,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <EnvObject t0="14.0159" t1="-2.24726" t2="18.5145" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="14.0159" t1="-2.74726" t2="18.5145" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <ItemObject t0="8.80698" t1="-2.32134" t2="18.4569" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="42" type_file="Data/Items/gear/dogtools/dogtoolhammer.xml" color_r="1" color_g="1" color_b="1" overbright="0">
@@ -806,6 +806,7 @@
             <parameter name="2" type="string" val="display_image|Data/Textures/Decals/rugs/thick_tan_rug_c.tga_converted.dds|1,1,1,1|1" />
             <parameter name="3" type="string" val="set_object_param|0|3|0|drika_param|drika_new_value" />
             <parameter name="4" type="string" val="wait|1000" />
+            <parameter name="5" type="string" val="load_level|Data/Levels/nothing.xml" />
             <parameter name="Name" type="string" val="Buster&apos;s Hotspot" />
             <parameter name="Show Name" type="int" val="1" />
         </parameters>
