@@ -18,7 +18,8 @@ enum drika_element_types { 	none = 0,
 							drika_set_color = 17,
 							drika_play_music = 18,
 							drika_set_character_param = 19,
-							drika_display_text = 20
+							drika_display_text = 20,
+							drika_display_image = 21
 						};
 
 array<vec4> display_colors = {	vec4(255),
@@ -39,6 +40,7 @@ array<vec4> display_colors = {	vec4(255),
 								vec4(61, 96, 40, 255),
 								vec4(96, 47, 40, 255),
 								vec4(96, 40, 62, 255),
+								vec4(40, 93, 96, 255),
 								vec4(40, 93, 96, 255),
 								vec4(40, 93, 96, 255),
 								vec4(40, 93, 96, 255)
@@ -136,6 +138,15 @@ class DrikaElement{
 	vec3 StringToVec3(string value){
 		array<string> values = value.split(",");
 		return vec3(atof(values[0]), atof(values[1]), atof(values[2]));
+	}
+
+	string Vec4ToString(vec4 value){
+		return value.x + "," + value.y + "," + value.z + "," + value.a;
+	}
+
+	vec4 StringToVec4(string value){
+		array<string> values = value.split(",");
+		return vec4(atof(values[0]), atof(values[1]), atof(values[2]), atof(values[3]));
 	}
 
 	quaternion StringToQuat(string value){

@@ -19,6 +19,7 @@
 #include "hotspots/drika_play_music.as"
 #include "hotspots/drika_set_character_param.as"
 #include "hotspots/drika_display_text.as"
+#include "hotspots/drika_display_image.as"
 
 bool show_editor = false;
 bool has_closed = true;
@@ -38,6 +39,10 @@ const int _ragdoll_state = 4;
 dictionary object_references;
 string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
 bool duplicating = false;
+float g_scale;
+vec4 g_tint;
+string g_image_path;
+bool show_image = false;
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -216,6 +221,8 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 		return DrikaSetCharacterParam(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
 	}else if(line_elements[0] == "display_text"){
 		return DrikaDisplayText(line_elements[1]);
+	}else if(line_elements[0] == "display_image"){
+		return DrikaDisplayImage(line_elements[1], line_elements[2], line_elements[3]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -432,6 +439,10 @@ void DrawEditor(){
 				}
 				if(ImGui_MenuItem("Display Text")){
 					DrikaDisplayText new_param();
+					InsertElement(@new_param);
+				}
+				if(ImGui_MenuItem("Display Image")){
+					DrikaDisplayImage new_param();
 					InsertElement(@new_param);
 				}
 				ImGui_EndMenu();
@@ -661,6 +672,43 @@ void Reset(){
 	}
 	if(editing && show_editor){
 		GetCurrentElement().StartEdit();
+	}
+}
+
+void Draw(){
+	if(show_image){
+		HUDImage@ image = hud.AddImage();
+		image.SetImageFromPath(g_image_path);
+
+		vec2 screen_dims = vec2(GetScreenWidth(), GetScreenHeight());
+		float screen_aspect_ratio = screen_dims.x / screen_dims.y;
+
+		vec2 image_dims = vec2(image.GetWidth(), image.GetHeight());
+		float image_aspect_ratio = image_dims.x / image_dims.y;
+
+		float fill_scale = screen_aspect_ratio <= image_aspect_ratio ?
+			screen_dims.x / image_dims.x :
+			screen_dims.y / image_dims.y;
+
+		float image_scale = g_scale * fill_scale;
+		vec2 image_pos = vec2(
+			screen_dims.x - (image_dims.x * image_scale),
+			screen_dims.y - (image_dims.y * image_scale)) * 0.5f;
+
+		image.scale = vec3(image_scale, image_scale, 0.0f);
+		image.position = vec3(image_pos.x, image_pos.y, 0.0f);
+		image.color = g_tint;
+	}
+}
+
+void ShowImage(string path, vec4 tint, float scale){
+	if(path == ""){
+		show_image = false;
+	}else{
+		g_scale = scale;
+		g_tint = tint;
+		g_image_path = path;
+		show_image = true;
 	}
 }
 
