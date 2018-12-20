@@ -485,8 +485,7 @@ void DrawEditor(){
 						display_index = drika_indexes[current_line];
 					}
 					ReorderElements();
-					//Remove the last one since all the saved elements have been saved down one index.
-					params.Remove("" + drika_elements.size());
+					Save();
 				}
 			}
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
@@ -574,6 +573,7 @@ void DrawEditor(){
 	if(reorded && !ImGui_IsMouseDragging(0)){
 		reorded = false;
 		ReorderElements();
+		Save();
 	}
 }
 
@@ -606,6 +606,7 @@ void InsertElement(DrikaElement@ new_element){
 	ReorderElements();
 	if(post_init_done && drika_elements.size() > 0){
 		GetCurrentElement().StartEdit();
+		Save();
 	}
 }
 
@@ -714,5 +715,11 @@ void Save(){
 	for(uint i = 0; i < drika_indexes.size(); i++){
 		string data = drika_elements[drika_indexes[i]].GetSaveString();
 		params.SetString("" + drika_elements[drika_indexes[i]].index, data);
+	}
+	//Remove the elements that have a bigger index that the amount of current elements.
+	int counter = drika_indexes.size();
+	while(params.HasParam("" + counter)){
+		params.Remove("" + counter);
+		counter++;
 	}
 }
