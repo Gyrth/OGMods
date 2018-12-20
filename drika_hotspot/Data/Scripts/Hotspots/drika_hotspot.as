@@ -439,6 +439,11 @@ void DrawEditor(){
 			if(ImGui_BeginMenu("Settings")){
 				if(ImGui_Checkbox("Show Name", show_name)){
 					params.SetInt("Show Name", show_name?1:0);
+					if(!show_name){
+						this_hotspot.SetName("");
+					}else{
+						this_hotspot.SetName(display_name);
+					}
 				}
 				if(show_name){
 					if(ImGui_InputText("Name", display_name, 64)){
