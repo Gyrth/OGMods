@@ -278,6 +278,7 @@ void SwitchToEditing(){
 
 void SwitchToPlaying(){
 	if(this_hotspot.IsSelected()){
+		show_editor = false;
 		this_hotspot.SetSelected(false);
 	}
 	editing = false;
@@ -608,9 +609,6 @@ void ReceiveMessage(string msg){
 			int id = atoi(token_iter.GetToken(msg));
 			if(id != this_hotspot.GetID()){
 				show_editor = false;
-				if(drika_elements.size() > 0){
-					GetCurrentElement().EditDone();
-				}
 			}
 		}
 	}
