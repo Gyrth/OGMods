@@ -58,7 +58,6 @@ void Init() {
 		duplicating = true;
 	}
 	InterpData();
-	duplicating = false;
 }
 
 string RegisterObject(int id, string reference){
@@ -224,12 +223,17 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 	}
 }
 
+void PostInit(){
+	post_init_done = true;
+	for(uint i = 0; i < drika_elements.size(); i++){
+		drika_elements[i].PostInit();
+	}
+	duplicating = false;
+}
+
 void Update(){
 	if(!post_init_done){
-		post_init_done = true;
-		for(uint i = 0; i < drika_elements.size(); i++){
-			drika_elements[i].PostInit();
-		}
+		PostInit();
 		return;
 	}
 

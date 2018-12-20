@@ -182,7 +182,12 @@ class DrikaElement{
 
 	void RetrievePlaceholder(){
 		if(duplicating){
-			placeholder_id = -1;
+			//Use the same transform as the original placeholder.
+			Object@ old_placeholder = ReadObjectFromID(placeholder_id);
+			CreatePlaceholder();
+			placeholder.SetScale(old_placeholder.GetScale());
+			placeholder.SetTranslation(old_placeholder.GetTranslation());
+			placeholder.SetRotation(old_placeholder.GetRotation());
 			return;
 		}
 		if(ObjectExists(placeholder_id)){
