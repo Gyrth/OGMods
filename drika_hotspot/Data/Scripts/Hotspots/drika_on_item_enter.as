@@ -6,6 +6,7 @@ class DrikaOnItemEnter : DrikaElement{
 	int item_id;
 	int current_combo_item = 0;
 	item_trigger_types trigger_type;
+	array<string> item_triggger_choices = {"Check ID", "Check Label"};
 
 	DrikaOnItemEnter(string _trigger_type = "0", string _param = "-1"){
 		drika_element_type = drika_on_item_enter;
@@ -37,7 +38,6 @@ class DrikaOnItemEnter : DrikaElement{
 	}
 
 	void DrawSettings(){
-		array<string> item_triggger_choices = {"Check ID", "Check Label"};
 		if(ImGui_Combo("Check for", current_combo_item, item_triggger_choices, item_triggger_choices.size())){
 			trigger_type = item_trigger_types(current_combo_item);
 		}

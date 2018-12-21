@@ -13,6 +13,7 @@ class DrikaSetObjectParam : DrikaElement{
 	float float_param_after = 0.0;
 
 	param_types param_type;
+	array<string> param_type_choices = {"String", "Integer", "Float"};
 
 	DrikaSetObjectParam(string _identifier_type = "0", string _identifier = "-1", string _param_type = "0", string _param_name = "drika_param", string _param_after = "drika_new_value"){
 		param_name = _param_name;
@@ -102,7 +103,6 @@ class DrikaSetObjectParam : DrikaElement{
 		DrawSelectTargetUI();
 
 		ImGui_InputText("Param Name", param_name, 64);
-		array<string> param_type_choices = {"String", "Integer", "Float"};
 		if(ImGui_Combo("Param Type", current_type, param_type_choices, param_type_choices.size())){
 			param_type = param_types(current_type);
 		}

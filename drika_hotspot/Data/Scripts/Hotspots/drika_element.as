@@ -88,6 +88,7 @@ class DrikaElement{
 	array<EntityType> connection_types;
 	array<string> available_references;
 	bool show_reference_option = false;
+	array<string> identifier_choices = {"ID", "Reference"};
 
 	string GetSaveString(){return "";}
 	string GetDisplayString(){return "";};
@@ -258,7 +259,6 @@ class DrikaElement{
 
 	void DrawSelectTargetUI(){
 		if(show_reference_option){
-			array<string> identifier_choices = {"ID", "Reference"};
 			if(ImGui_Combo("Identifier Type", current_idenifier_type, identifier_choices, identifier_choices.size())){
 				identifier_type = identifier_types(current_idenifier_type);
 			}

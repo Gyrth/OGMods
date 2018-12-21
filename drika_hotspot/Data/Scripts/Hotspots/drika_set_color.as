@@ -10,6 +10,7 @@ class DrikaSetColor : DrikaElement{
 	int current_color_type;
 	color_types color_type;
 	array<string> palette_indexes;
+	array<string> color_type_choices = {"Tint", "Palette Color"};
 
 	DrikaSetColor(string _identifier_type = "0", string _identifier = "-1", string _color_type = "0", string _palette_slot = "0", string _color = "1,1,1"){
 		color_type = color_types(atoi(_color_type));
@@ -74,7 +75,6 @@ class DrikaSetColor : DrikaElement{
 
 	void DrawSettings(){
 		DrawSelectTargetUI();
-		array<string> color_type_choices = {"Tint", "Palette Color"};
 		if(ImGui_Combo("Color Type", current_color_type, color_type_choices, color_type_choices.size())){
 			color_type = color_types(current_color_type);
 			GetNumPaletteColors();
