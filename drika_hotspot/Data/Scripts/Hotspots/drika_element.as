@@ -336,9 +336,9 @@ class DrikaElement{
 		scale_mat_z[15] = 1.0f;
 		gizmo_transform_z = gizmo_transform_z * scale_mat_z;
 
-		DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, vec4(0.0f, 0.0f, 0.5f, 0.15f), _delete_on_update);
-		DebugDrawWireMesh("Data/Models/drika_gizmo_x.obj", gizmo_transform_x, vec4(0.5f, 0.0f, 0.0f, 0.15f), _delete_on_update);
-		DebugDrawWireMesh("Data/Models/drika_gizmo_z.obj", gizmo_transform_z, vec4(0.0f, 0.5, 0.0f, 0.15f), _delete_on_update);
+		DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, vec4(0.0f, 0.0f, 1.0f, 0.15f), _delete_on_update);
+		DebugDrawWireMesh("Data/Models/drika_gizmo_x.obj", gizmo_transform_x, vec4(1.0f, 0.0f, 0.0f, 0.15f), _delete_on_update);
+		DebugDrawWireMesh("Data/Models/drika_gizmo_z.obj", gizmo_transform_z, vec4(0.0f, 1.0, 0.0f, 0.15f), _delete_on_update);
 	}
 
 }
