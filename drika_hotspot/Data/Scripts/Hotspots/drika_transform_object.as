@@ -34,14 +34,14 @@ class DrikaTransformObject : DrikaElement{
 		QueueDeleteObjectID(placeholder_id);
 	}
 
-	string GetSaveString(){
+	array<string> GetSaveParameters(){
 		string save_identifier;
 		if(identifier_type == id){
 			save_identifier = "" + object_id;
 		}else if(identifier_type == reference){
 			save_identifier = "" + reference_string;
 		}
-		return "transform_object" + param_delimiter + placeholder_id + param_delimiter + int(identifier_type) + param_delimiter + save_identifier;
+		return {"transform_object", placeholder_id, identifier_type, save_identifier};
 	}
 
 	string GetDisplayString(){

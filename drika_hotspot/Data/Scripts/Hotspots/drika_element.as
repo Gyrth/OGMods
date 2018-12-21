@@ -90,7 +90,6 @@ class DrikaElement{
 	bool show_reference_option = false;
 	array<string> identifier_choices = {"ID", "Reference"};
 
-	string GetSaveString(){return "";}
 	string GetDisplayString(){return "";};
 	void Update(){}
 	void PostInit(){}
@@ -108,6 +107,17 @@ class DrikaElement{
 	void ReceiveMessage(string message, string param){}
 	void SetIndex(int _index){
 		index = _index;
+	}
+
+	array<string> GetSaveParameters(){return {};}
+
+	string GetSaveString(){
+		string save_data = "";
+		array<string> parameters = GetSaveParameters();
+		for(uint i = 0; i < parameters.size(); i++){
+			save_data += parameters[i] + ((i != parameters.size() - 1)?param_delimiter:"");
+		}
+		return save_data;
 	}
 
 	void StartEdit(){

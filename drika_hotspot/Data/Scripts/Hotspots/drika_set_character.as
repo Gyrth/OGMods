@@ -18,8 +18,8 @@ class DrikaSetCharacter : DrikaElement{
 		}
 	}
 
-	string GetSaveString(){
-		return "set_character" + param_delimiter + object_id + param_delimiter + character_path + param_delimiter + (cache_skeleton_info?"true":"false");
+	array<string> GetSaveParameters(){
+		return {"set_character", object_id, character_path, (cache_skeleton_info?"true":"false")};
 	}
 
 	string GetDisplayString(){

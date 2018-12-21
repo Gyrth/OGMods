@@ -15,8 +15,8 @@ class DrikaPlayMusic : DrikaElement{
 		AddMusic(music_path);
 	}
 
-	string GetSaveString(){
-		return "play_music" + param_delimiter + music_path + param_delimiter + song;
+	array<string> GetSaveParameters(){
+		return {"play_music", music_path, song};
 	}
 
 	string GetDisplayString(){

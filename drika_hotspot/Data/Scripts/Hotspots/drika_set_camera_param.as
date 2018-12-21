@@ -65,7 +65,7 @@ class DrikaSetCameraParam : DrikaElement{
 		}
 	}
 
-	string GetSaveString(){
+	array<string> GetSaveParameters(){
 		string save_string;
 		if(param_type == vec3_color_param){
 			save_string = Vec3ToString(vec3_param_after);
@@ -74,7 +74,7 @@ class DrikaSetCameraParam : DrikaElement{
 		}else if(param_type == float_array_param){
 			save_string = FloatArrayToString(float_array_param_after);
 		}
-		return "set_camera_param" + param_delimiter + int(camera_param) + param_delimiter + save_string;
+		return {"set_camera_param", camera_param, save_string};
 	}
 
 	string GetDisplayString(){

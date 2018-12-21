@@ -17,8 +17,8 @@ class DrikaPlaySound : DrikaElement{
 		QueueDeleteObjectID(placeholder_id);
 	}
 
-	string GetSaveString(){
-		return "play_sound" + param_delimiter + placeholder_id + param_delimiter + sound_path;
+	array<string> GetSaveParameters(){
+		return {"play_sound", placeholder_id, sound_path};
 	}
 
 	string GetDisplayString(){

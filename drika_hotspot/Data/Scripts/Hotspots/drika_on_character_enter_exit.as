@@ -29,13 +29,13 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		has_settings = true;
 	}
 
-	string GetSaveString(){
+	array<string> GetSaveParameters(){
 		if(target_character_type == check_id){
-			return "on_character_enter_exit" + param_delimiter + int(target_character_type) + param_delimiter + object_id + param_delimiter + int(hotspot_trigger_type);
+			return {"on_character_enter_exit", target_character_type, object_id, hotspot_trigger_type};
 		}else if(target_character_type == check_team){
-			return "on_character_enter_exit" + param_delimiter + int(target_character_type) + param_delimiter + character_team + param_delimiter + int(hotspot_trigger_type);
+			return {"on_character_enter_exit", target_character_type, character_team, hotspot_trigger_type};
 		}else{
-			return "on_character_enter_exit" + param_delimiter + int(target_character_type) + param_delimiter + "" + param_delimiter + int(hotspot_trigger_type);
+			return {"on_character_enter_exit", target_character_type, "", hotspot_trigger_type};
 		}
 	}
 

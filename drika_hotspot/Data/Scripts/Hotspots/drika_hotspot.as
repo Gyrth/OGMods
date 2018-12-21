@@ -264,6 +264,7 @@ void Update(){
 	if(!show_editor && !has_closed){
 		has_closed = true;
 		Reset();
+		Save();
 	}
 
 	if(EditorModeActive() && editing == false){
@@ -359,7 +360,6 @@ void DrawEditor(){
 			if(ImGui_Button("Close")){
 				GetCurrentElement().ApplySettings();
 				ImGui_CloseCurrentPopup();
-				Save();
 			}
 			ImGui_EndChild();
 			ImGui_EndPopup();

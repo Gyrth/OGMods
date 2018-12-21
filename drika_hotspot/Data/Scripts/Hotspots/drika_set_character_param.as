@@ -156,7 +156,7 @@ class DrikaSetCharacterParam : DrikaElement{
 		}
 	}
 
-	string GetSaveString(){
+	array<string> GetSaveParameters(){
 		string saved_string;
 		if(param_type == int_param){
 			saved_string = "" + int_param_after;
@@ -173,7 +173,7 @@ class DrikaSetCharacterParam : DrikaElement{
 		}else if(identifier_type == reference){
 			save_identifier = "" + reference_string;
 		}
-		return "set_character_param" + param_delimiter + identifier_type + param_delimiter + save_identifier + param_delimiter + int(character_param) + param_delimiter + saved_string;
+		return {"set_character_param", identifier_type, save_identifier, character_param, saved_string};
 	}
 
 	string GetDisplayString(){

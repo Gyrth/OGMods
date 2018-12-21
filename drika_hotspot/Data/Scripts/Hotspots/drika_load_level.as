@@ -7,8 +7,8 @@ class DrikaLoadLevel : DrikaElement{
 		has_settings = true;
 	}
 
-	string GetSaveString(){
-		return "load_level" + param_delimiter + level_path;
+	array<string> GetSaveParameters(){
+		return {"load_level", level_path};
 	}
 
 	string GetDisplayString(){

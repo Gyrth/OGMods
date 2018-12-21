@@ -26,8 +26,8 @@ class DrikaCreateObject : DrikaElement{
 		QueueDeleteObjectID(placeholder_id);
     }
 
-	string GetSaveString(){
-		return "create_object" + param_delimiter + placeholder_id + param_delimiter + object_path + param_delimiter + reference;
+	array<string> GetSaveParameters(){
+		return {"create_object", placeholder_id, object_path, reference};
 	}
 
 	string GetDisplayString(){

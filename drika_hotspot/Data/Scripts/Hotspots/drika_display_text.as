@@ -11,8 +11,8 @@ class DrikaDisplayText : DrikaElement{
 		has_settings = true;
 	}
 
-	string GetSaveString(){
-		return "display_text" + param_delimiter + display_message + param_delimiter + font_size + param_delimiter + font_path;
+	array<string> GetSaveParameters(){
+		return {"display_text", display_message, font_size, font_path};
 	}
 
 	string GetDisplayString(){

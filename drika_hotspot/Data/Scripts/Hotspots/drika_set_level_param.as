@@ -119,7 +119,7 @@ class DrikaSetLevelParam : DrikaElement{
 		}
 	}
 
-	string GetSaveString(){
+	array<string> GetSaveParameters(){
 		string save_string;
 		if(level_param == other){
 			save_string = param_name + ";" + string_param_after;
@@ -132,7 +132,7 @@ class DrikaSetLevelParam : DrikaElement{
 		}else if(param_type == int_param){
 			save_string = "" + int_param_after;
 		}
-		return "set_level_param" + param_delimiter + int(level_param) + param_delimiter + save_string;
+		return {"set_level_param", level_param, save_string};
 	}
 
 	string GetDisplayString(){

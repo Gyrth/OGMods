@@ -11,10 +11,10 @@ class DrikaDisplayImage : DrikaElement{
 		has_settings = true;
 	}
 
-	string GetSaveString(){
-		return "display_image" + param_delimiter + image_path + param_delimiter + Vec4ToString(tint) + param_delimiter + scale;
+	array<string> GetSaveParameters(){
+		return {"display_image", image_path, Vec4ToString(tint), scale};
 	}
-
+	
 	string GetDisplayString(){
 		return "DisplayImage " + image_path;
 	}

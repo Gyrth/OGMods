@@ -27,14 +27,14 @@ class DrikaSetColor : DrikaElement{
 		Reset();
     }
 
-	string GetSaveString(){
+	array<string> GetSaveParameters(){
 		string save_identifier;
 		if(identifier_type == id){
 			save_identifier = "" + object_id;
 		}else if(identifier_type == reference){
 			save_identifier = "" + reference_string;
 		}
-		return "set_color" + param_delimiter + identifier_type + param_delimiter + save_identifier + param_delimiter + color_type + param_delimiter + palette_slot + param_delimiter + Vec3ToString(after_color);
+		return {"set_color", identifier_type, save_identifier, color_type, palette_slot, Vec3ToString(after_color)};
 	}
 
 	string GetDisplayString(){

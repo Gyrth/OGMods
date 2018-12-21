@@ -8,17 +8,20 @@ class DrikaWait : DrikaElement{
 		drika_element_type = drika_wait;
 		has_settings = true;
 	}
-	string GetSaveString(){
-		return "wait" + param_delimiter + duration;
+
+	array<string> GetSaveParameters(){
+		return {"wait", duration};
 	}
 
 	string GetDisplayString(){
 		return "Wait " + duration;
 	}
+
 	void DrawSettings(){
 		ImGui_Text("Wait in ms : ");
 		ImGui_InputInt("Duration", duration);
 	}
+	
 	bool Trigger(){
 		if(timer <= 0.0){
 			Reset();
@@ -28,6 +31,7 @@ class DrikaWait : DrikaElement{
 			return false;
 		}
 	}
+
 	void Reset(){
 		timer = duration / 1000.0;
 	}

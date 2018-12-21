@@ -24,6 +24,14 @@ class DrikaCheckCharacterState : DrikaElement{
 		has_settings = true;
 	}
 
+	array<string> GetSaveParameters(){
+		if(target_character_type == check_id){
+			return {"check_character_state", target_character_type, object_id, state_check};
+		}else{
+			return {"check_character_state", target_character_type, character_team, state_check};
+		}
+	}
+
 	string GetDisplayString(){
 		string trigger_message = "";
 		if(target_character_type == check_id){
@@ -50,14 +58,6 @@ class DrikaCheckCharacterState : DrikaElement{
 		if(target_character_type == check_id && object_id != -1 && MovementObjectExists(object_id)){
 			MovementObject@ character = ReadCharacterID(object_id);
 			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-		}
-	}
-
-	string GetSaveString(){
-		if(target_character_type == check_id){
-			return "check_character_state" + param_delimiter + int(target_character_type) + param_delimiter + object_id + param_delimiter + state_check;
-		}else{
-			return "check_character_state" + param_delimiter + int(target_character_type) + param_delimiter + character_team + param_delimiter + state_check;
 		}
 	}
 
