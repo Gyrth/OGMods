@@ -1,4 +1,5 @@
 #include "hotspots/drika_element.as"
+#include "hotspots/drika_set_object_param.as"
 #include "hotspots/drika_wait.as"
 #include "hotspots/drika_wait_level_message.as"
 #include "hotspots/drika_set_enabled.as"
@@ -10,7 +11,6 @@
 #include "hotspots/drika_on_item_enter.as"
 #include "hotspots/drika_send_level_message.as"
 #include "hotspots/drika_start_dialogue.as"
-#include "hotspots/drika_set_object_param.as"
 #include "hotspots/drika_set_level_param.as"
 #include "hotspots/drika_set_camera_param.as"
 #include "hotspots/drika_create_object.as"
@@ -21,6 +21,7 @@
 #include "hotspots/drika_display_text.as"
 #include "hotspots/drika_display_image.as"
 #include "hotspots/drika_load_level.as"
+#include "hotspots/drika_set_velocity.as"
 #include "hotspots/drika_check_character_state.as"
 
 bool show_editor = false;
@@ -232,6 +233,8 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 		return DrikaLoadLevel(line_elements[1]);
 	}else if(line_elements[0] == "check_character_state"){
 		return DrikaCheckCharacterState(line_elements[1], line_elements[2], line_elements[3]);
+	}else if(line_elements[0] == "set_velocity"){
+		return DrikaSetVelocity(line_elements[1], line_elements[2], line_elements[3]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -458,6 +461,10 @@ void DrawEditor(){
 				}
 				if(ImGui_MenuItem("Check Character State")){
 					DrikaCheckCharacterState new_param();
+					InsertElement(@new_param);
+				}
+				if(ImGui_MenuItem("Set Velocity")){
+					DrikaSetVelocity new_param();
 					InsertElement(@new_param);
 				}
 				ImGui_EndMenu();
