@@ -92,7 +92,8 @@ class DrikaElement{
 	bool show_reference_option = false;
 	array<string> identifier_choices = {"ID", "Reference"};
 
-	string GetDisplayString(){return "";};
+	string GetDisplayString(){return "";}
+	string GetReference(){return "";}
 	void Update(){}
 	void PostInit(){}
 	bool Trigger(){return false;}
@@ -106,7 +107,7 @@ class DrikaElement{
 	void SetCurrent(bool _current){}
 	void ReceiveMessage(string message){}
 	void ReceiveMessage(string message, int param){}
-	void ReceiveMessage(string message, string param){}
+	void ReceiveMessage(string message, string param, int id_param){}
 	void SetIndex(int _index){
 		index = _index;
 	}

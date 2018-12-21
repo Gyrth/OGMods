@@ -92,21 +92,20 @@ string RegisterObject(int id, string reference){
 
 bool HasReferences(){
 	for(uint i = 0; i < drika_elements.size(); i++){
-		DrikaCreateObject @current_element = cast<DrikaCreateObject>(drika_elements[i]);
-	    if(current_element !is null && drika_elements[i].show_reference_option){
+	    if(drika_elements[i].GetReference() != ""){
 			return true;
 		}
 	}
 	return false;
 }
 
-
 array<string> GetReferences(){
 	array<string> reference_strings;
+	Log(info, "Getting references " + drika_elements.size());
 	for(uint i = 0; i < drika_elements.size(); i++){
-		DrikaCreateObject @current_element = cast<DrikaCreateObject>(drika_elements[i]);
-	    if(current_element !is null && drika_elements[i].show_reference_option){
-			reference_strings.insertLast(current_element.reference);
+	    if(drika_elements[i].GetReference() != ""){
+			Log(info, i + " ref " + drika_elements[i].GetReference());
+			reference_strings.insertLast(drika_elements[i].GetReference());
 		}
 	}
 	return reference_strings;
@@ -202,7 +201,7 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 	}else if(line_elements[0] == "go_to_line"){
 		return DrikaGoToLine(line_elements[1]);
 	}else if(line_elements[0] == "on_character_enter_exit"){
-		return DrikaOnCharacterEnterExit(line_elements[1], line_elements[2], line_elements[3]);
+		return DrikaOnCharacterEnterExit(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
 	}else if(line_elements[0] == "on_item_enter"){
 		return DrikaOnItemEnter(line_elements[1], line_elements[2]);
 	}else if(line_elements[0] == "send_level_message"){
@@ -234,7 +233,7 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 	}else if(line_elements[0] == "check_character_state"){
 		return DrikaCheckCharacterState(line_elements[1], line_elements[2], line_elements[3]);
 	}else if(line_elements[0] == "set_velocity"){
-		return DrikaSetVelocity(line_elements[1], line_elements[2], line_elements[3]);
+		return DrikaSetVelocity(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -662,7 +661,7 @@ void HandleEvent(string event, MovementObject @mo){
 			ScriptParams@ char_params = ReadObjectFromID(mo.GetID()).GetScriptParams();
 			if(char_params.HasParam("Teams")) {
 				string team = char_params.GetString("Teams");
-				GetCurrentElement().ReceiveMessage((event == "enter")?"CharacterEnter":"CharacterExit", team);
+				GetCurrentElement().ReceiveMessage((event == "enter")?"CharacterEnter":"CharacterExit", team, mo.GetID());
 			}
 		}
 	}
@@ -673,7 +672,7 @@ void HandleEventItem(string event, ItemObject @obj){
 	if(event == "enter"){
 		if(!script_finished && drika_indexes.size() > 0){
 			GetCurrentElement().ReceiveMessage("ItemEnter", obj.GetID());
-			GetCurrentElement().ReceiveMessage("ItemEnter", obj.GetLabel());
+			GetCurrentElement().ReceiveMessage("ItemEnter", obj.GetLabel(), obj.GetID());
 		}
 	}
 }

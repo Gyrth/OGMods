@@ -12,11 +12,12 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	array<string> character_trigger_choices = {"Check ID", "Check Team", "Any Character", "Any Player", "Any NPC"};
 	array<string> hotspot_trigger_choices = {"On Enter", "On Exit"};
 
-	DrikaOnCharacterEnterExit(string _target_character_type = "0", string _param = "-1", string _hotspot_trigger_type = "0"){
+	DrikaOnCharacterEnterExit(string _target_character_type = "0", string _param = "-1", string _hotspot_trigger_type = "0", string _reference_string = ""){
 		target_character_type = target_character_types(atoi(_target_character_type));
 		new_target_character_type = target_character_type;
 		hotspot_trigger_type = hotspot_trigger_types(atoi(_hotspot_trigger_type));
 		new_hotspot_trigger_type = hotspot_trigger_type;
+		reference_string = _reference_string;
 
 		drika_element_type = drika_on_character_enter_exit;
 		connection_types = {_movement_object};
@@ -29,13 +30,17 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		has_settings = true;
 	}
 
+	string GetReference(){
+		return reference_string;
+	}
+
 	array<string> GetSaveParameters(){
 		if(target_character_type == check_id){
-			return {"on_character_enter_exit", target_character_type, object_id, hotspot_trigger_type};
+			return {"on_character_enter_exit", target_character_type, object_id, hotspot_trigger_type, reference_string};
 		}else if(target_character_type == check_team){
-			return {"on_character_enter_exit", target_character_type, character_team, hotspot_trigger_type};
+			return {"on_character_enter_exit", target_character_type, character_team, hotspot_trigger_type, reference_string};
 		}else{
-			return {"on_character_enter_exit", target_character_type, "", hotspot_trigger_type};
+			return {"on_character_enter_exit", target_character_type, "", hotspot_trigger_type, reference_string};
 		}
 	}
 
@@ -67,6 +72,13 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		}else if(target_character_type == check_team){
 			ImGui_InputText("Team", character_team, 64);
 		}
+
+		ImGui_InputText("Set Reference", reference_string, 64);
+		if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("If a reference is set it can be used by other functions\nlike Set Object Param or Transform Object.");
+			ImGui_PopStyleColor();
+		}
 	}
 
 	void DrawEditing(){
@@ -87,12 +99,14 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 					target_character_type == any_npc && !character.controlled){
 					Log(info, "OnEnterExit triggered");
 					triggered = true;
+					//If the reference already exists then a new one is assigned by the hotspot.
+					reference_string = RegisterObject(param, reference_string);
 				}
 			}
 		}
 	}
 
-	void ReceiveMessage(string message, string param){
+	void ReceiveMessage(string message, string param, int id_param){
 		if((target_character_type == check_team && hotspot_trigger_type == on_enter && message == "CharacterEnter") ||
 			(target_character_type == check_team && hotspot_trigger_type == on_exit && message == "CharacterExit")){
 			//Removed all the spaces.
@@ -102,6 +116,8 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 			if(teams.find(character_team) != -1){
 				Log(info, "OnEnterExit triggered");
 				triggered = true;
+				//If the reference already exists then a new one is assigned by the hotspot.
+				reference_string = RegisterObject(id_param, reference_string);
 			}
 		}
 	}

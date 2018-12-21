@@ -2,24 +2,23 @@ class DrikaCreateObject : DrikaElement{
 	string object_path;
 	int spawned_object_id = -1;
 	Object@ spawned_object;
-	string reference;
 
-	DrikaCreateObject(string _placeholder_id = "-1", string _object_path = default_preview_mesh, string _reference = ""){
+	DrikaCreateObject(string _placeholder_id = "-1", string _object_path = default_preview_mesh, string _reference_string = ""){
 		placeholder_id = atoi(_placeholder_id);
 		placeholder_name = "Create Object Helper";
 		object_path = _object_path;
 		drika_element_type = drika_create_object;
-		reference = _reference;
+		reference_string = _reference_string;
 		default_placeholder_scale = vec3(1.0);
 		has_settings = true;
-
-		if(reference != ""){
-			show_reference_option = true;
-		}
 	}
 
 	void PostInit(){
 		RetrievePlaceholder();
+	}
+
+	string GetReference(){
+		return reference_string;
 	}
 
 	void Delete(){
@@ -27,7 +26,7 @@ class DrikaCreateObject : DrikaElement{
     }
 
 	array<string> GetSaveParameters(){
-		return {"create_object", placeholder_id, object_path, reference};
+		return {"create_object", placeholder_id, object_path, reference_string};
 	}
 
 	string GetDisplayString(){
@@ -44,14 +43,12 @@ class DrikaCreateObject : DrikaElement{
 				object_path = new_path;
 			}
 		}
-		ImGui_Checkbox("Set Reference", show_reference_option);
+
+		ImGui_InputText("Set Reference", reference_string, 64);
 		if(ImGui_IsItemHovered()){
 			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
 			ImGui_SetTooltip("If a reference is set it can be used by other functions\nlike Set Object Param or Transform Object.");
 			ImGui_PopStyleColor();
-		}
-		if(show_reference_option){
-			ImGui_InputText("Reference", reference, 64);
 		}
 	}
 
@@ -67,7 +64,7 @@ class DrikaCreateObject : DrikaElement{
 
 	void Reset(){
 		if(spawned_object_id != -1){
-			DeRegisterObject(reference);
+			DeRegisterObject(reference_string);
 			QueueDeleteObjectID(spawned_object_id);
 			spawned_object_id = -1;
 		}
@@ -78,7 +75,7 @@ class DrikaCreateObject : DrikaElement{
 			spawned_object_id = CreateObject(object_path);
 
 			//If the reference already exists then a new one is assigned by the hotspot.
-			reference = RegisterObject(spawned_object_id, reference);
+			reference_string = RegisterObject(spawned_object_id, reference_string);
 
 			@spawned_object = ReadObjectFromID(spawned_object_id);
 			spawned_object.SetSelectable(true);

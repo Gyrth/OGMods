@@ -46,7 +46,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="23.3849" t1="1.90602" t2="13.2076" s0="1" s1="1" s2="1" q0="0.253231" q1="0.157919" q2="-0.04194" q3="0.953508" euler_x="0.519172" euler_y="0.328259" euler_z="0" id="1">
+    <CameraObject t0="22.9901" t1="-1.48418" t2="12.1924" s0="1" s1="1" s2="1" q0="0.018885" q1="0.257046" q2="-0.00502416" q3="0.966202" euler_x="0.0390861" euler_y="0.52003" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -215,7 +215,7 @@
             <parameter name="4" type="string" val="create_particle|46|5|Data/Particles/blooddrop.xml|0|1,1,1|true|0|false" />
             <parameter name="5" type="string" val="play_sound|47|Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav" />
             <parameter name="6" type="string" val="go_to_line|0" />
-            <parameter name="7" type="string" val="on_character_enter_exit|0|-1|0" />
+            <parameter name="7" type="string" val="on_character_enter_exit|0|-1|0|" />
             <parameter name="8" type="string" val="send_level_message|level_message" />
             <parameter name="9" type="string" val="start_dialogue|drika_dialogue" />
         </parameters>
@@ -239,7 +239,7 @@
     </EnvObject>
     <Hotspot t0="13.8909" t1="-0.612318" t2="10.2304" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|2||0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|2||0|" />
             <parameter name="1" type="string" val="start_dialogue|CameraParams" />
             <parameter name="10" type="string" val="set_camera_param|2|120" />
             <parameter name="2" type="string" val="wait|1000" />
@@ -262,7 +262,7 @@
     </EnvObject>
     <Hotspot t0="26.0969" t1="-1.47566" t2="-13.9218" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0|" />
             <parameter name="1" type="string" val="set_camera_param|0|0.498055,0.263562,0.263562" />
             <parameter name="2" type="string" val="set_camera_param|1|0.146997,0.16413,0.284047" />
             <parameter name="3" type="string" val="set_camera_param|2|120" />
@@ -280,7 +280,7 @@
     </EnvObject>
     <Hotspot t0="25.9314" t1="-2.31318" t2="-5.44237" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="34" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0|" />
             <parameter name="1" type="string" val="send_level_message|set_to_guard" />
             <parameter name="10" type="string" val="create_particle|51|10|Data/Particles/metalspark.xml|5|1,0,0|false|0.5|false" />
             <parameter name="11" type="string" val="play_sound|49|Data/Sounds/explosives/explosion3.wav" />
@@ -301,7 +301,7 @@
     </EnvObject>
     <Hotspot t0="26.3" t1="-2.31318" t2="-9.6636" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0|" />
             <parameter name="1" type="string" val="set_color|0|3|1|0|1,0.455253,0.455253" />
             <parameter name="10" type="string" val="wait|1000" />
             <parameter name="11" type="string" val="go_to_line|1" />
@@ -319,7 +319,7 @@
     </Hotspot>
     <Hotspot t0="25.9878" t1="-2.32088" t2="-0.915076" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="37" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0|" />
             <parameter name="1" type="string" val="set_level_param|0|NEWACHIEVEMENT" />
             <parameter name="10" type="string" val="set_level_param|9|NO_OBJECIVE" />
             <parameter name="11" type="string" val="set_level_param|10|200" />
@@ -350,9 +350,9 @@
     </EnvObject>
     <Hotspot t0="14.5129" t1="-0.711907" t2="17.9259" s0="1.21949" s1="1" s2="1.26964" q0="-0.0107272" q1="0.00988086" q2="0.0075142" q3="0.999866" euler_x="-0.0213089" euler_y="0.0199216" euler_z="0.0148179" id="40" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|133|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|133|0|" />
             <parameter name="1" type="string" val="transform_object|147|0|41" />
-            <parameter name="2" type="string" val="on_character_enter_exit|0|133|1" />
+            <parameter name="2" type="string" val="on_character_enter_exit|0|133|1|" />
             <parameter name="3" type="string" val="transform_object|150|0|41" />
             <parameter name="4" type="string" val="go_to_line|0" />
         </parameters>
@@ -409,7 +409,7 @@
     </PlaceholderObject>
     <Hotspot t0="26.3395" t1="-2.31318" t2="-17.0909" s0="0.497162" s1="0.497162" s2="0.497162" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="54" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0|entered_character" />
             <parameter name="1" type="string" val="create_object|4|Data/Objects/primitives/edged_cone.xml|edged_cone" />
             <parameter name="10" type="string" val="set_enabled|0|19|true" />
             <parameter name="11" type="string" val="go_to_line|3" />
@@ -433,7 +433,7 @@
     </PlaceholderObject>
     <Hotspot t0="25.9627" t1="-1.6417" t2="2.36924" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="56" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0|" />
             <parameter name="1" type="string" val="play_music|Data/Music/lugaru.xml|lugaru_menu" />
             <parameter name="2" type="string" val="wait|5000" />
             <parameter name="3" type="string" val="play_music|Data/Music/therium.xml|therium_combat" />
@@ -642,7 +642,7 @@
     </Group>
     <Hotspot t0="5.77862" t1="-1.49125" t2="-23.1871" s0="1.76821" s1="0.435105" s2="1.41476" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="121" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|1|turner|0|" />
             <parameter name="1" type="string" val="transform_object|122|0|118" />
             <parameter name="10" type="string" val="set_character_param|0|133|17|33.1" />
             <parameter name="2" type="string" val="wait|1000" />
@@ -699,7 +699,7 @@
             <Connection id="151" />
         </Connections>
     </PathPointObject>
-    <EnvObject name="Set Velocity Helper" t0="26.2101" t1="-1.30257" t2="9.36387" s0="0.25" s1="0.25" s2="0.25" q0="-0.297038" q1="0.444554" q2="0.459697" q3="0.709099" euler_x="-0.0292678" euler_y="1.12801" euler_z="1.13183" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="-0.375923" q1="0.849467" q2="0.139781" q3="0.342855" euler_x="-3.11364" euler_y="0.758153" euler_z="-2.29719" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="12.82" t1="0.349311" t2="-27.3281" s0="0.683989" s1="0.319388" s2="0.348802" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="140" color_r="1" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -728,7 +728,7 @@
     </EnvObject>
     <Hotspot name="Buster&apos;s Hotspot" t0="26.1601" t1="-1.77817" t2="6.00436" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="148" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
+            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0|" />
             <parameter name="1" type="string" val="display_text|First thing when the level &#x0A;starts it plays my reset dialogue &#x0A;this sends a level message to a &#x0A;drika&apos;s hotspot that &#x0A;disables the doppleganger character &#x0A;and enables the normal &#x0A;character, it wiggles the  global &#x0A;lighting capture to make &#x0A;sure the lighting resets properly &#x0A;on restart. It sets the &#x0A;guard back to Team Turner (in case &#x0A;he was aggro) and makes &#x0A;him not afraid on sight anymore (in &#x0A;case he was) Then the &#x0A;guard patrols through 1 or 4 Drika&apos;s &#x0A;hot spot, each one &#x0A;translates a dialogue hotspot in &#x0A;and out of the level near &#x0A;the guard&apos;s patrol point as he &#x0A;stops there, each dialogue has &#x0A;a variety of options. Once the &#x0A;guard moves on the dialogue can&apos;t &#x0A;be triggered until the guard is &#x0A;standing in the drika&apos;s hotspot .&#x0A;Each dialogue hotspot has unique &#x0A;options, whenever you commit to a &#x0A;option, it disables the drika&apos;s &#x0A;hotspots by moving them under the &#x0A;level, using a send level command, &#x0A;this makes it so all the dialogue &#x0A;hotspots stay forever outside &#x0A;of bounds and can&apos;t be triggers anymore. &#x0A;But this only happens if you &#x0A;commit to a choice, if you hit enter &#x0A;to skip out of dialogue it won&apos;t do this.|20|Data/Fonts/Cella.ttf" />
             <parameter name="2" type="string" val="display_image|Data/Textures/Decals/rugs/thick_tan_rug_c.tga_converted.dds|1,1,1,1|1" />
             <parameter name="3" type="string" val="set_object_param|0|3|0|drika_param|drika_new_value" />
@@ -754,11 +754,12 @@
     </PathPointObject>
     <Hotspot t0="26.2278" t1="-1.90332" t2="9.38723" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="153" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|0|3|0" />
-            <parameter name="1" type="string" val="set_character_param|0|154|34|15.7" />
-            <parameter name="2" type="string" val="set_velocity|138|42|20" />
-            <parameter name="3" type="string" val="check_character_state|1|guard|1" />
-            <parameter name="4" type="string" val="display_image|Data/Textures/drika_hotspot.png|1,1,1,1|1" />
+            <parameter name="0" type="string" val="on_character_enter_exit|2||0|character_entered00" />
+            <parameter name="1" type="string" val="set_velocity|138|1|character_entered|15" />
+            <parameter name="2" type="string" val="display_text|Go Away!|100|Data/Fonts/edosz.ttf" />
+            <parameter name="3" type="string" val="wait|1000" />
+            <parameter name="4" type="string" val="display_text||1|Data/Fonts/Cella.ttf" />
+            <parameter name="5" type="string" val="go_to_line|0" />
         </parameters>
         <Connections />
         <ConnectionsFrom />

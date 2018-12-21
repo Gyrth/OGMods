@@ -2,13 +2,13 @@ class DrikaSetVelocity : DrikaElement{
 
 	float velocity_magnitude;
 
-	DrikaSetVelocity(string _placeholder_id = "-1", string _target_id = "-1", string _velocity_magnitude = "1"){
+	DrikaSetVelocity(string _placeholder_id = "-1", string _identifier_type = "0", string _identifier = "-1", string _velocity_magnitude = "1"){
 		placeholder_id = atoi(_placeholder_id);
 		connection_types = {_movement_object, _item_object};
-		object_id = atoi(_target_id);
 		placeholder_name = "Set Velocity Helper";
 		drika_element_type = drika_set_velocity;
 		velocity_magnitude = atof(_velocity_magnitude);
+		InterpIdentifier(_identifier_type, _identifier);
 		has_settings = true;
 	}
 
@@ -17,7 +17,13 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	array<string> GetSaveParameters(){
-		return {"set_velocity", placeholder_id, object_id, velocity_magnitude};
+		string save_identifier;
+		if(identifier_type == id){
+			save_identifier = "" + object_id;
+		}else if(identifier_type == reference){
+			save_identifier = "" + reference_string;
+		}
+		return {"set_velocity", placeholder_id, identifier_type, save_identifier, velocity_magnitude};
 	}
 
 	string GetDisplayString(){
@@ -25,12 +31,13 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	void DrawSettings(){
+		DrawSelectTargetUI();
 		ImGui_DragFloat("Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);
 	}
 
 	void DrawEditing(){
 		if(ObjectExists(placeholder_id)){
-			if(object_id != -1 && ObjectExists(object_id)){
+			if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
 				Object@ target_object = ReadObjectFromID(object_id);
 				DebugDrawLine(target_object.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
@@ -58,20 +65,21 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	void ApplyVelocity(){
-		if(ObjectExists(placeholder_id) && ObjectExists(object_id)){
-			Object@ target = ReadObjectFromID(object_id);
-			vec3 up_direction = placeholder.GetRotation() * vec3(0, 1, 0);
-			if(target.GetType() == _movement_object){
-				MovementObject@ char = ReadCharacterID(object_id);
-				char.velocity = up_direction * velocity_magnitude;
-				char.Execute("SetOnGround(false);");
-				char.Execute("pre_jump = false;");
-			}else if(target.GetType() == _item_object){
-				ItemObject@ io = ReadItemID(object_id);
-				io.ActivatePhysics();
-				io.SetLinearVelocity(up_direction * velocity_magnitude);
-				io.ActivatePhysics();
-			}
+		Object@ target_object = GetTargetObject();
+		if(target_object is null){
+			return;
+		}
+		vec3 up_direction = placeholder.GetRotation() * vec3(0, 1, 0);
+		if(target_object.GetType() == _movement_object){
+			MovementObject@ char = ReadCharacterID(target_object.GetID());
+			char.velocity = up_direction * velocity_magnitude;
+			char.Execute("SetOnGround(false);");
+			char.Execute("pre_jump = false;");
+		}else if(target_object.GetType() == _item_object){
+			ItemObject@ io = ReadItemID(target_object.GetID());
+			io.ActivatePhysics();
+			io.SetLinearVelocity(up_direction * velocity_magnitude);
+			io.ActivatePhysics();
 		}
 	}
 }
