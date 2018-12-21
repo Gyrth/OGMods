@@ -46,7 +46,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="22.9901" t1="-1.48418" t2="12.1924" s0="1" s1="1" s2="1" q0="0.018885" q1="0.257046" q2="-0.00502416" q3="0.966202" euler_x="0.0390861" euler_y="0.52003" euler_z="0" id="1">
+    <CameraObject t0="23.0991" t1="1.9007" t2="12.1519" s0="1" s1="1" s2="1" q0="0.317686" q1="0.305083" q2="-0.108757" q3="0.891163" euler_x="0.68488" euler_y="0.659673" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -754,9 +754,9 @@
     </PathPointObject>
     <Hotspot t0="26.2278" t1="-1.90332" t2="9.38723" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="153" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="0" type="string" val="on_character_enter_exit|2||0|character_entered00" />
+            <parameter name="0" type="string" val="on_character_enter_exit|2||0|character_entered" />
             <parameter name="1" type="string" val="set_velocity|138|1|character_entered|15" />
-            <parameter name="2" type="string" val="display_text|Go Away!|100|Data/Fonts/edosz.ttf" />
+            <parameter name="2" type="string" val="display_text|Go Away!|200|Data/Fonts/edosz.ttf" />
             <parameter name="3" type="string" val="wait|1000" />
             <parameter name="4" type="string" val="display_text||1|Data/Fonts/Cella.ttf" />
             <parameter name="5" type="string" val="go_to_line|0" />

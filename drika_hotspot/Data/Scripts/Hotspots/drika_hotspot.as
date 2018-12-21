@@ -76,18 +76,8 @@ void Init() {
 }
 
 string RegisterObject(int id, string reference){
-	if(object_references.exists(reference)){
-		Log(warning, "Object reference already exists! " + reference);
-		int i = 0;
-		while(object_references.exists(reference + i)){
-			i += 1;
-		}
-		object_references[reference + i] = id;
-		return (reference + i);
-	}else{
-		object_references[reference] = id;
-		return reference;
-	}
+	object_references[reference] = id;
+	return reference;
 }
 
 bool HasReferences(){
