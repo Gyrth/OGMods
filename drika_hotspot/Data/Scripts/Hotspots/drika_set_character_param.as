@@ -39,6 +39,7 @@ enum character_params { 	aggression = 0,
 
 class DrikaSetCharacterParam : DrikaElement{
 	int current_type;
+	bool delete_before = false;
 
 	string string_param_before;
 	string string_param_after;
@@ -156,6 +157,14 @@ class DrikaSetCharacterParam : DrikaElement{
 			return;
 		}
 		ScriptParams@ params = target_object.GetScriptParams();
+
+		if(!params.HasParam(param_name)){
+			delete_before = true;
+			return;
+		}else{
+			delete_before = false;
+		}
+
 		if(param_type == string_param){
 			if(!params.HasParam(param_name)){
 				params.AddString(param_name, string_param_after);
@@ -351,6 +360,11 @@ class DrikaSetCharacterParam : DrikaElement{
 			return false;
 		}
 		ScriptParams@ params = target_object.GetScriptParams();
+
+		if(reset && delete_before){
+			params.Remove(param_name);
+			return true;
+		}
 
 		if(!params.HasParam(param_name)){
 			if(param_type == string_param){
