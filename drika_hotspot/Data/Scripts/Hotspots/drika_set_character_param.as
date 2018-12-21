@@ -22,8 +22,20 @@ enum character_params { 	aggression = 0,
 							peripheral_fov_vertical = 21,
 							species = 22,
 							static_char = 23,
-							teams = 24
+							teams = 24,
+							fall_damage_mult = 25,
+							fear_afraid_at_health_level = 26,
+							fear_always_afraid_on_sight = 27,
+							fear_causes_fear_on_sight = 28,
+							fear_never_afraid_on_sight = 29,
+							no_look_around = 30,
+							stick_to_nav_mesh = 31,
+							throw_counter_probability = 32,
+							is_throw_trainer = 33,
+							weapon_catch_skill = 34,
+							wearing_metal_armor = 35
 					};
+
 
 class DrikaSetCharacterParam : DrikaElement{
 	int current_type;
@@ -45,9 +57,9 @@ class DrikaSetCharacterParam : DrikaElement{
 	string param_name;
 
 	array<int> string_parameters = {species, teams};
-	array<int> float_parameters = {aggression, attack_damage, attack_knockback, attack_speed, block_followup, block_skill, character_scale, damage_resistance, ear_size, fat, focus_fov_distance, focus_fov_horizontal, focus_fov_vertical, ground_aggression, movement_speed, muscle, peripheral_fov_distance, peripheral_fov_horizontal, peripheral_fov_vertical};
+	array<int> float_parameters = {aggression, attack_damage, attack_knockback, attack_speed, block_followup, block_skill, character_scale, damage_resistance, ear_size, fat, focus_fov_distance, focus_fov_horizontal, focus_fov_vertical, ground_aggression, movement_speed, muscle, peripheral_fov_distance, peripheral_fov_horizontal, peripheral_fov_vertical, fall_damage_mult, fear_afraid_at_health_level, throw_counter_probability, weapon_catch_skill};
 	array<int> int_parameters = {knocked_out_shield};
-	array<int> bool_parameters = {cannot_be_disarmed, left_handed, static_char};
+	array<int> bool_parameters = {cannot_be_disarmed, left_handed, static_char, fear_always_afraid_on_sight, fear_causes_fear_on_sight, fear_never_afraid_on_sight, no_look_around, stick_to_nav_mesh, is_throw_trainer, wearing_metal_armor};
 
 	array<string> param_names = {	"Aggression",
 	 								"Attack Damage",
@@ -73,7 +85,18 @@ class DrikaSetCharacterParam : DrikaElement{
 									"Peripheral FOV vertical",
 									"Species",
 									"Static",
-									"Teams"
+									"Teams",
+									"Fall Damage Multiplier",
+									"Fear - Afraid At Health Level",
+									"Fear - Always Afraid On Sight",
+									"Fear - Causes Fear On Sight",
+									"Fear - Never Afraid On Sight",
+									"No Look Around",
+									"Stick To Nav Mesh",
+									"Throw Counter Probability",
+									"Throw Trainer",
+									"Weapon Catch Skill",
+									"Wearing Metal Armor"
 								};
 
 	DrikaSetCharacterParam(string _identifier_type = "0", string _identifier = "-1", string _param_type = "0", string _param_after = "50.0"){
@@ -201,79 +224,112 @@ class DrikaSetCharacterParam : DrikaElement{
 
 		switch(character_param){
 			case aggression:
-				ImGui_SliderFloat("Aggression", float_param_after, 0.0, 100.0, "%.2f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
 				break;
 			case attack_damage:
-				ImGui_SliderFloat("Attack Damage", float_param_after, 0.0, 200.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case attack_knockback:
-				ImGui_SliderFloat("Attack Knockback", float_param_after, 0.0, 200.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case attack_speed:
-				ImGui_SliderFloat("Attack Speed", float_param_after, 0.0, 200.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case block_followup:
-				ImGui_SliderFloat("Block Follow-up", float_param_after, 0.0, 100.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case block_skill:
-				ImGui_SliderFloat("Block Skill", float_param_after, 0.0, 100.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case cannot_be_disarmed:
-				ImGui_Checkbox("Cannot Be Disarmed", bool_param_after);
+				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case character_scale:
-				ImGui_SliderFloat("Character Scale", float_param_after, 60, 140, "%.2f");
+				ImGui_SliderFloat(param_name, float_param_after, 60, 140, "%.2f");
 				break;
 			case damage_resistance:
-				ImGui_SliderFloat("Damage Resistance", float_param_after, 0.0, 200.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case ear_size:
-				ImGui_SliderFloat("Ear Size", float_param_after, 0.0, 300.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 300.0, "%.1f");
 				break;
 			case fat:
-				ImGui_SliderFloat("Fat", float_param_after, 0.0, 200.0, "%.3f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
 				break;
 			case focus_fov_distance:
-				ImGui_SliderFloat("Focus FOV distance", float_param_after, 0.0, 100.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case focus_fov_horizontal:
-				ImGui_SliderFloat("Focus FOV horizontal", float_param_after, 0.573, 90.0, "%.2f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case focus_fov_vertical:
-				ImGui_SliderFloat("Focus FOV vertical", float_param_after, 0.573, 90.0, "%.2f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case ground_aggression:
-				ImGui_SliderFloat("Ground Aggression", float_param_after, 0.0, 100.0, "%.2f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
 				break;
 			case knocked_out_shield:
-				ImGui_SliderInt("Knockout Shield", int_param_after, 0, 10);
+				ImGui_SliderInt(param_name, int_param_after, 0, 10);
 				break;
 			case left_handed:
-				ImGui_Checkbox("Left handed", bool_param_after);
+				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case movement_speed:
-				ImGui_SliderFloat("Movement Speed", float_param_after, 10.0, 150.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 10.0, 150.0, "%.1f");
 				break;
 			case muscle:
-				ImGui_SliderFloat("Muscle", float_param_after, 0.0, 200.0, "%.3f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
 				break;
 			case peripheral_fov_distance:
-				ImGui_SliderFloat("Peripheral FOV distance", float_param_after, 0.0, 100.0, "%.1f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case peripheral_fov_horizontal:
-				ImGui_SliderFloat("Peripheral FOV horizontal", float_param_after, 0.573, 90.0, "%.2f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case peripheral_fov_vertical:
-				ImGui_SliderFloat("Peripheral FOV vertical", float_param_after, 0.573, 90.0, "%.2f");
+				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case species:
-				ImGui_InputText("Species", string_param_after, 64);
+				ImGui_InputText(param_name, string_param_after, 64);
 				break;
 			case static_char:
-				ImGui_Checkbox("Static", bool_param_after);
+				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case teams:
-				ImGui_InputText("Teams", string_param_after, 64);
+				ImGui_InputText(param_name, string_param_after, 64);
+				break;
+			case fall_damage_mult:
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 10.0, "%.1f");
+				break;
+			case fear_afraid_at_health_level:
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
+				break;
+			case fear_always_afraid_on_sight:
+				ImGui_Checkbox(param_name, bool_param_after);
+				break;
+			case fear_causes_fear_on_sight:
+				ImGui_Checkbox(param_name, bool_param_after);
+				break;
+			case fear_never_afraid_on_sight:
+				ImGui_Checkbox(param_name, bool_param_after);
+				break;
+			case no_look_around:
+				ImGui_Checkbox(param_name, bool_param_after);
+				break;
+			case stick_to_nav_mesh:
+				ImGui_Checkbox(param_name, bool_param_after);
+				break;
+			case throw_counter_probability:
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
+				break;
+			case is_throw_trainer:
+				ImGui_Checkbox(param_name, bool_param_after);
+				break;
+			case weapon_catch_skill:
+				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
+				break;
+			case wearing_metal_armor:
+				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			default:
 				Log(warning, "Found a non standard parameter type. " + param_type);
@@ -309,79 +365,112 @@ class DrikaSetCharacterParam : DrikaElement{
 		}else{
 			switch(character_param){
 				case aggression:
-					params.SetFloat("Aggression", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case attack_damage:
-					params.SetFloat("Attack Damage", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case attack_knockback:
-					params.SetFloat("Attack Knockback", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case attack_speed:
-					params.SetFloat("Attack Speed", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case block_followup:
-					params.SetFloat("Block Follow-up", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case block_skill:
-					params.SetFloat("Block Skill", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case cannot_be_disarmed:
-					params.SetInt("Cannot Be Disarmed", (reset?bool_param_before:bool_param_after)?1:0);
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
 					break;
 				case character_scale:
-					params.SetFloat("Character Scale", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case damage_resistance:
-					params.SetFloat("Damage Resistance", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case ear_size:
-					params.SetFloat("Ear Size", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case fat:
-					params.SetFloat("Fat", reset?float_param_before:float_param_after / 200.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 200.0);
 					break;
 				case focus_fov_distance:
-					params.SetFloat("Focus FOV distance", reset?float_param_before:float_param_after);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after);
 					break;
 				case focus_fov_horizontal:
-					params.SetFloat("Focus FOV horizontal", reset?float_param_before:float_param_after / 57.2957);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 57.2957);
 					break;
 				case focus_fov_vertical:
-					params.SetFloat("Focus FOV vertical", reset?float_param_before:float_param_after / 57.2957);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 57.2957);
 					break;
 				case ground_aggression:
-					params.SetFloat("Ground Aggression", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case knocked_out_shield:
-					params.SetInt("Ground Aggression", reset?int_param_before:int_param_after);
+					params.SetInt(param_name, reset?int_param_before:int_param_after);
 					break;
 				case left_handed:
-					params.SetInt("Left handed", (reset?bool_param_before:bool_param_after)?1:0);
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
 					break;
 				case movement_speed:
-					params.SetFloat("Movement Speed", reset?float_param_before:float_param_after / 100.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
 					break;
 				case muscle:
-					params.SetFloat("Muscle", reset?float_param_before:float_param_after / 200.0);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 200.0);
 					break;
 				case peripheral_fov_distance:
-					params.SetFloat("Peripheral FOV distance", reset?float_param_before:float_param_after);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after);
 					break;
 				case peripheral_fov_horizontal:
-					params.SetFloat("Peripheral FOV horizontal", reset?float_param_before:float_param_after / 57.2957);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 57.2957);
 					break;
 				case peripheral_fov_vertical:
-					params.SetFloat("Peripheral FOV vertical", reset?float_param_before:float_param_after / 57.2957);
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 57.2957);
 					break;
 				case species:
-					params.SetString("Species", reset?string_param_before:string_param_after);
+					params.SetString(param_name, reset?string_param_before:string_param_after);
 					break;
 				case static_char:
-					params.SetInt("Static", (reset?bool_param_before:bool_param_after)?1:0);
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
 					break;
 				case teams:
-					params.SetString("Teams", reset?string_param_before:string_param_after);
+					params.SetString(param_name, reset?string_param_before:string_param_after);
+					break;
+				case fall_damage_mult:
+					params.SetFloat(param_name, reset?float_param_before:float_param_after);
+					break;
+				case fear_afraid_at_health_level:
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
+					break;
+				case fear_always_afraid_on_sight:
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
+					break;
+				case fear_causes_fear_on_sight:
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
+					break;
+				case fear_never_afraid_on_sight:
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
+					break;
+				case no_look_around:
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
+					break;
+				case stick_to_nav_mesh:
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
+					break;
+				case throw_counter_probability:
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
+					break;
+				case is_throw_trainer:
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
+					break;
+				case weapon_catch_skill:
+					params.SetFloat(param_name, reset?float_param_before:float_param_after / 100.0);
+					break;
+				case wearing_metal_armor:
+					params.SetInt(param_name, (reset?bool_param_before:bool_param_after)?1:0);
 					break;
 				default:
 					Log(warning, "Found a non standard parameter type. " + param_type);
