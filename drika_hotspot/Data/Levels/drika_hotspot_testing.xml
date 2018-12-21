@@ -46,13 +46,13 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="12.972" t1="5.51796" t2="-8.80308" s0="1" s1="1" s2="1" q0="0.037671" q1="-0.961549" q2="0.171595" q3="0.211092" euler_x="-2.7884" euler_y="-0.432211" euler_z="-3.14159" id="1">
+    <CameraObject t0="7.72583" t1="4.11757" t2="-31.3417" s0="1" s1="1" s2="1" q0="0.118775" q1="0.674683" q2="-0.111309" q3="0.719934" euler_x="0.327014" euler_y="1.50593" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="10.0975" t1="-0.621201" t2="-12.7138" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <ActorObject t0="18.7444" t1="-0.621202" t2="3.42447" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -79,6 +79,7 @@
             <parameter name="Species" type="string" val="rabbit" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Teams" type="string" val="turner" />
+            <parameter name="drika_param" type="string" val="" />
         </parameters>
         <Connections>
             <Connection id="3" />
@@ -451,6 +452,9 @@
             <parameter name="Muscle" type="float" val="200.421" />
         </parameters>
     </EnvObject>
+    <EnvObject t0="26.2516" t1="-2.74726" t2="9.46973" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="84" color_r="0.63636" color_g="0.487013" color_b="0.713725" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
     <Group t0="0.491961" t1="-8.35209" t2="-31.4474" s0="16.4361" s1="0.47295" s2="5.17684" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="118" version="1">
         <parameters />
         <Group t0="-6.45789" t1="-8.52934" t2="-31.4474" s0="2.52638" s1="0.462948" s2="4.61696" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="71" version="1">
@@ -675,73 +679,6 @@
     <EnvObject name="Transform Object Helper" t0="3.61545" t1="-11.4075" t2="-25.4229" s0="32.9488" s1="4.9195" s2="0.697604" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="132" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="22.4528" t1="-0.748265" t2="12.6731" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="133" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="0">
-        <parameters>
-            <parameter name="Aggression" type="float" val="0.5" />
-            <parameter name="Attack Damage" type="float" val="1" />
-            <parameter name="Attack Knockback" type="float" val="1" />
-            <parameter name="Attack Speed" type="float" val="1" />
-            <parameter name="Block Follow-up" type="float" val="0.5" />
-            <parameter name="Block Skill" type="float" val="0.5" />
-            <parameter name="Cannot Be Disarmed" type="int" val="0" />
-            <parameter name="Character Scale" type="float" val="1" />
-            <parameter name="Damage Resistance" type="float" val="1" />
-            <parameter name="Ear Size" type="float" val="1" />
-            <parameter name="Fat" type="float" val="0.5" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
-            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
-            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
-            <parameter name="Ground Aggression" type="float" val="0.5" />
-            <parameter name="Knockout Shield" type="int" val="0" />
-            <parameter name="Left handed" type="int" val="0" />
-            <parameter name="Movement Speed" type="float" val="1" />
-            <parameter name="Muscle" type="float" val="0.322035" />
-            <parameter name="Peripheral FOV distance" type="float" val="4" />
-            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
-            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
-            <parameter name="Species" type="string" val="rabbit" />
-            <parameter name="Static" type="int" val="0" />
-            <parameter name="Teams" type="string" val="turner" />
-        </parameters>
-        <Connections>
-            <Connection id="151" />
-        </Connections>
-        <ItemConnections />
-        <Palette>
-            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
-            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
-            <Color label="Fur" channel="2" red="0.67451" green="0.486275" blue="0.243137" />
-        </Palette>
-        <EnvObjectAttachments>
-            <EnvObjectAttachment>
-                <BoneConnect bone_id="31" num_connections="1" m0="0.327843" m1="0.943578" m2="-0.0466895" m3="0" m4="-0.134845" m5="-0.00217803" m6="-0.990864" m7="0" m8="-0.935059" m9="0.331143" m10="0.126523" m11="0" m12="-0.0251851" m13="1.49372" m14="-0.617447" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-            </EnvObjectAttachment>
-            <EnvObjectAttachment>
-                <BoneConnect bone_id="31" num_connections="1" m0="-0.843851" m1="-0.00742338" m2="-0.536527" m3="0" m4="-0.0111863" m5="0.999931" m6="0.00375873" m7="0" m8="0.536462" m9="0.0091735" m10="-0.843875" m11="0" m12="-1.00064" m13="0.714247" m14="0.226541" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-            </EnvObjectAttachment>
-            <EnvObjectAttachment>
-                <BoneConnect bone_id="31" num_connections="1" m0="-0.00729665" m1="-0.121821" m2="0.992522" m3="0" m4="-0.0808789" m5="0.989372" m6="0.120839" m7="0" m8="-0.996694" m9="-0.0793924" m10="-0.0170719" m11="0" m12="0.00835264" m13="0.604086" m14="0.283655" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-            </EnvObjectAttachment>
-        </EnvObjectAttachments>
-        <EnvObject s0="0.30908" s1="0.30908" s2="0.30908" id="135" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-            <parameters />
-        </EnvObject>
-        <EnvObject s0="0.375262" s1="0.375262" s2="0.375262" id="136" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-            <parameters />
-        </EnvObject>
-        <EnvObject s0="0.190557" s1="0.190557" s2="0.190557" id="137" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-            <parameters />
-        </EnvObject>
-    </ActorObject>
     <PathPointObject t0="9.22505" t1="-2.42134" t2="17.9797" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="134" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
@@ -782,7 +719,6 @@
             <parameter name="2" type="string" val="display_image|Data/Textures/Decals/rugs/thick_tan_rug_c.tga_converted.dds|1,1,1,1|1" />
             <parameter name="3" type="string" val="set_object_param|0|3|0|drika_param|drika_new_value" />
             <parameter name="4" type="string" val="wait|1000" />
-            <parameter name="5" type="string" val="load_level|Data/Levels/nothing.xml" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -802,25 +738,48 @@
             <Connection id="134" />
         </Connections>
     </PathPointObject>
-    <Group t0="26.3015" t1="-0.860198" t2="8.68376" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="153" version="1">
-        <parameters />
-        <Hotspot t0="26.3062" t1="-0.853688" t2="8.69966" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" euler_x="0" euler_y="0" euler_z="-3.1405" id="154" type_file="Data/Objects/Hotspots/fire_test.xml">
-            <parameters>
-                <parameter name="Fire Ribbons" type="int" val="4" />
-                <parameter name="Ignite Characters" type="int" val="1" />
-                <parameter name="Light Amplify" type="float" val="1" />
-                <parameter name="Light Distance" type="float" val="2" />
-            </parameters>
-            <Connections />
-            <ConnectionsFrom />
-        </Hotspot>
-        <EnvObject t0="26.2916" t1="-0.929038" t2="8.66059" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="155" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
-            <parameters />
-        </EnvObject>
-        <Decal t0="26.3087" t1="-0.906128" t2="8.65858" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="156" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
-            <parameters />
-        </Decal>
-    </Group>
+    <Hotspot t0="26.2278" t1="-1.90332" t2="9.38723" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="153" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="0" type="string" val="check_character_state|1|guard|1" />
+            <parameter name="1" type="string" val="display_image|Data/Textures/drika_hotspot.png|1,1,1,1|1" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
+    <ActorObject t0="8.23402" t1="-2.19389" t2="-40.5255" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="154" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="guard, someother,nothing" />
+        </parameters>
+        <Connections>
+            <Connection id="154" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="drika_hotspot.xml" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="empty_placeholder.png" />
@@ -831,10 +790,10 @@
     <SpawnerItem display_name="Dog Spear" path="Data/Objects/Weapons/DogWeapons/DogSpear.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/DogSpear.png" />
     <SpawnerItem display_name="Dog Knife" path="Data/Objects/Weapons/DogWeapons/DogKnife.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/DogKnife.png" />
     <SpawnerItem display_name="Hammer" path="Data/Items/gear/dogtools/dogtoolhammer.xml" thumbnail_path="" />
-    <SpawnerItem display_name="Male Rabbit Guard Brown" path="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_GuardActor_reddy.png" />
     <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
     <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
     <SpawnerItem display_name="Spike" path="Data/Objects/Hotspots/spike.xml" thumbnail_path="Data/UI/spawner/thumbs/Interactive Objects/spike_2.png" />
     <SpawnerItem display_name="Path Point" path="Data/Objects/pathpoint/pathpoint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/pathpoint.png" />
     <SpawnerItem display_name="Fire" path="Data/Objects/fire.xml" thumbnail_path="" />
+    <SpawnerItem display_name="Male Rabbit Guard Brown" path="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_GuardActor_reddy.png" />
 </RecentItems>

@@ -20,7 +20,8 @@ enum drika_element_types { 	none = 0,
 							drika_set_character_param = 19,
 							drika_display_text = 20,
 							drika_display_image = 21,
-							drika_load_level = 22
+							drika_load_level = 22,
+							drika_check_character_state = 23
 						};
 
 array<vec4> display_colors = {	vec4(255),
@@ -45,6 +46,7 @@ array<vec4> display_colors = {	vec4(255),
 								vec4(40, 93, 96, 255),
 								vec4(40, 93, 96, 255),
 								vec4(40, 93, 96, 255),
+								vec4(40, 93, 96, 255),
 								vec4(40, 93, 96, 255)
 							};
 
@@ -60,6 +62,13 @@ enum param_types { 	string_param = 0,
 					float_array_param = 5,
 					bool_param = 6
 				};
+
+enum target_character_types {	check_id = 0,
+								check_team = 1,
+								any_character = 2,
+								any_player = 3,
+								any_npc = 4
+							};
 
 class DrikaElement{
 	drika_element_types drika_element_type = none;

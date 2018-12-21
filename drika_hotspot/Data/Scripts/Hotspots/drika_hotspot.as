@@ -21,6 +21,7 @@
 #include "hotspots/drika_display_text.as"
 #include "hotspots/drika_display_image.as"
 #include "hotspots/drika_load_level.as"
+#include "hotspots/drika_check_character_state.as"
 
 bool show_editor = false;
 bool has_closed = true;
@@ -229,6 +230,8 @@ DrikaElement@ InterpElement(array<string> &in line_elements){
 		return DrikaDisplayImage(line_elements[1], line_elements[2], line_elements[3]);
 	}else if(line_elements[0] == "load_level"){
 		return DrikaLoadLevel(line_elements[1]);
+	}else if(line_elements[0] == "check_character_state"){
+		return DrikaCheckCharacterState(line_elements[1], line_elements[2], line_elements[3]);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + line_elements[0]);
@@ -451,6 +454,10 @@ void DrawEditor(){
 				}
 				if(ImGui_MenuItem("Load Level")){
 					DrikaLoadLevel new_param();
+					InsertElement(@new_param);
+				}
+				if(ImGui_MenuItem("Check Character State")){
+					DrikaCheckCharacterState new_param();
 					InsertElement(@new_param);
 				}
 				ImGui_EndMenu();
