@@ -27,7 +27,13 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetVelocity " + velocity_magnitude;
+		string display_identifier;
+		if(identifier_type == id){
+			display_identifier = "" + object_id;
+		}else if(identifier_type == reference){
+			display_identifier = "" + reference_string;
+		}
+		return "SetVelocity " + "vel:" + velocity_magnitude + " target:" + display_identifier;
 	}
 
 	void StartSettings(){
