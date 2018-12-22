@@ -38,6 +38,7 @@ class DrikaCreateParticle : DrikaElement{
 	string GetDisplayString(){
 		return "CreateParticle " + particle_path;
 	}
+	
 	void DrawSettings(){
 		ImGui_Text("Particle Path : ");
 		ImGui_SameLine();

@@ -64,7 +64,6 @@ class DrikaCreateObject : DrikaElement{
 
 	void Reset(){
 		if(spawned_object_id != -1){
-			DeRegisterObject(reference_string);
 			QueueDeleteObjectID(spawned_object_id);
 			spawned_object_id = -1;
 		}
