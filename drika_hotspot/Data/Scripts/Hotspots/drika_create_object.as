@@ -1,7 +1,6 @@
 class DrikaCreateObject : DrikaElement{
 	string object_path;
-	int spawned_object_id = -1;
-	Object@ spawned_object;
+	array<int> spawned_object_ids;
 
 	DrikaCreateObject(string _placeholder_id = "-1", string _object_path = default_preview_mesh, string _reference_string = ""){
 		placeholder_id = atoi(_placeholder_id);
@@ -21,16 +20,12 @@ class DrikaCreateObject : DrikaElement{
 		return reference_string;
 	}
 
-	void Delete(){
-		QueueDeleteObjectID(placeholder_id);
-    }
-
 	array<string> GetSaveParameters(){
 		return {"create_object", placeholder_id, object_path, reference_string};
 	}
 
 	string GetDisplayString(){
-		return "CreateObject " + object_path;
+		return "CreateObject " + object_path + " " + reference_string;
 	}
 
 	void DrawSettings(){
@@ -57,20 +52,24 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void Reset(){
-		if(spawned_object_id != -1){
-			QueueDeleteObjectID(spawned_object_id);
-			spawned_object_id = -1;
+		if(triggered){
+			for(uint i = 0; i < spawned_object_ids.size(); i++){
+				QueueDeleteObjectID(spawned_object_ids[i]);
+			}
+			spawned_object_ids.resize(0);
+			triggered = false;
 		}
 	}
 
 	bool Trigger(){
+		triggered = true;
 		if(ObjectExists(placeholder_id)){
-			spawned_object_id = CreateObject(object_path);
+			int spawned_object_id = CreateObject(object_path);
+			spawned_object_ids.insertLast(spawned_object_id);
 
-			//If the reference already exists then a new one is assigned by the hotspot.
-			reference_string = RegisterObject(spawned_object_id, reference_string);
+			RegisterObject(spawned_object_id, reference_string);
 
-			@spawned_object = ReadObjectFromID(spawned_object_id);
+			Object@ spawned_object = ReadObjectFromID(spawned_object_id);
 			spawned_object.SetSelectable(true);
 			spawned_object.SetTranslatable(true);
 			spawned_object.SetScalable(true);
