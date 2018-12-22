@@ -73,6 +73,10 @@ class DrikaSetColor : DrikaElement{
 		GetNumPaletteColors();
 	}
 
+	void StartSettings(){
+		CheckReferenceOptionAvailable();
+	}
+
 	void DrawSettings(){
 		DrawSelectTargetUI();
 		if(ImGui_Combo("Color Type", current_color_type, color_type_choices, color_type_choices.size())){

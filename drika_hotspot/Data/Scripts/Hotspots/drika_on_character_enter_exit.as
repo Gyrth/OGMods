@@ -72,7 +72,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		}else if(target_character_type == check_team){
 			ImGui_InputText("Team", character_team, 64);
 		}
-		DrawSelectTargetUI();
+		DrawSetReferenceUI();
 	}
 
 	void DrawEditing(){

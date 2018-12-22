@@ -34,6 +34,10 @@ class DrikaSetEnabled : DrikaElement{
 		return "SetEnabled " + display_string + " " + enabled;
 	}
 
+	void StartSettings(){
+		CheckReferenceOptionAvailable();
+	}
+
 	void DrawSettings(){
 		DrawSelectTargetUI();
 		ImGui_Text("Set To : ");

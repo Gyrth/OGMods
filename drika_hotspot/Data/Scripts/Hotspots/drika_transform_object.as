@@ -67,6 +67,10 @@ class DrikaTransformObject : DrikaElement{
 		}
 		placeholder.SetScale(bounds * target_object.GetScale());
 	}
+	
+	void StartSettings(){
+		CheckReferenceOptionAvailable();
+	}
 
 	void DrawSettings(){
 		DrawSelectTargetUI();

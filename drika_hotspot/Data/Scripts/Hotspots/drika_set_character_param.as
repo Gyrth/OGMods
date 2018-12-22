@@ -222,6 +222,10 @@ class DrikaSetCharacterParam : DrikaElement{
 		return "SetCharacterParam " + object_id + " " + param_name + " " + display_string;
 	}
 
+	void StartSettings(){
+		CheckReferenceOptionAvailable();
+	}
+
 	void DrawSettings(){
 		DrawSelectTargetUI();
 

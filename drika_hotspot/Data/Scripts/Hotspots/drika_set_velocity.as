@@ -30,6 +30,10 @@ class DrikaSetVelocity : DrikaElement{
 		return "SetVelocity " + velocity_magnitude;
 	}
 
+	void StartSettings(){
+		CheckReferenceOptionAvailable();
+	}
+
 	void DrawSettings(){
 		DrawSelectTargetUI();
 		ImGui_DragFloat("Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);

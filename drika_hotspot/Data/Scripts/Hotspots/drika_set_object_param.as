@@ -98,6 +98,10 @@ class DrikaSetObjectParam : DrikaElement{
 		}
 		return "SetObjectParam " + display_identifier + " " + param_name + " " + display_string;
 	}
+	
+	void StartSettings(){
+		CheckReferenceOptionAvailable();
+	}
 
 	void DrawSettings(){
 		DrawSelectTargetUI();

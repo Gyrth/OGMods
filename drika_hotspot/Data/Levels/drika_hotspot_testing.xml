@@ -46,7 +46,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="23.0991" t1="1.9007" t2="12.1519" s0="1" s1="1" s2="1" q0="0.317686" q1="0.305083" q2="-0.108757" q3="0.891163" euler_x="0.68488" euler_y="0.659673" euler_z="0" id="1">
+    <CameraObject t0="23.2154" t1="2.61813" t2="16.5114" s0="1" s1="1" s2="1" q0="0.183025" q1="0.309658" q2="-0.0608704" q3="0.931079" euler_x="0.388196" euler_y="0.642145" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -362,9 +362,9 @@
     <EnvObject t0="14.0159" t1="-2.74726" t2="18.5145" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
-    <ItemObject t0="28.5017" t1="-1.83141" t2="9.81052" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.706683" q3="0.70753" euler_x="0" euler_y="0" euler_z="1.5696" id="42" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <EnvObject name="Create Object Helper" t0="28.5789" t1="-1.90332" t2="7.99406" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="1.5708" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
-    </ItemObject>
+    </EnvObject>
     <EnvObject t0="14.3257" t1="-0.940252" t2="19.1556" s0="0.25" s1="0.25" s2="0.25" q0="0.671292" q1="0.511547" q2="0.515335" q3="-0.148744" euler_x="2.48457" euler_y="-1.00481" euler_z="1.6726" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -702,6 +702,9 @@
     <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="-0.375923" q1="0.849467" q2="0.139781" q3="0.342855" euler_x="-3.11364" euler_y="0.758153" euler_z="-2.29719" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <EnvObject name="Create Object Helper" t0="28.917" t1="-1.90332" t2="9.24934" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="1.5708" id="139" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject t0="12.82" t1="0.349311" t2="-27.3281" s0="0.683989" s1="0.319388" s2="0.348802" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="140" color_r="1" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
@@ -752,14 +755,22 @@
             <Connection id="134" />
         </Connections>
     </PathPointObject>
+    <EnvObject name="Create Object Helper" t0="29.1405" t1="-1.90332" t2="11.0215" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="1.5708" id="152" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <Hotspot t0="26.2278" t1="-1.90332" t2="9.38723" s0="0.497162" s1="0.497162" s2="0.497162" q0="0.0185591" q1="0.0300961" q2="-0.00741978" q3="0.999347" euler_x="0.0367227" euler_y="0.0604651" euler_z="-0.0137383" id="153" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="0" type="string" val="on_character_enter_exit|2||0|character_entered" />
-            <parameter name="1" type="string" val="set_velocity|138|1|character_entered|15" />
-            <parameter name="2" type="string" val="display_text|Go Away!|200|Data/Fonts/edosz.ttf" />
-            <parameter name="3" type="string" val="wait|1000" />
-            <parameter name="4" type="string" val="display_text||1|Data/Fonts/Cella.ttf" />
-            <parameter name="5" type="string" val="go_to_line|0" />
+            <parameter name="1" type="string" val="create_object|42|Data/Items/DogWeapons/DogSpear.xml|spear" />
+            <parameter name="10" type="string" val="go_to_line|0" />
+            <parameter name="2" type="string" val="create_object|139|Data/Items/DogWeapons/DogSpear.xml|spear2" />
+            <parameter name="3" type="string" val="create_object|152|Data/Items/DogWeapons/DogSpear.xml|spear3" />
+            <parameter name="4" type="string" val="set_velocity|138|1|spear|15" />
+            <parameter name="5" type="string" val="set_velocity|155|1|spear2|15" />
+            <parameter name="6" type="string" val="set_velocity|156|1|spear3|15" />
+            <parameter name="7" type="string" val="display_text|Go Away!|200|Data/Fonts/edosz.ttf" />
+            <parameter name="8" type="string" val="wait|1000" />
+            <parameter name="9" type="string" val="display_text||1|Data/Fonts/Cella.ttf" />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -809,6 +820,12 @@
         <ItemConnections />
         <Palette />
     </ActorObject>
+    <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="-0.375923" q1="0.849467" q2="0.139781" q3="0.342855" euler_x="-3.11364" euler_y="0.758153" euler_z="-2.29719" id="155" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="-0.375923" q1="0.849467" q2="0.139781" q3="0.342855" euler_x="-3.11364" euler_y="0.758153" euler_z="-2.29719" id="156" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="drika_hotspot.xml" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="empty_placeholder.png" />

@@ -671,7 +671,7 @@ void Reset(){
 	//If the user is editing the script then stay with the current line to edit.
 	current_line = 0;
 	display_index = drika_indexes[current_line];
-	object_references.resize(0);
+	object_references.deleteAll();
 
 	script_finished = false;
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){

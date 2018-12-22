@@ -101,6 +101,7 @@ class DrikaElement{
 	void Delete(){}
 	void DrawSettings(){}
 	void ApplySettings(){}
+	void StartSettings(){}
 	void ConnectedChanged(){}
 	void DrawEditing(){}
 	void TargetChanged(){}
@@ -245,7 +246,7 @@ class DrikaElement{
 		}
 	}
 
-	void StartSettings(){
+	void CheckReferenceOptionAvailable(){
 		if(HasReferences()){
 			show_reference_option = true;
 			available_references = GetReferences();
@@ -288,7 +289,7 @@ class DrikaElement{
 		}
 	}
 
-	void DrawSelectTargetUI(){
+	void DrawSetReferenceUI(){
 		ImGui_InputText("Set Reference", reference_string, 64);
 		if(ImGui_IsItemHovered()){
 			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
