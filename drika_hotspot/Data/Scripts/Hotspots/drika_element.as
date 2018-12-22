@@ -288,6 +288,15 @@ class DrikaElement{
 		}
 	}
 
+	void DrawSelectTargetUI(){
+		ImGui_InputText("Set Reference", reference_string, 64);
+		if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("If a reference is set it can be used by other functions\nlike Set Object Param or Transform Object.");
+			ImGui_PopStyleColor();
+		}
+	}
+
 	Object@ GetTargetObject(){
 		Object@ target_object;
 		if(identifier_type == id){

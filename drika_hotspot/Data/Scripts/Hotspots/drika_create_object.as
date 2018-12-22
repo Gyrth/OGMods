@@ -43,13 +43,7 @@ class DrikaCreateObject : DrikaElement{
 				object_path = new_path;
 			}
 		}
-
-		ImGui_InputText("Set Reference", reference_string, 64);
-		if(ImGui_IsItemHovered()){
-			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
-			ImGui_SetTooltip("If a reference is set it can be used by other functions\nlike Set Object Param or Transform Object.");
-			ImGui_PopStyleColor();
-		}
+		DrawSetReferenceUI();
 	}
 
 	void DrawEditing(){

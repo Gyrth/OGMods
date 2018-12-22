@@ -72,13 +72,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		}else if(target_character_type == check_team){
 			ImGui_InputText("Team", character_team, 64);
 		}
-
-		ImGui_InputText("Set Reference", reference_string, 64);
-		if(ImGui_IsItemHovered()){
-			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
-			ImGui_SetTooltip("If a reference is set it can be used by other functions\nlike Set Object Param or Transform Object.");
-			ImGui_PopStyleColor();
-		}
+		DrawSelectTargetUI();
 	}
 
 	void DrawEditing(){
