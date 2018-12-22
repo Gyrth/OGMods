@@ -18,7 +18,7 @@ class DrikaLoadLevel : DrikaElement{
 	void DrawSettings(){
 		ImGui_Text("Level Path : " + level_path);
 		ImGui_SameLine();
-		if(ImGui_Button("Set Sound Path")){
+		if(ImGui_Button("Set Level Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Levels");
 			if(new_path != ""){
 				level_path = new_path;
