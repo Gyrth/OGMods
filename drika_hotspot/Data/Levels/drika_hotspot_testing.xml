@@ -46,7 +46,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <CameraObject t0="23.2154" t1="2.61813" t2="16.5114" s0="1" s1="1" s2="1" q0="0.183025" q1="0.309658" q2="-0.0608704" q3="0.931079" euler_x="0.388196" euler_y="0.642145" euler_z="0" id="1">
+    <CameraObject t0="21.3032" t1="-0.481556" t2="11.5022" s0="1" s1="1" s2="1" q0="0.119554" q1="0.482506" q2="-0.0666786" q3="0.865129" euler_x="0.274645" euler_y="1.01751" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -699,7 +699,7 @@
             <Connection id="151" />
         </Connections>
     </PathPointObject>
-    <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="-0.375923" q1="0.849467" q2="0.139781" q3="0.342855" euler_x="-3.11364" euler_y="0.758153" euler_z="-2.29719" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="-0.013388" q1="0.175617" q2="0.635155" q3="0.752032" euler_x="0.21309" euler_y="0.284988" euler_z="1.43336" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject name="Create Object Helper" t0="28.917" t1="-1.90332" t2="9.24934" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="1.5708" id="139" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
@@ -820,10 +820,10 @@
         <ItemConnections />
         <Palette />
     </ActorObject>
-    <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="-0.375923" q1="0.849467" q2="0.139781" q3="0.342855" euler_x="-3.11364" euler_y="0.758153" euler_z="-2.29719" id="155" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="0.632074" q1="-0.723506" q2="0.147655" q3="0.235003" euler_x="3.0433" euler_y="-0.554725" euler_z="-1.67749" id="155" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="-0.375923" q1="0.849467" q2="0.139781" q3="0.342855" euler_x="-3.11364" euler_y="0.758153" euler_z="-2.29719" id="156" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Set Velocity Helper" t0="25.1859" t1="-1.85261" t2="9.68512" s0="0.25" s1="0.25" s2="0.25" q0="-0.575719" q1="0.652266" q2="0.277751" q3="0.40737" euler_x="-2.93679" euler_y="1.01835" euler_z="-1.58069" id="156" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
 </ActorObjects>
