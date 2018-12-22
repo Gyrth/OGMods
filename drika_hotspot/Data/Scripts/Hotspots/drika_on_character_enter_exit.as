@@ -93,8 +93,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 					target_character_type == any_npc && !character.controlled){
 					Log(info, "OnEnterExit triggered");
 					triggered = true;
-					//If the reference already exists then a new one is assigned by the hotspot.
-					reference_string = RegisterObject(param, reference_string);
+					RegisterObject(param, reference_string);
 				}
 			}
 		}
@@ -110,8 +109,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 			if(teams.find(character_team) != -1){
 				Log(info, "OnEnterExit triggered");
 				triggered = true;
-				//If the reference already exists then a new one is assigned by the hotspot.
-				reference_string = RegisterObject(id_param, reference_string);
+				RegisterObject(id_param, reference_string);
 			}
 		}
 	}

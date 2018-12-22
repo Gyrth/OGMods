@@ -75,9 +75,8 @@ void Init() {
 	InterpData();
 }
 
-string RegisterObject(int id, string reference){
+void RegisterObject(int id, string reference){
 	object_references[reference] = id;
-	return reference;
 }
 
 bool HasReferences(){
