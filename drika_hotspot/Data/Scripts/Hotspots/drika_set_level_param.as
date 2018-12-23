@@ -68,16 +68,40 @@ class DrikaSetLevelParam : DrikaElement{
 									"Other..."
 								};
 
-	DrikaSetLevelParam(string _level_param = "0", string _param_after = "no_kills"){
-		level_param = level_params(atoi(_level_param));
+	DrikaSetLevelParam(JSONValue params = JSONValue()){
+		level_param = level_params(GetJSONInt(params, "level_param", 0));
 		current_type = level_param;
 		param_name = param_names[current_type];
 
 		drika_element_type = drika_set_level_param;
-		has_settings = true;
 		SetParamType();
-		InterpParam(_param_after);
-		GetBeforeParam();
+		InterpParam(params);
+		has_settings = true;
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("set_level_param");
+		data["level_param"] = JSONValue(level_param);
+		data["param_name"] = JSONValue(param_name);
+
+		string save_string;
+		if(level_param == other){
+			data["param_after"] = JSONValue(param_name + ";" + string_param_after);
+		}else if(param_type == string_param){
+			data["param_after"] = JSONValue(string_param_after);
+			save_string = string_param_after;
+		}else if(param_type == vec3_param || param_type == vec3_color_param){
+			data["param_after"] = JSONValue(JSONarrayValue);
+			data["param_after"].append(vec3_param_after.x);
+			data["param_after"].append(vec3_param_after.y);
+			data["param_after"].append(vec3_param_after.z);
+		}else if(param_type == float_param){
+			data["param_after"] = JSONValue(float_param_after);
+		}else if(param_type == int_param){
+			data["param_after"] = JSONValue(int_param_after);
+		}
+		return data;
 	}
 
 	void SetParamType(){
@@ -99,40 +123,21 @@ class DrikaSetLevelParam : DrikaElement{
 		}
 	}
 
-	void InterpParam(string _param){
+	void InterpParam(JSONValue _params){
 		if(param_type == vec3_param || param_type == vec3_color_param){
-			vec3_param_after = StringToVec3(_param);
+			vec3_param_after = GetJSONVec3(_params, "param_after", vec3(1));
 		}else if(param_type == float_param){
-			float_param_after = atof(_param);
+			float_param_after = GetJSONFloat(_params, "param_after", 0.0);
 		}else if(param_type == int_param){
-			int_param_after = atoi(_param);
+			int_param_after = GetJSONInt(_params, "param_after", 0);
 		}else if(param_type == string_param){
 			if(level_param == other){
-				array<string> split_param = _param.split(";");
-				if(split_param.size() == 2){
-					param_name = split_param[0];
-					string_param_after = split_param[1];
-				}
+				param_name = GetJSONString(_params, "param_name", "");
+				string_param_after = GetJSONString(_params, "param_after", "");
 			}else{
-				string_param_after = _param;
+				string_param_after = GetJSONString(_params, "param_after", "");
 			}
 		}
-	}
-
-	array<string> GetSaveParameters(){
-		string save_string;
-		if(level_param == other){
-			save_string = param_name + ";" + string_param_after;
-		}else if(param_type == string_param){
-			save_string = string_param_after;
-		}else if(param_type == vec3_param || param_type == vec3_color_param){
-			save_string = Vec3ToString(vec3_param_after);
-		}else if(param_type == float_param){
-			save_string = "" + float_param_after;
-		}else if(param_type == int_param){
-			save_string = "" + int_param_after;
-		}
-		return {"set_level_param", level_param, save_string};
 	}
 
 	string GetDisplayString(){

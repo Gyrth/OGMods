@@ -1,12 +1,21 @@
 class DrikaPlaySound : DrikaElement{
 	string sound_path;
 
-	DrikaPlaySound(string _placeholder_id = "-1", string _sound_path = "Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav"){
-		placeholder_id = atoi(_placeholder_id);
+	DrikaPlaySound(JSONValue params = JSONValue()){
+		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
 		placeholder_name = "Play Sound Helper";
-		sound_path = _sound_path;
+		sound_path = GetJSONString(params, "sound_path", "Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav");
+
 		drika_element_type = drika_play_sound;
 		has_settings = true;
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("play_sound");
+		data["sound_path"] = JSONValue(sound_path);
+		data["placeholder_id"] = JSONValue(placeholder_id);
+		return data;
 	}
 
 	void PostInit(){
@@ -15,10 +24,6 @@ class DrikaPlaySound : DrikaElement{
 
 	void Delete(){
 		QueueDeleteObjectID(placeholder_id);
-	}
-
-	array<string> GetSaveParameters(){
-		return {"play_sound", placeholder_id, sound_path};
 	}
 
 	string GetDisplayString(){

@@ -1,28 +1,28 @@
 #include "hotspots/drika_element.as"
 #include "hotspots/drika_set_object_param.as"
-#include "hotspots/drika_wait.as"
-#include "hotspots/drika_wait_level_message.as"
-#include "hotspots/drika_set_enabled.as"
-#include "hotspots/drika_set_character.as"
+#include "hotspots/drika_create_object.as"
+#include "hotspots/drika_check_character_state.as"
 #include "hotspots/drika_create_particle.as"
-#include "hotspots/drika_play_sound.as"
+#include "hotspots/drika_display_image.as"
+#include "hotspots/drika_display_text.as"
 #include "hotspots/drika_go_to_line.as"
+#include "hotspots/drika_load_level.as"
 #include "hotspots/drika_on_character_enter_exit.as"
 #include "hotspots/drika_on_item_enter.as"
-#include "hotspots/drika_send_level_message.as"
-#include "hotspots/drika_start_dialogue.as"
-#include "hotspots/drika_set_level_param.as"
-#include "hotspots/drika_set_camera_param.as"
-#include "hotspots/drika_create_object.as"
-#include "hotspots/drika_transform_object.as"
-#include "hotspots/drika_set_color.as"
 #include "hotspots/drika_play_music.as"
+#include "hotspots/drika_play_sound.as"
+#include "hotspots/drika_send_level_message.as"
+#include "hotspots/drika_set_camera_param.as"
 #include "hotspots/drika_set_character_param.as"
-#include "hotspots/drika_display_text.as"
-#include "hotspots/drika_display_image.as"
-#include "hotspots/drika_load_level.as"
+#include "hotspots/drika_set_character.as"
+#include "hotspots/drika_set_color.as"
+#include "hotspots/drika_set_enabled.as"
+#include "hotspots/drika_set_level_param.as"
 #include "hotspots/drika_set_velocity.as"
-#include "hotspots/drika_check_character_state.as"
+#include "hotspots/drika_start_dialogue.as"
+#include "hotspots/drika_transform_object.as"
+#include "hotspots/drika_wait_level_message.as"
+#include "hotspots/drika_wait.as"
 
 bool show_editor = false;
 bool has_closed = true;
@@ -149,6 +149,9 @@ void ConvertDisplayColors(){
 
 void Dispose() {
     level.StopReceivingLevelEvents(hotspot.GetID());
+	for(uint i = 0; i < drika_elements.size(); i++){
+		drika_elements[i].Delete();
+	}
 }
 
 void SetParameters(){
@@ -157,71 +160,74 @@ void SetParameters(){
 
 void InterpData(){
 	int line_index = 0;
-	while(params.HasParam("" + line_index)){
-		array<string> line_elements = params.GetString("" + line_index).split(param_delimiter);
-		if(line_elements[0] == ""){
-			continue;
+	if(params.HasParam("Script Data")){
+		JSON data;
+		if(!data.parseString(params.GetString("Script Data"))){
+			Log(warning, "Unable to parse the JSON in the Script Data!");
+		}else{
+			for( uint i = 0; i < data.getRoot()["functions"].size(); ++i ) {
+				drika_elements.insertLast(InterpElement(data.getRoot()["functions"][i]));
+				drika_indexes.insertLast(drika_elements.size() - 1);
+				line_index += 1;
+			}
 		}
-		drika_elements.insertLast(InterpElement(line_elements));
-		drika_indexes.insertLast(drika_elements.size() - 1);
-		line_index += 1;
 	}
 	Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID());
 	ReorderElements();
 }
 
-DrikaElement@ InterpElement(array<string> &in line_elements){
-	if(line_elements[0] == "set_character"){
-		return DrikaSetCharacter(line_elements[1], line_elements[2], line_elements[3]);
-	}else if(line_elements[0] == "set_enabled"){
-		return DrikaSetEnabled(line_elements[1], line_elements[2], line_elements[3]);
-	}else if(line_elements[0] == "wait"){
-		return DrikaWait(line_elements[1]);
-	}else if(line_elements[0] == "wait_level_message"){
-		return DrikaWaitLevelMessage(line_elements[1]);
-	}else if(line_elements[0] == "create_particle"){
-		return DrikaCreateParticle(line_elements[1], line_elements[2], line_elements[3], line_elements[4], line_elements[5], line_elements[6], line_elements[7], line_elements[8]);
-	}else if(line_elements[0] == "play_sound"){
-		return DrikaPlaySound(line_elements[1], line_elements[2]);
-	}else if(line_elements[0] == "go_to_line"){
-		return DrikaGoToLine(line_elements[1]);
-	}else if(line_elements[0] == "on_character_enter_exit"){
-		return DrikaOnCharacterEnterExit(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
-	}else if(line_elements[0] == "on_item_enter"){
-		return DrikaOnItemEnter(line_elements[1], line_elements[2]);
-	}else if(line_elements[0] == "send_level_message"){
-		return DrikaSendLevelMessage(line_elements[1]);
-	}else if(line_elements[0] == "start_dialogue"){
-		return DrikaStartDialogue(line_elements[1]);
-	}else if(line_elements[0] == "set_object_param"){
-		return DrikaSetObjectParam(line_elements[1], line_elements[2], line_elements[3], line_elements[4], line_elements[5]);
-	}else if(line_elements[0] == "set_level_param"){
-		return DrikaSetLevelParam(line_elements[1], line_elements[2]);
-	}else if(line_elements[0] == "set_camera_param"){
-		return DrikaSetCameraParam(line_elements[1], line_elements[2]);
-	}else if(line_elements[0] == "create_object"){
-		return DrikaCreateObject(line_elements[1], line_elements[2], line_elements[3]);
-	}else if(line_elements[0] == "transform_object"){
-		return DrikaTransformObject(line_elements[1], line_elements[2], line_elements[3]);
-	}else if(line_elements[0] == "set_color"){
-		return DrikaSetColor(line_elements[1], line_elements[2], line_elements[3], line_elements[4], line_elements[5]);
-	}else if(line_elements[0] == "play_music"){
-		return DrikaPlayMusic(line_elements[1], line_elements[2]);
-	}else if(line_elements[0] == "set_character_param"){
-		return DrikaSetCharacterParam(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
-	}else if(line_elements[0] == "display_text"){
-		return DrikaDisplayText(line_elements[1], line_elements[2], line_elements[3]);
-	}else if(line_elements[0] == "display_image"){
-		return DrikaDisplayImage(line_elements[1], line_elements[2], line_elements[3]);
-	}else if(line_elements[0] == "load_level"){
-		return DrikaLoadLevel(line_elements[1]);
-	}else if(line_elements[0] == "check_character_state"){
-		return DrikaCheckCharacterState(line_elements[1], line_elements[2], line_elements[3]);
-	}else if(line_elements[0] == "set_velocity"){
-		return DrikaSetVelocity(line_elements[1], line_elements[2], line_elements[3], line_elements[4]);
+DrikaElement@ InterpElement(JSONValue &in function_json){
+	if(function_json["function_name"].asString() == "set_object_param"){
+		return DrikaSetObjectParam(function_json);
+	}else if(function_json["function_name"].asString() == "create_object"){
+		return DrikaCreateObject(function_json);
+	}else if(function_json["function_name"].asString() == "check_character_state"){
+		return DrikaCheckCharacterState(function_json);
+	}else if(function_json["function_name"].asString() == "create_particle"){
+		return DrikaCreateParticle(function_json);
+	}else if(function_json["function_name"].asString() == "display_image"){
+		return DrikaDisplayImage(function_json);
+	}else if(function_json["function_name"].asString() == "display_text"){
+		return DrikaDisplayText(function_json);
+	}else if(function_json["function_name"].asString() == "go_to_line"){
+		return DrikaGoToLine(function_json);
+	}else if(function_json["function_name"].asString() == "load_level"){
+		return DrikaLoadLevel(function_json);
+	}else if(function_json["function_name"].asString() == "on_character_enter_exit"){
+		return DrikaOnCharacterEnterExit(function_json);
+	}else if(function_json["function_name"].asString() == "on_item_enter"){
+		return DrikaOnItemEnter(function_json);
+	}else if(function_json["function_name"].asString() == "play_music"){
+		return DrikaPlayMusic(function_json);
+	}else if(function_json["function_name"].asString() == "play_sound"){
+		return DrikaPlaySound(function_json);
+	}else if(function_json["function_name"].asString() == "send_level_message"){
+		return DrikaPlaySound(function_json);
+	}else if(function_json["function_name"].asString() == "set_camera_param"){
+		return DrikaSetCameraParam(function_json);
+	}else if(function_json["function_name"].asString() == "set_character_param"){
+		return DrikaSetCharacterParam(function_json);
+	}else if(function_json["function_name"].asString() == "set_character"){
+		return DrikaSetCharacter(function_json);
+	}else if(function_json["function_name"].asString() == "set_color"){
+		return DrikaSetColor(function_json);
+	}else if(function_json["function_name"].asString() == "set_enabled"){
+		return DrikaSetEnabled(function_json);
+	}else if(function_json["function_name"].asString() == "set_level_param"){
+		return DrikaSetLevelParam(function_json);
+	}else if(function_json["function_name"].asString() == "set_velocity"){
+		return DrikaSetVelocity(function_json);
+	}else if(function_json["function_name"].asString() == "start_dialogue"){
+		return DrikaStartDialogue(function_json);
+	}else if(function_json["function_name"].asString() == "transform_object"){
+		return DrikaTransformObject(function_json);
+	}else if(function_json["function_name"].asString() == "wait_level_message"){
+		return DrikaWaitLevelMessage(function_json);
+	}else if(function_json["function_name"].asString() == "wait"){
+		return DrikaWait(function_json);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
-		Log(warning, "Unknown command found: " + line_elements[0]);
+		Log(warning, "Unknown command found: " + function_json["function_name"].asString());
 		return DrikaElement();
 	}
 }
@@ -234,20 +240,21 @@ void PostInit(){
 	duplicating = false;
 }
 
+void LaunchCustomGUI(){
+	show_editor = !show_editor;
+	if(show_editor && drika_elements.size() > 0){
+		has_closed = false;
+		GetCurrentElement().StartEdit();
+		level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
+	}
+}
+
 void Update(){
 	if(!post_init_done){
 		PostInit();
 		return;
 	}
 
-	if(this_hotspot.IsSelected() && GetInputPressed(0, "o")){
-		show_editor = !show_editor;
-		if(show_editor && drika_elements.size() > 0){
-			has_closed = false;
-			GetCurrentElement().StartEdit();
-			level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
-		}
-	}
 	if(!show_editor && !has_closed){
 		has_closed = true;
 		Reset();
@@ -347,6 +354,7 @@ void DrawEditor(){
 			if(ImGui_Button("Close")){
 				GetCurrentElement().ApplySettings();
 				ImGui_CloseCurrentPopup();
+				Save();
 			}
 			ImGui_EndChild();
 			ImGui_EndPopup();
@@ -355,102 +363,80 @@ void DrawEditor(){
 
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("Add")){
-				if(ImGui_MenuItem("Set Character")){
+				if(ImGui_MenuItem("Set Object Param")){
+					DrikaSetObjectParam new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Create Object")){
+					DrikaCreateObject new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Check Character State")){
+					DrikaCheckCharacterState new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Create Particle")){
+					DrikaCreateParticle new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Display Image")){
+					DrikaDisplayImage new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Display Text")){
+					DrikaDisplayText new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Go To Line")){
+					DrikaGoToLine new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Load Level")){
+					DrikaLoadLevel new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("On Character Enter Exit")){
+					DrikaOnCharacterEnterExit new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("On Item Enter")){
+					DrikaOnItemEnter new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Play Music")){
+					DrikaPlayMusic new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Play Sound")){
+					DrikaPlaySound new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Send Level Message")){
+					DrikaSendLevelMessage new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Set Camera Param")){
+					DrikaSetCameraParam new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Set Character Param")){
+					DrikaSetCharacterParam new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Set Character")){
 					DrikaSetCharacter new_param();
 					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Set Enabled")){
+				}else if(ImGui_MenuItem("Set Color")){
+					DrikaSetColor new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Set Enabled")){
 					DrikaSetEnabled new_param();
 					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Wait For Level Message")){
+				}else if(ImGui_MenuItem("Set Level Param")){
+					DrikaSetLevelParam new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Set Velocity")){
+					DrikaSetVelocity new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Start Dialogue")){
+					DrikaStartDialogue new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Transform Object")){
+					DrikaTransformObject new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("Wait For Level Message")){
 					DrikaWaitLevelMessage new_param();
 					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Wait")){
+				}else if(ImGui_MenuItem("Wait")){
 					DrikaWait new_param();
 					InsertElement(@new_param);
 				}
-				if(ImGui_MenuItem("Create Particle")){
-					DrikaCreateParticle new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Play Sound")){
-					DrikaPlaySound new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Go To Line")){
-					DrikaGoToLine new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("On Character Enter Exit")){
-					DrikaOnCharacterEnterExit new_param();
-					InsertElement(@new_param);
-				}
-				/* if(ImGui_MenuItem("On Item Enter")){
-					DrikaOnItemEnter new_param();
-					InsertElement(@new_param);
-				} */
-				if(ImGui_MenuItem("Send Level Message")){
-					DrikaSendLevelMessage new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Start Dialogue")){
-					DrikaStartDialogue new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Set Object Parameter")){
-					DrikaSetObjectParam new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Set Level Parameter")){
-					DrikaSetLevelParam new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Set Camera Parameter")){
-					DrikaSetCameraParam new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Create Object")){
-					DrikaCreateObject new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Transform Object")){
-					DrikaTransformObject new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Set Color")){
-					DrikaSetColor new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Play Music")){
-					DrikaPlayMusic new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Set Character Parameter")){
-					DrikaSetCharacterParam new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Display Text")){
-					DrikaDisplayText new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Display Image")){
-					DrikaDisplayImage new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Load Level")){
-					DrikaLoadLevel new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Check Character State")){
-					DrikaCheckCharacterState new_param();
-					InsertElement(@new_param);
-				}
-				if(ImGui_MenuItem("Set Velocity")){
-					DrikaSetVelocity new_param();
-					InsertElement(@new_param);
-				}
+
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Settings")){
@@ -497,8 +483,7 @@ void DrawEditor(){
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
 					duplicating = true;
-					array<string> line_elements = GetCurrentElement().GetSaveString().split(param_delimiter);
-					DrikaElement@ new_element = InterpElement(line_elements);
+					DrikaElement@ new_element = InterpElement(GetCurrentElement().GetSaveData());
 					new_element.PostInit();
 					InsertElement(new_element);
 					duplicating = false;
@@ -598,6 +583,7 @@ void InsertElement(DrikaElement@ new_element){
 	if(drika_elements.size() > 0){
 		GetCurrentElement().EditDone();
 	}
+	new_element.PostInit();
 	drika_elements.insertLast(new_element);
 	//There are no functions in the list yet.
 	if(drika_indexes.size() < 1){
@@ -739,14 +725,72 @@ void ShowText(string _text, int _font_size, string _font_path){
 }
 
 void Save(){
+	JSON data;
+	JSONValue functions;
+
 	for(uint i = 0; i < drika_indexes.size(); i++){
-		string data = drika_elements[drika_indexes[i]].GetSaveString();
-		params.SetString("" + drika_elements[drika_indexes[i]].index, data);
+		functions.append(drika_elements[drika_indexes[i]].GetSaveData());
 	}
-	//Remove the elements that have a bigger index that the amount of current elements.
-	int counter = drika_indexes.size();
-	while(params.HasParam("" + counter)){
-		params.Remove("" + counter);
-		counter++;
+	data.getRoot()["functions"] = functions;
+	params.SetString("Script Data", data.writeString(false));
+}
+
+int GetJSONInt(JSONValue data, string var_name, int default_value){
+	if(data.isMember(var_name) && data[var_name].isInt()){
+		return data[var_name].asInt();
+	}else{
+		return default_value;
+	}
+}
+
+string GetJSONString(JSONValue data, string var_name, string default_value){
+	if(data.isMember(var_name) && data[var_name].isString()){
+		return data[var_name].asString();
+	}else{
+		return default_value;
+	}
+}
+
+vec3 GetJSONVec3(JSONValue data, string var_name, vec3 default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		return vec3(data[var_name][0].asFloat(), data[var_name][1].asFloat(), data[var_name][2].asFloat());
+	}else{
+		return default_value;
+	}
+}
+
+vec4 GetJSONVec4(JSONValue data, string var_name, vec4 default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		return vec4(data[var_name][0].asFloat(), data[var_name][1].asFloat(), data[var_name][2].asFloat(), data[var_name][3].asFloat());
+	}else{
+		return default_value;
+	}
+}
+
+bool GetJSONBool(JSONValue data, string var_name, bool default_value){
+	if(data.isMember(var_name) && data[var_name].isBool()){
+		return data[var_name].asBool();
+	}else{
+		return default_value;
+	}
+}
+
+float GetJSONFloat(JSONValue data, string var_name, float default_value){
+	if(data.isMember(var_name) && data[var_name].isNumeric()){
+		return data[var_name].asFloat();
+	}else{
+		return default_value;
+	}
+}
+
+array<float> GetJSONFloatArray(JSONValue data, string var_name, array<float> default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		array<float> values;
+		for(uint i = 0; i < data[var_name].size(); i++){
+			values.insertLast(data[var_name][i].asFloat());
+		}
+		return values;
+	}else{
+		return default_value;
 	}
 }

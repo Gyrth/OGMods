@@ -2,7 +2,6 @@ enum hotspot_trigger_types {	on_enter = 0,
 								on_exit = 1};
 
 class DrikaOnCharacterEnterExit : DrikaElement{
-	string character_team;
 	int new_target_character_type;
 	int new_hotspot_trigger_type;
 
@@ -12,36 +11,34 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	array<string> character_trigger_choices = {"Check ID", "Check Team", "Any Character", "Any Player", "Any NPC"};
 	array<string> hotspot_trigger_choices = {"On Enter", "On Exit"};
 
-	DrikaOnCharacterEnterExit(string _target_character_type = "0", string _param = "-1", string _hotspot_trigger_type = "0", string _reference_string = ""){
-		target_character_type = target_character_types(atoi(_target_character_type));
+	DrikaOnCharacterEnterExit(JSONValue params = JSONValue()){
+		target_character_type = target_character_types(GetJSONInt(params, "target_character_type", 0));
 		new_target_character_type = target_character_type;
-		hotspot_trigger_type = hotspot_trigger_types(atoi(_hotspot_trigger_type));
+
+		hotspot_trigger_type = hotspot_trigger_types(GetJSONInt(params, "hotspot_trigger_type", 0));
 		new_hotspot_trigger_type = hotspot_trigger_type;
-		reference_string = _reference_string;
+		reference_string = GetJSONString(params, "reference_string", "");
+		character_team = GetJSONString(params, "character_team", "");
+		object_id = GetJSONInt(params, "object_id", -1);
 
-		drika_element_type = drika_on_character_enter_exit;
 		connection_types = {_movement_object};
-
-		if(target_character_type == check_id){
-			object_id = atoi(_param);
-		}else if(target_character_type == check_team){
-			character_team = _param;
-		}
+		drika_element_type = drika_on_character_enter_exit;
 		has_settings = true;
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("on_character_enter_exit");
+		data["target_character_type"] = JSONValue(target_character_type);
+		data["hotspot_trigger_type"] = JSONValue(hotspot_trigger_type);
+		data["reference_string"] = JSONValue(reference_string);
+		data["object_id"] = JSONValue(object_id);
+		data["character_team"] = JSONValue(character_team);
+		return data;
 	}
 
 	string GetReference(){
 		return reference_string;
-	}
-
-	array<string> GetSaveParameters(){
-		if(target_character_type == check_id){
-			return {"on_character_enter_exit", target_character_type, object_id, hotspot_trigger_type, reference_string};
-		}else if(target_character_type == check_team){
-			return {"on_character_enter_exit", target_character_type, character_team, hotspot_trigger_type, reference_string};
-		}else{
-			return {"on_character_enter_exit", target_character_type, "", hotspot_trigger_type, reference_string};
-		}
 	}
 
 	string GetDisplayString(){
@@ -64,13 +61,13 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		if(ImGui_Combo("Check for", new_target_character_type, character_trigger_choices, character_trigger_choices.size())){
 			target_character_type = target_character_types(new_target_character_type);
 		}
-		if(ImGui_Combo("Trigger when", new_hotspot_trigger_type, hotspot_trigger_choices, hotspot_trigger_choices.size())){
-			hotspot_trigger_type = hotspot_trigger_types(new_hotspot_trigger_type);
-		}
 		if(target_character_type == check_id){
 			ImGui_InputInt("ID", object_id);
 		}else if(target_character_type == check_team){
 			ImGui_InputText("Team", character_team, 64);
+		}
+		if(ImGui_Combo("Trigger when", new_hotspot_trigger_type, hotspot_trigger_choices, hotspot_trigger_choices.size())){
+			hotspot_trigger_type = hotspot_trigger_types(new_hotspot_trigger_type);
 		}
 		DrawSetReferenceUI();
 	}

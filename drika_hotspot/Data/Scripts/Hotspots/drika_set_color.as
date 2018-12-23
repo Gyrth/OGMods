@@ -12,30 +12,41 @@ class DrikaSetColor : DrikaElement{
 	array<string> palette_indexes;
 	array<string> color_type_choices = {"Tint", "Palette Color"};
 
-	DrikaSetColor(string _identifier_type = "0", string _identifier = "-1", string _color_type = "0", string _palette_slot = "0", string _color = "1,1,1"){
-		color_type = color_types(atoi(_color_type));
+	DrikaSetColor(JSONValue params = JSONValue()){
+		color_type = color_types(GetJSONInt(params, "color_type", 0));
 		current_color_type = color_type;
-		palette_slot = atoi(_palette_slot);
+		palette_slot = GetJSONInt(params, "palette_slot", 0);
+		after_color = GetJSONVec3(params, "after_color", vec3(1));
+
+		InterpIdentifier(params);
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object};
-		InterpIdentifier(_identifier_type, _identifier);
 		drika_element_type = drika_set_color;
-		after_color = StringToVec3(_color);
 		has_settings = true;
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("set_color");
+		data["color_type"] = JSONValue(color_type);
+		data["palette_slot"] = JSONValue(palette_slot);
+		data["after_color"] = JSONValue(JSONarrayValue);
+		data["after_color"].append(after_color.x);
+		data["after_color"].append(after_color.y);
+		data["after_color"].append(after_color.z);
+		data["identifier_type"] = JSONValue(identifier_type);
+		if(identifier_type == id){
+			data["identifier"] = JSONValue(object_id);
+		}else if(identifier_type == reference){
+			data["identifier"] = JSONValue(reference_string);
+		}else if(identifier_type == team){
+			data["identifier"] = JSONValue(character_team);
+		}
+		return data;
 	}
 
 	void Delete(){
 		Reset();
     }
-
-	array<string> GetSaveParameters(){
-		string save_identifier;
-		if(identifier_type == id){
-			save_identifier = "" + object_id;
-		}else if(identifier_type == reference){
-			save_identifier = "" + reference_string;
-		}
-		return {"set_color", identifier_type, save_identifier, color_type, palette_slot, Vec3ToString(after_color)};
-	}
 
 	string GetDisplayString(){
 		string identifier;
@@ -74,7 +85,7 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void StartSettings(){
-		CheckReferenceOptionAvailable();
+		CheckReferenceAvailable();
 	}
 
 	void DrawSettings(){

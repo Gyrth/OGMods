@@ -3,20 +3,24 @@ class DrikaPlayMusic : DrikaElement{
 	string song;
 	string before_song;
 
-	DrikaPlayMusic(string _music_path = "Data/Music/lugaru.xml", string _song = "lugaru_menu"){
-		placeholder_name = "Play Sound Helper";
-		music_path = _music_path;
-		song = _song;
+	DrikaPlayMusic(JSONValue params = JSONValue()){
+		music_path = GetJSONString(params, "music_path", "Data/Music/lugaru.xml");
+		song = GetJSONString(params, "song", "lugaru_menu");
+
 		drika_element_type = drika_play_music;
 		has_settings = true;
 	}
 
-	void PostInit(){
-		AddMusic(music_path);
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("play_music");
+		data["music_path"] = JSONValue(music_path);
+		data["song"] = JSONValue(song);
+		return data;
 	}
 
-	array<string> GetSaveParameters(){
-		return {"play_music", music_path, song};
+	void PostInit(){
+		AddMusic(music_path);
 	}
 
 	string GetDisplayString(){

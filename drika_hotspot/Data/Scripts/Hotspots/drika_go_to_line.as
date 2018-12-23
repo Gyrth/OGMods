@@ -1,14 +1,17 @@
 class DrikaGoToLine : DrikaElement{
 	int line;
 
-	DrikaGoToLine(string _line = "0"){
-		line = atoi(_line);
+	DrikaGoToLine(JSONValue params = JSONValue()){
+		line = GetJSONInt(params, "line", 0);
 		drika_element_type = drika_go_to_line;
 		has_settings = true;
 	}
 
-	array<string> GetSaveParameters(){
-		return {"go_to_line", line};
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("go_to_line");
+		data["line"] = JSONValue(line);
+		return data;
 	}
 
 	string GetDisplayString(){

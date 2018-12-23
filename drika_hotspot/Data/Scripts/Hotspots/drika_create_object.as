@@ -2,12 +2,12 @@ class DrikaCreateObject : DrikaElement{
 	string object_path;
 	array<int> spawned_object_ids;
 
-	DrikaCreateObject(string _placeholder_id = "-1", string _object_path = default_preview_mesh, string _reference_string = ""){
-		placeholder_id = atoi(_placeholder_id);
+	DrikaCreateObject(JSONValue params = JSONValue()){
+		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
 		placeholder_name = "Create Object Helper";
-		object_path = _object_path;
+		object_path = GetJSONString(params, "object_path", default_preview_mesh);
 		drika_element_type = drika_create_object;
-		reference_string = _reference_string;
+		reference_string = GetJSONString(params, "reference_string", "");
 		default_placeholder_scale = vec3(1.0);
 		has_settings = true;
 	}
@@ -20,8 +20,13 @@ class DrikaCreateObject : DrikaElement{
 		return reference_string;
 	}
 
-	array<string> GetSaveParameters(){
-		return {"create_object", placeholder_id, object_path, reference_string};
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("create_object");
+		data["placeholder_id"] = JSONValue(placeholder_id);
+		data["object_path"] = JSONValue(object_path);
+		data["reference_string"] = JSONValue(reference_string);
+		return data;
 	}
 
 	string GetDisplayString(){

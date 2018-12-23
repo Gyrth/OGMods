@@ -15,29 +15,47 @@ class DrikaSetObjectParam : DrikaElement{
 	param_types param_type;
 	array<string> param_type_choices = {"String", "Integer", "Float"};
 
-	DrikaSetObjectParam(string _identifier_type = "0", string _identifier = "-1", string _param_type = "0", string _param_name = "drika_param", string _param_after = "drika_new_value"){
-		param_name = _param_name;
-		param_type = param_types(atoi(_param_type));
+	DrikaSetObjectParam(JSONValue params = JSONValue()){
+		InterpIdentifier(params);
+		param_name = GetJSONString(params, "param_name", "drika_param");
+		param_type = param_types(GetJSONInt(params, "param_type", 0));
 		current_type = param_type;
 		connection_types = {_env_object, _movement_object};
-		InterpIdentifier(_identifier_type, _identifier);
 		drika_element_type = drika_set_object_param;
 		has_settings = true;
-
-		InterpParam(_param_after);
+		InterpParam(params);
 	}
 
-	void Delete(){
-		SetParameter(true);
-	}
-
-	void InterpParam(string _param){
-		if(param_type == float_param){
-			float_param_after = atof(_param);
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("set_object_param");
+		data["identifier_type"] = JSONValue(identifier_type);
+		if(identifier_type == id){
+			data["identifier"] = JSONValue(object_id);
+		}else if(identifier_type == reference){
+			data["identifier"] = JSONValue(reference_string);
+		}else if(identifier_type == team){
+			data["identifier"] = JSONValue(character_team);
+		}
+		data["param_name"] = JSONValue(param_name);
+		data["param_type"] = JSONValue(param_type);
+		if(param_type == string_param){
+			data["param_after"] = JSONValue(string_param_after);
+		}else if(param_type == float_param){
+			data["param_after"] = JSONValue(float_param_after);
 		}else if(param_type == int_param){
-			int_param_after = atoi(_param);
+			data["param_after"] = JSONValue(int_param_after);
+		}
+		return data;
+	}
+
+	void InterpParam(JSONValue _params){
+		if(param_type == float_param){
+			float_param_after = GetJSONFloat(_params, "param_after", 0.0);
+		}else if(param_type == int_param){
+			int_param_after = GetJSONInt(_params, "param_after", 0);
 		}else if(param_type == string_param){
-			string_param_after = _param;
+			string_param_after = GetJSONString(_params, "param_after", "");
 		}
 	}
 
@@ -63,24 +81,6 @@ class DrikaSetObjectParam : DrikaElement{
 		}
 	}
 
-	array<string> GetSaveParameters(){
-		string save_identifier;
-		if(identifier_type == id){
-			save_identifier = "" + object_id;
-		}else if(identifier_type == reference){
-			save_identifier = "" + reference_string;
-		}
-		string save_string;
-		if(param_type == string_param){
-			save_string = string_param_after;
-		}else if(param_type == float_param){
-			save_string = "" + float_param_after;
-		}else if(param_type == int_param){
-			save_string = "" + int_param_after;
-		}
-		return {"set_object_param", identifier_type, save_identifier, param_type, param_name, save_string};
-	}
-
 	string GetDisplayString(){
 		string display_identifier;
 		if(identifier_type == id){
@@ -98,9 +98,9 @@ class DrikaSetObjectParam : DrikaElement{
 		}
 		return "SetObjectParam " + display_identifier + " " + param_name + " " + display_string;
 	}
-	
+
 	void StartSettings(){
-		CheckReferenceOptionAvailable();
+		CheckReferenceAvailable();
 	}
 
 	void DrawSettings(){

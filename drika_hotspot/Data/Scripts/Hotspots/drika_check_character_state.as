@@ -1,68 +1,64 @@
 class DrikaCheckCharacterState : DrikaElement{
-	string character_team;
-	target_character_types target_character_type;
-	int new_target_character_type;
-
-	array<string> target_choices = {"Check ID", "Check Team"};
+	array<string> target_choices = {"Check ID", "Check Reference", "Check Team"};
 	array<string> state_choices = {"Awake", "Unconscious", "Dead"};
 	int state_check;
 
-	DrikaCheckCharacterState(string _target_character_type = "0", string _param = "-1", string _state_check = "1"){
-		target_character_type = target_character_types(atoi(_target_character_type));
-		new_target_character_type = target_character_type;
-
-		state_check = atoi(_state_check);
+	DrikaCheckCharacterState(JSONValue params = JSONValue()){
+		state_check = GetJSONInt(params, "state_check", 0);
+		InterpIdentifier(params);
+		show_team_option = true;
 
 		drika_element_type = drika_check_character_state;
 		connection_types = {_movement_object};
 
-		if(target_character_type == check_id){
-			object_id = atoi(_param);
-		}else if(target_character_type == check_team){
-			character_team = _param;
-		}
 		has_settings = true;
 	}
 
-	array<string> GetSaveParameters(){
-		if(target_character_type == check_id){
-			return {"check_character_state", target_character_type, object_id, state_check};
-		}else{
-			return {"check_character_state", target_character_type, character_team, state_check};
+	void StartSettings(){
+		CheckReferenceAvailable();
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("check_character_state");
+		data["state_check"] = JSONValue(state_check);
+		data["identifier_type"] = JSONValue(identifier_type);
+		if(identifier_type == id){
+			data["identifier"] = JSONValue(object_id);
+		}else if(identifier_type == reference){
+			data["identifier"] = JSONValue(reference_string);
+		}else if(identifier_type == team){
+			data["identifier"] = JSONValue(character_team);
 		}
+		return data;
 	}
 
 	string GetDisplayString(){
 		string trigger_message = "";
-		if(target_character_type == check_id){
+		if(identifier_type == id){
 			trigger_message = "" + object_id;
-		}else if(target_character_type == check_team){
+		}else if(identifier_type == reference){
+			trigger_message = reference_string;
+		}else if(identifier_type == team){
 			trigger_message = character_team;
 		}
 		return "CheckCharacterState" + " " + trigger_message + " " + state_choices[state_check];
 	}
 
 	void DrawSettings(){
-		if(ImGui_Combo("Target type", new_target_character_type, target_choices, target_choices.size())){
-			target_character_type = target_character_types(new_target_character_type);
-		}
-		if(target_character_type == check_id){
-			ImGui_InputInt("ID", object_id);
-		}else if(target_character_type == check_team){
-			ImGui_InputText("Team", character_team, 64);
-		}
+		DrawSelectTargetUI();
 		ImGui_Combo("Check for", state_check, state_choices, state_choices.size());
 	}
 
 	void DrawEditing(){
-		if(target_character_type == check_id && object_id != -1 && MovementObjectExists(object_id)){
+		if(identifier_type == id && object_id != -1 && MovementObjectExists(object_id)){
 			MovementObject@ character = ReadCharacterID(object_id);
 			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
 	bool Trigger(){
-		if(target_character_type == check_id){
+		if(identifier_type == id){
 			if(MovementObjectExists(object_id)){
 				MovementObject@ char = ReadCharacterID(object_id);
 				if(char.HasVar("knocked_out")){
@@ -71,7 +67,7 @@ class DrikaCheckCharacterState : DrikaElement{
 					}
 				}
 			}
-		}else if(target_character_type == check_team){
+		}else if(identifier_type == team){
 			int num_characters = GetNumCharacters();
 			bool all_in_state = true;
 			for(int i = 0; i < num_characters; i++){
@@ -93,6 +89,22 @@ class DrikaCheckCharacterState : DrikaElement{
 				}
 			}
 			return all_in_state;
+		}else if(identifier_type == reference){
+			int registered_object_id = GetRegisteredObjectID(reference_string);
+			if(registered_object_id == -1){
+				Log(warning, "MovementObject does not exist with reference " + reference_string);
+				return false;
+			}
+			if(MovementObjectExists(registered_object_id)){
+				MovementObject@ char = ReadCharacterID(registered_object_id);
+				if(char.HasVar("knocked_out")){
+					if(char.GetIntVar("knocked_out") == state_check){
+						return true;
+					}
+				}
+			}else{
+				Log(warning, "Object with reference " + reference_string + " is not a MovementObject!");
+			}
 		}
 		return false;
 	}

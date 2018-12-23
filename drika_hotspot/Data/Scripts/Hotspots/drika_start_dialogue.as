@@ -1,14 +1,18 @@
 class DrikaStartDialogue : DrikaElement{
 	string dialogue_name;
 
-	DrikaStartDialogue(string _dialogue_name = "drika_dialogue"){
-		dialogue_name = _dialogue_name;
+	DrikaStartDialogue(JSONValue params = JSONValue()){
+		dialogue_name = GetJSONString(params, "dialogue_name", "drika_dialogue");
+
 		drika_element_type = drika_start_dialogue;
 		has_settings = true;
 	}
 
-	array<string> GetSaveParameters(){
-		return {"start_dialogue", dialogue_name};
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("start_dialogue");
+		data["dialogue_name"] = JSONValue(dialogue_name);
+		return data;
 	}
 
 	string GetDisplayString(){

@@ -53,7 +53,8 @@ array<vec4> display_colors = {	vec4(255),
 							};
 
 enum identifier_types {	id = 0,
-						reference = 1
+						reference = 1,
+						team = 2
 					};
 
 enum param_types { 	string_param = 0,
@@ -80,17 +81,18 @@ class DrikaElement{
 	int index = -1;
 	int placeholder_id = -1;
 	Object@ placeholder;
-	int object_id;
+	int object_id = -1;
 	string reference_string = "";
 	string placeholder_name;
 	identifier_types identifier_type;
-	int current_idenifier_type;
+	int current_identifier_type;
 	int current_reference;
 	vec3 default_placeholder_scale = vec3(0.25);
 	array<EntityType> connection_types;
 	array<string> available_references;
 	bool show_reference_option = false;
-	array<string> identifier_choices = {"ID", "Reference"};
+	bool show_team_option = false;
+	string character_team;
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}
@@ -113,15 +115,8 @@ class DrikaElement{
 		index = _index;
 	}
 
-	array<string> GetSaveParameters(){return {};}
-
-	string GetSaveString(){
-		string save_data = "";
-		array<string> parameters = GetSaveParameters();
-		for(uint i = 0; i < parameters.size(); i++){
-			save_data += parameters[i] + ((i != parameters.size() - 1)?param_delimiter:"");
-		}
-		return save_data;
+	JSONValue GetSaveData(){
+		return JSONValue();
 	}
 
 	void StartEdit(){
@@ -236,17 +231,26 @@ class DrikaElement{
 		}
 	}
 
-	void InterpIdentifier(string _identifier_type, string _identifier){
-		identifier_type = identifier_types(atoi(_identifier_type));
-		current_idenifier_type = identifier_type;
-		if(identifier_type == id){
-			object_id = atoi(_identifier);
-		}else if(identifier_type == reference){
-			reference_string = _identifier;
+	void InterpIdentifier(JSONValue params){
+		if(params.isMember("identifier_type")){
+			if(params["identifier_type"].asInt() == id){
+				identifier_type = identifier_types(id);
+				object_id = params["identifier"].asInt();
+			}else if(params["identifier_type"].asInt() == reference){
+				identifier_type = identifier_types(reference);
+				reference_string = params["identifier"].asString();
+			}else if(params["identifier_type"].asInt() == team){
+				identifier_type = identifier_types(team);
+				character_team = params["identifier"].asString();
+			}
+		}else{
+			//By default the id is used as identifier with -1 as the target id.
+			identifier_type = identifier_types(id);
 		}
+		current_identifier_type = identifier_type;
 	}
 
-	void CheckReferenceOptionAvailable(){
+	void CheckReferenceAvailable(){
 		if(HasReferences()){
 			show_reference_option = true;
 			available_references = GetReferences();
@@ -265,16 +269,24 @@ class DrikaElement{
 			show_reference_option = false;
 			//Force the identifier type to id when no references are available.
 			if(identifier_type == reference){
-				current_idenifier_type = id;
-				identifier_type = identifier_types(current_idenifier_type);
+				current_identifier_type = id;
+				identifier_type = identifier_types(current_identifier_type);
 			}
 		}
 	}
 
 	void DrawSelectTargetUI(){
-		if(show_reference_option){
-			if(ImGui_Combo("Identifier Type", current_idenifier_type, identifier_choices, identifier_choices.size())){
-				identifier_type = identifier_types(current_idenifier_type);
+		if(show_reference_option || show_team_option){
+			array<string> identifier_choices = {"ID"};
+			if(show_reference_option){
+				identifier_choices.insertLast("Reference");
+			}
+			if(show_team_option){
+				identifier_choices.insertLast("Team");
+			}
+
+			if(ImGui_Combo("Identifier Type", current_identifier_type, identifier_choices, identifier_choices.size())){
+				identifier_type = identifier_types(current_identifier_type);
 			}
 		}
 		if(identifier_type == id){
@@ -286,6 +298,8 @@ class DrikaElement{
 				reference_string = available_references[current_reference];
 				TargetChanged();
 			}
+		}else if(identifier_type == team){
+			ImGui_InputText("Team", character_team, 64);
 		}
 	}
 
@@ -302,7 +316,6 @@ class DrikaElement{
 		Object@ target_object;
 		if(identifier_type == id){
 			if(object_id == -1 || !ObjectExists(object_id)){
-				Log(warning, "Object does not exist with id " + object_id);
 				return null;
 			}else{
 				@target_object = ReadObjectFromID(object_id);

@@ -1,29 +1,39 @@
 class DrikaSetVelocity : DrikaElement{
-
 	float velocity_magnitude;
 
-	DrikaSetVelocity(string _placeholder_id = "-1", string _identifier_type = "0", string _identifier = "-1", string _velocity_magnitude = "1"){
-		placeholder_id = atoi(_placeholder_id);
-		connection_types = {_movement_object, _item_object};
+	DrikaSetVelocity(JSONValue params = JSONValue()){
+		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
+		velocity_magnitude = GetJSONFloat(params, "velocity_magnitude", 5);
+		InterpIdentifier(params);
+
 		placeholder_name = "Set Velocity Helper";
 		drika_element_type = drika_set_velocity;
-		velocity_magnitude = atof(_velocity_magnitude);
-		InterpIdentifier(_identifier_type, _identifier);
+		connection_types = {_movement_object, _item_object};
 		has_settings = true;
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("set_velocity");
+		data["velocity_magnitude"] = JSONValue(velocity_magnitude);
+		data["placeholder_id"] = JSONValue(placeholder_id);
+		data["identifier_type"] = JSONValue(identifier_type);
+		if(identifier_type == id){
+			data["identifier"] = JSONValue(object_id);
+		}else if(identifier_type == reference){
+			data["identifier"] = JSONValue(reference_string);
+		}else if(identifier_type == team){
+			data["identifier"] = JSONValue(character_team);
+		}
+		return data;
+	}
+
+	void Delete(){
+		QueueDeleteObjectID(placeholder_id);
 	}
 
 	void PostInit(){
 		RetrievePlaceholder();
-	}
-
-	array<string> GetSaveParameters(){
-		string save_identifier;
-		if(identifier_type == id){
-			save_identifier = "" + object_id;
-		}else if(identifier_type == reference){
-			save_identifier = "" + reference_string;
-		}
-		return {"set_velocity", placeholder_id, identifier_type, save_identifier, velocity_magnitude};
 	}
 
 	string GetDisplayString(){
@@ -37,7 +47,7 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	void StartSettings(){
-		CheckReferenceOptionAvailable();
+		CheckReferenceAvailable();
 	}
 
 	void DrawSettings(){

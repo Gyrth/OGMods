@@ -2,14 +2,18 @@ class DrikaWaitLevelMessage : DrikaElement{
 	string message;
 	bool received_message = false;
 
-	DrikaWaitLevelMessage(string _message = "continue_drika_hotspot"){
-		message = _message;
+	DrikaWaitLevelMessage(JSONValue params = JSONValue()){
+		message = GetJSONString(params, "message", "continue_drika_hotspot");
+
 		drika_element_type = drika_wait_level_message;
 		has_settings = true;
 	}
 
-	array<string> GetSaveParameters(){
-		return {"wait_level_message", message};
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("wait_level_message");
+		data["message"] = JSONValue(message);
+		return data;
 	}
 
 	string GetDisplayString(){

@@ -2,26 +2,31 @@ class DrikaSetEnabled : DrikaElement{
 	bool enabled;
 	bool before_enabled;
 
-	DrikaSetEnabled(string _identifier_type = "0", string _identifier = "-1", string _enabled = "true"){
-		enabled = (_enabled == "true");
+	DrikaSetEnabled(JSONValue params = JSONValue()){
+		enabled = GetJSONBool(params, "enabled", true);
+		InterpIdentifier(params);
 		drika_element_type = drika_set_enabled;
 		connection_types = {_env_object};
-		InterpIdentifier(_identifier_type, _identifier);
 		has_settings = true;
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("set_enabled");
+		data["enabled"] = JSONValue(enabled);
+		data["identifier_type"] = JSONValue(identifier_type);
+		if(identifier_type == id){
+			data["identifier"] = JSONValue(object_id);
+		}else if(identifier_type == reference){
+			data["identifier"] = JSONValue(reference_string);
+		}else if(identifier_type == team){
+			data["identifier"] = JSONValue(character_team);
+		}
+		return data;
 	}
 
 	void Delete(){
 		Reset();
-	}
-
-	array<string> GetSaveParameters(){
-		string save_identifier;
-		if(identifier_type == id){
-			save_identifier = "" + object_id;
-		}else if(identifier_type == reference){
-			save_identifier = "" + reference_string;
-		}
-		return {"set_enabled", identifier_type, save_identifier, enabled};
 	}
 
 	string GetDisplayString(){
@@ -35,7 +40,7 @@ class DrikaSetEnabled : DrikaElement{
 	}
 
 	void StartSettings(){
-		CheckReferenceOptionAvailable();
+		CheckReferenceAvailable();
 	}
 
 	void DrawSettings(){

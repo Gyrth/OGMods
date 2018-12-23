@@ -3,16 +3,22 @@ class DrikaDisplayText : DrikaElement{
 	int font_size;
 	string font_path;
 
-	DrikaDisplayText(string _display_message = "Drika Display Message", string _font_size = "1.0", string _font_path = "Data/Fonts/Cella.ttf"){
-		display_message = _display_message;
-		font_size = atoi(_font_size);
-		font_path = _font_path;
+	DrikaDisplayText(JSONValue params = JSONValue()){
+		display_message = GetJSONString(params, "display_message", "Drika Display Message");
+		font_size = GetJSONInt(params, "font_size", 10);
+		font_path = GetJSONString(params, "font_path", "Data/Fonts/Cella.ttf");
+
 		drika_element_type = drika_display_text;
 		has_settings = true;
 	}
 
-	array<string> GetSaveParameters(){
-		return {"display_text", display_message, font_size, font_path};
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("display_text");
+		data["display_message"] = JSONValue(display_message);
+		data["font_size"] = JSONValue(font_size);
+		data["font_path"] = JSONValue(font_path);
+		return data;
 	}
 
 	string GetDisplayString(){

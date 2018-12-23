@@ -1,14 +1,17 @@
 class DrikaLoadLevel : DrikaElement{
 	string level_path;
 
-	DrikaLoadLevel(string _level_path = "Data/Levels/nothing.xml"){
-		level_path = _level_path;
+	DrikaLoadLevel(JSONValue params = JSONValue()){
+		level_path = GetJSONString(params, "level_path", "Data/Levels/nothing.xml");
 		drika_element_type = drika_load_level;
 		has_settings = true;
 	}
 
-	array<string> GetSaveParameters(){
-		return {"load_level", level_path};
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("load_level");
+		data["level_path"] = JSONValue(level_path);
+		return data;
 	}
 
 	string GetDisplayString(){

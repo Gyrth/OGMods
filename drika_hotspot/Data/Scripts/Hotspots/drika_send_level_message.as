@@ -2,15 +2,19 @@ class DrikaSendLevelMessage : DrikaElement{
 	string message;
 	string display_message;
 
-	DrikaSendLevelMessage(string _message = "continue_drika_hotspot"){
-		message = _message;
+	DrikaSendLevelMessage(JSONValue params = JSONValue()){
+		message = GetJSONString(params, "message", "continue_drika_hotspot");
+
 		drika_element_type = drika_send_level_message;
 		has_settings = true;
 		SetDisplayMessage();
 	}
 
-	array<string> GetSaveParameters(){
-		return {"send_level_message", message};
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("send_level_message");
+		data["message"] = JSONValue(message);
+		return data;
 	}
 
 	string GetDisplayString(){

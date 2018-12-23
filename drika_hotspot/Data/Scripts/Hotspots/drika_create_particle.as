@@ -8,19 +8,36 @@ class DrikaCreateParticle : DrikaElement{
 	bool connect_particles = false;
 	int previous_particle_id = -1;
 
-	DrikaCreateParticle(string _placeholder_id = "-1", string _amount = "5", string _particle_path = "Data/Particles/blooddrop.xml", string _velocity = "0.0", string _tint = "1,1,1", string _use_blood_tint = "true", string _spread = "0.0", string _connect_particles = "false"){
-		amount = atoi(_amount);
-		placeholder_id = atoi(_placeholder_id);
+	DrikaCreateParticle(JSONValue params = JSONValue()){
+		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
 		placeholder_name = "Create Particle Helper";
-		particle_path = _particle_path;
-		tint = StringToVec3(_tint);
-		velocity = atof(_velocity);
-		spread = atof(_spread);
-		use_blood_tint = (_use_blood_tint == "true");
-		connect_particles = (_connect_particles == "true");
-
+		particle_path = GetJSONString(params, "particle_path", "Data/Particles/blooddrop.xml");
 		drika_element_type = drika_create_particle;
+
+		amount = GetJSONInt(params, "amount", 5);
+		tint = GetJSONVec3(params, "tint", vec3(1.0f));
+		velocity = GetJSONFloat(params, "velocity", 0.0f);
+		spread = GetJSONFloat(params, "spread", 0.0f);
+		use_blood_tint = GetJSONBool(params, "use_blood_tint", true);
+		connect_particles = GetJSONBool(params, "connect_particles", false);
 		has_settings = true;
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("create_particle");
+		data["placeholder_id"] = JSONValue(placeholder_id);
+		data["particle_path"] = JSONValue(particle_path);
+		data["amount"] = JSONValue(amount);
+		data["velocity"] = JSONValue(velocity);
+		data["spread"] = JSONValue(spread);
+		data["use_blood_tint"] = JSONValue(use_blood_tint);
+		data["connect_particles"] = JSONValue(connect_particles);
+		data["tint"] = JSONValue(JSONarrayValue);
+		data["tint"].append(tint.x);
+		data["tint"].append(tint.y);
+		data["tint"].append(tint.z);
+		return data;
 	}
 
 	void PostInit(){
@@ -31,14 +48,10 @@ class DrikaCreateParticle : DrikaElement{
 		QueueDeleteObjectID(placeholder_id);
 	}
 
-	array<string> GetSaveParameters(){
-		return {"create_particle", placeholder_id, amount, particle_path, velocity, Vec3ToString(tint), use_blood_tint, spread, connect_particles};
-	}
-
 	string GetDisplayString(){
 		return "CreateParticle " + particle_path;
 	}
-	
+
 	void DrawSettings(){
 		ImGui_Text("Particle Path : ");
 		ImGui_SameLine();

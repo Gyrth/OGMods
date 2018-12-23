@@ -3,23 +3,36 @@ class DrikaSetCharacter : DrikaElement{
 	string original_character_path;
 	bool cache_skeleton_info = true;
 
-	DrikaSetCharacter(string _object_id = "-1", string _character_path = "Data/Characters/guard.xml", string _cache_skeleton_info = "true"){
-		object_id = atoi(_object_id);
-		character_path = _character_path;
+	DrikaSetCharacter(JSONValue params = JSONValue()){
+		character_path = GetJSONString(params, "_character_path", "Data/Characters/guard.xml");
+		cache_skeleton_info = GetJSONBool(params, "cache_skeleton_info", true);
+		InterpIdentifier(params);
+
+		connection_types = {_movement_object};
 		drika_element_type = drika_set_character;
 		has_settings = true;
-		cache_skeleton_info = ((_cache_skeleton_info == "true")?true:false);
-		connection_types = {_movement_object};
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("set_character");
+		data["character_path"] = JSONValue(character_path);
+		data["cache_skeleton_info"] = JSONValue(cache_skeleton_info);
+		data["identifier_type"] = JSONValue(identifier_type);
+		if(identifier_type == id){
+			data["identifier"] = JSONValue(object_id);
+		}else if(identifier_type == reference){
+			data["identifier"] = JSONValue(reference_string);
+		}else if(identifier_type == team){
+			data["identifier"] = JSONValue(character_team);
+		}
+		return data;
 	}
 
 	void PostInit(){
 		if(!MovementObjectExists(object_id)){
 			Log(warning, "Character does not exist with id " + object_id);
 		}
-	}
-
-	array<string> GetSaveParameters(){
-		return {"set_character", object_id, character_path, (cache_skeleton_info?"true":"false")};
 	}
 
 	string GetDisplayString(){
@@ -33,10 +46,12 @@ class DrikaSetCharacter : DrikaElement{
 		}
 	}
 
-	void DrawSettings(){
-		if(ImGui_InputInt("Character ID", object_id)){
+	void StartSettings(){
+		CheckReferenceAvailable();
+	}
 
-		}
+	void DrawSettings(){
+		DrawSelectTargetUI();
 		ImGui_Text("Set To Character : ");
 		ImGui_SameLine();
 		ImGui_Text(character_path);

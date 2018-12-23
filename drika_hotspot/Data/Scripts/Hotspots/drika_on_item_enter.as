@@ -8,25 +8,23 @@ class DrikaOnItemEnter : DrikaElement{
 	item_trigger_types trigger_type;
 	array<string> item_triggger_choices = {"Check ID", "Check Label"};
 
-	DrikaOnItemEnter(string _trigger_type = "0", string _param = "-1"){
+	DrikaOnItemEnter(JSONValue params = JSONValue()){
+		trigger_type = item_trigger_types(GetJSONInt(params, "trigger_type", 0));
+		current_combo_item = int(trigger_type);
+		item_id = GetJSONInt(params, "item_id", -1);
+		item_label = GetJSONString(params, "item_label", "");
+
+		connection_types = {_item_object};
 		drika_element_type = drika_on_item_enter;
 		has_settings = true;
-		trigger_type = item_trigger_types(atoi(_trigger_type));
-		current_combo_item = int(trigger_type);
-
-		if(trigger_type == check_id){
-			item_id = atoi(_param);
-		}else{
-			item_label = _param;
-		}
 	}
 
-	array<string> GetSaveParameters(){
-		if(trigger_type == check_id){
-			return {"on_item_enter", trigger_type, item_id};
-		}else{
-			return {"on_item_enter", trigger_type, item_label};
-		}
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("on_item_enter");
+		data["trigger_type"] = JSONValue(trigger_type);
+		data["item_label"] = JSONValue(item_label);
+		return data;
 	}
 
 	string GetDisplayString(){

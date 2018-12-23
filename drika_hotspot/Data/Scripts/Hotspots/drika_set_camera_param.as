@@ -33,16 +33,35 @@ class DrikaSetCameraParam : DrikaElement{
 									"DOF"
 								};
 
-	DrikaSetCameraParam(string _camera_param = "0", string _param_after = "1,1,1"){
-		camera_param = camera_params(atoi(_camera_param));
+	DrikaSetCameraParam(JSONValue params = JSONValue()){
+		camera_param = camera_params(GetJSONInt(params, "camera_param", 0));
 		current_type = camera_param;
-		param_name = param_names[current_type];
 
 		drika_element_type = drika_set_camera_param;
 		has_settings = true;
 		SetParamType();
-		GetBeforeParam();
-		InterpParam(_param_after);
+		InterpParam(params);
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("set_camera_param");
+		data["camera_param"] = JSONValue("camera_param");
+		string save_string;
+		if(param_type == vec3_color_param){
+			data["param_after"] = JSONValue(JSONarrayValue);
+			data["param_after"].append(vec3_param_after.x);
+			data["param_after"].append(vec3_param_after.y);
+			data["param_after"].append(vec3_param_after.z);
+		}else if(param_type == float_param){
+			data["param_after"] = JSONValue(float_param_after);
+		}else if(param_type == float_array_param){
+			data["param_after"] = JSONValue(JSONarrayValue);
+			for(uint i = 0; i < float_array_param_after.size(); i++){
+				data["param_after"].append(float_array_param_after[i]);
+			}
+		}
+		return data;
 	}
 
 	void SetParamType(){
@@ -55,26 +74,14 @@ class DrikaSetCameraParam : DrikaElement{
 		}
 	}
 
-	void InterpParam(string _param){
+	void InterpParam(JSONValue _params){
 		if(param_type == vec3_color_param){
-			vec3_param_after = StringToVec3(_param);
+			vec3_param_after = GetJSONVec3(_params, "param_after", vec3(1.0));
 		}else if(param_type == float_param){
-			float_param_after = atof(_param);
+			float_param_after = GetJSONFloat(_params, "param_after", 1.0);
 		}else if(param_type == float_array_param){
-			float_array_param_after = StringToFloatArray(_param);
+			float_array_param_after = GetJSONFloatArray(_params, "param_after", {1.0, 1.0, 1.0, 1.0, 1.0, 1.0});
 		}
-	}
-
-	array<string> GetSaveParameters(){
-		string save_string;
-		if(param_type == vec3_color_param){
-			save_string = Vec3ToString(vec3_param_after);
-		}else if(param_type == float_param){
-			save_string = "" + float_param_after;
-		}else if(param_type == float_array_param){
-			save_string = FloatArrayToString(float_array_param_after);
-		}
-		return {"set_camera_param", camera_param, save_string};
 	}
 
 	string GetDisplayString(){
@@ -142,6 +149,10 @@ class DrikaSetCameraParam : DrikaElement{
 	}
 
 	bool Trigger(){
+		if(!triggered){
+			GetBeforeParam();
+			triggered = true;
+		}
 		return SetParameter(false);
 	}
 
@@ -176,6 +187,9 @@ class DrikaSetCameraParam : DrikaElement{
 	}
 
 	void Reset(){
-		SetParameter(true);
+		if(triggered){
+			SetParameter(true);
+			triggered = false;
+		}
 	}
 }

@@ -5,14 +5,31 @@ class DrikaTransformObject : DrikaElement{
 	quaternion before_rotation;
 	vec3 before_scale;
 
-	DrikaTransformObject(string _placeholder_id = "-1", string _identifier_type = "0", string _identifier = "-1"){
+	DrikaTransformObject(JSONValue params = JSONValue()){
+		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
+		placeholder_name = "Create Particle Helper";
 		drika_element_type = drika_transform_object;
-		placeholder_id = atoi(_placeholder_id);
 		default_placeholder_scale = vec3(1.0);
 		placeholder_name = "Transform Object Helper";
-		has_settings = true;
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object};
-		InterpIdentifier(_identifier_type, _identifier);
+
+		InterpIdentifier(params);
+		has_settings = true;
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("transform_object");
+		data["placeholder_id"] = JSONValue(placeholder_id);
+		data["identifier_type"] = JSONValue(identifier_type);
+		if(identifier_type == id){
+			data["identifier"] = JSONValue(object_id);
+		}else if(identifier_type == reference){
+			data["identifier"] = JSONValue(reference_string);
+		}else if(identifier_type == team){
+			data["identifier"] = JSONValue(character_team);
+		}
+		return data;
 	}
 
 	void PostInit(){
@@ -32,16 +49,6 @@ class DrikaTransformObject : DrikaElement{
 	void Delete(){
 		Reset();
 		QueueDeleteObjectID(placeholder_id);
-	}
-
-	array<string> GetSaveParameters(){
-		string save_identifier;
-		if(identifier_type == id){
-			save_identifier = "" + object_id;
-		}else if(identifier_type == reference){
-			save_identifier = "" + reference_string;
-		}
-		return {"transform_object", placeholder_id, identifier_type, save_identifier};
 	}
 
 	string GetDisplayString(){
@@ -67,9 +74,9 @@ class DrikaTransformObject : DrikaElement{
 		}
 		placeholder.SetScale(bounds * target_object.GetScale());
 	}
-	
+
 	void StartSettings(){
-		CheckReferenceOptionAvailable();
+		CheckReferenceAvailable();
 	}
 
 	void DrawSettings(){
