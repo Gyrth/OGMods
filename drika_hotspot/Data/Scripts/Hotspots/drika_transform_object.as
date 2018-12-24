@@ -7,7 +7,6 @@ class DrikaTransformObject : DrikaElement{
 
 	DrikaTransformObject(JSONValue params = JSONValue()){
 		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
-		placeholder_name = "Create Particle Helper";
 		drika_element_type = drika_transform_object;
 		default_placeholder_scale = vec3(1.0);
 		placeholder_name = "Transform Object Helper";

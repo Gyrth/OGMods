@@ -25,7 +25,7 @@ enum drika_element_types { 	none = 0,
 							drika_set_velocity = 24
 						};
 
-array<vec4> display_colors = {    vec4(255),
+array<vec4> display_colors = {	vec4(255),
                                 vec4(230, 184, 175, 255),
                                 vec4(255, 153, 0, 255),
                                 vec4(0, 243, 255, 255),

@@ -484,7 +484,6 @@ void DrawEditor(){
 				if(drika_elements.size() > 0){
 					duplicating = true;
 					DrikaElement@ new_element = InterpElement(GetCurrentElement().GetSaveData());
-					new_element.PostInit();
 					InsertElement(new_element);
 					duplicating = false;
 				}

@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="30.3717" t1="5.22401" t2="6.6229" s0="1" s1="1" s2="1" q0="0.284542" q1="-0.552359" q2="0.208058" q3="0.755412" euler_x="0.720471" euler_y="-1.26272" euler_z="0" id="1">
+    <CameraObject t0="33.6878" t1="1.95465" t2="-1.83304" s0="1" s1="1" s2="1" q0="0.0712744" q1="-0.360278" q2="0.0276201" q3="0.929708" euler_x="0.153027" euler_y="-0.739398" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -239,9 +239,9 @@
     <EnvObject t0="26.2798" t1="-2.74726" t2="-9.67234" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="35" color_r="0.0941176" color_g="1" color_b="0" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="25.9964" t1="-1.4062" t2="6.01628" s0="0.501976" s1="0.501976" s2="0.501976" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot t0="26.2469" t1="-1.92814" t2="6.13204" s0="0.501976" s1="0.501976" s2="0.501976" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:149,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:57},{&quot;clear_image&quot;:false,&quot;function_name&quot;:&quot;display_image&quot;,&quot;image_path&quot;:&quot;Data/Textures/drika_hotspot.png&quot;,&quot;scale&quot;:1,&quot;tint&quot;:[1,1,1,1]},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;clear_image&quot;:true,&quot;function_name&quot;:&quot;display_image&quot;,&quot;image_path&quot;:&quot;Data/Textures/drika_hotspot.png&quot;,&quot;scale&quot;:1,&quot;tint&quot;:[1,1,1,1]}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:125,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:86},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:48,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:57},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:27,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:58},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:26,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:59},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:26,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:85},{&quot;clear_image&quot;:false,&quot;function_name&quot;:&quot;display_image&quot;,&quot;image_path&quot;:&quot;Data/Textures/drika_hotspot.png&quot;,&quot;scale&quot;:1,&quot;tint&quot;:[1,1,1,1]},{&quot;duration&quot;:200,&quot;function_name&quot;:&quot;wait&quot;},{&quot;clear_image&quot;:true,&quot;function_name&quot;:&quot;display_image&quot;,&quot;image_path&quot;:&quot;Data/Textures/drika_hotspot.png&quot;,&quot;scale&quot;:1,&quot;tint&quot;:[1,1,1,1]}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -359,7 +359,13 @@
             <Connection id="3" />
         </Connections>
     </PlaceholderObject>
-    <EnvObject name="Transform Object Helper" t0="26.7001" t1="-0.213203" t2="2.70386" s0="2.83456" s1="0.868163" s2="2.77512" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Transform Object Helper" t0="22.4715" t1="-1.24316" t2="1.67319" s0="2.83456" s1="0.868163" s2="2.77512" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Transform Object Helper" t0="28.2266" t1="-1.52645" t2="-1.83325" s0="2.83456" s1="0.868163" s2="2.77512" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Transform Object Helper" t0="21.984" t1="-1.26973" t2="-5.93651" s0="2.83456" s1="0.868163" s2="2.77512" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="59" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="5.82174" t1="-3.42138" t2="-122.457" s0="24.5896" s1="1" s2="30.9778" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="60" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -374,6 +380,12 @@
         </parameters>
     </EnvObject>
     <EnvObject t0="26.2516" t1="-2.74726" t2="9.46973" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="84" color_r="0.63636" color_g="0.487013" color_b="0.713725" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Transform Object Helper" t0="22.289" t1="-1.07953" t2="-10.3088" s0="2.83456" s1="0.868163" s2="2.77512" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="85" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Transform Object Helper" t0="31.6036" t1="-1.37758" t2="-14.7357" s0="2.83456" s1="0.868163" s2="2.77512" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <Group t0="0.491961" t1="-8.35209" t2="-31.4474" s0="16.4361" s1="0.47295" s2="5.17684" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="118" version="1">
