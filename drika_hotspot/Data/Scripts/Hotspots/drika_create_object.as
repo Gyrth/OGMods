@@ -12,6 +12,10 @@ class DrikaCreateObject : DrikaElement{
 		has_settings = true;
 	}
 
+	void Delete(){
+		QueueDeleteObjectID(placeholder_id);
+	}
+
 	void PostInit(){
 		RetrievePlaceholder();
 	}
