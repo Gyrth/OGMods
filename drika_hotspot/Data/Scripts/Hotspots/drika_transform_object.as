@@ -11,7 +11,7 @@ class DrikaTransformObject : DrikaElement{
 		drika_element_type = drika_transform_object;
 		default_placeholder_scale = vec3(1.0);
 		placeholder_name = "Transform Object Helper";
-		connection_types = {_movement_object, _env_object, _decal_object, _item_object};
+		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object};
 
 		InterpIdentifier(params);
 		has_settings = true;
