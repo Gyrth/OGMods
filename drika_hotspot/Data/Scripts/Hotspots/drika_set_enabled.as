@@ -6,7 +6,7 @@ class DrikaSetEnabled : DrikaElement{
 		enabled = GetJSONBool(params, "enabled", true);
 		InterpIdentifier(params);
 		drika_element_type = drika_set_enabled;
-		connection_types = {_env_object};
+		connection_types = {_env_object, _hotspot_object};
 		has_settings = true;
 	}
 

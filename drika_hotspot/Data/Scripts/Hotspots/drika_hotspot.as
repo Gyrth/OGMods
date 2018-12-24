@@ -51,6 +51,7 @@ int font_size;
 string font_path;
 bool show_text = false;
 float text_opacity = 1.0;
+bool hotspot_enabled = true;
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -73,6 +74,10 @@ void Init() {
 		duplicating = true;
 	}
 	InterpData();
+}
+
+void SetEnabled(bool val){
+	hotspot_enabled = val;
 }
 
 void RegisterObject(int id, string reference){
@@ -267,7 +272,7 @@ void Update(){
 		SwitchToPlaying();
 	}
 
-	if(!script_finished && drika_indexes.size() > 0 && !show_editor){
+	if(!script_finished && drika_indexes.size() > 0 && !show_editor && hotspot_enabled){
 		if(messages.size() > 0){
 			for(uint i = 0; i < messages.size(); i++){
 				GetCurrentElement().ReceiveMessage(messages[i]);
@@ -609,7 +614,8 @@ void ReceiveMessage(string msg){
         return;
     }
     string token = token_iter.GetToken(msg);
-	if(token == "level_event"){
+	// Discard the messages when this hotspot is disabled.
+	if(token == "level_event" && hotspot_enabled){
 		token_iter.FindNextToken(msg);
 		string message = token_iter.GetToken(msg);
 		if(!script_finished && drika_indexes.size() > 0){
@@ -626,7 +632,7 @@ void ReceiveMessage(string msg){
 
 void HandleEvent(string event, MovementObject @mo){
 	if(event == "enter" || event == "exit"){
-		if(!script_finished && drika_indexes.size() > 0){
+		if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
 			GetCurrentElement().ReceiveMessage((event == "enter")?"CharacterEnter":"CharacterExit", mo.GetID());
 			ScriptParams@ char_params = ReadObjectFromID(mo.GetID()).GetScriptParams();
 			if(char_params.HasParam("Teams")) {
@@ -640,7 +646,7 @@ void HandleEvent(string event, MovementObject @mo){
 void HandleEventItem(string event, ItemObject @obj){
 	Log(info, "on item works!");
 	if(event == "enter"){
-		if(!script_finished && drika_indexes.size() > 0){
+		if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
 			GetCurrentElement().ReceiveMessage("ItemEnter", obj.GetID());
 			GetCurrentElement().ReceiveMessage("ItemEnter", obj.GetLabel(), obj.GetID());
 		}

@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="33.6878" t1="1.95465" t2="-1.83304" s0="1" s1="1" s2="1" q0="0.0712744" q1="-0.360278" q2="0.0276201" q3="0.929708" euler_x="0.153027" euler_y="-0.739398" euler_z="0" id="1">
+    <CameraObject t0="21.7985" t1="0.583673" t2="5.82408" s0="1" s1="1" s2="1" q0="0.21959" q1="0.707277" q2="-0.248815" q3="0.624204" euler_x="-2.46505" euler_y="1.44617" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -562,6 +562,13 @@
             </EnvObject>
         </Group>
     </Group>
+    <Hotspot t0="26.318" t1="-1.92814" t2="2.3242" s0="0.501976" s1="0.501976" s2="0.501976" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="121" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;enabled&quot;:false,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;enabled&quot;:true,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;duration&quot;:200,&quot;function_name&quot;:&quot;wait&quot;}]}&#x0A;' />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <EnvObject t0="26.356" t1="-2.74726" t2="-13.7048" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="125" color_r="0" color_g="0.0941176" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
