@@ -87,7 +87,7 @@ class DrikaSetLevelParam : DrikaElement{
 
 		string save_string;
 		if(level_param == other){
-			data["param_after"] = JSONValue(param_name + ";" + string_param_after);
+			data["param_after"] = JSONValue(string_param_after);
 		}else if(param_type == string_param){
 			data["param_after"] = JSONValue(string_param_after);
 			save_string = string_param_after;

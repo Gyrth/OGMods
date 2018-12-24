@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="21.3675" t1="1.91425" t2="6.71688" s0="1" s1="1" s2="1" q0="0.0187541" q1="0.980884" q2="-0.122841" q3="0.149753" euler_x="-2.89242" euler_y="0.303002" euler_z="-3.14159" id="1">
+    <CameraObject t0="21.5665" t1="0.697134" t2="6.01387" s0="1" s1="1" s2="1" q0="0.106863" q1="0.809868" q2="-0.15584" q3="0.555344" euler_x="-2.76139" euler_y="1.20216" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -168,7 +168,7 @@
     </EnvObject>
     <Hotspot t0="26.1629" t1="-1.27732" t2="9.37494" s0="0.569122" s1="0.569122" s2="0.569122" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:3},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:84,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:34},{&quot;function_name&quot;:&quot;set_velocity&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:24,&quot;velocity_magnitude&quot;:11.000000953674316},{&quot;function_name&quot;:&quot;set_level_param&quot;,&quot;level_param&quot;:17,&quot;param_after&quot;:&quot;test;okay&quot;,&quot;param_name&quot;:&quot;test&quot;},{&quot;after_color&quot;:[0.058138661086559296,0.077841892838478088,0.31128406524658203],&quot;color_type&quot;:1,&quot;function_name&quot;:&quot;set_color&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;palette_slot&quot;:0},{&quot;after_color&quot;:[0.71595335006713867,0.13650473952293396,0.13650473952293396],&quot;color_type&quot;:1,&quot;function_name&quot;:&quot;set_color&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;palette_slot&quot;:1},{&quot;after_color&quot;:[0.1154143288731575,0.47081714868545532,0.11818006634712219],&quot;color_type&quot;:1,&quot;function_name&quot;:&quot;set_color&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;palette_slot&quot;:2},{&quot;function_name&quot;:&quot;wait_level_message&quot;,&quot;message&quot;:&quot;continue_drika_hotspot&quot;},{&quot;character_param&quot;:24,&quot;function_name&quot;:&quot;set_character_param&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;param_after&quot;:&quot;notturner&quot;,&quot;param_type&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:3},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:84,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:34},{&quot;function_name&quot;:&quot;set_velocity&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:24,&quot;velocity_magnitude&quot;:11.000000953674316},{&quot;function_name&quot;:&quot;set_level_param&quot;,&quot;level_param&quot;:17,&quot;param_after&quot;:&quot;okay&quot;,&quot;param_name&quot;:&quot;test&quot;},{&quot;after_color&quot;:[0.058138661086559296,0.077841892838478088,0.31128406524658203],&quot;color_type&quot;:1,&quot;function_name&quot;:&quot;set_color&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;palette_slot&quot;:0},{&quot;after_color&quot;:[0.71595335006713867,0.13650473952293396,0.13650473952293396],&quot;color_type&quot;:1,&quot;function_name&quot;:&quot;set_color&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;palette_slot&quot;:1},{&quot;after_color&quot;:[0.1154143288731575,0.47081714868545532,0.11818006634712219],&quot;color_type&quot;:1,&quot;function_name&quot;:&quot;set_color&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;palette_slot&quot;:2},{&quot;function_name&quot;:&quot;wait_level_message&quot;,&quot;message&quot;:&quot;continue_drika_hotspot&quot;},{&quot;character_param&quot;:24,&quot;function_name&quot;:&quot;set_character_param&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;param_after&quot;:&quot;notturner&quot;,&quot;param_type&quot;:0}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -212,6 +212,11 @@
     <EnvObject t0="26.2798" t1="-2.74726" t2="-9.67234" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="35" color_r="0.0941176" color_g="1" color_b="0" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
+    <Hotspot t0="25.9964" t1="-1.4062" t2="6.01628" s0="0.501976" s1="0.501976" s2="0.501976" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters />
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <EnvObject t0="26.4826" t1="-2.74726" t2="-17.1659" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="38" color_r="0.682353" color_g="0" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
@@ -544,4 +549,5 @@
     <SpawnerItem display_name="Fire" path="Data/Objects/fire.xml" thumbnail_path="" />
     <SpawnerItem display_name="Male Rabbit Guard Brown" path="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_GuardActor_reddy.png" />
     <SpawnerItem display_name="Dog Spear" path="Data/Items/DogWeapons/DogSpear.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/wspear.png" />
+    <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
 </RecentItems>
