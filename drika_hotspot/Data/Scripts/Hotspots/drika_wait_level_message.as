@@ -33,7 +33,12 @@ class DrikaWaitLevelMessage : DrikaElement{
 	}
 
 	bool Trigger(){
-		return received_message;
+		if(received_message){
+			received_message = false;
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	void Reset(){

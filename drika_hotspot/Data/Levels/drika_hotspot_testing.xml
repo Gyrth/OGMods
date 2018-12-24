@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="24.1761" t1="-0.968704" t2="10.3923" s0="1" s1="1" s2="1" q0="0.0801192" q1="-0.62155" q2="0.0641213" q3="0.776624" euler_x="0.205599" euler_y="-1.34988" euler_z="0" id="1">
+    <CameraObject t0="26.8502" t1="5.03052" t2="12.1835" s0="1" s1="1" s2="1" q0="0.203737" q1="-0.513337" q2="0.126935" q3="0.823932" euler_x="0.484824" euler_y="-1.11437" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -240,7 +240,9 @@
         <parameters />
     </EnvObject>
     <Hotspot t0="25.9964" t1="-1.4062" t2="6.01628" s0="0.501976" s1="0.501976" s2="0.501976" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
-        <parameters />
+        <parameters>
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:149,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:57}]}&#x0A;' />
+        </parameters>
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
@@ -281,7 +283,7 @@
     </Hotspot>
     <Hotspot t0="-14.8747" t1="-2.42134" t2="8.65861" s0="1.4543" s1="1" s2="12.1734" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;enabled&quot;:true,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:50,&quot;identifier_type&quot;:0},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:45,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:49},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:2}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;enabled&quot;:false,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:50,&quot;identifier_type&quot;:0},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;enabled&quot;:true,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:50,&quot;identifier_type&quot;:0},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:45,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:49},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:3}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -289,7 +291,7 @@
     <EnvObject t0="26.0686" t1="-2.74726" t2="2.31907" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="48" color_r="0.0664359" color_g="0.282353" color_b="0" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="-21.8458" t1="-1.42138" t2="8.5921" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="1.57045" euler_z="0" id="51" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
+    <ActorObject t0="-21.8458" t1="-1.42138" t2="8.5921" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="51" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -357,6 +359,9 @@
             <Connection id="3" />
         </Connections>
     </PlaceholderObject>
+    <EnvObject name="Transform Object Helper" t0="26.7001" t1="-0.213203" t2="2.70386" s0="2.83456" s1="0.868163" s2="2.77512" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject t0="5.82174" t1="-3.42138" t2="-122.457" s0="24.5896" s1="1" s2="30.9778" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="60" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
@@ -589,7 +594,7 @@
     <DynamicLightObject t0="12.8009" t1="3.70381" t2="-26.6873" s0="1.87809" s1="1.87809" s2="1.87809" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="146" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
         <parameters />
     </DynamicLightObject>
-    <EnvObject t0="26.2372" t1="-2.74726" t2="5.93567" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="149" color_r="0.186021" color_g="0" color_b="0.282353" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="26.7001" t1="-0.213203" t2="2.70386" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="149" color_r="0.186021" color_g="0" color_b="0.282353" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <PathPointObject t0="14.1764" t1="-2.42134" t2="19.621" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="151" type_file="">
