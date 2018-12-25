@@ -207,7 +207,7 @@ DrikaElement@ InterpElement(JSONValue &in function_json){
 	}else if(function_json["function_name"].asString() == "play_sound"){
 		return DrikaPlaySound(function_json);
 	}else if(function_json["function_name"].asString() == "send_level_message"){
-		return DrikaPlaySound(function_json);
+		return DrikaSendLevelMessage(function_json);
 	}else if(function_json["function_name"].asString() == "set_camera_param"){
 		return DrikaSetCameraParam(function_json);
 	}else if(function_json["function_name"].asString() == "set_character_param"){
