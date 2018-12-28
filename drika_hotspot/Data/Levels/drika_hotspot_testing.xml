@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="23.0971" t1="1.84043" t2="8.12985" s0="1" s1="1" s2="1" q0="0.21959" q1="0.707277" q2="-0.248815" q3="0.624204" euler_x="-2.46504" euler_y="1.44617" euler_z="-3.14159" id="1">
+    <CameraObject t0="33.6593" t1="2.14655" t2="9.03924" s0="1" s1="1" s2="1" q0="-0.201421" q1="0.548014" q2="-0.137969" q3="-0.800047" euler_x="0.493271" euler_y="-1.20114" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -209,9 +209,6 @@
     <EnvObject name="Create Object Helper" t0="17.982" t1="0.525773" t2="-27.3426" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Set Velocity Helper" t0="24.483" t1="-2.05751" t2="9.42319" s0="0.25" s1="0.25" s2="0.25" q0="-0.0198121" q1="-0.0941623" q2="0.20494" q3="0.974033" euler_x="-0.0784854" euler_y="-0.176224" euler_z="0.421694" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject name="Set Velocity Helper" t0="26.1629" t1="-2.17828" t2="9.43144" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -219,9 +216,6 @@
         <parameters />
     </EnvObject>
     <EnvObject t0="25.9926" t1="-2.74726" t2="-1.007" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" color_r="1" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject name="Set Velocity Helper" t0="27.4889" t1="-0.791057" t2="9.43144" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="13.7892" t1="-2.74726" t2="10.1012" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
@@ -276,7 +270,7 @@
     </EnvObject>
     <Hotspot t0="20.1079" t1="-0.832158" t2="13.6093" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="45" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;entered_character&quot;,&quot;target_character_type&quot;:4},{&quot;function_name&quot;:&quot;set_velocity&quot;,&quot;identifier&quot;:&quot;entered_character&quot;,&quot;identifier_type&quot;:1,&quot;placeholder_id&quot;:46,&quot;velocity_magnitude&quot;:25},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;entered_character&quot;,&quot;target_character_type&quot;:4},{&quot;function_name&quot;:&quot;set_velocity&quot;,&quot;identifier&quot;:&quot;entered_character&quot;,&quot;identifier_type&quot;:1,&quot;placeholder_id&quot;:46,&quot;velocity_magnitude&quot;:30},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />

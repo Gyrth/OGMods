@@ -220,14 +220,14 @@ class DrikaElement{
 			placeholder.SetScale(old_placeholder.GetScale());
 			placeholder.SetTranslation(old_placeholder.GetTranslation());
 			placeholder.SetRotation(old_placeholder.GetRotation());
-			return;
-		}
-		if(ObjectExists(placeholder_id)){
-			@placeholder = ReadObjectFromID(placeholder_id);
-			placeholder.SetName(placeholder_name);
-			placeholder.SetSelectable(false);
 		}else{
-			CreatePlaceholder();
+			if(ObjectExists(placeholder_id)){
+				@placeholder = ReadObjectFromID(placeholder_id);
+				placeholder.SetName(placeholder_name);
+				placeholder.SetSelectable(false);
+			}else{
+				CreatePlaceholder();
+			}
 		}
 	}
 
