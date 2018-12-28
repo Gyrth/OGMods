@@ -615,17 +615,17 @@ void ReceiveMessage(string msg){
     }
     string token = token_iter.GetToken(msg);
 	// Discard the messages when this hotspot is disabled.
-	if(token == "level_event" && hotspot_enabled){
+	if(token == "level_event"){
 		token_iter.FindNextToken(msg);
 		string message = token_iter.GetToken(msg);
-		if(!script_finished && drika_indexes.size() > 0){
-			messages.insertLast(message);
-		}
 		if(message == "drika_hotspot_editing" && token_iter.FindNextToken(msg)){
 			int id = atoi(token_iter.GetToken(msg));
 			if(id != this_hotspot.GetID()){
 				show_editor = false;
 			}
+		}
+		if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
+			messages.insertLast(message);
 		}
 	}
 }
