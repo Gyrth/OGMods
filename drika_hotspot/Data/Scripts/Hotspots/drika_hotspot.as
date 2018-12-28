@@ -160,7 +160,8 @@ void Dispose() {
 }
 
 void SetParameters(){
-
+	params.AddIntCheckbox("Debug Current Line", debug_current_line);
+	debug_current_line = (params.GetInt("Debug Current Line") == 1);
 }
 
 void InterpData(){
@@ -318,6 +319,7 @@ bool reorded = false;
 int display_index = 0;
 int drag_target_line = 0;
 bool update_scroll = false;
+bool debug_current_line = false;
 
 void DrawEditor(){
 	if(show_name){
@@ -456,6 +458,9 @@ void DrawEditor(){
 					if(ImGui_InputText("Name", display_name, 64)){
 						this_hotspot.SetName(display_name);
 					}
+				}
+				if(ImGui_Checkbox("Debug Current Line", debug_current_line)){
+					params.SetInt("Debug Current Line", debug_current_line?1:0);
 				}
 				ImGui_EndMenu();
 			}
@@ -673,6 +678,13 @@ void Reset(){
 }
 
 void Draw(){
+	if(debug_current_line){
+		if(!hotspot_enabled){
+			DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.75, 0), "Disabled", 1.0, false, _delete_on_draw);
+		}else{
+			DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.75, 0), GetCurrentElement().GetDisplayString(), 1.0, false, _delete_on_draw);
+		}
+	}
 	if(show_text){
 		vec2 pos(GetScreenWidth() *0.5, GetScreenHeight() *0.2);
 		TextMetrics metrics = GetTextAtlasMetrics(font_path, font_size, 0, text);

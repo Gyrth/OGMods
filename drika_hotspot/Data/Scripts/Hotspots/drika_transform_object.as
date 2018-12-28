@@ -109,7 +109,6 @@ class DrikaTransformObject : DrikaElement{
 		}
 		if(ObjectExists(placeholder_id)){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			Log(warning, "id " + object_id);
 			DrawGizmo(placeholder);
 		}else{
 			CreatePlaceholder();
