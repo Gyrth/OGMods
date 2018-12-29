@@ -109,7 +109,7 @@ bool AcceptConnectionsTo(Object @other){
 	if(drika_elements.size() > 0){
 		if(GetCurrentElement().placeholder_id == other.GetID()){
 			return false;
-		}else if(GetCurrentElement().connection_types.find(other.GetType()) != -1){
+		}else if(GetCurrentElement().identifier_type == id && GetCurrentElement().connection_types.find(other.GetType()) != -1){
 			return true;
 		}
 	}
