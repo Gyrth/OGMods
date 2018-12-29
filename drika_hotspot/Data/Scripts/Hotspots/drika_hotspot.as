@@ -248,10 +248,12 @@ void PostInit(){
 
 void LaunchCustomGUI(){
 	show_editor = !show_editor;
-	if(show_editor && drika_elements.size() > 0){
-		has_closed = false;
-		GetCurrentElement().StartEdit();
+	if(show_editor){
 		level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
+		has_closed = false;
+		if(drika_elements.size() > 0){
+			GetCurrentElement().StartEdit();
+		}
 	}
 }
 
@@ -325,7 +327,11 @@ void DrawEditor(){
 	if(show_name){
 		DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.5, 0), display_name, 1.0, false, _delete_on_draw);
 	}
-	DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_update);
+	if(show_editor){
+		DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.25, 1.0, 0.25, 1.0), _delete_on_update);
+	}else{
+		DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_update);
+	}
 	if(show_editor){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
@@ -678,7 +684,7 @@ void Reset(){
 }
 
 void Draw(){
-	if(debug_current_line){
+	if(debug_current_line && drika_elements.size() > 0){
 		if(!hotspot_enabled){
 			DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.75, 0), "Disabled", 1.0, false, _delete_on_draw);
 		}else{
