@@ -2,9 +2,11 @@ class DrikaCheckCharacterState : DrikaElement{
 	array<string> target_choices = {"Check ID", "Check Reference", "Check Team"};
 	array<string> state_choices = {"Awake", "Unconscious", "Dead"};
 	int state_check;
+	bool equals = true;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		state_check = GetJSONInt(params, "state_check", 0);
+		equals = GetJSONBool(params, "equals", true);
 		InterpIdentifier(params);
 		show_team_option = true;
 
@@ -22,6 +24,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		JSONValue data;
 		data["function_name"] = JSONValue("check_character_state");
 		data["state_check"] = JSONValue(state_check);
+		data["equals"] = JSONValue(equals);
 		data["identifier_type"] = JSONValue(identifier_type);
 		if(identifier_type == id){
 			data["identifier"] = JSONValue(object_id);
@@ -42,11 +45,12 @@ class DrikaCheckCharacterState : DrikaElement{
 		}else if(identifier_type == team){
 			trigger_message = character_team;
 		}
-		return "CheckCharacterState" + " " + trigger_message + " " + state_choices[state_check];
+		return "CheckCharacterState" + " " + trigger_message + (equals?" ":" not ") + state_choices[state_check];
 	}
 
 	void DrawSettings(){
 		DrawSelectTargetUI();
+		ImGui_Checkbox("Equals", equals);
 		ImGui_Combo("Check for", state_check, state_choices, state_choices.size());
 	}
 
@@ -62,7 +66,7 @@ class DrikaCheckCharacterState : DrikaElement{
 			if(MovementObjectExists(object_id)){
 				MovementObject@ char = ReadCharacterID(object_id);
 				if(char.HasVar("knocked_out")){
-					if(char.GetIntVar("knocked_out") == state_check){
+					if((char.GetIntVar("knocked_out") == state_check) == equals){
 						return true;
 					}
 				}
@@ -81,7 +85,7 @@ class DrikaCheckCharacterState : DrikaElement{
 						//Teams are , seperated.
 						array<string> teams = no_spaces_param.split(",");
 						if(teams.find(character_team) != -1){
-							if(char.GetIntVar("knocked_out") != state_check){
+							if((char.GetIntVar("knocked_out") != state_check) == equals){
 								all_in_state = false;
 							}
 						}
@@ -98,7 +102,7 @@ class DrikaCheckCharacterState : DrikaElement{
 			if(MovementObjectExists(registered_object_id)){
 				MovementObject@ char = ReadCharacterID(registered_object_id);
 				if(char.HasVar("knocked_out")){
-					if(char.GetIntVar("knocked_out") == state_check){
+					if((char.GetIntVar("knocked_out") == state_check) == equals){
 						return true;
 					}
 				}
