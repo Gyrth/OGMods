@@ -103,9 +103,9 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(identifier_type == id && object_id != -1 && ObjectExists(object_id) && ObjectExists(placeholder_id)){
-			Object@ object = ReadObjectFromID(object_id);
-			DebugDrawLine(object.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		Object@ target_object = GetTargetObject();
+		if(target_object !is null && ObjectExists(placeholder_id)){
+			DebugDrawLine(target_object.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 		if(ObjectExists(placeholder_id)){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
