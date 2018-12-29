@@ -315,7 +315,11 @@ class DrikaElement{
 	Object@ GetTargetObject(){
 		Object@ target_object;
 		if(identifier_type == id){
-			if(object_id == -1 || !ObjectExists(object_id)){
+			if(object_id == -1){
+				return null;
+			}else if(!ObjectExists(object_id)){
+				Log(warning, "The object with id " + object_id + " doesn't exist anymore, so resetting to -1.");
+				object_id = -1;
 				return null;
 			}else{
 				@target_object = ReadObjectFromID(object_id);
