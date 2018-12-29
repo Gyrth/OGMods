@@ -84,7 +84,7 @@ class DrikaElement{
 	int object_id = -1;
 	string reference_string = "";
 	string placeholder_name;
-	identifier_types identifier_type;
+	identifier_types identifier_type = id;
 	int current_identifier_type;
 	int current_reference;
 	vec3 default_placeholder_scale = vec3(0.25);
@@ -276,18 +276,22 @@ class DrikaElement{
 	}
 
 	void DrawSelectTargetUI(){
-		if(show_reference_option || show_team_option){
-			array<string> identifier_choices = {"ID"};
+		array<string> string_choices = {"ID", "Reference", "Team"};
+		if(ImGui_BeginCombo("Identifier Type", string_choices[current_identifier_type], ImGuiComboFlags_HeightSmall)){
+			if(ImGui_Selectable("ID", string_choices[current_identifier_type] == "ID")){
+				identifier_type = id;
+			}
 			if(show_reference_option){
-				identifier_choices.insertLast("Reference");
+				if(ImGui_Selectable("Reference", string_choices[current_identifier_type] == "Reference")){
+					identifier_type = reference;
+				}
 			}
 			if(show_team_option){
-				identifier_choices.insertLast("Team");
+				if(ImGui_Selectable("Team", string_choices[current_identifier_type] == "Team")){
+					identifier_type = team;
+				}
 			}
-
-			if(ImGui_Combo("Identifier Type", current_identifier_type, identifier_choices, identifier_choices.size())){
-				identifier_type = identifier_types(current_identifier_type);
-			}
+			ImGui_EndCombo();
 		}
 		if(identifier_type == id){
 			if(ImGui_InputInt("Object ID", object_id)){
