@@ -115,6 +115,27 @@ class DrikaElement{
 		index = _index;
 	}
 
+	void LeftClick(){
+		Object@ target_object = GetTargetObject();
+		if(this_hotspot.IsSelected() && ObjectExists(placeholder_id)){
+			this_hotspot.SetSelected(false);
+			if(target_object !is null){
+				target_object.SetSelected(false);
+			}
+			placeholder.SetSelected(true);
+		}else if(ObjectExists(placeholder_id) && placeholder.IsSelected() && target_object !is null){
+			placeholder.SetSelected(false);
+			this_hotspot.SetSelected(false);
+			target_object.SetSelected(true);
+		}else if(target_object !is null && target_object.IsSelected()){
+			if(ObjectExists(placeholder_id)){
+				placeholder.SetSelected(false);
+			}
+			target_object.SetSelected(false);
+			this_hotspot.SetSelected(true);
+		}
+	}
+
 	JSONValue GetSaveData(){
 		return JSONValue();
 	}
@@ -367,9 +388,14 @@ class DrikaElement{
 		scale_mat_z[15] = 1.0f;
 		gizmo_transform_z = gizmo_transform_z * scale_mat_z;
 
-		DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, vec4(0.0f, 0.0f, 1.0f, 0.15f), _delete_on_update);
-		DebugDrawWireMesh("Data/Models/drika_gizmo_x.obj", gizmo_transform_x, vec4(1.0f, 0.0f, 0.0f, 0.15f), _delete_on_update);
-		DebugDrawWireMesh("Data/Models/drika_gizmo_z.obj", gizmo_transform_z, vec4(0.0f, 1.0, 0.0f, 0.15f), _delete_on_update);
+		float color_mult = 1.0;
+		if(!target.IsSelected()){
+			color_mult = 0.05;
+		}
+
+		DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, mix(vec4(), vec4(0.0f, 0.0f, 1.0f, 0.15f), color_mult), _delete_on_update);
+		DebugDrawWireMesh("Data/Models/drika_gizmo_x.obj", gizmo_transform_x, mix(vec4(), vec4(1.0f, 0.0f, 0.0f, 0.15f), color_mult), _delete_on_update);
+		DebugDrawWireMesh("Data/Models/drika_gizmo_z.obj", gizmo_transform_z, mix(vec4(), vec4(0.0f, 1.0, 0.0f, 0.15f), color_mult), _delete_on_update);
 	}
 
 }

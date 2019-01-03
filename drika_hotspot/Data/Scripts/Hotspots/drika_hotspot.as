@@ -545,6 +545,10 @@ void DrawEditor(){
 					current_line = int(i);
 					GetCurrentElement().StartEdit();
 				}
+
+			}
+			if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(1)){
+				GetCurrentElement().LeftClick();
 			}
 			if(update_scroll && display_index == int(item_no)){
 				update_scroll = false;
