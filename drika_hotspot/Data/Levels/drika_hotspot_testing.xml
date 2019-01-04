@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="30.2395" t1="1.66469" t2="6.5606" s0="1" s1="1" s2="1" q0="0.305912" q1="-0.433973" q2="0.159517" q3="0.83225" euler_x="0.704486" euler_y="-0.961314" euler_z="0" id="1">
+    <CameraObject t0="30.2556" t1="1.68198" t2="6.57351" s0="1" s1="1" s2="1" q0="0.307236" q1="-0.354069" q2="0.124393" q3="0.87451" euler_x="0.675707" euler_y="-0.769408" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -564,7 +564,7 @@
     <Hotspot name="asdasd" t0="26.318" t1="-1.92814" t2="2.3242" s0="0.501976" s1="0.501976" s2="0.501976" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="121" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;enabled&quot;:false,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;enabled&quot;:true,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;duration&quot;:200,&quot;function_name&quot;:&quot;wait&quot;},{&quot;delay&quot;:0.25,&quot;duration&quot;:10,&quot;function_name&quot;:&quot;slow_motion&quot;,&quot;target_time_scale&quot;:0.5,&quot;wait&quot;:false},{&quot;clear_image&quot;:false,&quot;function_name&quot;:&quot;display_image&quot;,&quot;image_path&quot;:&quot;Data/Textures/drika_hotspot.png&quot;,&quot;scale&quot;:1,&quot;tint&quot;:[1,1,1,1]}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;enabled&quot;:false,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;enabled&quot;:true,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;duration&quot;:200,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;on_input&quot;,&quot;input&quot;:&quot;attack&quot;,&quot;type_text&quot;:false},{&quot;delay&quot;:0.25,&quot;duration&quot;:10,&quot;function_name&quot;:&quot;slow_motion&quot;,&quot;target_time_scale&quot;:0.5,&quot;wait&quot;:false},{&quot;clear_image&quot;:false,&quot;function_name&quot;:&quot;display_image&quot;,&quot;image_path&quot;:&quot;Data/Textures/drika_hotspot.png&quot;,&quot;scale&quot;:1,&quot;tint&quot;:[1,1,1,1]}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
