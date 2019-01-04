@@ -22,7 +22,8 @@ enum drika_element_types { 	none = 0,
 							drika_display_image = 21,
 							drika_load_level = 22,
 							drika_check_character_state = 23,
-							drika_set_velocity = 24
+							drika_set_velocity = 24,
+							drika_slow_motion = 25
 						};
 
 array<vec4> display_colors = {	vec4(255),
@@ -49,6 +50,7 @@ array<vec4> display_colors = {	vec4(255),
                                 vec4(153, 255, 193, 255),
                                 vec4(255, 0, 255, 255),
                                 vec4(255, 117, 117, 255),
+								vec4(153, 174, 255, 255),
                                 vec4(153, 174, 255, 255)
                             };
 

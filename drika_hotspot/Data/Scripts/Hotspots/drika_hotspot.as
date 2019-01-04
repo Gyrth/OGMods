@@ -1,4 +1,5 @@
 #include "hotspots/drika_element.as"
+#include "hotspots/drika_slow_motion.as"
 #include "hotspots/drika_set_object_param.as"
 #include "hotspots/drika_create_object.as"
 #include "hotspots/drika_check_character_state.as"
@@ -231,6 +232,8 @@ DrikaElement@ InterpElement(JSONValue &in function_json){
 		return DrikaWaitLevelMessage(function_json);
 	}else if(function_json["function_name"].asString() == "wait"){
 		return DrikaWait(function_json);
+	}else if(function_json["function_name"].asString() == "slow_motion"){
+		return DrikaSlowMotion(function_json);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + function_json["function_name"].asString());
@@ -447,6 +450,9 @@ void DrawEditor(){
 					InsertElement(@new_param);
 				}else if(ImGui_MenuItem("Wait")){
 					DrikaWait new_param();
+					InsertElement(@new_param);
+				}else if(ImGui_MenuItem("SlowMotion")){
+					DrikaSlowMotion new_param();
 					InsertElement(@new_param);
 				}
 
