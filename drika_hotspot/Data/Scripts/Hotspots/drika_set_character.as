@@ -4,7 +4,7 @@ class DrikaSetCharacter : DrikaElement{
 	bool cache_skeleton_info = true;
 
 	DrikaSetCharacter(JSONValue params = JSONValue()){
-		character_path = GetJSONString(params, "_character_path", "Data/Characters/guard.xml");
+		character_path = GetJSONString(params, "character_path", "Data/Characters/guard.xml");
 		cache_skeleton_info = GetJSONBool(params, "cache_skeleton_info", true);
 		InterpIdentifier(params);
 
