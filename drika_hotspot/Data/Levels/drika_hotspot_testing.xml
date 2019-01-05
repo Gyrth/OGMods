@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="28.3896" t1="1.13417" t2="8.38424" s0="1" s1="1" s2="1" q0="0.0117267" q1="-0.691709" q2="0.0112349" q3="0.721993" euler_x="0.0324789" euler_y="-1.52796" euler_z="2.52275e-06" id="1">
+    <CameraObject t0="15.489" t1="-1.08031" t2="-8.53248" s0="1" s1="1" s2="1" q0="0.00985533" q1="0.507116" q2="-0.00579923" q3="0.861802" euler_x="0.0228705" euler_y="1.06375" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -572,11 +572,56 @@
     <Hotspot name="asdasd" t0="26.318" t1="-1.92814" t2="2.3242" s0="0.501976" s1="0.501976" s2="0.501976" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="121" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;enabled&quot;:false,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;enabled&quot;:true,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;duration&quot;:200,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;on_input&quot;,&quot;input&quot;:&quot;attack&quot;,&quot;type_text&quot;:false},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:54,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:56},{&quot;delay&quot;:0.25,&quot;duration&quot;:10,&quot;function_name&quot;:&quot;slow_motion&quot;,&quot;target_time_scale&quot;:0.5,&quot;wait&quot;:false},{&quot;function_name&quot;:&quot;set_morph_target&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;label&quot;:&quot;wink_r&quot;,&quot;weight&quot;:1,&quot;weight_weight&quot;:1},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;set_morph_target&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;label&quot;:&quot;wink_r&quot;,&quot;weight&quot;:0,&quot;weight_weight&quot;:1},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:7}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;enabled&quot;:false,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;enabled&quot;:true,&quot;function_name&quot;:&quot;set_enabled&quot;,&quot;identifier&quot;:36,&quot;identifier_type&quot;:0},{&quot;duration&quot;:200,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;on_input&quot;,&quot;input&quot;:&quot;attack&quot;,&quot;type_text&quot;:false},{&quot;function_name&quot;:&quot;transform_object&quot;,&quot;identifier&quot;:54,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:56},{&quot;delay&quot;:0.25,&quot;duration&quot;:10,&quot;function_name&quot;:&quot;slow_motion&quot;,&quot;target_time_scale&quot;:0.5,&quot;wait&quot;:false},{&quot;function_name&quot;:&quot;set_morph_target&quot;,&quot;identifier&quot;:122,&quot;identifier_type&quot;:0,&quot;label&quot;:&quot;happy&quot;,&quot;weight&quot;:1,&quot;weight_weight&quot;:1},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;set_morph_target&quot;,&quot;identifier&quot;:122,&quot;identifier_type&quot;:0,&quot;label&quot;:&quot;happy&quot;,&quot;weight&quot;:0,&quot;weight_weight&quot;:1},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:7}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
+    <ActorObject t0="15.9237" t1="-1.42134" t2="-8.89154" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="122" type_file="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fall Damage Multiplier" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
+            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
+            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
+            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="No Look Around" type="int" val="0" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Stick To Nav Mesh" type="int" val="0" />
+            <parameter name="Teams" type="string" val="guard, turner" />
+            <parameter name="Throw Counter Probability" type="float" val="0.4" />
+            <parameter name="Throw Trainer" type="int" val="0" />
+            <parameter name="Weapon Catch Skill" type="float" val="1" />
+            <parameter name="Wearing Metal Armor" type="int" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="122" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
     <EnvObject t0="31.6036" t1="-1.37758" t2="-14.7357" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="125" color_r="0" color_g="0.0941176" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
@@ -697,4 +742,5 @@
     <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
     <SpawnerItem display_name="Male Civilian Rabbit Pale" path="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/pale_rabbit_civ_actor.png" />
     <SpawnerItem display_name="Global Reflection" path="Data/Objects/global_reflection_capture.xml" thumbnail_path="" />
+    <SpawnerItem display_name="Male Civilian Rabbit" path="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_RabbitCivActor.png" />
 </RecentItems>

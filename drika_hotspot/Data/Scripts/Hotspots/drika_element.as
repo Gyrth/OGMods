@@ -366,6 +366,29 @@ class DrikaElement{
 		return target_object;
 	}
 
+	MovementObject@ GetTargetMovementObject(){
+		MovementObject@ target_object;
+		if(identifier_type == id){
+			if(object_id == -1){
+				return null;
+			}else if(!MovementObjectExists(object_id)){
+				Log(warning, "The MovementObject with id " + object_id + " doesn't exist anymore, so resetting to -1.");
+				object_id = -1;
+				return null;
+			}else{
+				@target_object = ReadCharacterID(object_id);
+			}
+		}else if (identifier_type == reference){
+			int registered_object_id = GetRegisteredObjectID(reference_string);
+			if(registered_object_id == -1){
+				Log(warning, "MovementObject does not exist with reference " + reference_string);
+				return null;
+			}
+			@target_object = ReadCharacterID(registered_object_id);
+		}
+		return target_object;
+	}
+
 	void DrawGizmo(Object@ target){
 		mat4 gizmo_transform_y;
 		gizmo_transform_y.SetTranslationPart(target.GetTranslation());

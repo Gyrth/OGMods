@@ -32,8 +32,16 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	void PostInit(){
-		if(!MovementObjectExists(object_id)){
-			Log(warning, "Character does not exist with id " + object_id);
+		Object@ target_object = GetTargetObject();
+		if(target_object is null){
+			Log(warning, "MovementObject does not exist with id " + target_object.GetID());
+			return;
+		}
+	}
+
+	void Delete(){
+		if(triggered){
+			SetMorphTarget(true);
 		}
 	}
 
@@ -45,15 +53,27 @@ class DrikaSetMorphTarget : DrikaElement{
 		CheckReferenceAvailable();
 	}
 
+	void ApplySettings(){
+		//Reset the morph value set by the preview.
+		SetMorphTarget(true);
+	}
+
 	void DrawSettings(){
 		DrawSelectTargetUI();
-		ImGui_InputText("Label", label, 64);
-		ImGui_SliderFloat("Weight", weight, 0.0f, 1.0f, "%.2f");
-		ImGui_SliderFloat("Weight weight", weight_weight, 0.0f, 1.0f, "%.2f");
+		if(ImGui_InputText("Label", label, 64)){
+			SetMorphTarget(false);
+		}
+		if(ImGui_SliderFloat("Weight", weight, 0.0f, 1.0f, "%.2f")){
+			SetMorphTarget(false);
+		}
+		if(ImGui_SliderFloat("Weight weight", weight_weight, 0.0f, 1.0f, "%.2f")){
+			SetMorphTarget(false);
+		}
 	}
 
 	bool Trigger(){
-		if(object_id == -1 || !MovementObjectExists(object_id)){
+		MovementObject@ target_character = GetTargetMovementObject();
+		if(target_character is null){
 			return false;
 		}
 		triggered = true;
@@ -62,17 +82,19 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(object_id != -1 && MovementObjectExists(object_id)){
-			MovementObject@ character = ReadCharacterID(object_id);
-			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		MovementObject@ target_character = GetTargetMovementObject();
+		if(target_character is null){
+			return;
 		}
+		DebugDrawLine(target_character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 	}
 
 	void SetMorphTarget(bool reset){
-		if(object_id != -1 && MovementObjectExists(object_id)){
-			MovementObject@ character = ReadCharacterID(object_id);
-			character.rigged_object().SetMorphTargetWeight(label, reset?0.0f:weight, reset?0.0f:weight_weight);
+		MovementObject@ target_character = GetTargetMovementObject();
+		if(target_character is null){
+			return;
 		}
+		target_character.rigged_object().SetMorphTargetWeight(label, reset?0.0f:weight, reset?0.0f:weight_weight);
 	}
 
 	void Reset(){

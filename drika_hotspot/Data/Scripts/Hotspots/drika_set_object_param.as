@@ -121,10 +121,11 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
-			Object@ target_object = ReadObjectFromID(object_id);
-			DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		Object@ target_object = GetTargetObject();
+		if(target_object is null){
+			return;
 		}
+		DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 	}
 
 	bool Trigger(){
