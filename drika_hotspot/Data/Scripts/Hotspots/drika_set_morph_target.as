@@ -1,12 +1,14 @@
 class DrikaSetMorphTarget : DrikaElement{
 	string label;
+	string label2;
 	float weight;
-	float weight_weight;
+	bool two_way_morph;
 
 	DrikaSetMorphTarget(JSONValue params = JSONValue()){
 		label = GetJSONString(params, "label", "mouth_open");
+		label2 = GetJSONString(params, "label2", "mouth_open");
 		weight = GetJSONFloat(params, "weight", 1.0);
-		weight_weight = GetJSONFloat(params, "weight_weight", 1.0);
+		two_way_morph = GetJSONBool(params, "two_way_morph", false);
 		InterpIdentifier(params);
 
 		connection_types = {_movement_object};
@@ -18,8 +20,9 @@ class DrikaSetMorphTarget : DrikaElement{
 		JSONValue data;
 		data["function_name"] = JSONValue("set_morph_target");
 		data["label"] = JSONValue(label);
+		data["label2"] = JSONValue(label2);
 		data["weight"] = JSONValue(weight);
-		data["weight_weight"] = JSONValue(weight_weight);
+		data["two_way_morph"] = JSONValue(two_way_morph);
 		data["identifier_type"] = JSONValue(identifier_type);
 		if(identifier_type == id){
 			data["identifier"] = JSONValue(object_id);
@@ -46,11 +49,12 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetMorphTarget " + label + " " + weight + " " + weight_weight;
+		return "SetMorphTarget " + label + (two_way_morph?"+" + label2:"") + " " + weight;
 	}
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		SetMorphTarget(false);
 	}
 
 	void ApplySettings(){
@@ -60,14 +64,33 @@ class DrikaSetMorphTarget : DrikaElement{
 
 	void DrawSettings(){
 		DrawSelectTargetUI();
+
+		if(ImGui_Checkbox("Two Way Morph Target", two_way_morph)){
+			//A single morph target cannot go under 0.
+			if(!two_way_morph && weight < 0.0){
+				weight = 0.0;
+			}
+			SetMorphTarget(true);
+			SetMorphTarget(false);
+		}
+
 		if(ImGui_InputText("Label", label, 64)){
+			SetMorphTarget(true);
 			SetMorphTarget(false);
 		}
-		if(ImGui_SliderFloat("Weight", weight, 0.0f, 1.0f, "%.2f")){
-			SetMorphTarget(false);
-		}
-		if(ImGui_SliderFloat("Weight weight", weight_weight, 0.0f, 1.0f, "%.2f")){
-			SetMorphTarget(false);
+
+		if(two_way_morph){
+			if(ImGui_InputText("Label 2", label2, 64)){
+				SetMorphTarget(true);
+				SetMorphTarget(false);
+			}
+			if(ImGui_SliderFloat("Weight", weight, -2.0f, 2.0f, "%.2f")){
+				SetMorphTarget(false);
+			}
+		}else{
+			if(ImGui_SliderFloat("Weight", weight, 0.0f, 2.0f, "%.2f")){
+				SetMorphTarget(false);
+			}
 		}
 	}
 
@@ -94,7 +117,22 @@ class DrikaSetMorphTarget : DrikaElement{
 		if(target_character is null){
 			return;
 		}
-		target_character.rigged_object().SetMorphTargetWeight(label, reset?0.0f:weight, reset?0.0f:weight_weight);
+		if(reset){
+			target_character.rigged_object().SetMorphTargetWeight(label, 0.0f, 1.0);
+			target_character.rigged_object().SetMorphTargetWeight(label2, 0.0f, 1.0);
+		}else{
+			if(two_way_morph){
+				if(weight < 0.0){
+					target_character.rigged_object().SetMorphTargetWeight(label, abs(weight), 1.0);
+					target_character.rigged_object().SetMorphTargetWeight(label2, 0.0f, 1.0f);
+				}else{
+					target_character.rigged_object().SetMorphTargetWeight(label, 0.0f, 0.0f);
+					target_character.rigged_object().SetMorphTargetWeight(label2, weight, 1.0);
+				}
+			}else{
+				target_character.rigged_object().SetMorphTargetWeight(label, weight, 1.0);
+			}
+		}
 	}
 
 	void Reset(){
