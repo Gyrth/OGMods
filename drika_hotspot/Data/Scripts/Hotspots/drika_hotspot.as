@@ -12,7 +12,7 @@
 #include "hotspots/drika_go_to_line.as"
 #include "hotspots/drika_load_level.as"
 #include "hotspots/drika_on_character_enter_exit.as"
-#include "hotspots/drika_on_item_enter.as"
+#include "hotspots/drika_on_item_enter_exit.as"
 #include "hotspots/drika_play_music.as"
 #include "hotspots/drika_play_sound.as"
 #include "hotspots/drika_send_level_message.as"
@@ -73,11 +73,17 @@ void Init() {
 	display_name = this_hotspot.GetName();
     level.ReceiveLevelEvents(hotspot.GetID());
 	ConvertDisplayColors();
+	SortFunctionsAlphabetical();
 	//When the user duplicates a hotspot the editormode is active and the left alt is pressed.
 	if(EditorModeActive() && GetInputDown(0, "lalt")){
 		duplicating = true;
 	}
 	InterpData();
+}
+
+void SortFunctionsAlphabetical(){
+	sorted_element_names = drika_element_names.getKeys();
+	sorted_element_names.sortAsc();
 }
 
 void SetEnabled(bool val){
@@ -205,8 +211,8 @@ DrikaElement@ InterpElement(JSONValue &in function_json){
 		return DrikaLoadLevel(function_json);
 	}else if(function_json["function_name"].asString() == "on_character_enter_exit"){
 		return DrikaOnCharacterEnterExit(function_json);
-	}else if(function_json["function_name"].asString() == "on_item_enter"){
-		return DrikaOnItemEnter(function_json);
+	}else if(function_json["function_name"].asString() == "on_item_enter_exit"){
+		return DrikaOnItemEnterExit(function_json);
 	}else if(function_json["function_name"].asString() == "play_music"){
 		return DrikaPlayMusic(function_json);
 	}else if(function_json["function_name"].asString() == "play_sound"){
@@ -388,92 +394,7 @@ void DrawEditor(){
 
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("Add")){
-				if(ImGui_MenuItem("Set Object Param")){
-					DrikaSetObjectParam new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Create Object")){
-					DrikaCreateObject new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Check Character State")){
-					DrikaCheckCharacterState new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Create Particle")){
-					DrikaCreateParticle new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Display Image")){
-					DrikaDisplayImage new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Display Text")){
-					DrikaDisplayText new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Go To Line")){
-					DrikaGoToLine new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Load Level")){
-					DrikaLoadLevel new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("On Character Enter Exit")){
-					DrikaOnCharacterEnterExit new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("On Item Enter")){
-					DrikaOnItemEnter new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Play Music")){
-					DrikaPlayMusic new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Play Sound")){
-					DrikaPlaySound new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Send Level Message")){
-					DrikaSendLevelMessage new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Set Camera Param")){
-					DrikaSetCameraParam new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Set Character Param")){
-					DrikaSetCharacterParam new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Set Character")){
-					DrikaSetCharacter new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Set Color")){
-					DrikaSetColor new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Set Enabled")){
-					DrikaSetEnabled new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Set Level Param")){
-					DrikaSetLevelParam new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Set Velocity")){
-					DrikaSetVelocity new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Start Dialogue")){
-					DrikaStartDialogue new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Transform Object")){
-					DrikaTransformObject new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Wait For Level Message")){
-					DrikaWaitLevelMessage new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("Wait")){
-					DrikaWait new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("SlowMotion")){
-					DrikaSlowMotion new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("OnInput")){
-					DrikaOnInput new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("SetMorphTarget")){
-					DrikaSetMorphTarget new_param();
-					InsertElement(@new_param);
-				}else if(ImGui_MenuItem("SetBoneInflate")){
-					DrikaSetBoneInflate new_param();
-					InsertElement(@new_param);
-				}
-
+				AddFunctionMenuItems();
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Settings")){
@@ -844,4 +765,77 @@ array<float> GetJSONFloatArray(JSONValue data, string var_name, array<float> def
 	}else{
 		return default_value;
 	}
+}
+
+void AddFunctionMenuItems(){
+	for(uint i = 0; i < sorted_element_names.size(); i++){
+		drika_element_types current_element_type = drika_element_types(drika_element_names[sorted_element_names[i]]);
+		ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
+		if(ImGui_MenuItem(sorted_element_names[i])){
+			InsertElement(@CreateNewFunction(current_element_type));
+		}
+		ImGui_PopStyleColor();
+	}
+}
+
+DrikaElement@ CreateNewFunction(drika_element_types element_type) {
+	switch(element_type){
+		case drika_wait_level_message:
+			return DrikaWaitLevelMessage();
+		case drika_wait:
+			return DrikaWait();
+		case drika_set_enabled:
+			return DrikaSetEnabled();
+		case drika_set_character:
+			return DrikaSetCharacter();
+		case drika_create_particle:
+			return DrikaCreateParticle();
+		case drika_play_sound:
+			return DrikaPlaySound();
+		case drika_go_to_line:
+			return DrikaGoToLine();
+		case drika_on_character_enter_exit:
+			return DrikaOnCharacterEnterExit();
+		case drika_on_item_enter_exit:
+			return DrikaOnItemEnterExit();
+		case drika_send_level_message:
+			return DrikaSendLevelMessage();
+		case drika_start_dialogue:
+			return DrikaStartDialogue();
+		case drika_set_object_param:
+			return DrikaSetObjectParam();
+		case drika_set_level_param:
+			return DrikaSetLevelParam();
+		case drika_set_camera_param:
+			return DrikaSetCameraParam();
+		case drika_create_object:
+			return DrikaCreateObject();
+		case drika_transform_object:
+			return DrikaTransformObject();
+		case drika_set_color:
+			return DrikaSetColor();
+		case drika_play_music:
+			return DrikaPlayMusic();
+		case drika_set_character_param:
+			return DrikaSetCharacterParam();
+		case drika_display_text:
+			return DrikaDisplayText();
+		case drika_display_image:
+			return DrikaDisplayImage();
+		case drika_load_level:
+			return DrikaLoadLevel();
+		case drika_check_character_state:
+			return DrikaCheckCharacterState();
+		case drika_set_velocity:
+			return DrikaSetVelocity();
+		case drika_slow_motion:
+			return DrikaSlowMotion();
+		case drika_on_input:
+			return DrikaOnInput();
+		case drika_set_morph_target:
+			return DrikaSetMorphTarget();
+		case drika_set_bone_inflate:
+			return DrikaSetBoneInflate();
+	}
+	return DrikaElement();
 }

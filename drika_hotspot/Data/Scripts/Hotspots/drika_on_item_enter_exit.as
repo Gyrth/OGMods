@@ -1,27 +1,27 @@
 enum item_trigger_types {	check_id = 0,
 							check_label = 1};
 
-class DrikaOnItemEnter : DrikaElement{
+class DrikaOnItemEnterExit : DrikaElement{
 	string item_label;
 	int item_id;
 	int current_combo_item = 0;
 	item_trigger_types trigger_type;
 	array<string> item_triggger_choices = {"Check ID", "Check Label"};
 
-	DrikaOnItemEnter(JSONValue params = JSONValue()){
+	DrikaOnItemEnterExit(JSONValue params = JSONValue()){
 		trigger_type = item_trigger_types(GetJSONInt(params, "trigger_type", 0));
 		current_combo_item = int(trigger_type);
 		item_id = GetJSONInt(params, "item_id", -1);
 		item_label = GetJSONString(params, "item_label", "");
 
 		connection_types = {_item_object};
-		drika_element_type = drika_on_item_enter;
+		drika_element_type = drika_on_item_enter_exit;
 		has_settings = true;
 	}
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("on_item_enter");
+		data["function_name"] = JSONValue("on_item_enter_exit");
 		data["trigger_type"] = JSONValue(trigger_type);
 		data["item_label"] = JSONValue(item_label);
 		return data;
