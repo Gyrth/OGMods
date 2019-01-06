@@ -34,7 +34,7 @@ class DrikaSetMorphTarget : DrikaElement{
 	void PostInit(){
 		Object@ target_object = GetTargetObject();
 		if(target_object is null){
-			Log(warning, "MovementObject does not exist with id " + target_object.GetID());
+			Log(warning, "MovementObject does not exist with id " + object_id);
 			return;
 		}
 	}
