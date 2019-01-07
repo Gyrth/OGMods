@@ -356,25 +356,21 @@ class DrikaElement{
 	}
 
 	void DrawSelectTargetUI(){
-		array<string> string_choices = {"ID", "Reference", "Team"};
-		if(ImGui_BeginCombo("Identifier Type", string_choices[current_identifier_type], ImGuiComboFlags_HeightSmall)){
-			if(ImGui_Selectable("ID", string_choices[current_identifier_type] == "ID")){
-				current_identifier_type = id;
+		array<string> identifier_choices = {"ID"};
+		if(show_reference_option){
+			identifier_choices.insertLast("Reference");
+		}
+		if(show_team_option){
+			identifier_choices.insertLast("Team");
+		}
+		if(ImGui_Combo("Identifier Type", current_identifier_type, identifier_choices, identifier_choices.size())){
+			if(identifier_choices[current_identifier_type] == "ID"){
 				identifier_type = id;
+			}else if(identifier_choices[current_identifier_type] == "Team"){
+				identifier_type = team;
+			}else if(identifier_choices[current_identifier_type] == "Reference"){
+				identifier_type = reference;
 			}
-			if(show_reference_option){
-				if(ImGui_Selectable("Reference", string_choices[current_identifier_type] == "Reference")){
-					current_identifier_type = reference;
-					identifier_type = reference;
-				}
-			}
-			if(show_team_option){
-				if(ImGui_Selectable("Team", string_choices[current_identifier_type] == "Team")){
-					current_identifier_type = team;
-					identifier_type = team;
-				}
-			}
-			ImGui_EndCombo();
 		}
 		if(identifier_type == id){
 			if(ImGui_InputInt("Object ID", object_id)){
