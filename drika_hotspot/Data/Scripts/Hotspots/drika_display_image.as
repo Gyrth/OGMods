@@ -49,7 +49,7 @@ class DrikaDisplayImage : DrikaElement{
 				}
 			}
 			ImGui_SliderFloat("Scale", scale, 0.0f, 100.0f, "%.1f");
-			ImGui_ColorPicker4("Color", tint, 0);
+			ImGui_ColorEdit4("Color", tint);
 		}
 	}
 

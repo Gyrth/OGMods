@@ -68,7 +68,7 @@ class DrikaCreateParticle : DrikaElement{
 		ImGui_Checkbox("Connect Particles", connect_particles);
 		ImGui_Checkbox("Use Blood Tint", use_blood_tint);
 		if(!use_blood_tint){
-			ImGui_ColorPicker3("Particle Tint", tint, 0);
+			ImGui_ColorEdit3("Particle Tint", tint);
 		}
 	}
 

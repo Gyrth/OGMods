@@ -86,7 +86,7 @@ class DrikaSetColor : DrikaElement{
 			}
 			ImGui_Combo("Palette Slot", palette_slot, palette_indexes, palette_indexes.size());
 		}
-		ImGui_ColorPicker3("Color", after_color, 0);
+		ImGui_ColorEdit3("Color", after_color);
 	}
 
 	void DrawEditing(){

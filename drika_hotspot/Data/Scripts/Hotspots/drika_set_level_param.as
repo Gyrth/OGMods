@@ -183,7 +183,7 @@ class DrikaSetLevelParam : DrikaElement{
 		}else if(param_type == vec3_param){
 			ImGui_InputFloat3("After", vec3_param_after);
 		}else if(param_type == vec3_color_param){
-			ImGui_ColorPicker3("After", vec3_param_after, 0);
+			ImGui_ColorEdit3("After", vec3_param_after);
 		}else if(param_type == int_param){
 			ImGui_InputInt("After", int_param_after);
 		}

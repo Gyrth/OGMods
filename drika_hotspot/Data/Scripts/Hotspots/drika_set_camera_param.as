@@ -117,7 +117,7 @@ class DrikaSetCameraParam : DrikaElement{
 		if(param_type == float_param){
 			ImGui_SliderFloat("After", float_param_after, -1000.0f, 1000.0f, "%.4f");
 		}else if(param_type == vec3_color_param){
-			ImGui_ColorPicker3("After", vec3_param_after, 0);
+			ImGui_ColorEdit3("After", vec3_param_after);
 		}else if(param_type == float_array_param){
 			ImGui_SliderFloat("Near Blur", float_array_param_after[0], -1000.0f, 1000.0f, "%.4f");
 			ImGui_SliderFloat("Near Dist", float_array_param_after[1], -1000.0f, 1000.0f, "%.4f");
