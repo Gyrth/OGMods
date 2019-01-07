@@ -3,6 +3,7 @@
 #include "hotspots/drika_on_input.as"
 #include "hotspots/drika_set_morph_target.as"
 #include "hotspots/drika_set_bone_inflate.as"
+#include "hotspots/drika_send_character_message.as"
 #include "hotspots/drika_set_object_param.as"
 #include "hotspots/drika_create_object.as"
 #include "hotspots/drika_check_character_state.as"
@@ -249,6 +250,8 @@ DrikaElement@ InterpElement(JSONValue &in function_json){
 		return DrikaSetMorphTarget(function_json);
 	}else if(function_json["function_name"].asString() == "set_bone_inflate"){
 		return DrikaSetBoneInflate(function_json);
+	}else if(function_json["function_name"].asString() == "send_character_message"){
+		return DrikaSendCharacterMessage(function_json);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + function_json["function_name"].asString());
@@ -836,6 +839,8 @@ DrikaElement@ CreateNewFunction(drika_element_types element_type) {
 			return DrikaSetMorphTarget();
 		case drika_set_bone_inflate:
 			return DrikaSetBoneInflate();
+		case drika_send_character_message:
+			return DrikaSendCharacterMessage();
 	}
 	return DrikaElement();
 }
