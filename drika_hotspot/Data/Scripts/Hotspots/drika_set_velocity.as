@@ -4,7 +4,7 @@ class DrikaSetVelocity : DrikaElement{
 	DrikaSetVelocity(JSONValue params = JSONValue()){
 		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
 		velocity_magnitude = GetJSONFloat(params, "velocity_magnitude", 5);
-		InterpIdentifier(params);
+		LoadIdentifier(params);
 
 		placeholder_name = "Set Velocity Helper";
 		drika_element_type = drika_set_velocity;
@@ -17,14 +17,7 @@ class DrikaSetVelocity : DrikaElement{
 		data["function_name"] = JSONValue("set_velocity");
 		data["velocity_magnitude"] = JSONValue(velocity_magnitude);
 		data["placeholder_id"] = JSONValue(placeholder_id);
-		data["identifier_type"] = JSONValue(identifier_type);
-		if(identifier_type == id){
-			data["identifier"] = JSONValue(object_id);
-		}else if(identifier_type == reference){
-			data["identifier"] = JSONValue(reference_string);
-		}else if(identifier_type == team){
-			data["identifier"] = JSONValue(character_team);
-		}
+		SaveIdentifier(data);
 		return data;
 	}
 
@@ -37,13 +30,7 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		string display_identifier;
-		if(identifier_type == id){
-			display_identifier = "" + object_id;
-		}else if(identifier_type == reference){
-			display_identifier = "" + reference_string;
-		}
-		return "SetVelocity " + "vel:" + velocity_magnitude + " target:" + display_identifier;
+		return "SetVelocity " + "vel:" + velocity_magnitude + " target:" + GetTargetDisplayText();
 	}
 
 	void StartSettings(){
@@ -85,21 +72,20 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	void ApplyVelocity(){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			return;
-		}
-		vec3 up_direction = placeholder.GetRotation() * vec3(0, 1, 0);
-		if(target_object.GetType() == _movement_object){
-			MovementObject@ char = ReadCharacterID(target_object.GetID());
-			char.velocity = up_direction * velocity_magnitude;
-			char.Execute("SetOnGround(false);");
-			char.Execute("pre_jump = false;");
-		}else if(target_object.GetType() == _item_object){
-			ItemObject@ io = ReadItemID(target_object.GetID());
-			io.ActivatePhysics();
-			io.SetLinearVelocity(up_direction * velocity_magnitude);
-			io.ActivatePhysics();
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			vec3 up_direction = placeholder.GetRotation() * vec3(0, 1, 0);
+			if(targets[i].GetType() == _movement_object){
+				MovementObject@ char = ReadCharacterID(targets[i].GetID());
+				char.velocity = up_direction * velocity_magnitude;
+				char.Execute("SetOnGround(false);");
+				char.Execute("pre_jump = false;");
+			}else if(targets[i].GetType() == _item_object){
+				ItemObject@ io = ReadItemID(targets[i].GetID());
+				io.ActivatePhysics();
+				io.SetLinearVelocity(up_direction * velocity_magnitude);
+				io.ActivatePhysics();
+			}
 		}
 	}
 }

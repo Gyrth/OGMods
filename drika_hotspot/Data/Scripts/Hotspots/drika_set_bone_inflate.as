@@ -5,7 +5,7 @@ class DrikaSetBoneInflate : DrikaElement{
 	DrikaSetBoneInflate(JSONValue params = JSONValue()){
 		bone_name = GetJSONString(params, "bone_name", "torso");
 		inflate_value = GetJSONFloat(params, "inflate_value", 0.0);
-		InterpIdentifier(params);
+		LoadIdentifier(params);
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_bone_inflate;
@@ -17,23 +17,8 @@ class DrikaSetBoneInflate : DrikaElement{
 		data["function_name"] = JSONValue("set_bone_inflate");
 		data["bone_name"] = JSONValue(bone_name);
 		data["inflate_value"] = JSONValue(inflate_value);
-		data["identifier_type"] = JSONValue(identifier_type);
-		if(identifier_type == id){
-			data["identifier"] = JSONValue(object_id);
-		}else if(identifier_type == reference){
-			data["identifier"] = JSONValue(reference_string);
-		}else if(identifier_type == team){
-			data["identifier"] = JSONValue(character_team);
-		}
+		SaveIdentifier(data);
 		return data;
-	}
-
-	void PostInit(){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			Log(warning, "MovementObject does not exist with id " + object_id);
-			return;
-		}
 	}
 
 	void Delete(){
@@ -43,7 +28,7 @@ class DrikaSetBoneInflate : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetBoneInflate " + bone_name + " " + inflate_value;
+		return "SetBoneInflate " + GetTargetDisplayText() + " " + bone_name + " " + inflate_value;
 	}
 
 	void StartSettings(){
@@ -72,43 +57,38 @@ class DrikaSetBoneInflate : DrikaElement{
 	}
 
 	bool Trigger(){
-		MovementObject@ target_character = GetTargetMovementObject();
-		if(target_character is null){
-			return false;
-		}
 		triggered = true;
-		SetBoneInflate(false);
-		return true;
+		return SetBoneInflate(false);
 	}
 
 	void DrawEditing(){
-		MovementObject@ target_character = GetTargetMovementObject();
-		if(target_character is null){
-			return;
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
-		DebugDrawLine(target_character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 	}
 
-	void SetBoneInflate(bool reset){
-		MovementObject@ target_character = GetTargetMovementObject();
-		if(target_character is null){
-			return;
-		}
-		if(!target_character.rigged_object().skeleton().IKBoneExists(bone_name)) {
-			return;
-		}
+	bool SetBoneInflate(bool reset){
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		if(targets.size() == 0){return false;}
+		for(uint i = 0; i < targets.size(); i++){
+			if(!targets[i].rigged_object().skeleton().IKBoneExists(bone_name)){
+				continue;
+			}
 
-		int bone = target_character.rigged_object().skeleton().IKBoneStart(bone_name);
-		int chain_len = target_character.rigged_object().skeleton().IKBoneLength(bone_name);
+			int bone = targets[i].rigged_object().skeleton().IKBoneStart(bone_name);
+			int chain_len = targets[i].rigged_object().skeleton().IKBoneLength(bone_name);
 
-		for(int i = 0; i < chain_len; ++i) {
-			target_character.rigged_object().skeleton().SetBoneInflate(bone, reset?1.0f:inflate_value);
-			bone = target_character.rigged_object().skeleton().GetParent(bone);
+			for(int j = 0; j < chain_len; ++j){
+				targets[i].rigged_object().skeleton().SetBoneInflate(bone, reset?1.0f:inflate_value);
+				bone = targets[i].rigged_object().skeleton().GetParent(bone);
 
-			if(bone == -1) {
-				break;
+				if(bone == -1){
+					break;
+				}
 			}
 		}
+		return true;
 	}
 
 	void Reset(){

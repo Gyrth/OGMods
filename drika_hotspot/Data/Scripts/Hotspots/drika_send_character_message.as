@@ -15,7 +15,7 @@ class DrikaSendCharacterMessage : DrikaElement{
 		message = GetJSONString(params, "message", "restore_health");
 		character_message_type = character_message_types(GetJSONInt(params, "character_message_type", character_message));
 		current_message_type = character_message_type;
-		InterpIdentifier(params);
+		LoadIdentifier(params);
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_send_character_message;
@@ -23,30 +23,17 @@ class DrikaSendCharacterMessage : DrikaElement{
 		SetDisplayMessage();
 	}
 
-	void PostInit(){
-		if(!MovementObjectExists(object_id)){
-			Log(warning, "Character does not exist with id " + object_id);
-		}
-	}
-
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["function_name"] = JSONValue("send_character_message");
 		data["character_message_type"] = JSONValue(character_message_type);
 		data["message"] = JSONValue(message);
-		data["identifier_type"] = JSONValue(identifier_type);
-		if(identifier_type == id){
-			data["identifier"] = JSONValue(object_id);
-		}else if(identifier_type == reference){
-			data["identifier"] = JSONValue(reference_string);
-		}else if(identifier_type == team){
-			data["identifier"] = JSONValue(character_team);
-		}
+		SaveIdentifier(data);
 		return data;
 	}
 
 	string GetDisplayString(){
-		return "SendCharacterMessage " + display_message;
+		return "SendCharacterMessage " + GetTargetDisplayText() + " " + display_message;
 	}
 
 	void StartSettings(){
@@ -71,24 +58,23 @@ class DrikaSendCharacterMessage : DrikaElement{
 	}
 
 	void DrawEditing(){
-		MovementObject@ target_character = GetTargetMovementObject();
-		if(target_character is null){
-			return;
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
-		DebugDrawLine(target_character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 	}
 
 	bool Trigger(){
-		MovementObject@ target_character = GetTargetMovementObject();
-		if(target_character is null){
-			return false;
-		}
-		if(character_message_type == character_message){
-			target_character.ReceiveMessage(message);
-		}else if(character_message_type == character_script_message){
-			target_character.ReceiveScriptMessage(message);
-		}else if(character_message_type == character_queue_script_message){
-			target_character.QueueScriptMessage(message);
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		if(targets.size() == 0){return false;}
+		for(uint i = 0; i < targets.size(); i++){
+			if(character_message_type == character_message){
+				targets[i].ReceiveMessage(message);
+			}else if(character_message_type == character_script_message){
+				targets[i].ReceiveScriptMessage(message);
+			}else if(character_message_type == character_queue_script_message){
+				targets[i].QueueScriptMessage(message);
+			}
 		}
 		return true;
 	}

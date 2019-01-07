@@ -30,8 +30,7 @@ enum drika_element_types { 	none = 0,
 							drika_send_character_message = 29
 						};
 
-dictionary drika_element_names = {	{"None", 0},
-									{"Wait Level Message", 1},
+dictionary drika_element_names = {	{"Wait Level Message", 1},
 									{"Wait", 2},
 									{"Set Enabled", 3},
 									{"Set Character", 4},
@@ -126,7 +125,7 @@ class DrikaElement{
 	int placeholder_id = -1;
 	Object@ placeholder;
 	int object_id = -1;
-	string reference_string = "";
+	string reference_string = "drika_reference";
 	string placeholder_name;
 	identifier_types identifier_type = id;
 	int current_identifier_type;
@@ -136,7 +135,7 @@ class DrikaElement{
 	array<string> available_references;
 	bool show_reference_option = false;
 	bool show_team_option = false;
-	string character_team;
+	string character_team = "team_drika";
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}
@@ -160,22 +159,26 @@ class DrikaElement{
 	}
 
 	void LeftClick(){
-		Object@ target_object = GetTargetObject();
+		array<Object@> target_objects = GetTargetObjects();
 		if(this_hotspot.IsSelected() && ObjectExists(placeholder_id)){
 			this_hotspot.SetSelected(false);
-			if(target_object !is null){
-				target_object.SetSelected(false);
+			for(uint i = 0 ; i < target_objects.size(); i++){
+				target_objects[i].SetSelected(false);
 			}
 			placeholder.SetSelected(true);
-		}else if(ObjectExists(placeholder_id) && placeholder.IsSelected() && target_object !is null){
+		}else if(ObjectExists(placeholder_id) && placeholder.IsSelected()){
 			placeholder.SetSelected(false);
 			this_hotspot.SetSelected(false);
-			target_object.SetSelected(true);
-		}else if(target_object !is null && target_object.IsSelected()){
+			for(uint i = 0 ; i < target_objects.size(); i++){
+				target_objects[i].SetSelected(true);
+			}
+		}else{
 			if(ObjectExists(placeholder_id)){
 				placeholder.SetSelected(false);
 			}
-			target_object.SetSelected(false);
+			for(uint i = 0 ; i < target_objects.size(); i++){
+				target_objects[i].SetSelected(false);
+			}
 			this_hotspot.SetSelected(true);
 		}
 	}
@@ -296,7 +299,7 @@ class DrikaElement{
 		}
 	}
 
-	void InterpIdentifier(JSONValue params){
+	void LoadIdentifier(JSONValue params){
 		if(params.isMember("identifier_type")){
 			if(params["identifier_type"].asInt() == id){
 				identifier_type = identifier_types(id);
@@ -313,6 +316,18 @@ class DrikaElement{
 			identifier_type = identifier_types(id);
 		}
 		current_identifier_type = identifier_type;
+	}
+
+	void SaveIdentifier(JSONValue &inout data){
+		data["identifier_type"] = JSONValue(identifier_type);
+		if(identifier_type == id){
+			data["identifier"] = JSONValue(object_id);
+		}else if(identifier_type == reference){
+			data["identifier"] = JSONValue(reference_string);
+		}else if(identifier_type == team){
+			data["identifier"] = JSONValue(character_team);
+		}
+		Log(info, "Saving identifier!");
 	}
 
 	void CheckReferenceAvailable(){
@@ -344,15 +359,18 @@ class DrikaElement{
 		array<string> string_choices = {"ID", "Reference", "Team"};
 		if(ImGui_BeginCombo("Identifier Type", string_choices[current_identifier_type], ImGuiComboFlags_HeightSmall)){
 			if(ImGui_Selectable("ID", string_choices[current_identifier_type] == "ID")){
+				current_identifier_type = id;
 				identifier_type = id;
 			}
 			if(show_reference_option){
 				if(ImGui_Selectable("Reference", string_choices[current_identifier_type] == "Reference")){
+					current_identifier_type = reference;
 					identifier_type = reference;
 				}
 			}
 			if(show_team_option){
 				if(ImGui_Selectable("Team", string_choices[current_identifier_type] == "Team")){
+					current_identifier_type = team;
 					identifier_type = team;
 				}
 			}
@@ -381,50 +399,90 @@ class DrikaElement{
 		}
 	}
 
-	Object@ GetTargetObject(){
-		Object@ target_object;
+	array<Object@> GetTargetObjects(){
+		array<Object@> target_objects;
 		if(identifier_type == id){
 			if(object_id == -1){
-				return null;
+				//Do nothing.
 			}else if(!ObjectExists(object_id)){
 				Log(warning, "The object with id " + object_id + " doesn't exist anymore, so resetting to -1.");
 				object_id = -1;
-				return null;
 			}else{
-				@target_object = ReadObjectFromID(object_id);
+				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
 		}else if (identifier_type == reference){
 			int registered_object_id = GetRegisteredObjectID(reference_string);
 			if(registered_object_id == -1){
-				Log(warning, "Object does not exist with reference " + reference_string);
-				return null;
+				//Does not exist yet.
+			}else{
+				target_objects.insertLast(ReadObjectFromID(registered_object_id));
 			}
-			@target_object = ReadObjectFromID(registered_object_id);
+		}else if (identifier_type == team){
+			array<int> object_ids = GetObjectIDs();
+			for(uint i = 0; i < object_ids.size(); i++){
+				Object@ obj = ReadObjectFromID(object_ids[i]);
+				ScriptParams@ obj_params = obj.GetScriptParams();
+				if(obj_params.HasParam("Teams")){
+					//Removed all the spaces.
+					string no_spaces_param = join(obj_params.GetString("Teams").split(" "), "");
+					//Teams are , seperated.
+					array<string> teams = no_spaces_param.split(",");
+					if(teams.find(character_team) != -1){
+						target_objects.insertLast(obj);
+					}
+				}
+			}
 		}
-		return target_object;
+		return target_objects;
 	}
 
-	MovementObject@ GetTargetMovementObject(){
-		MovementObject@ target_object;
+	array<MovementObject@> GetTargetMovementObjects(){
+		array<MovementObject@> target_movement_objects;
 		if(identifier_type == id){
 			if(object_id == -1){
-				return null;
+				//Do nothing.
 			}else if(!MovementObjectExists(object_id)){
-				Log(warning, "The MovementObject with id " + object_id + " doesn't exist anymore, so resetting to -1.");
+				Log(warning, "The MovementObject with id " + object_id + " doesn't exist or is not a MovementObject, so resetting to -1.");
 				object_id = -1;
-				return null;
 			}else{
-				@target_object = ReadCharacterID(object_id);
+				target_movement_objects.insertLast(ReadCharacterID(object_id));
 			}
 		}else if (identifier_type == reference){
 			int registered_object_id = GetRegisteredObjectID(reference_string);
 			if(registered_object_id == -1){
-				Log(warning, "MovementObject does not exist with reference " + reference_string);
-				return null;
+				//Does not exist yet.
+			}else if(MovementObjectExists(registered_object_id)){
+				target_movement_objects.insertLast(ReadCharacterID(registered_object_id));
 			}
-			@target_object = ReadCharacterID(registered_object_id);
+		}else if (identifier_type == team){
+			array<int> mo_ids = GetObjectIDsType(_movement_object);
+			for(uint i = 0; i < mo_ids.size(); i++){
+				MovementObject@ mo = ReadCharacterID(mo_ids[i]);
+				Object@ obj = ReadObjectFromID(mo_ids[i]);
+				ScriptParams@ obj_params = obj.GetScriptParams();
+				if(obj_params.HasParam("Teams")){
+					//Removed all the spaces.
+					string no_spaces_param = join(obj_params.GetString("Teams").split(" "), "");
+					//Teams are , seperated.
+					array<string> teams = no_spaces_param.split(",");
+					if(teams.find(character_team) != -1){
+						target_movement_objects.insertLast(mo);
+					}
+				}
+			}
 		}
-		return target_object;
+		return target_movement_objects;
+	}
+
+	string GetTargetDisplayText(){
+		if(identifier_type == id){
+			return "" + object_id;
+		}else if (identifier_type == reference){
+			return reference_string;
+		}else if (identifier_type == team){
+			return character_team;
+		}
+		return "NA";
 	}
 
 	void DrawGizmo(Object@ target){

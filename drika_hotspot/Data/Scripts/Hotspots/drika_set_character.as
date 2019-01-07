@@ -6,7 +6,7 @@ class DrikaSetCharacter : DrikaElement{
 	DrikaSetCharacter(JSONValue params = JSONValue()){
 		character_path = GetJSONString(params, "character_path", "Data/Characters/guard.xml");
 		cache_skeleton_info = GetJSONBool(params, "cache_skeleton_info", true);
-		InterpIdentifier(params);
+		LoadIdentifier(params);
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_character;
@@ -18,31 +18,18 @@ class DrikaSetCharacter : DrikaElement{
 		data["function_name"] = JSONValue("set_character");
 		data["character_path"] = JSONValue(character_path);
 		data["cache_skeleton_info"] = JSONValue(cache_skeleton_info);
-		data["identifier_type"] = JSONValue(identifier_type);
-		if(identifier_type == id){
-			data["identifier"] = JSONValue(object_id);
-		}else if(identifier_type == reference){
-			data["identifier"] = JSONValue(reference_string);
-		}else if(identifier_type == team){
-			data["identifier"] = JSONValue(character_team);
-		}
+		SaveIdentifier(data);
 		return data;
 	}
 
-	void PostInit(){
-		if(!MovementObjectExists(object_id)){
-			Log(warning, "Character does not exist with id " + object_id);
-		}
-	}
-
 	string GetDisplayString(){
-		return "SetCharacter " + object_id + " " + character_path;
+		return "SetCharacter " + GetTargetDisplayText() + " " + character_path;
 	}
 
 	void GetOriginalCharacter(){
-		if(object_id != -1 && MovementObjectExists(object_id)){
-			MovementObject@ character = ReadCharacterID(object_id);
-			original_character_path = character.char_path;
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			original_character_path = targets[i].char_path;
 		}
 	}
 
@@ -65,42 +52,40 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	bool Trigger(){
-		if(object_id == -1 || !MovementObjectExists(object_id)){
-			return false;
-		}
 		if(!triggered){
 			GetOriginalCharacter();
 		}
 		triggered = true;
-		SetParameter(false);
-		return true;
+		return SetParameter(false);
 	}
 
 	void DrawEditing(){
-		if(object_id != -1 && MovementObjectExists(object_id)){
-			MovementObject@ character = ReadCharacterID(object_id);
-			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
-	void SetParameter(bool reset){
-		if(object_id != -1 && MovementObjectExists(object_id)){
-			MovementObject@ character = ReadCharacterID(object_id);
-			if(character.char_path == (reset?original_character_path:character_path)){
-				return;
+	bool SetParameter(bool reset){
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		if(targets.size() == 0){return false;}
+		for(uint i = 0; i < targets.size(); i++){
+			if(targets[i].char_path == (reset?original_character_path:character_path)){
+				continue;
 			}
-			character.char_path = reset?original_character_path:character_path;
+			targets[i].char_path = reset?original_character_path:character_path;
 			string command =	"character_getter.Load(this_mo.char_path);" +
 								"this_mo.RecreateRiggedObject(this_mo.char_path);";
 
 			if(cache_skeleton_info){
 				command += "CacheSkeletonInfo();";
 			}
-			if(character.GetIntVar("state") == _ragdoll_state){
+			if(targets[i].GetIntVar("state") == _ragdoll_state){
 				command += "Recover();";
 			}
-			character.Execute(command);
+			targets[i].Execute(command);
 		}
+		return true;
 	}
 
 	void Reset(){

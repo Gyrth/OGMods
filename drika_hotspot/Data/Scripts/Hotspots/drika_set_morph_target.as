@@ -9,7 +9,7 @@ class DrikaSetMorphTarget : DrikaElement{
 		label2 = GetJSONString(params, "label2", "mouth_open");
 		weight = GetJSONFloat(params, "weight", 1.0);
 		two_way_morph = GetJSONBool(params, "two_way_morph", false);
-		InterpIdentifier(params);
+		LoadIdentifier(params);
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_morph_target;
@@ -23,23 +23,8 @@ class DrikaSetMorphTarget : DrikaElement{
 		data["label2"] = JSONValue(label2);
 		data["weight"] = JSONValue(weight);
 		data["two_way_morph"] = JSONValue(two_way_morph);
-		data["identifier_type"] = JSONValue(identifier_type);
-		if(identifier_type == id){
-			data["identifier"] = JSONValue(object_id);
-		}else if(identifier_type == reference){
-			data["identifier"] = JSONValue(reference_string);
-		}else if(identifier_type == team){
-			data["identifier"] = JSONValue(character_team);
-		}
+		SaveIdentifier(data);
 		return data;
-	}
-
-	void PostInit(){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			Log(warning, "MovementObject does not exist with id " + object_id);
-			return;
-		}
 	}
 
 	void Delete(){
@@ -49,7 +34,7 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetMorphTarget " + label + (two_way_morph?"+" + label2:"") + " " + weight;
+		return "SetMorphTarget " + GetTargetDisplayText() + " " + label + (two_way_morph?"+" + label2:"") + " " + weight;
 	}
 
 	void StartSettings(){
@@ -95,44 +80,39 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	bool Trigger(){
-		MovementObject@ target_character = GetTargetMovementObject();
-		if(target_character is null){
-			return false;
-		}
 		triggered = true;
-		SetMorphTarget(false);
-		return true;
+		return SetMorphTarget(false);
 	}
 
 	void DrawEditing(){
-		MovementObject@ target_character = GetTargetMovementObject();
-		if(target_character is null){
-			return;
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
-		DebugDrawLine(target_character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 	}
 
-	void SetMorphTarget(bool reset){
-		MovementObject@ target_character = GetTargetMovementObject();
-		if(target_character is null){
-			return;
-		}
-		if(reset){
-			target_character.rigged_object().SetMorphTargetWeight(label, 0.0f, 1.0);
-			target_character.rigged_object().SetMorphTargetWeight(label2, 0.0f, 1.0);
-		}else{
-			if(two_way_morph){
-				if(weight < 0.0){
-					target_character.rigged_object().SetMorphTargetWeight(label, abs(weight), 1.0);
-					target_character.rigged_object().SetMorphTargetWeight(label2, 0.0f, 1.0f);
-				}else{
-					target_character.rigged_object().SetMorphTargetWeight(label, 0.0f, 0.0f);
-					target_character.rigged_object().SetMorphTargetWeight(label2, weight, 1.0);
-				}
+	bool SetMorphTarget(bool reset){
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		if(targets.size() == 0){return false;}
+		for(uint i = 0; i < targets.size(); i++){
+			if(reset){
+				targets[i].rigged_object().SetMorphTargetWeight(label, 0.0f, 1.0);
+				targets[i].rigged_object().SetMorphTargetWeight(label2, 0.0f, 1.0);
 			}else{
-				target_character.rigged_object().SetMorphTargetWeight(label, weight, 1.0);
+				if(two_way_morph){
+					if(weight < 0.0){
+						targets[i].rigged_object().SetMorphTargetWeight(label, abs(weight), 1.0);
+						targets[i].rigged_object().SetMorphTargetWeight(label2, 0.0f, 1.0f);
+					}else{
+						targets[i].rigged_object().SetMorphTargetWeight(label, 0.0f, 0.0f);
+						targets[i].rigged_object().SetMorphTargetWeight(label2, weight, 1.0);
+					}
+				}else{
+					targets[i].rigged_object().SetMorphTargetWeight(label, weight, 1.0);
+				}
 			}
 		}
+		return true;
 	}
 
 	void Reset(){

@@ -12,7 +12,7 @@ class DrikaTransformObject : DrikaElement{
 		placeholder_name = "Transform Object Helper";
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object};
 
-		InterpIdentifier(params);
+		LoadIdentifier(params);
 		has_settings = true;
 	}
 
@@ -20,14 +20,7 @@ class DrikaTransformObject : DrikaElement{
 		JSONValue data;
 		data["function_name"] = JSONValue("transform_object");
 		data["placeholder_id"] = JSONValue(placeholder_id);
-		data["identifier_type"] = JSONValue(identifier_type);
-		if(identifier_type == id){
-			data["identifier"] = JSONValue(object_id);
-		}else if(identifier_type == reference){
-			data["identifier"] = JSONValue(reference_string);
-		}else if(identifier_type == team){
-			data["identifier"] = JSONValue(character_team);
-		}
+		SaveIdentifier(data);
 		return data;
 	}
 
@@ -36,13 +29,12 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	void GetBeforeParam(){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			return;
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			before_translation = targets[i].GetTranslation();
+			before_rotation = targets[i].GetRotation();
+			before_scale = targets[i].GetScale();
 		}
-		before_translation = target_object.GetTranslation();
-		before_rotation = target_object.GetRotation();
-		before_scale = target_object.GetScale();
 	}
 
 	void Delete(){
@@ -50,27 +42,20 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		string display_string;
-		if(identifier_type == id){
-			display_string = "" + object_id;
-		}else if(identifier_type == reference){
-			display_string = "" + reference_string;
-		}
-		return "Transform Object " + display_string;
+		return "Transform Object " + GetTargetDisplayText();
 	}
 
 	void GetNewTransform(){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			return;
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			placeholder.SetTranslation(targets[i].GetTranslation());
+			placeholder.SetRotation(targets[i].GetRotation());
+			vec3 bounds = targets[i].GetBoundingBox();
+			if(bounds == vec3(0.0)){
+				bounds = vec3(1.0);
+			}
+			placeholder.SetScale(bounds * targets[i].GetScale());
 		}
-		placeholder.SetTranslation(target_object.GetTranslation());
-		placeholder.SetRotation(target_object.GetRotation());
-		vec3 bounds = target_object.GetBoundingBox();
-		if(bounds == vec3(0.0)){
-			bounds = vec3(1.0);
-		}
-		placeholder.SetScale(bounds * target_object.GetScale());
 	}
 
 	void StartSettings(){
@@ -103,11 +88,11 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	void DrawEditing(){
-		Object@ target_object = GetTargetObject();
-		if(target_object !is null && ObjectExists(placeholder_id)){
-			DebugDrawLine(target_object.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-		}
 		if(ObjectExists(placeholder_id)){
+			array<Object@> targets = GetTargetObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			}
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			DrawGizmo(placeholder);
 		}else{
@@ -118,19 +103,18 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	bool ApplyTransform(bool reset){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			return false;
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			targets[i].SetTranslation(reset?before_translation:placeholder.GetTranslation());
+			targets[i].SetRotation(reset?before_rotation:placeholder.GetRotation());
+			vec3 scale = placeholder.GetScale();
+			vec3 bounds = targets[i].GetBoundingBox();
+			if(bounds == vec3(0.0)){
+				bounds = vec3(1.0);
+			}
+			vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
+			targets[i].SetScale(reset?before_scale:new_scale);
 		}
-		target_object.SetTranslation(reset?before_translation:placeholder.GetTranslation());
-		target_object.SetRotation(reset?before_rotation:placeholder.GetRotation());
-		vec3 scale = placeholder.GetScale();
-		vec3 bounds = target_object.GetBoundingBox();
-		if(bounds == vec3(0.0)){
-			bounds = vec3(1.0);
-		}
-		vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
-		target_object.SetScale(reset?before_scale:new_scale);
 		return true;
 	}
 

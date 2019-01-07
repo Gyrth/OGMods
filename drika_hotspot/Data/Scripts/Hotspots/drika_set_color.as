@@ -18,7 +18,7 @@ class DrikaSetColor : DrikaElement{
 		palette_slot = GetJSONInt(params, "palette_slot", 0);
 		after_color = GetJSONVec3(params, "after_color", vec3(1));
 
-		InterpIdentifier(params);
+		LoadIdentifier(params);
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object};
 		drika_element_type = drika_set_color;
 		has_settings = true;
@@ -33,14 +33,7 @@ class DrikaSetColor : DrikaElement{
 		data["after_color"].append(after_color.x);
 		data["after_color"].append(after_color.y);
 		data["after_color"].append(after_color.z);
-		data["identifier_type"] = JSONValue(identifier_type);
-		if(identifier_type == id){
-			data["identifier"] = JSONValue(object_id);
-		}else if(identifier_type == reference){
-			data["identifier"] = JSONValue(reference_string);
-		}else if(identifier_type == team){
-			data["identifier"] = JSONValue(character_team);
-		}
+		SaveIdentifier(data);
 		return data;
 	}
 
@@ -49,13 +42,7 @@ class DrikaSetColor : DrikaElement{
     }
 
 	string GetDisplayString(){
-		string identifier;
-		if(identifier_type == id){
-			identifier = "" + object_id;
-		}else if(identifier_type == reference){
-			identifier = "" + reference_string;
-		}
-		return "SetColor " + identifier + " " + Vec3ToString(after_color);
+		return "SetColor " + GetTargetDisplayText() + " " + Vec3ToString(after_color);
 	}
 
 	void StartEdit(){
@@ -65,16 +52,15 @@ class DrikaSetColor : DrikaElement{
 
 	void GetNumPaletteColors(){
 		if(color_type == object_palette_color){
-			Object@ target_object = GetTargetObject();
-			if(target_object is null){
-				return;
-			}
-			palette_indexes.resize(0);
-			num_palette_colors = 0;
-			if(target_object.GetType() == _movement_object){
-				num_palette_colors = target_object.GetNumPaletteColors();
-				for(int i = 0; i < num_palette_colors; i++){
-					palette_indexes.insertLast("" + i);
+			array<Object@> targets = GetTargetObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				palette_indexes.resize(0);
+				num_palette_colors = 0;
+				if(targets[i].GetType() == _movement_object){
+					num_palette_colors = targets[i].GetNumPaletteColors();
+					for(int j = 0; j < num_palette_colors; j++){
+						palette_indexes.insertLast("" + j);
+					}
 				}
 			}
 		}
@@ -104,9 +90,9 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
-			Object@ target_object = ReadObjectFromID(object_id);
-			DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
@@ -119,26 +105,24 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void GetBeforeColor(){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			return;
-		}
-		if(color_type == object_palette_color){
-			before_color = target_object.GetPaletteColor(palette_slot);
-		}else if(color_type == object_tint){
-			before_color = target_object.GetTint();
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			if(color_type == object_palette_color){
+				before_color = targets[i].GetPaletteColor(palette_slot);
+			}else if(color_type == object_tint){
+				before_color = targets[i].GetTint();
+			}
 		}
 	}
 
 	bool SetColor(bool reset){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			return false;
-		}
-		if(color_type == object_palette_color){
-			target_object.SetPaletteColor(palette_slot, reset?before_color:after_color);
-		}else if(color_type == object_tint){
-			target_object.SetTint(reset?before_color:after_color);
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			if(color_type == object_palette_color){
+				targets[i].SetPaletteColor(palette_slot, reset?before_color:after_color);
+			}else if(color_type == object_tint){
+				targets[i].SetTint(reset?before_color:after_color);
+			}
 		}
 		return true;
 	}

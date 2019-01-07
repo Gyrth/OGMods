@@ -16,7 +16,7 @@ class DrikaSetObjectParam : DrikaElement{
 	array<string> param_type_choices = {"String", "Integer", "Float"};
 
 	DrikaSetObjectParam(JSONValue params = JSONValue()){
-		InterpIdentifier(params);
+		LoadIdentifier(params);
 		param_name = GetJSONString(params, "param_name", "drika_param");
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
 		current_type = param_type;
@@ -29,14 +29,6 @@ class DrikaSetObjectParam : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["function_name"] = JSONValue("set_object_param");
-		data["identifier_type"] = JSONValue(identifier_type);
-		if(identifier_type == id){
-			data["identifier"] = JSONValue(object_id);
-		}else if(identifier_type == reference){
-			data["identifier"] = JSONValue(reference_string);
-		}else if(identifier_type == team){
-			data["identifier"] = JSONValue(character_team);
-		}
 		data["param_name"] = JSONValue(param_name);
 		data["param_type"] = JSONValue(param_type);
 		if(param_type == string_param){
@@ -46,6 +38,7 @@ class DrikaSetObjectParam : DrikaElement{
 		}else if(param_type == int_param){
 			data["param_after"] = JSONValue(int_param_after);
 		}
+		SaveIdentifier(data);
 		return data;
 	}
 
@@ -60,34 +53,27 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	void GetBeforeParam(){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			return;
-		}
-		ScriptParams@ params = target_object.GetScriptParams();
-		//If the param does not exist then just remove it when resetting.
-		if(!params.HasParam(param_name)){
-			delete_before = true;
-			return;
-		}else{
-			delete_before = false;
-		}
-		if(param_type == string_param){
-			string_param_before = params.GetString(param_name);
-		}else if(param_type == float_param){
-			float_param_before = params.GetFloat(param_name);
-		}else if(param_type == int_param){
-			int_param_before = params.GetInt(param_name);
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			ScriptParams@ params = targets[i].GetScriptParams();
+			//If the param does not exist then just remove it when resetting.
+			if(!params.HasParam(param_name)){
+				delete_before = true;
+				return;
+			}else{
+				delete_before = false;
+			}
+			if(param_type == string_param){
+				string_param_before = params.GetString(param_name);
+			}else if(param_type == float_param){
+				float_param_before = params.GetFloat(param_name);
+			}else if(param_type == int_param){
+				int_param_before = params.GetInt(param_name);
+			}
 		}
 	}
 
 	string GetDisplayString(){
-		string display_identifier;
-		if(identifier_type == id){
-			display_identifier = "" + object_id;
-		}else if(identifier_type == reference){
-			display_identifier = "" + reference_string;
-		}
 		string display_string;
 		if(param_type == string_param){
 			display_string = string_param_after;
@@ -96,7 +82,7 @@ class DrikaSetObjectParam : DrikaElement{
 		}else if(param_type == int_param){
 			display_string = "" + int_param_after;
 		}
-		return "SetObjectParam " + display_identifier + " " + param_name + " " + display_string;
+		return "SetObjectParam " + GetTargetDisplayText() + " " + param_name + " " + display_string;
 	}
 
 	void StartSettings(){
@@ -121,11 +107,10 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	void DrawEditing(){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			return;
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
-		DebugDrawLine(target_object.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 	}
 
 	bool Trigger(){
@@ -137,34 +122,33 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	bool SetParameter(bool reset){
-		Object@ target_object = GetTargetObject();
-		if(target_object is null){
-			return false;
-		}
-		ScriptParams@ params = target_object.GetScriptParams();
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			ScriptParams@ params = targets[i].GetScriptParams();
 
-		if(reset && delete_before){
-			params.Remove(param_name);
-			return true;
-		}
-
-		if(!params.HasParam(param_name)){
-			if(param_type == string_param){
-				params.AddString(param_name, reset?string_param_before:string_param_after);
-			}else if(param_type == int_param){
-				params.AddInt(param_name, reset?int_param_before:int_param_after);
-			}else if(param_type == float_param){
-				params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
-			}
-		}else{
-			if(param_type == string_param){
-				params.SetString(param_name, reset?string_param_before:string_param_after);
-			}else if(param_type == int_param){
-				params.SetInt(param_name, reset?int_param_before:int_param_after);
-			}else if(param_type == float_param){
+			if(reset && delete_before){
 				params.Remove(param_name);
-				params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
-				/* params.SetFloat(param_name, reset?float_param_before:float_param_after); */
+				return true;
+			}
+
+			if(!params.HasParam(param_name)){
+				if(param_type == string_param){
+					params.AddString(param_name, reset?string_param_before:string_param_after);
+				}else if(param_type == int_param){
+					params.AddInt(param_name, reset?int_param_before:int_param_after);
+				}else if(param_type == float_param){
+					params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
+				}
+			}else{
+				if(param_type == string_param){
+					params.SetString(param_name, reset?string_param_before:string_param_after);
+				}else if(param_type == int_param){
+					params.SetInt(param_name, reset?int_param_before:int_param_after);
+				}else if(param_type == float_param){
+					params.Remove(param_name);
+					params.AddFloatSlider(param_name, reset?float_param_before:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
+					/* params.SetFloat(param_name, reset?float_param_before:float_param_after); */
+				}
 			}
 		}
 		return true;

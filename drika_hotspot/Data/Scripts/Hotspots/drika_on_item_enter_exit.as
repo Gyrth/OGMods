@@ -70,5 +70,4 @@ class DrikaOnItemEnterExit : DrikaElement{
 			return false;
 		}
 	}
-
 }
