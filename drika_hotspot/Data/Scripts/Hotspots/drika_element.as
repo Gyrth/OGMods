@@ -97,7 +97,8 @@ array<vec4> display_colors = {	vec4(255),
 
 enum identifier_types {	id = 0,
 						reference = 1,
-						team = 2
+						team = 2,
+						name = 3
 					};
 
 enum param_types { 	string_param = 0,
@@ -135,7 +136,9 @@ class DrikaElement{
 	array<string> available_references;
 	bool show_reference_option = false;
 	bool show_team_option = false;
+	bool show_name_option = false;
 	string character_team = "team_drika";
+	string object_name = "team_drika";
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}
@@ -310,6 +313,9 @@ class DrikaElement{
 			}else if(params["identifier_type"].asInt() == team){
 				identifier_type = identifier_types(team);
 				character_team = params["identifier"].asString();
+			}else if(params["identifier_type"].asInt() == name){
+				identifier_type = identifier_types(name);
+				object_name = params["identifier"].asString();
 			}
 		}else{
 			//By default the id is used as identifier with -1 as the target id.
@@ -326,6 +332,8 @@ class DrikaElement{
 			data["identifier"] = JSONValue(reference_string);
 		}else if(identifier_type == team){
 			data["identifier"] = JSONValue(character_team);
+		}else if(identifier_type == name){
+			data["identifier"] = JSONValue(object_name);
 		}
 		Log(info, "Saving identifier!");
 	}
@@ -363,6 +371,9 @@ class DrikaElement{
 		if(show_team_option){
 			identifier_choices.insertLast("Team");
 		}
+		if(show_name_option){
+			identifier_choices.insertLast("Name");
+		}
 		if(ImGui_Combo("Identifier Type", current_identifier_type, identifier_choices, identifier_choices.size())){
 			if(identifier_choices[current_identifier_type] == "ID"){
 				identifier_type = id;
@@ -370,6 +381,8 @@ class DrikaElement{
 				identifier_type = team;
 			}else if(identifier_choices[current_identifier_type] == "Reference"){
 				identifier_type = reference;
+			}else if(identifier_choices[current_identifier_type] == "Name"){
+				identifier_type = name;
 			}
 		}
 		if(identifier_type == id){
@@ -383,6 +396,8 @@ class DrikaElement{
 			}
 		}else if(identifier_type == team){
 			ImGui_InputText("Team", character_team, 64);
+		}else if(identifier_type == name){
+			ImGui_InputText("Name", object_name, 64);
 		}
 	}
 
@@ -428,6 +443,14 @@ class DrikaElement{
 					}
 				}
 			}
+		}else if (identifier_type == name){
+			array<int> object_ids = GetObjectIDs();
+			for(uint i = 0; i < object_ids.size(); i++){
+				Object@ obj = ReadObjectFromID(object_ids[i]);
+				if(obj.GetName() == object_name){
+					target_objects.insertLast(obj);
+				}
+			}
 		}
 		return target_objects;
 	}
@@ -466,6 +489,15 @@ class DrikaElement{
 					}
 				}
 			}
+		}else if (identifier_type == name){
+			array<int> mo_ids = GetObjectIDsType(_movement_object);
+			for(uint i = 0; i < mo_ids.size(); i++){
+				Object@ obj = ReadObjectFromID(mo_ids[i]);
+				MovementObject@ mo = ReadCharacterID(mo_ids[i]);
+				if(obj.GetName() == object_name){
+					target_movement_objects.insertLast(mo);
+				}
+			}
 		}
 		return target_movement_objects;
 	}
@@ -477,6 +509,8 @@ class DrikaElement{
 			return reference_string;
 		}else if (identifier_type == team){
 			return character_team;
+		}else if (identifier_type == name){
+			return object_name;
 		}
 		return "NA";
 	}

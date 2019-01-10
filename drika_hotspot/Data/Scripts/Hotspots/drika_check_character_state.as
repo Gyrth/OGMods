@@ -9,6 +9,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		equals = GetJSONBool(params, "equals", true);
 		LoadIdentifier(params);
 		show_team_option = true;
+		show_name_option = true;
 
 		drika_element_type = drika_check_character_state;
 		connection_types = {_movement_object};

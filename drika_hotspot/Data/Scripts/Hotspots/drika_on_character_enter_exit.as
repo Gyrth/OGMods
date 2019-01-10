@@ -88,7 +88,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 					target_character_type == any_character ||
 					target_character_type == any_player && character.controlled ||
 					target_character_type == any_npc && !character.controlled){
-					Log(info, "OnEnterExit triggered");
 					triggered = true;
 					RegisterObject(param, reference_string);
 				}
@@ -104,7 +103,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 			//Teams are , seperated.
 			array<string> teams = no_spaces_param.split(",");
 			if(teams.find(character_team) != -1){
-				Log(info, "OnEnterExit triggered");
 				triggered = true;
 				RegisterObject(id_param, reference_string);
 			}
