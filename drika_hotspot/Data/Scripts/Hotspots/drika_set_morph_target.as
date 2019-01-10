@@ -10,6 +10,8 @@ class DrikaSetMorphTarget : DrikaElement{
 		weight = GetJSONFloat(params, "weight", 1.0);
 		two_way_morph = GetJSONBool(params, "two_way_morph", false);
 		LoadIdentifier(params);
+		show_team_option = true;
+		show_name_option = true;
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_morph_target;

@@ -117,6 +117,15 @@ enum target_character_types {	check_id = 0,
 								any_npc = 4
 							};
 
+class BeforeValue{
+	string string_value;
+	float float_value;
+	int int_value;
+	bool bool_value;
+	vec3 vec3_value;
+	bool delete_before = false;
+}
+
 class DrikaElement{
 	drika_element_types drika_element_type = none;
 	bool visible;

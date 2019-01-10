@@ -1,13 +1,15 @@
 class DrikaSetCharacter : DrikaElement{
 	string character_path;
-	string original_character_path;
+	array<BeforeValue> original_character_paths;
 	bool cache_skeleton_info = true;
 
 	DrikaSetCharacter(JSONValue params = JSONValue()){
 		character_path = GetJSONString(params, "character_path", "Data/Characters/guard.xml");
 		cache_skeleton_info = GetJSONBool(params, "cache_skeleton_info", true);
 		LoadIdentifier(params);
-
+		show_team_option = true;
+		show_name_option = true;
+		
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_character;
 		has_settings = true;
@@ -28,8 +30,10 @@ class DrikaSetCharacter : DrikaElement{
 
 	void GetOriginalCharacter(){
 		array<MovementObject@> targets = GetTargetMovementObjects();
+		original_character_paths.resize(0);
 		for(uint i = 0; i < targets.size(); i++){
-			original_character_path = targets[i].char_path;
+			original_character_paths.insertLast(BeforeValue());
+			original_character_paths[i].string_value = targets[i].char_path;
 		}
 	}
 
@@ -70,10 +74,10 @@ class DrikaSetCharacter : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
 		for(uint i = 0; i < targets.size(); i++){
-			if(targets[i].char_path == (reset?original_character_path:character_path)){
+			if(targets[i].char_path == (reset?original_character_paths[i].string_value:character_path)){
 				continue;
 			}
-			targets[i].char_path = reset?original_character_path:character_path;
+			targets[i].char_path = reset?original_character_paths[i].string_value:character_path;
 			string command =	"character_getter.Load(this_mo.char_path);" +
 								"this_mo.RecreateRiggedObject(this_mo.char_path);";
 

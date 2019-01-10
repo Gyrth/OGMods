@@ -36,23 +36,15 @@ enum character_params { 	aggression = 0,
 							wearing_metal_armor = 35
 					};
 
-
 class DrikaSetCharacterParam : DrikaElement{
 	int current_type;
 
-	array<bool> delete_before;
-
-	array<string> string_param_before;
-	string string_param_after;
-
-	array<int> int_param_before;
+	string string_param_after = "";
 	int int_param_after = 0;
-
-	array<bool> bool_param_before;
 	bool bool_param_after = false;
-
-	array<float> float_param_before;
 	float float_param_after = 0.0;
+
+	array<BeforeValue@> params_before;
 
 	param_types param_type;
 	character_params character_param;
@@ -173,42 +165,40 @@ class DrikaSetCharacterParam : DrikaElement{
 	void GetBeforeParam(){
 		//Use the Objects in stead of MovementObject so that the params are available.
 		array<Object@> targets = GetTargetObjects();
-		delete_before.resize(targets.size());
-		string_param_before.resize(targets.size());
-		float_param_before.resize(targets.size());
-		int_param_before.resize(targets.size());
-		bool_param_before.resize(targets.size());
+		params_before.resize(0);
+
 		for(uint i = 0; i < targets.size(); i++){
 			ScriptParams@ params = targets[i].GetScriptParams();
+			params_before.insertLast(BeforeValue());
 
 			if(!params.HasParam(param_name)){
-				delete_before[i] = true;
+				params_before[i].delete_before = true;
 				return;
 			}else{
-				delete_before[i] = false;
+				params_before[i].delete_before = false;
 			}
 
 			if(param_type == string_param){
 				if(!params.HasParam(param_name)){
 					params.AddString(param_name, string_param_after);
 				}
-				string_param_before[i] = params.GetString(param_name);
+				params_before[i].string_value = params.GetString(param_name);
 			}else if(param_type == float_param){
 				if(!params.HasParam(param_name)){
 					params.AddFloat(param_name, float_param_after);
 				}
-				float_param_before[i] = params.GetFloat(param_name);
+				params_before[i].float_value = params.GetFloat(param_name);
 			}else if(param_type == int_param){
 				if(!params.HasParam(param_name)){
 					params.AddInt(param_name, int_param_after);
 				}
-				int_param_before[i] = params.GetInt(param_name);
+				params_before[i].int_value = params.GetInt(param_name);
 			}else if(param_type == bool_param){
 				if(!params.HasParam(param_name)){
 					params.AddIntCheckbox(param_name, bool_param_after);
 				}
-				bool_param_before[i] = (params.GetInt(param_name) == 1);
-				Log(info, "Before bool " + bool_param_before[i]);
+				params_before[i].bool_value = (params.GetInt(param_name) == 1);
+				Log(info, "Before bool " + params_before[i].bool_value);
 			}
 		}
 	}
@@ -370,130 +360,130 @@ class DrikaSetCharacterParam : DrikaElement{
 		for(uint i = 0; i < targets.size(); i++){
 			ScriptParams@ params = targets[i].GetScriptParams();
 
-			if(reset && delete_before[i]){
+			if(reset && params_before[i].delete_before){
 				params.Remove(param_name);
 				return true;
 			}
 
 			if(!params.HasParam(param_name)){
 				if(param_type == string_param){
-					params.AddString(param_name, reset?string_param_before[i]:string_param_after);
+					params.AddString(param_name, reset?params_before[i].string_value:string_param_after);
 				}else if(param_type == int_param){
-					params.AddInt(param_name, reset?int_param_before[i]:int_param_after);
+					params.AddInt(param_name, reset?params_before[i].int_value:int_param_after);
 				}else if(param_type == float_param){
-					params.AddFloatSlider(param_name, reset?float_param_before[i]:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
+					params.AddFloatSlider(param_name, reset?params_before[i].float_value:float_param_after, "min:0,max:1000,step:0.0001,text_mult:1");
 				}else if(param_type == bool_param){
-					params.AddIntCheckbox(param_name, reset?bool_param_before[i]:bool_param_after);
+					params.AddIntCheckbox(param_name, reset?params_before[i].bool_value:bool_param_after);
 				}
 			}else{
 				switch(character_param){
 					case aggression:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case attack_damage:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case attack_knockback:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case attack_speed:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case block_followup:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case block_skill:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case cannot_be_disarmed:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case character_scale:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case damage_resistance:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case ear_size:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case fat:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 200.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 200.0);
 						break;
 					case focus_fov_distance:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after);
 						break;
 					case focus_fov_horizontal:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 57.2957);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 57.2957);
 						break;
 					case focus_fov_vertical:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 57.2957);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 57.2957);
 						break;
 					case ground_aggression:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case knocked_out_shield:
-						params.SetInt(param_name, reset?int_param_before[i]:int_param_after);
+						params.SetInt(param_name, reset?params_before[i].int_value:int_param_after);
 						break;
 					case left_handed:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case movement_speed:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case muscle:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 200.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 200.0);
 						break;
 					case peripheral_fov_distance:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after);
 						break;
 					case peripheral_fov_horizontal:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 57.2957);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 57.2957);
 						break;
 					case peripheral_fov_vertical:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 57.2957);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 57.2957);
 						break;
 					case species:
-						params.SetString(param_name, reset?string_param_before[i]:string_param_after);
+						params.SetString(param_name, reset?params_before[i].string_value:string_param_after);
 						break;
 					case static_char:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case teams:
-						params.SetString(param_name, reset?string_param_before[i]:string_param_after);
+						params.SetString(param_name, reset?params_before[i].string_value:string_param_after);
 						break;
 					case fall_damage_mult:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after);
 						break;
 					case fear_afraid_at_health_level:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case fear_always_afraid_on_sight:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case fear_causes_fear_on_sight:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case fear_never_afraid_on_sight:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case no_look_around:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case stick_to_nav_mesh:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case throw_counter_probability:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case is_throw_trainer:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case weapon_catch_skill:
-						params.SetFloat(param_name, reset?float_param_before[i]:float_param_after / 100.0);
+						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case wearing_metal_armor:
-						params.SetInt(param_name, (reset?bool_param_before[i]:bool_param_after)?1:0);
+						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					default:
 						Log(warning, "Found a non standard parameter type. " + param_type);

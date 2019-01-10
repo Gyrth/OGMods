@@ -5,6 +5,8 @@ class DrikaSetVelocity : DrikaElement{
 		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
 		velocity_magnitude = GetJSONFloat(params, "velocity_magnitude", 5);
 		LoadIdentifier(params);
+		show_team_option = true;
+		show_name_option = true;
 
 		placeholder_name = "Set Velocity Helper";
 		drika_element_type = drika_set_velocity;
@@ -44,9 +46,9 @@ class DrikaSetVelocity : DrikaElement{
 
 	void DrawEditing(){
 		if(ObjectExists(placeholder_id)){
-			if(identifier_type == id && object_id != -1 && ObjectExists(object_id)){
-				Object@ target_object = ReadObjectFromID(object_id);
-				DebugDrawLine(target_object.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			array<Object@> targets = GetTargetObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			mat4 gizmo_transform_y;

@@ -1,10 +1,13 @@
 class DrikaSetEnabled : DrikaElement{
 	bool enabled;
-	bool before_enabled;
+	array<BeforeValue> before_values;
 
 	DrikaSetEnabled(JSONValue params = JSONValue()){
 		enabled = GetJSONBool(params, "enabled", true);
 		LoadIdentifier(params);
+		show_team_option = true;
+		show_name_option = true;
+
 		drika_element_type = drika_set_enabled;
 		connection_types = {_env_object, _hotspot_object};
 		has_settings = true;
@@ -47,8 +50,10 @@ class DrikaSetEnabled : DrikaElement{
 
 	void GetBeforeParam(){
 		array<Object@> targets = GetTargetObjects();
+		before_values.resize(0);
 		for(uint i = 0; i < targets.size(); i++){
-			before_enabled = targets[i].GetEnabled();
+			before_values.insertLast(BeforeValue());
+			before_values[i].bool_value = targets[i].GetEnabled();
 		}
 	}
 
@@ -62,7 +67,7 @@ class DrikaSetEnabled : DrikaElement{
 	bool ApplyEnabled(bool reset){
 		array<Object@> targets = GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			targets[i].SetEnabled(reset?before_enabled:enabled);
+			targets[i].SetEnabled(reset?before_values[i].bool_value:enabled);
 		}
 		return true;
 	}
