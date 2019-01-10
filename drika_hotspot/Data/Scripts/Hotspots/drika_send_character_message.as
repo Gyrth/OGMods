@@ -10,6 +10,7 @@ class DrikaSendCharacterMessage : DrikaElement{
 	character_message_types character_message_type;
 	int current_message_type;
 	array<string> message_type_choices = {"Message", "Script Message", "Queue Script Message"};
+	string message_list = "restore_health\nfull_revive\nfall_death\nignite\nactivate\nentered_fire\nextinguish\nstart_talking\nstop_talking\nset_dialogue_control\nset_omniscient\nset_animation\nset_eye_dir\nset_rotation\nequip_item\nempty_hands\nset_dialogue_position\nset_torso_target\nmake_saved_corpse\nrevive_and_unsave_corpse\n";
 
 	DrikaSendCharacterMessage(JSONValue params = JSONValue()){
 		message = GetJSONString(params, "message", "restore_health");
@@ -47,6 +48,11 @@ class DrikaSendCharacterMessage : DrikaElement{
 		}
 		if(ImGui_InputText("Message", message, 64)){
 			SetDisplayMessage();
+		}
+		if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip(message_list);
+			ImGui_PopStyleColor();
 		}
 	}
 
