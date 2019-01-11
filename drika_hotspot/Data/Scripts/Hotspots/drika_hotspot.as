@@ -4,6 +4,7 @@
 #include "hotspots/drika_set_morph_target.as"
 #include "hotspots/drika_set_bone_inflate.as"
 #include "hotspots/drika_send_character_message.as"
+#include "hotspots/drika_animation.as"
 #include "hotspots/drika_set_object_param.as"
 #include "hotspots/drika_create_object.as"
 #include "hotspots/drika_check_character_state.as"
@@ -252,6 +253,8 @@ DrikaElement@ InterpElement(JSONValue &in function_json){
 		return DrikaSetBoneInflate(function_json);
 	}else if(function_json["function_name"].asString() == "send_character_message"){
 		return DrikaSendCharacterMessage(function_json);
+	}else if(function_json["function_name"].asString() == "animation"){
+		return DrikaAnimation(function_json);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + function_json["function_name"].asString());
@@ -770,6 +773,18 @@ array<float> GetJSONFloatArray(JSONValue data, string var_name, array<float> def
 	}
 }
 
+array<int> GetJSONIntArray(JSONValue data, string var_name, array<int> default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		array<int> values;
+		for(uint i = 0; i < data[var_name].size(); i++){
+			values.insertLast(data[var_name][i].asInt());
+		}
+		return values;
+	}else{
+		return default_value;
+	}
+}
+
 void AddFunctionMenuItems(){
 	for(uint i = 0; i < sorted_element_names.size(); i++){
 		drika_element_types current_element_type = drika_element_types(drika_element_names[sorted_element_names[i]]);
@@ -841,6 +856,8 @@ DrikaElement@ CreateNewFunction(drika_element_types element_type) {
 			return DrikaSetBoneInflate();
 		case drika_send_character_message:
 			return DrikaSendCharacterMessage();
+		case drika_animation:
+			return DrikaAnimation();
 	}
 	return DrikaElement();
 }

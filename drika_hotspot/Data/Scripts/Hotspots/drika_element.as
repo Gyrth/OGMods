@@ -27,7 +27,8 @@ enum drika_element_types { 	none = 0,
 							drika_on_input = 26,
 							drika_set_morph_target = 27,
 							drika_set_bone_inflate = 28,
-							drika_send_character_message = 29
+							drika_send_character_message = 29,
+							drika_animation = 30
 						};
 
 dictionary drika_element_names = {	{"Wait Level Message", 1},
@@ -58,7 +59,8 @@ dictionary drika_element_names = {	{"Wait Level Message", 1},
 									{"On Input", 26},
 									{"Set Morph Target", 27},
 									{"Set Bone Inflate", 28},
-									{"Send Character Message", 29}
+									{"Send Character Message", 29},
+									{"Animation", 30}
 								};
 
 array<string> sorted_element_names;
@@ -87,6 +89,7 @@ array<vec4> display_colors = {	vec4(255),
                                 vec4(153, 255, 193, 255),
                                 vec4(255, 0, 255, 255),
                                 vec4(255, 117, 117, 255),
+								vec4(153, 174, 255, 255),
 								vec4(153, 174, 255, 255),
 								vec4(153, 174, 255, 255),
 								vec4(153, 174, 255, 255),
