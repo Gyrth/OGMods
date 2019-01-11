@@ -10,13 +10,13 @@ void Init(string str){
 
 	ReadAnimationList();
 	QueryAnimation("");
-	build_version = GetBuildVersionShort();
 }
 
 array<AnimationGroup@> all_animations;
 array<AnimationGroup@> current_animations;
 array<string> active_mods;
-bool show = false;
+bool show_animation_browser = false;
+bool show_pick_animation_button = false;
 int voice_preview = 1;
 bool select = false;
 int icon_size = 25;
@@ -35,7 +35,14 @@ bool on_animation_line = false;
 string search_buffer = "";
 string dialogue_buffer = "";
 bool update_dialogue_buffer = false;
-string build_version = "";
+
+// Coloring options
+vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
+vec4 background_color(0.25, 0.25, 0.25, 0.98);
+vec4 titlebar_color(0.15, 0.15, 0.15, 0.98);
+vec4 item_hovered(0.2, 0.2, 0.2, 0.98);
+vec4 item_clicked(0.1, 0.1, 0.1, 0.98);
+vec4 text_color(0.7, 0.7, 0.7, 1.0);
 
 class AnimationGroup{
 	string name;
@@ -105,70 +112,96 @@ string ToLowerCase(string input){
 
 void Display(){
 	UpdateCursor();
-	if(show){
-		animation_index = 0;
+
+	ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
+	ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
+	ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_TitleBg, item_hovered);
+	ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_Text, text_color);
+	ImGui_PushStyleColor(ImGuiCol_Header, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_HeaderHovered, item_hovered);
+	ImGui_PushStyleColor(ImGuiCol_HeaderActive, item_clicked);
+	ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, background_color);
+	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrab, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
+	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
+	ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
+	ImGui_PushStyleColor(ImGuiCol_Button, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_ButtonHovered, item_hovered);
+	ImGui_PushStyleColor(ImGuiCol_ButtonActive, item_clicked);
+	ImGui_PushStyleColor(ImGuiCol_TextSelectedBg, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_ComboBg, titlebar_color);
+
+	if(show_pick_animation_button){
+		if(ImGui_Begin("###Dialogue Editor", show_pick_animation_button, ImGuiWindowFlags_MenuBar)){
+			if(ImGui_BeginMenuBar()){
+				if(ImGui_Button("Pick Animation")){
+					show_animation_browser = true;
+				}
+				ImGui_EndMenuBar();
+			}
+			ImGui_End();
+		}
+	}
+
+	if(show_animation_browser){
 		ImGui_SetNextWindowSize(vec2(500, 500), ImGuiSetCond_FirstUseEver);
-		ImGui_Begin("Animation Browser", show, ImGuiWindowFlags_NoScrollbar);
+		if(ImGui_Begin("Animation Browser", show_animation_browser, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse)){
+			ImGui_BeginChild(99, vec2(ImGui_GetWindowWidth(), top_bar_height), false, ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
-		ImGui_BeginChild(99, vec2(ImGui_GetWindowWidth(), top_bar_height), false, ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+			if(update_dialogue_buffer){
+				update_dialogue_buffer = false;
+				ImGui_SetTextBuf(dialogue_buffer);
 
-		if(update_dialogue_buffer){
-			update_dialogue_buffer = false;
+				level.Execute(	"int previous_selected_line = dialogue.selected_line;" +
+								"dialogue.ClearSpawnedObjects();" +
+								"dialogue.UpdateStringsFromScript(ImGui_GetTextBuf());" +
+								"dialogue.AddInvisibleStrings();" +
+								"dialogue.modified = true;" +
+								"dialogue.selected_line = previous_selected_line;" +
+								"dialogue.HandleSelectedString(dialogue.selected_line);");
+			}else{
+				//If the dialogue buffer doesn't need to be updated then just request the current buffer content and set it again after the search buffer.
+				dialogue_buffer = ImGui_GetTextBuf();
+			}
+
+			ImGui_SetTextBuf(search_buffer);
+			ImGui_Text("Search");
+			ImGui_SameLine();
+			ImGui_PushItemWidth(ImGui_GetWindowWidth() - 85);
+			if(ImGui_InputText("", ImGuiInputTextFlags_AutoSelectAll)){
+				search_buffer = ImGui_GetTextBuf();
+				QueryAnimation(ImGui_GetTextBuf());
+			}
+			ImGui_PopItemWidth();
+			ImGui_EndChild();
+
+			//Set the dialogue buffer again so that it doesn't take the buffer of the search.
 			ImGui_SetTextBuf(dialogue_buffer);
 
-			string extra_line = "";
-			if(build_version == "1.2.3"){
-				//The next line is used in non-internal_testing, should be removed in the next release.
-				extra_line = "dialogue.SaveScriptToParams();";
-			}else{
-				//The line is used in internal_testing.
-				extra_line = "dialogue.modified = true;";
+			if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth() - scrollbar_width, ImGui_GetWindowHeight() - (top_bar_height + 40)), ImGuiWindowFlags_AlwaysAutoResize)){
+				for(uint i = 0; i < current_animations.size(); i++){
+					AddCategory(current_animations[i].name, current_animations[i].animations);
+				}
+				ImGui_EndChildFrame();
 			}
-
-			level.Execute(	"int previous_selected_line = dialogue.selected_line;" +
-							"dialogue.ClearSpawnedObjects();" +
-							"dialogue.UpdateStringsFromScript(ImGui_GetTextBuf());" +
-							"dialogue.AddInvisibleStrings();" +
-							extra_line +
-							"dialogue.selected_line = previous_selected_line;" +
-							"dialogue.HandleSelectedString(dialogue.selected_line);");
-		}else{
-			//If the dialogue buffer doesn't need to be updated then just request the current buffer content and set it again after the search buffer.
-			dialogue_buffer = ImGui_GetTextBuf();
-		}
-
-		ImGui_SetTextBuf(search_buffer);
-		if(ImGui_InputText("Search", ImGuiInputTextFlags_AutoSelectAll)){
-			search_buffer = ImGui_GetTextBuf();
-			QueryAnimation(ImGui_GetTextBuf());
-		}
-		ImGui_EndChild();
-
-		//Set the dialogue buffer again so that it doesn't take the buffer of the search.
-		ImGui_SetTextBuf(dialogue_buffer);
-
-		ImGui_PushStyleColor(ImGuiCol_FrameBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
-		if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth() - scrollbar_width, ImGui_GetWindowHeight() - (top_bar_height + 30)), ImGuiWindowFlags_AlwaysAutoResize)){
-			ImGui_PopStyleColor();
-			for(uint i = 0; i < current_animations.size(); i++){
-				AddCategory(current_animations[i].name, current_animations[i].animations);
+			//When the animation browser window isn't in focus and the dialogue editor is not on a line with a set_animation line then just hide the animation browser.
+			if(!ImGui_IsRootWindowOrAnyChildFocused() && !on_animation_line){
+				show_animation_browser = false;
 			}
-			ImGui_EndChildFrame();
+			ImGui_End();
 		}
-		//When the animation browser window isn't in focus and the dialogue editor is not on a line with a set_animation line then just hide the animation browser.
-		if(!ImGui_IsRootWindowOrAnyChildFocused() && !on_animation_line){
-			show = false;
-		}
-		ImGui_End();
 	}
+
+	ImGui_PopStyleColor(20);
 }
 
 void AddCategory(string category, array<string> items){
 	if(current_animations.size() < 1){
 		return;
 	}
-	ImGui_PushStyleColor(ImGuiCol_Border, vec4(0.0f, 0.5f, 0.5f, 0.5f));
-	ImGui_PushStyleColor(ImGuiCol_Header, vec4(1.0f, 0.5f, 0.0f, 0.5f));
 	if(ImGui_TreeNodeEx(category, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
 		ImGui_Unindent(22.0f);
 		for(uint i = 0; i < items.size(); i++){
@@ -178,7 +211,6 @@ void AddCategory(string category, array<string> items){
 		ImGui_Indent(22.0f);
 		ImGui_TreePop();
 	}
-	ImGui_PopStyleColor(2);
 }
 
 void AddItem(string name, int index){
@@ -202,12 +234,7 @@ void ReceiveMessage(string msg){
 }
 
 void SetCurrentAnimation(){
-	int index;
-	if(build_version == "1.2.3"){
-		index = current_dialogue_line;
-	}else{
-		index = previous_dialogue_line;
-	}
+	int index = previous_dialogue_line;
 	array<string> split_dialogue = dialogue_buffer.split("\n");
 	array<string> split_line = split_dialogue[index].split(" ");
 
@@ -243,16 +270,17 @@ void UpdateCursor(){
 			new_dialogue_line += 1;
 		}
 		current_dialogue_line = new_dialogue_line;
-
 		array<string> split_line = split_dialogue[current_dialogue_line].split(" ");
 		if(split_line.size() >= 3){
 			if(split_line[2] == "\"set_animation"){
 				selected_animation = GetAnimationPathFromString(split_line[3]);
 				on_animation_line = true;
-				show = true;
+				show_animation_browser = true;
+				/* show_pick_animation_button = true; */
 				return;
 			}
 		}
+		/* show_pick_animation_button = false; */
 		on_animation_line = false;
 	}
 }
