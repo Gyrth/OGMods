@@ -29,6 +29,7 @@
 #include "hotspots/drika_transform_object.as"
 #include "hotspots/drika_wait_level_message.as"
 #include "hotspots/drika_wait.as"
+#include "hotspots/drika_billboard.as"
 
 bool show_editor = false;
 bool has_closed = true;
@@ -255,6 +256,8 @@ DrikaElement@ InterpElement(JSONValue &in function_json){
 		return DrikaSendCharacterMessage(function_json);
 	}else if(function_json["function_name"].asString() == "animation"){
 		return DrikaAnimation(function_json);
+	}else if(function_json["function_name"].asString() == "billboard"){
+		return DrikaBillboard(function_json);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + function_json["function_name"].asString());
@@ -858,6 +861,8 @@ DrikaElement@ CreateNewFunction(drika_element_types element_type) {
 			return DrikaSendCharacterMessage();
 		case drika_animation:
 			return DrikaAnimation();
+		case drika_billboard:
+			return DrikaBillboard();
 	}
 	return DrikaElement();
 }

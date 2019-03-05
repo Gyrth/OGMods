@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="22.6475" t1="1.92865" t2="32.7149" s0="1" s1="1" s2="1" q0="0.0471831" q1="-0.607507" q2="0.0361881" q3="0.792086" euler_x="0.118996" euler_y="-1.30855" euler_z="0" id="1">
+    <CameraObject t0="21.2651" t1="1.62728" t2="6.03666" s0="1" s1="1" s2="1" q0="0.059709" q1="-0.826073" q2="0.0891522" q3="0.553254" euler_x="-2.92658" euler_y="-1.18025" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -50,6 +50,10 @@
             <parameter name="Block Skill" type="float" val="0.5" />
             <parameter name="Cannot Be Disarmed" type="int" val="0" />
             <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Color Channel 1 tags" type="string" val="" />
+            <parameter name="Color Channel 2 tags" type="string" val="" />
+            <parameter name="Color Channel 3 tags" type="string" val="" />
+            <parameter name="Color Channel 4 tags" type="string" val="" />
             <parameter name="Damage Resistance" type="float" val="1" />
             <parameter name="Ear Size" type="float" val="1" />
             <parameter name="Fall Damage Multiplier" type="float" val="1" />
@@ -115,12 +119,6 @@
                 <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
             </EnvObjectAttachment>
             <EnvObjectAttachment>
-                <BoneConnect bone_id="0" num_connections="1" m0="0.999914" m1="-0.0128419" m2="-0.00254443" m3="0" m4="0.00994796" m5="0.618978" m6="0.785345" m7="0" m8="-0.00851038" m9="-0.785304" m10="0.619052" m11="0" m12="0.0367756" m13="-0.441849" m14="0.478799" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-            </EnvObjectAttachment>
-            <EnvObjectAttachment>
                 <BoneConnect bone_id="0" num_connections="1" m0="0.999992" m1="0.0040662" m2="-1.82571e-05" m3="0" m4="-0.00331989" m5="0.813844" m6="-0.581074" m7="0" m8="-0.0023479" m9="0.581069" m10="0.813851" m11="0" m12="-0.0547504" m13="0.438105" m14="1.25468" m15="1" />
                 <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
                 <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
@@ -143,9 +141,6 @@
             <parameters />
         </EnvObject>
         <EnvObject s0="0.190557" s1="0.190557" s2="0.190557" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-            <parameters />
-        </EnvObject>
-        <EnvObject s0="0.25" s1="0.25" s2="0.25" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
             <parameters />
         </EnvObject>
         <EnvObject s0="1" s1="1.01729" s2="0.288362" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
@@ -271,10 +266,10 @@
     <EnvObject name="Set Velocity Helper" t0="-69.1083" t1="9.9041" t2="8.49077" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="-0.5" q3="0.866025" euler_x="0" euler_y="0" euler_z="-1.0472" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="20.1079" t1="-0.832158" t2="13.6093" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="45" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot t0="13.4951" t1="-0.475087" t2="9.893" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="45" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;entered_character&quot;,&quot;target_character_type&quot;:4},{&quot;function_name&quot;:&quot;set_velocity&quot;,&quot;identifier&quot;:&quot;entered_character&quot;,&quot;identifier_type&quot;:1,&quot;placeholder_id&quot;:46,&quot;velocity_magnitude&quot;:30},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;entered_character&quot;,&quot;target_character_type&quot;:2},{&quot;billboard_type&quot;:1,&quot;function_name&quot;:&quot;billboard&quot;,&quot;image_color&quot;:[0.61176472902297974,0,0.57647061347961426,0.364705890417099],&quot;image_path&quot;:&quot;Data/Textures/ui/ogicon.png&quot;,&quot;image_size&quot;:2.1699998378753662,&quot;placeholder_id&quot;:150},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -300,6 +295,10 @@
             <parameter name="Block Skill" type="float" val="0.5" />
             <parameter name="Cannot Be Disarmed" type="int" val="0" />
             <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Color Channel 1 tags" type="string" val="fur_primary" />
+            <parameter name="Color Channel 2 tags" type="string" val="fabric_primary_shirt" />
+            <parameter name="Color Channel 3 tags" type="string" val="fabric_secondary_pants" />
+            <parameter name="Color Channel 4 tags" type="string" val="fur_markings" />
             <parameter name="Damage Resistance" type="float" val="1" />
             <parameter name="Ear Size" type="float" val="1" />
             <parameter name="Fall Damage Multiplier" type="float" val="1" />
@@ -381,7 +380,7 @@
     <EnvObject t0="5.8758" t1="-3.42138" t2="-184.254" s0="24.5896" s1="1" s2="30.9778" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="61" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="13.5961" t1="1.3891" t2="30.3033" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="13.5961" t1="1.66243" t2="30.3033" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters>
             <parameter name="Muscle" type="float" val="200.421" />
         </parameters>
@@ -587,6 +586,10 @@
             <parameter name="Block Skill" type="float" val="0.5" />
             <parameter name="Cannot Be Disarmed" type="int" val="0" />
             <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Color Channel 1 tags" type="string" val="" />
+            <parameter name="Color Channel 2 tags" type="string" val="" />
+            <parameter name="Color Channel 3 tags" type="string" val="" />
+            <parameter name="Color Channel 4 tags" type="string" val="" />
             <parameter name="Damage Resistance" type="float" val="1" />
             <parameter name="Ear Size" type="float" val="1" />
             <parameter name="Fall Damage Multiplier" type="float" val="1" />
@@ -712,6 +715,9 @@
     <EnvObject t0="26.0346" t1="-2.7999" t2="6.13049" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="149" color_r="0.186021" color_g="0" color_b="0.282353" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
+    <EnvObject name="Billboard Helper" t0="14.5074" t1="2.26258" t2="9.01375" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="150" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <PathPointObject t0="14.1764" t1="-2.42134" t2="19.621" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="151" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
@@ -731,6 +737,10 @@
             <parameter name="Block Skill" type="float" val="0.5" />
             <parameter name="Cannot Be Disarmed" type="int" val="0" />
             <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Color Channel 1 tags" type="string" val="" />
+            <parameter name="Color Channel 2 tags" type="string" val="" />
+            <parameter name="Color Channel 3 tags" type="string" val="" />
+            <parameter name="Color Channel 4 tags" type="string" val="" />
             <parameter name="Damage Resistance" type="float" val="1" />
             <parameter name="Ear Size" type="float" val="1" />
             <parameter name="Fall Damage Multiplier" type="float" val="1" />
