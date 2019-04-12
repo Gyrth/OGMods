@@ -337,10 +337,9 @@ class DrikaAnimation : DrikaElement{
 		mesh_transform.SetRotationPart(rotation);
 
 		mat4 scale_mat;
-		float scale = (object.GetScale().x + object.GetScale().y + object.GetScale().z ) / 3.0f;
-		scale_mat[0] = scale;
-		scale_mat[5] = scale;
-		scale_mat[10] = scale;
+		scale_mat[0] = object.GetScale().x;
+		scale_mat[5] = object.GetScale().y;
+		scale_mat[10] = object.GetScale().z;
 		scale_mat[15] = 1.0f;
 		mesh_transform = mesh_transform * scale_mat;
 
