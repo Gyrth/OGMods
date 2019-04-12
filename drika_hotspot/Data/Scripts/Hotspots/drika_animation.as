@@ -300,7 +300,8 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void DrawEditing(){
-		for(uint i = 0; i < key_ids.size() - 1; i++){
+		int num_keys = max(0, key_ids.size() - 1);
+		for(int i = 0; i < num_keys; i++){
 			if(ObjectExists(key_ids[i])){
 				Object@ current_key = ReadObjectFromID(key_ids[i]);
 				Object@ next_key = ReadObjectFromID(key_ids[i+1]);
@@ -358,6 +359,9 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void Reset(){
+		if(key_ids.size() < 2){
+			return;
+		}
 		if(animation_type == looping_forwards || animation_type == looping_forwards_and_backwards || animation_type == forward){
 			key_index = 0;
 			@current_key = ReadObjectFromID(key_ids[key_index]);
