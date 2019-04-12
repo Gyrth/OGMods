@@ -342,6 +342,25 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
+	void EditDone(){
+		for(uint i = 0; i < key_ids.size(); i++){
+			if(key_ids[i] != -1 && ObjectExists(key_ids[i])){
+				Object@ current_key = ReadObjectFromID(key_ids[i]);
+				current_key.SetSelected(false);
+				current_key.SetSelectable(false);
+			}
+		}
+	}
+
+	void StartEdit(){
+		for(uint i = 0; i < key_ids.size(); i++){
+			if(key_ids[i] != -1 && ObjectExists(key_ids[i])){
+				Object@ current_key = ReadObjectFromID(key_ids[i]);
+				current_key.SetSelectable(true);
+			}
+		}
+	}
+
 	void CreateKey(){
 		int new_key_id = CreateObject("Data/Objects/drika_hotspot_cube.xml", false);
 		key_ids.insertLast(new_key_id);
