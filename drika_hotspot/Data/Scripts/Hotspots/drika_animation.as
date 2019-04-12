@@ -300,13 +300,11 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void DrawEditing(){
-		Object@ current_key;
-		for(uint i = 0; i < key_ids.size(); i++){
+		for(uint i = 0; i < key_ids.size() - 1; i++){
 			if(ObjectExists(key_ids[i])){
-				Object@ next_key = ReadObjectFromID(key_ids[i]);
-				if(current_key !is null){
-					DebugDrawLine(current_key.GetTranslation(), next_key.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-				}
+				Object@ current_key = ReadObjectFromID(key_ids[i]);
+				Object@ next_key = ReadObjectFromID(key_ids[i+1]);
+				DebugDrawLine(current_key.GetTranslation(), next_key.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}else{
 				key_ids.removeAt(i);
 				return;
