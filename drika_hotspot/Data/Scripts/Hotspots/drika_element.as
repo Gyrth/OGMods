@@ -169,6 +169,7 @@ class DrikaElement{
 	void DrawEditing(){}
 	void TargetChanged(){}
 	void SetCurrent(bool _current){}
+	void ReceiveEditorMessage(array<string> message){}
 	void ReceiveMessage(string message){}
 	void ReceiveMessage(string message, int param){}
 	void ReceiveMessage(string message, string param, int id_param){}

@@ -302,21 +302,23 @@ void Update(){
 		SwitchToPlaying();
 	}
 
-	if(!script_finished && drika_indexes.size() > 0 && !show_editor && hotspot_enabled){
-		if(messages.size() > 0){
-			for(uint i = 0; i < messages.size(); i++){
-				GetCurrentElement().ReceiveMessage(messages[i]);
+	if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
+		if(!show_editor){
+			if(messages.size() > 0){
+				for(uint i = 0; i < messages.size(); i++){
+					GetCurrentElement().ReceiveMessage(messages[i]);
+				}
 			}
-			messages.resize(0);
-		}
-		if(GetCurrentElement().Trigger()){
-			if(current_line == int(drika_indexes.size() - 1)){
-				script_finished = true;
-			}else{
-				current_line += 1;
-				display_index = drika_indexes[current_line];
+			if(GetCurrentElement().Trigger()){
+				if(current_line == int(drika_indexes.size() - 1)){
+					script_finished = true;
+				}else{
+					current_line += 1;
+					display_index = drika_indexes[current_line];
+				}
 			}
 		}
+		messages.resize(0);
 	}
 }
 
@@ -579,22 +581,30 @@ void ReceiveMessage(string msg){
     TokenIterator token_iter;
     token_iter.Init();
 
-    if(!token_iter.FindNextToken(msg)){
+    if(!token_iter.FindNextToken(msg) || drika_elements.size() == 0){
         return;
     }
     string token = token_iter.GetToken(msg);
 	// Discard the messages when this hotspot is disabled.
 	if(token == "level_event"){
-		token_iter.FindNextToken(msg);
-		string message = token_iter.GetToken(msg);
-		if(message == "drika_hotspot_editing" && token_iter.FindNextToken(msg)){
-			int id = atoi(token_iter.GetToken(msg));
-			if(id != this_hotspot.GetID()){
-				show_editor = false;
+		if(editing){
+			array<string> editor_messages;
+			while(token_iter.FindNextToken(msg)){
+				editor_messages.insertLast(token_iter.GetToken(msg));
 			}
-		}
-		if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
-			messages.insertLast(message);
+			GetCurrentElement().ReceiveEditorMessage(editor_messages);
+		}else{
+			token_iter.FindNextToken(msg);
+			string message = token_iter.GetToken(msg);
+			if(message == "drika_hotspot_editing" && token_iter.FindNextToken(msg)){
+				int id = atoi(token_iter.GetToken(msg));
+				if(id != this_hotspot.GetID()){
+					show_editor = false;
+				}
+			}
+			if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
+				messages.insertLast(message);
+			}
 		}
 	}
 }

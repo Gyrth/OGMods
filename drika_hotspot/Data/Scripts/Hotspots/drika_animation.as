@@ -105,6 +105,24 @@ class DrikaAnimation : DrikaElement{
 		ImGui_Checkbox("Animate Scale", animate_scale);
 	}
 
+	void ReceiveEditorMessage(array<string> messages){
+		if(messages[0] == "added_object"){
+			int obj_id = atoi(messages[1]);
+			if(!ObjectExists(obj_id)){
+				return;
+			}
+			Object@ obj = ReadObjectFromID(obj_id);
+			ScriptParams@ obj_params = obj.GetScriptParams();
+			if(obj_params.HasParam("Owner")){
+				if(obj_params.GetInt("Owner") == this_hotspot.GetID()){
+					//The new object is a duplicated animation key of this animation.
+					key_ids.insertAt(obj_params.GetInt("Index") + 1, obj_id);
+					WriteAnimationKeyParams();
+				}
+			}
+		}
+	}
+
 	void TargetChanged(){
 
 	}
@@ -133,6 +151,19 @@ class DrikaAnimation : DrikaElement{
 		//Make sure there is always at least two animation key available.
 		while(key_ids.size() < 2){
 			CreateKey();
+			WriteAnimationKeyParams();
+		}
+	}
+
+	void WriteAnimationKeyParams(){
+		for(uint i = 0; i < key_ids.size(); i++){
+			if(!ObjectExists(key_ids[i])){
+				return;
+			}
+			Object@ key = ReadObjectFromID(key_ids[i]);
+			ScriptParams@ key_params = key.GetScriptParams();
+			key_params.SetInt("Index", i);
+			key_params.SetInt("Owner", this_hotspot.GetID());
 		}
 	}
 
@@ -328,8 +359,13 @@ class DrikaAnimation : DrikaElement{
 				}
 				DrawDebugMesh(next_key);
 				DebugDrawLine(current_key.GetTranslation(), next_key.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			}else{
+			}else if(!ObjectExists(key_ids[i])){
 				key_ids.removeAt(i);
+				WriteAnimationKeyParams();
+				return;
+			}else if(!ObjectExists(key_ids[i+1])){
+				key_ids.removeAt(i+1);
+				WriteAnimationKeyParams();
 				return;
 			}
 		}
@@ -366,6 +402,8 @@ class DrikaAnimation : DrikaElement{
 		key_ids.insertLast(new_key_id);
 		Object@ new_key = ReadObjectFromID(new_key_id);
 		new_key.SetName("Animation Key");
+		new_key.SetDeletable(true);
+		new_key.SetCopyable(true);
 		new_key.SetSelectable(true);
 		new_key.SetTranslatable(true);
 		new_key.SetScalable(true);
