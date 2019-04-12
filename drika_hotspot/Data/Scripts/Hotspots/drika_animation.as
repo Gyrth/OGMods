@@ -299,12 +299,34 @@ class DrikaAnimation : DrikaElement{
 		return -c/2 * (cos(pi*t/d) - 1) + b;
 	}
 
+	void DrawDebugMesh(Object@ object){
+		mat4 mesh_transform;
+		mesh_transform.SetTranslationPart(object.GetTranslation());
+		mat4 rotation = Mat4FromQuaternion(object.GetRotation());
+		mesh_transform.SetRotationPart(rotation);
+
+		mat4 scale_mat;
+		float scale = (object.GetScale().x + object.GetScale().y + object.GetScale().z ) / 3.0f;
+		scale_mat[0] = scale;
+		scale_mat[5] = scale;
+		scale_mat[10] = scale;
+		scale_mat[15] = 1.0f;
+		mesh_transform = mesh_transform * scale_mat;
+
+		vec4 color = object.IsSelected()?vec4(0.0f, 0.85f, 0.0f, 0.75f):vec4(0.0f, 0.35f, 0.0f, 0.75f);
+		DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_update);
+	}
+
 	void DrawEditing(){
 		int num_keys = max(0, key_ids.size() - 1);
 		for(int i = 0; i < num_keys; i++){
-			if(ObjectExists(key_ids[i])){
+			if(ObjectExists(key_ids[i]) && ObjectExists(key_ids[i+1])){
 				Object@ current_key = ReadObjectFromID(key_ids[i]);
 				Object@ next_key = ReadObjectFromID(key_ids[i+1]);
+				if(i == 0){
+					DrawDebugMesh(current_key);
+				}
+				DrawDebugMesh(next_key);
 				DebugDrawLine(current_key.GetTranslation(), next_key.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}else{
 				key_ids.removeAt(i);
