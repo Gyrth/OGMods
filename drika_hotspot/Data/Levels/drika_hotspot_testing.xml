@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="21.2651" t1="1.62728" t2="6.03666" s0="1" s1="1" s2="1" q0="0.059709" q1="-0.826073" q2="0.0891522" q3="0.553254" euler_x="-2.92658" euler_y="-1.18025" euler_z="-3.14159" id="1">
+    <CameraObject t0="22.5317" t1="1.45652" t2="33.3461" s0="1" s1="1" s2="1" q0="0.0426726" q1="-0.69454" q2="0.0413361" q3="0.716997" euler_x="0.118892" euler_y="-1.53898" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -380,7 +380,7 @@
     <EnvObject t0="5.8758" t1="-3.42138" t2="-184.254" s0="24.5896" s1="1" s2="30.9778" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="61" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="13.5961" t1="1.66243" t2="30.3033" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="13.5961" t1="1.17243" t2="30.3033" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters>
             <parameter name="Muscle" type="float" val="200.421" />
         </parameters>

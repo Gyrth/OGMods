@@ -531,6 +531,7 @@ void DrawEditor(){
 			line_counter += 1;
 		}
 		ImGui_End();
+		GetCurrentElement().DrawExtraUI();
 		ImGui_PopStyleColor(17);
 		if(drika_elements.size() > 0){
 			GetCurrentElement().DrawEditing();

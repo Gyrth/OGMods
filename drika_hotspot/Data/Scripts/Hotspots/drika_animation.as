@@ -30,6 +30,9 @@ class DrikaAnimation : DrikaElement{
 	float animation_timer = 0.0;
 	int loop_direction = 1;
 	bool animation_finished = false;
+	float timeline_position = 1.0;
+	float timeline_duration = 1.0;
+	bool timeline_snap = true;
 
 	array<string> animation_type_names = {	"Looping Forwards",
 											"Looping Backwards",
@@ -434,6 +437,47 @@ class DrikaAnimation : DrikaElement{
 				}
 			}
 		}
+	}
+
+	void DrawExtraUI(){
+		float margin = 20.0;
+		float timeline_width = GetScreenWidth() - margin;
+		float timeline_height = GetScreenHeight() - margin;
+		if(duration > 0.0){
+			timeline_duration = duration;
+		}
+
+		if(ImGui_Begin("Animation Timeline", ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)){
+			vec2 current_position = ImGui_GetWindowPos() + vec2(margin / 2.0);
+			float line_separation = timeline_width / (timeline_duration * 10.0);
+			//Add one more line for the 0 keyframe.
+			int nr_lines = int(timeline_duration * 10.0) + 1;
+			for(int i = 0; i < nr_lines; i++){
+				ImDrawList_AddLine(current_position + ((i%10==0?vec2():vec2(0.0, 20.0))), current_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(1.0, 1.0, 1.0, 1.0)), 1.0f);
+				current_position += vec2(line_separation, 0.0);
+			}
+			if(ImGui_IsWindowHovered() && ImGui_IsMouseDown(0)){
+				timeline_position = min(timeline_duration, max(0.0, ImGui_GetMousePos().x - margin / 2.0) * timeline_duration / timeline_width);
+				if(timeline_snap){
+					float lowest = floor(timeline_position * 10.0) / 10.0;
+					float highest = ceil(timeline_position * 10.0) / 10.0;
+					if(abs(timeline_position - lowest) < abs(highest - timeline_position)){
+						timeline_position = lowest;
+					}else{
+						timeline_position = highest;
+					}
+				}
+			}
+		}
+		//Draw the current position on the timeline.
+		vec2 cursor_position = ImGui_GetWindowPos() + vec2(margin / 2.0, 0.0);
+		//Convert the time in msec to a x position on the timeline.
+		cursor_position += vec2(timeline_position * timeline_width / timeline_duration, 0.0);
+		ImDrawList_AddLine(cursor_position, cursor_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(0.0, 1.0, 0.0, 1.0)), 4.0f);
+
+		ImGui_SetWindowSize("Animation Timeline", vec2(GetScreenWidth(), GetScreenHeight() / 8.0));
+		ImGui_SetWindowPos("Animation Timeline", vec2(0.0f, GetScreenHeight() - (GetScreenHeight() / 8.0)));
+		ImGui_End();
 	}
 
 	void Reset(){
