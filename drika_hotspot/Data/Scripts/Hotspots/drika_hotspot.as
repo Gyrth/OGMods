@@ -367,6 +367,7 @@ void DrawEditor(){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBg, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
