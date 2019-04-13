@@ -317,6 +317,8 @@ void Update(){
 					display_index = drika_indexes[current_line];
 				}
 			}
+		}else{
+			GetCurrentElement().Update();
 		}
 		messages.resize(0);
 	}
@@ -531,11 +533,10 @@ void DrawEditor(){
 			line_counter += 1;
 		}
 		ImGui_End();
-		GetCurrentElement().DrawExtraUI();
-		ImGui_PopStyleColor(17);
 		if(drika_elements.size() > 0){
 			GetCurrentElement().DrawEditing();
 		}
+		ImGui_PopStyleColor(17);
 	}
 	if(reorded && !ImGui_IsMouseDragging(0)){
 		reorded = false;

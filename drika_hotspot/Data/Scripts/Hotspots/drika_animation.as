@@ -94,6 +94,7 @@ class DrikaAnimation : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		WriteAnimationKeyParams();
 	}
 
 	void DrawSettings(){
@@ -378,6 +379,14 @@ class DrikaAnimation : DrikaElement{
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
+
+		DrawTimeline();
+	}
+
+	void Update(){
+		if(GetInputPressed(0, "i")){
+			InsertAnimationKey();
+		}
 	}
 
 	void EditDone(){
@@ -414,6 +423,26 @@ class DrikaAnimation : DrikaElement{
 		new_key.SetTranslation(this_hotspot.GetTranslation() + vec3(0, key_ids.size(), 0));
 	}
 
+	void InsertAnimationKey(){
+		int new_key_id = CreateObject("Data/Objects/drika_hotspot_cube.xml", false);
+		key_ids.insertLast(new_key_id);
+		Object@ new_key = ReadObjectFromID(new_key_id);
+		ScriptParams@ new_key_params = new_key.GetScriptParams();
+		new_key_params.SetFloat("Time", timeline_position);
+		new_key_params.SetInt("Index", key_ids.size() - 1);
+		new_key_params.SetInt("Owner", this_hotspot.GetID());
+		new_key.SetName("Animation Key");
+		new_key.SetDeletable(true);
+		new_key.SetCopyable(true);
+		new_key.SetSelectable(true);
+		new_key.SetTranslatable(true);
+		new_key.SetScalable(true);
+		new_key.SetRotatable(true);
+		new_key.SetScale(vec3(1.0));
+		array<Object@> targets = GetTargetObjects();
+		new_key.SetTranslation(targets[0].GetTranslation());
+	}
+
 	void LeftClick(){
 		int selected_index = -1;
 		for(uint i = 0; i < key_ids.size(); i++){
@@ -439,7 +468,7 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
-	void DrawExtraUI(){
+	void DrawTimeline(){
 		float margin = 20.0;
 		float timeline_width = GetScreenWidth() - margin;
 		float timeline_height = GetScreenHeight() - margin;
@@ -474,6 +503,20 @@ class DrikaAnimation : DrikaElement{
 		//Convert the time in msec to a x position on the timeline.
 		cursor_position += vec2(timeline_position * timeline_width / timeline_duration, 0.0);
 		ImDrawList_AddLine(cursor_position, cursor_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(0.0, 1.0, 0.0, 1.0)), 4.0f);
+
+		for(uint i = 0; i < key_ids.size(); i++){
+			if(!ObjectExists(key_ids[i])){
+				return;
+			}
+			Object@ key = ReadObjectFromID(key_ids[i]);
+			ScriptParams@ key_params = key.GetScriptParams();
+			if(key_params.HasParam("Time")){
+				vec2 key_position = ImGui_GetWindowPos() + vec2(margin / 2.0, 0.0);
+				//Convert the time in msec to a x position on the timeline.
+				key_position += vec2(key_params.GetFloat("Time") * timeline_width / timeline_duration, 0.0);
+				ImDrawList_AddLine(key_position + vec2(0.0, 20.0), key_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(1.0, 0.75, 0.0, 0.85)), 4.0f);
+			}
+		}
 
 		ImGui_SetWindowSize("Animation Timeline", vec2(GetScreenWidth(), GetScreenHeight() / 8.0));
 		ImGui_SetWindowPos("Animation Timeline", vec2(0.0f, GetScreenHeight() - (GetScreenHeight() / 8.0)));

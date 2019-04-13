@@ -173,7 +173,6 @@ class DrikaElement{
 	void ReceiveMessage(string message){}
 	void ReceiveMessage(string message, int param){}
 	void ReceiveMessage(string message, string param, int id_param){}
-	void DrawExtraUI(){}
 	void SetIndex(int _index){
 		index = _index;
 	}
