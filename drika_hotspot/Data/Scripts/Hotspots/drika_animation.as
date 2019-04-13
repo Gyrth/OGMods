@@ -6,15 +6,31 @@ enum animation_types {
 						backward = 4
 					}
 
-enum animation_methods {
-						constant_speed = 0,
-						divide_between_keys = 1
-					}
+enum animation_methods 	{
+							timeline_method = 0,
+							placeholder_method = 1
+						}
+
+enum duration_methods 	{
+							constant_speed = 0,
+							divide_between_keys = 1
+						}
+
+class AnimationKey{
+	vec3 translation;
+	quaternion rotation;
+	vec3 scale;
+	float time;
+}
 
 class DrikaAnimation : DrikaElement{
+	array<AnimationKey@> key_data;
 	array<int> key_ids;
 	animation_types animation_type;
 	int current_animation_type;
+	int current_duration_method;
+	int current_animation_method;
+	duration_methods duration_method;
 	animation_methods animation_method;
 	bool interpolate_rotation;
 	bool interpolate_translation;
@@ -34,20 +50,33 @@ class DrikaAnimation : DrikaElement{
 	float timeline_duration = 1.0;
 	bool timeline_snap = true;
 
-	array<string> animation_type_names = {	"Looping Forwards",
-											"Looping Backwards",
-											"Looping Forwards and Backwards",
-											"Forward",
-											"Backward"
-										};
+	array<string> animation_type_names = 	{
+												"Looping Forwards",
+												"Looping Backwards",
+												"Looping Forwards and Backwards",
+												"Forward",
+												"Backward"
+											};
+
+	array<string> duration_method_names = 	{
+												"Constant Speed",
+												"Divide Between Keys"
+											};
+
+	array<string> animation_method_names = 	{
+												"Timeline",
+												"Placeholder"
+											};
 
 	DrikaAnimation(JSONValue params = JSONValue()){
 		drika_element_type = drika_animation;
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object};
 		key_ids = GetJSONIntArray(params, "key_ids", {});
+		key_data = InterpAnimationData(GetJSONValueArray(params, "key_data", {}));
 		animation_type = animation_types(GetJSONInt(params, "animation_type", 3));
 		current_animation_type = animation_type;
-		animation_method = animation_methods(GetJSONInt(params, "animation_method", 0));
+		duration_method = duration_methods(GetJSONInt(params, "duration_method", 0));
+		animation_method = animation_methods(GetJSONInt(params, "animation_method", 1));
 		interpolate_rotation = GetJSONBool(params, "interpolate_rotation", false);
 		interpolate_translation = GetJSONBool(params, "interpolate_translation", false);
 		animate_camera = GetJSONBool(params, "animate_camera", false);
@@ -63,6 +92,7 @@ class DrikaAnimation : DrikaElement{
 		JSONValue data;
 		data["function_name"] = JSONValue("animation");
 		data["animation_type"] = JSONValue(animation_type);
+		data["duration_method"] = JSONValue(duration_method);
 		data["animation_method"] = JSONValue(animation_method);
 		data["interpolate_rotation"] = JSONValue(interpolate_rotation);
 		data["interpolate_translation"] = JSONValue(interpolate_translation);
@@ -70,12 +100,52 @@ class DrikaAnimation : DrikaElement{
 		data["animate_scale"] = JSONValue(animate_scale);
 		data["duration"] = JSONValue(duration);
 		data["forward_rotation"] = JSONValue(forward_rotation);
+
 		data["key_ids"] = JSONValue(JSONarrayValue);
 		for(uint i = 0; i < key_ids.size(); i++){
 			data["key_ids"].append(key_ids[i]);
 		}
+
+		data["key_data"] = JSONValue(JSONarrayValue);
+		for(uint i = 0; i < key_data.size(); i++){
+			JSONValue current_key_data;
+			current_key_data["time"] = JSONValue(key_data[i].time);
+
+			current_key_data["translation"] = JSONValue(JSONarrayValue);
+			current_key_data["translation"].append(key_data[i].translation.x);
+			current_key_data["translation"].append(key_data[i].translation.y);
+			current_key_data["translation"].append(key_data[i].translation.z);
+
+			current_key_data["rotation"] = JSONValue(JSONarrayValue);
+			current_key_data["rotation"].append(key_data[i].rotation.x);
+			current_key_data["rotation"].append(key_data[i].rotation.y);
+			current_key_data["rotation"].append(key_data[i].rotation.z);
+			current_key_data["rotation"].append(key_data[i].rotation.w);
+
+			current_key_data["scale"] = JSONValue(JSONarrayValue);
+			current_key_data["scale"].append(key_data[i].scale.x);
+			current_key_data["scale"].append(key_data[i].scale.y);
+			current_key_data["scale"].append(key_data[i].scale.z);
+
+			data["key_data"].append(current_key_data);
+
+		}
 		SaveIdentifier(data);
 		return data;
+	}
+
+	array<AnimationKey@> InterpAnimationData(array<JSONValue> data){
+		array<AnimationKey@> new_data;
+		for(uint i = 0; i < data.size(); i++){
+			JSONValue current_key_data = data[i];
+			AnimationKey new_key;
+			new_key.translation = vec3(current_key_data["translation"][0].asFloat(), current_key_data["translation"][1].asFloat(), current_key_data["translation"][2].asFloat());
+			new_key.rotation = quaternion(current_key_data["rotation"][0].asFloat(), current_key_data["rotation"][1].asFloat(), current_key_data["rotation"][2].asFloat(), current_key_data["rotation"][3].asFloat());
+			new_key.scale = vec3(current_key_data["scale"][0].asFloat(), current_key_data["scale"][1].asFloat(), current_key_data["scale"][2].asFloat());
+			new_key.time = current_key_data["time"].asFloat();
+			new_data.insertLast(new_key);
+		}
+		return new_data;
 	}
 
 	void PostInit(){
@@ -99,6 +169,12 @@ class DrikaAnimation : DrikaElement{
 
 	void DrawSettings(){
 		DrawSelectTargetUI();
+		if(ImGui_Combo("Animation Method", current_animation_method, animation_method_names, animation_method_names.size())){
+			animation_method = animation_methods(current_animation_method);
+		}
+		if(ImGui_Combo("Duration Method", current_duration_method, duration_method_names, duration_method_names.size())){
+			duration_method = duration_methods(current_duration_method);
+		}
 		if(ImGui_Combo("Animation Type", current_animation_type, animation_type_names, animation_type_names.size())){
 			animation_type = animation_types(current_animation_type);
 		}
@@ -174,7 +250,7 @@ class DrikaAnimation : DrikaElement{
 	void UpdateAnimation(){
 		float alpha = 0.0;
 		animation_timer += time_step;
-		if(animation_method == constant_speed){
+		if(duration_method == constant_speed){
 			//The animation will have a constant speed.
 			bool skip_node = false;
 			float whole_distance = CalculateWholeDistance();
@@ -198,7 +274,7 @@ class DrikaAnimation : DrikaElement{
 					}
 				}
 			}
-		}else if(animation_method == divide_between_keys){
+		}else if(duration_method == divide_between_keys){
 			//The animation will devide the time between the animation keys.
 			float duration_between_keys = max(0.0001, duration / key_ids.size());
 			alpha = animation_timer / duration_between_keys;
@@ -209,7 +285,7 @@ class DrikaAnimation : DrikaElement{
 				return;
 			}
 		}else{
-			Log(error, "Unknown animation method! " + animation_method);
+			Log(error, "Unknown animation method! " + duration_method);
 		}
 
 		ApplyTransform(alpha);
@@ -380,12 +456,18 @@ class DrikaAnimation : DrikaElement{
 			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 
-		DrawTimeline();
+		if(animation_method == timeline_method){
+			DrawTimeline();
+		}
 	}
 
 	void Update(){
-		if(GetInputPressed(0, "i")){
-			InsertAnimationKey();
+		if(animation_method == timeline_method){
+			if(GetInputPressed(0, "i")){
+				InsertAnimationKey();
+			}else if(GetInputPressed(0, "x")){
+				DeleteAnimationKey();
+			}
 		}
 	}
 
@@ -424,23 +506,22 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void InsertAnimationKey(){
-		int new_key_id = CreateObject("Data/Objects/drika_hotspot_cube.xml", false);
-		key_ids.insertLast(new_key_id);
-		Object@ new_key = ReadObjectFromID(new_key_id);
-		ScriptParams@ new_key_params = new_key.GetScriptParams();
-		new_key_params.SetFloat("Time", timeline_position);
-		new_key_params.SetInt("Index", key_ids.size() - 1);
-		new_key_params.SetInt("Owner", this_hotspot.GetID());
-		new_key.SetName("Animation Key");
-		new_key.SetDeletable(true);
-		new_key.SetCopyable(true);
-		new_key.SetSelectable(true);
-		new_key.SetTranslatable(true);
-		new_key.SetScalable(true);
-		new_key.SetRotatable(true);
-		new_key.SetScale(vec3(1.0));
+		AnimationKey new_key;
+		new_key.time = timeline_position;
 		array<Object@> targets = GetTargetObjects();
-		new_key.SetTranslation(targets[0].GetTranslation());
+		new_key.translation = targets[0].GetTranslation();
+		new_key.rotation = targets[0].GetRotation();
+		new_key.scale = targets[0].GetScale();
+		key_data.insertLast(@new_key);
+	}
+
+	void DeleteAnimationKey(){
+		for(uint i = 0; i < key_data.size(); i++){
+			if(key_data[i].time == timeline_position){
+				key_data.removeAt(i);
+				i--;
+			}
+		}
 	}
 
 	void LeftClick(){
@@ -504,18 +585,11 @@ class DrikaAnimation : DrikaElement{
 		cursor_position += vec2(timeline_position * timeline_width / timeline_duration, 0.0);
 		ImDrawList_AddLine(cursor_position, cursor_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(0.0, 1.0, 0.0, 1.0)), 4.0f);
 
-		for(uint i = 0; i < key_ids.size(); i++){
-			if(!ObjectExists(key_ids[i])){
-				return;
-			}
-			Object@ key = ReadObjectFromID(key_ids[i]);
-			ScriptParams@ key_params = key.GetScriptParams();
-			if(key_params.HasParam("Time")){
-				vec2 key_position = ImGui_GetWindowPos() + vec2(margin / 2.0, 0.0);
-				//Convert the time in msec to a x position on the timeline.
-				key_position += vec2(key_params.GetFloat("Time") * timeline_width / timeline_duration, 0.0);
-				ImDrawList_AddLine(key_position + vec2(0.0, 20.0), key_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(1.0, 0.75, 0.0, 0.85)), 4.0f);
-			}
+		for(uint i = 0; i < key_data.size(); i++){
+			vec2 key_position = ImGui_GetWindowPos() + vec2(margin / 2.0, 0.0);
+			//Convert the time in msec to a x position on the timeline.
+			key_position += vec2(key_data[i].time * timeline_width / timeline_duration, 0.0);
+			ImDrawList_AddLine(key_position + vec2(0.0, 20.0), key_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(1.0, 0.75, 0.0, 0.85)), 4.0f);
 		}
 
 		ImGui_SetWindowSize("Animation Timeline", vec2(GetScreenWidth(), GetScreenHeight() / 8.0));

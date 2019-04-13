@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="25.5329" t1="1.76163" t2="33.3878" s0="1" s1="1" s2="1" q0="0.031912" q1="-0.705232" q2="0.0318078" q3="0.707544" euler_x="0.0901065" euler_y="-1.56752" euler_z="3.75608e-05" id="1">
+    <CameraObject t0="31.7401" t1="2.92171" t2="33.8647" s0="1" s1="1" s2="1" q0="0.0686224" q1="-0.671765" q2="0.0627264" q3="0.734907" euler_x="0.186213" euler_y="-1.48108" euler_z="-1.4137e-06" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -380,7 +380,7 @@
     <EnvObject t0="5.8758" t1="-3.42138" t2="-184.254" s0="24.5896" s1="1" s2="30.9778" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="61" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="14.0161" t1="-1.14363" t2="27.1227" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="13.5961" t1="-1.72393" t2="29.4429" s0="2.67709" s1="3.31725" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters>
             <parameter name="Muscle" type="float" val="200.421" />
         </parameters>
@@ -628,6 +628,13 @@
     <EnvObject t0="31.6036" t1="-1.37758" t2="-14.7357" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="125" color_r="0" color_g="0.0941176" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
+    <EnvObject name="Animation Key" t0="13.5961" t1="-1.04643" t2="26.3398" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters>
+            <parameter name="Index" type="int" val="1" />
+            <parameter name="Owner" type="int" val="138" />
+            <parameter name="Time" type="float" val="0.1" />
+        </parameters>
+    </EnvObject>
     <Hotspot t0="26.7779" t1="-2.42134" t2="30.0019" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="127" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
@@ -677,7 +684,7 @@
     <Hotspot t0="10.9525" t1="0.746269" t2="34.8769" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="138" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:0,&quot;duration&quot;:5,&quot;forward_rotation&quot;:0,&quot;function_name&quot;:&quot;animation&quot;,&quot;identifier&quot;:72,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_ids&quot;:[147,148]}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:0,&quot;duration&quot;:5,&quot;duration_method&quot;:1,&quot;forward_rotation&quot;:0,&quot;function_name&quot;:&quot;animation&quot;,&quot;identifier&quot;:72,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:1,&quot;translation&quot;:[13.596099853515625,-1.1353528499603271,26.747085571289062]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2,&quot;translation&quot;:[13.596099853515625,-1.1353528499603271,26.747085571289062]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:3,&quot;translation&quot;:[13.596099853515625,-1.1353528499603271,26.747085571289062]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2.0999999046325684,&quot;translation&quot;:[13.596099853515625,-1.7239338159561157,29.442920684814453]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2.2000000476837158,&quot;translation&quot;:[13.596099853515625,-1.7239338159561157,29.442920684814453]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2.2999999523162842,&quot;translation&quot;:[13.596099853515625,-1.7239338159561157,29.442920684814453]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2.4000000953674316,&quot;translation&quot;:[13.596099853515625,-1.7239338159561157,29.442920684814453]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2.5,&quot;translation&quot;:[13.596099853515625,-1.7239338159561157,29.442920684814453]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2.5999999046325684,&quot;translation&quot;:[13.596099853515625,-1.7239338159561157,29.442920684814453]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2.7000000476837158,&quot;translation&quot;:[13.596099853515625,-1.7239338159561157,29.442920684814453]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2.7999999523162842,&quot;translation&quot;:[13.596099853515625,-1.7239338159561157,29.442920684814453]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:2.9000000953674316,&quot;translation&quot;:[13.596099853515625,-1.7239338159561157,29.442920684814453]}],&quot;key_ids&quot;:[147,126,148]}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -706,7 +713,7 @@
     <DynamicLightObject t0="12.8009" t1="3.70381" t2="-26.6873" s0="1.87809" s1="1.87809" s2="1.87809" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="146" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
         <parameters />
     </DynamicLightObject>
-    <EnvObject name="Animation Key" t0="13.5961" t1="1.00243" t2="30.3033" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Animation Key" t0="13.5961" t1="-1.89331" t2="30.2187" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters>
             <parameter name="Index" type="int" val="0" />
             <parameter name="Owner" type="int" val="138" />
@@ -715,7 +722,7 @@
     </EnvObject>
     <EnvObject name="Animation Key" t0="13.1169" t1="5.11131" t2="33.818" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters>
-            <parameter name="Index" type="int" val="1" />
+            <parameter name="Index" type="int" val="2" />
             <parameter name="Owner" type="int" val="138" />
             <parameter name="Time" type="float" val="0.2" />
         </parameters>

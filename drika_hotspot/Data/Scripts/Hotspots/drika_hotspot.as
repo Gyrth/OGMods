@@ -801,6 +801,30 @@ array<int> GetJSONIntArray(JSONValue data, string var_name, array<int> default_v
 	}
 }
 
+array<string> GetJSONStringArray(JSONValue data, string var_name, array<string> default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		array<string> values;
+		for(uint i = 0; i < data[var_name].size(); i++){
+			values.insertLast(data[var_name][i].asString());
+		}
+		return values;
+	}else{
+		return default_value;
+	}
+}
+
+array<JSONValue> GetJSONValueArray(JSONValue data, string var_name, array<JSONValue> default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		array<JSONValue> values;
+		for(uint i = 0; i < data[var_name].size(); i++){
+			values.insertLast(data[var_name][i]);
+		}
+		return values;
+	}else{
+		return default_value;
+	}
+}
+
 void AddFunctionMenuItems(){
 	for(uint i = 0; i < sorted_element_names.size(); i++){
 		drika_element_types current_element_type = drika_element_types(drika_element_names[sorted_element_names[i]]);
