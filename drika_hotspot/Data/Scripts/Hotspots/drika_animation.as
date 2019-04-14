@@ -231,6 +231,7 @@ class DrikaAnimation : DrikaElement{
 		UpdateAnimation();
 		if(animation_finished){
 			animation_finished = false;
+			Reset();
 			return true;
 		}else{
 			return false;
@@ -259,7 +260,6 @@ class DrikaAnimation : DrikaElement{
 
 	void UpdateAnimation(){
 		if(animation_method == timeline_method){
-			animation_timer += time_step;
 			TimelineUpdateAnimation();
 			TimelineSetTransform(animation_timer);
 		}else if(animation_method == placeholder_method){
@@ -345,9 +345,37 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void TimelineUpdateAnimation(){
-		if(animation_timer >= duration){
-			if(animation_type == looping_forwards){
+		if(animation_type == forward){
+			animation_timer += time_step;
+			if(animation_timer >= duration){
+				animation_finished = true;
+			}
+		}else if(animation_type == backward){
+			animation_timer -= time_step;
+			if(animation_timer <= 0.0){
+				animation_finished = true;
+			}
+		}else if(animation_type == looping_forwards){
+			animation_timer += time_step;
+			if(animation_timer >= duration){
 				animation_timer = 0.0;
+			}
+		}else if(animation_type == looping_backwards){
+			animation_timer -= time_step;
+			if(animation_timer <= 0.0){
+				animation_timer = duration;
+			}
+		}else if(animation_type == looping_forwards_and_backwards){
+			if(loop_direction == 1){
+				animation_timer += time_step;
+				if(animation_timer >= duration){
+					loop_direction = -1;
+				}
+			}else if(loop_direction == -1){
+				animation_timer -= time_step;
+				if(animation_timer <= 0.0){
+					loop_direction = 1;
+				}
 			}
 		}
 	}
@@ -710,6 +738,18 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void Reset(){
+		if(animation_type == forward){
+			animation_timer = 0.0;
+		}else if(animation_type == backward){
+			animation_timer = duration;
+		}else if(animation_type == looping_forwards){
+			animation_timer = 0.0;
+		}else if(animation_type == looping_backwards){
+			animation_timer = duration;
+		}else if(animation_type == looping_forwards_and_backwards){
+			animation_timer = 0.0;
+		}
+		
 		if(key_ids.size() < 2){
 			return;
 		}
