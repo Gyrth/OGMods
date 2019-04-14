@@ -49,6 +49,7 @@ class DrikaAnimation : DrikaElement{
 	float timeline_position = 1.0;
 	float timeline_duration = 1.0;
 	bool timeline_snap = true;
+	float alpha = 0.0;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -251,16 +252,13 @@ class DrikaAnimation : DrikaElement{
 
 	void UpdateAnimation(){
 		if(animation_method == timeline_method){
-			TimelineApplyTransform(animation_timer);
 			animation_timer += time_step;
-			if(animation_timer >= duration){
-				if(animation_type == looping_forwards){
-					animation_timer = 0.0;
-				}
-			}
+			TimelineUpdateAnimation();
+			TimelineSetTransform(animation_timer);
 		}else if(animation_method == placeholder_method){
 			animation_timer += time_step;
-			PlaceholderApplyTransform();
+			PlaceholderUpdateAnimation();
+			PlaceholderSetTransform();
 		}
 	}
 
@@ -330,18 +328,30 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
-	void TimelineApplyTransform(float current_time){
+	void ApplyTransform(vec3 translation, quaternion rotation, vec3 scale){
+		array<Object@> targets = GetTargetObjects();
+		targets[0].SetTranslation(translation);
+		targets[0].SetRotation(rotation);
+		if(animate_scale){
+			targets[0].SetScale(scale);
+		}
+	}
+
+	void TimelineUpdateAnimation(){
+		if(animation_timer >= duration){
+			if(animation_type == looping_forwards){
+				animation_timer = 0.0;
+			}
+		}
+	}
+
+	void TimelineSetTransform(float current_time){
 		bool applied_transform = false;
 		for(uint i = 0; i < key_data.size(); i++){
 			if(key_data[i].time == current_time){
 				//If the timeline position is exactly on a keyframe then just apply that transform.
 				applied_transform = true;
-				array<Object@> targets = GetTargetObjects();
-				targets[0].SetTranslation(key_data[i].translation);
-				targets[0].SetRotation(key_data[i].rotation);
-				if(animate_scale){
-					targets[0].SetScale(key_data[i].scale);
-				}
+				ApplyTransform(key_data[i].translation, key_data[i].rotation, key_data[i].scale);
 			}
 		}
 		if(!applied_transform){
@@ -362,19 +372,13 @@ class DrikaAnimation : DrikaElement{
 			if(@left_key != null && @right_key != null){
 				float whole_length = right_key.time - left_key.time;
 				float current_length = right_key.time - current_time;
-				float weight = (current_length / whole_length);
-				array<Object@> targets = GetTargetObjects();
-				targets[0].SetTranslation(mix(right_key.translation, left_key.translation, weight));
-				targets[0].SetRotation(mix(right_key.rotation, left_key.rotation, weight));
-				if(animate_scale){
-					targets[0].SetScale(mix(right_key.scale, left_key.scale, weight));
-				}
+				alpha = (current_length / whole_length);
+				ApplyTransform(mix(right_key.translation, left_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
 			}
 		}
 	}
 
-	void PlaceholderApplyTransform(){
-		float alpha = 0.0;
+	void PlaceholderUpdateAnimation(){
 		if(duration_method == constant_speed){
 			//The animation will have a constant speed.
 			bool skip_node = false;
@@ -412,7 +416,9 @@ class DrikaAnimation : DrikaElement{
 		}else{
 			Log(error, "Unknown animation method! " + duration_method);
 		}
+	}
 
+	void PlaceholderSetTransform(){
 		quaternion new_rotation;
 		vec3 new_position;
 
@@ -447,17 +453,9 @@ class DrikaAnimation : DrikaElement{
 			new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
 		}
 
-		if(animate_scale){
-			vec3 scale = mix(current_key.GetScale(), next_key.GetScale(), alpha);
-			for(uint i = 0; i < targets.size(); i++){
-				targets[i].SetScale(scale);
-			}
-		}
+		vec3 new_scale = mix(current_key.GetScale(), next_key.GetScale(), alpha);
 
-		for(uint i = 0; i < targets.size(); i++){
-			targets[i].SetRotation(new_rotation);
-			targets[i].SetTranslation(new_position);
-		}
+		ApplyTransform(new_position, new_rotation, new_scale);
 	}
 
 	//Current time, start value, change in value, duration
@@ -621,6 +619,12 @@ class DrikaAnimation : DrikaElement{
 			int nr_lines = int(timeline_duration * 10.0) + 1;
 			for(int i = 0; i < nr_lines; i++){
 				ImDrawList_AddLine(current_position + ((i%10==0?vec2():vec2(0.0, 20.0))), current_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(1.0, 1.0, 1.0, 1.0)), 1.0f);
+
+				string frame_label = formatFloat((i / 10.0), '0l', 2, 1);
+				if(line_separation > 30.0 || i%10==0){
+					ImDrawList_AddText(current_position - vec2(10.0, 10.0), ImGui_GetColorU32(i%10==0?vec4(1.0, 1.0, 1.0, 0.5):vec4(1.0, 1.0, 1.0, 0.25)), frame_label);
+				}
+
 				current_position += vec2(line_separation, 0.0);
 			}
 			if(ImGui_IsWindowHovered() && ImGui_IsMouseDown(0)){
@@ -633,7 +637,7 @@ class DrikaAnimation : DrikaElement{
 					}else{
 						timeline_position = highest;
 					}
-					TimelineApplyTransform(timeline_position);
+					TimelineSetTransform(timeline_position);
 				}
 			}
 		}
