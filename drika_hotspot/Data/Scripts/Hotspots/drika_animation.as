@@ -250,47 +250,18 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void UpdateAnimation(){
-		float alpha = 0.0;
-		animation_timer += time_step;
-		if(duration_method == constant_speed){
-			//The animation will have a constant speed.
-			bool skip_node = false;
-			float whole_distance = CalculateWholeDistance();
-			//When the keys are all at the same location no animation can be performed.
-			if(whole_distance == 0.0f){
-				return;
-			}else{
-				float key_distance = distance(next_key.GetTranslation(), current_key.GetTranslation());
-				//If the current and next keys are at the same location then just go to the next key.
-				if(key_distance == 0.0f){
-					animation_timer = 0.0f;
-					NextAnimationKey();
-				}else{
-					//To make sure the time isn't 0, or else it will devide by zero.
-					float duration_between_keys = max(0.0001f, duration * (key_distance / whole_distance));
-					alpha = animation_timer / duration_between_keys;
-					if(animation_timer > duration_between_keys){
-						animation_timer = 0.0f;
-						NextAnimationKey();
-						return;
-					}
+		if(animation_method == timeline_method){
+			TimelineApplyTransform(animation_timer);
+			animation_timer += time_step;
+			if(animation_timer >= duration){
+				if(animation_type == looping_forwards){
+					animation_timer = 0.0;
 				}
 			}
-		}else if(duration_method == divide_between_keys){
-			//The animation will devide the time between the animation keys.
-			float duration_between_keys = max(0.0001, duration / key_ids.size());
-			alpha = animation_timer / duration_between_keys;
-			float key_distance = distance(next_key.GetTranslation(), current_key.GetTranslation());
-			if(animation_timer > duration_between_keys){
-				animation_timer = 0.0f;
-				NextAnimationKey();
-				return;
-			}
-		}else{
-			Log(error, "Unknown animation method! " + duration_method);
+		}else if(animation_method == placeholder_method){
+			animation_timer += time_step;
+			PlaceholderApplyTransform();
 		}
-
-		ApplyTransform(alpha);
 	}
 
 	float CalculateWholeDistance(){
@@ -359,10 +330,10 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
-	void ApplyTransformTimeline(){
+	void TimelineApplyTransform(float current_time){
 		bool applied_transform = false;
 		for(uint i = 0; i < key_data.size(); i++){
-			if(key_data[i].time == timeline_position){
+			if(key_data[i].time == current_time){
 				//If the timeline position is exactly on a keyframe then just apply that transform.
 				applied_transform = true;
 				array<Object@> targets = GetTargetObjects();
@@ -377,20 +348,20 @@ class DrikaAnimation : DrikaElement{
 			AnimationKey@ left_key = null;
 			AnimationKey@ right_key = null;
 			for(uint i = 0; i < key_data.size(); i++){
-				if(key_data[i].time < timeline_position){
-					if(@left_key == null || timeline_position - key_data[i].time < timeline_position - left_key.time){
+				if(key_data[i].time < current_time){
+					if(@left_key == null || current_time - key_data[i].time < current_time - left_key.time){
 						@left_key = key_data[i];
 					}
 				}
-				if(key_data[i].time > timeline_position){
-					if(@right_key == null || key_data[i].time - timeline_position < right_key.time - timeline_position){
+				if(key_data[i].time > current_time){
+					if(@right_key == null || key_data[i].time - current_time < right_key.time - current_time){
 						@right_key = key_data[i];
 					}
 				}
 			}
 			if(@left_key != null && @right_key != null){
 				float whole_length = right_key.time - left_key.time;
-				float current_length = right_key.time - timeline_position;
+				float current_length = right_key.time - current_time;
 				float weight = (current_length / whole_length);
 				array<Object@> targets = GetTargetObjects();
 				targets[0].SetTranslation(mix(right_key.translation, left_key.translation, weight));
@@ -402,7 +373,46 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
-	void ApplyTransform(float alpha){
+	void PlaceholderApplyTransform(){
+		float alpha = 0.0;
+		if(duration_method == constant_speed){
+			//The animation will have a constant speed.
+			bool skip_node = false;
+			float whole_distance = CalculateWholeDistance();
+			//When the keys are all at the same location no animation can be performed.
+			if(whole_distance == 0.0f){
+				return;
+			}else{
+				float key_distance = distance(next_key.GetTranslation(), current_key.GetTranslation());
+				//If the current and next keys are at the same location then just go to the next key.
+				if(key_distance == 0.0f){
+					animation_timer = 0.0f;
+					NextAnimationKey();
+				}else{
+					//To make sure the time isn't 0, or else it will devide by zero.
+					float duration_between_keys = max(0.0001f, duration * (key_distance / whole_distance));
+					alpha = animation_timer / duration_between_keys;
+					if(animation_timer > duration_between_keys){
+						animation_timer = 0.0f;
+						NextAnimationKey();
+						return;
+					}
+				}
+			}
+		}else if(duration_method == divide_between_keys){
+			//The animation will devide the time between the animation keys.
+			float duration_between_keys = max(0.0001, duration / key_ids.size());
+			alpha = animation_timer / duration_between_keys;
+			float key_distance = distance(next_key.GetTranslation(), current_key.GetTranslation());
+			if(animation_timer > duration_between_keys){
+				animation_timer = 0.0f;
+				NextAnimationKey();
+				return;
+			}
+		}else{
+			Log(error, "Unknown animation method! " + duration_method);
+		}
+
 		quaternion new_rotation;
 		vec3 new_position;
 
@@ -623,7 +633,7 @@ class DrikaAnimation : DrikaElement{
 					}else{
 						timeline_position = highest;
 					}
-					ApplyTransformTimeline();
+					TimelineApplyTransform(timeline_position);
 				}
 			}
 		}
