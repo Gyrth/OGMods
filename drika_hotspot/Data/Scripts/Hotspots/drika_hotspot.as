@@ -537,7 +537,7 @@ void DrawEditor(){
 		if(drika_elements.size() > 0){
 			GetCurrentElement().DrawEditing();
 		}
-		ImGui_PopStyleColor(17);
+		ImGui_PopStyleColor(18);
 	}
 	if(reorded && !ImGui_IsMouseDragging(0)){
 		reorded = false;
