@@ -21,6 +21,8 @@ class AnimationKey{
 	quaternion rotation;
 	vec3 scale;
 	float time;
+	bool moving = false;
+	float moving_time;
 }
 
 class DrikaAnimation : DrikaElement{
@@ -50,6 +52,11 @@ class DrikaAnimation : DrikaElement{
 	float timeline_duration = 1.0;
 	bool timeline_snap = true;
 	float alpha = 0.0;
+	bool moving_animation_key = false;
+	AnimationKey@ target_key;
+	float margin = 20.0;
+	float timeline_width;
+	float timeline_height;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -516,13 +523,56 @@ class DrikaAnimation : DrikaElement{
 
 	void Update(){
 		if(animation_method == timeline_method){
-			if(GetInputPressed(0, "i")){
-				//Make sure to delete any key that's currently at this position before adding a new one.
-				DeleteAnimationKey();
-				InsertAnimationKey();
-			}else if(GetInputPressed(0, "x")){
-				DeleteAnimationKey();
+			if(moving_animation_key){
+				MoveAnimationKey();
+			}else{
+				if(GetInputPressed(0, "i")){
+					//Make sure to delete any key that's currently at this position before adding a new one.
+					DeleteAnimationKey();
+					InsertAnimationKey();
+				}else if(GetInputPressed(0, "x")){
+					DeleteAnimationKey();
+				}else if(GetInputPressed(0, "g")){
+					moving_animation_key = true;
+					for(uint i = 0; i < key_data.size(); i++){
+						if(key_data[i].time == timeline_position){
+							@target_key = key_data[i];
+							target_key.moving = true;
+							target_key.moving_time = target_key.time;
+						}
+					}
+				}
 			}
+		}
+	}
+
+	void MoveAnimationKey(){
+		target_key.moving_time = min(timeline_duration, max(0.0, ImGui_GetMousePos().x - margin / 2.0) * timeline_duration / timeline_width);
+		if(timeline_snap){
+			float lowest = floor(target_key.moving_time * 10.0) / 10.0;
+			float highest = ceil(target_key.moving_time * 10.0) / 10.0;
+			if(abs(target_key.moving_time - lowest) < abs(highest - target_key.moving_time)){
+				target_key.moving_time = lowest;
+			}else{
+				target_key.moving_time = highest;
+			}
+		}
+		//Apply the movement to the keyframe.
+		if(ImGui_IsMouseClicked(0)){
+			//Remove any keyframe that is currently at this position.
+			for(uint i = 0; i < key_data.size(); i++){
+				if(key_data[i].time == target_key.moving_time){
+					key_data.removeAt(i);
+					i--;
+				}
+			}
+			target_key.moving = false;
+			target_key.time = target_key.moving_time;
+			moving_animation_key = false;
+		//Cancel the movement to the keyframe.
+		}else if(ImGui_IsMouseClicked(1)){
+			target_key.moving = false;
+			moving_animation_key = false;
 		}
 	}
 
@@ -605,9 +655,8 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void DrawTimeline(){
-		float margin = 20.0;
-		float timeline_width = GetScreenWidth() - margin;
-		float timeline_height = GetScreenHeight() - margin;
+		timeline_width = GetScreenWidth() - margin;
+		timeline_height = GetScreenHeight() - margin;
 		if(duration > 0.0){
 			timeline_duration = duration;
 		}
@@ -650,7 +699,8 @@ class DrikaAnimation : DrikaElement{
 		for(uint i = 0; i < key_data.size(); i++){
 			vec2 key_position = ImGui_GetWindowPos() + vec2(margin / 2.0, 0.0);
 			//Convert the time in msec to a x position on the timeline.
-			key_position += vec2(key_data[i].time * timeline_width / timeline_duration, 0.0);
+			float keyframe_time = key_data[i].moving?key_data[i].moving_time:key_data[i].time;
+			key_position += vec2(keyframe_time * timeline_width / timeline_duration, 0.0);
 			ImDrawList_AddLine(key_position + vec2(0.0, 20.0), key_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(1.0, 0.75, 0.0, 0.85)), 4.0f);
 		}
 
