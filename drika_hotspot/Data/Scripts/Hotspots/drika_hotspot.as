@@ -591,11 +591,18 @@ void ReceiveMessage(string msg){
 	// Discard the messages when this hotspot is disabled.
 	if(token == "level_event"){
 		if(editing){
-			array<string> editor_messages;
-			while(token_iter.FindNextToken(msg)){
-				editor_messages.insertLast(token_iter.GetToken(msg));
+			if(show_editor){
+				array<string> editor_messages;
+				while(token_iter.FindNextToken(msg)){
+					editor_messages.insertLast(token_iter.GetToken(msg));
+				}
+				//This message is send when ctrl + s is pressed.
+				if(editor_messages[0] == "save_selected_dialogue"){
+					Log(info, "SAVE!");
+					Save();
+				}
+				GetCurrentElement().ReceiveEditorMessage(editor_messages);
 			}
-			GetCurrentElement().ReceiveEditorMessage(editor_messages);
 		}else{
 			token_iter.FindNextToken(msg);
 			string message = token_iter.GetToken(msg);
