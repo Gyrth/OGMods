@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="35.1191" t1="10.9032" t2="26.6235" s0="1" s1="1" s2="1" q0="0.127089" q1="-0.671453" q2="0.118455" q3="0.720395" euler_x="0.349237" euler_y="-1.5005" euler_z="1.48503e-06" id="1">
+    <CameraObject t0="3.96327" t1="1.53041" t2="2.50745" s0="1" s1="1" s2="1" q0="0.000712365" q1="0.924284" q2="-0.00172514" q3="0.3817" euler_x="-3.13786" euler_y="0.783272" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -380,7 +380,7 @@
     <EnvObject t0="5.8758" t1="-3.42138" t2="-184.254" s0="24.5896" s1="1" s2="30.9778" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="61" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="8.11298" t1="-1.73335" t2="34.3359" s0="2.59683" s1="4.78466" s2="2.67023" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="11.831" t1="-1.73816" t2="46.2951" s0="17.781" s1="4.78466" s2="2.13566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters>
             <parameter name="Muscle" type="float" val="200.421" />
         </parameters>
@@ -628,7 +628,7 @@
     <EnvObject t0="31.6036" t1="-1.37758" t2="-14.7357" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="125" color_r="0" color_g="0.0941176" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Animation Key" t0="13.5961" t1="-1.04643" t2="26.3398" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Animation Key" t0="13.6627" t1="-0.279534" t2="26.4917" s0="1" s1="1" s2="1" q0="-0.0850998" q1="0.903216" q2="0.211317" q3="0.363735" euler_x="2.68194" euler_y="0.765682" euler_z="-3.14159" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters>
             <parameter name="Index" type="int" val="1" />
             <parameter name="Owner" type="int" val="138" />
@@ -684,7 +684,7 @@
     <Hotspot t0="14.1463" t1="-0.735339" t2="18.5649" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="138" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:5,&quot;duration_method&quot;:1,&quot;forward_rotation&quot;:0,&quot;function_name&quot;:&quot;animation&quot;,&quot;identifier&quot;:72,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:1,&quot;translation&quot;:[13.596099853515625,-1.1353528499603271,26.747085571289062]},{&quot;rotation&quot;:[-0.70188808441162109,0,0,0.71228718757629395],&quot;scale&quot;:[9.626739501953125,12.563207626342773,2.1356608867645264],&quot;time&quot;:5,&quot;translation&quot;:[12.029891014099121,-2.7474179267883301,-2.586359977722168]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[17.780979156494141,4.7846627235412598,2.13565993309021],&quot;time&quot;:0,&quot;translation&quot;:[8.0669574737548828,-1.7383687496185303,34.399566650390625]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[17.781000137329102,4.7846598625183105,2.13565993309021],&quot;time&quot;:2,&quot;translation&quot;:[13.596099853515625,0.58542728424072266,19.731086730957031]},{&quot;rotation&quot;:[-0.70710676908493042,0,0,0.70710676908493042],&quot;scale&quot;:[2.596829891204834,4.7846598625183105,2.6702320575714111],&quot;time&quot;:3.0999999046325684,&quot;translation&quot;:[13.596099853515625,6.6415815353393555,9.4339361190795898]},{&quot;rotation&quot;:[-0.86602544784545898,0,0,0.49999997019767761],&quot;scale&quot;:[2.596829891204834,4.7846598625183105,2.6702320575714111],&quot;time&quot;:4,&quot;translation&quot;:[13.596101760864258,-0.0096640586853027344,1.4564180374145508]}],&quot;key_ids&quot;:[147,126,148]},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;animate_camera&quot;:true,&quot;animate_scale&quot;:true,&quot;animation_method&quot;:0,&quot;animation_type&quot;:0,&quot;duration&quot;:5.0199999809265137,&quot;duration_method&quot;:1,&quot;forward_rotation&quot;:0,&quot;function_name&quot;:&quot;animation&quot;,&quot;identifier&quot;:72,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.6770899295806885,3.3172500133514404,2.13565993309021],&quot;time&quot;:1,&quot;translation&quot;:[13.596099853515625,-1.1353528499603271,26.747085571289062]},{&quot;rotation&quot;:[-0.20885302126407623,0,0,0.977946937084198],&quot;scale&quot;:[0.7878304123878479,0.7878304123878479,0.7878304123878479],&quot;time&quot;:5,&quot;translation&quot;:[11.162460327148438,4.4006843566894531,1.3774111270904541]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[0.99717652797698975,0.53128379583358765,0.62367886304855347],&quot;time&quot;:0,&quot;translation&quot;:[7.5783553123474121,-1.7383687496185303,34.59283447265625]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[3.4933311939239502,0.94001471996307373,0.41958087682723999],&quot;time&quot;:2,&quot;translation&quot;:[13.596099853515625,0.58542728424072266,19.731086730957031]},{&quot;rotation&quot;:[-0.70710676908493042,0,0,0.70710676908493042],&quot;scale&quot;:[1.2647972106933594,2.3303892612457275,1.3005480766296387],&quot;time&quot;:3.0999999046325684,&quot;translation&quot;:[13.596099853515625,6.6415815353393555,9.4339361190795898]},{&quot;rotation&quot;:[-0.98323166370391846,0,0,0.18236058950424194],&quot;scale&quot;:[1.4157532453536987,2.6085257530212402,1.4557709693908691],&quot;time&quot;:4,&quot;translation&quot;:[13.596101760864258,-0.0096640586853027344,1.4564180374145508]}],&quot;key_ids&quot;:[147,126,148]},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -713,7 +713,7 @@
     <DynamicLightObject t0="12.8009" t1="3.70381" t2="-26.6873" s0="1.87809" s1="1.87809" s2="1.87809" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="146" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
         <parameters />
     </DynamicLightObject>
-    <EnvObject name="Animation Key" t0="13.5961" t1="-1.89331" t2="30.2187" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Animation Key" t0="13.6023" t1="-1.16953" t2="31.0484" s0="1.8774" s1="1.8774" s2="1.8774" q0="-0.813677" q1="-0.0252172" q2="-0.559237" q3="-0.1566" euler_x="2.42571" euler_y="-1.12479" euler_z="0.525009" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters>
             <parameter name="Index" type="int" val="0" />
             <parameter name="Owner" type="int" val="138" />

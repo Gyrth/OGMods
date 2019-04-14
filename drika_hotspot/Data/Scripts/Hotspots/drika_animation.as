@@ -57,6 +57,7 @@ class DrikaAnimation : DrikaElement{
 	float margin = 20.0;
 	float timeline_width;
 	float timeline_height;
+	Object@ camera_placeholder = null;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -335,12 +336,72 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
+	void CameraPlaceholderCheck(){
+		if(animate_camera){
+			if(@camera_placeholder == null){
+				int camera_placeholder_id = CreateObject("Data/Objects/placeholder/camera_placeholder.xml");
+				@camera_placeholder = ReadObjectFromID(camera_placeholder_id);
+				camera_placeholder.SetSelectable(true);
+				camera_placeholder.SetTranslatable(true);
+				camera_placeholder.SetScalable(true);
+				camera_placeholder.SetRotatable(true);
+			}
+
+			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(camera_placeholder);
+			if(show_editor){
+				placeholder_object.SetSpecialType(kCamPreview);
+			}else{
+				placeholder_object.SetSpecialType(kSpawn);
+			}
+		}else{
+			if(@camera_placeholder != null){
+				QueueDeleteObjectID(camera_placeholder.GetID());
+				@camera_placeholder = null;
+			}
+		}
+	}
+
 	void ApplyTransform(vec3 translation, quaternion rotation, vec3 scale){
-		array<Object@> targets = GetTargetObjects();
-		targets[0].SetTranslation(translation);
-		targets[0].SetRotation(rotation);
+		Object@ target;
+		CameraPlaceholderCheck();
+		if(animate_camera){
+			@target = camera_placeholder;
+
+			vec3 direction;
+			vec3 position = target.GetTranslation();
+			vec3 pos = target.GetTranslation();
+			vec4 v = target.GetRotationVec4();
+			quaternion rot(v.x,v.y,v.z,v.a);
+
+			// Set camera euler angles from rotation matrix
+			vec3 front = Mult(rot, vec3(0,0,1));
+			float y_rot = atan2(front.x, front.z)*180.0f/pi;
+			float x_rot = asin(front[1])*-180.0f/pi;
+			vec3 up = Mult(rot, vec3(0,1,0));
+			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+			vec3 expected_up = normalize(cross(expected_right, front));
+			float z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/pi;
+			direction.x = floor(x_rot*100.0f+0.5f)/100.0f;
+			direction.y = floor(y_rot*100.0f+0.5f)/100.0f;
+			direction.z = floor(z_rot*100.0f+0.5f)/100.0f;
+
+			if(animate_scale){
+				const float zoom_sensitivity = 3.5f;
+				float zoom = min(150.0f, 90.0f / max(0.001f,(1.0f+(target.GetScale().x-1.0f) * zoom_sensitivity)));
+				level.Execute("dialogue.cam_zoom = " + zoom + ";");
+			}
+
+			level.Execute("dialogue.cam_pos = vec3(" + position.x + ", " + position.y + ", " + position.z + ");");
+			level.Execute("dialogue.cam_rot = vec3(" + direction.x + "," + direction.y + "," + direction.z + ");");
+		}else{
+			array<Object@> targets = GetTargetObjects();
+			@target = targets[0];
+		}
+
+		target.SetTranslation(translation);
+		target.SetRotation(rotation);
 		if(animate_scale){
-			targets[0].SetScale(scale);
+			target.SetScale(scale);
 		}
 	}
 
@@ -539,9 +600,25 @@ class DrikaAnimation : DrikaElement{
 
 		UpdateAnimationKeys();
 
-		array<Object@> targets = GetTargetObjects();
-		for(uint i = 0; i < targets.size(); i++){
-			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		if(animate_camera){
+			DebugDrawLine(camera_placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			if(animation_method == placeholder_method){
+				for(uint i = 0; i < key_ids.size(); i++){
+					Object@ key = ReadObjectFromID(key_ids[i]);
+					if(key.IsSelected()){
+						camera_placeholder.SetTranslation(key.GetTranslation());
+						camera_placeholder.SetRotation(key.GetRotation());
+						if(animate_scale){
+							camera_placeholder.SetScale(key.GetScale());
+						}
+					}
+				}
+			}
+		}else{
+			array<Object@> targets = GetTargetObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			}
 		}
 
 		if(animation_method == timeline_method){
@@ -614,6 +691,10 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
+	void ApplySettings(){
+		Reset();
+	}
+
 	void StartEdit(){
 		for(uint i = 0; i < key_ids.size(); i++){
 			if(key_ids[i] != -1 && ObjectExists(key_ids[i])){
@@ -621,6 +702,7 @@ class DrikaAnimation : DrikaElement{
 				current_key.SetSelectable(true);
 			}
 		}
+		Reset();
 	}
 
 	void CreateKey(){
@@ -640,11 +722,17 @@ class DrikaAnimation : DrikaElement{
 
 	void InsertAnimationKey(){
 		AnimationKey new_key;
+		Object@ target;
+		if(animate_camera){
+			@target = camera_placeholder;
+		}else{
+			array<Object@> targets = GetTargetObjects();
+			@target = targets[0];
+		}
 		new_key.time = timeline_position;
-		array<Object@> targets = GetTargetObjects();
-		new_key.translation = targets[0].GetTranslation();
-		new_key.rotation = targets[0].GetRotation();
-		new_key.scale = targets[0].GetScale();
+		new_key.translation = target.GetTranslation();
+		new_key.rotation = target.GetRotation();
+		new_key.scale = target.GetScale();
 		key_data.insertLast(@new_key);
 	}
 
@@ -749,7 +837,10 @@ class DrikaAnimation : DrikaElement{
 		}else if(animation_type == looping_forwards_and_backwards){
 			animation_timer = 0.0;
 		}
-		
+
+		CameraPlaceholderCheck();
+		timeline_position = 0.0;
+
 		if(key_ids.size() < 2){
 			return;
 		}
@@ -763,5 +854,10 @@ class DrikaAnimation : DrikaElement{
 			@next_key = ReadObjectFromID(key_ids[key_index - 1]);
 		}
 		loop_direction = 1.0;
+		if(animation_method == timeline_method){
+			TimelineSetTransform(animation_timer);
+		}else if(animation_method == placeholder_method){
+			PlaceholderSetTransform();
+		}
 	}
 }
