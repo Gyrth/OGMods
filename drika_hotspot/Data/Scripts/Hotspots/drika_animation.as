@@ -186,18 +186,20 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void ReceiveEditorMessage(array<string> messages){
-		if(messages[0] == "added_object"){
-			int obj_id = atoi(messages[1]);
-			if(!ObjectExists(obj_id)){
-				return;
-			}
-			Object@ obj = ReadObjectFromID(obj_id);
-			ScriptParams@ obj_params = obj.GetScriptParams();
-			if(obj_params.HasParam("Owner")){
-				if(obj_params.GetInt("Owner") == this_hotspot.GetID()){
-					//The new object is a duplicated animation key of this animation.
-					key_ids.insertAt(obj_params.GetInt("Index") + 1, obj_id);
-					WriteAnimationKeyParams();
+		if(animation_method == placeholder_method){
+			if(messages[0] == "added_object"){
+				int obj_id = atoi(messages[1]);
+				if(!ObjectExists(obj_id)){
+					return;
+				}
+				Object@ obj = ReadObjectFromID(obj_id);
+				ScriptParams@ obj_params = obj.GetScriptParams();
+				if(obj_params.HasParam("Owner")){
+					if(obj_params.GetInt("Owner") == this_hotspot.GetID()){
+						//The new object is a duplicated animation key of this animation.
+						key_ids.insertAt(obj_params.GetInt("Index") + 1, obj_id);
+						WriteAnimationKeyParams();
+					}
 				}
 			}
 		}
@@ -357,6 +359,49 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
+	void ApplyTransformTimeline(){
+		bool applied_transform = false;
+		for(uint i = 0; i < key_data.size(); i++){
+			if(key_data[i].time == timeline_position){
+				//If the timeline position is exactly on a keyframe then just apply that transform.
+				applied_transform = true;
+				array<Object@> targets = GetTargetObjects();
+				targets[0].SetTranslation(key_data[i].translation);
+				targets[0].SetRotation(key_data[i].rotation);
+				if(animate_scale){
+					targets[0].SetScale(key_data[i].scale);
+				}
+			}
+		}
+		if(!applied_transform){
+			AnimationKey@ left_key = null;
+			AnimationKey@ right_key = null;
+			for(uint i = 0; i < key_data.size(); i++){
+				if(key_data[i].time < timeline_position){
+					if(@left_key == null || timeline_position - key_data[i].time < timeline_position - left_key.time){
+						@left_key = key_data[i];
+					}
+				}
+				if(key_data[i].time > timeline_position){
+					if(@right_key == null || key_data[i].time - timeline_position < right_key.time - timeline_position){
+						@right_key = key_data[i];
+					}
+				}
+			}
+			if(@left_key != null && @right_key != null){
+				float whole_length = right_key.time - left_key.time;
+				float current_length = right_key.time - timeline_position;
+				float weight = (current_length / whole_length);
+				array<Object@> targets = GetTargetObjects();
+				targets[0].SetTranslation(mix(right_key.translation, left_key.translation, weight));
+				targets[0].SetRotation(mix(right_key.rotation, left_key.rotation, weight));
+				if(animate_scale){
+					targets[0].SetScale(mix(right_key.scale, left_key.scale, weight));
+				}
+			}
+		}
+	}
+
 	void ApplyTransform(float alpha){
 		quaternion new_rotation;
 		vec3 new_position;
@@ -464,6 +509,8 @@ class DrikaAnimation : DrikaElement{
 	void Update(){
 		if(animation_method == timeline_method){
 			if(GetInputPressed(0, "i")){
+				//Make sure to delete any key that's currently at this position before adding a new one.
+				DeleteAnimationKey();
 				InsertAnimationKey();
 			}else if(GetInputPressed(0, "x")){
 				DeleteAnimationKey();
@@ -576,6 +623,7 @@ class DrikaAnimation : DrikaElement{
 					}else{
 						timeline_position = highest;
 					}
+					ApplyTransformTimeline();
 				}
 			}
 		}
