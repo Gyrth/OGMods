@@ -369,15 +369,12 @@ class DrikaAnimation : DrikaElement{
 
 			vec3 direction;
 			vec3 position = target.GetTranslation();
-			vec3 pos = target.GetTranslation();
-			vec4 v = target.GetRotationVec4();
-			quaternion rot(v.x,v.y,v.z,v.a);
 
 			// Set camera euler angles from rotation matrix
-			vec3 front = Mult(rot, vec3(0,0,1));
+			vec3 front = Mult(rotation, vec3(0,0,1));
 			float y_rot = atan2(front.x, front.z)*180.0f/pi;
 			float x_rot = asin(front[1])*-180.0f/pi;
-			vec3 up = Mult(rot, vec3(0,1,0));
+			vec3 up = Mult(rotation, vec3(0,1,0));
 			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
 			vec3 expected_up = normalize(cross(expected_right, front));
 			float z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/pi;
@@ -387,11 +384,11 @@ class DrikaAnimation : DrikaElement{
 
 			if(animate_scale){
 				const float zoom_sensitivity = 3.5f;
-				float zoom = min(150.0f, 90.0f / max(0.001f,(1.0f+(target.GetScale().x-1.0f) * zoom_sensitivity)));
+				float zoom = min(150.0f, 90.0f / max(0.001f,(1.0f+(scale.x-1.0f) * zoom_sensitivity)));
 				level.Execute("dialogue.cam_zoom = " + zoom + ";");
 			}
 
-			level.Execute("dialogue.cam_pos = vec3(" + position.x + ", " + position.y + ", " + position.z + ");");
+			level.Execute("dialogue.cam_pos = vec3(" + translation.x + ", " + translation.y + ", " + translation.z + ");");
 			level.Execute("dialogue.cam_rot = vec3(" + direction.x + "," + direction.y + "," + direction.z + ");");
 		}else{
 			array<Object@> targets = GetTargetObjects();
@@ -446,32 +443,95 @@ class DrikaAnimation : DrikaElement{
 		for(uint i = 0; i < key_data.size(); i++){
 			if(key_data[i].time == current_time){
 				//If the timeline position is exactly on a keyframe then just apply that transform.
-				applied_transform = true;
-				ApplyTransform(key_data[i].translation, key_data[i].rotation, key_data[i].scale);
+				/* applied_transform = true;
+				ApplyTransform(key_data[i].translation, key_data[i].rotation, key_data[i].scale); */
 			}
 		}
 		if(!applied_transform){
-			AnimationKey@ left_key = null;
-			AnimationKey@ right_key = null;
-			for(uint i = 0; i < key_data.size(); i++){
-				if(key_data[i].time < current_time){
-					if(@left_key == null || current_time - key_data[i].time < current_time - left_key.time){
-						@left_key = key_data[i];
-					}
-				}
-				if(key_data[i].time > current_time){
-					if(@right_key == null || key_data[i].time - current_time < right_key.time - current_time){
-						@right_key = key_data[i];
-					}
-				}
-			}
-			if(@left_key != null && @right_key != null){
+			AnimationKey@ right_key = GetClosestAnimationFrame(current_time, 1, {});
+			AnimationKey@ left_key = GetClosestAnimationFrame(current_time, -1, {});
+			AnimationKey@ right2_key = GetClosestAnimationFrame(current_time, 1, {right_key});
+			AnimationKey@ left2_key = GetClosestAnimationFrame(current_time, -1, {left_key});
+
+			if(@left_key != null && @right_key != null && @left2_key != null && @right2_key != null){
+
 				float whole_length = right_key.time - left_key.time;
 				float current_length = right_key.time - current_time;
 				alpha = (current_length / whole_length);
-				ApplyTransform(mix(right_key.translation, left_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
+
+				DebugDrawWireBox(left_key.translation, left_key.scale, vec3(1.0), _delete_on_update);
+				DebugDrawWireBox(right_key.translation, right_key.scale, vec3(1.0), _delete_on_update);
+				DebugDrawWireBox(left2_key.translation, left2_key.scale, vec3(1.0), _delete_on_update);
+				DebugDrawWireBox(right2_key.translation, right2_key.scale, vec3(1.0), _delete_on_update);
+
+				vec3 left_direction = normalize(left_key.translation - left2_key.translation);
+				vec3 left_target = left2_key.translation + (left_direction * (distance(left2_key.translation, left_key.translation) * 2.0f));
+				DebugDrawLine(left2_key.translation, left_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+
+				vec3 right_direction = normalize(right_key.translation - right2_key.translation);
+				vec3 right_target = right2_key.translation + (right_direction * (distance(right2_key.translation, right_key.translation) * 2.0f));
+				DebugDrawLine(right2_key.translation, right_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+
+				vec3 leg_1_position = mix(left_target, left_key.translation, alpha);
+				DebugDrawWireBox(leg_1_position, right2_key.scale, vec3(1.0, 0.0, 0.0), _delete_on_update);
+
+				vec3 leg_2_position = mix(right_target, left_target, alpha);
+				DebugDrawWireBox(leg_2_position, right2_key.scale, vec3(1.0, 0.0, 0.0), _delete_on_update);
+				DebugDrawLine(leg_1_position, leg_2_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+
+				vec3 leg_3_position = mix(right_key.translation, right_target, alpha);
+				DebugDrawWireBox(leg_3_position, right2_key.scale, vec3(1.0, 0.0, 0.0), _delete_on_update);
+				DebugDrawLine(leg_2_position, leg_3_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+
+
+				vec3 leg_1_2_average = mix(leg_2_position, leg_1_position, alpha);
+				vec3 leg_2_3_average = mix(leg_3_position, leg_2_position, alpha);
+				DebugDrawLine(leg_1_2_average, leg_2_3_average, vec3(0.0, 1.0, 1.0), _delete_on_update);
+
+				vec3 final_position = mix(leg_2_3_average, leg_1_2_average, alpha);
+
+				ApplyTransform(final_position, mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
+
+			}
+			/* else if(@left_key != null && @right_key != null){
+				float whole_length = right_key.time - left_key.time;
+				float current_length = right_key.time - current_time;
+				alpha = (current_length / whole_length);
+
+				if(interpolate_translation){
+					//Current time, start value, change in value, duration
+					float keyframe_distance = distance(left_key.translation, right_key.translation);
+					float offset_alpha = sine_wave(alpha, 0.0f, 1.0f, 1.0f);
+					vec3 previous_direction = normalize(left_key.rotation * vec3(0.0f, 0.0f, 1.0f) * (loop_direction)) * keyframe_distance * alpha;
+					vec3 current_direction = normalize(right_key.rotation * vec3(0.0f, 0.0f, 1.0f) * (loop_direction)) * (keyframe_distance * (1.0f - alpha));
+					vec3 new_position_curved = mix(right_key.translation + current_direction, left_key.translation + previous_direction, offset_alpha);
+					ApplyTransform(new_position_curved, mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
+				}else{
+					ApplyTransform(mix(right_key.translation, left_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
+				}
+			} */
+		}
+	}
+
+	AnimationKey@ GetClosestAnimationFrame(float current_time, int direction, array<AnimationKey@> exceptions){
+		AnimationKey@ key = null;
+		for(uint i = 0; i < key_data.size(); i++){
+			bool hit_exception = false;
+			for(uint j = 0; j < exceptions.size(); j++){
+				if(exceptions[j] is key_data[i]){
+					hit_exception = true;
+					break;
+				}
+			}
+			if(hit_exception){
+				continue;
+			}
+			if(	(key_data[i].time > current_time && direction == 1 && (@key == null || key_data[i].time - current_time < key.time - current_time)) ||
+				(key_data[i].time < current_time && direction == -1 && (@key == null || current_time - key_data[i].time < current_time - key.time))){
+				@key = key_data[i];
 			}
 		}
+		return key;
 	}
 
 	void PlaceholderUpdateAnimation(){
