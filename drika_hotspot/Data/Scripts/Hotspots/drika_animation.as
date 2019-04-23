@@ -58,7 +58,7 @@ class DrikaAnimation : DrikaElement{
 	float timeline_width;
 	float timeline_height;
 	Object@ camera_placeholder = null;
-	bool draw_debug_lines = true;
+	bool draw_debug_lines = false;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -468,23 +468,6 @@ class DrikaAnimation : DrikaElement{
 					ApplyTransform(Bezier2Right(right_key.translation, left_key.translation, right2_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
 				}
 			}
-			/* else if(@left_key != null && @right_key != null){
-				float whole_length = right_key.time - left_key.time;
-				float current_length = right_key.time - current_time;
-				alpha = (current_length / whole_length);
-
-				if(interpolate_translation){
-					//Current time, start value, change in value, duration
-					float keyframe_distance = distance(left_key.translation, right_key.translation);
-					float offset_alpha = sine_wave(alpha, 0.0f, 1.0f, 1.0f);
-					vec3 previous_direction = normalize(left_key.rotation * vec3(0.0f, 0.0f, 1.0f) * (loop_direction)) * keyframe_distance * alpha;
-					vec3 current_direction = normalize(right_key.rotation * vec3(0.0f, 0.0f, 1.0f) * (loop_direction)) * (keyframe_distance * (1.0f - alpha));
-					vec3 new_position_curved = mix(right_key.translation + current_direction, left_key.translation + previous_direction, offset_alpha);
-					ApplyTransform(new_position_curved, mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
-				}else{
-					ApplyTransform(mix(right_key.translation, left_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
-				}
-			} */
 		}
 	}
 

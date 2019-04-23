@@ -351,7 +351,6 @@ class DrikaElement{
 		}else if(identifier_type == name){
 			data["identifier"] = JSONValue(object_name);
 		}
-		Log(info, "Saving identifier!");
 	}
 
 	void CheckReferenceAvailable(){
