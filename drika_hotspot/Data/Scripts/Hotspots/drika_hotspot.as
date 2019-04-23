@@ -598,20 +598,16 @@ void ReceiveMessage(string msg){
 				}
 				//This message is send when ctrl + s is pressed.
 				if(editor_messages[0] == "save_selected_dialogue"){
-					Log(info, "SAVE!");
 					Save();
+				}else if(editor_messages[0] == "drika_hotspot_editing" && atoi(editor_messages[1]) != this_hotspot.GetID()){
+					show_editor = false;
 				}
 				GetCurrentElement().ReceiveEditorMessage(editor_messages);
 			}
 		}else{
 			token_iter.FindNextToken(msg);
 			string message = token_iter.GetToken(msg);
-			if(message == "drika_hotspot_editing" && token_iter.FindNextToken(msg)){
-				int id = atoi(token_iter.GetToken(msg));
-				if(id != this_hotspot.GetID()){
-					show_editor = false;
-				}
-			}
+
 			if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
 				messages.insertLast(message);
 			}
