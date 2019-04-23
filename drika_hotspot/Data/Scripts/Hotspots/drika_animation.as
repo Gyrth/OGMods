@@ -58,6 +58,7 @@ class DrikaAnimation : DrikaElement{
 	float timeline_width;
 	float timeline_height;
 	Object@ camera_placeholder = null;
+	bool draw_debug_lines = true;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -443,8 +444,8 @@ class DrikaAnimation : DrikaElement{
 		for(uint i = 0; i < key_data.size(); i++){
 			if(key_data[i].time == current_time){
 				//If the timeline position is exactly on a keyframe then just apply that transform.
-				/* applied_transform = true;
-				ApplyTransform(key_data[i].translation, key_data[i].rotation, key_data[i].scale); */
+				applied_transform = true;
+				ApplyTransform(key_data[i].translation, key_data[i].rotation, key_data[i].scale);
 			}
 		}
 		if(!applied_transform){
@@ -453,45 +454,19 @@ class DrikaAnimation : DrikaElement{
 			AnimationKey@ right2_key = GetClosestAnimationFrame(current_time, 1, {right_key});
 			AnimationKey@ left2_key = GetClosestAnimationFrame(current_time, -1, {left_key});
 
-			if(@left_key != null && @right_key != null && @left2_key != null && @right2_key != null){
+			if(@left_key != null && @right_key != null){
 
 				float whole_length = right_key.time - left_key.time;
 				float current_length = right_key.time - current_time;
 				alpha = (current_length / whole_length);
 
-				DebugDrawWireBox(left_key.translation, left_key.scale, vec3(1.0), _delete_on_update);
-				DebugDrawWireBox(right_key.translation, right_key.scale, vec3(1.0), _delete_on_update);
-				DebugDrawWireBox(left2_key.translation, left2_key.scale, vec3(1.0), _delete_on_update);
-				DebugDrawWireBox(right2_key.translation, right2_key.scale, vec3(1.0), _delete_on_update);
-
-				vec3 left_direction = normalize(left_key.translation - left2_key.translation);
-				vec3 left_target = left2_key.translation + (left_direction * (distance(left2_key.translation, left_key.translation) * 2.0f));
-				DebugDrawLine(left2_key.translation, left_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-
-				vec3 right_direction = normalize(right_key.translation - right2_key.translation);
-				vec3 right_target = right2_key.translation + (right_direction * (distance(right2_key.translation, right_key.translation) * 2.0f));
-				DebugDrawLine(right2_key.translation, right_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-
-				vec3 leg_1_position = mix(left_target, left_key.translation, alpha);
-				DebugDrawWireBox(leg_1_position, right2_key.scale, vec3(1.0, 0.0, 0.0), _delete_on_update);
-
-				vec3 leg_2_position = mix(right_target, left_target, alpha);
-				DebugDrawWireBox(leg_2_position, right2_key.scale, vec3(1.0, 0.0, 0.0), _delete_on_update);
-				DebugDrawLine(leg_1_position, leg_2_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
-
-				vec3 leg_3_position = mix(right_key.translation, right_target, alpha);
-				DebugDrawWireBox(leg_3_position, right2_key.scale, vec3(1.0, 0.0, 0.0), _delete_on_update);
-				DebugDrawLine(leg_2_position, leg_3_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
-
-
-				vec3 leg_1_2_average = mix(leg_2_position, leg_1_position, alpha);
-				vec3 leg_2_3_average = mix(leg_3_position, leg_2_position, alpha);
-				DebugDrawLine(leg_1_2_average, leg_2_3_average, vec3(0.0, 1.0, 1.0), _delete_on_update);
-
-				vec3 final_position = mix(leg_2_3_average, leg_1_2_average, alpha);
-
-				ApplyTransform(final_position, mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
-
+				if(@left2_key != null && @right2_key != null){
+					ApplyTransform(Bezier3(right_key.translation, left_key.translation, right2_key.translation, left2_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
+				}else if(@left2_key != null){
+					ApplyTransform(Bezier2Left(right_key.translation, left_key.translation, left2_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
+				}else if(@right2_key != null){
+					ApplyTransform(Bezier2Right(right_key.translation, left_key.translation, right2_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
+				}
 			}
 			/* else if(@left_key != null && @right_key != null){
 				float whole_length = right_key.time - left_key.time;
@@ -511,6 +486,89 @@ class DrikaAnimation : DrikaElement{
 				}
 			} */
 		}
+	}
+
+	vec3 Bezier3(vec3 right_position, vec3 left_position, vec3 second_right_position, vec3 second_left_position, float alpha){
+		float target_distance = distance(left_position, right_position) / 2.0f;
+
+		vec3 left_direction = normalize(right_position - second_left_position);
+		vec3 left_target = left_position + (left_direction * target_distance);
+
+		vec3 right_direction = normalize(left_position - second_right_position);
+		vec3 right_target = right_position + (right_direction * target_distance);
+
+		vec3 leg_1_position = mix(left_target, left_position, alpha);
+		vec3 leg_2_position = mix(right_target, left_target, alpha);
+		vec3 leg_3_position = mix(right_position, right_target, alpha);
+
+		vec3 leg_1_2_average = mix(leg_2_position, leg_1_position, alpha);
+		vec3 leg_2_3_average = mix(leg_3_position, leg_2_position, alpha);
+
+		if(draw_debug_lines){
+			DebugDrawWireBox(right_position, vec3(0.5), vec3(1.0), _delete_on_update);
+			DebugDrawWireBox(left_position, vec3(0.5), vec3(1.0), _delete_on_update);
+			DebugDrawWireBox(second_right_position, vec3(0.5), vec3(1.0), _delete_on_update);
+			DebugDrawWireBox(second_left_position, vec3(0.5), vec3(1.0), _delete_on_update);
+
+			DebugDrawLine(left_position, left_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawLine(right_position, right_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawWireBox(leg_1_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
+			DebugDrawWireBox(leg_2_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
+			DebugDrawLine(leg_1_position, leg_2_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawWireBox(leg_3_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
+			DebugDrawLine(leg_2_position, leg_3_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawLine(leg_1_2_average, leg_2_3_average, vec3(0.0, 1.0, 1.0), _delete_on_update);
+		}
+
+		return mix(leg_2_3_average, leg_1_2_average, alpha);
+	}
+
+	vec3 Bezier2Right(vec3 right_position, vec3 left_position, vec3 second_right_position, float alpha){
+		float target_distance = distance(left_position, right_position) / 2.0f;
+
+		vec3 right_direction = normalize(left_position - second_right_position);
+		vec3 right_target = right_position + (right_direction * target_distance);
+
+		vec3 leg_1_position = mix(right_target, left_position, alpha);
+		vec3 leg_2_position = mix(right_position, right_target, alpha);
+
+		if(draw_debug_lines){
+			DebugDrawWireBox(right_position, vec3(0.5), vec3(1.0), _delete_on_update);
+			DebugDrawWireBox(left_position, vec3(0.5), vec3(1.0), _delete_on_update);
+
+			DebugDrawWireBox(second_right_position, vec3(0.5), vec3(1.0), _delete_on_update);
+			DebugDrawLine(left_position, right_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawLine(right_position, right_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawWireBox(leg_1_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
+			DebugDrawWireBox(leg_2_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
+			DebugDrawLine(leg_1_position, leg_2_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+		}
+
+		return mix(leg_2_position, leg_1_position, alpha);
+	}
+
+	vec3 Bezier2Left(vec3 right_position, vec3 left_position, vec3 second_left_position, float alpha){
+		float target_distance = distance(left_position, right_position) / 2.0f;
+
+		vec3 left_direction = normalize(right_position - second_left_position);
+		vec3 left_target = left_position + (left_direction * target_distance);
+
+		vec3 leg_1_position = mix(left_target, left_position, alpha);
+		vec3 leg_2_position = mix(right_position, left_target, alpha);
+
+		if(draw_debug_lines){
+			DebugDrawWireBox(right_position, vec3(0.5), vec3(1.0), _delete_on_update);
+			DebugDrawWireBox(left_position, vec3(0.5), vec3(1.0), _delete_on_update);
+
+			DebugDrawWireBox(second_left_position, vec3(0.5), vec3(1.0), _delete_on_update);
+			DebugDrawLine(right_position, left_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawLine(left_position, left_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawWireBox(leg_1_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
+			DebugDrawWireBox(leg_2_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
+			DebugDrawLine(leg_1_position, leg_2_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+		}
+
+		return mix(leg_2_position, leg_1_position, alpha);
 	}
 
 	AnimationKey@ GetClosestAnimationFrame(float current_time, int direction, array<AnimationKey@> exceptions){

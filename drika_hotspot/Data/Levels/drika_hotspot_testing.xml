@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-13.574" t1="4.3944" t2="28.2537" s0="1" s1="1" s2="1" q0="0.0155253" q1="0.675822" q2="-0.0142412" q3="0.736763" euler_x="0.0421386" euler_y="1.48457" euler_z="0" id="1">
+    <CameraObject t0="-5.86812" t1="4.87291" t2="31.5679" s0="1" s1="1" s2="1" q0="0.0345287" q1="-0.552815" q2="-0.0229348" q3="-0.832272" euler_x="-0.0829268" euler_y="1.17262" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -380,7 +380,7 @@
     <EnvObject t0="5.8758" t1="-3.42138" t2="-184.254" s0="24.5896" s1="1" s2="30.9778" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="61" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="7.57836" t1="2.47616" t2="35.3466" s0="0.997177" s1="0.531284" s2="0.623679" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="7.57836" t1="9.19983" t2="32.5729" s0="0.997177" s1="0.531284" s2="0.623679" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters>
             <parameter name="Muscle" type="float" val="200.421" />
         </parameters>
@@ -628,7 +628,7 @@
     <EnvObject t0="31.6036" t1="-1.37758" t2="-14.7357" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="125" color_r="0" color_g="0.0941176" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Animation Key" t0="13.6627" t1="-0.279534" t2="26.4917" s0="1" s1="1" s2="1" q0="-0.0850998" q1="0.903216" q2="0.211317" q3="0.363735" euler_x="2.68194" euler_y="0.765682" euler_z="-3.14159" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Animation Key" t0="30.7969" t1="-2.72161" t2="58.5734" s0="1" s1="1" s2="1" q0="-0.0850998" q1="0.903216" q2="0.211317" q3="0.363735" euler_x="2.68194" euler_y="0.765682" euler_z="-3.14159" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters>
             <parameter name="Index" type="int" val="1" />
             <parameter name="Owner" type="int" val="138" />
@@ -713,14 +713,14 @@
     <DynamicLightObject t0="12.8009" t1="3.70381" t2="-26.6873" s0="1.87809" s1="1.87809" s2="1.87809" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="146" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
         <parameters />
     </DynamicLightObject>
-    <EnvObject name="Animation Key" t0="13.6023" t1="-1.16953" t2="31.0484" s0="1.8774" s1="1.8774" s2="1.8774" q0="-0.813677" q1="-0.0252172" q2="-0.559237" q3="-0.1566" euler_x="2.42571" euler_y="-1.12479" euler_z="0.525009" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Animation Key" t0="32.9713" t1="-7.22791" t2="63.5228" s0="1.8774" s1="1.8774" s2="1.8774" q0="-0.813677" q1="-0.0252172" q2="-0.559237" q3="-0.1566" euler_x="2.42571" euler_y="-1.12479" euler_z="0.525009" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters>
             <parameter name="Index" type="int" val="0" />
             <parameter name="Owner" type="int" val="138" />
             <parameter name="Time" type="float" val="0.1" />
         </parameters>
     </EnvObject>
-    <EnvObject name="Animation Key" t0="13.1169" t1="5.11131" t2="33.818" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Animation Key" t0="30.2753" t1="0.0324807" t2="64.8" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters>
             <parameter name="Index" type="int" val="2" />
             <parameter name="Owner" type="int" val="138" />
