@@ -263,13 +263,18 @@ class DrikaAnimation : DrikaElement{
 		}
 		if(!animation_started){
 			animation_started = true;
-			level.SendMessage("animating_camera true " + hotspot.GetID());
+			if(animate_camera){
+				level.SendMessage("animating_camera true " + hotspot.GetID());
+			}
 		}
 		UpdateAnimationKeys();
 		UpdateAnimation();
 		if(animation_finished){
 			animation_finished = false;
-			Reset();
+			animation_started = false;
+			if(animate_camera){
+				level.SendMessage("animating_camera false " + hotspot.GetID());
+			}
 			return true;
 		}else{
 			return false;
@@ -559,6 +564,14 @@ class DrikaAnimation : DrikaElement{
 
 					new_rotation = quaternion(vec4(0,1,0,yaw)) * quaternion(vec4(1,0,0,pitch)) * quaternion(vec4(0,0,1,roll));
 				}
+			}else if(@right_key != null){
+				new_translation = right_key.translation;
+				new_rotation = right_key.rotation;
+				new_scale = right_key.scale;
+			}else if(@left_key != null){
+				new_translation = left_key.translation;
+				new_rotation = left_key.rotation;
+				new_scale = left_key.scale;
 			}
 		}
 		ApplyTransform(new_translation, new_rotation, new_scale);
@@ -1035,7 +1048,9 @@ class DrikaAnimation : DrikaElement{
 		previous_translation = vec3();
 		timeline_position = 0.0;
 		animation_started = false;
-		level.SendMessage("animating_camera false " + hotspot.GetID());
+		if(animate_camera){
+			level.SendMessage("animating_camera false " + hotspot.GetID());
+		}
 
 		if(key_ids.size() < 2){
 			return;
