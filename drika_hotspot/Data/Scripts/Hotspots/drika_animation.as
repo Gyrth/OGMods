@@ -39,7 +39,7 @@ class DrikaAnimation : DrikaElement{
 	bool animate_camera;
 	bool animate_scale;
 	float duration;
-	float forward_rotation;
+	float extra_yaw;
 
 	int key_index = 0;
 	Object@ current_key;
@@ -59,6 +59,7 @@ class DrikaAnimation : DrikaElement{
 	float timeline_height;
 	Object@ camera_placeholder = null;
 	bool draw_debug_lines = false;
+	vec3 previous_translation = vec3();
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -92,7 +93,7 @@ class DrikaAnimation : DrikaElement{
 		animate_camera = GetJSONBool(params, "animate_camera", false);
 		animate_scale = GetJSONBool(params, "animate_scale", false);
 		duration = GetJSONFloat(params, "duration", 5.0);
-		forward_rotation = GetJSONFloat(params, "forward_rotation", 0.0);
+		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
 
 		LoadIdentifier(params);
 		has_settings = true;
@@ -109,7 +110,7 @@ class DrikaAnimation : DrikaElement{
 		data["animate_camera"] = JSONValue(animate_camera);
 		data["animate_scale"] = JSONValue(animate_scale);
 		data["duration"] = JSONValue(duration);
-		data["forward_rotation"] = JSONValue(forward_rotation);
+		data["extra_yaw"] = JSONValue(extra_yaw);
 
 		data["key_ids"] = JSONValue(JSONarrayValue);
 		for(uint i = 0; i < key_ids.size(); i++){
@@ -169,7 +170,11 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "Animation " + GetTargetDisplayText();
+		if(animate_camera){
+			return "Animation Camera";
+		}else{
+			return "Animation " + GetTargetDisplayText();
+		}
 	}
 
 	void StartSettings(){
@@ -182,17 +187,40 @@ class DrikaAnimation : DrikaElement{
 		if(ImGui_Combo("Animation Method", current_animation_method, animation_method_names, animation_method_names.size())){
 			animation_method = animation_methods(current_animation_method);
 		}
-		if(ImGui_Combo("Duration Method", current_duration_method, duration_method_names, duration_method_names.size())){
-			duration_method = duration_methods(current_duration_method);
+		if(animation_method == placeholder_method){
+			if(ImGui_Combo("Duration Method", current_duration_method, duration_method_names, duration_method_names.size())){
+				duration_method = duration_methods(current_duration_method);
+			}
 		}
 		if(ImGui_Combo("Animation Type", current_animation_type, animation_type_names, animation_type_names.size())){
 			animation_type = animation_types(current_animation_type);
 		}
-		ImGui_SliderFloat("Duration", duration, 0.0f, 10.0f, "%.2f");
-		ImGui_Checkbox("Interpolation Rotation", interpolate_rotation);
-		ImGui_Checkbox("Interpolation Translation", interpolate_translation);
-		ImGui_Checkbox("Animate Camera", animate_camera);
-		ImGui_Checkbox("Animate Scale", animate_scale);
+		if(ImGui_SliderFloat("Duration", duration, 0.0f, 10.0f, "%.2f")){
+			SetCurrentTransform();
+		}
+		if(ImGui_SliderFloat("Extra Yaw", extra_yaw, 0.0f, 360.0f, "%.1f")){
+			SetCurrentTransform();
+		}
+		if(ImGui_Checkbox("Interpolation Rotation", interpolate_rotation)){
+			SetCurrentTransform();
+		}
+		if(ImGui_Checkbox("Interpolation Translation", interpolate_translation)){
+			SetCurrentTransform();
+		}
+		if(ImGui_Checkbox("Animate Camera", animate_camera)){
+			SetCurrentTransform();
+		}
+		if(ImGui_Checkbox("Animate Scale", animate_scale)){
+			SetCurrentTransform();
+		}
+	}
+
+	void SetCurrentTransform(){
+		if(animation_method == timeline_method){
+			TimelineSetTransform(animation_timer);
+		}else if(animation_method == placeholder_method){
+			PlaceholderSetTransform();
+		}
 	}
 
 	void ReceiveEditorMessage(array<string> messages){
@@ -216,11 +244,11 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void TargetChanged(){
-
+		animate_camera = false;
 	}
 
 	void ConnectedChanged(){
-
+		animate_camera = false;
 	}
 
 	bool Trigger(){
@@ -440,35 +468,85 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void TimelineSetTransform(float current_time){
-		bool applied_transform = false;
+		bool on_keyframe = false;
+		vec3 new_translation;
+		quaternion new_rotation;
+		vec3 new_scale;
+
 		for(uint i = 0; i < key_data.size(); i++){
 			if(key_data[i].time == current_time){
 				//If the timeline position is exactly on a keyframe then just apply that transform.
-				applied_transform = true;
-				ApplyTransform(key_data[i].translation, key_data[i].rotation, key_data[i].scale);
+				on_keyframe = true;
+				new_translation = key_data[i].translation;
+				new_rotation = key_data[i].rotation;
+				new_scale = key_data[i].scale;
 			}
 		}
-		if(!applied_transform){
+
+		if(!on_keyframe){
 			AnimationKey@ right_key = GetClosestAnimationFrame(current_time, 1, {});
 			AnimationKey@ left_key = GetClosestAnimationFrame(current_time, -1, {});
 			AnimationKey@ right2_key = GetClosestAnimationFrame(current_time, 1, {right_key});
 			AnimationKey@ left2_key = GetClosestAnimationFrame(current_time, -1, {left_key});
 
 			if(@left_key != null && @right_key != null){
-
 				float whole_length = right_key.time - left_key.time;
 				float current_length = right_key.time - current_time;
 				alpha = (current_length / whole_length);
 
-				if(@left2_key != null && @right2_key != null){
-					ApplyTransform(Bezier3(right_key.translation, left_key.translation, right2_key.translation, left2_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
-				}else if(@left2_key != null){
-					ApplyTransform(Bezier2Left(right_key.translation, left_key.translation, left2_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
-				}else if(@right2_key != null){
-					ApplyTransform(Bezier2Right(right_key.translation, left_key.translation, right2_key.translation, alpha), mix(right_key.rotation, left_key.rotation, alpha), mix(right_key.scale, left_key.scale, alpha));
+				if(!on_keyframe){
+					new_scale = mix(right_key.scale, left_key.scale, alpha);
+				}
+
+				if(interpolate_translation || interpolate_rotation){
+					if(@left2_key != null && @right2_key != null){
+						if(interpolate_translation){
+							new_translation = Bezier3(right_key.translation, left_key.translation, right2_key.translation, left2_key.translation, alpha);
+						}
+						if(interpolate_rotation){
+							previous_translation = Bezier3(right_key.translation, left_key.translation, right2_key.translation, left2_key.translation, max(0.0, alpha - time_step));
+						}
+					}else if(@left2_key != null){
+						if(interpolate_translation){
+							new_translation = Bezier2Left(right_key.translation, left_key.translation, left2_key.translation, alpha);
+						}
+						if(interpolate_rotation){
+							previous_translation = Bezier2Left(right_key.translation, left_key.translation, left2_key.translation, max(0.0, alpha - time_step));
+						}
+					}else if(@right2_key != null){
+						if(interpolate_translation){
+							new_translation = Bezier2Right(right_key.translation, left_key.translation, right2_key.translation, alpha);
+						}
+						if(interpolate_rotation){
+							previous_translation = Bezier2Right(right_key.translation, left_key.translation, right2_key.translation, max(0.0, alpha - time_step));
+						}
+					}
+				}
+
+				if(!interpolate_translation){
+					new_translation = mix(right_key.translation, left_key.translation, alpha);
+				}
+
+				if(!interpolate_rotation){
+					new_rotation = mix(right_key.rotation, left_key.rotation, alpha);
+					float extra_y_rot = (extra_yaw / 180.0f * pi);
+					new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
+				}else{
+					vec3 path_direction = normalize(previous_translation - new_translation);
+					vec3 up_direction = normalize(mix(right_key.rotation, left_key.rotation, alpha) * vec3(0.0f, 1.0f, 0.0f));
+
+					float yaw = atan2(-path_direction.x, -path_direction.z) + (extra_yaw / 180.0f * pi);
+					float pitch = asin(-path_direction.y);
+					vec3 right_roll_direction = normalize(right_key.rotation * vec3(1.0f, 0.0f, 0.0f));
+					vec3 left_roll_direction = normalize(left_key.rotation * vec3(1.0f, 0.0f, 0.0f));
+					vec3 mixed_roll_direction = mix(right_roll_direction, left_roll_direction, alpha);
+					float roll = asin(mixed_roll_direction.y);
+
+					new_rotation = quaternion(vec4(0,1,0,yaw)) * quaternion(vec4(1,0,0,pitch)) * quaternion(vec4(0,0,1,roll));
 				}
 			}
 		}
+		ApplyTransform(new_translation, new_rotation, new_scale);
 	}
 
 	vec3 Bezier3(vec3 right_position, vec3 left_position, vec3 second_right_position, vec3 second_left_position, float alpha){
@@ -636,7 +714,7 @@ class DrikaAnimation : DrikaElement{
 			vec3 path_direction = normalize(new_position - targets[0].GetTranslation());
 			vec3 up_direction = normalize(mix(current_key.GetRotation(), next_key.GetRotation(), alpha) * vec3(0.0f, 1.0f, 0.0f));
 
-			float rotation_y = atan2(-path_direction.x, -path_direction.z) + (forward_rotation / 180.0f * pi);
+			float rotation_y = atan2(-path_direction.x, -path_direction.z) + (extra_yaw / 180.0f * pi);
 			float rotation_x = asin(-path_direction.y);
 
 			vec3 previous_direction = normalize(current_key.GetRotation() * vec3(1.0f, 0.0f, 0.0f));
@@ -646,7 +724,7 @@ class DrikaAnimation : DrikaElement{
 			new_rotation = quaternion(vec4(0,1,0,rotation_y)) * quaternion(vec4(1,0,0,rotation_x)) * quaternion(vec4(0,0,1,rotation_z));
 		}else{
 			new_rotation = mix(current_key.GetRotation(), next_key.GetRotation(), alpha);
-			float extra_y_rot = (forward_rotation / 180.0f * pi);
+			float extra_y_rot = (extra_yaw / 180.0f * pi);
 			new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
 		}
 
@@ -699,6 +777,7 @@ class DrikaAnimation : DrikaElement{
 			}
 		}
 
+		CameraPlaceholderCheck();
 		UpdateAnimationKeys();
 
 		if(animate_camera){
@@ -803,7 +882,6 @@ class DrikaAnimation : DrikaElement{
 				current_key.SetSelectable(true);
 			}
 		}
-		Reset();
 	}
 
 	void CreateKey(){
@@ -939,7 +1017,7 @@ class DrikaAnimation : DrikaElement{
 			animation_timer = 0.0;
 		}
 
-		CameraPlaceholderCheck();
+		previous_translation = vec3();
 		timeline_position = 0.0;
 
 		if(key_ids.size() < 2){

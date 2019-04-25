@@ -390,7 +390,7 @@ void DrawEditor(){
 		ImGui_PopStyleVar();
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
-		ImGui_SetNextWindowSize(vec2(450.0f, 250.0f), ImGuiSetCond_FirstUseEver);
+		ImGui_SetNextWindowSize(vec2(500.0f, 450.0f), ImGuiSetCond_FirstUseEver);
         if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
 			ImGui_BeginChild("Element Settings", vec2(-1, ImGui_GetWindowHeight() - 60));
 			GetCurrentElement().DrawSettings();

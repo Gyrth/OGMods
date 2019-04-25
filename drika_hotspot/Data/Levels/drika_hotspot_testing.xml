@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-5.20534" t1="7.90789" t2="27.428" s0="1" s1="1" s2="1" q0="0.00121325" q1="0.722372" q2="-0.00126743" q3="0.691503" euler_x="-3.13808" euler_y="1.52714" euler_z="-3.14159" id="1">
+    <CameraObject t0="-13.7399" t1="6.0484" t2="5.57261" s0="1" s1="1" s2="1" q0="0.0959728" q1="0.743485" q2="-0.109315" q3="0.65274" euler_x="-2.84962" euler_y="1.44099" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -380,7 +380,7 @@
     <EnvObject t0="5.8758" t1="-3.42138" t2="-184.254" s0="24.5896" s1="1" s2="30.9778" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="61" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="7.57836" t1="7.75001" t2="28.9101" s0="0.997177" s1="0.531284" s2="0.623679" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="7.57836" t1="1.80221" t2="44.3652" s0="0.997177" s1="0.531284" s2="0.623679" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters>
             <parameter name="Muscle" type="float" val="200.421" />
         </parameters>
@@ -684,7 +684,7 @@
     <Hotspot t0="14.1463" t1="-0.735339" t2="18.5649" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="138" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:0,&quot;duration&quot;:10,&quot;duration_method&quot;:1,&quot;forward_rotation&quot;:0,&quot;function_name&quot;:&quot;animation&quot;,&quot;identifier&quot;:72,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:true,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[0.99717700481414795,0.53128397464752197,0.62367898225784302],&quot;time&quot;:0,&quot;translation&quot;:[7.5783553123474121,2.4761636257171631,35.3465576171875]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[0.99717700481414795,0.53128397464752197,0.62367898225784302],&quot;time&quot;:2.5,&quot;translation&quot;:[7.5783553123474121,9.6330270767211914,31.922946929931641]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[0.99717700481414795,0.53128397464752197,0.62367898225784302],&quot;time&quot;:7.5,&quot;translation&quot;:[7.5783553123474121,9.6775169372558594,23.086221694946289]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[0.99717700481414795,0.53128397464752197,0.62367898225784302],&quot;time&quot;:10,&quot;translation&quot;:[7.5783553123474121,1.8052940368652344,21.315519332885742]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[0.99717700481414795,0.53128397464752197,0.62367898225784302],&quot;time&quot;:5,&quot;translation&quot;:[7.5783562660217285,7.0370488166809082,27.245193481445312]}],&quot;key_ids&quot;:[147,126,148]},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;animate_camera&quot;:true,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:0,&quot;duration&quot;:10,&quot;duration_method&quot;:1,&quot;extra_yaw&quot;:0,&quot;function_name&quot;:&quot;animation&quot;,&quot;identifier&quot;:152,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:true,&quot;key_data&quot;:[{&quot;rotation&quot;:[-1.9663066730402079e-09,0.14136879146099091,-1.376937586172744e-08,-0.98995697498321533],&quot;scale&quot;:[1,1,1],&quot;time&quot;:0,&quot;translation&quot;:[8.3208484649658203,-2.0414402484893799,32.79986572265625]},{&quot;rotation&quot;:[0.20963543653488159,-0.042268089950084686,-0.23772907257080078,-0.94749736785888672],&quot;scale&quot;:[1,1,1],&quot;time&quot;:10,&quot;translation&quot;:[15.961970329284668,-1.0447983741760254,-7.406001091003418]},{&quot;rotation&quot;:[0.13161861896514893,0.17265033721923828,-0.021301060914993286,-0.97591662406921387],&quot;scale&quot;:[1,1,1],&quot;time&quot;:6,&quot;translation&quot;:[14.37725830078125,-1.4101890325546265,-4.6571388244628906]},{&quot;rotation&quot;:[-0.14702039957046509,-0.36148235201835632,-0.053566843271255493,0.91915524005889893],&quot;scale&quot;:[1,1,1],&quot;time&quot;:3,&quot;translation&quot;:[3.5666735172271729,-0.81988143920898438,0.30794715881347656]}],&quot;key_ids&quot;:[147,126,148]},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -742,6 +742,9 @@
             <Connection id="134" />
         </Connections>
     </PathPointObject>
+    <EnvObject t0="7.57836" t1="1.42775" t2="45.2896" s0="3.65214" s1="3.65214" s2="3.65214" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="152" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
+        <parameters />
+    </EnvObject>
     <ActorObject name="drika_character" t0="8.23402" t1="-2.19389" t2="-40.5255" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="154" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
@@ -811,4 +814,6 @@
     <SpawnerItem display_name="Global Reflection" path="Data/Objects/global_reflection_capture.xml" thumbnail_path="" />
     <SpawnerItem display_name="Male Civilian Rabbit" path="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_RabbitCivActor.png" />
     <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
+    <SpawnerItem display_name="Dog Knife" path="Data/Items/DogWeapons/DogKnife.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/wknife.png" />
+    <SpawnerItem display_name="Arena Stone Statue Standing" path="Data/Objects/Buildings/arena/arena_statue_standing.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/Arena Statue Standing.png" />
 </RecentItems>
