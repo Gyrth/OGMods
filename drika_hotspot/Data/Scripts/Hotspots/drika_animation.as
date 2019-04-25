@@ -61,6 +61,9 @@ class DrikaAnimation : DrikaElement{
 	bool draw_debug_lines = false;
 	vec3 previous_translation = vec3();
 	bool animation_started = false;
+	vec3 new_translation;
+	quaternion new_rotation;
+	vec3 new_scale;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -484,9 +487,6 @@ class DrikaAnimation : DrikaElement{
 
 	void TimelineSetTransform(float current_time){
 		bool on_keyframe = false;
-		vec3 new_translation;
-		quaternion new_rotation;
-		vec3 new_scale;
 
 		for(uint i = 0; i < key_data.size(); i++){
 			if(key_data[i].time == current_time){
