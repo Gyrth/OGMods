@@ -14,4 +14,5 @@
     <NeedsRestart>false</NeedsRestart>
     <Level title="Drika Hotspot Testing" thumbnail="Images/drika_hotspot_full.jpg">drika_hotspot_testing.xml</Level>
 	<Item category="Hotspots" title="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail="Data/Images/drika_hotspot_thumb.jpg" />
+	<LevelHookFile>Data/Scripts/drika_controller.as</LevelHookFile>
 </Mod>

@@ -60,6 +60,7 @@ class DrikaAnimation : DrikaElement{
 	Object@ camera_placeholder = null;
 	bool draw_debug_lines = false;
 	vec3 previous_translation = vec3();
+	bool animation_started = false;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -257,6 +258,10 @@ class DrikaAnimation : DrikaElement{
 		if(targets.size() == 0){
 			return false;
 		}
+		if(!animation_started){
+			animation_started = true;
+			level.SendMessage("animating_camera true " + hotspot.GetID());
+		}
 		UpdateAnimationKeys();
 		UpdateAnimation();
 		if(animation_finished){
@@ -411,10 +416,20 @@ class DrikaAnimation : DrikaElement{
 			direction.y = floor(y_rot*100.0f+0.5f)/100.0f;
 			direction.z = floor(z_rot*100.0f+0.5f)/100.0f;
 
+			if(!EditorModeActive()){
+				camera.SetPos(translation);
+				camera.SetXRotation(direction.x);
+				camera.SetYRotation(direction.y);
+				camera.SetZRotation(direction.z);
+				camera.SetDistance(0.0f);
+	            UpdateListener(translation, vec3(0.0f), camera.GetFacing(), camera.GetUpVector());
+			}
+
 			if(animate_scale){
 				const float zoom_sensitivity = 3.5f;
 				float zoom = min(150.0f, 90.0f / max(0.001f,(1.0f+(scale.x-1.0f) * zoom_sensitivity)));
 				level.Execute("dialogue.cam_zoom = " + zoom + ";");
+				camera.SetFOV(zoom);
 			}
 
 			level.Execute("dialogue.cam_pos = vec3(" + translation.x + ", " + translation.y + ", " + translation.z + ");");
@@ -1019,6 +1034,8 @@ class DrikaAnimation : DrikaElement{
 
 		previous_translation = vec3();
 		timeline_position = 0.0;
+		animation_started = false;
+		level.SendMessage("animating_camera false " + hotspot.GetID());
 
 		if(key_ids.size() < 2){
 			return;
