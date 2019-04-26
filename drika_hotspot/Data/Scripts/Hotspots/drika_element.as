@@ -29,7 +29,8 @@ enum drika_element_types { 	none = 0,
 							drika_set_bone_inflate = 28,
 							drika_send_character_message = 29,
 							drika_animation = 30,
-							drika_billboard = 31
+							drika_billboard = 31,
+							drika_read_write_savefile = 32
 						};
 
 array<string> drika_element_names = {	"None",
@@ -64,6 +65,7 @@ array<string> drika_element_names = {	"None",
 										"Send Character Message",
 										"Animation",
 										"Billboard",
+										"Read Write Save File"
 									};
 
 array<string> sorted_element_names;
@@ -92,6 +94,7 @@ array<vec4> display_colors = {	vec4(255),
                                 vec4(153, 255, 193, 255),
                                 vec4(255, 0, 255, 255),
                                 vec4(255, 117, 117, 255),
+								vec4(153, 174, 255, 255),
 								vec4(153, 174, 255, 255),
 								vec4(153, 174, 255, 255),
 								vec4(153, 174, 255, 255),
