@@ -64,6 +64,7 @@ class DrikaAnimation : DrikaElement{
 	vec3 new_translation;
 	quaternion new_rotation;
 	vec3 new_scale;
+	bool done = false;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -277,16 +278,23 @@ class DrikaAnimation : DrikaElement{
 		if(targets.size() == 0){
 			return false;
 		}
+
 		if(!animation_started){
 			animation_started = true;
 			if(animate_camera){
 				level.SendMessage("animating_camera true " + hotspot.GetID());
 			}
 		}
+
+		//When the animation is done, and the trigger is called again, then start the animation over.
+		if(done){
+			Reset();
+			return false;
+		}
+
 		UpdateAnimation();
 		if(animation_finished){
-			animation_finished = false;
-			animation_started = false;
+			done = true;
 			if(animate_camera){
 				level.SendMessage("animating_camera false " + hotspot.GetID());
 			}
@@ -1073,6 +1081,8 @@ class DrikaAnimation : DrikaElement{
 		timeline_position = 0.0;
 		animation_started = false;
 		loop_direction = 1.0;
+		done = false;
+		animation_finished = false;
 
 		if(animate_camera){
 			level.SendMessage("animating_camera false " + hotspot.GetID());
