@@ -1069,23 +1069,24 @@ class DrikaAnimation : DrikaElement{
 		previous_translation = vec3();
 		timeline_position = 0.0;
 		animation_started = false;
+		loop_direction = 1.0;
+
 		if(animate_camera){
 			level.SendMessage("animating_camera false " + hotspot.GetID());
 		}
 
-		if(key_ids.size() < 2){
-			return;
+		if(animation_method == placeholder_method){
+			UpdateAnimationKeys();
+			if(animation_type == looping_forwards || animation_type == looping_forwards_and_backwards || animation_type == forward){
+				key_index = 0;
+				@current_key = ReadObjectFromID(key_ids[key_index]);
+				@next_key = ReadObjectFromID(key_ids[key_index + 1]);
+			}else{
+				key_index = key_ids.size() - 1;
+				@current_key = ReadObjectFromID(key_ids[key_index]);
+				@next_key = ReadObjectFromID(key_ids[key_index - 1]);
+			}
 		}
-		if(animation_type == looping_forwards || animation_type == looping_forwards_and_backwards || animation_type == forward){
-			key_index = 0;
-			@current_key = ReadObjectFromID(key_ids[key_index]);
-			@next_key = ReadObjectFromID(key_ids[key_index + 1]);
-		}else{
-			key_index = key_ids.size() - 1;
-			@current_key = ReadObjectFromID(key_ids[key_index]);
-			@next_key = ReadObjectFromID(key_ids[key_index - 1]);
-		}
-		loop_direction = 1.0;
 		SetCurrentTransform();
 	}
 }
