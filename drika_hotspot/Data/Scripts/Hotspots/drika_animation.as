@@ -222,6 +222,7 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void SetCurrentTransform(){
+		CameraPlaceholderCheck();
 		if(animation_method == timeline_method){
 			TimelineSetTransform(animation_timer);
 		}else if(animation_method == placeholder_method){
@@ -269,7 +270,6 @@ class DrikaAnimation : DrikaElement{
 				level.SendMessage("animating_camera true " + hotspot.GetID());
 			}
 		}
-		UpdateAnimationKeys();
 		UpdateAnimation();
 		if(animation_finished){
 			animation_finished = false;
@@ -306,12 +306,12 @@ class DrikaAnimation : DrikaElement{
 	void UpdateAnimation(){
 		if(animation_method == timeline_method){
 			TimelineUpdateAnimation();
-			TimelineSetTransform(animation_timer);
 		}else if(animation_method == placeholder_method){
+			UpdateAnimationKeys();
 			animation_timer += time_step;
 			PlaceholderUpdateAnimation();
-			PlaceholderSetTransform();
 		}
+		SetCurrentTransform();
 	}
 
 	float CalculateWholeDistance(){
@@ -407,7 +407,6 @@ class DrikaAnimation : DrikaElement{
 
 	void ApplyTransform(vec3 translation, quaternion rotation, vec3 scale){
 		Object@ target;
-		CameraPlaceholderCheck();
 		if(animate_camera){
 			@target = camera_placeholder;
 
@@ -789,33 +788,37 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void DrawEditing(){
-		int num_keys = max(0, key_ids.size() - 1);
-		for(int i = 0; i < num_keys; i++){
-			if(ObjectExists(key_ids[i]) && ObjectExists(key_ids[i+1])){
-				Object@ current_key = ReadObjectFromID(key_ids[i]);
-				Object@ next_key = ReadObjectFromID(key_ids[i+1]);
-				if(i == 0){
-					DrawDebugMesh(current_key);
-				}
-				DrawDebugMesh(next_key);
-				DebugDrawLine(current_key.GetTranslation(), next_key.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			}else if(!ObjectExists(key_ids[i])){
-				key_ids.removeAt(i);
-				WriteAnimationKeyParams();
-				return;
-			}else if(!ObjectExists(key_ids[i+1])){
-				key_ids.removeAt(i+1);
-				WriteAnimationKeyParams();
-				return;
-			}
-		}
-
 		CameraPlaceholderCheck();
-		UpdateAnimationKeys();
+		if(animation_method == timeline_method){
+			if(animate_camera){
+				DebugDrawLine(camera_placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			}
+			DrawTimeline();
+		}else{
+			UpdateAnimationKeys();
+			int num_keys = max(0, key_ids.size() - 1);
+			for(int i = 0; i < num_keys; i++){
+				if(ObjectExists(key_ids[i]) && ObjectExists(key_ids[i+1])){
+					Object@ current_key = ReadObjectFromID(key_ids[i]);
+					Object@ next_key = ReadObjectFromID(key_ids[i+1]);
+					if(i == 0){
+						DrawDebugMesh(current_key);
+					}
+					DrawDebugMesh(next_key);
+					DebugDrawLine(current_key.GetTranslation(), next_key.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				}else if(!ObjectExists(key_ids[i])){
+					key_ids.removeAt(i);
+					WriteAnimationKeyParams();
+					return;
+				}else if(!ObjectExists(key_ids[i+1])){
+					key_ids.removeAt(i+1);
+					WriteAnimationKeyParams();
+					return;
+				}
+			}
+			if(animate_camera){
+				DebugDrawLine(camera_placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 
-		if(animate_camera){
-			DebugDrawLine(camera_placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			if(animation_method == placeholder_method){
 				for(uint i = 0; i < key_ids.size(); i++){
 					Object@ key = ReadObjectFromID(key_ids[i]);
 					if(key.IsSelected()){
@@ -826,16 +829,13 @@ class DrikaAnimation : DrikaElement{
 						}
 					}
 				}
-			}
-		}else{
-			array<Object@> targets = GetTargetObjects();
-			for(uint i = 0; i < targets.size(); i++){
-				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			}
-		}
 
-		if(animation_method == timeline_method){
-			DrawTimeline();
+			}else{
+				array<Object@> targets = GetTargetObjects();
+				for(uint i = 0; i < targets.size(); i++){
+					DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				}
+			}
 		}
 	}
 
@@ -1019,8 +1019,9 @@ class DrikaAnimation : DrikaElement{
 					}else{
 						timeline_position = highest;
 					}
-					TimelineSetTransform(timeline_position);
 				}
+				animation_timer = timeline_position;
+				SetCurrentTransform();
 			}
 		}
 		//Draw the current position on the timeline.
@@ -1075,10 +1076,6 @@ class DrikaAnimation : DrikaElement{
 			@next_key = ReadObjectFromID(key_ids[key_index - 1]);
 		}
 		loop_direction = 1.0;
-		if(animation_method == timeline_method){
-			TimelineSetTransform(animation_timer);
-		}else if(animation_method == placeholder_method){
-			PlaceholderSetTransform();
-		}
+		SetCurrentTransform();
 	}
 }
