@@ -844,19 +844,24 @@ class DrikaAnimation : DrikaElement{
 			if(moving_animation_key){
 				MoveAnimationKey();
 			}else{
-				if(GetInputPressed(0, "i")){
-					//Make sure to delete any key that's currently at this position before adding a new one.
-					DeleteAnimationKey();
-					InsertAnimationKey();
-				}else if(GetInputPressed(0, "x")){
-					DeleteAnimationKey();
-				}else if(GetInputPressed(0, "g")){
-					moving_animation_key = true;
-					for(uint i = 0; i < key_data.size(); i++){
-						if(key_data[i].time == timeline_position){
-							@target_key = key_data[i];
-							target_key.moving = true;
-							target_key.moving_time = target_key.time;
+				//Don't move/insert/delete keys when the modifier keys are pressed.
+				if(GetInputDown(0, "lctrl") || GetInputDown(0, "lalt")){
+					return;
+				}else{
+					if(GetInputPressed(0, "i")){
+						//Make sure to delete any key that's currently at this position before adding a new one.
+						DeleteAnimationKey();
+						InsertAnimationKey();
+					}else if(GetInputPressed(0, "x")){
+						DeleteAnimationKey();
+					}else if(GetInputPressed(0, "g")){
+						for(uint i = 0; i < key_data.size(); i++){
+							if(key_data[i].time == timeline_position){
+								@target_key = key_data[i];
+								target_key.moving = true;
+								target_key.moving_time = target_key.time;
+								moving_animation_key = true;
+							}
 						}
 					}
 				}
