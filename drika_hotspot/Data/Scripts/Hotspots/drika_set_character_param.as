@@ -33,7 +33,9 @@ enum character_params { 	aggression = 0,
 							throw_counter_probability = 32,
 							is_throw_trainer = 33,
 							weapon_catch_skill = 34,
-							wearing_metal_armor = 35
+							wearing_metal_armor = 35,
+							ignite = 36,
+							extinguish = 37
 					};
 
 class DrikaSetCharacterParam : DrikaElement{
@@ -54,6 +56,7 @@ class DrikaSetCharacterParam : DrikaElement{
 	array<int> float_parameters = {aggression, attack_damage, attack_knockback, attack_speed, block_followup, block_skill, character_scale, damage_resistance, ear_size, fat, focus_fov_distance, focus_fov_horizontal, focus_fov_vertical, ground_aggression, movement_speed, muscle, peripheral_fov_distance, peripheral_fov_horizontal, peripheral_fov_vertical, fall_damage_mult, fear_afraid_at_health_level, throw_counter_probability, weapon_catch_skill};
 	array<int> int_parameters = {knocked_out_shield};
 	array<int> bool_parameters = {cannot_be_disarmed, left_handed, static_char, fear_always_afraid_on_sight, fear_causes_fear_on_sight, fear_never_afraid_on_sight, no_look_around, stick_to_nav_mesh, is_throw_trainer, wearing_metal_armor};
+	array<int> function_parameters = {ignite, extinguish};
 
 	array<string> param_names = {	"Aggression",
 	 								"Attack Damage",
@@ -90,7 +93,9 @@ class DrikaSetCharacterParam : DrikaElement{
 									"Throw Counter Probability",
 									"Throw Trainer",
 									"Weapon Catch Skill",
-									"Wearing Metal Armor"
+									"Wearing Metal Armor",
+									"Ignite",
+									"Extinguish"
 								};
 
 	DrikaSetCharacterParam(JSONValue params = JSONValue()){
@@ -136,6 +141,8 @@ class DrikaSetCharacterParam : DrikaElement{
 			param_type = int_param;
 		}else if(bool_parameters.find(character_param) != -1){
 			param_type = bool_param;
+		}else if(function_parameters.find(character_param) != -1){
+			param_type = function_param;
 		}
 	}
 
@@ -148,6 +155,8 @@ class DrikaSetCharacterParam : DrikaElement{
 			bool_param_after = GetJSONBool(_params, "param_after", false);
 		}else if(param_type == string_param){
 			string_param_after = GetJSONString(_params, "param_after", "");
+		}else if(param_type == function_param){
+			//This type doesn't have any parameters.
 		}
 	}
 
@@ -339,6 +348,10 @@ class DrikaSetCharacterParam : DrikaElement{
 			case wearing_metal_armor:
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
+			case ignite:
+				break;
+			case extinguish:
+				break;
 			default:
 				Log(warning, "Found a non standard parameter type. " + param_type);
 				break;
@@ -365,7 +378,7 @@ class DrikaSetCharacterParam : DrikaElement{
 				return true;
 			}
 
-			if(!params.HasParam(param_name)){
+			if(!params.HasParam(param_name) && param_type != function_param){
 				if(param_type == string_param){
 					params.AddString(param_name, reset?params_before[i].string_value:string_param_after);
 				}else if(param_type == int_param){
@@ -484,6 +497,24 @@ class DrikaSetCharacterParam : DrikaElement{
 						break;
 					case wearing_metal_armor:
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
+						break;
+					case ignite:
+						if(targets[i].GetType() == _movement_object){
+							MovementObject@ char = ReadCharacterID(targets[i].GetID());
+							if(!reset){
+								char.rigged_object().Ignite();
+							}else{
+								char.rigged_object().Extinguish();
+							}
+						}
+						break;
+					case extinguish:
+						if(!reset){
+							if(targets[i].GetType() == _movement_object){
+								MovementObject@ char = ReadCharacterID(targets[i].GetID());
+								char.rigged_object().Extinguish();
+							}
+						}
 						break;
 					default:
 						Log(warning, "Found a non standard parameter type. " + param_type);

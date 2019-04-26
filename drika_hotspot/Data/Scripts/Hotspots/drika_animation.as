@@ -232,6 +232,10 @@ class DrikaAnimation : DrikaElement{
 
 	void SetCurrentTransform(){
 		CameraPlaceholderCheck();
+		array<Object@> targets = GetTargetObjects();
+		if(targets.size() == 0){
+			return;
+		}
 		if(animation_method == timeline_method){
 			TimelineSetTransform(animation_timer);
 		}else if(animation_method == placeholder_method){
