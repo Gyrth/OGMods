@@ -192,6 +192,15 @@ class DrikaAnimation : DrikaElement{
 		DrawSelectTargetUI();
 		if(ImGui_Combo("Animation Method", current_animation_method, animation_method_names, animation_method_names.size())){
 			animation_method = animation_methods(current_animation_method);
+			//Remove all the old data when switching between methods.
+			if(animation_method == placeholder_method){
+				key_data.resize(0);
+			}else{
+				for(uint i = 0; i < key_ids.size(); i++){
+					QueueDeleteObjectID(key_ids[i]);
+				}
+				key_ids.resize(0);
+			}
 		}
 		if(animation_method == placeholder_method){
 			if(ImGui_Combo("Duration Method", current_duration_method, duration_method_names, duration_method_names.size())){
@@ -844,8 +853,9 @@ class DrikaAnimation : DrikaElement{
 			if(moving_animation_key){
 				MoveAnimationKey();
 			}else{
-				//Don't move/insert/delete keys when the modifier keys are pressed.
-				if(GetInputDown(0, "lctrl") || GetInputDown(0, "lalt")){
+				array<Object@> targets = GetTargetObjects();
+				//Don't move/insert/delete keys when the modifier keys are pressed or no targets are present.
+				if(GetInputDown(0, "lctrl") || GetInputDown(0, "lalt") || targets.size() == 0){
 					return;
 				}else{
 					if(GetInputPressed(0, "i")){
