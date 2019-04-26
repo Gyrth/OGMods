@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-59.8511" t1="19.0976" t2="63.8251" s0="1" s1="1" s2="1" q0="0.0292954" q1="-0.336432" q2="0.0104717" q3="0.941194" euler_x="0.0622316" euler_y="-0.686597" euler_z="0" id="1">
+    <CameraObject t0="19.3031" t1="1.27287" t2="25.7472" s0="1" s1="1" s2="1" q0="-0.0739557" q1="0.7706" q2="-0.0909746" q3="-0.626442" euler_x="-2.90657" euler_y="-1.36515" euler_z="-3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -923,6 +923,20 @@
         <parameters />
     </EnvObject>
     <EnvObject t0="-43.8612" t1="-2.74731" t2="9.8665" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="188" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="14.0934" t1="-2.74726" t2="26.6604" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="189" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="14.3044" t1="-2.31318" t2="26.5987" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="190" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Debug Current Line" type="int" val="0" />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;victim&quot;,&quot;target_character_type&quot;:2},{&quot;function_name&quot;:&quot;set_velocity&quot;,&quot;identifier&quot;:&quot;victim&quot;,&quot;identifier_type&quot;:1,&quot;placeholder_id&quot;:191,&quot;velocity_magnitude&quot;:25},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
+    <EnvObject name="Set Velocity Helper" t0="14.255" t1="-0.108442" t2="26.5987" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0.5" q3="0.866025" euler_x="0" euler_y="0" euler_z="1.0472" id="191" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
 </ActorObjects>

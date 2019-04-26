@@ -46,7 +46,7 @@ string param_delimiter = "|";
 array<string> messages;
 bool is_selected = false;
 const int _ragdoll_state = 4;
-dictionary object_references;
+array<ObjectReference@> object_references;
 string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
 bool duplicating = false;
 float image_scale;
@@ -71,6 +71,15 @@ vec4 text_color(0.7, 0.7, 0.7, 1.0);
 TextureAssetRef delete_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Delete.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Copy.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
+class ObjectReference{
+	int id;
+	string reference;
+	ObjectReference(int _id, string _reference){
+		id = _id;
+		reference = _reference;
+	}
+}
+
 void Init() {
 	show_name = (this_hotspot.GetName() != "");
 	display_name = this_hotspot.GetName();
@@ -94,7 +103,17 @@ void SetEnabled(bool val){
 }
 
 void RegisterObject(int id, string reference){
-	object_references[reference] = id;
+	bool already_registered = false;
+	for(uint i = 0; i < object_references.size(); i++){
+		//Already have this reference, so just change the id.
+		if(object_references[i].reference == reference){
+			object_references[i].id = id;
+			already_registered = true;
+		}
+	}
+	if(!already_registered){
+		object_references.insertLast(ObjectReference(id, reference));
+	}
 }
 
 bool HasReferences(){
@@ -150,11 +169,12 @@ bool Disconnect(Object @other){
 }
 
 int GetRegisteredObjectID(string reference){
-	if(object_references.exists(reference)){
-		return int(object_references[reference]);
-	}else{
-		return -1;
+	for(uint i = 0; i < object_references.size(); i++){
+		if(object_references[i].reference == reference){
+			return object_references[i].id;
+		}
 	}
+	return -1;
 }
 
 void ConvertDisplayColors(){
@@ -646,7 +666,7 @@ void Reset(){
 	//If the user is editing the script then stay with the current line to edit.
 	current_line = 0;
 	display_index = drika_indexes[current_line];
-	object_references.deleteAll();
+	object_references.resize(0);
 
 	script_finished = false;
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
