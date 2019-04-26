@@ -839,12 +839,11 @@ class DrikaAnimation : DrikaElement{
 					}
 				}
 
-			}else{
-				array<Object@> targets = GetTargetObjects();
-				for(uint i = 0; i < targets.size(); i++){
-					DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-				}
 			}
+		}
+		array<Object@> targets = GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
