@@ -502,9 +502,9 @@ class DrikaSetCharacterParam : DrikaElement{
 						if(targets[i].GetType() == _movement_object){
 							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							if(!reset){
-								char.rigged_object().Ignite();
+								char.ReceiveMessage("ignite");
 							}else{
-								char.rigged_object().Extinguish();
+								char.ReceiveMessage("extinguish");
 							}
 						}
 						break;
@@ -512,7 +512,7 @@ class DrikaSetCharacterParam : DrikaElement{
 						if(!reset){
 							if(targets[i].GetType() == _movement_object){
 								MovementObject@ char = ReadCharacterID(targets[i].GetID());
-								char.rigged_object().Extinguish();
+								char.ReceiveMessage("extinguish");
 							}
 						}
 						break;
