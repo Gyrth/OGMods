@@ -330,9 +330,9 @@ void SwitchToEditing(){
 
 void SwitchToPlaying(){
 	if(this_hotspot.IsSelected()){
-		show_editor = false;
 		this_hotspot.SetSelected(false);
 	}
+	show_editor = false;
 	editing = false;
 	Reset();
 }
