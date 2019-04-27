@@ -474,6 +474,23 @@ class DrikaAnimation : DrikaElement{
 		if(animate_scale){
 			target.SetScale(scale);
 		}
+
+		RefreshChildren(target);
+	}
+
+	void RefreshChildren(Object@ obj){
+		if(obj.GetType() == _group){
+			array<int> children = obj.GetChildren();
+			for(uint i = 0; i < children.size(); i++){
+				Object@ child = ReadObjectFromID(children[i]);
+				child.SetTranslation(child.GetTranslation());
+				child.SetRotation(child.GetRotation());
+				if(animate_scale){
+					child.SetScale(child.GetScale());
+				}
+				RefreshChildren(child);
+			}
+		}
 	}
 
 	void TimelineUpdateAnimation(){
