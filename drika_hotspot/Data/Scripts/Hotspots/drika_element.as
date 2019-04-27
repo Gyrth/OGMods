@@ -159,7 +159,7 @@ class DrikaElement{
 	bool show_team_option = false;
 	bool show_name_option = false;
 	string character_team = "team_drika";
-	string object_name = "team_drika";
+	string object_name = "drika_object";
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}
@@ -243,6 +243,13 @@ class DrikaElement{
 			return false;
 		}
 		return false;
+	}
+
+	void ClearTarget(){
+		object_id = -1;
+		reference_string = "drika_reference";
+		character_team = "team_drika";
+		object_name = "drika_object";
 	}
 
 	string Vec3ToString(vec3 value){

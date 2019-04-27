@@ -228,6 +228,9 @@ class DrikaAnimation : DrikaElement{
 		}
 		if(ImGui_Checkbox("Animate Camera", animate_camera)){
 			SetCurrentTransform();
+			if(animate_camera){
+				ClearTarget();
+			}
 		}
 		if(ImGui_Checkbox("Animate Scale", animate_scale)){
 			SetCurrentTransform();
@@ -237,10 +240,6 @@ class DrikaAnimation : DrikaElement{
 
 	void SetCurrentTransform(){
 		CameraPlaceholderCheck();
-		array<Object@> targets = GetTargetObjects();
-		if(targets.size() == 0){
-			return;
-		}
 		if(animation_method == timeline_method){
 			TimelineSetTransform(animation_timer);
 		}else if(animation_method == placeholder_method){
@@ -278,8 +277,8 @@ class DrikaAnimation : DrikaElement{
 
 	bool Trigger(){
 		array<Object@> targets = GetTargetObjects();
-		// Don't do anything if the target object does not exist.
-		if(targets.size() == 0){
+		// Don't do anything if the target object does not exist and the animation is not targeting the camera.
+		if(targets.size() == 0 && !animate_camera){
 			return false;
 		}
 
@@ -414,6 +413,7 @@ class DrikaAnimation : DrikaElement{
 				camera_placeholder.SetTranslatable(true);
 				camera_placeholder.SetScalable(true);
 				camera_placeholder.SetRotatable(true);
+				camera_placeholder.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
 			}
 
 			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(camera_placeholder);
@@ -470,6 +470,9 @@ class DrikaAnimation : DrikaElement{
 			level.Execute("dialogue.cam_rot = vec3(" + direction.x + "," + direction.y + "," + direction.z + ");");
 		}else{
 			array<Object@> targets = GetTargetObjects();
+			if(targets.size() == 0){
+				return;
+			}
 			@target = targets[0];
 		}
 
@@ -874,9 +877,11 @@ class DrikaAnimation : DrikaElement{
 
 			}
 		}
-		array<Object@> targets = GetTargetObjects();
-		for(uint i = 0; i < targets.size(); i++){
-			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		if(!animate_camera){
+			array<Object@> targets = GetTargetObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			}
 		}
 	}
 
@@ -886,8 +891,8 @@ class DrikaAnimation : DrikaElement{
 				MoveAnimationKey();
 			}else{
 				array<Object@> targets = GetTargetObjects();
-				//Don't move/insert/delete keys when the modifier keys are pressed or no targets are present.
-				if(GetInputDown(0, "lctrl") || GetInputDown(0, "lalt") || targets.size() == 0){
+				//Don't move/insert/delete keys when the modifier keys are pressed.
+				if(GetInputDown(0, "lctrl") || GetInputDown(0, "lalt")){
 					return;
 				}else{
 					if(GetInputPressed(0, "i")){
@@ -986,6 +991,9 @@ class DrikaAnimation : DrikaElement{
 			@target = camera_placeholder;
 		}else{
 			array<Object@> targets = GetTargetObjects();
+			if(targets.size() == 0){
+				return;
+			}
 			@target = targets[0];
 		}
 		new_key.time = timeline_position;
