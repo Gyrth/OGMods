@@ -339,7 +339,7 @@ void Update(){
 			UpdateParallelOperations();
 
 			if(!script_finished){
-				if(GetCurrentElement().Trigger() || GetCurrentElement().parallel_operation){
+				if(GetCurrentElement().parallel_operation || GetCurrentElement().Trigger()){
 					if(current_line == int(drika_indexes.size() - 1)){
 						script_finished = true;
 					}else{
@@ -706,6 +706,7 @@ void Reset(){
 	current_line = 0;
 	display_index = drika_indexes[current_line];
 	object_references.resize(0);
+	parallel_elements.resize(0);
 
 	script_finished = false;
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
