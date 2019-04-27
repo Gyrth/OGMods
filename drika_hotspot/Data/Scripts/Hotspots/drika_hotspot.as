@@ -414,6 +414,9 @@ bool update_scroll = false;
 bool debug_current_line = false;
 
 void DrawEditor(){
+	if(camera.GetFlags() == kPreviewCamera){
+		return;
+	}
 	if(show_name){
 		DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.5, 0), display_name, 1.0, false, _delete_on_draw);
 	}
@@ -718,6 +721,9 @@ void Reset(){
 }
 
 void Draw(){
+	if(camera.GetFlags() == kPreviewCamera){
+		return;
+	}
 	if(debug_current_line && drika_elements.size() > 0){
 		if(!hotspot_enabled){
 			DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.75, 0), "Disabled", 1.0, false, _delete_on_draw);
