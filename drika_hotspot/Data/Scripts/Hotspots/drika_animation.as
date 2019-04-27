@@ -176,6 +176,7 @@ class DrikaAnimation : DrikaElement{
 		for(uint i = 0; i < key_ids.size(); i++){
 			QueueDeleteObjectID(key_ids[i]);
 		}
+		QueueDeleteObjectID(placeholder_id);
 	}
 
 	string GetDisplayString(){

@@ -302,17 +302,21 @@ class DrikaElement{
 		placeholder.SetScalable(true);
 		placeholder.SetRotatable(true);
 		placeholder.SetScale(default_placeholder_scale);
-		placeholder.SetTranslation(this_hotspot.GetTranslation());
+		placeholder.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
 	}
 
 	void RetrievePlaceholder(){
 		if(duplicating){
-			//Use the same transform as the original placeholder.
-			Object@ old_placeholder = ReadObjectFromID(placeholder_id);
-			CreatePlaceholder();
-			placeholder.SetScale(old_placeholder.GetScale());
-			placeholder.SetTranslation(old_placeholder.GetTranslation());
-			placeholder.SetRotation(old_placeholder.GetRotation());
+			if(ObjectExists(placeholder_id)){
+				//Use the same transform as the original placeholder.
+				Object@ old_placeholder = ReadObjectFromID(placeholder_id);
+				CreatePlaceholder();
+				placeholder.SetScale(old_placeholder.GetScale());
+				placeholder.SetTranslation(old_placeholder.GetTranslation());
+				placeholder.SetRotation(old_placeholder.GetRotation());
+			}else{
+				placeholder_id = -1;
+			}
 		}else{
 			if(ObjectExists(placeholder_id)){
 				@placeholder = ReadObjectFromID(placeholder_id);
