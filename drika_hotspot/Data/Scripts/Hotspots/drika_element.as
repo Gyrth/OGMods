@@ -142,6 +142,7 @@ class DrikaElement{
 	bool visible;
 	bool triggered = false;
 	bool has_settings = false;
+	bool parallel_operation = false;
 	int index = -1;
 	int placeholder_id = -1;
 	Object@ placeholder;

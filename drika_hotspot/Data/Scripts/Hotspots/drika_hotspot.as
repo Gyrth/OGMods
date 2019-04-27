@@ -40,6 +40,7 @@ string display_name = "Drika Hotspot";
 bool script_finished = false;
 int current_line = 0;
 array<DrikaElement@> drika_elements;
+array<DrikaElement@> parallel_elements;
 array<int> drika_indexes;
 bool post_init_done = false;
 Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
@@ -332,25 +333,53 @@ void Update(){
 		SwitchToPlaying();
 	}
 
-	if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
+	if(drika_indexes.size() > 0 && hotspot_enabled){
 		if(!show_editor){
-			if(messages.size() > 0){
-				for(uint i = 0; i < messages.size(); i++){
-					GetCurrentElement().ReceiveMessage(messages[i]);
-				}
-			}
-			if(GetCurrentElement().Trigger()){
-				if(current_line == int(drika_indexes.size() - 1)){
-					script_finished = true;
-				}else{
-					current_line += 1;
-					display_index = drika_indexes[current_line];
+			DeliverMessages();
+			UpdateParallelOperations();
+
+			if(!script_finished){
+				if(GetCurrentElement().Trigger() || GetCurrentElement().parallel_operation){
+					if(current_line == int(drika_indexes.size() - 1)){
+						script_finished = true;
+					}else{
+						current_line += 1;
+						display_index = drika_indexes[current_line];
+					}
 				}
 			}
 		}else{
 			GetCurrentElement().Update();
 		}
 		messages.resize(0);
+	}
+}
+
+void UpdateParallelOperations(){
+	for(uint i = 0; i < parallel_elements.size(); i++){
+		if(parallel_elements[i].Trigger()){
+			parallel_elements.removeAt(i);
+			i--;
+		}
+	}
+	if(!script_finished){
+		if(GetCurrentElement().parallel_operation){
+			//Check if the element is already added.
+			for(uint i = 0; i < parallel_elements.size(); i++){
+				if(parallel_elements[i].index == GetCurrentElement().index){
+					return;
+				}
+			}
+			parallel_elements.insertLast(GetCurrentElement());
+		}
+	}
+}
+
+void DeliverMessages(){
+	if(messages.size() > 0){
+		for(uint i = 0; i < messages.size(); i++){
+			GetCurrentElement().ReceiveMessage(messages[i]);
+		}
 	}
 }
 

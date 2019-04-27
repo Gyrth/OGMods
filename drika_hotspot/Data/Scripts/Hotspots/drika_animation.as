@@ -86,7 +86,7 @@ class DrikaAnimation : DrikaElement{
 
 	DrikaAnimation(JSONValue params = JSONValue()){
 		drika_element_type = drika_animation;
-		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object};
+		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object, _group};
 		key_ids = GetJSONIntArray(params, "key_ids", {});
 		key_data = InterpAnimationData(GetJSONValueArray(params, "key_data", {}));
 		animation_type = animation_types(GetJSONInt(params, "animation_type", 3));
@@ -101,6 +101,7 @@ class DrikaAnimation : DrikaElement{
 		animate_scale = GetJSONBool(params, "animate_scale", false);
 		duration = GetJSONFloat(params, "duration", 5.0);
 		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
+		parallel_operation = GetJSONBool(params, "parallel_operation", false);
 
 		LoadIdentifier(params);
 		has_settings = true;
@@ -118,6 +119,7 @@ class DrikaAnimation : DrikaElement{
 		data["animate_scale"] = JSONValue(animate_scale);
 		data["duration"] = JSONValue(duration);
 		data["extra_yaw"] = JSONValue(extra_yaw);
+		data["parallel_operation"] = JSONValue(parallel_operation);
 
 		data["key_ids"] = JSONValue(JSONarrayValue);
 		for(uint i = 0; i < key_ids.size(); i++){
@@ -229,6 +231,7 @@ class DrikaAnimation : DrikaElement{
 		if(ImGui_Checkbox("Animate Scale", animate_scale)){
 			SetCurrentTransform();
 		}
+		ImGui_Checkbox("Play In Parallel", parallel_operation);
 	}
 
 	void SetCurrentTransform(){
