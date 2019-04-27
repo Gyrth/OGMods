@@ -1,7 +1,8 @@
 enum camera_params {	tint = 0,
 						vignette_tint = 1,
 						fov = 2,
-						dof = 3
+						dof = 3,
+						splitscreen = 4
 					};
 
 class DrikaSetCameraParam : DrikaElement{
@@ -13,6 +14,9 @@ class DrikaSetCameraParam : DrikaElement{
 
 	array<float> float_array_param_before;
 	array<float> float_array_param_after;
+
+	int int_param_before;
+	int int_param_after;
 
 	float float_param_before;
 	float float_param_after;
@@ -26,16 +30,21 @@ class DrikaSetCameraParam : DrikaElement{
 	array<int> float_parameters = {fov};
 	array<int> vec3_color_parameters = {tint, vignette_tint};
 	array<int> float_array_parameters = {dof};
+	array<int> function_parameters = {splitscreen};
+
+	array<string> splitscreen_mode_choices = {"None", "Full", "Split"};
 
 	array<string> param_names = {	"Tint",
 	 								"Vignette Tint",
 									"FOV",
-									"DOF"
+									"DOF",
+									"SplitScreen"
 								};
 
 	DrikaSetCameraParam(JSONValue params = JSONValue()){
 		camera_param = camera_params(GetJSONInt(params, "camera_param", 0));
 		current_type = camera_param;
+		param_name = param_names[camera_param];
 
 		drika_element_type = drika_set_camera_param;
 		has_settings = true;
@@ -46,7 +55,7 @@ class DrikaSetCameraParam : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["function_name"] = JSONValue("set_camera_param");
-		data["camera_param"] = JSONValue("camera_param");
+		data["camera_param"] = JSONValue(camera_param);
 		string save_string;
 		if(param_type == vec3_color_param){
 			data["param_after"] = JSONValue(JSONarrayValue);
@@ -60,6 +69,8 @@ class DrikaSetCameraParam : DrikaElement{
 			for(uint i = 0; i < float_array_param_after.size(); i++){
 				data["param_after"].append(float_array_param_after[i]);
 			}
+		}else if(param_type == function_param){
+			data["param_after"] = JSONValue(int_param_after);
 		}
 		return data;
 	}
@@ -71,6 +82,8 @@ class DrikaSetCameraParam : DrikaElement{
 			param_type = vec3_color_param;
 		}else if(float_array_parameters.find(camera_param) != -1){
 			param_type = float_array_param;
+		}else if(function_parameters.find(camera_param) != -1){
+			param_type = function_param;
 		}
 	}
 
@@ -81,6 +94,8 @@ class DrikaSetCameraParam : DrikaElement{
 			float_param_after = GetJSONFloat(_params, "param_after", 1.0);
 		}else if(param_type == float_array_param){
 			float_array_param_after = GetJSONFloatArray(_params, "param_after", {1.0, 1.0, 1.0, 1.0, 1.0, 1.0});
+		}else if(param_type == function_param){
+			int_param_after = GetJSONInt(_params, "param_after", 0);
 		}
 	}
 
@@ -95,6 +110,10 @@ class DrikaSetCameraParam : DrikaElement{
 			}
 		}else if(param_type == vec3_color_param){
 			display_string = vec3_param_after.x + "," + vec3_param_after.y + "," + vec3_param_after.z;
+		}else if(param_type == function_param){
+			if(camera_param == splitscreen){
+				display_string = splitscreen_mode_choices[int_param_after];
+			}
 		}
 		return "SetCameraParam " + param_name + " " + display_string;
 	}
@@ -125,6 +144,10 @@ class DrikaSetCameraParam : DrikaElement{
 			ImGui_SliderFloat("Far Blur", float_array_param_after[3], -1000.0f, 1000.0f, "%.4f");
 			ImGui_SliderFloat("Far Dist", float_array_param_after[4], -1000.0f, 1000.0f, "%.4f");
 			ImGui_SliderFloat("Far Transition", float_array_param_after[5], -1000.0f, 1000.0f, "%.4f");
+		}else if(param_type == function_param){
+			if(camera_param == splitscreen){
+				ImGui_Combo("SplitScreen Mode", int_param_after, splitscreen_mode_choices, splitscreen_mode_choices.size());
+			}
 		}
 	}
 
@@ -141,6 +164,9 @@ class DrikaSetCameraParam : DrikaElement{
 				break;
 			case dof:
 				float_array_param_before = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
+				break;
+			case splitscreen:
+				int_param_before = kModeNone;
 				break;
 			default:
 				Log(warning, "Found a non standard parameter type. " + param_type);
@@ -177,6 +203,18 @@ class DrikaSetCameraParam : DrikaElement{
 				{
 					array<float>@ new_setting = reset?float_array_param_before:float_array_param_after;
 					camera.SetDOF(new_setting[0],new_setting[1],new_setting[2],new_setting[3],new_setting[4],new_setting[5]);
+				}
+				break;
+			case splitscreen:
+				{
+					int mode = reset?int_param_before:int_param_after;
+					if(mode == kModeNone){
+						SetSplitScreenMode(kModeNone);
+					}else if(mode == kModeFull){
+						SetSplitScreenMode(kModeFull);
+					}else if(mode == kModeSplit){
+						SetSplitScreenMode(kModeSplit);
+					}
 				}
 				break;
 			default:
