@@ -31,6 +31,7 @@
 #include "hotspots/drika_wait.as"
 #include "hotspots/drika_billboard.as"
 #include "hotspots/drika_read_write_savefile.as"
+#include "hotspots/drika_set_splitscreen_mode.as"
 
 bool show_editor = false;
 bool has_closed = true;
@@ -288,6 +289,8 @@ DrikaElement@ InterpElement(JSONValue &in function_json){
 		return DrikaBillboard(function_json);
 	}else if(function_json["function_name"].asString() == "read_write_savefile"){
 		return DrikaReadWriteSaveFile(function_json);
+	}else if(function_json["function_name"].asString() == "set_splitscreen_mode"){
+		return DrikaSetSplitScreenMode(function_json);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + function_json["function_name"].asString());
@@ -938,6 +941,8 @@ DrikaElement@ CreateNewFunction(drika_element_types element_type) {
 			return DrikaBillboard();
 		case drika_read_write_savefile:
 			return DrikaReadWriteSaveFile();
+		case drika_set_splitscreen_mode:
+			return DrikaSetSplitScreenMode();
 	}
 	return DrikaElement();
 }

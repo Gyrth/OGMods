@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="9.06363" t1="4.11756" t2="27.5168" s0="1" s1="1" s2="1" q0="0.0886105" q1="0.732902" q2="-0.0972946" q3="0.667486" euler_x="-2.87763" euler_y="1.47744" euler_z="-3.14159" id="1">
+    <CameraObject t0="4.39801" t1="6.26129" t2="33.0035" s0="1" s1="1" s2="1" q0="0.152474" q1="0.37541" q2="-0.062758" q3="0.912075" euler_x="0.331282" euler_y="0.780933" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -606,7 +606,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <ActorObject name="drika_character" t0="15.9538" t1="-1.59152" t2="-8.90377" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="122" type_file="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml" is_player="0">
+    <ActorObject name="drika_character" t0="15.9538" t1="-1.59152" t2="-8.90377" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="122" type_file="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -919,7 +919,7 @@
     <Hotspot t0="14.3044" t1="-2.31318" t2="26.5987" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="190" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;victim&quot;,&quot;target_character_type&quot;:2},{&quot;function_name&quot;:&quot;read_write_savefile&quot;,&quot;param&quot;:&quot;drika_save_param&quot;,&quot;read_write_mode&quot;:0,&quot;value&quot;:&quot;drika_save_value&quot;},{&quot;character_param&quot;:36,&quot;function_name&quot;:&quot;set_character_param&quot;,&quot;identifier&quot;:&quot;victim&quot;,&quot;identifier_type&quot;:1,&quot;param_type&quot;:7},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:1,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:2},{&quot;function_name&quot;:&quot;read_write_savefile&quot;,&quot;param&quot;:&quot;drika_save_param&quot;,&quot;read_write_mode&quot;:1,&quot;value&quot;:&quot;drika_save_value&quot;},{&quot;character_param&quot;:37,&quot;function_name&quot;:&quot;set_character_param&quot;,&quot;identifier&quot;:&quot;victim&quot;,&quot;identifier_type&quot;:1,&quot;param_type&quot;:7},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;victim&quot;,&quot;target_character_type&quot;:2},{&quot;function_name&quot;:&quot;set_splitscreen_mode&quot;,&quot;mode&quot;:1},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;set_splitscreen_mode&quot;,&quot;mode&quot;:2},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;set_splitscreen_mode&quot;,&quot;mode&quot;:0},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:1},{&quot;function_name&quot;:&quot;read_write_savefile&quot;,&quot;param&quot;:&quot;drika_save_param&quot;,&quot;read_write_mode&quot;:0,&quot;value&quot;:&quot;drika_save_value&quot;},{&quot;character_param&quot;:36,&quot;function_name&quot;:&quot;set_character_param&quot;,&quot;identifier&quot;:&quot;victim&quot;,&quot;identifier_type&quot;:1,&quot;param_type&quot;:7},{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:1,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:2},{&quot;function_name&quot;:&quot;read_write_savefile&quot;,&quot;param&quot;:&quot;drika_save_param&quot;,&quot;read_write_mode&quot;:1,&quot;value&quot;:&quot;drika_save_value&quot;},{&quot;character_param&quot;:37,&quot;function_name&quot;:&quot;set_character_param&quot;,&quot;identifier&quot;:&quot;victim&quot;,&quot;identifier_type&quot;:1,&quot;param_type&quot;:7}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -959,7 +959,7 @@
             <parameters />
         </EnvObject>
     </Group>
-    <Group t0="27.9819" t1="1.05111" t2="24.581" s0="0.332418" s1="1.29573" s2="1.34814" q0="-0.320561" q1="0" q2="0" q3="0.947228" euler_x="-0.652644" euler_y="0" euler_z="0" id="199" version="1">
+    <Group t0="27.9819" t1="1.05111" t2="24.581" s0="0.332418" s1="1.29573" s2="1.34814" q0="-0.320561" q1="0" q2="0" q3="0.947228" euler_x="-0.652643" euler_y="0" euler_z="0" id="199" version="1">
         <parameters />
         <EnvObject t0="27.9819" t1="1.04291" t2="24.5995" s0="0.483306" s1="0.163621" s2="0.517847" q0="-0.226671" q1="0.226671" q2="0.669791" q3="0.669791" euler_x="0" euler_y="0.652644" euler_z="1.5708" id="200" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cylinder.xml">
             <parameters />
@@ -1070,7 +1070,7 @@
             <parameters />
         </EnvObject>
     </Group>
-    <EnvObject t0="27.4649" t1="-1.39974" t2="31.2849" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.5522" euler_z="-1.88327" id="232" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+    <EnvObject t0="27.4649" t1="-1.39974" t2="31.2849" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="232" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
     <Hotspot t0="30.1092" t1="5.66379" t2="27.9284" s0="0.535999" s1="0.535999" s2="0.535999" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="234" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
@@ -1083,10 +1083,10 @@
     </Hotspot>
     <Group t0="27.4466" t1="3.3383" t2="28.9119" s0="0.65246" s1="1.19293" s2="4.08531" q0="-0.00785756" q1="0" q2="0" q3="0.999969" euler_x="-0.0157153" euler_y="0" euler_z="0" id="235" version="1">
         <parameters />
-        <EnvObject t0="27.4458" t1="3.3752" t2="28.9113" s0="0.233779" s1="2.01463" s2="0.245912" q0="-0.659543" q1="-0.0453937" q2="0.0183639" q3="0.75007" euler_x="-1.44445" euler_y="-0.0438875" euler_z="0.0876231" id="231" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+        <EnvObject t0="27.4458" t1="3.3752" t2="28.9113" s0="0.233779" s1="2.01463" s2="0.245912" q0="-0.659543" q1="-0.0453937" q2="0.0183639" q3="0.75007" euler_x="-1.44445" euler_y="-0.0438874" euler_z="0.087623" id="231" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="27.5311" t1="3.24304" t2="27.2007" s0="0.187413" s1="0.212147" s2="0.474468" q0="-0.633383" q1="-0.044736" q2="0.0199127" q3="0.772288" euler_x="-1.37573" euler_y="-0.0438875" euler_z="0.087623" id="233" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+        <EnvObject t0="27.5311" t1="3.24304" t2="27.2007" s0="0.187413" s1="0.212147" s2="0.474468" q0="-0.633383" q1="-0.044736" q2="0.0199127" q3="0.772288" euler_x="-1.37573" euler_y="-0.0438875" euler_z="0.0876231" id="233" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
             <parameters />
         </EnvObject>
     </Group>
@@ -1101,25 +1101,25 @@
     <EnvObject t0="28.3646" t1="3.23897" t2="30.6175" s0="0.12731" s1="2.01463" s2="0.140153" q0="-0.475307" q1="0.411822" q2="0.563424" q3="0.535761" euler_x="-0.213204" euler_y="1.35532" euler_z="1.44931" id="237" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="26.1442" t1="-1.38879" t2="31.2923" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.5522" euler_z="-1.88327" id="238" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+    <EnvObject t0="26.1442" t1="-1.38879" t2="31.2923" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="238" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="26.1333" t1="2.05403" t2="31.2313" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.5522" euler_z="-1.88327" id="239" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+    <EnvObject t0="26.1333" t1="2.05403" t2="31.2313" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="239" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="27.4042" t1="2.08522" t2="31.2234" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.5522" euler_z="-1.88327" id="240" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+    <EnvObject t0="27.4042" t1="2.08522" t2="31.2234" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="240" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="28.7327" t1="2.04788" t2="31.2165" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.5522" euler_z="-1.88327" id="241" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+    <EnvObject t0="28.7327" t1="2.04788" t2="31.2165" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="241" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="28.739" t1="-1.37608" t2="31.2772" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.5522" euler_z="-1.88327" id="242" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+    <EnvObject t0="28.739" t1="-1.37608" t2="31.2772" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="242" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="24.7989" t1="-1.44691" t2="31.301" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.5522" euler_z="-1.88327" id="243" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+    <EnvObject t0="24.7989" t1="-1.44691" t2="31.301" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="243" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="24.819" t1="2.01286" t2="31.2395" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.5522" euler_z="-1.88327" id="244" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+    <EnvObject t0="24.819" t1="2.01286" t2="31.2395" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="244" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
     <Hotspot t0="30.1092" t1="5.76551" t2="32.8676" s0="0.535999" s1="0.535999" s2="0.535999" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="245" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
