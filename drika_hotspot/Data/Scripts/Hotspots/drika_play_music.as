@@ -1,11 +1,13 @@
 class DrikaPlayMusic : DrikaElement{
 	string music_path;
-	string song;
+	string song_path;
+	string song_name;
 	string before_song;
 
 	DrikaPlayMusic(JSONValue params = JSONValue()){
-		music_path = GetJSONString(params, "music_path", "Data/Music/lugaru.xml");
-		song = GetJSONString(params, "song", "lugaru_menu");
+		music_path = GetJSONString(params, "music_path", "Data/Music/drika_music.xml");
+		song_path = GetJSONString(params, "song_path", "Data/Music/lugaru_menu_new.ogg");
+		song_name = GetJSONString(params, "song_name", "lugaru_menu_new.ogg");
 
 		drika_element_type = drika_play_music;
 		has_settings = true;
@@ -15,30 +17,34 @@ class DrikaPlayMusic : DrikaElement{
 		JSONValue data;
 		data["function_name"] = JSONValue("play_music");
 		data["music_path"] = JSONValue(music_path);
-		data["song"] = JSONValue(song);
+		data["song_path"] = JSONValue(song_path);
+		data["song_name"] = JSONValue(song_name);
 		return data;
 	}
 
-	void PostInit(){
-		AddMusic(music_path);
-	}
-
 	string GetDisplayString(){
-		return "PlayMusic " + music_path + " " + song;
+		return "PlayMusic " + song_name;
 	}
 
 	void DrawSettings(){
-		ImGui_Text("Music Path : ");
+		ImGui_Text("Song Path : ");
 		ImGui_SameLine();
-		ImGui_Text(music_path);
-		if(ImGui_Button("Set Music Path")){
-			string new_path = GetUserPickedReadPath("wav", "Data/Music");
+		ImGui_Text(song_path);
+		if(ImGui_Button("Set Song Path")){
+			string new_path = GetUserPickedReadPath("ogg", "Data/Music");
 			if(new_path != ""){
-				music_path = new_path;
-				AddMusic(music_path);
+				song_path = new_path;
+				GetSongName();
+				music_path = "Data/Music/" + GetUniqueFileName() + ".xml";
+				WriteMusicXML();
+				Play(false);
 			}
 		}
-		ImGui_InputText("Song", song, 64);
+	}
+
+	void GetSongName(){
+		array<string> split_path = song_path.split("/");
+		song_name = split_path[split_path.size() - 1];
 	}
 
 	bool Trigger(){
@@ -49,16 +55,49 @@ class DrikaPlayMusic : DrikaElement{
 		return Play(false);
 	}
 
+	string GetUniqueFileName(){
+		string filename = "";
+		while(filename.length() < 10){
+			string s('0');
+	        s[0] = rand() % (123 - 97) + 97;
+	        filename += s;
+		}
+		if(FileExists("Data/Music/" + filename + ".xml")){
+			//Already exists so get a new one.
+			return GetUniqueFileName();
+		}else{
+			return filename;
+		}
+	}
+
+	void WriteMusicXML(){
+		string msg = "write_music_xml ";
+		msg += music_path + " ";
+		msg += song_name + " ";
+		msg += song_path;
+
+		level.SendMessage(msg);
+	}
+
 	void GetPreviousSong(){
 		before_song = GetSong();
 	}
 
+	void StartEdit(){
+		Play(false);
+	}
+
 	bool Play(bool reset){
-		Log(info, "Set song " + (reset?before_song:song));
 		if(reset){
 			RemoveMusic(music_path);
+			Log(warning, "before_song " + before_song);
+		}else{
+			if(!FileExists(music_path)){
+				WriteMusicXML();
+			}
+			AddMusic(music_path);
 		}
-		PlaySong((reset?before_song:song));
+		PlaySong((reset?before_song:song_name));
 		return true;
 	}
 
