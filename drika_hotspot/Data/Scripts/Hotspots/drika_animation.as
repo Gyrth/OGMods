@@ -176,7 +176,15 @@ class DrikaAnimation : DrikaElement{
 		for(uint i = 0; i < key_ids.size(); i++){
 			QueueDeleteObjectID(key_ids[i]);
 		}
-		QueueDeleteObjectID(placeholder_id);
+		if(@camera_placeholder != null){
+			QueueDeleteObjectID(camera_placeholder.GetID());
+			@camera_placeholder = null;
+		}
+		if(@placeholder != null){
+			QueueDeleteObjectID(placeholder.GetID());
+			placeholder_id = -1;
+			@placeholder = null;
+		}
 	}
 
 	string GetDisplayString(){
