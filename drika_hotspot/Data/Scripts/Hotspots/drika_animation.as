@@ -962,6 +962,10 @@ class DrikaAnimation : DrikaElement{
 				current_key.SetSelectable(false);
 			}
 		}
+		if(animate_camera){
+			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(camera_placeholder);
+			placeholder_object.SetSpecialType(kSpawn);
+		}
 	}
 
 	void ApplySettings(){
