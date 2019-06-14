@@ -1,0 +1,16 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>downloader</Id>
+    <Name>Downloader</Name>
+    <Category>Item Pack</Category>
+    <Version>0.1.0</Version>
+    <Author>Gyrth McMulin</Author>
+    <Thumbnail>Data/Images/downloader_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/downloader_full.jpg</PreviewImage>
+    <Description>Downloader.</Description>
+    <Tag>b5</Tag>
+    <Tag>scripting</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <NeedsRestart>false</NeedsRestart>
+	<LevelHookFile>Data/Scripts/downloader.as</LevelHookFile>
+</Mod>
