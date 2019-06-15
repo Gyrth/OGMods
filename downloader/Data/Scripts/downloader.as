@@ -2,7 +2,12 @@ string log_data = "";
 uint16 api_port = 80;
 uint main_socket = SOCKET_ID_INVALID;
 bool show = true;
-bool show_header = true;
+bool show_notification = false;
+bool show_header = false;
+float notification_slide = 0.0;
+float notification_timer = 5.0;
+string notification_text = "";
+array<string> notification_queue;
 
 bool post_init_done = false;
 float progress_interval_timer = 0.0;
@@ -15,6 +20,7 @@ const string code_200 = "HTTP/1.1 200 OK\r";
 array<Download@> download_queue;
 Download@ current_download;
 TextureAssetRef image = LoadTexture("Data/UI/spawner/thumbs/Hotspot/empty.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+TextureAssetRef star = LoadTexture("Data/UI/star_filled.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -75,6 +81,34 @@ void Update(int paused){
 		@current_download = @download_queue[0];
 		StartDownload();
 	}
+	UpdateNotification();
+}
+
+void UpdateNotification(){
+	//Still showing a notification.
+	if(notification_timer < (notification_queue.size() > 0?1.0:5.0)){
+		notification_timer += time_step;
+		if(notification_slide < 325.0f){
+			notification_slide += time_step * 1000.0;
+		}
+	}else{
+		//Done showing notification.
+		if(notification_queue.size() > 0){
+			notification_slide = 0.0;
+			show_notification = true;
+			notification_timer = 0.0;
+			notification_text = notification_queue[0];
+			notification_queue.removeAt(0);
+		}else if(show_notification){
+			Log(warning, "Stop showing!");
+			show_notification = false;
+		}
+	}
+}
+
+void ShowNotification(string message){
+	Log(warning, message);
+	notification_queue.insertLast(message);
 }
 
 void UpdateProgressBar(){
@@ -105,7 +139,7 @@ void ReceiveMessage(string msg){
 }
 
 void DrawGUI(){
-	if(show){
+	if(show || show_notification){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
@@ -123,6 +157,9 @@ void DrawGUI(){
 		ImGui_PushStyleColor(ImGuiCol_Button, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ButtonHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ButtonActive, item_clicked);
+	}
+
+	if(show){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
 
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
@@ -140,13 +177,30 @@ void DrawGUI(){
 			ImGui_EndMenuBar();
 		}
 
-		ImGui_TextWrapped(log_data);
+		/* ImGui_TextWrapped(log_data); */
+		if(ImGui_InputTextMultiline("Log", vec2(-1.0, ImGui_GetWindowHeight() - 300), ImGuiInputTextFlags_ReadOnly)){
+
+		}
 
 		ImGui_Text(progress_text);
 
-		ImGui_Image(image, vec2(902, 507));
+		ImGui_Image(image, vec2(300, 200));
 
 		ImGui_End();
+	}
+
+	if(show_notification){
+		ImGui_SetNextWindowSize(vec2(300.0f, 125.0f), ImGuiSetCond_Always);
+		ImGui_SetNextWindowPos(vec2(GetScreenWidth() - notification_slide, GetScreenHeight() - 150.0f), ImGuiSetCond_Always);
+
+		ImGui_Begin("Notification " + "###Notification", show_notification, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+		ImGui_Image(star, vec2(100, 100));
+		ImGui_SameLine();
+		ImGui_TextWrapped(notification_text);
+		ImGui_End();
+	}
+
+	if(show || show_notification){
 		ImGui_PopStyleColor(17);
 	}
 }
@@ -240,6 +294,7 @@ void IncomingTCPData(uint socket, array<uint8>@ data) {
 			UpdateProgressBar();
 
 			if(current_download.download_type == file){
+				ShowNotification("Download done : \n" + current_download.full_address);
 				WriteDownloadedFile();
 			}else if(current_download.download_type == directory){
 				DownloadFilesInDirectory();
@@ -275,6 +330,7 @@ void DownloadFilesInDirectory(){
 void TCPLog(string message){
 	Log(warning, message);
 	log_data += message + "\n";
+	ImGui_SetTextBuf(log_data);
 }
 
 void TCPLog(array<uint8>@ data){
@@ -340,9 +396,9 @@ void ReadHeader(int body_index){
 	/* Log(warning, "Header size " + header_size); */
 
 	current_download.raw_data.removeRange(0, header_size);
-	TCPLog("From header " + GetString(current_download.raw_data));
+	/* TCPLog("From header " + GetString(current_download.raw_data)); */
 	current_download.download_progress = current_download.raw_data.length();
-	TCPLog("Progress : " + current_download.download_progress);
+	/* TCPLog("Progress : " + current_download.download_progress); */
 }
 
 array<string> ExtractStringBetween(string source, string first_string, string second_string){
@@ -370,7 +426,6 @@ void WriteDownloadedFile(){
 	WriteFileToWriteDir(save_file);
 
 	if(current_download.file_extention == "png" || current_download.file_extention == "jpg"){
-		Log(warning, "Image : " + save_file);
 		image = LoadTexture(save_file, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
 	}
 }
