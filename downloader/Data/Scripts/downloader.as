@@ -2,12 +2,15 @@ string log_data = "";
 uint16 api_port = 80;
 uint main_socket = SOCKET_ID_INVALID;
 bool show = true;
-bool show_header = false;
+bool show_header = true;
 
 bool post_init_done = false;
 float progress_interval_timer = 0.0;
 bool downloading = false;
 string progress_text = "";
+
+const string code_404 = "HTTP/1.1 404 ERROR ";
+const string code_200 = "HTTP/1.1 200 OK\r";
 
 array<Download@> download_queue;
 Download@ current_download;
@@ -34,6 +37,8 @@ class Download{
 	string file_extention;
 	string server_address;
 	bool has_header = false;
+	bool error = false;
+	string error_code = "";
 	int file_size;
 	int download_progress = 0;
 	int packet_size = 0;
@@ -160,6 +165,7 @@ void PostInit(){
 	/* QueueDownload("107.173.129.154/moonwards/steppes.jpg"); */
 	/* QueueDownload("107.173.129.154/downloader/fary.jpg"); */
 	QueueDownload("107.173.129.154/downloader/");
+	/* QueueDownload("raw.githubusercontent.com/Gyrth/OGMods/drika_hotspot/drika_hotspot/Data/Scripts/Hotspots/drika_element.as"); */
 }
 
 void QueueDownload(string full_address){
@@ -217,12 +223,17 @@ void IncomingTCPData(uint socket, array<uint8>@ data) {
 				break;
 			}
 		}
+	}else if(current_download.error){
+		TCPLog("Error downloading : " + current_download.error_code);
+		TCPLog("-----------------------------------------------");
+		ClearDownload();
 	}else if(current_download.has_header){
 		current_download.download_progress += data.size();
 		current_download.packet_size = data.size();
 
 		if(current_download.download_progress >= current_download.file_size){
 			//Done downloading!
+			TCPLog("Download size : " + current_download.download_progress + " bytes.");
 			TCPLog("Download time : " + current_download.download_timer + " seconds.");
 			TCPLog("Download speed : " + (current_download.file_size / current_download.download_timer) / 1024.0 + " kb/s.");
 			TCPLog("-----------------------------------------------");
@@ -233,12 +244,16 @@ void IncomingTCPData(uint socket, array<uint8>@ data) {
 			}else if(current_download.download_type == directory){
 				DownloadFilesInDirectory();
 			}
-			downloading = false;
-			download_queue.removeAt(0);
-			DestroySocketTCP(main_socket);
-			main_socket = SOCKET_ID_INVALID;
+			ClearDownload();
 		}
 	}
+}
+
+void ClearDownload(){
+	downloading = false;
+	download_queue.removeAt(0);
+	DestroySocketTCP(main_socket);
+	main_socket = SOCKET_ID_INVALID;
 }
 
 void DownloadFilesInDirectory(){
@@ -258,6 +273,7 @@ void DownloadFilesInDirectory(){
 }
 
 void TCPLog(string message){
+	Log(warning, message);
 	log_data += message + "\n";
 }
 
@@ -295,6 +311,12 @@ void ReadHeader(int body_index){
 		}
 	}
 
+	if(header_lines[0] != code_200){
+		current_download.error = true;
+		current_download.error_code = header_lines[0];
+		return;
+	}
+
 	int header_size = body_index;
 	string text = "";
 	string numbers = "";
@@ -318,8 +340,9 @@ void ReadHeader(int body_index){
 	/* Log(warning, "Header size " + header_size); */
 
 	current_download.raw_data.removeRange(0, header_size);
-	Log(warning, "From header " + GetString(current_download.raw_data));
+	TCPLog("From header " + GetString(current_download.raw_data));
 	current_download.download_progress = current_download.raw_data.length();
+	TCPLog("Progress : " + current_download.download_progress);
 }
 
 array<string> ExtractStringBetween(string source, string first_string, string second_string){
@@ -345,7 +368,9 @@ void WriteDownloadedFile(){
 
 	string save_file = "Data/Downloads/" + current_download.file_name + "." + current_download.file_extention;
 	WriteFileToWriteDir(save_file);
+
 	if(current_download.file_extention == "png" || current_download.file_extention == "jpg"){
+		Log(warning, "Image : " + save_file);
 		image = LoadTexture(save_file, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
 	}
 }
