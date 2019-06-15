@@ -2,22 +2,15 @@ string log_data = "";
 uint16 api_port = 80;
 uint main_socket = SOCKET_ID_INVALID;
 bool show = true;
-uint counter = 0;
-array<uint8> raw_data;
-string file_path;
-string file_name;
-string file_extention;
-string server_address;
+bool show_header = false;
+
 bool post_init_done = false;
 float progress_interval_timer = 0.0;
-float download_timer = 0.0;
 bool downloading = false;
 string progress_text = "";
-bool has_header = false;
-int file_size;
-int download_progress = 0;
-int packet_size = 0;
-array<string> download_queue;
+
+array<Download@> download_queue;
+Download@ current_download;
 TextureAssetRef image = LoadTexture("Data/UI/spawner/thumbs/Hotspot/empty.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
 // Coloring options
@@ -28,6 +21,36 @@ vec4 item_hovered(0.2, 0.2, 0.2, 0.98);
 vec4 item_clicked(0.1, 0.1, 0.1, 0.98);
 vec4 text_color(0.7, 0.7, 0.7, 1.0);
 
+enum download_types {
+						file = 0,
+						directory = 1
+					};
+
+class Download{
+	array<uint8> raw_data;
+	string full_address;
+	string file_path;
+	string file_name;
+	string file_extention;
+	string server_address;
+	bool has_header = false;
+	int file_size;
+	int download_progress = 0;
+	int packet_size = 0;
+	float download_timer = 0.0;
+	download_types download_type;
+
+	Download(string full_address){
+		this.full_address = full_address;
+		//If the name ends with / then it's a subdirectory.
+		if(full_address.substr(full_address.length() -1, 1) == "/"){
+			download_type = directory;
+		}else{
+			download_type = file;
+		}
+	}
+}
+
 void Update(int paused){
 	if(!post_init_done){
 		PostInit();
@@ -35,7 +58,7 @@ void Update(int paused){
 	}
 	if(downloading){
 		progress_interval_timer += time_step;
-		download_timer += time_step;
+		current_download.download_timer += time_step;
 
 		if(progress_interval_timer > 0.2){
 			/* Log(warning, "Progress " + download_progress); */
@@ -44,26 +67,26 @@ void Update(int paused){
 			UpdateProgressBar();
 		}
 	}else if(download_queue.size() > 0){
-		Download(download_queue[0]);
-		download_queue.removeAt(0);
+		@current_download = @download_queue[0];
+		StartDownload();
 	}
 }
 
 void UpdateProgressBar(){
 	string size;
 
-	if(download_progress > 10000000){
-		size = (download_progress / 1024.0 / 1024.0) + " megabytes";
-	}else if(download_progress > 1024){
-		size = (download_progress / 1024.0) + " kilobytes";
+	if(current_download.download_progress > 10000000){
+		size = (current_download.download_progress / 1024.0 / 1024.0) + " megabytes";
+	}else if(current_download.download_progress > 1024){
+		size = (current_download.download_progress / 1024.0) + " kilobytes";
 	}else{
-		size = download_progress + " bytes";
+		size = current_download.download_progress + " bytes";
 	}
 
-	string percentage = (download_progress * 100 / max(file_size, 1)) + "% - ";
-	string speed = ((download_progress / max(download_timer, 0.001)) / 1024.0) + " kb/s. ";
+	string percentage = (current_download.download_progress * 100 / max(current_download.file_size, 1)) + "% - ";
+	string speed = ((current_download.download_progress / max(current_download.download_timer, 0.001)) / 1024.0) + " kb/s. ";
 
-	progress_text = "Download : " + size + " " + percentage + speed + "\nLast packet size : " + packet_size + " bytes.";
+	progress_text = "Download : " + size + " " + percentage + speed + "\nLast packet size : " + current_download.packet_size + " bytes.";
 }
 
 void ReceiveMessage(string msg){
@@ -132,36 +155,38 @@ void PostInit(){
 	/* QueueDownload("107.173.129.154/moonwards/hart.png"); */
 	/* QueueDownload("gyrthmcmulin.me/images/youtube.png"); */
 	/* QueueDownload("gyrthmcmulin.me/videos/landmine.mp4"); */
-	/* QueueDownload("107.173.129.154/moonwards/overgrowth.png"); */
+	/* QueueDownload("107.173.129.154/downloader/overgrowth.png"); */
 	/* QueueDownload("107.173.129.154/moonwards/updates.json"); */
 	/* QueueDownload("107.173.129.154/moonwards/steppes.jpg"); */
-	/* QueueDownload("107.173.129.154/moonwards/fary.jpg"); */
+	/* QueueDownload("107.173.129.154/downloader/fary.jpg"); */
+	QueueDownload("107.173.129.154/downloader/");
 }
 
-void QueueDownload(string url){
-	download_queue.insertLast(url);
+void QueueDownload(string full_address){
+	download_queue.insertLast(Download(full_address));
 }
 
-void Download(string address){
-	array<string> split_address = address.split("/");
-	server_address = split_address[0];
+void StartDownload(){
+	array<string> split_address = current_download.full_address.split("/");
+	current_download.server_address = split_address[0];
 
-	TCPLog("Downloading file : " + address);
+	TCPLog("Downloading file : " + current_download.full_address);
 
-	file_path = "";
 	for(uint i = 1; i < split_address.size(); i++){
-		file_path += "/" + split_address[i];
+		current_download.file_path += "/" + split_address[i];
 	}
 
 	array<string> split_file_name = split_address[split_address.size() - 1].split(".");
-	file_name = split_file_name[0];
-	file_extention = split_file_name[1];
+	current_download.file_name = split_file_name[0];
+	if(split_file_name.size() > 1){
+		current_download.file_extention = split_file_name[1];
+	}
 
-	SendRequest(server_address, "GET " + file_path + " HTTP/1.1\r\nHost: " + server_address + "\r\n\r\n");
+	SendRequest(current_download.server_address, "GET " + current_download.file_path + " HTTP/1.1\r\nHost: " + current_download.server_address + "\r\n\r\n");
 }
 
 void SendRequest(string address, string request){
-	has_header = false;
+	current_download.has_header = false;
 
 	if( main_socket == SOCKET_ID_INVALID ) {
 		main_socket = CreateSocketTCP(address, api_port);
@@ -179,40 +204,56 @@ void SendRequest(string address, string request){
 }
 
 void IncomingTCPData(uint socket, array<uint8>@ data) {
-	counter += data.size();
-
 	for(uint i = 0; i < data.size(); i++){
-		raw_data.insertLast(data[i]);
+		current_download.raw_data.insertLast(data[i]);
 	}
 
-	if(!has_header){
+	if(!current_download.has_header){
 		//Check if the whole head has been received.
-		for(uint i = 0; i < raw_data.size() - 2; i++){
-			if(raw_data[i] == 13 && raw_data[i + 1] == 10 && raw_data[i + 2] == 13){
-				has_header = true;
+		for(uint i = 0; i < current_download.raw_data.size() - 2; i++){
+			if(current_download.raw_data[i] == 13 && current_download.raw_data[i + 1] == 10 && current_download.raw_data[i + 2] == 13){
+				current_download.has_header = true;
 				ReadHeader(i + 4);
 				break;
 			}
 		}
-	}else if(has_header){
-		download_progress += data.size();
-		packet_size = data.size();
+	}else if(current_download.has_header){
+		current_download.download_progress += data.size();
+		current_download.packet_size = data.size();
 
-		if(download_progress >= file_size){
+		if(current_download.download_progress >= current_download.file_size){
 			//Done downloading!
-			TCPLog("Download time : " + download_timer + " seconds.");
-			TCPLog("Download speed : " + (file_size / download_timer) / 1024.0 + " kb/s.");
+			TCPLog("Download time : " + current_download.download_timer + " seconds.");
+			TCPLog("Download speed : " + (current_download.file_size / current_download.download_timer) / 1024.0 + " kb/s.");
 			TCPLog("-----------------------------------------------");
 			UpdateProgressBar();
 
-			download_timer = 0.0;
-			WriteDownloadedFile();
+			if(current_download.download_type == file){
+				WriteDownloadedFile();
+			}else if(current_download.download_type == directory){
+				DownloadFilesInDirectory();
+			}
 			downloading = false;
+			download_queue.removeAt(0);
 			DestroySocketTCP(main_socket);
 			main_socket = SOCKET_ID_INVALID;
-			download_progress = 0;
-			raw_data.resize(0);
 		}
+	}
+}
+
+void DownloadFilesInDirectory(){
+	array<string> result = ExtractStringBetween(GetString(current_download.raw_data), "<tr>", "</tr>");
+
+	TCPLog("Directory list : ");
+	int counter = 0;
+	//Skip the first 3 lines since those are headers.
+	for(uint i = 3; i < result.size(); i++){
+		array<string> file_name = ExtractStringBetween(result[i], "<a href=\"", "\">");
+		if(file_name.size() > 0){
+			TCPLog(counter + ".   " + file_name[0]);
+			QueueDownload(current_download.full_address + file_name[0]);
+		}
+		counter += 1;
 	}
 }
 
@@ -237,7 +278,7 @@ void TCPLog(array<uint8>@ data){
 }
 
 void ReadHeader(int body_index){
-	array<string> header_lines = GetString(raw_data).split("\n");
+	array<string> header_lines = GetString(current_download.raw_data).split("\n");
 	string length_line;
 
 	for(uint i = 0; i < header_lines.size(); i++){
@@ -248,20 +289,22 @@ void ReadHeader(int body_index){
 	}
 
 	//Show the header in the log window.
-	/* for(uint i = 0; i < header_lines.size(); i++){
-		TCPLog(header_lines[i]);
-	} */
+	if(show_header){
+		for(uint i = 0; i < header_lines.size(); i++){
+			TCPLog(header_lines[i]);
+		}
+	}
 
 	int header_size = body_index;
 	string text = "";
 	string numbers = "";
 
-	for(uint i = 0; i < raw_data.size(); i++){
+	for(uint i = 0; i < current_download.raw_data.size(); i++){
 		string s('0');
-		s[0] = raw_data[i];
+		s[0] = current_download.raw_data[i];
 		text += s;
-		numbers += "" + raw_data[i];
-		if(raw_data[i] == 10){
+		numbers += "" + current_download.raw_data[i];
+		if(current_download.raw_data[i] == 10){
 			/* Log(warning, "Header line text " + text);
 			Log(warning, "Header line numbers" + numbers); */
 			text = "";
@@ -269,28 +312,40 @@ void ReadHeader(int body_index){
 		}
 	}
 
-	file_size = atoi(join(length_line.split("Content-Length: "), ""));
-	TCPLog("File size : " + (file_size / 1024.0) + " kb");
+	current_download.file_size = atoi(join(length_line.split("Content-Length: "), ""));
+	TCPLog("File size : " + (current_download.file_size / 1024.0) + " kb");
 
 	/* Log(warning, "Header size " + header_size); */
 
-	raw_data.removeRange(0, header_size);
-	Log(warning, "From header " + GetString(raw_data));
-	download_progress = raw_data.length();
+	current_download.raw_data.removeRange(0, header_size);
+	Log(warning, "From header " + GetString(current_download.raw_data));
+	current_download.download_progress = current_download.raw_data.length();
+}
+
+array<string> ExtractStringBetween(string source, string first_string, string second_string){
+	array<string> result;
+
+	array<string> first_split = source.split(first_string);
+	for(uint i = 1; i < first_split.size(); i++){
+		array<string> second_split = first_split[i].split(second_string);
+		result.insertLast(second_split[0]);
+	}
+
+	return result;
 }
 
 void WriteDownloadedFile(){
 	StartWriteFile();
 
-	for(uint i = 0; i < raw_data.size(); i++){
+	for(uint i = 0; i < current_download.raw_data.size(); i++){
 		string s('0');
-		s[0] = raw_data[i];
+		s[0] = current_download.raw_data[i];
 		AddFileString(s);
 	}
 
-	string save_file = "Data/Downloads/" + file_name + "." + file_extention;
+	string save_file = "Data/Downloads/" + current_download.file_name + "." + current_download.file_extention;
 	WriteFileToWriteDir(save_file);
-	if(file_extention == "png" || file_extention == "jpg"){
+	if(current_download.file_extention == "png" || current_download.file_extention == "jpg"){
 		image = LoadTexture(save_file, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
 	}
 }
