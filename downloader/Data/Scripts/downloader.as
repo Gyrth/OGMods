@@ -9,7 +9,7 @@ float notification_timer = 5.0;
 string notification_text = "";
 array<string> notification_queue;
 tabs tab = download;
-array<RemoteMod@> remote_mods;
+array<ModData@> mods;
 
 bool post_init_done = false;
 float progress_interval_timer = 0.0;
@@ -47,7 +47,7 @@ enum download_types	{
 						thumbnail = 3
 					};
 
-class RemoteMod{
+class ModData{
 	string name = "";
 	string id = "";
 	string version = "";
@@ -60,25 +60,30 @@ class RemoteMod{
 	bool is_enabled = false;
 	bool has_mod_id = false;
 	bool can_activate = false;
+	bool is_remote_mod = false;
+	bool is_local_mod = false;
 	ModID mod_id;
 
-	RemoteMod(string name, string id, string version, string author, string thumbnail_path, string description){
+	ModData(string name, string id, string version, string author, string thumbnail_path, string description, bool is_remote_mod = false){
 		this.name = name;
 		this.id = id;
 		this.version = version;
 		this.author = author;
-		this.remote_thumbnail_path = thumbnail_path;
 		this.description = description;
+		this.is_remote_mod = is_remote_mod;
 
-		array<string> split_path = remote_thumbnail_path.split("/");
-		local_thumbnail_path = "Data/Downloads/Thumbnails/" + split_path[split_path.size() - 1];
+		if(is_remote_mod){
+			this.remote_thumbnail_path = thumbnail_path;
+			array<string> split_path = remote_thumbnail_path.split("/");
+			local_thumbnail_path = "Data/Downloads/Thumbnails/" + split_path[split_path.size() - 1];
 
-		if(FileExists(local_thumbnail_path)){
-			ReloadThumbnail();
+			if(!FileExists(local_thumbnail_path)){
+				QueueDownload("107.173.129.154/downloader/" + remote_thumbnail_path, this);
+			}
 		}else{
-			QueueDownload("107.173.129.154/downloader/" + remote_thumbnail_path, this);
-			thumbnail = default_thumbnail;
+			local_thumbnail_path = thumbnail_path;
 		}
+		ReloadThumbnail();
 
 		array<ModID>all_mods = GetModSids();
 		for(uint i = 0; i < all_mods.size(); i++){
@@ -111,7 +116,9 @@ class RemoteMod{
 
 	void ReloadThumbnail(){
 		if(FileExists(local_thumbnail_path)){
-			thumbnail = LoadTexture(local_thumbnail_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+			thumbnail = LoadTexture(local_thumbnail_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
+		}else{
+			thumbnail = default_thumbnail;
 		}
 	}
 }
@@ -131,9 +138,9 @@ class Download{
 	int packet_size = 0;
 	float download_timer = 0.0;
 	download_types download_type;
-	RemoteMod@ target;
+	ModData@ target;
 
-	Download(string full_address, RemoteMod@ target){
+	Download(string full_address, ModData@ target){
 		@this.target = @target;
 		this.full_address = full_address;
 
@@ -335,7 +342,7 @@ void DrawGUI(){
 
 			vec2 mod_button_size = vec2(-1.0, 125.0f);
 
-			for(uint i = 0; i < remote_mods.size(); i++){
+			for(uint i = 0; i < mods.size(); i++){
 
 				vec2 name_title_pos;
 				ImGui_Spacing();
@@ -343,7 +350,7 @@ void DrawGUI(){
 					ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, item_hovered);
 				}
 
-				ImGui_BeginChild(remote_mods[i].id, mod_button_size, true, ImGuiWindowFlags_NoScrollWithMouse);
+				ImGui_BeginChild(mods[i].id, mod_button_size, true, ImGuiWindowFlags_NoScrollWithMouse);
 				if(selected_mod != int(i) && ImGui_IsMouseHoveringWindow()){
 					if(ImGui_IsMouseClicked(0)){
 						new_selected_mod = int(i);
@@ -366,19 +373,19 @@ void DrawGUI(){
 
 				ImGui_SetColumnWidth(0, 165);
 
-				ImGui_Image(remote_mods[i].thumbnail, vec2(150, 100));
+				ImGui_Image(mods[i].thumbnail, vec2(150, 100));
 				ImGui_NextColumn();
-				ImGui_TextWrapped(remote_mods[i].description);
+				ImGui_TextWrapped(mods[i].description);
 
 				ImGui_EndChild();
 				vec3 text_color = vec3(1, 1, 1);
-				if(remote_mods[i].is_enabled){
+				if(mods[i].is_enabled){
 					text_color = vec3(0.65, 1, 0.65);
-				}else if(!remote_mods[i].can_activate){
+				}else if(!mods[i].can_activate){
 					text_color = vec3(1, 0.65, 0.65);
 				}
 
-				mod_list_labels.insertLast(LabelData(remote_mods[i].name + " - " + remote_mods[i].author, name_title_pos, text_color, background_color));
+				mod_list_labels.insertLast(LabelData(mods[i].name + " - " + mods[i].author, name_title_pos, text_color, background_color));
 			}
 
 			ImGui_EndChild();
@@ -405,36 +412,36 @@ void DrawGUI(){
 
 			inspector_labels.insertLast(LabelData("ModInspector", ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
-			if(remote_mods.size() > 0){
+			if(mods.size() > 0){
 				float section_height = ImGui_GetWindowHeight() - 10.0;
 
 				ImGui_BeginChild("Thumbnail", vec2(-1.0, section_height / 3.0), false, ImGuiWindowFlags_NoScrollWithMouse);
 				float image_height = section_height / 3.0 - 10.0f;
 				ImGui_Indent(ImGui_GetWindowWidth() / 2.0f - image_height);
-				ImGui_Image(remote_mods[selected_mod].thumbnail, vec2(image_height * 2.0f, image_height));
+				ImGui_Image(mods[selected_mod].thumbnail, vec2(image_height * 2.0f, image_height));
 				ImGui_EndChild();
 
 				ImGui_BeginChild("Install", vec2(-1.0, 40.0), true, ImGuiWindowFlags_NoScrollWithMouse);
-				inspector_labels.insertLast(LabelData(remote_mods[selected_mod].name, ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
+				inspector_labels.insertLast(LabelData(mods[selected_mod].name, ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
 				ImGui_Spacing();
 
-				if(!remote_mods[selected_mod].is_installed){
+				if(!mods[selected_mod].is_installed){
 					ImGui_Button("Install");
 				}else{
 					ImGui_Button("UnInstall");
 					ImGui_SameLine();
-					if(remote_mods[selected_mod].is_enabled){
+					if(mods[selected_mod].is_enabled){
 						if(ImGui_Button("Disable")){
-							bool succes = ModActivation(remote_mods[selected_mod].mod_id, false);
-							Log(warning, "Disable " + succes);
-							remote_mods[selected_mod].UpdateStatus();
+							bool succes = ModActivation(mods[selected_mod].mod_id, false);
+							mods[selected_mod].UpdateStatus();
 						}
 					}else{
-						if(remote_mods[selected_mod].can_activate){
+						if(mods[selected_mod].can_activate){
 							if(ImGui_Button("Enable")){
-								ModActivation(remote_mods[selected_mod].mod_id, true);
-								remote_mods[selected_mod].UpdateStatus();
+								ModActivation(mods[selected_mod].mod_id, true);
+								mods[selected_mod].UpdateStatus();
+								mods[selected_mod].ReloadThumbnail();
 							}
 						}else{
 							ImGui_TextDisabled("Enable");
@@ -449,9 +456,9 @@ void DrawGUI(){
 
 				ImGui_Columns(2, false);
 
-				ImGui_Text("Author : " + remote_mods[selected_mod].author);
-				ImGui_Text("ID : " + remote_mods[selected_mod].id);
-				ImGui_Text("Version : " + remote_mods[selected_mod].version);
+				ImGui_Text("Author : " + mods[selected_mod].author);
+				ImGui_Text("ID : " + mods[selected_mod].id);
+				ImGui_Text("Version : " + mods[selected_mod].version);
 
 				ImGui_NextColumn();
 
@@ -464,7 +471,7 @@ void DrawGUI(){
 				ImGui_BeginChild("Description", vec2(-1.0, -1.0), true, ImGuiWindowFlags_NoScrollWithMouse);
 				inspector_labels.insertLast(LabelData("Description", ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
-				ImGui_TextWrapped(remote_mods[selected_mod].description);
+				ImGui_TextWrapped(mods[selected_mod].description);
 				ImGui_EndChild();
 			}
 
@@ -510,20 +517,20 @@ void Init(string level_name){
 }
 
 void PostInit(){
-	/* QueueDownload("wolfire.com/overgrowth/smalltitle.png"); */
-	/* QueueDownload("107.173.129.154/moonwards/star.png"); */
-	/* QueueDownload("107.173.129.154/moonwards/hart.png"); */
-	/* QueueDownload("gyrthmcmulin.me/images/youtube.png"); */
-	/* QueueDownload("gyrthmcmulin.me/videos/landmine.mp4"); */
-	/* QueueDownload("107.173.129.154/downloader/overgrowth.png"); */
-	/* QueueDownload("107.173.129.154/moonwards/updates.json"); */
-	/* QueueDownload("107.173.129.154/moonwards/steppes.jpg"); */
-	/* QueueDownload("107.173.129.154/downloader/fary.jpg"); */
-	QueueDownload("107.173.129.154/downloader/mod_list.json");
-	/* QueueDownload("raw.githubusercontent.com/Gyrth/OGMods/drika_hotspot/drika_hotspot/Data/Scripts/Hotspots/drika_element.as"); */
+	/* QueueDownload("107.173.129.154/downloader/mod_list.json"); */
+	ReadLocalMods();
 }
 
-void QueueDownload(string full_address, RemoteMod@ target = null){
+void ReadLocalMods(){
+	array<ModID> all_mods = GetModSids();
+
+	for(uint i = 0; i < all_mods.size(); i++){
+		ModData mod(ModGetName(all_mods[i]),ModGetID(all_mods[i]), ModGetVersion(all_mods[i]), ModGetAuthor(all_mods[i]), ModGetThumbnail(all_mods[i]), ModGetDescription(all_mods[i]));
+		mods.insertLast(@mod);
+	}
+}
+
+void QueueDownload(string full_address, ModData@ target = null){
 	download_queue.insertLast(Download(full_address, target));
 }
 
@@ -621,8 +628,8 @@ void ReadModList(){
 	for(uint i = 0; i < array_members.size(); i++){
 		JSONValue mod_data = root[array_members[i]];
 
-		RemoteMod remote_mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString());
-		remote_mods.insertLast(@remote_mod);
+		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), true);
+		mods.insertLast(@mod);
 	}
 }
 
