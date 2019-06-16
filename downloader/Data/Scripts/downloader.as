@@ -364,9 +364,9 @@ void DrawGUI(){
 
 				ImGui_Columns(2, false);
 
-				ImGui_SetColumnWidth(0, 115);
+				ImGui_SetColumnWidth(0, 165);
 
-				ImGui_Image(remote_mods[i].thumbnail, vec2(100, 100));
+				ImGui_Image(remote_mods[i].thumbnail, vec2(150, 100));
 				ImGui_NextColumn();
 				ImGui_TextWrapped(remote_mods[i].description);
 
@@ -404,7 +404,7 @@ void DrawGUI(){
 
 				ImGui_BeginChild("Thumbnail", vec2(-1.0, section_height / 3.0), false, ImGuiWindowFlags_NoScrollWithMouse);
 				float image_height = section_height / 3.0 - 10.0f;
-				ImGui_Indent(ImGui_GetWindowWidth() / 2.0f - (section_height / 3.0));
+				ImGui_Indent(ImGui_GetWindowWidth() / 2.0f - image_height);
 				ImGui_Image(remote_mods[selected_mod].thumbnail, vec2(image_height * 2.0f, image_height));
 				ImGui_EndChild();
 
