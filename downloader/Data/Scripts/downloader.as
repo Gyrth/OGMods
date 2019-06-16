@@ -51,6 +51,7 @@ class ModData{
 	string name = "";
 	string id = "";
 	string version = "";
+	string remote_version = "";
 	string author = "";
 	string remote_thumbnail_path = "";
 	string local_thumbnail_path = "";
@@ -74,12 +75,6 @@ class ModData{
 
 		if(is_remote_mod){
 			this.remote_thumbnail_path = thumbnail_path;
-			array<string> split_path = remote_thumbnail_path.split("/");
-			local_thumbnail_path = "Data/Downloads/Thumbnails/" + split_path[split_path.size() - 1];
-
-			if(!FileExists(local_thumbnail_path)){
-				QueueDownload("107.173.129.154/downloader/" + remote_thumbnail_path, this);
-			}
 		}else{
 			local_thumbnail_path = thumbnail_path;
 		}
@@ -115,6 +110,15 @@ class ModData{
 	}
 
 	void ReloadThumbnail(){
+		if(is_remote_mod){
+			array<string> split_path = remote_thumbnail_path.split("/");
+			local_thumbnail_path = "Data/Downloads/Thumbnails/" + split_path[split_path.size() - 1];
+
+			if(!FileExists(local_thumbnail_path)){
+				QueueDownload(remote_thumbnail_path, this);
+			}
+		}
+
 		if(FileExists(local_thumbnail_path)){
 			thumbnail = LoadTexture(local_thumbnail_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
 		}else{
@@ -517,8 +521,8 @@ void Init(string level_name){
 }
 
 void PostInit(){
-	/* QueueDownload("107.173.129.154/downloader/mod_list.json"); */
 	ReadLocalMods();
+	QueueDownload("107.173.129.154/downloader/mod_list.json");
 }
 
 void ReadLocalMods(){
@@ -627,6 +631,24 @@ void ReadModList(){
 
 	for(uint i = 0; i < array_members.size(); i++){
 		JSONValue mod_data = root[array_members[i]];
+		bool already_local = false;
+
+		for(uint j = 0; j < mods.size(); j++){
+			//The remote mod is already loaded as a local mod.
+			if(mods[j].id == mod_data["ID"].asString()){
+				mods[j].is_remote_mod = true;
+				mods[j].remote_version = mod_data["Version"].asString();
+				mods[j].remote_thumbnail_path = mod_data["Thumbnail"].asString();
+				already_local = true;
+				mods[j].ReloadThumbnail();
+
+				break;
+			}
+		}
+
+		if(already_local){
+			continue;
+		}
 
 		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), true);
 		mods.insertLast(@mod);

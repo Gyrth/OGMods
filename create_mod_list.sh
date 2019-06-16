@@ -58,7 +58,7 @@ def FindModXML(path, folder):
 				elif "<Thumbnail>" in line:
 					line = line.replace("<Thumbnail>", "");
 					line = line.replace("</Thumbnail>", "");
-					mod_thumbnail_path = folder + "/" + (' '.join(line.split()));
+					mod_thumbnail_path = "107.173.129.154/downloader/" + folder + "/" + (' '.join(line.split()));
 				elif "<Description>" in line:
 					line = line.replace("<Description>", "");
 					line = line.replace("</Description>", "");
