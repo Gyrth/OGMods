@@ -9,6 +9,7 @@ float notification_timer = 5.0;
 string notification_text = "";
 array<string> notification_queue;
 tabs tab = download;
+tabs new_tab = download;
 array<RemoteMod@> remote_mods;
 
 bool post_init_done = false;
@@ -181,6 +182,9 @@ void Update(int paused){
 		@current_download = @download_queue[0];
 		StartDownload();
 	}
+	if(new_tab != tab){
+		tab = new_tab;
+	}
 	UpdateNotification();
 }
 
@@ -267,9 +271,6 @@ void DrawGUI(){
 		ImGui_Begin("Downloader " + "###Downloader", show, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 		ImGui_PopStyleVar(1);
 
-		vec2 p = ImGui_GetCursorScreenPos() - vec2(10.0, 10.0);
-		vec2 size = ImGui_GetWindowSize() - vec2(0.0, 0.0);
-
 		/* ImGui_BeginChild("Child", vec2(200, 200), true, ImGuiWindowFlags_NoScrollbar);
 		ImGui_Image(default_thumbnail, vec2(500,500));
 		ImGui_EndChild(); */
@@ -284,15 +285,53 @@ void DrawGUI(){
 			ImGui_EndMenuBar();
 		} */
 
+		//Create the tabs at the top.
+		vec2 tab_size = vec2(ImGui_GetWindowWidth() / 2.0 - 8.0, 20.0);
+
+		/* ImGui_PushStyleColor(ImGuiCol_Header, vec4(0));
+		ImGui_PushStyleColor(ImGuiCol_HeaderHovered, vec4(0));
+		ImGui_PushStyleColor(ImGuiCol_HeaderActive, vec4(0)); */
+
+		vec2 starting_position = ImGui_GetCursorScreenPos();
+
+		/* ImDrawList_AddRectFilled(starting_position, starting_position + tab_size, ImGui_GetColorU32(tab == download?titlebar_color:item_hovered), 10.0f, ImDrawCornerFlags_Top); */
+		if(ImGui_Selectable("###Downloads", (tab == download), 0, tab_size) && tab != download){
+			tab = download;
+		}
+		vec2 download_label_center_position = starting_position + vec2(tab_size.x / 2.0f, tab_size.y / 2.0f) - ImGui_CalcTextSize("Downloads") / 2.0f;
+		ImDrawList_AddText(download_label_center_position, ImGui_GetColorU32(text_color), "Downloads");
+		ImGui_SameLine();
+
+		starting_position += vec2(tab_size.x, 0.0f);
+		/* ImDrawList_AddRectFilled(starting_position, starting_position + tab_size, ImGui_GetColorU32(tab == logger?titlebar_color:item_hovered), 10.0f, ImDrawCornerFlags_Top); */
+		if(ImGui_Selectable("###Log", (tab == logger), 0, tab_size) && tab != logger){
+			tab = logger;
+		}
+		vec2 log_label_center_position = starting_position + vec2(tab_size.x / 2.0f, tab_size.y / 2.0f) - ImGui_CalcTextSize("Log") / 2.0f;
+		ImDrawList_AddText(log_label_center_position, ImGui_GetColorU32(text_color), "Log");
+
+		/* ImGui_PopStyleColor(3); */
+
+		//Create the main window in which everything is shown.
+		ImGui_Spacing();
+		ImGui_BeginChild("MainWindow", vec2(-1.0, -1.0f), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+		float extra_label_width = 5.0f;
+		vec2 p;
+		vec2 size;
+
 		ImGui_Spacing();
 
-		vec2 cursor_pos = ImGui_GetCursorScreenPos();
-		array<LabelData@> labels;
-
 		if(tab == download){
-			ImGui_BeginChild("ModList", vec2(ImGui_GetWindowWidth() / 2.0 - 13.0, ImGui_GetWindowHeight() - 90.0), true);
+			ImGui_Columns(2, false);
+			array<LabelData@> mod_list_labels;
 
-			vec2 mod_button_size = vec2(ImGui_GetWindowWidth() - 15.0, 125.0f);
+			p = ImGui_GetCursorScreenPos() - vec2(0.0, 0.0);
+
+			ImGui_BeginChild("ModList", vec2(ImGui_GetWindowWidth() / 2.0 - 13.0, -1.0), true);
+			size = ImGui_GetWindowSize() + vec2(0.0, 0.0);
+
+			vec2 mod_button_size = vec2(-1.0, 125.0f);
 
 			for(uint i = 0; i < remote_mods.size(); i++){
 
@@ -302,6 +341,8 @@ void DrawGUI(){
 					ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, item_hovered);
 				}
 				ImGui_BeginChild(remote_mods[i].id, mod_button_size, true, ImGuiWindowFlags_NoScrollWithMouse);
+				size.x = ImGui_GetWindowWidth();
+				p.x = ImGui_GetWindowPos().x;
 				name_title_pos = ImGui_GetCursorScreenPos() + vec2(20.0, -15.0);
 
 				if(selected_mod == int(i)){
@@ -310,14 +351,7 @@ void DrawGUI(){
 				ImGui_Spacing();
 				ImGui_Spacing();
 
-				/* if(ImGui_Selectable("###" + remote_mods[i].name, selected_mod == int(i), 0, vec2(ImGui_GetWindowWidth() - 20.0, 100.0f))){
-					selected_mod = int(i);
-				} */
-
 				ImGui_SameLine();
-
-				/* ImGui_IsMouseHoveringWindow */
-
 
 				ImGui_Columns(2, false);
 
@@ -325,25 +359,32 @@ void DrawGUI(){
 
 				ImGui_Image(remote_mods[i].thumbnail, vec2(100, 100));
 				ImGui_NextColumn();
-				/* ImGui_SameLine(); */
 				ImGui_TextWrapped(remote_mods[i].description);
 
 				ImGui_EndChild();
 
-				labels.insertLast(LabelData(remote_mods[i].name + " - " + remote_mods[i].author, name_title_pos, remote_mods[i].is_enabled?vec3(0.75, 1, 0.75):vec3(1, 1, 1)));
-
-				/* ImGui_BeginChild("Title" + remote_mods[i].name);
-				ImDrawList_AddText(name_title_pos, ImGui_GetColorU32(), remote_mods[i].name + " - " + remote_mods[i].author);
-				ImGui_EndChild(); */
-
-				/* ImGui_Spacing(); */
+				mod_list_labels.insertLast(LabelData(remote_mods[i].name + " - " + remote_mods[i].author, name_title_pos, remote_mods[i].is_enabled?vec3(0.65, 1, 0.65):vec3(1, 1, 1)));
 			}
 
 			ImGui_EndChild();
 
-			ImGui_SameLine();
+			ImGui_SetNextWindowPos(p);
+			ImGui_BeginChild("ModListLabels", size, false, ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoScrollbar);
 
-			ImGui_BeginChild("ModInspector", vec2(ImGui_GetWindowWidth() / 2.0 - 13.0, ImGui_GetWindowHeight() - 90.0), true);
+			for(uint i = 0; i < mod_list_labels.size(); i++){
+				ImDrawList_AddRectFilled(mod_list_labels[i].position - vec2(extra_label_width, 0.0), mod_list_labels[i].position + ImGui_CalcTextSize(mod_list_labels[i].text) + vec2(extra_label_width, 0.0), ImGui_GetColorU32(background_color));
+				ImDrawList_AddText(mod_list_labels[i].position, ImGui_GetColorU32(mod_list_labels[i].color), mod_list_labels[i].text);
+			}
+
+			ImGui_EndChild();
+
+			ImGui_NextColumn();
+
+			array<LabelData@> inspector_labels;
+			ImGui_BeginChild("ModInspector", vec2(-1.0, -1.0), true, ImGuiWindowFlags_AlwaysUseWindowPadding);
+
+			p = ImGui_GetCursorScreenPos() - vec2(8.0, 20.0);
+			size = ImGui_GetWindowSize() + vec2(0.0, 12.0);
 
 			vec2 inspector_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
 			vec2 details_title_pos;
@@ -351,15 +392,15 @@ void DrawGUI(){
 			vec2 mod_title_pos;
 
 			if(remote_mods.size() > 0){
-				float section_height = ImGui_GetWindowHeight() - 8.0;
+				float section_height = ImGui_GetWindowHeight() - 10.0;
 
-				ImGui_BeginChild("Thumbnail", vec2(-1, section_height / 3.0), false, ImGuiWindowFlags_NoScrollWithMouse);
+				ImGui_BeginChild("Thumbnail", vec2(-1.0, section_height / 3.0), false, ImGuiWindowFlags_NoScrollWithMouse);
 				float image_height = section_height / 3.0 - 10.0f;
 				ImGui_Indent(ImGui_GetWindowWidth() / 2.0f - (section_height / 3.0));
 				ImGui_Image(remote_mods[selected_mod].thumbnail, vec2(image_height * 2.0f, image_height));
 				ImGui_EndChild();
 
-				ImGui_BeginChild("Install", vec2(-1, section_height / 12.0), true, ImGuiWindowFlags_NoScrollWithMouse);
+				ImGui_BeginChild("Install", vec2(-1.0, 40.0), true, ImGuiWindowFlags_NoScrollWithMouse);
 				mod_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
 				ImGui_Spacing();
 
@@ -388,7 +429,7 @@ void DrawGUI(){
 				ImGui_EndChild();
 				ImGui_Spacing();
 
-				ImGui_BeginChild("Details", vec2(-1, section_height / 5.0), true, ImGuiWindowFlags_NoScrollWithMouse);
+				ImGui_BeginChild("Details", vec2(-1, 70.0), true, ImGuiWindowFlags_NoScrollWithMouse);
 				details_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
 
 				ImGui_Columns(2, false);
@@ -405,7 +446,7 @@ void DrawGUI(){
 				ImGui_EndChild();
 				ImGui_Spacing();
 
-				ImGui_BeginChild("Description", vec2(-1, section_height / 3.0), true, ImGuiWindowFlags_NoScrollWithMouse);
+				ImGui_BeginChild("Description", vec2(-1.0, -1.0), true, ImGuiWindowFlags_NoScrollWithMouse);
 				description_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
 
 				ImGui_TextWrapped(remote_mods[selected_mod].description);
@@ -413,41 +454,29 @@ void DrawGUI(){
 
 			}
 
-			ImGui_EndChild();
-
-			labels.insertLast(LabelData("ModInspector", inspector_title_pos, vec3(1, 1, 1)));
-			labels.insertLast(LabelData("Details", details_title_pos, vec3(1, 1, 1)));
-			labels.insertLast(LabelData("Description", description_title_pos, vec3(1, 1, 1)));
+			inspector_labels.insertLast(LabelData("ModInspector", inspector_title_pos, vec3(1, 1, 1)));
+			inspector_labels.insertLast(LabelData("Details", details_title_pos, vec3(1, 1, 1)));
+			inspector_labels.insertLast(LabelData("Description", description_title_pos, vec3(1, 1, 1)));
 
 			if(remote_mods.size() > 0){
-				labels.insertLast(LabelData(remote_mods[selected_mod].name, mod_title_pos, vec3(1, 1, 1)));
+				inspector_labels.insertLast(LabelData(remote_mods[selected_mod].name, mod_title_pos, vec3(1, 1, 1)));
+			}
+
+			ImGui_EndChild();
+
+			ImGui_SetNextWindowPos(p);
+			ImGui_BeginChild("InspectorLabels", size, false, ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_AlwaysUseWindowPadding);
+
+			for(uint i = 0; i < inspector_labels.size(); i++){
+				ImDrawList_AddRectFilled(inspector_labels[i].position - vec2(extra_label_width, 0.0), inspector_labels[i].position + ImGui_CalcTextSize(inspector_labels[i].text) + vec2(extra_label_width, 0.0), ImGui_GetColorU32(background_color));
+				ImDrawList_AddText(inspector_labels[i].position, ImGui_GetColorU32(inspector_labels[i].color), inspector_labels[i].text);
 			}
 
 		}else if(tab == logger){
 			ImGui_InputTextMultiline("Log", vec2(-1.0, ImGui_GetWindowHeight() - 120.0), ImGuiInputTextFlags_ReadOnly);
 			ImGui_Text(progress_text);
 		}
-
-		vec2 tab_size = vec2(ImGui_GetWindowWidth() / 2.0 - 13.0, 25.0);
-
-		if(ImGui_Selectable("Downloads", tab == download, 0, tab_size)){
-			tab = download;
-		}
-		ImGui_SameLine();
-		if(ImGui_Selectable("Log", tab == logger, 0, tab_size)){
-			tab = logger;
-		}
-
-		ImGui_SetNextWindowSize(size);
-		ImGui_SetNextWindowPos(p);
-		ImGui_BeginChild("Labels", size, true, ImGuiWindowFlags_NoInputs);
-
-		float extra_width = 5.0f;
-		for(uint i = 0; i < labels.size(); i++){
-			ImDrawList_AddRectFilled(labels[i].position - vec2(extra_width, 0.0), labels[i].position + ImGui_CalcTextSize(labels[i].text) + vec2(extra_width, 0.0), ImGui_GetColorU32(background_color));
-			ImDrawList_AddText(labels[i].position, ImGui_GetColorU32(labels[i].color), labels[i].text);
-		}
-
+		ImGui_EndChild();
 		ImGui_EndChild();
 
 		ImGui_End();
