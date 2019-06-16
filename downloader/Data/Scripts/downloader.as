@@ -16,6 +16,7 @@ float progress_interval_timer = 0.0;
 bool downloading = false;
 string progress_text = "";
 int selected_mod = 0;
+int new_selected_mod = 0;
 
 const string code_404 = "HTTP/1.1 404 ERROR ";
 const string code_200 = "HTTP/1.1 200 OK\r";
@@ -154,11 +155,13 @@ class LabelData{
 	string text;
 	vec2 position;
 	vec3 color;
+	vec4 background_color;
 
-	LabelData(string text, vec2 position, vec3 color){
+	LabelData(string text, vec2 position, vec3 color, vec4 background_color){
 		this.text = text;
 		this.position = position;
 		this.color = color;
+		this.background_color = background_color;
 	}
 }
 
@@ -180,6 +183,9 @@ void Update(int paused){
 	}else if(download_queue.size() > 0){
 		@current_download = @download_queue[0];
 		StartDownload();
+	}
+	if(new_selected_mod != selected_mod){
+		selected_mod = new_selected_mod;
 	}
 	UpdateNotification();
 }
@@ -336,7 +342,14 @@ void DrawGUI(){
 				if(selected_mod == int(i)){
 					ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, item_hovered);
 				}
+
 				ImGui_BeginChild(remote_mods[i].id, mod_button_size, true, ImGuiWindowFlags_NoScrollWithMouse);
+				if(selected_mod != int(i) && ImGui_IsMouseHoveringWindow()){
+					if(ImGui_IsMouseClicked(0)){
+						new_selected_mod = int(i);
+					}
+				}
+
 				size.x = ImGui_GetWindowWidth();
 				p.x = ImGui_GetWindowPos().x;
 				name_title_pos = ImGui_GetCursorScreenPos() + vec2(20.0, -15.0);
@@ -359,7 +372,7 @@ void DrawGUI(){
 
 				ImGui_EndChild();
 
-				mod_list_labels.insertLast(LabelData(remote_mods[i].name + " - " + remote_mods[i].author, name_title_pos, remote_mods[i].is_enabled?vec3(0.65, 1, 0.65):vec3(1, 1, 1)));
+				mod_list_labels.insertLast(LabelData(remote_mods[i].name + " - " + remote_mods[i].author, name_title_pos, remote_mods[i].is_enabled?vec3(0.65, 1, 0.65):vec3(1, 1, 1), background_color));
 			}
 
 			ImGui_EndChild();
@@ -368,7 +381,9 @@ void DrawGUI(){
 			ImGui_BeginChild("ModListLabels", size, false, ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoScrollbar);
 
 			for(uint i = 0; i < mod_list_labels.size(); i++){
-				ImDrawList_AddRectFilled(mod_list_labels[i].position - vec2(extra_label_width, 0.0), mod_list_labels[i].position + ImGui_CalcTextSize(mod_list_labels[i].text) + vec2(extra_label_width, 0.0), ImGui_GetColorU32(background_color));
+				vec2 text_size = ImGui_CalcTextSize(mod_list_labels[i].text);
+				text_size.y /= 1.7;
+				ImDrawList_AddRectFilled(mod_list_labels[i].position - vec2(extra_label_width, 0.0), mod_list_labels[i].position + text_size + vec2(extra_label_width, 0.0), ImGui_GetColorU32(mod_list_labels[i].background_color));
 				ImDrawList_AddText(mod_list_labels[i].position, ImGui_GetColorU32(mod_list_labels[i].color), mod_list_labels[i].text);
 			}
 
@@ -382,10 +397,7 @@ void DrawGUI(){
 			p = ImGui_GetCursorScreenPos() - vec2(8.0, 20.0);
 			size = ImGui_GetWindowSize() + vec2(0.0, 12.0);
 
-			vec2 inspector_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
-			vec2 details_title_pos;
-			vec2 description_title_pos;
-			vec2 mod_title_pos;
+			inspector_labels.insertLast(LabelData("ModInspector", ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
 			if(remote_mods.size() > 0){
 				float section_height = ImGui_GetWindowHeight() - 10.0;
@@ -397,7 +409,8 @@ void DrawGUI(){
 				ImGui_EndChild();
 
 				ImGui_BeginChild("Install", vec2(-1.0, 40.0), true, ImGuiWindowFlags_NoScrollWithMouse);
-				mod_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
+				inspector_labels.insertLast(LabelData(remote_mods[selected_mod].name, ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
+
 				ImGui_Spacing();
 
 				if(!remote_mods[selected_mod].is_installed){
@@ -426,7 +439,7 @@ void DrawGUI(){
 				ImGui_Spacing();
 
 				ImGui_BeginChild("Details", vec2(-1, 70.0), true, ImGuiWindowFlags_NoScrollWithMouse);
-				details_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
+				inspector_labels.insertLast(LabelData("Details", ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
 				ImGui_Columns(2, false);
 
@@ -443,19 +456,10 @@ void DrawGUI(){
 				ImGui_Spacing();
 
 				ImGui_BeginChild("Description", vec2(-1.0, -1.0), true, ImGuiWindowFlags_NoScrollWithMouse);
-				description_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
+				inspector_labels.insertLast(LabelData("Description", ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
 				ImGui_TextWrapped(remote_mods[selected_mod].description);
 				ImGui_EndChild();
-
-			}
-
-			inspector_labels.insertLast(LabelData("ModInspector", inspector_title_pos, vec3(1, 1, 1)));
-			inspector_labels.insertLast(LabelData("Details", details_title_pos, vec3(1, 1, 1)));
-			inspector_labels.insertLast(LabelData("Description", description_title_pos, vec3(1, 1, 1)));
-
-			if(remote_mods.size() > 0){
-				inspector_labels.insertLast(LabelData(remote_mods[selected_mod].name, mod_title_pos, vec3(1, 1, 1)));
 			}
 
 			ImGui_EndChild();
@@ -464,7 +468,7 @@ void DrawGUI(){
 			ImGui_BeginChild("InspectorLabels", size, false, ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_AlwaysUseWindowPadding);
 
 			for(uint i = 0; i < inspector_labels.size(); i++){
-				ImDrawList_AddRectFilled(inspector_labels[i].position - vec2(extra_label_width, 0.0), inspector_labels[i].position + ImGui_CalcTextSize(inspector_labels[i].text) + vec2(extra_label_width, 0.0), ImGui_GetColorU32(background_color));
+				ImDrawList_AddRectFilled(inspector_labels[i].position - vec2(extra_label_width, 0.0), inspector_labels[i].position + ImGui_CalcTextSize(inspector_labels[i].text) + vec2(extra_label_width, 0.0), ImGui_GetColorU32(inspector_labels[i].background_color));
 				ImDrawList_AddText(inspector_labels[i].position, ImGui_GetColorU32(inspector_labels[i].color), inspector_labels[i].text);
 			}
 			ImGui_EndChild();
