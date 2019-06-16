@@ -8,11 +8,14 @@ float notification_slide = 0.0;
 float notification_timer = 5.0;
 string notification_text = "";
 array<string> notification_queue;
+tabs tab = download;
+array<RemoteMod@> remote_mods;
 
 bool post_init_done = false;
 float progress_interval_timer = 0.0;
 bool downloading = false;
 string progress_text = "";
+int selected_mod = 0;
 
 const string code_404 = "HTTP/1.1 404 ERROR ";
 const string code_200 = "HTTP/1.1 200 OK\r";
@@ -21,19 +24,96 @@ array<Download@> download_queue;
 Download@ current_download;
 TextureAssetRef image = LoadTexture("Data/UI/spawner/thumbs/Hotspot/empty.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef star = LoadTexture("Data/UI/star_filled.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+TextureAssetRef default_thumbnail = LoadTexture("Data/Textures/ui/menus/main/icon-x.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
-vec4 background_color(0.25, 0.25, 0.25, 0.98);
+vec4 background_color(0.25, 0.25, 0.25, 1.0);
 vec4 titlebar_color(0.15, 0.15, 0.15, 0.98);
 vec4 item_hovered(0.2, 0.2, 0.2, 0.98);
 vec4 item_clicked(0.1, 0.1, 0.1, 0.98);
 vec4 text_color(0.7, 0.7, 0.7, 1.0);
 
-enum download_types {
+enum tabs 	{
+				download = 0,
+				logger = 1
+			};
+
+enum download_types	{
 						file = 0,
-						directory = 1
+						directory = 1,
+						mod_list = 2,
+						thumbnail = 3
 					};
+
+class RemoteMod{
+	string name = "";
+	string id = "";
+	string version = "";
+	string author = "";
+	string remote_thumbnail_path = "";
+	string local_thumbnail_path = "";
+	TextureAssetRef thumbnail;
+	string description = "";
+	bool is_installed = false;
+	bool is_enabled = false;
+	bool has_mod_id = false;
+	bool can_activate = false;
+	ModID mod_id;
+
+	RemoteMod(string name, string id, string version, string author, string thumbnail_path, string description){
+		this.name = name;
+		this.id = id;
+		this.version = version;
+		this.author = author;
+		this.remote_thumbnail_path = thumbnail_path;
+		this.description = description;
+
+		array<string> split_path = remote_thumbnail_path.split("/");
+		local_thumbnail_path = "Data/Downloads/Thumbnails/" + split_path[split_path.size() - 1];
+
+		if(FileExists(local_thumbnail_path)){
+			ReloadThumbnail();
+		}else{
+			QueueDownload("107.173.129.154/downloader/" + remote_thumbnail_path, this);
+			thumbnail = default_thumbnail;
+		}
+
+		array<ModID>all_mods = GetModSids();
+		for(uint i = 0; i < all_mods.size(); i++){
+			if(ModGetID(all_mods[i]) == id){
+				mod_id = all_mods[i];
+				has_mod_id = true;
+				break;
+			}
+		}
+		UpdateStatus();
+	}
+
+	void UpdateStatus(){
+		if(has_mod_id){
+			is_installed = true;
+			if(ModIsActive(mod_id)){
+				is_enabled = true;
+			}else{
+				is_enabled = false;
+			}
+			if(ModCanActivate(mod_id)){
+				can_activate = true;
+			}else{
+				can_activate = false;
+			}
+		}else{
+			is_installed = false;
+		}
+	}
+
+	void ReloadThumbnail(){
+		if(FileExists(local_thumbnail_path)){
+			thumbnail = LoadTexture(local_thumbnail_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+		}
+	}
+}
 
 class Download{
 	array<uint8> raw_data;
@@ -50,15 +130,35 @@ class Download{
 	int packet_size = 0;
 	float download_timer = 0.0;
 	download_types download_type;
+	RemoteMod@ target;
 
-	Download(string full_address){
+	Download(string full_address, RemoteMod@ target){
+		@this.target = @target;
 		this.full_address = full_address;
+
+		array<string> split_address = full_address.split("/");
 		//If the name ends with / then it's a subdirectory.
-		if(full_address.substr(full_address.length() -1, 1) == "/"){
+		if(@target != null){
+			download_type = thumbnail;
+		}else if(full_address.substr(full_address.length() -1, 1) == "/"){
 			download_type = directory;
+		}else if(split_address[split_address.length() -1] == "mod_list.json"){
+			download_type = mod_list;
 		}else{
 			download_type = file;
 		}
+	}
+}
+
+class LabelData{
+	string text;
+	vec2 position;
+	vec3 color;
+
+	LabelData(string text, vec2 position, vec3 color){
+		this.text = text;
+		this.position = position;
+		this.color = color;
 	}
 }
 
@@ -164,27 +264,191 @@ void DrawGUI(){
 
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
 		ImGui_SetNextWindowPos(vec2(100.0f, 100.0f), ImGuiSetCond_FirstUseEver);
-		ImGui_Begin("Downloader " + "###Downloader", show, ImGuiWindowFlags_MenuBar);
-		ImGui_PopStyleVar();
+		ImGui_Begin("Downloader " + "###Downloader", show, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui_PopStyleVar(1);
 
-		if(ImGui_BeginMenuBar()){
-			/* if(ImGui_BeginMenu("Add")){
+		vec2 p = ImGui_GetCursorScreenPos() - vec2(10.0, 10.0);
+		vec2 size = ImGui_GetWindowSize() - vec2(0.0, 0.0);
+
+		/* ImGui_BeginChild("Child", vec2(200, 200), true, ImGuiWindowFlags_NoScrollbar);
+		ImGui_Image(default_thumbnail, vec2(500,500));
+		ImGui_EndChild(); */
+
+		/* if(ImGui_BeginMenuBar()){
+			if(ImGui_BeginMenu("Add")){
 				ImGui_EndMenu();
-			} */
+			}
 			if(ImGui_Button("Start Download")){
 				QueueDownload("107.173.129.154/moonwards/fary.jpg");
 			}
 			ImGui_EndMenuBar();
+		} */
+
+		ImGui_Spacing();
+
+		vec2 cursor_pos = ImGui_GetCursorScreenPos();
+		array<LabelData@> labels;
+
+		if(tab == download){
+			ImGui_BeginChild("ModList", vec2(ImGui_GetWindowWidth() / 2.0 - 13.0, ImGui_GetWindowHeight() - 90.0), true);
+
+			vec2 mod_button_size = vec2(ImGui_GetWindowWidth() - 15.0, 125.0f);
+
+			for(uint i = 0; i < remote_mods.size(); i++){
+
+				vec2 name_title_pos;
+				ImGui_Spacing();
+				if(selected_mod == int(i)){
+					ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, item_hovered);
+				}
+				ImGui_BeginChild(remote_mods[i].id, mod_button_size, true, ImGuiWindowFlags_NoScrollWithMouse);
+				name_title_pos = ImGui_GetCursorScreenPos() + vec2(20.0, -15.0);
+
+				if(selected_mod == int(i)){
+					ImGui_PopStyleColor();
+				}
+				ImGui_Spacing();
+				ImGui_Spacing();
+
+				/* if(ImGui_Selectable("###" + remote_mods[i].name, selected_mod == int(i), 0, vec2(ImGui_GetWindowWidth() - 20.0, 100.0f))){
+					selected_mod = int(i);
+				} */
+
+				ImGui_SameLine();
+
+				/* ImGui_IsMouseHoveringWindow */
+
+
+				ImGui_Columns(2, false);
+
+				ImGui_SetColumnWidth(0, 115);
+
+				ImGui_Image(remote_mods[i].thumbnail, vec2(100, 100));
+				ImGui_NextColumn();
+				/* ImGui_SameLine(); */
+				ImGui_TextWrapped(remote_mods[i].description);
+
+				ImGui_EndChild();
+
+				labels.insertLast(LabelData(remote_mods[i].name + " - " + remote_mods[i].author, name_title_pos, remote_mods[i].is_enabled?vec3(0.75, 1, 0.75):vec3(1, 1, 1)));
+
+				/* ImGui_BeginChild("Title" + remote_mods[i].name);
+				ImDrawList_AddText(name_title_pos, ImGui_GetColorU32(), remote_mods[i].name + " - " + remote_mods[i].author);
+				ImGui_EndChild(); */
+
+				/* ImGui_Spacing(); */
+			}
+
+			ImGui_EndChild();
+
+			ImGui_SameLine();
+
+			ImGui_BeginChild("ModInspector", vec2(ImGui_GetWindowWidth() / 2.0 - 13.0, ImGui_GetWindowHeight() - 90.0), true);
+
+			vec2 inspector_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
+			vec2 details_title_pos;
+			vec2 description_title_pos;
+			vec2 mod_title_pos;
+
+			if(remote_mods.size() > 0){
+				float section_height = ImGui_GetWindowHeight() - 8.0;
+
+				ImGui_BeginChild("Thumbnail", vec2(-1, section_height / 3.0), false, ImGuiWindowFlags_NoScrollWithMouse);
+				float image_height = section_height / 3.0 - 10.0f;
+				ImGui_Indent(ImGui_GetWindowWidth() / 2.0f - (section_height / 3.0));
+				ImGui_Image(remote_mods[selected_mod].thumbnail, vec2(image_height * 2.0f, image_height));
+				ImGui_EndChild();
+
+				ImGui_BeginChild("Install", vec2(-1, section_height / 12.0), true, ImGuiWindowFlags_NoScrollWithMouse);
+				mod_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
+				ImGui_Spacing();
+
+				if(!remote_mods[selected_mod].is_installed){
+					ImGui_Button("Install");
+				}else{
+					ImGui_Button("UnInstall");
+					ImGui_SameLine();
+					if(remote_mods[selected_mod].is_enabled){
+						if(ImGui_Button("Disable")){
+							bool succes = ModActivation(remote_mods[selected_mod].mod_id, false);
+							Log(warning, "Disable " + succes);
+							remote_mods[selected_mod].UpdateStatus();
+						}
+					}else{
+						if(remote_mods[selected_mod].can_activate){
+							if(ImGui_Button("Enable")){
+								ModActivation(remote_mods[selected_mod].mod_id, true);
+								remote_mods[selected_mod].UpdateStatus();
+							}
+						}else{
+							ImGui_TextDisabled("Enable");
+						}
+					}
+				}
+				ImGui_EndChild();
+				ImGui_Spacing();
+
+				ImGui_BeginChild("Details", vec2(-1, section_height / 5.0), true, ImGuiWindowFlags_NoScrollWithMouse);
+				details_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
+
+				ImGui_Columns(2, false);
+
+				ImGui_Text("Author : " + remote_mods[selected_mod].author);
+				ImGui_Text("ID : " + remote_mods[selected_mod].id);
+				ImGui_Text("Version : " + remote_mods[selected_mod].version);
+
+				ImGui_NextColumn();
+
+				ImGui_Text("Status : " + "Not installed");
+				ImGui_Text("Downloads : " + "12");
+
+				ImGui_EndChild();
+				ImGui_Spacing();
+
+				ImGui_BeginChild("Description", vec2(-1, section_height / 3.0), true, ImGuiWindowFlags_NoScrollWithMouse);
+				description_title_pos = ImGui_GetWindowPos() + vec2(20.0, -7.0);
+
+				ImGui_TextWrapped(remote_mods[selected_mod].description);
+				ImGui_EndChild();
+
+			}
+
+			ImGui_EndChild();
+
+			labels.insertLast(LabelData("ModInspector", inspector_title_pos, vec3(1, 1, 1)));
+			labels.insertLast(LabelData("Details", details_title_pos, vec3(1, 1, 1)));
+			labels.insertLast(LabelData("Description", description_title_pos, vec3(1, 1, 1)));
+
+			if(remote_mods.size() > 0){
+				labels.insertLast(LabelData(remote_mods[selected_mod].name, mod_title_pos, vec3(1, 1, 1)));
+			}
+
+		}else if(tab == logger){
+			ImGui_InputTextMultiline("Log", vec2(-1.0, ImGui_GetWindowHeight() - 120.0), ImGuiInputTextFlags_ReadOnly);
+			ImGui_Text(progress_text);
 		}
 
-		/* ImGui_TextWrapped(log_data); */
-		if(ImGui_InputTextMultiline("Log", vec2(-1.0, ImGui_GetWindowHeight() - 300), ImGuiInputTextFlags_ReadOnly)){
+		vec2 tab_size = vec2(ImGui_GetWindowWidth() / 2.0 - 13.0, 25.0);
 
+		if(ImGui_Selectable("Downloads", tab == download, 0, tab_size)){
+			tab = download;
+		}
+		ImGui_SameLine();
+		if(ImGui_Selectable("Log", tab == logger, 0, tab_size)){
+			tab = logger;
 		}
 
-		ImGui_Text(progress_text);
+		ImGui_SetNextWindowSize(size);
+		ImGui_SetNextWindowPos(p);
+		ImGui_BeginChild("Labels", size, true, ImGuiWindowFlags_NoInputs);
 
-		ImGui_Image(image, vec2(300, 200));
+		float extra_width = 5.0f;
+		for(uint i = 0; i < labels.size(); i++){
+			ImDrawList_AddRectFilled(labels[i].position - vec2(extra_width, 0.0), labels[i].position + ImGui_CalcTextSize(labels[i].text) + vec2(extra_width, 0.0), ImGui_GetColorU32(background_color));
+			ImDrawList_AddText(labels[i].position, ImGui_GetColorU32(labels[i].color), labels[i].text);
+		}
+
+		ImGui_EndChild();
 
 		ImGui_End();
 	}
@@ -193,11 +457,13 @@ void DrawGUI(){
 		ImGui_SetNextWindowSize(vec2(300.0f, 125.0f), ImGuiSetCond_Always);
 		ImGui_SetNextWindowPos(vec2(GetScreenWidth() - notification_slide, GetScreenHeight() - 150.0f), ImGuiSetCond_Always);
 
+		ImGui_PushStyleVar(ImGuiStyleVar_Alpha, 0.5f);
 		ImGui_Begin("Notification " + "###Notification", show_notification, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
 		ImGui_Image(star, vec2(100, 100));
 		ImGui_SameLine();
 		ImGui_TextWrapped(notification_text);
 		ImGui_End();
+		ImGui_PopStyleVar();
 	}
 
 	if(show || show_notification){
@@ -218,12 +484,12 @@ void PostInit(){
 	/* QueueDownload("107.173.129.154/moonwards/updates.json"); */
 	/* QueueDownload("107.173.129.154/moonwards/steppes.jpg"); */
 	/* QueueDownload("107.173.129.154/downloader/fary.jpg"); */
-	QueueDownload("107.173.129.154/downloader/");
+	QueueDownload("107.173.129.154/downloader/mod_list.json");
 	/* QueueDownload("raw.githubusercontent.com/Gyrth/OGMods/drika_hotspot/drika_hotspot/Data/Scripts/Hotspots/drika_element.as"); */
 }
 
-void QueueDownload(string full_address){
-	download_queue.insertLast(Download(full_address));
+void QueueDownload(string full_address, RemoteMod@ target = null){
+	download_queue.insertLast(Download(full_address, target));
 }
 
 void StartDownload(){
@@ -293,14 +559,35 @@ void IncomingTCPData(uint socket, array<uint8>@ data) {
 			TCPLog("-----------------------------------------------");
 			UpdateProgressBar();
 
-			if(current_download.download_type == file){
+			if(current_download.download_type == thumbnail){
+				ShowNotification("Thumbnail download done : \n" + current_download.full_address);
+				WriteDownloadedFile("Data/Downloads/Thumbnails/");
+				current_download.target.ReloadThumbnail();
+			}else if(current_download.download_type == file){
 				ShowNotification("Download done : \n" + current_download.full_address);
-				WriteDownloadedFile();
+				WriteDownloadedFile("Data/Downloads/");
 			}else if(current_download.download_type == directory){
 				DownloadFilesInDirectory();
+			}else if(current_download.download_type == mod_list){
+				ReadModList();
 			}
 			ClearDownload();
 		}
+	}
+}
+
+void ReadModList(){
+	JSON json;
+	json.parseString(GetString(current_download.raw_data));
+
+	JSONValue root = json.getRoot();
+	array<string> array_members = root.getMemberNames();
+
+	for(uint i = 0; i < array_members.size(); i++){
+		JSONValue mod_data = root[array_members[i]];
+
+		RemoteMod remote_mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString());
+		remote_mods.insertLast(@remote_mod);
 	}
 }
 
@@ -413,7 +700,7 @@ array<string> ExtractStringBetween(string source, string first_string, string se
 	return result;
 }
 
-void WriteDownloadedFile(){
+void WriteDownloadedFile(string folder){
 	StartWriteFile();
 
 	for(uint i = 0; i < current_download.raw_data.size(); i++){
@@ -422,7 +709,7 @@ void WriteDownloadedFile(){
 		AddFileString(s);
 	}
 
-	string save_file = "Data/Downloads/" + current_download.file_name + "." + current_download.file_extention;
+	string save_file = folder + current_download.file_name + "." + current_download.file_extention;
 	WriteFileToWriteDir(save_file);
 
 	if(current_download.file_extention == "png" || current_download.file_extention == "jpg"){
