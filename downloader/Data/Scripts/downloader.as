@@ -9,7 +9,6 @@ float notification_timer = 5.0;
 string notification_text = "";
 array<string> notification_queue;
 tabs tab = download;
-tabs new_tab = download;
 array<RemoteMod@> remote_mods;
 
 bool post_init_done = false;
@@ -182,9 +181,6 @@ void Update(int paused){
 		@current_download = @download_queue[0];
 		StartDownload();
 	}
-	if(new_tab != tab){
-		tab = new_tab;
-	}
 	UpdateNotification();
 }
 
@@ -288,13 +284,13 @@ void DrawGUI(){
 		//Create the tabs at the top.
 		vec2 tab_size = vec2(ImGui_GetWindowWidth() / 2.0 - 8.0, 20.0);
 
-		/* ImGui_PushStyleColor(ImGuiCol_Header, vec4(0));
+		ImGui_PushStyleColor(ImGuiCol_Header, vec4(0));
 		ImGui_PushStyleColor(ImGuiCol_HeaderHovered, vec4(0));
-		ImGui_PushStyleColor(ImGuiCol_HeaderActive, vec4(0)); */
+		ImGui_PushStyleColor(ImGuiCol_HeaderActive, vec4(0));
 
 		vec2 starting_position = ImGui_GetCursorScreenPos();
 
-		/* ImDrawList_AddRectFilled(starting_position, starting_position + tab_size, ImGui_GetColorU32(tab == download?titlebar_color:item_hovered), 10.0f, ImDrawCornerFlags_Top); */
+		ImDrawList_AddRectFilled(starting_position, starting_position + tab_size, ImGui_GetColorU32(tab == download?titlebar_color:item_hovered), 10.0f, ImDrawCornerFlags_Top);
 		if(ImGui_Selectable("###Downloads", (tab == download), 0, tab_size) && tab != download){
 			tab = download;
 		}
@@ -303,14 +299,14 @@ void DrawGUI(){
 		ImGui_SameLine();
 
 		starting_position += vec2(tab_size.x, 0.0f);
-		/* ImDrawList_AddRectFilled(starting_position, starting_position + tab_size, ImGui_GetColorU32(tab == logger?titlebar_color:item_hovered), 10.0f, ImDrawCornerFlags_Top); */
+		ImDrawList_AddRectFilled(starting_position, starting_position + tab_size, ImGui_GetColorU32(tab == logger?titlebar_color:item_hovered), 10.0f, ImDrawCornerFlags_Top);
 		if(ImGui_Selectable("###Log", (tab == logger), 0, tab_size) && tab != logger){
 			tab = logger;
 		}
 		vec2 log_label_center_position = starting_position + vec2(tab_size.x / 2.0f, tab_size.y / 2.0f) - ImGui_CalcTextSize("Log") / 2.0f;
 		ImDrawList_AddText(log_label_center_position, ImGui_GetColorU32(text_color), "Log");
 
-		/* ImGui_PopStyleColor(3); */
+		ImGui_PopStyleColor(3);
 
 		//Create the main window in which everything is shown.
 		ImGui_Spacing();
@@ -471,12 +467,12 @@ void DrawGUI(){
 				ImDrawList_AddRectFilled(inspector_labels[i].position - vec2(extra_label_width, 0.0), inspector_labels[i].position + ImGui_CalcTextSize(inspector_labels[i].text) + vec2(extra_label_width, 0.0), ImGui_GetColorU32(background_color));
 				ImDrawList_AddText(inspector_labels[i].position, ImGui_GetColorU32(inspector_labels[i].color), inspector_labels[i].text);
 			}
+			ImGui_EndChild();
 
 		}else if(tab == logger){
 			ImGui_InputTextMultiline("Log", vec2(-1.0, ImGui_GetWindowHeight() - 120.0), ImGuiInputTextFlags_ReadOnly);
 			ImGui_Text(progress_text);
 		}
-		ImGui_EndChild();
 		ImGui_EndChild();
 
 		ImGui_End();
