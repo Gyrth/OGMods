@@ -371,8 +371,14 @@ void DrawGUI(){
 				ImGui_TextWrapped(remote_mods[i].description);
 
 				ImGui_EndChild();
+				vec3 text_color = vec3(1, 1, 1);
+				if(remote_mods[i].is_enabled){
+					text_color = vec3(0.65, 1, 0.65);
+				}else if(!remote_mods[i].can_activate){
+					text_color = vec3(1, 0.65, 0.65);
+				}
 
-				mod_list_labels.insertLast(LabelData(remote_mods[i].name + " - " + remote_mods[i].author, name_title_pos, remote_mods[i].is_enabled?vec3(0.65, 1, 0.65):vec3(1, 1, 1), background_color));
+				mod_list_labels.insertLast(LabelData(remote_mods[i].name + " - " + remote_mods[i].author, name_title_pos, text_color, background_color));
 			}
 
 			ImGui_EndChild();
