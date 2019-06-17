@@ -333,37 +333,6 @@ void DrawGUI(){
 		ImGui_Spacing();
 		ImGui_BeginChild("MainWindow", vec2(-1.0, -1.0f), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
-		//Add the searchbar.
-		ImGui_SetNextWindowPos(ImGui_GetCursorScreenPos() + vec2(ImGui_GetWindowWidth() / 8.0, 0.0));
-		ImGui_BeginChild("Searchbar", vec2(ImGui_GetWindowWidth() / 4.0, 25.0f), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
-
-		ImGui_PushItemWidth(50);
-		ImGui_LabelText("###Search:", "Search:");
-		ImGui_SameLine();
-		ImGui_PushItemWidth(-1);
-		if(ImGui_InputText("##Search:", search_string, 64, ImGuiInputTextFlags_AutoSelectAll)){
-			SearchMods(search_string);
-		}
-
-		if(search_string != ""){
-			ImGui_SameLine();
-			vec2 empty_button_start = ImGui_GetCursorScreenPos();
-			empty_button_start.x -= 28.0;
-
-			ImGui_SetNextWindowPos(empty_button_start);
-			ImGui_BeginChild("EmptyButton", vec2(20.0, 20.0), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
-
-			if(ImGui_InvisibleButton("EmptyButton", vec2(20.0, 20.0))){
-				search_string = "";
-			}
-			ImDrawList_AddRectFilled(empty_button_start + vec2(2.0, 2.0), empty_button_start + vec2(18.0, 18.0), ImGui_GetColorU32(item_hovered), ImDrawCornerFlags_All);
-			ImDrawList_AddText(empty_button_start + vec2(7.0, 3.0), ImGui_GetColorU32(text_color), "x");
-
-			ImGui_EndChild();
-		}
-
-		ImGui_EndChild();
-
 		float extra_label_width = 5.0f;
 		vec2 p;
 		vec2 size;
@@ -379,6 +348,38 @@ void DrawGUI(){
 		}
 
 		if(tab == download){
+			//Add the searchbar.
+			ImGui_SetNextWindowPos(ImGui_GetCursorScreenPos() + vec2(ImGui_GetWindowWidth() / 8.0, 0.0));
+			ImGui_BeginChild("Searchbar", vec2(ImGui_GetWindowWidth() / 4.0, 25.0f), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+			ImGui_PushItemWidth(50);
+			ImGui_LabelText("###Search:", "Search:");
+			ImGui_SameLine();
+			ImGui_PushItemWidth(-1);
+			ImGui_SetTextBuf(search_string);
+			if(ImGui_InputText("##Search:", search_string, 64, ImGuiInputTextFlags_AutoSelectAll)){
+				SearchMods(search_string);
+			}
+
+			if(search_string != ""){
+				ImGui_SameLine();
+				vec2 empty_button_start = ImGui_GetCursorScreenPos();
+				empty_button_start.x -= 28.0;
+
+				ImGui_SetNextWindowPos(empty_button_start);
+				ImGui_BeginChild("EmptyButton", vec2(20.0, 20.0), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+				if(ImGui_InvisibleButton("EmptyButton", vec2(20.0, 20.0))){
+					search_string = "";
+				}
+				ImDrawList_AddRectFilled(empty_button_start + vec2(2.0, 2.0), empty_button_start + vec2(18.0, 18.0), ImGui_GetColorU32(item_hovered), ImDrawCornerFlags_All);
+				ImDrawList_AddText(empty_button_start + vec2(7.0, 3.0), ImGui_GetColorU32(text_color), "x");
+
+				ImGui_EndChild();
+			}
+
+			ImGui_EndChild();
+
 			ImGui_Columns(2, false);
 			array<LabelData@> mod_list_labels;
 
@@ -534,6 +535,7 @@ void DrawGUI(){
 			ImGui_EndChild();
 
 		}else if(tab == logger){
+			ImGui_SetTextBuf(log_data);
 			ImGui_InputTextMultiline("Log", vec2(-1.0, ImGui_GetWindowHeight() - 120.0), ImGuiInputTextFlags_ReadOnly);
 			ImGui_Text(progress_text);
 		}
