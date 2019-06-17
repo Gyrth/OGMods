@@ -64,6 +64,7 @@ class ModData{
 	bool is_remote_mod = false;
 	bool is_local_mod = false;
 	ModID mod_id;
+	string error;
 
 	ModData(string name, string id, string version, string author, string thumbnail_path, string description, bool is_remote_mod = false){
 		this.name = name;
@@ -104,6 +105,7 @@ class ModData{
 			}else{
 				can_activate = false;
 			}
+			error = ModGetValidityString(mod_id);
 		}else{
 			is_installed = false;
 		}
@@ -425,7 +427,7 @@ void DrawGUI(){
 				ImGui_Image(mods[selected_mod].thumbnail, vec2(image_height * 2.0f, image_height));
 				ImGui_EndChild();
 
-				ImGui_BeginChild("Install", vec2(-1.0, 40.0), true, ImGuiWindowFlags_NoScrollWithMouse);
+				ImGui_BeginChild("Install", vec2(-1.0, mods[selected_mod].can_activate?40.0:80.0), true);
 				inspector_labels.insertLast(LabelData(mods[selected_mod].name, ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
 				ImGui_Spacing();
@@ -433,22 +435,22 @@ void DrawGUI(){
 				if(!mods[selected_mod].is_installed){
 					ImGui_Button("Install");
 				}else{
-					ImGui_Button("UnInstall");
-					ImGui_SameLine();
 					if(mods[selected_mod].is_enabled){
 						if(ImGui_Button("Disable")){
 							bool succes = ModActivation(mods[selected_mod].mod_id, false);
 							mods[selected_mod].UpdateStatus();
 						}
 					}else{
-						if(mods[selected_mod].can_activate){
+						if(!mods[selected_mod].can_activate){
+							ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
+							ImGui_TextWrapped(mods[selected_mod].error);
+							ImGui_PopStyleColor();
+						}else{
 							if(ImGui_Button("Enable")){
 								ModActivation(mods[selected_mod].mod_id, true);
 								mods[selected_mod].UpdateStatus();
 								mods[selected_mod].ReloadThumbnail();
 							}
-						}else{
-							ImGui_TextDisabled("Enable");
 						}
 					}
 				}
