@@ -334,13 +334,13 @@ void DrawGUI(){
 		ImGui_BeginChild("MainWindow", vec2(-1.0, -1.0f), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
 		//Add the searchbar.
-		ImGui_SetNextWindowPos(ImGui_GetCursorScreenPos() + vec2( + ImGui_GetWindowWidth() / 8.0, 0));
-		ImGui_BeginChild("Searchbar", vec2(ImGui_GetWindowWidth() / 2.0, 25.0f), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui_SetNextWindowPos(ImGui_GetCursorScreenPos() + vec2(ImGui_GetWindowWidth() / 8.0, 0.0));
+		ImGui_BeginChild("Searchbar", vec2(ImGui_GetWindowWidth() / 4.0, 25.0f), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
-
-		ImGui_Text("Search:");
+		ImGui_PushItemWidth(50);
+		ImGui_LabelText("###Search:", "Search:");
 		ImGui_SameLine();
-		ImGui_PushItemWidth(150.0);
+		ImGui_PushItemWidth(-1);
 		if(ImGui_InputText("##Search:", search_string, 64, ImGuiInputTextFlags_AutoSelectAll)){
 			SearchMods(search_string);
 		}
