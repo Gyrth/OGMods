@@ -565,9 +565,10 @@ void DrawGUI(){
 void SearchMods(string query){
 	search_results.resize(0);
 	new_selected_mod = 0;
+	string query_lower = ToLowerCase(query);
 
 	for(uint i = 0; i < mods.size(); i++){
-		if(mods[i].name.findFirst(query) != -1 || mods[i].id.findFirst(query) != -1 || mods[i].author.findFirst(query) != -1){
+		if(ToLowerCase(mods[i].name).findFirst(query_lower) != -1 || ToLowerCase(mods[i].id).findFirst(query_lower) != -1 || ToLowerCase(mods[i].author).findFirst(query_lower) != -1){
 			search_results.insertLast(mods[i]);
 		}
 	}
@@ -870,4 +871,20 @@ array<uint8> toByteArray(string message){
 
 void Menu(){
 	ImGui_Checkbox("Show Download UI", show);
+}
+
+string ToLowerCase(string input){
+	string output;
+	for(uint i = 0; i < input.length(); i++){
+		if(input[i] >= 65 &&  input[i] <= 90){
+			string lower_case('0');
+			lower_case[0] = input[i] + 32;
+			output += lower_case;
+		}else{
+			string new_character('0');
+			new_character[0] = input[i];
+			output += new_character;
+		}
+	}
+	return output;
 }
