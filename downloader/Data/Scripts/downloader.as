@@ -10,6 +10,8 @@ string notification_text = "";
 array<string> notification_queue;
 tabs tab = download;
 array<ModData@> mods;
+array<ModData@> search_results;
+string search_string = "";
 
 bool post_init_done = false;
 float progress_interval_timer = 0.0;
@@ -331,11 +333,50 @@ void DrawGUI(){
 		ImGui_Spacing();
 		ImGui_BeginChild("MainWindow", vec2(-1.0, -1.0f), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
+		//Add the searchbar.
+		ImGui_SetNextWindowPos(ImGui_GetCursorScreenPos() + vec2( + ImGui_GetWindowWidth() / 8.0, 0));
+		ImGui_BeginChild("Searchbar", vec2(ImGui_GetWindowWidth() / 2.0, 25.0f), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+
+		ImGui_Text("Search:");
+		ImGui_SameLine();
+		ImGui_PushItemWidth(150.0);
+		if(ImGui_InputText("##Search:", search_string, 64, ImGuiInputTextFlags_AutoSelectAll)){
+			SearchMods(search_string);
+		}
+
+		if(search_string != ""){
+			ImGui_SameLine();
+			vec2 empty_button_start = ImGui_GetCursorScreenPos();
+			empty_button_start.x -= 28.0;
+
+			ImGui_SetNextWindowPos(empty_button_start);
+			ImGui_BeginChild("EmptyButton", vec2(20.0, 20.0), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+			if(ImGui_InvisibleButton("EmptyButton", vec2(20.0, 20.0))){
+				search_string = "";
+			}
+			ImDrawList_AddRectFilled(empty_button_start + vec2(2.0, 2.0), empty_button_start + vec2(18.0, 18.0), ImGui_GetColorU32(item_hovered), ImDrawCornerFlags_All);
+			ImDrawList_AddText(empty_button_start + vec2(7.0, 3.0), ImGui_GetColorU32(text_color), "x");
+
+			ImGui_EndChild();
+		}
+
+		ImGui_EndChild();
+
 		float extra_label_width = 5.0f;
 		vec2 p;
 		vec2 size;
 
 		ImGui_Spacing();
+
+		array<ModData@> @target_list;
+
+		if(search_string != ""){
+			@target_list = @search_results;
+		}else{
+			@target_list = @mods;
+		}
 
 		if(tab == download){
 			ImGui_Columns(2, false);
@@ -348,7 +389,7 @@ void DrawGUI(){
 
 			vec2 mod_button_size = vec2(-1.0, 125.0f);
 
-			for(uint i = 0; i < mods.size(); i++){
+			for(uint i = 0; i < target_list.size(); i++){
 
 				vec2 name_title_pos;
 				ImGui_Spacing();
@@ -356,7 +397,7 @@ void DrawGUI(){
 					ImGui_PushStyleColor(ImGuiCol_ChildWindowBg, item_hovered);
 				}
 
-				ImGui_BeginChild(mods[i].id, mod_button_size, true, ImGuiWindowFlags_NoScrollWithMouse);
+				ImGui_BeginChild(target_list[i].id, mod_button_size, true, ImGuiWindowFlags_NoScrollWithMouse);
 				if(selected_mod != int(i) && ImGui_IsMouseHoveringWindow()){
 					if(ImGui_IsMouseClicked(0)){
 						new_selected_mod = int(i);
@@ -379,19 +420,19 @@ void DrawGUI(){
 
 				ImGui_SetColumnWidth(0, 165);
 
-				ImGui_Image(mods[i].thumbnail, vec2(150, 100));
+				ImGui_Image(target_list[i].thumbnail, vec2(150, 100));
 				ImGui_NextColumn();
-				ImGui_TextWrapped(mods[i].description);
+				ImGui_TextWrapped(target_list[i].description);
 
 				ImGui_EndChild();
 				vec3 text_color = vec3(1, 1, 1);
-				if(mods[i].is_enabled){
+				if(target_list[i].is_enabled){
 					text_color = vec3(0.65, 1, 0.65);
-				}else if(!mods[i].can_activate){
+				}else if(!target_list[i].can_activate){
 					text_color = vec3(1, 0.65, 0.65);
 				}
 
-				mod_list_labels.insertLast(LabelData(mods[i].name + " - " + mods[i].author, name_title_pos, text_color, background_color));
+				mod_list_labels.insertLast(LabelData(target_list[i].name + " - " + target_list[i].author, name_title_pos, text_color, background_color));
 			}
 
 			ImGui_EndChild();
@@ -418,38 +459,38 @@ void DrawGUI(){
 
 			inspector_labels.insertLast(LabelData("ModInspector", ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
-			if(mods.size() > 0){
+			if(target_list.size() > 0){
 				float section_height = ImGui_GetWindowHeight() - 10.0;
 
 				ImGui_BeginChild("Thumbnail", vec2(-1.0, section_height / 3.0), false, ImGuiWindowFlags_NoScrollWithMouse);
 				float image_height = section_height / 3.0 - 10.0f;
 				ImGui_Indent(ImGui_GetWindowWidth() / 2.0f - image_height);
-				ImGui_Image(mods[selected_mod].thumbnail, vec2(image_height * 2.0f, image_height));
+				ImGui_Image(target_list[selected_mod].thumbnail, vec2(image_height * 2.0f, image_height));
 				ImGui_EndChild();
 
-				ImGui_BeginChild("Install", vec2(-1.0, mods[selected_mod].can_activate?40.0:80.0), true);
-				inspector_labels.insertLast(LabelData(mods[selected_mod].name, ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
+				ImGui_BeginChild("Install", vec2(-1.0, target_list[selected_mod].can_activate?40.0:80.0), true);
+				inspector_labels.insertLast(LabelData(target_list[selected_mod].name, ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
 				ImGui_Spacing();
 
-				if(!mods[selected_mod].is_installed){
+				if(!target_list[selected_mod].is_installed){
 					ImGui_Button("Install");
 				}else{
-					if(mods[selected_mod].is_enabled){
+					if(target_list[selected_mod].is_enabled){
 						if(ImGui_Button("Disable")){
-							bool succes = ModActivation(mods[selected_mod].mod_id, false);
-							mods[selected_mod].UpdateStatus();
+							bool succes = ModActivation(target_list[selected_mod].mod_id, false);
+							target_list[selected_mod].UpdateStatus();
 						}
 					}else{
-						if(!mods[selected_mod].can_activate){
+						if(!target_list[selected_mod].can_activate){
 							ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
-							ImGui_TextWrapped(mods[selected_mod].error);
+							ImGui_TextWrapped(target_list[selected_mod].error);
 							ImGui_PopStyleColor();
 						}else{
 							if(ImGui_Button("Enable")){
-								ModActivation(mods[selected_mod].mod_id, true);
-								mods[selected_mod].UpdateStatus();
-								mods[selected_mod].ReloadThumbnail();
+								ModActivation(target_list[selected_mod].mod_id, true);
+								target_list[selected_mod].UpdateStatus();
+								target_list[selected_mod].ReloadThumbnail();
 							}
 						}
 					}
@@ -462,9 +503,9 @@ void DrawGUI(){
 
 				ImGui_Columns(2, false);
 
-				ImGui_Text("Author : " + mods[selected_mod].author);
-				ImGui_Text("ID : " + mods[selected_mod].id);
-				ImGui_Text("Version : " + mods[selected_mod].version);
+				ImGui_Text("Author : " + target_list[selected_mod].author);
+				ImGui_Text("ID : " + target_list[selected_mod].id);
+				ImGui_Text("Version : " + target_list[selected_mod].version);
 
 				ImGui_NextColumn();
 
@@ -477,7 +518,7 @@ void DrawGUI(){
 				ImGui_BeginChild("Description", vec2(-1.0, -1.0), true, ImGuiWindowFlags_NoScrollWithMouse);
 				inspector_labels.insertLast(LabelData("Description", ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
-				ImGui_TextWrapped(mods[selected_mod].description);
+				ImGui_TextWrapped(target_list[selected_mod].description);
 				ImGui_EndChild();
 			}
 
@@ -516,6 +557,17 @@ void DrawGUI(){
 
 	if(show || show_notification){
 		ImGui_PopStyleColor(17);
+	}
+}
+
+void SearchMods(string query){
+	search_results.resize(0);
+	new_selected_mod = 0;
+
+	for(uint i = 0; i < mods.size(); i++){
+		if(mods[i].name.findFirst(query) != -1 || mods[i].id.findFirst(query) != -1 || mods[i].author.findFirst(query) != -1){
+			search_results.insertLast(mods[i]);
+		}
 	}
 }
 
