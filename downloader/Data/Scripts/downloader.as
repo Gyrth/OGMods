@@ -292,15 +292,24 @@ void DrawGUI(){
 		ImGui_Image(default_thumbnail, vec2(500,500));
 		ImGui_EndChild(); */
 
-		/* if(ImGui_BeginMenuBar()){
-			if(ImGui_BeginMenu("Add")){
+		if(ImGui_BeginMenuBar()){
+			if(ImGui_BeginMenu("Actions")){
+				if(ImGui_MenuItem("Disable All Mods")){
+					for(uint i = 0; i < mods.size(); i++){
+						ModActivation(mods[i].mod_id, false);
+						mods[i].UpdateStatus();
+					}
+				}
+				if(ImGui_MenuItem("Enable All Mods")){
+					for(uint i = 0; i < mods.size(); i++){
+						ModActivation(mods[i].mod_id, true);
+						mods[i].UpdateStatus();
+					}
+				}
 				ImGui_EndMenu();
 			}
-			if(ImGui_Button("Start Download")){
-				QueueDownload("107.173.129.154/moonwards/fary.jpg");
-			}
 			ImGui_EndMenuBar();
-		} */
+		}
 
 		//Create the tabs at the top.
 		vec2 tab_size = vec2(ImGui_GetWindowWidth() / 2.0 - 8.0, 20.0);
