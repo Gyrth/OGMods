@@ -65,16 +65,18 @@ class ModData{
 	bool can_activate = false;
 	bool is_remote_mod = false;
 	bool is_local_mod = false;
+	string source_description;
 	ModID mod_id;
 	string error;
 
-	ModData(string name, string id, string version, string author, string thumbnail_path, string description, bool is_remote_mod = false){
+	ModData(string name, string id, string version, string author, string thumbnail_path, string description, bool is_remote_mod, bool is_local_mod){
 		this.name = name;
 		this.id = id;
 		this.version = version;
 		this.author = author;
 		this.description = description;
 		this.is_remote_mod = is_remote_mod;
+		this.is_local_mod = is_local_mod;
 
 		if(is_remote_mod){
 			this.remote_thumbnail_path = thumbnail_path;
@@ -110,6 +112,14 @@ class ModData{
 			error = ModGetValidityString(mod_id);
 		}else{
 			is_installed = false;
+		}
+		if(is_local_mod){
+			source_description = "Local";
+			if(is_remote_mod){
+				source_description += " and Remote";
+			}
+		}else if(is_remote_mod){
+			source_description = "Remote";
 		}
 	}
 
@@ -520,6 +530,7 @@ void DrawGUI(){
 				ImGui_NextColumn();
 
 				ImGui_Text("Status : " + "Not installed");
+				ImGui_Text("Source : " + target_list[selected_mod].source_description);
 				ImGui_Text("Downloads : " + "12");
 
 				ImGui_EndChild();
@@ -595,7 +606,7 @@ void ReadLocalMods(){
 	array<ModID> all_mods = GetModSids();
 
 	for(uint i = 0; i < all_mods.size(); i++){
-		ModData mod(ModGetName(all_mods[i]),ModGetID(all_mods[i]), ModGetVersion(all_mods[i]), ModGetAuthor(all_mods[i]), ModGetThumbnail(all_mods[i]), ModGetDescription(all_mods[i]));
+		ModData mod(ModGetName(all_mods[i]),ModGetID(all_mods[i]), ModGetVersion(all_mods[i]), ModGetAuthor(all_mods[i]), ModGetThumbnail(all_mods[i]), ModGetDescription(all_mods[i]), false, true);
 		mods.insertLast(@mod);
 	}
 }
@@ -707,6 +718,7 @@ void ReadModList(){
 				mods[j].remote_thumbnail_path = mod_data["Thumbnail"].asString();
 				already_local = true;
 				mods[j].ReloadThumbnail();
+				mods[j].UpdateStatus();
 
 				break;
 			}
@@ -716,7 +728,7 @@ void ReadModList(){
 			continue;
 		}
 
-		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), true);
+		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), true, false);
 		mods.insertLast(@mod);
 	}
 }
