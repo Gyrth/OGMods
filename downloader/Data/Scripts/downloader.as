@@ -12,6 +12,7 @@ tabs tab = download;
 array<ModData@> mods;
 array<ModData@> search_results;
 string search_string = "";
+array<int> reload_targets;
 
 bool post_init_done = false;
 float progress_interval_timer = 0.0;
@@ -19,11 +20,11 @@ bool downloading = false;
 string progress_text = "";
 int selected_mod = 0;
 int new_selected_mod = 0;
+string server_address = "107.173.129.154/downloader/";
 
 const string code_404 = "HTTP/1.1 404 ERROR ";
 const string code_200 = "HTTP/1.1 200 OK\r";
 
-array<Download@> download_queue;
 Download@ current_download;
 TextureAssetRef image = LoadTexture("Data/UI/spawner/thumbs/Hotspot/empty.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef star = LoadTexture("Data/UI/star_filled.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
@@ -57,6 +58,7 @@ class ModData{
 	string author = "";
 	string remote_thumbnail_path = "";
 	string local_thumbnail_path = "";
+	string remote_path = "";
 	TextureAssetRef thumbnail;
 	string description = "";
 	bool is_installed = false;
@@ -65,38 +67,76 @@ class ModData{
 	bool can_activate = false;
 	bool is_remote_mod = false;
 	bool is_local_mod = false;
+	bool is_installing = false;
+	bool getting_thumbnail = false;
 	string source_description;
 	ModID mod_id;
 	string error;
+	Download@ download;
+	Download@ thumbnail_download;
 
-	ModData(string name, string id, string version, string author, string thumbnail_path, string description, bool is_remote_mod, bool is_local_mod){
+	ModData(string name, string id, string version, string author, string thumbnail_path, string description, string remote_path, bool is_remote_mod){
 		this.name = name;
 		this.id = id;
 		this.version = version;
 		this.author = author;
 		this.description = description;
 		this.is_remote_mod = is_remote_mod;
-		this.is_local_mod = is_local_mod;
+		this.remote_path = remote_path;
 
 		if(is_remote_mod){
 			this.remote_thumbnail_path = thumbnail_path;
 		}else{
 			local_thumbnail_path = thumbnail_path;
 		}
+		UpdateStatus();
 		ReloadThumbnail();
+	}
 
+	void StartDownload(){
+		if(is_installing){
+			return;
+		}
+		is_installing = true;
+		@download = Download(server_address + remote_path);
+	}
+
+	Download@ GetNextDownload(){
+		if(@thumbnail_download != null){
+			Download@ next_download = thumbnail_download.GetNextDownload();
+			if(@next_download == null){
+				@thumbnail_download = null;
+			}else{
+				return next_download;
+			}
+		}
+
+		if(@download != null){
+			Download@ next_download = download.GetNextDownload();
+			if(@next_download == null){
+				ShowNotification("Mod download done : " + name);
+				is_installing = false;
+				@download = null;
+				ReloadMods();
+				UpdateStatus();
+			}
+			return next_download;
+		}else{
+			return null;
+		}
+	}
+
+	void UpdateStatus(){
 		array<ModID>all_mods = GetModSids();
 		for(uint i = 0; i < all_mods.size(); i++){
 			if(ModGetID(all_mods[i]) == id){
+				is_local_mod = true;
 				mod_id = all_mods[i];
 				has_mod_id = true;
 				break;
 			}
 		}
-		UpdateStatus();
-	}
 
-	void UpdateStatus(){
 		if(has_mod_id){
 			is_installed = true;
 			if(ModIsActive(mod_id)){
@@ -113,6 +153,7 @@ class ModData{
 		}else{
 			is_installed = false;
 		}
+
 		if(is_local_mod){
 			source_description = "Local";
 			if(is_remote_mod){
@@ -127,13 +168,14 @@ class ModData{
 		if(is_remote_mod){
 			array<string> split_path = remote_thumbnail_path.split("/");
 			local_thumbnail_path = "Data/Downloads/Thumbnails/" + split_path[split_path.size() - 1];
-
-			if(!FileExists(local_thumbnail_path)){
-				QueueDownload(remote_thumbnail_path, this);
+			if(!FileExists(local_thumbnail_path) && @download == null){
+				getting_thumbnail = true;
+				@thumbnail_download = Download(remote_thumbnail_path, this);
 			}
 		}
 
 		if(FileExists(local_thumbnail_path)){
+			getting_thumbnail = false;
 			thumbnail = LoadTexture(local_thumbnail_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
 		}else{
 			thumbnail = default_thumbnail;
@@ -145,24 +187,28 @@ class Download{
 	array<uint8> raw_data;
 	string full_address;
 	string file_path;
+	string local_file_path;
 	string file_name;
 	string file_extention;
 	string server_address;
 	bool has_header = false;
 	bool error = false;
+	bool download_done = false;
 	string error_code = "";
 	int file_size;
 	int download_progress = 0;
 	int packet_size = 0;
 	float download_timer = 0.0;
 	download_types download_type;
+	array<Download@> download_queue;
 	ModData@ target;
 
-	Download(string full_address, ModData@ target){
-		@this.target = @target;
+	Download(string full_address, ModData@ target = null){
 		this.full_address = full_address;
+		@this.target = target;
 
 		array<string> split_address = full_address.split("/");
+		server_address = split_address[0];
 		//If the name ends with / then it's a subdirectory.
 		if(@target != null){
 			download_type = thumbnail;
@@ -173,7 +219,113 @@ class Download{
 		}else{
 			download_type = file;
 		}
+
+		for(uint i = 1; i < split_address.size(); i++){
+			file_path += "/" + split_address[i];
+		}
+
+		for(uint i = 2; i < split_address.size() - 1; i++){
+			local_file_path += "/" + split_address[i];
+		}
+
+		array<string> split_file_name = split_address[split_address.size() - 1].split(".");
+		file_name = split_file_name[0];
+		if(split_file_name.size() > 1){
+			file_extention = split_file_name[1];
+		}
 	}
+
+	Download@ GetNextDownload(){
+		if(download_queue.size() > 0){
+			Download@ next_download = download_queue[0].GetNextDownload();
+			if(@next_download == null){
+				download_queue.removeAt(0);
+				return GetNextDownload();
+			}
+			return next_download;
+		}else if(!download_done){
+			return this;
+		}else{
+			return null;
+		}
+	}
+
+	bool ReadData(array<uint8>@ data){
+		if(download_queue.size() > 0){
+			if(download_queue[0].ReadData(data)){
+				download_queue.removeAt(0);
+
+			}
+		}else if(!download_done){
+
+			for(uint i = 0; i < data.size(); i++){
+				raw_data.insertLast(data[i]);
+			}
+
+			if(!has_header){
+				//Check if the whole head has been received.
+				for(uint i = 0; i < raw_data.size() - 2; i++){
+					if(raw_data[i] == 13 && raw_data[i + 1] == 10 && raw_data[i + 2] == 13){
+						has_header = true;
+						ReadHeader(i + 4);
+						break;
+					}
+				}
+			}else if(error){
+				TCPLog("Error downloading : " + error_code);
+				TCPLog("-----------------------------------------------");
+				ClearSocket();
+				download_done = true;
+				return true;
+			}else if(has_header){
+				download_progress += data.size();
+				packet_size = data.size();
+
+				if(download_progress >= file_size){
+					//Done downloading!
+					TCPLog("Download done : " + full_address);
+					TCPLog("Download size : " + download_progress + " bytes.");
+					TCPLog("Download time : " + download_timer + " seconds.");
+					TCPLog("Download speed : " + (file_size / max(0.001, download_timer)) / 1024.0 + " kb/s.");
+					TCPLog("-----------------------------------------------");
+					UpdateProgressBar();
+					ClearSocket();
+
+					if(download_type == thumbnail){
+						WriteDownloadedFile("Data/Downloads/Thumbnails/");
+						target.ReloadThumbnail();
+					}else if(download_type == file){
+						WriteDownloadedFile("Data/Mods" + local_file_path + "/");
+					}else if(download_type == directory){
+						DownloadFilesInDirectory();
+					}else if(download_type == mod_list){
+						TCPLog("Read Mod list");
+						ReadModList();
+					}
+					download_done = true;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	void DownloadFilesInDirectory(){
+		array<string> result = ExtractStringBetween(GetString(raw_data), "<tr>", "</tr>");
+
+		TCPLog("Directory list : ");
+		int counter = 0;
+		//Skip the first 3 lines since those are headers.
+		for(uint i = 3; i < result.size(); i++){
+			array<string> file_name = ExtractStringBetween(result[i], "<a href=\"", "\">");
+			if(file_name.size() > 0){
+				TCPLog(counter + ".   " + file_name[0]);
+				download_queue.insertLast(Download(full_address + file_name[0]));
+			}
+			counter += 1;
+		}
+	}
+
 }
 
 class LabelData{
@@ -195,7 +347,7 @@ void Update(int paused){
 		PostInit();
 		post_init_done = true;
 	}
-	if(downloading){
+	if(@current_download != null){
 		progress_interval_timer += time_step;
 		current_download.download_timer += time_step;
 
@@ -205,10 +357,23 @@ void Update(int paused){
 			progress_interval_timer = 0.0;
 			UpdateProgressBar();
 		}
-	}else if(download_queue.size() > 0){
-		@current_download = @download_queue[0];
-		StartDownload();
+	}else{
+		for(uint i = 0; i < mods.size(); i++){
+			if(@mods[i].GetNextDownload() != null){
+				@current_download = mods[i].GetNextDownload();
+				TCPLog("Downloading file : " + current_download.full_address);
+				SendRequest(current_download.server_address, "GET " + current_download.file_path + " HTTP/1.1\r\nHost: " + current_download.server_address + "\r\n\r\n");
+				break;
+			}
+		}
 	}
+
+	for(uint i = 0; i < reload_targets.size(); i++){
+		mods[reload_targets[i]].UpdateStatus();
+		mods[reload_targets[i]].ReloadThumbnail();
+	}
+	reload_targets.resize(0);
+
 	if(new_selected_mod != selected_mod){
 		selected_mod = new_selected_mod;
 	}
@@ -493,24 +658,30 @@ void DrawGUI(){
 
 				ImGui_Spacing();
 
-				if(!target_list[selected_mod].is_installed){
-					ImGui_Button("Install");
+				if(target_list[selected_mod].is_installing){
+					ImGui_TextWrapped("Installing...");
 				}else{
-					if(target_list[selected_mod].is_enabled){
-						if(ImGui_Button("Disable")){
-							bool succes = ModActivation(target_list[selected_mod].mod_id, false);
-							target_list[selected_mod].UpdateStatus();
+					if(!target_list[selected_mod].is_installed){
+						if(ImGui_Button("Install")){
+							target_list[selected_mod].StartDownload();
 						}
 					}else{
-						if(!target_list[selected_mod].can_activate){
-							ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
-							ImGui_TextWrapped(target_list[selected_mod].error);
-							ImGui_PopStyleColor();
-						}else{
-							if(ImGui_Button("Enable")){
-								ModActivation(target_list[selected_mod].mod_id, true);
+						if(target_list[selected_mod].is_enabled){
+							if(ImGui_Button("Disable")){
+								bool succes = ModActivation(target_list[selected_mod].mod_id, false);
 								target_list[selected_mod].UpdateStatus();
-								target_list[selected_mod].ReloadThumbnail();
+							}
+						}else{
+							if(!target_list[selected_mod].can_activate){
+								ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
+								ImGui_TextWrapped(target_list[selected_mod].error);
+								ImGui_PopStyleColor();
+							}else{
+								if(ImGui_Button("Enable")){
+									ModActivation(target_list[selected_mod].mod_id, true);
+									target_list[selected_mod].UpdateStatus();
+									target_list[selected_mod].ReloadThumbnail();
+								}
 							}
 						}
 					}
@@ -599,51 +770,31 @@ void Init(string level_name){
 
 void PostInit(){
 	ReadLocalMods();
-	QueueDownload("107.173.129.154/downloader/mod_list.json");
+	GetRemoteMods();
+}
+
+void GetRemoteMods(){
+	@current_download = Download(server_address + "mod_list.json");
+	SendRequest(current_download.server_address, "GET " + current_download.file_path + " HTTP/1.1\r\nHost: " + current_download.server_address + "\r\n\r\n");
 }
 
 void ReadLocalMods(){
 	array<ModID> all_mods = GetModSids();
 
 	for(uint i = 0; i < all_mods.size(); i++){
-		ModData mod(ModGetName(all_mods[i]),ModGetID(all_mods[i]), ModGetVersion(all_mods[i]), ModGetAuthor(all_mods[i]), ModGetThumbnail(all_mods[i]), ModGetDescription(all_mods[i]), false, true);
+		ModData mod(ModGetName(all_mods[i]),ModGetID(all_mods[i]), ModGetVersion(all_mods[i]), ModGetAuthor(all_mods[i]), ModGetThumbnail(all_mods[i]), ModGetDescription(all_mods[i]), "", false);
 		mods.insertLast(@mod);
 	}
 }
 
-void QueueDownload(string full_address, ModData@ target = null){
-	download_queue.insertLast(Download(full_address, target));
-}
-
-void StartDownload(){
-	array<string> split_address = current_download.full_address.split("/");
-	current_download.server_address = split_address[0];
-
-	TCPLog("Downloading file : " + current_download.full_address);
-
-	for(uint i = 1; i < split_address.size(); i++){
-		current_download.file_path += "/" + split_address[i];
-	}
-
-	array<string> split_file_name = split_address[split_address.size() - 1].split(".");
-	current_download.file_name = split_file_name[0];
-	if(split_file_name.size() > 1){
-		current_download.file_extention = split_file_name[1];
-	}
-
-	SendRequest(current_download.server_address, "GET " + current_download.file_path + " HTTP/1.1\r\nHost: " + current_download.server_address + "\r\n\r\n");
-}
-
 void SendRequest(string address, string request){
-	current_download.has_header = false;
-
+	/* Log( info, "Request " + address + request); */
 	if( main_socket == SOCKET_ID_INVALID ) {
 		main_socket = CreateSocketTCP(address, api_port);
         if( main_socket != SOCKET_ID_INVALID ) {
             Log( info, "Connected " + main_socket );
 			array<uint8> message = toByteArray(request);
 			if( IsValidSocketTCP(main_socket) ){
-				downloading = true;
 		        SocketTCPSend(main_socket, message);
 			}
         } else {
@@ -653,48 +804,10 @@ void SendRequest(string address, string request){
 }
 
 void IncomingTCPData(uint socket, array<uint8>@ data) {
-	for(uint i = 0; i < data.size(); i++){
-		current_download.raw_data.insertLast(data[i]);
-	}
-
-	if(!current_download.has_header){
-		//Check if the whole head has been received.
-		for(uint i = 0; i < current_download.raw_data.size() - 2; i++){
-			if(current_download.raw_data[i] == 13 && current_download.raw_data[i + 1] == 10 && current_download.raw_data[i + 2] == 13){
-				current_download.has_header = true;
-				ReadHeader(i + 4);
-				break;
-			}
-		}
-	}else if(current_download.error){
-		TCPLog("Error downloading : " + current_download.error_code);
-		TCPLog("-----------------------------------------------");
-		ClearDownload();
-	}else if(current_download.has_header){
-		current_download.download_progress += data.size();
-		current_download.packet_size = data.size();
-
-		if(current_download.download_progress >= current_download.file_size){
-			//Done downloading!
-			TCPLog("Download size : " + current_download.download_progress + " bytes.");
-			TCPLog("Download time : " + current_download.download_timer + " seconds.");
-			TCPLog("Download speed : " + (current_download.file_size / current_download.download_timer) / 1024.0 + " kb/s.");
-			TCPLog("-----------------------------------------------");
-			UpdateProgressBar();
-
-			if(current_download.download_type == thumbnail){
-				ShowNotification("Thumbnail download done : \n" + current_download.full_address);
-				WriteDownloadedFile("Data/Downloads/Thumbnails/");
-				current_download.target.ReloadThumbnail();
-			}else if(current_download.download_type == file){
-				ShowNotification("Download done : \n" + current_download.full_address);
-				WriteDownloadedFile("Data/Downloads/");
-			}else if(current_download.download_type == directory){
-				DownloadFilesInDirectory();
-			}else if(current_download.download_type == mod_list){
-				ReadModList();
-			}
-			ClearDownload();
+	//Once the download completes it return true.
+	if(@current_download != null){
+		if(current_download.ReadData(data)){
+			@current_download = null;
 		}
 	}
 }
@@ -717,9 +830,7 @@ void ReadModList(){
 				mods[j].remote_version = mod_data["Version"].asString();
 				mods[j].remote_thumbnail_path = mod_data["Thumbnail"].asString();
 				already_local = true;
-				mods[j].ReloadThumbnail();
-				mods[j].UpdateStatus();
-
+				reload_targets.insertLast(j);
 				break;
 			}
 		}
@@ -728,32 +839,14 @@ void ReadModList(){
 			continue;
 		}
 
-		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), true, false);
+		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), mod_data["Directory"].asString(), true);
 		mods.insertLast(@mod);
 	}
 }
 
-void ClearDownload(){
-	downloading = false;
-	download_queue.removeAt(0);
+void ClearSocket(){
 	DestroySocketTCP(main_socket);
 	main_socket = SOCKET_ID_INVALID;
-}
-
-void DownloadFilesInDirectory(){
-	array<string> result = ExtractStringBetween(GetString(current_download.raw_data), "<tr>", "</tr>");
-
-	TCPLog("Directory list : ");
-	int counter = 0;
-	//Skip the first 3 lines since those are headers.
-	for(uint i = 3; i < result.size(); i++){
-		array<string> file_name = ExtractStringBetween(result[i], "<a href=\"", "\">");
-		if(file_name.size() > 0){
-			TCPLog(counter + ".   " + file_name[0]);
-			QueueDownload(current_download.full_address + file_name[0]);
-		}
-		counter += 1;
-	}
 }
 
 void TCPLog(string message){

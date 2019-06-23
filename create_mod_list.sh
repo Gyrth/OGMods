@@ -32,12 +32,14 @@ def FindModXML(path, folder):
 	mod_author = ""
 	mod_thumbnail_path = ""
 	mod_description = ""
+	mod_directory = ""
 
 	print(path + "/" + folder + "/mod.xml")
 
 	try:
 		with open(path + "/" + folder + "/mod.xml") as f:
 			lines = f.readlines()
+			mod_directory = folder + "/"
 			for line in lines:
 				if "<Name>" in line:
 					line = line.replace("<Name>", "");
@@ -66,7 +68,7 @@ def FindModXML(path, folder):
 	except IOError:
 		return
 
-	data[mod_name] = {"ID" : mod_id, "Name" : mod_name, "Version" : mod_version, "Author" : mod_author, "Thumbnail" : mod_thumbnail_path, "Description" : mod_description}
+	data[mod_name] = {"ID" : mod_id, "Name" : mod_name, "Version" : mod_version, "Author" : mod_author, "Thumbnail" : mod_thumbnail_path, "Description" : mod_description, "Directory" : mod_directory}
 	print("Found mod " + mod_id + " " + mod_author + " " + mod_name);
 
 Main()
