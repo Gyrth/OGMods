@@ -849,6 +849,7 @@ void ReadModList(){
 				mods[j].is_remote_mod = true;
 				mods[j].remote_version = mod_data["Version"].asString();
 				mods[j].remote_thumbnail_path = mod_data["Thumbnail"].asString();
+				mods[j].remote_path = mod_data["Directory"].asString();
 				already_local = true;
 				reload_targets.insertLast(j);
 				break;
