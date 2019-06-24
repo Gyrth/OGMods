@@ -756,7 +756,7 @@ void DrawGUI(){
 		ImGui_SetNextWindowSize(vec2(300.0f, 125.0f), ImGuiSetCond_Always);
 		ImGui_SetNextWindowPos(vec2(GetScreenWidth() - notification_slide, GetScreenHeight() - 150.0f), ImGuiSetCond_Always);
 
-		ImGui_PushStyleVar(ImGuiStyleVar_Alpha, 0.5f);
+		ImGui_PushStyleVar(ImGuiStyleVar_Alpha, 0.75f);
 		ImGui_Begin("Notification " + "###Notification", show_notification, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
 		ImGui_Image(star, vec2(100, 100));
 		ImGui_SameLine();
