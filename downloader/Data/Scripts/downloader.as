@@ -72,6 +72,7 @@ class ModData{
 	bool is_local_mod = false;
 	bool is_installing = false;
 	bool getting_thumbnail = false;
+	bool has_error = false;
 	string source_description;
 	ModID mod_id;
 	string error;
@@ -153,6 +154,9 @@ class ModData{
 				can_activate = false;
 			}
 			error = ModGetValidityString(mod_id);
+			if(error.length() > 0){
+				has_error = true;
+			}
 		}else{
 			is_installed = false;
 		}
@@ -377,13 +381,6 @@ void Update(int paused){
 	}
 	reload_targets.resize(0);
 
-	if(new_selected_mod != selected_mod){
-		selected_mod = new_selected_mod;
-	}
-	if(sort_mods){
-		SortMods();
-		sort_mods = false;
-	}
 	UpdateNotification();
 }
 
@@ -442,6 +439,13 @@ void ReceiveMessage(string msg){
 }
 
 void DrawGUI(){
+	if(sort_mods){
+		SortMods();
+		sort_mods = false;
+	}
+	if(new_selected_mod != selected_mod){
+		selected_mod = new_selected_mod;
+	}
 	if(show || show_notification){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
@@ -670,7 +674,7 @@ void DrawGUI(){
 				ImGui_Image(sorted_mods[selected_mod].thumbnail, vec2(image_height * 2.0f, image_height));
 				ImGui_EndChild();
 
-				ImGui_BeginChild("Install", vec2(-1.0, sorted_mods[selected_mod].can_activate?40.0:80.0), true);
+				ImGui_BeginChild("Install", vec2(-1.0, sorted_mods[selected_mod].has_error?100.0:40.0), true);
 				inspector_labels.insertLast(LabelData(sorted_mods[selected_mod].name, ImGui_GetWindowPos() + vec2(20.0, -7.0), vec3(1, 1, 1), background_color));
 
 				ImGui_Spacing();
@@ -684,22 +688,38 @@ void DrawGUI(){
 						}
 					}else{
 						if(sorted_mods[selected_mod].is_enabled){
+							ImGui_SameLine();
 							if(ImGui_Button("Disable")){
 								bool succes = ModActivation(sorted_mods[selected_mod].mod_id, false);
 								sorted_mods[selected_mod].UpdateStatus();
 							}
 						}else{
-							if(!sorted_mods[selected_mod].can_activate){
-								ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
-								ImGui_TextWrapped(sorted_mods[selected_mod].error);
-								ImGui_PopStyleColor();
-							}else{
+
+							if(sorted_mods[selected_mod].can_activate){
+								ImGui_SameLine();
 								if(ImGui_Button("Enable")){
 									ModActivation(sorted_mods[selected_mod].mod_id, true);
 									sorted_mods[selected_mod].UpdateStatus();
 									sorted_mods[selected_mod].ReloadThumbnail();
 								}
 							}
+						}
+						if(sorted_mods[selected_mod].is_remote_mod){
+							ImGui_SameLine();
+							if(ImGui_Button("ReInstall")){
+								sorted_mods[selected_mod].StartDownload();
+							}
+							if(sorted_mods[selected_mod].version != sorted_mods[selected_mod].remote_version){
+								ImGui_SameLine();
+								if(ImGui_Button("Update")){
+									sorted_mods[selected_mod].StartDownload();
+								}
+							}
+						}
+						if(sorted_mods[selected_mod].has_error){
+							ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
+							ImGui_TextWrapped(sorted_mods[selected_mod].error);
+							ImGui_PopStyleColor();
 						}
 					}
 				}
