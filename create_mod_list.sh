@@ -1,14 +1,11 @@
 #! /usr/bin/python3
 import os
 import json
-import xml.etree.ElementTree as etree
+import xml.etree.ElementTree as etree_read
 from lxml import etree
 
-main_path = "/run/HyperDisk/SteamLibraryLinux/steamapps/common/Overgrowth/"
-custom_animations_path = "/run/HyperDisk/SteamLibraryLinux/steamapps/workshop/content/25000/"
+parser = etree.XMLParser(recover=True)
 
-index = 0
-root_element = etree.Element('root')
 data = {}
 
 def Main():
@@ -23,6 +20,12 @@ def CreateModList(path):
 	for folder in os.listdir(path):
 		FindModXML(path, folder)
 
+def GetXMLValue(data, names):
+	for name in names:
+		if(data.find(name) != None):
+			return data.find(name).text
+	return "NA"
+
 def FindModXML(path, folder):
 	global data
 
@@ -33,42 +36,34 @@ def FindModXML(path, folder):
 	mod_thumbnail_path = ""
 	mod_description = ""
 	mod_directory = ""
-
-	print(path + "/" + folder + "/mod.xml")
+	mod_dependencies = ""
 
 	try:
 		with open(path + "/" + folder + "/mod.xml") as f:
-			lines = f.readlines()
+			print(path + "/" + folder + "/mod.xml")
+
+			tree = etree_read.parse(path + "/" + folder + "/mod.xml", parser=parser)
+			root = tree.getroot()
+
+			mod_name = GetXMLValue(root, ["Name"])
+			mod_id = GetXMLValue(root, ["Id", "ID"])
+			mod_version = GetXMLValue(root, ["Version"])
+			mod_author = GetXMLValue(root, ["Author"])
+			mod_thumbnail_path = "107.173.129.154/downloader/" + folder + "/" + GetXMLValue(root, ["Thumbnail"])
+			mod_description = GetXMLValue(root, ["Description"])
 			mod_directory = folder + "/"
-			for line in lines:
-				if "<Name>" in line:
-					line = line.replace("<Name>", "");
-					line = line.replace("</Name>", "");
-					mod_name = (' '.join(line.split()));
-				elif "<Id>" in line:
-					line = line.replace("<Id>", "");
-					line = line.replace("</Id>", "");
-					mod_id = (' '.join(line.split()));
-				elif "<Version>" in line:
-					line = line.replace("<Version>", "");
-					line = line.replace("</Version>", "");
-					mod_version = (' '.join(line.split()));
-				elif "<Author>" in line:
-					line = line.replace("<Author>", "");
-					line = line.replace("</Author>", "");
-					mod_author = (' '.join(line.split()));
-				elif "<Thumbnail>" in line:
-					line = line.replace("<Thumbnail>", "");
-					line = line.replace("</Thumbnail>", "");
-					mod_thumbnail_path = "107.173.129.154/downloader/" + folder + "/" + (' '.join(line.split()));
-				elif "<Description>" in line:
-					line = line.replace("<Description>", "");
-					line = line.replace("</Description>", "");
-					mod_description = (' '.join(line.split()));
+
+			dependency_root = root.find("ModDependency")
+			if(dependency_root != None):
+				for dependency_id in dependency_root.findall("Id"):
+					if mod_dependencies != "":
+						mod_dependencies += ","
+					mod_dependencies += dependency_id.text
+
 	except IOError:
 		return
 
-	data[mod_name] = {"ID" : mod_id, "Name" : mod_name, "Version" : mod_version, "Author" : mod_author, "Thumbnail" : mod_thumbnail_path, "Description" : mod_description, "Directory" : mod_directory}
+	data[mod_name] = {"ID" : mod_id, "Name" : mod_name, "Version" : mod_version, "Author" : mod_author, "Thumbnail" : mod_thumbnail_path, "Description" : mod_description, "Directory" : mod_directory, "Dependencies" : mod_dependencies}
 	print("Found mod " + mod_id + " " + mod_author + " " + mod_name);
 
 Main()

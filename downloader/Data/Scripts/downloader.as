@@ -12,7 +12,6 @@ tabs tab = download;
 array<ModData@> mods;
 array<ModData@> sorted_mods;
 string search_query = "";
-array<int> reload_targets;
 bool sort_mods = false;
 
 bool post_init_done = false;
@@ -73,13 +72,17 @@ class ModData{
 	bool is_installing = false;
 	bool getting_thumbnail = false;
 	bool has_error = false;
+	bool refresh = false;
 	string source_description;
 	ModID mod_id;
 	string error;
-	Download@ download;
-	Download@ thumbnail_download;
+	Download@ download = null;
+	Download@ thumbnail_download = null;
+	string dependencies;
+	array<ModData@> dependencies_mod_data;
+	ModData@ target;
 
-	ModData(string name, string id, string version, string author, string thumbnail_path, string description, string remote_path, bool is_remote_mod){
+	ModData(string name, string id, string version, string author, string thumbnail_path, string description, string remote_path, bool is_remote_mod, string dependencies){
 		this.name = name;
 		this.id = id;
 		this.version = version;
@@ -87,22 +90,39 @@ class ModData{
 		this.description = description;
 		this.is_remote_mod = is_remote_mod;
 		this.remote_path = remote_path;
+		this.dependencies = dependencies;
+
+		CheckLocalMod();
 
 		if(is_remote_mod){
 			this.remote_thumbnail_path = thumbnail_path;
 		}else{
 			local_thumbnail_path = thumbnail_path;
 		}
-		UpdateStatus();
-		ReloadThumbnail();
 	}
 
-	void StartDownload(){
-		if(is_installing){
+	void Install(ModData@ target = null){
+		if(!is_remote_mod){
 			return;
 		}
+
+		if(@target != null){
+			@this.target = @target;
+		}
+
 		is_installing = true;
-		@download = Download(server_address + remote_path);
+		if(dependencies_mod_data.size() != 0){
+			for(uint i = 0; i < dependencies_mod_data.size(); i++){
+				if(!dependencies_mod_data[i].is_installed){
+					dependencies_mod_data[i].Install(this);
+					return;
+				}
+			}
+		}
+
+		if(@download == null){
+			@download = Download(server_address + remote_path);
+		}
 	}
 
 	Download@ GetNextDownload(){
@@ -123,6 +143,9 @@ class ModData{
 				@download = null;
 				ReloadMods();
 				UpdateStatus();
+				if(@target != null){
+					target.Install();
+				}
 			}
 			return next_download;
 		}else{
@@ -130,7 +153,7 @@ class ModData{
 		}
 	}
 
-	void UpdateStatus(){
+	void CheckLocalMod(){
 		array<ModID>all_mods = GetModSids();
 		for(uint i = 0; i < all_mods.size(); i++){
 			if(ModGetID(all_mods[i]) == id){
@@ -138,6 +161,29 @@ class ModData{
 				mod_id = all_mods[i];
 				has_mod_id = true;
 				break;
+			}
+		}
+	}
+
+	void UpdateStatus(){
+		CheckLocalMod();
+
+		error = "";
+		has_error = false;
+		can_activate = true;
+
+		if(dependencies != ""){
+			array<string> dependencies_ids = dependencies.split(",");
+			for(uint i = 0; i < dependencies_ids.size(); i++){
+				for(uint j = 0; j < mods.size(); j++){
+					if(mods[j].id == dependencies_ids[i]){
+						dependencies_mod_data.insertLast(mods[j]);
+						break;
+					}else if(j == mods.size() - 1){
+						error += "Could not find dependency : " + dependencies_ids[i];
+						has_error = true;
+					}
+				}
 			}
 		}
 
@@ -148,15 +194,24 @@ class ModData{
 			}else{
 				is_enabled = false;
 			}
-			if(ModCanActivate(mod_id)){
-				can_activate = true;
-			}else{
+
+			if(!ModCanActivate(mod_id)){
 				can_activate = false;
 			}
-			error = ModGetValidityString(mod_id);
+			//If this mod has dependencies then check if the dependencies can be enabled as well.
+			if(dependencies_mod_data.size() != 0){
+				for(uint i = 0; i < dependencies_mod_data.size(); i++){
+					if(!ModCanActivate(dependencies_mod_data[i].mod_id)){
+						can_activate = false;
+					}
+				}
+			}
+
+			error += ModGetValidityString(mod_id);
 			if(error.length() > 0){
 				has_error = true;
 			}
+
 		}else{
 			is_installed = false;
 		}
@@ -371,15 +426,13 @@ void Update(int paused){
 				TCPLog("Downloading file : " + current_download.full_address);
 				SendRequest(current_download.server_address, "GET " + current_download.file_path + " HTTP/1.1\r\nHost: " + current_download.server_address + "\r\n\r\n");
 				break;
+			}else if(mods[i].refresh){
+				mods[i].UpdateStatus();
+				mods[i].ReloadThumbnail();
+				mods[i].refresh = false;
 			}
 		}
 	}
-
-	for(uint i = 0; i < reload_targets.size(); i++){
-		mods[reload_targets[i]].UpdateStatus();
-		mods[reload_targets[i]].ReloadThumbnail();
-	}
-	reload_targets.resize(0);
 
 	UpdateNotification();
 }
@@ -681,47 +734,47 @@ void DrawGUI(){
 
 				if(sorted_mods[selected_mod].is_installing){
 					ImGui_TextWrapped("Installing...");
-				}else{
+				}else if(!sorted_mods[selected_mod].has_error){
 					if(!sorted_mods[selected_mod].is_installed){
 						if(ImGui_Button("Install")){
-							sorted_mods[selected_mod].StartDownload();
+							sorted_mods[selected_mod].Install();
 						}
 					}else{
 						if(sorted_mods[selected_mod].is_enabled){
-							ImGui_SameLine();
 							if(ImGui_Button("Disable")){
 								bool succes = ModActivation(sorted_mods[selected_mod].mod_id, false);
 								sorted_mods[selected_mod].UpdateStatus();
 							}
+							ImGui_SameLine();
 						}else{
 
 							if(sorted_mods[selected_mod].can_activate){
-								ImGui_SameLine();
 								if(ImGui_Button("Enable")){
 									ModActivation(sorted_mods[selected_mod].mod_id, true);
 									sorted_mods[selected_mod].UpdateStatus();
 									sorted_mods[selected_mod].ReloadThumbnail();
 								}
+								ImGui_SameLine();
 							}
 						}
 						if(sorted_mods[selected_mod].is_remote_mod){
-							ImGui_SameLine();
 							if(ImGui_Button("ReInstall")){
-								sorted_mods[selected_mod].StartDownload();
+								sorted_mods[selected_mod].Install();
 							}
+							ImGui_SameLine();
 							if(sorted_mods[selected_mod].version != sorted_mods[selected_mod].remote_version){
-								ImGui_SameLine();
 								if(ImGui_Button("Update")){
-									sorted_mods[selected_mod].StartDownload();
+									sorted_mods[selected_mod].Install();
 								}
+								ImGui_SameLine();
 							}
-						}
-						if(sorted_mods[selected_mod].has_error){
-							ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
-							ImGui_TextWrapped(sorted_mods[selected_mod].error);
-							ImGui_PopStyleColor();
 						}
 					}
+				}
+				if(sorted_mods[selected_mod].has_error){
+					ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
+					ImGui_TextWrapped(sorted_mods[selected_mod].error);
+					ImGui_PopStyleColor();
 				}
 				ImGui_EndChild();
 				ImGui_Spacing();
@@ -739,7 +792,7 @@ void DrawGUI(){
 
 				ImGui_Text("Status : " + "Not installed");
 				ImGui_Text("Source : " + sorted_mods[selected_mod].source_description);
-				ImGui_Text("Downloads : " + "12");
+				ImGui_Text("Dependencies : " + sorted_mods[selected_mod].dependencies);
 
 				ImGui_EndChild();
 				ImGui_Spacing();
@@ -821,8 +874,9 @@ void ReadLocalMods(){
 	array<ModID> all_mods = GetModSids();
 
 	for(uint i = 0; i < all_mods.size(); i++){
-		ModData mod(ModGetName(all_mods[i]),ModGetID(all_mods[i]), ModGetVersion(all_mods[i]), ModGetAuthor(all_mods[i]), ModGetThumbnail(all_mods[i]), ModGetDescription(all_mods[i]), "", false);
+		ModData mod(ModGetName(all_mods[i]),ModGetID(all_mods[i]), ModGetVersion(all_mods[i]), ModGetAuthor(all_mods[i]), ModGetThumbnail(all_mods[i]), ModGetDescription(all_mods[i]), "", false, "");
 		mods.insertLast(@mod);
+		mod.refresh = true;
 	}
 	sort_mods = true;
 }
@@ -870,8 +924,9 @@ void ReadModList(){
 				mods[j].remote_version = mod_data["Version"].asString();
 				mods[j].remote_thumbnail_path = mod_data["Thumbnail"].asString();
 				mods[j].remote_path = mod_data["Directory"].asString();
+				mods[j].dependencies = mod_data["Dependencies"].asString();
 				already_local = true;
-				reload_targets.insertLast(j);
+				mods[j].refresh = true;
 				break;
 			}
 		}
@@ -880,8 +935,9 @@ void ReadModList(){
 			continue;
 		}
 
-		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), mod_data["Directory"].asString(), true);
+		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), mod_data["Directory"].asString(), true, mod_data["Dependencies"].asString());
 		mods.insertLast(@mod);
+		mod.refresh = true;
 	}
 	sort_mods = true;
 }
