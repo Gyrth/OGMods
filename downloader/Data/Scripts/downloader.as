@@ -73,6 +73,7 @@ class ModData{
 	bool getting_thumbnail = false;
 	bool has_error = false;
 	bool refresh = false;
+	bool has_dependencies = false;
 	string source_description;
 	ModID mod_id;
 	string error;
@@ -125,6 +126,16 @@ class ModData{
 		}
 	}
 
+	void Activation(bool enable, bool include_dependencies = true){
+		if(has_dependencies && include_dependencies){
+			for(uint i = 0; i < dependencies_mod_data.size(); i++){
+				dependencies_mod_data[i].Activation(enable);
+			}
+		}
+		ModActivation(mod_id, enable);
+		refresh = true;
+	}
+
 	Download@ GetNextDownload(){
 		if(@thumbnail_download != null){
 			Download@ next_download = thumbnail_download.GetNextDownload();
@@ -170,7 +181,7 @@ class ModData{
 
 		error = "";
 		has_error = false;
-		can_activate = true;
+		can_activate = false;
 
 		if(dependencies != ""){
 			array<string> dependencies_ids = dependencies.split(",");
@@ -185,6 +196,7 @@ class ModData{
 					}
 				}
 			}
+			has_dependencies = dependencies_mod_data.size() != 0;
 		}
 
 		if(has_mod_id){
@@ -195,8 +207,8 @@ class ModData{
 				is_enabled = false;
 			}
 
-			if(!ModCanActivate(mod_id)){
-				can_activate = false;
+			if(ModCanActivate(mod_id)){
+				can_activate = true;
 			}
 			//If this mod has dependencies then check if the dependencies can be enabled as well.
 			if(dependencies_mod_data.size() != 0){
@@ -535,14 +547,12 @@ void DrawGUI(){
 			if(ImGui_BeginMenu("Actions")){
 				if(ImGui_MenuItem("Disable All Mods")){
 					for(uint i = 0; i < mods.size(); i++){
-						ModActivation(mods[i].mod_id, false);
-						mods[i].UpdateStatus();
+						mods[i].Activation(false);
 					}
 				}
 				if(ImGui_MenuItem("Enable All Mods")){
 					for(uint i = 0; i < mods.size(); i++){
-						ModActivation(mods[i].mod_id, true);
-						mods[i].UpdateStatus();
+						mods[i].Activation(true);
 					}
 				}
 				ImGui_EndMenu();
@@ -741,18 +751,21 @@ void DrawGUI(){
 						}
 					}else{
 						if(sorted_mods[selected_mod].is_enabled){
-							if(ImGui_Button("Disable")){
-								bool succes = ModActivation(sorted_mods[selected_mod].mod_id, false);
-								sorted_mods[selected_mod].UpdateStatus();
+							if(ImGui_Button("Disable ")){
+								sorted_mods[selected_mod].Activation(false, false);
 							}
 							ImGui_SameLine();
+							if(sorted_mods[selected_mod].has_dependencies){
+								if(ImGui_Button("Disable including dependencies")){
+									sorted_mods[selected_mod].Activation(false);
+								}
+								ImGui_SameLine();
+							}
 						}else{
 
 							if(sorted_mods[selected_mod].can_activate){
 								if(ImGui_Button("Enable")){
-									ModActivation(sorted_mods[selected_mod].mod_id, true);
-									sorted_mods[selected_mod].UpdateStatus();
-									sorted_mods[selected_mod].ReloadThumbnail();
+									sorted_mods[selected_mod].Activation(true);
 								}
 								ImGui_SameLine();
 							}
