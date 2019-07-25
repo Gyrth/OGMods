@@ -1,0 +1,11 @@
+#!/bin/bash
+for file in *; do
+	if [ ${file: -4} == ".wav" ]
+	then
+		filename="${file}"
+		echo $filename
+		ffmpeg -i $filename -acodec pcm_s16le -ar 44100 "output_$filename"
+		rm $filename
+		mv "output_$filename" $filename
+	fi
+done
