@@ -4,5 +4,5 @@ set_cam -132.378 118.041 -99.7445 17.24 65.62 -0.89 80.5421
 #name "C path"
 #participants 2
 send_level_message "set_camera_dof 0 0 0 0.3 10 1"
-vo "Data/VoiceOver/t2/hub/C path0.wav"
+vo "Data/VoiceOver/t2/hub/C_path0.wav"
 say 2 "" "Some things are better left for other days..."

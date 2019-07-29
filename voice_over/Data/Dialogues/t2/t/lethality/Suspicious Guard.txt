@@ -2,9 +2,9 @@
 #participants 2
 
 set_cam 8.10089 1.93596 -84.3991 0 -180 0 90
-vo "Data/VoiceOver/t2/t/lethality/Suspicious Guard0.wav"
+vo "Data/VoiceOver/t2/t/lethality/Suspicious_Guard0.wav"
 say 2 "Guard" "Hey![wait 0.2] What are you doing here?"
-vo "Data/VoiceOver/t2/t/lethality/Suspicious Guard1.wav"
+vo "Data/VoiceOver/t2/t/lethality/Suspicious_Guard1.wav"
 say 1 "Turner" "Just wandering around,[wait 0.1] nothing to worry about."
-vo "Data/VoiceOver/t2/t/lethality/Suspicious Guard2.wav"
+vo "Data/VoiceOver/t2/t/lethality/Suspicious_Guard2.wav"
 say 2 "Guard" "Stay out of trouble."

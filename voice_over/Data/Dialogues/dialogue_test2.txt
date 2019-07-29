@@ -15,7 +15,7 @@ send_character_message 2 "set_torso_target -42.5151 28.0668 60.4855 1"
 send_character_message 2 "set_eye_dir 0.27 0.6 0.74 1"
 set_cam -41.0483 28.5414 64.4864 -17.9755 -12.3667 1.86379 48.6435
 
-vo "Data/VoiceOver//dialogue_test20.wav"
+vo "Data/VoiceOver/dialogue_test20.wav"
 say 2 "Guard" "Hey![wait 0.2] What are you doing here?"
 wait_for_click
 
@@ -29,7 +29,7 @@ send_character_message 2 "set_torso_target -41.6841 27.3508 60.1027 1"
 send_character_message 2 "set_eye_dir -0.02 0.61 0.78 0.999881"
 set_cam -42.2472 28.0386 59.1126 -6.60062 -151.062 -1.7327 39.8293
 
-vo "Data/VoiceOver//dialogue_test21.wav"
+vo "Data/VoiceOver/dialogue_test21.wav"
 say 1 "Turner" "Just wandering around,[wait 0.1] nothing to worry about."
 wait_for_click
 
@@ -43,7 +43,7 @@ send_character_message 2 "set_torso_target -41.2887 27.917 60.1583 0.000714719"
 send_character_message 2 "set_eye_dir 0 0 0.99 1"
 set_cam -41.1713 28.4945 64.7313 -16.759 -11.9549 -4.15327 43.9116
 
-vo "Data/VoiceOver//dialogue_test22.wav"
+vo "Data/VoiceOver/dialogue_test22.wav"
 say 2 "Guard" "Stay out of trouble."
 wait_for_click
 

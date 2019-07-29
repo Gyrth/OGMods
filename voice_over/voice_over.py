@@ -37,7 +37,7 @@ def find_dialogue_txt (path, file_paths):
 				file_paths.append(file_info)
 
 def voice_over_txt(full_level_path, relative_path, file):
-	print(full_level_path)
+	# print(full_level_path)
 	with open(full_level_path, "r") as f:
 		line = f.readline()
 		out_lines = []
@@ -76,7 +76,8 @@ def voice_over_txt(full_level_path, relative_path, file):
 					local_path += "/"
 
 				sound_file = "Data/VoiceOver/" + local_path + file[:-4] + str(say_counter) + ".wav"
-				sound_file.replace(" ", "_")
+				sound_file = sound_file.replace(" ", "_")
+				# print(sound_file)
 				es.save("".join(dialogue), sound_file)
 				out_lines.append("vo \"" + sound_file + "\"\n")
 				say_counter += 1

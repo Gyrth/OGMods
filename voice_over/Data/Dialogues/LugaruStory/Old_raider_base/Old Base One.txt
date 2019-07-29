@@ -11,7 +11,7 @@ send_character_message 1 "set_head_target -285.695 19.1601 118.324 1"
 set_cam -282.667 18.7717 118.877 6.22 87.84 2.02 70.7078
 #name "Old Base One"
 #participants 2
-vo "Data/VoiceOver/LugaruStory/Old_raider_base/Old Base One0.wav"
+vo "Data/VoiceOver/LugaruStory/Old_raider_base/Old_Base_One0.wav"
 say 1 "Turner" "Why aren't you attacking me?"
 send_character_message 1 "set_animation \"Data\Animations\r_actionidle.anm\""
 send_character_message 2 "set_torso_target -285.216 18.7833 118.91 0.798052"
@@ -19,5 +19,5 @@ send_character_message 2 "set_eye_dir -285.787 18.8169 118.7 0.712945"
 send_character_message 2 "set_head_target -285.631 18.7149 118.899 1"
 send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
 set_cam -288.201 18.6946 121.113 -1.6 -48.26 2.84 62.7144
-vo "Data/VoiceOver/LugaruStory/Old_raider_base/Old Base One1.wav"
+vo "Data/VoiceOver/LugaruStory/Old_raider_base/Old_Base_One1.wav"
 say 2 "Ray" "If you beat our leader,[wait 0.3] what chance do I have?[wait 0.4] I don't want to die..."

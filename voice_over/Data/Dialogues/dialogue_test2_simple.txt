@@ -1,9 +1,9 @@
 #name "Suspicious Guard"
 #participants 2
 
-vo "Data/VoiceOver//dialogue_test2_simple0.wav"
+vo "Data/VoiceOver/dialogue_test2_simple0.wav"
 say 2 "Guard" "Hey![wait 0.2] What are you doing here?"
-vo "Data/VoiceOver//dialogue_test2_simple1.wav"
+vo "Data/VoiceOver/dialogue_test2_simple1.wav"
 say 1 "Turner" "Just wandering around,[wait 0.1] nothing to worry about."
-vo "Data/VoiceOver//dialogue_test2_simple2.wav"
+vo "Data/VoiceOver/dialogue_test2_simple2.wav"
 say 2 "Guard" "Stay out of trouble."

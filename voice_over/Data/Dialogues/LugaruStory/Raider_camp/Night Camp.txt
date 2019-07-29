@@ -6,10 +6,10 @@ send_character_message 1 "set_head_target -62.6095 18.616 118.752 1"
 set_cam -66.9979 18.19 120.35 -4.82 -65.28 -0.2 50.5488
 #name "Night Camp"
 #participants 1
-vo "Data/VoiceOver/LugaruStory/Raider_camp/Night Camp0.wav"
+vo "Data/VoiceOver/LugaruStory/Raider_camp/Night_Camp0.wav"
 say 1 "Turner" "Only one sentry."
 set_character_pos 1 -63.7132 17.3497 119.5 38
 send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
 set_cam -6.72412 7.2299 83.8737 6.05 -61.97 -3.3 69.6856
-vo "Data/VoiceOver/LugaruStory/Raider_camp/Night Camp1.wav"
+vo "Data/VoiceOver/LugaruStory/Raider_camp/Night_Camp1.wav"
 say 1 "Turner" "Their mistake."
