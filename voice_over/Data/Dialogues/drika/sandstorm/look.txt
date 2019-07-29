@@ -1,0 +1,19 @@
+#name "Look"
+#participants 2
+set_character_pos 1 -250.757 52.8712 -77.2062 -49
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+send_character_message 1 "set_head_target -249.314 52.8683 -75.3663 0"
+set_cam -252.342 54.5886 -78.8147 -19.47 -136.34 -0.01 109.971
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_level_message "set_camera_dof 0.1 8.0 10.0 0.0 20.0 10.0"
+send_character_message 1 "empty_hands"
+vo "Data/VoiceOver/drika/sandstorm/look0.wav"
+say 1 "Drika" "Everything looks just about the same from up here. [wait 0.3]Storm's too thick to see through."
+send_character_message 1 "set_torso_target -250.089 52.9542 -76.3097 1"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_head_target -247.33 52.0626 -76.4983 1"
+set_cam -252.037 54.2716 -76.2414 -29.91 -68.11 0 46.55
+send_level_message "set_camera_dof 0.5 5.0 10.0 0.0 20.0 10.0"
+vo "Data/VoiceOver/drika/sandstorm/look1.wav"
+say 1 "Drika" "Wait... [wait 0.3]are those pawprints?"

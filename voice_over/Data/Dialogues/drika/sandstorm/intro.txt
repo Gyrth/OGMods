@@ -1,0 +1,22 @@
+#name "Intro"
+#participants 2
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 1 "set_torso_target -332.775 45.524 -111.882 1"
+set_character_pos 1 -333.263 44.168 -111.843 16
+send_character_message 1 "set_head_target -330.98 46.0716 -113.396 1"
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_cam -332.738 45.0405 -112.88 -7.41 162.71 2.49 38.6731
+send_level_message "set_camera_dof 0.0 0.0 0.0 0.3 8.0 5.0"
+vo "Data/VoiceOver/drika/sandstorm/intro0.wav"
+say 1 "Drika" "...[wait 0.3]now I know why they say this land's impossible to chart. [wait 0.5]All these damn dunes look the same."
+send_character_message 1 "set_head_target -327.776 45.7449 -115.317 1"
+set_cam -334.847 44.0244 -113.029 18.73 -100.53 -0.77 68.6941
+send_level_message "set_camera_dof 0.3 3.0 1.0 0.0 8.0 5.0"
+vo "Data/VoiceOver/drika/sandstorm/intro1.wav"
+say 1 "Drika" "I'm lost, [wait 0.3]but that can't stop me just yet."
+send_character_message 1 "set_torso_target -332.775 45.524 -111.882 0"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_head_target -326.578 45.2673 -111.27 1"
+vo "Data/VoiceOver/drika/sandstorm/intro2.wav"
+say 1 "Drika" "I need to find shelter, [wait 0.3]and soon. [wait 0.5]This sandstorm's not calming down."

@@ -1,0 +1,83 @@
+#name "IntroGuard"
+#participants 4
+send_character_message 1 "set_head_target -126.982 -83.5081 -2.1058 1"
+set_cam -125.475 -87.2545 6.32217 19.5 10.74 0.02 24.3327
+set_character_pos 3 -129.121 -84.1414 -3.3507 -139
+send_character_message 3 "set_animation \"Data/Animations/r_crossarms_idle.anm\""
+send_character_message 3 "set_eye_dir -126.169 -85.3424 3.91628 1"
+set_character_pos 2 -126.996 -84.167 -2.51154 -77
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+send_character_message 2 "set_head_target -125.893 -86.1241 2.36701 1"
+set_character_pos 1 -125.588 -87.2259 3.80859 113
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_color 2 0 0.1 1
+set_dialogue_voice 2 7
+send_level_message "set_camera_dof 0.3 5.0 10.0 0.7 10.0 10.0"
+vo "Data/VoiceOver/drika/steppes/introguard0.wav"
+say 2 "???" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+vo "Data/VoiceOver/drika/steppes/introguard1.wav"
+say 1 "Drika" "The toll fee?"
+send_character_message 2 "set_head_target -125.671 -86.1724 3.66682 1"
+send_character_message 2 "set_torso_target -126.923 -84.2748 -2.19856 1"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+vo "Data/VoiceOver/drika/steppes/introguard2.wav"
+say 2 "???" "You're asking me what?"
+set_cam -127.625 -82.4873 -3.85434 -29.25 -160.63 0 18.0615
+vo "Data/VoiceOver/drika/steppes/introguard3.wav"
+say 1 "Drika" "Aren't you even going to ask for a bill of conduct? [wait 0.3]How much do I pay?"
+send_character_message 2 "set_eye_dir -126.902 -83.8178 -2.24973 0"
+send_character_message 2 "set_head_target -127.701 -84.2544 -1.32799 1"
+send_character_message 2 "set_torso_target -128.448 -83.8191 -1.69536 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_facepalm.anm\""
+send_level_message "set_camera_dof 0.0 5.0 10.0 0.6 6.0 5.0"
+vo "Data/VoiceOver/drika/steppes/introguard4.wav"
+say 2 "???" "...hell. [wait 0.5]Foreigner."
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 2 "set_torso_target -126.524 -84.4391 -0.902146 0"
+send_character_message 2 "set_head_target -125.911 -86.0426 2.70619 1"
+send_character_message 2 "set_eye_dir -125.766 -86.1575 3.18743 1"
+vo "Data/VoiceOver/drika/steppes/introguard5.wav"
+say 2 "???" "Let me see that 'bill of conduct' you have."
+send_character_message 1 "set_head_target -126.927 -83.0959 -2.05084 1"
+send_character_message 1 "set_torso_target -126.117 -85.2 2.94689 1"
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_point.anm\""
+set_cam -127.278 -86.4445 2.55533 -0.03 -123.69 -0.02 18.0615
+send_level_message "set_camera_dof 0.0 5.0 10.0 0.3 20.0 10.0"
+vo "Data/VoiceOver/drika/steppes/introguard6.wav"
+say 1 "Drika" "[wait 0.3]Here."
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 2 "set_torso_target -126.524 -84.4391 -0.902146 0.0227462"
+send_character_message 2 "set_head_target -125.629 -86.4885 3.63164 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_worriedpose_2.anm\""
+set_cam -123.731 -83.5742 -0.151424 0.03 57.86 0.02 18.0615
+vo "Data/VoiceOver/drika/steppes/introguard7.wav"
+say 2 "???" "Now this, [wait 0.3]my good cat... [wait 0.5]this means nothing to me."
+set_cam -123.731 -83.5742 -0.151424 0.03 57.86 0.02 18.0615
+send_character_message 2 "set_torso_target -126.661 -84.5912 -1.07132 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+vo "Data/VoiceOver/drika/steppes/introguard8.wav"
+say 2 "???" "I don't know how to read. [wait 0.3]Not a single word of this makes any sense."
+set_cam -109.674 -86.6201 9.7328 2 62.46 0.03 22.2086
+send_level_message "set_camera_dof 0.4 16.0 5.0 0.3 20.0 10.0"
+vo "Data/VoiceOver/drika/steppes/introguard9.wav"
+say 1 "Drika" "So? [wait 0.5]Get someone who does know how to read."
+send_character_message 2 "set_torso_target -126.724 -83.1082 -1.15033 1"
+vo "Data/VoiceOver/drika/steppes/introguard10.wav"
+say 2 "???" "Do you take Ouran as a place for bills? [wait 0.5]Taxes? [wait 0.5]You assume there are laws here?"
+set_cam -125.386 -83.6313 -0.648382 1.94 46.97 -0.5 22.2086
+send_level_message "set_camera_dof 0.0 5.0 10.0 0.7 10.0 10.0"
+vo "Data/VoiceOver/drika/steppes/introguard11.wav"
+say 2 "???" "That's not how a place like this works. [wait 0.5]Nobody cares who you are, [wait 0.3]where you're from and how much coin is in your pocket."
+send_character_message 2 "set_torso_target -126.907 -84.4125 -1.9668 1"
+send_character_message 2 "set_head_target -125.629 -86.7908 3.63164 1"
+send_character_message 2 "set_eye_dir -125.766 -86.1575 3.18743 0.508017"
+vo "Data/VoiceOver/drika/steppes/introguard12.wav"
+say 2 "???" "Find a single person who can and would even read whatever scam you have on your hands and I'll chip my tooth and hand it to 'ya."
+set_cam -122.099 -87.3641 7.43821 9.85 33.33 -0.01 36.2057
+vo "Data/VoiceOver/drika/steppes/introguard13.wav"
+say 1 "Drika" "Fine. [wait 0.5]I get it."
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+vo "Data/VoiceOver/drika/steppes/introguard14.wav"
+say 2 "???" "You'll figure it all out eventually."

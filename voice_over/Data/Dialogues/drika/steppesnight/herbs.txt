@@ -1,0 +1,18 @@
+#name "Herbs"
+#participants 2
+set_character_pos 1 -157.552 -63.5447 -73.6827 9
+send_character_message 1 "set_animation \"Data/Animations/drika_tracks.anm\""
+send_character_message 1 "set_eye_dir -156.334 -63.5093 -73.2263 0.765396"
+send_character_message 1 "set_torso_target -156.61 -63.0204 -73.2793 0"
+send_character_message 1 "set_head_target -156.354 -63.8607 -73.5559 1"
+set_cam -157.399 -62.5406 -72.6992 -42.86 -30.6 -5.59 48.0117
+set_dialogue_color 2 0.6 0.9 0
+set_dialogue_voice 2 12
+vo "Data/VoiceOver/drika/steppesnight/herbs0.wav"
+say 2 "Drika" "..."
+send_character_message 1 "set_head_target -156.781 -63.7547 -73.6406 1"
+vo "Data/VoiceOver/drika/steppesnight/herbs1.wav"
+say 2 "Drika" "[wait 0.3]Tranquilizing herbs. [wait 0.5]Just like I thought."
+send_character_message 1 "set_animation \"Data/Animations/drika_tracksup.anm\""
+vo "Data/VoiceOver/drika/steppesnight/herbs2.wav"
+say 2 "Drika" "After this much use, [wait 0.5]I could recognize them from anywhere..."

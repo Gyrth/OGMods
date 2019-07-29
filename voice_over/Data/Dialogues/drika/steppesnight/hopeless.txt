@@ -1,0 +1,39 @@
+#name "Hopeless"
+#participants 3
+send_character_message 2 "set_eye_dir -169.571 -69.3831 -79.8604 0"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_torso_target -169.938 -67.7205 -78.0901 0"
+send_character_message 1 "set_head_target -169.585 -68.1887 -79.7867 1"
+set_cam -170.661 -65.1856 -79.0767 -73.38 -70.35 -1.55 39.7807
+set_character_pos 2 -169.977 -68.1107 -79.7058 -161
+send_character_message 2 "set_animation \"Data/Animations/helpless2.anm\""
+set_character_pos 1 -169.314 -68.1925 -78.4485 112
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_color 2 1 1 1
+send_level_message "set_camera_dof 0.3 3.2 0.6 0.3 20.0 10.0"
+vo "Data/VoiceOver/drika/steppesnight/hopeless0.wav"
+say 2 "???" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+send_character_message 1 "set_head_target -169.65 -68.3316 -79.7657 1"
+send_character_message 1 "set_torso_target -169.516 -68.7348 -78.6847 1"
+vo "Data/VoiceOver/drika/steppesnight/hopeless1.wav"
+say 1 "Drika" "What are you doing here?"
+send_character_message 2 "set_eye_dir -169.427 -68.3334 -79.3429 0.385645"
+send_character_message 1 "set_head_target -169.348 -68.5017 -79.8114 1"
+set_cam -168.66 -68.3545 -80.9882 -0.48 153.38 0.12 41.2309
+send_level_message "set_camera_dof 0.0 5.0 10.0 1.7 20.0 10.0"
+vo "Data/VoiceOver/drika/steppesnight/hopeless2.wav"
+say 2 "???" "Say... [wait 0.3]you haven't seen an..."
+send_character_message 2 "set_animation \"Data/Animations/helpless2talk.anm\""
+vo "Data/VoiceOver/drika/steppesnight/hopeless3.wav"
+say 2 "???" "An auburn rabbit, [wait 0.3]with one ear..."
+send_character_message 1 "set_animation \"Data/Animations/r_crouch.anm\""
+send_character_message 1 "set_torso_target -169.516 -68.7348 -78.6847 0"
+send_character_message 1 "set_head_target -169.478 -68.6597 -79.8858 1"
+vo "Data/VoiceOver/drika/steppesnight/hopeless4.wav"
+say 1 "Drika" "...[wait 0.3]no."
+send_character_message 2 "set_animation \"Data/Animations/helpless2.anm\""
+send_character_message 2 "set_eye_dir -169.427 -68.3334 -79.3429 0"
+vo "Data/VoiceOver/drika/steppesnight/hopeless5.wav"
+say 2 "???" "...[wait 0.3]figured."

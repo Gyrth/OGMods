@@ -1,0 +1,39 @@
+#name "Nei"
+#participants 3
+send_character_message 2 "set_eye_dir -260.426 -79.8222 -81.8269 0.855583"
+send_character_message 2 "set_head_target -259.918 -80.0107 -81.0648 1"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+set_character_pos 2 -262.282 -80.3975 -81.2599 -6
+send_character_message 2 "set_animation \"Data/Animations/dialogue_leaning_back_onwall.anm\""
+set_character_pos 1 -259.971 -80.6672 -81.8637 -114
+send_character_message 1 "set_eye_dir -260.924 -79.6057 -81.1667 1"
+send_character_message 1 "set_torso_target -259.121 -80.2702 -80.7961 0"
+send_character_message 1 "set_head_target -261.668 -79.7755 -81.2256 1"
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_color 2 0.8 0.75 1
+set_cam -262.152 -80.1344 -78.3164 0 -17.02 0 60.1772
+send_level_message "enable 1667"
+send_level_message "enable 1456"
+send_level_message "set_camera_dof 0.3 3.0 2.0 0.3 10.0 5.0"
+vo "Data/VoiceOver/drika/steppes/nei0.wav"
+say 2 "???" "Cat. [wait 0.5]Tell me the time."
+send_character_message 1 "set_head_target -261.778 -79.9091 -81.2174 1"
+send_character_message 2 "set_head_target -259.916 -80.0637 -81.0592 1"
+send_character_message 1 "set_torso_target -260.606 -80.3339 -81.1431 1"
+vo "Data/VoiceOver/drika/steppes/nei1.wav"
+say 1 "Drika" "...[wait 0.5]ugh. [wait 0.5]Coming close to sundown, [wait 0.3]now."
+send_character_message 2 "set_head_target -260.065 -78.717 -80.904 1"
+send_character_message 2 "set_torso_target -261.348 -79.7073 -80.93 1"
+vo "Data/VoiceOver/drika/steppes/nei2.wav"
+say 2 "???" "Ehmhmhm. [wait 0.5]Good. [wait 0.5]Thank you."
+send_character_message 2 "set_head_target -260.343 -79.7621 -81.8234 1"
+send_character_message 1 "set_torso_target -260.606 -80.3339 -81.1431 0"
+vo "Data/VoiceOver/drika/steppes/nei3.wav"
+say 2 "???" "Listen to the bell tolls, [wait 0.3]alright?"
+send_character_message 2 "set_torso_target -261.348 -79.7073 -80.93 0"
+send_character_message 2 "set_head_target -260.454 -80.3165 -81.0607 1"
+vo "Data/VoiceOver/drika/steppes/nei4.wav"
+say 2 "???" "I'll be the preacher, [wait 0.3]this time."
+send_level_message "disable 1667"
+send_level_message "disable 1456"

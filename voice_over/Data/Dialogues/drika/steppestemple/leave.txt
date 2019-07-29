@@ -1,0 +1,23 @@
+#name "Lethal"
+#participants 4
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+set_character_pos 1 111.036 345.922 -79.9372 90
+send_character_message 1 "set_eye_dir 110.897 347.125 -80.8102 0.793313"
+send_character_message 1 "set_torso_target 111.354 346.111 -80.4322 1"
+send_character_message 1 "set_head_target 111.472 346.728 -80.6049 1"
+set_cam 111.486 346.868 -83.2262 -5.48 177.2 0 20.2991
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_character_message 1 "equip_item 22"
+send_level_message "set_camera_dof 0.3 5.0 10.0 0.3 20.0 10.0"
+vo "Data/VoiceOver/drika/steppestemple/leave0.wav"
+say 1 "Drika" "..."
+send_character_message 1 "set_eye_dir 110.897 347.125 -80.8102 1"
+send_character_message 1 "set_head_target 110.954 347.144 -83.4596 1"
+send_character_message 1 "set_torso_target 111.354 346.111 -80.4322 0"
+vo "Data/VoiceOver/drika/steppestemple/leave1.wav"
+say 1 "Drika" "..."
+set_cam 98.1708 364.413 -75.956 -31.15 -147.65 0.61 70.5947
+vo "Data/VoiceOver/drika/steppestemple/leave2.wav"
+say 1 "Drika" "..."
+send_global_message "levelwin level_9"

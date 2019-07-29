@@ -1,0 +1,25 @@
+#name "Lugarian"
+#participants 3
+set_character_pos 2 -216.351 -67.1656 -117.591 -73
+send_character_message 2 "set_animation \"Data/Animations/lugariansuffer.anm\""
+send_character_message 2 "set_eye_dir -216.296 -66.6991 -117.284 0.255591"
+send_character_message 2 "set_head_target -216.085 -67.1612 -116.91 1"
+set_character_pos 1 -217.937 -67.0923 -117.421 -15
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_eye_dir -218.854 -65.8067 -117.408 1"
+send_character_message 1 "set_torso_target -216.987 -66.473 -117.412 0"
+send_character_message 1 "set_head_target -216.407 -66.4241 -117.359 1"
+set_cam -219.153 -66.6904 -118.602 0 -119.72 0 22.5516
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_color 2 1 1 1
+send_level_message "set_camera_dof 0.3 3.0 2.0 0.5 3.8 1.0"
+vo "Data/VoiceOver/drika/steppes/lugarian0.wav"
+say 1 "Drika" "...[wait 0.5]a lugarian like you... [wait 0.3]what are you doing here?"
+send_character_message 2 "set_head_target -216.192 -66.9737 -116.867 1"
+send_character_message 1 "set_head_target -216.548 -66.5058 -116.899 1"
+vo "Data/VoiceOver/drika/steppes/lugarian1.wav"
+say 2 "???" "Leave me alone. [wait 0.5]I don't need your sympathy."
+send_character_message 2 "set_head_target -216.134 -67.0799 -117.119 1"
+vo "Data/VoiceOver/drika/steppes/lugarian2.wav"
+say 1 "Drika" "..."

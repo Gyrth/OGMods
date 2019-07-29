@@ -1,0 +1,24 @@
+#name "Camp"
+#participants 2
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_handhips.anm\""
+set_cam -254.673 51.3222 -97.4281 -14.09 -175.2 -0.05 50.2996
+set_character_pos 1 -255.099 49.9168 -93.4119 0
+send_character_message 1 "set_torso_target -254.805 50.2614 -93.3524 0"
+send_character_message 1 "set_head_target -254.223 50.1292 -92.8769 1"
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_level_message "set_camera_dof 0.3 2.0 10.0 2.3 4.0 10.0"
+send_character_message 1 "empty_hands"
+vo "Data/VoiceOver/drika/sandstorm/camp0.wav"
+say 1 "Drika" "...[wait 0.3]what's this, [wait 0.3]now?"
+set_cam -252.845 49.6451 -92.7589 12.7 80.57 0 23.7004
+send_character_message 1 "set_head_target -254.171 50.0003 -92.8619 1"
+send_character_message 1 "set_animation \"Data/Animations/drika_tracks.anm\""
+send_level_message "set_camera_dof 0.0 5.0 10.0 2.3 5.0 10.0"
+vo "Data/VoiceOver/drika/sandstorm/camp1.wav"
+say 1 "Drika" "[wait 0.3]A campsite. [wait 0.5]They were cooking meat. [wait 0.3]Guess they couldn't pack the leftovers."
+send_character_message 1 "set_animation \"Data/Animations/drika_tracksup.anm\""
+send_character_message 1 "set_head_target -253.187 50.1124 -93.0882 1"
+set_cam -255.803 50.1363 -92.5015 -4.9 -59.03 -0.16 60.3575
+vo "Data/VoiceOver/drika/sandstorm/camp2.wav"
+say 1 "Drika" "I'd love to take it, [wait 0.3]but it's practically frozen solid. [wait 0.3]Useless."

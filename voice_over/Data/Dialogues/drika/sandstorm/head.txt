@@ -1,0 +1,16 @@
+#name "Head"
+#participants 1
+send_character_message 1 "set_torso_target -159.042 30.0207 -11.966 0.179805"
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_character_pos 1 -159.938 29.5767 -12.3962 -22
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_eye_dir -334.133 45.3836 -111.891 1"
+send_character_message 1 "set_head_target -157.066 32.1967 -11.257 1"
+set_cam -166.503 28.8944 -7.86602 11.26 -68.26 0.02 50.5824
+send_character_message 1 "empty_hands"
+vo "Data/VoiceOver/drika/sandstorm/head0.wav"
+say 1 "Drika" "Apparently, [wait 0.3]remnants of previous Ouranian generations can sometimes surface after the cycle resets."
+send_character_message 1 "set_head_target -156.219 32.7243 -9.36394 1"
+vo "Data/VoiceOver/drika/sandstorm/head1.wav"
+say 1 "Drika" "This must be one of those artifacts..."

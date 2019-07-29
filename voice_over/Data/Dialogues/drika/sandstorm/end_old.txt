@@ -1,0 +1,12 @@
+#name "End"
+#participants 2
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/sandstorm/end_old0.wav"
+say 1 "Drika" "..."
+vo "Data/VoiceOver/drika/sandstorm/end_old1.wav"
+say 1 "Drika" "That's the both of them..."
+vo "Data/VoiceOver/drika/sandstorm/end_old2.wav"
+say 1 "Drika" "I didn't want this to happen. [wait 0.5]I wanted none of this to happen..."
+vo "Data/VoiceOver/drika/sandstorm/end_old3.wav"
+say 1 "Drika" "Maybe I shouldn't have gotten a second chance."

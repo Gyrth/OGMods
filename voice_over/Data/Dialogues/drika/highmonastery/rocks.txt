@@ -1,0 +1,100 @@
+#name "Rocks"
+#participants 14
+send_character_message 11 "set_head_target -66.6707 176.308 -244.239 1"
+send_character_message 10 "set_head_target -66.6835 176.416 -244.192 1"
+send_character_message 7 "set_head_target -66.6577 176.342 -244.571 1"
+send_character_message 6 "set_head_target -66.7418 176.381 -244.726 1"
+send_character_message 2 "set_head_target -66.5501 176.482 -244.468 1"
+send_character_message 12 "set_eye_dir -68.2371 175.596 -249.94 1"
+send_character_message 12 "set_head_target -66.7357 176.428 -244.225 1"
+send_character_message 11 "set_eye_dir -68.2432 175.671 -250.031 1"
+send_character_message 10 "set_eye_dir -67.8326 175.683 -249.149 1"
+send_character_message 9 "set_eye_dir -68.0656 175.451 -250.113 1"
+send_character_message 9 "set_head_target -66.5274 176.395 -244.068 1"
+send_character_message 8 "set_eye_dir -68.3338 175.434 -250.857 1"
+send_character_message 8 "set_head_target -66.6828 176.249 -244.273 1"
+send_character_message 7 "set_eye_dir -68.154 175.586 -250.114 1"
+send_character_message 6 "set_eye_dir -68.1188 175.533 -249.713 1"
+send_character_message 5 "set_eye_dir -64.2335 176.966 -240.139 1"
+send_character_message 5 "set_torso_target -63.7521 176.215 -239.532 0"
+send_character_message 3 "set_eye_dir -67.6944 176.794 -239.743 1"
+send_character_message 3 "set_torso_target -66.4753 176.002 -240.191 0.982264"
+send_character_message 2 "set_eye_dir -68.0462 175.517 -250.628 1"
+set_cam -73.4656 176.008 -243.023 0 -106.69 0 17.3002
+send_character_message 5 "set_head_target -65.928 176.355 -240.412 1"
+send_character_message 3 "set_head_target -65.922 176.385 -240.329 1"
+send_character_message 11 "set_torso_target -69.7911 174.663 -256.066 0"
+send_character_message 1 "set_eye_dir -66.7354 177.278 -242.88 1"
+send_character_message 1 "set_torso_target -65.4403 176.285 -241.886 0"
+send_character_message 1 "set_head_target -65.2414 176.548 -240.509 1"
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_color 2 0 0.1 1
+set_dialogue_voice 2 7
+set_dialogue_color 3 0.8 0.75 1
+set_dialogue_color 4 1 0.75 0.85
+set_dialogue_color 5 1 1 1
+set_dialogue_color 6 1 1 1
+set_dialogue_color 7 1 1 1
+set_dialogue_color 8 1 0.5 0
+set_dialogue_color 9 1 1 1
+set_dialogue_color 10 1 1 1
+set_dialogue_color 11 1 1 1
+set_dialogue_color 12 1 1 1
+set_dialogue_voice 4 3
+set_dialogue_color 13 0.6 0.9 0
+set_dialogue_voice 13 12
+set_dialogue_color 14 0 0 0
+set_character_pos 5 -65.0824 175.726 -240.385 150
+set_character_pos 3 -67.114 175.705 -240.356 22
+set_character_pos 9 -69.3093 175.18 -260.199 -30
+set_character_pos 8 -69.786 175.179 -259.248 -30
+set_character_pos 12 -70.356 174.713 -257.637 -23
+set_character_pos 11 -69.7414 174.773 -256.735 -76
+set_character_pos 1 -66.6084 175.707 -241.921 -45
+set_character_pos 2 -71.3317 174.418 -259.085 -30
+set_character_pos 7 -72.3094 174.429 -257.285 -48
+set_character_pos 6 -71.4939 174.783 -254.697 -23
+set_character_pos 10 -71.7702 174.774 -253.744 -30
+send_character_message 1 "set_animation \"Data/Animations/amos_door2.anm\""
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+send_character_message 3 "set_animation \"Data/Animations/ghostsword_idle.anm\""
+send_character_message 5 "set_animation \"Data/Animations/r_combatidle2.anm\""
+send_character_message 6 "set_animation \"Data/Animations/c_actionidle.anm\""
+send_character_message 7 "set_animation \"Data/Animations/c_actionidle.anm\""
+send_character_message 8 "set_animation \"Data/Animations/r_meditate.anm\""
+send_character_message 9 "set_animation \"Data/Animations/r_meditate.anm\""
+send_character_message 10 "set_animation \"Data/Animations/d_actionidle.anm\""
+send_character_message 11 "set_animation \"Data/Animations/r_actionidle_crouch_knife_threat.anm\""
+send_character_message 12 "set_animation \"Data/Animations/r_actionidlecrouchthreat.anm\""
+send_level_message "disable 717"
+send_level_message "enable 846"
+vo "Data/VoiceOver/drika/highmonastery/rocks0.wav"
+say 1 "Drika" "..."
+vo "Data/VoiceOver/drika/highmonastery/rocks1.wav"
+say 5 "???" "Nei, [wait 0.3]was it?"
+vo "Data/VoiceOver/drika/highmonastery/rocks2.wav"
+say 3 "Nei" "..."
+vo "Data/VoiceOver/drika/highmonastery/rocks3.wav"
+say 5 "???" "You think you're taking back what's yours, [wait 0.3]huh?"
+vo "Data/VoiceOver/drika/highmonastery/rocks4.wav"
+say 3 "Nei" "...[wait 0.5]!"
+vo "Data/VoiceOver/drika/highmonastery/rocks5.wav"
+say 1 "Drika" "..."
+vo "Data/VoiceOver/drika/highmonastery/rocks6.wav"
+say 3 "Nei" "...[wait 0.5]ugh...[wait 0.3]!"
+vo "Data/VoiceOver/drika/highmonastery/rocks7.wav"
+say 1 "Drika" "...[wait 0.3]?"
+vo "Data/VoiceOver/drika/highmonastery/rocks8.wav"
+say 1 "Drika" "..."
+vo "Data/VoiceOver/drika/highmonastery/rocks9.wav"
+say 3 "Nei" "...[wait 0.5]wait, [wait 0.3]stop! [wait 0.5]St-[wait 0.3]Stop!"
+vo "Data/VoiceOver/drika/highmonastery/rocks10.wav"
+say 1 "Drika" "..."
+vo "Data/VoiceOver/drika/highmonastery/rocks11.wav"
+say 1 "Drika" "..."
+vo "Data/VoiceOver/drika/highmonastery/rocks12.wav"
+say 1 "Drika" "..."
+vo "Data/VoiceOver/drika/highmonastery/rocks13.wav"
+say 14 "" "..."
+send_global_message "levelwin level_7"

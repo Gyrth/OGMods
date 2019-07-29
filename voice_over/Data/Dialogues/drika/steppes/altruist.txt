@@ -1,0 +1,20 @@
+#name "Altruist"
+#participants 3
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/steppes/altruist0.wav"
+say 1 "Drika" "Greetings."
+vo "Data/VoiceOver/drika/steppes/altruist1.wav"
+say 2 "???" "'Lo."
+vo "Data/VoiceOver/drika/steppes/altruist2.wav"
+say 1 "Drika" "I've never travelled to Ouran before, so forgive me for inquiring..."
+vo "Data/VoiceOver/drika/steppes/altruist3.wav"
+say 1 "Drika" "I've heard someone mention a 'cult'?"
+vo "Data/VoiceOver/drika/steppes/altruist4.wav"
+say 2 "???" "Those altruist folk?"
+vo "Data/VoiceOver/drika/steppes/altruist5.wav"
+say 2 "???" "They keep to 'emselves. Don't talk to nobody."
+vo "Data/VoiceOver/drika/steppes/altruist6.wav"
+say 2 "???" "The only things they'll say to anyone not of their kin is how they're 'taking back what is theirs' and such things..."
+vo "Data/VoiceOver/drika/steppes/altruist7.wav"
+say 2 "???" "Dumb idea to get involved in that. Things are taken no matter what."

@@ -1,0 +1,35 @@
+#name "End"
+#participants 2
+send_character_message 1 "set_head_target -70.51 -2.51573 184.754 1"
+set_character_pos 1 -71.4803 -3.38684 188.444 71
+send_character_message 1 "set_animation \"Data/Animations/r_woundedidlearmed.anm\""
+set_cam -86.7841 -2.82696 172.156 0 -136.72 0 17.912
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_color 2 1 1 1
+set_dialogue_voice 2 17
+set_dialogue_color 3 0.8 0.8 0.8
+set_dialogue_voice 3 13
+send_level_message "set_camera_dof 2.3 13.0 10.0 0.3 20.0 10.0"
+send_level_message "music_layer_override 0"
+send_character_message 1 "equip_item 30"
+vo "Data/VoiceOver/drika/sandstorm/end0.wav"
+say 1 "Drika" "..."
+send_character_message 1 "set_torso_target -71.4738 -3.12276 187.073 1"
+send_character_message 1 "set_head_target -75.0305 -2.93741 187.482 1"
+send_level_message "music_layer_override 0"
+vo "Data/VoiceOver/drika/sandstorm/end1.wav"
+say 1 "Drika" "That's the both of them..."
+send_character_message 1 "set_head_target -70.7261 -3.40645 187.837 1"
+send_character_message 1 "set_torso_target -71.1487 -3.4785 187.443 1"
+set_cam -69.7839 -3.08531 183.787 0 157.77 0 17.912
+send_level_message "set_camera_dof 0.3 5.0 10.0 2.3 10.0 10.0"
+vo "Data/VoiceOver/drika/sandstorm/end2.wav"
+say 1 "Drika" "I didn't want this to happen. [wait 0.5]I wanted none of this to happen..."
+set_cam -52.0857 -1.67711 169.476 -2.82 137.35 0 17.912
+send_character_message 1 "set_head_target -70.4821 -2.45751 187.039 1"
+send_character_message 1 "set_torso_target -70.9805 -3.37312 187.421 1"
+send_level_message "set_camera_dof 1.3 14.0 5.0 0.3 30.0 10.0"
+vo "Data/VoiceOver/drika/sandstorm/end3.wav"
+say 1 "Drika" "Maybe I shouldn't have gotten a second chance."
+send_global_message "levelwin level_3"

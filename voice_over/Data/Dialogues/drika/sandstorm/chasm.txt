@@ -1,0 +1,12 @@
+#name "Chasm"
+#participants 2
+send_character_message 1 "set_animation \"Data/Animations/drika_tracks.anm\""
+set_character_pos 1 -190.847 23.2089 42.4977 -14
+send_character_message 1 "set_eye_dir -334.154 45.3572 -111.859 1"
+send_character_message 1 "set_head_target -190.145 22.8038 42.6886 0"
+set_cam -197.247 37.7546 43.0855 -72.88 -82.14 0.09 51.1651
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_character_message 1 "empty_hands"
+vo "Data/VoiceOver/drika/sandstorm/chasm0.wav"
+say 1 "Drika" "The wind must've swept the pawprints away in here. [wait 0.5]Guess I'll just have to keep moving, [wait 0.3]I might pick up the trail again."

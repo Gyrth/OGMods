@@ -1,0 +1,14 @@
+#name "Cultist"
+#participants 4
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/steppes/cultist_old0.wav"
+say 2 "???" "Psst -- [wait 0.3]kitty."
+vo "Data/VoiceOver/drika/steppes/cultist_old1.wav"
+say 1 "Drika" "...[wait 0.3]?"
+vo "Data/VoiceOver/drika/steppes/cultist_old2.wav"
+say 2 "???" "You come here looking for something, yeah?"
+vo "Data/VoiceOver/drika/steppes/cultist_old3.wav"
+say 3 "????" "It'll get stolen, [wait 0.3]as long as you're on the wrong side of the petal."
+vo "Data/VoiceOver/drika/steppes/cultist_old4.wav"
+say 2 "???" "Now scram. [wait 0.5]Yell for help and you'll see where that gets ya."

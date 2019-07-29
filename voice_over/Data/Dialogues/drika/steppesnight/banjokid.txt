@@ -1,0 +1,39 @@
+#name "Banjo"
+#participants 3
+set_character_pos 2 -256.197 -74.9495 -45.672 88
+send_character_message 2 "set_animation \"Data/Animations/banjo.anm\""
+send_character_message 2 "set_eye_dir -257.081 -73.8888 -45.7187 0"
+set_character_pos 1 -257.984 -74.6519 -50.9826 -69
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_eye_dir -259.164 -73.463 -50.8982 1"
+send_character_message 1 "set_torso_target -257.298 -74.1293 -50.9014 0"
+send_character_message 1 "set_head_target -256.227 -74.1452 -45.8166 1"
+set_cam -256.373 -74.3939 -43.7047 0 2.62 0 29.0487
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_voice 2 2
+set_dialogue_color 2 1 1 1
+send_level_message "set_camera_dof 0.3 5.0 10.0 0.5 20.0 10.0"
+vo "Data/VoiceOver/drika/steppesnight/banjokid0.wav"
+say 1 "Drika" "...[wait 0.3]you're young compared to most of the people here."
+set_cam -255.84 -74.8197 -46.9499 14.18 158.48 0 47.6449
+send_level_message "set_camera_dof 0.0 5.0 10.0 0.5 1.5 1.0"
+vo "Data/VoiceOver/drika/steppesnight/banjokid1.wav"
+say 2 "???" "Yup. [wait 0.5]'Case you're wondering what's up with this old thing..."
+send_character_message 2 "set_head_target -256.982 -74.1368 -47.7769 1"
+send_character_message 2 "set_eye_dir -257.081 -73.8888 -45.7187 0.505084"
+vo "Data/VoiceOver/drika/steppesnight/banjokid2.wav"
+say 2 "???" "Got it in the Arlissian slums. [wait 0.3]Parents sent me out here."
+set_cam -256.365 -74.6333 -46.8161 -2.54 -169.96 -3.17 40.4293
+send_character_message 2 "set_eye_dir -257.081 -73.8888 -45.7187 0"
+send_character_message 2 "set_head_target -256.982 -74.1368 -47.7769 0"
+send_level_message "set_camera_dof 0.0 5.0 10.0 0.6 3.0 1.0"
+vo "Data/VoiceOver/drika/steppesnight/banjokid3.wav"
+say 1 "Drika" "So why's it say ''Fear Not the Inevitable''...?"
+set_cam -255.876 -74.3305 -46.5971 1.55 154.77 0.03 40.4293
+vo "Data/VoiceOver/drika/steppesnight/banjokid4.wav"
+say 2 "???" "I'm probably gonna die out here. [wait 0.1]That's why."
+set_cam -259.018 -73.9483 -52.2363 -3.18 -149.34 0.6 42.3683
+send_level_message "set_camera_dof 0.3 5.0 10.0 0.5 9.0 6.0"
+vo "Data/VoiceOver/drika/steppesnight/banjokid5.wav"
+say 1 "Drika" "..."

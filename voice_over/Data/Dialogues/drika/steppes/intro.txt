@@ -1,0 +1,60 @@
+#name "Intro"
+#participants 9
+send_character_message 4 "set_eye_dir -124.315 -82.7437 -0.124518 1"
+send_character_message 3 "set_eye_dir -124.251 -82.9065 -0.817971 1"
+send_character_message 8 "set_animation \"Data/Animations/r_dialogue_thoughtful.anm\""
+send_character_message 8 "set_eye_dir -116.009 -51.1413 24.5643 1"
+send_character_message 8 "set_head_target -77.5942 -70.8194 39.6952 1"
+send_character_message 2 "set_eye_dir -115.252 -51.6114 23.9431 1"
+set_character_pos 4 -129.355 -84.167 -3.66228 -78
+send_character_message 4 "set_head_target -114.491 -84.4808 5.97202 1"
+set_character_pos 3 -127.041 -84.1414 -2.44136 -101
+send_character_message 3 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 3 "set_torso_target -126.871 -83.8267 -1.39279 1"
+send_character_message 3 "set_head_target -117.13 -84.3804 4.566 1"
+send_character_message 1 "set_torso_target -40.7111 -89.5877 54.7056 1"
+send_character_message 1 "set_head_target -63.8059 -88.7916 43.2684 1"
+set_character_pos 1 -40.0653 -90.3804 55.3481 150
+set_character_pos 7 -209.698 -74.9458 -92.7825 -90
+send_character_message 7 "set_animation \"Data/Animations/r_swordclean.anm\""
+send_character_message 2 "set_animation \"Data/Animations/bow/r_arrow_idle_stand_threat.anm\""
+send_character_message 2 "set_head_target -110.681 -53.7025 25.384 1"
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_color 2 1 1 1
+set_dialogue_color 3 0 0.1 1
+set_dialogue_voice 3 7
+set_cam -38.7812 -90.0174 55.4159 13.39 66.8 0 52.503
+send_level_message "music_layer_override 0"
+send_level_message "set_camera_dof 0.3 5.0 10.0 0 20.0 10.0"
+vo "Data/VoiceOver/drika/steppes/intro0.wav"
+say 1 "Drika" "...so this is it? [wait 0.5]The Steppes?"
+send_character_message 1 "set_head_target -63.8137 -77.6428 45.5942 1"
+vo "Data/VoiceOver/drika/steppes/intro1.wav"
+say 1 "Drika" "This is where I'll spend the rest of Spur and Sail...?"
+send_character_message 8 "set_torso_target -114.066 -52.1351 24.6293 1"
+set_cam -118.614 -49.6724 22.6165 -27.27 -111.99 -0.17 14.2347
+vo "Data/VoiceOver/drika/steppes/intro2.wav"
+say 2 "???" "..."
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_welcome.anm\""
+send_level_message "set_camera_dof 0.3 10.0 2.0 0 20.0 10.0"
+vo "Data/VoiceOver/drika/steppes/intro3.wav"
+say 1 "Drika" "I seek shelter -- [wait 0.5]grant me refuge!"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 4 "set_torso_target -126.589 -83.7057 -1.51887 1"
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+set_cam -133.457 -83.257 -5.82378 -2.8 -122.05 0.04 15.6773
+send_level_message "set_camera_dof 0.3 5.0 10.0 0.5 100.0 5.0"
+vo "Data/VoiceOver/drika/steppes/intro4.wav"
+say 3 "????" "Shut up and get in!"
+send_character_message 8 "set_animation \"Data/Animations/prayer.anm\""
+send_character_message 8 "set_head_target -77.5942 -70.8194 39.6952 0"
+send_character_message 2 "set_head_target -110.681 -53.7025 25.384 1"
+send_character_message 8 "set_torso_target -114.066 -52.1351 24.6293 0"
+set_character_pos 8 -136.266 -51.4331 25.5661 -144
+send_character_message 1 "set_head_target -65.693 -88.3781 38.4871 1"
+send_character_message 1 "set_torso_target -40.7111 -89.5877 54.7056 0"
+set_cam -34.1328 -89.9399 58.608 1.89 59.37 -0.04 8.48703
+send_level_message "set_camera_dof 0.3 20.0 5.0 0 20.0 10.0"
+vo "Data/VoiceOver/drika/steppes/intro5.wav"
+say 1 "Drika" "..."

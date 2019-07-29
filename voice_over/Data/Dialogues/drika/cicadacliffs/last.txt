@@ -1,0 +1,37 @@
+#name "Last"
+#participants 3
+set_character_pos 1 28.8014 63.237 -57.7965 90
+send_character_message 1 "set_animation \"Data/Animations/r_meditate.anm\""
+send_character_message 1 "set_eye_dir 28.8827 64.5427 -56.9534 0"
+send_character_message 1 "set_head_target 28.8428 63.1234 -58.2618 1"
+set_cam 31.2547 62.9876 -65.3041 0 161.57 0 19.793
+set_dialogue_color 2 0.6 0.9 0
+set_dialogue_voice 2 12
+send_level_message "disable 105"
+send_character_message 1 "set_torso_target 28.9413 63.0968 -58.7204 0"
+send_character_message 1 "set_head_target 28.5429 63.2282 -58.334 0"
+set_cam 27.4659 65.0893 -73.4383 -23.28 -168.74 0 38.0006
+send_character_message 1 "set_animation \"Data/Animations/const_freefallstart.anm\""
+set_character_pos 1 28.8018 62.7024 -65.6854 90
+vo "Data/VoiceOver/drika/cicadacliffs/last0.wav"
+say 2 "Drika" "...[wait 0.3]so I'll make the right choice this time. [wait 0.5]I'll kill the only person who deserves to be killed."
+send_character_message 1 "set_animation \"Data/Animations/const_freefallbreath.anm\""
+set_cam 32.2034 64.2441 -63.7417 -18.09 53.06 0 39.484
+vo "Data/VoiceOver/drika/cicadacliffs/last1.wav"
+say 2 "Drika" "All things come to an end, [wait 0.3]and it's time I reach mine."
+set_cam 28.9434 62.9939 -61.3178 4.18 1.23 -0.42 36.5108
+send_character_message 1 "set_animation \"Data/Animations/const_freefallarm.anm\""
+vo "Data/VoiceOver/drika/cicadacliffs/last2.wav"
+say 2 "Drika" "[wait 0.5]I'll let the sands of Ouran wipe away the guilt and whatever life is left inside me."
+set_character_pos 1 28.8018 62.7024 -65.7124 90
+send_character_message 1 "set_animation \"Data/Animations/const_freefallstep.anm\""
+send_level_message "enable 105"
+vo "Data/VoiceOver/drika/cicadacliffs/last3.wav"
+say 2 "Drika" "..."
+set_cam 29.7646 65.0564 -66.2469 -73.38 -3.35 82.97 76.7984
+vo "Data/VoiceOver/drika/cicadacliffs/last4.wav"
+say 2 "Drika" "..."
+fade_to_black 1
+vo "Data/VoiceOver/drika/cicadacliffs/last5.wav"
+say 3 "" "..."
+send_global_message "levelwin"

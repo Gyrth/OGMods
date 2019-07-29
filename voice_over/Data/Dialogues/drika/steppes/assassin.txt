@@ -1,0 +1,47 @@
+#name "Assassin"
+#participants 3
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_character_message 2 "set_eye_dir -213.791 -71.3482 -105.026 0.62839"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_head_target -214.258 -71.3569 -104.821 1"
+set_cam -220.654 -71.4841 -107.028 0 -106.53 0 10.4465
+set_character_pos 1 -216.104 -72.1516 -105.894 -25
+set_character_pos 2 -213.696 -72.2025 -104.719 170
+send_character_message 2 "set_head_target -215.724 -71.3405 -105.75 1"
+send_character_message 2 "set_animation \"Data/Animations/r_idle.anm\""
+send_level_message "set_camera_dof 0.7 6.0 3.0 5.3 9.0 3.0"
+vo "Data/VoiceOver/drika/steppes/assassin0.wav"
+say 2 "???" "Of what business do you have for me?"
+send_character_message 1 "set_head_target -214.258 -71.2771 -104.821 1"
+send_character_message 1 "set_torso_target -215.394 -71.6695 -105.204 1"
+send_level_message "set_camera_dof 0.0 6.0 3.0 5.3 9.0 3.0"
+vo "Data/VoiceOver/drika/steppes/assassin1.wav"
+say 1 "Drika" "I've none; [wait 0.3]I'm just looking for shelter within these walls."
+send_character_message 2 "set_torso_target -214.562 -71.762 -104.752 1"
+set_cam -211.878 -71.3841 -105.603 0 109.17 0 19.6061
+send_character_message 2 "set_eye_dir -213.791 -71.3482 -105.026 1"
+send_character_message 2 "set_head_target -216.062 -71.1288 -104.3 1"
+send_level_message "set_camera_dof 0.7 6.0 3.0 0 9.0 3.0"
+vo "Data/VoiceOver/drika/steppes/assassin2.wav"
+say 2 "???" "Seems the only place that'll accept you is the temple of prayer, [wait 0.3]o'er there. [wait 0.5]I'm sure you'll fit in."
+set_cam -213.069 -71.515 -103.724 0 44.47 0 32.0523
+send_character_message 2 "set_head_target -215.564 -71.4388 -105.626 1"
+send_level_message "set_camera_dof 0.7 3.0 3.0 2 9.0 3.0"
+vo "Data/VoiceOver/drika/steppes/assassin3.wav"
+say 1 "Drika" "...[wait 0.3]who are you, anyways?"
+send_character_message 2 "set_head_target -215.564 -71.0355 -105.626 1"
+send_character_message 2 "set_torso_target -214.562 -71.762 -104.752 0"
+vo "Data/VoiceOver/drika/steppes/assassin4.wav"
+say 2 "???" "I'm the limb of Ouran that fights back. [wait 0.5]If anyone comes here to hurt its denizens, [wait 0.3]I'm here to kill 'em."
+send_character_message 2 "set_eye_dir -213.791 -71.3482 -105.026 0"
+send_character_message 2 "set_head_target -215.241 -71.6265 -105.965 1"
+set_cam -215.091 -71.5455 -107.327 0 -157.38 0 21.6181
+send_level_message "set_camera_dof 0.0 6.0 3.0 0.4 9.0 3.0"
+vo "Data/VoiceOver/drika/steppes/assassin5.wav"
+say 2 "???" "Too many times, [wait 0.3]the Arlissian Collective -- [wait 0.5]er, [wait 0.3]Cinderbreathe Empire now thinks it's a smart idea to send people chasing after stragglers o'er here."
+send_character_message 2 "set_torso_target -214.607 -71.7377 -104.956 1"
+send_character_message 2 "set_head_target -215.464 -70.9315 -105.636 1"
+send_character_message 2 "set_eye_dir -213.791 -71.3482 -105.026 0.575846"
+vo "Data/VoiceOver/drika/steppes/assassin6.wav"
+say 2 "???" "I'm one of those people making sure that's a bad idea."

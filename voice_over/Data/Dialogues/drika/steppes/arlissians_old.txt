@@ -1,0 +1,18 @@
+#name "Arlissians"
+#participants 4
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/steppes/arlissians_old0.wav"
+say 2 "???" "..."
+vo "Data/VoiceOver/drika/steppes/arlissians_old1.wav"
+say 1 "Drika" "May this one ask?"
+vo "Data/VoiceOver/drika/steppes/arlissians_old2.wav"
+say 3 "????" "We were travelling on behalf of the Arlissian Collective's King Vivian."
+vo "Data/VoiceOver/drika/steppes/arlissians_old3.wav"
+say 3 "????" "News just broke to us."
+vo "Data/VoiceOver/drika/steppes/arlissians_old4.wav"
+say 2 "???" "I hate the dirtclods."
+vo "Data/VoiceOver/drika/steppes/arlissians_old5.wav"
+say 2 "???" "I hate them more than anything."
+vo "Data/VoiceOver/drika/steppes/arlissians_old6.wav"
+say 1 "Drika" "..."

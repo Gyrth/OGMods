@@ -1,7 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2.7
 
-# import http.client, urllib.parse
-# import requests
 import os
 # import json
 from xml.etree import ElementTree as etree
@@ -16,11 +14,12 @@ es.voice = 'en-scottish'
 es.speed = 175
 es.word_gap = 5
 
-# es.say("That is, assuming you ate your rations on the way here.")
-# es.save("That is, assuming you ate your rations on the way here.", "Data/VoiceOver/test")
+def walk_error(exception_instance):
+	print(exception_instance)
 
 def find_dialogue_txt (path, file_paths):
-	for root, dirs, files in os.walk(path):
+	# print(path)
+	for root, dirs, files in os.walk(path, onerror=walk_error):
 		for name in files:
 			if name.endswith((".txt")):
 				relDir = ""
@@ -38,7 +37,7 @@ def find_dialogue_txt (path, file_paths):
 				file_paths.append(file_info)
 
 def voice_over_txt(full_level_path, relative_path, file):
-	#print(full_level_path)
+	print(full_level_path)
 	with open(full_level_path, "r") as f:
 		line = f.readline()
 		out_lines = []
@@ -47,8 +46,10 @@ def voice_over_txt(full_level_path, relative_path, file):
 
 		voiceover_path = "Data/VoiceOver"
 		dialogue_path = "Data/Dialogues"
-		os.makedirs(voiceover_path + "/" + relative_path, exist_ok=True)
-		os.makedirs(dialogue_path + "/" + relative_path, exist_ok=True)
+		if not os.path.exists(voiceover_path + "/" + relative_path):
+			os.makedirs(voiceover_path + "/" + relative_path)
+		if not os.path.exists(dialogue_path + "/" + relative_path):
+			os.makedirs(dialogue_path + "/" + relative_path)
 
 		while line:
 			# Check if line begins with say.
@@ -70,7 +71,12 @@ def voice_over_txt(full_level_path, relative_path, file):
 						# No [ or ] found in this line
 						dialogue.append(dia)
 
-				sound_file = "Data/VoiceOver/" + relative_path + "/" + file[:-4] + str(say_counter) + ".wav"
+				local_path = relative_path
+				if local_path != "":
+					local_path += "/"
+
+				sound_file = "Data/VoiceOver/" + local_path + file[:-4] + str(say_counter) + ".wav"
+				sound_file.replace(" ", "_")
 				es.save("".join(dialogue), sound_file)
 				out_lines.append("vo \"" + sound_file + "\"\n")
 				say_counter += 1
@@ -86,7 +92,7 @@ def voice_over_txt(full_level_path, relative_path, file):
 		    translated_dialogue_file.write(line)
 		translated_dialogue_file.close()
 
-dialogues_path = "/run/Hyperdisk/SteamLibraryLinux/steamapps/common/Overgrowth/Data/Dialogues"
+dialogues_path = "/run/HyperDisk/SteamLibraryLinux/steamapps/common/Overgrowth/Data/Dialogues/"
 
 dialogue_info = []
 find_dialogue_txt(dialogues_path, dialogue_info)

@@ -1,0 +1,30 @@
+#name "Temple"
+#participants 3
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_character_pos 2 -278.727 -74.3719 -86.3877 -42
+send_character_message 2 "set_animation \"Data/Animations/interestingsit.anm\""
+send_character_message 2 "set_head_target -278.047 -73.8352 -83.9983 1"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_head_target -278.436 -73.6809 -85.0265 1"
+set_cam -275.643 -73.9552 -80.4522 0 34.63 0 26.3626
+set_character_pos 1 -277.553 -74.4592 -82.6414 143
+vo "Data/VoiceOver/drika/steppes/temple0.wav"
+say 1 "Drika" "Is this the temple?"
+send_character_message 2 "set_head_target -277.833 -74.1309 -83.4485 1"
+vo "Data/VoiceOver/drika/steppes/temple1.wav"
+say 2 "???" "That it is. [wait 0.5]You looking for prayer?"
+send_character_message 1 "set_head_target -277.121 -73.5357 -86.4452 1"
+vo "Data/VoiceOver/drika/steppes/temple2.wav"
+say 1 "Drika" "No, [wait 0.3]I'm just looking for somewhere to rest."
+send_character_message 2 "set_eye_dir -279.044 -73.4352 -87.1933 0"
+send_character_message 2 "set_head_target -277.833 -73.4545 -83.4485 1"
+send_character_message 1 "set_head_target -278.8 -73.9819 -86.2621 1"
+vo "Data/VoiceOver/drika/steppes/temple3.wav"
+say 2 "???" "There's no rest without prayer, [wait 0.3]sister. [wait 0.5]Come in when you need to."
+send_character_message 1 "set_head_target -282.985 -72.6434 -85.0796 1"
+set_cam -273.547 -74.0227 -81.9521 5.35 67.95 0 40.6546
+send_character_message 2 "set_head_target -275.674 -73.292 -84.219 1"
+send_character_message 2 "set_eye_dir -279.044 -73.4352 -87.1933 1"
+vo "Data/VoiceOver/drika/steppes/temple4.wav"
+say 1 "Drika" "...[wait 0.5]I could call it a day now, [wait 0.3]or maybe I could keep looking around..."

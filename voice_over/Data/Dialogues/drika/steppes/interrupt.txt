@@ -1,0 +1,25 @@
+#name "Interrupt"
+#participants 3
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+set_cam -171.442 -53.2439 45.5045 0.85 -91.52 -1.53 20.0377
+set_character_pos 2 -163.376 -53.1704 45.1036 180
+send_character_message 2 "set_animation \"Data/Animations/d_actionidle.anm\""
+send_character_message 2 "set_torso_target -164.036 -53.4216 44.9941 1"
+send_character_message 2 "set_head_target -168.251 -53.1169 45.7657 1"
+set_character_pos 1 -169.071 -53.9807 45.8163 0
+send_character_message 1 "set_eye_dir -168.334 -52.6952 46.3167 1"
+send_character_message 1 "set_torso_target -169.898 -53.3615 45.2991 0"
+send_character_message 1 "set_head_target -163.825 -52.5161 45.1679 1"
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/steppes/interrupt0.wav"
+say 2 "???" "Hey, [wait 0.3]you must be one of the excavators...?"
+send_character_message 2 "set_animation \"Data/Animations/amos_door1.anm\""
+send_character_message 2 "set_torso_target -164.036 -53.4216 44.9941 0"
+vo "Data/VoiceOver/drika/steppes/interrupt1.wav"
+say 2 "???" "Make your way through, [wait 0.3]but whatever you do, [wait 0.5]don't interrupt the father."
+send_character_message 1 "set_head_target -163.858 -52.9444 45.0829 1"
+send_character_message 2 "set_head_target -168.496 -52.7931 45.7657 1"
+send_character_message 2 "set_animation \"Data/Animations/r_dialogue_armcross.anm\""
+vo "Data/VoiceOver/drika/steppes/interrupt2.wav"
+say 2 "???" "This is important stuff, [wait 0.3]okay?"

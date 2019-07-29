@@ -1,0 +1,18 @@
+#name "Find"
+#participants 2
+set_character_pos 1 -140.918 17.236 82.5403 -55
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 1 "set_torso_target -142.192 18.8357 79.7095 0"
+send_character_message 1 "set_head_target -134.874 18.4084 95.1549 1"
+set_cam -142.243 18.1481 80.9656 -4.17 -147.59 0.01 34.121
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/sandstorm/find_old0.wav"
+say 1 "Drika" "[wait 0.3]Is that a flag on the crete...?"
+set_cam -112.422 4.65997 129.883 -2.97 -144.62 0.02 21.5808
+vo "Data/VoiceOver/drika/sandstorm/find_old1.wav"
+say 1 "Drika" "There's something there, [wait 0.3]through the sand... [wait 0.5]someone's home!"
+send_character_message 1 "set_animation \"Data/Animations/c_actionidle.anm\""
+set_cam -143.278 18.0097 80.5335 -2.94 -135.88 -0.43 32.5805
+vo "Data/VoiceOver/drika/sandstorm/find_old2.wav"
+say 1 "Drika" "Can they point me to the Steppes...?"

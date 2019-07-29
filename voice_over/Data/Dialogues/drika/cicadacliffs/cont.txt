@@ -1,0 +1,24 @@
+#name "Cont"
+#participants 2
+set_dialogue_color 2 0.6 0.9 0
+set_dialogue_voice 2 12
+set_character_pos 1 74.3419 54.8011 -52.1139 168
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_eye_dir 73.6469 55.8129 -51.5833 0"
+send_character_message 1 "set_torso_target 72.8227 54.5087 -52.3598 1"
+send_character_message 1 "set_head_target 72.5023 55.1977 -52.6871 1"
+set_cam 73.1741 55.351 -51.4347 0 -54.44 0 61.6453
+send_level_message "set_camera_dof 0.0 5.0 10.0 0.3 20.0 10.0"
+vo "Data/VoiceOver/drika/cicadacliffs/cont0.wav"
+say 2 "Drika" "Cobus... [wait 0.3]he never deserved my exploitation. [wait 0.5]That was wrong of me."
+send_character_message 1 "set_torso_target 73.0497 54.5159 -52.3128 1"
+send_character_message 1 "set_eye_dir 73.6469 55.8129 -51.5833 0.350082"
+send_character_message 1 "set_head_target 72.2553 54.7816 -52.4062 1"
+vo "Data/VoiceOver/drika/cicadacliffs/cont1.wav"
+say 2 "Drika" "Ferdi... [wait 0.3]I should never have accepted his help. [wait 0.5]Had he known who I am..."
+send_character_message 1 "set_eye_dir 73.6469 55.8129 -51.5833 1"
+set_cam 76.5497 55.3508 -53.0855 0 105.99 0 75.1394
+send_character_message 1 "set_head_target 69.0313 56.9886 -50.7768 1"
+send_character_message 1 "set_torso_target 73.0497 54.5159 -52.3128 0"
+vo "Data/VoiceOver/drika/cicadacliffs/cont2.wav"
+say 2 "Drika" "And Terai. [wait 0.5]I put him through hell just to help someone like me."

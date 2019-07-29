@@ -1,0 +1,23 @@
+#name "Lugarian"
+#participants 1
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_character_message 1 "set_head_target -216.547 -66.511 -117.385 1"
+send_character_message 1 "set_torso_target -215.851 -66.519 -117.448 0"
+set_character_pos 1 -217.463 -67.0113 -117.917 -46
+send_character_message 1 "set_eye_dir -217.654 -65.8545 -117.818 1"
+set_cam -214.824 -66.7347 -114.11 3.05 34.96 -0.74 31.1065
+send_level_message "set_camera_dof 0.3 5.0 10.0 0.3 20.0 10.0"
+vo "Data/VoiceOver/drika/steppesnight/lugarian0.wav"
+say 1 "Drika" "Who was that Lugarian, [wait 0.3]anyways...?"
+send_character_message 1 "set_torso_target -217.053 -66.642 -117.42 1"
+send_character_message 1 "set_head_target -216.886 -66.5474 -117.157 1"
+send_character_message 1 "set_eye_dir -217.654 -65.8545 -117.818 0.459437"
+vo "Data/VoiceOver/drika/steppesnight/lugarian1.wav"
+say 1 "Drika" "She seemed lonely -- [wait 0.5]moreso than the others."
+send_character_message 1 "set_eye_dir -217.654 -65.8545 -117.818 0.929496"
+send_character_message 1 "set_head_target -216.242 -66.6766 -116.855 1"
+send_character_message 1 "set_torso_target -216.996 -66.7066 -117.437 1"
+vo "Data/VoiceOver/drika/steppesnight/lugarian2.wav"
+say 1 "Drika" "And that skull she was staring at..."

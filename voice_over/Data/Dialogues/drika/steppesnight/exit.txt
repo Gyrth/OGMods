@@ -1,0 +1,11 @@
+#name "Exit"
+#participants 2
+set_character_pos 1 -278.529 -74.4221 -83.0829 149
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_head_target -282.852 -71.8734 -85.5236 1"
+set_cam -271.057 -73.659 -84.5409 0 97.92 0 60.2887
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/steppesnight/exit0.wav"
+say 1 "Drika" "Time to pack up for the night... [wait 0.3]hope there's a bed left for me."
+send_global_message "levelwin level_8"

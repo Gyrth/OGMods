@@ -1,0 +1,93 @@
+#name "Leave"
+#participants 14
+send_character_message 2 "set_torso_target -77.4046 175.304 -247.167 0"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 2 "set_animation \"Data/Animations/amos_door1.anm\""
+send_character_message 3 "set_animation \"Data/Animations/nei_confront1.anm\""
+send_character_message 5 "set_animation \"Data/Animations/hand_confront1.anm\""
+send_character_message 6 "set_animation \"Data/Animations/c_actionidle.anm\""
+send_character_message 7 "set_animation \"Data/Animations/c_actionidle.anm\""
+send_character_message 8 "set_animation \"Data/Animations/r_meditate.anm\""
+send_character_message 9 "set_animation \"Data/Animations/r_meditate.anm\""
+send_character_message 10 "set_animation \"Data/Animations/d_actionidle.anm\""
+send_character_message 11 "set_animation \"Data/Animations/r_actionidle_crouch_knife_threat.anm\""
+send_character_message 12 "set_animation \"Data/Animations/r_actionidlecrouchthreat.anm\""
+send_character_message 11 "set_head_target -66.6707 176.308 -244.239 1"
+send_character_message 10 "set_head_target -66.6835 176.416 -244.192 1"
+send_character_message 7 "set_head_target -66.6577 176.342 -244.571 1"
+send_character_message 6 "set_head_target -66.7418 176.381 -244.726 1"
+send_character_message 2 "set_head_target -79.7848 175.564 -245.098 1"
+send_character_message 12 "set_eye_dir -68.2371 175.596 -249.94 1"
+send_character_message 12 "set_head_target -66.7357 176.428 -244.225 1"
+send_character_message 11 "set_eye_dir -68.2432 175.671 -250.031 1"
+send_character_message 10 "set_eye_dir -67.8326 175.683 -249.149 1"
+send_character_message 9 "set_eye_dir -68.0656 175.451 -250.113 1"
+send_character_message 9 "set_head_target -66.5274 176.395 -244.068 1"
+send_character_message 8 "set_eye_dir -68.3338 175.434 -250.857 1"
+send_character_message 8 "set_head_target -66.6828 176.249 -244.273 1"
+send_character_message 7 "set_eye_dir -68.154 175.586 -250.114 1"
+send_character_message 6 "set_eye_dir -68.1188 175.533 -249.713 1"
+send_character_message 5 "set_eye_dir -64.2335 176.966 -240.139 1"
+send_character_message 5 "set_torso_target -63.7521 176.215 -239.532 0"
+send_character_message 3 "set_eye_dir -65.2179 176.583 -240.5 1"
+send_character_message 3 "set_torso_target -66.5768 176.202 -240.27 0.00494355"
+send_character_message 2 "set_eye_dir -79.7387 175.638 -245.107 1"
+send_character_message 5 "set_head_target -67.0012 176.361 -240.292 1"
+send_character_message 3 "set_head_target -65.9756 176.549 -240.339 1"
+send_character_message 11 "set_torso_target -69.7911 174.663 -256.066 0"
+send_character_message 1 "set_eye_dir -80.6198 175.277 -244.625 1"
+send_character_message 1 "set_torso_target -80.4918 175.188 -245.323 1"
+send_character_message 1 "set_head_target -79.8237 175.541 -245.901 1"
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_color 2 0 0.1 1
+set_dialogue_voice 2 7
+set_dialogue_color 3 0.8 0.75 1
+set_dialogue_voice 4 3
+set_dialogue_color 4 1 0.75 0.85
+set_dialogue_color 5 1 1 1
+set_dialogue_color 6 1 1 1
+set_dialogue_color 7 1 1 1
+set_dialogue_color 8 1 0.5 0
+set_dialogue_color 9 1 1 1
+set_dialogue_color 10 1 1 1
+set_dialogue_color 11 1 1 1
+set_dialogue_color 12 1 1 1
+set_dialogue_color 13 0.6 0.9 0
+set_dialogue_voice 13 12
+set_dialogue_color 14 0 0 0
+set_character_pos 5 -65.7352 175.715 -240.351 -176
+set_character_pos 3 -67.114 175.705 -240.356 3
+set_character_pos 9 -69.3093 175.18 -260.199 -30
+set_character_pos 8 -69.786 175.179 -259.248 -30
+set_character_pos 12 -70.356 174.713 -257.637 -23
+set_character_pos 11 -69.7414 174.773 -256.735 -76
+set_character_pos 1 -80.0364 174.715 -244.84 153
+set_character_pos 2 -77.9567 174.74 -246.346 -136
+set_character_pos 7 -72.3094 174.429 -257.285 -48
+set_character_pos 6 -71.4939 174.783 -254.697 -23
+set_character_pos 10 -71.7702 174.774 -253.744 -30
+send_level_message "disable 717"
+send_level_message "disable 726"
+send_level_message "disable 748"
+send_level_message "enable 846"
+send_level_message "enable 890"
+send_level_message "enable 891"
+set_cam -81.837 175.517 -242.563 -1.54 -41.78 -0.1 14.8981
+send_level_message "set_camera_dof 0.0 6.0 10.0 0.3 5.0 1.0"
+vo "Data/VoiceOver/drika/highmonastery/leave0.wav"
+say 2 "Nera" "No, [wait 0.3]Drika -- [wait 0.5]stay."
+send_character_message 1 "set_torso_target -80.3637 175.139 -245.423 1"
+send_character_message 1 "set_head_target -79.7108 175.596 -245.752 1"
+send_character_message 2 "set_head_target -79.7572 175.732 -245.094 1"
+send_character_message 2 "set_animation \"Data/Animations/r_actionidle.anm\""
+vo "Data/VoiceOver/drika/highmonastery/leave1.wav"
+say 2 "Nera" "People will think you're involved in this."
+send_character_message 2 "set_torso_target -78.3907 174.741 -246.115 1"
+send_character_message 2 "set_eye_dir -79.7421 175.942 -244.896 1"
+send_character_message 2 "set_head_target -79.7061 175.439 -245.254 1"
+send_character_message 1 "set_eye_dir -80.6198 175.277 -244.625 0.640768"
+send_character_message 1 "set_head_target -80.7213 175.402 -245.086 1"
+vo "Data/VoiceOver/drika/highmonastery/leave2.wav"
+say 1 "Drika" "..."
+send_level_message "start_dialogue Guards"

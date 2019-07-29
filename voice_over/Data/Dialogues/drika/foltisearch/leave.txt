@@ -1,0 +1,75 @@
+#name "Leave"
+#participants 8
+send_character_message 5 "set_animation \"Data/Animations/ratkeeper.anm\""
+send_character_message 5 "set_eye_dir -15.4228 -4.96321 316.968 0.655783"
+send_character_message 5 "set_head_target -15.4362 -5.18768 317.452 1"
+set_character_pos 4 13.5294 -0.0195576 354.586 60
+send_character_message 4 "set_animation \"Data/Animations/r_crouch_sad.anm\""
+send_character_message 4 "set_eye_dir 12.6265 1.17306 354.546 1"
+send_character_message 4 "set_torso_target 14.4779 0.552676 354.359 0"
+send_character_message 4 "set_head_target 20.4263 -5.64467 346.665 1"
+set_character_pos 3 9.02455 -7.3414 348.347 7
+send_character_message 3 "set_animation \"Data/Animations/carr_diss.anm\""
+send_character_message 3 "set_eye_dir 9.02583 -6.74748 348.282 0.255005"
+send_character_message 3 "set_torso_target 9.47337 -6.87851 348.137 0.0024437"
+send_character_message 3 "set_head_target 9.40148 -6.90744 348.181 0.00670117"
+set_character_pos 1 22.1731 -6.80317 344.518 0
+send_character_message 1 "set_animation \"Data/Animations/folti_tosit.anm\""
+send_character_message 1 "set_eye_dir 21.2828 -5.70866 344.531 0.288372"
+send_character_message 1 "set_torso_target 23.1471 -6.3906 344.533 0.00800735"
+send_character_message 1 "set_head_target 23.1071 -6.27489 344.535 0.000217974"
+set_cam 11.1992 -3.31556 350.804 -13.73 -69.74 0 40.58
+set_dialogue_color 1 1 0.3 0.3
+set_dialogue_voice 1 11
+set_dialogue_color 2 0.75 0.75 0.75
+set_dialogue_voice 2 13
+set_dialogue_color 3 1 0.75 0.85
+set_dialogue_voice 3 9
+send_level_message "disable 632"
+send_level_message "disable 606"
+send_character_message 1 "empty_hands"
+send_level_message "set_camera_dof 0.3 12.0 2.0 0.5 10.0 10.0"
+send_level_message "music_layer_override 0"
+set_character_pos 5 -18.0492 -6.31293 315.388 -22
+send_level_message "disable 605"
+vo "Data/VoiceOver/drika/foltisearch/leave0.wav"
+say 1 "Folti" "...[wait 0.3]and so he falls."
+send_character_message 3 "set_eye_dir 8.98645 -6.65943 348.186 0.255005"
+send_character_message 1 "set_head_target 23.4448 -6.26146 344.747 1"
+send_character_message 1 "set_eye_dir 21.4503 -5.97447 345.232 0.823242"
+set_cam 27.8163 -5.91567 343.581 -2.57 102.35 0.01 6.07867
+send_level_message "set_camera_dof 0.3 10.0 3.0 1.0 20.0 5.0"
+vo "Data/VoiceOver/drika/foltisearch/leave1.wav"
+say 3 "Hen" "Hell. [wait 0.5]Expected him to at least... [wait 0.3]last longer?"
+send_character_message 3 "set_head_target 9.21757 -6.61338 348.409 1"
+send_character_message 1 "set_head_target 23.3123 -5.85854 344.477 1"
+send_character_message 1 "set_eye_dir 21.4503 -5.97447 345.232 0"
+send_level_message "set_camera_dof 0.0 10.0 3.0 1.0 20.0 5.0"
+vo "Data/VoiceOver/drika/foltisearch/leave2.wav"
+say 1 "Folti" "Hah. [wait 0.3]Of course not. [wait 0.5]I'm Arlissian."
+set_cam 27.8163 -5.91558 343.581 -2.57 102.35 0.01 6.07867
+send_character_message 3 "set_torso_target 9.05693 -7.06084 348.668 0.997739"
+send_character_message 1 "set_eye_dir 21.4503 -5.97447 345.232 0.511252"
+send_character_message 1 "set_head_target 23.4776 -6.30865 344.637 1"
+send_character_message 3 "set_eye_dir 8.98645 -6.65943 348.186 0.518188"
+send_character_message 3 "set_head_target 9.21513 -6.6995 348.309 1"
+send_level_message "set_camera_dof 0.3 10.0 3.0 1.0 20.0 5.0"
+vo "Data/VoiceOver/drika/foltisearch/leave3.wav"
+say 3 "Hen" "Well... [wait 0.3]I suppose I'm to give you the location of the Steppes."
+send_character_message 4 "set_head_target 20.4264 -5.64466 346.665 1"
+send_character_message 1 "set_head_target 23.4588 -6.27937 344.649 1"
+send_character_message 1 "set_torso_target 23.1471 -6.3906 344.533 0.00800735"
+set_cam 11.5682 -6.82706 351.434 -0.45 40.35 0.4 10.1567
+send_character_message 3 "set_animation \"Data/Animations/carr_diss2.anm\""
+send_character_message 3 "set_eye_dir 9.21055 -6.39017 349.106 1"
+send_character_message 3 "set_head_target 9.39302 -6.66307 346.863 1"
+send_character_message 3 "set_torso_target 9.05693 -7.06084 348.668 0"
+send_level_message "set_camera_dof 0.0 5.0 10.0 0.5 30.0 5.0"
+vo "Data/VoiceOver/drika/foltisearch/leave4.wav"
+say 3 "Hen" "You'll want to go see Thendra, [wait 0.3]by the cicada. [wait 0.5]Just don't touch it."
+send_character_message 1 "set_animation \"Data/Animations/folti_fromsit.anm\""
+send_character_message 1 "set_eye_dir 21.4503 -5.97447 345.232 0.665423"
+send_character_message 1 "set_head_target 24.107 -6.22534 345.692 1"
+set_cam 25.3401 -6.47886 344.781 -0.59 94.37 -0.13 45.5321
+vo "Data/VoiceOver/drika/foltisearch/leave5.wav"
+say 3 "Hen" "Now off with you, [wait 0.5]please. [wait 0.5]None of us want you here any longer."

@@ -1,0 +1,26 @@
+#name "BlueDog"
+#participants 3
+set_character_pos 2 -233.111 -72.498 -13.5297 42
+send_character_message 2 "set_animation \"Data/Animations/dialogue_leaning_back_onwall.anm\""
+send_character_message 2 "set_head_target -232.313 -72.0574 -14.1268 1"
+set_character_pos 1 -230.451 -72.4953 -14.2272 130
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_torso_target -229.947 -72.0479 -14.8743 0"
+send_character_message 1 "set_head_target -232.873 -71.6513 -13.7099 1"
+set_cam -233.748 -71.4731 -14.0697 -6.4 -105.97 0 59.5482
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_level_message "set_camera_dof 0.0 6.0 3.0 1 14.0 3.0"
+vo "Data/VoiceOver/drika/steppes/bluedog0.wav"
+say 2 "???" "Watch yourself."
+send_character_message 1 "set_torso_target -231.086 -72.0479 -14.9486 1"
+vo "Data/VoiceOver/drika/steppes/bluedog1.wav"
+say 1 "Drika" "Hmm?"
+send_character_message 2 "set_head_target -231.362 -71.8494 -14.2328 1"
+set_cam -228.438 -71.7713 -15.6536 0.04 118.85 0.04 16.7186
+vo "Data/VoiceOver/drika/steppes/bluedog2.wav"
+say 2 "???" "Don't get caught. You've a lot to chew."
+send_character_message 1 "set_torso_target -231.086 -72.0479 -14.9486 0"
+send_character_message 2 "set_head_target -232.77 -71.2047 -15.2062 1"
+vo "Data/VoiceOver/drika/steppes/bluedog3.wav"
+say 1 "Drika" "..."

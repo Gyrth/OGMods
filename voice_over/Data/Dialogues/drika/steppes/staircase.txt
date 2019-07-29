@@ -1,0 +1,49 @@
+#name "Staircase"
+#participants 3
+send_character_message 2 "set_head_target -182.366 -66.9932 31.2388 1"
+set_character_pos 1 -182.415 -67.7835 31.0459 -117
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_eye_dir -183.509 -66.5574 30.9944 1"
+send_character_message 1 "set_torso_target -181.661 -67.3115 31.366 0"
+send_character_message 1 "set_head_target -183.601 -66.868 33.2583 1"
+set_character_pos 2 -183.78 -67.8259 33.6742 64
+send_character_message 2 "set_animation \"Data/Animations/drika_fromsit.anm\""
+set_cam -180.729 -67.37 30.0273 0 130.13 0 48.6085
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+set_dialogue_color 2 1 1 1
+vo "Data/VoiceOver/drika/steppes/staircase0.wav"
+say 2 "???" "Hey -- [wait 0.5]I'd recommend staying far away from these stairs."
+send_character_message 1 "set_eye_dir -183.509 -66.5574 30.9944 0"
+send_character_message 2 "set_head_target -182.368 -66.9932 31.2382 1"
+send_character_message 2 "set_torso_target -183.398 -67.8509 32.8753 0.00984916"
+send_character_message 1 "set_torso_target -182.706 -67.542 31.5354 0.962966"
+send_character_message 1 "set_head_target -183.687 -66.3671 33.2532 1"
+vo "Data/VoiceOver/drika/steppes/staircase1.wav"
+say 1 "Drika" "And what'll happen if I don't?"
+send_character_message 1 "set_head_target -183.687 -66.3671 33.2532 1"
+send_character_message 1 "set_torso_target -182.706 -67.542 31.5354 0.962966"
+send_character_message 2 "set_torso_target -183.422 -67.7248 32.8858 0.958745"
+send_character_message 2 "set_head_target -183.693 -67.0156 31.4668 1"
+set_cam -184.962 -66.6494 34.3606 -13.02 -50.22 3.6 48.6085
+vo "Data/VoiceOver/drika/steppes/staircase2.wav"
+say 2 "???" "We aren't thugs. [wait 0.5]But we've naught to offer but books and prayer."
+send_character_message 1 "set_eye_dir -183.509 -66.5574 30.9944 1"
+send_character_message 1 "set_head_target -183.71 -66.9306 33.1421 1"
+send_character_message 1 "set_torso_target -182.706 -67.542 31.5354 0"
+send_character_message 2 "set_torso_target -183.422 -67.7248 32.8858 0"
+send_character_message 2 "set_head_target -182.514 -66.917 31.2685 1"
+vo "Data/VoiceOver/drika/steppes/staircase3.wav"
+say 1 "Drika" "Prayer, [wait 0.3]huh?"
+send_character_message 2 "set_eye_dir -184.242 -66.1959 34.4494 0"
+send_character_message 2 "set_head_target -182.277 -67.2952 31.649 1"
+set_cam -182.638 -67.0317 33.6301 9.14 86.25 -1.18 38.9493
+vo "Data/VoiceOver/drika/steppes/staircase4.wav"
+say 2 "???" "Not the kind your ilk are apt to. [wait 0.5]We're serving a much higher purpose here."
+send_character_message 1 "set_head_target -183.494 -67.5457 33.1769 1"
+set_cam -180.555 -67.0826 30.1735 -8.82 124.64 1.15 52.5916
+send_character_message 2 "set_animation \"Data/Animations/r_meditate.anm\""
+send_character_message 2 "set_head_target -180.614 -69.7245 27.9194 1"
+send_character_message 2 "set_eye_dir -184.242 -66.1959 34.4494 0"
+vo "Data/VoiceOver/drika/steppes/staircase5.wav"
+say 2 "???" "For your sake and ours, [wait 0.3]stay away. [wait 0.5]We have important business to attend to."

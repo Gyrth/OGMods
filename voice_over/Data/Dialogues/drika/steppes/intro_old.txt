@@ -1,0 +1,16 @@
+#name "Intro"
+#participants 4
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/steppes/intro_old0.wav"
+say 1 "Drika" "...so this is it? [wait 0.5]The Steppes?"
+vo "Data/VoiceOver/drika/steppes/intro_old1.wav"
+say 1 "Drika" "This is where I'll spend the rest of Spur and Sail...?"
+vo "Data/VoiceOver/drika/steppes/intro_old2.wav"
+say 2 "???" "..."
+vo "Data/VoiceOver/drika/steppes/intro_old3.wav"
+say 1 "Drika" "I seek shelter -- [wait 0.5]grant me refuge!"
+vo "Data/VoiceOver/drika/steppes/intro_old4.wav"
+say 3 "????" "Shut up and get in!"
+vo "Data/VoiceOver/drika/steppes/intro_old5.wav"
+say 1 "Drika" "..."

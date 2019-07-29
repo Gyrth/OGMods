@@ -1,0 +1,22 @@
+#name "Intro"
+#participants 2
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_level_message "music_layer_override -2"
+set_character_pos 1 -207.412 -54.5583 -126.378 -169
+send_character_message 1 "set_animation \"Data/Animations/dialogue_breathless.anm\""
+send_character_message 1 "set_eye_dir -208.3 -53.4198 -126.408 0.606868"
+send_character_message 1 "set_torso_target -207.898 -54.8027 -126.374 1"
+send_character_message 1 "set_head_target -208.372 -54.3618 -126.37 1"
+set_cam -209.254 -54.3886 -128.035 6.01 -144.3 0.05 28.5781
+send_level_message "set_camera_dof 0.0 5.0 10.0 0.3 20.0 10.0"
+vo "Data/VoiceOver/drika/steppesnight/intro0.wav"
+say 1 "Drika" "Well... [wait 0.3]that was eventful."
+send_character_message 1 "set_torso_target -207.898 -54.8027 -126.374 0"
+send_character_message 1 "set_eye_dir -208.3 -53.4198 -126.408 1"
+send_character_message 1 "set_head_target -215.759 -54.4592 -127.561 1"
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+set_cam -207.558 -53.7005 -125.379 -8.37 8.95 -0.36 56.6779
+send_level_message "set_camera_dof 0.5 5.0 10.0 0.0 20.0 10.0"
+vo "Data/VoiceOver/drika/steppesnight/intro1.wav"
+say 1 "Drika" "Too tired to do anything else. [wait 0.5]I should seek hearth in the prayer temple."

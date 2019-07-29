@@ -1,0 +1,12 @@
+#name "OrangeDog"
+#participants 3
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/steppes/orangedog0.wav"
+say 2 "???" "Watch yourself."
+vo "Data/VoiceOver/drika/steppes/orangedog1.wav"
+say 1 "Drika" "Hmm?"
+vo "Data/VoiceOver/drika/steppes/orangedog2.wav"
+say 2 "???" "Don't get caught. You've a lot to chew."
+vo "Data/VoiceOver/drika/steppes/orangedog3.wav"
+say 1 "Drika" "..."

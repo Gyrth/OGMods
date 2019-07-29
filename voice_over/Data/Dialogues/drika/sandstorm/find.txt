@@ -1,0 +1,30 @@
+#name "Find"
+#participants 2
+set_character_pos 1 -128.448 12.4401 100.17 -60
+send_character_message 1 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 1 "set_torso_target -127.754 12.4076 101.211 1"
+send_character_message 1 "set_head_target -125.218 13.1985 104.596 1"
+set_cam -103.349 4.66954 127.646 14.02 44.52 0 14.407
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_level_message "music_layer_override 0"
+send_character_message 1 "empty_hands"
+vo "Data/VoiceOver/drika/sandstorm/find0.wav"
+say 1 "Drika" "..."
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+send_character_message 1 "set_head_target -123.038 14.697 102.403 1"
+vo "Data/VoiceOver/drika/sandstorm/find1.wav"
+say 1 "Drika" "Weather isn't getting any better..."
+send_character_message 1 "set_head_target -126.875 15.8295 105.859 1"
+send_character_message 1 "set_torso_target -127.754 12.4076 101.211 0"
+set_cam -130.145 13.2588 97.8971 0.02 -145.78 0 52.2988
+vo "Data/VoiceOver/drika/sandstorm/find2.wav"
+say 1 "Drika" "[wait 0.3]Is that a flag on the crete...?"
+set_cam -116.989 8.29901 116.405 -3.89 -147.14 0 56.5328
+vo "Data/VoiceOver/drika/sandstorm/find3.wav"
+say 1 "Drika" "There's something there, [wait 0.3]through the sand... [wait 0.5]someone's home!"
+send_character_message 1 "set_torso_target -128.19 12.8506 101.361 1"
+send_character_message 1 "set_head_target -124.741 13.3729 105.623 1"
+set_cam -131.141 13.0069 98.715 -0.01 -135.07 0 48.4109
+vo "Data/VoiceOver/drika/sandstorm/find4.wav"
+say 1 "Drika" "Can they point me to the Steppes...?"

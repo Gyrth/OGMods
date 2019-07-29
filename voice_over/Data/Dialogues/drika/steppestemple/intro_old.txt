@@ -1,0 +1,22 @@
+#name "Intro"
+#participants 5
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/steppestemple/intro_old0.wav"
+say 1 "Drika" "...the air here is heavy."
+vo "Data/VoiceOver/drika/steppestemple/intro_old1.wav"
+say 2 "???" "'Tis a scent you become used to."
+vo "Data/VoiceOver/drika/steppestemple/intro_old2.wav"
+say 2 "???" "I detect the Arlissian dialect within your breath; have you come to study the shortness of life?"
+vo "Data/VoiceOver/drika/steppestemple/intro_old3.wav"
+say 1 "Drika" "No, I..."
+vo "Data/VoiceOver/drika/steppestemple/intro_old4.wav"
+say 1 "Drika" "Maybe."
+vo "Data/VoiceOver/drika/steppestemple/intro_old5.wav"
+say 1 "Drika" "I need to get shelter. Somewhere to sleep, first."
+vo "Data/VoiceOver/drika/steppestemple/intro_old6.wav"
+say 2 "???" "Trivialities. The means that carry our end."
+vo "Data/VoiceOver/drika/steppestemple/intro_old7.wav"
+say 2 "???" "We will allow your rest. Pick an unoccupied lodging, and wake for a new day."
+vo "Data/VoiceOver/drika/steppestemple/intro_old8.wav"
+say 1 "Drika" "Thank you."

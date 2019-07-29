@@ -1,0 +1,18 @@
+#name "Intro"
+#participants 1
+send_level_message "enable 4"
+send_level_message "enable 965"
+send_level_message "disable 822"
+send_level_message "disable 920"
+send_level_message "disable 944"
+send_level_message "disable 958"
+send_level_message "disable 962"
+send_level_message "music_layer_override 0"
+send_character_message 1 "set_head_target 114.675 349.453 -115.383 1"
+set_cam 117.584 351.505 -127.61 -5.53 171.77 0.54 63.8862
+set_character_pos 1 117.929 350.184 -124.531 -97
+send_character_message 1 "set_animation \"Data/Animations/drika_idle.anm\""
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+vo "Data/VoiceOver/drika/steppestemple/intro0.wav"
+say 1 "Drika" "..."

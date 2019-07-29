@@ -1,0 +1,69 @@
+#name "Intro"
+#participants 8
+set_character_pos 6 3.13771 7.53289 358.811 -172
+send_character_message 6 "set_animation \"Data/Animations/dialogue_sitting_handstogether.anm\""
+set_character_pos 5 -18.0492 -6.31293 315.388 -173
+send_character_message 5 "set_animation \"Data/Animations/r_idle.anm\""
+send_character_message 5 "set_head_target -31.8473 4.08036 313.4 1"
+set_character_pos 4 13.2113 -0.0853429 356.378 15
+send_character_message 4 "set_animation \"Data/Animations/r_dialogue_shade.anm\""
+send_character_message 4 "set_head_target 28.7265 -0.324886 355.074 1"
+send_character_message 2 "set_animation \"Data/Animations/r_spearstance.anm\""
+set_character_pos 7 -34.426 4.38351 313.357 0
+send_character_message 7 "set_animation \"Data/Animations/r_dialogue_kneeling_low.anm\""
+send_character_message 7 "set_eye_dir -33.7843 4.0653 313.287 0"
+send_character_message 7 "set_torso_target -33.6755 3.76312 313.378 1"
+send_character_message 7 "set_head_target -33.7807 3.99864 313.284 1"
+set_character_pos 1 137.895 -6.31023 356.38 -180
+send_character_message 1 "set_animation \"Data/Animations/folti_idle.anm\""
+send_character_message 1 "set_eye_dir 137.987 -5.17783 355.389 1"
+send_character_message 1 "set_torso_target 137.279 -5.69601 356.095 1"
+send_character_message 1 "set_head_target 116.484 -5.67088 353.855 1"
+set_cam -32.8404 4.19194 314.234 0 43.99 0 37.5672
+set_dialogue_color 1 1 0.3 0.3
+set_dialogue_voice 1 11
+send_level_message "music_layer_override -2"
+send_level_message "set_camera_dof 0.0 5.0 10.0 0.3 20.0 10.0"
+set_character_pos 3 9.09847 -7.29712 348.342 6
+send_character_message 3 "set_animation \"Data/Animations/carr_idle.anm\""
+send_level_message "disable 632"
+send_level_message "disable 606"
+vo "Data/VoiceOver/drika/foltisearch/intro0.wav"
+say 8 "?????" "..."
+send_character_message 7 "set_eye_dir -33.7843 4.0653 313.287 0.476118"
+send_character_message 7 "set_head_target -33.6036 3.90082 313.324 1"
+vo "Data/VoiceOver/drika/foltisearch/intro1.wav"
+say 8 "?????" "...?"
+send_character_message 1 "set_head_target 116.484 -5.67082 353.855 1"
+send_character_message 1 "set_torso_target 137.279 -5.69601 356.095 0.982274"
+send_character_message 7 "set_animation \"Data/Animations/r_dialogue_kneelfist.anm\""
+set_cam -23.5566 -1.09444 314.149 26.36 81.05 -0.98 38.8354
+send_character_message 7 "set_eye_dir -33.7843 4.0653 313.287 1"
+send_character_message 7 "set_head_target -27.1875 4.1244 315.095 1"
+send_level_message "set_camera_dof 0.3 12.0 7.0 0.3 20.0 10.0"
+vo "Data/VoiceOver/drika/foltisearch/intro2.wav"
+say 8 "?????" "...!"
+set_cam -38.4719 4.68701 312.011 -4.39 -105.86 0.08 7.30967
+send_level_message "set_camera_dof 0.6 10.0 10.0 0.0 20.0 10.0"
+vo "Data/VoiceOver/drika/foltisearch/intro3.wav"
+say 8 "?????" "..."
+send_character_message 1 "set_torso_target 137.279 -5.69601 356.095 0"
+send_character_message 1 "set_head_target 114.751 -3.2458 357.397 1"
+set_cam 94.7584 -6.05777 344.425 -1.03 -105.23 0.11 13.3444
+send_level_message "music_layer_override 0"
+send_level_message "set_camera_dof 0.3 20.0 10.0 0.6 20.0 10.0"
+vo "Data/VoiceOver/drika/foltisearch/intro4.wav"
+say 1 "Folti" "..."
+send_character_message 1 "set_eye_dir 137.987 -5.17783 355.389 0"
+set_cam 94.7584 -6.05777 344.425 -1.03 -105.23 0.11 13.3444
+send_character_message 1 "set_torso_target 137.279 -5.69601 356.095 0.992462"
+send_character_message 1 "set_head_target 115.782 -5.10764 350.869 1"
+vo "Data/VoiceOver/drika/foltisearch/intro5.wav"
+say 1 "Folti" "[wait 0.3]So the caravan's tracks leads me there."
+send_character_message 1 "set_eye_dir 137.987 -5.17783 355.389 1"
+send_character_message 1 "set_head_target 114.635 -2.13669 354.927 1"
+send_character_message 1 "set_torso_target 137.279 -5.69601 356.095 0"
+set_cam 144.389 -5.83888 354.748 1.02 90.9 0.18 41.3091
+send_level_message "set_camera_dof 0.3 15.0 10.0 0.0 20.0 10.0"
+vo "Data/VoiceOver/drika/foltisearch/intro6.wav"
+say 1 "Folti" "The wind can't hide your tracks. [wait 0.5]You will answer to me..."

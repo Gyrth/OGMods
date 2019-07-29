@@ -1,0 +1,20 @@
+#name "Pawprints"
+#participants 2
+set_character_pos 1 -239.285 47.9267 -77.664 -151
+send_character_message 1 "set_animation \"Data/Animations/drika_tracks.anm\""
+send_character_message 1 "set_head_target -239.929 47.7295 -77.3642 1"
+set_cam -240.072 47.7329 -77.0363 30.47 -38.34 2.06 62.2518
+set_dialogue_color 1 0.6 0.9 0
+set_dialogue_voice 1 12
+send_character_message 1 "empty_hands"
+vo "Data/VoiceOver/drika/sandstorm/pawprints0.wav"
+say 1 "Drika" "These were left not too long ago. [wait 0.3]Storm hasn't erased them just yet."
+set_cam -240.115 48.4782 -78.1147 -31.35 -150.72 0 78.0361
+send_character_message 1 "set_head_target -239.662 48.0535 -76.6991 1"
+vo "Data/VoiceOver/drika/sandstorm/pawprints1.wav"
+say 1 "Drika" "Seems like a dog came through here. [wait 0.5]I'm not experienced enough with tracking in a place like this to know who, [wait 0.3]though."
+set_cam -244.06 55.8066 -75.8287 -73.63 -106.04 -4.44 64.5717
+send_character_message 1 "set_animation \"Data/Animations/drika_tracksup.anm\""
+send_character_message 1 "set_head_target -240.405 48.3371 -73.364 1"
+vo "Data/VoiceOver/drika/sandstorm/pawprints2.wav"
+say 1 "Drika" "I should follow them. [wait 0.5]These could bring me to shelter..."
