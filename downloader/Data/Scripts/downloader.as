@@ -23,6 +23,9 @@ int new_selected_mod = 0;
 string server_address = "107.173.129.154/downloader/";
 bool show_local_mods = true;
 bool show_remote_mods = true;
+bool swap_mod_data = false;
+ModData@ swap_main;
+ModData@ swap_new_main;
 
 const string code_404 = "HTTP/1.1 404 ERROR ";
 const string code_200 = "HTTP/1.1 200 OK\r";
@@ -61,6 +64,7 @@ class ModData{
 	string remote_thumbnail_path = "";
 	string local_thumbnail_path = "";
 	string remote_path = "";
+	string path = "";
 	TextureAssetRef thumbnail;
 	string description = "";
 	bool is_installed = false;
@@ -69,37 +73,52 @@ class ModData{
 	bool can_activate = false;
 	bool is_remote_mod = false;
 	bool is_local_mod = false;
+	bool is_steam_mod = false;
 	bool is_installing = false;
 	bool getting_thumbnail = false;
 	bool has_error = false;
 	bool refresh = false;
 	bool has_dependencies = false;
+	string mod_type = "";
 	string source_description;
 	ModID mod_id;
+	array<ModData@> alternatives;
 	string error;
 	Download@ download = null;
 	Download@ thumbnail_download = null;
 	string dependencies;
-	array<ModData@> dependencies_mod_data;
+	array<string> dependencies_mod_ids;
 	ModData@ target;
 
-	ModData(string name, string id, string version, string author, string thumbnail_path, string description, string remote_path, bool is_remote_mod, string dependencies){
+	//Constructor used for local/steam mods.
+	ModData(ModID mod_id){
+		this.name = ModGetName(mod_id);
+		this.id = ModGetID(mod_id);
+		this.version = ModGetVersion(mod_id);
+		this.author = ModGetAuthor(mod_id);
+		this.description = ModGetDescription(mod_id);
+		this.path = ModGetPath(mod_id);
+		this.is_local_mod = true;
+
+		CheckSteamMod();
+		this.mod_id = mod_id;
+		this.local_thumbnail_path = ModGetThumbnail(mod_id);
+	}
+
+	//Constructor used for remote mods.
+	ModData(string name, string id, string version, string author, string thumbnail_path, string description, string remote_path, string dependencies){
 		this.name = name;
 		this.id = id;
 		this.version = version;
 		this.author = author;
 		this.description = description;
-		this.is_remote_mod = is_remote_mod;
+		this.is_remote_mod = true;
 		this.remote_path = remote_path;
 		this.dependencies = dependencies;
 
-		CheckLocalMod();
+		/* this.mod_ids.insertLast(mod_id); */
 
-		if(is_remote_mod){
-			this.remote_thumbnail_path = thumbnail_path;
-		}else{
-			local_thumbnail_path = thumbnail_path;
-		}
+		this.remote_thumbnail_path = thumbnail_path;
 	}
 
 	void Install(ModData@ target = null){
@@ -112,10 +131,10 @@ class ModData{
 		}
 
 		is_installing = true;
-		if(dependencies_mod_data.size() != 0){
-			for(uint i = 0; i < dependencies_mod_data.size(); i++){
-				if(!dependencies_mod_data[i].is_installed){
-					dependencies_mod_data[i].Install(this);
+		for(uint i = 0; i < dependencies_mod_ids.size(); i++){
+			for(uint j = 0; j < mods.size(); j++){
+				if(mods[j].id == dependencies_mod_ids[i] && !mods[j].is_installed){
+					mods[j].Install(this);
 					return;
 				}
 			}
@@ -128,8 +147,12 @@ class ModData{
 
 	void Activation(bool enable, bool include_dependencies = true){
 		if(has_dependencies && include_dependencies){
-			for(uint i = 0; i < dependencies_mod_data.size(); i++){
-				dependencies_mod_data[i].Activation(enable);
+			for(uint i = 0; i < dependencies_mod_ids.size(); i++){
+				for(uint j = 0; j < mods.size(); j++){
+					if(mods[j].id == dependencies_mod_ids[i]){
+						mods[j].Activation(enable);
+					}
+				}
 			}
 		}
 		ModActivation(mod_id, enable);
@@ -164,20 +187,12 @@ class ModData{
 		}
 	}
 
-	void CheckLocalMod(){
-		array<ModID>all_mods = GetModSids();
-		for(uint i = 0; i < all_mods.size(); i++){
-			if(ModGetID(all_mods[i]) == id){
-				is_local_mod = true;
-				mod_id = all_mods[i];
-				has_mod_id = true;
-				break;
-			}
-		}
+	void CheckSteamMod(){
+		is_steam_mod = IsWorkshopMod(mod_id);
 	}
 
 	void UpdateStatus(){
-		CheckLocalMod();
+		CheckSteamMod();
 
 		error = "";
 		has_error = false;
@@ -188,7 +203,7 @@ class ModData{
 			for(uint i = 0; i < dependencies_ids.size(); i++){
 				for(uint j = 0; j < mods.size(); j++){
 					if(mods[j].id == dependencies_ids[i]){
-						dependencies_mod_data.insertLast(mods[j]);
+						dependencies_mod_ids.insertLast(mods[j].id);
 						break;
 					}else if(j == mods.size() - 1){
 						error += "Could not find dependency : " + dependencies_ids[i];
@@ -196,10 +211,10 @@ class ModData{
 					}
 				}
 			}
-			has_dependencies = dependencies_mod_data.size() != 0;
+			has_dependencies = dependencies_mod_ids.size() != 0;
 		}
 
-		if(has_mod_id){
+		if(is_local_mod){
 			is_installed = true;
 			if(ModIsActive(mod_id)){
 				is_enabled = true;
@@ -211,10 +226,12 @@ class ModData{
 				can_activate = true;
 			}
 			//If this mod has dependencies then check if the dependencies can be enabled as well.
-			if(dependencies_mod_data.size() != 0){
-				for(uint i = 0; i < dependencies_mod_data.size(); i++){
-					if(!ModCanActivate(dependencies_mod_data[i].mod_id)){
-						can_activate = false;
+			if(dependencies_mod_ids.size() != 0){
+				for(uint i = 0; i < dependencies_mod_ids.size(); i++){
+					for(uint j = 0; j < mods.size(); j++){
+						if(mods[j].id == dependencies_mod_ids[i] && !ModCanActivate(mods[j].mod_id)){
+							can_activate = false;
+						}
 					}
 				}
 			}
@@ -228,14 +245,27 @@ class ModData{
 			is_installed = false;
 		}
 
+		source_description = "";
+
 		if(is_local_mod){
 			source_description = "Local";
-			if(is_remote_mod){
-				source_description += " and Remote";
-			}
-		}else if(is_remote_mod){
-			source_description = "Remote";
 		}
+
+		if(is_remote_mod){
+			if(source_description != ""){
+				source_description += ", ";
+			}
+			source_description += "Remote";
+		}
+
+		if(is_steam_mod){
+			if(source_description != ""){
+				source_description += ", ";
+			}
+			source_description += "Steam";
+		}
+
+		//Update the mod type that shows in the dropdown menu.
 	}
 
 	void ReloadThumbnail(){
@@ -374,7 +404,8 @@ class Download{
 						DownloadFilesInDirectory();
 					}else if(download_type == mod_list){
 						TCPLog("Read Mod list");
-						ReadModList();
+						ReadRemoteMods();
+						SortAlphabetically();
 					}
 					download_done = true;
 					return true;
@@ -443,6 +474,11 @@ void Update(int paused){
 				mods[i].ReloadThumbnail();
 				mods[i].refresh = false;
 			}
+		}
+		if(swap_mod_data){
+			SwapModData(swap_main, swap_new_main);
+			sort_mods = true;
+			swap_mod_data = false;
 		}
 	}
 
@@ -750,6 +786,23 @@ void DrawGUI(){
 							sorted_mods[selected_mod].Install();
 						}
 					}else{
+
+						if(sorted_mods[selected_mod].alternatives.size() != 0){
+							//Show a dropdown menu when there are mods with the same id.
+							if(ImGui_BeginCombo("###source", sorted_mods[selected_mod].path, 0)){
+								for(uint i = 0; i < sorted_mods[selected_mod].alternatives.size(); i++){
+									if(ImGui_Selectable(sorted_mods[selected_mod].alternatives[i].path, false)){
+										@swap_main = sorted_mods[selected_mod];
+										@swap_new_main = sorted_mods[selected_mod].alternatives[i];
+										swap_mod_data = true;
+									}
+								}
+
+								ImGui_EndCombo();
+							}
+							ImGui_SameLine();
+						}
+
 						if(sorted_mods[selected_mod].is_enabled){
 							if(ImGui_Button("Disable ")){
 								sorted_mods[selected_mod].Activation(false, false);
@@ -858,7 +911,6 @@ void DrawGUI(){
 
 void SortMods(){
 	sorted_mods.resize(0);
-	new_selected_mod = 0;
 	string query_lower = ToLowerCase(search_query);
 
 	for(uint i = 0; i < mods.size(); i++){
@@ -868,6 +920,29 @@ void SortMods(){
 			}
 		}
 	}
+
+	if(selected_mod > int(sorted_mods.size() - 1)){
+		new_selected_mod = 0;
+	}
+}
+
+void SortAlphabetically(){
+	array<ModData@> sorted_mod_data;
+	for(uint i = 32; i <= 126; i++){
+		for(uint p = 0; p < mods.size(); p++){
+            string mod_name = mods[p].name;
+            if(mod_name.length() > 0){
+                uint first_letter = mod_name[0];
+                if(first_letter >= 65 && first_letter <= 90){
+                    first_letter += 32;
+                }
+                if(i == first_letter){
+                    sorted_mod_data.insertLast(mods[p]);
+                }
+            }
+		}
+	}
+	mods = sorted_mod_data;
 }
 
 void Init(string level_name){
@@ -887,9 +962,24 @@ void ReadLocalMods(){
 	array<ModID> all_mods = GetModSids();
 
 	for(uint i = 0; i < all_mods.size(); i++){
-		ModData mod(ModGetName(all_mods[i]),ModGetID(all_mods[i]), ModGetVersion(all_mods[i]), ModGetAuthor(all_mods[i]), ModGetThumbnail(all_mods[i]), ModGetDescription(all_mods[i]), "", false, "");
-		mods.insertLast(@mod);
-		mod.refresh = true;
+		bool merged = false;
+
+		ModData mod(all_mods[i]);
+
+		for(uint j = 0; j < mods.size(); j++){
+			//Check if a local mod is already there.
+			if(ModGetID(all_mods[i]) == mods[j].id){
+				mods[j].alternatives.insertLast(@mod);
+				mod.refresh = true;
+				merged = true;
+				break;
+			}
+		}
+
+		if(!merged){
+			mods.insertLast(@mod);
+			mod.refresh = true;
+		}
 	}
 	sort_mods = true;
 }
@@ -919,7 +1009,7 @@ void IncomingTCPData(uint socket, array<uint8>@ data) {
 	}
 }
 
-void ReadModList(){
+void ReadRemoteMods(){
 	JSON json;
 	json.parseString(GetString(current_download.raw_data));
 
@@ -928,31 +1018,100 @@ void ReadModList(){
 
 	for(uint i = 0; i < array_members.size(); i++){
 		JSONValue mod_data = root[array_members[i]];
-		bool already_local = false;
+		bool merged = false;
+
+		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), mod_data["Directory"].asString(), mod_data["Dependencies"].asString());
 
 		for(uint j = 0; j < mods.size(); j++){
-			//The remote mod is already loaded as a local mod.
+			//Check if the remote mod is already loaded as a local mod.
 			if(mods[j].id == mod_data["ID"].asString()){
-				mods[j].is_remote_mod = true;
-				mods[j].remote_version = mod_data["Version"].asString();
-				mods[j].remote_thumbnail_path = mod_data["Thumbnail"].asString();
-				mods[j].remote_path = mod_data["Directory"].asString();
-				mods[j].dependencies = mod_data["Dependencies"].asString();
-				already_local = true;
-				mods[j].refresh = true;
+				array<string> cache_keywords = {"Documents/Wolfire/Overgrowth", "Library/Application Support/Overgrowth", ".local/share/Overgrowth"};
+
+				string main_mod_path = ModGetPath(mods[j].mod_id);
+				for(uint k = 0; k < cache_keywords.size(); k++){
+					//The main mod is located in the cache folder.
+					if(main_mod_path.findFirst(cache_keywords[k]) != -1){
+						//Merge the remote data into the local data.
+						mods[j].remote_path = mod_data["Directory"].asString();
+						mods[j].is_remote_mod = true;
+						Log(warning, "1Merged local mod! " + main_mod_path);
+						mods[j].remote_version = mod_data["Version"].asString();
+						mods[j].remote_thumbnail_path = mod_data["Thumbnail"].asString();
+						mods[j].dependencies = mod_data["Dependencies"].asString();
+						mods[j].refresh = true;
+						merged = true;
+						break;
+					}
+				}
+
+				if(merged){
+					break;
+				}
+
+				//Also check the alternatives.
+				for(uint k = 0; k < mods[j].alternatives.size(); k++){
+					string alternative_mod_path = ModGetPath(mods[j].alternatives[k].mod_id);
+
+					for(uint l = 0; l < cache_keywords.size(); l++){
+						//The alternative mod is located in the cache folder.
+						if(alternative_mod_path.findFirst(cache_keywords[l]) != -1){
+							//Merge the remote data into the local data.
+							mods[j].alternatives[k].remote_path = mod_data["Directory"].asString();
+							mods[j].alternatives[k].is_remote_mod = true;
+							Log(warning, "2Merged local mod! " + alternative_mod_path);
+							mods[j].alternatives[k].remote_version = mod_data["Version"].asString();
+							mods[j].alternatives[k].remote_thumbnail_path = mod_data["Thumbnail"].asString();
+							mods[j].alternatives[k].dependencies = mod_data["Dependencies"].asString();
+							mods[j].alternatives[k].refresh = true;
+							merged = true;
+							break;
+						}
+					}
+					if(merged){
+						break;
+					}
+				}
+
+				if(merged){
+					break;
+				}
+
+				//When this part is reached, the remote mod is not available in the cache folder.
+				mods[j].alternatives.insertLast(mod);
+				mod.refresh = true;
+				merged = true;
 				break;
 			}
 		}
 
-		if(already_local){
-			continue;
+		if(!merged){
+			mods.insertLast(@mod);
+			mod.refresh = true;
 		}
-
-		ModData mod(mod_data["Name"].asString(), mod_data["ID"].asString(), mod_data["Version"].asString(), mod_data["Author"].asString(), mod_data["Thumbnail"].asString(), mod_data["Description"].asString(), mod_data["Directory"].asString(), true, mod_data["Dependencies"].asString());
-		mods.insertLast(@mod);
-		mod.refresh = true;
 	}
 	sort_mods = true;
+}
+
+void SwapModData(ModData@ main_data, ModData@ new_main_data){
+	array<ModData@> new_alternatives = {main_data};
+	for(uint i = 0; i < main_data.alternatives.size(); i++){
+		if(main_data.alternatives[i] !is new_main_data){
+			new_alternatives.insertLast(main_data.alternatives[i]);
+		}
+	}
+	int old_index = 0;
+
+	main_data.alternatives.resize(0);
+	for(uint i = 0; i < mods.size(); i++){
+		if(mods[i] is main_data){
+			mods.removeAt(i);
+			old_index = i;
+			break;
+		}
+	}
+
+	new_main_data.alternatives = new_alternatives;
+	mods.insertAt(old_index, new_main_data);
 }
 
 void ClearSocket(){
