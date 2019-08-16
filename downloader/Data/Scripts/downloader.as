@@ -976,7 +976,7 @@ void SortMods(){
 	string query_lower = ToLowerCase(search_query);
 
 	for(uint i = 0; i < mods.size(); i++){
-		if(mods[i].is_local_mod && show_local_mods || mods[i].is_remote_mod && show_remote_mods){
+		if(mods[i].is_local_mod && show_local_mods || mods[i].is_remote_mod && show_remote_mods || mods[i].is_steam_mod){
 			if(ToLowerCase(mods[i].name).findFirst(query_lower) != -1 || ToLowerCase(mods[i].id).findFirst(query_lower) != -1 || ToLowerCase(mods[i].author).findFirst(query_lower) != -1){
 				sorted_mods.insertLast(mods[i]);
 			}
@@ -1031,6 +1031,11 @@ void ReadLocalMods(){
 		for(uint j = 0; j < mods.size(); j++){
 			//Check if a local mod is already there.
 			if(ModGetID(all_mods[i]) == mods[j].id){
+				//If the alternative mod is active, then swap them over.
+				if(ModIsActive(mod.mod_id)){
+					Log(warning, "Swapping because alt is active!!!" + mod.name);
+					@mods[j].swap_target = mod;
+				}
 				mods[j].alternatives.insertLast(@mod);
 				mod.refresh = true;
 				merged = true;
@@ -1145,8 +1150,6 @@ void SwapModData(ModData@ main_data, ModData@ new_main_data){
 	int old_index = 0;
 	bool was_enabled = main_data.is_enabled;
 
-	@main_data.swap_target = null;
-
 	main_data.alternatives.resize(0);
 	for(uint i = 0; i < mods.size(); i++){
 		if(mods[i] is main_data){
@@ -1162,6 +1165,8 @@ void SwapModData(ModData@ main_data, ModData@ new_main_data){
 		main_data.Activate(false, false);
 		new_main_data.Activate(true);
 	}
+	@main_data.swap_target = null;
+	sort_mods = true;
 }
 
 void ClearSocket(){
