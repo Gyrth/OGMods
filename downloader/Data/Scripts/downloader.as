@@ -23,9 +23,6 @@ int new_selected_mod = 0;
 string server_address = "107.173.129.154/downloader/";
 bool show_local_mods = true;
 bool show_remote_mods = true;
-bool swap_mod_data = false;
-ModData@ swap_main;
-ModData@ swap_new_main;
 
 const string code_404 = "HTTP/1.1 404 ERROR ";
 const string code_200 = "HTTP/1.1 200 OK\r";
@@ -79,7 +76,9 @@ class ModData{
 	bool can_activate = false;
 	bool is_remote_mod = false;
 	bool is_local_mod = false;
+	bool is_steam_mod = false;
 	bool is_installing = false;
+	bool is_core_mod = false;
 	bool getting_thumbnail = false;
 	bool has_error = false;
 	bool refresh = false;
@@ -96,6 +95,7 @@ class ModData{
 	ModData@ target;
 	bool is_in_cache_folder = false;
 	mod_sources mod_source;
+	ModData@ swap_target = null;
 
 	//Constructor used for local/steam mods.
 	ModData(ModID mod_id){
@@ -249,6 +249,7 @@ class ModData{
 		has_error = false;
 		can_activate = false;
 		is_local_mod = mod_source == local;
+		is_steam_mod = mod_source == steam;
 
 		if(is_local_mod && is_remote_mod && is_in_cache_folder){
 			is_installed = true;
@@ -272,7 +273,7 @@ class ModData{
 			has_dependencies = dependencies_mod_ids.size() != 0;
 		}
 
-		if(is_local_mod){
+		if(is_local_mod || is_steam_mod){
 			if(ModIsActive(mod_id)){
 				is_enabled = true;
 			}else{
@@ -282,6 +283,9 @@ class ModData{
 			if(ModCanActivate(mod_id)){
 				can_activate = true;
 			}
+
+			is_core_mod = ModIsCore(mod_id);
+
 			//If this mod has dependencies then check if the dependencies can be enabled as well.
 			if(dependencies_mod_ids.size() != 0){
 				for(uint i = 0; i < dependencies_mod_ids.size(); i++){
@@ -313,7 +317,7 @@ class ModData{
 			source_description += "Remote";
 		}
 
-		if(mod_source == steam){
+		if(is_steam_mod){
 			if(source_description != ""){
 				source_description += ", ";
 			}
@@ -526,12 +530,9 @@ void Update(int paused){
 				mods[i].UpdateStatus();
 				mods[i].ReloadThumbnail();
 				mods[i].refresh = false;
+			}else if(mods[i].swap_target !is null){
+				SwapModData(mods[i], mods[i].swap_target);
 			}
-		}
-		if(swap_mod_data){
-			SwapModData(swap_main, swap_new_main);
-			sort_mods = true;
-			swap_mod_data = false;
 		}
 	}
 
@@ -845,9 +846,7 @@ void DrawGUI(){
 						if(ImGui_BeginCombo("###source", sorted_mods[selected_mod].path, 0)){
 							for(uint i = 0; i < sorted_mods[selected_mod].alternatives.size(); i++){
 								if(ImGui_Selectable(sorted_mods[selected_mod].alternatives[i].path, false)){
-									@swap_main = sorted_mods[selected_mod];
-									@swap_new_main = sorted_mods[selected_mod].alternatives[i];
-									swap_mod_data = true;
+									@sorted_mods[selected_mod].swap_target = sorted_mods[selected_mod].alternatives[i];
 								}
 							}
 
@@ -855,8 +854,16 @@ void DrawGUI(){
 						}
 					}
 
-				 	if(!sorted_mods[selected_mod].has_error){
-						if(!sorted_mods[selected_mod].is_installed){
+					if(sorted_mods[selected_mod].has_error){
+						ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
+						ImGui_TextWrapped("Error: " + sorted_mods[selected_mod].error);
+						ImGui_PopStyleColor();
+					}
+
+					if(sorted_mods[selected_mod].is_core_mod){
+						ImGui_TextWrapped("This is a core mod that can not be disabled.");
+					}else if(sorted_mods[selected_mod].can_activate){
+						if(sorted_mods[selected_mod].is_remote_mod && !sorted_mods[selected_mod].is_installed){
 							if(ImGui_Button("Install")){
 								sorted_mods[selected_mod].Install();
 							}
@@ -897,11 +904,6 @@ void DrawGUI(){
 					}
 				}
 
-				if(sorted_mods[selected_mod].has_error){
-					ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.65, 0.65, 1.0));
-					ImGui_TextWrapped(sorted_mods[selected_mod].error);
-					ImGui_PopStyleColor();
-				}
 				ImGui_EndChild();
 				ImGui_Spacing();
 
@@ -1113,6 +1115,10 @@ void ReadRemoteMods(){
 					}
 				}
 
+				if(merged){
+					break;
+				}
+
 				mods[j].alternatives.insertLast(mod);
 				mod.refresh = true;
 				merged = true;
@@ -1138,6 +1144,8 @@ void SwapModData(ModData@ main_data, ModData@ new_main_data){
 	}
 	int old_index = 0;
 	bool was_enabled = main_data.is_enabled;
+
+	@main_data.swap_target = null;
 
 	main_data.alternatives.resize(0);
 	for(uint i = 0; i < mods.size(); i++){
