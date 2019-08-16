@@ -205,24 +205,18 @@ class ModData{
 
 		array<ModID> all_mods = GetModSids();
 		string remote_folder_name = join(remote_path.split("/"), "");
-		Log(warning, remote_path + " Remote folder is called " + remote_folder_name);
 
 		for(uint i = 0; i < all_mods.size(); i++){
 			ModID mod_id = all_mods[i];
 			//Check all the local mods with the same id.
 			if(ModGetID(mod_id) == id){
 				string mod_path = ModGetPath(mod_id);
-				Log(warning, "Found mod with same ID " + mod_path);
 
 				if(CheckInCache(mod_path)){
 					array<string> split_path = mod_path.split("/");
 					string folder_name = split_path[split_path.size() - 1];
 
-					Log(warning, "Compare " + folder_name + " and " + remote_folder_name);
-
 					if(folder_name == remote_folder_name){
-						Log(warning, "Found local mod that's been downloaded " + mod_path);
-
 						this.mod_id = mod_id;
 						this.is_local_mod = true;
 						path = ModGetPath(mod_id);
@@ -242,7 +236,6 @@ class ModData{
 		for(uint i = 0; i < cache_keywords.size(); i++){
 			//Check if the mod is located in the cache folder.
 			if(input_path.findFirst(cache_keywords[i]) != -1){
-				Log(warning, "In cache " + input_path);
 				return true;
 			}
 		}
@@ -561,14 +554,12 @@ void UpdateNotification(){
 			notification_text = notification_queue[0];
 			notification_queue.removeAt(0);
 		}else if(show_notification){
-			Log(warning, "Stop showing!");
 			show_notification = false;
 		}
 	}
 }
 
 void ShowNotification(string message){
-	Log(warning, message);
 	notification_queue.insertLast(message);
 }
 
@@ -1058,13 +1049,13 @@ void SendRequest(string address, string request){
 	if( main_socket == SOCKET_ID_INVALID ) {
 		main_socket = CreateSocketTCP(address, api_port);
         if( main_socket != SOCKET_ID_INVALID ) {
-            Log( info, "Connected " + main_socket );
+            TCPLog("Connected " + main_socket);
 			array<uint8> message = toByteArray(request);
 			if( IsValidSocketTCP(main_socket) ){
 		        SocketTCPSend(main_socket, message);
 			}
         } else {
-            Log( warning, "Unable to connect" );
+            TCPLog("Unable to connect");
         }
     }
 }
@@ -1099,7 +1090,6 @@ void ReadRemoteMods(){
 					//Merge the remote data into the local data.
 					mods[j].remote_path = mod_data["Directory"].asString();
 					mods[j].is_remote_mod = true;
-					Log(warning, "1Merged local mod! " + mods[j].path);
 					mods[j].remote_version = mod_data["Version"].asString();
 					mods[j].remote_thumbnail_path = mod_data["Thumbnail"].asString();
 					mods[j].dependencies = mod_data["Dependencies"].asString();
@@ -1114,7 +1104,6 @@ void ReadRemoteMods(){
 						//Merge the remote data into the local data.
 						mods[j].alternatives[k].remote_path = mod_data["Directory"].asString();
 						mods[j].alternatives[k].is_remote_mod = true;
-						Log(warning, "2Merged local mod! " + mods[j].alternatives[k].path);
 						mods[j].alternatives[k].remote_version = mod_data["Version"].asString();
 						mods[j].alternatives[k].remote_thumbnail_path = mod_data["Thumbnail"].asString();
 						mods[j].alternatives[k].dependencies = mod_data["Dependencies"].asString();
@@ -1236,7 +1225,7 @@ void ReadHeader(int body_index){
 	}
 
 	current_download.file_size = atoi(join(length_line.split("Content-Length: "), ""));
-	TCPLog("File size : " + (current_download.file_size / 1024.0) + " kb");
+	/* TCPLog("File size : " + (current_download.file_size / 1024.0) + " kb"); */
 
 	/* Log(warning, "Header size " + header_size); */
 
