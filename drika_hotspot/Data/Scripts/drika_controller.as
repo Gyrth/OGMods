@@ -5,6 +5,11 @@ FontSetup name_font("edosz", 70 , HexColor("#CCCCCC"), true);
 FontSetup dialogue_font("arial", 50 , HexColor("#CCCCCC"), true);
 FontSetup controls_font("arial", 45 , HexColor("#616161"), true);
 
+array<string> dialogue_queue;
+IMDivider @dialogue_lines_holder_vert;
+IMDivider @dialogue_line_holder;
+int line_counter = 0;
+
 void Init(string str){
 	@imGUI = CreateIMGUI();
 	BuildUI();
@@ -15,6 +20,7 @@ void SetWindowDimensions(int width, int height){
 }
 
 void BuildUI(){
+	AddExampleText();
 	DisposeTextAtlases();
 	imGUI.clear();
 	imGUI.setHeaderHeight(225);
@@ -78,21 +84,15 @@ void BuildUI(){
 	imGUI.getFooter().addFloatingElement(name_container, "name_container", vec2(0, 0), 3);
 	imGUI.getFooter().addFloatingElement(bg_container, "bg_container", vec2(0.0, 50.0), -1);
 
-	string example_text = "This needs to be here in case the \"Save dialogue?\" popup needs to be \nHello there! [wait 0.2]How can I help you? \nOh, my mistake[wait 0.2] -- I guess I'm talking to myself.";
-	array<string> split_text = example_text.split("\n");
+	IMDivider dialogue_lines_holder_horiz("dialogue_lines_holder_horiz", DOHorizontal);
+	dialogue_lines_holder_horiz.appendSpacer(100.0);
+	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
+	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
+	dialogue_lines_holder_vert.setAlignment(CALeft, CATop);
 
-	IMDivider dialogue_holder("dialogue_holder", DOHorizontal);
-	dialogue_holder.appendSpacer(100.0);
-	IMDivider text_divider("text_divider", DOVertical);
-	dialogue_holder.append(text_divider);
-	text_divider.setAlignment(CALeft, CATop);
-	/* text_divider.showBorder(); */
-	text_divider.setZOrdering(1);
-	/* text_divider.appendSpacer(125.0); */
-	for(uint i = 0; i < split_text.size(); i++){
-		IMText dialogue_text(split_text[i], dialogue_font);
-		text_divider.append(dialogue_text);
-	}
+	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+	dialogue_lines_holder_vert.append(dialogue_line_holder);
+	dialogue_line_holder.setZOrdering(1);
 
 	IMContainer controls_container(2400.0, 375.0);
 	controls_container.setAlignment(CABottom, CARight);
@@ -106,7 +106,12 @@ void BuildUI(){
 	controls_divider.append(rtn_skip);
 
 	imGUI.getFooter().addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
-	imGUI.getFooter().setElement(dialogue_holder);
+	imGUI.getFooter().setElement(dialogue_lines_holder_horiz);
+}
+
+void AddExampleText(){
+	string example_text = "This needs to be here in case the \"Save dialogue?\" popup needs to be Hello there! [wait 0.2]How can I help you? Oh, my mistake[wait 0.2] -- I guess I'm talking to myself.";
+	dialogue_queue = example_text.split(" ");
 }
 
 float CalculateTextWidth(string text, int font_size){
@@ -185,8 +190,29 @@ void ReceiveMessage(string msg){
 	}
 }
 
+float add_dialogue_timer = 0.0;
+
 void Update(){
 	imGUI.update();
+
+	if(dialogue_queue.size() > 0){
+		add_dialogue_timer += time_step;
+		if(add_dialogue_timer > 0.25){
+			add_dialogue_timer = 0.0;
+			IMText dialogue_text(dialogue_queue[0] + " ", dialogue_font);
+			dialogue_text.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
+
+			dialogue_line_holder.append(dialogue_text);
+			dialogue_queue.removeAt(0);
+
+			if(dialogue_line_holder.getSizeX() > 1500.0){
+				line_counter += 1;
+				@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+				dialogue_lines_holder_vert.append(dialogue_line_holder);
+				dialogue_line_holder.setZOrdering(1);
+			}
+		}
+	}
 }
 
 bool HasFocus(){
