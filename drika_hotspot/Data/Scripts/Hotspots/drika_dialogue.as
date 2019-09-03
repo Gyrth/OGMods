@@ -1,9 +1,10 @@
 enum dialogue_functions	{
 							say = 0,
-							set_dialogue_color = 1,
-							set_dialogue_voice = 2,
-							set_character_pos = 3,
-							set_animation = 4
+							add_actor = 1,
+							set_dialogue_color = 2,
+							set_dialogue_voice = 3,
+							set_character_pos = 4,
+							set_animation = 5
 						}
 
 class DrikaDialogue : DrikaElement{
@@ -14,9 +15,12 @@ class DrikaDialogue : DrikaElement{
 	bool say_started = false;
 	float say_timer = 0.0;
 	float wait_timer = 0.0;
+	int actor_id;
+	string actor_name;
 
 	array<string> dialogue_function_names =	{
 												"Say",
+												"Add Actor",
 												"Set Dialogue Color",
 												"Set Dialogue Voice",
 												"Set Character Position",
@@ -29,6 +33,13 @@ class DrikaDialogue : DrikaElement{
 
 		if(dialogue_function == say){
 			say_text = GetJSONString(params, "say_text", "Drika Hotspot Dialogue");
+		}else if(dialogue_function == add_actor){
+			connection_types = {_movement_object};
+			actor_id = GetJSONInt(params, "actor_id", 0);
+			if(MovementObjectExists(actor_id)){
+				Object@ actor_object = ReadObjectFromID(actor_id);
+				actor_name = actor_object.GetName();
+			}
 		}
 
 		drika_element_type = drika_dialogue;
@@ -42,6 +53,8 @@ class DrikaDialogue : DrikaElement{
 
 		if(dialogue_function == say){
 			data["say_text"] = JSONValue(say_text);
+		}else if(dialogue_function == add_actor){
+			data["actor_id"] = JSONValue(actor_id);
 		}
 
 		return data;
@@ -57,26 +70,69 @@ class DrikaDialogue : DrikaElement{
 			}else{
 				display_string += "\"" + say_text.substr(0, 35) + "..." + "\"";
 			}
+		}else if(dialogue_function == add_actor){
+			if(actor_name == ""){
+				display_string += actor_id;
+			}else{
+				display_string += actor_name;
+			}
 		}
 
 		return display_string;
 	}
 
 	void StartSettings(){
+		CheckReferenceAvailable();
 		if(dialogue_function == say){
 			ImGui_SetTextBuf(say_text);
+		}
+	}
+
+	void DrawEditing(){
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		}
+	}
+
+	void ConnectedChanged(){
+		if(dialogue_function == add_actor){
+			actor_id = object_id;
+			if(MovementObjectExists(actor_id)){
+				Object@ actor_object = ReadObjectFromID(actor_id);
+				actor_name = actor_object.GetName();
+			}
 		}
 	}
 
 	void DrawSettings(){
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
 			dialogue_function = dialogue_functions(current_dialogue_function);
+			if(dialogue_function == add_actor){
+				connection_types = {_movement_object};
+			}else{
+				connection_types = {};
+			}
 		}
 
 		if(dialogue_function == say){
+			if(ImGui_Combo("Actor", current_reference, available_references, available_references.size())){
+				reference_string = available_references[current_reference];
+				TargetChanged();
+			}
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				say_text = ImGui_GetTextBuf();
 			}
+		}else if(dialogue_function == add_actor){
+
+		}
+	}
+
+	string GetReference(){
+		if(dialogue_function == add_actor){
+			return actor_name;
+		}else{
+			return "";
 		}
 	}
 
@@ -128,6 +184,9 @@ class DrikaDialogue : DrikaElement{
 				}
 			}
 			say_timer += time_step;
+		}else if(dialogue_function == add_actor){
+			RegisterObject(actor_id, actor_name);
+			triggered = true;
 		}
 		return triggered;
 	}

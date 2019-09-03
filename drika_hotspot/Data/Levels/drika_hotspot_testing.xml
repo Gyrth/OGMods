@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="8.54223" t1="-0.115638" t2="-3.69675" s0="1" s1="1" s2="1" q0="0.149687" q1="-0.180242" q2="0.0277637" q3="0.971769" euler_x="0.305668" euler_y="-0.366788" euler_z="0" id="1">
+    <CameraObject t0="2.57118" t1="2.51026" t2="-1.91278" s0="1" s1="1" s2="1" q0="0.191631" q1="0.52926" q2="-0.124115" q3="0.817164" euler_x="0.46069" euler_y="1.14948" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -837,7 +837,7 @@
     <Hotspot t0="5.54833" t1="-1.43434" t2="-7.47749" s0="0.428653" s1="0.428653" s2="0.428653" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;dialogue_function&quot;:0,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;say_text&quot;:&quot;Drika Hotspot Dialogue [wait 0.5] Seems to be working.\n Drika Hotspot Dialogue [wait 0.5] Seems to be working.\nDrika Hotspot Dialogue [wait 0.5] Seems to be working.\n Drika Hotspot Dialogue [wait 0.5] Seems to be working.\nDrika Hotspot Dialogue [wait 0.5] Seems to be working.\n Drika Hotspot Dialogue [wait 0.5] Seems to be working.&quot;}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;actor_id&quot;:122,&quot;dialogue_function&quot;:1,&quot;function_name&quot;:&quot;dialogue&quot;},{&quot;dialogue_function&quot;:0,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;say_text&quot;:&quot;Drika Hotspot Dialogue [wait 0.5] Seems to be working.&quot;}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
