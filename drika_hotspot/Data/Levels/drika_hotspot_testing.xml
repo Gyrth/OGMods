@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="10.3048" t1="-0.0994969" t2="9.14392" s0="1" s1="1" s2="1" q0="-0.0202574" q1="0.366884" q2="-0.00799137" q3="-0.930012" euler_x="0.0435568" euler_y="-0.751502" euler_z="0" id="1">
+    <CameraObject t0="8.54223" t1="-0.115638" t2="-3.69675" s0="1" s1="1" s2="1" q0="0.149687" q1="-0.180242" q2="0.0277637" q3="0.971769" euler_x="0.305668" euler_y="-0.366788" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -229,7 +229,7 @@
     <EnvObject name="Create Particle Helper" t0="-76.3033" t1="-2.0284" t2="11.4961" s0="0.25" s1="0.25" s2="0.25" q0="0.0602962" q1="0.0848466" q2="0.414548" q3="0.904056" euler_x="0.181327" euler_y="0.103606" euler_z="0.869299" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="22.289" t1="-1.07953" t2="-10.3088" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="26" color_r="0" color_g="0.658842" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+    <EnvObject t0="5.37502" t1="-2.71934" t2="-7.74962" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="26" color_r="0" color_g="0.658842" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="28.2266" t1="-1.52645" t2="-1.83325" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" color_r="1" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
@@ -834,6 +834,14 @@
             <parameter name="Owner" type="int" val="175" />
         </parameters>
     </EnvObject>
+    <Hotspot t0="5.54833" t1="-1.43434" t2="-7.47749" s0="0.428653" s1="0.428653" s2="0.428653" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Debug Current Line" type="int" val="1" />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;dialogue_function&quot;:0,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;say_text&quot;:&quot;Drika Hotspot Dialogue [wait 0.5] Seems to be working.\n Drika Hotspot Dialogue [wait 0.5] Seems to be working.\nDrika Hotspot Dialogue [wait 0.5] Seems to be working.\n Drika Hotspot Dialogue [wait 0.5] Seems to be working.\nDrika Hotspot Dialogue [wait 0.5] Seems to be working.\n Drika Hotspot Dialogue [wait 0.5] Seems to be working.&quot;}]}&#x0A;' />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <Hotspot t0="18.1116" t1="6.39651" t2="26.1045" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="180" type_file="Data/Objects/Hotspots/overgrowth_level.xml">
         <parameters>
             <parameter name="death_message" type="string" val="Press $attack$ to try again" />
@@ -1068,6 +1076,6 @@
     <SpawnerItem display_name="Basics Stone Square Pillar" path="Data/Objects/Buildings/basics/soft_square_pillar.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/soft_square_pillar.png" />
     <SpawnerItem display_name="Basics Stone Cylinder" path="Data/Objects/Buildings/basics/soft_cylinder.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/soft_cylinder.png" />
     <SpawnerItem display_name="Basics Stone Cube" path="Data/Objects/Buildings/basics/soft_cube.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/soft_cube.png" />
-    <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
     <SpawnerItem display_name="Overgrowth Level Hotspot" path="Data/Objects/Hotspots/overgrowth_level.xml" thumbnail_path="Data/Textures/ui/ogicon.png" />
+    <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
 </RecentItems>

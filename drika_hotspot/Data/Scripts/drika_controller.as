@@ -5,10 +5,11 @@ FontSetup name_font("edosz", 70 , HexColor("#CCCCCC"), true);
 FontSetup dialogue_font("arial", 50 , HexColor("#CCCCCC"), true);
 FontSetup controls_font("arial", 45 , HexColor("#616161"), true);
 
-array<string> dialogue_queue;
+array<string> dialogue_cache;
 IMDivider @dialogue_lines_holder_vert;
 IMDivider @dialogue_line_holder;
 int line_counter = 0;
+bool ui_created = false;
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
@@ -20,7 +21,8 @@ void SetWindowDimensions(int width, int height){
 }
 
 void BuildUI(){
-	AddExampleText();
+	ui_created = false;
+	line_counter = 0;
 	DisposeTextAtlases();
 	imGUI.clear();
 	imGUI.setHeaderHeight(225);
@@ -83,6 +85,7 @@ void BuildUI(){
 
 	imGUI.getFooter().addFloatingElement(name_container, "name_container", vec2(0, 0), 3);
 	imGUI.getFooter().addFloatingElement(bg_container, "bg_container", vec2(0.0, 50.0), -1);
+	imGUI.getFooter().setAlignment(CALeft, CACenter);
 
 	IMDivider dialogue_lines_holder_horiz("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_lines_holder_horiz.appendSpacer(100.0);
@@ -93,6 +96,17 @@ void BuildUI(){
 	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 	dialogue_lines_holder_vert.append(dialogue_line_holder);
 	dialogue_line_holder.setZOrdering(1);
+
+	//Add all the text that has already been added, in case of a refresh.
+	for(uint i = 0; i < dialogue_cache.size(); i++){
+		IMText dialogue_text(dialogue_cache[i], dialogue_font);
+		dialogue_line_holder.append(dialogue_text);
+
+		line_counter += 1;
+		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+		dialogue_lines_holder_vert.append(dialogue_line_holder);
+		dialogue_line_holder.setZOrdering(1);
+	}
 
 	IMContainer controls_container(2400.0, 375.0);
 	controls_container.setAlignment(CABottom, CARight);
@@ -107,11 +121,8 @@ void BuildUI(){
 
 	imGUI.getFooter().addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
 	imGUI.getFooter().setElement(dialogue_lines_holder_horiz);
-}
 
-void AddExampleText(){
-	string example_text = "This needs to be here in case the \"Save dialogue?\" popup needs to be Hello there! [wait 0.2]How can I help you? Oh, my mistake[wait 0.2] -- I guess I'm talking to myself.";
-	dialogue_queue = example_text.split(" ");
+	ui_created = true;
 }
 
 float CalculateTextWidth(string text, int font_size){
@@ -187,6 +198,41 @@ void ReceiveMessage(string msg){
 		string song_path = token_iter.GetToken(msg);
 
 		WriteMusicXML(music_path, song_name, song_path);
+	}else if(token == "drika_dialogue_show"){
+
+	}else if(token == "drika_dialogue_hide"){
+
+	}else if(token == "drika_dialogue_add_say"){
+		token_iter.FindNextToken(msg);
+		string text = token_iter.GetToken(msg);
+
+		if(text != "\n"){
+			IMText dialogue_text(text + " ", dialogue_font);
+			if(dialogue_cache.size() == 0){
+				dialogue_cache.insertLast("");
+			}
+			dialogue_cache[dialogue_cache.size() - 1] += text + " ";
+			dialogue_text.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
+
+			dialogue_line_holder.append(dialogue_text);
+		}
+
+		if(dialogue_line_holder.getSizeX() > 1500.0 || text == "\n"){
+			line_counter += 1;
+			dialogue_cache.insertLast("");
+			@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+			dialogue_lines_holder_vert.append(dialogue_line_holder);
+			dialogue_line_holder.setZOrdering(1);
+		}
+	}else if(token == "drika_dialogue_clear_say"){
+		dialogue_cache.resize(0);
+		dialogue_lines_holder_vert.clear();
+
+		line_counter = 0;
+		dialogue_cache.insertLast("");
+		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+		dialogue_lines_holder_vert.append(dialogue_line_holder);
+		dialogue_line_holder.setZOrdering(1);
 	}
 }
 
@@ -194,25 +240,6 @@ float add_dialogue_timer = 0.0;
 
 void Update(){
 	imGUI.update();
-
-	if(dialogue_queue.size() > 0){
-		add_dialogue_timer += time_step;
-		if(add_dialogue_timer > 0.25){
-			add_dialogue_timer = 0.0;
-			IMText dialogue_text(dialogue_queue[0] + " ", dialogue_font);
-			dialogue_text.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
-
-			dialogue_line_holder.append(dialogue_text);
-			dialogue_queue.removeAt(0);
-
-			if(dialogue_line_holder.getSizeX() > 1500.0){
-				line_counter += 1;
-				@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-				dialogue_lines_holder_vert.append(dialogue_line_holder);
-				dialogue_line_holder.setZOrdering(1);
-			}
-		}
-	}
 }
 
 bool HasFocus(){
