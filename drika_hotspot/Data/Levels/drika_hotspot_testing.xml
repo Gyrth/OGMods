@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="2.57118" t1="2.51026" t2="-1.91278" s0="1" s1="1" s2="1" q0="0.191631" q1="0.52926" q2="-0.124115" q3="0.817164" euler_x="0.46069" euler_y="1.14948" euler_z="0" id="1">
+    <CameraObject t0="9.34453" t1="5.90437" t2="-15.8766" s0="1" s1="1" s2="1" q0="0.056268" q1="0.928072" q2="-0.333069" q3="0.156787" euler_x="-2.45246" euler_y="0.334716" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -606,7 +606,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <ActorObject name="drika_character" t0="15.9538" t1="-1.59152" t2="-8.90377" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="122" type_file="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml" is_player="0">
+    <ActorObject name="Drika Character" t0="15.9538" t1="-1.59152" t2="-8.90377" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="122" type_file="Data/Objects/IGF_Characters/IGF_RabbitCivActor.xml" is_player="0">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -837,7 +837,7 @@
     <Hotspot t0="5.54833" t1="-1.43434" t2="-7.47749" s0="0.428653" s1="0.428653" s2="0.428653" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;actor_id&quot;:122,&quot;dialogue_function&quot;:1,&quot;function_name&quot;:&quot;dialogue&quot;},{&quot;dialogue_function&quot;:0,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;say_text&quot;:&quot;Drika Hotspot Dialogue [wait 0.5] Seems to be working.&quot;}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;actor_id&quot;:122,&quot;dialogue_function&quot;:1,&quot;function_name&quot;:&quot;dialogue&quot;},{&quot;dialogue_function&quot;:0,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;identifier&quot;:&quot;Drika Character&quot;,&quot;say_text&quot;:&quot;Drika Hotspot Dialogue [wait 1.5] Seems to be working.\nDrika Hotspot Dialogue [wait 2.5] Seems to be working.\nDrika Hotspot Dialogue [wait 3.5] Seems to be working.\nDrika Hotspot Dialogue [wait 4.5] Seems to be working.&quot;}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />

@@ -17,6 +17,7 @@ class DrikaDialogue : DrikaElement{
 	float wait_timer = 0.0;
 	int actor_id;
 	string actor_name;
+	vec3 dialogue_color;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -33,13 +34,20 @@ class DrikaDialogue : DrikaElement{
 
 		if(dialogue_function == say){
 			say_text = GetJSONString(params, "say_text", "Drika Hotspot Dialogue");
+			identifier_type = identifier_types(reference);
+			reference_string = GetJSONString(params, "identifier", "drika_reference");
 		}else if(dialogue_function == add_actor){
 			connection_types = {_movement_object};
 			actor_id = GetJSONInt(params, "actor_id", 0);
+			object_id = actor_id;
 			if(MovementObjectExists(actor_id)){
 				Object@ actor_object = ReadObjectFromID(actor_id);
 				actor_name = actor_object.GetName();
 			}
+		}else if(dialogue_function == set_dialogue_color){
+			dialogue_color = GetJSONVec3(params, "dialogue_color", vec3(1));
+			identifier_type = identifier_types(reference);
+			reference_string = GetJSONString(params, "identifier", "drika_reference");
 		}
 
 		drika_element_type = drika_dialogue;
@@ -53,8 +61,15 @@ class DrikaDialogue : DrikaElement{
 
 		if(dialogue_function == say){
 			data["say_text"] = JSONValue(say_text);
+			data["identifier"] = JSONValue(reference_string);
 		}else if(dialogue_function == add_actor){
 			data["actor_id"] = JSONValue(actor_id);
+		}else if(dialogue_function == set_dialogue_color){
+			data["dialogue_color"] = JSONValue(JSONarrayValue);
+			data["dialogue_color"].append(dialogue_color.x);
+			data["dialogue_color"].append(dialogue_color.y);
+			data["dialogue_color"].append(dialogue_color.z);
+			data["identifier"] = JSONValue(reference_string);
 		}
 
 		return data;
@@ -65,6 +80,7 @@ class DrikaDialogue : DrikaElement{
 		display_string += dialogue_function_names[current_dialogue_function] + " ";
 
 		if(dialogue_function == say){
+			display_string += reference_string + " ";
 			if(say_text.length() < 35){
 				display_string += "\"" + say_text + "\"";
 			}else{
@@ -76,6 +92,9 @@ class DrikaDialogue : DrikaElement{
 			}else{
 				display_string += actor_name;
 			}
+		}else if(dialogue_function == set_dialogue_color){
+			display_string += reference_string + " ";
+			display_string += Vec3ToString(dialogue_color);
 		}
 
 		return display_string;
@@ -118,13 +137,15 @@ class DrikaDialogue : DrikaElement{
 		if(dialogue_function == say){
 			if(ImGui_Combo("Actor", current_reference, available_references, available_references.size())){
 				reference_string = available_references[current_reference];
-				TargetChanged();
 			}
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				say_text = ImGui_GetTextBuf();
 			}
-		}else if(dialogue_function == add_actor){
-
+		}else if(dialogue_function == set_dialogue_color){
+			if(ImGui_Combo("Actor", current_reference, available_references, available_references.size())){
+				reference_string = available_references[current_reference];
+			}
+			ImGui_ColorEdit3("Dialogue Color", dialogue_color);
 		}
 	}
 
@@ -157,6 +178,7 @@ class DrikaDialogue : DrikaElement{
 				wait_timer -= time_step;
 			}else if(say_timer > 0.15){
 				say_timer = 0.0;
+				string nametag = "\"" + reference_string + "\"";
 
 				if(say_text_split[0] == "[wait"){
 					say_text_split.removeAt(0);
@@ -165,15 +187,15 @@ class DrikaDialogue : DrikaElement{
 					return triggered;
 				}else if(say_text_split[0].findFirst("\n") != -1){
 					array<string> new_line_split = say_text_split[0].split("\n");
-					level.SendMessage("drika_dialogue_add_say " + new_line_split[0]);
-					level.SendMessage("drika_dialogue_add_say \n");
+					level.SendMessage("drika_dialogue_add_say " + nametag + " " + new_line_split[0]);
+					level.SendMessage("drika_dialogue_add_say " + nametag + " \n");
 
 					new_line_split.removeAt(0);
 					say_text_split[0] = join(new_line_split, "\n");
 					return triggered;
 				}
-
 				string msg = "drika_dialogue_add_say ";
+				msg += nametag + " ";
 				msg += say_text_split[0];
 				level.SendMessage(msg);
 
@@ -187,7 +209,14 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == add_actor){
 			RegisterObject(actor_id, actor_name);
 			triggered = true;
+		}else if(dialogue_function == set_dialogue_color){
+			string msg = "drika_dialogue_set_color ";
+			msg += reference_string;
+			msg += dialogue_color.x + " " + dialogue_color.y + " " + dialogue_color.z;
+			level.SendMessage(msg);
+			triggered = true;
 		}
+
 		return triggered;
 	}
 }

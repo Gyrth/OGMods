@@ -11,6 +11,10 @@ IMDivider @dialogue_line_holder;
 int line_counter = 0;
 bool ui_created = false;
 
+array<string> dialogue_color_names;
+array<vec3> dialogue_colors;
+string current_actor_name = "";
+
 void Init(string str){
 	@imGUI = CreateIMGUI();
 	BuildUI();
@@ -65,25 +69,8 @@ void BuildUI(){
 	right_fade.setDisplacementX(-0.25);
 	bg_divider.append(right_fade);
 
-	IMContainer name_container(0.0, 100.0);
-	IMDivider name_divider("name_divider", DOHorizontal);
-	name_divider.setZOrdering(2);
-	/* name_divider.showBorder(); */
-	name_divider.setAlignment(CACenter, CACenter);
-	name_container.setElement(name_divider);
-	IMText name("Turner", name_font);
-	name_divider.appendSpacer(30.0);
-	name_divider.append(name);
-	name_divider.appendSpacer(30.0);
+	CreateNameTag(imGUI.getFooter());
 
-	IMImage name_background("Textures/ui/menus/main/brushStroke.png");
-	name_background.setClip(false);
-	/* name_background.showBorder(); */
-
-	name_background.setSize(vec2(CalculateTextWidth(name.getText(), name_font.size), 100.0));
-	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
-
-	imGUI.getFooter().addFloatingElement(name_container, "name_container", vec2(0, 0), 3);
 	imGUI.getFooter().addFloatingElement(bg_container, "bg_container", vec2(0.0, 50.0), -1);
 	imGUI.getFooter().setAlignment(CALeft, CACenter);
 
@@ -123,6 +110,31 @@ void BuildUI(){
 	imGUI.getFooter().setElement(dialogue_lines_holder_horiz);
 
 	ui_created = true;
+}
+
+void CreateNameTag(IMContainer@ parent){
+	//Remove any nametag that's already there.
+	parent.removeElement("name_container");
+
+	IMContainer name_container(0.0, 100.0);
+	IMDivider name_divider("name_divider", DOHorizontal);
+	name_divider.setZOrdering(2);
+	/* name_divider.showBorder(); */
+	name_divider.setAlignment(CACenter, CACenter);
+	name_container.setElement(name_divider);
+	IMText name(current_actor_name, name_font);
+	name_divider.appendSpacer(30.0);
+	name_divider.append(name);
+	name_divider.appendSpacer(30.0);
+
+	IMImage name_background("Textures/ui/menus/main/brushStroke.png");
+	name_background.setClip(false);
+	/* name_background.showBorder(); */
+
+	name_background.setSize(vec2(CalculateTextWidth(name.getText(), name_font.size), 100.0));
+	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
+
+	parent.addFloatingElement(name_container, "name_container", vec2(0, 0), 3);
 }
 
 float CalculateTextWidth(string text, int font_size){
@@ -204,6 +216,14 @@ void ReceiveMessage(string msg){
 
 	}else if(token == "drika_dialogue_add_say"){
 		token_iter.FindNextToken(msg);
+		string actor_name = token_iter.GetToken(msg);
+
+		if(current_actor_name != actor_name){
+			current_actor_name = actor_name;
+			CreateNameTag(imGUI.getFooter());
+		}
+
+		token_iter.FindNextToken(msg);
 		string text = token_iter.GetToken(msg);
 
 		if(text != "\n"){
@@ -233,6 +253,25 @@ void ReceiveMessage(string msg){
 		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 		dialogue_lines_holder_vert.append(dialogue_line_holder);
 		dialogue_line_holder.setZOrdering(1);
+	}else if(token == "drika_dialogue_set_color"){
+		token_iter.FindNextToken(msg);
+		string reference = token_iter.GetToken(msg);
+
+		vec3 color;
+		token_iter.FindNextToken(msg);
+		color.x = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		color.y = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		color.z = atof(token_iter.GetToken(msg));
+
+		int index = dialogue_color_names.find(reference);
+		if(index != -1){
+			dialogue_colors[index] = color;
+		}else{
+			dialogue_colors.insertLast(color);
+			dialogue_color_names.insertLast(reference);
+		}
 	}
 }
 
