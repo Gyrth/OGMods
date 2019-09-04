@@ -17,6 +17,8 @@ class DrikaDialogue : DrikaElement{
 	int actor_id;
 	string actor_name;
 	vec4 dialogue_color = vec4(1.0);
+	bool dialogue_done = false;
+	int voice = 0;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -35,6 +37,9 @@ class DrikaDialogue : DrikaElement{
 			connection_types = {_movement_object};
 		}else if(dialogue_function == set_actor_color){
 			dialogue_color = GetJSONVec4(params, "dialogue_color", vec4(1));
+			connection_types = {_movement_object};
+		}else if(dialogue_function == set_actor_voice){
+			voice = GetJSONInt(params, "voice", 0);
 			connection_types = {_movement_object};
 		}
 
@@ -58,6 +63,8 @@ class DrikaDialogue : DrikaElement{
 			data["dialogue_color"].append(dialogue_color.y);
 			data["dialogue_color"].append(dialogue_color.z);
 			data["dialogue_color"].append(dialogue_color.a);
+		}else if(dialogue_function == set_actor_voice){
+			data["voice"] = JSONValue(voice);
 		}
 		SaveIdentifier(data);
 
@@ -79,6 +86,8 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_color){
 			display_string += actor_name;
 			display_string += Vec4ToString(dialogue_color);
+		}else if(dialogue_function == set_actor_voice){
+			display_string += actor_name;
 		}
 
 		return display_string;
@@ -116,6 +125,8 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void DrawSettings(){
+		DrawSelectTargetUI();
+
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
 			dialogue_function = dialogue_functions(current_dialogue_function);
 			if(dialogue_function == say || dialogue_function == set_actor_color){
@@ -124,8 +135,6 @@ class DrikaDialogue : DrikaElement{
 				connection_types = {};
 			}
 		}
-
-		DrawSelectTargetUI();
 
 		if(dialogue_function == say){
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
@@ -136,11 +145,15 @@ class DrikaDialogue : DrikaElement{
 				reference_string = available_references[current_reference];
 			}
 			ImGui_ColorEdit4("Dialogue Color", dialogue_color);
+		}else if(dialogue_function == set_actor_voice){
+			if(ImGui_SliderInt("Voice", voice, 0, 18, "%.0f")){
+				level.SendMessage("drika_dialogue_test_voice " + voice);
+			}
 		}
 	}
 
 	void Reset(){
-		triggered = false;
+		dialogue_done = false;
 		if(dialogue_function == say){
 			say_started = false;
 			say_timer = 0.0;
@@ -156,8 +169,17 @@ class DrikaDialogue : DrikaElement{
 				level.SendMessage("drika_dialogue_clear_say");
 			}
 
-			if(wait_timer > 0.0){
+			if(dialogue_done){
+				if(GetInputPressed(0, "attack")){
+					level.SendMessage("drika_dialogue_skip");
+					return true;
+				}
+			}else if(wait_timer > 0.0){
 				wait_timer -= time_step;
+				if(GetInputPressed(0, "attack")){
+					level.SendMessage("drika_dialogue_skip");
+					wait_timer = 0.0;
+				}
 			}else if(say_timer > 0.15){
 				say_timer = 0.0;
 				string nametag = "\"" + actor_name + "\"";
@@ -166,7 +188,7 @@ class DrikaDialogue : DrikaElement{
 					say_text_split.removeAt(0);
 					wait_timer = atof(say_text_split[0].substr(0, 2));
 					say_text_split.removeAt(0);
-					return triggered;
+					return false;
 				}else if(say_text_split[0].findFirst("\n") != -1){
 					array<string> new_line_split = say_text_split[0].split("\n");
 					level.SendMessage("drika_dialogue_add_say " + nametag + " " + new_line_split[0]);
@@ -174,7 +196,7 @@ class DrikaDialogue : DrikaElement{
 
 					new_line_split.removeAt(0);
 					say_text_split[0] = join(new_line_split, "\n");
-					return triggered;
+					return false;
 				}
 				string msg = "drika_dialogue_add_say ";
 				msg += nametag + " ";
@@ -184,7 +206,7 @@ class DrikaDialogue : DrikaElement{
 				say_text_split.removeAt(0);
 
 				if(say_text_split.size() == 0){
-					triggered = true;
+					dialogue_done = true;
 				}
 			}
 			say_timer += time_step;
@@ -193,9 +215,16 @@ class DrikaDialogue : DrikaElement{
 			msg += "\"" + actor_name + "\"";
 			msg += dialogue_color.x + " " + dialogue_color.y + " " + dialogue_color.z + " " + dialogue_color.a;
 			level.SendMessage(msg);
-			triggered = true;
+			return true;
+		}else if(dialogue_function == set_actor_voice){
+			string msg = "drika_dialogue_set_voice ";
+			msg += "\"" + actor_name + "\"";
+			msg += voice;
+			level.SendMessage(msg);
+			return true;
 		}
 
-		return triggered;
+		return false;
 	}
+
 }
