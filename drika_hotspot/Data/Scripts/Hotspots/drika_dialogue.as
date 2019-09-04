@@ -19,8 +19,8 @@ class DrikaDialogue : DrikaElement{
 	vec4 dialogue_color = vec4(1.0);
 	bool dialogue_done = false;
 	int voice = 0;
-	vec3 target_character_position;
-	float target_character_rotation;
+	vec3 target_actor_position;
+	float target_actor_rotation;
 	Object@ character_placeholder = null;
 
 	array<string> dialogue_function_names =	{
@@ -45,8 +45,8 @@ class DrikaDialogue : DrikaElement{
 			voice = GetJSONInt(params, "voice", 0);
 			connection_types = {_movement_object};
 		}else if(dialogue_function == set_actor_position){
-			target_character_position = GetJSONVec3(params, "target_character_position", vec3(0.0));
-			target_character_rotation = GetJSONFloat(params, "target_character_rotation", 0.0);
+			target_actor_position = GetJSONVec3(params, "target_actor_position", vec3(0.0));
+			target_actor_rotation = GetJSONFloat(params, "target_actor_rotation", 0.0);
 			connection_types = {_movement_object};
 		}
 
@@ -60,8 +60,8 @@ class DrikaDialogue : DrikaElement{
 	void PostInit(){
 		if(dialogue_function == set_actor_position){
 			//If this is a new set character position then use the hotspot as the default position.
-			if(target_character_position == vec3(0.0)){
-				target_character_position = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+			if(target_actor_position == vec3(0.0)){
+				target_actor_position = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
 			}
 		}
 	}
@@ -82,11 +82,11 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_voice){
 			data["voice"] = JSONValue(voice);
 		}else if(dialogue_function == set_actor_position){
-			data["target_character_position"] = JSONValue(JSONarrayValue);
-			data["target_character_position"].append(target_character_position.x);
-			data["target_character_position"].append(target_character_position.y);
-			data["target_character_position"].append(target_character_position.z);
-			data["target_character_rotation"] = JSONValue(target_character_rotation);
+			data["target_actor_position"] = JSONValue(JSONarrayValue);
+			data["target_actor_position"].append(target_actor_position.x);
+			data["target_actor_position"].append(target_actor_position.y);
+			data["target_actor_position"].append(target_actor_position.z);
+			data["target_actor_rotation"] = JSONValue(target_actor_rotation);
 		}
 		SaveIdentifier(data);
 
@@ -158,21 +158,32 @@ class DrikaDialogue : DrikaElement{
 
 				float new_rotation = floor(rot + 0.5f);
 
-				if(target_character_position != new_position || target_character_rotation != new_rotation){
-					target_character_position = new_position;
-					target_character_rotation = new_rotation;
-					SetCharacterPosition();
+				if(target_actor_position != new_position || target_actor_rotation != new_rotation){
+					target_actor_position = new_position;
+					target_actor_rotation = new_rotation;
+					SetActorPosition();
 				}
 			}
 		}
 	}
 
 	void StartEdit(){
+		if(dialogue_function == set_actor_position){
+			SetActorPosition();
+		}else if(dialogue_function == set_actor_voice){
+			SetActorVoice();
+		}else if(dialogue_function == set_actor_color){
+			SetActorColor();
+		}
 	}
 
 	void EditDone(){
 		if(dialogue_function == set_actor_position){
 			DeleteCharacterPlaceholder();
+		}else if(dialogue_function == say){
+			if(say_started){
+				Reset();
+			}
 		}
 	}
 
@@ -193,8 +204,8 @@ class DrikaDialogue : DrikaElement{
 			character_placeholder.SetScalable(true);
 			character_placeholder.SetRotatable(true);
 
-			character_placeholder.SetTranslation(target_character_position);
-			character_placeholder.SetRotation(quaternion(vec4(0,1,0, target_character_rotation * PI / 180.0f)));
+			character_placeholder.SetTranslation(target_actor_position);
+			character_placeholder.SetRotation(quaternion(vec4(0,1,0, target_actor_rotation * PI / 180.0f)));
 
 
 			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(character_placeholder);
@@ -239,6 +250,9 @@ class DrikaDialogue : DrikaElement{
 	void Reset(){
 		dialogue_done = false;
 		if(dialogue_function == say){
+			if(say_started){
+				level.SendMessage("drika_dialogue_hide");
+			}
 			say_started = false;
 			say_timer = 0.0;
 		}else if(dialogue_function == set_actor_position){
@@ -253,85 +267,104 @@ class DrikaDialogue : DrikaElement{
 		}
 	}
 
+	void Update(){
+		if(dialogue_function == say){
+			UpdateSayDialogue();
+		}
+	}
+
 	bool Trigger(){
 		if(dialogue_function == say){
-			//Some setup operations that only need to be done once.
-			if(say_started == false){
-				say_started = true;
-				say_text_split = say_text.split(" ");
-				level.SendMessage("drika_dialogue_clear_say");
-			}
-
-			if(dialogue_done){
-				if(GetInputPressed(0, "attack")){
-					level.SendMessage("drika_dialogue_skip");
-					return true;
-				}
-			}else if(wait_timer > 0.0){
-				wait_timer -= time_step;
-				if(GetInputPressed(0, "attack")){
-					level.SendMessage("drika_dialogue_skip");
-					wait_timer = 0.0;
-				}
-			}else if(say_timer > 0.15){
-				say_timer = 0.0;
-				string nametag = "\"" + actor_name + "\"";
-
-				if(say_text_split[0] == "[wait"){
-					say_text_split.removeAt(0);
-					wait_timer = atof(say_text_split[0].substr(0, 2));
-					say_text_split.removeAt(0);
-					return false;
-				}else if(say_text_split[0].findFirst("\n") != -1){
-					array<string> new_line_split = say_text_split[0].split("\n");
-					level.SendMessage("drika_dialogue_add_say " + nametag + " " + new_line_split[0]);
-					level.SendMessage("drika_dialogue_add_say " + nametag + " \n");
-
-					new_line_split.removeAt(0);
-					say_text_split[0] = join(new_line_split, "\n");
-					return false;
-				}
-				string msg = "drika_dialogue_add_say ";
-				msg += nametag + " ";
-				msg += say_text_split[0];
-				level.SendMessage(msg);
-
-				say_text_split.removeAt(0);
-
-				if(say_text_split.size() == 0){
-					dialogue_done = true;
-				}
-			}
-			say_timer += time_step;
+			return UpdateSayDialogue();
 		}else if(dialogue_function == set_actor_color){
-			string msg = "drika_dialogue_set_color ";
-			msg += "\"" + actor_name + "\"";
-			msg += dialogue_color.x + " " + dialogue_color.y + " " + dialogue_color.z + " " + dialogue_color.a;
-			level.SendMessage(msg);
+			SetActorColor();
 			return true;
 		}else if(dialogue_function == set_actor_voice){
-			string msg = "drika_dialogue_set_voice ";
-			msg += "\"" + actor_name + "\"";
-			msg += voice;
-			level.SendMessage(msg);
+			SetActorVoice();
 			return true;
 		}else if(dialogue_function == set_actor_position){
-			SetCharacterPosition();
+			SetActorPosition();
 			return true;
 		}
 
 		return false;
 	}
 
-	void SetCharacterPosition(){
+	void SetActorColor(){
+		string msg = "drika_dialogue_set_color ";
+		msg += "\"" + actor_name + "\"";
+		msg += dialogue_color.x + " " + dialogue_color.y + " " + dialogue_color.z + " " + dialogue_color.a;
+		level.SendMessage(msg);
+	}
+
+	void SetActorVoice(){
+		string msg = "drika_dialogue_set_voice ";
+		msg += "\"" + actor_name + "\"";
+		msg += voice;
+		level.SendMessage(msg);
+	}
+
+	bool UpdateSayDialogue(){
+		//Some setup operations that only need to be done once.
+		if(say_started == false){
+			say_started = true;
+			say_text_split = say_text.split(" ");
+			level.SendMessage("drika_dialogue_clear_say");
+		}
+
+		if(dialogue_done){
+			if(GetInputPressed(0, "attack")){
+				level.SendMessage("drika_dialogue_skip");
+				return true;
+			}
+		}else if(wait_timer > 0.0){
+			wait_timer -= time_step;
+			if(GetInputPressed(0, "attack")){
+				level.SendMessage("drika_dialogue_skip");
+				wait_timer = 0.0;
+			}
+		}else if(say_timer > 0.15){
+			say_timer = 0.0;
+			string nametag = "\"" + actor_name + "\"";
+
+			if(say_text_split[0] == "[wait"){
+				say_text_split.removeAt(0);
+				wait_timer = atof(say_text_split[0].substr(0, 2));
+				say_text_split.removeAt(0);
+				return false;
+			}else if(say_text_split[0].findFirst("\n") != -1){
+				array<string> new_line_split = say_text_split[0].split("\n");
+				level.SendMessage("drika_dialogue_add_say " + nametag + " " + new_line_split[0]);
+				level.SendMessage("drika_dialogue_add_say " + nametag + " \n");
+
+				new_line_split.removeAt(0);
+				say_text_split[0] = join(new_line_split, "\n");
+				return false;
+			}
+			string msg = "drika_dialogue_add_say ";
+			msg += nametag + " ";
+			msg += say_text_split[0];
+			level.SendMessage(msg);
+
+			say_text_split.removeAt(0);
+
+			if(say_text_split.size() == 0){
+				dialogue_done = true;
+			}
+		}
+		say_timer += time_step;
+		return false;
+	}
+
+	void SetActorPosition(){
 		array<MovementObject@> targets = GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
 			if(!triggered){
 				targets[i].ReceiveScriptMessage("set_dialogue_control true");
 			}
-			targets[i].ReceiveScriptMessage("set_rotation " + target_character_rotation);
-			targets[i].ReceiveScriptMessage("set_dialogue_position " + target_character_position.x + " " + target_character_position.y + " " + target_character_position.z);
+			targets[i].ReceiveScriptMessage("set_rotation " + target_actor_rotation);
+			targets[i].ReceiveScriptMessage("set_dialogue_position " + target_actor_position.x + " " + target_actor_position.y + " " + target_actor_position.z);
 		}
 		triggered = true;
 	}

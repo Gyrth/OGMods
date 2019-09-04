@@ -1,4 +1,5 @@
 bool animating_camera = false;
+bool show_dialogue = false;
 array<string> hotspot_ids;
 IMGUI@ imGUI;
 FontSetup name_font("edosz", 70 , HexColor("#CCCCCC"), true);
@@ -26,11 +27,12 @@ ActorSettings@ current_actor_settings = ActorSettings();
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
-	BuildUI();
 }
 
 void SetWindowDimensions(int width, int height){
-	BuildUI();
+	if(show_dialogue){
+		BuildUI();
+	}
 }
 
 void BuildUI(){
@@ -227,13 +229,17 @@ void ReceiveMessage(string msg){
 		string song_path = token_iter.GetToken(msg);
 
 		WriteMusicXML(music_path, song_name, song_path);
-	}else if(token == "drika_dialogue_show"){
-
 	}else if(token == "drika_dialogue_hide"){
-
+		show_dialogue = false;
+		imGUI.clear();
 	}else if(token == "drika_dialogue_add_say"){
 		token_iter.FindNextToken(msg);
 		string actor_name = token_iter.GetToken(msg);
+
+		if(!show_dialogue){
+			BuildUI();
+			show_dialogue = true;
+		}
 
 		if(current_actor_settings.name != actor_name){
 			bool settings_found = false;
@@ -282,12 +288,14 @@ void ReceiveMessage(string msg){
 	}else if(token == "drika_dialogue_clear_say"){
 		dialogue_cache.resize(0);
 		dialogue_lines_holder_vert.clear();
-
 		line_counter = 0;
 		dialogue_cache.insertLast("");
-		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-		dialogue_lines_holder_vert.append(dialogue_line_holder);
-		dialogue_line_holder.setZOrdering(1);
+
+		if(show_dialogue){
+			@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+			dialogue_lines_holder_vert.append(dialogue_line_holder);
+			dialogue_line_holder.setZOrdering(1);
+		}
 	}else if(token == "drika_dialogue_set_color"){
 		token_iter.FindNextToken(msg);
 		string actor_name = token_iter.GetToken(msg);
