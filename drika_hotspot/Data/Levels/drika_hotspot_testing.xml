@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="9.34453" t1="5.90437" t2="-15.8766" s0="1" s1="1" s2="1" q0="0.056268" q1="0.928072" q2="-0.333069" q3="0.156787" euler_x="-2.45246" euler_y="0.334716" euler_z="3.14159" id="1">
+    <CameraObject t0="6.65134" t1="2.95643" t2="-15.0351" s0="1" s1="1" s2="1" q0="-0.0172024" q1="-0.97481" q2="0.207106" q3="-0.0809685" euler_x="-2.7229" euler_y="0.165741" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -837,7 +837,7 @@
     <Hotspot t0="5.54833" t1="-1.43434" t2="-7.47749" s0="0.428653" s1="0.428653" s2="0.428653" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;actor_id&quot;:122,&quot;dialogue_function&quot;:1,&quot;function_name&quot;:&quot;dialogue&quot;},{&quot;dialogue_function&quot;:0,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;identifier&quot;:&quot;Drika Character&quot;,&quot;say_text&quot;:&quot;Drika Hotspot Dialogue [wait 1.5] Seems to be working.\nDrika Hotspot Dialogue [wait 2.5] Seems to be working.\nDrika Hotspot Dialogue [wait 3.5] Seems to be working.\nDrika Hotspot Dialogue [wait 4.5] Seems to be working.&quot;}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;dialogue_color&quot;:[1,0,0,1],&quot;dialogue_function&quot;:1,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0},{&quot;dialogue_color&quot;:[0,0.023529291152954102,1,0.17254902422428131],&quot;dialogue_function&quot;:1,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;identifier&quot;:122,&quot;identifier_type&quot;:0},{&quot;dialogue_function&quot;:0,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;say_text&quot;:&quot;Drika Hotspot Dialogue [wait 1.5] Seems to be working.\nDrika Hotspot Dialogue [wait 2.5] Seems to be working.&quot;},{&quot;dialogue_function&quot;:0,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;identifier&quot;:122,&quot;identifier_type&quot;:0,&quot;say_text&quot;:&quot;Drika Hotspot Dialogue [wait 3.5] Seems to be working.\nDrika Hotspot Dialogue [wait 4.5] Seems to be working.&quot;},{&quot;dialogue_function&quot;:0,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;identifier&quot;:-1,&quot;identifier_type&quot;:0,&quot;say_text&quot;:&quot;Drika Hotspot Dialogue [wait 1.5] Seems to be working.\nDrika Hotspot Dialogue [wait 2.5] Seems to be working.\nDrika Hotspot Dialogue [wait 3.5] Seems to be working.\nDrika Hotspot Dialogue [wait 4.5] Seems to be working.&quot;}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />

@@ -12,8 +12,9 @@ int line_counter = 0;
 bool ui_created = false;
 
 array<string> dialogue_color_names;
-array<vec3> dialogue_colors;
+array<vec4> dialogue_colors;
 string current_actor_name = "";
+vec4 current_dialogue_color = vec4(1.0);
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
@@ -126,6 +127,7 @@ void CreateNameTag(IMContainer@ parent){
 	name_divider.appendSpacer(30.0);
 	name_divider.append(name);
 	name_divider.appendSpacer(30.0);
+	name.setColor(current_dialogue_color);
 
 	IMImage name_background("Textures/ui/menus/main/brushStroke.png");
 	name_background.setClip(false);
@@ -218,7 +220,27 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		string actor_name = token_iter.GetToken(msg);
 
-		if(current_actor_name != actor_name){
+		int name_index = dialogue_color_names.find(actor_name);
+		bool color_changed = false;
+		if(name_index != -1){
+			if(	current_dialogue_color.x != dialogue_colors[name_index].x ||
+				current_dialogue_color.y != dialogue_colors[name_index].y ||
+				current_dialogue_color.z != dialogue_colors[name_index].z ||
+				current_dialogue_color.a != dialogue_colors[name_index].a){
+				color_changed = true;
+				current_dialogue_color = dialogue_colors[name_index];
+			}
+		}else{
+			if(	current_dialogue_color.x != 1.0 ||
+				current_dialogue_color.y != 1.0 ||
+				current_dialogue_color.z != 1.0 ||
+				current_dialogue_color.a != 1.0){
+				color_changed = true;
+				current_dialogue_color = vec4(1.0);
+			}
+		}
+
+		if(current_actor_name != actor_name || color_changed){
 			current_actor_name = actor_name;
 			CreateNameTag(imGUI.getFooter());
 		}
@@ -257,13 +279,15 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		string reference = token_iter.GetToken(msg);
 
-		vec3 color;
+		vec4 color;
 		token_iter.FindNextToken(msg);
 		color.x = atof(token_iter.GetToken(msg));
 		token_iter.FindNextToken(msg);
 		color.y = atof(token_iter.GetToken(msg));
 		token_iter.FindNextToken(msg);
 		color.z = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		color.a = atof(token_iter.GetToken(msg));
 
 		int index = dialogue_color_names.find(reference);
 		if(index != -1){
