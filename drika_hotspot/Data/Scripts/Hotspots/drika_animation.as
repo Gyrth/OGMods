@@ -44,7 +44,6 @@ class DrikaAnimation : DrikaElement{
 	int key_index = 0;
 	Object@ current_key;
 	Object@ next_key;
-	float pi = 3.14159265f;
 	float animation_timer = 0.0;
 	int loop_direction = 1;
 	bool animation_finished = false;
@@ -448,12 +447,12 @@ class DrikaAnimation : DrikaElement{
 
 			// Set camera euler angles from rotation matrix
 			vec3 front = Mult(rotation, vec3(0,0,1));
-			float y_rot = atan2(front.x, front.z)*180.0f/pi;
-			float x_rot = asin(front[1])*-180.0f/pi;
+			float y_rot = atan2(front.x, front.z)*180.0f/PI;
+			float x_rot = asin(front[1])*-180.0f/PI;
 			vec3 up = Mult(rotation, vec3(0,1,0));
 			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
 			vec3 expected_up = normalize(cross(expected_right, front));
-			float z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/pi;
+			float z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/PI;
 			direction.x = floor(x_rot*100.0f+0.5f)/100.0f;
 			direction.y = floor(y_rot*100.0f+0.5f)/100.0f;
 			direction.z = floor(z_rot*100.0f+0.5f)/100.0f;
@@ -603,13 +602,13 @@ class DrikaAnimation : DrikaElement{
 
 				if(!interpolate_rotation){
 					new_rotation = mix(right_key.rotation, left_key.rotation, alpha);
-					float extra_y_rot = (extra_yaw / 180.0f * pi);
+					float extra_y_rot = (extra_yaw / 180.0f * PI);
 					new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
 				}else{
 					vec3 path_direction = normalize(previous_translation - new_translation);
 					vec3 up_direction = normalize(mix(right_key.rotation, left_key.rotation, alpha) * vec3(0.0f, 1.0f, 0.0f));
 
-					float yaw = atan2(-path_direction.x, -path_direction.z) + (extra_yaw / 180.0f * pi);
+					float yaw = atan2(-path_direction.x, -path_direction.z) + (extra_yaw / 180.0f * PI);
 					float pitch = asin(-path_direction.y);
 					vec3 right_roll_direction = normalize(right_key.rotation * vec3(1.0f, 0.0f, 0.0f));
 					vec3 left_roll_direction = normalize(left_key.rotation * vec3(1.0f, 0.0f, 0.0f));
@@ -799,7 +798,7 @@ class DrikaAnimation : DrikaElement{
 			vec3 path_direction = normalize(new_position - targets[0].GetTranslation());
 			vec3 up_direction = normalize(mix(current_key.GetRotation(), next_key.GetRotation(), alpha) * vec3(0.0f, 1.0f, 0.0f));
 
-			float rotation_y = atan2(-path_direction.x, -path_direction.z) + (extra_yaw / 180.0f * pi);
+			float rotation_y = atan2(-path_direction.x, -path_direction.z) + (extra_yaw / 180.0f * PI);
 			float rotation_x = asin(-path_direction.y);
 
 			vec3 previous_direction = normalize(current_key.GetRotation() * vec3(1.0f, 0.0f, 0.0f));
@@ -809,7 +808,7 @@ class DrikaAnimation : DrikaElement{
 			new_rotation = quaternion(vec4(0,1,0,rotation_y)) * quaternion(vec4(1,0,0,rotation_x)) * quaternion(vec4(0,0,1,rotation_z));
 		}else{
 			new_rotation = mix(current_key.GetRotation(), next_key.GetRotation(), alpha);
-			float extra_y_rot = (extra_yaw / 180.0f * pi);
+			float extra_y_rot = (extra_yaw / 180.0f * PI);
 			new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
 		}
 
@@ -820,7 +819,7 @@ class DrikaAnimation : DrikaElement{
 
 	//Current time, start value, change in value, duration
 	float sine_wave(float t, float b, float c, float d) {
-		return -c/2 * (cos(pi*t/d) - 1) + b;
+		return -c/2 * (cos(PI*t/d) - 1) + b;
 	}
 
 	void DrawDebugMesh(Object@ object){

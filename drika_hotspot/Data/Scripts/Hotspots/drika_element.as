@@ -163,6 +163,7 @@ class DrikaElement{
 	bool show_name_option = false;
 	string character_team = "team_drika";
 	string object_name = "drika_object";
+	float PI = 3.14159265f;
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}
