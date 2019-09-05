@@ -7,7 +7,8 @@ enum dialogue_functions	{
 							set_actor_eye_direction = 5,
 							set_actor_torso_direction = 6,
 							set_actor_head_direction = 7,
-							set_actor_omniscient = 8
+							set_actor_omniscient = 8,
+							set_camera_position = 9
 						}
 
 class DrikaDialogue : DrikaElement{
@@ -34,6 +35,9 @@ class DrikaDialogue : DrikaElement{
 	vec3 target_actor_head_direction;
 	float target_actor_head_direction_weight;
 	bool omniscient;
+	vec3 target_camera_position;
+	vec3 target_camera_rotation;
+	float target_camera_zoom;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -44,7 +48,8 @@ class DrikaDialogue : DrikaElement{
 												"Set Actor Eye Direction",
 												"Set Actor Torso Direction",
 												"Set Actor Head Direction",
-												"Set Actor Omniscient"
+												"Set Actor Omniscient",
+												"Set Camera Position"
 											};
 
 	DrikaDialogue(JSONValue params = JSONValue()){
@@ -68,6 +73,9 @@ class DrikaDialogue : DrikaElement{
 		target_actor_head_direction = GetJSONVec3(params, "target_actor_head_direction", vec3(0.0));
 		target_actor_head_direction_weight = GetJSONFloat(params, "target_actor_head_direction_weight", 1.0);
 		omniscient = GetJSONBool(params, "omniscient", true);
+		target_camera_position = GetJSONVec3(params, "target_camera_position", vec3(0.0));
+		target_camera_rotation = GetJSONVec3(params, "target_camera_rotation", vec3(0.0));
+		target_camera_zoom = GetJSONFloat(params, "target_camera_zoom", 90.0);
 
 		LoadIdentifier(params);
 		UpdateActorName();
@@ -119,6 +127,16 @@ class DrikaDialogue : DrikaElement{
 			data["target_actor_head_direction_weight"] = JSONValue(target_actor_head_direction_weight);
 		}else if(dialogue_function == set_actor_omniscient){
 			data["omniscient"] = JSONValue(omniscient);
+		}else if(dialogue_function == set_camera_position){
+			data["target_camera_position"] = JSONValue(JSONarrayValue);
+			data["target_camera_position"].append(target_camera_position.x);
+			data["target_camera_position"].append(target_camera_position.y);
+			data["target_camera_position"].append(target_camera_position.z);
+			data["target_camera_rotation"] = JSONValue(JSONarrayValue);
+			data["target_camera_rotation"].append(target_camera_rotation.x);
+			data["target_camera_rotation"].append(target_camera_rotation.y);
+			data["target_camera_rotation"].append(target_camera_rotation.z);
+			data["target_camera_zoom"] = JSONValue(target_camera_zoom);
 		}
 		SaveIdentifier(data);
 
@@ -160,6 +178,8 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_omniscient){
 			display_string += actor_name;
 			display_string += omniscient;
+		}else if(dialogue_function == set_actor_omniscient){
+			display_string += target_camera_zoom;
 		}
 
 		return display_string;
@@ -298,6 +318,32 @@ class DrikaDialogue : DrikaElement{
 					SetActorHeadDirection();
 				}
 			}
+		}else if(dialogue_function == set_camera_position){
+			PlaceholderCheck();
+
+			if(placeholder.IsSelected()){
+				vec3 new_position = placeholder.GetTranslation();
+				vec4 v = placeholder.GetRotationVec4();
+				quaternion quat(v.x,v.y,v.z,v.a);
+				vec3 front = Mult(quat, vec3(0,0,1));
+				vec3 new_rotation;
+				new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
+				new_rotation.x = asin(front[1]) * -180.0f / PI;
+				vec3 up = Mult(quat, vec3(0,1,0));
+				vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+				vec3 expected_up = normalize(cross(expected_right, front));
+				new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
+
+				const float zoom_sensitivity = 3.5f;
+				float new_zoom = min(150.0f, 90.0f / max(0.001f, (1.0f + (placeholder.GetScale().x - 1.0f) * zoom_sensitivity)));
+
+				if(target_camera_position != new_position || target_camera_rotation != new_rotation || target_camera_zoom != new_zoom){
+					target_camera_position = new_position;
+					target_camera_rotation = new_rotation;
+					target_camera_zoom = new_zoom;
+					/* SetCameraPosition(); */
+				}
+			}
 		}
 	}
 
@@ -322,7 +368,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void EditDone(){
-		if(dialogue_function == set_actor_position || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction){
+		if(dialogue_function == set_actor_position || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_camera_position){
 			DeletePlaceholder();
 		}else if(dialogue_function == say){
 			if(say_started){
@@ -347,6 +393,8 @@ class DrikaDialogue : DrikaElement{
 			placeholder.SetTranslatable(true);
 			placeholder.SetScalable(true);
 			placeholder.SetRotatable(true);
+			placeholder.SetDeletable(false);
+			placeholder.SetCopyable(false);
 
 			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder);
 			if(dialogue_function == set_actor_eye_direction){
@@ -357,10 +405,10 @@ class DrikaDialogue : DrikaElement{
 				placeholder.SetScale(0.05f + 0.05f * target_blink_multiplier);
 				placeholder_object.SetEditorDisplayName("Set Actor Eye Direction Helper");
 			}else if(dialogue_function == set_actor_position){
+				//If this is a new set character position then use the hotspot as the default position.
 				if(target_actor_position == vec3(0.0)){
 					target_actor_position = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
 				}
-				//If this is a new set character position then use the hotspot as the default position.
 				placeholder.SetTranslation(target_actor_position);
 				placeholder.SetRotation(quaternion(vec4(0,1,0, target_actor_rotation * PI / 180.0f)));
 				placeholder_object.SetPreview("Data/Objects/drika_spawn_placeholder.xml");
@@ -379,9 +427,26 @@ class DrikaDialogue : DrikaElement{
 				placeholder.SetScale(target_actor_head_direction_weight / 4.0f + 0.1f);
 				placeholder.SetTranslation(target_actor_head_direction);
 				placeholder_object.SetEditorDisplayName("Set Actor Head Direction Helper");
-			}
+			}else if(dialogue_function == set_camera_position){
+				if(target_camera_position == vec3(0.0)){
+					target_camera_position = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+				}
+				placeholder.SetTranslation(target_camera_position);
 
-			placeholder_object.SetSpecialType(kSpawn);
+				const float zoom_sensitivity = 3.5f;
+				float scale = (90.0f / target_camera_zoom - 1.0f) / zoom_sensitivity + 1.0f;
+				placeholder.SetScale(vec3(scale));
+
+				float deg2rad = PI / 180.0f;
+	            quaternion rot_y(vec4(0, 1, 0, target_camera_rotation.y * deg2rad));
+	            quaternion rot_x(vec4(1, 0, 0, target_camera_rotation.x * deg2rad));
+	            quaternion rot_z(vec4(0, 0, 1, target_camera_rotation.z * deg2rad));
+	            placeholder.SetRotation(rot_y * rot_x * rot_z);
+
+				placeholder_object.SetPreview("Data/Objects/camera.xml");
+				placeholder_object.SetEditorDisplayName("Set Camera Position Helper");
+				placeholder_object.SetSpecialType(kCamPreview);
+			}
 		}
 	}
 
@@ -389,7 +454,7 @@ class DrikaDialogue : DrikaElement{
 		DrawSelectTargetUI();
 
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
-			if(dialogue_function == set_actor_position || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction ||dialogue_function == set_actor_head_direction){
+			if(dialogue_function == set_actor_position || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction ||dialogue_function == set_actor_head_direction || dialogue_function == set_camera_position){
 				DeletePlaceholder();
 			}
 
@@ -513,9 +578,25 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_omniscient){
 			SetActorOmniscient();
 			return true;
+		}else if(dialogue_function == set_camera_position){
+			SetCameraPosition();
+			return true;
 		}
 
 		return false;
+	}
+
+	void SetCameraPosition(){
+		string msg = "drika_dialogue_set_camera_position ";
+		msg += floor(target_camera_rotation.x * 100.0f + 0.5f) / 100.0f + " ";
+		msg += floor(target_camera_rotation.y * 100.0f + 0.5f) / 100.0f + " ";
+		msg += floor(target_camera_rotation.z * 100.0f + 0.5f) / 100.0f + " ";
+		msg += target_camera_position.x + " ";
+		msg += target_camera_position.y + " ";
+		msg += target_camera_position.z + " ";
+		msg += target_camera_zoom;
+		level.SendMessage(msg);
+		Log(warning, msg);
 	}
 
 	void SetActorOmniscient(){

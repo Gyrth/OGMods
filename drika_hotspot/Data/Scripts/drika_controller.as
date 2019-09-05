@@ -1,6 +1,7 @@
 #include "animation_group.as"
 
 bool animating_camera = false;
+bool has_camera_control = false;
 bool show_dialogue = false;
 array<string> hotspot_ids;
 IMGUI@ imGUI;
@@ -8,6 +9,9 @@ FontSetup name_font("edosz", 70 , HexColor("#CCCCCC"), true);
 FontSetup dialogue_font("arial", 50 , HexColor("#CCCCCC"), true);
 FontSetup controls_font("arial", 45 , HexColor("#616161"), true);
 array<AnimationGroup@> all_animations;
+vec3 camera_position;
+vec3 camera_rotation;
+float camera_zoom;
 
 class ActorSettings{
 	string name = "Default";
@@ -249,6 +253,7 @@ void ReceiveMessage(string msg){
 
 		if(!show_dialogue){
 			show_dialogue = true;
+			has_camera_control = true;
 			BuildUI();
 		}
 
@@ -384,6 +389,23 @@ void ReceiveMessage(string msg){
 			}
 		}
 		hotspot_obj.ReceiveScriptMessage("drika_dialogue_send_done");
+	}else if(token == "drika_dialogue_set_camera_position"){
+		token_iter.FindNextToken(msg);
+		camera_rotation.x = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		camera_rotation.y = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		camera_rotation.z = atof(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		camera_position.x = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		camera_position.y = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		camera_position.z = atof(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		camera_zoom = atof(token_iter.GetToken(msg));
 	}
 }
 
@@ -419,14 +441,25 @@ void ReadAnimationList(){
 
 void Update(){
 	imGUI.update();
+	if(has_camera_control && !EditorModeActive()){
+		camera.SetXRotation(camera_rotation.x);
+		camera.SetYRotation(camera_rotation.y);
+		camera.SetZRotation(camera_rotation.z);
+		camera.SetPos(camera_position);
+		camera.SetDistance(0.0f);
+		camera.SetFOV(camera_zoom);
+		camera.SetDOF(0,0,0,0,0,0);
+		UpdateListener(camera_position, vec3(0.0f), camera.GetFacing(), camera.GetUpVector());
+		SetGrabMouse(true);
+	}
 }
 
 bool HasFocus(){
 	return false;
 }
-
+//HasCameraControl
 bool DialogueCameraControl() {
-	if(animating_camera){
+	if((animating_camera || has_camera_control) && !EditorModeActive()){
 		return true;
 	}else{
 		return false;
