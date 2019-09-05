@@ -28,6 +28,8 @@ class DrikaDialogue : DrikaElement{
 	string search_buffer = "";
 	vec3 target_actor_eye_direction = vec3(0.0);
 	float target_blink_multiplier = 1.0;
+	vec3 target_actor_torso_direction = vec3(0.0);
+	float target_actor_torso_direction_weight = 1.0;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -63,6 +65,10 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_eye_direction){
 			target_actor_eye_direction = GetJSONVec3(params, "target_actor_eye_direction", vec3(0.0));
 			target_blink_multiplier = GetJSONFloat(params, "target_blink_multiplier", 1.0);
+			connection_types = {_movement_object};
+		}else if(dialogue_function == set_actor_torso_direction){
+			target_actor_torso_direction = GetJSONVec3(params, "target_actor_torso_direction", vec3(0.0));
+			target_actor_torso_direction_weight = GetJSONFloat(params, "target_actor_torso_direction_weight", 1.0);
 			connection_types = {_movement_object};
 		}
 
@@ -106,6 +112,12 @@ class DrikaDialogue : DrikaElement{
 			data["target_actor_eye_direction"].append(target_actor_eye_direction.y);
 			data["target_actor_eye_direction"].append(target_actor_eye_direction.z);
 			data["target_blink_multiplier"] = JSONValue(target_blink_multiplier);
+		}else if(dialogue_function == set_actor_torso_direction){
+			data["target_actor_torso_direction"] = JSONValue(JSONarrayValue);
+			data["target_actor_torso_direction"].append(target_actor_torso_direction.x);
+			data["target_actor_torso_direction"].append(target_actor_torso_direction.y);
+			data["target_actor_torso_direction"].append(target_actor_torso_direction.z);
+			data["target_actor_torso_direction_weight"] = JSONValue(target_actor_torso_direction_weight);
 		}
 		SaveIdentifier(data);
 
@@ -137,7 +149,10 @@ class DrikaDialogue : DrikaElement{
 			display_string += target_actor_animation;
 		}else if(dialogue_function == set_actor_eye_direction){
 			display_string += actor_name;
-			display_string += target_actor_eye_direction;
+			display_string += target_blink_multiplier;
+		}else if(dialogue_function == set_actor_torso_direction){
+			display_string += actor_name;
+			display_string += target_actor_torso_direction_weight;
 		}
 
 		return display_string;
@@ -197,7 +212,7 @@ class DrikaDialogue : DrikaElement{
 			}
 		}else if(dialogue_function == set_actor_eye_direction){
 			PlaceholderCheck();
-			DebugDrawBillboard("Data/Textures/ui/eye_widget.tga", placeholder.GetTranslation(), 0.05, vec4(1.0), _delete_on_draw);
+			DebugDrawBillboard("Data/Textures/ui/eye_widget.tga", placeholder.GetTranslation(), 0.1, vec4(1.0), _delete_on_draw);
 			if(placeholder.IsSelected()){
 				float scale = placeholder.GetScale().x;
 				if(scale < 0.05f){
@@ -216,6 +231,27 @@ class DrikaDialogue : DrikaElement{
 					SetActorEyeDirection();
 				}
 			}
+		}else if(dialogue_function == set_actor_torso_direction){
+			PlaceholderCheck();
+			DebugDrawBillboard("Data/Textures/ui/torso_widget.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_draw);
+			if(placeholder.IsSelected()){
+				float scale = placeholder.GetScale().x;
+				if(scale < 0.1f){
+					placeholder.SetScale(vec3(0.1f));
+				}
+				if(scale > 0.35f){
+					placeholder.SetScale(vec3(0.35f));
+				}
+
+				float new_weight = (placeholder.GetScale().x - 0.1f) * 4.0f;
+				vec3 new_direction = placeholder.GetTranslation();
+
+				if(target_actor_torso_direction != new_direction || target_actor_torso_direction_weight != new_weight){
+					target_actor_torso_direction_weight = new_weight;
+					target_actor_torso_direction = new_direction;
+					SetActorTorsoDirection();
+				}
+			}
 		}
 	}
 
@@ -230,6 +266,8 @@ class DrikaDialogue : DrikaElement{
 			SetActorAnimation();
 		}else if(dialogue_function == set_actor_eye_direction){
 			SetActorEyeDirection();
+		}else if(dialogue_function == set_actor_torso_direction){
+			SetActorTorsoDirection();
 		}
 	}
 
@@ -237,6 +275,8 @@ class DrikaDialogue : DrikaElement{
 		if(dialogue_function == set_actor_position){
 			DeletePlaceholder();
 		}else if(dialogue_function == set_actor_eye_direction){
+			DeletePlaceholder();
+		}else if(dialogue_function == set_actor_torso_direction){
 			DeletePlaceholder();
 		}else if(dialogue_function == say){
 			if(say_started){
@@ -279,6 +319,13 @@ class DrikaDialogue : DrikaElement{
 				placeholder.SetRotation(quaternion(vec4(0,1,0, target_actor_rotation * PI / 180.0f)));
 				placeholder_object.SetPreview("Data/Objects/drika_spawn_placeholder.xml");
 				placeholder_object.SetEditorDisplayName("Set Actor Position Helper");
+			}else if(dialogue_function == set_actor_torso_direction){
+				if(target_actor_torso_direction == vec3(0.0)){
+					target_actor_torso_direction = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+				}
+				placeholder.SetScale(target_actor_torso_direction_weight / 4.0f + 0.1f);
+				placeholder.SetTranslation(target_actor_torso_direction);
+				placeholder_object.SetEditorDisplayName("Set Actor Torso Direction Helper");
 			}
 
 			placeholder_object.SetSpecialType(kSpawn);
@@ -400,9 +447,21 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_eye_direction){
 			SetActorEyeDirection();
 			return true;
+		}else if(dialogue_function == set_actor_torso_direction){
+			SetActorTorsoDirection();
+			return true;
 		}
 
 		return false;
+	}
+
+	void SetActorTorsoDirection(){
+		array<MovementObject@> targets = GetTargetMovementObjects();
+
+		for(uint i = 0; i < targets.size(); i++){
+			targets[i].ReceiveScriptMessage("set_torso_target " + target_actor_torso_direction.x + " " + target_actor_torso_direction.y + " " + target_actor_torso_direction.z + " " + target_actor_torso_direction_weight);
+		}
+		triggered = true;
 	}
 
 	void SetActorEyeDirection(){
