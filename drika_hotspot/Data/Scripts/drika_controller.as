@@ -1,3 +1,5 @@
+#include "animation_group.as"
+
 bool animating_camera = false;
 bool show_dialogue = false;
 array<string> hotspot_ids;
@@ -5,6 +7,7 @@ IMGUI@ imGUI;
 FontSetup name_font("edosz", 70 , HexColor("#CCCCCC"), true);
 FontSetup dialogue_font("arial", 50 , HexColor("#CCCCCC"), true);
 FontSetup controls_font("arial", 45 , HexColor("#616161"), true);
+array<AnimationGroup@> all_animations;
 
 class ActorSettings{
 	string name = "Default";
@@ -89,6 +92,9 @@ void BuildUI(){
 }
 
 void CreateBackground(IMContainer@ parent){
+	if(!show_dialogue){
+		return;
+	}
 	//Remove any background that's already there.
 	parent.removeElement("bg_container");
 
@@ -131,6 +137,9 @@ void CreateBackground(IMContainer@ parent){
 }
 
 void CreateNameTag(IMContainer@ parent){
+	if(!show_dialogue){
+		return;
+	}
 	//Remove any nametag that's already there.
 	parent.removeElement("name_container");
 
@@ -171,7 +180,9 @@ float CalculateTextWidth(string text, int font_size){
 }
 
 void PostScriptReload(){
-	BuildUI();
+	if(show_dialogue){
+		BuildUI();
+	}
 }
 
 void WriteMusicXML(string music_path, string song_name, string song_path){
@@ -237,8 +248,8 @@ void ReceiveMessage(string msg){
 		string actor_name = token_iter.GetToken(msg);
 
 		if(!show_dialogue){
-			BuildUI();
 			show_dialogue = true;
+			BuildUI();
 		}
 
 		if(current_actor_settings.name != actor_name){
@@ -287,11 +298,11 @@ void ReceiveMessage(string msg){
 		}
 	}else if(token == "drika_dialogue_clear_say"){
 		dialogue_cache.resize(0);
-		dialogue_lines_holder_vert.clear();
 		line_counter = 0;
 		dialogue_cache.insertLast("");
 
 		if(show_dialogue){
+			dialogue_lines_holder_vert.clear();
 			@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 			dialogue_lines_holder_vert.append(dialogue_line_holder);
 			dialogue_line_holder.setZOrdering(1);
@@ -357,6 +368,52 @@ void ReceiveMessage(string msg){
 		PlayLineContinueSound(test_voice);
 	}else if(token == "drika_dialogue_skip"){
 		PlayLineStartSound();
+	}else if(token == "drika_dialogue_get_animations"){
+		token_iter.FindNextToken(msg);
+		int hotspot_id = atoi(token_iter.GetToken(msg));
+
+		if(all_animations.size() == 0){
+			ReadAnimationList();
+		}
+		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
+		for(uint i = 0; i < all_animations.size(); i++){
+			hotspot_obj.ReceiveScriptMessage("drika_dialogue_add_animation_group " + all_animations[i].name);
+
+			for(uint j = 0; j < all_animations[i].animations.size(); j++){
+				hotspot_obj.ReceiveScriptMessage("drika_dialogue_add_animation " + all_animations[i].animations[j]);
+			}
+		}
+		hotspot_obj.ReceiveScriptMessage("drika_dialogue_send_done");
+	}
+}
+
+void ReadAnimationList(){
+	JSON file;
+	file.parseFile("Data/Scripts/drika_dialogue_animation_list.json");
+	JSONValue root = file.getRoot();
+	array<string> list_groups = root.getMemberNames();
+	array<string> active_mods;
+
+	array<ModID> mod_ids = GetActiveModSids();
+	for(uint i = 0; i < mod_ids.size(); i++){
+		active_mods.insertLast(ModGetID(mod_ids[i]));
+	}
+
+	for(uint i = 0; i < list_groups.size(); i++){
+		//Skip this mod if it's not active
+		if(active_mods.find(root[list_groups[i]]["Mod ID"].asString()) == -1){
+			continue;
+		}
+		AnimationGroup new_group(list_groups[i]);
+		JSONValue animation_list = root[list_groups[i]]["Animations"];
+		for(uint j = 0; j < animation_list.size(); j++){
+			string new_animation = animation_list[j].asString();
+			if(FileExists(new_animation)){
+				//This animation exists in the game fils so add it to the animation group.
+				new_group.AddAnimation(new_animation);
+			}
+		}
+		all_animations.insertLast(@new_group);
 	}
 }
 

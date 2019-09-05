@@ -22,6 +22,8 @@ class DrikaDialogue : DrikaElement{
 	vec3 target_actor_position;
 	float target_actor_rotation;
 	Object@ character_placeholder = null;
+	string target_actor_animation = "Data/Animations/r_dialogue_2handneck.anm";
+	string search_buffer = "";
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -47,6 +49,9 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_position){
 			target_actor_position = GetJSONVec3(params, "target_actor_position", vec3(0.0));
 			target_actor_rotation = GetJSONFloat(params, "target_actor_rotation", 0.0);
+			connection_types = {_movement_object};
+		}else if(dialogue_function == set_actor_animation){
+			target_actor_animation = GetJSONString(params, "target_actor_animation", "Data/Animations/r_dialogue_2handneck.anm");
 			connection_types = {_movement_object};
 		}
 
@@ -87,6 +92,8 @@ class DrikaDialogue : DrikaElement{
 			data["target_actor_position"].append(target_actor_position.y);
 			data["target_actor_position"].append(target_actor_position.z);
 			data["target_actor_rotation"] = JSONValue(target_actor_rotation);
+		}else if(dialogue_function == set_actor_animation){
+			data["target_actor_animation"] = JSONValue(target_actor_animation);
 		}
 		SaveIdentifier(data);
 
@@ -110,8 +117,12 @@ class DrikaDialogue : DrikaElement{
 			display_string += Vec4ToString(dialogue_color);
 		}else if(dialogue_function == set_actor_voice){
 			display_string += actor_name;
+			display_string += voice;
 		}else if(dialogue_function == set_actor_position){
 			display_string += actor_name;
+		}else if(dialogue_function == set_actor_animation){
+			display_string += actor_name;
+			display_string += target_actor_animation;
 		}
 
 		return display_string;
@@ -138,6 +149,11 @@ class DrikaDialogue : DrikaElement{
 		CheckReferenceAvailable();
 		if(dialogue_function == say){
 			ImGui_SetTextBuf(say_text);
+		}else if(dialogue_function == set_actor_animation){
+			if(all_animations.size() == 0){
+				level.SendMessage("drika_dialogue_get_animations " + hotspot.GetID());
+			}
+			QueryAnimation(search_buffer);
 		}
 	}
 
@@ -174,6 +190,8 @@ class DrikaDialogue : DrikaElement{
 			SetActorVoice();
 		}else if(dialogue_function == set_actor_color){
 			SetActorColor();
+		}else if(dialogue_function == set_actor_animation){
+			SetActorAnimation();
 		}
 	}
 
@@ -236,14 +254,52 @@ class DrikaDialogue : DrikaElement{
 				say_text = ImGui_GetTextBuf();
 			}
 		}else if(dialogue_function == set_actor_color){
-			if(ImGui_Combo("Actor", current_reference, available_references, available_references.size())){
-				reference_string = available_references[current_reference];
+			if(ImGui_ColorEdit4("Dialogue Color", dialogue_color)){
+				SetActorColor();
 			}
-			ImGui_ColorEdit4("Dialogue Color", dialogue_color);
 		}else if(dialogue_function == set_actor_voice){
 			if(ImGui_SliderInt("Voice", voice, 0, 18, "%.0f")){
 				level.SendMessage("drika_dialogue_test_voice " + voice);
 			}
+		}else if(dialogue_function == set_actor_animation){
+			ImGui_SetTextBuf(search_buffer);
+			ImGui_Text("Search");
+			ImGui_SameLine();
+			ImGui_PushItemWidth(ImGui_GetWindowWidth() - 85);
+			if(ImGui_InputText("", ImGuiInputTextFlags_AutoSelectAll)){
+				search_buffer = ImGui_GetTextBuf();
+				QueryAnimation(ImGui_GetTextBuf());
+			}
+			ImGui_PopItemWidth();
+
+			if(ImGui_BeginChildFrame(55, vec2(-1, -1), ImGuiWindowFlags_AlwaysAutoResize)){
+				for(uint i = 0; i < current_animations.size(); i++){
+					AddCategory(current_animations[i].name, current_animations[i].animations);
+				}
+				ImGui_EndChildFrame();
+			}
+		}
+	}
+
+	void AddCategory(string category, array<string> items){
+		if(current_animations.size() < 1){
+			return;
+		}
+		if(ImGui_TreeNodeEx(category, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
+			ImGui_Unindent(22.0f);
+			for(uint i = 0; i < items.size(); i++){
+				AddItem(items[i]);
+			}
+			ImGui_Indent(22.0f);
+			ImGui_TreePop();
+		}
+	}
+
+	void AddItem(string name){
+		bool is_selected = name == target_actor_animation;
+		if(ImGui_Selectable(name, is_selected)){
+			target_actor_animation = name;
+			SetActorAnimation();
 		}
 	}
 
@@ -255,6 +311,7 @@ class DrikaDialogue : DrikaElement{
 			}
 			say_started = false;
 			say_timer = 0.0;
+			wait_timer = 0.0;
 		}else if(dialogue_function == set_actor_position){
 			if(triggered){
 				array<MovementObject@> targets = GetTargetMovementObjects();
@@ -284,6 +341,9 @@ class DrikaDialogue : DrikaElement{
 			return true;
 		}else if(dialogue_function == set_actor_position){
 			SetActorPosition();
+			return true;
+		}else if(dialogue_function == set_actor_animation){
+			SetActorAnimation();
 			return true;
 		}
 
@@ -369,4 +429,12 @@ class DrikaDialogue : DrikaElement{
 		triggered = true;
 	}
 
+	void SetActorAnimation(){
+		array<MovementObject@> targets = GetTargetMovementObjects();
+
+		for(uint i = 0; i < targets.size(); i++){
+			targets[i].ReceiveScriptMessage("set_animation \"" + target_actor_animation + "\"");
+		}
+		triggered = true;
+	}
 }

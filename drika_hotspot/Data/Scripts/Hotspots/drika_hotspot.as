@@ -1,3 +1,4 @@
+#include "animation_group.as"
 #include "hotspots/drika_element.as"
 #include "hotspots/drika_slow_motion.as"
 #include "hotspots/drika_on_input.as"
@@ -63,6 +64,10 @@ bool show_text = false;
 float text_opacity = 1.0;
 bool hotspot_enabled = true;
 
+array<AnimationGroup@> all_animations;
+array<AnimationGroup@> current_animations;
+array<string> active_mods;
+
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
 vec4 background_color(0.25, 0.25, 0.25, 0.98);
@@ -94,6 +99,38 @@ void Init() {
 		duplicating = true;
 	}
 	InterpData();
+}
+
+void QueryAnimation(string query){
+	current_animations.resize(0);
+	for(uint i = 0; i < all_animations.size(); i++){
+		AnimationGroup@ current_group = all_animations[i];
+		AnimationGroup new_group(current_group.name);
+		for(uint j = 0; j < current_group.animations.size(); j++){
+			if(ToLowerCase(current_group.animations[j]).findFirst(ToLowerCase(query)) != -1){
+				new_group.AddAnimation(current_group.animations[j]);
+			}
+		}
+		if(new_group.animations.size() > 0){
+			current_animations.insertLast(@new_group);
+		}
+	}
+}
+
+string ToLowerCase(string input){
+	string output;
+	for(uint i = 0; i < input.length(); i++){
+		if(input[i] >= 65 &&  input[i] <= 90){
+			string lower_case('0');
+			lower_case[0] = input[i] + 32;
+			output += lower_case;
+		}else{
+			string new_character('0');
+			new_character[0] = input[i];
+			output += new_character;
+		}
+	}
+	return output;
 }
 
 void SortFunctionsAlphabetical(){
@@ -681,6 +718,17 @@ void ReceiveMessage(string msg){
 				messages.insertLast(message);
 			}
 		}
+	}else if(token == "drika_dialogue_add_animation_group"){
+		token_iter.FindNextToken(msg);
+		string group_name = token_iter.GetToken(msg);
+
+		AnimationGroup new_group(group_name);
+		all_animations.insertLast(@new_group);
+	}else if(token == "drika_dialogue_add_animation"){
+		token_iter.FindNextToken(msg);
+		string new_animation = token_iter.GetToken(msg);
+
+		all_animations[all_animations.size() -1].AddAnimation(new_animation);
 	}
 }
 
