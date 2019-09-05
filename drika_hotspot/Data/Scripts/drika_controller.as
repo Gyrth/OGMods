@@ -377,7 +377,7 @@ void ReceiveMessage(string msg){
 		}
 		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
 		for(uint i = 0; i < all_animations.size(); i++){
-			hotspot_obj.ReceiveScriptMessage("drika_dialogue_add_animation_group " + all_animations[i].name);
+			hotspot_obj.ReceiveScriptMessage("drika_dialogue_add_animation_group " + "\"" + all_animations[i].name + "\"");
 
 			for(uint j = 0; j < all_animations[i].animations.size(); j++){
 				hotspot_obj.ReceiveScriptMessage("drika_dialogue_add_animation " + all_animations[i].animations[j]);
