@@ -6,7 +6,8 @@ enum dialogue_functions	{
 							set_actor_animation = 4,
 							set_actor_eye_direction = 5,
 							set_actor_torso_direction = 6,
-							set_actor_head_direction = 7
+							set_actor_head_direction = 7,
+							set_actor_omniscient = 8
 						}
 
 class DrikaDialogue : DrikaElement{
@@ -19,17 +20,20 @@ class DrikaDialogue : DrikaElement{
 	float wait_timer = 0.0;
 	int actor_id;
 	string actor_name;
-	vec4 dialogue_color = vec4(1.0);
+	vec4 dialogue_color;
 	bool dialogue_done = false;
-	int voice = 0;
-	vec3 target_actor_position = vec3(0.0);
-	float target_actor_rotation = 0.0;
-	string target_actor_animation = "Data/Animations/r_dialogue_2handneck.anm";
+	int voice;
+	vec3 target_actor_position;
+	float target_actor_rotation;
+	string target_actor_animation;
 	string search_buffer = "";
-	vec3 target_actor_eye_direction = vec3(0.0);
-	float target_blink_multiplier = 1.0;
-	vec3 target_actor_torso_direction = vec3(0.0);
-	float target_actor_torso_direction_weight = 1.0;
+	vec3 target_actor_eye_direction;
+	float target_blink_multiplier;
+	vec3 target_actor_torso_direction;
+	float target_actor_torso_direction_weight;
+	vec3 target_actor_head_direction;
+	float target_actor_head_direction_weight;
+	bool omniscient;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -39,48 +43,37 @@ class DrikaDialogue : DrikaElement{
 												"Set Actor Animation",
 												"Set Actor Eye Direction",
 												"Set Actor Torso Direction",
-												"Set Actor Head Direction"
+												"Set Actor Head Direction",
+												"Set Actor Omniscient"
 											};
 
 	DrikaDialogue(JSONValue params = JSONValue()){
 		dialogue_function = dialogue_functions(GetJSONInt(params, "dialogue_function", 0));
 		current_dialogue_function = dialogue_function;
 
-		if(dialogue_function == say){
-			say_text = GetJSONString(params, "say_text", "Drika Hotspot Dialogue");
-			connection_types = {_movement_object};
-		}else if(dialogue_function == set_actor_color){
-			dialogue_color = GetJSONVec4(params, "dialogue_color", vec4(1));
-			connection_types = {_movement_object};
-		}else if(dialogue_function == set_actor_voice){
-			voice = GetJSONInt(params, "voice", 0);
-			connection_types = {_movement_object};
-		}else if(dialogue_function == set_actor_position){
-			target_actor_position = GetJSONVec3(params, "target_actor_position", vec3(0.0));
-			target_actor_rotation = GetJSONFloat(params, "target_actor_rotation", 0.0);
-			connection_types = {_movement_object};
-		}else if(dialogue_function == set_actor_animation){
-			target_actor_animation = GetJSONString(params, "target_actor_animation", "Data/Animations/r_dialogue_2handneck.anm");
-			connection_types = {_movement_object};
-		}else if(dialogue_function == set_actor_eye_direction){
-			target_actor_eye_direction = GetJSONVec3(params, "target_actor_eye_direction", vec3(0.0));
-			target_blink_multiplier = GetJSONFloat(params, "target_blink_multiplier", 1.0);
-			connection_types = {_movement_object};
-		}else if(dialogue_function == set_actor_torso_direction){
-			target_actor_torso_direction = GetJSONVec3(params, "target_actor_torso_direction", vec3(0.0));
-			target_actor_torso_direction_weight = GetJSONFloat(params, "target_actor_torso_direction_weight", 1.0);
+		if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
 			connection_types = {_movement_object};
 		}
+
+		say_text = GetJSONString(params, "say_text", "Drika Hotspot Dialogue");
+		dialogue_color = GetJSONVec4(params, "dialogue_color", vec4(1));
+		voice = GetJSONInt(params, "voice", 0);
+		target_actor_position = GetJSONVec3(params, "target_actor_position", vec3(0.0));
+		target_actor_rotation = GetJSONFloat(params, "target_actor_rotation", 0.0);
+		target_actor_animation = GetJSONString(params, "target_actor_animation", "Data/Animations/r_dialogue_2handneck.anm");
+		target_actor_eye_direction = GetJSONVec3(params, "target_actor_eye_direction", vec3(0.0));
+		target_blink_multiplier = GetJSONFloat(params, "target_blink_multiplier", 1.0);
+		target_actor_torso_direction = GetJSONVec3(params, "target_actor_torso_direction", vec3(0.0));
+		target_actor_torso_direction_weight = GetJSONFloat(params, "target_actor_torso_direction_weight", 1.0);
+		target_actor_head_direction = GetJSONVec3(params, "target_actor_head_direction", vec3(0.0));
+		target_actor_head_direction_weight = GetJSONFloat(params, "target_actor_head_direction_weight", 1.0);
+		omniscient = GetJSONBool(params, "omniscient", true);
 
 		LoadIdentifier(params);
 		UpdateActorName();
 
 		drika_element_type = drika_dialogue;
 		has_settings = true;
-	}
-
-	void PostInit(){
-
 	}
 
 	JSONValue GetSaveData(){
@@ -118,6 +111,14 @@ class DrikaDialogue : DrikaElement{
 			data["target_actor_torso_direction"].append(target_actor_torso_direction.y);
 			data["target_actor_torso_direction"].append(target_actor_torso_direction.z);
 			data["target_actor_torso_direction_weight"] = JSONValue(target_actor_torso_direction_weight);
+		}else if(dialogue_function == set_actor_head_direction){
+			data["target_actor_head_direction"] = JSONValue(JSONarrayValue);
+			data["target_actor_head_direction"].append(target_actor_head_direction.x);
+			data["target_actor_head_direction"].append(target_actor_head_direction.y);
+			data["target_actor_head_direction"].append(target_actor_head_direction.z);
+			data["target_actor_head_direction_weight"] = JSONValue(target_actor_head_direction_weight);
+		}else if(dialogue_function == set_actor_omniscient){
+			data["omniscient"] = JSONValue(omniscient);
 		}
 		SaveIdentifier(data);
 
@@ -153,6 +154,12 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_torso_direction){
 			display_string += actor_name;
 			display_string += target_actor_torso_direction_weight;
+		}else if(dialogue_function == set_actor_head_direction){
+			display_string += actor_name;
+			display_string += target_actor_head_direction_weight;
+		}else if(dialogue_function == set_actor_omniscient){
+			display_string += actor_name;
+			display_string += omniscient;
 		}
 
 		return display_string;
@@ -213,6 +220,12 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_eye_direction){
 			PlaceholderCheck();
 			DebugDrawBillboard("Data/Textures/ui/eye_widget.tga", placeholder.GetTranslation(), 0.1, vec4(1.0), _delete_on_draw);
+
+			for(uint i = 0; i < targets.size(); i++){
+				vec3 head_pos = targets[i].rigged_object().GetAvgIKChainPos("head");
+				DebugDrawLine(head_pos, placeholder.GetTranslation(), vec4(1.0), vec4(1.0), _delete_on_update);
+			}
+
 			if(placeholder.IsSelected()){
 				float scale = placeholder.GetScale().x;
 				if(scale < 0.05f){
@@ -234,6 +247,12 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_torso_direction){
 			PlaceholderCheck();
 			DebugDrawBillboard("Data/Textures/ui/torso_widget.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_draw);
+
+			for(uint i = 0; i < targets.size(); i++){
+				vec3 torso_pos = targets[i].rigged_object().GetAvgIKChainPos("torso");
+				DebugDrawLine(torso_pos, placeholder.GetTranslation(), vec4(1.0), vec4(1.0), _delete_on_update);
+			}
+
 			if(placeholder.IsSelected()){
 				float scale = placeholder.GetScale().x;
 				if(scale < 0.1f){
@@ -252,6 +271,33 @@ class DrikaDialogue : DrikaElement{
 					SetActorTorsoDirection();
 				}
 			}
+		}else if(dialogue_function == set_actor_head_direction){
+			PlaceholderCheck();
+			DebugDrawBillboard("Data/Textures/ui/head_widget.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_draw);
+
+			for(uint i = 0; i < targets.size(); i++){
+				vec3 head_pos = targets[i].rigged_object().GetAvgIKChainPos("head");
+				DebugDrawLine(head_pos, placeholder.GetTranslation(), vec4(1.0), vec4(1.0), _delete_on_update);
+			}
+
+			if(placeholder.IsSelected()){
+				float scale = placeholder.GetScale().x;
+				if(scale < 0.1f){
+					placeholder.SetScale(vec3(0.1f));
+				}
+				if(scale > 0.35f){
+					placeholder.SetScale(vec3(0.35f));
+				}
+
+				float new_weight = (placeholder.GetScale().x - 0.1f) * 4.0f;
+				vec3 new_direction = placeholder.GetTranslation();
+
+				if(target_actor_head_direction != new_direction || target_actor_head_direction_weight != new_weight){
+					target_actor_head_direction_weight = new_weight;
+					target_actor_head_direction = new_direction;
+					SetActorHeadDirection();
+				}
+			}
 		}
 	}
 
@@ -268,15 +314,15 @@ class DrikaDialogue : DrikaElement{
 			SetActorEyeDirection();
 		}else if(dialogue_function == set_actor_torso_direction){
 			SetActorTorsoDirection();
+		}else if(dialogue_function == set_actor_head_direction){
+			SetActorHeadDirection();
+		}else if(dialogue_function == set_actor_omniscient){
+			SetActorOmniscient();
 		}
 	}
 
 	void EditDone(){
-		if(dialogue_function == set_actor_position){
-			DeletePlaceholder();
-		}else if(dialogue_function == set_actor_eye_direction){
-			DeletePlaceholder();
-		}else if(dialogue_function == set_actor_torso_direction){
+		if(dialogue_function == set_actor_position || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction){
 			DeletePlaceholder();
 		}else if(dialogue_function == say){
 			if(say_started){
@@ -326,6 +372,13 @@ class DrikaDialogue : DrikaElement{
 				placeholder.SetScale(target_actor_torso_direction_weight / 4.0f + 0.1f);
 				placeholder.SetTranslation(target_actor_torso_direction);
 				placeholder_object.SetEditorDisplayName("Set Actor Torso Direction Helper");
+			}else if(dialogue_function == set_actor_head_direction){
+				if(target_actor_head_direction == vec3(0.0)){
+					target_actor_head_direction = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+				}
+				placeholder.SetScale(target_actor_head_direction_weight / 4.0f + 0.1f);
+				placeholder.SetTranslation(target_actor_head_direction);
+				placeholder_object.SetEditorDisplayName("Set Actor Head Direction Helper");
 			}
 
 			placeholder_object.SetSpecialType(kSpawn);
@@ -336,7 +389,7 @@ class DrikaDialogue : DrikaElement{
 		DrawSelectTargetUI();
 
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
-			if(dialogue_function == set_actor_position || dialogue_function == set_actor_eye_direction){
+			if(dialogue_function == set_actor_position || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction ||dialogue_function == set_actor_head_direction){
 				DeletePlaceholder();
 			}
 
@@ -377,6 +430,10 @@ class DrikaDialogue : DrikaElement{
 				}
 				ImGui_EndChildFrame();
 			}
+		}else if(dialogue_function == set_actor_omniscient){
+			ImGui_Text("Set Omnicient to : ");
+			ImGui_SameLine();
+			ImGui_Checkbox("", omniscient);
 		}
 	}
 
@@ -450,9 +507,33 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_torso_direction){
 			SetActorTorsoDirection();
 			return true;
+		}else if(dialogue_function == set_actor_head_direction){
+			SetActorHeadDirection();
+			return true;
+		}else if(dialogue_function == set_actor_omniscient){
+			SetActorOmniscient();
+			return true;
 		}
 
 		return false;
+	}
+
+	void SetActorOmniscient(){
+		array<MovementObject@> targets = GetTargetMovementObjects();
+
+		for(uint i = 0; i < targets.size(); i++){
+			targets[i].ReceiveScriptMessage("set_omniscient " + omniscient);
+		}
+		triggered = true;
+	}
+
+	void SetActorHeadDirection(){
+		array<MovementObject@> targets = GetTargetMovementObjects();
+
+		for(uint i = 0; i < targets.size(); i++){
+			targets[i].ReceiveScriptMessage("set_head_target " + target_actor_head_direction.x + " " + target_actor_head_direction.y + " " + target_actor_head_direction.z + " " + target_actor_head_direction_weight);
+		}
+		triggered = true;
 	}
 
 	void SetActorTorsoDirection(){
