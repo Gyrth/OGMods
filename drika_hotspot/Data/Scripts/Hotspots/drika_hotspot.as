@@ -64,7 +64,10 @@ bool show_text = false;
 float text_opacity = 1.0;
 bool hotspot_enabled = true;
 int last_dialogue = -1;
+int first_dialogue = -1;
 array<int> dialogue_actor_ids;
+bool wait_for_fade = false;
+bool in_dialogue_mode = false;
 
 array<AnimationGroup@> all_animations;
 array<AnimationGroup@> current_animations;
@@ -375,15 +378,21 @@ void Update(){
 		SwitchToPlaying();
 	}
 
-	if(drika_indexes.size() > 0 && hotspot_enabled){
+	if(drika_indexes.size() > 0 && hotspot_enabled && !wait_for_fade){
 		if(!show_editor){
 			DeliverMessages();
 			UpdateParallelOperations();
 
 			if(!script_finished){
+				if(current_line == first_dialogue && !in_dialogue_mode){
+					level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+					wait_for_fade = true;
+					return;
+				}
+
 				if(GetCurrentElement().parallel_operation || GetCurrentElement().Trigger()){
 					if(current_line == last_dialogue){
-						ClearDialogueActors();
+						level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
 						level.SendMessage("drika_dialogue_end");
 					}
 					if(current_line == int(drika_indexes.size() - 1)){
@@ -667,7 +676,7 @@ void ReorderElements(){
 		DrikaElement@ current_element = drika_elements[drika_indexes[index]];
 		current_element.SetIndex(index);
 	}
-	FindLastDialogue();
+	FindFirstLastDialogue();
 }
 
 void InsertElement(DrikaElement@ new_element){
@@ -736,6 +745,11 @@ void ReceiveMessage(string msg){
 		string new_animation = token_iter.GetToken(msg);
 
 		all_animations[all_animations.size() -1].AddAnimation(new_animation);
+	}else if(token == "drika_dialogue_fade_out_done"){
+		in_dialogue_mode = !in_dialogue_mode;
+
+		ClearDialogueActors();
+		wait_for_fade = false;
 	}
 }
 
@@ -776,6 +790,8 @@ void Reset(){
 	parallel_elements.resize(0);
 
 	script_finished = false;
+	wait_for_fade = false;
+	in_dialogue_mode = false;
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
 		drika_elements[drika_indexes[i]].Reset();
 	}
@@ -786,10 +802,11 @@ void Reset(){
 }
 
 void AddDialogueActor(int character_id){
+	MovementObject@ char = ReadCharacterID(character_id);
 	if(dialogue_actor_ids.find(character_id) == -1){
 		dialogue_actor_ids.insertLast(character_id);
-		MovementObject@ char = ReadCharacterID(character_id);
 		char.ReceiveScriptMessage("set_dialogue_control true");
+		char.rigged_object().anim_client().Reset();
 	}
 }
 
@@ -797,14 +814,19 @@ void ClearDialogueActors(){
 	for(uint i = 0; i < dialogue_actor_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(dialogue_actor_ids[i]);
 		char.ReceiveScriptMessage("set_dialogue_control false");
+		char.rigged_object().anim_client().Reset();
 	}
 	dialogue_actor_ids.resize(0);
 }
 
-void FindLastDialogue(){
+void FindFirstLastDialogue(){
 	last_dialogue = -1;
+	first_dialogue = -1;
 	for(uint i = 0; i < drika_indexes.size(); i++){
 		if(drika_elements[drika_indexes[i]].drika_element_type == drika_dialogue){
+			if(first_dialogue == -1){
+				first_dialogue = i;
+			}
 			last_dialogue = i;
 		}
 	}

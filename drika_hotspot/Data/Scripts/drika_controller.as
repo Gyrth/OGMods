@@ -12,6 +12,12 @@ array<AnimationGroup@> all_animations;
 vec3 camera_position;
 vec3 camera_rotation;
 float camera_zoom;
+bool fading = false;
+float blackout_amount = 1.0;
+float fade_direction = 1.0;
+float fade_duration = 0.2;
+float fade_timer = 0.0;
+array<int> waiting_hotspot_ids;
 
 class ActorSettings{
 	string name = "Default";
@@ -202,6 +208,15 @@ void WriteMusicXML(string music_path, string song_name, string song_path){
 
 void DrawGUI(){
 	imGUI.render();
+	if(fading){
+		HUDImage @blackout_image = hud.AddImage();
+		blackout_image.SetImageFromPath("Data/Textures/diffuse.tga");
+		blackout_image.position.y = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
+		blackout_image.position.x = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
+		blackout_image.position.z = -2.0f;
+		blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
+		blackout_image.color = vec4(0.0f, 0.0f, 0.0f, blackout_amount);
+	}
 }
 
 void ReceiveMessage(string msg){
@@ -230,6 +245,8 @@ void ReceiveMessage(string msg){
 				animating_camera = false;
 			}
 		}
+	}else if(token == "reset"){
+		has_camera_control = false;
 	}else if(token == "write_music_xml"){
 		array<string> lines;
 		string xml_content;
@@ -253,7 +270,6 @@ void ReceiveMessage(string msg){
 
 		if(!show_dialogue){
 			show_dialogue = true;
-			has_camera_control = true;
 			BuildUI();
 		}
 
@@ -406,10 +422,19 @@ void ReceiveMessage(string msg){
 
 		token_iter.FindNextToken(msg);
 		camera_zoom = atof(token_iter.GetToken(msg));
+		SetCameraPosition();
+		camera.FixDiscontinuity();
 	}else if(token == "drika_dialogue_end"){
 		show_dialogue = false;
-		has_camera_control = false;
 		imGUI.clear();
+	}else if(token == "drika_dialogue_fade_out_in"){
+		token_iter.FindNextToken(msg);
+		int hotspot_id = atoi(token_iter.GetToken(msg));
+		waiting_hotspot_ids.insertLast(hotspot_id);
+
+		fading = true;
+		fade_timer = 0.0;
+		fade_direction = 1.0;
 	}
 }
 
@@ -445,7 +470,29 @@ void ReadAnimationList(){
 
 void Update(){
 	imGUI.update();
-	if(has_camera_control && !EditorModeActive()){
+	SetCameraPosition();
+	if(fading){
+		blackout_amount = fade_timer / fade_duration;
+		if(fade_direction == 1.0){
+			if(fade_timer >= fade_duration){
+				//Screen has faded all the way to black.
+				has_camera_control = !has_camera_control;
+				MessageWaitingForFadeOut();
+				fade_direction = -1.0;
+			}
+			fade_timer += time_step;
+		}else{
+			if(fade_timer <= 0.0){
+				//Screen has faded all the way from black to clear.
+				fading = false;
+			}
+			fade_timer -= time_step;
+		}
+	}
+}
+
+void SetCameraPosition(){
+	if((animating_camera || has_camera_control) && !EditorModeActive()){
 		camera.SetXRotation(camera_rotation.x);
 		camera.SetYRotation(camera_rotation.y);
 		camera.SetZRotation(camera_rotation.z);
@@ -456,6 +503,14 @@ void Update(){
 		UpdateListener(camera_position, vec3(0.0f), camera.GetFacing(), camera.GetUpVector());
 		SetGrabMouse(true);
 	}
+}
+
+void MessageWaitingForFadeOut(){
+	for(uint i = 0; i < waiting_hotspot_ids.size(); i++){
+		Object@ hotspot_obj = ReadObjectFromID(waiting_hotspot_ids[i]);
+		hotspot_obj.ReceiveScriptMessage("drika_dialogue_fade_out_done");
+	}
+	waiting_hotspot_ids.resize(0);
 }
 
 bool HasFocus(){

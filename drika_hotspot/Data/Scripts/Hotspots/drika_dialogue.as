@@ -536,10 +536,6 @@ class DrikaDialogue : DrikaElement{
 			say_started = false;
 			say_timer = 0.0;
 			wait_timer = 0.0;
-		}else if(dialogue_function == set_actor_position){
-			if(triggered){
-				triggered = false;
-			}
 		}
 	}
 
@@ -551,7 +547,10 @@ class DrikaDialogue : DrikaElement{
 
 	bool Trigger(){
 		if(dialogue_function == say){
-			return UpdateSayDialogue();
+			if(UpdateSayDialogue()){
+				Reset();
+				return true;
+			}
 		}else if(dialogue_function == set_actor_color){
 			SetActorColor();
 			return true;
@@ -602,7 +601,6 @@ class DrikaDialogue : DrikaElement{
 		for(uint i = 0; i < targets.size(); i++){
 			targets[i].ReceiveScriptMessage("set_omniscient " + omniscient);
 		}
-		triggered = true;
 	}
 
 	void SetActorHeadDirection(){
@@ -612,7 +610,6 @@ class DrikaDialogue : DrikaElement{
 			AddDialogueActor(targets[i].GetID());
 			targets[i].ReceiveScriptMessage("set_head_target " + target_actor_head_direction.x + " " + target_actor_head_direction.y + " " + target_actor_head_direction.z + " " + target_actor_head_direction_weight);
 		}
-		triggered = true;
 	}
 
 	void SetActorTorsoDirection(){
@@ -622,7 +619,6 @@ class DrikaDialogue : DrikaElement{
 			AddDialogueActor(targets[i].GetID());
 			targets[i].ReceiveScriptMessage("set_torso_target " + target_actor_torso_direction.x + " " + target_actor_torso_direction.y + " " + target_actor_torso_direction.z + " " + target_actor_torso_direction_weight);
 		}
-		triggered = true;
 	}
 
 	void SetActorEyeDirection(){
@@ -632,7 +628,6 @@ class DrikaDialogue : DrikaElement{
 			AddDialogueActor(targets[i].GetID());
 			targets[i].ReceiveScriptMessage("set_eye_dir " + target_actor_eye_direction.x + " " + target_actor_eye_direction.y + " " + target_actor_eye_direction.z + " " + target_blink_multiplier);
 		}
-		triggered = true;
 	}
 
 	void SetActorColor(){
@@ -723,10 +718,11 @@ class DrikaDialogue : DrikaElement{
 
 		for(uint i = 0; i < targets.size(); i++){
 			AddDialogueActor(targets[i].GetID());
+			targets[i].rigged_object().anim_client().Reset();
 			targets[i].ReceiveScriptMessage("set_rotation " + target_actor_rotation);
 			targets[i].ReceiveScriptMessage("set_dialogue_position " + target_actor_position.x + " " + target_actor_position.y + " " + target_actor_position.z);
+			targets[i].Execute("FixDiscontinuity();");
 		}
-		triggered = true;
 	}
 
 	void SetActorAnimation(){
@@ -736,6 +732,5 @@ class DrikaDialogue : DrikaElement{
 			AddDialogueActor(targets[i].GetID());
 			targets[i].ReceiveScriptMessage("set_animation \"" + target_actor_animation + "\"");
 		}
-		triggered = true;
 	}
 }
