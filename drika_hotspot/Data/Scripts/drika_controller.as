@@ -406,6 +406,10 @@ void ReceiveMessage(string msg){
 
 		token_iter.FindNextToken(msg);
 		camera_zoom = atof(token_iter.GetToken(msg));
+	}else if(token == "drika_dialogue_end"){
+		show_dialogue = false;
+		has_camera_control = false;
+		imGUI.clear();
 	}
 }
 
@@ -457,7 +461,7 @@ void Update(){
 bool HasFocus(){
 	return false;
 }
-//HasCameraControl
+
 bool DialogueCameraControl() {
 	if((animating_camera || has_camera_control) && !EditorModeActive()){
 		return true;

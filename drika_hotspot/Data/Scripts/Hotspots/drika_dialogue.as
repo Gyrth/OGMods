@@ -202,6 +202,10 @@ class DrikaDialogue : DrikaElement{
 		}
 	}
 
+	void Delete(){
+		DeletePlaceholder();
+	}
+
 	void StartSettings(){
 		CheckReferenceAvailable();
 		if(dialogue_function == say){
@@ -341,7 +345,6 @@ class DrikaDialogue : DrikaElement{
 					target_camera_position = new_position;
 					target_camera_rotation = new_rotation;
 					target_camera_zoom = new_zoom;
-					/* SetCameraPosition(); */
 				}
 			}
 		}
@@ -535,11 +538,6 @@ class DrikaDialogue : DrikaElement{
 			wait_timer = 0.0;
 		}else if(dialogue_function == set_actor_position){
 			if(triggered){
-				array<MovementObject@> targets = GetTargetMovementObjects();
-
-				for(uint i = 0; i < targets.size(); i++){
-					targets[i].ReceiveScriptMessage("set_dialogue_control false");
-				}
 				triggered = false;
 			}
 		}
@@ -596,7 +594,6 @@ class DrikaDialogue : DrikaElement{
 		msg += target_camera_position.z + " ";
 		msg += target_camera_zoom;
 		level.SendMessage(msg);
-		Log(warning, msg);
 	}
 
 	void SetActorOmniscient(){
@@ -705,9 +702,6 @@ class DrikaDialogue : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
-			if(!triggered){
-				targets[i].ReceiveScriptMessage("set_dialogue_control true");
-			}
 			targets[i].ReceiveScriptMessage("set_rotation " + target_actor_rotation);
 			targets[i].ReceiveScriptMessage("set_dialogue_position " + target_actor_position.x + " " + target_actor_position.y + " " + target_actor_position.z);
 		}
@@ -718,6 +712,7 @@ class DrikaDialogue : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
+			AddDialogueActor(targets[i].GetID());
 			targets[i].ReceiveScriptMessage("set_animation \"" + target_actor_animation + "\"");
 		}
 		triggered = true;
