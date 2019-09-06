@@ -609,6 +609,7 @@ class DrikaDialogue : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
+			AddDialogueActor(targets[i].GetID());
 			targets[i].ReceiveScriptMessage("set_head_target " + target_actor_head_direction.x + " " + target_actor_head_direction.y + " " + target_actor_head_direction.z + " " + target_actor_head_direction_weight);
 		}
 		triggered = true;
@@ -618,6 +619,7 @@ class DrikaDialogue : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
+			AddDialogueActor(targets[i].GetID());
 			targets[i].ReceiveScriptMessage("set_torso_target " + target_actor_torso_direction.x + " " + target_actor_torso_direction.y + " " + target_actor_torso_direction.z + " " + target_actor_torso_direction_weight);
 		}
 		triggered = true;
@@ -627,6 +629,7 @@ class DrikaDialogue : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
+			AddDialogueActor(targets[i].GetID());
 			targets[i].ReceiveScriptMessage("set_eye_dir " + target_actor_eye_direction.x + " " + target_actor_eye_direction.y + " " + target_actor_eye_direction.z + " " + target_blink_multiplier);
 		}
 		triggered = true;
@@ -702,6 +705,7 @@ class DrikaDialogue : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
+			AddDialogueActor(targets[i].GetID());
 			targets[i].ReceiveScriptMessage("set_rotation " + target_actor_rotation);
 			targets[i].ReceiveScriptMessage("set_dialogue_position " + target_actor_position.x + " " + target_actor_position.y + " " + target_actor_position.z);
 		}
