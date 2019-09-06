@@ -671,21 +671,34 @@ class DrikaDialogue : DrikaElement{
 		}else if(say_timer > 0.15){
 			say_timer = 0.0;
 			string nametag = "\"" + actor_name + "\"";
+			array<MovementObject@> targets = GetTargetMovementObjects();
 
 			if(say_text_split[0] == "[wait"){
 				say_text_split.removeAt(0);
 				wait_timer = atof(say_text_split[0].substr(0, 2));
 				say_text_split.removeAt(0);
+				for(uint i = 0; i < targets.size(); i++){
+					targets[i].ReceiveScriptMessage("stop_talking");
+				}
 				return false;
 			}else if(say_text_split[0].findFirst("\n") != -1){
+				for(uint i = 0; i < targets.size(); i++){
+					targets[i].ReceiveScriptMessage("start_talking");
+				}
 				array<string> new_line_split = say_text_split[0].split("\n");
 				level.SendMessage("drika_dialogue_add_say " + nametag + " " + new_line_split[0]);
 				level.SendMessage("drika_dialogue_add_say " + nametag + " \n");
 
 				new_line_split.removeAt(0);
 				say_text_split[0] = join(new_line_split, "\n");
+
 				return false;
 			}
+
+			for(uint i = 0; i < targets.size(); i++){
+				targets[i].ReceiveScriptMessage("start_talking");
+			}
+
 			string msg = "drika_dialogue_add_say ";
 			msg += nametag + " ";
 			msg += say_text_split[0];
@@ -694,8 +707,12 @@ class DrikaDialogue : DrikaElement{
 			say_text_split.removeAt(0);
 
 			if(say_text_split.size() == 0){
+				for(uint i = 0; i < targets.size(); i++){
+					targets[i].ReceiveScriptMessage("stop_talking");
+				}
 				dialogue_done = true;
 			}
+
 		}
 		say_timer += time_step;
 		return false;
