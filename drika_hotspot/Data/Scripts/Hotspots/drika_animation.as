@@ -785,7 +785,7 @@ class DrikaAnimation : DrikaElement{
 			new_position = mix(current_key.GetTranslation(), next_key.GetTranslation(), alpha);
 		}
 
-		if(interpolate_rotation){
+		if(interpolate_rotation && targets.size() > 0){
 			vec3 path_direction = normalize(new_position - targets[0].GetTranslation());
 			vec3 up_direction = normalize(mix(current_key.GetRotation(), next_key.GetRotation(), alpha) * vec3(0.0f, 1.0f, 0.0f));
 
