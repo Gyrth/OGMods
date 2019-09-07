@@ -410,6 +410,18 @@ void Update(){
 	}
 }
 
+void EndDialogue(){
+	//Check if the last function is also a dialogue function.
+	if(last_dialogue == int(drika_indexes.size() - 1)){
+		current_line = last_dialogue;
+		script_finished = true;
+	}else{
+		current_line = last_dialogue + 1;
+	}
+	level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+	level.SendMessage("drika_dialogue_end");
+}
+
 void UpdateParallelOperations(){
 	for(uint i = 0; i < parallel_elements.size(); i++){
 		if(parallel_elements[i].Trigger()){

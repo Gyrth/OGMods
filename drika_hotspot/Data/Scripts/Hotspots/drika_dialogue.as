@@ -652,7 +652,11 @@ class DrikaDialogue : DrikaElement{
 			level.SendMessage("drika_dialogue_clear_say");
 		}
 
-		if(dialogue_done){
+		if(GetInputPressed(0, "return")){
+			EndDialogue();
+			Reset();
+			return false;
+		}else if(dialogue_done){
 			if(GetInputPressed(0, "attack")){
 				level.SendMessage("drika_dialogue_skip");
 				return true;
