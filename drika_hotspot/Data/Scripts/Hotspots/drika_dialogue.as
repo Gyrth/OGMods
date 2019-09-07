@@ -8,7 +8,8 @@ enum dialogue_functions	{
 							set_actor_torso_direction = 6,
 							set_actor_head_direction = 7,
 							set_actor_omniscient = 8,
-							set_camera_position = 9
+							set_camera_position = 9,
+							fade_to_black = 10
 						}
 
 class DrikaDialogue : DrikaElement{
@@ -38,6 +39,8 @@ class DrikaDialogue : DrikaElement{
 	vec3 target_camera_position;
 	vec3 target_camera_rotation;
 	float target_camera_zoom;
+	float target_fade_to_black;
+	float fade_to_black_duration;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -49,7 +52,8 @@ class DrikaDialogue : DrikaElement{
 												"Set Actor Torso Direction",
 												"Set Actor Head Direction",
 												"Set Actor Omniscient",
-												"Set Camera Position"
+												"Set Camera Position",
+												"Fade To Black"
 											};
 
 	DrikaDialogue(JSONValue params = JSONValue()){
@@ -76,6 +80,8 @@ class DrikaDialogue : DrikaElement{
 		target_camera_position = GetJSONVec3(params, "target_camera_position", vec3(0.0));
 		target_camera_rotation = GetJSONVec3(params, "target_camera_rotation", vec3(0.0));
 		target_camera_zoom = GetJSONFloat(params, "target_camera_zoom", 90.0);
+		target_fade_to_black = GetJSONFloat(params, "target_fade_to_black", 1.0);
+		fade_to_black_duration = GetJSONFloat(params, "fade_to_black_duration", 1.0);
 
 		LoadIdentifier(params);
 		UpdateActorName();
@@ -137,6 +143,9 @@ class DrikaDialogue : DrikaElement{
 			data["target_camera_rotation"].append(target_camera_rotation.y);
 			data["target_camera_rotation"].append(target_camera_rotation.z);
 			data["target_camera_zoom"] = JSONValue(target_camera_zoom);
+		}else if(dialogue_function == fade_to_black){
+			data["target_fade_to_black"] = JSONValue(target_fade_to_black);
+			data["fade_to_black_duration"] = JSONValue(fade_to_black_duration);
 		}
 		SaveIdentifier(data);
 
@@ -180,6 +189,9 @@ class DrikaDialogue : DrikaElement{
 			display_string += omniscient;
 		}else if(dialogue_function == set_actor_omniscient){
 			display_string += target_camera_zoom;
+		}else if(dialogue_function == fade_to_black){
+			display_string += target_fade_to_black + " ";
+			display_string += fade_to_black_duration;
 		}
 
 		return display_string;
@@ -367,6 +379,8 @@ class DrikaDialogue : DrikaElement{
 			SetActorHeadDirection();
 		}else if(dialogue_function == set_actor_omniscient){
 			SetActorOmniscient();
+		}else if(dialogue_function == fade_to_black){
+			SetFadeToBlack();
 		}
 	}
 
@@ -374,6 +388,10 @@ class DrikaDialogue : DrikaElement{
 		DeletePlaceholder();
 		if(dialogue_function == say){
 			if(say_started){
+				Reset();
+			}
+		}else if(dialogue_function == fade_to_black){
+			if(triggered){
 				Reset();
 			}
 		}
@@ -462,6 +480,7 @@ class DrikaDialogue : DrikaElement{
 			if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
 				connection_types = {_movement_object};
 			}else{
+				ClearTarget();
 				connection_types = {};
 			}
 		}
@@ -499,6 +518,9 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Text("Set Omnicient to : ");
 			ImGui_SameLine();
 			ImGui_Checkbox("", omniscient);
+		}else if(dialogue_function == fade_to_black){
+			ImGui_SliderFloat("Target Alpha", target_fade_to_black, 0.0, 1.0, "%.3f");
+ 			ImGui_SliderFloat("Fade Duration", fade_to_black_duration, 0.0, 10.0, "%.3f");
 		}
 	}
 
@@ -538,6 +560,9 @@ class DrikaDialogue : DrikaElement{
 			say_started = false;
 			say_timer = 0.0;
 			wait_timer = 0.0;
+		}else if(dialogue_function == fade_to_black){
+			triggered = false;
+			ResetFadeToBlack();
 		}
 	}
 
@@ -580,9 +605,26 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_camera_position){
 			SetCameraPosition();
 			return true;
+		}else if(dialogue_function == fade_to_black){
+			SetFadeToBlack();
+			return true;
 		}
 
 		return false;
+	}
+
+	void SetFadeToBlack(){
+		string msg = "drika_dialogue_fade_to_black ";
+		msg += target_fade_to_black + " ";
+		msg += fade_to_black_duration;
+		triggered = true;
+		level.SendMessage(msg);
+	}
+
+	void ResetFadeToBlack(){
+		string msg = "drika_dialogue_clear_fade_to_black ";
+		msg += target_fade_to_black;
+		level.SendMessage(msg);
 	}
 
 	void SetCameraPosition(){

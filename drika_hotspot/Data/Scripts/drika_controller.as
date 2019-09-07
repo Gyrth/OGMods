@@ -13,10 +13,13 @@ vec3 camera_position;
 vec3 camera_rotation;
 float camera_zoom;
 bool fading = false;
-float blackout_amount = 1.0;
+float blackout_amount = 0.0;
 float fade_direction = 1.0;
 float fade_duration = 0.2;
 float fade_timer = 0.0;
+float target_fade_to_black = 1.0;
+float fade_to_black_duration = 1.0;
+bool fade_to_black = false;
 array<int> waiting_hotspot_ids;
 
 class ActorSettings{
@@ -208,15 +211,13 @@ void WriteMusicXML(string music_path, string song_name, string song_path){
 
 void DrawGUI(){
 	imGUI.render();
-	if(fading){
-		HUDImage @blackout_image = hud.AddImage();
-		blackout_image.SetImageFromPath("Data/Textures/diffuse.tga");
-		blackout_image.position.y = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
-		blackout_image.position.x = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
-		blackout_image.position.z = -2.0f;
-		blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
-		blackout_image.color = vec4(0.0f, 0.0f, 0.0f, blackout_amount);
-	}
+	HUDImage @blackout_image = hud.AddImage();
+	blackout_image.SetImageFromPath("Data/Textures/diffuse.tga");
+	blackout_image.position.y = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
+	blackout_image.position.x = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
+	blackout_image.position.z = -2.0f;
+	blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
+	blackout_image.color = vec4(0.0f, 0.0f, 0.0f, blackout_amount);
 }
 
 void ReceiveMessage(string msg){
@@ -247,6 +248,7 @@ void ReceiveMessage(string msg){
 		}
 	}else if(token == "reset"){
 		has_camera_control = false;
+		fade_timer = 0.0;
 	}else if(token == "write_music_xml"){
 		array<string> lines;
 		string xml_content;
@@ -433,8 +435,19 @@ void ReceiveMessage(string msg){
 		waiting_hotspot_ids.insertLast(hotspot_id);
 
 		fading = true;
-		fade_timer = 0.0;
 		fade_direction = 1.0;
+	}else if(token == "drika_dialogue_fade_to_black"){
+		token_iter.FindNextToken(msg);
+		target_fade_to_black = atof(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		fade_to_black_duration = atof(token_iter.GetToken(msg));
+
+		fade_to_black = true;
+	}else if(token == "drika_dialogue_clear_fade_to_black"){
+		fade_timer = 0.0;
+		blackout_amount = 0.0;
+		fade_to_black = false;
 	}
 }
 
@@ -488,6 +501,14 @@ void Update(){
 			}
 			fade_timer -= time_step;
 		}
+	}else if(fade_to_black){
+		blackout_amount = fade_timer * target_fade_to_black / (fade_to_black_duration * target_fade_to_black);
+		if(fade_timer >= (fade_to_black_duration * target_fade_to_black)){
+			fade_to_black = false;
+			fade_timer = fade_duration;
+			return;
+		}
+		fade_timer += time_step;
 	}
 }
 
