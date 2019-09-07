@@ -371,9 +371,8 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void EditDone(){
-		if(dialogue_function == set_actor_position || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_camera_position){
-			DeletePlaceholder();
-		}else if(dialogue_function == say){
+		DeletePlaceholder();
+		if(dialogue_function == say){
 			if(say_started){
 				Reset();
 			}
@@ -457,12 +456,10 @@ class DrikaDialogue : DrikaElement{
 		DrawSelectTargetUI();
 
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
-			if(dialogue_function == set_actor_position || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction ||dialogue_function == set_actor_head_direction || dialogue_function == set_camera_position){
-				DeletePlaceholder();
-			}
-
+			DeletePlaceholder();
 			dialogue_function = dialogue_functions(current_dialogue_function);
-			if(dialogue_function == say || dialogue_function == set_actor_color){
+
+			if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
 				connection_types = {_movement_object};
 			}else{
 				connection_types = {};
