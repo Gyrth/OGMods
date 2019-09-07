@@ -289,8 +289,9 @@ void ReceiveMessage(string msg){
 
 			if(!settings_found){
 				ActorSettings new_settings();
+				new_settings.name = actor_name;
 				actor_settings.insertLast(@new_settings);
-				current_actor_settings = new_settings;
+				@current_actor_settings = new_settings;
 			}
 
 			CreateNameTag(imGUI.getFooter());
