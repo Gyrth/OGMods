@@ -9,7 +9,8 @@ enum dialogue_functions	{
 							set_actor_head_direction = 7,
 							set_actor_omniscient = 8,
 							set_camera_position = 9,
-							fade_to_black = 10
+							fade_to_black = 10,
+							settings = 11
 						}
 
 class DrikaDialogue : DrikaElement{
@@ -42,6 +43,12 @@ class DrikaDialogue : DrikaElement{
 	float target_fade_to_black;
 	float fade_to_black_duration;
 
+	int dialogue_layout;
+	string dialogue_text_font;
+	int dialogue_text_size;
+	vec4 dialogue_text_color;
+	bool dialogue_text_shadow;
+
 	array<string> dialogue_function_names =	{
 												"Say",
 												"Set Actor Color",
@@ -53,7 +60,17 @@ class DrikaDialogue : DrikaElement{
 												"Set Actor Head Direction",
 												"Set Actor Omniscient",
 												"Set Camera Position",
-												"Fade To Black"
+												"Fade To Black",
+												"Settings"
+											};
+
+	array<string> dialogue_layout_names =	{
+												"Default",
+												"Simple",
+												"Breath Of The Wild",
+												"Chrono Trigger",
+												"Fallout 3 Green",
+												"Fire Emblem"
 											};
 
 	DrikaDialogue(JSONValue params = JSONValue()){
@@ -83,6 +100,12 @@ class DrikaDialogue : DrikaElement{
 		target_camera_zoom = GetJSONFloat(params, "target_camera_zoom", 90.0);
 		target_fade_to_black = GetJSONFloat(params, "target_fade_to_black", 1.0);
 		fade_to_black_duration = GetJSONFloat(params, "fade_to_black_duration", 1.0);
+
+		dialogue_layout = GetJSONInt(params, "dialogue_layout", 0);
+		dialogue_text_font = GetJSONString(params, "dialogue_text_font", "Data/Fonts/arial.ttf");
+		dialogue_text_size = GetJSONInt(params, "dialogue_text_size", 50);
+		dialogue_text_color = GetJSONVec4(params, "dialogue_text_color", vec4(1));
+		dialogue_text_shadow = GetJSONBool(params, "dialogue_text_shadow", true);
 
 		UpdateActorName();
 
@@ -146,6 +169,17 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == fade_to_black){
 			data["target_fade_to_black"] = JSONValue(target_fade_to_black);
 			data["fade_to_black_duration"] = JSONValue(fade_to_black_duration);
+		}else if(dialogue_function == settings){
+			data["dialogue_layout"] = JSONValue(dialogue_layout);
+			data["dialogue_text_font"] = JSONValue(dialogue_text_font);
+			data["dialogue_text_size"] = JSONValue(dialogue_text_size);
+			data["dialogue_text_shadow"] = JSONValue(dialogue_text_shadow);
+
+			data["dialogue_text_color"] = JSONValue(JSONarrayValue);
+			data["dialogue_text_color"].append(dialogue_text_color.x);
+			data["dialogue_text_color"].append(dialogue_text_color.y);
+			data["dialogue_text_color"].append(dialogue_text_color.z);
+			data["dialogue_text_color"].append(dialogue_text_color.a);
 		}
 
 		if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
@@ -234,8 +268,8 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void DrawEditing(){
+		array<MovementObject@> targets = GetTargetMovementObjects();
 		if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
-			array<MovementObject@> targets = GetTargetMovementObjects();
 			for(uint i = 0; i < targets.size(); i++){
 				DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
@@ -368,6 +402,10 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void StartEdit(){
+		Apply();
+	}
+
+	void Apply(){
 		if(dialogue_function == set_actor_position){
 			SetActorPosition();
 		}else if(dialogue_function == set_actor_voice){
@@ -386,6 +424,8 @@ class DrikaDialogue : DrikaElement{
 			SetActorOmniscient();
 		}else if(dialogue_function == fade_to_black){
 			SetFadeToBlack();
+		}else if(dialogue_function == settings){
+			SetDialogueSettings();
 		}
 	}
 
@@ -400,6 +440,10 @@ class DrikaDialogue : DrikaElement{
 				Reset();
 			}
 		}
+	}
+
+	void ApplySettings(){
+		Apply();
 	}
 
 	void DeletePlaceholder(){
@@ -476,7 +520,9 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		if(connection_types.find(_movement_object) != -1){
+			DrawSelectTargetUI();
+		}
 
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
 			DeletePlaceholder();
@@ -525,6 +571,19 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == fade_to_black){
 			ImGui_SliderFloat("Target Alpha", target_fade_to_black, 0.0, 1.0, "%.3f");
  			ImGui_SliderFloat("Fade Duration", fade_to_black_duration, 0.0, 10.0, "%.3f");
+		}else if(dialogue_function == settings){
+			ImGui_Combo("Dialogue Layout", dialogue_layout, dialogue_layout_names, dialogue_layout_names.size());
+			ImGui_Text("Font : " + dialogue_text_font);
+			ImGui_SameLine();
+			if(ImGui_Button("Set Font")){
+				string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
+				if(new_path != ""){
+					dialogue_text_font = new_path;
+				}
+			}
+			ImGui_SliderInt("Dialogue Text Size", dialogue_text_size, 1, 100, "%.0f");
+			ImGui_ColorEdit4("Dialogue Text Color", dialogue_text_color);
+			ImGui_Checkbox("Dialogue Text Shadow", dialogue_text_shadow);
 		}
 	}
 
@@ -612,9 +671,25 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == fade_to_black){
 			SetFadeToBlack();
 			return true;
+		}else if(dialogue_function == settings){
+			SetDialogueSettings();
+			return true;
 		}
 
 		return false;
+	}
+
+	void SetDialogueSettings(){
+		string msg = "drika_dialogue_set_settings ";
+		msg += dialogue_layout + " ";
+		msg += dialogue_text_font + " ";
+		msg += dialogue_text_size + " ";
+		msg += dialogue_text_color.x + " ";
+		msg += dialogue_text_color.y + " ";
+		msg += dialogue_text_color.z + " ";
+		msg += dialogue_text_color.a + " ";
+		msg += dialogue_text_shadow + " ";
+		level.SendMessage(msg);
 	}
 
 	void SetFadeToBlack(){

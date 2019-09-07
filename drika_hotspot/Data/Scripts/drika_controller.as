@@ -21,6 +21,7 @@ float target_fade_to_black = 1.0;
 float fade_to_black_duration = 1.0;
 bool fade_to_black = false;
 array<int> waiting_hotspot_ids;
+int dialogue_layout = 0;
 
 class ActorSettings{
 	string name = "Default";
@@ -74,7 +75,7 @@ void BuildUI(){
 
 	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(1);
+	dialogue_line_holder.setZOrdering(2);
 
 	//Add all the text that has already been added, in case of a refresh.
 	for(uint i = 0; i < dialogue_cache.size(); i++){
@@ -84,14 +85,14 @@ void BuildUI(){
 		line_counter += 1;
 		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 		dialogue_lines_holder_vert.append(dialogue_line_holder);
-		dialogue_line_holder.setZOrdering(1);
+		dialogue_line_holder.setZOrdering(2);
 	}
 
 	IMContainer controls_container(2400.0, 375.0);
 	controls_container.setAlignment(CABottom, CARight);
 	IMDivider controls_divider("controls_divider", DOVertical);
 	controls_divider.setAlignment(CATop, CALeft);
-	controls_divider.setZOrdering(2);
+	controls_divider.setZOrdering(1);
 	controls_container.setElement(controls_divider);
 	IMText lmb_continue("Left mouse button to continue", controls_font);
 	IMText rtn_skip("return to skip", controls_font);
@@ -317,7 +318,7 @@ void ReceiveMessage(string msg){
 			dialogue_cache.insertLast("");
 			@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 			dialogue_lines_holder_vert.append(dialogue_line_holder);
-			dialogue_line_holder.setZOrdering(1);
+			dialogue_line_holder.setZOrdering(2);
 		}
 	}else if(token == "drika_dialogue_clear_say"){
 		dialogue_cache.resize(0);
@@ -328,7 +329,7 @@ void ReceiveMessage(string msg){
 			dialogue_lines_holder_vert.clear();
 			@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 			dialogue_lines_holder_vert.append(dialogue_line_holder);
-			dialogue_line_holder.setZOrdering(1);
+			dialogue_line_holder.setZOrdering(2);
 		}
 	}else if(token == "drika_dialogue_set_color"){
 		token_iter.FindNextToken(msg);
@@ -448,6 +449,35 @@ void ReceiveMessage(string msg){
 		fade_timer = 0.0;
 		blackout_amount = 0.0;
 		fade_to_black = false;
+	}else if(token == "drika_dialogue_set_settings"){
+		token_iter.FindNextToken(msg);
+		dialogue_layout = atoi(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		string new_font_path = token_iter.GetToken(msg);
+		array<string> new_font_path_split = new_font_path.split("/");
+		string new_font_file = new_font_path_split[new_font_path_split.size() - 1];
+		string dialogue_text_font = new_font_file.substr(0, new_font_file.length() - 4);
+		Log(warning, "New font " + dialogue_text_font);
+
+		token_iter.FindNextToken(msg);
+		int dialogue_text_size = atoi(token_iter.GetToken(msg));
+
+		vec4 dialogue_text_color;
+		token_iter.FindNextToken(msg);
+		dialogue_text_color.x = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		dialogue_text_color.y = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		dialogue_text_color.z = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		dialogue_text_color.a = atof(token_iter.GetToken(msg));
+		Log(warning, "dialogue_text_color " + dialogue_text_color.x + " " + dialogue_text_color.y + " " + dialogue_text_color.z + " " + dialogue_text_color.a);
+
+		token_iter.FindNextToken(msg);
+		bool dialogue_text_shadow = token_iter.GetToken(msg) == "true";
+
+		dialogue_font = FontSetup(dialogue_text_font, dialogue_text_size, dialogue_text_color, dialogue_text_shadow);
 	}
 }
 
