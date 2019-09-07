@@ -1,10 +1,12 @@
 #include "animation_group.as"
+#include "dialogue_layouts.as"
 
 bool animating_camera = false;
 bool has_camera_control = false;
 bool show_dialogue = false;
 array<string> hotspot_ids;
 IMGUI@ imGUI;
+FontSetup name_font_arial("arial", 70 , HexColor("#CCCCCC"), true);
 FontSetup name_font("edosz", 70 , HexColor("#CCCCCC"), true);
 FontSetup dialogue_font("arial", 50 , HexColor("#CCCCCC"), true);
 FontSetup controls_font("arial", 45 , HexColor("#616161"), true);
@@ -48,23 +50,38 @@ void Init(string str){
 
 void SetWindowDimensions(int width, int height){
 	if(show_dialogue){
-		BuildUI();
+		BuildDialogueUI();
 	}
 }
 
-void BuildUI(){
+void BuildDialogueUI(){
 	ui_created = false;
 	line_counter = 0;
 	DisposeTextAtlases();
 	imGUI.clear();
 	imGUI.setHeaderHeight(225);
 	imGUI.setFooterHeight(450);
-	imGUI.setFooterPanels(500.0f, 500.0f);
 	imGUI.setup();
+	imGUI.setGuides(true);
 
 	CreateNameTag(imGUI.getFooter());
 	CreateBackground(imGUI.getFooter());
 
+	switch(dialogue_layout){
+		case default_layout:
+			DefaultUI();
+			break;
+		case simple_layout:
+			SimpleUI();
+			break;
+		default :
+			break;
+	}
+
+	ui_created = true;
+}
+
+void DefaultUI(){
 	imGUI.getFooter().setAlignment(CALeft, CACenter);
 
 	IMDivider dialogue_lines_holder_horiz("dialogue_lines_holder_horiz", DOHorizontal);
@@ -101,14 +118,54 @@ void BuildUI(){
 
 	imGUI.getFooter().addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
 	imGUI.getFooter().setElement(dialogue_lines_holder_horiz);
+}
 
-	ui_created = true;
+void SimpleUI(){
+	imGUI.getFooter().setAlignment(CACenter, CACenter);
+	/* imGUI.getFooter().showBorder(); */
+
+	IMDivider dialogue_lines_holder_horiz("dialogue_lines_holder_horiz", DOHorizontal);
+	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
+	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
+	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
+	dialogue_lines_holder_vert.setAlignment(CACenter, CATop);
+
+	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+	dialogue_lines_holder_vert.append(dialogue_line_holder);
+	dialogue_line_holder.setZOrdering(2);
+
+	//Add all the text that has already been added, in case of a refresh.
+	for(uint i = 0; i < dialogue_cache.size(); i++){
+		IMText dialogue_text(dialogue_cache[i], dialogue_font);
+		dialogue_line_holder.append(dialogue_text);
+
+		line_counter += 1;
+		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+		dialogue_lines_holder_vert.append(dialogue_line_holder);
+		dialogue_line_holder.setZOrdering(2);
+	}
+
+	imGUI.getFooter().setElement(dialogue_lines_holder_horiz);
 }
 
 void CreateBackground(IMContainer@ parent){
 	if(!show_dialogue){
 		return;
 	}
+
+	switch(dialogue_layout){
+		case default_layout:
+			DefaultBackground(parent);
+			break;
+		case simple_layout:
+			SimpleBackground(parent);
+			break;
+		default :
+			break;
+	}
+}
+
+void DefaultBackground(IMContainer@ parent){
 	//Remove any background that's already there.
 	parent.removeElement("bg_container");
 
@@ -150,19 +207,56 @@ void CreateBackground(IMContainer@ parent){
 	parent.addFloatingElement(bg_container, "bg_container", vec2(0.0, 50.0), -1);
 }
 
+void SimpleBackground(IMContainer@ parent){
+	//Remove any background that's already there.
+	parent.removeElement("bg_container");
+
+	IMContainer bg_container(0.0, 0.0);
+	IMDivider bg_divider("bg_divider", DOHorizontal);
+	bg_divider.setZOrdering(-1);
+	bg_container.setElement(bg_divider);
+
+	float bg_alpha = 1.0;
+	float bg_height = 450.0;
+	float extra_width = 500.0;
+
+	IMImage middle_fade("Textures/dialogue_bg_top_fade.png");
+	middle_fade.setSizeX(2560.0 + extra_width);
+	middle_fade.setSizeY(bg_height);
+	middle_fade.setAlpha(bg_alpha);
+	middle_fade.setClip(false);
+	bg_divider.append(middle_fade);
+
+	parent.addFloatingElement(bg_container, "bg_container", vec2(-(extra_width / 2.0), 0.0), -1);
+}
+
 void CreateNameTag(IMContainer@ parent){
 	if(!show_dialogue){
 		return;
 	}
+
+	switch(dialogue_layout){
+		case default_layout:
+			DefaultNameTag(parent);
+			break;
+		case simple_layout:
+			SimpleNameTag(parent);
+			break;
+		default :
+			break;
+	}
+}
+
+void DefaultNameTag(IMContainer@ parent){
 	//Remove any nametag that's already there.
 	parent.removeElement("name_container");
 
 	IMContainer name_container(0.0, 100.0);
 	IMDivider name_divider("name_divider", DOHorizontal);
 	name_divider.setZOrdering(2);
-	/* name_divider.showBorder(); */
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
+
 	IMText name(current_actor_settings.name, name_font);
 	name_divider.appendSpacer(30.0);
 	name_divider.append(name);
@@ -171,12 +265,37 @@ void CreateNameTag(IMContainer@ parent){
 
 	IMImage name_background("Textures/ui/menus/main/brushStroke.png");
 	name_background.setClip(false);
-	/* name_background.showBorder(); */
 
 	name_background.setSize(vec2(CalculateTextWidth(name.getText(), name_font.size), 100.0));
 	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
 
 	parent.addFloatingElement(name_container, "name_container", vec2(0, 0), 3);
+}
+
+void SimpleNameTag(IMContainer@ parent){
+	//Remove any nametag that's already there.
+	parent.removeElement("name_container");
+
+	IMContainer name_container(0.0, 100.0);
+	IMDivider name_divider("name_divider", DOHorizontal);
+	name_divider.setZOrdering(2);
+	name_divider.setAlignment(CACenter, CACenter);
+	name_container.setElement(name_divider);
+
+	IMText name(current_actor_settings.name, name_font_arial);
+	name_divider.appendSpacer(30.0);
+	name_divider.append(name);
+	name_divider.appendSpacer(30.0);
+	name.setColor(current_actor_settings.color);
+
+	IMImage name_background("Textures/dialogue_bg_nametag_faded.png");
+	name_background.setClip(false);
+	name_background.setAlpha(0.5);
+
+	name_background.setSize(vec2(CalculateTextWidth(name.getText(), name_font_arial.size), 100.0));
+	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
+
+	parent.addFloatingElement(name_container, "name_container", vec2(100, 0), 3);
 }
 
 float CalculateTextWidth(string text, int font_size){
@@ -190,12 +309,12 @@ float CalculateTextWidth(string text, int font_size){
 			lower_case += 1;
 		}
 	}
-	return (lower_case * font_size * 0.30) + (upper_case * font_size * 1.40);
+	return (lower_case * font_size * 0.4) + (upper_case * font_size * 1.4);
 }
 
 void PostScriptReload(){
 	if(show_dialogue){
-		BuildUI();
+		BuildDialogueUI();
 	}
 }
 
@@ -273,7 +392,7 @@ void ReceiveMessage(string msg){
 
 		if(!show_dialogue){
 			show_dialogue = true;
-			BuildUI();
+			BuildDialogueUI();
 		}
 
 		if(current_actor_settings.name != actor_name){
@@ -459,7 +578,6 @@ void ReceiveMessage(string msg){
 		array<string> new_font_path_split = new_font_path.split("/");
 		string new_font_file = new_font_path_split[new_font_path_split.size() - 1];
 		string dialogue_text_font = new_font_file.substr(0, new_font_file.length() - 4);
-		Log(warning, "New font " + dialogue_text_font);
 
 		token_iter.FindNextToken(msg);
 		int dialogue_text_size = atoi(token_iter.GetToken(msg));
@@ -473,7 +591,6 @@ void ReceiveMessage(string msg){
 		dialogue_text_color.z = atof(token_iter.GetToken(msg));
 		token_iter.FindNextToken(msg);
 		dialogue_text_color.a = atof(token_iter.GetToken(msg));
-		Log(warning, "dialogue_text_color " + dialogue_text_color.x + " " + dialogue_text_color.y + " " + dialogue_text_color.z + " " + dialogue_text_color.a);
 
 		token_iter.FindNextToken(msg);
 		bool dialogue_text_shadow = token_iter.GetToken(msg) == "true";

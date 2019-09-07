@@ -1,3 +1,5 @@
+#include "dialogue_layouts.as";
+
 enum dialogue_functions	{
 							say = 0,
 							set_actor_color = 1,
@@ -14,6 +16,7 @@ enum dialogue_functions	{
 						}
 
 class DrikaDialogue : DrikaElement{
+
 	dialogue_functions dialogue_function;
 	int current_dialogue_function;
 	string say_text;
@@ -62,15 +65,6 @@ class DrikaDialogue : DrikaElement{
 												"Set Camera Position",
 												"Fade To Black",
 												"Settings"
-											};
-
-	array<string> dialogue_layout_names =	{
-												"Default",
-												"Simple",
-												"Breath Of The Wild",
-												"Chrono Trigger",
-												"Fallout 3 Green",
-												"Fire Emblem"
 											};
 
 	DrikaDialogue(JSONValue params = JSONValue()){
