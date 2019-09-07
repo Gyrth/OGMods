@@ -530,6 +530,11 @@ class DrikaDialogue : DrikaElement{
 			if(say_started){
 				level.SendMessage("drika_dialogue_hide");
 			}
+			array<MovementObject@> targets = GetTargetMovementObjects();
+
+			for(uint i = 0; i < targets.size(); i++){
+				targets[i].ReceiveScriptMessage("stop_talking");
+			}
 			say_started = false;
 			say_timer = 0.0;
 			wait_timer = 0.0;
