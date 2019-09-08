@@ -789,7 +789,7 @@ class DrikaDialogue : DrikaElement{
 
 	void SetActorSettings(){
 		string msg = "drika_dialogue_set_actor_settings ";
-		msg += "\"" + actor_name + "\"";
+		msg += "\"" + actor_name + "\" ";
 		msg += dialogue_color.x + " " + dialogue_color.y + " " + dialogue_color.z + " " + dialogue_color.a + " ";
 		msg += voice + " ";
 		msg += avatar_path;

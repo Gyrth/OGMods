@@ -829,6 +829,7 @@ void ReceiveMessage(string msg){
 			ActorSettings new_settings();
 			new_settings.name = actor_name;
 			new_settings.voice = voice;
+			new_settings.color = color;
 			new_settings.avatar_path = avatar_path;
 			actor_settings.insertLast(@new_settings);
 		}
