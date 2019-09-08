@@ -621,13 +621,13 @@ class DrikaDialogue : DrikaElement{
 
 	void Update(){
 		if(dialogue_function == say){
-			UpdateSayDialogue();
+			UpdateSayDialogue(true);
 		}
 	}
 
 	bool Trigger(){
 		if(dialogue_function == say){
-			if(UpdateSayDialogue()){
+			if(UpdateSayDialogue(false)){
 				Reset();
 				return true;
 			}
@@ -754,7 +754,7 @@ class DrikaDialogue : DrikaElement{
 		level.SendMessage(msg);
 	}
 
-	bool UpdateSayDialogue(){
+	bool UpdateSayDialogue(bool preview){
 		//Some setup operations that only need to be done once.
 		if(say_started == false){
 			say_started = true;
@@ -762,12 +762,12 @@ class DrikaDialogue : DrikaElement{
 			level.SendMessage("drika_dialogue_clear_say");
 		}
 
-		if(GetInputPressed(0, "return")){
+		if(GetInputPressed(0, "return") && !preview){
 			EndDialogue();
 			Reset();
 			return false;
 		}else if(dialogue_done){
-			if(GetInputPressed(0, "attack")){
+			if(GetInputPressed(0, "attack") && !preview){
 				level.SendMessage("drika_dialogue_skip");
 				return true;
 			}
