@@ -247,6 +247,7 @@ class DrikaDialogue : DrikaElement{
 
 	void Delete(){
 		DeletePlaceholder();
+		Reset();
 	}
 
 	void StartSettings(){
@@ -425,15 +426,7 @@ class DrikaDialogue : DrikaElement{
 
 	void EditDone(){
 		DeletePlaceholder();
-		if(dialogue_function == say){
-			if(say_started){
-				Reset();
-			}
-		}else if(dialogue_function == fade_to_black){
-			if(triggered){
-				Reset();
-			}
-		}
+		Reset();
 	}
 
 	void ApplySettings(){
@@ -520,6 +513,7 @@ class DrikaDialogue : DrikaElement{
 
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
 			DeletePlaceholder();
+			Reset();
 			dialogue_function = dialogue_functions(current_dialogue_function);
 
 			if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
@@ -618,8 +612,10 @@ class DrikaDialogue : DrikaElement{
 			say_timer = 0.0;
 			wait_timer = 0.0;
 		}else if(dialogue_function == fade_to_black){
+			if(triggered){
+				ResetFadeToBlack();
+			}
 			triggered = false;
-			ResetFadeToBlack();
 		}
 	}
 
