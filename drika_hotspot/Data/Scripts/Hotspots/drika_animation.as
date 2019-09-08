@@ -452,16 +452,21 @@ class DrikaAnimation : DrikaElement{
 
 			const float zoom_sensitivity = 3.5f;
 			float zoom = min(150.0f, 90.0f / max(0.001f,(1.0f+(scale.x-1.0f) * zoom_sensitivity)));
+			vec3 direction = vec3(floor(x_rot * 100.0f + 0.5f) / 100.0f, floor(y_rot * 100.0f + 0.5f) / 100.0f, floor(z_rot * 100.0f + 0.5f) / 100.0f);
 
 			string msg = "drika_dialogue_set_camera_position ";
-			msg += floor(x_rot * 100.0f + 0.5f) / 100.0f + " ";
-			msg += floor(y_rot * 100.0f + 0.5f) / 100.0f + " ";
-			msg += floor(z_rot * 100.0f + 0.5f) / 100.0f + " ";
+			msg += direction.x + " ";
+			msg += direction.y + " ";
+			msg += direction.z + " ";
 			msg += translation.x + " ";
 			msg += translation.y + " ";
 			msg += translation.z + " ";
-			msg += zoom;
+			msg += animate_scale?zoom:90.0;
 			level.SendMessage(msg);
+
+			level.Execute("dialogue.cam_pos = vec3(" + translation.x + ", " + translation.y + ", " + translation.z + ");");
+			level.Execute("dialogue.cam_rot = vec3(" + direction.x + "," + direction.y + "," + direction.z + ");");
+			level.Execute("dialogue.cam_zoom = " + (animate_scale?zoom:90.0) + ");");
 
 			if(@camera_placeholder != null){
 				camera_placeholder.SetTranslation(translation);
