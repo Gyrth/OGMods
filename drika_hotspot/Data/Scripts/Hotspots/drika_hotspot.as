@@ -824,6 +824,16 @@ void AddDialogueActor(int character_id){
 	}
 }
 
+void RemoveDialogueActor(int character_id){
+	int index = dialogue_actor_ids.find(character_id);
+	if(index != -1){
+		MovementObject@ char = ReadCharacterID(dialogue_actor_ids[index]);
+		char.ReceiveScriptMessage("set_dialogue_control false");
+		char.rigged_object().anim_client().Reset();
+		dialogue_actor_ids.removeAt(index);
+	}
+}
+
 void ClearDialogueActors(){
 	for(uint i = 0; i < dialogue_actor_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(dialogue_actor_ids[i]);

@@ -178,6 +178,7 @@ class DrikaElement{
 	void ConnectedChanged(){}
 	void DrawEditing(){}
 	void TargetChanged(){}
+	void PreDisconnect(Object @other){}
 	void SetCurrent(bool _current){}
 	void ReceiveEditorMessage(array<string> message){}
 	void ReceiveMessage(string message){}
@@ -234,7 +235,7 @@ class DrikaElement{
 			return false;
 		}
 		if(object_id != -1 && ObjectExists(object_id)){
-			hotspot.Disconnect(ReadObjectFromID(object_id));
+			Disconnect(ReadObjectFromID(object_id));
 		}
 		object_id = other.GetID();
 		ConnectedChanged();
@@ -242,6 +243,7 @@ class DrikaElement{
 	}
 
 	bool Disconnect(Object @other){
+		PreDisconnect(other);
 		if(other.GetID() == object_id){
 			object_id = -1;
 			return false;
@@ -423,11 +425,13 @@ class DrikaElement{
 		}
 		if(identifier_type == id){
 			if(ImGui_InputInt("Object ID", object_id)){
+				Reset();
 				TargetChanged();
 			}
 		}else if(identifier_type == reference){
 			if(ImGui_Combo("Reference", current_reference, available_references, available_references.size())){
 				reference_string = available_references[current_reference];
+				Reset();
 				TargetChanged();
 			}
 		}else if(identifier_type == team){

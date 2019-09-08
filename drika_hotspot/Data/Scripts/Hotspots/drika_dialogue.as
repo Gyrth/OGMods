@@ -2,17 +2,16 @@
 
 enum dialogue_functions	{
 							say = 0,
-							set_actor_color = 1,
-							set_actor_voice = 2,
-							set_actor_position = 3,
-							set_actor_animation = 4,
-							set_actor_eye_direction = 5,
-							set_actor_torso_direction = 6,
-							set_actor_head_direction = 7,
-							set_actor_omniscient = 8,
-							set_camera_position = 9,
-							fade_to_black = 10,
-							settings = 11
+							actor_settings = 1,
+							set_actor_position = 2,
+							set_actor_animation = 3,
+							set_actor_eye_direction = 4,
+							set_actor_torso_direction = 5,
+							set_actor_head_direction = 6,
+							set_actor_omniscient = 7,
+							set_camera_position = 8,
+							fade_to_black = 9,
+							settings = 10
 						}
 
 class DrikaDialogue : DrikaElement{
@@ -54,8 +53,7 @@ class DrikaDialogue : DrikaElement{
 
 	array<string> dialogue_function_names =	{
 												"Say",
-												"Set Actor Color",
-												"Set Actor Voice",
+												"Actor Settings",
 												"Set Actor Position",
 												"Set Actor Animation",
 												"Set Actor Eye Direction",
@@ -71,7 +69,7 @@ class DrikaDialogue : DrikaElement{
 		dialogue_function = dialogue_functions(GetJSONInt(params, "dialogue_function", 0));
 		current_dialogue_function = dialogue_function;
 
-		if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
+		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
 			connection_types = {_movement_object};
 			LoadIdentifier(params);
 		}
@@ -114,13 +112,12 @@ class DrikaDialogue : DrikaElement{
 
 		if(dialogue_function == say){
 			data["say_text"] = JSONValue(say_text);
-		}else if(dialogue_function == set_actor_color){
+		}else if(dialogue_function == actor_settings){
 			data["dialogue_color"] = JSONValue(JSONarrayValue);
 			data["dialogue_color"].append(dialogue_color.x);
 			data["dialogue_color"].append(dialogue_color.y);
 			data["dialogue_color"].append(dialogue_color.z);
 			data["dialogue_color"].append(dialogue_color.a);
-		}else if(dialogue_function == set_actor_voice){
 			data["voice"] = JSONValue(voice);
 		}else if(dialogue_function == set_actor_position){
 			data["target_actor_position"] = JSONValue(JSONarrayValue);
@@ -176,7 +173,7 @@ class DrikaDialogue : DrikaElement{
 			data["dialogue_text_color"].append(dialogue_text_color.a);
 		}
 
-		if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
+		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
 			SaveIdentifier(data);
 		}
 
@@ -195,12 +192,8 @@ class DrikaDialogue : DrikaElement{
 			}else{
 				display_string += "\"" + say_text.substr(0, 35) + "..." + "\"";
 			}
-		}else if(dialogue_function == set_actor_color){
+		}else if(dialogue_function == actor_settings){
 			display_string += actor_name;
-			display_string += Vec4ToString(dialogue_color);
-		}else if(dialogue_function == set_actor_voice){
-			display_string += actor_name;
-			display_string += voice;
 		}else if(dialogue_function == set_actor_position){
 			display_string += actor_name;
 		}else if(dialogue_function == set_actor_animation){
@@ -264,7 +257,7 @@ class DrikaDialogue : DrikaElement{
 
 	void DrawEditing(){
 		array<MovementObject@> targets = GetTargetMovementObjects();
-		if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
+		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
 			for(uint i = 0; i < targets.size(); i++){
 				DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
@@ -403,10 +396,8 @@ class DrikaDialogue : DrikaElement{
 	void Apply(){
 		if(dialogue_function == set_actor_position){
 			SetActorPosition();
-		}else if(dialogue_function == set_actor_voice){
-			SetActorVoice();
-		}else if(dialogue_function == set_actor_color){
-			SetActorColor();
+		}else if(dialogue_function == actor_settings){
+			SetActorSettings();
 		}else if(dialogue_function == set_actor_animation){
 			SetActorAnimation();
 		}else if(dialogue_function == set_actor_eye_direction){
@@ -426,7 +417,9 @@ class DrikaDialogue : DrikaElement{
 
 	void EditDone(){
 		DeletePlaceholder();
-		Reset();
+		if(dialogue_function != set_actor_animation){
+			Reset();
+		}
 	}
 
 	void ApplySettings(){
@@ -516,10 +509,17 @@ class DrikaDialogue : DrikaElement{
 			Reset();
 			dialogue_function = dialogue_functions(current_dialogue_function);
 
-			if(dialogue_function == say || dialogue_function == set_actor_color || dialogue_function == set_actor_voice || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
+			if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
 				connection_types = {_movement_object};
 			}else{
 				connection_types = {};
+			}
+
+			if(dialogue_function == set_actor_animation){
+				if(all_animations.size() == 0){
+					level.SendMessage("drika_dialogue_get_animations " + hotspot.GetID());
+				}
+				QueryAnimation(search_buffer);
 			}
 		}
 
@@ -527,11 +527,10 @@ class DrikaDialogue : DrikaElement{
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				say_text = ImGui_GetTextBuf();
 			}
-		}else if(dialogue_function == set_actor_color){
+		}else if(dialogue_function == actor_settings){
 			if(ImGui_ColorEdit4("Dialogue Color", dialogue_color)){
-				SetActorColor();
+
 			}
-		}else if(dialogue_function == set_actor_voice){
 			if(ImGui_SliderInt("Voice", voice, 0, 18, "%.0f")){
 				level.SendMessage("drika_dialogue_test_voice " + voice);
 			}
@@ -597,6 +596,18 @@ class DrikaDialogue : DrikaElement{
 		}
 	}
 
+	void ConnectedChanged(){
+		Apply();
+	}
+
+	void TargetChanged(){
+		Apply();
+	}
+
+	void PreDisconnect(Object@ other){
+		Reset();
+	}
+
 	void Reset(){
 		dialogue_done = false;
 		if(dialogue_function == say){
@@ -616,6 +627,12 @@ class DrikaDialogue : DrikaElement{
 				ResetFadeToBlack();
 			}
 			triggered = false;
+		}else if(dialogue_function == set_actor_animation){
+			array<MovementObject@> targets = GetTargetMovementObjects();
+
+			for(uint i = 0; i < targets.size(); i++){
+				RemoveDialogueActor(targets[i].GetID());
+			}
 		}
 	}
 
@@ -631,11 +648,8 @@ class DrikaDialogue : DrikaElement{
 				Reset();
 				return true;
 			}
-		}else if(dialogue_function == set_actor_color){
-			SetActorColor();
-			return true;
-		}else if(dialogue_function == set_actor_voice){
-			SetActorVoice();
+		}else if(dialogue_function == actor_settings){
+			SetActorSettings();
 			return true;
 		}else if(dialogue_function == set_actor_position){
 			SetActorPosition();
@@ -740,16 +754,10 @@ class DrikaDialogue : DrikaElement{
 		}
 	}
 
-	void SetActorColor(){
-		string msg = "drika_dialogue_set_color ";
+	void SetActorSettings(){
+		string msg = "drika_dialogue_set_actor_settings ";
 		msg += "\"" + actor_name + "\"";
-		msg += dialogue_color.x + " " + dialogue_color.y + " " + dialogue_color.z + " " + dialogue_color.a;
-		level.SendMessage(msg);
-	}
-
-	void SetActorVoice(){
-		string msg = "drika_dialogue_set_voice ";
-		msg += "\"" + actor_name + "\"";
+		msg += dialogue_color.x + " " + dialogue_color.y + " " + dialogue_color.z + " " + dialogue_color.a + " ";
 		msg += voice;
 		level.SendMessage(msg);
 	}

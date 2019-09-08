@@ -752,7 +752,7 @@ void ReceiveMessage(string msg){
 			dialogue_lines_holder_vert.append(dialogue_line_holder);
 			dialogue_line_holder.setZOrdering(2);
 		}
-	}else if(token == "drika_dialogue_set_color"){
+	}else if(token == "drika_dialogue_set_actor_settings"){
 		token_iter.FindNextToken(msg);
 		string actor_name = token_iter.GetToken(msg);
 
@@ -766,37 +766,15 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		color.a = atof(token_iter.GetToken(msg));
 
-		bool settings_found = false;
-
-		for(uint i = 0; i < actor_settings.size(); i++){
-			if(actor_settings[i].name == actor_name){
-				settings_found = true;
-				actor_settings[i].color = color;
-				break;
-			}
-		}
-
-		if(!settings_found){
-			ActorSettings new_settings();
-			new_settings.name = actor_name;
-			new_settings.color = color;
-			actor_settings.insertLast(@new_settings);
-		}
-
-		CreateNameTag(imGUI.getFooter());
-		CreateBackground(imGUI.getFooter());
-	}else if(token == "drika_dialogue_set_voice"){
-		token_iter.FindNextToken(msg);
-		string actor_name = token_iter.GetToken(msg);
-
 		token_iter.FindNextToken(msg);
 		int voice = atoi(token_iter.GetToken(msg));
-		bool settings_found = false;
 
+		bool settings_found = false;
 		for(uint i = 0; i < actor_settings.size(); i++){
 			if(actor_settings[i].name == actor_name){
 				settings_found = true;
 				actor_settings[i].voice = voice;
+				actor_settings[i].color = color;
 				break;
 			}
 		}
@@ -807,6 +785,9 @@ void ReceiveMessage(string msg){
 			new_settings.voice = voice;
 			actor_settings.insertLast(@new_settings);
 		}
+
+		/* CreateNameTag(imGUI.getFooter());
+		CreateBackground(imGUI.getFooter()); */
 	}else if(token == "drika_dialogue_test_voice"){
 		token_iter.FindNextToken(msg);
 		int test_voice = atoi(token_iter.GetToken(msg));
@@ -859,6 +840,7 @@ void ReceiveMessage(string msg){
 		fading = true;
 		fade_direction = 1.0;
 	}else if(token == "drika_dialogue_fade_to_black"){
+		Log(warning, "drika_dialogue_fade_to_black");
 		token_iter.FindNextToken(msg);
 		target_fade_to_black = atof(token_iter.GetToken(msg));
 
