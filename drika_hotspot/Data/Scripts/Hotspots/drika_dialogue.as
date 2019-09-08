@@ -51,6 +51,10 @@ class DrikaDialogue : DrikaElement{
 	vec4 dialogue_text_color;
 	bool dialogue_text_shadow;
 
+	string default_avatar_path = "Data/Textures/ui/menus/main/white_square.png";
+	TextureAssetRef avatar = LoadTexture(default_avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+	string avatar_path;
+
 	array<string> dialogue_function_names =	{
 												"Say",
 												"Actor Settings",
@@ -77,6 +81,10 @@ class DrikaDialogue : DrikaElement{
 		say_text = GetJSONString(params, "say_text", "Drika Hotspot Dialogue");
 		dialogue_color = GetJSONVec4(params, "dialogue_color", vec4(1));
 		voice = GetJSONInt(params, "voice", 0);
+		avatar_path = GetJSONString(params, "avatar_path", "None");
+		if(avatar_path != "None"){
+			avatar = LoadTexture(avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+		}
 		target_actor_position = GetJSONVec3(params, "target_actor_position", vec3(0.0));
 		target_actor_rotation = GetJSONFloat(params, "target_actor_rotation", 0.0);
 		target_actor_animation = GetJSONString(params, "target_actor_animation", "Data/Animations/r_dialogue_2handneck.anm");
@@ -119,6 +127,7 @@ class DrikaDialogue : DrikaElement{
 			data["dialogue_color"].append(dialogue_color.z);
 			data["dialogue_color"].append(dialogue_color.a);
 			data["voice"] = JSONValue(voice);
+			data["avatar_path"] = JSONValue(avatar_path);
 		}else if(dialogue_function == set_actor_position){
 			data["target_actor_position"] = JSONValue(JSONarrayValue);
 			data["target_actor_position"].append(target_actor_position.x);
@@ -534,6 +543,30 @@ class DrikaDialogue : DrikaElement{
 			if(ImGui_SliderInt("Voice", voice, 0, 18, "%.0f")){
 				level.SendMessage("drika_dialogue_test_voice " + voice);
 			}
+
+			ImGui_Columns(2, false);
+			ImGui_SetColumnWidth(0, 75);
+			ImGui_Image(avatar, vec2(50, 50));
+			ImGui_NextColumn();
+			if(ImGui_Button("Set Avatar")){
+				string new_path = GetUserPickedReadPath("png", "Data/Textures");
+				if(new_path != ""){
+					array<string> split_path = new_path.split(".");
+					string extention = split_path[split_path.size() - 1];
+					if(extention != "jpg" && extention != "png" && extention != "tga"){
+						DisplayError("Load Avatar", "Only .png, .tga or .jpg files are allowed.");
+					}else{
+						avatar_path = new_path;
+						avatar = LoadTexture(avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+					}
+				}
+			}
+			if(avatar_path != "None"){
+				if(ImGui_Button("Clear Avatar")){
+					avatar_path = "None";
+					avatar = LoadTexture(default_avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+				}
+			}
 		}else if(dialogue_function == set_actor_animation){
 			ImGui_SetTextBuf(search_buffer);
 			ImGui_Text("Search");
@@ -758,7 +791,8 @@ class DrikaDialogue : DrikaElement{
 		string msg = "drika_dialogue_set_actor_settings ";
 		msg += "\"" + actor_name + "\"";
 		msg += dialogue_color.x + " " + dialogue_color.y + " " + dialogue_color.z + " " + dialogue_color.a + " ";
-		msg += voice;
+		msg += voice + " ";
+		msg += avatar_path;
 		level.SendMessage(msg);
 	}
 

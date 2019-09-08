@@ -29,6 +29,7 @@ class ActorSettings{
 	string name = "Default";
 	vec4 color = vec4(1.0);
 	int voice = 0;
+	string avatar_path = "None";
 
 	ActorSettings(){
 
@@ -519,13 +520,25 @@ void DefaultNameTag(IMContainer@ parent){
 
 void SimpleNameTag(IMContainer@ parent){
 	//Remove any nametag that's already there.
-	parent.removeElement("name_container");
+	parent.removeElement("nametag_container");
+
+	IMContainer nametag_container(0.0, 0.0);
+	IMDivider nametag_divider("nametag_divider", DOHorizontal);
+	nametag_container.setElement(nametag_divider);
+	nametag_divider.setAlignment(CACenter, CATop);
+
+	if(current_actor_settings.avatar_path != "None"){
+		IMImage avatar_image(current_actor_settings.avatar_path);
+		avatar_image.setSize(vec2(400, 400));
+		nametag_divider.append(avatar_image);
+	}
 
 	IMContainer name_container(0.0, 100.0);
 	IMDivider name_divider("name_divider", DOHorizontal);
 	name_divider.setZOrdering(2);
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
+	nametag_divider.append(name_container);
 
 	IMText name(current_actor_settings.name, name_font_arial);
 	name_divider.appendSpacer(30.0);
@@ -540,7 +553,7 @@ void SimpleNameTag(IMContainer@ parent){
 	name_background.setSize(vec2(CalculateTextWidth(name.getText(), name_font_arial.size), 100.0));
 	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
 
-	parent.addFloatingElement(name_container, "name_container", vec2(100, 0), 3);
+	parent.addFloatingElement(nametag_container, "nametag_container", vec2(100, 0), 3);
 }
 
 void BreathOfTheWildNameTag(IMContainer@ parent){
@@ -552,6 +565,13 @@ void BreathOfTheWildNameTag(IMContainer@ parent){
 	name_divider.setZOrdering(2);
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
+
+	if(current_actor_settings.avatar_path != "None"){
+		IMImage avatar_image(current_actor_settings.avatar_path);
+		avatar_image.setSize(vec2(350, 350));
+		avatar_image.setClip(false);
+		name_container.addFloatingElement(avatar_image, "avatar", vec2(-500, 50), 3);
+	}
 
 	IMText name(current_actor_settings.name, name_font_arial);
 	name_divider.appendSpacer(30.0);
@@ -572,6 +592,13 @@ void ChronoTriggerNameTag(IMContainer@ parent){
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
+	if(current_actor_settings.avatar_path != "None"){
+		IMImage avatar_image(current_actor_settings.avatar_path);
+		avatar_image.setSize(vec2(350, 350));
+		avatar_image.setClip(false);
+		name_container.addFloatingElement(avatar_image, "avatar", vec2(-450, 25), 3);
+	}
+
 	IMText name(current_actor_settings.name + " : ", name_font_arial);
 	name_divider.appendSpacer(30.0);
 	name_divider.append(name);
@@ -590,6 +617,13 @@ void Fallout3NameTag(IMContainer@ parent){
 	name_divider.setZOrdering(2);
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
+
+	if(current_actor_settings.avatar_path != "None"){
+		IMImage avatar_image(current_actor_settings.avatar_path);
+		avatar_image.setSize(vec2(350, 350));
+		avatar_image.setClip(false);
+		name_container.addFloatingElement(avatar_image, "avatar", vec2(-1050, 100), 3);
+	}
 
 	IMText name(current_actor_settings.name, name_font_arial);
 	name_divider.append(name);
@@ -769,12 +803,24 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		int voice = atoi(token_iter.GetToken(msg));
 
+		token_iter.FindNextToken(msg);
+		string avatar_path = token_iter.GetToken(msg);
+
+		if(avatar_path != "None"){
+			array<string> split_path = avatar_path.split("/");
+			//Remove the Data/ in the beginning of the path.
+			split_path.removeAt(0);
+			avatar_path = join(split_path, "/");
+			Log(warning, "Avatar path " + avatar_path);
+		}
+
 		bool settings_found = false;
 		for(uint i = 0; i < actor_settings.size(); i++){
 			if(actor_settings[i].name == actor_name){
 				settings_found = true;
 				actor_settings[i].voice = voice;
 				actor_settings[i].color = color;
+				actor_settings[i].avatar_path = avatar_path;
 				break;
 			}
 		}
@@ -783,11 +829,9 @@ void ReceiveMessage(string msg){
 			ActorSettings new_settings();
 			new_settings.name = actor_name;
 			new_settings.voice = voice;
+			new_settings.avatar_path = avatar_path;
 			actor_settings.insertLast(@new_settings);
 		}
-
-		/* CreateNameTag(imGUI.getFooter());
-		CreateBackground(imGUI.getFooter()); */
 	}else if(token == "drika_dialogue_test_voice"){
 		token_iter.FindNextToken(msg);
 		int test_voice = atoi(token_iter.GetToken(msg));
