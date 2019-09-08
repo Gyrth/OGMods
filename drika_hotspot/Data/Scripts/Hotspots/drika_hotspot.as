@@ -239,9 +239,6 @@ void ConvertDisplayColors(){
 
 void Dispose() {
     level.StopReceivingLevelEvents(hotspot.GetID());
-	for(uint i = 0; i < drika_elements.size(); i++){
-		drika_elements[i].Delete();
-	}
 }
 
 void SetParameters(){
