@@ -435,11 +435,9 @@ void Fallout3Background(IMContainer@ parent){
 	float bg_alpha = 0.5;
 	float bg_height = 400.0;
 	float side_width = 5.0;
-	float mult = 2.0;
-	vec4 ui_tint = vec4(0.11 * mult, 1.0 * mult, 0.51 * mult, 1.0);
 
 	IMImage left_fade("Textures/dialogue_bg_fo3_end.png");
-	left_fade.setColor(ui_tint);
+	left_fade.setColor(current_actor_settings.color);
 	left_fade.setSizeX(side_width);
 	left_fade.setSizeY(bg_height);
 	left_fade.setAlpha(bg_alpha);
@@ -448,7 +446,7 @@ void Fallout3Background(IMContainer@ parent){
 	bg_divider.append(left_fade);
 
 	IMImage middle_fade("Textures/ui/dialogue/dialogue_bg.png");
-	middle_fade.setColor(ui_tint);
+	middle_fade.setColor(current_actor_settings.color);
 	middle_fade.setSizeX(1500.0);
 	middle_fade.setSizeY(bg_height);
 	middle_fade.setAlpha(bg_alpha);
@@ -456,7 +454,7 @@ void Fallout3Background(IMContainer@ parent){
 	bg_divider.append(middle_fade);
 
 	IMImage right_fade("Textures/dialogue_bg_fo3_end.png");
-	right_fade.setColor(ui_tint);
+	right_fade.setColor(current_actor_settings.color);
 	right_fade.setSizeX(side_width);
 	right_fade.setSizeY(bg_height);
 	right_fade.setAlpha(bg_alpha);
