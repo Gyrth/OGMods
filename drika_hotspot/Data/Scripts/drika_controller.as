@@ -535,7 +535,7 @@ void SimpleNameTag(IMContainer@ parent){
 
 	IMContainer name_container(0.0, 100.0);
 	IMDivider name_divider("name_divider", DOHorizontal);
-	name_divider.setZOrdering(2);
+	name_divider.setZOrdering(3);
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 	nametag_divider.append(name_container);
@@ -562,7 +562,7 @@ void BreathOfTheWildNameTag(IMContainer@ parent){
 
 	IMContainer name_container(0.0, 100.0);
 	IMDivider name_divider("name_divider", DOHorizontal);
-	name_divider.setZOrdering(2);
+	name_divider.setZOrdering(3);
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
@@ -573,13 +573,13 @@ void BreathOfTheWildNameTag(IMContainer@ parent){
 		name_container.addFloatingElement(avatar_image, "avatar", vec2(-500, 50), 3);
 	}
 
-	IMText name(current_actor_settings.name, name_font_arial);
+	IMText name(current_actor_settings.name, dialogue_font);
 	name_divider.appendSpacer(30.0);
 	name_divider.append(name);
 	name_divider.appendSpacer(30.0);
 	name.setColor(current_actor_settings.color);
 
-	parent.addFloatingElement(name_container, "name_container", vec2(550, -(name_font_arial.size / 4.0)), 3);
+	parent.addFloatingElement(name_container, "name_container", vec2(550, -(dialogue_font.size / 4.0)), 3);
 }
 
 void ChronoTriggerNameTag(IMContainer@ parent){
@@ -588,7 +588,7 @@ void ChronoTriggerNameTag(IMContainer@ parent){
 
 	IMContainer name_container(0.0, 100.0);
 	IMDivider name_divider("name_divider", DOHorizontal);
-	name_divider.setZOrdering(2);
+	name_divider.setZOrdering(3);
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
@@ -599,13 +599,13 @@ void ChronoTriggerNameTag(IMContainer@ parent){
 		name_container.addFloatingElement(avatar_image, "avatar", vec2(-450, 25), 3);
 	}
 
-	IMText name(current_actor_settings.name + " : ", name_font_arial);
+	IMText name(current_actor_settings.name + " : ", dialogue_font);
 	name_divider.appendSpacer(30.0);
 	name_divider.append(name);
 	name_divider.appendSpacer(30.0);
 	name.setColor(current_actor_settings.color);
 
-	parent.addFloatingElement(name_container, "name_container", vec2(500.0, name_font_arial.size / 2.0), 3);
+	parent.addFloatingElement(name_container, "name_container", vec2(500.0, dialogue_font.size / 2.0), 3);
 }
 
 void Fallout3NameTag(IMContainer@ parent){
@@ -614,7 +614,7 @@ void Fallout3NameTag(IMContainer@ parent){
 
 	IMContainer name_container(0.0, 100.0);
 	IMDivider name_divider("name_divider", DOHorizontal);
-	name_divider.setZOrdering(2);
+	name_divider.setZOrdering(3);
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
@@ -625,12 +625,12 @@ void Fallout3NameTag(IMContainer@ parent){
 		name_container.addFloatingElement(avatar_image, "avatar", vec2(-1050, 100), 3);
 	}
 
-	IMText name(current_actor_settings.name, name_font_arial);
+	IMText name(current_actor_settings.name, dialogue_font);
 	name_divider.append(name);
 	name.setColor(current_actor_settings.color);
 
-	float name_width = CalculateTextWidth(name.getText(), name_font_arial.size);
-	parent.addFloatingElement(name_container, "name_container", vec2(2560 / 2.0 - (name_width / 2.0), -(name_font_arial.size + 10.0)), 3);
+	float name_width = CalculateTextWidth(name.getText(), dialogue_font.size);
+	parent.addFloatingElement(name_container, "name_container", vec2(2560 / 2.0 - (name_width / 2.0), -(dialogue_font.size + 10.0)), 3);
 }
 
 float CalculateTextWidth(string text, int font_size){
