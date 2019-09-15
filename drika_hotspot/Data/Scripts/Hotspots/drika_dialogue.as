@@ -639,7 +639,7 @@ class DrikaDialogue : DrikaElement{
 		Apply();
 	}
 
-	void PreDisconnect(Object@ other){
+	void PreTargetChanged(){
 		Reset();
 	}
 

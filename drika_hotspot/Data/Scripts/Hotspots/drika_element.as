@@ -150,6 +150,7 @@ class DrikaElement{
 	int placeholder_id = -1;
 	Object@ placeholder;
 	int object_id = -1;
+	int new_object_id = -1;
 	string reference_string = "drika_reference";
 	string placeholder_name;
 	identifier_types identifier_type = id;
@@ -162,7 +163,9 @@ class DrikaElement{
 	bool show_team_option = false;
 	bool show_name_option = false;
 	string character_team = "team_drika";
+	string new_character_team = "team_drika";
 	string object_name = "drika_object";
+	string new_object_name = "drika_object";
 	float PI = 3.14159265359f;
 
 	string GetDisplayString(){return "";}
@@ -175,10 +178,10 @@ class DrikaElement{
 	void DrawSettings(){}
 	void ApplySettings(){}
 	void StartSettings(){}
-	void ConnectedChanged(){}
 	void DrawEditing(){}
+	void PreTargetChanged(){}
 	void TargetChanged(){}
-	void PreDisconnect(Object @other){}
+	void ConnectedChanged(){}
 	void SetCurrent(bool _current){}
 	void ReceiveEditorMessage(array<string> message){}
 	void ReceiveMessage(string message){}
@@ -235,15 +238,16 @@ class DrikaElement{
 			return false;
 		}
 		if(object_id != -1 && ObjectExists(object_id)){
+			PreTargetChanged();
 			Disconnect(ReadObjectFromID(object_id));
 		}
-		object_id = other.GetID();
+		new_object_id = other.GetID();
+		object_id = new_object_id;
 		ConnectedChanged();
 		return false;
 	}
 
 	bool Disconnect(Object @other){
-		PreDisconnect(other);
 		if(other.GetID() == object_id){
 			object_id = -1;
 			return false;
@@ -424,20 +428,30 @@ class DrikaElement{
 			}
 		}
 		if(identifier_type == id){
-			if(ImGui_InputInt("Object ID", object_id)){
-				Reset();
+			if(ImGui_InputInt("Object ID", new_object_id)){
+				PreTargetChanged();
+				object_id = new_object_id;
 				TargetChanged();
 			}
 		}else if(identifier_type == reference){
 			if(ImGui_Combo("Reference", current_reference, available_references, available_references.size())){
+				PreTargetChanged();
 				reference_string = available_references[current_reference];
-				Reset();
+
 				TargetChanged();
 			}
 		}else if(identifier_type == team){
-			ImGui_InputText("Team", character_team, 64);
+			if(ImGui_InputText("Team", new_character_team, 64)){
+				PreTargetChanged();
+				character_team = new_character_team;
+				TargetChanged();
+			}
 		}else if(identifier_type == name){
-			ImGui_InputText("Name", object_name, 64);
+			if(ImGui_InputText("Name", new_object_name, 64)){
+				PreTargetChanged();
+				object_name = new_object_name;
+				TargetChanged();
+			}
 		}
 	}
 
