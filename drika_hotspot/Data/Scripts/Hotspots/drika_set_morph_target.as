@@ -2,15 +2,18 @@ class DrikaSetMorphTarget : DrikaElement{
 	string morph_1;
 	string morph_2;
 	float weight;
+	float smoothing_duration;
 	bool two_way_morph;
 	array<string> available_morphs;
 	int morph_1_index;
 	int morph_2_index;
+	float timer = 0.0;
 
 	DrikaSetMorphTarget(JSONValue params = JSONValue()){
 		morph_1 = GetJSONString(params, "morph_1", "mouth_open");
 		morph_2 = GetJSONString(params, "morph_2", "mouth_open");
 		weight = GetJSONFloat(params, "weight", 1.0);
+		smoothing_duration = GetJSONFloat(params, "smoothing_duration", 0.0);
 		two_way_morph = GetJSONBool(params, "two_way_morph", false);
 		LoadIdentifier(params);
 		show_team_option = true;
@@ -27,6 +30,7 @@ class DrikaSetMorphTarget : DrikaElement{
 		data["morph_1"] = JSONValue(morph_1);
 		data["morph_2"] = JSONValue(morph_2);
 		data["weight"] = JSONValue(weight);
+		data["smoothing_duration"] = JSONValue(smoothing_duration);
 		data["two_way_morph"] = JSONValue(two_way_morph);
 		SaveIdentifier(data);
 		return data;
@@ -104,6 +108,7 @@ class DrikaSetMorphTarget : DrikaElement{
 
 			ImGui_PushItemWidth(ImGui_GetWindowContentRegionWidth() * 0.5 - extra_space);
 			if(ImGui_SliderFloat("###Weight", weight, -1.0f, 1.0f, "%.2f")){
+				SetMorphTarget(true);
 				SetMorphTarget(false);
 			}
 			ImGui_PopItemWidth();
@@ -130,15 +135,33 @@ class DrikaSetMorphTarget : DrikaElement{
 
 			ImGui_PushItemWidth(-1);
 			if(ImGui_SliderFloat("###Weight", weight, 0.0f, 1.0f, "%.2f")){
+				SetMorphTarget(true);
 				SetMorphTarget(false);
 			}
 			ImGui_PopItemWidth();
 		}
+		ImGui_SliderFloat("Smoothing Duration", smoothing_duration, 0.0f, 10.0f, "%.2f");
 	}
 
 	bool Trigger(){
-		triggered = true;
-		return SetMorphTarget(false);
+		if(UpdateSmoothing()){
+			SetMorphTarget(false);
+			triggered = false;
+			timer = 0.0;
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	bool UpdateSmoothing(){
+		if(timer >= smoothing_duration){
+			return true;
+		}else{
+			SetMorphTarget(false);
+			timer += time_step;
+		}
+		return false;
 	}
 
 	void DrawEditing(){
@@ -146,11 +169,19 @@ class DrikaSetMorphTarget : DrikaElement{
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
+		UpdateSmoothing();
 	}
 
 	bool SetMorphTarget(bool reset){
 		array<MovementObject@> targets = GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
+
+		if(reset){
+			triggered = false;
+			timer = 0.0;
+		}
+
+		float weight_weight = smoothing_duration == 0.0f?1.0:min(1.0, max(0.0, timer / smoothing_duration));
 		for(uint i = 0; i < targets.size(); i++){
 			if(reset){
 				targets[i].rigged_object().SetMorphTargetWeight(morph_1, 0.0f, 1.0);
@@ -158,14 +189,14 @@ class DrikaSetMorphTarget : DrikaElement{
 			}else{
 				if(two_way_morph){
 					if(weight < 0.0){
-						targets[i].rigged_object().SetMorphTargetWeight(morph_1, abs(weight), 1.0);
-						targets[i].rigged_object().SetMorphTargetWeight(morph_2, 0.0f, 1.0f);
+						targets[i].rigged_object().SetMorphTargetWeight(morph_1, abs(weight), weight_weight);
+						targets[i].rigged_object().SetMorphTargetWeight(morph_2, 0.0f, weight_weight);
 					}else{
-						targets[i].rigged_object().SetMorphTargetWeight(morph_1, 0.0f, 1.0f);
-						targets[i].rigged_object().SetMorphTargetWeight(morph_2, weight, 1.0);
+						targets[i].rigged_object().SetMorphTargetWeight(morph_1, 0.0f, weight_weight);
+						targets[i].rigged_object().SetMorphTargetWeight(morph_2, weight, weight_weight);
 					}
 				}else{
-					targets[i].rigged_object().SetMorphTargetWeight(morph_1, weight, 1.0);
+					targets[i].rigged_object().SetMorphTargetWeight(morph_1, weight, weight_weight);
 				}
 			}
 		}
