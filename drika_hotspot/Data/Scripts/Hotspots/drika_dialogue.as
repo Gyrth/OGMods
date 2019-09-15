@@ -73,11 +73,6 @@ class DrikaDialogue : DrikaElement{
 		dialogue_function = dialogue_functions(GetJSONInt(params, "dialogue_function", 0));
 		current_dialogue_function = dialogue_function;
 
-		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
-			connection_types = {_movement_object};
-			LoadIdentifier(params);
-		}
-
 		say_text = GetJSONString(params, "say_text", "Drika Hotspot Dialogue");
 		dialogue_color = GetJSONVec4(params, "dialogue_color", vec4(1));
 		voice = GetJSONInt(params, "voice", 0);
@@ -107,10 +102,17 @@ class DrikaDialogue : DrikaElement{
 		dialogue_text_color = GetJSONVec4(params, "dialogue_text_color", vec4(1));
 		dialogue_text_shadow = GetJSONBool(params, "dialogue_text_shadow", true);
 
-		UpdateActorName();
+		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
+			connection_types = {_movement_object};
+			LoadIdentifier(params);
+		}
 
 		drika_element_type = drika_dialogue;
 		has_settings = true;
+	}
+
+	void PostInit(){
+		UpdateActorName();
 	}
 
 	JSONValue GetSaveData(){
