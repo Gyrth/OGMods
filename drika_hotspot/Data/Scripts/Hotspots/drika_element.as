@@ -349,16 +349,19 @@ class DrikaElement{
 		if(params.isMember("identifier_type")){
 			if(params["identifier_type"].asInt() == id){
 				identifier_type = identifier_types(id);
-				object_id = params["identifier"].asInt();
+				new_object_id = params["identifier"].asInt();
+				object_id = new_object_id;
 			}else if(params["identifier_type"].asInt() == reference){
 				identifier_type = identifier_types(reference);
 				reference_string = params["identifier"].asString();
 			}else if(params["identifier_type"].asInt() == team){
 				identifier_type = identifier_types(team);
-				character_team = params["identifier"].asString();
+				new_character_team = params["identifier"].asString();
+				character_team = new_character_team;
 			}else if(params["identifier_type"].asInt() == name){
 				identifier_type = identifier_types(name);
-				object_name = params["identifier"].asString();
+				new_object_name = params["identifier"].asString();
+				object_name = new_object_name;
 			}
 		}else{
 			//By default the id is used as identifier with -1 as the target id.
