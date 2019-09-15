@@ -36,6 +36,17 @@ class ActorSettings{
 	}
 }
 
+class ReadFileProcess{
+	int hotspot_id = -1;
+	string data = "";
+	string file_path;
+
+	ReadFileProcess(int _hotspot_id, string _file_path){
+		hotspot_id = _hotspot_id;
+		file_path = _file_path;
+	}
+}
+
 array<string> dialogue_cache;
 IMDivider @dialogue_lines_holder_vert;
 IMDivider @dialogue_line_holder;
@@ -44,6 +55,7 @@ bool ui_created = false;
 string current_actor_name = "Default";
 array<ActorSettings@> actor_settings;
 ActorSettings@ current_actor_settings = ActorSettings();
+array<ReadFileProcess@> read_file_processes;
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
@@ -924,6 +936,16 @@ void ReceiveMessage(string msg){
 		bool dialogue_text_shadow = token_iter.GetToken(msg) == "true";
 
 		dialogue_font = FontSetup(dialogue_text_font, dialogue_text_size, dialogue_text_color, dialogue_text_shadow);
+	}else if(token == "drika_read_file"){
+		token_iter.FindNextToken(msg);
+		int hotspot_id = atoi(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		string file_path = token_iter.GetToken(msg);
+
+		Log(warning, "DHS read " + hotspot_id + " " + file_path);
+
+		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path));
 	}
 }
 
@@ -960,6 +982,7 @@ void ReadAnimationList(){
 void Update(){
 	imGUI.update();
 	SetCameraPosition();
+	UpdateReadFileProcesses();
 	if(fading){
 		blackout_amount = fade_timer / fade_duration;
 		if(fade_direction == 1.0){
@@ -985,6 +1008,27 @@ void Update(){
 			return;
 		}
 		fade_timer += time_step;
+	}
+}
+
+void UpdateReadFileProcesses(){
+	if(read_file_processes.size() > 0){
+		if(LoadFile(read_file_processes[0].file_path)){
+			while(true){
+				string line = GetFileLine();
+				if(line == "end"){
+					break;
+				}else{
+					read_file_processes[0].data += line + "\n";
+				}
+			}
+			Object@ hotspot_obj = ReadObjectFromID(read_file_processes[0].hotspot_id);
+			hotspot_obj.ReceiveScriptMessage("drika_read_file " + "\"" + read_file_processes[0].data + "\"");
+		}else{
+			Log(error, "Error loading file: " + read_file_processes[0].file_path);
+		}
+
+		read_file_processes.removeAt(0);
 	}
 }
 

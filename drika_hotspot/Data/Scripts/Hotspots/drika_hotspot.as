@@ -201,9 +201,7 @@ bool AcceptConnectionsTo(Object @other){
 }
 
 bool ConnectTo(Object @other){
-	if(!post_init_done){
-
-	}else{
+	if(post_init_done){
 		if(drika_elements.size() > 0){
 			bool return_value = GetCurrentElement().ConnectTo(other);
 			Save();
@@ -764,10 +762,14 @@ void ReceiveMessage(string msg){
 
 		ClearDialogueActors();
 		wait_for_fade = false;
+	}else if(token == "drika_read_file"){
+		string file_content = "";
+		while(token_iter.FindNextToken(msg)){
+			file_content += token_iter.GetToken(msg);
+		}
+		GetCurrentElement().ReceiveMessage(file_content);
 	}
 }
-
-
 
 void HandleEvent(string event, MovementObject @mo){
 	if(event == "enter" || event == "exit"){

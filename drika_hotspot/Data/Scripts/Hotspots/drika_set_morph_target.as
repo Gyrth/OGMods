@@ -1,12 +1,15 @@
 class DrikaSetMorphTarget : DrikaElement{
-	string label;
-	string label2;
+	string morph_1;
+	string morph_2;
 	float weight;
 	bool two_way_morph;
+	array<string> available_morphs;
+	int morph_1_index;
+	int morph_2_index;
 
 	DrikaSetMorphTarget(JSONValue params = JSONValue()){
-		label = GetJSONString(params, "label", "mouth_open");
-		label2 = GetJSONString(params, "label2", "mouth_open");
+		morph_1 = GetJSONString(params, "morph_1", "mouth_open");
+		morph_2 = GetJSONString(params, "morph_2", "mouth_open");
 		weight = GetJSONFloat(params, "weight", 1.0);
 		two_way_morph = GetJSONBool(params, "two_way_morph", false);
 		LoadIdentifier(params);
@@ -21,8 +24,8 @@ class DrikaSetMorphTarget : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["function_name"] = JSONValue("set_morph_target");
-		data["label"] = JSONValue(label);
-		data["label2"] = JSONValue(label2);
+		data["morph_1"] = JSONValue(morph_1);
+		data["morph_2"] = JSONValue(morph_2);
 		data["weight"] = JSONValue(weight);
 		data["two_way_morph"] = JSONValue(two_way_morph);
 		SaveIdentifier(data);
@@ -30,23 +33,48 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	void Delete(){
-		if(triggered){
-			SetMorphTarget(true);
-		}
+		SetMorphTarget(true);
 	}
 
 	string GetDisplayString(){
-		return "SetMorphTarget " + GetTargetDisplayText() + " " + label + (two_way_morph?"+" + label2:"") + " " + weight;
+		return "SetMorphTarget " + GetTargetDisplayText() + " " + morph_1 + (two_way_morph?"+" + morph_2:"") + " " + weight;
 	}
 
 	void StartSettings(){
+		if(available_morphs.size() == 0){
+			GetAvailableMorphs();
+		}
 		CheckReferenceAvailable();
 		SetMorphTarget(false);
 	}
 
-	void ApplySettings(){
-		//Reset the morph value set by the preview.
+	void StartEdit(){
+		SetMorphTarget(false);
+	}
+
+	void EditDone(){
 		SetMorphTarget(true);
+	}
+
+	void PreTargetChanged(){
+		SetMorphTarget(true);
+	}
+
+	void TargetChanged(){
+		SetMorphTarget(false);
+	}
+
+	void GetMorphIndex(){
+		morph_1_index = 0;
+		morph_2_index = 0;
+		for(uint i = 0; i < available_morphs.size(); i++){
+			if(available_morphs[i] == morph_1){
+				morph_1_index = i;
+			}
+			if(available_morphs[i] == morph_2){
+				morph_2_index = i;
+			}
+		}
 	}
 
 	void DrawSettings(){
@@ -61,23 +89,50 @@ class DrikaSetMorphTarget : DrikaElement{
 			SetMorphTarget(false);
 		}
 
-		if(ImGui_InputText("Label", label, 64)){
-			SetMorphTarget(true);
-			SetMorphTarget(false);
-		}
+		float extra_space = 8.0f;
 
 		if(two_way_morph){
-			if(ImGui_InputText("Label 2", label2, 64)){
+			ImGui_PushItemWidth(ImGui_GetWindowContentRegionWidth() * 0.25);
+			if(ImGui_Combo("###Morph 1", morph_1_index, available_morphs, available_morphs.size())){
+				morph_1 = available_morphs[morph_1_index];
 				SetMorphTarget(true);
 				SetMorphTarget(false);
 			}
-			if(ImGui_SliderFloat("Weight", weight, -2.0f, 2.0f, "%.2f")){
+			ImGui_PopItemWidth();
+
+			ImGui_SameLine();
+
+			ImGui_PushItemWidth(ImGui_GetWindowContentRegionWidth() * 0.5 - extra_space);
+			if(ImGui_SliderFloat("###Weight", weight, -1.0f, 1.0f, "%.2f")){
 				SetMorphTarget(false);
 			}
+			ImGui_PopItemWidth();
+
+			ImGui_SameLine();
+
+			ImGui_PushItemWidth(ImGui_GetWindowContentRegionWidth() * 0.25 - extra_space);
+			if(ImGui_Combo("###Morph 2", morph_2_index, available_morphs, available_morphs.size())){
+				morph_2 = available_morphs[morph_2_index];
+				SetMorphTarget(true);
+				SetMorphTarget(false);
+			}
+			ImGui_PopItemWidth();
 		}else{
-			if(ImGui_SliderFloat("Weight", weight, 0.0f, 2.0f, "%.2f")){
+			ImGui_PushItemWidth(ImGui_GetWindowContentRegionWidth() * 0.25 - extra_space);
+			if(ImGui_Combo("###Morph 1", morph_1_index, available_morphs, available_morphs.size())){
+				morph_1 = available_morphs[morph_1_index];
+				SetMorphTarget(true);
 				SetMorphTarget(false);
 			}
+			ImGui_PopItemWidth();
+
+			ImGui_SameLine();
+
+			ImGui_PushItemWidth(-1);
+			if(ImGui_SliderFloat("###Weight", weight, 0.0f, 1.0f, "%.2f")){
+				SetMorphTarget(false);
+			}
+			ImGui_PopItemWidth();
 		}
 	}
 
@@ -98,23 +153,64 @@ class DrikaSetMorphTarget : DrikaElement{
 		if(targets.size() == 0){return false;}
 		for(uint i = 0; i < targets.size(); i++){
 			if(reset){
-				targets[i].rigged_object().SetMorphTargetWeight(label, 0.0f, 1.0);
-				targets[i].rigged_object().SetMorphTargetWeight(label2, 0.0f, 1.0);
+				targets[i].rigged_object().SetMorphTargetWeight(morph_1, 0.0f, 1.0);
+				targets[i].rigged_object().SetMorphTargetWeight(morph_2, 0.0f, 1.0);
 			}else{
 				if(two_way_morph){
 					if(weight < 0.0){
-						targets[i].rigged_object().SetMorphTargetWeight(label, abs(weight), 1.0);
-						targets[i].rigged_object().SetMorphTargetWeight(label2, 0.0f, 1.0f);
+						targets[i].rigged_object().SetMorphTargetWeight(morph_1, abs(weight), 1.0);
+						targets[i].rigged_object().SetMorphTargetWeight(morph_2, 0.0f, 1.0f);
 					}else{
-						targets[i].rigged_object().SetMorphTargetWeight(label, 0.0f, 0.0f);
-						targets[i].rigged_object().SetMorphTargetWeight(label2, weight, 1.0);
+						targets[i].rigged_object().SetMorphTargetWeight(morph_1, 0.0f, 1.0f);
+						targets[i].rigged_object().SetMorphTargetWeight(morph_2, weight, 1.0);
 					}
 				}else{
-					targets[i].rigged_object().SetMorphTargetWeight(label, weight, 1.0);
+					targets[i].rigged_object().SetMorphTargetWeight(morph_1, weight, 1.0);
 				}
 			}
 		}
 		return true;
+	}
+
+	void ReceiveMessage(string message){
+		array<string> file_lines = message.split("\n");
+		bool inside_morph = false;
+
+		for(uint i = 0; i < file_lines.size(); i++){
+			string line = file_lines[i];
+			//Remove any tabs.
+			line = join(line.split("\t"), "");
+			if(line.findFirst("<morphs>") != -1){
+				//Find the content within the <morphs> tags.
+				inside_morph = true;
+			}else if(line.findFirst("</morphs>") != -1){
+				//Found the end of the morphs tag.
+				break;
+			}else if(inside_morph){
+				//This line has a morph in it because it starts with a <.
+				int tag_start = line.findFirst("<") + 1;
+				if(tag_start != 0){
+					int tag_end = line.findFirst(" ", tag_start);
+					if(tag_end != -1){
+						string new_morph_name = line.substr(tag_start, tag_end - tag_start);
+						//Check if the morph is already added.
+						if(available_morphs.find(new_morph_name) == -1){
+							available_morphs.insertLast(new_morph_name);
+						}
+					}
+				}
+			}
+		}
+		GetMorphIndex();
+	}
+
+	void GetAvailableMorphs(){
+		available_morphs.resize(0);
+
+		array<MovementObject@> targets = GetTargetMovementObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			level.SendMessage("drika_read_file " + hotspot.GetID() + " " + targets[i].char_path);
+		}
 	}
 
 	void Reset(){

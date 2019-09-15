@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="9.72125" t1="2.12178" t2="-15.1728" s0="1" s1="1" s2="1" q0="0.03472" q1="-0.964691" q2="0.200971" q3="0.166661" euler_x="-2.73081" euler_y="-0.342144" euler_z="-3.14159" id="1">
+    <CameraObject t0="21.4782" t1="-0.207995" t2="12.3013" s0="1" s1="1" s2="1" q0="0.117728" q1="-0.571807" q2="0.0833548" q3="0.807607" euler_x="0.289509" euler_y="-1.23219" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -299,7 +299,7 @@
     <Hotspot t0="13.4951" t1="-0.475087" t2="9.893" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="45" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;entered_character&quot;,&quot;target_character_type&quot;:2},{&quot;billboard_type&quot;:1,&quot;function_name&quot;:&quot;billboard&quot;,&quot;image_color&quot;:[0.61176472902297974,0,0.57647061347961426,0.364705890417099],&quot;image_path&quot;:&quot;Data/Textures/ui/ogicon.png&quot;,&quot;image_size&quot;:2.1699998378753662,&quot;placeholder_id&quot;:150},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;entered_character&quot;,&quot;target_character_type&quot;:0},{&quot;dialogue_function&quot;:2,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_position&quot;:[19.413345336914062,-1.6945507526397705,11.135418891906738],&quot;target_actor_rotation&quot;:0},{&quot;dialogue_function&quot;:3,&quot;function_name&quot;:&quot;dialogue&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_animation&quot;:&quot;Data/Animations/r_grabneck.anm&quot;},{&quot;function_name&quot;:&quot;set_morph_target&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;morph_1&quot;:&quot;fist_l&quot;,&quot;morph_2&quot;:&quot;fist_r&quot;,&quot;two_way_morph&quot;:true,&quot;weight&quot;:-1},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;set_morph_target&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;morph_1&quot;:&quot;fist_l&quot;,&quot;morph_2&quot;:&quot;fist_r&quot;,&quot;two_way_morph&quot;:true,&quot;weight&quot;:1},{&quot;duration&quot;:1000,&quot;function_name&quot;:&quot;wait&quot;},{&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:3}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
