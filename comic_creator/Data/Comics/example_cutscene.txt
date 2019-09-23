@@ -1,0 +1,26 @@
+new_page
+add_image Textures/example_comic_background.png -100 -100 2700 1555
+add_image Textures/3.png -620 -220 3180 1815
+move_in 12000 400 0
+add_image Textures/2.png -620 -240 3240 1795
+move_in 12000 500 0
+add_image Textures/1.png -520 -280 3080 1795
+move_in 12000 600 0
+wait_click
+add_image Textures/ui/arena_mode/character_image/contender.png 1540 220 1020 1695
+fade_in 1000
+move_in 2000 300 0
+add_image Textures/example_comic_background.png 860 260 800 155
+fade_in 1000
+set_font edosz 100 255 254 254 true
+add_text 900 280 Hey you there! STOP!
+crawl_in 1000
+wait_click
+add_image Textures/ui/arena_mode/character_image/fighter.png 1120 120 -1120 1915
+move_in 2000 -300 0
+fade_in 1000
+set_font Underdog-Regular 70 255 254 254 true
+add_image Textures/example_comic_background.png 840 560 900 215
+fade_in 1000
+add_text 860 600 Get out of my way\nor I split your skull in half.
+crawl_in 2000
