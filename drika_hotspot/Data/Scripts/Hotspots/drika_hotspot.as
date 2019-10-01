@@ -516,7 +516,6 @@ void DrawEditor(){
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
 		ImGui_SetNextWindowPos(vec2(100.0f, 100.0f), ImGuiSetCond_FirstUseEver);
 		ImGui_Begin("Drika Hotspot " + (show_name?" - " + display_name:"" + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, ImGuiWindowFlags_MenuBar);
-		ImGui_PopStyleVar();
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
 		ImGui_SetNextWindowSize(vec2(500.0f, 450.0f), ImGuiSetCond_FirstUseEver);
@@ -667,6 +666,7 @@ void DrawEditor(){
 			line_counter += 1;
 		}
 		ImGui_End();
+		ImGui_PopStyleVar();
 		if(drika_elements.size() > 0){
 			GetCurrentElement().DrawEditing();
 		}
