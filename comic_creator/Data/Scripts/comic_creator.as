@@ -407,13 +407,16 @@ void Update(int is_paused){
 		/* Log(info, "message " + message.name); */
 		if( message.name == "Close" ) {
 			imGUI.getMain().clear();
-		}else if( message.name == "grabber_activate" ) {
+		}else if(message.name == "grabber_activate"){
 			if(!dragging){
 				@current_grabber = GetCurrentElement().GetGrabber(message.getString(0));
 			}
-		}else if( message.name == "grabber_deactivate" ) {
+		}else if(message.name == "grabber_deactivate"){
+			if(!dragging){
+				@current_grabber = null;
+			}
+		}else if(message.name == "grabber_move_check"){
 
-		}else if( message.name == "grabber_move_check" ) {
 		}
 	}
 
