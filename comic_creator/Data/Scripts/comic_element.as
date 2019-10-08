@@ -12,6 +12,41 @@ enum comic_element_types { 	none,
 							comic_music,
 							comic_song};
 
+array<string> comic_element_names = {	"None",
+										"Grabber",
+										"Image",
+										"Page",
+										"Fade In",
+										"Move In",
+										"Font",
+										"Sound",
+										"Text",
+										"Wait For Click",
+										"Crawl In",
+										"Music",
+										"Song"
+									};
+
+array<string> sorted_element_names;
+
+array<vec4> display_colors =	{
+									vec4(255),
+	                                vec4(0, 0, 0, 255),
+	                                vec4(110, 94, 180, 255),
+									vec4(123, 92, 133, 255),
+									vec4(88, 122, 147, 255),
+									vec4(152, 113, 80, 255),
+									vec4(144, 143, 64, 255),
+									vec4(164, 43, 43, 255),
+									vec4(85, 131, 102, 255),
+									vec4(123, 130, 138, 255),
+									vec4(78, 136, 124, 255),
+									vec4(164, 43, 43, 255),
+									vec4(164, 43, 43, 255)
+								};
+
+vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
+
 class ComicElement{
 	comic_element_types comic_element_type = none;
 	bool edit_mode = false;
@@ -30,6 +65,7 @@ class ComicElement{
 	void ShowPage(){}
 	void HidePage(){}
 	void Update(){}
+	void StartEdit(){}
 	void SetEdit(bool editing){}
 	void SetProgress(int _progress){}
 	void AddSettings(){}
@@ -44,4 +80,8 @@ class ComicElement{
 	}
 	void SetTarget(ComicElement@ element){}
 	void ClearTarget(){}
+	JSONValue GetSaveData(){
+		return JSONValue();
+	}
+	void PostInit(){}
 }

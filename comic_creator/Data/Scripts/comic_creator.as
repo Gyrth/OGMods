@@ -16,10 +16,9 @@
 string level_name = "";
 IMGUI@ imGUI;
 
-int current_line = 0;
-int element_counter = 0;
-
 TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/whaleman.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Copy.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+TextureAssetRef delete_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Delete.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
 string grid_background = "Textures/grid.png";
 string black_background = "Textures/black.tga";
@@ -51,21 +50,62 @@ bool at_correct_line = false;
 int snap_scale = 20;
 int target_line = 0;
 
+int current_line = 0;
+int element_counter = 0;
+bool post_init_done = false;
+
 IMContainer@ image_container;
 IMContainer@ text_container;
 IMContainer@ grabber_container;
 
 // Coloring options
-vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
 vec4 background_color(0.25, 0.25, 0.25, 0.98);
 vec4 titlebar_color(0.15, 0.15, 0.15, 0.98);
 vec4 item_hovered(0.2, 0.2, 0.2, 0.98);
 vec4 item_clicked(0.1, 0.1, 0.1, 0.98);
 vec4 text_color(0.7, 0.7, 0.7, 1.0);
 
+array<string> tween_types = {
+								"linearTween",
+							    "inQuadTween",
+							    "outQuadTween",
+							    "inOutQuadTween",
+							    "outInQuadTween",
+							    "inCubicTween",
+							    "outCubicTween",
+							    "inOutCubicTween",
+							    "outInCubicTween",
+							    "inQuartTween",
+							    "outQuartTween",
+							    "inOutQuartTween",
+							    "outInQuartTween",
+							    "inQuintTween",
+							    "outQuintTween",
+							    "inOutQuintTween",
+							    "outInQuintTween",
+							    "inSineTween",
+							    "outSineTween",
+							    "inOutSineTween",
+							    "outInSineTween",
+							    "inExpoTween",
+							    "outExpoTween",
+							    "inOutExpoTween",
+							    "outInExpoTween",
+							    "inCircTween",
+							    "outCircTween",
+							    "inOutCircTween",
+							    "outInCircTween",
+							    "outBounceTween",
+							    "inBounceTween",
+							    "inOutBounceTween",
+    							"outInBounceTween"
+							};
+
 // This init is used when loaded from the main menu.
 void Initialize(){
 	environment_state = in_menu;
+	ConvertDisplayColors();
+	SortFunctionsAlphabetical();
 	PlaySong("menu-lugaru");
 	CreateComicUI();
 
@@ -89,6 +129,26 @@ void Init(string level_name){
 	environment_state = in_game;
 	editor_open = false;
 	CreateComicUI();
+}
+
+void ConvertDisplayColors(){
+	for(uint i = 0; i < display_colors.size(); i++){
+		display_colors[i].x /= 255;
+		display_colors[i].y /= 255;
+		display_colors[i].z /= 255;
+	}
+}
+
+void SortFunctionsAlphabetical(){
+	//Remove empty function names.
+	for(uint i = 0; i < comic_element_names.size(); i++){
+		if(comic_element_names[i] == ""){
+			comic_element_names.removeAt(i);
+			i--;
+		}
+	}
+	sorted_element_names = comic_element_names;
+	sorted_element_names.sortAsc();
 }
 
 void Menu(){
@@ -148,46 +208,49 @@ void LoadComic(string path){
 }
 
 void InterpComic(){
-	array<string> lines = comic_content.split("\n");
+	JSON data;
 
-	for(uint index = 0; index < lines.size(); index++){
-		array<string> line_elements = lines[index].split(" ");
-
-		if(line_elements[0] == "add_image"){
-			vec2 position = vec2(atoi(line_elements[2]), atoi(line_elements[3]));
-			vec2 size = vec2(atoi(line_elements[4]), atoi(line_elements[5]));
-			comic_elements.insertLast(ComicImage(line_elements[1], position, size, index));
-		}else if(line_elements[0] == "fade_in"){
-			comic_elements.insertLast(ComicFadeIn(atoi(line_elements[1]), index));
-		}else if(line_elements[0] == "move_in"){
-			comic_elements.insertLast(ComicMoveIn(atoi(line_elements[1]), vec2(atoi(line_elements[2]), atoi(line_elements[3])), index));
-		}else if(line_elements[0] == "new_page"){
-			comic_elements.insertLast(ComicPage(index));
-		}else if(line_elements[0] == "set_font"){
-			comic_elements.insertLast(ComicFont(line_elements[1], atoi(line_elements[2]), vec3(atoi(line_elements[3]), atoi(line_elements[4]), atoi(line_elements[5])), line_elements[6] == "true", index));
-		}else if(line_elements[0] == "add_text"){
-			string complete_text = "";
-			for(uint j = 3; j < line_elements.size(); j++){
-				complete_text += line_elements[j] + (j==line_elements.size()-1? "" : " ");
-			}
-			comic_elements.insertLast(ComicText(complete_text, vec2(atoi(line_elements[1]), atoi(line_elements[2])), index));
-		}else if(line_elements[0] == "wait_click"){
-			comic_elements.insertLast(ComicWaitClick(index));
-		}else if(line_elements[0] == "play_sound"){
-			comic_elements.insertLast(ComicSound(line_elements[1], index));
-		}else if(line_elements[0] == "crawl_in"){
-			comic_elements.insertLast(ComicCrawlIn(atoi(line_elements[1]), index));
-		}else if(line_elements[0] == "add_music"){
-			comic_elements.insertLast(ComicMusic(line_elements[1], index));
-		}else if(line_elements[0] == "play_song"){
-			comic_elements.insertLast(ComicSong(line_elements[1], index));
-		}else{
-			//Either an empty line or an unknown command is in the comic.
-			continue;
+	if(!data.parseString(comic_content)){
+		Log(warning, "Unable to parse the JSON in the Script Data!");
+	}else{
+		for(uint i = 0; i < data.getRoot()["functions"].size(); ++i ){
+			comic_elements.insertLast(InterpElement(data.getRoot()["functions"][i]));
+			comic_indexes.insertLast(comic_elements.size() - 1);
 		}
-		comic_indexes.insertLast(index);
 	}
+
+	Log(info, "Interp of comic script done.");
 	ReorderElements();
+}
+
+ComicElement@ InterpElement(JSONValue &in function_json){
+	if(function_json["function_name"].asString() == "add_image"){
+		return ComicImage(function_json);
+	}else if(function_json["function_name"].asString() == "new_page"){
+		return ComicPage(function_json);
+	}else if(function_json["function_name"].asString() == "set_font"){
+		return ComicFont(function_json);
+	}else if(function_json["function_name"].asString() == "add_text"){
+		return ComicText(function_json);
+	}else if(function_json["function_name"].asString() == "wait_click"){
+		return ComicWaitClick(function_json);
+	}else if(function_json["function_name"].asString() == "play_sound"){
+		return ComicSound(function_json);
+	}else if(function_json["function_name"].asString() == "add_music"){
+		return ComicMusic(function_json);
+	}else if(function_json["function_name"].asString() == "play_song"){
+		return ComicSong(function_json);
+	}else if(function_json["function_name"].asString() == "crawl_in"){
+		return ComicCrawlIn(function_json);
+	}else if(function_json["function_name"].asString() == "fade_in"){
+		return ComicFadeIn(function_json);
+	}else if(function_json["function_name"].asString() == "move_in"){
+		return ComicMoveIn(function_json);
+	}else{
+		//Either an empty line or an unknown command is in the comic.
+		Log(warning, "Unknown command found: " + function_json["function_name"].asString());
+		return ComicElement();
+	}
 }
 
 void ReorderElements(){
@@ -315,7 +378,19 @@ void Update(){
 	Update(0);
 }
 
+void PostInit(){
+	post_init_done = true;
+	for(uint i = 0; i < comic_elements.size(); i++){
+		comic_elements[i].PostInit();
+	}
+}
+
 void Update(int is_paused){
+	if(!post_init_done){
+		PostInit();
+		return;
+	}
+
 	if(GetInputPressed(0, "f1") && environment_state == in_menu){
 		editor_open = !editor_open;
 		if(!editor_open){
@@ -330,7 +405,8 @@ void Update(int is_paused){
 		CloseComic();
 		SetPaused(false);
 	}
-	while( imGUI.getMessageQueueSize() > 0 ) {
+
+	while(imGUI.getMessageQueueSize() > 0){
 		IMMessage@ message = imGUI.getNextMessage();
 		/* Log(info, "message " + message.name); */
 		if( message.name == "Close" ) {
@@ -344,6 +420,7 @@ void Update(int is_paused){
 		}else if( message.name == "grabber_move_check" ) {
 		}
 	}
+
 	UpdateGrabber();
 	UpdateProgress();
 	imGUI.update();
@@ -563,6 +640,7 @@ void DrawGUI(){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBg, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
@@ -574,6 +652,9 @@ void DrawGUI(){
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
 		ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
+		ImGui_PushStyleColor(ImGuiCol_Button, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_ButtonHovered, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_ButtonActive, item_clicked);
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
 
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
@@ -582,30 +663,11 @@ void DrawGUI(){
 		ImGui_PopStyleVar();
 
 		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Delete))){
-			if(comic_elements.size() > 0){
-				GetCurrentElement().Delete();
-				int current_index = comic_indexes[current_line];
-				comic_elements.removeAt(current_index);
-				comic_indexes.removeAt(current_line);
-				for(uint i = 0; i < comic_indexes.size(); i++){
-					if(comic_indexes[i] > current_index){
-						comic_indexes[i] -= 1;
-					}
-				}
-				// If the last element is deleted then the target needs to be the previous element.
-				if(current_line > 0 && current_line == int(comic_elements.size())){
-					target_line -= 1;
-					display_index = comic_indexes[current_line - 1];
-				}else{
-					display_index = comic_indexes[current_line];
-				}
-				unsaved = true;
-				ReorderElements();
-			}
+			DeleteCurrentElement();
 		}
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
-		ImGui_SetNextWindowSize(vec2(300.0f, 150.0f), ImGuiSetCond_FirstUseEver);
+		ImGui_SetNextWindowSize(vec2(500.0f, 450.0f), ImGuiSetCond_FirstUseEver);
         if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
 			ImGui_BeginChild("Element Settings", vec2(-1, ImGui_GetWindowHeight() - 60));
 			GetCurrentElement().AddSettings();
@@ -623,14 +685,14 @@ void DrawGUI(){
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(380, 75));
 		if(ImGui_BeginPopupModal("Confirm", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize)){
-			ImGui_Text("You unsaved changed, are you sure you want to quit?");
+			ImGui_Text("You unsaved changes. Are you sure you want to quit?");
 			ImGui_Separator();
 			ImGui_BeginChild("ConfirmButtons");
 			ImGui_Dummy(vec2(130.0, 1.0));
 			ImGui_SameLine();
 			if(ImGui_Button("Yes")){
 				unsaved = false;
-				imGUI.receiveMessage(IMMessage("Back"));
+				this_ui.SendCallback("back");
 			}
 			ImGui_SameLine(0.0, 25.0);
 			if(ImGui_Button("No")){
@@ -676,52 +738,21 @@ void DrawGUI(){
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Add")){
-				if(ImGui_MenuItem("New Page")){
-					ComicPage new_page(current_line);
-					InsertElement(@new_page);
-				}
-				if(ImGui_MenuItem("Image")){
-					ComicImage new_image(default_image, vec2(500, 500), vec2(720, 255), current_line);
-					InsertElement(@new_image);
-				}
-				if(ImGui_MenuItem("Text")){
-					ComicText new_text("Example text", vec2(200, 200), current_line);
-					InsertElement(@new_text);
-				}
-				if(ImGui_MenuItem("Sound")){
-					ComicSound new_sound("Data/Sounds/FistImpact_1.wav", current_line);
-					InsertElement(@new_sound);
-				}
-				if(ImGui_MenuItem("Crawl In")){
-					ComicCrawlIn new_crawl_in(1000, current_line);
-					InsertElement(@new_crawl_in);
-				}
-				if(ImGui_MenuItem("Fade In")){
-					ComicFadeIn new_fade_in(1000, current_line);
-					InsertElement(@new_fade_in);
-				}
-				if(ImGui_MenuItem("Move In")){
-					ComicMoveIn new_move_in(1000, vec2(0, 200), current_line);
-					InsertElement(@new_move_in);
-				}
-				if(ImGui_MenuItem("Font")){
-					ComicFont new_font("Underdog-Regular", 35, vec3(1.0), false, current_line);
-					InsertElement(@new_font);
-				}
-				if(ImGui_MenuItem("Wait Click")){
-					ComicWaitClick new_wait_click(current_line);
-					InsertElement(@new_wait_click);
-				}
-				if(ImGui_MenuItem("Music")){
-					ComicMusic new_music("Data/Music/lugaru.xml", current_line);
-					InsertElement(@new_music);
-				}
-				if(ImGui_MenuItem("Song")){
-					ComicSong new_song("lugaru_menu", current_line);
-					InsertElement(@new_song);
-				}
+				AddFunctionMenuItems();
 				ImGui_EndMenu();
 			}
+
+			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
+				DeleteCurrentElement();
+			}
+
+			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
+				if(comic_elements.size() > 0){
+					ComicElement@ new_element = InterpElement(GetCurrentElement().GetSaveData());
+					InsertElement(new_element);
+				}
+			}
+
 			ImGui_EndMenuBar();
 		}
 
@@ -785,30 +816,105 @@ void DrawGUI(){
 			line_counter += 1;
 		}
 		ImGui_End();
-		ImGui_PopStyleColor(14);
+		ImGui_PopStyleColor(18);
 	}
 	if(reorded && !ImGui_IsMouseDragging(0)){
 		reorded = false;
 		ReorderElements();
 	}
 	if(at_correct_line){
-		imGUI.render();
+	}
+	imGUI.render();
+}
+
+void DeleteCurrentElement(){
+	if(comic_elements.size() > 0){
+		GetCurrentElement().Delete();
+		int current_index = comic_indexes[current_line];
+
+		comic_elements.removeAt(current_index);
+		comic_indexes.removeAt(current_line);
+
+		for(uint i = 0; i < comic_indexes.size(); i++){
+			if(comic_indexes[i] > current_index){
+				comic_indexes[i] -= 1;
+			}
+		}
+		// If the last element is deleted then the target needs to be the previous element.
+		if(current_line > 0 && current_line == int(comic_elements.size())){
+			display_index = comic_indexes[current_line - 1];
+			current_line -= 1;
+		}else if(comic_elements.size() > 0){
+			display_index = comic_indexes[current_line];
+		}
+		unsaved = true;
+		ReorderElements();
 	}
 }
 
+void AddFunctionMenuItems(){
+	for(uint i = 0; i < sorted_element_names.size(); i++){
+		comic_element_types current_element_type = comic_element_types(comic_element_names.find(sorted_element_names[i]));
+		if(current_element_type == none){
+			continue;
+		}
+		ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
+		if(ImGui_MenuItem(sorted_element_names[i])){
+			InsertElement(@CreateNewFunction(current_element_type));
+		}
+		ImGui_PopStyleColor();
+	}
+}
+
+ComicElement@ CreateNewFunction(comic_element_types element_type) {
+	switch(element_type){
+		case comic_crawl_in:
+			return ComicCrawlIn();
+		case comic_fade_in:
+			return ComicFadeIn();
+		case comic_font:
+			return ComicFont();
+		case comic_image:
+			return ComicImage();
+		case comic_move_in:
+			return ComicMoveIn();
+		case comic_music:
+			return ComicMusic();
+		case comic_page:
+			return ComicPage();
+		case comic_song:
+			return ComicSong();
+		case comic_text:
+			return ComicText();
+		case comic_wait_click:
+			return ComicWaitClick();
+	}
+	return ComicElement();
+}
+
 void InsertElement(ComicElement@ new_element){
+	if(comic_elements.size() > 0){
+		GetCurrentElement().SetVisible(false);
+		GetCurrentElement().EditDone();
+	}
+	new_element.PostInit();
 	comic_elements.insertLast(new_element);
+	//There are no functions in the list yet.
 	if(comic_indexes.size() < 1){
-		comic_indexes.insertAt(current_line, comic_elements.size() - 1);
-		target_line = 0;
-		display_index = comic_indexes[current_line];
+		comic_indexes.insertLast(comic_elements.size() - 1);
+		display_index = comic_indexes[0];
+	//Add a the new function to the next line and make that line the current one.
 	}else{
 		comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
-		target_line += 1;
 		display_index = comic_indexes[current_line + 1];
+		current_line += 1;
+	}
+	ReorderElements();
+	if(post_init_done && comic_elements.size() > 0){
+		GetCurrentElement().StartEdit();
+		GetCurrentElement().SetVisible(true);
 	}
 	unsaved = true;
-	ReorderElements();
 }
 
 void SaveComicToFile(){
@@ -832,4 +938,108 @@ void SaveComic(string path = ""){
 		}
 	}
 	WriteFileKeepBackup(FindFilePath(comic_path));
+}
+
+int GetJSONInt(JSONValue data, string var_name, int default_value){
+	if(data.isMember(var_name) && data[var_name].isInt()){
+		return data[var_name].asInt();
+	}else{
+		return default_value;
+	}
+}
+
+string GetJSONString(JSONValue data, string var_name, string default_value){
+	if(data.isMember(var_name) && data[var_name].isString()){
+		return data[var_name].asString();
+	}else{
+		return default_value;
+	}
+}
+
+vec2 GetJSONVec2(JSONValue data, string var_name, vec2 default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		return vec2(data[var_name][0].asFloat(), data[var_name][1].asFloat());
+	}else{
+		return default_value;
+	}
+}
+
+vec3 GetJSONVec3(JSONValue data, string var_name, vec3 default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		return vec3(data[var_name][0].asFloat(), data[var_name][1].asFloat(), data[var_name][2].asFloat());
+	}else{
+		return default_value;
+	}
+}
+
+vec4 GetJSONVec4(JSONValue data, string var_name, vec4 default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		return vec4(data[var_name][0].asFloat(), data[var_name][1].asFloat(), data[var_name][2].asFloat(), data[var_name][3].asFloat());
+	}else{
+		return default_value;
+	}
+}
+
+bool GetJSONBool(JSONValue data, string var_name, bool default_value){
+	if(data.isMember(var_name) && data[var_name].isBool()){
+		return data[var_name].asBool();
+	}else{
+		return default_value;
+	}
+}
+
+float GetJSONFloat(JSONValue data, string var_name, float default_value){
+	if(data.isMember(var_name) && data[var_name].isNumeric()){
+		return data[var_name].asFloat();
+	}else{
+		return default_value;
+	}
+}
+
+array<float> GetJSONFloatArray(JSONValue data, string var_name, array<float> default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		array<float> values;
+		for(uint i = 0; i < data[var_name].size(); i++){
+			values.insertLast(data[var_name][i].asFloat());
+		}
+		return values;
+	}else{
+		return default_value;
+	}
+}
+
+array<int> GetJSONIntArray(JSONValue data, string var_name, array<int> default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		array<int> values;
+		for(uint i = 0; i < data[var_name].size(); i++){
+			values.insertLast(data[var_name][i].asInt());
+		}
+		return values;
+	}else{
+		return default_value;
+	}
+}
+
+array<string> GetJSONStringArray(JSONValue data, string var_name, array<string> default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		array<string> values;
+		for(uint i = 0; i < data[var_name].size(); i++){
+			values.insertLast(data[var_name][i].asString());
+		}
+		return values;
+	}else{
+		return default_value;
+	}
+}
+
+array<JSONValue> GetJSONValueArray(JSONValue data, string var_name, array<JSONValue> default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		array<JSONValue> values;
+		for(uint i = 0; i < data[var_name].size(); i++){
+			values.insertLast(data[var_name][i]);
+		}
+		return values;
+	}else{
+		return default_value;
+	}
 }

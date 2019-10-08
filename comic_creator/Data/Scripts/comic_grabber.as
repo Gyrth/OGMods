@@ -6,6 +6,7 @@ class ComicGrabber : ComicElement{
 	int direction_y;
 	grabber_types grabber_type;
 	string grabber_name;
+
 	ComicGrabber(string name, int _direction_x, int _direction_y, grabber_types _grabber_type, int parent_index){
 		comic_element_type = comic_grabber;
 		grabber_type = _grabber_type;
@@ -29,15 +30,14 @@ class ComicGrabber : ComicElement{
 		grabber_image.setSize(vec2(grabber_size));
 		grabber_container.addFloatingElement(grabber_image, grabber_name, vec2(grabber_size / 2.0), parent_index + 1);
 	}
+
 	void Delete(){
 		grabber_container.removeElement(grabber_name);
 	}
+
 	void SetVisible(bool _visible){
 		visible = _visible;
 		image.setVisible(visible);
 		image.setPauseBehaviors(!visible);
-	}
-	string GetDisplayString(){
-		return "Grabber";
 	}
 }

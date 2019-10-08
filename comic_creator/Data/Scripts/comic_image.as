@@ -6,23 +6,27 @@ class ComicImage : ComicElement{
 	ComicGrabber@ grabber_bottom_right;
 	ComicGrabber@ grabber_center;
 	string path;
-	vec2 location;
+	vec2 position;
 	vec2 size;
 	string image_name;
 
-	ComicImage(string _path, vec2 _location, vec2 _size, int _index){
+	ComicImage(JSONValue params = JSONValue()){
 		comic_element_type = comic_image;
-		has_settings = true;
 		display_color = HexColor("#6e5eb4");
 
-		path = _path;
-		index = _index;
-		location = _location;
-		size = _size;
+		path = GetJSONString(params, "path", "Textures/ui/menus/credits/overgrowth.png");
+		position = GetJSONVec2(params, "position", vec2(500, 500));
+		size = GetJSONVec2(params, "size", vec2(720, 255));
 
+		has_settings = true;
+	}
+
+	void PostInit(){
 		IMImage new_image(path);
 		@image = new_image;
 		new_image.setBorderColor(edit_outline_color);
+		new_image.setSize(size);
+		image_name = "image" + index;
 
 		@grabber_top_left = ComicGrabber("top_left", -1, -1, scaler, index);
 		@grabber_top_right = ComicGrabber("top_right", 1, -1, scaler, index);
@@ -30,13 +34,25 @@ class ComicImage : ComicElement{
 		@grabber_bottom_right = ComicGrabber("bottom_right", 1, 1, scaler, index);
 		@grabber_center = ComicGrabber("center", 1, 1, mover, index);
 
-		new_image.setSize(size);
-
-		image_name = "image" + element_counter;
-		element_counter += 1;
-
-		image_container.addFloatingElement(new_image, image_name, location, index);
+		image_container.addFloatingElement(new_image, image_name, position, index);
 		UpdateContent();
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("add_image");
+		data["path"] = JSONValue(path);
+		data["position"] = JSONValue(JSONarrayValue);
+		data["position"].append(position.x);
+		data["position"].append(position.y);
+		data["size"] = JSONValue(JSONarrayValue);
+		data["size"].append(size.x);
+		data["size"].append(size.y);
+		return data;
+	}
+
+	string GetDisplayString(){
+		return "AddImage " + path;
 	}
 
 	void Delete(){
@@ -60,23 +76,34 @@ class ComicImage : ComicElement{
 	}
 
 	void UpdateContent(){
-		image.showBorder(edit_mode);
-		grabber_top_left.SetVisible(edit_mode);
-		grabber_top_right.SetVisible(edit_mode);
-		grabber_bottom_left.SetVisible(edit_mode);
-		grabber_bottom_right.SetVisible(edit_mode);
-		grabber_center.SetVisible(edit_mode);
-
 		image.setVisible(visible);
 
-		vec2 location = image_container.getElementPosition(image_name);
+		vec2 position = image_container.getElementPosition(image_name);
 		vec2 size = image.getSize();
 
-		grabber_container.moveElement(grabber_top_left.grabber_name, location - vec2(grabber_size / 2.0));
-		grabber_container.moveElement(grabber_top_right.grabber_name, location + vec2(size.x, 0) - vec2(grabber_size / 2.0));
-		grabber_container.moveElement(grabber_bottom_left.grabber_name, location + vec2(0, size.y) - vec2(grabber_size / 2.0));
-		grabber_container.moveElement(grabber_bottom_right.grabber_name, location + vec2(size.x, size.y) - vec2(grabber_size / 2.0));
-		grabber_container.moveElement(grabber_center.grabber_name, location + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_top_left.grabber_name, position - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_top_right.grabber_name, position + vec2(size.x, 0) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_bottom_left.grabber_name, position + vec2(0, size.y) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_bottom_right.grabber_name, position + vec2(size.x, size.y) - vec2(grabber_size / 2.0));
+		grabber_container.moveElement(grabber_center.grabber_name, position + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+	}
+
+	void StartEdit(){
+		image.showBorder(true);
+		grabber_top_left.SetVisible(true);
+		grabber_top_right.SetVisible(true);
+		grabber_bottom_left.SetVisible(true);
+		grabber_bottom_right.SetVisible(true);
+		grabber_center.SetVisible(true);
+	}
+
+	void EditDone(){
+		image.showBorder(false);
+		grabber_top_left.SetVisible(false);
+		grabber_top_right.SetVisible(false);
+		grabber_bottom_left.SetVisible(false);
+		grabber_bottom_right.SetVisible(false);
+		grabber_center.SetVisible(false);
 	}
 
 	void AddSize(vec2 added_size, int direction_x, int direction_y){
@@ -87,7 +114,7 @@ class ComicImage : ComicElement{
 			image.setSizeX(image.getSizeX() - added_size.x);
 			size.x -= added_size.x;
 			image_container.moveElementRelative(image_name, vec2(added_size.x, 0.0));
-			location.x += added_size.x;
+			position.x += added_size.x;
 		}
 		if(direction_y == 1){
 			image.setSizeY(image.getSizeY() + added_size.y);
@@ -96,14 +123,14 @@ class ComicImage : ComicElement{
 			image.setSizeY(image.getSizeY() - added_size.y);
 			size.y -= added_size.y;
 			image_container.moveElementRelative(image_name, vec2(0.0, added_size.y));
-			location.y += added_size.y;
+			position.y += added_size.y;
 		}
 		UpdateContent();
 	}
 
 	void AddPosition(vec2 added_positon){
 		image_container.moveElementRelative(image_name, added_positon);
-		location += added_positon;
+		position += added_positon;
 		UpdateContent();
 	}
 
@@ -123,14 +150,6 @@ class ComicImage : ComicElement{
 		}
 	}
 
-	string GetSaveString(){
-		return "add_image " + path + " " + location.x + " " + location.y + " " + size.x + " " + size.y;
-	}
-
-	string GetDisplayString(){
-		return "AddImage " + path;
-	}
-
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){
 		image.addUpdateBehavior(behavior, name);
 	}
@@ -140,6 +159,7 @@ class ComicImage : ComicElement{
 
 	void SetVisible(bool _visible){
 		visible = _visible;
+		Log(warning, "IMage visible " + visible);
 		UpdateContent();
 	}
 

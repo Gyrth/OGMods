@@ -2,13 +2,14 @@ class ComicCrawlIn : ComicElement{
 	ComicElement@ target = null;
 	int duration;
 	float timer = 0.0;
-	ComicCrawlIn(int _duration, int _index){
-		index = _index;
+
+	ComicCrawlIn(JSONValue params = JSONValue()){
 		comic_element_type = comic_crawl_in;
-		has_settings = true;
-		duration = _duration;
+		duration = GetJSONInt(params, "duration", 1000);
 		display_color = HexColor("#4e887c");
+		has_settings = true;
 	}
+
 	void SetCurrent(bool _current){
 		if(@target != null){
 			if(_current){
@@ -18,24 +19,33 @@ class ComicCrawlIn : ComicElement{
 			}
 		}
 	}
+
 	void ClearTarget(){
 		@target = null;
 	}
+
 	void SetTarget(ComicElement@ element){
 		@target = element;
 	}
+
 	void Update(){
 		if(@target != null && timer < duration){
 			timer += time_step * 1000.0;
 			target.SetProgress(int(timer * 100.0 / duration));
 		}
 	}
-	string GetSaveString(){
-		return "crawl_in " + duration;
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("crawl_in");
+		data["duration"] = JSONValue(duration);
+		return data;
 	}
+
 	string GetDisplayString(){
 		return "CrawlIn " + duration;
 	}
+
 	void AddSettings(){
 		if(ImGui_DragInt("Duration", duration, 1.0, 1, 10000)){
 			timer = 0.0;

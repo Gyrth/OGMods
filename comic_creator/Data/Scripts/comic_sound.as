@@ -1,29 +1,38 @@
 class ComicSound : ComicElement{
 	string path;
-	ComicSound(string _path, int _index){
-		index = _index;
+
+	ComicSound(JSONValue params = JSONValue()){
 		comic_element_type = comic_sound;
-		has_settings = true;
-		path = _path;
+		path = GetJSONString(params, "path", "Data/Sounds/FistImpact_1.wav");
+
 		display_color = HexColor("#916342");
+		has_settings = true;
 	}
+
 	void SetCurrent(bool _current){
 		if(creator_state == editing && _current){
 			PlaySound(path);
 		}
 	}
+
 	void SetVisible(bool _visible){
 		visible = _visible;
 		if(visible && creator_state == playing && play_direction == 1){
 			PlaySound(path);
 		}
 	}
-	string GetSaveString(){
-		return "play_sound " + path;
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("play_sound");
+		data["path"] = JSONValue(path);
+		return data;
 	}
+
 	string GetDisplayString(){
 		return "PlaySound " + path;
 	}
+
 	void AddSettings(){
 		ImGui_Text("Current Sound : ");
 		ImGui_Text(path);

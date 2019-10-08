@@ -4,38 +4,51 @@ class ComicFont : ComicElement{
 	vec4 font_color;
 	bool shadowed;
 	array<ComicText@> texts;
-
 	vec4 new_color;
-
 	FontSetup font("edosz", 75, HexColor("#CCCCCC"), true);
-	ComicFont(string _font_name, int _font_size, vec3 _font_color, bool _shadowed, int _index){
+
+	ComicFont(JSONValue params = JSONValue()){
 		comic_element_type = comic_font;
-		has_settings = true;
 		display_color = HexColor("#908f40");
 
-		index = _index;
-		font_name = _font_name;
-		font_size = _font_size;
-		font_color = vec4(_font_color / 255.0, 1.0);
-		shadowed = _shadowed;
+		font_name = GetJSONString(params, "font_name", "edosz");
+		font_size = GetJSONInt(params, "font_size", 75);
+		font_color = GetJSONVec4(params, "font_color", vec4(1.0, 1.0, 1.0, 1.0));
+		shadowed = GetJSONBool(params, "shadowed", true);
 
-		font.fontName = _font_name;
-		font.size = _font_size;
+		font.fontName = font_name;
+		font.size = font_size;
 		font.color = font_color;
-		font.shadowed = _shadowed;
+		font.shadowed = shadowed;
+
+		has_settings = true;
 	}
-	string GetSaveString(){
-		return "set_font " + font_name + " " + font_size + " " + int(font_color.x * 255) + " " + int(font_color.y * 255) + " " + int(font_color.z * 255) + " " + (shadowed ? "true" : "false");
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("set_font");
+		data["font_name"] = JSONValue(font_name);
+		data["font_color"] = JSONValue(JSONarrayValue);
+		data["font_color"].append(font_color.x);
+		data["font_color"].append(font_color.y);
+		data["font_color"].append(font_color.z);
+		data["shadowed"] = JSONValue(shadowed);
+		return data;
 	}
+
 	string GetDisplayString(){
 		return "SetFont " + font_name + " " + font_size + (shadowed ? " shadowed" : "");
+	}
+
+	void ClearTarget(){
+		texts.resize(0);
 	}
 
 	void SetTarget(ComicElement@ element){
 		ComicText@ new_text = cast<ComicText>(element);
 		@new_text.comic_font = this;
-		new_text.SetNewText();
-		new_text.UpdateContent();
+		/* new_text.SetNewText();
+		new_text.UpdateContent(); */
 		texts.insertLast(new_text);
 	}
 
@@ -65,9 +78,5 @@ class ComicFont : ComicElement{
 		if(ImGui_DragInt("Text Size", font_size, 0.5, 1, 100)){
 			font.size = font_size;
 		}
-	}
-
-	void EditDone(){
-		ReorderElements();
 	}
 }

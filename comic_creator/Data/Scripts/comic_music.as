@@ -1,27 +1,33 @@
 class ComicMusic : ComicElement{
 	string path;
-	ComicMusic(string _path, int _index){
-		index = _index;
-		path = _path;
+
+	ComicMusic(JSONValue params = JSONValue()){
 		comic_element_type = comic_music;
-		has_settings = true;
+
+		path = GetJSONString(params, "path", "Data/Music/lugaru.xml");
 		display_color = HexColor("#a42b2b");
-		element_counter += 1;
-		Log(info, "AddMusic " + path);
 		AddMusic(path);
+		has_settings = true;
 	}
+
 	void SetVisible(bool _visible){
 		visible = _visible;
 		if(visible){
 
 		}
 	}
-	string GetSaveString(){
-		return "add_music " + path;
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["function_name"] = JSONValue("add_music");
+		data["path"] = JSONValue(path);
+		return data;
 	}
+
 	string GetDisplayString(){
 		return "AddMusic " + path;
 	}
+
 	void AddSettings(){
 		ImGui_Text("Current Music : ");
 		ImGui_Text(path);
