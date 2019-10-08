@@ -15,7 +15,7 @@ class ComicImage : ComicElement{
 		display_color = HexColor("#6e5eb4");
 
 		path = GetJSONString(params, "path", "Textures/ui/menus/credits/overgrowth.png");
-		position = GetJSONVec2(params, "position", vec2(snap_scale * 10.0, snap_scale * 10.0));
+		position = GetJSONVec2(params, "position", vec2(snap_scale, snap_scale));
 		size = GetJSONVec2(params, "size", vec2(720 - (720 % snap_scale), 255 - (255 % snap_scale)));
 
 		has_settings = true;

@@ -35,7 +35,7 @@ environment_states environment_state;
 creator_states creator_state = editing;
 bool editor_open = creator_state == editing;
 
-vec2 drag_position;
+vec2 click_position;
 ComicGrabber@ current_grabber = null;
 ComicFont@ current_font = null;
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
@@ -560,37 +560,42 @@ void UpdateGrabber(){
 			dragging = false;
 			@current_grabber = null;
 		}else{
-			vec2 new_position = imGUI.guistate.mousePosition;
-			if(new_position != drag_position){
-				vec2 difference = (new_position - drag_position);
+			vec2 current_grabber_position = current_grabber.GetPosition();
+			vec2 new_position = current_grabber_position + (imGUI.guistate.mousePosition - click_position);
+
+			bool round_x_direction = (new_position.x % snap_scale > (snap_scale / 2.0))?true:false;
+			bool round_y_direction = (new_position.y % snap_scale > (snap_scale / 2.0))?true:false;
+			vec2 new_snap_position;
+			new_snap_position.x = round_x_direction?ceil(new_position.x / snap_scale):floor(new_position.x / snap_scale);
+			new_snap_position.y = round_y_direction?ceil(new_position.y / snap_scale):floor(new_position.y / snap_scale);
+			new_snap_position *= snap_scale;
+
+			if(current_grabber_position != new_snap_position){
+				vec2 difference = (new_snap_position - current_grabber_position);
 				int direction_x = (difference.x > 0.0) ? 1 : -1;
 				int direction_y = (difference.y > 0.0) ? 1 : -1;
-				int steps_x = int(abs(difference.x) / snap_scale);
-				int steps_y = int(abs(difference.y) / snap_scale);
+
 				if(current_grabber.grabber_type == scaler){
-					if(abs(difference.x) >= snap_scale){
-						GetCurrentElement().AddSize(vec2(snap_scale * direction_x * steps_x, 0.0), current_grabber.direction_x, current_grabber.direction_y);
-						drag_position.x += snap_scale * direction_x * steps_x;
+					if(current_grabber_position.x != new_snap_position.x){
+						GetCurrentElement().AddSize(vec2(difference.x, 0.0), current_grabber.direction_x, current_grabber.direction_y);
 					}
-					if(abs(difference.y) >= snap_scale){
-						GetCurrentElement().AddSize(vec2(0.0, snap_scale * direction_y * steps_y), current_grabber.direction_x, current_grabber.direction_y);
-						drag_position.y += snap_scale * direction_y * steps_y;
+					if(current_grabber_position.y != new_snap_position.y){
+						GetCurrentElement().AddSize(vec2(0.0, difference.y), current_grabber.direction_x, current_grabber.direction_y);
 					}
 				}else if(current_grabber.grabber_type == mover){
-					if(abs(difference.x) >= snap_scale){
-						GetCurrentElement().AddPosition(vec2(snap_scale * direction_x * steps_x, 0.0));
-						drag_position.x += snap_scale * direction_x * steps_x;
+					if(current_grabber_position.x != new_snap_position.x){
+						GetCurrentElement().AddPosition(vec2(difference.x, 0.0));
 					}
-					if(abs(difference.y) >= snap_scale){
-						GetCurrentElement().AddPosition(vec2(0.0, snap_scale * direction_y * steps_y));
-						drag_position.y += snap_scale * direction_y * steps_y;
+					if(current_grabber_position.y != new_snap_position.y){
+						GetCurrentElement().AddPosition(vec2(0.0, difference.y));
 					}
 				}
+				click_position += difference;
 			}
 		}
 	}else{
 		if(GetInputDown(0, "mouse0") && @current_grabber != null){
-			drag_position = imGUI.guistate.mousePosition;
+			click_position = imGUI.guistate.mousePosition;
 			dragging = true;
 		}
 	}
@@ -734,7 +739,7 @@ void DrawGUI(){
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Settings")){
-				ImGui_DragInt("Snap Scale", snap_scale, 0.5f, 1, 50, "%.0f");
+				ImGui_DragInt("Snap Scale", snap_scale, 0.5f, 15, 150, "%.0f");
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Add")){

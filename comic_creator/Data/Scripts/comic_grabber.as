@@ -31,6 +31,10 @@ class ComicGrabber : ComicElement{
 		grabber_container.addFloatingElement(grabber_image, grabber_name, vec2(grabber_size / 2.0), parent_index + 1);
 	}
 
+	vec2 GetPosition(){
+		return grabber_container.getElementPosition(grabber_name) + vec2(grabber_size / 2.0);
+	}
+
 	void Delete(){
 		grabber_container.removeElement(grabber_name);
 	}
