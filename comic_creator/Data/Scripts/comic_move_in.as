@@ -8,7 +8,6 @@ class ComicMoveIn : ComicElement{
 	ComicMoveIn(JSONValue params = JSONValue()){
 		comic_element_type = comic_move_in;
 		has_settings = true;
-		display_color = HexColor("#987150");
 
 		duration = GetJSONInt(params, "duration", 1000);
 		offset = GetJSONVec2(params, "offset", vec2(100.0, 100.0));

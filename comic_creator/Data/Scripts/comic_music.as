@@ -5,7 +5,6 @@ class ComicMusic : ComicElement{
 		comic_element_type = comic_music;
 
 		path = GetJSONString(params, "path", "Data/Music/lugaru.xml");
-		display_color = HexColor("#a42b2b");
 		AddMusic(path);
 		has_settings = true;
 	}

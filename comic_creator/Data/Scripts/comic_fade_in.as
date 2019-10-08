@@ -7,7 +7,6 @@ class ComicFadeIn : ComicElement{
 
 	ComicFadeIn(JSONValue params = JSONValue()){
 		comic_element_type = comic_fade_in;
-		display_color = HexColor("#587a93");
 
 		duration = GetJSONInt(params, "duration", 1000);
 		tween_type = GetJSONInt(params, "tween_type", linearTween);

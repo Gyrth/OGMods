@@ -9,7 +9,6 @@ class ComicFont : ComicElement{
 
 	ComicFont(JSONValue params = JSONValue()){
 		comic_element_type = comic_font;
-		display_color = HexColor("#908f40");
 
 		font_name = GetJSONString(params, "font_name", "edosz");
 		font_size = GetJSONInt(params, "font_size", 75);

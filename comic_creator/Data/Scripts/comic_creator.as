@@ -25,7 +25,7 @@ string black_background = "Textures/black.tga";
 string default_image = "Textures/ui/menus/credits/overgrowth.png";
 array<ComicElement@> comic_elements;
 array<int> comic_indexes;
-int grabber_size = 50;
+int grabber_size = 25;
 
 enum environment_states { in_game, in_menu };
 enum creator_states { editing, playing };
@@ -304,7 +304,7 @@ void ReorderElements(){
 		}
 	}
 	// Run the whole script again from the beginning to fix any ordering problems.
-	current_line = 0;
+	current_line = -1;
 }
 
 ComicElement@ GetNextElementOfType(comic_element_types type){
@@ -326,10 +326,18 @@ ComicElement@ GetPreviousElementOfType(comic_element_types type){
 }
 
 ComicElement@ GetCurrentElement(){
-	return comic_elements[comic_indexes[current_line]];
+	if(current_line == -1){
+		return comic_elements[comic_indexes[0]];
+	}else{
+		return comic_elements[comic_indexes[current_line]];
+	}
 }
 
 void DrawBackground(){
+	if(creator_state != editing){
+		return;
+	}
+
 	vec2 vertical_position = vec2(0.0, 0.0);
 	vec2 horizontal_position = vec2(0.0, 0.0);
 	int nr_horizontal_lines = int(ceil(screenMetrics.screenSize.y / (snap_scale * screenMetrics.GUItoScreenYScale)));
@@ -390,8 +398,10 @@ void Update(int is_paused){
 	if(GetInputPressed(0, "f1") && environment_state == in_menu){
 		editor_open = !editor_open;
 		if(!editor_open){
+			GetCurrentElement().SetEdit(false);
 			creator_state = playing;
 		}else if(editor_open){
+			GetCurrentElement().SetEdit(true);
 			target_line = current_line;
 			creator_state = editing;
 		}
@@ -470,12 +480,15 @@ void UpdateProgress(){
 }
 
 void GoToLine(int new_line){
+	/* Log(warning, "Curren " + current_line + " target " + target_line); */
 	// Don't do anything if already at target line.
 	if(new_line == current_line){
 		return;
 	}
 
-	GetCurrentElement().SetEdit(false);
+	if(creator_state == editing){
+		GetCurrentElement().SetEdit(false);
+	}
 	GetCurrentElement().SetCurrent(false);
 	at_correct_line = false;
 	while(true){
@@ -762,7 +775,9 @@ void DrawGUI(){
 			for(int j = 0; j < initial_length; j++){
 				line_number += " ";
 			}
-			ImGui_PushStyleColor(ImGuiCol_Text, comic_elements[item_no].display_color);
+
+			vec4 text_color = comic_elements[item_no].GetDisplayColor();
+			ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 			if(ImGui_Selectable(line_number + comic_elements[item_no].GetDisplayString(), display_index == int(item_no), ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
 					if(comic_elements[comic_indexes[i]].has_settings){
@@ -852,7 +867,7 @@ void DeleteCurrentElement(){
 		// If the last element is deleted then the target needs to be the previous element.
 		if(current_line > 0 && current_line == int(comic_elements.size())){
 			display_index = comic_indexes[current_line - 1];
-			current_line -= 1;
+			target_line -= 1;
 		}else if(comic_elements.size() > 0){
 			display_index = comic_indexes[current_line];
 		}
@@ -889,6 +904,8 @@ ComicElement@ CreateNewFunction(comic_element_types element_type) {
 			return ComicMoveIn();
 		case comic_music:
 			return ComicMusic();
+		case comic_sound:
+			return ComicSound();
 		case comic_page:
 			return ComicPage();
 		case comic_song:
@@ -903,8 +920,7 @@ ComicElement@ CreateNewFunction(comic_element_types element_type) {
 
 void InsertElement(ComicElement@ new_element){
 	if(comic_elements.size() > 0){
-		GetCurrentElement().SetVisible(false);
-		GetCurrentElement().EditDone();
+		GetCurrentElement().SetEdit(false);
 	}
 	new_element.PostInit();
 	comic_elements.insertLast(new_element);
@@ -916,13 +932,9 @@ void InsertElement(ComicElement@ new_element){
 	}else{
 		comic_indexes.insertAt(current_line + 1, comic_elements.size() - 1);
 		display_index = comic_indexes[current_line + 1];
-		current_line += 1;
+		target_line += 1;
 	}
 	ReorderElements();
-	if(post_init_done && comic_elements.size() > 0){
-		GetCurrentElement().StartEdit();
-		GetCurrentElement().SetVisible(true);
-	}
 	unsaved = true;
 }
 

@@ -49,7 +49,6 @@ class ComicElement{
 	bool edit_mode = false;
 	bool visible;
 	bool has_settings = false;
-	vec4 display_color = vec4(1.0);
 	int index = -1;
 
 	void AddPosition(vec2 added_positon){}
@@ -81,4 +80,7 @@ class ComicElement{
 		return JSONValue();
 	}
 	void PostInit(){}
+	vec4 GetDisplayColor(){
+		return display_colors[comic_element_type];
+	}
 }

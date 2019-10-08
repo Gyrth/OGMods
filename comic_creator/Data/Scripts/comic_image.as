@@ -12,7 +12,6 @@ class ComicImage : ComicElement{
 
 	ComicImage(JSONValue params = JSONValue()){
 		comic_element_type = comic_image;
-		display_color = HexColor("#6e5eb4");
 
 		path = GetJSONString(params, "path", "Textures/ui/menus/credits/overgrowth.png");
 		position = GetJSONVec2(params, "position", vec2(snap_scale, snap_scale));
@@ -27,7 +26,7 @@ class ComicImage : ComicElement{
 		new_image.setBorderColor(edit_outline_color);
 		new_image.setSize(size);
 		new_image.setClip(false);
-		image_name = "image" + index;
+		image_name = imGUI.getUniqueName("image");
 
 		@grabber_top_left = Grabber("top_left", -1, -1, scaler, index);
 		@grabber_top_right = Grabber("top_right", 1, -1, scaler, index);
@@ -165,11 +164,6 @@ class ComicImage : ComicElement{
 				SetNewImage();
 			}
 		}
-	}
-
-	void StartEdit(){
-		edit_mode = true;
-		UpdateContent();
 	}
 
 	void SetEdit(bool editing){

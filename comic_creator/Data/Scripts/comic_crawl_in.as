@@ -6,7 +6,6 @@ class ComicCrawlIn : ComicElement{
 	ComicCrawlIn(JSONValue params = JSONValue()){
 		comic_element_type = comic_crawl_in;
 		duration = GetJSONInt(params, "duration", 1000);
-		display_color = HexColor("#4e887c");
 		has_settings = true;
 	}
 

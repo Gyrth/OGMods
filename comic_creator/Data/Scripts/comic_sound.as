@@ -5,7 +5,6 @@ class ComicSound : ComicElement{
 		comic_element_type = comic_sound;
 		path = GetJSONString(params, "path", "Data/Sounds/FistImpact_1.wav");
 
-		display_color = HexColor("#916342");
 		has_settings = true;
 	}
 

@@ -3,7 +3,6 @@ class ComicSong : ComicElement{
 
 	ComicSong(JSONValue params = JSONValue()){
 		comic_element_type = comic_music;
-		display_color = HexColor("#a42b2b");
 		name = GetJSONString(params, "name", "lugaru_menu");
 
 		has_settings = true;

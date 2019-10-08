@@ -12,10 +12,8 @@ class ComicText : ComicElement{
 
 	ComicText(JSONValue params = JSONValue()){
 		comic_element_type = comic_text;
-		display_color = HexColor("#558366");
 
 		string original_content = GetJSONString(params, "content", "Example Text");
-
 		position = GetJSONVec2(params, "position", vec2(200, 200));
 		content = original_content.split("\\n");
 		joined_content = join(content, "\n");
@@ -27,14 +25,12 @@ class ComicText : ComicElement{
 	void PostInit(){
 		IMDivider text_holder("textholder" + index, DOVertical);
 		@holder = text_holder;
-		text_holder.showBorder();
 		text_holder.setBorderColor(edit_outline_color);
 		text_holder.setAlignment(CALeft, CATop);
 		text_holder.setClip(false);
 
 		@grabber_center = Grabber("center", 1, 1, mover, index);
-		holder_name = "text" + element_counter;
-		element_counter += 1;
+		holder_name = imGUI.getUniqueName("text");
 		text_container.addFloatingElement(text_holder, holder_name, position, index);
 		SetNewText();
 		UpdateContent();
@@ -115,9 +111,15 @@ class ComicText : ComicElement{
 		UpdateContent();
 	}
 
+	void StartEdit(){
+		edit_mode = true;
+		UpdateContent();
+	}
+
 	void SetEdit(bool editing){
 		edit_mode = editing;
 		UpdateContent();
+		SetNewText();
 	}
 
 	Grabber@ GetGrabber(string grabber_name){
