@@ -33,7 +33,6 @@ class ComicText : ComicElement{
 		holder_name = imGUI.getUniqueName("text");
 		text_container.addFloatingElement(text_holder, holder_name, position, index);
 		SetNewText();
-		UpdateContent();
 	}
 
 	JSONValue GetSaveData(){
@@ -81,6 +80,7 @@ class ComicText : ComicElement{
 		whole_length = join(content, "").length();
 		// imgui needs to update once or else the position of the grabber isn't calculated correctly.
 		imGUI.update();
+		UpdateContent();
 	}
 
 	void SetProgress(int progress){
@@ -118,7 +118,6 @@ class ComicText : ComicElement{
 
 	void SetEdit(bool editing){
 		edit_mode = editing;
-		UpdateContent();
 		SetNewText();
 	}
 
@@ -157,6 +156,5 @@ class ComicText : ComicElement{
 		content = joined_content.split("\n");
 		display_content = join(content, " ");
 		SetNewText();
-		UpdateContent();
 	}
 }
