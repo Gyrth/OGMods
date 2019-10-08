@@ -11,7 +11,7 @@ class Grabber{
 	Grabber(string name, int _direction_x, int _direction_y, grabber_types _grabber_type, int parent_index){
 		grabber_type = _grabber_type;
 
-		IMImage grabber_image("Textures/ui/eclipse.tga");
+		IMImage grabber_image("Textures/grabber.png");
 		@image = grabber_image;
 
 		direction_x = _direction_x;
