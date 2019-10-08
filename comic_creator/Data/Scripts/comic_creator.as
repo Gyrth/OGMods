@@ -36,7 +36,7 @@ creator_states creator_state = editing;
 bool editor_open = creator_state == editing;
 
 vec2 click_position;
-ComicGrabber@ current_grabber = null;
+Grabber@ current_grabber = null;
 ComicFont@ current_font = null;
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 string comic_path;
@@ -258,7 +258,6 @@ void ReorderElements(){
 		current_element.SetIndex(index);
 		current_element.ClearTarget();
 		current_element.SetVisible(false);
-		current_element.SetEdit(false);
 		if(current_element.comic_element_type == comic_page){
 			// A page needs to get all the comic elements untill it finds different page.
 			for(uint j = index + 1; j < comic_indexes.size(); j++){

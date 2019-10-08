@@ -1,5 +1,4 @@
 enum comic_element_types { 	none,
-							comic_grabber,
 							comic_image,
 							comic_page,
 						 	comic_fade_in,
@@ -13,7 +12,6 @@ enum comic_element_types { 	none,
 							comic_song};
 
 array<string> comic_element_names = {	"None",
-										"Grabber",
 										"Image",
 										"Page",
 										"Fade In",
@@ -31,7 +29,6 @@ array<string> sorted_element_names;
 
 array<vec4> display_colors =	{
 									vec4(255),
-	                                vec4(0, 0, 0, 255),
 	                                vec4(110, 94, 180, 255),
 									vec4(123, 92, 133, 255),
 									vec4(88, 122, 147, 255),
@@ -57,7 +54,7 @@ class ComicElement{
 
 	void AddPosition(vec2 added_positon){}
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
-	ComicGrabber@ GetGrabber(string grabber_name){return null;}
+	Grabber@ GetGrabber(string grabber_name){return null;}
 	string GetSaveString(){return "";}
 	string GetDisplayString(){return "";};
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){};

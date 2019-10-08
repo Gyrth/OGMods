@@ -1,10 +1,10 @@
 class ComicImage : ComicElement{
 	IMImage@ image;
-	ComicGrabber@ grabber_top_left;
-	ComicGrabber@ grabber_top_right;
-	ComicGrabber@ grabber_bottom_left;
-	ComicGrabber@ grabber_bottom_right;
-	ComicGrabber@ grabber_center;
+	Grabber@ grabber_top_left;
+	Grabber@ grabber_top_right;
+	Grabber@ grabber_bottom_left;
+	Grabber@ grabber_bottom_right;
+	Grabber@ grabber_center;
 	string path;
 	vec2 position;
 	vec2 size;
@@ -29,11 +29,11 @@ class ComicImage : ComicElement{
 		new_image.setClip(false);
 		image_name = "image" + index;
 
-		@grabber_top_left = ComicGrabber("top_left", -1, -1, scaler, index);
-		@grabber_top_right = ComicGrabber("top_right", 1, -1, scaler, index);
-		@grabber_bottom_left = ComicGrabber("bottom_left", -1, 1, scaler, index);
-		@grabber_bottom_right = ComicGrabber("bottom_right", 1, 1, scaler, index);
-		@grabber_center = ComicGrabber("center", 1, 1, mover, index);
+		@grabber_top_left = Grabber("top_left", -1, -1, scaler, index);
+		@grabber_top_right = Grabber("top_right", 1, -1, scaler, index);
+		@grabber_bottom_left = Grabber("bottom_left", -1, 1, scaler, index);
+		@grabber_bottom_right = Grabber("bottom_right", 1, 1, scaler, index);
+		@grabber_center = Grabber("center", 1, 1, mover, index);
 
 		image_container.addFloatingElement(new_image, image_name, position, index);
 		UpdateContent();
@@ -87,24 +87,13 @@ class ComicImage : ComicElement{
 		grabber_container.moveElement(grabber_bottom_left.grabber_name, position + vec2(0, size.y) - vec2(grabber_size / 2.0));
 		grabber_container.moveElement(grabber_bottom_right.grabber_name, position + vec2(size.x, size.y) - vec2(grabber_size / 2.0));
 		grabber_container.moveElement(grabber_center.grabber_name, position + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
-	}
 
-	void StartEdit(){
-		image.showBorder(true);
-		grabber_top_left.SetVisible(true);
-		grabber_top_right.SetVisible(true);
-		grabber_bottom_left.SetVisible(true);
-		grabber_bottom_right.SetVisible(true);
-		grabber_center.SetVisible(true);
-	}
-
-	void EditDone(){
-		image.showBorder(false);
-		grabber_top_left.SetVisible(false);
-		grabber_top_right.SetVisible(false);
-		grabber_bottom_left.SetVisible(false);
-		grabber_bottom_right.SetVisible(false);
-		grabber_center.SetVisible(false);
+		image.showBorder(edit_mode);
+		grabber_top_left.SetVisible(edit_mode);
+		grabber_top_right.SetVisible(edit_mode);
+		grabber_bottom_left.SetVisible(edit_mode);
+		grabber_bottom_right.SetVisible(edit_mode);
+		grabber_center.SetVisible(edit_mode);
 	}
 
 	void AddSize(vec2 added_size, int direction_x, int direction_y){
@@ -135,7 +124,7 @@ class ComicImage : ComicElement{
 		UpdateContent();
 	}
 
-	ComicGrabber@ GetGrabber(string grabber_name){
+	Grabber@ GetGrabber(string grabber_name){
 		if(grabber_name == "top_left"){
 			return grabber_top_left;
 		}else if(grabber_name == "top_right"){
@@ -176,6 +165,11 @@ class ComicImage : ComicElement{
 				SetNewImage();
 			}
 		}
+	}
+
+	void StartEdit(){
+		edit_mode = true;
+		UpdateContent();
 	}
 
 	void SetEdit(bool editing){

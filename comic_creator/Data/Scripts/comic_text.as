@@ -7,7 +7,7 @@ class ComicText : ComicElement{
 	int whole_length = 0;
 	vec2 position;
 	ComicFont@ comic_font = null;
-	ComicGrabber@ grabber_center;
+	Grabber@ grabber_center;
 	string holder_name;
 
 	ComicText(JSONValue params = JSONValue()){
@@ -32,7 +32,7 @@ class ComicText : ComicElement{
 		text_holder.setAlignment(CALeft, CATop);
 		text_holder.setClip(false);
 
-		@grabber_center = ComicGrabber("center", 1, 1, mover, index);
+		@grabber_center = Grabber("center", 1, 1, mover, index);
 		holder_name = "text" + element_counter;
 		element_counter += 1;
 		text_container.addFloatingElement(text_holder, holder_name, position, index);
@@ -120,7 +120,7 @@ class ComicText : ComicElement{
 		UpdateContent();
 	}
 
-	ComicGrabber@ GetGrabber(string grabber_name){
+	Grabber@ GetGrabber(string grabber_name){
 		if(grabber_name == "center"){
 			return grabber_center;
 		}else{
