@@ -121,7 +121,6 @@ void Initialize(){
 	}else{
 		comic_path = "New Comic";
 	}
-	AddBackground();
 }
 
 // This init is used when loaded in-game.
@@ -331,27 +330,26 @@ ComicElement@ GetCurrentElement(){
 	return comic_elements[comic_indexes[current_line]];
 }
 
-void AddBackground(){
-	int vertical_amount = 5;
-	int horizontal_amount = 8;
-	IMDivider vertical("vertical", DOVertical);
-	for(int i = 0; i < vertical_amount; i++){
-		IMDivider horizontal("horizontal" + i, DOHorizontal);
-		vertical.append(horizontal);
-		for(int j = 0; j < horizontal_amount; j++){
-			string background_path;
-			if(creator_state == editing){
-				background_path = grid_background;
-			}else{
-				background_path = black_background;
-			}
-			IMImage background(background_path);
-			background.scaleToSizeX(320);
-			horizontal.append(background);
-		}
+void DrawBackground(){
+	vec2 vertical_position = vec2(0.0, 0.0);
+	vec2 horizontal_position = vec2(0.0, 0.0);
+	int nr_horizontal_lines = int(ceil(screenMetrics.screenSize.y / (snap_scale * screenMetrics.GUItoScreenYScale)));
+	int nr_vertical_lines = int(ceil(screenMetrics.screenSize.x / (snap_scale * screenMetrics.GUItoScreenXScale)));
+	vec4 line_color = vec4(0.25, 0.25, 0.25, 1.0);
+	float line_width = 1.0;
+	float thick_line_width = 2.0;
+
+	for(int i = 0; i < nr_vertical_lines; i++){
+		bool thick_line = i % 10 == 0;
+		imGUI.drawBox(vertical_position, vec2(thick_line?thick_line_width:line_width, screenMetrics.screenSize.y), line_color, 0, false);
+		vertical_position += vec2((snap_scale * screenMetrics.GUItoScreenXScale), 0.0);
 	}
-	imGUI.getBackgroundLayer(0).setClip(true);
-	imGUI.getBackgroundLayer(0).setElement(vertical);
+
+	for(int i = 0; i < nr_horizontal_lines; i++){
+		bool thick_line = i % 10 == 0;
+		imGUI.drawBox(horizontal_position, vec2(screenMetrics.screenSize.x, thick_line?thick_line_width:line_width), line_color, 0, false);
+		horizontal_position += vec2(0.0, (snap_scale * screenMetrics.GUItoScreenYScale));
+	}
 }
 
 bool CanGoBack(){
@@ -636,6 +634,8 @@ bool update_scroll = false;
 bool show_confirm = false;
 
 void DrawGUI(){
+	DrawBackground();
+
 	if(editor_open){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
@@ -822,6 +822,7 @@ void DrawGUI(){
 		reorded = false;
 		ReorderElements();
 	}
+
 	if(at_correct_line){
 	}
 	imGUI.render();
