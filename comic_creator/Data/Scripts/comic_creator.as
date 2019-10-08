@@ -357,7 +357,6 @@ bool CanGoBack(){
 		if(!editor_open){
 			editor_open = true;
 		}
-		show_confirm = true;
 		return false;
 	}else{
 		return true;
@@ -636,7 +635,6 @@ bool reorded = false;
 int display_index = 0;
 int drag_target_line = 0;
 bool update_scroll = false;
-bool show_confirm = false;
 
 void DrawGUI(){
 	DrawBackground();
@@ -688,30 +686,7 @@ void DrawGUI(){
 		}
 		ImGui_PopStyleVar();
 
-		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(380, 75));
-		if(ImGui_BeginPopupModal("Confirm", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize)){
-			ImGui_Text("You unsaved changes. Are you sure you want to quit?");
-			ImGui_Separator();
-			ImGui_BeginChild("ConfirmButtons");
-			ImGui_Dummy(vec2(130.0, 1.0));
-			ImGui_SameLine();
-			if(ImGui_Button("Yes")){
-				unsaved = false;
-				this_ui.SendCallback("back");
-			}
-			ImGui_SameLine(0.0, 25.0);
-			if(ImGui_Button("No")){
-				ImGui_CloseCurrentPopup();
-			}
-			ImGui_EndChild();
-			ImGui_EndPopup();
-		}
-		if(show_confirm){
-			ImGui_OpenPopup("Confirm");
-			show_confirm = false;
-		}
 
-		ImGui_PopStyleVar();
 
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
@@ -820,9 +795,35 @@ void DrawGUI(){
 			}
 			line_counter += 1;
 		}
+
+		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape)) && unsaved){
+			ImGui_OpenPopup("Confirm");
+		}
+
+		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(380, 75));
+		if(ImGui_BeginPopupModal("Confirm", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize)){
+			ImGui_Text("You unsaved changes. Are you sure you want to quit?");
+			ImGui_Separator();
+			ImGui_BeginChild("ConfirmButtons");
+			ImGui_Dummy(vec2(130.0, 1.0));
+			ImGui_SameLine();
+			if(ImGui_Button("Yes")){
+				unsaved = false;
+				this_ui.SendCallback("back");
+			}
+			ImGui_SameLine(0.0, 25.0);
+			if(ImGui_Button("No")){
+				ImGui_CloseCurrentPopup();
+			}
+			ImGui_EndChild();
+			ImGui_EndPopup();
+		}
+		ImGui_PopStyleVar();
+
 		ImGui_End();
 		ImGui_PopStyleColor(18);
 	}
+
 	if(reorded && !ImGui_IsMouseDragging(0)){
 		reorded = false;
 		ReorderElements();
