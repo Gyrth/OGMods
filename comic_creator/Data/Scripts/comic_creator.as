@@ -826,12 +826,12 @@ void DrawGUI(){
 			line_counter += 1;
 		}
 
-		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(380, 75));
+		ImGui_SetNextWindowSize(vec2(300.0f, 90.0f), ImGuiSetCond_FirstUseEver);
 		if(ImGui_BeginPopupModal("Confirm", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize)){
-			ImGui_Text("You unsaved changes. Are you sure you want to quit?");
+			ImGui_Text("You have unsaved changes.\nAre you sure you want to quit?");
 			ImGui_Separator();
 			ImGui_BeginChild("ConfirmButtons");
-			ImGui_Dummy(vec2(130.0, 1.0));
+			ImGui_Dummy(vec2(90.0, 1.0));
 			ImGui_SameLine();
 			if(ImGui_Button("Yes")){
 				unsaved = false;
@@ -844,7 +844,6 @@ void DrawGUI(){
 			ImGui_EndChild();
 			ImGui_EndPopup();
 		}
-		ImGui_PopStyleVar();
 
 		ImGui_End();
 		ImGui_PopStyleColor(18);
