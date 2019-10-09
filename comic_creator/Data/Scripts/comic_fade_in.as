@@ -11,10 +11,15 @@ class ComicFadeIn : ComicElement{
 		duration = GetJSONInt(params, "duration", 1000);
 		tween_type = GetJSONInt(params, "tween_type", linearTween);
 		has_settings = true;
+		name = imGUI.getUniqueName("fadein");
 	}
 
-	void PostInit(){
-		name = "fadein" + index;
+	void SelectAgain(){
+		if(@target != null){
+			IMFadeIn new_fade(duration, IMTweenType(tween_type));
+			target.RemoveUpdateBehavior(name);
+			target.AddUpdateBehavior(new_fade, name);
+		}
 	}
 
 	void SetVisible(bool _visible){

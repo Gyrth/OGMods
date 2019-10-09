@@ -83,4 +83,5 @@ class ComicElement{
 	vec4 GetDisplayColor(){
 		return display_colors[comic_element_type];
 	}
+	void SelectAgain(){}
 }

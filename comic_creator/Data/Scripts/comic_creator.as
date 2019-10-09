@@ -784,6 +784,10 @@ void DrawGUI(){
 						ImGui_OpenPopup("Edit");
 					}
 				}else{
+					//If the same line is selected call this function.
+					if(target_line == int(i)){
+						comic_elements[item_no].SelectAgain();
+					}
 					display_index = int(item_no);
 					target_line = int(i);
 				}

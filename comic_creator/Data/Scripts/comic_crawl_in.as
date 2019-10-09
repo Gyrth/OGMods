@@ -19,6 +19,12 @@ class ComicCrawlIn : ComicElement{
 		}
 	}
 
+	void SelectAgain(){
+		if(@target != null){
+			timer = 0.0;
+		}
+	}
+
 	void ClearTarget(){
 		@target = null;
 	}

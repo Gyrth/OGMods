@@ -12,10 +12,15 @@ class ComicMoveIn : ComicElement{
 		duration = GetJSONInt(params, "duration", 1000);
 		offset = GetJSONVec2(params, "offset", vec2(100.0, 100.0));
 		tween_type = GetJSONInt(params, "tween_type", linearTween);
+		name = imGUI.getUniqueName("movein");
 	}
 
-	void PostInit(){
-		name = "movein" + index;
+	void SelectAgain(){
+		if(@target != null){
+			IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
+			target.RemoveUpdateBehavior(name);
+			target.AddUpdateBehavior(new_move, name);
+		}
 	}
 
 	void SetVisible(bool _visible){
