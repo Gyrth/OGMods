@@ -14,6 +14,10 @@ class ComicSound : ComicElement{
 		}
 	}
 
+	void SelectAgain(){
+		PlaySound(path);
+	}
+
 	void SetVisible(bool _visible){
 		visible = _visible;
 		if(visible && creator_state == playing && play_direction == 1){
