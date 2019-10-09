@@ -685,6 +685,10 @@ void DrawGUI(){
 			DeleteCurrentElement();
 		}
 
+		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape)) && unsaved && !ImGui_IsPopupOpen("Edit")){
+			ImGui_OpenPopup("Confirm");
+		}
+
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
 		ImGui_SetNextWindowSize(vec2(500.0f, 450.0f), ImGuiSetCond_FirstUseEver);
         if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
@@ -698,11 +702,15 @@ void DrawGUI(){
 				ImGui_CloseCurrentPopup();
 			}
 			ImGui_EndChild();
+
+			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
+				GetCurrentElement().EditDone();
+				ImGui_CloseCurrentPopup();
+			}
+
 			ImGui_EndPopup();
 		}
 		ImGui_PopStyleVar();
-
-
 
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("File")){
@@ -816,10 +824,6 @@ void DrawGUI(){
 				}
 			}
 			line_counter += 1;
-		}
-
-		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape)) && unsaved){
-			ImGui_OpenPopup("Confirm");
 		}
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(380, 75));
