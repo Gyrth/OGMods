@@ -200,7 +200,7 @@ void LoadComic(string path){
 			if(new_line == "end"){
 				break;
 			}
-			comic_content += new_line + "\n";
+			comic_content += new_line;
 		}
 	}
 	InterpComic();
@@ -219,6 +219,7 @@ void InterpComic(){
 	}
 
 	Log(info, "Interp of comic script done.");
+	PostInit();
 	ReorderElements();
 }
 
@@ -846,6 +847,7 @@ void DrawGUI(){
 	}
 
 	if(reorded && !ImGui_IsMouseDragging(0)){
+		unsaved = true;
 		reorded = false;
 		ReorderElements();
 	}
@@ -954,14 +956,17 @@ void SaveComic(string path = ""){
 		comic_path = path;
 	}
 	unsaved = false;
-	StartWriteFile();
+
+	JSON data;
+	JSONValue functions;
 
 	for(uint i = 0; i < comic_indexes.size(); i++){
-		AddFileString(comic_elements[comic_indexes[i]].GetSaveString());
-		if(i != comic_elements.size() - 1){
-			AddFileString("\n");
-		}
+		functions.append(comic_elements[comic_indexes[i]].GetSaveData());
 	}
+	data.getRoot()["functions"] = functions;
+
+	StartWriteFile();
+	AddFileString(data.writeString(false));
 	WriteFileKeepBackup(FindFilePath(comic_path));
 }
 
