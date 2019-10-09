@@ -10,12 +10,14 @@ class ComicImage : ComicElement{
 	float position_y;
 	float size_x;
 	float size_y;
+	float rotation;
 	string image_name;
 
 	ComicImage(JSONValue params = JSONValue()){
 		comic_element_type = comic_image;
 
 		path = GetJSONString(params, "path", "Textures/ui/menus/credits/overgrowth.png");
+		rotation = GetJSONFloat(params, "rotation", 0.0);
 		vec2 position = GetJSONVec2(params, "position", vec2(snap_scale, snap_scale));
 		position_x = position.x;
 		position_y = position.y;
@@ -41,6 +43,7 @@ class ComicImage : ComicElement{
 		@grabber_center = Grabber("center", 1, 1, mover);
 
 		image_container.addFloatingElement(new_image, image_name, vec2(position_x, position_y), 0);
+		new_image.setRotation(rotation);
 		UpdateContent();
 	}
 
@@ -48,6 +51,7 @@ class ComicImage : ComicElement{
 		JSONValue data;
 		data["function_name"] = JSONValue("add_image");
 		data["path"] = JSONValue(path);
+		data["rotation"] = JSONValue(rotation);
 		data["position"] = JSONValue(JSONarrayValue);
 		data["position"].append(position_x);
 		data["position"].append(position_y);
@@ -208,6 +212,19 @@ class ComicImage : ComicElement{
 		ImGui_SameLine();
 		if(ImGui_SliderFloat("###size_y", size_y, 0.0, 1000, "%.0f")){
 			image.setSize(vec2(size_x, size_y));
+			UpdateContent();
+		}
+
+		ImGui_PopItemWidth();
+
+		slider_width = ImGui_GetWindowWidth() - 61.0;
+		ImGui_PushItemWidth(slider_width);
+
+		ImGui_Text("Rotation :");
+		ImGui_Text("Degrees");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###rotation", rotation, -360, 360, "%.0f")){
+			image.setRotation(rotation);
 			UpdateContent();
 		}
 

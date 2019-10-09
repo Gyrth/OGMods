@@ -7,6 +7,7 @@ class ComicText : ComicElement{
 	int whole_length = 0;
 	float position_x;
 	float position_y;
+	float rotation;
 	ComicFont@ comic_font = null;
 	Grabber@ grabber_center;
 	string holder_name;
@@ -15,6 +16,7 @@ class ComicText : ComicElement{
 		comic_element_type = comic_text;
 
 		string original_content = GetJSONString(params, "content", "Example Text");
+		rotation = GetJSONFloat(params, "rotation", 0.0);
 		vec2 position = GetJSONVec2(params, "position", vec2(200, 200));
 		position_x = position.x;
 		position_y = position.y;
@@ -36,11 +38,15 @@ class ComicText : ComicElement{
 		holder_name = imGUI.getUniqueName("text");
 		text_container.addFloatingElement(text_holder, holder_name, vec2(position_x, position_y), 0);
 		SetNewText();
+		for(uint i = 0; i < text_elements.size(); i++){
+			text_elements[i].setRotation(rotation);
+		}
 	}
 
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["function_name"] = JSONValue("add_text");
+		data["rotation"] = JSONValue(rotation);
 		data["position"] = JSONValue(JSONarrayValue);
 		data["position"].append(position_x);
 		data["position"].append(position_y);
@@ -173,6 +179,21 @@ class ComicText : ComicElement{
 			text_container.moveElement(holder_name, vec2(position_x, position_y));
 			UpdateContent();
 		}
+		ImGui_PopItemWidth();
+
+		slider_width = ImGui_GetWindowWidth() - 61.0;
+		ImGui_PushItemWidth(slider_width);
+
+		ImGui_Text("Rotation :");
+		ImGui_Text("Degrees");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###rotation", rotation, -360, 360, "%.0f")){
+			for(uint i = 0; i < text_elements.size(); i++){
+				text_elements[i].setRotation(rotation);
+			}
+			UpdateContent();
+		}
+
 		ImGui_PopItemWidth();
 	}
 
