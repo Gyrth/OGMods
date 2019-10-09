@@ -6,16 +6,22 @@ class ComicImage : ComicElement{
 	Grabber@ grabber_bottom_right;
 	Grabber@ grabber_center;
 	string path;
-	vec2 position;
-	vec2 size;
+	float position_x;
+	float position_y;
+	float size_x;
+	float size_y;
 	string image_name;
 
 	ComicImage(JSONValue params = JSONValue()){
 		comic_element_type = comic_image;
 
 		path = GetJSONString(params, "path", "Textures/ui/menus/credits/overgrowth.png");
-		position = GetJSONVec2(params, "position", vec2(snap_scale, snap_scale));
-		size = GetJSONVec2(params, "size", vec2(720 - (720 % snap_scale), 255 - (255 % snap_scale)));
+		vec2 position = GetJSONVec2(params, "position", vec2(snap_scale, snap_scale));
+		position_x = position.x;
+		position_y = position.y;
+		vec2 size = GetJSONVec2(params, "size", vec2(720 - (720 % snap_scale), 255 - (255 % snap_scale)));
+		size_x = size.x;
+		size_y = size.y;
 
 		has_settings = true;
 	}
@@ -24,7 +30,7 @@ class ComicImage : ComicElement{
 		IMImage new_image(path);
 		@image = new_image;
 		new_image.setBorderColor(edit_outline_color);
-		new_image.setSize(size);
+		new_image.setSize(vec2(size_x, size_y));
 		new_image.setClip(false);
 		image_name = imGUI.getUniqueName("image");
 
@@ -34,7 +40,7 @@ class ComicImage : ComicElement{
 		@grabber_bottom_right = Grabber("bottom_right", 1, 1, scaler, index);
 		@grabber_center = Grabber("center", 1, 1, mover, index);
 
-		image_container.addFloatingElement(new_image, image_name, position, index);
+		image_container.addFloatingElement(new_image, image_name, vec2(position_x, position_y), index);
 		UpdateContent();
 	}
 
@@ -43,11 +49,11 @@ class ComicImage : ComicElement{
 		data["function_name"] = JSONValue("add_image");
 		data["path"] = JSONValue(path);
 		data["position"] = JSONValue(JSONarrayValue);
-		data["position"].append(position.x);
-		data["position"].append(position.y);
+		data["position"].append(position_x);
+		data["position"].append(position_y);
 		data["size"] = JSONValue(JSONarrayValue);
-		data["size"].append(size.x);
-		data["size"].append(size.y);
+		data["size"].append(size_x);
+		data["size"].append(size_y);
 		return data;
 	}
 
@@ -98,28 +104,29 @@ class ComicImage : ComicElement{
 	void AddSize(vec2 added_size, int direction_x, int direction_y){
 		if(direction_x == 1){
 			image.setSizeX(image.getSizeX() + added_size.x);
-			size.x += added_size.x;
+			size_x += added_size.x;
 		}else{
 			image.setSizeX(image.getSizeX() - added_size.x);
-			size.x -= added_size.x;
+			size_x -= added_size.x;
 			image_container.moveElementRelative(image_name, vec2(added_size.x, 0.0));
-			position.x += added_size.x;
+			position_x += added_size.x;
 		}
 		if(direction_y == 1){
 			image.setSizeY(image.getSizeY() + added_size.y);
-			size.y += added_size.y;
+			size_y += added_size.y;
 		}else{
 			image.setSizeY(image.getSizeY() - added_size.y);
-			size.y -= added_size.y;
+			size_y -= added_size.y;
 			image_container.moveElementRelative(image_name, vec2(0.0, added_size.y));
-			position.y += added_size.y;
+			position_y += added_size.y;
 		}
 		UpdateContent();
 	}
 
 	void AddPosition(vec2 added_positon){
 		image_container.moveElementRelative(image_name, added_positon);
-		position += added_positon;
+		position_x += added_positon.x;
+		position_y += added_positon.y;
 		UpdateContent();
 	}
 
@@ -154,6 +161,7 @@ class ComicImage : ComicElement{
 
 	void AddSettings(){
 		ImGui_Text("Current Image : ");
+		ImGui_SameLine();
 		ImGui_Text(path);
 		if(ImGui_Button("Set Image")){
 			string new_path = GetUserPickedReadPath("png", "Data/Textures");
@@ -164,6 +172,41 @@ class ComicImage : ComicElement{
 				SetNewImage();
 			}
 		}
+
+		ImGui_Text("Position :");
+		float slider_width = ImGui_GetWindowWidth() / 2.0 - 20.0;
+		ImGui_PushItemWidth(slider_width);
+
+		ImGui_Text("X");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###position_x", position_x, 0.0, 2560, "%.0f")){
+			image_container.moveElement(image_name, vec2(position_x, position_y));
+			UpdateContent();
+		}
+		ImGui_SameLine();
+		ImGui_Text("Y");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###position_y", position_y, 0.0, 1440, "%.0f")){
+			image_container.moveElement(image_name, vec2(position_x, position_y));
+			UpdateContent();
+		}
+
+		ImGui_Text("Size :");
+		ImGui_Text("X");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###size_x", size_x, 0.0, 1000, "%.0f")){
+			image.setSize(vec2(size_x, size_y));
+			UpdateContent();
+		}
+		ImGui_SameLine();
+		ImGui_Text("Y");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###size_y", size_y, 0.0, 1000, "%.0f")){
+			image.setSize(vec2(size_x, size_y));
+			UpdateContent();
+		}
+
+		ImGui_PopItemWidth();
 	}
 
 	void SetEdit(bool editing){

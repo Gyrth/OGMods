@@ -5,7 +5,8 @@ class ComicText : ComicElement{
 	string joined_content;
 	string display_content;
 	int whole_length = 0;
-	vec2 position;
+	float position_x;
+	float position_y;
 	ComicFont@ comic_font = null;
 	Grabber@ grabber_center;
 	string holder_name;
@@ -14,7 +15,9 @@ class ComicText : ComicElement{
 		comic_element_type = comic_text;
 
 		string original_content = GetJSONString(params, "content", "Example Text");
-		position = GetJSONVec2(params, "position", vec2(200, 200));
+		vec2 position = GetJSONVec2(params, "position", vec2(200, 200));
+		position_x = position.x;
+		position_y = position.y;
 		content = original_content.split("\\n");
 		joined_content = join(content, "\n");
 		display_content = join(content, " ");
@@ -31,7 +34,7 @@ class ComicText : ComicElement{
 
 		@grabber_center = Grabber("center", 1, 1, mover, index);
 		holder_name = imGUI.getUniqueName("text");
-		text_container.addFloatingElement(text_holder, holder_name, position, index);
+		text_container.addFloatingElement(text_holder, holder_name, vec2(position_x, position_y), index);
 		SetNewText();
 	}
 
@@ -39,8 +42,8 @@ class ComicText : ComicElement{
 		JSONValue data;
 		data["function_name"] = JSONValue("add_text");
 		data["position"] = JSONValue(JSONarrayValue);
-		data["position"].append(position.x);
-		data["position"].append(position.y);
+		data["position"].append(position_x);
+		data["position"].append(position_y);
 		data["content"] = JSONValue(join(content, "\\n"));
 		return data;
 	}
@@ -131,7 +134,8 @@ class ComicText : ComicElement{
 
 	void AddPosition(vec2 added_positon){
 		text_container.moveElementRelative(holder_name, added_positon);
-		position += added_positon;
+		position_x += added_positon.x;
+		position_y += added_positon.y;
 		UpdateContent();
 	}
 
@@ -148,8 +152,27 @@ class ComicText : ComicElement{
 	}
 
 	void AddSettings(){
-		if(ImGui_InputTextMultiline("", joined_content, 512, vec2(-1, -1))){
+		if(ImGui_InputTextMultiline("", joined_content, 512, vec2(-1, ImGui_GetWindowHeight() -50.0))){
 		}
+
+		ImGui_Text("Position :");
+		float slider_width = ImGui_GetWindowWidth() / 2.0 - 20.0;
+		ImGui_PushItemWidth(slider_width);
+
+		ImGui_Text("X");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###position_x", position_x, 0.0, 2560, "%.0f")){
+			text_container.moveElement(holder_name, vec2(position_x, position_y));
+			UpdateContent();
+		}
+		ImGui_SameLine();
+		ImGui_Text("Y");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###position_y", position_y, 0.0, 1440, "%.0f")){
+			text_container.moveElement(holder_name, vec2(position_x, position_y));
+			UpdateContent();
+		}
+		ImGui_PopItemWidth();
 	}
 
 	void EditDone(){
