@@ -34,13 +34,13 @@ class ComicImage : ComicElement{
 		new_image.setClip(false);
 		image_name = imGUI.getUniqueName("image");
 
-		@grabber_top_left = Grabber("top_left", -1, -1, scaler, index);
-		@grabber_top_right = Grabber("top_right", 1, -1, scaler, index);
-		@grabber_bottom_left = Grabber("bottom_left", -1, 1, scaler, index);
-		@grabber_bottom_right = Grabber("bottom_right", 1, 1, scaler, index);
-		@grabber_center = Grabber("center", 1, 1, mover, index);
+		@grabber_top_left = Grabber("top_left", -1, -1, scaler);
+		@grabber_top_right = Grabber("top_right", 1, -1, scaler);
+		@grabber_bottom_left = Grabber("bottom_left", -1, 1, scaler);
+		@grabber_bottom_right = Grabber("bottom_right", 1, 1, scaler);
+		@grabber_center = Grabber("center", 1, 1, mover);
 
-		image_container.addFloatingElement(new_image, image_name, vec2(position_x, position_y), index);
+		image_container.addFloatingElement(new_image, image_name, vec2(position_x, position_y), 0);
 		UpdateContent();
 	}
 
@@ -73,6 +73,11 @@ class ComicImage : ComicElement{
 	void SetIndex(int _index){
 		index = _index;
 		image.setZOrdering(index);
+		grabber_top_left.SetIndex(index);
+		grabber_top_right.SetIndex(index);
+		grabber_bottom_left.SetIndex(index);
+		grabber_bottom_right.SetIndex(index);
+		grabber_center.SetIndex(index);
 	}
 
 	void SetNewImage(){

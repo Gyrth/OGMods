@@ -32,9 +32,9 @@ class ComicText : ComicElement{
 		text_holder.setAlignment(CALeft, CATop);
 		text_holder.setClip(false);
 
-		@grabber_center = Grabber("center", 1, 1, mover, index);
+		@grabber_center = Grabber("center", 1, 1, mover);
 		holder_name = imGUI.getUniqueName("text");
-		text_container.addFloatingElement(text_holder, holder_name, vec2(position_x, position_y), index);
+		text_container.addFloatingElement(text_holder, holder_name, vec2(position_x, position_y), 0);
 		SetNewText();
 	}
 
@@ -63,6 +63,7 @@ class ComicText : ComicElement{
 		for(uint i = 0; i < text_elements.size(); i++){
 			text_elements[i].setZOrdering(index);
 		}
+		grabber_center.SetIndex(index);
 	}
 
 	void SetNewText(){
