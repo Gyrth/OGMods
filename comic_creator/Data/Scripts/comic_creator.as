@@ -408,9 +408,16 @@ void Update(int is_paused){
 		}
 	}else if(GetInputDown(0, "lctrl") && GetInputPressed(0, "s")){
 		SaveComic();
-	}else if(GetInputDown(0, "l") && environment_state == in_game){
+	}else if(GetInputPressed(0, "l") && environment_state == in_game){
 		CloseComic();
 		SetPaused(false);
+	}else if(GetInputPressed(0, "l") && environment_state == in_menu && creator_state == playing){
+		for(uint index = 0; index < comic_indexes.size(); index++){
+			ComicElement@ current_element = comic_elements[comic_indexes[index]];
+			current_element.SetVisible(false);
+		}
+		current_line = -1;
+		target_line = 0;
 	}
 
 	while(imGUI.getMessageQueueSize() > 0){
@@ -481,7 +488,6 @@ void UpdateProgress(){
 }
 
 void GoToLine(int new_line){
-	/* Log(warning, "Curren " + current_line + " target " + target_line); */
 	// Don't do anything if already at target line.
 	if(new_line == current_line){
 		return;
@@ -532,15 +538,11 @@ void GoToLine(int new_line){
 int GetPlayingProgress(){
 	int new_line = current_line;
 	while(true){
-		if(new_line == int(comic_elements.size() -1) || comic_elements[comic_indexes[new_line]].comic_element_type == comic_wait_click || comic_elements[comic_indexes[new_line]].comic_element_type == comic_crawl_in){
+		if(new_line != -1 && (new_line == int(comic_elements.size() -1) || GetCurrentElement().comic_element_type == comic_wait_click || GetCurrentElement().comic_element_type == comic_crawl_in)){
 			break;
 		}else{
 			new_line += play_direction;
 		}
-	}
-	if(target_line != -1){
-		new_line = target_line;
-		target_line = -1;
 	}
 	if(new_line == current_line){
 		// Waiting for input to progress.
@@ -566,6 +568,7 @@ int GetPlayingProgress(){
 			}
 		}
 	}
+	display_index = comic_indexes[new_line];
 	return new_line;
 }
 
@@ -787,7 +790,7 @@ void DrawGUI(){
 
 			vec4 text_color = comic_elements[item_no].GetDisplayColor();
 			ImGui_PushStyleColor(ImGuiCol_Text, text_color);
-			if(ImGui_Selectable(line_number + comic_elements[item_no].GetDisplayString(), display_index == int(item_no), ImGuiSelectableFlags_AllowDoubleClick)){
+			if(ImGui_Selectable(line_number + comic_elements[item_no].GetDisplayString(), display_index == item_no, ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
 					if(comic_elements[comic_indexes[i]].has_settings){
 						ImGui_OpenPopup("Edit");
@@ -797,7 +800,7 @@ void DrawGUI(){
 					if(target_line == int(i)){
 						comic_elements[item_no].SelectAgain();
 					}
-					display_index = int(item_no);
+					display_index = item_no;
 					target_line = int(i);
 				}
 			}
@@ -943,6 +946,7 @@ void InsertElement(ComicElement@ new_element){
 		display_index = comic_indexes[current_line + 1];
 		target_line += 1;
 	}
+
 	ReorderElements();
 	unsaved = true;
 }
