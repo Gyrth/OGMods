@@ -258,6 +258,7 @@ void ReorderElements(){
 		ComicElement@ current_element = comic_elements[comic_indexes[index]];
 		current_element.SetIndex(index);
 		current_element.ClearTarget();
+		current_element.SetEdit(false);
 		current_element.SetVisible(false);
 		if(current_element.comic_element_type == comic_page){
 			// A page needs to get all the comic elements untill it finds different page.
@@ -946,8 +947,8 @@ void InsertElement(ComicElement@ new_element){
 		display_index = comic_indexes[current_line + 1];
 		target_line += 1;
 	}
-
 	ReorderElements();
+
 	unsaved = true;
 }
 
