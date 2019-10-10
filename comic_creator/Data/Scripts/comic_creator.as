@@ -685,7 +685,7 @@ void DrawGUI(){
 		ImGui_Begin("Comic Creator " + comic_path + (unsaved?" * " : "") + "###Comic Creator", editor_open, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings);
 		ImGui_PopStyleVar();
 
-		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Delete))){
+		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Delete)) && !ImGui_IsPopupOpen("Edit")){
 			DeleteCurrentElement();
 		}
 

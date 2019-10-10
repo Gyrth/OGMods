@@ -159,7 +159,7 @@ class ComicText : ComicElement{
 	}
 
 	void AddSettings(){
-		if(ImGui_InputTextMultiline("", joined_content, 512, vec2(-1, ImGui_GetWindowHeight() -50.0))){
+		if(ImGui_InputTextMultiline("", joined_content, 512, vec2(-1, ImGui_GetWindowHeight() -80.0))){
 		}
 
 		ImGui_Text("Position :");
