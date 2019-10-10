@@ -31,7 +31,6 @@ class Grabber{
 	}
 
 	void SetIndex(int parent_index){
-		Log(warning, "Index " + (parent_index + 1));
 		index = parent_index + 1;
 		image.setZOrdering(index);
 	}

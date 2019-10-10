@@ -31,6 +31,7 @@ class ComicFont : ComicElement{
 		data["font_color"].append(font_color.x);
 		data["font_color"].append(font_color.y);
 		data["font_color"].append(font_color.z);
+		data["font_color"].append(font_color.a);
 		data["shadowed"] = JSONValue(shadowed);
 		return data;
 	}
@@ -46,9 +47,20 @@ class ComicFont : ComicElement{
 	void SetTarget(ComicElement@ element){
 		ComicText@ new_text = cast<ComicText>(element);
 		@new_text.comic_font = this;
-		/* new_text.SetNewText();
-		new_text.UpdateContent(); */
 		texts.insertLast(new_text);
+	}
+
+	void Delete(){
+		for(uint i = 0; i < texts.size(); i++){
+			@texts[i].comic_font = null;
+			texts[i].SetNewText();
+		}
+	}
+
+	void EditDone(){
+		for(uint i = 0; i < texts.size(); i++){
+			texts[i].SetNewText();
+		}
 	}
 
 	void AddSettings(){
