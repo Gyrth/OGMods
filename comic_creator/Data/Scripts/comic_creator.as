@@ -421,6 +421,7 @@ void Update(int is_paused){
 			ComicElement@ current_element = comic_elements[comic_indexes[index]];
 			current_element.SetVisible(false);
 		}
+		play_direction = 1;
 		current_line = -1;
 		target_line = 0;
 	}
@@ -515,6 +516,7 @@ void GoToLine(int new_line){
 			}
 			GetCurrentElement().SetVisible(false);
 			current_line -= 1;
+			display_index = comic_indexes[current_line];
 			GetCurrentElement().SetVisible(true);
 		// Going to the next line in the script.
 		}else if(new_line > current_line){
@@ -526,6 +528,7 @@ void GoToLine(int new_line){
 				}
 			}
 			current_line += 1;
+			display_index = comic_indexes[current_line];
 			GetCurrentElement().SetVisible(true);
 		// At the correct line.
 		}else{
@@ -585,7 +588,6 @@ int GetPlayingProgress(){
 			}
 		}
 	}
-	display_index = comic_indexes[new_line];
 	return new_line;
 }
 
