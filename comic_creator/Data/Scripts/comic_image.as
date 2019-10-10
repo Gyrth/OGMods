@@ -12,6 +12,7 @@ class ComicImage : ComicElement{
 	float size_y;
 	float rotation;
 	string image_name;
+	vec4 color;
 
 	ComicImage(JSONValue params = JSONValue()){
 		comic_element_type = comic_image;
@@ -19,6 +20,7 @@ class ComicImage : ComicElement{
 		path = GetJSONString(params, "path", "Textures/ui/menus/credits/overgrowth.png");
 		rotation = GetJSONFloat(params, "rotation", 0.0);
 		vec2 position = GetJSONVec2(params, "position", vec2(snap_scale, snap_scale));
+		color = GetJSONVec4(params, "color", vec4(1.0, 1.0, 1.0, 1.0));
 		position_x = position.x;
 		position_y = position.y;
 		vec2 size = GetJSONVec2(params, "size", vec2(720 - (720 % snap_scale), 255 - (255 % snap_scale)));
@@ -44,6 +46,7 @@ class ComicImage : ComicElement{
 
 		image_container.addFloatingElement(new_image, image_name, vec2(position_x, position_y), 0);
 		new_image.setRotation(rotation);
+		new_image.setColor(color);
 		UpdateContent();
 	}
 
@@ -55,6 +58,11 @@ class ComicImage : ComicElement{
 		data["position"] = JSONValue(JSONarrayValue);
 		data["position"].append(position_x);
 		data["position"].append(position_y);
+		data["color"] = JSONValue(JSONarrayValue);
+		data["color"].append(color.x);
+		data["color"].append(color.y);
+		data["color"].append(color.z);
+		data["color"].append(color.a);
 		data["size"] = JSONValue(JSONarrayValue);
 		data["size"].append(size_x);
 		data["size"].append(size_y);
@@ -182,6 +190,8 @@ class ComicImage : ComicElement{
 			}
 		}
 
+		ImGui_Spacing();
+
 		ImGui_Text("Position :");
 		float slider_width = ImGui_GetWindowWidth() / 2.0 - 20.0;
 		ImGui_PushItemWidth(slider_width);
@@ -200,6 +210,8 @@ class ComicImage : ComicElement{
 			UpdateContent();
 		}
 
+		ImGui_Spacing();
+
 		ImGui_Text("Size :");
 		ImGui_Text("X");
 		ImGui_SameLine();
@@ -217,17 +229,31 @@ class ComicImage : ComicElement{
 
 		ImGui_PopItemWidth();
 
-		slider_width = ImGui_GetWindowWidth() - 61.0;
+		slider_width = ImGui_GetWindowWidth() - 80.0;
 		ImGui_PushItemWidth(slider_width);
 
+		ImGui_Spacing();
+
 		ImGui_Text("Rotation :");
-		ImGui_Text("Degrees");
 		ImGui_SameLine();
 		if(ImGui_SliderFloat("###rotation", rotation, -360, 360, "%.0f")){
 			image.setRotation(rotation);
 			UpdateContent();
 		}
 
+		ImGui_PopItemWidth();
+
+		ImGui_Spacing();
+
+		slider_width = ImGui_GetWindowWidth() - 61.0;
+		ImGui_PushItemWidth(slider_width);
+
+		ImGui_Text("Color :");
+		ImGui_SameLine();
+		if(ImGui_ColorEdit4("###Color", color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
+			image.setColor(color);
+			UpdateContent();
+		}
 		ImGui_PopItemWidth();
 	}
 
