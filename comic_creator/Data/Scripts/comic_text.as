@@ -38,9 +38,6 @@ class ComicText : ComicElement{
 		holder_name = imGUI.getUniqueName("text");
 		text_container.addFloatingElement(text_holder, holder_name, vec2(position_x, position_y), 0);
 		SetNewText();
-		for(uint i = 0; i < text_elements.size(); i++){
-			text_elements[i].setRotation(rotation);
-		}
 	}
 
 	JSONValue GetSaveData(){
@@ -75,7 +72,7 @@ class ComicText : ComicElement{
 	void SetNewText(){
 		text_elements.resize(0);
 		holder.clear();
-		holder.setSize(vec2(0,0));
+		holder.setSize(vec2(-1,-1));
 		for(uint i = 0; i < content.size(); i++){
 			IMText@ new_text;
 			if(comic_font is null){
@@ -86,6 +83,7 @@ class ComicText : ComicElement{
 			text_elements.insertLast(@new_text);
 			holder.append(new_text);
 			new_text.setZOrdering(index);
+			new_text.setRotation(rotation);
 		}
 		whole_length = join(content, "").length();
 		// imgui needs to update once or else the position of the grabber isn't calculated correctly.
@@ -160,6 +158,8 @@ class ComicText : ComicElement{
 
 	void AddSettings(){
 		if(ImGui_InputTextMultiline("", joined_content, 512, vec2(-1, ImGui_GetWindowHeight() -80.0))){
+			content = joined_content.split("\n");
+			SetNewText();
 		}
 
 		ImGui_Text("Position :");
@@ -188,18 +188,13 @@ class ComicText : ComicElement{
 		ImGui_Text("Degrees");
 		ImGui_SameLine();
 		if(ImGui_SliderFloat("###rotation", rotation, -360, 360, "%.0f")){
-			for(uint i = 0; i < text_elements.size(); i++){
-				text_elements[i].setRotation(rotation);
-			}
-			UpdateContent();
+			SetNewText();
 		}
 
 		ImGui_PopItemWidth();
 	}
 
 	void EditDone(){
-		content = joined_content.split("\n");
 		display_content = join(content, " ");
-		SetNewText();
 	}
 }
