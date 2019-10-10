@@ -10,6 +10,7 @@
 #include "comic_wait_click.as"
 #include "comic_crawl_in.as"
 #include "comic_music.as"
+#include "comic_wait.as"
 #include "comic_song.as"
 #include "music_load.as"
 
@@ -53,6 +54,7 @@ int target_line = 0;
 int current_line = 0;
 int element_counter = 0;
 bool post_init_done = false;
+float waiting_timer = 0.0;
 
 IMContainer@ image_container;
 IMContainer@ text_container;
@@ -246,6 +248,8 @@ ComicElement@ InterpElement(JSONValue &in function_json){
 		return ComicFadeIn(function_json);
 	}else if(function_json["function_name"].asString() == "move_in"){
 		return ComicMoveIn(function_json);
+	}else if(function_json["function_name"].asString() == "wait"){
+		return ComicWait(function_json);
 	}else{
 		//Either an empty line or an unknown command is in the comic.
 		Log(warning, "Unknown command found: " + function_json["function_name"].asString());
@@ -539,12 +543,17 @@ void GoToLine(int new_line){
 int GetPlayingProgress(){
 	int new_line = current_line;
 	while(true){
-		if(new_line != -1 && (new_line == int(comic_elements.size() -1) || GetCurrentElement().comic_element_type == comic_wait_click || GetCurrentElement().comic_element_type == comic_crawl_in)){
+		if(new_line != -1 && (new_line == int(comic_elements.size() -1) || GetCurrentElement().comic_element_type == comic_wait_click || GetCurrentElement().comic_element_type == comic_crawl_in || GetCurrentElement().comic_element_type == comic_wait)){
 			break;
 		}else{
 			new_line += play_direction;
 		}
 	}
+
+	if(GetCurrentElement().comic_element_type == comic_wait && waiting_timer <= 0.0){
+		waiting_timer = cast<ComicWait>(GetCurrentElement()).duration / 1000.0;
+	}
+
 	if(new_line == current_line){
 		// Waiting for input to progress.
 		if(GetInputPressed(0, "mouse0")){
@@ -566,6 +575,13 @@ int GetPlayingProgress(){
 			if(CanPlayBackward()){
 				new_line = current_line - 1;
 				play_direction = -1;
+			}
+		}else if(waiting_timer > 0.0){
+			waiting_timer -= time_step;
+			if(waiting_timer <= 0.0){
+				if(CanPlayForward() && play_direction == 1 || CanPlayBackward() && play_direction == -1){
+					new_line += play_direction;
+				}
 			}
 		}
 	}
@@ -927,6 +943,8 @@ ComicElement@ CreateNewFunction(comic_element_types element_type) {
 			return ComicText();
 		case comic_wait_click:
 			return ComicWaitClick();
+		case comic_wait:
+			return ComicWait();
 	}
 	return ComicElement();
 }

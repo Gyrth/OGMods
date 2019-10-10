@@ -1,17 +1,21 @@
-enum comic_element_types { 	none,
-							comic_image,
-							comic_page,
-						 	comic_fade_in,
-							comic_move_in,
-							comic_font,
-							comic_sound,
-							comic_text,
-							comic_wait_click,
-							comic_crawl_in,
-							comic_music,
-							comic_song};
+enum comic_element_types	{
+								none,
+								comic_image,
+								comic_page,
+							 	comic_fade_in,
+								comic_move_in,
+								comic_font,
+								comic_sound,
+								comic_text,
+								comic_wait_click,
+								comic_crawl_in,
+								comic_music,
+								comic_song,
+								comic_wait
+							};
 
-array<string> comic_element_names = {	"None",
+array<string> comic_element_names =	{
+										"None",
 										"Image",
 										"Page",
 										"Fade In",
@@ -22,7 +26,8 @@ array<string> comic_element_names = {	"None",
 										"Wait For Click",
 										"Crawl In",
 										"Music",
-										"Song"
+										"Song",
+										"Wait"
 									};
 
 array<string> sorted_element_names;
@@ -39,7 +44,8 @@ array<vec4> display_colors =	{
 									vec4(123, 130, 138, 255),
 									vec4(78, 136, 124, 255),
 									vec4(164, 43, 43, 255),
-									vec4(164, 43, 43, 255)
+									vec4(164, 43, 43, 255),
+									vec4(166, 176, 187, 255)
 								};
 
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
