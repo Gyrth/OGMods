@@ -98,11 +98,12 @@ class ComicImage : ComicElement{
 		vec2 position = image_container.getElementPosition(image_name);
 		vec2 size = image.getSize();
 
-		grabber_container.moveElement(grabber_top_left.grabber_name, position - vec2(grabber_size / 2.0));
-		grabber_container.moveElement(grabber_top_right.grabber_name, position + vec2(size.x, 0) - vec2(grabber_size / 2.0));
-		grabber_container.moveElement(grabber_bottom_left.grabber_name, position + vec2(0, size.y) - vec2(grabber_size / 2.0));
-		grabber_container.moveElement(grabber_bottom_right.grabber_name, position + vec2(size.x, size.y) - vec2(grabber_size / 2.0));
-		grabber_container.moveElement(grabber_center.grabber_name, position + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+		grabber_top_left.SetPosition(position);
+		grabber_top_right.SetPosition(position + vec2(size.x, 0));
+		grabber_bottom_left.SetPosition(position + vec2(0, size.y));
+		grabber_bottom_right.SetPosition(position + vec2(size.x, size.y));
+		grabber_center.SetPosition(position);
+		grabber_center.SetSize(vec2(size_x, size_y));
 
 		image.showBorder(edit_mode);
 		grabber_top_left.SetVisible(edit_mode);

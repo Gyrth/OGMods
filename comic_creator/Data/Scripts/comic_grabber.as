@@ -8,12 +8,19 @@ class Grabber{
 	string grabber_name;
 	bool visible = false;
 	int index = 0;
+	vec2 size = vec2(grabber_size);
+	float margin = 50.0;
 
 	Grabber(string name, int _direction_x, int _direction_y, grabber_types _grabber_type){
 		grabber_type = _grabber_type;
 
-		IMImage grabber_image("Textures/grabber.png");
-		@image = grabber_image;
+		if(grabber_type == scaler){
+			IMImage grabber_image("Textures/grabber.png");
+			@image = grabber_image;
+		}else{
+			IMImage grabber_image("Textures/empty.png");
+			@image = grabber_image;
+		}
 
 		direction_x = _direction_x;
 		direction_y = _direction_y;
@@ -25,9 +32,22 @@ class Grabber{
 
 		grabber_name = imGUI.getUniqueName("grabber");
 
-		grabber_image.addMouseOverBehavior(IMFixedMessageOnMouseOver( on_enter, on_over, on_exit ), "");
-		grabber_image.setSize(vec2(grabber_size));
-		grabber_container.addFloatingElement(grabber_image, grabber_name, vec2(grabber_size / 2.0), 0);
+		image.addMouseOverBehavior(IMFixedMessageOnMouseOver( on_enter, on_over, on_exit ), "");
+		image.setSize(size);
+		grabber_container.addFloatingElement(image, grabber_name, vec2(0.0), 0);
+	}
+
+	void SetSize(vec2 _size){
+		size = _size;
+		image.setSize(vec2(abs(size.x), abs(size.y)) - vec2(margin));
+	}
+
+	void SetPosition(vec2 position){
+		if(grabber_type == scaler){
+			grabber_container.moveElement(grabber_name, position - (size / 2.0));
+		}else{
+			grabber_container.moveElement(grabber_name, vec2(size.x < 0.0?size.x+position.x:position.x, size.y < 0.0?size.y+position.y:position.y) + (vec2(margin / 2.0)));
+		}
 	}
 
 	void SetIndex(int parent_index){
@@ -36,7 +56,7 @@ class Grabber{
 	}
 
 	vec2 GetPosition(){
-		return grabber_container.getElementPosition(grabber_name) + vec2(grabber_size / 2.0);
+		return grabber_container.getElementPosition(grabber_name) + (size / 2.0);
 	}
 
 	void Delete(){

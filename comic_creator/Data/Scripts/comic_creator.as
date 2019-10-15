@@ -26,7 +26,7 @@ string black_background = "Textures/black.tga";
 string default_image = "Textures/ui/menus/credits/overgrowth.png";
 array<ComicElement@> comic_elements;
 array<int> comic_indexes;
-int grabber_size = 25;
+int grabber_size = 35;
 
 enum environment_states { in_game, in_menu };
 enum creator_states { editing, playing };
