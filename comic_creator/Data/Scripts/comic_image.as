@@ -13,6 +13,7 @@ class ComicImage : ComicElement{
 	float rotation;
 	string image_name;
 	vec4 color;
+	bool keep_aspect;
 
 	ComicImage(JSONValue params = JSONValue()){
 		comic_element_type = comic_image;
@@ -21,6 +22,7 @@ class ComicImage : ComicElement{
 		rotation = GetJSONFloat(params, "rotation", 0.0);
 		vec2 position = GetJSONVec2(params, "position", vec2(snap_scale, snap_scale));
 		color = GetJSONVec4(params, "color", vec4(1.0, 1.0, 1.0, 1.0));
+		keep_aspect = GetJSONBool(params, "keep_aspect", false);
 		position_x = position.x;
 		position_y = position.y;
 		vec2 size = GetJSONVec2(params, "size", vec2(720 - (720 % snap_scale), 255 - (255 % snap_scale)));
@@ -54,6 +56,7 @@ class ComicImage : ComicElement{
 		JSONValue data;
 		data["function_name"] = JSONValue("add_image");
 		data["path"] = JSONValue(path);
+		data["keep_aspect"] = JSONValue(keep_aspect);
 		data["rotation"] = JSONValue(rotation);
 		data["position"] = JSONValue(JSONarrayValue);
 		data["position"].append(position_x);
@@ -122,22 +125,60 @@ class ComicImage : ComicElement{
 
 	void AddSize(vec2 added_size, int direction_x, int direction_y){
 		if(direction_x == 1){
-			image.setSizeX(image.getSizeX() + added_size.x);
-			size_x += added_size.x;
+			if(keep_aspect){
+				if(direction_y != -1){
+					image.scaleToSizeX(image.getSizeX() + added_size.x);
+					size_x += added_size.x;
+					size_y = image.getSizeY();
+				}
+			}else{
+				image.setSizeX(image.getSizeX() + added_size.x);
+				size_x += added_size.x;
+			}
 		}else{
-			image.setSizeX(image.getSizeX() - added_size.x);
-			size_x -= added_size.x;
-			image_container.moveElementRelative(image_name, vec2(added_size.x, 0.0));
-			position_x += added_size.x;
+			if(keep_aspect){
+				if(direction_y != -1){
+					image.scaleToSizeX(image.getSizeX() - added_size.x);
+					size_x -= added_size.x;
+					image_container.moveElementRelative(image_name, vec2(added_size.x, 0.0));
+					position_x += added_size.x;
+					size_y = image.getSizeY();
+				}
+			}else{
+				image.setSizeX(image.getSizeX() - added_size.x);
+				size_x -= added_size.x;
+				image_container.moveElementRelative(image_name, vec2(added_size.x, 0.0));
+				position_x += added_size.x;
+			}
 		}
 		if(direction_y == 1){
-			image.setSizeY(image.getSizeY() + added_size.y);
-			size_y += added_size.y;
+			if(!keep_aspect){
+				image.setSizeY(image.getSizeY() + added_size.y);
+				size_y += added_size.y;
+			}
 		}else{
-			image.setSizeY(image.getSizeY() - added_size.y);
-			size_y -= added_size.y;
-			image_container.moveElementRelative(image_name, vec2(0.0, added_size.y));
-			position_y += added_size.y;
+			if(keep_aspect){
+				if(direction_x == 1){
+					image.scaleToSizeY(image.getSizeY() - added_size.y);
+					size_y -= added_size.y;
+					image_container.moveElementRelative(image_name, vec2(0.0, added_size.y));
+					position_y += added_size.y;
+					size_x = image.getSizeX();
+				}else{
+					float size_x_before = image.getSizeX();
+					image.scaleToSizeY(image.getSizeY() - added_size.y);
+					size_y -= added_size.y;
+					float moved_x = size_x_before - image.getSizeX();
+					image_container.moveElementRelative(image_name, vec2(moved_x, added_size.y));
+					position_y += added_size.y;
+					size_x = image.getSizeX();
+				}
+			}else{
+				image.setSizeY(image.getSizeY() - added_size.y);
+				size_y -= added_size.y;
+				image_container.moveElementRelative(image_name, vec2(0.0, added_size.y));
+				position_y += added_size.y;
+			}
 		}
 		UpdateContent();
 	}
@@ -258,6 +299,7 @@ class ComicImage : ComicElement{
 			UpdateContent();
 		}
 		ImGui_PopItemWidth();
+		ImGui_Checkbox("Keep aspect ratio", keep_aspect);
 	}
 
 	void SetEdit(bool editing){
