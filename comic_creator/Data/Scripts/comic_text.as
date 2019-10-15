@@ -106,9 +106,10 @@ class ComicText : ComicElement{
 		grabber_center.SetIndex(index);
 
 		vec2 position = text_container.getElementPosition(holder_name);
+		grabber_center.SetPosition(position);
 		vec2 size = holder.getSize();
 		if(size.x + size.y > 0.0){
-			grabber_container.moveElement(grabber_center.grabber_name, position + vec2(size.x / 2.0, size.y / 2.0) - vec2(grabber_size / 2.0));
+			grabber_center.SetSize(vec2(size.x, size.y));
 		}
 	}
 
