@@ -9,11 +9,9 @@ class ComicMusic : ComicElement{
 		has_settings = true;
 	}
 
-	void SetVisible(bool _visible){
+	bool SetVisible(bool _visible){
 		visible = _visible;
-		if(visible){
-
-		}
+		return visible;
 	}
 
 	JSONValue GetSaveData(){
@@ -27,7 +25,7 @@ class ComicMusic : ComicElement{
 		return "AddMusic " + path;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_Text("Current Music : ");
 		ImGui_Text(path);
 		if(ImGui_Button("Set Music XML")){

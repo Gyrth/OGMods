@@ -18,11 +18,12 @@ class ComicSound : ComicElement{
 		PlaySound(path);
 	}
 
-	void SetVisible(bool _visible){
+	bool SetVisible(bool _visible){
 		visible = _visible;
 		if(visible && creator_state == playing && play_direction == 1){
 			PlaySound(path);
 		}
+		return visible;
 	}
 
 	JSONValue GetSaveData(){
@@ -36,7 +37,7 @@ class ComicSound : ComicElement{
 		return "PlaySound " + path;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_Text("Current Sound : ");
 		ImGui_Text(path);
 		if(ImGui_Button("Set Sound")){

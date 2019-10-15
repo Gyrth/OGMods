@@ -8,11 +8,12 @@ class ComicSong : ComicElement{
 		has_settings = true;
 	}
 
-	void SetVisible(bool _visible){
+	bool SetVisible(bool _visible){
 		visible = _visible;
 		if(visible){
 			PlaySong(name);
 		}
+		return visible;
 	}
 
 	JSONValue GetSaveData(){
@@ -26,7 +27,7 @@ class ComicSong : ComicElement{
 		return "PlaySong " + name;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_InputText("Song", name, 32);
 	}
 

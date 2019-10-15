@@ -27,6 +27,7 @@ class ComicFont : ComicElement{
 		JSONValue data;
 		data["function_name"] = JSONValue("set_font");
 		data["font_name"] = JSONValue(font_name);
+		data["font_size"] = JSONValue(font_size);
 		data["font_color"] = JSONValue(JSONarrayValue);
 		data["font_color"].append(font_color.x);
 		data["font_color"].append(font_color.y);
@@ -40,30 +41,34 @@ class ComicFont : ComicElement{
 		return "SetFont " + font_name + " " + font_size + (shadowed ? " shadowed" : "");
 	}
 
-	void ClearTarget(){
+	void RefreshTarget(){
 		texts.resize(0);
-	}
-
-	void SetTarget(ComicElement@ element){
-		ComicText@ new_text = cast<ComicText>(element);
-		@new_text.comic_font = this;
-		texts.insertLast(new_text);
+		// The font applies to all the next text element untill a new font is found.
+		for(uint j = index + 1; j < comic_indexes.size(); j++){
+			if(comic_elements[comic_indexes[j]].comic_element_type == comic_text){
+				ComicText@ text = cast<ComicText>(comic_elements[comic_indexes[j]]);
+				@text.comic_font = this;
+				texts.insertLast(text);
+			}else if(comic_elements[comic_indexes[j]].comic_element_type == comic_font){
+				break;
+			}
+		}
 	}
 
 	void Delete(){
 		for(uint i = 0; i < texts.size(); i++){
 			@texts[i].comic_font = null;
-			texts[i].SetNewText();
+			texts[i].UpdateContent();
 		}
 	}
 
 	void EditDone(){
 		for(uint i = 0; i < texts.size(); i++){
-			texts[i].SetNewText();
+			texts[i].UpdateContent();
 		}
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_Text("Font : " + font_name);
 		ImGui_SameLine();
 		if(ImGui_Button("Pick Font")){

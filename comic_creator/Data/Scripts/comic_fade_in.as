@@ -15,6 +15,10 @@ class ComicFadeIn : ComicElement{
 	}
 
 	void SelectAgain(){
+		Preview();
+	}
+
+	void Preview(){
 		if(@target != null){
 			IMFadeIn new_fade(duration, IMTweenType(tween_type));
 			target.RemoveUpdateBehavior(name);
@@ -22,24 +26,27 @@ class ComicFadeIn : ComicElement{
 		}
 	}
 
-	void SetVisible(bool _visible){
-		visible = _visible;
+	bool SetVisible(bool _visible){
 		if(@target != null){
-			if(visible){
+			if(!visible){
 				IMFadeIn new_fade(duration, IMTweenType(tween_type));
 				target.AddUpdateBehavior(new_fade, name);
-			}else{
+			}else if(_visible == false){
 				target.RemoveUpdateBehavior(name);
 			}
 		}
+		visible = _visible;
+		return visible;
 	}
 
-	void ClearTarget(){
-		@target = null;
+	void SetEdit(bool _edit){
+		if(_edit){
+			Preview();
+		}
 	}
 
-	void SetTarget(ComicElement@ element){
-		@target = element;
+	void RefreshTarget(){
+		@target = GetPreviousElementOfType({comic_text, comic_image}, index);
 	}
 
 	JSONValue GetSaveData(){
@@ -54,8 +61,10 @@ class ComicFadeIn : ComicElement{
 		return "FadeIn " + duration;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_DragInt("Duration", duration, 1.0, 1, 10000);
-		ImGui_Combo("Tween Type", tween_type, tween_types, tween_types.size());
+		if(ImGui_Combo("Tween Type", tween_type, tween_types, tween_types.size())){
+			Preview();
+		}
 	}
 }

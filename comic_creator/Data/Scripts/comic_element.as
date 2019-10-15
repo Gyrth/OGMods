@@ -70,18 +70,17 @@ class ComicElement{
 	void StartEdit(){}
 	void SetEdit(bool editing){}
 	void SetProgress(int _progress){}
-	void AddSettings(){}
+	void DrawSettings(){}
 	void EditDone(){}
 	void SetCurrent(bool _current){}
 	void Delete(){}
 	void SetIndex(int _index){
 		index = _index;
 	}
-	void SetVisible(bool _visible){
+	bool SetVisible(bool _visible){
 		visible = _visible;
+		return visible;
 	}
-	void SetTarget(ComicElement@ element){}
-	void ClearTarget(){}
 	JSONValue GetSaveData(){
 		return JSONValue();
 	}
@@ -90,4 +89,5 @@ class ComicElement{
 		return display_colors[comic_element_type];
 	}
 	void SelectAgain(){}
+	void RefreshTarget(){}
 }

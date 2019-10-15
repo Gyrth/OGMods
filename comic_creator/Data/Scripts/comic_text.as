@@ -62,11 +62,6 @@ class ComicText : ComicElement{
 
 	void SetIndex(int _index){
 		index = _index;
-		holder.setZOrdering(index);
-		for(uint i = 0; i < text_elements.size(); i++){
-			text_elements[i].setZOrdering(index);
-		}
-		grabber_center.SetIndex(index);
 	}
 
 	void SetNewText(){
@@ -102,10 +97,13 @@ class ComicText : ComicElement{
 	void UpdateContent(){
 		holder.showBorder(edit_mode);
 		holder.setVisible(visible);
+		holder.setZOrdering(index);
 		for(uint i = 0; i < text_elements.size(); i++){
 			text_elements[i].setVisible(visible);
+			text_elements[i].setZOrdering(index);
 		}
 		grabber_center.SetVisible(edit_mode);
+		grabber_center.SetIndex(index);
 
 		vec2 position = text_container.getElementPosition(holder_name);
 		vec2 size = holder.getSize();
@@ -114,9 +112,10 @@ class ComicText : ComicElement{
 		}
 	}
 
-	void SetVisible(bool _visible){
+	bool SetVisible(bool _visible){
 		visible = _visible;
 		UpdateContent();
+		return visible;
 	}
 
 	void StartEdit(){
@@ -156,7 +155,7 @@ class ComicText : ComicElement{
 		}
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		if(ImGui_InputTextMultiline("", joined_content, 512, vec2(-1, ImGui_GetWindowHeight() -80.0))){
 			content = joined_content.split("\n");
 			SetNewText();

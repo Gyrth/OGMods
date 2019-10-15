@@ -9,35 +9,32 @@ class ComicCrawlIn : ComicElement{
 		has_settings = true;
 	}
 
-	void SetCurrent(bool _current){
-		if(@target != null){
-			if(_current){
-				timer = 0.0;
-			}else{
-				target.SetProgress(100);
-			}
-		}
+	void SelectAgain(){
+		timer = 0.0;
 	}
 
-	void SelectAgain(){
-		if(@target != null){
+	bool SetVisible(bool _visible){
+		if(_visible){
+			if(@target != null && timer < duration){
+				timer += time_step * 1000.0;
+				target.SetProgress(int(timer * 100.0 / duration));
+				return false;
+			}
+		}else{
+			target.SetProgress(100.0);
 			timer = 0.0;
 		}
+		return true;
 	}
 
-	void ClearTarget(){
-		@target = null;
-	}
-
-	void SetTarget(ComicElement@ element){
-		@target = element;
-	}
-
-	void Update(){
-		if(@target != null && timer < duration){
-			timer += time_step * 1000.0;
-			target.SetProgress(int(timer * 100.0 / duration));
+	void SetEdit(bool _edit){
+		if(!_edit && @target != null){
+			target.SetProgress(100);
 		}
+	}
+
+	void RefreshTarget(){
+		@target = GetPreviousElementOfType({comic_text}, index);
 	}
 
 	JSONValue GetSaveData(){
@@ -51,7 +48,7 @@ class ComicCrawlIn : ComicElement{
 		return "CrawlIn " + duration;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		if(ImGui_DragInt("Duration", duration, 1.0, 1, 10000)){
 			timer = 0.0;
 		}

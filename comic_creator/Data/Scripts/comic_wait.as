@@ -1,6 +1,7 @@
 class ComicWait : ComicElement{
 
 	float duration;
+	float wait_timer = 0.0;
 
 	ComicWait(JSONValue params = JSONValue()){
 		comic_element_type = comic_wait;
@@ -19,7 +20,24 @@ class ComicWait : ComicElement{
 		return "Wait " + duration;
 	}
 
-	void AddSettings(){
+	bool SetVisible(bool _visible){
+		if(_visible){
+			if(wait_timer == 0.0){
+				wait_timer = duration / 1000.0;
+			}else{
+				wait_timer -= time_step;
+				if(wait_timer <= 0.0){
+					wait_timer = 0.0;
+					return true;
+				}
+			}
+		}else{
+			wait_timer = 0.0;
+		}
+		return false;
+	}
+
+	void DrawSettings(){
 		float slider_width = ImGui_GetWindowWidth() - 80.0;
 		ImGui_PushItemWidth(slider_width);
 

@@ -16,6 +16,10 @@ class ComicMoveIn : ComicElement{
 	}
 
 	void SelectAgain(){
+		Preview();
+	}
+
+	void Preview(){
 		if(@target != null){
 			IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
 			target.RemoveUpdateBehavior(name);
@@ -23,24 +27,27 @@ class ComicMoveIn : ComicElement{
 		}
 	}
 
-	void SetVisible(bool _visible){
-		visible = _visible;
+	bool SetVisible(bool _visible){
 		if(@target != null){
-			if(visible){
+			if(!visible){
 				IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
 				target.AddUpdateBehavior(new_move, name);
-			}else{
+			}else if(_visible == false){
 				target.RemoveUpdateBehavior(name);
 			}
 		}
+		visible = _visible;
+		return visible;
 	}
 
-	void SetTarget(ComicElement@ element){
-		@target = element;
+	void SetEdit(bool _edit){
+		if(_edit){
+			Preview();
+		}
 	}
 
-	void ClearTarget(){
-		@target = null;
+	void RefreshTarget(){
+		@target = GetPreviousElementOfType({comic_text, comic_image}, index);
 	}
 
 	JSONValue GetSaveData(){
@@ -58,9 +65,11 @@ class ComicMoveIn : ComicElement{
 		return "MoveIn " + duration + " " + offset.x + " " + offset.y;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_DragInt("Duration", duration, 1.0, 1, 10000);
 		ImGui_DragFloat2("Offset", offset);
-		ImGui_Combo("Tween Type", tween_type, tween_types, tween_types.size());
+		if(ImGui_Combo("Tween Type", tween_type, tween_types, tween_types.size())){
+			Preview();
+		}
 	}
 }

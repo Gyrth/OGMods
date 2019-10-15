@@ -84,12 +84,6 @@ class ComicImage : ComicElement{
 
 	void SetIndex(int _index){
 		index = _index;
-		image.setZOrdering(index);
-		grabber_top_left.SetIndex(index);
-		grabber_top_right.SetIndex(index);
-		grabber_bottom_left.SetIndex(index);
-		grabber_bottom_right.SetIndex(index);
-		grabber_center.SetIndex(index);
 	}
 
 	void SetNewImage(){
@@ -116,6 +110,13 @@ class ComicImage : ComicElement{
 		grabber_bottom_left.SetVisible(edit_mode);
 		grabber_bottom_right.SetVisible(edit_mode);
 		grabber_center.SetVisible(edit_mode);
+
+		image.setZOrdering(index);
+		grabber_top_left.SetIndex(index);
+		grabber_top_right.SetIndex(index);
+		grabber_bottom_left.SetIndex(index);
+		grabber_bottom_right.SetIndex(index);
+		grabber_center.SetIndex(index);
 	}
 
 	void AddSize(vec2 added_size, int direction_x, int direction_y){
@@ -171,12 +172,13 @@ class ComicImage : ComicElement{
 		image.removeUpdateBehavior(name);
 	}
 
-	void SetVisible(bool _visible){
+	bool SetVisible(bool _visible){
 		visible = _visible;
 		UpdateContent();
+		return visible;
 	}
 
-	void AddSettings(){
+	void DrawSettings(){
 		ImGui_Text("Current Image : ");
 		ImGui_SameLine();
 		ImGui_Text(path);
