@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <particle>
     <textures color_map = "Data/Textures/spark.tga" 
-              shader = "litsprite"
-              soft_shader = "litspritesoft"/>
+              shader = "envobject #PARTICLE"
+              soft_shader = "envobject #PARTICLE"/>
     <stretch velocity_axis = "true" speed_stretch = "true" min_squash = "true"/>
     <size min = "3.0" max = "6.0"/>
     <color red =   "1.0"
