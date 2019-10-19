@@ -66,8 +66,14 @@ class ComicMoveIn : ComicElement{
 	}
 
 	void DrawSettings(){
-		ImGui_DragInt("Duration", duration, 1.0, 1, 10000);
-		ImGui_DragFloat2("Offset", offset);
+		if(ImGui_DragInt("Duration", duration, 1.0, 1, 10000)){
+			Preview();
+		}
+
+		if(ImGui_DragFloat2("Offset", offset)){
+			Preview();
+		}
+		
 		if(ImGui_Combo("Tween Type", tween_type, tween_types, tween_types.size())){
 			Preview();
 		}
