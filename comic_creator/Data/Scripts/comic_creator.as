@@ -220,6 +220,8 @@ void InterpComic(){
 		}
 	}
 
+	snap_scale = GetJSONInt(data.getRoot()["settings"], "snap_scale", 20);
+
 	Log(info, "Interp of comic script done.");
 	ReorderElements();
 	RefreshTargets();
@@ -922,6 +924,10 @@ void SaveComic(string path = ""){
 		functions.append(comic_elements[comic_indexes[i]].GetSaveData());
 	}
 	data.getRoot()["functions"] = functions;
+
+	JSONValue settings;
+	settings["snap_scale"] = JSONValue(snap_scale);
+	data.getRoot()["settings"] = settings;
 
 	StartWriteFile();
 	AddFileString(data.writeString(false));
