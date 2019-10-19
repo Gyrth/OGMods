@@ -367,11 +367,15 @@ void Update(int is_paused){
 	if(GetInputPressed(0, "f1") && environment_state == in_menu){
 		editor_open = !editor_open;
 		if(!editor_open){
-			GetCurrentElement().SetEditing(false);
+			if(comic_elements.size() > 0){
+				GetCurrentElement().SetEditing(false);
+			}
 			creator_state = playing;
 			play_direction = 1;
 		}else if(editor_open){
-			GetCurrentElement().SetEditing(true);
+			if(comic_elements.size() > 0){
+				GetCurrentElement().SetEditing(true);
+			}
 			target_line = current_line;
 			creator_state = editing;
 		}
@@ -446,6 +450,7 @@ void UpdateProgress(){
 	if(comic_elements.size() == 0){
 		return;
 	}
+
 	if(creator_state == playing){
 		UpdatePlaying();
 	}else{
@@ -498,12 +503,12 @@ void UpdateEditing(){
 			if(current_line == 0){
 				break;
 			}else{
+				Log(warning, "Go backward");
 				play_direction = -1;
 				GetCurrentElement().SetEditing(false);
 				GetCurrentElement().SetVisible(false);
 				current_line -= 1;
 				display_index = comic_indexes[current_line];
-				Log(warning, "Go backward");
 				GetCurrentElement().SetEditing(true);
 			}
 		}else{
