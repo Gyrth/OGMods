@@ -21,12 +21,9 @@ TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/
 TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Copy.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef delete_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Delete.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
-string grid_background = "Textures/grid.png";
-string black_background = "Textures/black.tga";
 string default_image = "Textures/ui/menus/credits/overgrowth.png";
 array<ComicElement@> comic_elements;
 array<int> comic_indexes;
-int grabber_size = 35;
 
 enum environment_states { in_game, in_menu };
 enum creator_states { editing, playing };
@@ -38,23 +35,22 @@ bool editor_open = creator_state == editing;
 
 vec2 click_position;
 Grabber@ current_grabber = null;
-ComicFont@ current_font = null;
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 string comic_path;
-uint image_layer = 0;
-uint text_layer = 0;
-uint grabber_layer = 2;
 
 bool dragging = false;
 bool unsaved = false;
-bool at_correct_line = false;
 int snap_scale = 20;
 int target_line = 0;
+int play_direction = 1.0;
 
 int current_line = 0;
-int element_counter = 0;
 bool post_init_done = false;
-float waiting_timer = 0.0;
+string comic_content;
+bool reorded = false;
+int display_index = 0;
+int drag_target_line = 0;
+bool update_scroll = false;
 
 IMContainer@ image_container;
 IMContainer@ text_container;
@@ -177,14 +173,12 @@ bool DialogueCameraControl(){
 	return (editor_open || creator_state == playing);
 }
 
-string comic_content;
 void LoadComic(string path){
 	comic_content = "";
 	comic_path = path;
 	image_container.clear();
 	text_container.clear();
 	grabber_container.clear();
-	@current_font = null;
 	@current_grabber = null;
 	comic_elements.resize(0);
 	comic_indexes.resize(0);
@@ -426,14 +420,11 @@ void CloseComic(){
 	grabber_container.clear();
 	current_line = 0;
 	target_line = 0;
-	@current_font = null;
 	@current_grabber = null;
 	comic_elements.resize(0);
 	comic_indexes.resize(0);
 	creator_state = editing;
 }
-
-int play_direction = 1.0;
 
 bool CanPlayForward(){
 	if(current_line + 1 < int(comic_indexes.size())){
@@ -597,11 +588,6 @@ string ToLowerCase(string input){
 	}
 	return output;
 }
-
-bool reorded = false;
-int display_index = 0;
-int drag_target_line = 0;
-bool update_scroll = false;
 
 void DrawGUI(){
 	DrawBackground();
@@ -806,8 +792,6 @@ void DrawGUI(){
 		RefreshTargets();
 	}
 
-	if(at_correct_line){
-	}
 	imGUI.render();
 }
 

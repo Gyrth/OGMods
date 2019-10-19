@@ -8,6 +8,7 @@ class Grabber{
 	string grabber_name;
 	bool visible = false;
 	int index = 0;
+	int grabber_size = 35;
 	vec2 size = vec2(grabber_size);
 	float margin = 50.0;
 
