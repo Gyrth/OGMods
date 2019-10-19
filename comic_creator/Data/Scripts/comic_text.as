@@ -35,6 +35,7 @@ class ComicText : ComicElement{
 		text_holder.setClip(false);
 
 		@grabber_center = Grabber("center", 1, 1, mover);
+		grabber_center.margin = 0.0;
 		holder_name = imGUI.getUniqueName("text");
 		text_container.addFloatingElement(text_holder, holder_name, vec2(position_x, position_y), 0);
 		SetNewText();
