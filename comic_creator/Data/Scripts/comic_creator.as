@@ -117,6 +117,7 @@ void Initialize(){
 		LoadComic(new_comic_path);
 		SetInterlevelData("load_comic", "");
 	}else{
+		post_init_done = true;
 		comic_path = "New Comic";
 	}
 }
