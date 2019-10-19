@@ -13,11 +13,18 @@ class ComicSound : ComicElement{
 	}
 
 	bool SetVisible(bool _visible){
-		visible = _visible;
-		if(visible && creator_state == playing && play_direction == 1){
+		if(!visible && !(creator_state == editing && play_direction == -1)){
 			PlaySound(path);
 		}
+
+		visible = _visible;
 		return visible;
+	}
+
+	void SetEditing(bool editing){
+		if(editing){
+			PlaySound(path);
+		}
 	}
 
 	JSONValue GetSaveData(){
@@ -38,6 +45,7 @@ class ComicSound : ComicElement{
 			string new_path = GetUserPickedReadPath("wav", "Data/Sounds");
 			if(new_path != ""){
 				path = new_path;
+				PlaySound(path);
 			}
 		}
 	}
