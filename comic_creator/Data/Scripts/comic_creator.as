@@ -43,6 +43,8 @@ bool unsaved = false;
 int snap_scale = 20;
 int target_line = 0;
 int play_direction = 1.0;
+bool left_click = false;
+bool right_click = false;
 
 int current_line = 0;
 bool post_init_done = false;
@@ -456,6 +458,9 @@ void UpdateProgress(){
 
 void UpdatePlaying(){
 	while(true){
+		GetCurrentElement().ParseInput(left_click, right_click);
+		left_click = false;
+		right_click = false;
 		if(GetCurrentElement().SetVisible(true)){
 			if(play_direction == 1){
 				if(CanPlayForward()){
@@ -478,6 +483,12 @@ void UpdatePlaying(){
 		}
 		current_line += play_direction;
 		display_index = comic_indexes[current_line];
+	}
+
+	if(GetInputPressed(0, "mouse0")){
+		left_click = true;
+	}else if(GetInputPressed(0, "grab")){
+		right_click = true;
 	}
 }
 

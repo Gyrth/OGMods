@@ -12,35 +12,35 @@ class ComicWaitClick : ComicElement{
 		return data;
 	}
 
-	bool SetVisible(bool _visible){
-		if(GetInputPressed(0, "mouse0")){
+	void ParseInput(bool left_mouse, bool right_mouse){
+		if(left_mouse){
 			if(CanPlayForward()){
 				play_direction = 1;
 				clicked = true;
-				return false;
 			}else{
 				StorageSetInt32("progress_" + comic_path, 0);
 				if(environment_state == in_game){
 					CloseComic();
 					SetPaused(false);
 				}else{
-					imGUI.receiveMessage(IMMessage("Back"));
+					this_ui.SendCallback("back");
 				}
 			}
-		}else if(GetInputPressed(0, "grab")){
+		}else if(right_mouse){
 			if(CanPlayBackward()){
 				play_direction = -1;
 				clicked = true;
-				return false;
 			}
 		}
+	}
 
+	bool SetVisible(bool _visible){
 		if(clicked){
 			clicked = false;
 			return true;
+		}else{
+			return false;
 		}
-
-		return false;
 	}
 
 	string GetDisplayString(){

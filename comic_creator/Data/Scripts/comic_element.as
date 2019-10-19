@@ -84,4 +84,5 @@ class ComicElement{
 	}
 	void SelectAgain(){}
 	void RefreshTarget(){}
+	void ParseInput(bool left_mouse, bool right_mouse){}
 }
