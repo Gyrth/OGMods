@@ -18,13 +18,7 @@ class ComicWaitClick : ComicElement{
 				play_direction = 1;
 				clicked = true;
 			}else{
-				StorageSetInt32("progress_" + comic_path, 0);
-				if(environment_state == in_game){
-					CloseComic();
-					SetPaused(false);
-				}else{
-					this_ui.SendCallback("back");
-				}
+				clicked = true;
 			}
 		}else if(right_mouse){
 			if(CanPlayBackward()){

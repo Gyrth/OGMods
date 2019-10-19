@@ -187,8 +187,10 @@ void LoadComic(string path){
 	comic_indexes.resize(0);
 	unsaved = false;
 	current_line = 0;
+	bool has_progress = false;
 
 	if(StorageHasInt32("progress_" + comic_path)){
+		has_progress = true;
 		target_line = StorageGetInt32("progress_" + path);
 	}
 
@@ -203,6 +205,9 @@ void LoadComic(string path){
 		}
 	}
 	InterpComic();
+	if(has_progress){
+		UpdateEditing();
+	}
 }
 
 void InterpComic(){
@@ -467,7 +472,12 @@ void UpdatePlaying(){
 					Log(warning, "Go forward");
 				}else{
 					StorageSetInt32("progress_" + comic_path, 0);
-					imGUI.receiveMessage(IMMessage("Back"));
+					if(environment_state == in_game){
+						CloseComic();
+						SetPaused(false);
+					}else{
+						this_ui.SendCallback("back");
+					}
 					break;
 				}
 			}else if(play_direction == -1){
@@ -483,6 +493,7 @@ void UpdatePlaying(){
 		}
 		current_line += play_direction;
 		display_index = comic_indexes[current_line];
+		StorageSetInt32("progress_" + comic_path, current_line);
 	}
 
 	if(GetInputPressed(0, "mouse0")){
