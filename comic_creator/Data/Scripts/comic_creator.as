@@ -296,11 +296,7 @@ ComicElement@ GetPreviousElementOfType(array<comic_element_types> types, int sta
 }
 
 ComicElement@ GetCurrentElement(){
-	if(current_line == -1){
-		return comic_elements[comic_indexes[0]];
-	}else{
-		return comic_elements[comic_indexes[current_line]];
-	}
+	return comic_elements[comic_indexes[current_line]];
 }
 
 void DrawBackground(){
@@ -390,7 +386,7 @@ void Update(int is_paused){
 			current_element.SetVisible(false);
 		}
 		play_direction = 1;
-		current_line = -1;
+		current_line = 0;
 		target_line = 0;
 	}
 
