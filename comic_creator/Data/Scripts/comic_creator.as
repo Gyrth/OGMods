@@ -372,11 +372,11 @@ void Update(int is_paused){
 	if(GetInputPressed(0, "f1") && environment_state == in_menu){
 		editor_open = !editor_open;
 		if(!editor_open){
-			GetCurrentElement().SetEdit(false);
+			GetCurrentElement().SetEditing(false);
 			creator_state = playing;
 			play_direction = 1;
 		}else if(editor_open){
-			GetCurrentElement().SetEdit(true);
+			GetCurrentElement().SetEditing(true);
 			target_line = current_line;
 			creator_state = editing;
 		}
@@ -494,11 +494,11 @@ void UpdateEditing(){
 		if(current_line < target_line){
 			if(CanPlayForward()){
 				Log(warning, "Go forward");
-				GetCurrentElement().SetEdit(false);
+				GetCurrentElement().SetEditing(false);
 				play_direction = 1;
 				current_line += 1;
 				display_index = comic_indexes[current_line];
-				GetCurrentElement().SetEdit(true);
+				GetCurrentElement().SetEditing(true);
 			}else{
 				break;
 			}
@@ -507,12 +507,12 @@ void UpdateEditing(){
 				break;
 			}else{
 				play_direction = -1;
-				GetCurrentElement().SetEdit(false);
+				GetCurrentElement().SetEditing(false);
 				GetCurrentElement().SetVisible(false);
 				current_line -= 1;
 				display_index = comic_indexes[current_line];
 				Log(warning, "Go backward");
-				GetCurrentElement().SetEdit(true);
+				GetCurrentElement().SetEditing(true);
 			}
 		}else{
 			break;
@@ -884,7 +884,7 @@ ComicElement@ CreateNewFunction(comic_element_types element_type) {
 
 void InsertElement(ComicElement@ new_element){
 	if(comic_elements.size() > 0){
-		GetCurrentElement().SetEdit(false);
+		GetCurrentElement().SetEditing(false);
 	}
 	new_element.PostInit();
 	comic_elements.insertLast(new_element);

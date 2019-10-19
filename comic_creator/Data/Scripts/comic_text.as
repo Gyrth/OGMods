@@ -119,12 +119,7 @@ class ComicText : ComicElement{
 		return visible;
 	}
 
-	void StartEdit(){
-		edit_mode = true;
-		UpdateContent();
-	}
-
-	void SetEdit(bool editing){
+	void SetEditing(bool editing){
 		edit_mode = editing;
 		SetNewText();
 	}

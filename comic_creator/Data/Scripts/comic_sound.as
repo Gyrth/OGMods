@@ -8,12 +8,6 @@ class ComicSound : ComicElement{
 		has_settings = true;
 	}
 
-	void SetCurrent(bool _current){
-		if(creator_state == editing && _current){
-			PlaySound(path);
-		}
-	}
-
 	void SelectAgain(){
 		PlaySound(path);
 	}

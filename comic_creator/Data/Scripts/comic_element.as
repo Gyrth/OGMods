@@ -57,6 +57,7 @@ class ComicElement{
 	bool has_settings = false;
 	int index = -1;
 
+	void PostInit(){}
 	void AddPosition(vec2 added_positon){}
 	void AddSize(vec2 added_size, int direction_x, int direction_y){}
 	Grabber@ GetGrabber(string grabber_name){return null;}
@@ -64,15 +65,9 @@ class ComicElement{
 	string GetDisplayString(){return "";};
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){};
 	void RemoveUpdateBehavior(string behavior_name){};
-	void ShowPage(){}
-	void HidePage(){}
-	void Update(){}
-	void StartEdit(){}
-	void SetEdit(bool editing){}
-	void SetProgress(int _progress){}
+	void SetEditing(bool editing){}
 	void DrawSettings(){}
 	void EditDone(){}
-	void SetCurrent(bool _current){}
 	void Delete(){}
 	void SetIndex(int _index){
 		index = _index;
@@ -84,7 +79,6 @@ class ComicElement{
 	JSONValue GetSaveData(){
 		return JSONValue();
 	}
-	void PostInit(){}
 	vec4 GetDisplayColor(){
 		return display_colors[comic_element_type];
 	}

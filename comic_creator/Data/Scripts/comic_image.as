@@ -302,7 +302,7 @@ class ComicImage : ComicElement{
 		ImGui_Checkbox("Keep aspect ratio", keep_aspect);
 	}
 
-	void SetEdit(bool editing){
+	void SetEditing(bool editing){
 		edit_mode = editing;
 		UpdateContent();
 	}

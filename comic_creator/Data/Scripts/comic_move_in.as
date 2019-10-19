@@ -40,8 +40,8 @@ class ComicMoveIn : ComicElement{
 		return visible;
 	}
 
-	void SetEdit(bool _edit){
-		if(_edit){
+	void SetEditing(bool editing){
+		if(editing){
 			Preview();
 		}
 	}

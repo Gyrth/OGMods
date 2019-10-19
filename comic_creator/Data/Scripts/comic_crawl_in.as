@@ -1,5 +1,5 @@
 class ComicCrawlIn : ComicElement{
-	ComicElement@ target = null;
+	ComicText@ target = null;
 	int duration;
 	float timer = 0.0;
 
@@ -27,14 +27,14 @@ class ComicCrawlIn : ComicElement{
 		return true;
 	}
 
-	void SetEdit(bool _edit){
-		if(!_edit && @target != null){
+	void SetEditing(bool editing){
+		if(!editing && @target != null){
 			target.SetProgress(100);
 		}
 	}
 
 	void RefreshTarget(){
-		@target = GetPreviousElementOfType({comic_text}, index);
+		@target = cast<ComicText>(GetPreviousElementOfType({comic_text}, index));
 	}
 
 	JSONValue GetSaveData(){
