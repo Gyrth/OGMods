@@ -14,7 +14,7 @@ class ComicCrawlIn : ComicElement{
 	}
 
 	bool SetVisible(bool _visible){
-		if(_visible){
+		if(_visible && (creator_state == playing && play_direction == 1 || (creator_state == editing && edit_mode))){
 			if(@target != null && timer < duration){
 				timer += time_step * 1000.0;
 				target.SetProgress(int(timer * 100.0 / duration));
@@ -31,6 +31,8 @@ class ComicCrawlIn : ComicElement{
 		if(!editing && @target != null){
 			target.SetProgress(100);
 		}
+		timer = 0.0;
+		edit_mode = editing;
 	}
 
 	void RefreshTarget(){

@@ -115,9 +115,9 @@ void Initialize(){
 
 	string new_comic_path = GetInterlevelData("load_comic");
 	if(new_comic_path != ""){
-		creator_state = playing;
 		editor_open = false;
 		LoadComic(new_comic_path);
+		creator_state = playing;
 		SetInterlevelData("load_comic", "");
 	}else{
 		post_init_done = true;
@@ -207,6 +207,7 @@ void LoadComic(string path){
 	}
 	InterpComic();
 	if(has_progress){
+
 		UpdateEditing();
 	}
 }
@@ -506,16 +507,18 @@ void UpdatePlaying(){
 }
 
 void UpdateEditing(){
+	ComicElement@ previous_element = GetCurrentElement();
+	bool line_moved = false;
+
 	while(true){
 		GetCurrentElement().SetVisible(true);
 		if(current_line < target_line){
 			if(CanPlayForward()){
 				Log(warning, "Go forward");
-				GetCurrentElement().SetEditing(false);
 				play_direction = 1;
 				current_line += 1;
+				line_moved = true;
 				display_index = comic_indexes[current_line];
-				GetCurrentElement().SetEditing(true);
 			}else{
 				break;
 			}
@@ -525,15 +528,19 @@ void UpdateEditing(){
 			}else{
 				Log(warning, "Go backward");
 				play_direction = -1;
-				GetCurrentElement().SetEditing(false);
 				GetCurrentElement().SetVisible(false);
 				current_line -= 1;
+				line_moved = true;
 				display_index = comic_indexes[current_line];
-				GetCurrentElement().SetEditing(true);
 			}
 		}else{
 			break;
 		}
+	}
+
+	if(line_moved){
+		previous_element.SetEditing(false);
+		GetCurrentElement().SetEditing(true);
 	}
 }
 
