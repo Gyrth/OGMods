@@ -158,6 +158,19 @@ void SortFunctionsAlphabetical(){
 
 void Menu(){
 	ImGui_Checkbox("Comic Creator", editor_open);
+	if(!editor_open){
+		if(comic_elements.size() > 0){
+			GetCurrentElement().SetEditing(false);
+		}
+		creator_state = playing;
+		play_direction = 1;
+	}else if(editor_open){
+		if(comic_elements.size() > 0){
+			GetCurrentElement().SetEditing(true);
+		}
+		target_line = current_line;
+		creator_state = editing;
+	}
 }
 
 void CreateComicUI(){
@@ -406,6 +419,13 @@ void Update(int is_paused){
 		target_line = 0;
 	}
 
+	ProcessMessages();
+	UpdateGrabber();
+	UpdateProgress();
+	imGUI.update();
+}
+
+void ProcessMessages(){
 	while(imGUI.getMessageQueueSize() > 0){
 		IMMessage@ message = imGUI.getNextMessage();
 		/* Log(info, "message " + message.name); */
@@ -423,10 +443,6 @@ void Update(int is_paused){
 
 		}
 	}
-
-	UpdateGrabber();
-	UpdateProgress();
-	imGUI.update();
 }
 
 void CloseComic(){
@@ -478,15 +494,14 @@ void UpdatePlaying(){
 		if(GetCurrentElement().SetVisible(true)){
 			if(play_direction == 1){
 				if(CanPlayForward()){
-					Log(warning, "Go forward");
+					/* Log(warning, "Go forward"); */
 				}else if(!unsaved){
 					StorageSetInt32("progress_" + comic_path, 0);
 					if(environment_state == in_game){
 						CloseComic();
 						SetPaused(false);
 					}else{
-						imGUI.receiveMessage(IMMessage("Back"));
-						/* this_ui.SendCallback("back"); */
+						Back();
 					}
 					break;
 				}else{
@@ -497,7 +512,7 @@ void UpdatePlaying(){
 					break;
 				}else{
 					GetCurrentElement().SetVisible(false);
-					Log(warning, "Go backward");
+					/* Log(warning, "Go backward"); */
 				}
 			}
 		}else{
@@ -609,7 +624,9 @@ void ReceiveMessage(string msg){
 			current_line = 0;
 			token_iter.FindNextToken(msg);
 			LoadComic(token_iter.GetToken(msg));
-			creator_state = playing;
+			if(!editor_open){
+				creator_state = playing;
+			}
 			SetPaused(true);
 		}
 	}
@@ -827,8 +844,7 @@ void DrawGUI(){
 			ImGui_SameLine();
 			if(ImGui_Button("Yes")){
 				unsaved = false;
-				/* this_ui.SendCallback("back"); */
-				imGUI.receiveMessage(IMMessage("Back"));
+				Back();
 			}
 			ImGui_SameLine(0.0, 25.0);
 			if(ImGui_Button("No")){
