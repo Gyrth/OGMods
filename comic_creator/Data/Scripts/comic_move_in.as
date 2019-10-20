@@ -30,10 +30,9 @@ class ComicMoveIn : ComicElement{
 	bool SetVisible(bool _visible){
 		if(@target != null){
 			if(!visible){
+				target.RemoveUpdateBehavior(name);
 				IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
 				target.AddUpdateBehavior(new_move, name);
-			}else if(_visible == false){
-				target.RemoveUpdateBehavior(name);
 			}
 		}
 		visible = _visible;
@@ -73,7 +72,7 @@ class ComicMoveIn : ComicElement{
 		if(ImGui_DragFloat2("Offset", offset)){
 			Preview();
 		}
-		
+
 		if(ImGui_Combo("Tween Type", tween_type, tween_types, tween_types.size())){
 			Preview();
 		}
