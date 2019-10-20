@@ -9,12 +9,17 @@ class ComicSound : ComicElement{
 	}
 
 	void SelectAgain(){
-		PlaySound(path);
+		Play();
+	}
+
+	void Play(){
+		int handle = PlaySound(path);
+		SetSoundGain(handle, volume);
 	}
 
 	bool SetVisible(bool _visible){
-		if(!visible && !(creator_state == editing && play_direction == -1)){
-			PlaySound(path);
+		if(!visible && creator_state == playing){
+			Play();
 		}
 
 		visible = _visible;
@@ -23,7 +28,7 @@ class ComicSound : ComicElement{
 
 	void SetEditing(bool editing){
 		if(editing){
-			PlaySound(path);
+			Play();
 		}
 	}
 
@@ -45,7 +50,7 @@ class ComicSound : ComicElement{
 			string new_path = GetUserPickedReadPath("wav", "Data/Sounds");
 			if(new_path != ""){
 				path = new_path;
-				PlaySound(path);
+				Play();
 			}
 		}
 	}

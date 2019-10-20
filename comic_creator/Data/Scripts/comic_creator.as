@@ -41,6 +41,7 @@ string comic_path;
 bool dragging = false;
 bool unsaved = false;
 int snap_scale = 20;
+float volume = 1.0;
 int target_line = 0;
 int play_direction = 1.0;
 bool left_click = false;
@@ -223,6 +224,7 @@ void InterpComic(){
 	}
 
 	snap_scale = GetJSONInt(data.getRoot()["settings"], "snap_scale", 20);
+	volume = GetJSONFloat(data.getRoot()["settings"], "volume", 1.0);
 
 	Log(info, "Interp of comic script done.");
 	ReorderElements();
@@ -700,6 +702,7 @@ void DrawGUI(){
 			}
 			if(ImGui_BeginMenu("Settings")){
 				ImGui_DragInt("Snap Scale", snap_scale, 0.5f, 15, 150, "%.0f");
+				ImGui_DragFloat("Volume", volume, 0.01, 0.0, 1.0, "%.2f");
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Add")){
@@ -935,6 +938,7 @@ void SaveComic(string path = ""){
 
 	JSONValue settings;
 	settings["snap_scale"] = JSONValue(snap_scale);
+	settings["volume"] = JSONValue(volume);
 	data.getRoot()["settings"] = settings;
 
 	StartWriteFile();
