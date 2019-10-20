@@ -2,6 +2,7 @@ class ComicCrawlIn : ComicElement{
 	ComicText@ target = null;
 	int duration;
 	float timer = 0.0;
+	bool skip = false;
 
 	ComicCrawlIn(JSONValue params = JSONValue()){
 		comic_element_type = comic_crawl_in;
@@ -13,8 +14,29 @@ class ComicCrawlIn : ComicElement{
 		timer = 0.0;
 	}
 
+	void ParseInput(bool left_mouse, bool right_mouse){
+		if(left_mouse){
+			if(CanPlayForward()){
+				play_direction = 1;
+				skip = true;
+			}else{
+				skip = true;
+			}
+		}else if(right_mouse){
+			if(CanPlayBackward()){
+				play_direction = -1;
+				skip = true;
+			}
+		}
+	}
+
 	bool SetVisible(bool _visible){
-		if(_visible && (creator_state == playing && play_direction == 1 || (creator_state == editing && edit_mode))){
+		if(skip){
+			skip = false;
+			target.SetProgress(100.0);
+			timer = 0.0;
+			return true;
+		}else if(_visible && (creator_state == playing && play_direction == 1 || (creator_state == editing && edit_mode))){
 			if(@target != null && timer < duration){
 				timer += time_step * 1000.0;
 				target.SetProgress(int(timer * 100.0 / duration));
