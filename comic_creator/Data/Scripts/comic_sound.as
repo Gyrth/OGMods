@@ -18,7 +18,7 @@ class ComicSound : ComicElement{
 	}
 
 	bool SetVisible(bool _visible){
-		if(!visible && creator_state == playing){
+		if(!visible && creator_state == playing && play_direction == 1){
 			Play();
 		}
 
