@@ -473,7 +473,7 @@ void UpdatePlaying(){
 			if(play_direction == 1){
 				if(CanPlayForward()){
 					Log(warning, "Go forward");
-				}else{
+				}else if(!unsaved){
 					StorageSetInt32("progress_" + comic_path, 0);
 					if(environment_state == in_game){
 						CloseComic();
@@ -481,6 +481,8 @@ void UpdatePlaying(){
 					}else{
 						this_ui.SendCallback("back");
 					}
+					break;
+				}else{
 					break;
 				}
 			}else if(play_direction == -1){
