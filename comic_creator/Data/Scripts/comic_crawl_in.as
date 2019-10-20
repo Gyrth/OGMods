@@ -2,6 +2,7 @@ class ComicCrawlIn : ComicElement{
 	ComicText@ target = null;
 	int duration;
 	float timer = 0.0;
+	float text_sound_timer = 0.0;
 	bool skip = false;
 
 	ComicCrawlIn(JSONValue params = JSONValue()){
@@ -40,6 +41,13 @@ class ComicCrawlIn : ComicElement{
 			if(@target != null && timer < duration){
 				timer += time_step * 1000.0;
 				target.SetProgress(int(timer * 100.0 / duration));
+				if(use_text_sounds){
+					text_sound_timer -= time_step;
+					if(text_sound_timer <= 0.0){
+						text_sound_timer = 0.15;
+						PlayTextSound(text_sound_variant);
+					}
+				}
 				return false;
 			}
 		}else{

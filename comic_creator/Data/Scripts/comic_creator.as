@@ -46,6 +46,8 @@ int target_line = 0;
 int play_direction = 1.0;
 bool left_click = false;
 bool right_click = false;
+int text_sound_variant = 0;
+bool use_text_sounds = false;
 
 int current_line = 0;
 bool post_init_done = false;
@@ -226,6 +228,8 @@ void InterpComic(){
 
 	snap_scale = GetJSONInt(data.getRoot()["settings"], "snap_scale", 20);
 	volume = GetJSONFloat(data.getRoot()["settings"], "volume", 1.0);
+	use_text_sounds = GetJSONBool(data.getRoot()["settings"], "use_text_sounds", false);
+	text_sound_variant = GetJSONInt(data.getRoot()["settings"], "text_sound_variant", 0);
 
 	Log(info, "Interp of comic script done.");
 	ReorderElements();
@@ -710,8 +714,21 @@ void DrawGUI(){
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Settings")){
-				ImGui_DragInt("Snap Scale", snap_scale, 0.5f, 15, 150, "%.0f");
-				ImGui_DragFloat("Volume", volume, 0.01, 0.0, 1.0, "%.2f");
+				if(ImGui_DragInt("Snap Scale", snap_scale, 0.15f, 15, 150, "%.0f")){
+					unsaved = true;
+				}
+				if(ImGui_DragFloat("Sound Volume", volume, 0.01, 0.0, 1.0, "%.2f")){
+					unsaved = true;
+				}
+				if(ImGui_Checkbox("Text Sounds", use_text_sounds)){
+					unsaved = true;
+				}
+				if(use_text_sounds){
+					if(ImGui_DragInt("Text Sound Variant", text_sound_variant, 0.15f, 0.0, 18.0, "%.0f")){
+						PlayTextSound(text_sound_variant);
+						unsaved = true;
+					}
+				}
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Add")){
@@ -831,6 +848,30 @@ void DrawGUI(){
 	imGUI.render();
 }
 
+void PlayTextSound(int variant) {
+	switch(variant){
+		case 0: PlaySoundGroup("Data/Sounds/concrete_foley/fs_light_concrete_edgecrawl.xml"); break;
+		case 1: PlaySoundGroup("Data/Sounds/drygrass_foley/fs_light_drygrass_crouchwalk.xml"); break;
+		case 2: PlaySoundGroup("Data/Sounds/cloth_foley/cloth_fabric_crouchwalk.xml"); break;
+		case 3: PlaySoundGroup("Data/Sounds/dirtyrock_foley/fs_light_dirtyrock_crouchwalk.xml"); break;
+		case 4: PlaySoundGroup("Data/Sounds/cloth_foley/cloth_leather_crouchwalk.xml"); break;
+		case 5: PlaySoundGroup("Data/Sounds/grass_foley/fs_light_grass_run.xml", 0.5); break;
+		case 6: PlaySoundGroup("Data/Sounds/gravel_foley/fs_light_gravel_crouchwalk.xml"); break;
+		case 7: PlaySoundGroup("Data/Sounds/sand_foley/fs_light_sand_crouchwalk.xml", 0.7); break;
+		case 8: PlaySoundGroup("Data/Sounds/snow_foley/fs_light_snow_run.xml", 0.5); break;
+		case 9: PlaySoundGroup("Data/Sounds/wood_foley/fs_light_wood_crouchwalk.xml", 0.4); break;
+		case 10: PlaySoundGroup("Data/Sounds/water_foley/mud_fs_walk.xml", 0.4); break;
+		case 11: PlaySoundGroup("Data/Sounds/concrete_foley/fs_heavy_concrete_walk.xml", 0.5); break;
+		case 12: PlaySoundGroup("Data/Sounds/drygrass_foley/fs_heavy_drygrass_walk.xml", 0.4); break;
+		case 13: PlaySoundGroup("Data/Sounds/dirtyrock_foley/fs_heavy_dirtyrock_walk.xml", 0.5); break;
+		case 14: PlaySoundGroup("Data/Sounds/grass_foley/fs_heavy_grass_walk.xml", 0.3); break;
+		case 15: PlaySoundGroup("Data/Sounds/gravel_foley/fs_heavy_gravel_walk.xml", 0.3); break;
+		case 16: PlaySoundGroup("Data/Sounds/sand_foley/fs_heavy_sand_run.xml", 0.3); break;
+		case 17: PlaySoundGroup("Data/Sounds/snow_foley/fs_heavy_snow_crouchwalk.xml", 0.3); break;
+		case 18: PlaySoundGroup("Data/Sounds/wood_foley/fs_heavy_wood_walk.xml", 0.3); break;
+	}
+}
+
 void DeleteCurrentElement(){
 	if(comic_elements.size() > 0){
 		GetCurrentElement().Delete();
@@ -948,6 +989,8 @@ void SaveComic(string path = ""){
 	JSONValue settings;
 	settings["snap_scale"] = JSONValue(snap_scale);
 	settings["volume"] = JSONValue(volume);
+	settings["use_text_sounds"] = JSONValue(use_text_sounds);
+	settings["text_sound_variant"] = JSONValue(text_sound_variant);
 	data.getRoot()["settings"] = settings;
 
 	StartWriteFile();
