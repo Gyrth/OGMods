@@ -51,7 +51,9 @@ class ComicCrawlIn : ComicElement{
 				return false;
 			}
 		}else{
-			target.SetProgress(100.0);
+			if(@target != null){
+				target.SetProgress(100.0);
+			}
 			timer = 0.0;
 		}
 		return true;
