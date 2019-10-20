@@ -130,6 +130,8 @@ void Initialize(){
 // This init is used when loaded in-game.
 void Init(string level_name){
 	environment_state = in_game;
+	ConvertDisplayColors();
+	SortFunctionsAlphabetical();
 	editor_open = false;
 	CreateComicUI();
 }
@@ -314,7 +316,7 @@ ComicElement@ GetCurrentElement(){
 }
 
 void DrawBackground(){
-	if(creator_state != editing){
+	if(!editor_open){
 		return;
 	}
 
@@ -483,7 +485,8 @@ void UpdatePlaying(){
 						CloseComic();
 						SetPaused(false);
 					}else{
-						this_ui.SendCallback("back");
+						imGUI.receiveMessage(IMMessage("Back"));
+						/* this_ui.SendCallback("back"); */
 					}
 					break;
 				}else{
@@ -824,7 +827,8 @@ void DrawGUI(){
 			ImGui_SameLine();
 			if(ImGui_Button("Yes")){
 				unsaved = false;
-				this_ui.SendCallback("back");
+				/* this_ui.SendCallback("back"); */
+				imGUI.receiveMessage(IMMessage("Back"));
 			}
 			ImGui_SameLine(0.0, 25.0);
 			if(ImGui_Button("No")){
