@@ -134,6 +134,8 @@ void Init(string level_name){
 	SortFunctionsAlphabetical();
 	editor_open = false;
 	CreateComicUI();
+	post_init_done = true;
+	comic_path = "New Comic";
 }
 
 void ConvertDisplayColors(){
@@ -681,7 +683,7 @@ void DrawGUI(){
 			DeleteCurrentElement();
 		}
 
-		if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape)) && unsaved && !ImGui_IsPopupOpen("Edit")){
+		if(environment_state == in_menu && ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape)) && unsaved && !ImGui_IsPopupOpen("Edit")){
 			ImGui_OpenPopup("Confirm");
 		}
 
@@ -981,6 +983,7 @@ void InsertElement(ComicElement@ new_element){
 	}
 	ReorderElements();
 	RefreshTargets();
+	GetCurrentElement().SetEditing(true);
 
 	unsaved = true;
 }

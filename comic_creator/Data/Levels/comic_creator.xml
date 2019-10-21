@@ -45,7 +45,12 @@
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Damage Resistance" type="float" val="1" />
             <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fall Damage Multiplier" type="float" val="1" />
             <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
+            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
+            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
+            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
             <parameter name="Focus FOV distance" type="float" val="100" />
             <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
             <parameter name="Focus FOV vertical" type="float" val="0.62834" />
@@ -54,12 +59,18 @@
             <parameter name="Left handed" type="int" val="0" />
             <parameter name="Movement Speed" type="float" val="1" />
             <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="No Look Around" type="int" val="0" />
             <parameter name="Peripheral FOV distance" type="float" val="4" />
             <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
             <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
             <parameter name="Species" type="string" val="rabbit" />
             <parameter name="Static" type="int" val="0" />
+            <parameter name="Stick To Nav Mesh" type="int" val="0" />
             <parameter name="Teams" type="string" val="guard" />
+            <parameter name="Throw Counter Probability" type="float" val="0.4" />
+            <parameter name="Throw Trainer" type="int" val="0" />
+            <parameter name="Weapon Catch Skill" type="float" val="1" />
+            <parameter name="Wearing Metal Armor" type="int" val="0" />
         </parameters>
         <Connections>
             <Connection id="0" />
@@ -72,7 +83,7 @@
             <Color label="Leather" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <CameraObject t0="-3.73267" t1="0.470019" t2="4.36039" s0="1" s1="1" s2="1" q0="0.018065" q1="0.806153" q2="-0.024645" q3="0.590918" euler_x="-3.08047" euler_y="1.26508" euler_z="-3.14159" id="1">
+    <CameraObject t0="-9.43806" t1="1.26349" t2="5.59625" s0="1" s1="1" s2="1" q0="0.0654324" q1="0.771318" q2="-0.0803706" q3="0.627955" euler_x="-2.93394" euler_y="1.3666" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="3.42549" t1="-3.42134" t2="2.37398" s0="6.46988" s1="1" s2="6.38524" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
