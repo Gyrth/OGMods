@@ -5,6 +5,8 @@ The Comic Creator lets you create dynamic comics inside Overgrowth. These comics
 ## Basics
 To create a new comic simply go to ``Play -> Comic Creator``. An empty sheet will be created for you with a grid. The list of available functions are under the menu button ``Add``. The Comic Creator will execute these function in order, starting at the top. Once enough functions are added you can change the order by drag and dropping the correct function at the correct line. You can preview a function by clicking on them once, or by using ``Arrow Up`` and ``Arrow Down`` to navigate the comic. Most of the functions have settings available. To edit these settings, double click the function you want to edit. If you would like to preview the comic press ``F1`` to toggle the editor on and off. To remove a function, select the target function and click the red cross icon in the menu bar or press the ``Delete`` key. Next to the delete icon is the duplicate button. This will copy the currently selected function and all of it's settings. To save the comic either go to ``File -> Save to file`` or press ``Ctrl + S``.
 
+![editor showcase](editor_showcase.gif "Editor Showcase")
+
 ## Functions
 
 ### Crawl In
@@ -56,6 +58,8 @@ Add this line to your ``mod.xml`` between ``<Mod>`` and ``</Mod>``. Change the t
 ```
 
 ### Show a comic in a dialogue in-game.
-
-
-[Preorder the game here.](http://www.wolfire.com/overgrowth)
+When you want to show a specific comic during a dialogue only one line is needed in the dialogue script. Simply add this line and point it to your own comic text file.
+```
+send_level_message "show_comic Data/Comics/example_in_game.txt"
+```
+![reader showcase](reader_showcase.gif "Reader Showcase")
