@@ -540,7 +540,7 @@ void UpdateEditing(){
 		GetCurrentElement().SetVisible(true);
 		if(current_line < target_line){
 			if(CanPlayForward()){
-				Log(warning, "Go forward");
+				/* Log(warning, "Go forward"); */
 				play_direction = 1;
 				current_line += 1;
 				line_moved = true;
@@ -552,7 +552,7 @@ void UpdateEditing(){
 			if(current_line == 0){
 				break;
 			}else{
-				Log(warning, "Go backward");
+				/* Log(warning, "Go backward"); */
 				play_direction = -1;
 				GetCurrentElement().SetVisible(false);
 				current_line -= 1;
