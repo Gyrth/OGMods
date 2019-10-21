@@ -14,6 +14,13 @@ class ComicImage : ComicElement{
 	string image_name;
 	vec4 color;
 	bool keep_aspect;
+	float position_offset_x = 0.0;
+	float position_offset_y = 0.0;
+	float size_offset_x = 0.0;
+	float size_offset_y = 0.0;
+
+	float max_offset_x = 0.0;
+	float max_offset_y = 0.0;
 
 	ComicImage(JSONValue params = JSONValue()){
 		comic_element_type = comic_image;
@@ -29,6 +36,14 @@ class ComicImage : ComicElement{
 		size_x = size.x;
 		size_y = size.y;
 
+		vec2 position_offset = GetJSONVec2(params, "position_offset", vec2(0.0, 0.0));
+		position_offset_x = position_offset.x;
+		position_offset_y = position_offset.y;
+
+		vec2 size_offset = GetJSONVec2(params, "size_offset", vec2(0.0, 0.0));
+		size_offset_x = size_offset.x;
+		size_offset_y = size_offset.y;
+
 		has_settings = true;
 	}
 
@@ -36,6 +51,12 @@ class ComicImage : ComicElement{
 		IMImage new_image(path);
 		@image = new_image;
 		new_image.setBorderColor(edit_outline_color);
+		ReadMaxOffsets();
+		if(size_offset_x == 0.0 || size_offset_y == 0.0){
+			size_offset_x = max_offset_x;
+			size_offset_y = max_offset_y;
+		}
+		SetOffset();
 		new_image.setSize(vec2(size_x, size_y));
 		new_image.setClip(false);
 		image_name = imGUI.getUniqueName("image");
@@ -69,6 +90,12 @@ class ComicImage : ComicElement{
 		data["size"] = JSONValue(JSONarrayValue);
 		data["size"].append(size_x);
 		data["size"].append(size_y);
+		data["size_offset"] = JSONValue(JSONarrayValue);
+		data["size_offset"].append(size_offset_x);
+		data["size_offset"].append(size_offset_y);
+		data["position_offset"] = JSONValue(JSONarrayValue);
+		data["position_offset"].append(position_offset_x);
+		data["position_offset"].append(position_offset_y);
 		return data;
 	}
 
@@ -92,6 +119,7 @@ class ComicImage : ComicElement{
 	void SetNewImage(){
 		vec2 old_size = image.getSize();
 		image.setImageFile(path);
+		ReadMaxOffsets();
 		image.setSize(old_size);
 	}
 
@@ -220,6 +248,15 @@ class ComicImage : ComicElement{
 		return visible;
 	}
 
+	void ReadMaxOffsets(){
+		max_offset_x = image.getSizeX();
+		max_offset_y = image.getSizeY();
+	}
+
+	void SetOffset(){
+		image.setImageOffset(vec2(position_offset_x, position_offset_y), vec2(size_offset_x, size_offset_y));
+	}
+
 	void DrawSettings(){
 		ImGui_Text("Current Image : ");
 		ImGui_SameLine();
@@ -269,6 +306,36 @@ class ComicImage : ComicElement{
 		if(ImGui_SliderFloat("###size_y", size_y, 0.0, 1000, "%.0f")){
 			image.setSize(vec2(size_x, size_y));
 			UpdateContent();
+		}
+
+		ImGui_Spacing();
+
+		ImGui_Text("Position Offset :");
+		ImGui_Text("X");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###position_offset_x", position_offset_x, 0.0, max_offset_x, "%.0f")){
+			SetOffset();
+		}
+		ImGui_SameLine();
+		ImGui_Text("Y");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###position_offset_y", position_offset_y, 0.0, max_offset_y, "%.0f")){
+			SetOffset();
+		}
+
+		ImGui_Spacing();
+
+		ImGui_Text("Size Offset :");
+		ImGui_Text("X");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###size_offset_x", size_offset_x, 1.0, max_offset_x, "%.0f")){
+			SetOffset();
+		}
+		ImGui_SameLine();
+		ImGui_Text("Y");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("###size_offset_y", size_offset_y, 1.0, max_offset_y, "%.0f")){
+			SetOffset();
 		}
 
 		ImGui_PopItemWidth();
