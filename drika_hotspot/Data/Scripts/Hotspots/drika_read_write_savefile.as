@@ -59,6 +59,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	void WriteParamValue(bool reset){
 		SavedLevel@ data = save_file.GetSavedLevel("drika_data");
 		data.SetValue(param, reset?"":value);
+		save_file.WriteInPlace();
 	}
 
 	string ReadParamValue(){
