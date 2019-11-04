@@ -9,8 +9,6 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	read_write_modes read_write_mode;
 	int current_read_write_mode;
 	array<string> mode_choices = {"Read", "Write"};
-	bool read_checked = false;
-	string read_value = "";
 
 	DrikaReadWriteSaveFile(JSONValue params = JSONValue()){
 		param = GetJSONString(params, "param", "drika_save_param");
@@ -62,7 +60,6 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		SavedLevel@ data = save_file.GetSavedLevel("drika_data");
 		data.SetValue(param, reset?"":value);
 		save_file.WriteInPlace();
-		level.SendMessage("drika_write_savefile");
 	}
 
 	string ReadParamValue(){
@@ -70,27 +67,16 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		return data.GetValue(param);
 	}
 
-	void Reset(){
-		read_checked = false;
-		read_value = "";
-	}
-
 	bool Trigger(){
 		if(read_write_mode == read){
-			if(!read_checked){
-				read_value = ReadParamValue();
-				read_checked = true;
+			if(ReadParamValue() == value){
+				return true;
+			}else{
+				return false;
 			}
-			return read_value == value;
 		}else{
 			WriteParamValue(false);
 			return true;
-		}
-	}
-
-	void ReceiveMessage(string message){
-		if(message == "drika_write_savefile"){
-			read_checked = false;
 		}
 	}
 }
