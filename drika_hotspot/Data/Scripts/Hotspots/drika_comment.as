@@ -1,6 +1,6 @@
 class DrikaComment : DrikaElement{
 	string comment;
-	
+
 	DrikaComment(JSONValue params = JSONValue()){
 		comment = GetJSONString(params, "comment", "drika_comment");
 		drika_element_type = drika_comment;
@@ -14,11 +14,13 @@ class DrikaComment : DrikaElement{
 	}
 
 	string GetDisplayString(){
-			{return "Comment: " + comment + " ";}
+		return "Comment: " + comment + " ";
 	}
+
 	void DrawSettings(){
-			ImGui_InputText(" ", comment, 64);
-		}
+		ImGui_InputText(" ", comment, 64);
+	}
+
 	bool Trigger(){
 		return true;
 	}
