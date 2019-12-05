@@ -1,4 +1,3 @@
-					
 class DrikaGoToLine : DrikaElement{
 	int line;
 	int line2;
@@ -70,8 +69,11 @@ class DrikaGoToLine : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		if (choice_line2 == false) {return "GoToLine " + line;}
-		else {return "Randomly pick from a list of lines to go to ";}
+		if(choice_line2 == false){
+			return "GoToLine " + line;
+		}else{
+			return "Randomly pick from a list of lines to go to ";
+		}
 	}
 
 	void DrawSettings(){
@@ -102,8 +104,7 @@ class DrikaGoToLine : DrikaElement{
 										ImGui_InputInt("Line 9", line9);
 										ImGui_Checkbox("Add a tenth line", choice_line10);
 										if(choice_line10 == true){
-											ImGui_InputInt("Line 10", line10);	
-											}
+											ImGui_InputInt("Line 10", line10);
 										}
 									}
 								}
@@ -112,8 +113,9 @@ class DrikaGoToLine : DrikaElement{
 					}
 				}
 			}
+		}
 	}
-	
+
 	bool Trigger(){
 		array<int> line_list = {line};
 		if (choice_line2 == true) {line_list.insertLast(line2);}
