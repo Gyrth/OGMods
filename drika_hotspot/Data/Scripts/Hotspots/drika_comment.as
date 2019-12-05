@@ -10,6 +10,7 @@ class DrikaComment : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["function_name"] = JSONValue("comment");
+		data["comment"] = JSONValue(comment);
 		return data;
 	}
 
