@@ -64,8 +64,6 @@ string font_path;
 bool show_text = false;
 float text_opacity = 1.0;
 bool hotspot_enabled = true;
-int last_dialogue = -1;
-int first_dialogue = -1;
 array<int> dialogue_actor_ids;
 bool wait_for_fade = false;
 bool in_dialogue_mode = false;
@@ -387,17 +385,7 @@ void Update(){
 			UpdateParallelOperations();
 
 			if(!script_finished){
-				if(current_line == first_dialogue && !in_dialogue_mode){
-					level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
-					wait_for_fade = true;
-					return;
-				}
-
 				if(GetCurrentElement().parallel_operation || GetCurrentElement().Trigger()){
-					if(current_line == last_dialogue){
-						level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
-						level.SendMessage("drika_dialogue_end");
-					}
 					if(current_line == int(drika_indexes.size() - 1)){
 						script_finished = true;
 					}else{
@@ -411,18 +399,6 @@ void Update(){
 		}
 		messages.resize(0);
 	}
-}
-
-void EndDialogue(){
-	//Check if the last function is also a dialogue function.
-	if(last_dialogue == int(drika_indexes.size() - 1)){
-		current_line = last_dialogue;
-		script_finished = true;
-	}else{
-		current_line = last_dialogue + 1;
-	}
-	level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
-	level.SendMessage("drika_dialogue_end");
 }
 
 void UpdateParallelOperations(){
@@ -691,7 +667,6 @@ void ReorderElements(){
 		DrikaElement@ current_element = drika_elements[drika_indexes[index]];
 		current_element.SetIndex(index);
 	}
-	FindFirstLastDialogue();
 }
 
 void InsertElement(DrikaElement@ new_element){
@@ -846,19 +821,6 @@ void ClearDialogueActors(){
 		char.rigged_object().anim_client().Reset();
 	}
 	dialogue_actor_ids.resize(0);
-}
-
-void FindFirstLastDialogue(){
-	last_dialogue = -1;
-	first_dialogue = -1;
-	for(uint i = 0; i < drika_indexes.size(); i++){
-		if(drika_elements[drika_indexes[i]].drika_element_type == drika_dialogue){
-			if(first_dialogue == -1){
-				first_dialogue = i;
-			}
-			last_dialogue = i;
-		}
-	}
 }
 
 void Draw(){

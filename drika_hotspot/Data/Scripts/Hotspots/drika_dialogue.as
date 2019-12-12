@@ -11,7 +11,9 @@ enum dialogue_functions	{
 							set_actor_omniscient = 7,
 							set_camera_position = 8,
 							fade_to_black = 9,
-							settings = 10
+							settings = 10,
+							start = 11,
+							end = 12
 						}
 
 class DrikaDialogue : DrikaElement{
@@ -66,11 +68,13 @@ class DrikaDialogue : DrikaElement{
 												"Set Actor Omniscient",
 												"Set Camera Position",
 												"Fade To Black",
-												"Settings"
+												"Settings",
+												"Start",
+												"End"
 											};
 
 	DrikaDialogue(JSONValue params = JSONValue()){
-		dialogue_function = dialogue_functions(GetJSONInt(params, "dialogue_function", 0));
+		dialogue_function = dialogue_functions(GetJSONInt(params, "dialogue_function", start));
 		current_dialogue_function = dialogue_function;
 
 		say_text = GetJSONString(params, "say_text", "Drika Hotspot Dialogue");
@@ -715,9 +719,25 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == settings){
 			SetDialogueSettings();
 			return true;
+		}else if(dialogue_function == start){
+			StartDialogue();
+			return true;
+		}else if(dialogue_function == end){
+			EndDialogue();
+			return true;
 		}
 
 		return false;
+	}
+
+	void StartDialogue(){
+		level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+		wait_for_fade = true;
+	}
+
+	void EndDialogue(){
+		level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+		level.SendMessage("drika_dialogue_end");
 	}
 
 	void SetDialogueSettings(){
