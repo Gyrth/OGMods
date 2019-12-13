@@ -56,6 +56,14 @@ class DrikaDialogue : DrikaElement{
 	string default_avatar_path = "Data/Textures/ui/menus/main/white_square.png";
 	TextureAssetRef avatar = LoadTexture(default_avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 	string avatar_path;
+	bool anim_mirrored;
+	bool anim_mobile;
+	bool anim_super_mobile;
+	bool anim_swap;
+	bool anim_from_start;
+	bool use_ik;
+	float transition_speed;
+	bool wait_anim_end;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -106,6 +114,15 @@ class DrikaDialogue : DrikaElement{
 		dialogue_text_color = GetJSONVec4(params, "dialogue_text_color", vec4(1));
 		dialogue_text_shadow = GetJSONBool(params, "dialogue_text_shadow", true);
 
+		anim_mirrored = GetJSONBool(params, "anim_mirrored", false);
+		anim_mobile = GetJSONBool(params, "anim_mobile", false);
+		anim_super_mobile = GetJSONBool(params, "anim_super_mobile", false);
+		anim_swap = GetJSONBool(params, "anim_swap", false);
+		anim_from_start = GetJSONBool(params, "anim_from_start", true);
+		use_ik = GetJSONBool(params, "use_ik", true);
+		transition_speed = GetJSONFloat(params, "transition_speed", 3.0);
+		wait_anim_end = GetJSONBool(params, "wait_anim_end", true);
+
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
 			connection_types = {_movement_object};
 			LoadIdentifier(params);
@@ -142,6 +159,14 @@ class DrikaDialogue : DrikaElement{
 			data["target_actor_rotation"] = JSONValue(target_actor_rotation);
 		}else if(dialogue_function == set_actor_animation){
 			data["target_actor_animation"] = JSONValue(target_actor_animation);
+			data["anim_mirrored"] = JSONValue(anim_mirrored);
+			data["anim_mobile"] = JSONValue(anim_mobile);
+			data["anim_super_mobile"] = JSONValue(anim_super_mobile);
+			data["anim_swap"] = JSONValue(anim_swap);
+			data["anim_from_start"] = JSONValue(anim_from_start);
+			data["use_ik"] = JSONValue(use_ik);
+			data["transition_speed"] = JSONValue(transition_speed);
+			data["wait_anim_end"] = JSONValue(wait_anim_end);
 		}else if(dialogue_function == set_actor_eye_direction){
 			data["target_actor_eye_direction"] = JSONValue(JSONarrayValue);
 			data["target_actor_eye_direction"].append(target_actor_eye_direction.x);
@@ -576,6 +601,22 @@ class DrikaDialogue : DrikaElement{
 				}
 			}
 		}else if(dialogue_function == set_actor_animation){
+			ImGui_Checkbox("From Start", anim_from_start);
+			ImGui_SameLine();
+			ImGui_Checkbox("Swap", anim_swap);
+			ImGui_SameLine();
+			ImGui_Checkbox("Mirrored", anim_mirrored);
+			ImGui_SameLine();
+			ImGui_Checkbox("Mobile", anim_mobile);
+			ImGui_SameLine();
+			ImGui_Checkbox("Super Mobile", anim_super_mobile);
+			ImGui_SameLine();
+			ImGui_Checkbox("Use IK", use_ik);
+			ImGui_SameLine();
+			ImGui_Checkbox("Wait Animation End", wait_anim_end);
+
+			ImGui_SliderFloat("Transition Speed", transition_speed, 0.0, 10.0, "%.1f");
+
 			ImGui_SetTextBuf(search_buffer);
 			ImGui_Text("Search");
 			ImGui_SameLine();
@@ -592,6 +633,7 @@ class DrikaDialogue : DrikaElement{
 				}
 				ImGui_EndChildFrame();
 			}
+
 		}else if(dialogue_function == set_actor_omniscient){
 			ImGui_Text("Set Omnicient to : ");
 			ImGui_SameLine();
@@ -696,8 +738,25 @@ class DrikaDialogue : DrikaElement{
 			SetActorPosition();
 			return true;
 		}else if(dialogue_function == set_actor_animation){
-			SetActorAnimation();
-			return true;
+			if(wait_anim_end){
+				if(!triggered){
+					SetActorAnimation();
+					triggered = true;
+				}else{
+					array<MovementObject@> targets = GetTargetMovementObjects();
+					for(uint i = 0; i < targets.size(); i++){
+						if(targets[i].GetBoolVar("in_animation")){
+							return false;
+						}
+						triggered = false;
+						return true;
+					}
+				}
+				return false;
+			}else{
+				SetActorAnimation();
+				return true;
+			}
 		}else if(dialogue_function == set_actor_eye_direction){
 			SetActorEyeDirection();
 			return true;
@@ -931,7 +990,8 @@ class DrikaDialogue : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
-			targets[i].rigged_object().anim_client().Reset();
+			/* targets[i].rigged_object().anim_client().Reset(); */
+			targets[i].Execute("dialogue_anim = \"Data/Animations/r_actionidle.anm\";");
 			targets[i].ReceiveScriptMessage("set_rotation " + target_actor_rotation);
 			targets[i].ReceiveScriptMessage("set_dialogue_position " + target_actor_position.x + " " + target_actor_position.y + " " + target_actor_position.z);
 			targets[i].Execute("FixDiscontinuity();");
@@ -943,7 +1003,20 @@ class DrikaDialogue : DrikaElement{
 
 		for(uint i = 0; i < targets.size(); i++){
 			AddDialogueActor(targets[i].GetID());
-			targets[i].ReceiveScriptMessage("set_animation \"" + target_actor_animation + "\"");
+
+			string flags = "0";
+			if(anim_mirrored) flags += " | _ANM_MIRRORED";
+			if(anim_mobile) flags += " | _ANM_MOBILE";
+			if(anim_super_mobile) flags += " | _ANM_SUPER_MOBILE";
+			if(anim_swap) flags += " | _ANM_SWAP";
+			if(anim_from_start) flags += " | _ANM_FROM_START";
+
+			string roll_fade = use_ik ? "roll_ik_fade = 0.0f;" : "roll_ik_fade = 1.0f;";
+			string callback = "";
+			if(wait_anim_end) callback += "in_animation = true;this_mo.rigged_object().anim_client().SetAnimationCallback(\"void EndAnim()\");";
+
+			targets[i].rigged_object().anim_client().Reset();
+			targets[i].Execute(roll_fade + "this_mo.SetAnimation(\"" + target_actor_animation + "\", " + transition_speed + ", " + flags + ");dialogue_anim = \"" + target_actor_animation + "\";" + callback);
 		}
 	}
 }

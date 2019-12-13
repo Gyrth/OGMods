@@ -817,6 +817,7 @@ void RemoveDialogueActor(int character_id){
 void ClearDialogueActors(){
 	for(uint i = 0; i < dialogue_actor_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(dialogue_actor_ids[i]);
+		char.Execute("roll_ik_fade = 0.0f;");
 		char.ReceiveScriptMessage("set_dialogue_control false");
 		char.rigged_object().anim_client().Reset();
 	}
