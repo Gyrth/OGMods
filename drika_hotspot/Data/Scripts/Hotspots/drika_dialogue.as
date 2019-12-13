@@ -723,8 +723,7 @@ class DrikaDialogue : DrikaElement{
 			StartDialogue();
 			return true;
 		}else if(dialogue_function == end){
-			EndDialogue();
-			return true;
+			return EndDialogue();
 		}
 
 		return false;
@@ -735,9 +734,17 @@ class DrikaDialogue : DrikaElement{
 		wait_for_fade = true;
 	}
 
-	void EndDialogue(){
-		level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
-		level.SendMessage("drika_dialogue_end");
+	bool EndDialogue(){
+		if(!triggered){
+			level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+			wait_for_fade = true;
+			triggered = true;
+			return false;
+		}else{
+			level.SendMessage("drika_dialogue_end");
+			triggered = false;
+			return true;
+		}
 	}
 
 	void SetDialogueSettings(){
