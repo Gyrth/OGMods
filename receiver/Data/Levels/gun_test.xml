@@ -34,15 +34,15 @@
     <RayToSun r0="0.121363" r1="0.062051" r2="0.990667" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="0.570118" t1="2.92747" t2="1.79911" s0="1" s1="1" s2="1" q0="-0.115268" q1="0.0415649" q2="-0.00482758" q3="-0.992453" euler_x="0.231253" euler_y="-0.083713" euler_z="0" id="0">
+    <CameraObject t0="4.18123" t1="2.84287" t2="-0.770907" s0="1" s1="1" s2="1" q0="0.0409158" q1="-0.667636" q2="0.0367927" q3="0.742452" euler_x="0.110108" euler_y="-1.46478" euler_z="-1.12656e-06" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="0" t1="0" t2="0" s0="6" s1="1" s2="6" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="0.218195" t1="2.33247" t2="-1.05645" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" type_file="Data/Characters/gun_actor.xml" is_player="0">
+    <ActorObject t0="0.192089" t1="2.47731" t2="-0.95798" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" type_file="Data/Characters/gun_actor.xml" is_player="0">
         <parameters>
-            <parameter name="Character Scale" type="float" val="0.25" />
+            <parameter name="Character Scale" type="float" val="1.2" />
             <parameter name="Deep" type="float" val="0" />
             <parameter name="Follow Player" type="int" val="1" />
             <parameter name="Long" type="float" val="0" />

@@ -180,7 +180,7 @@ array<int> weapon_slots = {-1, -1};
 int knife_layer_id = -1;
 int throw_knife_layer_id = -1;
 float land_magnitude = 0.0f;
-float character_scale = 1.0f;
+float character_scale = 2.0f;
 AttackScriptGetter attack_attacker;
 float block_stunned = 1.0f;
 int block_stunned_by_id = -1;
@@ -282,7 +282,7 @@ void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
     time += ts.step();
     /* ApplyPhysics(ts); */
-    HandleCollisions(ts);
+    /* HandleCollisions(ts); */
     /* UpdateJumping(); */
     /* UpdateFacing(ts); */
 }
@@ -292,7 +292,7 @@ void SetScale(float new_character_scale){
 	vec3 old_facing = this_mo.GetFacing();
 	params.SetFloat("Character Scale", character_scale);
 	this_mo.RecreateRiggedObject(this_mo.char_path);
-	this_mo.SetAnimation("Data/Animations/gun_default.anm", 20.0f, 0);
+	this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, 0);
 	this_mo.SetRotationFromFacing(old_facing);
 	FixDiscontinuity();
 }
@@ -435,7 +435,7 @@ bool Init(string character_path) {
     bool success = character_getter.Load(this_mo.char_path);
     if(success){
         this_mo.RecreateRiggedObject(this_mo.char_path);
-        this_mo.SetAnimation("Data/Animations/gun_default.anm", 20.0f, 0);
+        this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, 0);
     }
     return success;
 }
@@ -709,11 +709,11 @@ void SetParameters() {
 	params.AddFloatSlider("Wide", 0.0, "min:0.0,max:1.0,step:0.01,text_mult:1");
 	params.AddFloatSlider("Deep", 0.0, "min:0.0,max:1.0,step:0.01,text_mult:1");
 
-    params.AddFloatSlider("Character Scale",0.25,"min:0.25,max:2.0,step:0.02,text_mult:100");
+    params.AddFloatSlider("Character Scale",0.5,"min:0.25,max:2.0,step:0.02,text_mult:100");
     character_scale = params.GetFloat("Character Scale");
     if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
         this_mo.RecreateRiggedObject(this_mo.char_path);
-        this_mo.SetAnimation("Data/Animations/gun_default.anm", 20.0f, 0);
+        this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, 0);
         FixDiscontinuity();
     }
 }
