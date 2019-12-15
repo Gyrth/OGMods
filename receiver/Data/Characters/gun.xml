@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<character>
+    <appearance obj_path = "Data/Objects/gun.xml"
+                skeleton = "Data/Skeletons/gun.xml"/>
+    <animations/>
+    <attacks/>
+    <team>gun</team>
+    <morphs>
+    </morphs>
+    <voice path = "Data/Sounds/voice/rabbit2.xml"
+           pitch = "1.0"/>
+    <clothing>Data/Materials/cloth_fabric.xml</clothing>
+    <tags/>
+ </character>

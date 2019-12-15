@@ -1,0 +1,19 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>receiver</Id>
+    <Name>Receiver</Name>
+    <Version>0.1.0</Version>
+    <Author>Gyrth</Author>
+    <Category>Item Pack</Category>
+    <Thumbnail>Data/Images/receiver_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/receiver_full.jpg</PreviewImage>
+    <Description>Receiver.</Description>
+    <Tag>scripting</Tag>
+	<Tag>character</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <Item category="Character"
+        title="Gun"
+        path="Data/Characters/gun_actor.xml"
+        thumbnail="Data/UI/spawner/gun.png" />
+    <Level title="Gun Test" thumbnail="Images/receiver_full.jpg">gun_test.xml</Level>
+</Mod>
