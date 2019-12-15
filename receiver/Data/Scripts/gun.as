@@ -281,7 +281,7 @@ array<vec3> weap_points;
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
     time += ts.step();
-    ApplyPhysics(ts);
+    /* ApplyPhysics(ts); */
     HandleCollisions(ts);
     /* UpdateJumping(); */
     /* UpdateFacing(ts); */
