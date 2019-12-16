@@ -47,6 +47,7 @@ bool chase_allowed = false;
 
 float body_bob_freq = 0.0f;
 float body_bob_time_offset;
+string target_animation = "Data/Animations/gun_animation.anm";
 
 class InvestigatePoint {
     vec3 pos;
@@ -292,7 +293,7 @@ void SetScale(float new_character_scale){
 	vec3 old_facing = this_mo.GetFacing();
 	params.SetFloat("Character Scale", character_scale);
 	this_mo.RecreateRiggedObject(this_mo.char_path);
-	this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, 0);
+	this_mo.SetAnimation(target_animation, 20.0f, 0);
 	this_mo.SetRotationFromFacing(old_facing);
 	FixDiscontinuity();
 }
@@ -435,7 +436,7 @@ bool Init(string character_path) {
     bool success = character_getter.Load(this_mo.char_path);
     if(success){
         this_mo.RecreateRiggedObject(this_mo.char_path);
-        this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, 0);
+        this_mo.SetAnimation(target_animation, 20.0f, 0);
     }
     return success;
 }
@@ -713,7 +714,7 @@ void SetParameters() {
     character_scale = params.GetFloat("Character Scale");
     if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
         this_mo.RecreateRiggedObject(this_mo.char_path);
-        this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, 0);
+        this_mo.SetAnimation(target_animation, 20.0f, 0);
         FixDiscontinuity();
     }
 }
