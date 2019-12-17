@@ -437,6 +437,16 @@ bool Init(string character_path) {
     if(success){
         this_mo.RecreateRiggedObject(this_mo.char_path);
         this_mo.SetAnimation(target_animation, 20.0f, 0);
+		RiggedObject@ rigged_object = this_mo.rigged_object();
+	    Skeleton@ skeleton = rigged_object.skeleton();
+	    int num_bones = skeleton.NumBones();
+	    skeleton_bind_transforms.resize(num_bones);
+	    inv_skeleton_bind_transforms.resize(num_bones);
+
+	    for(int i = 0; i < num_bones; ++i) {
+	        skeleton_bind_transforms[i] = BoneTransform(skeleton.GetBindMatrix(i));
+	        inv_skeleton_bind_transforms[i] = invert(skeleton_bind_transforms[i]);
+	    }
     }
     return success;
 }
@@ -596,12 +606,23 @@ void FixDiscontinuity() {
     queue_fix_discontinuity = true;
 }
 
+array<int> debug_lines;
+
 void PreDrawCameraNoCull(float curr_game_time) {
     if(queue_fix_discontinuity){
         this_mo.FixDiscontinuity();
         FinalAnimationMatrixUpdate(1);
         queue_fix_discontinuity = false;
     }
+	RiggedObject@ rigged_object = this_mo.rigged_object();
+	Skeleton@ skeleton = rigged_object.skeleton();
+
+	int bone = skeleton.IKBoneStart("head");
+	BoneTransform transform = BoneTransform(skeleton.GetBoneTransform(bone));
+	vec3 start = transform * (skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)));
+	vec3 end = transform * (skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)));
+
+    DebugDrawLine(start, end, vec3(1.0f), _fade);
 }
 
 void FinalAnimationMatrixUpdate(int num_frames) {
