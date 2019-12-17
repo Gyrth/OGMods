@@ -282,10 +282,6 @@ array<vec3> weap_points;
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
     time += ts.step();
-    /* ApplyPhysics(ts); */
-    /* HandleCollisions(ts); */
-    /* UpdateJumping(); */
-    /* UpdateFacing(ts); */
 }
 
 void SetScale(float new_character_scale){
@@ -298,129 +294,12 @@ void SetScale(float new_character_scale){
 	FixDiscontinuity();
 }
 
-float wiggle_wait = 0.0f;
-float wave = 1.0f;
-bool targeted_jump = false;
-
-void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
-    float distance_threshold = character_scale * 1.25f;
-    vec3 this_com = this_mo.rigged_object().skeleton().GetCenterOfMass();
-    vec3 other_com = other.rigged_object().skeleton().GetCenterOfMass();
-    this_com.y = this_mo.position.y;
-    other_com.y = other.position.y;
-    if(distance(this_com, other_com) < distance_threshold){
-        vec3 dir = other_com - this_com;
-        float dist = length(dir);
-        dir /= dist;
-        dir *= distance_threshold - dist;
-        vec3 other_push = dir * 0.5f / (time_step) * 0.15f;
-        this_mo.velocity -= other_push;
-        other.Execute("
-        if(!static_char){
-            push_velocity += vec3("+other_push.x+","+other_push.y+","+other_push.z+");
-            MindReceiveMessage(\"collided "+this_mo.GetID()+"\");
-            wide_offset = 0.0f;
-        }");
-    }
-}
-
-float jump_wait = 0.1f;
-float long_offset = 3.14f;
-float long_magnitude = 0.0f;
-float wide_offset = 3.14f;
-bool allow_jumping = true;
-
-void UpdateJumping(){
-	if(jump_wait > 0.0f){
-		jump_wait -= time_step;
-	}
-    if(on_ground && allow_jumping){
-        if(jump_wait < 0.0f){
-            jump_wait = RangedRandomFloat(0.1f, 0.25f);
-            float jump_mult = 5.0f;
-            vec3 jump_vel;
-
-            if(targeted_jump && GetPlayerCharacterID() != -1){
-                MovementObject@ char = ReadCharacterID(GetPlayerCharacterID());
-				float distance_to_target = distance(char.position, this_mo.position);
-				vec3 direction = normalize(char.position - this_mo.position);
-                jump_vel = direction * min(1.0, distance_to_target);
-				jump_vel.y = min(1.0, distance_to_target * 0.15);
-            }else{
-                jump_vel.y = RangedRandomFloat(1.0f, 2.0f);
-                jump_vel.x = RangedRandomFloat(-1.0f, 1.0f);
-                jump_vel.z = RangedRandomFloat(-1.0f, 1.0f);
-            }
-            this_mo.velocity += jump_vel * jump_mult;
-            long_magnitude = length(this_mo.velocity) * 0.075f;
-            long_offset = 0.0f;
-
-			string sound;
-			switch(rand()%9){
-				case 0:
-					sound = "Data/Sounds/voice/animal/wolf_attack_2.wav"; break;
-				case 1:
-					sound = "Data/Sounds/voice/animal/wolf_attack_3.wav"; break;
-				case 2:
-					sound = "Data/Sounds/voice/animal/wolf_attack_4.wav"; break;
-				case 3:
-					sound = "Data/Sounds/voice/animal/wolf_attack_5.wav"; break;
-				case 4:
-					sound = "Data/Sounds/voice/animal/wolf_attack_6.wav"; break;
-				case 5:
-					sound = "Data/Sounds/voice/animal/wolf_attack_7.wav"; break;
-				case 6:
-					sound = "Data/Sounds/voice/animal/wolf_attack_8.wav"; break;
-				case 7:
-					sound = "Data/Sounds/voice/animal/wolf_attack_9.wav"; break;
-				default:
-					sound = "Data/Sounds/voice/animal/wolf_attack_1.wav"; break;
-			}
-			PlaySound(sound, this_mo.position);
-			CheckAttack();
-        }
-    }
-    if(long_offset < 3.14f){
-        long_offset += time_step * 50.0f;
-        this_mo.rigged_object().SetMorphTargetWeight("long",pow(sin(long_offset), 2.0f), 1.0);
-    }
-    float damping_time = 10.0f;
-    if(wide_offset < damping_time){
-        wide_offset += time_step * 30.0f;
-        float weight = (damping_time - wide_offset) * 0.05f * pow(sin(wide_offset), 0.5f);
-        this_mo.rigged_object().SetMorphTargetWeight("wide", weight, 1.0f);
-        this_mo.rigged_object().SetMorphTargetWeight("deep", weight, 1.0f);
-    }
-}
-
-string attack_path = "Data/Attacks/knifeslash.xml";
-float p_attack_damage_mult = 1.0;
-float p_attack_knockback_mult = 1.0;
-
-void CheckAttack(){
-	int player_id = GetPlayerCharacterID();
-	if(player_id == -1){
-		return;
-	}
-	MovementObject@ char = ReadCharacterID(player_id);
-	/* DebugDrawLine(this_mo.position, this_mo.position + normalize(char.position - this_mo.position) * (character_scale * 2.0) , vec3(1.0), _fade); */
-	if(distance(char.position, this_mo.position) < (character_scale * 1.75)){
-		vec3 direction = normalize(this_mo.velocity);
-		int hit = char.WasHit("attackimpact", attack_path, direction, this_mo.position, this_mo.getID(), p_attack_damage_mult, p_attack_knockback_mult);
-	}
-}
-
-void UpdateFacing(const Timestep &in ts){
-    vec3 flat_vel = vec3(this_mo.velocity.x, 0.0f, this_mo.velocity.z);
-    this_mo.SetRotationFromFacing(InterpDirections(this_mo.GetFacing(), flat_vel, 1.0 - pow(0.95f, ts.frames())));
-}
-
 void FinalAttachedItemUpdate(int num_frames) {
 }
 
 void HandleAnimationEvent(string event, vec3 world_pos){
-
 }
+
 void Reset() {
     this_mo.rigged_object().anim_client().RemoveAllLayers();
     this_mo.DetachAllItems();
@@ -437,7 +316,7 @@ bool Init(string character_path) {
     if(success){
         this_mo.RecreateRiggedObject(this_mo.char_path);
         this_mo.SetAnimation(target_animation, 20.0f, 0);
-		RiggedObject@ rigged_object = this_mo.rigged_object();
+		/* RiggedObject@ rigged_object = this_mo.rigged_object();
 	    Skeleton@ skeleton = rigged_object.skeleton();
 	    int num_bones = skeleton.NumBones();
 	    skeleton_bind_transforms.resize(num_bones);
@@ -446,121 +325,9 @@ bool Init(string character_path) {
 	    for(int i = 0; i < num_bones; ++i) {
 	        skeleton_bind_transforms[i] = BoneTransform(skeleton.GetBindMatrix(i));
 	        inv_skeleton_bind_transforms[i] = invert(skeleton_bind_transforms[i]);
-	    }
+	    } */
     }
     return success;
-}
-
-void ApplyPhysics(const Timestep &in ts) {
-	bool collision_below = false;
-	for(int i = 0; i < sphere_col.NumContacts(); i++){
-		if(sphere_col.GetContact(i).position.y < this_mo.position.y){
-			collision_below = true;
-			break;
-		}
-	}
-	if(sphere_col.NumContacts() > 0 && collision_below){
-		on_ground = true;
-	}else{
-		on_ground = false;
-	}
-    if(!on_ground){
-        this_mo.velocity += physics.gravity_vector * ts.step();
-    }
-    bool feet_moving = false;
-    float _walk_accel = 35.0f; // how fast characters accelerate when moving
-    if(on_ground){
-        this_mo.velocity *= pow(0.95f,ts.frames());
-    }
-}
-
-void HandleCollisions(const Timestep &in ts) {
-    vec3 scale;
-    float size;
-    GetCollisionSphere(scale, size);
-    if(show_debug){
-        DebugDrawWireSphere(this_mo.position, size, vec3(1.0f,1.0f,1.0f), _delete_on_update);
-    }
-    if(on_ground){
-        HandleGroundCollisions(ts);
-    } else {
-        HandleAirCollisions(ts);
-    }
-}
-
-void HandleGroundCollisions(const Timestep &in ts) {
-    // Check if character has room to stand up
-    vec3 old_pos = this_mo.position;
-    vec3 scale;
-    float size;
-    GetCollisionSphere(scale, size);
-    col.GetSlidingScaledSphereCollision(this_mo.position, size, scale);
-    if(show_debug){
-        DebugDrawWireScaledSphere(this_mo.position, size, scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
-    }
-    this_mo.position = sphere_col.adjusted_position;
-    bool in_air = HandleStandingCollision();
-}
-
-bool HandleStandingCollision() {
-    vec3 lower_pos = this_mo.position - vec3(0.0f, 0.05f, 0.0f);
-    vec3 scale;
-    float size;
-    GetCollisionSphere(scale, size);
-    col.GetSweptSphereCollision(this_mo.position, lower_pos, size);
-    if(show_debug){
-        DebugDrawWireSphere(this_mo.position, size, vec3(0.0f,0.0f,1.0f), _delete_on_update);
-        DebugDrawWireSphere(lower_pos, size, vec3(0.0f,0.0f,1.0f), _delete_on_update);
-    }
-    return (sphere_col.position == lower_pos);
-}
-
-void HandleAirCollisions(const Timestep &in ts) {
-    vec3 offset = this_mo.position - last_col_pos;
-    this_mo.position = last_col_pos;
-    bool landing = false;
-    vec3 old_vel = this_mo.velocity;
-    for(int i=0; i<ts.frames(); ++i){ // Divide movement into multiple pieces to help prevent surface penetration
-        if(on_ground){
-            break;
-        }
-        this_mo.position += offset/ts.frames();
-        vec3 scale;
-        float size;
-        GetCollisionSphere(scale, size);
-        col.GetSlidingScaledSphereCollision(this_mo.position, size, scale);
-        if(show_debug){
-            DebugDrawWireScaledSphere(this_mo.position, size, scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
-        }
-
-        vec3 closest_point;
-        float closest_dist = -1.0f;
-        for(int j=0; j<sphere_col.NumContacts(); j++){
-            const CollisionPoint contact = sphere_col.GetContact(j);
-            land_magnitude = length(this_mo.velocity);
-            float bounciness = 0.55f;
-            if(contact.normal.y > _ground_normal_y_threshold ||
-                (this_mo.velocity.y < 0.0f && contact.normal.y > 0.2f) ||
-                (contact.custom_normal.y >= 1.0 && contact.custom_normal.y < 4.0))
-                {  // If collision with a surface that can be walked on, then land
-                    landing = true;
-                    PlaySoundGroup("Data/Sounds/weapon_foley/impact/weapon_drop_light_dirt.xml", this_mo.position, 1.0f);
-                    //The charater is pushed back when colliding with the ground.
-                    if(length(this_mo.velocity) > 3.0f){
-                        this_mo.velocity = reflect(this_mo.velocity, contact.normal) * bounciness;
-                    }
-                }
-        }
-    }
-    if(landing){
-        //Print("Land " + length(this_mo.velocity) + "\n");
-        wide_offset = 0.0f;
-    }
-}
-
-void GetCollisionSphere(vec3 &out scale, float &out size){
-    scale = vec3(1.0f);
-    size = character_scale;
 }
 
 int WasHit(string type, string attack_path, vec3 dir, vec3 pos, int attacker_id, float attack_damage_mult, float attack_knockback_mult) {
@@ -606,15 +373,13 @@ void FixDiscontinuity() {
     queue_fix_discontinuity = true;
 }
 
-array<int> debug_lines;
-
 void PreDrawCameraNoCull(float curr_game_time) {
     if(queue_fix_discontinuity){
         this_mo.FixDiscontinuity();
         FinalAnimationMatrixUpdate(1);
         queue_fix_discontinuity = false;
     }
-	RiggedObject@ rigged_object = this_mo.rigged_object();
+	/* RiggedObject@ rigged_object = this_mo.rigged_object();
 	Skeleton@ skeleton = rigged_object.skeleton();
 
 	int bone = skeleton.IKBoneStart("head");
@@ -622,7 +387,7 @@ void PreDrawCameraNoCull(float curr_game_time) {
 	vec3 start = transform * (skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)));
 	vec3 end = transform * (skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)));
 
-    DebugDrawLine(start, end, vec3(1.0f), _fade);
+    DebugDrawLine(start, end, vec3(1.0f), _delete_on_draw); */
 }
 
 void FinalAnimationMatrixUpdate(int num_frames) {
@@ -676,9 +441,6 @@ void ResetSecondaryAnimation() {
     old_hip_offset = vec3(0.0f);
 }
 
-float move_delay = 0.0f;
-float repulsor_delay = 0.0f;
-
 void MindReceiveMessage(string msg){
 }
 void ReceiveMessage(string msg){
@@ -720,9 +482,6 @@ int GetPlayerCharacterID() {
 }
 
 void SetParameters() {
-    params.AddIntCheckbox("Follow Player", true);
-    targeted_jump = (params.GetInt("Follow Player") != 0);
-
     string team_str;
     character_getter.GetTeamString(team_str);
     params.AddString("Teams",team_str);
@@ -739,7 +498,7 @@ void SetParameters() {
         FixDiscontinuity();
     }
 }
-
+void HandleCollisionsBetweenTwoCharacters(MovementObject @other){}
 void NotifyItemDetach(int idex){}
 void HandleEditorAttachment(int x, int y, bool mirror){}
 void Contact(){}

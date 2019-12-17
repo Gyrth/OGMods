@@ -1,5 +1,5 @@
-# Material Count: 7
-newmtl GunPart5_gun_c.png
+# Material Count: 8
+newmtl Material.001_gun_n.png
 Ns 90.196078
 Ka 0.000000 0.000000 0.000000
 Kd 0.512000 0.512000 0.512000
@@ -7,10 +7,10 @@ Ks 0.250000 0.250000 0.250000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_c.png
+map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_n.png
 
 
-newmtl GunTrigger_gun_c.png
+newmtl GunPart5_gun_n.png
 Ns 90.196078
 Ka 0.000000 0.000000 0.000000
 Kd 0.512000 0.512000 0.512000
@@ -18,10 +18,10 @@ Ks 0.250000 0.250000 0.250000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_c.png
+map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_n.png
 
 
-newmtl GunPart3_gun_c.png
+newmtl GunPart3.001_gun_n.png
 Ns 90.196078
 Ka 0.000000 0.000000 0.000000
 Kd 0.512000 0.512000 0.512000
@@ -29,10 +29,10 @@ Ks 0.250000 0.250000 0.250000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_c.png
+map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_n.png
 
 
-newmtl GunPart4_gun_c.png
+newmtl GunPart3
 Ns 90.196078
 Ka 0.000000 0.000000 0.000000
 Kd 0.512000 0.512000 0.512000
@@ -40,10 +40,10 @@ Ks 0.250000 0.250000 0.250000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_c.png
+map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_n.png
 
 
-newmtl Material.001_gun_c.png
+newmtl GunPart4_gun_n.png
 Ns 90.196078
 Ka 0.000000 0.000000 0.000000
 Kd 0.512000 0.512000 0.512000
@@ -51,10 +51,10 @@ Ks 0.250000 0.250000 0.250000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_c.png
+map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_n.png
 
 
-newmtl GunPart2_gun_c.png
+newmtl GunPart3_gun_n.png
 Ns 90.196078
 Ka 0.000000 0.000000 0.000000
 Kd 0.512000 0.512000 0.512000
@@ -62,10 +62,10 @@ Ks 0.250000 0.250000 0.250000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_c.png
+map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_n.png
 
 
-newmtl GunPart3.001_gun_c.png
+newmtl GunTrigger_gun_n.png
 Ns 90.196078
 Ka 0.000000 0.000000 0.000000
 Kd 0.512000 0.512000 0.512000
@@ -73,6 +73,17 @@ Ks 0.250000 0.250000 0.250000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_c.png
+map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_n.png
+
+
+newmtl GunPart2_gun_n.png
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /home/gyrth/Documents/OGMods/receiver/Data/Textures/gun_n.png
 
 
