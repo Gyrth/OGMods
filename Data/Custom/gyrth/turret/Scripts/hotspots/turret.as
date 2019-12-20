@@ -59,8 +59,8 @@ void OnExit(MovementObject @mo) {
 
 void Shoot(MovementObject @mo){
 	string body_part;
-	int random_picker = RangedRandomFloat(0,4);	//This case switch picks a random body part to shoot.
-	switch(random_picker){
+	double random_picker = RangedRandomFloat(0,4);	//This case switch picks a random body part to shoot.
+	switch(int(random_picker)){
 		case 0: body_part = "head"; break;
 		case 1: body_part = "leftarm";  break;
 		case 2: body_part = "rightarm";  break;
