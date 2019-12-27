@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="19.6068" t1="1.53431" t2="17.5312" s0="1" s1="1" s2="1" q0="0.105733" q1="-0.359756" q2="0.0410722" q3="0.926126" euler_x="0.227349" euler_y="-0.741024" euler_z="0" id="1">
+    <CameraObject t0="17.9441" t1="-0.0164371" t2="-3.02891" s0="1" s1="1" s2="1" q0="-0.156676" q1="-0.0259188" q2="0.00411307" q3="-0.987301" euler_x="0.314757" euler_y="0.0524923" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -886,6 +886,14 @@
     <EnvObject name="Play Sound Helper" t0="-76.5749" t1="0.594534" t2="14.7766" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="183" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <Hotspot t0="26.3114" t1="-2.31318" t2="-9.44473" s0="0.444444" s1="0.444444" s2="0.444444" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="184" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Debug Current Line" type="int" val="1" />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;ai_goal&quot;:5,&quot;ai_sub_goal&quot;:10,&quot;function_name&quot;:&quot;ai_control&quot;,&quot;identifier&quot;:122,&quot;identifier_type&quot;:0}]}&#x0A;' />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <EnvObject t0="24.1388" t1="-2.6577" t2="16.9638" s0="0.581048" s1="0.259089" s2="0.512372" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="186" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
@@ -903,6 +911,9 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
+    <ItemObject t0="16.2335" t1="-2.32134" t2="-6.58998" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="192" type_file="Data/Items/Bastard.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </ItemObject>
     <Group t0="28.2505" t1="-1.15978" t2="23.435" s0="0.641924" s1="2.50214" s2="2.60336" q0="-0.320561" q1="0" q2="0" q3="0.947228" euler_x="-0.652643" euler_y="0" euler_z="0" id="198" version="1">
         <parameters />
         <EnvObject t0="28.2505" t1="-1.17561" t2="23.4707" s0="0.933299" s1="0.315963" s2="1" q0="-0.226671" q1="0.226671" q2="0.669791" q3="0.669791" euler_x="0" euler_y="0.652644" euler_z="1.5708" id="185" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cylinder.xml">
@@ -1116,6 +1127,7 @@
     <SpawnerItem display_name="Basics Stone Cylinder" path="Data/Objects/Buildings/basics/soft_cylinder.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/soft_cylinder.png" />
     <SpawnerItem display_name="Basics Stone Cube" path="Data/Objects/Buildings/basics/soft_cube.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/soft_cube.png" />
     <SpawnerItem display_name="Overgrowth Level Hotspot" path="Data/Objects/Hotspots/overgrowth_level.xml" thumbnail_path="Data/Textures/ui/ogicon.png" />
-    <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
     <SpawnerItem display_name="Start Dialogue Hotspot" path="Data/Objects/Hotspots/start_dialogue.xml" thumbnail_path="Data/UI/spawner/thumbs/Hotspot/sign_icon.png" />
+    <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
+    <SpawnerItem display_name="Bastard Sword" path="Data/Items/Bastard.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/wsword2.png" />
 </RecentItems>
