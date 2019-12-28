@@ -13,7 +13,8 @@ enum dialogue_functions	{
 							fade_to_black = 9,
 							settings = 10,
 							start = 11,
-							end = 12
+							end = 12,
+							set_actor_dialogue_control = 13
 						}
 
 class DrikaDialogue : DrikaElement{
@@ -64,6 +65,7 @@ class DrikaDialogue : DrikaElement{
 	bool use_ik;
 	float transition_speed;
 	bool wait_anim_end;
+	bool dialogue_control;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -78,7 +80,8 @@ class DrikaDialogue : DrikaElement{
 												"Fade To Black",
 												"Settings",
 												"Start",
-												"End"
+												"End",
+												"Set Actor Dialogue Control"
 											};
 
 	DrikaDialogue(JSONValue params = JSONValue()){
@@ -122,8 +125,9 @@ class DrikaDialogue : DrikaElement{
 		use_ik = GetJSONBool(params, "use_ik", true);
 		transition_speed = GetJSONFloat(params, "transition_speed", 3.0);
 		wait_anim_end = GetJSONBool(params, "wait_anim_end", true);
+		dialogue_control = GetJSONBool(params, "dialogue_control", true);
 
-		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
+		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			connection_types = {_movement_object};
 			LoadIdentifier(params);
 		}
@@ -211,9 +215,11 @@ class DrikaDialogue : DrikaElement{
 			data["dialogue_text_color"].append(dialogue_text_color.y);
 			data["dialogue_text_color"].append(dialogue_text_color.z);
 			data["dialogue_text_color"].append(dialogue_text_color.a);
+		}else if(dialogue_function == set_actor_dialogue_control){
+			data["dialogue_control"] = JSONValue(dialogue_control);
 		}
 
-		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
+		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			SaveIdentifier(data);
 		}
 
@@ -258,6 +264,9 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == fade_to_black){
 			display_string += target_fade_to_black + " ";
 			display_string += fade_to_black_duration;
+		}else if(dialogue_function == set_actor_dialogue_control){
+			display_string += actor_name;
+			display_string += dialogue_control;
 		}
 
 		return display_string;
@@ -299,7 +308,7 @@ class DrikaDialogue : DrikaElement{
 
 	void DrawEditing(){
 		array<MovementObject@> targets = GetTargetMovementObjects();
-		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
+		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			for(uint i = 0; i < targets.size(); i++){
 				DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
@@ -454,12 +463,14 @@ class DrikaDialogue : DrikaElement{
 			SetFadeToBlack();
 		}else if(dialogue_function == settings){
 			SetDialogueSettings();
+		}else if(dialogue_function == set_actor_dialogue_control){
+			SetActorDialogueControl();
 		}
 	}
 
 	void EditDone(){
 		DeletePlaceholder();
-		if(dialogue_function != set_actor_animation){
+		if(dialogue_function != set_actor_dialogue_control){
 			Reset();
 		}
 	}
@@ -551,7 +562,7 @@ class DrikaDialogue : DrikaElement{
 			Reset();
 			dialogue_function = dialogue_functions(current_dialogue_function);
 
-			if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient){
+			if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 				connection_types = {_movement_object};
 			}else{
 				connection_types = {};
@@ -654,6 +665,10 @@ class DrikaDialogue : DrikaElement{
 			ImGui_SliderInt("Dialogue Text Size", dialogue_text_size, 1, 100, "%.0f");
 			ImGui_ColorEdit4("Dialogue Text Color", dialogue_text_color);
 			ImGui_Checkbox("Dialogue Text Shadow", dialogue_text_shadow);
+		}else if(dialogue_function == set_actor_dialogue_control){
+			ImGui_Text("Set to : ");
+			ImGui_SameLine();
+			ImGui_Checkbox("", dialogue_control);
 		}
 	}
 
@@ -710,7 +725,7 @@ class DrikaDialogue : DrikaElement{
 				ResetFadeToBlack();
 			}
 			triggered = false;
-		}else if(dialogue_function == set_actor_animation){
+		}else if(dialogue_function == set_actor_dialogue_control){
 			array<MovementObject@> targets = GetTargetMovementObjects();
 
 			for(uint i = 0; i < targets.size(); i++){
@@ -783,7 +798,11 @@ class DrikaDialogue : DrikaElement{
 			return true;
 		}else if(dialogue_function == end){
 			return EndDialogue();
+		}else if(dialogue_function == set_actor_dialogue_control){
+			SetActorDialogueControl();
+			return true;
 		}
+
 
 		return false;
 	}
@@ -1002,8 +1021,6 @@ class DrikaDialogue : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
-			AddDialogueActor(targets[i].GetID());
-
 			string flags = "0";
 			if(anim_mirrored) flags += " | _ANM_MIRRORED";
 			if(anim_mobile) flags += " | _ANM_MOBILE";
@@ -1017,6 +1034,18 @@ class DrikaDialogue : DrikaElement{
 
 			targets[i].rigged_object().anim_client().Reset();
 			targets[i].Execute(roll_fade + "this_mo.SetAnimation(\"" + target_actor_animation + "\", " + transition_speed + ", " + flags + ");dialogue_anim = \"" + target_actor_animation + "\";" + callback);
+		}
+	}
+
+	void SetActorDialogueControl(){
+		array<MovementObject@> targets = GetTargetMovementObjects();
+
+		for(uint i = 0; i < targets.size(); i++){
+			if(dialogue_control){
+				AddDialogueActor(targets[i].GetID());
+			}else{
+				RemoveDialogueActor(targets[i].GetID());
+			}
 		}
 	}
 }
