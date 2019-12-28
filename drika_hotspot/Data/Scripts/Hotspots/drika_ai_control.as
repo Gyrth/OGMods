@@ -1,73 +1,41 @@
 enum ai_goals {
 				_patrol,
 				_attack,
-				_investigate,
+				_investigate_slow,
+				_investigate_urgent,
+				_investigate_body,
+				_investigate_around,
+				_investigate_attack,
 				_get_help,
 				_escort,
 				_get_weapon,
-				_navigate,
-				_struggle,
-				_hold_still,
+				_get_closest_weapon,
 				_flee
 			};
 
-enum ai_sub_goals {
-					_unknown,
-					_provoke_attack,
-					_avoid_jump_kick,
-					_knock_off_ledge,
-					_wait_and_attack,
-					_rush_and_attack,
-					_defend,
-					_surround_target,
-					_escape_surround,
-					_investigate_slow,
-					_investigate_urgent,
-					_investigate_body,
-					_investigate_around,
-					_investigate_attack
-				};
-
 class DrikaAIControl : DrikaElement{
 	int current_ai_goal;
-	int current_ai_sub_goal;
 	int ai_goal;
-	int ai_sub_goal;
 
 	array<string> ai_goal_names = {		"Patrol",
 										"Attack",
-										"Investigate",
-										"Get Help",
-										"Escort",
-										"Get Weapon",
-										"Navigate",
-										"Struggle",
-										"Hold Still",
-										"Flee"
-									};
-
-	array<string> ai_sub_goal_names = {
-										"Unknown",
-										"Provoke Attack",
-										"Avoid Jump Kick",
-										"Knock Off Ledge",
-										"Wait and Attack",
-										"Rush and Attack",
-										"Defend",
-										"Surround Target",
-										"Escape Surround",
 										"Investigate Slow",
 										"Investigate Urgent",
 										"Investigate Body",
 										"Investigate Around",
-										"Investigate Attack"
+										"Investigate Attack",
+										"Get Help",
+										"Escort",
+										"Get Weapon",
+										"Get Closest Weapon",
+										"Flee"
 									};
 
 	DrikaAIControl(JSONValue params = JSONValue()){
-		ai_goal = ai_goals(GetJSONInt(params, "ai_goal", _investigate));
+		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
+		placeholder_name = "AIControl Helper";
+		ai_goal = ai_goals(GetJSONInt(params, "ai_goal", _investigate_slow));
 		current_ai_goal = ai_goal;
-		ai_sub_goal = ai_sub_goals(GetJSONInt(params, "ai_sub_goal", _investigate_slow));
-		current_ai_sub_goal = ai_sub_goal;
 		show_team_option = true;
 		show_name_option = true;
 
@@ -77,11 +45,15 @@ class DrikaAIControl : DrikaElement{
 		LoadIdentifier(params);
 	}
 
+	void PostInit(){
+		RetrievePlaceholder();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["function_name"] = JSONValue("ai_control");
+		data["placeholder_id"] = JSONValue(placeholder_id);
 		data["ai_goal"] = JSONValue(ai_goal);
-		data["ai_sub_goal"] = JSONValue(ai_sub_goal);
 		SaveIdentifier(data);
 		return data;
 	}
@@ -90,7 +62,15 @@ class DrikaAIControl : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			if(ObjectExists(placeholder_id)){
+				DebugDrawLine(placeholder.GetTranslation(), targets[i].position, vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawBillboard("Data/Textures/ui/challenge_mode/quit_icon_c.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
+			}else{
+				CreatePlaceholder();
+				StartEdit();
+			}
 		}
+
 	}
 
 	string GetDisplayString(){
@@ -108,44 +88,91 @@ class DrikaAIControl : DrikaElement{
 		if(ImGui_Combo("AIGoal", current_ai_goal, ai_goal_names)){
 			ai_goal = ai_goals(current_ai_goal);
 		}
-
-		if(ImGui_Combo("AISubGoal", current_ai_sub_goal, ai_sub_goal_names)){
-			ai_sub_goal = ai_sub_goals(current_ai_sub_goal);
-		}
 	}
 
 	bool Trigger(){
 		array<MovementObject@> targets = GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
-		for(uint i = 0; i < targets.size(); i++){
-			targets[i].Execute("nav_target = vec3(0,0,0);");
-			targets[i].Execute("SetGoal(AIGoal(" + ai_goal + "));");
-			targets[i].Execute("SetSubGoal(AISubGoal(" + (ai_sub_goal - 1) + "));");
-			switch(ai_goal){
-				case _patrol:
-					break;
-				case _attack:
-					break;
-				case _investigate:
-					break;
-				case _get_help:
-					break;
-				case _escort:
-					break;
-				case _get_weapon:
-					break;
-				case _navigate:
-					break;
-				case _struggle:
-					break;
-				case _hold_still:
-					break;
-				case _flee:
-					break;
 
-				default:
-					break;
-			}
+		string command = "";
+
+		switch(ai_goal){
+			case _patrol:
+
+				command += "SetGoal(_patrol);";
+				break;
+			case _attack:
+
+				command += "SetGoal(_attack);";
+				break;
+			case _investigate_slow:
+				{
+					vec3 target_pos = placeholder.GetTranslation();
+					command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+					command += "SetGoal(_investigate);";
+					command += "SetSubGoal(_investigate_slow);";
+				}
+				break;
+			case _investigate_urgent:
+				{
+					vec3 target_pos = placeholder.GetTranslation();
+					command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+					command += "SetGoal(_investigate);";
+					command += "SetSubGoal(_investigate_urgent);";
+				}
+				break;
+			case _investigate_body:
+				{
+					vec3 target_pos = placeholder.GetTranslation();
+					command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+					command += "SetGoal(_investigate);";
+					command += "SetSubGoal(_investigate_body);";
+				}
+				break;
+			case _investigate_around:
+				{
+					vec3 target_pos = placeholder.GetTranslation();
+					command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+					command += "SetGoal(_investigate);";
+					command += "SetSubGoal(_investigate_around);";
+				}
+				break;
+			case _investigate_attack:
+				{
+					vec3 target_pos = placeholder.GetTranslation();
+					command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+					command += "SetGoal(_investigate);";
+					command += "SetSubGoal(_investigate_attack);";
+				}
+				break;
+			case _get_help:
+
+				command += "SetGoal(_get_help);";
+				break;
+			case _escort:
+
+				command += "SetGoal(_escort);";
+				break;
+			case _get_weapon:
+
+				command += "SetGoal(_get_weapon);";
+				break;
+			case _get_closest_weapon:
+
+				command += "SetGoal(_get_weapon);";
+				break;
+			case _flee:
+
+				command += "SetGoal(_flee);";
+				break;
+
+			default:
+				break;
+		}
+
+		for(uint i = 0; i < targets.size(); i++){
+			Log(warning, "Execute " + command);
+			targets[i].Execute(command);
 		}
 
 		triggered = true;
