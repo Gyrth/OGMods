@@ -35,7 +35,8 @@ enum character_params { 	aggression = 0,
 							weapon_catch_skill = 34,
 							wearing_metal_armor = 35,
 							ignite = 36,
-							extinguish = 37
+							extinguish = 37,
+							is_player = 38
 					};
 
 class DrikaSetCharacterParam : DrikaElement{
@@ -56,7 +57,7 @@ class DrikaSetCharacterParam : DrikaElement{
 	array<int> float_parameters = {aggression, attack_damage, attack_knockback, attack_speed, block_followup, block_skill, character_scale, damage_resistance, ear_size, fat, focus_fov_distance, focus_fov_horizontal, focus_fov_vertical, ground_aggression, movement_speed, muscle, peripheral_fov_distance, peripheral_fov_horizontal, peripheral_fov_vertical, fall_damage_mult, fear_afraid_at_health_level, throw_counter_probability, weapon_catch_skill};
 	array<int> int_parameters = {knocked_out_shield};
 	array<int> bool_parameters = {cannot_be_disarmed, left_handed, static_char, fear_always_afraid_on_sight, fear_causes_fear_on_sight, fear_never_afraid_on_sight, no_look_around, stick_to_nav_mesh, is_throw_trainer, wearing_metal_armor};
-	array<int> function_parameters = {ignite, extinguish};
+	array<int> function_parameters = {ignite, extinguish, is_player};
 
 	array<string> param_names = {	"Aggression",
 	 								"Attack Damage",
@@ -95,7 +96,8 @@ class DrikaSetCharacterParam : DrikaElement{
 									"Weapon Catch Skill",
 									"Wearing Metal Armor",
 									"Ignite",
-									"Extinguish"
+									"Extinguish",
+									"Is Player"
 								};
 
 	DrikaSetCharacterParam(JSONValue params = JSONValue()){
@@ -207,7 +209,11 @@ class DrikaSetCharacterParam : DrikaElement{
 					params.AddIntCheckbox(param_name, bool_param_after);
 				}
 				params_before[i].bool_value = (params.GetInt(param_name) == 1);
-				Log(info, "Before bool " + params_before[i].bool_value);
+			}else if(character_param == is_player){
+				if(targets[i].GetType() == _movement_object){
+					MovementObject@ char = ReadCharacterID(targets[i].GetID());
+					params_before[i].bool_value = char.is_player;
+				}
 			}
 		}
 	}
@@ -351,6 +357,9 @@ class DrikaSetCharacterParam : DrikaElement{
 			case ignite:
 				break;
 			case extinguish:
+				break;
+			case is_player:
+				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			default:
 				Log(warning, "Found a non standard parameter type. " + param_type);
@@ -514,6 +523,12 @@ class DrikaSetCharacterParam : DrikaElement{
 								MovementObject@ char = ReadCharacterID(targets[i].GetID());
 								char.ReceiveMessage("extinguish");
 							}
+						}
+						break;
+					case is_player:
+						if(targets[i].GetType() == _movement_object){
+							MovementObject@ char = ReadCharacterID(targets[i].GetID());
+							char.is_player = reset?params_before[i].bool_value:bool_param_after;
 						}
 						break;
 					default:
