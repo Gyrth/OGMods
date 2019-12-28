@@ -92,7 +92,7 @@ class DrikaAnimation : DrikaElement{
 		current_animation_type = animation_type;
 		duration_method = duration_methods(GetJSONInt(params, "duration_method", 0));
 		current_duration_method = duration_method;
-		animation_method = animation_methods(GetJSONInt(params, "animation_method", 1));
+		animation_method = animation_methods(GetJSONInt(params, "animation_method", 0));
 		current_animation_method  = animation_method;
 		interpolate_rotation = GetJSONBool(params, "interpolate_rotation", false);
 		interpolate_translation = GetJSONBool(params, "interpolate_translation", false);
