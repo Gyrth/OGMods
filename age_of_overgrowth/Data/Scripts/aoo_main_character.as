@@ -1737,8 +1737,11 @@ void UpdateBrain(const Timestep &in ts){
         }
     }
 
-    DebugDrawAIState();
     DebugDrawAIPath();
+}
+
+void DrawAIStateDebug() {
+
 }
 
 bool IsAware(){
