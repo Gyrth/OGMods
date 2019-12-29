@@ -124,7 +124,7 @@ class DrikaDialogue : DrikaElement{
 		anim_from_start = GetJSONBool(params, "anim_from_start", true);
 		use_ik = GetJSONBool(params, "use_ik", true);
 		transition_speed = GetJSONFloat(params, "transition_speed", 3.0);
-		wait_anim_end = GetJSONBool(params, "wait_anim_end", true);
+		wait_anim_end = GetJSONBool(params, "wait_anim_end", false);
 		dialogue_control = GetJSONBool(params, "dialogue_control", true);
 
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
