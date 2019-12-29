@@ -803,7 +803,7 @@ void AddDialogueActor(int character_id){
 	if(dialogue_actor_ids.find(character_id) == -1){
 		dialogue_actor_ids.insertLast(character_id);
 		char.ReceiveScriptMessage("set_dialogue_control true");
-		char.rigged_object().anim_client().Reset();
+		/* char.rigged_object().anim_client().Reset(); */
 	}
 }
 
@@ -812,7 +812,7 @@ void RemoveDialogueActor(int character_id){
 	if(index != -1){
 		MovementObject@ char = ReadCharacterID(dialogue_actor_ids[index]);
 		char.ReceiveScriptMessage("set_dialogue_control false");
-		char.rigged_object().anim_client().Reset();
+		/* char.rigged_object().anim_client().Reset(); */
 		dialogue_actor_ids.removeAt(index);
 	}
 }
@@ -822,7 +822,7 @@ void ClearDialogueActors(){
 		MovementObject@ char = ReadCharacterID(dialogue_actor_ids[i]);
 		char.Execute("roll_ik_fade = 0.0f;");
 		char.ReceiveScriptMessage("set_dialogue_control false");
-		char.rigged_object().anim_client().Reset();
+		/* char.rigged_object().anim_client().Reset(); */
 	}
 	dialogue_actor_ids.resize(0);
 }
