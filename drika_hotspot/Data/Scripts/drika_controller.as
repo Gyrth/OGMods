@@ -24,6 +24,7 @@ float fade_to_black_duration = 1.0;
 bool fade_to_black = false;
 array<int> waiting_hotspot_ids;
 int dialogue_layout = 0;
+bool use_voice_sounds = true;
 
 class ActorSettings{
 	string name = "Default";
@@ -934,6 +935,8 @@ void ReceiveMessage(string msg){
 
 		token_iter.FindNextToken(msg);
 		bool dialogue_text_shadow = token_iter.GetToken(msg) == "true";
+		token_iter.FindNextToken(msg);
+		use_voice_sounds = token_iter.GetToken(msg) == "true";
 
 		dialogue_font = FontSetup(dialogue_text_font, dialogue_text_size, dialogue_text_color, dialogue_text_shadow);
 	}else if(token == "drika_read_file"){
@@ -1067,6 +1070,7 @@ bool DialogueCameraControl() {
 }
 
 void PlayLineContinueSound(int test_voice = -1) {
+	if(!use_voice_sounds){return;}
     switch(test_voice == -1?current_actor_settings.voice:test_voice){
         case 0: PlaySoundGroup("Data/Sounds/concrete_foley/fs_light_concrete_edgecrawl.xml"); break;
         case 1: PlaySoundGroup("Data/Sounds/drygrass_foley/fs_light_drygrass_crouchwalk.xml"); break;
@@ -1090,7 +1094,8 @@ void PlayLineContinueSound(int test_voice = -1) {
     }
 }
 
-void PlayLineStartSound() {
+void PlayLineStartSound(){
+	if(!use_voice_sounds){return;}
 	switch(current_actor_settings.voice){
 		case 0: PlaySoundGroup("Data/Sounds/concrete_foley/fs_light_concrete_run.xml"); break;
 		case 1: PlaySoundGroup("Data/Sounds/drygrass_foley/fs_light_drygrass_walk.xml"); break;
