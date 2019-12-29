@@ -176,6 +176,14 @@ class DrikaPlaySound : DrikaElement{
 		}
 	}
 
+	void StartEdit(){
+		Trigger();
+	}
+
+	void EditDone(){
+		Reset();
+	}
+
 	bool Trigger(){
 		string extension = sound_path.substr(sound_path.length() - 3, sound_path.length());
 
