@@ -26,7 +26,6 @@ class DrikaBillboard : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("billboard");
 		data["image_path"] = JSONValue(image_path);
 		data["placeholder_id"] = JSONValue(placeholder_id);
 		data["image_size"] = JSONValue(image_size);

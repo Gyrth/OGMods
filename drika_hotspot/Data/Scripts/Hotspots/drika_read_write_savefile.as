@@ -45,7 +45,6 @@ class DrikaReadWriteSaveFile : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("read_write_savefile");
 		data["param"] = JSONValue(param);
 		data["value"] = JSONValue(value);
 		data["param2"] = JSONValue(param2);

@@ -108,7 +108,6 @@ class DrikaAnimation : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("animation");
 		data["animation_type"] = JSONValue(animation_type);
 		data["duration_method"] = JSONValue(duration_method);
 		data["animation_method"] = JSONValue(animation_method);

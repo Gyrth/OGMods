@@ -45,7 +45,6 @@ class DrikaGoToLine : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("go_to_line");
 		data["line"] = JSONValue(line);
 		data["line2"] = JSONValue(line2);
 		data["line3"] = JSONValue(line3);

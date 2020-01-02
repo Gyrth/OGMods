@@ -18,7 +18,6 @@ class DrikaSlowMotion : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("slow_motion");
 		data["target_time_scale"] = JSONValue(target_time_scale);
 		data["duration"] = JSONValue(duration);
 		data["delay"] = JSONValue(delay);

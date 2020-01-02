@@ -9,7 +9,7 @@ class DrikaSetCharacter : DrikaElement{
 		LoadIdentifier(params);
 		show_team_option = true;
 		show_name_option = true;
-		
+
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_character;
 		has_settings = true;
@@ -17,7 +17,6 @@ class DrikaSetCharacter : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_character");
 		data["character_path"] = JSONValue(character_path);
 		data["cache_skeleton_info"] = JSONValue(cache_skeleton_info);
 		SaveIdentifier(data);

@@ -26,7 +26,6 @@ class DrikaSetMorphTarget : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_morph_target");
 		data["morph_1"] = JSONValue(morph_1);
 		data["morph_2"] = JSONValue(morph_2);
 		data["weight"] = JSONValue(weight);

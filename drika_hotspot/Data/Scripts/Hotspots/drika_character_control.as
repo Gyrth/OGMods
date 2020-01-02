@@ -138,7 +138,6 @@ class DrikaCharacterControl : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("character_control");
 		data["character_option"] = JSONValue(character_option);
 		data["param_type"] = JSONValue(param_type);
 		if(param_type == int_param){

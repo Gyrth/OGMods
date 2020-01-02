@@ -26,7 +26,6 @@ class DrikaCreateObject : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("create_object");
 		data["placeholder_id"] = JSONValue(placeholder_id);
 		data["object_path"] = JSONValue(object_path);
 		data["reference_string"] = JSONValue(reference_string);

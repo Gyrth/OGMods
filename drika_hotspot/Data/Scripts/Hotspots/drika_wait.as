@@ -12,7 +12,6 @@ class DrikaWait : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("wait");
 		data["duration"] = JSONValue(duration);
 		return data;
 	}

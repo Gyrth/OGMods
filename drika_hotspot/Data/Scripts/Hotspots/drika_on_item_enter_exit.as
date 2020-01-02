@@ -21,7 +21,6 @@ class DrikaOnItemEnterExit : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("on_item_enter_exit");
 		data["trigger_type"] = JSONValue(trigger_type);
 		data["item_label"] = JSONValue(item_label);
 		return data;

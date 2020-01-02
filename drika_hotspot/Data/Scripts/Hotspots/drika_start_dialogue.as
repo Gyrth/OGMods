@@ -10,7 +10,6 @@ class DrikaStartDialogue : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("start_dialogue");
 		data["dialogue_name"] = JSONValue(dialogue_name);
 		return data;
 	}

@@ -144,7 +144,6 @@ class DrikaDialogue : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("dialogue");
 		data["dialogue_function"] = JSONValue(dialogue_function);
 
 		if(dialogue_function == say){

@@ -18,7 +18,6 @@ class DrikaTransformObject : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("transform_object");
 		data["placeholder_id"] = JSONValue(placeholder_id);
 		SaveIdentifier(data);
 		return data;

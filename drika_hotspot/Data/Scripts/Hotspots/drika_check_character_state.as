@@ -23,7 +23,6 @@ class DrikaCheckCharacterState : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("check_character_state");
 		data["state_check"] = JSONValue(state_check);
 		data["equals"] = JSONValue(equals);
 		SaveIdentifier(data);

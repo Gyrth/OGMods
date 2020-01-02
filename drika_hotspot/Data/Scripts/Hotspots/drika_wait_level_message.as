@@ -11,7 +11,6 @@ class DrikaWaitLevelMessage : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("wait_level_message");
 		data["message"] = JSONValue(message);
 		return data;
 	}

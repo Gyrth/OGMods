@@ -28,7 +28,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("on_character_enter_exit");
 		data["target_character_type"] = JSONValue(target_character_type);
 		data["hotspot_trigger_type"] = JSONValue(hotspot_trigger_type);
 		data["reference_string"] = JSONValue(reference_string);

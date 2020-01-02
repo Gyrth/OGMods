@@ -25,7 +25,6 @@ class DrikaSetObjectParam : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_object_param");
 		data["param_name"] = JSONValue(param_name);
 		data["param_type"] = JSONValue(param_type);
 		if(param_type == string_param){

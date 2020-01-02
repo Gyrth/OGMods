@@ -25,7 +25,6 @@ class DrikaCreateParticle : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("create_particle");
 		data["placeholder_id"] = JSONValue(placeholder_id);
 		data["particle_path"] = JSONValue(particle_path);
 		data["amount"] = JSONValue(amount);

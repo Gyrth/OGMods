@@ -26,7 +26,6 @@ class DrikaSendCharacterMessage : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("send_character_message");
 		data["character_message_type"] = JSONValue(character_message_type);
 		data["message"] = JSONValue(message);
 		SaveIdentifier(data);

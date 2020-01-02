@@ -79,7 +79,6 @@ class DrikaPlaySound : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("play_sound");
 		data["sound_path"] = JSONValue(sound_path);
 		data["placeholder_id"] = JSONValue(placeholder_id);
 		data["play_sound_method"] = JSONValue(play_sound_method);

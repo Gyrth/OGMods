@@ -16,7 +16,6 @@ class DrikaSetVelocity : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_velocity");
 		data["velocity_magnitude"] = JSONValue(velocity_magnitude);
 		data["placeholder_id"] = JSONValue(placeholder_id);
 		SaveIdentifier(data);

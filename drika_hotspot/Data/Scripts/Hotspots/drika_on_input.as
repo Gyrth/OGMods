@@ -36,7 +36,6 @@ class DrikaOnInput : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("on_input");
 		data["input"] = JSONValue(input);
 		data["type_text"] = JSONValue(type_text);
 		return data;

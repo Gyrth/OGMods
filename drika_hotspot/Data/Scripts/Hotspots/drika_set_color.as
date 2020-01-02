@@ -26,7 +26,6 @@ class DrikaSetColor : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_color");
 		data["color_type"] = JSONValue(color_type);
 		data["palette_slot"] = JSONValue(palette_slot);
 		data["after_color"] = JSONValue(JSONarrayValue);

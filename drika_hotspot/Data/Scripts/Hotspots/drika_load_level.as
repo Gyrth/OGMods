@@ -9,7 +9,6 @@ class DrikaLoadLevel : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("load_level");
 		data["level_path"] = JSONValue(level_path);
 		return data;
 	}

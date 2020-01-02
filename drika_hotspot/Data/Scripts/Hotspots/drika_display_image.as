@@ -16,7 +16,6 @@ class DrikaDisplayImage : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("display_image");
 		data["image_path"] = JSONValue(image_path);
 		data["scale"] = JSONValue(scale);
 		data["clear_image"] = JSONValue(clear_image);

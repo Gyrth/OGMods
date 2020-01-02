@@ -81,7 +81,6 @@ class DrikaSetLevelParam : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_level_param");
 		data["level_param"] = JSONValue(level_param);
 		data["param_name"] = JSONValue(param_name);
 

@@ -54,7 +54,6 @@ class DrikaSetCameraParam : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_camera_param");
 		data["camera_param"] = JSONValue(camera_param);
 		string save_string;
 		if(param_type == vec3_color_param){

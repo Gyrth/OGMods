@@ -14,7 +14,6 @@ class DrikaDisplayText : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("display_text");
 		data["display_message"] = JSONValue(display_message);
 		data["font_size"] = JSONValue(font_size);
 		data["font_path"] = JSONValue(font_path);

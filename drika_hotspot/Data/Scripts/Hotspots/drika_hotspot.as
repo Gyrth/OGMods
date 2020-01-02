@@ -257,7 +257,7 @@ void InterpData(){
 			Log(warning, "Unable to parse the JSON in the Script Data!");
 		}else{
 			for( uint i = 0; i < data.getRoot()["functions"].size(); ++i ) {
-				drika_elements.insertLast(InterpElement(data.getRoot()["functions"][i]));
+				drika_elements.insertLast(InterpElement(none, data.getRoot()["functions"][i]));
 				drika_indexes.insertLast(drika_elements.size() - 1);
 				line_index += 1;
 			}
@@ -265,84 +265,6 @@ void InterpData(){
 	}
 	Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID());
 	ReorderElements();
-}
-
-DrikaElement@ InterpElement(JSONValue &in function_json){
-	if(function_json["function_name"].asString() == "set_object_param"){
-		return DrikaSetObjectParam(function_json);
-	}else if(function_json["function_name"].asString() == "create_object"){
-		return DrikaCreateObject(function_json);
-	}else if(function_json["function_name"].asString() == "check_character_state"){
-		return DrikaCheckCharacterState(function_json);
-	}else if(function_json["function_name"].asString() == "create_particle"){
-		return DrikaCreateParticle(function_json);
-	}else if(function_json["function_name"].asString() == "display_image"){
-		return DrikaDisplayImage(function_json);
-	}else if(function_json["function_name"].asString() == "display_text"){
-		return DrikaDisplayText(function_json);
-	}else if(function_json["function_name"].asString() == "go_to_line"){
-		return DrikaGoToLine(function_json);
-	}else if(function_json["function_name"].asString() == "load_level"){
-		return DrikaLoadLevel(function_json);
-	}else if(function_json["function_name"].asString() == "on_character_enter_exit"){
-		return DrikaOnCharacterEnterExit(function_json);
-	}else if(function_json["function_name"].asString() == "on_item_enter_exit"){
-		return DrikaOnItemEnterExit(function_json);
-	}else if(function_json["function_name"].asString() == "play_music"){
-		return DrikaPlayMusic(function_json);
-	}else if(function_json["function_name"].asString() == "play_sound"){
-		return DrikaPlaySound(function_json);
-	}else if(function_json["function_name"].asString() == "send_level_message"){
-		return DrikaSendLevelMessage(function_json);
-	}else if(function_json["function_name"].asString() == "set_camera_param"){
-		return DrikaSetCameraParam(function_json);
-	}else if(function_json["function_name"].asString() == "character_control"){
-		return DrikaCharacterControl(function_json);
-	}else if(function_json["function_name"].asString() == "set_character"){
-		return DrikaSetCharacter(function_json);
-	}else if(function_json["function_name"].asString() == "set_color"){
-		return DrikaSetColor(function_json);
-	}else if(function_json["function_name"].asString() == "set_enabled"){
-		return DrikaSetEnabled(function_json);
-	}else if(function_json["function_name"].asString() == "set_level_param"){
-		return DrikaSetLevelParam(function_json);
-	}else if(function_json["function_name"].asString() == "set_velocity"){
-		return DrikaSetVelocity(function_json);
-	}else if(function_json["function_name"].asString() == "start_dialogue"){
-		return DrikaStartDialogue(function_json);
-	}else if(function_json["function_name"].asString() == "transform_object"){
-		return DrikaTransformObject(function_json);
-	}else if(function_json["function_name"].asString() == "wait_level_message"){
-		return DrikaWaitLevelMessage(function_json);
-	}else if(function_json["function_name"].asString() == "wait"){
-		return DrikaWait(function_json);
-	}else if(function_json["function_name"].asString() == "slow_motion"){
-		return DrikaSlowMotion(function_json);
-	}else if(function_json["function_name"].asString() == "on_input"){
-		return DrikaOnInput(function_json);
-	}else if(function_json["function_name"].asString() == "set_morph_target"){
-		return DrikaSetMorphTarget(function_json);
-	}else if(function_json["function_name"].asString() == "set_bone_inflate"){
-		return DrikaSetBoneInflate(function_json);
-	}else if(function_json["function_name"].asString() == "send_character_message"){
-		return DrikaSendCharacterMessage(function_json);
-	}else if(function_json["function_name"].asString() == "animation"){
-		return DrikaAnimation(function_json);
-	}else if(function_json["function_name"].asString() == "billboard"){
-		return DrikaBillboard(function_json);
-	}else if(function_json["function_name"].asString() == "read_write_savefile"){
-		return DrikaReadWriteSaveFile(function_json);
-	}else if(function_json["function_name"].asString() == "dialogue"){
-		return DrikaDialogue(function_json);
-	}else if(function_json["function_name"].asString() == "comment"){
-		return DrikaComment(function_json);
-	}else if(function_json["function_name"].asString() == "ai_control"){
-		return DrikaAIControl(function_json);
-	}else{
-		//Either an empty line or an unknown command is in the comic.
-		Log(warning, "Unknown command found: " + function_json["function_name"].asString());
-		return DrikaElement();
-	}
 }
 
 void PostInit(){
@@ -569,7 +491,7 @@ void DrawEditor(){
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
 					duplicating = true;
-					DrikaElement@ new_element = InterpElement(GetCurrentElement().GetSaveData());
+					DrikaElement@ new_element = InterpElement(GetCurrentElement().drika_element_type, GetCurrentElement().GetSaveData());
 					InsertElement(new_element);
 					duplicating = false;
 				}
@@ -897,7 +819,9 @@ void Save(){
 	JSONValue functions;
 
 	for(uint i = 0; i < drika_indexes.size(); i++){
-		functions.append(drika_elements[drika_indexes[i]].GetSaveData());
+		JSONValue function_data = drika_elements[drika_indexes[i]].GetSaveData();
+		function_data["function"] = JSONValue(drika_elements[drika_indexes[i]].drika_element_type);
+		functions.append(function_data);
 	}
 	data.getRoot()["functions"] = functions;
 	params.SetString("Script Data", data.writeString(false));
@@ -1007,84 +931,95 @@ void AddFunctionMenuItems(){
 		}
 		ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
 		if(ImGui_MenuItem(sorted_element_names[i])){
-			InsertElement(@CreateNewFunction(current_element_type));
+			InsertElement(@InterpElement(current_element_type, JSONValue()));
 		}
 		ImGui_PopStyleColor();
 	}
 }
 
-DrikaElement@ CreateNewFunction(drika_element_types element_type) {
-	switch(element_type){
+DrikaElement@ InterpElement(drika_element_types element_type, JSONValue &in function_json){
+	drika_element_types target_element_type;
+	if(element_type == none){
+		if(function_json.isMember("function")){
+			target_element_type = drika_element_types(function_json["function"].asInt());
+		}else{
+			Log(warning, "Found a function without a function identifier.");
+		}
+	}else{
+		target_element_type = element_type;
+	}
+
+	switch(target_element_type){
 		case drika_wait_level_message:
-			return DrikaWaitLevelMessage();
+			return DrikaWaitLevelMessage(function_json);
 		case drika_wait:
-			return DrikaWait();
+			return DrikaWait(function_json);
 		case drika_set_enabled:
-			return DrikaSetEnabled();
+			return DrikaSetEnabled(function_json);
 		case drika_set_character:
-			return DrikaSetCharacter();
+			return DrikaSetCharacter(function_json);
 		case drika_create_particle:
-			return DrikaCreateParticle();
+			return DrikaCreateParticle(function_json);
 		case drika_play_sound:
-			return DrikaPlaySound();
+			return DrikaPlaySound(function_json);
 		case drika_go_to_line:
-			return DrikaGoToLine();
+			return DrikaGoToLine(function_json);
 		case drika_on_character_enter_exit:
-			return DrikaOnCharacterEnterExit();
+			return DrikaOnCharacterEnterExit(function_json);
 		case drika_on_item_enter_exit:
-			return DrikaOnItemEnterExit();
+			return DrikaOnItemEnterExit(function_json);
 		case drika_send_level_message:
-			return DrikaSendLevelMessage();
+			return DrikaSendLevelMessage(function_json);
 		case drika_start_dialogue:
-			return DrikaStartDialogue();
+			return DrikaStartDialogue(function_json);
 		case drika_set_object_param:
-			return DrikaSetObjectParam();
+			return DrikaSetObjectParam(function_json);
 		case drika_set_level_param:
-			return DrikaSetLevelParam();
+			return DrikaSetLevelParam(function_json);
 		case drika_set_camera_param:
-			return DrikaSetCameraParam();
+			return DrikaSetCameraParam(function_json);
 		case drika_create_object:
-			return DrikaCreateObject();
+			return DrikaCreateObject(function_json);
 		case drika_transform_object:
-			return DrikaTransformObject();
+			return DrikaTransformObject(function_json);
 		case drika_set_color:
-			return DrikaSetColor();
+			return DrikaSetColor(function_json);
 		case drika_play_music:
-			return DrikaPlayMusic();
+			return DrikaPlayMusic(function_json);
 		case drika_character_control:
-			return DrikaCharacterControl();
+			return DrikaCharacterControl(function_json);
 		case drika_display_text:
-			return DrikaDisplayText();
+			return DrikaDisplayText(function_json);
 		case drika_display_image:
-			return DrikaDisplayImage();
+			return DrikaDisplayImage(function_json);
 		case drika_load_level:
-			return DrikaLoadLevel();
+			return DrikaLoadLevel(function_json);
 		case drika_check_character_state:
-			return DrikaCheckCharacterState();
+			return DrikaCheckCharacterState(function_json);
 		case drika_set_velocity:
-			return DrikaSetVelocity();
+			return DrikaSetVelocity(function_json);
 		case drika_slow_motion:
-			return DrikaSlowMotion();
+			return DrikaSlowMotion(function_json);
 		case drika_on_input:
-			return DrikaOnInput();
+			return DrikaOnInput(function_json);
 		case drika_set_morph_target:
-			return DrikaSetMorphTarget();
+			return DrikaSetMorphTarget(function_json);
 		case drika_set_bone_inflate:
-			return DrikaSetBoneInflate();
+			return DrikaSetBoneInflate(function_json);
 		case drika_send_character_message:
-			return DrikaSendCharacterMessage();
+			return DrikaSendCharacterMessage(function_json);
 		case drika_animation:
-			return DrikaAnimation();
+			return DrikaAnimation(function_json);
 		case drika_billboard:
-			return DrikaBillboard();
+			return DrikaBillboard(function_json);
 		case drika_read_write_savefile:
-			return DrikaReadWriteSaveFile();
+			return DrikaReadWriteSaveFile(function_json);
 		case drika_comment:
-			return DrikaComment();
+			return DrikaComment(function_json);
 		case drika_dialogue:
-			return DrikaDialogue();
+			return DrikaDialogue(function_json);
 		case drika_ai_control:
-			return DrikaAIControl();
+			return DrikaAIControl(function_json);
 	}
 	return DrikaElement();
 }

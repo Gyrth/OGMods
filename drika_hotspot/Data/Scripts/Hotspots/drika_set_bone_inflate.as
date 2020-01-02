@@ -14,7 +14,6 @@ class DrikaSetBoneInflate : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_bone_inflate");
 		data["bone_name"] = JSONValue(bone_name);
 		data["inflate_value"] = JSONValue(inflate_value);
 		SaveIdentifier(data);

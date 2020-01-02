@@ -48,7 +48,6 @@ class DrikaAIControl : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("ai_control");
 		if(goals_with_placeholders.find(ai_goals(ai_goal)) != -1){
 			data["placeholder_id"] = JSONValue(placeholder_id);
 		}

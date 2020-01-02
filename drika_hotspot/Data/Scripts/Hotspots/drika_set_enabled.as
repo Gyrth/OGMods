@@ -15,7 +15,6 @@ class DrikaSetEnabled : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_enabled");
 		data["enabled"] = JSONValue(enabled);
 		SaveIdentifier(data);
 		return data;
