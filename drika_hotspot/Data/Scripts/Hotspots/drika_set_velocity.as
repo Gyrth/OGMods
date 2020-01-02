@@ -1,5 +1,6 @@
 class DrikaSetVelocity : DrikaElement{
 	float velocity_magnitude;
+	bool add_velocity;
 
 	DrikaSetVelocity(JSONValue params = JSONValue()){
 		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
@@ -7,6 +8,7 @@ class DrikaSetVelocity : DrikaElement{
 		LoadIdentifier(params);
 		show_team_option = true;
 		show_name_option = true;
+		add_velocity = GetJSONBool(params, "add_velocity", true);
 
 		placeholder_name = "Set Velocity Helper";
 		drika_element_type = drika_set_velocity;
@@ -18,6 +20,7 @@ class DrikaSetVelocity : DrikaElement{
 		JSONValue data;
 		data["velocity_magnitude"] = JSONValue(velocity_magnitude);
 		data["placeholder_id"] = JSONValue(placeholder_id);
+		data["add_velocity"] = JSONValue(add_velocity);
 		SaveIdentifier(data);
 		return data;
 	}
@@ -41,6 +44,7 @@ class DrikaSetVelocity : DrikaElement{
 	void DrawSettings(){
 		DrawSelectTargetUI();
 		ImGui_DragFloat("Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);
+		ImGui_Checkbox("Add Velocity", add_velocity);
 	}
 
 	void DrawEditing(){
@@ -62,6 +66,21 @@ class DrikaSetVelocity : DrikaElement{
 			gizmo_transform_y = gizmo_transform_y * scale_mat_y;
 
 			DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, vec4(1.0f, 0.0f, 0.0f, 1.0f), _delete_on_update);
+
+			mat4 mesh_transform;
+			mesh_transform.SetTranslationPart(placeholder.GetTranslation());
+			mat4 rotation = Mat4FromQuaternion(placeholder.GetRotation());
+			mesh_transform.SetRotationPart(rotation);
+
+			mat4 scale_mat;
+			scale_mat[0] = placeholder.GetScale().x;
+			scale_mat[5] = placeholder.GetScale().y;
+			scale_mat[10] = placeholder.GetScale().z;
+			scale_mat[15] = 1.0f;
+			mesh_transform = mesh_transform * scale_mat;
+
+			vec4 color = placeholder.IsSelected()?vec4(0.0f, 0.85f, 0.0f, 0.75f):vec4(0.0f, 0.35f, 0.0f, 0.75f);
+			DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_update);
 		}else{
 			CreatePlaceholder();
 		}
@@ -78,13 +97,29 @@ class DrikaSetVelocity : DrikaElement{
 			vec3 up_direction = placeholder.GetRotation() * vec3(0, 1, 0);
 			if(targets[i].GetType() == _movement_object){
 				MovementObject@ char = ReadCharacterID(targets[i].GetID());
-				char.velocity = up_direction * velocity_magnitude;
-				char.Execute("SetOnGround(false);");
-				char.Execute("pre_jump = false;");
+				if(char.GetIntVar("state") == _ragdoll_state){
+					if(add_velocity){
+						char.rigged_object().ApplyForceToRagdoll(char.rigged_object().GetAvgVelocity() + up_direction * velocity_magnitude, char.rigged_object().skeleton().GetCenterOfMass());
+					}else{
+						char.rigged_object().ApplyForceToRagdoll(up_direction * velocity_magnitude, char.rigged_object().skeleton().GetCenterOfMass());
+					}
+		        }else{
+					if(add_velocity){
+						char.velocity = char.velocity + up_direction * velocity_magnitude;
+					}else{
+						char.velocity = up_direction * velocity_magnitude;
+					}
+					char.Execute("SetOnGround(false);");
+					char.Execute("pre_jump = false;");
+				}
 			}else if(targets[i].GetType() == _item_object){
 				ItemObject@ io = ReadItemID(targets[i].GetID());
 				io.ActivatePhysics();
-				io.SetLinearVelocity(up_direction * velocity_magnitude);
+				if(add_velocity){
+					io.SetLinearVelocity(io.GetLinearVelocity() + up_direction * velocity_magnitude);
+				}else{
+					io.SetLinearVelocity(up_direction * velocity_magnitude);
+				}
 				io.ActivatePhysics();
 			}
 		}
