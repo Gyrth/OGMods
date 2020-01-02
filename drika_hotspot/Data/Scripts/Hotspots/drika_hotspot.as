@@ -706,19 +706,17 @@ void ReceiveMessage(string msg){
 	// Discard the messages when this hotspot is disabled.
 	if(token == "level_event"){
 		if(editing){
-			if(show_editor){
-				array<string> editor_messages;
-				while(token_iter.FindNextToken(msg)){
-					editor_messages.insertLast(token_iter.GetToken(msg));
-				}
-				//This message is send when ctrl + s is pressed.
-				if(editor_messages[0] == "save_selected_dialogue"){
-					Save();
-				}else if(editor_messages[0] == "drika_hotspot_editing" && atoi(editor_messages[1]) != this_hotspot.GetID()){
-					show_editor = false;
-				}
-				GetCurrentElement().ReceiveEditorMessage(editor_messages);
+			array<string> editor_messages;
+			while(token_iter.FindNextToken(msg)){
+				editor_messages.insertLast(token_iter.GetToken(msg));
 			}
+			//This message is send when ctrl + s is pressed.
+			if(editor_messages[0] == "save_selected_dialogue"){
+				Save();
+			}else if(editor_messages[0] == "drika_hotspot_editing" && atoi(editor_messages[1]) != this_hotspot.GetID()){
+				show_editor = false;
+			}
+			GetCurrentElement().ReceiveEditorMessage(editor_messages);
 		}else{
 			token_iter.FindNextToken(msg);
 			string message = token_iter.GetToken(msg);
