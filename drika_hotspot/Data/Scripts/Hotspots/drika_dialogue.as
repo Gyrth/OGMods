@@ -806,7 +806,6 @@ class DrikaDialogue : DrikaElement{
 			return true;
 		}
 
-
 		return false;
 	}
 
@@ -918,8 +917,7 @@ class DrikaDialogue : DrikaElement{
 		}
 
 		if(GetInputPressed(0, "return") && !preview){
-			EndDialogue();
-			Reset();
+			SkipWholeDialogue();
 			return false;
 		}else if(dialogue_done){
 			if(GetInputPressed(0, "attack") && !preview){
@@ -1007,6 +1005,39 @@ class DrikaDialogue : DrikaElement{
 		}
 		say_timer += time_step;
 		return false;
+	}
+
+	void SkipWholeDialogue(){
+		while(true){
+			//When ending a dialogue just let it trigger.
+			if(GetCurrentElement().drika_element_type == drika_dialogue){
+				DrikaDialogue@ dialogue_function = cast<DrikaDialogue@>(GetCurrentElement());
+				if(dialogue_function.dialogue_function == end){
+					break;
+				}
+			}
+
+			//No end dialogue was found and the script has ended.
+			if(current_line == int(drika_indexes.size() - 1)){
+				script_finished = true;
+				break;
+			}else{
+				current_line += 1;
+				display_index = drika_indexes[current_line];
+			}
+
+			//Skip any dialogue say or sounds.
+			if(GetCurrentElement().drika_element_type == drika_dialogue){
+				DrikaDialogue@ dialogue_function = cast<DrikaDialogue@>(GetCurrentElement());
+				if(dialogue_function.dialogue_function == say || dialogue_function.dialogue_function == set_camera_position || dialogue_function.dialogue_function == fade_to_black){
+					continue;
+				}
+			}else if(GetCurrentElement().drika_element_type == drika_play_sound){
+				continue;
+			}
+
+			GetCurrentElement().Trigger();
+		}
 	}
 
 	void SetActorPosition(){
