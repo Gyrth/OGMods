@@ -20,7 +20,7 @@
 #include "hotspots/drika_play_sound.as"
 #include "hotspots/drika_send_level_message.as"
 #include "hotspots/drika_set_camera_param.as"
-#include "hotspots/drika_set_character_param.as"
+#include "hotspots/drika_character_control.as"
 #include "hotspots/drika_set_character.as"
 #include "hotspots/drika_set_color.as"
 #include "hotspots/drika_set_enabled.as"
@@ -296,8 +296,8 @@ DrikaElement@ InterpElement(JSONValue &in function_json){
 		return DrikaSendLevelMessage(function_json);
 	}else if(function_json["function_name"].asString() == "set_camera_param"){
 		return DrikaSetCameraParam(function_json);
-	}else if(function_json["function_name"].asString() == "set_character_param"){
-		return DrikaSetCharacterParam(function_json);
+	}else if(function_json["function_name"].asString() == "character_control"){
+		return DrikaCharacterControl(function_json);
 	}else if(function_json["function_name"].asString() == "set_character"){
 		return DrikaSetCharacter(function_json);
 	}else if(function_json["function_name"].asString() == "set_color"){
@@ -1053,8 +1053,8 @@ DrikaElement@ CreateNewFunction(drika_element_types element_type) {
 			return DrikaSetColor();
 		case drika_play_music:
 			return DrikaPlayMusic();
-		case drika_set_character_param:
-			return DrikaSetCharacterParam();
+		case drika_character_control:
+			return DrikaCharacterControl();
 		case drika_display_text:
 			return DrikaDisplayText();
 		case drika_display_image:

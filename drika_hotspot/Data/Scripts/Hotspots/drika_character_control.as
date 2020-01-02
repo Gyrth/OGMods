@@ -1,4 +1,4 @@
-enum character_params { 	aggression = 0,
+enum character_options { 	aggression = 0,
 							attack_damage = 1,
 							attack_knockback = 2,
 							attack_speed = 3,
@@ -46,7 +46,7 @@ enum character_params { 	aggression = 0,
 							apply_damage = 45
 					};
 
-class DrikaSetCharacterParam : DrikaElement{
+class DrikaCharacterControl : DrikaElement{
 	int current_type;
 
 	string string_param_after = "";
@@ -60,7 +60,7 @@ class DrikaSetCharacterParam : DrikaElement{
 	array<BeforeValue@> params_before;
 
 	param_types param_type;
-	character_params character_param;
+	character_options character_option;
 	string param_name;
 
 	array<int> string_parameters = {species, teams};
@@ -117,9 +117,9 @@ class DrikaSetCharacterParam : DrikaElement{
 									"Apply Damage"
 								};
 
-	DrikaSetCharacterParam(JSONValue params = JSONValue()){
-		character_param = character_params(GetJSONInt(params, "character_param", 0));
-		current_type = character_param;
+	DrikaCharacterControl(JSONValue params = JSONValue()){
+		character_option = character_options(GetJSONInt(params, "character_option", 0));
+		current_type = character_option;
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
 		show_team_option = true;
 		show_name_option = true;
@@ -128,7 +128,7 @@ class DrikaSetCharacterParam : DrikaElement{
 		damage_amount = GetJSONFloat(params, "damage_amount", 1.0);
 
 		connection_types = {_movement_object};
-		drika_element_type = drika_set_character_param;
+		drika_element_type = drika_character_control;
 		has_settings = true;
 		LoadIdentifier(params);
 		SetParamType();
@@ -138,8 +138,8 @@ class DrikaSetCharacterParam : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["function_name"] = JSONValue("set_character_param");
-		data["character_param"] = JSONValue(character_param);
+		data["function_name"] = JSONValue("character_control");
+		data["character_option"] = JSONValue(character_option);
 		data["param_type"] = JSONValue(param_type);
 		if(param_type == int_param){
 			data["param_after"] = JSONValue(int_param_after);
@@ -150,10 +150,10 @@ class DrikaSetCharacterParam : DrikaElement{
 		}else if(param_type == string_param){
 			data["param_after"] = JSONValue(string_param_after);
 		}
-		if(character_param == limp_ragdoll || character_param == injured_ragdoll || character_param == ragdoll){
+		if(character_option == limp_ragdoll || character_option == injured_ragdoll || character_option == ragdoll){
 			data["recovery_time"] = JSONValue(recovery_time);
 			data["roll_recovery_time"] = JSONValue(roll_recovery_time);
-		}else if(character_param == apply_damage){
+		}else if(character_option == apply_damage){
 			data["damage_amount"] = JSONValue(damage_amount);
 		}
 		SaveIdentifier(data);
@@ -161,15 +161,15 @@ class DrikaSetCharacterParam : DrikaElement{
 	}
 
 	void SetParamType(){
-		if(string_parameters.find(character_param) != -1){
+		if(string_parameters.find(character_option) != -1){
 			param_type = string_param;
-		}else if(float_parameters.find(character_param) != -1){
+		}else if(float_parameters.find(character_option) != -1){
 			param_type = float_param;
-		}else if(int_parameters.find(character_param) != -1){
+		}else if(int_parameters.find(character_option) != -1){
 			param_type = int_param;
-		}else if(bool_parameters.find(character_param) != -1){
+		}else if(bool_parameters.find(character_option) != -1){
 			param_type = bool_param;
-		}else if(function_parameters.find(character_param) != -1){
+		}else if(function_parameters.find(character_option) != -1){
 			param_type = function_param;
 		}
 	}
@@ -196,7 +196,7 @@ class DrikaSetCharacterParam : DrikaElement{
 	}
 
 	void SetParamName(){
-		param_name = param_names[character_param];
+		param_name = param_names[character_option];
 	}
 
 	void GetBeforeParam(){
@@ -235,7 +235,7 @@ class DrikaSetCharacterParam : DrikaElement{
 					params.AddIntCheckbox(param_name, bool_param_after);
 				}
 				params_before[i].bool_value = (params.GetInt(param_name) == 1);
-			}else if(character_param == is_player){
+			}else if(character_option == is_player){
 				if(targets[i].GetType() == _movement_object){
 					MovementObject@ char = ReadCharacterID(targets[i].GetID());
 					params_before[i].bool_value = char.is_player;
@@ -266,12 +266,12 @@ class DrikaSetCharacterParam : DrikaElement{
 		DrawSelectTargetUI();
 
 		if(ImGui_Combo("Param Type", current_type, param_names)){
-			character_param = character_params(current_type);
+			character_option = character_options(current_type);
 			SetParamType();
 			SetParamName();
 		}
 
-		switch(character_param){
+		switch(character_option){
 			case aggression:
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
 				break;
@@ -445,7 +445,7 @@ class DrikaSetCharacterParam : DrikaElement{
 					params.AddIntCheckbox(param_name, reset?params_before[i].bool_value:bool_param_after);
 				}
 			}else{
-				switch(character_param){
+				switch(character_option){
 					case aggression:
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;

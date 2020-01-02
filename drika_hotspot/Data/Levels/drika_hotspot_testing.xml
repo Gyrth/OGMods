@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-5.61674" t1="-0.56609" t2="-11.1658" s0="1" s1="1" s2="1" q0="0.0127514" q1="0.970655" q2="-0.0528364" q3="0.234254" euler_x="-3.03283" euler_y="0.473616" euler_z="3.14159" id="1">
+    <CameraObject t0="-3.22469" t1="-0.50941" t2="-12.9754" s0="1" s1="1" s2="1" q0="0.0127514" q1="0.970655" q2="-0.0528364" q3="0.234254" euler_x="-3.03289" euler_y="0.473661" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -1338,7 +1338,7 @@
     <Hotspot t0="-4.13369" t1="-2.28553" t2="-7.48065" s0="0.44096" s1="0.44096" s2="0.44096" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="324" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;character_param&quot;:45,&quot;damage_amount&quot;:0.5,&quot;function_name&quot;:&quot;set_character_param&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;param_type&quot;:7},{&quot;choice_line10&quot;:false,&quot;choice_line2&quot;:false,&quot;choice_line3&quot;:false,&quot;choice_line4&quot;:false,&quot;choice_line5&quot;:false,&quot;choice_line6&quot;:false,&quot;choice_line7&quot;:false,&quot;choice_line8&quot;:false,&quot;choice_line9&quot;:false,&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0,&quot;line10&quot;:0,&quot;line2&quot;:0,&quot;line3&quot;:0,&quot;line4&quot;:0,&quot;line5&quot;:0,&quot;line6&quot;:0,&quot;line7&quot;:0,&quot;line8&quot;:0,&quot;line9&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function_name&quot;:&quot;on_character_enter_exit&quot;,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;character_option&quot;:39,&quot;function_name&quot;:&quot;character_control&quot;,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;param_type&quot;:7},{&quot;choice_line10&quot;:false,&quot;choice_line2&quot;:false,&quot;choice_line3&quot;:false,&quot;choice_line4&quot;:false,&quot;choice_line5&quot;:false,&quot;choice_line6&quot;:false,&quot;choice_line7&quot;:false,&quot;choice_line8&quot;:false,&quot;choice_line9&quot;:false,&quot;function_name&quot;:&quot;go_to_line&quot;,&quot;line&quot;:0,&quot;line10&quot;:0,&quot;line2&quot;:0,&quot;line3&quot;:0,&quot;line4&quot;:0,&quot;line5&quot;:0,&quot;line6&quot;:0,&quot;line7&quot;:0,&quot;line8&quot;:0,&quot;line9&quot;:0}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
