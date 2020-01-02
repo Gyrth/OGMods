@@ -16,6 +16,7 @@ vec3 camera_rotation;
 float camera_zoom;
 bool fading = false;
 float blackout_amount = 0.0;
+float starting_fade_amount = 0.0;
 float fade_direction = 1.0;
 float fade_duration = 0.2;
 float fade_timer = 0.0;
@@ -889,6 +890,7 @@ void ReceiveMessage(string msg){
 		camera.FixDiscontinuity();
 	}else if(token == "drika_dialogue_end"){
 		show_dialogue = false;
+		fade_to_black = false;
 		imGUI.clear();
 	}else if(token == "drika_dialogue_fade_out_in"){
 		token_iter.FindNextToken(msg);
@@ -901,6 +903,7 @@ void ReceiveMessage(string msg){
 		Log(warning, "drika_dialogue_fade_to_black");
 		token_iter.FindNextToken(msg);
 		target_fade_to_black = atof(token_iter.GetToken(msg));
+		starting_fade_amount = blackout_amount;
 
 		token_iter.FindNextToken(msg);
 		fade_to_black_duration = atof(token_iter.GetToken(msg));
@@ -1004,8 +1007,8 @@ void Update(){
 			fade_timer -= time_step;
 		}
 	}else if(fade_to_black){
-		blackout_amount = fade_timer * target_fade_to_black / (fade_to_black_duration * target_fade_to_black);
-		if(fade_timer >= (fade_to_black_duration * target_fade_to_black)){
+		blackout_amount = mix(starting_fade_amount, target_fade_to_black, fade_timer / max(0.0001, fade_to_black_duration));
+		if(fade_timer >= fade_to_black_duration){
 			fade_to_black = false;
 			fade_timer = fade_duration;
 			return;
