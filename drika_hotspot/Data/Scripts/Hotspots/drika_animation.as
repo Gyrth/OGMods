@@ -217,7 +217,7 @@ class DrikaAnimation : DrikaElement{
 		if(ImGui_Combo("Animation Type", current_animation_type, animation_type_names, animation_type_names.size())){
 			animation_type = animation_types(current_animation_type);
 		}
-		if(ImGui_SliderFloat("Duration", duration, 0.0f, 10.0f, "%.2f")){
+		if(ImGui_SliderFloat("Duration", duration, 0.1f, 10.0f, "%.1f")){
 			SetCurrentTransform();
 		}
 		if(ImGui_SliderFloat("Extra Yaw", extra_yaw, 0.0f, 360.0f, "%.1f")){
@@ -1053,13 +1053,17 @@ class DrikaAnimation : DrikaElement{
 
 		if(ImGui_Begin("Animation Timeline", ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)){
 			vec2 current_position = ImGui_GetWindowPos() + vec2(margin / 2.0);
-			float line_separation = timeline_width / (timeline_duration * 10.0);
+			float step_size = 10.0f;
+			if(timeline_duration > 50.0){
+				step_size = 1.0f;
+			}
+			float line_separation = timeline_width / (timeline_duration * step_size);
 			//Add one more line for the 0 keyframe.
-			int nr_lines = int(timeline_duration * 10.0) + 1;
+			int nr_lines = int(timeline_duration * step_size) + 1;
 			for(int i = 0; i < nr_lines; i++){
 				ImDrawList_AddLine(current_position + ((i%10==0?vec2():vec2(0.0, 20.0))), current_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(1.0, 1.0, 1.0, 1.0)), 1.0f);
 
-				string frame_label = formatFloat((i / 10.0), '0l', 2, 1);
+				string frame_label = formatFloat((i / step_size), '0l', 2, 1);
 				if(line_separation > 30.0 || i%10==0){
 					ImDrawList_AddText(current_position - vec2(10.0, 10.0), ImGui_GetColorU32(i%10==0?vec4(1.0, 1.0, 1.0, 0.5):vec4(1.0, 1.0, 1.0, 0.25)), frame_label);
 				}
