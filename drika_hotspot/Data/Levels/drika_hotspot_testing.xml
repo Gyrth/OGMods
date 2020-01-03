@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="55.4155" t1="0.980998" t2="-2.36695" s0="1" s1="1" s2="1" q0="0.151123" q1="-0.713738" q2="0.162354" q3="0.664365" euler_x="-2.69426" euler_y="-1.49917" euler_z="-3.14159" id="1">
+    <CameraObject t0="24.0177" t1="3.80627" t2="21.1105" s0="1" s1="1" s2="1" q0="-0.138502" q1="0.566065" q2="-0.0971742" q3="-0.806811" euler_x="0.340018" euler_y="-1.22361" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -135,6 +135,9 @@
     <EnvObject t0="31.0948" t1="-2.14485" t2="-7.63353" s0="0.290843" s1="0.290843" s2="0.290843" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_tower.xml">
         <parameters />
     </EnvObject>
+    <EnvObject t0="-49.0925" t1="0.706497" t2="40.84" s0="0.734431" s1="5.87923" s2="30.7675" q0="-0.683013" q1="0.183013" q2="-0.683013" q3="0.183013" euler_x="-1.5708" euler_y="-1.0472" euler_z="-1.5708" id="15" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject t0="0.686971" t1="-1.70802" t2="-0.143217" s0="0.175709" s1="1.37522" s2="0.321743" q0="0.932366" q1="0" q2="0" q3="0.361517" euler_x="2.4018" euler_y="0" euler_z="0" id="16" color_r="0.137255" color_g="0.137254" color_b="0.137254" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
@@ -226,7 +229,7 @@
     <EnvObject t0="-78.3585" t1="12.4617" t2="8.1328" s0="24.8739" s1="16.8831" s2="1.2921" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="39" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-48.6786" t1="1.85264" t2="32.2606" s0="0.73684" s1="6.27403" s2="30.9719" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="40" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="-48.6786" t1="-4.45904" t2="32.4059" s0="0.591576" s1="29.764" s2="30.9719" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="40" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="14.0159" t1="-2.74726" t2="18.5145" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
@@ -260,7 +263,10 @@
     <EnvObject t0="28.6651" t1="-2.84908" t2="-3.75343" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="-0.0266584" q2="0" q3="0.999644" euler_x="0" euler_y="-0.0533231" euler_z="0" id="48" color_r="0.0664359" color_g="0.282353" color_b="0" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="13.897" t1="-1.52142" t2="14.7368" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="51" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
+    <EnvObject t0="-49.0925" t1="0.820754" t2="46.4075" s0="0.785062" s1="5.81264" s2="30.7675" q0="-0.183013" q1="0.683013" q2="-0.183013" q3="0.683013" euler_x="-1.5708" euler_y="1.0472" euler_z="-1.5708" id="50" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <ActorObject t0="6.66256" t1="-1.19626" t2="13.9349" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="51" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -615,7 +621,7 @@
     <EnvObject t0="6.41871" t1="-4.43237" t2="-27.3281" s0="16.4744" s1="2.45975" s2="0.348802" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="131" color_r="0.117647" color_g="0.117646" color_b="0.117646" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Create Object Helper" t0="54.1307" t1="0.0416823" t2="-2.82147" s0="0.488199" s1="0.488199" s2="0.488199" q0="0.00299478" q1="0.0498793" q2="-0.00847104" q3="0.998713" euler_x="0.00516252" euler_y="0.0998468" euler_z="-0.0167055" id="132" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Create Object Helper" t0="54.1307" t1="0.0416823" t2="-2.82147" s0="0.488199" s1="0.488199" s2="0.488199" q0="0.00299478" q1="0.0498793" q2="-0.00847104" q3="0.998713" euler_x="0.00516253" euler_y="0.0998468" euler_z="-0.0167055" id="132" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <PathPointObject t0="9.22505" t1="-2.42134" t2="17.9797" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="134" type_file="">
@@ -641,10 +647,16 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
+    <EnvObject t0="-51.1508" t1="-3.9765" t2="54.3764" s0="0.58221" s1="30.2465" s2="30.2361" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="139" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject t0="12.82" t1="0.349311" t2="-27.3281" s0="0.683989" s1="0.319388" s2="0.348802" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="140" color_r="1" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="12.8064" t1="1.16379" t2="-27.3281" s0="0.683989" s1="0.319388" s2="0.348802" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="141" color_r="1" color_g="0.613095" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-48.7353" t1="-4.68475" t2="43.698" s0="0.736842" s1="6.30473" s2="30.6495" q0="-0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="-1.5708" euler_y="0" euler_z="-1.5708" id="142" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="12.8064" t1="2.00297" t2="-27.3281" s0="0.683989" s1="0.319388" s2="0.348802" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="143" color_r="1" color_g="0.613095" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -726,6 +738,9 @@
         <parameters />
     </EnvObject>
     <EnvObject t0="3.41925" t1="-1.7076" t2="3.12902" s0="0.459155" s1="1" s2="0.373131" q0="0.287916" q1="0" q2="0" q3="0.957656" euler_x="0.5841" euler_y="0" euler_z="0" id="165" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/stick.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-0.913229" t1="-4.68476" t2="44.0782" s0="0.736841" s1="12.7795" s2="17.309" q0="-0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="-1.5708" euler_y="0" euler_z="-1.5708" id="166" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <Group t0="27.2718" t1="0.368351" t2="16.8444" s0="2.01" s1="5.73325" s2="7.17163" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="167" version="1">
@@ -1018,7 +1033,7 @@
     <EnvObject t0="24.819" t1="2.01286" t2="31.2395" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="244" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="30.2179" t1="1.50382" t2="-8.16799" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="245" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+    <EnvObject t0="30.2179" t1="1.50382" t2="-5.16799" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="245" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="16.8262" t1="2.8185" t2="31.271" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="246" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
@@ -1033,7 +1048,7 @@
     <EnvObject t0="12.8315" t1="-0.667503" t2="31.3557" s0="0.176565" s1="0.662477" s2="1.73925" q0="-0.502018" q1="0.50681" q2="0.495992" q3="0.49509" euler_x="2.83306" euler_y="1.55219" euler_z="-1.88326" id="249" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="30.2493" t1="1.5127" t2="0.61715" s0="-1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="250" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+    <EnvObject t0="30.2158" t1="1.50382" t2="-2.38285" s0="-1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="250" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="30.3804" t1="8.51247" t2="-3.77362" s0="0.351123" s1="3.04938" s2="2.79664" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="251" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -1135,6 +1150,14 @@
     <EnvObject name="Play Sound Helper" t0="28.5842" t1="-0.31318" t2="-3.66351" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <Hotspot t0="-48.1734" t1="-6.03193" t2="35.0496" s0="14.6628" s1="1" s2="1.18373" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="282" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Debug Current Line" type="int" val="0" />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;victim&quot;,&quot;target_character_type&quot;:2},{&quot;character_option&quot;:39,&quot;function&quot;:19,&quot;identifier&quot;:&quot;victim&quot;,&quot;identifier_type&quot;:1,&quot;param_type&quot;:7},{&quot;add_velocity&quot;:false,&quot;function&quot;:24,&quot;identifier&quot;:&quot;victim&quot;,&quot;identifier_type&quot;:1,&quot;placeholder_id&quot;:318,&quot;velocity_magnitude&quot;:50},{&quot;choice_line10&quot;:false,&quot;choice_line2&quot;:false,&quot;choice_line3&quot;:false,&quot;choice_line4&quot;:false,&quot;choice_line5&quot;:false,&quot;choice_line6&quot;:false,&quot;choice_line7&quot;:false,&quot;choice_line8&quot;:false,&quot;choice_line9&quot;:false,&quot;function&quot;:7,&quot;line&quot;:0,&quot;line10&quot;:0,&quot;line2&quot;:0,&quot;line3&quot;:0,&quot;line4&quot;:0,&quot;line5&quot;:0,&quot;line6&quot;:0,&quot;line7&quot;:0,&quot;line8&quot;:0,&quot;line9&quot;:0}]}&#x0A;' />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <EnvObject t0="44.6677" t1="-8.00281" t2="-12.7734" s0="0.413677" s1="6.99152" s2="14.763" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="283" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
@@ -1239,13 +1262,27 @@
     <EnvObject name="Play Sound Helper" t0="55.6482" t1="-0.596374" t2="-13.6638" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="316" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Set Velocity Helper" t0="-5.43659" t1="-0.912643" t2="-7.69995" s0="0.260781" s1="0.260075" s2="0.255275" q0="0.00189203" q1="0.119685" q2="0.475467" q3="0.871545" euler_x="0.119986" euler_y="0.208326" euler_z="1.01138" id="317" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Set Velocity Helper" t0="-5.43659" t1="-0.912643" t2="-7.69995" s0="0.260781" s1="0.260075" s2="0.255275" q0="-0.0555211" q1="0.106045" q2="0.00128058" q3="0.992803" euler_x="-0.112736" euler_y="0.212297" euler_z="-0.00944493" id="317" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Set Velocity Helper" t0="-47.6228" t1="-4.40607" t2="35.1814" s0="0.25" s1="0.25" s2="0.25" q0="0.185408" q1="0" q2="0" q3="0.982661" euler_x="0.372975" euler_y="0" euler_z="0" id="318" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject name="AIControl Helper" t0="43.3132" t1="-2.3526" t2="-2.85159" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="319" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <Hotspot t0="-48.6668" t1="-6.03193" t2="52.1196" s0="14.6628" s1="1" s2="1.18373" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="320" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Debug Current Line" type="int" val="0" />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;victim&quot;,&quot;target_character_type&quot;:2},{&quot;character_option&quot;:39,&quot;function&quot;:19,&quot;identifier&quot;:&quot;victim&quot;,&quot;identifier_type&quot;:1,&quot;param_type&quot;:7},{&quot;add_velocity&quot;:false,&quot;function&quot;:24,&quot;identifier&quot;:&quot;victim&quot;,&quot;identifier_type&quot;:1,&quot;placeholder_id&quot;:322,&quot;velocity_magnitude&quot;:50},{&quot;choice_line10&quot;:false,&quot;choice_line2&quot;:false,&quot;choice_line3&quot;:false,&quot;choice_line4&quot;:false,&quot;choice_line5&quot;:false,&quot;choice_line6&quot;:false,&quot;choice_line7&quot;:false,&quot;choice_line8&quot;:false,&quot;choice_line9&quot;:false,&quot;function&quot;:7,&quot;line&quot;:0,&quot;line10&quot;:0,&quot;line2&quot;:0,&quot;line3&quot;:0,&quot;line4&quot;:0,&quot;line5&quot;:0,&quot;line6&quot;:0,&quot;line7&quot;:0,&quot;line8&quot;:0,&quot;line9&quot;:0}]}&#x0A;' />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <EnvObject name="Create Object Helper" t0="54.2205" t1="-0.150261" t2="-2.88775" s0="0.174012" s1="0.174012" s2="0.174012" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="321" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Set Velocity Helper" t0="-47.6228" t1="-4.02902" t2="58.8099" s0="0.25" s1="0.25" s2="0.25" q0="-0.18614" q1="0" q2="0" q3="0.982523" euler_x="-0.374463" euler_y="0" euler_z="0" id="322" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="-3.93734" t1="-2.7196" t2="-7.69805" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="323" color_r="0" color_g="0.658842" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
@@ -1254,7 +1291,7 @@
     <Hotspot t0="-4.13369" t1="-2.28553" t2="-7.48065" s0="0.44096" s1="0.44096" s2="0.44096" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="324" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;add_velocity&quot;:true,&quot;function&quot;:24,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:317,&quot;velocity_magnitude&quot;:20}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;character_option&quot;:39,&quot;function&quot;:19,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;param_type&quot;:7},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;add_velocity&quot;:false,&quot;function&quot;:24,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:317,&quot;velocity_magnitude&quot;:50.000003814697266}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -1618,6 +1655,6 @@
     <SpawnerItem display_name="Blob Shadow" path="Data/Objects/Decals/blob_shadow.xml" thumbnail_path="" />
     <SpawnerItem display_name="Rabbit Blood Footprint" path="Data/Objects/Decals/footprints/rabbit_blood_footprint.xml" thumbnail_path="Data/UI/spawner/thumbs/Decal/footprints/rabbitbloodprint.png" />
     <SpawnerItem display_name="Path Point" path="Data/Objects/pathpoint/pathpoint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/pathpoint.png" />
-    <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
     <SpawnerItem display_name="Male Rabbit Guard Brown" path="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_GuardActor_reddy.png" />
+    <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
 </RecentItems>

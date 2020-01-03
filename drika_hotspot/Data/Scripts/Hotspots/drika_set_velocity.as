@@ -99,9 +99,9 @@ class DrikaSetVelocity : DrikaElement{
 				MovementObject@ char = ReadCharacterID(targets[i].GetID());
 				if(char.GetIntVar("state") == _ragdoll_state){
 					if(add_velocity){
-						char.rigged_object().ApplyForceToRagdoll(char.rigged_object().GetAvgVelocity() + up_direction * velocity_magnitude, char.rigged_object().skeleton().GetCenterOfMass());
+						char.rigged_object().ApplyForceToRagdoll(char.rigged_object().GetAvgVelocity() + up_direction * velocity_magnitude * 1000.0, char.rigged_object().skeleton().GetCenterOfMass());
 					}else{
-						char.rigged_object().ApplyForceToRagdoll(up_direction * velocity_magnitude, char.rigged_object().skeleton().GetCenterOfMass());
+						char.rigged_object().ApplyForceToRagdoll(up_direction * velocity_magnitude * 1000.0, char.rigged_object().skeleton().GetCenterOfMass());
 					}
 		        }else{
 					if(add_velocity){
