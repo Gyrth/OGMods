@@ -3,11 +3,13 @@ class DrikaPlayMusic : DrikaElement{
 	string song_path;
 	string song_name;
 	string before_song;
+	bool from_beginning_no_fade;
 
 	DrikaPlayMusic(JSONValue params = JSONValue()){
 		music_path = GetJSONString(params, "music_path", "Data/Music/drika_music.xml");
 		song_path = GetJSONString(params, "song_path", "Data/Music/lugaru_menu_new.ogg");
 		song_name = GetJSONString(params, "song_name", "lugaru_menu_new.ogg");
+		from_beginning_no_fade = GetJSONBool(params, "from_beginning_no_fade", false);
 
 		drika_element_type = drika_play_music;
 		has_settings = true;
@@ -18,6 +20,7 @@ class DrikaPlayMusic : DrikaElement{
 		data["music_path"] = JSONValue(music_path);
 		data["song_path"] = JSONValue(song_path);
 		data["song_name"] = JSONValue(song_name);
+		data["from_beginning_no_fade"] = JSONValue(from_beginning_no_fade);
 		return data;
 	}
 
@@ -39,6 +42,7 @@ class DrikaPlayMusic : DrikaElement{
 				Play(false);
 			}
 		}
+		ImGui_Checkbox("From Beginning No Fade", from_beginning_no_fade);
 	}
 
 	void GetSongName(){
@@ -89,14 +93,17 @@ class DrikaPlayMusic : DrikaElement{
 	bool Play(bool reset){
 		if(reset){
 			RemoveMusic(music_path);
-			Log(warning, "before_song " + before_song);
 		}else{
 			if(!FileExists(music_path)){
 				WriteMusicXML();
 			}
 			AddMusic(music_path);
 		}
-		PlaySong((reset?before_song:song_name));
+		if(from_beginning_no_fade){
+			SetSong((reset?before_song:song_name));
+		}else{
+			PlaySong((reset?before_song:song_name));
+		}
 		return true;
 	}
 
