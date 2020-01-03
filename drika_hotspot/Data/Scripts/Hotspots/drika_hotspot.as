@@ -488,6 +488,11 @@ void DrawEditor(){
 					Save();
 				}
 			}
+			if(ImGui_IsItemHovered()){
+				ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+				ImGui_SetTooltip("Delete");
+				ImGui_PopStyleColor();
+			}
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
 					duplicating = true;
@@ -495,6 +500,11 @@ void DrawEditor(){
 					InsertElement(new_element);
 					duplicating = false;
 				}
+			}
+			if(ImGui_IsItemHovered()){
+				ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+				ImGui_SetTooltip("Duplicate");
+				ImGui_PopStyleColor();
 			}
 			ImGui_EndMenuBar();
 		}
