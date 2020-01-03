@@ -115,6 +115,7 @@ class DrikaPlaySound : DrikaElement{
 	}
 
 	void Delete(){
+		Reset();
 		QueueDeleteObjectID(placeholder_id);
 	}
 
