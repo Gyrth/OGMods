@@ -957,8 +957,6 @@ class DrikaAnimation : DrikaElement{
 			}
 		}
 		if(animate_camera){
-			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(camera_placeholder);
-			placeholder_object.SetSpecialType(kSpawn);
 			DeleteCameraPlaceholder();
 		}
 	}

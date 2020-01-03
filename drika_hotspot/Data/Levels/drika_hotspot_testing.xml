@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="24.0177" t1="3.80627" t2="21.1105" s0="1" s1="1" s2="1" q0="-0.138502" q1="0.566065" q2="-0.0971742" q3="-0.806811" euler_x="0.340018" euler_y="-1.22361" euler_z="0" id="1">
+    <CameraObject t0="-7.9881" t1="-1.00358" t2="-6.96369" s0="1" s1="1" s2="1" q0="0.025216" q1="0.716048" q2="-0.0259008" q3="0.697115" euler_x="-3.06928" euler_y="1.544" euler_z="3.14159" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -1262,10 +1262,7 @@
     <EnvObject name="Play Sound Helper" t0="55.6482" t1="-0.596374" t2="-13.6638" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="316" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Set Velocity Helper" t0="-5.43659" t1="-0.912643" t2="-7.69995" s0="0.260781" s1="0.260075" s2="0.255275" q0="-0.0555211" q1="0.106045" q2="0.00128058" q3="0.992803" euler_x="-0.112736" euler_y="0.212297" euler_z="-0.00944493" id="317" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject name="Set Velocity Helper" t0="-47.6228" t1="-4.40607" t2="35.1814" s0="0.25" s1="0.25" s2="0.25" q0="0.185408" q1="0" q2="0" q3="0.982661" euler_x="0.372975" euler_y="0" euler_z="0" id="318" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Set Velocity Helper" t0="-47.6228" t1="-4.40607" t2="35.1814" s0="0.25" s1="0.25" s2="0.25" q0="0.185408" q1="0" q2="0" q3="0.982661" euler_x="0.372974" euler_y="0" euler_z="0" id="318" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject name="AIControl Helper" t0="43.3132" t1="-2.3526" t2="-2.85159" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="319" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
@@ -1282,7 +1279,7 @@
     <EnvObject name="Create Object Helper" t0="54.2205" t1="-0.150261" t2="-2.88775" s0="0.174012" s1="0.174012" s2="0.174012" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="321" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Set Velocity Helper" t0="-47.6228" t1="-4.02902" t2="58.8099" s0="0.25" s1="0.25" s2="0.25" q0="-0.18614" q1="0" q2="0" q3="0.982523" euler_x="-0.374463" euler_y="0" euler_z="0" id="322" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Set Velocity Helper" t0="-47.6228" t1="-4.02902" t2="58.8099" s0="0.25" s1="0.25" s2="0.25" q0="-0.18614" q1="0" q2="0" q3="0.982523" euler_x="-0.374464" euler_y="0" euler_z="0" id="322" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="-3.93734" t1="-2.7196" t2="-7.69805" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="323" color_r="0" color_g="0.658842" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
@@ -1291,7 +1288,7 @@
     <Hotspot t0="-4.13369" t1="-2.28553" t2="-7.48065" s0="0.44096" s1="0.44096" s2="0.44096" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="324" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;character_option&quot;:39,&quot;function&quot;:19,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;param_type&quot;:7},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;add_velocity&quot;:false,&quot;function&quot;:24,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;placeholder_id&quot;:317,&quot;velocity_magnitude&quot;:50.000003814697266}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;animate_camera&quot;:true,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:5,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:-1,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1,1,1],&quot;time&quot;:0,&quot;translation&quot;:[-4.1336898803710938,-0.28553009033203125,-7.4806499481201172]},{&quot;rotation&quot;:[0,-0.70710676908493042,0,0.70710676908493042],&quot;scale&quot;:[1,1,1],&quot;time&quot;:2,&quot;translation&quot;:[-22.443874359130859,0.57014083862304688,0.080180168151855469]},{&quot;rotation&quot;:[-5.9604644775390625e-08,0.64567261934280396,0,0.76361435651779175],&quot;scale&quot;:[1,1,1],&quot;time&quot;:4,&quot;translation&quot;:[-1.9217207431793213,7.3129372596740723,13.05153751373291]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;placeholder_id&quot;:-1,&quot;play_sound_method&quot;:0,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
