@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-9.17407" t1="-0.273321" t2="-6.6416" s0="1" s1="1" s2="1" q0="0.190251" q1="0.578794" q2="-0.141118" q3="0.780313" euler_x="0.478297" euler_y="1.2764" euler_z="0" id="1">
+    <CameraObject t0="-8.6883" t1="-1.60744" t2="-7.42613" s0="1" s1="1" s2="1" q0="0.0599093" q1="0.688089" q2="-0.0571839" q3="0.720884" euler_x="0.165829" euler_y="1.52425" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -1262,6 +1262,9 @@
     <EnvObject name="Play Sound Helper" t0="55.6482" t1="-0.596374" t2="-13.6638" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="316" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <EnvObject t0="-5.38462" t1="1.32039" t2="-11.2905" s0="0.355076" s1="6.98781" s2="4.90264" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="317" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject name="Set Velocity Helper" t0="-47.6228" t1="-4.40607" t2="35.1814" s0="0.25" s1="0.25" s2="0.25" q0="0.185408" q1="0" q2="0" q3="0.982661" euler_x="0.372974" euler_y="0" euler_z="0" id="318" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -1305,6 +1308,9 @@
     <EnvObject t0="59.4734" t1="0.876499" t2="-0.497472" s0="1.37521" s1="1.06698" s2="1" q0="-0.5" q1="-0.5" q2="0.5" q3="0.5" euler_x="-1.5708" euler_y="0" euler_z="1.5708" id="328" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
         <parameters />
     </EnvObject>
+    <DynamicLightObject t0="-6.56207" t1="-1.68784" t2="-7.5418" s0="1.54896" s1="1.78392" s2="1.86937" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="329" color_r="1" color_g="0.99999" color_b="0.99999" overbright="50">
+        <parameters />
+    </DynamicLightObject>
     <EnvObject t0="64.6671" t1="0.788226" t2="-0.0232785" s0="1" s1="0.725973" s2="1.07252" q0="-0.0448429" q1="-0.0454496" q2="0.710389" q3="0.700907" euler_x="-0.127783" euler_y="0" euler_z="1.58423" id="330" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope.xml">
         <parameters />
     </EnvObject>
@@ -1418,6 +1424,11 @@
     <EnvObject name="Create Object Helper" t0="43.3311" t1="0.881203" t2="1.56283" s0="1" s1="1" s2="1" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="337" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <ReflectionCaptureObject t0="-7.13204" t1="-1.00793" t2="-7.66694" s0="0.292902" s1="0.292902" s2="0.292902" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="338" gicoeff00="0.0535851" gicoeff01="0.0323524" gicoeff02="0.0173035" gicoeff03="0.0992737" gicoeff04="0.0648041" gicoeff05="0.0410004" gicoeff06="0.161652" gicoeff07="0.0921173" gicoeff08="0.0480881" gicoeff09="0.0233231" gicoeff10="0.0229301" gicoeff11="0.0175781" gicoeff12="0.118576" gicoeff13="0.071106" gicoeff14="0.0388336" gicoeff15="0.0435333" gicoeff16="0.0314293" gicoeff17="0.0222397">
+        <parameters>
+            <parameter name="Global" type="string" val="0" />
+        </parameters>
+    </ReflectionCaptureObject>
     <PathPointObject t0="43.3065" t1="-0.419146" t2="4.46484" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="339" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Sit" />
@@ -1487,6 +1498,9 @@
     <EnvObject name="AIControl Helper" t0="50.748" t1="-0.191019" t2="-3.07137" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="344" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <EnvObject name="Create Object Helper" t0="-6.98063" t1="-2.0545" t2="-7.64886" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="345" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject name="Set Velocity Helper" t0="42.7608" t1="0.455974" t2="1.34405" s0="0.25" s1="0.25" s2="0.25" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="346" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -1506,6 +1520,9 @@
         <parameters />
     </EnvObject>
     <EnvObject name="Play Sound Helper" t0="28.5842" t1="-0.31318" t2="-3.66351" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="352" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Set Velocity Helper" t0="-6.98063" t1="-1.7872" t2="-7.66783" s0="0.25" s1="0.25" s2="0.25" q0="0.110317" q1="-0.00757737" q2="-0.00608071" q3="0.993849" euler_x="0.22119" euler_y="-0.0137203" euler_z="-0.0137602" id="353" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject name="Play Sound Helper" t0="28.5842" t1="-0.31318" t2="-3.66351" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="354" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
@@ -1597,7 +1614,7 @@
     <Hotspot t0="-6.98063" t1="-2.28552" t2="-6.94059" s0="0.256046" s1="0.250086" s2="0.326755" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="382" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;dialogue_control&quot;:true,&quot;dialogue_function&quot;:13,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0},{&quot;dialogue_function&quot;:2,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_position&quot;:[-6.9846792221069336,-1.8440054655075073,-5.9181709289550781],&quot;target_actor_rotation&quot;:90},{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:false,&quot;anim_mobile&quot;:false,&quot;anim_super_mobile&quot;:false,&quot;anim_swap&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_animation&quot;:&quot;Data/Animations/open_chest.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:false}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;dialogue_function&quot;:11,&quot;function&quot;:33},{&quot;dialogue_control&quot;:true,&quot;dialogue_function&quot;:13,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0},{&quot;dialogue_function&quot;:8,&quot;function&quot;:33,&quot;target_camera_position&quot;:[-8.254364013671875,-1.6097733974456787,-7.0648350715637207],&quot;target_camera_rotation&quot;:[-8.779698371887207,-72.977165222167969,6.1898595049569849e-06],&quot;target_camera_zoom&quot;:90},{&quot;dialogue_function&quot;:2,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_position&quot;:[-6.9846782684326172,-1.8893914222717285,-6.1083278656005859],&quot;target_actor_rotation&quot;:90},{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:false,&quot;anim_mobile&quot;:false,&quot;anim_super_mobile&quot;:false,&quot;anim_swap&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_animation&quot;:&quot;Data/Animations/open_chest.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:false},{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:2,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:380,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0.70710700750350952,0,0.70710700750350952],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1,&quot;translation&quot;:[-6.9939899444580078,-1.8274799585342407,-7.6390500068664551]},{&quot;rotation&quot;:[-0.35355353355407715,0.61237263679504395,-0.35355353355407715,0.61237263679504395],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1.7999999523162842,&quot;translation&quot;:[-6.9959626197814941,-1.5175315141677856,-7.8991541862487793]},{&quot;rotation&quot;:[-0.18301272392272949,0.68301284313201904,-0.18301272392272949,0.68301284313201904],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1.3999999761581421,&quot;translation&quot;:[-6.9949760437011719,-1.6365554332733154,-7.7282123565673828]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:true,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:5,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:329,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.4384222030639648,2.8083016872406006,2.9428243637084961],&quot;time&quot;:2.5,&quot;translation&quot;:[-6.4480628967285156,-1.4895173311233521,-7.5879831314086914]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5489599704742432,1.7839186191558838,1.8693714141845703],&quot;time&quot;:5,&quot;translation&quot;:[-6.562065601348877,-1.6878376007080078,-7.5417976379394531]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5489599704742432,1.7839186191558838,1.8693714141845703],&quot;time&quot;:0.89999997615814209,&quot;translation&quot;:[-6.562065601348877,-1.6878376007080078,-7.5417976379394531]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.4143826961517334,2.7806158065795898,2.9138119220733643],&quot;time&quot;:4,&quot;translation&quot;:[-6.4511442184448242,-1.4948773384094238,-7.5867347717285156]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;dialogue_function&quot;:8,&quot;function&quot;:33,&quot;target_camera_position&quot;:[-8.1100044250488281,-2.072509765625,-8.4676370620727539],&quot;target_camera_rotation&quot;:[11.932717323303223,-139.39248657226562,1.8643937110900879],&quot;target_camera_zoom&quot;:90},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;dialogue_function&quot;:8,&quot;function&quot;:33,&quot;target_camera_position&quot;:[-8.0273284912109375,-2.1310379505157471,-6.4221944808959961],&quot;target_camera_rotation&quot;:[7.7746024131774902,-52.469882965087891,0.4583880603313446],&quot;target_camera_zoom&quot;:90},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;function&quot;:15,&quot;object_path&quot;:&quot;Data/Items/DogWeapons/DogKnife.xml&quot;,&quot;placeholder_id&quot;:345,&quot;reference_string&quot;:&quot;knife&quot;},{&quot;add_velocity&quot;:true,&quot;function&quot;:24,&quot;identifier&quot;:&quot;knife&quot;,&quot;identifier_type&quot;:1,&quot;placeholder_id&quot;:353,&quot;velocity_magnitude&quot;:4},{&quot;duration&quot;:2000,&quot;function&quot;:2},{&quot;dialogue_control&quot;:false,&quot;dialogue_function&quot;:13,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0},{&quot;dialogue_function&quot;:12,&quot;function&quot;:33}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -1634,7 +1651,6 @@
     <SpawnerItem display_name="Burrow Hut" path="Data/Objects/therium/burrow/burrow_hut.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
     <SpawnerItem display_name="Basics Stone Stairs" path="Data/Objects/Buildings/basics/soft_stairs.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/soft_stairs.png" />
     <SpawnerItem display_name="Large Stucco Stone Cat Stairs" path="Data/Objects/Buildings/terraces/cat_stairs.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/cat_stairs.png" />
-    <SpawnerItem display_name="Local Reflection" path="Data/Objects/local_reflection_capture.xml" thumbnail_path="" />
     <SpawnerItem display_name="Global Reflection" path="Data/Objects/global_reflection_capture.xml" thumbnail_path="" />
     <SpawnerItem display_name="Large Stucco Stone Cat Patio Box" path="Data/Objects/Buildings/terraces/cat_patio_box.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/cat_patio_box.png" />
     <SpawnerItem display_name="Robed Stone Statue" path="Data/Objects/Environment/Statues/RobedStatue.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/RobedStatue.png" />
@@ -1661,7 +1677,6 @@
     <SpawnerItem display_name="Fancy Wooden Door" path="Data/Objects/Buildings/Door1.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/door1.png" />
     <SpawnerItem display_name="Male Rabbit Rope" path="Data/Objects/characters/rabbits/male_rabbit_2_actor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/Male_rabbit_2_actor.png" />
     <SpawnerItem display_name="Nav Connection" path="Data/Objects/navmesh/navmesh_connection.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
-    <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
     <SpawnerItem display_name="Donatas" path="Data/Objects/therium/characters/donatas_actor.xml" thumbnail_path="" />
     <SpawnerItem display_name="Nav Hint" path="Data/Objects/navmesh/navmesh_hint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
     <SpawnerItem display_name="Arrow" path="Data/Objects/therium/Weapons/bowarrow/StandardArrow.xml" thumbnail_path="" />
@@ -1673,4 +1688,6 @@
     <SpawnerItem display_name="chest.xml" path="Data/Objects/chest.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="chest_lid.xml" path="Data/Objects/chest_lid.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
+    <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
+    <SpawnerItem display_name="Local Reflection" path="Data/Objects/local_reflection_capture.xml" thumbnail_path="" />
 </RecentItems>
