@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-7.97192" t1="-0.432282" t2="-5.78762" s0="1" s1="1" s2="1" q0="0.0247579" q1="0.668422" q2="-0.0222718" q3="0.743037" euler_x="0.0666828" euler_y="1.46518" euler_z="0" id="1">
+    <CameraObject t0="-9.17407" t1="-0.273321" t2="-6.6416" s0="1" s1="1" s2="1" q0="0.190251" q1="0.578794" q2="-0.141118" q3="0.780313" euler_x="0.478297" euler_y="1.2764" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.1511" t1="-3.42134" t2="1.75026" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -642,7 +642,7 @@
     <Hotspot t0="14.1463" t1="-0.735339" t2="18.5649" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="138" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:2},{&quot;function&quot;:18,&quot;music_path&quot;:&quot;Data/Music/hwaxlekztz.xml&quot;,&quot;song_name&quot;:&quot;ambient2.ogg&quot;,&quot;song_path&quot;:&quot;Data/Music/ambient2.ogg&quot;},{&quot;duration&quot;:5000,&quot;function&quot;:2},{&quot;function&quot;:18,&quot;music_path&quot;:&quot;Data/Music/atwvjgtncn.xml&quot;,&quot;song_name&quot;:&quot;unfolding-mirrors.ogg&quot;,&quot;song_path&quot;:&quot;Data/Music/unfolding-mirrors.ogg&quot;},{&quot;ai_sound&quot;:true,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:2.0399999618530273,&quot;placeholder_id&quot;:168,&quot;play_sound_method&quot;:1,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:1}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:-1,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:2},{&quot;from_beginning_no_fade&quot;:false,&quot;function&quot;:18,&quot;music_path&quot;:&quot;Data/Music/hwaxlekztz.xml&quot;,&quot;song_name&quot;:&quot;ambient2.ogg&quot;,&quot;song_path&quot;:&quot;Data/Music/ambient2.ogg&quot;},{&quot;duration&quot;:5000,&quot;function&quot;:2},{&quot;from_beginning_no_fade&quot;:false,&quot;function&quot;:18,&quot;music_path&quot;:&quot;Data/Music/atwvjgtncn.xml&quot;,&quot;song_name&quot;:&quot;unfolding-mirrors.ogg&quot;,&quot;song_path&quot;:&quot;Data/Music/unfolding-mirrors.ogg&quot;},{&quot;ai_sound&quot;:true,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:2.0399999618530273,&quot;placeholder_id&quot;:168,&quot;play_sound_method&quot;:1,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:1}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -1288,7 +1288,7 @@
     <Hotspot t0="-4.13369" t1="-2.28553" t2="-7.48065" s0="0.44096" s1="0.44096" s2="0.44096" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="324" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;function&quot;:18,&quot;music_path&quot;:&quot;Data/Music/drika_music.xml&quot;,&quot;song_name&quot;:&quot;lugaru_menu_new.ogg&quot;,&quot;song_path&quot;:&quot;Data/Music/lugaru_menu_new.ogg&quot;},{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;function&quot;:18,&quot;music_path&quot;:&quot;Data/Music/ufkixhmvnk.xml&quot;,&quot;song_name&quot;:&quot;Trololo.ogg&quot;,&quot;song_path&quot;:&quot;Data/Sounds/Trololo.ogg&quot;},{&quot;animate_camera&quot;:true,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:10,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:-1,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1,1,1],&quot;time&quot;:0,&quot;translation&quot;:[-4.1336898803710938,-0.28553009033203125,-7.4806499481201172]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1,1,1],&quot;time&quot;:300,&quot;translation&quot;:[-4.1336898803710938,-1.1430079936981201,34.204910278320312]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1,1,1],&quot;time&quot;:10,&quot;translation&quot;:[-4.1336898803710938,-0.81411272287368774,6.408869743347168]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;clear_image&quot;:false,&quot;function&quot;:21,&quot;image_path&quot;:&quot;Data/Textures/drika_hotspot.png&quot;,&quot;scale&quot;:1,&quot;tint&quot;:[1,1,1,1]}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;from_beginning_no_fade&quot;:false,&quot;function&quot;:18,&quot;music_path&quot;:&quot;Data/Music/drika_music.xml&quot;,&quot;song_name&quot;:&quot;lugaru_menu_new.ogg&quot;,&quot;song_path&quot;:&quot;Data/Music/lugaru_menu_new.ogg&quot;},{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;from_beginning_no_fade&quot;:true,&quot;function&quot;:18,&quot;music_path&quot;:&quot;Data/Music/ufkixhmvnk.xml&quot;,&quot;song_name&quot;:&quot;Trololo.ogg&quot;,&quot;song_path&quot;:&quot;Data/Sounds/Trololo.ogg&quot;},{&quot;animate_camera&quot;:true,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:10,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:-1,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1,1,1],&quot;time&quot;:0,&quot;translation&quot;:[-4.1336898803710938,-0.28553009033203125,-7.4806499481201172]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1,1,1],&quot;time&quot;:300,&quot;translation&quot;:[-4.1336898803710938,-1.1430079936981201,34.204910278320312]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1,1,1],&quot;time&quot;:10,&quot;translation&quot;:[-4.1336898803710938,-0.81411272287368774,6.408869743347168]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;clear_image&quot;:false,&quot;function&quot;:21,&quot;image_path&quot;:&quot;Data/Textures/drika_hotspot.png&quot;,&quot;scale&quot;:1,&quot;tint&quot;:[1,1,1,1]}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
@@ -1585,6 +1585,23 @@
     <EnvObject name="AIControl Helper" t0="-1.10103" t1="0.48378" t2="-7.67696" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="378" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
+    <EnvObject t0="-6.99485" t1="-2.09001" t2="-7.64018" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="379" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/chest.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-6.99399" t1="-1.82748" t2="-7.63905" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="380" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/chest_lid.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-6.91316" t1="-2.7196" t2="-7.80938" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="381" color_r="0" color_g="0.658842" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
+    <Hotspot t0="-6.98063" t1="-2.28552" t2="-6.94059" s0="0.256046" s1="0.250086" s2="0.326755" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="382" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Debug Current Line" type="int" val="0" />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;dialogue_control&quot;:true,&quot;dialogue_function&quot;:13,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0},{&quot;dialogue_function&quot;:2,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_position&quot;:[-6.9846792221069336,-1.8440054655075073,-5.9181709289550781],&quot;target_actor_rotation&quot;:90},{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:false,&quot;anim_mobile&quot;:false,&quot;anim_super_mobile&quot;:false,&quot;anim_swap&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_animation&quot;:&quot;Data/Animations/open_chest.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:false}]}&#x0A;' />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="drika_hotspot.xml" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="empty_placeholder.png" />
@@ -1653,5 +1670,7 @@
     <SpawnerItem display_name="Rabbit Blood Footprint" path="Data/Objects/Decals/footprints/rabbit_blood_footprint.xml" thumbnail_path="Data/UI/spawner/thumbs/Decal/footprints/rabbitbloodprint.png" />
     <SpawnerItem display_name="Path Point" path="Data/Objects/pathpoint/pathpoint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/pathpoint.png" />
     <SpawnerItem display_name="Male Rabbit Guard Brown" path="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_GuardActor_reddy.png" />
+    <SpawnerItem display_name="chest.xml" path="Data/Objects/chest.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="chest_lid.xml" path="Data/Objects/chest_lid.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Drika Hotspot" path="Data/Objects/Hotspots/drika_hotspot.xml" thumbnail_path="Data/Images/drika_hotspot_thumb.jpg" />
 </RecentItems>
