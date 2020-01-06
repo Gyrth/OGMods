@@ -1,0 +1,185 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>blender_import_level</Name>
+<Description></Description>
+<Shader>post</Shader>
+<Shadows>true</Shadows>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/red_hills/red_hills_hm.png</Heightmap>
+    <ShaderExtra></ShaderExtra>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/red_hills/red_hills_c.tga</ColorMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_normal.png" materialpath="Data/Materials/dirt.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_dirt_normal.tga" materialpath="Data/Materials/dirt.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
+<AmbientSounds />
+<Script>challengelevel.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Extra AO" type="string" val="0" />
+    <parameter name="Fog amount" type="float" val="1" />
+    <parameter name="HDR Black point" type="float" val="0.01" />
+    <parameter name="HDR Bloom multiplier" type="float" val="1" />
+    <parameter name="HDR White point" type="float" val="0.8" />
+    <parameter name="Level Boundaries" type="int" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
+    <parameter name="Sky Brightness" type="float" val="1" />
+    <parameter name="Sky Rotation" type="float" val="0" />
+    <parameter name="Sky Tint" type="string" val="255, 255, 255" />
+</LevelScriptParameters>
+<NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
+    <SunAngularRad>0.112145</SunAngularRad>
+    <SunColorAngle>6.8534</SunColorAngle>
+    <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
+</Sky>
+<ActorObjects>
+    <ActorObject t0="47.7552" t1="5.2247" t2="-134.009" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" euler_x="0" euler_y="-0.605973" euler_z="0" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Bloodthirsty" type="int" val="0" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fall Damage Multiplier" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
+            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
+            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
+            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="string" val="0.0" />
+            <parameter name="Lives" type="string" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="No Look Around" type="int" val="0" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Stick To Nav Mesh" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+            <parameter name="Throw Counter Probability" type="float" val="0.4" />
+            <parameter name="Throw Trainer" type="int" val="0" />
+            <parameter name="Weapon Catch Skill" type="float" val="1" />
+            <parameter name="Wearing Metal Armor" type="int" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <PlaceholderObject t0="17.7917" t1="84.661" t2="-82.3831" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Dialogues/red_shard_outro.txt" />
+            <parameter name="DisplayName" type="string" val="Red Shards Outro" />
+            <parameter name="NumParticipants" type="int" val="1" />
+            <parameter name="Script" type="string" val='set_character_pos 1 17.531 83.9527 -77.8105 64&#x0A;send_character_message 1 &quot;set_animation \&quot;Data/Animations/r_actionidle.anm\&quot;&quot;&#x0A;send_character_message 1 &quot;set_eye_dir 16.4076 85.715 -82.1976 1&quot;&#x0A;send_character_message 1 &quot;set_torso_target 16.1016 85.8923 -81.3986 0&quot;&#x0A;send_character_message 1 &quot;set_head_target 18.1593 83.5915 -79.2745 0.999967&quot;&#x0A;set_cam 16.0436 85.4226 -77.3998 -32.47 -49.34 -3.32 63.9589&#x0A;#name &quot;Red Shards Outro&quot;&#x0A;#participants 1&#x0A;&#x0A;say 1 &quot;Turner&quot; &quot;This looks like valuable material.&quot;&#x0A;send_character_message 1 &quot;set_head_target 17.8919 83.9824 -79.2947 0.999967&quot;&#x0A;set_cam 15.024 85.1607 -79.4084 -21.11 -99.08 0.49 63.9589&#x0A;say 1 &quot;Turner&quot; &quot;The dogs will be pleased.&quot;&#x0A;' />
+            <parameter name="obj_1" type="int" val="263" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <EnvObject t0="-63.619" t1="16.7623" t2="3.31852" s0="1" s1="1" s2="1" q0="0.411496" q1="0" q2="0" q3="0.911412" euler_x="0.84819" euler_y="0" euler_z="0" id="183" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/medium_props/egg_b.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-80.7534" t1="-10.2915" t2="57.5964" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="187" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/medium_props/egg_c.xml">
+        <parameters />
+    </EnvObject>
+    <PlaceholderObject t0="45.4768" t1="4.35656" t2="-131.043" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="261" type_file="" special_type="0">
+        <parameters>
+            <parameter name="Dialogue" type="string" val="Dialogues/red_shard_intro.txt" />
+            <parameter name="DisplayName" type="string" val="Red Shards Intro" />
+            <parameter name="NumParticipants" type="int" val="1" />
+            <parameter name="Script" type="string" val='set_character_pos 1 47.5054 3.98251 -128.469 -84&#x0A;send_character_message 1 &quot;set_animation \&quot;Data/Animations/r_dialogue_shade.anm\&quot;&quot;&#x0A;send_character_message 1 &quot;set_torso_target 46.7659 4.94485 -126.125 1&quot;&#x0A;send_character_message 1 &quot;set_head_target 47.3088 5.68112 -125.792 1&quot;&#x0A;set_cam 48.0567 4.52649 -129.319 7.22 170.33 1.91 72.2282&#x0A;#name &quot;Red Shards Intro&quot;&#x0A;#participants 1&#x0A;&#x0A;say 1 &quot;Turner&quot; &quot;I should get to the top of some of these.&quot;&#x0A;set_cam 19.4237 85.4054 -82.0441 -26.93 170.35 -1.04 72.2282&#x0A;say 1 &quot;Turner&quot; &quot;There might be something valuable.&quot;&#x0A;' />
+            <parameter name="obj_1" type="int" val="262" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="45.4768" t1="5.05656" t2="-131.043" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="262" type_file="" special_type="2">
+        <parameters />
+        <Connections>
+            <Connection id="1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="17.7917" t1="85.361" t2="-82.3831" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="263" type_file="" special_type="2">
+        <parameters />
+        <Connections>
+            <Connection id="1" />
+        </Connections>
+    </PlaceholderObject>
+    <Hotspot t0="18.328" t1="85.5937" t2="-79.2105" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="264" type_file="Data/Objects/Hotspots/start_dialogue.xml">
+        <parameters>
+            <parameter name="Automatic" type="int" val="1" />
+            <parameter name="Color" type="string" val="1.0 1.0 1.0" />
+            <parameter name="Dialogue" type="string" val="Red Shards Outro" />
+            <parameter name="Fade" type="int" val="1" />
+            <parameter name="Visible in game" type="int" val="1" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
+    <CameraObject t0="-49.5115" t1="65.2232" t2="-128.662" s0="1" s1="1" s2="1" q0="0.0306756" q1="0.945258" q2="-0.0931661" q3="0.311233" euler_x="-2.9451" euler_y="0.636155" euler_z="3.14159" id="271">
+        <parameters />
+    </CameraObject>
+    <NavmeshConnectionObject t0="12.4624" t1="7.38058" t2="-142.784" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="272" type_file="">
+        <parameters />
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="275" offmesh_connection_id="1001" poly_area="8" />
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="7.5405" t1="7.21807" t2="-140.656" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="273" type_file="">
+        <parameters />
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="274" offmesh_connection_id="1000" poly_area="373660044" />
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="0.444402" t1="13.4918" t2="-136.843" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="274" type_file="">
+        <parameters />
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="273" offmesh_connection_id="1000" poly_area="373660004" />
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <NavmeshConnectionObject t0="19.2583" t1="4.86056" t2="-145.925" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="275" type_file="">
+        <parameters />
+        <NavMeshConnections>
+            <NavMeshConnection other_object_id="272" offmesh_connection_id="1001" poly_area="373659484" />
+        </NavMeshConnections>
+    </NavmeshConnectionObject>
+    <EnvObject t0="32.5222" t1="13.9556" t2="18.1677" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="-1" euler_x="0" euler_y="0" euler_z="0" id="278" color_r="0.733333" color_g="0.155294" color_b="0.155294" overbright="0" type_file="Data/Objects/blender_import_level.xml">
+        <parameters />
+    </EnvObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="crete_level.xml" path="Data/Objects/crete_level.xml" thumbnail_path="empty_placeholder.png" />
+</RecentItems>
