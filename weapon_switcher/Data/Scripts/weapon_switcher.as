@@ -53,9 +53,11 @@ void Init(string p_level_name) {
     weapons.insertLast(Weapon("Flint Knife C Two",      "Data/Items/flint_knife_c2.xml",                        "UI/spawner/thumbs/Interactive Objects/flint_knife_c2.png"));
     weapons.insertLast(Weapon("Gabe Knife",             "Data/Items/gabenife.xml",                              "UI/spawner/thumbs/Interactive Objects/gabenife.png"));
 }
+
 void DrawGUI() {
 	imGUI.render();
 }
+
 void AddUI(){
     imGUI.setup();
     IMDivider main( "main", DOHorizontal );
