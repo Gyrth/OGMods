@@ -43,7 +43,8 @@ enum character_options { 	aggression = 0,
 							injured_ragdoll = 42,
 							ragdoll = 43,
 							cut_throat = 44,
-							apply_damage = 45
+							apply_damage = 45,
+							wet = 46
 					};
 
 class DrikaCharacterControl : DrikaElement{
@@ -53,9 +54,10 @@ class DrikaCharacterControl : DrikaElement{
 	int int_param_after = 0;
 	bool bool_param_after = false;
 	float float_param_after = 0.0;
-	float recovery_time = 0.0;
-	float roll_recovery_time = 0.0;
-	float damage_amount = 0.0;
+	float recovery_time;
+	float roll_recovery_time;
+	float damage_amount;
+	float wet_amount;
 
 	array<BeforeValue@> params_before;
 
@@ -67,7 +69,7 @@ class DrikaCharacterControl : DrikaElement{
 	array<int> float_parameters = {aggression, attack_damage, attack_knockback, attack_speed, block_followup, block_skill, character_scale, damage_resistance, ear_size, fat, focus_fov_distance, focus_fov_horizontal, focus_fov_vertical, ground_aggression, movement_speed, muscle, peripheral_fov_distance, peripheral_fov_horizontal, peripheral_fov_vertical, fall_damage_mult, fear_afraid_at_health_level, throw_counter_probability, weapon_catch_skill};
 	array<int> int_parameters = {knocked_out_shield};
 	array<int> bool_parameters = {cannot_be_disarmed, left_handed, static_char, fear_always_afraid_on_sight, fear_causes_fear_on_sight, fear_never_afraid_on_sight, no_look_around, stick_to_nav_mesh, is_throw_trainer, wearing_metal_armor};
-	array<int> function_parameters = {ignite, extinguish, is_player, kill, revive, limp_ragdoll, injured_ragdoll, ragdoll, cut_throat, apply_damage};
+	array<int> function_parameters = {ignite, extinguish, is_player, kill, revive, limp_ragdoll, injured_ragdoll, ragdoll, cut_throat, apply_damage, wet};
 
 	array<string> param_names = {	"Aggression",
 	 								"Attack Damage",
@@ -114,7 +116,8 @@ class DrikaCharacterControl : DrikaElement{
 									"Injured Ragdoll",
 									"Ragdoll",
 									"Cut Throat",
-									"Apply Damage"
+									"Apply Damage",
+									"Wet"
 								};
 
 	DrikaCharacterControl(JSONValue params = JSONValue()){
@@ -126,6 +129,7 @@ class DrikaCharacterControl : DrikaElement{
 		recovery_time = GetJSONFloat(params, "recovery_time", 1.0);
 		roll_recovery_time = GetJSONFloat(params, "roll_recovery_time", 0.2);
 		damage_amount = GetJSONFloat(params, "damage_amount", 1.0);
+		wet_amount = GetJSONFloat(params, "wet_amount", 1.0);
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_character_control;
@@ -154,6 +158,8 @@ class DrikaCharacterControl : DrikaElement{
 			data["roll_recovery_time"] = JSONValue(roll_recovery_time);
 		}else if(character_option == apply_damage){
 			data["damage_amount"] = JSONValue(damage_amount);
+		}else if(character_option == wet){
+			data["wet_amount"] = JSONValue(wet_amount);
 		}
 		SaveIdentifier(data);
 		return data;
@@ -407,6 +413,9 @@ class DrikaCharacterControl : DrikaElement{
 				break;
 			case cut_throat:
 				break;
+			case wet:
+				ImGui_SliderFloat("Amount", wet_amount, 0.0, 1.0, "%.1f");
+				break;
 			default:
 				Log(warning, "Found a non standard parameter type. " + param_type);
 				break;
@@ -617,6 +626,12 @@ class DrikaCharacterControl : DrikaElement{
 						if(!reset){
 							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.Execute("TakeBloodDamage(" + damage_amount + ");if(knocked_out != _awake){Ragdoll(_RGDL_INJURED);}");
+						}
+						break;
+					case wet:
+						{
+							MovementObject@ char = ReadCharacterID(targets[i].GetID());
+							char.rigged_object().SetWet(reset?0.0:wet_amount);
 						}
 						break;
 					default:
