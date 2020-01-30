@@ -191,6 +191,7 @@ class DrikaElement{
 	void ReceiveEditorMessage(array<string> message){}
 	void ReceiveMessage(string message){}
 	void ReceiveMessage(string message, int param){}
+	void ReceiveMessage(string message, string param){}
 	void ReceiveMessage(string message, string param, int id_param){}
 	void SetIndex(int _index){
 		index = _index;

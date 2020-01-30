@@ -202,7 +202,7 @@ class DrikaSetMorphTarget : DrikaElement{
 		return true;
 	}
 
-	void ReceiveMessage(string message){
+	void ReceiveMessage(string message, string param_1, int param_2){
 		array<string> file_lines = message.split("\n");
 		bool inside_morph = false;
 
@@ -239,7 +239,7 @@ class DrikaSetMorphTarget : DrikaElement{
 
 		array<MovementObject@> targets = GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			level.SendMessage("drika_read_file " + hotspot.GetID() + " " + targets[i].char_path);
+			level.SendMessage("drika_read_file " + hotspot.GetID() + " " + targets[i].char_path + " " + targets[i].GetID());
 		}
 	}
 

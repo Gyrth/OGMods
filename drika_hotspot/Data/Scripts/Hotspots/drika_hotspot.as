@@ -676,11 +676,16 @@ void ReceiveMessage(string msg){
 		ClearDialogueActors();
 		wait_for_fade = false;
 	}else if(token == "drika_read_file"){
-		string file_content = "";
-		while(token_iter.FindNextToken(msg)){
-			file_content += token_iter.GetToken(msg);
-		}
-		GetCurrentElement().ReceiveMessage(file_content);
+		token_iter.FindNextToken(msg);
+		string file_content = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		string param_1 = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		int param_2 = atoi(token_iter.GetToken(msg));
+
+		GetCurrentElement().ReceiveMessage(file_content, param_1, param_2);
 	}
 }
 

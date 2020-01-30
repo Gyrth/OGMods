@@ -42,10 +42,14 @@ class ReadFileProcess{
 	int hotspot_id = -1;
 	string data = "";
 	string file_path;
+	string param_1;
+	int param_2;
 
-	ReadFileProcess(int _hotspot_id, string _file_path){
+	ReadFileProcess(int _hotspot_id, string _file_path, string _param_1, int _param_2){
 		hotspot_id = _hotspot_id;
 		file_path = _file_path;
+		param_1 = _param_1;
+		param_2 = _param_2;
 	}
 }
 
@@ -949,9 +953,13 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		string file_path = token_iter.GetToken(msg);
 
-		Log(warning, "DHS read " + hotspot_id + " " + file_path);
+		token_iter.FindNextToken(msg);
+		string param_1 = token_iter.GetToken(msg);
 
-		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path));
+		token_iter.FindNextToken(msg);
+		int param_2 = atoi(token_iter.GetToken(msg));
+
+		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path, param_1, param_2));
 	}
 }
 
@@ -1029,7 +1037,8 @@ void UpdateReadFileProcesses(){
 				}
 			}
 			Object@ hotspot_obj = ReadObjectFromID(read_file_processes[0].hotspot_id);
-			hotspot_obj.ReceiveScriptMessage("drika_read_file " + "\"" + read_file_processes[0].data + "\"");
+			read_file_processes[0].data = join(read_file_processes[0].data.split("\""), "\\\"");
+			hotspot_obj.ReceiveScriptMessage("drika_read_file " + "\"" + read_file_processes[0].data + "\"" + " " + read_file_processes[0].param_1 + " " + read_file_processes[0].param_2);
 		}else{
 			Log(error, "Error loading file: " + read_file_processes[0].file_path);
 		}
