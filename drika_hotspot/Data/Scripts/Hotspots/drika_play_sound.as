@@ -134,27 +134,42 @@ class DrikaPlaySound : DrikaElement{
 			}
 			if(new_path != ""){
 				sound_path = new_path;
+				PreviewSound();
 			}
 		}
 
 		if(ImGui_Combo("Play Sound Method", current_play_sound_method, play_sound_method_names, play_sound_method_names.size())){
 			play_sound_method = play_sound_methods(current_play_sound_method);
 			IdentifyPlayMethod();
+			//Trigger a draw editing once to delte or create placeholder object so that it can be previewed.
+			DrawEditing();
+			PreviewSound();
 		}
 
 		if(play_sound_method == play_sound_group_position_priority){
-			ImGui_Combo("Sound Priority", priority, sound_priority_names, sound_priority_names.size());
+			if(ImGui_Combo("Sound Priority", priority, sound_priority_names, sound_priority_names.size())){
+				PreviewSound();
+			}
 		}
 
 		if(has_gain){
-			ImGui_SliderFloat("Gain", gain, 0.0f, 10.0f, "%.2f");
+			if(ImGui_SliderFloat("Gain", gain, 0.0f, 10.0f, "%.2f")){
+				PreviewSound();
+			}
 		}
 
-		ImGui_Checkbox("AISound", ai_sound);
-		if(is_spatial && ai_sound){
-			ImGui_SliderFloat("AISound Max Range", max_range, 0.0f, 10.0f, "%.2f");
-			if(ImGui_Combo("Sound Type", current_sound_type, sound_type_names, sound_type_names.size())){
-				sound_type = SoundType(current_sound_type);
+		if(is_spatial){
+			if(ImGui_Checkbox("AISound", ai_sound)){
+				PreviewSound();
+			}
+			if(ai_sound){
+				if(ImGui_SliderFloat("AISound Max Range", max_range, 0.0f, 10.0f, "%.2f")){
+					PreviewSound();
+				}
+				if(ImGui_Combo("Sound Type", current_sound_type, sound_type_names, sound_type_names.size())){
+					sound_type = SoundType(current_sound_type);
+					PreviewSound();
+				}
 			}
 		}
 	}
@@ -166,7 +181,6 @@ class DrikaPlaySound : DrikaElement{
 				DebugDrawBillboard("Data/Textures/ui/speaker.png", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
 			}else{
 				CreatePlaceholder();
-				StartEdit();
 			}
 		}else{
 			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
@@ -177,6 +191,11 @@ class DrikaPlaySound : DrikaElement{
 	}
 
 	void StartEdit(){
+		PreviewSound();
+	}
+
+	void PreviewSound(){
+		Reset();
 		Trigger();
 	}
 
