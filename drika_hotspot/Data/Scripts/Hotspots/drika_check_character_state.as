@@ -1,12 +1,22 @@
+enum state_choices { 	awake = 0,
+						unconscious = 1,
+						dead = 2,
+						knows_about = 3
+					}
+
 class DrikaCheckCharacterState : DrikaElement{
-	array<string> target_choices = {"Check ID", "Check Reference", "Check Team"};
-	array<string> state_choices = {"Awake", "Unconscious", "Dead"};
-	int state_check;
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About"};
+	state_choices state_choice;
+	int current_state_choice;
 	bool equals = true;
+	int known_character_id;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
-		state_check = GetJSONInt(params, "state_check", 0);
+		state_choice = state_choices(GetJSONInt(params, "state_check", awake));
+		current_state_choice = state_choice;
 		equals = GetJSONBool(params, "equals", true);
+		known_character_id = GetJSONInt(params, "known_character_id", 0);
+
 		LoadIdentifier(params);
 		show_team_option = true;
 		show_name_option = true;
@@ -23,20 +33,29 @@ class DrikaCheckCharacterState : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["state_check"] = JSONValue(state_check);
+		data["state_check"] = JSONValue(state_choice);
 		data["equals"] = JSONValue(equals);
+		if(state_choice == knows_about){
+			data["known_character_id"] = JSONValue(known_character_id);
+		}
 		SaveIdentifier(data);
 		return data;
 	}
 
 	string GetDisplayString(){
-		return "CheckCharacterState" + " " + GetTargetDisplayText() + (equals?" ":" not ") + state_choices[state_check];
+		return "CheckCharacterState" + " " + GetTargetDisplayText() + (equals?" ":" not ") + state_choice_names[state_choice] + ((state_choice == knows_about)?" " +  known_character_id:"");
 	}
 
 	void DrawSettings(){
 		DrawSelectTargetUI();
 		ImGui_Checkbox("Equals", equals);
-		ImGui_Combo("Check for", state_check, state_choices, state_choices.size());
+		if(ImGui_Combo("Check for", current_state_choice, state_choice_names, state_choice_names.size())){
+			state_choice = state_choices(current_state_choice);
+		}
+
+		if(state_choice == knows_about){
+			ImGui_InputInt("Known Character ID", known_character_id);
+		}
 	}
 
 	void DrawEditing(){
@@ -51,8 +70,17 @@ class DrikaCheckCharacterState : DrikaElement{
 		if(targets.size() == 0){return false;}
 		bool all_in_state = true;
 		for(uint i = 0; i < targets.size(); i++){
-			if((targets[i].GetIntVar("knocked_out") != state_check) == equals){
-				all_in_state = false;
+			if(state_choice == knows_about){
+				string command = "self_id = situation.KnownID(" + known_character_id + ");";
+				targets[i].Execute(command);
+				bool known = (targets[i].GetIntVar("self_id") != -1);
+				if(known != equals){
+					all_in_state = false;
+				}
+			}else{
+				if((targets[i].GetIntVar("knocked_out") != state_choice) == equals){
+					all_in_state = false;
+				}
 			}
 		}
 		return all_in_state;
