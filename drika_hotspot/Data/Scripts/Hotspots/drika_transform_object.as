@@ -69,10 +69,6 @@ class DrikaTransformObject : DrikaElement{
 		GetNewTransform();
 	}
 
-	void ConnectedChanged(){
-		GetNewTransform();
-	}
-
 	bool Trigger(){
 		if(ObjectExists(placeholder_id)){
 			if(!triggered){

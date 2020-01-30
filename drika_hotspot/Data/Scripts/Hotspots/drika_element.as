@@ -187,7 +187,6 @@ class DrikaElement{
 	void DrawEditing(){}
 	void PreTargetChanged(){}
 	void TargetChanged(){}
-	void ConnectedChanged(){}
 	void SetCurrent(bool _current){}
 	void ReceiveEditorMessage(array<string> message){}
 	void ReceiveMessage(string message){}
@@ -249,7 +248,7 @@ class DrikaElement{
 		}
 		new_object_id = other.GetID();
 		object_id = new_object_id;
-		ConnectedChanged();
+		TargetChanged();
 		return false;
 	}
 

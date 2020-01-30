@@ -272,11 +272,7 @@ class DrikaAnimation : DrikaElement{
 	void TargetChanged(){
 		animate_camera = false;
 	}
-
-	void ConnectedChanged(){
-		animate_camera = false;
-	}
-
+	
 	bool Trigger(){
 		array<Object@> targets = GetTargetObjects();
 		// Don't do anything if the target object does not exist and the animation is not targeting the camera.

@@ -697,10 +697,6 @@ class DrikaDialogue : DrikaElement{
 		}
 	}
 
-	void ConnectedChanged(){
-		Apply();
-	}
-
 	void TargetChanged(){
 		Apply();
 	}
