@@ -102,6 +102,8 @@ void Init() {
 	//When the user duplicates a hotspot the editormode is active and the left alt is pressed.
 	if(EditorModeActive() && GetInputDown(0, "lalt")){
 		duplicating = true;
+	}else if(EditorModeActive() && GetInputDown(0, "lctrl") && GetInputDown(0, "v")){
+		duplicating = true;
 	}
 	InterpData();
 }
