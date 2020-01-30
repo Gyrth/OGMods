@@ -54,6 +54,7 @@ class DrikaDialogue : DrikaElement{
 	vec4 dialogue_text_color;
 	bool dialogue_text_shadow;
 	bool use_voice_sounds;
+	bool show_names;
 
 	string default_avatar_path = "Data/Textures/ui/menus/main/white_square.png";
 	TextureAssetRef avatar = LoadTexture(default_avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
@@ -118,6 +119,7 @@ class DrikaDialogue : DrikaElement{
 		dialogue_text_color = GetJSONVec4(params, "dialogue_text_color", vec4(1));
 		dialogue_text_shadow = GetJSONBool(params, "dialogue_text_shadow", true);
 		use_voice_sounds = GetJSONBool(params, "use_voice_sounds", true);
+		show_names = GetJSONBool(params, "show_names", true);
 
 		anim_mirrored = GetJSONBool(params, "anim_mirrored", false);
 		anim_mobile = GetJSONBool(params, "anim_mobile", false);
@@ -211,6 +213,7 @@ class DrikaDialogue : DrikaElement{
 			data["dialogue_text_size"] = JSONValue(dialogue_text_size);
 			data["dialogue_text_shadow"] = JSONValue(dialogue_text_shadow);
 			data["use_voice_sounds"] = JSONValue(use_voice_sounds);
+			data["show_names"] = JSONValue(show_names);
 
 			data["dialogue_text_color"] = JSONValue(JSONarrayValue);
 			data["dialogue_text_color"].append(dialogue_text_color.x);
@@ -668,6 +671,7 @@ class DrikaDialogue : DrikaElement{
 			ImGui_ColorEdit4("Dialogue Text Color", dialogue_text_color);
 			ImGui_Checkbox("Dialogue Text Shadow", dialogue_text_shadow);
 			ImGui_Checkbox("Use Voice Sounds", use_voice_sounds);
+			ImGui_Checkbox("Show Name", show_names);
 		}else if(dialogue_function == set_actor_dialogue_control){
 			ImGui_Text("Set to : ");
 			ImGui_SameLine();
@@ -834,6 +838,7 @@ class DrikaDialogue : DrikaElement{
 		msg += dialogue_text_color.a + " ";
 		msg += dialogue_text_shadow + " ";
 		msg += use_voice_sounds + " ";
+		msg += show_names + " ";
 		level.SendMessage(msg);
 	}
 

@@ -26,6 +26,7 @@ bool fade_to_black = false;
 array<int> waiting_hotspot_ids;
 int dialogue_layout = 0;
 bool use_voice_sounds = true;
+bool show_names = true;
 
 class ActorSettings{
 	string name = "Default";
@@ -486,7 +487,7 @@ void Fallout3Background(IMContainer@ parent){
 }
 
 void CreateNameTag(IMContainer@ parent){
-	if(!show_dialogue){
+	if(!show_dialogue || !show_names){
 		return;
 	}
 
@@ -942,8 +943,12 @@ void ReceiveMessage(string msg){
 
 		token_iter.FindNextToken(msg);
 		bool dialogue_text_shadow = token_iter.GetToken(msg) == "true";
+
 		token_iter.FindNextToken(msg);
 		use_voice_sounds = token_iter.GetToken(msg) == "true";
+
+		token_iter.FindNextToken(msg);
+		show_names = token_iter.GetToken(msg) == "true";
 
 		dialogue_font = FontSetup(dialogue_text_font, dialogue_text_size, dialogue_text_color, dialogue_text_shadow);
 	}else if(token == "drika_read_file"){
