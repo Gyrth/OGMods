@@ -1,10 +1,16 @@
 class DrikaSetBoneInflate : DrikaElement{
 	string bone_name;
 	float inflate_value;
+	array<string> bone_names = {"rightear", "leftear", "rightarm", "leftarm", "head", "torso", "tail", "right_leg", "left_leg", "lefthand", "righthand", "leftfingers", "rightfingers", "leftthumb", "rightthumb", "index"};
+	int current_index;
+	int bone_index;
+	int current_bone_index;
 
 	DrikaSetBoneInflate(JSONValue params = JSONValue()){
 		bone_name = GetJSONString(params, "bone_name", "torso");
 		inflate_value = GetJSONFloat(params, "inflate_value", 0.0);
+		bone_index = GetJSONInt(params, "bone_index", 11);
+		current_bone_index = bone_index;
 		LoadIdentifier(params);
 
 		connection_types = {_movement_object};
@@ -16,6 +22,9 @@ class DrikaSetBoneInflate : DrikaElement{
 		JSONValue data;
 		data["bone_name"] = JSONValue(bone_name);
 		data["inflate_value"] = JSONValue(inflate_value);
+		if(bone_name == "index"){
+			data["bone_index"] = JSONValue(bone_index);
+		}
 		SaveIdentifier(data);
 		return data;
 	}
@@ -27,31 +36,47 @@ class DrikaSetBoneInflate : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetBoneInflate " + GetTargetDisplayText() + " " + bone_name + " " + inflate_value;
+		return "SetBoneInflate " + GetTargetDisplayText() + " " + bone_name + " " + ((bone_name == "index")?(bone_index + " "):"") + inflate_value;
 	}
 
 	void StartSettings(){
 		CheckReferenceAvailable();
 	}
 
-	void ApplySettings(){
-		//Reset the morph value set by the preview.
+	void StartEdit(){
+		current_index = 0;
+		for(uint i = 0; i < bone_names.size(); i++){
+			if(bone_names[i] == bone_name){
+				current_index = i;
+				break;
+			}
+		}
+		SetBoneInflate(false);
+	}
+
+	void EditDone(){
 		SetBoneInflate(true);
 	}
 
 	void DrawSettings(){
 		DrawSelectTargetUI();
-		if(ImGui_InputText("Bone Name", bone_name, 64)){
+
+		if(ImGui_Combo("Bone", current_index, bone_names, bone_names.size())){
+			SetBoneInflate(true);
+			bone_name = bone_names[current_index];
 			SetBoneInflate(false);
-		}
-		if(ImGui_IsItemHovered()){
-			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
-			ImGui_SetTooltip("Possible bone names:\nrightear\nleftear\nrightarm\nleftarm\nhead\ntorso\ntail\nright_leg\nleft_leg\nlefthand\nrighthand\nleftfingers\nrightfingers\nleftthumb\nrightthumb");
-			ImGui_PopStyleColor();
 		}
 
 		if(ImGui_SliderFloat("Value", inflate_value, 0.0f, 1.0f, "%.2f")){
 			SetBoneInflate(false);
+		}
+
+		if(bone_name == "index"){
+			if(ImGui_InputInt("index", current_bone_index)){
+				SetBoneInflate(true);
+				bone_index = current_bone_index;
+				SetBoneInflate(false);
+			}
 		}
 	}
 
@@ -71,19 +96,35 @@ class DrikaSetBoneInflate : DrikaElement{
 		array<MovementObject@> targets = GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
 		for(uint i = 0; i < targets.size(); i++){
-			if(!targets[i].rigged_object().skeleton().IKBoneExists(bone_name)){
-				continue;
-			}
+			if(bone_name == "leftfingers"){
+				targets[i].rigged_object().skeleton().SetBoneInflate(13, reset?1.0f:inflate_value);
+			}else if(bone_name == "leftthumb"){
+				targets[i].rigged_object().skeleton().SetBoneInflate(15, reset?1.0f:inflate_value);
+			}else if(bone_name == "rightfingers"){
+				targets[i].rigged_object().skeleton().SetBoneInflate(26, reset?1.0f:inflate_value);
+			}else if(bone_name == "rightthumb"){
+				targets[i].rigged_object().skeleton().SetBoneInflate(28, reset?1.0f:inflate_value);
+			}else if(bone_name == "righthand"){
+				targets[i].rigged_object().skeleton().SetBoneInflate(24, reset?1.0f:inflate_value);
+			}else if(bone_name == "lefthand"){
+				targets[i].rigged_object().skeleton().SetBoneInflate(11, reset?1.0f:inflate_value);
+			}else if(bone_name == "index"){
+				targets[i].rigged_object().skeleton().SetBoneInflate(bone_index, reset?1.0f:inflate_value);
+			}else{
+				if(!targets[i].rigged_object().skeleton().IKBoneExists(bone_name)){
+					continue;
+				}
 
-			int bone = targets[i].rigged_object().skeleton().IKBoneStart(bone_name);
-			int chain_len = targets[i].rigged_object().skeleton().IKBoneLength(bone_name);
+				int bone = targets[i].rigged_object().skeleton().IKBoneStart(bone_name);
+				int chain_len = targets[i].rigged_object().skeleton().IKBoneLength(bone_name);
 
-			for(int j = 0; j < chain_len; ++j){
-				targets[i].rigged_object().skeleton().SetBoneInflate(bone, reset?1.0f:inflate_value);
-				bone = targets[i].rigged_object().skeleton().GetParent(bone);
+				for(int j = 0; j < chain_len; ++j){
+					targets[i].rigged_object().skeleton().SetBoneInflate(bone, reset?1.0f:inflate_value);
+					bone = targets[i].rigged_object().skeleton().GetParent(bone);
 
-				if(bone == -1){
-					break;
+					if(bone == -1){
+						break;
+					}
 				}
 			}
 		}
