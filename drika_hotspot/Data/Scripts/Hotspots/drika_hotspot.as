@@ -686,18 +686,24 @@ void ReceiveMessage(string msg){
 		int param_2 = atoi(token_iter.GetToken(msg));
 
 		GetCurrentElement().ReceiveMessage(file_content, param_1, param_2);
+	}else if(token == "drika_external_hotspot"){
+		token_iter.FindNextToken(msg);
+		string event = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		int char_id = atoi(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		int source_hotspot_id = atoi(token_iter.GetToken(msg));
+
+		GetCurrentElement().ReceiveMessage(event, char_id, source_hotspot_id);
 	}
 }
 
 void HandleEvent(string event, MovementObject @mo){
 	if(event == "enter" || event == "exit"){
 		if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
-			GetCurrentElement().ReceiveMessage((event == "enter")?"CharacterEnter":"CharacterExit", mo.GetID());
-			ScriptParams@ char_params = ReadObjectFromID(mo.GetID()).GetScriptParams();
-			if(char_params.HasParam("Teams")) {
-				string team = char_params.GetString("Teams");
-				GetCurrentElement().ReceiveMessage((event == "enter")?"CharacterEnter":"CharacterExit", team, mo.GetID());
-			}
+			GetCurrentElement().ReceiveMessage(event, mo.GetID());
 		}
 	}
 }
