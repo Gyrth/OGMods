@@ -272,7 +272,7 @@ class DrikaAnimation : DrikaElement{
 	void TargetChanged(){
 		animate_camera = false;
 	}
-	
+
 	bool Trigger(){
 		array<Object@> targets = GetTargetObjects();
 		// Don't do anything if the target object does not exist and the animation is not targeting the camera.
@@ -1016,25 +1016,45 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void LeftClick(){
-		int selected_index = -1;
-		for(uint i = 0; i < key_ids.size(); i++){
-			Object@ next_key = ReadObjectFromID(key_ids[i]);
-			if(next_key.IsSelected()){
-				selected_index = i;
-				break;
+		if(animation_method == timeline_method){
+			array<Object@> target_objects = GetTargetObjects();
+			if(this_hotspot.IsSelected()){
+				this_hotspot.SetSelected(false);
+				for(uint i = 0 ; i < target_objects.size(); i++){
+					target_objects[i].SetSelected(false);
+				}
+			}else if(target_objects.size() > 0 && !target_objects[0].IsSelected()){
+				this_hotspot.SetSelected(false);
+				for(uint i = 0 ; i < target_objects.size(); i++){
+					target_objects[i].SetSelected(true);
+				}
+			}else{
+				for(uint i = 0 ; i < target_objects.size(); i++){
+					target_objects[i].SetSelected(false);
+				}
+				this_hotspot.SetSelected(true);
 			}
-		}
-		if(selected_index != -1){
-			selected_index += 1;
-			if(selected_index >= int(key_ids.size())){
-				selected_index = 0;
-			}
+		}else if(animation_method == placeholder_method){
+			int selected_index = -1;
 			for(uint i = 0; i < key_ids.size(); i++){
 				Object@ next_key = ReadObjectFromID(key_ids[i]);
-				if(selected_index == int(i)){
-					next_key.SetSelected(true);
-				}else{
-					next_key.SetSelected(false);
+				if(next_key.IsSelected()){
+					selected_index = i;
+					break;
+				}
+			}
+			if(selected_index != -1){
+				selected_index += 1;
+				if(selected_index >= int(key_ids.size())){
+					selected_index = 0;
+				}
+				for(uint i = 0; i < key_ids.size(); i++){
+					Object@ next_key = ReadObjectFromID(key_ids[i]);
+					if(selected_index == int(i)){
+						next_key.SetSelected(true);
+					}else{
+						next_key.SetSelected(false);
+					}
 				}
 			}
 		}
