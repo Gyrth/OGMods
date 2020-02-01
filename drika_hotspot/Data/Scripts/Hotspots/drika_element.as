@@ -130,13 +130,6 @@ enum param_types { 	string_param = 0,
 					function_param = 7
 				};
 
-enum target_character_types {	check_id = 0,
-								check_team = 1,
-								any_character = 2,
-								any_player = 3,
-								any_npc = 4
-							};
-
 class BeforeValue{
 	string string_value;
 	float float_value;

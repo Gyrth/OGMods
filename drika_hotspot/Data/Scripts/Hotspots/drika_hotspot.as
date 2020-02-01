@@ -157,6 +157,9 @@ void SetEnabled(bool val){
 }
 
 void RegisterObject(int id, string reference){
+	if(reference == ""){
+		return;
+	}
 	bool already_registered = false;
 	for(uint i = 0; i < object_references.size(); i++){
 		//Already have this reference, so just change the id.

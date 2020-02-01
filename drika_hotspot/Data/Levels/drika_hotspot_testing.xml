@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-7.05157" t1="-0.890178" t2="-5.4913" s0="1" s1="1" s2="1" q0="0.195116" q1="0.0112911" q2="-0.00224642" q3="0.980713" euler_x="0.392778" euler_y="0.0230253" euler_z="0" id="1">
+    <CameraObject t0="-9.79278" t1="0.246792" t2="-4.93291" s0="1" s1="1" s2="1" q0="0.120553" q1="0.493767" q2="-0.0693445" q3="0.858401" euler_x="0.279054" euler_y="1.044" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.16529" t1="-3.42134" t2="1.76417" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -89,10 +89,9 @@
         </Connections>
         <ItemConnections />
         <Palette>
-            <Color label="Clothes" channel="0" red="1" green="1" blue="1" />
-            <Color label="Fur" channel="1" red="0.99999" green="1" blue="0.99999" />
-            <Color label="Leather" channel="2" red="1" green="1" blue="1" />
-            <Color label="Armor" channel="3" red="1" green="1" blue="1" />
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="0.99999" green="1" blue="0.99999" />
         </Palette>
     </ActorObject>
     <EnvObject t0="31.1054" t1="0.485653" t2="-7.62564" s0="1.7413" s1="1.7413" s2="1.7413" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
@@ -333,6 +332,13 @@
             <Connection id="53" />
         </Connections>
     </PlaceholderObject>
+    <Hotspot name="Drika External Hotspot" t0="-6.77233" t1="-1.97858" t2="-6.52713" s0="0.457079" s1="0.457079" s2="0.457079" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="54" type_file="Data/Objects/Hotspots/drika_external_hotspot.xml">
+        <parameters>
+            <parameter name="Target Drika Hotspot" type="int" val="382" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <PlaceholderObject t0="13.8309" t1="0.476143" t2="10.206" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="55" type_file="" special_type="2">
         <parameters />
         <Connections>
@@ -590,7 +596,7 @@
             <parameter name="Species" type="string" val="rabbit" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Stick To Nav Mesh" type="int" val="0" />
-            <parameter name="Teams" type="string" val="turner, player" />
+            <parameter name="Teams" type="string" val="turner" />
             <parameter name="Throw Counter Probability" type="float" val="0.4" />
             <parameter name="Throw Trainer" type="int" val="0" />
             <parameter name="Weapon Catch Skill" type="float" val="1" />
@@ -608,6 +614,13 @@
     <EnvObject t0="26.4368" t1="-2.79354" t2="-13.109" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="125" color_r="0" color_g="0.0941176" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
+    <Hotspot name="Drika External Hotspot" t0="-6.77233" t1="-1.97858" t2="-6.52713" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="127" type_file="Data/Objects/Hotspots/drika_external_hotspot.xml">
+        <parameters>
+            <parameter name="Target Drika Hotspot" type="int" val="382" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <EnvObject t0="-12.5448" t1="2.56643" t2="-23.0396" s0="4.12569" s1="6.98781" s2="4.11712" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="128" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
@@ -1360,7 +1373,7 @@
             <parameter name="Species" type="string" val="rabbit" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Stick To Nav Mesh" type="int" val="0" />
-            <parameter name="Teams" type="string" val="rabbit, player, guard" />
+            <parameter name="Teams" type="string" val="rabbit, turner, guard" />
             <parameter name="Throw Counter Probability" type="float" val="0.4" />
             <parameter name="Throw Trainer" type="int" val="0" />
             <parameter name="Weapon Catch Skill" type="float" val="1" />
@@ -1479,7 +1492,7 @@
             <parameter name="Species" type="string" val="rabbit" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Stick To Nav Mesh" type="int" val="1" />
-            <parameter name="Teams" type="string" val="rabbit, player, guard" />
+            <parameter name="Teams" type="string" val="rabbit, turner, guard" />
             <parameter name="Throw Counter Probability" type="float" val="0.4" />
             <parameter name="Throw Trainer" type="int" val="0" />
             <parameter name="Weapon Catch Skill" type="float" val="1" />
@@ -1618,11 +1631,14 @@
     <Hotspot t0="-6.77233" t1="-1.82602" t2="-4.89122" s0="0.256046" s1="0.250086" s2="0.326755" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="382" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;turner&quot;,&quot;external_hotspot&quot;:true,&quot;external_hotspot_id&quot;:386,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:1},{&quot;custom_prompt&quot;:false,&quot;function&quot;:26,&quot;identifier&quot;:&quot;Turner&quot;,&quot;identifier_type&quot;:3,&quot;input_identifier&quot;:10,&quot;input_type&quot;:0,&quot;placeholder_id&quot;:377,&quot;promt_size&quot;:0.29999998211860657,&quot;use_prompt&quot;:true},{&quot;dialogue_function&quot;:11,&quot;function&quot;:33},{&quot;dialogue_control&quot;:true,&quot;dialogue_function&quot;:13,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0},{&quot;dialogue_function&quot;:8,&quot;function&quot;:33,&quot;target_camera_position&quot;:[-8.254364013671875,-1.6097733974456787,-7.0648350715637207],&quot;target_camera_rotation&quot;:[-8.779698371887207,-72.977165222167969,6.1898595049569849e-06],&quot;target_camera_zoom&quot;:90},{&quot;dialogue_function&quot;:2,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_position&quot;:[-6.9846782684326172,-1.8893914222717285,-6.1083278656005859],&quot;target_actor_rotation&quot;:90},{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:false,&quot;anim_mobile&quot;:false,&quot;anim_super_mobile&quot;:false,&quot;anim_swap&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_animation&quot;:&quot;Data/Animations/open_chest.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:false},{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:2,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:380,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0.70710700750350952,0,0.70710700750350952],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1,&quot;translation&quot;:[-6.9939899444580078,-1.8274799585342407,-7.6390500068664551]},{&quot;rotation&quot;:[-0.35355353355407715,0.61237263679504395,-0.35355353355407715,0.61237263679504395],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1.7999999523162842,&quot;translation&quot;:[-6.9959626197814941,-1.5175315141677856,-7.8991541862487793]},{&quot;rotation&quot;:[-0.18301272392272949,0.68301284313201904,-0.18301272392272949,0.68301284313201904],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1.3999999761581421,&quot;translation&quot;:[-6.9949760437011719,-1.6365554332733154,-7.7282123565673828]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:true,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:5,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:329,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.4384222030639648,2.8083016872406006,2.9428243637084961],&quot;time&quot;:2.5,&quot;translation&quot;:[-6.4480628967285156,-1.4895173311233521,-7.5879831314086914]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5489599704742432,1.7839186191558838,1.8693714141845703],&quot;time&quot;:5,&quot;translation&quot;:[-6.562065601348877,-1.6878376007080078,-7.5417976379394531]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5489599704742432,1.7839186191558838,1.8693714141845703],&quot;time&quot;:0.89999997615814209,&quot;translation&quot;:[-6.562065601348877,-1.6878376007080078,-7.5417976379394531]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.4143826961517334,2.7806158065795898,2.9138119220733643],&quot;time&quot;:4,&quot;translation&quot;:[-6.4511442184448242,-1.4948773384094238,-7.5867347717285156]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;dialogue_function&quot;:8,&quot;function&quot;:33,&quot;target_camera_position&quot;:[-8.0273284912109375,-2.1310379505157471,-6.4221944808959961],&quot;target_camera_rotation&quot;:[7.7746024131774902,-52.469882965087891,0.4583880603313446],&quot;target_camera_zoom&quot;:90},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;dialogue_function&quot;:8,&quot;function&quot;:33,&quot;target_camera_position&quot;:[-8.1100044250488281,-2.072509765625,-8.4676370620727539],&quot;target_camera_rotation&quot;:[11.932717323303223,-139.39248657226562,1.8643937110900879],&quot;target_camera_zoom&quot;:90},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;function&quot;:15,&quot;object_path&quot;:&quot;Data/Items/DogWeapons/DogKnife.xml&quot;,&quot;placeholder_id&quot;:345,&quot;reference_string&quot;:&quot;knife&quot;},{&quot;add_velocity&quot;:true,&quot;function&quot;:24,&quot;identifier&quot;:&quot;knife&quot;,&quot;identifier_type&quot;:1,&quot;placeholder_id&quot;:353,&quot;velocity_magnitude&quot;:4},{&quot;duration&quot;:2000,&quot;function&quot;:2},{&quot;dialogue_control&quot;:false,&quot;dialogue_function&quot;:13,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0},{&quot;dialogue_function&quot;:12,&quot;function&quot;:33}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;player&quot;,&quot;external_hotspot&quot;:true,&quot;external_hotspot_id&quot;:127,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:2,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;reset_when_false&quot;:false,&quot;target_character_type&quot;:3},{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:3,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:386,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:true,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5526100397109985,0.58481597900390625,1.933150053024292],&quot;time&quot;:0,&quot;translation&quot;:[-6.9131598472595215,-2.7195999622344971,-10.809379577636719]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5526100397109985,0.58481597900390625,1.933150053024292],&quot;time&quot;:1,&quot;translation&quot;:[-6.9131598472595215,1.2804000377655029,-10.809379577636719]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5526100397109985,0.58481597900390625,1.933150053024292],&quot;time&quot;:2,&quot;translation&quot;:[-6.9131608009338379,1.2804005146026611,-4.8093781471252441]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5526100397109985,0.58481597900390625,1.933150053024292],&quot;time&quot;:3,&quot;translation&quot;:[-6.9131608009338379,4.780400276184082,-4.8093781471252441]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:false},{&quot;character_team&quot;:&quot;player&quot;,&quot;external_hotspot&quot;:true,&quot;external_hotspot_id&quot;:54,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:2,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;reset_when_false&quot;:false,&quot;target_character_type&quot;:1},{&quot;custom_prompt&quot;:false,&quot;function&quot;:26,&quot;identifier&quot;:&quot;Turner&quot;,&quot;identifier_type&quot;:3,&quot;input_identifier&quot;:10,&quot;input_type&quot;:0,&quot;placeholder_id&quot;:377,&quot;prompt_size&quot;:0.25,&quot;use_prompt&quot;:true},{&quot;dialogue_function&quot;:11,&quot;function&quot;:33},{&quot;dialogue_control&quot;:true,&quot;dialogue_function&quot;:13,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0},{&quot;dialogue_function&quot;:8,&quot;function&quot;:33,&quot;target_camera_position&quot;:[-8.254364013671875,-1.6097733974456787,-7.0648350715637207],&quot;target_camera_rotation&quot;:[-8.779698371887207,-72.977165222167969,6.1898595049569849e-06],&quot;target_camera_zoom&quot;:90},{&quot;dialogue_function&quot;:2,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_position&quot;:[-6.9846782684326172,-1.8893914222717285,-6.1083278656005859],&quot;target_actor_rotation&quot;:90},{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:false,&quot;anim_mobile&quot;:false,&quot;anim_super_mobile&quot;:false,&quot;anim_swap&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;target_actor_animation&quot;:&quot;Data/Animations/open_chest.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:false},{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:2,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:380,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0.70710700750350952,0,0.70710700750350952],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1,&quot;translation&quot;:[-6.9939899444580078,-1.8274799585342407,-7.6390500068664551]},{&quot;rotation&quot;:[-0.35355353355407715,0.61237263679504395,-0.35355353355407715,0.61237263679504395],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1.7999999523162842,&quot;translation&quot;:[-6.9959626197814941,-1.5175315141677856,-7.8991541862487793]},{&quot;rotation&quot;:[-0.18301272392272949,0.68301284313201904,-0.18301272392272949,0.68301284313201904],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1.3999999761581421,&quot;translation&quot;:[-6.9949760437011719,-1.6365554332733154,-7.7282123565673828]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;animate_camera&quot;:false,&quot;animate_scale&quot;:true,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:5,&quot;duration_method&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:329,&quot;identifier_type&quot;:0,&quot;interpolate_rotation&quot;:false,&quot;interpolate_translation&quot;:false,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.4384222030639648,2.8083016872406006,2.9428243637084961],&quot;time&quot;:2.5,&quot;translation&quot;:[-6.4480628967285156,-1.4895173311233521,-7.5879831314086914]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5489599704742432,1.7839186191558838,1.8693714141845703],&quot;time&quot;:5,&quot;translation&quot;:[-6.562065601348877,-1.6878376007080078,-7.5417976379394531]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.5489599704742432,1.7839186191558838,1.8693714141845703],&quot;time&quot;:0.89999997615814209,&quot;translation&quot;:[-6.562065601348877,-1.6878376007080078,-7.5417976379394531]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2.4143826961517334,2.7806158065795898,2.9138119220733643],&quot;time&quot;:4,&quot;translation&quot;:[-6.4511442184448242,-1.4948773384094238,-7.5867347717285156]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;dialogue_function&quot;:8,&quot;function&quot;:33,&quot;target_camera_position&quot;:[-8.0273284912109375,-2.1310379505157471,-6.4221944808959961],&quot;target_camera_rotation&quot;:[7.7746024131774902,-52.469882965087891,0.4583880603313446],&quot;target_camera_zoom&quot;:90},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;dialogue_function&quot;:8,&quot;function&quot;:33,&quot;target_camera_position&quot;:[-8.1100044250488281,-2.072509765625,-8.4676370620727539],&quot;target_camera_rotation&quot;:[11.932717323303223,-139.39248657226562,1.8643937110900879],&quot;target_camera_zoom&quot;:90},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;function&quot;:15,&quot;object_path&quot;:&quot;Data/Items/DogWeapons/DogKnife.xml&quot;,&quot;placeholder_id&quot;:345,&quot;reference_string&quot;:&quot;knife&quot;},{&quot;add_velocity&quot;:true,&quot;function&quot;:24,&quot;identifier&quot;:&quot;knife&quot;,&quot;identifier_type&quot;:1,&quot;placeholder_id&quot;:353,&quot;velocity_magnitude&quot;:4},{&quot;duration&quot;:2000,&quot;function&quot;:2},{&quot;dialogue_control&quot;:false,&quot;dialogue_function&quot;:13,&quot;function&quot;:33,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0},{&quot;dialogue_function&quot;:12,&quot;function&quot;:33}]}&#x0A;' />
         </parameters>
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
+    <EnvObject name="Billboard Helper" t0="-8.42519" t1="-2.0958" t2="-6.03154" s0="1.49571" s1="1.49571" s2="1.49571" q0="0.289405" q1="-0.657374" q2="0.422601" q3="0.552729" euler_x="-1.70488" euler_y="-1.33066" euler_z="2.76855" id="384" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <Hotspot name="Drika External Hotspot" t0="-12.6979" t1="-1.96051" t2="-6.88549" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="385" type_file="Data/Objects/Hotspots/drika_external_hotspot.xml">
         <parameters>
             <parameter name="Target Drika Hotspot" type="int" val="394" />
@@ -1630,13 +1646,9 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <Hotspot name="Drika External Hotspot" t0="-6.77233" t1="-1.9903" t2="-6.93145" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="386" type_file="Data/Objects/Hotspots/drika_external_hotspot.xml">
-        <parameters>
-            <parameter name="Target Drika Hotspot" type="int" val="382" />
-        </parameters>
-        <Connections />
-        <ConnectionsFrom />
-    </Hotspot>
+    <EnvObject t0="-6.91316" t1="-2.7196" t2="-10.8094" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="386" color_r="0" color_g="0.658842" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
     <Hotspot name="Drika External Hotspot" t0="-12.6979" t1="-1.90079" t2="-9.46098" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="387" type_file="Data/Objects/Hotspots/drika_external_hotspot.xml">
         <parameters>
             <parameter name="Target Drika Hotspot" type="int" val="394" />
