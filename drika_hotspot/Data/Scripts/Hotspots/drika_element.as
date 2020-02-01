@@ -160,7 +160,7 @@ class DrikaElement{
 	string reference_string = "drika_reference";
 	string placeholder_name;
 	identifier_types identifier_type = id;
-	int current_identifier_type;
+	int current_identifier_type = -1;
 	int current_reference;
 	vec3 default_placeholder_scale = vec3(0.25);
 	array<EntityType> connection_types;
@@ -374,7 +374,6 @@ class DrikaElement{
 			//By default the id is used as identifier with -1 as the target id.
 			identifier_type = identifier_types(id);
 		}
-		current_identifier_type = identifier_type;
 	}
 
 	void SaveIdentifier(JSONValue &inout data){
@@ -426,6 +425,19 @@ class DrikaElement{
 		if(show_name_option){
 			identifier_choices.insertLast("Name");
 		}
+
+		if(current_identifier_type == -1){
+			for(uint i = 0; i < identifier_choices.size(); i++){
+				if(	identifier_type == id && identifier_choices[i] == "ID"||
+				 	identifier_type == team && identifier_choices[i] == "Team"||
+					identifier_type == reference && identifier_choices[i] == "Reference"||
+					identifier_type == name && identifier_choices[i] == "Name"){
+					current_identifier_type = i;
+					break;
+				}
+			}
+		}
+
 		if(ImGui_Combo("Identifier Type", current_identifier_type, identifier_choices, identifier_choices.size())){
 			if(identifier_choices[current_identifier_type] == "ID"){
 				identifier_type = id;
