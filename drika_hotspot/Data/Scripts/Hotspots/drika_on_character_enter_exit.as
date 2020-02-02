@@ -120,7 +120,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 		if(hotspot_trigger_type == on_enter){
 			display_string += "OnCharacterEnter ";
-		}else if(hotspot_trigger_type == on_enter){
+		}else if(hotspot_trigger_type == on_exit){
 			display_string += "OnCharacterExit ";
 		}else if(hotspot_trigger_type == while_inside){
 			display_string += "WhileCharacterInside ";
