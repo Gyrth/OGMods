@@ -520,6 +520,8 @@ class DrikaDialogue : DrikaElement{
 			SetDialogueSettings();
 		}else if(dialogue_function == set_actor_dialogue_control){
 			SetActorDialogueControl();
+		}else if(dialogue_function == choice){
+			Reset();
 		}
 	}
 
@@ -796,6 +798,16 @@ class DrikaDialogue : DrikaElement{
 		Reset();
 	}
 
+	void ReceiveMessage(string message, int param){
+		if(message == "drika_dialogue_choice_select"){
+			current_choice = param;
+			level.SendMessage("drika_dialogue_choice_select " + current_choice);
+		}else if(message == "drika_dialogue_choice_pick" && !editing){
+			triggered = true;
+			current_choice = param;
+		}
+	}
+
 	void Reset(){
 		dialogue_done = false;
 		if(dialogue_function == say){
@@ -826,6 +838,7 @@ class DrikaDialogue : DrikaElement{
 				level.SendMessage("drika_dialogue_hide");
 			}
 			choice_ui_added = false;
+			triggered = false;
 		}
 	}
 
@@ -932,33 +945,19 @@ class DrikaDialogue : DrikaElement{
 				merged_choices += "\"" + choice_5 + "\"";
 			}
 
-			level.SendMessage("drika_dialogue_choice " + " " +  merged_choices);
+			level.SendMessage("drika_dialogue_choice " + this_hotspot.GetID() + " " +  merged_choices);
 		}
 
-		if((GetInputPressed(0, "up") || GetInputPressed(0, "menu_up")) && current_choice > 0){
-			current_choice -= 1;
-			level.SendMessage("drika_dialogue_choice_select " + current_choice);
-		}else if((GetInputPressed(0, "down") || GetInputPressed(0, "menu_down")) && current_choice < (nr_choices - 1)){
-			current_choice += 1;
-			level.SendMessage("drika_dialogue_choice_select " + current_choice);
-		}
 
 		if(!preview){
-			if(GetInputPressed(0, "jump") || GetInputPressed(0, "skip_dialogue")){
-				int new_target_line;
-				if(current_choice + 1 == 1){
-					new_target_line = choice_1_go_to_line;
-				}else if(current_choice + 1 == 2){
-					new_target_line = choice_2_go_to_line;
-				}else if(current_choice + 1 == 3){
-					new_target_line = choice_3_go_to_line;
-				}else if(current_choice + 1 == 4){
-					new_target_line = choice_4_go_to_line;
-				}else if(current_choice + 1 == 5){
-					new_target_line = choice_5_go_to_line;
-				}
-
-				return PickChoice(new_target_line);
+			if((GetInputPressed(0, "up") || GetInputPressed(0, "menu_up")) && current_choice > 0){
+				current_choice -= 1;
+				level.SendMessage("drika_dialogue_choice_select " + current_choice);
+			}else if((GetInputPressed(0, "down") || GetInputPressed(0, "menu_down")) && current_choice < (nr_choices - 1)){
+				current_choice += 1;
+				level.SendMessage("drika_dialogue_choice_select " + current_choice);
+			}else if(GetInputPressed(0, "jump") || GetInputPressed(0, "skip_dialogue")){
+				return GoToCurrentChoice();
 			}else if(GetInputPressed(0, "1") && nr_choices >= 1){
 				return PickChoice(choice_1_go_to_line);
 			}else if(GetInputPressed(0, "2") && nr_choices >= 2){
@@ -972,7 +971,28 @@ class DrikaDialogue : DrikaElement{
 			}
 		}
 
+		if(triggered){
+			return GoToCurrentChoice();
+		}
+
 		return false;
+	}
+
+	bool GoToCurrentChoice(){
+		int new_target_line;
+		if(current_choice + 1 == 1){
+			new_target_line = choice_1_go_to_line;
+		}else if(current_choice + 1 == 2){
+			new_target_line = choice_2_go_to_line;
+		}else if(current_choice + 1 == 3){
+			new_target_line = choice_3_go_to_line;
+		}else if(current_choice + 1 == 4){
+			new_target_line = choice_4_go_to_line;
+		}else if(current_choice + 1 == 5){
+			new_target_line = choice_5_go_to_line;
+		}
+
+		return PickChoice(new_target_line);
 	}
 
 	bool PickChoice(int new_target_line){
@@ -980,8 +1000,6 @@ class DrikaDialogue : DrikaElement{
 			Log(warning, "The Go to line isn't valid in the dialogue choice " + new_target_line);
 			return false;
 		}
-
-		Log(warning, "Go to line " + new_target_line);
 
 		current_line = new_target_line;
 		display_index = drika_indexes[new_target_line];

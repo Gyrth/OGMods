@@ -31,6 +31,7 @@ bool show_names = true;
 array<IMContainer@> choice_ui_elements;
 array<string> choices;
 int selected_choice = 0;
+int ui_hotspot_id = -1;
 
 class ActorSettings{
 	string name = "Default";
@@ -129,6 +130,11 @@ void CreateChoiceUI(){
 		line_divider.setZOrdering(2);
 
 		IMContainer choice_container(1500, -1);
+		IMMessage on_click("drika_dialogue_choice_pick", i);
+		IMMessage on_hover_enter("drika_dialogue_choice_select", i);
+	    IMMessage nil_message("");
+		choice_container.addLeftMouseClickBehavior(IMFixedMessageOnClick(on_click), "");
+		choice_container.addMouseOverBehavior(IMFixedMessageOnMouseOver(on_hover_enter, nil_message, nil_message), "");
 		dialogue_lines_holder_vert.append(choice_container);
 		choice_container.setZOrdering(2);
 		choice_container.setBorderColor(dialogue_font.color);
@@ -144,7 +150,7 @@ void CreateChoiceUI(){
 		choice_ui_elements.insertLast(@choice_container);
 	}
 
-	ReceiveMessage("drika_dialogue_choice_select " + selected_choice);
+	SelectChoice(selected_choice);
 }
 
 void DefaultUI(){
@@ -780,6 +786,7 @@ void ReceiveMessage(string msg){
 	}else if(token == "drika_dialogue_hide"){
 		show_dialogue = false;
 		showing_choice = false;
+		ui_hotspot_id = -1;
 		imGUI.clear();
 	}else if(token == "drika_dialogue_add_say"){
 		token_iter.FindNextToken(msg);
@@ -939,6 +946,7 @@ void ReceiveMessage(string msg){
 		show_dialogue = false;
 		fade_to_black = false;
 		showing_choice = false;
+		ui_hotspot_id = -1;
 		imGUI.clear();
 	}else if(token == "drika_dialogue_fade_out_in"){
 		token_iter.FindNextToken(msg);
@@ -1009,6 +1017,9 @@ void ReceiveMessage(string msg){
 
 		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path, param_1, param_2));
 	}else if(token == "drika_dialogue_choice"){
+		token_iter.FindNextToken(msg);
+		int hotspot_id = atoi(token_iter.GetToken(msg));
+
 		array<string> lines;
 
 		while(token_iter.FindNextToken(msg)){
@@ -1019,8 +1030,14 @@ void ReceiveMessage(string msg){
 		choices = lines;
 
 		if(!show_dialogue){
+
+			if(!EditorModeActive()){
+				SetGrabMouse(false);
+			}
+
 			show_dialogue = true;
 			showing_choice = true;
+			ui_hotspot_id = hotspot_id;
 			BuildDialogueUI();
 		}
 
@@ -1029,20 +1046,26 @@ void ReceiveMessage(string msg){
 		int new_selected_choice = atoi(token_iter.GetToken(msg));
 
 		if(new_selected_choice != selected_choice){
-			choice_ui_elements[selected_choice].showBorder(false);
-			choice_ui_elements[selected_choice].removeElement("bg");
+			SelectChoice(new_selected_choice);
 		}
-		selected_choice = new_selected_choice;
-		choice_ui_elements[selected_choice].showBorder(true);
-
-		vec4 background_color = dialogue_font.color;
-		background_color.a = 0.15f;
-		IMImage background_image("Textures/ui/whiteblock.tga");
-		background_image.setClip(true);
-		background_image.setSize(vec2(1500.0 + 40.0, dialogue_font.size + 40.0));
-		background_image.setEffectColor(background_color);
-		choice_ui_elements[selected_choice].addFloatingElement(background_image, "bg", vec2(-20.0));
 	}
+}
+
+void SelectChoice(int new_selected_choice){
+	if(new_selected_choice != selected_choice){
+		choice_ui_elements[selected_choice].showBorder(false);
+		choice_ui_elements[selected_choice].removeElement("bg");
+	}
+	selected_choice = new_selected_choice;
+	choice_ui_elements[selected_choice].showBorder(true);
+
+	vec4 background_color = dialogue_font.color;
+	background_color.a = 0.15f;
+	IMImage background_image("Textures/ui/whiteblock.tga");
+	background_image.setClip(true);
+	background_image.setSize(vec2(1500.0 + 40.0, dialogue_font.size + 40.0));
+	background_image.setEffectColor(background_color);
+	choice_ui_elements[selected_choice].addFloatingElement(background_image, "bg", vec2(-20.0));
 }
 
 void ReadAnimationList(){
@@ -1076,6 +1099,20 @@ void ReadAnimationList(){
 }
 
 void Update(){
+
+	while(imGUI.getMessageQueueSize() > 0 ){
+        IMMessage@ message = imGUI.getNextMessage();
+
+		if(ui_hotspot_id != -1){
+			Object@ hotspot_obj = ReadObjectFromID(ui_hotspot_id);
+			if(message.name == "drika_dialogue_choice_select"){
+				hotspot_obj.ReceiveScriptMessage("drika_ui_event drika_dialogue_choice_select " + message.getInt(0));
+			}else if(message.name == "drika_dialogue_choice_pick"){
+				hotspot_obj.ReceiveScriptMessage("drika_ui_event drika_dialogue_choice_pick " + message.getInt(0));
+			}
+		}
+	}
+
 	imGUI.update();
 	SetCameraPosition();
 	UpdateReadFileProcesses();
@@ -1139,7 +1176,9 @@ void SetCameraPosition(){
 		camera.SetFOV(camera_zoom);
 		camera.SetDOF(0,0,0,0,0,0);
 		UpdateListener(camera_position, vec3(0.0f), camera.GetFacing(), camera.GetUpVector());
-		SetGrabMouse(true);
+		if(!showing_choice){
+			SetGrabMouse(true);
+		}
 	}
 }
 
@@ -1152,7 +1191,7 @@ void MessageWaitingForFadeOut(){
 }
 
 bool HasFocus(){
-	return false;
+	return (showing_choice && !EditorModeActive())?true:false;
 }
 
 bool DialogueCameraControl() {

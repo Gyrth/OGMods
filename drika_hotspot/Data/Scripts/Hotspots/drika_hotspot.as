@@ -700,6 +700,15 @@ void ReceiveMessage(string msg){
 		int source_hotspot_id = atoi(token_iter.GetToken(msg));
 
 		GetCurrentElement().ReceiveMessage(event, char_id, source_hotspot_id);
+	}else if(token == "drika_ui_event"){
+
+		token_iter.FindNextToken(msg);
+		string event = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		int param_1 = atoi(token_iter.GetToken(msg));
+
+		GetCurrentElement().ReceiveMessage(event, param_1);
 	}
 }
 
