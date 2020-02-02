@@ -944,7 +944,7 @@ class DrikaDialogue : DrikaElement{
 		}
 
 		if(!preview){
-			if(GetInputPressed(0, "jump")){
+			if(GetInputPressed(0, "jump") || GetInputPressed(0, "skip_dialogue")){
 				int new_target_line;
 				if(current_choice + 1 == 1){
 					new_target_line = choice_1_go_to_line;
@@ -958,21 +958,35 @@ class DrikaDialogue : DrikaElement{
 					new_target_line = choice_5_go_to_line;
 				}
 
-				if(new_target_line < 0 || new_target_line >= int(drika_elements.size())){
-					Log(warning, "The Go to line isn't valid in the dialogue choice " + new_target_line);
-					return false;
-				}
-
-				Log(warning, "Go to line " + new_target_line);
-
-				current_line = new_target_line;
-				display_index = drika_indexes[new_target_line];
-
-				return true;
+				return PickChoice(new_target_line);
+			}else if(GetInputPressed(0, "1") && nr_choices >= 1){
+				return PickChoice(choice_1_go_to_line);
+			}else if(GetInputPressed(0, "2") && nr_choices >= 2){
+				return PickChoice(choice_2_go_to_line);
+			}else if(GetInputPressed(0, "3") && nr_choices >= 3){
+				return PickChoice(choice_3_go_to_line);
+			}else if(GetInputPressed(0, "4") && nr_choices >= 4){
+				return PickChoice(choice_4_go_to_line);
+			}else if(GetInputPressed(0, "5") && nr_choices >= 5){
+				return PickChoice(choice_5_go_to_line);
 			}
 		}
 
 		return false;
+	}
+
+	bool PickChoice(int new_target_line){
+		if(new_target_line < 0 || new_target_line >= int(drika_elements.size())){
+			Log(warning, "The Go to line isn't valid in the dialogue choice " + new_target_line);
+			return false;
+		}
+
+		Log(warning, "Go to line " + new_target_line);
+
+		current_line = new_target_line;
+		display_index = drika_indexes[new_target_line];
+
+		return true;
 	}
 
 	void StartDialogue(){
