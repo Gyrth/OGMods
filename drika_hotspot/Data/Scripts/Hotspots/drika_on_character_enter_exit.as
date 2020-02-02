@@ -15,7 +15,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	int new_hotspot_trigger_type;
 	bool external_hotspot;
 	int external_hotspot_id;
-	Object@ external_hotspot_obj;
+	Object@ external_hotspot_obj = null;
 	bool reset_when_false;
 
 	target_character_types target_character_type;
@@ -86,6 +86,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	void Delete(){
 		if(external_hotspot && ObjectExists(external_hotspot_id)){
 			QueueDeleteObjectID(external_hotspot_id);
+			@external_hotspot_obj = null;
 		}
 	}
 
@@ -175,6 +176,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 			CreateExternalHotspot();
 		}else if(external_hotspot_id != -1 && !external_hotspot){
 			QueueDeleteObjectID(external_hotspot_id);
+			@external_hotspot_obj = null;
 			external_hotspot_id = -1;
 		}
 
