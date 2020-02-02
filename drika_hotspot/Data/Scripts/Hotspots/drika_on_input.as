@@ -79,7 +79,7 @@ class DrikaOnInput : DrikaElement{
 		other_input = GetJSONString(params, "other_input", "w");
 		use_prompt = GetJSONBool(params, "use_prompt", false);
 		custom_prompt = GetJSONBool(params, "custom_prompt", false);
-		custom_prompt_path = GetJSONString(params, "custom_prompt_path", "Data/Textures/UI/flatDark/flatDark50.png");
+		custom_prompt_path = GetJSONString(params, "custom_prompt_path", "Data/Textures/UI/keyboard/f.png");
 		prompt_size = GetJSONFloat(params, "prompt_size", 0.25);
 
 		GetInputData();
