@@ -4,6 +4,7 @@
 bool animating_camera = false;
 bool has_camera_control = false;
 bool show_dialogue = false;
+bool showing_choice = false;
 array<string> hotspot_ids;
 IMGUI@ imGUI;
 FontSetup name_font_arial("arial", 70 , HexColor("#CCCCCC"), true);
@@ -27,6 +28,9 @@ array<int> waiting_hotspot_ids;
 int dialogue_layout = 0;
 bool use_voice_sounds = true;
 bool show_names = true;
+array<IMContainer@> choice_ui_elements;
+array<string> choices;
+int selected_choice = 0;
 
 class ActorSettings{
 	string name = "Default";
@@ -107,7 +111,40 @@ void BuildDialogueUI(){
 			break;
 	}
 
+	CreateChoiceUI();
+
 	ui_created = true;
+}
+
+void CreateChoiceUI(){
+	if(!showing_choice){
+		return;
+	}
+
+	choice_ui_elements.resize(0);
+
+	for(uint i = 0; i < choices.size(); i++){
+		line_counter += 1;
+		IMDivider line_divider("dialogue_line_holder" + line_counter, DOHorizontal);
+		line_divider.setZOrdering(2);
+
+		IMContainer choice_container(1500, -1);
+		dialogue_lines_holder_vert.append(choice_container);
+		choice_container.setZOrdering(2);
+		choice_container.setBorderColor(dialogue_font.color);
+		choice_container.setBorderSize(2.0f);
+
+		IMText choice_text(choices[i], dialogue_font);
+		choice_text.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
+		choice_container.setElement(line_divider);
+
+		line_divider.appendSpacer(20.0f);
+		line_divider.append(choice_text);
+		line_divider.appendSpacer(20.0f);
+		choice_ui_elements.insertLast(@choice_container);
+	}
+
+	ReceiveMessage("drika_dialogue_choice_select " + selected_choice);
 }
 
 void DefaultUI(){
@@ -312,8 +349,10 @@ void DefaultBackground(IMContainer@ parent){
 	float bg_alpha = 0.5;
 	float bg_height = 350.0;
 
+	vec4 color = showing_choice?dialogue_font.color:current_actor_settings.color;
+
 	IMImage left_fade("Textures/ui/dialogue/dialogue_bg-fade.png");
-	left_fade.setColor(current_actor_settings.color);
+	left_fade.setColor(color);
 	left_fade.setSizeX(500.0);
 	left_fade.setSizeY(bg_height);
 	left_fade.setAlpha(bg_alpha);
@@ -322,7 +361,7 @@ void DefaultBackground(IMContainer@ parent){
 	bg_divider.append(left_fade);
 
 	IMImage middle_fade("Textures/ui/dialogue/dialogue_bg.png");
-	middle_fade.setColor(current_actor_settings.color);
+	middle_fade.setColor(color);
 	middle_fade.setSizeX(1560.0);
 	middle_fade.setSizeY(bg_height);
 	middle_fade.setAlpha(bg_alpha);
@@ -330,7 +369,7 @@ void DefaultBackground(IMContainer@ parent){
 	bg_divider.append(middle_fade);
 
 	IMImage right_fade("Textures/ui/dialogue/dialogue_bg-fade_reverse.png");
-	right_fade.setColor(current_actor_settings.color);
+	right_fade.setColor(color);
 	right_fade.setSizeX(500.0);
 	right_fade.setSizeY(bg_height);
 	right_fade.setAlpha(bg_alpha);
@@ -455,9 +494,10 @@ void Fallout3Background(IMContainer@ parent){
 	float bg_alpha = 0.5;
 	float bg_height = 400.0;
 	float side_width = 5.0;
+	vec4 color = showing_choice?dialogue_font.color:current_actor_settings.color;
 
 	IMImage left_fade("Textures/dialogue_bg_fo3_end.png");
-	left_fade.setColor(current_actor_settings.color);
+	left_fade.setColor(color);
 	left_fade.setSizeX(side_width);
 	left_fade.setSizeY(bg_height);
 	left_fade.setAlpha(bg_alpha);
@@ -466,7 +506,7 @@ void Fallout3Background(IMContainer@ parent){
 	bg_divider.append(left_fade);
 
 	IMImage middle_fade("Textures/ui/dialogue/dialogue_bg.png");
-	middle_fade.setColor(current_actor_settings.color);
+	middle_fade.setColor(color);
 	middle_fade.setSizeX(1500.0);
 	middle_fade.setSizeY(bg_height);
 	middle_fade.setAlpha(bg_alpha);
@@ -474,7 +514,7 @@ void Fallout3Background(IMContainer@ parent){
 	bg_divider.append(middle_fade);
 
 	IMImage right_fade("Textures/dialogue_bg_fo3_end.png");
-	right_fade.setColor(current_actor_settings.color);
+	right_fade.setColor(color);
 	right_fade.setSizeX(side_width);
 	right_fade.setSizeY(bg_height);
 	right_fade.setAlpha(bg_alpha);
@@ -487,7 +527,7 @@ void Fallout3Background(IMContainer@ parent){
 }
 
 void CreateNameTag(IMContainer@ parent){
-	if(!show_dialogue || !show_names){
+	if(!show_dialogue || !show_names || showing_choice){
 		return;
 	}
 
@@ -739,6 +779,7 @@ void ReceiveMessage(string msg){
 		WriteMusicXML(music_path, song_name, song_path);
 	}else if(token == "drika_dialogue_hide"){
 		show_dialogue = false;
+		showing_choice = false;
 		imGUI.clear();
 	}else if(token == "drika_dialogue_add_say"){
 		token_iter.FindNextToken(msg);
@@ -795,6 +836,7 @@ void ReceiveMessage(string msg){
 			dialogue_line_holder.setZOrdering(2);
 		}
 	}else if(token == "drika_dialogue_clear_say"){
+		choices.resize(0);
 		dialogue_cache.resize(0);
 		line_counter = 0;
 		dialogue_cache.insertLast("");
@@ -896,6 +938,7 @@ void ReceiveMessage(string msg){
 	}else if(token == "drika_dialogue_end"){
 		show_dialogue = false;
 		fade_to_black = false;
+		showing_choice = false;
 		imGUI.clear();
 	}else if(token == "drika_dialogue_fade_out_in"){
 		token_iter.FindNextToken(msg);
@@ -965,6 +1008,40 @@ void ReceiveMessage(string msg){
 		int param_2 = atoi(token_iter.GetToken(msg));
 
 		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path, param_1, param_2));
+	}else if(token == "drika_dialogue_choice"){
+		array<string> lines;
+
+		while(token_iter.FindNextToken(msg)){
+			lines.insertLast(token_iter.GetToken(msg));
+		}
+
+		selected_choice = 0;
+		choices = lines;
+
+		if(!show_dialogue){
+			show_dialogue = true;
+			showing_choice = true;
+			BuildDialogueUI();
+		}
+
+	}else if(token == "drika_dialogue_choice_select"){
+		token_iter.FindNextToken(msg);
+		int new_selected_choice = atoi(token_iter.GetToken(msg));
+
+		if(new_selected_choice != selected_choice){
+			choice_ui_elements[selected_choice].showBorder(false);
+			choice_ui_elements[selected_choice].removeElement("bg");
+		}
+		selected_choice = new_selected_choice;
+		choice_ui_elements[selected_choice].showBorder(true);
+
+		vec4 background_color = dialogue_font.color;
+		background_color.a = 0.15f;
+		IMImage background_image("Textures/ui/whiteblock.tga");
+		background_image.setClip(true);
+		background_image.setSize(vec2(1500.0 + 40.0, dialogue_font.size + 40.0));
+		background_image.setEffectColor(background_color);
+		choice_ui_elements[selected_choice].addFloatingElement(background_image, "bg", vec2(-20.0));
 	}
 }
 

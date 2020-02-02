@@ -14,7 +14,8 @@ enum dialogue_functions	{
 							settings = 10,
 							start = 11,
 							end = 12,
-							set_actor_dialogue_control = 13
+							set_actor_dialogue_control = 13,
+							choice = 14
 						}
 
 class DrikaDialogue : DrikaElement{
@@ -68,6 +69,19 @@ class DrikaDialogue : DrikaElement{
 	float transition_speed;
 	bool wait_anim_end;
 	bool dialogue_control;
+	int current_choice;
+	int nr_choices;
+	string choice_1;
+	string choice_2;
+	string choice_3;
+	string choice_4;
+	string choice_5;
+	int choice_1_go_to_line;
+	int choice_2_go_to_line;
+	int choice_3_go_to_line;
+	int choice_4_go_to_line;
+	int choice_5_go_to_line;
+	bool choice_ui_added = false;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -83,7 +97,8 @@ class DrikaDialogue : DrikaElement{
 												"Settings",
 												"Start",
 												"End",
-												"Set Actor Dialogue Control"
+												"Set Actor Dialogue Control",
+												"Choice"
 											};
 
 	DrikaDialogue(JSONValue params = JSONValue()){
@@ -130,6 +145,17 @@ class DrikaDialogue : DrikaElement{
 		transition_speed = GetJSONFloat(params, "transition_speed", 3.0);
 		wait_anim_end = GetJSONBool(params, "wait_anim_end", false);
 		dialogue_control = GetJSONBool(params, "dialogue_control", true);
+		nr_choices = GetJSONInt(params, "nr_choices", 5);
+		choice_1 = GetJSONString(params, "choice_1", "Pick choice nr 1");
+		choice_2 = GetJSONString(params, "choice_2", "Pick choice nr 2");
+		choice_3 = GetJSONString(params, "choice_3", "Pick choice nr 3");
+		choice_4 = GetJSONString(params, "choice_4", "Pick choice nr 4");
+		choice_5 = GetJSONString(params, "choice_5", "Pick choice nr 5");
+		choice_1_go_to_line = GetJSONInt(params, "choice_1_go_to_line", 0);
+		choice_2_go_to_line = GetJSONInt(params, "choice_2_go_to_line", 0);
+		choice_3_go_to_line = GetJSONInt(params, "choice_3_go_to_line", 0);
+		choice_4_go_to_line = GetJSONInt(params, "choice_4_go_to_line", 0);
+		choice_5_go_to_line = GetJSONInt(params, "choice_5_go_to_line", 0);
 
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			connection_types = {_movement_object};
@@ -222,6 +248,28 @@ class DrikaDialogue : DrikaElement{
 			data["dialogue_text_color"].append(dialogue_text_color.a);
 		}else if(dialogue_function == set_actor_dialogue_control){
 			data["dialogue_control"] = JSONValue(dialogue_control);
+		}else if(dialogue_function == choice){
+			data["nr_choices"] = JSONValue(nr_choices);
+			if(nr_choices >= 1){
+				data["choice_1"] = JSONValue(choice_1);
+				data["choice_1_go_to_line"] = JSONValue(choice_1_go_to_line);
+			}
+			if(nr_choices >= 2){
+				data["choice_2"] = JSONValue(choice_2);
+				data["choice_2_go_to_line"] = JSONValue(choice_2_go_to_line);
+			}
+			if(nr_choices >= 3){
+				data["choice_3"] = JSONValue(choice_3);
+				data["choice_3_go_to_line"] = JSONValue(choice_3_go_to_line);
+			}
+			if(nr_choices >= 4){
+				data["choice_4"] = JSONValue(choice_4);
+				data["choice_4_go_to_line"] = JSONValue(choice_4_go_to_line);
+			}
+			if(nr_choices >= 5){
+				data["choice_5"] = JSONValue(choice_5);
+				data["choice_5_go_to_line"] = JSONValue(choice_5_go_to_line);
+			}
 		}
 
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
@@ -272,6 +320,8 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_dialogue_control){
 			display_string += actor_name;
 			display_string += dialogue_control;
+		}else if(dialogue_function == choice){
+
 		}
 
 		return display_string;
@@ -676,6 +726,43 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Text("Set to : ");
 			ImGui_SameLine();
 			ImGui_Checkbox("", dialogue_control);
+		}else if(dialogue_function == choice){
+			ImGui_SliderInt("Number of choices : ", nr_choices, 1, 5, "%.0f");
+			if(nr_choices >= 1){
+				ImGui_InputText("##text1", choice_1, 64);
+				ImGui_SameLine();
+				ImGui_Text("Go to Line : ");
+				ImGui_SameLine();
+				ImGui_InputInt("##go_to_line1", choice_1_go_to_line);
+			}
+			if(nr_choices >= 2){
+				ImGui_InputText("##text2", choice_2, 64);
+				ImGui_SameLine();
+				ImGui_Text("Go to Line : ");
+				ImGui_SameLine();
+				ImGui_InputInt("##go_to_line2", choice_2_go_to_line);
+			}
+			if(nr_choices >= 3){
+				ImGui_InputText("##text3", choice_3, 64);
+				ImGui_SameLine();
+				ImGui_Text("Go to Line : ");
+				ImGui_SameLine();
+				ImGui_InputInt("##go_to_line3", choice_3_go_to_line);
+			}
+			if(nr_choices >= 4){
+				ImGui_InputText("##text4", choice_4, 64);
+				ImGui_SameLine();
+				ImGui_Text("Go to Line : ");
+				ImGui_SameLine();
+				ImGui_InputInt("##go_to_line4", choice_4_go_to_line);
+			}
+			if(nr_choices >= 5){
+				ImGui_InputText("##text5", choice_5, 64);
+				ImGui_SameLine();
+				ImGui_Text("Go to Line : ");
+				ImGui_SameLine();
+				ImGui_InputInt("##go_to_line5", choice_5_go_to_line);
+			}
 		}
 	}
 
@@ -734,12 +821,19 @@ class DrikaDialogue : DrikaElement{
 			for(uint i = 0; i < targets.size(); i++){
 				RemoveDialogueActor(targets[i].GetID());
 			}
+		}else if(dialogue_function == choice){
+			if(choice_ui_added){
+				level.SendMessage("drika_dialogue_hide");
+			}
+			choice_ui_added = false;
 		}
 	}
 
 	void Update(){
 		if(dialogue_function == say){
 			UpdateSayDialogue(true);
+		}else if(dialogue_function == choice){
+			ShowChoiceDialogue(true);
 		}
 	}
 
@@ -804,6 +898,78 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_dialogue_control){
 			SetActorDialogueControl();
 			return true;
+		}else if(dialogue_function == choice){
+			if(ShowChoiceDialogue(false)){
+				Reset();
+				return true;
+			}
+			return false;
+		}
+
+		return false;
+	}
+
+	bool ShowChoiceDialogue(bool preview){
+		if(!choice_ui_added){
+			level.SendMessage("drika_dialogue_clear_say");
+			current_choice = 0;
+			choice_ui_added = true;
+			string merged_choices;
+
+			if(nr_choices >= 1){
+				merged_choices += "\"" + choice_1 + "\"";
+			}
+			if(nr_choices >= 2){
+				merged_choices += "\"" + choice_2 + "\"";
+			}
+			if(nr_choices >= 3){
+				merged_choices += "\"" + choice_3 + "\"";
+			}
+			if(nr_choices >= 4){
+				merged_choices += "\"" + choice_4 + "\"";
+			}
+			if(nr_choices >= 5){
+				merged_choices += "\"" + choice_5 + "\"";
+			}
+
+			level.SendMessage("drika_dialogue_choice " + " " +  merged_choices);
+		}
+
+		if((GetInputPressed(0, "up") || GetInputPressed(0, "menu_up")) && current_choice > 0){
+			current_choice -= 1;
+			level.SendMessage("drika_dialogue_choice_select " + current_choice);
+		}else if((GetInputPressed(0, "down") || GetInputPressed(0, "menu_down")) && current_choice < (nr_choices - 1)){
+			current_choice += 1;
+			level.SendMessage("drika_dialogue_choice_select " + current_choice);
+		}
+
+		if(!preview){
+			if(GetInputPressed(0, "jump")){
+				int new_target_line;
+				if(current_choice + 1 == 1){
+					new_target_line = choice_1_go_to_line;
+				}else if(current_choice + 1 == 2){
+					new_target_line = choice_2_go_to_line;
+				}else if(current_choice + 1 == 3){
+					new_target_line = choice_3_go_to_line;
+				}else if(current_choice + 1 == 4){
+					new_target_line = choice_4_go_to_line;
+				}else if(current_choice + 1 == 5){
+					new_target_line = choice_5_go_to_line;
+				}
+
+				if(new_target_line < 0 || new_target_line >= int(drika_elements.size())){
+					Log(warning, "The Go to line isn't valid in the dialogue choice " + new_target_line);
+					return false;
+				}
+
+				Log(warning, "Go to line " + new_target_line);
+
+				current_line = new_target_line;
+				display_index = drika_indexes[new_target_line];
+
+				return true;
+			}
 		}
 
 		return false;
@@ -917,7 +1083,7 @@ class DrikaDialogue : DrikaElement{
 			level.SendMessage("drika_dialogue_clear_say");
 		}
 
-		if(GetInputPressed(0, "return") && !preview){
+		if(GetInputPressed(0, "skip_dialogue") && !preview){
 			SkipWholeDialogue();
 			return false;
 		}else if(dialogue_done){
