@@ -84,21 +84,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	void Update(){
-		if(duplicate_external_hotspot){
-			duplicate_external_hotspot = false;
-			if(ObjectExists(external_hotspot_id)){
-				//Use the same transform as the original external hotspot.
-				Object@ old_hotspot = ReadObjectFromID(external_hotspot_id);
-				CreateExternalHotspot();
-				external_hotspot_obj.SetScale(old_hotspot.GetScale());
-				external_hotspot_obj.SetTranslation(old_hotspot.GetTranslation());
-				external_hotspot_obj.SetRotation(old_hotspot.GetRotation());
-			}else{
-				external_hotspot_id = -1;
-			}
-			return;
-		}
-
 		if(external_hotspot_id == -1 && external_hotspot){
 			CreateExternalHotspot();
 		}else if(external_hotspot_id != -1 && !external_hotspot){
