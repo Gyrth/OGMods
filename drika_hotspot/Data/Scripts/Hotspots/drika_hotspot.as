@@ -68,6 +68,7 @@ array<int> dialogue_actor_ids;
 bool wait_for_fade = false;
 bool in_dialogue_mode = false;
 array<DrikaElement@> post_init_queue;
+bool element_added = false;
 
 array<AnimationGroup@> all_animations;
 array<AnimationGroup@> current_animations;
@@ -291,6 +292,13 @@ void Update(){
 			post_init_queue[i].PostInit();
 		}
 		post_init_queue.resize(0);
+
+		if(element_added){
+			element_added = false;
+			GetCurrentElement().StartEdit();
+			Save();
+		}
+
 		duplicating = false;
 		return;
 	}
@@ -502,8 +510,7 @@ void DrawEditor(){
 					DrikaElement@ new_element = InterpElement(GetCurrentElement().drika_element_type, GetCurrentElement().GetSaveData());
 					post_init_queue.insertLast(@new_element);
 					InsertElement(new_element);
-					GetCurrentElement().StartEdit();
-					Save();
+					element_added = true;
 				}
 			}
 			if(ImGui_IsItemHovered()){
@@ -613,7 +620,6 @@ void InsertElement(DrikaElement@ new_element){
 	if(drika_elements.size() > 0){
 		GetCurrentElement().EditDone();
 	}
-	new_element.PostInit();
 	drika_elements.insertLast(new_element);
 	//There are no functions in the list yet.
 	if(drika_indexes.size() < 1){
@@ -962,9 +968,10 @@ void AddFunctionMenuItems(){
 		}
 		ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
 		if(ImGui_MenuItem(sorted_element_names[i])){
-			InsertElement(@InterpElement(current_element_type, JSONValue()));
-			GetCurrentElement().StartEdit();
-			Save();
+			DrikaElement@ new_element = InterpElement(current_element_type, JSONValue());
+			post_init_queue.insertLast(@new_element);
+			InsertElement(new_element);
+			element_added = true;
 		}
 		ImGui_PopStyleColor();
 	}
