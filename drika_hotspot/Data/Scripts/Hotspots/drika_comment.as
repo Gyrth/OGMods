@@ -23,7 +23,7 @@ class DrikaComment : DrikaElement{
 	}
 
 	void DrawSettings(){
-			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
+		if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 			display_comment = ImGui_GetTextBuf();
 		}
 	}
