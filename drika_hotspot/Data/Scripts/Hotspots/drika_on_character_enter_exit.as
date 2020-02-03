@@ -83,6 +83,31 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		}
 	}
 
+	void Update(){
+		if(duplicate_external_hotspot){
+			duplicate_external_hotspot = false;
+			if(ObjectExists(external_hotspot_id)){
+				//Use the same transform as the original external hotspot.
+				Object@ old_hotspot = ReadObjectFromID(external_hotspot_id);
+				CreateExternalHotspot();
+				external_hotspot_obj.SetScale(old_hotspot.GetScale());
+				external_hotspot_obj.SetTranslation(old_hotspot.GetTranslation());
+				external_hotspot_obj.SetRotation(old_hotspot.GetRotation());
+			}else{
+				external_hotspot_id = -1;
+			}
+			return;
+		}
+
+		if(external_hotspot_id == -1 && external_hotspot){
+			CreateExternalHotspot();
+		}else if(external_hotspot_id != -1 && !external_hotspot){
+			QueueDeleteObjectID(external_hotspot_id);
+			@external_hotspot_obj = null;
+			external_hotspot_id = -1;
+		}
+	}
+
 	void Delete(){
 		if(external_hotspot && ObjectExists(external_hotspot_id)){
 			QueueDeleteObjectID(external_hotspot_id);
@@ -106,8 +131,15 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	void EditDone(){
-		if(ObjectExists(external_hotspot_id)){
+		if(external_hotspot && ObjectExists(external_hotspot_id)){
 			external_hotspot_obj.SetSelected(false);
+			external_hotspot_obj.SetSelectable(false);
+		}
+	}
+
+	void StartEdit(){
+		if(external_hotspot && ObjectExists(external_hotspot_id)){
+			external_hotspot_obj.SetSelectable(true);
 		}
 	}
 
@@ -170,14 +202,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		if(target_character_type == check_id && object_id != -1 && MovementObjectExists(object_id)){
 			MovementObject@ character = ReadCharacterID(object_id);
 			DebugDrawLine(character.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-		}
-
-		if(external_hotspot_id == -1 && external_hotspot){
-			CreateExternalHotspot();
-		}else if(external_hotspot_id != -1 && !external_hotspot){
-			QueueDeleteObjectID(external_hotspot_id);
-			@external_hotspot_obj = null;
-			external_hotspot_id = -1;
 		}
 
 		if(@external_hotspot_obj != null){
