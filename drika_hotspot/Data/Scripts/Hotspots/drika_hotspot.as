@@ -46,7 +46,6 @@ int current_line = 0;
 array<DrikaElement@> drika_elements;
 array<DrikaElement@> parallel_elements;
 array<int> drika_indexes;
-bool post_init_done = false;
 Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
 string param_delimiter = "|";
 array<string> messages;
@@ -68,6 +67,7 @@ bool hotspot_enabled = true;
 array<int> dialogue_actor_ids;
 bool wait_for_fade = false;
 bool in_dialogue_mode = false;
+array<DrikaElement@> post_init_queue;
 
 array<AnimationGroup@> all_animations;
 array<AnimationGroup@> current_animations;
@@ -206,12 +206,10 @@ bool AcceptConnectionsTo(Object @other){
 }
 
 bool ConnectTo(Object @other){
-	if(post_init_done){
-		if(drika_elements.size() > 0){
-			bool return_value = GetCurrentElement().ConnectTo(other);
-			Save();
-			return return_value;
-		}
+	if(drika_elements.size() > 0){
+		bool return_value = GetCurrentElement().ConnectTo(other);
+		Save();
+		return return_value;
 	}
 	return false;
 }
@@ -262,22 +260,16 @@ void InterpData(){
 			Log(warning, "Unable to parse the JSON in the Script Data!");
 		}else{
 			for( uint i = 0; i < data.getRoot()["functions"].size(); ++i ) {
-				drika_elements.insertLast(InterpElement(none, data.getRoot()["functions"][i]));
+				DrikaElement@ new_element = InterpElement(none, data.getRoot()["functions"][i]);
+				drika_elements.insertLast(@new_element);
 				drika_indexes.insertLast(drika_elements.size() - 1);
 				line_index += 1;
+				post_init_queue.insertLast(@new_element);
 			}
 		}
 	}
 	Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID());
 	ReorderElements();
-}
-
-void PostInit(){
-	post_init_done = true;
-	for(uint i = 0; i < drika_elements.size(); i++){
-		drika_elements[i].PostInit();
-	}
-	duplicating = false;
 }
 
 void LaunchCustomGUI(){
@@ -292,8 +284,14 @@ void LaunchCustomGUI(){
 }
 
 void Update(){
-	if(!post_init_done){
-		PostInit();
+	//The post init queue is necessary so that Update is executing it, and not the Draw functions.
+	//The Draw and DrawEditor sometimes can have issues such as spawning hotspots that crash the game.
+	if(post_init_queue.size() > 0){
+		for(uint i = 0; i < post_init_queue.size(); i++){
+			post_init_queue[i].PostInit();
+		}
+		post_init_queue.resize(0);
+		duplicating = false;
 		return;
 	}
 
@@ -502,8 +500,10 @@ void DrawEditor(){
 				if(drika_elements.size() > 0){
 					duplicating = true;
 					DrikaElement@ new_element = InterpElement(GetCurrentElement().drika_element_type, GetCurrentElement().GetSaveData());
+					post_init_queue.insertLast(@new_element);
 					InsertElement(new_element);
-					duplicating = false;
+					GetCurrentElement().StartEdit();
+					Save();
 				}
 			}
 			if(ImGui_IsItemHovered()){
@@ -626,10 +626,6 @@ void InsertElement(DrikaElement@ new_element){
 		current_line += 1;
 	}
 	ReorderElements();
-	if(post_init_done && drika_elements.size() > 0){
-		GetCurrentElement().StartEdit();
-		Save();
-	}
 }
 
 void ReceiveMessage(string msg){
@@ -967,6 +963,8 @@ void AddFunctionMenuItems(){
 		ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
 		if(ImGui_MenuItem(sorted_element_names[i])){
 			InsertElement(@InterpElement(current_element_type, JSONValue()));
+			GetCurrentElement().StartEdit();
+			Save();
 		}
 		ImGui_PopStyleColor();
 	}
