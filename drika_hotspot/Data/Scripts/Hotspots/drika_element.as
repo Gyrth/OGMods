@@ -166,6 +166,8 @@ class DrikaElement{
 	string object_name = "drika_object";
 	string new_object_name = "drika_object";
 	float PI = 3.14159265359f;
+	string line_number;
+	bool deleted = false;
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}
@@ -189,6 +191,10 @@ class DrikaElement{
 	void ReceiveMessage(string message, string param, int id_param){}
 	void SetIndex(int _index){
 		index = _index;
+	}
+
+	~DrikaElement(){
+		/* Log(warning, "Deleted " + GetDisplayString()); */
 	}
 
 	void LeftClick(){

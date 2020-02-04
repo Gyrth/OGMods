@@ -1,4 +1,5 @@
 class DrikaGoToLine : DrikaElement{
+	DrikaElement@ line_element;
 	int line;
 	int line2;
 	int line3;
@@ -43,9 +44,15 @@ class DrikaGoToLine : DrikaElement{
 		has_settings = true;
 	}
 
+	void PostInit(){
+		@line_element = drika_elements[drika_indexes[line]];
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["line"] = JSONValue(line);
+		if(@line_element != null){
+			data["line"] = JSONValue(line_element.index);
+		}
 		data["line2"] = JSONValue(line2);
 		data["line3"] = JSONValue(line3);
 		data["line4"] = JSONValue(line4);
@@ -68,17 +75,55 @@ class DrikaGoToLine : DrikaElement{
 	}
 
 	string GetDisplayString(){
+		//Elements can be deleted when this function isn't being edited. So this function is used to continuesly check the target element.
+		if(@line_element == null || line_element.deleted){
+			//If the line_element gets deleted then just pick the first one.
+			@line_element = drika_elements[0];
+		}
+
 		if(choice_line2 == false){
-			return "GoToLine " + line;
+			if(@line_element != null){
+				return "GoToLine " + line_element.index;
+			}else{
+				return "GoToLine";
+			}
 		}else{
 			return "Randomly pick from a list of lines to go to ";
 		}
 	}
 
 	void DrawSettings(){
-		ImGui_InputInt("Line", line);
 		ImGui_Checkbox("Pick a random line from a list of choices", choice_line2);
-		if(choice_line2 == true){
+
+		if(@line_element == null){
+			return;
+		}
+
+		if(!choice_line2){
+			string preview_value = line_element.line_number + line_element.GetDisplayString();
+			ImGui_Text("Go to line : ");
+			ImGui_SameLine();
+			ImGui_PushStyleColor(ImGuiCol_Text, line_element.GetDisplayColor());
+			ImGui_PushItemWidth(-1.0);
+			if(ImGui_BeginCombo("###line", preview_value)){
+			    for(uint i = 0; i < drika_indexes.size(); i++){
+					int item_no = drika_indexes[i];
+			        bool is_selected = (line_element.index == drika_indexes[i]);
+					vec4 text_color = drika_elements[item_no].GetDisplayColor();
+
+					ImGui_PushStyleColor(ImGuiCol_Text, text_color);
+			        if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), is_selected)){
+						@line_element = drika_elements[item_no];
+						line = line_element.index;
+					}
+					ImGui_PopStyleColor();
+			    }
+			    ImGui_EndCombo();
+			}
+			ImGui_PopItemWidth();
+			ImGui_PopStyleColor();
+		}else{
+			ImGui_InputInt("Line", line);
 			ImGui_InputInt("Line 2", line2);
 			ImGui_Checkbox("Add a third line", choice_line3);
 			if(choice_line3 == true){
@@ -116,25 +161,31 @@ class DrikaGoToLine : DrikaElement{
 	}
 
 	bool Trigger(){
-		array<int> line_list = {line};
-		if (choice_line2 == true) {line_list.insertLast(line2);}
-		if (choice_line3 == true) {line_list.insertLast(line3);}
-		if (choice_line4 == true) {line_list.insertLast(line4);}
-		if (choice_line5 == true) {line_list.insertLast(line5);}
-		if (choice_line6 == true) {line_list.insertLast(line6);}
-		if (choice_line7 == true) {line_list.insertLast(line7);}
-		if (choice_line8 == true) {line_list.insertLast(line8);}
-		if (choice_line9 == true) {line_list.insertLast(line9);}
-		if (choice_line10 == true) {line_list.insertLast(line10);}
-		int random_value = line_list[rand() % line_list.length()];
-
-		if(random_value < int(drika_elements.size())){
-			current_line = random_value;
-			display_index = drika_indexes[random_value];
+		if(!choice_line2){
+			current_line = line_element.index;
+			display_index = drika_indexes[line_element.index];
 			return false;
 		}else{
-			Log(info, "The GoToLine isn't valid " + random_value);
-			return false;
+			array<int> line_list = {line};
+			if (choice_line2 == true) {line_list.insertLast(line2);}
+			if (choice_line3 == true) {line_list.insertLast(line3);}
+			if (choice_line4 == true) {line_list.insertLast(line4);}
+			if (choice_line5 == true) {line_list.insertLast(line5);}
+			if (choice_line6 == true) {line_list.insertLast(line6);}
+			if (choice_line7 == true) {line_list.insertLast(line7);}
+			if (choice_line8 == true) {line_list.insertLast(line8);}
+			if (choice_line9 == true) {line_list.insertLast(line9);}
+			if (choice_line10 == true) {line_list.insertLast(line10);}
+			int random_value = line_list[rand() % line_list.length()];
+
+			if(random_value < int(drika_elements.size())){
+				current_line = random_value;
+				display_index = drika_indexes[random_value];
+				return false;
+			}else{
+				Log(info, "The GoToLine isn't valid " + random_value);
+				return false;
+			}
 		}
 	}
 }
