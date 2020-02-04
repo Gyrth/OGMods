@@ -82,6 +82,11 @@ class DrikaDialogue : DrikaElement{
 	int choice_4_go_to_line;
 	int choice_5_go_to_line;
 	bool choice_ui_added = false;
+	DrikaElement@ choice_1_element;
+	DrikaElement@ choice_2_element;
+	DrikaElement@ choice_3_element;
+	DrikaElement@ choice_4_element;
+	DrikaElement@ choice_5_element;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -168,6 +173,11 @@ class DrikaDialogue : DrikaElement{
 
 	void PostInit(){
 		UpdateActorName();
+		@choice_1_element = drika_elements[drika_indexes[choice_1_go_to_line]];
+		@choice_2_element = drika_elements[drika_indexes[choice_2_go_to_line]];
+		@choice_3_element = drika_elements[drika_indexes[choice_3_go_to_line]];
+		@choice_4_element = drika_elements[drika_indexes[choice_4_go_to_line]];
+		@choice_5_element = drika_elements[drika_indexes[choice_5_go_to_line]];
 	}
 
 	JSONValue GetSaveData(){
@@ -252,23 +262,33 @@ class DrikaDialogue : DrikaElement{
 			data["nr_choices"] = JSONValue(nr_choices);
 			if(nr_choices >= 1){
 				data["choice_1"] = JSONValue(choice_1);
-				data["choice_1_go_to_line"] = JSONValue(choice_1_go_to_line);
+				if(@choice_1_element != null){
+					data["choice_1_go_to_line"] = JSONValue(choice_1_element.index);
+				}
 			}
 			if(nr_choices >= 2){
 				data["choice_2"] = JSONValue(choice_2);
-				data["choice_2_go_to_line"] = JSONValue(choice_2_go_to_line);
+				if(@choice_2_element != null){
+					data["choice_2_go_to_line"] = JSONValue(choice_2_element.index);
+				}
 			}
 			if(nr_choices >= 3){
 				data["choice_3"] = JSONValue(choice_3);
-				data["choice_3_go_to_line"] = JSONValue(choice_3_go_to_line);
+				if(@choice_3_element != null){
+					data["choice_3_go_to_line"] = JSONValue(choice_3_element.index);
+				}
 			}
 			if(nr_choices >= 4){
 				data["choice_4"] = JSONValue(choice_4);
-				data["choice_4_go_to_line"] = JSONValue(choice_4_go_to_line);
+				if(@choice_4_element != null){
+					data["choice_4_go_to_line"] = JSONValue(choice_4_element.index);
+				}
 			}
 			if(nr_choices >= 5){
 				data["choice_5"] = JSONValue(choice_5);
-				data["choice_5_go_to_line"] = JSONValue(choice_5_go_to_line);
+				if(@choice_5_element != null){
+					data["choice_5_go_to_line"] = JSONValue(choice_5_element.index);
+				}
 			}
 		}
 
@@ -321,7 +341,21 @@ class DrikaDialogue : DrikaElement{
 			display_string += actor_name;
 			display_string += dialogue_control;
 		}else if(dialogue_function == choice){
-
+			if(@choice_1_element == null || choice_1_element.deleted){
+				@choice_1_element = drika_elements[0];
+			}
+			if(@choice_2_element == null || choice_2_element.deleted){
+				@choice_2_element = drika_elements[0];
+			}
+			if(@choice_3_element == null || choice_3_element.deleted){
+				@choice_3_element = drika_elements[0];
+			}
+			if(@choice_4_element == null || choice_4_element.deleted){
+				@choice_4_element = drika_elements[0];
+			}
+			if(@choice_5_element == null || choice_5_element.deleted){
+				@choice_5_element = drika_elements[0];
+			}
 		}
 
 		return display_string;
@@ -729,43 +763,69 @@ class DrikaDialogue : DrikaElement{
 			ImGui_SameLine();
 			ImGui_Checkbox("", dialogue_control);
 		}else if(dialogue_function == choice){
-			ImGui_SliderInt("Number of choices : ", nr_choices, 1, 5, "%.0f");
+			ImGui_PushItemWidth(-1.0);
+
+			ImGui_SliderInt("Number of choices", nr_choices, 1, 5, "%.0f");
 			if(nr_choices >= 1){
+				ImGui_Separator();
+				ImGui_Text("Choice 1 : ");
+				ImGui_SameLine();
 				ImGui_InputText("##text1", choice_1, 64);
-				ImGui_SameLine();
-				ImGui_Text("Go to Line : ");
-				ImGui_SameLine();
-				ImGui_InputInt("##go_to_line1", choice_1_go_to_line);
+				AddGoToLineCombo(choice_1_element);
 			}
 			if(nr_choices >= 2){
+				ImGui_Separator();
+				ImGui_Text("Choice 2 : ");
+				ImGui_SameLine();
 				ImGui_InputText("##text2", choice_2, 64);
-				ImGui_SameLine();
-				ImGui_Text("Go to Line : ");
-				ImGui_SameLine();
-				ImGui_InputInt("##go_to_line2", choice_2_go_to_line);
+				AddGoToLineCombo(choice_2_element);
 			}
 			if(nr_choices >= 3){
+				ImGui_Separator();
+				ImGui_Text("Choice 3 : ");
+				ImGui_SameLine();
 				ImGui_InputText("##text3", choice_3, 64);
-				ImGui_SameLine();
-				ImGui_Text("Go to Line : ");
-				ImGui_SameLine();
-				ImGui_InputInt("##go_to_line3", choice_3_go_to_line);
+				AddGoToLineCombo(choice_3_element);
 			}
 			if(nr_choices >= 4){
+				ImGui_Separator();
+				ImGui_Text("Choice 4 : ");
+				ImGui_SameLine();
 				ImGui_InputText("##text4", choice_4, 64);
-				ImGui_SameLine();
-				ImGui_Text("Go to Line : ");
-				ImGui_SameLine();
-				ImGui_InputInt("##go_to_line4", choice_4_go_to_line);
+				AddGoToLineCombo(choice_4_element);
 			}
 			if(nr_choices >= 5){
+				ImGui_Separator();
+				ImGui_Text("Choice 5 : ");
+				ImGui_SameLine();
 				ImGui_InputText("##text5", choice_5, 64);
-				ImGui_SameLine();
-				ImGui_Text("Go to Line : ");
-				ImGui_SameLine();
-				ImGui_InputInt("##go_to_line5", choice_5_go_to_line);
+				AddGoToLineCombo(choice_5_element);
 			}
+
+			ImGui_PopItemWidth();
 		}
+	}
+
+	void AddGoToLineCombo(DrikaElement@ &inout target_element){
+		string preview_value = target_element.line_number + target_element.GetDisplayString();
+		ImGui_Text("Go to line : ");
+		ImGui_SameLine();
+		ImGui_PushStyleColor(ImGuiCol_Text, target_element.GetDisplayColor());
+		if(ImGui_BeginCombo("###line" + target_element.index, preview_value)){
+			for(uint i = 0; i < drika_indexes.size(); i++){
+				int item_no = drika_indexes[i];
+				bool is_selected = (target_element.index == drika_indexes[i]);
+				vec4 text_color = drika_elements[item_no].GetDisplayColor();
+
+				ImGui_PushStyleColor(ImGuiCol_Text, text_color);
+				if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), is_selected)){
+					@target_element = drika_elements[item_no];
+				}
+				ImGui_PopStyleColor();
+			}
+			ImGui_EndCombo();
+		}
+		ImGui_PopStyleColor();
 	}
 
 	void AddCategory(string category, array<string> items){
@@ -959,15 +1019,15 @@ class DrikaDialogue : DrikaElement{
 			}else if(GetInputPressed(0, "jump") || GetInputPressed(0, "skip_dialogue")){
 				return GoToCurrentChoice();
 			}else if(GetInputPressed(0, "1") && nr_choices >= 1){
-				return PickChoice(choice_1_go_to_line);
+				return PickChoice(choice_1_element.index);
 			}else if(GetInputPressed(0, "2") && nr_choices >= 2){
-				return PickChoice(choice_2_go_to_line);
+				return PickChoice(choice_2_element.index);
 			}else if(GetInputPressed(0, "3") && nr_choices >= 3){
-				return PickChoice(choice_3_go_to_line);
+				return PickChoice(choice_3_element.index);
 			}else if(GetInputPressed(0, "4") && nr_choices >= 4){
-				return PickChoice(choice_4_go_to_line);
+				return PickChoice(choice_4_element.index);
 			}else if(GetInputPressed(0, "5") && nr_choices >= 5){
-				return PickChoice(choice_5_go_to_line);
+				return PickChoice(choice_5_element.index);
 			}
 		}
 
@@ -981,15 +1041,15 @@ class DrikaDialogue : DrikaElement{
 	bool GoToCurrentChoice(){
 		int new_target_line;
 		if(current_choice + 1 == 1){
-			new_target_line = choice_1_go_to_line;
+			new_target_line = choice_1_element.index;
 		}else if(current_choice + 1 == 2){
-			new_target_line = choice_2_go_to_line;
+			new_target_line = choice_2_element.index;
 		}else if(current_choice + 1 == 3){
-			new_target_line = choice_3_go_to_line;
+			new_target_line = choice_3_element.index;
 		}else if(current_choice + 1 == 4){
-			new_target_line = choice_4_go_to_line;
+			new_target_line = choice_4_element.index;
 		}else if(current_choice + 1 == 5){
-			new_target_line = choice_5_go_to_line;
+			new_target_line = choice_5_element.index;
 		}
 
 		return PickChoice(new_target_line);
