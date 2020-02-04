@@ -50,7 +50,7 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(ObjectExists(placeholder_id)){
+		if(@placeholder != null && ObjectExists(placeholder_id)){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			DrawGizmo(placeholder);
 		}else{
