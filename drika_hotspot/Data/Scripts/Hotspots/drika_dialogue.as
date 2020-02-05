@@ -667,6 +667,7 @@ class DrikaDialogue : DrikaElement{
 		if(dialogue_function == say){
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				say_text = ImGui_GetTextBuf();
+				Reset();
 			}
 		}else if(dialogue_function == actor_settings){
 			if(ImGui_ColorEdit4("Dialogue Color", dialogue_color)){
