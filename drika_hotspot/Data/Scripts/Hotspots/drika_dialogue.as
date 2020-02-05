@@ -771,47 +771,47 @@ class DrikaDialogue : DrikaElement{
 				ImGui_Text("Choice 1 : ");
 				ImGui_SameLine();
 				ImGui_InputText("##text1", choice_1, 64);
-				AddGoToLineCombo(choice_1_element);
+				AddGoToLineCombo(choice_1_element, "choice_1");
 			}
 			if(nr_choices >= 2){
 				ImGui_Separator();
 				ImGui_Text("Choice 2 : ");
 				ImGui_SameLine();
 				ImGui_InputText("##text2", choice_2, 64);
-				AddGoToLineCombo(choice_2_element);
+				AddGoToLineCombo(choice_2_element, "choice_2");
 			}
 			if(nr_choices >= 3){
 				ImGui_Separator();
 				ImGui_Text("Choice 3 : ");
 				ImGui_SameLine();
 				ImGui_InputText("##text3", choice_3, 64);
-				AddGoToLineCombo(choice_3_element);
+				AddGoToLineCombo(choice_3_element, "choice_3");
 			}
 			if(nr_choices >= 4){
 				ImGui_Separator();
 				ImGui_Text("Choice 4 : ");
 				ImGui_SameLine();
 				ImGui_InputText("##text4", choice_4, 64);
-				AddGoToLineCombo(choice_4_element);
+				AddGoToLineCombo(choice_4_element, "choice_4");
 			}
 			if(nr_choices >= 5){
 				ImGui_Separator();
 				ImGui_Text("Choice 5 : ");
 				ImGui_SameLine();
 				ImGui_InputText("##text5", choice_5, 64);
-				AddGoToLineCombo(choice_5_element);
+				AddGoToLineCombo(choice_5_element, "choice_5");
 			}
 
 			ImGui_PopItemWidth();
 		}
 	}
 
-	void AddGoToLineCombo(DrikaElement@ &inout target_element){
+	void AddGoToLineCombo(DrikaElement@ &inout target_element, string combo_name){
 		string preview_value = target_element.line_number + target_element.GetDisplayString();
 		ImGui_Text("Go to line : ");
 		ImGui_SameLine();
 		ImGui_PushStyleColor(ImGuiCol_Text, target_element.GetDisplayColor());
-		if(ImGui_BeginCombo("###line" + target_element.index, preview_value)){
+		if(ImGui_BeginCombo("###line" + combo_name, preview_value)){
 			for(uint i = 0; i < drika_indexes.size(); i++){
 				int item_no = drika_indexes[i];
 				bool is_selected = (target_element.index == drika_indexes[i]);
