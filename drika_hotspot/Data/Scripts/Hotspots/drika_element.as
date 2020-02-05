@@ -657,13 +657,15 @@ class DrikaElement{
 		}else if (identifier_type == name){
 			return object_name;
 		}else if(identifier_type == character){
-			if(ObjectExists(object_id)){
-				Object@ char_obj = ReadObjectFromID(object_id);
+			if(object_id != -1){
+				if(ObjectExists(object_id)){
+					Object@ char_obj = ReadObjectFromID(object_id);
 
-				if(char_obj.GetName() != ""){
-					return char_obj.GetName();
-				}else{
-					return char_obj.GetID() + "";
+					if(char_obj.GetName() != ""){
+						return char_obj.GetName();
+					}else{
+						return char_obj.GetID() + "";
+					}
 				}
 			}
 		}
