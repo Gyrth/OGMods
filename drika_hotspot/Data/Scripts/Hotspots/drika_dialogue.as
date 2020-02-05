@@ -971,7 +971,7 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == choice){
 			if(ShowChoiceDialogue(false)){
 				Reset();
-				return true;
+				return false;
 			}
 			return false;
 		}
