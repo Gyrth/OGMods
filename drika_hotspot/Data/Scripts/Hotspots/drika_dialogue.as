@@ -366,7 +366,11 @@ class DrikaDialogue : DrikaElement{
 		return display_string;
 	}
 
-	void UpdateActorName(){;
+	void UpdateActorName(){
+		//Temporary converting identifier for backwards compatibility. Can be removed later on.
+		if(identifier_type == id){
+			identifier_type = character;
+		}
 		actor_name = GetTargetDisplayText() + " ";
 	}
 
