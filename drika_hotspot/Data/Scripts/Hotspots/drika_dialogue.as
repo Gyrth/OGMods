@@ -167,6 +167,11 @@ class DrikaDialogue : DrikaElement{
 			LoadIdentifier(params);
 		}
 
+		show_character_option = true;
+		show_team_option = true;
+		show_name_option = true;
+		show_reference_option = true;
+
 		drika_element_type = drika_dialogue;
 		has_settings = true;
 	}
@@ -361,21 +366,8 @@ class DrikaDialogue : DrikaElement{
 		return display_string;
 	}
 
-	void UpdateActorName(){
-		array<Object@> targets = GetTargetObjects();
-		actor_name = "";
-
-		if(identifier_type == id && targets.size() != 0){
-			for(uint i = 0; i < targets.size(); i++){
-				if(targets[i].GetName() != ""){
-					actor_name += targets[i].GetName() + " ";
-				}else{
-					actor_name += targets[i].GetID() + " ";
-				}
-			}
-		}else{
-			actor_name = GetTargetDisplayText() + " ";
-		}
+	void UpdateActorName(){;
+		actor_name = GetTargetDisplayText() + " ";
 	}
 
 	void Delete(){
@@ -385,6 +377,7 @@ class DrikaDialogue : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 		if(dialogue_function == say){
 			ImGui_SetTextBuf(say_text);
 		}else if(dialogue_function == set_actor_animation){

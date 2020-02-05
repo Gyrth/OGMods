@@ -117,7 +117,8 @@ array<vec4> display_colors = {	vec4(255),
 enum identifier_types {	id = 0,
 						reference = 1,
 						team = 2,
-						name = 3
+						name = 3,
+						character = 4
 					};
 
 enum param_types { 	string_param = 0,
@@ -161,6 +162,7 @@ class DrikaElement{
 	bool show_reference_option = false;
 	bool show_team_option = false;
 	bool show_name_option = false;
+	bool show_character_option = false;
 	string character_team = "team_drika";
 	string new_character_team = "team_drika";
 	string object_name = "drika_object";
@@ -168,6 +170,9 @@ class DrikaElement{
 	float PI = 3.14159265359f;
 	string line_number;
 	bool deleted = false;
+	array<string> available_character_names;
+	array<int> available_character_ids;
+	int current_character;
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}
@@ -368,6 +373,10 @@ class DrikaElement{
 				identifier_type = identifier_types(name);
 				new_object_name = params["identifier"].asString();
 				object_name = new_object_name;
+			}else if(params["identifier_type"].asInt() == character){
+				identifier_type = identifier_types(character);
+				new_object_id = params["identifier"].asInt();
+				object_id = new_object_id;
 			}
 		}else{
 			//By default the id is used as identifier with -1 as the target id.
@@ -385,6 +394,8 @@ class DrikaElement{
 			data["identifier"] = JSONValue(character_team);
 		}else if(identifier_type == name){
 			data["identifier"] = JSONValue(object_name);
+		}else if(identifier_type == character){
+			data["identifier"] = JSONValue(object_id);
 		}
 	}
 
@@ -413,8 +424,39 @@ class DrikaElement{
 		}
 	}
 
+	void CheckCharactersAvailable(){
+		available_character_ids.resize(0);
+		available_character_names.resize(0);
+		current_character = 0;
+
+		if(identifier_type == id && show_character_option){
+			identifier_type = character;
+		}
+
+		for(int i = 0; i < GetNumCharacters(); i++){
+			MovementObject@ char = ReadCharacter(i);
+			Object@ char_obj = ReadObjectFromID(char.GetID());
+
+			if(char_obj.GetName() == ""){
+				available_character_names.insertLast("Character id : " + char.GetID());
+			}else{
+				available_character_names.insertLast(char_obj.GetName());
+			}
+
+			available_character_ids.insertLast(char.GetID());
+			if(object_id == char.GetID()){
+				current_character = available_character_ids.size() - 1;
+			}
+		}
+	}
+
 	void DrawSelectTargetUI(){
-		array<string> identifier_choices = {"ID"};
+		array<string> identifier_choices = {};
+		if(show_character_option){
+			identifier_choices.insertLast("Character");
+		}else{
+			identifier_choices.insertLast("ID");
+		}
 		if(show_reference_option){
 			identifier_choices.insertLast("Reference");
 		}
@@ -430,6 +472,7 @@ class DrikaElement{
 				if(	identifier_type == id && identifier_choices[i] == "ID"||
 				 	identifier_type == team && identifier_choices[i] == "Team"||
 					identifier_type == reference && identifier_choices[i] == "Reference"||
+					identifier_type == character && identifier_choices[i] == "Character"||
 					identifier_type == name && identifier_choices[i] == "Name"){
 					current_identifier_type = i;
 					break;
@@ -446,8 +489,11 @@ class DrikaElement{
 				identifier_type = reference;
 			}else if(identifier_choices[current_identifier_type] == "Name"){
 				identifier_type = name;
+			}else if(identifier_choices[current_identifier_type] == "Character"){
+				identifier_type = character;
 			}
 		}
+
 		if(identifier_type == id){
 			if(ImGui_InputInt("Object ID", new_object_id)){
 				PreTargetChanged();
@@ -471,6 +517,12 @@ class DrikaElement{
 			if(ImGui_InputText("Name", new_object_name, 64)){
 				PreTargetChanged();
 				object_name = new_object_name;
+				TargetChanged();
+			}
+		}else if(identifier_type == character){
+			if(ImGui_Combo("Character", current_character, available_character_names, available_character_names.size())){
+				PreTargetChanged();
+				object_id = available_character_ids[current_character];
 				TargetChanged();
 			}
 		}
@@ -526,6 +578,15 @@ class DrikaElement{
 					target_objects.insertLast(obj);
 				}
 			}
+		}else if(identifier_type == character){
+			if(object_id == -1){
+				//Do nothing.
+			}else if(!ObjectExists(object_id)){
+				Log(warning, "The object with id " + object_id + " doesn't exist anymore, so resetting to -1.");
+				object_id = -1;
+			}else{
+				target_objects.insertLast(ReadObjectFromID(object_id));
+			}
 		}
 		return target_objects;
 	}
@@ -573,6 +634,15 @@ class DrikaElement{
 					target_movement_objects.insertLast(mo);
 				}
 			}
+		}else if(identifier_type == character){
+			if(object_id == -1){
+				//Do nothing.
+			}else if(!MovementObjectExists(object_id)){
+				Log(warning, "The MovementObject with id " + object_id + " doesn't exist or is not a MovementObject, so resetting to -1.");
+				object_id = -1;
+			}else{
+				target_movement_objects.insertLast(ReadCharacterID(object_id));
+			}
 		}
 		return target_movement_objects;
 	}
@@ -586,6 +656,16 @@ class DrikaElement{
 			return character_team;
 		}else if (identifier_type == name){
 			return object_name;
+		}else if(identifier_type == character){
+			if(ObjectExists(object_id)){
+				Object@ char_obj = ReadObjectFromID(object_id);
+
+				if(char_obj.GetName() != ""){
+					return char_obj.GetName();
+				}else{
+					return char_obj.GetID() + "";
+				}
+			}
 		}
 		return "NA";
 	}
