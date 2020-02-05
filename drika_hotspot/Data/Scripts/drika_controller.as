@@ -946,6 +946,7 @@ void ReceiveMessage(string msg){
 		show_dialogue = false;
 		fade_to_black = false;
 		showing_choice = false;
+		has_camera_control = false;
 		ui_hotspot_id = -1;
 		imGUI.clear();
 	}else if(token == "drika_dialogue_fade_out_in"){

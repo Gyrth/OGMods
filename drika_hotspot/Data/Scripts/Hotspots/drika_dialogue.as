@@ -864,7 +864,6 @@ class DrikaDialogue : DrikaElement{
 
 	void Reset(){
 		dialogue_done = false;
-		triggered = false;
 		if(dialogue_function == say){
 			if(say_started){
 				level.SendMessage("drika_dialogue_hide");
@@ -892,7 +891,12 @@ class DrikaDialogue : DrikaElement{
 				level.SendMessage("drika_dialogue_hide");
 			}
 			choice_ui_added = false;
+		}else if(dialogue_function == start){
+			if(triggered){
+				level.SendMessage("drika_dialogue_end");
+			}
 		}
+		triggered = false;
 	}
 
 	void Update(){
@@ -1063,6 +1067,7 @@ class DrikaDialogue : DrikaElement{
 	void StartDialogue(){
 		level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
 		wait_for_fade = true;
+		triggered = true;
 	}
 
 	bool EndDialogue(){
