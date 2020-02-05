@@ -1070,14 +1070,18 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	bool EndDialogue(){
-		if(!triggered){
-			level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
-			wait_for_fade = true;
-			triggered = true;
-			return false;
+		if(level.DialogueCameraControl()){
+			if(!triggered){
+				level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+				wait_for_fade = true;
+				triggered = true;
+				return false;
+			}else{
+				level.SendMessage("drika_dialogue_end");
+				triggered = false;
+				return true;
+			}
 		}else{
-			level.SendMessage("drika_dialogue_end");
-			triggered = false;
 			return true;
 		}
 	}
