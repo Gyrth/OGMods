@@ -4,9 +4,11 @@ class DrikaSetEnabled : DrikaElement{
 
 	DrikaSetEnabled(JSONValue params = JSONValue()){
 		enabled = GetJSONBool(params, "enabled", true);
-		LoadIdentifier(params);
+
 		show_team_option = true;
 		show_name_option = true;
+		show_character_option = true;
+		LoadIdentifier(params);
 
 		drika_element_type = drika_set_enabled;
 		connection_types = {_env_object, _hotspot_object};
@@ -30,6 +32,7 @@ class DrikaSetEnabled : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void DrawSettings(){

@@ -11,6 +11,10 @@ class DrikaSetBoneInflate : DrikaElement{
 		inflate_value = GetJSONFloat(params, "inflate_value", 0.0);
 		bone_index = GetJSONInt(params, "bone_index", 11);
 		current_bone_index = bone_index;
+
+		show_team_option = true;
+		show_name_option = true;
+		show_character_option = true;
 		LoadIdentifier(params);
 
 		connection_types = {_movement_object};
@@ -41,6 +45,7 @@ class DrikaSetBoneInflate : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void StartEdit(){

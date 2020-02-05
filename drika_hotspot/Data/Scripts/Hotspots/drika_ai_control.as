@@ -33,12 +33,14 @@ class DrikaAIControl : DrikaElement{
 		ai_goal = ai_goals(GetJSONInt(params, "ai_goal", _investigate_slow));
 		target_id = GetJSONInt(params, "target_id", -1);
 		current_ai_goal = ai_goal;
-		show_team_option = true;
-		show_name_option = true;
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_ai_control;
 		has_settings = true;
+
+		show_team_option = true;
+		show_name_option = true;
+		show_character_option = true;
 		LoadIdentifier(params);
 	}
 
@@ -84,6 +86,7 @@ class DrikaAIControl : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void DrawSettings(){

@@ -124,8 +124,11 @@ class DrikaCharacterControl : DrikaElement{
 		character_option = character_options(GetJSONInt(params, "character_option", 0));
 		current_type = character_option;
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
+
 		show_team_option = true;
 		show_name_option = true;
+		show_character_option = true;
+
 		recovery_time = GetJSONFloat(params, "recovery_time", 1.0);
 		roll_recovery_time = GetJSONFloat(params, "roll_recovery_time", 0.2);
 		damage_amount = GetJSONFloat(params, "damage_amount", 1.0);
@@ -265,6 +268,7 @@ class DrikaCharacterControl : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void DrawSettings(){

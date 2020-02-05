@@ -21,7 +21,11 @@ class DrikaSetColor : DrikaElement{
 		current_palette_slot = palette_slot;
 		after_color = GetJSONVec3(params, "after_color", vec3(1));
 
+		show_team_option = true;
+		show_name_option = true;
+		show_character_option = true;
 		LoadIdentifier(params);
+
 		connection_types = {_movement_object, _env_object, _item_object};
 		drika_element_type = drika_set_color;
 		has_settings = true;
@@ -125,6 +129,7 @@ class DrikaSetColor : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void DrawSettings(){

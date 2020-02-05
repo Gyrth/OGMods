@@ -17,9 +17,10 @@ class DrikaCheckCharacterState : DrikaElement{
 		equals = GetJSONBool(params, "equals", true);
 		known_character_id = GetJSONInt(params, "known_character_id", 0);
 
-		LoadIdentifier(params);
 		show_team_option = true;
 		show_name_option = true;
+		show_character_option = true;
+		LoadIdentifier(params);
 
 		drika_element_type = drika_check_character_state;
 		connection_types = {_movement_object};
@@ -29,6 +30,7 @@ class DrikaCheckCharacterState : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	JSONValue GetSaveData(){

@@ -102,7 +102,11 @@ class DrikaAnimation : DrikaElement{
 		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
 		parallel_operation = GetJSONBool(params, "parallel_operation", false);
 
+		show_team_option = true;
+		show_name_option = true;
+		show_character_option = true;
 		LoadIdentifier(params);
+
 		has_settings = true;
 	}
 
@@ -192,6 +196,7 @@ class DrikaAnimation : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 		WriteAnimationKeyParams();
 	}
 

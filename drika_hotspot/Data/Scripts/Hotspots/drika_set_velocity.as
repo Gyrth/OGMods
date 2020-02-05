@@ -5,9 +5,12 @@ class DrikaSetVelocity : DrikaElement{
 	DrikaSetVelocity(JSONValue params = JSONValue()){
 		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
 		velocity_magnitude = GetJSONFloat(params, "velocity_magnitude", 5);
-		LoadIdentifier(params);
+
 		show_team_option = true;
 		show_name_option = true;
+		show_character_option = true;
+		LoadIdentifier(params);
+
 		add_velocity = GetJSONBool(params, "add_velocity", true);
 
 		placeholder_name = "Set Velocity Helper";
@@ -39,6 +42,7 @@ class DrikaSetVelocity : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void DrawSettings(){

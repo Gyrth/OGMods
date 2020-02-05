@@ -162,11 +162,6 @@ class DrikaDialogue : DrikaElement{
 		choice_4_go_to_line = GetJSONInt(params, "choice_4_go_to_line", 0);
 		choice_5_go_to_line = GetJSONInt(params, "choice_5_go_to_line", 0);
 
-		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
-			connection_types = {_movement_object};
-			LoadIdentifier(params);
-		}
-
 		show_character_option = true;
 		show_team_option = true;
 		show_name_option = true;
@@ -174,6 +169,11 @@ class DrikaDialogue : DrikaElement{
 
 		drika_element_type = drika_dialogue;
 		has_settings = true;
+
+		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
+			connection_types = {_movement_object};
+			LoadIdentifier(params);
+		}
 	}
 
 	void PostInit(){
@@ -367,10 +367,6 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void UpdateActorName(){
-		//Temporary converting identifier for backwards compatibility. Can be removed later on.
-		if(identifier_type == id){
-			identifier_type = character;
-		}
 		actor_name = GetTargetDisplayText() + " ";
 	}
 

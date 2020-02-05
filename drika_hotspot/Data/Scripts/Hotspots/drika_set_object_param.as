@@ -11,12 +11,15 @@ class DrikaSetObjectParam : DrikaElement{
 	array<string> param_type_choices = {"String", "Integer", "Float"};
 
 	DrikaSetObjectParam(JSONValue params = JSONValue()){
-		LoadIdentifier(params);
 		param_name = GetJSONString(params, "param_name", "drika_param");
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
 		current_type = param_type;
+
 		show_team_option = true;
 		show_name_option = true;
+		show_character_option = true;
+		LoadIdentifier(params);
+
 		connection_types = {_env_object, _movement_object};
 		drika_element_type = drika_set_object_param;
 		has_settings = true;
@@ -85,6 +88,7 @@ class DrikaSetObjectParam : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void DrawSettings(){

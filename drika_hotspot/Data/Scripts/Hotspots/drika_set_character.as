@@ -6,9 +6,11 @@ class DrikaSetCharacter : DrikaElement{
 	DrikaSetCharacter(JSONValue params = JSONValue()){
 		character_path = GetJSONString(params, "character_path", "Data/Characters/guard.xml");
 		cache_skeleton_info = GetJSONBool(params, "cache_skeleton_info", true);
-		LoadIdentifier(params);
+
 		show_team_option = true;
 		show_name_option = true;
+		show_character_option = true;
+		LoadIdentifier(params);
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_character;
@@ -38,6 +40,7 @@ class DrikaSetCharacter : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void DrawSettings(){

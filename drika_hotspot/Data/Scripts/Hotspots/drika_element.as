@@ -429,10 +429,6 @@ class DrikaElement{
 		available_character_names.resize(0);
 		current_character = 0;
 
-		if(identifier_type == id && show_character_option){
-			identifier_type = character;
-		}
-
 		for(int i = 0; i < GetNumCharacters(); i++){
 			MovementObject@ char = ReadCharacter(i);
 			Object@ char_obj = ReadObjectFromID(char.GetID());
@@ -451,11 +447,9 @@ class DrikaElement{
 	}
 
 	void DrawSelectTargetUI(){
-		array<string> identifier_choices = {};
+		array<string> identifier_choices = {"ID"};
 		if(show_character_option){
 			identifier_choices.insertLast("Character");
-		}else{
-			identifier_choices.insertLast("ID");
 		}
 		if(show_reference_option){
 			identifier_choices.insertLast("Reference");
@@ -491,6 +485,15 @@ class DrikaElement{
 				identifier_type = name;
 			}else if(identifier_choices[current_identifier_type] == "Character"){
 				identifier_type = character;
+			}
+
+			//The ID and Character method share a variable. So that needs to be synced when switching identifier method.
+			new_object_id = object_id;
+			for(uint i = 0; i < available_character_ids.size(); i++){
+				if(available_character_ids[i] == object_id){
+					current_character = i;
+					break;
+				}
 			}
 		}
 

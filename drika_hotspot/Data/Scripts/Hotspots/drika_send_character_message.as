@@ -16,6 +16,10 @@ class DrikaSendCharacterMessage : DrikaElement{
 		message = GetJSONString(params, "message", "restore_health");
 		character_message_type = character_message_types(GetJSONInt(params, "character_message_type", character_message));
 		current_message_type = character_message_type;
+
+		show_team_option = true;
+		show_name_option = true;
+		show_character_option = true;
 		LoadIdentifier(params);
 
 		connection_types = {_movement_object};
@@ -38,6 +42,7 @@ class DrikaSendCharacterMessage : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void DrawSettings(){

@@ -15,9 +15,11 @@ class DrikaSetMorphTarget : DrikaElement{
 		weight = GetJSONFloat(params, "weight", 1.0);
 		smoothing_duration = GetJSONFloat(params, "smoothing_duration", 0.0);
 		two_way_morph = GetJSONBool(params, "two_way_morph", false);
-		LoadIdentifier(params);
+
 		show_team_option = true;
 		show_name_option = true;
+		show_character_option = true;
+		LoadIdentifier(params);
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_morph_target;
@@ -48,6 +50,7 @@ class DrikaSetMorphTarget : DrikaElement{
 			GetAvailableMorphs();
 		}
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 		SetMorphTarget(false);
 	}
 

@@ -12,7 +12,11 @@ class DrikaTransformObject : DrikaElement{
 		placeholder_name = "Transform Object Helper";
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object};
 
+		show_team_option = true;
+		show_name_option = true;
+		show_character_option = true;
 		LoadIdentifier(params);
+
 		has_settings = true;
 	}
 
@@ -59,6 +63,7 @@ class DrikaTransformObject : DrikaElement{
 
 	void StartSettings(){
 		CheckReferenceAvailable();
+		CheckCharactersAvailable();
 	}
 
 	void DrawSettings(){
