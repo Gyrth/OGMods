@@ -868,6 +868,7 @@ class DrikaDialogue : DrikaElement{
 
 	void Reset(){
 		dialogue_done = false;
+		triggered = false;
 		if(dialogue_function == say){
 			if(say_started){
 				level.SendMessage("drika_dialogue_hide");
@@ -884,7 +885,6 @@ class DrikaDialogue : DrikaElement{
 			if(triggered){
 				ResetFadeToBlack();
 			}
-			triggered = false;
 		}else if(dialogue_function == set_actor_dialogue_control){
 			array<MovementObject@> targets = GetTargetMovementObjects();
 
@@ -896,7 +896,6 @@ class DrikaDialogue : DrikaElement{
 				level.SendMessage("drika_dialogue_hide");
 			}
 			choice_ui_added = false;
-			triggered = false;
 		}
 	}
 
