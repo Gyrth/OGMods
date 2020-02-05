@@ -956,7 +956,6 @@ void ReceiveMessage(string msg){
 		fading = true;
 		fade_direction = 1.0;
 	}else if(token == "drika_dialogue_fade_to_black"){
-		Log(warning, "drika_dialogue_fade_to_black");
 		token_iter.FindNextToken(msg);
 		target_fade_to_black = atof(token_iter.GetToken(msg));
 		starting_fade_amount = blackout_amount;

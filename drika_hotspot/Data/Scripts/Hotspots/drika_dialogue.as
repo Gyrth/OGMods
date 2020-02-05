@@ -1077,11 +1077,11 @@ class DrikaDialogue : DrikaElement{
 				triggered = true;
 				return false;
 			}else{
-				level.SendMessage("drika_dialogue_end");
 				triggered = false;
 				return true;
 			}
 		}else{
+			level.SendMessage("drika_dialogue_end");
 			return true;
 		}
 	}
