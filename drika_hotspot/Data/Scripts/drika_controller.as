@@ -562,25 +562,26 @@ void DefaultNameTag(IMContainer@ parent){
 	//Remove any nametag that's already there.
 	parent.removeElement("name_container");
 
-	IMContainer name_container(0.0, 100.0);
+	IMContainer name_container(0.0, 125.0);
 	IMDivider name_divider("name_divider", DOHorizontal);
 	name_divider.setZOrdering(2);
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
 	IMText name(current_actor_settings.name, name_font);
-	name_divider.appendSpacer(30.0);
+	name_divider.appendSpacer(50.0);
 	name_divider.append(name);
-	name_divider.appendSpacer(30.0);
+	name_divider.appendSpacer(50.0);
 	name.setColor(current_actor_settings.color);
 
 	IMImage name_background("Textures/ui/menus/main/brushStroke.png");
 	name_background.setClip(false);
-
-	name_background.setSize(vec2(CalculateTextWidth(name.getText(), name_font.size), 100.0));
-	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
-
 	parent.addFloatingElement(name_container, "name_container", vec2(0, 0), 3);
+
+	imGUI.update();
+	name_background.setSize(name_container.getSize());
+	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
+	name_background.setZOrdering(1);
 }
 
 void SimpleNameTag(IMContainer@ parent){
@@ -598,7 +599,8 @@ void SimpleNameTag(IMContainer@ parent){
 		nametag_divider.append(avatar_image);
 	}
 
-	IMContainer name_container(0.0, 100.0);
+	IMContainer name_container(-1.0, dialogue_font.size);
+	name_container.setAlignment(CACenter, CACenter);
 	IMDivider name_divider("name_divider", DOHorizontal);
 	name_divider.setZOrdering(3);
 	name_divider.setAlignment(CACenter, CACenter);
@@ -606,19 +608,20 @@ void SimpleNameTag(IMContainer@ parent){
 	nametag_divider.append(name_container);
 
 	IMText name(current_actor_settings.name, name_font_arial);
-	name_divider.appendSpacer(30.0);
+	name_divider.appendSpacer(60.0);
 	name_divider.append(name);
-	name_divider.appendSpacer(30.0);
+	name_divider.appendSpacer(60.0);
 	name.setColor(current_actor_settings.color);
 
 	IMImage name_background("Textures/dialogue_bg_nametag_faded.png");
 	name_background.setClip(false);
 	name_background.setAlpha(0.5);
-
-	name_background.setSize(vec2(CalculateTextWidth(name.getText(), name_font_arial.size), 100.0));
-	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
-
 	parent.addFloatingElement(nametag_container, "nametag_container", vec2(100, 0), 3);
+
+	imGUI.update();
+	name_background.setSize(name_container.getSize());
+	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
+	name_background.setZOrdering(1);
 }
 
 void BreathOfTheWildNameTag(IMContainer@ parent){
@@ -677,7 +680,8 @@ void Fallout3NameTag(IMContainer@ parent){
 	//Remove any nametag that's already there.
 	parent.removeElement("name_container");
 
-	IMContainer name_container(0.0, 100.0);
+	IMContainer name_container(parent.getSizeX(), dialogue_font.size);
+	name_container.setAlignment(CACenter, CACenter);
 	IMDivider name_divider("name_divider", DOHorizontal);
 	name_divider.setZOrdering(3);
 	name_divider.setAlignment(CACenter, CACenter);
@@ -694,22 +698,8 @@ void Fallout3NameTag(IMContainer@ parent){
 	name_divider.append(name);
 	name.setColor(current_actor_settings.color);
 
-	float name_width = CalculateTextWidth(name.getText(), dialogue_font.size);
-	parent.addFloatingElement(name_container, "name_container", vec2(2560 / 2.0 - (name_width / 2.0), -(dialogue_font.size + 10.0)), 3);
-}
+	parent.addFloatingElement(name_container, "name_container", vec2(0.0, -dialogue_font.size), 3);
 
-float CalculateTextWidth(string text, int font_size){
-	uint8 text_length = text.length();
-	int lower_case = 0;
-	int upper_case = 0;
-	for(uint i = 0; i < text_length; i++){
-		if(text.substr(i, 1)[0] >= 65 && text.substr(i, 1)[0] <= 90){
-			upper_case += 1;
-		}else{
-			lower_case += 1;
-		}
-	}
-	return (lower_case * font_size * 0.4) + (upper_case * font_size * 1.4);
 }
 
 void PostScriptReload(){
