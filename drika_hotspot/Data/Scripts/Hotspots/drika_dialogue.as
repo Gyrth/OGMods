@@ -174,10 +174,20 @@ class DrikaDialogue : DrikaElement{
 			connection_types = {_movement_object};
 			LoadIdentifier(params);
 		}
+
+		if(duplicating && dialogue_function == choice){
+			GetTargetElement();
+		}
 	}
 
 	void PostInit(){
 		UpdateActorName();
+		if(!duplicating && dialogue_function == choice){
+			GetTargetElement();
+		}
+	}
+
+	void GetTargetElement(){
 		@choice_1_element = drika_elements[drika_indexes[choice_1_go_to_line]];
 		@choice_2_element = drika_elements[drika_indexes[choice_2_go_to_line]];
 		@choice_3_element = drika_elements[drika_indexes[choice_3_go_to_line]];
@@ -346,21 +356,11 @@ class DrikaDialogue : DrikaElement{
 			display_string += actor_name;
 			display_string += dialogue_control;
 		}else if(dialogue_function == choice){
-			if(@choice_1_element == null || choice_1_element.deleted){
-				@choice_1_element = drika_elements[0];
-			}
-			if(@choice_2_element == null || choice_2_element.deleted){
-				@choice_2_element = drika_elements[0];
-			}
-			if(@choice_3_element == null || choice_3_element.deleted){
-				@choice_3_element = drika_elements[0];
-			}
-			if(@choice_4_element == null || choice_4_element.deleted){
-				@choice_4_element = drika_elements[0];
-			}
-			if(@choice_5_element == null || choice_5_element.deleted){
-				@choice_5_element = drika_elements[0];
-			}
+			GoToLineCheckAvailable(choice_1_element);
+			if(nr_choices >= 2)	GoToLineCheckAvailable(choice_2_element);
+			if(nr_choices >= 3)	GoToLineCheckAvailable(choice_3_element);
+			if(nr_choices >= 4)	GoToLineCheckAvailable(choice_4_element);
+			if(nr_choices >= 5)	GoToLineCheckAvailable(choice_5_element);
 		}
 
 		return display_string;
@@ -760,13 +760,13 @@ class DrikaDialogue : DrikaElement{
 			ImGui_PushItemWidth(-1.0);
 
 			ImGui_SliderInt("Number of choices", nr_choices, 1, 5, "%.0f");
-			if(nr_choices >= 1){
-				ImGui_Separator();
-				ImGui_Text("Choice 1 : ");
-				ImGui_SameLine();
-				ImGui_InputText("##text1", choice_1, 64);
-				AddGoToLineCombo(choice_1_element, "choice_1");
-			}
+
+			ImGui_Separator();
+			ImGui_Text("Choice 1 : ");
+			ImGui_SameLine();
+			ImGui_InputText("##text1", choice_1, 64);
+			AddGoToLineCombo(choice_1_element, "choice_1");
+
 			if(nr_choices >= 2){
 				ImGui_Separator();
 				ImGui_Text("Choice 2 : ");
@@ -798,28 +798,6 @@ class DrikaDialogue : DrikaElement{
 
 			ImGui_PopItemWidth();
 		}
-	}
-
-	void AddGoToLineCombo(DrikaElement@ &inout target_element, string combo_name){
-		string preview_value = target_element.line_number + target_element.GetDisplayString();
-		ImGui_Text("Go to line : ");
-		ImGui_SameLine();
-		ImGui_PushStyleColor(ImGuiCol_Text, target_element.GetDisplayColor());
-		if(ImGui_BeginCombo("###line" + combo_name, preview_value)){
-			for(uint i = 0; i < drika_indexes.size(); i++){
-				int item_no = drika_indexes[i];
-				bool is_selected = (target_element.index == drika_indexes[i]);
-				vec4 text_color = drika_elements[item_no].GetDisplayColor();
-
-				ImGui_PushStyleColor(ImGuiCol_Text, text_color);
-				if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), is_selected)){
-					@target_element = drika_elements[item_no];
-				}
-				ImGui_PopStyleColor();
-			}
-			ImGui_EndCombo();
-		}
-		ImGui_PopStyleColor();
 	}
 
 	void AddCategory(string category, array<string> items){

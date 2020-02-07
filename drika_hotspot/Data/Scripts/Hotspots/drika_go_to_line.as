@@ -1,5 +1,4 @@
 class DrikaGoToLine : DrikaElement{
-	DrikaElement@ line_element;
 	int line;
 	int line2;
 	int line3;
@@ -19,6 +18,16 @@ class DrikaGoToLine : DrikaElement{
 	bool choice_line8 = false;
 	bool choice_line9 = false;
 	bool choice_line10 = false;
+	DrikaElement@ line_element;
+	DrikaElement@ line_element_2;
+	DrikaElement@ line_element_3;
+	DrikaElement@ line_element_4;
+	DrikaElement@ line_element_5;
+	DrikaElement@ line_element_6;
+	DrikaElement@ line_element_7;
+	DrikaElement@ line_element_8;
+	DrikaElement@ line_element_9;
+	DrikaElement@ line_element_10;
 
 	DrikaGoToLine(JSONValue params = JSONValue()){
 		line = GetJSONInt(params, "line", 0);
@@ -42,10 +51,29 @@ class DrikaGoToLine : DrikaElement{
 		choice_line10 = GetJSONBool(params, "choice_line10", false);
 		drika_element_type = drika_go_to_line;
 		has_settings = true;
+
+		if(duplicating){
+			GetTargetElement();
+		}
 	}
 
 	void PostInit(){
+		if(!duplicating){
+			GetTargetElement();
+		}
+	}
+
+	void GetTargetElement(){
 		@line_element = drika_elements[drika_indexes[line]];
+		@line_element_2 = drika_elements[drika_indexes[line2]];
+		@line_element_3 = drika_elements[drika_indexes[line3]];
+		@line_element_4 = drika_elements[drika_indexes[line4]];
+		@line_element_5 = drika_elements[drika_indexes[line5]];
+		@line_element_6 = drika_elements[drika_indexes[line6]];
+		@line_element_7 = drika_elements[drika_indexes[line7]];
+		@line_element_8 = drika_elements[drika_indexes[line8]];
+		@line_element_9 = drika_elements[drika_indexes[line9]];
+		@line_element_10 = drika_elements[drika_indexes[line10]];
 	}
 
 	JSONValue GetSaveData(){
@@ -53,15 +81,34 @@ class DrikaGoToLine : DrikaElement{
 		if(@line_element != null){
 			data["line"] = JSONValue(line_element.index);
 		}
-		data["line2"] = JSONValue(line2);
-		data["line3"] = JSONValue(line3);
-		data["line4"] = JSONValue(line4);
-		data["line5"] = JSONValue(line5);
-		data["line6"] = JSONValue(line6);
-		data["line7"] = JSONValue(line7);
-		data["line8"] = JSONValue(line8);
-		data["line9"] = JSONValue(line9);
-		data["line10"] = JSONValue(line10);
+		if(@line_element_2 != null){
+			data["line2"] = JSONValue(line_element_2.index);
+		}
+		if(@line_element_3 != null){
+			data["line3"] = JSONValue(line_element_3.index);
+		}
+		if(@line_element_4 != null){
+			data["line4"] = JSONValue(line_element_4.index);
+		}
+		if(@line_element_5 != null){
+			data["line5"] = JSONValue(line_element_5.index);
+		}
+		if(@line_element_6 != null){
+			data["line6"] = JSONValue(line_element_6.index);
+		}
+		if(@line_element_7 != null){
+			data["line7"] = JSONValue(line_element_7.index);
+		}
+		if(@line_element_8 != null){
+			data["line8"] = JSONValue(line_element_8.index);
+		}
+		if(@line_element_9 != null){
+			data["line9"] = JSONValue(line_element_9.index);
+		}
+		if(@line_element_10 != null){
+			data["line10"] = JSONValue(line_element_10.index);
+		}
+
 		data["choice_line2"] = JSONValue(choice_line2);
 		data["choice_line3"] = JSONValue(choice_line3);
 		data["choice_line4"] = JSONValue(choice_line4);
@@ -75,10 +122,33 @@ class DrikaGoToLine : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		//Elements can be deleted when this function isn't being edited. So this function is used to continuesly check the target element.
-		if(@line_element == null || line_element.deleted){
-			//If the line_element gets deleted then just pick the first one.
-			@line_element = drika_elements[0];
+		GoToLineCheckAvailable(line_element);
+		if(choice_line2){
+			GoToLineCheckAvailable(line_element_2);
+			if(choice_line3){
+				GoToLineCheckAvailable(line_element_3);
+				if(choice_line4){
+					GoToLineCheckAvailable(line_element_4);
+					if(choice_line5){
+						GoToLineCheckAvailable(line_element_5);
+						if(choice_line6){
+							GoToLineCheckAvailable(line_element_6);
+							if(choice_line7){
+								GoToLineCheckAvailable(line_element_7);
+								if(choice_line8){
+									GoToLineCheckAvailable(line_element_8);
+									if(choice_line9){
+										GoToLineCheckAvailable(line_element_9);
+										if(choice_line10){
+											GoToLineCheckAvailable(line_element_10);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
 		if(choice_line2 == false){
@@ -95,60 +165,35 @@ class DrikaGoToLine : DrikaElement{
 	void DrawSettings(){
 		ImGui_Checkbox("Pick a random line from a list of choices", choice_line2);
 
-		if(@line_element == null){
-			return;
-		}
-
 		if(!choice_line2){
-			string preview_value = line_element.line_number + line_element.GetDisplayString();
-			ImGui_Text("Go to line : ");
-			ImGui_SameLine();
-			ImGui_PushStyleColor(ImGuiCol_Text, line_element.GetDisplayColor());
-			ImGui_PushItemWidth(-1.0);
-			if(ImGui_BeginCombo("###line", preview_value)){
-			    for(uint i = 0; i < drika_indexes.size(); i++){
-					int item_no = drika_indexes[i];
-			        bool is_selected = (line_element.index == drika_indexes[i]);
-					vec4 text_color = drika_elements[item_no].GetDisplayColor();
-
-					ImGui_PushStyleColor(ImGuiCol_Text, text_color);
-			        if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), is_selected)){
-						@line_element = drika_elements[item_no];
-						line = line_element.index;
-					}
-					ImGui_PopStyleColor();
-			    }
-			    ImGui_EndCombo();
-			}
-			ImGui_PopItemWidth();
-			ImGui_PopStyleColor();
+			AddGoToLineCombo(line_element, "line");
 		}else{
-			ImGui_InputInt("Line", line);
-			ImGui_InputInt("Line 2", line2);
+			AddGoToLineCombo(line_element, "line");
+			AddGoToLineCombo(line_element_2, "line2");
 			ImGui_Checkbox("Add a third line", choice_line3);
 			if(choice_line3 == true){
-				ImGui_InputInt("Line 3", line3);
+				AddGoToLineCombo(line_element_3, "line3");
 				ImGui_Checkbox("Add a fourth line", choice_line4);
 				if(choice_line4 == true){
-					ImGui_InputInt("Line 4", line4);
+					AddGoToLineCombo(line_element_4, "line4");
 					ImGui_Checkbox("Add a fifth line", choice_line5);
 					if(choice_line5 == true){
-						ImGui_InputInt("Line 5", line5);
+						AddGoToLineCombo(line_element_5, "line5");
 						ImGui_Checkbox("Add a sixth line", choice_line6);
 						if(choice_line6 == true){
-							ImGui_InputInt("Line 6", line6);
+							AddGoToLineCombo(line_element_6, "line6");
 							ImGui_Checkbox("Add a seventh line", choice_line7);
 							if(choice_line7 == true){
-								ImGui_InputInt("Line 7", line7);
+								AddGoToLineCombo(line_element_7, "line7");
 								ImGui_Checkbox("Add an eighth line", choice_line8);
 								if(choice_line8 == true){
-									ImGui_InputInt("Line 8", line8);
+									AddGoToLineCombo(line_element_8, "line8");
 									ImGui_Checkbox("Add a ninth line", choice_line9);
 									if(choice_line9 == true){
-										ImGui_InputInt("Line 9", line9);
+										AddGoToLineCombo(line_element_9, "line9");
 										ImGui_Checkbox("Add a tenth line", choice_line10);
 										if(choice_line10 == true){
-											ImGui_InputInt("Line 10", line10);
+											AddGoToLineCombo(line_element_10, "line10");
 										}
 									}
 								}
@@ -166,26 +211,21 @@ class DrikaGoToLine : DrikaElement{
 			display_index = drika_indexes[line_element.index];
 			return false;
 		}else{
-			array<int> line_list = {line};
-			if (choice_line2 == true) {line_list.insertLast(line2);}
-			if (choice_line3 == true) {line_list.insertLast(line3);}
-			if (choice_line4 == true) {line_list.insertLast(line4);}
-			if (choice_line5 == true) {line_list.insertLast(line5);}
-			if (choice_line6 == true) {line_list.insertLast(line6);}
-			if (choice_line7 == true) {line_list.insertLast(line7);}
-			if (choice_line8 == true) {line_list.insertLast(line8);}
-			if (choice_line9 == true) {line_list.insertLast(line9);}
-			if (choice_line10 == true) {line_list.insertLast(line10);}
-			int random_value = line_list[rand() % line_list.length()];
+			array<DrikaElement@> line_list = {line_element};
+			if (choice_line2 == true) {line_list.insertLast(line_element_2);}
+			if (choice_line3 == true) {line_list.insertLast(line_element_3);}
+			if (choice_line4 == true) {line_list.insertLast(line_element_4);}
+			if (choice_line5 == true) {line_list.insertLast(line_element_5);}
+			if (choice_line6 == true) {line_list.insertLast(line_element_6);}
+			if (choice_line7 == true) {line_list.insertLast(line_element_7);}
+			if (choice_line8 == true) {line_list.insertLast(line_element_8);}
+			if (choice_line9 == true) {line_list.insertLast(line_element_9);}
+			if (choice_line10 == true) {line_list.insertLast(line_element_10);}
+			DrikaElement@ random_element = line_list[rand() % line_list.length()];
 
-			if(random_value < int(drika_elements.size())){
-				current_line = random_value;
-				display_index = drika_indexes[random_value];
-				return false;
-			}else{
-				Log(info, "The GoToLine isn't valid " + random_value);
-				return false;
-			}
+			current_line = random_element.index;
+			display_index = drika_indexes[random_element.index];
+			return false;
 		}
 	}
 }
