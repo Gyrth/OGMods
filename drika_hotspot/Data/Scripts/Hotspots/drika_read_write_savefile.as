@@ -20,6 +20,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	int current_read_write_mode;
 	int current_condition_count;
 	int continue_line;
+	DrikaElement@ continue_element;
 	bool continue_if_false = false;
 	bool if_any_are_true = false;
 	array<string> mode_choices = {"Read", "Write"};
@@ -35,12 +36,27 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		value2 = GetJSONString(params, "value2", "drika_save_value_two");
 		param3 = GetJSONString(params, "param3", "drika_save_param_three");
 		value3 = GetJSONString(params, "value3", "drika_save_value_three");
+
 		read_write_mode = read_write_modes(GetJSONInt(params, "read_write_mode", 0));
 		condition_count = additional_conditions(GetJSONInt(params, "condition_count", 0));
 		current_read_write_mode = read_write_mode;
 		current_condition_count = condition_count;
 		drika_element_type = drika_read_write_savefile;
 		has_settings = true;
+
+		if(duplicating){
+			GetTargetElement();
+		}
+	}
+
+	void PostInit(){
+		if(!duplicating){
+			GetTargetElement();
+		}
+	}
+
+	void GetTargetElement(){
+		@continue_element = drika_elements[drika_indexes[continue_line]];
 	}
 
 	JSONValue GetSaveData(){
@@ -55,11 +71,15 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		data["condition_count"] = JSONValue(condition_count);
 		data["continue_if_false"] = JSONValue(continue_if_false);
 		data["if_any_are_true"] = JSONValue(if_any_are_true);
-		data["continue_line"] = JSONValue(continue_line);
+		if(continue_if_false && @continue_element != null){
+			data["continue_line"] = JSONValue(continue_element.index);
+		}
 		return data;
 	}
 
 	string GetDisplayString(){
+		GoToLineCheckAvailable(continue_element);
+
 		if(read_write_mode == read and condition_count == condition_count_none){
 			return "Read " + param + " " + value;
 		}else{
@@ -113,7 +133,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 
 			ImGui_Checkbox("If not, go to specified line:", continue_if_false);
 			if(continue_if_false == true){
-				ImGui_InputInt("Line", continue_line);
+				AddGoToLineCombo(continue_element, "line");
 			}
 		}else{
 			ImGui_Text("Set param : ");
@@ -153,7 +173,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				return true;
 			}else{
 				if (continue_if_false == true and continue_line < int(drika_elements.size())){
-					current_line = continue_line;
+					current_line = continue_element.index;
+					display_index = drika_indexes[continue_element.index];
 				}
 				return false;
 			}
@@ -162,7 +183,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				return true;
 			}else{
 				if(continue_if_false == true and continue_line < int(drika_elements.size())){
-					current_line = continue_line;
+					current_line = continue_element.index;
+					display_index = drika_indexes[continue_element.index];
 				}
 				return false;
 			}
@@ -171,7 +193,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				return true;
 			}else{
 				if (continue_if_false == true and continue_line < int(drika_elements.size())){
-					current_line = continue_line;
+					current_line = continue_element.index;
+					display_index = drika_indexes[continue_element.index];
 				}
 				return false;
 			}
@@ -180,7 +203,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				return true;
 			}else{
 				if(continue_if_false == true and continue_line < int(drika_elements.size())){
-					current_line = continue_line;
+					current_line = continue_element.index;
+					display_index = drika_indexes[continue_element.index];
 				}
 				return false;
 			}
@@ -188,8 +212,11 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			if(ReadParamValue() == value or ReadParam2Value() == value2 or ReadParam3Value() == value3){
 				return true;
 			}else{
-				if(continue_if_false == true and continue_line < int(drika_elements.size())) {current_line = continue_line;}
-					return false;
+				if(continue_if_false == true and continue_line < int(drika_elements.size())){
+					current_line = continue_element.index;
+					display_index = drika_indexes[continue_element.index];
+				}
+				return false;
 			}
 		}else{
 			WriteParamValue(false);
