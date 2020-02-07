@@ -320,7 +320,7 @@ class DrikaDialogue : DrikaElement{
 		UpdateActorName();
 
 		if(dialogue_function == say){
-			display_string += actor_name;
+			display_string += actor_name + " ";
 			string clean_say_text = say_text;
 			clean_say_text = join(clean_say_text.split("\n"), "");
 			if(clean_say_text.length() < 35){
@@ -329,23 +329,23 @@ class DrikaDialogue : DrikaElement{
 				display_string += "\"" + clean_say_text.substr(0, 35) + "..." + "\"";
 			}
 		}else if(dialogue_function == actor_settings){
-			display_string += actor_name;
+			display_string += actor_name + " ";
 		}else if(dialogue_function == set_actor_position){
-			display_string += actor_name;
+			display_string += actor_name + " ";
 		}else if(dialogue_function == set_actor_animation){
-			display_string += actor_name;
+			display_string += actor_name + " ";
 			display_string += target_actor_animation;
 		}else if(dialogue_function == set_actor_eye_direction){
-			display_string += actor_name;
+			display_string += actor_name + " ";
 			display_string += target_blink_multiplier;
 		}else if(dialogue_function == set_actor_torso_direction){
-			display_string += actor_name;
+			display_string += actor_name + " ";
 			display_string += target_actor_torso_direction_weight;
 		}else if(dialogue_function == set_actor_head_direction){
-			display_string += actor_name;
+			display_string += actor_name + " ";
 			display_string += target_actor_head_direction_weight;
 		}else if(dialogue_function == set_actor_omniscient){
-			display_string += actor_name;
+			display_string += actor_name + " ";
 			display_string += omniscient;
 		}else if(dialogue_function == set_actor_omniscient){
 			display_string += target_camera_zoom;
@@ -353,7 +353,7 @@ class DrikaDialogue : DrikaElement{
 			display_string += target_fade_to_black + " ";
 			display_string += fade_to_black_duration;
 		}else if(dialogue_function == set_actor_dialogue_control){
-			display_string += actor_name;
+			display_string += actor_name + " ";
 			display_string += dialogue_control;
 		}else if(dialogue_function == choice){
 			GoToLineCheckAvailable(choice_1_element);
@@ -367,7 +367,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void UpdateActorName(){
-		actor_name = GetTargetDisplayText() + " ";
+		actor_name = GetTargetDisplayText();
 	}
 
 	void Delete(){
