@@ -310,6 +310,24 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
+	void SkipAnimation(){
+		//When the animation is skipped during dialogue the camera animation is ignored.
+		if(!animate_camera){
+			if(animation_type == forward){
+				animation_timer = duration;
+			}else if(animation_type == backward){
+				animation_timer = 0.0;
+			}else if(animation_type == looping_forwards){
+				animation_timer = duration;
+			}else if(animation_type == looping_backwards){
+				animation_timer = 0.0;
+			}else if(animation_type == looping_forwards_and_backwards){
+				animation_timer = duration;
+			}
+			UpdateAnimation();
+		}
+	}
+
 	void UpdateAnimationKeys(){
 		//Make sure there is always at least two animation key available.
 		while(key_ids.size() < 2){

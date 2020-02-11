@@ -1273,6 +1273,10 @@ class DrikaDialogue : DrikaElement{
 				}
 			}else if(GetCurrentElement().drika_element_type == drika_play_sound){
 				continue;
+			}else if(GetCurrentElement().drika_element_type == drika_animation){
+				DrikaAnimation@ animation_function = cast<DrikaAnimation@>(GetCurrentElement());
+				animation_function.SkipAnimation();
+				continue;
 			}
 
 			GetCurrentElement().Trigger();
