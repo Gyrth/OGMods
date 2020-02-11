@@ -764,6 +764,8 @@ void AddDialogueActor(int character_id){
 	if(dialogue_actor_ids.find(character_id) == -1){
 		dialogue_actor_ids.insertLast(character_id);
 		char.ReceiveScriptMessage("set_dialogue_control true");
+		vec3 hotspot_position = this_hotspot.GetTranslation();
+		char.ReceiveScriptMessage("set_dialogue_position " + hotspot_position.x + " " + hotspot_position.y + " " + hotspot_position.z);
 		/* char.rigged_object().anim_client().Reset(); */
 	}
 }
