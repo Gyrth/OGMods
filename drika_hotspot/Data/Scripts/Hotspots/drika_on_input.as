@@ -297,8 +297,13 @@ class DrikaOnInput : DrikaElement{
 			return;
 		}
 		array<MovementObject@> targets = GetTargetMovementObjects();
-		for(uint i = 0; i < targets.size(); i++){
-			current_prompt_icon = (targets[i].controller_id == 0)?GetKeyboardIcon():GetControllerIcon();
+		//When the target MO is -1 then just get the keyboard icon so that it has something to render.
+		if(targets.size() == 0){
+			current_prompt_icon = GetKeyboardIcon();
+		}else{
+			for(uint i = 0; i < targets.size(); i++){
+				current_prompt_icon = (targets[i].controller_id == 0)?GetKeyboardIcon():GetControllerIcon();
+			}
 		}
 	}
 
