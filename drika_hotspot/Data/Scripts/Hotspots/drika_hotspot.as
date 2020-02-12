@@ -439,7 +439,9 @@ void DrawEditor(){
 		ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
         if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
 			ImGui_BeginChild("Element Settings", vec2(-1, ImGui_GetWindowHeight() - 60));
+			ImGui_PushItemWidth(-1);
 			GetCurrentElement().DrawSettings();
+			ImGui_PopItemWidth();
 			ImGui_EndChild();
 			ImGui_BeginChild("Modal Buttons", vec2(-1, 60));
 			if(ImGui_Button("Close")){
@@ -848,6 +850,7 @@ void ShowImage(string _image_path, vec4 _image_tint, float _image_scale){
 }
 
 void ShowText(string _text, int _font_size, string _font_path){
+	DisposeTextAtlases();
 	if(_text == ""){
 		show_text = false;
 	}else{

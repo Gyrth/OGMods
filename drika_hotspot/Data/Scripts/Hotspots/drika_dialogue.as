@@ -169,8 +169,8 @@ class DrikaDialogue : DrikaElement{
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			connection_types = {_movement_object};
 			target_select.LoadIdentifier(params);
-			target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 		}
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		if(duplicating && dialogue_function == choice){
 			GetTargetElement();
@@ -375,7 +375,7 @@ class DrikaDialogue : DrikaElement{
 	void StartSettings(){
 		target_select.CheckAvailableTargets();
 		if(dialogue_function == say){
-			ImGui_SetTextBuf(say_text);
+
 		}else if(dialogue_function == set_actor_animation){
 			if(all_animations.size() == 0){
 				level.SendMessage("drika_dialogue_get_animations " + hotspot.GetID());
@@ -633,10 +633,8 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void DrawSettings(){
-		if(connection_types.find(_movement_object) != -1){
-			target_select.DrawSelectTargetUI();
-		}
-
+		ImGui_Text("Dialogue Function");
+		ImGui_SameLine();
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
 			DeletePlaceholder();
 			Reset();
@@ -656,16 +654,25 @@ class DrikaDialogue : DrikaElement{
 			}
 		}
 
+		if(connection_types.find(_movement_object) != -1){
+			target_select.DrawSelectTargetUI();
+		}
+
 		if(dialogue_function == say){
+			ImGui_SetTextBuf(say_text);
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				say_text = ImGui_GetTextBuf();
 				Reset();
 			}
 		}else if(dialogue_function == actor_settings){
-			if(ImGui_ColorEdit4("Dialogue Color", dialogue_color)){
+			ImGui_Text("Dialogue Color");
+			ImGui_SameLine();
+			if(ImGui_ColorEdit4("##Dialogue Color", dialogue_color)){
 
 			}
-			if(ImGui_SliderInt("Voice", voice, 0, 18, "%.0f")){
+			ImGui_Text("Voice");
+			ImGui_SameLine();
+			if(ImGui_SliderInt("##Voice", voice, 0, 18, "%.0f")){
 				level.SendMessage("drika_dialogue_test_voice " + voice);
 			}
 
@@ -707,17 +714,19 @@ class DrikaDialogue : DrikaElement{
 			ImGui_SameLine();
 			ImGui_Checkbox("Wait Animation End", wait_anim_end);
 
-			ImGui_SliderFloat("Transition Speed", transition_speed, 0.0, 10.0, "%.1f");
+			ImGui_Text("Transition Speed");
+			ImGui_SameLine();
+			ImGui_SliderFloat("##Transition Speed", transition_speed, 0.0, 10.0, "%.1f");
 
 			ImGui_SetTextBuf(search_buffer);
 			ImGui_Text("Search");
 			ImGui_SameLine();
-			ImGui_PushItemWidth(ImGui_GetWindowWidth() - 85);
+			/* ImGui_PushItemWidth(ImGui_GetWindowWidth() - 85); */
 			if(ImGui_InputText("", ImGuiInputTextFlags_AutoSelectAll)){
 				search_buffer = ImGui_GetTextBuf();
 				QueryAnimation(ImGui_GetTextBuf());
 			}
-			ImGui_PopItemWidth();
+			/* ImGui_PopItemWidth(); */
 
 			if(ImGui_BeginChildFrame(55, vec2(-1, -1), ImGuiWindowFlags_AlwaysAutoResize)){
 				for(uint i = 0; i < current_animations.size(); i++){
@@ -727,14 +736,20 @@ class DrikaDialogue : DrikaElement{
 			}
 
 		}else if(dialogue_function == set_actor_omniscient){
-			ImGui_Text("Set Omnicient to : ");
+			ImGui_Text("Set Omnicient to");
 			ImGui_SameLine();
 			ImGui_Checkbox("", omniscient);
 		}else if(dialogue_function == fade_to_black){
-			ImGui_SliderFloat("Target Alpha", target_fade_to_black, 0.0, 1.0, "%.3f");
- 			ImGui_SliderFloat("Fade Duration", fade_to_black_duration, 0.0, 10.0, "%.3f");
+			ImGui_Text("Target Alpha");
+			ImGui_SameLine();
+			ImGui_SliderFloat("##Target Alpha", target_fade_to_black, 0.0, 1.0, "%.3f");
+			ImGui_Text("Fade Duration");
+			ImGui_SameLine();
+ 			ImGui_SliderFloat("##Fade Duration", fade_to_black_duration, 0.0, 10.0, "%.3f");
 		}else if(dialogue_function == settings){
-			ImGui_Combo("Dialogue Layout", dialogue_layout, dialogue_layout_names, dialogue_layout_names.size());
+			ImGui_Text("Dialogue Layout");
+			ImGui_SameLine();
+			ImGui_Combo("##Dialogue Layout", dialogue_layout, dialogue_layout_names, dialogue_layout_names.size());
 			ImGui_Text("Font : " + dialogue_text_font);
 			ImGui_SameLine();
 			if(ImGui_Button("Set Font")){
@@ -743,13 +758,17 @@ class DrikaDialogue : DrikaElement{
 					dialogue_text_font = new_path;
 				}
 			}
-			ImGui_SliderInt("Dialogue Text Size", dialogue_text_size, 1, 100, "%.0f");
-			ImGui_ColorEdit4("Dialogue Text Color", dialogue_text_color);
+			ImGui_Text("Dialogue Text Size");
+			ImGui_SameLine();
+			ImGui_SliderInt("##Dialogue Text Size", dialogue_text_size, 1, 100, "%.0f");
+			ImGui_Text("Dialogue Text Color");
+			ImGui_SameLine();
+			ImGui_ColorEdit4("##Dialogue Text Color", dialogue_text_color);
 			ImGui_Checkbox("Dialogue Text Shadow", dialogue_text_shadow);
 			ImGui_Checkbox("Use Voice Sounds", use_voice_sounds);
 			ImGui_Checkbox("Show Name", show_names);
 		}else if(dialogue_function == set_actor_dialogue_control){
-			ImGui_Text("Set to : ");
+			ImGui_Text("Set dialogue control to");
 			ImGui_SameLine();
 			ImGui_Checkbox("", dialogue_control);
 		}else if(dialogue_function == choice){
@@ -758,35 +777,35 @@ class DrikaDialogue : DrikaElement{
 			ImGui_SliderInt("Number of choices", nr_choices, 1, 5, "%.0f");
 
 			ImGui_Separator();
-			ImGui_Text("Choice 1 : ");
+			ImGui_Text("Choice 1");
 			ImGui_SameLine();
 			ImGui_InputText("##text1", choice_1, 64);
 			AddGoToLineCombo(choice_1_element, "choice_1");
 
 			if(nr_choices >= 2){
 				ImGui_Separator();
-				ImGui_Text("Choice 2 : ");
+				ImGui_Text("Choice 2");
 				ImGui_SameLine();
 				ImGui_InputText("##text2", choice_2, 64);
 				AddGoToLineCombo(choice_2_element, "choice_2");
 			}
 			if(nr_choices >= 3){
 				ImGui_Separator();
-				ImGui_Text("Choice 3 : ");
+				ImGui_Text("Choice 3");
 				ImGui_SameLine();
 				ImGui_InputText("##text3", choice_3, 64);
 				AddGoToLineCombo(choice_3_element, "choice_3");
 			}
 			if(nr_choices >= 4){
 				ImGui_Separator();
-				ImGui_Text("Choice 4 : ");
+				ImGui_Text("Choice 4");
 				ImGui_SameLine();
 				ImGui_InputText("##text4", choice_4, 64);
 				AddGoToLineCombo(choice_4_element, "choice_4");
 			}
 			if(nr_choices >= 5){
 				ImGui_Separator();
-				ImGui_Text("Choice 5 : ");
+				ImGui_Text("Choice 5");
 				ImGui_SameLine();
 				ImGui_InputText("##text5", choice_5, 64);
 				AddGoToLineCombo(choice_5_element, "choice_5");

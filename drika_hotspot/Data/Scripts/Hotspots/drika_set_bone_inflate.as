@@ -63,22 +63,28 @@ class DrikaSetBoneInflate : DrikaElement{
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
 
-		if(ImGui_Combo("Bone", current_index, bone_names, bone_names.size())){
+		ImGui_Text("Bone");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Bone", current_index, bone_names, bone_names.size())){
 			SetBoneInflate(true);
 			bone_name = bone_names[current_index];
 			SetBoneInflate(false);
 		}
 
-		if(ImGui_SliderFloat("Value", inflate_value, 0.0f, 1.0f, "%.2f")){
-			SetBoneInflate(false);
-		}
-
 		if(bone_name == "index"){
-			if(ImGui_InputInt("index", current_bone_index)){
+			ImGui_Text("Index");
+			ImGui_SameLine();
+			if(ImGui_InputInt("##Index", current_bone_index)){
 				SetBoneInflate(true);
 				bone_index = current_bone_index;
 				SetBoneInflate(false);
 			}
+		}
+
+		ImGui_Text("Value");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("##Value", inflate_value, 0.0f, 1.0f, "%.2f")){
+			SetBoneInflate(false);
 		}
 	}
 

@@ -83,16 +83,20 @@ class DrikaBillboard : DrikaElement{
 	}
 
 	void StartSettings(){
-		ImGui_SetTextBuf(billboard_text_string);
+
 	}
 
 	void DrawSettings(){
-		if(ImGui_Combo("Billboard Type", current_billboard_type, billboard_type_choices, billboard_type_choices.size())){
+		ImGui_Text("Billboard Type");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Billboard Type", current_billboard_type, billboard_type_choices, billboard_type_choices.size())){
 			billboard_type = billboard_types(current_billboard_type);
 			Reset();
 		}
 
-		if(ImGui_Combo("Billboard Update Type", current_billboard_update_type, billboard_update_type_choices, billboard_update_type_choices.size())){
+		ImGui_Text("Billboard Update Type");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Billboard Update Type", current_billboard_update_type, billboard_update_type_choices, billboard_update_type_choices.size())){
 			billboard_update_type = billboard_update_types(current_billboard_update_type);
 			Reset();
 		}
@@ -106,9 +110,14 @@ class DrikaBillboard : DrikaElement{
 					image_path = new_path;
 				}
 			}
-			ImGui_SliderFloat("Image Size", image_size, 0.0f, 10.0f, "%.2f");
-			ImGui_ColorEdit4("Color", image_color);
+			ImGui_Text("Image Size");
+			ImGui_SameLine();
+			ImGui_SliderFloat("##Image Size", image_size, 0.0f, 10.0f, "%.2f");
+			ImGui_Text("Tint");
+			ImGui_SameLine();
+			ImGui_ColorEdit4("##Tint", image_color);
 		}else if(billboard_type == billboard_text){
+			ImGui_SetTextBuf(billboard_text_string);
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				billboard_text_string = ImGui_GetTextBuf();
 				SetDisplayText();

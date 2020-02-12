@@ -131,7 +131,10 @@ class DrikaSetColor : DrikaElement{
 
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
-		if(ImGui_Combo("Color Type", current_color_type, color_type_choices, color_type_choices.size())){
+
+		ImGui_Text("Color Type");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Color Type", current_color_type, color_type_choices, color_type_choices.size())){
 			SetColor(true);
 			color_type = color_types(current_color_type);
 			GetNumPaletteColors();
@@ -143,7 +146,9 @@ class DrikaSetColor : DrikaElement{
 			if(num_palette_colors == 0){
 				return;
 			}
-			if(ImGui_Combo("Palette Slot", current_palette_slot, palette_names, palette_names.size())){
+			ImGui_Text("Palette Slot");
+			ImGui_SameLine();
+			if(ImGui_Combo("##Palette Slot", current_palette_slot, palette_names, palette_names.size())){
 				SetColor(true);
 				palette_slot = current_palette_slot;
 				GetBeforeColor();
@@ -151,7 +156,9 @@ class DrikaSetColor : DrikaElement{
 			}
 		}
 
-		if(ImGui_ColorEdit3("Color", after_color)){
+		ImGui_Text("Color");
+		ImGui_SameLine();
+		if(ImGui_ColorEdit3("#Color", after_color)){
 			SetColor(false);
 		}
 	}

@@ -11,6 +11,10 @@ class TargetSelect{
 	string character_team = "team_drika";
 	string object_name = "drika_object";
 
+	string identifier_type_tag = "identifier_type";
+	string identifier_tag = "identifier";
+	string tag = "";
+
 	identifier_types identifier_type;
 	array<string> available_references;
 	array<string> available_character_names;
@@ -18,8 +22,13 @@ class TargetSelect{
 	int target_option;
 	DrikaElement@ parent;
 
-	TargetSelect(DrikaElement@ _parent){
+	TargetSelect(DrikaElement@ _parent, string tag = ""){
 		@parent = _parent;
+		if(tag != ""){
+			this.tag = tag;
+			identifier_type_tag = "identifier_type_" + tag;
+			identifier_tag = "identifier_" + tag;
+		}
 	}
 
 	bool ConnectTo(Object @other){
@@ -52,7 +61,7 @@ class TargetSelect{
 			Object@ char_obj = ReadObjectFromID(char.GetID());
 
 			if(char_obj.GetName() == ""){
-				available_character_names.insertLast("Character id : " + char.GetID());
+				available_character_names.insertLast("Character id " + char.GetID());
 			}else{
 				available_character_names.insertLast(char_obj.GetName());
 			}
@@ -110,7 +119,13 @@ class TargetSelect{
 			}
 		}
 
-		if(ImGui_Combo("Identifier Type", current_identifier_type, identifier_choices, identifier_choices.size())){
+		ImGui_Text("Identifier Type");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Identifier Type" + tag, current_identifier_type, identifier_choices, identifier_choices.size())){
+
+			if(identifier_type == current_identifier_type){return;}
+
+			parent.PreTargetChanged();
 			if(identifier_choices[current_identifier_type] == "ID"){
 				identifier_type = id;
 			}else if(identifier_choices[current_identifier_type] == "Team"){
@@ -122,11 +137,14 @@ class TargetSelect{
 			}else if(identifier_choices[current_identifier_type] == "Character"){
 				identifier_type = character;
 			}
+			parent.TargetChanged();
 		}
 
 		if(identifier_type == id){
 			int new_object_id = object_id;
-			if(ImGui_InputInt("Object ID", new_object_id)){
+			ImGui_Text("Object ID");
+			ImGui_SameLine();
+			if(ImGui_InputInt("##Object ID" + tag, new_object_id)){
 				parent.PreTargetChanged();
 				object_id = new_object_id;
 				parent.TargetChanged();
@@ -149,21 +167,29 @@ class TargetSelect{
 				return;
 			}
 
-			if(ImGui_Combo("Reference", current_reference, available_references, available_references.size())){
+			ImGui_Text("Reference");
+			ImGui_SameLine();
+			if(ImGui_Combo("##Reference" + tag, current_reference, available_references, available_references.size())){
 				parent.PreTargetChanged();
 				reference_string = available_references[current_reference];
 				parent.TargetChanged();
 			}
 		}else if(identifier_type == team){
 			string new_character_team = character_team;
-			if(ImGui_InputText("Team", new_character_team, 64)){
+
+			ImGui_Text("Team");
+			ImGui_SameLine();
+			if(ImGui_InputText("##Team" + tag, new_character_team, 64)){
 				parent.PreTargetChanged();
 				character_team = new_character_team;
 				parent.TargetChanged();
 			}
 		}else if(identifier_type == name){
 			string new_object_name = object_name;
-			if(ImGui_InputText("Name", new_object_name, 64)){
+
+			ImGui_Text("Name");
+			ImGui_SameLine();
+			if(ImGui_InputText("##Name" + tag, new_object_name, 64)){
 				parent.PreTargetChanged();
 				object_name = new_object_name;
 				parent.TargetChanged();
@@ -183,7 +209,9 @@ class TargetSelect{
 				object_id = available_character_ids[0];
 			}
 
-			if(ImGui_Combo("Character", current_character, available_character_names, available_character_names.size())){
+			ImGui_Text("Character");
+			ImGui_SameLine();
+			if(ImGui_Combo("##Character" + tag, current_character, available_character_names, available_character_names.size())){
 				parent.PreTargetChanged();
 				object_id = available_character_ids[current_character];
 				parent.TargetChanged();
@@ -192,37 +220,37 @@ class TargetSelect{
 	}
 
 	void SaveIdentifier(JSONValue &inout data){
-		data["identifier_type"] = JSONValue(identifier_type);
+		data[identifier_type_tag] = JSONValue(identifier_type);
 		if(identifier_type == id){
-			data["identifier"] = JSONValue(object_id);
+			data[identifier_tag] = JSONValue(object_id);
 		}else if(identifier_type == reference){
-			data["identifier"] = JSONValue(reference_string);
+			data[identifier_tag] = JSONValue(reference_string);
 		}else if(identifier_type == team){
-			data["identifier"] = JSONValue(character_team);
+			data[identifier_tag] = JSONValue(character_team);
 		}else if(identifier_type == name){
-			data["identifier"] = JSONValue(object_name);
+			data[identifier_tag] = JSONValue(object_name);
 		}else if(identifier_type == character){
-			data["identifier"] = JSONValue(object_id);
+			data[identifier_tag] = JSONValue(object_id);
 		}
 	}
 
 	void LoadIdentifier(JSONValue params){
-		if(params.isMember("identifier_type")){
-			if(params["identifier_type"].asInt() == id){
+		if(params.isMember(identifier_type_tag)){
+			if(params[identifier_type_tag].asInt() == id){
 				identifier_type = identifier_types(id);
-				object_id = params["identifier"].asInt();
-			}else if(params["identifier_type"].asInt() == reference){
+				object_id = params[identifier_tag].asInt();
+			}else if(params[identifier_type_tag].asInt() == reference){
 				identifier_type = identifier_types(reference);
-				reference_string = params["identifier"].asString();
-			}else if(params["identifier_type"].asInt() == team){
+				reference_string = params[identifier_tag].asString();
+			}else if(params[identifier_type_tag].asInt() == team){
 				identifier_type = identifier_types(team);
-				character_team = params["identifier"].asString();
-			}else if(params["identifier_type"].asInt() == name){
+				character_team = params[identifier_tag].asString();
+			}else if(params[identifier_type_tag].asInt() == name){
 				identifier_type = identifier_types(name);
-				object_name = params["identifier"].asString();
-			}else if(params["identifier_type"].asInt() == character){
+				object_name = params[identifier_tag].asString();
+			}else if(params[identifier_type_tag].asInt() == character){
 				identifier_type = identifier_types(character);
-				object_id = params["identifier"].asInt();
+				object_id = params[identifier_tag].asInt();
 			}
 		}else{
 			//By default the id is used as identifier with -1 as the target id.

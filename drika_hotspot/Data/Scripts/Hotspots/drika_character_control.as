@@ -271,7 +271,9 @@ class DrikaCharacterControl : DrikaElement{
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
 
-		if(ImGui_Combo("Param Type", current_type, param_names)){
+		ImGui_Text("Param Type");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Param Type", current_type, param_names)){
 			character_option = character_options(current_type);
 			SetParamType();
 			SetParamName();
@@ -279,84 +281,134 @@ class DrikaCharacterControl : DrikaElement{
 
 		switch(character_option){
 			case aggression:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
 				break;
 			case attack_damage:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case attack_knockback:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case attack_speed:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case block_followup:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case block_skill:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case cannot_be_disarmed:
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case character_scale:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 60, 140, "%.2f");
 				break;
 			case damage_resistance:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case ear_size:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 300.0, "%.1f");
 				break;
 			case fat:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
 				break;
 			case focus_fov_distance:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case focus_fov_horizontal:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case focus_fov_vertical:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case ground_aggression:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
 				break;
 			case knocked_out_shield:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderInt(param_name, int_param_after, 0, 10);
 				break;
 			case left_handed:
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case movement_speed:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 10.0, 150.0, "%.1f");
 				break;
 			case muscle:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
 				break;
 			case peripheral_fov_distance:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case peripheral_fov_horizontal:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case peripheral_fov_vertical:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case species:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_InputText(param_name, string_param_after, 64);
 				break;
 			case static_char:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case teams:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_InputText(param_name, string_param_after, 64);
 				break;
 			case fall_damage_mult:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 10.0, "%.1f");
 				break;
 			case fear_afraid_at_health_level:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
 				break;
 			case fear_always_afraid_on_sight:
@@ -375,12 +427,16 @@ class DrikaCharacterControl : DrikaElement{
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case throw_counter_probability:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case is_throw_trainer:
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case weapon_catch_skill:
+				ImGui_Text(param_name);
+				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case wearing_metal_armor:
@@ -398,24 +454,40 @@ class DrikaCharacterControl : DrikaElement{
 			case revive:
 				break;
 			case limp_ragdoll:
-				ImGui_SliderFloat("Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
-				ImGui_SliderFloat("Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
+				ImGui_Text("Recovery Time");
+				ImGui_SameLine();
+				ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
+				ImGui_Text("Roll Recovery Time");
+				ImGui_SameLine();
+				ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
 				break;
 			case injured_ragdoll:
-				ImGui_SliderFloat("Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
-				ImGui_SliderFloat("Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
+				ImGui_Text("Recovery Time");
+				ImGui_SameLine();
+				ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
+				ImGui_Text("Roll Recovery Time");
+				ImGui_SameLine();
+				ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
 				break;
 			case ragdoll:
-				ImGui_SliderFloat("Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
-				ImGui_SliderFloat("Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
+				ImGui_Text("Recovery Time");
+				ImGui_SameLine();
+				ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
+				ImGui_Text("Roll Recovery Time");
+				ImGui_SameLine();
+				ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
 				break;
 			case apply_damage:
-				ImGui_SliderFloat("Amount", damage_amount, 0.0, 2.0, "%.1f");
+				ImGui_Text("Amount");
+				ImGui_SameLine();
+				ImGui_SliderFloat("##Amount", damage_amount, 0.0, 2.0, "%.1f");
 				break;
 			case cut_throat:
 				break;
 			case wet:
-				ImGui_SliderFloat("Amount", wet_amount, 0.0, 1.0, "%.1f");
+				ImGui_Text("Amount");
+				ImGui_SameLine();
+				ImGui_SliderFloat("##Amount", wet_amount, 0.0, 1.0, "%.1f");
 				break;
 			default:
 				Log(warning, "Found a non standard parameter type. " + param_type);

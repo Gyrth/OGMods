@@ -51,7 +51,9 @@ class DrikaStartDialogue : DrikaElement{
 	}
 
 	void DrawSettings(){
-		if(ImGui_Combo("Dialogue", current_index, available_dialogues, available_dialogues.size())){
+		ImGui_Text("Dialogue");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Dialogue", current_index, available_dialogues, available_dialogues.size())){
 			@dialogue_obj = ReadObjectFromID(dialogue_ids[current_index]);
 			dialogue_name = available_dialogues[current_index];
 		}

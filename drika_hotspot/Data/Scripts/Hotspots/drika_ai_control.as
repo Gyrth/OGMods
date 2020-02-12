@@ -13,7 +13,7 @@ enum ai_goals {
 class DrikaAIControl : DrikaElement{
 	int current_ai_goal;
 	int ai_goal;
-	int target_id;
+	TargetSelect ai_target(this, "ai_target");
 
 	array<ai_goals> goals_with_placeholders = {_investigate_slow, _investigate_urgent};
 
@@ -32,7 +32,6 @@ class DrikaAIControl : DrikaElement{
 		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
 		placeholder_name = "AIControl Helper";
 		ai_goal = ai_goals(GetJSONInt(params, "ai_goal", _investigate_slow));
-		target_id = GetJSONInt(params, "target_id", -1);
 		current_ai_goal = ai_goal;
 
 		connection_types = {_movement_object};
@@ -41,6 +40,8 @@ class DrikaAIControl : DrikaElement{
 
 		target_select.LoadIdentifier(params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
+		ai_target.LoadIdentifier(params);
+		ai_target.target_option = id_option | name_option | character_option | reference_option | team_option;
 	}
 
 	void PostInit(){
@@ -53,7 +54,7 @@ class DrikaAIControl : DrikaElement{
 			data["placeholder_id"] = JSONValue(placeholder_id);
 		}
 		data["ai_goal"] = JSONValue(ai_goal);
-		data["target_id"] = JSONValue(target_id);
+		target_select.SaveIdentifier(data);
 		target_select.SaveIdentifier(data);
 		return data;
 	}
@@ -85,40 +86,53 @@ class DrikaAIControl : DrikaElement{
 
 	void StartSettings(){
 		target_select.CheckAvailableTargets();
+		ai_target.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
 
-		if(ImGui_Combo("AIGoal", current_ai_goal, ai_goal_names)){
+		ImGui_Text("AIGoal");
+		ImGui_SameLine();
+		if(ImGui_Combo("##AIGoal", current_ai_goal, ai_goal_names)){
 			ai_goal = ai_goals(current_ai_goal);
 		}
 
-		if(ai_goal == _patrol){
-			ImGui_InputInt("Pathpoint ID", target_id);
-		}else if(ai_goal == _attack){
-			ImGui_InputInt("Attack Character ID", target_id);
-		}else if(ai_goal == _escort){
-			ImGui_InputInt("Escord Character ID", target_id);
-		}else if(ai_goal == _get_weapon){
-			ImGui_InputInt("Weapon ID", target_id);
+		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon){
+			ImGui_Separator();
+			if(ai_goal == _patrol){
+				ImGui_Text("Pathpoint ID");
+			}else if(ai_goal == _attack){
+				ImGui_Text("Attack Character ID");
+			}else if(ai_goal == _escort){
+				ImGui_Text("Escord Character ID");
+			}else if(ai_goal == _get_weapon){
+				ImGui_Text("Weapon ID");
+			}
+			ai_target.DrawSelectTargetUI();
 		}
 	}
 
 	bool Trigger(){
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
+		array<Object@> ai_targets = ai_target.GetTargetObjects();
 		if(targets.size() == 0){return false;}
+
+		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon){
+			if(ai_targets.size() == 0){
+				return false;
+			}
+		}
 
 		string command = "";
 
 		switch(ai_goal){
 			case _patrol:
 				{
-					if(ObjectExists(target_id)){
-						Object@ target_object = ReadObjectFromID(target_id);
-						if(target_object.GetType() == _path_point_object){
+					for(uint j = 0; j < ai_targets.size(); j++){
+						if(ai_targets[j].GetType() == _path_point_object){
 							for(uint i = 0; i < targets.size(); i++){
-								ReadObjectFromID(targets[i].GetID()).ConnectTo(target_object);
+								ReadObjectFromID(targets[i].GetID()).ConnectTo(ai_targets[j]);
 							}
 						}
 					}
@@ -126,8 +140,12 @@ class DrikaAIControl : DrikaElement{
 				}
 				break;
 			case _attack:
-				command += "Notice(" + target_id + ");";
-				command += "SetGoal(_attack);";
+				{
+					for(uint j = 0; j < ai_targets.size(); j++){
+						command += "Notice(" + ai_targets[j].GetID() + ");";
+					}
+					command += "SetGoal(_attack);";
+				}
 				break;
 			case _investigate_slow:
 				{
@@ -158,12 +176,20 @@ class DrikaAIControl : DrikaElement{
 				command += "SetGoal(_get_help);";
 				break;
 			case _escort:
-				command += "escort_id = " + target_id + ";";
-				command += "SetGoal(_escort);";
+				{
+					for(uint j = 0; j < ai_targets.size(); j++){
+						command += "escort_id = " + ai_targets[j].GetID() + ";";
+					}
+					command += "SetGoal(_escort);";
+				}
 				break;
 			case _get_weapon:
-				command += "SetGoal(_get_weapon);";
-				command += "weapon_target_id = " + target_id + ";";
+				{
+					command += "SetGoal(_get_weapon);";
+					for(uint j = 0; j < ai_targets.size(); j++){
+						command += "weapon_target_id = " + ai_targets[j].GetID() + ";";
+					}
+				}
 				break;
 			case _get_closest_weapon:
 				command += "CheckForNearbyWeapons();";
@@ -186,13 +212,13 @@ class DrikaAIControl : DrikaElement{
 	void Reset(){
 		if(triggered){
 			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
+			array<Object@> ai_targets = ai_target.GetTargetObjects();
 
 			if(ai_goal == _patrol){
-				if(ObjectExists(target_id)){
-					Object@ target_object = ReadObjectFromID(target_id);
-					if(target_object.GetType() == _path_point_object){
+				for(uint j = 0; j < ai_targets.size(); j++){
+					if(ai_targets[j].GetType() == _path_point_object){
 						for(uint i = 0; i < targets.size(); i++){
-							ReadObjectFromID(targets[i].GetID()).Disconnect(target_object);
+							ReadObjectFromID(targets[i].GetID()).Disconnect(ai_targets[j]);
 						}
 					}
 				}

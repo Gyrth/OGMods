@@ -325,7 +325,7 @@ class DrikaElement{
 		}
 
 		string preview_value = target_element.line_number + target_element.GetDisplayString();
-		ImGui_Text("Go to line : ");
+		ImGui_Text("Go to line");
 		ImGui_SameLine();
 		ImGui_PushStyleColor(ImGuiCol_Text, target_element.GetDisplayColor());
 		if(ImGui_BeginCombo("###line" + combo_name, preview_value)){
@@ -361,7 +361,9 @@ class DrikaElement{
 	}
 
 	void DrawSetReferenceUI(){
-		ImGui_InputText("Set Reference", reference_string, 64);
+		ImGui_Text("Set Reference");
+		ImGui_SameLine();
+		ImGui_InputText("##Reference", reference_string, 64);
 		if(ImGui_IsItemHovered()){
 			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
 			ImGui_SetTooltip("If a reference is set it can be used by other functions\nlike Set Object Param or Transform Object.");

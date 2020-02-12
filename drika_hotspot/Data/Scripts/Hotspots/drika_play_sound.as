@@ -125,6 +125,7 @@ class DrikaPlaySound : DrikaElement{
 
 	void DrawSettings(){
 		ImGui_Text("Sound Path : " + sound_path);
+		ImGui_SameLine();
 		if(ImGui_Button("Set Sound Path")){
 			string new_path = "";
 			if(is_group){
@@ -138,7 +139,9 @@ class DrikaPlaySound : DrikaElement{
 			}
 		}
 
-		if(ImGui_Combo("Play Sound Method", current_play_sound_method, play_sound_method_names, play_sound_method_names.size())){
+		ImGui_Text("Play Sound Method");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Play Sound Method", current_play_sound_method, play_sound_method_names, play_sound_method_names.size())){
 			play_sound_method = play_sound_methods(current_play_sound_method);
 			IdentifyPlayMethod();
 			//Trigger a draw editing once to delte or create placeholder object so that it can be previewed.
@@ -147,13 +150,17 @@ class DrikaPlaySound : DrikaElement{
 		}
 
 		if(play_sound_method == play_sound_group_position_priority){
-			if(ImGui_Combo("Sound Priority", priority, sound_priority_names, sound_priority_names.size())){
+			ImGui_Text("Sound Priority");
+			ImGui_SameLine();
+			if(ImGui_Combo("##Sound Priority", priority, sound_priority_names, sound_priority_names.size())){
 				PreviewSound();
 			}
 		}
 
 		if(has_gain){
-			if(ImGui_SliderFloat("Gain", gain, 0.0f, 10.0f, "%.2f")){
+			ImGui_Text("Gain");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Gain", gain, 0.0f, 10.0f, "%.2f")){
 				PreviewSound();
 			}
 		}
@@ -163,10 +170,14 @@ class DrikaPlaySound : DrikaElement{
 				PreviewSound();
 			}
 			if(ai_sound){
-				if(ImGui_SliderFloat("AISound Max Range", max_range, 0.0f, 10.0f, "%.2f")){
+				ImGui_Text("AISound Max Range");
+				ImGui_SameLine();
+				if(ImGui_SliderFloat("##AISound Max Range", max_range, 0.0f, 10.0f, "%.2f")){
 					PreviewSound();
 				}
-				if(ImGui_Combo("Sound Type", current_sound_type, sound_type_names, sound_type_names.size())){
+				ImGui_Text("Sound Type");
+				ImGui_SameLine();
+				if(ImGui_Combo("##Sound Type", current_sound_type, sound_type_names, sound_type_names.size())){
 					sound_type = SoundType(current_sound_type);
 					PreviewSound();
 				}

@@ -96,12 +96,16 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	}
 
 	void DrawSettings(){
-		if(ImGui_Combo("Read Write Mode", current_read_write_mode, mode_choices, mode_choices.size())){
+		ImGui_Text("Read Write Mode");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Read Write Mode", current_read_write_mode, mode_choices, mode_choices.size())){
 			read_write_mode = read_write_modes(current_read_write_mode);
 		}
 
 		if(read_write_mode == read){
-			if(ImGui_Combo("Additional Conditions", current_condition_count, condition_choices, condition_choices.size())){
+			ImGui_Text("Additional Conditions");
+			ImGui_SameLine();
+			if(ImGui_Combo("##Additional Conditions", current_condition_count, condition_choices, condition_choices.size())){
 				condition_count = additional_conditions(current_condition_count);
 			}
 
@@ -113,18 +117,39 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			}
 
 			if(condition_count != condition_count_none){
-				ImGui_Text("FIRST PARAMETER -------------- ");
-				ImGui_InputText("Parameter Name 1: ", param, 64);
-				ImGui_InputText("Parameter Value 1: ", value, 64);
-				ImGui_Text("SECOND PARAMETER -------------- ");
-				ImGui_InputText("Parameter Name 2: ", param2, 64);
-				ImGui_InputText("Parameter Value 2: ", value2, 64);
+				ImGui_Separator();
+				ImGui_Text("First Parameter");
+
+				ImGui_Text("Parameter Name 1");
+				ImGui_SameLine();
+				ImGui_InputText("##Parameter Name 1", param, 64);
+				ImGui_Text("Parameter Value 1");
+				ImGui_SameLine();
+				ImGui_InputText("##Parameter Value 1", value, 64);
+
+				ImGui_Separator();
+				ImGui_Text("Second Parameter");
+
+				ImGui_Text("Parameter Name 2");
+				ImGui_SameLine();
+				ImGui_InputText("##Parameter Name 2", param2, 64);
+				ImGui_Text("Parameter Value 2");
+				ImGui_SameLine();
+				ImGui_InputText("##Parameter Value 2", value2, 64);
+				ImGui_Separator();
 			}
 
 			if(condition_count == condition_count_two){
-				ImGui_Text("THIRD PARAMETER -------------- ");
-				ImGui_InputText("Parameter Name 3: ", param3, 64);
-				ImGui_InputText("Parameter Value 3", value3, 64);
+				ImGui_Text("Third Parameter");
+
+				ImGui_Text("Parameter Name 3");
+				ImGui_SameLine();
+				ImGui_InputText("##Parameter Name 3", param3, 64);
+				ImGui_Text("Parameter Value 3");
+				ImGui_SameLine();
+				ImGui_InputText("##Parameter Value 3", value3, 64);
+
+				ImGui_Separator();
 			}
 
 			if(condition_count != condition_count_none){

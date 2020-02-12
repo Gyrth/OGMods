@@ -40,6 +40,7 @@ class DrikaCreateObject : DrikaElement{
 		ImGui_Text("Object Path : ");
 		ImGui_SameLine();
 		ImGui_Text(object_path);
+		ImGui_SameLine();
 		if(ImGui_Button("Set Object Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Objects");
 			if(new_path != ""){

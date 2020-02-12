@@ -199,7 +199,9 @@ class DrikaAnimation : DrikaElement{
 
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
-		if(ImGui_Combo("Animation Method", current_animation_method, animation_method_names, animation_method_names.size())){
+		ImGui_Text("Animation Method");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Animation Method", current_animation_method, animation_method_names, animation_method_names.size())){
 			animation_method = animation_methods(current_animation_method);
 			//Remove all the old data when switching between methods.
 			if(animation_method == placeholder_method){
@@ -212,17 +214,26 @@ class DrikaAnimation : DrikaElement{
 			}
 		}
 		if(animation_method == placeholder_method){
-			if(ImGui_Combo("Duration Method", current_duration_method, duration_method_names, duration_method_names.size())){
+			ImGui_Text("Duration Method");
+			ImGui_SameLine();
+			if(ImGui_Combo("##Duration Method", current_duration_method, duration_method_names, duration_method_names.size())){
 				duration_method = duration_methods(current_duration_method);
 			}
 		}
-		if(ImGui_Combo("Animation Type", current_animation_type, animation_type_names, animation_type_names.size())){
+
+		ImGui_Text("Animation Type");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Animation Type", current_animation_type, animation_type_names, animation_type_names.size())){
 			animation_type = animation_types(current_animation_type);
 		}
-		if(ImGui_SliderFloat("Duration", duration, 0.1f, 10.0f, "%.1f")){
+		ImGui_Text("Duration");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("##Duration", duration, 0.1f, 10.0f, "%.1f")){
 			SetCurrentTransform();
 		}
-		if(ImGui_SliderFloat("Extra Yaw", extra_yaw, 0.0f, 360.0f, "%.1f")){
+		ImGui_Text("Extra Yaw");
+		ImGui_SameLine();
+		if(ImGui_SliderFloat("##Extra Yaw", extra_yaw, 0.0f, 360.0f, "%.1f")){
 			SetCurrentTransform();
 		}
 		if(ImGui_Checkbox("Interpolation Rotation", interpolate_rotation)){

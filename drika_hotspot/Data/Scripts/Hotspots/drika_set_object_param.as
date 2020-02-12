@@ -91,17 +91,27 @@ class DrikaSetObjectParam : DrikaElement{
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
 
-		ImGui_InputText("Param Name", param_name, 64);
-		if(ImGui_Combo("Param Type", current_type, param_type_choices, param_type_choices.size())){
+		ImGui_Text("Param Name");
+		ImGui_SameLine();
+		ImGui_InputText("##Param Name", param_name, 64);
+		ImGui_Text("Param Type");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Param Type", current_type, param_type_choices, param_type_choices.size())){
 			param_type = param_types(current_type);
 		}
 
 		if(param_type == string_param){
-			ImGui_InputText("After", string_param_after, 64);
+			ImGui_Text("After");
+			ImGui_SameLine();
+			ImGui_InputText("##After", string_param_after, 64);
 		}else if(param_type == int_param){
-			ImGui_InputInt("After", int_param_after);
+			ImGui_Text("After");
+			ImGui_SameLine();
+			ImGui_InputInt("##After", int_param_after);
 		}else{
-			ImGui_SliderFloat("After", float_param_after, -1000.0f, 1000.0f, "%.4f");
+			ImGui_Text("After");
+			ImGui_SameLine();
+			ImGui_SliderFloat("##After", float_param_after, -1000.0f, 1000.0f, "%.4f");
 		}
 	}
 

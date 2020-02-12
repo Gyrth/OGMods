@@ -162,22 +162,32 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	void DrawSettings(){
-		if(ImGui_Combo("Check for", new_target_character_type, character_trigger_choices, character_trigger_choices.size())){
+		ImGui_Text("Check for");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Check for", new_target_character_type, character_trigger_choices, character_trigger_choices.size())){
 			target_character_type = target_character_types(new_target_character_type);
 		}
 
 		if(target_character_type == check_id){
-			ImGui_InputInt("ID", object_id);
+			ImGui_Text("ID");
+			ImGui_SameLine();
+			ImGui_InputInt("##ID", object_id);
 		}else if(target_character_type == check_team){
-			ImGui_InputText("Team", character_team, 64);
+			ImGui_Text("Team");
+			ImGui_SameLine();
+			ImGui_InputText("##Team", character_team, 64);
 		}
 
-		if(ImGui_Combo("Trigger when", new_hotspot_trigger_type, hotspot_trigger_choices, hotspot_trigger_choices.size())){
+		ImGui_Text("Trigger when");
+		ImGui_SameLine();
+		if(ImGui_Combo("###Trigger when", new_hotspot_trigger_type, hotspot_trigger_choices, hotspot_trigger_choices.size())){
 			hotspot_trigger_type = hotspot_trigger_types(new_hotspot_trigger_type);
 		}
 
 		if(hotspot_trigger_type == while_inside || hotspot_trigger_type == while_outside){
-			ImGui_Checkbox("Reset When False", reset_when_false);
+			ImGui_Text("Reset When False");
+			ImGui_SameLine();
+			ImGui_Checkbox("##Reset When False", reset_when_false);
 		}
 
 		ImGui_Checkbox("External Hotspot", external_hotspot);

@@ -35,20 +35,46 @@ class DrikaDisplayImage : DrikaElement{
 		}
 	}
 
+	void StartEdit(){
+		if(!clear_image){
+			ShowImage(image_path, tint, scale);
+		}
+	}
+
+	void EditDone(){
+		ShowImage("", tint, scale);
+	}
+
 	void DrawSettings(){
-		ImGui_Checkbox("Clear Image", clear_image);
+		if(ImGui_Checkbox("Clear Image", clear_image)){
+			if(clear_image){
+				ShowImage("", tint, scale);
+			}else{
+				ShowImage(image_path, tint, scale);
+			}
+		}
 		if(!clear_image){
 			ImGui_Text("Image Path : ");
 			ImGui_SameLine();
 			ImGui_Text(image_path);
+			ImGui_SameLine();
 			if(ImGui_Button("Set Image Path")){
 				string new_path = GetUserPickedReadPath("png", "Data/Textures");
 				if(new_path != ""){
 					image_path = new_path;
+					ShowImage(image_path, tint, scale);
 				}
 			}
-			ImGui_SliderFloat("Scale", scale, 0.0f, 100.0f, "%.1f");
-			ImGui_ColorEdit4("Color", tint);
+			ImGui_Text("Scale");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Scale", scale, 0.0f, 5.0f, "%.1f")){
+				ShowImage(image_path, tint, scale);
+			}
+			ImGui_Text("Color");
+			ImGui_SameLine();
+			if(ImGui_ColorEdit4("##Color", tint)){
+				ShowImage(image_path, tint, scale);
+			}
 		}
 	}
 

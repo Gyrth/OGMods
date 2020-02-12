@@ -45,7 +45,8 @@ class DrikaSetCharacter : DrikaElement{
 		ImGui_Text("Set To Character : ");
 		ImGui_SameLine();
 		ImGui_Text(character_path);
-		if(ImGui_Button("Set Character File")){
+		ImGui_SameLine();
+		if(ImGui_Button("Set Character Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Characters");
 			if(new_path != ""){
 				character_path = new_path;

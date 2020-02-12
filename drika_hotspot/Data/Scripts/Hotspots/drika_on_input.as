@@ -178,18 +178,25 @@ class DrikaOnInput : DrikaElement{
 
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
-		if(ImGui_Combo("Input Type", current_input_type, input_type_names, input_type_names.size())){
+
+		ImGui_Text("Input Type");
+		ImGui_SameLine();
+		if(ImGui_Combo("##Input Type", current_input_type, input_type_names, input_type_names.size())){
 			input_type = input_types(current_input_type);
 		}
 
 		if(input_type == button_pressed){
-			if(ImGui_Combo("Button", input_index, input_names, input_names.size())){
+			ImGui_Text("Button");
+			ImGui_SameLine();
+			if(ImGui_Combo("##Button", input_index, input_names, input_names.size())){
 				GetInputData();
 				GetIcon();
 			}
 
 			if(input.input_identifier == input_other){
-				if(ImGui_InputText("Input", other_input, 64)){
+				ImGui_Text("Input");
+				ImGui_SameLine();
+				if(ImGui_InputText("##Input", other_input, 64)){
 					GetIcon();
 				}
 			}
@@ -199,10 +206,13 @@ class DrikaOnInput : DrikaElement{
 			}
 
 			if(use_prompt){
-				ImGui_DragFloat("prompt Size", prompt_size, 0.001f, 0.0f, 5.0f, "%.2f");
+				ImGui_Text("Prompt Size");
+				ImGui_SameLine();
+				ImGui_DragFloat("##Prompt Size", prompt_size, 0.001f, 0.0f, 5.0f, "%.2f");
 				ImGui_Checkbox("Custom Prompt", custom_prompt);
 				if(custom_prompt){
 					ImGui_Text("Path : " + custom_prompt_path);
+					ImGui_SameLine();
 					if(ImGui_Button("Set Path")){
 						string new_path = "";
 						new_path = GetUserPickedReadPath("png", "Data/Textures/UI");
@@ -213,7 +223,9 @@ class DrikaOnInput : DrikaElement{
 				}
 			}
 		}else if(input_type == type_text){
-			ImGui_InputText("Input", typed_text, 64);
+			ImGui_Text("Input");
+			ImGui_SameLine();
+			ImGui_InputText("##Input", typed_text, 64);
 		}
 	}
 

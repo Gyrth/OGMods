@@ -21,7 +21,9 @@ class DrikaSendLevelMessage : DrikaElement{
 	}
 
 	void DrawSettings(){
-		if(ImGui_InputText("Message", message, 64)){
+		ImGui_Text("Message");
+		ImGui_SameLine();
+		if(ImGui_InputText("##Message", message, 64)){
 			SetDisplayMessage();
 		}
 	}
