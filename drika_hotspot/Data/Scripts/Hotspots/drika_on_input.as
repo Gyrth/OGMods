@@ -88,6 +88,7 @@ class DrikaOnInput : DrikaElement{
 		LoadIdentifier(params);
 		show_team_option = true;
 		show_name_option = true;
+		show_character_option = true;
 
 		connection_types = {_movement_object};
 
