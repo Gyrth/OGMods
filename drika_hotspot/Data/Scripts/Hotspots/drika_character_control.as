@@ -125,9 +125,8 @@ class DrikaCharacterControl : DrikaElement{
 		current_type = character_option;
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		recovery_time = GetJSONFloat(params, "recovery_time", 1.0);
 		roll_recovery_time = GetJSONFloat(params, "roll_recovery_time", 0.2);
@@ -137,7 +136,6 @@ class DrikaCharacterControl : DrikaElement{
 		connection_types = {_movement_object};
 		drika_element_type = drika_character_control;
 		has_settings = true;
-		LoadIdentifier(params);
 		SetParamType();
 		InterpParam(params);
 		SetParamName();
@@ -164,7 +162,7 @@ class DrikaCharacterControl : DrikaElement{
 		}else if(character_option == wet){
 			data["wet_amount"] = JSONValue(wet_amount);
 		}
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
@@ -197,7 +195,7 @@ class DrikaCharacterControl : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
@@ -209,7 +207,7 @@ class DrikaCharacterControl : DrikaElement{
 
 	void GetBeforeParam(){
 		//Use the Objects in stead of MovementObject so that the params are available.
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		params_before.resize(0);
 
 		for(uint i = 0; i < targets.size(); i++){
@@ -263,16 +261,15 @@ class DrikaCharacterControl : DrikaElement{
 		}else if(param_type == string_param){
 			display_string = string_param_after;
 		}
-		return "SetCharacterParam " + GetTargetDisplayText() + " " + param_name + " " + display_string;
+		return "SetCharacterParam " + target_select.GetTargetDisplayText() + " " + param_name + " " + display_string;
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 
 		if(ImGui_Combo("Param Type", current_type, param_names)){
 			character_option = character_options(current_type);
@@ -436,7 +433,7 @@ class DrikaCharacterControl : DrikaElement{
 
 	bool SetParameter(bool reset){
 		//Use the Objects in stead of MovementObject so that the params are available.
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		if(targets.size() == 0){return false;}
 		for(uint i = 0; i < targets.size(); i++){
 			ScriptParams@ params = targets[i].GetScriptParams();

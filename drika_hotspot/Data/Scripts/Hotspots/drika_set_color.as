@@ -21,10 +21,8 @@ class DrikaSetColor : DrikaElement{
 		current_palette_slot = palette_slot;
 		after_color = GetJSONVec3(params, "after_color", vec3(1));
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_movement_object, _env_object, _item_object};
 		drika_element_type = drika_set_color;
@@ -39,7 +37,7 @@ class DrikaSetColor : DrikaElement{
 		data["after_color"].append(after_color.x);
 		data["after_color"].append(after_color.y);
 		data["after_color"].append(after_color.z);
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
@@ -48,7 +46,7 @@ class DrikaSetColor : DrikaElement{
     }
 
 	string GetDisplayString(){
-		return "SetColor " + GetTargetDisplayText() + " " + Vec3ToString(after_color);
+		return "SetColor " + target_select.GetTargetDisplayText() + " " + Vec3ToString(after_color);
 	}
 
 	void StartEdit(){
@@ -63,7 +61,7 @@ class DrikaSetColor : DrikaElement{
 
 	void GetNumPaletteColors(){
 		if(color_type == object_palette_color){
-			array<Object@> targets = GetTargetObjects();
+			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
 				palette_indexes.resize(0);
 				num_palette_colors = 0;
@@ -128,12 +126,11 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 		if(ImGui_Combo("Color Type", current_color_type, color_type_choices, color_type_choices.size())){
 			SetColor(true);
 			color_type = color_types(current_color_type);
@@ -160,7 +157,7 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			if(targets[i].GetType() == _movement_object){
 				MovementObject@ char = ReadCharacterID(targets[i].GetID());
@@ -180,7 +177,7 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void GetBeforeColor(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			if(color_type == object_palette_color){
 				if(targets[i].GetType() == _movement_object && targets[i].GetNumPaletteColors() > palette_slot){
@@ -193,7 +190,7 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	bool SetColor(bool reset){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			if(color_type == object_palette_color){
 				if(targets[i].GetType() == _movement_object && targets[i].GetNumPaletteColors() > palette_slot){

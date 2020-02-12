@@ -12,10 +12,8 @@ class DrikaTransformObject : DrikaElement{
 		placeholder_name = "Transform Object Helper";
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object};
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		has_settings = true;
 	}
@@ -23,7 +21,7 @@ class DrikaTransformObject : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["placeholder_id"] = JSONValue(placeholder_id);
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
@@ -32,7 +30,7 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	void GetBeforeParam(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			before_translation = targets[i].GetTranslation();
 			before_rotation = targets[i].GetRotation();
@@ -45,11 +43,11 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "Transform Object " + GetTargetDisplayText();
+		return "Transform Object " + target_select.GetTargetDisplayText();
 	}
 
 	void GetNewTransform(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			placeholder.SetTranslation(targets[i].GetTranslation());
 			placeholder.SetRotation(targets[i].GetRotation());
@@ -62,12 +60,11 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 	}
 
 	void TargetChanged(){
@@ -89,7 +86,7 @@ class DrikaTransformObject : DrikaElement{
 
 	void DrawEditing(){
 		if(ObjectExists(placeholder_id)){
-			array<Object@> targets = GetTargetObjects();
+			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
 				DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
@@ -103,7 +100,7 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	bool ApplyTransform(bool reset){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			targets[i].SetTranslation(reset?before_translation:placeholder.GetTranslation());
 			targets[i].SetRotation(reset?before_rotation:placeholder.GetRotation());

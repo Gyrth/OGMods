@@ -17,10 +17,8 @@ class DrikaCheckCharacterState : DrikaElement{
 		equals = GetJSONBool(params, "equals", true);
 		known_character_id = GetJSONInt(params, "known_character_id", 0);
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		drika_element_type = drika_check_character_state;
 		connection_types = {_movement_object};
@@ -29,8 +27,7 @@ class DrikaCheckCharacterState : DrikaElement{
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	JSONValue GetSaveData(){
@@ -40,16 +37,16 @@ class DrikaCheckCharacterState : DrikaElement{
 		if(state_choice == knows_about){
 			data["known_character_id"] = JSONValue(known_character_id);
 		}
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
 	string GetDisplayString(){
-		return "CheckCharacterState" + " " + GetTargetDisplayText() + (equals?" ":" not ") + state_choice_names[state_choice] + ((state_choice == knows_about)?" " +  known_character_id:"");
+		return "CheckCharacterState" + " " + target_select.GetTargetDisplayText() + (equals?" ":" not ") + state_choice_names[state_choice] + ((state_choice == knows_about)?" " +  known_character_id:"");
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 		ImGui_Checkbox("Equals", equals);
 		if(ImGui_Combo("Check for", current_state_choice, state_choice_names, state_choice_names.size())){
 			state_choice = state_choices(current_state_choice);
@@ -61,14 +58,14 @@ class DrikaCheckCharacterState : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
 	bool Trigger(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
 		bool all_in_state = true;
 		for(uint i = 0; i < targets.size(); i++){

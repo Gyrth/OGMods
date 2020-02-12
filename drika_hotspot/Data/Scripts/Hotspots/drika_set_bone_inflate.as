@@ -12,10 +12,8 @@ class DrikaSetBoneInflate : DrikaElement{
 		bone_index = GetJSONInt(params, "bone_index", 11);
 		current_bone_index = bone_index;
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_bone_inflate;
@@ -29,7 +27,7 @@ class DrikaSetBoneInflate : DrikaElement{
 		if(bone_name == "index"){
 			data["bone_index"] = JSONValue(bone_index);
 		}
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
@@ -40,12 +38,11 @@ class DrikaSetBoneInflate : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetBoneInflate " + GetTargetDisplayText() + " " + bone_name + " " + ((bone_name == "index")?(bone_index + " "):"") + inflate_value;
+		return "SetBoneInflate " + target_select.GetTargetDisplayText() + " " + bone_name + " " + ((bone_name == "index")?(bone_index + " "):"") + inflate_value;
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void StartEdit(){
@@ -64,7 +61,7 @@ class DrikaSetBoneInflate : DrikaElement{
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 
 		if(ImGui_Combo("Bone", current_index, bone_names, bone_names.size())){
 			SetBoneInflate(true);
@@ -91,14 +88,14 @@ class DrikaSetBoneInflate : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
 	bool SetBoneInflate(bool reset){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
 		for(uint i = 0; i < targets.size(); i++){
 			if(bone_name == "leftfingers"){

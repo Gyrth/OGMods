@@ -5,10 +5,8 @@ class DrikaSetEnabled : DrikaElement{
 	DrikaSetEnabled(JSONValue params = JSONValue()){
 		enabled = GetJSONBool(params, "enabled", true);
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		drika_element_type = drika_set_enabled;
 		connection_types = {_env_object, _hotspot_object};
@@ -18,7 +16,7 @@ class DrikaSetEnabled : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["enabled"] = JSONValue(enabled);
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
@@ -27,16 +25,15 @@ class DrikaSetEnabled : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetEnabled " + GetTargetDisplayText() + " " + enabled;
+		return "SetEnabled " + target_select.GetTargetDisplayText() + " " + enabled;
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 		ImGui_Text("Set To : ");
 		ImGui_SameLine();
 		ImGui_Checkbox("", enabled);
@@ -51,7 +48,7 @@ class DrikaSetEnabled : DrikaElement{
 	}
 
 	void GetBeforeParam(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		before_values.resize(0);
 		for(uint i = 0; i < targets.size(); i++){
 			before_values.insertLast(BeforeValue());
@@ -60,14 +57,14 @@ class DrikaSetEnabled : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
 	bool ApplyEnabled(bool reset){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			targets[i].SetEnabled(reset?before_values[i].bool_value:enabled);
 		}

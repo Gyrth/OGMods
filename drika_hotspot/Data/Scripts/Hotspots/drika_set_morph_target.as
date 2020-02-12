@@ -16,10 +16,8 @@ class DrikaSetMorphTarget : DrikaElement{
 		smoothing_duration = GetJSONFloat(params, "smoothing_duration", 0.0);
 		two_way_morph = GetJSONBool(params, "two_way_morph", false);
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_morph_target;
@@ -33,7 +31,7 @@ class DrikaSetMorphTarget : DrikaElement{
 		data["weight"] = JSONValue(weight);
 		data["smoothing_duration"] = JSONValue(smoothing_duration);
 		data["two_way_morph"] = JSONValue(two_way_morph);
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
@@ -42,15 +40,14 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetMorphTarget " + GetTargetDisplayText() + " " + morph_1 + (two_way_morph?"+" + morph_2:"") + " " + weight;
+		return "SetMorphTarget " + target_select.GetTargetDisplayText() + " " + morph_1 + (two_way_morph?"+" + morph_2:"") + " " + weight;
 	}
 
 	void StartSettings(){
+		target_select.CheckAvailableTargets();
 		if(available_morphs.size() == 0){
 			GetAvailableMorphs();
 		}
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
 		SetMorphTarget(false);
 	}
 
@@ -84,7 +81,7 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 
 		if(ImGui_Checkbox("Two Way Morph Target", two_way_morph)){
 			//A single morph target cannot go under 0.
@@ -167,7 +164,7 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
@@ -175,7 +172,7 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	bool SetMorphTarget(bool reset){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
 
 		if(reset){
@@ -240,7 +237,7 @@ class DrikaSetMorphTarget : DrikaElement{
 	void GetAvailableMorphs(){
 		available_morphs.resize(0);
 
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			level.SendMessage("drika_read_file " + hotspot.GetID() + " " + targets[i].char_path + " " + targets[i].GetID());
 		}

@@ -1,5 +1,6 @@
 #include "animation_group.as"
 #include "hotspots/drika_element.as"
+#include "target_select.as"
 #include "hotspots/drika_slow_motion.as"
 #include "hotspots/drika_on_input.as"
 #include "hotspots/drika_set_morph_target.as"
@@ -199,7 +200,7 @@ bool AcceptConnectionsTo(Object @other){
 	if(drika_elements.size() > 0){
 		if(GetCurrentElement().placeholder_id == other.GetID()){
 			return false;
-		}else if(GetCurrentElement().identifier_type == id && GetCurrentElement().connection_types.find(other.GetType()) != -1){
+		}else if(GetCurrentElement().connection_types.find(other.GetType()) != -1){
 			return true;
 		}
 	}

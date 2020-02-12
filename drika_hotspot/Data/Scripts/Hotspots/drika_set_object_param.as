@@ -15,10 +15,8 @@ class DrikaSetObjectParam : DrikaElement{
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
 		current_type = param_type;
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_env_object, _movement_object};
 		drika_element_type = drika_set_object_param;
@@ -37,7 +35,7 @@ class DrikaSetObjectParam : DrikaElement{
 		}else if(param_type == int_param){
 			data["param_after"] = JSONValue(int_param_after);
 		}
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
@@ -52,7 +50,7 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	void GetBeforeParam(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		params_before.resize(0);
 		for(uint i = 0; i < targets.size(); i++){
 			ScriptParams@ params = targets[i].GetScriptParams();
@@ -83,16 +81,15 @@ class DrikaSetObjectParam : DrikaElement{
 		}else if(param_type == int_param){
 			display_string = "" + int_param_after;
 		}
-		return "SetObjectParam " + GetTargetDisplayText() + " " + param_name + " " + display_string;
+		return "SetObjectParam " + target_select.GetTargetDisplayText() + " " + param_name + " " + display_string;
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 
 		ImGui_InputText("Param Name", param_name, 64);
 		if(ImGui_Combo("Param Type", current_type, param_type_choices, param_type_choices.size())){
@@ -109,7 +106,7 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
@@ -124,7 +121,7 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	bool SetParameter(bool reset){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			ScriptParams@ params = targets[i].GetScriptParams();
 

@@ -6,10 +6,8 @@ class DrikaSetVelocity : DrikaElement{
 		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
 		velocity_magnitude = GetJSONFloat(params, "velocity_magnitude", 5);
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		add_velocity = GetJSONBool(params, "add_velocity", true);
 
@@ -24,7 +22,7 @@ class DrikaSetVelocity : DrikaElement{
 		data["velocity_magnitude"] = JSONValue(velocity_magnitude);
 		data["placeholder_id"] = JSONValue(placeholder_id);
 		data["add_velocity"] = JSONValue(add_velocity);
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
@@ -37,23 +35,22 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SetVelocity " + "vel:" + velocity_magnitude + " target:" + GetTargetDisplayText();
+		return "SetVelocity " + "vel:" + velocity_magnitude + " target:" + target_select.GetTargetDisplayText();
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 		ImGui_DragFloat("Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);
 		ImGui_Checkbox("Add Velocity", add_velocity);
 	}
 
 	void DrawEditing(){
 		if(ObjectExists(placeholder_id)){
-			array<Object@> targets = GetTargetObjects();
+			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
 				DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
@@ -96,7 +93,7 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	void ApplyVelocity(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			vec3 up_direction = placeholder.GetRotation() * vec3(0, 1, 0);
 			if(targets[i].GetType() == _movement_object){

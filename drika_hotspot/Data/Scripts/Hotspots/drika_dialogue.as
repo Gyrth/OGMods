@@ -162,17 +162,14 @@ class DrikaDialogue : DrikaElement{
 		choice_4_go_to_line = GetJSONInt(params, "choice_4_go_to_line", 0);
 		choice_5_go_to_line = GetJSONInt(params, "choice_5_go_to_line", 0);
 
-		show_character_option = true;
-		show_team_option = true;
-		show_name_option = true;
-		show_reference_option = true;
 
 		drika_element_type = drika_dialogue;
 		has_settings = true;
 
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			connection_types = {_movement_object};
-			LoadIdentifier(params);
+			target_select.LoadIdentifier(params);
+			target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 		}
 
 		if(duplicating && dialogue_function == choice){
@@ -308,7 +305,7 @@ class DrikaDialogue : DrikaElement{
 		}
 
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
-			SaveIdentifier(data);
+			target_select.SaveIdentifier(data);
 		}
 
 		return data;
@@ -367,7 +364,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void UpdateActorName(){
-		actor_name = GetTargetDisplayText();
+		actor_name = target_select.GetTargetDisplayText();
 	}
 
 	void Delete(){
@@ -376,8 +373,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 		if(dialogue_function == say){
 			ImGui_SetTextBuf(say_text);
 		}else if(dialogue_function == set_actor_animation){
@@ -389,7 +385,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			for(uint i = 0; i < targets.size(); i++){
 				DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
@@ -638,7 +634,7 @@ class DrikaDialogue : DrikaElement{
 
 	void DrawSettings(){
 		if(connection_types.find(_movement_object) != -1){
-			DrawSelectTargetUI();
+			target_select.DrawSelectTargetUI();
 		}
 
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
@@ -846,7 +842,7 @@ class DrikaDialogue : DrikaElement{
 			if(say_started){
 				level.SendMessage("drika_dialogue_hide");
 			}
-			array<MovementObject@> targets = GetTargetMovementObjects();
+			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 			for(uint i = 0; i < targets.size(); i++){
 				targets[i].ReceiveScriptMessage("stop_talking");
@@ -859,7 +855,7 @@ class DrikaDialogue : DrikaElement{
 				ResetFadeToBlack();
 			}
 		}else if(dialogue_function == set_actor_dialogue_control){
-			array<MovementObject@> targets = GetTargetMovementObjects();
+			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 			for(uint i = 0; i < targets.size(); i++){
 				RemoveDialogueActor(targets[i].GetID());
@@ -903,7 +899,7 @@ class DrikaDialogue : DrikaElement{
 					SetActorAnimation();
 					triggered = true;
 				}else{
-					array<MovementObject@> targets = GetTargetMovementObjects();
+					array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 					for(uint i = 0; i < targets.size(); i++){
 						if(targets[i].GetBoolVar("in_animation")){
 							return false;
@@ -1107,7 +1103,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SetActorOmniscient(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
 			targets[i].ReceiveScriptMessage("set_omniscient " + omniscient);
@@ -1115,7 +1111,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SetActorHeadDirection(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
 			targets[i].ReceiveScriptMessage("set_head_target " + target_actor_head_direction.x + " " + target_actor_head_direction.y + " " + target_actor_head_direction.z + " " + target_actor_head_direction_weight);
@@ -1123,7 +1119,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SetActorTorsoDirection(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
 			targets[i].ReceiveScriptMessage("set_torso_target " + target_actor_torso_direction.x + " " + target_actor_torso_direction.y + " " + target_actor_torso_direction.z + " " + target_actor_torso_direction_weight);
@@ -1131,7 +1127,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SetActorEyeDirection(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
 			targets[i].ReceiveScriptMessage("set_eye_dir " + target_actor_eye_direction.x + " " + target_actor_eye_direction.y + " " + target_actor_eye_direction.z + " " + target_blink_multiplier);
@@ -1164,7 +1160,7 @@ class DrikaDialogue : DrikaElement{
 				return true;
 			}
 		}else if(GetInputPressed(0, "attack")){
-			array<MovementObject@> targets = GetTargetMovementObjects();
+			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 			string nametag = "\"" + actor_name + "\"";
 			say_timer = 0.0;
 			wait_timer = 0.0;
@@ -1193,7 +1189,7 @@ class DrikaDialogue : DrikaElement{
 		}else if(say_timer > 0.15){
 			say_timer = 0.0;
 			string nametag = "\"" + actor_name + "\"";
-			array<MovementObject@> targets = GetTargetMovementObjects();
+			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 			if(say_text_split[0].findFirst("[wait") != -1){
 				int start_index = say_text_split[0].findFirst("[wait");
@@ -1284,7 +1280,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SetActorPosition(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
 			/* targets[i].rigged_object().anim_client().Reset(); */
@@ -1297,7 +1293,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SetActorAnimation(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
 			string flags = "0";
@@ -1317,7 +1313,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SetActorDialogueControl(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
 			if(dialogue_control){

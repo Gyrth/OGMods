@@ -17,6 +17,8 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	int external_hotspot_id;
 	Object@ external_hotspot_obj = null;
 	bool reset_when_false;
+	string character_team;
+	int object_id;
 
 	target_character_types target_character_type;
 	hotspot_trigger_types hotspot_trigger_type;

@@ -17,10 +17,8 @@ class DrikaSendCharacterMessage : DrikaElement{
 		character_message_type = character_message_types(GetJSONInt(params, "character_message_type", character_message));
 		current_message_type = character_message_type;
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_send_character_message;
@@ -32,21 +30,20 @@ class DrikaSendCharacterMessage : DrikaElement{
 		JSONValue data;
 		data["character_message_type"] = JSONValue(character_message_type);
 		data["message"] = JSONValue(message);
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
 	string GetDisplayString(){
-		return "SendCharacterMessage " + GetTargetDisplayText() + " " + display_message;
+		return "SendCharacterMessage " + target_select.GetTargetDisplayText() + " " + display_message;
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 		if(ImGui_Combo("Message Type", current_message_type, message_type_choices, message_type_choices.size())){
 			character_message_type = character_message_types(current_message_type);
 		}
@@ -68,14 +65,14 @@ class DrikaSendCharacterMessage : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
 	bool Trigger(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
 		for(uint i = 0; i < targets.size(); i++){
 			if(character_message_type == character_message){

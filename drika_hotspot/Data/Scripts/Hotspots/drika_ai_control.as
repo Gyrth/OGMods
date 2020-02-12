@@ -14,6 +14,7 @@ class DrikaAIControl : DrikaElement{
 	int current_ai_goal;
 	int ai_goal;
 	int target_id;
+
 	array<ai_goals> goals_with_placeholders = {_investigate_slow, _investigate_urgent};
 
 	array<string> ai_goal_names = {		"Patrol",
@@ -38,10 +39,8 @@ class DrikaAIControl : DrikaElement{
 		drika_element_type = drika_ai_control;
 		has_settings = true;
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 	}
 
 	void PostInit(){
@@ -55,12 +54,12 @@ class DrikaAIControl : DrikaElement{
 		}
 		data["ai_goal"] = JSONValue(ai_goal);
 		data["target_id"] = JSONValue(target_id);
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
 	void DrawEditing(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			PlaceholderCheck();
@@ -81,16 +80,15 @@ class DrikaAIControl : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "AIControl " + ai_goal_names[ai_goal] + " " + GetTargetDisplayText();
+		return "AIControl " + ai_goal_names[ai_goal] + " " + target_select.GetTargetDisplayText();
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 
 		if(ImGui_Combo("AIGoal", current_ai_goal, ai_goal_names)){
 			ai_goal = ai_goals(current_ai_goal);
@@ -108,7 +106,7 @@ class DrikaAIControl : DrikaElement{
 	}
 
 	bool Trigger(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
 
 		string command = "";
@@ -187,7 +185,7 @@ class DrikaAIControl : DrikaElement{
 
 	void Reset(){
 		if(triggered){
-			array<MovementObject@> targets = GetTargetMovementObjects();
+			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 			if(ai_goal == _patrol){
 				if(ObjectExists(target_id)){

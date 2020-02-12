@@ -7,10 +7,8 @@ class DrikaSetCharacter : DrikaElement{
 		character_path = GetJSONString(params, "character_path", "Data/Characters/guard.xml");
 		cache_skeleton_info = GetJSONBool(params, "cache_skeleton_info", true);
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_set_character;
@@ -21,16 +19,16 @@ class DrikaSetCharacter : DrikaElement{
 		JSONValue data;
 		data["character_path"] = JSONValue(character_path);
 		data["cache_skeleton_info"] = JSONValue(cache_skeleton_info);
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
 	string GetDisplayString(){
-		return "SetCharacter " + GetTargetDisplayText() + " " + character_path;
+		return "SetCharacter " + target_select.GetTargetDisplayText() + " " + character_path;
 	}
 
 	void GetOriginalCharacter(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		original_character_paths.resize(0);
 		for(uint i = 0; i < targets.size(); i++){
 			original_character_paths.insertLast(BeforeValue());
@@ -39,12 +37,11 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 		ImGui_Text("Set To Character : ");
 		ImGui_SameLine();
 		ImGui_Text(character_path);
@@ -66,14 +63,14 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	void DrawEditing(){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 	}
 
 	bool SetParameter(bool reset){
-		array<MovementObject@> targets = GetTargetMovementObjects();
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		if(targets.size() == 0){return false;}
 		for(uint i = 0; i < targets.size(); i++){
 			if(targets[i].char_path == (reset?original_character_paths[i].string_value:character_path)){

@@ -102,10 +102,8 @@ class DrikaAnimation : DrikaElement{
 		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
 		parallel_operation = GetJSONBool(params, "parallel_operation", false);
 
-		show_team_option = true;
-		show_name_option = true;
-		show_character_option = true;
-		LoadIdentifier(params);
+		target_select.LoadIdentifier(params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		has_settings = true;
 	}
@@ -152,7 +150,7 @@ class DrikaAnimation : DrikaElement{
 			data["key_data"].append(current_key_data);
 
 		}
-		SaveIdentifier(data);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
@@ -190,18 +188,17 @@ class DrikaAnimation : DrikaElement{
 		if(animate_camera){
 			return "Animation Camera";
 		}else{
-			return "Animation " + GetTargetDisplayText();
+			return "Animation " + target_select.GetTargetDisplayText();
 		}
 	}
 
 	void StartSettings(){
-		CheckReferenceAvailable();
-		CheckCharactersAvailable();
+		target_select.CheckAvailableTargets();
 		WriteAnimationKeyParams();
 	}
 
 	void DrawSettings(){
-		DrawSelectTargetUI();
+		target_select.DrawSelectTargetUI();
 		if(ImGui_Combo("Animation Method", current_animation_method, animation_method_names, animation_method_names.size())){
 			animation_method = animation_methods(current_animation_method);
 			//Remove all the old data when switching between methods.
@@ -237,7 +234,7 @@ class DrikaAnimation : DrikaElement{
 		if(ImGui_Checkbox("Animate Camera", animate_camera)){
 			SetCurrentTransform();
 			if(animate_camera){
-				ClearTarget();
+				target_select.ClearTarget();
 			}
 		}
 		if(ImGui_Checkbox("Animate Scale", animate_scale)){
@@ -279,7 +276,7 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	bool Trigger(){
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 		// Don't do anything if the target object does not exist and the animation is not targeting the camera.
 		if(targets.size() == 0 && !animate_camera){
 			return false;
@@ -494,7 +491,7 @@ class DrikaAnimation : DrikaElement{
 				}
 			}
 		}else{
-			array<Object@> targets = GetTargetObjects();
+			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
 				targets[i].SetTranslation(translation);
 				targets[i].SetRotation(rotation);
@@ -795,7 +792,7 @@ class DrikaAnimation : DrikaElement{
 		quaternion new_rotation;
 		vec3 new_position;
 
-		array<Object@> targets = GetTargetObjects();
+		array<Object@> targets = target_select.GetTargetObjects();
 
 		if(interpolate_translation){
 			float node_distance = distance(next_key.GetTranslation(), current_key.GetTranslation());
@@ -899,7 +896,7 @@ class DrikaAnimation : DrikaElement{
 			}
 		}
 		if(!animate_camera){
-			array<Object@> targets = GetTargetObjects();
+			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
 				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
@@ -911,7 +908,7 @@ class DrikaAnimation : DrikaElement{
 			if(moving_animation_key){
 				MoveAnimationKey();
 			}else{
-				array<Object@> targets = GetTargetObjects();
+				array<Object@> targets = target_select.GetTargetObjects();
 				//Don't move/insert/delete keys when the modifier keys are pressed.
 				if(GetInputDown(0, "lctrl") || GetInputDown(0, "lalt")){
 					return;
@@ -1016,7 +1013,7 @@ class DrikaAnimation : DrikaElement{
 		if(animate_camera){
 			@target = camera_placeholder;
 		}else{
-			array<Object@> targets = GetTargetObjects();
+			array<Object@> targets = target_select.GetTargetObjects();
 			if(targets.size() == 0){
 				return;
 			}
@@ -1040,7 +1037,7 @@ class DrikaAnimation : DrikaElement{
 
 	void LeftClick(){
 		if(animation_method == timeline_method){
-			array<Object@> target_objects = GetTargetObjects();
+			array<Object@> target_objects = target_select.GetTargetObjects();
 			if(this_hotspot.IsSelected()){
 				this_hotspot.SetSelected(false);
 				for(uint i = 0 ; i < target_objects.size(); i++){
