@@ -38,7 +38,7 @@ class DrikaSlowMotion : DrikaElement{
 	}
 
 	void DrawSettings(){
-		ImGui_Checkbox("Wait untill finished", wait);
+		ImGui_Checkbox("Wait until finished", wait);
 		ImGui_SliderFloat("Target Time Scale", target_time_scale, 0.0f, 1.0f, "%.2f");
 		ImGui_SliderFloat("Duration", duration, 0.0f, 10.0f, "%.2f");
 		ImGui_SliderFloat("Delay", delay, 0.0f, 10.0f, "%.2f");
