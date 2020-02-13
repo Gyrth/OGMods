@@ -102,15 +102,28 @@ class DrikaTransformObject : DrikaElement{
 	bool ApplyTransform(bool reset){
 		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			targets[i].SetTranslation(reset?before_translation:placeholder.GetTranslation());
-			targets[i].SetRotation(reset?before_rotation:placeholder.GetRotation());
-			vec3 scale = placeholder.GetScale();
-			vec3 bounds = targets[i].GetBoundingBox();
-			if(bounds == vec3(0.0)){
-				bounds = vec3(1.0);
+			if(targets[i].GetType() == _movement_object){
+				MovementObject@ char = ReadCharacterID(targets[i].GetID());
+
+				vec3 facing = Mult(reset?before_rotation:placeholder.GetRotation(), vec3(0,0,1));
+				float rot = atan2(facing.x, facing.z) * 180.0f / PI;
+				float new_rotation = floor(rot + 0.5f);
+				vec3 new_facing = Mult(quaternion(vec4(0, 1, 0, new_rotation * 3.1415f / 180.0f)), vec3(1, 0, 0));
+
+				char.SetRotationFromFacing(new_facing);
+				char.position = reset?before_translation:placeholder.GetTranslation();
+				char.velocity = vec3(0.0, 0.0, 0.0);
+			}else{
+				targets[i].SetTranslation(reset?before_translation:placeholder.GetTranslation());
+				targets[i].SetRotation(reset?before_rotation:placeholder.GetRotation());
+				vec3 scale = placeholder.GetScale();
+				vec3 bounds = targets[i].GetBoundingBox();
+				if(bounds == vec3(0.0)){
+					bounds = vec3(1.0);
+				}
+				vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
+				targets[i].SetScale(reset?before_scale:new_scale);
 			}
-			vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
-			targets[i].SetScale(reset?before_scale:new_scale);
 		}
 		return true;
 	}

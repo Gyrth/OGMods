@@ -40,6 +40,7 @@ class DrikaAnimation : DrikaElement{
 	bool animate_scale;
 	float duration;
 	float extra_yaw;
+	bool moved_spawn_point = false;
 
 	int key_index = 0;
 	Object@ current_key;
@@ -503,13 +504,37 @@ class DrikaAnimation : DrikaElement{
 			}
 		}else{
 			array<Object@> targets = target_select.GetTargetObjects();
+
 			for(uint i = 0; i < targets.size(); i++){
-				targets[i].SetTranslation(translation);
-				targets[i].SetRotation(rotation);
-				if(animate_scale){
-					targets[i].SetScale(scale);
+				if(targets[i].GetType() == _movement_object){
+					MovementObject@ char = ReadCharacterID(targets[i].GetID());
+
+					vec3 facing = Mult(rotation, vec3(0,0,1));
+					float rot = atan2(facing.x, facing.z) * 180.0f / PI;
+					float new_rotation = floor(rot + 0.5f);
+					vec3 new_facing = Mult(quaternion(vec4(0, 1, 0, new_rotation * 3.1415f / 180.0f)), vec3(1, 0, 0));
+
+					char.SetRotationFromFacing(new_facing);
+					char.position = translation;
+					char.velocity = vec3(0.0, 0.0, 0.0);
+
+					if(editing || (!editing && moved_spawn_point)){
+						if(editing){
+							moved_spawn_point = true;
+						}else{
+							moved_spawn_point = false;
+						}
+						targets[i].SetTranslation(translation);
+						targets[i].SetRotation(rotation);
+					}
+				}else{
+					targets[i].SetTranslation(translation);
+					targets[i].SetRotation(rotation);
+					if(animate_scale){
+						targets[i].SetScale(scale);
+					}
+					RefreshChildren(targets[i]);
 				}
-				RefreshChildren(targets[i]);
 			}
 		}
 	}
