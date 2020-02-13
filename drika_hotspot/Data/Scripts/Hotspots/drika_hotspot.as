@@ -51,7 +51,6 @@ Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
 string param_delimiter = "|";
 array<string> messages;
 bool is_selected = false;
-const int _ragdoll_state = 4;
 array<ObjectReference@> object_references;
 string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
 bool duplicating = false;
@@ -74,6 +73,12 @@ bool element_added = false;
 array<AnimationGroup@> all_animations;
 array<AnimationGroup@> current_animations;
 array<string> active_mods;
+
+const int _movement_state = 0;  // character is moving on the ground
+const int _ground_state = 1;  // character has fallen down or is raising up, ATM ragdolls handle most of this
+const int _attack_state = 2;  // character is performing an attack
+const int _hit_reaction_state = 3;  // character was hit or dealt damage to and has to react to it in some manner
+const int _ragdoll_state = 4;  // character is falling in ragdoll mode
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);

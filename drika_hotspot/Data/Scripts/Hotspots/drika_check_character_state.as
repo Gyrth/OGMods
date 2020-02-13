@@ -1,11 +1,33 @@
 enum state_choices { 	awake = 0,
 						unconscious = 1,
 						dead = 2,
-						knows_about = 3
+						knows_about = 3,
+						in_combat = 4,
+						moving = 5,
+						attacking = 6,
+						ragdolling = 7,
+						hit_reacting = 8,
+						patrolling = 9,
+						investigating = 10,
+						getting_help = 11,
+						fleeing = 12
 					}
 
+enum AIGoal {
+    _ai_patrol,
+    _ai_attack,
+    _ai_investigate,
+    _ai_get_help,
+    _ai_escort,
+    _ai_get_weapon,
+    _ai_navigate,
+    _ai_struggle,
+    _ai_hold_still,
+    _ai_flee
+};
+
 class DrikaCheckCharacterState : DrikaElement{
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "Patrolling", "Investigating", "Getting Help", "Investigating"};
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
@@ -85,6 +107,51 @@ class DrikaCheckCharacterState : DrikaElement{
 					if(known != equals){
 						all_in_state = false;
 					}
+				}
+			}else if(state_choice == in_combat){
+				bool state = (targets[i].GetIntVar("goal") == _ai_attack);
+				if(state != equals){
+					all_in_state = false;
+				}
+			}else if(state_choice == moving){
+				bool state = (length(targets[i].velocity) > 1.0);
+				if(state != equals){
+					all_in_state = false;
+				}
+			}else if(state_choice == attacking){
+				bool state = (targets[i].GetIntVar("state") == _attack_state);
+				if(state != equals){
+					all_in_state = false;
+				}
+			}else if(state_choice == ragdolling){
+				bool state = (targets[i].GetIntVar("state") == _ragdoll_state);
+				if(state != equals){
+					all_in_state = false;
+				}
+			}else if(state_choice == hit_reacting){
+				bool state = (targets[i].GetIntVar("state") == _hit_reaction_state);
+				if(state != equals){
+					all_in_state = false;
+				}
+			}else if(state_choice == patrolling){
+				bool state = (targets[i].GetIntVar("goal") == _ai_patrol);
+				if(state != equals){
+					all_in_state = false;
+				}
+			}else if(state_choice == investigating){
+				bool state = (targets[i].GetIntVar("goal") == _ai_investigate);
+				if(state != equals){
+					all_in_state = false;
+				}
+			}else if(state_choice == getting_help){
+				bool state = (targets[i].GetIntVar("goal") == _ai_get_help);
+				if(state != equals){
+					all_in_state = false;
+				}
+			}else if(state_choice == fleeing){
+				bool state = (targets[i].GetIntVar("goal") == _ai_flee);
+				if(state != equals){
+					all_in_state = false;
 				}
 			}else{
 				if((targets[i].GetIntVar("knocked_out") != state_choice) == equals){
