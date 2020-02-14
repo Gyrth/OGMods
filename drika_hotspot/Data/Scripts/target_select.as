@@ -2,7 +2,8 @@ enum target_options {	id_option = (1<<0),
 						reference_option = (1<<1),
 						team_option = (1<<2),
 						name_option = (1<<3),
-						character_option = (1<<4)
+						character_option = (1<<4),
+						item_option = (1<<5)
 					};
 
 class TargetSelect{
@@ -19,6 +20,8 @@ class TargetSelect{
 	array<string> available_references;
 	array<string> available_character_names;
 	array<int> available_character_ids;
+	array<string> available_item_names;
+	array<int> available_item_ids;
 	int target_option;
 	DrikaElement@ parent;
 
@@ -70,12 +73,32 @@ class TargetSelect{
 		}
 	}
 
+	void CheckItemsAvailable(){
+		available_item_ids.resize(0);
+		available_item_names.resize(0);
+
+		for(int i = 0; i < GetNumItems(); i++){
+			ItemObject@ item = ReadItem(i);
+
+			if(item.GetLabel() == ""){
+				available_item_names.insertLast("Item " + item.GetID());
+			}else{
+				available_item_names.insertLast(item.GetLabel() + " " + item.GetID());
+			}
+
+			available_item_ids.insertLast(item.GetID());
+		}
+	}
+
 	void CheckAvailableTargets(){
 		if((target_option & character_option) != 0){
 			CheckCharactersAvailable();
 		}
 		if((target_option & reference_option) != 0){
 			CheckReferenceAvailable();
+		}
+		if((target_option & item_option) != 0){
+			CheckItemsAvailable();
 		}
 	}
 
@@ -106,6 +129,10 @@ class TargetSelect{
 			identifier_choices.insertLast("Name");
 		}
 
+		if((target_option & item_option) != 0 && available_item_ids.size() > 0){
+			identifier_choices.insertLast("Item");
+		}
+
 		int current_identifier_type;
 
 		for(uint i = 0; i < identifier_choices.size(); i++){
@@ -113,6 +140,7 @@ class TargetSelect{
 			 	identifier_type == team && identifier_choices[i] == "Team"||
 				identifier_type == reference && identifier_choices[i] == "Reference"||
 				identifier_type == character && identifier_choices[i] == "Character"||
+				identifier_type == item && identifier_choices[i] == "Item"||
 				identifier_type == name && identifier_choices[i] == "Name"){
 				current_identifier_type = i;
 				break;
@@ -122,8 +150,6 @@ class TargetSelect{
 		ImGui_Text("Identifier Type");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Identifier Type" + tag, current_identifier_type, identifier_choices, identifier_choices.size())){
-
-			if(identifier_type == current_identifier_type){return;}
 
 			parent.PreTargetChanged();
 			if(identifier_choices[current_identifier_type] == "ID"){
@@ -136,6 +162,8 @@ class TargetSelect{
 				identifier_type = name;
 			}else if(identifier_choices[current_identifier_type] == "Character"){
 				identifier_type = character;
+			}else if(identifier_choices[current_identifier_type] == "Item"){
+				identifier_type = item;
 			}
 			parent.TargetChanged();
 		}
@@ -216,6 +244,30 @@ class TargetSelect{
 				object_id = available_character_ids[current_character];
 				parent.TargetChanged();
 			}
+		}else if(identifier_type == item){
+			int current_item = -1;
+			for(uint i = 0; i < available_item_ids.size(); i++){
+				if(object_id == available_item_ids[i]){
+					current_item = i;
+					break;
+				}
+			}
+
+			//Pick the first item if the object_id can't be found.
+			if(current_item == -1 && available_item_ids.size() > 0){
+				Log(warning, "Object item does not exist " + object_id);
+				current_item = 0;
+				object_id = available_item_ids[0];
+				Log(warning, "Setting to " + object_id);
+			}
+
+			ImGui_Text("Item");
+			ImGui_SameLine();
+			if(ImGui_Combo("##Item" + tag, current_item, available_item_names, available_item_names.size())){
+				parent.PreTargetChanged();
+				object_id = available_item_ids[current_item];
+				parent.TargetChanged();
+			}
 		}
 	}
 
@@ -230,6 +282,8 @@ class TargetSelect{
 		}else if(identifier_type == name){
 			data[identifier_tag] = JSONValue(object_name);
 		}else if(identifier_type == character){
+			data[identifier_tag] = JSONValue(object_id);
+		}else if(identifier_type == item){
 			data[identifier_tag] = JSONValue(object_id);
 		}
 	}
@@ -250,6 +304,9 @@ class TargetSelect{
 				object_name = params[identifier_tag].asString();
 			}else if(params[identifier_type_tag].asInt() == character){
 				identifier_type = identifier_types(character);
+				object_id = params[identifier_tag].asInt();
+			}else if(params[identifier_type_tag].asInt() == item){
+				identifier_type = identifier_types(item);
 				object_id = params[identifier_tag].asInt();
 			}
 		}else{
@@ -300,6 +357,15 @@ class TargetSelect{
 				}
 			}
 		}else if(identifier_type == character){
+			if(object_id == -1){
+				//Do nothing.
+			}else if(!ObjectExists(object_id)){
+				Log(warning, "The object with id " + object_id + " doesn't exist anymore, so resetting to -1.");
+				object_id = -1;
+			}else{
+				target_objects.insertLast(ReadObjectFromID(object_id));
+			}
+		}else if(identifier_type == item){
 			if(object_id == -1){
 				//Do nothing.
 			}else if(!ObjectExists(object_id)){
@@ -386,6 +452,18 @@ class TargetSelect{
 						return char_obj.GetName();
 					}else{
 						return char_obj.GetID() + "";
+					}
+				}
+			}
+		}else if(identifier_type == item){
+			if(object_id != -1){
+				if(ObjectExists(object_id)){
+					ItemObject@ item_obj = ReadItemID(object_id);
+
+					if(item_obj.GetLabel() != ""){
+						return item_obj.GetLabel();
+					}else{
+						return item_obj.GetID() + "";
 					}
 				}
 			}

@@ -118,7 +118,8 @@ enum identifier_types {	id = 0,
 						reference = 1,
 						team = 2,
 						name = 3,
-						character = 4
+						character = 4,
+						item = 5
 					};
 
 enum param_types { 	string_param = 0,
