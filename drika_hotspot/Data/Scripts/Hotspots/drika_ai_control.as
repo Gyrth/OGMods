@@ -55,7 +55,7 @@ class DrikaAIControl : DrikaElement{
 		}
 		data["ai_goal"] = JSONValue(ai_goal);
 		target_select.SaveIdentifier(data);
-		target_select.SaveIdentifier(data);
+		ai_target.SaveIdentifier(data);
 		return data;
 	}
 
@@ -67,6 +67,23 @@ class DrikaAIControl : DrikaElement{
 			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
 				DebugDrawLine(placeholder.GetTranslation(), targets[i].position, vec3(0.0, 1.0, 0.0), _delete_on_update);
 				DebugDrawBillboard("Data/Textures/ui/challenge_mode/quit_icon_c.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
+			}
+
+			if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon){
+				array<Object@> ai_targets = ai_target.GetTargetObjects();
+
+				for(uint j = 0; j < ai_targets.size(); j++){
+					vec3 target_location = ai_targets[j].GetTranslation();
+
+					if(ai_targets[j].GetType() == _item_object){
+						ItemObject@ item_obj = ReadItemID(ai_targets[j].GetID());
+						target_location = item_obj.GetPhysicsPosition();
+					}else if(ai_targets[j].GetType() == _movement_object){
+						MovementObject@ char = ReadCharacterID(ai_targets[j].GetID());
+						target_location = char.position;
+					}
+					DebugDrawLine(targets[i].position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
+				}
 			}
 		}
 	}
@@ -81,7 +98,11 @@ class DrikaAIControl : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "AIControl " + ai_goal_names[ai_goal] + " " + target_select.GetTargetDisplayText();
+		string display_text = "AIControl " + target_select.GetTargetDisplayText() + " " + ai_goal_names[ai_goal];
+		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon){
+			display_text += " " + ai_target.GetTargetDisplayText();
+		}
+		return display_text;
 	}
 
 	void StartSettings(){
