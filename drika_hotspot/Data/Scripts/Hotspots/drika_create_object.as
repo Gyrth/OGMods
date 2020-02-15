@@ -13,6 +13,7 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void Delete(){
+		Reset();
 		QueueDeleteObjectID(placeholder_id);
 	}
 
