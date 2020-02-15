@@ -28,7 +28,7 @@ enum AIGoal {
 };
 
 class DrikaCheckCharacterState : DrikaElement{
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "Patrolling", "Investigating", "Getting Help", "Investigating", "In Proximity"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "Patrolling", "Investigating", "Getting Help", "Fleeing", "In Proximity"};
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
