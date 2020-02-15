@@ -133,7 +133,7 @@ class TargetSelect{
 			identifier_choices.insertLast("Item");
 		}
 
-		int current_identifier_type;
+		int current_identifier_type = -1;
 
 		for(uint i = 0; i < identifier_choices.size(); i++){
 			if(	identifier_type == id && identifier_choices[i] == "ID"||
@@ -147,10 +147,15 @@ class TargetSelect{
 			}
 		}
 
+		bool refresh_target = false;
+		if(current_identifier_type == -1){
+			current_identifier_type = 0;
+			refresh_target = true;
+		}
+
 		ImGui_Text("Identifier Type");
 		ImGui_SameLine();
-		if(ImGui_Combo("##Identifier Type" + tag, current_identifier_type, identifier_choices, identifier_choices.size())){
-
+		if(ImGui_Combo("##Identifier Type" + tag, current_identifier_type, identifier_choices, identifier_choices.size()) || refresh_target){
 			parent.PreTargetChanged();
 			if(identifier_choices[current_identifier_type] == "ID"){
 				identifier_type = id;

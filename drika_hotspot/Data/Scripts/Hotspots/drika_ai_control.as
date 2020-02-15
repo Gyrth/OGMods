@@ -41,7 +41,17 @@ class DrikaAIControl : DrikaElement{
 		target_select.LoadIdentifier(params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 		ai_target.LoadIdentifier(params);
-		ai_target.target_option = id_option | name_option | character_option | reference_option | team_option;
+		SetTargetOptions();
+	}
+
+	void SetTargetOptions(){
+		if(ai_goal == _patrol){
+			ai_target.target_option = id_option | reference_option;
+		}else if(ai_goal == _get_weapon){
+			ai_target.target_option = id_option | reference_option | item_option;
+		}else if(ai_goal == _attack || ai_goal == _escort){
+			ai_target.target_option = id_option | name_option | character_option | reference_option | team_option;
+		}
 	}
 
 	void PostInit(){
@@ -117,18 +127,20 @@ class DrikaAIControl : DrikaElement{
 		ImGui_SameLine();
 		if(ImGui_Combo("##AIGoal", current_ai_goal, ai_goal_names)){
 			ai_goal = ai_goals(current_ai_goal);
+			SetTargetOptions();
+			StartSettings();
 		}
 
 		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon){
 			ImGui_Separator();
 			if(ai_goal == _patrol){
-				ImGui_Text("Pathpoint ID");
+				ImGui_Text("Pathpoint");
 			}else if(ai_goal == _attack){
-				ImGui_Text("Attack Character ID");
+				ImGui_Text("Attack Character");
 			}else if(ai_goal == _escort){
-				ImGui_Text("Escord Character ID");
+				ImGui_Text("Escord Character");
 			}else if(ai_goal == _get_weapon){
-				ImGui_Text("Weapon ID");
+				ImGui_Text("Weapon");
 			}
 			ai_target.DrawSelectTargetUI();
 		}
