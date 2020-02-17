@@ -339,15 +339,20 @@ class TargetSelect{
 				target_objects.insertLast(ReadObjectFromID(registered_object_id));
 			}
 		}else if (identifier_type == team){
-			array<int> object_ids = GetObjectIDs();
+			array<int> object_ids = GetObjectIDsType(_movement_object);
 			for(uint i = 0; i < object_ids.size(); i++){
 				Object@ obj = ReadObjectFromID(object_ids[i]);
 				ScriptParams@ obj_params = obj.GetScriptParams();
+
 				if(obj_params.HasParam("Teams")){
-					//Removed all the spaces.
-					string no_spaces_param = join(obj_params.GetString("Teams").split(" "), "");
-					//Teams are , seperated.
-					array<string> teams = no_spaces_param.split(",");
+					array<string> teams;
+					//Teams are , seperated or space comma.
+					array<string> space_comma_separated = obj_params.GetString("Teams").split(", ");
+					for(uint j = 0; j < space_comma_separated.size(); j++){
+						array<string> comma_separated = space_comma_separated[j].split(",");
+						teams.insertAt(0, comma_separated);
+					}
+
 					if(teams.find(character_team) != -1){
 						target_objects.insertLast(obj);
 					}
