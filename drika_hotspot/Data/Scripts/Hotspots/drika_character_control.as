@@ -58,6 +58,7 @@ class DrikaCharacterControl : DrikaElement{
 	float roll_recovery_time;
 	float damage_amount;
 	float wet_amount;
+	array<Object@> target_cache;
 
 	array<BeforeValue@> params_before;
 
@@ -505,7 +506,15 @@ class DrikaCharacterControl : DrikaElement{
 
 	bool SetParameter(bool reset){
 		//Use the Objects in stead of MovementObject so that the params are available.
-		array<Object@> targets = target_select.GetTargetObjects();
+		array<Object@> targets;
+
+		if(!reset){
+			targets = target_select.GetTargetObjects();
+			target_cache = targets;
+		}else{
+			targets = target_cache;
+		}
+
 		if(targets.size() == 0){return false;}
 		for(uint i = 0; i < targets.size(); i++){
 			ScriptParams@ params = targets[i].GetScriptParams();
