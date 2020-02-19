@@ -1,50 +1,50 @@
-enum character_options { 	aggression = 0,
-							attack_damage = 1,
-							attack_knockback = 2,
-							attack_speed = 3,
-							block_followup = 4,
-							block_skill = 5,
-							cannot_be_disarmed = 6,
-							character_scale = 7,
-							damage_resistance = 8,
-							ear_size = 9,
-							fat = 10,
-							focus_fov_distance = 11,
-							focus_fov_horizontal = 12,
-							focus_fov_vertical = 13,
-							ground_aggression = 14,
-							knocked_out_shield = 15,
-							left_handed = 16,
-							movement_speed = 17,
-							muscle = 18,
-							peripheral_fov_distance = 19,
-							peripheral_fov_horizontal = 20,
-							peripheral_fov_vertical = 21,
-							species = 22,
-							static_char = 23,
-							teams = 24,
-							fall_damage_mult = 25,
-							fear_afraid_at_health_level = 26,
-							fear_always_afraid_on_sight = 27,
-							fear_causes_fear_on_sight = 28,
-							fear_never_afraid_on_sight = 29,
-							no_look_around = 30,
-							stick_to_nav_mesh = 31,
-							throw_counter_probability = 32,
-							is_throw_trainer = 33,
-							weapon_catch_skill = 34,
-							wearing_metal_armor = 35,
-							ignite = 36,
-							extinguish = 37,
-							is_player = 38,
-							kill = 39,
-							revive = 40,
-							limp_ragdoll = 41,
-							injured_ragdoll = 42,
-							ragdoll = 43,
-							cut_throat = 44,
-							apply_damage = 45,
-							wet = 46
+enum character_control_options { 	aggression = 0,
+									attack_damage = 1,
+									attack_knockback = 2,
+									attack_speed = 3,
+									block_followup = 4,
+									block_skill = 5,
+									cannot_be_disarmed = 6,
+									character_scale = 7,
+									damage_resistance = 8,
+									ear_size = 9,
+									fat = 10,
+									focus_fov_distance = 11,
+									focus_fov_horizontal = 12,
+									focus_fov_vertical = 13,
+									ground_aggression = 14,
+									knocked_out_shield = 15,
+									left_handed = 16,
+									movement_speed = 17,
+									muscle = 18,
+									peripheral_fov_distance = 19,
+									peripheral_fov_horizontal = 20,
+									peripheral_fov_vertical = 21,
+									species = 22,
+									static_char = 23,
+									teams = 24,
+									fall_damage_mult = 25,
+									fear_afraid_at_health_level = 26,
+									fear_always_afraid_on_sight = 27,
+									fear_causes_fear_on_sight = 28,
+									fear_never_afraid_on_sight = 29,
+									no_look_around = 30,
+									stick_to_nav_mesh = 31,
+									throw_counter_probability = 32,
+									is_throw_trainer = 33,
+									weapon_catch_skill = 34,
+									wearing_metal_armor = 35,
+									ignite = 36,
+									extinguish = 37,
+									is_player = 38,
+									kill = 39,
+									revive = 40,
+									limp_ragdoll = 41,
+									injured_ragdoll = 42,
+									ragdoll = 43,
+									cut_throat = 44,
+									apply_damage = 45,
+									wet = 46
 					};
 
 class DrikaCharacterControl : DrikaElement{
@@ -63,7 +63,7 @@ class DrikaCharacterControl : DrikaElement{
 	array<BeforeValue@> params_before;
 
 	param_types param_type;
-	character_options character_option;
+	character_control_options character_control_option;
 	string param_name;
 
 	array<int> string_parameters = {species, teams};
@@ -122,8 +122,8 @@ class DrikaCharacterControl : DrikaElement{
 								};
 
 	DrikaCharacterControl(JSONValue params = JSONValue()){
-		character_option = character_options(GetJSONInt(params, "character_option", 0));
-		current_type = character_option;
+		character_control_option = character_control_options(GetJSONInt(params, "character_option", 0));
+		current_type = character_control_option;
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
 
 		target_select.LoadIdentifier(params);
@@ -144,7 +144,7 @@ class DrikaCharacterControl : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["character_option"] = JSONValue(character_option);
+		data["character_option"] = JSONValue(character_control_option);
 		data["param_type"] = JSONValue(param_type);
 		if(param_type == int_param){
 			data["param_after"] = JSONValue(int_param_after);
@@ -155,12 +155,12 @@ class DrikaCharacterControl : DrikaElement{
 		}else if(param_type == string_param){
 			data["param_after"] = JSONValue(string_param_after);
 		}
-		if(character_option == limp_ragdoll || character_option == injured_ragdoll || character_option == ragdoll){
+		if(character_control_option == limp_ragdoll || character_control_option == injured_ragdoll || character_control_option == ragdoll){
 			data["recovery_time"] = JSONValue(recovery_time);
 			data["roll_recovery_time"] = JSONValue(roll_recovery_time);
-		}else if(character_option == apply_damage){
+		}else if(character_control_option == apply_damage){
 			data["damage_amount"] = JSONValue(damage_amount);
-		}else if(character_option == wet){
+		}else if(character_control_option == wet){
 			data["wet_amount"] = JSONValue(wet_amount);
 		}
 		target_select.SaveIdentifier(data);
@@ -168,15 +168,15 @@ class DrikaCharacterControl : DrikaElement{
 	}
 
 	void SetParamType(){
-		if(string_parameters.find(character_option) != -1){
+		if(string_parameters.find(character_control_option) != -1){
 			param_type = string_param;
-		}else if(float_parameters.find(character_option) != -1){
+		}else if(float_parameters.find(character_control_option) != -1){
 			param_type = float_param;
-		}else if(int_parameters.find(character_option) != -1){
+		}else if(int_parameters.find(character_control_option) != -1){
 			param_type = int_param;
-		}else if(bool_parameters.find(character_option) != -1){
+		}else if(bool_parameters.find(character_control_option) != -1){
 			param_type = bool_param;
-		}else if(function_parameters.find(character_option) != -1){
+		}else if(function_parameters.find(character_control_option) != -1){
 			param_type = function_param;
 		}
 	}
@@ -203,7 +203,7 @@ class DrikaCharacterControl : DrikaElement{
 	}
 
 	void SetParamName(){
-		param_name = param_names[character_option];
+		param_name = param_names[character_control_option];
 	}
 
 	void GetBeforeParam(){
@@ -242,7 +242,7 @@ class DrikaCharacterControl : DrikaElement{
 					params.AddIntCheckbox(param_name, bool_param_after);
 				}
 				params_before[i].bool_value = (params.GetInt(param_name) == 1);
-			}else if(character_option == is_player){
+			}else if(character_control_option == is_player){
 				if(targets[i].GetType() == _movement_object){
 					MovementObject@ char = ReadCharacterID(targets[i].GetID());
 					params_before[i].bool_value = char.is_player;
@@ -262,7 +262,7 @@ class DrikaCharacterControl : DrikaElement{
 		}else if(param_type == string_param){
 			display_string = string_param_after;
 		}
-		return "SetCharacterParam " + target_select.GetTargetDisplayText() + " " + param_name + " " + display_string;
+		return "CharacterControl " + target_select.GetTargetDisplayText() + " " + param_name + " " + display_string;
 	}
 
 	void StartSettings(){
@@ -275,12 +275,12 @@ class DrikaCharacterControl : DrikaElement{
 		ImGui_Text("Param Type");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Param Type", current_type, param_names)){
-			character_option = character_options(current_type);
+			character_control_option = character_control_options(current_type);
 			SetParamType();
 			SetParamName();
 		}
 
-		switch(character_option){
+		switch(character_control_option){
 			case aggression:
 				ImGui_Text(param_name);
 				ImGui_SameLine();
@@ -535,7 +535,7 @@ class DrikaCharacterControl : DrikaElement{
 					params.AddIntCheckbox(param_name, reset?params_before[i].bool_value:bool_param_after);
 				}
 			}else{
-				switch(character_option){
+				switch(character_control_option){
 					case aggression:
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
