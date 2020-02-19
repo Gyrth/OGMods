@@ -32,6 +32,12 @@ array<IMContainer@> choice_ui_elements;
 array<string> choices;
 int selected_choice = 0;
 int ui_hotspot_id = -1;
+float camera_near_blur = 0.0;
+float camera_near_dist = 0.0;
+float camera_near_transition = 0.0;
+float camera_far_blur = 0.0;
+float camera_far_dist = 0.0;
+float camera_far_transition = 0.0;
 
 class ActorSettings{
 	string name = "Default";
@@ -1038,6 +1044,19 @@ void ReceiveMessage(string msg){
 		if(new_selected_choice != selected_choice){
 			SelectChoice(new_selected_choice);
 		}
+	}else if(token == "drika_set_dof"){
+		token_iter.FindNextToken(msg);
+		camera_near_blur = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		camera_near_dist = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		camera_near_transition = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		camera_far_blur = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		camera_far_dist = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		camera_far_transition = atof(token_iter.GetToken(msg));
 	}
 }
 
@@ -1164,7 +1183,7 @@ void SetCameraPosition(){
 		camera.SetPos(camera_position);
 		camera.SetDistance(0.0f);
 		camera.SetFOV(camera_zoom);
-		camera.SetDOF(0,0,0,0,0,0);
+		camera.SetDOF(camera_near_blur, camera_near_dist, camera_near_transition, camera_far_blur, camera_far_dist, camera_far_transition);
 		UpdateListener(camera_position, vec3(0.0f), camera.GetFacing(), camera.GetUpVector());
 		if(!showing_choice){
 			SetGrabMouse(true);

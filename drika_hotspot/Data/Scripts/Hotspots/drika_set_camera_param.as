@@ -221,6 +221,7 @@ class DrikaSetCameraParam : DrikaElement{
 			case dof:
 				{
 					array<float>@ new_setting = reset?float_array_param_before:float_array_param_after;
+					level.SendMessage("drika_set_dof " + new_setting[0] + " " + new_setting[1] + " " + new_setting[2] + " " + new_setting[3] + " " + new_setting[4] + " " + new_setting[5]);
 					camera.SetDOF(new_setting[0],new_setting[1],new_setting[2],new_setting[3],new_setting[4],new_setting[5]);
 				}
 				break;
