@@ -765,6 +765,12 @@ void ReceiveMessage(string msg){
 	}else if(token == "reset"){
 		has_camera_control = false;
 		fade_timer = 0.0;
+		camera_near_blur = 0.0;
+		camera_near_dist = 0.0;
+		camera_near_transition = 0.0;
+		camera_far_blur = 0.0;
+		camera_far_dist = 0.0;
+		camera_far_transition = 0.0;
 	}else if(token == "write_music_xml"){
 		array<string> lines;
 		string xml_content;
