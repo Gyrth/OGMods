@@ -1063,6 +1063,9 @@ void ReceiveMessage(string msg){
 		camera_far_dist = atof(token_iter.GetToken(msg));
 		token_iter.FindNextToken(msg);
 		camera_far_transition = atof(token_iter.GetToken(msg));
+	}else if(token == "drika_set_fov"){
+		token_iter.FindNextToken(msg);
+		camera_zoom = atof(token_iter.GetToken(msg));
 	}
 }
 

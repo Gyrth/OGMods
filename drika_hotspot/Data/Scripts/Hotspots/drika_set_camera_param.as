@@ -52,6 +52,10 @@ class DrikaSetCameraParam : DrikaElement{
 		InterpParam(params);
 	}
 
+	void PostInit(){
+		GetBeforeParam();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["camera_param"] = JSONValue(camera_param);
@@ -117,6 +121,18 @@ class DrikaSetCameraParam : DrikaElement{
 		return "SetCameraParam " + param_name + " " + display_string;
 	}
 
+	void StartEdit(){
+		if(camera_param == dof){
+			SetParameter(false);
+		}
+	}
+
+	void EditDone(){
+		if(camera_param == dof){
+			SetParameter(true);
+		}
+	}
+
 	void DrawSettings(){
 		ImGui_Text("Param Type");
 		ImGui_SameLine();
@@ -134,33 +150,49 @@ class DrikaSetCameraParam : DrikaElement{
 			}
 		}
 
-		if(param_type == float_param){
+		if(camera_param == fov){
+			ImGui_Text("FOV");
+			ImGui_SameLine();
+			ImGui_SliderFloat("##FOV", float_param_after, 0.0f, 100.0f, "%.0f");
+		}else if(camera_param == dof){
+			ImGui_Text("Near Blur");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Near Blur", float_array_param_after[0], 0.0f, 10.0f, "%.1f")){
+				SetParameter(false);
+			}
+			ImGui_Text("Near Dist");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Near Dist", float_array_param_after[1], 0.0f, 10.0f, "%.1f")){
+				SetParameter(false);
+			}
+			ImGui_Text("Near Transition");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Near Transition", float_array_param_after[2], 0.0f, 10.0f, "%.1f")){
+				SetParameter(false);
+			}
+			ImGui_Text("Far Blur");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Far Blur", float_array_param_after[3], 0.0f, 10.0f, "%.1f")){
+				SetParameter(false);
+			}
+			ImGui_Text("Far Dist");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Far Dist", float_array_param_after[4], 0.0f, 10.0f, "%.1f")){
+				SetParameter(false);
+			}
+			ImGui_Text("Far Transition");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Far Transition", float_array_param_after[5], 0.0f, 10.0f, "%.1f")){
+				SetParameter(false);
+			}
+		}else if(param_type == float_param){
 			ImGui_Text("After");
 			ImGui_SameLine();
-			ImGui_SliderFloat("##After", float_param_after, -1000.0f, 1000.0f, "%.4f");
+			ImGui_SliderFloat("##After", float_param_after, -100.0f, 100.0f, "%.4f");
 		}else if(param_type == vec3_color_param){
 			ImGui_Text("After");
 			ImGui_SameLine();
 			ImGui_ColorEdit3("##After", vec3_param_after);
-		}else if(param_type == float_array_param){
-			ImGui_Text("Near Blur");
-			ImGui_SameLine();
-			ImGui_SliderFloat("##Near Blur", float_array_param_after[0], -1000.0f, 1000.0f, "%.4f");
-			ImGui_Text("Near Dist");
-			ImGui_SameLine();
-			ImGui_SliderFloat("##Near Dist", float_array_param_after[1], -1000.0f, 1000.0f, "%.4f");
-			ImGui_Text("Near Transition");
-			ImGui_SameLine();
-			ImGui_SliderFloat("##Near Transition", float_array_param_after[2], -1000.0f, 1000.0f, "%.4f");
-			ImGui_Text("Far Blur");
-			ImGui_SameLine();
-			ImGui_SliderFloat("##Far Blur", float_array_param_after[3], -1000.0f, 1000.0f, "%.4f");
-			ImGui_Text("Far Dist");
-			ImGui_SameLine();
-			ImGui_SliderFloat("##Far Dist", float_array_param_after[4], -1000.0f, 1000.0f, "%.4f");
-			ImGui_Text("Far Transition");
-			ImGui_SameLine();
-			ImGui_SliderFloat("##Far Transition", float_array_param_after[5], -1000.0f, 1000.0f, "%.4f");
 		}else if(param_type == function_param){
 			if(camera_param == splitscreen){
 				ImGui_Text("SplitScreen Mode");
@@ -213,6 +245,7 @@ class DrikaSetCameraParam : DrikaElement{
 				break;
 			case fov:
 				if(level.DialogueCameraControl()){
+					level.SendMessage("drika_set_fov " + float_param_after);
 					level.Execute("dialogue.cam_zoom = " + float_param_after + ";");
 				}else{
 					camera.SetFOV(reset?float_param_before:float_param_after);
