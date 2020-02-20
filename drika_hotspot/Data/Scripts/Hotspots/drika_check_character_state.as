@@ -28,7 +28,7 @@ enum AIGoal {
 };
 
 class DrikaCheckCharacterState : DrikaElement{
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "Patrolling", "Investigating", "Getting Help", "Fleeing", "In Proximity"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity"};
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
@@ -156,7 +156,12 @@ class DrikaCheckCharacterState : DrikaElement{
 					}
 				}
 			}else if(state_choice == in_combat){
-				bool state = (targets[i].GetIntVar("goal") == _ai_attack);
+				bool state;
+				if(!targets[i].controlled){
+					state = (targets[i].GetIntVar("goal") == _ai_attack);
+				}else{
+					state = (targets[i].QueryIntFunction("int CombatSong()") == 1);
+				}
 				if(state != equals){
 					all_in_state = false;
 				}
@@ -181,24 +186,32 @@ class DrikaCheckCharacterState : DrikaElement{
 					all_in_state = false;
 				}
 			}else if(state_choice == patrolling){
-				bool state = (targets[i].GetIntVar("goal") == _ai_patrol);
-				if(state != equals){
-					all_in_state = false;
+				if(!targets[i].controlled){
+					bool state = (targets[i].GetIntVar("goal") == _ai_patrol);
+					if(state != equals){
+						all_in_state = false;
+					}
 				}
 			}else if(state_choice == investigating){
-				bool state = (targets[i].GetIntVar("goal") == _ai_investigate);
-				if(state != equals){
-					all_in_state = false;
+				if(!targets[i].controlled){
+					bool state = (targets[i].GetIntVar("goal") == _ai_investigate);
+					if(state != equals){
+						all_in_state = false;
+					}
 				}
 			}else if(state_choice == getting_help){
-				bool state = (targets[i].GetIntVar("goal") == _ai_get_help);
-				if(state != equals){
-					all_in_state = false;
+				if(!targets[i].controlled){
+					bool state = (targets[i].GetIntVar("goal") == _ai_get_help);
+					if(state != equals){
+						all_in_state = false;
+					}
 				}
 			}else if(state_choice == fleeing){
-				bool state = (targets[i].GetIntVar("goal") == _ai_flee);
-				if(state != equals){
-					all_in_state = false;
+				if(!targets[i].controlled){
+					bool state = (targets[i].GetIntVar("goal") == _ai_flee);
+					if(state != equals){
+						all_in_state = false;
+					}
 				}
 			}else if(state_choice == in_proximity){
 				array<Object@> target_objects = known_target.GetTargetObjects();
