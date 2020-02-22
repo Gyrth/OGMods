@@ -13,6 +13,7 @@ class DrikaBillboard : DrikaElement{
 	vec4 image_color = vec4(1.0);
 	string billboard_text_string;
 	string display_text;
+	float overbright;
 
 	int current_billboard_update_type;
 	billboard_update_types billboard_update_type;
@@ -28,6 +29,7 @@ class DrikaBillboard : DrikaElement{
 		image_path = GetJSONString(params, "image_path", "Data/Textures/ui/ogicon.png");
 		image_color = GetJSONVec4(params, "image_color", vec4(1));
 		image_size = GetJSONFloat(params, "image_size", 1.0f);
+		overbright = GetJSONFloat(params, "overbright", 0.0f);
 		billboard_text_string = GetJSONString(params, "billboard_text_string", "Example billboard text.");
 
 		billboard_type = billboard_types(GetJSONInt(params, "billboard_type", billboard_image));
@@ -50,6 +52,7 @@ class DrikaBillboard : DrikaElement{
 		data["image_color"].append(image_color.y);
 		data["image_color"].append(image_color.z);
 		data["image_color"].append(image_color.a);
+		data["overbright"] = JSONValue(overbright);
 		data["billboard_type"] = JSONValue(billboard_type);
 		data["billboard_update_type"] = JSONValue(billboard_update_type);
 		data["billboard_text_string"] = JSONValue(billboard_text_string);
@@ -116,6 +119,9 @@ class DrikaBillboard : DrikaElement{
 			ImGui_Text("Tint");
 			ImGui_SameLine();
 			ImGui_ColorEdit4("##Tint", image_color);
+			ImGui_Text("Overbright");
+			ImGui_SameLine();
+			ImGui_SliderFloat("##Overbright", overbright, 0.0f, 10.0f, "%.1f");
 		}else if(billboard_type == billboard_text){
 			ImGui_SetTextBuf(billboard_text_string);
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
@@ -129,7 +135,9 @@ class DrikaBillboard : DrikaElement{
 		if(ObjectExists(placeholder_id)){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			if(billboard_type == billboard_image){
-				DebugDrawBillboard(image_path, placeholder.GetTranslation(), image_size, image_color, _delete_on_draw);
+				float multiplier = 1.0 + overbright;
+				vec4 combined_color = vec4(image_color.x * multiplier, image_color.y * multiplier, image_color.z * multiplier, image_color.a);
+				DebugDrawBillboard(image_path, placeholder.GetTranslation(), image_size, combined_color, _delete_on_draw);
 			}else if(billboard_type == billboard_text){
 				DebugDrawText(placeholder.GetTranslation(), billboard_text_string, 1.0, false, _delete_on_draw);
 			}
@@ -173,7 +181,9 @@ class DrikaBillboard : DrikaElement{
 		}
 
 		if(billboard_type == billboard_image){
-			billboard_ids.insertLast(DebugDrawBillboard(image_path, placeholder.GetTranslation(), image_size, image_color, draw_method));
+			float multiplier = 1.0 + overbright;
+			vec4 combined_color = vec4(image_color.x * multiplier, image_color.y * multiplier, image_color.z * multiplier, image_color.a);
+			billboard_ids.insertLast(DebugDrawBillboard(image_path, placeholder.GetTranslation(), image_size, combined_color, draw_method));
 		}else if(billboard_type == billboard_text){
 			billboard_ids.insertLast(DebugDrawText(placeholder.GetTranslation(), billboard_text_string, 1.0, false, draw_method));
 		}
