@@ -87,6 +87,8 @@ class DrikaDialogue : DrikaElement{
 	DrikaElement@ choice_3_element;
 	DrikaElement@ choice_4_element;
 	DrikaElement@ choice_5_element;
+	array<float> dof_settings;
+	bool update_dof = false;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -161,6 +163,7 @@ class DrikaDialogue : DrikaElement{
 		choice_3_go_to_line = GetJSONInt(params, "choice_3_go_to_line", 0);
 		choice_4_go_to_line = GetJSONInt(params, "choice_4_go_to_line", 0);
 		choice_5_go_to_line = GetJSONInt(params, "choice_5_go_to_line", 0);
+		dof_settings = GetJSONFloatArray(params, "dof_settings", {0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
 
 
 		drika_element_type = drika_dialogue;
@@ -252,6 +255,10 @@ class DrikaDialogue : DrikaElement{
 			data["target_camera_rotation"].append(target_camera_rotation.y);
 			data["target_camera_rotation"].append(target_camera_rotation.z);
 			data["target_camera_zoom"] = JSONValue(target_camera_zoom);
+			data["dof_settings"] = JSONValue(JSONarrayValue);
+			for(uint i = 0; i < dof_settings.size(); i++){
+				data["dof_settings"].append(dof_settings[i]);
+			}
 		}else if(dialogue_function == fade_to_black){
 			data["target_fade_to_black"] = JSONValue(target_fade_to_black);
 			data["fade_to_black_duration"] = JSONValue(fade_to_black_duration);
@@ -545,6 +552,9 @@ class DrikaDialogue : DrikaElement{
 			SetActorDialogueControl();
 		}else if(dialogue_function == choice){
 			Reset();
+		}else if(dialogue_function == set_camera_position){
+			SetCameraPosition();
+			SetDialogueDOF();
 		}
 	}
 
@@ -812,7 +822,42 @@ class DrikaDialogue : DrikaElement{
 			}
 
 			ImGui_PopItemWidth();
+		}else if(dialogue_function == set_camera_position){
+			ImGui_Text("Near Blur");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Near Blur", dof_settings[0], 0.0f, 10.0f, "%.1f")){
+				update_dof = true;
+			}
+			ImGui_Text("Near Dist");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Near Dist", dof_settings[1], 0.0f, 10.0f, "%.1f")){
+				update_dof = true;
+			}
+			ImGui_Text("Near Transition");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Near Transition", dof_settings[2], 0.0f, 10.0f, "%.1f")){
+				update_dof = true;
+			}
+			ImGui_Text("Far Blur");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Far Blur", dof_settings[3], 0.0f, 10.0f, "%.1f")){
+				update_dof = true;
+			}
+			ImGui_Text("Far Dist");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Far Dist", dof_settings[4], 0.0f, 10.0f, "%.1f")){
+				update_dof = true;
+			}
+			ImGui_Text("Far Transition");
+			ImGui_SameLine();
+			if(ImGui_SliderFloat("##Far Transition", dof_settings[5], 0.0f, 10.0f, "%.1f")){
+				update_dof = true;
+			}
 		}
+	}
+
+	void SetDialogueDOF(){
+		level.SendMessage("drika_set_dof " + dof_settings[0] + " " + dof_settings[1] + " " + dof_settings[2] + " " + dof_settings[3] + " " + dof_settings[4] + " " + dof_settings[5]);
 	}
 
 	void AddCategory(string category, array<string> items){
@@ -888,6 +933,8 @@ class DrikaDialogue : DrikaElement{
 			if(triggered){
 				level.SendMessage("drika_dialogue_end");
 			}
+		}else if(dialogue_function == set_camera_position){
+			level.SendMessage("drika_set_dof 0.0 0.0 0.0 0.0 0.0 0.0");
 		}
 		triggered = false;
 	}
@@ -897,6 +944,11 @@ class DrikaDialogue : DrikaElement{
 			UpdateSayDialogue(true);
 		}else if(dialogue_function == choice){
 			ShowChoiceDialogue(true);
+		}else if(dialogue_function == set_camera_position){
+			if(update_dof){
+				update_dof = false;
+				SetDialogueDOF();
+			}
 		}
 	}
 
@@ -946,6 +998,7 @@ class DrikaDialogue : DrikaElement{
 			return true;
 		}else if(dialogue_function == set_camera_position){
 			SetCameraPosition();
+			SetDialogueDOF();
 			return true;
 		}else if(dialogue_function == fade_to_black){
 			SetFadeToBlack();

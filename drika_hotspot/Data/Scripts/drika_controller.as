@@ -1066,6 +1066,8 @@ void ReceiveMessage(string msg){
 	}else if(token == "drika_set_fov"){
 		token_iter.FindNextToken(msg);
 		camera_zoom = atof(token_iter.GetToken(msg));
+	}else if(token == "request_preview_dof"){
+		camera.SetDOF(camera_near_blur, camera_near_dist, camera_near_transition, camera_far_blur, camera_far_dist, camera_far_transition);
 	}
 }
 
