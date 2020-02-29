@@ -69,6 +69,7 @@ bool wait_for_fade = false;
 bool in_dialogue_mode = false;
 array<DrikaElement@> post_init_queue;
 bool element_added = false;
+array<int> multi_select;
 
 array<AnimationGroup@> all_animations;
 array<AnimationGroup@> current_animations;
@@ -337,7 +338,7 @@ void Update(){
 					}
 				}
 			}
-		}else{
+		}else if(!reorded){
 			GetCurrentElement().Update();
 		}
 		messages.resize(0);
@@ -398,7 +399,6 @@ void SelectedChanged(){
 
 bool reorded = false;
 int display_index = 0;
-int drag_target_line = 0;
 bool update_scroll = false;
 bool debug_current_line = false;
 
@@ -556,49 +556,87 @@ void DrawEditor(){
 			int item_no = drika_indexes[i];
 			vec4 text_color = drika_elements[item_no].GetDisplayColor();
 			ImGui_PushStyleColor(ImGuiCol_Text, text_color);
-			if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), display_index == int(item_no), ImGuiSelectableFlags_AllowDoubleClick)){
+			bool line_selected = display_index == int(item_no) || multi_select.find(item_no) != -1;
+			if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
 					if(drika_elements[drika_indexes[i]].has_settings){
 						GetCurrentElement().StartSettings();
 						ImGui_OpenPopup("Edit");
 					}
-				}else{
+				}else if(!reorded){
+					if(GetInputDown(0, "lctrl")){
+						int find_selected = multi_select.find(item_no);
+						if(multi_select.size() == 0){
+							multi_select.insertLast(drika_indexes[current_line]);
+						}else if(find_selected != -1 && multi_select.size() != 1){
+							multi_select.removeAt(find_selected);
+							GetCurrentElement().EditDone();
+							display_index = int(drika_indexes[multi_select[multi_select.size() - 1]]);
+							current_line = int(multi_select[multi_select.size() - 1]);
+							GetCurrentElement().StartEdit();
+							continue;
+						}
+					}else{
+						multi_select.resize(0);
+					}
 					GetCurrentElement().EditDone();
 					display_index = int(item_no);
 					current_line = int(i);
 					GetCurrentElement().StartEdit();
+
+					multi_select.insertLast(item_no);
 				}
 
 			}
+
 			if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(1)){
 				GetCurrentElement().LeftClick();
 			}
+
 			if(update_scroll && display_index == int(item_no)){
 				update_scroll = false;
 				ImGui_SetScrollHere(0.5);
 			}
+
 			ImGui_PopStyleColor();
 			if(ImGui_IsItemActive() && !ImGui_IsItemHovered()){
 				float drag_dy = ImGui_GetMouseDragDelta(0).y;
-				if(drag_dy < 0.0 && i > 0){
-					// Swap
-					drika_indexes[i] = drika_indexes[i-1];
-            		drika_indexes[i-1] = item_no;
-					drag_target_line = i-1;
-					reorded = true;
-					ImGui_ResetMouseDragDelta();
-				}else if(drag_dy > 0.0 && i < drika_elements.size() - 1){
-					drika_indexes[i] = drika_indexes[i+1];
-            		drika_indexes[i+1] = item_no;
-					drag_target_line = i+1;
-					reorded = true;
-					ImGui_ResetMouseDragDelta();
+				bool can_drag_up = multi_select.find(drika_indexes[0]) == -1;
+				bool can_drag_down = multi_select.find(drika_indexes[drika_indexes.size() - 1]) == -1;
+
+				if(drag_dy < 0.0 && can_drag_up){
+					// Dragging Up
+
+					for(uint k = 0; k < drika_indexes.size(); k++){
+						for(uint j = 0; j < multi_select.size(); j++){
+							if(multi_select[j] == drika_indexes[k]){
+								SwapIndexes(k, k - 1);
+								reorded = true;
+							}
+						}
+					}
+					current_line -= 1;
+				}else if(drag_dy > 0.0 && can_drag_down){
+					// Dragging Down
+
+					for(int k = drika_indexes.size() - 1; k > -1; k--){
+						for(uint j = 0; j < multi_select.size(); j++){
+							if(multi_select[j] == drika_indexes[k]){
+								SwapIndexes(k, k + 1);
+								reorded = true;
+							}
+						}
+					}
+
+					current_line += 1;
 				}
+				ImGui_ResetMouseDragDelta();
 			}
+
 			line_counter += 1;
 		}
 		ImGui_End();
-		if(drika_elements.size() > 0){
+		if(drika_elements.size() > 0 && !reorded){
 			GetCurrentElement().DrawEditing();
 		}
 		ImGui_PopStyleColor(18);
@@ -608,6 +646,12 @@ void DrawEditor(){
 		ReorderElements();
 		Save();
 	}
+}
+
+void SwapIndexes(int index_1, int index_2){
+	int value_1 = drika_indexes[index_1];
+	drika_indexes[index_1] = drika_indexes[index_2];
+	drika_indexes[index_2] = value_1;
 }
 
 DrikaElement@ GetCurrentElement(){
