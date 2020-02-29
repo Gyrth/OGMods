@@ -536,7 +536,6 @@ void DrawEditor(){
 			}
 		}
 
-		int line_counter = 0;
 		for(uint i = 0; i < drika_indexes.size(); i++){
 			int item_no = drika_indexes[i];
 			vec4 text_color = drika_elements[item_no].GetDisplayColor();
@@ -589,7 +588,7 @@ void DrawEditor(){
 				bool can_drag_up = multi_select.find(0) == -1;
 				bool can_drag_down = multi_select.find(drika_indexes.size() - 1) == -1;
 
-				if(drag_dy < 0.0 && can_drag_up){
+				if(drag_dy < -10.0 && can_drag_up){
 					// Dragging Up
 
 					for(uint k = 0; k < drika_indexes.size(); k++){
@@ -607,7 +606,8 @@ void DrawEditor(){
 					}
 
 					current_line -= 1;
-				}else if(drag_dy > 0.0 && can_drag_down){
+					ImGui_ResetMouseDragDelta();
+				}else if(drag_dy > 10.0 && can_drag_down){
 					// Dragging Down
 
 					for(int k = drika_indexes.size() - 1; k > -1; k--){
@@ -625,11 +625,9 @@ void DrawEditor(){
 					}
 
 					current_line += 1;
+					ImGui_ResetMouseDragDelta();
 				}
-				ImGui_ResetMouseDragDelta();
 			}
-
-			line_counter += 1;
 		}
 		ImGui_End();
 		if(drika_elements.size() > 0 && !reorded){
