@@ -502,9 +502,27 @@ void DrawEditor(){
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
 					duplicating = true;
-					DrikaElement@ new_element = InterpElement(GetCurrentElement().drika_element_type, GetCurrentElement().GetSaveData());
-					post_init_queue.insertLast(@new_element);
-					InsertElement(new_element);
+					array<int> sorted_selected = multi_select;
+					multi_select.resize(0);
+					sorted_selected.sortDesc();
+					int insert_at = sorted_selected[0];
+
+					GetCurrentElement().EditDone();
+
+					for(uint i = 0; i < sorted_selected.size(); i++){
+						DrikaElement@ target = drika_elements[drika_indexes[sorted_selected[i]]];
+						DrikaElement@ new_element = InterpElement(target.drika_element_type, target.GetSaveData());
+						post_init_queue.insertLast(@new_element);
+
+						multi_select.insertLast(insert_at + 1 + i);
+						drika_elements.insertLast(new_element);
+						drika_indexes.insertAt(insert_at + 1, drika_elements.size() - 1);
+						display_index = drika_indexes[insert_at + 1];
+					}
+					current_line = insert_at + 1;
+
+					ReorderElements();
+
 					element_added = true;
 				}
 			}
