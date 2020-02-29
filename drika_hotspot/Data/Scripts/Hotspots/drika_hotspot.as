@@ -484,29 +484,14 @@ void DrawEditor(){
 			}
 			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
-					GetCurrentElement().Delete();
-					GetCurrentElement().deleted = true;
-					int current_index = drika_indexes[current_line];
-
-					drika_elements[drika_indexes[current_line]];
-
-					drika_elements.removeAt(current_index);
-					drika_indexes.removeAt(current_line);
-
-					for(uint i = 0; i < drika_indexes.size(); i++){
-						if(drika_indexes[i] > current_index){
-							drika_indexes[i] -= 1;
-						}
+					for(uint i = 0; i < multi_select.size(); i++){
+						DeleteDrikaElement(multi_select[i]);
 					}
-					// If the last element is deleted then the target needs to be the previous element.
-					if(current_line > 0 && current_line == int(drika_elements.size())){
-						display_index = drika_indexes[current_line - 1];
-						current_line -= 1;
-					}else if(drika_elements.size() > 0){
-						display_index = drika_indexes[current_line];
-					}
+					multi_select = {current_line};
+
 					ReorderElements();
 					Save();
+					display_index = drika_indexes[current_line];
 				}
 			}
 			if(ImGui_IsItemHovered()){
@@ -556,7 +541,7 @@ void DrawEditor(){
 			int item_no = drika_indexes[i];
 			vec4 text_color = drika_elements[item_no].GetDisplayColor();
 			ImGui_PushStyleColor(ImGuiCol_Text, text_color);
-			bool line_selected = display_index == int(item_no) || multi_select.find(item_no) != -1;
+			bool line_selected = display_index == int(item_no) || multi_select.find(i) != -1;
 			if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
 				if(ImGui_IsMouseDoubleClicked(0)){
 					if(drika_elements[drika_indexes[i]].has_settings){
@@ -565,9 +550,9 @@ void DrawEditor(){
 					}
 				}else if(!reorded){
 					if(GetInputDown(0, "lctrl")){
-						int find_selected = multi_select.find(item_no);
+						int find_selected = multi_select.find(i);
 						if(multi_select.size() == 0){
-							multi_select.insertLast(drika_indexes[current_line]);
+							multi_select.insertLast(i);
 						}else if(find_selected != -1 && multi_select.size() != 1){
 							multi_select.removeAt(find_selected);
 							GetCurrentElement().EditDone();
@@ -584,7 +569,7 @@ void DrawEditor(){
 					current_line = int(i);
 					GetCurrentElement().StartEdit();
 
-					multi_select.insertLast(item_no);
+					multi_select.insertLast(i);
 				}
 
 			}
@@ -601,31 +586,42 @@ void DrawEditor(){
 			ImGui_PopStyleColor();
 			if(ImGui_IsItemActive() && !ImGui_IsItemHovered()){
 				float drag_dy = ImGui_GetMouseDragDelta(0).y;
-				bool can_drag_up = multi_select.find(drika_indexes[0]) == -1;
-				bool can_drag_down = multi_select.find(drika_indexes[drika_indexes.size() - 1]) == -1;
+				bool can_drag_up = multi_select.find(0) == -1;
+				bool can_drag_down = multi_select.find(drika_indexes.size() - 1) == -1;
 
 				if(drag_dy < 0.0 && can_drag_up){
 					// Dragging Up
 
 					for(uint k = 0; k < drika_indexes.size(); k++){
 						for(uint j = 0; j < multi_select.size(); j++){
-							if(multi_select[j] == drika_indexes[k]){
+							if(multi_select[j] == int(k)){
+								Log(warning, "swap " + k);
 								SwapIndexes(k, k - 1);
 								reorded = true;
 							}
 						}
 					}
+
+					for(uint j = 0; j < multi_select.size(); j++){
+						multi_select[j] -= 1;
+					}
+
 					current_line -= 1;
 				}else if(drag_dy > 0.0 && can_drag_down){
 					// Dragging Down
 
 					for(int k = drika_indexes.size() - 1; k > -1; k--){
 						for(uint j = 0; j < multi_select.size(); j++){
-							if(multi_select[j] == drika_indexes[k]){
+							if(multi_select[j] == int(k)){
+								Log(warning, "swap " + k);
 								SwapIndexes(k, k + 1);
 								reorded = true;
 							}
 						}
+					}
+
+					for(uint j = 0; j < multi_select.size(); j++){
+						multi_select[j] += 1;
 					}
 
 					current_line += 1;
@@ -645,6 +641,48 @@ void DrawEditor(){
 		reorded = false;
 		ReorderElements();
 		Save();
+	}
+}
+
+void DeleteDrikaElement(int index){
+	DrikaElement@ target = drika_elements[drika_indexes[index]];
+
+	target.Delete();
+	target.deleted = true;
+
+	{
+		string print_log = "";
+		for(uint k = 0; k < drika_indexes.size(); k++){
+			print_log += drika_indexes[k] + " ";
+		}
+		Log(warning, print_log);
+	}
+
+	for(uint i = 0; i < drika_indexes.size(); i++){
+		if(drika_indexes[i] > drika_indexes[index]){
+			drika_indexes[i] -= 1;
+		}
+	}
+
+	drika_elements.removeAt(drika_indexes[index]);
+	Log(warning, "Remove drika_elements " + drika_indexes[index]);
+	drika_indexes.removeAt(index);
+	Log(warning, "Remove drika_indexes " + index);
+
+	{
+		string print_log = "";
+		for(uint k = 0; k < drika_indexes.size(); k++){
+			print_log += drika_indexes[k] + " ";
+		}
+		Log(warning, print_log);
+	}
+
+	// If the last element is deleted then the target needs to be the previous element.
+	if(current_line > 0 && current_line == int(drika_elements.size())){
+		display_index = drika_indexes[current_line - 1];
+		current_line -= 1;
+	}else if(drika_elements.size() > 0){
+		display_index = drika_indexes[current_line];
 	}
 }
 
