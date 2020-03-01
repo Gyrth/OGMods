@@ -1114,6 +1114,7 @@ void ReadAnimationList(){
 				new_group.AddAnimation(new_animation);
 			}
 		}
+		new_group.SortAlphabetically();
 		all_animations.insertLast(@new_group);
 	}
 }

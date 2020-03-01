@@ -7,4 +7,7 @@ class AnimationGroup{
 	void AddAnimation(string _animation){
 		animations.insertLast(_animation);
 	}
+	void SortAlphabetically(){
+		animations.sortAsc();
+	}
 }
