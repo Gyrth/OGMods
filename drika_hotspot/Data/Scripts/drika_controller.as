@@ -1068,6 +1068,31 @@ void ReceiveMessage(string msg){
 		camera_zoom = atof(token_iter.GetToken(msg));
 	}else if(token == "request_preview_dof"){
 		camera.SetDOF(camera_near_blur, camera_near_dist, camera_near_transition, camera_far_blur, camera_far_dist, camera_far_transition);
+	}else if(token == "drika_export_to_file"){
+		token_iter.FindNextToken(msg);
+		string path = token_iter.GetToken(msg);
+		string content = "";
+
+		while(token_iter.FindNextToken(msg)){
+			content += token_iter.GetToken(msg);
+		}
+        StartWriteFile();
+		AddFileString(content);
+        WriteFileKeepBackup(path);
+	}else if(token == "drika_import_from_file"){
+		token_iter.FindNextToken(msg);
+		int hotspot_id = atoi(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		string file_path = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		string param_1 = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		int param_2 = atoi(token_iter.GetToken(msg));
+
+		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path, param_1, param_2));
 	}
 }
 
@@ -1168,17 +1193,16 @@ void Update(){
 void UpdateReadFileProcesses(){
 	if(read_file_processes.size() > 0){
 		if(LoadFile(read_file_processes[0].file_path)){
+			Object@ hotspot_obj = ReadObjectFromID(read_file_processes[0].hotspot_id);
 			while(true){
 				string line = GetFileLine();
 				if(line == "end"){
+					hotspot_obj.ReceiveScriptMessage("drika_read_file " + " " + read_file_processes[0].param_1 + " " + read_file_processes[0].param_2 + " end");
 					break;
 				}else{
-					read_file_processes[0].data += line + "\n";
+					hotspot_obj.ReceiveScriptMessage("drika_read_file " + " " + read_file_processes[0].param_1 + " " + read_file_processes[0].param_2 + "\"" + join((line + "\n").split("\""), "\\\"") + "\"");
 				}
 			}
-			Object@ hotspot_obj = ReadObjectFromID(read_file_processes[0].hotspot_id);
-			read_file_processes[0].data = join(read_file_processes[0].data.split("\""), "\\\"");
-			hotspot_obj.ReceiveScriptMessage("drika_read_file " + "\"" + read_file_processes[0].data + "\"" + " " + read_file_processes[0].param_1 + " " + read_file_processes[0].param_2);
 		}else{
 			Log(error, "Error loading file: " + read_file_processes[0].file_path);
 		}

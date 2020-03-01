@@ -70,6 +70,7 @@ bool in_dialogue_mode = false;
 array<DrikaElement@> post_init_queue;
 bool element_added = false;
 array<int> multi_select;
+string file_content;
 
 array<AnimationGroup@> all_animations;
 array<AnimationGroup@> current_animations;
@@ -473,6 +474,21 @@ void DrawEditor(){
 				}
 				ImGui_EndMenu();
 			}
+			if(ImGui_BeginMenu("Import/Export")){
+				if(ImGui_MenuItem("Export to file")){
+					ExportToFile();
+				}
+				if(ImGui_MenuItem("Import from file")){
+					ImportFromFile();
+				}
+				if(ImGui_MenuItem("Copy to clipboard")){
+
+				}
+				if(ImGui_MenuItem("Paste from clipboard")){
+
+				}
+				ImGui_EndMenu();
+			}
 			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
 					array<int> sorted_selected = multi_select;
@@ -677,6 +693,32 @@ void DrawEditor(){
 	}
 }
 
+void ExportToFile(){
+	string write_path = GetUserPickedWritePath("txt", "Data/Dialogues");
+	if(write_path != ""){
+		Log(info,"Save to file: " + write_path);
+
+		JSON data;
+		JSONValue functions;
+
+		for(uint i = 0; i < drika_indexes.size(); i++){
+			JSONValue function_data = drika_elements[drika_indexes[i]].GetSaveData();
+			function_data["function"] = JSONValue(drika_elements[drika_indexes[i]].drika_element_type);
+			functions.append(function_data);
+		}
+		data.getRoot()["functions"] = functions;
+		string send_data = join(data.writeString(false).split("\""), "\\\"");
+		level.SendMessage("drika_export_to_file " + write_path + " " + "\"" + send_data + "\"");
+	}
+}
+
+void ImportFromFile(){
+	string read_path = GetUserPickedReadPath("txt", "Data/Dialogues");
+	if(read_path != ""){
+		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + read_path + " " + "drika_import_from_file" + " " + 0);
+	}
+}
+
 void DeleteDrikaElement(int index){
 	DrikaElement@ target = drika_elements[drika_indexes[index]];
 
@@ -791,15 +833,32 @@ void ReceiveMessage(string msg){
 		wait_for_fade = false;
 	}else if(token == "drika_read_file"){
 		token_iter.FindNextToken(msg);
-		string file_content = token_iter.GetToken(msg);
-
-		token_iter.FindNextToken(msg);
 		string param_1 = token_iter.GetToken(msg);
 
 		token_iter.FindNextToken(msg);
 		int param_2 = atoi(token_iter.GetToken(msg));
 
-		GetCurrentElement().ReceiveMessage(file_content, param_1, param_2);
+		string new_content = "";
+		while(token_iter.FindNextToken(msg)){
+			new_content += token_iter.GetToken(msg);
+			Log(warning, new_content);
+		}
+
+		if(new_content == "end"){
+			if(param_1 == "drika_import_from_file"){
+				array<string> split_content = file_content.split("\n");
+				for(uint i = 0; i < split_content.size(); i++){
+					Log(warning, split_content[i]);
+				}
+				InterpImportData(file_content);
+			}else{
+				GetCurrentElement().ReceiveMessage(file_content, param_1, param_2);
+			}
+			file_content = "";
+		}else{
+			file_content += new_content;
+		}
+
 	}else if(token == "drika_external_hotspot"){
 		token_iter.FindNextToken(msg);
 		string event = token_iter.GetToken(msg);
@@ -820,6 +879,21 @@ void ReceiveMessage(string msg){
 		int param_1 = atoi(token_iter.GetToken(msg));
 
 		GetCurrentElement().ReceiveMessage(event, param_1);
+	}
+}
+
+void InterpImportData(string import_data){
+
+	JSON data;
+	if(!data.parseString(import_data)){
+		Log(warning, "Unable to parse the JSON in the Script Data!");
+	}else{
+		for( uint i = 0; i < data.getRoot()["functions"].size(); ++i ) {
+			DrikaElement@ new_element = InterpElement(none, data.getRoot()["functions"][i]);
+			drika_elements.insertLast(@new_element);
+			drika_indexes.insertLast(drika_elements.size() - 1);
+			post_init_queue.insertLast(@new_element);
+		}
 	}
 }
 
