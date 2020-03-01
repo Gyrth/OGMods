@@ -499,7 +499,6 @@ void DrawEditor(){
 				if(drika_elements.size() > 0){
 					duplicating = true;
 					int last_selected = multi_select[multi_select.size() - 1];
-					Log(warning, "last_selected " + last_selected);
 					array<int> sorted_selected = multi_select;
 					multi_select.resize(0);
 					sorted_selected.sortDesc();
@@ -523,7 +522,6 @@ void DrawEditor(){
 					for(uint i = insert_at + 1; i < drika_indexes.size(); i++){
 						if(drika_elements[drika_indexes[i]].index == last_selected){
 							current_line = i;
-							Log(warning, "Select index " + current_line);
 						}
 					}
 
@@ -608,14 +606,6 @@ void DrawEditor(){
 					current_line = int(i);
 					GetCurrentElement().StartEdit();
 
-					{
-						string print_log = "";
-						for(uint k = 0; k < multi_select.size(); k++){
-							print_log += multi_select[k] + " ";
-						}
-						Log(warning, print_log);
-					}
-
 				}
 
 			}
@@ -641,7 +631,6 @@ void DrawEditor(){
 					for(uint k = 0; k < drika_indexes.size(); k++){
 						for(uint j = 0; j < multi_select.size(); j++){
 							if(multi_select[j] == int(k)){
-								Log(warning, "swap " + k);
 								SwapIndexes(k, k - 1);
 								reorded = true;
 							}
@@ -660,7 +649,6 @@ void DrawEditor(){
 					for(int k = drika_indexes.size() - 1; k > -1; k--){
 						for(uint j = 0; j < multi_select.size(); j++){
 							if(multi_select[j] == int(k)){
-								Log(warning, "swap " + k);
 								SwapIndexes(k, k + 1);
 								reorded = true;
 							}
@@ -695,14 +683,6 @@ void DeleteDrikaElement(int index){
 	target.Delete();
 	target.deleted = true;
 
-	{
-		string print_log = "";
-		for(uint k = 0; k < drika_indexes.size(); k++){
-			print_log += drika_indexes[k] + " ";
-		}
-		Log(warning, print_log);
-	}
-
 	for(uint i = 0; i < drika_indexes.size(); i++){
 		if(drika_indexes[i] > drika_indexes[index]){
 			drika_indexes[i] -= 1;
@@ -710,17 +690,7 @@ void DeleteDrikaElement(int index){
 	}
 
 	drika_elements.removeAt(drika_indexes[index]);
-	Log(warning, "Remove drika_elements " + drika_indexes[index]);
 	drika_indexes.removeAt(index);
-	Log(warning, "Remove drika_indexes " + index);
-
-	{
-		string print_log = "";
-		for(uint k = 0; k < drika_indexes.size(); k++){
-			print_log += drika_indexes[k] + " ";
-		}
-		Log(warning, print_log);
-	}
 
 	// If the last element is deleted then the target needs to be the previous element.
 	if(current_line > 0 && current_line == int(drika_elements.size())){
