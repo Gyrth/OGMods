@@ -43,7 +43,7 @@ bool editing = false;
 bool show_name = false;
 string display_name = "Drika Hotspot";
 bool script_finished = false;
-int current_line = 0;
+int current_line;
 array<DrikaElement@> drika_elements;
 array<DrikaElement@> parallel_elements;
 array<int> drika_indexes;
@@ -102,6 +102,7 @@ class ObjectReference{
 }
 
 void Init() {
+	current_line = 0;
 	show_name = (this_hotspot.GetName() != "");
 	display_name = this_hotspot.GetName();
     level.ReceiveLevelEvents(hotspot.GetID());
@@ -284,6 +285,7 @@ void InterpData(){
 void LaunchCustomGUI(){
 	show_editor = !show_editor;
 	if(show_editor){
+		multi_select = {current_line};
 		level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
 		has_closed = false;
 		if(drika_elements.size() > 0){
@@ -386,17 +388,6 @@ void SwitchToPlaying(){
 	Reset();
 }
 
-void SelectedChanged(){
-	is_selected = this_hotspot.IsSelected();
-	if(is_selected){
-		if(!show_editor && drika_elements.size() != 0){
-			GetCurrentElement().StartEdit();
-		}
-		show_editor = true;
-		level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
-	}
-}
-
 bool reorded = false;
 int display_index = 0;
 bool update_scroll = false;
@@ -484,14 +475,19 @@ void DrawEditor(){
 			}
 			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
-					for(uint i = 0; i < multi_select.size(); i++){
-						DeleteDrikaElement(multi_select[i]);
+					array<int> sorted_selected = multi_select;
+					sorted_selected.sortAsc();
+					for(uint i = 0; i < sorted_selected.size(); i++){
+						DeleteDrikaElement(sorted_selected[i] - i);
 					}
-					multi_select = {current_line};
+					multi_select.resize(0);
 
 					ReorderElements();
 					Save();
-					display_index = drika_indexes[current_line];
+					if(drika_elements.size() > 0){
+						multi_select = {current_line};
+						display_index = drika_indexes[current_line];
+					}
 				}
 			}
 			if(ImGui_IsItemHovered()){
@@ -502,6 +498,8 @@ void DrawEditor(){
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
 					duplicating = true;
+					int last_selected = multi_select[multi_select.size() - 1];
+					Log(warning, "last_selected " + last_selected);
 					array<int> sorted_selected = multi_select;
 					multi_select.resize(0);
 					sorted_selected.sortDesc();
@@ -512,6 +510,8 @@ void DrawEditor(){
 					for(uint i = 0; i < sorted_selected.size(); i++){
 						DrikaElement@ target = drika_elements[drika_indexes[sorted_selected[i]]];
 						DrikaElement@ new_element = InterpElement(target.drika_element_type, target.GetSaveData());
+						// Temporary set the index to the original index, so it can be found later on.
+						new_element.SetIndex(sorted_selected[i]);
 						post_init_queue.insertLast(@new_element);
 
 						multi_select.insertLast(insert_at + 1 + i);
@@ -519,7 +519,13 @@ void DrawEditor(){
 						drika_indexes.insertAt(insert_at + 1, drika_elements.size() - 1);
 						display_index = drika_indexes[insert_at + 1];
 					}
-					current_line = insert_at + 1;
+
+					for(uint i = insert_at + 1; i < drika_indexes.size(); i++){
+						if(drika_elements[drika_indexes[i]].index == last_selected){
+							current_line = i;
+							Log(warning, "Select index " + current_line);
+						}
+					}
 
 					ReorderElements();
 
@@ -566,7 +572,20 @@ void DrawEditor(){
 						ImGui_OpenPopup("Edit");
 					}
 				}else if(!reorded){
-					if(GetInputDown(0, "lctrl")){
+					if(GetInputDown(0, "lshift")){
+						int starting_point = multi_select[multi_select.size() - 1];
+						int ending_point = i;
+						int direction = starting_point < ending_point?1:-1;
+
+						for(int j = starting_point; true; j += direction){
+							if(multi_select.find(j) == -1){
+								multi_select.insertLast(j);
+							}
+							if(j == ending_point){
+								break;
+							}
+						}
+					}else if(GetInputDown(0, "lctrl")){
 						int find_selected = multi_select.find(i);
 						if(multi_select.size() == 0){
 							multi_select.insertLast(i);
@@ -577,16 +596,26 @@ void DrawEditor(){
 							current_line = int(multi_select[multi_select.size() - 1]);
 							GetCurrentElement().StartEdit();
 							continue;
+						}else{
+							multi_select.insertLast(i);
 						}
 					}else{
 						multi_select.resize(0);
+						multi_select.insertLast(i);
 					}
 					GetCurrentElement().EditDone();
 					display_index = int(item_no);
 					current_line = int(i);
 					GetCurrentElement().StartEdit();
 
-					multi_select.insertLast(i);
+					{
+						string print_log = "";
+						for(uint k = 0; k < multi_select.size(); k++){
+							print_log += multi_select[k] + " ";
+						}
+						Log(warning, print_log);
+					}
+
 				}
 
 			}
@@ -849,6 +878,7 @@ void Reset(){
 	GetCurrentElement().EditDone();
 	//If the user is editing the script then stay with the current line to edit.
 	current_line = 0;
+	multi_select = {current_line};
 	display_index = drika_indexes[current_line];
 	object_references.resize(0);
 	parallel_elements.resize(0);
@@ -1085,6 +1115,7 @@ void AddFunctionMenuItems(){
 			post_init_queue.insertLast(@new_element);
 			InsertElement(new_element);
 			element_added = true;
+			multi_select = {current_line};
 		}
 		ImGui_PopStyleColor();
 	}
