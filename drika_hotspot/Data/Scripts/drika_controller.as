@@ -1193,16 +1193,17 @@ void Update(){
 void UpdateReadFileProcesses(){
 	if(read_file_processes.size() > 0){
 		if(LoadFile(read_file_processes[0].file_path)){
-			Object@ hotspot_obj = ReadObjectFromID(read_file_processes[0].hotspot_id);
 			while(true){
 				string line = GetFileLine();
 				if(line == "end"){
-					hotspot_obj.ReceiveScriptMessage("drika_read_file " + " " + read_file_processes[0].param_1 + " " + read_file_processes[0].param_2 + " end");
 					break;
 				}else{
-					hotspot_obj.ReceiveScriptMessage("drika_read_file " + " " + read_file_processes[0].param_1 + " " + read_file_processes[0].param_2 + "\"" + join((line + "\n").split("\""), "\\\"") + "\"");
+					read_file_processes[0].data += line + "\n";
 				}
 			}
+			Object@ hotspot_obj = ReadObjectFromID(read_file_processes[0].hotspot_id);
+			read_file_processes[0].data = join(read_file_processes[0].data.split("\""), "\\\"");
+			hotspot_obj.ReceiveScriptMessage("drika_read_file " + " " + read_file_processes[0].param_1 + " " + read_file_processes[0].param_2 + "\"" + read_file_processes[0].data + "\"");
 		}else{
 			Log(error, "Error loading file: " + read_file_processes[0].file_path);
 		}

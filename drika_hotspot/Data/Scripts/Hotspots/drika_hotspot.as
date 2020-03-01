@@ -838,27 +838,16 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		int param_2 = atoi(token_iter.GetToken(msg));
 
-		string new_content = "";
+		string file_content = "";
 		while(token_iter.FindNextToken(msg)){
-			new_content += token_iter.GetToken(msg);
-			Log(warning, new_content);
+			file_content += token_iter.GetToken(msg);
 		}
 
-		if(new_content == "end"){
-			if(param_1 == "drika_import_from_file"){
-				array<string> split_content = file_content.split("\n");
-				for(uint i = 0; i < split_content.size(); i++){
-					Log(warning, split_content[i]);
-				}
-				InterpImportData(file_content);
-			}else{
-				GetCurrentElement().ReceiveMessage(file_content, param_1, param_2);
-			}
-			file_content = "";
+		if(param_1 == "drika_import_from_file"){
+			InterpImportData(file_content);
 		}else{
-			file_content += new_content;
+			GetCurrentElement().ReceiveMessage(file_content, param_1, param_2);
 		}
-
 	}else if(token == "drika_external_hotspot"){
 		token_iter.FindNextToken(msg);
 		string event = token_iter.GetToken(msg);
@@ -883,8 +872,9 @@ void ReceiveMessage(string msg){
 }
 
 void InterpImportData(string import_data){
-
 	JSON data;
+	duplicating = true;
+
 	if(!data.parseString(import_data)){
 		Log(warning, "Unable to parse the JSON in the Script Data!");
 	}else{
@@ -895,6 +885,7 @@ void InterpImportData(string import_data){
 			post_init_queue.insertLast(@new_element);
 		}
 	}
+	ReorderElements();
 }
 
 void HandleEvent(string event, MovementObject @mo){
