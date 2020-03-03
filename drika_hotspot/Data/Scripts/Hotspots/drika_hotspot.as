@@ -558,6 +558,7 @@ void DrawEditor(){
 		if(!ImGui_IsPopupOpen("Edit")){
 			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
 				if(current_line > 0){
+					multi_select = {current_line - 1};
 					GetCurrentElement().EditDone();
 					display_index = drika_indexes[current_line - 1];
 					current_line -= 1;
@@ -566,6 +567,7 @@ void DrawEditor(){
 				}
 			}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow))){
 				if(current_line < int(drika_elements.size() - 1)){
+					multi_select = {current_line + 1};
 					GetCurrentElement().EditDone();
 					display_index = drika_indexes[current_line + 1];
 					current_line += 1;
@@ -620,8 +622,7 @@ void DrawEditor(){
 							multi_select.insertLast(i);
 						}
 					}else if(multi_select.find(i) == -1){
-						multi_select.resize(0);
-						multi_select.insertLast(i);
+						multi_select = {i};
 					}
 					GetCurrentElement().EditDone();
 					display_index = int(item_no);
