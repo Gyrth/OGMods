@@ -487,7 +487,7 @@ void DrawEditor(){
 					CopyToClipBoard();
 				}
 				if(ImGui_MenuItem("Paste from clipboard")){
-
+					PasteFromClipboard();
 				}
 				ImGui_EndMenu();
 			}
@@ -701,7 +701,7 @@ void DrawEditor(){
 			}
 		}
 		ImGui_End();
-		if(drika_elements.size() > 0 && !reorded){
+		if(drika_elements.size() > 0 && !reorded && post_init_queue.size() == 0){
 			GetCurrentElement().DrawEditing();
 		}
 
@@ -770,6 +770,11 @@ void CopyToClipBoard(){
 
 	data.getRoot()["functions"] = functions;
 	ImGui_SetClipboardText(data.writeString(false));
+}
+
+void PasteFromClipboard(){
+	string clipboard_content = ImGui_GetClipboardText();
+	InterpImportData(clipboard_content);
 }
 
 void ImportFromFile(){
@@ -934,17 +939,39 @@ void ReceiveMessage(string msg){
 void InterpImportData(string import_data){
 	JSON data;
 	duplicating = true;
+	array<int> created_indexes;
 
 	if(!data.parseString(import_data)){
 		Log(warning, "Unable to parse the JSON in the Script Data!");
+		duplicating = false;
+		return;
 	}else{
+		int start_index = (drika_indexes.size() > 0)?current_line + 1:current_line;
 		for( uint i = 0; i < data.getRoot()["functions"].size(); ++i ) {
 			DrikaElement@ new_element = InterpElement(none, data.getRoot()["functions"][i]);
 			drika_elements.insertLast(@new_element);
-			drika_indexes.insertLast(drika_elements.size() - 1);
+			drika_indexes.insertAt(start_index + i, drika_elements.size() - 1);
+			created_indexes.insertLast(start_index + i);
 			post_init_queue.insertLast(@new_element);
 		}
 	}
+
+	if(drika_indexes.size() == 0){
+		duplicating = false;
+		return;
+	}
+
+	multi_select = created_indexes;
+	current_line = multi_select[multi_select.size() - 1];
+	display_index = drika_indexes[current_line];
+
+	string log_message;
+	for(uint i = 0; i < multi_select.size(); ++i){
+		log_message += " " + multi_select[i];
+	}
+	Log(warning, "log_message " + log_message);
+	Log(warning, "current " + current_line);
+
 	ReorderElements();
 }
 
