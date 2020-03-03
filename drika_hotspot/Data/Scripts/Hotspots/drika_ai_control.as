@@ -7,7 +7,8 @@ enum ai_goals {
 				_get_help,
 				_escort,
 				_get_weapon,
-				_get_closest_weapon
+				_get_closest_weapon,
+				_throw_weapon
 			};
 
 class DrikaAIControl : DrikaElement{
@@ -25,7 +26,8 @@ class DrikaAIControl : DrikaElement{
 										"Get Help",
 										"Escort",
 										"Get Weapon",
-										"Get Closest Weapon"
+										"Get Closest Weapon",
+										"Throw Weapon"
 									};
 
 	DrikaAIControl(JSONValue params = JSONValue()){
@@ -51,6 +53,8 @@ class DrikaAIControl : DrikaElement{
 			ai_target.target_option = id_option | reference_option | item_option;
 		}else if(ai_goal == _attack || ai_goal == _escort){
 			ai_target.target_option = id_option | name_option | character_option | reference_option | team_option;
+		}else if(ai_goal == _throw_weapon){
+			ai_target.target_option = character_option;
 		}
 	}
 
@@ -79,7 +83,7 @@ class DrikaAIControl : DrikaElement{
 				DebugDrawBillboard("Data/Textures/ui/challenge_mode/quit_icon_c.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
 			}
 
-			if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon){
+			if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon){
 				array<Object@> ai_targets = ai_target.GetTargetObjects();
 
 				for(uint j = 0; j < ai_targets.size(); j++){
@@ -109,7 +113,7 @@ class DrikaAIControl : DrikaElement{
 
 	string GetDisplayString(){
 		string display_text = "AIControl " + target_select.GetTargetDisplayText() + " " + ai_goal_names[ai_goal];
-		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon){
+		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon){
 			display_text += " " + ai_target.GetTargetDisplayText();
 		}
 		return display_text;
@@ -131,16 +135,18 @@ class DrikaAIControl : DrikaElement{
 			StartSettings();
 		}
 
-		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon){
+		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon){
 			ImGui_Separator();
 			if(ai_goal == _patrol){
 				ImGui_Text("Pathpoint");
 			}else if(ai_goal == _attack){
 				ImGui_Text("Attack Character");
 			}else if(ai_goal == _escort){
-				ImGui_Text("Escord Character");
+				ImGui_Text("Escort Character");
 			}else if(ai_goal == _get_weapon){
 				ImGui_Text("Weapon");
+			}else if(ai_goal == _throw_weapon){
+				ImGui_Text("Target Character");
 			}
 			ai_target.DrawSelectTargetUI();
 		}
@@ -151,7 +157,7 @@ class DrikaAIControl : DrikaElement{
 		array<Object@> ai_targets = ai_target.GetTargetObjects();
 		if(targets.size() == 0){return false;}
 
-		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon){
+		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon){
 			if(ai_targets.size() == 0){
 				return false;
 			}
@@ -228,7 +234,13 @@ class DrikaAIControl : DrikaElement{
 				command += "CheckForNearbyWeapons();";
 				command += "SetGoal(_get_weapon);";
 				break;
-
+			case _throw_weapon:
+					{
+						command += "target_id = " + ai_targets[0].GetID() + ";";
+						command += "going_to_throw_item = true;";
+			            command += "going_to_throw_item_time = time;";
+					}
+					break;
 			default:
 				break;
 		}
