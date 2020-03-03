@@ -89,6 +89,8 @@ class DrikaDialogue : DrikaElement{
 	DrikaElement@ choice_5_element;
 	array<float> dof_settings;
 	bool update_dof = false;
+	bool enable_track_target;
+	TargetSelect track_target(this, "track_target");
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -164,7 +166,9 @@ class DrikaDialogue : DrikaElement{
 		choice_4_go_to_line = GetJSONInt(params, "choice_4_go_to_line", 0);
 		choice_5_go_to_line = GetJSONInt(params, "choice_5_go_to_line", 0);
 		dof_settings = GetJSONFloatArray(params, "dof_settings", {0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
-
+		enable_track_target = GetJSONBool(params, "enable_track_target", false);
+		track_target.LoadIdentifier(params);
+		track_target.target_option = character_option | item_option;
 
 		drika_element_type = drika_dialogue;
 		has_settings = true;
@@ -258,6 +262,10 @@ class DrikaDialogue : DrikaElement{
 			data["dof_settings"] = JSONValue(JSONarrayValue);
 			for(uint i = 0; i < dof_settings.size(); i++){
 				data["dof_settings"].append(dof_settings[i]);
+			}
+			data["enable_track_target"] = JSONValue(enable_track_target);
+			if(enable_track_target){
+				track_target.SaveIdentifier(data);
 			}
 		}else if(dialogue_function == fade_to_black){
 			data["target_fade_to_black"] = JSONValue(target_fade_to_black);
@@ -381,6 +389,7 @@ class DrikaDialogue : DrikaElement{
 
 	void StartSettings(){
 		target_select.CheckAvailableTargets();
+		track_target.CheckAvailableTargets();
 		if(dialogue_function == say){
 
 		}else if(dialogue_function == set_actor_animation){
@@ -522,6 +531,24 @@ class DrikaDialogue : DrikaElement{
 					target_camera_zoom = new_zoom;
 				}
 			}
+
+			if(enable_track_target){
+				array<Object@> track_targets = track_target.GetTargetObjects();
+
+				for(uint j = 0; j < track_targets.size(); j++){
+					vec3 target_location = track_targets[j].GetTranslation();
+
+					if(track_targets[j].GetType() == _item_object){
+						ItemObject@ item_obj = ReadItemID(track_targets[j].GetID());
+						target_location = item_obj.GetPhysicsPosition();
+					}else if(track_targets[j].GetType() == _movement_object){
+						MovementObject@ char = ReadCharacterID(track_targets[j].GetID());
+						target_location = char.position;
+					}
+					DebugDrawLine(placeholder.GetTranslation(), target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
+				}
+			}
+
 		}
 	}
 
@@ -853,6 +880,16 @@ class DrikaDialogue : DrikaElement{
 			if(ImGui_SliderFloat("##Far Transition", dof_settings[5], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+
+			ImGui_Text("Track Target");
+			ImGui_SameLine();
+			ImGui_Checkbox("##Track Target", enable_track_target);
+
+			if(enable_track_target){
+				ImGui_Separator();
+				ImGui_Text("Target Character");
+				track_target.DrawSelectTargetUI();
+			}
 		}
 	}
 
@@ -1170,7 +1207,15 @@ class DrikaDialogue : DrikaElement{
 		msg += target_camera_position.x + " ";
 		msg += target_camera_position.y + " ";
 		msg += target_camera_position.z + " ";
-		msg += target_camera_zoom;
+		msg += target_camera_zoom + " ";
+
+		array<Object@> targets = track_target.GetTargetObjects();
+		if(enable_track_target && targets.size() > 0){
+			msg += true + " ";
+			msg += targets[0].GetID();
+		}else{
+			msg += false + " ";
+		}
 		level.SendMessage(msg);
 	}
 

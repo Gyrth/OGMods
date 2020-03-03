@@ -38,6 +38,8 @@ float camera_near_transition = 0.0;
 float camera_far_blur = 0.0;
 float camera_far_dist = 0.0;
 float camera_far_transition = 0.0;
+bool enable_track_target = false;
+int track_target_id = -1;
 
 class ActorSettings{
 	string name = "Default";
@@ -942,7 +944,21 @@ void ReceiveMessage(string msg){
 
 		token_iter.FindNextToken(msg);
 		camera_zoom = atof(token_iter.GetToken(msg));
-		SetCameraPosition();
+
+		token_iter.FindNextToken(msg);
+		enable_track_target = token_iter.GetToken(msg) == "true";
+
+		if(enable_track_target){
+			camera.SetPos(camera_position);
+			camera.SetXRotation(camera_rotation.x);
+			camera.SetYRotation(camera_rotation.y);
+			camera.SetZRotation(camera_rotation.z);
+			token_iter.FindNextToken(msg);
+			track_target_id = atoi(token_iter.GetToken(msg));
+		}else{
+			SetCameraPosition();
+		}
+
 		camera.FixDiscontinuity();
 	}else if(token == "drika_dialogue_end"){
 		show_dialogue = false;
@@ -1214,9 +1230,20 @@ void UpdateReadFileProcesses(){
 
 void SetCameraPosition(){
 	if((animating_camera || has_camera_control) && !EditorModeActive()){
-		camera.SetXRotation(camera_rotation.x);
-		camera.SetYRotation(camera_rotation.y);
-		camera.SetZRotation(camera_rotation.z);
+		if(enable_track_target){
+			Object@ track_target = ReadObjectFromID(track_target_id);
+			if(track_target.GetType() == _movement_object){
+				MovementObject@ char = ReadCharacterID(track_target_id);
+				SmoothCameraLookAt(char.rigged_object().GetAvgIKChainPos("torso"));
+			}else if(track_target.GetType() == _item_object){
+				ItemObject@ item = ReadItemID(track_target_id);
+				SmoothCameraLookAt(item.GetPhysicsPosition());
+			}
+		}else{
+			camera.SetXRotation(camera_rotation.x);
+			camera.SetYRotation(camera_rotation.y);
+			camera.SetZRotation(camera_rotation.z);
+		}
 		camera.SetPos(camera_position);
 		camera.SetDistance(0.0f);
 		camera.SetFOV(camera_zoom);
@@ -1226,6 +1253,13 @@ void SetCameraPosition(){
 			SetGrabMouse(true);
 		}
 	}
+}
+
+void SmoothCameraLookAt(vec3 target_location){
+	float camera_distance = distance(target_location, camera.GetPos());
+	vec3 current_look_location = camera.GetPos() + (camera.GetFacing() * camera_distance);
+	/* DebugDrawWireSphere(current_look_location, 0.5, vec3(1.0), _delete_on_update); */
+	camera.LookAt(mix(current_look_location, target_location, time_step * 10.0));
 }
 
 void MessageWaitingForFadeOut(){
