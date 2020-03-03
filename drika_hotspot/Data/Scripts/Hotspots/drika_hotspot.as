@@ -484,7 +484,7 @@ void DrawEditor(){
 					ImportFromFile();
 				}
 				if(ImGui_MenuItem("Copy to clipboard")){
-
+					CopyToClipBoard();
 				}
 				if(ImGui_MenuItem("Paste from clipboard")){
 
@@ -727,16 +727,49 @@ void ExportToFile(){
 
 		JSON data;
 		JSONValue functions;
+		array<int> target_indexes = drika_indexes;
 
-		for(uint i = 0; i < drika_indexes.size(); i++){
-			JSONValue function_data = drika_elements[drika_indexes[i]].GetSaveData();
-			function_data["function"] = JSONValue(drika_elements[drika_indexes[i]].drika_element_type);
+		//Only export the selected functions.
+		if(multi_select.size() > 1){
+			array<int> sorted_selected = multi_select;
+			sorted_selected.sortAsc();
+			target_indexes = sorted_selected;
+		}
+
+		for(uint i = 0; i < target_indexes.size(); i++){
+			JSONValue function_data = drika_elements[target_indexes[i]].GetSaveData();
+			function_data["function"] = JSONValue(drika_elements[target_indexes[i]].drika_element_type);
 			functions.append(function_data);
 		}
+
 		data.getRoot()["functions"] = functions;
 		string send_data = join(data.writeString(false).split("\""), "\\\"");
 		level.SendMessage("drika_export_to_file " + write_path + " " + "\"" + send_data + "\"");
 	}
+}
+
+void CopyToClipBoard(){
+	Log(info,"Copy To Clipboard");
+
+	JSON data;
+	JSONValue functions;
+	array<int> target_indexes = drika_indexes;
+
+	//Only export the selected functions.
+	if(multi_select.size() > 1){
+		array<int> sorted_selected = multi_select;
+		sorted_selected.sortAsc();
+		target_indexes = sorted_selected;
+	}
+
+	for(uint i = 0; i < target_indexes.size(); i++){
+		JSONValue function_data = drika_elements[target_indexes[i]].GetSaveData();
+		function_data["function"] = JSONValue(drika_elements[target_indexes[i]].drika_element_type);
+		functions.append(function_data);
+	}
+
+	data.getRoot()["functions"] = functions;
+	ImGui_SetClipboardText(data.writeString(false));
 }
 
 void ImportFromFile(){
