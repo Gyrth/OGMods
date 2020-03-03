@@ -393,6 +393,7 @@ bool reorded = false;
 int display_index = 0;
 bool update_scroll = false;
 bool debug_current_line = false;
+float left_over_drag_y = 0.0;
 
 void DrawEditor(){
 	if(camera.GetFlags() == kPreviewCamera){
@@ -580,12 +581,17 @@ void DrawEditor(){
 			ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 			bool line_selected = display_index == int(item_no) || multi_select.find(i) != -1;
 			if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
+
+			}
+
+			if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(0)){
+				left_over_drag_y = 0.0;
 				if(ImGui_IsMouseDoubleClicked(0)){
 					if(drika_elements[drika_indexes[i]].has_settings){
 						GetCurrentElement().StartSettings();
 						ImGui_OpenPopup("Edit");
 					}
-				}else if(!reorded){
+				}else{
 					if(GetInputDown(0, "lshift")){
 						int starting_point = multi_select[multi_select.size() - 1];
 						int ending_point = i;
@@ -613,7 +619,7 @@ void DrawEditor(){
 						}else{
 							multi_select.insertLast(i);
 						}
-					}else{
+					}else if(multi_select.find(i) == -1){
 						multi_select.resize(0);
 						multi_select.insertLast(i);
 					}
@@ -621,9 +627,7 @@ void DrawEditor(){
 					display_index = int(item_no);
 					current_line = int(i);
 					GetCurrentElement().StartEdit();
-
 				}
-
 			}
 
 			if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(1)){
@@ -636,46 +640,57 @@ void DrawEditor(){
 			}
 
 			ImGui_PopStyleColor();
-			if(ImGui_IsItemActive() && !ImGui_IsItemHovered()){
-				float drag_dy = ImGui_GetMouseDragDelta(0).y;
+			if(ImGui_IsItemActive()){
+				float drag_dy = ImGui_GetMouseDragDelta(0).y + left_over_drag_y;
 				bool can_drag_up = multi_select.find(0) == -1;
 				bool can_drag_down = multi_select.find(drika_indexes.size() - 1) == -1;
+				float drag_threshold = 17.0;
 
-				if(drag_dy < -10.0 && can_drag_up){
-					// Dragging Up
+				if(drag_dy < -drag_threshold && can_drag_up){
+					while(drag_dy < -drag_threshold && can_drag_up){
+						// Dragging Up
 
-					for(uint k = 0; k < drika_indexes.size(); k++){
-						for(uint j = 0; j < multi_select.size(); j++){
-							if(multi_select[j] == int(k)){
-								SwapIndexes(k, k - 1);
-								reorded = true;
+						for(uint k = 0; k < drika_indexes.size(); k++){
+							for(uint j = 0; j < multi_select.size(); j++){
+								if(multi_select[j] == int(k)){
+									SwapIndexes(k, k - 1);
+									reorded = true;
+								}
 							}
 						}
-					}
 
-					for(uint j = 0; j < multi_select.size(); j++){
-						multi_select[j] -= 1;
-					}
+						for(uint j = 0; j < multi_select.size(); j++){
+							multi_select[j] -= 1;
+						}
 
-					current_line -= 1;
+						current_line -= 1;
+						drag_dy += drag_threshold;
+						can_drag_up = multi_select.find(0) == -1;
+					}
+					left_over_drag_y = drag_dy;
 					ImGui_ResetMouseDragDelta();
-				}else if(drag_dy > 10.0 && can_drag_down){
-					// Dragging Down
+				}else if(drag_dy > drag_threshold && can_drag_down){
+					while(drag_dy > drag_threshold && can_drag_down){
+						// Dragging Down
 
-					for(int k = drika_indexes.size() - 1; k > -1; k--){
-						for(uint j = 0; j < multi_select.size(); j++){
-							if(multi_select[j] == int(k)){
-								SwapIndexes(k, k + 1);
-								reorded = true;
+						for(int k = drika_indexes.size() - 1; k > -1; k--){
+							for(uint j = 0; j < multi_select.size(); j++){
+								if(multi_select[j] == int(k)){
+									SwapIndexes(k, k + 1);
+									reorded = true;
+								}
 							}
 						}
-					}
 
-					for(uint j = 0; j < multi_select.size(); j++){
-						multi_select[j] += 1;
-					}
+						for(uint j = 0; j < multi_select.size(); j++){
+							multi_select[j] += 1;
+						}
 
-					current_line += 1;
+						current_line += 1;
+						drag_dy -= drag_threshold;
+						can_drag_down = multi_select.find(drika_indexes.size() - 1) == -1;
+					}
+					left_over_drag_y = drag_dy;
 					ImGui_ResetMouseDragDelta();
 				}
 			}
