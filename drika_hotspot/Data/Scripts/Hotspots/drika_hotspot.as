@@ -394,6 +394,7 @@ int display_index = 0;
 bool update_scroll = false;
 bool debug_current_line = false;
 float left_over_drag_y = 0.0;
+bool dragging = false;
 
 void DrawEditor(){
 	if(camera.GetFlags() == kPreviewCamera){
@@ -583,7 +584,10 @@ void DrawEditor(){
 			ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 			bool line_selected = display_index == int(item_no) || multi_select.find(i) != -1;
 			if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
-
+				// This item has been selected that is inside multiselect, but no modifier key is pressed.
+				if(multi_select.find(i) != -1 && !dragging && multi_select.size() > 1 && !GetInputDown(0, "lshift") && !GetInputDown(0, "lctrl")){
+					multi_select = {i};
+				}
 			}
 
 			if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(0)){
@@ -700,6 +704,13 @@ void DrawEditor(){
 		if(drika_elements.size() > 0 && !reorded){
 			GetCurrentElement().DrawEditing();
 		}
+
+		if(ImGui_IsMouseDragging(0)){
+			dragging = true;
+		}else{
+			dragging = false;
+		}
+
 		ImGui_PopStyleColor(18);
 	}
 	if(reorded && !ImGui_IsMouseDragging(0)){
