@@ -330,10 +330,10 @@ class DrikaElement{
 		ImGui_Text("Go to line");
 		ImGui_SameLine();
 		ImGui_PushStyleColor(ImGuiCol_Text, target_element.GetDisplayColor());
-		if(ImGui_BeginCombo("###line" + combo_name, preview_value)){
+		if(ImGui_BeginCombo("###line" + combo_name, preview_value, ImGuiComboFlags_HeightLarge)){
 			for(uint i = 0; i < drika_indexes.size(); i++){
 				int item_no = drika_indexes[i];
-				bool is_selected = (target_element.index == drika_indexes[i]);
+				bool is_selected = (target_element.index == drika_elements[drika_indexes[i]].index);
 				vec4 text_color = drika_elements[item_no].GetDisplayColor();
 
 				ImGui_PushStyleColor(ImGuiCol_Text, text_color);
