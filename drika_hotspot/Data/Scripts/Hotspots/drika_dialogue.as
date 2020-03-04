@@ -89,7 +89,8 @@ class DrikaDialogue : DrikaElement{
 	DrikaElement@ choice_5_element;
 	array<float> dof_settings;
 	bool update_dof = false;
-	bool enable_track_target;
+	bool enable_look_at_target;
+	bool enable_move_with_target;
 	TargetSelect track_target(this, "track_target");
 
 	array<string> dialogue_function_names =	{
@@ -166,7 +167,8 @@ class DrikaDialogue : DrikaElement{
 		choice_4_go_to_line = GetJSONInt(params, "choice_4_go_to_line", 0);
 		choice_5_go_to_line = GetJSONInt(params, "choice_5_go_to_line", 0);
 		dof_settings = GetJSONFloatArray(params, "dof_settings", {0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
-		enable_track_target = GetJSONBool(params, "enable_track_target", false);
+		enable_look_at_target = GetJSONBool(params, "enable_look_at_target", false);
+		enable_move_with_target = GetJSONBool(params, "enable_move_with_target", false);
 		track_target.LoadIdentifier(params);
 		track_target.target_option = character_option | item_option;
 
@@ -263,8 +265,9 @@ class DrikaDialogue : DrikaElement{
 			for(uint i = 0; i < dof_settings.size(); i++){
 				data["dof_settings"].append(dof_settings[i]);
 			}
-			data["enable_track_target"] = JSONValue(enable_track_target);
-			if(enable_track_target){
+			data["enable_look_at_target"] = JSONValue(enable_look_at_target);
+			data["enable_move_with_target"] = JSONValue(enable_move_with_target);
+			if(enable_look_at_target || enable_move_with_target){
 				track_target.SaveIdentifier(data);
 			}
 		}else if(dialogue_function == fade_to_black){
@@ -532,7 +535,7 @@ class DrikaDialogue : DrikaElement{
 				}
 			}
 
-			if(enable_track_target){
+			if(enable_look_at_target || enable_move_with_target){
 				array<Object@> track_targets = track_target.GetTargetObjects();
 
 				for(uint j = 0; j < track_targets.size(); j++){
@@ -881,11 +884,15 @@ class DrikaDialogue : DrikaElement{
 				update_dof = true;
 			}
 
-			ImGui_Text("Track Target");
+			ImGui_Text("Look At Target");
 			ImGui_SameLine();
-			ImGui_Checkbox("##Track Target", enable_track_target);
+			ImGui_Checkbox("##Look At Target", enable_look_at_target);
 
-			if(enable_track_target){
+			ImGui_Text("Move With Target");
+			ImGui_SameLine();
+			ImGui_Checkbox("##Move With Target", enable_move_with_target);
+
+			if(enable_look_at_target || enable_move_with_target){
 				ImGui_Separator();
 				ImGui_Text("Target Character");
 				track_target.DrawSelectTargetUI();
@@ -1210,12 +1217,9 @@ class DrikaDialogue : DrikaElement{
 		msg += target_camera_zoom + " ";
 
 		array<Object@> targets = track_target.GetTargetObjects();
-		if(enable_track_target && targets.size() > 0){
-			msg += true + " ";
-			msg += targets[0].GetID();
-		}else{
-			msg += false + " ";
-		}
+		msg += enable_look_at_target + " ";
+		msg += enable_move_with_target + " ";
+		msg += ((targets.size() > 0)?targets[0].GetID():-1) + " ";
 		level.SendMessage(msg);
 	}
 

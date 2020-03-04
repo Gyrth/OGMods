@@ -38,8 +38,12 @@ float camera_near_transition = 0.0;
 float camera_far_blur = 0.0;
 float camera_far_dist = 0.0;
 float camera_far_transition = 0.0;
-bool enable_track_target = false;
+bool enable_look_at_target = false;
+bool enable_move_with_target = false;
 int track_target_id = -1;
+vec3 target_positional_difference = vec3();
+vec3 current_camera_position = vec3();
+bool camera_settings_changed = false;
 
 class ActorSettings{
 	string name = "Default";
@@ -946,20 +950,31 @@ void ReceiveMessage(string msg){
 		camera_zoom = atof(token_iter.GetToken(msg));
 
 		token_iter.FindNextToken(msg);
-		enable_track_target = token_iter.GetToken(msg) == "true";
+		enable_look_at_target = token_iter.GetToken(msg) == "true";
 
-		if(enable_track_target){
-			camera.SetPos(camera_position);
-			camera.SetXRotation(camera_rotation.x);
-			camera.SetYRotation(camera_rotation.y);
-			camera.SetZRotation(camera_rotation.z);
+		token_iter.FindNextToken(msg);
+		enable_move_with_target = token_iter.GetToken(msg) == "true";
+
+		if(enable_look_at_target || enable_move_with_target){
 			token_iter.FindNextToken(msg);
 			track_target_id = atoi(token_iter.GetToken(msg));
-		}else{
-			SetCameraPosition();
+
+			if(track_target_id != -1 && ObjectExists(track_target_id)){
+				Object@ track_target = ReadObjectFromID(track_target_id);
+				vec3 target_location;
+				if(track_target.GetType() == _movement_object){
+					MovementObject@ char = ReadCharacterID(track_target_id);
+					target_location = char.rigged_object().GetAvgIKChainPos("torso");
+				}else if(track_target.GetType() == _item_object){
+					ItemObject@ item = ReadItemID(track_target_id);
+					target_location = item.GetPhysicsPosition();
+				}
+				target_positional_difference = camera_position - target_location;
+			}
 		}
 
-		camera.FixDiscontinuity();
+		current_camera_position = camera_position;
+		camera_settings_changed = true;
 	}else if(token == "drika_dialogue_end"){
 		show_dialogue = false;
 		fade_to_black = false;
@@ -1228,23 +1243,57 @@ void UpdateReadFileProcesses(){
 	}
 }
 
+int update_counter = 0;
+
 void SetCameraPosition(){
+
+	if(camera_settings_changed){
+		camera.SetPos(camera_position);
+		camera.SetXRotation(camera_rotation.x);
+		camera.SetYRotation(camera_rotation.y);
+		camera.SetZRotation(camera_rotation.z);
+		camera.CalcFacing();
+
+		camera.FixDiscontinuity();
+		camera_settings_changed = false;
+
+		return;
+	}
+
 	if((animating_camera || has_camera_control) && !EditorModeActive()){
-		if(enable_track_target){
-			Object@ track_target = ReadObjectFromID(track_target_id);
-			if(track_target.GetType() == _movement_object){
-				MovementObject@ char = ReadCharacterID(track_target_id);
-				SmoothCameraLookAt(char.rigged_object().GetAvgIKChainPos("torso"));
-			}else if(track_target.GetType() == _item_object){
-				ItemObject@ item = ReadItemID(track_target_id);
-				SmoothCameraLookAt(item.GetPhysicsPosition());
+		if(enable_look_at_target){
+			if(track_target_id != -1 && ObjectExists(track_target_id)){
+				Object@ track_target = ReadObjectFromID(track_target_id);
+				if(track_target.GetType() == _movement_object){
+					MovementObject@ char = ReadCharacterID(track_target_id);
+					SmoothCameraLookAt(char.rigged_object().GetAvgIKChainPos("torso"));
+				}else if(track_target.GetType() == _item_object){
+					ItemObject@ item = ReadItemID(track_target_id);
+					SmoothCameraLookAt(item.GetPhysicsPosition());
+				}
 			}
 		}else{
 			camera.SetXRotation(camera_rotation.x);
 			camera.SetYRotation(camera_rotation.y);
 			camera.SetZRotation(camera_rotation.z);
 		}
-		camera.SetPos(camera_position);
+
+		if(enable_move_with_target){
+			if(track_target_id != -1 && ObjectExists(track_target_id)){
+				Object@ track_target = ReadObjectFromID(track_target_id);
+				if(track_target.GetType() == _movement_object){
+					MovementObject@ char = ReadCharacterID(track_target_id);
+					SmoothCameraMoveWith(char.rigged_object().GetAvgIKChainPos("torso"));
+				}else if(track_target.GetType() == _item_object){
+					ItemObject@ item = ReadItemID(track_target_id);
+					SmoothCameraMoveWith(item.GetPhysicsPosition());
+				}
+			}
+		}else{
+			camera.SetPos(camera_position);
+			current_camera_position = camera_position;
+		}
+
 		camera.SetDistance(0.0f);
 		camera.SetFOV(camera_zoom);
 		camera.SetDOF(camera_near_blur, camera_near_dist, camera_near_transition, camera_far_blur, camera_far_dist, camera_far_transition);
@@ -1253,11 +1302,18 @@ void SetCameraPosition(){
 			SetGrabMouse(true);
 		}
 	}
+
+}
+
+void SmoothCameraMoveWith(vec3 target_location){
+	vec3 adjusted_target_location = target_location + target_positional_difference;
+	current_camera_position = mix(current_camera_position, adjusted_target_location, time_step * 10.0);
+	camera.SetPos(current_camera_position);
 }
 
 void SmoothCameraLookAt(vec3 target_location){
-	float camera_distance = distance(target_location, camera.GetPos());
-	vec3 current_look_location = camera.GetPos() + (camera.GetFacing() * camera_distance);
+	float camera_distance = distance(target_location, current_camera_position);
+	vec3 current_look_location = current_camera_position + (camera.GetFacing() * camera_distance);
 	/* DebugDrawWireSphere(current_look_location, 0.5, vec3(1.0), _delete_on_update); */
 	camera.LookAt(mix(current_look_location, target_location, time_step * 10.0));
 }
