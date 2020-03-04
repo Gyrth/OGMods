@@ -3,8 +3,70 @@ enum target_options {	id_option = (1<<0),
 						team_option = (1<<2),
 						name_option = (1<<3),
 						character_option = (1<<4),
-						item_option = (1<<5)
+						item_option = (1<<5),
+						batch_option = (1<<6)
 					};
+
+class BatchObject{
+	string text;
+	vec4 color;
+	int id;
+
+	BatchObject(int _id, string _text, vec4 _color){
+		text = _text;
+		color = _color;
+		id = _id;
+	}
+}
+
+/* vec4(156, 255, 159, 255),
+vec4(153, 255, 193, 255),
+vec4(255, 0, 255, 255),
+vec4(0, 149, 255, 255), */
+
+vec4 GetBatchObjectColor(int object_type){
+	switch(object_type){
+		case _env_object:
+			return vec4(230, 184, 175, 255);
+		case _movement_object:
+			return vec4(255, 153, 0, 255);
+		case _spawn_point:
+			return vec4(0, 243, 255, 255);
+		case _decal_object:
+			return vec4(0, 173, 182, 255);
+		case _hotspot_object:
+			return vec4(0, 255, 0, 255);
+		case _group:
+			return vec4(0, 255, 149, 255);
+		case _item_object:
+			return vec4(255, 255, 0, 255);
+		case _path_point_object:
+			return vec4(255, 0, 0, 255);
+		case _ambient_sound_object:
+			return vec4(150, 0, 0, 255);
+		case _placeholder_object:
+			return vec4(221, 126, 107, 255);
+		case _light_probe_object:
+			return vec4(150, 0, 150, 255);
+		case _dynamic_light_object:
+			return vec4(0, 113, 194, 255);
+		case _navmesh_hint_object:
+			return vec4(0, 43, 255, 255);
+		case _navmesh_region_object:
+			return vec4(126, 139, 226, 255);
+		case _navmesh_connection_object:
+			return vec4(0, 182, 0, 255);
+		case _reflection_capture_object:
+			return vec4(162, 250, 255, 255);
+		case _light_volume_object:
+			return vec4(203, 200, 255, 255);
+		case _prefab:
+			return vec4(0, 173, 101, 255);
+		default :
+			break;
+	}
+	return vec4(1.0);
+}
 
 class TargetSelect{
 	int object_id = -1;
@@ -22,8 +84,10 @@ class TargetSelect{
 	array<int> available_character_ids;
 	array<string> available_item_names;
 	array<int> available_item_ids;
+	array<int> batch_ids;
 	int target_option;
 	DrikaElement@ parent;
+	array<BatchObject@> batch_objects;
 
 	TargetSelect(DrikaElement@ _parent, string tag = ""){
 		@parent = _parent;
@@ -100,6 +164,17 @@ class TargetSelect{
 		if((target_option & item_option) != 0){
 			CheckItemsAvailable();
 		}
+		if((target_option & batch_option) != 0){
+			CheckBatchObjects();
+		}
+	}
+
+	void CheckBatchObjects(){
+		if(batch_objects.size() == 0){
+			for(uint i = 0; i < batch_ids.size(); i++){
+				AddBatchObject(batch_ids[i]);
+			}
+		}
 	}
 
 	void CheckReferenceAvailable(){
@@ -133,6 +208,10 @@ class TargetSelect{
 			identifier_choices.insertLast("Item");
 		}
 
+		if((target_option & batch_option) != 0){
+			identifier_choices.insertLast("Batch");
+		}
+
 		int current_identifier_type = -1;
 
 		for(uint i = 0; i < identifier_choices.size(); i++){
@@ -141,6 +220,7 @@ class TargetSelect{
 				identifier_type == reference && identifier_choices[i] == "Reference"||
 				identifier_type == character && identifier_choices[i] == "Character"||
 				identifier_type == item && identifier_choices[i] == "Item"||
+				identifier_type == batch && identifier_choices[i] == "Batch"||
 				identifier_type == name && identifier_choices[i] == "Name"){
 				current_identifier_type = i;
 				break;
@@ -169,6 +249,8 @@ class TargetSelect{
 				identifier_type = character;
 			}else if(identifier_choices[current_identifier_type] == "Item"){
 				identifier_type = item;
+			}else if(identifier_choices[current_identifier_type] == "Batch"){
+				identifier_type = batch;
 			}
 			parent.TargetChanged();
 		}
@@ -273,7 +355,75 @@ class TargetSelect{
 				object_id = available_item_ids[current_item];
 				parent.TargetChanged();
 			}
+		}else if(identifier_type == batch){
+			if(ImGui_Button("Add Selected")){
+				array<int> object_ids = GetSelected();
+				for(uint i = 0; i < object_ids.size(); i++){
+					Object@ obj = ReadObjectFromID(object_ids[i]);
+					if(batch_ids.find(object_ids[i]) == -1){
+						batch_ids.insertLast(object_ids[i]);
+						AddBatchObject(obj.GetID());
+					}
+				}
+			}
+			ImGui_SameLine();
+			if(ImGui_Button("Remove Selected")){
+				array<int> object_ids = GetSelected();
+				for(uint i = 0; i < object_ids.size(); i++){
+					Object@ obj = ReadObjectFromID(object_ids[i]);
+					int batch_id_index = batch_ids.find(object_ids[i]);
+					if(batch_id_index != -1){
+						batch_ids.removeAt(batch_id_index);
+					}
+
+					for(uint j = 0; j < batch_objects.size(); j++){
+						if(batch_objects[j].id == object_ids[i]){
+							batch_objects.removeAt(j);
+						}
+					}
+				}
+			}
+			ImGui_SameLine();
+			if(ImGui_Button("Clear")){
+				batch_ids.resize(0);
+				batch_objects.resize(0);
+			}
+
+			if(ImGui_BeginChildFrame(55, vec2(-1, ImGui_GetWindowHeight() - 100))){
+
+				for(uint i = 0; i < batch_objects.size(); i++){
+					ImGui_PushID("delete" + i);
+					if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 2, vec4(0))){
+						Object@ obj = ReadObjectFromID(batch_objects[i].id);
+						int batch_id_index = batch_ids.find(batch_objects[i].id);
+						if(batch_id_index != -1){
+							batch_ids.removeAt(batch_id_index);
+						}
+						batch_objects.removeAt(i);
+						continue;
+					}
+					ImGui_PopID();
+					ImGui_SameLine();
+
+					vec4 text_color = batch_objects[i].color;
+					ImGui_PushStyleColor(ImGuiCol_Text, text_color);
+					ImGui_PushItemWidth(150.0);
+					if(ImGui_Selectable(batch_objects[i].text, false)){
+
+					}
+					ImGui_PopItemWidth();
+					ImGui_PopStyleColor();
+				}
+
+				ImGui_EndChildFrame();
+			}
 		}
+	}
+
+	void AddBatchObject(int batch_object_id){
+		Object@ obj = ReadObjectFromID(batch_object_id);
+		string text = obj.GetID() + obj.GetEditorLabel() + obj.GetLabel() + obj.GetName();
+		batch_objects.insertLast(BatchObject(obj.GetID(), text, GetBatchObjectColor(obj.GetType())));
 	}
 
 	void SaveIdentifier(JSONValue &inout data){
@@ -290,6 +440,11 @@ class TargetSelect{
 			data[identifier_tag] = JSONValue(object_id);
 		}else if(identifier_type == item){
 			data[identifier_tag] = JSONValue(object_id);
+		}else if(identifier_type == batch){
+			data[identifier_tag] = JSONValue(JSONarrayValue);
+			for(uint i = 0; i < batch_ids.size(); i++){
+				data[identifier_tag].append(batch_ids[i]);
+			}
 		}
 	}
 
@@ -313,6 +468,9 @@ class TargetSelect{
 			}else if(params[identifier_type_tag].asInt() == item){
 				identifier_type = identifier_types(item);
 				object_id = params[identifier_tag].asInt();
+			}else if(params[identifier_type_tag].asInt() == batch){
+				identifier_type = identifier_types(batch);
+				batch_ids = GetJSONIntArray(params, identifier_tag, {});
 			}
 		}else{
 			//By default the id is used as identifier with -1 as the target id.
@@ -384,6 +542,10 @@ class TargetSelect{
 			}else{
 				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
+		}else if(identifier_type == batch){
+			for(uint i = 0; i < batch_ids.size(); i++){
+				target_objects.insertLast(ReadObjectFromID(batch_ids[i]));
+			}
 		}
 		return target_objects;
 	}
@@ -440,6 +602,12 @@ class TargetSelect{
 			}else{
 				target_movement_objects.insertLast(ReadCharacterID(object_id));
 			}
+		}else if(identifier_type == batch){
+			for(uint i = 0; i < batch_ids.size(); i++){
+				if(!MovementObjectExists(batch_ids[i])){
+					target_movement_objects.insertLast(ReadCharacterID(batch_ids[i]));
+				}
+			}
 		}
 		return target_movement_objects;
 	}
@@ -477,6 +645,8 @@ class TargetSelect{
 					}
 				}
 			}
+		}else if (identifier_type == batch){
+			return "batch";
 		}
 		return "NA";
 	}
