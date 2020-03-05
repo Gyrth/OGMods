@@ -79,20 +79,22 @@ class DrikaReadWriteSaveFile : DrikaElement{
 
 	string GetDisplayString(){
 		GoToLineCheckAvailable(continue_element);
+		string display_string;
 
-		if(read_write_mode == read and condition_count == condition_count_none){
-			return "Read " + param + " " + value;
-		}else{
-			if(read_write_mode == read and condition_count == condition_count_one){
-				return "Check two conditions ";
-			}else{
-				if(read_write_mode == read and condition_count == condition_count_two){
-					return "Check three conditions ";
-				}else{
-					return "Write " + param + " " + value;
-				}
+		if(read_write_mode == read){
+			if(condition_count == condition_count_none){
+				display_string += "Read " + param + " " + value;
+			}else if(condition_count == condition_count_one){
+				display_string += "Check two conditions";
+			}else if(condition_count == condition_count_two){
+				display_string += "Check three conditions";
 			}
+			display_string += (continue_if_false?" else line " + continue_element.index:"");
+		}else if(read_write_mode == write){
+			display_string += "Write " + param + " " + value;
 		}
+
+		return display_string;
 	}
 
 	void DrawSettings(){
