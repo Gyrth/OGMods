@@ -79,6 +79,8 @@ class DrikaSetMorphTarget : DrikaElement{
 				morph_2_index = i;
 			}
 		}
+		morph_1 = available_morphs[morph_1_index];
+		morph_2 = available_morphs[morph_2_index];
 	}
 
 	void DrawSettings(){
