@@ -286,6 +286,7 @@ void InterpData(){
 void LaunchCustomGUI(){
 	show_editor = !show_editor;
 	if(show_editor){
+		update_scroll = true;
 		multi_select = {current_line};
 		level.SendMessage("drika_hotspot_editing " + this_hotspot.GetID());
 		has_closed = false;
