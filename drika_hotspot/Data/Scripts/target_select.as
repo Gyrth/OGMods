@@ -252,7 +252,7 @@ class TargetSelect{
 			}else if(identifier_choices[current_identifier_type] == "Batch"){
 				identifier_type = batch;
 			}
-			parent.TargetChanged();
+			target_changed = true;
 		}
 
 		if(identifier_type == id){
@@ -418,6 +418,10 @@ class TargetSelect{
 
 				ImGui_EndChildFrame();
 			}
+		}
+
+		if(target_changed){
+			parent.TargetChanged();
 		}
 	}
 
