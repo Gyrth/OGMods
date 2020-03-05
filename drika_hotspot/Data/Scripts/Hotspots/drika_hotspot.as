@@ -449,6 +449,11 @@ void DrawEditor(){
 				Save();
 			}
 			ImGui_EndChild();
+			
+			if(!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)){
+				ImGui_CloseCurrentPopup();
+			}
+
 			ImGui_EndPopup();
 		}
 		ImGui_PopStyleVar();
