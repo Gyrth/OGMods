@@ -392,8 +392,9 @@ class TargetSelect{
 			if(ImGui_BeginChildFrame(55, vec2(-1, ImGui_GetWindowHeight() - 100))){
 
 				for(uint i = 0; i < batch_objects.size(); i++){
-					ImGui_PushID("delete" + i);
-					if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 2, vec4(0))){
+					/* ImGui_PushID("delete" + i); */
+					if(ImGui_Button("Delete " + batch_objects[i].id)){
+					/* if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 2, vec4(0))){ */
 						Object@ obj = ReadObjectFromID(batch_objects[i].id);
 						int batch_id_index = batch_ids.find(batch_objects[i].id);
 						if(batch_id_index != -1){
@@ -402,7 +403,7 @@ class TargetSelect{
 						batch_objects.removeAt(i);
 						continue;
 					}
-					ImGui_PopID();
+					/* ImGui_PopID(); */
 					ImGui_SameLine();
 
 					vec4 text_color = batch_objects[i].color;
