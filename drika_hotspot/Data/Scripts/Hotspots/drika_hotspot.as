@@ -449,7 +449,7 @@ void DrawEditor(){
 				Save();
 			}
 			ImGui_EndChild();
-			
+
 			if(!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)){
 				ImGui_CloseCurrentPopup();
 			}
@@ -858,11 +858,12 @@ void InsertElement(DrikaElement@ new_element){
 void ReceiveMessage(string msg){
     TokenIterator token_iter;
     token_iter.Init();
+	token_iter.FindNextToken(msg);
+	string token = token_iter.GetToken(msg);
 
-    if(!token_iter.FindNextToken(msg) || drika_elements.size() == 0){
+    if(drika_elements.size() == 0 && token != "drika_read_file"){
         return;
     }
-    string token = token_iter.GetToken(msg);
 	// Discard the messages when this hotspot is disabled.
 	if(token == "level_event"){
 		if(editing){
