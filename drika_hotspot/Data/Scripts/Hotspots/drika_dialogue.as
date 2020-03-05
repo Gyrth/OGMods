@@ -181,14 +181,14 @@ class DrikaDialogue : DrikaElement{
 		}
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
-		if(duplicating && dialogue_function == choice){
+		if(duplicating_function && dialogue_function == choice){
 			GetTargetElement();
 		}
 	}
 
 	void PostInit(){
 		UpdateActorName();
-		if(!duplicating && dialogue_function == choice){
+		if(!duplicating_hotspot && dialogue_function == choice){
 			GetTargetElement();
 		}
 	}

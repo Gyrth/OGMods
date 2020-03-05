@@ -63,7 +63,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 
 	void PostInit(){
 		if(external_hotspot){
-			if(duplicating){
+			if(duplicating_hotspot){
 				if(ObjectExists(external_hotspot_id)){
 					//Use the same transform as the original external hotspot.
 					Object@ old_hotspot = ReadObjectFromID(external_hotspot_id);

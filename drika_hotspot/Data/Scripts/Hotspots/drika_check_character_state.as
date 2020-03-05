@@ -56,10 +56,16 @@ class DrikaCheckCharacterState : DrikaElement{
 		connection_types = {_movement_object};
 
 		has_settings = true;
+
+		if(duplicating_function){
+			GetTargetElement();
+		}
 	}
 
 	void PostInit(){
-		GetTargetElement();
+		if(!duplicating_function){
+			GetTargetElement();
+		}
 	}
 
 	void GetTargetElement(){

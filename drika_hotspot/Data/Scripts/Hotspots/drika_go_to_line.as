@@ -51,10 +51,16 @@ class DrikaGoToLine : DrikaElement{
 		choice_line10 = GetJSONBool(params, "choice_line10", false);
 		drika_element_type = drika_go_to_line;
 		has_settings = true;
+
+		if(duplicating_function){
+			GetTargetElement();
+		}
 	}
 
 	void PostInit(){
-		GetTargetElement();
+		if(!duplicating_function){
+			GetTargetElement();
+		}
 	}
 
 	void GetTargetElement(){

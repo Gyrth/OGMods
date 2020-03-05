@@ -44,13 +44,13 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		drika_element_type = drika_read_write_savefile;
 		has_settings = true;
 
-		if(duplicating){
+		if(duplicating_function){
 			GetTargetElement();
 		}
 	}
 
 	void PostInit(){
-		if(!duplicating){
+		if(!duplicating_function){
 			GetTargetElement();
 		}
 	}

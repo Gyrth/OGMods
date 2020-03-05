@@ -53,7 +53,8 @@ array<string> messages;
 bool is_selected = false;
 array<ObjectReference@> object_references;
 string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
-bool duplicating = false;
+bool duplicating_hotspot = false;
+bool duplicating_function = false;
 float image_scale;
 vec4 image_tint;
 string image_path;
@@ -111,9 +112,9 @@ void Init() {
 	SortFunctionsAlphabetical();
 	//When the user duplicates a hotspot the editormode is active and the left alt is pressed.
 	if(EditorModeActive() && GetInputDown(0, "lalt")){
-		duplicating = true;
+		duplicating_hotspot = true;
 	}else if(EditorModeActive() && GetInputDown(0, "lctrl") && GetInputDown(0, "v")){
-		duplicating = true;
+		duplicating_hotspot = true;
 	}
 	InterpData();
 }
@@ -311,7 +312,8 @@ void Update(){
 			Save();
 		}
 
-		duplicating = false;
+		duplicating_hotspot = false;
+		duplicating_function = false;
 		return;
 	}
 
@@ -516,7 +518,7 @@ void DrawEditor(){
 			}
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
-					duplicating = true;
+					duplicating_function = true;
 					int last_selected = multi_select[multi_select.size() - 1];
 					array<int> sorted_selected = multi_select;
 					multi_select.resize(0);
@@ -940,12 +942,12 @@ void ReceiveMessage(string msg){
 
 void InterpImportData(string import_data){
 	JSON data;
-	duplicating = true;
+	duplicating_hotspot = true;
 	array<int> created_indexes;
 
 	if(!data.parseString(import_data)){
 		Log(warning, "Unable to parse the JSON in the Script Data!");
-		duplicating = false;
+		duplicating_hotspot = false;
 		return;
 	}else{
 		int start_index = (drika_indexes.size() > 0)?current_line + 1:current_line;
@@ -959,7 +961,7 @@ void InterpImportData(string import_data){
 	}
 
 	if(drika_indexes.size() == 0){
-		duplicating = false;
+		duplicating_hotspot = false;
 		return;
 	}
 
