@@ -163,89 +163,90 @@ class DrikaAIControl : DrikaElement{
 			}
 		}
 
-		string command = "";
+		for(uint i = 0; i < targets.size(); i++){
+			string command;
 
-		switch(ai_goal){
-			case _patrol:
-				{
-					for(uint j = 0; j < ai_targets.size(); j++){
-						if(ai_targets[j].GetType() == _path_point_object){
-							for(uint i = 0; i < targets.size(); i++){
+			switch(ai_goal){
+				case _patrol:
+					{
+						for(uint j = 0; j < ai_targets.size(); j++){
+							if(ai_targets[j].GetType() == _path_point_object){
 								ReadObjectFromID(targets[i].GetID()).ConnectTo(ai_targets[j]);
 							}
 						}
-					}
-					command += "SetGoal(_patrol);";
-				}
-				break;
-			case _attack:
-				{
-					for(uint j = 0; j < ai_targets.size(); j++){
-						command += "Notice(" + ai_targets[j].GetID() + ");";
-					}
-					command += "SetGoal(_attack);";
-				}
-				break;
-			case _investigate_slow:
-				{
-					vec3 target_pos = placeholder.GetTranslation();
-					command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
-					command += "SetGoal(_investigate);";
-					command += "SetSubGoal(_investigate_slow);";
-				}
-				break;
-			case _investigate_urgent:
-				{
-					vec3 target_pos = placeholder.GetTranslation();
-					command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
-					command += "SetGoal(_investigate);";
-					command += "SetSubGoal(_investigate_urgent);";
-				}
-				break;
-			case _investigate_around:
-				{
-					command += "nav_target = this_mo.position;";
-					command += "SetGoal(_investigate);";
-					command += "SetSubGoal(_investigate_around);";
-					command += "investigate_target_id = -1;";
-				}
-				break;
-			case _get_help:
-				command += "ally_id = GetClosestCharacterID(1000.0f, _TC_ALLY | _TC_CONSCIOUS | _TC_IDLE | _TC_KNOWN);";
-				command += "SetGoal(_get_help);";
-				break;
-			case _escort:
-				{
-					for(uint j = 0; j < ai_targets.size(); j++){
-						command += "escort_id = " + ai_targets[j].GetID() + ";";
-					}
-					command += "SetGoal(_escort);";
-				}
-				break;
-			case _get_weapon:
-				{
-					command += "SetGoal(_get_weapon);";
-					for(uint j = 0; j < ai_targets.size(); j++){
-						command += "weapon_target_id = " + ai_targets[j].GetID() + ";";
-					}
-				}
-				break;
-			case _get_closest_weapon:
-				command += "CheckForNearbyWeapons();";
-				command += "SetGoal(_get_weapon);";
-				break;
-			case _throw_weapon:
-					{
-						command += "target_id = " + ai_targets[0].GetID() + ";";
-						command += "going_to_throw_item = true;";
-			            command += "going_to_throw_item_time = time;";
+						command += "SetGoal(_patrol);";
 					}
 					break;
-			default:
-				break;
-		}
+				case _attack:
+					{
+						for(uint j = 0; j < ai_targets.size(); j++){
+							command += "Notice(" + ai_targets[j].GetID() + ");";
+						}
+						command += "SetGoal(_attack);";
+					}
+					break;
+				case _investigate_slow:
+					{
+						vec3 target_pos = placeholder.GetTranslation();
+						command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+						command += "SetGoal(_investigate);";
+						command += "SetSubGoal(_investigate_slow);";
+					}
+					break;
+				case _investigate_urgent:
+					{
+						vec3 target_pos = placeholder.GetTranslation();
+						command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+						command += "SetGoal(_investigate);";
+						command += "SetSubGoal(_investigate_urgent);";
+					}
+					break;
+				case _investigate_around:
+					{
+						command += "nav_target = this_mo.position;";
+						command += "SetGoal(_investigate);";
+						command += "SetSubGoal(_investigate_around);";
+						command += "investigate_target_id = -1;";
+					}
+					break;
+				case _get_help:
+					command += "ally_id = GetClosestCharacterID(1000.0f, _TC_ALLY | _TC_CONSCIOUS | _TC_IDLE | _TC_KNOWN);";
+					command += "SetGoal(_get_help);";
+					break;
+				case _escort:
+					{
+						for(uint j = 0; j < ai_targets.size(); j++){
+							command += "escort_id = " + ai_targets[j].GetID() + ";";
+						}
+						command += "SetGoal(_escort);";
+					}
+					break;
+				case _get_weapon:
+					{
+						command += "SetGoal(_get_weapon);";
+						for(uint j = 0; j < ai_targets.size(); j++){
+							command += "weapon_target_id = " + ai_targets[j].GetID() + ";";
+						}
+					}
+					break;
+				case _get_closest_weapon:
+					command += "CheckForNearbyWeapons();";
+					command += "SetGoal(_get_weapon);";
+					break;
+				case _throw_weapon:
+						{
+							int weapon_id = targets[i].GetArrayIntVar("weapon_slots", targets[i].GetIntVar("primary_weapon_slot"));
+							if(weapon_id != -1){
+								command += "target_id = " + ai_targets[0].GetID() + ";";
+								command += "going_to_throw_item = true;";
+					            command += "going_to_throw_item_time = time;";
+							}
+						}
+						break;
+				default:
+					break;
+			}
 
-		for(uint i = 0; i < targets.size(); i++){
 			Log(warning, "Execute " + command);
 			targets[i].Execute(command);
 		}
