@@ -443,16 +443,11 @@ void DrawEditor(){
 			GetCurrentElement().DrawSettings();
 			ImGui_PopItemWidth();
 			ImGui_EndChild();
-			ImGui_BeginChild("Modal Buttons", vec2(-1, 60));
-			if(ImGui_Button("Close")){
+
+			if(!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)){
 				GetCurrentElement().ApplySettings();
 				ImGui_CloseCurrentPopup();
 				Save();
-			}
-			ImGui_EndChild();
-
-			if(!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)){
-				ImGui_CloseCurrentPopup();
 			}
 
 			ImGui_EndPopup();
