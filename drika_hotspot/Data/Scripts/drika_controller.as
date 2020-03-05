@@ -1246,21 +1246,21 @@ void UpdateReadFileProcesses(){
 int update_counter = 0;
 
 void SetCameraPosition(){
-
-	if(camera_settings_changed){
-		camera.SetPos(camera_position);
-		camera.SetXRotation(camera_rotation.x);
-		camera.SetYRotation(camera_rotation.y);
-		camera.SetZRotation(camera_rotation.z);
-		camera.CalcFacing();
-
-		camera.FixDiscontinuity();
-		camera_settings_changed = false;
-
-		return;
-	}
-
 	if((animating_camera || has_camera_control) && !EditorModeActive()){
+
+		if(camera_settings_changed){
+			camera.SetPos(camera_position);
+			camera.SetXRotation(camera_rotation.x);
+			camera.SetYRotation(camera_rotation.y);
+			camera.SetZRotation(camera_rotation.z);
+			camera.CalcFacing();
+
+			camera.FixDiscontinuity();
+			camera_settings_changed = false;
+
+			return;
+		}
+
 		if(enable_look_at_target){
 			if(track_target_id != -1 && ObjectExists(track_target_id)){
 				Object@ track_target = ReadObjectFromID(track_target_id);
