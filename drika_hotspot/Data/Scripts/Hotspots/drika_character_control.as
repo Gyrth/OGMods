@@ -272,9 +272,10 @@ class DrikaCharacterControl : DrikaElement{
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Param Type");
 		ImGui_SameLine();
-		if(ImGui_Combo("##Param Type", current_type, param_names)){
+		if(ImGui_Combo("##Param Type", current_type, param_names, 15)){
 			character_control_option = character_control_options(current_type);
 			SetParamType();
 			SetParamName();
@@ -282,31 +283,37 @@ class DrikaCharacterControl : DrikaElement{
 
 		switch(character_control_option){
 			case aggression:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
 				break;
 			case attack_damage:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case attack_knockback:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case attack_speed:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case block_followup:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case block_skill:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
@@ -315,46 +322,55 @@ class DrikaCharacterControl : DrikaElement{
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case character_scale:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 60, 140, "%.2f");
 				break;
 			case damage_resistance:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
 				break;
 			case ear_size:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 300.0, "%.1f");
 				break;
 			case fat:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
 				break;
 			case focus_fov_distance:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case focus_fov_horizontal:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case focus_fov_vertical:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case ground_aggression:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
 				break;
 			case knocked_out_shield:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderInt(param_name, int_param_after, 0, 10);
@@ -363,51 +379,61 @@ class DrikaCharacterControl : DrikaElement{
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case movement_speed:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 10.0, 150.0, "%.1f");
 				break;
 			case muscle:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
 				break;
 			case peripheral_fov_distance:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
 				break;
 			case peripheral_fov_horizontal:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case peripheral_fov_vertical:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
 				break;
 			case species:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_InputText(param_name, string_param_after, 64);
 				break;
 			case static_char:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case teams:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_InputText(param_name, string_param_after, 64);
 				break;
 			case fall_damage_mult:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 10.0, "%.1f");
 				break;
 			case fear_afraid_at_health_level:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
@@ -428,6 +454,7 @@ class DrikaCharacterControl : DrikaElement{
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case throw_counter_probability:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
@@ -436,6 +463,7 @@ class DrikaCharacterControl : DrikaElement{
 				ImGui_Checkbox(param_name, bool_param_after);
 				break;
 			case weapon_catch_skill:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(param_name);
 				ImGui_SameLine();
 				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
@@ -455,30 +483,37 @@ class DrikaCharacterControl : DrikaElement{
 			case revive:
 				break;
 			case limp_ragdoll:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Recovery Time");
 				ImGui_SameLine();
 				ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Roll Recovery Time");
 				ImGui_SameLine();
 				ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
 				break;
 			case injured_ragdoll:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Recovery Time");
 				ImGui_SameLine();
 				ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Roll Recovery Time");
 				ImGui_SameLine();
 				ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
 				break;
 			case ragdoll:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Recovery Time");
 				ImGui_SameLine();
 				ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Roll Recovery Time");
 				ImGui_SameLine();
 				ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
 				break;
 			case apply_damage:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Amount");
 				ImGui_SameLine();
 				ImGui_SliderFloat("##Amount", damage_amount, 0.0, 2.0, "%.1f");
@@ -486,6 +521,7 @@ class DrikaCharacterControl : DrikaElement{
 			case cut_throat:
 				break;
 			case wet:
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Amount");
 				ImGui_SameLine();
 				ImGui_SliderFloat("##Amount", wet_amount, 0.0, 1.0, "%.1f");

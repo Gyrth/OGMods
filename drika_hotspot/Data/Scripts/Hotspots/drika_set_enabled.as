@@ -34,6 +34,7 @@ class DrikaSetEnabled : DrikaElement{
 
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Set To");
 		ImGui_SameLine();
 		ImGui_Checkbox("", enabled);

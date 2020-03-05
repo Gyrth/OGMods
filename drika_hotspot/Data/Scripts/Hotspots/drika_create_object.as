@@ -38,8 +38,10 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Object Path : ");
 		ImGui_SameLine();
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text(object_path);
 		ImGui_SameLine();
 		if(ImGui_Button("Set Object Path")){

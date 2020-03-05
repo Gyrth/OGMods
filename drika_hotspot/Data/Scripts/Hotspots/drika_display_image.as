@@ -54,8 +54,10 @@ class DrikaDisplayImage : DrikaElement{
 			}
 		}
 		if(!clear_image){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Image Path : ");
 			ImGui_SameLine();
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text(image_path);
 			ImGui_SameLine();
 			if(ImGui_Button("Set Image Path")){
@@ -65,11 +67,13 @@ class DrikaDisplayImage : DrikaElement{
 					ShowImage(image_path, tint, scale);
 				}
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Scale");
 			ImGui_SameLine();
 			if(ImGui_SliderFloat("##Scale", scale, 0.0f, 5.0f, "%.1f")){
 				ShowImage(image_path, tint, scale);
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Color");
 			ImGui_SameLine();
 			if(ImGui_ColorEdit4("##Color", tint)){

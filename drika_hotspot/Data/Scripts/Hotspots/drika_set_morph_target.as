@@ -142,6 +142,7 @@ class DrikaSetMorphTarget : DrikaElement{
 			}
 			ImGui_PopItemWidth();
 		}
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Smoothing Duration");
 		ImGui_SameLine();
 		ImGui_SliderFloat("##Smoothing Duration", smoothing_duration, 0.0f, 10.0f, "%.2f");

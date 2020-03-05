@@ -21,6 +21,7 @@ class DrikaWait : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Wait in ms");
 		ImGui_SameLine();
 		ImGui_InputInt("Duration", duration);

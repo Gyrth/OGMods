@@ -29,8 +29,10 @@ class DrikaPlayMusic : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Song Path : ");
 		ImGui_SameLine();
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text(song_path);
 		ImGui_SameLine();
 		if(ImGui_Button("Set Song Path")){

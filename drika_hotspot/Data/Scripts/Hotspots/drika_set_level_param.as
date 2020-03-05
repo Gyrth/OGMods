@@ -156,6 +156,7 @@ class DrikaSetLevelParam : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Param Type");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Param Type", current_type, param_names)){
@@ -176,26 +177,32 @@ class DrikaSetLevelParam : DrikaElement{
 
 		if(param_type == string_param){
 			if(level_param == other){
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Param Name");
 				ImGui_SameLine();
 				ImGui_InputText("##Param Name", param_name, 64);
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("After");
 			ImGui_SameLine();
 			ImGui_InputText("##After", string_param_after, 64);
 		}else if(param_type == float_param){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("After");
 			ImGui_SameLine();
 			ImGui_SliderFloat("##After", float_param_after, -1000.0f, 1000.0f, "%.4f");
 		}else if(param_type == vec3_param){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("After");
 			ImGui_SameLine();
 			ImGui_InputFloat3("##After", vec3_param_after);
 		}else if(param_type == vec3_color_param){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("After");
 			ImGui_SameLine();
 			ImGui_ColorEdit3("##After", vec3_param_after);
 		}else if(param_type == int_param){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("After");
 			ImGui_SameLine();
 			ImGui_InputInt("##After", int_param_after);

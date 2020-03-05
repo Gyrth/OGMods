@@ -21,6 +21,7 @@ class DrikaSendLevelMessage : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Message");
 		ImGui_SameLine();
 		if(ImGui_InputText("##Message", message, 64)){

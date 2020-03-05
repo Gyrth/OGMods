@@ -20,6 +20,7 @@ class DrikaWaitLevelMessage : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Wait for message");
 		ImGui_SameLine();
 		ImGui_InputText("Message", message, 64);

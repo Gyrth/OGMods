@@ -52,8 +52,10 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Particle Path : ");
 		ImGui_SameLine();
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text(particle_path);
 		ImGui_SameLine();
 		if(ImGui_Button("Set Particle Path")){
@@ -62,18 +64,22 @@ class DrikaCreateParticle : DrikaElement{
 				particle_path = new_path;
 			}
 		}
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Amount");
 		ImGui_SameLine();
 		ImGui_InputInt("##Amount", amount);
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Velocity");
 		ImGui_SameLine();
 		ImGui_DragFloat("##Velocity", velocity, 1.0f, 0.0f, 1000.0f);
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Spread");
 		ImGui_SameLine();
 		ImGui_DragFloat("##Spread", spread, 0.001f, 0.0f, 1.0f, "%.3f");
 		ImGui_Checkbox("Connect Particles", connect_particles);
 		ImGui_Checkbox("Use Blood Tint", use_blood_tint);
 		if(!use_blood_tint){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Particle Tint");
 			ImGui_SameLine();
 			ImGui_ColorEdit3("##Particle Tint", tint);

@@ -327,6 +327,7 @@ class DrikaElement{
 		}
 
 		string preview_value = target_element.line_number + target_element.GetDisplayString();
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Go to line");
 		ImGui_SameLine();
 		ImGui_PushStyleColor(ImGuiCol_Text, target_element.GetDisplayColor());
@@ -363,6 +364,7 @@ class DrikaElement{
 	}
 
 	void DrawSetReferenceUI(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Set Reference");
 		ImGui_SameLine();
 		ImGui_InputText("##Reference", reference_string, 64);

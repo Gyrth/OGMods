@@ -127,6 +127,7 @@ class DrikaAIControl : DrikaElement{
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("AIGoal");
 		ImGui_SameLine();
 		if(ImGui_Combo("##AIGoal", current_ai_goal, ai_goal_names)){

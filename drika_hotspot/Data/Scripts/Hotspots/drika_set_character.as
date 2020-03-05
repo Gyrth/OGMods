@@ -42,8 +42,10 @@ class DrikaSetCharacter : DrikaElement{
 
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Set To Character : ");
 		ImGui_SameLine();
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text(character_path);
 		ImGui_SameLine();
 		if(ImGui_Button("Set Character Path")){

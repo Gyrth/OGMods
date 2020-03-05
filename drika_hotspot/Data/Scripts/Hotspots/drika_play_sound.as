@@ -124,6 +124,7 @@ class DrikaPlaySound : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Sound Path : " + sound_path);
 		ImGui_SameLine();
 		if(ImGui_Button("Set Sound Path")){
@@ -139,6 +140,7 @@ class DrikaPlaySound : DrikaElement{
 			}
 		}
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Play Sound Method");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Play Sound Method", current_play_sound_method, play_sound_method_names, play_sound_method_names.size())){
@@ -150,6 +152,7 @@ class DrikaPlaySound : DrikaElement{
 		}
 
 		if(play_sound_method == play_sound_group_position_priority){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Sound Priority");
 			ImGui_SameLine();
 			if(ImGui_Combo("##Sound Priority", priority, sound_priority_names, sound_priority_names.size())){
@@ -158,6 +161,7 @@ class DrikaPlaySound : DrikaElement{
 		}
 
 		if(has_gain){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Gain");
 			ImGui_SameLine();
 			if(ImGui_SliderFloat("##Gain", gain, 0.0f, 10.0f, "%.2f")){
@@ -170,11 +174,13 @@ class DrikaPlaySound : DrikaElement{
 				PreviewSound();
 			}
 			if(ai_sound){
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("AISound Max Range");
 				ImGui_SameLine();
 				if(ImGui_SliderFloat("##AISound Max Range", max_range, 0.0f, 10.0f, "%.2f")){
 					PreviewSound();
 				}
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Sound Type");
 				ImGui_SameLine();
 				if(ImGui_Combo("##Sound Type", current_sound_type, sound_type_names, sound_type_names.size())){

@@ -44,6 +44,7 @@ class DrikaSetVelocity : DrikaElement{
 
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Velocity");
 		ImGui_SameLine();
 		ImGui_DragFloat("##Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);

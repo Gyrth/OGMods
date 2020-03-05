@@ -44,11 +44,13 @@ class DrikaSendCharacterMessage : DrikaElement{
 
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Message Type");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Message Type", current_message_type, message_type_choices, message_type_choices.size())){
 			character_message_type = character_message_types(current_message_type);
 		}
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Message");
 		ImGui_SameLine();
 		if(ImGui_InputText("##Message", message, 64)){

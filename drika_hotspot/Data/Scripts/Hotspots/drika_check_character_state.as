@@ -125,6 +125,7 @@ class DrikaCheckCharacterState : DrikaElement{
 			ImGui_Separator();
 			ImGui_Text("Proximity Target");
 			known_target.DrawSelectTargetUI();
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Proximity Distance");
 			ImGui_SameLine();
 			ImGui_SliderFloat("##Proximity Distance", proximity_distance, 0.0, 100.0, "%.2f");

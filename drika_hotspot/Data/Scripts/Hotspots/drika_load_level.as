@@ -18,6 +18,7 @@ class DrikaLoadLevel : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Level Path : " + level_path);
 		ImGui_SameLine();
 		if(ImGui_Button("Set Level Path")){

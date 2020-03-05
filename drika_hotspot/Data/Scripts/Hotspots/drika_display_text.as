@@ -34,6 +34,7 @@ class DrikaDisplayText : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Font Path : " + font_path);
 		ImGui_SameLine();
 		if(ImGui_Button("Set Font Path")){
@@ -43,6 +44,7 @@ class DrikaDisplayText : DrikaElement{
 				ShowText(display_message, font_size, font_path);
 			}
 		}
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Font Size");
 		ImGui_SameLine();
 		if(ImGui_SliderInt("##Font Size", font_size, 0, 100, "%.0f")){

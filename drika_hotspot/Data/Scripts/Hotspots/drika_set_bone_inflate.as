@@ -63,6 +63,7 @@ class DrikaSetBoneInflate : DrikaElement{
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Bone");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Bone", current_index, bone_names, bone_names.size())){
@@ -72,6 +73,7 @@ class DrikaSetBoneInflate : DrikaElement{
 		}
 
 		if(bone_name == "index"){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Index");
 			ImGui_SameLine();
 			if(ImGui_InputInt("##Index", current_bone_index)){
@@ -81,6 +83,7 @@ class DrikaSetBoneInflate : DrikaElement{
 			}
 		}
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Value");
 		ImGui_SameLine();
 		if(ImGui_SliderFloat("##Value", inflate_value, 0.0f, 1.0f, "%.2f")){

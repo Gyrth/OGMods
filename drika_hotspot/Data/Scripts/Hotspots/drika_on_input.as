@@ -179,6 +179,7 @@ class DrikaOnInput : DrikaElement{
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Input Type");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Input Type", current_input_type, input_type_names, input_type_names.size())){
@@ -186,6 +187,7 @@ class DrikaOnInput : DrikaElement{
 		}
 
 		if(input_type == button_pressed){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Button");
 			ImGui_SameLine();
 			if(ImGui_Combo("##Button", input_index, input_names, input_names.size())){
@@ -194,6 +196,7 @@ class DrikaOnInput : DrikaElement{
 			}
 
 			if(input.input_identifier == input_other){
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Input");
 				ImGui_SameLine();
 				if(ImGui_InputText("##Input", other_input, 64)){
@@ -206,11 +209,13 @@ class DrikaOnInput : DrikaElement{
 			}
 
 			if(use_prompt){
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Prompt Size");
 				ImGui_SameLine();
 				ImGui_DragFloat("##Prompt Size", prompt_size, 0.001f, 0.0f, 5.0f, "%.2f");
 				ImGui_Checkbox("Custom Prompt", custom_prompt);
 				if(custom_prompt){
+					ImGui_AlignTextToFramePadding();
 					ImGui_Text("Path : " + custom_prompt_path);
 					ImGui_SameLine();
 					if(ImGui_Button("Set Path")){
@@ -223,6 +228,7 @@ class DrikaOnInput : DrikaElement{
 				}
 			}
 		}else if(input_type == type_text){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Input");
 			ImGui_SameLine();
 			ImGui_InputText("##Input", typed_text, 64);

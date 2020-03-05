@@ -98,6 +98,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Read Write Mode");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Read Write Mode", current_read_write_mode, mode_choices, mode_choices.size())){
@@ -105,6 +106,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		}
 
 		if(read_write_mode == read){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Additional Conditions");
 			ImGui_SameLine();
 			if(ImGui_Combo("##Additional Conditions", current_condition_count, condition_choices, condition_choices.size())){

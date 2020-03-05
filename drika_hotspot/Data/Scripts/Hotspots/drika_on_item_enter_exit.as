@@ -35,16 +35,19 @@ class DrikaOnItemEnterExit : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Check for");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Check for", current_combo_item, item_triggger_choices, item_triggger_choices.size())){
 			trigger_type = item_trigger_types(current_combo_item);
 		}
 		if(trigger_type == check_id){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("ID");
 			ImGui_SameLine();
 			ImGui_InputInt("##ID", item_id);
 		}else{
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Label");
 			ImGui_SameLine();
 			ImGui_InputText("##Label", item_label, 64);

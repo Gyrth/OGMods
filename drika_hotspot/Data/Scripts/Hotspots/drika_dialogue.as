@@ -673,6 +673,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Dialogue Function");
 		ImGui_SameLine();
 		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
@@ -705,11 +706,13 @@ class DrikaDialogue : DrikaElement{
 				Reset();
 			}
 		}else if(dialogue_function == actor_settings){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Dialogue Color");
 			ImGui_SameLine();
 			if(ImGui_ColorEdit4("##Dialogue Color", dialogue_color)){
 
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Voice");
 			ImGui_SameLine();
 			if(ImGui_SliderInt("##Voice", voice, 0, 18, "%.0f")){
@@ -717,10 +720,8 @@ class DrikaDialogue : DrikaElement{
 			}
 
 			ImGui_Columns(2, false);
-			ImGui_SetColumnWidth(0, 75);
-			ImGui_Image(avatar, vec2(50, 50));
-			ImGui_NextColumn();
-			if(ImGui_Button("Set Avatar")){
+			ImGui_SetColumnWidth(0, 110);
+			if(ImGui_Button("Pick Avatar")){
 				string new_path = GetUserPickedReadPath("png", "Data/Textures");
 				if(new_path != ""){
 					array<string> split_path = new_path.split(".");
@@ -739,6 +740,8 @@ class DrikaDialogue : DrikaElement{
 					avatar = LoadTexture(default_avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 				}
 			}
+			ImGui_NextColumn();
+			ImGui_Image(avatar, vec2(50, 50));
 		}else if(dialogue_function == set_actor_animation){
 			ImGui_Checkbox("From Start", anim_from_start);
 			ImGui_SameLine();
@@ -754,10 +757,12 @@ class DrikaDialogue : DrikaElement{
 			ImGui_SameLine();
 			ImGui_Checkbox("Wait Animation End", wait_anim_end);
 
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Transition Speed");
 			ImGui_SameLine();
 			ImGui_SliderFloat("##Transition Speed", transition_speed, 0.0, 10.0, "%.1f");
 
+			ImGui_AlignTextToFramePadding();
 			ImGui_SetTextBuf(search_buffer);
 			ImGui_Text("Search");
 			ImGui_SameLine();
@@ -776,20 +781,25 @@ class DrikaDialogue : DrikaElement{
 			}
 
 		}else if(dialogue_function == set_actor_omniscient){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Set Omnicient to");
 			ImGui_SameLine();
 			ImGui_Checkbox("", omniscient);
 		}else if(dialogue_function == fade_to_black){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Target Alpha");
 			ImGui_SameLine();
 			ImGui_SliderFloat("##Target Alpha", target_fade_to_black, 0.0, 1.0, "%.3f");
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Fade Duration");
 			ImGui_SameLine();
  			ImGui_SliderFloat("##Fade Duration", fade_to_black_duration, 0.0, 10.0, "%.3f");
 		}else if(dialogue_function == settings){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Dialogue Layout");
 			ImGui_SameLine();
 			ImGui_Combo("##Dialogue Layout", dialogue_layout, dialogue_layout_names, dialogue_layout_names.size());
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Font : " + dialogue_text_font);
 			ImGui_SameLine();
 			if(ImGui_Button("Set Font")){
@@ -798,9 +808,11 @@ class DrikaDialogue : DrikaElement{
 					dialogue_text_font = new_path;
 				}
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Dialogue Text Size");
 			ImGui_SameLine();
 			ImGui_SliderInt("##Dialogue Text Size", dialogue_text_size, 1, 100, "%.0f");
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Dialogue Text Color");
 			ImGui_SameLine();
 			ImGui_ColorEdit4("##Dialogue Text Color", dialogue_text_color);
@@ -808,6 +820,7 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Checkbox("Use Voice Sounds", use_voice_sounds);
 			ImGui_Checkbox("Show Name", show_names);
 		}else if(dialogue_function == set_actor_dialogue_control){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Set dialogue control to");
 			ImGui_SameLine();
 			ImGui_Checkbox("", dialogue_control);
@@ -817,6 +830,7 @@ class DrikaDialogue : DrikaElement{
 			ImGui_SliderInt("Number of choices", nr_choices, 1, 5, "%.0f");
 
 			ImGui_Separator();
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Choice 1");
 			ImGui_SameLine();
 			ImGui_InputText("##text1", choice_1, 64);
@@ -824,6 +838,7 @@ class DrikaDialogue : DrikaElement{
 
 			if(nr_choices >= 2){
 				ImGui_Separator();
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Choice 2");
 				ImGui_SameLine();
 				ImGui_InputText("##text2", choice_2, 64);
@@ -831,6 +846,7 @@ class DrikaDialogue : DrikaElement{
 			}
 			if(nr_choices >= 3){
 				ImGui_Separator();
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Choice 3");
 				ImGui_SameLine();
 				ImGui_InputText("##text3", choice_3, 64);
@@ -838,6 +854,7 @@ class DrikaDialogue : DrikaElement{
 			}
 			if(nr_choices >= 4){
 				ImGui_Separator();
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Choice 4");
 				ImGui_SameLine();
 				ImGui_InputText("##text4", choice_4, 64);
@@ -845,6 +862,7 @@ class DrikaDialogue : DrikaElement{
 			}
 			if(nr_choices >= 5){
 				ImGui_Separator();
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Choice 5");
 				ImGui_SameLine();
 				ImGui_InputText("##text5", choice_5, 64);
@@ -853,44 +871,45 @@ class DrikaDialogue : DrikaElement{
 
 			ImGui_PopItemWidth();
 		}else if(dialogue_function == set_camera_position){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Blur");
 			ImGui_SameLine();
 			if(ImGui_SliderFloat("##Near Blur", dof_settings[0], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Dist");
 			ImGui_SameLine();
 			if(ImGui_SliderFloat("##Near Dist", dof_settings[1], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Transition");
 			ImGui_SameLine();
 			if(ImGui_SliderFloat("##Near Transition", dof_settings[2], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Far Blur");
 			ImGui_SameLine();
 			if(ImGui_SliderFloat("##Far Blur", dof_settings[3], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Far Dist");
 			ImGui_SameLine();
 			if(ImGui_SliderFloat("##Far Dist", dof_settings[4], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Far Transition");
 			ImGui_SameLine();
 			if(ImGui_SliderFloat("##Far Transition", dof_settings[5], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
 
-			ImGui_Text("Look At Target");
-			ImGui_SameLine();
-			ImGui_Checkbox("##Look At Target", enable_look_at_target);
-
-			ImGui_Text("Move With Target");
-			ImGui_SameLine();
-			ImGui_Checkbox("##Move With Target", enable_move_with_target);
+			ImGui_Checkbox("Look At Target", enable_look_at_target);
+			ImGui_Checkbox("Move With Target", enable_move_with_target);
 
 			if(enable_look_at_target || enable_move_with_target){
 				ImGui_Separator();

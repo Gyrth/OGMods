@@ -234,6 +234,7 @@ class TargetSelect{
 			refresh_target = true;
 		}
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Identifier Type");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Identifier Type" + tag, current_identifier_type, identifier_choices, identifier_choices.size()) || refresh_target){
@@ -258,6 +259,7 @@ class TargetSelect{
 
 		if(identifier_type == id){
 			int new_object_id = object_id;
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Object ID");
 			ImGui_SameLine();
 			if(ImGui_InputInt("##Object ID" + tag, new_object_id)){
@@ -283,6 +285,7 @@ class TargetSelect{
 				return;
 			}
 
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Reference");
 			ImGui_SameLine();
 			if(ImGui_Combo("##Reference" + tag, current_reference, available_references, available_references.size())){
@@ -293,6 +296,7 @@ class TargetSelect{
 		}else if(identifier_type == team){
 			string new_character_team = character_team;
 
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Team");
 			ImGui_SameLine();
 			if(ImGui_InputText("##Team" + tag, new_character_team, 64)){
@@ -303,6 +307,7 @@ class TargetSelect{
 		}else if(identifier_type == name){
 			string new_object_name = object_name;
 
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Name");
 			ImGui_SameLine();
 			if(ImGui_InputText("##Name" + tag, new_object_name, 64)){
@@ -325,6 +330,7 @@ class TargetSelect{
 				object_id = available_character_ids[0];
 			}
 
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Character");
 			ImGui_SameLine();
 			if(ImGui_Combo("##Character" + tag, current_character, available_character_names, available_character_names.size())){
@@ -349,6 +355,7 @@ class TargetSelect{
 				Log(warning, "Setting to " + object_id);
 			}
 
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Item");
 			ImGui_SameLine();
 			if(ImGui_Combo("##Item" + tag, current_item, available_item_names, available_item_names.size())){

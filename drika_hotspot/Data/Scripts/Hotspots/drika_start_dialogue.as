@@ -51,6 +51,7 @@ class DrikaStartDialogue : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Dialogue");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Dialogue", current_index, available_dialogues, available_dialogues.size())){

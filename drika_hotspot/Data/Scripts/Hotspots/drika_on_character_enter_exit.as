@@ -162,6 +162,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Check for");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Check for", new_target_character_type, character_trigger_choices, character_trigger_choices.size())){
@@ -169,15 +170,18 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		}
 
 		if(target_character_type == check_id){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("ID");
 			ImGui_SameLine();
 			ImGui_InputInt("##ID", object_id);
 		}else if(target_character_type == check_team){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Team");
 			ImGui_SameLine();
 			ImGui_InputText("##Team", character_team, 64);
 		}
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Trigger when");
 		ImGui_SameLine();
 		if(ImGui_Combo("###Trigger when", new_hotspot_trigger_type, hotspot_trigger_choices, hotspot_trigger_choices.size())){
@@ -185,6 +189,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		}
 
 		if(hotspot_trigger_type == while_inside || hotspot_trigger_type == while_outside){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Reset When False");
 			ImGui_SameLine();
 			ImGui_Checkbox("##Reset When False", reset_when_false);

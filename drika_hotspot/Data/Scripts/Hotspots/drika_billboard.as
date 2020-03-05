@@ -90,6 +90,7 @@ class DrikaBillboard : DrikaElement{
 	}
 
 	void DrawSettings(){
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Billboard Type");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Billboard Type", current_billboard_type, billboard_type_choices, billboard_type_choices.size())){
@@ -97,6 +98,7 @@ class DrikaBillboard : DrikaElement{
 			Reset();
 		}
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Billboard Update Type");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Billboard Update Type", current_billboard_update_type, billboard_update_type_choices, billboard_update_type_choices.size())){
@@ -105,6 +107,7 @@ class DrikaBillboard : DrikaElement{
 		}
 
 		if(billboard_type == billboard_image){
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Image Path : " + image_path);
 			ImGui_SameLine();
 			if(ImGui_Button("Set Image Path")){
@@ -113,12 +116,15 @@ class DrikaBillboard : DrikaElement{
 					image_path = new_path;
 				}
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Image Size");
 			ImGui_SameLine();
 			ImGui_SliderFloat("##Image Size", image_size, 0.0f, 10.0f, "%.2f");
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Tint");
 			ImGui_SameLine();
 			ImGui_ColorEdit4("##Tint", image_color);
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Overbright");
 			ImGui_SameLine();
 			ImGui_SliderFloat("##Overbright", overbright, 0.0f, 10.0f, "%.1f");

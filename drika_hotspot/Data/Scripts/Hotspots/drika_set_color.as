@@ -62,9 +62,9 @@ class DrikaSetColor : DrikaElement{
 	void GetNumPaletteColors(){
 		if(color_type == object_palette_color){
 			array<Object@> targets = target_select.GetTargetObjects();
+			palette_indexes.resize(0);
+			num_palette_colors = 0;
 			for(uint i = 0; i < targets.size(); i++){
-				palette_indexes.resize(0);
-				num_palette_colors = 0;
 				if(targets[i].GetType() == _movement_object){
 					num_palette_colors = targets[i].GetNumPaletteColors();
 
@@ -120,6 +120,7 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void TargetChanged(){
+		Log(warning, "Check");
 		GetNumPaletteColors();
 		GetBeforeColor();
 		SetColor(false);
@@ -132,6 +133,7 @@ class DrikaSetColor : DrikaElement{
 	void DrawSettings(){
 		target_select.DrawSelectTargetUI();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Color Type");
 		ImGui_SameLine();
 		if(ImGui_Combo("##Color Type", current_color_type, color_type_choices, color_type_choices.size())){
@@ -146,6 +148,7 @@ class DrikaSetColor : DrikaElement{
 			if(num_palette_colors == 0){
 				return;
 			}
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Palette Slot");
 			ImGui_SameLine();
 			if(ImGui_Combo("##Palette Slot", current_palette_slot, palette_names, palette_names.size())){
@@ -156,6 +159,7 @@ class DrikaSetColor : DrikaElement{
 			}
 		}
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Color");
 		ImGui_SameLine();
 		if(ImGui_ColorEdit3("#Color", after_color)){
