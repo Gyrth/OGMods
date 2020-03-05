@@ -228,6 +228,7 @@ class TargetSelect{
 		}
 
 		bool refresh_target = false;
+		bool target_changed = false;
 		if(current_identifier_type == -1){
 			current_identifier_type = 0;
 			refresh_target = true;
