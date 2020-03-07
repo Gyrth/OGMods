@@ -108,7 +108,7 @@ void Init() {
 	show_name = (this_hotspot.GetName() != "");
 	display_name = this_hotspot.GetName();
     level.ReceiveLevelEvents(hotspot.GetID());
-	ConvertDisplayColors();
+	LoadPalette();
 	SortFunctionsAlphabetical();
 	//When the user duplicates a hotspot the editormode is active and the left alt is pressed.
 	if(EditorModeActive() && GetInputDown(0, "lalt")){
@@ -117,6 +117,32 @@ void Init() {
 		duplicating_hotspot = true;
 	}
 	InterpData();
+}
+
+void LoadPalette(bool use_defaults = false){
+	JSON data;
+
+	SavedLevel@ saved_level = save_file.GetSavedLevel("drika_data");
+	string palette_data = saved_level.GetValue("drika_palette");
+
+	if(palette_data == "" || !data.parseString(palette_data) || use_defaults){
+		if(!data.parseString(palette_data)){
+			Log(warning, "Unable to parse the JSON in the palette!");
+		}
+		data.parseFile("Data/Scripts/default_palette.json");
+	}
+
+	display_colors.resize(drika_element_names.size());
+	JSONValue color_palette = data.getRoot();
+	for(uint i = 0; i < drika_element_names.size(); i++){
+		if(i < color_palette.size()){
+			JSONValue color = color_palette[i];
+			vec4 palette_color = vec4(color[0].asFloat(), color[1].asFloat(), color[2].asFloat(), color[3].asFloat());
+			display_colors[i] = palette_color;
+		}else{
+			display_colors[i] = vec4(1.0);
+		}
+	}
 }
 
 void QueryAnimation(string query){
@@ -239,14 +265,6 @@ int GetRegisteredObjectID(string reference){
 		}
 	}
 	return -1;
-}
-
-void ConvertDisplayColors(){
-	for(uint i = 0; i < display_colors.size(); i++){
-		display_colors[i].x /= 255;
-		display_colors[i].y /= 255;
-		display_colors[i].z /= 255;
-	}
 }
 
 void Dispose() {
@@ -398,6 +416,7 @@ bool update_scroll = false;
 bool debug_current_line = false;
 float left_over_drag_y = 0.0;
 bool dragging = false;
+bool open_palette = false;
 
 void DrawEditor(){
 	if(camera.GetFlags() == kPreviewCamera){
@@ -456,6 +475,49 @@ void DrawEditor(){
 		}
 		ImGui_PopStyleVar();
 
+		if(open_palette){
+			ImGui_OpenPopup("Configure Palette");
+			open_palette = false;
+		}
+
+		ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
+        if(ImGui_BeginPopupModal("Configure Palette", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
+			if(ImGui_Button("Reset to defaults.")){
+				LoadPalette(true);
+				SavePalette();
+			}
+			ImGui_BeginChild("Palette", vec2(-1, -1));
+			ImGui_PushItemWidth(-1);
+			ImGui_Columns(2, false);
+			ImGui_SetColumnWidth(0, 200.0);
+
+			for(uint i = 0; i < sorted_element_names.size(); i++){
+				drika_element_types current_element_type = drika_element_types(drika_element_names.find(sorted_element_names[i]));
+				if(current_element_type == none){
+					continue;
+				}
+				ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
+				ImGui_Text(sorted_element_names[i]);
+				ImGui_PopStyleColor();
+
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(-1);
+				ImGui_ColorEdit4("##Palette Color" + i, display_colors[current_element_type]);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+			}
+
+			ImGui_PopItemWidth();
+			ImGui_EndChild();
+
+			if(!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)){
+				ImGui_CloseCurrentPopup();
+				SavePalette();
+			}
+
+			ImGui_EndPopup();
+		}
+
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("Add")){
 				AddFunctionMenuItems();
@@ -477,6 +539,11 @@ void DrawEditor(){
 				if(ImGui_Checkbox("Debug Current Line", debug_current_line)){
 					params.SetInt("Debug Current Line", debug_current_line?1:0);
 				}
+
+				if(ImGui_MenuItem("Configure Palette")){
+					open_palette = true;
+				}
+
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Import/Export")){
@@ -559,7 +626,7 @@ void DrawEditor(){
 			ImGui_EndMenuBar();
 		}
 
-		if(!ImGui_IsPopupOpen("Edit")){
+		if(!ImGui_IsPopupOpen("Edit") && !ImGui_IsPopupOpen("Palette")){
 			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
 				if(current_line > 0){
 					multi_select = {current_line - 1};
@@ -721,6 +788,23 @@ void DrawEditor(){
 		ReorderElements();
 		Save();
 	}
+}
+
+void SavePalette(){
+	JSON data;
+	JSONValue palette;
+	for(uint i = 0; i < display_colors.size(); i++){
+		JSONValue color = JSONValue(JSONarrayValue);
+		color.append(display_colors[i].x);
+		color.append(display_colors[i].y);
+		color.append(display_colors[i].z);
+		color.append(display_colors[i].a);
+		palette.append(color);
+	}
+	data.getRoot() = palette;
+	SavedLevel@ saved_level = save_file.GetSavedLevel("drika_data");
+	saved_level.SetValue("drika_palette", data.writeString(false));
+	save_file.WriteInPlace();
 }
 
 void ExportToFile(){
