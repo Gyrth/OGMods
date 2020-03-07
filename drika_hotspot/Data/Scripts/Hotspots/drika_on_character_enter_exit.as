@@ -82,11 +82,17 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 					CreateExternalHotspot();
 				}
 			}
+			external_hotspot_obj.SetSelected(false);
+			external_hotspot_obj.SetSelectable(false);
 		}
 	}
 
 	void Update(){
-		if(external_hotspot_id == -1 && external_hotspot){
+		if(external_hotspot_id != -1 && !ObjectExists(external_hotspot_id) && external_hotspot){
+			external_hotspot = false;
+			external_hotspot_id = -1;
+			@external_hotspot_obj = null;
+		}else if(external_hotspot_id == -1 && external_hotspot){
 			CreateExternalHotspot();
 		}else if(external_hotspot_id != -1 && !external_hotspot){
 			QueueDeleteObjectID(external_hotspot_id);
