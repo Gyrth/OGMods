@@ -790,6 +790,39 @@ void DrawEditor(){
 	}
 }
 
+/* TextureAssetRef dialogue_background = LoadTexture("Data/Textures/ui/dialogue/dialogue_bg.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+TextureAssetRef dialogue_background_left = LoadTexture("Data/Textures/ui/dialogue/dialogue_bg-fade.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+TextureAssetRef dialogue_background_right = LoadTexture("Data/Textures/ui/dialogue/dialogue_bg-fade_reverse.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+
+void DrawDialogueTest(){
+	float screen_height = GetScreenHeight();
+	float screen_width = GetScreenWidth();
+
+	float one_fourth_height = screen_height / 4.0;
+	vec2 ratio = vec2(screen_width / 1920.0, screen_height / 1080.0);
+	float one_third_width = screen_width / 3.0;
+
+	ImGui_PushStyleColor(ImGuiCol_WindowBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
+	ImGui_Begin("MouseBlockContainer", show_editor, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoInputs);
+
+	ImGui_SetWindowFontScale(ratio.x * 6.0);
+	float side_width = 300.0;
+	uint32 background_color = ImGui_GetColorU32(vec4(1.0, 1.0, 1.0, 0.5));
+
+	ImDrawList_AddImage(dialogue_background_left, vec2((100.0 * ratio.x) + 0.0, one_fourth_height * 3.0), vec2((side_width) * ratio.x, one_fourth_height * 4.0), vec2(0, 0), vec2(1, 1), background_color);
+	ImDrawList_AddImage(dialogue_background, vec2((side_width) * ratio.x, one_fourth_height * 3.0), vec2(screen_width - (side_width * ratio.x), one_fourth_height * 4.0), vec2(0, 0), vec2(1, 1), background_color);
+	ImDrawList_AddImage(dialogue_background_right, vec2((screen_width - (side_width * ratio.x)) - 0.0, one_fourth_height * 3.0), vec2(screen_width - (100 * ratio.x), one_fourth_height * 4.0), vec2(0, 0), vec2(1, 1), background_color);
+
+	ImDrawList_AddText(vec2((side_width) * ratio.x, one_fourth_height * 3.0), ImGui_GetColorU32(vec4(1.0, 1.0, 1.0, 1.0)), "Example text\nThis could be the dialogue");
+	ImGui_SetWindowFontScale(1.0);
+
+	ImGui_PopStyleColor(1);
+
+	ImGui_SetWindowPos("MouseBlockContainer", vec2(0, one_fourth_height * 3.0));
+	ImGui_SetWindowSize("MouseBlockContainer", vec2(screen_width, screen_height));
+	ImGui_End();
+} */
+
 void SavePalette(){
 	JSON data;
 	JSONValue palette;
