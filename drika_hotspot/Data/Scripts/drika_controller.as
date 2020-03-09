@@ -45,6 +45,11 @@ vec3 target_positional_difference = vec3();
 vec3 current_camera_position = vec3();
 bool camera_settings_changed = false;
 
+IMContainer@ image_container;
+IMContainer@ text_container;
+IMContainer@ grabber_container;
+bool editing_ui = false;
+
 class ActorSettings{
 	string name = "Default";
 	vec4 color = vec4(1.0);
@@ -83,6 +88,19 @@ array<ReadFileProcess@> read_file_processes;
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
+	imGUI.setup();
+	imGUI.setBackgroundLayers(1);
+
+	imGUI.getMain().setZOrdering(-1);
+
+	@image_container = IMContainer(2560, 1440);
+	imGUI.getMain().addFloatingElement(image_container, "image_container", vec2(0));
+
+	@text_container = IMContainer(2560, 1440);
+	imGUI.getMain().addFloatingElement(text_container, "text_container", vec2(0));
+
+	@grabber_container = IMContainer(2560, 1440);
+	imGUI.getMain().addFloatingElement(grabber_container, "grabber_container", vec2(0));
 }
 
 void SetWindowDimensions(int width, int height){
@@ -740,6 +758,43 @@ void DrawGUI(){
 	blackout_image.position.z = -2.0f;
 	blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
 	blackout_image.color = vec4(0.0f, 0.0f, 0.0f, blackout_amount);
+	if(editing_ui){
+		DrawMouseBlockContainer();
+		DrawGrid();
+	}
+}
+
+void DrawMouseBlockContainer(){
+	ImGui_PushStyleColor(ImGuiCol_WindowBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
+	ImGui_Begin("MouseBlockContainer", editing_ui, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBringToFrontOnFocus);
+	ImGui_PopStyleColor(1);
+	ImGui_SetWindowPos("MouseBlockContainer", vec2(0,0));
+	ImGui_SetWindowSize("MouseBlockContainer", vec2(GetScreenWidth(), GetScreenHeight()));
+	ImGui_End();
+}
+
+int snap_scale = 20;
+
+void DrawGrid(){
+	vec2 vertical_position = vec2(0.0, 0.0);
+	vec2 horizontal_position = vec2(0.0, 0.0);
+	int nr_horizontal_lines = int(ceil(screenMetrics.screenSize.y / (snap_scale * screenMetrics.GUItoScreenYScale)));
+	int nr_vertical_lines = int(ceil(screenMetrics.screenSize.x / (snap_scale * screenMetrics.GUItoScreenXScale)));
+	vec4 line_color = vec4(0.25, 0.25, 0.25, 1.0);
+	float line_width = 1.0;
+	float thick_line_width = 2.0;
+
+	for(int i = 0; i < nr_vertical_lines; i++){
+		bool thick_line = i % 10 == 0;
+		imGUI.drawBox(vertical_position, vec2(thick_line?thick_line_width:line_width, screenMetrics.screenSize.y), line_color, 0, false);
+		vertical_position += vec2((snap_scale * screenMetrics.GUItoScreenXScale), 0.0);
+	}
+
+	for(int i = 0; i < nr_horizontal_lines; i++){
+		bool thick_line = i % 10 == 0;
+		imGUI.drawBox(horizontal_position, vec2(screenMetrics.screenSize.x, thick_line?thick_line_width:line_width), line_color, 0, false);
+		horizontal_position += vec2(0.0, (snap_scale * screenMetrics.GUItoScreenYScale));
+	}
 }
 
 void ReceiveMessage(string msg){
@@ -1124,6 +1179,81 @@ void ReceiveMessage(string msg){
 		int param_2 = atoi(token_iter.GetToken(msg));
 
 		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path, param_1, param_2));
+	}else if(token == "drika_edit_ui"){
+		token_iter.FindNextToken(msg);
+		bool enable = token_iter.GetToken(msg) == "true";
+
+		editing_ui = enable;
+		if(editing_ui){
+			token_iter.FindNextToken(msg);
+			ui_hotspot_id = atoi(token_iter.GetToken(msg));
+		}else{
+			ui_hotspot_id = -1;
+		}
+	}else if(token == "drika_ui_add_image"){
+
+		token_iter.FindNextToken(msg);
+		string ui_element_identifier = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		string image_path = token_iter.GetToken(msg);
+
+		vec2 image_position;
+		token_iter.FindNextToken(msg);
+		image_position.x = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		image_position.y = atof(token_iter.GetToken(msg));
+
+		vec2 image_size;
+		token_iter.FindNextToken(msg);
+		image_size.x = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		image_size.y = atof(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		float image_rotation = atof(token_iter.GetToken(msg));
+
+		vec4 image_color;
+		token_iter.FindNextToken(msg);
+		image_color.x = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		image_color.y = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		image_color.z = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		image_color.a = atof(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		bool keep_aspect = token_iter.GetToken(msg) == "true";
+
+		vec2 image_position_offset;
+		token_iter.FindNextToken(msg);
+		image_position_offset.x = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		image_position_offset.y = atof(token_iter.GetToken(msg));
+
+		vec2 image_size_offset;
+		token_iter.FindNextToken(msg);
+		image_size_offset.x = atof(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		image_size_offset.y = atof(token_iter.GetToken(msg));
+
+		IMElement@ found_target = image_container.findElement(ui_element_identifier);
+		image_container.removeElement(ui_element_identifier);
+		if(@found_target != null){
+		}
+
+		IMImage new_image(image_path);
+		new_image.setClip(false);
+		image_container.addFloatingElement(new_image, ui_element_identifier, image_position, 0);
+		new_image.setSize(image_size);
+		new_image.setRotation(image_rotation);
+		new_image.setColor(image_color);
+		new_image.setImageOffset(image_position_offset, image_size_offset);
+	}else if(token == "drika_ui_add_text"){
+
+	}else if(token == "drika_ui_clear"){
+
 	}
 }
 

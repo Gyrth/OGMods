@@ -33,7 +33,8 @@ enum drika_element_types { 	none = 0,
 							drika_read_write_savefile = 32,
 							drika_dialogue = 33,
 							drika_comment = 34,
-							drika_ai_control = 35
+							drika_ai_control = 35,
+							drika_user_interface = 36
 						};
 
 array<string> drika_element_names = {	"None",
@@ -71,7 +72,8 @@ array<string> drika_element_names = {	"None",
 										"Read Write Save File",
 										"Dialogue",
 										"Comment",
-										"AI Control"
+										"AI Control",
+										"User Interface"
 									};
 
 array<string> sorted_element_names;

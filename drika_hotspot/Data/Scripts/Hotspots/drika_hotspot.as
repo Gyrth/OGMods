@@ -36,6 +36,7 @@
 #include "hotspots/drika_dialogue.as"
 #include "hotspots/drika_comment.as"
 #include "hotspots/drika_ai_control.as"
+#include "hotspots/drika_user_interface.as"
 
 bool show_editor = false;
 bool has_closed = true;
@@ -72,6 +73,8 @@ array<DrikaElement@> post_init_queue;
 bool element_added = false;
 array<int> multi_select;
 string file_content;
+int ui_snap_scale = 20;
+int unique_id_counter = 0;
 
 array<AnimationGroup@> all_animations;
 array<AnimationGroup@> current_animations;
@@ -458,6 +461,7 @@ void DrawEditor(){
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
 		ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
+
         if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
 			ImGui_BeginChild("Element Settings", vec2(-1, -1));
 			ImGui_PushItemWidth(-1);
@@ -770,6 +774,7 @@ void DrawEditor(){
 				}
 			}
 		}
+
 		ImGui_End();
 		if(drika_elements.size() > 0 && !reorded && post_init_queue.size() == 0){
 			GetCurrentElement().DrawEditing();
@@ -1250,6 +1255,11 @@ void Save(){
 	params.SetString("Script Data", data.writeString(false));
 }
 
+string GetUniqueID(){
+	unique_id_counter += 1;
+	return hotspot.GetID() + "" + unique_id_counter;
+}
+
 int GetJSONInt(JSONValue data, string var_name, int default_value){
 	if(data.isMember(var_name) && data[var_name].isInt()){
 		return data[var_name].asInt();
@@ -1261,6 +1271,22 @@ int GetJSONInt(JSONValue data, string var_name, int default_value){
 string GetJSONString(JSONValue data, string var_name, string default_value){
 	if(data.isMember(var_name) && data[var_name].isString()){
 		return data[var_name].asString();
+	}else{
+		return default_value;
+	}
+}
+
+ivec2 GetJSONIVec2(JSONValue data, string var_name, ivec2 default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		return ivec2(data[var_name][0].asInt(), data[var_name][1].asInt());
+	}else{
+		return default_value;
+	}
+}
+
+vec2 GetJSONVec2(JSONValue data, string var_name, vec2 default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		return vec2(data[var_name][0].asFloat(), data[var_name][1].asFloat());
 	}else{
 		return default_value;
 	}
@@ -1447,6 +1473,8 @@ DrikaElement@ InterpElement(drika_element_types element_type, JSONValue &in func
 			return DrikaDialogue(function_json);
 		case drika_ai_control:
 			return DrikaAIControl(function_json);
+		case drika_user_interface:
+			return DrikaUserInterface(function_json);
 	}
 	return DrikaElement();
 }
