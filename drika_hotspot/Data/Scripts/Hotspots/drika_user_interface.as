@@ -17,6 +17,7 @@ class DrikaUserInterface : DrikaElement{
 	vec2 size_offset;
 	array<string> content;
 	string joined_content;
+	string text_content;
 	string display_content;
 	vec2 max_offset;
 	string ui_element_identifier;
@@ -40,8 +41,8 @@ class DrikaUserInterface : DrikaElement{
 		position_offset = GetJSONVec2(params, "position_offset", vec2(0.0, 0.0));
 		size_offset = GetJSONVec2(params, "size_offset", vec2(0.0, 0.0));
 
-		string original_content = GetJSONString(params, "text_content", "Example Text");
-		content = original_content.split("\\n");
+		text_content = GetJSONString(params, "text_content", "Example Text");
+		content = text_content.split("\\n");
 		joined_content = join(content, "\n");
 		display_content = join(content, " ");
 		ui_element_identifier = GetUniqueID();
@@ -51,21 +52,54 @@ class DrikaUserInterface : DrikaElement{
 		has_settings = true;
 	}
 
+	void PostInit(){
+
+	}
+
 	void ReadMaxOffsets(){
 		/* max_offset = image.getSizeX(); */
+	}
+
+	void ReceiveEditorMessage(array<string> message){
+
+	}
+
+	void ReceiveMessage(string message){
+
 	}
 
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["ui_function"] = JSONValue(ui_function);
+		data["ui_element_identifier"] = JSONValue(ui_element_identifier);
 
-		if(ui_function == ui_clear){
-
-		}else if(ui_function == ui_image){
-
-
+		if(ui_function == ui_image){
+			data["image_path"] = JSONValue(image_path);
+			data["keep_aspect"] = JSONValue(keep_aspect);
+			data["rotation"] = JSONValue(rotation);
+			data["position"] = JSONValue(JSONarrayValue);
+			data["position"].append(position.x);
+			data["position"].append(position.y);
+			data["color"] = JSONValue(JSONarrayValue);
+			data["color"].append(color.x);
+			data["color"].append(color.y);
+			data["color"].append(color.z);
+			data["color"].append(color.a);
+			data["size"] = JSONValue(JSONarrayValue);
+			data["size"].append(size.x);
+			data["size"].append(size.y);
+			data["size_offset"] = JSONValue(JSONarrayValue);
+			data["size_offset"].append(size_offset.x);
+			data["size_offset"].append(size_offset.y);
+			data["position_offset"] = JSONValue(JSONarrayValue);
+			data["position_offset"].append(position_offset.x);
+			data["position_offset"].append(position_offset.y);
 		}else if(ui_function == ui_text){
-
+			data["rotation"] = JSONValue(rotation);
+			data["position"] = JSONValue(JSONarrayValue);
+			data["position"].append(position.x);
+			data["position"].append(position.y);
+			data["text_content"] = JSONValue(text_content);
 		}
 		return data;
 	}
@@ -194,43 +228,53 @@ class DrikaUserInterface : DrikaElement{
 
 	void StartEdit(){
 		level.SendMessage("drika_edit_ui true " + hotspot.GetID());
-		TriggerUIElement();
+		AddUIElement();
 	}
 
-	void TriggerUIElement(){
+	void AddUIElement(){
 		if(ui_function == ui_clear){
 			level.SendMessage("drika_ui_clear");
 		}else if(ui_function == ui_image){
-			string msg = "drika_ui_add_image ";
-			msg += ui_element_identifier + " ";
-			msg += image_path + " ";
-			msg += position.x + " ";
-			msg += position.y + " ";
-			msg += size.x + " ";
-			msg += size.y + " ";
-			msg += rotation + " ";
-			msg += color.x + " ";
-			msg += color.y + " ";
-			msg += color.z + " ";
-			msg += color.a + " ";
-			msg += keep_aspect + " ";
-			msg += position_offset.x + " ";
-			msg += position_offset.y + " ";
-			msg += size_offset.x + " ";
-			msg += size_offset.y + " ";
-			level.SendMessage(msg);
+			SendJSONMessage("drika_ui_add_image", GetSaveData());
 		}else if(ui_function == ui_text){
-
-			level.SendMessage("drika_edit_ui true " + hotspot.GetID());
+			SendJSONMessage("drika_ui_add_text", GetSaveData());
 		}
+	}
+
+	void SendJSONMessage(string message_name, JSONValue json_value){
+		string msg = message_name + " ";
+
+		JSON data;
+		data.getRoot() = json_value;
+
+		//Level messages strip out the " so add an extra \ to prevent this.
+		string json_string = data.writeString(false);
+		json_string = join(json_string.split("\""), "\\\"");
+
+		msg += "\"" + json_string + "\"";
+		level.SendMessage(msg);
 	}
 
 	void EditDone(){
 		level.SendMessage("drika_edit_ui false");
 	}
 
+	void Reset(){
+		if(ui_function == ui_image || ui_function == ui_text){
+			string msg = "drika_ui_remove_element ";
+			msg += ui_element_identifier + " ";
+			level.SendMessage(msg);
+		}
+	}
+
+	void Delete(){
+		string msg = "drika_ui_remove_element ";
+		msg += ui_element_identifier + " ";
+		level.SendMessage(msg);
+	}
+
 	bool Trigger(){
-		TriggerUIElement();
+		AddUIElement();
 		return true;
 	}
 }

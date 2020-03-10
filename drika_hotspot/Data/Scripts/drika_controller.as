@@ -1,5 +1,10 @@
+#include "drika_json_functions.as"
 #include "animation_group.as"
 #include "dialogue_layouts.as"
+#include "drika_ui_element.as"
+#include "drika_ui_grabber.as"
+#include "drika_ui_image.as"
+#include "drika_ui_text.as"
 
 bool animating_camera = false;
 bool has_camera_control = false;
@@ -45,10 +50,17 @@ vec3 target_positional_difference = vec3();
 vec3 current_camera_position = vec3();
 bool camera_settings_changed = false;
 
+FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 IMContainer@ image_container;
 IMContainer@ text_container;
 IMContainer@ grabber_container;
 bool editing_ui = false;
+array<IMText@> text_elements;
+array<DrikaUIElement@> ui_elements;
+bool grabber_dragging = false;
+DrikaUIGrabber@ current_grabber = null;
+DrikaUIElement@ current_ui_element = null;
+vec2 click_position;
 
 class ActorSettings{
 	string name = "Default";
@@ -804,6 +816,8 @@ void ReceiveMessage(string msg){
 		return;
 	}
 	string token = token_iter.GetToken(msg);
+
+	Log(warning, token);
 	if(token == "animating_camera"){
 		token_iter.FindNextToken(msg);
 		string enable = token_iter.GetToken(msg);
@@ -1191,70 +1205,66 @@ void ReceiveMessage(string msg){
 			ui_hotspot_id = -1;
 		}
 	}else if(token == "drika_ui_add_image"){
+		token_iter.FindNextToken(msg);
+		string json_string = token_iter.GetToken(msg);
 
+		JSON data;
+
+		if(!data.parseString(json_string)){
+			Log(warning, "Unable to parse the JSON in the UI JSON Data!");
+		}else{
+			JSONValue json_data = data.getRoot();
+			DrikaUIImage image(json_data);
+			@current_ui_element = @image;
+			ui_elements.insertLast(image);
+		}
+	}else if(token == "drika_ui_add_text"){
+		token_iter.FindNextToken(msg);
+		string json_string = token_iter.GetToken(msg);
+
+		JSON data;
+
+		if(!data.parseString(json_string)){
+			Log(warning, "Unable to parse the JSON in the UI JSON Data!");
+		}else{
+			JSONValue json_data = data.getRoot();
+			DrikaUIText text(json_data);
+			@current_ui_element = @text;
+			ui_elements.insertLast(text);
+		}
+	}else if(token == "drika_ui_clear"){
+		for(uint i = 0; i < ui_elements.size(); i++){
+			ui_elements[i].Delete();
+		}
+		ui_elements.resize(0);
+	}else if(token == "drika_ui_remove_element"){
 		token_iter.FindNextToken(msg);
 		string ui_element_identifier = token_iter.GetToken(msg);
 
-		token_iter.FindNextToken(msg);
-		string image_path = token_iter.GetToken(msg);
-
-		vec2 image_position;
-		token_iter.FindNextToken(msg);
-		image_position.x = atof(token_iter.GetToken(msg));
-		token_iter.FindNextToken(msg);
-		image_position.y = atof(token_iter.GetToken(msg));
-
-		vec2 image_size;
-		token_iter.FindNextToken(msg);
-		image_size.x = atof(token_iter.GetToken(msg));
-		token_iter.FindNextToken(msg);
-		image_size.y = atof(token_iter.GetToken(msg));
-
-		token_iter.FindNextToken(msg);
-		float image_rotation = atof(token_iter.GetToken(msg));
-
-		vec4 image_color;
-		token_iter.FindNextToken(msg);
-		image_color.x = atof(token_iter.GetToken(msg));
-		token_iter.FindNextToken(msg);
-		image_color.y = atof(token_iter.GetToken(msg));
-		token_iter.FindNextToken(msg);
-		image_color.z = atof(token_iter.GetToken(msg));
-		token_iter.FindNextToken(msg);
-		image_color.a = atof(token_iter.GetToken(msg));
-
-		token_iter.FindNextToken(msg);
-		bool keep_aspect = token_iter.GetToken(msg) == "true";
-
-		vec2 image_position_offset;
-		token_iter.FindNextToken(msg);
-		image_position_offset.x = atof(token_iter.GetToken(msg));
-		token_iter.FindNextToken(msg);
-		image_position_offset.y = atof(token_iter.GetToken(msg));
-
-		vec2 image_size_offset;
-		token_iter.FindNextToken(msg);
-		image_size_offset.x = atof(token_iter.GetToken(msg));
-		token_iter.FindNextToken(msg);
-		image_size_offset.y = atof(token_iter.GetToken(msg));
-
-		IMElement@ found_target = image_container.findElement(ui_element_identifier);
-		image_container.removeElement(ui_element_identifier);
-		if(@found_target != null){
+		int index = GetUIElementIndex(ui_element_identifier);
+		if(index != -1){
+			ui_elements[index].Delete();
+			ui_elements.removeAt(index);
 		}
-
-		IMImage new_image(image_path);
-		new_image.setClip(false);
-		image_container.addFloatingElement(new_image, ui_element_identifier, image_position, 0);
-		new_image.setSize(image_size);
-		new_image.setRotation(image_rotation);
-		new_image.setColor(image_color);
-		new_image.setImageOffset(image_position_offset, image_size_offset);
-	}else if(token == "drika_ui_add_text"){
-
-	}else if(token == "drika_ui_clear"){
-
 	}
+}
+
+DrikaUIElement@ GetUIElement(string identifier){
+	for(uint i = 0; i < ui_elements.size(); i++){
+		if(ui_elements[i].ui_element_identifier == identifier){
+			return ui_elements[i];
+		}
+	}
+	return @DrikaUIElement();
+}
+
+int GetUIElementIndex(string identifier){
+	for(uint i = 0; i < ui_elements.size(); i++){
+		if(ui_elements[i].ui_element_identifier == identifier){
+			return i;
+		}
+	}
+	return -1;
 }
 
 void SelectChoice(int new_selected_choice){
@@ -1316,10 +1326,20 @@ void Update(){
 				hotspot_obj.ReceiveScriptMessage("drika_ui_event drika_dialogue_choice_select " + message.getInt(0));
 			}else if(message.name == "drika_dialogue_choice_pick"){
 				hotspot_obj.ReceiveScriptMessage("drika_ui_event drika_dialogue_choice_pick " + message.getInt(0));
+			}else if(message.name == "grabber_activate"){
+				Log(warning, "grabber_activate " + message.getString(0));
+				if(!grabber_dragging){
+					@current_grabber = current_ui_element.GetGrabber(message.getString(0));
+				}
+			}else if(message.name == "grabber_deactivate"){
+				if(!grabber_dragging){
+					@current_grabber = null;
+				}
 			}
 		}
 	}
 
+	UpdateGrabber();
 	imGUI.update();
 	SetCameraPosition();
 	UpdateReadFileProcesses();
@@ -1348,6 +1368,57 @@ void Update(){
 			return;
 		}
 		fade_timer += time_step;
+	}
+}
+
+void UpdateGrabber(){
+	if(grabber_dragging){
+		if(!ImGui_IsMouseDown(0)){
+			grabber_dragging = false;
+			@current_grabber = null;
+		}else{
+			Log(warning, "mvoing");
+
+			vec2 current_grabber_position = current_grabber.GetPosition();
+			vec2 new_position = current_grabber_position + (imGUI.guistate.mousePosition - click_position);
+
+			bool round_x_direction = (new_position.x % snap_scale > (snap_scale / 2.0))?true:false;
+			bool round_y_direction = (new_position.y % snap_scale > (snap_scale / 2.0))?true:false;
+			vec2 new_snap_position;
+			new_snap_position.x = round_x_direction?ceil(new_position.x / snap_scale):floor(new_position.x / snap_scale);
+			new_snap_position.y = round_y_direction?ceil(new_position.y / snap_scale):floor(new_position.y / snap_scale);
+			new_snap_position *= snap_scale;
+
+			if(current_grabber_position != new_snap_position){
+				vec2 difference = (new_snap_position - current_grabber_position);
+				int direction_x = (difference.x > 0.0) ? 1 : -1;
+				int direction_y = (difference.y > 0.0) ? 1 : -1;
+
+				if(current_grabber.grabber_type == scaler){
+					if(current_grabber_position.x != new_snap_position.x){
+						current_ui_element.AddSize(vec2(difference.x, 0.0), current_grabber.direction_x, current_grabber.direction_y);
+					}
+					if(current_grabber_position.y != new_snap_position.y){
+						current_ui_element.AddSize(vec2(0.0, difference.y), current_grabber.direction_x, current_grabber.direction_y);
+					}
+				}else if(current_grabber.grabber_type == mover){
+					if(current_grabber_position.x != new_snap_position.x){
+						current_ui_element.AddPosition(vec2(difference.x, 0.0));
+					}
+					if(current_grabber_position.y != new_snap_position.y){
+						current_ui_element.AddPosition(vec2(0.0, difference.y));
+					}
+				}
+				click_position += difference;
+			}
+		}
+	}else{
+		if(ImGui_IsMouseDown(0) && @current_grabber != null){
+			click_position = imGUI.guistate.mousePosition;
+			Log(warning, "grabbing" + click_position.x);
+			grabber_dragging = true;
+			Log(warning, "grabbing");
+		}
 	}
 }
 
