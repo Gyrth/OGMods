@@ -779,6 +779,7 @@ void DrawGUI(){
 void DrawMouseBlockContainer(){
 	ImGui_PushStyleColor(ImGuiCol_WindowBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
 	ImGui_Begin("MouseBlockContainer", editing_ui, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBringToFrontOnFocus);
+	UpdateGrabber();
 	ImGui_PopStyleColor(1);
 	ImGui_SetWindowPos("MouseBlockContainer", vec2(0,0));
 	ImGui_SetWindowSize("MouseBlockContainer", vec2(GetScreenWidth(), GetScreenHeight()));
@@ -1195,6 +1196,9 @@ void ReceiveMessage(string msg){
 		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path, param_1, param_2));
 	}else if(token == "drika_edit_ui"){
 		token_iter.FindNextToken(msg);
+		string ui_element_identifier = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
 		bool enable = token_iter.GetToken(msg) == "true";
 
 		editing_ui = enable;
@@ -1246,6 +1250,25 @@ void ReceiveMessage(string msg){
 			ui_elements[index].Delete();
 			ui_elements.removeAt(index);
 		}
+	}else if(token == "drika_ui_set_editing"){
+		token_iter.FindNextToken(msg);
+		string ui_element_identifier = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		bool editing = token_iter.GetToken(msg) == "true";
+
+		@current_ui_element = GetUIElement(ui_element_identifier);
+		current_ui_element.SetEditing(editing);
+	}else if(token == "drika_ui_instruction"){
+		token_iter.FindNextToken(msg);
+		string ui_element_identifier = token_iter.GetToken(msg);
+		array<string> instruction;
+
+		while(token_iter.FindNextToken(msg)){
+			instruction.insertLast(token_iter.GetToken(msg));
+		}
+
+		GetUIElement(ui_element_identifier).ReadInstruction(instruction);
 	}
 }
 
@@ -1339,7 +1362,6 @@ void Update(){
 		}
 	}
 
-	UpdateGrabber();
 	imGUI.update();
 	SetCameraPosition();
 	UpdateReadFileProcesses();
@@ -1375,10 +1397,7 @@ void UpdateGrabber(){
 	if(grabber_dragging){
 		if(!ImGui_IsMouseDown(0)){
 			grabber_dragging = false;
-			@current_grabber = null;
 		}else{
-			Log(warning, "mvoing");
-
 			vec2 current_grabber_position = current_grabber.GetPosition();
 			vec2 new_position = current_grabber_position + (imGUI.guistate.mousePosition - click_position);
 
@@ -1396,28 +1415,27 @@ void UpdateGrabber(){
 
 				if(current_grabber.grabber_type == scaler){
 					if(current_grabber_position.x != new_snap_position.x){
-						current_ui_element.AddSize(vec2(difference.x, 0.0), current_grabber.direction_x, current_grabber.direction_y);
+						current_ui_element.AddSize(ivec2(int(difference.x), 0), current_grabber.direction_x, current_grabber.direction_y);
 					}
 					if(current_grabber_position.y != new_snap_position.y){
-						current_ui_element.AddSize(vec2(0.0, difference.y), current_grabber.direction_x, current_grabber.direction_y);
+						current_ui_element.AddSize(ivec2(0, int(difference.y)), current_grabber.direction_x, current_grabber.direction_y);
 					}
 				}else if(current_grabber.grabber_type == mover){
 					if(current_grabber_position.x != new_snap_position.x){
-						current_ui_element.AddPosition(vec2(difference.x, 0.0));
+						Log(warning, "Check" + current_ui_element.ui_element_identifier);
+						current_ui_element.AddPosition(ivec2(int(difference.x), 0));
 					}
 					if(current_grabber_position.y != new_snap_position.y){
-						current_ui_element.AddPosition(vec2(0.0, difference.y));
+						current_ui_element.AddPosition(ivec2(0, int(difference.y)));
 					}
 				}
 				click_position += difference;
 			}
 		}
 	}else{
-		if(ImGui_IsMouseDown(0) && @current_grabber != null){
+		if(ImGui_IsMouseDown(0) && @current_grabber != null && ImGui_IsWindowHovered()){
 			click_position = imGUI.guistate.mousePosition;
-			Log(warning, "grabbing" + click_position.x);
 			grabber_dragging = true;
-			Log(warning, "grabbing");
 		}
 	}
 }

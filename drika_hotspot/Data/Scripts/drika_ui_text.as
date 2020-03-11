@@ -5,8 +5,7 @@ class DrikaUIText : DrikaUIElement{
 	string joined_content;
 	string display_content;
 	int whole_length = 0;
-	float position_x;
-	float position_y;
+	ivec2 position;
 	float rotation;
 	DrikaUIGrabber@ grabber_center;
 	string holder_name;
@@ -16,14 +15,13 @@ class DrikaUIText : DrikaUIElement{
 
 		string original_content = GetJSONString(params, "text_content", "");
 		rotation = GetJSONFloat(params, "rotation", 0.0);
-		vec2 position = GetJSONVec2(params, "position", vec2());
-		position_x = position.x;
-		position_y = position.y;
+		position = GetJSONIVec2(params, "position", ivec2());
 		content = original_content.split("\\n");
 		joined_content = join(content, "\n");
 		display_content = join(content, " ");
 
 		ui_element_identifier = GetJSONString(params, "ui_element_identifier", "");
+		PostInit();
 	}
 
 	void PostInit(){
@@ -36,8 +34,25 @@ class DrikaUIText : DrikaUIElement{
 		@grabber_center = DrikaUIGrabber("center", 1, 1, mover);
 		grabber_center.margin = 0.0;
 		holder_name = imGUI.getUniqueName("text");
-		text_container.addFloatingElement(text_holder, holder_name, vec2(position_x, position_y), 0);
+		text_container.addFloatingElement(text_holder, holder_name, vec2(position.x, position.y), 0);
 		SetNewText();
+	}
+
+	void ReadInstruction(array<string> instruction){
+		Log(warning, "Got instruction " + instruction[0]);
+		if(instruction[0] == "set_position"){
+			position.x = atoi(instruction[1]);
+			position.y = atoi(instruction[2]);
+			SetPosition();
+		}else if(instruction[0] == "set_rotation"){
+			rotation = atof(instruction[1]);
+			SetNewText();
+		}else if(instruction[0] == "set_content"){
+			joined_content = instruction[1];
+			content = joined_content.split("\n");
+			SetNewText();
+		}
+		UpdateContent();
 	}
 
 	void Delete(){
@@ -78,12 +93,8 @@ class DrikaUIText : DrikaUIElement{
 	}
 
 	void UpdateContent(){
-		holder.showBorder(editing_ui);
-		holder.setVisible(visible);
-		for(uint i = 0; i < text_elements.size(); i++){
-			text_elements[i].setVisible(visible);
-		}
-		grabber_center.SetVisible(editing_ui);
+		holder.showBorder(editing);
+		grabber_center.SetVisible(editing);
 
 		vec2 position = text_container.getElementPosition(holder_name);
 		grabber_center.SetPosition(position);
@@ -93,13 +104,8 @@ class DrikaUIText : DrikaUIElement{
 		}
 	}
 
-	bool SetVisible(bool _visible){
-		visible = _visible;
-		UpdateContent();
-		return visible;
-	}
-
-	void SetEditing(bool editing){
+	void SetEditing(bool _editing){
+		editing = _editing;
 		SetNewText();
 	}
 
@@ -111,10 +117,9 @@ class DrikaUIText : DrikaUIElement{
 		}
 	}
 
-	void AddPosition(vec2 added_positon){
-		text_container.moveElementRelative(holder_name, added_positon);
-		position_x += added_positon.x;
-		position_y += added_positon.y;
+	void AddPosition(ivec2 added_positon){
+		text_container.moveElementRelative(holder_name, vec2(added_positon.x, added_positon.y));
+		position += added_positon;
 		UpdateContent();
 	}
 
@@ -128,6 +133,10 @@ class DrikaUIText : DrikaUIElement{
 		for(uint i = 0; i < text_elements.size(); i++){
 			text_elements[i].removeUpdateBehavior(name);
 		}
+	}
+
+	void SetPosition(){
+		text_container.moveElement(holder_name, vec2(position.x, position.y));
 	}
 
 	void EditDone(){

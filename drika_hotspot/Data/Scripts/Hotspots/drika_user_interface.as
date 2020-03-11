@@ -8,19 +8,20 @@ class DrikaUserInterface : DrikaElement{
 	ui_functions ui_function;
 	int current_ui_function;
 	string image_path;
-	vec2 size;
-	vec2 position;
+	ivec2 size;
+	ivec2 position;
+	ivec2 position_offset;
+	ivec2 size_offset;
+	ivec2 max_offset;
 	float rotation;
 	vec4 color;
 	bool keep_aspect;
-	vec2 position_offset;
-	vec2 size_offset;
 	array<string> content;
 	string joined_content;
 	string text_content;
 	string display_content;
-	vec2 max_offset;
 	string ui_element_identifier;
+	bool ui_element_added = false;
 
 	array<string> ui_function_names =	{
 											"Clear",
@@ -34,12 +35,12 @@ class DrikaUserInterface : DrikaElement{
 
 		image_path = GetJSONString(params, "image_path", "Textures/ui/menus/credits/overgrowth.png");
 		rotation = GetJSONFloat(params, "rotation", 0.0);
-		position = GetJSONVec2(params, "position", vec2(ui_snap_scale, ui_snap_scale));
+		position = GetJSONIVec2(params, "position", ivec2(ui_snap_scale, ui_snap_scale) * 5);
 		color = GetJSONVec4(params, "color", vec4(1.0, 1.0, 1.0, 1.0));
 		keep_aspect = GetJSONBool(params, "keep_aspect", false);
-		size = GetJSONVec2(params, "size", vec2(720 - (720 % ui_snap_scale), 255 - (255 % ui_snap_scale)));
-		position_offset = GetJSONVec2(params, "position_offset", vec2(0.0, 0.0));
-		size_offset = GetJSONVec2(params, "size_offset", vec2(0.0, 0.0));
+		size = GetJSONIVec2(params, "size", ivec2(720 - (720 % ui_snap_scale), 255 - (255 % ui_snap_scale)));
+		position_offset = GetJSONIVec2(params, "position_offset", ivec2(0, 0));
+		size_offset = GetJSONIVec2(params, "size_offset", ivec2(0, 0));
 
 		text_content = GetJSONString(params, "text_content", "Example Text");
 		content = text_content.split("\\n");
@@ -113,7 +114,12 @@ class DrikaUserInterface : DrikaElement{
 		ImGui_Text("UI Function");
 		ImGui_SameLine();
 		if(ImGui_Combo("##UI Function", current_ui_function, ui_function_names, ui_function_names.size())){
-			ui_function = ui_functions(current_ui_function);
+			if(current_ui_function != ui_function){
+				SendLevelMessage("drika_ui_remove_element");
+				ui_element_added = false;
+				ui_function = ui_functions(current_ui_function);
+				StartEdit();
+			}
 		}
 
 		if(ui_function == ui_image){
@@ -127,113 +133,153 @@ class DrikaUserInterface : DrikaElement{
 				}
 			}
 
-			float slider_width = ImGui_GetWindowWidth() / 2.0 - 40.0;
+			ImGui_Columns(2, false);
+			float margin = 8.0;
+			float option_name_width = 130.0;
+			float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
+			float slider_width = (second_column_width / 2.0) - margin;
+			ImGui_SetColumnWidth(0, option_name_width);
+			ImGui_SetColumnWidth(1, second_column_width);
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position ");
-
-			ImGui_SameLine();
+			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
-
-			if(ImGui_DragFloat("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
-
+			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
+				SendInstruction("set_position", {position.x, position.y});
 			}
-
 			ImGui_SameLine();
-			if(ImGui_DragFloat("##Position Y", position.y, 1.0, 0, 1440, "%.0f")){
-
+			if(ImGui_DragInt("##Position Y", position.y, 1.0, 0, 1440, "%.0f")){
+				SendInstruction("set_position", {position.x, position.y});
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size ");
-			ImGui_SameLine();
-			if(ImGui_DragFloat("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
-
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(slider_width);
+			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
+				SendInstruction("set_size", {size.x, size.y});
 			}
 			ImGui_SameLine();
-			if(ImGui_DragFloat("##size_y", size.y, 1.0, 1.0f, 1000, "%.0f")){
-
+			if(ImGui_DragInt("##size_y", size.y, 1.0, 1.0f, 1000, "%.0f")){
+				SendInstruction("set_size", {size.x, size.y});
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position Offset ");
-			ImGui_SameLine();
-			if(ImGui_DragFloat("##position_offset_x", position_offset.x, 1.0, 0.0f, max_offset.x, "%.0f")){
-
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(slider_width);
+			if(ImGui_DragInt("##position_offset_x", position_offset.x, 1.0, 0.0f, max_offset.x, "%.0f")){
+				SendInstruction("set_position_offset", {position_offset.x, position_offset.y});
 			}
 			ImGui_SameLine();
-			if(ImGui_DragFloat("##position_offset_y", position_offset.y, 1.0, 0.0f, max_offset.y, "%.0f")){
-
+			if(ImGui_DragInt("##position_offset_y", position_offset.y, 1.0, 0.0f, max_offset.y, "%.0f")){
+				SendInstruction("set_position_offset", {position_offset.x, position_offset.y});
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size Offset ");
-			ImGui_SameLine();
-			if(ImGui_DragFloat("##size_offset_x", size_offset.x, 1.0, 1.0f, max_offset.x, "%.0f")){
-
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(slider_width);
+			if(ImGui_DragInt("##size_offset_x", size_offset.x, 1.0, 1.0f, max_offset.x, "%.0f")){
+				SendInstruction("set_size_offset", {size_offset.x, size_offset.y});
 			}
 			ImGui_SameLine();
-			if(ImGui_DragFloat("##size_offset_y", size_offset.y, 1.0, 1.0f, max_offset.y, "%.0f")){
-
+			if(ImGui_DragInt("##size_offset_y", size_offset.y, 1.0, 1.0f, max_offset.y, "%.0f")){
+				SendInstruction("set_size_offset", {size_offset.x, size_offset.y});
 			}
-
 			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Rotation ");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_SliderFloat("###Rotation", rotation, -360, 360, "%.0f")){
-
+				SendInstruction("set_rotation", {rotation});
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Color ");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_ColorEdit4("###Color", color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
+				SendInstruction("set_color", {color.x, color.y, color.z, color.a});
+			}
+			ImGui_PopItemWidth();
 
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Keep aspect ratio ");
+			ImGui_NextColumn();
+			if(ImGui_Checkbox("##Keep aspect ratio", keep_aspect)){
+				SendInstruction("set_aspect_ratio", {keep_aspect});
+			}
+		}else if(ui_function == ui_text){
+			ImGui_NextColumn();
+			ImGui_SetTextBuf(text_content);
+			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, ImGui_GetWindowHeight() / 2.0))){
+				text_content = ImGui_GetTextBuf();
+				SendInstruction("set_content", {"\"" + text_content + "\""});
 			}
 
-			ImGui_Checkbox("Keep aspect ratio", keep_aspect);
-		}else if(ui_function == ui_text){
-			float slider_width = ImGui_GetWindowWidth() / 2.0 - 40.0;
+			ImGui_Columns(2, false);
+			float margin = 8.0;
+			float option_name_width = 130.0;
+			float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
+			float slider_width = (second_column_width / 2.0) - margin;
+			ImGui_SetColumnWidth(0, option_name_width);
+			ImGui_SetColumnWidth(1, second_column_width);
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position ");
 
-			ImGui_SameLine();
+			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
-
-			if(ImGui_DragFloat("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
-
+			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
+				SendInstruction("set_position", {position.x, position.y});
 			}
-
 			ImGui_SameLine();
-			if(ImGui_DragFloat("##Position Y", position.y, 1.0, 0, 1440, "%.0f")){
-
+			if(ImGui_DragInt("##Position Y", position.y, 1.0, 0, 1440, "%.0f")){
+				SendInstruction("set_position", {position.x, position.y});
 			}
-
 			ImGui_PopItemWidth();
+
+			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Rotation ");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_SliderFloat("###rotation", rotation, -360, 360, "%.0f")){
-
+				SendInstruction("set_rotation", {rotation});
 			}
-
-			ImGui_SetTextBuf(joined_content);
-			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
-				content = ImGui_GetTextBuf().split("\n");
-			}
+			ImGui_PopItemWidth();
 		}
 	}
 
 	void StartEdit(){
-		level.SendMessage("drika_edit_ui true " + hotspot.GetID());
+		SendLevelMessage("drika_edit_ui", "true", "" + hotspot.GetID());
 		AddUIElement();
+		SendLevelMessage("drika_ui_set_editing", "true");
 	}
 
 	void AddUIElement(){
+		if(ui_element_added){
+			return;
+		}
+		ui_element_added = true;
 		if(ui_function == ui_clear){
-			level.SendMessage("drika_ui_clear");
+			SendLevelMessage("drika_ui_clear");
 		}else if(ui_function == ui_image){
 			SendJSONMessage("drika_ui_add_image", GetSaveData());
 		}else if(ui_function == ui_text){
@@ -255,22 +301,38 @@ class DrikaUserInterface : DrikaElement{
 		level.SendMessage(msg);
 	}
 
+	void SendLevelMessage(string param_1, string param_2 = "", string param_3 = ""){
+		string msg = param_1 + " ";
+		msg += ui_element_identifier + " ";
+		msg += param_2 + " ";
+		msg += param_3 + " ";
+		level.SendMessage(msg);
+	}
+
+	void SendInstruction(string param_1, array<string> params){
+		string msg = "drika_ui_instruction ";
+		msg += ui_element_identifier + " ";
+		msg += param_1 + " ";
+		for(uint i = 0; i < params.size(); i++){
+			msg += params[i] + " ";
+		}
+		level.SendMessage(msg);
+	}
+
 	void EditDone(){
-		level.SendMessage("drika_edit_ui false");
+		SendLevelMessage("drika_edit_ui", "false");
+		SendLevelMessage("drika_ui_set_editing", "false");
 	}
 
 	void Reset(){
 		if(ui_function == ui_image || ui_function == ui_text){
-			string msg = "drika_ui_remove_element ";
-			msg += ui_element_identifier + " ";
-			level.SendMessage(msg);
+			SendLevelMessage("drika_ui_remove_element");
+			ui_element_added = false;
 		}
 	}
 
 	void Delete(){
-		string msg = "drika_ui_remove_element ";
-		msg += ui_element_identifier + " ";
-		level.SendMessage(msg);
+		SendLevelMessage("drika_ui_remove_element");
 	}
 
 	bool Trigger(){

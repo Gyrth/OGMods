@@ -57,7 +57,6 @@ class DrikaUIGrabber{
 	}
 
 	vec2 GetPosition(){
-		Log(warning, "grabber name " + grabber_name);
 		return grabber_container.getElementPosition(grabber_name) + (size / 2.0);
 	}
 
