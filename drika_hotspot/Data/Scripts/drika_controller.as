@@ -1413,23 +1413,27 @@ void UpdateGrabber(){
 				int direction_x = (difference.x > 0.0) ? 1 : -1;
 				int direction_y = (difference.y > 0.0) ? 1 : -1;
 
+				Log(warning, "" + click_position.y);
+
 				if(current_grabber.grabber_type == scaler){
 					if(current_grabber_position.x != new_snap_position.x){
 						current_ui_element.AddSize(ivec2(int(difference.x), 0), current_grabber.direction_x, current_grabber.direction_y);
+						click_position.x += int(difference.x);
 					}
 					if(current_grabber_position.y != new_snap_position.y){
 						current_ui_element.AddSize(ivec2(0, int(difference.y)), current_grabber.direction_x, current_grabber.direction_y);
+						click_position.y += int(difference.y);
 					}
 				}else if(current_grabber.grabber_type == mover){
 					if(current_grabber_position.x != new_snap_position.x){
-						Log(warning, "Check" + current_ui_element.ui_element_identifier);
 						current_ui_element.AddPosition(ivec2(int(difference.x), 0));
+						click_position.x += int(difference.x);
 					}
 					if(current_grabber_position.y != new_snap_position.y){
 						current_ui_element.AddPosition(ivec2(0, int(difference.y)));
+						click_position.y += int(difference.y);
 					}
 				}
-				click_position += difference;
 			}
 		}
 	}else{
