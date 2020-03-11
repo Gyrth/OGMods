@@ -133,7 +133,7 @@ class DrikaUserInterface : DrikaElement{
 					array<string> split_path = new_path.split("/");
 					split_path.removeAt(0);
 					image_path = join(split_path, "/");
-					SendInstruction("set_image_path", {image_path});
+					SendUIInstruction("set_image_path", {image_path});
 				}
 			}
 
@@ -150,11 +150,11 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
 			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
-				SendInstruction("set_position", {position.x, position.y});
+				SendUIInstruction("set_position", {position.x, position.y});
 			}
 			ImGui_SameLine();
 			if(ImGui_DragInt("##Position Y", position.y, 1.0, 0, 1440, "%.0f")){
-				SendInstruction("set_position", {position.x, position.y});
+				SendUIInstruction("set_position", {position.x, position.y});
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -164,11 +164,11 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
 			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
-				SendInstruction("set_size", {size.x, size.y});
+				SendUIInstruction("set_size", {size.x, size.y});
 			}
 			ImGui_SameLine();
 			if(ImGui_DragInt("##size_y", size.y, 1.0, 1.0f, 1000, "%.0f")){
-				SendInstruction("set_size", {size.x, size.y});
+				SendUIInstruction("set_size", {size.x, size.y});
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -178,11 +178,11 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
 			if(ImGui_DragInt("##position_offset_x", position_offset.x, 1.0, 0.0f, max_offset.x, "%.0f")){
-				SendInstruction("set_position_offset", {position_offset.x, position_offset.y});
+				SendUIInstruction("set_position_offset", {position_offset.x, position_offset.y});
 			}
 			ImGui_SameLine();
 			if(ImGui_DragInt("##position_offset_y", position_offset.y, 1.0, 0.0f, max_offset.y, "%.0f")){
-				SendInstruction("set_position_offset", {position_offset.x, position_offset.y});
+				SendUIInstruction("set_position_offset", {position_offset.x, position_offset.y});
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -192,11 +192,11 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
 			if(ImGui_DragInt("##size_offset_x", size_offset.x, 1.0, 1.0f, max_offset.x, "%.0f")){
-				SendInstruction("set_size_offset", {size_offset.x, size_offset.y});
+				SendUIInstruction("set_size_offset", {size_offset.x, size_offset.y});
 			}
 			ImGui_SameLine();
 			if(ImGui_DragInt("##size_offset_y", size_offset.y, 1.0, 1.0f, max_offset.y, "%.0f")){
-				SendInstruction("set_size_offset", {size_offset.x, size_offset.y});
+				SendUIInstruction("set_size_offset", {size_offset.x, size_offset.y});
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -206,7 +206,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_SliderFloat("###Rotation", rotation, -360, 360, "%.0f")){
-				SendInstruction("set_rotation", {rotation});
+				SendUIInstruction("set_rotation", {rotation});
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -216,7 +216,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_ColorEdit4("###Color", color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
-				SendInstruction("set_color", {color.x, color.y, color.z, color.a});
+				SendUIInstruction("set_color", {color.x, color.y, color.z, color.a});
 			}
 			ImGui_PopItemWidth();
 
@@ -226,14 +226,14 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_Text("Keep aspect ratio ");
 			ImGui_NextColumn();
 			if(ImGui_Checkbox("##Keep aspect ratio", keep_aspect)){
-				SendInstruction("set_aspect_ratio", {keep_aspect});
+				SendUIInstruction("set_aspect_ratio", {keep_aspect});
 			}
 		}else if(ui_function == ui_text){
 			ImGui_NextColumn();
 			ImGui_SetTextBuf(text_content);
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, ImGui_GetWindowHeight() / 2.0))){
 				text_content = ImGui_GetTextBuf();
-				SendInstruction("set_content", {"\"" + text_content + "\""});
+				SendUIInstruction("set_content", {"\"" + text_content + "\""});
 			}
 
 			ImGui_Columns(2, false);
@@ -250,11 +250,11 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
 			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
-				SendInstruction("set_position", {position.x, position.y});
+				SendUIInstruction("set_position", {position.x, position.y});
 			}
 			ImGui_SameLine();
 			if(ImGui_DragInt("##Position Y", position.y, 1.0, 0, 1440, "%.0f")){
-				SendInstruction("set_position", {position.x, position.y});
+				SendUIInstruction("set_position", {position.x, position.y});
 			}
 			ImGui_PopItemWidth();
 
@@ -265,7 +265,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_SliderFloat("###rotation", rotation, -360, 360, "%.0f")){
-				SendInstruction("set_rotation", {rotation});
+				SendUIInstruction("set_rotation", {rotation});
 			}
 			ImGui_PopItemWidth();
 		}
@@ -313,7 +313,8 @@ class DrikaUserInterface : DrikaElement{
 		level.SendMessage(msg);
 	}
 
-	void SendInstruction(string param_1, array<string> params){
+	void SendUIInstruction(string param_1, array<string> params){
+		//This message goes to the drika_controller levelscript and then to the correct ui_element.
 		string msg = "drika_ui_instruction ";
 		msg += ui_element_identifier + " ";
 		msg += param_1 + " ";
@@ -321,6 +322,18 @@ class DrikaUserInterface : DrikaElement{
 			msg += params[i] + " ";
 		}
 		level.SendMessage(msg);
+	}
+
+	void ReadUIInstruction(array<string> instruction){
+		//This function comes from the ui_element on screen -> drika_controller levelscript -> drika_hotspot -> here.
+		Log(warning, "Got instruction " + instruction[0]);
+		if(instruction[0] == "set_position"){
+			position.x = atoi(instruction[1]);
+			position.y = atoi(instruction[2]);
+		}else if(instruction[0] == "set_size"){
+			size.x = atoi(instruction[1]);
+			size.y = atoi(instruction[2]);
+		}
 	}
 
 	void EditDone(){

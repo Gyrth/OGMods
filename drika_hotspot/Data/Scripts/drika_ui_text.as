@@ -38,7 +38,7 @@ class DrikaUIText : DrikaUIElement{
 		SetNewText();
 	}
 
-	void ReadInstruction(array<string> instruction){
+	void ReadUIInstruction(array<string> instruction){
 		Log(warning, "Got instruction " + instruction[0]);
 		if(instruction[0] == "set_position"){
 			position.x = atoi(instruction[1]);
@@ -121,6 +121,7 @@ class DrikaUIText : DrikaUIElement{
 		text_container.moveElementRelative(holder_name, vec2(added_positon.x, added_positon.y));
 		position += added_positon;
 		UpdateContent();
+		SendUIInstruction("set_position", {position.x, position.y});
 	}
 
 	void AddUpdateBehavior(IMUpdateBehavior@ behavior, string name){

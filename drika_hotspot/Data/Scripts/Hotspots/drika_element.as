@@ -146,6 +146,7 @@ class DrikaElement{
 	void ReceiveMessage(string message, string param){}
 	void ReceiveMessage(string message, int param_1, int param_2){}
 	void ReceiveMessage(string message, string param, int id_param){}
+	void ReadUIInstruction(array<string> instruction){}
 	void SetIndex(int _index){
 		index = _index;
 	}

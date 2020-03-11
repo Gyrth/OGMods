@@ -61,7 +61,7 @@ class DrikaUIImage : DrikaUIElement{
 		UpdateContent();
 	}
 
-	void ReadInstruction(array<string> instruction){
+	void ReadUIInstruction(array<string> instruction){
 		Log(warning, "Got instruction " + instruction[0]);
 		if(instruction[0] == "set_position"){
 			position.x = atoi(instruction[1]);
@@ -196,6 +196,7 @@ class DrikaUIImage : DrikaUIElement{
 			}
 		}
 		UpdateContent();
+		SendUIInstruction("set_size", {size.x, size.y});
 	}
 
 	void SetPosition(){
@@ -210,6 +211,7 @@ class DrikaUIImage : DrikaUIElement{
 		image_container.moveElementRelative(image_name, vec2(added_positon.x, added_positon.y));
 		position += added_positon;
 		UpdateContent();
+		SendUIInstruction("set_position", {position.x, position.y});
 	}
 
 	DrikaUIGrabber@ GetGrabber(string grabber_name){

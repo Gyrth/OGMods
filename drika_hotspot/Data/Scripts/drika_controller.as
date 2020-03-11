@@ -1269,7 +1269,21 @@ void ReceiveMessage(string msg){
 			instruction.insertLast(token_iter.GetToken(msg));
 		}
 
-		GetUIElement(ui_element_identifier).ReadInstruction(instruction);
+		GetUIElement(ui_element_identifier).ReadUIInstruction(instruction);
+	}
+}
+
+void SendUIInstruction(string param_1, array<string> params){
+	if(ui_hotspot_id != -1){
+		Object@ hotspot_obj = ReadObjectFromID(ui_hotspot_id);
+
+		string msg = "drika_ui_instruction ";
+		msg += param_1 + " ";
+		for(uint i = 0; i < params.size(); i++){
+			msg += params[i] + " ";
+		}
+
+		hotspot_obj.ReceiveScriptMessage(msg);
 	}
 }
 

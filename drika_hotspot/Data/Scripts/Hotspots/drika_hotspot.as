@@ -1060,6 +1060,14 @@ void ReceiveMessage(string msg){
 		int param_1 = atoi(token_iter.GetToken(msg));
 
 		GetCurrentElement().ReceiveMessage(event, param_1);
+	}else if(token == "drika_ui_instruction"){
+		array<string> instruction;
+
+		while(token_iter.FindNextToken(msg)){
+			instruction.insertLast(token_iter.GetToken(msg));
+		}
+
+		GetCurrentElement().ReadUIInstruction(instruction);
 	}
 }
 
