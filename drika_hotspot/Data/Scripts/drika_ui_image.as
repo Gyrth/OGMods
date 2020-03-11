@@ -5,7 +5,7 @@ class DrikaUIImage : DrikaUIElement{
 	DrikaUIGrabber@ grabber_bottom_left;
 	DrikaUIGrabber@ grabber_bottom_right;
 	DrikaUIGrabber@ grabber_center;
-	string path;
+	string image_path;
 	ivec2 position;
 	ivec2 size;
 	float rotation;
@@ -20,7 +20,7 @@ class DrikaUIImage : DrikaUIElement{
 	DrikaUIImage(JSONValue params = JSONValue()){
 		drika_ui_element_type = drika_ui_image;
 
-		path = GetJSONString(params, "image_path", "");
+		image_path = GetJSONString(params, "image_path", "");
 		rotation = GetJSONFloat(params, "rotation", 0.0);
 		position = GetJSONIVec2(params, "position", ivec2());
 		color = GetJSONVec4(params, "color", vec4());
@@ -35,7 +35,7 @@ class DrikaUIImage : DrikaUIElement{
 	}
 
 	void PostInit(){
-		IMImage new_image(path);
+		IMImage new_image(image_path);
 		@image = new_image;
 		new_image.setBorderColor(edit_outline_color);
 		ReadMaxOffsets();
@@ -91,6 +91,9 @@ class DrikaUIImage : DrikaUIElement{
 		}else if(instruction[0] == "set_aspect_ratio"){
 			keep_aspect = instruction[1] == "true";
 			SetSize();
+		}else if(instruction[0] == "set_image_path"){
+			image_path = instruction[1];
+			SetNewImage();
 		}
 		UpdateContent();
 	}
@@ -110,7 +113,7 @@ class DrikaUIImage : DrikaUIElement{
 
 	void SetNewImage(){
 		vec2 old_size = image.getSize();
-		image.setImageFile(path);
+		image.setImageFile(image_path);
 		ReadMaxOffsets();
 		image.setSize(old_size);
 	}

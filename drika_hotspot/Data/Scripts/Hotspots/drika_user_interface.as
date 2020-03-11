@@ -129,7 +129,11 @@ class DrikaUserInterface : DrikaElement{
 			if(ImGui_Button("Set Image Path")){
 				string new_path = GetUserPickedReadPath("png", "Data/Images");
 				if(new_path != ""){
-					image_path = new_path;
+					//Remove the Data/ in the beginning of the path because IMImage starts in Data/.
+					array<string> split_path = new_path.split("/");
+					split_path.removeAt(0);
+					image_path = join(split_path, "/");
+					SendInstruction("set_image_path", {image_path});
 				}
 			}
 
