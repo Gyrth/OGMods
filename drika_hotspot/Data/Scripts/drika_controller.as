@@ -1250,6 +1250,7 @@ void ReceiveMessage(string msg){
 			ui_elements[index].Delete();
 			ui_elements.removeAt(index);
 		}
+		@current_grabber = null;
 	}else if(token == "drika_ui_set_editing"){
 		token_iter.FindNextToken(msg);
 		string ui_element_identifier = token_iter.GetToken(msg);
