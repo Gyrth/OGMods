@@ -70,6 +70,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void ReorderDone(){
 		UpdateExternalResource();
+		SendUIInstruction("set_z_order", {index});
 	}
 
 	void UpdateExternalResource(){
@@ -139,6 +140,10 @@ class DrikaUserInterface : DrikaElement{
 	void PostInit(){
 		UpdateDisplayString();
 		UpdateExternalResource();
+		if(ui_function == ui_font){
+			AddUIElement();
+		}
+		SendUIInstruction("set_z_order", {index});
 	}
 
 	void ReceiveEditorMessage(array<string> message){
@@ -181,11 +186,6 @@ class DrikaUserInterface : DrikaElement{
 			data["position"].append(position.x);
 			data["position"].append(position.y);
 			data["text_content"] = JSONValue(text_content);
-			if(font_element is null){
-				data["font_id"] = JSONValue("");
-			}else{
-				data["font_id"] = JSONValue(font_element.ui_element_identifier);
-			}
 		}else if(ui_function == ui_font){
 			data["font_name"] = JSONValue(font_name);
 			data["font_size"] = JSONValue(font_size);
@@ -451,11 +451,22 @@ class DrikaUserInterface : DrikaElement{
 		if(ui_function == ui_clear){
 			SendLevelMessage("drika_ui_clear");
 		}else if(ui_function == ui_image){
-			SendJSONMessage("drika_ui_add_image", GetSaveData());
+			JSONValue data = GetSaveData();
+			data["index"] = JSONValue(index);
+			SendJSONMessage("drika_ui_add_image", data);
 		}else if(ui_function == ui_text){
-			SendJSONMessage("drika_ui_add_text", GetSaveData());
+			JSONValue data = GetSaveData();
+			data["index"] = JSONValue(index);
+			if(font_element is null){
+				data["font_id"] = JSONValue("");
+			}else{
+				data["font_id"] = JSONValue(font_element.ui_element_identifier);
+			}
+			SendJSONMessage("drika_ui_add_text", data);
 		}else if(ui_function == ui_font){
-			SendJSONMessage("drika_ui_add_font", GetSaveData());
+			JSONValue data = GetSaveData();
+			data["index"] = JSONValue(index);
+			SendJSONMessage("drika_ui_add_font", data);
 		}
 	}
 
@@ -550,12 +561,10 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void FontHasChanged(){
-		if(ui_element_added){
-			if(font_element is null){
-				SendUIInstruction("font_changed", {""});
-			}else{
-				SendUIInstruction("font_changed", {font_element.ui_element_identifier});
-			}
+		if(font_element is null){
+			SendUIInstruction("font_changed", {""});
+		}else{
+			SendUIInstruction("font_changed", {font_element.ui_element_identifier});
 		}
 	}
 }

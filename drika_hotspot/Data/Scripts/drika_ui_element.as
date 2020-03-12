@@ -11,6 +11,7 @@ class DrikaUIElement{
 	bool visible;
 	string ui_element_identifier;
 	bool editing;
+	int index = 0;
 
 	void AddPosition(ivec2 added_positon){}
 	void AddSize(ivec2 added_size, int direction_x, int direction_y){}

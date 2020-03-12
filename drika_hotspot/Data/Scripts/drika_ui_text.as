@@ -16,6 +16,7 @@ class DrikaUIText : DrikaUIElement{
 		split_content = text_content.split("\n");
 		rotation = GetJSONFloat(params, "rotation", 0.0);
 		position = GetJSONIVec2(params, "position", ivec2());
+		index = GetJSONInt(params, "index", 0);
 
 		@font_element = cast<DrikaUIFont@>(GetUIElement(GetJSONString(params, "font_id", "")));
 
@@ -29,6 +30,7 @@ class DrikaUIText : DrikaUIElement{
 		text_holder.setBorderColor(edit_outline_color);
 		text_holder.setAlignment(CALeft, CATop);
 		text_holder.setClip(false);
+		text_holder.setZOrdering(index);
 
 		@grabber_center = DrikaUIGrabber("center", 1, 1, mover);
 		grabber_center.margin = 0.0;
@@ -53,6 +55,9 @@ class DrikaUIText : DrikaUIElement{
 		}else if(instruction[0] == "font_changed"){
 			@font_element = cast<DrikaUIFont@>(GetUIElement(instruction[1]));
 			SetNewText();
+		}else if(instruction[0] == "set_z_order"){
+			index = atoi(instruction[1]);
+			SetZOrder();
 		}
 		UpdateContent();
 	}
@@ -62,7 +67,7 @@ class DrikaUIText : DrikaUIElement{
 		grabber_center.Delete();
 	}
 
-	void SetZOrder(int index){
+	void SetZOrder(){
 		holder.setZOrdering(index);
 		for(uint i = 0; i < text_elements.size(); i++){
 			text_elements[i].setZOrdering(index);

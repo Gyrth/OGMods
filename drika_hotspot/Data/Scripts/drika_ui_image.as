@@ -26,6 +26,7 @@ class DrikaUIImage : DrikaUIElement{
 		color = GetJSONVec4(params, "color", vec4());
 		keep_aspect = GetJSONBool(params, "keep_aspect", false);
 		size = GetJSONIVec2(params, "size", ivec2());
+		index = GetJSONInt(params, "index", 0);
 
 		position_offset = GetJSONIVec2(params, "position_offset", ivec2());
 		size_offset = GetJSONIVec2(params, "size_offset", ivec2());
@@ -44,6 +45,7 @@ class DrikaUIImage : DrikaUIElement{
 		}
 		SetOffset();
 		new_image.setSize(vec2(size.x, size.y));
+		new_image.setZOrdering(index);
 		new_image.setClip(false);
 		image_name = imGUI.getUniqueName("image");
 
@@ -94,6 +96,9 @@ class DrikaUIImage : DrikaUIElement{
 		}else if(instruction[0] == "set_image_path"){
 			image_path = instruction[1];
 			SetNewImage();
+		}else if(instruction[0] == "set_z_order"){
+			index = atoi(instruction[1]);
+			SetZOrder();
 		}
 		UpdateContent();
 	}
@@ -107,7 +112,7 @@ class DrikaUIImage : DrikaUIElement{
 		grabber_center.Delete();
 	}
 
-	void SetZOrder(int index){
+	void SetZOrder(){
 		image.setZOrdering(index);
 	}
 
