@@ -35,8 +35,7 @@ class DrikaCheckCharacterState : DrikaElement{
 	TargetSelect known_target(this, "known_target");
 	float proximity_distance;
 	bool continue_if_false = false;
-	DrikaElement@ continue_element;
-	int continue_line;
+	GoToLineSelect@ continue_element;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		state_choice = state_choices(GetJSONInt(params, "state_check", awake));
@@ -44,7 +43,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		equals = GetJSONBool(params, "equals", true);
 		proximity_distance = GetJSONFloat(params, "proximity_distance", 1.0);
 		continue_if_false = GetJSONBool(params, "continue_if_false", false);
-		continue_line = GetJSONInt(params, "continue_line", 0);
+		@continue_element = GoToLineSelect("continue_line", params);
 
 		target_select.LoadIdentifier(params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
@@ -56,20 +55,10 @@ class DrikaCheckCharacterState : DrikaElement{
 		connection_types = {_movement_object};
 
 		has_settings = true;
-
-		if(duplicating_function){
-			GetTargetElement();
-		}
 	}
 
 	void PostInit(){
-		if(!duplicating_function){
-			GetTargetElement();
-		}
-	}
-
-	void GetTargetElement(){
-		@continue_element = drika_elements[drika_indexes[continue_line]];
+		continue_element.PostInit();
 	}
 
 	void SetTargetOptions(){
@@ -96,16 +85,16 @@ class DrikaCheckCharacterState : DrikaElement{
 			data["proximity_distance"] = JSONValue(proximity_distance);
 		}
 		data["continue_if_false"] = JSONValue(continue_if_false);
-		if(continue_if_false && @continue_element != null){
-			data["continue_line"] = JSONValue(continue_element.index);
+		if(continue_if_false){
+			continue_element.SaveGoToLine(data);
 		}
 		target_select.SaveIdentifier(data);
 		return data;
 	}
 
 	string GetDisplayString(){
-		GoToLineCheckAvailable(continue_element);
-		return "CheckCharacterState" + " " + target_select.GetTargetDisplayText() + (equals?" ":" not ") + state_choice_names[state_choice] + ((state_choice == knows_about || state_choice == in_proximity)?" " +  known_target.GetTargetDisplayText():"") + (continue_if_false?" else line " + continue_element.index:"");
+		continue_element.CheckLineAvailable();
+		return "CheckCharacterState" + " " + target_select.GetTargetDisplayText() + (equals?" ":" not ") + state_choice_names[state_choice] + ((state_choice == knows_about || state_choice == in_proximity)?" " +  known_target.GetTargetDisplayText():"") + (continue_if_false?" else line " + continue_element.GetTargetLineIndex():"");
 	}
 
 	void DrawSettings(){
@@ -132,8 +121,8 @@ class DrikaCheckCharacterState : DrikaElement{
 		}
 
 		ImGui_Checkbox("If not, go to specified line:", continue_if_false);
-		if(continue_if_false == true){
-			AddGoToLineCombo(continue_element, "line");
+		if(continue_if_false){
+			continue_element.DrawGoToLineUI();
 		}
 	}
 
@@ -270,8 +259,8 @@ class DrikaCheckCharacterState : DrikaElement{
 		}
 
 		if(!all_in_state && continue_if_false){
-			current_line = continue_element.index;
-			display_index = drika_indexes[continue_element.index];
+			current_line = continue_element.GetTargetLineIndex();
+			display_index = drika_indexes[continue_element.GetTargetLineIndex()];
 		}
 
 		return all_in_state;

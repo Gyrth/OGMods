@@ -19,8 +19,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	additional_conditions condition_count;
 	int current_read_write_mode;
 	int current_condition_count;
-	int continue_line;
-	DrikaElement@ continue_element;
+	GoToLineSelect@ continue_element;
 	bool continue_if_false = false;
 	bool if_any_are_true = false;
 	array<string> mode_choices = {"Read", "Write"};
@@ -29,7 +28,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	DrikaReadWriteSaveFile(JSONValue params = JSONValue()){
 		continue_if_false = GetJSONBool(params, "continue_if_false", false);
 		if_any_are_true = GetJSONBool(params, "if_any_are_true", false);
-		continue_line = GetJSONInt(params, "continue_line", 0);
+		@continue_element = GoToLineSelect("continue_line", params);
 		param = GetJSONString(params, "param", "drika_save_param");
 		value = GetJSONString(params, "value", "drika_save_value");
 		param2 = GetJSONString(params, "param2", "drika_save_param_two");
@@ -43,20 +42,10 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		current_condition_count = condition_count;
 		drika_element_type = drika_read_write_savefile;
 		has_settings = true;
-
-		if(duplicating_function){
-			GetTargetElement();
-		}
 	}
 
 	void PostInit(){
-		if(!duplicating_function){
-			GetTargetElement();
-		}
-	}
-
-	void GetTargetElement(){
-		@continue_element = drika_elements[drika_indexes[continue_line]];
+		continue_element.PostInit();
 	}
 
 	JSONValue GetSaveData(){
@@ -71,14 +60,14 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		data["condition_count"] = JSONValue(condition_count);
 		data["continue_if_false"] = JSONValue(continue_if_false);
 		data["if_any_are_true"] = JSONValue(if_any_are_true);
-		if(continue_if_false && @continue_element != null){
-			data["continue_line"] = JSONValue(continue_element.index);
+		if(continue_if_false){
+			continue_element.SaveGoToLine(data);
 		}
 		return data;
 	}
 
 	string GetDisplayString(){
-		GoToLineCheckAvailable(continue_element);
+		continue_element.CheckLineAvailable();
 		string display_string;
 
 		if(read_write_mode == read){
@@ -89,7 +78,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			}else if(condition_count == condition_count_two){
 				display_string += "Check three conditions";
 			}
-			display_string += (continue_if_false?" else line " + continue_element.index:"");
+			display_string += (continue_if_false?" else line " + continue_element.GetTargetLineIndex():"");
 		}else if(read_write_mode == write){
 			display_string += "Write " + param + " " + value;
 		}
@@ -161,8 +150,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			}
 
 			ImGui_Checkbox("If not, go to specified line:", continue_if_false);
-			if(continue_if_false == true){
-				AddGoToLineCombo(continue_element, "line");
+			if(continue_if_false){
+				continue_element.DrawGoToLineUI();
 			}
 		}else{
 			ImGui_Text("Set param : ");
@@ -197,13 +186,14 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	}
 
 	bool Trigger(){
+		int continue_line = continue_element.GetTargetLineIndex();
 		if(read_write_mode == read and condition_count == condition_count_none){
 			if(ReadParamValue() == value){
 				return true;
 			}else{
 				if (continue_if_false == true and continue_line < int(drika_elements.size())){
-					current_line = continue_element.index;
-					display_index = drika_indexes[continue_element.index];
+					current_line = continue_line;
+					display_index = drika_indexes[continue_line];
 				}
 				return false;
 			}
@@ -212,8 +202,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				return true;
 			}else{
 				if(continue_if_false == true and continue_line < int(drika_elements.size())){
-					current_line = continue_element.index;
-					display_index = drika_indexes[continue_element.index];
+					current_line = continue_line;
+					display_index = drika_indexes[continue_line];
 				}
 				return false;
 			}
@@ -222,8 +212,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				return true;
 			}else{
 				if (continue_if_false == true and continue_line < int(drika_elements.size())){
-					current_line = continue_element.index;
-					display_index = drika_indexes[continue_element.index];
+					current_line = continue_line;
+					display_index = drika_indexes[continue_line];
 				}
 				return false;
 			}
@@ -232,8 +222,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				return true;
 			}else{
 				if(continue_if_false == true and continue_line < int(drika_elements.size())){
-					current_line = continue_element.index;
-					display_index = drika_indexes[continue_element.index];
+					current_line = continue_line;
+					display_index = drika_indexes[continue_line];
 				}
 				return false;
 			}
@@ -242,8 +232,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				return true;
 			}else{
 				if(continue_if_false == true and continue_line < int(drika_elements.size())){
-					current_line = continue_element.index;
-					display_index = drika_indexes[continue_element.index];
+					current_line = continue_line;
+					display_index = drika_indexes[continue_line];
 				}
 				return false;
 			}
