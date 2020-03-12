@@ -1,9 +1,9 @@
-class GoToLineSelect{
+class DrikaGoToLineSelect{
 	string name;
 	int index;
 	DrikaElement@ target_element;
 
-	GoToLineSelect(string _name, JSONValue params = JSONValue()){
+	DrikaGoToLineSelect(string _name, JSONValue params = JSONValue()){
 		name = _name;
 		index = GetJSONInt(params, name, 0);
 		if(duplicating_function){

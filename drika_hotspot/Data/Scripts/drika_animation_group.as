@@ -1,7 +1,7 @@
-class AnimationGroup{
+class DrikaAnimationGroup{
 	string name;
 	array<string> animations;
-	AnimationGroup(string _name){
+	DrikaAnimationGroup(string _name){
 		name = _name;
 	}
 	void AddAnimation(string _animation){

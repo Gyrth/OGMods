@@ -8,28 +8,28 @@ class DrikaGoToLine : DrikaElement{
 	bool choice_line8 = false;
 	bool choice_line9 = false;
 	bool choice_line10 = false;
-	GoToLineSelect@ line_element;
-	GoToLineSelect@ line_element_2;
-	GoToLineSelect@ line_element_3;
-	GoToLineSelect@ line_element_4;
-	GoToLineSelect@ line_element_5;
-	GoToLineSelect@ line_element_6;
-	GoToLineSelect@ line_element_7;
-	GoToLineSelect@ line_element_8;
-	GoToLineSelect@ line_element_9;
-	GoToLineSelect@ line_element_10;
+	DrikaGoToLineSelect@ line_element;
+	DrikaGoToLineSelect@ line_element_2;
+	DrikaGoToLineSelect@ line_element_3;
+	DrikaGoToLineSelect@ line_element_4;
+	DrikaGoToLineSelect@ line_element_5;
+	DrikaGoToLineSelect@ line_element_6;
+	DrikaGoToLineSelect@ line_element_7;
+	DrikaGoToLineSelect@ line_element_8;
+	DrikaGoToLineSelect@ line_element_9;
+	DrikaGoToLineSelect@ line_element_10;
 
 	DrikaGoToLine(JSONValue params = JSONValue()){
-		@line_element = GoToLineSelect("line", params);
-		@line_element_2 = GoToLineSelect("line2", params);
-		@line_element_3 = GoToLineSelect("line3", params);
-		@line_element_4 = GoToLineSelect("line4", params);
-		@line_element_5 = GoToLineSelect("line5", params);
-		@line_element_6 = GoToLineSelect("line6", params);
-		@line_element_7 = GoToLineSelect("line7", params);
-		@line_element_8 = GoToLineSelect("line8", params);
-		@line_element_9 = GoToLineSelect("line9", params);
-		@line_element_10 = GoToLineSelect("line10", params);
+		@line_element = DrikaGoToLineSelect("line", params);
+		@line_element_2 = DrikaGoToLineSelect("line2", params);
+		@line_element_3 = DrikaGoToLineSelect("line3", params);
+		@line_element_4 = DrikaGoToLineSelect("line4", params);
+		@line_element_5 = DrikaGoToLineSelect("line5", params);
+		@line_element_6 = DrikaGoToLineSelect("line6", params);
+		@line_element_7 = DrikaGoToLineSelect("line7", params);
+		@line_element_8 = DrikaGoToLineSelect("line8", params);
+		@line_element_9 = DrikaGoToLineSelect("line9", params);
+		@line_element_10 = DrikaGoToLineSelect("line10", params);
 
 		choice_line2 = GetJSONBool(params, "choice_line2", false);
 		choice_line3 = GetJSONBool(params, "choice_line3", false);
@@ -190,7 +190,7 @@ class DrikaGoToLine : DrikaElement{
 			display_index = drika_indexes[line_element.GetTargetLineIndex()];
 			return false;
 		}else{
-			array<GoToLineSelect@> line_list = {line_element};
+			array<DrikaGoToLineSelect@> line_list = {line_element};
 			if (choice_line2 == true) {line_list.insertLast(line_element_2);}
 			if (choice_line3 == true) {line_list.insertLast(line_element_3);}
 			if (choice_line4 == true) {line_list.insertLast(line_element_4);}
@@ -200,7 +200,7 @@ class DrikaGoToLine : DrikaElement{
 			if (choice_line8 == true) {line_list.insertLast(line_element_8);}
 			if (choice_line9 == true) {line_list.insertLast(line_element_9);}
 			if (choice_line10 == true) {line_list.insertLast(line_element_10);}
-			GoToLineSelect@ random_element = line_list[rand() % line_list.length()];
+			DrikaGoToLineSelect@ random_element = line_list[rand() % line_list.length()];
 
 			current_line = random_element.GetTargetLineIndex();
 			display_index = drika_indexes[random_element.GetTargetLineIndex()];

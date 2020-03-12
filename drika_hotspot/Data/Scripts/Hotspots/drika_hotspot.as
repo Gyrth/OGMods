@@ -1,7 +1,7 @@
 #include "drika_json_functions.as"
-#include "animation_group.as"
+#include "drika_animation_group.as"
 #include "hotspots/drika_element.as"
-#include "target_select.as"
+#include "drika_target_select.as"
 #include "drika_go_to_line_select.as"
 #include "hotspots/drika_slow_motion.as"
 #include "hotspots/drika_on_input.as"
@@ -78,8 +78,8 @@ string file_content;
 int ui_snap_scale = 20;
 int unique_id_counter = 0;
 
-array<AnimationGroup@> all_animations;
-array<AnimationGroup@> current_animations;
+array<DrikaAnimationGroup@> all_animations;
+array<DrikaAnimationGroup@> current_animations;
 array<string> active_mods;
 
 const int _movement_state = 0;  // character is moving on the ground
@@ -134,7 +134,7 @@ void LoadPalette(bool use_defaults = false){
 		if(!data.parseString(palette_data)){
 			Log(warning, "Unable to parse the JSON in the palette!");
 		}
-		data.parseFile("Data/Scripts/default_palette.json");
+		data.parseFile("Data/Scripts/drika_default_palette.json");
 	}
 
 	display_colors.resize(drika_element_names.size());
@@ -153,8 +153,8 @@ void LoadPalette(bool use_defaults = false){
 void QueryAnimation(string query){
 	current_animations.resize(0);
 	for(uint i = 0; i < all_animations.size(); i++){
-		AnimationGroup@ current_group = all_animations[i];
-		AnimationGroup new_group(current_group.name);
+		DrikaAnimationGroup@ current_group = all_animations[i];
+		DrikaAnimationGroup new_group(current_group.name);
 		for(uint j = 0; j < current_group.animations.size(); j++){
 			if(ToLowerCase(current_group.animations[j]).findFirst(ToLowerCase(query)) != -1){
 				new_group.AddAnimation(current_group.animations[j]);
@@ -1022,7 +1022,7 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		string group_name = token_iter.GetToken(msg);
 
-		AnimationGroup new_group(group_name);
+		DrikaAnimationGroup new_group(group_name);
 		all_animations.insertLast(@new_group);
 	}else if(token == "drika_dialogue_add_animation"){
 		token_iter.FindNextToken(msg);

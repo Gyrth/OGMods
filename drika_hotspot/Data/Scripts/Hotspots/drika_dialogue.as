@@ -1,4 +1,4 @@
-#include "dialogue_layouts.as";
+#include "drika_dialogue_layouts.as";
 
 enum dialogue_functions	{
 							say = 0,
@@ -82,16 +82,16 @@ class DrikaDialogue : DrikaElement{
 	int choice_4_go_to_line;
 	int choice_5_go_to_line;
 	bool choice_ui_added = false;
-	GoToLineSelect@ choice_1_element;
-	GoToLineSelect@ choice_2_element;
-	GoToLineSelect@ choice_3_element;
-	GoToLineSelect@ choice_4_element;
-	GoToLineSelect@ choice_5_element;
+	DrikaGoToLineSelect@ choice_1_element;
+	DrikaGoToLineSelect@ choice_2_element;
+	DrikaGoToLineSelect@ choice_3_element;
+	DrikaGoToLineSelect@ choice_4_element;
+	DrikaGoToLineSelect@ choice_5_element;
 	array<float> dof_settings;
 	bool update_dof = false;
 	bool enable_look_at_target;
 	bool enable_move_with_target;
-	TargetSelect track_target(this, "track_target");
+	DrikaTargetSelect track_target(this, "track_target");
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -162,11 +162,11 @@ class DrikaDialogue : DrikaElement{
 		choice_4 = GetJSONString(params, "choice_4", "Pick choice nr 4");
 		choice_5 = GetJSONString(params, "choice_5", "Pick choice nr 5");
 
-		@choice_1_element = GoToLineSelect("choice_1_go_to_line", params);
-		@choice_2_element = GoToLineSelect("choice_2_go_to_line", params);
-		@choice_3_element = GoToLineSelect("choice_3_go_to_line", params);
-		@choice_4_element = GoToLineSelect("choice_4_go_to_line", params);
-		@choice_5_element = GoToLineSelect("choice_5_go_to_line", params);
+		@choice_1_element = DrikaGoToLineSelect("choice_1_go_to_line", params);
+		@choice_2_element = DrikaGoToLineSelect("choice_2_go_to_line", params);
+		@choice_3_element = DrikaGoToLineSelect("choice_3_go_to_line", params);
+		@choice_4_element = DrikaGoToLineSelect("choice_4_go_to_line", params);
+		@choice_5_element = DrikaGoToLineSelect("choice_5_go_to_line", params);
 
 		dof_settings = GetJSONFloatArray(params, "dof_settings", {0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
 		enable_look_at_target = GetJSONBool(params, "enable_look_at_target", false);

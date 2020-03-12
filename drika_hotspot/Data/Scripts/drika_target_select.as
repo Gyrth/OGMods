@@ -68,7 +68,7 @@ vec4 GetBatchObjectColor(int object_type){
 	return vec4(1.0);
 }
 
-class TargetSelect{
+class DrikaTargetSelect{
 	int object_id = -1;
 	string reference_string = "drika_reference";
 	string character_team = "team_drika";
@@ -89,7 +89,7 @@ class TargetSelect{
 	DrikaElement@ parent;
 	array<BatchObject@> batch_objects;
 
-	TargetSelect(DrikaElement@ _parent, string tag = ""){
+	DrikaTargetSelect(DrikaElement@ _parent, string tag = ""){
 		@parent = _parent;
 		if(tag != ""){
 			this.tag = tag;

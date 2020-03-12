@@ -124,7 +124,7 @@ class DrikaElement{
 	string line_number;
 	bool deleted = false;
 	string reference_string = "drika_reference";
-	TargetSelect target_select(this);
+	DrikaTargetSelect target_select(this);
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}

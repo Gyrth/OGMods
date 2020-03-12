@@ -1,6 +1,6 @@
 #include "drika_json_functions.as"
-#include "animation_group.as"
-#include "dialogue_layouts.as"
+#include "drika_animation_group.as"
+#include "drika_dialogue_layouts.as"
 #include "drika_ui_element.as"
 #include "drika_ui_grabber.as"
 #include "drika_ui_image.as"
@@ -17,7 +17,7 @@ FontSetup name_font_arial("arial", 70 , HexColor("#CCCCCC"), true);
 FontSetup name_font("edosz", 70 , HexColor("#CCCCCC"), true);
 FontSetup dialogue_font("arial", 50 , HexColor("#CCCCCC"), true);
 FontSetup controls_font("arial", 45 , HexColor("#616161"), true);
-array<AnimationGroup@> all_animations;
+array<DrikaAnimationGroup@> all_animations;
 vec3 camera_position;
 vec3 camera_rotation;
 float camera_zoom;
@@ -1354,7 +1354,7 @@ void ReadAnimationList(){
 		if(active_mods.find(root[list_groups[i]]["Mod ID"].asString()) == -1){
 			continue;
 		}
-		AnimationGroup new_group(list_groups[i]);
+		DrikaAnimationGroup new_group(list_groups[i]);
 		JSONValue animation_list = root[list_groups[i]]["Animations"];
 		for(uint j = 0; j < animation_list.size(); j++){
 			string new_animation = animation_list[j].asString();

@@ -14,7 +14,7 @@ enum ai_goals {
 class DrikaAIControl : DrikaElement{
 	int current_ai_goal;
 	int ai_goal;
-	TargetSelect ai_target(this, "ai_target");
+	DrikaTargetSelect ai_target(this, "ai_target");
 
 	array<ai_goals> goals_with_placeholders = {_investigate_slow, _investigate_urgent};
 

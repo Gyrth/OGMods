@@ -32,10 +32,10 @@ class DrikaCheckCharacterState : DrikaElement{
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
-	TargetSelect known_target(this, "known_target");
+	DrikaTargetSelect known_target(this, "known_target");
 	float proximity_distance;
 	bool continue_if_false = false;
-	GoToLineSelect@ continue_element;
+	DrikaGoToLineSelect@ continue_element;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		state_choice = state_choices(GetJSONInt(params, "state_check", awake));
@@ -43,7 +43,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		equals = GetJSONBool(params, "equals", true);
 		proximity_distance = GetJSONFloat(params, "proximity_distance", 1.0);
 		continue_if_false = GetJSONBool(params, "continue_if_false", false);
-		@continue_element = GoToLineSelect("continue_line", params);
+		@continue_element = DrikaGoToLineSelect("continue_line", params);
 
 		target_select.LoadIdentifier(params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;

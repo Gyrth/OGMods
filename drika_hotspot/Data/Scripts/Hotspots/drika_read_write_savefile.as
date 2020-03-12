@@ -19,7 +19,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	additional_conditions condition_count;
 	int current_read_write_mode;
 	int current_condition_count;
-	GoToLineSelect@ continue_element;
+	DrikaGoToLineSelect@ continue_element;
 	bool continue_if_false = false;
 	bool if_any_are_true = false;
 	array<string> mode_choices = {"Read", "Write"};
@@ -28,7 +28,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	DrikaReadWriteSaveFile(JSONValue params = JSONValue()){
 		continue_if_false = GetJSONBool(params, "continue_if_false", false);
 		if_any_are_true = GetJSONBool(params, "if_any_are_true", false);
-		@continue_element = GoToLineSelect("continue_line", params);
+		@continue_element = DrikaGoToLineSelect("continue_line", params);
 		param = GetJSONString(params, "param", "drika_save_param");
 		value = GetJSONString(params, "value", "drika_save_value");
 		param2 = GetJSONString(params, "param2", "drika_save_param_two");
