@@ -188,7 +188,7 @@ class DrikaDialogue : DrikaElement{
 
 	void PostInit(){
 		UpdateActorName();
-		if(!duplicating_hotspot && dialogue_function == choice){
+		if(duplicating_hotspot && dialogue_function == choice){
 			GetTargetElement();
 		}
 	}
