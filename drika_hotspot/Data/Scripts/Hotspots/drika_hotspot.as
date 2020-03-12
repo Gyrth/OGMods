@@ -273,6 +273,9 @@ int GetRegisteredObjectID(string reference){
 
 void Dispose() {
     level.StopReceivingLevelEvents(hotspot.GetID());
+	if(editing && drika_elements.size() > 0){
+		GetCurrentElement().EditDone();
+	}
 	if(GetInputDown(0, "delete")){
 		for(uint i = 0; i < drika_elements.size(); i++){
 			drika_elements[i].Delete();
@@ -568,6 +571,7 @@ void DrawEditor(){
 			}
 			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				if(drika_elements.size() > 0){
+					GetCurrentElement().EditDone();
 					array<int> sorted_selected = multi_select;
 					sorted_selected.sortAsc();
 					for(uint i = 0; i < sorted_selected.size(); i++){
@@ -581,6 +585,7 @@ void DrawEditor(){
 						multi_select = {current_line};
 						display_index = drika_indexes[current_line];
 					}
+					GetCurrentElement().StartEdit();
 				}
 			}
 			if(ImGui_IsItemHovered()){
