@@ -2,6 +2,7 @@
 #include "animation_group.as"
 #include "hotspots/drika_element.as"
 #include "target_select.as"
+#include "drika_go_to_line_select.as"
 #include "hotspots/drika_slow_motion.as"
 #include "hotspots/drika_on_input.as"
 #include "hotspots/drika_set_morph_target.as"
