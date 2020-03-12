@@ -125,6 +125,7 @@ class DrikaElement{
 	bool deleted = false;
 	string reference_string = "drika_reference";
 	DrikaTargetSelect target_select(this);
+	int export_index = -1;
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}
@@ -154,6 +155,14 @@ class DrikaElement{
 
 	~DrikaElement(){
 		/* Log(warning, "Deleted " + GetDisplayString()); */
+	}
+
+	void SetExportIndex(int _index){
+		export_index = _index;
+	}
+
+	void ClearExportIndex(){
+		export_index = -1;
 	}
 
 	bool ConnectTo(Object @other){

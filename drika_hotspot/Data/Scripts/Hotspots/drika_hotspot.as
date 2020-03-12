@@ -58,6 +58,8 @@ array<ObjectReference@> object_references;
 string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
 bool duplicating_hotspot = false;
 bool duplicating_function = false;
+bool exporting = false;
+bool importing = false;
 float image_scale;
 vec4 image_tint;
 string image_path;
@@ -77,6 +79,7 @@ array<int> multi_select;
 string file_content;
 int ui_snap_scale = 20;
 int unique_id_counter = 0;
+array<DrikaElement@> imported_elements;
 
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;
@@ -332,14 +335,16 @@ void Update(){
 		}
 		post_init_queue.resize(0);
 
-		if(element_added){
+		if(element_added || importing){
 			element_added = false;
+			ReorderElements();
 			GetCurrentElement().StartEdit();
 			Save();
 		}
 
 		duplicating_hotspot = false;
 		duplicating_function = false;
+		importing = false;
 		return;
 	}
 
@@ -557,13 +562,17 @@ void DrawEditor(){
 			}
 			if(ImGui_BeginMenu("Import/Export")){
 				if(ImGui_MenuItem("Export to file")){
+					exporting = true;
 					ExportToFile();
+					exporting = false;
 				}
 				if(ImGui_MenuItem("Import from file")){
 					ImportFromFile();
 				}
 				if(ImGui_MenuItem("Copy to clipboard")){
+					exporting = true;
 					CopyToClipBoard();
+					exporting = false;
 				}
 				if(ImGui_MenuItem("Paste from clipboard")){
 					PasteFromClipboard();
@@ -623,8 +632,6 @@ void DrawEditor(){
 							current_line = i;
 						}
 					}
-
-					ReorderElements();
 
 					element_added = true;
 				}
@@ -869,9 +876,17 @@ void ExportToFile(){
 		}
 
 		for(uint i = 0; i < target_indexes.size(); i++){
+			drika_elements[target_indexes[i]].SetExportIndex(i);
+		}
+
+		for(uint i = 0; i < target_indexes.size(); i++){
 			JSONValue function_data = drika_elements[target_indexes[i]].GetSaveData();
 			function_data["function"] = JSONValue(drika_elements[target_indexes[i]].drika_element_type);
 			functions.append(function_data);
+		}
+
+		for(uint i = 0; i < target_indexes.size(); i++){
+			drika_elements[target_indexes[i]].ClearExportIndex();
 		}
 
 		data.getRoot()["functions"] = functions;
@@ -895,9 +910,17 @@ void CopyToClipBoard(){
 	}
 
 	for(uint i = 0; i < target_indexes.size(); i++){
+		drika_elements[target_indexes[i]].SetExportIndex(i);
+	}
+
+	for(uint i = 0; i < target_indexes.size(); i++){
 		JSONValue function_data = drika_elements[target_indexes[i]].GetSaveData();
 		function_data["function"] = JSONValue(drika_elements[target_indexes[i]].drika_element_type);
 		functions.append(function_data);
+	}
+
+	for(uint i = 0; i < target_indexes.size(); i++){
+		drika_elements[target_indexes[i]].ClearExportIndex();
 	}
 
 	data.getRoot()["functions"] = functions;
@@ -1086,6 +1109,8 @@ void InterpImportData(string import_data){
 	JSON data;
 	duplicating_hotspot = true;
 	array<int> created_indexes;
+	importing = true;
+	imported_elements.resize(0);
 
 	if(!data.parseString(import_data)){
 		Log(warning, "Unable to parse the JSON in the Script Data!");
@@ -1099,6 +1124,7 @@ void InterpImportData(string import_data){
 			drika_indexes.insertAt(start_index + i, drika_elements.size() - 1);
 			created_indexes.insertLast(start_index + i);
 			post_init_queue.insertLast(@new_element);
+			imported_elements.insertLast(@new_element);
 		}
 	}
 
@@ -1110,8 +1136,14 @@ void InterpImportData(string import_data){
 	multi_select = created_indexes;
 	current_line = multi_select[multi_select.size() - 1];
 	display_index = drika_indexes[current_line];
+}
 
-	ReorderElements();
+DrikaElement@ GetImportElement(int _index){
+	if(int(imported_elements.size()) > _index){
+		return imported_elements[_index];
+	}else{
+		return null;
+	}
 }
 
 void HandleEvent(string event, MovementObject @mo){

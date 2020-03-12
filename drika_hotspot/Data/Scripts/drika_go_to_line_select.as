@@ -1,25 +1,48 @@
 class DrikaGoToLineSelect{
 	string name;
+	int import_index;
 	int index;
 	DrikaElement@ target_element;
 
 	DrikaGoToLineSelect(string _name, JSONValue params = JSONValue()){
 		name = _name;
 		index = GetJSONInt(params, name, 0);
+		import_index = GetJSONInt(params, name + "_import_index", -1);
 		if(duplicating_function){
-			@target_element = drika_elements[drika_indexes[index]];
+			GetTargetElement();
 		}
 	}
 
 	void PostInit(){
-		if(duplicating_hotspot || !duplicating_function){
-			@target_element = drika_elements[drika_indexes[index]];
+		if(importing){
+			if(import_index != -1){
+				//Get the element from the imported functions.
+				@target_element = GetImportElement(import_index);
+			}else{
+				//However if the target is not included in the import data, try to get the element on the same index.
+				GetTargetElement();
+			}
+		}else if(duplicating_hotspot || !duplicating_function){
+			GetTargetElement();
 		}
+	}
+
+	void GetTargetElement(){
+		if(int(drika_indexes.size()) > index){
+			if(int(drika_elements.size()) > drika_indexes[index]){
+				@target_element = drika_elements[drika_indexes[index]];
+				return;
+			}
+		}
+		@target_element = null;
 	}
 
 	void SaveGoToLine(JSONValue &inout data){
 		if(@target_element != null){
 			data[name] = JSONValue(target_element.index);
+			if(exporting){
+				data[name + "_import_index"] = JSONValue(target_element.export_index);
+			}
 		}
 	}
 
