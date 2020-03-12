@@ -150,6 +150,7 @@ class DrikaElement{
 	void SetIndex(int _index){
 		index = _index;
 	}
+	void ReorderDone(){}
 
 	~DrikaElement(){
 		/* Log(warning, "Deleted " + GetDisplayString()); */

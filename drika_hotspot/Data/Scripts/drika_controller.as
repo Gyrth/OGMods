@@ -5,6 +5,7 @@
 #include "drika_ui_grabber.as"
 #include "drika_ui_image.as"
 #include "drika_ui_text.as"
+#include "drika_ui_font.as"
 
 bool animating_camera = false;
 bool has_camera_control = false;
@@ -818,7 +819,7 @@ void ReceiveMessage(string msg){
 	}
 	string token = token_iter.GetToken(msg);
 
-	Log(warning, token);
+	/* Log(warning, token); */
 	if(token == "animating_camera"){
 		token_iter.FindNextToken(msg);
 		string enable = token_iter.GetToken(msg);
@@ -957,7 +958,6 @@ void ReceiveMessage(string msg){
 			//Remove the Data/ in the beginning of the path.
 			split_path.removeAt(0);
 			avatar_path = join(split_path, "/");
-			Log(warning, "Avatar path " + avatar_path);
 		}
 
 		bool settings_found = false;
@@ -1236,6 +1236,20 @@ void ReceiveMessage(string msg){
 			@current_ui_element = @text;
 			ui_elements.insertLast(text);
 		}
+	}else if(token == "drika_ui_add_font"){
+		token_iter.FindNextToken(msg);
+		string json_string = token_iter.GetToken(msg);
+
+		JSON data;
+
+		if(!data.parseString(json_string)){
+			Log(warning, "Unable to parse the JSON in the UI JSON Data!");
+		}else{
+			JSONValue json_data = data.getRoot();
+			DrikaUIFont font(json_data);
+			@current_ui_element = @font;
+			ui_elements.insertLast(font);
+		}
 	}else if(token == "drika_ui_clear"){
 		for(uint i = 0; i < ui_elements.size(); i++){
 			ui_elements[i].Delete();
@@ -1365,7 +1379,6 @@ void Update(){
 			}else if(message.name == "drika_dialogue_choice_pick"){
 				hotspot_obj.ReceiveScriptMessage("drika_ui_event drika_dialogue_choice_pick " + message.getInt(0));
 			}else if(message.name == "grabber_activate"){
-				Log(warning, "grabber_activate " + message.getString(0));
 				if(!grabber_dragging){
 					@current_grabber = current_ui_element.GetGrabber(message.getString(0));
 				}
@@ -1427,8 +1440,6 @@ void UpdateGrabber(){
 				vec2 difference = (new_snap_position - current_grabber_position);
 				int direction_x = (difference.x > 0.0) ? 1 : -1;
 				int direction_y = (difference.y > 0.0) ? 1 : -1;
-
-				Log(warning, "" + click_position.y);
 
 				if(current_grabber.grabber_type == scaler){
 					if(current_grabber_position.x != new_snap_position.x){

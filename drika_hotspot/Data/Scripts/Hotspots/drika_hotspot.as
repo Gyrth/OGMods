@@ -956,6 +956,11 @@ void ReorderElements(){
 			current_element.line_number += " ";
 		}
 	}
+
+	for(uint index = 0; index < drika_indexes.size(); index++){
+		DrikaElement@ current_element = drika_elements[drika_indexes[index]];
+		current_element.ReorderDone();
+	}
 }
 
 void InsertElement(DrikaElement@ new_element){
@@ -1099,13 +1104,6 @@ void InterpImportData(string import_data){
 	multi_select = created_indexes;
 	current_line = multi_select[multi_select.size() - 1];
 	display_index = drika_indexes[current_line];
-
-	string log_message;
-	for(uint i = 0; i < multi_select.size(); ++i){
-		log_message += " " + multi_select[i];
-	}
-	Log(warning, "log_message " + log_message);
-	Log(warning, "current " + current_line);
 
 	ReorderElements();
 }

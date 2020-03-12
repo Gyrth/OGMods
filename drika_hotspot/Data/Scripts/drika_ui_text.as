@@ -1,24 +1,23 @@
 class DrikaUIText : DrikaUIElement{
 	IMDivider@ holder;
 	array<IMText@> text_elements;
-	array<string> content;
-	string joined_content;
-	string display_content;
-	int whole_length = 0;
+	array<string> split_content;
+	string text_content;
 	ivec2 position;
 	float rotation;
 	DrikaUIGrabber@ grabber_center;
 	string holder_name;
+	DrikaUIFont@ font_element = null;
 
 	DrikaUIText(JSONValue params = JSONValue()){
 		drika_ui_element_type = drika_ui_text;
 
-		string original_content = GetJSONString(params, "text_content", "");
+		text_content = GetJSONString(params, "text_content", "");
+		split_content = text_content.split("\n");
 		rotation = GetJSONFloat(params, "rotation", 0.0);
 		position = GetJSONIVec2(params, "position", ivec2());
-		content = original_content.split("\\n");
-		joined_content = join(content, "\n");
-		display_content = join(content, " ");
+
+		@font_element = cast<DrikaUIFont@>(GetUIElement(GetJSONString(params, "font_id", "")));
 
 		ui_element_identifier = GetJSONString(params, "ui_element_identifier", "");
 		PostInit();
@@ -48,8 +47,11 @@ class DrikaUIText : DrikaUIElement{
 			rotation = atof(instruction[1]);
 			SetNewText();
 		}else if(instruction[0] == "set_content"){
-			joined_content = instruction[1];
-			content = joined_content.split("\n");
+			text_content = instruction[1];
+			split_content = text_content.split("\n");
+			SetNewText();
+		}else if(instruction[0] == "font_changed"){
+			@font_element = cast<DrikaUIFont@>(GetUIElement(instruction[1]));
 			SetNewText();
 		}
 		UpdateContent();
@@ -71,25 +73,22 @@ class DrikaUIText : DrikaUIElement{
 		text_elements.resize(0);
 		holder.clear();
 		holder.setSize(vec2(-1,-1));
-		for(uint i = 0; i < content.size(); i++){
+		for(uint i = 0; i < split_content.size(); i++){
 			IMText@ new_text;
-			@new_text = IMText(content[i], default_font);
+			DisposeTextAtlases();
+			if(font_element is null){
+				@new_text = IMText(split_content[i], default_font);
+			}else{
+				@new_text = IMText(split_content[i], font_element.font);
+			}
 			text_elements.insertLast(@new_text);
 			holder.append(new_text);
 			new_text.setRotation(rotation);
 		}
-		whole_length = join(content, "").length();
+
 		// imgui needs to update once or else the position of the grabber isn't calculated correctly.
 		imGUI.update();
 		UpdateContent();
-	}
-
-	void SetProgress(int progress){
-		int shown_characters = progress * whole_length / 100;
-		for(uint i = 0; i < text_elements.size(); i++){
-			text_elements[i].setText(content[i].substr(0, max(0, min(content[i].length(), shown_characters))));
-			shown_characters -= content[i].length();
-		}
 	}
 
 	void UpdateContent(){
@@ -138,9 +137,5 @@ class DrikaUIText : DrikaUIElement{
 
 	void SetPosition(){
 		text_container.moveElement(holder_name, vec2(position.x, position.y));
-	}
-
-	void EditDone(){
-		display_content = join(content, " ");
 	}
 }
