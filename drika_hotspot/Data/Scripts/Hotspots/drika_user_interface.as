@@ -438,9 +438,9 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void StartEdit(){
-		SendLevelMessage("drika_edit_ui", "true", "" + hotspot.GetID());
+		SendLevelMessage("drika_edit_ui", {true, hotspot.GetID(), show_grid, ui_snap_scale});
 		AddUIElement();
-		SendLevelMessage("drika_ui_set_editing", "true");
+		SendLevelMessage("drika_ui_set_editing", {true});
 	}
 
 	void AddUIElement(){
@@ -484,11 +484,13 @@ class DrikaUserInterface : DrikaElement{
 		level.SendMessage(msg);
 	}
 
-	void SendLevelMessage(string param_1, string param_2 = "", string param_3 = ""){
+	void SendLevelMessage(string param_1, array<string> params = {}){
+		//This message goes to the drika_controller levelscript and then to the correct ui_element.
 		string msg = param_1 + " ";
 		msg += ui_element_identifier + " ";
-		msg += param_2 + " ";
-		msg += param_3 + " ";
+		for(uint i = 0; i < params.size(); i++){
+			msg += params[i] + " ";
+		}
 		level.SendMessage(msg);
 	}
 
@@ -516,8 +518,8 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void EditDone(){
-		SendLevelMessage("drika_edit_ui", "false");
-		SendLevelMessage("drika_ui_set_editing", "false");
+		SendLevelMessage("drika_edit_ui", {false});
+		SendLevelMessage("drika_ui_set_editing", {false});
 		UpdateDisplayString();
 	}
 

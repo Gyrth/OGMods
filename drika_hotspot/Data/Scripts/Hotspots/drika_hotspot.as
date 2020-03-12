@@ -291,6 +291,10 @@ void Dispose() {
 void SetParameters(){
 	params.AddIntCheckbox("Debug Current Line", debug_current_line);
 	debug_current_line = (params.GetInt("Debug Current Line") == 1);
+	params.AddIntCheckbox("Show UI Grid", show_grid);
+	show_grid = (params.GetInt("Debug Current Line") == 1);
+	params.AddInt("UI Snap Scale", ui_snap_scale);
+	ui_snap_scale = params.GetInt("UI Snap Scale");
 }
 
 void InterpData(){
@@ -427,6 +431,7 @@ bool reorded = false;
 int display_index = 0;
 bool update_scroll = false;
 bool debug_current_line = false;
+bool show_grid = true;
 float left_over_drag_y = 0.0;
 bool dragging = false;
 bool open_palette = false;
@@ -552,6 +557,16 @@ void DrawEditor(){
 				}
 				if(ImGui_Checkbox("Debug Current Line", debug_current_line)){
 					params.SetInt("Debug Current Line", debug_current_line?1:0);
+				}
+
+				if(ImGui_Checkbox("Show UI Grid", show_grid)){
+					params.SetInt("Show UI Grid", show_grid?1:0);
+					level.SendMessage("drika_set_show_grid " + show_grid);
+				}
+
+				if(ImGui_DragInt("UI Snap Scale", ui_snap_scale, 1.0, 15, 150, "%.0f")){
+					params.SetInt("UI Snap Scale", ui_snap_scale);
+					level.SendMessage("drika_set_ui_snap_scale " + ui_snap_scale);
 				}
 
 				if(ImGui_MenuItem("Configure Palette")){

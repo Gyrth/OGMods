@@ -64,6 +64,7 @@ bool grabber_dragging = false;
 DrikaUIGrabber@ current_grabber = null;
 DrikaUIElement@ current_ui_element = null;
 vec2 click_position;
+bool show_grid = true;
 
 class ActorSettings{
 	string name = "Default";
@@ -790,13 +791,16 @@ void DrawMouseBlockContainer(){
 	ImGui_End();
 }
 
-int snap_scale = 20;
+int ui_snap_scale = 20;
 
 void DrawGrid(){
+	if(!show_grid){
+		return;
+	}
 	vec2 vertical_position = vec2(0.0, 0.0);
 	vec2 horizontal_position = vec2(0.0, 0.0);
-	int nr_horizontal_lines = int(ceil(screenMetrics.screenSize.y / (snap_scale * screenMetrics.GUItoScreenYScale)));
-	int nr_vertical_lines = int(ceil(screenMetrics.screenSize.x / (snap_scale * screenMetrics.GUItoScreenXScale))) + 1;
+	int nr_horizontal_lines = int(ceil(screenMetrics.screenSize.y / (ui_snap_scale * screenMetrics.GUItoScreenYScale)));
+	int nr_vertical_lines = int(ceil(screenMetrics.screenSize.x / (ui_snap_scale * screenMetrics.GUItoScreenXScale))) + 1;
 	vec4 line_color = vec4(0.25, 0.25, 0.25, 1.0);
 	float line_width = 1.0;
 	float thick_line_width = 3.0;
@@ -805,13 +809,13 @@ void DrawGrid(){
 		bool thick_line = i % 10 == 0;
 
 		imGUI.drawBox(vertical_position, vec2(thick_line?thick_line_width:line_width, screenMetrics.screenSize.y), line_color, 0, false);
-		vertical_position += vec2((snap_scale * screenMetrics.GUItoScreenXScale), 0.0);
+		vertical_position += vec2((ui_snap_scale * screenMetrics.GUItoScreenXScale), 0.0);
 	}
 
 	for(int i = 0; i < nr_horizontal_lines; i++){
 		bool thick_line = i % 10 == 0;
 		imGUI.drawBox(horizontal_position, vec2(screenMetrics.screenSize.x, thick_line?thick_line_width:line_width), line_color, 0, false);
-		horizontal_position += vec2(0.0, (snap_scale * screenMetrics.GUItoScreenYScale));
+		horizontal_position += vec2(0.0, (ui_snap_scale * screenMetrics.GUItoScreenYScale));
 	}
 }
 
@@ -1203,12 +1207,17 @@ void ReceiveMessage(string msg){
 		string ui_element_identifier = token_iter.GetToken(msg);
 
 		token_iter.FindNextToken(msg);
-		bool enable = token_iter.GetToken(msg) == "true";
+		editing_ui = token_iter.GetToken(msg) == "true";
 
-		editing_ui = enable;
 		if(editing_ui){
 			token_iter.FindNextToken(msg);
 			ui_hotspot_id = atoi(token_iter.GetToken(msg));
+
+			token_iter.FindNextToken(msg);
+			show_grid = token_iter.GetToken(msg) == "true";
+
+			token_iter.FindNextToken(msg);
+			ui_snap_scale = max(5, atoi(token_iter.GetToken(msg)));
 		}else{
 			ui_hotspot_id = -1;
 		}
@@ -1288,6 +1297,12 @@ void ReceiveMessage(string msg){
 		}
 
 		GetUIElement(ui_element_identifier).ReadUIInstruction(instruction);
+	}else if(token == "drika_set_show_grid"){
+		token_iter.FindNextToken(msg);
+		show_grid = token_iter.GetToken(msg) == "true";
+	}else if(token == "drika_set_ui_snap_scale"){
+		token_iter.FindNextToken(msg);
+		ui_snap_scale = max(5, atoi(token_iter.GetToken(msg)));
 	}
 }
 
@@ -1433,12 +1448,12 @@ void UpdateGrabber(){
 			vec2 current_grabber_position = current_grabber.GetPosition();
 			vec2 new_position = current_grabber_position + (imGUI.guistate.mousePosition - click_position);
 
-			bool round_x_direction = (new_position.x % snap_scale > (snap_scale / 2.0))?true:false;
-			bool round_y_direction = (new_position.y % snap_scale > (snap_scale / 2.0))?true:false;
+			bool round_x_direction = (new_position.x % ui_snap_scale > (ui_snap_scale / 2.0))?true:false;
+			bool round_y_direction = (new_position.y % ui_snap_scale > (ui_snap_scale / 2.0))?true:false;
 			vec2 new_snap_position;
-			new_snap_position.x = round_x_direction?ceil(new_position.x / snap_scale):floor(new_position.x / snap_scale);
-			new_snap_position.y = round_y_direction?ceil(new_position.y / snap_scale):floor(new_position.y / snap_scale);
-			new_snap_position *= snap_scale;
+			new_snap_position.x = round_x_direction?ceil(new_position.x / ui_snap_scale):floor(new_position.x / ui_snap_scale);
+			new_snap_position.y = round_y_direction?ceil(new_position.y / ui_snap_scale):floor(new_position.y / ui_snap_scale);
+			new_snap_position *= ui_snap_scale;
 
 			if(current_grabber_position != new_snap_position){
 				vec2 difference = (new_snap_position - current_grabber_position);
