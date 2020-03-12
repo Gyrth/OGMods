@@ -1059,7 +1059,7 @@ void ReceiveMessage(string msg){
 		showing_choice = false;
 		has_camera_control = false;
 		ui_hotspot_id = -1;
-		imGUI.clear();
+		dialogue_container.clear();
 	}else if(token == "drika_dialogue_fade_out_in"){
 		token_iter.FindNextToken(msg);
 		int hotspot_id = atoi(token_iter.GetToken(msg));
