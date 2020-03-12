@@ -793,13 +793,14 @@ void DrawGrid(){
 	vec2 vertical_position = vec2(0.0, 0.0);
 	vec2 horizontal_position = vec2(0.0, 0.0);
 	int nr_horizontal_lines = int(ceil(screenMetrics.screenSize.y / (snap_scale * screenMetrics.GUItoScreenYScale)));
-	int nr_vertical_lines = int(ceil(screenMetrics.screenSize.x / (snap_scale * screenMetrics.GUItoScreenXScale)));
+	int nr_vertical_lines = int(ceil(screenMetrics.screenSize.x / (snap_scale * screenMetrics.GUItoScreenXScale))) + 1;
 	vec4 line_color = vec4(0.25, 0.25, 0.25, 1.0);
 	float line_width = 1.0;
-	float thick_line_width = 2.0;
+	float thick_line_width = 3.0;
 
 	for(int i = 0; i < nr_vertical_lines; i++){
 		bool thick_line = i % 10 == 0;
+
 		imGUI.drawBox(vertical_position, vec2(thick_line?thick_line_width:line_width, screenMetrics.screenSize.y), line_color, 0, false);
 		vertical_position += vec2((snap_scale * screenMetrics.GUItoScreenXScale), 0.0);
 	}
