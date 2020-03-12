@@ -50,8 +50,10 @@ int track_target_id = -1;
 vec3 target_positional_difference = vec3();
 vec3 current_camera_position = vec3();
 bool camera_settings_changed = false;
+vec2 dialogue_size = vec2(2560, 450);
 
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
+IMContainer@ dialogue_container;
 IMContainer@ image_container;
 IMContainer@ text_container;
 IMContainer@ grabber_container;
@@ -106,6 +108,10 @@ void Init(string str){
 
 	imGUI.getMain().setZOrdering(-1);
 
+	@dialogue_container = IMContainer(dialogue_size.x, dialogue_size.y);
+	/* dialogue_container.showBorder(); */
+	imGUI.getMain().addFloatingElement(dialogue_container, "dialogue_container", vec2(0, 1440 - dialogue_size.y));
+
 	@image_container = IMContainer(2560, 1440);
 	imGUI.getMain().addFloatingElement(image_container, "image_container", vec2(0));
 
@@ -126,30 +132,27 @@ void BuildDialogueUI(){
 	ui_created = false;
 	line_counter = 0;
 	DisposeTextAtlases();
-	imGUI.clear();
-	imGUI.setHeaderHeight(225);
-	imGUI.setFooterHeight(450);
-	imGUI.setup();
-	imGUI.setGuides(true);
+	dialogue_container.clear();
+	dialogue_container.setSize(dialogue_size);
 
-	CreateNameTag(imGUI.getFooter());
-	CreateBackground(imGUI.getFooter());
+	CreateNameTag(dialogue_container);
+	CreateBackground(dialogue_container);
 
 	switch(dialogue_layout){
 		case default_layout:
-			DefaultUI();
+			DefaultUI(dialogue_container);
 			break;
 		case simple_layout:
-			SimpleUI();
+			SimpleUI(dialogue_container);
 			break;
 		case breath_of_the_wild_layout:
-			BreathOfTheWildUI();
+			BreathOfTheWildUI(dialogue_container);
 			break;
 		case chrono_trigger_layout:
-			ChronoTriggerUI();
+			ChronoTriggerUI(dialogue_container);
 			break;
 		case fallout_3_green_layout:
-			Fallout3UI();
+			Fallout3UI(dialogue_container);
 			break;
 		default :
 			break;
@@ -196,8 +199,8 @@ void CreateChoiceUI(){
 	SelectChoice(selected_choice);
 }
 
-void DefaultUI(){
-	imGUI.getFooter().setAlignment(CALeft, CACenter);
+void DefaultUI(IMContainer@ parent){
+	parent.setAlignment(CALeft, CACenter);
 
 	IMDivider dialogue_lines_holder_horiz("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_lines_holder_horiz.appendSpacer(100.0);
@@ -231,13 +234,13 @@ void DefaultUI(){
 	controls_divider.append(lmb_continue);
 	controls_divider.append(rtn_skip);
 
-	imGUI.getFooter().addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
-	imGUI.getFooter().setElement(dialogue_lines_holder_horiz);
+	parent.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
+	parent.setElement(dialogue_lines_holder_horiz);
 }
 
-void SimpleUI(){
-	imGUI.getFooter().setAlignment(CACenter, CACenter);
-	/* imGUI.getFooter().showBorder(); */
+void SimpleUI(IMContainer@ parent){
+	parent.setAlignment(CACenter, CACenter);
+	/* parent.showBorder(); */
 
 	IMDivider dialogue_lines_holder_horiz("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
@@ -260,13 +263,13 @@ void SimpleUI(){
 		dialogue_line_holder.setZOrdering(2);
 	}
 
-	imGUI.getFooter().setElement(dialogue_lines_holder_horiz);
+	parent.setElement(dialogue_lines_holder_horiz);
 }
 
-void BreathOfTheWildUI(){
-	imGUI.getFooter().setAlignment(CACenter, CACenter);
-	/* imGUI.getFooter().showBorder(); */
-	imGUI.getFooter().setSizeY(400.0);
+void BreathOfTheWildUI(IMContainer@ parent){
+	parent.setAlignment(CACenter, CACenter);
+	/* parent.showBorder(); */
+	parent.setSizeY(400.0);
 
 	IMDivider dialogue_lines_holder_horiz("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
@@ -289,13 +292,13 @@ void BreathOfTheWildUI(){
 		dialogue_line_holder.setZOrdering(2);
 	}
 
-	imGUI.getFooter().setElement(dialogue_lines_holder_horiz);
+	parent.setElement(dialogue_lines_holder_horiz);
 }
 
-void ChronoTriggerUI(){
-	imGUI.getFooter().setAlignment(CACenter, CABottom);
-	/* imGUI.getFooter().showBorder(); */
-	imGUI.getFooter().setSizeY(450.0);
+void ChronoTriggerUI(IMContainer@ parent){
+	parent.setAlignment(CACenter, CABottom);
+	/* parent.showBorder(); */
+	parent.setSizeY(450.0);
 
 	IMContainer dialogue_holder(1500, 300);
 	dialogue_holder.setAlignment(CALeft, CATop);
@@ -323,13 +326,13 @@ void ChronoTriggerUI(){
 		dialogue_line_holder.setZOrdering(2);
 	}
 
-	imGUI.getFooter().setElement(dialogue_holder);
+	parent.setElement(dialogue_holder);
 }
 
-void Fallout3UI(){
-	imGUI.getFooter().setAlignment(CACenter, CABottom);
-	/* imGUI.getFooter().showBorder(); */
-	imGUI.getFooter().setSizeY(450.0);
+void Fallout3UI(IMContainer@ parent){
+	parent.setAlignment(CACenter, CABottom);
+	/* parent.showBorder(); */
+	parent.setSizeY(450.0);
 
 	IMContainer dialogue_holder(1400, 400);
 	dialogue_holder.setAlignment(CALeft, CATop);
@@ -357,7 +360,7 @@ void Fallout3UI(){
 		dialogue_line_holder.setZOrdering(2);
 	}
 
-	imGUI.getFooter().setElement(dialogue_holder);
+	parent.setElement(dialogue_holder);
 }
 
 void CreateBackground(IMContainer@ parent){
@@ -867,7 +870,7 @@ void ReceiveMessage(string msg){
 		show_dialogue = false;
 		showing_choice = false;
 		ui_hotspot_id = -1;
-		imGUI.clear();
+		dialogue_container.clear();
 	}else if(token == "drika_dialogue_add_say"){
 		token_iter.FindNextToken(msg);
 		string actor_name = token_iter.GetToken(msg);
@@ -895,8 +898,8 @@ void ReceiveMessage(string msg){
 				@current_actor_settings = new_settings;
 			}
 
-			CreateNameTag(imGUI.getFooter());
-			CreateBackground(imGUI.getFooter());
+			CreateNameTag(dialogue_container);
+			CreateBackground(dialogue_container);
 		}
 
 		PlayLineContinueSound();
