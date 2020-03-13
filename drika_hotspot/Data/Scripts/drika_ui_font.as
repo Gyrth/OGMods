@@ -4,7 +4,6 @@ class DrikaUIFont : DrikaUIElement{
 	vec4 font_color;
 	bool shadowed;
 	array<DrikaUIText@> text_elements;
-	float font_rotation;
 	FontSetup font("edosz", 75, HexColor("#CCCCCC"), true);
 
 	DrikaUIFont(JSONValue params = JSONValue()){
@@ -12,13 +11,11 @@ class DrikaUIFont : DrikaUIElement{
 		font_size = GetJSONInt(params, "font_size", 0);
 		font_color = GetJSONVec4(params, "font_color", vec4());
 		shadowed = GetJSONBool(params, "shadowed", false);
-		font_rotation = GetJSONFloat(params, "font_rotation", 0.0);
 
 		font.fontName = font_name;
 		font.size = font_size;
 		font.color = font_color;
 		font.shadowed = shadowed;
-		font.rotation = font_rotation;
 		ui_element_identifier = GetJSONString(params, "ui_element_identifier", "");
 	}
 
@@ -39,9 +36,6 @@ class DrikaUIFont : DrikaUIElement{
 		}else if(instruction[0] == "set_font_size"){
 			font_size = atoi(instruction[1]);
 			font.size = font_size;
-		}else if(instruction[0] == "set_font_rotation"){
-			font_rotation = atof(instruction[1]);
-			font.rotation = font_rotation;
 		}
 	}
 }
