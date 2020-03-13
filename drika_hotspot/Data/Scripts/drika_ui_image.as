@@ -99,6 +99,26 @@ class DrikaUIImage : DrikaUIElement{
 		}else if(instruction[0] == "set_z_order"){
 			index = atoi(instruction[1]);
 			SetZOrder();
+		}else if(instruction[0] == "add_update_behaviour"){
+			if(instruction[1] == "fade_in"){
+				int duration = atoi(instruction[2]);
+				int tween_type = atoi(instruction[3]);
+				string name = instruction[4];
+
+				IMFadeIn new_fade(duration, IMTweenType(tween_type));
+				image.addUpdateBehavior(new_fade, name);
+			}else if(instruction[1] == "move_in"){
+				int duration = atoi(instruction[2]);
+				vec2 offset(atoi(instruction[3]), atoi(instruction[4]));
+				int tween_type = atoi(instruction[5]);
+				string name = instruction[6];
+
+				IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
+				image.addUpdateBehavior(new_move, name);
+			}
+		}else if(instruction[0] == "remove_update_behaviour"){
+			string name = instruction[1];
+			image.removeUpdateBehavior(name);
 		}
 		UpdateContent();
 	}

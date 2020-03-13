@@ -7,6 +7,42 @@ enum ui_functions	{
 						ui_move_in = 5
 					}
 
+array<string> tween_types = {
+								"linearTween",
+							    "inQuadTween",
+							    "outQuadTween",
+							    "inOutQuadTween",
+							    "outInQuadTween",
+							    "inCubicTween",
+							    "outCubicTween",
+							    "inOutCubicTween",
+							    "outInCubicTween",
+							    "inQuartTween",
+							    "outQuartTween",
+							    "inOutQuartTween",
+							    "outInQuartTween",
+							    "inQuintTween",
+							    "outQuintTween",
+							    "inOutQuintTween",
+							    "outInQuintTween",
+							    "inSineTween",
+							    "outSineTween",
+							    "inOutSineTween",
+							    "outInSineTween",
+							    "inExpoTween",
+							    "outExpoTween",
+							    "inOutExpoTween",
+							    "outInExpoTween",
+							    "inCircTween",
+							    "outCircTween",
+							    "inOutCircTween",
+							    "outInCircTween",
+							    "outBounceTween",
+							    "inBounceTween",
+							    "inOutBounceTween",
+    							"outInBounceTween"
+							};
+
 class DrikaUserInterface : DrikaElement{
 	ui_functions ui_function;
 	int current_ui_function;
@@ -30,7 +66,11 @@ class DrikaUserInterface : DrikaElement{
 	float font_rotation;
 	bool shadowed;
 	DrikaUserInterface@ font_element = null;
+	DrikaUserInterface@ fade_move_element = null;
 	array<DrikaUserInterface@> text_elements;
+	int behaviour_duration;
+	int tween_type;
+	ivec2 move_in_offset;
 
 	array<string> ui_function_names =	{
 											"Clear",
@@ -60,6 +100,10 @@ class DrikaUserInterface : DrikaElement{
 		shadowed = GetJSONBool(params, "shadowed", true);
 		font_rotation = GetJSONFloat(params, "font_rotation", 0.0);
 
+		move_in_offset = GetJSONIVec2(params, "move_in_offset", ivec2(100, 100));
+		behaviour_duration = GetJSONInt(params, "behaviour_duration", 1000);
+		tween_type = GetJSONInt(params, "tween_type", 0);
+
 		text_content = GetJSONString(params, "text_content", "Example Text");
 		ui_element_identifier = GetUniqueID();
 		Log(warning, "Unique ID " + ui_element_identifier);
@@ -75,7 +119,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void UpdateExternalResource(){
 		if(ui_function == ui_text){
-			DrikaUserInterface@ new_font_element = GetPreviousUIElementOfType(ui_font);
+			DrikaUserInterface@ new_font_element = GetPreviousUIElementOfType({ui_font});
 			if(new_font_element !is font_element){
 				if(font_element !is null){
 					font_element.RemoveTextElement(this);
@@ -93,6 +137,30 @@ class DrikaUserInterface : DrikaElement{
 					}
 				}
 			}
+		}else if(ui_function == ui_fade_in || ui_function == ui_move_in){
+			DrikaUserInterface@ new_ui_element = GetPreviousUIElementOfType({ui_text, ui_image});
+
+			if(new_ui_element !is fade_move_element){
+				SendRemoveUpdatebehaviour();
+				@fade_move_element = @new_ui_element;
+				SendAddUpdateBehaviour();
+			}
+		}
+	}
+
+	void SendAddUpdateBehaviour(){
+		if(fade_move_element !is null){
+			if(ui_function == ui_fade_in){
+				fade_move_element.SendUIInstruction("add_update_behaviour", {"fade_in", behaviour_duration, tween_type, ui_element_identifier});
+			}else if(ui_function == ui_move_in){
+				fade_move_element.SendUIInstruction("add_update_behaviour", {"move_in", behaviour_duration, move_in_offset.x, move_in_offset.y, tween_type, ui_element_identifier});
+			}
+		}
+	}
+
+	void SendRemoveUpdatebehaviour(){
+		if(fade_move_element !is null){
+			fade_move_element.SendUIInstruction("remove_update_behaviour", {ui_element_identifier});
 		}
 	}
 
@@ -116,11 +184,11 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
-	DrikaUserInterface@ GetPreviousUIElementOfType(ui_functions function_type){
+	DrikaUserInterface@ GetPreviousUIElementOfType(array<ui_functions> function_types){
 		for(int i = index - 1; i > -1; i--){
 			if(drika_elements[drika_indexes[i]].drika_element_type == drika_user_interface){
 				DrikaUserInterface@ found_ui_element = cast<DrikaUserInterface@>(drika_elements[drika_indexes[i]]);
-				if(found_ui_element.ui_function == function_type){
+				if(function_types.find(found_ui_element.ui_function) != -1){
 					return found_ui_element;
 				}
 			}
@@ -139,15 +207,6 @@ class DrikaUserInterface : DrikaElement{
 		return collection;
 	}
 
-	/* DrikaUserInterface@ GetNextElementOfType(array<drika_element_types> types, int starting_point){
-		for(uint i = starting_point + 1; i < drika_indexes.size(); i++){
-			if(types.find(drika_elements[drika_indexes[i]].drika_element_type) != -1){
-				return drika_elements[drika_indexes[i]];
-			}
-		}
-		return null;
-	} */
-
 	void PostInit(){
 		UpdateDisplayString();
 		UpdateExternalResource();
@@ -155,14 +214,6 @@ class DrikaUserInterface : DrikaElement{
 			AddUIElement();
 		}
 		SendUIInstruction("set_z_order", {index});
-	}
-
-	void ReceiveEditorMessage(array<string> message){
-
-	}
-
-	void ReceiveMessage(string message){
-
 	}
 
 	JSONValue GetSaveData(){
@@ -207,6 +258,15 @@ class DrikaUserInterface : DrikaElement{
 			data["font_color"].append(font_color.a);
 			data["shadowed"] = JSONValue(shadowed);
 			data["font_rotation"] = JSONValue(font_rotation);
+		}else if(ui_function == ui_fade_in){
+			data["behaviour_duration"] = JSONValue(behaviour_duration);
+			data["tween_type"] = JSONValue(tween_type);
+		}else if(ui_function == ui_move_in){
+			data["behaviour_duration"] = JSONValue(behaviour_duration);
+			data["tween_type"] = JSONValue(tween_type);
+			data["move_in_offset"] = JSONValue(JSONarrayValue);
+			data["move_in_offset"].append(move_in_offset.x);
+			data["move_in_offset"].append(move_in_offset.y);
 		}
 		return data;
 	}
@@ -445,6 +505,77 @@ class DrikaUserInterface : DrikaElement{
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
+		}else if(ui_function == ui_fade_in){
+			ImGui_Columns(2, false);
+			float margin = 8.0;
+			float option_name_width = 130.0;
+			float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
+			float slider_width = (second_column_width / 2.0) - margin;
+			ImGui_SetColumnWidth(0, option_name_width);
+			ImGui_SetColumnWidth(1, second_column_width);
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Duration ");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width - margin);
+			if(ImGui_DragInt("##Duration", behaviour_duration, 1.0, 1, 10000)){
+				SendRemoveUpdatebehaviour();
+				SendAddUpdateBehaviour();
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Tween Type ");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width - margin);
+			if(ImGui_Combo("##Tween Type", tween_type, tween_types, tween_types.size())){
+				SendRemoveUpdatebehaviour();
+				SendAddUpdateBehaviour();
+			}
+
+			ImGui_PopItemWidth();
+		}else if(ui_function == ui_move_in){
+			ImGui_Columns(2, false);
+			float margin = 8.0;
+			float option_name_width = 130.0;
+			float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
+			float slider_width = (second_column_width / 2.0) - margin;
+			ImGui_SetColumnWidth(0, option_name_width);
+			ImGui_SetColumnWidth(1, second_column_width);
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Duration ");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width - margin);
+			if(ImGui_DragInt("##Duration", behaviour_duration, 1.0, 1, 10000)){
+				SendRemoveUpdatebehaviour();
+				SendAddUpdateBehaviour();
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Tween Type ");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width - margin);
+			if(ImGui_Combo("##Tween Type", tween_type, tween_types, tween_types.size())){
+				SendRemoveUpdatebehaviour();
+				SendAddUpdateBehaviour();
+			}
+
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Offset ");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width - margin);
+			if(ImGui_DragInt2("##Offset", move_in_offset)){
+				SendRemoveUpdatebehaviour();
+				SendAddUpdateBehaviour();
+			}
+			ImGui_PopItemWidth();
 		}
 	}
 
@@ -458,19 +589,19 @@ class DrikaUserInterface : DrikaElement{
 		if(ui_element_added){
 			return;
 		}
-		ui_element_added = true;
 		if(ui_function == ui_clear){
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
 			for(uint i = 0; i < target_elements.size(); i++){
 				target_elements[i].RemoveUIElement();
 			}
 			Log(warning, "send remove ui");
-			ui_element_added = false;
 		}else if(ui_function == ui_image){
+			ui_element_added = true;
 			JSONValue data = GetSaveData();
 			data["index"] = JSONValue(index);
 			SendJSONMessage("drika_ui_add_image", data);
 		}else if(ui_function == ui_text){
+			ui_element_added = true;
 			JSONValue data = GetSaveData();
 			data["index"] = JSONValue(index);
 			if(font_element is null){
@@ -480,9 +611,13 @@ class DrikaUserInterface : DrikaElement{
 			}
 			SendJSONMessage("drika_ui_add_text", data);
 		}else if(ui_function == ui_font){
+			ui_element_added = true;
 			JSONValue data = GetSaveData();
 			data["index"] = JSONValue(index);
 			SendJSONMessage("drika_ui_add_font", data);
+		}else if(ui_function == ui_fade_in || ui_function == ui_move_in){
+			SendRemoveUpdatebehaviour();
+			SendAddUpdateBehaviour();
 		}
 	}
 
