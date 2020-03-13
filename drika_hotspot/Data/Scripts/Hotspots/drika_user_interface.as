@@ -302,6 +302,7 @@ class DrikaUserInterface : DrikaElement{
 				SendLevelMessage("drika_ui_remove_element");
 				ui_element_added = false;
 				ui_function = ui_functions(current_ui_function);
+				ReorderElements();
 				StartEdit();
 			}
 		}
