@@ -66,7 +66,7 @@ class DrikaUIText : DrikaUIElement{
 
 				for(uint i = 0; i < text_elements.size(); i++){
 					IMFadeIn new_fade(duration, IMTweenType(tween_type));
-					text_elements[i].addUpdateBehavior(new_fade, name);
+					text_elements[i].addUpdateBehavior(new_fade, name + "2");
 				}
 			}else if(instruction[1] == "move_in"){
 				int duration = atoi(instruction[2]);
@@ -79,7 +79,14 @@ class DrikaUIText : DrikaUIElement{
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string name = instruction[1];
-			holder.removeUpdateBehavior(name);
+			if(holder.hasUpdateBehavior(name)){
+				holder.removeUpdateBehavior(name);
+			}
+			for(uint i = 0; i < text_elements.size(); i++){
+				if(text_elements[i].hasUpdateBehavior(name)){
+					text_elements[i].removeUpdateBehavior(name);
+				}
+			}
 		}
 		UpdateContent();
 	}
@@ -132,7 +139,7 @@ class DrikaUIText : DrikaUIElement{
 
 	void SetEditing(bool _editing){
 		editing = _editing;
-		SetNewText();
+		UpdateContent();
 	}
 
 	DrikaUIGrabber@ GetGrabber(string grabber_name){

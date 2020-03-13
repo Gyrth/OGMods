@@ -118,7 +118,9 @@ class DrikaUIImage : DrikaUIElement{
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string name = instruction[1];
-			image.removeUpdateBehavior(name);
+			if(image.hasUpdateBehavior(name)){
+				image.removeUpdateBehavior(name);
+			}
 		}
 		UpdateContent();
 	}

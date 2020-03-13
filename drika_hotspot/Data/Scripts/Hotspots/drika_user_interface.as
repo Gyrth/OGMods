@@ -2,9 +2,7 @@ enum ui_functions	{
 						ui_clear = 0,
 						ui_image = 1,
 						ui_text = 2,
-						ui_font = 3,
-						ui_fade_in = 4,
-						ui_move_in = 5
+						ui_font = 3
 					}
 
 array<string> tween_types = {
@@ -63,22 +61,24 @@ class DrikaUserInterface : DrikaElement{
 	string font_name;
 	int font_size;
 	vec4 font_color;
-	float font_rotation;
 	bool shadowed;
 	DrikaUserInterface@ font_element = null;
-	DrikaUserInterface@ fade_move_element = null;
 	array<DrikaUserInterface@> text_elements;
-	int behaviour_duration;
-	int tween_type;
+
+	bool use_fade_in;
+	int fade_in_duration;
+	int fade_in_tween_type;
+
+	bool use_move_in;
+	int move_in_duration;
+	int move_in_tween_type;
 	ivec2 move_in_offset;
 
 	array<string> ui_function_names =	{
 											"Clear",
 											"Image",
 											"Text",
-											"Font",
-											"Fade In",
-											"Move In"
+											"Font"
 										};
 
 	DrikaUserInterface(JSONValue params = JSONValue()){
@@ -98,11 +98,15 @@ class DrikaUserInterface : DrikaElement{
 		font_size = GetJSONInt(params, "font_size", 75);
 		font_color = GetJSONVec4(params, "font_color", vec4(1.0, 1.0, 1.0, 1.0));
 		shadowed = GetJSONBool(params, "shadowed", true);
-		font_rotation = GetJSONFloat(params, "font_rotation", 0.0);
 
+		use_fade_in = GetJSONBool(params, "use_fade_in", false);
+		fade_in_duration = GetJSONInt(params, "fade_in_duration", 1000);
+		fade_in_tween_type = GetJSONInt(params, "fade_in_tween_type", 0);
+
+		use_move_in = GetJSONBool(params, "use_move_in", false);
+		move_in_duration = GetJSONInt(params, "move_in_duration", 1000);
+		move_in_tween_type = GetJSONInt(params, "move_in_tween_type", 0);
 		move_in_offset = GetJSONIVec2(params, "move_in_offset", ivec2(100, 100));
-		behaviour_duration = GetJSONInt(params, "behaviour_duration", 1000);
-		tween_type = GetJSONInt(params, "tween_type", 0);
 
 		text_content = GetJSONString(params, "text_content", "Example Text");
 		ui_element_identifier = GetUniqueID();
@@ -137,31 +141,21 @@ class DrikaUserInterface : DrikaElement{
 					}
 				}
 			}
-		}else if(ui_function == ui_fade_in || ui_function == ui_move_in){
-			DrikaUserInterface@ new_ui_element = GetPreviousUIElementOfType({ui_text, ui_image});
-
-			if(new_ui_element !is fade_move_element){
-				SendRemoveUpdatebehaviour();
-				@fade_move_element = @new_ui_element;
-				SendAddUpdateBehaviour();
-			}
 		}
 	}
 
 	void SendAddUpdateBehaviour(){
-		if(fade_move_element !is null){
-			if(ui_function == ui_fade_in){
-				fade_move_element.SendUIInstruction("add_update_behaviour", {"fade_in", behaviour_duration, tween_type, ui_element_identifier});
-			}else if(ui_function == ui_move_in){
-				fade_move_element.SendUIInstruction("add_update_behaviour", {"move_in", behaviour_duration, move_in_offset.x, move_in_offset.y, tween_type, ui_element_identifier});
-			}
+		if(use_fade_in){
+			SendUIInstruction("add_update_behaviour", {"fade_in", fade_in_duration, fade_in_tween_type, "fade_" + ui_element_identifier});
+		}
+		if(use_move_in){
+			SendUIInstruction("add_update_behaviour", {"move_in", move_in_duration, move_in_offset.x, move_in_offset.y, move_in_tween_type, "move_" + ui_element_identifier});
 		}
 	}
 
 	void SendRemoveUpdatebehaviour(){
-		if(fade_move_element !is null){
-			fade_move_element.SendUIInstruction("remove_update_behaviour", {ui_element_identifier});
-		}
+		SendUIInstruction("remove_update_behaviour", {"fade_" + ui_element_identifier});
+		SendUIInstruction("remove_update_behaviour", {"move_" + ui_element_identifier});
 	}
 
 	void AddTextElement(DrikaUserInterface@ new_text_element){
@@ -242,12 +236,35 @@ class DrikaUserInterface : DrikaElement{
 			data["position_offset"] = JSONValue(JSONarrayValue);
 			data["position_offset"].append(position_offset.x);
 			data["position_offset"].append(position_offset.y);
+			data["use_fade_in"] = JSONValue(use_fade_in);
+			if(use_fade_in){
+				data["fade_in_duration"] = JSONValue(fade_in_duration);
+				data["fade_in_tween_type"] = JSONValue(fade_in_tween_type);
+			}
+			data["use_move_in"] = JSONValue(use_move_in);
+			if(use_move_in){
+				data["move_in_duration"] = JSONValue(move_in_duration);
+				data["move_in_tween_type"] = JSONValue(move_in_tween_type);
+			}
 		}else if(ui_function == ui_text){
 			data["rotation"] = JSONValue(rotation);
 			data["position"] = JSONValue(JSONarrayValue);
 			data["position"].append(position.x);
 			data["position"].append(position.y);
 			data["text_content"] = JSONValue(text_content);
+			data["use_fade_in"] = JSONValue(use_fade_in);
+			if(use_fade_in){
+				data["fade_in_duration"] = JSONValue(fade_in_duration);
+				data["fade_in_tween_type"] = JSONValue(fade_in_tween_type);
+			}
+			data["use_move_in"] = JSONValue(use_move_in);
+			if(use_move_in){
+				data["move_in_duration"] = JSONValue(move_in_duration);
+				data["move_in_tween_type"] = JSONValue(move_in_tween_type);
+				data["move_in_offset"] = JSONValue(JSONarrayValue);
+				data["move_in_offset"].append(move_in_offset.x);
+				data["move_in_offset"].append(move_in_offset.y);
+			}
 		}else if(ui_function == ui_font){
 			data["font_name"] = JSONValue(font_name);
 			data["font_size"] = JSONValue(font_size);
@@ -257,16 +274,6 @@ class DrikaUserInterface : DrikaElement{
 			data["font_color"].append(font_color.z);
 			data["font_color"].append(font_color.a);
 			data["shadowed"] = JSONValue(shadowed);
-			data["font_rotation"] = JSONValue(font_rotation);
-		}else if(ui_function == ui_fade_in){
-			data["behaviour_duration"] = JSONValue(behaviour_duration);
-			data["tween_type"] = JSONValue(tween_type);
-		}else if(ui_function == ui_move_in){
-			data["behaviour_duration"] = JSONValue(behaviour_duration);
-			data["tween_type"] = JSONValue(tween_type);
-			data["move_in_offset"] = JSONValue(JSONarrayValue);
-			data["move_in_offset"].append(move_in_offset.x);
-			data["move_in_offset"].append(move_in_offset.y);
 		}
 		return data;
 	}
@@ -281,11 +288,18 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float margin = 8.0;
+		float option_name_width = 130.0;
+		float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
+		float slider_width = (second_column_width / 2.0) - margin;
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("UI Function");
 		ImGui_SameLine();
 		if(ImGui_Combo("##UI Function", current_ui_function, ui_function_names, ui_function_names.size())){
 			if(current_ui_function != ui_function){
+				SendRemoveUpdatebehaviour();
 				SendLevelMessage("drika_ui_remove_element");
 				ui_element_added = false;
 				ui_function = ui_functions(current_ui_function);
@@ -309,15 +323,11 @@ class DrikaUserInterface : DrikaElement{
 			}
 
 			ImGui_Columns(2, false);
-			float margin = 8.0;
-			float option_name_width = 130.0;
-			float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
-			float slider_width = (second_column_width / 2.0) - margin;
 			ImGui_SetColumnWidth(0, option_name_width);
 			ImGui_SetColumnWidth(1, second_column_width);
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Position ");
+			ImGui_Text("Position");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
 			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
@@ -331,7 +341,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Size ");
+			ImGui_Text("Size");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
 			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
@@ -345,7 +355,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Position Offset ");
+			ImGui_Text("Position Offset");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
 			if(ImGui_DragInt("##position_offset_x", position_offset.x, 1.0, 0.0f, max_offset.x, "%.0f")){
@@ -359,7 +369,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Size Offset ");
+			ImGui_Text("Size Offset");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
 			if(ImGui_DragInt("##size_offset_x", size_offset.x, 1.0, 1.0f, max_offset.x, "%.0f")){
@@ -373,7 +383,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Rotation ");
+			ImGui_Text("Rotation");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_SliderFloat("###Rotation", rotation, -360, 360, "%.0f")){
@@ -383,7 +393,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Color ");
+			ImGui_Text("Color");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_ColorEdit4("###Color", color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
@@ -394,28 +404,25 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Keep aspect ratio ");
+			ImGui_Text("Keep aspect ratio");
 			ImGui_NextColumn();
 			if(ImGui_Checkbox("##Keep aspect ratio", keep_aspect)){
 				SendUIInstruction("set_aspect_ratio", {keep_aspect});
 			}
+			ImGui_NextColumn();
 		}else if(ui_function == ui_text){
 			ImGui_SetTextBuf(text_content);
-			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, ImGui_GetWindowHeight() / 2.0))){
+			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, ImGui_GetWindowHeight() / 2.0), ImGuiInputTextFlags_AllowTabInput)){
 				text_content = ImGui_GetTextBuf();
 				SendUIInstruction("set_content", {"\"" + text_content + "\""});
 			}
 
 			ImGui_Columns(2, false);
-			float margin = 8.0;
-			float option_name_width = 130.0;
-			float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
-			float slider_width = (second_column_width / 2.0) - margin;
 			ImGui_SetColumnWidth(0, option_name_width);
 			ImGui_SetColumnWidth(1, second_column_width);
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Position ");
+			ImGui_Text("Position");
 
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(slider_width);
@@ -431,13 +438,14 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Rotation ");
+			ImGui_Text("Rotation");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_SliderFloat("###rotation", rotation, -360, 360, "%.0f")){
 				SendUIInstruction("set_rotation", {rotation});
 			}
 			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(ui_function == ui_font){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Font : " + font_name);
@@ -458,15 +466,11 @@ class DrikaUserInterface : DrikaElement{
 			}
 
 			ImGui_Columns(2, false);
-			float margin = 8.0;
-			float option_name_width = 130.0;
-			float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
-			float slider_width = (second_column_width / 2.0) - margin;
 			ImGui_SetColumnWidth(0, option_name_width);
 			ImGui_SetColumnWidth(1, second_column_width);
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Font Color ");
+			ImGui_Text("Font Color");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_ColorEdit4("###Font Color", font_color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
@@ -477,7 +481,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Shadowed ");
+			ImGui_Text("Shadowed");
 			ImGui_NextColumn();
 			if(ImGui_Checkbox("##Shadowed", shadowed)){
 				SendUIInstruction("set_shadowed", {shadowed});
@@ -486,96 +490,99 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Text Size ");
+			ImGui_Text("Text Size");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
 			if(ImGui_DragInt("###Text Size", font_size, 0.5, 1, 100)){
 				SendUIInstruction("set_font_size", {font_size});
 			}
 			ImGui_PopItemWidth();
-
 			ImGui_NextColumn();
+		}
 
+		if(ui_function == ui_image || ui_function == ui_text){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Rotation ");
+			ImGui_Text("Use Fade In");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
-			if(ImGui_SliderFloat("###Rotation", font_rotation, -360, 360, "%.0f")){
-				SendUIInstruction("set_font_rotation", {font_rotation});
-			}
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-		}else if(ui_function == ui_fade_in){
-			ImGui_Columns(2, false);
-			float margin = 8.0;
-			float option_name_width = 130.0;
-			float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
-			float slider_width = (second_column_width / 2.0) - margin;
-			ImGui_SetColumnWidth(0, option_name_width);
-			ImGui_SetColumnWidth(1, second_column_width);
-
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Duration ");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
-			if(ImGui_DragInt("##Duration", behaviour_duration, 1.0, 1, 10000)){
+			if(ImGui_Checkbox("##Use Fade In", use_fade_in)){
 				SendRemoveUpdatebehaviour();
 				SendAddUpdateBehaviour();
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Tween Type ");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
-			if(ImGui_Combo("##Tween Type", tween_type, tween_types, tween_types.size())){
-				SendRemoveUpdatebehaviour();
-				SendAddUpdateBehaviour();
+			if(use_fade_in){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Fade In Duration");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width - margin);
+				if(ImGui_DragInt("##Fade Duration", fade_in_duration, 1.0, 1, 10000)){
+					SendRemoveUpdatebehaviour();
+					SendAddUpdateBehaviour();
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Fade In Tween");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width - margin);
+				if(ImGui_Combo("##Fade Tween Type", fade_in_tween_type, tween_types, tween_types.size())){
+					SendRemoveUpdatebehaviour();
+					SendAddUpdateBehaviour();
+				}
+
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
 			}
 
-			ImGui_PopItemWidth();
-		}else if(ui_function == ui_move_in){
-			ImGui_Columns(2, false);
-			float margin = 8.0;
-			float option_name_width = 130.0;
-			float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
-			float slider_width = (second_column_width / 2.0) - margin;
-			ImGui_SetColumnWidth(0, option_name_width);
-			ImGui_SetColumnWidth(1, second_column_width);
-
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Duration ");
+			ImGui_Text("Use Move In");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width - margin);
-			if(ImGui_DragInt("##Duration", behaviour_duration, 1.0, 1, 10000)){
-				SendRemoveUpdatebehaviour();
-				SendAddUpdateBehaviour();
-			}
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Tween Type ");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
-			if(ImGui_Combo("##Tween Type", tween_type, tween_types, tween_types.size())){
-				SendRemoveUpdatebehaviour();
-				SendAddUpdateBehaviour();
-			}
-
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Offset ");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
-			if(ImGui_DragInt2("##Offset", move_in_offset)){
+			if(ImGui_Checkbox("##Use Move In", use_move_in)){
 				SendRemoveUpdatebehaviour();
 				SendAddUpdateBehaviour();
 			}
 			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			if(use_move_in){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Move In Duration");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width - margin);
+				if(ImGui_DragInt("##Duration", move_in_duration, 1.0, 1, 10000)){
+					SendRemoveUpdatebehaviour();
+					SendAddUpdateBehaviour();
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Move In Tween");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width - margin);
+				if(ImGui_Combo("##Tween Type", move_in_tween_type, tween_types, tween_types.size())){
+					SendRemoveUpdatebehaviour();
+					SendAddUpdateBehaviour();
+				}
+
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Move In Offset");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width - margin);
+				if(ImGui_DragInt2("##Move In Offset", move_in_offset)){
+					SendRemoveUpdatebehaviour();
+					SendAddUpdateBehaviour();
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+			}
 		}
 	}
 
@@ -586,9 +593,6 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void AddUIElement(){
-		if(ui_element_added){
-			return;
-		}
 		if(ui_function == ui_clear){
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
 			for(uint i = 0; i < target_elements.size(); i++){
@@ -596,28 +600,33 @@ class DrikaUserInterface : DrikaElement{
 			}
 			Log(warning, "send remove ui");
 		}else if(ui_function == ui_image){
-			ui_element_added = true;
-			JSONValue data = GetSaveData();
-			data["index"] = JSONValue(index);
-			SendJSONMessage("drika_ui_add_image", data);
-		}else if(ui_function == ui_text){
-			ui_element_added = true;
-			JSONValue data = GetSaveData();
-			data["index"] = JSONValue(index);
-			if(font_element is null){
-				data["font_id"] = JSONValue("");
-			}else{
-				data["font_id"] = JSONValue(font_element.ui_element_identifier);
+			if(!ui_element_added){
+				JSONValue data = GetSaveData();
+				data["index"] = JSONValue(index);
+				SendJSONMessage("drika_ui_add_image", data);
 			}
-			SendJSONMessage("drika_ui_add_text", data);
+			SendRemoveUpdatebehaviour();
+			SendAddUpdateBehaviour();
+			ui_element_added = true;
+		}else if(ui_function == ui_text){
+			if(!ui_element_added){
+				JSONValue data = GetSaveData();
+				data["index"] = JSONValue(index);
+				if(font_element is null){
+					data["font_id"] = JSONValue("");
+				}else{
+					data["font_id"] = JSONValue(font_element.ui_element_identifier);
+				}
+				SendJSONMessage("drika_ui_add_text", data);
+			}
+			ui_element_added = true;
+			SendRemoveUpdatebehaviour();
+			SendAddUpdateBehaviour();
 		}else if(ui_function == ui_font){
 			ui_element_added = true;
 			JSONValue data = GetSaveData();
 			data["index"] = JSONValue(index);
 			SendJSONMessage("drika_ui_add_font", data);
-		}else if(ui_function == ui_fade_in || ui_function == ui_move_in){
-			SendRemoveUpdatebehaviour();
-			SendAddUpdateBehaviour();
 		}
 	}
 
