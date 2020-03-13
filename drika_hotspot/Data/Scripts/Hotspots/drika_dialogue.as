@@ -63,7 +63,6 @@ class DrikaDialogue : DrikaElement{
 	bool anim_mirrored;
 	bool anim_mobile;
 	bool anim_super_mobile;
-	bool anim_swap;
 	bool anim_from_start;
 	bool use_ik;
 	float transition_speed;
@@ -149,7 +148,6 @@ class DrikaDialogue : DrikaElement{
 		anim_mirrored = GetJSONBool(params, "anim_mirrored", false);
 		anim_mobile = GetJSONBool(params, "anim_mobile", false);
 		anim_super_mobile = GetJSONBool(params, "anim_super_mobile", false);
-		anim_swap = GetJSONBool(params, "anim_swap", false);
 		anim_from_start = GetJSONBool(params, "anim_from_start", true);
 		use_ik = GetJSONBool(params, "use_ik", true);
 		transition_speed = GetJSONFloat(params, "transition_speed", 3.0);
@@ -218,7 +216,6 @@ class DrikaDialogue : DrikaElement{
 			data["anim_mirrored"] = JSONValue(anim_mirrored);
 			data["anim_mobile"] = JSONValue(anim_mobile);
 			data["anim_super_mobile"] = JSONValue(anim_super_mobile);
-			data["anim_swap"] = JSONValue(anim_swap);
 			data["anim_from_start"] = JSONValue(anim_from_start);
 			data["use_ik"] = JSONValue(use_ik);
 			data["transition_speed"] = JSONValue(transition_speed);
@@ -726,8 +723,6 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Image(avatar, vec2(50, 50));
 		}else if(dialogue_function == set_actor_animation){
 			ImGui_Checkbox("From Start", anim_from_start);
-			ImGui_SameLine();
-			ImGui_Checkbox("Swap", anim_swap);
 			ImGui_SameLine();
 			ImGui_Checkbox("Mirrored", anim_mirrored);
 			ImGui_SameLine();
@@ -1422,7 +1417,6 @@ class DrikaDialogue : DrikaElement{
 			if(anim_mirrored) flags += " | _ANM_MIRRORED";
 			if(anim_mobile) flags += " | _ANM_MOBILE";
 			if(anim_super_mobile) flags += " | _ANM_SUPER_MOBILE";
-			if(anim_swap) flags += " | _ANM_SWAP";
 			if(anim_from_start) flags += " | _ANM_FROM_START";
 
 			string roll_fade = use_ik ? "roll_ik_fade = 0.0f;" : "roll_ik_fade = 1.0f;";
