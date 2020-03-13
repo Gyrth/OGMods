@@ -128,6 +128,17 @@ class DrikaUserInterface : DrikaElement{
 		return null;
 	}
 
+	array<DrikaUserInterface@> GetAllUIElements(){
+		array<DrikaUserInterface@> collection;
+		for(uint i = 0; i < drika_elements.size(); i++){
+			if(drika_elements[i].drika_element_type == drika_user_interface){
+				DrikaUserInterface@ found_ui_element = cast<DrikaUserInterface@>(drika_elements[i]);
+				collection.insertLast(found_ui_element);
+			}
+		}
+		return collection;
+	}
+
 	/* DrikaUserInterface@ GetNextElementOfType(array<drika_element_types> types, int starting_point){
 		for(uint i = starting_point + 1; i < drika_indexes.size(); i++){
 			if(types.find(drika_elements[drika_indexes[i]].drika_element_type) != -1){
@@ -449,7 +460,12 @@ class DrikaUserInterface : DrikaElement{
 		}
 		ui_element_added = true;
 		if(ui_function == ui_clear){
-			SendLevelMessage("drika_ui_clear");
+			array<DrikaUserInterface@> target_elements = GetAllUIElements();
+			for(uint i = 0; i < target_elements.size(); i++){
+				target_elements[i].RemoveUIElement();
+			}
+			Log(warning, "send remove ui");
+			ui_element_added = false;
 		}else if(ui_function == ui_image){
 			JSONValue data = GetSaveData();
 			data["index"] = JSONValue(index);
@@ -541,9 +557,15 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void Reset(){
-		if(ui_function == ui_image || ui_function == ui_text){
-			SendLevelMessage("drika_ui_remove_element");
-			ui_element_added = false;
+		RemoveUIElement();
+	}
+
+	void RemoveUIElement(){
+		if(ui_element_added){
+			if(ui_function == ui_image || ui_function == ui_text){
+				SendLevelMessage("drika_ui_remove_element");
+				ui_element_added = false;
+			}
 		}
 	}
 

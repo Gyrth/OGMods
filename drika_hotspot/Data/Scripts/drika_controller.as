@@ -1263,11 +1263,6 @@ void ReceiveMessage(string msg){
 			@current_ui_element = @font;
 			ui_elements.insertLast(font);
 		}
-	}else if(token == "drika_ui_clear"){
-		for(uint i = 0; i < ui_elements.size(); i++){
-			ui_elements[i].Delete();
-		}
-		ui_elements.resize(0);
 	}else if(token == "drika_ui_remove_element"){
 		token_iter.FindNextToken(msg);
 		string ui_element_identifier = token_iter.GetToken(msg);
