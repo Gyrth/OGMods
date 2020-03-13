@@ -40,7 +40,7 @@ class DrikaUIText : DrikaUIElement{
 	}
 
 	void ReadUIInstruction(array<string> instruction){
-		Log(warning, "Got instruction " + instruction[0]);
+		/* Log(warning, "Got instruction " + instruction[0]); */
 		if(instruction[0] == "set_position"){
 			position.x = atoi(instruction[1]);
 			position.y = atoi(instruction[2]);

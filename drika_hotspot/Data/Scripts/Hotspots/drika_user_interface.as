@@ -110,7 +110,6 @@ class DrikaUserInterface : DrikaElement{
 
 		text_content = GetJSONString(params, "text_content", "Example Text");
 		ui_element_identifier = GetUniqueID();
-		Log(warning, "Unique ID " + ui_element_identifier);
 
 		drika_element_type = drika_user_interface;
 		has_settings = true;
@@ -598,7 +597,6 @@ class DrikaUserInterface : DrikaElement{
 			for(uint i = 0; i < target_elements.size(); i++){
 				target_elements[i].RemoveUIElement();
 			}
-			Log(warning, "send remove ui");
 		}else if(ui_function == ui_image){
 			if(!ui_element_added){
 				JSONValue data = GetSaveData();
@@ -667,7 +665,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void ReadUIInstruction(array<string> instruction){
 		//This function comes from the ui_element on screen -> drika_controller levelscript -> drika_hotspot -> here.
-		Log(warning, "Got instruction " + instruction[0]);
+		/* Log(warning, "Got instruction " + instruction[0]); */
 		if(instruction[0] == "set_position"){
 			position.x = atoi(instruction[1]);
 			position.y = atoi(instruction[2]);

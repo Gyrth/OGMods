@@ -20,7 +20,7 @@ class DrikaUIFont : DrikaUIElement{
 	}
 
 	void ReadUIInstruction(array<string> instruction){
-		Log(warning, "UIFont got instruction " + instruction[0]);
+		/* Log(warning, "UIFont got instruction " + instruction[0]); */
 		if(instruction[0] == "set_font"){
 			font_name = instruction[1];
 			font.fontName = font_name;

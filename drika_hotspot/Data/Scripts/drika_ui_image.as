@@ -49,8 +49,6 @@ class DrikaUIImage : DrikaUIElement{
 		new_image.setClip(false);
 		image_name = imGUI.getUniqueName("image");
 
-		Log(warning, "Create image");
-
 		@grabber_top_left = DrikaUIGrabber("top_left", -1, -1, scaler);
 		@grabber_top_right = DrikaUIGrabber("top_right", 1, -1, scaler);
 		@grabber_bottom_left = DrikaUIGrabber("bottom_left", -1, 1, scaler);
@@ -64,7 +62,7 @@ class DrikaUIImage : DrikaUIElement{
 	}
 
 	void ReadUIInstruction(array<string> instruction){
-		Log(warning, "Got instruction " + instruction[0]);
+		/* Log(warning, "Got instruction " + instruction[0]); */
 		if(instruction[0] == "set_position"){
 			position.x = atoi(instruction[1]);
 			position.y = atoi(instruction[2]);
