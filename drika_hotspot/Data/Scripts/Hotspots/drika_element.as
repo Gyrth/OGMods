@@ -318,22 +318,22 @@ class DrikaElement{
 		}
 	}
 
-	void DrawGizmo(Object@ target){
+	void DrawGizmo(vec3 translation, quaternion rotation, vec3 scale, bool selected){
 		mat4 gizmo_transform_y;
-		gizmo_transform_y.SetTranslationPart(target.GetTranslation());
-		gizmo_transform_y.SetRotationPart(Mat4FromQuaternion(target.GetRotation()));
+		gizmo_transform_y.SetTranslationPart(translation);
+		gizmo_transform_y.SetRotationPart(Mat4FromQuaternion(rotation));
 		mat4 gizmo_transform_x = gizmo_transform_y;
 		mat4 gizmo_transform_z = gizmo_transform_y;
 
 		mat4 scale_mat_y;
 		scale_mat_y[0] = 1.0;
-		scale_mat_y[5] = target.GetScale().y;
+		scale_mat_y[5] = scale.y;
 		scale_mat_y[10] = 1.0;
 		scale_mat_y[15] = 1.0f;
 		gizmo_transform_y = gizmo_transform_y * scale_mat_y;
 
 		mat4 scale_mat_x;
-		scale_mat_x[0] = target.GetScale().x;
+		scale_mat_x[0] = scale.x;
 		scale_mat_x[5] = 1.0;
 		scale_mat_x[10] = 1.0;
 		scale_mat_x[15] = 1.0f;
@@ -342,12 +342,12 @@ class DrikaElement{
 		mat4 scale_mat_z;
 		scale_mat_z[0] = 1.0;
 		scale_mat_z[5] = 1.0;
-		scale_mat_z[10] = target.GetScale().z;
+		scale_mat_z[10] = scale.z;
 		scale_mat_z[15] = 1.0f;
 		gizmo_transform_z = gizmo_transform_z * scale_mat_z;
 
 		float color_mult = 1.0;
-		if(!target.IsSelected()){
+		if(!selected){
 			color_mult = 0.05;
 		}
 
@@ -356,4 +356,85 @@ class DrikaElement{
 		DebugDrawWireMesh("Data/Models/drika_gizmo_z.obj", gizmo_transform_z, mix(vec4(), vec4(0.0f, 1.0, 0.0f, 0.15f), color_mult), _delete_on_update);
 	}
 
+	void DrawGizmo(Object@ target){
+		DrawGizmo(target.GetTranslation(), target.GetRotation(), target.GetScale(), target.IsSelected());
+	}
+
+	vec3 GetTargetTranslation(Object@ target){
+		if(target.GetType() == _movement_object){
+			MovementObject@ char = ReadCharacterID(target.GetID());
+			return char.position;
+		}else if(target.GetType() == _item_object){
+			ItemObject@ item = ReadItemID(target.GetID());
+			return item.GetPhysicsPosition();
+		}else{
+			return target.GetTranslation();
+		}
+	}
+
+	quaternion GetTargetRotation(Object@ target){
+		if(target.GetType() == _movement_object){
+			//GetFacing() is not available in hotspot scripts.
+			MovementObject@ char = ReadCharacterID(target.GetID());
+			/* vec3 facing = char.GetFacing();
+	        float cur_rotation = atan2(facing.x, facing.z);
+	        quaternion rotation(vec4(0, 1, 0, cur_rotation));
+			return rotation; */
+
+			RiggedObject@ rigged_object = char.rigged_object();
+			Skeleton@ skeleton = rigged_object.skeleton();
+
+			// Get relative chest transformation
+			int chest_bone = skeleton.IKBoneStart("torso");
+			BoneTransform chest_frame_matrix = rigged_object.GetFrameMatrix(chest_bone);
+
+			/* return target.GetRotation(); */
+			return chest_frame_matrix.rotation;
+		}else if(target.GetType() == _item_object){
+			ItemObject@ item = ReadItemID(target.GetID());
+			mat4 physics_transform = item.GetPhysicsTransform();
+			return QuaternionFromMat4(physics_transform.GetRotationPart());
+		}else{
+			return target.GetRotation();
+		}
+	}
+
+	void SetTargetTranslation(Object@ target, vec3 translation){
+		if(target.GetType() == _movement_object){
+			MovementObject@ char = ReadCharacterID(target.GetID());
+			char.position = translation;
+			char.velocity = vec3(0.0, 0.0, 0.0);
+		}else if(target.GetType() == _item_object){
+			ItemObject@ item = ReadItemID(target.GetID());
+			mat4 physics_transform = item.GetPhysicsTransform();
+			physics_transform.SetTranslationPart(translation);
+			item.SetPhysicsTransform(physics_transform);
+			item.SetAngularVelocity(vec3());
+			item.SetLinearVelocity(vec3());
+			item.ActivatePhysics();
+		}else{
+			target.SetTranslation(translation);
+		}
+	}
+
+	void SetTargetRotation(Object@ target, quaternion rotation){
+		if(target.GetType() == _movement_object){
+			MovementObject@ char = ReadCharacterID(target.GetID());
+			vec3 facing = Mult(rotation, vec3(0,0,1));
+			float rot = atan2(facing.x, facing.z) * 180.0f / PI;
+			float new_rotation = floor(rot + 0.5f);
+			vec3 new_facing = Mult(quaternion(vec4(0, 1, 0, new_rotation * 3.1415f / 180.0f)), vec3(1, 0, 0));
+			char.SetRotationFromFacing(new_facing);
+		}else if(target.GetType() == _item_object){
+			ItemObject@ item = ReadItemID(target.GetID());
+			mat4 physics_transform = item.GetPhysicsTransform();
+			physics_transform.SetRotationPart(Mat4FromQuaternion(rotation));
+			item.SetPhysicsTransform(physics_transform);
+			item.SetAngularVelocity(vec3());
+			item.SetLinearVelocity(vec3());
+			item.ActivatePhysics();
+		}else{
+			target.SetRotation(rotation);
+		}
+	}
 }
