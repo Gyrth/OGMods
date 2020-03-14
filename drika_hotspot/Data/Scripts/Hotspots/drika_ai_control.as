@@ -281,29 +281,6 @@ class DrikaAIControl : DrikaElement{
 				case _cut_throat:
 						{
 							command += "executing = false;";
-							command += "MovementObject @char = ReadCharacterID(" + ai_targets[0].GetID() + ");";
-							command += "SetState(_attack_state);";
-							command += "breath_speed += 2.0f;";
-							command += "attack_animation_set = false;";
-							command += "attacking_with_throw = 2;";
-							command += "can_feint = false;";
-							command += "feinting = false;";
-							command += "SetTargetID(char.GetID());";
-							command += "SetTethered(_TETHERED_REARCHOKE);";
-							command += "SetTetherID(char.GetID());";
-							//Executing triggers the throat cutting or just choking.
-							command += "tether_rel = char.position - this_mo.position;";
-							command += "tether_rel.y = 0.0f;";
-							command += "tether_rel = normalize(tether_rel);";
-
-							command += "PlaySoundGroup(\"Data/Sounds/voice/animal2/voice_bunny_jump_land.xml\", char.position, 0.6);";
-							command += "choke_start_time = time;";
-
-							MovementObject@ ai_char = ReadCharacterID(ai_targets[0].GetID());
-							ai_char.Execute("SetTethered(_TETHERED_REARCHOKED);" +
-											"SetTetherID(" + targets[i].GetID() + ");" +
-											"this_mo.MaterialEvent(\"choke_grab\", this_mo.position);");
-							/* command += "executing = true;"; */
 						}
 						break;
 				default:
