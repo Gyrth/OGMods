@@ -8,7 +8,9 @@ enum ai_goals {
 				_escort,
 				_get_weapon,
 				_get_closest_weapon,
-				_throw_weapon
+				_throw_weapon,
+				_choke,
+				_cut_throat
 			};
 
 class DrikaAIControl : DrikaElement{
@@ -27,7 +29,9 @@ class DrikaAIControl : DrikaElement{
 										"Escort",
 										"Get Weapon",
 										"Get Closest Weapon",
-										"Throw Weapon"
+										"Throw Weapon",
+										"Choke",
+										"Cut Throat"
 									};
 
 	DrikaAIControl(JSONValue params = JSONValue()){
@@ -51,7 +55,7 @@ class DrikaAIControl : DrikaElement{
 			ai_target.target_option = id_option | reference_option;
 		}else if(ai_goal == _get_weapon){
 			ai_target.target_option = id_option | reference_option | item_option;
-		}else if(ai_goal == _attack || ai_goal == _escort){
+		}else if(ai_goal == _attack || ai_goal == _escort || ai_goal == _choke || ai_goal == _cut_throat){
 			ai_target.target_option = id_option | name_option | character_option | reference_option | team_option;
 		}else if(ai_goal == _throw_weapon){
 			ai_target.target_option = character_option;
@@ -83,7 +87,7 @@ class DrikaAIControl : DrikaElement{
 				DebugDrawBillboard("Data/Textures/ui/challenge_mode/quit_icon_c.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
 			}
 
-			if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon){
+			if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
 				array<Object@> ai_targets = ai_target.GetTargetObjects();
 
 				for(uint j = 0; j < ai_targets.size(); j++){
@@ -112,7 +116,7 @@ class DrikaAIControl : DrikaElement{
 
 	string GetDisplayString(){
 		string display_text = "AIControl " + target_select.GetTargetDisplayText() + " " + ai_goal_names[ai_goal];
-		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon){
+		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
 			display_text += " " + ai_target.GetTargetDisplayText();
 		}
 		return display_text;
@@ -135,7 +139,7 @@ class DrikaAIControl : DrikaElement{
 			StartSettings();
 		}
 
-		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon){
+		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
 			ImGui_Separator();
 			if(ai_goal == _patrol){
 				ImGui_Text("Pathpoint");
@@ -147,6 +151,10 @@ class DrikaAIControl : DrikaElement{
 				ImGui_Text("Weapon");
 			}else if(ai_goal == _throw_weapon){
 				ImGui_Text("Target Character");
+			}else if(ai_goal == _choke){
+				ImGui_Text("Target Character");
+			}else if(ai_goal == _cut_throat){
+				ImGui_Text("Target Character");
 			}
 			ai_target.DrawSelectTargetUI();
 		}
@@ -157,7 +165,7 @@ class DrikaAIControl : DrikaElement{
 		array<Object@> ai_targets = ai_target.GetTargetObjects();
 		if(targets.size() == 0){return false;}
 
-		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon){
+		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
 			if(ai_targets.size() == 0){
 				return false;
 			}
@@ -241,6 +249,61 @@ class DrikaAIControl : DrikaElement{
 								command += "going_to_throw_item = true;";
 					            command += "going_to_throw_item_time = time;";
 							}
+						}
+						break;
+				case _choke:
+						{
+							command += "MovementObject @char = ReadCharacterID(" + ai_targets[0].GetID() + ");";
+							command += "SetState(_attack_state);";
+							command += "breath_speed += 2.0f;";
+							command += "attack_animation_set = false;";
+							command += "attacking_with_throw = 2;";
+							command += "can_feint = false;";
+							command += "feinting = false;";
+							command += "SetTargetID(char.GetID());";
+							command += "SetTethered(_TETHERED_REARCHOKE);";
+							command += "SetTetherID(char.GetID());";
+							//Executing triggers the throat cutting or just choking.
+							command += "executing = true;";
+							command += "tether_rel = char.position - this_mo.position;";
+							command += "tether_rel.y = 0.0f;";
+							command += "tether_rel = normalize(tether_rel);";
+
+							command += "PlaySoundGroup(\"Data/Sounds/voice/animal2/voice_bunny_jump_land.xml\", char.position, 0.6);";
+							command += "choke_start_time = time;";
+
+							MovementObject@ ai_char = ReadCharacterID(ai_targets[0].GetID());
+							ai_char.Execute("SetTethered(_TETHERED_REARCHOKED);" +
+		                        			"SetTetherID(" + targets[i].GetID() + ");" +
+											"this_mo.MaterialEvent(\"choke_grab\", this_mo.position);");
+						}
+						break;
+				case _cut_throat:
+						{
+							command += "executing = false;";
+							command += "MovementObject @char = ReadCharacterID(" + ai_targets[0].GetID() + ");";
+							command += "SetState(_attack_state);";
+							command += "breath_speed += 2.0f;";
+							command += "attack_animation_set = false;";
+							command += "attacking_with_throw = 2;";
+							command += "can_feint = false;";
+							command += "feinting = false;";
+							command += "SetTargetID(char.GetID());";
+							command += "SetTethered(_TETHERED_REARCHOKE);";
+							command += "SetTetherID(char.GetID());";
+							//Executing triggers the throat cutting or just choking.
+							command += "tether_rel = char.position - this_mo.position;";
+							command += "tether_rel.y = 0.0f;";
+							command += "tether_rel = normalize(tether_rel);";
+
+							command += "PlaySoundGroup(\"Data/Sounds/voice/animal2/voice_bunny_jump_land.xml\", char.position, 0.6);";
+							command += "choke_start_time = time;";
+
+							MovementObject@ ai_char = ReadCharacterID(ai_targets[0].GetID());
+							ai_char.Execute("SetTethered(_TETHERED_REARCHOKED);" +
+											"SetTetherID(" + targets[i].GetID() + ");" +
+											"this_mo.MaterialEvent(\"choke_grab\", this_mo.position);");
+							/* command += "executing = true;"; */
 						}
 						break;
 				default:
