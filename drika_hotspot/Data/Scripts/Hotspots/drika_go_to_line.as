@@ -131,14 +131,25 @@ class DrikaGoToLine : DrikaElement{
 			}
 		}
 
-		if(choice_line2 == false){
+		if(!choice_line2){
 			if(@line_element != null){
-				return "GoToLine " + line_element.GetTargetLineIndex();
+				return "GoToLine " + line_element.GetTargetLineIndex() + " " + ((line_element.target_element is this)?"":line_element.target_element.GetDisplayString());
 			}else{
 				return "GoToLine";
 			}
 		}else{
-			return "Randomly pick from a list of lines to go to ";
+			array<string> line_indexes;
+			if(choice_line2){line_indexes.insertLast("" + line_element_2.GetTargetLineIndex());}
+			if(choice_line3){line_indexes.insertLast("" + line_element_3.GetTargetLineIndex());}
+			if(choice_line4){line_indexes.insertLast("" + line_element_4.GetTargetLineIndex());}
+			if(choice_line5){line_indexes.insertLast("" + line_element_5.GetTargetLineIndex());}
+			if(choice_line6){line_indexes.insertLast("" + line_element_6.GetTargetLineIndex());}
+			if(choice_line7){line_indexes.insertLast("" + line_element_7.GetTargetLineIndex());}
+			if(choice_line8){line_indexes.insertLast("" + line_element_8.GetTargetLineIndex());}
+			if(choice_line9){line_indexes.insertLast("" + line_element_9.GetTargetLineIndex());}
+			if(choice_line10){line_indexes.insertLast("" + line_element_10.GetTargetLineIndex());}
+
+			return "Randomly pick from a list of lines to go to. " + "[" + join(line_indexes, ", ") + "]";
 		}
 	}
 
