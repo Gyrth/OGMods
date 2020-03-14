@@ -275,6 +275,14 @@ class DrikaElement{
 		placeholder.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
 	}
 
+	void RemovePlaceholder(){
+		if(placeholder_id != -1 && ObjectExists(placeholder_id)){
+			QueueDeleteObjectID(placeholder_id);
+		}
+		placeholder_id = -1;
+		@placeholder = null;
+	}
+
 	void RetrievePlaceholder(){
 		if(duplicating_hotspot){
 			if(ObjectExists(placeholder_id)){

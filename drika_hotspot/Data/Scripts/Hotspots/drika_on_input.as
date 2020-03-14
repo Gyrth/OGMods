@@ -253,17 +253,14 @@ class DrikaOnInput : DrikaElement{
 			}
 		}else{
 			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
-				QueueDeleteObjectID(placeholder_id);
-				placeholder_id = -1;
+				RemovePlaceholder();
 			}
 		}
 		DrawPrompt();
 	}
 
 	void Delete(){
-		if(ObjectExists(placeholder_id)){
-			QueueDeleteObjectID(placeholder_id);
-		}
+		RemovePlaceholder();
 	}
 
 	void Reset(){

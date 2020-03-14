@@ -104,8 +104,7 @@ class DrikaAIControl : DrikaElement{
 
 	void PlaceholderCheck(){
 		if(goals_with_placeholders.find(ai_goals(ai_goal)) == -1 && placeholder_id != -1 && ObjectExists(placeholder_id)){
-			QueueDeleteObjectID(placeholder_id);
-			placeholder_id = -1;
+			RemovePlaceholder();
 		}else if(goals_with_placeholders.find(ai_goals(ai_goal)) != -1 && (placeholder_id == -1 || !ObjectExists(placeholder_id))){
 			CreatePlaceholder();
 		}

@@ -179,9 +179,7 @@ class DrikaAnimation : DrikaElement{
 		}
 		DeleteCameraPlaceholder();
 		if(@placeholder != null){
-			QueueDeleteObjectID(placeholder.GetID());
-			placeholder_id = -1;
-			@placeholder = null;
+			RemovePlaceholder();
 		}
 	}
 

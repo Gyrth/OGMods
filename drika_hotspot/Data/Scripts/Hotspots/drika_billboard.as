@@ -66,7 +66,7 @@ class DrikaBillboard : DrikaElement{
 
 	void Delete(){
 		Reset();
-		QueueDeleteObjectID(placeholder_id);
+		RemovePlaceholder();
 	}
 
 	void Reset(){

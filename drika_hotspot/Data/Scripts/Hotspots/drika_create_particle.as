@@ -44,7 +44,7 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	void Delete(){
-		QueueDeleteObjectID(placeholder_id);
+		RemovePlaceholder();
 	}
 
 	string GetDisplayString(){

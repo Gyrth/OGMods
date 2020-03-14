@@ -116,7 +116,7 @@ class DrikaPlaySound : DrikaElement{
 
 	void Delete(){
 		Reset();
-		QueueDeleteObjectID(placeholder_id);
+		RemovePlaceholder();
 	}
 
 	string GetDisplayString(){
@@ -201,8 +201,7 @@ class DrikaPlaySound : DrikaElement{
 			}
 		}else{
 			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
-				QueueDeleteObjectID(placeholder_id);
-				placeholder_id = -1;
+				RemovePlaceholder();
 			}
 		}
 	}

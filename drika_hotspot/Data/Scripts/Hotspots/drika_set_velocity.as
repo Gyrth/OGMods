@@ -27,7 +27,7 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	void Delete(){
-		QueueDeleteObjectID(placeholder_id);
+		RemovePlaceholder();
 	}
 
 	void PostInit(){
