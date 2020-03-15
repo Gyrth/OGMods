@@ -610,7 +610,9 @@ void DrawEditor(){
 						multi_select = {current_line};
 						display_index = drika_indexes[current_line];
 					}
-					GetCurrentElement().StartEdit();
+					if(drika_elements.size() > 0){
+						GetCurrentElement().StartEdit();
+					}
 				}
 			}
 			if(ImGui_IsItemHovered()){
