@@ -315,13 +315,7 @@ class DrikaDialogue : DrikaElement{
 
 		if(dialogue_function == say){
 			display_string += actor_name + " ";
-			string clean_say_text = say_text;
-			clean_say_text = join(clean_say_text.split("\n"), "");
-			if(clean_say_text.length() < 35){
-				display_string += "\"" + clean_say_text + "\"";
-			}else{
-				display_string += "\"" + clean_say_text.substr(0, 35) + "..." + "\"";
-			}
+			display_string += "\"" + say_text + "\"";
 		}else if(dialogue_function == actor_settings){
 			display_string += actor_name + " ";
 		}else if(dialogue_function == set_actor_position){

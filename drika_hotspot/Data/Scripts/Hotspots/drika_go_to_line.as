@@ -133,7 +133,7 @@ class DrikaGoToLine : DrikaElement{
 
 		if(!choice_line2){
 			if(@line_element != null){
-				return "GoToLine " + line_element.GetTargetLineIndex() + " " + ((line_element.target_element is this)?"":line_element.target_element.GetDisplayString());
+				return "GoToLine " + line_element.GetTargetLineIndex() + " " + ((line_element.target_element.drika_element_type == drika_go_to_line)?"":line_element.target_element.GetDisplayString());
 			}else{
 				return "GoToLine";
 			}

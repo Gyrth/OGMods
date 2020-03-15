@@ -12,7 +12,6 @@ class DrikaBillboard : DrikaElement{
 	float image_size = 1.0;
 	vec4 image_color = vec4(1.0);
 	string billboard_text_string;
-	string display_text;
 	float overbright;
 
 	int current_billboard_update_type;
@@ -61,7 +60,6 @@ class DrikaBillboard : DrikaElement{
 
 	void PostInit(){
 		RetrievePlaceholder();
-		SetDisplayText();
 	}
 
 	void Delete(){
@@ -80,7 +78,7 @@ class DrikaBillboard : DrikaElement{
 		if(billboard_type == billboard_image){
 			return "Billboard " + image_path;
 		}else if(billboard_type == billboard_text){
-			return "Billboard " + display_text;
+			return "Billboard " + billboard_text_string;
 		}
 		return "Billboard";
 	}
@@ -132,7 +130,6 @@ class DrikaBillboard : DrikaElement{
 			ImGui_SetTextBuf(billboard_text_string);
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				billboard_text_string = ImGui_GetTextBuf();
-				SetDisplayText();
 			}
 		}
 	}
@@ -165,15 +162,6 @@ class DrikaBillboard : DrikaElement{
 		}else{
 			CreatePlaceholder();
 			return false;
-		}
-	}
-
-	void SetDisplayText(){
-		display_text = join(billboard_text_string.split("\n"), "");
-		if(display_text.length() < 35){
-			display_text = "\"" + display_text + "\"";
-		}else{
-			display_text = "\"" + display_text.substr(0, 35) + "..." + "\"";
 		}
 	}
 

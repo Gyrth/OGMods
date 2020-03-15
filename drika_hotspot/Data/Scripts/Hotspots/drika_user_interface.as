@@ -55,7 +55,6 @@ class DrikaUserInterface : DrikaElement{
 	bool keep_aspect;
 	array<string> content;
 	string text_content;
-	string display_content;
 	string ui_element_identifier;
 	bool ui_element_added = false;
 	string font_name;
@@ -201,7 +200,6 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void PostInit(){
-		UpdateDisplayString();
 		UpdateExternalResource();
 		if(ui_function == ui_font){
 			AddUIElement();
@@ -281,7 +279,7 @@ class DrikaUserInterface : DrikaElement{
 		string display_string = "UserInterface ";
 		display_string += ui_function_names[ui_function] + " ";
 		if(ui_function == ui_text){
-			display_string += display_content;
+			display_string += text_content;
 		}
 		return display_string;
 	}
@@ -679,23 +677,11 @@ class DrikaUserInterface : DrikaElement{
 	void EditDone(){
 		SendLevelMessage("drika_edit_ui", {false});
 		SendLevelMessage("drika_ui_set_editing", {false});
-		UpdateDisplayString();
 	}
 
 	void ApplySettings(){
 		if(ui_function == ui_font){
 			SendFontHasChanged();
-		}
-	}
-
-	void UpdateDisplayString(){
-		if(ui_function == ui_text){
-			display_content = join(text_content.split("\n"), " ");
-			if(display_content.length() < 35){
-				display_content = "\"" + display_content + "\"";
-			}else{
-				display_content = "\"" + display_content.substr(0, 35) + "..." + "\"";
-			}
 		}
 	}
 

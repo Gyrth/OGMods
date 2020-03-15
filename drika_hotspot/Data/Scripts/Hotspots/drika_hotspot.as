@@ -686,7 +686,16 @@ void DrawEditor(){
 			vec4 text_color = drika_elements[item_no].GetDisplayColor();
 			ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 			bool line_selected = display_index == int(item_no) || multi_select.find(i) != -1;
-			if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
+
+			string display_string = drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString();
+			display_string = join(display_string.split("\n"), "");
+			float space_for_characters = ImGui_CalcTextSize(display_string).x;
+
+			if(space_for_characters > ImGui_GetWindowContentRegionWidth()){
+				display_string = display_string.substr(0, int(display_string.length() * (ImGui_GetWindowContentRegionWidth() / space_for_characters)) - 3) + "...";
+			}
+
+			if(ImGui_Selectable(display_string, line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
 				// This item has been selected that is inside multiselect, but no modifier key is pressed.
 				if(multi_select.find(i) != -1 && !dragging && multi_select.size() > 1 && !GetInputDown(0, "lshift") && !GetInputDown(0, "lctrl")){
 					multi_select = {i};
@@ -1242,7 +1251,12 @@ void Draw(){
 		if(!hotspot_enabled){
 			DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.75, 0), "Disabled", 1.0, false, _delete_on_draw);
 		}else{
-			DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.75, 0), GetCurrentElement().GetDisplayString(), 1.0, false, _delete_on_draw);
+			string trimmed_display_string = GetCurrentElement().GetDisplayString();
+			trimmed_display_string = join(trimmed_display_string.split("\n"), "");
+			if(trimmed_display_string.length() > 35){
+				trimmed_display_string = trimmed_display_string.substr(0, 35) + "...";
+			}
+			DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.75, 0), trimmed_display_string, 1.0, false, _delete_on_draw);
 		}
 	}
 	if(show_text){
