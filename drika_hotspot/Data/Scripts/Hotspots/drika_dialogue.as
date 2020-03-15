@@ -1158,15 +1158,9 @@ class DrikaDialogue : DrikaElement{
 
 	bool EndDialogue(){
 		if(level.DialogueCameraControl()){
-			if(!triggered){
-				level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
-				wait_for_fade = true;
-				triggered = true;
-				return false;
-			}else{
-				triggered = false;
-				return true;
-			}
+			level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+			wait_for_fade = true;
+			return false;
 		}else{
 			level.SendMessage("drika_dialogue_end");
 			return true;
