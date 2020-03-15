@@ -1354,6 +1354,9 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SkipWholeDialogue(){
+		say_started = false;
+		say_timer = 0.0;
+		wait_timer = 0.0;
 		while(true){
 			//When ending a dialogue just let it trigger.
 			if(GetCurrentElement().drika_element_type == drika_dialogue){
