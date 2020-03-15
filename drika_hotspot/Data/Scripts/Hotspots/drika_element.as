@@ -284,7 +284,7 @@ class DrikaElement{
 	}
 
 	void RetrievePlaceholder(){
-		if(duplicating_hotspot){
+		if(duplicating_hotspot || duplicating_function){
 			if(ObjectExists(placeholder_id)){
 				//Use the same transform as the original placeholder.
 				Object@ old_placeholder = ReadObjectFromID(placeholder_id);
