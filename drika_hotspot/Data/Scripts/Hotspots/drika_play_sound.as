@@ -135,7 +135,7 @@ class DrikaPlaySound : DrikaElement{
 				new_path = GetUserPickedReadPath("wav", "Data/Sounds");
 			}
 			if(new_path != ""){
-				sound_path = new_path;
+				sound_path = FindShortestPath(new_path);
 				PreviewSound();
 			}
 		}

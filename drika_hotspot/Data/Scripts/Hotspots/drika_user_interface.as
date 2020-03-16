@@ -312,6 +312,7 @@ class DrikaUserInterface : DrikaElement{
 			if(ImGui_Button("Set Image Path")){
 				string new_path = GetUserPickedReadPath("png", "Data/Images");
 				if(new_path != ""){
+					new_path = FindShortestPath(new_path);
 					//Remove the Data/ in the beginning of the path because IMImage starts in Data/.
 					array<string> split_path = new_path.split("/");
 					split_path.removeAt(0);
@@ -451,6 +452,7 @@ class DrikaUserInterface : DrikaElement{
 			if(ImGui_Button("Pick Font")){
 				string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 				if(new_path != ""){
+					new_path = FindShortestPath(new_path);
 					array<string> path_split = new_path.split("/");
 					for(uint i = 0; i < path_split.size(); i++){
 						if(path_split[i].findFirst(".ttf") != -1){

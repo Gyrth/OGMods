@@ -24,7 +24,7 @@ class DrikaLoadLevel : DrikaElement{
 		if(ImGui_Button("Set Level Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Levels");
 			if(new_path != ""){
-				level_path = new_path;
+				level_path = FindShortestPath(new_path);
 			}
 		}
 	}

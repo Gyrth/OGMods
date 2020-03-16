@@ -40,7 +40,7 @@ class DrikaDisplayText : DrikaElement{
 		if(ImGui_Button("Set Font Path")){
 			string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 			if(new_path != ""){
-				font_path = new_path;
+				font_path = FindShortestPath(new_path);
 				ShowText(display_message, font_size, font_path);
 			}
 		}

@@ -51,7 +51,7 @@ class DrikaSetCharacter : DrikaElement{
 		if(ImGui_Button("Set Character Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Characters");
 			if(new_path != ""){
-				character_path = new_path;
+				character_path = FindShortestPath(new_path);
 			}
 		}
 		ImGui_Checkbox("Cache Skeleton Info", cache_skeleton_info);

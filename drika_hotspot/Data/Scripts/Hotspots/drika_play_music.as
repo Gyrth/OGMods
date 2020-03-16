@@ -38,7 +38,7 @@ class DrikaPlayMusic : DrikaElement{
 		if(ImGui_Button("Set Song Path")){
 			string new_path = GetUserPickedReadPath("ogg", "Data/Music");
 			if(new_path != ""){
-				song_path = new_path;
+				song_path = FindShortestPath(new_path);
 				GetSongName();
 				music_path = "Data/Music/" + GetUniqueFileName() + ".xml";
 				WriteMusicXML();
