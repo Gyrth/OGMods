@@ -20,6 +20,10 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	string character_team;
 	int object_id;
 
+	vec3 external_hotspot_translation;
+	quaternion external_hotspot_rotation;
+	vec3 external_hotspot_scale;
+
 	target_character_types target_character_type;
 	hotspot_trigger_types hotspot_trigger_type;
 
@@ -36,6 +40,9 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		character_team = GetJSONString(params, "character_team", "");
 		object_id = GetJSONInt(params, "object_id", -1);
 		external_hotspot = GetJSONBool(params, "external_hotspot", false);
+		external_hotspot_translation = GetJSONVec3(params, "external_hotspot_translation", vec3());
+		external_hotspot_rotation = GetJSONQuaternion(params, "external_hotspot_rotation", quaternion());
+		external_hotspot_scale = GetJSONVec3(params, "external_hotspot_scale", vec3());
 		external_hotspot_id = GetJSONInt(params, "external_hotspot_id", -1);
 		reset_when_false = GetJSONBool(params, "reset_when_false", false);
 
@@ -54,6 +61,27 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		data["external_hotspot"] = JSONValue(external_hotspot);
 		if(external_hotspot){
 			data["external_hotspot_id"] = JSONValue(external_hotspot_id);
+			if(exporting){
+				vec3 translation = external_hotspot_obj.GetTranslation();
+				quaternion rotation = external_hotspot_obj.GetRotation();
+				vec3 scale = external_hotspot_obj.GetScale();
+
+				data["external_hotspot_translation"] = JSONValue(JSONarrayValue);
+				data["external_hotspot_translation"].append(translation.x);
+				data["external_hotspot_translation"].append(translation.y);
+				data["external_hotspot_translation"].append(translation.z);
+
+				data["external_hotspot_rotation"] = JSONValue(JSONarrayValue);
+				data["external_hotspot_rotation"].append(rotation.x);
+				data["external_hotspot_rotation"].append(rotation.y);
+				data["external_hotspot_rotation"].append(rotation.z);
+				data["external_hotspot_rotation"].append(rotation.w);
+
+				data["external_hotspot_scale"] = JSONValue(JSONarrayValue);
+				data["external_hotspot_scale"].append(scale.x);
+				data["external_hotspot_scale"].append(scale.y);
+				data["external_hotspot_scale"].append(scale.z);
+			}
 		}
 		if(hotspot_trigger_type == while_inside || hotspot_trigger_type == while_outside){
 			data["reset_when_false"] = JSONValue(reset_when_false);
@@ -74,6 +102,11 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 				}else{
 					external_hotspot_id = -1;
 				}
+			}else if(importing){
+				CreateExternalHotspot();
+				external_hotspot_obj.SetTranslation(external_hotspot_translation);
+				external_hotspot_obj.SetRotation(external_hotspot_rotation);
+				external_hotspot_obj.SetScale(external_hotspot_scale);
 			}else{
 				if(ObjectExists(external_hotspot_id)){
 					@external_hotspot_obj = ReadObjectFromID(external_hotspot_id);
@@ -82,8 +115,11 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 					CreateExternalHotspot();
 				}
 			}
-			external_hotspot_obj.SetSelected(false);
-			external_hotspot_obj.SetSelectable(false);
+
+			if(external_hotspot_obj !is null){
+				external_hotspot_obj.SetSelected(false);
+				external_hotspot_obj.SetSelectable(false);
+			}
 		}
 	}
 

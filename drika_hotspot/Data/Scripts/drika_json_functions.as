@@ -109,3 +109,11 @@ array<JSONValue> GetJSONValueArray(JSONValue data, string var_name, array<JSONVa
 		return default_value;
 	}
 }
+
+quaternion GetJSONQuaternion(JSONValue data, string var_name, quaternion default_value){
+	if(data.isMember(var_name) && data[var_name].isArray()){
+		return quaternion(data[var_name][0].asFloat(), data[var_name][1].asFloat(), data[var_name][2].asFloat(), data[var_name][3].asFloat());
+	}else{
+		return default_value;
+	}
+}
