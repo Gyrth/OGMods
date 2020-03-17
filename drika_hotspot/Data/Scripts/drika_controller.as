@@ -911,23 +911,28 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		string text = token_iter.GetToken(msg);
 
-		if(text != "\n"){
-			IMText dialogue_text(text + " ", dialogue_font);
-			if(dialogue_cache.size() == 0){
-				dialogue_cache.insertLast("");
+		array<string> split_text = text.split(" ");
+
+		for(uint i = 0; i < split_text.size(); i++){
+			if(split_text[i] != "\n"){
+				IMText dialogue_text(split_text[i] + " ", dialogue_font);
+				if(dialogue_cache.size() == 0){
+					dialogue_cache.insertLast("");
+				}
+				dialogue_cache[dialogue_cache.size() - 1] += split_text[i] + " ";
+				dialogue_text.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
+
+				dialogue_line_holder.append(dialogue_text);
 			}
-			dialogue_cache[dialogue_cache.size() - 1] += text + " ";
-			dialogue_text.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
+			imGUI.update();
 
-			dialogue_line_holder.append(dialogue_text);
-		}
-
-		if(dialogue_line_holder.getSizeX() > 1500.0 || text == "\n"){
-			line_counter += 1;
-			dialogue_cache.insertLast("");
-			@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-			dialogue_lines_holder_vert.append(dialogue_line_holder);
-			dialogue_line_holder.setZOrdering(2);
+			if(dialogue_line_holder.getSizeX() > 1450.0 || split_text[i] == "\n"){
+				line_counter += 1;
+				dialogue_cache.insertLast("");
+				@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+				dialogue_lines_holder_vert.append(dialogue_line_holder);
+				dialogue_line_holder.setZOrdering(2);
+			}
 		}
 	}else if(token == "drika_dialogue_clear_say"){
 		choices.resize(0);
