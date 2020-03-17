@@ -40,9 +40,9 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		character_team = GetJSONString(params, "character_team", "");
 		object_id = GetJSONInt(params, "object_id", -1);
 		external_hotspot = GetJSONBool(params, "external_hotspot", false);
-		external_hotspot_translation = GetJSONVec3(params, "external_hotspot_translation", vec3());
+		external_hotspot_translation = GetJSONVec3(params, "external_hotspot_translation", this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
 		external_hotspot_rotation = GetJSONQuaternion(params, "external_hotspot_rotation", quaternion());
-		external_hotspot_scale = GetJSONVec3(params, "external_hotspot_scale", vec3());
+		external_hotspot_scale = GetJSONVec3(params, "external_hotspot_scale", vec3(0.25));
 		external_hotspot_id = GetJSONInt(params, "external_hotspot_id", -1);
 		reset_when_false = GetJSONBool(params, "reset_when_false", false);
 
