@@ -444,16 +444,15 @@ void SimpleBackground(IMContainer@ parent){
 
 	float bg_alpha = 1.0;
 	float bg_height = 450.0;
-	float extra_width = 500.0;
 
-	IMImage middle_fade("Textures/dialogue_bg_top_fade.png");
-	middle_fade.setSizeX(2560.0 + extra_width);
+	IMImage middle_fade("Textures/dialogue_bg_nametag_faded.png");
+	middle_fade.setSizeX(2560);
 	middle_fade.setSizeY(bg_height);
 	middle_fade.setAlpha(bg_alpha);
 	middle_fade.setClip(false);
 	bg_divider.append(middle_fade);
 
-	parent.addFloatingElement(bg_container, "bg_container", vec2(-(extra_width / 2.0), 0.0), -1);
+	parent.addFloatingElement(bg_container, "bg_container", vec2(0.0), -1);
 }
 
 void BreathOfTheWildBackground(IMContainer@ parent){
@@ -662,8 +661,8 @@ void SimpleNameTag(IMContainer@ parent){
 
 	IMImage name_background("Textures/dialogue_bg_nametag_faded.png");
 	name_background.setClip(false);
-	name_background.setAlpha(0.5);
-	parent.addFloatingElement(nametag_container, "nametag_container", vec2(100, 0), 3);
+	name_background.setAlpha(0.75);
+	parent.addFloatingElement(nametag_container, "nametag_container", vec2(300, -50), 3);
 
 	imGUI.update();
 	name_background.setSize(name_container.getSize());
