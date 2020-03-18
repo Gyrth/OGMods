@@ -104,26 +104,29 @@ array<ReadFileProcess@> read_file_processes;
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
+	@dialogue_container = IMContainer(dialogue_size.x, dialogue_size.y);
+	@image_container = IMContainer(2560, 1440);
+	@text_container = IMContainer(2560, 1440);
+	@grabber_container = IMContainer(2560, 1440);
+	CreateIMGUIContainers();
+}
+
+void CreateIMGUIContainers(){
 	imGUI.setup();
 	imGUI.setBackgroundLayers(1);
 
+	/* imGUI.getMain().showBorder(); */
 	imGUI.getMain().setZOrdering(-1);
 
-	@dialogue_container = IMContainer(dialogue_size.x, dialogue_size.y);
-	/* dialogue_container.showBorder(); */
 	imGUI.getMain().addFloatingElement(dialogue_container, "dialogue_container", vec2(0, 1440 - dialogue_size.y));
-
-	@image_container = IMContainer(2560, 1440);
 	imGUI.getMain().addFloatingElement(image_container, "image_container", vec2(0));
-
-	@text_container = IMContainer(2560, 1440);
 	imGUI.getMain().addFloatingElement(text_container, "text_container", vec2(0));
-
-	@grabber_container = IMContainer(2560, 1440);
 	imGUI.getMain().addFloatingElement(grabber_container, "grabber_container", vec2(0));
 }
 
 void SetWindowDimensions(int width, int height){
+	imGUI.clear();
+	CreateIMGUIContainers();
 	if(show_dialogue){
 		BuildDialogueUI();
 	}
@@ -749,9 +752,8 @@ void Fallout3NameTag(IMContainer@ parent){
 }
 
 void PostScriptReload(){
-	if(show_dialogue){
-		BuildDialogueUI();
-	}
+	imGUI.clear();
+	CreateIMGUIContainers();
 }
 
 void WriteMusicXML(string music_path, string song_name, string song_path){
