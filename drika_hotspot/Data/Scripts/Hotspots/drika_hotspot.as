@@ -41,6 +41,7 @@
 #include "hotspots/drika_user_interface.as"
 
 bool show_editor = false;
+bool run_in_editormode = true;
 bool has_closed = true;
 bool editing = false;
 bool show_name = false;
@@ -295,6 +296,8 @@ void SetParameters(){
 	show_grid = (params.GetInt("Debug Current Line") == 1);
 	params.AddInt("UI Snap Scale", ui_snap_scale);
 	ui_snap_scale = params.GetInt("UI Snap Scale");
+	params.AddIntCheckbox("Run in EditorMode", run_in_editormode);
+	run_in_editormode = (params.GetInt("Run in EditorMode") == 1);
 }
 
 void InterpData(){
@@ -331,6 +334,9 @@ void LaunchCustomGUI(){
 }
 
 void Update(){
+	if(!run_in_editormode && EditorModeActive()){
+		return;
+	}
 	//The post init queue is necessary so that Update is executing it, and not the Draw functions.
 	//The Draw and DrawEditor sometimes can have issues such as spawning hotspots that crash the game.
 	if(post_init_queue.size() > 0){
@@ -557,6 +563,10 @@ void DrawEditor(){
 				}
 				if(ImGui_Checkbox("Debug Current Line", debug_current_line)){
 					params.SetInt("Debug Current Line", debug_current_line?1:0);
+				}
+
+				if(ImGui_Checkbox("Run in EditorMode", run_in_editormode)){
+					params.SetInt("Run in EditorMode", run_in_editormode?1:0);
 				}
 
 				if(ImGui_Checkbox("Show UI Grid", show_grid)){
