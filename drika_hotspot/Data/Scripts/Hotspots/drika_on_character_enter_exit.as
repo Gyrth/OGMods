@@ -272,6 +272,14 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		if(!external_hotspot){
 			CheckEvent(message, param);
 		}
+
+		if(hotspot_trigger_type == while_inside || hotspot_trigger_type == while_outside){
+			//Send the enter/exit events to the next element in case those are used in the next element.
+			if(hotspot_trigger_type == while_inside && InsideCheck() || hotspot_trigger_type == while_outside && !InsideCheck()){
+				DrikaElement@ next_element = drika_elements[drika_indexes[index + 1]];
+				next_element.ReceiveMessage(message, param);
+			}
+		}
 	}
 
 	void ReceiveMessage(string message, int param_1, int param_2){
@@ -279,6 +287,14 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		//Check if the enter/exit signal is from the external hotspot.
 		if(param_2 == external_hotspot_id){
 			CheckEvent(message, param_1);
+		}
+
+		if(hotspot_trigger_type == while_inside || hotspot_trigger_type == while_outside){
+			//Send the enter/exit events to the next element in case those are used in the next element.
+			if(hotspot_trigger_type == while_inside && InsideCheck() || hotspot_trigger_type == while_outside && !InsideCheck()){
+				DrikaElement@ next_element = drika_elements[drika_indexes[index + 1]];
+				next_element.ReceiveMessage(message, param_1, param_2);
+			}
 		}
 	}
 
@@ -335,7 +351,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 				if(current_line == int(drika_indexes.size() - 1)){
 					return true;
 				}
-				DrikaElement@ next_element = drika_elements[drika_indexes[current_line + 1]];
+				DrikaElement@ next_element = drika_elements[drika_indexes[index + 1]];
 				if(next_element.Trigger()){
 					//The next element has finished so go to the next element.
 					current_line += 1;
@@ -347,7 +363,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 						return true;
 					}
 					triggered = false;
-					DrikaElement@ next_element = drika_elements[drika_indexes[current_line + 1]];
+					DrikaElement@ next_element = drika_elements[drika_indexes[index + 1]];
 					next_element.Reset();
 				}
 			}
