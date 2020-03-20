@@ -697,7 +697,7 @@ class DrikaDialogue : DrikaElement{
 			if(ImGui_Button("Pick Avatar")){
 				string new_path = GetUserPickedReadPath("png", "Data/Textures");
 				if(new_path != ""){
-					new_path = FindShortestPath(new_path);
+					new_path = new_path;
 					array<string> split_path = new_path.split(".");
 					string extention = split_path[split_path.size() - 1];
 					if(extention != "jpg" && extention != "png" && extention != "tga"){
@@ -777,7 +777,7 @@ class DrikaDialogue : DrikaElement{
 			if(ImGui_Button("Set Font")){
 				string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 				if(new_path != ""){
-					dialogue_text_font = FindShortestPath(new_path);
+					dialogue_text_font = new_path;
 				}
 			}
 			ImGui_AlignTextToFramePadding();

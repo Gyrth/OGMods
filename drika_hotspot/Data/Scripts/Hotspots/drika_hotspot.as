@@ -971,7 +971,7 @@ void PasteFromClipboard(){
 void ImportFromFile(){
 	string read_path = GetUserPickedReadPath("txt", "Data/Dialogues");
 	if(read_path != ""){
-		read_path = FindShortestPath(read_path);
+		read_path = read_path;
 		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + read_path + " " + "drika_import_from_file" + " " + 0);
 	}
 }

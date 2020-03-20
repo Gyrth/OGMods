@@ -111,7 +111,7 @@ class DrikaBillboard : DrikaElement{
 			if(ImGui_Button("Set Image Path")){
 				string new_path = GetUserPickedReadPath("png", "Data/Images");
 				if(new_path != ""){
-					image_path = FindShortestPath(new_path);
+					image_path = new_path;
 				}
 			}
 			ImGui_AlignTextToFramePadding();

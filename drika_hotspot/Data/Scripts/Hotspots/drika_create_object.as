@@ -47,7 +47,7 @@ class DrikaCreateObject : DrikaElement{
 		if(ImGui_Button("Set Object Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Objects");
 			if(new_path != ""){
-				object_path = FindShortestPath(new_path);
+				object_path = new_path;
 			}
 		}
 		DrawSetReferenceUI();
