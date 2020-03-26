@@ -504,7 +504,7 @@ class DrikaTargetSelect{
 			}
 		}else if (identifier_type == reference){
 			int registered_object_id = GetRegisteredObjectID(reference_string);
-			if(registered_object_id == -1){
+			if(registered_object_id == -1 || !ObjectExists(registered_object_id)){
 				//Does not exist yet.
 			}else{
 				target_objects.insertLast(ReadObjectFromID(registered_object_id));
