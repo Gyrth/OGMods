@@ -66,6 +66,14 @@ DrikaUIElement@ current_ui_element = null;
 vec2 click_position;
 bool show_grid = true;
 
+string in_combat_song = "";
+bool in_combat_from_beginning_no_fade = false;
+string player_died_song = "";
+bool player_died_from_beginning_no_fade = false;
+string enemies_defeated_song = "";
+bool enemies_defeated_from_beginning_no_fade = false;
+string current_song = "None";
+
 class ActorSettings{
 	string name = "Default";
 	vec4 color = vec4(1.0);
@@ -1304,6 +1312,32 @@ void ReceiveMessage(string msg){
 	}else if(token == "drika_set_ui_snap_scale"){
 		token_iter.FindNextToken(msg);
 		ui_snap_scale = max(5, atoi(token_iter.GetToken(msg)));
+	}else if(token == "drika_music_event"){
+		token_iter.FindNextToken(msg);
+		int event_type = atoi(token_iter.GetToken(msg));
+		token_iter.FindNextToken(msg);
+		string song_name = token_iter.GetToken(msg);
+		token_iter.FindNextToken(msg);
+		bool from_beginning_no_fade = token_iter.GetToken(msg) == "true";
+
+		if(event_type == 0){
+			in_combat_song = song_name;
+			in_combat_from_beginning_no_fade = from_beginning_no_fade;
+		}else if(event_type == 1){
+			player_died_song = song_name;
+			player_died_from_beginning_no_fade = from_beginning_no_fade;
+		}else if(event_type == 2){
+			enemies_defeated_song = song_name;
+			enemies_defeated_from_beginning_no_fade = from_beginning_no_fade;
+		}
+
+		if(EditorModeActive()){
+			if(from_beginning_no_fade){
+				SetSong(song_name);
+			}else{
+				PlaySong(song_name);
+			}
+		}
 	}
 }
 
@@ -1413,6 +1447,7 @@ void Update(){
 	imGUI.update();
 	SetCameraPosition();
 	UpdateReadFileProcesses();
+	UpdateMusic();
 	if(fading){
 		blackout_amount = fade_timer / fade_duration;
 		if(fade_direction == 1.0){
@@ -1439,6 +1474,99 @@ void Update(){
 		}
 		fade_timer += time_step;
 	}
+}
+
+void UpdateMusic(){
+	if(EditorModeActive()){
+		return;
+	}
+
+	if(player_died_song != ""){
+		int player_id = GetPlayerCharacterID();
+		if(player_id != -1 && ReadCharacter(player_id).GetIntVar("knocked_out") != _awake){
+			if(current_song != player_died_song){
+				current_song = player_died_song;
+				Log(warning, "Set song " + current_song);
+				if(in_combat_from_beginning_no_fade){
+					SetSong(player_died_song);
+				}else{
+					PlaySong(player_died_song);
+				}
+			}
+			return;
+		}else if(current_song == player_died_song){
+			current_song = "None";
+			Log(warning, "Set song " + current_song);
+		}
+	}
+
+	if(in_combat_song != ""){
+		int player_id = GetPlayerCharacterID();
+		if(player_id != -1 && ReadCharacter(player_id).QueryIntFunction("int CombatSong()") == 1){
+			if(current_song != in_combat_song){
+				current_song = in_combat_song;
+				Log(warning, "Set song " + current_song);
+				if(in_combat_from_beginning_no_fade){
+					SetSong(in_combat_song);
+				}else{
+					PlaySong(in_combat_song);
+				}
+			}
+			return;
+		}else if(current_song == in_combat_song){
+			current_song = "None";
+			Log(warning, "Set song " + current_song);
+		}
+	}
+
+	if(enemies_defeated_song != ""){
+		int threats_remaining = ThreatsRemaining();
+		if(threats_remaining == 0){
+			if(current_song != enemies_defeated_song){
+				current_song = enemies_defeated_song;
+				Log(warning, "Set song " + current_song);
+				if(enemies_defeated_from_beginning_no_fade){
+					SetSong(enemies_defeated_song);
+				}else{
+					PlaySong(enemies_defeated_song);
+				}
+			}
+			return;
+		}else if(current_song == enemies_defeated_song){
+			current_song = "None";
+			Log(warning, "Set song " + current_song);
+		}
+	}
+}
+
+int GetPlayerCharacterID() {
+    int num = GetNumCharacters();
+    for(int i=0; i<num; ++i){
+        MovementObject@ char = ReadCharacter(i);
+        if(char.controlled){
+            return i;
+        }
+    }
+    return -1;
+}
+
+int ThreatsRemaining() {
+    int player_id = GetPlayerCharacterID();
+    if(player_id == -1){
+        return -1;
+    }
+    MovementObject@ player_char = ReadCharacter(player_id);
+
+    int num = GetNumCharacters();
+    int num_threats = 0;
+    for(int i=0; i<num; ++i){
+        MovementObject@ char = ReadCharacter(i);
+        if(char.GetIntVar("knocked_out") == _awake && !player_char.OnSameTeam(char))
+        {
+            ++num_threats;
+        }
+    }
+    return num_threats;
 }
 
 void UpdateGrabber(){
