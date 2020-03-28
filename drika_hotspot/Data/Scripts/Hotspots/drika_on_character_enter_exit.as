@@ -159,6 +159,14 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		}
 	}
 
+	bool ConnectTo(Object @other){
+		if(other.GetID() == object_id){
+			return false;
+		}
+		object_id = other.GetID();
+		return false;
+	}
+
 	void EditDone(){
 		if(external_hotspot && ObjectExists(external_hotspot_id)){
 			external_hotspot_obj.SetSelected(false);
@@ -440,6 +448,9 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	bool CharacterInside(MovementObject@ char, Object@ hotspot_obj){
+		if(hotspot_obj is null){
+			return false;
+		}
 		vec3 pos = hotspot_obj.GetTranslation();
 		vec3 scale = hotspot_obj.GetScale();
 
