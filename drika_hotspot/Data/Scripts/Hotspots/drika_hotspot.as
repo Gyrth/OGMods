@@ -334,9 +334,6 @@ void LaunchCustomGUI(){
 }
 
 void Update(){
-	if(!run_in_editormode && EditorModeActive()){
-		return;
-	}
 	//The post init queue is necessary so that Update is executing it, and not the Draw functions.
 	//The Draw and DrawEditor sometimes can have issues such as spawning hotspots that crash the game.
 	if(post_init_queue.size() > 0){
@@ -368,6 +365,10 @@ void Update(){
 		SwitchToEditing();
 	}else if(!EditorModeActive() && editing == true){
 		SwitchToPlaying();
+	}
+
+	if(!run_in_editormode && EditorModeActive()){
+		return;
 	}
 
 	if(drika_indexes.size() > 0 && hotspot_enabled && !wait_for_fade){
