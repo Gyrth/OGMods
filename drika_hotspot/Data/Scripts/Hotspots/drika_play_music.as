@@ -41,7 +41,11 @@ class DrikaPlayMusic : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "PlayMusic " + song_name;
+		string display_string = "PlayMusic ";
+		if(on_event){
+			display_string += music_event_names[music_event] + " ";
+		}
+		return display_string + song_name;
 	}
 
 	void DrawSettings(){
