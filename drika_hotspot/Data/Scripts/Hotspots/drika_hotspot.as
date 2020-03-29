@@ -81,6 +81,7 @@ string file_content;
 int ui_snap_scale = 20;
 int unique_id_counter = 0;
 array<DrikaElement@> imported_elements;
+array<Object@> refresh_queue;
 
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;
@@ -365,6 +366,15 @@ void Update(){
 		SwitchToEditing();
 	}else if(!EditorModeActive() && editing == true){
 		SwitchToPlaying();
+	}
+
+	for(uint i = 0; i < refresh_queue.size(); i++){
+		Object@ child = refresh_queue[i];
+		child.SetTranslation(child.GetTranslation());
+		child.SetRotation(child.GetRotation());
+		child.SetScale(child.GetScale());
+		refresh_queue.removeAt(i);
+		i--;
 	}
 
 	if(!run_in_editormode && EditorModeActive() && !show_editor){

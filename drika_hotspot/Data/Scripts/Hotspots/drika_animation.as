@@ -547,11 +547,7 @@ class DrikaAnimation : DrikaElement{
 			array<int> children = obj.GetChildren();
 			for(uint i = 0; i < children.size(); i++){
 				Object@ child = ReadObjectFromID(children[i]);
-				child.SetTranslation(child.GetTranslation());
-				child.SetRotation(child.GetRotation());
-				if(animate_scale){
-					child.SetScale(child.GetScale());
-				}
+				refresh_queue.insertLast(child);
 				RefreshChildren(child);
 			}
 		}
