@@ -367,7 +367,7 @@ void Update(){
 		SwitchToPlaying();
 	}
 
-	if(!run_in_editormode && EditorModeActive()){
+	if(!run_in_editormode && EditorModeActive() && !show_editor){
 		return;
 	}
 
