@@ -86,6 +86,7 @@ array<Object@> refresh_queue;
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;
 array<string> active_mods;
+array<int> refresh_queue_counter;
 
 const int _movement_state = 0;  // character is moving on the ground
 const int _ground_state = 1;  // character has fallen down or is raising up, ATM ragdolls handle most of this
@@ -356,6 +357,22 @@ void Update(){
 		return;
 	}
 
+	for(uint i = 0; i < refresh_queue_counter.size(); i++){
+		refresh_queue_counter[i] += 1;
+	}
+
+	for(uint i = 0; i < refresh_queue_counter.size(); i++){
+		if(refresh_queue_counter[i] > 2){
+			Object@ child = refresh_queue[i];
+			child.SetTranslation(child.GetTranslation());
+			child.SetRotation(child.GetRotation());
+			child.SetScale(child.GetScale());
+			refresh_queue.removeAt(i);
+			refresh_queue_counter.removeAt(i);
+			i--;
+		}
+	}
+
 	if(!show_editor && !has_closed){
 		has_closed = true;
 		Reset();
@@ -366,15 +383,6 @@ void Update(){
 		SwitchToEditing();
 	}else if(!EditorModeActive() && editing == true){
 		SwitchToPlaying();
-	}
-
-	for(uint i = 0; i < refresh_queue.size(); i++){
-		Object@ child = refresh_queue[i];
-		child.SetTranslation(child.GetTranslation());
-		child.SetRotation(child.GetRotation());
-		child.SetScale(child.GetScale());
-		refresh_queue.removeAt(i);
-		i--;
 	}
 
 	if(!run_in_editormode && EditorModeActive() && !show_editor){

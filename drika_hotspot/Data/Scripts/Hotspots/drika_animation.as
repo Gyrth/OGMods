@@ -548,6 +548,7 @@ class DrikaAnimation : DrikaElement{
 			for(uint i = 0; i < children.size(); i++){
 				Object@ child = ReadObjectFromID(children[i]);
 				refresh_queue.insertLast(child);
+				refresh_queue_counter.insertLast(0);
 				RefreshChildren(child);
 			}
 		}
