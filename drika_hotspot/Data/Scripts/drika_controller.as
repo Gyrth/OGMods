@@ -74,6 +74,20 @@ string enemies_defeated_song = "";
 bool enemies_defeated_from_beginning_no_fade = false;
 string current_song = "None";
 
+array<CheckpointData@> checkpoint_data;
+float PI = 3.14159265359f;
+
+class CheckpointData{
+	string name;
+	JSON json;
+	JSONValue data;
+
+	CheckpointData(string _name){
+		json.getRoot()["checkpoint_data"] = data;
+		name = _name;
+	}
+}
+
 class ActorSettings{
 	string name = "Default";
 	vec4 color = vec4(1.0);
@@ -1338,7 +1352,139 @@ void ReceiveMessage(string msg){
 				PlaySong(song_name);
 			}
 		}
+	}else if(token == "drika_register_save"){
+		token_iter.FindNextToken(msg);
+		string save_name = token_iter.GetToken(msg);
+
+		for(uint i = 0; i < checkpoint_data.size(); i++){
+			if(checkpoint_data[i].name == save_name){
+				return;
+			}
+		}
+
+		CheckpointData new_data(save_name);
+		checkpoint_data.insertLast(new_data);
+	}else if(token == "drika_remove_save"){
+		token_iter.FindNextToken(msg);
+		string save_name = token_iter.GetToken(msg);
+
+		for(uint i = 0; i < checkpoint_data.size(); i++){
+			if(checkpoint_data[i].name == save_name){
+				checkpoint_data.removeAt(i);
+			}
+		}
+	}else if(token == "drika_save_checkpoint"){
+		token_iter.FindNextToken(msg);
+		string save_name = token_iter.GetToken(msg);
+		SaveCheckpoint(save_name);
+	}else if(token == "drika_load_checkpoint"){
+		token_iter.FindNextToken(msg);
+		string save_name = token_iter.GetToken(msg);
+		LoadCheckpoint(save_name);
+	}else if(token == "drika_get_save_names"){
+		token_iter.FindNextToken(msg);
+		int hotspot_id = atoi(token_iter.GetToken(msg));
+		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
+
+		string return_msg = "drika_message ";
+		for(uint i = 0; i < checkpoint_data.size(); i++){
+			return_msg += "\"" + checkpoint_data[i].name + "\"" + ((i == checkpoint_data.size() -1)?"":" ");
+		}
+
+		Log(warning, "send " + return_msg);
+
+		hotspot_obj.ReceiveScriptMessage(return_msg);
 	}
+}
+
+void SaveCheckpoint(string save_name){
+	CheckpointData@ checkpoint = null;
+	for(uint i = 0; i < checkpoint_data.size(); i++){
+		if(checkpoint_data[i].name == save_name){
+			@checkpoint = @checkpoint_data[i];
+		}
+	}
+
+	if(checkpoint is null){
+		Log(error, "Could not find the checkpoint data! " + save_name);
+		return;
+	}
+
+	checkpoint.data.clear();
+
+	for(int i = 0; i < GetNumCharacters(); i++){
+		JSONValue character_data;
+		MovementObject@ char = ReadCharacter(i);
+		character_data["id"] = JSONValue(char.GetID());
+
+		character_data["translation"] = JSONValue(JSONarrayValue);
+		vec3 translation = char.position;
+		character_data["translation"].append(translation.x);
+		character_data["translation"].append(translation.y);
+		character_data["translation"].append(translation.z);
+
+		RiggedObject@ rigged_object = char.rigged_object();
+		Skeleton@ skeleton = rigged_object.skeleton();
+		// Get relative chest transformation
+		int chest_bone = skeleton.IKBoneStart("torso");
+		BoneTransform chest_frame_matrix = rigged_object.GetFrameMatrix(chest_bone);
+		quaternion quat = chest_frame_matrix.rotation;
+		vec3 facing = Mult(quat, vec3(0,0,1));
+		float rot = atan2(facing.x, facing.z) * 180.0f / PI;
+		float rotation = floor(rot + 0.5f);
+		character_data["rotation"] = JSONValue(rotation);
+
+		character_data["velocity"] = JSONValue(JSONarrayValue);
+		vec3 velocity = char.velocity;
+		character_data["velocity"].append(velocity.x);
+		character_data["velocity"].append(velocity.y);
+		character_data["velocity"].append(velocity.z);
+
+		checkpoint.data.append(character_data);
+	}
+
+	for(int i = 0; i < GetNumItems(); i++){
+		ItemObject@ item = ReadItem(i);
+		JSONValue item_data;
+
+		item_data["id"] = JSONValue(item.GetID());
+
+		item_data["translation"] = JSONValue(JSONarrayValue);
+		vec3 translation = item.GetPhysicsPosition();
+		item_data["translation"].append(translation.x);
+		item_data["translation"].append(translation.y);
+		item_data["translation"].append(translation.z);
+
+		item_data["linear_velocity"] = JSONValue(JSONarrayValue);
+		vec3 linear_velocity = item.GetLinearVelocity();
+		item_data["linear_velocity"].append(linear_velocity.x);
+		item_data["linear_velocity"].append(linear_velocity.y);
+		item_data["linear_velocity"].append(linear_velocity.z);
+
+		item_data["angular_velocity"] = JSONValue(JSONarrayValue);
+		vec3 angular_velocity = item.GetAngularVelocity();
+		item_data["angular_velocity"].append(angular_velocity.x);
+		item_data["angular_velocity"].append(angular_velocity.y);
+		item_data["angular_velocity"].append(angular_velocity.z);
+
+		checkpoint.data.append(item_data);
+	}
+
+	for(int i = 0; i < GetNumHotspots(); i++){
+		//Only save DHS hotspots.
+		Hotspot@ hotspot = ReadHotspot(i);
+		if(hotspot.GetTypeString() != "Drika Hotspot"){
+			continue;
+		}
+		JSONValue hotspot_data;
+		hotspot_data["id"] = JSONValue(hotspot.GetID());
+		hotspot_data["drika_checkpoint_data"] = JSONValue(hotspot.QueryStringFunction("string GetCheckpointData()"));
+		checkpoint.data.append(hotspot_data);
+	}
+}
+
+void LoadCheckpoint(string load_name){
+
 }
 
 void SendUIInstruction(string param_1, array<string> params){

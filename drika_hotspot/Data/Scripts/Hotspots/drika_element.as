@@ -34,7 +34,8 @@ enum drika_element_types { 	none = 0,
 							drika_dialogue = 33,
 							drika_comment = 34,
 							drika_ai_control = 35,
-							drika_user_interface = 36
+							drika_user_interface = 36,
+							drika_checkpoint = 37
 						};
 
 array<string> drika_element_names = {	"None",
@@ -73,7 +74,8 @@ array<string> drika_element_names = {	"None",
 										"Dialogue",
 										"Comment",
 										"AI Control",
-										"User Interface"
+										"User Interface",
+										"Checkpoint"
 									};
 
 array<string> sorted_element_names;
@@ -147,6 +149,7 @@ class DrikaElement{
 	void ReceiveMessage(string message, string param){}
 	void ReceiveMessage(string message, int param_1, int param_2){}
 	void ReceiveMessage(string message, string param, int id_param){}
+	void ReceiveMessage(array<string> messages){}
 	void ReadUIInstruction(array<string> instruction){}
 	void SetIndex(int _index){
 		index = _index;

@@ -39,6 +39,7 @@
 #include "hotspots/drika_comment.as"
 #include "hotspots/drika_ai_control.as"
 #include "hotspots/drika_user_interface.as"
+#include "hotspots/drika_checkpoint.as"
 
 bool show_editor = false;
 bool run_in_editormode = true;
@@ -128,6 +129,10 @@ void Init() {
 		duplicating_hotspot = true;
 	}
 	InterpData();
+}
+
+string GetTypeString(){
+	return "Drika Hotspot";
 }
 
 void LoadPalette(bool use_defaults = false){
@@ -1158,6 +1163,14 @@ void ReceiveMessage(string msg){
 		}
 
 		GetCurrentElement().ReadUIInstruction(instruction);
+	}else if(token == "drika_message"){
+		array<string> drika_messages;
+
+		while(token_iter.FindNextToken(msg)){
+			drika_messages.insertLast(token_iter.GetToken(msg));
+		}
+
+		GetCurrentElement().ReceiveMessage(drika_messages);
 	}
 }
 
@@ -1361,6 +1374,11 @@ void Save(){
 	params.SetString("Script Data", data.writeString(false));
 }
 
+string GetCheckpointData(){
+	Log(warning, "Getting dhs cehckpoint data works!");
+	return "Empty";
+}
+
 string GetUniqueID(){
 	unique_id_counter += 1;
 	return hotspot.GetID() + "" + unique_id_counter;
@@ -1469,6 +1487,8 @@ DrikaElement@ InterpElement(drika_element_types element_type, JSONValue &in func
 			return DrikaAIControl(function_json);
 		case drika_user_interface:
 			return DrikaUserInterface(function_json);
+		case drika_checkpoint:
+			return DrikaCheckpoint(function_json);
 	}
 	return DrikaElement();
 }
