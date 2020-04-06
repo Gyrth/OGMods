@@ -234,7 +234,7 @@ class DrikaTargetSelect{
 			refresh_target = true;
 		}
 
-		ImGui_BeginChild("target_select_ui", vec2(0, 45), false, ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui_BeginChild("target_select_ui" + tag, vec2(0, 45), false, ImGuiWindowFlags_AlwaysAutoResize);
 
 		float margin = 8.0;
 		float option_name_width = 120.0;
