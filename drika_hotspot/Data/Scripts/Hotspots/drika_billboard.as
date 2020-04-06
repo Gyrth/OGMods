@@ -88,49 +88,84 @@ class DrikaBillboard : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Billboard Type");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Billboard Type", current_billboard_type, billboard_type_choices, billboard_type_choices.size())){
 			billboard_type = billboard_types(current_billboard_type);
 			Reset();
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Billboard Update Type");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Billboard Update Type", current_billboard_update_type, billboard_update_type_choices, billboard_update_type_choices.size())){
 			billboard_update_type = billboard_update_types(current_billboard_update_type);
 			Reset();
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(billboard_type == billboard_image){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Image Path : " + image_path);
-			ImGui_SameLine();
+			ImGui_Text("Image Path");
+			ImGui_NextColumn();
 			if(ImGui_Button("Set Image Path")){
 				string new_path = GetUserPickedReadPath("png", "Data/Images");
 				if(new_path != ""){
 					image_path = new_path;
 				}
 			}
+			ImGui_PopItemWidth();
+			ImGui_SameLine();
+			ImGui_Text(image_path);
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Image Size");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_SliderFloat("##Image Size", image_size, 0.0f, 10.0f, "%.2f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Tint");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_ColorEdit4("##Tint", image_color);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Overbright");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_SliderFloat("##Overbright", overbright, 0.0f, 10.0f, "%.1f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(billboard_type == billboard_text){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Text");
+			ImGui_NextColumn();
 			ImGui_SetTextBuf(billboard_text_string);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				billboard_text_string = ImGui_GetTextBuf();
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 	}
 
