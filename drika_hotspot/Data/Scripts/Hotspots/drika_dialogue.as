@@ -646,10 +646,19 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float margin = 8.0;
+		float option_name_width = 150.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Dialogue Function");
-		ImGui_SameLine();
-		if(ImGui_Combo("Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_Combo("###Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
 			DeletePlaceholder();
 			Reset();
 			dialogue_function = dialogue_functions(current_dialogue_function);
@@ -667,31 +676,54 @@ class DrikaDialogue : DrikaElement{
 				QueryAnimation(search_buffer);
 			}
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(connection_types.find(_movement_object) != -1){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Target");
+			ImGui_NextColumn();
+
 			target_select.DrawSelectTargetUI();
+			ImGui_NextColumn();
 		}
 
 		if(dialogue_function == say){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Text");
+			ImGui_NextColumn();
 			ImGui_SetTextBuf(say_text);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				say_text = ImGui_GetTextBuf();
 				Reset();
 			}
+			ImGui_PopItemWidth();
 		}else if(dialogue_function == actor_settings){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Dialogue Color");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_ColorEdit4("##Dialogue Color", dialogue_color)){
 
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Voice");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderInt("##Voice", voice, 0, 18, "%.0f")){
 				level.SendMessage("drika_dialogue_test_voice " + voice);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Avatar");
+			ImGui_NextColumn();
+			ImGui_BeginChild("avatar_select_ui", vec2(0, 50), false, ImGuiWindowFlags_AlwaysAutoResize);
 			ImGui_Columns(2, false);
 			ImGui_SetColumnWidth(0, 110);
 			if(ImGui_Button("Pick Avatar")){
@@ -716,7 +748,12 @@ class DrikaDialogue : DrikaElement{
 			}
 			ImGui_NextColumn();
 			ImGui_Image(avatar, vec2(50, 50));
+			ImGui_EndChild();
 		}else if(dialogue_function == set_actor_animation){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Animation");
+			ImGui_NextColumn();
+
 			ImGui_Checkbox("From Start", anim_from_start);
 			ImGui_SameLine();
 			ImGui_Checkbox("Mirrored", anim_mirrored);
@@ -729,21 +766,29 @@ class DrikaDialogue : DrikaElement{
 			ImGui_SameLine();
 			ImGui_Checkbox("Wait Animation End", wait_anim_end);
 
+			ImGui_BeginChild("animation_settings_ui", vec2(0, 20), false, ImGuiWindowFlags_AlwaysAutoResize);
+			ImGui_Columns(2, false);
+			ImGui_SetColumnWidth(0, 150);
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Transition Speed");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			float second_settings_column_width = ImGui_GetContentRegionAvailWidth();
+			ImGui_PushItemWidth(second_settings_column_width);
 			ImGui_SliderFloat("##Transition Speed", transition_speed, 0.0, 10.0, "%.1f");
+			ImGui_PopItemWidth();
+			ImGui_EndChild();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_SetTextBuf(search_buffer);
 			ImGui_Text("Search");
 			ImGui_SameLine();
-			/* ImGui_PushItemWidth(ImGui_GetWindowWidth() - 85); */
+			ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth());
 			if(ImGui_InputText("", ImGuiInputTextFlags_AutoSelectAll)){
 				search_buffer = ImGui_GetTextBuf();
 				QueryAnimation(ImGui_GetTextBuf());
 			}
-			/* ImGui_PopItemWidth(); */
+			ImGui_PopItemWidth();
 
 			if(ImGui_BeginChildFrame(55, vec2(-1, -1), ImGuiWindowFlags_AlwaysAutoResize)){
 				for(uint i = 0; i < current_animations.size(); i++){
@@ -755,138 +800,239 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_omniscient){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Set Omnicient to");
-			ImGui_SameLine();
+			ImGui_NextColumn();
 			ImGui_Checkbox("", omniscient);
 		}else if(dialogue_function == fade_to_black){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Target Alpha");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_SliderFloat("##Target Alpha", target_fade_to_black, 0.0, 1.0, "%.3f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Fade Duration");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
  			ImGui_SliderFloat("##Fade Duration", fade_to_black_duration, 0.0, 10.0, "%.3f");
+			ImGui_PopItemWidth();
 		}else if(dialogue_function == settings){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Dialogue Layout");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_Combo("##Dialogue Layout", dialogue_layout, dialogue_layout_names, dialogue_layout_names.size());
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Font : " + dialogue_text_font);
-			ImGui_SameLine();
+			ImGui_Text("Font");
+			ImGui_NextColumn();
 			if(ImGui_Button("Set Font")){
 				string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 				if(new_path != ""){
 					dialogue_text_font = new_path;
 				}
 			}
+			ImGui_SameLine();
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text(dialogue_text_font);
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Dialogue Text Size");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_SliderInt("##Dialogue Text Size", dialogue_text_size, 1, 100, "%.0f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Dialogue Text Color");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_ColorEdit4("##Dialogue Text Color", dialogue_text_color);
-			ImGui_Checkbox("Dialogue Text Shadow", dialogue_text_shadow);
-			ImGui_Checkbox("Use Voice Sounds", use_voice_sounds);
-			ImGui_Checkbox("Show Name", show_names);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Dialogue Text Shadow");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Dialogue Text Shadow", dialogue_text_shadow);
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Use Voice Sounds");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Use Voice Sounds", use_voice_sounds);
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Show Name");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Show Name", show_names);
+			ImGui_NextColumn();
+
 		}else if(dialogue_function == set_actor_dialogue_control){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Set dialogue control to");
-			ImGui_SameLine();
+			ImGui_NextColumn();
 			ImGui_Checkbox("", dialogue_control);
 		}else if(dialogue_function == choice){
-			ImGui_PushItemWidth(-1.0);
 
-			ImGui_SliderInt("Number of choices", nr_choices, 1, 5, "%.0f");
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Number of choices");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_SliderInt("###Number of choices", nr_choices, 1, 5, "%.0f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
 			ImGui_Separator();
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Choice 1");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_InputText("##text1", choice_1, 64);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			ImGui_NextColumn();
 			choice_1_element.DrawGoToLineUI();
+			ImGui_NextColumn();
 
 			if(nr_choices >= 2){
 				ImGui_Separator();
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Choice 2");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##text2", choice_2, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+				ImGui_NextColumn();
 				choice_2_element.DrawGoToLineUI();
+				ImGui_NextColumn();
 			}
 			if(nr_choices >= 3){
 				ImGui_Separator();
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Choice 3");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##text3", choice_3, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+				ImGui_NextColumn();
 				choice_3_element.DrawGoToLineUI();
+				ImGui_NextColumn();
 			}
 			if(nr_choices >= 4){
 				ImGui_Separator();
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Choice 4");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##text4", choice_4, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+				ImGui_NextColumn();
 				choice_4_element.DrawGoToLineUI();
+				ImGui_NextColumn();
 			}
 			if(nr_choices >= 5){
 				ImGui_Separator();
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Choice 5");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##text5", choice_5, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+				ImGui_NextColumn();
 				choice_5_element.DrawGoToLineUI();
+				ImGui_NextColumn();
 			}
 
-			ImGui_PopItemWidth();
 		}else if(dialogue_function == set_camera_position){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Blur");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Near Blur", dof_settings[0], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Dist");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Near Dist", dof_settings[1], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Transition");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Near Transition", dof_settings[2], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Far Blur");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Far Blur", dof_settings[3], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Far Dist");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Far Dist", dof_settings[4], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Far Transition");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Far Transition", dof_settings[5], 0.0f, 10.0f, "%.1f")){
 				update_dof = true;
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
-			ImGui_Checkbox("Look At Target", enable_look_at_target);
-			ImGui_Checkbox("Move With Target", enable_move_with_target);
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Look At Target");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Look At Target", enable_look_at_target);
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Move With Target");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Move With Target", enable_move_with_target);
+			ImGui_NextColumn();
 
 			if(enable_look_at_target || enable_move_with_target){
 				ImGui_Separator();
 				ImGui_Text("Target Character");
+				ImGui_NextColumn();
 				track_target.DrawSelectTargetUI();
+				ImGui_NextColumn();
 			}
 		}
 	}

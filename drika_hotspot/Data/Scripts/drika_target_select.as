@@ -234,9 +234,20 @@ class DrikaTargetSelect{
 			refresh_target = true;
 		}
 
+		ImGui_BeginChild("target_select_ui", vec2(0, 45), false, ImGuiWindowFlags_AlwaysAutoResize);
+
+		float margin = 8.0;
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Identifier Type");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
+
 		if(ImGui_Combo("##Identifier Type" + tag, current_identifier_type, identifier_choices, identifier_choices.size()) || refresh_target){
 			parent.PreTargetChanged();
 			if(identifier_choices[current_identifier_type] == "ID"){
@@ -256,17 +267,22 @@ class DrikaTargetSelect{
 			}
 			target_changed = true;
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(identifier_type == id){
 			int new_object_id = object_id;
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Object ID");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_InputInt("##Object ID" + tag, new_object_id)){
 				parent.PreTargetChanged();
 				object_id = new_object_id;
 				parent.TargetChanged();
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(identifier_type == reference){
 			int current_reference = -1;
 
@@ -287,34 +303,43 @@ class DrikaTargetSelect{
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Reference");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Reference" + tag, current_reference, available_references, available_references.size())){
 				parent.PreTargetChanged();
 				reference_string = available_references[current_reference];
 				parent.TargetChanged();
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(identifier_type == team){
 			string new_character_team = character_team;
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Team");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_InputText("##Team" + tag, new_character_team, 64)){
 				parent.PreTargetChanged();
 				character_team = new_character_team;
 				parent.TargetChanged();
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(identifier_type == name){
 			string new_object_name = object_name;
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Name");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_InputText("##Name" + tag, new_object_name, 64)){
 				parent.PreTargetChanged();
 				object_name = new_object_name;
 				parent.TargetChanged();
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(identifier_type == character){
 			int current_character = -1;
 			for(uint i = 0; i < available_character_ids.size(); i++){
@@ -332,12 +357,15 @@ class DrikaTargetSelect{
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Character");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Character" + tag, current_character, available_character_names, available_character_names.size())){
 				parent.PreTargetChanged();
 				object_id = available_character_ids[current_character];
 				parent.TargetChanged();
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(identifier_type == item){
 			int current_item = -1;
 			for(uint i = 0; i < available_item_ids.size(); i++){
@@ -357,12 +385,15 @@ class DrikaTargetSelect{
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Item");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Item" + tag, current_item, available_item_names, available_item_names.size())){
 				parent.PreTargetChanged();
 				object_id = available_item_ids[current_item];
 				parent.TargetChanged();
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(identifier_type == batch){
 			if(ImGui_Button("Add Selected")){
 				array<int> object_ids = GetSelected();
@@ -427,6 +458,7 @@ class DrikaTargetSelect{
 				ImGui_EndChildFrame();
 			}
 		}
+		ImGui_EndChild();
 
 		if(target_changed){
 			parent.TargetChanged();

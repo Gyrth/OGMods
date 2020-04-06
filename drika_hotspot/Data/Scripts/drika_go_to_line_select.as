@@ -73,10 +73,19 @@ class DrikaGoToLineSelect{
 			return;
 		}
 
+		ImGui_BeginChild("go_to_line_select_ui" + name, vec2(0, 20), false, ImGuiWindowFlags_AlwaysAutoResize);
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		string preview_value = target_element.line_number + target_element.GetDisplayString();
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Go to line");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
 		ImGui_PushStyleColor(ImGuiCol_Text, target_element.GetDisplayColor());
 		if(ImGui_BeginCombo("###line" + name, preview_value, ImGuiComboFlags_HeightLarge)){
 			for(uint i = 0; i < drika_indexes.size(); i++){
@@ -93,5 +102,7 @@ class DrikaGoToLineSelect{
 			ImGui_EndCombo();
 		}
 		ImGui_PopStyleColor();
+		ImGui_PopItemWidth();
+		ImGui_EndChild();
 	}
 }
