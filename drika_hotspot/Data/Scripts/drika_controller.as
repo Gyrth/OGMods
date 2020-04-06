@@ -65,6 +65,7 @@ DrikaUIGrabber@ current_grabber = null;
 DrikaUIElement@ current_ui_element = null;
 vec2 click_position;
 bool show_grid = true;
+bool post_init_done = false;
 
 string in_combat_song = "";
 bool in_combat_from_beginning_no_fade = false;
@@ -131,6 +132,11 @@ void Init(string str){
 	@text_container = IMContainer(2560, 1440);
 	@grabber_container = IMContainer(2560, 1440);
 	CreateIMGUIContainers();
+}
+
+void PostInit(){
+	level.SendMessage("level_start");
+	post_init_done = true;
 }
 
 void CreateIMGUIContainers(){
@@ -1568,6 +1574,9 @@ void ReadAnimationList(){
 }
 
 void Update(){
+	if(!post_init_done){
+		PostInit();
+	}
 
 	while(imGUI.getMessageQueueSize() > 0 ){
         IMMessage@ message = imGUI.getNextMessage();
