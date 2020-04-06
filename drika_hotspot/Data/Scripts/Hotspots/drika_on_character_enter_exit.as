@@ -212,40 +212,63 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	void DrawSettings(){
+		float option_name_width = 170.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Check for");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Check for", new_target_character_type, character_trigger_choices, character_trigger_choices.size())){
 			target_character_type = target_character_types(new_target_character_type);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(target_character_type == check_id){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("ID");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_InputInt("##ID", object_id);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(target_character_type == check_team){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Team");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_InputText("##Team", character_team, 64);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Trigger when");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("###Trigger when", new_hotspot_trigger_type, hotspot_trigger_choices, hotspot_trigger_choices.size())){
 			hotspot_trigger_type = hotspot_trigger_types(new_hotspot_trigger_type);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(hotspot_trigger_type == while_inside || hotspot_trigger_type == while_outside){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Reset When False");
-			ImGui_SameLine();
+			ImGui_NextColumn();
 			ImGui_Checkbox("##Reset When False", reset_when_false);
+			ImGui_NextColumn();
 		}
 
-		ImGui_Checkbox("External Hotspot", external_hotspot);
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("External Hotspot");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###External Hotspot", external_hotspot);
+		ImGui_NextColumn();
 
 		DrawSetReferenceUI();
 	}

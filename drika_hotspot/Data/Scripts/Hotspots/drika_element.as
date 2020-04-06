@@ -312,13 +312,16 @@ class DrikaElement{
 	void DrawSetReferenceUI(){
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Set Reference");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
 		ImGui_InputText("##Reference", reference_string, 64);
 		if(ImGui_IsItemHovered()){
 			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
 			ImGui_SetTooltip("If a reference is set it can be used by other functions\nlike Set Object Param or Transform Object.");
 			ImGui_PopStyleColor();
 		}
+		ImGui_PopItemWidth();
 	}
 
 	void DrawGizmo(vec3 translation, quaternion rotation, vec3 scale, bool selected){
