@@ -647,7 +647,6 @@ class DrikaDialogue : DrikaElement{
 
 	void DrawSettings(){
 
-		float margin = 8.0;
 		float option_name_width = 150.0;
 
 		ImGui_Columns(2, false);

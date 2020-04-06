@@ -197,10 +197,24 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 170.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
 		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Animation Method");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Animation Method", current_animation_method, animation_method_names, animation_method_names.size())){
 			animation_method = animation_methods(current_animation_method);
 			//Remove all the old data when switching between methods.
@@ -213,49 +227,88 @@ class DrikaAnimation : DrikaElement{
 				key_ids.resize(0);
 			}
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		if(animation_method == placeholder_method){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Duration Method");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Duration Method", current_duration_method, duration_method_names, duration_method_names.size())){
 				duration_method = duration_methods(current_duration_method);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Animation Type");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Animation Type", current_animation_type, animation_type_names, animation_type_names.size())){
 			animation_type = animation_types(current_animation_type);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Duration");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_SliderFloat("##Duration", duration, 0.1f, 10.0f, "%.1f")){
 			SetCurrentTransform();
 		}
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Extra Yaw");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_SliderFloat("##Extra Yaw", extra_yaw, 0.0f, 360.0f, "%.1f")){
 			SetCurrentTransform();
 		}
-		if(ImGui_Checkbox("Interpolation Rotation", interpolate_rotation)){
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Interpolate Rotation");
+		ImGui_NextColumn();
+		if(ImGui_Checkbox("###Interpolation Rotation", interpolate_rotation)){
 			SetCurrentTransform();
 		}
-		if(ImGui_Checkbox("Interpolation Translation", interpolate_translation)){
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Interpolate Translation");
+		ImGui_NextColumn();
+		if(ImGui_Checkbox("###Interpolation Translation", interpolate_translation)){
 			SetCurrentTransform();
 		}
-		if(ImGui_Checkbox("Animate Camera", animate_camera)){
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Animate Camera");
+		ImGui_NextColumn();
+		if(ImGui_Checkbox("###Animate Camera", animate_camera)){
 			SetCurrentTransform();
 			if(animate_camera){
 				target_select.ClearTarget();
 			}
 		}
-		if(ImGui_Checkbox("Animate Scale", animate_scale)){
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Animate Scale");
+		ImGui_NextColumn();
+		if(ImGui_Checkbox("###Animate Scale", animate_scale)){
 			SetCurrentTransform();
 		}
-		ImGui_Checkbox("Play In Parallel", parallel_operation);
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Play In Parallel");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###Play In Parallel", parallel_operation);
 	}
 
 	void SetCurrentTransform(){
