@@ -73,13 +73,6 @@ class DrikaGoToLineSelect{
 			return;
 		}
 
-		ImGui_BeginChild("go_to_line_select_ui" + name, vec2(0, 20), false, ImGuiWindowFlags_AlwaysAutoResize);
-
-		float option_name_width = 120.0;
-
-		ImGui_Columns(2, false);
-		ImGui_SetColumnWidth(0, option_name_width);
-
 		string preview_value = target_element.line_number + target_element.GetDisplayString();
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Go to line");
@@ -103,6 +96,6 @@ class DrikaGoToLineSelect{
 		}
 		ImGui_PopStyleColor();
 		ImGui_PopItemWidth();
-		ImGui_EndChild();
+		ImGui_NextColumn();
 	}
 }

@@ -98,29 +98,66 @@ class DrikaCheckCharacterState : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 140.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
 		target_select.DrawSelectTargetUI();
-		ImGui_Checkbox("Equals", equals);
-		if(ImGui_Combo("Check for", current_state_choice, state_choice_names, state_choice_names.size())){
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Check for");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_Combo("###Check for", current_state_choice, state_choice_names, state_choice_names.size())){
 			state_choice = state_choices(current_state_choice);
 			SetTargetOptions();
 			StartSettings();
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Equals");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###Equals", equals);
+		ImGui_NextColumn();
 
 		if(state_choice == knows_about){
 			ImGui_Separator();
 			ImGui_Text("Known Character");
+			ImGui_NextColumn();
 			known_target.DrawSelectTargetUI();
+			ImGui_NextColumn();
 		}else if(state_choice == in_proximity){
 			ImGui_Separator();
 			ImGui_Text("Proximity Target");
+			ImGui_NextColumn();
 			known_target.DrawSelectTargetUI();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Proximity Distance");
-			ImGui_SameLine();
-			ImGui_SliderFloat("##Proximity Distance", proximity_distance, 0.0, 100.0, "%.2f");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_SliderFloat("###Proximity Distance", proximity_distance, 0.0, 100.0, "%.2f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 
-		ImGui_Checkbox("If not, go to specified line:", continue_if_false);
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("If not, go to line");
+		ImGui_NextColumn();
+
+		ImGui_Checkbox("###If not, go to line", continue_if_false);
+		ImGui_NextColumn();
 		if(continue_if_false){
 			continue_element.DrawGoToLineUI();
 		}

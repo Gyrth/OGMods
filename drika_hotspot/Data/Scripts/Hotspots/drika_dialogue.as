@@ -896,9 +896,7 @@ class DrikaDialogue : DrikaElement{
 			ImGui_InputText("##text1", choice_1, 64);
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
-			ImGui_NextColumn();
 			choice_1_element.DrawGoToLineUI();
-			ImGui_NextColumn();
 
 			if(nr_choices >= 2){
 				ImGui_Separator();
@@ -909,9 +907,7 @@ class DrikaDialogue : DrikaElement{
 				ImGui_InputText("##text2", choice_2, 64);
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
-				ImGui_NextColumn();
 				choice_2_element.DrawGoToLineUI();
-				ImGui_NextColumn();
 			}
 			if(nr_choices >= 3){
 				ImGui_Separator();
@@ -922,9 +918,7 @@ class DrikaDialogue : DrikaElement{
 				ImGui_InputText("##text3", choice_3, 64);
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
-				ImGui_NextColumn();
 				choice_3_element.DrawGoToLineUI();
-				ImGui_NextColumn();
 			}
 			if(nr_choices >= 4){
 				ImGui_Separator();
@@ -935,9 +929,7 @@ class DrikaDialogue : DrikaElement{
 				ImGui_InputText("##text4", choice_4, 64);
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
-				ImGui_NextColumn();
 				choice_4_element.DrawGoToLineUI();
-				ImGui_NextColumn();
 			}
 			if(nr_choices >= 5){
 				ImGui_Separator();
@@ -948,9 +940,7 @@ class DrikaDialogue : DrikaElement{
 				ImGui_InputText("##text5", choice_5, 64);
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
-				ImGui_NextColumn();
 				choice_5_element.DrawGoToLineUI();
-				ImGui_NextColumn();
 			}
 
 		}else if(dialogue_function == set_camera_position){
