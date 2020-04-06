@@ -1284,6 +1284,7 @@ class DrikaDialogue : DrikaElement{
 			}
 
 			level.SendMessage("drika_dialogue_skip");
+			level.SendMessage("drika_dialogue_show_skip_message");
 			for(uint i = 0; i < targets.size(); i++){
 				targets[i].ReceiveScriptMessage("stop_talking");
 			}
@@ -1336,10 +1337,12 @@ class DrikaDialogue : DrikaElement{
 
 			say_text_split.removeAt(0);
 
+			//At the end of the dialogue text.
 			if(say_text_split.size() == 0){
 				for(uint i = 0; i < targets.size(); i++){
 					targets[i].ReceiveScriptMessage("stop_talking");
 				}
+				level.SendMessage("drika_dialogue_show_skip_message");
 				dialogue_done = true;
 			}
 

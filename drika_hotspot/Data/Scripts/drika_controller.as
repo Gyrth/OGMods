@@ -51,6 +51,8 @@ vec3 target_positional_difference = vec3();
 vec3 current_camera_position = vec3();
 bool camera_settings_changed = false;
 vec2 dialogue_size = vec2(2560, 450);
+IMText@ lmb_continue;
+IMText@ rtn_skip;
 
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 IMContainer@ dialogue_container;
@@ -255,18 +257,23 @@ void DefaultUI(IMContainer@ parent){
 		dialogue_line_holder.setZOrdering(2);
 	}
 
+	bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
+
 	IMContainer controls_container(2400.0, 375.0);
 	controls_container.setAlignment(CABottom, CARight);
 	IMDivider controls_divider("controls_divider", DOVertical);
 	controls_divider.setAlignment(CATop, CALeft);
 	controls_divider.setZOrdering(1);
 	controls_container.setElement(controls_divider);
-	IMText lmb_continue("Left mouse button to continue", controls_font);
-	IMText rtn_skip("return to skip", controls_font);
+	@lmb_continue = IMText(GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack") + " to continue", controls_font);
+	@rtn_skip = IMText(GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "skip_dialogue")+" to skip", controls_font);
 	controls_divider.append(lmb_continue);
 	controls_divider.append(rtn_skip);
 
+	lmb_continue.setVisible(false);
+	rtn_skip.setVisible(false);
 	parent.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
+
 	parent.setElement(dialogue_lines_holder_horiz);
 }
 
@@ -1192,6 +1199,15 @@ void ReceiveMessage(string msg){
 
 		if(new_selected_choice != selected_choice){
 			SelectChoice(new_selected_choice);
+		}
+	}else if(token == "drika_dialogue_show_skip_message"){
+		if(lmb_continue !is null){
+			lmb_continue.setVisible(true);
+			lmb_continue.addUpdateBehavior(IMFadeIn(100, inSineTween ), "");
+		}
+		if(rtn_skip !is null){
+			rtn_skip.setVisible(true);
+			rtn_skip.addUpdateBehavior(IMFadeIn(100, inSineTween ), "");
 		}
 	}else if(token == "drika_set_dof"){
 		token_iter.FindNextToken(msg);
