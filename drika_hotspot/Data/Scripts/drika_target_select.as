@@ -234,9 +234,8 @@ class DrikaTargetSelect{
 			refresh_target = true;
 		}
 
-		ImGui_BeginChild("target_select_ui" + tag, vec2(0, 45), false, ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui_BeginChild("target_select_ui" + tag, vec2(0, (identifier_type == batch)?20:45), false, ImGuiWindowFlags_AlwaysAutoResize);
 
-		float margin = 8.0;
 		float option_name_width = 120.0;
 
 		ImGui_Columns(2, false);
@@ -395,6 +394,11 @@ class DrikaTargetSelect{
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 		}else if(identifier_type == batch){
+			ImGui_EndChild();
+
+			ImGui_BeginChild("batch_select_ui" + tag, vec2(0, 200), false, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar);
+
+			ImGui_NextColumn();
 			if(ImGui_Button("Add Selected")){
 				array<int> object_ids = GetSelected();
 				for(uint i = 0; i < object_ids.size(); i++){
@@ -428,7 +432,7 @@ class DrikaTargetSelect{
 				batch_objects.resize(0);
 			}
 
-			if(ImGui_BeginChildFrame(55, vec2(-1, ImGui_GetWindowHeight() - 100))){
+			if(ImGui_BeginChildFrame(123, vec2(-1, 200), ImGuiWindowFlags_AlwaysAutoResize)){
 
 				for(uint i = 0; i < batch_objects.size(); i++){
 					/* ImGui_PushID("delete" + i); */

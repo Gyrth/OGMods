@@ -134,9 +134,18 @@ class DrikaSetCameraParam : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Param Type");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Param Type", current_type, param_names, param_names.size())){
 			camera_param = camera_params(current_type);
 			param_name = param_names[current_type];
@@ -150,65 +159,102 @@ class DrikaSetCameraParam : DrikaElement{
 				vec3_param_after = vec3_param_before;
 			}
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(camera_param == fov){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("FOV");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_SliderFloat("##FOV", float_param_after, 0.0f, 100.0f, "%.0f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(camera_param == dof){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Blur");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Near Blur", float_array_param_after[0], 0.0f, 10.0f, "%.1f")){
 				SetParameter(false);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Dist");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Near Dist", float_array_param_after[1], 0.0f, 10.0f, "%.1f")){
 				SetParameter(false);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Transition");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Near Transition", float_array_param_after[2], 0.0f, 10.0f, "%.1f")){
 				SetParameter(false);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Far Blur");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Far Blur", float_array_param_after[3], 0.0f, 10.0f, "%.1f")){
 				SetParameter(false);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Far Dist");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Far Dist", float_array_param_after[4], 0.0f, 10.0f, "%.1f")){
 				SetParameter(false);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Far Transition");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Far Transition", float_array_param_after[5], 0.0f, 10.0f, "%.1f")){
 				SetParameter(false);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(param_type == float_param){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("After");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_SliderFloat("##After", float_param_after, -100.0f, 100.0f, "%.4f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(param_type == vec3_color_param){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("After");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_ColorEdit3("##After", vec3_param_after);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(param_type == function_param){
 			if(camera_param == splitscreen){
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("SplitScreen Mode");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_Combo("##SplitScreen Mode", int_param_after, splitscreen_mode_choices, splitscreen_mode_choices.size());
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
 			}
 		}
 	}

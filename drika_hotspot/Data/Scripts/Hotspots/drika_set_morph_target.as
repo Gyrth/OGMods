@@ -84,9 +84,23 @@ class DrikaSetMorphTarget : DrikaElement{
 	}
 
 	void DrawSettings(){
-		target_select.DrawSelectTargetUI();
 
-		if(ImGui_Checkbox("Two Way Morph Target", two_way_morph)){
+		float option_name_width = 140.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Two Way Morph");
+		ImGui_NextColumn();
+		if(ImGui_Checkbox("###Two Way Morph", two_way_morph)){
 			//A single morph target cannot go under 0.
 			if(!two_way_morph && weight < 0.0){
 				weight = 0.0;
@@ -94,11 +108,16 @@ class DrikaSetMorphTarget : DrikaElement{
 			SetMorphTarget(true);
 			SetMorphTarget(false);
 		}
+		ImGui_NextColumn();
 
-		float extra_space = 8.0f;
+		float margin = 3.0;
 
 		if(two_way_morph){
-			ImGui_PushItemWidth(ImGui_GetWindowContentRegionWidth() * 0.25);
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Morph Setting");
+			ImGui_NextColumn();
+
+			ImGui_PushItemWidth(second_column_width * 0.24 - margin);
 			if(ImGui_Combo("###Morph 1", morph_1_index, available_morphs, available_morphs.size())){
 				morph_1 = available_morphs[morph_1_index];
 				SetMorphTarget(true);
@@ -108,7 +127,7 @@ class DrikaSetMorphTarget : DrikaElement{
 
 			ImGui_SameLine();
 
-			ImGui_PushItemWidth(ImGui_GetWindowContentRegionWidth() * 0.5 - extra_space);
+			ImGui_PushItemWidth(second_column_width * 0.5 - margin);
 			if(ImGui_SliderFloat("###Weight", weight, -1.0f, 1.0f, "%.2f")){
 				SetMorphTarget(true);
 				SetMorphTarget(false);
@@ -117,15 +136,20 @@ class DrikaSetMorphTarget : DrikaElement{
 
 			ImGui_SameLine();
 
-			ImGui_PushItemWidth(ImGui_GetWindowContentRegionWidth() * 0.25 - extra_space);
+			ImGui_PushItemWidth(second_column_width * 0.25 - margin);
 			if(ImGui_Combo("###Morph 2", morph_2_index, available_morphs, available_morphs.size())){
 				morph_2 = available_morphs[morph_2_index];
 				SetMorphTarget(true);
 				SetMorphTarget(false);
 			}
 			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else{
-			ImGui_PushItemWidth(ImGui_GetWindowContentRegionWidth() * 0.25 - extra_space);
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Morph Setting");
+			ImGui_NextColumn();
+
+			ImGui_PushItemWidth(second_column_width * 0.25);
 			if(ImGui_Combo("###Morph 1", morph_1_index, available_morphs, available_morphs.size())){
 				morph_1 = available_morphs[morph_1_index];
 				SetMorphTarget(true);
@@ -141,11 +165,16 @@ class DrikaSetMorphTarget : DrikaElement{
 				SetMorphTarget(false);
 			}
 			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Smoothing Duration");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		ImGui_SliderFloat("##Smoothing Duration", smoothing_duration, 0.0f, 10.0f, "%.2f");
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	bool Trigger(){

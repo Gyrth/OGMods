@@ -35,22 +35,38 @@ class DrikaOnItemEnterExit : DrikaElement{
 	}
 
 	void DrawSettings(){
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Check for");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Check for", current_combo_item, item_triggger_choices, item_triggger_choices.size())){
 			trigger_type = item_trigger_types(current_combo_item);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		if(trigger_type == check_id){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("ID");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_InputInt("##ID", item_id);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Label");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_InputText("##Label", item_label, 64);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 	}
 

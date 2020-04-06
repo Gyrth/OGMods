@@ -51,13 +51,23 @@ class DrikaStartDialogue : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Dialogue");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Dialogue", current_index, available_dialogues, available_dialogues.size())){
 			@dialogue_obj = ReadObjectFromID(dialogue_ids[current_index]);
 			dialogue_name = available_dialogues[current_index];
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	bool Trigger(){

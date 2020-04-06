@@ -21,10 +21,20 @@ class DrikaWait : DrikaElement{
 	}
 
 	void DrawSettings(){
+		float option_name_width = 130.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Wait in ms");
-		ImGui_SameLine();
+		ImGui_Text("Wait miliseconds");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
+		ImGui_PushItemWidth(second_column_width);
 		ImGui_InputInt("Duration", duration);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	bool Trigger(){

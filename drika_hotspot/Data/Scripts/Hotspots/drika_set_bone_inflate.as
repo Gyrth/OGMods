@@ -61,34 +61,55 @@ class DrikaSetBoneInflate : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
 		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Bone");
-		ImGui_SameLine();
-		if(ImGui_Combo("##Bone", current_index, bone_names, bone_names.size())){
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_Combo("###Bone", current_index, bone_names, bone_names.size())){
 			SetBoneInflate(true);
 			bone_name = bone_names[current_index];
 			SetBoneInflate(false);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(bone_name == "index"){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Index");
-			ImGui_SameLine();
-			if(ImGui_InputInt("##Index", current_bone_index)){
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_InputInt("###Index", current_bone_index)){
 				SetBoneInflate(true);
 				bone_index = current_bone_index;
 				SetBoneInflate(false);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Value");
-		ImGui_SameLine();
-		if(ImGui_SliderFloat("##Value", inflate_value, 0.0f, 1.0f, "%.2f")){
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_SliderFloat("###Value", inflate_value, 0.0f, 1.0f, "%.2f")){
 			SetBoneInflate(false);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	bool Trigger(){

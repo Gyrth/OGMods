@@ -41,20 +41,39 @@ class DrikaSetCharacter : DrikaElement{
 	}
 
 	void DrawSettings(){
+		float option_name_width = 150.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
 		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Set To Character : ");
-		ImGui_SameLine();
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text(character_path);
-		ImGui_SameLine();
+		ImGui_Text("Character Path");
+		ImGui_NextColumn();
+
 		if(ImGui_Button("Set Character Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Characters");
 			if(new_path != ""){
 				character_path = new_path;
 			}
 		}
-		ImGui_Checkbox("Cache Skeleton Info", cache_skeleton_info);
+		ImGui_AlignTextToFramePadding();
+		ImGui_SameLine();
+		ImGui_Text(character_path);
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Cache Skeleton Info");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###Cache Skeleton Info", cache_skeleton_info);
+		ImGui_NextColumn();
 	}
 
 	bool Trigger(){

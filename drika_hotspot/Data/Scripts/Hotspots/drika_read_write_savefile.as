@@ -87,77 +87,161 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 150.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Read Write Mode");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Read Write Mode", current_read_write_mode, mode_choices, mode_choices.size())){
 			read_write_mode = read_write_modes(current_read_write_mode);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(read_write_mode == read){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Additional Conditions");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Additional Conditions", current_condition_count, condition_choices, condition_choices.size())){
 				condition_count = additional_conditions(current_condition_count);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
 			if(condition_count == condition_count_none){
-				ImGui_Text("Check if param : ") ;
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Check if param");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("Parameter", param, 64);
-				ImGui_Text("Is equal to : ");
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Is equal to");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("Value", value, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
 			}
 
 			if(condition_count != condition_count_none){
 				ImGui_Separator();
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("First Parameter");
+				ImGui_NextColumn();
+				ImGui_NextColumn();
 
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Parameter Name 1");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##Parameter Name 1", param, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Parameter Value 1");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##Parameter Value 1", value, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
 
 				ImGui_Separator();
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Second Parameter");
+				ImGui_NextColumn();
+				ImGui_NextColumn();
 
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Parameter Name 2");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##Parameter Name 2", param2, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Parameter Value 2");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##Parameter Value 2", value2, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
 				ImGui_Separator();
 			}
 
 			if(condition_count == condition_count_two){
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Third Parameter");
+				ImGui_NextColumn();
+				ImGui_NextColumn();
 
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Parameter Name 3");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##Parameter Name 3", param3, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Parameter Value 3");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				ImGui_InputText("##Parameter Value 3", value3, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
 
 				ImGui_Separator();
 			}
 
 			if(condition_count != condition_count_none){
-				ImGui_Checkbox("Continue if any of the conditions are true", if_any_are_true);
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Continue if any true");
+				ImGui_NextColumn();
+				ImGui_Checkbox("###Continue if any true", if_any_are_true);
+				ImGui_NextColumn();
 			}
 
-			ImGui_Checkbox("If not, go to specified line:", continue_if_false);
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("If not, go to line");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###If not, go to line", continue_if_false);
+			ImGui_NextColumn();
+
 			if(continue_if_false){
 				continue_element.DrawGoToLineUI();
 			}
 		}else{
-			ImGui_Text("Set param : ");
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Parameter name");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_InputText("Parameter", param, 64);
-			ImGui_Text("To : ");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Parameter Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_InputText("Value", value, 64);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+
 			if(ImGui_Button("Reset value")){
 				WriteParamValue(true);
 			}

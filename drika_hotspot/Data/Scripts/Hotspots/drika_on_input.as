@@ -177,47 +177,81 @@ class DrikaOnInput : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
 		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Input Type");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Input Type", current_input_type, input_type_names, input_type_names.size())){
 			input_type = input_types(current_input_type);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(input_type == button_pressed){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Button");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Button", input_index, input_names, input_names.size())){
 				GetInputData();
 				GetIcon();
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
 			if(input.input_identifier == input_other){
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Input");
-				ImGui_SameLine();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
 				if(ImGui_InputText("##Input", other_input, 64)){
 					GetIcon();
 				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
 			}
 
-			if(ImGui_Checkbox("Use prompt", use_prompt)){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Use prompt");
+			ImGui_NextColumn();
+			if(ImGui_Checkbox("###Use prompt", use_prompt)){
 				GetIcon();
 			}
+			ImGui_NextColumn();
 
 			if(use_prompt){
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Prompt Size");
-				ImGui_SameLine();
-				ImGui_DragFloat("##Prompt Size", prompt_size, 0.001f, 0.0f, 5.0f, "%.2f");
-				ImGui_Checkbox("Custom Prompt", custom_prompt);
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_DragFloat("###Prompt Size", prompt_size, 0.001f, 0.0f, 5.0f, "%.2f");
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Custom Prompt");
+				ImGui_NextColumn();
+				ImGui_Checkbox("###Custom Prompt", custom_prompt);
+				ImGui_NextColumn();
+
 				if(custom_prompt){
 					ImGui_AlignTextToFramePadding();
-					ImGui_Text("Path : " + custom_prompt_path);
-					ImGui_SameLine();
+					ImGui_Text("Path");
+					ImGui_NextColumn();
 					if(ImGui_Button("Set Path")){
 						string new_path = "";
 						new_path = GetUserPickedReadPath("png", "Data/Textures/UI");
@@ -225,13 +259,19 @@ class DrikaOnInput : DrikaElement{
 							custom_prompt_path = new_path;
 						}
 					}
+					ImGui_SameLine();
+					ImGui_Text(custom_prompt_path);
+					ImGui_NextColumn();
 				}
 			}
 		}else if(input_type == type_text){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Input");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_InputText("##Input", typed_text, 64);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 	}
 

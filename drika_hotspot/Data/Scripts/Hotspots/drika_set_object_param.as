@@ -89,34 +89,61 @@ class DrikaSetObjectParam : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 140.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Param Name");
-		ImGui_SameLine();
-		ImGui_InputText("##Param Name", param_name, 64);
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_InputText("###Param Name", param_name, 64);
+		ImGui_PopItemWidth();
 		ImGui_AlignTextToFramePadding();
+		ImGui_NextColumn();
+
 		ImGui_Text("Param Type");
-		ImGui_SameLine();
-		if(ImGui_Combo("##Param Type", current_type, param_type_choices, param_type_choices.size())){
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_Combo("###Param Type", current_type, param_type_choices, param_type_choices.size())){
 			param_type = param_types(current_type);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(param_type == string_param){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("After");
-			ImGui_SameLine();
-			ImGui_InputText("##After", string_param_after, 64);
+			ImGui_Text("Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputText("###Value", string_param_after, 64);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(param_type == int_param){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("After");
-			ImGui_SameLine();
-			ImGui_InputInt("##After", int_param_after);
+			ImGui_Text("Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputInt("###Value", int_param_after);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else{
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("After");
-			ImGui_SameLine();
-			ImGui_SliderFloat("##After", float_param_after, -1000.0f, 1000.0f, "%.4f");
+			ImGui_Text("Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_SliderFloat("###Value", float_param_after, -1000.0f, 1000.0f, "%.4f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 	}
 

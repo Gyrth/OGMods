@@ -94,22 +94,23 @@ class DrikaTransformObject : DrikaElement{
 	}
 
 	void DrawSettings(){
-		target_select.DrawSelectTargetUI();
-
-		float margin = 8.0;
 		float option_name_width = 150.0;
-		float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
-		float slider_width = (second_column_width / 2.0) - margin;
 
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
-		ImGui_SetColumnWidth(1, second_column_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Transform Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Use Target Object");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
-		if(ImGui_Checkbox("##Use Target Object", use_target_object)){
+		if(ImGui_Checkbox("###Use Target Object", use_target_object)){
 			if(use_target_object){
 				RemovePlaceholder();
 			}
@@ -119,7 +120,7 @@ class DrikaTransformObject : DrikaElement{
 
 		if(use_target_object){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Target");
+			ImGui_Text("Using Target");
 			ImGui_NextColumn();
 
 			target_location.DrawSelectTargetUI();
@@ -129,7 +130,7 @@ class DrikaTransformObject : DrikaElement{
 			ImGui_Text("Translation Offset");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_DragFloat3("##Translation Offset", translation_offset, 0.001f, -5.0f, 5.0f, "%.3f")){
+			if(ImGui_DragFloat3("###Translation Offset", translation_offset, 0.001f, -5.0f, 5.0f, "%.3f")){
 
 			}
 			ImGui_PopItemWidth();
@@ -139,7 +140,7 @@ class DrikaTransformObject : DrikaElement{
 			ImGui_Text("Use Target Location");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_Checkbox("##Use Target Location", use_target_location)){
+			if(ImGui_Checkbox("###Use Target Location", use_target_location)){
 
 			}
 			ImGui_PopItemWidth();
@@ -149,7 +150,7 @@ class DrikaTransformObject : DrikaElement{
 			ImGui_Text("Use Target Rotation");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_Checkbox("##Use Target Rotation", use_target_rotation)){
+			if(ImGui_Checkbox("###Use Target Rotation", use_target_rotation)){
 
 			}
 			ImGui_PopItemWidth();
@@ -159,7 +160,7 @@ class DrikaTransformObject : DrikaElement{
 			ImGui_Text("Use Target Scale");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_Checkbox("##Use Target Scale", use_target_scale)){
+			if(ImGui_Checkbox("###Use Target Scale", use_target_scale)){
 
 			}
 			ImGui_PopItemWidth();

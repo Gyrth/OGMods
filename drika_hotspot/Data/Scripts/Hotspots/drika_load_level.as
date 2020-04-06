@@ -18,15 +18,25 @@ class DrikaLoadLevel : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Level Path : " + level_path);
-		ImGui_SameLine();
+		ImGui_Text("Level Path");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
 		if(ImGui_Button("Set Level Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Levels");
 			if(new_path != ""){
 				level_path = new_path;
 			}
 		}
+		ImGui_SameLine();
+		ImGui_Text(level_path);
 	}
 
 	bool Trigger(){

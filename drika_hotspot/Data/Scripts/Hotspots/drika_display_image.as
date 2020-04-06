@@ -46,20 +46,31 @@ class DrikaDisplayImage : DrikaElement{
 	}
 
 	void DrawSettings(){
-		if(ImGui_Checkbox("Clear Image", clear_image)){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Clear Image");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		if(ImGui_Checkbox("###Clear Image", clear_image)){
 			if(clear_image){
 				ShowImage("", tint, scale);
 			}else{
 				ShowImage(image_path, tint, scale);
 			}
 		}
+		ImGui_NextColumn();
+
 		if(!clear_image){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Image Path : ");
-			ImGui_SameLine();
+			ImGui_Text("Image Path");
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text(image_path);
-			ImGui_SameLine();
 			if(ImGui_Button("Set Image Path")){
 				string new_path = GetUserPickedReadPath("png", "Data/Textures");
 				if(new_path != ""){
@@ -67,18 +78,29 @@ class DrikaDisplayImage : DrikaElement{
 					ShowImage(image_path, tint, scale);
 				}
 			}
+			ImGui_SameLine();
+			ImGui_Text(image_path);
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Scale");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("##Scale", scale, 0.0f, 5.0f, "%.1f")){
 				ShowImage(image_path, tint, scale);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Color");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_ColorEdit4("##Color", tint)){
 				ShowImage(image_path, tint, scale);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 	}
 

@@ -156,9 +156,17 @@ class DrikaSetLevelParam : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 110.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Param Type");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Param Type", current_type, param_names)){
 			level_param = level_params(current_type);
 			param_name = param_names[current_type];
@@ -174,38 +182,58 @@ class DrikaSetLevelParam : DrikaElement{
 				vec3_param_after = vec3_param_before;
 			}
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(param_type == string_param){
 			if(level_param == other){
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Param Name");
-				ImGui_SameLine();
-				ImGui_InputText("##Param Name", param_name, 64);
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_InputText("###Param Name", param_name, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
 			}
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("After");
-			ImGui_SameLine();
-			ImGui_InputText("##After", string_param_after, 64);
+			ImGui_Text("Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputText("###Value", string_param_after, 64);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(param_type == float_param){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("After");
-			ImGui_SameLine();
-			ImGui_SliderFloat("##After", float_param_after, -1000.0f, 1000.0f, "%.4f");
+			ImGui_Text("Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_SliderFloat("###Value", float_param_after, -1000.0f, 1000.0f, "%.4f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(param_type == vec3_param){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("After");
-			ImGui_SameLine();
-			ImGui_InputFloat3("##After", vec3_param_after);
+			ImGui_Text("Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat3("###Value", vec3_param_after);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(param_type == vec3_color_param){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("After");
-			ImGui_SameLine();
-			ImGui_ColorEdit3("##After", vec3_param_after);
+			ImGui_Text("Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_ColorEdit3("###Value", vec3_param_after);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(param_type == int_param){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("After");
-			ImGui_SameLine();
-			ImGui_InputInt("##After", int_param_after);
+			ImGui_Text("Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputInt("###Value", int_param_after);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 	}
 

@@ -21,12 +21,23 @@ class DrikaSendLevelMessage : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Message");
-		ImGui_SameLine();
-		if(ImGui_InputText("##Message", message, 64)){
+		ImGui_Text("Level Message");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_InputText("###Level Message", message, 64)){
 			SetDisplayMessage();
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	void SetDisplayMessage(){

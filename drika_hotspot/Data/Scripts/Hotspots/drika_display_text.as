@@ -34,9 +34,15 @@ class DrikaDisplayText : DrikaElement{
 	}
 
 	void DrawSettings(){
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Font Path : " + font_path);
-		ImGui_SameLine();
+		ImGui_Text("Font Path");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		if(ImGui_Button("Set Font Path")){
 			string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 			if(new_path != ""){
@@ -44,17 +50,29 @@ class DrikaDisplayText : DrikaElement{
 				ShowText(display_message, font_size, font_path);
 			}
 		}
+		ImGui_SameLine();
+		ImGui_Text(font_path);
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Font Size");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_SliderInt("##Font Size", font_size, 0, 100, "%.0f")){
 			ShowText(display_message, font_size, font_path);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Text");
+		ImGui_NextColumn();
 		ImGui_SetTextBuf(display_message);
 		if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 			display_message = ImGui_GetTextBuf();
 			ShowText(display_message, font_size, font_path);
 		}
+		ImGui_NextColumn();
 	}
 
 	void Reset(){

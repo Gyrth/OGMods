@@ -76,18 +76,15 @@ class DrikaCheckpoint : DrikaElement{
 	}
 
 	void DrawSettings(){
-
-		float margin = 8.0;
 		float option_name_width = 75.0;
-		float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
 
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
-		ImGui_SetColumnWidth(1, second_column_width);
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Mode");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Mode", current_checkpoint_mode, mode_names, mode_names.size())){
 			checkpoint_mode = checkpoint_modes(current_checkpoint_mode);

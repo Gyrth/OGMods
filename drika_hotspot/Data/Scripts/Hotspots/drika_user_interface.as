@@ -286,14 +286,18 @@ class DrikaUserInterface : DrikaElement{
 
 	void DrawSettings(){
 
-		float margin = 8.0;
-		float option_name_width = 130.0;
-		float second_column_width = ImGui_GetWindowContentRegionWidth() - option_name_width + margin;
-		float slider_width = (second_column_width / 2.0) - margin;
+		float option_name_width = 140.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("UI Function");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		float slider_width = second_column_width / 2.0;
+		float margin = 3.0;
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##UI Function", current_ui_function, ui_function_names, ui_function_names.size())){
 			if(current_ui_function != ui_function){
 				SendRemoveUpdatebehaviour();
@@ -304,11 +308,13 @@ class DrikaUserInterface : DrikaElement{
 				StartEdit();
 			}
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(ui_function == ui_image){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Image Path : " + image_path);
-			ImGui_SameLine();
+			ImGui_Text("Image Path");
+			ImGui_NextColumn();
 			if(ImGui_Button("Set Image Path")){
 				string new_path = GetUserPickedReadPath("png", "Data/Images");
 				if(new_path != ""){
@@ -320,10 +326,9 @@ class DrikaUserInterface : DrikaElement{
 					SendUIInstruction("set_image_path", {image_path});
 				}
 			}
-
-			ImGui_Columns(2, false);
-			ImGui_SetColumnWidth(0, option_name_width);
-			ImGui_SetColumnWidth(1, second_column_width);
+			ImGui_SameLine();
+			ImGui_Text(image_path);
+			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position");
@@ -384,7 +389,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Rotation");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("###Rotation", rotation, -360, 360, "%.0f")){
 				SendUIInstruction("set_rotation", {rotation});
 			}
@@ -394,7 +399,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Color");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_ColorEdit4("###Color", color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
 				SendUIInstruction("set_color", {color.x, color.y, color.z, color.a});
 			}
@@ -410,15 +415,15 @@ class DrikaUserInterface : DrikaElement{
 			}
 			ImGui_NextColumn();
 		}else if(ui_function == ui_text){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Text");
+			ImGui_NextColumn();
 			ImGui_SetTextBuf(text_content);
-			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, ImGui_GetWindowHeight() / 2.0), ImGuiInputTextFlags_AllowTabInput)){
+			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, ImGui_GetWindowHeight() / 3.0), ImGuiInputTextFlags_AllowTabInput)){
 				text_content = ImGui_GetTextBuf();
 				SendUIInstruction("set_content", {"\"" + text_content + "\""});
 			}
-
-			ImGui_Columns(2, false);
-			ImGui_SetColumnWidth(0, option_name_width);
-			ImGui_SetColumnWidth(1, second_column_width);
+			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position");
@@ -439,7 +444,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Rotation");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_SliderFloat("###rotation", rotation, -360, 360, "%.0f")){
 				SendUIInstruction("set_rotation", {rotation});
 			}
@@ -447,8 +452,8 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 		}else if(ui_function == ui_font){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Font : " + font_name);
-			ImGui_SameLine();
+			ImGui_Text("Font");
+			ImGui_NextColumn();
 			if(ImGui_Button("Pick Font")){
 				string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 				if(new_path != ""){
@@ -464,15 +469,14 @@ class DrikaUserInterface : DrikaElement{
 					}
 				}
 			}
-
-			ImGui_Columns(2, false);
-			ImGui_SetColumnWidth(0, option_name_width);
-			ImGui_SetColumnWidth(1, second_column_width);
+			ImGui_SameLine();
+			ImGui_Text(font_name);
+			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Font Color");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_ColorEdit4("###Font Color", font_color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
 				SendUIInstruction("set_font_color", {font_color.x, font_color.y, font_color.z, font_color.a});
 			}
@@ -492,7 +496,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Text Size");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_DragInt("###Text Size", font_size, 0.5, 1, 100)){
 				SendUIInstruction("set_font_size", {font_size});
 			}
@@ -504,7 +508,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Fade In");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Checkbox("##Use Fade In", use_fade_in)){
 				SendRemoveUpdatebehaviour();
 				SendAddUpdateBehaviour();
@@ -516,7 +520,7 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Fade In Duration");
 				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width - margin);
+				ImGui_PushItemWidth(second_column_width);
 				if(ImGui_DragInt("##Fade Duration", fade_in_duration, 1.0, 1, 10000)){
 					SendRemoveUpdatebehaviour();
 					SendAddUpdateBehaviour();
@@ -527,7 +531,7 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Fade In Tween");
 				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width - margin);
+				ImGui_PushItemWidth(second_column_width);
 				if(ImGui_Combo("##Fade Tween Type", fade_in_tween_type, tween_types, tween_types.size())){
 					SendRemoveUpdatebehaviour();
 					SendAddUpdateBehaviour();
@@ -540,7 +544,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Move In");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width - margin);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Checkbox("##Use Move In", use_move_in)){
 				SendRemoveUpdatebehaviour();
 				SendAddUpdateBehaviour();
@@ -552,7 +556,7 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Move In Duration");
 				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width - margin);
+				ImGui_PushItemWidth(second_column_width);
 				if(ImGui_DragInt("##Duration", move_in_duration, 1.0, 1, 10000)){
 					SendRemoveUpdatebehaviour();
 					SendAddUpdateBehaviour();
@@ -563,7 +567,7 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Move In Tween");
 				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width - margin);
+				ImGui_PushItemWidth(second_column_width);
 				if(ImGui_Combo("##Tween Type", move_in_tween_type, tween_types, tween_types.size())){
 					SendRemoveUpdatebehaviour();
 					SendAddUpdateBehaviour();
@@ -575,7 +579,7 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Move In Offset");
 				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width - margin);
+				ImGui_PushItemWidth(second_column_width);
 				if(ImGui_DragInt2("##Move In Offset", move_in_offset)){
 					SendRemoveUpdatebehaviour();
 					SendAddUpdateBehaviour();

@@ -43,24 +43,46 @@ class DrikaSendCharacterMessage : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
 		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Message Type");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Message Type", current_message_type, message_type_choices, message_type_choices.size())){
 			character_message_type = character_message_types(current_message_type);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Message");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_InputText("##Message", message, 64)){
 			SetDisplayMessage();
 		}
+		ImGui_PopItemWidth();
+
 		if(ImGui_IsItemHovered()){
 			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
 			ImGui_SetTooltip(message_list);
 			ImGui_PopStyleColor();
 		}
+		ImGui_NextColumn();
 	}
 
 	void SetDisplayMessage(){

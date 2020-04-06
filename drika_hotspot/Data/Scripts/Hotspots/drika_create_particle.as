@@ -52,37 +52,72 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Particle Path : ");
-		ImGui_SameLine();
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text(particle_path);
-		ImGui_SameLine();
+		ImGui_Text("Particle Path");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
+
 		if(ImGui_Button("Set Particle Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Particles");
 			if(new_path != ""){
 				particle_path = new_path;
 			}
 		}
+		ImGui_SameLine();
+		ImGui_Text(particle_path);
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Amount");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		ImGui_InputInt("##Amount", amount);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Velocity");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		ImGui_DragFloat("##Velocity", velocity, 1.0f, 0.0f, 1000.0f);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Spread");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
 		ImGui_DragFloat("##Spread", spread, 0.001f, 0.0f, 1.0f, "%.3f");
-		ImGui_Checkbox("Connect Particles", connect_particles);
-		ImGui_Checkbox("Use Blood Tint", use_blood_tint);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Connect Particles");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###Connect Particles", connect_particles);
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Use Blood Tint");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###Use Blood Tint", use_blood_tint);
+		ImGui_NextColumn();
+
 		if(!use_blood_tint){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Particle Tint");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			ImGui_ColorEdit3("##Particle Tint", tint);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 	}
 

@@ -49,12 +49,17 @@ class DrikaPlayMusic : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 175.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Song Path : ");
-		ImGui_SameLine();
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text(song_path);
-		ImGui_SameLine();
+		ImGui_Text("Song Path");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
 		if(ImGui_Button("Set Song Path")){
 			string new_path = GetUserPickedReadPath("ogg", "Data/Music");
 			if(new_path != ""){
@@ -65,17 +70,32 @@ class DrikaPlayMusic : DrikaElement{
 				Play(false);
 			}
 		}
-		ImGui_Checkbox("From Beginning No Fade", from_beginning_no_fade);
+		ImGui_SameLine();
+		ImGui_Text(song_path);
+		ImGui_NextColumn();
 
-		ImGui_Checkbox("On Event", on_event);
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("From Beginning No Fade");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###From Beginning No Fade", from_beginning_no_fade);
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("On Event");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###On Event", on_event);
+		ImGui_NextColumn();
 
 		if(on_event){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Music Event");
-			ImGui_SameLine();
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Music Event", current_music_event, music_event_names, music_event_names.size())){
 				music_event = music_events(current_music_event);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 	}
 

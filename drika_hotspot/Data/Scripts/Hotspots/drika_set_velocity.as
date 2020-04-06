@@ -43,12 +43,32 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 140.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Velocity");
-		ImGui_SameLine();
-		ImGui_DragFloat("##Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);
-		ImGui_Checkbox("Add Velocity", add_velocity);
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_DragFloat("###Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Add Velocity");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###Add Velocity", add_velocity);
+		ImGui_NextColumn();
 	}
 
 	void DrawEditing(){

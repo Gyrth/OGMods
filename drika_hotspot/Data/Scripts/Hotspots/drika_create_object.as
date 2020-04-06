@@ -38,18 +38,25 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 100.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Object Path : ");
-		ImGui_SameLine();
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text(object_path);
-		ImGui_SameLine();
+		ImGui_Text("Object Path");
+		ImGui_NextColumn();
+
 		if(ImGui_Button("Set Object Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Objects");
 			if(new_path != ""){
 				object_path = new_path;
 			}
 		}
+		ImGui_SameLine();
+		ImGui_Text(object_path);
+		ImGui_NextColumn();
 		DrawSetReferenceUI();
 	}
 

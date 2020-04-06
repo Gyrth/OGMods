@@ -20,10 +20,20 @@ class DrikaWaitLevelMessage : DrikaElement{
 	}
 
 	void DrawSettings(){
+
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Wait for message");
-		ImGui_SameLine();
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
 		ImGui_InputText("Message", message, 64);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	void ReceiveMessage(string _message){

@@ -134,9 +134,15 @@ class DrikaAIControl : DrikaElement{
 		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("AIGoal");
+		ImGui_Text("Target");
 		ImGui_NextColumn();
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("AIGoal");
+		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##AIGoal", current_ai_goal, ai_goal_names)){
 			ai_goal = ai_goals(current_ai_goal);
@@ -144,12 +150,6 @@ class DrikaAIControl : DrikaElement{
 			StartSettings();
 		}
 		ImGui_PopItemWidth();
-		ImGui_NextColumn();
-
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Target");
-		ImGui_NextColumn();
-		target_select.DrawSelectTargetUI();
 		ImGui_NextColumn();
 
 		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){

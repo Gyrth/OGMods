@@ -38,19 +38,42 @@ class DrikaSlowMotion : DrikaElement{
 	}
 
 	void DrawSettings(){
-		ImGui_Checkbox("Wait until finished", wait);
+
+		float option_name_width = 150.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Wait until finished");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_Checkbox("###Wait until finished", wait);
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Target Time Scale");
-		ImGui_SameLine();
-		ImGui_SliderFloat("##Target Time Scale", target_time_scale, 0.0f, 1.0f, "%.2f");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_SliderFloat("###Target Time Scale", target_time_scale, 0.0f, 1.0f, "%.2f");
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Duration");
-		ImGui_SameLine();
-		ImGui_SliderFloat("##Duration", duration, 0.0f, 10.0f, "%.2f");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_SliderFloat("###Duration", duration, 0.0f, 10.0f, "%.2f");
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Delay");
-		ImGui_SameLine();
-		ImGui_SliderFloat("##Delay", delay, 0.0f, 10.0f, "%.2f");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_SliderFloat("###Delay", delay, 0.0f, 10.0f, "%.2f");
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	void Reset(){

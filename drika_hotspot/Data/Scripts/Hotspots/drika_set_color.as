@@ -131,18 +131,32 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void DrawSettings(){
+		float option_name_width = 120.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Target");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
 		target_select.DrawSelectTargetUI();
+		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Color Type");
-		ImGui_SameLine();
-		if(ImGui_Combo("##Color Type", current_color_type, color_type_choices, color_type_choices.size())){
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_Combo("###Color Type", current_color_type, color_type_choices, color_type_choices.size())){
 			SetColor(true);
 			color_type = color_types(current_color_type);
 			GetNumPaletteColors();
 			GetBeforeColor();
 			SetColor(false);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
 		if(color_type == object_palette_color){
 			if(num_palette_colors == 0){
@@ -150,21 +164,27 @@ class DrikaSetColor : DrikaElement{
 			}
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Palette Slot");
-			ImGui_SameLine();
-			if(ImGui_Combo("##Palette Slot", current_palette_slot, palette_names, palette_names.size())){
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_Combo("###Palette Slot", current_palette_slot, palette_names, palette_names.size())){
 				SetColor(true);
 				palette_slot = current_palette_slot;
 				GetBeforeColor();
 				SetColor(false);
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Color");
-		ImGui_SameLine();
-		if(ImGui_ColorEdit3("#Color", after_color)){
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_ColorEdit3("###Color", after_color)){
 			SetColor(false);
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	void DrawEditing(){
