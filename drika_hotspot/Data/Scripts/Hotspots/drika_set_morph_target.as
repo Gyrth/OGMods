@@ -91,15 +91,15 @@ class DrikaSetMorphTarget : DrikaElement{
 		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Target");
+		ImGui_Text("Target Character");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_NextColumn();
 		target_select.DrawSelectTargetUI();
-		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Two Way Morph");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		if(ImGui_Checkbox("###Two Way Morph", two_way_morph)){
 			//A single morph target cannot go under 0.
 			if(!two_way_morph && weight < 0.0){

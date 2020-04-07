@@ -98,19 +98,20 @@ class DrikaSetObjectParam : DrikaElement{
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Target");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
-		target_select.DrawSelectTargetUI();
 		ImGui_NextColumn();
+		target_select.DrawSelectTargetUI();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Param Name");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		ImGui_InputText("###Param Name", param_name, 64);
 		ImGui_PopItemWidth();
 		ImGui_AlignTextToFramePadding();
 		ImGui_NextColumn();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Param Type");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);

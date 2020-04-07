@@ -277,15 +277,15 @@ class DrikaCharacterControl : DrikaElement{
 		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Target");
+		ImGui_Text("Target Character");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_NextColumn();
 		target_select.DrawSelectTargetUI();
-		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Param Type");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Param Type", current_type, param_names, 15)){
 			character_control_option = character_control_options(current_type);

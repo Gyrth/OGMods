@@ -687,11 +687,11 @@ class DrikaDialogue : DrikaElement{
 
 		if(connection_types.find(_movement_object) != -1){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Target");
+			ImGui_Text("Target Character");
+			ImGui_NextColumn();
 			ImGui_NextColumn();
 
 			target_select.DrawSelectTargetUI();
-			ImGui_NextColumn();
 		}
 
 		if(dialogue_function == say){
@@ -1027,8 +1027,8 @@ class DrikaDialogue : DrikaElement{
 				ImGui_Separator();
 				ImGui_Text("Target Character");
 				ImGui_NextColumn();
-				track_target.DrawSelectTargetUI();
 				ImGui_NextColumn();
+				track_target.DrawSelectTargetUI();
 			}
 		}else if(dialogue_function == start){
 			ImGui_AlignTextToFramePadding();

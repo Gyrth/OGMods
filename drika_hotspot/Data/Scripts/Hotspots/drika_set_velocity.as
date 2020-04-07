@@ -52,13 +52,13 @@ class DrikaSetVelocity : DrikaElement{
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Target");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
-		target_select.DrawSelectTargetUI();
 		ImGui_NextColumn();
+		target_select.DrawSelectTargetUI();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Velocity");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		ImGui_DragFloat("###Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);
 		ImGui_PopItemWidth();

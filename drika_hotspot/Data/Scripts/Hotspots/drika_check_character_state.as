@@ -105,16 +105,16 @@ class DrikaCheckCharacterState : DrikaElement{
 		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Target");
+		ImGui_Text("Target Character");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_NextColumn();
 
 		target_select.DrawSelectTargetUI();
-		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Check for");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("###Check for", current_state_choice, state_choice_names, state_choice_names.size())){
 			state_choice = state_choices(current_state_choice);
@@ -140,8 +140,8 @@ class DrikaCheckCharacterState : DrikaElement{
 			ImGui_Separator();
 			ImGui_Text("Proximity Target");
 			ImGui_NextColumn();
-			known_target.DrawSelectTargetUI();
 			ImGui_NextColumn();
+			known_target.DrawSelectTargetUI();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Proximity Distance");

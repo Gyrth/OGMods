@@ -134,15 +134,15 @@ class DrikaAIControl : DrikaElement{
 		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Target");
+		ImGui_Text("Target Character");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_NextColumn();
 		target_select.DrawSelectTargetUI();
-		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("AIGoal");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##AIGoal", current_ai_goal, ai_goal_names)){
 			ai_goal = ai_goals(current_ai_goal);
@@ -153,10 +153,9 @@ class DrikaAIControl : DrikaElement{
 		ImGui_NextColumn();
 
 		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
-			ImGui_Separator();
 			ImGui_AlignTextToFramePadding();
 			if(ai_goal == _patrol){
-				ImGui_Text("Pathpoint");
+				ImGui_Text("Pathpoint Object");
 			}else if(ai_goal == _attack){
 				ImGui_Text("Attack Character");
 			}else if(ai_goal == _escort){
@@ -171,8 +170,8 @@ class DrikaAIControl : DrikaElement{
 				ImGui_Text("Target Character");
 			}
 			ImGui_NextColumn();
-			ai_target.DrawSelectTargetUI();
 			ImGui_NextColumn();
+			ai_target.DrawSelectTargetUI();
 		}
 	}
 

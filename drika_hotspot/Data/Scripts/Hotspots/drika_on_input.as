@@ -184,16 +184,16 @@ class DrikaOnInput : DrikaElement{
 		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Target");
+		ImGui_Text("Target Character");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_NextColumn();
 
 		target_select.DrawSelectTargetUI();
-		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Input Type");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Input Type", current_input_type, input_type_names, input_type_names.size())){
 			input_type = input_types(current_input_type);

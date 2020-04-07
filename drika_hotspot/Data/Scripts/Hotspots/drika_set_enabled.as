@@ -33,7 +33,7 @@ class DrikaSetEnabled : DrikaElement{
 	}
 
 	void DrawSettings(){
-		float option_name_width = 110.0;
+		float option_name_width = 120.0;
 
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
@@ -41,14 +41,14 @@ class DrikaSetEnabled : DrikaElement{
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Target");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_NextColumn();
 
 		target_select.DrawSelectTargetUI();
-		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Set Enabled To");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_Checkbox("###Set To", enabled);
 	}
 

@@ -102,13 +102,13 @@ class DrikaTransformObject : DrikaElement{
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Transform Target");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
-		target_select.DrawSelectTargetUI();
 		ImGui_NextColumn();
+		target_select.DrawSelectTargetUI();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Use Target Object");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Checkbox("###Use Target Object", use_target_object)){
 			if(use_target_object){
@@ -122,9 +122,9 @@ class DrikaTransformObject : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Using Target");
 			ImGui_NextColumn();
+			ImGui_NextColumn();
 
 			target_location.DrawSelectTargetUI();
-			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Translation Offset");

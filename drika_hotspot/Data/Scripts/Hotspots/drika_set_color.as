@@ -139,14 +139,14 @@ class DrikaSetColor : DrikaElement{
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Target");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_NextColumn();
 
 		target_select.DrawSelectTargetUI();
-		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Color Type");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("###Color Type", current_color_type, color_type_choices, color_type_choices.size())){
 			SetColor(true);

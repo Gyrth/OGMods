@@ -278,13 +278,6 @@ class DrikaTargetSelect{
 			refresh_target = true;
 		}
 
-		ImGui_BeginChild("target_select_ui" + tag, vec2(0, (identifier_type == batch)?20:45), false, ImGuiWindowFlags_AlwaysAutoResize);
-
-		float option_name_width = 120.0;
-
-		ImGui_Columns(2, false);
-		ImGui_SetColumnWidth(0, option_name_width);
-
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Identifier Type");
 		ImGui_NextColumn();
@@ -438,11 +431,12 @@ class DrikaTargetSelect{
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 		}else if(identifier_type == batch){
-			ImGui_EndChild();
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Batch");
+			ImGui_NextColumn();
 
 			ImGui_BeginChild("batch_select_ui" + tag, vec2(0, 200), false, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar);
 
-			ImGui_NextColumn();
 			if(ImGui_Button("Add Selected")){
 				array<int> object_ids = GetSelected();
 				for(uint i = 0; i < object_ids.size(); i++){
@@ -505,8 +499,9 @@ class DrikaTargetSelect{
 
 				ImGui_EndChildFrame();
 			}
+			ImGui_EndChild();
+			ImGui_NextColumn();
 		}
-		ImGui_EndChild();
 
 		if(target_changed){
 			parent.TargetChanged();
