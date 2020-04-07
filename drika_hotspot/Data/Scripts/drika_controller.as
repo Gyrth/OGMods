@@ -77,16 +77,14 @@ string enemies_defeated_song = "";
 bool enemies_defeated_from_beginning_no_fade = false;
 string current_song = "None";
 
-array<CheckpointData@> checkpoint_data;
+array<CheckpointData@> checkpoints;
 float PI = 3.14159265359f;
 
 class CheckpointData{
 	string name;
-	JSON json;
-	JSONValue data;
+	string data;
 
 	CheckpointData(string _name){
-		json.getRoot()["checkpoint_data"] = data;
 		name = _name;
 	}
 }
@@ -1384,21 +1382,21 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		string save_name = token_iter.GetToken(msg);
 
-		for(uint i = 0; i < checkpoint_data.size(); i++){
-			if(checkpoint_data[i].name == save_name){
+		for(uint i = 0; i < checkpoints.size(); i++){
+			if(checkpoints[i].name == save_name){
 				return;
 			}
 		}
 
 		CheckpointData new_data(save_name);
-		checkpoint_data.insertLast(new_data);
+		checkpoints.insertLast(new_data);
 	}else if(token == "drika_remove_save"){
 		token_iter.FindNextToken(msg);
 		string save_name = token_iter.GetToken(msg);
 
-		for(uint i = 0; i < checkpoint_data.size(); i++){
-			if(checkpoint_data[i].name == save_name){
-				checkpoint_data.removeAt(i);
+		for(uint i = 0; i < checkpoints.size(); i++){
+			if(checkpoints[i].name == save_name){
+				checkpoints.removeAt(i);
 			}
 		}
 	}else if(token == "drika_save_checkpoint"){
@@ -1415,8 +1413,8 @@ void ReceiveMessage(string msg){
 		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
 
 		string return_msg = "drika_message ";
-		for(uint i = 0; i < checkpoint_data.size(); i++){
-			return_msg += "\"" + checkpoint_data[i].name + "\"" + ((i == checkpoint_data.size() -1)?"":" ");
+		for(uint i = 0; i < checkpoints.size(); i++){
+			return_msg += "\"" + checkpoints[i].name + "\"" + ((i == checkpoints.size() -1)?"":" ");
 		}
 
 		Log(warning, "send " + return_msg);
@@ -1427,9 +1425,11 @@ void ReceiveMessage(string msg){
 
 void SaveCheckpoint(string save_name){
 	CheckpointData@ checkpoint = null;
-	for(uint i = 0; i < checkpoint_data.size(); i++){
-		if(checkpoint_data[i].name == save_name){
-			@checkpoint = @checkpoint_data[i];
+	for(uint i = 0; i < checkpoints.size(); i++){
+		if(checkpoints[i].name == save_name){
+			@checkpoint = @checkpoints[i];
+			checkpoints.removeAt(i);
+			break;
 		}
 	}
 
@@ -1438,7 +1438,11 @@ void SaveCheckpoint(string save_name){
 		return;
 	}
 
-	checkpoint.data.clear();
+	//Move the checkpoint to the end of the array so it can be used as the latest checkpoint.
+	checkpoints.insertLast(checkpoint);
+
+	JSON json;
+	JSONValue root;
 
 	for(int i = 0; i < GetNumCharacters(); i++){
 		JSONValue character_data;
@@ -1468,7 +1472,7 @@ void SaveCheckpoint(string save_name){
 		character_data["velocity"].append(velocity.y);
 		character_data["velocity"].append(velocity.z);
 
-		checkpoint.data.append(character_data);
+		root.append(character_data);
 	}
 
 	for(int i = 0; i < GetNumItems(); i++){
@@ -1495,7 +1499,7 @@ void SaveCheckpoint(string save_name){
 		item_data["angular_velocity"].append(angular_velocity.y);
 		item_data["angular_velocity"].append(angular_velocity.z);
 
-		checkpoint.data.append(item_data);
+		root.append(item_data);
 	}
 
 	for(int i = 0; i < GetNumHotspots(); i++){
@@ -1506,13 +1510,71 @@ void SaveCheckpoint(string save_name){
 		}
 		JSONValue hotspot_data;
 		hotspot_data["id"] = JSONValue(hotspot.GetID());
-		hotspot_data["drika_checkpoint_data"] = JSONValue(hotspot.QueryStringFunction("string GetCheckpointData()"));
-		checkpoint.data.append(hotspot_data);
+		hotspot_data["dhs_data"] = JSONValue(hotspot.QueryStringFunction("string GetCheckpointData()"));
+		root.append(hotspot_data);
 	}
+
+	json.getRoot()["checkpoint_data"] = root;
+	checkpoint.data = json.writeString(false);
+	Log(warning, checkpoint.data);
 }
 
 void LoadCheckpoint(string load_name){
+	Log(warning, "Load " + load_name);
+	CheckpointData@ checkpoint = null;
+	if(load_name == "Latest"){
+		if(checkpoints.size() > 0){
+			@checkpoint = @checkpoints[checkpoints.size() - 1];
+		}
+	}else{
+		for(uint i = 0; i < checkpoints.size(); i++){
+			if(checkpoints[i].name == load_name){
+				@checkpoint = @checkpoints[i];
+				break;
+			}
+		}
+	}
 
+	if(checkpoint is null){
+		Log(error, "Could not find the checkpoint data! " + load_name);
+		return;
+	}
+
+	JSON file;
+	file.parseString(checkpoint.data);
+	JSONValue root = file.getRoot()["checkpoint_data"];
+
+	for(uint i = 0; i < root.size(); i++){
+		JSONValue obj_data = root[i];
+		int id = obj_data["id"].asInt();
+		Object@ obj = ReadObjectFromID(id);
+
+		if(obj.GetType() == _movement_object){
+			vec3 position = vec3(obj_data["translation"][0].asFloat(), obj_data["translation"][1].asFloat(), obj_data["translation"][2].asFloat());
+			float rotation = obj_data["rotation"].asFloat();
+			vec3 velocity = vec3(obj_data["velocity"][0].asFloat(), obj_data["velocity"][1].asFloat(), obj_data["velocity"][2].asFloat());
+
+			MovementObject@ char = ReadCharacterID(id);
+			char.position = position;
+			char.ReceiveScriptMessage("set_rotation " + rotation);
+			char.velocity = velocity;
+		}else if(obj.GetType() == _hotspot_object){
+			string msg = "drika_load_checkpoint_data " + obj_data["dhs_data"].asString();
+			obj.ReceiveScriptMessage(msg);
+		}else if(obj.GetType() == _item_object){
+			vec3 position = vec3(obj_data["translation"][0].asFloat(), obj_data["translation"][1].asFloat(), obj_data["translation"][2].asFloat());
+			vec3 linear_velocity = vec3(obj_data["linear_velocity"][0].asFloat(), obj_data["linear_velocity"][1].asFloat(), obj_data["linear_velocity"][2].asFloat());
+			vec3 angular_velocity = vec3(obj_data["angular_velocity"][0].asFloat(), obj_data["angular_velocity"][1].asFloat(), obj_data["angular_velocity"][2].asFloat());
+
+			ItemObject@ item = ReadItemID(id);
+			mat4 physics_transform = item.GetPhysicsTransform();
+			physics_transform.SetTranslationPart(position);
+			item.SetPhysicsTransform(physics_transform);
+			item.SetLinearVelocity(linear_velocity);
+			item.SetAngularVelocity(angular_velocity);
+			item.ActivatePhysics();
+		}
+	}
 }
 
 void SendUIInstruction(string param_1, array<string> params){

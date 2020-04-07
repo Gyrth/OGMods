@@ -1169,6 +1169,13 @@ void ReceiveMessage(string msg){
 		}
 
 		GetCurrentElement().ReceiveMessage(drika_messages);
+	}else if(token == "drika_load_checkpoint_data"){
+		string checkpoint_data;
+
+		while(token_iter.FindNextToken(msg)){
+			checkpoint_data += token_iter.GetToken(msg);
+		}
+		SetCheckpointData(checkpoint_data);
 	}
 }
 
@@ -1386,6 +1393,11 @@ void Save(){
 string GetCheckpointData(){
 	Log(warning, "Getting dhs cehckpoint data works!");
 	return "Empty";
+}
+
+void SetCheckpointData(string checkpoint_data){
+	Log(warning, "Loading dhs cehckpoint data works!");
+
 }
 
 string GetUniqueID(){

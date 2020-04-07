@@ -128,12 +128,12 @@ class DrikaCheckpoint : DrikaElement{
 	}
 
 	void SaveCheckpoint(){
-		string msg = "drika_save_checkpoint " + save_name;
+		string msg = "drika_save_checkpoint " + "\"" + save_name + "\"";
 		level.SendMessage(msg);
 	}
 
 	void LoadCheckpoint(){
-		string msg = "drika_load_checkpoint " + load_name;
+		string msg = "drika_load_checkpoint " + "\"" + load_name + "\"";
 		level.SendMessage(msg);
 	}
 
