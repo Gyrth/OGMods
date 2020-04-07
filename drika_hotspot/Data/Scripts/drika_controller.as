@@ -1625,8 +1625,8 @@ void Update(){
 			if(fade_timer >= fade_duration){
 				//Screen has faded all the way to black.
 				has_camera_control = !has_camera_control;
-				MessageWaitingForFadeOut();
 				fade_direction = -1.0;
+				MessageWaitingForFadeOut();
 			}
 			fade_timer += time_step;
 		}else{
@@ -1889,7 +1889,7 @@ void SmoothCameraLookAt(vec3 target_location){
 void MessageWaitingForFadeOut(){
 	for(uint i = 0; i < waiting_hotspot_ids.size(); i++){
 		Object@ hotspot_obj = ReadObjectFromID(waiting_hotspot_ids[i]);
-		hotspot_obj.ReceiveScriptMessage("drika_dialogue_fade_out_done");
+		hotspot_obj.ReceiveScriptMessage("drika_message fade_out_done");
 	}
 	waiting_hotspot_ids.resize(0);
 }

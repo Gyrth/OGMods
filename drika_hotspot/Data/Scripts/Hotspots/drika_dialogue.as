@@ -48,6 +48,7 @@ class DrikaDialogue : DrikaElement{
 	float target_camera_zoom;
 	float target_fade_to_black;
 	float fade_to_black_duration;
+	bool wait_for_fade = false;
 
 	int dialogue_layout;
 	string dialogue_text_font;
@@ -56,6 +57,7 @@ class DrikaDialogue : DrikaElement{
 	bool dialogue_text_shadow;
 	bool use_voice_sounds;
 	bool show_names;
+	bool use_fade;
 
 	string default_avatar_path = "Data/Textures/ui/menus/main/white_square.png";
 	TextureAssetRef avatar = LoadTexture(default_avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
@@ -144,6 +146,7 @@ class DrikaDialogue : DrikaElement{
 		dialogue_text_shadow = GetJSONBool(params, "dialogue_text_shadow", true);
 		use_voice_sounds = GetJSONBool(params, "use_voice_sounds", true);
 		show_names = GetJSONBool(params, "show_names", true);
+		use_fade = GetJSONBool(params, "use_fade", true);
 
 		anim_mirrored = GetJSONBool(params, "anim_mirrored", false);
 		anim_mobile = GetJSONBool(params, "anim_mobile", false);
@@ -299,6 +302,10 @@ class DrikaDialogue : DrikaElement{
 				data["choice_5"] = JSONValue(choice_5);
 				choice_5_element.SaveGoToLine(data);
 			}
+		}else if(dialogue_function == start){
+			data["use_fade"] = JSONValue(use_fade);
+		}else if(dialogue_function == end){
+			data["use_fade"] = JSONValue(use_fade);
 		}
 
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
@@ -1023,6 +1030,18 @@ class DrikaDialogue : DrikaElement{
 				track_target.DrawSelectTargetUI();
 				ImGui_NextColumn();
 			}
+		}else if(dialogue_function == start){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Use Fade");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Use Fade", use_fade);
+			ImGui_NextColumn();
+		}else if(dialogue_function == end){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Use Fade");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Use Fade", use_fade);
+			ImGui_NextColumn();
 		}
 	}
 
@@ -1070,8 +1089,20 @@ class DrikaDialogue : DrikaElement{
 		}
 	}
 
+	void ReceiveMessage(array<string> messages){
+		Log(warning, "Received " + messages[0]);
+		if(messages[0] == "fade_out_done"){
+			if(dialogue_function == start){
+				wait_for_fade = false;
+			}else if(dialogue_function == end){
+				wait_for_fade = false;
+			}
+		}
+	}
+
 	void Reset(){
 		dialogue_done = false;
+		wait_for_fade = false;
 		if(dialogue_function == say){
 			if(say_started){
 				level.SendMessage("drika_dialogue_hide");
@@ -1177,8 +1208,7 @@ class DrikaDialogue : DrikaElement{
 			SetDialogueSettings();
 			return true;
 		}else if(dialogue_function == start){
-			StartDialogue();
-			return true;
+			return StartDialogue();
 		}else if(dialogue_function == end){
 			return EndDialogue();
 		}else if(dialogue_function == set_actor_dialogue_control){
@@ -1280,18 +1310,35 @@ class DrikaDialogue : DrikaElement{
 		return true;
 	}
 
-	void StartDialogue(){
-		level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
-		wait_for_fade = true;
-		triggered = true;
+	bool StartDialogue(){
+		if(wait_for_fade){
+			//Waiting for the fade to end.
+			return false;
+		}else if(use_fade && !triggered){
+			//Starting the fade.
+			level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+			wait_for_fade = true;
+			triggered = true;
+			return false;
+		}else{
+			//Fade is done, continue with the next function.
+			in_dialogue_mode = true;
+			triggered = false;
+			return true;
+		}
 	}
 
 	bool EndDialogue(){
-		if(level.DialogueCameraControl()){
+		if(wait_for_fade){
+			return false;
+		}else if(level.DialogueCameraControl() && (use_fade && !triggered)){
 			level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
 			wait_for_fade = true;
 			return false;
 		}else{
+			in_dialogue_mode = false;
+			triggered = false;
+			ClearDialogueActors();
 			level.SendMessage("drika_dialogue_end");
 			return true;
 		}

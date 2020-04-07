@@ -74,7 +74,6 @@ bool show_text = false;
 float text_opacity = 1.0;
 bool hotspot_enabled = true;
 array<int> dialogue_actor_ids;
-bool wait_for_fade = false;
 bool in_dialogue_mode = false;
 array<DrikaElement@> post_init_queue;
 bool element_added = false;
@@ -395,7 +394,7 @@ void Update(){
 		return;
 	}
 
-	if(drika_indexes.size() > 0 && hotspot_enabled && !wait_for_fade){
+	if(drika_indexes.size() > 0 && hotspot_enabled){
 		if(!show_editor){
 			DeliverMessages();
 			UpdateParallelOperations();
@@ -1114,11 +1113,6 @@ void ReceiveMessage(string msg){
 		string new_animation = token_iter.GetToken(msg);
 
 		all_animations[all_animations.size() -1].AddAnimation(new_animation);
-	}else if(token == "drika_dialogue_fade_out_done"){
-		in_dialogue_mode = !in_dialogue_mode;
-
-		ClearDialogueActors();
-		wait_for_fade = false;
 	}else if(token == "drika_read_file"){
 		token_iter.FindNextToken(msg);
 		string param_1 = token_iter.GetToken(msg);
@@ -1247,7 +1241,6 @@ void Reset(){
 	parallel_elements.resize(0);
 
 	script_finished = false;
-	wait_for_fade = false;
 	in_dialogue_mode = false;
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
 		drika_elements[drika_indexes[i]].Reset();
