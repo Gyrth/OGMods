@@ -1092,6 +1092,10 @@ void ReceiveMessage(string msg){
 			}
 		}
 
+		level.Execute("dialogue.cam_pos = vec3(" + camera_position.x + ", " + camera_position.y + ", " + camera_position.z + ");");
+		level.Execute("dialogue.cam_rot = vec3(" + camera_rotation.x + "," + camera_rotation.y + "," + camera_rotation.z + ");");
+		level.Execute("dialogue.cam_zoom = " + camera_zoom + ");");
+
 		current_camera_position = camera_position;
 		camera_settings_changed = true;
 	}else if(token == "drika_dialogue_end"){

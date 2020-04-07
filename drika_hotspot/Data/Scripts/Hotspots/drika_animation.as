@@ -547,10 +547,6 @@ class DrikaAnimation : DrikaElement{
 			msg += animate_scale?zoom:90.0;
 			level.SendMessage(msg);
 
-			level.Execute("dialogue.cam_pos = vec3(" + translation.x + ", " + translation.y + ", " + translation.z + ");");
-			level.Execute("dialogue.cam_rot = vec3(" + direction.x + "," + direction.y + "," + direction.z + ");");
-			level.Execute("dialogue.cam_zoom = " + (animate_scale?zoom:90.0) + ");");
-
 			if(@camera_placeholder != null){
 				camera_placeholder.SetTranslation(translation);
 				camera_placeholder.SetRotation(rotation);
