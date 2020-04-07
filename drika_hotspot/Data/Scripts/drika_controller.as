@@ -1451,7 +1451,7 @@ void SaveCheckpoint(string save_name){
 		int chest_bone = skeleton.IKBoneStart("torso");
 		BoneTransform chest_frame_matrix = rigged_object.GetFrameMatrix(chest_bone);
 		quaternion quat = chest_frame_matrix.rotation;
-		vec3 facing = Mult(quat, vec3(0,0,1));
+		vec3 facing = Mult(quat, vec3(1,0,0));
 		float rot = atan2(facing.x, facing.z) * 180.0f / PI;
 		float rotation = floor(rot + 0.5f);
 		character_data["rotation"] = JSONValue(rotation);

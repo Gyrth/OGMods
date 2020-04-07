@@ -41,6 +41,7 @@
 #include "hotspots/drika_user_interface.as"
 #include "hotspots/drika_checkpoint.as"
 
+float PI = 3.14159265359f;
 bool show_editor = false;
 bool run_in_editormode = true;
 bool has_closed = true;
@@ -1261,9 +1262,21 @@ void AddDialogueActor(int character_id){
 	MovementObject@ char = ReadCharacterID(character_id);
 	if(dialogue_actor_ids.find(character_id) == -1){
 		dialogue_actor_ids.insertLast(character_id);
+		vec3 char_position = char.position;
+
+		RiggedObject@ rigged_object = char.rigged_object();
+		Skeleton@ skeleton = rigged_object.skeleton();
+		// Get relative chest transformation
+		int chest_bone = skeleton.IKBoneStart("torso");
+		BoneTransform chest_frame_matrix = rigged_object.GetFrameMatrix(chest_bone);
+		quaternion quat = chest_frame_matrix.rotation;
+		vec3 facing = Mult(quat, vec3(1,0,0));
+		float rot = atan2(facing.x, facing.z) * 180.0f / PI;
+		float char_rotation = floor(rot + 0.5f);
+
 		char.ReceiveScriptMessage("set_dialogue_control true");
-		vec3 hotspot_position = this_hotspot.GetTranslation();
-		char.ReceiveScriptMessage("set_dialogue_position " + hotspot_position.x + " " + hotspot_position.y + " " + hotspot_position.z);
+		char.ReceiveScriptMessage("set_dialogue_position " + char_position.x + " " + char_position.y + " " + char_position.z);
+		char.ReceiveScriptMessage("set_rotation " + char_rotation);
 		/* char.rigged_object().anim_client().Reset(); */
 	}
 }
