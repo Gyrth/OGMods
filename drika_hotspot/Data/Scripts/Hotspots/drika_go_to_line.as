@@ -60,34 +60,33 @@ class DrikaGoToLine : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 
-		data["choice_line2"] = JSONValue(choice_line2);
-		data["choice_line3"] = JSONValue(choice_line3);
-		data["choice_line4"] = JSONValue(choice_line4);
-		data["choice_line5"] = JSONValue(choice_line5);
-		data["choice_line6"] = JSONValue(choice_line6);
-		data["choice_line7"] = JSONValue(choice_line7);
-		data["choice_line8"] = JSONValue(choice_line8);
-		data["choice_line9"] = JSONValue(choice_line9);
-		data["choice_line10"] = JSONValue(choice_line10);
-
 		line_element.SaveGoToLine(data);
 		if(choice_line2){
+			data["choice_line2"] = JSONValue(choice_line2);
 			line_element_2.SaveGoToLine(data);
 			if(choice_line3){
+				data["choice_line3"] = JSONValue(choice_line3);
 				line_element_3.SaveGoToLine(data);
 				if(choice_line4){
+					data["choice_line4"] = JSONValue(choice_line4);
 					line_element_4.SaveGoToLine(data);
 					if(choice_line5){
+						data["choice_line5"] = JSONValue(choice_line5);
 						line_element_5.SaveGoToLine(data);
 						if(choice_line6){
+							data["choice_line6"] = JSONValue(choice_line6);
 							line_element_6.SaveGoToLine(data);
 							if(choice_line7){
+								data["choice_line7"] = JSONValue(choice_line7);
 								line_element_7.SaveGoToLine(data);
 								if(choice_line8){
+									data["choice_line8"] = JSONValue(choice_line8);
 									line_element_8.SaveGoToLine(data);
 									if(choice_line9){
+										data["choice_line9"] = JSONValue(choice_line9);
 										line_element_9.SaveGoToLine(data);
 										if(choice_line10){
+											data["choice_line10"] = JSONValue(choice_line10);
 											line_element_10.SaveGoToLine(data);
 										}
 									}
