@@ -1090,7 +1090,6 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void ReceiveMessage(array<string> messages){
-		Log(warning, "Received " + messages[0]);
 		if(messages[0] == "fade_out_done"){
 			if(dialogue_function == start){
 				wait_for_fade = false;
@@ -1324,6 +1323,7 @@ class DrikaDialogue : DrikaElement{
 			//Fade is done, continue with the next function.
 			in_dialogue_mode = true;
 			triggered = false;
+			level.SendMessage("drika_dialogue_start");
 			return true;
 		}
 	}

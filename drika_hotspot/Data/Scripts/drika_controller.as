@@ -1101,6 +1101,8 @@ void ReceiveMessage(string msg){
 		has_camera_control = false;
 		ui_hotspot_id = -1;
 		dialogue_container.clear();
+	}else if(token == "drika_dialogue_start"){
+		has_camera_control = true;
 	}else if(token == "drika_dialogue_fade_out_in"){
 		token_iter.FindNextToken(msg);
 		int hotspot_id = atoi(token_iter.GetToken(msg));
@@ -1624,7 +1626,6 @@ void Update(){
 		if(fade_direction == 1.0){
 			if(fade_timer >= fade_duration){
 				//Screen has faded all the way to black.
-				has_camera_control = !has_camera_control;
 				fade_direction = -1.0;
 				MessageWaitingForFadeOut();
 			}
