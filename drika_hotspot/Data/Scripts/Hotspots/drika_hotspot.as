@@ -573,6 +573,9 @@ void DrawEditor(){
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Settings")){
+				if(ImGui_Checkbox("Enabled", hotspot_enabled)){
+					this_hotspot.SetEnabled(hotspot_enabled);
+				}
 				if(ImGui_Checkbox("Show Name", show_name)){
 					if(!show_name){
 						this_hotspot.SetName("");
