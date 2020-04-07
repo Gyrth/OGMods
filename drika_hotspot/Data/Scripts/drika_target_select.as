@@ -68,6 +68,50 @@ vec4 GetBatchObjectColor(int object_type){
 	return vec4(1.0);
 }
 
+string GetObjectTypeString(int object_type){
+	switch(object_type){
+		case _env_object:
+			return "EnvObject";
+		case _movement_object:
+			return "MovementObject";
+		case _spawn_point:
+			return "SpawnPoint";
+		case _decal_object:
+			return "DecalObject";
+		case _hotspot_object:
+			return "Hotspot";
+		case _group:
+			return "Group";
+		case _item_object:
+			return "ItemObject";
+		case _path_point_object:
+			return "PathPointObject";
+		case _ambient_sound_object:
+			return "AmbientSound";
+		case _placeholder_object:
+			return "Placeholder";
+		case _light_probe_object:
+			return "LightProbe";
+		case _dynamic_light_object:
+			return "DynamicLight";
+		case _navmesh_hint_object:
+			return "NavMeshHint";
+		case _navmesh_region_object:
+			return "NavMeshRegion";
+		case _navmesh_connection_object:
+			return "NavMeshConnection";
+		case _reflection_capture_object:
+			return "ReflectionCapture";
+		case _light_volume_object:
+			return "LightVolume";
+		case _prefab:
+			return "Prefab";
+		default :
+			break;
+	}
+	return "NA";
+}
+
 class DrikaTargetSelect{
 	int object_id = -1;
 	string reference_string = "drika_reference";
@@ -471,7 +515,16 @@ class DrikaTargetSelect{
 
 	void AddBatchObject(int batch_object_id){
 		Object@ obj = ReadObjectFromID(batch_object_id);
-		string text = obj.GetID() + obj.GetEditorLabel() + obj.GetLabel() + obj.GetName();
+		string label = obj.GetLabel();
+		string editor_label = obj.GetEditorLabel();
+		string name = obj.GetName();
+		string type_string = GetObjectTypeString(obj.GetType());
+
+		string text = obj.GetID() + " ";
+		text += (label != "")?label + " ":"";
+		text += (editor_label != "")?editor_label + " ":"";
+		text += (name != "")?name + " ":"";
+		text += type_string;
 		batch_objects.insertLast(BatchObject(obj.GetID(), text, GetBatchObjectColor(obj.GetType())));
 	}
 
