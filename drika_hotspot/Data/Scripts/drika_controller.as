@@ -80,6 +80,15 @@ string current_song = "None";
 array<CheckpointData@> checkpoints;
 float PI = 3.14159265359f;
 
+enum WeaponSlot {
+    _held_left = 0,
+    _held_right = 1,
+    _sheathed_left = 2,
+    _sheathed_right = 3,
+    _sheathed_left_sheathe = 4,
+    _sheathed_right_sheathe = 5,
+};
+
 class CheckpointData{
 	string name;
 	string data;
@@ -1479,25 +1488,57 @@ void SaveCheckpoint(string save_name){
 		ItemObject@ item = ReadItem(i);
 		JSONValue item_data;
 
-		item_data["id"] = JSONValue(item.GetID());
+		int item_id = item.GetID();
+		item_data["id"] = JSONValue(item_id);
 
-		item_data["translation"] = JSONValue(JSONarrayValue);
-		vec3 translation = item.GetPhysicsPosition();
-		item_data["translation"].append(translation.x);
-		item_data["translation"].append(translation.y);
-		item_data["translation"].append(translation.z);
+		bool is_held = item.IsHeld();
+		item_data["is_held"] = JSONValue(is_held);
+		if(is_held){
+			item_data["held_by_whom"] = JSONValue(item.HeldByWhom());
+			MovementObject@ char = ReadCharacterID(item.HeldByWhom());
 
-		item_data["linear_velocity"] = JSONValue(JSONarrayValue);
-		vec3 linear_velocity = item.GetLinearVelocity();
-		item_data["linear_velocity"].append(linear_velocity.x);
-		item_data["linear_velocity"].append(linear_velocity.y);
-		item_data["linear_velocity"].append(linear_velocity.z);
+			if(item_id == char.GetArrayIntVar("weapon_slots", _held_left)){
+				item_data["item_slot"] = JSONValue(_held_left);
+			}else if(item_id == char.GetArrayIntVar("weapon_slots", _held_right)){
+				item_data["item_slot"] = JSONValue(_held_right);
+			}else if(item_id == char.GetArrayIntVar("weapon_slots", _sheathed_left)){
+				item_data["item_slot"] = JSONValue(_sheathed_left);
+			}else if(item_id == char.GetArrayIntVar("weapon_slots", _sheathed_right)){
+				item_data["item_slot"] = JSONValue(_sheathed_right);
+			}else if(item_id == char.GetArrayIntVar("weapon_slots", _sheathed_left_sheathe)){
+				item_data["item_slot"] = JSONValue(_sheathed_left_sheathe);
+			}else if(item_id == char.GetArrayIntVar("weapon_slots", _sheathed_right_sheathe)){
+				item_data["item_slot"] = JSONValue(_sheathed_right_sheathe);
+			}else{
+				Log(warning, "Unknown slot used for item! " + item_id);
+				item_data["item_slot"] = JSONValue(-1);
+			}
+		}else{
+			item_data["translation"] = JSONValue(JSONarrayValue);
+			vec3 translation = item.GetPhysicsPosition();
+			item_data["translation"].append(translation.x);
+			item_data["translation"].append(translation.y);
+			item_data["translation"].append(translation.z);
 
-		item_data["angular_velocity"] = JSONValue(JSONarrayValue);
-		vec3 angular_velocity = item.GetAngularVelocity();
-		item_data["angular_velocity"].append(angular_velocity.x);
-		item_data["angular_velocity"].append(angular_velocity.y);
-		item_data["angular_velocity"].append(angular_velocity.z);
+			item_data["rotation"] = JSONValue(JSONarrayValue);
+			quaternion rotation = QuaternionFromMat4(item.GetPhysicsTransform().GetRotationPart());
+			item_data["rotation"].append(rotation.x);
+			item_data["rotation"].append(rotation.y);
+			item_data["rotation"].append(rotation.z);
+			item_data["rotation"].append(rotation.w);
+
+			item_data["linear_velocity"] = JSONValue(JSONarrayValue);
+			vec3 linear_velocity = item.GetLinearVelocity();
+			item_data["linear_velocity"].append(linear_velocity.x);
+			item_data["linear_velocity"].append(linear_velocity.y);
+			item_data["linear_velocity"].append(linear_velocity.z);
+
+			item_data["angular_velocity"] = JSONValue(JSONarrayValue);
+			vec3 angular_velocity = item.GetAngularVelocity();
+			item_data["angular_velocity"].append(angular_velocity.x);
+			item_data["angular_velocity"].append(angular_velocity.y);
+			item_data["angular_velocity"].append(angular_velocity.z);
+		}
 
 		root.append(item_data);
 	}
@@ -1558,21 +1599,50 @@ void LoadCheckpoint(string load_name){
 			char.position = position;
 			char.ReceiveScriptMessage("set_rotation " + rotation);
 			char.velocity = velocity;
+			char.Execute("FixDiscontinuity();");
+			char.Execute("ResetMind();");
 		}else if(obj.GetType() == _hotspot_object){
 			string msg = "drika_load_checkpoint_data " + obj_data["dhs_data"].asString();
 			obj.ReceiveScriptMessage(msg);
 		}else if(obj.GetType() == _item_object){
-			vec3 position = vec3(obj_data["translation"][0].asFloat(), obj_data["translation"][1].asFloat(), obj_data["translation"][2].asFloat());
-			vec3 linear_velocity = vec3(obj_data["linear_velocity"][0].asFloat(), obj_data["linear_velocity"][1].asFloat(), obj_data["linear_velocity"][2].asFloat());
-			vec3 angular_velocity = vec3(obj_data["angular_velocity"][0].asFloat(), obj_data["angular_velocity"][1].asFloat(), obj_data["angular_velocity"][2].asFloat());
-
+			bool is_held = obj_data["is_held"].asBool();
 			ItemObject@ item = ReadItemID(id);
-			mat4 physics_transform = item.GetPhysicsTransform();
-			physics_transform.SetTranslationPart(position);
-			item.SetPhysicsTransform(physics_transform);
-			item.SetLinearVelocity(linear_velocity);
-			item.SetAngularVelocity(angular_velocity);
-			item.ActivatePhysics();
+
+			bool currently_held = item.IsHeld();
+			//Detach the item from any character first.
+			if(currently_held){
+				int char_id = item.HeldByWhom();
+				MovementObject@ holder = ReadCharacterID(char_id);
+				holder.Execute("this_mo.DetachItem(" + id + ");");
+				holder.Execute("NotifyItemDetach(" + id + ");");
+			}
+
+			if(is_held){
+				int item_slot = obj_data["item_slot"].asInt();
+				//If the slot is not found then just skip attaching it.
+				if(item_slot != -1){
+					int char_id = obj_data["held_by_whom"].asInt();
+					MovementObject@ holder = ReadCharacterID(char_id);
+					bool is_left = (item_slot == _held_left || item_slot == _sheathed_left || item_slot == _sheathed_left_sheathe);
+					string attachement_type = (item_slot == _held_left || item_slot == _held_right)?"_at_grip":"_at_sheathe";
+					string command = "this_mo.AttachItemToSlot(" + id + ", " + attachement_type + ", " + is_left + ");HandleEditorAttachment(" + id + ", " + attachement_type + ", " + is_left + ");";
+					Log(warning, command);
+					holder.Execute(command);
+				}
+			}else{
+				vec3 position = vec3(obj_data["translation"][0].asFloat(), obj_data["translation"][1].asFloat(), obj_data["translation"][2].asFloat());
+				mat4 rotation = Mat4FromQuaternion(quaternion(obj_data["rotation"][0].asFloat(), obj_data["rotation"][1].asFloat(), obj_data["rotation"][2].asFloat(), obj_data["rotation"][3].asFloat()));
+				vec3 linear_velocity = vec3(obj_data["linear_velocity"][0].asFloat(), obj_data["linear_velocity"][1].asFloat(), obj_data["linear_velocity"][2].asFloat());
+				vec3 angular_velocity = vec3(obj_data["angular_velocity"][0].asFloat(), obj_data["angular_velocity"][1].asFloat(), obj_data["angular_velocity"][2].asFloat());
+
+				mat4 physics_transform = item.GetPhysicsTransform();
+				physics_transform.SetTranslationPart(position);
+				physics_transform.SetRotationPart(rotation);
+				item.SetPhysicsTransform(physics_transform);
+				item.SetLinearVelocity(linear_velocity);
+				item.SetAngularVelocity(angular_velocity);
+				item.ActivatePhysics();
+			}
 		}
 	}
 }
