@@ -12,6 +12,8 @@ class DrikaCheckpoint : DrikaElement{
 	int current_checkpoint_mode;
 	int current_save_data;
 	array<string> save_data_names = {"Latest"};
+	bool wait_for_fade = false;
+	bool use_fade = true;
 
 	DrikaCheckpoint(JSONValue params = JSONValue()){
 		save_name = GetJSONString(params, "save_name", "save");
@@ -31,11 +33,20 @@ class DrikaCheckpoint : DrikaElement{
 
 	void ReceiveMessage(array<string> messages){
 		Log(warning, "received message");
-		save_data_names = {"Latest"};
-		for(uint i = 0; i < messages.size(); i++){
-			Log(warning, messages[i]);
-			save_data_names.insertLast(messages[i]);
+		if(messages[0] == "drika_save_names"){
+			save_data_names = {"Latest"};
+			for(uint i = 1; i < messages.size(); i++){
+				Log(warning, messages[i]);
+				save_data_names.insertLast(messages[i]);
+			}
+		}else if(messages[0] == "fade_out_done"){
+			wait_for_fade = false;
 		}
+	}
+
+	void Reset(){
+		wait_for_fade = false;
+		triggered = false;
 	}
 
 	JSONValue GetSaveData(){
@@ -132,9 +143,23 @@ class DrikaCheckpoint : DrikaElement{
 		level.SendMessage(msg);
 	}
 
-	void LoadCheckpoint(){
-		string msg = "drika_load_checkpoint " + "\"" + load_name + "\"";
-		level.SendMessage(msg);
+	bool LoadCheckpoint(){
+		if(wait_for_fade){
+			//Waiting for the fade to end.
+			return false;
+		}else if(use_fade && !triggered){
+			//Starting the fade.
+			level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+			wait_for_fade = true;
+			triggered = true;
+			return false;
+		}else{
+			//Fade is done, continue with the next function.
+			triggered = false;
+			string msg = "drika_load_checkpoint " + "\"" + load_name + "\"";
+			level.SendMessage(msg);
+			return true;
+		}
 	}
 
 	void GetSaveNames(){
@@ -144,7 +169,7 @@ class DrikaCheckpoint : DrikaElement{
 
 	bool Trigger(){
 		if(checkpoint_mode == load){
-			LoadCheckpoint();
+			return LoadCheckpoint();
 		}else if(checkpoint_mode == save){
 			SaveCheckpoint();
 		}

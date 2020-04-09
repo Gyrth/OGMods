@@ -1433,7 +1433,7 @@ void ReceiveMessage(string msg){
 		int hotspot_id = atoi(token_iter.GetToken(msg));
 		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
 
-		string return_msg = "drika_message ";
+		string return_msg = "drika_message drika_save_names";
 		for(uint i = 0; i < checkpoints.size(); i++){
 			return_msg += "\"" + checkpoints[i].name + "\"" + ((i == checkpoints.size() -1)?"":" ");
 		}
