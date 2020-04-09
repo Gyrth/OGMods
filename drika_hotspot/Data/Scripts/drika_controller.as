@@ -89,6 +89,18 @@ enum WeaponSlot {
     _sheathed_right_sheathe = 5,
 };
 
+const int _movement_state = 0;  // character is moving on the ground
+const int _ground_state = 1;  // character has fallen down or is raising up, ATM ragdolls handle most of this
+const int _attack_state = 2;  // character is performing an attack
+const int _hit_reaction_state = 3;  // character was hit or dealt damage to and has to react to it in some manner
+const int _ragdoll_state = 4;  // character is falling in ragdoll mode
+
+const int _RGDL_NO_TYPE = 0;
+const int _RGDL_FALL = 1;
+const int _RGDL_LIMP = 2;
+const int _RGDL_INJURED = 3;
+const int _RGDL_ANIMATION = 4;
+
 class CheckpointData{
 	string name;
 	string data;
@@ -1481,6 +1493,27 @@ void SaveCheckpoint(string save_name){
 		character_data["velocity"].append(velocity.y);
 		character_data["velocity"].append(velocity.z);
 
+		character_data["state"] = JSONValue(char.GetIntVar("state"));
+		character_data["ragdoll_type"] = JSONValue(char.GetIntVar("ragdoll_type"));
+		character_data["knocked_out"] = JSONValue(char.GetIntVar("knocked_out"));
+
+		character_data["blood_health"] = JSONValue(char.GetFloatVar("blood_health"));
+		character_data["block_health"] = JSONValue(char.GetFloatVar("block_health"));
+		character_data["blood_damage"] = JSONValue(char.GetFloatVar("blood_damage"));
+		character_data["temp_health"] = JSONValue(char.GetFloatVar("temp_health"));
+		character_data["permanent_health"] = JSONValue(char.GetFloatVar("permanent_health"));
+		character_data["on_fire"] = JSONValue(char.GetBoolVar("on_fire"));
+		character_data["injured_mouth_open"] = JSONValue(char.GetFloatVar("injured_mouth_open"));
+		character_data["blood_amount"] = JSONValue(char.GetFloatVar("blood_amount"));
+		character_data["recovery_time"] = JSONValue(char.GetFloatVar("recovery_time"));
+		character_data["roll_recovery_time"] = JSONValue(char.GetFloatVar("roll_recovery_time"));
+		character_data["zone_killed"] = JSONValue(char.GetIntVar("zone_killed"));
+		character_data["ko_shield"] = JSONValue(char.GetIntVar("ko_shield"));
+		character_data["got_hit_by_leg_cannon_count"] = JSONValue(char.GetIntVar("got_hit_by_leg_cannon_count"));
+		character_data["ragdoll_static_time"] = JSONValue(char.GetFloatVar("ragdoll_static_time"));
+		character_data["frozen"] = JSONValue(char.GetBoolVar("frozen"));
+		character_data["no_freeze"] = JSONValue(char.GetBoolVar("no_freeze"));
+
 		root.append(character_data);
 	}
 
@@ -1490,6 +1523,9 @@ void SaveCheckpoint(string save_name){
 
 		int item_id = item.GetID();
 		item_data["id"] = JSONValue(item_id);
+
+		int stuck_in_whom = item.StuckInWhom();
+		item_data["stuck_in_whom"] = JSONValue(stuck_in_whom);
 
 		bool is_held = item.IsHeld();
 		item_data["is_held"] = JSONValue(is_held);
@@ -1585,6 +1621,9 @@ void LoadCheckpoint(string load_name){
 	file.parseString(checkpoint.data);
 	JSONValue root = file.getRoot()["checkpoint_data"];
 
+	//Since we can't add or remove specific decals, just remove all of them when loading.
+	ClearTemporaryDecals();
+
 	for(uint i = 0; i < root.size(); i++){
 		JSONValue obj_data = root[i];
 		int id = obj_data["id"].asInt();
@@ -1594,27 +1633,72 @@ void LoadCheckpoint(string load_name){
 			vec3 position = vec3(obj_data["translation"][0].asFloat(), obj_data["translation"][1].asFloat(), obj_data["translation"][2].asFloat());
 			float rotation = obj_data["rotation"].asFloat();
 			vec3 velocity = vec3(obj_data["velocity"][0].asFloat(), obj_data["velocity"][1].asFloat(), obj_data["velocity"][2].asFloat());
+			int state = obj_data["state"].asInt();
 
 			MovementObject@ char = ReadCharacterID(id);
+			char.Execute("Reset();");
+			char.Execute("SetState(_movement_state);");
 			char.position = position;
 			char.ReceiveScriptMessage("set_rotation " + rotation);
 			char.velocity = velocity;
+			char.FixDiscontinuity();
 			char.Execute("FixDiscontinuity();");
-			char.Execute("ResetMind();");
+
+			char.Execute("knocked_out = " + obj_data["knocked_out"].asInt() + ";");
+
+			if(state == _ragdoll_state){
+				int ragdoll_type = obj_data["ragdoll_type"].asInt();
+				char.Execute("Ragdoll(" + ragdoll_type + ");");
+			}
+
+			char.Execute("blood_health = " + obj_data["blood_health"].asFloat() + ";");
+			char.Execute("block_health = " + obj_data["block_health"].asFloat() + ";");
+			char.Execute("blood_damage = " + obj_data["blood_damage"].asFloat() + ";");
+			char.Execute("temp_health = " + obj_data["temp_health"].asFloat() + ";");
+			char.Execute("permanent_health = " + obj_data["permanent_health"].asFloat() + ";");
+			char.Execute("on_fire = " + obj_data["on_fire"].asBool() + ";");
+			char.Execute("injured_mouth_open = " + obj_data["injured_mouth_open"].asFloat() + ";");
+			char.Execute("blood_amount = " + obj_data["blood_amount"].asFloat() + ";");
+			char.Execute("recovery_time = " + obj_data["recovery_time"].asFloat() + ";");
+			char.Execute("roll_recovery_time = " + obj_data["roll_recovery_time"].asFloat() + ";");
+			char.Execute("zone_killed = " + obj_data["zone_killed"].asInt() + ";");
+			char.Execute("ko_shield = " + obj_data["ko_shield"].asInt() + ";");
+			char.Execute("got_hit_by_leg_cannon_count = " + obj_data["got_hit_by_leg_cannon_count"].asInt() + ";");
+			char.Execute("ragdoll_static_time = " + obj_data["ragdoll_static_time"].asFloat() + ";");
+			char.Execute("frozen = " + obj_data["frozen"].asBool() + ";");
+			char.Execute("no_freeze = " + obj_data["no_freeze"].asBool() + ";");
+
+			/* char.Execute("ResetMind();"); */
+			/* char.Execute("SetState(" + state + ");"); */
 		}else if(obj.GetType() == _hotspot_object){
 			string msg = "drika_load_checkpoint_data " + obj_data["dhs_data"].asString();
 			obj.ReceiveScriptMessage(msg);
 		}else if(obj.GetType() == _item_object){
 			bool is_held = obj_data["is_held"].asBool();
 			ItemObject@ item = ReadItemID(id);
+			item.CleanBlood();
 
 			bool currently_held = item.IsHeld();
+			int stuck_id = item.StuckInWhom();
 			//Detach the item from any character first.
 			if(currently_held){
 				int char_id = item.HeldByWhom();
 				MovementObject@ holder = ReadCharacterID(char_id);
 				holder.Execute("this_mo.DetachItem(" + id + ");");
 				holder.Execute("NotifyItemDetach(" + id + ");");
+				Log(warning, "Detach held");
+			}
+
+			if(stuck_id != -1){
+				MovementObject@ holder = ReadCharacterID(stuck_id);
+				holder.rigged_object().UnStickItem(id);
+				/* holder.Execute("this_mo.DetachItem(" + id + ");"); */
+				Log(warning, "Detach stuck");
+			}
+
+			int stuck_in_whom = obj_data["stuck_in_whom"].asInt();
+			if(stuck_in_whom != -1){
+				MovementObject@ holder = ReadCharacterID(stuck_in_whom);
 			}
 
 			if(is_held){
@@ -1642,6 +1726,7 @@ void LoadCheckpoint(string load_name){
 				item.SetLinearVelocity(linear_velocity);
 				item.SetAngularVelocity(angular_velocity);
 				item.ActivatePhysics();
+				item.SetThrown();
 			}
 		}
 	}
