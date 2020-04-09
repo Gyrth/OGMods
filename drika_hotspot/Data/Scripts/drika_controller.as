@@ -1493,7 +1493,8 @@ void SaveCheckpoint(string save_name){
 		character_data["velocity"].append(velocity.y);
 		character_data["velocity"].append(velocity.z);
 
-		character_data["state"] = JSONValue(char.GetIntVar("state"));
+		int state = char.GetIntVar("state");
+		character_data["state"] = JSONValue(state);
 		character_data["ragdoll_type"] = JSONValue(char.GetIntVar("ragdoll_type"));
 		character_data["knocked_out"] = JSONValue(char.GetIntVar("knocked_out"));
 
@@ -1513,6 +1514,38 @@ void SaveCheckpoint(string save_name){
 		character_data["ragdoll_static_time"] = JSONValue(char.GetFloatVar("ragdoll_static_time"));
 		character_data["frozen"] = JSONValue(char.GetBoolVar("frozen"));
 		character_data["no_freeze"] = JSONValue(char.GetBoolVar("no_freeze"));
+
+		if(state == _ragdoll_state){
+			string bone_data;
+
+			for(int j = 0, len = skeleton.NumBones(); j < len; ++j) {
+				if(skeleton.HasPhysics(j)) {
+					vec3 bone_pos = skeleton.GetBoneTransform(j).GetTranslationPart();
+					quaternion bone_quat = QuaternionFromMat4(skeleton.GetBoneTransform(j));
+					vec3 bone_vel = skeleton.GetBoneLinearVelocity(j);
+					bone_data +=	"" + j +
+									" " + bone_pos[0] +
+									" " + bone_pos[1] +
+									" " + bone_pos[2] +
+									" " + bone_quat.x +
+									" " + bone_quat.y +
+									" " + bone_quat.z +
+									" " + bone_quat.w +
+									" " + bone_vel.x +
+									" " + bone_vel.y +
+									" " + bone_vel.z + " ";
+				}
+			}
+			Log(warning, "Bone data " + bone_data);
+			character_data["bone_data"] = JSONValue(bone_data);
+
+			character_data["avg_bone_velocity"] = JSONValue(JSONarrayValue);
+			vec3 avg_bone_velocity = char.rigged_object().GetAvgVelocity();
+			character_data["avg_bone_velocity"].append(avg_bone_velocity.x);
+			character_data["avg_bone_velocity"].append(avg_bone_velocity.y);
+			character_data["avg_bone_velocity"].append(avg_bone_velocity.z);
+
+		}
 
 		root.append(character_data);
 	}
@@ -1649,6 +1682,67 @@ void LoadCheckpoint(string load_name){
 			if(state == _ragdoll_state){
 				int ragdoll_type = obj_data["ragdoll_type"].asInt();
 				char.Execute("Ragdoll(" + ragdoll_type + ");");
+
+				//Set the transform of all the bones back.
+				Skeleton@ skeleton = char.rigged_object().skeleton();
+
+				char.rigged_object().SetRagdollDamping(0.0f);
+				char.rigged_object().RefreshRagdoll();
+
+				/* char.rigged_object().SetRagdollDamping(1.0f); */
+				string bone_data = obj_data["bone_data"].asString();
+				TokenIterator token_iter;
+				token_iter.Init();
+				int index = 0;
+				int bone = -1;
+				vec3 bone_pos;
+				vec3 bone_vel;
+				quaternion bone_quat;
+				int num = 0;
+
+				while(token_iter.FindNextToken(bone_data)) {
+					switch(index) {
+						case 0: bone = atoi(token_iter.GetToken(bone_data)); break;
+						case 1: bone_pos[0] = atof(token_iter.GetToken(bone_data)); break;
+						case 2: bone_pos[1] = atof(token_iter.GetToken(bone_data)); break;
+						case 3: bone_pos[2] = atof(token_iter.GetToken(bone_data)); break;
+						case 4: bone_quat.x = atof(token_iter.GetToken(bone_data)); break;
+						case 5: bone_quat.y = atof(token_iter.GetToken(bone_data)); break;
+						case 6: bone_quat.z = atof(token_iter.GetToken(bone_data)); break;
+						case 7: bone_quat.w = atof(token_iter.GetToken(bone_data)); break;
+						case 8: bone_vel.x = atof(token_iter.GetToken(bone_data)); break;
+						case 9: bone_vel.y = atof(token_iter.GetToken(bone_data)); break;
+						case 10: bone_vel.z = atof(token_iter.GetToken(bone_data));
+							{
+								mat4 translate_mat;
+								translate_mat.SetTranslationPart(bone_pos);
+								mat4 rotation_mat;
+								rotation_mat = Mat4FromQuaternion(bone_quat);
+								mat4 mat = translate_mat * rotation_mat;
+								DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)),
+											  mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)),
+											  vec4(1.0f), vec4(1.0f), _persistent);
+								skeleton.SetBoneTransform(bone, mat);
+								Log(warning, "Bone force " + bone_vel.x + " " + bone_vel.y + " " + bone_vel.z);
+								char.rigged_object().ApplyForceToBone(bone_vel, bone);
+							}
+
+							break;
+					}
+
+					++index;
+
+					if(index == 11) {
+						index = 0;
+					}
+				}
+
+				vec3 avg_bone_velocity = vec3(obj_data["avg_bone_velocity"][0].asFloat(), obj_data["avg_bone_velocity"][1].asFloat(), obj_data["avg_bone_velocity"][2].asFloat());
+				skeleton.AddVelocity(avg_bone_velocity);
+			}
+
+			if(obj_data["frozen"].asBool()){
+
 			}
 
 			char.Execute("blood_health = " + obj_data["blood_health"].asFloat() + ";");
