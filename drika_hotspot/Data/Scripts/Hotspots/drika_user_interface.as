@@ -1,10 +1,3 @@
-enum ui_functions	{
-						ui_clear = 0,
-						ui_image = 1,
-						ui_text = 2,
-						ui_font = 3
-					}
-
 array<string> tween_types = {
 								"linearTween",
 							    "inQuadTween",
@@ -301,8 +294,7 @@ class DrikaUserInterface : DrikaElement{
 		if(ImGui_Combo("##UI Function", current_ui_function, ui_function_names, ui_function_names.size())){
 			if(current_ui_function != ui_function){
 				SendRemoveUpdatebehaviour();
-				SendLevelMessage("drika_ui_remove_element");
-				ui_element_added = false;
+				RemoveUIElement();
 				ui_function = ui_functions(current_ui_function);
 				ReorderElements();
 				StartEdit();
@@ -605,8 +597,9 @@ class DrikaUserInterface : DrikaElement{
 		}else if(ui_function == ui_image){
 			if(!ui_element_added){
 				JSONValue data = GetSaveData();
+				data["type"] = JSONValue(ui_image);
 				data["index"] = JSONValue(index);
-				SendJSONMessage("drika_ui_add_image", data);
+				SendJSONMessage("drika_ui_add_element", data);
 			}
 			SendRemoveUpdatebehaviour();
 			SendAddUpdateBehaviour();
@@ -614,13 +607,14 @@ class DrikaUserInterface : DrikaElement{
 		}else if(ui_function == ui_text){
 			if(!ui_element_added){
 				JSONValue data = GetSaveData();
+				data["type"] = JSONValue(ui_text);
 				data["index"] = JSONValue(index);
 				if(font_element is null){
 					data["font_id"] = JSONValue("");
 				}else{
 					data["font_id"] = JSONValue(font_element.ui_element_identifier);
 				}
-				SendJSONMessage("drika_ui_add_text", data);
+				SendJSONMessage("drika_ui_add_element", data);
 			}
 			ui_element_added = true;
 			SendRemoveUpdatebehaviour();
@@ -629,7 +623,8 @@ class DrikaUserInterface : DrikaElement{
 			ui_element_added = true;
 			JSONValue data = GetSaveData();
 			data["index"] = JSONValue(index);
-			SendJSONMessage("drika_ui_add_font", data);
+			data["type"] = JSONValue(ui_font);
+			SendJSONMessage("drika_ui_add_element", data);
 		}
 	}
 
@@ -697,7 +692,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void RemoveUIElement(){
 		if(ui_element_added){
-			if(ui_function == ui_image || ui_function == ui_text){
+			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_font){
 				SendLevelMessage("drika_ui_remove_element");
 				ui_element_added = false;
 			}
@@ -705,7 +700,7 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void Delete(){
-		SendLevelMessage("drika_ui_remove_element");
+		RemoveUIElement();
 	}
 
 	bool Trigger(){
