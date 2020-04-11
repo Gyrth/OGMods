@@ -13,6 +13,33 @@ class DrikaSetEnabled : DrikaElement{
 		has_settings = true;
 	}
 
+	JSONValue GetCheckpointData(){
+		JSONValue data;
+		data["triggered"] = triggered;
+		if(triggered){
+			data["target_ids"] = JSONValue(JSONarrayValue);
+			data["target_enabled"] = JSONValue(JSONarrayValue);
+			array<Object@> targets = target_select.GetTargetObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				data["target_ids"].append(targets[i].GetID());
+				data["target_enabled"].append(targets[i].GetEnabled());
+			}
+		}
+		return data;
+	}
+
+	void SetCheckpointData(JSONValue data = JSONValue()){
+		triggered = data["triggered"].asBool();
+		if(triggered){
+			JSONValue target_ids = data["target_ids"];
+			JSONValue target_enabled = data["target_enabled"];
+			for(uint i = 0; i < target_ids.size(); i++){
+				Object@ obj = ReadObjectFromID(target_ids[i].asInt());
+				obj.SetEnabled(target_enabled[i].asBool());
+			}
+		}
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["enabled"] = JSONValue(enabled);

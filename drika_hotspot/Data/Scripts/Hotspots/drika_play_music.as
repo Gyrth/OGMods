@@ -29,6 +29,22 @@ class DrikaPlayMusic : DrikaElement{
 		has_settings = true;
 	}
 
+	JSONValue GetCheckpointData(){
+		JSONValue data;
+		data["triggered"] = triggered;
+		if(triggered){
+			data["current_song"] = JSONValue(GetSong());
+		}
+		return data;
+	}
+
+	void SetCheckpointData(JSONValue data = JSONValue()){
+		triggered = data["triggered"].asBool();
+		if(triggered){
+			SetSong(data["current_song"].asString());
+		}
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["music_path"] = JSONValue(music_path);

@@ -173,6 +173,22 @@ class DrikaAnimation : DrikaElement{
 		Reset();
 	}
 
+	JSONValue GetCheckpointData(){
+		JSONValue data;
+		data["animation_timer"] = animation_timer;
+		data["loop_direction"] = loop_direction;
+		data["animation_finished"] = animation_finished;
+		data["done"] = done;
+		return data;
+	}
+
+	void SetCheckpointData(JSONValue data = JSONValue()){
+		animation_timer = data["animation_timer"].asFloat();
+		loop_direction = data["loop_direction"].asInt();
+		animation_finished = data["animation_finished"].asBool();
+		done = data["done"].asBool();
+	}
+
 	void Delete(){
 		for(uint i = 0; i < key_ids.size(); i++){
 			QueueDeleteObjectID(key_ids[i]);

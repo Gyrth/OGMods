@@ -66,6 +66,16 @@ class DrikaAIControl : DrikaElement{
 		RetrievePlaceholder();
 	}
 
+	JSONValue GetCheckpointData(){
+		JSONValue data;
+		data["triggered"] = triggered;
+		return data;
+	}
+
+	void SetCheckpointData(JSONValue data = JSONValue()){
+		triggered = data["triggered"].asBool();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		if(goals_with_placeholders.find(ai_goals(ai_goal)) != -1){

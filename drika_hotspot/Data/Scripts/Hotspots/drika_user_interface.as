@@ -107,6 +107,17 @@ class DrikaUserInterface : DrikaElement{
 		has_settings = true;
 	}
 
+	JSONValue GetCheckpointData(){
+		JSONValue data;
+		data["ui_element_added"] = ui_element_added;
+		return data;
+	}
+
+	void SetCheckpointData(JSONValue data = JSONValue()){
+		//The current ui elements are handled by the levelscript (drika_controller) so no need to add them here.
+		ui_element_added = data["ui_element_added"].asBool();
+	}
+
 	void ReorderDone(){
 		UpdateExternalResource();
 		SendUIInstruction("set_z_order", {index});
