@@ -13,11 +13,11 @@ class DrikaCheckpoint : DrikaElement{
 	int current_save_data;
 	array<string> save_data_names = {"Latest"};
 	bool wait_for_fade = false;
-	bool use_fade = true;
+	bool use_fade = false;
 
 	DrikaCheckpoint(JSONValue params = JSONValue()){
 		save_name = GetJSONString(params, "save_name", "save");
-		load_name = GetJSONString(params, "load_name", "load");
+		load_name = GetJSONString(params, "load_name", "Latest");
 
 		checkpoint_mode = checkpoint_modes(GetJSONInt(params, "checkpoint_mode", save));
 		current_checkpoint_mode = checkpoint_mode;
@@ -102,6 +102,8 @@ class DrikaCheckpoint : DrikaElement{
 			if(checkpoint_mode == load){
 				RemoveSave(save_name);
 				GetSaveNames();
+			}else if(checkpoint_mode == save){
+				RegisterSave(save_name);
 			}
 		}
 		ImGui_PopItemWidth();
