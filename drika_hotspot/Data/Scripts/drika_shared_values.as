@@ -13,3 +13,10 @@ array<string> dialogue_layout_names =	{
 											"Chrono Trigger",
 											"Fallout 3 Green"
 										};
+
+enum ui_functions	{
+						ui_clear = 0,
+						ui_image = 1,
+						ui_text = 2,
+						ui_font = 3
+					}

@@ -1,6 +1,6 @@
 #include "drika_json_functions.as"
 #include "drika_animation_group.as"
-#include "drika_dialogue_layouts.as"
+#include "drika_shared_values.as"
 #include "drika_ui_element.as"
 #include "drika_ui_grabber.as"
 #include "drika_ui_image.as"
@@ -1296,48 +1296,10 @@ void ReceiveMessage(string msg){
 		}else{
 			ui_hotspot_id = -1;
 		}
-	}else if(token == "drika_ui_add_image"){
+	}else if(token == "drika_ui_add_element"){
 		token_iter.FindNextToken(msg);
 		string json_string = token_iter.GetToken(msg);
-
-		JSON data;
-
-		if(!data.parseString(json_string)){
-			Log(warning, "Unable to parse the JSON in the UI JSON Data!");
-		}else{
-			JSONValue json_data = data.getRoot();
-			DrikaUIImage image(json_data);
-			@current_ui_element = @image;
-			ui_elements.insertLast(image);
-		}
-	}else if(token == "drika_ui_add_text"){
-		token_iter.FindNextToken(msg);
-		string json_string = token_iter.GetToken(msg);
-
-		JSON data;
-
-		if(!data.parseString(json_string)){
-			Log(warning, "Unable to parse the JSON in the UI JSON Data!");
-		}else{
-			JSONValue json_data = data.getRoot();
-			DrikaUIText text(json_data);
-			@current_ui_element = @text;
-			ui_elements.insertLast(text);
-		}
-	}else if(token == "drika_ui_add_font"){
-		token_iter.FindNextToken(msg);
-		string json_string = token_iter.GetToken(msg);
-
-		JSON data;
-
-		if(!data.parseString(json_string)){
-			Log(warning, "Unable to parse the JSON in the UI JSON Data!");
-		}else{
-			JSONValue json_data = data.getRoot();
-			DrikaUIFont font(json_data);
-			@current_ui_element = @font;
-			ui_elements.insertLast(font);
-		}
+		AddUIElement(json_string);
 	}else if(token == "drika_ui_remove_element"){
 		token_iter.FindNextToken(msg);
 		string ui_element_identifier = token_iter.GetToken(msg);
@@ -1347,6 +1309,7 @@ void ReceiveMessage(string msg){
 			ui_elements[index].Delete();
 			ui_elements.removeAt(index);
 		}
+		@current_ui_element = null;
 		@current_grabber = null;
 	}else if(token == "drika_ui_set_editing"){
 		token_iter.FindNextToken(msg);
@@ -1441,6 +1404,38 @@ void ReceiveMessage(string msg){
 		Log(warning, "send " + return_msg);
 
 		hotspot_obj.ReceiveScriptMessage(return_msg);
+	}
+}
+
+void AddUIElement(string json_string){
+	JSON data;
+
+	if(!data.parseString(json_string)){
+		Log(warning, "Unable to parse the JSON in the UI JSON Data!");
+	}else{
+		JSONValue json_data = data.getRoot();
+		DrikaUIElement@ new_element;
+
+		switch(json_data["type"].asInt()) {
+			case ui_clear:
+				break;
+			case ui_image:
+				@new_element = DrikaUIImage(json_data);
+				break;
+			case ui_text:
+				@new_element = DrikaUIText(json_data);
+				break;
+			case ui_font:
+				@new_element = DrikaUIFont(json_data);
+				break;
+			default:
+				Log(warning, "Unknown ui element type: " + json_data["type"].asInt());
+				break;
+		}
+
+		new_element.json_string = json_string;
+		@current_ui_element = @new_element;
+		ui_elements.insertLast(new_element);
 	}
 }
 

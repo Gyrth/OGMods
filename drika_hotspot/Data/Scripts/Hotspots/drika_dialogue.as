@@ -1,4 +1,4 @@
-#include "drika_dialogue_layouts.as";
+#include "drika_shared_values.as";
 
 enum dialogue_functions	{
 							say = 0,
