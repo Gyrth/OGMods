@@ -32,11 +32,9 @@ class DrikaCheckpoint : DrikaElement{
 	}
 
 	void ReceiveMessage(array<string> messages){
-		Log(warning, "received message");
 		if(messages[0] == "drika_save_names"){
 			save_data_names = {"Latest"};
 			for(uint i = 1; i < messages.size(); i++){
-				Log(warning, messages[i]);
 				save_data_names.insertLast(messages[i]);
 			}
 		}else if(messages[0] == "fade_out_done"){
@@ -131,18 +129,17 @@ class DrikaCheckpoint : DrikaElement{
 	}
 
 	void RegisterSave(string name){
-		string msg = "drika_register_save " + "\"" + name + "\"";
+		string msg = "drika_register_save " + "\"" + join(name.split("\""), "\\\"") + "\"";
 		level.SendMessage(msg);
 	}
 
 	void RemoveSave(string name){
-		string msg = "drika_remove_save " + "\"" + name + "\"";
+		string msg = "drika_remove_save " + "\"" + join(name.split("\""), "\\\"") + "\"";
 		level.SendMessage(msg);
 	}
 
 	void SaveCheckpoint(){
-		string msg = "drika_save_checkpoint " + "\"" + save_name + "\"";
-		level.SendMessage(msg);
+		triggered = true;
 	}
 
 	bool LoadCheckpoint(){
@@ -153,13 +150,10 @@ class DrikaCheckpoint : DrikaElement{
 			//Starting the fade.
 			level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
 			wait_for_fade = true;
-			triggered = true;
 			return false;
 		}else{
+			triggered = true;
 			//Fade is done, continue with the next function.
-			triggered = false;
-			string msg = "drika_load_checkpoint " + "\"" + load_name + "\"";
-			level.SendMessage(msg);
 			return true;
 		}
 	}
@@ -176,5 +170,18 @@ class DrikaCheckpoint : DrikaElement{
 			SaveCheckpoint();
 		}
 		return true;
+	}
+
+	void PostTrigger(){
+		if(triggered){
+			triggered = false;
+			if(checkpoint_mode == load){
+				string msg = "drika_load_checkpoint " + "\"" + join(load_name.split("\""), "\\\"") + "\"";
+				level.SendMessage(msg);
+			}else if(checkpoint_mode == save){
+				string msg = "drika_save_checkpoint " + "\"" + join(save_name.split("\""), "\\\"") + "\"";
+				level.SendMessage(msg);
+			}
+		}
 	}
 }

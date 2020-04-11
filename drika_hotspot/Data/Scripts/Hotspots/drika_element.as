@@ -133,6 +133,7 @@ class DrikaElement{
 	void Update(){}
 	void PostInit(){}
 	bool Trigger(){return false;}
+	void PostTrigger(){}
 	void Reset(){}
 	void Delete(){}
 	void DrawSettings(){}
@@ -202,6 +203,14 @@ class DrikaElement{
 
 	JSONValue GetSaveData(){
 		return JSONValue();
+	}
+
+	JSONValue GetCheckpointData(){
+		return JSONValue();
+	}
+
+	void SetCheckpointData(JSONValue data = JSONValue()){
+
 	}
 
 	void StartEdit(){

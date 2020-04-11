@@ -1063,7 +1063,7 @@ void ReceiveMessage(string msg){
 		}
 		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
 		for(uint i = 0; i < all_animations.size(); i++){
-			hotspot_obj.ReceiveScriptMessage("drika_dialogue_add_animation_group " + "\"" + all_animations[i].name + "\"");
+			hotspot_obj.ReceiveScriptMessage("drika_dialogue_add_animation_group " + join(all_animations[i].name.split("\""), "\\\""));
 
 			for(uint j = 0; j < all_animations[i].animations.size(); j++){
 				hotspot_obj.ReceiveScriptMessage("drika_dialogue_add_animation " + all_animations[i].animations[j]);
@@ -1396,13 +1396,14 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		int hotspot_id = atoi(token_iter.GetToken(msg));
 		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
+		array<string> save_names;
 
 		string return_msg = "drika_message drika_save_names";
 		for(uint i = 0; i < checkpoints.size(); i++){
-			return_msg += "\"" + checkpoints[i].name + "\"" + ((i == checkpoints.size() -1)?"":" ");
+			save_names.insertLast("\"" + join(checkpoints[i].name.split("\""), "\\\"") + "\"");
 		}
-
-		Log(warning, "send " + return_msg);
+		return_msg += join(save_names, " ");
+		Log(warning, return_msg);
 
 		hotspot_obj.ReceiveScriptMessage(return_msg);
 	}
@@ -1533,7 +1534,6 @@ void SaveCheckpoint(string save_name){
 									" " + bone_vel.z + " ";
 				}
 			}
-			Log(warning, "Bone data " + bone_data);
 			character_data["bone_data"] = JSONValue(bone_data);
 
 			character_data["avg_bone_velocity"] = JSONValue(JSONarrayValue);
@@ -1618,6 +1618,7 @@ void SaveCheckpoint(string save_name){
 		JSONValue hotspot_data;
 		hotspot_data["id"] = JSONValue(hotspot.GetID());
 		hotspot_data["dhs_data"] = JSONValue(hotspot.QueryStringFunction("string GetCheckpointData()"));
+
 		object_data.append(hotspot_data);
 	}
 
@@ -1631,12 +1632,10 @@ void SaveCheckpoint(string save_name){
 
 	json.getRoot()["checkpoint_data"] = object_data;
 	checkpoint.data = json.writeString(false);
-	Log(warning, checkpoint.data);
 }
 
 void LoadCheckpoint(string load_name){
-	loading_checkpoint = true;
-	Log(warning, "Load " + load_name);
+	Log(warning, "Load checkpoint " + load_name);
 	CheckpointData@ checkpoint = null;
 	if(load_name == "Latest"){
 		if(checkpoints.size() > 0){
@@ -1729,7 +1728,6 @@ void LoadCheckpoint(string load_name){
 											  mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)),
 											  vec4(1.0f), vec4(1.0f), _persistent);
 								skeleton.SetBoneTransform(bone, mat);
-								Log(warning, "Bone force " + bone_vel.x + " " + bone_vel.y + " " + bone_vel.z);
 								char.rigged_object().ApplyForceToBone(bone_vel, bone);
 							}
 
@@ -1772,7 +1770,7 @@ void LoadCheckpoint(string load_name){
 			/* char.Execute("ResetMind();"); */
 			/* char.Execute("SetState(" + state + ");"); */
 		}else if(obj.GetType() == _hotspot_object){
-			string msg = "drika_load_checkpoint_data " + obj_data["dhs_data"].asString();
+			string msg = "drika_load_checkpoint_data " + join(obj_data["dhs_data"].asString().split("\""), "\\\"");
 			obj.ReceiveScriptMessage(msg);
 		}else if(obj.GetType() == _item_object){
 			bool is_held = obj_data["is_held"].asBool();
@@ -1787,14 +1785,12 @@ void LoadCheckpoint(string load_name){
 				MovementObject@ holder = ReadCharacterID(char_id);
 				holder.Execute("this_mo.DetachItem(" + id + ");");
 				holder.Execute("NotifyItemDetach(" + id + ");");
-				Log(warning, "Detach held");
 			}
 
 			if(stuck_id != -1){
 				MovementObject@ holder = ReadCharacterID(stuck_id);
 				holder.rigged_object().UnStickItem(id);
 				/* holder.Execute("this_mo.DetachItem(" + id + ");"); */
-				Log(warning, "Detach stuck");
 			}
 
 			int stuck_in_whom = obj_data["stuck_in_whom"].asInt();
@@ -1811,7 +1807,6 @@ void LoadCheckpoint(string load_name){
 					bool is_left = (item_slot == _held_left || item_slot == _sheathed_left || item_slot == _sheathed_left_sheathe);
 					string attachement_type = (item_slot == _held_left || item_slot == _held_right)?"_at_grip":"_at_sheathe";
 					string command = "this_mo.AttachItemToSlot(" + id + ", " + attachement_type + ", " + is_left + ");HandleEditorAttachment(" + id + ", " + attachement_type + ", " + is_left + ");";
-					Log(warning, command);
 					holder.Execute(command);
 				}
 			}else{
@@ -1997,7 +1992,6 @@ void UpdateMusic(){
 		if(player_id != -1 && ReadCharacter(player_id).GetIntVar("knocked_out") != _awake){
 			if(current_song != player_died_song){
 				current_song = player_died_song;
-				Log(warning, "Set song " + current_song);
 				if(in_combat_from_beginning_no_fade){
 					SetSong(player_died_song);
 				}else{
@@ -2007,7 +2001,6 @@ void UpdateMusic(){
 			return;
 		}else if(current_song == player_died_song){
 			current_song = "None";
-			Log(warning, "Set song " + current_song);
 		}
 	}
 
@@ -2016,7 +2009,6 @@ void UpdateMusic(){
 		if(player_id != -1 && ReadCharacter(player_id).QueryIntFunction("int CombatSong()") == 1){
 			if(current_song != in_combat_song){
 				current_song = in_combat_song;
-				Log(warning, "Set song " + current_song);
 				if(in_combat_from_beginning_no_fade){
 					SetSong(in_combat_song);
 				}else{
@@ -2026,7 +2018,6 @@ void UpdateMusic(){
 			return;
 		}else if(current_song == in_combat_song){
 			current_song = "None";
-			Log(warning, "Set song " + current_song);
 		}
 	}
 
@@ -2035,7 +2026,6 @@ void UpdateMusic(){
 		if(threats_remaining == 0){
 			if(current_song != enemies_defeated_song){
 				current_song = enemies_defeated_song;
-				Log(warning, "Set song " + current_song);
 				if(enemies_defeated_from_beginning_no_fade){
 					SetSong(enemies_defeated_song);
 				}else{
@@ -2045,7 +2035,6 @@ void UpdateMusic(){
 			return;
 		}else if(current_song == enemies_defeated_song){
 			current_song = "None";
-			Log(warning, "Set song " + current_song);
 		}
 	}
 }

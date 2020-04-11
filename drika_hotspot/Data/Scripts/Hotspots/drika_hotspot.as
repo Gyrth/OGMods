@@ -400,13 +400,16 @@ void Update(){
 			UpdateParallelOperations();
 
 			if(!script_finished){
-				if(GetCurrentElement().parallel_operation || GetCurrentElement().Trigger()){
+				DrikaElement@ current_element = GetCurrentElement();
+				if(current_element.parallel_operation || current_element.Trigger()){
 					if(current_line == int(drika_indexes.size() - 1)){
 						script_finished = true;
 					}else{
 						current_line += 1;
 						display_index = drika_indexes[current_line];
 					}
+
+					current_element.PostTrigger();
 				}
 			}
 		}else if(!reorded){
@@ -1391,13 +1394,39 @@ void Save(){
 }
 
 string GetCheckpointData(){
-	Log(warning, "Getting dhs cehckpoint data works!");
-	return "Empty";
+	JSON json;
+	JSONValue function_data;
+
+	json.getRoot()["current_line"] = JSONValue(current_line);
+	json.getRoot()["display_index"] = JSONValue(display_index);
+	json.getRoot()["script_finished"] = JSONValue(script_finished);
+	json.getRoot()["in_dialogue_mode"] = JSONValue(in_dialogue_mode);
+
+	for(uint i = 0; i < drika_indexes.size(); i++){
+		function_data.append(drika_elements[drika_indexes[i]].GetCheckpointData());
+	}
+
+	json.getRoot()["function_data"] = function_data;
+	return json.writeString(false);
 }
 
 void SetCheckpointData(string checkpoint_data){
-	Log(warning, "Loading dhs cehckpoint data works!");
+	JSON json;
+	if(!json.parseString(checkpoint_data)){
+		Log(error, "Could not parse checkpoint JSON!");
+		return;
+	}
+	JSONValue root = json.getRoot();
+	JSONValue function_data = root["function_data"];
 
+	current_line = root["current_line"].asInt();
+	display_index = root["display_index"].asInt();
+	script_finished = root["script_finished"].asBool();
+	in_dialogue_mode = root["in_dialogue_mode"].asBool();
+
+	for(uint i = 0; i < function_data.size(); i++){
+		drika_elements[drika_indexes[i]].SetCheckpointData(function_data[i]);
+	}
 }
 
 string GetUniqueID(){
