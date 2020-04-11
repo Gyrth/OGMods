@@ -1501,6 +1501,7 @@ void SaveCheckpoint(string save_name){
 		character_data["temp_health"] = JSONValue(char.GetFloatVar("temp_health"));
 		character_data["permanent_health"] = JSONValue(char.GetFloatVar("permanent_health"));
 		character_data["on_fire"] = JSONValue(char.GetBoolVar("on_fire"));
+		character_data["fire_sleep"] = JSONValue(char.GetBoolVar("fire_sleep"));
 		character_data["injured_mouth_open"] = JSONValue(char.GetFloatVar("injured_mouth_open"));
 		character_data["blood_amount"] = JSONValue(char.GetFloatVar("blood_amount"));
 		character_data["recovery_time"] = JSONValue(char.GetFloatVar("recovery_time"));
@@ -1665,6 +1666,11 @@ void LoadCheckpoint(string load_name){
 	for(uint i = 0; i < object_data.size(); i++){
 		JSONValue obj_data = object_data[i];
 		int id = obj_data["id"].asInt();
+
+		if(!ObjectExists(id)){
+			continue;
+		}
+
 		Object@ obj = ReadObjectFromID(id);
 
 		if(obj.GetType() == _movement_object){
@@ -1724,9 +1730,9 @@ void LoadCheckpoint(string load_name){
 								mat4 rotation_mat;
 								rotation_mat = Mat4FromQuaternion(bone_quat);
 								mat4 mat = translate_mat * rotation_mat;
-								DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)),
+								/* DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)),
 											  mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)),
-											  vec4(1.0f), vec4(1.0f), _persistent);
+											  vec4(1.0f), vec4(1.0f), _persistent); */
 								skeleton.SetBoneTransform(bone, mat);
 								char.rigged_object().ApplyForceToBone(bone_vel, bone);
 							}
@@ -1755,6 +1761,7 @@ void LoadCheckpoint(string load_name){
 			char.Execute("temp_health = " + obj_data["temp_health"].asFloat() + ";");
 			char.Execute("permanent_health = " + obj_data["permanent_health"].asFloat() + ";");
 			char.Execute("on_fire = " + obj_data["on_fire"].asBool() + ";");
+			char.Execute("fire_sleep = " + obj_data["fire_sleep"].asBool() + ";");
 			char.Execute("injured_mouth_open = " + obj_data["injured_mouth_open"].asFloat() + ";");
 			char.Execute("blood_amount = " + obj_data["blood_amount"].asFloat() + ";");
 			char.Execute("recovery_time = " + obj_data["recovery_time"].asFloat() + ";");

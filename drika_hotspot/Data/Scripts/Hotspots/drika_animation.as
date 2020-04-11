@@ -179,6 +179,7 @@ class DrikaAnimation : DrikaElement{
 		data["loop_direction"] = loop_direction;
 		data["animation_finished"] = animation_finished;
 		data["done"] = done;
+		data["animation_started"] = animation_started;
 		return data;
 	}
 
@@ -187,6 +188,10 @@ class DrikaAnimation : DrikaElement{
 		loop_direction = data["loop_direction"].asInt();
 		animation_finished = data["animation_finished"].asBool();
 		done = data["done"].asBool();
+		animation_started = data["animation_started"].asBool();
+		if(animation_started){
+			SetCurrentTransform();
+		}
 	}
 
 	void Delete(){

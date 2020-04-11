@@ -19,6 +19,12 @@ class DrikaSetEnabled : DrikaElement{
 		if(triggered){
 			data["target_ids"] = JSONValue(JSONarrayValue);
 			data["target_enabled"] = JSONValue(JSONarrayValue);
+			data["before_values"] = JSONValue(JSONarrayValue);
+
+			for(uint i = 0; i < before_values.size(); i++){
+				data["before_values"].append(before_values[i].bool_value);
+			}
+
 			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
 				data["target_ids"].append(targets[i].GetID());
@@ -33,9 +39,26 @@ class DrikaSetEnabled : DrikaElement{
 		if(triggered){
 			JSONValue target_ids = data["target_ids"];
 			JSONValue target_enabled = data["target_enabled"];
-			for(uint i = 0; i < target_ids.size(); i++){
-				Object@ obj = ReadObjectFromID(target_ids[i].asInt());
-				obj.SetEnabled(target_enabled[i].asBool());
+			JSONValue before = data["before_values"];
+
+			//Also sync the before values if this function has been triggered.
+			before_values.resize(0);
+			for(uint i = 0; i < before.size(); i++){
+				before_values.insertLast(BeforeValue());
+				before_values[i].bool_value = before[i].asBool();
+			}
+
+			//if references are used for the target then the id might have changed. So just apply normally.
+			if(target_select.identifier_type == reference){
+				ApplyEnabled(false);
+			}else{
+				for(uint i = 0; i < target_ids.size(); i++){
+					if(!ObjectExists(target_ids[i].asInt())){
+						continue;
+					}
+					Object@ obj = ReadObjectFromID(target_ids[i].asInt());
+					obj.SetEnabled(target_enabled[i].asBool());
+				}
 			}
 		}
 	}
