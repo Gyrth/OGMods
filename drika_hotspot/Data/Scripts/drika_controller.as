@@ -78,6 +78,7 @@ bool enemies_defeated_from_beginning_no_fade = false;
 string current_song = "None";
 
 array<CheckpointData@> checkpoints;
+bool loading_checkpoint = false;
 float PI = 3.14159265359f;
 
 enum WeaponSlot {
@@ -1458,7 +1459,7 @@ void SaveCheckpoint(string save_name){
 	checkpoints.insertLast(checkpoint);
 
 	JSON json;
-	JSONValue root;
+	JSONValue object_data;
 
 	for(int i = 0; i < GetNumCharacters(); i++){
 		JSONValue character_data;
@@ -1543,7 +1544,7 @@ void SaveCheckpoint(string save_name){
 
 		}
 
-		root.append(character_data);
+		object_data.append(character_data);
 	}
 
 	for(int i = 0; i < GetNumItems(); i++){
@@ -1605,7 +1606,7 @@ void SaveCheckpoint(string save_name){
 			item_data["angular_velocity"].append(angular_velocity.z);
 		}
 
-		root.append(item_data);
+		object_data.append(item_data);
 	}
 
 	for(int i = 0; i < GetNumHotspots(); i++){
@@ -1617,15 +1618,24 @@ void SaveCheckpoint(string save_name){
 		JSONValue hotspot_data;
 		hotspot_data["id"] = JSONValue(hotspot.GetID());
 		hotspot_data["dhs_data"] = JSONValue(hotspot.QueryStringFunction("string GetCheckpointData()"));
-		root.append(hotspot_data);
+		object_data.append(hotspot_data);
 	}
 
-	json.getRoot()["checkpoint_data"] = root;
+	//Save the current ui elements.
+	JSONValue ui_element_data;
+
+	for(uint i = 0; i < ui_elements.size(); i++){
+		ui_element_data.append(JSONValue(ui_elements[i].json_string));
+	}
+	json.getRoot()["ui_element_data"] = ui_element_data;
+
+	json.getRoot()["checkpoint_data"] = object_data;
 	checkpoint.data = json.writeString(false);
 	Log(warning, checkpoint.data);
 }
 
 void LoadCheckpoint(string load_name){
+	loading_checkpoint = true;
 	Log(warning, "Load " + load_name);
 	CheckpointData@ checkpoint = null;
 	if(load_name == "Latest"){
@@ -1648,13 +1658,13 @@ void LoadCheckpoint(string load_name){
 
 	JSON file;
 	file.parseString(checkpoint.data);
-	JSONValue root = file.getRoot()["checkpoint_data"];
+	JSONValue object_data = file.getRoot()["checkpoint_data"];
 
 	//Since we can't add or remove specific decals, just remove all of them when loading.
 	ClearTemporaryDecals();
 
-	for(uint i = 0; i < root.size(); i++){
-		JSONValue obj_data = root[i];
+	for(uint i = 0; i < object_data.size(); i++){
+		JSONValue obj_data = object_data[i];
 		int id = obj_data["id"].asInt();
 		Object@ obj = ReadObjectFromID(id);
 
@@ -1821,6 +1831,23 @@ void LoadCheckpoint(string load_name){
 			}
 		}
 	}
+
+	//Restore all the ui elements that were on the screen.
+	@current_ui_element = null;
+	for(uint i = 0; i < ui_elements.size(); i++){
+		ui_elements[i].Delete();
+	}
+	ui_elements.resize(0);
+	@current_ui_element = null;
+	@current_grabber = null;
+
+	JSONValue ui_element_data = file.getRoot()["ui_element_data"];
+	for(uint i = 0; i < ui_element_data.size(); i++){
+		string json_string = ui_element_data[i].asString();
+		AddUIElement(json_string);
+	}
+
+	loading_checkpoint = false;
 }
 
 void SendUIInstruction(string param_1, array<string> params){
