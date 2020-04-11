@@ -1509,6 +1509,7 @@ void SaveCheckpoint(string save_name){
 		character_data["ragdoll_static_time"] = JSONValue(char.GetFloatVar("ragdoll_static_time"));
 		character_data["frozen"] = JSONValue(char.GetBoolVar("frozen"));
 		character_data["no_freeze"] = JSONValue(char.GetBoolVar("no_freeze"));
+		character_data["cut_throat"] = JSONValue(char.GetBoolVar("cut_throat"));
 
 		if(state == _ragdoll_state){
 			string bone_data;
@@ -1756,6 +1757,7 @@ void LoadCheckpoint(string load_name){
 			char.Execute("ragdoll_static_time = " + obj_data["ragdoll_static_time"].asFloat() + ";");
 			char.Execute("frozen = " + obj_data["frozen"].asBool() + ";");
 			char.Execute("no_freeze = " + obj_data["no_freeze"].asBool() + ";");
+			char.Execute("cut_throat = " + obj_data["cut_throat"].asBool() + ";");
 
 			/* char.Execute("ResetMind();"); */
 			/* char.Execute("SetState(" + state + ");"); */
