@@ -1,5 +1,6 @@
 #include "drika_json_functions.as"
 #include "drika_animation_group.as"
+#include "drika_placeholder.as"
 #include "hotspots/drika_element.as"
 #include "drika_target_select.as"
 #include "drika_go_to_line_select.as"
@@ -249,7 +250,7 @@ array<string> GetReferences(){
 
 bool AcceptConnectionsTo(Object @other){
 	if(drika_elements.size() > 0){
-		if(GetCurrentElement().placeholder_id == other.GetID()){
+		if(GetCurrentElement().placeholder.id == other.GetID()){
 			return false;
 		}else if(GetCurrentElement().connection_types.find(other.GetType()) != -1){
 			return true;

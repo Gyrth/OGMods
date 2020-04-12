@@ -57,7 +57,6 @@ class DrikaAnimation : DrikaElement{
 	float margin = 20.0;
 	float timeline_width;
 	float timeline_height;
-	Object@ camera_placeholder = null;
 	bool draw_debug_lines = false;
 	vec3 previous_translation = vec3();
 	bool animation_started = false;
@@ -85,6 +84,8 @@ class DrikaAnimation : DrikaElement{
 											};
 
 	DrikaAnimation(JSONValue params = JSONValue()){
+		placeholder.default_scale = vec3(1.0);
+
 		drika_element_type = drika_animation;
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object, _group};
 		key_ids = GetJSONIntArray(params, "key_ids", {});
@@ -198,10 +199,7 @@ class DrikaAnimation : DrikaElement{
 		for(uint i = 0; i < key_ids.size(); i++){
 			QueueDeleteObjectID(key_ids[i]);
 		}
-		DeleteCameraPlaceholder();
-		if(@placeholder != null){
-			RemovePlaceholder();
-		}
+		placeholder.Remove();
 	}
 
 	string GetDisplayString(){
@@ -513,33 +511,20 @@ class DrikaAnimation : DrikaElement{
 
 	void CameraPlaceholderCheck(){
 		if(animate_camera){
-			if(@camera_placeholder == null){
-				int camera_placeholder_id = CreateObject("Data/Objects/placeholder/camera_placeholder.xml");
-				@camera_placeholder = ReadObjectFromID(camera_placeholder_id);
-				camera_placeholder.SetSelectable(true);
-				camera_placeholder.SetTranslatable(true);
-				camera_placeholder.SetScalable(true);
-				camera_placeholder.SetRotatable(true);
-				camera_placeholder.SetDeletable(false);
-				camera_placeholder.SetCopyable(false);
-				camera_placeholder.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
+			if(!placeholder.Exists()){
+				placeholder.path = "Data/Objects/placeholder/camera_placeholder.xml";
+				placeholder.Create();
+				placeholder.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
 			}
 
-			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(camera_placeholder);
+			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder.object);
 			if(show_editor){
 				placeholder_object.SetSpecialType(kCamPreview);
 			}else{
 				placeholder_object.SetSpecialType(kSpawn);
 			}
 		}else{
-			DeleteCameraPlaceholder();
-		}
-	}
-
-	void DeleteCameraPlaceholder(){
-		if(@camera_placeholder != null){
-			QueueDeleteObjectID(camera_placeholder.GetID());
-			@camera_placeholder = null;
+			placeholder.Remove();
 		}
 	}
 
@@ -568,11 +553,11 @@ class DrikaAnimation : DrikaElement{
 			msg += animate_scale?zoom:90.0;
 			level.SendMessage(msg);
 
-			if(@camera_placeholder != null){
-				camera_placeholder.SetTranslation(translation);
-				camera_placeholder.SetRotation(rotation);
+			if(placeholder.Exists()){
+				placeholder.SetTranslation(translation);
+				placeholder.SetRotation(rotation);
 				if(animate_scale){
-					camera_placeholder.SetScale(scale);
+					placeholder.SetScale(scale);
 				}
 			}
 		}else{
@@ -960,7 +945,7 @@ class DrikaAnimation : DrikaElement{
 		CameraPlaceholderCheck();
 		if(animation_method == timeline_method){
 			if(animate_camera){
-				DebugDrawLine(camera_placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
 			DrawTimeline();
 		}else{
@@ -986,15 +971,15 @@ class DrikaAnimation : DrikaElement{
 				}
 			}
 			if(animate_camera){
-				DebugDrawLine(camera_placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 
 				for(uint i = 0; i < key_ids.size(); i++){
 					Object@ key = ReadObjectFromID(key_ids[i]);
 					if(key.IsSelected()){
-						camera_placeholder.SetTranslation(key.GetTranslation());
-						camera_placeholder.SetRotation(key.GetRotation());
+						placeholder.SetTranslation(key.GetTranslation());
+						placeholder.SetRotation(key.GetRotation());
 						if(animate_scale){
-							camera_placeholder.SetScale(key.GetScale());
+							placeholder.SetScale(key.GetScale());
 						}
 					}
 				}
@@ -1079,8 +1064,9 @@ class DrikaAnimation : DrikaElement{
 			}
 		}
 		if(animate_camera){
-			DeleteCameraPlaceholder();
+			placeholder.Remove();
 		}
+		DrikaElement::EditDone();
 	}
 
 	void ApplySettings(){
@@ -1089,6 +1075,7 @@ class DrikaAnimation : DrikaElement{
 
 	void StartEdit(){
 		CameraPlaceholderCheck();
+		DrikaElement::StartEdit();
 		for(uint i = 0; i < key_ids.size(); i++){
 			if(key_ids[i] != -1 && ObjectExists(key_ids[i])){
 				Object@ current_key = ReadObjectFromID(key_ids[i]);
@@ -1117,7 +1104,7 @@ class DrikaAnimation : DrikaElement{
 		AnimationKey new_key;
 		Object@ target;
 		if(animate_camera){
-			@target = camera_placeholder;
+			@target = placeholder.object;
 		}else{
 			array<Object@> targets = target_select.GetTargetObjects();
 			if(targets.size() == 0){
@@ -1143,23 +1130,7 @@ class DrikaAnimation : DrikaElement{
 
 	void LeftClick(){
 		if(animation_method == timeline_method){
-			array<Object@> target_objects = target_select.GetTargetObjects();
-			if(this_hotspot.IsSelected()){
-				this_hotspot.SetSelected(false);
-				for(uint i = 0 ; i < target_objects.size(); i++){
-					target_objects[i].SetSelected(false);
-				}
-			}else if(target_objects.size() > 0 && !target_objects[0].IsSelected()){
-				this_hotspot.SetSelected(false);
-				for(uint i = 0 ; i < target_objects.size(); i++){
-					target_objects[i].SetSelected(true);
-				}
-			}else{
-				for(uint i = 0 ; i < target_objects.size(); i++){
-					target_objects[i].SetSelected(false);
-				}
-				this_hotspot.SetSelected(true);
-			}
+			DrikaElement::LeftClick();
 		}else if(animation_method == placeholder_method){
 			int selected_index = -1;
 			for(uint i = 0; i < key_ids.size(); i++){

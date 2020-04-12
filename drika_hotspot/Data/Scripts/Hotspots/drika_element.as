@@ -101,6 +101,11 @@ enum param_types { 	string_param = 0,
 					function_param = 7
 				};
 
+enum select_states {	select_hotspot = 0,
+						select_placeholder = 1,
+						select_target = 2
+					};
+
 class BeforeValue{
 	string string_value;
 	float float_value;
@@ -117,16 +122,14 @@ class DrikaElement{
 	bool has_settings = false;
 	bool parallel_operation = false;
 	int index = -1;
-	int placeholder_id = -1;
-	Object@ placeholder;
-	string placeholder_name;
-	vec3 default_placeholder_scale = vec3(0.25);
+	DrikaPlaceholder placeholder();
 	array<EntityType> connection_types;
 	string line_number;
 	bool deleted = false;
 	string reference_string = "drika_reference";
 	DrikaTargetSelect target_select(this);
 	int export_index = -1;
+	select_states select_state = select_hotspot;
 
 	string GetDisplayString(){return "";}
 	string GetReference(){return "";}
@@ -177,27 +180,28 @@ class DrikaElement{
 	}
 
 	void LeftClick(){
-		array<Object@> target_objects = target_select.GetTargetObjects();
-		if(this_hotspot.IsSelected() && ObjectExists(placeholder_id)){
-			this_hotspot.SetSelected(false);
-			for(uint i = 0 ; i < target_objects.size(); i++){
-				target_objects[i].SetSelected(false);
+		while(true){
+			select_state = select_states(select_state + 1);
+			if(select_state > select_target){
+				select_state = select_hotspot;
 			}
-			placeholder.SetSelected(true);
-		}else if(ObjectExists(placeholder_id) && placeholder.IsSelected()){
-			placeholder.SetSelected(false);
-			this_hotspot.SetSelected(false);
-			for(uint i = 0 ; i < target_objects.size(); i++){
-				target_objects[i].SetSelected(true);
-			}
-		}else{
-			if(ObjectExists(placeholder_id)){
+
+			if(select_state == select_hotspot){
 				placeholder.SetSelected(false);
+				this_hotspot.SetSelected(true);
+				target_select.SetSelected(false);
+				break;
+			}else if(select_state == select_placeholder && placeholder.Exists()){
+				placeholder.SetSelected(true);
+				this_hotspot.SetSelected(false);
+				target_select.SetSelected(false);
+				break;
+			}else if(select_state == select_target){
+				placeholder.SetSelected(false);
+				this_hotspot.SetSelected(false);
+				target_select.SetSelected(true);
+				break;
 			}
-			for(uint i = 0 ; i < target_objects.size(); i++){
-				target_objects[i].SetSelected(false);
-			}
-			this_hotspot.SetSelected(true);
 		}
 	}
 
@@ -214,16 +218,11 @@ class DrikaElement{
 	}
 
 	void StartEdit(){
-		if(placeholder_id != -1 && ObjectExists(placeholder_id)){
-			placeholder.SetSelectable(true);
-		}
+		placeholder.SetSelectable(true);
 	}
 
 	void EditDone(){
-		if(placeholder_id != -1 && ObjectExists(placeholder_id)){
-			placeholder.SetSelected(false);
-			placeholder.SetSelectable(false);
-		}
+		placeholder.SetSelectable(false);
 	}
 
 	string Vec3ToString(vec3 value){
@@ -272,49 +271,6 @@ class DrikaElement{
 
 	vec4 GetDisplayColor(){
 		return display_colors[drika_element_type];
-	}
-
-	void CreatePlaceholder(){
-		placeholder_id = CreateObject("Data/Objects/drika_hotspot_cube.xml", false);
-		@placeholder = ReadObjectFromID(placeholder_id);
-		placeholder.SetName(placeholder_name);
-		placeholder.SetSelectable(true);
-		placeholder.SetTranslatable(true);
-		placeholder.SetScalable(true);
-		placeholder.SetRotatable(true);
-		placeholder.SetScale(default_placeholder_scale);
-		placeholder.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
-	}
-
-	void RemovePlaceholder(){
-		if(placeholder_id != -1 && ObjectExists(placeholder_id)){
-			QueueDeleteObjectID(placeholder_id);
-		}
-		placeholder_id = -1;
-		@placeholder = null;
-	}
-
-	void RetrievePlaceholder(){
-		if(duplicating_hotspot || duplicating_function){
-			if(ObjectExists(placeholder_id)){
-				//Use the same transform as the original placeholder.
-				Object@ old_placeholder = ReadObjectFromID(placeholder_id);
-				CreatePlaceholder();
-				placeholder.SetScale(old_placeholder.GetScale());
-				placeholder.SetTranslation(old_placeholder.GetTranslation());
-				placeholder.SetRotation(old_placeholder.GetRotation());
-			}else{
-				placeholder_id = -1;
-			}
-		}else{
-			if(ObjectExists(placeholder_id)){
-				@placeholder = ReadObjectFromID(placeholder_id);
-				placeholder.SetName(placeholder_name);
-				placeholder.SetSelectable(false);
-			}else{
-				CreatePlaceholder();
-			}
-		}
 	}
 
 	void DrawSetReferenceUI(){

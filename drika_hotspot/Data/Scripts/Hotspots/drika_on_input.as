@@ -68,8 +68,8 @@ class DrikaOnInput : DrikaElement{
 								};
 
 	DrikaOnInput(JSONValue params = JSONValue()){
-		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
-		placeholder_name = "Input Prompt Helper";
+		placeholder.Load(params);
+		placeholder.name = "Input Prompt Helper";
 
 		input_type = input_types(GetJSONInt(params, "input_type", button_pressed));
 		current_input_type = input_type;
@@ -97,7 +97,7 @@ class DrikaOnInput : DrikaElement{
 
 	void PostInit(){
 		if(use_prompt){
-			RetrievePlaceholder();
+			placeholder.Retrieve();
 			GetIcon();
 		}
 	}
@@ -134,7 +134,7 @@ class DrikaOnInput : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["input_type"] = JSONValue(input_type);
-		data["placeholder_id"] = JSONValue(placeholder_id);
+		placeholder.Save(data);
 
 		if(input_type == type_text){
 			data["typed_text"] = JSONValue(typed_text);
@@ -286,21 +286,21 @@ class DrikaOnInput : DrikaElement{
 		}
 
 		if(use_prompt && input_type == button_pressed){
-			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
+			if(placeholder.Exists()){
 				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}else{
-				CreatePlaceholder();
+				placeholder.Create();
 			}
 		}else{
-			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
-				RemovePlaceholder();
+			if(placeholder.Exists()){
+				placeholder.Remove();
 			}
 		}
 		DrawPrompt();
 	}
 
 	void Delete(){
-		RemovePlaceholder();
+		placeholder.Remove();
 	}
 
 	void Reset(){
@@ -341,7 +341,7 @@ class DrikaOnInput : DrikaElement{
 
 	void DrawPrompt(){
 		if(use_prompt){
-			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
+			if(placeholder.Exists()){
 				if(custom_prompt){
 					DebugDrawBillboard(custom_prompt_path, placeholder.GetTranslation(), prompt_size, prompt_color, _delete_on_update);
 				}else{

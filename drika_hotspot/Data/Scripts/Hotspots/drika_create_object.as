@@ -3,22 +3,23 @@ class DrikaCreateObject : DrikaElement{
 	array<int> spawned_object_ids;
 
 	DrikaCreateObject(JSONValue params = JSONValue()){
-		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
-		placeholder_name = "Create Object Helper";
+		placeholder.Load(params);
+		placeholder.name = "Create Object Helper";
+		placeholder.default_scale = vec3(1.0);
+
 		object_path = GetJSONString(params, "object_path", default_preview_mesh);
 		drika_element_type = drika_create_object;
 		reference_string = GetJSONString(params, "reference_string", "");
-		default_placeholder_scale = vec3(1.0);
 		has_settings = true;
 	}
 
 	void Delete(){
 		Reset();
-		RemovePlaceholder();
+		placeholder.Remove();
 	}
 
 	void PostInit(){
-		RetrievePlaceholder();
+		placeholder.Retrieve();
 	}
 
 	JSONValue GetCheckpointData(){
@@ -70,7 +71,7 @@ class DrikaCreateObject : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["placeholder_id"] = JSONValue(placeholder_id);
+		placeholder.Save(data);
 		data["object_path"] = JSONValue(object_path);
 		data["reference_string"] = JSONValue(reference_string);
 		return data;
@@ -104,11 +105,11 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(@placeholder != null && ObjectExists(placeholder_id)){
+		if(placeholder.Exists()){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			DrawGizmo(placeholder);
+			DrawGizmo(placeholder.object);
 		}else{
-			CreatePlaceholder();
+			placeholder.Create();
 			StartEdit();
 		}
 	}
@@ -125,7 +126,7 @@ class DrikaCreateObject : DrikaElement{
 
 	bool Trigger(){
 		triggered = true;
-		if(ObjectExists(placeholder_id)){
+		if(placeholder.Exists()){
 			Log(warning, "Create " + object_path);
 			int spawned_object_id = CreateObject(object_path);
 			spawned_object_ids.insertLast(spawned_object_id);
@@ -142,7 +143,7 @@ class DrikaCreateObject : DrikaElement{
 			spawned_object.SetScale(placeholder.GetScale());
 			return true;
 		}else{
-			CreatePlaceholder();
+			placeholder.Create();
 			return false;
 		}
 	}

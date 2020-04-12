@@ -116,6 +116,8 @@ class DrikaDialogue : DrikaElement{
 		dialogue_function = dialogue_functions(GetJSONInt(params, "dialogue_function", start));
 		current_dialogue_function = dialogue_function;
 
+		placeholder.default_scale = vec3(1.0);
+
 		say_text = GetJSONString(params, "say_text", "Drika Hotspot Dialogue");
 		dialogue_color = GetJSONVec4(params, "dialogue_color", vec4(1));
 		voice = GetJSONInt(params, "voice", 0);
@@ -366,7 +368,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void Delete(){
-		DeletePlaceholder();
+		placeholder.Remove();
 		Reset();
 	}
 
@@ -569,7 +571,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void EditDone(){
-		DeletePlaceholder();
+		placeholder.Remove();
 		if(dialogue_function != set_actor_dialogue_control){
 			Reset();
 		}
@@ -579,26 +581,12 @@ class DrikaDialogue : DrikaElement{
 		Apply();
 	}
 
-	void DeletePlaceholder(){
-		if(@placeholder != null){
-			int placeholder_id = placeholder.GetID();
-			DeleteObjectID(placeholder_id);
-			@placeholder = null;
-		}
-	}
-
 	void PlaceholderCheck(){
-		if(@placeholder == null){
-			int placeholder_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml");
-			@placeholder = ReadObjectFromID(placeholder_id);
-			placeholder.SetSelectable(true);
-			placeholder.SetTranslatable(true);
-			placeholder.SetScalable(true);
-			placeholder.SetRotatable(true);
-			placeholder.SetDeletable(false);
-			placeholder.SetCopyable(false);
+		if(!placeholder.Exists()){
+			placeholder.path = "Data/Objects/placeholder/empty_placeholder.xml";
+			placeholder.Create();
 
-			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder);
+			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder.object);
 			if(dialogue_function == set_actor_eye_direction){
 				if(target_actor_eye_direction == vec3(0.0)){
 					target_actor_eye_direction = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
@@ -665,7 +653,7 @@ class DrikaDialogue : DrikaElement{
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("###Dialogue Function", current_dialogue_function, dialogue_function_names, dialogue_function_names.size())){
-			DeletePlaceholder();
+			placeholder.Remove();
 			Reset();
 			dialogue_function = dialogue_functions(current_dialogue_function);
 

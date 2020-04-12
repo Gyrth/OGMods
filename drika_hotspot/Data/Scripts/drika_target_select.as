@@ -754,4 +754,11 @@ class DrikaTargetSelect{
 		character_team = "team_drika";
 		object_name = "drika_object";
 	}
+
+	void SetSelected(bool selected){
+		array<Object@> target_objects = GetTargetObjects();
+		for(uint i = 0 ; i < target_objects.size(); i++){
+			target_objects[i].SetSelected(selected);
+		}
+	}
 }

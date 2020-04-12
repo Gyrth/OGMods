@@ -60,7 +60,9 @@ class DrikaPlaySound : DrikaElement{
 										};
 
 	DrikaPlaySound(JSONValue params = JSONValue()){
-		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
+		placeholder.Load(params);
+		placeholder.name = "Play Sound Helper";
+
 		priority = GetJSONInt(params, "priority", _sound_priority_max);
 		gain = GetJSONFloat(params, "gain", 1.0);
 		play_sound_method = play_sound_methods(GetJSONInt(params, "play_sound_method", play_sound));
@@ -71,7 +73,6 @@ class DrikaPlaySound : DrikaElement{
 		sound_type = SoundType(GetJSONInt(params, "sound_type", _sound_type_foley));
 		current_sound_type = sound_type;
 		sound_path = GetJSONString(params, "sound_path", "Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav");
-		placeholder_name = "Play Sound Helper";
 
 		drika_element_type = drika_play_sound;
 		has_settings = true;
@@ -79,8 +80,8 @@ class DrikaPlaySound : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
+		placeholder.Save(data);
 		data["sound_path"] = JSONValue(sound_path);
-		data["placeholder_id"] = JSONValue(placeholder_id);
 		data["play_sound_method"] = JSONValue(play_sound_method);
 		data["priority"] = JSONValue(priority);
 		data["gain"] = JSONValue(gain);
@@ -111,12 +112,12 @@ class DrikaPlaySound : DrikaElement{
 	}
 
 	void PostInit(){
-		RetrievePlaceholder();
+		placeholder.Retrieve();
 	}
 
 	void Delete(){
 		Reset();
-		RemovePlaceholder();
+		placeholder.Remove();
 	}
 
 	string GetDisplayString(){
@@ -224,20 +225,21 @@ class DrikaPlaySound : DrikaElement{
 
 	void DrawEditing(){
 		if(is_spatial){
-			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
+			if(placeholder.Exists()){
 				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 				DebugDrawBillboard("Data/Textures/ui/speaker.png", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
 			}else{
-				CreatePlaceholder();
+				placeholder.Create();
 			}
 		}else{
-			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
-				RemovePlaceholder();
+			if(placeholder.Exists()){
+				placeholder.Remove();
 			}
 		}
 	}
 
 	void StartEdit(){
+		DrikaElement::StartEdit();
 		PreviewSound();
 	}
 
@@ -247,6 +249,7 @@ class DrikaPlaySound : DrikaElement{
 	}
 
 	void EditDone(){
+		DrikaElement::EditDone();
 		Reset();
 	}
 
@@ -254,8 +257,8 @@ class DrikaPlaySound : DrikaElement{
 		string extension = sound_path.substr(sound_path.length() - 3, sound_path.length());
 
 		if(is_spatial){
-			if(placeholder_id == -1 || !ObjectExists(placeholder_id)){
-				CreatePlaceholder();
+			if(!placeholder.Exists()){
+				placeholder.Create();
 				return false;
 			}
 			if(ai_sound){

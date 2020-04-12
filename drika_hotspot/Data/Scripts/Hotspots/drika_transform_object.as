@@ -10,11 +10,12 @@ class DrikaTransformObject : DrikaElement{
 	vec3 translation_offset;
 
 	DrikaTransformObject(JSONValue params = JSONValue()){
-		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
+		placeholder.Load(params);
+		placeholder.name = "Transform Object Helper";
+		placeholder.default_scale = vec3(1.0);
+
 		translation_offset = GetJSONVec3(params, "translation_offset", vec3(0.0));
 		drika_element_type = drika_transform_object;
-		default_placeholder_scale = vec3(1.0);
-		placeholder_name = "Transform Object Helper";
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object};
 
 		target_select.LoadIdentifier(params);
@@ -32,7 +33,7 @@ class DrikaTransformObject : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["placeholder_id"] = JSONValue(placeholder_id);
+		placeholder.Save(data);
 		target_select.SaveIdentifier(data);
 		data["use_target_object"] = JSONValue(use_target_object);
 		if(use_target_object){
@@ -50,7 +51,7 @@ class DrikaTransformObject : DrikaElement{
 
 	void PostInit(){
 		if(!use_target_object){
-			RetrievePlaceholder();
+			placeholder.Retrieve();
 		}
 	}
 
@@ -65,7 +66,7 @@ class DrikaTransformObject : DrikaElement{
 
 	void Delete(){
 		if(!use_target_object){
-			RemovePlaceholder();
+			placeholder.Remove();
 		}
 	}
 
@@ -112,7 +113,7 @@ class DrikaTransformObject : DrikaElement{
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Checkbox("###Use Target Object", use_target_object)){
 			if(use_target_object){
-				RemovePlaceholder();
+				placeholder.Remove();
 			}
 		}
 		ImGui_PopItemWidth();
@@ -182,15 +183,15 @@ class DrikaTransformObject : DrikaElement{
 
 	void DrawEditing(){
 		if(!use_target_object){
-			if(ObjectExists(placeholder_id)){
+			if(placeholder.Exists()){
 				array<Object@> targets = target_select.GetTargetObjects();
 				for(uint i = 0; i < targets.size(); i++){
 					DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 				}
 				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-				DrawGizmo(placeholder);
+				DrawGizmo(placeholder.object);
 			}else{
-				CreatePlaceholder();
+				placeholder.Create();
 				SetPlaceholderTransform();
 				StartEdit();
 			}
@@ -238,7 +239,7 @@ class DrikaTransformObject : DrikaElement{
 					}
 				}
 			}else{
-				if(placeholder_id == -1 || !ObjectExists(placeholder_id)){
+				if(!placeholder.Exists()){
 					Log(warning, "Placeholder does not exist!");
 					return false;
 				}

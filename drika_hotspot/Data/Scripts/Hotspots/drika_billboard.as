@@ -23,8 +23,10 @@ class DrikaBillboard : DrikaElement{
 	array<string> billboard_type_choices = {"Image", "Text"};
 
 	DrikaBillboard(JSONValue params = JSONValue()){
-		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
-		placeholder_name = "Billboard Helper";
+		placeholder.Load(params);
+		placeholder.name = "Billboard Helper";
+		placeholder.default_scale = vec3(1.0);
+
 		image_path = GetJSONString(params, "image_path", "Data/Textures/ui/ogicon.png");
 		image_color = GetJSONVec4(params, "image_color", vec4(1));
 		image_size = GetJSONFloat(params, "image_size", 1.0f);
@@ -44,7 +46,6 @@ class DrikaBillboard : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["image_path"] = JSONValue(image_path);
-		data["placeholder_id"] = JSONValue(placeholder_id);
 		data["image_size"] = JSONValue(image_size);
 		data["image_color"] = JSONValue(JSONarrayValue);
 		data["image_color"].append(image_color.x);
@@ -55,16 +56,17 @@ class DrikaBillboard : DrikaElement{
 		data["billboard_type"] = JSONValue(billboard_type);
 		data["billboard_update_type"] = JSONValue(billboard_update_type);
 		data["billboard_text_string"] = JSONValue(billboard_text_string);
+		placeholder.Save(data);
 		return data;
 	}
 
 	void PostInit(){
-		RetrievePlaceholder();
+		placeholder.Retrieve();
 	}
 
 	void Delete(){
 		Reset();
-		RemovePlaceholder();
+		placeholder.Remove();
 	}
 
 	void Reset(){
@@ -81,10 +83,6 @@ class DrikaBillboard : DrikaElement{
 			return "Billboard " + billboard_text_string;
 		}
 		return "Billboard";
-	}
-
-	void StartSettings(){
-
 	}
 
 	void DrawSettings(){
@@ -170,7 +168,7 @@ class DrikaBillboard : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(ObjectExists(placeholder_id)){
+		if(placeholder.Exists()){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			if(billboard_type == billboard_image){
 				float multiplier = 1.0 + overbright;
@@ -180,7 +178,7 @@ class DrikaBillboard : DrikaElement{
 				DebugDrawText(placeholder.GetTranslation(), billboard_text_string, 1.0, false, _delete_on_draw);
 			}
 		}else{
-			CreatePlaceholder();
+			placeholder.Create();
 			StartEdit();
 		}
 	}
@@ -191,11 +189,11 @@ class DrikaBillboard : DrikaElement{
 	}
 
 	bool Trigger(){
-		if(ObjectExists(placeholder_id)){
+		if(placeholder.Exists()){
 			CreateBillboard();
 			return true;
 		}else{
-			CreatePlaceholder();
+			placeholder.Create();
 			return false;
 		}
 	}

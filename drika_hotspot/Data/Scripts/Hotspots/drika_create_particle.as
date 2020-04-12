@@ -9,8 +9,9 @@ class DrikaCreateParticle : DrikaElement{
 	int previous_particle_id = -1;
 
 	DrikaCreateParticle(JSONValue params = JSONValue()){
-		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
-		placeholder_name = "Create Particle Helper";
+		placeholder.Load(params);
+		placeholder.name = "Create Particle Helper";
+
 		particle_path = GetJSONString(params, "particle_path", "Data/Particles/blooddrop.xml");
 		drika_element_type = drika_create_particle;
 
@@ -25,7 +26,7 @@ class DrikaCreateParticle : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["placeholder_id"] = JSONValue(placeholder_id);
+		placeholder.Save(data);
 		data["particle_path"] = JSONValue(particle_path);
 		data["amount"] = JSONValue(amount);
 		data["velocity"] = JSONValue(velocity);
@@ -40,11 +41,11 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	void PostInit(){
-		RetrievePlaceholder();
+		placeholder.Retrieve();
 	}
 
 	void Delete(){
-		RemovePlaceholder();
+		placeholder.Remove();
 	}
 
 	string GetDisplayString(){
@@ -122,13 +123,13 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(ObjectExists(placeholder_id)){
+		if(placeholder.Exists()){
 			vec3 forward_direction = placeholder.GetRotation() * vec3(1, 0, 0);
 			DebugDrawLine(placeholder.GetTranslation(), placeholder.GetTranslation() + (forward_direction * (velocity / 10.0)), vec3(1, 0, 0), _delete_on_update);
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			DebugDrawBillboard("Data/Textures/ui/stealth_debug/zzzz.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
 		}else{
-			CreatePlaceholder();
+			placeholder.Create();
 			StartEdit();
 		}
 	}
@@ -138,7 +139,7 @@ class DrikaCreateParticle : DrikaElement{
 	}
 
 	bool Trigger(){
-		if(ObjectExists(placeholder_id)){
+		if(placeholder.Exists()){
 			vec3 particle_tint = GetBloodTint();
 			if(!use_blood_tint){
 				particle_tint = tint;
@@ -159,7 +160,7 @@ class DrikaCreateParticle : DrikaElement{
 			}
 			return true;
 		}else{
-			CreatePlaceholder();
+			placeholder.Create();
 			return false;
 		}
 	}

@@ -35,8 +35,8 @@ class DrikaAIControl : DrikaElement{
 									};
 
 	DrikaAIControl(JSONValue params = JSONValue()){
-		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
-		placeholder_name = "AIControl Helper";
+		placeholder.Load(params);
+		placeholder.name = "AIControl Helper";
 		ai_goal = ai_goals(GetJSONInt(params, "ai_goal", _investigate_slow));
 		current_ai_goal = ai_goal;
 
@@ -63,7 +63,12 @@ class DrikaAIControl : DrikaElement{
 	}
 
 	void PostInit(){
-		RetrievePlaceholder();
+		placeholder.Retrieve();
+	}
+
+	void Delete(){
+		Reset();
+		placeholder.Remove();
 	}
 
 	JSONValue GetCheckpointData(){
@@ -79,7 +84,7 @@ class DrikaAIControl : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		if(goals_with_placeholders.find(ai_goals(ai_goal)) != -1){
-			data["placeholder_id"] = JSONValue(placeholder_id);
+			placeholder.Save(data);
 		}
 		data["ai_goal"] = JSONValue(ai_goal);
 		target_select.SaveIdentifier(data);
@@ -88,13 +93,17 @@ class DrikaAIControl : DrikaElement{
 	}
 
 	void DrawEditing(){
+		PlaceholderCheck();
+		if(placeholder.Exists()){
+			DebugDrawBillboard("Data/Textures/ui/challenge_mode/quit_icon_c.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
+			DebugDrawLine(this_hotspot.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_update);
+		}
+
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			PlaceholderCheck();
-			if(placeholder_id != -1 && ObjectExists(placeholder_id)){
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_update);
+			if(placeholder.Exists()){
 				DebugDrawLine(placeholder.GetTranslation(), targets[i].position, vec3(0.0, 1.0, 0.0), _delete_on_update);
-				DebugDrawBillboard("Data/Textures/ui/challenge_mode/quit_icon_c.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
 			}
 
 			if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
@@ -117,10 +126,10 @@ class DrikaAIControl : DrikaElement{
 	}
 
 	void PlaceholderCheck(){
-		if(goals_with_placeholders.find(ai_goals(ai_goal)) == -1 && placeholder_id != -1 && ObjectExists(placeholder_id)){
-			RemovePlaceholder();
-		}else if(goals_with_placeholders.find(ai_goals(ai_goal)) != -1 && (placeholder_id == -1 || !ObjectExists(placeholder_id))){
-			CreatePlaceholder();
+		if(goals_with_placeholders.find(ai_goals(ai_goal)) == -1 && placeholder.Exists()){
+			placeholder.Remove();
+		}else if(goals_with_placeholders.find(ai_goals(ai_goal)) != -1 && !placeholder.Exists()){
+			placeholder.Create();
 		}
 	}
 

@@ -3,7 +3,9 @@ class DrikaSetVelocity : DrikaElement{
 	bool add_velocity;
 
 	DrikaSetVelocity(JSONValue params = JSONValue()){
-		placeholder_id = GetJSONInt(params, "placeholder_id", -1);
+		placeholder.Load(params);
+		placeholder.name = "Set Velocity Helper";
+
 		velocity_magnitude = GetJSONFloat(params, "velocity_magnitude", 5);
 
 		target_select.LoadIdentifier(params);
@@ -11,7 +13,6 @@ class DrikaSetVelocity : DrikaElement{
 
 		add_velocity = GetJSONBool(params, "add_velocity", true);
 
-		placeholder_name = "Set Velocity Helper";
 		drika_element_type = drika_set_velocity;
 		connection_types = {_movement_object, _item_object};
 		has_settings = true;
@@ -19,19 +20,19 @@ class DrikaSetVelocity : DrikaElement{
 
 	JSONValue GetSaveData(){
 		JSONValue data;
+		placeholder.Save(data);
 		data["velocity_magnitude"] = JSONValue(velocity_magnitude);
-		data["placeholder_id"] = JSONValue(placeholder_id);
 		data["add_velocity"] = JSONValue(add_velocity);
 		target_select.SaveIdentifier(data);
 		return data;
 	}
 
 	void Delete(){
-		RemovePlaceholder();
+		placeholder.Remove();
 	}
 
 	void PostInit(){
-		RetrievePlaceholder();
+		placeholder.Retrieve();
 	}
 
 	string GetDisplayString(){
@@ -72,7 +73,7 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(ObjectExists(placeholder_id)){
+		if(placeholder.Exists()){
 			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
 				DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
@@ -106,7 +107,7 @@ class DrikaSetVelocity : DrikaElement{
 			vec4 color = placeholder.IsSelected()?vec4(0.0f, 0.85f, 0.0f, 0.75f):vec4(0.0f, 0.35f, 0.0f, 0.75f);
 			DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_update);
 		}else{
-			CreatePlaceholder();
+			placeholder.Create();
 		}
 	}
 
