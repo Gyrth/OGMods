@@ -1,6 +1,6 @@
 #include "drika_json_functions.as"
 #include "drika_animation_group.as"
-#include "drika_shared_values.as"
+#include "drika_shared.as"
 #include "drika_ui_element.as"
 #include "drika_ui_grabber.as"
 #include "drika_ui_image.as"
