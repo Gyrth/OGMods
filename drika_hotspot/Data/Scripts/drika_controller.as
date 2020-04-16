@@ -44,6 +44,7 @@ float camera_near_transition = 0.0;
 float camera_far_blur = 0.0;
 float camera_far_dist = 0.0;
 float camera_far_transition = 0.0;
+bool update_dof = false;
 bool enable_look_at_target = false;
 bool enable_move_with_target = false;
 int track_target_id = -1;
@@ -1248,11 +1249,14 @@ void ReceiveMessage(string msg){
 		camera_far_dist = atof(token_iter.GetToken(msg));
 		token_iter.FindNextToken(msg);
 		camera_far_transition = atof(token_iter.GetToken(msg));
+		update_dof = true;
 	}else if(token == "drika_set_fov"){
 		token_iter.FindNextToken(msg);
 		camera_zoom = atof(token_iter.GetToken(msg));
 	}else if(token == "request_preview_dof"){
-		camera.SetDOF(camera_near_blur, camera_near_dist, camera_near_transition, camera_far_blur, camera_far_dist, camera_far_transition);
+		if(update_dof){
+			camera.SetDOF(camera_near_blur, camera_near_dist, camera_near_transition, camera_far_blur, camera_far_dist, camera_far_transition);
+		}
 	}else if(token == "drika_export_to_file"){
 		token_iter.FindNextToken(msg);
 		string path = token_iter.GetToken(msg);
