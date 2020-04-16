@@ -11,7 +11,9 @@ enum state_choices { 	awake = 0,
 						investigating = 10,
 						getting_help = 11,
 						fleeing = 12,
-						in_proximity = 13
+						in_proximity = 13,
+						right_footstep = 14,
+						left_footstep = 15,
 					}
 
 enum AIGoal {
@@ -28,7 +30,7 @@ enum AIGoal {
 };
 
 class DrikaCheckCharacterState : DrikaElement{
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep"};
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
@@ -36,6 +38,7 @@ class DrikaCheckCharacterState : DrikaElement{
 	float proximity_distance;
 	bool continue_if_false = false;
 	DrikaGoToLineSelect@ continue_element;
+	array<bool> foot_down;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		state_choice = state_choices(GetJSONInt(params, "state_check", awake));
@@ -120,15 +123,20 @@ class DrikaCheckCharacterState : DrikaElement{
 			state_choice = state_choices(current_state_choice);
 			SetTargetOptions();
 			StartSettings();
+			if(state_choice == right_footstep || state_choice == left_footstep){
+				continue_if_false = false;
+			}
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Equals");
-		ImGui_NextColumn();
-		ImGui_Checkbox("###Equals", equals);
-		ImGui_NextColumn();
+		if(state_choice != right_footstep && state_choice != left_footstep){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Equals");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Equals", equals);
+			ImGui_NextColumn();
+		}
 
 		if(state_choice == knows_about){
 			ImGui_Separator();
@@ -152,14 +160,16 @@ class DrikaCheckCharacterState : DrikaElement{
 			ImGui_NextColumn();
 		}
 
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text("If not, go to line");
-		ImGui_NextColumn();
+		if(state_choice != right_footstep && state_choice != left_footstep){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("If not, go to line");
+			ImGui_NextColumn();
 
-		ImGui_Checkbox("###If not, go to line", continue_if_false);
-		ImGui_NextColumn();
-		if(continue_if_false){
-			continue_element.DrawGoToLineUI();
+			ImGui_Checkbox("###If not, go to line", continue_if_false);
+			ImGui_NextColumn();
+			if(continue_if_false){
+				continue_element.DrawGoToLineUI();
+			}
 		}
 	}
 
@@ -288,9 +298,51 @@ class DrikaCheckCharacterState : DrikaElement{
 						all_in_state = false;
 					}
 				}
-			}else{
+			}else if(state_choice == awake || state_choice == unconscious || state_choice == dead){
 				if((targets[i].GetIntVar("knocked_out") != state_choice) == equals){
 					all_in_state = false;
+				}
+			}else if(state_choice == right_footstep){
+				//First get the foot status.
+				vec3 leg_pos = targets[i].rigged_object().GetIKTargetPosition("right_leg");
+				if(foot_down.size() < i + 1){
+					col.GetSlidingSphereCollision(leg_pos, 0.1);
+					foot_down.insertLast((sphere_col.NumContacts() > 0));
+					all_in_state = false;
+				}else{
+					col.GetSlidingSphereCollision(leg_pos, 0.1);
+					//Now check if the foot status has changed.
+					bool current_foot_down = (sphere_col.NumContacts() > 0);
+					//If any of the characters has a foot that goes from not planted to planted, then a footstep is heard.
+					if(foot_down[i] == false && current_foot_down == true){
+						foot_down.resize(0);
+						all_in_state = true;
+						break;
+					}else{
+						foot_down[i] = current_foot_down;
+						all_in_state = false;
+					}
+				}
+			}else if(state_choice == left_footstep){
+				//First get the foot status.
+				vec3 leg_pos = targets[i].rigged_object().GetIKTargetPosition("left_leg");
+				if(foot_down.size() < i + 1){
+					col.GetSlidingSphereCollision(leg_pos, 0.1);
+					foot_down.insertLast((sphere_col.NumContacts() > 0));
+					all_in_state = false;
+				}else{
+					col.GetSlidingSphereCollision(leg_pos, 0.1);
+					//Now check if the foot status has changed.
+					bool current_foot_down = (sphere_col.NumContacts() > 0);
+					//If any of the characters has a foot that goes from not planted to planted, then a footstep is heard.
+					if(foot_down[i] == false && current_foot_down == true){
+						foot_down.resize(0);
+						all_in_state = true;
+						break;
+					}else{
+						foot_down[i] = current_foot_down;
+						all_in_state = false;
+					}
 				}
 			}
 		}
@@ -301,5 +353,9 @@ class DrikaCheckCharacterState : DrikaElement{
 		}
 
 		return all_in_state;
+	}
+
+	void Reset(){
+		triggered = false;
 	}
 }
