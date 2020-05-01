@@ -205,6 +205,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void PostInit(){
 		UpdateExternalResource();
+		//The font needs to be available from the start so that during editing the text are using the correct font.
 		if(ui_function == ui_font){
 			AddUIElement();
 		}
@@ -631,11 +632,13 @@ class DrikaUserInterface : DrikaElement{
 			SendRemoveUpdatebehaviour();
 			SendAddUpdateBehaviour();
 		}else if(ui_function == ui_font){
-			ui_element_added = true;
-			JSONValue data = GetSaveData();
-			data["index"] = JSONValue(index);
-			data["type"] = JSONValue(ui_font);
-			SendJSONMessage("drika_ui_add_element", data);
+			if(!ui_element_added){
+				ui_element_added = true;
+				JSONValue data = GetSaveData();
+				data["index"] = JSONValue(index);
+				data["type"] = JSONValue(ui_font);
+				SendJSONMessage("drika_ui_add_element", data);
+			}
 		}
 	}
 

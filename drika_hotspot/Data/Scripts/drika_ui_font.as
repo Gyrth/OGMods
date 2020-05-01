@@ -7,6 +7,8 @@ class DrikaUIFont : DrikaUIElement{
 	FontSetup font("edosz", 75, HexColor("#CCCCCC"), true);
 
 	DrikaUIFont(JSONValue params = JSONValue()){
+		drika_ui_element_types drika_ui_element_type = drika_ui_font;
+
 		font_name = GetJSONString(params, "font_name", "");
 		font_size = GetJSONInt(params, "font_size", 0);
 		font_color = GetJSONVec4(params, "font_color", vec4());
