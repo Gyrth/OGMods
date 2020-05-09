@@ -41,6 +41,7 @@
 #include "hotspots/drika_ai_control.as"
 #include "hotspots/drika_user_interface.as"
 #include "hotspots/drika_checkpoint.as"
+#include "drika_quick_launch.as"
 
 float PI = 3.14159265359f;
 bool show_editor = false;
@@ -107,6 +108,8 @@ vec4 text_color(0.7, 0.7, 0.7, 1.0);
 TextureAssetRef delete_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Delete.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Copy.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
+DrikaQuickLaunch quick_launch();
+
 class ObjectReference{
 	int id;
 	string reference;
@@ -130,6 +133,7 @@ void Init() {
 		duplicating_hotspot = true;
 	}
 	InterpData();
+	quick_launch.Init();
 }
 
 string GetTypeString(){
@@ -363,6 +367,8 @@ void Update(){
 		return;
 	}
 
+	quick_launch.Update();
+
 	for(uint i = 0; i < refresh_queue_counter.size(); i++){
 		refresh_queue_counter[i] += 1;
 	}
@@ -527,6 +533,8 @@ void DrawEditor(){
 			ImGui_EndPopup();
 		}
 		ImGui_PopStyleVar();
+
+		quick_launch.Draw();
 
 		if(open_palette){
 			ImGui_OpenPopup("Configure Palette");
@@ -702,7 +710,7 @@ void DrawEditor(){
 			ImGui_EndMenuBar();
 		}
 
-		if(!ImGui_IsPopupOpen("Edit") && !ImGui_IsPopupOpen("Palette")){
+		if(!ImGui_IsPopupOpen("Edit") && !ImGui_IsPopupOpen("Palette") && !ImGui_IsPopupOpen("Quick Launch")){
 			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
 				if(current_line > 0){
 					multi_select = {current_line - 1};
