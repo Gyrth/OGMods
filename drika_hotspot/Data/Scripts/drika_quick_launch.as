@@ -25,6 +25,8 @@ class DrikaQuickLaunch{
 	array<DrikaQuickLaunchElement@> database;
 	array<DrikaQuickLaunchElement@> results;
 	int selected_item = 0;
+	bool update_quick_launch_scroll = false;
+	bool quick_launch_open = false;
 
 	DrikaQuickLaunch(){
 	}
@@ -39,6 +41,7 @@ class DrikaQuickLaunch{
 
 		JSONValue root = data.getRoot();
 		array<string> list_groups = root.getMemberNames();
+		list_groups.sortAsc();
 
 		for(uint i = 0; i < list_groups.size(); i++){
 			database.insertLast(DrikaQuickLaunchElement(list_groups[i], root[list_groups[i]].asString()));
@@ -47,24 +50,24 @@ class DrikaQuickLaunch{
 
 	void Draw(){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
-		ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
+		ImGui_SetNextWindowSize(vec2(1000.0f, 450.0f), ImGuiSetCond_Always);
 
 		if(open_quick_launch){
 			ImGui_OpenPopup("Quick Launch");
 			quick_launch_search_buffer = "";
 			QueryElement(quick_launch_search_buffer);
 			open_quick_launch = false;
+			quick_launch_open = true;
 		}
 
-		if(ImGui_BeginPopupModal("Quick Launch", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)){
-			ImGui_BeginChild("Quick Launch Elements", vec2(-1, -1));
-			ImGui_PushItemWidth(-1);
-
+		if(ImGui_BeginPopupModal("Quick Launch", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar)){
+			ImGui_SetWindowFontScale(2.0);
 			ImGui_AlignTextToFramePadding();
 			ImGui_SetTextBuf(quick_launch_search_buffer);
 			ImGui_Text("Search");
 			ImGui_SameLine();
 			ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth());
+
 			if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
 				ImGui_SetKeyboardFocusHere(-1);
 			}
@@ -74,9 +77,27 @@ class DrikaQuickLaunch{
 				QueryElement(quick_launch_search_buffer);
 				selected_item = 0;
 			}
+
+			//The lctrl check only works once when the popup opens. When after that, it's always returning false.
+			if(!GetInputDown(0, "lctrl") && ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Enter)) && results.size() != 0){
+				JSON data;
+				if(!data.parseString(results[selected_item].json)){
+					Log(warning, "Unable to parse the JSON in the Quick Launch Database! " + results[selected_item].json);
+				}else{
+					DrikaElement@ new_element = InterpElement(none, data.getRoot());
+					post_init_queue.insertLast(@new_element);
+					InsertElement(new_element);
+					element_added = true;
+					multi_select = {current_line};
+					ImGui_CloseCurrentPopup();
+					quick_launch_open = false;
+				}
+			}
+
 			ImGui_PopItemWidth();
 
-			ImGui_SetWindowFontScale(3.0);
+			ImGui_BeginChild("Quick Launch Elements", vec2(-1, -1), false, ImGuiWindowFlags_NoInputs);
+			ImGui_SetWindowFontScale(2.0);
 			for(uint i = 0; i < results.size(); i++){
 				vec4 text_color = display_colors[results[i].type];
 				ImGui_PushStyleColor(ImGuiCol_Text, text_color);
@@ -94,28 +115,32 @@ class DrikaQuickLaunch{
 
 				}
 
+				if(update_quick_launch_scroll && line_selected){
+					update_quick_launch_scroll = false;
+					ImGui_SetScrollHere(0.5);
+				}
+
 				ImGui_PopStyleColor();
 			}
-			ImGui_SetWindowFontScale(1.0);
+
+			ImGui_EndChild();
 
 			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
 				ImGui_CloseCurrentPopup();
+				quick_launch_open = false;
 			}
 
 			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
 				if(selected_item > 0){
 					selected_item -= 1;
-					/* update_scroll = true; */
+					update_quick_launch_scroll = true;
 				}
 			}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow))){
 				if(selected_item < int(results.size() - 1)){
 					selected_item += 1;
-					/* update_scroll = true; */
+					update_quick_launch_scroll = true;
 				}
 			}
-
-			ImGui_PopItemWidth();
-			ImGui_EndChild();
 
 			if(!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)){
 				ImGui_CloseCurrentPopup();
@@ -128,11 +153,24 @@ class DrikaQuickLaunch{
 
 	void QueryElement(string query){
 		results.resize(0);
+		//If the query is empty then just return the whole database.
 		if(query == ""){
 			results = database;
 		}else{
+			//The query can be multiple words separated by spaces.
+			array<string> split_query = query.split(" ");
+
 			for(uint i = 0; i < database.size(); i++){
-				if(ToLowerCase(database[i].query).findFirst(ToLowerCase(query)) != -1){
+				bool found_result = true;
+				for(uint j = 0; j < split_query.size(); j++){
+					//Could not find part of query in the database.
+					if(ToLowerCase(database[i].query).findFirst(ToLowerCase(split_query[j])) == -1){
+						found_result = false;
+						break;
+					}
+				}
+				//Only if all parts of the query are found then add the result.
+				if(found_result){
 					results.insertLast(database[i]);
 				}
 			}

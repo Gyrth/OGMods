@@ -313,7 +313,6 @@ void SetParameters(){
 }
 
 void InterpData(){
-	int line_index = 0;
 	if(params.HasParam("Script Data")){
 		JSON data;
 		if(!data.parseString(params.GetString("Script Data"))){
@@ -323,7 +322,6 @@ void InterpData(){
 				DrikaElement@ new_element = InterpElement(none, data.getRoot()["functions"][i]);
 				drika_elements.insertLast(@new_element);
 				drika_indexes.insertLast(drika_elements.size() - 1);
-				line_index += 1;
 				post_init_queue.insertLast(@new_element);
 			}
 		}
