@@ -55,6 +55,8 @@ class DrikaQuickLaunch{
 		if(open_quick_launch){
 			ImGui_OpenPopup("Quick Launch");
 			quick_launch_search_buffer = "";
+			selected_item = 0;
+			update_quick_launch_scroll = true;
 			QueryElement(quick_launch_search_buffer);
 			open_quick_launch = false;
 			quick_launch_open = true;
