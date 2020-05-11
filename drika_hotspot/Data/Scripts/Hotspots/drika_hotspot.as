@@ -522,7 +522,7 @@ void DrawEditor(){
 			ImGui_PopItemWidth();
 			ImGui_EndChild();
 
-			if(!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)){
+			if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
 				GetCurrentElement().ApplySettings();
 				ImGui_CloseCurrentPopup();
 				Save();
@@ -726,6 +726,13 @@ void DrawEditor(){
 					current_line += 1;
 					update_scroll = true;
 					GetCurrentElement().StartEdit();
+				}
+			}else if(drika_elements.size() > 0 && !reorded && post_init_queue.size() == 0){
+				if(!GetInputDown(0, "lctrl") && ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Enter))){
+					if(GetCurrentElement().has_settings){
+						GetCurrentElement().StartSettings();
+						ImGui_OpenPopup("Edit");
+					}
 				}
 			}
 		}
