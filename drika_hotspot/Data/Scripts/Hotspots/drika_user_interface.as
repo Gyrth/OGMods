@@ -423,6 +423,11 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_Text("Text");
 			ImGui_NextColumn();
 			ImGui_SetTextBuf(text_content);
+
+			if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
+				ImGui_SetKeyboardFocusHere(0);
+			}
+
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, ImGui_GetWindowHeight() / 3.0), ImGuiInputTextFlags_AllowTabInput)){
 				text_content = ImGui_GetTextBuf();
 				SendUIInstruction("set_content", {"\"" + text_content + "\""});

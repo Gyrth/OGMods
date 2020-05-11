@@ -688,10 +688,16 @@ class DrikaDialogue : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_SetTextBuf(say_text);
 			ImGui_PushItemWidth(second_column_width);
+
+			if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
+				ImGui_SetKeyboardFocusHere(0);
+			}
+
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				say_text = ImGui_GetTextBuf();
 				Reset();
 			}
+
 			ImGui_PopItemWidth();
 		}else if(dialogue_function == actor_settings){
 			ImGui_AlignTextToFramePadding();
