@@ -99,11 +99,11 @@ const int _ragdoll_state = 4;  // character is falling in ragdoll mode
 
 // Coloring options
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
-vec4 background_color(0.25, 0.25, 0.25, 0.98);
-vec4 titlebar_color(0.15, 0.15, 0.15, 0.98);
-vec4 item_hovered(0.2, 0.2, 0.2, 0.98);
-vec4 item_clicked(0.1, 0.1, 0.1, 0.98);
-vec4 text_color(0.7, 0.7, 0.7, 1.0);
+vec4 background_color();
+vec4 titlebar_color();
+vec4 item_hovered();
+vec4 item_clicked();
+vec4 text_color();
 
 TextureAssetRef delete_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Delete.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/Copy.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
@@ -142,19 +142,52 @@ string GetTypeString(){
 
 void LoadPalette(bool use_defaults = false){
 	JSON data;
+	JSONValue root;
+	bool retrieve_default_palette = false;
 
 	SavedLevel@ saved_level = save_file.GetSavedLevel("drika_data");
 	string palette_data = saved_level.GetValue("drika_palette");
 
+	//Check if the saved json is parseble, available or just use the defaults.
 	if(palette_data == "" || !data.parseString(palette_data) || use_defaults){
 		if(!data.parseString(palette_data)){
-			Log(warning, "Unable to parse the JSON in the palette!");
+			Log(warning, "Unable to parse the saved JSON in the palette!");
 		}
-		data.parseFile("Data/Scripts/drika_default_palette.json");
+		retrieve_default_palette = true;
+	}else{
+		Log(warning, "Saved palette JSON loaded correctly.");
 	}
 
+	//Check if the existing saved data has the relevant data.
+	if(!retrieve_default_palette){
+		root = data.getRoot();
+		//Old palette savig method. Use defaults in stead.
+		if(root.isArray()){
+			retrieve_default_palette = true;
+		}else if(!root.isMember("Function Palette")){
+			Log(warning, "Could not find Function Palette in JSON.");
+			retrieve_default_palette = true;
+		}else if(!root.isMember("UI Palette")){
+			Log(warning, "Could not find UI Palette in JSON.");
+			retrieve_default_palette = true;
+		}
+	}
+
+	//Get the defaults values.
+	if(retrieve_default_palette){
+		Log(warning, "Loading the default palette.");
+		if(!data.parseFile("Data/Scripts/drika_default_palette.json")){
+			Log(warning, "Error loading the default palette.");
+			return;
+		}
+		root = data.getRoot();
+	}else{
+		Log(warning, "Using the palette from the saved JSON.");
+	}
+
+	JSONValue color_palette = root["Function Palette"];
+
 	display_colors.resize(drika_element_names.size());
-	JSONValue color_palette = data.getRoot();
 	for(uint i = 0; i < drika_element_names.size(); i++){
 		if(i < color_palette.size()){
 			JSONValue color = color_palette[i];
@@ -164,6 +197,23 @@ void LoadPalette(bool use_defaults = false){
 			display_colors[i] = vec4(1.0);
 		}
 	}
+
+	JSONValue ui_palette = root["UI Palette"];
+
+	JSONValue bg_color = ui_palette["Background Color"];
+	background_color = vec4(bg_color[0].asFloat(), bg_color[1].asFloat(), bg_color[2].asFloat(), bg_color[3].asFloat());
+
+	JSONValue tb_color = ui_palette["Titlebar Color"];
+	titlebar_color = vec4(tb_color[0].asFloat(), tb_color[1].asFloat(), tb_color[2].asFloat(), tb_color[3].asFloat());
+
+	JSONValue ih_color = ui_palette["Item Hovered"];
+	item_hovered = vec4(ih_color[0].asFloat(), ih_color[1].asFloat(), ih_color[2].asFloat(), ih_color[3].asFloat());
+
+	JSONValue ic_color = ui_palette["Item Clicked"];
+	item_clicked = vec4(ic_color[0].asFloat(), ic_color[1].asFloat(), ic_color[2].asFloat(), ic_color[3].asFloat());
+
+	JSONValue t_color = ui_palette["Text Color"];
+	text_color = vec4(t_color[0].asFloat(), t_color[1].asFloat(), t_color[2].asFloat(), t_color[3].asFloat());
 }
 
 void QueryAnimation(string query){
@@ -491,7 +541,7 @@ void DrawEditor(){
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, background_color);
-		ImGui_PushStyleColor(ImGuiCol_TitleBg, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_TitleBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 		ImGui_PushStyleColor(ImGuiCol_Header, titlebar_color);
@@ -541,14 +591,20 @@ void DrawEditor(){
 
 		ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
         if(ImGui_BeginPopupModal("Configure Palette", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
-			if(ImGui_Button("Reset to defaults.")){
+			if(ImGui_Button("Reset to defaults")){
 				LoadPalette(true);
 				SavePalette();
 			}
+			ImGui_Separator();
+
 			ImGui_BeginChild("Palette", vec2(-1, -1));
 			ImGui_PushItemWidth(-1);
 			ImGui_Columns(2, false);
 			ImGui_SetColumnWidth(0, 200.0);
+
+			ImGui_Text("Function Colors");
+			ImGui_NextColumn();
+			ImGui_NextColumn();
 
 			for(uint i = 0; i < sorted_element_names.size(); i++){
 				drika_element_types current_element_type = drika_element_types(drika_element_names.find(sorted_element_names[i]));
@@ -556,6 +612,7 @@ void DrawEditor(){
 					continue;
 				}
 				ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text(sorted_element_names[i]);
 				ImGui_PopStyleColor();
 
@@ -566,10 +623,49 @@ void DrawEditor(){
 				ImGui_NextColumn();
 			}
 
+			ImGui_Text("UI Colors");
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+
+			ImGui_Text("Background Color");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(-1);
+			ImGui_ColorEdit4("##Background Color", background_color);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_Text("Titlebar Color");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(-1);
+			ImGui_ColorEdit4("##Titlebar Color", titlebar_color);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_Text("Item Hovered");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(-1);
+			ImGui_ColorEdit4("##Item Hovered", item_hovered);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_Text("Item Clicked");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(-1);
+			ImGui_ColorEdit4("##Item Clicked", item_clicked);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_Text("Text Color");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(-1);
+			ImGui_ColorEdit4("##Text Color", text_color);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 			ImGui_PopItemWidth();
 			ImGui_EndChild();
 
-			if(!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)){
+			if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
 				ImGui_CloseCurrentPopup();
 				SavePalette();
 			}
@@ -924,16 +1020,60 @@ void DrawDialogueTest(){
 
 void SavePalette(){
 	JSON data;
-	JSONValue palette;
+	JSONValue root;
+
+	JSONValue function_palette;
+
 	for(uint i = 0; i < display_colors.size(); i++){
 		JSONValue color = JSONValue(JSONarrayValue);
 		color.append(display_colors[i].x);
 		color.append(display_colors[i].y);
 		color.append(display_colors[i].z);
 		color.append(display_colors[i].a);
-		palette.append(color);
+		function_palette.append(color);
 	}
-	data.getRoot() = palette;
+	root["Function Palette"] = function_palette;
+
+	JSONValue ui_palette;
+
+	JSONValue bg_color = JSONValue(JSONarrayValue);
+	bg_color.append(background_color.x);
+	bg_color.append(background_color.y);
+	bg_color.append(background_color.z);
+	bg_color.append(background_color.a);
+	ui_palette["Background Color"] = bg_color;
+
+	JSONValue tb_color = JSONValue(JSONarrayValue);
+	tb_color.append(titlebar_color.x);
+	tb_color.append(titlebar_color.y);
+	tb_color.append(titlebar_color.z);
+	tb_color.append(titlebar_color.a);
+	ui_palette["Titlebar Color"] = tb_color;
+
+	JSONValue ih_color = JSONValue(JSONarrayValue);
+	ih_color.append(item_hovered.x);
+	ih_color.append(item_hovered.y);
+	ih_color.append(item_hovered.z);
+	ih_color.append(item_hovered.a);
+	ui_palette["Item Hovered"] = ih_color;
+
+	JSONValue ic_color = JSONValue(JSONarrayValue);
+	ic_color.append(item_clicked.x);
+	ic_color.append(item_clicked.y);
+	ic_color.append(item_clicked.z);
+	ic_color.append(item_clicked.a);
+	ui_palette["Item Clicked"] = ic_color;
+
+	JSONValue t_color = JSONValue(JSONarrayValue);
+	t_color.append(text_color.x);
+	t_color.append(text_color.y);
+	t_color.append(text_color.z);
+	t_color.append(text_color.a);
+	ui_palette["Text Color"] = t_color;
+
+	root["UI Palette"] = ui_palette;
+
+	data.getRoot() = root;
 	SavedLevel@ saved_level = save_file.GetSavedLevel("drika_data");
 	saved_level.SetValue("drika_palette", data.writeString(false));
 	save_file.WriteInPlace();
