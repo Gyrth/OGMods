@@ -1,0 +1,13 @@
+<Object>
+  <Model>Data/Models/LODTerrain01.obj</Model>
+  <ColorMap>Data/Textures/Terrain/impressive_mountains/impressive_mountains_c.tga</ColorMap>
+  <NormalMap>Data/Textures/normal.tga</NormalMap>
+  <WeightMap>Data/Textures/Terrain/impressive_mountains/impressive_mountains_w.png</WeightMap>
+  <DetailMaps>
+    <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/snow.tga"/>
+    <DetailMap/>
+    <DetailMap/>
+    <DetailMap/>
+  </DetailMaps>
+  <ShaderName>envobject #DETAILMAP4 #TANGENT</ShaderName>
+</Object>

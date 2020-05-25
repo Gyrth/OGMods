@@ -2,11 +2,12 @@ import bpy
 from mathutils import *
 import os.path
 import re
+from lxml import etree
 import xml.etree.ElementTree as ET
 from xml.etree.ElementTree import XMLParser
 from pathlib import Path
 from math import radians
-from bpy.props import BoolProperty, IntVectorProperty, StringProperty
+from bpy.props import BoolProperty, IntVectorProperty, StringProperty, IntProperty
 from bpy.types import (Panel, Operator)
 
 bpy.types.Scene.og_path = StringProperty(subtype='DIR_PATH', name="Overgrowth Path")
@@ -14,42 +15,90 @@ bpy.types.Scene.level_path = StringProperty(subtype='FILE_PATH', name="Level Pat
 bpy.types.Scene.import_plants = BoolProperty(name="Import Plants")
 bpy.types.Scene.import_terrain = BoolProperty(name="Import Terrain")
 bpy.types.Scene.draw_during_import = BoolProperty(name="Draw During Import")
+bpy.types.Scene.terrain_size = IntProperty(name="Terrain Size", default=3072)
+bpy.types.Scene.subdivide = IntProperty(name="Subdivide", default=3)
+bpy.types.Scene.terrain_object = StringProperty(name="Terrain Object", subtype='BYTE_STRING')
 
 load_models = True
 draw_during_import = True
 import_plants = False
 import_terrain = False
+terrain_size = 3072
+subdivide = 3
+terrain_object = ""
+og_path = ""
 
-cached_object_names = []
-cached_object_meshes = []
+def read_level_xml():
+    nr_cubes = 2 ** subdivide
+    cube_size = (terrain_size / nr_cubes)
+    position_x = (-terrain_size / 2.0) + (cube_size / 2.0)
+    position_y = (-terrain_size / 2.0) + (cube_size / 2.0)
+    
+    print(cube_size)
+    terrain = bpy.data.objects[terrain_object]
+    terrain_material = terrain.data.materials[0]
+    
+    for direction_x in range(nr_cubes):
+        for direction_y in range(nr_cubes):
+            bpy.ops.mesh.primitive_cube_add(size=1.0)
+            obj = bpy.context.object
+            
+            obj.scale = (cube_size, cube_size, 1000)
+            obj.location = (position_x, position_y, 0)
+            obj.name = "lod_" + str('%02d' % subdivide) + "_" + str(direction_x) + str(direction_y)
+            
+            boolmod = obj.modifiers.new("Bool", 'BOOLEAN')
+            boolmod.operation = 'INTERSECT'
+            boolmod.object = terrain
+            obj.data.materials.append(terrain_material)
+            if draw_during_import:
+                bpy.ops.wm.redraw_timer(type='DRAW_WIN_SWAP', iterations=1)
+            print("Created LOD : " + obj.name)
+            
+            position_y += cube_size
+        position_x += cube_size
+        position_y = (-terrain_size / 2.0) + (cube_size / 2.0)
+    
+    print("Done creating LODs.")
 
-def read_level_xml(og_path, level_path):
-    with open(level_path, 'r') as file:
-        content = file.read()
-        content = content.replace("<?xml version=\"2.0\" ?>\n", "")
-        root = ET.fromstring("<data>" + content + "</data>")
-        
-        skydome_path = root.find("Sky").find("DomeTexture").text
-        
-        world = bpy.context.scene.world
-        node_tree = bpy.data.worlds[world.name].node_tree
-        env_texture = node_tree.nodes["Environment Texture"]
-        img = None
-        
-        resolved_path = path_insensitive(og_path + skydome_path)
-        if resolved_path != None and os.path.isfile(resolved_path):
-            img = bpy.data.images.load(resolved_path, check_existing=True)
-        else:
-            resolved_path = path_insensitive(og_path + skydome_path + '_converted.dds')
-            if resolved_path != None and os.path.isfile(resolved_path):
-                img = bpy.data.images.load(resolved_path, check_existing=True)
-            else:
-                print("Could not find " + skydome_path)
-                return
-        env_texture.image = img
-        
-        read_terrain(og_path, root.find("Terrain"))
-        read_body(og_path, root)
+def export_xml():
+    # create the file structure
+    object = ET.Element('Object')
+    model = ET.SubElement(object, 'Model')
+    colormap = ET.SubElement(object, 'ColorMap')
+    normalmap = ET.SubElement(object, 'NormalMap')
+    weightmap = ET.SubElement(object, 'WeightMap')
+    detailmaps = ET.SubElement(object, 'DetailMaps')
+    
+    detailmap1 = ET.SubElement(detailmaps, 'DetailMap')
+    detailmap2 = ET.SubElement(detailmaps, 'DetailMap')
+    detailmap3 = ET.SubElement(detailmaps, 'DetailMap')
+    detailmap4 = ET.SubElement(detailmaps, 'DetailMap')
+    
+    shadername = ET.SubElement(object, 'ShaderName')
+
+    
+    model.text = 'Data/Models/LODTerrain01.obj'
+    colormap.text = 'Data/Textures/Terrain/impressive_mountains/impressive_mountains_c.tga'
+    normalmap.text = 'Data/Textures/normal.tga'
+    weightmap.text = 'Data/Textures/Terrain/impressive_mountains/impressive_mountains_w.png'
+    
+    detailmap1.set('colorpath','Data/Textures/Terrain/DetailTextures/snow.tga')
+    shadername.text = 'envobject #DETAILMAP4 #TANGENT'
+
+    resolved_write_directory = bpy.path.abspath(og_path + "test.xml")
+
+    print("Path " + resolved_write_directory)
+
+    # create a new XML file with the results
+    mydata = ET.tostring(object).decode("utf-8")
+    
+    tree = etree.fromstring(mydata)
+    pretty = etree.tostring(tree, encoding="unicode", pretty_print=True)
+    
+    myfile = open(resolved_write_directory, "w")
+    print(pretty)
+    myfile.write(pretty)
 
 def read_terrain(og_path, terrain):
     if import_terrain and terrain != None:
@@ -367,20 +416,9 @@ def bake_texture():
 def clear():
     objs = bpy.data.objects
     for obj in objs:
-        if obj.type != 'LIGHT' and obj.type != 'CAMERA':
+        if obj.name.find("lod") != -1:
             objs.remove(obj, do_unlink=True)
-    
-    for block in bpy.data.meshes:
-        bpy.data.meshes.remove(block)
-    
-    for m in bpy.data.materials:
-        bpy.data.materials.remove(m)
-    
-    for img in bpy.data.images:
-        bpy.data.images.remove(img)
-    
-    cached_object_names.clear()
-    cached_object_meshes.clear()
+
     bpy.ops.wm.redraw_timer(type='DRAW_WIN_SWAP', iterations=1)
 
 def decimate_all():
@@ -463,16 +501,21 @@ class ImportOperator(Operator):
     bl_idname = "object.import"
     
     def execute(self, context):
-        clear()
         global draw_during_import
         global import_plants
         global import_terrain
+        global terrain_size
+        global subdivide
+        global terrain_object        
         
         draw_during_import = context.scene.draw_during_import
         import_plants = context.scene.import_plants
         import_terrain = context.scene.import_terrain
+        terrain_size = context.scene.terrain_size
+        subdivide = context.scene.subdivide
+        terrain_object = context.scene.terrain_object
         
-        read_level_xml(str(Path(context.scene.og_path).resolve()) + "/", str(Path(context.scene.level_path).resolve()))
+        read_level_xml()
         return {'FINISHED'}
 
 class ClearOperator(Operator):
@@ -483,6 +526,18 @@ class ClearOperator(Operator):
         clear()
         return {'FINISHED'}
 
+class ExportOperator(Operator):
+    bl_label = "Operator"
+    bl_idname = "object.export_xml"
+    
+    def execute(self, context):
+        global og_path
+        
+        og_path = context.scene.og_path
+        
+        export_xml()
+        return {'FINISHED'}
+
 class OGLevelImport(Panel):
     """Creates a Panel in the Object properties window"""
     bl_label = "Overgrowth Level Import"
@@ -491,25 +546,38 @@ class OGLevelImport(Panel):
 
     def draw(self, context):
         layout = self.layout
-        self.layout.prop(context.scene, "og_path")
-        self.layout.prop(context.scene, "level_path")
-        self.layout.prop(context.scene, "import_plants")
-        self.layout.prop(context.scene, "import_terrain")
-        self.layout.prop(context.scene, "draw_during_import")
+        layout.prop(context.scene, "og_path")
+        layout.prop(context.scene, "level_path")
+        layout.prop(context.scene, "import_plants")
+        layout.prop(context.scene, "import_terrain")
+        layout.prop(context.scene, "draw_during_import")
+        layout.prop(context.scene, "terrain_size")
+        layout.prop(context.scene, "subdivide")
+        
+        scene = context.scene
+        layout.prop_search(scene, "terrain_object", scene, "objects", text="Terrain Object")
         
         row = layout.row()
         row.operator(ImportOperator.bl_idname, text="Import", icon="LIBRARY_DATA_DIRECT")
         row.operator(ClearOperator.bl_idname, text="Clear", icon="CANCEL")
+        
+        layout.operator(ExportOperator.bl_idname, text="Export")
 
 def register():
     bpy.utils.register_class(OGLevelImport)
     bpy.utils.register_class(ClearOperator)
     bpy.utils.register_class(ImportOperator)
+    bpy.types.Scene.terrain_object = bpy.props.StringProperty()
+    bpy.types.Scene.og_path = bpy.props.StringProperty()
+    bpy.utils.register_class(ExportOperator)
 
 def unregister():
     bpy.utils.unregister_class(OGLevelImport)
     bpy.utils.unregister_class(ClearOperator)
     bpy.utils.unregister_class(ImportOperator)
+    del bpy.types.Object.terrain_object
+    del bpy.types.Object.og_path
+    bpy.utils.unregister_class(ExportOperator)
 
 if __name__ == "__main__":
     register()
