@@ -47,20 +47,53 @@ def read_level_xml():
             obj.location = (position_x, position_y, 0)
             obj.name = "lod_" + str('%02d' % subdivide) + "_" + str(direction_x) + str(direction_y)
             
-            boolmod = obj.modifiers.new("Bool", 'BOOLEAN')
-            boolmod.operation = 'INTERSECT'
-#            boolmod.object = terrain
+            #Apply the same material to the newly created mesh as the terrain.
             obj.data.materials.append(terrain_material)
+            
+            apply_boolean(obj, terrain)
+            apply_decimate(obj, 0.1);
+            
+            #Update drawing the viewport to show progress.
             if draw_during_import:
                 bpy.ops.wm.redraw_timer(type='DRAW_WIN_SWAP', iterations=1)
+            
             print("Created LOD : " + obj.name)
-            export_xml(obj.name)
+            
+#            export_xml(obj.name)
+#            export_model(obj)
             
             position_y += cube_size
         position_x += cube_size
         position_y = (-terrain_size / 2.0) + (cube_size / 2.0)
     
     print("Done creating LODs.")
+
+def apply_decimate(obj, ratio):
+    #Add a new decimate modifier.
+    decimatemod = obj.modifiers.new('Decimate','DECIMATE')
+    decimatemod.ratio=ratio
+    decimatemod.use_collapse_triangulate=True
+    
+    #Apply the decimate modifier.
+    bpy.context.view_layer.objects.active = obj
+    bpy.ops.object.modifier_apply(modifier=decimatemod.name)
+
+def apply_boolean(obj, terrain):
+    #Add a new boolean modifier.
+    boolmod = obj.modifiers.new("Bool", 'BOOLEAN')
+    #Make it an intersection boolean.
+    boolmod.operation = 'INTERSECT'
+    #Use the terrain object as the target to slice.
+    boolmod.object = terrain
+    
+    #Apply the boolean modifier.
+    bpy.context.view_layer.objects.active = obj
+    bpy.ops.object.modifier_apply(modifier=boolmod.name)
+
+def export_model(obj):
+    bpy.context.view_layer.objects.active = obj
+    resolved_write_directory = bpy.path.abspath(og_path + "Data/Models/" + obj.name + ".obj")
+    bpy.ops.export_scene.obj(filepath=resolved_write_directory, use_selection=True, use_materials=False)
 
 def export_xml(lod_name):
     # create the file structure
