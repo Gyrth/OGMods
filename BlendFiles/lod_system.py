@@ -10,32 +10,69 @@ from math import radians
 from bpy.props import BoolProperty, IntVectorProperty, StringProperty, IntProperty
 from bpy.types import (Panel, Operator)
 
-bpy.types.Scene.og_path = StringProperty(subtype='DIR_PATH', name="Overgrowth Path")
+terrain_size = 3072
+subdivide = 3
+draw_during_import = True
+load_models = True
+import_plants = False
+import_terrain = False
+terrain_object = ""
+export_path = ""
+colormap_path = "Data/Textures/Terrain/impressive_mountains/impressive_mountains_c.tga"
+normalmap_path = "Data/Textures/normal.tga"
+weightmap_path = "Data/Textures/Terrain/impressive_mountains/impressive_mountains_w.png"
+shader = "envobject #DETAILMAP4 #TANGENT"
+
+detailmap1_color = "Data/Textures/Terrain/DetailTextures/snow.tga"
+detailmap1_normal = "Data/Textures/Terrain/DetailTextures/snow_normal.tga"
+detailmap1_material = "Data/Materials/snow.xml"
+
+detailmap2_color = "Data/Textures/Terrain/DetailTextures/glacial.tga"
+detailmap2_normal = "Data/Textures/Terrain/DetailTextures/glacial_normal.tga"
+detailmap2_material = "Data/Materials/ice.xml"
+
+detailmap3_color = "Data/Textures/Terrain/DetailTextures/pebbles.tga"
+detailmap3_normal = "Data/Textures/Terrain/DetailTextures/pebbles_normal.tga"
+detailmap3_material = "Data/Materials/gravel.xml"
+
+detailmap4_color = "Data/Textures/Terrain/DetailTextures/dark_round_rocks.tga"
+detailmap4_normal = "Data/Textures/Terrain/DetailTextures/dark_round_rocks_normal.tga"
+detailmap4_material = "Data/Materials/rocks.xml"
+
+bpy.types.Scene.export_path = StringProperty(subtype='DIR_PATH', name="Export Path")
 bpy.types.Scene.level_path = StringProperty(subtype='FILE_PATH', name="Level Path")
 bpy.types.Scene.import_plants = BoolProperty(name="Import Plants")
 bpy.types.Scene.import_terrain = BoolProperty(name="Import Terrain")
-bpy.types.Scene.draw_during_import = BoolProperty(name="Draw During Import")
-bpy.types.Scene.terrain_size = IntProperty(name="Terrain Size", default=3072)
-bpy.types.Scene.subdivide = IntProperty(name="Subdivide", default=3)
+bpy.types.Scene.draw_during_import = BoolProperty(name="Draw During Import", default=draw_during_import)
+bpy.types.Scene.terrain_size = IntProperty(name="Terrain Size", default=terrain_size)
+bpy.types.Scene.subdivide = IntProperty(name="Subdivide", default=subdivide)
 bpy.types.Scene.terrain_object = StringProperty(name="Terrain Object", subtype='BYTE_STRING')
+bpy.types.Scene.colormap_path = StringProperty(name="ColorMap", default=colormap_path)
+bpy.types.Scene.normalmap_path = StringProperty(name="NormalMap", default=normalmap_path)
+bpy.types.Scene.weightmap_path = StringProperty(name="WeightMap", default=weightmap_path)
+bpy.types.Scene.shader = StringProperty(name="ShaderName", default=shader)
 
-load_models = True
-draw_during_import = True
-import_plants = False
-import_terrain = False
-terrain_size = 3072
-subdivide = 3
-terrain_object = ""
-og_path = ""
-operator = ""
+bpy.types.Scene.detailmap1_color = StringProperty(name="1 DetailMap Color", default=detailmap1_color)
+bpy.types.Scene.detailmap1_normal = StringProperty(name="1 DetailMap Normal", default=detailmap1_normal)
+bpy.types.Scene.detailmap1_material = StringProperty(name="1 DetailMap Material", default=detailmap1_material)
+
+bpy.types.Scene.detailmap2_color = StringProperty(name="2 DetailMap Color", default=detailmap2_color)
+bpy.types.Scene.detailmap2_normal = StringProperty(name="2 DetailMap Normal", default=detailmap2_normal)
+bpy.types.Scene.detailmap2_material = StringProperty(name="2 DetailMap Material", default=detailmap2_material)
+
+bpy.types.Scene.detailmap3_color = StringProperty(name="3 DetailMap Color", default=detailmap3_color)
+bpy.types.Scene.detailmap3_normal = StringProperty(name="3 DetailMap Normal", default=detailmap3_normal)
+bpy.types.Scene.detailmap3_material = StringProperty(name="3 DetailMap Material", default=detailmap3_material)
+
+bpy.types.Scene.detailmap4_color = StringProperty(name="4 DetailMap Color", default=detailmap4_color)
+bpy.types.Scene.detailmap4_normal = StringProperty(name="4 DetailMap Normal", default=detailmap4_normal)
+bpy.types.Scene.detailmap4_material = StringProperty(name="4 DetailMap Material", default=detailmap4_material)
 
 def create_lods():
     create_lod(5, 1, 0.1)
 
 def create_lod(lod_index, nr_subdivide, decimate_ratio):
     print("Creating LOD " + str(lod_index))
-    
-    operator.report({'INFO'}, 'Printing report to Info window.')
     
     nr_cubes = 2 ** nr_subdivide
     cube_size = (terrain_size / nr_cubes)
@@ -54,7 +91,7 @@ def create_lod(lod_index, nr_subdivide, decimate_ratio):
             
             obj.scale = (cube_size, cube_size, 1000)
             obj.location = (position_x, position_y, 0)
-            obj.name = "lod_" + str(lod_index) + "_" + str('%02d' % lod_counter)
+            obj.name = "lod_" + str(lod_index) + "_" + str('%03d' % lod_counter)
             
             #Apply the same material to the newly created mesh as the terrain.
             obj.data.materials.append(terrain_material)
@@ -104,9 +141,18 @@ def apply_boolean(obj, terrain):
 
 def export_model(obj):
     bpy.context.view_layer.objects.active = obj
-    resolved_write_directory = bpy.path.abspath(og_path + "Data/Models/" + obj.name + ".obj")
+    resolved_write_directory = bpy.path.abspath(export_path + "Data/Models/" + terrain_object + "/" + obj.name + ".obj")
+    
+    #Create the directories if they do not exist.
+    if not os.path.exists(os.path.dirname(resolved_write_directory)):
+        try:
+            os.makedirs(os.path.dirname(resolved_write_directory))
+        except OSError as exc: # Guard against race condition
+            if exc.errno != errno.EEXIST:
+                raise
+    
     bpy.ops.export_scene.obj(filepath=resolved_write_directory, use_selection=True, use_materials=False)
-    print("Exported model " + "Data/Models/" + obj.name + ".obj")
+    print("Exported model " + resolved_write_directory)
 
 def export_xml(lod_name):
     # create the file structure
@@ -124,21 +170,43 @@ def export_xml(lod_name):
     
     shadername = ET.SubElement(object, 'ShaderName')
     
-    model.text = 'Data/Models/' + lod_name + '.obj'
-    colormap.text = 'Data/Textures/Terrain/impressive_mountains/impressive_mountains_c.tga'
-    normalmap.text = 'Data/Textures/normal.tga'
-    weightmap.text = 'Data/Textures/Terrain/impressive_mountains/impressive_mountains_w.png'
+    model.text = 'Data/Models/' + terrain_object + "/" + lod_name + '.obj'
+    colormap.text = colormap_path
+    normalmap.text = normalmap_path
+    weightmap.text = weightmap_path
     
-    detailmap1.set('colorpath','Data/Textures/Terrain/DetailTextures/snow.tga')
-    shadername.text = 'envobject #DETAILMAP4 #TANGENT'
+    detailmap1.set('colorpath', detailmap1_color)
+    detailmap1.set('normalpath', detailmap1_normal)
+    detailmap1.set('materialpath', detailmap1_material)
+    
+    detailmap2.set('colorpath', detailmap2_color)
+    detailmap2.set('normalpath', detailmap2_normal)
+    detailmap2.set('materialpath', detailmap2_material)
+    
+    detailmap3.set('colorpath', detailmap3_color)
+    detailmap3.set('normalpath', detailmap3_normal)
+    detailmap3.set('materialpath', detailmap3_material)
+    
+    detailmap4.set('colorpath', detailmap4_color)
+    detailmap4.set('normalpath', detailmap4_normal)
+    detailmap4.set('materialpath', detailmap4_material)
+    
+    shadername.text = shader
 
-    resolved_write_directory = bpy.path.abspath(og_path + "Data/Objects/" + lod_name + ".xml")
+    resolved_write_directory = bpy.path.abspath(export_path + "Data/Objects/" + terrain_object + "/" + lod_name + ".xml")
 
     # create a new XML file with the results
     mydata = ET.tostring(object).decode("utf-8")
     
     tree = etree.fromstring(mydata)
     pretty = "<?xml version=\"1.0\" ?>\n" + etree.tostring(tree, encoding="unicode", pretty_print=True)
+    
+    if not os.path.exists(os.path.dirname(resolved_write_directory)):
+        try:
+            os.makedirs(os.path.dirname(resolved_write_directory))
+        except OSError as exc: # Guard against race condition
+            if exc.errno != errno.EEXIST:
+                raise
     
     myfile = open(resolved_write_directory, "w")
     myfile.write(pretty)
@@ -164,8 +232,27 @@ class CreateLODsOperator(Operator):
         global terrain_size
         global subdivide
         global terrain_object
-        global og_path
-        global operator
+        global export_path
+        global colormap_path
+        global normalmap_path
+        global weightmap_path
+        global shader
+        
+        global detailmap1_color
+        global detailmap1_normal
+        global detailmap1_material
+        
+        global detailmap2_color
+        global detailmap2_normal
+        global detailmap2_material
+        
+        global detailmap3_color
+        global detailmap3_normal
+        global detailmap3_material
+        
+        global detailmap4_color
+        global detailmap4_normal
+        global detailmap4_material
         
         draw_during_import = context.scene.draw_during_import
         import_plants = context.scene.import_plants
@@ -173,8 +260,11 @@ class CreateLODsOperator(Operator):
         terrain_size = context.scene.terrain_size
         subdivide = context.scene.subdivide
         terrain_object = context.scene.terrain_object
-        og_path = context.scene.og_path
-        operator = self
+        export_path = context.scene.export_path
+        colormap_path = context.scene.colormap_path
+        normalmap_path = context.scene.normalmap_path
+        weightmap_path = context.scene.weightmap_path
+        shader = context.scene.shader
         
         create_lods()
         return {'FINISHED'}
@@ -195,13 +285,34 @@ class CreateLODsPanel(Panel):
 
     def draw(self, context):
         layout = self.layout
-        layout.prop(context.scene, "og_path")
-        layout.prop(context.scene, "level_path")
-        layout.prop(context.scene, "import_plants")
-        layout.prop(context.scene, "import_terrain")
+        layout.prop(context.scene, "export_path")
+#        layout.prop(context.scene, "level_path")
+#        layout.prop(context.scene, "import_plants")
+#        layout.prop(context.scene, "import_terrain")
         layout.prop(context.scene, "draw_during_import")
         layout.prop(context.scene, "terrain_size")
-        layout.prop(context.scene, "subdivide")
+#        layout.prop(context.scene, "subdivide")
+        
+        layout.prop(context.scene, "colormap_path")
+        layout.prop(context.scene, "normalmap_path")
+        layout.prop(context.scene, "weightmap_path")
+        layout.prop(context.scene, "shader")
+        
+        layout.prop(context.scene, "detailmap1_color")
+        layout.prop(context.scene, "detailmap1_normal")
+        layout.prop(context.scene, "detailmap1_material")
+        
+        layout.prop(context.scene, "detailmap2_color")
+        layout.prop(context.scene, "detailmap2_normal")
+        layout.prop(context.scene, "detailmap2_material")
+        
+        layout.prop(context.scene, "detailmap3_color")
+        layout.prop(context.scene, "detailmap3_normal")
+        layout.prop(context.scene, "detailmap3_material")
+        
+        layout.prop(context.scene, "detailmap4_color")
+        layout.prop(context.scene, "detailmap4_normal")
+        layout.prop(context.scene, "detailmap4_material")
         
         scene = context.scene
         layout.prop_search(scene, "terrain_object", scene, "objects", text="Terrain Object")
