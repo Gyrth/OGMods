@@ -49,11 +49,12 @@ def read_level_xml():
             
             boolmod = obj.modifiers.new("Bool", 'BOOLEAN')
             boolmod.operation = 'INTERSECT'
-            boolmod.object = terrain
+#            boolmod.object = terrain
             obj.data.materials.append(terrain_material)
             if draw_during_import:
                 bpy.ops.wm.redraw_timer(type='DRAW_WIN_SWAP', iterations=1)
             print("Created LOD : " + obj.name)
+            export_xml(obj.name)
             
             position_y += cube_size
         position_x += cube_size
@@ -61,7 +62,7 @@ def read_level_xml():
     
     print("Done creating LODs.")
 
-def export_xml():
+def export_xml(lod_name):
     # create the file structure
     object = ET.Element('Object')
     model = ET.SubElement(object, 'Model')
@@ -78,7 +79,7 @@ def export_xml():
     shadername = ET.SubElement(object, 'ShaderName')
 
     
-    model.text = 'Data/Models/LODTerrain01.obj'
+    model.text = 'Data/Models/' + lod_name + '.obj'
     colormap.text = 'Data/Textures/Terrain/impressive_mountains/impressive_mountains_c.tga'
     normalmap.text = 'Data/Textures/normal.tga'
     weightmap.text = 'Data/Textures/Terrain/impressive_mountains/impressive_mountains_w.png'
@@ -86,7 +87,7 @@ def export_xml():
     detailmap1.set('colorpath','Data/Textures/Terrain/DetailTextures/snow.tga')
     shadername.text = 'envobject #DETAILMAP4 #TANGENT'
 
-    resolved_write_directory = bpy.path.abspath(og_path + "test.xml")
+    resolved_write_directory = bpy.path.abspath(og_path + "Data/Objects/" + lod_name + ".xml")
 
     print("Path " + resolved_write_directory)
 
@@ -94,7 +95,7 @@ def export_xml():
     mydata = ET.tostring(object).decode("utf-8")
     
     tree = etree.fromstring(mydata)
-    pretty = etree.tostring(tree, encoding="unicode", pretty_print=True)
+    pretty = "<?xml version=\"1.0\" ?>\n" + etree.tostring(tree, encoding="unicode", pretty_print=True)
     
     myfile = open(resolved_write_directory, "w")
     print(pretty)
@@ -506,7 +507,8 @@ class ImportOperator(Operator):
         global import_terrain
         global terrain_size
         global subdivide
-        global terrain_object        
+        global terrain_object
+        global og_path
         
         draw_during_import = context.scene.draw_during_import
         import_plants = context.scene.import_plants
@@ -514,6 +516,7 @@ class ImportOperator(Operator):
         terrain_size = context.scene.terrain_size
         subdivide = context.scene.subdivide
         terrain_object = context.scene.terrain_object
+        og_path = context.scene.og_path
         
         read_level_xml()
         return {'FINISHED'}
@@ -535,7 +538,7 @@ class ExportOperator(Operator):
         
         og_path = context.scene.og_path
         
-        export_xml()
+        export_xml("lod")
         return {'FINISHED'}
 
 class OGLevelImport(Panel):
@@ -568,7 +571,6 @@ def register():
     bpy.utils.register_class(ClearOperator)
     bpy.utils.register_class(ImportOperator)
     bpy.types.Scene.terrain_object = bpy.props.StringProperty()
-    bpy.types.Scene.og_path = bpy.props.StringProperty()
     bpy.utils.register_class(ExportOperator)
 
 def unregister():
@@ -576,7 +578,6 @@ def unregister():
     bpy.utils.unregister_class(ClearOperator)
     bpy.utils.unregister_class(ImportOperator)
     del bpy.types.Object.terrain_object
-    del bpy.types.Object.og_path
     bpy.utils.unregister_class(ExportOperator)
 
 if __name__ == "__main__":
