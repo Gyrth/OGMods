@@ -1,0 +1,274 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>lod_terrain_02</Name>
+<Description></Description>
+<Shader>post</Shader>
+<Shadows>true</Shadows>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/impressive_mountains/impressive_mountains_hm.png</Heightmap>
+    <ShaderExtra></ShaderExtra>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/impressive_mountains/impressive_mountains_c.tga</ColorMap>
+    <WeightMap>Data/Textures/Terrain/impressive_mountains/impressive_mountains_w.png</WeightMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/snow.tga" normalpath="Data/Textures/Terrain/DetailTextures/snow_normal.tga" materialpath="Data/Materials/snow.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/glacial.tga" normalpath="Data/Textures/Terrain/DetailTextures/glacial_normal.tga" materialpath="Data/Materials/ice.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/pebbles_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dark_round_rocks.tga" normalpath="Data/Textures/Terrain/DetailTextures/dark_round_rocks_normal.tga" materialpath="Data/Materials/rocks.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
+<AmbientSounds>
+    <Ambient path="Data/Sounds/ambient/amb_ice_wind" />
+</AmbientSounds>
+<Script>challengelevel.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Extra AO" type="string" val="0" />
+    <parameter name="HDR Black point" type="string" val="0.005" />
+    <parameter name="HDR Bloom multiplier" type="string" val="1" />
+    <parameter name="HDR White point" type="string" val="0.8" />
+    <parameter name="Level Boundaries" type="string" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
+    <parameter name="Sky Rotation" type="string" val="0" />
+</LevelScriptParameters>
+<NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue4.tga</DomeTexture>
+    <SunAngularRad>0.111615</SunAngularRad>
+    <SunColorAngle>352.148</SunColorAngle>
+    <RayToSun r0="-0.027197" r1="0.622325" r2="0.782286" />
+</Sky>
+<ActorObjects>
+    <ActorObject t0="23.1283" t1="-9.92503" t2="25.0889" s0="1" s1="1" s2="1" q0="0" q1="0.509189" q2="0" q3="0.860655" euler_x="0" euler_y="1.06849" euler_z="0" id="1" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fall Damage Multiplier" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
+            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
+            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
+            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Jump - Air Control" type="float" val="3" />
+            <parameter name="Jump - Initial Velocity" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain Boost" type="float" val="10" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Lives" type="int" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="No Look Around" type="int" val="0" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Stick To Nav Mesh" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+            <parameter name="Throw Counter Probability" type="float" val="0.4" />
+            <parameter name="Throw Trainer" type="int" val="0" />
+            <parameter name="Weapon Catch Skill" type="float" val="1" />
+            <parameter name="Wearing Metal Armor" type="int" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="9.17883" t1="-6.84058" t2="26.3907" s0="1" s1="1" s2="1" q0="0" q1="-0.682882" q2="0" q3="0.730529" euler_x="0" euler_y="-1.50341" euler_z="0" id="2" type_file="Data/Objects/IGF_Characters/IGF_GuardActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fall Damage Multiplier" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
+            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
+            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
+            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Jump - Air Control" type="float" val="3" />
+            <parameter name="Jump - Initial Velocity" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain Boost" type="float" val="10" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Lives" type="int" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="No Look Around" type="int" val="0" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Stick To Nav Mesh" type="int" val="0" />
+            <parameter name="Teams" type="string" val="guard" />
+            <parameter name="Throw Counter Probability" type="float" val="0.4" />
+            <parameter name="Throw Trainer" type="int" val="0" />
+            <parameter name="Weapon Catch Skill" type="float" val="1" />
+            <parameter name="Wearing Metal Armor" type="int" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.67451" green="0.67451" blue="0.67451" />
+            <Color label="Fur" channel="1" red="0.647059" green="0.647059" blue="0.647059" />
+            <Color label="Leather" channel="2" red="0.537255" green="0.513726" blue="0.513726" />
+            <Color label="Armor" channel="3" red="0.439216" green="0.439216" blue="0.439216" />
+        </Palette>
+    </ActorObject>
+    <ItemObject t0="22.8428" t1="-9.83258" t2="26.8318" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Items/DogWeapons/DogBroadSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </ItemObject>
+    <CameraObject t0="-386.838" t1="48.2194" t2="177.478" s0="1" s1="1" s2="1" q0="0.0153447" q1="-0.977748" q2="0.19448" q3="0.0771452" euler_x="-2.74891" euler_y="-0.157476" euler_z="-3.14159" id="4">
+        <parameters />
+    </CameraObject>
+    <EnvObject t0="19.7141" t1="-10.613" t2="20.3209" s0="2.96193" s1="2.96193" s2="2.96193" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+        <parameters />
+    </EnvObject>
+    <AmbientSoundObject t0="82.5629" t1="-21.7187" t2="-48.8347" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="78.8911" t1="-20.9889" t2="-57.7398" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="73.1073" t1="-21.8058" t2="-45.3117" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="78.579" t1="-21.6627" t2="-63.8691" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="82.5964" t1="-21.9401" t2="-63.5106" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="85.5382" t1="-22.2965" t2="-55.979" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="69.8755" t1="-22.5927" t2="-47.3947" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="85.9566" t1="-22.1303" t2="-32.7811" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="74.3419" t1="-22.6674" t2="-26.2545" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="62.2677" t1="-22.5334" t2="-20.9058" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="69.2039" t1="-21.228" t2="-16.872" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="78.4161" t1="-21.0999" t2="-3.1761" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="78.0236" t1="-18.4887" t2="7.53207" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="71.9522" t1="-18.2539" t2="10.1254" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="65.3414" t1="-19.247" t2="-1.8628" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="55.4584" t1="-20.157" t2="2.20531" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="70.514" t1="-20.2359" t2="-7.11731" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="82.4645" t1="-21.6439" t2="-17.5303" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="41.6363" t1="-15.441" t2="12.2895" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="38.4823" t1="-14.3973" t2="16.1234" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="25" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="33.1508" t1="-12.8904" t2="21.0073" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="26" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="40.4356" t1="-14.0469" t2="32.1976" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="47.5305" t1="-16.7792" t2="22.0356" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="47.3106" t1="-17.4132" t2="5.25072" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="29" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="55.8529" t1="-17.9351" t2="12.9945" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="30" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="58.0957" t1="-21.5442" t2="-9.50957" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="62.1255" t1="-21.615" t2="-7.44624" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="32" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="64.9126" t1="-21.7614" t2="-13.1387" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="33" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="62.1289" t1="-22.2574" t2="-14.5102" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="34" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="73.7392" t1="-23.7139" t2="-33.8853" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="35" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="53.2297" t1="-19.8783" t2="-3.89179" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <AmbientSoundObject t0="81.1163" t1="-22.9036" t2="-38.9504" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="37" type_file="Data/Objects/Sounds/icecrack.xml">
+        <parameters />
+    </AmbientSoundObject>
+    <ItemObject t0="22.2686" t1="-9.68053" t2="27.3411" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="38" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </ItemObject>
+    <ItemObject t0="24.0119" t1="-9.95323" t2="26.3906" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="40" type_file="Data/Items/DogWeapons/DogBroadSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </ItemObject>
+    <EnvObject t0="-234.738" t1="13.0702" t2="255.126" s0="-0.951225" s1="1" s2="-0.984619" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/terrain_lod_01.xml">
+        <parameters />
+    </EnvObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="terrain_lod_01.xml" path="Data/Objects/terrain_lod_01.xml" thumbnail_path="empty_placeholder.png" />
+</RecentItems>
