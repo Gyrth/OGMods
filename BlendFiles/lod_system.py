@@ -14,8 +14,8 @@ terrain_size = 3072
 subdivide = 3
 draw_during_import = True
 load_models = True
-import_plants = False
-import_terrain = False
+export_xml = True
+export_obj = True
 terrain_object = ""
 export_path = ""
 colormap_path = "Data/Textures/Terrain/impressive_mountains/impressive_mountains_c.tga"
@@ -41,8 +41,8 @@ detailmap4_material = "Data/Materials/rocks.xml"
 
 bpy.types.Scene.export_path = StringProperty(subtype='DIR_PATH', name="Export Path")
 bpy.types.Scene.level_path = StringProperty(subtype='FILE_PATH', name="Level Path")
-bpy.types.Scene.import_plants = BoolProperty(name="Import Plants")
-bpy.types.Scene.import_terrain = BoolProperty(name="Import Terrain")
+bpy.types.Scene.export_xml = BoolProperty(name="Export XML")
+bpy.types.Scene.export_obj = BoolProperty(name="Export Model")
 bpy.types.Scene.draw_during_import = BoolProperty(name="Draw During Import", default=draw_during_import)
 bpy.types.Scene.terrain_size = IntProperty(name="Terrain Size", default=terrain_size)
 bpy.types.Scene.subdivide = IntProperty(name="Subdivide", default=subdivide)
@@ -105,8 +105,11 @@ def create_lod(lod_index, nr_subdivide, decimate_ratio):
             
             print("Created LOD : " + obj.name)
             
-            export_xml(obj.name)
-            export_model(obj)
+            if export_xml:
+                export_xml(obj.name)
+            
+            if export_obj:
+                export_model(obj)
             
             position_y += cube_size
             lod_counter += 1
@@ -151,7 +154,7 @@ def export_model(obj):
             if exc.errno != errno.EEXIST:
                 raise
     
-    bpy.ops.export_scene.obj(filepath=resolved_write_directory, use_selection=True, use_materials=False)
+    bpy.ops.export_scene.obj(filepath=resolved_write_directory, use_selection=True, use_materials=False, axis_forward='X')
     print("Exported model " + resolved_write_directory)
 
 def export_xml(lod_name):
@@ -215,10 +218,15 @@ def export_xml(lod_name):
 
 def clear():
     objs = bpy.data.objects
+    lods = []
     for obj in objs:
         if obj.name.find("lod") != -1:
-            objs.remove(obj, do_unlink=True)
-
+#            bpy.context.view_layer.objects.active = obj
+#            bpy.ops.object.delete() 
+            lods.append(obj)
+#            objs.remove(obj, do_unlink=True)
+    
+    bpy.ops.object.delete({"selected_objects": lods})
     bpy.ops.wm.redraw_timer(type='DRAW_WIN_SWAP', iterations=1)
 
 class CreateLODsOperator(Operator):
@@ -227,8 +235,8 @@ class CreateLODsOperator(Operator):
     
     def execute(self, context):
         global draw_during_import
-        global import_plants
-        global import_terrain
+        global export_xml
+        global export_obj
         global terrain_size
         global subdivide
         global terrain_object
@@ -255,8 +263,8 @@ class CreateLODsOperator(Operator):
         global detailmap4_material
         
         draw_during_import = context.scene.draw_during_import
-        import_plants = context.scene.import_plants
-        import_terrain = context.scene.import_terrain
+        export_xml = context.scene.export_xml
+        export_obj = context.scene.export_obj
         terrain_size = context.scene.terrain_size
         subdivide = context.scene.subdivide
         terrain_object = context.scene.terrain_object
@@ -287,8 +295,8 @@ class CreateLODsPanel(Panel):
         layout = self.layout
         layout.prop(context.scene, "export_path")
 #        layout.prop(context.scene, "level_path")
-#        layout.prop(context.scene, "import_plants")
-#        layout.prop(context.scene, "import_terrain")
+        layout.prop(context.scene, "export_xml")
+        layout.prop(context.scene, "export_obj")
         layout.prop(context.scene, "draw_during_import")
         layout.prop(context.scene, "terrain_size")
 #        layout.prop(context.scene, "subdivide")

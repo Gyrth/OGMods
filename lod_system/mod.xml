@@ -10,6 +10,7 @@
     <Description>LOD System.</Description>
     <Tag>scripting</Tag>
     <SupportedVersion>*</SupportedVersion>
+	<LevelHookFile>Data/Scripts/lod_import.as</LevelHookFile>
     <!-- <Level title="Bug Report" thumbnail="Images/full.jpg">bug_report.xml</Level>
 	<Item category="Bug Report" title="Bug Report Hotspot" path="Data/Objects/Hotspots/bug_report.xml" thumbnail="Data/Images/thumb.jpg" /> -->
 </Mod>
