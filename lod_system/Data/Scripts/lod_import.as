@@ -26,9 +26,9 @@ class LOD{
 			chunks.insertLast(@chunk);
 		}
 
-		int nr_cunks = int(pow(2, subdivide));
-		Log(warning, "nr cunks " + nr_cunks);
-		float chunk_size = (terrain_size / nr_cunks);
+		float nr_cunks = pow(2, subdivide);
+		float chunk_size = terrain_size / nr_cunks;
+		Log(warning, terrain_size + " divided " + nr_cunks + " = chunk_size " + chunk_size);
 		float position_x = (-terrain_size / 2.0) + (chunk_size / 2.0);
 		float position_z = (-terrain_size / 2.0) + (chunk_size / 2.0);
 
@@ -41,8 +41,9 @@ class LOD{
 					return;
 				}
 
-				chunks[chunk_counter].SetTranslation(vec3(position_z, 0.0, position_x));
-				Log(warning, "SetTranslation " + position_x + " " + position_z);
+				float y_offset = atof(chunks[chunk_counter].GetLabel());
+				chunks[chunk_counter].SetTranslation(vec3(position_z, y_offset, position_x));
+				Log(warning, "SetTranslation " + position_z + " " + position_x);
 
 				position_z += chunk_size;
 				chunk_counter += 1;
@@ -141,7 +142,8 @@ void LoadLODs(string path){
 		Log(warning, "Found " + found + " at lod " + i);
 	}
 
-	lod_5.CreateChunks();
+	lod_4.CreateChunks();
+	/* lod_5.CreateChunks(); */
 }
 
 string zero_pad(int i){

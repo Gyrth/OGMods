@@ -69,7 +69,8 @@ bpy.types.Scene.detailmap4_normal = StringProperty(name="4 DetailMap Normal", de
 bpy.types.Scene.detailmap4_material = StringProperty(name="4 DetailMap Material", default=detailmap4_material)
 
 def create_lods():
-    create_lod(5, 1, 0.1)
+    create_lod(4, 2, 0.1)
+#    create_lod(5, 1, 0.1)
 
 def create_lod(lod_index, nr_subdivide, decimate_ratio):
     print("Creating LOD " + str(lod_index))
@@ -81,6 +82,8 @@ def create_lod(lod_index, nr_subdivide, decimate_ratio):
     
     terrain = bpy.data.objects[terrain_object]
     terrain_material = terrain.data.materials[0]
+    
+    set_decimate_ratio(terrain, decimate_ratio);
     
     lod_counter = 0
     
@@ -97,7 +100,6 @@ def create_lod(lod_index, nr_subdivide, decimate_ratio):
             obj.data.materials.append(terrain_material)
             
             apply_boolean(obj, terrain)
-            apply_decimate(obj, decimate_ratio);
             
             #Update drawing the viewport to show progress.
             if draw_during_import:
@@ -105,29 +107,33 @@ def create_lod(lod_index, nr_subdivide, decimate_ratio):
             
             print("Created LOD : " + obj.name)
             
+            bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
+            
             if export_xml:
-                export_xml(obj.name)
+                export_lod_xml(obj)
             
             if export_obj:
-                export_model(obj)
+                export_lod_obj(obj)
             
             position_y += cube_size
             lod_counter += 1
         position_x += cube_size
         position_y = (-terrain_size / 2.0) + (cube_size / 2.0)
     
+    terrain.modifiers.remove(terrain.modifiers.get("Decimate"))
+    
     print("Done creating LODs.")
 
-def apply_decimate(obj, ratio):
-    print("Applying decimate on " + obj.name)
-    #Add a new decimate modifier.
-    decimatemod = obj.modifiers.new('Decimate','DECIMATE')
+def set_decimate_ratio(terrain, ratio):
+    print("Setting decimate ratio " + str(ratio))
+    
+    decimatemod = terrain.modifiers.get("Decimate")
+    if decimatemod is None:
+        # otherwise add a modifier to selected object
+        decimatemod = terrain.modifiers.new("Decimate", 'DECIMATE')
+    
     decimatemod.ratio=ratio
     decimatemod.use_collapse_triangulate=True
-    
-    #Apply the decimate modifier.
-    bpy.context.view_layer.objects.active = obj
-    bpy.ops.object.modifier_apply(modifier=decimatemod.name)
 
 def apply_boolean(obj, terrain):
     print("Applying boolean on " + obj.name)
@@ -142,7 +148,7 @@ def apply_boolean(obj, terrain):
     bpy.context.view_layer.objects.active = obj
     bpy.ops.object.modifier_apply(modifier=boolmod.name)
 
-def export_model(obj):
+def export_lod_obj(obj):
     bpy.context.view_layer.objects.active = obj
     resolved_write_directory = bpy.path.abspath(export_path + "Data/Models/" + terrain_object + "/" + obj.name + ".obj")
     
@@ -157,7 +163,8 @@ def export_model(obj):
     bpy.ops.export_scene.obj(filepath=resolved_write_directory, use_selection=True, use_materials=False, axis_forward='X')
     print("Exported model " + resolved_write_directory)
 
-def export_xml(lod_name):
+def export_lod_xml(obj):
+    lod_name = obj.name
     # create the file structure
     object = ET.Element('Object')
     model = ET.SubElement(object, 'Model')
@@ -172,6 +179,7 @@ def export_xml(lod_name):
     detailmap4 = ET.SubElement(detailmaps, 'DetailMap')
     
     shadername = ET.SubElement(object, 'ShaderName')
+    label = ET.SubElement(object, 'label')
     
     model.text = 'Data/Models/' + terrain_object + "/" + lod_name + '.obj'
     colormap.text = colormap_path
@@ -195,6 +203,7 @@ def export_xml(lod_name):
     detailmap4.set('materialpath', detailmap4_material)
     
     shadername.text = shader
+    label.text = str(obj.location.z)
 
     resolved_write_directory = bpy.path.abspath(export_path + "Data/Objects/" + terrain_object + "/" + lod_name + ".xml")
 
@@ -218,15 +227,15 @@ def export_xml(lod_name):
 
 def clear():
     objs = bpy.data.objects
-    lods = []
     for obj in objs:
         if obj.name.find("lod") != -1:
-#            bpy.context.view_layer.objects.active = obj
-#            bpy.ops.object.delete() 
-            lods.append(obj)
-#            objs.remove(obj, do_unlink=True)
+            objs.remove(obj, do_unlink=True)
     
-    bpy.ops.object.delete({"selected_objects": lods})
+    terrain = bpy.data.objects[terrain_object]
+    for block in bpy.data.meshes:
+        if terrain.data != block:
+            bpy.data.meshes.remove(block)
+    
     bpy.ops.wm.redraw_timer(type='DRAW_WIN_SWAP', iterations=1)
 
 class CreateLODsOperator(Operator):
@@ -282,6 +291,10 @@ class ClearOperator(Operator):
     bl_idname = "object.clear"
     
     def execute(self, context):
+        global terrain_object
+        
+        terrain_object = context.scene.terrain_object
+        
         clear()
         return {'FINISHED'}
 
