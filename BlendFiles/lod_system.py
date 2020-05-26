@@ -69,7 +69,10 @@ bpy.types.Scene.detailmap4_normal = StringProperty(name="4 DetailMap Normal", de
 bpy.types.Scene.detailmap4_material = StringProperty(name="4 DetailMap Material", default=detailmap4_material)
 
 def create_lods():
-    create_lod(4, 2, 0.1)
+    create_lod(1, 5, 0.5)
+#    create_lod(2, 4, 0.1)
+#    create_lod(3, 3, 0.1)
+#    create_lod(4, 2, 0.1)
 #    create_lod(5, 1, 0.1)
 
 def create_lod(lod_index, nr_subdivide, decimate_ratio):
@@ -160,7 +163,7 @@ def export_lod_obj(obj):
             if exc.errno != errno.EEXIST:
                 raise
     
-    bpy.ops.export_scene.obj(filepath=resolved_write_directory, use_selection=True, use_materials=False, axis_forward='X')
+    bpy.ops.export_scene.obj(filepath=resolved_write_directory, use_triangles=True, use_selection=True, use_materials=False, axis_forward='X')
     print("Exported model " + resolved_write_directory)
 
 def export_lod_xml(obj):

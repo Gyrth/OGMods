@@ -23,6 +23,7 @@ class LOD{
 		for(uint i = 0; i < paths.size(); i++){
 			int chunk_id = CreateObject(paths[i]);
 			Object@ chunk = ReadObjectFromID(chunk_id);
+			chunk.SetTint(vec3(RangedRandomFloat(0.0, 1.0), RangedRandomFloat(0.0, 1.0), RangedRandomFloat(0.0, 1.0)));
 			chunks.insertLast(@chunk);
 		}
 
@@ -142,7 +143,10 @@ void LoadLODs(string path){
 		Log(warning, "Found " + found + " at lod " + i);
 	}
 
-	lod_4.CreateChunks();
+	lod_1.CreateChunks();
+	/* lod_2.CreateChunks(); */
+	/* lod_3.CreateChunks(); */
+	/* lod_4.CreateChunks(); */
 	/* lod_5.CreateChunks(); */
 }
 
