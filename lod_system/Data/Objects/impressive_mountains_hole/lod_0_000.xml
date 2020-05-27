@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<Object>
+  <Model>Data/Models/impressive_mountains_hole/lod_0_000.obj</Model>
+  <ColorMap>Data/Textures/Terrain/impressive_mountains/impressive_mountains_c.tga</ColorMap>
+  <NormalMap>Data/Textures/normal.tga</NormalMap>
+  <WeightMap>Data/Textures/Terrain/impressive_mountains/impressive_mountains_w.png</WeightMap>
+  <DetailMaps>
+    <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/snow.tga" normalpath="Data/Textures/Terrain/DetailTextures/snow_normal.tga" materialpath="Data/Materials/snow.xml"/>
+    <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/glacial.tga" normalpath="Data/Textures/Terrain/DetailTextures/glacial_normal.tga" materialpath="Data/Materials/ice.xml"/>
+    <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/pebbles_normal.tga" materialpath="Data/Materials/gravel.xml"/>
+    <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dark_round_rocks.tga" normalpath="Data/Textures/Terrain/DetailTextures/dark_round_rocks_normal.tga" materialpath="Data/Materials/rocks.xml"/>
+  </DetailMaps>
+  <!-- <DetailObjects>
+       		<DetailObject obj_path="Data/GrassTest/grass_square.xml" weight_path="Data/Textures/Environments/Cliffs/groundbase_02_grass.png" normal_conform="0.9" density="3" min_embed="-0.2" max_embed="0.0" min_scale="4.0" max_scale="6.8" view_distance="10" jitter_degrees="10" overbright="0" />
+       		<DetailObject obj_path="Data/GrassTest/grass_square.xml" weight_path="Data/Textures/Environments/Cliffs/groundbase_02_grass.png" normal_conform="0.9" density="2" min_embed="-0.2" max_embed="0.0" min_scale="4.0" max_scale="6.8" view_distance="20" jitter_degrees="10" overbright="0" />
+        	<DetailObject obj_path="Data/Objects/Environment/Rocks/lichen_rock_a.xml" weight_path="Data/Textures/Terrain/forest_hills/forest_hills_not_grass.tga" normal_conform="1" density="20" min_embed="0.3" max_embed="0.7" min_scale="0.08" tint_weight = "0.5" max_scale="0.12" view_distance="10" jitter_degrees="45" overbright="0.4" collision_type="static" />
+   	</DetailObjects> -->
+  <ShaderName>envobject #DETAILMAP4 #TANGENT</ShaderName>
+  <label>10.327305793762207</label>
+</Object>

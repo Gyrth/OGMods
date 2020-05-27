@@ -9,9 +9,13 @@ class LOD{
 	int subdivide;
 	array<Object@> chunks;
 	array<string> paths;
+	float min;
+	float max;
 
-	LOD(int subdivide){
+	LOD(int subdivide, float min, float max){
 		this.subdivide = subdivide;
+		this.min = min;
+		this.max = max;
 	}
 
 	void AddLOD(string path){
@@ -23,7 +27,7 @@ class LOD{
 		for(uint i = 0; i < paths.size(); i++){
 			int chunk_id = CreateObject(paths[i]);
 			Object@ chunk = ReadObjectFromID(chunk_id);
-			chunk.SetTint(vec3(RangedRandomFloat(0.0, 1.0), RangedRandomFloat(0.0, 1.0), RangedRandomFloat(0.0, 1.0)));
+			/* chunk.SetTint(vec3(RangedRandomFloat(0.0, 1.0))); */
 			chunks.insertLast(@chunk);
 		}
 
@@ -44,7 +48,8 @@ class LOD{
 
 				float y_offset = atof(chunks[chunk_counter].GetLabel());
 				chunks[chunk_counter].SetTranslation(vec3(position_z, y_offset, position_x));
-				Log(warning, "SetTranslation " + position_z + " " + position_x);
+				/* chunks[chunk_counter].SetScale(vec3(1.0, 0.1, 1.0)); */
+				/* Log(warning, "SetTranslation " + position_z + " " + position_x); */
 
 				position_z += chunk_size;
 				chunk_counter += 1;
@@ -61,20 +66,75 @@ class LOD{
 			paths.resize(0);
 		}
 	}
+
+	void Update(){
+		for(uint i = 0; i < chunks.size(); i++){
+			float dist = distance(chunks[i].GetTranslation(), player_position);
+			/* Log(warning, "dist " + dist); */
+			chunks[i].SetEnabled((dist < max && dist > min));
+		}
+	}
 }
 
-LOD lod_0(6);
-LOD lod_1(5);
-LOD lod_2(4);
-LOD lod_3(3);
-LOD lod_4(2);
-LOD lod_5(1);
+LOD lod_0(5, 0.0, 200.0);
+LOD lod_1(4, 50.0, 100.0);
+LOD lod_2(3, 100.0, 200.0);
+LOD lod_3(2, 200, 400);
+LOD lod_4(1, 400, 10000);
+
+void PostInit(){
+	LoadLODs("Data/Objects/impressive_mountains_hole/lod_5_000.xml");
+}
+
+vec3 grid_position = vec3(0.0);
+vec3 player_position = vec3(0.0);
+float threshold = 100.0;
 
 void Init(string str){
+
 }
 
-void Update(int paused){
+bool post_init_done = false;
 
+void Update(int paused){
+	if(!post_init_done){
+		PostInit();
+		post_init_done = true;
+		return;
+	}
+	int player_id = -1;
+	for(int i = 0; i < GetNumCharacters(); i++){
+		MovementObject@ char = ReadCharacter(i);
+
+		if(char.controlled){
+			player_id = char.GetID();
+			break;
+		}
+	}
+
+	if(player_id != -1 || EditorModeActive()){
+		vec3 current_player_position;
+		if(EditorModeActive()){
+			current_player_position = camera.GetPos();
+		}else{
+			MovementObject@ player = ReadCharacterID(player_id);
+			current_player_position = player.position;
+		}
+
+		/* current_player_position.y = 0.0; */
+
+		vec3 new_grid_position = vec3(floor(current_player_position.x / (threshold)), floor(current_player_position.y / (threshold)), floor(current_player_position.z / (threshold)));
+
+		if(grid_position != new_grid_position){
+			grid_position = new_grid_position;
+			player_position = (grid_position * threshold) + (threshold / 2.0);
+			UpdateLOD();
+		}
+	}
+}
+
+void UpdateLOD(){
+	/* lod_0.Update(); */
 }
 
 void ReceiveMessage(string msg){
@@ -130,8 +190,6 @@ void LoadLODs(string path){
 					lod_3.AddLOD(chunk_path);
 				}else if(i == 4){
 					lod_4.AddLOD(chunk_path);
-				}else if(i == 5){
-					lod_5.AddLOD(chunk_path);
 				}
 
 				found += 1;
@@ -143,11 +201,15 @@ void LoadLODs(string path){
 		Log(warning, "Found " + found + " at lod " + i);
 	}
 
-	lod_1.CreateChunks();
+	float nr_cunks_smalest = pow(2, 5);
+	threshold = terrain_size / nr_cunks_smalest;
+	Log(warning, "threshold = " + threshold);
+
+	lod_0.CreateChunks();
+	/* lod_1.CreateChunks(); */
 	/* lod_2.CreateChunks(); */
 	/* lod_3.CreateChunks(); */
 	/* lod_4.CreateChunks(); */
-	/* lod_5.CreateChunks(); */
 }
 
 string zero_pad(int i){
