@@ -22,12 +22,13 @@ class LOD{
 		paths.insertLast(path);
 	}
 
-	void CreateChunks(){
+	void CreateChunks(vec3 tint){
 
 		for(uint i = 0; i < paths.size(); i++){
 			int chunk_id = CreateObject(paths[i]);
 			Object@ chunk = ReadObjectFromID(chunk_id);
 			/* chunk.SetTint(vec3(RangedRandomFloat(0.0, 1.0))); */
+			chunk.SetTint(tint);
 			chunks.insertLast(@chunk);
 		}
 
@@ -77,10 +78,10 @@ class LOD{
 }
 
 LOD lod_0(5, 0.0, 200.0);
-LOD lod_1(4, 50.0, 100.0);
-LOD lod_2(3, 100.0, 200.0);
-LOD lod_3(2, 200, 400);
-LOD lod_4(1, 400, 10000);
+LOD lod_1(4, 200.0, 400.0);
+LOD lod_2(3, 400.0, 800.0);
+LOD lod_3(2, 800, 1200);
+LOD lod_4(1, 1200, 1000000);
 
 void PostInit(){
 	LoadLODs("Data/Objects/impressive_mountains_hole/lod_5_000.xml");
@@ -121,7 +122,7 @@ void Update(int paused){
 			current_player_position = player.position;
 		}
 
-		/* current_player_position.y = 0.0; */
+		current_player_position.y = 0.0;
 
 		vec3 new_grid_position = vec3(floor(current_player_position.x / (threshold)), floor(current_player_position.y / (threshold)), floor(current_player_position.z / (threshold)));
 
@@ -134,7 +135,11 @@ void Update(int paused){
 }
 
 void UpdateLOD(){
-	/* lod_0.Update(); */
+	lod_0.Update();
+	lod_1.Update();
+	lod_2.Update();
+	lod_3.Update();
+	lod_4.Update();
 }
 
 void ReceiveMessage(string msg){
@@ -205,11 +210,11 @@ void LoadLODs(string path){
 	threshold = terrain_size / nr_cunks_smalest;
 	Log(warning, "threshold = " + threshold);
 
-	lod_0.CreateChunks();
-	/* lod_1.CreateChunks(); */
-	/* lod_2.CreateChunks(); */
-	/* lod_3.CreateChunks(); */
-	/* lod_4.CreateChunks(); */
+	lod_0.CreateChunks(vec3(1.0, 0.0, 0.0));
+	lod_1.CreateChunks(vec3(0.0, 1.0, 0.0));
+	lod_2.CreateChunks(vec3(0.0, 0.0, 1.0));
+	lod_3.CreateChunks(vec3(1.0, 1.0, 0.0));
+	lod_4.CreateChunks(vec3(0.0, 1.0, 1.0));
 }
 
 string zero_pad(int i){

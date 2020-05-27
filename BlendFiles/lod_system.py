@@ -71,9 +71,9 @@ bpy.types.Scene.detailmap4_material = StringProperty(name="4 DetailMap Material"
 def create_lods():
 #    create_lod(0, 5, 1.0)
 #    create_lod(1, 4, 0.1)
-#    create_lod(2, 3, 0.1)
-#    create_lod(3, 2, 0.1)
-    create_lod(4, 1, 0.1)
+#    create_lod(2, 3, 0.05)
+#    create_lod(3, 2, 0.02)
+    create_lod(4, 1, 0.01)
 
     terrain = bpy.data.objects[terrain_object]
     terrain.modifiers.remove(terrain.modifiers.get("Decimate"))
@@ -123,13 +123,12 @@ def create_lod(lod_index, nr_subdivide, decimate_ratio):
                 export_lod_xml(obj)
             
             #Delete the object and mesh once exported.
-            objs = bpy.data.objects
-            obj_mesh = obj.data
-            objs.remove(obj, do_unlink=True)
-            
-            for mesh in bpy.data.meshes:
-                if mesh == obj_mesh:
-                    bpy.data.meshes.remove(mesh)
+#            objs = bpy.data.objects
+#            obj_mesh = obj.data
+#            objs.remove(obj, do_unlink=True)
+#            for mesh in bpy.data.meshes:
+#                if mesh == obj_mesh:
+#                    bpy.data.meshes.remove(mesh)
                 
             position_y += cube_size
             lod_counter += 1
