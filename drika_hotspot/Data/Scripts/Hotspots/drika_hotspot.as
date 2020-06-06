@@ -85,6 +85,8 @@ int ui_snap_scale = 20;
 int unique_id_counter = 0;
 array<DrikaElement@> imported_elements;
 array<Object@> refresh_queue;
+bool move_relative = false;
+mat4 old_transform;
 
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;
@@ -360,6 +362,8 @@ void SetParameters(){
 	ui_snap_scale = params.GetInt("UI Snap Scale");
 	params.AddIntCheckbox("Run in EditorMode", run_in_editormode);
 	run_in_editormode = (params.GetInt("Run in EditorMode") == 1);
+	params.AddIntCheckbox("Transform Relative", move_relative);
+	move_relative = (params.GetInt("Transform Relative") == 1);
 }
 
 void InterpData(){
@@ -443,6 +447,38 @@ void Update(){
 		SwitchToEditing();
 	}else if(!EditorModeActive() && editing == true){
 		SwitchToPlaying();
+	}
+
+	if(move_relative && EditorModeActive()){
+		if(this_hotspot.IsSelected() && !is_selected){
+			//Switched from not selected to selected.
+			old_transform = this_hotspot.GetTransform();
+			is_selected = true;
+		}else if(!this_hotspot.IsSelected() && is_selected){
+			//Switched from being selected to not selected.
+			is_selected = false;
+		}else if(this_hotspot.IsSelected()){
+			mat4 current_transform = this_hotspot.GetTransform();
+			vec3 old_translation = old_transform.GetTranslationPart();
+			vec3 current_translation = current_transform.GetTranslationPart();
+
+			quaternion old_rotation = QuaternionFromMat4(old_transform.GetRotationPart());
+			quaternion current_rotation = QuaternionFromMat4(current_transform.GetRotationPart());
+
+			if(old_translation != current_translation || old_rotation != current_rotation){
+				vec3 origin = this_hotspot.GetTranslation();
+				vec3 translation_offset = current_translation - old_translation;
+				quaternion rotaton_offset = quaternion(current_rotation.x - old_rotation.x, current_rotation.y - old_rotation.y, current_rotation.z - old_rotation.z, current_rotation.w - old_rotation.w);
+
+				for(uint i = 0; i < drika_indexes.size(); i++){
+					DrikaElement@ element = drika_elements[drika_indexes[i]];
+					mat4 before_mat = old_transform.GetRotationPart();
+					mat4 after_mat = current_transform.GetRotationPart();
+					element.RelativeTransform(origin, translation_offset, before_mat, after_mat);
+				}
+				old_transform = this_hotspot.GetTransform();
+			}
+		}
 	}
 
 	if(!run_in_editormode && EditorModeActive() && !show_editor){
@@ -710,6 +746,10 @@ void DrawEditor(){
 				if(ImGui_DragInt("UI Snap Scale", ui_snap_scale, 1.0, 15, 150, "%.0f")){
 					params.SetInt("UI Snap Scale", ui_snap_scale);
 					level.SendMessage("drika_set_ui_snap_scale " + ui_snap_scale);
+				}
+
+				if(ImGui_Checkbox("Transform Relative", move_relative)){
+					params.SetInt("Transform Relative", move_relative?1:0);
 				}
 
 				if(ImGui_MenuItem("Configure Palette")){

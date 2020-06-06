@@ -407,4 +407,9 @@ class DrikaElement{
 			target.SetRotation(rotation);
 		}
 	}
+
+	void RelativeTransform(vec3 origin, vec3 translation_offset, mat4 before_mat, mat4 after_mat){
+		placeholder.RelativeTranslate(translation_offset);
+		placeholder.RelativeRotate(origin, before_mat, after_mat);
+	}
 }

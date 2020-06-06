@@ -133,9 +133,31 @@ class DrikaPlaceholder{
 		}
 	}
 
+	void RelativeTranslate(vec3 offset){
+		if(Exists()){
+			object.SetTranslation(object.GetTranslation() + offset);
+		}
+	}
+
 	void SetRotation(quaternion rotation){
 		if(Exists()){
 			object.SetRotation(rotation);
+		}
+	}
+
+	void RelativeRotate(vec3 origin, mat4 before_mat, mat4 after_mat){
+		if(Exists()){
+			vec3 current_translation = object.GetTranslation();
+
+			mat4 inverse_mat = after_mat * invert(before_mat);
+			vec3 rotated_point = origin + (inverse_mat * (current_translation - origin));
+
+			mat4 object_mat = object.GetTransform();
+			mat4 object_inverse_mat = object_mat * invert(before_mat);
+			mat4 rotation_mat = object_inverse_mat * after_mat;
+			object.SetRotation(QuaternionFromMat4(rotation_mat));
+
+			object.SetTranslation(rotated_point);
 		}
 	}
 
