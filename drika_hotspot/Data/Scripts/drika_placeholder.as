@@ -105,13 +105,13 @@ class DrikaPlaceholder{
 	string GetPlaceholderXMLData(string model, string colormap){
 		string data = "";
 
-		data += "<?xml version=\"1.0\" ?>\n";
+		data += "<?xml\" version=\\\"1.0\\\" ?>\n";
 		data += "<Object>\n";
-		data += "<Model>" + model + "</Model>\n";
-		data += "<ColorMap>" + colormap + "</ColorMap>\n";
-		data += "<NormalMap>Data/Textures/chest_n.png</NormalMap>\n";
-		data += "<ShaderName>drika_placeholder</ShaderName>\n";
-		data += "<flags no_collision=true/>\n";
+		data += "\t<Model>" + model + "</Model>\n";
+		data += "\t<ColorMap>" + colormap + "</ColorMap>\n";
+		data += "\t<NormalMap>Data/Textures/chest_n.png</NormalMap>\n";
+		data += "\t<ShaderName>drika_placeholder</ShaderName>\n";
+		data += "\t<flags no_collision=true/>\n";
 		data += "</Object>\n";
 
 		return data;
