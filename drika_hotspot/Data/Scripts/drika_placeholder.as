@@ -63,8 +63,8 @@ class DrikaPlaceholder{
 		if(@placeholder_object !is null){
 			QueueDeleteObjectID(placeholder_object.GetID());
 		}
-		Log(warning, "UpdatePlaceholderPreview");
 		@placeholder_object = null;
+
 		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + parent.index + " " + object_path + " " + "xml_content");
 	}
 
@@ -169,6 +169,7 @@ class DrikaPlaceholder{
 				object.SetScale(old_placeholder.GetScale());
 				object.SetTranslation(old_placeholder.GetTranslation());
 				object.SetRotation(old_placeholder.GetRotation());
+				AddPlaceholderObject();
 			}else{
 				id = -1;
 			}

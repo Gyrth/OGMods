@@ -2192,8 +2192,7 @@ void UpdateWriteFileProcesses(){
 					content += line + "\n";
 				}
 			}
-			Log(error, "Reading : " + content);
-
+			/* Log(error, "Reading : " + content); */
 		}else{
 			Log(error, "Error loading file: " + write_file_processes[0].file_path);
 		}
