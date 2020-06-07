@@ -10,7 +10,8 @@ enum ai_goals {
 				_get_closest_weapon,
 				_throw_weapon,
 				_choke,
-				_cut_throat
+				_cut_throat,
+				_jump
 			};
 
 class DrikaAIControl : DrikaElement{
@@ -18,7 +19,7 @@ class DrikaAIControl : DrikaElement{
 	int ai_goal;
 	DrikaTargetSelect ai_target(this, "ai_target");
 
-	array<ai_goals> goals_with_placeholders = {_investigate_slow, _investigate_urgent};
+	array<ai_goals> goals_with_placeholders = {_investigate_slow, _investigate_urgent, _jump};
 
 	array<string> ai_goal_names = {		"Patrol",
 										"Attack",
@@ -31,7 +32,8 @@ class DrikaAIControl : DrikaElement{
 										"Get Closest Weapon",
 										"Throw Weapon",
 										"Choke",
-										"Cut Throat"
+										"Cut Throat",
+										"Jump"
 									};
 
 	DrikaAIControl(JSONValue params = JSONValue()){
@@ -317,6 +319,16 @@ class DrikaAIControl : DrikaElement{
 							command += "executing = false;";
 						}
 						break;
+				case _jump:
+					{
+						vec3 target_pos = placeholder.GetTranslation();
+						command += "vec3 jump_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+						command += "vec3 vel;";
+						command += "JumpToTarget(jump_target, vel, 0.5f);";
+						command += "has_jump_target = true;";
+						command += "jump_target_vel = vel;";
+					}
+					break;
 				default:
 					break;
 			}
