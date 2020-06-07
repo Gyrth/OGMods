@@ -1375,6 +1375,14 @@ void ReceiveMessage(string msg){
 			checkpoint_data += token_iter.GetToken(msg);
 		}
 		SetCheckpointData(checkpoint_data);
+	}else if(token == "drika_function_message"){
+		token_iter.FindNextToken(msg);
+		int function_index = atoi(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		string message = token_iter.GetToken(msg);
+
+		drika_elements[drika_indexes[function_index]].ReceiveMessage(message);
 	}
 }
 

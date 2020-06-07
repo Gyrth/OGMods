@@ -138,6 +138,20 @@ class ReadFileProcess{
 	}
 }
 
+class WriteFileProcess{
+	int hotspot_id = -1;
+	string data;
+	string file_path;
+	int function_index;
+
+	WriteFileProcess(int _hotspot_id, int _function_index, string _file_path, string _data){
+		hotspot_id = _hotspot_id;
+		file_path = _file_path;
+		data = _data;
+		function_index = _function_index;
+	}
+}
+
 array<string> dialogue_cache;
 IMDivider @dialogue_lines_holder_vert;
 IMDivider @dialogue_line_holder;
@@ -147,6 +161,7 @@ string current_actor_name = "Default";
 array<ActorSettings@> actor_settings;
 ActorSettings@ current_actor_settings = ActorSettings();
 array<ReadFileProcess@> read_file_processes;
+array<WriteFileProcess@> write_file_processes;
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
@@ -1396,6 +1411,24 @@ void ReceiveMessage(string msg){
 		Log(warning, return_msg);
 
 		hotspot_obj.ReceiveScriptMessage(return_msg);
+	}else if(token == "drika_write_file"){
+		token_iter.FindNextToken(msg);
+		int hotspot_id = atoi(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		int function_index = atoi(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		string file_path = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		string data = token_iter.GetToken(msg);
+
+		while(token_iter.FindNextToken(msg)){
+			data += token_iter.GetToken(msg) + " ";
+		}
+
+		write_file_processes.insertLast(WriteFileProcess(hotspot_id, function_index, file_path, data));
 	}
 }
 
@@ -1951,6 +1984,7 @@ void Update(){
 	imGUI.update();
 	SetCameraPosition();
 	UpdateReadFileProcesses();
+	UpdateWriteFileProcesses();
 	UpdateMusic();
 	if(fading){
 		blackout_amount = fade_timer / fade_duration;
@@ -2136,8 +2170,42 @@ void UpdateReadFileProcesses(){
 		read_file_processes.removeAt(0);
 	}
 }
-
 int update_counter = 0;
+
+void UpdateWriteFileProcesses(){
+	update_counter += 1;
+	if(update_counter > 400 && write_file_processes.size() > 0){
+		StartWriteFile();
+		AddFileString(write_file_processes[0].data);
+		WriteFile(write_file_processes[0].file_path);
+
+		Log(warning, "Written placeholder for " + write_file_processes[0].hotspot_id);
+
+		string content = "";
+
+		if(LoadFile(write_file_processes[0].file_path)){
+			while(true){
+				string line = GetFileLine();
+				if(line == "end"){
+					break;
+				}else{
+					content += line + "\n";
+				}
+			}
+			Log(error, "Reading : " + content);
+
+		}else{
+			Log(error, "Error loading file: " + write_file_processes[0].file_path);
+		}
+
+		Object@ hotspot_obj = ReadObjectFromID(write_file_processes[0].hotspot_id);
+		hotspot_obj.ReceiveScriptMessage("drika_function_message " + " " + write_file_processes[0].function_index + " " + "drika_write_placeholder_done");
+
+		write_file_processes.removeAt(0);
+		update_counter = 0;
+	}
+}
+
 
 void SetCameraPosition(){
 	if((animating_camera || has_camera_control) && !EditorModeActive()){

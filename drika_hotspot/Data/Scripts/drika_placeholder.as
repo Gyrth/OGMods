@@ -8,6 +8,7 @@ class DrikaPlaceholder{
 	string path = "Data/Objects/drika_hotspot_cube.xml";
 	string object_path;
 	DrikaElement@ parent;
+	string placeholder_path;
 
 	DrikaPlaceholder(){
 
@@ -45,14 +46,14 @@ class DrikaPlaceholder{
 		if(object_path == "" || @placeholder_object !is null){
 			return;
 		}
-		int placeholder_object_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml", true);
+		/* int placeholder_object_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml", true);
 		@placeholder_object = ReadObjectFromID(placeholder_object_id);
 
 		placeholder_object.SetTranslation(object.GetTranslation());
 		placeholder_object.SetRotation(object.GetRotation());
 		placeholder_object.SetScale(object.GetScale());
 
-		@placeholder = cast<PlaceholderObject@>(placeholder_object);
+		@placeholder = cast<PlaceholderObject@>(placeholder_object); */
 		UpdatePlaceholderPreview();
 	}
 
@@ -61,9 +62,11 @@ class DrikaPlaceholder{
 			//Remove all spaces to eliminate style differences.
 			string xml_content = join(message.split(" "), "");
 			string model = GetStringBetween(xml_content, "<Model>", "</Model>");
+			string colormap = GetStringBetween(xml_content, "<ColorMap>", "</ColorMap>");
 			if(model != ""){
-				placeholder.SetPreview(object_path);
-				Log(warning, "model found : " + model);
+				string data = GetPlaceholderXMLData(model, colormap);
+				placeholder_path = "Data/Objects/placeholder/drika_placeholder_" + hotspot.GetID() + "_" + parent.index + ".xml";
+				level.SendMessage("drika_write_file " + hotspot.GetID() + " " + parent.index + " " + placeholder_path + " " + data);
 			}else{
 				//Check if the target xml is an ItemObject or a Character.
 				string obj_path = GetStringBetween(xml_content, "obj_path=\"", "\"");
@@ -81,6 +84,39 @@ class DrikaPlaceholder{
 					}
 				}
 			}
+		}
+	}
+
+	string GetPlaceholderXMLData(string model, string colormap){
+		string data = "";
+
+		data += "<?xml version=\"1.0\" ?>\n";
+		data += "<Object>\n";
+		data += "<Model>" + model + "</Model>\n";
+		data += "<ColorMap>" + colormap + "</ColorMap>\n";
+		data += "<NormalMap>Data/Textures/chest_n.png</NormalMap>\n";
+		data += "<ShaderName>drika_placeholder</ShaderName>\n";
+		data += "<flags no_collision=true/>\n";
+		data += "</Object>\n";
+
+		return data;
+	}
+
+	void ReceiveMessage(string message){
+		if(message == "drika_write_placeholder_done"){
+			if(!FileExists(placeholder_path)){
+				Log(warning, "Path does not exist " + placeholder_path);
+				return;
+			}else{
+				Log(warning, "Path does exist! " + placeholder_path);
+			}
+
+			int placeholder_object_id = CreateObject(placeholder_path, true);
+			@placeholder_object = ReadObjectFromID(placeholder_object_id);
+
+			placeholder_object.SetTranslation(object.GetTranslation());
+			placeholder_object.SetRotation(object.GetRotation());
+			placeholder_object.SetScale(object.GetScale());
 		}
 	}
 

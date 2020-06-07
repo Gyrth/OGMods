@@ -156,4 +156,8 @@ class DrikaCreateObject : DrikaElement{
 	void ReceiveMessage(string message, string identifier){
 		placeholder.ReceiveMessage(message, identifier);
 	}
+
+	void ReceiveMessage(string message){
+		placeholder.ReceiveMessage(message);
+	}
 }
