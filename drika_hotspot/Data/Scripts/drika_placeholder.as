@@ -76,7 +76,11 @@ class DrikaPlaceholder{
 			string colormap = GetStringBetween(xml_content, "<ColorMap>", "</ColorMap>");
 			if(model != ""){
 				string data = GetPlaceholderXMLData(model, colormap);
-				placeholder_path = "Data/Objects/placeholder/drika_placeholder_" + hotspot.GetID() + "_" + parent.index + ".xml";
+
+				int unique_index = StorageGetInt32("unique_index");
+				placeholder_path = "Data/Objects/placeholder/drika_placeholder_" + unique_index + ".xml";
+				StorageSetInt32("unique_index", unique_index + 1);
+
 				level.SendMessage("drika_write_file " + hotspot.GetID() + " " + parent.index + " " + placeholder_path + " " + data);
 			}else{
 				//Check if the target xml is an ItemObject or a Character.
