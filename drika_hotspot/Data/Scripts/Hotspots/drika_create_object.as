@@ -111,7 +111,7 @@ class DrikaCreateObject : DrikaElement{
 	void DrawEditing(){
 		if(placeholder.Exists()){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			DrawGizmo(placeholder.object);
+			DrawGizmo(placeholder.GetTranslation(), placeholder.GetRotation(), placeholder.GetScale(), placeholder.IsSelected());
 			placeholder.DrawEditing();
 		}else{
 			placeholder.Create();
