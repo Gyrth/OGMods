@@ -11,6 +11,8 @@ class DrikaCreateObject : DrikaElement{
 		drika_element_type = drika_create_object;
 		reference_string = GetJSONString(params, "reference_string", "");
 		has_settings = true;
+		placeholder.object_path = object_path;
+		@placeholder.parent = this;
 	}
 
 	void Delete(){
@@ -96,6 +98,8 @@ class DrikaCreateObject : DrikaElement{
 			string new_path = GetUserPickedReadPath("xml", "Data/Objects");
 			if(new_path != ""){
 				object_path = new_path;
+				placeholder.object_path = object_path;
+				placeholder.UpdatePlaceholderPreview();
 			}
 		}
 		ImGui_SameLine();
@@ -108,6 +112,7 @@ class DrikaCreateObject : DrikaElement{
 		if(placeholder.Exists()){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			DrawGizmo(placeholder.object);
+			placeholder.DrawEditing();
 		}else{
 			placeholder.Create();
 			StartEdit();
@@ -146,5 +151,9 @@ class DrikaCreateObject : DrikaElement{
 			placeholder.Create();
 			return false;
 		}
+	}
+
+	void ReceiveMessage(string message, string identifier){
+		placeholder.ReceiveMessage(message, identifier);
 	}
 }

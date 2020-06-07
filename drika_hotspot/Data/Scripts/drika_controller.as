@@ -128,13 +128,13 @@ class ReadFileProcess{
 	string data = "";
 	string file_path;
 	string param_1;
-	int param_2;
+	int function_index;
 
-	ReadFileProcess(int _hotspot_id, string _file_path, string _param_1, int _param_2){
+	ReadFileProcess(int _hotspot_id, int _function_index, string _file_path, string _param_1){
 		hotspot_id = _hotspot_id;
 		file_path = _file_path;
 		param_1 = _param_1;
-		param_2 = _param_2;
+		function_index = _function_index;
 	}
 }
 
@@ -1186,15 +1186,15 @@ void ReceiveMessage(string msg){
 		int hotspot_id = atoi(token_iter.GetToken(msg));
 
 		token_iter.FindNextToken(msg);
+		int function_index = atoi(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
 		string file_path = token_iter.GetToken(msg);
 
 		token_iter.FindNextToken(msg);
 		string param_1 = token_iter.GetToken(msg);
 
-		token_iter.FindNextToken(msg);
-		int param_2 = atoi(token_iter.GetToken(msg));
-
-		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path, param_1, param_2));
+		read_file_processes.insertLast(ReadFileProcess(hotspot_id, function_index, file_path, param_1));
 	}else if(token == "drika_dialogue_choice"){
 		token_iter.FindNextToken(msg);
 		int hotspot_id = atoi(token_iter.GetToken(msg));
@@ -1268,20 +1268,6 @@ void ReceiveMessage(string msg){
         StartWriteFile();
 		AddFileString(content);
         WriteFileKeepBackup(path);
-	}else if(token == "drika_import_from_file"){
-		token_iter.FindNextToken(msg);
-		int hotspot_id = atoi(token_iter.GetToken(msg));
-
-		token_iter.FindNextToken(msg);
-		string file_path = token_iter.GetToken(msg);
-
-		token_iter.FindNextToken(msg);
-		string param_1 = token_iter.GetToken(msg);
-
-		token_iter.FindNextToken(msg);
-		int param_2 = atoi(token_iter.GetToken(msg));
-
-		read_file_processes.insertLast(ReadFileProcess(hotspot_id, file_path, param_1, param_2));
 	}else if(token == "drika_edit_ui"){
 		token_iter.FindNextToken(msg);
 		string ui_element_identifier = token_iter.GetToken(msg);
@@ -2142,7 +2128,7 @@ void UpdateReadFileProcesses(){
 			}
 			Object@ hotspot_obj = ReadObjectFromID(read_file_processes[0].hotspot_id);
 			read_file_processes[0].data = join(read_file_processes[0].data.split("\""), "\\\"");
-			hotspot_obj.ReceiveScriptMessage("drika_read_file " + " " + read_file_processes[0].param_1 + " " + read_file_processes[0].param_2 + "\"" + read_file_processes[0].data + "\"");
+			hotspot_obj.ReceiveScriptMessage("drika_read_file_done " + " " + read_file_processes[0].function_index + " " + read_file_processes[0].param_1 + "\"" + read_file_processes[0].data + "\"");
 		}else{
 			Log(error, "Error loading file: " + read_file_processes[0].file_path);
 		}

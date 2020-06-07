@@ -750,6 +750,8 @@ void DrawEditor(){
 
 				if(ImGui_Checkbox("Transform Relative", move_relative)){
 					params.SetInt("Transform Relative", move_relative?1:0);
+					//Reset the transform when turning this setting on or off.
+					old_transform = this_hotspot.GetTransform();
 				}
 
 				if(ImGui_MenuItem("Configure Palette")){
@@ -1196,7 +1198,7 @@ void ImportFromFile(){
 	string read_path = GetUserPickedReadPath("txt", "Data/Dialogues");
 	if(read_path != ""){
 		read_path = read_path;
-		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + read_path + " " + "drika_import_from_file" + " " + 0);
+		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + 0 + " " + read_path + " " + "drika_import_from_file");
 	}
 }
 
@@ -1277,7 +1279,7 @@ void ReceiveMessage(string msg){
 	token_iter.FindNextToken(msg);
 	string token = token_iter.GetToken(msg);
 
-    if(drika_elements.size() == 0 && token != "drika_read_file"){
+    if(drika_elements.size() == 0 && token != "drika_read_file_done"){
         return;
     }
 	// Discard the messages when this hotspot is disabled.
@@ -1313,12 +1315,12 @@ void ReceiveMessage(string msg){
 		string new_animation = token_iter.GetToken(msg);
 
 		all_animations[all_animations.size() -1].AddAnimation(new_animation);
-	}else if(token == "drika_read_file"){
+	}else if(token == "drika_read_file_done"){
 		token_iter.FindNextToken(msg);
-		string param_1 = token_iter.GetToken(msg);
+		int function_index = atoi(token_iter.GetToken(msg));
 
 		token_iter.FindNextToken(msg);
-		int param_2 = atoi(token_iter.GetToken(msg));
+		string param_1 = token_iter.GetToken(msg);
 
 		string file_content = "";
 		while(token_iter.FindNextToken(msg)){
@@ -1328,7 +1330,7 @@ void ReceiveMessage(string msg){
 		if(param_1 == "drika_import_from_file"){
 			InterpImportData(file_content);
 		}else{
-			GetCurrentElement().ReceiveMessage(file_content, param_1, param_2);
+			drika_elements[drika_indexes[function_index]].ReceiveMessage(file_content, param_1);
 		}
 	}else if(token == "drika_external_hotspot"){
 		token_iter.FindNextToken(msg);
@@ -1735,4 +1737,17 @@ DrikaElement@ InterpElement(drika_element_types element_type, JSONValue &in func
 			return DrikaCheckpoint(function_json);
 	}
 	return DrikaElement();
+}
+
+string GetStringBetween(string source, string first, string second){
+	array<string> first_cut = source.split(first);
+	if(first_cut.size() <= 1){
+		return "";
+	}
+	array<string> second_cut = first_cut[1].split(second);
+
+	if(second_cut.size() <= 1){
+		return "";
+	}
+	return second_cut[0];
 }

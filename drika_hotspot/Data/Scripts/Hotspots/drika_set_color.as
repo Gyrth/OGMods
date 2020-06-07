@@ -69,7 +69,7 @@ class DrikaSetColor : DrikaElement{
 					num_palette_colors = targets[i].GetNumPaletteColors();
 
 					MovementObject@ char = ReadCharacterID(targets[i].GetID());
-					level.SendMessage("drika_read_file " + hotspot.GetID() + " " + char.char_path + " " + "character_file" + " " + char.GetID());
+					level.SendMessage("drika_read_file " + hotspot.GetID() + " " + index + " " + char.char_path + " " + "character_file");
 
 					for(int j = 0; j < num_palette_colors; j++){
 						palette_indexes.insertLast("" + j);
@@ -84,10 +84,10 @@ class DrikaSetColor : DrikaElement{
 		}
 	}
 
-	void ReceiveMessage(string message, string identifier, int id){
+	void ReceiveMessage(string message, string identifier){
 		if(identifier == "character_file"){
 			string obj_path = GetStringBetween(message, "obj_path = \"", "\"");
-			level.SendMessage("drika_read_file " + hotspot.GetID() + " " + obj_path + " " + "object_file" + " " + id);
+			level.SendMessage("drika_read_file " + hotspot.GetID() + " " + index + " " + obj_path + " " + "object_file");
 		}else if(identifier == "object_file"){
 			palette_names.resize(0);
 			string red = GetStringBetween(message, "label_red=\"", "\"");
@@ -100,19 +100,6 @@ class DrikaSetColor : DrikaElement{
 			if(blue != "") palette_names.insertLast(blue);
 			if(alpha != "") palette_names.insertLast(alpha);
 		}
-	}
-
-	string GetStringBetween(string source, string first, string second){
-		array<string> first_cut = source.split(first);
-		if(first_cut.size() <= 1){
-			return "";
-		}
-		array<string> second_cut = first_cut[1].split(second);
-
-		if(second_cut.size() <= 1){
-			return "";
-		}
-		return second_cut[0];
 	}
 
 	void PreTargetChanged(){
