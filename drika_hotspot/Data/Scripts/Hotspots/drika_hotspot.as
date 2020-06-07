@@ -831,8 +831,9 @@ void DrawEditor(){
 					for(uint i = 0; i < sorted_selected.size(); i++){
 						DrikaElement@ target = drika_elements[drika_indexes[sorted_selected[i]]];
 						DrikaElement@ new_element = InterpElement(target.drika_element_type, target.GetSaveData());
-						// Temporary set the index to the original index, so it can be found later on.
-						new_element.SetIndex(insert_at + 1 + i);
+						// The elements are added in reverse order so insertLast can be used.
+						int index_new_element = insert_at + (sorted_selected.size() - i);
+						new_element.SetIndex(index_new_element);
 						post_init_queue.insertLast(@new_element);
 
 						multi_select.insertLast(insert_at + 1 + i);

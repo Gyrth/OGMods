@@ -123,7 +123,6 @@ class DrikaPlaceholder{
 
 			int placeholder_object_id = CreateObject(placeholder_path, true);
 			@placeholder_object = ReadObjectFromID(placeholder_object_id);
-			Log(warning, "Created placeholder");
 			bounding_box = placeholder_object.GetBoundingBox();
 			object.SetScale(bounding_box);
 
