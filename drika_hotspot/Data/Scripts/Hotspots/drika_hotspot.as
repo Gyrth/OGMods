@@ -832,18 +832,16 @@ void DrawEditor(){
 						DrikaElement@ target = drika_elements[drika_indexes[sorted_selected[i]]];
 						DrikaElement@ new_element = InterpElement(target.drika_element_type, target.GetSaveData());
 						// Temporary set the index to the original index, so it can be found later on.
-						new_element.SetIndex(sorted_selected[i]);
+						new_element.SetIndex(insert_at + 1 + i);
 						post_init_queue.insertLast(@new_element);
 
 						multi_select.insertLast(insert_at + 1 + i);
 						drika_elements.insertLast(new_element);
 						drika_indexes.insertAt(insert_at + 1, drika_elements.size() - 1);
 						display_index = drika_indexes[insert_at + 1];
-					}
 
-					for(uint i = insert_at + 1; i < drika_indexes.size(); i++){
-						if(drika_elements[drika_indexes[i]].index == last_selected){
-							current_line = i;
+						if(target.index == last_selected){
+							current_line = insert_at + 1;
 						}
 					}
 
