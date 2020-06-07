@@ -1,7 +1,6 @@
 class DrikaPlaceholder{
 	int id = -1;
 	Object@ object;
-	PlaceholderObject@ placeholder;
 	Object@ placeholder_object;
 	string name;
 	vec3 default_scale = vec3(0.25);
@@ -60,11 +59,7 @@ class DrikaPlaceholder{
 	}
 
 	void UpdatePlaceholderPreview(){
-		if(@placeholder_object !is null){
-			QueueDeleteObjectID(placeholder_object.GetID());
-		}
-		@placeholder_object = null;
-
+		RemovePlaceholderObject();
 		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + parent.index + " " + object_path + " " + "xml_content");
 	}
 
@@ -137,10 +132,10 @@ class DrikaPlaceholder{
 	}
 
 	void RemovePlaceholderObject(){
-		QueueDeleteObjectID(placeholder_object.GetID());
+		if(@placeholder_object !is null){
+			QueueDeleteObjectID(placeholder_object.GetID());
+		}
 		@placeholder_object = null;
-		@placeholder = null;
-		Log(warning, "RemovePlaceholderObject");
 	}
 
 	void DrawEditing(){
@@ -162,6 +157,7 @@ class DrikaPlaceholder{
 		}
 		id = -1;
 		@object = null;
+		RemovePlaceholderObject();
 	}
 
 	void Retrieve(){
