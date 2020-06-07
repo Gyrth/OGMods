@@ -222,6 +222,7 @@ class DrikaElement{
 	}
 
 	void EditDone(){
+		select_state = select_hotspot;
 		placeholder.SetSelectable(false);
 	}
 
