@@ -412,4 +412,12 @@ class DrikaElement{
 		placeholder.RelativeTranslate(translation_offset);
 		placeholder.RelativeRotate(origin, before_mat, after_mat);
 	}
+
+	void HotspotStartEdit(){
+		placeholder.AddPlaceholderObject();
+	}
+
+	void HotspotStopEdit(){
+		placeholder.HidePlaceholderObject();
+	}
 }

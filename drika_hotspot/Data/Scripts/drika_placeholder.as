@@ -9,6 +9,7 @@ class DrikaPlaceholder{
 	string object_path;
 	DrikaElement@ parent;
 	string placeholder_path;
+	vec3 bounding_box = vec3(1.0);
 
 	DrikaPlaceholder(){
 
@@ -43,18 +44,28 @@ class DrikaPlaceholder{
 	}
 
 	void AddPlaceholderObject(){
-		if(object_path == "" || @placeholder_object !is null){
+		if(object_path == ""){
+			return;
+		}else if(@placeholder_object !is null){
+			placeholder_object.SetEnabled(true);
 			return;
 		}
-		/* int placeholder_object_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml", true);
-		@placeholder_object = ReadObjectFromID(placeholder_object_id);
-
-		placeholder_object.SetTranslation(object.GetTranslation());
-		placeholder_object.SetRotation(object.GetRotation());
-		placeholder_object.SetScale(object.GetScale());
-
-		@placeholder = cast<PlaceholderObject@>(placeholder_object); */
 		UpdatePlaceholderPreview();
+	}
+
+	void HidePlaceholderObject(){
+		if(@placeholder_object !is null){
+			placeholder_object.SetEnabled(false);
+		}
+	}
+
+	void UpdatePlaceholderPreview(){
+		if(@placeholder_object !is null){
+			QueueDeleteObjectID(placeholder_object.GetID());
+		}
+		Log(warning, "UpdatePlaceholderPreview");
+		@placeholder_object = null;
+		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + parent.index + " " + object_path + " " + "xml_content");
 	}
 
 	void ReceiveMessage(string message, string identifier){
@@ -113,10 +124,11 @@ class DrikaPlaceholder{
 
 			int placeholder_object_id = CreateObject(placeholder_path, true);
 			@placeholder_object = ReadObjectFromID(placeholder_object_id);
+			Log(warning, "Created placeholder");
+			bounding_box = placeholder_object.GetBoundingBox();
+			object.SetScale(bounding_box);
 
-			placeholder_object.SetTranslation(object.GetTranslation());
-			placeholder_object.SetRotation(object.GetRotation());
-			placeholder_object.SetScale(object.GetScale());
+			UpdatePlaceholderTransform();
 		}
 	}
 
@@ -124,10 +136,7 @@ class DrikaPlaceholder{
 		QueueDeleteObjectID(placeholder_object.GetID());
 		@placeholder_object = null;
 		@placeholder = null;
-	}
-
-	void UpdatePlaceholderPreview(){
-		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + parent.index + " " + object_path + " " + "xml_content");
+		Log(warning, "RemovePlaceholderObject");
 	}
 
 	void DrawEditing(){
@@ -140,7 +149,7 @@ class DrikaPlaceholder{
 	void UpdatePlaceholderTransform(){
 		placeholder_object.SetTranslation(object.GetTranslation());
 		placeholder_object.SetRotation(object.GetRotation());
-		placeholder_object.SetScale(object.GetScale());
+		placeholder_object.SetScale(vec3(object.GetScale().x / bounding_box.x, object.GetScale().y / bounding_box.y, object.GetScale().z / bounding_box.z));
 	}
 
 	void Remove(){
@@ -172,7 +181,6 @@ class DrikaPlaceholder{
 				Create();
 			}
 		}
-		AddPlaceholderObject();
 	}
 
 	bool Exists(){
@@ -220,7 +228,7 @@ class DrikaPlaceholder{
 
 	vec3 GetScale(){
 		if(Exists()){
-			return object.GetScale();
+			return vec3(object.GetScale().x / bounding_box.x, object.GetScale().y / bounding_box.y, object.GetScale().z / bounding_box.z);
 		}else{
 			return vec3(1.0);
 		}

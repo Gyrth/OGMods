@@ -2170,11 +2170,11 @@ void UpdateReadFileProcesses(){
 		read_file_processes.removeAt(0);
 	}
 }
+
 int update_counter = 0;
 
 void UpdateWriteFileProcesses(){
-	update_counter += 1;
-	if(update_counter > 400 && write_file_processes.size() > 0){
+	if(write_file_processes.size() > 0){
 		StartWriteFile();
 		AddFileString(write_file_processes[0].data);
 		WriteFile(write_file_processes[0].file_path);
@@ -2202,7 +2202,6 @@ void UpdateWriteFileProcesses(){
 		hotspot_obj.ReceiveScriptMessage("drika_function_message " + " " + write_file_processes[0].function_index + " " + "drika_write_placeholder_done");
 
 		write_file_processes.removeAt(0);
-		update_counter = 0;
 	}
 }
 

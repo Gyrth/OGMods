@@ -395,6 +395,17 @@ void LaunchCustomGUI(){
 			GetCurrentElement().StartEdit();
 		}
 	}
+	SendHotspotStateChange();
+}
+
+void SendHotspotStateChange(){
+	for(uint i = 0; i < drika_elements.size(); i++){
+		if(show_editor){
+			drika_elements[i].HotspotStartEdit();
+		}else{
+			drika_elements[i].HotspotStopEdit();
+		}
+	}
 }
 
 void Update(){
@@ -441,6 +452,7 @@ void Update(){
 		has_closed = true;
 		Reset();
 		Save();
+		SendHotspotStateChange();
 	}
 
 	if(EditorModeActive() && editing == false){
