@@ -37,9 +37,7 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		hotspot_trigger_type = hotspot_trigger_types(GetJSONInt(params, "hotspot_trigger_type", 0));
 		new_hotspot_trigger_type = hotspot_trigger_type;
 		reference_string = GetJSONString(params, "reference_string", "");
-		if(reference_string != ""){
-			RegisterReference(this);
-		}
+		AttemptRegisterReference(reference_string);
 		character_team = GetJSONString(params, "character_team", "");
 		object_id = GetJSONInt(params, "object_id", -1);
 		external_hotspot = GetJSONBool(params, "external_hotspot", false);

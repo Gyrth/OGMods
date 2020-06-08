@@ -10,9 +10,7 @@ class DrikaCreateObject : DrikaElement{
 		object_path = GetJSONString(params, "object_path", default_preview_mesh);
 		drika_element_type = drika_create_object;
 		reference_string = GetJSONString(params, "reference_string", "");
-		if(reference_string != ""){
-			RegisterReference(this);
-		}
+		AttemptRegisterReference(reference_string);
 		has_settings = true;
 		placeholder.object_path = object_path;
 		@placeholder.parent = this;
@@ -80,7 +78,11 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "CreateObject " + object_path + " " + reference_string;
+		// Continuesly check if the reference has been freed.
+		if(reference_already_taken){
+			AttemptRegisterReference(reference_string);
+		}
+		return "CreateObject " + object_path + " " + reference_string + (reference_already_taken?" (Invalid)":"");
 	}
 
 	void DrawSettings(){

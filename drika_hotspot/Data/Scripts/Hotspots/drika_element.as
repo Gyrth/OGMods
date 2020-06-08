@@ -278,6 +278,23 @@ class DrikaElement{
 		return display_colors[drika_element_type];
 	}
 
+	void AttemptRegisterReference(string new_reference_string){
+		// If the new reference string is empty then remove the reference.
+		if(new_reference_string == ""){
+			RemoveReference(this);
+			reference_string = new_reference_string;
+			reference_already_taken = false;
+		}else if(GetReferenceElement(new_reference_string) !is null){
+			// Check if the reference string is already taken.
+			reference_already_taken = true;
+			reference_string = new_reference_string;
+		}else{
+			reference_already_taken = false;
+			reference_string = new_reference_string;
+			RegisterReference(this);
+		}
+	}
+
 	void DrawSetReferenceUI(){
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Set Reference");
@@ -288,20 +305,7 @@ class DrikaElement{
 		// If the reference string is changed then update the reference.
 		string new_reference_string = reference_string;
 		if(ImGui_InputText("##Reference", new_reference_string, 64)){
-			// If the new reference string is empty then remove the reference.
-			if(new_reference_string == ""){
-				RemoveReference(this);
-				reference_string = new_reference_string;
-				reference_already_taken = false;
-			}else if(GetReferenceElement(new_reference_string) !is null){
-				// Check if the reference string is already taken.
-				reference_already_taken = true;
-				reference_string = new_reference_string;
-			}else{
-				reference_already_taken = false;
-				reference_string = new_reference_string;
-				RegisterReference(this);
-			}
+			AttemptRegisterReference(new_reference_string);
 		}
 
 		if(ImGui_IsItemHovered()){
