@@ -59,7 +59,7 @@ Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
 string param_delimiter = "|";
 array<string> messages;
 bool is_selected = false;
-array<ObjectReference@> object_references;
+array<Reference@> references;
 string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
 bool duplicating_hotspot = false;
 bool duplicating_function = false;
@@ -112,12 +112,10 @@ TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/
 
 DrikaQuickLaunch quick_launch();
 
-class ObjectReference{
-	int id;
-	string reference;
-	ObjectReference(int _id, string _reference){
-		id = _id;
-		reference = _reference;
+class Reference{
+	DrikaElement@ element;
+	Reference(DrikaElement@ _element){
+		@element = @_element;
 	}
 }
 
@@ -266,42 +264,50 @@ void SetEnabled(bool val){
 	hotspot_enabled = val;
 }
 
-void RegisterObject(int id, string reference){
-	if(reference == ""){
+void RegisterReference(DrikaElement@ element){
+	// Do not allow refences with an empty string.
+	if(element.reference_string == ""){
 		return;
 	}
-	bool already_registered = false;
-	for(uint i = 0; i < object_references.size(); i++){
-		//Already have this reference, so just change the id.
-		if(object_references[i].reference == reference){
-			object_references[i].id = id;
-			already_registered = true;
+
+	for(uint i = 0; i < references.size(); i++){
+		//Already have this reference, so do not add it.
+		if(references[i].element is element){
+			return;
 		}
 	}
-	if(!already_registered){
-		object_references.insertLast(ObjectReference(id, reference));
-	}
+
+	references.insertLast(Reference(element));
 }
 
-bool HasReferences(){
-	for(uint i = 0; i < drika_elements.size(); i++){
-	    if(drika_elements[i].GetReference() != ""){
-			return true;
+void RemoveReference(DrikaElement@ element){
+	for(uint i = 0; i < references.size(); i++){
+		if(references[i].element is element){
+			references.removeAt(i);
+			break;
 		}
 	}
-	return false;
 }
 
 array<string> GetReferences(){
 	array<string> reference_strings;
 	Log(info, "Getting references " + drika_elements.size());
 	for(uint i = 0; i < drika_elements.size(); i++){
-	    if(drika_elements[i].GetReference() != ""){
-			Log(info, i + " ref " + drika_elements[i].GetReference());
-			reference_strings.insertLast(drika_elements[i].GetReference());
+	    if(drika_elements[i].GetReferenceString() != ""){
+			Log(info, i + " ref " + drika_elements[i].GetReferenceString());
+			reference_strings.insertLast(drika_elements[i].GetReferenceString());
 		}
 	}
 	return reference_strings;
+}
+
+DrikaElement@ GetReferenceElement(string reference){
+	for(uint i = 0; i < references.size(); i++){
+		if(references[i].element.reference_string == reference){
+			return references[i].element;
+		}
+	}
+	return null;
 }
 
 bool AcceptConnectionsTo(Object @other){
@@ -329,15 +335,6 @@ bool Disconnect(Object @other){
 		return GetCurrentElement().Disconnect(other);
 	}
 	return false;
-}
-
-int GetRegisteredObjectID(string reference){
-	for(uint i = 0; i < object_references.size(); i++){
-		if(object_references[i].reference == reference){
-			return object_references[i].id;
-		}
-	}
-	return -1;
 }
 
 void Dispose() {
@@ -1465,7 +1462,6 @@ void Reset(){
 	current_line = 0;
 	multi_select = {current_line};
 	display_index = drika_indexes[current_line];
-	object_references.resize(0);
 	parallel_elements.resize(0);
 
 	script_finished = false;

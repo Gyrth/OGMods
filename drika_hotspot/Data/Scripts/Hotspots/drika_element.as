@@ -126,13 +126,15 @@ class DrikaElement{
 	array<EntityType> connection_types;
 	string line_number;
 	bool deleted = false;
-	string reference_string = "drika_reference";
+	string reference_string = "";
+	bool reference_already_taken = false;
 	DrikaTargetSelect target_select(this);
 	int export_index = -1;
 	select_states select_state = select_hotspot;
 
 	string GetDisplayString(){return "";}
-	string GetReference(){return "";}
+	string GetReferenceString(){return reference_string;}
+	array<int> GetReferenceObjectIDs(){return {};}
 	void Update(){}
 	void PostInit(){}
 	bool Trigger(){return false;}
@@ -219,11 +221,13 @@ class DrikaElement{
 
 	void StartEdit(){
 		placeholder.SetSelectable(true);
+		target_select.StartEdit();
 	}
 
 	void EditDone(){
 		select_state = select_hotspot;
 		placeholder.SetSelectable(false);
+		target_select.EditDone();
 	}
 
 	string Vec3ToString(vec3 value){
@@ -280,12 +284,40 @@ class DrikaElement{
 		ImGui_NextColumn();
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
-		ImGui_InputText("##Reference", reference_string, 64);
+
+		// If the reference string is changed then update the reference.
+		string new_reference_string = reference_string;
+		if(ImGui_InputText("##Reference", new_reference_string, 64)){
+			// If the new reference string is empty then remove the reference.
+			if(new_reference_string == ""){
+				RemoveReference(this);
+				reference_string = new_reference_string;
+				reference_already_taken = false;
+			}else if(GetReferenceElement(new_reference_string) !is null){
+				// Check if the reference string is already taken.
+				reference_already_taken = true;
+				reference_string = new_reference_string;
+			}else{
+				reference_already_taken = false;
+				reference_string = new_reference_string;
+				RegisterReference(this);
+			}
+		}
+
 		if(ImGui_IsItemHovered()){
 			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
 			ImGui_SetTooltip("If a reference is set it can be used by other functions\nlike Set Object Param or Transform Object.");
 			ImGui_PopStyleColor();
 		}
+
+		if(reference_already_taken){
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+			ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.0, 0.0, 1.0));
+			ImGui_Text("This reference is already taken!");
+			ImGui_PopStyleColor();
+		}
+
 		ImGui_PopItemWidth();
 	}
 

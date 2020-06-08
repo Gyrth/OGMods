@@ -115,6 +115,7 @@ string GetObjectTypeString(int object_type){
 class DrikaTargetSelect{
 	int object_id = -1;
 	string reference_string = "drika_reference";
+	DrikaElement@ reference_element;
 	string character_team = "team_drika";
 	string object_name = "drika_object";
 
@@ -147,11 +148,11 @@ class DrikaTargetSelect{
 			return false;
 		}
 		if(object_id != -1 && ObjectExists(object_id)){
-			parent.PreTargetChanged();
+			PreTargetChanged();
 			Disconnect(ReadObjectFromID(object_id));
 		}
 		object_id = other.GetID();
-		parent.TargetChanged();
+		TargetChanged();
 		return false;
 	}
 
@@ -285,7 +286,7 @@ class DrikaTargetSelect{
 		ImGui_PushItemWidth(second_column_width);
 
 		if(ImGui_Combo("##Identifier Type" + tag, current_identifier_type, identifier_choices, identifier_choices.size()) || refresh_target){
-			parent.PreTargetChanged();
+			PreTargetChanged();
 			if(identifier_choices[current_identifier_type] == "ID"){
 				identifier_type = id;
 			}else if(identifier_choices[current_identifier_type] == "Team"){
@@ -313,9 +314,9 @@ class DrikaTargetSelect{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_InputInt("##Object ID" + tag, new_object_id)){
-				parent.PreTargetChanged();
+				PreTargetChanged();
 				object_id = new_object_id;
-				parent.TargetChanged();
+				TargetChanged();
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -332,6 +333,7 @@ class DrikaTargetSelect{
 					}
 				}
 				reference_string = available_references[current_reference];
+				@reference_element = GetReferenceElement(reference_string);
 			}else{
 				//Force the identifier type to id when no references are available.
 				identifier_type = id;
@@ -343,9 +345,10 @@ class DrikaTargetSelect{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Reference" + tag, current_reference, available_references, available_references.size())){
-				parent.PreTargetChanged();
+				PreTargetChanged();
 				reference_string = available_references[current_reference];
-				parent.TargetChanged();
+				@reference_element = GetReferenceElement(reference_string);
+				TargetChanged();
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -357,9 +360,9 @@ class DrikaTargetSelect{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_InputText("##Team" + tag, new_character_team, 64)){
-				parent.PreTargetChanged();
+				PreTargetChanged();
 				character_team = new_character_team;
-				parent.TargetChanged();
+				TargetChanged();
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -371,9 +374,9 @@ class DrikaTargetSelect{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_InputText("##Name" + tag, new_object_name, 64)){
-				parent.PreTargetChanged();
+				PreTargetChanged();
 				object_name = new_object_name;
-				parent.TargetChanged();
+				TargetChanged();
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -397,9 +400,9 @@ class DrikaTargetSelect{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Character" + tag, current_character, available_character_names, available_character_names.size())){
-				parent.PreTargetChanged();
+				PreTargetChanged();
 				object_id = available_character_ids[current_character];
-				parent.TargetChanged();
+				TargetChanged();
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -425,9 +428,9 @@ class DrikaTargetSelect{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Combo("##Item" + tag, current_item, available_item_names, available_item_names.size())){
-				parent.PreTargetChanged();
+				PreTargetChanged();
 				object_id = available_item_ids[current_item];
-				parent.TargetChanged();
+				TargetChanged();
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -505,7 +508,7 @@ class DrikaTargetSelect{
 		}
 
 		if(target_changed){
-			parent.TargetChanged();
+			TargetChanged();
 		}
 	}
 
@@ -587,14 +590,20 @@ class DrikaTargetSelect{
 			}else{
 				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
-		}else if (identifier_type == reference){
-			int registered_object_id = GetRegisteredObjectID(reference_string);
-			if(registered_object_id == -1 || !ObjectExists(registered_object_id)){
-				//Does not exist yet.
-			}else{
-				target_objects.insertLast(ReadObjectFromID(registered_object_id));
+		}else if(identifier_type == reference){
+			if(reference_element !is null){
+				if(reference_element.deleted){
+					Log(warning, "Deleted!");
+					@reference_element = null;
+					reference_string = "";
+				}else{
+					array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
+					for(uint i = 0; i < registered_object_ids.size(); i++){
+						target_objects.insertLast(ReadObjectFromID(registered_object_ids[i]));
+					}
+				}
 			}
-		}else if (identifier_type == team){
+		}else if(identifier_type == team){
 			array<int> object_ids = GetObjectIDsType(_movement_object);
 			for(uint i = 0; i < object_ids.size(); i++){
 				Object@ obj = ReadObjectFromID(object_ids[i]);
@@ -614,7 +623,7 @@ class DrikaTargetSelect{
 					}
 				}
 			}
-		}else if (identifier_type == name){
+		}else if(identifier_type == name){
 			array<int> object_ids = GetObjectIDs();
 			for(uint i = 0; i < object_ids.size(); i++){
 				Object@ obj = ReadObjectFromID(object_ids[i]);
@@ -660,11 +669,18 @@ class DrikaTargetSelect{
 				target_movement_objects.insertLast(ReadCharacterID(object_id));
 			}
 		}else if (identifier_type == reference){
-			int registered_object_id = GetRegisteredObjectID(reference_string);
-			if(registered_object_id == -1){
-				//Does not exist yet.
-			}else if(MovementObjectExists(registered_object_id)){
-				target_movement_objects.insertLast(ReadCharacterID(registered_object_id));
+			if(reference_element !is null){
+				if(reference_element.deleted){
+					@reference_element = null;
+					reference_string = "";
+				}else{
+					array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
+					for(uint i = 0; i < registered_object_ids.size(); i++){
+						if(MovementObjectExists(registered_object_ids[i])){
+							target_movement_objects.insertLast(ReadCharacterID(registered_object_ids[i]));
+						}
+					}
+				}
 			}
 		}else if (identifier_type == team){
 			array<int> mo_ids = GetObjectIDsType(_movement_object);
@@ -714,7 +730,7 @@ class DrikaTargetSelect{
 		if(identifier_type == id){
 			return "" + object_id;
 		}else if (identifier_type == reference){
-			return reference_string;
+			return (reference_element !is null)?reference_element.reference_string:"issue";
 		}else if (identifier_type == team){
 			return character_team;
 		}else if (identifier_type == name){
@@ -751,15 +767,46 @@ class DrikaTargetSelect{
 
 	void ClearTarget(){
 		object_id = -1;
-		reference_string = "drika_reference";
+		reference_string = "";
 		character_team = "team_drika";
 		object_name = "drika_object";
 	}
 
 	void SetSelected(bool selected){
+		Log(warning, "Get reference object " + reference_string);
+
 		array<Object@> target_objects = GetTargetObjects();
 		for(uint i = 0 ; i < target_objects.size(); i++){
+			target_objects[i].SetSelectable(true);
 			target_objects[i].SetSelected(selected);
+		}
+	}
+
+	void StartEdit(){
+		SetReferencePlaceholderSelectable(true);
+	}
+
+	void EditDone(){
+		SetReferencePlaceholderSelectable(false);
+	}
+
+	void PreTargetChanged(){
+		SetReferencePlaceholderSelectable(false);
+		parent.PreTargetChanged();
+	}
+
+	void TargetChanged(){
+		parent.TargetChanged();
+		SetReferencePlaceholderSelectable(true);
+	}
+
+	// When the reference has a placeholder then it is unselectable by default.
+	// So when this function is using that placeholder make it selectable or unselectable when it's no longer used.
+	void SetReferencePlaceholderSelectable(bool selectable){
+		if(identifier_type == reference){
+			if(reference_element !is null){
+				reference_element.placeholder.SetSelectable(selectable);
+			}
 		}
 	}
 }

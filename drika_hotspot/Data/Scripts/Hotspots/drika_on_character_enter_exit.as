@@ -37,6 +37,9 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		hotspot_trigger_type = hotspot_trigger_types(GetJSONInt(params, "hotspot_trigger_type", 0));
 		new_hotspot_trigger_type = hotspot_trigger_type;
 		reference_string = GetJSONString(params, "reference_string", "");
+		if(reference_string != ""){
+			RegisterReference(this);
+		}
 		character_team = GetJSONString(params, "character_team", "");
 		object_id = GetJSONInt(params, "object_id", -1);
 		external_hotspot = GetJSONBool(params, "external_hotspot", false);
@@ -351,7 +354,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 				array<string> teams = no_spaces_param.split(",");
 				if(teams.find(character_team) != -1){
 					triggered = true;
-					RegisterObject(char_id, reference_string);
 					return;
 				}
 			}
@@ -364,7 +366,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 				target_character_type == any_player && char.controlled ||
 				target_character_type == any_npc && !char.controlled){
 				triggered = true;
-				RegisterObject(char_id, reference_string);
 				return;
 			}
 		}
@@ -415,14 +416,12 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 		if(target_character_type == check_id){
 			if(object_id != -1 && MovementObjectExists(object_id)){
 				MovementObject@ char = ReadCharacterID(object_id);
-				RegisterObject(char.GetID(), reference_string);
 				return CharacterInside(char, target_hotspot);
 			}
 		}else if(target_character_type == any_character){
 			for(int i = 0; i < GetNumCharacters(); i++){
 				MovementObject@ char = ReadCharacter(i);
 				if(CharacterInside(char, target_hotspot)){
-					RegisterObject(char.GetID(), reference_string);
 					return true;
 				}
 			}
@@ -430,7 +429,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 			for(int i = 0; i < GetNumCharacters(); i++){
 				MovementObject@ char = ReadCharacter(i);
 				if(char.controlled && CharacterInside(ReadCharacter(i), target_hotspot)){
-					RegisterObject(char.GetID(), reference_string);
 					return true;
 				}
 			}
@@ -438,7 +436,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 			for(int i = 0; i < GetNumCharacters(); i++){
 				MovementObject@ char = ReadCharacter(i);
 				if(!char.controlled && CharacterInside(ReadCharacter(i), target_hotspot)){
-					RegisterObject(char.GetID(), reference_string);
 					return true;
 				}
 			}
@@ -453,7 +450,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 					//Teams are , seperated.
 					array<string> teams = no_spaces_param.split(",");
 					if(teams.find(character_team) != -1){
-						RegisterObject(char.GetID(), reference_string);
 						//Every character in the team needs to be inside.
 						if(!CharacterInside(char, target_hotspot)){
 							return false;

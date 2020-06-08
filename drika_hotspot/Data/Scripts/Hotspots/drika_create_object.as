@@ -10,6 +10,9 @@ class DrikaCreateObject : DrikaElement{
 		object_path = GetJSONString(params, "object_path", default_preview_mesh);
 		drika_element_type = drika_create_object;
 		reference_string = GetJSONString(params, "reference_string", "");
+		if(reference_string != ""){
+			RegisterReference(this);
+		}
 		has_settings = true;
 		placeholder.object_path = object_path;
 		@placeholder.parent = this;
@@ -18,6 +21,7 @@ class DrikaCreateObject : DrikaElement{
 	void Delete(){
 		Reset();
 		placeholder.Remove();
+		RemoveReference(this);
 	}
 
 	void PostInit(){
@@ -65,10 +69,6 @@ class DrikaCreateObject : DrikaElement{
 				Trigger();
 			}
 		}
-	}
-
-	string GetReference(){
-		return reference_string;
 	}
 
 	JSONValue GetSaveData(){
@@ -136,8 +136,6 @@ class DrikaCreateObject : DrikaElement{
 			int spawned_object_id = CreateObject(object_path);
 			spawned_object_ids.insertLast(spawned_object_id);
 
-			RegisterObject(spawned_object_id, reference_string);
-
 			Object@ spawned_object = ReadObjectFromID(spawned_object_id);
 			spawned_object.SetSelectable(true);
 			spawned_object.SetTranslatable(true);
@@ -150,6 +148,14 @@ class DrikaCreateObject : DrikaElement{
 		}else{
 			placeholder.Create();
 			return false;
+		}
+	}
+
+	array<int> GetReferenceObjectIDs(){
+		if(!triggered){
+			return {placeholder.object.GetID()};
+		}else{
+			return spawned_object_ids;
 		}
 	}
 
