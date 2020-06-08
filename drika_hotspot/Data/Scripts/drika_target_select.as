@@ -579,28 +579,35 @@ class DrikaTargetSelect{
 		}
 	}
 
-	array<Object@> GetTargetObjects(){
-		array<Object@> target_objects;
-		if(identifier_type == id){
-			if(object_id == -1){
-				//Do nothing.
-			}else if(!ObjectExists(object_id)){
+	void CheckTargetAvailable(){
+		if(identifier_type == id || identifier_type == character || identifier_type == item){
+			if(object_id != -1 && !ObjectExists(object_id)){
 				Log(warning, "The object with id " + object_id + " doesn't exist anymore, so resetting to -1.");
 				object_id = -1;
-			}else{
-				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
 		}else if(identifier_type == reference){
 			if(reference_element !is null){
 				if(reference_element.deleted){
-					Log(warning, "Deleted!");
 					@reference_element = null;
 					reference_string = "";
-				}else{
-					array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
-					for(uint i = 0; i < registered_object_ids.size(); i++){
-						target_objects.insertLast(ReadObjectFromID(registered_object_ids[i]));
-					}
+				}
+			}
+		}
+	}
+
+	array<Object@> GetTargetObjects(){
+		CheckTargetAvailable();
+
+		array<Object@> target_objects;
+		if(identifier_type == id){
+			if(object_id != -1){
+				target_objects.insertLast(ReadObjectFromID(object_id));
+			}
+		}else if(identifier_type == reference){
+			if(reference_element !is null){
+				array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
+				for(uint i = 0; i < registered_object_ids.size(); i++){
+					target_objects.insertLast(ReadObjectFromID(registered_object_ids[i]));
 				}
 			}
 		}else if(identifier_type == team){
@@ -632,21 +639,11 @@ class DrikaTargetSelect{
 				}
 			}
 		}else if(identifier_type == character){
-			if(object_id == -1){
-				//Do nothing.
-			}else if(!ObjectExists(object_id)){
-				Log(warning, "The object with id " + object_id + " doesn't exist anymore, so resetting to -1.");
-				object_id = -1;
-			}else{
+			if(object_id != -1){
 				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
 		}else if(identifier_type == item){
-			if(object_id == -1){
-				//Do nothing.
-			}else if(!ObjectExists(object_id)){
-				Log(warning, "The object with id " + object_id + " doesn't exist anymore, so resetting to -1.");
-				object_id = -1;
-			}else{
+			if(object_id != -1){
 				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
 		}else if(identifier_type == batch){
@@ -658,27 +655,19 @@ class DrikaTargetSelect{
 	}
 
 	array<MovementObject@> GetTargetMovementObjects(){
+		CheckTargetAvailable();
+
 		array<MovementObject@> target_movement_objects;
 		if(identifier_type == id){
-			if(object_id == -1){
-				//Do nothing.
-			}else if(!MovementObjectExists(object_id)){
-				Log(warning, "The MovementObject with id " + object_id + " doesn't exist or is not a MovementObject, so resetting to -1.");
-				object_id = -1;
-			}else{
+			if(object_id != -1){
 				target_movement_objects.insertLast(ReadCharacterID(object_id));
 			}
 		}else if (identifier_type == reference){
 			if(reference_element !is null){
-				if(reference_element.deleted){
-					@reference_element = null;
-					reference_string = "";
-				}else{
-					array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
-					for(uint i = 0; i < registered_object_ids.size(); i++){
-						if(MovementObjectExists(registered_object_ids[i])){
-							target_movement_objects.insertLast(ReadCharacterID(registered_object_ids[i]));
-						}
+				array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
+				for(uint i = 0; i < registered_object_ids.size(); i++){
+					if(MovementObjectExists(registered_object_ids[i])){
+						target_movement_objects.insertLast(ReadCharacterID(registered_object_ids[i]));
 					}
 				}
 			}
@@ -708,12 +697,7 @@ class DrikaTargetSelect{
 				}
 			}
 		}else if(identifier_type == character){
-			if(object_id == -1){
-				//Do nothing.
-			}else if(!MovementObjectExists(object_id)){
-				Log(warning, "The MovementObject with id " + object_id + " doesn't exist or is not a MovementObject, so resetting to -1.");
-				object_id = -1;
-			}else{
+			if(object_id != -1){
 				target_movement_objects.insertLast(ReadCharacterID(object_id));
 			}
 		}else if(identifier_type == batch){
@@ -727,10 +711,11 @@ class DrikaTargetSelect{
 	}
 
 	string GetTargetDisplayText(){
+		CheckTargetAvailable();
 		if(identifier_type == id){
 			return "" + object_id;
 		}else if (identifier_type == reference){
-			return (reference_element !is null)?reference_element.reference_string:"issue";
+			return (reference_element !is null)?reference_element.reference_string:"";
 		}else if (identifier_type == team){
 			return character_team;
 		}else if (identifier_type == name){
@@ -777,7 +762,6 @@ class DrikaTargetSelect{
 
 		array<Object@> target_objects = GetTargetObjects();
 		for(uint i = 0 ; i < target_objects.size(); i++){
-			target_objects[i].SetSelectable(true);
 			target_objects[i].SetSelected(selected);
 		}
 	}
