@@ -331,6 +331,7 @@ class DrikaTargetSelect{
 						break;
 					}
 				}
+				reference_string = available_references[current_reference];
 			}else{
 				//Force the identifier type to id when no references are available.
 				identifier_type = id;
