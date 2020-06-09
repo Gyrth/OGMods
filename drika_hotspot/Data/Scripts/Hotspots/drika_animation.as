@@ -1165,7 +1165,7 @@ class DrikaAnimation : DrikaElement{
 			timeline_duration = duration;
 		}
 
-		if(ImGui_Begin("Animation Timeline", ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove)){
+		if(ImGui_Begin("Animation Timeline", ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoFocusOnAppearing)){
 			vec2 current_position = ImGui_GetWindowPos() + vec2(margin / 2.0);
 			float step_size = 10.0f;
 			if(timeline_duration > 50.0){
