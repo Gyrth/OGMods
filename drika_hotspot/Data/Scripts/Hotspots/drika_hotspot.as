@@ -568,6 +568,7 @@ bool show_grid = true;
 float left_over_drag_y = 0.0;
 bool dragging = false;
 bool open_palette = false;
+bool steal_focus = false;
 
 void DrawEditor(){
 	if(camera.GetFlags() == kPreviewCamera){
@@ -604,6 +605,11 @@ void DrawEditor(){
 
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
 		ImGui_SetNextWindowPos(vec2(100.0f, 100.0f), ImGuiSetCond_FirstUseEver);
+
+		if(steal_focus){
+			steal_focus = false;
+			ImGui_SetNextWindowFocus();
+		}
 		ImGui_Begin("Drika Hotspot" + (show_name?" - " + display_name:" " + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, ImGuiWindowFlags_MenuBar);
 		ImGui_PopStyleVar();
 
@@ -619,8 +625,9 @@ void DrawEditor(){
 
 			if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
 				GetCurrentElement().ApplySettings();
-				ImGui_CloseCurrentPopup();
 				Save();
+				steal_focus = true;
+				ImGui_CloseCurrentPopup();
 			}
 
 			ImGui_EndPopup();
@@ -711,8 +718,9 @@ void DrawEditor(){
 			ImGui_EndChild();
 
 			if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
-				ImGui_CloseCurrentPopup();
+				steal_focus = true;
 				SavePalette();
+				ImGui_CloseCurrentPopup();
 			}
 
 			ImGui_EndPopup();
