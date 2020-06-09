@@ -862,7 +862,7 @@ void DrawEditor(){
 			ImGui_EndMenuBar();
 		}
 
-		if(!ImGui_IsPopupOpen("Edit") && !ImGui_IsPopupOpen("Palette") && !ImGui_IsPopupOpen("Quick Launch")){
+		if(!ImGui_IsPopupOpen("Edit") && !ImGui_IsPopupOpen("Palette") && !ImGui_IsPopupOpen("Quick Launch") && ImGui_IsWindowFocused()){
 			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
 				if(current_line > 0){
 					multi_select = {current_line - 1};
