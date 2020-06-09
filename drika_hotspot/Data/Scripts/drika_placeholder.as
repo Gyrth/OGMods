@@ -123,11 +123,16 @@ class DrikaPlaceholder{
 
 			int placeholder_object_id = CreateObject(placeholder_path, true);
 			@placeholder_object = ReadObjectFromID(placeholder_object_id);
-			bounding_box = placeholder_object.GetBoundingBox();
+			SetBoundingBox(placeholder_object);
 			object.SetScale(bounding_box);
 
 			UpdatePlaceholderTransform();
 		}
+	}
+
+	void SetBoundingBox(Object@ obj){
+		vec3 new_bounding_box = obj.GetBoundingBox();
+		bounding_box = (new_bounding_box == vec3(0.0)?vec3(1.0):new_bounding_box);
 	}
 
 	void RemovePlaceholderObject(){
@@ -135,6 +140,7 @@ class DrikaPlaceholder{
 			QueueDeleteObjectID(placeholder_object.GetID());
 		}
 		@placeholder_object = null;
+		bounding_box = vec3(1.0);
 	}
 
 	void DrawEditing(){
@@ -145,9 +151,11 @@ class DrikaPlaceholder{
 	}
 
 	void UpdatePlaceholderTransform(){
-		placeholder_object.SetTranslation(object.GetTranslation());
-		placeholder_object.SetRotation(object.GetRotation());
-		placeholder_object.SetScale(vec3(object.GetScale().x / bounding_box.x, object.GetScale().y / bounding_box.y, object.GetScale().z / bounding_box.z));
+		if(@placeholder_object !is null){
+			placeholder_object.SetTranslation(object.GetTranslation());
+			placeholder_object.SetRotation(object.GetRotation());
+			placeholder_object.SetScale(vec3(object.GetScale().x / bounding_box.x, object.GetScale().y / bounding_box.y, object.GetScale().z / bounding_box.z));
+		}
 	}
 
 	void Remove(){

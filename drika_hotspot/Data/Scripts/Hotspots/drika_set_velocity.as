@@ -33,6 +33,7 @@ class DrikaSetVelocity : DrikaElement{
 
 	void PostInit(){
 		placeholder.Retrieve();
+		target_select.PostInit();
 	}
 
 	string GetDisplayString(){

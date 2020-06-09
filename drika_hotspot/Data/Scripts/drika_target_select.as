@@ -143,6 +143,12 @@ class DrikaTargetSelect{
 		}
 	}
 
+	void PostInit(){
+		if(identifier_type == reference){
+			@reference_element = GetReferenceElement(reference_string);
+		}
+	}
+
 	bool ConnectTo(Object @other){
 		if(other.GetID() == object_id){
 			return false;

@@ -41,6 +41,10 @@ class DrikaSetColor : DrikaElement{
 		return data;
 	}
 
+	void PostInit(){
+		target_select.PostInit();
+	}
+
 	void Delete(){
 		SetColor(true);
     }

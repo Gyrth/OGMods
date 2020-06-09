@@ -172,6 +172,7 @@ class DrikaAnimation : DrikaElement{
 
 	void PostInit(){
 		Reset();
+		target_select.PostInit();
 	}
 
 	JSONValue GetCheckpointData(){

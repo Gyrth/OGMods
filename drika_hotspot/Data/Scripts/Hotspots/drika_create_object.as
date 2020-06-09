@@ -86,7 +86,6 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void DrawSettings(){
-
 		float option_name_width = 100.0;
 
 		ImGui_Columns(2, false);
@@ -145,7 +144,10 @@ class DrikaCreateObject : DrikaElement{
 			spawned_object.SetRotatable(true);
 			spawned_object.SetTranslation(placeholder.GetTranslation());
 			spawned_object.SetRotation(placeholder.GetRotation());
-			spawned_object.SetScale(placeholder.GetScale());
+			// Since weapons and character can't be scaled, skip setting the scale on them.
+			if(spawned_object.GetType() == _env_object){
+				spawned_object.SetScale(placeholder.GetScale());
+			}
 			return true;
 		}else{
 			placeholder.Create();
@@ -155,6 +157,7 @@ class DrikaCreateObject : DrikaElement{
 
 	array<int> GetReferenceObjectIDs(){
 		if(!triggered){
+			placeholder.UpdatePlaceholderTransform();
 			return {placeholder.object.GetID()};
 		}else{
 			return spawned_object_ids;
