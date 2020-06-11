@@ -593,6 +593,8 @@ class DrikaTargetSelect{
 			}else if(params[identifier_type_tag].asInt() == batch){
 				identifier_type = identifier_types(batch);
 				batch_ids = GetJSONIntArray(params, identifier_tag, {});
+			}else if(params[identifier_type_tag].asInt() == cam){
+				identifier_type = identifier_types(cam);
 			}
 		}else{
 			//By default the id is used as identifier with -1 as the target id.
