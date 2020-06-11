@@ -344,7 +344,8 @@ class DrikaAnimation : DrikaElement{
 	bool Trigger(){
 		array<Object@> targets = target_select.GetTargetObjects();
 		// Don't do anything if the target object does not exist.
-		if(targets.size() == 0){
+		// But cintinue when animation target is the camera. Which does not return a target.
+		if(targets.size() == 0 && target_select.identifier_type != cam){
 			return false;
 		}
 
