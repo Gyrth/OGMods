@@ -158,6 +158,13 @@ class DrikaTargetSelect{
 			Disconnect(ReadObjectFromID(object_id));
 		}
 		object_id = other.GetID();
+		if(other.GetType() == _movement_object){
+			identifier_type = character;
+		}else if(other.GetType() == _item_object){
+			identifier_type = item;
+		}else{
+			identifier_type = id;
+		}
 		TargetChanged();
 		return false;
 	}
