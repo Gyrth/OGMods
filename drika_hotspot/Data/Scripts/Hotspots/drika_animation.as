@@ -63,6 +63,8 @@ class DrikaAnimation : DrikaElement{
 	quaternion new_rotation;
 	vec3 new_scale;
 	bool done = false;
+	ease_functions ease_function;
+	int current_ease_function;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -101,6 +103,8 @@ class DrikaAnimation : DrikaElement{
 		duration = GetJSONFloat(params, "duration", 5.0);
 		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
 		parallel_operation = GetJSONBool(params, "parallel_operation", false);
+		ease_function = ease_functions(GetJSONInt(params, "ease_function", linear));
+		current_ease_function = ease_function;
 
 		target_select.LoadIdentifier(params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option | camera_option | item_option;
@@ -119,6 +123,7 @@ class DrikaAnimation : DrikaElement{
 		data["duration"] = JSONValue(duration);
 		data["extra_yaw"] = JSONValue(extra_yaw);
 		data["parallel_operation"] = JSONValue(parallel_operation);
+		data["ease_function"] = JSONValue(ease_function);
 
 		data["key_ids"] = JSONValue(JSONarrayValue);
 		for(uint i = 0; i < key_ids.size(); i++){
@@ -284,19 +289,13 @@ class DrikaAnimation : DrikaElement{
 		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Interpolate Rotation");
+		ImGui_Text("Ease Function");
 		ImGui_NextColumn();
-		if(ImGui_Checkbox("###Interpolation Rotation", interpolate_rotation)){
-			SetCurrentTransform();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_Combo("##Ease Function", current_ease_function, ease_function_names, ease_function_names.size())){
+			ease_function = ease_functions(current_ease_function);
 		}
-		ImGui_NextColumn();
-
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Interpolate Translation");
-		ImGui_NextColumn();
-		if(ImGui_Checkbox("###Interpolation Translation", interpolate_translation)){
-			SetCurrentTransform();
-		}
+		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
@@ -644,58 +643,15 @@ class DrikaAnimation : DrikaElement{
 			if(@left_key != null && @right_key != null){
 				float whole_length = right_key.time - left_key.time;
 				float current_length = right_key.time - current_time;
-				alpha = (current_length / whole_length);
+				alpha = 1.0 - (current_length / whole_length);
 
-				if(!on_keyframe){
-					new_scale = mix(right_key.scale, left_key.scale, alpha);
-				}
+				alpha = ApplyEase(alpha);
 
-				if(interpolate_translation || interpolate_rotation){
-					if(@left2_key != null && @right2_key != null){
-						if(interpolate_translation){
-							new_translation = Bezier3(right_key.translation, left_key.translation, right2_key.translation, left2_key.translation, alpha);
-						}
-						if(interpolate_rotation){
-							previous_translation = Bezier3(right_key.translation, left_key.translation, right2_key.translation, left2_key.translation, max(0.0, alpha - time_step));
-						}
-					}else if(@left2_key != null){
-						if(interpolate_translation){
-							new_translation = Bezier2Left(right_key.translation, left_key.translation, left2_key.translation, alpha);
-						}
-						if(interpolate_rotation){
-							previous_translation = Bezier2Left(right_key.translation, left_key.translation, left2_key.translation, max(0.0, alpha - time_step));
-						}
-					}else if(@right2_key != null){
-						if(interpolate_translation){
-							new_translation = Bezier2Right(right_key.translation, left_key.translation, right2_key.translation, alpha);
-						}
-						if(interpolate_rotation){
-							previous_translation = Bezier2Right(right_key.translation, left_key.translation, right2_key.translation, max(0.0, alpha - time_step));
-						}
-					}
-				}
-
-				if(!interpolate_translation){
-					new_translation = mix(right_key.translation, left_key.translation, alpha);
-				}
-
-				if(!interpolate_rotation){
-					new_rotation = mix(right_key.rotation, left_key.rotation, alpha);
-					float extra_y_rot = (extra_yaw / 180.0f * PI);
-					new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
-				}else{
-					vec3 path_direction = normalize(previous_translation - new_translation);
-					vec3 up_direction = normalize(mix(right_key.rotation, left_key.rotation, alpha) * vec3(0.0f, 1.0f, 0.0f));
-
-					float yaw = atan2(-path_direction.x, -path_direction.z) + (extra_yaw / 180.0f * PI);
-					float pitch = asin(-path_direction.y);
-					vec3 right_roll_direction = normalize(right_key.rotation * vec3(1.0f, 0.0f, 0.0f));
-					vec3 left_roll_direction = normalize(left_key.rotation * vec3(1.0f, 0.0f, 0.0f));
-					vec3 mixed_roll_direction = mix(right_roll_direction, left_roll_direction, alpha);
-					float roll = asin(mixed_roll_direction.y);
-
-					new_rotation = quaternion(vec4(0,1,0,yaw)) * quaternion(vec4(1,0,0,pitch)) * quaternion(vec4(0,0,1,roll));
-				}
+				new_scale = mix(left_key.scale, right_key.scale, alpha);
+				new_rotation = mix(left_key.rotation, right_key.rotation, alpha);
+				float extra_y_rot = (extra_yaw / 180.0f * PI);
+				new_translation = mix(left_key.translation, right_key.translation, alpha);
+				new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
 			}else if(@right_key != null){
 				new_translation = right_key.translation;
 				new_rotation = right_key.rotation;
@@ -710,6 +666,72 @@ class DrikaAnimation : DrikaElement{
 			}
 		}
 		ApplyTransform(new_translation, new_rotation, new_scale);
+	}
+
+	float ApplyEase(float progress){
+		switch(ease_function){
+			case easeInSine:
+				return EaseInSine(progress);
+			case easeOutSine:
+				return EaseOutSine(progress);
+			case easeInOutSine:
+				return EaseInOutSine(progress);
+			case easeInQuad:
+				return EaseInQuad(progress);
+			case easeOutQuad:
+				return EaseOutQuad(progress);
+			case easeInOutQuad:
+				return EaseInOutQuad(progress);
+			case easeInCubic:
+				return EaseInCubic(progress);
+			case easeOutCubic:
+				return EaseOutCubic(progress);
+			case easeInOutCubic:
+				return EaseInOutCubic(progress);
+			case easeInQuart:
+				return EaseInQuart(progress);
+			case easeOutQuart:
+				return EaseOutQuart(progress);
+			case easeInOutQuart:
+				return EaseInOutQuart(progress);
+			case easeInQuint:
+				return EaseInQuint(progress);
+			case easeOutQuint:
+				return EaseOutQuint(progress);
+			case easeInOutQuint:
+				return EaseInOutQuint(progress);
+			case easeInExpo:
+				return EaseInExpo(progress);
+			case easeOutExpo:
+				return EaseOutExpo(progress);
+			case easeInOutExpo:
+				return EaseInOutExpo(progress);
+			case easeInCirc:
+				return EaseInCirc(progress);
+			case easeOutCirc:
+				return EaseOutCirc(progress);
+			case easeInOutCirc:
+				return EaseInOutCirc(progress);
+			case easeInBack:
+				return EaseInBack(progress);
+			case easeOutBack:
+				return EaseOutBack(progress);
+			case easeInOutBack:
+				return EaseInOutBack(progress);
+			case easeInElastic:
+				return EaseInElastic(progress);
+			case easeOutElastic:
+				return EaseOutElastic(progress);
+			case easeInOutElastic:
+				return EaseInOutElastic(progress);
+			case easeInBounce:
+				return EaseInBounce(progress);
+			case easeOutBounce:
+				return EaseOutBounce(progress);
+			case easeInOutBounce:
+				return EaseInOutBounce(progress);
+		}
+		return progress;
 	}
 
 	vec3 Bezier3(vec3 right_position, vec3 left_position, vec3 second_right_position, vec3 second_left_position, float alpha){
