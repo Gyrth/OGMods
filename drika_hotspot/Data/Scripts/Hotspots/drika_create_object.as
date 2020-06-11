@@ -145,7 +145,7 @@ class DrikaCreateObject : DrikaElement{
 			spawned_object.SetTranslation(placeholder.GetTranslation());
 			spawned_object.SetRotation(placeholder.GetRotation());
 			// Since weapons and character can't be scaled, skip setting the scale on them.
-			if(spawned_object.GetType() == _env_object){
+			if(spawned_object.GetType() == _env_object || spawned_object.GetType() == _hotspot_object){
 				spawned_object.SetScale(placeholder.GetScale());
 			}
 			return true;
