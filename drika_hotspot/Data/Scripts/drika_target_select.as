@@ -4,7 +4,8 @@ enum target_options {	id_option = (1<<0),
 						name_option = (1<<3),
 						character_option = (1<<4),
 						item_option = (1<<5),
-						batch_option = (1<<6)
+						batch_option = (1<<6),
+						camera_option = (1<<6)
 					};
 
 class BatchObject{
@@ -270,6 +271,10 @@ class DrikaTargetSelect{
 			identifier_choices.insertLast("Batch");
 		}
 
+		if((target_option & camera_option) != 0){
+			identifier_choices.insertLast("Camera");
+		}
+
 		int current_identifier_type = -1;
 
 		for(uint i = 0; i < identifier_choices.size(); i++){
@@ -279,7 +284,8 @@ class DrikaTargetSelect{
 				identifier_type == character && identifier_choices[i] == "Character"||
 				identifier_type == item && identifier_choices[i] == "Item"||
 				identifier_type == batch && identifier_choices[i] == "Batch"||
-				identifier_type == name && identifier_choices[i] == "Name"){
+				identifier_type == name && identifier_choices[i] == "Name"||
+				identifier_type == cam && identifier_choices[i] == "Camera"){
 				current_identifier_type = i;
 				break;
 			}
@@ -314,6 +320,8 @@ class DrikaTargetSelect{
 				identifier_type = item;
 			}else if(identifier_choices[current_identifier_type] == "Batch"){
 				identifier_type = batch;
+			}else if(identifier_choices[current_identifier_type] == "Camera"){
+				identifier_type = cam;
 			}
 			target_changed = true;
 		}
@@ -759,6 +767,8 @@ class DrikaTargetSelect{
 			}
 		}else if (identifier_type == batch){
 			return "batch";
+		}else if (identifier_type == cam){
+			return "Camera";
 		}
 		return "NA";
 	}
@@ -771,8 +781,6 @@ class DrikaTargetSelect{
 	}
 
 	void SetSelected(bool selected){
-		Log(warning, "Get reference object " + reference_string);
-
 		array<Object@> target_objects = GetTargetObjects();
 		for(uint i = 0 ; i < target_objects.size(); i++){
 			target_objects[i].SetSelected(selected);

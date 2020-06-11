@@ -88,7 +88,8 @@ enum identifier_types {	id = 0,
 						name = 3,
 						character = 4,
 						item = 5,
-						batch = 6
+						batch = 6,
+						cam = 7
 					};
 
 enum param_types { 	string_param = 0,

@@ -36,7 +36,6 @@ class DrikaAnimation : DrikaElement{
 	animation_methods animation_method;
 	bool interpolate_rotation;
 	bool interpolate_translation;
-	bool animate_camera;
 	bool animate_scale;
 	float duration;
 	float extra_yaw;
@@ -98,14 +97,13 @@ class DrikaAnimation : DrikaElement{
 		current_animation_method  = animation_method;
 		interpolate_rotation = GetJSONBool(params, "interpolate_rotation", false);
 		interpolate_translation = GetJSONBool(params, "interpolate_translation", false);
-		animate_camera = GetJSONBool(params, "animate_camera", false);
 		animate_scale = GetJSONBool(params, "animate_scale", false);
 		duration = GetJSONFloat(params, "duration", 5.0);
 		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
 		parallel_operation = GetJSONBool(params, "parallel_operation", false);
 
 		target_select.LoadIdentifier(params);
-		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option | camera_option | item_option;
 
 		has_settings = true;
 	}
@@ -117,7 +115,6 @@ class DrikaAnimation : DrikaElement{
 		data["animation_method"] = JSONValue(animation_method);
 		data["interpolate_rotation"] = JSONValue(interpolate_rotation);
 		data["interpolate_translation"] = JSONValue(interpolate_translation);
-		data["animate_camera"] = JSONValue(animate_camera);
 		data["animate_scale"] = JSONValue(animate_scale);
 		data["duration"] = JSONValue(duration);
 		data["extra_yaw"] = JSONValue(extra_yaw);
@@ -204,11 +201,7 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		if(animate_camera){
-			return "Animation Camera";
-		}else{
-			return "Animation " + target_select.GetTargetDisplayText();
-		}
+		return "Animation " + target_select.GetTargetDisplayText();
 	}
 
 	void StartSettings(){
@@ -307,17 +300,6 @@ class DrikaAnimation : DrikaElement{
 		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Animate Camera");
-		ImGui_NextColumn();
-		if(ImGui_Checkbox("###Animate Camera", animate_camera)){
-			SetCurrentTransform();
-			if(animate_camera){
-				target_select.ClearTarget();
-			}
-		}
-		ImGui_NextColumn();
-
-		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Animate Scale");
 		ImGui_NextColumn();
 		if(ImGui_Checkbox("###Animate Scale", animate_scale)){
@@ -359,20 +341,16 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
-	void TargetChanged(){
-		animate_camera = false;
-	}
-
 	bool Trigger(){
 		array<Object@> targets = target_select.GetTargetObjects();
-		// Don't do anything if the target object does not exist and the animation is not targeting the camera.
-		if(targets.size() == 0 && !animate_camera){
+		// Don't do anything if the target object does not exist.
+		if(targets.size() == 0){
 			return false;
 		}
 
 		if(!animation_started){
 			animation_started = true;
-			if(animate_camera){
+			if(target_select.identifier_type == cam){
 				level.SendMessage("animating_camera true " + hotspot.GetID());
 			}
 		}
@@ -386,7 +364,7 @@ class DrikaAnimation : DrikaElement{
 		UpdateAnimation();
 		if(animation_finished){
 			done = true;
-			if(animate_camera){
+			if(target_select.identifier_type == cam){
 				level.SendMessage("animating_camera false " + hotspot.GetID());
 			}
 			return true;
@@ -396,21 +374,18 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void SkipAnimation(){
-		//When the animation is skipped during dialogue the camera animation is ignored.
-		if(!animate_camera){
-			if(animation_type == forward){
-				animation_timer = duration;
-			}else if(animation_type == backward){
-				animation_timer = 0.0;
-			}else if(animation_type == looping_forwards){
-				animation_timer = duration;
-			}else if(animation_type == looping_backwards){
-				animation_timer = 0.0;
-			}else if(animation_type == looping_forwards_and_backwards){
-				animation_timer = duration;
-			}
-			UpdateAnimation();
+		if(animation_type == forward){
+			animation_timer = duration;
+		}else if(animation_type == backward){
+			animation_timer = 0.0;
+		}else if(animation_type == looping_forwards){
+			animation_timer = duration;
+		}else if(animation_type == looping_backwards){
+			animation_timer = 0.0;
+		}else if(animation_type == looping_forwards_and_backwards){
+			animation_timer = duration;
 		}
+		UpdateAnimation();
 	}
 
 	void UpdateAnimationKeys(){
@@ -511,7 +486,7 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void CameraPlaceholderCheck(){
-		if(animate_camera){
+		if(target_select.identifier_type == cam){
 			if(!placeholder.Exists()){
 				placeholder.path = "Data/Objects/placeholder/camera_placeholder.xml";
 				placeholder.Create();
@@ -530,7 +505,7 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void ApplyTransform(vec3 translation, quaternion rotation, vec3 scale){
-		if(animate_camera){
+		if(target_select.identifier_type == cam){
 			// Set camera euler angles from rotation matrix
 			vec3 front = Mult(rotation, vec3(0,0,1));
 			float y_rot = atan2(front.x, front.z)*180.0f/PI;
@@ -945,7 +920,7 @@ class DrikaAnimation : DrikaElement{
 	void DrawEditing(){
 		CameraPlaceholderCheck();
 		if(animation_method == timeline_method){
-			if(animate_camera){
+			if(target_select.identifier_type == cam){
 				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
 			DrawTimeline();
@@ -971,7 +946,7 @@ class DrikaAnimation : DrikaElement{
 					return;
 				}
 			}
-			if(animate_camera){
+			if(target_select.identifier_type == cam){
 				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 
 				for(uint i = 0; i < key_ids.size(); i++){
@@ -987,7 +962,8 @@ class DrikaAnimation : DrikaElement{
 
 			}
 		}
-		if(!animate_camera){
+
+		if(target_select.identifier_type != cam){
 			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
 				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
@@ -1064,7 +1040,7 @@ class DrikaAnimation : DrikaElement{
 				current_key.SetSelectable(false);
 			}
 		}
-		if(animate_camera){
+		if(target_select.identifier_type == cam){
 			placeholder.Remove();
 		}
 		DrikaElement::EditDone();
@@ -1104,7 +1080,7 @@ class DrikaAnimation : DrikaElement{
 	void InsertAnimationKey(){
 		AnimationKey new_key;
 		Object@ target;
-		if(animate_camera){
+		if(target_select.identifier_type == cam){
 			@target = placeholder.object;
 		}else{
 			array<Object@> targets = target_select.GetTargetObjects();
@@ -1238,7 +1214,7 @@ class DrikaAnimation : DrikaElement{
 		done = false;
 		animation_finished = false;
 
-		if(animate_camera){
+		if(target_select.identifier_type == cam){
 			level.SendMessage("animating_camera false " + hotspot.GetID());
 		}
 
