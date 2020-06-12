@@ -1,3 +1,5 @@
+#include "drika_shared.as";
+
 enum animation_types {
 						looping_forwards = 0,
 						looping_backwards = 1,
@@ -298,11 +300,9 @@ class DrikaAnimation : DrikaElement{
 				if(ImGui_Selectable(ease_function_names[i], current_ease_function == int(i))){
 					current_ease_function = i;
 					ease_function = ease_functions(current_ease_function);
-
-					/* ImDrawList_AddLine(current_position + ((i%10==0?vec2():vec2(0.0, 20.0))), current_position + vec2(0, timeline_height), ImGui_GetColorU32(vec4(1.0, 1.0, 1.0, 1.0)), 1.0f); */
-
 				}
-				if(ImGui_IsItemHovered()){
+
+				/* if(ImGui_IsItemHovered()){
 					ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
 					ImGui_BeginTooltip();
 					vec2 tooltip_size = vec2(150.0, 150.0);
@@ -347,7 +347,7 @@ class DrikaAnimation : DrikaElement{
 
 					ImGui_EndTooltip();
 					ImGui_PopStyleColor();
-				}
+				} */
 			}
 			ImGui_EndCombo();
 		}
