@@ -34,8 +34,6 @@ class DrikaAnimation : DrikaElement{
 	int current_animation_method;
 	duration_methods duration_method;
 	animation_methods animation_method;
-	bool interpolate_rotation;
-	bool interpolate_translation;
 	bool animate_scale;
 	float duration;
 	float extra_yaw;
@@ -97,8 +95,6 @@ class DrikaAnimation : DrikaElement{
 		current_duration_method = duration_method;
 		animation_method = animation_methods(GetJSONInt(params, "animation_method", 0));
 		current_animation_method  = animation_method;
-		interpolate_rotation = GetJSONBool(params, "interpolate_rotation", false);
-		interpolate_translation = GetJSONBool(params, "interpolate_translation", false);
 		animate_scale = GetJSONBool(params, "animate_scale", false);
 		duration = GetJSONFloat(params, "duration", 5.0);
 		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
@@ -117,8 +113,6 @@ class DrikaAnimation : DrikaElement{
 		data["animation_type"] = JSONValue(animation_type);
 		data["duration_method"] = JSONValue(duration_method);
 		data["animation_method"] = JSONValue(animation_method);
-		data["interpolate_rotation"] = JSONValue(interpolate_rotation);
-		data["interpolate_translation"] = JSONValue(interpolate_translation);
 		data["animate_scale"] = JSONValue(animate_scale);
 		data["duration"] = JSONValue(duration);
 		data["extra_yaw"] = JSONValue(extra_yaw);
@@ -413,7 +407,6 @@ class DrikaAnimation : DrikaElement{
 			TimelineUpdateAnimation();
 		}else if(animation_method == placeholder_method){
 			UpdateAnimationKeys();
-			animation_timer += time_step;
 			PlaceholderUpdateAnimation();
 		}
 		SetCurrentTransform();
@@ -425,64 +418,63 @@ class DrikaAnimation : DrikaElement{
 			whole_distance += distance(ReadObjectFromID(key_ids[i - 1]).GetTranslation(), ReadObjectFromID(key_ids[i]).GetTranslation());
 		}
 		//Add the distance between the fist and last node as well.
-		whole_distance += distance(ReadObjectFromID(key_ids[0]).GetTranslation(), ReadObjectFromID(key_ids[(key_ids.size() - 1)]).GetTranslation());
+		/* whole_distance += distance(ReadObjectFromID(key_ids[0]).GetTranslation(), ReadObjectFromID(key_ids[(key_ids.size() - 1)]).GetTranslation()); */
 		return whole_distance;
 	}
 
 	void NextAnimationKey(){
 		if(animation_type == looping_forwards){
-			if(key_index + 2 >= int(key_ids.size())){
+			if(key_index + 2 == int(key_ids.size())){
 				key_index = 0;
+				animation_timer = 0.0;
 			}else{
 				key_index += 1;
 			}
-			@current_key = ReadObjectFromID(key_ids[key_index]);
-			@next_key = ReadObjectFromID(key_ids[key_index + 1]);
+			alpha = 0.0;
 		}else if(animation_type == looping_backwards){
-			if(key_index - 2 < 0){
-				key_index = key_ids.size() - 1;
+			if(key_index - 1 == -1){
+				key_index = key_ids.size() - 2;
+				animation_timer = duration;
 			}else{
 				key_index -= 1;
 			}
-			@current_key = ReadObjectFromID(key_ids[key_index]);
-			@next_key = ReadObjectFromID(key_ids[key_index - 1]);
+			alpha = 1.0;
 		}else if(animation_type == looping_forwards_and_backwards){
 			if(loop_direction == 1){
-				if(key_index + 2 >= int(key_ids.size())){
+				if(key_index + 2 == int(key_ids.size())){
 					loop_direction = -1;
-					key_index += 1;
+					alpha = 1.0;
 				}else{
 					key_index += 1;
+					alpha = 0.0;
 				}
 			}else{
-				if(key_index - 2 < 0){
+				if(key_index - 1 == -1){
 					loop_direction = 1;
-					key_index -= 1;
+					alpha = 0.0;
 				}else{
 					key_index -= 1;
+					alpha = 1.0;
 				}
-			}
-
-			if(loop_direction == 1){
-				@current_key = ReadObjectFromID(key_ids[key_index]);
-				@next_key = ReadObjectFromID(key_ids[key_index + 1]);
-			}else{
-				@current_key = ReadObjectFromID(key_ids[key_index]);
-				@next_key = ReadObjectFromID(key_ids[key_index - 1]);
 			}
 		}else if(animation_type == forward){
-			if(key_index + 2 >= int(key_ids.size())){
+			if(key_index + 2 == int(key_ids.size())){
 				animation_finished = true;
 			}else{
 				key_index += 1;
+				alpha = 0.0;
 			}
 		}else if(animation_type == backward){
-			if(key_index - 2 < 0){
+			if(key_index - 1 == -1){
 				animation_finished = true;
 			}else{
 				key_index -= 1;
+				alpha = 1.0;
 			}
 		}
+
+		@current_key = ReadObjectFromID(key_ids[key_index]);
+		@next_key = ReadObjectFromID(key_ids[key_index + 1]);
 	}
 
 	void CameraPlaceholderCheck(){
@@ -734,89 +726,6 @@ class DrikaAnimation : DrikaElement{
 		return progress;
 	}
 
-	vec3 Bezier3(vec3 right_position, vec3 left_position, vec3 second_right_position, vec3 second_left_position, float alpha){
-		float target_distance = distance(left_position, right_position) / 2.0f;
-
-		vec3 left_direction = normalize(right_position - second_left_position);
-		vec3 left_target = left_position + (left_direction * target_distance);
-
-		vec3 right_direction = normalize(left_position - second_right_position);
-		vec3 right_target = right_position + (right_direction * target_distance);
-
-		vec3 leg_1_position = mix(left_target, left_position, alpha);
-		vec3 leg_2_position = mix(right_target, left_target, alpha);
-		vec3 leg_3_position = mix(right_position, right_target, alpha);
-
-		vec3 leg_1_2_average = mix(leg_2_position, leg_1_position, alpha);
-		vec3 leg_2_3_average = mix(leg_3_position, leg_2_position, alpha);
-
-		if(draw_debug_lines){
-			DebugDrawWireBox(right_position, vec3(0.5), vec3(1.0), _delete_on_update);
-			DebugDrawWireBox(left_position, vec3(0.5), vec3(1.0), _delete_on_update);
-			DebugDrawWireBox(second_right_position, vec3(0.5), vec3(1.0), _delete_on_update);
-			DebugDrawWireBox(second_left_position, vec3(0.5), vec3(1.0), _delete_on_update);
-
-			DebugDrawLine(left_position, left_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-			DebugDrawLine(right_position, right_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-			DebugDrawWireBox(leg_1_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
-			DebugDrawWireBox(leg_2_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
-			DebugDrawLine(leg_1_position, leg_2_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
-			DebugDrawWireBox(leg_3_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
-			DebugDrawLine(leg_2_position, leg_3_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
-			DebugDrawLine(leg_1_2_average, leg_2_3_average, vec3(0.0, 1.0, 1.0), _delete_on_update);
-		}
-
-		return mix(leg_2_3_average, leg_1_2_average, alpha);
-	}
-
-	vec3 Bezier2Right(vec3 right_position, vec3 left_position, vec3 second_right_position, float alpha){
-		float target_distance = distance(left_position, right_position) / 2.0f;
-
-		vec3 right_direction = normalize(left_position - second_right_position);
-		vec3 right_target = right_position + (right_direction * target_distance);
-
-		vec3 leg_1_position = mix(right_target, left_position, alpha);
-		vec3 leg_2_position = mix(right_position, right_target, alpha);
-
-		if(draw_debug_lines){
-			DebugDrawWireBox(right_position, vec3(0.5), vec3(1.0), _delete_on_update);
-			DebugDrawWireBox(left_position, vec3(0.5), vec3(1.0), _delete_on_update);
-
-			DebugDrawWireBox(second_right_position, vec3(0.5), vec3(1.0), _delete_on_update);
-			DebugDrawLine(left_position, right_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-			DebugDrawLine(right_position, right_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-			DebugDrawWireBox(leg_1_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
-			DebugDrawWireBox(leg_2_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
-			DebugDrawLine(leg_1_position, leg_2_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
-		}
-
-		return mix(leg_2_position, leg_1_position, alpha);
-	}
-
-	vec3 Bezier2Left(vec3 right_position, vec3 left_position, vec3 second_left_position, float alpha){
-		float target_distance = distance(left_position, right_position) / 2.0f;
-
-		vec3 left_direction = normalize(right_position - second_left_position);
-		vec3 left_target = left_position + (left_direction * target_distance);
-
-		vec3 leg_1_position = mix(left_target, left_position, alpha);
-		vec3 leg_2_position = mix(right_position, left_target, alpha);
-
-		if(draw_debug_lines){
-			DebugDrawWireBox(right_position, vec3(0.5), vec3(1.0), _delete_on_update);
-			DebugDrawWireBox(left_position, vec3(0.5), vec3(1.0), _delete_on_update);
-
-			DebugDrawWireBox(second_left_position, vec3(0.5), vec3(1.0), _delete_on_update);
-			DebugDrawLine(right_position, left_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-			DebugDrawLine(left_position, left_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-			DebugDrawWireBox(leg_1_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
-			DebugDrawWireBox(leg_2_position, vec3(0.5), vec3(1.0, 0.0, 0.0), _delete_on_update);
-			DebugDrawLine(leg_1_position, leg_2_position, vec3(0.0, 0.0, 1.0), _delete_on_update);
-		}
-
-		return mix(leg_2_position, leg_1_position, alpha);
-	}
-
 	AnimationKey@ GetClosestAnimationFrame(float current_time, int direction, array<AnimationKey@> exceptions){
 		AnimationKey@ key = null;
 		for(uint i = 0; i < key_data.size(); i++){
@@ -839,9 +748,16 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void PlaceholderUpdateAnimation(){
+
+		bool going_forward = false;
+		if(animation_type == forward || animation_type == looping_forwards || (animation_type == looping_forwards_and_backwards && loop_direction == 1)){
+			going_forward = true;
+		}
+
+		animation_timer += going_forward?time_step:time_step*-1.0;
+
 		if(duration_method == constant_speed){
 			//The animation will have a constant speed.
-			bool skip_node = false;
 			float whole_distance = CalculateWholeDistance();
 			//When the keys are all at the same location no animation can be performed.
 			if(whole_distance == 0.0f){
@@ -850,72 +766,69 @@ class DrikaAnimation : DrikaElement{
 				float key_distance = distance(next_key.GetTranslation(), current_key.GetTranslation());
 				//If the current and next keys are at the same location then just go to the next key.
 				if(key_distance == 0.0f){
-					animation_timer = 0.0f;
 					NextAnimationKey();
 				}else{
+					float duration_already_done = 0.0;
+
+					for(int i = 0; i < key_index; i++){
+						Object@ key_a = ReadObjectFromID(key_ids[i]);
+						Object@ key_b = ReadObjectFromID(key_ids[i + 1]);
+						float dist = distance(key_a.GetTranslation(), key_b.GetTranslation());
+						duration_already_done += duration * (dist / whole_distance);
+					}
+
 					//To make sure the time isn't 0, or else it will devide by zero.
 					float duration_between_keys = max(0.0001f, duration * (key_distance / whole_distance));
-					alpha = animation_timer / duration_between_keys;
-					if(animation_timer > duration_between_keys){
-						animation_timer = 0.0f;
-						NextAnimationKey();
-						return;
-					}
+
+					float current_length = animation_timer - duration_already_done;
+					alpha = current_length / duration_between_keys;
 				}
 			}
 		}else if(duration_method == divide_between_keys){
 			//The animation will devide the time between the animation keys.
-			float duration_between_keys = max(0.0001, duration / key_ids.size());
-			alpha = animation_timer / duration_between_keys;
-			float key_distance = distance(next_key.GetTranslation(), current_key.GetTranslation());
-			if(animation_timer > duration_between_keys){
-				animation_timer = 0.0f;
+			float duration_between_keys = max(0.0001, duration / (key_ids.size() - 1));
+
+			float current_length = (key_index * duration_between_keys) - animation_timer;
+			alpha = -1.0 * (current_length / duration_between_keys);
+		}
+
+		// Clamp the alpha between 0 - 1.
+		alpha = max(0.0, min(1.0, alpha));
+
+		// When the timer is going forward.
+		if(going_forward){
+			// When the timer is over the threshold go to the next keypoint.
+			if(alpha >= 1.0){
 				NextAnimationKey();
-				return;
 			}
 		}else{
-			Log(error, "Unknown animation method! " + duration_method);
+			if(alpha <= 0.0){
+				NextAnimationKey();
+			}
 		}
 	}
 
 	void PlaceholderSetTransform(){
-		quaternion new_rotation;
-		vec3 new_position;
+		alpha = ApplyEase(alpha);
 
-		array<Object@> targets = target_select.GetTargetObjects();
-
-		if(interpolate_translation){
-			float node_distance = distance(next_key.GetTranslation(), current_key.GetTranslation());
-			//Current time, start value, change in value, duration
-			float offset_alpha = sine_wave(alpha, 0.0f, 1.0f, 1.0f);
-			vec3 previous_direction = normalize(current_key.GetRotation() * vec3(0.0f, 0.0f, 1.0f) * loop_direction) * node_distance * alpha;
-			vec3 current_direction = normalize(next_key.GetRotation() * vec3(0.0f, 0.0f, 1.0f) * loop_direction) * (node_distance * (1.0f - alpha));
-			new_position = mix(current_key.GetTranslation() + previous_direction, next_key.GetTranslation() + current_direction, offset_alpha);
+		if(alpha == 0.0){
+			new_translation = current_key.GetTranslation();
+			new_rotation = current_key.GetRotation();
+			new_scale = current_key.GetScale();
+		}else if(alpha == 1.0){
+			new_translation = next_key.GetTranslation();
+			new_rotation = next_key.GetRotation();
+			new_scale = next_key.GetScale();
 		}else{
-			new_position = mix(current_key.GetTranslation(), next_key.GetTranslation(), alpha);
-		}
-
-		if(interpolate_rotation && targets.size() > 0){
-			vec3 path_direction = normalize(new_position - targets[0].GetTranslation());
-			vec3 up_direction = normalize(mix(current_key.GetRotation(), next_key.GetRotation(), alpha) * vec3(0.0f, 1.0f, 0.0f));
-
-			float rotation_y = atan2(-path_direction.x, -path_direction.z) + (extra_yaw / 180.0f * PI);
-			float rotation_x = asin(-path_direction.y);
-
-			vec3 previous_direction = normalize(current_key.GetRotation() * vec3(1.0f, 0.0f, 0.0f));
-			vec3 current_direction = normalize(next_key.GetRotation() * vec3(1.0f, 0.0f, 0.0f));
-			vec3 roll = mix(previous_direction, current_direction, alpha);
-			float rotation_z = asin(roll.y);
-			new_rotation = quaternion(vec4(0,1,0,rotation_y)) * quaternion(vec4(1,0,0,rotation_x)) * quaternion(vec4(0,0,1,rotation_z));
-		}else{
+			new_translation = mix(current_key.GetTranslation(), next_key.GetTranslation(), alpha);
 			new_rotation = mix(current_key.GetRotation(), next_key.GetRotation(), alpha);
-			float extra_y_rot = (extra_yaw / 180.0f * PI);
-			new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
+			new_scale = mix(current_key.GetScale(), next_key.GetScale(), alpha);
 		}
 
-		vec3 new_scale = mix(current_key.GetScale(), next_key.GetScale(), alpha);
+		float extra_y_rot = (extra_yaw / 180.0f * PI);
+		new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
 
-		ApplyTransform(new_position, new_rotation, new_scale);
+		ApplyTransform(new_translation, new_rotation, new_scale);
 	}
 
 	//Current time, start value, change in value, duration
@@ -1220,14 +1133,19 @@ class DrikaAnimation : DrikaElement{
 	void Reset(){
 		if(animation_type == forward){
 			animation_timer = 0.0;
+			alpha = 0.0;
 		}else if(animation_type == backward){
 			animation_timer = duration;
+			alpha = 1.0;
 		}else if(animation_type == looping_forwards){
 			animation_timer = 0.0;
+			alpha = 0.0;
 		}else if(animation_type == looping_backwards){
 			animation_timer = duration;
+			alpha = 1.0;
 		}else if(animation_type == looping_forwards_and_backwards){
 			animation_timer = 0.0;
+			alpha = 0.0;
 		}
 
 		previous_translation = vec3();
@@ -1248,9 +1166,9 @@ class DrikaAnimation : DrikaElement{
 				@current_key = ReadObjectFromID(key_ids[key_index]);
 				@next_key = ReadObjectFromID(key_ids[key_index + 1]);
 			}else{
-				key_index = key_ids.size() - 1;
+				key_index = key_ids.size() - 2;
 				@current_key = ReadObjectFromID(key_ids[key_index]);
-				@next_key = ReadObjectFromID(key_ids[key_index - 1]);
+				@next_key = ReadObjectFromID(key_ids[key_index + 1]);
 			}
 		}
 		SetCurrentTransform();
