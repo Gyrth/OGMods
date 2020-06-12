@@ -572,29 +572,24 @@ class DrikaTargetSelect{
 
 	void LoadIdentifier(JSONValue params){
 		if(params.isMember(identifier_type_tag)){
-			if(params[identifier_type_tag].asInt() == id){
-				identifier_type = identifier_types(id);
+			identifier_type = identifier_types(params[identifier_type_tag].asInt());
+
+			if(identifier_type == id){
 				object_id = params[identifier_tag].asInt();
-			}else if(params[identifier_type_tag].asInt() == reference){
-				identifier_type = identifier_types(reference);
+			}else if(identifier_type == reference){
 				reference_string = params[identifier_tag].asString();
-			}else if(params[identifier_type_tag].asInt() == team){
-				identifier_type = identifier_types(team);
+			}else if(identifier_type == team){
 				character_team = params[identifier_tag].asString();
-			}else if(params[identifier_type_tag].asInt() == name){
-				identifier_type = identifier_types(name);
+			}else if(identifier_type == name){
 				object_name = params[identifier_tag].asString();
-			}else if(params[identifier_type_tag].asInt() == character){
-				identifier_type = identifier_types(character);
+			}else if(identifier_type == character){
 				object_id = params[identifier_tag].asInt();
-			}else if(params[identifier_type_tag].asInt() == item){
-				identifier_type = identifier_types(item);
+			}else if(identifier_type == item){
 				object_id = params[identifier_tag].asInt();
-			}else if(params[identifier_type_tag].asInt() == batch){
-				identifier_type = identifier_types(batch);
+			}else if(identifier_type == batch){
 				batch_ids = GetJSONIntArray(params, identifier_tag, {});
-			}else if(params[identifier_type_tag].asInt() == cam){
-				identifier_type = identifier_types(cam);
+			}else if(identifier_type == cam){
+
 			}
 		}else{
 			//By default the id is used as identifier with -1 as the target id.
