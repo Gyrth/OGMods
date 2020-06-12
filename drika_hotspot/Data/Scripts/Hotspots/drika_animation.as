@@ -105,6 +105,12 @@ class DrikaAnimation : DrikaElement{
 		target_select.LoadIdentifier(params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option | camera_option | item_option;
 
+		// TODO Used for backwards compatibility with older saves. Remove in the future.
+		bool animate_camera = GetJSONBool(params, "animate_camera", false);
+		if(animate_camera){
+			target_select.identifier_type = cam;
+		}
+
 		has_settings = true;
 	}
 
