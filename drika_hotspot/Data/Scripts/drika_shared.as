@@ -259,3 +259,69 @@ float EaseInOutBounce(float progress){
 	  ? (1 - EaseOutBounce(1 - 2 * progress)) / 2
 	  : (1 + EaseOutBounce(2 * progress - 1)) / 2;
 }
+
+float ApplyEase(float progress, ease_functions ease){
+	switch(ease){
+		case easeInSine:
+			return EaseInSine(progress);
+		case easeOutSine:
+			return EaseOutSine(progress);
+		case easeInOutSine:
+			return EaseInOutSine(progress);
+		case easeInQuad:
+			return EaseInQuad(progress);
+		case easeOutQuad:
+			return EaseOutQuad(progress);
+		case easeInOutQuad:
+			return EaseInOutQuad(progress);
+		case easeInCubic:
+			return EaseInCubic(progress);
+		case easeOutCubic:
+			return EaseOutCubic(progress);
+		case easeInOutCubic:
+			return EaseInOutCubic(progress);
+		case easeInQuart:
+			return EaseInQuart(progress);
+		case easeOutQuart:
+			return EaseOutQuart(progress);
+		case easeInOutQuart:
+			return EaseInOutQuart(progress);
+		case easeInQuint:
+			return EaseInQuint(progress);
+		case easeOutQuint:
+			return EaseOutQuint(progress);
+		case easeInOutQuint:
+			return EaseInOutQuint(progress);
+		case easeInExpo:
+			return EaseInExpo(progress);
+		case easeOutExpo:
+			return EaseOutExpo(progress);
+		case easeInOutExpo:
+			return EaseInOutExpo(progress);
+		case easeInCirc:
+			return EaseInCirc(progress);
+		case easeOutCirc:
+			return EaseOutCirc(progress);
+		case easeInOutCirc:
+			return EaseInOutCirc(progress);
+		case easeInBack:
+			return EaseInBack(progress);
+		case easeOutBack:
+			return EaseOutBack(progress);
+		case easeInOutBack:
+			return EaseInOutBack(progress);
+		case easeInElastic:
+			return EaseInElastic(progress);
+		case easeOutElastic:
+			return EaseOutElastic(progress);
+		case easeInOutElastic:
+			return EaseInOutElastic(progress);
+		case easeInBounce:
+			return EaseInBounce(progress);
+		case easeOutBounce:
+			return EaseOutBounce(progress);
+		case easeInOutBounce:
+			return EaseInOutBounce(progress);
+	}
+	return progress;
+}
