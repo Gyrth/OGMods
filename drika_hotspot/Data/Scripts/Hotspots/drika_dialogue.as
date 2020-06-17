@@ -18,6 +18,12 @@ enum dialogue_functions	{
 							choice = 14
 						}
 
+enum camera_transitions	{
+							no_transition = 0,
+							move_transition = 1,
+							fade_transition = 2
+						}
+
 class DrikaDialogue : DrikaElement{
 
 	dialogue_functions dialogue_function;
@@ -93,6 +99,11 @@ class DrikaDialogue : DrikaElement{
 	bool enable_look_at_target;
 	bool enable_move_with_target;
 	DrikaTargetSelect track_target(this, "track_target");
+	camera_transitions camera_transition;
+	int current_camera_transition;
+	vec3 camera_translation_from;
+	vec3 camera_rotation_from;
+	float camera_transition_timer = 0.0;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -110,6 +121,12 @@ class DrikaDialogue : DrikaElement{
 												"End",
 												"Set Actor Dialogue Control",
 												"Choice"
+											};
+
+	array<string> camera_transition_names =	{
+												"None",
+												"Move Transition",
+												"Fade Transition"
 											};
 
 	DrikaDialogue(JSONValue params = JSONValue()){
@@ -140,6 +157,8 @@ class DrikaDialogue : DrikaElement{
 		target_camera_zoom = GetJSONFloat(params, "target_camera_zoom", 90.0);
 		target_fade_to_black = GetJSONFloat(params, "target_fade_to_black", 1.0);
 		fade_to_black_duration = GetJSONFloat(params, "fade_to_black_duration", 1.0);
+		camera_transition = camera_transitions(GetJSONInt(params, "camera_transition", no_transition));
+		current_camera_transition = camera_transition;
 
 		dialogue_layout = GetJSONInt(params, "dialogue_layout", 0);
 		dialogue_text_font = GetJSONString(params, "dialogue_text_font", "Data/Fonts/arial.ttf");
@@ -264,6 +283,7 @@ class DrikaDialogue : DrikaElement{
 			if(enable_look_at_target || enable_move_with_target){
 				track_target.SaveIdentifier(data);
 			}
+			data["camera_transition"] = JSONValue(camera_transition);
 		}else if(dialogue_function == fade_to_black){
 			data["target_fade_to_black"] = JSONValue(target_fade_to_black);
 			data["fade_to_black_duration"] = JSONValue(fade_to_black_duration);
@@ -565,7 +585,7 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == choice){
 			Reset();
 		}else if(dialogue_function == set_camera_position){
-			SetCameraPosition();
+			SetCameraPosition(target_camera_position, target_camera_rotation);
 			SetDialogueDOF();
 		}
 	}
@@ -1024,6 +1044,15 @@ class DrikaDialogue : DrikaElement{
 				ImGui_NextColumn();
 				track_target.DrawSelectTargetUI();
 			}
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Transition Method");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_Combo("###Transition Method", current_camera_transition, camera_transition_names, camera_transition_names.size())){
+				camera_transition = camera_transitions(current_camera_transition);
+			}
+
 		}else if(dialogue_function == start){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Fade");
@@ -1090,12 +1119,16 @@ class DrikaDialogue : DrikaElement{
 			}else if(dialogue_function == end){
 				wait_for_fade = false;
 			}
+		}else if(messages[0] == "old_camera_transform"){
+			camera_translation_from = vec3(atof(messages[1]), atof(messages[2]), atof(messages[3]));
+			camera_rotation_from = vec3(atof(messages[4]), atof(messages[5]), atof(messages[6]));
 		}
 	}
 
 	void Reset(){
 		dialogue_done = false;
 		wait_for_fade = false;
+		camera_transition_timer = 0.0;
 		if(dialogue_function == say){
 			if(say_started){
 				level.SendMessage("drika_dialogue_hide");
@@ -1191,9 +1224,35 @@ class DrikaDialogue : DrikaElement{
 			SetActorOmniscient();
 			return true;
 		}else if(dialogue_function == set_camera_position){
-			SetCameraPosition();
-			SetDialogueDOF();
-			return true;
+			if(camera_transition == move_transition){
+				if(triggered == false){
+					triggered = true;
+					level.SendMessage("drika_get_old_camera_transform " + this_hotspot.GetID());
+					return false;
+				}
+
+				float transition_duration = 1.0;
+				float alpha = ApplyEase(camera_transition_timer / transition_duration, easeInOutSine);
+				alpha = max(0.0, min(1.0, alpha));
+
+				vec3 mixed_translation = mix(camera_translation_from, target_camera_position, alpha);
+				vec3 mixed_rotation = mix(camera_rotation_from, target_camera_rotation, alpha);
+
+				SetCameraPosition(mixed_translation, mixed_rotation);
+				SetDialogueDOF();
+
+				if(camera_transition_timer >= transition_duration){
+					camera_transition_timer = 0.0;
+					return true;
+				}
+
+				camera_transition_timer += time_step;
+				return false;
+			}else{
+				SetCameraPosition(target_camera_position, target_camera_rotation);
+				SetDialogueDOF();
+				return true;
+			}
 		}else if(dialogue_function == fade_to_black){
 			SetFadeToBlack();
 			return true;
@@ -1368,14 +1427,14 @@ class DrikaDialogue : DrikaElement{
 		level.SendMessage(msg);
 	}
 
-	void SetCameraPosition(){
+	void SetCameraPosition(vec3 position, vec3 rotation){
 		string msg = "drika_dialogue_set_camera_position ";
-		msg += floor(target_camera_rotation.x * 100.0f + 0.5f) / 100.0f + " ";
-		msg += floor(target_camera_rotation.y * 100.0f + 0.5f) / 100.0f + " ";
-		msg += floor(target_camera_rotation.z * 100.0f + 0.5f) / 100.0f + " ";
-		msg += target_camera_position.x + " ";
-		msg += target_camera_position.y + " ";
-		msg += target_camera_position.z + " ";
+		msg += floor(rotation.x * 100.0f + 0.5f) / 100.0f + " ";
+		msg += floor(rotation.y * 100.0f + 0.5f) / 100.0f + " ";
+		msg += floor(rotation.z * 100.0f + 0.5f) / 100.0f + " ";
+		msg += position.x + " ";
+		msg += position.y + " ";
+		msg += position.z + " ";
 		msg += target_camera_zoom + " ";
 
 		array<Object@> targets = track_target.GetTargetObjects();

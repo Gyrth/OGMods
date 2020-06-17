@@ -54,6 +54,8 @@ bool camera_settings_changed = false;
 vec2 dialogue_size = vec2(2560, 450);
 IMText@ lmb_continue;
 IMText@ rtn_skip;
+vec3 old_camera_translation;
+vec3 old_camera_rotation;
 
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 IMContainer@ dialogue_container;
@@ -1133,6 +1135,8 @@ void ReceiveMessage(string msg){
 		level.Execute("dialogue.cam_zoom = " + camera_zoom + ");");
 
 		current_camera_position = camera_position;
+		old_camera_translation = camera_position;
+		old_camera_rotation = camera_rotation;
 		camera_settings_changed = true;
 	}else if(token == "drika_dialogue_end"){
 		show_dialogue = false;
@@ -1142,6 +1146,10 @@ void ReceiveMessage(string msg){
 		ui_hotspot_id = -1;
 		dialogue_container.clear();
 	}else if(token == "drika_dialogue_start"){
+		camera_position = camera.GetPos();
+		camera_rotation = vec3(camera.GetXRotation(), camera.GetYRotation(), camera.GetZRotation());
+		old_camera_translation = camera_position;
+		old_camera_rotation = camera_rotation;
 		has_camera_control = true;
 	}else if(token == "drika_dialogue_fade_out_in"){
 		token_iter.FindNextToken(msg);
@@ -1429,6 +1437,21 @@ void ReceiveMessage(string msg){
 		}
 
 		write_file_processes.insertLast(WriteFileProcess(hotspot_id, function_index, file_path, data));
+	}else if(token == "drika_get_old_camera_transform"){
+		token_iter.FindNextToken(msg);
+		int hotspot_id = atoi(token_iter.GetToken(msg));
+
+		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
+		string return_msg;
+		return_msg += "drika_message ";
+		return_msg += "old_camera_transform ";
+		return_msg += old_camera_translation.x + " ";
+		return_msg += old_camera_translation.y + " ";
+		return_msg += old_camera_translation.z + " ";
+		return_msg += old_camera_rotation.x + " ";
+		return_msg += old_camera_rotation.y + " ";
+		return_msg += old_camera_rotation.z + " ";
+		hotspot_obj.ReceiveScriptMessage(return_msg);
 	}
 }
 
@@ -2209,12 +2232,13 @@ void SetCameraPosition(){
 	if((animating_camera || has_camera_control) && !EditorModeActive()){
 
 		if(camera_settings_changed){
+			camera.SetDistance(0.0f);
 			camera.SetPos(camera_position);
 			camera.SetXRotation(camera_rotation.x);
 			camera.SetYRotation(camera_rotation.y);
 			camera.SetZRotation(camera_rotation.z);
-			camera.CalcFacing();
 
+			camera.CalcFacing();
 			camera.FixDiscontinuity();
 			camera_settings_changed = false;
 
