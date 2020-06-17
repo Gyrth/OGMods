@@ -1114,11 +1114,7 @@ class DrikaDialogue : DrikaElement{
 
 	void ReceiveMessage(array<string> messages){
 		if(messages[0] == "fade_out_done"){
-			if(dialogue_function == start){
-				wait_for_fade = false;
-			}else if(dialogue_function == end){
-				wait_for_fade = false;
-			}
+			wait_for_fade = false;
 		}else if(messages[0] == "old_camera_transform"){
 			camera_translation_from = vec3(atof(messages[1]), atof(messages[2]), atof(messages[3]));
 			camera_rotation_from = vec3(atof(messages[4]), atof(messages[5]), atof(messages[6]));
@@ -1248,6 +1244,22 @@ class DrikaDialogue : DrikaElement{
 
 				camera_transition_timer += time_step;
 				return false;
+			}else if(camera_transition == fade_transition){
+				if(wait_for_fade){
+					//Waiting for the fade to end.
+					return false;
+				}else if(!triggered){
+					//Starting the fade.
+					level.SendMessage("drika_dialogue_fade_out_in " + this_hotspot.GetID());
+					wait_for_fade = true;
+					triggered = true;
+					return false;
+				}else{
+					SetCameraPosition(target_camera_position, target_camera_rotation);
+					SetDialogueDOF();
+					triggered = false;
+					return true;
+				}
 			}else{
 				SetCameraPosition(target_camera_position, target_camera_rotation);
 				SetDialogueDOF();
