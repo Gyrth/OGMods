@@ -585,7 +585,7 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == choice){
 			Reset();
 		}else if(dialogue_function == set_camera_position){
-			SetCameraPosition(target_camera_position, target_camera_rotation);
+			SetCameraTransform(target_camera_position, target_camera_rotation);
 			SetDialogueDOF();
 		}
 	}
@@ -1231,10 +1231,34 @@ class DrikaDialogue : DrikaElement{
 				float alpha = ApplyEase(camera_transition_timer / transition_duration, easeInOutSine);
 				alpha = max(0.0, min(1.0, alpha));
 
-				vec3 mixed_translation = mix(camera_translation_from, target_camera_position, alpha);
-				vec3 mixed_rotation = mix(camera_rotation_from, target_camera_rotation, alpha);
+				// Convert the X Y Z rotations into quaternions.
+				float deg2rad = PI / 180.0f;
+	            quaternion rot_y(vec4(0, 1, 0, target_camera_rotation.y * deg2rad));
+	            quaternion rot_x(vec4(1, 0, 0, target_camera_rotation.x * deg2rad));
+	            quaternion rot_z(vec4(0, 0, 1, target_camera_rotation.z * deg2rad));
+				quaternion target_rotation = rot_y * rot_x * rot_z;
 
-				SetCameraPosition(mixed_translation, mixed_rotation);
+	            quaternion rot2_y(vec4(0, 1, 0, camera_rotation_from.y * deg2rad));
+	            quaternion rot2_x(vec4(1, 0, 0, camera_rotation_from.x * deg2rad));
+	            quaternion rot2_z(vec4(0, 0, 1, camera_rotation_from.z * deg2rad));
+				quaternion from_rotation = rot2_y * rot2_x * rot2_z;
+
+				// Use the alpha to mix the two quaternions, making them blend.
+				quaternion mixed_rotation = mix(from_rotation, target_rotation, alpha);
+
+				// Convert the resulting quaternion back into X Y Z rotation.
+				vec3 front = Mult(mixed_rotation, vec3(0,0,1));
+				vec3 new_mixed_rotation;
+				new_mixed_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
+				new_mixed_rotation.x = asin(front[1]) * -180.0f / PI;
+				vec3 up = Mult(mixed_rotation, vec3(0,1,0));
+				vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+				vec3 expected_up = normalize(cross(expected_right, front));
+				new_mixed_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
+
+				vec3 mixed_translation = mix(camera_translation_from, target_camera_position, alpha);
+
+				SetCameraTransform(mixed_translation, new_mixed_rotation);
 				SetDialogueDOF();
 
 				if(camera_transition_timer >= transition_duration){
@@ -1255,13 +1279,13 @@ class DrikaDialogue : DrikaElement{
 					triggered = true;
 					return false;
 				}else{
-					SetCameraPosition(target_camera_position, target_camera_rotation);
+					SetCameraTransform(target_camera_position, target_camera_rotation);
 					SetDialogueDOF();
 					triggered = false;
 					return true;
 				}
 			}else{
-				SetCameraPosition(target_camera_position, target_camera_rotation);
+				SetCameraTransform(target_camera_position, target_camera_rotation);
 				SetDialogueDOF();
 				return true;
 			}
@@ -1439,7 +1463,7 @@ class DrikaDialogue : DrikaElement{
 		level.SendMessage(msg);
 	}
 
-	void SetCameraPosition(vec3 position, vec3 rotation){
+	void SetCameraTransform(vec3 position, vec3 rotation){
 		string msg = "drika_dialogue_set_camera_position ";
 		msg += floor(rotation.x * 100.0f + 0.5f) / 100.0f + " ";
 		msg += floor(rotation.y * 100.0f + 0.5f) / 100.0f + " ";
