@@ -1,6 +1,6 @@
 enum ai_goals {
 				_patrol,
-				_attack,
+				_attack_target,
 				_investigate_slow,
 				_investigate_urgent,
 				_investigate_around,
@@ -11,7 +11,12 @@ enum ai_goals {
 				_throw_weapon,
 				_choke,
 				_cut_throat,
-				_jump
+				_jump_to_target,
+				_jump,
+				_attack,
+				_roll,
+				_dodge,
+				_throw_enemy
 			};
 
 class DrikaAIControl : DrikaElement{
@@ -19,10 +24,10 @@ class DrikaAIControl : DrikaElement{
 	int ai_goal;
 	DrikaTargetSelect ai_target(this, "ai_target");
 
-	array<ai_goals> goals_with_placeholders = {_investigate_slow, _investigate_urgent, _jump};
+	array<ai_goals> goals_with_placeholders = {_investigate_slow, _investigate_urgent, _jump_to_target};
 
 	array<string> ai_goal_names = {		"Patrol",
-										"Attack",
+										"Attack Target",
 										"Investigate Slow",
 										"Investigate Urgent",
 										"Investigate Around",
@@ -33,7 +38,12 @@ class DrikaAIControl : DrikaElement{
 										"Throw Weapon",
 										"Choke",
 										"Cut Throat",
-										"Jump"
+										"Jump To Target",
+										"Jump",
+										"Attack",
+										"Roll",
+										"Dodge",
+										"Throw Enemy"
 									};
 
 	DrikaAIControl(JSONValue params = JSONValue()){
@@ -57,7 +67,7 @@ class DrikaAIControl : DrikaElement{
 			ai_target.target_option = id_option | reference_option;
 		}else if(ai_goal == _get_weapon){
 			ai_target.target_option = id_option | reference_option | item_option;
-		}else if(ai_goal == _attack || ai_goal == _escort || ai_goal == _choke || ai_goal == _cut_throat){
+		}else if(ai_goal == _attack_target || ai_goal == _escort || ai_goal == _choke || ai_goal == _cut_throat){
 			ai_target.target_option = id_option | name_option | character_option | reference_option | team_option;
 		}else if(ai_goal == _throw_weapon){
 			ai_target.target_option = character_option;
@@ -108,7 +118,7 @@ class DrikaAIControl : DrikaElement{
 				DebugDrawLine(placeholder.GetTranslation(), targets[i].position, vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
 
-			if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
+			if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
 				array<Object@> ai_targets = ai_target.GetTargetObjects();
 
 				for(uint j = 0; j < ai_targets.size(); j++){
@@ -137,7 +147,7 @@ class DrikaAIControl : DrikaElement{
 
 	string GetDisplayString(){
 		string display_text = "AIControl " + target_select.GetTargetDisplayText() + " " + ai_goal_names[ai_goal];
-		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
+		if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
 			display_text += " " + ai_target.GetTargetDisplayText();
 		}
 		return display_text;
@@ -173,11 +183,11 @@ class DrikaAIControl : DrikaElement{
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
+		if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
 			ImGui_AlignTextToFramePadding();
 			if(ai_goal == _patrol){
 				ImGui_Text("Pathpoint Object");
-			}else if(ai_goal == _attack){
+			}else if(ai_goal == _attack_target){
 				ImGui_Text("Attack Character");
 			}else if(ai_goal == _escort){
 				ImGui_Text("Escort Character");
@@ -201,7 +211,7 @@ class DrikaAIControl : DrikaElement{
 		array<Object@> ai_targets = ai_target.GetTargetObjects();
 		if(targets.size() == 0){return false;}
 
-		if(ai_goal == _patrol || ai_goal == _attack || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
+		if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
 			if(ai_targets.size() == 0){
 				return false;
 			}
@@ -221,7 +231,7 @@ class DrikaAIControl : DrikaElement{
 						command += "SetGoal(_patrol);";
 					}
 					break;
-				case _attack:
+				case _attack_target:
 					{
 						for(uint j = 0; j < ai_targets.size(); j++){
 							command += "Notice(" + ai_targets[j].GetID() + ");";
@@ -319,7 +329,7 @@ class DrikaAIControl : DrikaElement{
 							command += "executing = false;";
 						}
 						break;
-				case _jump:
+				case _jump_to_target:
 					{
 						vec3 target_pos = placeholder.GetTranslation();
 						command += "vec3 jump_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
@@ -329,11 +339,45 @@ class DrikaAIControl : DrikaElement{
 						command += "jump_target_vel = vel;";
 					}
 					break;
+				case _jump:
+					{
+						command += "trying_to_climb = _jump;";
+					}
+					break;
+				case _attack:
+					{
+						command += "ai_attacking = true;";
+						command += "startled = false;";
+					}
+					break;
+				case _roll:
+					{
+						int chest_bone = targets[i].rigged_object().skeleton().IKBoneStart("torso");
+						BoneTransform chest_frame_matrix = targets[i].rigged_object().GetFrameMatrix(chest_bone);
+						vec3 roll_direction = chest_frame_matrix.rotation * vec3(0.0, 1.0, 0.0);
+						command += "vec3 target_velocity = vec3(" + roll_direction.x + "," + roll_direction.y + "," + roll_direction.z + ");";
+						command += "flip_info.StartRoll(target_velocity);";
+					}
+					break;
+				case _dodge:
+					{
+						command += "startled = false;";
+						command += "active_dodge_time = time;";
+						command += "dodge_dir = GetDodgeDirection();";
+					}
+					break;
+				case _throw_enemy:
+					{
+						command += "startled = false;";
+						command += "last_throw_attempt_time = 0.0;";
+						command += "throw_after_active_block = true;";
+					}
+					break;
 				default:
 					break;
 			}
 
-			Log(warning, "Execute " + command);
+			/* Log(warning, "Execute " + command); */
 			targets[i].Execute(command);
 		}
 
