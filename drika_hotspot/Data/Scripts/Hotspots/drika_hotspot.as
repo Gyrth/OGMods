@@ -1483,8 +1483,12 @@ void Reset(){
 	ClearDialogueActors();
 }
 
-void AddDialogueActor(int character_id){
-	MovementObject@ char = ReadCharacterID(character_id);
+void AddDialogueActor(MovementObject@ char){
+	if(char is null){
+		return;
+	}
+	int character_id = char.GetID();
+
 	if(dialogue_actor_ids.find(character_id) == -1){
 		dialogue_actor_ids.insertLast(character_id);
 		vec3 char_position = char.position;
@@ -1506,12 +1510,16 @@ void AddDialogueActor(int character_id){
 	}
 }
 
-void RemoveDialogueActor(int character_id){
+void RemoveDialogueActor(MovementObject@ char){
+	if(char is null){
+		return;
+	}
+
+	int character_id = char.GetID();
+
 	int index = dialogue_actor_ids.find(character_id);
 	if(index != -1){
-		MovementObject@ char = ReadCharacterID(dialogue_actor_ids[index]);
 		char.ReceiveScriptMessage("set_dialogue_control false");
-		/* char.rigged_object().anim_client().Reset(); */
 		dialogue_actor_ids.removeAt(index);
 	}
 }

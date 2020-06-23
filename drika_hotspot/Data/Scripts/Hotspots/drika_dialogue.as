@@ -1145,7 +1145,7 @@ class DrikaDialogue : DrikaElement{
 			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 			for(uint i = 0; i < targets.size(); i++){
-				RemoveDialogueActor(targets[i].GetID());
+				RemoveDialogueActor(targets[i]);
 			}
 		}else if(dialogue_function == choice){
 			if(choice_ui_added){
@@ -1702,9 +1702,9 @@ class DrikaDialogue : DrikaElement{
 
 		for(uint i = 0; i < targets.size(); i++){
 			if(dialogue_control){
-				AddDialogueActor(targets[i].GetID());
+				AddDialogueActor(targets[i]);
 			}else{
-				RemoveDialogueActor(targets[i].GetID());
+				RemoveDialogueActor(targets[i]);
 			}
 		}
 	}
