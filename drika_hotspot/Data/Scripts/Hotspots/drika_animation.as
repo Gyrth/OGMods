@@ -202,7 +202,7 @@ class DrikaAnimation : DrikaElement{
 
 	void Delete(){
 		for(uint i = 0; i < key_ids.size(); i++){
-			QueueDeleteObjectID(key_ids[i]);
+			DeleteObjectID(key_ids[i]);
 		}
 		placeholder.Remove();
 	}
