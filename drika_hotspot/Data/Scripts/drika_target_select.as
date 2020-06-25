@@ -251,7 +251,7 @@ class DrikaTargetSelect{
 			identifier_choices.insertLast("Character");
 		}
 
-		if((target_option & reference_option) != 0 && available_references.size() > 0){
+		if((target_option & reference_option) != 0 && (available_references.size() > 0 || target_option == reference_option)){
 			identifier_choices.insertLast("Reference");
 		}
 
