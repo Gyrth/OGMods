@@ -1,6 +1,17 @@
+enum create_delete_modes{
+							_create_object,
+							_delete_object
+						};
+
 class DrikaCreateObject : DrikaElement{
 	string object_path;
 	array<int> spawned_object_ids;
+	create_delete_modes create_delete_mode;
+
+	array<string> create_delete_mode_names = 	{
+													"Create",
+													"Delete"
+												};
 
 	DrikaCreateObject(JSONValue params = JSONValue()){
 		placeholder.Load(params);
@@ -11,6 +22,11 @@ class DrikaCreateObject : DrikaElement{
 		drika_element_type = drika_create_object;
 		reference_string = GetJSONString(params, "reference_string", "");
 		AttemptRegisterReference(reference_string);
+		create_delete_mode = create_delete_modes(GetJSONInt(params, "create_delete_mode", _create_object));
+
+		target_select.LoadIdentifier(params);
+		target_select.target_option = reference_option;
+
 		has_settings = true;
 		placeholder.object_path = object_path;
 		@placeholder.parent = this;
@@ -23,136 +39,215 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void PostInit(){
-		placeholder.Retrieve();
+		if(create_delete_mode == _create_object){
+			placeholder.Retrieve();
+		}else if(create_delete_mode == _delete_object){
+			target_select.PostInit();
+		}
 	}
 
 	JSONValue GetCheckpointData(){
 		JSONValue data;
 		data["triggered"] = triggered;
-		if(triggered){
-			data["target_ids"] = JSONValue(JSONarrayValue);
-			for(uint i = 0; i < spawned_object_ids.size(); i++){
-				data["target_ids"].append(spawned_object_ids[i]);
+
+		if(create_delete_mode == _create_object){
+			if(triggered){
+				data["target_ids"] = JSONValue(JSONarrayValue);
+				for(uint i = 0; i < spawned_object_ids.size(); i++){
+					data["target_ids"].append(spawned_object_ids[i]);
+				}
 			}
+		}else if(create_delete_mode == _delete_object){
+
 		}
 		return data;
 	}
 
 	void SetCheckpointData(JSONValue data = JSONValue()){
-		bool checkpoint_triggered = data["triggered"].asBool();
+		if(create_delete_mode == _create_object){
+			bool checkpoint_triggered = data["triggered"].asBool();
 
-		//The hotspot got reset and the target doesn't exist anymore.
-		if(checkpoint_triggered && !triggered){
-			spawned_object_ids.resize(0);
-			Trigger();
-		//The hotspot has not been reset but triggered.
-		}else if(checkpoint_triggered){
-			JSONValue target_ids = data["target_ids"];
-			bool missing_object = false;
-
-			spawned_object_ids.resize(0);
-			for(uint i = 0; i < target_ids.size(); i++){
-				if(!ObjectExists(target_ids[i].asInt())){
-					missing_object = true;
-					break;
-				}else{
-					Log(warning, "Not missing " + object_path + " " + target_ids[i].asInt());
-				}
-				spawned_object_ids.insertLast(target_ids[i].asInt());
-			}
-
-			if(missing_object){
-				Log(warning, "Missing " + object_path);
+			//The hotspot got reset and the target doesn't exist anymore.
+			if(checkpoint_triggered && !triggered){
 				spawned_object_ids.resize(0);
 				Trigger();
+			//The hotspot has not been reset but triggered.
+			}else if(checkpoint_triggered){
+				JSONValue target_ids = data["target_ids"];
+				bool missing_object = false;
+
+				spawned_object_ids.resize(0);
+				for(uint i = 0; i < target_ids.size(); i++){
+					if(!ObjectExists(target_ids[i].asInt())){
+						missing_object = true;
+						break;
+					}else{
+						Log(warning, "Not missing " + object_path + " " + target_ids[i].asInt());
+					}
+					spawned_object_ids.insertLast(target_ids[i].asInt());
+				}
+
+				if(missing_object){
+					Log(warning, "Missing " + object_path);
+					spawned_object_ids.resize(0);
+					Trigger();
+				}
 			}
+		}else if(create_delete_mode == _delete_object){
+
 		}
 	}
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		placeholder.Save(data);
-		data["object_path"] = JSONValue(object_path);
-		data["reference_string"] = JSONValue(reference_string);
+		data["create_delete_mode"] = JSONValue(create_delete_mode);
+		if(create_delete_mode == _create_object){
+			data["object_path"] = JSONValue(object_path);
+			data["reference_string"] = JSONValue(reference_string);
+			placeholder.Save(data);
+		}else if(create_delete_mode == _delete_object){
+			target_select.SaveIdentifier(data);
+		}
 		return data;
 	}
 
 	string GetDisplayString(){
-		// Continuesly check if the reference has been freed.
-		if(reference_already_taken){
-			AttemptRegisterReference(reference_string);
+		if(create_delete_mode == _create_object){
+			// Continuesly check if the reference has been freed.
+			if(reference_already_taken){
+				AttemptRegisterReference(reference_string);
+			}
+			return "CreateObject " + object_path + " " + reference_string + (reference_already_taken?" (Invalid)":"");
+		}else{
+			return "DeleteObject " + target_select.GetTargetDisplayText();
 		}
-		return "CreateObject " + object_path + " " + reference_string + (reference_already_taken?" (Invalid)":"");
+	}
+
+	void StartSettings(){
+		if(create_delete_mode == _delete_object){
+			target_select.CheckAvailableTargets();
+		}
+	}
+
+	void StartEdit(){
+		DrikaElement::StartEdit();
+		if(create_delete_mode == _create_object){
+			placeholder.AddPlaceholderObject();
+		}
 	}
 
 	void DrawSettings(){
-		float option_name_width = 100.0;
+		float option_name_width = 120.0;
 
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Object Path");
+		ImGui_Text("Mode");
 		ImGui_NextColumn();
-
-		if(ImGui_Button("Set Object Path")){
-			string new_path = GetUserPickedReadPath("xml", "Data/Objects");
-			if(new_path != ""){
-				object_path = new_path;
-				placeholder.object_path = object_path;
-				placeholder.UpdatePlaceholderPreview();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
+		int current_mode = create_delete_mode;
+		if(ImGui_Combo("##Mode", current_mode, create_delete_mode_names, create_delete_mode_names.size())){
+			create_delete_mode = create_delete_modes(current_mode);
+			if(create_delete_mode == _create_object){
+				AttemptRegisterReference(reference_string);
+			}else if(create_delete_mode == _delete_object){
+				RemoveReference(this);
+				placeholder.Remove();
+				target_select.CheckAvailableTargets();
 			}
 		}
-		ImGui_SameLine();
-		ImGui_Text(object_path);
+		ImGui_PopItemWidth();
 		ImGui_NextColumn();
-		DrawSetReferenceUI();
+
+		if(create_delete_mode == _create_object){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Object Path");
+			ImGui_NextColumn();
+
+			if(ImGui_Button("Set Object Path")){
+				string new_path = GetUserPickedReadPath("xml", "Data/Objects");
+				if(new_path != ""){
+					object_path = new_path;
+					placeholder.object_path = object_path;
+					placeholder.UpdatePlaceholderPreview();
+				}
+			}
+			ImGui_SameLine();
+			ImGui_Text(object_path);
+			ImGui_NextColumn();
+			DrawSetReferenceUI();
+		}else if(create_delete_mode == _delete_object){
+			target_select.DrawSelectTargetUI();
+		}
 	}
 
 	void DrawEditing(){
-		if(placeholder.Exists()){
-			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			DrawGizmo(placeholder.GetTranslation(), placeholder.GetRotation(), placeholder.GetScale(), placeholder.IsSelected());
-			placeholder.DrawEditing();
-		}else{
-			placeholder.Create();
-			StartEdit();
+		if(create_delete_mode == _create_object){
+			if(placeholder.Exists()){
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DrawGizmo(placeholder.GetTranslation(), placeholder.GetRotation(), placeholder.GetScale(), placeholder.IsSelected());
+				placeholder.DrawEditing();
+			}else{
+				placeholder.Create();
+				StartEdit();
+			}
+		}else if(create_delete_mode == _delete_object){
+			array<Object@> targets = target_select.GetTargetObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			}
 		}
 	}
 
 	void Reset(){
-		if(triggered){
-			for(uint i = 0; i < spawned_object_ids.size(); i++){
-				QueueDeleteObjectID(spawned_object_ids[i]);
+		if(create_delete_mode == _create_object){
+			if(triggered){
+				for(uint i = 0; i < spawned_object_ids.size(); i++){
+					QueueDeleteObjectID(spawned_object_ids[i]);
+				}
+				spawned_object_ids.resize(0);
+				triggered = false;
 			}
-			spawned_object_ids.resize(0);
-			triggered = false;
 		}
 	}
 
 	bool Trigger(){
 		triggered = true;
-		if(placeholder.Exists()){
-			Log(warning, "Create " + object_path);
-			int spawned_object_id = CreateObject(object_path);
-			spawned_object_ids.insertLast(spawned_object_id);
+		if(create_delete_mode == _create_object){
+			if(placeholder.Exists()){
+				Log(warning, "Create " + object_path);
+				int spawned_object_id = CreateObject(object_path);
+				spawned_object_ids.insertLast(spawned_object_id);
 
-			Object@ spawned_object = ReadObjectFromID(spawned_object_id);
-			spawned_object.SetSelectable(true);
-			spawned_object.SetTranslatable(true);
-			spawned_object.SetScalable(true);
-			spawned_object.SetRotatable(true);
-			spawned_object.SetTranslation(placeholder.GetTranslation());
-			spawned_object.SetRotation(placeholder.GetRotation());
-			// Since weapons and character can't be scaled, skip setting the scale on them.
-			if(spawned_object.GetType() == _env_object || spawned_object.GetType() == _hotspot_object){
-				spawned_object.SetScale(placeholder.GetScale());
+				Object@ spawned_object = ReadObjectFromID(spawned_object_id);
+				spawned_object.SetSelectable(true);
+				spawned_object.SetTranslatable(true);
+				spawned_object.SetScalable(true);
+				spawned_object.SetRotatable(true);
+				spawned_object.SetTranslation(placeholder.GetTranslation());
+				spawned_object.SetRotation(placeholder.GetRotation());
+				// Since weapons and character can't be scaled, skip setting the scale on them.
+				if(spawned_object.GetType() == _env_object || spawned_object.GetType() == _hotspot_object){
+					spawned_object.SetScale(placeholder.GetScale());
+				}
+				return true;
+			}else{
+				placeholder.Create();
+				return false;
 			}
-			return true;
-		}else{
-			placeholder.Create();
-			return false;
+		}else if(create_delete_mode == _delete_object){
+			array<Object@> targets = target_select.GetTargetObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				QueueDeleteObjectID(targets[i].GetID());
+			}
+			// Only continue when at least one reference object has been found.
+			if(targets.size() != 0){
+				return true;
+			}
 		}
+		return false;
 	}
 
 	array<int> GetReferenceObjectIDs(){
@@ -170,5 +265,25 @@ class DrikaCreateObject : DrikaElement{
 
 	void ReceiveMessage(string message){
 		placeholder.ReceiveMessage(message);
+	}
+
+	string GetReferenceString(){
+		if(create_delete_mode == _create_object){
+			return reference_string;
+		}else{
+			return "";
+		}
+	}
+
+	void HotspotStartEdit(){
+		if(create_delete_mode == _create_object){
+			placeholder.AddPlaceholderObject();
+		}
+	}
+
+	void HotspotStopEdit(){
+		if(create_delete_mode == _create_object){
+			placeholder.HidePlaceholderObject();
+		}
 	}
 }
