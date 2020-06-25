@@ -355,8 +355,8 @@ class DrikaTargetSelect{
 				}
 				reference_string = available_references[current_reference];
 				@reference_element = GetReferenceElement(reference_string);
-			}else{
-				//Force the identifier type to id when no references are available.
+			}else if((target_option & id_option) != 0){
+				//Force the identifier type to id when no references are available and id target option is availble.
 				identifier_type = id;
 				return;
 			}
@@ -733,7 +733,7 @@ class DrikaTargetSelect{
 		if(identifier_type == id){
 			return "" + object_id;
 		}else if (identifier_type == reference){
-			return (reference_element !is null)?reference_element.reference_string:"";
+			return (reference_element !is null)?reference_element.reference_string:"NA";
 		}else if (identifier_type == team){
 			return character_team;
 		}else if (identifier_type == name){
