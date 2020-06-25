@@ -157,6 +157,8 @@ class DrikaElement{
 	void ReceiveMessage(string message, string param, int id_param){}
 	void ReceiveMessage(array<string> messages){}
 	void ReadUIInstruction(array<string> instruction){}
+	void HotspotStartEdit(){}
+	void HotspotStopEdit(){}
 	void SetIndex(int _index){
 		index = _index;
 	}
@@ -449,13 +451,5 @@ class DrikaElement{
 	void RelativeTransform(vec3 origin, vec3 translation_offset, mat4 before_mat, mat4 after_mat){
 		placeholder.RelativeTranslate(translation_offset);
 		placeholder.RelativeRotate(origin, before_mat, after_mat);
-	}
-
-	void HotspotStartEdit(){
-		placeholder.AddPlaceholderObject();
-	}
-
-	void HotspotStopEdit(){
-		placeholder.HidePlaceholderObject();
 	}
 }
