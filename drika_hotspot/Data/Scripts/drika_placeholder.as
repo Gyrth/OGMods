@@ -176,7 +176,6 @@ class DrikaPlaceholder{
 				object.SetScale(old_placeholder.GetScale());
 				object.SetTranslation(old_placeholder.GetTranslation());
 				object.SetRotation(old_placeholder.GetRotation());
-				AddPlaceholderObject();
 			}else{
 				id = -1;
 			}
