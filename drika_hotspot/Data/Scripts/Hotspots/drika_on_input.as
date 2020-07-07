@@ -1,5 +1,6 @@
 enum input_types{ 	button_pressed = 0,
-					type_text = 1
+					type_text = 1,
+					button_down = 2
 				};
 
 enum input_identifiers{	up = 0,
@@ -49,7 +50,7 @@ class DrikaOnInput : DrikaElement{
 	vec4 prompt_color = vec4(0.5, 0.5, 0.5, 1.0);
 	string current_prompt_icon;
 
-	array<string> input_type_names = { "Button Press", "Type Text" };
+	array<string> input_type_names = { "Button Pressed", "Type Text", "Button Down" };
 
 	array<InputData@> inputs = {	InputData(up, "Forward", "up"),
 									InputData(down, "Backward", "down"),
@@ -138,7 +139,7 @@ class DrikaOnInput : DrikaElement{
 
 		if(input_type == type_text){
 			data["typed_text"] = JSONValue(typed_text);
-		}else if(input_type == button_pressed){
+		}else if(input_type == button_pressed || input_type == button_down){
 			data["input_identifier"] = JSONValue(input.input_identifier);
 			if(input.input_identifier == input_other){
 				data["other_input"] = JSONValue(other_input);
@@ -159,7 +160,7 @@ class DrikaOnInput : DrikaElement{
 
 	string GetDisplayString(){
 		string display_string = "OnInput " + target_select.GetTargetDisplayText() + " ";
-		if(input_type == button_pressed){
+		if(input_type == button_pressed || input_type == button_down){
 			return display_string + input.input_bind_name + ((input.input_identifier == input_other)?(" " + other_input):"");
 		}else if(input_type == type_text){
 			return display_string + typed_text;
@@ -201,7 +202,7 @@ class DrikaOnInput : DrikaElement{
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(input_type == button_pressed){
+		if(input_type == button_pressed || input_type == button_down){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Button");
 			ImGui_NextColumn();
@@ -285,7 +286,7 @@ class DrikaOnInput : DrikaElement{
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 		}
 
-		if(use_prompt && input_type == button_pressed){
+		if(use_prompt && (input_type == button_pressed || input_type == button_down)){
 			if(placeholder.Exists()){
 				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}else{
@@ -321,13 +322,15 @@ class DrikaOnInput : DrikaElement{
 						one_triggered = true;
 					}
 				}
-			}else{
+			}else if(input_type == button_pressed || input_type == button_down){
 				if(input.input_identifier == input_other){
-					if(GetInputPressed(targets[i].controller_id, other_input)){
+					if(input_type == button_pressed && GetInputPressed(targets[i].controller_id, other_input) ||
+						input_type == button_down && GetInputDown(targets[i].controller_id, other_input)){
 						one_triggered = true;
 					}
 				}else{
-					if(GetInputPressed(targets[i].controller_id, input.input_bind)){
+					if(input_type == button_pressed && GetInputPressed(targets[i].controller_id, input.input_bind) ||
+						input_type == button_down && GetInputDown(targets[i].controller_id, input.input_bind)){
 						one_triggered = true;
 					}
 				}
