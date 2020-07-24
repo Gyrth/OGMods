@@ -5,7 +5,7 @@ enum target_options {	id_option = (1<<0),
 						character_option = (1<<4),
 						item_option = (1<<5),
 						batch_option = (1<<6),
-						camera_option = (1<<6)
+						camera_option = (1<<7)
 					};
 
 class BatchObject{
