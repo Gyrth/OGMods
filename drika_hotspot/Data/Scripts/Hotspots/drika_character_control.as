@@ -142,6 +142,10 @@ class DrikaCharacterControl : DrikaElement{
 		SetParamName();
 	}
 
+	void PostInit(){
+		target_select.PostInit();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["character_option"] = JSONValue(character_control_option);

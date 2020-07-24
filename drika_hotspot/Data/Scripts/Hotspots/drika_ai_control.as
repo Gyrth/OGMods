@@ -76,6 +76,8 @@ class DrikaAIControl : DrikaElement{
 
 	void PostInit(){
 		placeholder.Retrieve();
+		target_select.PostInit();
+		ai_target.PostInit();
 	}
 
 	void Delete(){

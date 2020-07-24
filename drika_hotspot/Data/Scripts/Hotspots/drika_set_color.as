@@ -29,6 +29,10 @@ class DrikaSetColor : DrikaElement{
 		has_settings = true;
 	}
 
+	void PostInit(){
+		target_select.PostInit();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["color_type"] = JSONValue(color_type);
@@ -39,10 +43,6 @@ class DrikaSetColor : DrikaElement{
 		data["after_color"].append(after_color.z);
 		target_select.SaveIdentifier(data);
 		return data;
-	}
-
-	void PostInit(){
-		target_select.PostInit();
 	}
 
 	void Delete(){

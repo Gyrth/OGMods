@@ -101,6 +101,7 @@ class DrikaOnInput : DrikaElement{
 			placeholder.Retrieve();
 			GetIcon();
 		}
+		target_select.PostInit();
 	}
 
 	void GetInputData(){

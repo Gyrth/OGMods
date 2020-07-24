@@ -26,6 +26,10 @@ class DrikaSendCharacterMessage : DrikaElement{
 		SetDisplayMessage();
 	}
 
+	void PostInit(){
+		target_select.PostInit();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["character_message_type"] = JSONValue(character_message_type);

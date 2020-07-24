@@ -13,6 +13,10 @@ class DrikaSetEnabled : DrikaElement{
 		has_settings = true;
 	}
 
+	void PostInit(){
+		target_select.PostInit();
+	}
+
 	JSONValue GetCheckpointData(){
 		JSONValue data;
 		data["triggered"] = triggered;

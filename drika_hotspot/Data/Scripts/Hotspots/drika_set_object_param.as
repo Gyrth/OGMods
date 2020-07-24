@@ -24,6 +24,10 @@ class DrikaSetObjectParam : DrikaElement{
 		InterpParam(params);
 	}
 
+	void PostInit(){
+		target_select.PostInit();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["param_name"] = JSONValue(param_name);

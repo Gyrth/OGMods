@@ -213,6 +213,7 @@ class DrikaDialogue : DrikaElement{
 		choice_3_element.PostInit();
 		choice_4_element.PostInit();
 		choice_5_element.PostInit();
+		target_select.PostInit();
 	}
 
 	JSONValue GetSaveData(){

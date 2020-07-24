@@ -62,6 +62,7 @@ class DrikaCheckCharacterState : DrikaElement{
 
 	void PostInit(){
 		continue_element.PostInit();
+		target_select.PostInit();
 	}
 
 	void SetTargetOptions(){

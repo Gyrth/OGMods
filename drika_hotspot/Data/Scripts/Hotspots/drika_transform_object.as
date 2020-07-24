@@ -48,6 +48,14 @@ class DrikaTransformObject : DrikaElement{
 
 		has_settings = true;
 	}
+	
+	void PostInit(){
+		if(transform_mode == transform_to_placeholder){
+			placeholder.Retrieve();
+		}
+		target_select.PostInit();
+		target_location.PostInit();
+	}
 
 	JSONValue GetSaveData(){
 		JSONValue data;
@@ -70,12 +78,6 @@ class DrikaTransformObject : DrikaElement{
 			data["extra_yaw"] = JSONValue(extra_yaw);
 		}
 		return data;
-	}
-
-	void PostInit(){
-		if(transform_mode == transform_to_placeholder){
-			placeholder.Retrieve();
-		}
 	}
 
 	void GetBeforeParam(){

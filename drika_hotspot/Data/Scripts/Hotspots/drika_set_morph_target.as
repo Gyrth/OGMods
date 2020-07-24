@@ -24,6 +24,10 @@ class DrikaSetMorphTarget : DrikaElement{
 		has_settings = true;
 	}
 
+	void PostInit(){
+		target_select.PostInit();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["morph_1"] = JSONValue(morph_1);

@@ -18,6 +18,11 @@ class DrikaSetVelocity : DrikaElement{
 		has_settings = true;
 	}
 
+	void PostInit(){
+		placeholder.Retrieve();
+		target_select.PostInit();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		placeholder.Save(data);
@@ -29,11 +34,6 @@ class DrikaSetVelocity : DrikaElement{
 
 	void Delete(){
 		placeholder.Remove();
-	}
-
-	void PostInit(){
-		placeholder.Retrieve();
-		target_select.PostInit();
 	}
 
 	string GetDisplayString(){
