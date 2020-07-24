@@ -34,9 +34,14 @@ class DrikaCheckpoint : DrikaElement{
 	void ReceiveMessage(array<string> messages){
 		if(messages[0] == "drika_save_names"){
 			save_data_names = {"Latest"};
+			current_save_data = 0;
 			for(uint i = 1; i < messages.size(); i++){
 				save_data_names.insertLast(messages[i]);
+				if(messages[i] == load_name){
+					current_save_data = i;
+				}
 			}
+			load_name = save_data_names[current_save_data];
 		}else if(messages[0] == "fade_out_done"){
 			wait_for_fade = false;
 		}
@@ -73,6 +78,9 @@ class DrikaCheckpoint : DrikaElement{
 
 	void StartSettings(){
 		new_save_name = save_name;
+	}
+
+	void StartEdit(){
 		GetSaveNames();
 	}
 
@@ -136,6 +144,10 @@ class DrikaCheckpoint : DrikaElement{
 	void RemoveSave(string name){
 		string msg = "drika_remove_save " + "\"" + join(name.split("\""), "\\\"") + "\"";
 		level.SendMessage(msg);
+	}
+
+	void Delete(){
+		RemoveSave(save_name);
 	}
 
 	void SaveCheckpoint(){

@@ -108,6 +108,8 @@ const int _RGDL_ANIMATION = 4;
 class CheckpointData{
 	string name;
 	string data;
+	// This is the number of Checkpoint Save functions that use this specific CheckpointData.
+	int nr_saves = 1;
 
 	CheckpointData(string _name){
 		name = _name;
@@ -1383,6 +1385,7 @@ void ReceiveMessage(string msg){
 
 		for(uint i = 0; i < checkpoints.size(); i++){
 			if(checkpoints[i].name == save_name){
+				checkpoints[i].nr_saves += 1;
 				return;
 			}
 		}
@@ -1395,7 +1398,11 @@ void ReceiveMessage(string msg){
 
 		for(uint i = 0; i < checkpoints.size(); i++){
 			if(checkpoints[i].name == save_name){
-				checkpoints.removeAt(i);
+				checkpoints[i].nr_saves -= 1;
+				// Remove the CheckpointData if no save functions are using it.
+				if(checkpoints[i].nr_saves == 0){
+					checkpoints.removeAt(i);
+				}
 			}
 		}
 	}else if(token == "drika_save_checkpoint"){
