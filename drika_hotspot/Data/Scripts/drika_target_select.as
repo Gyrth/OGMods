@@ -677,7 +677,7 @@ class DrikaTargetSelect{
 
 		array<MovementObject@> target_movement_objects;
 		if(identifier_type == id){
-			if(object_id != -1){
+			if(object_id != -1 && MovementObjectExists(object_id)){
 				target_movement_objects.insertLast(ReadCharacterID(object_id));
 			}
 		}else if (identifier_type == reference){
@@ -715,7 +715,7 @@ class DrikaTargetSelect{
 				}
 			}
 		}else if(identifier_type == character){
-			if(object_id != -1){
+			if(object_id != -1 && MovementObjectExists(object_id)){
 				target_movement_objects.insertLast(ReadCharacterID(object_id));
 			}
 		}else if(identifier_type == batch){
