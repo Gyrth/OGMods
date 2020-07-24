@@ -364,7 +364,7 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_function == set_actor_omniscient){
 			display_string += actor_name + " ";
 			display_string += omniscient;
-		}else if(dialogue_function == set_actor_omniscient){
+		}else if(dialogue_function == set_camera_position){
 			display_string += target_camera_zoom;
 		}else if(dialogue_function == fade_to_black){
 			display_string += target_fade_to_black + " ";
