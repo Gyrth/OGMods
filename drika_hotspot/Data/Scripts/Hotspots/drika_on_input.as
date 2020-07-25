@@ -87,7 +87,7 @@ class DrikaOnInput : DrikaElement{
 		CreateInputList();
 		SetInputArray();
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option;
 
 		connection_types = {_movement_object};
@@ -303,6 +303,7 @@ class DrikaOnInput : DrikaElement{
 
 	void Delete(){
 		placeholder.Remove();
+		target_select.Delete();
 	}
 
 	void Reset(){

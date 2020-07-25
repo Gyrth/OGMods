@@ -16,7 +16,7 @@ class DrikaSetMorphTarget : DrikaElement{
 		smoothing_duration = GetJSONFloat(params, "smoothing_duration", 0.0);
 		two_way_morph = GetJSONBool(params, "two_way_morph", false);
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_movement_object};
@@ -41,6 +41,7 @@ class DrikaSetMorphTarget : DrikaElement{
 
 	void Delete(){
 		SetMorphTarget(true);
+		target_select.Delete();
 	}
 
 	string GetDisplayString(){

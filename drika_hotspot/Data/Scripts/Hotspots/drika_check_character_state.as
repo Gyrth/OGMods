@@ -34,7 +34,7 @@ class DrikaCheckCharacterState : DrikaElement{
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
-	DrikaTargetSelect known_target(this, "known_target");
+	DrikaTargetSelect@ known_target;
 	float proximity_distance;
 	bool continue_if_false = false;
 	DrikaGoToLineSelect@ continue_element;
@@ -48,10 +48,10 @@ class DrikaCheckCharacterState : DrikaElement{
 		continue_if_false = GetJSONBool(params, "continue_if_false", false);
 		@continue_element = DrikaGoToLineSelect("continue_line", params);
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
-		known_target.LoadIdentifier(params);
+		@known_target = DrikaTargetSelect(this, params, "known_target");
 		SetTargetOptions();
 
 		drika_element_type = drika_check_character_state;
@@ -358,5 +358,10 @@ class DrikaCheckCharacterState : DrikaElement{
 
 	void Reset(){
 		triggered = false;
+	}
+
+	void Delete(){
+		target_select.Delete();
+		known_target.Delete();
 	}
 }

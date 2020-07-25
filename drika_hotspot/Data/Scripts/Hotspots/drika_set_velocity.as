@@ -8,7 +8,7 @@ class DrikaSetVelocity : DrikaElement{
 
 		velocity_magnitude = GetJSONFloat(params, "velocity_magnitude", 5);
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		add_velocity = GetJSONBool(params, "add_velocity", true);
@@ -34,6 +34,7 @@ class DrikaSetVelocity : DrikaElement{
 
 	void Delete(){
 		placeholder.Remove();
+		target_select.Delete();
 	}
 
 	string GetDisplayString(){

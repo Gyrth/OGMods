@@ -89,7 +89,8 @@ enum identifier_types {	id = 0,
 						character = 4,
 						item = 5,
 						batch = 6,
-						cam = 7
+						cam = 7,
+						box_select = 8
 					};
 
 enum param_types { 	string_param = 0,
@@ -104,7 +105,8 @@ enum param_types { 	string_param = 0,
 
 enum select_states {	select_hotspot = 0,
 						select_placeholder = 1,
-						select_target = 2
+						select_target = 2,
+						select_target_select_placeholder = 3
 					};
 
 class BeforeValue{
@@ -129,7 +131,7 @@ class DrikaElement{
 	bool deleted = false;
 	string reference_string = "";
 	bool reference_already_taken = false;
-	DrikaTargetSelect target_select(this);
+	DrikaTargetSelect @target_select = DrikaTargetSelect(this, JSONValue());
 	int export_index = -1;
 	select_states select_state = select_hotspot;
 
@@ -187,7 +189,7 @@ class DrikaElement{
 	void LeftClick(){
 		while(true){
 			select_state = select_states(select_state + 1);
-			if(select_state > select_target){
+			if(select_state > select_target_select_placeholder){
 				select_state = select_hotspot;
 			}
 
@@ -195,16 +197,25 @@ class DrikaElement{
 				placeholder.SetSelected(false);
 				this_hotspot.SetSelected(true);
 				target_select.SetSelected(false);
+				target_select.box_select_placeholder.SetSelected(false);
+				break;
+			}else if(select_state == select_target_select_placeholder && target_select.box_select_placeholder.Exists()){
+				placeholder.SetSelected(false);
+				this_hotspot.SetSelected(false);
+				target_select.SetSelected(false);
+				target_select.box_select_placeholder.SetSelected(true);
 				break;
 			}else if(select_state == select_placeholder && placeholder.Exists()){
 				placeholder.SetSelected(true);
 				this_hotspot.SetSelected(false);
 				target_select.SetSelected(false);
+				target_select.box_select_placeholder.SetSelected(false);
 				break;
 			}else if(select_state == select_target){
 				placeholder.SetSelected(false);
 				this_hotspot.SetSelected(false);
 				target_select.SetSelected(true);
+				target_select.box_select_placeholder.SetSelected(false);
 				break;
 			}
 		}

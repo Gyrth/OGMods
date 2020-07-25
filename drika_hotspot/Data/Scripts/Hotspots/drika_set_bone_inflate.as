@@ -12,7 +12,7 @@ class DrikaSetBoneInflate : DrikaElement{
 		bone_index = GetJSONInt(params, "bone_index", 11);
 		current_bone_index = bone_index;
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_movement_object};
@@ -39,6 +39,7 @@ class DrikaSetBoneInflate : DrikaElement{
 		if(triggered){
 			SetBoneInflate(true);
 		}
+		target_select.Delete();
 	}
 
 	string GetDisplayString(){

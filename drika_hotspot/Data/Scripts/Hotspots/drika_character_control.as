@@ -126,7 +126,7 @@ class DrikaCharacterControl : DrikaElement{
 		current_type = character_control_option;
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		recovery_time = GetJSONFloat(params, "recovery_time", 1.0);
@@ -964,5 +964,9 @@ class DrikaCharacterControl : DrikaElement{
 			triggered = false;
 			SetParameter(true);
 		}
+	}
+
+	void Delete(){
+		target_select.Delete();
 	}
 }

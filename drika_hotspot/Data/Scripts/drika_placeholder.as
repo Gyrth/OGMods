@@ -1,5 +1,8 @@
 class DrikaPlaceholder{
 	int id = -1;
+	//The object and placeholder_object are two different models.
+	//object is a simple cube that can be translated, rotated and scaled by the user.
+	//placeholder_object is a representation of the model with texture using a stipple effect shader.
 	Object@ object;
 	Object@ placeholder_object;
 	string name;
@@ -27,6 +30,7 @@ class DrikaPlaceholder{
 	}
 
 	void Create(){
+		Log(warning, "Create " + path);
 		id = CreateObject(path, false);
 		@object = ReadObjectFromID(id);
 		object.SetName(name);
@@ -43,10 +47,10 @@ class DrikaPlaceholder{
 	}
 
 	void AddPlaceholderObject(){
-		if(object_path == ""){
-			return;
-		}else if(@placeholder_object !is null){
+		if(@placeholder_object !is null){
 			placeholder_object.SetEnabled(true);
+			return;
+		}else if(object_path == ""){
 			return;
 		}
 		UpdatePlaceholderPreview();
@@ -121,12 +125,21 @@ class DrikaPlaceholder{
 				Log(warning, "Path does exist! " + placeholder_path);
 			}
 
-			int placeholder_object_id = CreateObject(placeholder_path, true);
+			CreatePlaceholderMesh();
+			UpdatePlaceholderTransform();
+		}
+	}
+
+	void CreatePlaceholderMesh(){
+		int placeholder_object_id = CreateObject(placeholder_path, true);
+		//Failing to load the path results in a -1 being given back.
+		if(placeholder_object_id != -1){
 			@placeholder_object = ReadObjectFromID(placeholder_object_id);
 			SetBoundingBox(placeholder_object);
 			object.SetScale(bounding_box);
-
-			UpdatePlaceholderTransform();
+			placeholder_object.SetName(name + " Mesh");
+		}else{
+			Log(error, "Failed to load placeholder path : " + placeholder_path);
 		}
 	}
 
@@ -184,6 +197,7 @@ class DrikaPlaceholder{
 				@object = ReadObjectFromID(id);
 				object.SetName(name);
 				object.SetSelectable(false);
+				object.SetEnabled(false);
 			}else{
 				Create();
 			}
@@ -206,6 +220,7 @@ class DrikaPlaceholder{
 				object.SetSelected(false);
 			}
 			object.SetSelectable(selectable);
+			object.SetEnabled(selectable);
 		}
 	}
 

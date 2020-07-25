@@ -22,7 +22,7 @@ enum ai_goals {
 class DrikaAIControl : DrikaElement{
 	int current_ai_goal;
 	int ai_goal;
-	DrikaTargetSelect ai_target(this, "ai_target");
+	DrikaTargetSelect@ ai_target;
 
 	array<ai_goals> goals_with_placeholders = {_investigate_slow, _investigate_urgent, _jump_to_target};
 
@@ -56,9 +56,9 @@ class DrikaAIControl : DrikaElement{
 		drika_element_type = drika_ai_control;
 		has_settings = true;
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
-		ai_target.LoadIdentifier(params);
+		@ai_target = DrikaTargetSelect(this, params, "ai_target");
 		SetTargetOptions();
 	}
 
@@ -83,6 +83,8 @@ class DrikaAIControl : DrikaElement{
 	void Delete(){
 		Reset();
 		placeholder.Remove();
+		target_select.Delete();
+		ai_target.Delete();
 	}
 
 	JSONValue GetCheckpointData(){

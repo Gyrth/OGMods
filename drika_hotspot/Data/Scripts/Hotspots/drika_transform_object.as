@@ -8,7 +8,7 @@ class DrikaTransformObject : DrikaElement{
 	vec3 before_translation;
 	quaternion before_rotation;
 	vec3 before_scale;
-	DrikaTargetSelect target_location(this, "target_location");
+	DrikaTargetSelect@ target_location;
 	bool use_target_location;
 	bool use_target_rotation;
 	bool use_target_scale;
@@ -33,7 +33,7 @@ class DrikaTransformObject : DrikaElement{
 		drika_element_type = drika_transform_object;
 		connection_types = {_movement_object, _env_object, _decal_object, _item_object, _hotspot_object};
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option | item_option;
 
 		transform_mode = transform_modes(GetJSONInt(params, "transform_mode", transform_to_placeholder));
@@ -43,12 +43,12 @@ class DrikaTransformObject : DrikaElement{
 		use_target_scale = GetJSONBool(params, "use_target_scale", false);
 		move_speed = GetJSONFloat(params, "move_speed", 1.0);
 		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
-		target_location.LoadIdentifier(params);
+		@target_location = DrikaTargetSelect(this, params, "target_location");
 		target_location.target_option = id_option | name_option | character_option | reference_option | team_option | item_option;
 
 		has_settings = true;
 	}
-	
+
 	void PostInit(){
 		if(transform_mode == transform_to_placeholder){
 			placeholder.Retrieve();
@@ -93,6 +93,8 @@ class DrikaTransformObject : DrikaElement{
 		if(transform_mode == transform_to_placeholder){
 			placeholder.Remove();
 		}
+		target_select.Delete();
+		target_location.Delete();
 	}
 
 	string GetDisplayString(){

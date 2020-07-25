@@ -5,7 +5,8 @@ enum target_options {	id_option = (1<<0),
 						character_option = (1<<4),
 						item_option = (1<<5),
 						batch_option = (1<<6),
-						camera_option = (1<<7)
+						camera_option = (1<<7),
+						box_select_option = (1<<8)
 					};
 
 class BatchObject{
@@ -134,19 +135,39 @@ class DrikaTargetSelect{
 	int target_option;
 	DrikaElement@ parent;
 	array<BatchObject@> batch_objects;
+	DrikaPlaceholder box_select_placeholder();
+	bool include_envobject;
+	bool include_group;
+	bool include_movement_object;
+	bool include_item_object;
+	bool include_hotspot;
 
-	DrikaTargetSelect(DrikaElement@ _parent, string tag = ""){
+	DrikaTargetSelect(DrikaElement@ _parent, JSONValue params, string tag = ""){
 		@parent = _parent;
+
 		if(tag != ""){
 			this.tag = tag;
 			identifier_type_tag = "identifier_type_" + tag;
 			identifier_tag = "identifier_" + tag;
 		}
+
+		box_select_placeholder.path = "Data/Objects/drika_box_select_placeholder.xml";
+		box_select_placeholder.name = "Box Select Helper";
+		box_select_placeholder.default_scale = vec3(1.0);
+		include_envobject = GetJSONBool(params, "include_envobject", true);
+		include_group = GetJSONBool(params, "include_group", true);
+		include_movement_object = GetJSONBool(params, "include_movement_object", true);
+		include_item_object = GetJSONBool(params, "include_item_object", true);
+		include_hotspot = GetJSONBool(params, "include_hotspot", true);
+
+		LoadIdentifier(params);
 	}
 
 	void PostInit(){
 		if(identifier_type == reference){
 			@reference_element = GetReferenceElement(reference_string);
+		}else if(identifier_type == box_select){
+			box_select_placeholder.Retrieve();
 		}
 	}
 
@@ -275,6 +296,10 @@ class DrikaTargetSelect{
 			identifier_choices.insertLast("Camera");
 		}
 
+		if((target_option & box_select_option) != 0){
+			identifier_choices.insertLast("Box Select");
+		}
+
 		int current_identifier_type = -1;
 
 		for(uint i = 0; i < identifier_choices.size(); i++){
@@ -285,7 +310,8 @@ class DrikaTargetSelect{
 				identifier_type == item && identifier_choices[i] == "Item"||
 				identifier_type == batch && identifier_choices[i] == "Batch"||
 				identifier_type == name && identifier_choices[i] == "Name"||
-				identifier_type == cam && identifier_choices[i] == "Camera"){
+				identifier_type == cam && identifier_choices[i] == "Camera" ||
+				identifier_type == box_select && identifier_choices[i] == "Box Select"){
 				current_identifier_type = i;
 				break;
 			}
@@ -322,6 +348,8 @@ class DrikaTargetSelect{
 				identifier_type = batch;
 			}else if(identifier_choices[current_identifier_type] == "Camera"){
 				identifier_type = cam;
+			}else if(identifier_choices[current_identifier_type] == "Box Select"){
+				identifier_type = box_select;
 			}
 			target_changed = true;
 		}
@@ -526,6 +554,46 @@ class DrikaTargetSelect{
 			}
 			ImGui_EndChild();
 			ImGui_NextColumn();
+		}else if(identifier_type == box_select){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("EnvObject");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("##EnvObject", include_envobject);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Group");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("##Group", include_group);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("MovementObject");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("##MovementObject", include_movement_object);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("ItemObject");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("##ItemObject", include_item_object);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Hotspot");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("##Hotspot", include_hotspot);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 
 		if(target_changed){
@@ -567,6 +635,13 @@ class DrikaTargetSelect{
 			for(uint i = 0; i < batch_ids.size(); i++){
 				data[identifier_tag].append(batch_ids[i]);
 			}
+		}else if(identifier_type == box_select){
+			box_select_placeholder.Save(data);
+			data["include_envobject"] = JSONValue(include_envobject);
+			data["include_group"] = JSONValue(include_group);
+			data["include_movement_object"] = JSONValue(include_movement_object);
+			data["include_item_object"] = JSONValue(include_item_object);
+			data["include_hotspot"] = JSONValue(include_hotspot);
 		}
 	}
 
@@ -588,8 +663,8 @@ class DrikaTargetSelect{
 				object_id = params[identifier_tag].asInt();
 			}else if(identifier_type == batch){
 				batch_ids = GetJSONIntArray(params, identifier_tag, {});
-			}else if(identifier_type == cam){
-
+			}else if(identifier_type == box_select){
+				box_select_placeholder.Load(params);
 			}
 		}else{
 			//By default the id is used as identifier with -1 as the target id.
@@ -610,6 +685,12 @@ class DrikaTargetSelect{
 					reference_string = "";
 				}
 			}
+		}else if(identifier_type == box_select){
+			if(!box_select_placeholder.Exists()){
+				box_select_placeholder.Create();
+				/* box_select_placeholder.CreatePlaceholderMesh(); */
+			}
+			box_select_placeholder.DrawEditing();
 		}
 	}
 
@@ -668,8 +749,53 @@ class DrikaTargetSelect{
 			for(uint i = 0; i < batch_ids.size(); i++){
 				target_objects.insertLast(ReadObjectFromID(batch_ids[i]));
 			}
+		}else if(identifier_type == box_select){
+			mat4 placeholder_transform = box_select_placeholder.object.GetTransform();
+
+			/* mat4 scale_mat;
+			scale_mat[0] = placeholder_transform[0] * 0.25;
+			scale_mat[5] = placeholder_transform[5] * 0.25;
+			scale_mat[10] = placeholder_transform[10] * 0.25;;
+			scale_mat[15] = placeholder_transform[15] * 0.25;
+			placeholder_transform = placeholder_transform * scale_mat; */
+
+			if(include_envobject){
+				BoxSelectCheck(target_objects, placeholder_transform, _env_object);
+			}
+			if(include_group){
+				BoxSelectCheck(target_objects, placeholder_transform, _group);
+			}
+			if(include_item_object){
+				BoxSelectCheck(target_objects, placeholder_transform, _item_object);
+			}
+			if(include_movement_object){
+				BoxSelectCheck(target_objects, placeholder_transform, _movement_object);
+			}
+			if(include_hotspot){
+				BoxSelectCheck(target_objects, placeholder_transform, _hotspot_object);
+			}
 		}
 		return target_objects;
+	}
+
+	void BoxSelectCheck(array<Object@> &inout target_objects, mat4 box_transform, EntityType type){
+		array<int> object_ids = GetObjectIDsType(type);
+
+		for(uint i = 0; i < object_ids.size(); i++){
+			Object@ obj = ReadObjectFromID(object_ids[i]);
+			//Exclude all the helper objects.
+			if(obj.GetName().findFirst("Helper") != -1){
+				continue;
+			}
+			vec3 obj_translation = obj.GetTranslation();
+			vec3 local_space_translation = invert(box_transform) * obj_translation;
+
+			if(local_space_translation.x >= -1 && local_space_translation.x <= 1 &&
+				local_space_translation.y >= -1 && local_space_translation.y <= 1 &&
+				local_space_translation.z >= -1 && local_space_translation.z <= 1){
+				target_objects.insertLast(obj);
+			}
+		}
 	}
 
 	array<MovementObject@> GetTargetMovementObjects(){
@@ -766,6 +892,8 @@ class DrikaTargetSelect{
 			return "batch";
 		}else if (identifier_type == cam){
 			return "Camera";
+		}else if (identifier_type == box_select){
+			return "Box Select";
 		}
 		return "NA";
 	}
@@ -786,13 +914,16 @@ class DrikaTargetSelect{
 
 	void StartEdit(){
 		SetReferencePlaceholderSelectable(true);
+		box_select_placeholder.SetSelectable(true);
 	}
 
 	void EditDone(){
 		SetReferencePlaceholderSelectable(false);
+		box_select_placeholder.SetSelectable(false);
 	}
 
 	void PreTargetChanged(){
+		box_select_placeholder.Remove();
 		SetReferencePlaceholderSelectable(false);
 		parent.PreTargetChanged();
 	}
@@ -800,6 +931,11 @@ class DrikaTargetSelect{
 	void TargetChanged(){
 		parent.TargetChanged();
 		SetReferencePlaceholderSelectable(true);
+	}
+
+	void Delete(){
+		SetReferencePlaceholderSelectable(false);
+		box_select_placeholder.Remove();
 	}
 
 	// When the reference has a placeholder then it is unselectable by default.

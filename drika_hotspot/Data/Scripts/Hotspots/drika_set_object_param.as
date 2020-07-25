@@ -15,7 +15,7 @@ class DrikaSetObjectParam : DrikaElement{
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
 		current_type = param_type;
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_env_object, _movement_object};
@@ -205,5 +205,9 @@ class DrikaSetObjectParam : DrikaElement{
 			triggered = false;
 			SetParameter(true);
 		}
+	}
+
+	void Delete(){
+		target_select.Delete();
 	}
 }

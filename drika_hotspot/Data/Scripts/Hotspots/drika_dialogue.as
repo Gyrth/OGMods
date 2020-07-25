@@ -98,7 +98,7 @@ class DrikaDialogue : DrikaElement{
 	bool update_dof = false;
 	bool enable_look_at_target;
 	bool enable_move_with_target;
-	DrikaTargetSelect track_target(this, "track_target");
+	DrikaTargetSelect@ track_target;
 	camera_transitions camera_transition;
 	int current_camera_transition;
 	vec3 camera_translation_from;
@@ -193,7 +193,7 @@ class DrikaDialogue : DrikaElement{
 		dof_settings = GetJSONFloatArray(params, "dof_settings", {0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
 		enable_look_at_target = GetJSONBool(params, "enable_look_at_target", false);
 		enable_move_with_target = GetJSONBool(params, "enable_move_with_target", false);
-		track_target.LoadIdentifier(params);
+		@track_target = DrikaTargetSelect(this, params, "track_target");
 		track_target.target_option = character_option | item_option;
 
 		drika_element_type = drika_dialogue;
@@ -201,8 +201,8 @@ class DrikaDialogue : DrikaElement{
 
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			connection_types = {_movement_object};
-			target_select.LoadIdentifier(params);
 		}
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 	}
 
@@ -390,6 +390,8 @@ class DrikaDialogue : DrikaElement{
 
 	void Delete(){
 		placeholder.Remove();
+		target_select.Delete();
+		track_target.Delete();
 		Reset();
 	}
 

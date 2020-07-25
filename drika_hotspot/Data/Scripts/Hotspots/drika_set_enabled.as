@@ -5,8 +5,8 @@ class DrikaSetEnabled : DrikaElement{
 	DrikaSetEnabled(JSONValue params = JSONValue()){
 		enabled = GetJSONBool(params, "enabled", true);
 
-		target_select.LoadIdentifier(params);
-		target_select.target_option = id_option | name_option | character_option | reference_option | team_option | batch_option;
+		@target_select = DrikaTargetSelect(this, params);
+		target_select.target_option = id_option | name_option | character_option | reference_option | team_option | batch_option | box_select_option;
 
 		drika_element_type = drika_set_enabled;
 		connection_types = {_env_object, _hotspot_object};
@@ -76,6 +76,7 @@ class DrikaSetEnabled : DrikaElement{
 
 	void Delete(){
 		Reset();
+		target_select.Delete();
 	}
 
 	string GetDisplayString(){

@@ -17,7 +17,7 @@ class DrikaSendCharacterMessage : DrikaElement{
 		character_message_type = character_message_types(GetJSONInt(params, "character_message_type", character_message));
 		current_message_type = character_message_type;
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_movement_object};
@@ -116,5 +116,9 @@ class DrikaSendCharacterMessage : DrikaElement{
 			}
 		}
 		return true;
+	}
+
+	void Delete(){
+		target_select.Delete();
 	}
 }

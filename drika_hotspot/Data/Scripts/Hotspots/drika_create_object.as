@@ -24,7 +24,7 @@ class DrikaCreateObject : DrikaElement{
 		AttemptRegisterReference(reference_string);
 		create_delete_mode = create_delete_modes(GetJSONInt(params, "create_delete_mode", _create_object));
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = reference_option;
 
 		has_settings = true;
@@ -35,6 +35,7 @@ class DrikaCreateObject : DrikaElement{
 	void Delete(){
 		Reset();
 		placeholder.Remove();
+		target_select.Delete();
 		RemoveReference(this);
 	}
 

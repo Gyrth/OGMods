@@ -21,7 +21,7 @@ class DrikaSetColor : DrikaElement{
 		current_palette_slot = palette_slot;
 		after_color = GetJSONVec3(params, "after_color", vec3(1));
 
-		target_select.LoadIdentifier(params);
+		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		connection_types = {_movement_object, _env_object, _item_object};
@@ -47,6 +47,7 @@ class DrikaSetColor : DrikaElement{
 
 	void Delete(){
 		SetColor(true);
+		target_select.Delete();
     }
 
 	string GetDisplayString(){
