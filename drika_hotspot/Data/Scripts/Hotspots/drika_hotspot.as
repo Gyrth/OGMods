@@ -765,11 +765,11 @@ void DrawEditor(){
 					level.SendMessage("drika_set_ui_snap_scale " + ui_snap_scale);
 				}
 
-				if(ImGui_Checkbox("Transform Relative", move_relative)){
+				/* if(ImGui_Checkbox("Transform Relative", move_relative)){
 					params.SetInt("Transform Relative", move_relative?1:0);
 					//Reset the transform when turning this setting on or off.
 					old_transform = this_hotspot.GetTransform();
-				}
+				} */
 
 				if(ImGui_MenuItem("Configure Palette")){
 					open_palette = true;
