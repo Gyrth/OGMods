@@ -313,6 +313,7 @@ class DrikaTransformObject : DrikaElement{
 					SetTargetRotation(targets[i], reset?before_rotation:new_rotation);
 				}
 			}
+			RefreshChildren(targets[i]);
 		}
 		return true;
 	}

@@ -629,18 +629,6 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
-	void RefreshChildren(Object@ obj){
-		if(obj.GetType() == _group){
-			array<int> children = obj.GetChildren();
-			for(uint i = 0; i < children.size(); i++){
-				Object@ child = ReadObjectFromID(children[i]);
-				refresh_queue.insertLast(child);
-				refresh_queue_counter.insertLast(0);
-				RefreshChildren(child);
-			}
-		}
-	}
-
 	void TimelineUpdateAnimation(){
 		if(animation_type == forward){
 			animation_timer += time_step;
