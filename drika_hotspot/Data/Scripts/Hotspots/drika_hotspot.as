@@ -871,6 +871,7 @@ void DrawEditor(){
 					current_line -= 1;
 					update_scroll = true;
 					GetCurrentElement().StartEdit();
+					steal_focus = true;
 				}
 			}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow))){
 				if(current_line < int(drika_elements.size() - 1)){
@@ -880,6 +881,7 @@ void DrawEditor(){
 					current_line += 1;
 					update_scroll = true;
 					GetCurrentElement().StartEdit();
+					steal_focus = true;
 				}
 			}else if(drika_elements.size() > 0 && !reorded && post_init_queue.size() == 0){
 				if(!GetInputDown(0, "lctrl") && ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Enter))){
@@ -943,6 +945,7 @@ void DrawEditor(){
 							display_index = int(drika_indexes[multi_select[multi_select.size() - 1]]);
 							current_line = int(multi_select[multi_select.size() - 1]);
 							GetCurrentElement().StartEdit();
+							steal_focus = true;
 							continue;
 						}else{
 							multi_select.insertLast(i);
@@ -954,6 +957,7 @@ void DrawEditor(){
 					display_index = int(item_no);
 					current_line = int(i);
 					GetCurrentElement().StartEdit();
+					steal_focus = true;
 				}
 			}
 
