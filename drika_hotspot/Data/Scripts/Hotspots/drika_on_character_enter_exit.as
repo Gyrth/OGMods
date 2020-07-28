@@ -1,8 +1,3 @@
-enum hotspot_trigger_types {	on_enter = 0,
-								on_exit = 1,
-								while_inside = 2,
-								while_outside = 3};
-
 enum target_character_types {	check_id = 0,
 								check_team = 1,
 								any_character = 2,
@@ -28,7 +23,6 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	hotspot_trigger_types hotspot_trigger_type;
 
 	array<string> character_trigger_choices = {"Check ID", "Check Team", "Any Character", "Any Player", "Any NPC"};
-	array<string> hotspot_trigger_choices = {"On Enter", "On Exit", "While Inside", "While Outside"};
 
 	DrikaOnCharacterEnterExit(JSONValue params = JSONValue()){
 		target_character_type = target_character_types(GetJSONInt(params, "target_character_type", 0));

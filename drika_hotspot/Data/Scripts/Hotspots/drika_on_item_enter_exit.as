@@ -1,37 +1,51 @@
-enum item_trigger_types {	check_id = 0,
-							check_label = 1};
-
 class DrikaOnItemEnterExit : DrikaElement{
-	string item_label;
-	int item_id;
-	int current_combo_item = 0;
-	item_trigger_types trigger_type;
-	array<string> item_triggger_choices = {"Check ID", "Check Label"};
+	hotspot_trigger_types hotspot_trigger_type;
+	int new_hotspot_trigger_type;
+	array<int> items_inside;
 
 	DrikaOnItemEnterExit(JSONValue params = JSONValue()){
-		trigger_type = item_trigger_types(GetJSONInt(params, "trigger_type", 0));
-		current_combo_item = int(trigger_type);
-		item_id = GetJSONInt(params, "item_id", -1);
-		item_label = GetJSONString(params, "item_label", "");
+		hotspot_trigger_type = hotspot_trigger_types(GetJSONInt(params, "hotspot_trigger_type", 0));
+		new_hotspot_trigger_type = hotspot_trigger_type;
+
+		@target_select = DrikaTargetSelect(this, params);
+		target_select.target_option = id_option | name_option | item_option | reference_option;
 
 		connection_types = {_item_object};
 		drika_element_type = drika_on_item_enter_exit;
 		has_settings = true;
 	}
 
+	void PostInit(){
+		target_select.PostInit();
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
-		data["trigger_type"] = JSONValue(trigger_type);
-		data["item_label"] = JSONValue(item_label);
+		data["hotspot_trigger_type"] = JSONValue(hotspot_trigger_type);
+		target_select.SaveIdentifier(data);
 		return data;
 	}
 
 	string GetDisplayString(){
-		if(trigger_type == check_id){
-			return "OnItemEnter " + item_id;
-		}else{
-			return "OnItemEnter " + item_label;
+		string display_string = "";
+
+		if(hotspot_trigger_type == on_enter){
+			display_string += "OnItemEnter ";
+		}else if(hotspot_trigger_type == on_exit){
+			display_string += "OnItemExit ";
+		}else if(hotspot_trigger_type == while_inside){
+			display_string += "WhileItemInside ";
+		}else if(hotspot_trigger_type == while_outside){
+			display_string += "WhileItemOutside ";
 		}
+
+		display_string += target_select.GetTargetDisplayText();
+
+		return display_string;
+	}
+
+	void StartSettings(){
+		target_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
@@ -45,53 +59,95 @@ class DrikaOnItemEnterExit : DrikaElement{
 		ImGui_NextColumn();
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
-		if(ImGui_Combo("##Check for", current_combo_item, item_triggger_choices, item_triggger_choices.size())){
-			trigger_type = item_trigger_types(current_combo_item);
+		if(ImGui_Combo("##Check for", new_hotspot_trigger_type, hotspot_trigger_choices, hotspot_trigger_choices.size())){
+			hotspot_trigger_type = hotspot_trigger_types(new_hotspot_trigger_type);
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(trigger_type == check_id){
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("ID");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
-			ImGui_InputInt("##ID", item_id);
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-		}else{
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Label");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
-			ImGui_InputText("##Label", item_label, 64);
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-		}
+		target_select.DrawSelectTargetUI();
 	}
 
-	void ReceiveMessage(string message, int param){
-		if(trigger_type == check_id && message == "ItemEnter"){
-			if(param == item_id){
-				triggered = true;
-			}
-		}
-	}
-
-	void ReceiveMessage(string message, string param){
-		if(trigger_type == check_label && message == "ItemEnter"){
-			if(param == item_label){
-				triggered = true;
+	void DrawEditing(){
+		array<Object@> targets = target_select.GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			if(targets[i].GetType() == _item_object){
+				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
 		}
 	}
 
 	bool Trigger(){
-		if(triggered){
-			triggered = false;
-			return true;
-		}else{
-			return false;
+		if(!triggered){
+			items_inside = GetItemsInside();
 		}
+		array<Object@> objects = target_select.GetTargetObjects();
+
+		if(hotspot_trigger_type == on_enter){
+			array<int> new_items_inside = GetItemsInside();
+			for(uint i = 0; i < objects.size(); i++){
+				int obj_id = objects[i].GetID();
+				if(items_inside.find(obj_id) == -1 && new_items_inside.find(obj_id) != -1){
+					triggered = false;
+					return true;
+				}
+			}
+			items_inside = new_items_inside;
+		}else if(hotspot_trigger_type == on_exit){
+			array<int> new_items_inside = GetItemsInside();
+			for(uint i = 0; i < objects.size(); i++){
+				int obj_id = objects[i].GetID();
+				if(items_inside.find(obj_id) != -1 && new_items_inside.find(obj_id) == -1){
+					triggered = false;
+					return true;
+				}
+			}
+			items_inside = new_items_inside;
+		}else if(hotspot_trigger_type == while_inside){
+			for(uint i = 0; i < objects.size(); i++){
+				if(items_inside.find(objects[i].GetID()) != -1){
+					triggered = false;
+					return true;
+				}
+			}
+		}else if(hotspot_trigger_type == while_outside){
+			for(uint i = 0; i < objects.size(); i++){
+				if(items_inside.find(objects[i].GetID()) == -1){
+					triggered = false;
+					return true;
+				}
+			}
+		}
+		items_inside = GetItemsInside();
+		triggered = true;
+		return false;
+	}
+
+	array<int> GetItemsInside(){
+		array<int> object_ids = GetObjectIDsType(_item_object);
+		mat4 hotspot_transform = this_hotspot.GetTransform();
+		array<int> inside_ids;
+
+		for(uint i = 0; i < object_ids.size(); i++){
+			ItemObject@ io = ReadItemID(object_ids[i]);
+
+			vec3 io_translation = io.GetPhysicsPosition();
+			vec3 local_space_translation = invert(hotspot_transform) * io_translation;
+
+			if(local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
+				local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
+				local_space_translation.z >= -2 && local_space_translation.z <= 2){
+				inside_ids.insertLast(object_ids[i]);
+			}
+		}
+		return inside_ids;
+	}
+
+	void Reset(){
+		triggered = false;
+	}
+
+	void Delete(){
+		target_select.Delete();
 	}
 }
