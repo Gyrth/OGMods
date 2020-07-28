@@ -459,19 +459,24 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	bool CharacterInside(MovementObject@ char, Object@ hotspot_obj){
-		if(hotspot_obj is null){
+		if((!external_hotspot && this_hotspot is null) ||
+			(external_hotspot && external_hotspot_obj is null)){
 			return false;
 		}
-		vec3 pos = hotspot_obj.GetTranslation();
-		vec3 scale = hotspot_obj.GetScale();
 
-		vec3 char_pos = char.position;
-		bool is_inside =	char_pos.x > pos.x-scale.x*2.0f
-							&& char_pos.x < pos.x+scale.x*2.0f
-							&& char_pos.y > pos.y-scale.y*2.0f
-							&& char_pos.y < pos.y+scale.y*2.0f
-							&& char_pos.z > pos.z-scale.z*2.0f
-							&& char_pos.z < pos.z+scale.z*2.0f;
+		mat4 hotspot_transform;
+		if(external_hotspot){
+			hotspot_transform = external_hotspot_obj.GetTransform();
+		}else{
+			hotspot_transform =	this_hotspot.GetTransform();
+		}
+		
+		vec3 char_translation = char.position;
+		vec3 local_space_translation = invert(hotspot_transform) * char_translation;
+
+		bool is_inside = (	local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
+							local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
+							local_space_translation.z >= -2 && local_space_translation.z <= 2);
 
 		return is_inside;
 	}
