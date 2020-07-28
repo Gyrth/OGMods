@@ -153,7 +153,7 @@ class DrikaTargetSelect{
 
 		box_select_placeholder.path = "Data/Objects/drika_box_select_placeholder.xml";
 		box_select_placeholder.name = "Box Select Helper";
-		box_select_placeholder.default_scale = vec3(1.0);
+		box_select_placeholder.default_scale = vec3(0.5);
 		include_envobject = GetJSONBool(params, "include_envobject", true);
 		include_group = GetJSONBool(params, "include_group", true);
 		include_movement_object = GetJSONBool(params, "include_movement_object", true);
@@ -790,9 +790,9 @@ class DrikaTargetSelect{
 			vec3 obj_translation = obj.GetTranslation();
 			vec3 local_space_translation = invert(box_transform) * obj_translation;
 
-			if(local_space_translation.x >= -1 && local_space_translation.x <= 1 &&
-				local_space_translation.y >= -1 && local_space_translation.y <= 1 &&
-				local_space_translation.z >= -1 && local_space_translation.z <= 1){
+			if(local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
+				local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
+				local_space_translation.z >= -2 && local_space_translation.z <= 2){
 				target_objects.insertLast(obj);
 			}
 		}
