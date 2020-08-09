@@ -1,0 +1,167 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>currently_playing_ui_testing</Name>
+<Description></Description>
+<Shader>post</Shader>
+<Shadows>true</Shadows>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/ProcDesert/ProcDesert_hm.png</Heightmap>
+    <ShaderExtra></ShaderExtra>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/ProcDesert/ProcDesert_c.tga</ColorMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/pebbles_normal.tga" materialpath="Data/Materials/rock.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/pebbly_sand.tga" normalpath="Data/Textures/Terrain/DetailTextures/pebbly_sand_normal.tga" materialpath="Data/Materials/sand.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/sandwaves.tga" normalpath="Data/Textures/Terrain/DetailTextures/sandwaves_normal.tga" materialpath="Data/Materials/sand.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/cracked_ground.tga" normalpath="Data/Textures/Terrain/DetailTextures/cracked_ground_normal.tga" materialpath="Data/Materials/dirt.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
+<AmbientSounds />
+<Script>challengelevel.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Extra AO" type="string" val="0" />
+    <parameter name="HDR Black point" type="string" val="0.005" />
+    <parameter name="HDR Bloom multiplier" type="string" val="1" />
+    <parameter name="HDR White point" type="string" val="0.8" />
+    <parameter name="Level Boundaries" type="string" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
+    <parameter name="Sky Rotation" type="string" val="0" />
+</LevelScriptParameters>
+<NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<Sky>
+    <DomeTexture>Data/Textures/skies/Blue2.tga</DomeTexture>
+    <SunAngularRad>0.0840704</SunAngularRad>
+    <SunColorAngle>339.953</SunColorAngle>
+    <RayToSun r0="-0.050456" r1="0.304706" r2="0.951109" />
+</Sky>
+<ActorObjects>
+    <EnvObject t0="135.695" t1="97.0009" t2="-99.6069" s0="1" s1="1" s2="1" q0="-0.106573" q1="-0.49827" q2="-0.0618746" q3="0.85822" euler_x="-0.247094" euler_y="-1.05204" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <ActorObject t0="47.5088" t1="138.19" t2="-58.1352" s0="1" s1="1" s2="1" q0="0" q1="0.975485" q2="0" q3="0.220066" euler_x="3.14159" euler_y="0.443764" euler_z="3.14159" id="6" type_file="Data/Objects/IGF_Characters/IGF_GuardActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fall Damage Multiplier" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
+            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
+            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
+            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Jump - Air Control" type="float" val="3" />
+            <parameter name="Jump - Initial Velocity" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain Boost" type="float" val="10" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Lives" type="int" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="No Look Around" type="int" val="0" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Stick To Nav Mesh" type="int" val="0" />
+            <parameter name="Teams" type="string" val="guard" />
+            <parameter name="Throw Counter Probability" type="float" val="0.4" />
+            <parameter name="Throw Trainer" type="int" val="0" />
+            <parameter name="Weapon Catch Skill" type="float" val="1" />
+            <parameter name="Wearing Metal Armor" type="int" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Clothes" channel="0" red="0.47451" green="0.443137" blue="0.321569" />
+            <Color label="Fur" channel="1" red="0.505882" green="0.490196" blue="0.337255" />
+            <Color label="Leather" channel="2" red="0.313726" green="0.313726" blue="0.258824" />
+            <Color label="Armor" channel="3" red="0.356863" green="0.34902" blue="0.313726" />
+        </Palette>
+    </ActorObject>
+    <CameraObject t0="49.433" t1="138.729" t2="-55.8335" s0="1" s1="1" s2="1" q0="-0.0765961" q1="0.215961" q2="-0.0169965" q3="-0.973245" euler_x="0.15708" euler_y="-0.436719" euler_z="0" id="7">
+        <parameters />
+    </CameraObject>
+    <EnvObject t0="130.193" t1="94.3745" t2="-96.8612" s0="1.08825" s1="1.08825" s2="1.08825" q0="0.480396" q1="0.663254" q2="0.190919" q3="0.541169" euler_x="1.98656" euler_y="0.563835" euler_z="1.51482" id="355" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="137.913" t1="99.3111" t2="-118.586" s0="1.08825" s1="1.08825" s2="1.08825" q0="-0.582759" q1="-0.272452" q2="-0.0726685" q3="0.762156" euler_x="-1.37048" euler_y="-0.523597" euler_z="0.241096" id="356" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="132.055" t1="99.5174" t2="-106.791" s0="1.08825" s1="1.08825" s2="1.08825" q0="-0.15615" q1="-0.838738" q2="-0.492796" q3="0.171137" euler_x="2.10339" euler_y="-0.456688" euler_z="3.03749" id="357" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="131.687" t1="101.765" t2="-111.607" s0="1.08825" s1="1.08825" s2="1.08825" q0="0.827406" q1="0.0201857" q2="0.554155" q3="0.0889054" euler_x="2.71205" euler_y="-1.15164" euler_z="0.330146" id="358" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="137.556" t1="99.0111" t2="-110.388" s0="1.08825" s1="1.08825" s2="1.08825" q0="0.480396" q1="0.663254" q2="0.190919" q3="0.541169" euler_x="1.98656" euler_y="0.563835" euler_z="1.51482" id="359" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="128.831" t1="99.8271" t2="-106.452" s0="0.77675" s1="0.803017" s2="1" q0="-0.513912" q1="0" q2="0" q3="0.857843" euler_x="-1.07948" euler_y="0" euler_z="0" id="360" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/DesertRock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="142.47" t1="94.9019" t2="-106.96" s0="1" s1="1" s2="1" q0="-0.54958" q1="0" q2="0" q3="0.835441" euler_x="-1.16372" euler_y="0" euler_z="0" id="361" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1b.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="137.299" t1="97.5492" t2="-104.496" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="362" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1b.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="148.312" t1="94.3362" t2="-113.111" s0="1.08825" s1="1.08825" s2="1.08825" q0="0.00326373" q1="0.242145" q2="0.140386" q3="0.960024" euler_x="0.083923" euler_y="0.482521" euler_z="0.311066" id="363" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="142.941" t1="97.4899" t2="-116.028" s0="1" s1="1" s2="1" q0="0" q1="-0.645443" q2="0" q3="0.763808" euler_x="0" euler_y="-1.40321" euler_z="0" id="364" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1b.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="187.991" t1="88.2071" t2="-83.6802" s0="1.08825" s1="1.08825" s2="1.08825" q0="0.818788" q1="-0.016533" q2="0.553448" q3="0.151684" euler_x="2.54851" euler_y="-1.1465" euler_z="0.349123" id="365" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="168.501" t1="78.0712" t2="-49.2687" s0="1.08825" s1="1.08825" s2="1.08825" q0="-0.645259" q1="0.0153784" q2="0.477001" q3="0.596552" euler_x="-1.3534" euler_y="0.68662" euler_z="0.789786" id="366" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="161.293" t1="79.9655" t2="-50.5726" s0="1.08825" s1="1.08825" s2="1.08825" q0="0.356299" q1="0.608468" q2="0.325851" q3="0.629793" euler_x="1.56413" euler_y="0.563581" euler_z="1.51496" id="367" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="178.655" t1="87.9808" t2="-83.1028" s0="1.35668" s1="0.914713" s2="1" q0="-0.000178062" q1="0.0254216" q2="-0.00700594" q3="0.999652" euler_x="-0.000713126" euler_y="0.0508449" euler_z="-0.0140347" id="368" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1b.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="138.073" t1="101.221" t2="-114.439" s0="1.08825" s1="1.08825" s2="1.08825" q0="0.567245" q1="-0.410612" q2="0.706561" q3="0.101992" euler_x="-1.52936" euler_y="-1.08724" euler_z="-2.37742" id="373" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="93.5966" t1="102.86" t2="-78.9806" s0="1.08825" s1="1.08825" s2="1.08825" q0="0.197588" q1="0.849198" q2="0.153889" q3="0.464909" euler_x="2.434" euler_y="0.816547" euler_z="2.36752" id="378" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="158.943" t1="106.014" t2="-160.048" s0="1.40013" s1="1.45533" s2="1.08825" q0="-0.640418" q1="0.299415" q2="-0.691069" q3="0.150463" euler_x="-1.57009" euler_y="-0.919081" euler_z="-1.79432" id="379" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="305.002" t1="93.1045" t2="-123.506" s0="4.37837" s1="4.43743" s2="1.77428" q0="0.298691" q1="0.641326" q2="0.139582" q3="0.692821" euler_x="1.57253" euler_y="0.936122" euler_z="1.33514" id="380" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="175.989" t1="96.6205" t2="-149.99" s0="1.40013" s1="1.45533" s2="1.08825" q0="-0.0742923" q1="-0.577838" q2="0.807705" q3="0.090535" euler_x="-1.24379" euler_y="0.015384" euler_z="2.90732" id="381" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="156.477" t1="96.6556" t2="-144.469" s0="1.40013" s1="1.45533" s2="1.08825" q0="0.0479463" q1="-0.707517" q2="-0.191701" q3="0.678507" euler_x="1.58792" euler_y="-1.22773" euler_z="-1.79461" id="382" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/rock1a.xml">
+        <parameters />
+    </EnvObject>
+</ActorObjects>
+<RecentItems />

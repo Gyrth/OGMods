@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<Mod>
+    <Id>currently-playing-ui</Id>
+    <Name>Currently Playing UI</Name>
+    <Category>Item Pack</Category>
+    <Version>0.1.0</Version>
+    <Author>Gyrth McMulin</Author>
+    <Thumbnail>Data/Images/currently_playing_ui_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/currently_playing_ui_full.jpg</PreviewImage>
+    <Description>currently playing ui.</Description>
+    <Tag>b5</Tag>
+    <Tag>scripting</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <NeedsRestart>false</NeedsRestart>
+	<LevelHookFile>Data/Scripts/currently_playing_ui.as</LevelHookFile>
+	<Level title="Currently Playing UI Testing" thumbnail="Images/currently_playing_ui_full.jpg">currently_playing_ui_testing.xml</Level>
+</Mod>
