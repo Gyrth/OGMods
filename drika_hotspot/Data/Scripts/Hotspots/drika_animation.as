@@ -939,7 +939,7 @@ class DrikaAnimation : DrikaElement{
 		if(ImGui_IsMouseClicked(0)){
 			//Remove any keyframe that is currently at this position.
 			for(uint i = 0; i < key_data.size(); i++){
-				if(key_data[i].time == target_key.moving_time){
+				if(key_data[i] !is target_key && key_data[i].time == target_key.moving_time){
 					key_data.removeAt(i);
 					i--;
 				}
