@@ -918,6 +918,20 @@ class DrikaAnimation : DrikaElement{
 								moving_animation_key = true;
 							}
 						}
+					}else if(GetInputPressed(0, "c")){
+						uint size = key_data.size();
+						for(uint i = 0; i < size; i++){
+							if(key_data[i].time == timeline_position){
+								AnimationKey new_key = key_data[i];
+
+								@target_key = new_key;
+								target_key.moving = true;
+								target_key.moving_time = target_key.time;
+								moving_animation_key = true;
+
+								key_data.insertLast(@new_key);
+							}
+						}
 					}
 				}
 			}
