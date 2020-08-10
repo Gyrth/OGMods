@@ -910,7 +910,7 @@ class DrikaAnimation : DrikaElement{
 					}else if(GetInputPressed(0, "x")){
 						DeleteAnimationKey();
 					}else if(GetInputPressed(0, "g")){
-						for(uint i = 0; i < key_data.size(); i++){
+						for(uint i = 0, len = key_data.size(); i < len; i++){
 							if(key_data[i].time == timeline_position){
 								@target_key = key_data[i];
 								target_key.moving = true;
@@ -919,8 +919,7 @@ class DrikaAnimation : DrikaElement{
 							}
 						}
 					}else if(GetInputPressed(0, "c")){
-						uint size = key_data.size();
-						for(uint i = 0; i < size; i++){
+						for(uint i = 0, len = key_data.size(); i < len; i++){
 							if(key_data[i].time == timeline_position){
 								AnimationKey new_key = key_data[i];
 
