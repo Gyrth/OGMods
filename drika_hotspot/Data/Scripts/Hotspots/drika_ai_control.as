@@ -16,7 +16,9 @@ enum ai_goals {
 				_attack,
 				_roll,
 				_dodge,
-				_throw_enemy
+				_throw_enemy,
+				_investigate_slow_at_target,
+				_investigate_urgent_at_target
 			};
 
 class DrikaAIControl : DrikaElement{
@@ -43,7 +45,9 @@ class DrikaAIControl : DrikaElement{
 										"Attack",
 										"Roll",
 										"Dodge",
-										"Throw Enemy"
+										"Throw Enemy",
+										"Investigate Slow At Target",
+										"Investigate Urgent At Target"
 									};
 
 	DrikaAIControl(JSONValue params = JSONValue()){
@@ -69,6 +73,8 @@ class DrikaAIControl : DrikaElement{
 			ai_target.target_option = id_option | reference_option | item_option;
 		}else if(ai_goal == _attack_target || ai_goal == _escort || ai_goal == _choke || ai_goal == _cut_throat){
 			ai_target.target_option = id_option | name_option | character_option | reference_option | team_option;
+		}else if(ai_goal == _investigate_slow_at_target || ai_goal == _investigate_urgent_at_target){
+			ai_target.target_option = id_option | name_option | character_option | reference_option | team_option | item_option;
 		}else if(ai_goal == _throw_weapon){
 			ai_target.target_option = character_option;
 		}
@@ -122,7 +128,7 @@ class DrikaAIControl : DrikaElement{
 				DebugDrawLine(placeholder.GetTranslation(), targets[i].position, vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
 
-			if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
+			if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat || ai_goal == _investigate_slow_at_target || ai_goal == _investigate_urgent_at_target){
 				array<Object@> ai_targets = ai_target.GetTargetObjects();
 
 				for(uint j = 0; j < ai_targets.size(); j++){
@@ -151,7 +157,7 @@ class DrikaAIControl : DrikaElement{
 
 	string GetDisplayString(){
 		string display_text = "AIControl " + target_select.GetTargetDisplayText() + " " + ai_goal_names[ai_goal];
-		if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
+		if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat || ai_goal == _investigate_slow_at_target || ai_goal == _investigate_urgent_at_target){
 			display_text += " " + ai_target.GetTargetDisplayText();
 		}
 		return display_text;
@@ -187,7 +193,7 @@ class DrikaAIControl : DrikaElement{
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
+		if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat || ai_goal == _investigate_slow_at_target || ai_goal == _investigate_urgent_at_target){
 			ImGui_AlignTextToFramePadding();
 			if(ai_goal == _patrol){
 				ImGui_Text("Pathpoint Object");
@@ -203,6 +209,10 @@ class DrikaAIControl : DrikaElement{
 				ImGui_Text("Target Character");
 			}else if(ai_goal == _cut_throat){
 				ImGui_Text("Target Character");
+			}else if(ai_goal == _investigate_slow_at_target){
+				ImGui_Text("Target");
+			}else if(ai_goal == _investigate_urgent_at_target){
+				ImGui_Text("Target");
 			}
 			ImGui_NextColumn();
 			ImGui_NextColumn();
@@ -215,7 +225,7 @@ class DrikaAIControl : DrikaElement{
 		array<Object@> ai_targets = ai_target.GetTargetObjects();
 		if(targets.size() == 0){return false;}
 
-		if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat){
+		if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat || ai_goal == _investigate_slow_at_target || ai_goal == _investigate_urgent_at_target){
 			if(ai_targets.size() == 0){
 				return false;
 			}
@@ -375,6 +385,26 @@ class DrikaAIControl : DrikaElement{
 						command += "startled = false;";
 						command += "last_throw_attempt_time = 0.0;";
 						command += "throw_after_active_block = true;";
+					}
+					break;
+				case _investigate_slow_at_target:
+					{
+						for(uint j = 0; j < ai_targets.size(); j++){
+							vec3 target_pos = GetTargetTranslation(ai_targets[j]);
+							command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+							command += "SetGoal(_investigate);";
+							command += "SetSubGoal(_investigate_slow);";
+						}
+					}
+					break;
+				case _investigate_urgent_at_target:
+					{
+						for(uint j = 0; j < ai_targets.size(); j++){
+							vec3 target_pos = GetTargetTranslation(ai_targets[j]);
+							command += "nav_target = vec3(" + target_pos.x + "," + target_pos.y + "," + target_pos.z + ");";
+							command += "SetGoal(_investigate);";
+							command += "SetSubGoal(_investigate_urgent);";
+						}
 					}
 					break;
 				default:

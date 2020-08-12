@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="0.613732" t1="2.77041" t2="-3.80163" s0="1" s1="1" s2="1" q0="0.209547" q1="-0.305877" q2="0.069207" q3="0.926142" euler_x="0.445022" euler_y="-0.637982" euler_z="0" id="1">
+    <CameraObject t0="-3.91707" t1="5.99661" t2="-0.569113" s0="1" s1="1" s2="1" q0="0.316841" q1="0.159948" q2="-0.0542987" q3="0.933317" euler_x="0.654542" euler_y="0.339453" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.16529" t1="-3.42134" t2="1.76417" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -1220,9 +1220,6 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <EnvObject name="Create Object Helper" t0="-3.92594" t1="0.971108" t2="-7.89715" s0="2" s1="2" s2="2" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="301" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="8.04237" t1="-2.71935" t2="-7.56491" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="302" color_r="0" color_g="0.658842" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
@@ -1531,7 +1528,7 @@
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
             <parameter name="Run in EditorMode" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;create_delete_mode&quot;:0,&quot;function&quot;:15,&quot;object_path&quot;:&quot;Data/Objects/primitives/edged_cone.xml&quot;,&quot;placeholder_id&quot;:301,&quot;reference_string&quot;:&quot;cone&quot;},{&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:5,&quot;duration_method&quot;:0,&quot;ease_function&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:&quot;cone&quot;,&quot;identifier_type&quot;:1,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2,2,2],&quot;time&quot;:0,&quot;translation&quot;:[-3.9259400367736816,0.97110795974731445,-7.8971495628356934]},{&quot;rotation&quot;:[-0.70710676908493042,0,0,0.70710676908493042],&quot;scale&quot;:[2,2,2],&quot;time&quot;:2,&quot;translation&quot;:[-3.9259400367736816,-1.7367510795593262,-13.238790512084961]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[2,2,2],&quot;time&quot;:4,&quot;translation&quot;:[-3.9259400367736816,0.97110795974731445,-7.8971495628356934]},{&quot;rotation&quot;:[-0.70710676908493042,0,0,0.70710676908493042],&quot;scale&quot;:[2,2,2],&quot;time&quot;:5,&quot;translation&quot;:[-3.9259400367736816,-1.7367510795593262,-13.238790512084961]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:false}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;character_team&quot;:&quot;&quot;,&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;object_id&quot;:3,&quot;reference_string&quot;:&quot;&quot;,&quot;target_character_type&quot;:0},{&quot;ai_goal&quot;:19,&quot;function&quot;:35,&quot;identifier&quot;:51,&quot;identifier_ai_target&quot;:376,&quot;identifier_type&quot;:4,&quot;identifier_type_ai_target&quot;:5}]}&#x0A;' />
             <parameter name="Show UI Grid" type="int" val="1" />
             <parameter name="Transform Relative" type="int" val="1" />
             <parameter name="UI Snap Scale" type="int" val="20" />
