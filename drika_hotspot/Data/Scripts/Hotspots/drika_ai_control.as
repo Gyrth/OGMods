@@ -132,15 +132,7 @@ class DrikaAIControl : DrikaElement{
 				array<Object@> ai_targets = ai_target.GetTargetObjects();
 
 				for(uint j = 0; j < ai_targets.size(); j++){
-					vec3 target_location = ai_targets[j].GetTranslation();
-
-					if(ai_targets[j].GetType() == _item_object){
-						ItemObject@ item_obj = ReadItemID(ai_targets[j].GetID());
-						target_location = item_obj.GetPhysicsPosition();
-					}else if(ai_targets[j].GetType() == _movement_object){
-						MovementObject@ char = ReadCharacterID(ai_targets[j].GetID());
-						target_location = char.position;
-					}
+					vec3 target_location = GetTargetTranslation(ai_targets[j]);
 					DebugDrawLine(targets[i].position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
 				}
 			}
