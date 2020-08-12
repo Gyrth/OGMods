@@ -1,12 +1,32 @@
+enum set_velocity_modes {
+							_set_velocity_with_placeholder = 0,
+							_set_velocity_towards_target = 1
+						};
+
 class DrikaSetVelocity : DrikaElement{
 	float velocity_magnitude;
 	bool add_velocity;
+	set_velocity_modes set_velocity_mode;
+	int current_set_velocity_mode;
+	DrikaTargetSelect@ towards_target;
+	float height_offset;
+
+	array<string> set_velocity_mode_names = {	"Set Velocity With Placeholder",
+												"Set Velocity Towards Target"
+											};
 
 	DrikaSetVelocity(JSONValue params = JSONValue()){
 		placeholder.Load(params);
 		placeholder.name = "Set Velocity Helper";
 
 		velocity_magnitude = GetJSONFloat(params, "velocity_magnitude", 5);
+		height_offset = GetJSONFloat(params, "height_offset", 0.0);
+
+		set_velocity_mode = set_velocity_modes(GetJSONInt(params, "set_velocity_mode", _set_velocity_with_placeholder));
+		current_set_velocity_mode = set_velocity_mode;
+
+		@towards_target = DrikaTargetSelect(this, params, "towards_target");
+		towards_target.target_option = id_option | name_option | character_option | reference_option | team_option | item_option;
 
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
@@ -21,28 +41,43 @@ class DrikaSetVelocity : DrikaElement{
 	void PostInit(){
 		placeholder.Retrieve();
 		target_select.PostInit();
+		towards_target.PostInit();
 	}
 
 	JSONValue GetSaveData(){
 		JSONValue data;
-		placeholder.Save(data);
 		data["velocity_magnitude"] = JSONValue(velocity_magnitude);
 		data["add_velocity"] = JSONValue(add_velocity);
 		target_select.SaveIdentifier(data);
+		data["set_velocity_mode"] = JSONValue(set_velocity_mode);
+
+		if(set_velocity_mode == _set_velocity_with_placeholder){
+			placeholder.Save(data);
+		}else if(set_velocity_mode == _set_velocity_towards_target){
+			towards_target.SaveIdentifier(data);
+			data["height_offset"] = JSONValue(height_offset);
+		}
+
 		return data;
 	}
 
 	void Delete(){
 		placeholder.Remove();
 		target_select.Delete();
+		towards_target.Delete();
 	}
 
 	string GetDisplayString(){
-		return "SetVelocity " + "vel:" + velocity_magnitude + " target:" + target_select.GetTargetDisplayText();
+		string display_text = "SetVelocity " + target_select.GetTargetDisplayText() + " Vel:" + velocity_magnitude;
+		if(set_velocity_mode == _set_velocity_towards_target){
+			display_text += " " + towards_target.GetTargetDisplayText();
+		}
+		return display_text;
 	}
 
 	void StartSettings(){
 		target_select.CheckAvailableTargets();
+		towards_target.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
@@ -53,15 +88,42 @@ class DrikaSetVelocity : DrikaElement{
 		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Set Velocity Mode");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_Combo("##Set Velocity Mode", current_set_velocity_mode, set_velocity_mode_names, set_velocity_mode_names.size())){
+			set_velocity_mode = set_velocity_modes(current_set_velocity_mode);
+			StartSettings();
+		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Target");
 		ImGui_NextColumn();
 		ImGui_NextColumn();
 		target_select.DrawSelectTargetUI();
 
+		if(set_velocity_mode == _set_velocity_towards_target){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Towards Target");
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+			towards_target.DrawSelectTargetUI();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Height Offset");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_DragFloat("###Height Offset", height_offset, 0.0f, 0.0f, 5.0f, "%.1f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+		}
+
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Velocity");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		ImGui_DragFloat("###Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);
 		ImGui_PopItemWidth();
@@ -75,53 +137,85 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(placeholder.Exists()){
-			array<Object@> targets = target_select.GetTargetObjects();
-			for(uint i = 0; i < targets.size(); i++){
-				DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		if(set_velocity_mode == _set_velocity_towards_target){
+			if(placeholder.Exists()){
+				placeholder.Remove();
 			}
-			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
-			mat4 gizmo_transform_y;
-			gizmo_transform_y.SetTranslationPart(placeholder.GetTranslation());
-			gizmo_transform_y.SetRotationPart(Mat4FromQuaternion(placeholder.GetRotation()));
 
-			mat4 scale_mat_y;
-			scale_mat_y[0] = 1.0;
-			scale_mat_y[5] = velocity_magnitude / 10.0;
-			scale_mat_y[10] = 1.0;
-			scale_mat_y[15] = 1.0f;
-			gizmo_transform_y = gizmo_transform_y * scale_mat_y;
+			array<Object@> towards_targets = towards_target.GetTargetObjects();
+			array<Object@> targets = target_select.GetTargetObjects();
 
-			DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, vec4(1.0f, 0.0f, 0.0f, 1.0f), _delete_on_update);
+			for(uint i = 0; i < targets.size(); i++){
+				vec3 target_location = GetTargetTranslation(targets[i]);
+				DebugDrawLine(target_location, this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_update);
+				for(uint j = 0; j < towards_targets.size(); j++){
+					vec3 towards_target_location = GetTargetTranslation(towards_targets[j]);
+					DebugDrawLine(target_location, towards_target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
+				}
+			}
+		}else if(set_velocity_mode == _set_velocity_with_placeholder){
+			if(placeholder.Exists()){
+				array<Object@> targets = target_select.GetTargetObjects();
+				for(uint i = 0; i < targets.size(); i++){
+					DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				}
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_update);
+				mat4 gizmo_transform_y;
+				gizmo_transform_y.SetTranslationPart(placeholder.GetTranslation());
+				gizmo_transform_y.SetRotationPart(Mat4FromQuaternion(placeholder.GetRotation()));
 
-			mat4 mesh_transform;
-			mesh_transform.SetTranslationPart(placeholder.GetTranslation());
-			mat4 rotation = Mat4FromQuaternion(placeholder.GetRotation());
-			mesh_transform.SetRotationPart(rotation);
+				mat4 scale_mat_y;
+				scale_mat_y[0] = 1.0;
+				scale_mat_y[5] = velocity_magnitude / 10.0;
+				scale_mat_y[10] = 1.0;
+				scale_mat_y[15] = 1.0f;
+				gizmo_transform_y = gizmo_transform_y * scale_mat_y;
 
-			mat4 scale_mat;
-			scale_mat[0] = placeholder.GetScale().x;
-			scale_mat[5] = placeholder.GetScale().y;
-			scale_mat[10] = placeholder.GetScale().z;
-			scale_mat[15] = 1.0f;
-			mesh_transform = mesh_transform * scale_mat;
+				DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, vec4(1.0f, 0.0f, 0.0f, 1.0f), _delete_on_update);
 
-			vec4 color = placeholder.IsSelected()?vec4(0.0f, 0.85f, 0.0f, 0.75f):vec4(0.0f, 0.35f, 0.0f, 0.75f);
-			DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_update);
-		}else{
-			placeholder.Create();
+				mat4 mesh_transform;
+				mesh_transform.SetTranslationPart(placeholder.GetTranslation());
+				mat4 rotation = Mat4FromQuaternion(placeholder.GetRotation());
+				mesh_transform.SetRotationPart(rotation);
+
+				mat4 scale_mat;
+				scale_mat[0] = placeholder.GetScale().x;
+				scale_mat[5] = placeholder.GetScale().y;
+				scale_mat[10] = placeholder.GetScale().z;
+				scale_mat[15] = 1.0f;
+				mesh_transform = mesh_transform * scale_mat;
+
+				vec4 color = placeholder.IsSelected()?vec4(0.0f, 0.85f, 0.0f, 0.75f):vec4(0.0f, 0.35f, 0.0f, 0.75f);
+				DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_update);
+			}else{
+				placeholder.Create();
+			}
 		}
 	}
 
 	bool Trigger(){
-		ApplyVelocity();
-		return true;
+		return ApplyVelocity();
 	}
 
-	void ApplyVelocity(){
+	bool ApplyVelocity(){
 		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			vec3 up_direction = placeholder.GetRotation() * vec3(0, 1, 0);
+
+
+			vec3 up_direction;
+
+			if(set_velocity_mode == _set_velocity_with_placeholder){
+				up_direction = placeholder.GetRotation() * vec3(0, 1, 0);
+			}else if(set_velocity_mode == _set_velocity_towards_target){
+				array<Object@> towards_targets = towards_target.GetTargetObjects();
+				if(towards_targets.size() == 0){
+					return false;
+				}
+
+				up_direction = normalize((GetTargetTranslation(towards_targets[0]) + vec3(0.0, height_offset, 0.0)) - GetTargetTranslation(targets[i]));
+			}
+
+
 			if(targets[i].GetType() == _movement_object){
 				MovementObject@ char = ReadCharacterID(targets[i].GetID());
 				if(char.GetIntVar("state") == _ragdoll_state){
@@ -142,13 +236,18 @@ class DrikaSetVelocity : DrikaElement{
 			}else if(targets[i].GetType() == _item_object){
 				ItemObject@ io = ReadItemID(targets[i].GetID());
 				io.ActivatePhysics();
+				// For some reason the transform needs to be set or else the io doesn't wake up.
+				mat4 transform = io.GetPhysicsTransform();
+				io.SetPhysicsTransform(transform);
 				if(add_velocity){
 					io.SetLinearVelocity(io.GetLinearVelocity() + up_direction * velocity_magnitude);
 				}else{
 					io.SetLinearVelocity(up_direction * velocity_magnitude);
 				}
 				io.ActivatePhysics();
+				io.SetThrown();
 			}
 		}
+		return true;
 	}
 }
