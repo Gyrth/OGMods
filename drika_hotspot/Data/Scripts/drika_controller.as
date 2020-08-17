@@ -2208,25 +2208,9 @@ void UpdateWriteFileProcesses(){
 	if(write_file_processes.size() > 0){
 		StartWriteFile();
 		AddFileString(write_file_processes[0].data);
-		WriteFile(write_file_processes[0].file_path);
+		bool success = WriteFileKeepBackup(write_file_processes[0].file_path);
 
-		Log(warning, "Written placeholder for " + write_file_processes[0].hotspot_id);
-
-		string content = "";
-
-		if(LoadFile(write_file_processes[0].file_path)){
-			while(true){
-				string line = GetFileLine();
-				if(line == "end"){
-					break;
-				}else{
-					content += line + "\n";
-				}
-			}
-			/* Log(error, "Reading : " + content); */
-		}else{
-			Log(error, "Error loading file: " + write_file_processes[0].file_path);
-		}
+		Log(warning, "Success : " + success + ". Written placeholder for hotspot id : " + write_file_processes[0].hotspot_id);
 
 		Object@ hotspot_obj = ReadObjectFromID(write_file_processes[0].hotspot_id);
 		hotspot_obj.ReceiveScriptMessage("drika_function_message " + " " + write_file_processes[0].function_index + " " + "drika_write_placeholder_done");
