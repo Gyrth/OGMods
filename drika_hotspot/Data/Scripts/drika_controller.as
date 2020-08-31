@@ -855,6 +855,100 @@ void DrawGUI(){
 		DrawMouseBlockContainer();
 		DrawGrid();
 	}
+	DrawGraphEditor();
+}
+
+array<vec2> node_positions = {vec2(50.0, 50.0), vec2(150.0, 150.0)};
+
+void DrawGraphEditor(){
+	bool show_graph_editor = true;
+	ImGui_Begin("Graph Editor", show_graph_editor, ImGuiWindowFlags_MenuBar);
+
+	ImGui_BeginChild("Element Settings", vec2(-1, -1));
+
+	vec2 window_position = ImGui_GetWindowPos();
+	vec2 vertical_position = window_position;
+	vec2 horizontal_position = window_position;
+	vec2 window_size = ImGui_GetWindowSize();
+	float grid_size = 50.0f;
+	int nr_horizontal_lines = int(ceil(window_size.y / grid_size));
+	int nr_vertical_lines = int(ceil(window_size.x / grid_size)) + 1;
+	vec4 line_color = vec4(0.25, 0.25, 0.25, 1.0);
+	vec4 node_color = vec4(0.15, 0.15, 0.15, 1.0);
+	vec4 bezier_line_color = vec4(0.45, 0.45, 0.45, 1.0);
+	float line_width = 1.0;
+	float thick_line_width = 3.0;
+	vec2 node_size = vec2(250.0, 75.0);
+
+	for(int i = 0; i < nr_vertical_lines; i++){
+		ImDrawList_AddLine(vertical_position, vertical_position + vec2(0, window_size.y), ImGui_GetColorU32(line_color), line_width);
+		vertical_position += vec2(grid_size, 0.0);
+	}
+
+	for(int i = 0; i < nr_horizontal_lines; i++){
+		ImDrawList_AddLine(horizontal_position, horizontal_position + vec2(window_size.x, 0.0), ImGui_GetColorU32(line_color), line_width);
+		horizontal_position += vec2(0.0, grid_size);
+	}
+
+	int target_node = -1;
+	array<vec2> node_in_positions;
+	array<vec2> node_out_positions;
+
+	for(uint i = 0; i < node_positions.size(); i++){
+
+		vec2 node_rect_min = window_position + node_positions[i];
+		vec2 node_rect_max = node_rect_min + node_size;
+
+		// Display node box
+		ImDrawList_AddRectFilled(node_rect_min, node_rect_max, ImGui_GetColorU32(node_color), 4.0f);
+		ImDrawList_AddRect(node_rect_min, node_rect_max, ImGui_GetColorU32(line_color), 4.0f);
+
+		float NODE_SLOT_RADIUS = 4.0f;
+
+		vec2 node_slot_in_position = node_rect_min + vec2(node_size.x / 2.0f, 0.0);
+		node_in_positions.insertLast(node_slot_in_position);
+		ImDrawList_AddCircleFilled(node_slot_in_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(bezier_line_color));
+		ImDrawList_AddText(node_slot_in_position + vec2(-7.0f, 5.0f), ImGui_GetColorU32(bezier_line_color), "In");
+
+		vec2 node_slot_then_position = node_rect_min + vec2(node_size.x * 0.75f, 0.0) + vec2(0.0, node_size.y);
+		ImDrawList_AddCircleFilled(node_slot_then_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(bezier_line_color));
+		ImDrawList_AddText(node_slot_then_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Then");
+
+		vec2 node_slot_else_position = node_rect_min + vec2(node_size.x * 0.25f, 0.0) + vec2(0.0, node_size.y);
+		node_out_positions.insertLast(node_slot_else_position);
+		ImDrawList_AddCircleFilled(node_slot_else_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(bezier_line_color));
+		ImDrawList_AddText(node_slot_else_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Else");
+
+		vec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
+		// Display the node contents
+		ImGui_SetCursorScreenPos(node_rect_min + vec2(0.0, node_size.y / 2.5f) + vec2(NODE_WINDOW_PADDING.x, 0.0));
+		ImGui_PushItemWidth(node_size.x - (NODE_WINDOW_PADDING.x * 2.0f));
+	    ImGui_BeginGroup(); // Lock horizontal position
+		ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.0, 0.0, 1.0));
+		ImGui_Text("OnCharacterEnter Turner");
+		ImGui_PopStyleColor();
+	    ImGui_EndGroup();
+		ImGui_PopItemWidth();
+
+		ImGui_SetCursorScreenPos(node_rect_min);
+		ImGui_InvisibleButton("node", node_size);
+		if(ImGui_IsItemHovered()){
+			target_node = i;
+		}
+	}
+
+	if(target_node != -1 && ImGui_IsMouseDragging(0)){
+		node_positions[target_node] += ImGui_GetMouseDragDelta(0);
+		ImGui_ResetMouseDragDelta(0);
+	}
+
+	for(uint i = 0; i < node_out_positions.size() - 1; i++){
+		ImDrawList_AddBezierCurve(node_out_positions[i], node_out_positions[i] + vec2(0.0f, 50.0f), node_in_positions[i + 1] + vec2(0.0f, -50.0f), node_in_positions[i + 1], ImGui_GetColorU32(bezier_line_color), 3.0f);
+	}
+
+	ImGui_EndChild();
+
+	ImGui_End();
 }
 
 void DrawMouseBlockContainer(){
