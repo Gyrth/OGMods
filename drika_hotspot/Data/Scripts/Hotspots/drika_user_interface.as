@@ -284,7 +284,7 @@ class DrikaUserInterface : DrikaElement{
 		string display_string = "UserInterface ";
 		display_string += ui_function_names[ui_function] + " ";
 		if(ui_function == ui_text){
-			display_string += text_content;
+			display_string += "\"" + text_content + "\"";
 		}
 		return display_string;
 	}
