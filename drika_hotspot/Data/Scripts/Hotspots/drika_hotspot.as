@@ -1187,7 +1187,7 @@ void DrawGraphEditor(){
 	ImGui_EndChild();
 	graph_hover = ImGui_IsItemHovered();
 
-	if(target_node == -1 && ImGui_IsMouseDown(0)){
+	if(graph_hover && target_node == -1 && ImGui_IsMouseDown(0)){
 		vec2 delta = ImGui_GetMouseDragDelta(0, 0.0f);
 		ImGui_SetScrollX(ImGui_GetScrollX() - delta.x);
 		ImGui_SetScrollY(ImGui_GetScrollY() - delta.y);
