@@ -1065,6 +1065,7 @@ void DrawEditor(){
 
 array<vec2> node_positions = {vec2(50.0, 50.0), vec2(150.0, 150.0)};
 int target_node = -1;
+bool graph_hover = false;
 
 void DrawGraphEditor(){
 	bool show_graph_editor = true;
@@ -1072,11 +1073,20 @@ void DrawGraphEditor(){
 	vec4 background_color = vec4(0.15, 0.15, 0.15, 1.0);
 	vec4 node_color = vec4(0.2, 0.2, 0.2, 1.0);
 	vec4 bezier_line_color = vec4(0.45, 0.45, 0.45, 1.0);
-	vec2 node_size = vec2(500.0, 75.0);
+	vec2 node_size = vec2(500.0, 50.0);
+	vec4 in_slot_color = vec4(0.45, 0.75, 0.45, 1.0);
+	vec4 then_slot_color = vec4(0.45, 0.75, 0.45, 1.0);
+	vec4 else_slot_color = vec4(0.45, 0.45, 0.75, 1.0);
 
 	ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
-	ImGui_Begin("Drika Hotspot" + (show_name?" - " + display_name:" " + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_AlwaysHorizontalScrollbar);
+	int window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_AlwaysHorizontalScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
+	if(graph_hover){
+		window_flags = window_flags | ImGuiWindowFlags_NoMove;
+	}
+	ImGui_Begin("Drika Hotspot" + (show_name?" - " + display_name:" " + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, window_flags);
 	ImGui_PopStyleColor();
+
+	ImGui_BeginChild("Node Graph", vec2(2000, 2000), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoInputs);
 
 	vec2 window_position = ImGui_GetWindowPos();
 	vec2 vertical_position = window_position;
@@ -1098,6 +1108,15 @@ void DrawGraphEditor(){
 		horizontal_position += vec2(0.0, grid_size);
 	}
 
+	/* Log(warning, "target_node " + target_node + ImGui_IsMouseDown(0)); */
+
+	if(target_node != -1 && ImGui_IsMouseDown(0)){
+		drika_elements[target_node].node_position += ImGui_GetMouseDragDelta(0, 0.0f);
+		ImGui_ResetMouseDragDelta(0);
+	}else{
+		target_node = -1;
+	}
+
 	for(uint i = 0; i < drika_elements.size(); i++){
 		DrikaElement@ current_element = drika_elements[i];
 
@@ -1110,24 +1129,24 @@ void DrawGraphEditor(){
 
 		float NODE_SLOT_RADIUS = 4.0f;
 
-		vec2 node_slot_in_position = node_rect_min + vec2(node_size.x / 2.0f, 0.0);
+		vec2 node_slot_in_position = node_rect_min + vec2(node_size.x * 0.25f, 0.0);
 		current_element.node_slot_in_position = node_slot_in_position;
-		ImDrawList_AddCircleFilled(node_slot_in_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(bezier_line_color));
-		ImDrawList_AddText(node_slot_in_position + vec2(-7.0f, 5.0f), ImGui_GetColorU32(bezier_line_color), "In");
+		ImDrawList_AddCircleFilled(node_slot_in_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(in_slot_color));
+		/* ImDrawList_AddText(node_slot_in_position + vec2(-7.0f, 5.0f), ImGui_GetColorU32(bezier_line_color), "In"); */
 
-		vec2 node_slot_then_position = node_rect_min + vec2(node_size.x * 0.75f, 0.0) + vec2(0.0, node_size.y);
+		vec2 node_slot_then_position = node_rect_min + vec2(node_size.x * 0.25f, 0.0) + vec2(0.0, node_size.y);
 		current_element.node_slot_then_position = node_slot_then_position;
-		ImDrawList_AddCircleFilled(node_slot_then_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(bezier_line_color));
-		ImDrawList_AddText(node_slot_then_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Then");
+		ImDrawList_AddCircleFilled(node_slot_then_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(then_slot_color));
+		/* ImDrawList_AddText(node_slot_then_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Then"); */
 
-		vec2 node_slot_else_position = node_rect_min + vec2(node_size.x * 0.25f, 0.0) + vec2(0.0, node_size.y);
+		vec2 node_slot_else_position = node_rect_min + vec2(node_size.x * 0.75f, 0.0) + vec2(0.0, node_size.y);
 		current_element.node_slot_else_position = node_slot_else_position;
-		ImDrawList_AddCircleFilled(node_slot_else_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(bezier_line_color));
-		ImDrawList_AddText(node_slot_else_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Else");
+		ImDrawList_AddCircleFilled(node_slot_else_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(else_slot_color));
+		/* ImDrawList_AddText(node_slot_else_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Else"); */
 
 		vec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
 		// Display the node contents
-		ImGui_SetCursorScreenPos(node_rect_min + vec2(0.0, node_size.y / 2.5f) + vec2(NODE_WINDOW_PADDING.x, 0.0));
+		ImGui_SetCursorScreenPos(node_rect_min + vec2(0.0, node_size.y / 2.75f) + vec2(NODE_WINDOW_PADDING.x, 0.0));
 		ImGui_PushItemWidth(node_size.x - (NODE_WINDOW_PADDING.x * 2.0f));
 	    ImGui_BeginGroup(); // Lock horizontal position
 
@@ -1151,24 +1170,28 @@ void DrawGraphEditor(){
 
 		ImGui_SetCursorScreenPos(node_rect_min);
 		ImGui_InvisibleButton("node", node_size);
-		if(target_node == -1 && ImGui_IsItemHovered()){
+		if(!ImGui_IsMouseDown(0) && ImGui_IsItemHoveredRect()){
 			target_node = i;
 		}
-	}
-
-	if(target_node != -1 && ImGui_IsMouseDragging(0)){
-		drika_elements[target_node].node_position += ImGui_GetMouseDragDelta(0);
-		ImGui_ResetMouseDragDelta(0);
-	}else{
-		target_node = -1;
 	}
 
 	for(uint i = 0; i < drika_elements.size(); i++){
 		if(drika_elements[i].nodes_slot_then_connected !is null){
 			vec2 then_position = drika_elements[i].node_slot_then_position;
 			vec2 in_position = drika_elements[i].nodes_slot_then_connected.node_slot_in_position;
-			ImDrawList_AddBezierCurve(then_position, then_position + vec2(0.0f, 50.0f), in_position + vec2(0.0f, -50.0f), in_position, ImGui_GetColorU32(bezier_line_color), 3.0f);
+			float bezier_vert_offset = min(50.0f, abs(then_position.y - in_position.y));
+			ImDrawList_AddBezierCurve(then_position, then_position + vec2(0.0f, bezier_vert_offset), in_position + vec2(0.0f, -bezier_vert_offset), in_position, ImGui_GetColorU32(bezier_line_color), 3.0f);
 		}
+	}
+
+	ImGui_EndChild();
+	graph_hover = ImGui_IsItemHovered();
+
+	if(target_node == -1 && ImGui_IsMouseDown(0)){
+		vec2 delta = ImGui_GetMouseDragDelta(0, 0.0f);
+		ImGui_SetScrollX(ImGui_GetScrollX() - delta.x);
+		ImGui_SetScrollY(ImGui_GetScrollY() - delta.y);
+		ImGui_ResetMouseDragDelta(0);
 	}
 
 	ImGui_End();
