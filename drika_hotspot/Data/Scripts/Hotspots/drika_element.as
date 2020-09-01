@@ -134,6 +134,11 @@ class DrikaElement{
 	DrikaTargetSelect @target_select = DrikaTargetSelect(this, JSONValue());
 	int export_index = -1;
 	select_states select_state = select_hotspot;
+	vec2 node_position;
+	vec2 node_slot_in_position;
+	vec2 node_slot_then_position;
+	vec2 node_slot_else_position;
+	DrikaElement@ nodes_slot_then_connected;
 
 	string GetDisplayString(){return "";}
 	string GetReferenceString(){return reference_string;}
@@ -165,6 +170,10 @@ class DrikaElement{
 		index = _index;
 	}
 	void ReorderDone(){}
+
+	DrikaElement(){
+		node_position = vec2(125.0, 125.0 + (100.0f * drika_elements.size()));
+	}
 
 	~DrikaElement(){
 		/* Log(warning, "Deleted " + GetDisplayString()); */

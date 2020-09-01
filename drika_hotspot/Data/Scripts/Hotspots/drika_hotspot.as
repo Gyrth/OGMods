@@ -379,6 +379,11 @@ void InterpData(){
 	}
 	Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID());
 	ReorderElements();
+
+	for(uint i = 0; i < drika_elements.size() - 1; i++){
+		DrikaElement@ current_element = drika_elements[i];
+		@current_element.nodes_slot_then_connected = drika_elements[current_element.index + 1];
+	}
 }
 
 void LaunchCustomGUI(){
@@ -605,6 +610,11 @@ void DrawEditor(){
 
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
 		ImGui_SetNextWindowPos(vec2(100.0f, 100.0f), ImGuiSetCond_FirstUseEver);
+
+		bool show_graph_editor = true;
+		if(show_graph_editor){
+			DrawGraphEditor();
+		}
 
 		if(steal_focus){
 			steal_focus = false;
@@ -893,6 +903,12 @@ void DrawEditor(){
 			}
 		}
 
+		if(show_graph_editor){
+			ImGui_PopStyleColor(18);
+			ImGui_End();
+			return;
+		}
+
 		for(uint i = 0; i < drika_indexes.size(); i++){
 			int item_no = drika_indexes[i];
 			vec4 text_color = drika_elements[item_no].GetDisplayColor();
@@ -1045,6 +1061,117 @@ void DrawEditor(){
 		ReorderElements();
 		Save();
 	}
+}
+
+array<vec2> node_positions = {vec2(50.0, 50.0), vec2(150.0, 150.0)};
+int target_node = -1;
+
+void DrawGraphEditor(){
+	bool show_graph_editor = true;
+	vec4 line_color = vec4(0.25, 0.25, 0.25, 1.0);
+	vec4 background_color = vec4(0.15, 0.15, 0.15, 1.0);
+	vec4 node_color = vec4(0.2, 0.2, 0.2, 1.0);
+	vec4 bezier_line_color = vec4(0.45, 0.45, 0.45, 1.0);
+	vec2 node_size = vec2(500.0, 75.0);
+
+	ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
+	ImGui_Begin("Drika Hotspot" + (show_name?" - " + display_name:" " + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_AlwaysHorizontalScrollbar);
+	ImGui_PopStyleColor();
+
+	vec2 window_position = ImGui_GetWindowPos();
+	vec2 vertical_position = window_position;
+	vec2 horizontal_position = window_position;
+	vec2 window_size = ImGui_GetWindowSize();
+	float grid_size = 50.0f;
+	int nr_horizontal_lines = int(ceil(window_size.y / grid_size));
+	int nr_vertical_lines = int(ceil(window_size.x / grid_size)) + 1;
+	float line_width = 1.0;
+	float thick_line_width = 3.0;
+
+	for(int i = 0; i < nr_vertical_lines; i++){
+		ImDrawList_AddLine(vertical_position, vertical_position + vec2(0, window_size.y), ImGui_GetColorU32(line_color), line_width);
+		vertical_position += vec2(grid_size, 0.0);
+	}
+
+	for(int i = 0; i < nr_horizontal_lines; i++){
+		ImDrawList_AddLine(horizontal_position, horizontal_position + vec2(window_size.x, 0.0), ImGui_GetColorU32(line_color), line_width);
+		horizontal_position += vec2(0.0, grid_size);
+	}
+
+	for(uint i = 0; i < drika_elements.size(); i++){
+		DrikaElement@ current_element = drika_elements[i];
+
+		vec2 node_rect_min = window_position + current_element.node_position;
+		vec2 node_rect_max = node_rect_min + node_size;
+
+		// Display node box
+		ImDrawList_AddRectFilled(node_rect_min, node_rect_max, ImGui_GetColorU32(node_color), 4.0f);
+		ImDrawList_AddRect(node_rect_min, node_rect_max, ImGui_GetColorU32(line_color), 4.0f);
+
+		float NODE_SLOT_RADIUS = 4.0f;
+
+		vec2 node_slot_in_position = node_rect_min + vec2(node_size.x / 2.0f, 0.0);
+		current_element.node_slot_in_position = node_slot_in_position;
+		ImDrawList_AddCircleFilled(node_slot_in_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(bezier_line_color));
+		ImDrawList_AddText(node_slot_in_position + vec2(-7.0f, 5.0f), ImGui_GetColorU32(bezier_line_color), "In");
+
+		vec2 node_slot_then_position = node_rect_min + vec2(node_size.x * 0.75f, 0.0) + vec2(0.0, node_size.y);
+		current_element.node_slot_then_position = node_slot_then_position;
+		ImDrawList_AddCircleFilled(node_slot_then_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(bezier_line_color));
+		ImDrawList_AddText(node_slot_then_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Then");
+
+		vec2 node_slot_else_position = node_rect_min + vec2(node_size.x * 0.25f, 0.0) + vec2(0.0, node_size.y);
+		current_element.node_slot_else_position = node_slot_else_position;
+		ImDrawList_AddCircleFilled(node_slot_else_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(bezier_line_color));
+		ImDrawList_AddText(node_slot_else_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Else");
+
+		vec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
+		// Display the node contents
+		ImGui_SetCursorScreenPos(node_rect_min + vec2(0.0, node_size.y / 2.5f) + vec2(NODE_WINDOW_PADDING.x, 0.0));
+		ImGui_PushItemWidth(node_size.x - (NODE_WINDOW_PADDING.x * 2.0f));
+	    ImGui_BeginGroup(); // Lock horizontal position
+
+		int item_no = drika_indexes[i];
+		vec4 text_color = drika_elements[item_no].GetDisplayColor();
+		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
+
+		string display_string = drika_elements[item_no].GetDisplayString();
+		display_string = join(display_string.split("\n"), "");
+		float space_for_characters = ImGui_CalcTextSize(display_string).x;
+
+		if(space_for_characters > ImGui_GetWindowContentRegionWidth()){
+			display_string = display_string.substr(0, int(display_string.length() * (ImGui_GetWindowContentRegionWidth() / space_for_characters)) - 3) + "...";
+		}
+
+		ImGui_Text(display_string);
+
+		ImGui_PopStyleColor();
+	    ImGui_EndGroup();
+		ImGui_PopItemWidth();
+
+		ImGui_SetCursorScreenPos(node_rect_min);
+		ImGui_InvisibleButton("node", node_size);
+		if(target_node == -1 && ImGui_IsItemHovered()){
+			target_node = i;
+		}
+	}
+
+	if(target_node != -1 && ImGui_IsMouseDragging(0)){
+		drika_elements[target_node].node_position += ImGui_GetMouseDragDelta(0);
+		ImGui_ResetMouseDragDelta(0);
+	}else{
+		target_node = -1;
+	}
+
+	for(uint i = 0; i < drika_elements.size(); i++){
+		if(drika_elements[i].nodes_slot_then_connected !is null){
+			vec2 then_position = drika_elements[i].node_slot_then_position;
+			vec2 in_position = drika_elements[i].nodes_slot_then_connected.node_slot_in_position;
+			ImDrawList_AddBezierCurve(then_position, then_position + vec2(0.0f, 50.0f), in_position + vec2(0.0f, -50.0f), in_position, ImGui_GetColorU32(bezier_line_color), 3.0f);
+		}
+	}
+
+	ImGui_End();
 }
 
 /* TextureAssetRef dialogue_background = LoadTexture("Data/Textures/ui/dialogue/dialogue_bg.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
