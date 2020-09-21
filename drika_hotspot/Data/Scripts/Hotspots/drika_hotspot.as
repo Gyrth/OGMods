@@ -1073,10 +1073,10 @@ void DrawGraphEditor(){
 	vec4 background_color = vec4(0.15, 0.15, 0.15, 1.0);
 	vec4 node_color = vec4(0.2, 0.2, 0.2, 1.0);
 	vec4 bezier_line_color = vec4(0.45, 0.45, 0.45, 1.0);
-	vec2 node_size = vec2(500.0, 50.0);
 	vec4 in_slot_color = vec4(0.45, 0.75, 0.45, 1.0);
 	vec4 then_slot_color = vec4(0.45, 0.75, 0.45, 1.0);
 	vec4 else_slot_color = vec4(0.45, 0.45, 0.75, 1.0);
+	float NODE_SLOT_RADIUS = 7.0f;
 
 	ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 	int window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_AlwaysHorizontalScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
@@ -1117,42 +1117,42 @@ void DrawGraphEditor(){
 		target_node = -1;
 	}
 
-	for(uint i = 0; i < drika_elements.size(); i++){
+	for(uint i = 0; i < 1; i++){
 		DrikaElement@ current_element = drika_elements[i];
 
 		vec2 node_rect_min = window_position + current_element.node_position;
-		vec2 node_rect_max = node_rect_min + node_size;
+		vec2 node_rect_max = node_rect_min + current_element.node_size;
 
-		// Display node box
-		ImDrawList_AddRectFilled(node_rect_min, node_rect_max, ImGui_GetColorU32(node_color), 4.0f);
-		ImDrawList_AddRect(node_rect_min, node_rect_max, ImGui_GetColorU32(line_color), 4.0f);
-
-		float NODE_SLOT_RADIUS = 4.0f;
-
-		vec2 node_slot_in_position = node_rect_min + vec2(node_size.x * 0.25f, 0.0);
+		vec2 node_slot_in_position = node_rect_min + vec2(0.0, current_element.node_size.y * 0.5f);
 		current_element.node_slot_in_position = node_slot_in_position;
-		ImDrawList_AddCircleFilled(node_slot_in_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(in_slot_color));
-		/* ImDrawList_AddText(node_slot_in_position + vec2(-7.0f, 5.0f), ImGui_GetColorU32(bezier_line_color), "In"); */
 
-		vec2 node_slot_then_position = node_rect_min + vec2(node_size.x * 0.25f, 0.0) + vec2(0.0, node_size.y);
+		vec2 node_slot_then_position = node_rect_min + vec2(current_element.node_size.x, current_element.node_size.y * 0.25f);
 		current_element.node_slot_then_position = node_slot_then_position;
-		ImDrawList_AddCircleFilled(node_slot_then_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(then_slot_color));
-		/* ImDrawList_AddText(node_slot_then_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Then"); */
 
-		vec2 node_slot_else_position = node_rect_min + vec2(node_size.x * 0.75f, 0.0) + vec2(0.0, node_size.y);
+		vec2 node_slot_else_position = node_rect_min + vec2(current_element.node_size.x, current_element.node_size.y * 0.75f);
 		current_element.node_slot_else_position = node_slot_else_position;
-		ImDrawList_AddCircleFilled(node_slot_else_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(else_slot_color));
-		/* ImDrawList_AddText(node_slot_else_position + vec2(-14.0f, -20.0f), ImGui_GetColorU32(bezier_line_color), "Else"); */
 
 		vec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
+
+		// Display node box
+		ImDrawList_AddRectFilled(node_rect_min, node_rect_max + NODE_WINDOW_PADDING, ImGui_GetColorU32(node_color), 4.0f);
+		ImDrawList_AddRect(node_rect_min, node_rect_max + NODE_WINDOW_PADDING, ImGui_GetColorU32(line_color), 4.0f);
+
+		ImGui_SetCursorScreenPos(node_rect_min);
+		ImGui_InvisibleButton("node" + i, current_element.node_size + NODE_WINDOW_PADDING);
+		if(!ImGui_IsMouseDown(0) && ImGui_IsItemHoveredRect()){
+			target_node = i;
+		}
+
 		// Display the node contents
-		ImGui_SetCursorScreenPos(node_rect_min + vec2(0.0, node_size.y / 2.75f) + vec2(NODE_WINDOW_PADDING.x, 0.0));
-		ImGui_PushItemWidth(node_size.x - (NODE_WINDOW_PADDING.x * 2.0f));
+		ImGui_SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
+
+		/* ImGui_PushItemWidth(current_element.node_size.x - (NODE_WINDOW_PADDING.x * 2.0f)); */
 	    ImGui_BeginGroup(); // Lock horizontal position
+		/* ImGui_PopItemWidth(); */
 
 		int item_no = drika_indexes[i];
 		vec4 text_color = drika_elements[item_no].GetDisplayColor();
-		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 
 		string display_string = drika_elements[item_no].GetDisplayString();
 		display_string = join(display_string.split("\n"), "");
@@ -1162,17 +1162,35 @@ void DrawGraphEditor(){
 			display_string = display_string.substr(0, int(display_string.length() * (ImGui_GetWindowContentRegionWidth() / space_for_characters)) - 3) + "...";
 		}
 
+		float title_height = 20.0f;
+
+		/* ImGui_BeginChild("Title" + i, vec2(current_element.node_size.x - (NODE_WINDOW_PADDING.x * 2.0f), title_height)); */
+		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 		ImGui_Text(display_string);
-
 		ImGui_PopStyleColor();
-	    ImGui_EndGroup();
-		ImGui_PopItemWidth();
+		ImDrawList_AddLine(vec2(node_rect_min.x, node_rect_min.y + title_height), vec2(node_rect_min.x + current_element.node_size.x + - NODE_WINDOW_PADDING.x, node_rect_min.y + title_height), ImGui_GetColorU32(line_color), line_width);
 
-		ImGui_SetCursorScreenPos(node_rect_min);
-		ImGui_InvisibleButton("node", node_size);
-		if(!ImGui_IsMouseDown(0) && ImGui_IsItemHoveredRect()){
-			target_node = i;
-		}
+		/* ImGui_EndChild(); */
+
+		/* ImGui_BeginChildFrame(i, vec2(current_element.node_size.x - (NODE_WINDOW_PADDING.x * 2.0f), 200.0f)); */
+		ImGui_PushItemWidth(-1);
+		current_element.DrawSettings();
+		ImGui_PopItemWidth();
+		/* ImGui_EndChild(); */
+
+		/* vec2 cursor_pos = ImGui_GetCursorScreenPos(); */
+		/* current_element.node_size.y = height; */
+
+		/* ImGui_Text("Testing the group feature.");
+		ImGui_Text("Testing the group feature.");
+		ImGui_Text("Testing the group feature.");
+		ImGui_Text("Testing the group feature."); */
+
+	    ImGui_EndGroup();
+		float height = ImGui_GetItemRectSize().y;
+		/* ImGui_SetCursorScreenPos(node_rect_min - NODE_WINDOW_PADDING); */
+		/* ImGui_Text(" " + height); */
+		current_element.node_size.y = height;
 	}
 
 	for(uint i = 0; i < drika_elements.size(); i++){
@@ -1180,6 +1198,11 @@ void DrawGraphEditor(){
 			vec2 then_position = drika_elements[i].node_slot_then_position;
 			vec2 in_position = drika_elements[i].nodes_slot_then_connected.node_slot_in_position;
 			float bezier_vert_offset = min(50.0f, abs(then_position.y - in_position.y));
+
+			ImDrawList_AddCircleFilled(drika_elements[i].node_slot_in_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(in_slot_color));
+			ImDrawList_AddCircleFilled(drika_elements[i].node_slot_then_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(then_slot_color));
+			ImDrawList_AddCircleFilled(drika_elements[i].node_slot_else_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(else_slot_color));
+
 			ImDrawList_AddBezierCurve(then_position, then_position + vec2(0.0f, bezier_vert_offset), in_position + vec2(0.0f, -bezier_vert_offset), in_position, ImGui_GetColorU32(bezier_line_color), 3.0f);
 		}
 	}

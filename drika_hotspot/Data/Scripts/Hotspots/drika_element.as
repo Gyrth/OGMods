@@ -139,6 +139,7 @@ class DrikaElement{
 	vec2 node_slot_then_position;
 	vec2 node_slot_else_position;
 	DrikaElement@ nodes_slot_then_connected;
+	vec2 node_size = vec2(350.0, 250.0);
 
 	string GetDisplayString(){return "";}
 	string GetReferenceString(){return reference_string;}
