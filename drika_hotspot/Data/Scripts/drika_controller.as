@@ -60,7 +60,8 @@ bool dialogue_move_in = false;
 float dialogue_move_in_offset = 400.0f;
 float dialogue_move_in_timer = 0.0;
 float dialogue_move_in_duration = 0.25;
-bool show_avatar = false;
+bool show_avatar;
+int dialogue_location;
 
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 IMContainer@ dialogue_container;
@@ -213,12 +214,14 @@ void BuildDialogueUI(){
 	DisposeTextAtlases();
 	dialogue_container.clear();
 	IMDivider dialogue_divider("dialogue_divider", DOVertical);
-	/* dialogue_divider.showBorder(); */
 	IMContainer dialogue_ui_container(2560, 400);
 	dialogue_divider.append(dialogue_ui_container);
-	dialogue_container.setAlignment(CACenter, CABottom);
+	if(dialogue_location == dialogue_bottom){
+		dialogue_container.setAlignment(CACenter, CABottom);
+	}else{
+		dialogue_container.setAlignment(CACenter, CATop);
+	}
 	dialogue_container.setElement(dialogue_divider);
-	/* dialogue_container.showBorder(); */
 	dialogue_container.setSize(vec2(2560, 1440));
 
 	CreateNameTag(dialogue_ui_container);
@@ -1347,6 +1350,9 @@ void ReceiveMessage(string msg){
 
 		token_iter.FindNextToken(msg);
 		show_avatar = token_iter.GetToken(msg) == "true";
+
+		token_iter.FindNextToken(msg);
+		dialogue_location = atoi(token_iter.GetToken(msg));
 
 		dialogue_font = FontSetup(dialogue_text_font, dialogue_text_size, dialogue_text_color, dialogue_text_shadow);
 	}else if(token == "drika_read_file"){

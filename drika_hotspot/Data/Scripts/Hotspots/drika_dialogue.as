@@ -65,6 +65,7 @@ class DrikaDialogue : DrikaElement{
 	bool show_names;
 	bool show_avatar;
 	bool use_fade;
+	int dialogue_location;
 
 	string default_avatar_path = "Data/Textures/ui/menus/main/white_square.png";
 	TextureAssetRef avatar = LoadTexture(default_avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
@@ -170,6 +171,7 @@ class DrikaDialogue : DrikaElement{
 		show_names = GetJSONBool(params, "show_names", true);
 		show_avatar = GetJSONBool(params, "show_avatar", true);
 		use_fade = GetJSONBool(params, "use_fade", true);
+		dialogue_location = GetJSONInt(params, "dialogue_location", dialogue_bottom);
 
 		anim_mirrored = GetJSONBool(params, "anim_mirrored", false);
 		anim_mobile = GetJSONBool(params, "anim_mobile", false);
@@ -298,6 +300,7 @@ class DrikaDialogue : DrikaElement{
 			data["use_voice_sounds"] = JSONValue(use_voice_sounds);
 			data["show_names"] = JSONValue(show_names);
 			data["show_avatar"] = JSONValue(show_avatar);
+			data["dialogue_location"] = JSONValue(dialogue_location);
 
 			data["dialogue_text_color"] = JSONValue(JSONarrayValue);
 			data["dialogue_text_color"].append(dialogue_text_color.x);
@@ -905,6 +908,14 @@ class DrikaDialogue : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_Checkbox("###Show Avatar", show_avatar);
 			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Dialogue Location");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Combo("##Dialogue Location", dialogue_location, dialogue_location_names, dialogue_location_names.size());
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(dialogue_function == set_actor_dialogue_control){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Set dialogue control to");
@@ -1458,6 +1469,7 @@ class DrikaDialogue : DrikaElement{
 		msg += use_voice_sounds + " ";
 		msg += show_names + " ";
 		msg += show_avatar + " ";
+		msg += dialogue_location + " ";
 		level.SendMessage(msg);
 	}
 

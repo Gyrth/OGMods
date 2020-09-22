@@ -105,6 +105,16 @@ array<string> ease_function_names =	{
 										"EaseInOutBounce"
 									};
 
+enum dialogue_locations {
+							dialogue_bottom = 0,
+							dialogue_top = 1
+						}
+
+array<string> dialogue_location_names =	{
+											"Bottom",
+											"Top"
+										};
+
 float EaseInSine(float progress){
 	return 1 - cos((progress * PI) / 2);
 }
