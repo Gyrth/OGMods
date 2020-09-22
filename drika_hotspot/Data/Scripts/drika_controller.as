@@ -56,6 +56,11 @@ IMText@ lmb_continue;
 IMText@ rtn_skip;
 vec3 old_camera_translation;
 vec3 old_camera_rotation;
+bool dialogue_move_in = false;
+float dialogue_move_in_offset = 400.0f;
+float dialogue_move_in_timer = 0.0;
+float dialogue_move_in_duration = 0.25;
+bool show_avatar = false;
 
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 IMContainer@ dialogue_container;
@@ -169,7 +174,7 @@ array<WriteFileProcess@> write_file_processes;
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
-	@dialogue_container = IMContainer(dialogue_size.x, dialogue_size.y);
+	@dialogue_container = IMContainer(2560, 1440);
 	@image_container = IMContainer(2560, 1440);
 	@text_container = IMContainer(2560, 1440);
 	@grabber_container = IMContainer(2560, 1440);
@@ -188,7 +193,7 @@ void CreateIMGUIContainers(){
 	/* imGUI.getMain().showBorder(); */
 	imGUI.getMain().setZOrdering(-1);
 
-	imGUI.getMain().addFloatingElement(dialogue_container, "dialogue_container", vec2(0, 1440 - dialogue_size.y));
+	imGUI.getMain().addFloatingElement(dialogue_container, "dialogue_container", vec2(0));
 	imGUI.getMain().addFloatingElement(image_container, "image_container", vec2(0));
 	imGUI.getMain().addFloatingElement(text_container, "text_container", vec2(0));
 	imGUI.getMain().addFloatingElement(grabber_container, "grabber_container", vec2(0));
@@ -207,26 +212,36 @@ void BuildDialogueUI(){
 	line_counter = 0;
 	DisposeTextAtlases();
 	dialogue_container.clear();
-	dialogue_container.setSize(dialogue_size);
+	IMDivider dialogue_divider("dialogue_divider", DOVertical);
+	/* dialogue_divider.showBorder(); */
+	IMContainer dialogue_ui_container(2560, 400);
+	dialogue_divider.append(dialogue_ui_container);
+	dialogue_container.setAlignment(CACenter, CABottom);
+	dialogue_container.setElement(dialogue_divider);
+	/* dialogue_container.showBorder(); */
+	dialogue_container.setSize(vec2(2560, 1440));
 
-	CreateNameTag(dialogue_container);
-	CreateBackground(dialogue_container);
+	CreateNameTag(dialogue_ui_container);
+	CreateBackground(dialogue_ui_container);
 
 	switch(dialogue_layout){
 		case default_layout:
-			DefaultUI(dialogue_container);
+			DefaultUI(dialogue_ui_container);
 			break;
 		case simple_layout:
-			SimpleUI(dialogue_container);
+			SimpleUI(dialogue_ui_container);
 			break;
 		case breath_of_the_wild_layout:
-			BreathOfTheWildUI(dialogue_container);
+			BreathOfTheWildUI(dialogue_ui_container);
 			break;
 		case chrono_trigger_layout:
-			ChronoTriggerUI(dialogue_container);
+			ChronoTriggerUI(dialogue_ui_container);
 			break;
 		case fallout_3_green_layout:
-			Fallout3UI(dialogue_container);
+			Fallout3UI(dialogue_ui_container);
+			break;
+		case luigis_mansion_layout:
+			LuigisMansionUI(dialogue_ui_container);
 			break;
 		default :
 			break;
@@ -442,6 +457,40 @@ void Fallout3UI(IMContainer@ parent){
 	parent.setElement(dialogue_holder);
 }
 
+void LuigisMansionUI(IMContainer@ parent){
+	parent.setAlignment(CACenter, CABottom);
+	/* parent.showBorder(); */
+	parent.setSizeY(450.0);
+
+	IMContainer dialogue_holder(1400, 400);
+	dialogue_holder.setAlignment(CALeft, CATop);
+	/* dialogue_holder.showBorder(); */
+
+	IMDivider dialogue_lines_holder_horiz("dialogue_lines_holder_horiz", DOHorizontal);
+	dialogue_holder.setElement(dialogue_lines_holder_horiz);
+	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
+	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
+	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
+	dialogue_lines_holder_vert.setAlignment(CALeft, CATop);
+
+	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+	dialogue_lines_holder_vert.append(dialogue_line_holder);
+	dialogue_line_holder.setZOrdering(2);
+
+	//Add all the text that has already been added, in case of a refresh.
+	for(uint i = 0; i < dialogue_cache.size(); i++){
+		IMText dialogue_text(dialogue_cache[i], dialogue_font);
+		dialogue_line_holder.append(dialogue_text);
+
+		line_counter += 1;
+		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+		dialogue_lines_holder_vert.append(dialogue_line_holder);
+		dialogue_line_holder.setZOrdering(2);
+	}
+
+	parent.setElement(dialogue_holder);
+}
+
 void CreateBackground(IMContainer@ parent){
 	if(!show_dialogue){
 		return;
@@ -462,6 +511,9 @@ void CreateBackground(IMContainer@ parent){
 			break;
 		case fallout_3_green_layout:
 			Fallout3Background(parent);
+			break;
+		case luigis_mansion_layout:
+			LuigisMansionBackground(parent);
 			break;
 		default :
 			break;
@@ -656,8 +708,54 @@ void Fallout3Background(IMContainer@ parent){
 	parent.addFloatingElement(bg_container, "bg_container", vec2((2560 / 2.0) - (whole_width / 2.0), 0.0), -1);
 }
 
+void LuigisMansionBackground(IMContainer@ parent){
+	//Remove any background that's already there.
+	parent.removeElement("bg_container");
+
+	IMContainer bg_container(0.0, 0.0);
+	IMDivider bg_divider("bg_divider", DOHorizontal);
+	bg_divider.setZOrdering(-1);
+	bg_container.setElement(bg_divider);
+
+	float bg_alpha = 0.75;
+	float bg_height = 350.0;
+	float side_width = bg_height / 2.0;
+	float middle_width = 1800.0;
+	vec4 color = showing_choice?dialogue_font.color:current_actor_settings.color;
+
+	IMImage left_fade("Textures/dialogue_bg_lm_left.png");
+	left_fade.setColor(color);
+	left_fade.setAlpha(bg_alpha);
+	left_fade.scaleToSizeY(bg_height);
+	left_fade.setClip(false);
+	left_fade.setDisplacementX(0.25);
+	bg_divider.append(left_fade);
+
+	IMImage middle_fade("Textures/dialogue_bg_lm_middle.png");
+	middle_fade.setColor(color);
+	middle_fade.setAlpha(bg_alpha);
+	middle_fade.setSizeX(middle_width);
+	middle_fade.setSizeY(bg_height);
+	middle_fade.setClip(false);
+	bg_divider.append(middle_fade);
+
+	IMImage right_fade("Textures/dialogue_bg_lm_right.png");
+	right_fade.setColor(color);
+	right_fade.setAlpha(bg_alpha);
+	right_fade.scaleToSizeY(bg_height);
+	right_fade.setClip(false);
+	right_fade.setDisplacementX(-0.25);
+	bg_divider.append(right_fade);
+
+	float whole_width = (side_width * 2.0 + middle_width);
+	parent.addFloatingElement(bg_container, "bg_container", vec2((2560 / 2.0) - (whole_width / 2.0), 0.0), -1);
+	/* bg_container.showBorder(); */
+	dialogue_move_in_timer = dialogue_move_in_duration;
+	dialogue_move_in = true;
+}
+
 void CreateNameTag(IMContainer@ parent){
-	if(!show_dialogue || !show_names || showing_choice){
+	if(!show_dialogue || showing_choice){
 		return;
 	}
 
@@ -677,6 +775,9 @@ void CreateNameTag(IMContainer@ parent){
 		case fallout_3_green_layout:
 			Fallout3NameTag(parent);
 			break;
+		case luigis_mansion_layout:
+			LuigisMansionNameTag(parent);
+			break;
 		default :
 			break;
 	}
@@ -692,20 +793,22 @@ void DefaultNameTag(IMContainer@ parent){
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
-	IMText name(current_actor_settings.name, name_font);
-	name_divider.appendSpacer(50.0);
-	name_divider.append(name);
-	name_divider.appendSpacer(50.0);
-	name.setColor(current_actor_settings.color);
+	if(show_names){
+		IMText name(current_actor_settings.name, name_font);
+		name_divider.appendSpacer(50.0);
+		name_divider.append(name);
+		name_divider.appendSpacer(50.0);
+		name.setColor(current_actor_settings.color);
 
-	IMImage name_background("Textures/ui/menus/main/brushStroke.png");
-	name_background.setClip(false);
-	parent.addFloatingElement(name_container, "name_container", vec2(0, 0), 3);
+		IMImage name_background("Textures/ui/menus/main/brushStroke.png");
+		name_background.setClip(false);
+		parent.addFloatingElement(name_container, "name_container", vec2(0, 0), 3);
 
-	imGUI.update();
-	name_background.setSize(name_container.getSize());
-	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
-	name_background.setZOrdering(1);
+		imGUI.update();
+		name_background.setSize(name_container.getSize());
+		name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
+		name_background.setZOrdering(1);
+	}
 }
 
 void SimpleNameTag(IMContainer@ parent){
@@ -717,7 +820,7 @@ void SimpleNameTag(IMContainer@ parent){
 	nametag_container.setElement(nametag_divider);
 	nametag_divider.setAlignment(CACenter, CATop);
 
-	if(current_actor_settings.avatar_path != "None"){
+	if(current_actor_settings.avatar_path != "None" && show_avatar){
 		IMImage avatar_image(current_actor_settings.avatar_path);
 		avatar_image.setSize(vec2(400, 400));
 		nametag_divider.append(avatar_image);
@@ -731,21 +834,23 @@ void SimpleNameTag(IMContainer@ parent){
 	name_container.setElement(name_divider);
 	nametag_divider.append(name_container);
 
-	IMText name(current_actor_settings.name, name_font_arial);
-	name_divider.appendSpacer(60.0);
-	name_divider.append(name);
-	name_divider.appendSpacer(60.0);
-	name.setColor(current_actor_settings.color);
+	if(show_names){
+		IMText name(current_actor_settings.name, name_font_arial);
+		name_divider.appendSpacer(60.0);
+		name_divider.append(name);
+		name_divider.appendSpacer(60.0);
+		name.setColor(current_actor_settings.color);
 
-	IMImage name_background("Textures/dialogue_bg_nametag_faded.png");
-	name_background.setClip(false);
-	name_background.setAlpha(0.75);
+		IMImage name_background("Textures/dialogue_bg_nametag_faded.png");
+		name_background.setClip(false);
+		name_background.setAlpha(0.75);
+
+		imGUI.update();
+		name_background.setSize(name_container.getSize());
+		name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
+		name_background.setZOrdering(1);
+	}
 	parent.addFloatingElement(nametag_container, "nametag_container", vec2(300, -50), 3);
-
-	imGUI.update();
-	name_background.setSize(name_container.getSize());
-	name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
-	name_background.setZOrdering(1);
 }
 
 void BreathOfTheWildNameTag(IMContainer@ parent){
@@ -758,18 +863,20 @@ void BreathOfTheWildNameTag(IMContainer@ parent){
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
-	if(current_actor_settings.avatar_path != "None"){
+	if(current_actor_settings.avatar_path != "None" && show_avatar){
 		IMImage avatar_image(current_actor_settings.avatar_path);
 		avatar_image.setSize(vec2(350, 350));
 		avatar_image.setClip(false);
 		name_container.addFloatingElement(avatar_image, "avatar", vec2(-500, 50), 3);
 	}
 
-	IMText name(current_actor_settings.name, dialogue_font);
-	name_divider.appendSpacer(30.0);
-	name_divider.append(name);
-	name_divider.appendSpacer(30.0);
-	name.setColor(current_actor_settings.color);
+	if(show_names){
+		IMText name(current_actor_settings.name, dialogue_font);
+		name_divider.appendSpacer(30.0);
+		name_divider.append(name);
+		name_divider.appendSpacer(30.0);
+		name.setColor(current_actor_settings.color);
+	}
 
 	parent.addFloatingElement(name_container, "name_container", vec2(550, -(dialogue_font.size / 4.0)), 3);
 }
@@ -784,18 +891,20 @@ void ChronoTriggerNameTag(IMContainer@ parent){
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
-	if(current_actor_settings.avatar_path != "None"){
+	if(current_actor_settings.avatar_path != "None" && show_avatar){
 		IMImage avatar_image(current_actor_settings.avatar_path);
 		avatar_image.setSize(vec2(350, 350));
 		avatar_image.setClip(false);
 		name_container.addFloatingElement(avatar_image, "avatar", vec2(-450, 25), 3);
 	}
 
-	IMText name(current_actor_settings.name + " : ", dialogue_font);
-	name_divider.appendSpacer(30.0);
-	name_divider.append(name);
-	name_divider.appendSpacer(30.0);
-	name.setColor(current_actor_settings.color);
+	if(show_names){
+		IMText name(current_actor_settings.name + " : ", dialogue_font);
+		name_divider.appendSpacer(30.0);
+		name_divider.append(name);
+		name_divider.appendSpacer(30.0);
+		name.setColor(current_actor_settings.color);
+	}
 
 	parent.addFloatingElement(name_container, "name_container", vec2(500.0, dialogue_font.size / 2.0), 3);
 }
@@ -811,19 +920,48 @@ void Fallout3NameTag(IMContainer@ parent){
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
-	if(current_actor_settings.avatar_path != "None"){
+	if(current_actor_settings.avatar_path != "None" && show_avatar){
 		IMImage avatar_image(current_actor_settings.avatar_path);
 		avatar_image.setSize(vec2(350, 350));
 		avatar_image.setClip(false);
 		name_container.addFloatingElement(avatar_image, "avatar", vec2(-1050, 100), 3);
 	}
 
-	IMText name(current_actor_settings.name, dialogue_font);
-	name_divider.append(name);
-	name.setColor(current_actor_settings.color);
+	if(show_names){
+		IMText name(current_actor_settings.name, dialogue_font);
+		name_divider.append(name);
+		name.setColor(current_actor_settings.color);
+	}
 
 	parent.addFloatingElement(name_container, "name_container", vec2(0.0, -dialogue_font.size), 3);
 
+}
+
+void LuigisMansionNameTag(IMContainer@ parent){
+	//Remove any nametag that's already there.
+	parent.removeElement("name_container");
+
+	IMContainer name_container(parent.getSizeX(), dialogue_font.size);
+	name_container.setAlignment(CACenter, CACenter);
+	IMDivider name_divider("name_divider", DOHorizontal);
+	name_divider.setZOrdering(3);
+	name_divider.setAlignment(CACenter, CACenter);
+	name_container.setElement(name_divider);
+
+	if(current_actor_settings.avatar_path != "None" && show_avatar){
+		IMImage avatar_image(current_actor_settings.avatar_path);
+		avatar_image.setSize(vec2(250, 250));
+		avatar_image.setClip(false);
+		name_container.addFloatingElement(avatar_image, "avatar", vec2(200.0, 150.0), 3);
+	}
+
+	if(show_names){
+		IMText name(current_actor_settings.name, dialogue_font);
+		name_divider.append(name);
+		name.setColor(current_actor_settings.color);
+	}
+
+	parent.addFloatingElement(name_container, "name_container", vec2(0.0, -dialogue_font.size), 3);
 }
 
 void PostScriptReload(){
@@ -949,6 +1087,7 @@ void ReceiveMessage(string msg){
 	}else if(token == "drika_dialogue_hide"){
 		show_dialogue = false;
 		showing_choice = false;
+		dialogue_move_in = false;
 		ui_hotspot_id = -1;
 		dialogue_container.clear();
 	}else if(token == "drika_dialogue_add_say"){
@@ -1205,6 +1344,9 @@ void ReceiveMessage(string msg){
 
 		token_iter.FindNextToken(msg);
 		show_names = token_iter.GetToken(msg) == "true";
+
+		token_iter.FindNextToken(msg);
+		show_avatar = token_iter.GetToken(msg) == "true";
 
 		dialogue_font = FontSetup(dialogue_text_font, dialogue_text_size, dialogue_text_color, dialogue_text_shadow);
 	}else if(token == "drika_read_file"){
@@ -2041,6 +2183,15 @@ void Update(){
 			return;
 		}
 		fade_timer += time_step;
+	}else if(dialogue_move_in){
+		dialogue_container.setDisplacementY(EaseInQuad(dialogue_move_in_timer / dialogue_move_in_duration) * dialogue_move_in_offset);
+
+		if(dialogue_move_in_timer <= 0.0){
+			dialogue_move_in = false;
+			return;
+		}
+
+		dialogue_move_in_timer -= time_step;
 	}
 }
 

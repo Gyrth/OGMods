@@ -611,7 +611,7 @@ void DrawEditor(){
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
 		ImGui_SetNextWindowPos(vec2(100.0f, 100.0f), ImGuiSetCond_FirstUseEver);
 
-		bool show_graph_editor = true;
+		bool show_graph_editor = false;
 		if(show_graph_editor){
 			DrawGraphEditor();
 		}
