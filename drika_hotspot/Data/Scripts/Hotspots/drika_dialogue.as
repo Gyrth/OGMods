@@ -1545,12 +1545,46 @@ class DrikaDialogue : DrikaElement{
 		level.SendMessage(msg);
 	}
 
+
 	bool UpdateSayDialogue(bool preview){
 		//Some setup operations that only need to be done once.
 		if(say_started == false){
 			say_started = true;
-			say_text_split = say_text.split(" ");
+			array<string> say_text_queue;
+			say_text_split.resize(0);
+
+			//Get all the character seperate.
+			for(uint i = 0; i < say_text.length(); i++){
+				say_text_split.insertLast(say_text.substr(i, 1));
+			}
+
 			level.SendMessage("drika_dialogue_clear_say");
+
+			for(uint i = 0; i < say_text_split.size(); i++){
+				//When the next character is an opening bracket then it might be a command.
+				if(say_text_split[i] == "["){
+					//Get the locaton of the end bracket so that we can get the whole command inside.
+					int end_bracket_index = say_text.findFirst("]", i);
+					if(end_bracket_index != -1){
+						string command = say_text.substr(i + 1, end_bracket_index - (i + 1));
+						//Check if the first 4 letters turn out to be a wait command.
+						Log(warning, command.substr(0, 4));
+						if(command.substr(0, 4) == "wait"){
+							float wait_amount = atof(command.substr(4, command.length() - 4));
+							// Skip adding the whole content of inside the brackets.
+							i = end_bracket_index;
+							continue;
+						}
+					}
+				}
+				say_text_queue.insertLast(say_text_split[i]);
+			}
+
+			Log(warning, "Say content: \n" + join(say_text_queue, ""));
+
+			return false;
+		}else if(say_started == true){
+			return false;
 		}
 
 		if(GetInputPressed(0, "skip_dialogue") && !preview){
