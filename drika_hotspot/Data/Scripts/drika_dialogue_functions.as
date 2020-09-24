@@ -7,6 +7,7 @@ IMContainer @dialogue_line_holder;
 IMDivider @dialogue_lines_divider;
 IMDivider @dialogue_line;
 int line_counter = 0;
+vec2 dialogue_holder_size = vec2(1700, 300);
 
 void DialogueAddSay(string actor_name, string text){
 
@@ -91,7 +92,7 @@ void DialogueAddSay(string actor_name, string text){
 		/* dialogue_lines_holder_vert.showBorder(); */
 		/* dialogue_lines_holder_horiz.showBorder(); */
 
-		bool add_previous_text_to_new_line = dialogue_line_holder.getSizeX() > dialogue_holder.getSizeX();
+		bool add_previous_text_to_new_line = dialogue_lines_divider.getSizeX() > dialogue_holder_size.x;
 		if(add_previous_text_to_new_line){
 			Log(warning, "Remake dialogue ");
 
@@ -100,10 +101,10 @@ void DialogueAddSay(string actor_name, string text){
 			counter += 1;
 			dialogue_cache[counter].insertLast(dialogue_text);
 
-			@dialogue_lines_divider = IMDivider("dialogue_lines_divider", DOVertical);
-			dialogue_line_holder.clear();
-			dialogue_line_holder.setElement(dialogue_lines_divider);
-			dialogue_line_holder.setSizeX(1700.0f);
+			dialogue_lines_divider.showBorder();
+			dialogue_lines_divider.clear();
+			dialogue_lines_divider.setSize(dialogue_holder_size);
+			/* dialogue_line_holder.setSize(dialogue_holder_size); */
 
 			//Remake the dialogue using the cache.
 			for(uint j = 0; j < dialogue_cache.size(); j++){
@@ -204,43 +205,24 @@ void CreateChoiceUI(){
 void DefaultUI(IMContainer@ parent){
 	/* parent.setSizeY(400.0); */
 
-	vec2 dialogue_holder_size = vec2(1700, 300);
+	dialogue_holder_size = vec2(1700, 300);
 	vec2 dialogue_holder_offset = vec2(100.0, 50.0);
 	/* parent.showBorder(); */
 
-	//Add two containers of the same size so we can check if the size has been exceeded when adding dialogue.
-	@dialogue_holder = IMContainer(dialogue_holder_size.x, dialogue_holder_size.y);
 	@dialogue_line_holder = IMContainer(dialogue_holder_size.x, dialogue_holder_size.y);
-
-	dialogue_holder.showBorder();
-	dialogue_holder.setBorderColor(vec4(0.0, 0.0, 1.0, 1.0));
 
 	dialogue_line_holder.showBorder();
 	dialogue_line_holder.setBorderColor(vec4(0.0, 1.0, 0.0, 1.0));
 
-	parent.addFloatingElement(dialogue_holder, "dialogue_holder", dialogue_holder_offset, -1);
-	/* dialogue_holder.setElement(dialogue_line_holder); */
-	/* parent.addFloatingElement(dialogue_line_holder, "dialogue_holder", dialogue_holder_offset, -1); */
-	dialogue_holder.addFloatingElement(dialogue_line_holder, "dialogue_line_holder", vec2(0.0, 0.0), -1);
 
 	@dialogue_lines_divider = IMDivider("dialogue_lines_divider", DOVertical);
-	dialogue_line_holder.setAlignment(CALeft, CATop);
 	dialogue_line_holder.setElement(dialogue_lines_divider);
+	dialogue_lines_divider.setAlignment(CACenter, CATop);
+	parent.addFloatingElement(dialogue_lines_divider, "dialogue_holder", dialogue_holder_offset, -1);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
 	dialogue_lines_divider.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
-
-	//Add all the text that has already been added, in case of a refresh.
-	/* for(uint i = 0; i < dialogue_cache.size(); i++){
-		IMText dialogue_text(dialogue_cache[i].getText(), dialogue_font);
-		dialogue_line_holder.append(dialogue_text);
-
-		line_counter += 1;
-		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-		dialogue_lines_holder_vert.append(dialogue_line_holder);
-		dialogue_line_holder.setZOrdering(2);
-	} */
 
 	bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
 
@@ -257,9 +239,7 @@ void DefaultUI(IMContainer@ parent){
 
 	lmb_continue.setVisible(false);
 	rtn_skip.setVisible(false);
-	dialogue_holder.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
-
-	/* parent.setElement(dialogue_holder); */
+	parent.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
 }
 
 void SimpleUI(IMContainer@ parent){
