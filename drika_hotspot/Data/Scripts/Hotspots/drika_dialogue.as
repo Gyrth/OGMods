@@ -1581,6 +1581,8 @@ class DrikaDialogue : DrikaElement{
 			}
 
 			Log(warning, "Say content: \n" + join(say_text_queue, ""));
+			string nametag = "\"" + actor_name + "\"";
+			level.SendMessage("drika_dialogue_add_say " + nametag + " " + "\"" + join(say_text_queue, "") + "\"");
 
 			return false;
 		}else if(say_started == true){

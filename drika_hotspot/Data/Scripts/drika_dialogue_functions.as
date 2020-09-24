@@ -1,7 +1,17 @@
 
 array<array<IMText@>> dialogue_cache;
+IMContainer@ dialogue_ui_container;
+IMDivider @dialogue_lines_holder;
+IMContainer @dialogue_holder;
+IMContainer @dialogue_line_holder;
+IMDivider @dialogue_lines_divider;
+IMDivider @dialogue_line;
+int line_counter = 0;
 
 void DialogueAddSay(string actor_name, string text){
+
+	dialogue_cache = {array<IMText@>()};
+	int counter = 0;
 
 	//Find the actor settings for so that the UI can be build.
 	if(current_actor_settings.name != actor_name){
@@ -28,17 +38,38 @@ void DialogueAddSay(string actor_name, string text){
 		BuildDialogueUI();
 	}
 
-	array<string> split_text = text.split(" ");
+	//First split every word up in the text.
+	array<string> words = text.split(" ");
+	for(uint i = 0; i < words.size(); i++){
+		if(i != 0 && i != words.size()){
+			words.insertAt(i, " ");
+			i++;
+		}
+	}
+	//Also make sure the new line character are seperate.
+	array<string> split_text;
+	for(uint i = 0; i < words.size(); i++){
+		array<string> new_line_seperated = words[i].split("\n");
+		for(uint j = 0; j < new_line_seperated.size(); j++){
+
+			split_text.insertLast(new_line_seperated[j]);
+			if(j != new_line_seperated.size() -1){
+				split_text.insertLast("\n");
+			}
+		}
+	}
+
 	IMText@ dialogue_text;
 
 	for(uint i = 0; i < split_text.size(); i++){
 		string word = split_text[i];
+		/* Log(warning, word); */
 
 		if(word != "\n"){
-			@dialogue_text = IMText(split_text[i] + " ", dialogue_font);
-			dialogue_cache[line_counter].insertLast(dialogue_text);
+			@dialogue_text = IMText(split_text[i], dialogue_font);
+			dialogue_cache[counter].insertLast(dialogue_text);
 
-			dialogue_line_holder.append(dialogue_text, 1.0);
+			dialogue_line.append(dialogue_text, 1.0);
 			dialogue_text.showBorder();
 			dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 		}else if(word == "\n"){
@@ -46,9 +77,10 @@ void DialogueAddSay(string actor_name, string text){
 			line_counter += 1;
 			//Also add a new empty array to the cache.
 			dialogue_cache.insertLast(array<IMText@>());
-			@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-			dialogue_lines_holder_vert.append(dialogue_line_holder);
-			dialogue_line_holder.setZOrdering(2);
+			counter += 1;
+			@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
+			dialogue_lines_divider.append(dialogue_line);
+			dialogue_line.setZOrdering(2);
 
 			continue;
 		}
@@ -60,31 +92,29 @@ void DialogueAddSay(string actor_name, string text){
 		/* dialogue_lines_holder_horiz.showBorder(); */
 
 		bool add_previous_text_to_new_line = dialogue_line_holder.getSizeX() > dialogue_holder.getSizeX();
-		if(add_previous_text_to_new_line || split_text[i] == "\n"){
+		if(add_previous_text_to_new_line){
+			Log(warning, "Remake dialogue ");
 
-			@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-			dialogue_lines_holder_vert.append(dialogue_line_holder);
-			dialogue_line_holder.setZOrdering(2);
+			dialogue_cache[counter].removeLast();
+			dialogue_cache.insertLast(array<IMText@>());
+			counter += 1;
+			dialogue_cache[counter].insertLast(dialogue_text);
 
-			if(add_previous_text_to_new_line){
-				string previous_text = dialogue_text.getText();
-				dialogue_text.setText("");
-				/* dialogue_text.setSizeX(0.0f); */
-				/* dialogue_text.showBorder(); */
+			@dialogue_lines_divider = IMDivider("dialogue_lines_divider", DOVertical);
+			dialogue_line_holder.clear();
+			dialogue_line_holder.setElement(dialogue_lines_divider);
+			dialogue_line_holder.setSizeX(1700.0f);
 
-				@dialogue_text = IMText(previous_text, dialogue_font);
-				dialogue_text.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
-				dialogue_line_holder.append(dialogue_text);
+			//Remake the dialogue using the cache.
+			for(uint j = 0; j < dialogue_cache.size(); j++){
+				@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
+				dialogue_lines_divider.append(dialogue_line);
+				dialogue_line.setZOrdering(2);
+				for(uint k = 0; k < dialogue_cache[j].size(); k++){
+					dialogue_line.append(dialogue_cache[j][k]);
+				}
 			}
 		}
-
-		/* dialogue_line_holder.setSizeX(0.0f);
-		dialogue_lines_holder_vert.setSizeX(0.0f);
-		dialogue_lines_holder_horiz.setSizeX(0.0f); */
-		dialogue_lines_holder_vert.showBorder();
-		dialogue_holder.setBorderColor(vec4(0.0, 1.0, 0.0, 1.0));
-		/* dialogue_holder.showBorder(); */
-		/* dialogue_holder.setSizeX(1600.0f); */
 	}
 }
 
@@ -94,7 +124,7 @@ void BuildDialogueUI(){
 	DisposeTextAtlases();
 	dialogue_container.clear();
 	IMDivider dialogue_divider("dialogue_divider", DOVertical);
-	IMContainer dialogue_ui_container(2560, 400);
+	@dialogue_ui_container = IMContainer(2560, 400);
 	dialogue_divider.append(dialogue_ui_container);
 	if(dialogue_location == dialogue_bottom){
 		dialogue_container.setAlignment(CACenter, CABottom);
@@ -153,7 +183,7 @@ void CreateChoiceUI(){
 	    IMMessage nil_message("");
 		choice_container.addLeftMouseClickBehavior(IMFixedMessageOnClick(on_click), "");
 		choice_container.addMouseOverBehavior(IMFixedMessageOnMouseOver(on_hover_enter, nil_message, nil_message), "");
-		dialogue_lines_holder_vert.append(choice_container);
+		dialogue_lines_divider.append(choice_container);
 		choice_container.setZOrdering(2);
 		choice_container.setBorderColor(dialogue_font.color);
 		choice_container.setBorderSize(2.0f);
@@ -172,23 +202,34 @@ void CreateChoiceUI(){
 }
 
 void DefaultUI(IMContainer@ parent){
-	parent.setAlignment(CACenter, CABottom);
-	parent.setSizeY(400.0);
+	/* parent.setSizeY(400.0); */
 
-	vec2 size = vec2(1700, 300);
+	vec2 dialogue_holder_size = vec2(1700, 300);
+	vec2 dialogue_holder_offset = vec2(100.0, 50.0);
+	/* parent.showBorder(); */
 
-	@dialogue_holder = IMContainer(size.x, size.y);
+	//Add two containers of the same size so we can check if the size has been exceeded when adding dialogue.
+	@dialogue_holder = IMContainer(dialogue_holder_size.x, dialogue_holder_size.y);
+	@dialogue_line_holder = IMContainer(dialogue_holder_size.x, dialogue_holder_size.y);
 
-	@dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
-	dialogue_holder.addFloatingElement(dialogue_lines_holder_horiz, "dialogue_lines_holder_horiz", vec2(0.0, 0.0), -1);
+	dialogue_holder.showBorder();
+	dialogue_holder.setBorderColor(vec4(0.0, 0.0, 1.0, 1.0));
 
-	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
-	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
-	dialogue_lines_holder_vert.setAlignment(CALeft, CATop);
+	dialogue_line_holder.showBorder();
+	dialogue_line_holder.setBorderColor(vec4(0.0, 1.0, 0.0, 1.0));
 
-	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2);
+	parent.addFloatingElement(dialogue_holder, "dialogue_holder", dialogue_holder_offset, -1);
+	/* dialogue_holder.setElement(dialogue_line_holder); */
+	/* parent.addFloatingElement(dialogue_line_holder, "dialogue_holder", dialogue_holder_offset, -1); */
+	dialogue_holder.addFloatingElement(dialogue_line_holder, "dialogue_line_holder", vec2(0.0, 0.0), -1);
+
+	@dialogue_lines_divider = IMDivider("dialogue_lines_divider", DOVertical);
+	dialogue_line_holder.setAlignment(CALeft, CATop);
+	dialogue_line_holder.setElement(dialogue_lines_divider);
+
+	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_lines_divider.append(dialogue_line);
+	dialogue_line.setZOrdering(2);
 
 	//Add all the text that has already been added, in case of a refresh.
 	/* for(uint i = 0; i < dialogue_cache.size(); i++){
@@ -203,7 +244,7 @@ void DefaultUI(IMContainer@ parent){
 
 	bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
 
-	IMContainer controls_container(2400.0, 325.0);
+	IMContainer controls_container(2300.0, 300.0);
 	controls_container.setAlignment(CABottom, CARight);
 	IMDivider controls_divider("controls_divider", DOVertical);
 	controls_divider.setAlignment(CATop, CALeft);
@@ -216,17 +257,16 @@ void DefaultUI(IMContainer@ parent){
 
 	lmb_continue.setVisible(false);
 	rtn_skip.setVisible(false);
-	parent.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
+	dialogue_holder.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
 
-	/* parent.addFloatingElement(dialogue_holder, "dialogue_holder", vec2(100.0, 50.0), -1); */
-	parent.setElement(dialogue_holder);
+	/* parent.setElement(dialogue_holder); */
 }
 
 void SimpleUI(IMContainer@ parent){
 	parent.setAlignment(CACenter, CACenter);
 	/* parent.showBorder(); */
 
-	@dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
+	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
 	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
 	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
@@ -234,7 +274,7 @@ void SimpleUI(IMContainer@ parent){
 
 	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2);
+	dialogue_line_holder.setZOrdering(2); */
 
 	//Add all the text that has already been added, in case of a refresh.
 	/* for(uint i = 0; i < dialogue_cache.size(); i++){
@@ -247,7 +287,7 @@ void SimpleUI(IMContainer@ parent){
 		dialogue_line_holder.setZOrdering(2);
 	} */
 
-	parent.setElement(dialogue_lines_holder_horiz);
+	/* parent.setElement(dialogue_lines_holder_horiz); */
 }
 
 void BreathOfTheWildUI(IMContainer@ parent){
@@ -260,24 +300,22 @@ void BreathOfTheWildUI(IMContainer@ parent){
 	@dialogue_holder = IMContainer(size.x, size.y);
 	dialogue_holder.setAlignment(CACenter, CATop);
 
-	/* dialogue_holder.showBorder(); */
-
-	@dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
-	dialogue_holder.setElement(dialogue_lines_holder_horiz);
+	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
+	dialogue_holder.setElement(dialogue_lines_holder_horiz); */
 	/* dialogue_holder.addFloatingElement(dialogue_lines_holder_horiz, "dialogue_lines_holder_horiz", vec2(0.0, 0.0), -1); */
 
-	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
-	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
+	/* @dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
+	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert); */
 
 	/* dialogue_lines_holder_horiz.setAlignment(CACenter, CATop); */
-	dialogue_lines_holder_vert.setAlignment(CACenter, CATop);
+	/* dialogue_lines_holder_vert.setAlignment(CACenter, CATop); */
 
 	/* dialogue_lines_holder_horiz.showBorder(); */
 	/* dialogue_lines_holder_vert.showBorder(); */
 
-	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
+	/* @dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2);
+	dialogue_line_holder.setZOrdering(2); */
 
 	//Add all the text that has already been added, in case of a refresh.
 	/* for(uint i = 0; i < dialogue_cache.size(); i++){
@@ -303,7 +341,7 @@ void ChronoTriggerUI(IMContainer@ parent){
 	dialogue_holder.setAlignment(CALeft, CATop);
 	/* dialogue_holder.showBorder(); */
 
-	@dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
+	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_holder.setElement(dialogue_lines_holder_horiz);
 	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
 	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
@@ -312,7 +350,7 @@ void ChronoTriggerUI(IMContainer@ parent){
 
 	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2);
+	dialogue_line_holder.setZOrdering(2); */
 
 	//Add all the text that has already been added, in case of a refresh.
 	/* for(uint i = 0; i < dialogue_cache.size(); i++){
@@ -337,7 +375,7 @@ void Fallout3UI(IMContainer@ parent){
 	dialogue_holder.setAlignment(CALeft, CATop);
 	/* dialogue_holder.showBorder(); */
 
-	@dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
+	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_holder.setElement(dialogue_lines_holder_horiz);
 	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
 	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
@@ -346,7 +384,7 @@ void Fallout3UI(IMContainer@ parent){
 
 	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2);
+	dialogue_line_holder.setZOrdering(2); */
 
 	//Add all the text that has already been added, in case of a refresh.
 	/* for(uint i = 0; i < dialogue_cache.size(); i++){
@@ -372,7 +410,7 @@ void LuigisMansionUI(IMContainer@ parent){
 	@dialogue_holder = IMContainer(size.x, size.y);
 	dialogue_holder.setAlignment(CARight, CACenter);
 
-	@dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
+	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_holder.addFloatingElement(dialogue_lines_holder_horiz, "dialogue_lines_holder_horiz", vec2(0.0, 0.0), -1);
 	dialogue_lines_holder_horiz.setAlignment(CALeft, CATop);
 	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
@@ -381,7 +419,7 @@ void LuigisMansionUI(IMContainer@ parent){
 
 	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
 	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2);
+	dialogue_line_holder.setZOrdering(2); */
 
 	//Add all the text that has already been added, in case of a refresh.
 	/* for(uint i = 0; i < dialogue_cache.size(); i++){

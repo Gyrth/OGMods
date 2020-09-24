@@ -163,11 +163,6 @@ class WriteFileProcess{
 	}
 }
 
-IMDivider @dialogue_lines_holder_vert;
-IMDivider @dialogue_lines_holder_horiz;
-IMContainer @dialogue_holder;
-IMDivider @dialogue_line_holder;
-int line_counter = 0;
 bool ui_created = false;
 string current_actor_name = "Default";
 array<ActorSettings@> actor_settings;
@@ -203,16 +198,18 @@ void CreateIMGUIContainers(){
 }
 
 void SetWindowDimensions(int width, int height){
-	imGUI.clear();
+	Log(warning, "Check");
+	imGUI.doScreenResize();
+	/* imGUI.clear();
 	CreateIMGUIContainers();
 	if(show_dialogue){
 		BuildDialogueUI();
-	}
+	} */
 }
 
 void PostScriptReload(){
-	imGUI.clear();
-	CreateIMGUIContainers();
+	/* imGUI.clear();
+	CreateIMGUIContainers(); */
 }
 
 void WriteMusicXML(string music_path, string song_name, string song_path){
@@ -349,10 +346,10 @@ void ReceiveMessage(string msg){
 		line_counter = 0;
 
 		if(show_dialogue){
-			dialogue_lines_holder_vert.clear();
-			@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-			dialogue_lines_holder_vert.append(dialogue_line_holder);
-			dialogue_line_holder.setZOrdering(2);
+			dialogue_lines_divider.clear();
+			@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+			dialogue_lines_divider.append(dialogue_line);
+			dialogue_line.setZOrdering(2);
 		}
 	}else if(token == "drika_dialogue_set_actor_settings"){
 		token_iter.FindNextToken(msg);
