@@ -58,9 +58,8 @@ IMText@ rtn_skip;
 vec3 old_camera_translation;
 vec3 old_camera_rotation;
 bool dialogue_move_in = false;
-float dialogue_move_in_offset = 400.0f;
 float dialogue_move_in_timer = 0.0;
-float dialogue_move_in_duration = 0.25;
+float dialogue_move_in_duration = 0.15;
 bool show_avatar;
 int dialogue_location;
 
@@ -1378,7 +1377,8 @@ void Update(){
 		}
 		fade_timer += time_step;
 	}else if(dialogue_move_in){
-		dialogue_container.setDisplacementY(EaseInQuad(dialogue_move_in_timer / dialogue_move_in_duration) * dialogue_move_in_offset);
+		int direction = (dialogue_location == dialogue_top)?-1:1;
+		dialogue_container.setDisplacementY(EaseInQuad(dialogue_move_in_timer / dialogue_move_in_duration) * dialogue_holder_size.y * direction);
 
 		if(dialogue_move_in_timer <= 0.0){
 			dialogue_move_in = false;
