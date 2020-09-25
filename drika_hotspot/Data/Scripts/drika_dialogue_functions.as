@@ -146,7 +146,7 @@ void BuildDialogueUI(){
 		case chrono_trigger_layout:
 			ChronoTriggerUI(dialogue_ui_container);
 			break;
-		case fallout_3_green_layout:
+		case fallout_3_layout:
 			Fallout3UI(dialogue_ui_container);
 			break;
 		case luigis_mansion_layout:
@@ -273,37 +273,18 @@ void ChronoTriggerUI(IMContainer@ parent){
 }
 
 void Fallout3UI(IMContainer@ parent){
-	parent.setAlignment(CACenter, CABottom);
-	/* parent.showBorder(); */
-	parent.setSizeY(450.0);
+	parent.setSizeY(600.0);
+	dialogue_holder_size = vec2(1400, 500);
+	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
-	/* @dialogue_holder = IMContainer(1400, 400);
-	dialogue_holder.setAlignment(CALeft, CATop); */
-	/* dialogue_holder.showBorder(); */
+	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
+	dialogue_holder.setAlignment(CALeft, CATop);
+	parent.setElement(dialogue_holder);
 
-	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
-	dialogue_holder.setElement(dialogue_lines_holder_horiz);
-	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
-	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
-	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
-	dialogue_lines_holder_vert.setAlignment(CALeft, CATop);
-
-	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2); */
-
-	//Add all the text that has already been added, in case of a refresh.
-	/* for(uint i = 0; i < dialogue_cache.size(); i++){
-		IMText dialogue_text(dialogue_cache[i], dialogue_font);
-		dialogue_line_holder.append(dialogue_text);
-
-		line_counter += 1;
-		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-		dialogue_lines_holder_vert.append(dialogue_line_holder);
-		dialogue_line_holder.setZOrdering(2);
-	} */
-
-	/* parent.setElement(dialogue_holder); */
+	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_holder.append(dialogue_line);
+	dialogue_line.setZOrdering(2);
+	dialogue_holder.setSize(dialogue_holder_size);
 }
 
 void LuigisMansionUI(IMContainer@ parent){
@@ -359,7 +340,7 @@ void CreateBackground(IMContainer@ parent){
 		case chrono_trigger_layout:
 			ChronoTriggerBackground(parent);
 			break;
-		case fallout_3_green_layout:
+		case fallout_3_layout:
 			Fallout3Background(parent);
 			break;
 		case luigis_mansion_layout:
@@ -560,7 +541,7 @@ void Fallout3Background(IMContainer@ parent){
 	bg_divider.append(right_fade);
 
 	float whole_width = (side_width * 2.0 + 1500.0);
-	parent.addFloatingElement(bg_container, "bg_container", vec2((2560 / 2.0) - (whole_width / 2.0), 0.0), -1);
+	parent.addFloatingElement(bg_container, "bg_container", vec2((2560 / 2.0) - (whole_width / 2.0), 100.0), -1);
 }
 
 void LuigisMansionBackground(IMContainer@ parent){
@@ -627,7 +608,7 @@ void CreateNameTag(IMContainer@ parent){
 		case chrono_trigger_layout:
 			ChronoTriggerNameTag(parent);
 			break;
-		case fallout_3_green_layout:
+		case fallout_3_layout:
 			Fallout3NameTag(parent);
 			break;
 		case luigis_mansion_layout:
@@ -736,7 +717,7 @@ void BreathOfTheWildNameTag(IMContainer@ parent){
 		name.setColor(current_actor_settings.color);
 	}
 
-	parent.addFloatingElement(name_container, "name_container", vec2(550, (dialogue_font.size / 2.0)), 3);
+	parent.addFloatingElement(name_container, "name_container", vec2(550, 50.0 -(dialogue_font.size / 4.0)), 3);
 }
 
 void ChronoTriggerNameTag(IMContainer@ parent){
@@ -791,8 +772,7 @@ void Fallout3NameTag(IMContainer@ parent){
 		name.setColor(current_actor_settings.color);
 	}
 
-	parent.addFloatingElement(name_container, "name_container", vec2(0.0, -dialogue_font.size), 3);
-
+	parent.addFloatingElement(name_container, "name_container", vec2(0.0, 100.0 -dialogue_font.size), 3);
 }
 
 void LuigisMansionNameTag(IMContainer@ parent){
