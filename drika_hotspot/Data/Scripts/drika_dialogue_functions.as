@@ -234,7 +234,6 @@ void SimpleUI(IMContainer@ parent){
 	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
 	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
-	dialogue_holder.setAlignment(CACenter, CATop);
 	parent.setElement(dialogue_holder);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
@@ -473,6 +472,7 @@ void SimpleBackground(IMContainer@ parent){
 
 	float bg_alpha = 1.0;
 	float bg_height = 450.0;
+	vec2 background_offset = vec2(0.0, 25.0);
 
 	IMImage middle_fade("Textures/dialogue_bg_nametag_faded.png");
 	middle_fade.setSizeX(2560);
@@ -481,7 +481,7 @@ void SimpleBackground(IMContainer@ parent){
 	middle_fade.setClip(false);
 	bg_divider.append(middle_fade);
 
-	parent.addFloatingElement(bg_container, "bg_container", vec2(0.0), -1);
+	parent.addFloatingElement(bg_container, "bg_container", background_offset, -1);
 }
 
 void BreathOfTheWildBackground(IMContainer@ parent){
@@ -752,7 +752,7 @@ void SimpleNameTag(IMContainer@ parent){
 		nametag_divider.append(avatar_image);
 	}
 
-	parent.addFloatingElement(nametag_container, "nametag_container", vec2(200, -50), 3);
+	parent.addFloatingElement(nametag_container, "nametag_container", vec2(200, 0), 3);
 }
 
 void BreathOfTheWildNameTag(IMContainer@ parent){
