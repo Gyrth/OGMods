@@ -354,7 +354,6 @@ void DefaultBackground(IMContainer@ parent){
 	left_fade.setSizeY(bg_height);
 	left_fade.setAlpha(bg_alpha);
 	left_fade.setClip(false);
-	left_fade.setDisplacementX(0.25);
 	bg_divider.append(left_fade);
 
 	IMImage middle_fade("Textures/ui/dialogue/dialogue_bg.png");
@@ -371,7 +370,6 @@ void DefaultBackground(IMContainer@ parent){
 	right_fade.setSizeY(bg_height);
 	right_fade.setAlpha(bg_alpha);
 	right_fade.setClip(false);
-	right_fade.setDisplacementX(-0.25);
 	bg_divider.append(right_fade);
 
 	parent.addFloatingElement(bg_container, "bg_container", background_offset, -1);
@@ -419,7 +417,6 @@ void BreathOfTheWildBackground(IMContainer@ parent){
 	left_fade.setSizeY(bg_height);
 	left_fade.setAlpha(bg_alpha);
 	left_fade.setClip(false);
-	left_fade.setDisplacementX(0.25);
 	bg_divider.append(left_fade);
 
 	IMImage middle_fade("Textures/dialogue_bg_botw_middle.png");
@@ -434,7 +431,6 @@ void BreathOfTheWildBackground(IMContainer@ parent){
 	right_fade.setSizeY(bg_height);
 	right_fade.setAlpha(bg_alpha);
 	right_fade.setClip(false);
-	right_fade.setDisplacementX(-0.25);
 	bg_divider.append(right_fade);
 
 	float whole_width = (bg_height * 2.0 + 1000.0);
@@ -459,7 +455,6 @@ void ChronoTriggerBackground(IMContainer@ parent){
 	left_fade.setSizeY(bg_height);
 	left_fade.setAlpha(bg_alpha);
 	left_fade.setClip(false);
-	left_fade.setDisplacementX(0.25);
 	bg_divider.append(left_fade);
 
 	IMImage middle_fade("Textures/dialogue_bg_ct_middle.png");
@@ -474,7 +469,6 @@ void ChronoTriggerBackground(IMContainer@ parent){
 	right_fade.setSizeY(bg_height);
 	right_fade.setAlpha(bg_alpha);
 	right_fade.setClip(false);
-	right_fade.setDisplacementX(-0.25);
 	bg_divider.append(right_fade);
 
 	float whole_width = (side_width * 2.0 + 1500.0);
@@ -501,7 +495,6 @@ void Fallout3Background(IMContainer@ parent){
 	left_fade.setSizeY(bg_height);
 	left_fade.setAlpha(bg_alpha);
 	left_fade.setClip(false);
-	left_fade.setDisplacementX(0.25);
 	bg_divider.append(left_fade);
 
 	IMImage middle_fade("Textures/ui/dialogue/dialogue_bg.png");
@@ -518,7 +511,6 @@ void Fallout3Background(IMContainer@ parent){
 	right_fade.setSizeY(bg_height);
 	right_fade.setAlpha(bg_alpha);
 	right_fade.setClip(false);
-	right_fade.setDisplacementX(-0.25);
 	bg_divider.append(right_fade);
 
 	float whole_width = (side_width * 2.0 + 1500.0);
@@ -545,7 +537,6 @@ void LuigisMansionBackground(IMContainer@ parent){
 	left_fade.setAlpha(bg_alpha);
 	left_fade.scaleToSizeY(bg_height);
 	left_fade.setClip(false);
-	left_fade.setDisplacementX(0.25);
 	bg_divider.append(left_fade);
 
 	IMImage middle_fade("Textures/dialogue_bg_lm_middle.png");
@@ -561,7 +552,6 @@ void LuigisMansionBackground(IMContainer@ parent){
 	right_fade.setAlpha(bg_alpha);
 	right_fade.scaleToSizeY(bg_height);
 	right_fade.setClip(false);
-	right_fade.setDisplacementX(-0.25);
 	bg_divider.append(right_fade);
 
 	float whole_width = (side_width * 2.0 + middle_width);
