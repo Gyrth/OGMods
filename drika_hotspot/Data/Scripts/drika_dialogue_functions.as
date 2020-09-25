@@ -5,6 +5,10 @@ IMDivider @dialogue_holder;
 IMDivider @dialogue_line;
 int line_counter = 0;
 vec2 dialogue_holder_size = vec2(1700, 300);
+bool dialogue_move_in = false;
+float dialogue_move_in_timer = 0.0;
+float dialogue_move_in_duration = 0.15;
+int dialogue_location;
 
 void DialogueAddSay(string actor_name, string text){
 
@@ -770,4 +774,16 @@ void LuigisMansionNameTag(IMContainer@ parent){
 	}
 
 	parent.addFloatingElement(name_container, "name_container", vec2(0.0), 3);
+}
+
+void UpdateDialogueMoveIn(){
+	int direction = (dialogue_location == dialogue_top)?-1:1;
+	dialogue_container.setDisplacementY(EaseInQuad(dialogue_move_in_timer / dialogue_move_in_duration) * dialogue_holder_size.y * direction);
+
+	if(dialogue_move_in_timer <= 0.0){
+		dialogue_move_in = false;
+		return;
+	}
+
+	dialogue_move_in_timer -= time_step;
 }
