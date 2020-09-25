@@ -346,10 +346,11 @@ void ReceiveMessage(string msg){
 		line_counter = 0;
 
 		if(show_dialogue){
-			dialogue_lines_divider.clear();
+			dialogue_holder.clear();
 			@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
-			dialogue_lines_divider.append(dialogue_line);
+			dialogue_holder.append(dialogue_line);
 			dialogue_line.setZOrdering(2);
+			dialogue_holder.setSize(dialogue_holder_size);
 		}
 	}else if(token == "drika_dialogue_set_actor_settings"){
 		token_iter.FindNextToken(msg);

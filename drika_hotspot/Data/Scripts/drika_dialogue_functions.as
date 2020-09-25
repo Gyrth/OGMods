@@ -1,10 +1,7 @@
 
 array<array<IMText@>> dialogue_cache;
 IMContainer@ dialogue_ui_container;
-IMDivider @dialogue_lines_holder;
-IMContainer @dialogue_holder;
-IMContainer @dialogue_line_holder;
-IMDivider @dialogue_lines_divider;
+IMDivider @dialogue_holder;
 IMDivider @dialogue_line;
 int line_counter = 0;
 vec2 dialogue_holder_size = vec2(1700, 300);
@@ -71,7 +68,7 @@ void DialogueAddSay(string actor_name, string text){
 			dialogue_cache[counter].insertLast(dialogue_text);
 
 			dialogue_line.append(dialogue_text, 1.0);
-			dialogue_text.showBorder();
+			/* dialogue_text.showBorder(); */
 			dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 		}else if(word == "\n"){
 			//If a new line is found then add a new divider.
@@ -80,7 +77,7 @@ void DialogueAddSay(string actor_name, string text){
 			dialogue_cache.insertLast(array<IMText@>());
 			counter += 1;
 			@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
-			dialogue_lines_divider.append(dialogue_line);
+			dialogue_holder.append(dialogue_line);
 			dialogue_line.setZOrdering(2);
 
 			continue;
@@ -92,7 +89,7 @@ void DialogueAddSay(string actor_name, string text){
 		/* dialogue_lines_holder_vert.showBorder(); */
 		/* dialogue_lines_holder_horiz.showBorder(); */
 
-		bool add_previous_text_to_new_line = dialogue_lines_divider.getSizeX() > dialogue_holder_size.x;
+		bool add_previous_text_to_new_line = dialogue_holder.getSizeX() > dialogue_holder_size.x;
 		if(add_previous_text_to_new_line){
 			Log(warning, "Remake dialogue ");
 
@@ -101,15 +98,15 @@ void DialogueAddSay(string actor_name, string text){
 			counter += 1;
 			dialogue_cache[counter].insertLast(dialogue_text);
 
-			dialogue_lines_divider.showBorder();
-			dialogue_lines_divider.clear();
-			dialogue_lines_divider.setSize(dialogue_holder_size);
+			/* dialogue_holder.showBorder(); */
+			dialogue_holder.clear();
+			dialogue_holder.setSize(dialogue_holder_size);
 			/* dialogue_line_holder.setSize(dialogue_holder_size); */
 
 			//Remake the dialogue using the cache.
 			for(uint j = 0; j < dialogue_cache.size(); j++){
 				@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
-				dialogue_lines_divider.append(dialogue_line);
+				dialogue_holder.append(dialogue_line);
 				dialogue_line.setZOrdering(2);
 				for(uint k = 0; k < dialogue_cache[j].size(); k++){
 					dialogue_line.append(dialogue_cache[j][k]);
@@ -124,15 +121,15 @@ void BuildDialogueUI(){
 	line_counter = 0;
 	DisposeTextAtlases();
 	dialogue_container.clear();
-	IMDivider dialogue_divider("dialogue_divider", DOVertical);
-	@dialogue_ui_container = IMContainer(2560, 400);
-	dialogue_divider.append(dialogue_ui_container);
+	@dialogue_ui_container = IMContainer(2560, 500);
 	if(dialogue_location == dialogue_bottom){
 		dialogue_container.setAlignment(CACenter, CABottom);
 	}else{
 		dialogue_container.setAlignment(CACenter, CATop);
 	}
-	dialogue_container.setElement(dialogue_divider);
+	/* dialogue_ui_container.showBorder(); */
+	dialogue_ui_container.setAlignment(CACenter, CACenter);
+	dialogue_container.setElement(dialogue_ui_container);
 	dialogue_container.setSize(vec2(2560, 1440));
 
 	CreateNameTag(dialogue_ui_container);
@@ -184,7 +181,7 @@ void CreateChoiceUI(){
 	    IMMessage nil_message("");
 		choice_container.addLeftMouseClickBehavior(IMFixedMessageOnClick(on_click), "");
 		choice_container.addMouseOverBehavior(IMFixedMessageOnMouseOver(on_hover_enter, nil_message, nil_message), "");
-		dialogue_lines_divider.append(choice_container);
+		dialogue_holder.append(choice_container);
 		choice_container.setZOrdering(2);
 		choice_container.setBorderColor(dialogue_font.color);
 		choice_container.setBorderSize(2.0f);
@@ -203,25 +200,17 @@ void CreateChoiceUI(){
 }
 
 void DefaultUI(IMContainer@ parent){
-	/* parent.setSizeY(400.0); */
+	parent.setSizeY(500.0);
+	dialogue_holder_size = vec2(1700, 400);
+	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
-	dialogue_holder_size = vec2(1700, 300);
-	vec2 dialogue_holder_offset = vec2(100.0, 50.0);
-	/* parent.showBorder(); */
-
-	@dialogue_line_holder = IMContainer(dialogue_holder_size.x, dialogue_holder_size.y);
-
-	dialogue_line_holder.showBorder();
-	dialogue_line_holder.setBorderColor(vec4(0.0, 1.0, 0.0, 1.0));
-
-
-	@dialogue_lines_divider = IMDivider("dialogue_lines_divider", DOVertical);
-	dialogue_line_holder.setElement(dialogue_lines_divider);
-	dialogue_lines_divider.setAlignment(CACenter, CATop);
-	parent.addFloatingElement(dialogue_lines_divider, "dialogue_holder", dialogue_holder_offset, -1);
+	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
+	dialogue_holder.setAlignment(CALeft, CATop);
+	/* dialogue_holder.showBorder(); */
+	parent.addFloatingElement(dialogue_holder, "dialogue_holder", dialogue_holder_offset, -1);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
-	dialogue_lines_divider.append(dialogue_line);
+	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
 
 	bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
@@ -239,7 +228,7 @@ void DefaultUI(IMContainer@ parent){
 
 	lmb_continue.setVisible(false);
 	rtn_skip.setVisible(false);
-	parent.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
+	/* parent.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1); */
 }
 
 void SimpleUI(IMContainer@ parent){
@@ -277,8 +266,8 @@ void BreathOfTheWildUI(IMContainer@ parent){
 
 	vec2 size = vec2(1600, 300);
 
-	@dialogue_holder = IMContainer(size.x, size.y);
-	dialogue_holder.setAlignment(CACenter, CATop);
+	/* @dialogue_holder = IMContainer(size.x, size.y);
+	dialogue_holder.setAlignment(CACenter, CATop); */
 
 	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_holder.setElement(dialogue_lines_holder_horiz); */
@@ -308,7 +297,7 @@ void BreathOfTheWildUI(IMContainer@ parent){
 		dialogue_line_holder.setZOrdering(2);
 	} */
 
-	parent.addFloatingElement(dialogue_holder, "dialogue_holder", vec2(475.0, 65.0), -1);
+	/* parent.addFloatingElement(dialogue_holder, "dialogue_holder", vec2(475.0, 65.0), -1); */
 	/* parent.showBorder(); */
 }
 
@@ -317,8 +306,8 @@ void ChronoTriggerUI(IMContainer@ parent){
 	/* parent.showBorder(); */
 	parent.setSizeY(450.0);
 
-	@dialogue_holder = IMContainer(1500, 300);
-	dialogue_holder.setAlignment(CALeft, CATop);
+	/* @dialogue_holder = IMContainer(1500, 300);
+	dialogue_holder.setAlignment(CALeft, CATop); */
 	/* dialogue_holder.showBorder(); */
 
 	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
@@ -343,7 +332,7 @@ void ChronoTriggerUI(IMContainer@ parent){
 		dialogue_line_holder.setZOrdering(2);
 	} */
 
-	parent.setElement(dialogue_holder);
+	/* parent.setElement(dialogue_holder); */
 }
 
 void Fallout3UI(IMContainer@ parent){
@@ -351,8 +340,8 @@ void Fallout3UI(IMContainer@ parent){
 	/* parent.showBorder(); */
 	parent.setSizeY(450.0);
 
-	@dialogue_holder = IMContainer(1400, 400);
-	dialogue_holder.setAlignment(CALeft, CATop);
+	/* @dialogue_holder = IMContainer(1400, 400);
+	dialogue_holder.setAlignment(CALeft, CATop); */
 	/* dialogue_holder.showBorder(); */
 
 	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
@@ -377,7 +366,7 @@ void Fallout3UI(IMContainer@ parent){
 		dialogue_line_holder.setZOrdering(2);
 	} */
 
-	parent.setElement(dialogue_holder);
+	/* parent.setElement(dialogue_holder); */
 }
 
 void LuigisMansionUI(IMContainer@ parent){
@@ -387,8 +376,8 @@ void LuigisMansionUI(IMContainer@ parent){
 
 	vec2 size = vec2(1850, 350);
 
-	@dialogue_holder = IMContainer(size.x, size.y);
-	dialogue_holder.setAlignment(CARight, CACenter);
+	/* @dialogue_holder = IMContainer(size.x, size.y);
+	dialogue_holder.setAlignment(CARight, CACenter); */
 
 	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
 	dialogue_holder.addFloatingElement(dialogue_lines_holder_horiz, "dialogue_lines_holder_horiz", vec2(0.0, 0.0), -1);
@@ -412,7 +401,7 @@ void LuigisMansionUI(IMContainer@ parent){
 		dialogue_line_holder.setZOrdering(2);
 	} */
 
-	parent.addFloatingElement(dialogue_holder, "dialogue_holder", vec2(450.0, 0.0), -1);
+	/* parent.addFloatingElement(dialogue_holder, "dialogue_holder", vec2(450.0, 0.0), -1); */
 }
 
 void CreateBackground(IMContainer@ parent){
@@ -456,6 +445,7 @@ void DefaultBackground(IMContainer@ parent){
 
 	float bg_alpha = 0.5;
 	float bg_height = 350.0;
+	vec2 background_offset = vec2(0.0, 75.0);
 
 	vec4 color = showing_choice?dialogue_font.color:current_actor_settings.color;
 
@@ -485,7 +475,7 @@ void DefaultBackground(IMContainer@ parent){
 	right_fade.setDisplacementX(-0.25);
 	bg_divider.append(right_fade);
 
-	parent.addFloatingElement(bg_container, "bg_container", vec2(0.0, 0.0), -1);
+	parent.addFloatingElement(bg_container, "bg_container", background_offset, -1);
 	/* parent.showBorder(); */
 }
 
@@ -719,7 +709,7 @@ void DefaultNameTag(IMContainer@ parent){
 	name_divider.setAlignment(CACenter, CACenter);
 	name_container.setElement(name_divider);
 
-	vec2 offset(0.0, -65.0);
+	vec2 offset(0.0, 15.0);
 
 	if(show_names){
 		IMText name(current_actor_settings.name, name_font);
