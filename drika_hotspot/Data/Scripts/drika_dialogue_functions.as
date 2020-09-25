@@ -90,6 +90,7 @@ void DialogueAddSay(string actor_name, string text){
 		/* dialogue_lines_holder_horiz.showBorder(); */
 
 		bool add_previous_text_to_new_line = dialogue_holder.getSizeX() > dialogue_holder_size.x;
+		/* bool add_previous_text_to_new_line = true; */
 		if(add_previous_text_to_new_line){
 			Log(warning, "Remake dialogue ");
 
@@ -200,13 +201,14 @@ void CreateChoiceUI(){
 void DefaultUI(IMContainer@ parent){
 	parent.setSizeY(500.0);
 	dialogue_holder_size = vec2(1740, 400);
-	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
+	vec2 dialogue_holder_offset = vec2(100.0, 130.0);
 
 	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
 	dialogue_holder.setAlignment(CALeft, CATop);
 	parent.addFloatingElement(dialogue_holder, "dialogue_holder", dialogue_holder_offset, -1);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_holder.setSize(dialogue_holder_size);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
 
@@ -226,100 +228,79 @@ void DefaultUI(IMContainer@ parent){
 	lmb_continue.setVisible(false);
 	rtn_skip.setVisible(false);
 	parent.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
-	dialogue_holder.setSize(dialogue_holder_size);
 }
 
 void SimpleUI(IMContainer@ parent){
 	parent.setSizeY(500.0);
 	dialogue_holder_size = vec2(1400, 400);
-	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
 	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
+	dialogue_holder.setSize(dialogue_holder_size);
 	parent.setElement(dialogue_holder);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
-	dialogue_holder.setSize(dialogue_holder_size);
 }
 
 void BreathOfTheWildUI(IMContainer@ parent){
 	parent.setSizeY(500.0);
 	dialogue_holder_size = vec2(1500, 500);
-	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
 	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
+	dialogue_holder.setSize(dialogue_holder_size);
 	parent.setElement(dialogue_holder);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
-	dialogue_holder.setSize(dialogue_holder_size);
 }
 
 void ChronoTriggerUI(IMContainer@ parent){
 	parent.setSizeY(500.0);
 	dialogue_holder_size = vec2(1400, 500);
-	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
 	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
 	dialogue_holder.setAlignment(CALeft, CATop);
-	parent.setElement(dialogue_holder);
+	dialogue_holder.setSize(dialogue_holder_size);
+
+	vec2 floating_container_offset = vec2(575.0, 75.0 + dialogue_font.size);
+	IMContainer floating_container(dialogue_holder_size.x, dialogue_holder_size.y);
+	floating_container.setAlignment(CALeft, CATop);
+	floating_container.setElement(dialogue_holder);
+	parent.addFloatingElement(floating_container, "floating_container", floating_container_offset, -1);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
-	dialogue_holder.setSize(dialogue_holder_size);
 }
 
 void Fallout3UI(IMContainer@ parent){
 	parent.setSizeY(600.0);
 	dialogue_holder_size = vec2(1400, 500);
-	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
 	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
 	dialogue_holder.setAlignment(CALeft, CATop);
+	dialogue_holder.setSize(dialogue_holder_size);
 	parent.setElement(dialogue_holder);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
-	dialogue_holder.setSize(dialogue_holder_size);
 }
 
 void LuigisMansionUI(IMContainer@ parent){
-	parent.setAlignment(CACenter, CABottom);
-	/* parent.showBorder(); */
-	parent.setSizeY(450.0);
+	parent.setSizeY(500.0);
+	dialogue_holder_size = vec2(1500, 500);
 
-	vec2 size = vec2(1850, 350);
+	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
+	dialogue_holder.setAlignment(CALeft, CACenter);
+	dialogue_holder.setSize(dialogue_holder_size);
+	parent.setElement(dialogue_holder);
 
-	/* @dialogue_holder = IMContainer(size.x, size.y);
-	dialogue_holder.setAlignment(CARight, CACenter); */
-
-	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
-	dialogue_holder.addFloatingElement(dialogue_lines_holder_horiz, "dialogue_lines_holder_horiz", vec2(0.0, 0.0), -1);
-	dialogue_lines_holder_horiz.setAlignment(CALeft, CATop);
-	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
-	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
-	dialogue_lines_holder_vert.setAlignment(CALeft, CATop);
-
-	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2); */
-
-	//Add all the text that has already been added, in case of a refresh.
-	/* for(uint i = 0; i < dialogue_cache.size(); i++){
-		IMText dialogue_text(dialogue_cache[i], dialogue_font);
-		dialogue_line_holder.append(dialogue_text);
-
-		line_counter += 1;
-		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-		dialogue_lines_holder_vert.append(dialogue_line_holder);
-		dialogue_line_holder.setZOrdering(2);
-	} */
-
-	/* parent.addFloatingElement(dialogue_holder, "dialogue_holder", vec2(450.0, 0.0), -1); */
+	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_holder.append(dialogue_line);
+	dialogue_line.setZOrdering(2);
 }
 
 void CreateBackground(IMContainer@ parent){
@@ -584,8 +565,7 @@ void LuigisMansionBackground(IMContainer@ parent){
 	bg_divider.append(right_fade);
 
 	float whole_width = (side_width * 2.0 + middle_width);
-	parent.addFloatingElement(bg_container, "bg_container", vec2((2560 / 2.0) - (whole_width / 2.0), 0.0), -1);
-	/* bg_container.showBorder(); */
+	parent.addFloatingElement(bg_container, "bg_container", vec2((2560 / 2.0) - (whole_width / 2.0), 75.0), -1);
 	dialogue_move_in_timer = dialogue_move_in_duration;
 	dialogue_move_in = true;
 }
@@ -745,7 +725,7 @@ void ChronoTriggerNameTag(IMContainer@ parent){
 		name.setColor(current_actor_settings.color);
 	}
 
-	parent.addFloatingElement(name_container, "name_container", vec2(500.0, dialogue_font.size / 1.25), 3);
+	parent.addFloatingElement(name_container, "name_container", vec2(500.0, dialogue_font.size), 3);
 }
 
 void Fallout3NameTag(IMContainer@ parent){
@@ -783,14 +763,14 @@ void LuigisMansionNameTag(IMContainer@ parent){
 	name_container.setAlignment(CACenter, CACenter);
 	IMDivider name_divider("name_divider", DOHorizontal);
 	name_divider.setZOrdering(3);
-	name_divider.setAlignment(CACenter, CACenter);
+	name_divider.setAlignment(CACenter, CATop);
 	name_container.setElement(name_divider);
 
 	if(current_actor_settings.avatar_path != "None" && show_avatar){
 		IMImage avatar_image(current_actor_settings.avatar_path);
 		avatar_image.setSize(vec2(250, 250));
 		avatar_image.setClip(false);
-		name_container.addFloatingElement(avatar_image, "avatar", vec2(200.0, 150.0), 3);
+		name_container.addFloatingElement(avatar_image, "avatar", vec2(250.0, 125.0), 3);
 	}
 
 	if(show_names){
@@ -799,5 +779,5 @@ void LuigisMansionNameTag(IMContainer@ parent){
 		name.setColor(current_actor_settings.color);
 	}
 
-	parent.addFloatingElement(name_container, "name_container", vec2(0.0, -dialogue_font.size), 3);
+	parent.addFloatingElement(name_container, "name_container", vec2(0.0), 3);
 }
