@@ -258,37 +258,18 @@ void BreathOfTheWildUI(IMContainer@ parent){
 }
 
 void ChronoTriggerUI(IMContainer@ parent){
-	parent.setAlignment(CACenter, CABottom);
-	/* parent.showBorder(); */
-	parent.setSizeY(450.0);
+	parent.setSizeY(500.0);
+	dialogue_holder_size = vec2(1400, 500);
+	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
-	/* @dialogue_holder = IMContainer(1500, 300);
-	dialogue_holder.setAlignment(CALeft, CATop); */
-	/* dialogue_holder.showBorder(); */
+	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
+	dialogue_holder.setAlignment(CALeft, CATop);
+	parent.setElement(dialogue_holder);
 
-	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
-	dialogue_holder.setElement(dialogue_lines_holder_horiz);
-	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
-	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
-	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
-	dialogue_lines_holder_vert.setAlignment(CALeft, CATop);
-
-	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2); */
-
-	//Add all the text that has already been added, in case of a refresh.
-	/* for(uint i = 0; i < dialogue_cache.size(); i++){
-		IMText dialogue_text(dialogue_cache[i], dialogue_font);
-		dialogue_line_holder.append(dialogue_text);
-
-		line_counter += 1;
-		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-		dialogue_lines_holder_vert.append(dialogue_line_holder);
-		dialogue_line_holder.setZOrdering(2);
-	} */
-
-	/* parent.setElement(dialogue_holder); */
+	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_holder.append(dialogue_line);
+	dialogue_line.setZOrdering(2);
+	dialogue_holder.setSize(dialogue_holder_size);
 }
 
 void Fallout3UI(IMContainer@ parent){
@@ -535,7 +516,7 @@ void ChronoTriggerBackground(IMContainer@ parent){
 	bg_divider.append(right_fade);
 
 	float whole_width = (side_width * 2.0 + 1500.0);
-	parent.addFloatingElement(bg_container, "bg_container", vec2((2560 / 2.0) - (whole_width / 2.0), 0.0), -1);
+	parent.addFloatingElement(bg_container, "bg_container", vec2((2560 / 2.0) - (whole_width / 2.0), 25.0), -1);
 }
 
 void Fallout3Background(IMContainer@ parent){
@@ -783,7 +764,7 @@ void ChronoTriggerNameTag(IMContainer@ parent){
 		name.setColor(current_actor_settings.color);
 	}
 
-	parent.addFloatingElement(name_container, "name_container", vec2(500.0, dialogue_font.size / 2.0), 3);
+	parent.addFloatingElement(name_container, "name_container", vec2(500.0, dialogue_font.size / 1.25), 3);
 }
 
 void Fallout3NameTag(IMContainer@ parent){
