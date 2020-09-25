@@ -127,8 +127,6 @@ void BuildDialogueUI(){
 	}else{
 		dialogue_container.setAlignment(CACenter, CATop);
 	}
-	/* dialogue_ui_container.showBorder(); */
-	dialogue_ui_container.setAlignment(CACenter, CACenter);
 	dialogue_container.setElement(dialogue_ui_container);
 	dialogue_container.setSize(vec2(2560, 1440));
 
@@ -201,12 +199,11 @@ void CreateChoiceUI(){
 
 void DefaultUI(IMContainer@ parent){
 	parent.setSizeY(500.0);
-	dialogue_holder_size = vec2(1700, 400);
+	dialogue_holder_size = vec2(1740, 400);
 	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
 	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
 	dialogue_holder.setAlignment(CALeft, CATop);
-	/* dialogue_holder.showBorder(); */
 	parent.addFloatingElement(dialogue_holder, "dialogue_holder", dialogue_holder_offset, -1);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
@@ -215,7 +212,7 @@ void DefaultUI(IMContainer@ parent){
 
 	bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
 
-	IMContainer controls_container(2300.0, 300.0);
+	IMContainer controls_container(2425.0, 420.0);
 	controls_container.setAlignment(CABottom, CARight);
 	IMDivider controls_divider("controls_divider", DOVertical);
 	controls_divider.setAlignment(CATop, CALeft);
@@ -228,35 +225,21 @@ void DefaultUI(IMContainer@ parent){
 
 	lmb_continue.setVisible(false);
 	rtn_skip.setVisible(false);
-	/* parent.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1); */
+	parent.addFloatingElement(controls_container, "controls_container", vec2(0.0, 0.0), -1);
 }
 
 void SimpleUI(IMContainer@ parent){
-	parent.setAlignment(CACenter, CACenter);
-	/* parent.showBorder(); */
+	parent.setSizeY(500.0);
+	dialogue_holder_size = vec2(1400, 400);
+	vec2 dialogue_holder_offset = vec2(100.0, 125.0);
 
-	/* @dialogue_lines_holder_horiz = IMDivider("dialogue_lines_holder_horiz", DOHorizontal);
-	dialogue_lines_holder_horiz.setAlignment(CACenter, CATop);
-	@dialogue_lines_holder_vert = IMDivider("dialogue_lines_holder_vert", DOVertical);
-	dialogue_lines_holder_horiz.append(dialogue_lines_holder_vert);
-	dialogue_lines_holder_vert.setAlignment(CACenter, CATop);
+	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
+	dialogue_holder.setAlignment(CACenter, CATop);
+	parent.setElement(dialogue_holder);
 
-	@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-	dialogue_lines_holder_vert.append(dialogue_line_holder);
-	dialogue_line_holder.setZOrdering(2); */
-
-	//Add all the text that has already been added, in case of a refresh.
-	/* for(uint i = 0; i < dialogue_cache.size(); i++){
-		IMText dialogue_text(dialogue_cache[i], dialogue_font);
-		dialogue_line_holder.append(dialogue_text);
-
-		line_counter += 1;
-		@dialogue_line_holder = IMDivider("dialogue_line_holder" + line_counter, DOHorizontal);
-		dialogue_lines_holder_vert.append(dialogue_line_holder);
-		dialogue_line_holder.setZOrdering(2);
-	} */
-
-	/* parent.setElement(dialogue_lines_holder_horiz); */
+	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_holder.append(dialogue_line);
+	dialogue_line.setZOrdering(2);
 }
 
 void BreathOfTheWildUI(IMContainer@ parent){
@@ -734,25 +717,19 @@ void SimpleNameTag(IMContainer@ parent){
 	parent.removeElement("nametag_container");
 
 	IMContainer nametag_container(0.0, 0.0);
-	IMDivider nametag_divider("nametag_divider", DOHorizontal);
+	IMDivider nametag_divider("nametag_divider", DOVertical);
 	nametag_container.setElement(nametag_divider);
 	nametag_divider.setAlignment(CACenter, CATop);
 
-	if(current_actor_settings.avatar_path != "None" && show_avatar){
-		IMImage avatar_image(current_actor_settings.avatar_path);
-		avatar_image.setSize(vec2(400, 400));
-		nametag_divider.append(avatar_image);
-	}
-
-	IMContainer name_container(-1.0, dialogue_font.size);
-	name_container.setAlignment(CACenter, CACenter);
-	IMDivider name_divider("name_divider", DOHorizontal);
-	name_divider.setZOrdering(3);
-	name_divider.setAlignment(CACenter, CACenter);
-	name_container.setElement(name_divider);
-	nametag_divider.append(name_container);
-
 	if(show_names){
+		IMContainer name_container(-1.0, dialogue_font.size);
+		name_container.setAlignment(CACenter, CACenter);
+		IMDivider name_divider("name_divider", DOHorizontal);
+		name_divider.setZOrdering(3);
+		name_divider.setAlignment(CACenter, CACenter);
+		name_container.setElement(name_divider);
+		nametag_divider.append(name_container);
+
 		IMText name(current_actor_settings.name, name_font_arial);
 		name_divider.appendSpacer(60.0);
 		name_divider.append(name);
@@ -768,7 +745,14 @@ void SimpleNameTag(IMContainer@ parent){
 		name_container.addFloatingElement(name_background, "name_background", vec2(0, 0), 1);
 		name_background.setZOrdering(1);
 	}
-	parent.addFloatingElement(nametag_container, "nametag_container", vec2(300, -50), 3);
+
+	if(current_actor_settings.avatar_path != "None" && show_avatar){
+		IMImage avatar_image(current_actor_settings.avatar_path);
+		avatar_image.setSize(vec2(400, 400));
+		nametag_divider.append(avatar_image);
+	}
+
+	parent.addFloatingElement(nametag_container, "nametag_container", vec2(200, -50), 3);
 }
 
 void BreathOfTheWildNameTag(IMContainer@ parent){
