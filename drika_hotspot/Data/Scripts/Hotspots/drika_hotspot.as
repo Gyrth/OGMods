@@ -119,6 +119,9 @@ class Reference{
 	}
 }
 
+//Imposter class not used in hotspot script, but needed for shared class DialogueScriptEntry.
+class IMText{}
+
 void Init() {
 	current_line = 0;
 	show_name = (this_hotspot.GetName() != "");

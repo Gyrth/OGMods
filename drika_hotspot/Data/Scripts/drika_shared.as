@@ -115,6 +115,67 @@ array<string> dialogue_location_names =	{
 											"Top"
 										};
 
+enum script_entry_types {
+							empty_entry,
+							character_entry,
+							new_line_entry,
+							wait_entry,
+							red_text_entry,
+							green_text_entry,
+							blue_text_entry
+						}
+
+class DialogueScriptEntry{
+	script_entry_types script_entry_type;
+	float wait;
+	string character;
+	IMText @text;
+
+	DialogueScriptEntry(script_entry_types script_entry_type){
+		this.script_entry_type = script_entry_type;
+	}
+}
+
+array<DialogueScriptEntry@> InterpDialogueScript(string script_text){
+	array<DialogueScriptEntry@> new_dialogue_script;
+	array<string> script_text_split;
+
+	//Get all the character seperate.
+	for(uint i = 0; i < script_text.length(); i++){
+		script_text_split.insertLast(script_text.substr(i, 1));
+	}
+
+	for(uint i = 0; i < script_text_split.size(); i++){
+		//When the next character is an opening bracket then it might be a command.
+		if(script_text_split[i] == "["){
+			//Get the locaton of the end bracket so that we can get the whole command inside.
+			int end_bracket_index = script_text.findFirst("]", i);
+			if(end_bracket_index != -1){
+				string command = script_text.substr(i + 1, end_bracket_index - (i + 1));
+				//Check if the first 4 letters turn out to be a wait command.
+				if(command.substr(0, 4) == "wait"){
+					float wait_amount = atof(command.substr(4, command.length() - 4));
+					DialogueScriptEntry entry(wait_entry);
+					entry.wait = wait_amount;
+					new_dialogue_script.insertLast(entry);
+					// Skip adding the whole content of inside the brackets.
+					i = end_bracket_index;
+					continue;
+				}
+			}
+		}else if(script_text_split[i] == "\n"){
+			DialogueScriptEntry entry(new_line_entry);
+			new_dialogue_script.insertLast(entry);
+			continue;
+		}
+		DialogueScriptEntry entry(character_entry);
+		entry.character = script_text_split[i];
+		new_dialogue_script.insertLast(entry);
+	}
+
+	return new_dialogue_script;
+}
+
 float EaseInSine(float progress){
 	return 1 - cos((progress * PI) / 2);
 }

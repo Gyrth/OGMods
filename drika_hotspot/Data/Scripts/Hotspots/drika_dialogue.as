@@ -106,6 +106,7 @@ class DrikaDialogue : DrikaElement{
 	vec3 camera_translation_from;
 	vec3 camera_rotation_from;
 	float camera_transition_timer = 0.0;
+	array<DialogueScriptEntry@> dialogue_script;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -1545,47 +1546,55 @@ class DrikaDialogue : DrikaElement{
 		level.SendMessage(msg);
 	}
 
+	int dialogue_progress = 0;
+	float dialogue_progress_timer = 0.0;
 
 	bool UpdateSayDialogue(bool preview){
 		//Some setup operations that only need to be done once.
 		if(say_started == false){
 			say_started = true;
-			array<string> say_text_queue;
-			say_text_split.resize(0);
+			dialogue_progress = 0;
+			dialogue_progress_timer = 0.0;
 
-			//Get all the character seperate.
-			for(uint i = 0; i < say_text.length(); i++){
-				say_text_split.insertLast(say_text.substr(i, 1));
-			}
+			dialogue_script = InterpDialogueScript(say_text);
 
 			level.SendMessage("drika_dialogue_clear_say");
 
-			for(uint i = 0; i < say_text_split.size(); i++){
-				//When the next character is an opening bracket then it might be a command.
-				if(say_text_split[i] == "["){
-					//Get the locaton of the end bracket so that we can get the whole command inside.
-					int end_bracket_index = say_text.findFirst("]", i);
-					if(end_bracket_index != -1){
-						string command = say_text.substr(i + 1, end_bracket_index - (i + 1));
-						//Check if the first 4 letters turn out to be a wait command.
-						Log(warning, command.substr(0, 4));
-						if(command.substr(0, 4) == "wait"){
-							float wait_amount = atof(command.substr(4, command.length() - 4));
-							// Skip adding the whole content of inside the brackets.
-							i = end_bracket_index;
-							continue;
-						}
-					}
-				}
-				say_text_queue.insertLast(say_text_split[i]);
-			}
-
-			Log(warning, "Say content: \n" + join(say_text_queue, ""));
 			string nametag = "\"" + actor_name + "\"";
-			level.SendMessage("drika_dialogue_add_say " + nametag + " " + "\"" + join(say_text_queue, "") + "\"");
+			level.SendMessage("drika_dialogue_add_say " + nametag + " " + "\"" + say_text + "\"");
 
 			return false;
+		}else if(dialogue_done == true){
+			return false;
 		}else if(say_started == true){
+			if(dialogue_progress_timer > 0.15){
+				dialogue_progress_timer = 0.0;
+
+				for(uint i = dialogue_progress; i < dialogue_script.size(); i++){
+					DialogueScriptEntry@ entry = dialogue_script[i];
+					dialogue_progress += 1;
+
+					switch(entry.script_entry_type){
+						case character_entry:
+							level.SendMessage("drika_dialogue_next");
+							return false;
+						case new_line_entry:
+							level.SendMessage("drika_dialogue_next");
+							break;
+						case wait_entry:
+							level.SendMessage("drika_dialogue_next");
+							break;
+						default:
+							break;
+					}
+				}
+
+				//At the end of the dialogue.
+				level.SendMessage("drika_dialogue_show_skip_message");
+				dialogue_done = true;
+				return false;
+			}
+			dialogue_progress_timer += time_step;
 			return false;
 		}
 

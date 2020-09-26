@@ -336,6 +336,8 @@ void ReceiveMessage(string msg){
 		string text = token_iter.GetToken(msg);
 
 		DialogueAddSay(actor_name, text);
+	}else if(token == "drika_dialogue_next"){
+		DialogueNext();
 	}else if(token == "drika_dialogue_clear_say"){
 		choices.resize(0);
 		line_counter = 0;

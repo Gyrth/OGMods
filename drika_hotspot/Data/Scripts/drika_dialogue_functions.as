@@ -9,11 +9,14 @@ bool dialogue_move_in = false;
 float dialogue_move_in_timer = 0.0;
 float dialogue_move_in_duration = 0.15;
 int dialogue_location;
+int dialogue_progress = 0;
+array<DialogueScriptEntry@> dialogue_script;
 
 void DialogueAddSay(string actor_name, string text){
 
 	dialogue_cache = {array<IMText@>()};
 	int counter = 0;
+	dialogue_progress = 0;
 
 	//Find the actor settings for so that the UI can be build.
 	if(current_actor_settings.name != actor_name){
@@ -40,61 +43,58 @@ void DialogueAddSay(string actor_name, string text){
 		BuildDialogueUI();
 	}
 
-	//First split every word up in the text.
-	array<string> words = text.split(" ");
-	for(uint i = 0; i < words.size(); i++){
-		if(i != 0 && i != words.size()){
-			words.insertAt(i, " ");
-			i++;
-		}
-	}
-	//Also make sure the new line character are seperate.
-	array<string> split_text;
-	for(uint i = 0; i < words.size(); i++){
-		array<string> new_line_seperated = words[i].split("\n");
-		for(uint j = 0; j < new_line_seperated.size(); j++){
+	dialogue_script = InterpDialogueScript(text);
 
-			split_text.insertLast(new_line_seperated[j]);
-			if(j != new_line_seperated.size() -1){
-				split_text.insertLast("\n");
-			}
-		}
-	}
+	IMText @dialogue_text = IMText("", dialogue_font);
+	dialogue_cache[counter].insertLast(dialogue_text);
+	dialogue_line.append(dialogue_text);
 
-	IMText@ dialogue_text;
+	for(uint i = 0; i < dialogue_script.size(); i++){
+		DialogueScriptEntry@ entry = dialogue_script[i];
 
-	for(uint i = 0; i < split_text.size(); i++){
-		string word = split_text[i];
-		/* Log(warning, word); */
+		switch(entry.script_entry_type){
+			case character_entry:
+				if(entry.character == " "){
+					@dialogue_text = IMText(" ", dialogue_font);
+					dialogue_cache[counter].insertLast(dialogue_text);
+					dialogue_line.append(dialogue_text);
+					@entry.text = dialogue_text;
+					dialogue_text.showBorder();
+					dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 
-		if(word != "\n"){
-			@dialogue_text = IMText(split_text[i], dialogue_font);
-			dialogue_cache[counter].insertLast(dialogue_text);
+					@dialogue_text = IMText("", dialogue_font);
+					dialogue_cache[counter].insertLast(dialogue_text);
+					dialogue_line.append(dialogue_text);
+					dialogue_text.showBorder();
+					dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
+				}else{
+					dialogue_text.setText(dialogue_text.getText() + entry.character);
+					dialogue_text.showBorder();
+					dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
+					@entry.text = dialogue_text;
+				}
+				break;
+			case new_line_entry:
+				//If a new line is found then add a new divider.
+				line_counter += 1;
+				counter += 1;
+				@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
+				dialogue_line.setAlignment(CALeft, CATop);
+				dialogue_holder.append(dialogue_line);
+				dialogue_line.setZOrdering(2);
 
-			dialogue_line.append(dialogue_text, 1.0);
-			/* dialogue_text.showBorder(); */
-			dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
-		}else if(word == "\n"){
-			//If a new line is found then add a new divider.
-			line_counter += 1;
-			//Also add a new empty array to the cache.
-			dialogue_cache.insertLast(array<IMText@>());
-			counter += 1;
-			@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
-			dialogue_holder.append(dialogue_line);
-			dialogue_line.setZOrdering(2);
-
-			continue;
+				@dialogue_text = IMText("", dialogue_font);
+				dialogue_cache.insertLast(array<IMText@>());
+				dialogue_cache[counter].insertLast(dialogue_text);
+				dialogue_line.append(dialogue_text);
+				continue;
+			default :
+				break;
 		}
 
 		imGUI.update();
 
-		/* dialogue_line_holder.showBorder(); */
-		/* dialogue_lines_holder_vert.showBorder(); */
-		/* dialogue_lines_holder_horiz.showBorder(); */
-
 		bool add_previous_text_to_new_line = dialogue_holder.getSizeX() > dialogue_holder_size.x;
-		/* bool add_previous_text_to_new_line = true; */
 		if(add_previous_text_to_new_line){
 			Log(warning, "Remake dialogue ");
 
@@ -103,20 +103,26 @@ void DialogueAddSay(string actor_name, string text){
 			counter += 1;
 			dialogue_cache[counter].insertLast(dialogue_text);
 
-			/* dialogue_holder.showBorder(); */
 			dialogue_holder.clear();
 			dialogue_holder.setSize(dialogue_holder_size);
-			/* dialogue_line_holder.setSize(dialogue_holder_size); */
 
 			//Remake the dialogue using the cache.
 			for(uint j = 0; j < dialogue_cache.size(); j++){
 				@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
+				dialogue_line.setAlignment(CALeft, CATop);
 				dialogue_holder.append(dialogue_line);
 				dialogue_line.setZOrdering(2);
 				for(uint k = 0; k < dialogue_cache[j].size(); k++){
 					dialogue_line.append(dialogue_cache[j][k]);
 				}
 			}
+		}
+	}
+
+	//Hide the whole dialogue to start with by setting all the texts to nothing.
+	for(uint i = 0; i < dialogue_cache.size(); i++){
+		for(uint j = 0; j < dialogue_cache[i].size(); j++){
+			dialogue_cache[i][j].setText("");
 		}
 	}
 }
@@ -212,6 +218,7 @@ void DefaultUI(IMContainer@ parent){
 	parent.addFloatingElement(dialogue_holder, "dialogue_holder", dialogue_holder_offset, -1);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_line.setAlignment(CALeft, CATop);
 	dialogue_holder.setSize(dialogue_holder_size);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
@@ -243,6 +250,7 @@ void SimpleUI(IMContainer@ parent){
 	parent.setElement(dialogue_holder);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_line.setAlignment(CALeft, CATop);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
 }
@@ -256,6 +264,7 @@ void BreathOfTheWildUI(IMContainer@ parent){
 	parent.setElement(dialogue_holder);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_line.setAlignment(CALeft, CATop);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
 }
@@ -275,6 +284,7 @@ void ChronoTriggerUI(IMContainer@ parent){
 	parent.addFloatingElement(floating_container, "floating_container", floating_container_offset, -1);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_line.setAlignment(CALeft, CATop);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
 }
@@ -289,6 +299,7 @@ void Fallout3UI(IMContainer@ parent){
 	parent.setElement(dialogue_holder);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_line.setAlignment(CALeft, CATop);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
 }
@@ -303,6 +314,7 @@ void LuigisMansionUI(IMContainer@ parent){
 	parent.setElement(dialogue_holder);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_line.setAlignment(CALeft, CATop);
 	dialogue_holder.append(dialogue_line);
 	dialogue_line.setZOrdering(2);
 }
@@ -786,4 +798,21 @@ void UpdateDialogueMoveIn(){
 	}
 
 	dialogue_move_in_timer -= time_step;
+}
+
+void DialogueNext(){
+	DialogueScriptEntry@ entry = dialogue_script[dialogue_progress];
+	dialogue_progress += 1;
+
+	switch(entry.script_entry_type){
+		case character_entry:
+			entry.text.setText(entry.text.getText() + entry.character);
+			break;
+		case new_line_entry:
+			break;
+		case wait_entry:
+			break;
+		default:
+			break;
+	}
 }
