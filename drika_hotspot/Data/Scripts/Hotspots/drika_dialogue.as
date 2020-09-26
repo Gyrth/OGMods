@@ -1565,7 +1565,7 @@ class DrikaDialogue : DrikaElement{
 
 			return false;
 		}else if(dialogue_done == true){
-			return false;
+			return true;
 		}else if(say_started == true){
 			if(dialogue_timer <= 0.0){
 				for(uint i = dialogue_progress; i < dialogue_script.size(); i++){
@@ -1575,11 +1575,13 @@ class DrikaDialogue : DrikaElement{
 					switch(entry.script_entry_type){
 						case character_entry:
 							level.SendMessage("drika_dialogue_next");
-							dialogue_timer = 0.01;
+							dialogue_timer = preview?0.0:0.01;
+							SetTargetTalking(true);
 							return false;
 						case wait_entry:
 							level.SendMessage("drika_dialogue_next");
 							dialogue_timer = entry.wait;
+							SetTargetTalking(false);
 							return false;
 						default:
 							level.SendMessage("drika_dialogue_next");
@@ -1590,8 +1592,16 @@ class DrikaDialogue : DrikaElement{
 				//At the end of the dialogue.
 				level.SendMessage("drika_dialogue_show_skip_message");
 				dialogue_done = true;
+				SetTargetTalking(false);
 				return false;
+			}else if(GetInputPressed(0, "skip_dialogue") && !preview){
+				SkipWholeDialogue();
+				return false;
+			}else if(GetInputPressed(0, "attack") && !preview){
+				level.SendMessage("drika_dialogue_skip");
+				return true;
 			}
+
 			dialogue_timer -= time_step;
 			return false;
 		}
@@ -1688,6 +1698,13 @@ class DrikaDialogue : DrikaElement{
 		}
 		say_timer += time_step;
 		return false;
+	}
+
+	void SetTargetTalking(bool talking){
+		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			targets[i].ReceiveScriptMessage(talking?"start_talking":"stop_talking");
+		}
 	}
 
 	void SkipWholeDialogue(){
