@@ -1577,14 +1577,12 @@ class DrikaDialogue : DrikaElement{
 							level.SendMessage("drika_dialogue_next");
 							dialogue_timer = 0.01;
 							return false;
-						case new_line_entry:
-							level.SendMessage("drika_dialogue_next");
-							break;
 						case wait_entry:
 							level.SendMessage("drika_dialogue_next");
 							dialogue_timer = entry.wait;
 							return false;
 						default:
+							level.SendMessage("drika_dialogue_next");
 							break;
 					}
 				}

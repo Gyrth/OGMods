@@ -11,12 +11,16 @@ float dialogue_move_in_duration = 0.15;
 int dialogue_location;
 int dialogue_progress = 0;
 array<DialogueScriptEntry@> dialogue_script;
+special_fonts special_font = none;
+IMText @dialogue_text;
+int counter = 0;
 
 void DialogueAddSay(string actor_name, string text){
 
 	dialogue_cache = {array<IMText@>()};
-	int counter = 0;
+	counter = 0;
 	dialogue_progress = 0;
+	special_font = none;
 
 	//Find the actor settings for so that the UI can be build.
 	if(current_actor_settings.name != actor_name){
@@ -45,32 +49,23 @@ void DialogueAddSay(string actor_name, string text){
 
 	dialogue_script = InterpDialogueScript(text);
 
-	IMText @dialogue_text = IMText("", dialogue_font);
+	@dialogue_text = IMText("", dialogue_font);
 	dialogue_cache[counter].insertLast(dialogue_text);
 	dialogue_line.append(dialogue_text);
 
 	for(uint i = 0; i < dialogue_script.size(); i++){
 		DialogueScriptEntry@ entry = dialogue_script[i];
+		/* Log(warning, entry.character + " " + entry.script_entry_type); */
 
 		switch(entry.script_entry_type){
 			case character_entry:
 				if(entry.character == " "){
-					@dialogue_text = IMText(" ", dialogue_font);
-					dialogue_cache[counter].insertLast(dialogue_text);
-					dialogue_line.append(dialogue_text);
+					AddNewText(" ");
 					@entry.text = dialogue_text;
-					/* dialogue_text.showBorder(); */
-					dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 
-					@dialogue_text = IMText("", dialogue_font);
-					dialogue_cache[counter].insertLast(dialogue_text);
-					dialogue_line.append(dialogue_text);
-					/* dialogue_text.showBorder(); */
-					dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
+					AddNewText("");
 				}else{
 					dialogue_text.setText(dialogue_text.getText() + entry.character);
-					/* dialogue_text.showBorder(); */
-					dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 					@entry.text = dialogue_text;
 				}
 				break;
@@ -83,20 +78,34 @@ void DialogueAddSay(string actor_name, string text){
 				dialogue_holder.append(dialogue_line);
 				dialogue_line.setZOrdering(2);
 
-				@dialogue_text = IMText("", dialogue_font);
 				dialogue_cache.insertLast(array<IMText@>());
-				dialogue_cache[counter].insertLast(dialogue_text);
-				dialogue_line.append(dialogue_text);
+				AddNewText("");
+				continue;
+			case start_red_text_entry:
+				special_font = red;
+				AddNewText("");
+				continue;
+			case start_green_text_entry:
+				special_font = green;
+				AddNewText("");
+				continue;
+			case start_blue_text_entry:
+				special_font = blue;
+				AddNewText("");
+				continue;
+			case end_coloured_text_entry:
+				special_font = none;
+				AddNewText("");
 				continue;
 			default :
-				break;
+				continue;
 		}
 
 		imGUI.update();
 
 		bool add_previous_text_to_new_line = dialogue_holder.getSizeX() > dialogue_holder_size.x;
 		if(add_previous_text_to_new_line){
-			Log(warning, "Remake dialogue ");
+			/* Log(warning, "Remake dialogue "); */
 
 			dialogue_cache[counter].removeLast();
 			dialogue_cache.insertLast(array<IMText@>());
@@ -125,6 +134,28 @@ void DialogueAddSay(string actor_name, string text){
 			dialogue_cache[i][j].setText("");
 		}
 	}
+}
+
+void AddNewText(string text){
+	switch(special_font){
+		case red:
+			@dialogue_text = IMText(text, red_dialogue_font);
+			break;
+		case green:
+			@dialogue_text = IMText(text, green_dialogue_font);
+			break;
+		case blue:
+			@dialogue_text = IMText(text, blue_dialogue_font);
+			break;
+		default:
+			@dialogue_text = IMText(text, dialogue_font);
+			break;
+	}
+
+	dialogue_cache[counter].insertLast(dialogue_text);
+	dialogue_line.append(dialogue_text);
+	/* dialogue_text.showBorder(); */
+	dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 }
 
 void BuildDialogueUI(){

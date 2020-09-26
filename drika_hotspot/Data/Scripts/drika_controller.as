@@ -18,6 +18,9 @@ FontSetup name_font_arial("arial", 70 , HexColor("#CCCCCC"), true);
 FontSetup name_font("edosz", 70 , HexColor("#CCCCCC"), true);
 FontSetup dialogue_font("arial", 50 , HexColor("#CCCCCC"), true);
 FontSetup controls_font("arial", 45 , HexColor("#616161"), true);
+FontSetup red_dialogue_font("arial", 50 , HexColor("#990000"), true);
+FontSetup green_dialogue_font("arial", 50 , HexColor("#009900"), true);
+FontSetup blue_dialogue_font("arial", 50 , HexColor("#000099"), true);
 array<DrikaAnimationGroup@> all_animations;
 vec3 camera_position;
 vec3 camera_rotation;
@@ -540,6 +543,15 @@ void ReceiveMessage(string msg){
 		dialogue_location = atoi(token_iter.GetToken(msg));
 
 		dialogue_font = FontSetup(dialogue_text_font, dialogue_text_size, dialogue_text_color, dialogue_text_shadow);
+		red_dialogue_font.fontName = dialogue_text_font;
+		red_dialogue_font.size = dialogue_text_size;
+		red_dialogue_font.shadowed = dialogue_text_shadow;
+		green_dialogue_font.fontName = dialogue_text_font;
+		green_dialogue_font.size = dialogue_text_size;
+		green_dialogue_font.shadowed = dialogue_text_shadow;
+		blue_dialogue_font.fontName = dialogue_text_font;
+		blue_dialogue_font.size = dialogue_text_size;
+		blue_dialogue_font.shadowed = dialogue_text_shadow;
 	}else if(token == "drika_read_file"){
 		token_iter.FindNextToken(msg);
 		int hotspot_id = atoi(token_iter.GetToken(msg));

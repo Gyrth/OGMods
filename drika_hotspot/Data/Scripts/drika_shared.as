@@ -120,10 +120,18 @@ enum script_entry_types {
 							character_entry,
 							new_line_entry,
 							wait_entry,
-							red_text_entry,
-							green_text_entry,
-							blue_text_entry
+							start_red_text_entry,
+							start_green_text_entry,
+							start_blue_text_entry,
+							end_coloured_text_entry
 						}
+
+enum special_fonts	{
+						none,
+						red,
+						green,
+						blue
+					}
 
 class DialogueScriptEntry{
 	script_entry_types script_entry_type;
@@ -159,6 +167,26 @@ array<DialogueScriptEntry@> InterpDialogueScript(string script_text){
 					entry.wait = wait_amount;
 					new_dialogue_script.insertLast(entry);
 					// Skip adding the whole content of inside the brackets.
+					i = end_bracket_index;
+					continue;
+				}else if(command.substr(0, 3) == "red"){
+					DialogueScriptEntry entry(start_red_text_entry);
+					new_dialogue_script.insertLast(entry);
+					i = end_bracket_index;
+					continue;
+				}else if(command.substr(0, 5) == "green"){
+					DialogueScriptEntry entry(start_green_text_entry);
+					new_dialogue_script.insertLast(entry);
+					i = end_bracket_index;
+					continue;
+				}else if(command.substr(0, 4) == "blue"){
+					DialogueScriptEntry entry(start_blue_text_entry);
+					new_dialogue_script.insertLast(entry);
+					i = end_bracket_index;
+					continue;
+				}else if(command.substr(0, 1) == "/"){
+					DialogueScriptEntry entry(end_coloured_text_entry);
+					new_dialogue_script.insertLast(entry);
 					i = end_bracket_index;
 					continue;
 				}
