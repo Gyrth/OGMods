@@ -1547,14 +1547,14 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	int dialogue_progress = 0;
-	float dialogue_progress_timer = 0.0;
+	float dialogue_timer = 0.0;
 
 	bool UpdateSayDialogue(bool preview){
 		//Some setup operations that only need to be done once.
 		if(say_started == false){
 			say_started = true;
 			dialogue_progress = 0;
-			dialogue_progress_timer = 0.0;
+			dialogue_timer = 0.0;
 
 			dialogue_script = InterpDialogueScript(say_text);
 
@@ -1567,9 +1567,7 @@ class DrikaDialogue : DrikaElement{
 		}else if(dialogue_done == true){
 			return false;
 		}else if(say_started == true){
-			if(dialogue_progress_timer > 0.15){
-				dialogue_progress_timer = 0.0;
-
+			if(dialogue_timer <= 0.0){
 				for(uint i = dialogue_progress; i < dialogue_script.size(); i++){
 					DialogueScriptEntry@ entry = dialogue_script[i];
 					dialogue_progress += 1;
@@ -1577,13 +1575,15 @@ class DrikaDialogue : DrikaElement{
 					switch(entry.script_entry_type){
 						case character_entry:
 							level.SendMessage("drika_dialogue_next");
+							dialogue_timer = 0.01;
 							return false;
 						case new_line_entry:
 							level.SendMessage("drika_dialogue_next");
 							break;
 						case wait_entry:
 							level.SendMessage("drika_dialogue_next");
-							break;
+							dialogue_timer = entry.wait;
+							return false;
 						default:
 							break;
 					}
@@ -1594,7 +1594,7 @@ class DrikaDialogue : DrikaElement{
 				dialogue_done = true;
 				return false;
 			}
-			dialogue_progress_timer += time_step;
+			dialogue_timer -= time_step;
 			return false;
 		}
 

@@ -59,17 +59,17 @@ void DialogueAddSay(string actor_name, string text){
 					dialogue_cache[counter].insertLast(dialogue_text);
 					dialogue_line.append(dialogue_text);
 					@entry.text = dialogue_text;
-					dialogue_text.showBorder();
+					/* dialogue_text.showBorder(); */
 					dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 
 					@dialogue_text = IMText("", dialogue_font);
 					dialogue_cache[counter].insertLast(dialogue_text);
 					dialogue_line.append(dialogue_text);
-					dialogue_text.showBorder();
+					/* dialogue_text.showBorder(); */
 					dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 				}else{
 					dialogue_text.setText(dialogue_text.getText() + entry.character);
-					dialogue_text.showBorder();
+					/* dialogue_text.showBorder(); */
 					dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 					@entry.text = dialogue_text;
 				}
