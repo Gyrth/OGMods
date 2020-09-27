@@ -304,11 +304,35 @@ void DefaultUI(IMContainer@ parent){
 
 void SimpleUI(IMContainer@ parent){
 	parent.setSizeY(500.0);
-	dialogue_holder_size = vec2(1400, 400);
+	dialogue_holder_size = vec2(1400, 300);
+
+	vec2 dialogue_holder_offset = vec2((2560 - dialogue_holder_size.x) / 2.0f, 100.0);
+	IMContainer guide(dialogue_holder_size.x, dialogue_holder_size.y);
+	guide.showBorder();
+	/* parent.addFloatingElement(guide, "guide", dialogue_holder_offset, -1); */
+
+	IMContainer extra_container_2(dialogue_holder_size.x, dialogue_holder_size.y);
+	extra_container_2.showBorder();
+
+
+	SizePolicy x_policy(dialogue_holder_size.x);
+	SizePolicy y_policy(dialogue_holder_size.y);
+	x_policy.inheritMax();
+	y_policy.inheritMax();
+	IMContainer extra_container(x_policy, y_policy);
+	extra_container.showBorder();
+	extra_container.setAlignment(CACenter, CACenter);
+
+	extra_container_2.setElement(extra_container);
+	/* parent.addFloatingElement(extra_container, "extra_container", vec2(), -1); */
+	parent.setElement(extra_container_2);
 
 	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
+	/* dialogue_holder.showBorder(); */
 	dialogue_holder.setSize(dialogue_holder_size);
-	parent.setElement(dialogue_holder);
+	/* parent.showBorder(); */
+	/* extra_container.addFloatingElement(dialogue_holder, "dialogue_holder", vec2(), -1); */
+	extra_container.setElement(dialogue_holder);
 
 	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
 	dialogue_line.setAlignment(CALeft, CATop);
@@ -891,7 +915,7 @@ void DialogueNext(){
 				dialogue_cache[top_line_index][i].setText("");
 			}
 			dialogue_displacement_target = dialogue_displacement_target - dialogue_font.size;
-			set_dialogue_displacement = true;
+			/* set_dialogue_displacement = true; */
 		}
 	}
 
