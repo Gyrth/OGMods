@@ -15,6 +15,8 @@ special_fonts special_font = none;
 IMText @dialogue_text;
 int counter = 0;
 float last_continue_sound_time;
+int maximum_amount_of_lines;
+int line_number = -1;
 
 void DialogueAddSay(string actor_name, string text){
 
@@ -22,6 +24,9 @@ void DialogueAddSay(string actor_name, string text){
 	counter = 0;
 	dialogue_progress = 0;
 	special_font = none;
+	line_number = -1;
+	set_dialogue_displacement = false;
+	dialogue_displacement_target = 0.0f;
 
 	//Find the actor settings for so that the UI can be build.
 	if(current_actor_settings.name != actor_name){
@@ -53,17 +58,21 @@ void DialogueAddSay(string actor_name, string text){
 	@dialogue_text = IMText("", dialogue_font);
 	dialogue_cache[counter].insertLast(dialogue_text);
 	dialogue_line.append(dialogue_text);
+	maximum_amount_of_lines = -1;
+	array<DialogueScriptEntry@> last_word;
 
 	for(uint i = 0; i < dialogue_script.size(); i++){
 		DialogueScriptEntry@ entry = dialogue_script[i];
 		/* Log(warning, entry.character + " " + entry.script_entry_type); */
 
+		entry.line = counter;
 		switch(entry.script_entry_type){
 			case character_entry:
+				last_word.insertLast(entry);
 				if(entry.character == " "){
 					AddNewText(" ");
 					@entry.text = dialogue_text;
-
+					last_word.resize(0);
 					AddNewText("");
 				}else{
 					dialogue_text.setText(dialogue_text.getText() + entry.character);
@@ -74,7 +83,10 @@ void DialogueAddSay(string actor_name, string text){
 				//If a new line is found then add a new divider.
 				line_counter += 1;
 				counter += 1;
+				last_word.resize(0);
 				@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
+				//Set the y size of the divider so that an empty line still takes up the same amount of height.
+				dialogue_line.setSizeY(dialogue_font.size);
 				dialogue_line.setAlignment(CALeft, CATop);
 				dialogue_holder.append(dialogue_line);
 				dialogue_line.setZOrdering(2);
@@ -113,6 +125,12 @@ void DialogueAddSay(string actor_name, string text){
 			counter += 1;
 			dialogue_cache[counter].insertLast(dialogue_text);
 
+			//Set the line to the next one.
+			for(uint j = 0; j < last_word.size(); j++){
+				last_word[j].line = counter;
+			}
+			last_word.resize(0);
+
 			dialogue_holder.clear();
 			dialogue_holder.setSize(dialogue_holder_size);
 
@@ -126,6 +144,11 @@ void DialogueAddSay(string actor_name, string text){
 					dialogue_line.append(dialogue_cache[j][k]);
 				}
 			}
+		}
+
+		if(maximum_amount_of_lines == -1 && floor(dialogue_holder.getSizeY()) > dialogue_holder_size.y){
+			Log(warning, "maximum_amount_of_lines " + counter);
+			maximum_amount_of_lines = counter;
 		}
 	}
 
@@ -242,8 +265,12 @@ void CreateChoiceUI(){
 
 void DefaultUI(IMContainer@ parent){
 	parent.setSizeY(500.0);
-	dialogue_holder_size = vec2(1740, 400);
+	dialogue_holder_size = vec2(1740, 300);
 	vec2 dialogue_holder_offset = vec2(100.0, 130.0);
+
+	IMContainer guide(dialogue_holder_size.x, dialogue_holder_size.y);
+	guide.showBorder();
+	parent.addFloatingElement(guide, "guide", dialogue_holder_offset, -1);
 
 	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
 	dialogue_holder.setAlignment(CALeft, CATop);
@@ -832,9 +859,42 @@ void UpdateDialogueMoveIn(){
 	dialogue_move_in_timer -= time_step;
 }
 
+float dialogue_displacement_target;
+bool set_dialogue_displacement = false;
+
+void UpdateDialogueDisplacement(){
+	if(set_dialogue_displacement){
+		float current_displacement = dialogue_holder.getDisplacementY();
+		float new_displacement = current_displacement - (time_step * 2000.0);
+		if(new_displacement <= dialogue_displacement_target){
+			set_dialogue_displacement = false;
+			Log(warning, "done");
+			dialogue_holder.setDisplacementY(dialogue_displacement_target);
+		}else{
+			dialogue_holder.setDisplacementY(new_displacement);
+		}
+	}
+}
+
 void DialogueNext(){
 	DialogueScriptEntry@ entry = dialogue_script[dialogue_progress];
 	dialogue_progress += 1;
+
+	if(line_number != entry.line){
+		line_number = entry.line;
+		Log(warning, "New line " + line_number);
+		//If the max is -1 then there is enough room for all the lines.
+		if(maximum_amount_of_lines != -1 && line_number > maximum_amount_of_lines - 1){
+			//Hide the top most line first.
+			int top_line_index = line_number - maximum_amount_of_lines;
+			for(uint i = 0; i < dialogue_cache[top_line_index].size(); i++){
+				/* dialogue_cache[top_line_index][i].setText(""); */
+			}
+			dialogue_displacement_target = dialogue_displacement_target - dialogue_font.size;
+			/* set_dialogue_displacement = true; */
+			Log(warning, "setDisplacementY");
+		}
+	}
 
 	switch(entry.script_entry_type){
 		case character_entry:

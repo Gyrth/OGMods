@@ -1386,8 +1386,13 @@ void Update(){
 			return;
 		}
 		fade_timer += time_step;
-	}else if(dialogue_move_in){
-		UpdateDialogueMoveIn();
+	}
+
+	if(show_dialogue){
+		if(dialogue_move_in){
+			UpdateDialogueMoveIn();
+		}
+		UpdateDialogueDisplacement();
 	}
 }
 

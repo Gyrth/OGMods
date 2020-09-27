@@ -1575,7 +1575,7 @@ class DrikaDialogue : DrikaElement{
 					switch(entry.script_entry_type){
 						case character_entry:
 							level.SendMessage("drika_dialogue_next");
-							dialogue_timer = preview?0.0:0.01;
+							dialogue_timer = 0.01;
 							SetTargetTalking(true);
 							return false;
 						case wait_entry:

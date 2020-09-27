@@ -138,6 +138,7 @@ class DialogueScriptEntry{
 	float wait;
 	string character;
 	IMText @text;
+	int line;
 
 	DialogueScriptEntry(script_entry_types script_entry_type){
 		this.script_entry_type = script_entry_type;
