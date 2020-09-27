@@ -21,6 +21,7 @@ int maximum_amount_of_lines;
 int line_number = -1;
 ContainerAlignment dialogue_x_alignment;
 ContainerAlignment dialogue_y_alignment;
+array<DialogueScriptEntry@> last_word;
 
 void DialogueAddSay(string actor_name, string text){
 
@@ -63,7 +64,7 @@ void DialogueAddSay(string actor_name, string text){
 	dialogue_cache[counter].insertLast(dialogue_text);
 	dialogue_line.append(dialogue_text);
 	maximum_amount_of_lines = -1;
-	array<DialogueScriptEntry@> last_word;
+	last_word.resize(0);
 
 	for(uint i = 0; i < dialogue_script.size(); i++){
 		DialogueScriptEntry@ entry = dialogue_script[i];
@@ -77,10 +78,12 @@ void DialogueAddSay(string actor_name, string text){
 					AddNewText(" ");
 					@entry.text = dialogue_text;
 					last_word.resize(0);
+					CheckDialogueWidth();
 					AddNewText("");
 				}else{
 					dialogue_text.setText(dialogue_text.getText() + entry.character);
 					@entry.text = dialogue_text;
+					CheckDialogueWidth();
 				}
 				break;
 			case new_line_entry:
@@ -117,54 +120,6 @@ void DialogueAddSay(string actor_name, string text){
 			default :
 				continue;
 		}
-
-		imGUI.update();
-
-		Log(warning, " dialogue " + entry.character);
-		bool add_previous_text_to_new_line = dialogue_holder.getSizeX() > dialogue_holder_size.x;
-		if(add_previous_text_to_new_line){
-			Log(warning, "Remake dialogue " + dialogue_holder.getSizeX());
-			/* Log(warning, "Remake dialogue " + entry.character); */
-
-			dialogue_cache[counter].removeLast();
-			dialogue_cache.insertLast(array<IMText@>());
-			counter += 1;
-			dialogue_cache[counter].insertLast(dialogue_text);
-
-			//Set the line to the next one.
-			for(uint j = 0; j < last_word.size(); j++){
-				last_word[j].line = counter;
-			}
-			last_word.resize(0);
-
-			dialogue_holder.clear();
-			dialogue_holder.setSize(dialogue_holder_size);
-			dialogue_holder.showBorder();
-
-			//Remake the dialogue using the cache.
-			for(uint j = 0; j < dialogue_cache.size(); j++){
-				@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
-				//Set the y size of the divider so that an empty line still takes up the same amount of height.
-				dialogue_line.setSizeY(dialogue_font.size);
-				dialogue_line.setAlignment(CALeft, CATop);
-				dialogue_holder.append(dialogue_line);
-				dialogue_line.setZOrdering(2);
-				for(uint k = 0; k < dialogue_cache[j].size(); k++){
-					dialogue_line.append(dialogue_cache[j][k]);
-				}
-			}
-		}
-
-		if(maximum_amount_of_lines == -1 && floor(dialogue_holder.getSizeY()) > dialogue_holder_size.y){
-			Log(warning, "maximum_amount_of_lines " + counter);
-			dialogue_y_alignment = CATop;
-			dialogue_holder_container.setAlignment(dialogue_x_alignment, dialogue_y_alignment);
-			maximum_amount_of_lines = counter;
-
-			Log(warning, "Override y size");
-			//Set the y size so that the text is correctly centered.
-			fixed_size_container.setSizeY(dialogue_font.size * maximum_amount_of_lines);
-		}
 	}
 
 	//Hide the whole dialogue to start with by setting all the texts to nothing.
@@ -195,6 +150,54 @@ void AddNewText(string text){
 	dialogue_line.append(dialogue_text);
 	/* dialogue_text.showBorder(); */
 	dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
+}
+
+void CheckDialogueWidth(){
+	imGUI.update();
+
+	bool add_previous_text_to_new_line = dialogue_holder.getSizeX() > dialogue_holder_size.x;
+	if(add_previous_text_to_new_line){
+		dialogue_cache[counter].removeLast();
+		dialogue_cache.insertLast(array<IMText@>());
+		counter += 1;
+		dialogue_cache[counter].insertLast(dialogue_text);
+
+		//Set the line to the next one.
+		for(uint j = 0; j < last_word.size(); j++){
+			last_word[j].line = counter;
+		}
+		last_word.resize(0);
+
+		dialogue_holder.clear();
+		dialogue_holder.setSize(dialogue_holder_size);
+		/* dialogue_holder.showBorder(); */
+
+		//Remake the dialogue using the cache.
+		for(uint j = 0; j < dialogue_cache.size(); j++){
+			@dialogue_line = IMDivider("dialogue_line" + counter, DOHorizontal);
+			//Set the y size of the divider so that an empty line still takes up the same amount of height.
+			dialogue_line.setSizeY(dialogue_font.size);
+			dialogue_line.setAlignment(CALeft, CATop);
+			dialogue_holder.append(dialogue_line);
+			dialogue_line.setZOrdering(2);
+			for(uint k = 0; k < dialogue_cache[j].size(); k++){
+				dialogue_line.append(dialogue_cache[j][k]);
+			}
+		}
+	}
+
+	imGUI.update();
+
+	if(maximum_amount_of_lines == -1 && floor(dialogue_holder.getSizeY()) > dialogue_holder_size.y){
+		Log(warning, "maximum_amount_of_lines " + counter);
+		dialogue_y_alignment = CATop;
+		dialogue_holder_container.setAlignment(dialogue_x_alignment, dialogue_y_alignment);
+		maximum_amount_of_lines = counter;
+
+		Log(warning, "Override y size");
+		//Set the y size so that the text is correctly centered.
+		fixed_size_container.setSizeY(dialogue_font.size * maximum_amount_of_lines);
+	}
 }
 
 void BuildDialogueUI(){
