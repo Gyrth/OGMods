@@ -54,16 +54,14 @@ void DialogueAddSay(string actor_name, string text){
 		}
 	}
 
+	dialogue_script = InterpDialogueScript(text);
+
 	if(!show_dialogue){
 		show_dialogue = true;
 		BuildDialogueUI();
 	}
 
-	dialogue_script = InterpDialogueScript(text);
-
-	@dialogue_text = IMText("", dialogue_font);
-	dialogue_cache[counter].insertLast(dialogue_text);
-	dialogue_line.append(dialogue_text);
+	AddNewText("");
 	maximum_amount_of_lines = -1;
 	last_word.resize(0);
 
@@ -149,8 +147,6 @@ void AddNewText(string text){
 
 	dialogue_cache[counter].insertLast(dialogue_text);
 	dialogue_line.append(dialogue_text);
-	/* dialogue_text.showBorder(); */
-	dialogue_text.setBorderColor(vec4(1.0, 0.0, 0.0, 1.0));
 }
 
 void CheckDialogueWidth(){
@@ -236,6 +232,9 @@ void BuildDialogueUI(){
 			break;
 		case luigis_mansion_layout:
 			LuigisMansionUI(dialogue_ui_container);
+			break;
+		case mafia_layout:
+			MafiaUI(dialogue_ui_container);
 			break;
 		default :
 			break;
@@ -462,6 +461,36 @@ void LuigisMansionUI(IMContainer@ parent){
 	parent.setSizeY(500.0);
 	dialogue_holder_size = vec2(1500, 300);
 	dialogue_x_alignment = CALeft;
+	dialogue_y_alignment = CACenter;
+
+	@fixed_size_container = IMContainer(dialogue_holder_size.x, dialogue_holder_size.y);
+	/* fixed_size_container.showBorder(); */
+
+	SizePolicy x_policy(dialogue_holder_size.x);
+	SizePolicy y_policy(dialogue_holder_size.y);
+	x_policy.inheritMax();
+	y_policy.inheritMax();
+	@dialogue_holder_container = IMContainer(x_policy, y_policy);
+	dialogue_holder_container.setAlignment(dialogue_x_alignment, dialogue_y_alignment);
+
+	@dialogue_holder = IMDivider("dialogue_holder", DOVertical);
+	dialogue_holder.setSize(dialogue_holder_size);
+	dialogue_holder_container.setElement(dialogue_holder);
+	dialogue_holder.setAlignment(dialogue_x_alignment, dialogue_y_alignment);
+
+	fixed_size_container.setElement(dialogue_holder_container);
+	parent.setElement(fixed_size_container);
+
+	@dialogue_line = IMDivider("dialogue_line" + line_counter, DOHorizontal);
+	dialogue_line.setAlignment(CALeft, CATop);
+	dialogue_holder.append(dialogue_line);
+	dialogue_line.setZOrdering(2);
+}
+
+void MafiaUI(IMContainer@ parent){
+	parent.setSizeY(500.0);
+	dialogue_holder_size = vec2(1500, 400);
+	dialogue_x_alignment = CACenter;
 	dialogue_y_alignment = CACenter;
 
 	@fixed_size_container = IMContainer(dialogue_holder_size.x, dialogue_holder_size.y);
@@ -769,6 +798,9 @@ void CreateNameTag(IMContainer@ parent){
 		case luigis_mansion_layout:
 			LuigisMansionNameTag(parent);
 			break;
+		case mafia_layout:
+			MafiaNameTag(parent);
+			break;
 		default :
 			break;
 	}
@@ -956,6 +988,23 @@ void LuigisMansionNameTag(IMContainer@ parent){
 	}
 
 	parent.addFloatingElement(name_container, "name_container", vec2(0.0), 3);
+}
+
+void MafiaNameTag(IMContainer@ parent){
+	//Remove any nametag that's already there.
+	parent.removeElement("name_container");
+
+	if(show_names){
+		string name_text = current_actor_settings.name + " : ";
+		DialogueScriptEntry entry(character_entry);
+		entry.character = name_text;
+		dialogue_script.insertAt(0, entry);
+		Log(warning, "Check " + dialogue_script.size());
+
+		IMText name(name_text, dialogue_font);
+		dialogue_cache[counter].insertLast(name);
+		name.setColor(current_actor_settings.color);
+	}
 }
 
 void UpdateDialogueMoveIn(){
