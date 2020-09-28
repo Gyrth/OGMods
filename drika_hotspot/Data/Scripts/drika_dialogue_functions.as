@@ -704,7 +704,7 @@ void Fallout3Background(IMContainer@ parent){
 	bg_divider.setZOrdering(-1);
 	bg_container.setElement(bg_divider);
 
-	float bg_alpha = 0.5;
+	float bg_alpha = 0.75;
 	float bg_height = 400.0;
 	float side_width = 5.0;
 	vec4 color = showing_choice?dialogue_font.color:current_actor_settings.color;
