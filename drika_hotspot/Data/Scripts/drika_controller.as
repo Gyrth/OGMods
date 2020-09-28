@@ -192,18 +192,11 @@ void CreateIMGUIContainers(){
 }
 
 void SetWindowDimensions(int width, int height){
-	Log(warning, "Check");
 	imGUI.doScreenResize();
-	/* imGUI.clear();
-	CreateIMGUIContainers();
-	if(show_dialogue){
-		BuildDialogueUI();
-	} */
 }
 
 void PostScriptReload(){
-	/* imGUI.clear();
-	CreateIMGUIContainers(); */
+	
 }
 
 void WriteMusicXML(string music_path, string song_name, string song_path){
