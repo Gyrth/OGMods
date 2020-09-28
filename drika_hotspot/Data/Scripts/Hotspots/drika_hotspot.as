@@ -77,6 +77,7 @@ float text_opacity = 1.0;
 bool hotspot_enabled = true;
 array<int> dialogue_actor_ids;
 bool in_dialogue_mode = false;
+float text_speed = 0.05;
 array<DrikaElement@> post_init_queue;
 bool element_added = false;
 array<int> multi_select;

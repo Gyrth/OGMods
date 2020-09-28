@@ -66,6 +66,7 @@ class DrikaDialogue : DrikaElement{
 	bool show_avatar;
 	bool use_fade;
 	int dialogue_location;
+	float dialogue_text_speed;
 
 	string default_avatar_path = "Data/Textures/ui/menus/main/white_square.png";
 	TextureAssetRef avatar = LoadTexture(default_avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
@@ -173,6 +174,7 @@ class DrikaDialogue : DrikaElement{
 		show_avatar = GetJSONBool(params, "show_avatar", true);
 		use_fade = GetJSONBool(params, "use_fade", true);
 		dialogue_location = GetJSONInt(params, "dialogue_location", dialogue_bottom);
+		dialogue_text_speed = GetJSONFloat(params, "dialogue_text_speed", 50.0);
 
 		anim_mirrored = GetJSONBool(params, "anim_mirrored", false);
 		anim_mobile = GetJSONBool(params, "anim_mobile", false);
@@ -302,6 +304,7 @@ class DrikaDialogue : DrikaElement{
 			data["show_names"] = JSONValue(show_names);
 			data["show_avatar"] = JSONValue(show_avatar);
 			data["dialogue_location"] = JSONValue(dialogue_location);
+			data["dialogue_text_speed"] = JSONValue(dialogue_text_speed);
 
 			data["dialogue_text_color"] = JSONValue(JSONarrayValue);
 			data["dialogue_text_color"].append(dialogue_text_color.x);
@@ -917,6 +920,14 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Combo("##Dialogue Location", dialogue_location, dialogue_location_names, dialogue_location_names.size());
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Text Speed");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_SliderFloat("##Text Speed", dialogue_text_speed, 1.0, 100.0, "%.0f");
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}else if(dialogue_function == set_actor_dialogue_control){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Set dialogue control to");
@@ -1458,6 +1469,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SetDialogueSettings(){
+		text_speed = 1.0f / dialogue_text_speed;
 		string msg = "drika_dialogue_set_settings ";
 		msg += dialogue_layout + " ";
 		msg += dialogue_text_font + " ";
@@ -1575,7 +1587,7 @@ class DrikaDialogue : DrikaElement{
 					switch(entry.script_entry_type){
 						case character_entry:
 							level.SendMessage("drika_dialogue_next");
-							dialogue_timer = 0.01;
+							dialogue_timer = text_speed;
 							SetTargetTalking(true);
 							return false;
 						case wait_entry:

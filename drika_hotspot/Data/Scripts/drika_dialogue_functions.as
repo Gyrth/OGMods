@@ -464,7 +464,7 @@ void LuigisMansionUI(IMContainer@ parent){
 	dialogue_y_alignment = CACenter;
 
 	@fixed_size_container = IMContainer(dialogue_holder_size.x, dialogue_holder_size.y);
-	fixed_size_container.showBorder();
+	/* fixed_size_container.showBorder(); */
 
 	SizePolicy x_policy(dialogue_holder_size.x);
 	SizePolicy y_policy(dialogue_holder_size.y);
