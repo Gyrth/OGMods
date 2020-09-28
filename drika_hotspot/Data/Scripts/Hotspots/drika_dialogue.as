@@ -1577,9 +1577,41 @@ class DrikaDialogue : DrikaElement{
 
 			return false;
 		}else if(dialogue_done == true){
-			return true;
+			if(GetInputPressed(0, "attack") && !preview){
+				level.SendMessage("drika_dialogue_skip");
+				return true;
+			}else{
+				return false;
+			}
 		}else if(say_started == true){
-			if(dialogue_timer <= 0.0){
+			if(GetInputPressed(0, "skip_dialogue") && !preview){
+				SkipWholeDialogue();
+				return false;
+			}else if(GetInputPressed(0, "attack") && !preview){
+				level.SendMessage("drika_dialogue_skip");
+				SetTargetTalking(false);
+
+				for(uint i = dialogue_progress; i < dialogue_script.size(); i++){
+					DialogueScriptEntry@ entry = dialogue_script[i];
+					dialogue_progress += 1;
+
+					switch(entry.script_entry_type){
+						case character_entry:
+							level.SendMessage("drika_dialogue_next");
+							break;
+						case wait_entry:
+							//Skip the wait entries.
+							level.SendMessage("drika_dialogue_next");
+							break;
+						default:
+							level.SendMessage("drika_dialogue_next");
+							break;
+					}
+				}
+
+				dialogue_done = true;
+				return false;
+			}else if(dialogue_timer <= 0.0){
 				for(uint i = dialogue_progress; i < dialogue_script.size(); i++){
 					DialogueScriptEntry@ entry = dialogue_script[i];
 					dialogue_progress += 1;
@@ -1606,109 +1638,11 @@ class DrikaDialogue : DrikaElement{
 				dialogue_done = true;
 				SetTargetTalking(false);
 				return false;
-			}else if(GetInputPressed(0, "skip_dialogue") && !preview){
-				SkipWholeDialogue();
-				return false;
-			}else if(GetInputPressed(0, "attack") && !preview){
-				level.SendMessage("drika_dialogue_skip");
-				return true;
 			}
 
 			dialogue_timer -= time_step;
 			return false;
 		}
-
-		if(GetInputPressed(0, "skip_dialogue") && !preview){
-			SkipWholeDialogue();
-			return false;
-		}else if(dialogue_done){
-			if(GetInputPressed(0, "attack") && !preview){
-				level.SendMessage("drika_dialogue_skip");
-				return true;
-			}
-		}else if(GetInputPressed(0, "attack")){
-			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
-			string nametag = "\"" + actor_name + "\"";
-			say_timer = 0.0;
-			wait_timer = 0.0;
-			string wait_removed = join(say_text_split, " ");
-
-			while(wait_removed.findFirst("[wait") != -1){
-				int start_index = wait_removed.findFirst("[wait");
-				wait_removed.erase(start_index, 10);
-			}
-
-			array<string> new_line_split = wait_removed.split("\n");
-			for(uint i = 0; i < new_line_split.size(); i++){
-				level.SendMessage("drika_dialogue_add_say " + nametag + " " + "\"" + new_line_split[i] + "\"");
-				level.SendMessage("drika_dialogue_add_say " + nametag + " \n");
-			}
-
-			level.SendMessage("drika_dialogue_skip");
-			level.SendMessage("drika_dialogue_show_skip_message");
-			for(uint i = 0; i < targets.size(); i++){
-				targets[i].ReceiveScriptMessage("stop_talking");
-			}
-			say_text_split.resize(0);
-			dialogue_done = true;
-			return false;
-		}else if(wait_timer > 0.0){
-			wait_timer -= time_step;
-		}else if(say_timer > 0.15){
-			say_timer = 0.0;
-			string nametag = "\"" + actor_name + "\"";
-			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
-
-			if(say_text_split[0].findFirst("[wait") != -1){
-				int start_index = say_text_split[0].findFirst("[wait");
-				//Check if there is text in front that needs to be displayed first.
-				if(start_index != 0){
-					level.SendMessage("drika_dialogue_add_say " + nametag + " " + say_text_split[0].substr(0, start_index - 1));
-				}
-
-				say_text_split.removeAt(0);
-				wait_timer = atof(say_text_split[0].substr(0, 2));
-				say_text_split[0].erase(0, 4);
-				for(uint i = 0; i < targets.size(); i++){
-					targets[i].ReceiveScriptMessage("stop_talking");
-				}
-				return false;
-			}else if(say_text_split[0].findFirst("\n") != -1){
-				for(uint i = 0; i < targets.size(); i++){
-					targets[i].ReceiveScriptMessage("start_talking");
-				}
-				array<string> new_line_split = say_text_split[0].split("\n");
-				level.SendMessage("drika_dialogue_add_say " + nametag + " " + new_line_split[0]);
-				level.SendMessage("drika_dialogue_add_say " + nametag + " \n");
-
-				new_line_split.removeAt(0);
-				say_text_split[0] = join(new_line_split, "\n");
-
-				return false;
-			}
-
-			for(uint i = 0; i < targets.size(); i++){
-				targets[i].ReceiveScriptMessage("start_talking");
-			}
-
-			string msg = "drika_dialogue_add_say ";
-			msg += nametag + " ";
-			msg += say_text_split[0];
-			level.SendMessage(msg);
-
-			say_text_split.removeAt(0);
-
-			//At the end of the dialogue text.
-			if(say_text_split.size() == 0){
-				for(uint i = 0; i < targets.size(); i++){
-					targets[i].ReceiveScriptMessage("stop_talking");
-				}
-				level.SendMessage("drika_dialogue_show_skip_message");
-				dialogue_done = true;
-			}
-
-		}
-		say_timer += time_step;
 		return false;
 	}
 

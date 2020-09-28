@@ -32,6 +32,7 @@ void DialogueAddSay(string actor_name, string text){
 	line_number = -1;
 	set_dialogue_displacement = false;
 	dialogue_displacement_target = 0.0f;
+	smooth_dialogue_displacement = true;
 
 	//Find the actor settings for so that the UI can be build.
 	if(current_actor_settings.name != actor_name){
@@ -971,16 +972,22 @@ void UpdateDialogueMoveIn(){
 
 float dialogue_displacement_target;
 bool set_dialogue_displacement = false;
+bool smooth_dialogue_displacement = false;
 
 void UpdateDialogueDisplacement(){
 	if(set_dialogue_displacement){
-		float current_displacement = dialogue_holder.getDisplacementY();
-		float new_displacement = current_displacement - (time_step * 2000.0);
-		if(new_displacement <= dialogue_displacement_target){
+		if(smooth_dialogue_displacement){
+			float current_displacement = dialogue_holder.getDisplacementY();
+			float new_displacement = current_displacement - (time_step * 2000.0);
+			if(new_displacement <= dialogue_displacement_target){
+				set_dialogue_displacement = false;
+				dialogue_holder.setDisplacementY(dialogue_displacement_target);
+			}else{
+				dialogue_holder.setDisplacementY(new_displacement);
+			}
+		}else{
 			set_dialogue_displacement = false;
 			dialogue_holder.setDisplacementY(dialogue_displacement_target);
-		}else{
-			dialogue_holder.setDisplacementY(new_displacement);
 		}
 	}
 }

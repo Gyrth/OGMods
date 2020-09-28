@@ -403,6 +403,7 @@ void ReceiveMessage(string msg){
 		int test_voice = atoi(token_iter.GetToken(msg));
 		PlayLineContinueSound(test_voice);
 	}else if(token == "drika_dialogue_skip"){
+		smooth_dialogue_displacement = false;
 		PlayLineStartSound();
 	}else if(token == "drika_dialogue_get_animations"){
 		token_iter.FindNextToken(msg);
