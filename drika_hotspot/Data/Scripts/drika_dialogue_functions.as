@@ -216,9 +216,6 @@ void BuildDialogueUI(){
 	dialogue_container.setElement(dialogue_ui_container);
 	dialogue_container.setSize(vec2(2560, 1440));
 
-	CreateNameTag(dialogue_ui_container);
-	CreateBackground(dialogue_ui_container);
-
 	switch(dialogue_layout){
 		case default_layout:
 			DefaultUI(dialogue_ui_container);
@@ -245,6 +242,8 @@ void BuildDialogueUI(){
 			break;
 	}
 
+	CreateNameTag(dialogue_ui_container);
+	CreateBackground(dialogue_ui_container);
 	CreateChoiceUI();
 
 	ui_created = true;
@@ -1003,15 +1002,14 @@ void MafiaNameTag(IMContainer@ parent){
 	parent.removeElement("name_container");
 
 	if(show_names){
-		string name_text = current_actor_settings.name + " : ";
+		string name_text = current_actor_settings.name + " :";
 		DialogueScriptEntry entry(character_entry);
 		entry.character = name_text;
 		dialogue_script.insertAt(0, entry);
-		Log(warning, "Check " + dialogue_script.size());
 
-		IMText name(name_text, dialogue_font);
-		dialogue_cache[counter].insertLast(name);
-		name.setColor(current_actor_settings.color);
+		DialogueScriptEntry space_entry(character_entry);
+		space_entry.character = " ";
+		dialogue_script.insertAt(1, space_entry);
 	}
 }
 
