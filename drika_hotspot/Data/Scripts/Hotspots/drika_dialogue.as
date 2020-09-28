@@ -941,7 +941,9 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Text("Number of choices");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			ImGui_SliderInt("###Number of choices", nr_choices, 1, 5, "%.0f");
+			if(ImGui_SliderInt("###Number of choices", nr_choices, 1, 5, "%.0f")){
+				Reset();
+			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 
@@ -950,7 +952,9 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Text("Choice 1");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			ImGui_InputText("##text1", choice_1, 64);
+			if(ImGui_InputText("##text1", choice_1, 64)){
+				Reset();
+			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 			choice_1_element.DrawGoToLineUI();
@@ -961,7 +965,9 @@ class DrikaDialogue : DrikaElement{
 				ImGui_Text("Choice 2");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				ImGui_InputText("##text2", choice_2, 64);
+				if(ImGui_InputText("##text2", choice_2, 64)){
+					Reset();
+				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
 				choice_2_element.DrawGoToLineUI();
@@ -972,7 +978,9 @@ class DrikaDialogue : DrikaElement{
 				ImGui_Text("Choice 3");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				ImGui_InputText("##text3", choice_3, 64);
+				if(ImGui_InputText("##text3", choice_3, 64)){
+					Reset();
+				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
 				choice_3_element.DrawGoToLineUI();
@@ -983,7 +991,9 @@ class DrikaDialogue : DrikaElement{
 				ImGui_Text("Choice 4");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				ImGui_InputText("##text4", choice_4, 64);
+				if(ImGui_InputText("##text4", choice_4, 64)){
+					Reset();
+				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
 				choice_4_element.DrawGoToLineUI();
@@ -994,7 +1004,9 @@ class DrikaDialogue : DrikaElement{
 				ImGui_Text("Choice 5");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				ImGui_InputText("##text5", choice_5, 64);
+				if(ImGui_InputText("##text5", choice_5, 64)){
+					Reset();
+				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
 				choice_5_element.DrawGoToLineUI();
