@@ -343,10 +343,10 @@ bool Disconnect(Object @other){
 
 void Dispose() {
     level.StopReceivingLevelEvents(hotspot.GetID());
-	if(editing && drika_elements.size() > 0){
-		GetCurrentElement().EditDone();
-	}
 	if(GetInputDown(0, "delete")){
+		if(editing && drika_elements.size() > 0){
+			GetCurrentElement().EditDone();
+		}
 		for(uint i = 0; i < drika_elements.size(); i++){
 			drika_elements[i].Delete();
 			drika_elements[i].deleted = true;
