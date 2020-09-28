@@ -23,6 +23,10 @@ ContainerAlignment dialogue_x_alignment;
 ContainerAlignment dialogue_y_alignment;
 array<DialogueScriptEntry@> last_word;
 bool allow_dialogue_move_in = true;
+array<IMContainer@> choice_ui_elements;
+array<string> choices;
+int selected_choice = 0;
+bool showing_choice = false;
 
 void DialogueAddSay(string actor_name, string text){
 
@@ -258,7 +262,7 @@ void CreateChoiceUI(){
 		IMDivider line_divider("dialogue_line_holder" + line_counter, DOHorizontal);
 		line_divider.setZOrdering(2);
 
-		IMContainer choice_container(1500, -1);
+		IMContainer choice_container(dialogue_holder_size.x, dialogue_font.size * 1.3f);
 		IMMessage on_click("drika_dialogue_choice_pick", i);
 		IMMessage on_hover_enter("drika_dialogue_choice_select", i);
 	    IMMessage nil_message("");
@@ -267,11 +271,11 @@ void CreateChoiceUI(){
 		dialogue_holder.append(choice_container);
 		choice_container.setZOrdering(2);
 		choice_container.setBorderColor(dialogue_font.color);
-		choice_container.setBorderSize(2.0f);
+		choice_container.setBorderSize(5.0f);
 
 		IMText choice_text(choices[i], dialogue_font);
-		choice_text.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
 		choice_container.setElement(line_divider);
+		choice_container.setAlignment(dialogue_x_alignment, CACenter);
 
 		line_divider.appendSpacer(20.0f);
 		line_divider.append(choice_text);
@@ -279,6 +283,7 @@ void CreateChoiceUI(){
 		choice_ui_elements.insertLast(@choice_container);
 	}
 
+	imGUI.update();
 	SelectChoice(selected_choice);
 }
 
@@ -1128,4 +1133,21 @@ void PlayLineStartSound(){
 		case 17: PlaySoundGroup("Data/Sounds/snow_foley/fs_heavy_snow_jump.xml", 0.3); break;
 		case 18: PlaySoundGroup("Data/Sounds/wood_foley/fs_heavy_wood_run.xml", 0.3); break;
 	}
+}
+
+void SelectChoice(int new_selected_choice){
+	if(new_selected_choice != selected_choice){
+		choice_ui_elements[selected_choice].showBorder(false);
+		choice_ui_elements[selected_choice].removeElement("bg");
+	}
+	selected_choice = new_selected_choice;
+	choice_ui_elements[selected_choice].showBorder(true);
+
+	vec4 background_color = dialogue_font.color;
+	background_color.a = 0.15f;
+	IMImage background_image("Textures/ui/whiteblock.tga");
+	background_image.setClip(true);
+	background_image.setSize(choice_ui_elements[selected_choice].getSize());
+	background_image.setEffectColor(background_color);
+	choice_ui_elements[selected_choice].addFloatingElement(background_image, "bg", vec2(0.0));
 }

@@ -11,7 +11,6 @@
 bool animating_camera = false;
 bool has_camera_control = false;
 bool show_dialogue = false;
-bool showing_choice = false;
 array<string> hotspot_ids;
 IMGUI@ imGUI;
 FontSetup name_font_arial("arial", 70 , HexColor("#CCCCCC"), true);
@@ -38,9 +37,6 @@ array<int> waiting_hotspot_ids;
 int dialogue_layout = 0;
 bool use_voice_sounds = true;
 bool show_names = true;
-array<IMContainer@> choice_ui_elements;
-array<string> choices;
-int selected_choice = 0;
 int ui_hotspot_id = -1;
 float camera_near_blur = 0.0;
 float camera_near_dist = 0.0;
@@ -1286,23 +1282,6 @@ int GetUIElementIndex(string identifier){
 		}
 	}
 	return -1;
-}
-
-void SelectChoice(int new_selected_choice){
-	if(new_selected_choice != selected_choice){
-		choice_ui_elements[selected_choice].showBorder(false);
-		choice_ui_elements[selected_choice].removeElement("bg");
-	}
-	selected_choice = new_selected_choice;
-	choice_ui_elements[selected_choice].showBorder(true);
-
-	vec4 background_color = dialogue_font.color;
-	background_color.a = 0.15f;
-	IMImage background_image("Textures/ui/whiteblock.tga");
-	background_image.setClip(true);
-	background_image.setSize(vec2(1500.0 + 40.0, dialogue_font.size + 40.0));
-	background_image.setEffectColor(background_color);
-	choice_ui_elements[selected_choice].addFloatingElement(background_image, "bg", vec2(-20.0));
 }
 
 void ReadAnimationList(){
