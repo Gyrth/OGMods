@@ -311,6 +311,7 @@ void ReceiveMessage(string msg){
 		camera_far_blur = 0.0;
 		camera_far_dist = 0.0;
 		camera_far_transition = 0.0;
+		allow_dialogue_move_in = true;
 	}else if(token == "write_music_xml"){
 		array<string> lines;
 		string xml_content;
@@ -325,12 +326,14 @@ void ReceiveMessage(string msg){
 		string song_path = token_iter.GetToken(msg);
 
 		WriteMusicXML(music_path, song_name, song_path);
-	}else if(token == "drika_dialogue_hide"){
+	}else if(token == "drika_dialogue_clear"){
 		show_dialogue = false;
 		showing_choice = false;
 		dialogue_move_in = false;
 		ui_hotspot_id = -1;
 		dialogue_container.clear();
+	}else if(token == "allow_dialogue_move_in"){
+		allow_dialogue_move_in = true;
 	}else if(token == "drika_dialogue_add_say"){
 		token_iter.FindNextToken(msg);
 		string actor_name = token_iter.GetToken(msg);
@@ -485,6 +488,7 @@ void ReceiveMessage(string msg){
 		old_camera_translation = camera_position;
 		old_camera_rotation = camera_rotation;
 		has_camera_control = true;
+		allow_dialogue_move_in = true;
 	}else if(token == "drika_dialogue_fade_out_in"){
 		token_iter.FindNextToken(msg);
 		int hotspot_id = atoi(token_iter.GetToken(msg));

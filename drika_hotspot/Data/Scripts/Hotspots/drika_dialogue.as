@@ -15,7 +15,8 @@ enum dialogue_functions	{
 							start = 11,
 							end = 12,
 							set_actor_dialogue_control = 13,
-							choice = 14
+							choice = 14,
+							clear_dialogue = 15
 						}
 
 enum camera_transitions	{
@@ -124,7 +125,8 @@ class DrikaDialogue : DrikaElement{
 												"Start",
 												"End",
 												"Set Actor Dialogue Control",
-												"Choice"
+												"Choice",
+												"Clear Dialogue"
 											};
 
 	array<string> camera_transition_names =	{
@@ -1161,13 +1163,9 @@ class DrikaDialogue : DrikaElement{
 		camera_transition_timer = 0.0;
 		if(dialogue_function == say){
 			if(say_started){
-				level.SendMessage("drika_dialogue_hide");
+				level.SendMessage("drika_dialogue_clear");
 			}
-			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
-
-			for(uint i = 0; i < targets.size(); i++){
-				targets[i].ReceiveScriptMessage("stop_talking");
-			}
+			SetTargetTalking(false);
 			say_started = false;
 			say_timer = 0.0;
 			wait_timer = 0.0;
@@ -1183,7 +1181,7 @@ class DrikaDialogue : DrikaElement{
 			}
 		}else if(dialogue_function == choice){
 			if(choice_ui_added){
-				level.SendMessage("drika_dialogue_hide");
+				level.SendMessage("drika_dialogue_clear");
 			}
 			choice_ui_added = false;
 		}else if(dialogue_function == start){
@@ -1342,6 +1340,10 @@ class DrikaDialogue : DrikaElement{
 				return false;
 			}
 			return false;
+		}else if(dialogue_function == clear_dialogue){
+			level.SendMessage("allow_dialogue_move_in");
+			level.SendMessage("drika_dialogue_clear");
+			return true;
 		}
 
 		return false;

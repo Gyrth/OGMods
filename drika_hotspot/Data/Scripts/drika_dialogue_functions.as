@@ -22,6 +22,7 @@ int line_number = -1;
 ContainerAlignment dialogue_x_alignment;
 ContainerAlignment dialogue_y_alignment;
 array<DialogueScriptEntry@> last_word;
+bool allow_dialogue_move_in = true;
 
 void DialogueAddSay(string actor_name, string text){
 
@@ -771,7 +772,9 @@ void LuigisMansionBackground(IMContainer@ parent){
 	float whole_width = (side_width * 2.0 + middle_width);
 	parent.addFloatingElement(bg_container, "bg_container", vec2((2560 / 2.0) - (whole_width / 2.0), 75.0), -1);
 	dialogue_move_in_timer = dialogue_move_in_duration;
-	dialogue_move_in = true;
+	if(allow_dialogue_move_in){
+		dialogue_move_in = true;
+	}
 }
 
 void CreateNameTag(IMContainer@ parent){
@@ -1013,6 +1016,7 @@ void UpdateDialogueMoveIn(){
 
 	if(dialogue_move_in_timer <= 0.0){
 		dialogue_move_in = false;
+		allow_dialogue_move_in = false;
 		return;
 	}
 
