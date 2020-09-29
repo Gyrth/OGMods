@@ -459,18 +459,11 @@ class DrikaOnCharacterEnterExit : DrikaElement{
 	}
 
 	bool CharacterInside(MovementObject@ char, Object@ hotspot_obj){
-		if((!external_hotspot && this_hotspot is null) ||
-			(external_hotspot && external_hotspot_obj is null)){
+		if(hotspot_obj is null){
 			return false;
 		}
 
-		mat4 hotspot_transform;
-		if(external_hotspot){
-			hotspot_transform = external_hotspot_obj.GetTransform();
-		}else{
-			hotspot_transform =	this_hotspot.GetTransform();
-		}
-		
+		mat4 hotspot_transform = hotspot_obj.GetTransform();
 		vec3 char_translation = char.position;
 		vec3 local_space_translation = invert(hotspot_transform) * char_translation;
 
