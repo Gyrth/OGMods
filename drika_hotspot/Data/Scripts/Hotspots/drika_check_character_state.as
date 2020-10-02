@@ -143,8 +143,8 @@ class DrikaCheckCharacterState : DrikaElement{
 			ImGui_Separator();
 			ImGui_Text("Known Character");
 			ImGui_NextColumn();
-			known_target.DrawSelectTargetUI();
 			ImGui_NextColumn();
+			known_target.DrawSelectTargetUI();
 		}else if(state_choice == in_proximity){
 			ImGui_Separator();
 			ImGui_Text("Proximity Target");
