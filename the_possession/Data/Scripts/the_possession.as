@@ -14,6 +14,9 @@ float move_in_timer;
 vec3 move_from;
 float particle_timer = 0.0f;
 int ghost_sound;
+bool show_intro_text = true;
+bool lost = false;
+bool won = false;
 
 enum control_modes 	{
 						floating,
@@ -21,12 +24,27 @@ enum control_modes 	{
 						move_in_possess
 					}
 
+enum WeaponSlot {
+    _held_left = 0,
+    _held_right = 1,
+    _sheathed_left = 2,
+    _sheathed_right = 3,
+    _sheathed_left_sheathe = 4,
+    _sheathed_right_sheathe = 5,
+};
+
 void Init(string level_name){
 }
 
 void PostInit(){
 	original_fov = camera.GetFOV();
 	@level_params = level.GetScriptParams();
+	GetPlayer();
+	ShowMessage("Use G to switch between ghost mode and aim to possess a character.\n Kill all the characters, but don't get trapped in a corpse.\n Good luck.");
+	show_intro_text = true;
+}
+
+void GetPlayer(){
 	for(int i = 0; i < GetNumCharacters(); i++){
 		MovementObject@ char = ReadCharacter(i);
 		if(char.is_player){
@@ -34,6 +52,10 @@ void PostInit(){
 			break;
 		}
 	}
+}
+
+void ShowMessage(string message){
+	level.SendMessage("displaytext \"" + message + "\"");
 }
 
 void Update(int is_paused){
@@ -46,8 +68,40 @@ void Update(int is_paused){
 		return;
 	}
 
+	if(!lost && !won){
+		bool all_dead = true;
+		for(int i = 0; i < GetNumCharacters(); i++){
+			MovementObject@ char = ReadCharacter(i);
+			if(char.GetIntVar("knocked_out") == _awake){
+				all_dead = false;
+				break;
+			}
+		}
+		if(all_dead){
+			won = true;
+			ShowMessage("You killed all the enemies, well done.");
+		}
+
+		if(player.GetIntVar("knocked_out") != _awake && control_mode == bound){
+			lost = true;
+			ShowMessage("You are trapped in a dead body.\n Press R to reset.");
+		}
+	}
+
+	if(lost){
+		if(GetInputPressed(player.controller_id, "r")){
+			ShowMessage("");
+			level.SendMessage("reset");
+		}
+		return;
+	}
+
 	if(control_mode != move_in_possess){
 		if(GetInputPressed(0, "g")){
+			if(show_intro_text){
+				show_intro_text = false;
+				ShowMessage("");
+			}
 			// Switch mode.
 			if(control_mode == bound){
 				control_mode = floating;
@@ -97,12 +151,43 @@ void Update(int is_paused){
 			StopSound(ghost_sound);
 
 			if(possess_char !is player){
+
+				array<int> item_ids;
+				array<int> item_slots;
+
+				for(int i = 0; i < 6; i++){
+					int item_id = possess_char.GetArrayIntVar("weapon_slots", i);
+					if(item_id != -1){
+						item_ids.insertLast(item_id);
+						item_slots.insertLast(i);
+					}
+				}
+
 				possess_char.is_player = true;
 				possess_char.controlled = true;
 				player.is_player = false;
 				player.controlled = false;
+
+				ScriptParams@ player_params = ReadObjectFromID(player.GetID()).GetScriptParams();
+				player_params.SetString("Teams", "guard");
+				player.ChangeControlScript("enemycontrol.as");
+
 				@player = possess_char;
 				player.Execute("this_mo.RecreateRiggedObject(this_mo.char_path);");
+				player.Execute("this_mo.DetachAllItems();");
+
+				for(uint i = 0; i < item_ids.size(); i++){
+					int item_slot = item_slots[i];
+					int id = item_ids[i];
+					bool is_left = (item_slot == _held_left || item_slot == _sheathed_left || item_slot == _sheathed_left_sheathe);
+					string attachement_type = (item_slot == _held_left || item_slot == _held_right)?"_at_grip":"_at_sheathe";
+
+					string command = "this_mo.AttachItemToSlot(" + id + ", " + attachement_type + ", " + is_left + ");HandleEditorAttachment(" + id + ", " + attachement_type + ", " + is_left + ");";
+					player.Execute(command);
+				}
+
+				ScriptParams@ new_player_params = ReadObjectFromID(player.GetID()).GetScriptParams();
+				new_player_params.SetString("Teams", "player");
 			}
 		}
 		move_in_timer += time_step;
@@ -134,7 +219,7 @@ bool PossessCheck(){
 		vec3 direction = normalize(camera_position - check_pos);
 		float dot_product = dot(direction, look_direction);
 
-		if(1.0 + dot_product < 0.1){
+		if(1.0 + dot_product < 0.1 && char.GetIntVar("knocked_out") == _awake){
 			if(lowest_dot > dot_product){
 				@target_char = char;
 			}
@@ -147,6 +232,28 @@ bool PossessCheck(){
 	}
 
 	return false;
+}
+
+void Reset(){
+	lost = false;
+	won = false;
+	control_mode = bound;
+	GetPlayer();
+	level_params.SetFloat("Saturation", 1.0f);
+	StopSound(ghost_sound);
+	ShowMessage("");
+}
+
+void ReceiveMessage(string msg) {
+    TokenIterator token_iter;
+    token_iter.Init();
+    if(!token_iter.FindNextToken(msg)){
+        return;
+    }
+    string token = token_iter.GetToken(msg);
+    if(token == "reset"){
+        Reset();
+	}
 }
 
 void DrawGUI() {
