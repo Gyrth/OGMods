@@ -10,10 +10,10 @@ float z_rotation = 0.0f;
 vec2 camera_rotation_velocity;
 ScriptParams@ level_params;
 float fov = 90.0f;
-IMGUI@ imGUI;
-IMImage@ menu_background;
 float move_in_timer;
 vec3 move_from;
+float particle_timer = 0.0f;
+int ghost_sound;
 
 enum control_modes 	{
 						floating,
@@ -22,22 +22,6 @@ enum control_modes 	{
 					}
 
 void Init(string level_name){
-	@imGUI = CreateIMGUI();
-    imGUI.setup();
-
-	string ingame_menu_background = "Textures/vignette.png";
-    float background_width = 2560;
-	float background_height = 1440;
-
-    IMContainer background_container(background_width, background_height);
-    background_container.setAlignment(CACenter, CACenter);
-    @menu_background = IMImage(ingame_menu_background);
-
-    menu_background.setSize(vec2(background_width, background_height));
-    menu_background.setZOrdering(0);
-    menu_background.setColor(vec4(0, 0, 0, 0));
-    background_container.addFloatingElement(menu_background, "menu_background", vec2(0));
-	imGUI.getMain().setElement(@background_container);
 }
 
 void PostInit(){
@@ -62,27 +46,35 @@ void Update(int is_paused){
 		return;
 	}
 
-	if(GetInputPressed(0, "g")){
-		// Switch mode.
-		if(control_mode == bound){
-			control_mode = floating;
-			camera_velocity = vec3();
-			camera_velocity = vec3();
-			x_rotation = camera.GetXRotation();
-			y_rotation = camera.GetYRotation();
-			z_rotation = camera.GetZRotation();
-			level_params.SetFloat("Saturation", 0.0f);
-			level_params.SetFloat("HDR Black point", 0.01);
-			menu_background.setAlpha(1.5f);
-		}else if(control_mode == floating && PossessCheck()){
-			control_mode = move_in_possess;
-			move_in_timer = 0.0f;
-			move_from = camera.GetPos();
+	if(control_mode != move_in_possess){
+		if(GetInputPressed(0, "g")){
+			// Switch mode.
+			if(control_mode == bound){
+				control_mode = floating;
+				ghost_sound = PlaySoundLoop("Data/Sounds/ouran/roomtone.wav", 0.25f);
+				int start_sound = PlaySound("Data/Sounds/ghost_start.wav");
+				SetSoundGain(start_sound, 0.15f);
+				camera_velocity = vec3();
+				camera_velocity = vec3();
+				x_rotation = camera.GetXRotation();
+				y_rotation = camera.GetYRotation();
+				z_rotation = camera.GetZRotation();
+				level_params.SetFloat("Saturation", 0.0f);
+				level_params.SetFloat("HDR Black point", 0.01);
+			}else if(control_mode == floating && PossessCheck()){
+				control_mode = move_in_possess;
+				move_in_timer = 0.0f;
+				move_from = camera.GetPos();
+				int end_sound = PlaySound("Data/Sounds/ghost_end.wav");
+				SetSoundGain(end_sound, 0.15f);
+			}
 		}
 	}
 
 	if(control_mode == floating){
 		UpdateFloatingControls();
+		UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
+		CreatePossessedParticle(camera.GetPos());
 	}else if(control_mode == move_in_possess){
 		float move_in_duration = 0.5;
 		vec3 camera_position = mix(move_from, possess_char.position + vec3(0.0, 0.5, 0.0), move_in_timer / move_in_duration);
@@ -101,20 +93,33 @@ void Update(int is_paused){
 			player.Execute("cam_rotation = " + y_rotation + ";");
 			player.Execute("cam_rotation2 = " + x_rotation + ";");
 			level_params.SetFloat("Saturation", 1.0f);
-			level_params.SetFloat("HDR Black point", 0.005);
-			menu_background.setAlpha(0.0f);
+			/* level_params.SetFloat("HDR Black point", 0.005); */
+			StopSound(ghost_sound);
 
 			if(possess_char !is player){
 				possess_char.is_player = true;
-				player.is_player = false;
 				possess_char.controlled = true;
+				player.is_player = false;
 				player.controlled = false;
 				@player = possess_char;
+				player.Execute("this_mo.RecreateRiggedObject(this_mo.char_path);");
 			}
 		}
 		move_in_timer += time_step;
+		UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
+	}else if(control_mode == bound){
+		vec3 particle_position = player.position + vec3(0.0, 0.5, 0.0);
+		CreatePossessedParticle(particle_position);
 	}
-	imGUI.update();
+}
+
+void CreatePossessedParticle(vec3 location){
+	if(particle_timer >= 0.1){
+		particle_timer = 0.0f;
+		vec3 velocity = vec3(RangedRandomFloat(-1.0, 1.0), RangedRandomFloat(-1.0, 1.0), RangedRandomFloat(-1.0, 1.0)) * 2.0f;
+		MakeParticle("Data/Particles/possessed.xml", location, velocity, vec3(0.0, 0.0, 0.0));
+	}
+	particle_timer += time_step;
 }
 
 bool PossessCheck(){
@@ -145,12 +150,10 @@ bool PossessCheck(){
 }
 
 void DrawGUI() {
-	imGUI.render();
 }
 
 void SetWindowDimensions(int w, int h)
 {
-    imGUI.doScreenResize();
 }
 
 void UpdateFloatingControls(){
