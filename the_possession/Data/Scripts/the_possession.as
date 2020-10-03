@@ -17,6 +17,9 @@ int ghost_sound;
 bool show_intro_text = true;
 bool lost = false;
 bool won = false;
+int original_player_id = -1;
+bool resetting = false;
+float reset_timer = 0.0f;
 
 enum control_modes 	{
 						floating,
@@ -40,6 +43,7 @@ void PostInit(){
 	original_fov = camera.GetFOV();
 	@level_params = level.GetScriptParams();
 	GetPlayer();
+	original_player_id = player.GetID();
 	ShowMessage("Use G to switch between ghost mode and aim to possess a character.\n Kill all the characters, but don't get trapped in a corpse.\n Good luck.");
 	show_intro_text = true;
 }
@@ -68,6 +72,14 @@ void Update(int is_paused){
 		return;
 	}
 
+	if(resetting){
+		reset_timer -= time_step;
+		if(reset_timer <= 0.0f){
+			resetting = false;
+		}
+		return;
+	}
+
 	if(!lost && !won){
 		bool all_dead = true;
 		for(int i = 0; i < GetNumCharacters(); i++){
@@ -79,7 +91,7 @@ void Update(int is_paused){
 		}
 		if(all_dead){
 			won = true;
-			ShowMessage("You killed all the enemies, well done.");
+			ShowMessage("You killed all the enemies, well done.\n Press R to reset.");
 		}
 
 		if(player.GetIntVar("knocked_out") != _awake && control_mode == bound){
@@ -88,7 +100,7 @@ void Update(int is_paused){
 		}
 	}
 
-	if(lost){
+	if(lost || won){
 		if(GetInputPressed(player.controller_id, "r")){
 			ShowMessage("");
 			level.SendMessage("reset");
@@ -152,42 +164,7 @@ void Update(int is_paused){
 
 			if(possess_char !is player){
 
-				array<int> item_ids;
-				array<int> item_slots;
-
-				for(int i = 0; i < 6; i++){
-					int item_id = possess_char.GetArrayIntVar("weapon_slots", i);
-					if(item_id != -1){
-						item_ids.insertLast(item_id);
-						item_slots.insertLast(i);
-					}
-				}
-
-				possess_char.is_player = true;
-				possess_char.controlled = true;
-				player.is_player = false;
-				player.controlled = false;
-
-				ScriptParams@ player_params = ReadObjectFromID(player.GetID()).GetScriptParams();
-				player_params.SetString("Teams", "guard");
-				player.ChangeControlScript("enemycontrol.as");
-
-				@player = possess_char;
-				player.Execute("this_mo.RecreateRiggedObject(this_mo.char_path);");
-				player.Execute("this_mo.DetachAllItems();");
-
-				for(uint i = 0; i < item_ids.size(); i++){
-					int item_slot = item_slots[i];
-					int id = item_ids[i];
-					bool is_left = (item_slot == _held_left || item_slot == _sheathed_left || item_slot == _sheathed_left_sheathe);
-					string attachement_type = (item_slot == _held_left || item_slot == _held_right)?"_at_grip":"_at_sheathe";
-
-					string command = "this_mo.AttachItemToSlot(" + id + ", " + attachement_type + ", " + is_left + ");HandleEditorAttachment(" + id + ", " + attachement_type + ", " + is_left + ");";
-					player.Execute(command);
-				}
-
-				ScriptParams@ new_player_params = ReadObjectFromID(player.GetID()).GetScriptParams();
-				new_player_params.SetString("Teams", "player");
+				SwitchToCharacter(possess_char.GetID());
 			}
 		}
 		move_in_timer += time_step;
@@ -196,6 +173,48 @@ void Update(int is_paused){
 		vec3 particle_position = player.position + vec3(0.0, 0.5, 0.0);
 		CreatePossessedParticle(particle_position);
 	}
+}
+
+void SwitchToCharacter(int character_id){
+	MovementObject@ target_char = ReadCharacterID(character_id);
+	array<int> item_ids;
+	array<int> item_slots;
+
+	for(int i = 0; i < 6; i++){
+		int item_id = target_char.GetArrayIntVar("weapon_slots", i);
+		if(item_id != -1){
+			item_ids.insertLast(item_id);
+			item_slots.insertLast(i);
+		}
+	}
+
+	target_char.is_player = true;
+	target_char.controlled = true;
+	player.is_player = false;
+	player.controlled = false;
+
+	ScriptParams@ player_params = ReadObjectFromID(player.GetID()).GetScriptParams();
+	player_params.SetString("Teams", "guard");
+	player.ChangeControlScript("enemycontrol.as");
+
+	@player = target_char;
+	player.Execute("this_mo.RecreateRiggedObject(this_mo.char_path);");
+	player.Execute("this_mo.DetachAllItems();");
+
+	for(uint i = 0; i < item_ids.size(); i++){
+		int item_slot = item_slots[i];
+		int id = item_ids[i];
+		bool is_left = (item_slot == _held_left || item_slot == _sheathed_left || item_slot == _sheathed_left_sheathe);
+		string attachement_type = (item_slot == _held_left || item_slot == _held_right)?"_at_grip":"_at_sheathe";
+
+		string command = "this_mo.AttachItemToSlot(" + id + ", " + attachement_type + ", " + is_left + ");HandleEditorAttachment(" + id + ", " + attachement_type + ", " + is_left + ");";
+		player.Execute(command);
+		Log(warning, command);
+		player.Execute("UpdatePrimaryWeapon();");
+	}
+
+	ScriptParams@ new_player_params = ReadObjectFromID(player.GetID()).GetScriptParams();
+	new_player_params.SetString("Teams", "player");
 }
 
 void CreatePossessedParticle(vec3 location){
@@ -242,6 +261,7 @@ void Reset(){
 	level_params.SetFloat("Saturation", 1.0f);
 	StopSound(ghost_sound);
 	ShowMessage("");
+	SwitchToCharacter(original_player_id);
 }
 
 void ReceiveMessage(string msg) {
@@ -252,6 +272,8 @@ void ReceiveMessage(string msg) {
     }
     string token = token_iter.GetToken(msg);
     if(token == "reset"){
+		resetting = true;
+		reset_timer = 1.0f;
         Reset();
 	}
 }

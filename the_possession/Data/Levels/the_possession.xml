@@ -21,7 +21,7 @@
     </DetailMaps>
     <DetailObjects />
 </Terrain>
-<OutOfDate NavMesh="true" NavMeshParamHash="-1494217678" />
+<OutOfDate NavMesh="false" NavMeshParamHash="-1494217678" />
 <AmbientSounds />
 <Script>the_possession.as</Script>
 <LevelScriptParameters>
@@ -43,7 +43,7 @@
     <RayToSun r0="-0.027197" r1="0.622325" r2="0.782286" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="51.1327" t1="-9.37388" t2="-51.0121" s0="1" s1="1" s2="1" q0="0.0275906" q1="-0.966998" q2="0.223347" q3="0.119455" euler_x="-2.68761" euler_y="-0.245819" euler_z="-3.14159" id="2">
+    <CameraObject t0="56.8763" t1="-11.7274" t2="-43.5247" s0="1" s1="1" s2="1" q0="0.101396" q1="-0.888788" q2="0.238342" q3="0.37811" euler_x="-2.61759" euler_y="-0.804456" euler_z="3.14159" id="2">
         <parameters />
     </CameraObject>
     <Hotspot t0="66.8687" t1="-20.8904" t2="-63.1705" s0="1" s1="0.995311" s2="0.774894" q0="0.020804" q1="0.00649012" q2="-0.0356504" q3="0.999127" euler_x="0.0411248" euler_y="0.0144528" euler_z="-0.0710356" id="7" type_file="Data/Objects/Hotspots/spike.xml">
@@ -140,7 +140,7 @@
     <EnvObject t0="67.5924" t1="-21.2578" t2="-64.1486" s0="0.241424" s1="0.786048" s2="0.242157" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/MagmaArena/MagmaFloor.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="88.0458" t1="-11.406" t2="-34.8522" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="58" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+    <ActorObject t0="88.0458" t1="-11.406" t2="-34.8522" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="58" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -158,7 +158,7 @@
             <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
             <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
             <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV distance" type="float" val="10" />
             <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
             <parameter name="Focus FOV vertical" type="float" val="0.62834" />
             <parameter name="Ground Aggression" type="float" val="0.5" />
@@ -177,7 +177,7 @@
             <parameter name="Species" type="string" val="rabbit" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Stick To Nav Mesh" type="int" val="0" />
-            <parameter name="Teams" type="string" val="guard" />
+            <parameter name="Teams" type="string" val="player" />
             <parameter name="Throw Counter Probability" type="float" val="0.4" />
             <parameter name="Throw Trainer" type="int" val="0" />
             <parameter name="Weapon Catch Skill" type="float" val="1" />
@@ -594,7 +594,7 @@
             <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
             <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
             <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV distance" type="float" val="10" />
             <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
             <parameter name="Focus FOV vertical" type="float" val="0.62834" />
             <parameter name="Ground Aggression" type="float" val="0.5" />
@@ -627,7 +627,7 @@
         </ItemConnections>
         <Palette />
     </ActorObject>
-    <ActorObject t0="78.7003" t1="-15.7038" t2="-55.3195" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="203" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="1">
+    <ActorObject t0="78.7003" t1="-15.7038" t2="-55.3195" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="203" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -645,7 +645,7 @@
             <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
             <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
             <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV distance" type="float" val="10" />
             <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
             <parameter name="Focus FOV vertical" type="float" val="0.62834" />
             <parameter name="Ground Aggression" type="float" val="0.5" />
@@ -664,7 +664,7 @@
             <parameter name="Species" type="string" val="rabbit" />
             <parameter name="Static" type="int" val="0" />
             <parameter name="Stick To Nav Mesh" type="int" val="0" />
-            <parameter name="Teams" type="string" val="player" />
+            <parameter name="Teams" type="string" val="guard" />
             <parameter name="Throw Counter Probability" type="float" val="0.4" />
             <parameter name="Throw Trainer" type="int" val="0" />
             <parameter name="Weapon Catch Skill" type="float" val="1" />
@@ -701,7 +701,7 @@
             <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
             <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
             <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV distance" type="float" val="10" />
             <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
             <parameter name="Focus FOV vertical" type="float" val="0.62834" />
             <parameter name="Ground Aggression" type="float" val="0.5" />
@@ -863,7 +863,13 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
+    <NavmeshHintObject t0="51.6001" t1="-17.0633" t2="-40.4881" s0="4.38038" s1="3" s2="4.42821" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="232">
+        <parameters />
+    </NavmeshHintObject>
     <NavmeshHintObject t0="83.3113" t1="-16.0863" t2="-44.9505" s0="3" s1="3" s2="3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="233">
+        <parameters />
+    </NavmeshHintObject>
+    <NavmeshHintObject t0="54.6151" t1="-16.9097" t2="-35.2346" s0="4.30681" s1="3" s2="2.34665" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="234">
         <parameters />
     </NavmeshHintObject>
 </ActorObjects>
