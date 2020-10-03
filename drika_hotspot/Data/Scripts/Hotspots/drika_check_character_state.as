@@ -39,6 +39,7 @@ class DrikaCheckCharacterState : DrikaElement{
 	bool continue_if_false = false;
 	DrikaGoToLineSelect@ continue_element;
 	array<bool> foot_down;
+	bool check_all;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		state_choice = state_choices(GetJSONInt(params, "state_check", awake));
@@ -46,6 +47,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		equals = GetJSONBool(params, "equals", true);
 		proximity_distance = GetJSONFloat(params, "proximity_distance", 1.0);
 		continue_if_false = GetJSONBool(params, "continue_if_false", false);
+		check_all = GetJSONBool(params, "check_all", false);
 		@continue_element = DrikaGoToLineSelect("continue_line", params);
 
 		@target_select = DrikaTargetSelect(this, params);
@@ -82,6 +84,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		JSONValue data;
 		data["state_check"] = JSONValue(state_choice);
 		data["equals"] = JSONValue(equals);
+		data["check_all"] = JSONValue(check_all);
 		if(state_choice == knows_about){
 			known_target.SaveIdentifier(data);
 		}else if(state_choice == in_proximity){
@@ -114,6 +117,16 @@ class DrikaCheckCharacterState : DrikaElement{
 		ImGui_NextColumn();
 
 		target_select.DrawSelectTargetUI();
+
+		if(target_select.identifier_type == team){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Check All");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("##Check All", check_all);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+		}
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Check for");
@@ -218,6 +231,11 @@ class DrikaCheckCharacterState : DrikaElement{
 					string command = "self_id = situation.KnownID(" + known_targets[j].GetID() + ");";
 					targets[i].Execute(command);
 					bool known = (targets[i].GetIntVar("self_id") != -1);
+					//Return true immediately when we don't have to check all characters and the check returns true.
+					if(!check_all && known == equals){
+						all_in_state = true;
+						break;
+					}
 					if(known != equals){
 						all_in_state = false;
 					}
@@ -229,32 +247,56 @@ class DrikaCheckCharacterState : DrikaElement{
 				}else{
 					state = (targets[i].QueryIntFunction("int CombatSong()") == 1);
 				}
+				if(!check_all && state == equals){
+					all_in_state = true;
+					break;
+				}
 				if(state != equals){
 					all_in_state = false;
 				}
 			}else if(state_choice == moving){
 				bool state = (length(targets[i].velocity) > 1.0);
+				if(!check_all && state == equals){
+					all_in_state = true;
+					break;
+				}
 				if(state != equals){
 					all_in_state = false;
 				}
 			}else if(state_choice == attacking){
 				bool state = (targets[i].GetIntVar("state") == _attack_state);
+				if(!check_all && state == equals){
+					all_in_state = true;
+					break;
+				}
 				if(state != equals){
 					all_in_state = false;
 				}
 			}else if(state_choice == ragdolling){
 				bool state = (targets[i].GetIntVar("state") == _ragdoll_state);
+				if(!check_all && state == equals){
+					all_in_state = true;
+					break;
+				}
 				if(state != equals){
 					all_in_state = false;
 				}
 			}else if(state_choice == hit_reacting){
 				bool state = (targets[i].GetIntVar("state") == _hit_reaction_state);
+				if(!check_all && state == equals){
+					all_in_state = true;
+					break;
+				}
 				if(state != equals){
 					all_in_state = false;
 				}
 			}else if(state_choice == patrolling){
 				if(!targets[i].controlled){
 					bool state = (targets[i].GetIntVar("goal") == _ai_patrol);
+					if(!check_all && state == equals){
+						all_in_state = true;
+						break;
+					}
 					if(state != equals){
 						all_in_state = false;
 					}
@@ -262,6 +304,10 @@ class DrikaCheckCharacterState : DrikaElement{
 			}else if(state_choice == investigating){
 				if(!targets[i].controlled){
 					bool state = (targets[i].GetIntVar("goal") == _ai_investigate);
+					if(!check_all && state == equals){
+						all_in_state = true;
+						break;
+					}
 					if(state != equals){
 						all_in_state = false;
 					}
@@ -269,6 +315,10 @@ class DrikaCheckCharacterState : DrikaElement{
 			}else if(state_choice == getting_help){
 				if(!targets[i].controlled){
 					bool state = (targets[i].GetIntVar("goal") == _ai_get_help);
+					if(!check_all && state == equals){
+						all_in_state = true;
+						break;
+					}
 					if(state != equals){
 						all_in_state = false;
 					}
@@ -276,6 +326,10 @@ class DrikaCheckCharacterState : DrikaElement{
 			}else if(state_choice == fleeing){
 				if(!targets[i].controlled){
 					bool state = (targets[i].GetIntVar("goal") == _ai_flee);
+					if(!check_all && state == equals){
+						all_in_state = true;
+						break;
+					}
 					if(state != equals){
 						all_in_state = false;
 					}
@@ -295,12 +349,21 @@ class DrikaCheckCharacterState : DrikaElement{
 					}
 
 					bool state = (distance(targets[i].position, target_location) < proximity_distance);
+					if(!check_all && state == equals){
+						all_in_state = true;
+						break;
+					}
 					if(state != equals){
 						all_in_state = false;
 					}
 				}
 			}else if(state_choice == awake || state_choice == unconscious || state_choice == dead){
-				if((targets[i].GetIntVar("knocked_out") != state_choice) == equals){
+				int state = targets[i].GetIntVar("knocked_out");
+				if(!check_all && (state != state_choice) == equals){
+					all_in_state = true;
+					break;
+				}
+				if((state != state_choice) == equals){
 					all_in_state = false;
 				}
 			}else if(state_choice == right_footstep){
