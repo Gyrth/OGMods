@@ -114,6 +114,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Target Character");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_NextColumn();
 
 		target_select.DrawSelectTargetUI();
@@ -131,7 +132,6 @@ class DrikaCheckCharacterState : DrikaElement{
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Check for");
 		ImGui_NextColumn();
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("###Check for", current_state_choice, state_choice_names, state_choice_names.size())){
 			state_choice = state_choices(current_state_choice);
@@ -224,115 +224,60 @@ class DrikaCheckCharacterState : DrikaElement{
 		bool all_in_state = true;
 
 		for(uint i = 0; i < targets.size(); i++){
+			bool state;
 			if(state_choice == knows_about){
 				array<MovementObject@> known_targets = known_target.GetTargetMovementObjects();
 
 				for(uint j = 0; j < known_targets.size(); j++){
 					string command = "self_id = situation.KnownID(" + known_targets[j].GetID() + ");";
 					targets[i].Execute(command);
-					bool known = (targets[i].GetIntVar("self_id") != -1);
+					state = (targets[i].GetIntVar("self_id") != -1);
 					//Return true immediately when we don't have to check all characters and the check returns true.
-					if(!check_all && known == equals){
+					if(!check_all && state == equals){
 						all_in_state = true;
 						break;
 					}
-					if(known != equals){
+					if(state != equals){
 						all_in_state = false;
 					}
 				}
 			}else if(state_choice == in_combat){
-				bool state;
 				if(!targets[i].controlled){
 					state = (targets[i].GetIntVar("goal") == _ai_attack);
 				}else{
 					state = (targets[i].QueryIntFunction("int CombatSong()") == 1);
 				}
-				if(!check_all && state == equals){
-					all_in_state = true;
-					break;
-				}
-				if(state != equals){
-					all_in_state = false;
-				}
 			}else if(state_choice == moving){
-				bool state = (length(targets[i].velocity) > 1.0);
-				if(!check_all && state == equals){
-					all_in_state = true;
-					break;
-				}
-				if(state != equals){
-					all_in_state = false;
-				}
+				state = (length(targets[i].velocity) > 1.0);
 			}else if(state_choice == attacking){
-				bool state = (targets[i].GetIntVar("state") == _attack_state);
-				if(!check_all && state == equals){
-					all_in_state = true;
-					break;
-				}
-				if(state != equals){
-					all_in_state = false;
-				}
+				state = (targets[i].GetIntVar("state") == _attack_state);
 			}else if(state_choice == ragdolling){
-				bool state = (targets[i].GetIntVar("state") == _ragdoll_state);
-				if(!check_all && state == equals){
-					all_in_state = true;
-					break;
-				}
-				if(state != equals){
-					all_in_state = false;
-				}
+				state = (targets[i].GetIntVar("state") == _ragdoll_state);
 			}else if(state_choice == hit_reacting){
-				bool state = (targets[i].GetIntVar("state") == _hit_reaction_state);
-				if(!check_all && state == equals){
-					all_in_state = true;
-					break;
-				}
-				if(state != equals){
-					all_in_state = false;
-				}
+				state = (targets[i].GetIntVar("state") == _hit_reaction_state);
 			}else if(state_choice == patrolling){
 				if(!targets[i].controlled){
-					bool state = (targets[i].GetIntVar("goal") == _ai_patrol);
-					if(!check_all && state == equals){
-						all_in_state = true;
-						break;
-					}
-					if(state != equals){
-						all_in_state = false;
-					}
+					state = (targets[i].GetIntVar("goal") == _ai_patrol);
+				}else{
+					return false;
 				}
 			}else if(state_choice == investigating){
 				if(!targets[i].controlled){
-					bool state = (targets[i].GetIntVar("goal") == _ai_investigate);
-					if(!check_all && state == equals){
-						all_in_state = true;
-						break;
-					}
-					if(state != equals){
-						all_in_state = false;
-					}
+					state = (targets[i].GetIntVar("goal") == _ai_investigate);
+				}else{
+					return false;
 				}
 			}else if(state_choice == getting_help){
 				if(!targets[i].controlled){
-					bool state = (targets[i].GetIntVar("goal") == _ai_get_help);
-					if(!check_all && state == equals){
-						all_in_state = true;
-						break;
-					}
-					if(state != equals){
-						all_in_state = false;
-					}
+					state = (targets[i].GetIntVar("goal") == _ai_get_help);
+				}else{
+					return false;
 				}
 			}else if(state_choice == fleeing){
 				if(!targets[i].controlled){
-					bool state = (targets[i].GetIntVar("goal") == _ai_flee);
-					if(!check_all && state == equals){
-						all_in_state = true;
-						break;
-					}
-					if(state != equals){
-						all_in_state = false;
-					}
+					state = (targets[i].GetIntVar("goal") == _ai_flee);
+				}else{
+					return false;
 				}
 			}else if(state_choice == in_proximity){
 				array<Object@> target_objects = known_target.GetTargetObjects();
@@ -348,7 +293,7 @@ class DrikaCheckCharacterState : DrikaElement{
 						target_location = char.position;
 					}
 
-					bool state = (distance(targets[i].position, target_location) < proximity_distance);
+					state = (distance(targets[i].position, target_location) < proximity_distance);
 					if(!check_all && state == equals){
 						all_in_state = true;
 						break;
@@ -358,14 +303,7 @@ class DrikaCheckCharacterState : DrikaElement{
 					}
 				}
 			}else if(state_choice == awake || state_choice == unconscious || state_choice == dead){
-				int state = targets[i].GetIntVar("knocked_out");
-				if(!check_all && (state != state_choice) == equals){
-					all_in_state = true;
-					break;
-				}
-				if((state != state_choice) == equals){
-					all_in_state = false;
-				}
+				state = (targets[i].GetIntVar("knocked_out") == state_choice);
 			}else if(state_choice == right_footstep){
 				//First get the foot status.
 				vec3 leg_pos = targets[i].rigged_object().GetIKTargetPosition("right_leg");
@@ -408,6 +346,14 @@ class DrikaCheckCharacterState : DrikaElement{
 						all_in_state = false;
 					}
 				}
+			}
+
+			if(!check_all && state == equals){
+				all_in_state = true;
+				break;
+			}
+			if(state != equals){
+				all_in_state = false;
 			}
 		}
 
