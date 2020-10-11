@@ -1844,7 +1844,7 @@ string GetUniqueID(){
 void AddFunctionMenuItems(){
 	for(uint i = 0; i < sorted_element_names.size(); i++){
 		drika_element_types current_element_type = drika_element_types(drika_element_names.find(sorted_element_names[i]));
-		if(current_element_type == none){
+		if(current_element_type == none || current_element_type == drika_on_item_enter_exit){
 			continue;
 		}
 		ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
