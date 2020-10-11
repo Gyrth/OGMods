@@ -6,7 +6,7 @@ enum drika_element_types { 	none = 0,
 							drika_create_particle = 5,
 							drika_play_sound = 6,
 							drika_go_to_line = 7,
-							drika_on_character_enter_exit = 8,
+							drika_on_enter_exit = 8,
 							drika_on_item_enter_exit = 9,
 							drika_send_level_message = 10,
 							drika_start_dialogue = 11,
@@ -90,7 +90,10 @@ enum identifier_types {	id = 0,
 						item = 5,
 						batch = 6,
 						cam = 7,
-						box_select = 8
+						box_select = 8,
+						any_character = 9,
+						any_player = 10,
+						any_npc = 11
 					};
 
 enum param_types { 	string_param = 0,
@@ -328,7 +331,7 @@ class DrikaElement{
 
 		// If the reference string is changed then update the reference.
 		string new_reference_string = reference_string;
-		if(ImGui_InputText("##Reference", new_reference_string, 64)){
+		if(ImGui_InputText("##Set Reference", new_reference_string, 64)){
 			AttemptRegisterReference(new_reference_string);
 		}
 

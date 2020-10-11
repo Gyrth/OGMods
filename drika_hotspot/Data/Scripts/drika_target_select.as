@@ -6,7 +6,10 @@ enum target_options {	id_option = (1<<0),
 						item_option = (1<<5),
 						batch_option = (1<<6),
 						camera_option = (1<<7),
-						box_select_option = (1<<8)
+						box_select_option = (1<<8),
+						any_character_option = (1<<9),
+						any_player_option = (1<<10),
+						any_npc_option = (1<<11)
 					};
 
 class BatchObject{
@@ -300,6 +303,18 @@ class DrikaTargetSelect{
 			identifier_choices.insertLast("Box Select");
 		}
 
+		if((target_option & any_character_option) != 0){
+			identifier_choices.insertLast("Any Character");
+		}
+
+		if((target_option & any_player_option) != 0){
+			identifier_choices.insertLast("Any Player");
+		}
+
+		if((target_option & any_npc_option) != 0){
+			identifier_choices.insertLast("Any NPC");
+		}
+
 		int current_identifier_type = -1;
 
 		for(uint i = 0; i < identifier_choices.size(); i++){
@@ -311,7 +326,10 @@ class DrikaTargetSelect{
 				identifier_type == batch && identifier_choices[i] == "Batch"||
 				identifier_type == name && identifier_choices[i] == "Name"||
 				identifier_type == cam && identifier_choices[i] == "Camera" ||
-				identifier_type == box_select && identifier_choices[i] == "Box Select"){
+				identifier_type == box_select && identifier_choices[i] == "Box Select" ||
+				identifier_type == any_character && identifier_choices[i] == "Any Character" ||
+				identifier_type == any_player && identifier_choices[i] == "Any Player" ||
+				identifier_type == any_npc && identifier_choices[i] == "Any NPC" ){
 				current_identifier_type = i;
 				break;
 			}
@@ -350,6 +368,12 @@ class DrikaTargetSelect{
 				identifier_type = cam;
 			}else if(identifier_choices[current_identifier_type] == "Box Select"){
 				identifier_type = box_select;
+			}else if(identifier_choices[current_identifier_type] == "Any Character"){
+				identifier_type = any_character;
+			}else if(identifier_choices[current_identifier_type] == "Any Player"){
+				identifier_type = any_player;
+			}else if(identifier_choices[current_identifier_type] == "Any NPC"){
+				identifier_type = any_npc;
 			}
 			target_changed = true;
 		}
@@ -393,7 +417,7 @@ class DrikaTargetSelect{
 			ImGui_Text("Reference");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_Combo("##Reference" + tag, current_reference, available_references, available_references.size())){
+			if(ImGui_Combo("##Pick Reference" + tag, current_reference, available_references, available_references.size())){
 				PreTargetChanged();
 				reference_string = available_references[current_reference];
 				@reference_element = GetReferenceElement(reference_string);
@@ -774,6 +798,25 @@ class DrikaTargetSelect{
 			if(include_hotspot){
 				BoxSelectCheck(target_objects, placeholder_transform, _hotspot_object);
 			}
+		}else if(identifier_type == any_character){
+			for(int i = 0; i < GetNumCharacters(); i++){
+				MovementObject@ char = ReadCharacter(i);
+				target_objects.insertLast(ReadObjectFromID(char.GetID()));
+			}
+		}else if(identifier_type == any_player){
+			for(int i = 0; i < GetNumCharacters(); i++){
+				MovementObject@ char = ReadCharacter(i);
+				if(char.is_player){
+					target_objects.insertLast(ReadObjectFromID(char.GetID()));
+				}
+			}
+		}else if(identifier_type == any_npc){
+			for(int i = 0; i < GetNumCharacters(); i++){
+				MovementObject@ char = ReadCharacter(i);
+				if(!char.is_player){
+					target_objects.insertLast(ReadObjectFromID(char.GetID()));
+				}
+			}
 		}
 		return target_objects;
 	}
@@ -850,6 +893,24 @@ class DrikaTargetSelect{
 					target_movement_objects.insertLast(ReadCharacterID(batch_ids[i]));
 				}
 			}
+		}else if(identifier_type == any_character){
+			for(int i = 0; i < GetNumCharacters(); i++){
+				target_movement_objects.insertLast(ReadCharacter(i));
+			}
+		}else if(identifier_type == any_player){
+			for(int i = 0; i < GetNumCharacters(); i++){
+				MovementObject@ char = ReadCharacter(i);
+				if(char.is_player){
+					target_movement_objects.insertLast(char);
+				}
+			}
+		}else if(identifier_type == any_npc){
+			for(int i = 0; i < GetNumCharacters(); i++){
+				MovementObject@ char = ReadCharacter(i);
+				if(!char.is_player){
+					target_movement_objects.insertLast(char);
+				}
+			}
 		}
 		return target_movement_objects;
 	}
@@ -894,6 +955,12 @@ class DrikaTargetSelect{
 			return "Camera";
 		}else if (identifier_type == box_select){
 			return "Box Select";
+		}else if (identifier_type == any_character){
+			return "Any Character";
+		}else if (identifier_type == any_player){
+			return "Any Player";
+		}else if (identifier_type == any_npc){
+			return "Any NPC";
 		}
 		return "NA";
 	}

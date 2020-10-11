@@ -18,20 +18,6 @@ array<string> dialogue_layout_names =	{
 											"Mafia"
 										};
 
-enum hotspot_trigger_types	{
-								on_enter = 0,
-								on_exit = 1,
-								while_inside = 2,
-								while_outside = 3
-							};
-
-array<string> hotspot_trigger_choices = {
-											"On Enter",
-											"On Exit",
-											"While Inside",
-											"While Outside"
-										};
-
 enum ui_functions	{
 						ui_clear = 0,
 						ui_image = 1,

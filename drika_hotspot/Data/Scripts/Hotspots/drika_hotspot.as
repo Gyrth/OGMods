@@ -18,8 +18,7 @@
 #include "hotspots/drika_display_text.as"
 #include "hotspots/drika_go_to_line.as"
 #include "hotspots/drika_load_level.as"
-#include "hotspots/drika_on_character_enter_exit.as"
-#include "hotspots/drika_on_item_enter_exit.as"
+#include "hotspots/drika_on_enter_exit.as"
 #include "hotspots/drika_play_music.as"
 #include "hotspots/drika_play_sound.as"
 #include "hotspots/drika_send_level_message.as"
@@ -1887,10 +1886,10 @@ DrikaElement@ InterpElement(drika_element_types element_type, JSONValue &in func
 			return DrikaPlaySound(function_json);
 		case drika_go_to_line:
 			return DrikaGoToLine(function_json);
-		case drika_on_character_enter_exit:
-			return DrikaOnCharacterEnterExit(function_json);
+		case drika_on_enter_exit:
+			return DrikaOnEnterExit(function_json);
 		case drika_on_item_enter_exit:
-			return DrikaOnItemEnterExit(function_json);
+			return DrikaOnEnterExit(function_json);
 		case drika_send_level_message:
 			return DrikaSendLevelMessage(function_json);
 		case drika_start_dialogue:

@@ -1,0 +1,563 @@
+enum hotspot_trigger_types	{
+								on_character_enter = 0,
+								on_character_exit = 1,
+								while_character_inside = 2,
+								while_character_outside = 3,
+								on_item_enter = 4,
+								on_item_exit = 5,
+								while_item_inside = 6,
+								while_item_outside = 7
+							};
+
+array<string> hotspot_trigger_choices = {
+											"On Character Enter",
+											"On Character Exit",
+											"While Character Inside",
+											"While Character Outside",
+											"On Item Enter",
+											"On Item Exit",
+											"While Item Inside",
+											"While Item Outside"
+										};
+
+class DrikaOnEnterExit : DrikaElement{
+	int new_hotspot_trigger_type;
+	bool external_hotspot;
+	int external_hotspot_id;
+	Object@ external_hotspot_obj = null;
+	bool reset_when_false;
+	array<int> items_inside;
+	bool got_items_inside = false;
+	array<int> reference_ids;
+	bool initial_setup_done = false;
+
+	vec3 external_hotspot_translation;
+	quaternion external_hotspot_rotation;
+	vec3 external_hotspot_scale;
+
+	hotspot_trigger_types hotspot_trigger_type;
+
+	DrikaOnEnterExit(JSONValue params = JSONValue()){
+		@target_select = DrikaTargetSelect(this, params);
+
+		hotspot_trigger_type = hotspot_trigger_types(GetJSONInt(params, "hotspot_trigger_type", on_character_enter));
+
+		reference_string = GetJSONString(params, "reference_string", "");
+		AttemptRegisterReference(reference_string);
+		external_hotspot = GetJSONBool(params, "external_hotspot", false);
+		external_hotspot_translation = GetJSONVec3(params, "external_hotspot_translation", this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
+		external_hotspot_rotation = GetJSONQuaternion(params, "external_hotspot_rotation", quaternion());
+		external_hotspot_scale = GetJSONVec3(params, "external_hotspot_scale", vec3(0.25));
+		external_hotspot_id = GetJSONInt(params, "external_hotspot_id", -1);
+		reset_when_false = GetJSONBool(params, "reset_when_false", false);
+
+		//Converting old savedata into new, to be removed later on.
+		drika_element_types function_type = drika_element_types(params["function"].asInt());
+		if(function_type == drika_on_item_enter_exit){
+			Log(warning, "Found old savedata itementerexit");
+
+			int old_trigger_type = GetJSONInt(params, "hotspot_trigger_type", 0);
+			if(old_trigger_type == 0){
+				hotspot_trigger_type = on_item_enter;
+			}else if(old_trigger_type == 1){
+				hotspot_trigger_type = on_item_exit;
+			}else if(old_trigger_type == 2){
+				hotspot_trigger_type = while_item_inside;
+			}else if(old_trigger_type == 3){
+				hotspot_trigger_type = while_item_outside;
+			}
+			Log(warning, "itementerexit trigger type " + hotspot_trigger_type);
+
+		}else{
+			int old_character_type = GetJSONInt(params, "target_character_type", -1);
+			if(old_character_type != -1){
+				Log(warning, "Found old savedata characterenterexit");
+
+				if(old_character_type == 1){
+					target_select.identifier_type = team;
+				}else if(old_character_type == 2){
+					target_select.identifier_type = any_character;
+				}else if(old_character_type == 3){
+					target_select.identifier_type = any_player;
+				}else if(old_character_type == 4){
+					target_select.identifier_type = any_npc;
+				}
+
+				int old_trigger_type = GetJSONInt(params, "hotspot_trigger_type", 0);
+				if(old_trigger_type == 0){
+					hotspot_trigger_type = on_character_enter;
+				}else if(old_trigger_type == 1){
+					hotspot_trigger_type = on_character_exit;
+				}else if(old_trigger_type == 2){
+					hotspot_trigger_type = while_character_inside;
+				}else if(old_trigger_type == 3){
+					hotspot_trigger_type = while_character_outside;
+				}
+
+				target_select.object_id = GetJSONInt(params, "object_id", -1);
+				target_select.character_team = GetJSONString(params, "character_team", "");
+			}
+		}
+
+		new_hotspot_trigger_type = hotspot_trigger_type;
+		SetTargetOptions();
+
+		connection_types = {};
+		drika_element_type = drika_on_enter_exit;
+		has_settings = true;
+	}
+
+	void SetTargetOptions(){
+		if(IsCharacterFunction()){
+			target_select.target_option = id_option | name_option | character_option | reference_option | team_option | any_character_option | any_player_option | any_npc_option;
+			connection_types = {_movement_object};
+			Log(warning, "Character");
+		}else{
+			target_select.target_option = id_option | item_option | reference_option;
+			connection_types = {_item_object};
+			Log(warning, "ItemObject");
+		}
+	}
+
+	bool IsCharacterFunction(){
+		if(hotspot_trigger_type == on_character_enter || hotspot_trigger_type == on_character_exit || hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+			return true;
+		}
+		return false;
+	}
+	bool IsItemFunction(){
+		if(hotspot_trigger_type == on_item_enter || hotspot_trigger_type == on_item_exit || hotspot_trigger_type == while_item_inside || hotspot_trigger_type == while_item_outside){
+			return true;
+		}
+		return false;
+	}
+
+	JSONValue GetSaveData(){
+		JSONValue data;
+		data["hotspot_trigger_type"] = JSONValue(hotspot_trigger_type);
+		data["reference_string"] = JSONValue(reference_string);
+		data["external_hotspot"] = JSONValue(external_hotspot);
+		if(external_hotspot){
+			data["external_hotspot_id"] = JSONValue(external_hotspot_id);
+			if(exporting){
+				vec3 translation = external_hotspot_obj.GetTranslation();
+				quaternion rotation = external_hotspot_obj.GetRotation();
+				vec3 scale = external_hotspot_obj.GetScale();
+
+				data["external_hotspot_translation"] = JSONValue(JSONarrayValue);
+				data["external_hotspot_translation"].append(translation.x);
+				data["external_hotspot_translation"].append(translation.y);
+				data["external_hotspot_translation"].append(translation.z);
+
+				data["external_hotspot_rotation"] = JSONValue(JSONarrayValue);
+				data["external_hotspot_rotation"].append(rotation.x);
+				data["external_hotspot_rotation"].append(rotation.y);
+				data["external_hotspot_rotation"].append(rotation.z);
+				data["external_hotspot_rotation"].append(rotation.w);
+
+				data["external_hotspot_scale"] = JSONValue(JSONarrayValue);
+				data["external_hotspot_scale"].append(scale.x);
+				data["external_hotspot_scale"].append(scale.y);
+				data["external_hotspot_scale"].append(scale.z);
+			}
+		}
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+			data["reset_when_false"] = JSONValue(reset_when_false);
+		}
+		target_select.SaveIdentifier(data);
+		return data;
+	}
+
+	void PostInit(){
+		if(external_hotspot){
+			if(duplicating_hotspot){
+				if(ObjectExists(external_hotspot_id)){
+					//Use the same transform as the original external hotspot.
+					Object@ old_hotspot = ReadObjectFromID(external_hotspot_id);
+					CreateExternalHotspot();
+					external_hotspot_obj.SetScale(old_hotspot.GetScale());
+					external_hotspot_obj.SetTranslation(old_hotspot.GetTranslation());
+					external_hotspot_obj.SetRotation(old_hotspot.GetRotation());
+				}else{
+					external_hotspot_id = -1;
+				}
+			}else if(importing){
+				CreateExternalHotspot();
+				external_hotspot_obj.SetTranslation(external_hotspot_translation);
+				external_hotspot_obj.SetRotation(external_hotspot_rotation);
+				external_hotspot_obj.SetScale(external_hotspot_scale);
+			}else{
+				if(ObjectExists(external_hotspot_id)){
+					@external_hotspot_obj = ReadObjectFromID(external_hotspot_id);
+					external_hotspot_obj.SetName("Drika External Hotspot");
+				}else{
+					CreateExternalHotspot();
+				}
+			}
+
+			if(external_hotspot_obj !is null){
+				external_hotspot_obj.SetSelected(false);
+				external_hotspot_obj.SetSelectable(false);
+			}
+		}
+		target_select.PostInit();
+	}
+
+	void Update(){
+		if(external_hotspot_id != -1 && !ObjectExists(external_hotspot_id) && external_hotspot){
+			external_hotspot = false;
+			external_hotspot_id = -1;
+			@external_hotspot_obj = null;
+		}else if(external_hotspot_id == -1 && external_hotspot){
+			CreateExternalHotspot();
+		}else if(external_hotspot_id != -1 && !external_hotspot){
+			QueueDeleteObjectID(external_hotspot_id);
+			@external_hotspot_obj = null;
+			external_hotspot_id = -1;
+		}
+	}
+
+	void Delete(){
+		if(external_hotspot && ObjectExists(external_hotspot_id)){
+			QueueDeleteObjectID(external_hotspot_id);
+			@external_hotspot_obj = null;
+		}
+		target_select.Delete();
+	}
+
+	void LeftClick(){
+		if(this_hotspot.IsSelected() && ObjectExists(external_hotspot_id)){
+			this_hotspot.SetSelected(false);
+			external_hotspot_obj.SetSelected(true);
+		}else if(ObjectExists(external_hotspot_id) && external_hotspot_obj.IsSelected()){
+			external_hotspot_obj.SetSelected(false);
+			this_hotspot.SetSelected(false);
+		}else{
+			if(ObjectExists(external_hotspot_id)){
+				external_hotspot_obj.SetSelected(false);
+			}
+			this_hotspot.SetSelected(true);
+		}
+	}
+
+	void EditDone(){
+		if(external_hotspot && ObjectExists(external_hotspot_id)){
+			external_hotspot_obj.SetSelected(false);
+			external_hotspot_obj.SetSelectable(false);
+		}
+	}
+
+	void StartEdit(){
+		if(external_hotspot && ObjectExists(external_hotspot_id)){
+			external_hotspot_obj.SetSelectable(true);
+		}
+	}
+
+	void StartSettings(){
+		target_select.CheckAvailableTargets();
+	}
+
+	string GetReference(){
+		return reference_string;
+	}
+
+	string GetDisplayString(){
+		string display_string = "";
+
+		display_string += hotspot_trigger_choices[hotspot_trigger_type] + " ";
+		display_string += target_select.GetTargetDisplayText();
+
+		return display_string;
+	}
+
+	void DrawSettings(){
+		float option_name_width = 170.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Trigger when");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_Combo("###Trigger when", new_hotspot_trigger_type, hotspot_trigger_choices, hotspot_trigger_choices.size())){
+			hotspot_trigger_type = hotspot_trigger_types(new_hotspot_trigger_type);
+			SetTargetOptions();
+			target_select.CheckAvailableTargets();
+		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Reset When False");
+			ImGui_NextColumn();
+			ImGui_Checkbox("##Reset When False", reset_when_false);
+			ImGui_NextColumn();
+		}
+
+		target_select.DrawSelectTargetUI();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("External Hotspot");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###External Hotspot", external_hotspot);
+		ImGui_NextColumn();
+
+		DrawSetReferenceUI();
+	}
+
+	void DrawEditing(){
+		if(IsCharacterFunction()){
+			array<MovementObject@> chars = target_select.GetTargetMovementObjects();
+			for(uint i = 0; i < chars.size(); i++){
+				DebugDrawLine(chars[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			}
+		}else{
+			array<Object@> objs = target_select.GetTargetObjects();
+			for(uint i = 0; i < objs.size(); i++){
+				if(objs[i].GetType() == _item_object){
+					ItemObject@ io = ReadItemID(objs[i].GetID());
+					DebugDrawLine(io.GetPhysicsPosition(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				}
+			}
+		}
+
+		if(@external_hotspot_obj != null){
+			DebugDrawLine(external_hotspot_obj.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+		}
+	}
+
+	void CreateExternalHotspot(){
+		external_hotspot_id = CreateObject("Data/Objects/Hotspots/drika_external_hotspot.xml", false);
+		@external_hotspot_obj = ReadObjectFromID(external_hotspot_id);
+		external_hotspot_obj.SetName("Drika External Hotspot");
+		external_hotspot_obj.SetSelectable(true);
+		external_hotspot_obj.SetTranslatable(true);
+		external_hotspot_obj.SetScalable(true);
+		external_hotspot_obj.SetRotatable(true);
+		external_hotspot_obj.SetScale(vec3(0.25));
+		external_hotspot_obj.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
+		ScriptParams@ external_params = external_hotspot_obj.GetScriptParams();
+		external_params.SetInt("Target Drika Hotspot", this_hotspot.GetID());
+	}
+
+	void ReceiveMessage(string message, int param){
+		//This is triggered by characters entering/exiting the current hotspot.
+		if(!external_hotspot){
+			CheckEvent(message, param);
+		}
+
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+			//Send the enter/exit events to the next element in case those are used in the next element.
+			if(hotspot_trigger_type == while_character_inside && InsideCheck() || hotspot_trigger_type == while_character_outside && !InsideCheck()){
+				DrikaElement@ next_element = drika_elements[drika_indexes[index + 1]];
+				next_element.ReceiveMessage(message, param);
+			}
+		}
+	}
+
+	void ReceiveMessage(string message, int param_1, int param_2){
+		//This function is triggered when a character enters/exits an external hotspot.
+		//Check if the enter/exit signal is from the external hotspot.
+		if(param_2 == external_hotspot_id){
+			CheckEvent(message, param_1);
+		}
+
+
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+			//Send the enter/exit events to the next element in case those are used in the next element.
+			if(hotspot_trigger_type == while_character_inside && InsideCheck() || hotspot_trigger_type == while_character_outside && !InsideCheck()){
+				DrikaElement@ next_element = drika_elements[drika_indexes[index + 1]];
+				next_element.ReceiveMessage(message, param_1, param_2);
+			}
+		}
+	}
+
+	void CheckEvent(string event, int char_id){
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+			return;
+		}
+		if(!MovementObjectExists(char_id)){
+			return;
+		}
+
+		if((hotspot_trigger_type == on_character_enter && event == "enter") ||
+			(hotspot_trigger_type == on_character_exit && event == "exit")){
+				array<MovementObject@> chars = target_select.GetTargetMovementObjects();
+				for(uint i = 0; i < chars.size(); i++){
+					if(chars[i].GetID() == char_id){
+						triggered = true;
+						reference_ids.insertLast(char_id);
+						return;
+					}
+				}
+		}
+	}
+
+	void Reset(){
+		triggered = false;
+		got_items_inside = false;
+		initial_setup_done = false;
+	}
+
+	bool Trigger(){
+		if(!initial_setup_done){
+			reference_ids.resize(0);
+			initial_setup_done = true;
+		}
+
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+			if(hotspot_trigger_type == while_character_inside && InsideCheck() || hotspot_trigger_type == while_character_outside && !InsideCheck()){
+				triggered = true;
+
+				//If this is the last element then just return true to finish the script.
+				if(current_line == int(drika_indexes.size() - 1)){
+					Reset();
+					return true;
+				}
+				DrikaElement@ next_element = drika_elements[drika_indexes[index + 1]];
+				if(next_element.Trigger()){
+					Reset();
+					//The next element has finished so go to the next element.
+					current_line += 1;
+					return true;
+				}
+			}else{
+				//If the while has been triggered, but the next function is not then be able to reset.
+				if(triggered && reset_when_false){
+					//At the end of the script so can't reset the next function.
+					if(current_line == int(drika_indexes.size() - 1)){
+						Reset();
+						return true;
+					}
+					triggered = false;
+					DrikaElement@ next_element = drika_elements[drika_indexes[index + 1]];
+					next_element.Reset();
+				}
+			}
+			return false;
+		}else if(hotspot_trigger_type == on_character_enter || hotspot_trigger_type == on_character_exit){
+			if(triggered){
+				Reset();
+				return true;
+			}else{
+				return false;
+			}
+		}else if(IsItemFunction()){
+			if(!got_items_inside){
+				items_inside = GetItemsInside();
+			}
+			array<Object@> objects = target_select.GetTargetObjects();
+
+
+			if(hotspot_trigger_type == on_item_enter){
+				array<int> new_items_inside = GetItemsInside();
+				for(uint i = 0; i < objects.size(); i++){
+					int obj_id = objects[i].GetID();
+					if(items_inside.find(obj_id) == -1 && new_items_inside.find(obj_id) != -1){
+						reference_ids.insertLast(obj_id);
+						Reset();
+						return true;
+					}
+				}
+				items_inside = new_items_inside;
+			}else if(hotspot_trigger_type == on_item_exit){
+				array<int> new_items_inside = GetItemsInside();
+				for(uint i = 0; i < objects.size(); i++){
+					int obj_id = objects[i].GetID();
+					if(items_inside.find(obj_id) != -1 && new_items_inside.find(obj_id) == -1){
+						reference_ids.insertLast(obj_id);
+						Reset();
+						return true;
+					}
+				}
+				items_inside = new_items_inside;
+			}else if(hotspot_trigger_type == while_item_inside){
+				for(uint i = 0; i < objects.size(); i++){
+					int obj_id = objects[i].GetID();
+					if(items_inside.find(obj_id) != -1){
+						reference_ids.insertLast(obj_id);
+						Reset();
+						return true;
+					}
+				}
+			}else if(hotspot_trigger_type == while_item_outside){
+				for(uint i = 0; i < objects.size(); i++){
+					int obj_id = objects[i].GetID();
+					if(items_inside.find(obj_id) == -1){
+						reference_ids.insertLast(obj_id);
+						Reset();
+						return true;
+					}
+				}
+			}
+
+			items_inside = GetItemsInside();
+			got_items_inside = true;
+			return false;
+		}
+
+		return false;
+	}
+
+	bool InsideCheck(){
+		Object@ target_hotspot = external_hotspot?external_hotspot_obj:this_hotspot;
+		reference_ids.resize(0);
+
+		array<MovementObject@> chars = target_select.GetTargetMovementObjects();
+		for(uint i = 0; i < chars.size(); i++){
+			if(CharacterInside(chars[i], target_hotspot)){
+				if(hotspot_trigger_type == while_character_inside){
+					reference_ids.insertLast(chars[i].GetID());
+				}
+				return true;
+			}else if(hotspot_trigger_type == while_character_outside){
+				reference_ids.insertLast(chars[i].GetID());
+			}
+		}
+		return false;
+	}
+
+	bool CharacterInside(MovementObject@ char, Object@ hotspot_obj){
+		if(hotspot_obj is null){
+			return false;
+		}
+
+		mat4 hotspot_transform = hotspot_obj.GetTransform();
+		vec3 char_translation = char.position;
+		vec3 local_space_translation = invert(hotspot_transform) * char_translation;
+
+		bool is_inside = (	local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
+							local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
+							local_space_translation.z >= -2 && local_space_translation.z <= 2);
+
+		return is_inside;
+	}
+
+	array<int> GetItemsInside(){
+		Object@ target_hotspot = external_hotspot?external_hotspot_obj:this_hotspot;
+		array<int> object_ids = GetObjectIDsType(_item_object);
+		mat4 hotspot_transform = target_hotspot.GetTransform();
+		array<int> inside_ids;
+
+		for(uint i = 0; i < object_ids.size(); i++){
+			ItemObject@ io = ReadItemID(object_ids[i]);
+
+			vec3 io_translation = io.GetPhysicsPosition();
+			vec3 local_space_translation = invert(hotspot_transform) * io_translation;
+
+			if(local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
+				local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
+				local_space_translation.z >= -2 && local_space_translation.z <= 2){
+				inside_ids.insertLast(object_ids[i]);
+			}
+		}
+		return inside_ids;
+	}
+
+	array<int> GetReferenceObjectIDs(){
+		return reference_ids;
+	}
+}
