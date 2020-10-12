@@ -93,7 +93,8 @@ enum identifier_types {	id = 0,
 						box_select = 8,
 						any_character = 9,
 						any_player = 10,
-						any_npc = 11
+						any_npc = 11,
+						any_item = 12
 					};
 
 enum param_types { 	string_param = 0,

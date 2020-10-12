@@ -113,7 +113,7 @@ class DrikaOnEnterExit : DrikaElement{
 			connection_types = {_movement_object};
 			Log(warning, "Character");
 		}else{
-			target_select.target_option = id_option | name_option | item_option | reference_option;
+			target_select.target_option = id_option | name_option | item_option | reference_option | any_item_option;
 			connection_types = {_item_object};
 			Log(warning, "ItemObject");
 		}

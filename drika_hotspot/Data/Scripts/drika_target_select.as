@@ -9,7 +9,8 @@ enum target_options {	id_option = (1<<0),
 						box_select_option = (1<<8),
 						any_character_option = (1<<9),
 						any_player_option = (1<<10),
-						any_npc_option = (1<<11)
+						any_npc_option = (1<<11),
+						any_item_option = (1<<12)
 					};
 
 class BatchObject{
@@ -315,6 +316,10 @@ class DrikaTargetSelect{
 			identifier_choices.insertLast("Any NPC");
 		}
 
+		if((target_option & any_item_option) != 0 && available_item_ids.size() > 0){
+			identifier_choices.insertLast("Any Item");
+		}
+
 		int current_identifier_type = -1;
 
 		for(uint i = 0; i < identifier_choices.size(); i++){
@@ -329,7 +334,8 @@ class DrikaTargetSelect{
 				identifier_type == box_select && identifier_choices[i] == "Box Select" ||
 				identifier_type == any_character && identifier_choices[i] == "Any Character" ||
 				identifier_type == any_player && identifier_choices[i] == "Any Player" ||
-				identifier_type == any_npc && identifier_choices[i] == "Any NPC" ){
+				identifier_type == any_npc && identifier_choices[i] == "Any NPC" ||
+				identifier_type == any_item && identifier_choices[i] == "Any Item" ){
 				current_identifier_type = i;
 				break;
 			}
@@ -374,6 +380,8 @@ class DrikaTargetSelect{
 				identifier_type = any_player;
 			}else if(identifier_choices[current_identifier_type] == "Any NPC"){
 				identifier_type = any_npc;
+			}else if(identifier_choices[current_identifier_type] == "Any Item"){
+				identifier_type = any_item;
 			}
 			target_changed = true;
 		}
@@ -817,6 +825,11 @@ class DrikaTargetSelect{
 					target_objects.insertLast(ReadObjectFromID(char.GetID()));
 				}
 			}
+		}else if(identifier_type == any_item){
+			for(int i = 0; i < GetNumItems(); i++){
+				ItemObject@ item = ReadItem(i);
+				target_objects.insertLast(ReadObjectFromID(item.GetID()));
+			}
 		}
 		return target_objects;
 	}
@@ -961,6 +974,8 @@ class DrikaTargetSelect{
 			return "Any Player";
 		}else if (identifier_type == any_npc){
 			return "Any NPC";
+		}else if (identifier_type == any_item){
+			return "Any Item";
 		}
 		return "NA";
 	}
