@@ -252,15 +252,15 @@ string ToLowerCase(string input){
 }
 
 void SortFunctionsAlphabetical(){
+	sorted_element_names = drika_element_names;
+	sorted_element_names.sortAsc();
 	//Remove empty function names.
-	for(uint i = 0; i < drika_element_names.size(); i++){
-		if(drika_element_names[i] == ""){
-			drika_element_names.removeAt(i);
+	for(uint i = 0; i < sorted_element_names.size(); i++){
+		if(sorted_element_names[i] == ""){
+			sorted_element_names.removeAt(i);
 			i--;
 		}
 	}
-	sorted_element_names = drika_element_names;
-	sorted_element_names.sortAsc();
 }
 
 void SetEnabled(bool val){
@@ -673,12 +673,12 @@ void DrawEditor(){
 
 			for(uint i = 0; i < sorted_element_names.size(); i++){
 				drika_element_types current_element_type = drika_element_types(drika_element_names.find(sorted_element_names[i]));
-				if(current_element_type == none || current_element_type == drika_on_item_enter_exit){
+				if(current_element_type == none){
 					continue;
 				}
 				ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
 				ImGui_AlignTextToFramePadding();
-				ImGui_Text(sorted_element_names[i]);
+				ImGui_Text(drika_element_names[current_element_type] + " " + current_element_type);
 				ImGui_PopStyleColor();
 
 				ImGui_NextColumn();
@@ -1844,7 +1844,7 @@ string GetUniqueID(){
 void AddFunctionMenuItems(){
 	for(uint i = 0; i < sorted_element_names.size(); i++){
 		drika_element_types current_element_type = drika_element_types(drika_element_names.find(sorted_element_names[i]));
-		if(current_element_type == none || current_element_type == drika_on_item_enter_exit){
+		if(current_element_type == none){
 			continue;
 		}
 		ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
