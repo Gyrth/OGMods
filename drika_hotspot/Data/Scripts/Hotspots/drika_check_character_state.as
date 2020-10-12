@@ -40,6 +40,7 @@ class DrikaCheckCharacterState : DrikaElement{
 	DrikaGoToLineSelect@ continue_element;
 	array<bool> foot_down;
 	bool check_all;
+	bool check_all_known;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		state_choice = state_choices(GetJSONInt(params, "state_check", awake));
@@ -48,6 +49,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		proximity_distance = GetJSONFloat(params, "proximity_distance", 1.0);
 		continue_if_false = GetJSONBool(params, "continue_if_false", false);
 		check_all = GetJSONBool(params, "check_all", false);
+		check_all_known = GetJSONBool(params, "check_all_known", false);
 		@continue_element = DrikaGoToLineSelect("continue_line", params);
 
 		@target_select = DrikaTargetSelect(this, params);
@@ -85,6 +87,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		data["state_check"] = JSONValue(state_choice);
 		data["equals"] = JSONValue(equals);
 		data["check_all"] = JSONValue(check_all);
+		data["check_all_known"] = JSONValue(check_all_known);
 		if(state_choice == knows_about){
 			known_target.SaveIdentifier(data);
 		}else if(state_choice == in_proximity){
@@ -158,6 +161,16 @@ class DrikaCheckCharacterState : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_NextColumn();
 			known_target.DrawSelectTargetUI();
+
+			if(known_target.identifier_type == team){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Check All Known");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_Checkbox("##Check All Known", check_all_known);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+			}
 		}else if(state_choice == in_proximity){
 			ImGui_Separator();
 			ImGui_Text("Proximity Target");
@@ -233,7 +246,7 @@ class DrikaCheckCharacterState : DrikaElement{
 					targets[i].Execute(command);
 					state = (targets[i].GetIntVar("self_id") != -1);
 					//Return true immediately when we don't have to check all characters and the check returns true.
-					if(!check_all && state == equals){
+					if(!check_all_known && state == equals){
 						all_in_state = true;
 						break;
 					}
