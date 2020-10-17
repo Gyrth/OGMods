@@ -6,7 +6,11 @@ enum hotspot_trigger_types	{
 								on_item_enter = 4,
 								on_item_exit = 5,
 								while_item_inside = 6,
-								while_item_outside = 7
+								while_item_outside = 7,
+								on_object_enter = 8,
+								on_object_exit = 9,
+								while_object_inside = 10,
+								while_object_outside = 11
 							};
 
 array<string> hotspot_trigger_choices = {
@@ -17,7 +21,11 @@ array<string> hotspot_trigger_choices = {
 											"On Item Enter",
 											"On Item Exit",
 											"While Item Inside",
-											"While Item Outside"
+											"While Item Outside",
+											"On Object Enter",
+											"On Object Exit",
+											"While Object Inside",
+											"While Object Outside"
 										};
 
 class DrikaOnEnterExit : DrikaElement{
@@ -26,8 +34,8 @@ class DrikaOnEnterExit : DrikaElement{
 	int external_hotspot_id;
 	Object@ external_hotspot_obj = null;
 	bool reset_when_false;
-	array<int> items_inside;
-	bool got_items_inside = false;
+	array<int> objects_inside;
+	bool got_objects_inside = false;
 	array<int> reference_ids;
 	bool initial_setup_done = false;
 
@@ -54,8 +62,6 @@ class DrikaOnEnterExit : DrikaElement{
 		//Converting old savedata into new, to be removed later on.
 		drika_element_types function_type = drika_element_types(params["function"].asInt());
 		if(function_type == drika_on_item_enter_exit){
-			Log(warning, "Found old savedata itementerexit");
-
 			int old_trigger_type = GetJSONInt(params, "hotspot_trigger_type", 0);
 			if(old_trigger_type == 0){
 				hotspot_trigger_type = on_item_enter;
@@ -66,13 +72,9 @@ class DrikaOnEnterExit : DrikaElement{
 			}else if(old_trigger_type == 3){
 				hotspot_trigger_type = while_item_outside;
 			}
-			Log(warning, "itementerexit trigger type " + hotspot_trigger_type);
-
 		}else{
 			int old_character_type = GetJSONInt(params, "target_character_type", -1);
 			if(old_character_type != -1){
-				Log(warning, "Found old savedata characterenterexit");
-
 				if(old_character_type == 1){
 					target_select.identifier_type = team;
 				}else if(old_character_type == 2){
@@ -111,11 +113,12 @@ class DrikaOnEnterExit : DrikaElement{
 		if(IsCharacterFunction()){
 			target_select.target_option = id_option | name_option | character_option | reference_option | team_option | any_character_option | any_player_option | any_npc_option;
 			connection_types = {_movement_object};
-			Log(warning, "Character");
-		}else{
+		}else if(IsItemFunction()){
 			target_select.target_option = id_option | name_option | item_option | reference_option | any_item_option;
 			connection_types = {_item_object};
-			Log(warning, "ItemObject");
+		}else{
+			target_select.target_option = id_option | name_option | reference_option;
+			connection_types = {_env_object};
 		}
 	}
 
@@ -127,6 +130,13 @@ class DrikaOnEnterExit : DrikaElement{
 	}
 	bool IsItemFunction(){
 		if(hotspot_trigger_type == on_item_enter || hotspot_trigger_type == on_item_exit || hotspot_trigger_type == while_item_inside || hotspot_trigger_type == while_item_outside){
+			return true;
+		}
+		return false;
+	}
+
+	bool IsObjectFunction(){
+		if(hotspot_trigger_type == on_object_enter || hotspot_trigger_type == on_object_exit || hotspot_trigger_type == while_object_inside || hotspot_trigger_type == while_object_outside){
 			return true;
 		}
 		return false;
@@ -161,7 +171,9 @@ class DrikaOnEnterExit : DrikaElement{
 				data["external_hotspot_scale"].append(scale.z);
 			}
 		}
-		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside ||
+			hotspot_trigger_type == while_item_inside || hotspot_trigger_type == while_item_outside ||
+			hotspot_trigger_type == while_object_inside || hotspot_trigger_type == while_object_outside){
 			data["reset_when_false"] = JSONValue(reset_when_false);
 		}
 		target_select.SaveIdentifier(data);
@@ -289,7 +301,9 @@ class DrikaOnEnterExit : DrikaElement{
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside ||
+			hotspot_trigger_type == while_item_inside || hotspot_trigger_type == while_item_outside ||
+			hotspot_trigger_type == while_object_inside || hotspot_trigger_type == while_object_outside){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Reset When False");
 			ImGui_NextColumn();
@@ -314,13 +328,18 @@ class DrikaOnEnterExit : DrikaElement{
 			for(uint i = 0; i < chars.size(); i++){
 				DebugDrawLine(chars[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
-		}else{
+		}else if(IsItemFunction()){
 			array<Object@> objs = target_select.GetTargetObjects();
 			for(uint i = 0; i < objs.size(); i++){
 				if(objs[i].GetType() == _item_object){
 					ItemObject@ io = ReadItemID(objs[i].GetID());
 					DebugDrawLine(io.GetPhysicsPosition(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 				}
+			}
+		}else{
+			array<Object@> objs = target_select.GetTargetObjects();
+			for(uint i = 0; i < objs.size(); i++){
+				DebugDrawLine(objs[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
 		}
 
@@ -398,7 +417,7 @@ class DrikaOnEnterExit : DrikaElement{
 
 	void Reset(){
 		triggered = false;
-		got_items_inside = false;
+		got_objects_inside = false;
 		initial_setup_done = false;
 	}
 
@@ -446,38 +465,38 @@ class DrikaOnEnterExit : DrikaElement{
 				return false;
 			}
 		}else if(IsItemFunction()){
-			if(!got_items_inside){
-				items_inside = GetItemsInside();
+			if(!got_objects_inside){
+				objects_inside = GetItemsInside();
 			}
 			array<Object@> objects = target_select.GetTargetObjects();
 
 
 			if(hotspot_trigger_type == on_item_enter){
-				array<int> new_items_inside = GetItemsInside();
+				array<int> new_objects_inside = GetItemsInside();
 				for(uint i = 0; i < objects.size(); i++){
 					int obj_id = objects[i].GetID();
-					if(items_inside.find(obj_id) == -1 && new_items_inside.find(obj_id) != -1){
+					if(objects_inside.find(obj_id) == -1 && new_objects_inside.find(obj_id) != -1){
 						reference_ids.insertLast(obj_id);
 						Reset();
 						return true;
 					}
 				}
-				items_inside = new_items_inside;
+				objects_inside = new_objects_inside;
 			}else if(hotspot_trigger_type == on_item_exit){
-				array<int> new_items_inside = GetItemsInside();
+				array<int> new_objects_inside = GetItemsInside();
 				for(uint i = 0; i < objects.size(); i++){
 					int obj_id = objects[i].GetID();
-					if(items_inside.find(obj_id) != -1 && new_items_inside.find(obj_id) == -1){
+					if(objects_inside.find(obj_id) != -1 && new_objects_inside.find(obj_id) == -1){
 						reference_ids.insertLast(obj_id);
 						Reset();
 						return true;
 					}
 				}
-				items_inside = new_items_inside;
+				objects_inside = new_objects_inside;
 			}else if(hotspot_trigger_type == while_item_inside){
 				for(uint i = 0; i < objects.size(); i++){
 					int obj_id = objects[i].GetID();
-					if(items_inside.find(obj_id) != -1){
+					if(objects_inside.find(obj_id) != -1){
 						reference_ids.insertLast(obj_id);
 						Reset();
 						return true;
@@ -486,7 +505,7 @@ class DrikaOnEnterExit : DrikaElement{
 			}else if(hotspot_trigger_type == while_item_outside){
 				for(uint i = 0; i < objects.size(); i++){
 					int obj_id = objects[i].GetID();
-					if(items_inside.find(obj_id) == -1){
+					if(objects_inside.find(obj_id) == -1){
 						reference_ids.insertLast(obj_id);
 						Reset();
 						return true;
@@ -494,8 +513,60 @@ class DrikaOnEnterExit : DrikaElement{
 				}
 			}
 
-			items_inside = GetItemsInside();
-			got_items_inside = true;
+			objects_inside = GetItemsInside();
+			got_objects_inside = true;
+			return false;
+		}else if(IsObjectFunction()){
+			if(!got_objects_inside){
+				objects_inside = GetObjectsInside();
+			}
+			array<Object@> objects = target_select.GetTargetObjects();
+
+
+			if(hotspot_trigger_type == on_object_enter){
+				array<int> new_objects_inside = GetObjectsInside();
+				for(uint i = 0; i < objects.size(); i++){
+					int obj_id = objects[i].GetID();
+					if(objects_inside.find(obj_id) == -1 && new_objects_inside.find(obj_id) != -1){
+						reference_ids.insertLast(obj_id);
+						Reset();
+						return true;
+					}
+				}
+				objects_inside = new_objects_inside;
+			}else if(hotspot_trigger_type == on_object_exit){
+				array<int> new_objects_inside = GetObjectsInside();
+				for(uint i = 0; i < objects.size(); i++){
+					int obj_id = objects[i].GetID();
+					if(objects_inside.find(obj_id) != -1 && new_objects_inside.find(obj_id) == -1){
+						reference_ids.insertLast(obj_id);
+						Reset();
+						return true;
+					}
+				}
+				objects_inside = new_objects_inside;
+			}else if(hotspot_trigger_type == while_object_inside){
+				for(uint i = 0; i < objects.size(); i++){
+					int obj_id = objects[i].GetID();
+					if(objects_inside.find(obj_id) != -1){
+						reference_ids.insertLast(obj_id);
+						Reset();
+						return true;
+					}
+				}
+			}else if(hotspot_trigger_type == while_object_outside){
+				for(uint i = 0; i < objects.size(); i++){
+					int obj_id = objects[i].GetID();
+					if(objects_inside.find(obj_id) == -1){
+						reference_ids.insertLast(obj_id);
+						Reset();
+						return true;
+					}
+				}
+			}
+
+			objects_inside = GetObjectsInside();
+			got_objects_inside = true;
 			return false;
 		}
 
@@ -547,6 +618,26 @@ class DrikaOnEnterExit : DrikaElement{
 
 			vec3 io_translation = io.GetPhysicsPosition();
 			vec3 local_space_translation = invert(hotspot_transform) * io_translation;
+
+			if(local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
+				local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
+				local_space_translation.z >= -2 && local_space_translation.z <= 2){
+				inside_ids.insertLast(object_ids[i]);
+			}
+		}
+		return inside_ids;
+	}
+
+	array<int> GetObjectsInside(){
+		Object@ target_hotspot = external_hotspot?external_hotspot_obj:this_hotspot;
+		array<int> object_ids = GetObjectIDsType(_env_object);
+		mat4 hotspot_transform = target_hotspot.GetTransform();
+		array<int> inside_ids;
+
+		for(uint i = 0; i < object_ids.size(); i++){
+			Object@ obj = ReadObjectFromID(object_ids[i]);
+			vec3 obj_translation = obj.GetTranslation();
+			vec3 local_space_translation = invert(hotspot_transform) * obj_translation;
 
 			if(local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
 				local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
