@@ -575,7 +575,7 @@ class DrikaAnimation : DrikaElement{
 
 			double unit = sqx + sqy + sqz + sqw; // if normalised is one, otherwise is correction factor
 			double test = rotation.x * rotation.w - rotation.y * rotation.z;
-			if(test > 0.499*unit) { // singularity at north pole
+			if(test > 0.49999*unit) { // singularity at north pole
 				x_rot = PI / 2.0f;
 				y_rot = 2.0f * atan2(rotation.y, rotation.x);
 				z_rot = 0.0f;
@@ -585,7 +585,7 @@ class DrikaAnimation : DrikaElement{
 				x_rot = norm.x;
 				y_rot = norm.y;
 				z_rot = norm.z;
-			}else if(test < -0.499*unit) { // singularity at south pole
+			}else if(test < -0.49999*unit) { // singularity at south pole
 				y_rot = -2.0f * atan2(rotation.y, rotation.x);
 				x_rot = -PI / 2.0f;
 				z_rot = 0.0f;

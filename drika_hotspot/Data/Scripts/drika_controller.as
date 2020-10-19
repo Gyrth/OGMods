@@ -1554,6 +1554,7 @@ void SetCameraPosition(){
 
 		if(camera_settings_changed){
 			camera.SetDistance(0.0f);
+			camera.SetFOV(camera_zoom);
 			camera.SetPos(camera_position);
 			camera.SetXRotation(camera_rotation.x);
 			camera.SetYRotation(camera_rotation.y);
