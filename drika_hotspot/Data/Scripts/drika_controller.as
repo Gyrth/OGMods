@@ -196,7 +196,7 @@ void SetWindowDimensions(int width, int height){
 }
 
 void PostScriptReload(){
-	
+
 }
 
 void WriteMusicXML(string music_path, string song_name, string song_path){

@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-0.46563" t1="0.469248" t2="-4.52418" s0="1" s1="1" s2="1" q0="0.229328" q1="-0.255928" q2="0.0626371" q3="0.937009" euler_x="0.480053" euler_y="-0.533259" euler_z="0" id="1">
+    <CameraObject t0="0.145252" t1="1.30499" t2="-3.98435" s0="1" s1="1" s2="1" q0="0.176877" q1="-0.368122" q2="0.0715529" q3="0.90999" euler_x="0.383958" euler_y="-0.768817" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.16529" t1="-3.42134" t2="1.76417" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -223,6 +223,9 @@
         <parameters />
     </EnvObject>
     <EnvObject name="Set Velocity Helper" t0="26.1629" t1="-2.17828" t2="9.43144" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Play Sound Helper" t0="-3.81704" t1="0.42616" t2="-7.66277" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="4.56839" t1="-2.71935" t2="-7.56654" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="26" color_r="0" color_g="0.658842" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
@@ -1527,11 +1530,11 @@
     <EnvObject name="Play Sound Helper" t0="28.6837" t1="-0.40576" t2="-3.76996" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="356" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="-3.81704" t1="-1.57384" t2="-7.66277" s0="0.444444" s1="0.444444" s2="0.444444" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="361" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot t0="-3.81704" t1="-1.57384" t2="-7.66277" s0="0.498457" s1="0.498457" s2="0.498457" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="361" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
             <parameter name="Run in EditorMode" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:8,&quot;identifier&quot;:&quot;rocket&quot;,&quot;identifier_type&quot;:3,&quot;reference_string&quot;:&quot;&quot;},{&quot;fade_in_duration&quot;:1000,&quot;fade_in_tween_type&quot;:0,&quot;function&quot;:36,&quot;position&quot;:[1874,50],&quot;rotation&quot;:-9,&quot;text_content&quot;:&quot;Rocket enters!&quot;,&quot;ui_element_identifier&quot;:&quot;3611&quot;,&quot;ui_function&quot;:2,&quot;use_fade_in&quot;:true,&quot;use_move_in&quot;:false},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;play_sound_method&quot;:0,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:8,&quot;identifier&quot;:&quot;rocket&quot;,&quot;identifier_type&quot;:3,&quot;reference_string&quot;:&quot;&quot;},{&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:5,&quot;duration_method&quot;:0,&quot;ease_function&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier_type&quot;:7,&quot;key_data&quot;:[{&quot;rotation&quot;:[-0.70710676908493042,0,0,0.70710676908493042],&quot;scale&quot;:[1,1,1],&quot;time&quot;:0,&quot;translation&quot;:[-3.817039966583252,11.426159858703613,-7.6627697944641113]},{&quot;rotation&quot;:[2.9802322387695312e-08,-0.70710670948028564,-0.7071068286895752,-2.9802322387695312e-08],&quot;scale&quot;:[1,1,1],&quot;time&quot;:1,&quot;translation&quot;:[-3.817039966583252,0.92615985870361328,-7.6627697944641113]},{&quot;rotation&quot;:[-5.9604651880817983e-08,-0.70710670948028564,0.70710670948028564,-5.9604644775390625e-08],&quot;scale&quot;:[1,1,1],&quot;time&quot;:2,&quot;translation&quot;:[-3.817039966583252,0.92615973949432373,-7.6627693176269531]},{&quot;rotation&quot;:[-0.70710670948028564,8.9406967163085938e-08,-8.9406974268513295e-08,-0.70710670948028564],&quot;scale&quot;:[1,1,1],&quot;time&quot;:3,&quot;translation&quot;:[-3.817039966583252,8.4261598587036133,-7.6627693176269531]},{&quot;rotation&quot;:[-0,1.0430812125150624e-07,-4.4703483581542969e-08,-0.99999988079071045],&quot;scale&quot;:[1,1,1],&quot;time&quot;:4,&quot;translation&quot;:[-3.817039966583252,8.4261598587036133,-7.6627693176269531]},{&quot;rotation&quot;:[-1.5893263594080054e-08,0.99999988079071045,0,1.1920928955078125e-07],&quot;scale&quot;:[1,1,1],&quot;time&quot;:5,&quot;translation&quot;:[-3.817039966583252,8.4261598587036133,-7.6627693176269531]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:false},{&quot;fade_in_duration&quot;:1000,&quot;fade_in_tween_type&quot;:0,&quot;function&quot;:36,&quot;position&quot;:[1874,50],&quot;rotation&quot;:-9,&quot;text_content&quot;:&quot;Rocket enters!&quot;,&quot;ui_element_identifier&quot;:&quot;3611&quot;,&quot;ui_function&quot;:2,&quot;use_fade_in&quot;:true,&quot;use_move_in&quot;:false},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;placeholder_id&quot;:25,&quot;play_sound_method&quot;:0,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0}]}&#x0A;' />
             <parameter name="Show UI Grid" type="int" val="1" />
             <parameter name="Transform Relative" type="int" val="1" />
             <parameter name="UI Snap Scale" type="int" val="20" />

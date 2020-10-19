@@ -42,7 +42,9 @@
 #include "hotspots/drika_checkpoint.as"
 #include "drika_quick_launch.as"
 
-float PI = 3.14159265359f;
+const float PI = 3.14159265359f;
+double radToDeg = (180.0f / PI);
+double degToRad = (PI / 180.0f);
 bool show_editor = false;
 bool run_in_editormode = true;
 bool has_closed = true;
