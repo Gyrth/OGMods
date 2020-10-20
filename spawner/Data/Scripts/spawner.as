@@ -2,7 +2,7 @@ bool show = false;
 int voice_preview = 1;
 bool select = false;
 int icon_size = 155;
-int title_height = 25;
+int title_height = 23;
 int scrollbar_width = 10;
 int padding = 10;
 bool open_header = true;
@@ -75,11 +75,14 @@ class GUISpawnerItem{
 			ImGui_PushStyleColor(ImGuiCol_ChildBg, item_background);
 		}
 
-		ImGui_BeginChild(id + "button", vec2(icon_size), true, ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui_BeginChild(id + "button", vec2(icon_size, icon_size + title_height), true, ImGuiWindowFlags_NoScrollWithMouse);
 		ImGui_Indent((title_height / 2.0f) - (padding / 2.0f));
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text(title);
+		ImGui_Unindent((title_height / 2.0f) - (padding / 2.0f));
 		ImGui_PushStyleColor(ImGuiCol_Button, vec4(0.0f));
-		if(ImGui_ImageButton(icon, vec2(icon_size - title_height,icon_size - title_height))){
+		/* bool ImGui_ImageButton(const TextureAssetRef &in texture, const vec2 &in size, const vec2 &in uv0 = vec2(0,0), const vec2 &in uv1 = vec2(1,1), int frame_padding = -1, const vec4 &in background_color = vec4(0,0,0,0), const vec4 &in tint_color = vec4(1,1,1,1)); */
+		if(ImGui_ImageButton(icon, vec2(icon_size, icon_size), vec2(0,0), vec2(1,1), 0, vec4(0,0,0,0), vec4(1,1,1,1))){
 			if(currently_selected == id){
 				ClearSpawnSettings();
 			}else{
@@ -87,7 +90,6 @@ class GUISpawnerItem{
 				SetSpawnSettings(path);
 			}
 		}
-		ImGui_Unindent((title_height / 2.0f) - (padding / 2.0f));
 		ImGui_PopStyleColor(2);
 
 		ImGui_EndChild();
@@ -644,14 +646,14 @@ void AddCategory(GUISpawnerCategory@ category){
 
 	if(ImGui_TreeNodeEx(category.category_name, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
 		ImGui_Unindent(30.0f);
-		ImGui_BeginChild(category.category_name, vec2(ImGui_GetWindowWidth(), icon_size), false, ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui_BeginChild(category.category_name, vec2(ImGui_GetWindowWidth(), icon_size + title_height), false, ImGuiWindowFlags_NoScrollWithMouse);
 		float row_size = 0.0f;
 		for(uint i = 0; i < category.spawner_items.size(); i++){
 			row_size += icon_size + padding;
 			if(row_size > ImGui_GetWindowWidth()){
 				row_size = icon_size + padding;
 				ImGui_EndChild();
-				ImGui_BeginChild("child " + i, vec2(ImGui_GetWindowWidth(), icon_size), false, ImGuiWindowFlags_NoScrollWithMouse);
+				ImGui_BeginChild("child " + i, vec2(ImGui_GetWindowWidth(), icon_size + title_height), false, ImGuiWindowFlags_NoScrollWithMouse);
 			}
 			ImGui_SameLine();
 			category.spawner_items[i].DrawItem();
