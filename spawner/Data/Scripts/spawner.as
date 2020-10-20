@@ -327,10 +327,29 @@ void SpawnObject(string load_item_path){
 
 array<GUISpawnerItem@> QuerySpawnerItems(string query){
 	array<GUISpawnerItem@> new_list;
-	new_list.resize(0);
-	for(uint i = 0; i < all_items.size(); i++){
-		if(ToLowerCase(all_items[i].title).findFirst(ToLowerCase(query)) != -1 || ToLowerCase(all_items[i].category).findFirst(ToLowerCase(query)) != -1){
-			new_list.insertLast(all_items[i]);
+	//If the query is empty then just return the whole database.
+	if(query == ""){
+		new_list = all_items;
+	}else{
+		//The query can be multiple words separated by spaces.
+		array<string> split_query = query.split(" ");
+		for(uint i = 0; i < all_items.size(); i++){
+			string item_name = ToLowerCase(all_items[i].title);
+			string category_name = ToLowerCase(all_items[i].category);
+			bool found_result = true;
+
+			for(uint j = 0; j < split_query.size(); j++){
+				//Could not find part of query in the database.
+				string query_part = ToLowerCase(split_query[j]);
+				if(item_name.findFirst(query_part) == -1 && category_name.findFirst(query_part) == -1){
+					found_result = false;
+					break;
+				}
+			}
+			//Only if all parts of the query are found then add the result.
+			if(found_result){
+				new_list.insertLast(all_items[i]);
+			}
 		}
 	}
 	return new_list;
