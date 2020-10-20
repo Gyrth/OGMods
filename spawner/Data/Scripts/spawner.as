@@ -16,7 +16,7 @@ bool rand_x = false;
 bool rand_y = false;
 bool rand_z = false;
 float paint_max_distance = 1.0;
-string currently_selected = "";
+int currently_selected = -1;
 string load_item_path = "";
 array<vec3> painted_objects;
 array<vec3> painted_positions;
@@ -45,7 +45,7 @@ class GUISpawnerItem{
 	string title;
 	string category;
 	string path;
-	uint id;
+	int id;
 	TextureAssetRef icon;
 	SpawnerItem spawner_item;
 	bool has_thumbnail = false;
@@ -69,10 +69,9 @@ class GUISpawnerItem{
 	}
 
 	void DrawItem(){
-		if(currently_selected == path){
+		if(currently_selected == id){
 			ImGui_PushStyleColor(ImGuiCol_ChildBg, item_clicked);
-		}
-		else{
+		}else{
 			ImGui_PushStyleColor(ImGuiCol_ChildBg, item_background);
 		}
 
@@ -81,10 +80,10 @@ class GUISpawnerItem{
 		ImGui_Text(title);
 		ImGui_PushStyleColor(ImGuiCol_Button, vec4(0.0f));
 		if(ImGui_ImageButton(icon, vec2(icon_size - title_height,icon_size - title_height))){
-			if(currently_selected == path){
+			if(currently_selected == id){
 				ClearSpawnSettings();
 			}else{
-				currently_selected = path;
+				currently_selected = id;
 				SetSpawnSettings(path);
 			}
 		}
@@ -182,7 +181,8 @@ void GetAllSpawnerItems(){
 	array<SpawnerItem> spawner_items = ModGetAllSpawnerItems();
 	for(uint i = 0; i < spawner_items.size(); i++){
 		TextureAssetRef icon_texture = default_texture;
-		all_items.insertLast(GUISpawnerItem(spawner_items[i].GetCategory(), spawner_items[i].GetTitle(), spawner_items[i].GetPath(), i, icon_texture, spawner_items[i]));
+		GUISpawnerItem @new_item = GUISpawnerItem(spawner_items[i].GetCategory(), spawner_items[i].GetTitle(), spawner_items[i].GetPath(), i, icon_texture, spawner_items[i]);
+		all_items.insertLast(new_item);
 	}
 }
 
@@ -238,7 +238,7 @@ void Update(int paused){
 
 void ClearSpawnSettings(){
 	load_item_path = "";
-	currently_selected = "";
+	currently_selected = -1;
 	spawn = false;
 	SetPlaceholderVisible(false);
 }
@@ -394,7 +394,7 @@ array<GUISpawnerCategory@> SortIntoCategories(array<GUISpawnerItem@> unsorted){
 
 void DrawGUI(){
 	if(show){
-		if(paint && currently_selected != ""){
+		if(paint && currently_selected != -1){
 			ImGui_PushStyleColor(ImGuiCol_WindowBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
 			ImGui_Begin("PaintContainer", show, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBringToFrontOnFocus);
 			ImGui_PopStyleColor(1);
@@ -669,17 +669,67 @@ void SetPlaceholderModel(){
 		placeholder_object.SetPreview("");
 		return;
 	}
-	Log(warning, "Creating object " + load_item_path);
-	int id = CreateObject(load_item_path);
-	Object@ obj = ReadObjectFromID(id);
+
+	string placeholder_path = GetObjectPath(load_item_path);
+	Log(warning, "placeholder_path " + placeholder_path);
 	Object@ placeholder_box = ReadObjectFromID(placeholder_id);
 	PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder_box);
-	if(obj.GetType() == _env_object){
-		placeholder_object.SetPreview(load_item_path);
+	placeholder_object.SetPreview(placeholder_path);
+}
+
+string GetObjectPath(string target_path){
+	string object_path = "";
+	string data;
+
+	if(LoadFile(target_path)){
+		while(true){
+			string line = GetFileLine();
+			if(line == "end"){
+				break;
+			}else{
+				data += line + "\n";
+			}
+		}
+
+		//Remove all spaces to eliminate style differences.
+		string xml_content = join(data.split(" "), "");
+		//The target is an env_object, so just use that as the placeholder object.
+		if(GetStringBetween(xml_content, "<Model>", "</Model>") != ""){
+			return target_path;
+		}else{
+			//Check if the target xml is an ItemObject or a Character.
+			string obj_path = GetStringBetween(xml_content, "obj_path=\"", "\"");
+			if(obj_path != ""){
+				//Target is an ItemObject.
+				return GetObjectPath(obj_path);
+			}else{
+				//Check if the target xml is an Actor.
+				string actor_model = GetStringBetween(xml_content, "<Character>", "</Character>");
+				if(actor_model != ""){
+					return GetObjectPath(actor_model);
+				}else{
+					Log(warning, "Could not find model in " + target_path);
+				}
+			}
+		}
 	}else{
-		placeholder_object.SetPreview("");
+		Log(error, "Error loading file: " + target_path);
 	}
-	QueueDeleteObjectID(id);
+
+	return object_path;
+}
+
+string GetStringBetween(string source, string first, string second){
+	array<string> first_cut = source.split(first);
+	if(first_cut.size() <= 1){
+		return "";
+	}
+	array<string> second_cut = first_cut[1].split(second);
+
+	if(second_cut.size() <= 1){
+		return "";
+	}
+	return second_cut[0];
 }
 
 /* void Menu(){
