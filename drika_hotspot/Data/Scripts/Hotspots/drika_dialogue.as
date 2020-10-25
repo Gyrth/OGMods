@@ -1590,6 +1590,10 @@ class DrikaDialogue : DrikaElement{
 			level.SendMessage("drika_dialogue_add_say " + nametag + " " + "\"" + say_text + "\"");
 
 			return false;
+		}else if(say_started == true && (GetInputPressed(0, "skip_dialogue") && !preview)){
+			SetTargetTalking(false);
+			SkipWholeDialogue();
+			return false;
 		}else if(dialogue_done == true){
 			if(GetInputPressed(0, "attack") && !preview){
 				level.SendMessage("drika_dialogue_skip");
@@ -1598,10 +1602,7 @@ class DrikaDialogue : DrikaElement{
 				return false;
 			}
 		}else if(say_started == true){
-			if(GetInputPressed(0, "skip_dialogue") && !preview){
-				SkipWholeDialogue();
-				return false;
-			}else if(GetInputPressed(0, "attack") && !preview){
+			if(GetInputPressed(0, "attack") && !preview){
 				level.SendMessage("drika_dialogue_skip");
 				SetTargetTalking(false);
 
@@ -1668,18 +1669,8 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SkipWholeDialogue(){
-		say_started = false;
-		say_timer = 0.0;
-		wait_timer = 0.0;
+		Reset();
 		while(true){
-			//When ending a dialogue just let it trigger.
-			if(GetCurrentElement().drika_element_type == drika_dialogue){
-				DrikaDialogue@ dialogue_function = cast<DrikaDialogue@>(GetCurrentElement());
-				if(dialogue_function.dialogue_function == end){
-					break;
-				}
-			}
-
 			//No end dialogue was found and the script has ended.
 			if(current_line == int(drika_indexes.size() - 1)){
 				script_finished = true;
@@ -1689,10 +1680,21 @@ class DrikaDialogue : DrikaElement{
 				display_index = drika_indexes[current_line];
 			}
 
+			//When ending a dialogue just let it trigger.
+			if(GetCurrentElement().drika_element_type == drika_dialogue){
+				DrikaDialogue@ dialogue_function = cast<DrikaDialogue@>(GetCurrentElement());
+				if(dialogue_function.dialogue_function == end){
+					break;
+				}else if(dialogue_function.dialogue_function == choice){
+					//A dialogue choice can not be skipped.
+					break;
+				}
+			}
+
 			//Skip any dialogue say or sounds.
 			if(GetCurrentElement().drika_element_type == drika_dialogue){
 				DrikaDialogue@ dialogue_function = cast<DrikaDialogue@>(GetCurrentElement());
-				if(dialogue_function.dialogue_function == say || dialogue_function.dialogue_function == set_camera_position || dialogue_function.dialogue_function == fade_to_black){
+				if(dialogue_function.dialogue_function == say || dialogue_function.dialogue_function == fade_to_black){
 					continue;
 				}
 			}else if(GetCurrentElement().drika_element_type == drika_go_to_line){
