@@ -33,6 +33,7 @@ class DrikaDialogue : DrikaElement{
 	array<string> say_text_split;
 	bool say_started = false;
 	float say_timer = 0.0;
+	bool auto_continue;
 	float wait_timer = 0.0;
 	int actor_id;
 	string actor_name;
@@ -145,6 +146,7 @@ class DrikaDialogue : DrikaElement{
 		dialogue_color = GetJSONVec4(params, "dialogue_color", vec4(1));
 		voice = GetJSONInt(params, "voice", 0);
 		avatar_path = GetJSONString(params, "avatar_path", "None");
+		auto_continue = GetJSONBool(params, "auto_continue", false);
 		if(avatar_path != "None"){
 			avatar = LoadTexture(avatar_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 		}
@@ -231,6 +233,7 @@ class DrikaDialogue : DrikaElement{
 
 		if(dialogue_function == say){
 			data["say_text"] = JSONValue(say_text);
+			data["auto_continue"] = JSONValue(auto_continue);
 		}else if(dialogue_function == actor_settings){
 			data["dialogue_color"] = JSONValue(JSONarrayValue);
 			data["dialogue_color"].append(dialogue_color.x);
@@ -719,10 +722,16 @@ class DrikaDialogue : DrikaElement{
 
 		if(dialogue_function == say){
 			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Auto Continue");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("", auto_continue);
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Text");
 			ImGui_NextColumn();
 			ImGui_SetTextBuf(say_text);
-			ImGui_PushItemWidth(second_column_width);
 
 			if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
 				ImGui_SetKeyboardFocusHere(0);
@@ -1595,7 +1604,7 @@ class DrikaDialogue : DrikaElement{
 			SkipWholeDialogue();
 			return false;
 		}else if(dialogue_done == true){
-			if(GetInputPressed(0, "attack") && !preview){
+			if((GetInputPressed(0, "attack") || auto_continue) && !preview){
 				level.SendMessage("drika_dialogue_skip");
 				return true;
 			}else{
