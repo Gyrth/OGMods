@@ -85,15 +85,6 @@ array<CheckpointData@> checkpoints;
 bool loading_checkpoint = false;
 float PI = 3.14159265359f;
 
-enum WeaponSlot {
-    _held_left = 0,
-    _held_right = 1,
-    _sheathed_left = 2,
-    _sheathed_right = 3,
-    _sheathed_left_sheathe = 4,
-    _sheathed_right_sheathe = 5,
-};
-
 const int _movement_state = 0;  // character is moving on the ground
 const int _ground_state = 1;  // character has fallen down or is raising up, ATM ragdolls handle most of this
 const int _attack_state = 2;  // character is performing an attack

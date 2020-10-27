@@ -121,6 +121,15 @@ enum special_fonts	{
 						blue
 					}
 
+enum WeaponSlot {
+    _held_left = 0,
+    _held_right = 1,
+    _sheathed_left = 2,
+    _sheathed_right = 3,
+    _sheathed_left_sheathe = 4,
+    _sheathed_right_sheathe = 5,
+};
+
 class DialogueScriptEntry{
 	script_entry_types script_entry_type;
 	float wait;
