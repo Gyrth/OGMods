@@ -227,12 +227,14 @@ class DrikaTargetSelect{
 
 		for(int i = 0; i < GetNumItems(); i++){
 			ItemObject@ item = ReadItem(i);
+			Object@ obj = ReadObjectFromID(item.GetID());
 
-			if(item.GetLabel() == ""){
-				available_item_names.insertLast("Item " + item.GetID());
-			}else{
-				available_item_names.insertLast(item.GetLabel() + " " + item.GetID());
-			}
+			string description;
+			description += (item.GetLabel() == "")?"Item ":item.GetLabel() + " ";
+			description += item.GetID() + " ";
+			description += obj.GetName();
+
+			available_item_names.insertLast(description);
 
 			available_item_ids.insertLast(item.GetID());
 		}
@@ -954,12 +956,14 @@ class DrikaTargetSelect{
 			if(object_id != -1){
 				if(ObjectExists(object_id)){
 					ItemObject@ item_obj = ReadItemID(object_id);
+					Object@ obj = ReadObjectFromID(object_id);
 
-					if(item_obj.GetLabel() != ""){
-						return item_obj.GetLabel();
-					}else{
-						return item_obj.GetID() + "";
-					}
+					string description;
+					description += (item_obj.GetLabel() == "")?"Item ":item_obj.GetLabel() + " ";
+					description += item_obj.GetID() + " ";
+					description += obj.GetName();
+
+					return description;
 				}
 			}
 		}else if (identifier_type == batch){
