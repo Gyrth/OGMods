@@ -227,8 +227,12 @@ class DrikaCharacterControl : DrikaElement{
 			if(character_control_option == attach_item){
 				array<Object@> target_items = item_select.GetTargetObjects();
 				for(uint j = 0; j < target_items.size(); j++){
-					ItemObject@ io = ReadItemID(target_items[j].GetID());
-					DebugDrawLine(io.GetPhysicsPosition(), targets[i].position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+					if(target_items[j].GetType() == _item_object){
+						ItemObject@ io = ReadItemID(target_items[j].GetID());
+						DebugDrawLine(io.GetPhysicsPosition(), targets[i].position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+					}else{
+						DebugDrawLine(target_items[j].GetTranslation(), targets[i].position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+					}
 				}
 			}
 		}
