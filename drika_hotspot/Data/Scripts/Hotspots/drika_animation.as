@@ -65,6 +65,7 @@ class DrikaAnimation : DrikaElement{
 	bool done = false;
 	ease_functions ease_function;
 	int current_ease_function;
+	bool preview_animation = false;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -947,8 +948,17 @@ class DrikaAnimation : DrikaElement{
 		if(animation_method == timeline_method){
 			if(moving_animation_key){
 				MoveAnimationKey();
+			}else if(preview_animation){
+				if(GetInputPressed(0, "space")){
+					preview_animation = false;
+				}else{
+					UpdateAnimation();
+					timeline_position = animation_timer;
+					if(animation_finished){
+						preview_animation = false;
+					}
+				}
 			}else{
-				array<Object@> targets = target_select.GetTargetObjects();
 				//Don't move/insert/delete keys when the modifier keys are pressed.
 				if(GetInputDown(0, "lctrl") || GetInputDown(0, "lalt")){
 					return;
@@ -981,6 +991,11 @@ class DrikaAnimation : DrikaElement{
 								key_data.insertLast(@new_key);
 							}
 						}
+					}else if(GetInputPressed(0, "space")){
+						if(animation_finished){
+							Reset();
+						}
+						preview_animation = true;
 					}
 				}
 			}
@@ -1018,6 +1033,7 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void EditDone(){
+		preview_animation = false;
 		for(uint i = 0; i < key_ids.size(); i++){
 			if(key_ids[i] != -1 && ObjectExists(key_ids[i])){
 				Object@ current_key = ReadObjectFromID(key_ids[i]);
@@ -1203,6 +1219,7 @@ class DrikaAnimation : DrikaElement{
 		loop_direction = 1.0;
 		done = false;
 		animation_finished = false;
+		preview_animation = false;
 
 		if(target_select.identifier_type == cam){
 			level.SendMessage("animating_camera false " + hotspot.GetID());
