@@ -44,7 +44,8 @@ enum character_control_options { 	aggression = 0,
 									ragdoll = 43,
 									cut_throat = 44,
 									apply_damage = 45,
-									wet = 46
+									wet = 46,
+									attach_item = 47
 					};
 
 class DrikaCharacterControl : DrikaElement{
@@ -59,6 +60,9 @@ class DrikaCharacterControl : DrikaElement{
 	float damage_amount;
 	float wet_amount;
 	array<Object@> target_cache;
+	int attachment_type;
+	bool mirrored;
+	DrikaTargetSelect@ item_select;
 
 	array<BeforeValue@> params_before;
 
@@ -70,7 +74,7 @@ class DrikaCharacterControl : DrikaElement{
 	array<int> float_parameters = {aggression, attack_damage, attack_knockback, attack_speed, block_followup, block_skill, character_scale, damage_resistance, ear_size, fat, focus_fov_distance, focus_fov_horizontal, focus_fov_vertical, ground_aggression, movement_speed, muscle, peripheral_fov_distance, peripheral_fov_horizontal, peripheral_fov_vertical, fall_damage_mult, fear_afraid_at_health_level, throw_counter_probability, weapon_catch_skill};
 	array<int> int_parameters = {knocked_out_shield};
 	array<int> bool_parameters = {cannot_be_disarmed, left_handed, static_char, fear_always_afraid_on_sight, fear_causes_fear_on_sight, fear_never_afraid_on_sight, no_look_around, stick_to_nav_mesh, is_throw_trainer, wearing_metal_armor};
-	array<int> function_parameters = {ignite, extinguish, is_player, kill, revive, limp_ragdoll, injured_ragdoll, ragdoll, cut_throat, apply_damage, wet};
+	array<int> function_parameters = {ignite, extinguish, is_player, kill, revive, limp_ragdoll, injured_ragdoll, ragdoll, cut_throat, apply_damage, wet, attach_item};
 
 	array<string> param_names = {	"Aggression",
 	 								"Attack Damage",
@@ -118,8 +122,15 @@ class DrikaCharacterControl : DrikaElement{
 									"Ragdoll",
 									"Cut Throat",
 									"Apply Damage",
-									"Wet"
+									"Wet",
+									"Attach Item"
 								};
+
+	array<string> attachment_type_names = 	{	"At Grip",
+												"At Sheathe",
+												"At Attachment",
+												"At Unspecified"
+											};
 
 	DrikaCharacterControl(JSONValue params = JSONValue()){
 		character_control_option = character_control_options(GetJSONInt(params, "character_option", 0));
@@ -129,10 +140,15 @@ class DrikaCharacterControl : DrikaElement{
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
+		@item_select = DrikaTargetSelect(this, params, "item_select");
+		item_select.target_option = id_option | name_option | item_option | reference_option;
+
 		recovery_time = GetJSONFloat(params, "recovery_time", 1.0);
 		roll_recovery_time = GetJSONFloat(params, "roll_recovery_time", 0.2);
 		damage_amount = GetJSONFloat(params, "damage_amount", 1.0);
 		wet_amount = GetJSONFloat(params, "wet_amount", 1.0);
+		attachment_type = GetJSONInt(params, "attachment_type", _at_grip);
+		mirrored = GetJSONBool(params, "mirrored", false);
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_character_control;
@@ -144,6 +160,7 @@ class DrikaCharacterControl : DrikaElement{
 
 	void PostInit(){
 		target_select.PostInit();
+		item_select.PostInit();
 	}
 
 	JSONValue GetSaveData(){
@@ -166,6 +183,10 @@ class DrikaCharacterControl : DrikaElement{
 			data["damage_amount"] = JSONValue(damage_amount);
 		}else if(character_control_option == wet){
 			data["wet_amount"] = JSONValue(wet_amount);
+		}else if(character_control_option == attach_item){
+			data["attachment_type"] = JSONValue(attachment_type);
+			data["mirrored"] = JSONValue(mirrored);
+			item_select.SaveIdentifier(data);
 		}
 		target_select.SaveIdentifier(data);
 		return data;
@@ -203,6 +224,13 @@ class DrikaCharacterControl : DrikaElement{
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			if(character_control_option == attach_item){
+				array<Object@> target_items = item_select.GetTargetObjects();
+				for(uint j = 0; j < target_items.size(); j++){
+					ItemObject@ io = ReadItemID(target_items[j].GetID());
+					DebugDrawLine(io.GetPhysicsPosition(), targets[i].position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+				}
+			}
 		}
 	}
 
@@ -265,12 +293,15 @@ class DrikaCharacterControl : DrikaElement{
 			display_string = bool_param_after?"true":"false";
 		}else if(param_type == string_param){
 			display_string = string_param_after;
+		}else if(character_control_option == attach_item){
+			display_string = item_select.GetTargetDisplayText();
 		}
 		return "CharacterControl " + target_select.GetTargetDisplayText() + " " + param_name + " " + display_string;
 	}
 
 	void StartSettings(){
 		target_select.CheckAvailableTargets();
+		item_select.CheckAvailableTargets();
 	}
 
 	void DrawSettings(){
@@ -718,6 +749,31 @@ class DrikaCharacterControl : DrikaElement{
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
 				break;
+			case attach_item:
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Target Item");
+				ImGui_NextColumn();
+				ImGui_NextColumn();
+				item_select.DrawSelectTargetUI();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Attachment Type");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_Combo("##Attachment Type", attachment_type, attachment_type_names, attachment_type_names.size())){
+
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Mirrored");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_Checkbox("##Mirrored", mirrored);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+				break;
 			default:
 				Log(warning, "Found a non standard parameter type. " + param_type);
 				break;
@@ -746,8 +802,9 @@ class DrikaCharacterControl : DrikaElement{
 		if(targets.size() == 0){return false;}
 		for(uint i = 0; i < targets.size(); i++){
 			ScriptParams@ params = targets[i].GetScriptParams();
+			MovementObject@ char = ReadCharacterID(targets[i].GetID());
 
-			if(reset && params_before[i].delete_before){
+			if(reset && params_before[i].delete_before && param_type != function_param){
 				params.Remove(param_name);
 				return true;
 			}
@@ -874,7 +931,6 @@ class DrikaCharacterControl : DrikaElement{
 						break;
 					case ignite:
 						if(targets[i].GetType() == _movement_object){
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							if(!reset){
 								char.ReceiveMessage("ignite");
 							}else{
@@ -885,63 +941,109 @@ class DrikaCharacterControl : DrikaElement{
 					case extinguish:
 						if(!reset){
 							if(targets[i].GetType() == _movement_object){
-								MovementObject@ char = ReadCharacterID(targets[i].GetID());
 								char.ReceiveMessage("extinguish");
 							}
 						}
 						break;
 					case is_player:
 						if(targets[i].GetType() == _movement_object){
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.is_player = reset?params_before[i].bool_value:bool_param_after;
 						}
 						break;
 					case kill:
 						if(!reset){
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.Execute("temp_health = -1.0;permanent_health = -1.0;blood_health = -1.0;SetKnockedOut(_dead);CharacterDefeated();Ragdoll(_RGDL_LIMP);");
 						}
 						break;
 					case revive:
 						if(!reset){
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.QueueScriptMessage("full_revive");
 						}
 						break;
 					case limp_ragdoll:
 						if(!reset){
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.Execute("Ragdoll(_RGDL_LIMP);recovery_time = " + recovery_time + ";roll_recovery_time = " + roll_recovery_time + ";");
 						}
 						break;
 					case injured_ragdoll:
 						if(!reset){
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.Execute("if(state != _ragdoll_state){string sound = \"Data/Sounds/hit/hit_hard.xml\";PlaySoundGroup(sound, this_mo.position);}Ragdoll(_RGDL_INJURED);recovery_time = " + recovery_time + ";roll_recovery_time = " + roll_recovery_time + ";");
 						}
 						break;
 					case ragdoll:
 						if(!reset){
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.Execute("GoLimp();recovery_time = " + recovery_time + ";roll_recovery_time = " + roll_recovery_time + ";");
 						}
 						break;
 					case cut_throat:
 						if(!reset){
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.Execute("CutThroat();");
 						}
 						break;
 					case apply_damage:
 						if(!reset){
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.Execute("TakeBloodDamage(" + damage_amount + ");if(knocked_out != _awake){Ragdoll(_RGDL_INJURED);}");
 						}
 						break;
 					case wet:
 						{
-							MovementObject@ char = ReadCharacterID(targets[i].GetID());
 							char.rigged_object().SetWet(reset?0.0:wet_amount);
+						}
+						break;
+					case attach_item:
+						{
+							array<Object@> target_items = item_select.GetTargetObjects();
+							for(uint j = 0; j < target_items.size(); j++){
+								int item_id = target_items[j].GetID();
+								ItemObject@ io = ReadItemID(item_id);
+								if(reset){
+									char.Execute("this_mo.DetachItem(" + item_id + ");NotifyItemDetach(" + item_id + ");");
+								}else{
+									//Make sure the item is not held.
+									if(io.IsHeld()) {
+					                    int holder_id = io.HeldByWhom();
+					                    MovementObject@ holder = ReadCharacterID(holder_id);
+				                        holder.Execute("this_mo.DetachItem(" + item_id + ");NotifyItemDetach(" + item_id + ");");
+					                }
+
+									//Make sure the item is not stuck inside a body.
+					                if(io.StuckInWhom() != -1) {
+					                    int holder_id = io.StuckInWhom();
+					                    MovementObject@ holder = ReadCharacterID(holder_id);
+										holder.Execute("this_mo.DetachItem(" + item_id + ");NotifyItemDetach(" + item_id + ");");
+					                }
+
+									//Make sure the target slot is not occupied.
+									int weap_slot = -1;
+									if(attachment_type == _at_grip) {
+								        if(mirrored) {
+								            weap_slot = _held_left;
+								        } else {
+								            weap_slot = _held_right;
+								        }
+								    } else if(attachment_type == _at_sheathe) {
+								        if(mirrored) {
+								            weap_slot = _sheathed_right;
+								        } else {
+								            weap_slot = _sheathed_left;
+								        }
+								    }
+
+									char.Execute(	"int weapon = weapon_slots[" + weap_slot + "]; " +
+													"if(weapon != -1) {this_mo.DetachItem(weapon);NotifyItemDetach(weapon);}");
+
+									//This method attaches the item permanently, with connection lines in the editor.
+									/* targets[i].AttachItem(target_items[j], AttachmentType(attachment_type), mirrored); */
+
+									//Do not try to attach an item at the sheathe if it can't. This will crash the game.
+									if(attachment_type == _at_sheathe && !io.HasSheatheAttachment()){
+										continue;
+									}
+
+					                char.Execute(	"this_mo.AttachItemToSlot(" + target_items[j].GetID() + ", " + attachment_type + ", " + mirrored + ");" +
+					                				"HandleEditorAttachment(" + target_items[j].GetID() + ", " + attachment_type + ", " + mirrored + ");");
+								}
+							}
 						}
 						break;
 					default:
@@ -952,7 +1054,6 @@ class DrikaCharacterControl : DrikaElement{
 
 			//To make sure the parameters are being used, refresh them in aschar.
 			if(targets[i].GetType() == _movement_object){
-				MovementObject@ char = ReadCharacterID(targets[i].GetID());
 				char.Execute("SetParameters();");
 			}
 		}
