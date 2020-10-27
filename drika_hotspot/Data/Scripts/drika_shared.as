@@ -95,12 +95,14 @@ array<string> ease_function_names =	{
 
 enum dialogue_locations {
 							dialogue_bottom = 0,
-							dialogue_top = 1
+							dialogue_top = 1,
+							dialogue_center = 2
 						}
 
 array<string> dialogue_location_names =	{
 											"Bottom",
-											"Top"
+											"Top",
+											"Center"
 										};
 
 enum script_entry_types {

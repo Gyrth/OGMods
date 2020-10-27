@@ -210,6 +210,8 @@ void BuildDialogueUI(){
 	@dialogue_ui_container = IMContainer(2560, 500);
 	if(dialogue_location == dialogue_bottom){
 		dialogue_container.setAlignment(CACenter, CABottom);
+	}else if(dialogue_location == dialogue_center){
+		dialogue_container.setAlignment(CACenter, CACenter);
 	}else{
 		dialogue_container.setAlignment(CACenter, CATop);
 	}
