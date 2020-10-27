@@ -114,11 +114,7 @@ class DrikaCreateObject : DrikaElement{
 
 	string GetDisplayString(){
 		if(create_delete_mode == _create_object){
-			// Continuesly check if the reference has been freed.
-			if(reference_already_taken){
-				AttemptRegisterReference(reference_string);
-			}
-			return "CreateObject " + object_path + " " + reference_string + (reference_already_taken?" (Invalid)":"");
+			return "CreateObject " + object_path + " " + reference_string;
 		}else{
 			return "DeleteObject " + target_select.GetTargetDisplayText();
 		}
@@ -233,6 +229,7 @@ class DrikaCreateObject : DrikaElement{
 				if(spawned_object.GetType() == _env_object || spawned_object.GetType() == _hotspot_object){
 					spawned_object.SetScale(placeholder.GetScale());
 				}
+				AttemptRegisterReference(reference_string);
 				return true;
 			}else{
 				placeholder.Create();
@@ -241,12 +238,14 @@ class DrikaCreateObject : DrikaElement{
 		}else if(create_delete_mode == _delete_object){
 			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
-				QueueDeleteObjectID(targets[i].GetID());
+				Log(warning, "Delete object name " + targets[i].GetName());
+				Log(warning, "Delete object id " + targets[i].GetID());
+				//Don't delete any DHS placeholders/helpers.
+				if(targets[i].GetName().findFirst("Helper") == -1){
+					QueueDeleteObjectID(targets[i].GetID());
+				}
 			}
-			// Only continue when at least one reference object has been found.
-			if(targets.size() != 0){
-				return true;
-			}
+			return true;
 		}
 		return false;
 	}
@@ -256,7 +255,14 @@ class DrikaCreateObject : DrikaElement{
 			placeholder.UpdatePlaceholderTransform();
 			return {placeholder.object.GetID()};
 		}else{
-			return spawned_object_ids;
+			//Make sure the spawned objects are still there.
+			array<int> reference_object_ids;
+			for(uint i = 0; i < spawned_object_ids.size(); i++){
+				if(ObjectExists(spawned_object_ids[i])){
+					reference_object_ids.insertLast(spawned_object_ids[i]);
+				}
+			}
+			return reference_object_ids;
 		}
 	}
 

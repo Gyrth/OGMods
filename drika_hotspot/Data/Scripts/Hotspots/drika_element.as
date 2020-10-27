@@ -134,7 +134,6 @@ class DrikaElement{
 	string line_number;
 	bool deleted = false;
 	string reference_string = "";
-	bool reference_already_taken = false;
 	DrikaTargetSelect @target_select = DrikaTargetSelect(this, JSONValue());
 	int export_index = -1;
 	select_states select_state = select_hotspot;
@@ -311,13 +310,7 @@ class DrikaElement{
 		if(new_reference_string == ""){
 			RemoveReference(this);
 			reference_string = new_reference_string;
-			reference_already_taken = false;
-		}else if(GetReferenceElement(new_reference_string) !is null){
-			// Check if the reference string is already taken.
-			reference_already_taken = true;
-			reference_string = new_reference_string;
 		}else{
-			reference_already_taken = false;
 			reference_string = new_reference_string;
 			RegisterReference(this);
 		}
@@ -342,15 +335,51 @@ class DrikaElement{
 			ImGui_PopStyleColor();
 		}
 
-		if(reference_already_taken){
-			ImGui_NextColumn();
-			ImGui_NextColumn();
-			ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.0, 0.0, 1.0));
-			ImGui_Text("This reference is already taken!");
-			ImGui_PopStyleColor();
+		ImGui_PopItemWidth();
+	}
+
+	void RegisterReference(DrikaElement@ element){
+		// Do not allow refences with an empty string.
+		if(element.reference_string == ""){
+			return;
 		}
 
-		ImGui_PopItemWidth();
+		for(uint i = 0; i < references.size(); i++){
+			//A reference with the same string is found.
+			if(references[i].elements[0].reference_string == element.reference_string){
+				//Check if the element is already in the reference.
+				for(uint j = 0; j < references[i].elements.size(); j++){
+					//If the element is found then put it at the front of the array.
+					if(references[i].elements[j] is element){
+						references[i].elements.removeAt(j);
+						references[i].elements.insertAt(0, element);
+						return;
+					}
+				}
+				//Or else just add the element to the reference.
+				references[i].elements.insertAt(0, element);
+				return;
+			}
+		}
+
+		//A new reference is added.
+		references.insertLast(Reference(element));
+	}
+
+	void RemoveReference(DrikaElement@ element){
+		for(uint i = 0; i < references.size(); i++){
+			for(uint j = 0; j < references[i].elements.size(); j++){
+				if(references[i].elements[j] is element){
+					references[i].elements.removeAt(j);
+					break;
+				}
+			}
+			//Remove the reference if no elements are using it.
+			if(references[i].elements.size() == 0){
+				references.removeAt(i);
+				break;
+			}
+		}
 	}
 
 	void DrawGizmo(vec3 translation, quaternion rotation, vec3 scale, bool selected){

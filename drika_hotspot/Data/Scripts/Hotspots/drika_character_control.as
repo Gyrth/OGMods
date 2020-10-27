@@ -998,6 +998,7 @@ class DrikaCharacterControl : DrikaElement{
 						{
 							array<Object@> target_items = item_select.GetTargetObjects();
 							for(uint j = 0; j < target_items.size(); j++){
+								if(target_items[j].GetType() != _item_object){return false;}
 								int item_id = target_items[j].GetID();
 								ItemObject@ io = ReadItemID(item_id);
 								if(reset){

@@ -1316,6 +1316,7 @@ class DrikaDialogue : DrikaElement{
 
 				if(camera_transition_timer >= transition_duration){
 					camera_transition_timer = 0.0;
+					triggered = false;
 					return true;
 				}
 

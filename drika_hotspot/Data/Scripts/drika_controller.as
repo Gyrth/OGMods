@@ -1546,6 +1546,7 @@ void SetCameraPosition(){
 		if(camera_settings_changed){
 			camera.SetDistance(0.0f);
 			camera.SetFOV(camera_zoom);
+			camera.SetDOF(camera_near_blur, camera_near_dist, camera_near_transition, camera_far_blur, camera_far_dist, camera_far_transition);
 			camera.SetPos(camera_position);
 			camera.SetXRotation(camera_rotation.x);
 			camera.SetYRotation(camera_rotation.y);
@@ -1593,7 +1594,6 @@ void SetCameraPosition(){
 
 		camera.SetDistance(0.0f);
 		camera.SetFOV(camera_zoom);
-		camera.SetDOF(camera_near_blur, camera_near_dist, camera_near_transition, camera_far_blur, camera_far_dist, camera_far_transition);
 		UpdateListener(camera_position, vec3(0.0f), camera.GetFacing(), camera.GetUpVector());
 		if(!showing_choice){
 			SetGrabMouse(true);

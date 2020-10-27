@@ -115,9 +115,9 @@ TextureAssetRef duplicate_icon = LoadTexture("Data/UI/ribbon/images/icons/color/
 DrikaQuickLaunch quick_launch();
 
 class Reference{
-	DrikaElement@ element;
+	array<DrikaElement@> elements;
 	Reference(DrikaElement@ _element){
-		@element = @_element;
+		elements.insertLast(_element);
 	}
 }
 
@@ -267,52 +267,6 @@ void SortFunctionsAlphabetical(){
 
 void SetEnabled(bool val){
 	hotspot_enabled = val;
-}
-
-void RegisterReference(DrikaElement@ element){
-	// Do not allow refences with an empty string.
-	if(element.reference_string == ""){
-		return;
-	}
-
-	for(uint i = 0; i < references.size(); i++){
-		//Already have this reference, so do not add it.
-		if(references[i].element is element){
-			return;
-		}
-	}
-
-	references.insertLast(Reference(element));
-}
-
-void RemoveReference(DrikaElement@ element){
-	for(uint i = 0; i < references.size(); i++){
-		if(references[i].element is element){
-			references.removeAt(i);
-			break;
-		}
-	}
-}
-
-array<string> GetReferences(){
-	array<string> reference_strings;
-	Log(info, "Getting references " + drika_elements.size());
-	for(uint i = 0; i < drika_elements.size(); i++){
-	    if(drika_elements[i].GetReferenceString() != ""){
-			Log(info, i + " ref " + drika_elements[i].GetReferenceString());
-			reference_strings.insertLast(drika_elements[i].GetReferenceString());
-		}
-	}
-	return reference_strings;
-}
-
-DrikaElement@ GetReferenceElement(string reference){
-	for(uint i = 0; i < references.size(); i++){
-		if(references[i].element.reference_string == reference){
-			return references[i].element;
-		}
-	}
-	return null;
 }
 
 bool AcceptConnectionsTo(Object @other){
@@ -1975,4 +1929,24 @@ void RefreshChildren(Object@ obj){
 			RefreshChildren(child);
 		}
 	}
+}
+
+array<string> GetReferences(){
+	array<string> reference_strings;
+	Log(info, "Getting references " + references.size());
+	for(uint i = 0; i < references.size(); i++){
+		Log(info, i + " ref " + references[i].elements[0].reference_string);
+		reference_strings.insertLast(references[i].elements[0].reference_string);
+	}
+	return reference_strings;
+}
+
+DrikaElement@ GetReferenceElement(string reference){
+	for(uint i = 0; i < references.size(); i++){
+		//Use the first element in the array as it's the last element to be registered.
+		if(references[i].elements[0].reference_string == reference){
+			return references[i].elements[0];
+		}
+	}
+	return null;
 }

@@ -121,7 +121,6 @@ string GetObjectTypeString(int object_type){
 class DrikaTargetSelect{
 	int object_id = -1;
 	string reference_string = "drika_reference";
-	DrikaElement@ reference_element;
 	string character_team = "team_drika";
 	string object_name = "drika_object";
 
@@ -168,9 +167,7 @@ class DrikaTargetSelect{
 	}
 
 	void PostInit(){
-		if(identifier_type == reference){
-			@reference_element = GetReferenceElement(reference_string);
-		}else if(identifier_type == box_select){
+		if(identifier_type == box_select){
 			box_select_placeholder.Retrieve();
 		}
 	}
@@ -416,7 +413,6 @@ class DrikaTargetSelect{
 					}
 				}
 				reference_string = available_references[current_reference];
-				@reference_element = GetReferenceElement(reference_string);
 			}else if((target_option & id_option) != 0){
 				//Force the identifier type to id when no references are available and id target option is availble.
 				identifier_type = id;
@@ -430,7 +426,6 @@ class DrikaTargetSelect{
 			if(ImGui_Combo("##Pick Reference" + tag, current_reference, available_references, available_references.size())){
 				PreTargetChanged();
 				reference_string = available_references[current_reference];
-				@reference_element = GetReferenceElement(reference_string);
 				TargetChanged();
 			}
 			ImGui_PopItemWidth();
@@ -713,9 +708,9 @@ class DrikaTargetSelect{
 				object_id = -1;
 			}
 		}else if(identifier_type == reference){
+			DrikaElement@ reference_element = GetReferenceElement(reference_string);
 			if(reference_element !is null){
 				if(reference_element.deleted){
-					@reference_element = null;
 					reference_string = "";
 				}
 			}
@@ -737,6 +732,7 @@ class DrikaTargetSelect{
 				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
 		}else if(identifier_type == reference){
+			DrikaElement@ reference_element = GetReferenceElement(reference_string);
 			if(reference_element !is null){
 				array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
 				for(uint i = 0; i < registered_object_ids.size(); i++){
@@ -865,6 +861,7 @@ class DrikaTargetSelect{
 				target_movement_objects.insertLast(ReadCharacterID(object_id));
 			}
 		}else if (identifier_type == reference){
+			DrikaElement@ reference_element = GetReferenceElement(reference_string);
 			if(reference_element !is null){
 				array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
 				for(uint i = 0; i < registered_object_ids.size(); i++){
@@ -935,6 +932,7 @@ class DrikaTargetSelect{
 		if(identifier_type == id){
 			return "" + object_id;
 		}else if (identifier_type == reference){
+			DrikaElement@ reference_element = GetReferenceElement(reference_string);
 			return (reference_element !is null)?reference_element.reference_string:"NA";
 		}else if (identifier_type == team){
 			return character_team;
@@ -1028,6 +1026,7 @@ class DrikaTargetSelect{
 	// So when this function is using that placeholder make it selectable or unselectable when it's no longer used.
 	void SetReferencePlaceholderSelectable(bool selectable){
 		if(identifier_type == reference){
+			DrikaElement@ reference_element = GetReferenceElement(reference_string);
 			if(reference_element !is null){
 				reference_element.placeholder.SetSelectable(selectable);
 			}
