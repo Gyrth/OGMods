@@ -214,6 +214,14 @@ class DrikaCreateObject : DrikaElement{
 		triggered = true;
 		if(create_delete_mode == _create_object){
 			if(placeholder.Exists()){
+				//Check if any of the spawned items have been deleted first.
+				for(uint i = 0; i < spawned_object_ids.size(); i++){
+					if(!ObjectExists(spawned_object_ids[i])){
+						spawned_object_ids.removeAt(i);
+						i--;
+					}
+				}
+
 				Log(warning, "Create " + object_path);
 				int spawned_object_id = CreateObject(object_path);
 				spawned_object_ids.insertLast(spawned_object_id);
