@@ -455,6 +455,21 @@ void ReceiveMessage(string msg){
 		old_camera_translation = camera_position;
 		old_camera_rotation = camera_rotation;
 		camera_settings_changed = true;
+
+		if(!has_camera_control){
+			for(int i = 0; i < GetNumCharacters(); i++){
+				MovementObject@ char = ReadCharacter(i);
+				if(char.controlled){
+					char.Execute(	"level_cam_rotation.x = " + camera_rotation.x + ";" +
+									"level_cam_rotation.y = " + camera_rotation.y + ";" +
+									"level_cam_rotation.z = " + camera_rotation.z + ";" +
+									"cam_rotation = level_cam_rotation.y;" +
+									"target_rotation = level_cam_rotation.y;" +
+									"level_cam_pos = vec3(" + camera_position.x + "," + camera_position.y + "," + camera_position.z +");");
+				}
+			}
+		}
+
 	}else if(token == "drika_dialogue_end"){
 		show_dialogue = false;
 		fade_to_black = false;
