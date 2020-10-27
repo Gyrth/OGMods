@@ -57,6 +57,7 @@ class DrikaDialogue : DrikaElement{
 	float target_fade_to_black;
 	float fade_to_black_duration;
 	bool wait_for_fade = false;
+	bool skip_move_transition = false;
 
 	int dialogue_layout;
 	string dialogue_text_font;
@@ -1175,12 +1176,18 @@ class DrikaDialogue : DrikaElement{
 		}else if(messages[0] == "old_camera_transform"){
 			camera_translation_from = vec3(atof(messages[1]), atof(messages[2]), atof(messages[3]));
 			camera_rotation_from = vec3(atof(messages[4]), atof(messages[5]), atof(messages[6]));
+
+			//Skip the move transition if the beginning and end transform is the same.
+			if(distance(camera_rotation_from, target_camera_rotation) < 0.1 && distance(camera_translation_from, target_camera_position) < 0.1){
+				skip_move_transition = true;
+			}
 		}
 	}
 
 	void Reset(){
 		dialogue_done = false;
 		wait_for_fade = false;
+		skip_move_transition = false;
 		camera_transition_timer = 0.0;
 		if(dialogue_function == say){
 			if(say_started){
@@ -1278,6 +1285,14 @@ class DrikaDialogue : DrikaElement{
 					triggered = true;
 					level.SendMessage("drika_get_old_camera_transform " + this_hotspot.GetID());
 					return false;
+				}
+
+				if(skip_move_transition){
+					SetCameraTransform(target_camera_position, target_camera_rotation);
+					SetDialogueDOF();
+					skip_move_transition = false;
+					triggered = false;
+					return true;
 				}
 
 				float transition_duration = 1.0;
