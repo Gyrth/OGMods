@@ -80,6 +80,7 @@ class DrikaPlayMusic : DrikaElement{
 			string new_path = GetUserPickedReadPath("ogg", "Data/Music");
 			if(new_path != ""){
 				song_path = new_path;
+				SongPathCheck();
 				GetSongName();
 				music_path = "Data/Music/" + GetUniqueFileName() + ".xml";
 				WriteMusicXML();
@@ -160,7 +161,20 @@ class DrikaPlayMusic : DrikaElement{
 		Play(false);
 	}
 
+	void SongPathCheck(){
+		if(!FileExists(song_path)){
+			array<string> split_path = song_path.split("/");
+			split_path.removeRange(0, 2);
+			string new_path = join(split_path, "/");
+			if(FileExists(song_path)){
+				Log(warning, "Fixed path " + new_path);
+				song_path = new_path;
+			}
+		}
+	}
+
 	bool Play(bool reset){
+		SongPathCheck();
 		if(reset){
 			RemoveMusic(music_path);
 		}else{
