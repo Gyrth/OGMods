@@ -1629,6 +1629,7 @@ class DrikaDialogue : DrikaElement{
 		}else if(say_started == true){
 			if(GetInputPressed(0, "attack") && !preview){
 				level.SendMessage("drika_dialogue_skip");
+				level.SendMessage("drika_dialogue_show_skip_message");
 				SetTargetTalking(false);
 
 				for(uint i = dialogue_progress; i < dialogue_script.size(); i++){
