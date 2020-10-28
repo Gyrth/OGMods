@@ -148,7 +148,7 @@ void FindLevelInfo(){
 					Log(warning, campaign_levels[j].GetID() + " " + level_id);
 					if(campaign_levels[j].GetID() == level_id){
 						//Create a string to show which level this in the whole campaign. example: 5/15
-						campaign_progress = j + "/" + campaign_levels.size();
+						campaign_progress = (j + 1) + "/" + campaign_levels.size();
 						Log(warning, campaign_progress);
 						break;
 					}
