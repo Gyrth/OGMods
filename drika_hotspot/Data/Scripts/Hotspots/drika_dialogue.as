@@ -1742,7 +1742,7 @@ class DrikaDialogue : DrikaElement{
 
 		for(uint i = 0; i < targets.size(); i++){
 			/* targets[i].rigged_object().anim_client().Reset(); */
-			targets[i].Execute("dialogue_anim = \"Data/Animations/r_actionidle.anm\";");
+			/* targets[i].Execute("dialogue_anim = \"Data/Animations/r_actionidle.anm\";"); */
 			targets[i].ReceiveScriptMessage("set_rotation " + target_actor_rotation);
 			targets[i].ReceiveScriptMessage("set_dialogue_position " + target_actor_position.x + " " + target_actor_position.y + " " + target_actor_position.z);
 			targets[i].Execute("this_mo.velocity = vec3(0.0, 0.0, 0.0);");
