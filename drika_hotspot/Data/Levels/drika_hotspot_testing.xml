@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-7.63358" t1="-1.43292" t2="-7.53359" s0="1" s1="1" s2="1" q0="0.256934" q1="0.643677" q2="-0.243781" q3="0.678406" euler_x="0.724077" euler_y="1.51827" euler_z="2.27064e-06" id="1">
+    <CameraObject t0="1.72202" t1="0.712676" t2="-4.56896" s0="1" s1="1" s2="1" q0="0.329562" q1="0.00817326" q2="-0.00285309" q3="0.944094" euler_x="0.671706" euler_y="0.0173141" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.16529" t1="-3.42134" t2="1.76417" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -139,48 +139,10 @@
     <EnvObject t0="31.1054" t1="0.485653" t2="-7.62564" s0="1.7413" s1="1.7413" s2="1.7413" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="3.54364" t1="-2.75197" t2="2.67709" s0="1.73095" s1="0.587103" s2="1.74308" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="1.22766" t1="-1.21861" t2="0.390249" s0="0.934976" s1="1.87326" s2="0.482377" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
-        <parameters />
-    </EnvObject>
-    <Hotspot t0="3.62191" t1="-2.42134" t2="2.62358" s0="0.482106" s1="0.482106" s2="0.482106" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" type_file="Data/Objects/Hotspots/start_dialogue.xml">
-        <parameters>
-            <parameter name="Automatic" type="int" val="0" />
-            <parameter name="Color" type="string" val="1.0 1.0 1.0" />
-            <parameter name="Dialogue" type="string" val="DrikaTest" />
-            <parameter name="Fade" type="int" val="1" />
-            <parameter name="Visible in game" type="int" val="0" />
-        </parameters>
-        <Connections />
-        <ConnectionsFrom />
-    </Hotspot>
-    <PlaceholderObject t0="4.58533" t1="0.0655673" t2="2.17036" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" type_file="" special_type="0">
-        <parameters>
-            <parameter name="Dialogue" type="string" val="empty" />
-            <parameter name="DisplayName" type="string" val="DrikaTest" />
-            <parameter name="NumParticipants" type="string" val="1" />
-            <parameter name="Script" type="string" val='#name &quot;DrikaTest&quot;&#x0A;#participants 1&#x0A;send_character_message 1 &quot;set_dialogue_control true&quot;&#x0A;set_character_pos 1 3.40671 -1.7413 2.74886 90&#x0A;set_cam 5.23349 -1.29878 3.74276 0 40.24 0 90&#x0A;send_character_message 1 &quot;set_animation \&quot;Data/Animations/drika_lever_pull.anm\&quot;&quot;&#x0A;send_level_message &quot;open_door&quot;&#x0A;say 1 &quot;Turner&quot; &quot;Open the door.&quot;&#x0A;send_character_message 1 &quot;set_dialogue_control false&quot;&#x0A;' />
-            <parameter name="obj_1" type="int" val="11" />
-        </parameters>
-        <Connections>
-            <Connection id="10" />
-        </Connections>
-    </PlaceholderObject>
-    <PlaceholderObject t0="4.58533" t1="0.765567" t2="2.17036" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" type_file="" special_type="2">
-        <parameters />
-        <Connections>
-            <Connection id="3" />
-        </Connections>
-    </PlaceholderObject>
     <EnvObject t0="31.0948" t1="-2.14485" t2="-7.63353" s0="0.290843" s1="0.290843" s2="0.290843" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_tower.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="-49.0925" t1="0.706497" t2="40.84" s0="0.734431" s1="5.87923" s2="30.7675" q0="-0.683013" q1="0.183013" q2="-0.683013" q3="0.183013" euler_x="-1.5708" euler_y="-1.0472" euler_z="-1.5708" id="15" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="0.686971" t1="-1.70802" t2="-0.143217" s0="0.175709" s1="1.37522" s2="0.321743" q0="0.932366" q1="0" q2="0" q3="0.361517" euler_x="2.4018" euler_y="0" euler_z="0" id="16" color_r="0.137255" color_g="0.137254" color_b="0.137254" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <Hotspot t0="26.1629" t1="-1.27732" t2="9.37494" s0="0.569122" s1="0.569122" s2="0.569122" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
@@ -237,9 +199,6 @@
     <EnvObject name="Play Sound Helper" t0="28.6837" t1="-0.40576" t2="-3.76996" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="13.7892" t1="-2.74726" t2="10.1012" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="13.9225" t1="-2.198" t2="10.0199" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0.729917" q3="0.683536" euler_x="0" euler_y="0" euler_z="1.6364" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -282,9 +241,6 @@
     <EnvObject t0="-48.6786" t1="-4.45904" t2="32.4059" s0="0.591576" s1="29.764" s2="30.9719" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="40" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="14.0159" t1="-2.74726" t2="18.5145" s0="2.67709" s1="0.584816" s2="3.38273" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="-48.6371" t1="1.48205" t2="-15.4426" s0="0.739172" s1="5.90343" s2="31.0135" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="42" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
@@ -294,18 +250,6 @@
     <EnvObject name="Play Sound Helper" t0="28.6837" t1="-0.40576" t2="-3.76996" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="13.4763" t1="-0.51131" t2="9.87443" s0="1.07947" s1="1.07947" s2="1.07947" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="45" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
-        <parameters>
-            <parameter name="Debug Current Line" type="int" val="1" />
-            <parameter name="Run in EditorMode" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;reference_string&quot;:&quot;&quot;},{&quot;dialogue_function&quot;:11,&quot;function&quot;:33,&quot;use_fade&quot;:true},{&quot;camera_transition&quot;:0,&quot;dialogue_function&quot;:8,&quot;dof_settings&quot;:[0,0,0,0,0,0],&quot;enable_look_at_target&quot;:false,&quot;enable_move_with_target&quot;:false,&quot;function&quot;:33,&quot;target_camera_position&quot;:[19.585575103759766,0.17547440528869629,12.251055717468262],&quot;target_camera_rotation&quot;:[-22.304668426513672,0,0],&quot;target_camera_zoom&quot;:90},{&quot;dialogue_function&quot;:2,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_position&quot;:[18.981733322143555,-1.694550633430481,10.824050903320312],&quot;target_actor_rotation&quot;:-46},{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:false,&quot;anim_mobile&quot;:false,&quot;anim_super_mobile&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_animation&quot;:&quot;Data/Animations/r_ledge_climb_fast.anm&quot;,&quot;transition_speed&quot;:10,&quot;use_ik&quot;:false,&quot;wait_anim_end&quot;:true},{&quot;camera_transition&quot;:0,&quot;dialogue_function&quot;:8,&quot;dof_settings&quot;:[0,0,0,0,0,0],&quot;enable_look_at_target&quot;:false,&quot;enable_move_with_target&quot;:false,&quot;function&quot;:33,&quot;target_camera_position&quot;:[19.172151565551758,-0.26142895221710205,11.841464042663574],&quot;target_camera_rotation&quot;:[3.4254887104034424,-38.315971374511719,1.915503978729248],&quot;target_camera_zoom&quot;:90},{&quot;function&quot;:27,&quot;identifier&quot;:51,&quot;identifier_type&quot;:0,&quot;morph_1&quot;:&quot;fist_r&quot;,&quot;morph_2&quot;:&quot;fist_r&quot;,&quot;smoothing_duration&quot;:1,&quot;two_way_morph&quot;:false,&quot;weight&quot;:1},{&quot;camera_transition&quot;:0,&quot;dialogue_function&quot;:8,&quot;dof_settings&quot;:[0,0,0,0,0,0],&quot;enable_look_at_target&quot;:false,&quot;enable_move_with_target&quot;:false,&quot;function&quot;:33,&quot;target_camera_position&quot;:[20.074211120605469,-0.25286281108856201,11.628256797790527],&quot;target_camera_rotation&quot;:[-1.2754474878311157,41.386554718017578,3.7113733291625977],&quot;target_camera_zoom&quot;:90},{&quot;function&quot;:27,&quot;identifier&quot;:51,&quot;identifier_type&quot;:0,&quot;morph_1&quot;:&quot;fist_l&quot;,&quot;morph_2&quot;:&quot;fist_r&quot;,&quot;smoothing_duration&quot;:1,&quot;two_way_morph&quot;:false,&quot;weight&quot;:1},{&quot;dialogue_function&quot;:2,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_position&quot;:[19.597509384155273,-0.15495112538337708,11.074373245239258],&quot;target_actor_rotation&quot;:-46},{&quot;camera_transition&quot;:0,&quot;dialogue_function&quot;:8,&quot;dof_settings&quot;:[0,0,0,0,0,0],&quot;enable_look_at_target&quot;:false,&quot;enable_move_with_target&quot;:false,&quot;function&quot;:33,&quot;target_camera_position&quot;:[20.653606414794922,-0.48167777061462402,12.254035949707031],&quot;target_camera_rotation&quot;:[22.501813888549805,43.008678436279297,1.2247802019119263],&quot;target_camera_zoom&quot;:90},{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:false,&quot;anim_mobile&quot;:false,&quot;anim_super_mobile&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_animation&quot;:&quot;Data/Animations/r_standfromfront.anm&quot;,&quot;transition_speed&quot;:1,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:true},{&quot;camera_transition&quot;:0,&quot;dialogue_function&quot;:8,&quot;dof_settings&quot;:[0,0,0,0,0,0],&quot;enable_look_at_target&quot;:false,&quot;enable_move_with_target&quot;:false,&quot;function&quot;:33,&quot;target_camera_position&quot;:[20.304122924804688,-0.49614858627319336,13.21591854095459],&quot;target_camera_rotation&quot;:[20.025495529174805,11.269593238830566,0.84467780590057373],&quot;target_camera_zoom&quot;:90},{&quot;anim_from_start&quot;:false,&quot;anim_mirrored&quot;:true,&quot;anim_mobile&quot;:true,&quot;anim_super_mobile&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_animation&quot;:&quot;Data/Animations/r_frontkick.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:true},{&quot;camera_transition&quot;:0,&quot;dialogue_function&quot;:8,&quot;dof_settings&quot;:[0,0,0,0,0,0],&quot;enable_look_at_target&quot;:false,&quot;enable_move_with_target&quot;:false,&quot;function&quot;:33,&quot;target_camera_position&quot;:[21.841564178466797,-0.24811936914920807,12.289802551269531],&quot;target_camera_rotation&quot;:[-0.48224681615829468,69.137115478515625,1.2888349294662476],&quot;target_camera_zoom&quot;:90},{&quot;anim_from_start&quot;:false,&quot;anim_mirrored&quot;:false,&quot;anim_mobile&quot;:true,&quot;anim_super_mobile&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_animation&quot;:&quot;Data/Animations/r_frontkick.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:true},{&quot;camera_transition&quot;:0,&quot;dialogue_function&quot;:8,&quot;dof_settings&quot;:[0,0,0,0,0,0],&quot;enable_look_at_target&quot;:false,&quot;enable_move_with_target&quot;:false,&quot;function&quot;:33,&quot;target_camera_position&quot;:[20.865394592285156,0.20421242713928223,12.76113224029541],&quot;target_camera_rotation&quot;:[-8.2172107696533203,36.106220245361328,1.3583288192749023],&quot;target_camera_zoom&quot;:90},{&quot;anim_from_start&quot;:false,&quot;anim_mirrored&quot;:true,&quot;anim_mobile&quot;:false,&quot;anim_super_mobile&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_animation&quot;:&quot;Data/Animations/r_cold_idle.anm&quot;,&quot;transition_speed&quot;:0.5,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:false},{&quot;duration&quot;:3000,&quot;function&quot;:2},{&quot;dialogue_function&quot;:12,&quot;function&quot;:33,&quot;use_fade&quot;:true}]}&#x0A;' />
-            <parameter name="Show UI Grid" type="int" val="1" />
-            <parameter name="Transform Relative" type="int" val="0" />
-            <parameter name="UI Snap Scale" type="int" val="20" />
-        </parameters>
-        <Connections />
-        <ConnectionsFrom />
-    </Hotspot>
     <EnvObject t0="31.0948" t1="-1.86373" t2="0.0934906" s0="0.290843" s1="0.290843" s2="0.290843" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="46" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_tower.xml">
         <parameters />
     </EnvObject>
@@ -382,18 +326,6 @@
     <EnvObject name="Play Sound Helper" t0="28.6837" t1="-0.40576" t2="-3.76996" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <PlaceholderObject t0="13.8309" t1="-0.223857" t2="10.206" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="53" type_file="" special_type="0">
-        <parameters>
-            <parameter name="Dialogue" type="string" val="empty" />
-            <parameter name="DisplayName" type="string" val="CameraParams" />
-            <parameter name="NumParticipants" type="string" val="1" />
-            <parameter name="Script" type="string" val='#name &quot;CameraParams&quot;&#x0A;#participants 1&#x0A;set_character_pos 1 14.0065 -1.81446 9.94124 -133&#x0A;set_cam 13.4303 -0.527944 10.4762 -42.77 -52.4 0 90&#x0A;say 1 &quot;Turner&quot; &quot;Changing character in 3 2 1...&quot;&#x0A;' />
-            <parameter name="obj_1" type="int" val="55" />
-        </parameters>
-        <Connections>
-            <Connection id="53" />
-        </Connections>
-    </PlaceholderObject>
     <Hotspot name="Drika External Hotspot" t0="-6.77233" t1="-1.97858" t2="-6.52713" s0="0.457079" s1="0.457079" s2="0.457079" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="54" type_file="Data/Objects/Hotspots/drika_external_hotspot.xml">
         <parameters>
             <parameter name="Target Drika Hotspot" type="int" val="382" />
@@ -401,12 +333,6 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <PlaceholderObject t0="13.8309" t1="0.476143" t2="10.206" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="55" type_file="" special_type="2">
-        <parameters />
-        <Connections>
-            <Connection id="3" />
-        </Connections>
-    </PlaceholderObject>
     <EnvObject name="Transform Object Helper" t0="26.6232" t1="2.68552" t2="-0.391504" s0="1.32555" s1="1.32555" s2="1.32555" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -663,15 +589,6 @@
     <EnvObject name="AIControl Helper" t0="4.9744" t1="0.56566" t2="-7.90781" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="133" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <PathPointObject t0="9.22505" t1="-2.42134" t2="17.9797" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="134" type_file="">
-        <parameters>
-            <parameter name="Type" type="string" val="Stand" />
-            <parameter name="Wait" type="float" val="0" />
-        </parameters>
-        <Connections>
-            <Connection id="151" />
-        </Connections>
-    </PathPointObject>
     <EnvObject name="AIControl Helper" t0="4.9744" t1="0.56566" t2="-7.90781" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="135" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -681,18 +598,6 @@
     <EnvObject name="Transform Object Helper" t0="26.7779" t1="-2.42134" t2="30.0019" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="137" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="14.1463" t1="-0.735339" t2="18.5649" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="138" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
-        <parameters>
-            <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Run in EditorMode" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier_type&quot;:9,&quot;reference_string&quot;:&quot;&quot;},{&quot;from_beginning_no_fade&quot;:false,&quot;function&quot;:18,&quot;music_event&quot;:0,&quot;music_path&quot;:&quot;Data/Music/hwaxlekztz.xml&quot;,&quot;on_event&quot;:false,&quot;song_name&quot;:&quot;ambient2.ogg&quot;,&quot;song_path&quot;:&quot;Data/Music/ambient2.ogg&quot;},{&quot;duration&quot;:5000,&quot;function&quot;:2},{&quot;from_beginning_no_fade&quot;:false,&quot;function&quot;:18,&quot;music_event&quot;:0,&quot;music_path&quot;:&quot;Data/Music/atwvjgtncn.xml&quot;,&quot;on_event&quot;:false,&quot;song_name&quot;:&quot;unfolding-mirrors.ogg&quot;,&quot;song_path&quot;:&quot;Data/Music/unfolding-mirrors.ogg&quot;},{&quot;ai_sound&quot;:true,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:2.0399999618530273,&quot;placeholder_id&quot;:168,&quot;play_sound_method&quot;:1,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:1}]}&#x0A;' />
-            <parameter name="Show UI Grid" type="int" val="1" />
-            <parameter name="Transform Relative" type="int" val="0" />
-            <parameter name="UI Snap Scale" type="int" val="20" />
-        </parameters>
-        <Connections />
-        <ConnectionsFrom />
-    </Hotspot>
     <EnvObject t0="-51.1508" t1="-3.9765" t2="54.3764" s0="0.58221" s1="30.2465" s2="30.2361" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="139" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
@@ -720,74 +625,13 @@
     <EnvObject t0="59.4756" t1="6.83865" t2="-3.41865" s0="0.571114" s1="4.66101" s2="11.5756" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Play Sound Helper" t0="3.29389" t1="-1.67801" t2="0.873109" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="26.0346" t1="-2.7999" t2="6.13049" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="149" color_r="0.186021" color_g="0" color_b="0.282353" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject name="Billboard Helper" t0="14.5074" t1="2.26258" t2="9.01375" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="150" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <PathPointObject t0="14.1764" t1="-2.42134" t2="19.621" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="151" type_file="">
-        <parameters>
-            <parameter name="Type" type="string" val="Stand" />
-            <parameter name="Wait" type="float" val="0" />
-        </parameters>
-        <Connections>
-            <Connection id="134" />
-        </Connections>
-    </PathPointObject>
     <EnvObject t0="7.57836" t1="1.42775" t2="45.2896" s0="3.65214" s1="3.65214" s2="3.65214" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="152" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
-        <parameters />
-    </EnvObject>
-    <PlaceholderObject t0="2.14051" t1="-0.452778" t2="-8.2875" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="154" type_file="" special_type="0">
-        <parameters>
-            <parameter name="Dialogue" type="string" val="empty" />
-            <parameter name="DisplayName" type="string" val="Folti" />
-            <parameter name="NumParticipants" type="string" val="2" />
-            <parameter name="Script" type="string" val='#name &quot;Folti&quot;&#x0A;#participants 2&#x0A;set_dialogue_color 1 0.2 0.4 1&#x0A;set_dialogue_voice 1 7&#x0A;set_dialogue_color 2 1 0.3 0.3&#x0A;set_dialogue_voice 2 11&#x0A;set_character_pos 2 -8.07307 -11.344 66.8023 179&#x0A;send_character_message 2 &quot;set_animation \&quot;Data/Animations/folti_oneleg.anm\&quot;&quot;&#x0A;set_character_pos 1 -6.02594 -11.4341 71.1429 120&#x0A;send_character_message 1 &quot;set_animation \&quot;Data/Animations/r_dialogue_armcross.anm\&quot;&quot;&#x0A;send_character_message 1 &quot;set_eye_dir -4.97682 -10.3377 72.6291 1&quot;&#x0A;send_character_message 1 &quot;set_torso_target -4.98289 -11.0022 70.7671 0&quot;&#x0A;send_character_message 1 &quot;set_head_target -7.69175 -10.5491 68.09 1&quot;&#x0A;set_cam -3.4213 -10.9118 73.9721 0 38.25 0 14.0938&#x0A;send_level_message &quot;set_camera_dof 0.3 5.6 10.0 0.2 10.0 10.0&quot;&#x0A;send_level_message &quot;music_layer_override 0&quot;&#x0A;say 1 &quot;Terai&quot; &quot;So you&apos;re the guy? [wait 0.5]Yes I am the guy&quot;&#x0A;send_level_message &quot;show_choice&quot;&#x0A;' />
-            <parameter name="obj_1" type="int" val="158" />
-            <parameter name="obj_2" type="int" val="159" />
-        </parameters>
-        <Connections>
-            <Connection id="154" />
-        </Connections>
-    </PlaceholderObject>
-    <EnvObject t0="5.22766" t1="-1.21861" t2="0.390249" s0="0.934976" s1="1.87326" s2="0.482377" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="155" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="3.21096" t1="-1.15297" t2="0.388633" s0="1.28677" s1="1.7742" s2="0.482377" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="156" color_r="0.258824" color_g="0.258821" color_b="0.258821" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
-        <parameters />
-    </EnvObject>
-    <Hotspot t0="2.47802" t1="2.19686" t2="1.38064" s0="0.239713" s1="0.239713" s2="0.239713" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="157" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
-        <parameters>
-            <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Run in EditorMode" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;enabled&quot;:true,&quot;function&quot;:3,&quot;identifier&quot;:160,&quot;identifier_type&quot;:0},{&quot;enabled&quot;:false,&quot;function&quot;:3,&quot;identifier&quot;:165,&quot;identifier_type&quot;:0},{&quot;function&quot;:1,&quot;message&quot;:&quot;open_door&quot;},{&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:5,&quot;duration_method&quot;:0,&quot;ease_function&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier&quot;:156,&quot;identifier_type&quot;:0,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.2867699861526489,1.7741999626159668,0.48237699270248413],&quot;time&quot;:1,&quot;translation&quot;:[3.2109599113464355,-1.1529699563980103,0.38863301277160645]},{&quot;rotation&quot;:[0,0,0,1],&quot;scale&quot;:[1.2867699861526489,1.7741999626159668,0.48237699270248413],&quot;time&quot;:3,&quot;translation&quot;:[3.2109599113464355,-3.6529698371887207,0.38863396644592285]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:true},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;placeholder_id&quot;:148,&quot;play_sound_method&quot;:1,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/rockbreak4.wav&quot;,&quot;sound_type&quot;:0},{&quot;animate_scale&quot;:false,&quot;animation_method&quot;:0,&quot;animation_type&quot;:3,&quot;duration&quot;:5.0199999809265137,&quot;duration_method&quot;:0,&quot;ease_function&quot;:0,&quot;extra_yaw&quot;:0,&quot;function&quot;:30,&quot;identifier_type&quot;:7,&quot;key_data&quot;:[{&quot;rotation&quot;:[0,-0.56710612773895264,5.9604644775390625e-08,0.82364475727081299],&quot;scale&quot;:[1,1,1],&quot;time&quot;:2,&quot;translation&quot;:[0.60453534126281738,-1.6711602210998535,3.6707110404968262]},{&quot;rotation&quot;:[0.020365700125694275,-0.97562253475189209,0.10314693301916122,0.1926305890083313],&quot;scale&quot;:[1,1,1],&quot;time&quot;:3,&quot;translation&quot;:[2.4473505020141602,-1.6711605787277222,1.112281322479248]},{&quot;rotation&quot;:[-0.071613729000091553,-0.89836925268173218,0.124069944024086,-0.41522365808486938],&quot;scale&quot;:[1,1,1],&quot;time&quot;:4,&quot;translation&quot;:[4.1342320442199707,-1.5685086250305176,2.7500185966491699]},{&quot;rotation&quot;:[-0.071613729000091553,-0.89836925268173218,0.124069944024086,-0.41522365808486938],&quot;scale&quot;:[1,1,1],&quot;time&quot;:5,&quot;translation&quot;:[6.2521095275878906,-2.2382869720458984,0.89060020446777344]}],&quot;key_ids&quot;:[],&quot;parallel_operation&quot;:false},{&quot;function&quot;:26,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;input_identifier&quot;:10,&quot;input_type&quot;:0,&quot;use_prompt&quot;:false},{&quot;enabled&quot;:true,&quot;function&quot;:3,&quot;identifier&quot;:165,&quot;identifier_type&quot;:0},{&quot;enabled&quot;:false,&quot;function&quot;:3,&quot;identifier&quot;:160,&quot;identifier_type&quot;:0}]}&#x0A;' />
-            <parameter name="Show UI Grid" type="int" val="1" />
-            <parameter name="Transform Relative" type="int" val="0" />
-            <parameter name="UI Snap Scale" type="int" val="20" />
-        </parameters>
-        <Connections />
-        <ConnectionsFrom />
-    </Hotspot>
-    <PlaceholderObject t0="2.31551" t1="0.247222" t2="-8.2875" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="158" type_file="" special_type="2">
-        <parameters />
-        <Connections>
-            <Connection id="-1" />
-        </Connections>
-    </PlaceholderObject>
-    <PlaceholderObject t0="1.96551" t1="0.247222" t2="-8.2875" s0="0.3" s1="0.3" s2="0.3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="159" type_file="" special_type="2">
-        <parameters />
-        <Connections>
-            <Connection id="3" />
-        </Connections>
-    </PlaceholderObject>
-    <EnvObject t0="3.41313" t1="-1.73719" t2="2.27717" s0="0.459155" s1="1" s2="0.373131" q0="-0.304409" q1="0" q2="0" q3="0.952541" euler_x="-0.618636" euler_y="0" euler_z="0" id="160" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/stick.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="3.41925" t1="-1.7076" t2="3.12902" s0="0.459155" s1="1" s2="0.373131" q0="0.287916" q1="0" q2="0" q3="0.957656" euler_x="0.5841" euler_y="0" euler_z="0" id="165" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/stick.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="-0.913229" t1="-4.68476" t2="44.0782" s0="0.736841" s1="12.7795" s2="17.309" q0="-0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="-1.5708" euler_y="0" euler_z="-1.5708" id="166" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -805,9 +649,6 @@
             <parameters />
         </EnvObject>
     </Group>
-    <EnvObject name="Play Sound Helper" t0="8.15185" t1="-2.28004" t2="-35.608" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="168" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="26.6248" t1="-0.279906" t2="15.9634" s0="0.706649" s1="0.627864" s2="0.938237" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="170" color_r="0.478431" color_g="0.478427" color_b="0.478427" overbright="0" type_file="Data/Objects/Buildings/basics/soft_square_pillar.xml">
         <parameters />
     </EnvObject>
@@ -846,7 +687,7 @@
     </EnvObject>
     <Hotspot t0="4.75878" t1="-1.64159" t2="-7.78291" s0="0.428653" s1="0.428653" s2="0.428653" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Debug Current Line" type="int" val="1" />
+            <parameter name="Debug Current Line" type="int" val="0" />
             <parameter name="Run in EditorMode" type="int" val="1" />
             <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier_type&quot;:10,&quot;reference_string&quot;:&quot;&quot;},{&quot;check_all&quot;:false,&quot;check_all_known&quot;:false,&quot;continue_if_false&quot;:false,&quot;equals&quot;:true,&quot;function&quot;:23,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;state_check&quot;:14},{&quot;amount&quot;:2,&quot;connect_particles&quot;:false,&quot;function&quot;:5,&quot;particle_path&quot;:&quot;Data/Particles/heavydirt.xml&quot;,&quot;placeholder_id&quot;:352,&quot;spread&quot;:0.20500001311302185,&quot;tint&quot;:[0.27450978755950928,0.18878483772277832,0.12110724300146103],&quot;use_blood_tint&quot;:false,&quot;velocity&quot;:5},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;placeholder_id&quot;:357,&quot;play_sound_method&quot;:1,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0},{&quot;check_all&quot;:false,&quot;check_all_known&quot;:false,&quot;continue_if_false&quot;:false,&quot;equals&quot;:true,&quot;function&quot;:23,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;state_check&quot;:15},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;placeholder_id&quot;:358,&quot;play_sound_method&quot;:1,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0},{&quot;amount&quot;:2,&quot;connect_particles&quot;:false,&quot;function&quot;:5,&quot;particle_path&quot;:&quot;Data/Particles/heavydirt.xml&quot;,&quot;placeholder_id&quot;:359,&quot;spread&quot;:0.21700000762939453,&quot;tint&quot;:[0.27450978755950928,0.18878483772277832,0.12110724300146103],&quot;use_blood_tint&quot;:false,&quot;velocity&quot;:5},{&quot;function&quot;:7,&quot;line&quot;:1}]}&#x0A;' />
             <parameter name="Show UI Grid" type="int" val="1" />
@@ -901,7 +742,7 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
-    <ItemObject t0="19.311" t1="-2.0839" t2="-10.7655" s0="1" s1="1" s2="1" q0="0.256223" q1="-0.248373" q2="-0.657768" q3="0.663331" euler_x="0.72975" euler_y="0.00756363" euler_z="-1.55949" id="192" type_file="Data/Items/Bastard.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="1.95784" t1="-2.15858" t2="-11.6073" s0="1" s1="1" s2="1" q0="0.256223" q1="-0.248373" q2="-0.657768" q3="0.663331" euler_x="0.72975" euler_y="0.00756363" euler_z="-1.55949" id="192" type_file="Data/Items/Bastard.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
     <Group t0="28.2505" t1="-1.15978" t2="23.435" s0="0.641924" s1="2.50214" s2="2.60336" q0="-0.320561" q1="0" q2="0" q3="0.947228" euler_x="-0.652643" euler_y="0" euler_z="0" id="198" version="1">
@@ -1051,17 +892,6 @@
             <parameters />
         </EnvObject>
     </Group>
-    <Hotspot t0="1.88241" t1="-2.28553" t2="-7.73659" s0="0.418645" s1="0.418645" s2="0.418645" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="236" type_file="Data/Objects/Hotspots/start_dialogue.xml">
-        <parameters>
-            <parameter name="Automatic" type="int" val="1" />
-            <parameter name="Color" type="string" val="1.0 1.0 1.0" />
-            <parameter name="Dialogue" type="string" val="Folti" />
-            <parameter name="Fade" type="int" val="1" />
-            <parameter name="Visible in game" type="int" val="1" />
-        </parameters>
-        <Connections />
-        <ConnectionsFrom />
-    </Hotspot>
     <EnvObject t0="28.3646" t1="3.23897" t2="30.6175" s0="0.12731" s1="2.01463" s2="0.140153" q0="-0.475307" q1="0.411822" q2="0.563424" q3="0.535761" euler_x="-0.213204" euler_y="1.35532" euler_z="1.44931" id="237" color_r="0.447059" color_g="0.447054" color_b="0.447054" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
         <parameters />
     </EnvObject>
@@ -1197,7 +1027,7 @@
     <EnvObject name="AIControl Helper" t0="4.9744" t1="0.56566" t2="-7.90781" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="279" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <ItemObject t0="8.1471" t1="-0.445974" t2="-7.07463" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="280" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="-1.87795" t1="-1.43109" t2="-11.5789" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="280" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
     <EnvObject name="AIControl Helper" t0="4.9744" t1="0.56566" t2="-7.90781" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
@@ -1557,7 +1387,7 @@
             <parameters />
         </EnvObject>
     </Group>
-    <EnvObject name="Set Velocity Helper" t0="-6.98063" t1="-1.7872" t2="-7.66783" s0="0.25" s1="0.25" s2="0.25" q0="0.254914" q1="-0.00838743" q2="-0.00490333" q3="0.966915" euler_x="0.515636" euler_y="-0.0137204" euler_z="-0.0137601" id="353" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Set Velocity Helper" t0="-6.98063" t1="-1.7872" t2="-7.66783" s0="0.25" s1="0.25" s2="0.25" q0="0.254914" q1="-0.00838743" q2="-0.00490333" q3="0.966915" euler_x="0.515637" euler_y="-0.0137204" euler_z="-0.0137601" id="353" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject name="Create Object Helper" t0="-1.10103" t1="-1.46347" t2="-9.54344" s0="0.104685" s1="0.860263" s2="0.044675" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="354" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
@@ -1605,7 +1435,7 @@
     <EnvObject t0="-13.4039" t1="0.480626" t2="-20.6438" s0="0.912202" s1="0.895376" s2="1.06838" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="375" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ItemObject t0="17.4596" t1="-1.98656" t2="-10.154" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="376" type_file="Data/Items/Bastard.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="0.281206" t1="-2.10659" t2="-11.436" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="376" type_file="Data/Items/Bastard.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
     <EnvObject name="Input Prompt Helper" t0="-6.96562" t1="-1.72625" t2="-7.24033" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="377" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
@@ -1668,7 +1498,7 @@
     </EnvObject>
     <Hotspot t0="-11.4488" t1="-1.89387" t2="-6.6188" s0="0.296296" s1="0.296296" s2="0.296296" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="394" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
-            <parameter name="Debug Current Line" type="int" val="1" />
+            <parameter name="Debug Current Line" type="int" val="0" />
             <parameter name="Run in EditorMode" type="int" val="1" />
             <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:true,&quot;external_hotspot_id&quot;:385,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier&quot;:3,&quot;identifier_type&quot;:0,&quot;reference_string&quot;:&quot;&quot;},{&quot;choice_line2&quot;:true,&quot;choice_line3&quot;:true,&quot;choice_line4&quot;:true,&quot;choice_line5&quot;:true,&quot;function&quot;:7,&quot;line&quot;:2,&quot;line2&quot;:4,&quot;line3&quot;:6,&quot;line4&quot;:8,&quot;line5&quot;:10},{&quot;display_message&quot;:&quot;First&quot;,&quot;font_path&quot;:&quot;Data/Fonts/Cella.ttf&quot;,&quot;font_size&quot;:75,&quot;function&quot;:20},{&quot;function&quot;:7,&quot;line&quot;:11},{&quot;display_message&quot;:&quot;Second&quot;,&quot;font_path&quot;:&quot;Data/Fonts/Cella.ttf&quot;,&quot;font_size&quot;:100,&quot;function&quot;:20},{&quot;function&quot;:7,&quot;line&quot;:11},{&quot;display_message&quot;:&quot;Third&quot;,&quot;font_path&quot;:&quot;Data/Fonts/Cella.ttf&quot;,&quot;font_size&quot;:100,&quot;function&quot;:20},{&quot;function&quot;:7,&quot;line&quot;:11},{&quot;display_message&quot;:&quot;Fourth&quot;,&quot;font_path&quot;:&quot;Data/Fonts/Cella.ttf&quot;,&quot;font_size&quot;:100,&quot;function&quot;:20},{&quot;function&quot;:7,&quot;line&quot;:11},{&quot;display_message&quot;:&quot;Fifth&quot;,&quot;font_path&quot;:&quot;Data/Fonts/Cella.ttf&quot;,&quot;font_size&quot;:100,&quot;function&quot;:20},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;placeholder_id&quot;:337,&quot;play_sound_method&quot;:0,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0}]}&#x0A;' />
             <parameter name="Show UI Grid" type="int" val="1" />
@@ -1792,7 +1622,7 @@
     <EnvObject name="AIControl Helper" t0="50.3522" t1="-0.0867638" t2="-3.10988" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="456" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <ItemObject t0="12.4259" t1="-2.32134" t2="-9.62705" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="494" type_file="Data/Items/DogWeapons/DogKnife.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <ItemObject t0="3.18955" t1="-2.17839" t2="-11.5761" s0="1" s1="1" s2="1" q0="0.148447" q1="-0.863489" q2="-0.464981" q3="-0.127047" euler_x="2.18117" euler_y="0.365544" euler_z="-2.99305" id="494" type_file="Data/Items/DogWeapons/DogKnife.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
     <EnvObject name="AIControl Helper" t0="4.75878" t1="0.35841" t2="-7.78291" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="639" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">

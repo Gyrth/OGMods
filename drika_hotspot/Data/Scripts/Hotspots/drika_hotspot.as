@@ -339,7 +339,7 @@ void InterpData(){
 	Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID());
 	ReorderElements();
 
-	for(uint i = 0; i < drika_elements.size() - 1; i++){
+	for(int i = 0; i < int(drika_elements.size()) - 1; i++){
 		DrikaElement@ current_element = drika_elements[i];
 		@current_element.nodes_slot_then_connected = drika_elements[current_element.index + 1];
 	}
