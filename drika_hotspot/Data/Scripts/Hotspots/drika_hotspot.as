@@ -1656,6 +1656,8 @@ void AddDialogueActor(MovementObject@ char){
 		char.ReceiveScriptMessage("set_dialogue_control true");
 		char.ReceiveScriptMessage("set_dialogue_position " + char_position.x + " " + char_position.y + " " + char_position.z);
 		char.ReceiveScriptMessage("set_rotation " + char_rotation);
+		string no_character_collision = "reset_no_collide = " + (the_time + 1000.0f) + ";";
+		char.Execute(no_character_collision);
 		/* char.rigged_object().anim_client().Reset(); */
 	}
 }
@@ -1670,6 +1672,8 @@ void RemoveDialogueActor(MovementObject@ char){
 	int index = dialogue_actor_ids.find(character_id);
 	if(index != -1){
 		char.ReceiveScriptMessage("set_dialogue_control false");
+		string no_character_collision = "reset_no_collide = " + the_time + ";";
+		char.Execute(no_character_collision);
 		dialogue_actor_ids.removeAt(index);
 	}
 }
