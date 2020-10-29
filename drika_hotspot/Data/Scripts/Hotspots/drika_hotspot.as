@@ -531,7 +531,6 @@ bool debug_current_line = false;
 bool show_grid = true;
 float left_over_drag_y = 0.0;
 bool dragging = false;
-bool open_palette = false;
 bool steal_focus = false;
 
 void DrawEditor(){
@@ -605,96 +604,6 @@ void DrawEditor(){
 
 		quick_launch.Draw();
 
-		if(open_palette){
-			ImGui_OpenPopup("Configure Palette");
-			open_palette = false;
-		}
-
-		ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
-        if(ImGui_BeginPopupModal("Configure Palette", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
-			if(ImGui_Button("Reset to defaults")){
-				LoadPalette(true);
-				SavePalette();
-			}
-			ImGui_Separator();
-
-			ImGui_BeginChild("Palette", vec2(-1, -1));
-			ImGui_PushItemWidth(-1);
-			ImGui_Columns(2, false);
-			ImGui_SetColumnWidth(0, 200.0);
-
-			ImGui_Text("Function Colors");
-			ImGui_NextColumn();
-			ImGui_NextColumn();
-
-			for(uint i = 0; i < sorted_element_names.size(); i++){
-				drika_element_types current_element_type = drika_element_types(drika_element_names.find(sorted_element_names[i]));
-				if(current_element_type == none){
-					continue;
-				}
-				ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(drika_element_names[current_element_type] + " " + current_element_type);
-				ImGui_PopStyleColor();
-
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(-1);
-				ImGui_ColorEdit4("##Palette Color" + i, display_colors[current_element_type]);
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-			}
-
-			ImGui_Text("UI Colors");
-			ImGui_NextColumn();
-			ImGui_NextColumn();
-
-			ImGui_Text("Background Color");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(-1);
-			ImGui_ColorEdit4("##Background Color", background_color);
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-
-			ImGui_Text("Titlebar Color");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(-1);
-			ImGui_ColorEdit4("##Titlebar Color", titlebar_color);
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-
-			ImGui_Text("Item Hovered");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(-1);
-			ImGui_ColorEdit4("##Item Hovered", item_hovered);
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-
-			ImGui_Text("Item Clicked");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(-1);
-			ImGui_ColorEdit4("##Item Clicked", item_clicked);
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-
-			ImGui_Text("Text Color");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(-1);
-			ImGui_ColorEdit4("##Text Color", text_color);
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-
-			ImGui_PopItemWidth();
-			ImGui_EndChild();
-
-			if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
-				steal_focus = true;
-				SavePalette();
-				ImGui_CloseCurrentPopup();
-			}
-
-			ImGui_EndPopup();
-		}
-
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_BeginMenu("Add")){
 				AddFunctionMenuItems();
@@ -740,92 +649,49 @@ void DrawEditor(){
 					old_transform = this_hotspot.GetTransform();
 				} */
 
-				if(ImGui_MenuItem("Configure Palette")){
-					open_palette = true;
+				DrawPaletteModal();
+				if(ImGui_Selectable("Configure Palette")){
+
 				}
+				ImGui_OpenPopupOnItemClick("Configure Palette", 0);
 
 				ImGui_EndMenu();
 			}
 			if(ImGui_BeginMenu("Import/Export")){
-				if(ImGui_MenuItem("Export to file")){
+				if(ImGui_Selectable("Export to file")){
 					exporting = true;
 					ExportToFile();
 					exporting = false;
 				}
-				if(ImGui_MenuItem("Import from file")){
+				if(ImGui_Selectable("Import from file")){
 					ImportFromFile();
 				}
-				if(ImGui_MenuItem("Copy to clipboard")){
+				if(ImGui_Selectable("Copy to clipboard")){
 					exporting = true;
 					CopyToClipBoard();
 					exporting = false;
 				}
-				if(ImGui_MenuItem("Paste from clipboard")){
+				if(ImGui_Selectable("Paste from clipboard")){
 					PasteFromClipboard();
 				}
 				ImGui_EndMenu();
 			}
-			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
-				if(drika_elements.size() > 0){
-					GetCurrentElement().EditDone();
-					array<int> sorted_selected = multi_select;
-					sorted_selected.sortAsc();
-					for(uint i = 0; i < sorted_selected.size(); i++){
-						DeleteDrikaElement(sorted_selected[i] - i);
-					}
-					multi_select.resize(0);
 
-					ReorderElements();
-					Save();
-					if(drika_elements.size() > 0){
-						multi_select = {current_line};
-						display_index = drika_indexes[current_line];
-					}
-					if(drika_elements.size() > 0){
-						GetCurrentElement().StartEdit();
-					}
-				}
+			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
+				DeleteSelectedFunctions();
 			}
+
 			if(ImGui_IsItemHovered()){
 				ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
-				ImGui_SetTooltip("Delete");
+				ImGui_SetTooltip("Delete (x)");
 				ImGui_PopStyleColor();
 			}
 			if(ImGui_ImageButton(duplicate_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
-				if(drika_elements.size() > 0){
-					duplicating_function = true;
-					int last_selected = multi_select[multi_select.size() - 1];
-					array<int> sorted_selected = multi_select;
-					multi_select.resize(0);
-					sorted_selected.sortDesc();
-					int insert_at = sorted_selected[0];
-
-					GetCurrentElement().EditDone();
-
-					for(uint i = 0; i < sorted_selected.size(); i++){
-						DrikaElement@ target = drika_elements[drika_indexes[sorted_selected[i]]];
-						DrikaElement@ new_element = InterpElement(target.drika_element_type, target.GetSaveData());
-						// The elements are added in reverse order so insertLast can be used.
-						int index_new_element = insert_at + (sorted_selected.size() - i);
-						new_element.SetIndex(index_new_element);
-						post_init_queue.insertLast(@new_element);
-
-						multi_select.insertLast(insert_at + 1 + i);
-						drika_elements.insertLast(new_element);
-						drika_indexes.insertAt(insert_at + 1, drika_elements.size() - 1);
-						display_index = drika_indexes[insert_at + 1];
-
-						if(target.index == last_selected){
-							current_line = insert_at + 1;
-						}
-					}
-
-					element_added = true;
-				}
+				DuplicateSelectedFunctions();
 			}
 			if(ImGui_IsItemHovered()){
 				ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
-				ImGui_SetTooltip("Duplicate");
+				ImGui_SetTooltip("Duplicate (c)");
 				ImGui_PopStyleColor();
 			}
 			ImGui_EndMenuBar();
@@ -853,10 +719,16 @@ void DrawEditor(){
 					steal_focus = true;
 				}
 			}else if(drika_elements.size() > 0 && !reorded && post_init_queue.size() == 0){
-				if(!GetInputDown(0, "lctrl") && ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Enter))){
-					if(GetCurrentElement().has_settings){
-						GetCurrentElement().StartSettings();
-						ImGui_OpenPopup("Edit");
+				if(!GetInputDown(0, "lctrl") && !GetInputDown(0, "lalt")){
+					if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Enter))){
+						if(GetCurrentElement().has_settings){
+							GetCurrentElement().StartSettings();
+							ImGui_OpenPopup("Edit");
+						}
+					}else if(ImGui_IsWindowHovered() && ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_X))){
+						DeleteSelectedFunctions();
+					}else if(ImGui_IsWindowHovered() && ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_C))){
+						DuplicateSelectedFunctions();
 					}
 				}
 			}
@@ -1019,6 +891,148 @@ void DrawEditor(){
 		reorded = false;
 		ReorderElements();
 		Save();
+	}
+}
+
+void DrawPaletteModal(){
+	ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
+	if(ImGui_BeginPopupModal("Configure Palette", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
+		if(ImGui_Button("Reset to defaults")){
+			LoadPalette(true);
+			SavePalette();
+		}
+		ImGui_Separator();
+
+		ImGui_BeginChild("Palette", vec2(-1, -1));
+		ImGui_PushItemWidth(-1);
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, 200.0);
+
+		ImGui_Text("Function Colors");
+		ImGui_NextColumn();
+		ImGui_NextColumn();
+
+		for(uint i = 0; i < sorted_element_names.size(); i++){
+			drika_element_types current_element_type = drika_element_types(drika_element_names.find(sorted_element_names[i]));
+			if(current_element_type == none){
+				continue;
+			}
+			ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text(drika_element_names[current_element_type] + " " + current_element_type);
+			ImGui_PopStyleColor();
+
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(-1);
+			ImGui_ColorEdit4("##Palette Color" + i, display_colors[current_element_type]);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+		}
+
+		ImGui_Text("UI Colors");
+		ImGui_NextColumn();
+		ImGui_NextColumn();
+
+		ImGui_Text("Background Color");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(-1);
+		ImGui_ColorEdit4("##Background Color", background_color);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_Text("Titlebar Color");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(-1);
+		ImGui_ColorEdit4("##Titlebar Color", titlebar_color);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_Text("Item Hovered");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(-1);
+		ImGui_ColorEdit4("##Item Hovered", item_hovered);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_Text("Item Clicked");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(-1);
+		ImGui_ColorEdit4("##Item Clicked", item_clicked);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_Text("Text Color");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(-1);
+		ImGui_ColorEdit4("##Text Color", text_color);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_PopItemWidth();
+		ImGui_EndChild();
+
+		if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
+			steal_focus = true;
+			SavePalette();
+			ImGui_CloseCurrentPopup();
+		}
+
+		ImGui_EndPopup();
+	}
+}
+
+void DeleteSelectedFunctions(){
+	if(drika_elements.size() > 0){
+		GetCurrentElement().EditDone();
+		array<int> sorted_selected = multi_select;
+		sorted_selected.sortAsc();
+		for(uint i = 0; i < sorted_selected.size(); i++){
+			DeleteDrikaElement(sorted_selected[i] - i);
+		}
+		multi_select.resize(0);
+
+		ReorderElements();
+		Save();
+		if(drika_elements.size() > 0){
+			multi_select = {current_line};
+			display_index = drika_indexes[current_line];
+		}
+		if(drika_elements.size() > 0){
+			GetCurrentElement().StartEdit();
+		}
+	}
+}
+
+void DuplicateSelectedFunctions(){
+	if(drika_elements.size() > 0){
+		duplicating_function = true;
+		int last_selected = multi_select[multi_select.size() - 1];
+		array<int> sorted_selected = multi_select;
+		multi_select.resize(0);
+		sorted_selected.sortDesc();
+		int insert_at = sorted_selected[0];
+
+		GetCurrentElement().EditDone();
+
+		for(uint i = 0; i < sorted_selected.size(); i++){
+			DrikaElement@ target = drika_elements[drika_indexes[sorted_selected[i]]];
+			DrikaElement@ new_element = InterpElement(target.drika_element_type, target.GetSaveData());
+			// The elements are added in reverse order so insertLast can be used.
+			int index_new_element = insert_at + (sorted_selected.size() - i);
+			new_element.SetIndex(index_new_element);
+			post_init_queue.insertLast(@new_element);
+
+			multi_select.insertLast(insert_at + 1 + i);
+			drika_elements.insertLast(new_element);
+			drika_indexes.insertAt(insert_at + 1, drika_elements.size() - 1);
+			display_index = drika_indexes[insert_at + 1];
+
+			if(target.index == last_selected){
+				current_line = insert_at + 1;
+			}
+		}
+
+		element_added = true;
 	}
 }
 
@@ -1804,7 +1818,7 @@ void AddFunctionMenuItems(){
 			continue;
 		}
 		ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
-		if(ImGui_MenuItem(sorted_element_names[i])){
+		if(ImGui_Selectable(sorted_element_names[i])){
 			DrikaElement@ new_element = InterpElement(current_element_type, JSONValue());
 			post_init_queue.insertLast(@new_element);
 			InsertElement(new_element);
