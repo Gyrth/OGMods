@@ -1184,19 +1184,17 @@ void LoadCheckpoint(string load_name){
 			item.CleanBlood();
 
 			bool currently_held = item.IsHeld();
-			int stuck_id = item.StuckInWhom();
 			//Detach the item from any character first.
 			if(currently_held){
 				int char_id = item.HeldByWhom();
 				MovementObject@ holder = ReadCharacterID(char_id);
-				holder.Execute("this_mo.DetachItem(" + id + ");");
-				holder.Execute("NotifyItemDetach(" + id + ");");
+				holder.Execute("this_mo.DetachItem(" + id + ");NotifyItemDetach(" + id + ");");
 			}
 
+			int stuck_id = item.StuckInWhom();
 			if(stuck_id != -1){
 				MovementObject@ holder = ReadCharacterID(stuck_id);
-				holder.rigged_object().UnStickItem(id);
-				/* holder.Execute("this_mo.DetachItem(" + id + ");"); */
+				holder.Execute("this_mo.DetachItem(" + id + ");NotifyItemDetach(" + id + ");");
 			}
 
 			int stuck_in_whom = obj_data["stuck_in_whom"].asInt();
@@ -1225,9 +1223,9 @@ void LoadCheckpoint(string load_name){
 				physics_transform.SetTranslationPart(position);
 				physics_transform.SetRotationPart(rotation);
 				item.SetPhysicsTransform(physics_transform);
-				item.SetLinearVelocity(linear_velocity);
 				item.SetAngularVelocity(angular_velocity);
-				item.ActivatePhysics();
+				item.SetLinearVelocity(linear_velocity);
+				/* item.ActivatePhysics(); */
 				item.SetThrown();
 			}
 		}
