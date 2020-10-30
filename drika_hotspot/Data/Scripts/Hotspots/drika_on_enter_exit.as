@@ -38,6 +38,7 @@ class DrikaOnEnterExit : DrikaElement{
 	bool got_objects_inside = false;
 	array<int> reference_ids;
 	bool initial_setup_done = false;
+	bool check_all;
 
 	vec3 external_hotspot_translation;
 	quaternion external_hotspot_rotation;
@@ -58,6 +59,7 @@ class DrikaOnEnterExit : DrikaElement{
 		external_hotspot_scale = GetJSONVec3(params, "external_hotspot_scale", vec3(0.25));
 		external_hotspot_id = GetJSONInt(params, "external_hotspot_id", -1);
 		reset_when_false = GetJSONBool(params, "reset_when_false", false);
+		check_all = GetJSONBool(params, "check_all", false);
 
 		//Converting old savedata into new, to be removed later on.
 		drika_element_types function_type = drika_element_types(params["function"].asInt());
@@ -142,6 +144,13 @@ class DrikaOnEnterExit : DrikaElement{
 		return false;
 	}
 
+	bool IsWhileFunction(){
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside || hotspot_trigger_type == while_item_inside || hotspot_trigger_type == while_item_outside || hotspot_trigger_type == while_object_inside || hotspot_trigger_type == while_object_outside){
+			return true;
+		}
+		return false;
+	}
+
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["hotspot_trigger_type"] = JSONValue(hotspot_trigger_type);
@@ -171,10 +180,9 @@ class DrikaOnEnterExit : DrikaElement{
 				data["external_hotspot_scale"].append(scale.z);
 			}
 		}
-		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside ||
-			hotspot_trigger_type == while_item_inside || hotspot_trigger_type == while_item_outside ||
-			hotspot_trigger_type == while_object_inside || hotspot_trigger_type == while_object_outside){
+		if(IsWhileFunction()){
 			data["reset_when_false"] = JSONValue(reset_when_false);
+			data["check_all"] = JSONValue(check_all);
 		}
 		target_select.SaveIdentifier(data);
 		return data;
@@ -301,9 +309,7 @@ class DrikaOnEnterExit : DrikaElement{
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside ||
-			hotspot_trigger_type == while_item_inside || hotspot_trigger_type == while_item_outside ||
-			hotspot_trigger_type == while_object_inside || hotspot_trigger_type == while_object_outside){
+		if(IsWhileFunction()){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Reset When False");
 			ImGui_NextColumn();
@@ -312,6 +318,14 @@ class DrikaOnEnterExit : DrikaElement{
 		}
 
 		target_select.DrawSelectTargetUI();
+
+		if((target_select.identifier_type == team) && IsWhileFunction()){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Check All");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Check All", check_all);
+			ImGui_NextColumn();
+		}
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("External Hotspot");
@@ -576,6 +590,8 @@ class DrikaOnEnterExit : DrikaElement{
 	bool InsideCheck(){
 		Object@ target_hotspot = external_hotspot?external_hotspot_obj:this_hotspot;
 		reference_ids.resize(0);
+		bool all_inside = true;
+		bool one_inside = false;
 
 		array<MovementObject@> chars = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < chars.size(); i++){
@@ -583,12 +599,20 @@ class DrikaOnEnterExit : DrikaElement{
 				if(hotspot_trigger_type == while_character_inside){
 					reference_ids.insertLast(chars[i].GetID());
 				}
-				return true;
-			}else if(hotspot_trigger_type == while_character_outside){
-				reference_ids.insertLast(chars[i].GetID());
+				one_inside = true;
+			}else{
+				if(hotspot_trigger_type == while_character_outside){
+					reference_ids.insertLast(chars[i].GetID());
+				}
+				all_inside = false;
 			}
 		}
-		return false;
+
+		if(check_all){
+			return all_inside;
+		}else{
+			return one_inside;
+		}
 	}
 
 	bool CharacterInside(MovementObject@ char, Object@ hotspot_obj){
