@@ -40,6 +40,7 @@ class DrikaAnimation : DrikaElement{
 	float duration;
 	float extra_yaw;
 	bool moved_spawn_point = false;
+	bool update_collision;
 
 	int key_index = 0;
 	Object@ current_key;
@@ -104,6 +105,7 @@ class DrikaAnimation : DrikaElement{
 		parallel_operation = GetJSONBool(params, "parallel_operation", false);
 		ease_function = ease_functions(GetJSONInt(params, "ease_function", linear));
 		current_ease_function = ease_function;
+		update_collision = GetJSONBool(params, "update_collision", true);
 
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option | camera_option | item_option;
@@ -127,6 +129,7 @@ class DrikaAnimation : DrikaElement{
 		data["extra_yaw"] = JSONValue(extra_yaw);
 		data["parallel_operation"] = JSONValue(parallel_operation);
 		data["ease_function"] = JSONValue(ease_function);
+		data["update_collision"] = JSONValue(update_collision);
 
 		data["key_ids"] = JSONValue(JSONarrayValue);
 		for(uint i = 0; i < key_ids.size(); i++){
@@ -369,6 +372,13 @@ class DrikaAnimation : DrikaElement{
 		ImGui_Text("Play In Parallel");
 		ImGui_NextColumn();
 		ImGui_Checkbox("###Play In Parallel", parallel_operation);
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Update Collision");
+		ImGui_NextColumn();
+		ImGui_Checkbox("###Update Collision", update_collision);
+		ImGui_NextColumn();
 	}
 
 	void SetCurrentTransform(){
@@ -618,12 +628,16 @@ class DrikaAnimation : DrikaElement{
 						targets[i].SetRotation(rotation);
 					}
 				}else{
-					targets[i].SetTranslation(translation);
-					targets[i].SetRotation(rotation);
+					if(update_collision){
+						targets[i].SetTranslation(translation);
+						targets[i].SetRotation(rotation);
+						RefreshChildren(targets[i]);
+					}else{
+						targets[i].SetTranslationRotationFast(translation, rotation);
+					}
 					if(animate_scale){
 						targets[i].SetScale(scale);
 					}
-					RefreshChildren(targets[i]);
 				}
 			}
 		}
