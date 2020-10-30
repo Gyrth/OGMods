@@ -563,51 +563,9 @@ class DrikaAnimation : DrikaElement{
 
 	void ApplyTransform(vec3 translation, quaternion rotation, vec3 scale){
 		if(target_select.identifier_type == cam){
-			// Set camera euler angles from rotation matrix
-			vec3 front = Mult(rotation, vec3(0,0,1));
-			float x_rot;
-			float y_rot;
-			float z_rot;
-
-			double sqw = rotation.w*rotation.w;
-		    double sqx = rotation.x*rotation.x;
-		    double sqy = rotation.y*rotation.y;
-		    double sqz = rotation.z*rotation.z;
-
-			double unit = sqx + sqy + sqz + sqw; // if normalised is one, otherwise is correction factor
-			double test = rotation.x * rotation.w - rotation.y * rotation.z;
-			if(test > 0.49999*unit) { // singularity at north pole
-				x_rot = PI / 2.0f;
-				y_rot = 2.0f * atan2(rotation.y, rotation.x);
-				z_rot = 0.0f;
-
-				vec3 v = vec3(x_rot, y_rot, z_rot);
-            	vec3 norm = NormalizeAngles(radToDeg * v);
-				x_rot = norm.x;
-				y_rot = norm.y;
-				z_rot = norm.z;
-			}else if(test < -0.49999*unit) { // singularity at south pole
-				y_rot = -2.0f * atan2(rotation.y, rotation.x);
-				x_rot = -PI / 2.0f;
-				z_rot = 0.0f;
-
-				vec3 v = vec3(x_rot, y_rot, z_rot);
-	            vec3 norm = NormalizeAngles(radToDeg * v);
-				x_rot = norm.x;
-				y_rot = norm.y;
-				z_rot = norm.z;
-			}else{
-				y_rot = atan2(front.x, front.z)*180.0f/PI;
-				x_rot = asin(front[1])*-180.0f/PI;
-				vec3 up = Mult(rotation, vec3(0,1,0));
-				vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
-				vec3 expected_up = normalize(cross(expected_right, front));
-				z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/PI;
-			}
-
+			vec3 direction = SingularityFix(rotation);
 			const float zoom_sensitivity = 3.5f;
 			float zoom = min(150.0f, 90.0f / max(0.001f,(1.0f+(scale.x-1.0f) * zoom_sensitivity)));
-			vec3 direction = vec3(floor(x_rot * 100.0f + 0.5f) / 100.0f, floor(y_rot * 100.0f + 0.5f) / 100.0f, floor(z_rot * 100.0f + 0.5f) / 100.0f);
 
 			string msg = "drika_dialogue_set_camera_position ";
 			msg += direction.x + " ";
@@ -638,9 +596,17 @@ class DrikaAnimation : DrikaElement{
 					float new_rotation = floor(rot + 0.5f);
 					vec3 new_facing = Mult(quaternion(vec4(0, 1, 0, new_rotation * 3.1415f / 180.0f)), vec3(1, 0, 0));
 
-					char.SetRotationFromFacing(new_facing);
-					char.position = translation;
-					char.velocity = vec3(0.0, 0.0, 0.0);
+					if(char.GetBoolVar("dialogue_control")){
+						vec3 direction = SingularityFix(rotation);
+						char.ReceiveScriptMessage("set_rotation " + direction.y);
+						char.ReceiveScriptMessage("set_dialogue_position " + translation.x + " " + translation.y + " " + translation.z);
+						char.Execute("this_mo.velocity = vec3(0.0, 0.0, 0.0);");
+						char.Execute("FixDiscontinuity();");
+					}else{
+						char.SetRotationFromFacing(new_facing);
+						char.position = translation;
+						char.velocity = vec3(0.0, 0.0, 0.0);
+					}
 
 					if(editing || (!editing && moved_spawn_point)){
 						if(editing){
@@ -661,6 +627,52 @@ class DrikaAnimation : DrikaElement{
 				}
 			}
 		}
+	}
+
+	vec3 SingularityFix(quaternion rotation){
+		// Set camera euler angles from rotation matrix
+		vec3 front = Mult(rotation, vec3(0,0,1));
+		float x_rot;
+		float y_rot;
+		float z_rot;
+
+		double sqw = rotation.w*rotation.w;
+		double sqx = rotation.x*rotation.x;
+		double sqy = rotation.y*rotation.y;
+		double sqz = rotation.z*rotation.z;
+
+		double unit = sqx + sqy + sqz + sqw; // if normalised is one, otherwise is correction factor
+		double test = rotation.x * rotation.w - rotation.y * rotation.z;
+		if(test > 0.49999*unit) { // singularity at north pole
+			x_rot = PI / 2.0f;
+			y_rot = 2.0f * atan2(rotation.y, rotation.x);
+			z_rot = 0.0f;
+
+			vec3 v = vec3(x_rot, y_rot, z_rot);
+			vec3 norm = NormalizeAngles(radToDeg * v);
+			x_rot = norm.x;
+			y_rot = norm.y;
+			z_rot = norm.z;
+		}else if(test < -0.49999*unit) { // singularity at south pole
+			y_rot = -2.0f * atan2(rotation.y, rotation.x);
+			x_rot = -PI / 2.0f;
+			z_rot = 0.0f;
+
+			vec3 v = vec3(x_rot, y_rot, z_rot);
+			vec3 norm = NormalizeAngles(radToDeg * v);
+			x_rot = norm.x;
+			y_rot = norm.y;
+			z_rot = norm.z;
+		}else{
+			y_rot = atan2(front.x, front.z)*180.0f/PI;
+			x_rot = asin(front[1])*-180.0f/PI;
+			vec3 up = Mult(rotation, vec3(0,1,0));
+			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+			vec3 expected_up = normalize(cross(expected_right, front));
+			z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/PI;
+		}
+
+		return vec3(floor(x_rot * 100.0f + 0.5f) / 100.0f, floor(y_rot * 100.0f + 0.5f) / 100.0f, floor(z_rot * 100.0f + 0.5f) / 100.0f);
 	}
 
 	vec3 NormalizeAngles(vec3 angles){
@@ -944,8 +956,26 @@ class DrikaAnimation : DrikaElement{
 		}
 	}
 
+	void ApplyActorTransform(){
+		if(preview_animation){return;}
+		array<MovementObject@> chars = target_select.GetTargetMovementObjects();
+
+		for(uint i = 0; i < chars.size(); i++){
+			MovementObject@ char = chars[i];
+			Object@ obj = ReadObjectFromID(char.GetID());
+			if(obj.IsSelected()){
+				vec3 translation = obj.GetTranslation();
+				vec3 direction = SingularityFix(obj.GetRotation());
+				char.ReceiveScriptMessage("set_rotation " + direction.y);
+				char.ReceiveScriptMessage("set_dialogue_position " + translation.x + " " + translation.y + " " + translation.z);
+				char.Execute("this_mo.velocity = vec3(0.0, 0.0, 0.0);");
+			}
+		}
+	}
+
 	void Update(){
 		if(animation_method == timeline_method){
+			ApplyActorTransform();
 			if(moving_animation_key){
 				MoveAnimationKey();
 			}else if(preview_animation){
