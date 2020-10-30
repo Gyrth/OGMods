@@ -1743,6 +1743,13 @@ class DrikaDialogue : DrikaElement{
 		for(uint i = 0; i < targets.size(); i++){
 			/* targets[i].rigged_object().anim_client().Reset(); */
 			/* targets[i].Execute("dialogue_anim = \"Data/Animations/r_actionidle.anm\";"); */
+
+			if(targets[i].GetIntVar("state") == _ragdoll_state){
+                targets[i].Execute("WakeUp(_wake_stand);" +
+		                			"EndGetUp();" +
+		                			"unragdoll_time = 0.0f;");
+            }
+
 			targets[i].ReceiveScriptMessage("set_rotation " + target_actor_rotation);
 			targets[i].ReceiveScriptMessage("set_dialogue_position " + target_actor_position.x + " " + target_actor_position.y + " " + target_actor_position.z);
 			targets[i].Execute("this_mo.velocity = vec3(0.0, 0.0, 0.0);");
@@ -1763,6 +1770,13 @@ class DrikaDialogue : DrikaElement{
 			string roll_fade = use_ik ? "roll_ik_fade = 0.0f;" : "roll_ik_fade = 1.0f;";
 			string callback = "";
 			if(wait_anim_end) callback += "in_animation = true;this_mo.rigged_object().anim_client().SetAnimationCallback(\"void EndAnim()\");";
+
+			if(targets[i].GetIntVar("state") == _ragdoll_state){
+                targets[i].Execute("WakeUp(_wake_stand);" +
+		                			"EndGetUp();" +
+		                			"unragdoll_time = 0.0f;");
+				targets[i].Execute("FixDiscontinuity();");
+            }
 
 			targets[i].rigged_object().anim_client().Reset();
 			targets[i].Execute(roll_fade + "this_mo.SetAnimation(\"" + target_actor_animation + "\", " + transition_speed + ", " + flags + ");dialogue_anim = \"" + target_actor_animation + "\";" + callback);
