@@ -479,8 +479,8 @@ void Update(){
 		}else if(!reorded){
 			GetCurrentElement().Update();
 		}
-		messages.resize(0);
 	}
+	messages.resize(0);
 }
 
 void UpdateParallelOperations(){
@@ -1399,6 +1399,9 @@ void SwapIndexes(int index_1, int index_2){
 }
 
 DrikaElement@ GetCurrentElement(){
+	if(drika_elements.size() == 0){
+		return DrikaElement();
+	}
 	return drika_elements[drika_indexes[current_line]];
 }
 
@@ -1445,10 +1448,6 @@ void ReceiveMessage(string msg){
 	token_iter.FindNextToken(msg);
 	string token = token_iter.GetToken(msg);
 
-    if(drika_elements.size() == 0 && token != "drika_read_file_done"){
-        return;
-    }
-	// Discard the messages when this hotspot is disabled.
 	if(token == "level_event"){
 		if(editing){
 			array<string> editor_messages;
@@ -1466,7 +1465,8 @@ void ReceiveMessage(string msg){
 			token_iter.FindNextToken(msg);
 			string message = token_iter.GetToken(msg);
 
-			if(!script_finished && drika_indexes.size() > 0 && hotspot_enabled){
+			// Discard the messages when this hotspot is disabled.
+			if(!script_finished && drika_elements.size() > 0 && hotspot_enabled){
 				messages.insertLast(message);
 			}
 		}
