@@ -311,6 +311,7 @@ class DrikaElement{
 			RemoveReference(this);
 			reference_string = new_reference_string;
 		}else{
+			RemoveReference(this);
 			reference_string = new_reference_string;
 			RegisterReference(this);
 		}
