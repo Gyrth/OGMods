@@ -33,6 +33,7 @@ class DrikaSetColor : DrikaElement{
 
 	void PostInit(){
 		target_select.PostInit();
+		GetBeforeColor();
 	}
 
 	JSONValue GetSaveData(){
@@ -205,9 +206,6 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	bool Trigger(){
-		if(!triggered){
-			GetBeforeColor();
-		}
 		triggered = true;
 		return SetColor(false);
 	}
