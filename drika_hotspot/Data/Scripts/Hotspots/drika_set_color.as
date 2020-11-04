@@ -13,6 +13,7 @@ class DrikaSetColor : DrikaElement{
 	color_types color_type;
 	array<string> palette_indexes;
 	array<string> color_type_choices = {"Tint", "Palette Color"};
+	float overbright;
 
 	DrikaSetColor(JSONValue params = JSONValue()){
 		color_type = color_types(GetJSONInt(params, "color_type", 0));
@@ -20,6 +21,7 @@ class DrikaSetColor : DrikaElement{
 		palette_slot = GetJSONInt(params, "palette_slot", 0);
 		current_palette_slot = palette_slot;
 		after_color = GetJSONVec3(params, "after_color", vec3(1));
+		overbright = GetJSONFloat(params, "overbright", 0.0f);
 
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
@@ -37,6 +39,7 @@ class DrikaSetColor : DrikaElement{
 		JSONValue data;
 		data["color_type"] = JSONValue(color_type);
 		data["palette_slot"] = JSONValue(palette_slot);
+		data["overbright"] = JSONValue(overbright);
 		data["after_color"] = JSONValue(JSONarrayValue);
 		data["after_color"].append(after_color.x);
 		data["after_color"].append(after_color.y);
@@ -177,6 +180,16 @@ class DrikaSetColor : DrikaElement{
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Overbright");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_SliderFloat("##Overbright", overbright, 0.0f, 10.0f, "%.1f")){
+			SetColor(false);
+		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	void DrawEditing(){
@@ -214,13 +227,15 @@ class DrikaSetColor : DrikaElement{
 
 	bool SetColor(bool reset){
 		array<Object@> targets = target_select.GetTargetObjects();
+		float multiplier = 1.0 + overbright;
+
 		for(uint i = 0; i < targets.size(); i++){
 			if(color_type == object_palette_color){
 				if(targets[i].GetType() == _movement_object && targets[i].GetNumPaletteColors() > palette_slot){
-					targets[i].SetPaletteColor(palette_slot, reset?before_color:after_color);
+					targets[i].SetPaletteColor(palette_slot, reset?before_color:after_color*multiplier);
 				}
 			}else if(color_type == object_tint){
-				targets[i].SetTint(reset?before_color:after_color);
+				targets[i].SetTint(reset?before_color:after_color*multiplier);
 			}
 		}
 		return true;
