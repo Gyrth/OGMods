@@ -458,8 +458,8 @@ void Update(){
 		return;
 	}
 
-	if(drika_indexes.size() > 0 && hotspot_enabled){
-		if(!show_editor){
+	if(drika_indexes.size() > 0){
+		if(!show_editor && hotspot_enabled){
 			DeliverMessages();
 			UpdateParallelOperations();
 
