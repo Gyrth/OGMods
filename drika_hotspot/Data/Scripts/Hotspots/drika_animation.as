@@ -923,6 +923,7 @@ class DrikaAnimation : DrikaElement{
 				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 			}
 			DrawTimeline();
+			MoveAnimationKey();
 		}else{
 			UpdateAnimationKeys();
 			int num_keys = max(0, key_ids.size() - 1);
@@ -988,65 +989,63 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void Update(){
-		if(animation_method == timeline_method){
-			ApplyActorTransform();
-			if(moving_animation_key){
-				MoveAnimationKey();
-			}else if(preview_animation){
-				if(GetInputPressed(0, "space")){
-					preview_animation = false;
-				}else{
-					UpdateAnimation();
-					timeline_position = animation_timer;
-					if(animation_finished){
-						preview_animation = false;
-					}
-				}
+		ApplyActorTransform();
+		if(moving_animation_key){return;}
+		if(preview_animation){
+			if(GetInputPressed(0, "space")){
+				preview_animation = false;
 			}else{
-				//Don't move/insert/delete keys when the modifier keys are pressed.
-				if(GetInputDown(0, "lctrl") || GetInputDown(0, "lalt")){
-					return;
-				}else{
-					if(GetInputPressed(0, "i")){
-						//Make sure to delete any key that's currently at this position before adding a new one.
-						DeleteAnimationKey();
-						InsertAnimationKey();
-					}else if(GetInputPressed(0, "x")){
-						DeleteAnimationKey();
-					}else if(GetInputPressed(0, "g")){
-						for(uint i = 0, len = key_data.size(); i < len; i++){
-							if(key_data[i].time == timeline_position){
-								@target_key = key_data[i];
-								target_key.moving = true;
-								target_key.moving_time = target_key.time;
-								moving_animation_key = true;
-							}
+				UpdateAnimation();
+				timeline_position = animation_timer;
+				if(animation_finished){
+					preview_animation = false;
+				}
+			}
+		}else{
+			//Don't move/insert/delete keys when the modifier keys are pressed.
+			if(GetInputDown(0, "lctrl") || GetInputDown(0, "lalt")){
+				return;
+			}else{
+				if(GetInputPressed(0, "i")){
+					//Make sure to delete any key that's currently at this position before adding a new one.
+					DeleteAnimationKey();
+					InsertAnimationKey();
+				}else if(GetInputPressed(0, "x")){
+					DeleteAnimationKey();
+				}else if(GetInputPressed(0, "g")){
+					for(uint i = 0, len = key_data.size(); i < len; i++){
+						if(key_data[i].time == timeline_position){
+							@target_key = key_data[i];
+							target_key.moving = true;
+							target_key.moving_time = target_key.time;
+							moving_animation_key = true;
 						}
-					}else if(GetInputPressed(0, "c")){
-						for(uint i = 0, len = key_data.size(); i < len; i++){
-							if(key_data[i].time == timeline_position){
-								AnimationKey new_key = key_data[i];
-
-								@target_key = new_key;
-								target_key.moving = true;
-								target_key.moving_time = target_key.time;
-								moving_animation_key = true;
-
-								key_data.insertLast(@new_key);
-							}
-						}
-					}else if(GetInputPressed(0, "space")){
-						if(animation_finished){
-							Reset();
-						}
-						preview_animation = true;
 					}
+				}else if(GetInputPressed(0, "c")){
+					for(uint i = 0, len = key_data.size(); i < len; i++){
+						if(key_data[i].time == timeline_position){
+							AnimationKey new_key = key_data[i];
+
+							@target_key = new_key;
+							target_key.moving = true;
+							target_key.moving_time = target_key.time;
+							moving_animation_key = true;
+
+							key_data.insertLast(@new_key);
+						}
+					}
+				}else if(GetInputPressed(0, "space")){
+					if(animation_finished){
+						Reset();
+					}
+					preview_animation = true;
 				}
 			}
 		}
 	}
 
 	void MoveAnimationKey(){
+		if(!moving_animation_key){return;}
 		target_key.moving_time = min(timeline_duration, max(0.0, ImGui_GetMousePos().x - margin / 2.0) * timeline_duration / timeline_width);
 		if(timeline_snap){
 			float lowest = floor(target_key.moving_time * 10.0) / 10.0;
