@@ -47,7 +47,7 @@ bool chase_allowed = false;
 
 float body_bob_freq = 0.0f;
 float body_bob_time_offset;
-string target_animation = "Data/Animations/gun_animation.anm";
+string target_animation = "Data/Animations/gun_default.anm";
 
 class InvestigatePoint {
     vec3 pos;
@@ -282,6 +282,34 @@ array<vec3> weap_points;
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
     time += ts.step();
+
+	RiggedObject@ rigged_object = this_mo.rigged_object();
+
+	if(GetInputPressed(0, "space")){
+		this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, _ANM_FROM_START);
+	}
+
+	Skeleton@ skeleton = rigged_object.skeleton();
+	int num_bones = skeleton.NumBones();
+
+	for(int i = 0; i < num_bones; i++){
+		int bone = i;
+		if(skeleton.HasPhysics(i)){
+			vec3 bone_pos = skeleton.GetBoneTransform(i).GetTranslationPart();
+			quaternion bone_quat = QuaternionFromMat4(skeleton.GetBoneTransform(i));
+
+			mat4 translate_mat;
+			translate_mat.SetTranslationPart(bone_pos);
+			mat4 rotation_mat;
+			rotation_mat = Mat4FromQuaternion(bone_quat);
+			mat4 mat = translate_mat * rotation_mat;
+
+			DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)),
+						  mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)),
+						  vec4(1.0f), vec4(1.0f), _delete_on_draw);
+
+		}
+	}
 }
 
 void SetScale(float new_character_scale){
@@ -316,6 +344,8 @@ bool Init(string character_path) {
     if(success){
         this_mo.RecreateRiggedObject(this_mo.char_path);
         this_mo.SetAnimation(target_animation, 20.0f, 0);
+		this_mo.SetScriptUpdatePeriod(1);
+		this_mo.rigged_object().SetAnimUpdatePeriod(1);
 		/* RiggedObject@ rigged_object = this_mo.rigged_object();
 	    Skeleton@ skeleton = rigged_object.skeleton();
 	    int num_bones = skeleton.NumBones();
