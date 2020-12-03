@@ -34,7 +34,7 @@
     <RayToSun r0="0.121363" r1="0.062051" r2="0.990667" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="3.79373" t1="3.73762" t2="-0.821301" s0="1" s1="1" s2="1" q0="0.0484247" q1="-0.70192" q2="0.0479419" q3="0.708989" euler_x="0.136398" euler_y="-1.56077" euler_z="-8.92294e-06" id="0">
+    <CameraObject t0="6.88867" t1="7.54035" t2="-3.31419" s0="1" s1="1" s2="1" q0="0.106498" q1="-0.881513" q2="0.238782" q3="0.393161" euler_x="-2.61253" euler_y="-0.839056" euler_z="-3.14159" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="0" t1="0" t2="0" s0="6" s1="1" s2="6" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -56,7 +56,7 @@
         <ItemConnections />
         <Palette />
     </ActorObject>
-    <ActorObject t0="4.64879" t1="2.6055" t2="4.00451" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <ActorObject t0="4.41459" t1="2.18223" t2="3.73707" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" pc_script_path="playercontrol.as" is_player="1">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
