@@ -3,5 +3,5 @@
 	<Model>Data/Models/gun.obj</Model>
 	<ColorMap>Data/Textures/gun_c.png</ColorMap>
 	<NormalMap>Data/Textures/gun_n.png</NormalMap>
-    <ShaderName>envobject</ShaderName>
+    <ShaderName>envobject #TANGENT #NO_DECALS #KEEP_SPEC #BASE_TANGENT</ShaderName>
 </Object>

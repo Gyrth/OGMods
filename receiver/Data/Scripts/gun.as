@@ -277,6 +277,7 @@ quaternion total_body_rotation;
 array<vec3> temp_old_weap_points;
 array<vec3> old_weap_points;
 array<vec3> weap_points;
+float current_fov = 90.0f;
 
 enum GunStates{
 	MagazineOut,
@@ -317,8 +318,10 @@ array<Bullet@> bullets;
 float trigger_time_out = 0.0f;
 float time_out_length = 0.25f;
 float bullet_speed = 433.0f;
-float max_bullet_distance = 500.0f;
-
+float max_bullet_distance = 1500.0f;
+float cam_rotation_x = 0.0f;
+float cam_rotation_y = 180.0f;
+float cam_rotation_z = 0.0f;
 
 void Update(int num_frames) {
 	Timestep ts(time_step, num_frames);
@@ -326,24 +329,13 @@ void Update(int num_frames) {
 
 	RiggedObject@ rigged_object = this_mo.rigged_object();
 
-	if(GetInputPressed(this_mo.controller_id, "b")){
-		this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, _ANM_FROM_START);
-	}else if(gun_state == MagazineIn && GetInputPressed(this_mo.controller_id, "space")){
-		this_mo.SetAnimation("Data/Animations/gun_shoot.anm", 20.0f, _ANM_FROM_START);
-		Shoot();
-	}else if(gun_state == MagazineOut && GetInputPressed(this_mo.controller_id, "r")){
-		this_mo.SetAnimation("Data/Animations/gun_magazine_insert.anm", 20.0f, _ANM_FROM_START);
-		gun_state = MagazineIn;
-	}else if(gun_state == MagazineIn && GetInputPressed(this_mo.controller_id, "r")){
-		this_mo.SetAnimation("Data/Animations/gun_magazine_remove.anm", 20.0f, _ANM_FROM_START);
-		gun_state = MagazineOut;
-	}
-
 	for(int i=0; i<num_frames; ++i){
 		camera_shake *= 0.95f;
 	}
 
 	UpdateBullets();
+	UpdateControls();
+	UpdateCamera(ts);
 
 	Skeleton@ skeleton = rigged_object.skeleton();
 	int num_bones = skeleton.NumBones();
@@ -372,6 +364,74 @@ void Update(int num_frames) {
 	}
 }
 
+void UpdateCamera(const Timestep &in ts){
+	if(!this_mo.controlled){
+		return;
+	}
+	RiggedObject@ rigged_object = this_mo.rigged_object();
+	Skeleton@ skeleton = rigged_object.skeleton();
+
+	float camera_vibration_mult = 3.0f;
+    float camera_vibration = camera_shake * camera_vibration_mult;
+	float y_shake = RangedRandomFloat(-camera_vibration, camera_vibration);
+	float x_shake = RangedRandomFloat(-camera_vibration, camera_vibration);
+	camera.SetYRotation(cam_rotation_y + y_shake);
+	camera.SetXRotation(cam_rotation_x + x_shake);
+	camera.SetZRotation(cam_rotation_z);
+	camera.CalcFacing();
+
+	int bone = skeleton.IKBoneStart("pelvis");
+	vec3 bone_pos = skeleton.GetBoneTransform(bone).GetTranslationPart();
+	quaternion bone_quat = QuaternionFromMat4(skeleton.GetBoneTransform(bone));
+
+	mat4 translate_mat;
+	translate_mat.SetTranslationPart(bone_pos);
+	mat4 rotation_mat;
+	rotation_mat = Mat4FromQuaternion(bone_quat);
+	mat4 mat = translate_mat * rotation_mat;
+
+	DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)),
+				  mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)),
+				  vec4(1.0f), vec4(1.0f), _delete_on_draw);
+
+	vec3 cam_pos = mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0));
+	vec3 up_offset = camera.GetUpVector() * 0.25f;
+
+	camera.SetFOV(current_fov);
+	camera.SetPos(cam_pos + up_offset);
+	camera.SetDistance(0.5f);
+
+	if(this_mo.focused_character) {
+		UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
+	}
+
+	camera.SetInterpSteps(ts.frames());
+}
+
+void UpdateControls(){
+
+	if(this_mo.controlled){
+		cam_rotation_y -= GetLookXAxis(this_mo.controller_id);
+		cam_rotation_x -= GetLookYAxis(this_mo.controller_id);
+	}
+
+	vec3 facing = camera.GetFacing();
+	this_mo.SetRotationFromFacing(facing);
+
+	if(GetInputPressed(this_mo.controller_id, "b")){
+		this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, _ANM_FROM_START);
+	}else if(gun_state == MagazineIn && GetInputPressed(this_mo.controller_id, "attack")){
+		this_mo.SetAnimation("Data/Animations/gun_shoot.anm", 20.0f, _ANM_FROM_START);
+		Shoot();
+	}else if(gun_state == MagazineOut && GetInputPressed(this_mo.controller_id, "r")){
+		this_mo.SetAnimation("Data/Animations/gun_magazine_insert.anm", 20.0f, _ANM_FROM_START);
+		gun_state = MagazineIn;
+	}else if(gun_state == MagazineIn && GetInputPressed(this_mo.controller_id, "r")){
+		this_mo.SetAnimation("Data/Animations/gun_magazine_remove.anm", 20.0f, _ANM_FROM_START);
+		gun_state = MagazineOut;
+	}
+}
+
 void UpdateBullets(){
 	for(uint i = 0; i < bullets.size(); i++){
 
@@ -379,22 +439,25 @@ void UpdateBullets(){
 
 		vec3 start = bullet.starting_position;
 		vec3 end = bullet.starting_position + (bullet.direction * bullet_speed * time_step);
-		bool colliding = CheckCollisions(start, end);
+		bool done = CheckCollisions(start, end, bullet);
 		DebugDrawLine(start, end, vec3(0.5), vec3(0.5), _fade);
 		bullet.SetStartingPoint(end);
-		if (bullet.distance_done > max_bullet_distance || colliding){
+
+		if(bullet.distance_done > max_bullet_distance || done){
 			bullets.removeAt(i);
 			return;
 		}
 	}
 }
 
-bool CheckCollisions(vec3 start, vec3 end){
+bool CheckCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
 	bool colliding = false;
 	col.GetObjRayCollision(start, end);
 	vec3 direction = normalize(end - start);
+	CollisionPoint point;
+
 	if(sphere_col.NumContacts() != 0){
-		CollisionPoint point = sphere_col.GetContact(0);
+		point = sphere_col.GetContact(sphere_col.NumContacts() - 1);
 		MakeMetalSparks(point.position);
 		vec3 facing = camera.GetFacing();
 		MakeParticle("Data/Particles/gun_decal.xml", point.position - facing, facing * 10.0f);
@@ -409,34 +472,54 @@ bool CheckCollisions(vec3 start, vec3 end){
 		}
 		PlaySound(path, point.position);
 		colliding = true;
+		end = point.position;
 	}
 
 	col.CheckRayCollisionCharacters(start, end);
 	int char_id = -1;
 	if(sphere_col.NumContacts() != 0){
-		CollisionPoint point = sphere_col.GetContact(0);
+		point = sphere_col.GetContact(0);
 		char_id = point.id;
 	}
 
 	if(char_id != -1 && char_id != this_mo.GetID()){
 		MovementObject@ char = ReadCharacterID(char_id);
 		char.rigged_object().Stab(sphere_col.GetContact(0).position, direction, 1, 0);
-		vec3 force = direction * 5000.0f;
+		vec3 force = direction * 15000.0f;
 		vec3 hit_pos = vec3(0.0f);
 		TimedSlowMotion(0.1f, 0.7f, 0.05f);
-		float damage = 0.5;
+		float damage = 0.1;
 		char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
 					 "vec3 pos = vec3("+hit_pos.x+", "+hit_pos.y+", "+hit_pos.z+");" +
 					 "HandleRagdollImpactImpulse(impulse, pos, " + damage + ");");
 		 colliding = true;
+		 end = point.position;
 	}
 	return colliding;
 }
 
 void Shoot(){
+	RiggedObject@ rigged_object = this_mo.rigged_object();
+	Skeleton@ skeleton = rigged_object.skeleton();
+	int bone = skeleton.IKBoneStart("pelvis");
+	vec3 bone_pos = skeleton.GetBoneTransform(bone).GetTranslationPart();
+	quaternion bone_quat = QuaternionFromMat4(skeleton.GetBoneTransform(bone));
+
+	mat4 translate_mat;
+	translate_mat.SetTranslationPart(bone_pos);
+	mat4 rotation_mat;
+	rotation_mat = Mat4FromQuaternion(bone_quat);
+	mat4 mat = translate_mat * rotation_mat;
+
+	vec3 bone_point = mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0));
+
 	float offset = 0.01f;
-	vec3 forward = this_mo.GetFacing() + vec3(RangedRandomFloat(-offset, offset), RangedRandomFloat(-offset, offset), RangedRandomFloat(-offset, offset));
-	vec3 spawn_point = this_mo.position + (forward * 0.15) - vec3(0.0, 0.07, 0.0);
+	/* vec3 forward = this_mo.GetFacing() + vec3(RangedRandomFloat(-offset, offset), RangedRandomFloat(-offset, offset), RangedRandomFloat(-offset, offset)); */
+	vec3 forward = this_mo.GetFacing();
+	vec3 up = camera.GetUpVector();
+	vec3 forward_offset = forward * 0.2;
+	vec3 up_offset = up * 0.23;
+	vec3 spawn_point = bone_point + up_offset + forward_offset;
 
 	int smoke_particle_amount = 5;
 	vec3 smoke_velocity = forward * 5.0f;
@@ -449,7 +532,7 @@ void Shoot(){
 	camera_shake += 0.25f;
 	bullets.insertLast(Bullet(spawn_point, forward));
 
-	/* DebugDrawWireSphere(spawn_point, 0.05, vec3(1.0), _fade); */
+	/* DebugDrawWireSphere(spawn_point, 0.01, vec3(1.0), _fade); */
 }
 
 void MakeMetalSparks(vec3 pos) {
@@ -491,6 +574,7 @@ void Reset() {
 	ClearTemporaryDecals();
 	this_mo.rigged_object().ClearBoneConstraints();
 	this_mo.SetAnimation("Data/Animations/gun_default.anm", 20.0f, _ANM_FROM_START);
+	SetGrabMouse(true);
 }
 
 bool Init(string character_path) {
@@ -582,11 +666,15 @@ void FinalAnimationMatrixUpdate(int num_frames) {
 	vec3 offset = this_mo.position;
 	offset.y -= character_scale;
 
-	vec3 facing = this_mo.GetFacing();
-	float cur_rotation = atan2(facing.x, facing.z);
+	vec3 facing = camera.GetFacing();
+	vec3 flat_facing = normalize(vec3(facing.x, 0.0f, facing.z));
+	float target_rotation =  atan2(-flat_facing.x, flat_facing.z) / 3.1417f * 180.0f;
+	float target_rotation2 =  asin(facing.y) / 3.1417f * 180.0f;
 
-	quaternion rotation(vec4(0,1,0,cur_rotation));
-	local_to_world.rotation = rotation;
+	quaternion rot = 	quaternion(vec4(0.0f, -1.0f, 0.0f, target_rotation  * 3.1417f / 180.0f)) *
+						quaternion(vec4(-1.0f, 0.0f, 0.0f, target_rotation2 * 3.1417f / 180.0f));
+
+	local_to_world.rotation = rot;
 	local_to_world.origin = offset;
 	rigged_object.TransformAllFrameMats(local_to_world);
 }
