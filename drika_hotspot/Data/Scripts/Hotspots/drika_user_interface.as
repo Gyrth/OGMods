@@ -285,7 +285,10 @@ class DrikaUserInterface : DrikaElement{
 		display_string += ui_function_names[ui_function] + " ";
 		if(ui_function == ui_text){
 			display_string += "\"" + text_content + "\"";
+		}else if(ui_function == ui_font){
+			display_string += font_name + " " + font_size;
 		}
+
 		return display_string;
 	}
 
