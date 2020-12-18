@@ -465,15 +465,15 @@ class DrikaUserInterface : DrikaElement{
 			if(ImGui_Button("Pick Font")){
 				string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 				if(new_path != ""){
-					new_path = new_path;
 					array<string> path_split = new_path.split("/");
-					for(uint i = 0; i < path_split.size(); i++){
-						if(path_split[i].findFirst(".ttf") != -1){
-							string new_font_name = join(path_split[i].split(".ttf"), "");
-							font_name = new_font_name;
-							SendUIInstruction("set_font", {font_name});
-							break;
-						}
+					string file_name = path_split[path_split.size() - 1];
+					string file_extension = file_name.substr(file_name.length() - 3, 3);
+
+					if(file_extension == "ttf" || file_extension == "TTF"){
+						font_name = file_name.substr(0, file_name.length() - 4);
+						SendUIInstruction("set_font", {font_name});
+					}else{
+						DisplayError("Font issue", "Only ttf font files are supported.");
 					}
 				}
 			}

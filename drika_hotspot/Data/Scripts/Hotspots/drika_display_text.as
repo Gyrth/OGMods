@@ -46,8 +46,16 @@ class DrikaDisplayText : DrikaElement{
 		if(ImGui_Button("Set Font Path")){
 			string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 			if(new_path != ""){
-				font_path = new_path;
-				ShowText(display_message, font_size, font_path);
+				array<string> path_split = new_path.split("/");
+				string file_name = path_split[path_split.size() - 1];
+				string file_extension = file_name.substr(file_name.length() - 3, 3);
+
+				if(file_extension == "ttf" || file_extension == "TTF"){
+					font_path = new_path;
+					ShowText(display_message, font_size, font_path);
+				}else{
+					DisplayError("Font issue", "Only ttf font files are supported.");
+				}
 			}
 		}
 		ImGui_SameLine();
