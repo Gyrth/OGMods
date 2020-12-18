@@ -14,6 +14,7 @@ enum state_choices { 	awake = 0,
 						in_proximity = 13,
 						right_footstep = 14,
 						left_footstep = 15,
+						takes_damage = 16
 					}
 
 enum AIGoal {
@@ -29,8 +30,39 @@ enum AIGoal {
     _ai_flee
 };
 
+class HealthData{
+	int character_id;
+	float blood_health;
+	float temp_health;
+	float permanent_health;
+
+	HealthData(MovementObject@ char){
+		character_id = char.GetID();
+		blood_health = char.GetFloatVar("blood_health");
+		temp_health = char.GetFloatVar("temp_health");
+		permanent_health = char.GetFloatVar("permanent_health");
+	}
+
+	bool CheckHealthDecreased(){
+		if(!MovementObjectExists(character_id)){
+			Log(warning, "The target character does not exist anymore! " + character_id);
+			return false;
+		}
+
+		MovementObject@ char = ReadCharacterID(character_id);
+		if(char.GetFloatVar("blood_health") < blood_health){
+			return true;
+		}else if(char.GetFloatVar("temp_health") < temp_health){
+			return true;
+		}else if(char.GetFloatVar("permanent_health") < permanent_health){
+			return true;
+		}
+		return false;
+	}
+}
+
 class DrikaCheckCharacterState : DrikaElement{
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage"};
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
@@ -41,6 +73,8 @@ class DrikaCheckCharacterState : DrikaElement{
 	array<bool> foot_down;
 	bool check_all;
 	bool check_all_known;
+	bool got_before_health;
+	array<HealthData@> health_data;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		state_choice = state_choices(GetJSONInt(params, "state_check", awake));
@@ -185,6 +219,8 @@ class DrikaCheckCharacterState : DrikaElement{
 			ImGui_SliderFloat("###Proximity Distance", proximity_distance, 0.0, 100.0, "%.2f");
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
+		}else if(state_choice == takes_damage){
+
 		}
 
 		if(state_choice != right_footstep && state_choice != left_footstep){
@@ -203,13 +239,14 @@ class DrikaCheckCharacterState : DrikaElement{
 	void DrawEditing(){
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			MovementObject@ target = targets[i];
+			DebugDrawLine(target.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
 
 			if(state_choice == knows_about){
 				array<MovementObject@> known_targets = known_target.GetTargetMovementObjects();
 
 				for(uint j = 0; j < known_targets.size(); j++){
-					DebugDrawLine(targets[i].position, known_targets[j].position, vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(target.position, known_targets[j].position, vec3(0.0, 1.0, 0.0), _delete_on_update);
 				}
 			}else if(state_choice == in_proximity){
 				array<Object@> target_objects = known_target.GetTargetObjects();
@@ -224,7 +261,7 @@ class DrikaCheckCharacterState : DrikaElement{
 						MovementObject@ char = ReadCharacterID(target_objects[j].GetID());
 						target_location = char.position;
 					}
-					DebugDrawLine(targets[i].position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(target.position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
 				}
 			}
 		}
@@ -237,14 +274,16 @@ class DrikaCheckCharacterState : DrikaElement{
 		bool all_in_state = true;
 
 		for(uint i = 0; i < targets.size(); i++){
+			MovementObject@ target = targets[i];
 			bool state;
+
 			if(state_choice == knows_about){
 				array<MovementObject@> known_targets = known_target.GetTargetMovementObjects();
 
 				for(uint j = 0; j < known_targets.size(); j++){
 					string command = "self_id = situation.KnownID(" + known_targets[j].GetID() + ");";
-					targets[i].Execute(command);
-					state = (targets[i].GetIntVar("self_id") != -1);
+					target.Execute(command);
+					state = (target.GetIntVar("self_id") != -1);
 					//Return true immediately when we don't have to check all characters and the check returns true.
 					if(!check_all_known && state == equals){
 						all_in_state = true;
@@ -255,40 +294,40 @@ class DrikaCheckCharacterState : DrikaElement{
 					}
 				}
 			}else if(state_choice == in_combat){
-				if(!targets[i].controlled){
-					state = (targets[i].GetIntVar("goal") == _ai_attack);
+				if(!target.controlled){
+					state = (target.GetIntVar("goal") == _ai_attack);
 				}else{
-					state = (targets[i].QueryIntFunction("int CombatSong()") == 1);
+					state = (target.QueryIntFunction("int CombatSong()") == 1);
 				}
 			}else if(state_choice == moving){
-				state = (length(targets[i].velocity) > 1.0);
+				state = (length(target.velocity) > 1.0);
 			}else if(state_choice == attacking){
-				state = (targets[i].GetIntVar("state") == _attack_state);
+				state = (target.GetIntVar("state") == _attack_state);
 			}else if(state_choice == ragdolling){
-				state = (targets[i].GetIntVar("state") == _ragdoll_state);
+				state = (target.GetIntVar("state") == _ragdoll_state);
 			}else if(state_choice == hit_reacting){
-				state = (targets[i].GetIntVar("state") == _hit_reaction_state);
+				state = (target.GetIntVar("state") == _hit_reaction_state);
 			}else if(state_choice == patrolling){
-				if(!targets[i].controlled){
-					state = (targets[i].GetIntVar("goal") == _ai_patrol);
+				if(!target.controlled){
+					state = (target.GetIntVar("goal") == _ai_patrol);
 				}else{
 					return false;
 				}
 			}else if(state_choice == investigating){
-				if(!targets[i].controlled){
-					state = (targets[i].GetIntVar("goal") == _ai_investigate);
+				if(!target.controlled){
+					state = (target.GetIntVar("goal") == _ai_investigate);
 				}else{
 					return false;
 				}
 			}else if(state_choice == getting_help){
-				if(!targets[i].controlled){
-					state = (targets[i].GetIntVar("goal") == _ai_get_help);
+				if(!target.controlled){
+					state = (target.GetIntVar("goal") == _ai_get_help);
 				}else{
 					return false;
 				}
 			}else if(state_choice == fleeing){
-				if(!targets[i].controlled){
-					state = (targets[i].GetIntVar("goal") == _ai_flee);
+				if(!target.controlled){
+					state = (target.GetIntVar("goal") == _ai_flee);
 				}else{
 					return false;
 				}
@@ -306,7 +345,7 @@ class DrikaCheckCharacterState : DrikaElement{
 						target_location = char.position;
 					}
 
-					state = (distance(targets[i].position, target_location) < proximity_distance);
+					state = (distance(target.position, target_location) < proximity_distance);
 					if(!check_all && state == equals){
 						all_in_state = true;
 						break;
@@ -316,10 +355,10 @@ class DrikaCheckCharacterState : DrikaElement{
 					}
 				}
 			}else if(state_choice == awake || state_choice == unconscious || state_choice == dead){
-				state = (targets[i].GetIntVar("knocked_out") == state_choice);
+				state = (target.GetIntVar("knocked_out") == state_choice);
 			}else if(state_choice == right_footstep){
 				//First get the foot status.
-				vec3 leg_pos = targets[i].rigged_object().GetIKTargetPosition("right_leg");
+				vec3 leg_pos = target.rigged_object().GetIKTargetPosition("right_leg");
 				if(foot_down.size() < i + 1){
 					col.GetSlidingSphereCollision(leg_pos, 0.1);
 					foot_down.insertLast((sphere_col.NumContacts() > 0));
@@ -340,7 +379,7 @@ class DrikaCheckCharacterState : DrikaElement{
 				}
 			}else if(state_choice == left_footstep){
 				//First get the foot status.
-				vec3 leg_pos = targets[i].rigged_object().GetIKTargetPosition("left_leg");
+				vec3 leg_pos = target.rigged_object().GetIKTargetPosition("left_leg");
 				if(foot_down.size() < i + 1){
 					col.GetSlidingSphereCollision(leg_pos, 0.1);
 					foot_down.insertLast((sphere_col.NumContacts() > 0));
@@ -359,6 +398,29 @@ class DrikaCheckCharacterState : DrikaElement{
 						all_in_state = false;
 					}
 				}
+			}else if(state_choice == takes_damage){
+				HealthData@ target_health_data = null;
+				//Get the cached health data or create a new one if it doesn't exist.
+				for(uint j = 0; j < health_data.size(); j++){
+					if(target.GetID() == health_data[j].character_id){
+						@target_health_data = health_data[j];
+						break;
+					}
+				}
+
+				//Create a new health data if this character isn't tracked yet.
+				if(@target_health_data == null){
+					health_data.insertLast(HealthData(target));
+				}else{
+					state = target_health_data.CheckHealthDecreased();
+					if(!check_all && state == equals){
+						all_in_state = true;
+						break;
+					}
+					if(state != equals){
+						all_in_state = false;
+					}
+				}
 			}
 
 			if(!check_all && state == equals){
@@ -373,6 +435,11 @@ class DrikaCheckCharacterState : DrikaElement{
 		if(!all_in_state && continue_if_false){
 			current_line = continue_element.GetTargetLineIndex();
 			display_index = drika_indexes[continue_element.GetTargetLineIndex()];
+		}
+
+		//Reset all the health data so that it can be used again.
+		if(all_in_state){
+			health_data.resize(0);
 		}
 
 		return all_in_state;
