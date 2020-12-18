@@ -136,11 +136,7 @@ class DrikaUserInterface : DrikaElement{
 				}
 				//If the ui element is already on screen (while editing) then update the font.
 				if(ui_element_added){
-					if(font_element is null){
-						SendUIInstruction("font_changed", {""});
-					}else{
-						SendUIInstruction("font_changed", {font_element.ui_element_identifier});
-					}
+					FontHasChanged();
 				}
 			}
 		}
@@ -311,8 +307,8 @@ class DrikaUserInterface : DrikaElement{
 				SendRemoveUpdatebehaviour();
 				RemoveUIElement();
 				ui_function = ui_functions(current_ui_function);
-				ReorderElements();
 				StartEdit();
+				ReorderElements();
 			}
 		}
 		ImGui_PopItemWidth();
@@ -612,7 +608,10 @@ class DrikaUserInterface : DrikaElement{
 		if(ui_function == ui_clear){
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
 			for(uint i = 0; i < target_elements.size(); i++){
-				target_elements[i].RemoveUIElement();
+				//Make sure the fonts are still available when cleaing the screen.
+				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text){
+					target_elements[i].RemoveUIElement();
+				}
 			}
 		}else if(ui_function == ui_image){
 			if(!ui_element_added){
