@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<Mod>
+	<Id>rope</Id>
+	<Name>Rope</Name>
+	<Category>Item Pack</Category>
+	<Version>0.1.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Thumbnail>Data/Images/rope_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/rope_full.jpg</PreviewImage>
+	<Description>Desperate Gods.</Description>
+	<Tag>b5</Tag>
+	<Tag>scripting</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<NeedsRestart>false</NeedsRestart>
+	<!-- <Level title="Rope" thumbnail="Images/rope_full.jpg">rope.xml</Level> -->
+	<!-- <Item category="Desperate Gods" title="Table" path="Data/Objects/table.xml" thumbnail="Data/UI/spawner/dg.png" /> -->
+</Mod>

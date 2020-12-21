@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<character>
+	<appearance obj_path = "Data/Objects/IGF_Characters/IGF_Turner.xml"
+				skeleton = "Data/Skeletons/r_turner.xml"
+	<animations/>
+	<attacks/>
+	<team>rope</team>
+	<morphs>
+	</morphs>
+	<voice 	path = "Data/Sounds/voice/rabbit2.xml"
+			pitch = "1.0"/>
+	<clothing>Data/Materials/cloth_fabric.xml</clothing>
+	<tags/>
+ </character>
