@@ -47,7 +47,7 @@
             <parameter name="Ear Size" type="float" val="1" />
             <parameter name="Fat" type="float" val="0.5" />
             <parameter name="Muscle" type="float" val="0.5" />
-            <parameter name="Teams" type="string" val="" />
+            <parameter name="Teams" type="string" val="cat, guard, turner, rabbit" />
         </parameters>
         <Connections>
             <Connection id="2" />

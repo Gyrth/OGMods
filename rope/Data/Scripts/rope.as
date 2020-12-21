@@ -1,4 +1,9 @@
 #include "aschar_aux.as"
+#include "situationawareness.as"
+#include "interpdirection.as"
+
+Situation situation;
+int target_id = -1;
 
 float startle_time;
 
@@ -98,8 +103,6 @@ float p_block_skill;
 float p_block_followup;
 float p_attack_speed_mult;
 float p_speed_mult;
-float p_attack_damage_mult;
-float p_attack_knockback_mult;
 float p_fat;
 float p_muscle;
 float p_ear_size;
@@ -127,7 +130,7 @@ vec3 ground_normal(0,1,0);
 vec3 flip_modifier_axis;
 float flip_modifier_rotation;
 vec3 tilt_modifier;
-const float _leg_sphere_size = 0.45f; // affects the size of a sphere collider used for leg collisions
+const float collision_radius = 1.0f; // affects the size of a sphere collider used for leg collisions
 enum IdleType{_stand, _active, _combat};
 IdleType idle_type = _active;
 
@@ -139,6 +142,9 @@ float time = 0;
 
 vec3 head_look;
 vec3 torso_look;
+
+string[] legs = { "left_leg", "right_leg" };
+string[] arms = { "leftarm", "rightarm" };
 
 bool on_ground = false;
 string dialogue_anim = "Data/Animations/r_sweep.anm";
@@ -152,6 +158,74 @@ const int _hit_reaction_state = 3; // character was hit or dealt damage to and h
 const int _ragdoll_state = 4; // character is falling in ragdoll mode
 int state = _movement_state;
 
+vec3 last_col_pos;
+float duck_amount = 0.5f;
+const float _bumper_size = 2.5f;
+const float _ground_normal_y_threshold = 0.5f;
+const float _leg_sphere_size = 0.45f;  // affects the size of a sphere collider used for leg collisions
+
+bool balancing = false;
+vec3 balance_pos;
+
+bool show_debug = false;
+bool dialogue_control = false;
+bool static_char = false;
+int invisible_when_stationary = 0;
+int species = 0;
+float threat_amount = 0.0f;
+float target_threat_amount = 0.0f;
+float threat_vel = 0.0f;
+int primary_weapon_slot = 0;
+int secondary_weapon_slot = 1;
+array<int> weapon_slots = {-1, -1};
+int knife_layer_id = -1;
+int throw_knife_layer_id = -1;
+float land_magnitude = 0.0f;
+float character_scale = 1.0f;
+AttackScriptGetter attack_attacker;
+float block_stunned = 1.0f;
+int block_stunned_by_id = -1;
+
+
+array<BoneTransform> skeleton_bind_transforms;
+array<BoneTransform> inv_skeleton_bind_transforms;
+array<int> ik_chain_elements;
+enum IKLabel {kLeftArmIK, kRightArmIK, kLeftLegIK, kRightLegIK,
+              kHeadIK, kLeftEarIK, kRightEarIK, kTorsoIK,
+              kTailIK, kNumIK };
+array<int> ik_chain_start_index;
+array<int> ik_chain_length;
+array<float> ik_chain_bone_lengths;
+array<int> bone_children;
+array<int> bone_children_index;
+array<vec3> convex_hull_points;
+array<int> convex_hull_points_index;
+
+// Key transform enums
+const int kHeadKey = 0;
+const int kLeftArmKey = 1;
+const int kRightArmKey = 2;
+const int kLeftLegKey = 3;
+const int kRightLegKey = 4;
+const int kChestKey = 5;
+const int kHipKey = 6;
+const int kNumKeys = 7;
+
+array<float> key_masses;
+array<int> root_bone;
+
+array<int> flash_obj_ids;
+
+float last_changed_com = 0.0f;
+vec3 com_offset;
+vec3 com_offset_vel;
+vec3 target_com_offset;
+
+array<int> roll_check_bones;
+array<BoneTransform> key_transforms;
+array<float> target_leg_length;
+
+vec3 push_velocity;
 
 array<vec3> temp_old_ear_points;
 array<vec3> old_ear_points;
@@ -207,6 +281,7 @@ array<vec3> weap_points;
 vec3 gravity_vector = vec3(0.0, -9.81, 0.0);
 bool resetting = false;
 int num_segments = 20;
+float momentum_amount = 2.0f;
 
 class RopeSegment{
 	bool static_segment = false;
@@ -215,19 +290,29 @@ class RopeSegment{
 	vec3 velocity;
 	vec3 momentum;
 	RopeSegment@ previous_segment;
+	RopeSegment@ next_segment;
 	int id;
 
-	RopeSegment(vec3 initial_position, bool is_static, RopeSegment@ _previous_segment){
+	RopeSegment(vec3 initial_position, bool is_static){
 		position = initial_position;
 		static_segment = is_static;
-		@previous_segment = @_previous_segment;
 		id = rope_segments.size();
+	}
+
+	void UpdateNeighbours(){
+		if(id > 0){
+			@previous_segment = rope_segments[id -1];
+		}
+
+		if(id != int(rope_segments.size()) - 1){
+			@next_segment = rope_segments[id + 1];
+		}
 	}
 
 	void DrawDebug(){
 		/* DebugDrawWireSphere(position, radius, vec3(0.5), _delete_on_update); */
 		if(!static_segment){
-			DebugDrawLine(position, previous_segment.position, vec3(5.0, 0.0, 0.0), _delete_on_update);
+			DebugDrawLine(position, previous_segment.position, vec3(5.0, 0.0, 0.0), _delete_on_draw);
 		}
 	}
 
@@ -240,33 +325,21 @@ class RopeSegment{
 			if(@previous_segment != null){
 				//Adjust the segment position if it's too far away from the previous one.
 				if(distance(target_position, previous_segment.position) > (radius * 2.0)){
-					vec3 before_direction = normalize(position - previous_segment.position);
 					vec3 direction = normalize(target_position - previous_segment.position);
-
-					vec3 cross_product = cross(before_direction, direction);
-					vec3 adjusted_position = previous_segment.position + (direction * (radius * 2.0));
-					vec3 new_direction = normalize(adjusted_position - position);
-
-					float difference = distance(target_position, adjusted_position);
-					direction = normalize(target_position - previous_segment.position);
 					target_position = previous_segment.position + (direction * (radius * 2.0));
-
-					/* target_position = adjusted_position; */
-
 				}
 			}
 
 			//Repel other nope segments.
-			/* float repel_amount = 0.5;
-
-			for(uint i = 0; i < rope_segments.size(); i++){
+			/* for(uint i = 0; i < rope_segments.size(); i++){
 				RopeSegment@ segment = rope_segments[i];
-				if(segment.id != id){
+				if(segment !is this && segment !is previous_segment &&  segment !is next_segment){
 					float segment_distance = distance(segment.position, position);
-					if(segment_distance < (radius * 2.0) * 0.7){
+					if(segment_distance < (radius * 2.0) * 0.2){
 						vec3 repel_direction = normalize(position - segment.position);
 						DebugDrawLine(position, position + repel_direction, vec3(0.0, 1.0, 0.0), _delete_on_update);
-						target_position += repel_direction * repel_amount * time_step;
+						vec3 direction = normalize(target_position - segment.position);
+						target_position = segment.position + (direction * (radius * 2.0));
 					}
 				}
 			} */
@@ -275,22 +348,27 @@ class RopeSegment{
 			col.GetSweptSphereCollision(position, target_position, radius);
 			if(sphere_col.NumContacts() != 0){
 				target_position = sphere_col.adjusted_position;
-				momentum *= 0.9;
+				momentum *= 0.0;
 			}
-			/* col.GetSweptSphereCollisionCharacters(position, target_position, radius);
+
+			col.GetSweptSphereCollisionCharacters(position, target_position, radius);
+			array<vec3> adjusted_positions = {target_position};
 			for(int i = 0; i < sphere_col.NumContacts(); i++){
 				CollisionPoint contact = sphere_col.GetContact(0);
-				if(contact.id != this_mo.GetID()){
-					Log(warning, "Contact id  " + contact.id);
-					target_position = sphere_col.adjusted_position;
-				}
-			} */
+				adjusted_positions.insertLast(sphere_col.adjusted_position);
+				momentum *= 0.0;
+			}
+
+			vec3 combined_positions;
+			for(uint i = 0; i < adjusted_positions.size(); i++){
+				combined_positions += adjusted_positions[i];
+			}
+			target_position = combined_positions / adjusted_positions.size();
 
 			velocity = (target_position - position) / time_step;
-			momentum += velocity * time_step * 2.0;
+			momentum += velocity * time_step * momentum_amount;
 			position += velocity * time_step;
 			position += momentum * time_step;
-			/* momentum *= 1.1; */
 		}
 	}
 }
@@ -302,19 +380,33 @@ void UpdateRope(){
 
 	if(num_segments > int(rope_segments.size())){
 		if(rope_segments.size() == 0){
-			rope_segments.insertLast(RopeSegment(this_mo.position, true, null));
+			rope_segments.insertLast(RopeSegment(this_mo.position, true));
 		}else{
-			rope_segments.insertLast(RopeSegment(this_mo.position, false, rope_segments[rope_segments.size() - 1]));
+			rope_segments.insertLast(RopeSegment(this_mo.position, false));
 		}
+		UpdateRopeNeighbours();
 	}else if(num_segments > 0 && num_segments < int(rope_segments.size())){
 		rope_segments.removeAt(rope_segments.size() - 1);
+		UpdateRopeNeighbours();
 	}
 
 	gravity_vector = vec3(0.0, -9.81, 0.0);
 	for(uint i = 0; i < rope_segments.size(); i++){
 		RopeSegment@ segment = rope_segments[i];
 		segment.UpdateCollisions();
+	}
+}
+
+void PreDrawFrame(float curr_game_time){
+	for(uint i = 0; i < rope_segments.size(); i++){
+		RopeSegment@ segment = rope_segments[i];
 		segment.DrawDebug();
+	}
+}
+
+void UpdateRopeNeighbours(){
+	for(uint i = 0; i < rope_segments.size(); i++){
+		rope_segments[i].UpdateNeighbours();
 	}
 }
 
@@ -367,20 +459,6 @@ bool Init(string character_path) {
 	return true;
 }
 
-vec3 GetRandomFurColor() {
-    vec3 fur_color_byte;
-    int rnd = rand()%6;
-    switch(rnd){
-    case 0: fur_color_byte = vec3(255); break;
-    case 1: fur_color_byte = vec3(34); break;
-    case 2: fur_color_byte = vec3(137); break;
-    case 3: fur_color_byte = vec3(105,73,54); break;
-    case 4: fur_color_byte = vec3(53,28,10); break;
-    case 5: fur_color_byte = vec3(172,124,62); break;
-    }
-    return FloatTintFromByte(fur_color_byte);
-}
-
 void PostReset() {
 	resetting = false;
     CacheSkeletonInfo();
@@ -389,66 +467,6 @@ void PostReset() {
         body_bob_time_offset = RangedRandomFloat(0.0f,100.0f);
     }
 }
-
-// Create a random color tint, avoiding excess saturation
-vec3 RandReasonableColor(){
-    vec3 color;
-    color.x = rand()%255;
-    color.y = rand()%255;
-    color.z = rand()%255;
-    float avg = (color.x + color.y + color.z) / 3.0f;
-    color = mix(color, vec3(avg), 0.7f);
-    return FloatTintFromByte(color);
-}
-
-// Convert byte colors to float colors (255,0,0) to (1.0f,0.0f,0.0f)
-vec3 FloatTintFromByte(const vec3 &in tint){
-    vec3 float_tint;
-    float_tint.x = tint.x / 255.0f;
-    float_tint.y = tint.y / 255.0f;
-    float_tint.z = tint.z / 255.0f;
-    return float_tint;
-}
-
-array<BoneTransform> skeleton_bind_transforms;
-array<BoneTransform> inv_skeleton_bind_transforms;
-array<int> ik_chain_elements;
-enum IKLabel {kLeftArmIK, kRightArmIK, kLeftLegIK, kRightLegIK,
-              kHeadIK, kLeftEarIK, kRightEarIK, kTorsoIK,
-              kTailIK, kNumIK };
-array<int> ik_chain_start_index;
-array<int> ik_chain_length;
-array<float> ik_chain_bone_lengths;
-array<int> bone_children;
-array<int> bone_children_index;
-array<vec3> convex_hull_points;
-array<int> convex_hull_points_index;
-
-// Key transform enums
-const int kHeadKey = 0;
-const int kLeftArmKey = 1;
-const int kRightArmKey = 2;
-const int kLeftLegKey = 3;
-const int kRightLegKey = 4;
-const int kChestKey = 5;
-const int kHipKey = 6;
-const int kNumKeys = 7;
-
-array<float> key_masses;
-array<int> root_bone;
-
-array<int> flash_obj_ids;
-
-float last_changed_com = 0.0f;
-vec3 com_offset;
-vec3 com_offset_vel;
-vec3 target_com_offset;
-
-array<int> roll_check_bones;
-array<BoneTransform> key_transforms;
-array<float> target_leg_length;
-
-vec3 push_velocity;
 
 void CacheSkeletonInfo() {
     Log(info, "Caching skeleton info");
@@ -625,27 +643,13 @@ void ResetSecondaryAnimation() {
 void SetParameters() {
     params.AddFloatSlider("Character Scale",1,"min:0.6,max:1.4,step:0.02,text_mult:100");
     float new_char_scale = params.GetFloat("Character Scale");
-    if(new_char_scale != this_mo.rigged_object().GetRelativeCharScale()){
-        this_mo.RecreateRiggedObject(this_mo.char_path);
-        ResetSecondaryAnimation();
-        ResetLayers();
-        CacheSkeletonInfo();
-    }
 
-    params.AddFloatSlider("Fat",0.5f,"min:0.0,max:1.0,step:0.05,text_mult:200");
-    p_fat = params.GetFloat("Fat")*2.0f-1.0f;
-
-    params.AddFloatSlider("Muscle",0.5f,"min:0.0,max:1.0,step:0.05,text_mult:200");
-    p_muscle = params.GetFloat("Muscle")*2.0f-1.0f;
-
-    params.AddFloatSlider("Ear Size",1.0f,"min:0.0,max:3.0,step:0.1,text_mult:100");
-    p_ear_size = params.GetFloat("Ear Size")*0.5f+0.5f;
+    params.AddFloatSlider("Momentum Amount", 2.0f,"min:0.0,max:10.0,step:0.1,text_mult:100");
+    momentum_amount = params.GetFloat("Momentum Amount");
 
     string team_str;
     character_getter.GetTeamString(team_str);
     params.AddString("Teams",team_str);
-
-	params.AddString("Anim", "Data/Animations/r_flail.anm");
 
 	params.AddIntSlider("Num Segments", 20, "min:0,max:100");
 	num_segments = params.GetInt("Num Segments");
