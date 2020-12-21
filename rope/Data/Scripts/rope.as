@@ -225,7 +225,7 @@ class RopeSegment{
 	}
 
 	void DrawDebug(){
-		DebugDrawWireSphere(position, radius, vec3(0.5), _delete_on_update);
+		/* DebugDrawWireSphere(position, radius, vec3(0.5), _delete_on_update); */
 		if(!static_segment){
 			DebugDrawLine(position, previous_segment.position, vec3(5.0, 0.0, 0.0), _delete_on_update);
 		}
@@ -235,17 +235,29 @@ class RopeSegment{
 		if(static_segment){
 			position = this_mo.position;
 		}else{
-			vec3 gravity_applied_position = position + (gravity_vector * time_step);
+			vec3 target_position = position + (gravity_vector * time_step);
 
 			if(@previous_segment != null){
 				//Adjust the segment position if it's too far away from the previous one.
-				if(distance(gravity_applied_position, previous_segment.position) > (radius * 2.0)){
-					vec3 direction = normalize(gravity_applied_position - previous_segment.position);
-					gravity_applied_position = previous_segment.position + (direction * (radius * 2.0));
+				if(distance(target_position, previous_segment.position) > (radius * 2.0)){
+					vec3 before_direction = normalize(position - previous_segment.position);
+					vec3 direction = normalize(target_position - previous_segment.position);
+
+					vec3 cross_product = cross(before_direction, direction);
+					vec3 adjusted_position = previous_segment.position + (direction * (radius * 2.0));
+					vec3 new_direction = normalize(adjusted_position - position);
+
+					float difference = distance(target_position, adjusted_position);
+					direction = normalize(target_position - previous_segment.position);
+					target_position = previous_segment.position + (direction * (radius * 2.0));
+
+					/* target_position = adjusted_position; */
+
 				}
 			}
 
-			float repel_amount = 0.5;
+			//Repel other nope segments.
+			/* float repel_amount = 0.5;
 
 			for(uint i = 0; i < rope_segments.size(); i++){
 				RopeSegment@ segment = rope_segments[i];
@@ -254,32 +266,31 @@ class RopeSegment{
 					if(segment_distance < (radius * 2.0) * 0.7){
 						vec3 repel_direction = normalize(position - segment.position);
 						DebugDrawLine(position, position + repel_direction, vec3(0.0, 1.0, 0.0), _delete_on_update);
-						gravity_applied_position += repel_direction * repel_amount * time_step;
+						target_position += repel_direction * repel_amount * time_step;
 					}
 				}
-			}
+			} */
 
-			col.GetSweptSphereCollision(position, gravity_applied_position, radius);
+			//Collide with static objects.
+			col.GetSweptSphereCollision(position, target_position, radius);
 			if(sphere_col.NumContacts() != 0){
-				gravity_applied_position = sphere_col.adjusted_position;
-				momentum *= 0.96;
+				target_position = sphere_col.adjusted_position;
+				momentum *= 0.9;
 			}
-			/* col.GetSweptSphereCollisionCharacters(position, gravity_applied_position, radius);
+			/* col.GetSweptSphereCollisionCharacters(position, target_position, radius);
 			for(int i = 0; i < sphere_col.NumContacts(); i++){
 				CollisionPoint contact = sphere_col.GetContact(0);
 				if(contact.id != this_mo.GetID()){
 					Log(warning, "Contact id  " + contact.id);
-					gravity_applied_position = sphere_col.adjusted_position;
+					target_position = sphere_col.adjusted_position;
 				}
 			} */
 
-			velocity = (gravity_applied_position - position) / time_step;
-			/* velocity *= 0.999; */
-			momentum += velocity * 0.02;
-			/* momentum *= 0.4; */
+			velocity = (target_position - position) / time_step;
+			momentum += velocity * time_step * 2.0;
 			position += velocity * time_step;
 			position += momentum * time_step;
-			/* position = gravity_applied_position; */
+			/* momentum *= 1.1; */
 		}
 	}
 }
