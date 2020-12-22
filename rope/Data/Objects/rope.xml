@@ -1,7 +1,8 @@
 <?xml version="1.0" ?>
 <Object>
 	<Model>Data/Models/rope.obj</Model>
-	<ColorMap>Data/Textures/rope_c.jpg</ColorMap>
+	<ColorMap>Data/Textures/rope_c.png</ColorMap>
 	<NormalMap>Data/Textures/rope_n.jpg</NormalMap>
 	<ShaderName>envobject</ShaderName>
+	<flags no_collision=true double_sided=true/>
 </Object>

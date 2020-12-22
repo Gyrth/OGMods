@@ -167,7 +167,6 @@ const float _leg_sphere_size = 0.45f;  // affects the size of a sphere collider 
 bool balancing = false;
 vec3 balance_pos;
 
-bool show_debug = false;
 bool dialogue_control = false;
 bool static_char = false;
 int invisible_when_stationary = 0;
@@ -282,6 +281,10 @@ vec3 gravity_vector = vec3(0.0, -9.81, 0.0);
 bool resetting = false;
 int num_segments = 20;
 float momentum_amount = 2.0f;
+const float PI = 3.14159265359f;
+double radToDeg = (180.0f / PI);
+double degToRad = (PI / 180.0f);
+bool show_debug = false;
 
 class RopeSegment{
 	bool static_segment = false;
@@ -292,11 +295,17 @@ class RopeSegment{
 	RopeSegment@ previous_segment;
 	RopeSegment@ next_segment;
 	int id;
+	int obj_id = -1;
+	Object@ obj;
 
 	RopeSegment(vec3 initial_position, bool is_static){
 		position = initial_position;
 		static_segment = is_static;
 		id = rope_segments.size();
+	}
+
+	~RopeSegment(){
+		QueueDeleteObjectID(obj_id);
 	}
 
 	void UpdateNeighbours(){
@@ -307,10 +316,15 @@ class RopeSegment{
 		if(id != int(rope_segments.size()) - 1){
 			@next_segment = rope_segments[id + 1];
 		}
+
+		if(obj_id == -1 && previous_segment !is null){
+			obj_id = CreateObject("Data/Objects/rope.xml", true);
+			@obj = ReadObjectFromID(obj_id);
+		}
 	}
 
 	void DrawDebug(){
-		/* DebugDrawWireSphere(position, radius, vec3(0.5), _delete_on_update); */
+		DebugDrawWireSphere(position, radius * 0.1, vec3(1.0), _delete_on_update);
 		if(!static_segment){
 			DebugDrawLine(position, previous_segment.position, vec3(5.0, 0.0, 0.0), _delete_on_draw);
 		}
@@ -371,6 +385,33 @@ class RopeSegment{
 			position += momentum * time_step;
 		}
 	}
+
+	void UpdateMesh(){
+		if(previous_segment !is null && ObjectExists(obj_id) && obj !is null){
+			vec3 front = normalize(position - previous_segment.position);
+			vec3 new_rotation;
+			new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
+			new_rotation.x = asin(front[1]) * -180.0f / PI;
+			/* vec3 up =  normalize(position - previous_segment.position); */
+			vec3 up = normalize(cross(vec3(0.0, 0.0, 1.0), front));
+			if(distance(front, up) < 0.01){
+				up = vec3(0, 1, 0);
+			}
+
+			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+			vec3 expected_up = normalize(cross(expected_right, front));
+			new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
+
+			quaternion rot_y(vec4(0, 1, 0, new_rotation.y * degToRad));
+			quaternion rot_x(vec4(1, 0, 0, new_rotation.x * degToRad));
+			quaternion rot_z(vec4(0, 0, 1, new_rotation.z * degToRad));
+			quaternion final_rotation = rot_y * rot_x * rot_z;
+
+			obj.SetTranslationRotationFast((position + previous_segment.position) / 2.0f, final_rotation);
+			float rope_length = distance(position, previous_segment.position) / (radius * 2.0);
+			obj.SetScale(vec3(1.0, 1.0, rope_length));
+		}
+	}
 }
 
 array<RopeSegment@> rope_segments;
@@ -394,10 +435,12 @@ void UpdateRope(){
 	for(uint i = 0; i < rope_segments.size(); i++){
 		RopeSegment@ segment = rope_segments[i];
 		segment.UpdateCollisions();
+		segment.UpdateMesh();
 	}
 }
 
 void PreDrawFrame(float curr_game_time){
+	if(!show_debug){return;}
 	for(uint i = 0; i < rope_segments.size(); i++){
 		RopeSegment@ segment = rope_segments[i];
 		segment.DrawDebug();
@@ -456,6 +499,7 @@ bool Init(string character_path) {
 	PostReset();
 	this_mo.SetScriptUpdatePeriod(1);
 	this_mo.rigged_object().SetAnimUpdatePeriod(0);
+	this_mo.static_char = true;
 	return true;
 }
 
@@ -653,6 +697,9 @@ void SetParameters() {
 
 	params.AddIntSlider("Num Segments", 20, "min:0,max:100");
 	num_segments = params.GetInt("Num Segments");
+
+	params.AddIntCheckbox("Show Debug", false);
+	show_debug = (params.GetInt("Show Debug") != 0);
 }
 
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){}
