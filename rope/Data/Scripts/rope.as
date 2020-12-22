@@ -403,19 +403,43 @@ class RopeSegment{
 				momentum *= 0.0;
 			}
 
-			col.GetSweptSphereCollisionCharacters(position, target_position, radius);
-			array<vec3> adjusted_positions = {target_position};
-			for(int i = 0; i < sphere_col.NumContacts(); i++){
-				CollisionPoint contact = sphere_col.GetContact(0);
-				adjusted_positions.insertLast(sphere_col.adjusted_position);
+			//Collide with characters.
+			//If the collision positions are not changed the engine will not return any collisions.
+			float char_radius = radius;
+			if(connected_segments.size() > 0){
+				float new_radius = distance(position, connected_segments[0].position) / 2.0f;
+				if(new_radius != 0.0f){
+					char_radius = min(2.0f * radius, new_radius);
+				}
+			}
+			/* DebugDrawWireSphere(position, char_radius , vec3(1.0), _delete_on_update); */
+			col.GetSweptSphereCollisionCharacters(position + vec3(RangedRandomFloat(-0.0001, 0.0001)), target_position + vec3(RangedRandomFloat(-0.0001, 0.0001)), char_radius);
+			if(sphere_col.NumContacts() != 0){
+				target_position = sphere_col.adjusted_position;
 				momentum *= 0.0;
-			}
 
-			vec3 combined_positions;
-			for(uint i = 0; i < adjusted_positions.size(); i++){
-				combined_positions += adjusted_positions[i];
+
+				array<int> character_ids;
+				GetCharactersInSphere(target_position, radius, character_ids);
+				for(uint i  = 0; i < character_ids.size(); i++){
+					MovementObject@ char = ReadCharacterID(character_ids[i]);
+
+					float distance_threshold = 0.7f;
+
+					vec3 dir = char.position - target_position;
+					float dist = length(dir);
+					dir /= dist;
+					dir *= distance_threshold - dist;
+					vec3 other_push = dir * 0.5f / (time_step) * 0.15f;
+
+					char.Execute("
+					if(!this_mo.static_char) {
+						this_mo.position += vec3(" + dir.x + ", " + dir.y + ", " + dir.z + ") * 0.001f;
+						push_velocity += vec3(" + other_push.x + ", " + other_push.y + ", " + other_push.z + ");
+						MindReceiveMessage(\"collided " + this_mo.GetID() + "\");
+					}");
+				}
 			}
-			target_position = combined_positions / adjusted_positions.size();
 
 			velocity = (target_position - position) / time_step;
 			momentum += velocity * time_step * momentum_amount;
