@@ -285,6 +285,8 @@ const float PI = 3.14159265359f;
 double radToDeg = (180.0f / PI);
 double degToRad = (PI / 180.0f);
 bool show_debug = false;
+string anchors_param;
+array<int> anchor_points;
 
 class RopeSegment{
 	bool static_segment = false;
@@ -292,11 +294,12 @@ class RopeSegment{
 	float radius = 0.1;
 	vec3 velocity;
 	vec3 momentum;
-	RopeSegment@ previous_segment;
-	RopeSegment@ next_segment;
 	int id;
 	int obj_id = -1;
 	Object@ obj;
+	int anchor_id = -1;
+	Object@ anchor;
+	array<RopeSegment@> connected_segments;
 
 	RopeSegment(vec3 initial_position, bool is_static){
 		position = initial_position;
@@ -306,42 +309,77 @@ class RopeSegment{
 
 	~RopeSegment(){
 		QueueDeleteObjectID(obj_id);
+		QueueDeleteObjectID(anchor_id);
 	}
 
 	void UpdateNeighbours(){
+		connected_segments.resize(0);
+		//Get the previous rope segment.
 		if(id > 0){
-			@previous_segment = rope_segments[id -1];
+			connected_segments.insertLast(rope_segments[id - 1]);
 		}
 
+		//Get the next rope segment.
 		if(id != int(rope_segments.size()) - 1){
-			@next_segment = rope_segments[id + 1];
+			connected_segments.insertLast(rope_segments[id + 1]);
 		}
 
-		if(obj_id == -1 && previous_segment !is null){
+		if(id != 0 && obj_id == -1 && connected_segments.size() > 0){
 			obj_id = CreateObject("Data/Objects/rope.xml", true);
 			@obj = ReadObjectFromID(obj_id);
+		}
+
+		if(anchor_id == -1 && static_segment){
+			anchor_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml", true);
+			@anchor = ReadObjectFromID(anchor_id);
+			anchor.SetTranslation(this_mo.position);
+			anchor.SetScale(vec3(0.25));
+			anchor.SetSelectable(true);
+			anchor.SetTranslatable(true);
+		}
+	}
+
+	bool ConnectedToStatic(RopeSegment@ exclude){
+		if(static_segment){
+			return true;
+		}else if(connected_segments.size() == 0){
+			return false;
+		}else{
+			for(uint i = 0; i < connected_segments.size(); i++){
+				if(connected_segments[i] !is exclude){
+					return connected_segments[i].ConnectedToStatic(this);
+				}
+			}
+			return false;
 		}
 	}
 
 	void DrawDebug(){
 		DebugDrawWireSphere(position, radius * 0.1, vec3(1.0), _delete_on_update);
 		if(!static_segment){
-			DebugDrawLine(position, previous_segment.position, vec3(5.0, 0.0, 0.0), _delete_on_draw);
+			DebugDrawLine(position, connected_segments[0].position, vec3(5.0, 0.0, 0.0), _delete_on_draw);
 		}
 	}
 
 	void UpdateCollisions(){
 		if(static_segment){
-			position = this_mo.position;
+			position = anchor.GetTranslation();
 		}else{
 			vec3 target_position = position + (gravity_vector * time_step);
 
-			if(@previous_segment != null){
-				//Adjust the segment position if it's too far away from the previous one.
-				if(distance(target_position, previous_segment.position) > (radius * 2.0)){
-					vec3 direction = normalize(target_position - previous_segment.position);
-					target_position = previous_segment.position + (direction * (radius * 2.0));
+			float divide_by_connections = 0.0f;
+			vec3 collective_position;
+			for(uint i = 0; i < connected_segments.size(); i++){
+				if(connected_segments[i].ConnectedToStatic(this) && distance(target_position, connected_segments[i].position) > (radius * 2.0)){
+					vec3 direction = normalize(target_position - connected_segments[i].position);
+					collective_position += connected_segments[i].position + (direction * (radius * 2.0));
+					divide_by_connections += 1.0f;
 				}
+			}
+
+			//Make sure not to divide by zero.
+			if(divide_by_connections > 0.0f){
+				target_position = collective_position / divide_by_connections;
 			}
 
 			//Repel other nope segments.
@@ -387,7 +425,8 @@ class RopeSegment{
 	}
 
 	void UpdateMesh(){
-		if(previous_segment !is null && ObjectExists(obj_id) && obj !is null){
+		if(id != 0 && connected_segments.size() > 0 && ObjectExists(obj_id) && obj !is null){
+			RopeSegment@ previous_segment = connected_segments[0];
 			vec3 front = normalize(position - previous_segment.position);
 			vec3 new_rotation;
 			new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
@@ -420,7 +459,7 @@ void UpdateRope(){
 	if(resetting){return;}
 
 	if(num_segments > int(rope_segments.size())){
-		if(rope_segments.size() == 0){
+		if(anchor_points.find(rope_segments.size()) != -1){
 			rope_segments.insertLast(RopeSegment(this_mo.position, true));
 		}else{
 			rope_segments.insertLast(RopeSegment(this_mo.position, false));
@@ -504,6 +543,11 @@ bool Init(string character_path) {
 }
 
 void PostReset() {
+	array<string> achor_point_strings = anchors_param.split(",");
+	anchor_points.resize(0);
+	for(uint i = 0; i < achor_point_strings.size(); i++){
+		anchor_points.insertLast(atoi(achor_point_strings[i]));
+	}
 	resetting = false;
     CacheSkeletonInfo();
     if(body_bob_freq == 0.0f){
@@ -685,21 +729,24 @@ void ResetSecondaryAnimation() {
 }
 
 void SetParameters() {
-    params.AddFloatSlider("Character Scale",1,"min:0.6,max:1.4,step:0.02,text_mult:100");
-    float new_char_scale = params.GetFloat("Character Scale");
+	params.AddFloatSlider("Character Scale",1,"min:0.6,max:1.4,step:0.02,text_mult:100");
+	float new_char_scale = params.GetFloat("Character Scale");
 
-    params.AddFloatSlider("Momentum Amount", 2.0f,"min:0.0,max:10.0,step:0.1,text_mult:100");
-    momentum_amount = params.GetFloat("Momentum Amount");
+	params.AddFloatSlider("Momentum Amount", 2.0f,"min:0.0,max:10.0,step:0.1,text_mult:100");
+	momentum_amount = params.GetFloat("Momentum Amount");
 
-    string team_str;
-    character_getter.GetTeamString(team_str);
-    params.AddString("Teams",team_str);
+	string team_str;
+	character_getter.GetTeamString(team_str);
+	params.AddString("Teams",team_str);
 
 	params.AddIntSlider("Num Segments", 20, "min:0,max:100");
 	num_segments = params.GetInt("Num Segments");
 
 	params.AddIntCheckbox("Show Debug", false);
 	show_debug = (params.GetInt("Show Debug") != 0);
+
+	params.AddString("Anchors", "0");
+	anchors_param = params.GetString("Anchors");
 }
 
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){}
