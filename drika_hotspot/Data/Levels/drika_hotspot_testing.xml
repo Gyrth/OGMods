@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-13.2117" t1="0.744351" t2="-3.60909" s0="1" s1="1" s2="1" q0="0.17961" q1="0.383311" q2="-0.0762614" q3="0.902772" euler_x="0.39278" euler_y="0.803053" euler_z="0" id="1">
+    <CameraObject t0="-3.24813" t1="2.495" t2="10.1573" s0="1" s1="1" s2="1" q0="0.12263" q1="0.33921" q2="-0.044651" q3="0.931614" euler_x="0.261758" euler_y="0.698379" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.16529" t1="-3.42134" t2="1.76417" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -137,6 +137,9 @@
         </EnvObject>
     </ActorObject>
     <EnvObject t0="31.1054" t1="0.485653" t2="-7.62564" s0="1.7413" s1="1.7413" s2="1.7413" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject name="Play Sound Helper" t0="7.93289" t1="0.761" t2="-7.63686" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="31.0948" t1="-2.14485" t2="-7.63353" s0="0.290843" s1="0.290843" s2="0.290843" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/cat_town/medium_tower.xml">
@@ -1134,18 +1137,6 @@
     <EnvObject name="Play Sound Helper" t0="28.6837" t1="-0.40576" t2="-3.76996" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="299" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="8.13755" t1="-1.15763" t2="-7.62032" s0="0.666667" s1="0.666667" s2="0.666667" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="300" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
-        <parameters>
-            <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Run in EditorMode" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;function&quot;:26,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;input_identifier&quot;:13,&quot;input_type&quot;:0,&quot;other_input&quot;:&quot;k&quot;,&quot;use_prompt&quot;:false},{&quot;checkpoint_mode&quot;:1,&quot;function&quot;:37,&quot;load_name&quot;:&quot;Latest&quot;},{&quot;fade_in_duration&quot;:1000,&quot;fade_in_tween_type&quot;:0,&quot;function&quot;:36,&quot;position&quot;:[38,1304],&quot;rotation&quot;:0,&quot;text_content&quot;:&quot;Loaded.&quot;,&quot;ui_element_identifier&quot;:&quot;3001&quot;,&quot;ui_function&quot;:2,&quot;use_fade_in&quot;:true,&quot;use_move_in&quot;:false},{&quot;duration&quot;:500,&quot;function&quot;:2},{&quot;function&quot;:36,&quot;ui_element_identifier&quot;:&quot;3002&quot;,&quot;ui_function&quot;:0},{&quot;function&quot;:7,&quot;line&quot;:0}]}&#x0A;' />
-            <parameter name="Show UI Grid" type="int" val="1" />
-            <parameter name="Transform Relative" type="int" val="0" />
-            <parameter name="UI Snap Scale" type="int" val="20" />
-        </parameters>
-        <Connections />
-        <ConnectionsFrom />
-    </Hotspot>
     <EnvObject name="Play Sound Helper" t0="28.6837" t1="-0.40576" t2="-3.76996" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="301" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
@@ -1182,11 +1173,11 @@
     <EnvObject t0="-8.38628" t1="-0.386679" t2="2.71269" s0="3.38166" s1="2.99408" s2="0.748865" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="314" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
-    <Hotspot t0="8.56794" t1="1.37001" t2="-8.45545" s0="0.666667" s1="0.666667" s2="0.666667" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="316" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+    <Hotspot t0="7.93289" t1="-1.239" t2="-7.63686" s0="0.666667" s1="0.666667" s2="0.666667" q0="0" q1="0.0280983" q2="0" q3="0.999605" euler_x="0" euler_y="0.056204" euler_z="0" id="316" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
             <parameter name="Run in EditorMode" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;function&quot;:26,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;input_identifier&quot;:13,&quot;input_type&quot;:0,&quot;other_input&quot;:&quot;j&quot;,&quot;use_prompt&quot;:false},{&quot;checkpoint_mode&quot;:0,&quot;function&quot;:37,&quot;save_name&quot;:&quot;make a save&quot;},{&quot;fade_in_duration&quot;:1000,&quot;fade_in_tween_type&quot;:0,&quot;function&quot;:36,&quot;position&quot;:[22,1324],&quot;rotation&quot;:0,&quot;text_content&quot;:&quot;Saved...&quot;,&quot;ui_element_identifier&quot;:&quot;3161&quot;,&quot;ui_function&quot;:2,&quot;use_fade_in&quot;:true,&quot;use_move_in&quot;:false},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;function&quot;:36,&quot;ui_element_identifier&quot;:&quot;3162&quot;,&quot;ui_function&quot;:0},{&quot;function&quot;:7,&quot;line&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;check_all&quot;:false,&quot;check_all_known&quot;:false,&quot;compare_choice&quot;:2,&quot;compare_value&quot;:0.5,&quot;continue_if_false&quot;:false,&quot;equals&quot;:true,&quot;function&quot;:23,&quot;identifier&quot;:336,&quot;identifier_type&quot;:4,&quot;state_check&quot;:17},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;placeholder_id&quot;:9,&quot;play_sound_method&quot;:0,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0},{&quot;fade_in_duration&quot;:1000,&quot;fade_in_tween_type&quot;:0,&quot;function&quot;:36,&quot;position&quot;:[1236,1324],&quot;rotation&quot;:0,&quot;text_content&quot;:&quot;Check&quot;,&quot;ui_element_identifier&quot;:&quot;3161&quot;,&quot;ui_function&quot;:2,&quot;use_fade_in&quot;:true,&quot;use_move_in&quot;:false}]}&#x0A;' />
             <parameter name="Show UI Grid" type="int" val="1" />
             <parameter name="Transform Relative" type="int" val="0" />
             <parameter name="UI Snap Scale" type="int" val="20" />
@@ -1287,7 +1278,7 @@
             <Color label="Spots" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <ActorObject t0="5.4667" t1="-1.42138" t2="-193.443" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="336" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
+    <ActorObject t0="-5.21115" t1="-1.42138" t2="29.9068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="-1" euler_x="0" euler_y="0" euler_z="0" id="336" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />

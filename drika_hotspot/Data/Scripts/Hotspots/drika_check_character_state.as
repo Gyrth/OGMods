@@ -14,21 +14,32 @@ enum state_choices { 	awake = 0,
 						in_proximity = 13,
 						right_footstep = 14,
 						left_footstep = 15,
-						takes_damage = 16
+						takes_damage = 16,
+						check_blood_damage = 17,
+						check_blood_health = 18,
+						check_block_health = 19,
+						check_temp_health = 20,
+						check_permanent_health = 21
 					}
 
 enum AIGoal {
-    _ai_patrol,
-    _ai_attack,
-    _ai_investigate,
-    _ai_get_help,
-    _ai_escort,
-    _ai_get_weapon,
-    _ai_navigate,
-    _ai_struggle,
-    _ai_hold_still,
-    _ai_flee
+	_ai_patrol,
+	_ai_attack,
+	_ai_investigate,
+	_ai_get_help,
+	_ai_escort,
+	_ai_get_weapon,
+	_ai_navigate,
+	_ai_struggle,
+	_ai_hold_still,
+	_ai_flee
 };
+
+enum ValueCompare {
+	less_than = 0,
+	equal_to = 1,
+	more_than = 2
+}
 
 class HealthData{
 	int character_id;
@@ -62,7 +73,7 @@ class HealthData{
 }
 
 class DrikaCheckCharacterState : DrikaElement{
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage", "Blood Damage", "Blood Health", "Block Health", "Temp Health", "Permanent Health"};
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
@@ -75,6 +86,10 @@ class DrikaCheckCharacterState : DrikaElement{
 	bool check_all_known;
 	bool got_before_health;
 	array<HealthData@> health_data;
+	array<string> value_compare_names = {"Less than", "Equal to", "More than"};
+	ValueCompare compare_choice;
+	int current_compare_choice;
+	float compare_value;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		state_choice = state_choices(GetJSONInt(params, "state_check", awake));
@@ -85,6 +100,9 @@ class DrikaCheckCharacterState : DrikaElement{
 		check_all = GetJSONBool(params, "check_all", false);
 		check_all_known = GetJSONBool(params, "check_all_known", false);
 		@continue_element = DrikaGoToLineSelect("continue_line", params);
+		current_compare_choice = GetJSONInt(params, "compare_choice", less_than);
+		compare_choice = ValueCompare(current_compare_choice);
+		compare_value = GetJSONFloat(params, "compare_value", 1.0);
 
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
@@ -132,6 +150,12 @@ class DrikaCheckCharacterState : DrikaElement{
 		if(continue_if_false){
 			continue_element.SaveGoToLine(data);
 		}
+
+		if(state_choice == check_blood_damage || state_choice == check_blood_health || state_choice == check_block_health || state_choice == check_temp_health || state_choice == check_permanent_health){
+			data["compare_choice"] = JSONValue(compare_choice);
+			data["compare_value"] = JSONValue(compare_value);
+		}
+
 		target_select.SaveIdentifier(data);
 		return data;
 	}
@@ -181,7 +205,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(state_choice != right_footstep && state_choice != left_footstep){
+		if(state_choice != right_footstep && state_choice != left_footstep && state_choice != check_blood_damage && state_choice != check_blood_health && state_choice != check_block_health && state_choice != check_temp_health && state_choice != check_permanent_health){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Equals");
 			ImGui_NextColumn();
@@ -219,8 +243,25 @@ class DrikaCheckCharacterState : DrikaElement{
 			ImGui_SliderFloat("###Proximity Distance", proximity_distance, 0.0, 100.0, "%.2f");
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
-		}else if(state_choice == takes_damage){
+		}else if(state_choice == check_blood_damage || state_choice == check_blood_health || state_choice == check_block_health || state_choice == check_temp_health || state_choice == check_permanent_health){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Check");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_Combo("###Check", current_compare_choice, value_compare_names, value_compare_names.size())){
+				compare_choice = ValueCompare(current_compare_choice);
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Value");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_SliderFloat("##Value", compare_value, 0.0f, 1.0f, "%.1f")){
+
+			}
+			ImGui_NextColumn();
 		}
 
 		if(state_choice != right_footstep && state_choice != left_footstep){
@@ -420,6 +461,35 @@ class DrikaCheckCharacterState : DrikaElement{
 					if(state != equals){
 						all_in_state = false;
 					}
+				}
+
+			}else if(state_choice == check_blood_damage || state_choice == check_blood_health || state_choice == check_block_health || state_choice == check_temp_health || state_choice == check_permanent_health){
+				float check_value;
+				if(state_choice == check_blood_damage){
+					check_value = target.GetFloatVar("blood_damage");
+				}else if(state_choice == check_blood_health){
+					check_value = target.GetFloatVar("blood_health");
+				}else if(state_choice == check_block_health){
+					check_value = target.GetFloatVar("block_health");
+				}else if(state_choice == check_temp_health){
+					check_value = target.GetFloatVar("temp_health");
+				}else if(state_choice == check_permanent_health){
+					check_value = target.GetFloatVar("permanent_health");
+				}
+
+				switch(compare_choice){
+					case less_than:
+						state = (check_value < compare_value);
+						break;
+					case equal_to:
+						state = (check_value == compare_value);
+						break;
+					case more_than:
+						state = (check_value > compare_value);
+						break;
+					default:
+						Log(warning, "Unknown compare choice!");
+						break;
 				}
 			}
 
