@@ -162,7 +162,22 @@ class DrikaCheckCharacterState : DrikaElement{
 
 	string GetDisplayString(){
 		continue_element.CheckLineAvailable();
-		return "CheckCharacterState" + " " + target_select.GetTargetDisplayText() + (equals?" ":" not ") + state_choice_names[state_choice] + ((state_choice == knows_about || state_choice == in_proximity)?" " +  known_target.GetTargetDisplayText():"") + (continue_if_false?" else line " + continue_element.GetTargetLineIndex():"");
+		string display_string = "CheckCharacterState ";
+		if(target_select.identifier_type == team){
+			display_string += check_all?"all ":"any ";
+		}
+		display_string += target_select.GetTargetDisplayText();
+		display_string += (equals?" ":" not ");
+		display_string += state_choice_names[state_choice] + " ";
+		if(state_choice == knows_about || state_choice == in_proximity){
+			if(known_target.identifier_type == team){
+				display_string += check_all_known?"all ":"any ";
+			}
+			display_string += known_target.GetTargetDisplayText();
+		}
+		display_string += (continue_if_false?" else line " + continue_element.GetTargetLineIndex():"");
+
+		return display_string;
 	}
 
 	void DrawSettings(){
