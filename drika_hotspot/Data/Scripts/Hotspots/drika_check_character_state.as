@@ -271,11 +271,12 @@ class DrikaCheckCharacterState : DrikaElement{
 				}else{
 					ImGui_PushStyleColor(ImGuiCol_ButtonHovered, titlebar_color);
 				}
-				ImGui_PushID("Check All Known");
-				if(ImGui_Button("Check All")){
+				//TODO Once IT is pushed to stable use PushID so that buttons with the same text can be used.
+				/* ImGui_PushID("Check All Known"); */
+				if(ImGui_Button("Target Check All")){
 					check_all_known = true;
 				}
-				ImGui_PopID();
+				/* ImGui_PopID(); */
 				ImGui_PopStyleColor();
 
 				ImGui_SameLine();
@@ -285,11 +286,11 @@ class DrikaCheckCharacterState : DrikaElement{
 				}else{
 					ImGui_PushStyleColor(ImGuiCol_ButtonHovered, titlebar_color);
 				}
-				ImGui_PushID("Check Any Known");
-				if(ImGui_Button("Check Any")){
+				/* ImGui_PushID("Check Any Known"); */
+				if(ImGui_Button("Target Check Any")){
 					check_all_known = false;
 				}
-				ImGui_PopID();
+				/* ImGui_PopID(); */
 				ImGui_PopStyleVar();
 				ImGui_PopStyleColor();
 

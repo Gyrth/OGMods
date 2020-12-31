@@ -321,9 +321,35 @@ class DrikaOnEnterExit : DrikaElement{
 
 		if((target_select.identifier_type == team) && IsWhileFunction()){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Check All");
+			ImGui_Text("Check Method");
 			ImGui_NextColumn();
-			ImGui_Checkbox("###Check All", check_all);
+			ImGui_AlignTextToFramePadding();
+
+			ImGui_PushStyleVar(ImGuiStyleVar_ItemSpacing, vec2(0.0));
+			if(!check_all){
+				ImGui_PushStyleColor(ImGuiCol_Button, item_hovered);
+			}else{
+				ImGui_PushStyleColor(ImGuiCol_ButtonHovered, titlebar_color);
+			}
+			if(ImGui_Button("Check All")){
+				check_all = true;
+			}
+			ImGui_PopStyleColor();
+
+			ImGui_SameLine();
+
+			if(check_all){
+				ImGui_PushStyleColor(ImGuiCol_Button, item_hovered);
+			}else{
+				ImGui_PushStyleColor(ImGuiCol_ButtonHovered, titlebar_color);
+			}
+			if(ImGui_Button("Check Any")){
+				check_all = false;
+			}
+			ImGui_PopStyleVar();
+			ImGui_PopStyleColor();
+
+			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 		}
 
