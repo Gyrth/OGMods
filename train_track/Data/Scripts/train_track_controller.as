@@ -1,20 +1,16 @@
-
+//UI variables..----------------------------------------------------------------------------------------------------------------------------
 IMGUI@ imGUI;
 FontSetup default_font("arial", 70 , HexColor("#CCCCCC"), true);
 float blackout_amount = 0.0f;
+
+//Intersection, track and environment variables.----------------------------------------------------------------------------------------------
 array<Intersection@> intersections;
-string debug_cube_path = "Data/Objects/block.xml";
 string track_segment_path = "Data/Objects/track_segment.xml";
-bool post_init_done = false;
 uint num_intersections = 50;
 float height_range = 100.0f;
 float random_range = 400.0f;
-
-const float PI = 3.14159265359f;
-double rad2deg = (180.0f / PI);
-double deg2rad = (PI / 180.0f);
-
 array<vec3> occupied_locations;
+MineCart@ player = MineCart();
 array<EnvironmentAsset@> environment_assets = {	EnvironmentAsset("Data/Prototypes/OG/elm_tree_large.xml", 25.0f, 75),
 												EnvironmentAsset("Data/Prototypes/OG/elm_tree_small.xml", 25.0f, 75),
 												EnvironmentAsset("Data/Prototypes/OG/PineTree1_A.xml", 15.0f, 80),
@@ -24,9 +20,13 @@ array<EnvironmentAsset@> environment_assets = {	EnvironmentAsset("Data/Prototype
 												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/small_deciduous.xml", 10.0f, 40),
 												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/green_bush.xml", 2.0f, 75)};
 
-MineCart@ player = MineCart();
+//General script variables.-------------------------------------------------------------------------------------------------------------------
+bool post_init_done = false;
+const float PI = 3.14159265359f;
+double rad2deg = (180.0f / PI);
+double deg2rad = (PI / 180.0f);
 
-//Camera control variables.
+//Camera control variables.------------------------------------------------------------------------------------------------------------------
 float cam_rotation_x = 90.0f;
 float cam_rotation_y = 180.0f;
 float cam_rotation_z = 0.0f;
@@ -168,11 +168,6 @@ class Intersection{
 			}
 		}
 
-		/* Log(warning, "sorted_intersections " + sorted_intersections.size());
-		for(uint j = 0; j < sorted_intersections.size(); j++){
-			Log(warning, "distance " + distance(position, sorted_intersections[j].position));
-		} */
-
 		int connection_tries = max_connections;
 		for(int i = 0; i < connection_tries && int(sorted_intersections.size()) > i && connections.size() < max_connections; i++){
 			bool can_connect = sorted_intersections[i].RequestConnect(this);
@@ -254,9 +249,6 @@ class Intersection{
 				quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
 				quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
 				track_obj.SetRotation(rot_y * rot_x * rot_z);
-				/* Log(warning, "Num contacts " + sphere_col.NumContacts());
-				Log(warning, "x " + point.normal.x + " y " + point.normal.y + " z " + point.normal.z); */
-				/* break; */
 			}
 		}
 
@@ -294,7 +286,6 @@ class Intersection{
 		}
 	}
 }
-
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
