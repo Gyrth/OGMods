@@ -28,12 +28,15 @@ MineCart@ player = MineCart();
 
 class MineCart{
 	Object@ cart;
-	string cart_path = "Data/Objects/block.xml";
+	string cart_path = "Data/Objects/mine_cart.xml";
 	Intersection@ next_intersection;
+	Intersection@ previous_intersection;
 	array<vec3> track_positions;
 	int track_index = 0;
 	float base_speed = 10.0f;
 	float speed = base_speed;
+	float max_subtracted_speed = base_speed - 0.5f;
+	float max_added_speed = base_speed * 15.0f;
 	vec3 position;
 
 	MineCart(){
@@ -43,6 +46,7 @@ class MineCart{
 	void PostInit(){
 		@next_intersection = intersections[0];
 		track_positions = next_intersection.paths[0];
+		@previous_intersection = next_intersection.connections[0];
 		int cart_id = CreateObject(cart_path);
 		@cart = ReadObjectFromID(cart_id);
 		cart.SetCollisionEnabled(false);
@@ -53,20 +57,39 @@ class MineCart{
 
 	void Update(){
 		//Increase or decrease speed based on steepness.
-		speed = base_speed + ((position.y - track_positions[track_index].y) * 10.0f);
+
+		speed = mix(speed, base_speed + max(-max_subtracted_speed, min(max_added_speed, ((position.y - track_positions[track_index].y) * 25.0f))), time_step * 3.0f);
 
 		if(distance(position, track_positions[track_index]) < 0.1f){
 			track_index += 1;
 			//Check if the cart is at the end of the track.
 			if(track_index == int(track_positions.size())){
 				track_index = 0;
+				next_intersection.RequestNextIntersection(this, previous_intersection);
 			}
 		}
 
 		vec3 direction = normalize(track_positions[track_index] - position);
 		DebugDrawWireSphere(track_positions[track_index], 1.5, vec3(0.0, 0.0, 1.0), _delete_on_update);
 		position += direction * speed * time_step;
-		cart.SetTranslationRotationFast(position, quaternion());
+		cart.SetTranslation(position);
+
+		/* cart.SetTranslationRotationFast(position, quaternion()); */
+
+		vec3 up = vec3(0.0f, 1.0f, 0.0f);
+		vec3 front = direction;
+
+		vec3 new_rotation;
+		new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
+		new_rotation.x = asin(front[1]) * -180.0f / PI;
+		vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+		vec3 expected_up = normalize(cross(expected_right, front));
+		new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
+
+		quaternion rot_y(vec4(0, 1, 0, new_rotation.y * deg2rad));
+		quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
+		quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
+		cart.SetRotation(mix(cart.GetRotation(), rot_y * rot_x * rot_z, time_step * 5.0f));
 	}
 
 	void DrawDebug(){
@@ -239,6 +262,27 @@ class Intersection{
 		turn_signal_obj.SetTranslation(position + (direction * 4.0f) + vec3(0.0f, 4.0f, 0.0f));
 		turn_signal_obj.SetCollisionEnabled(false);
 	}
+
+	void RequestNextIntersection(MineCart@ cart, Intersection@ exclude){
+		array<Intersection@> choices = connections;
+		for(uint i = 0; i < choices.size(); i++){
+			if(choices[i] is exclude){
+				choices.removeAt(i);
+				Log(warning, "Remove at " + i);
+				break;
+			}
+		}
+
+		@cart.next_intersection = choices[rand() % choices.size()];
+		@cart.previous_intersection = @this;
+
+		for(uint i = 0; i < cart.next_intersection.connections.size(); i++){
+			if(cart.next_intersection.connections[i] is this){
+				cart.track_positions = cart.next_intersection.paths[i];
+				break;
+			}
+		}
+	}
 }
 
 
@@ -310,6 +354,7 @@ void Update(){
 
 	player.Update();
 	player.DrawDebug();
+	UpdateCamera();
 }
 
 void PostInit(){
@@ -374,10 +419,16 @@ void AttemptAssetPlacement(string path, float min_object_distance){
 	asset_object.SetRotation(new_rotation);
 }
 
+void UpdateCamera(){
+	if(!DialogueCameraControl()){return;}
+	camera.SetPos(player.position + vec3(15.0f, 10.0f, 0.0f));
+	camera.LookAt(player.position);
+}
+
 bool HasFocus(){
 	return false;
 }
 
 bool DialogueCameraControl() {
-	return false;
+	return EditorModeActive()?false:true;
 }
