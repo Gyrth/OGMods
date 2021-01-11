@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Mod>
+	<Id>train-track</Id>
+	<Name>Train Track</Name>
+	<Category>Level</Category>
+	<Thumbnail>Data/Images/train_track_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/train_track_full.jpg</PreviewImage>
+	<Description>Choo choo.</Description>
+	<Version>1.0.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Tag>Script</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<NeedsRestart>false</NeedsRestart>
+	<Level title="Train Track" thumbnail="Images/train_track_full.jpg">Data/Levels/train_track.xml</Level>
+</Mod>
