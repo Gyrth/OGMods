@@ -7,12 +7,34 @@ string debug_cube_path = "Data/Objects/block.xml";
 string track_segment_path = "Data/Objects/track_segment.xml";
 bool post_init_done = false;
 uint num_intersections = 50;
-float height_range = 1000.0f;
+float height_range = 100.0f;
 float random_range = 400.0f;
 
 const float PI = 3.14159265359f;
 double rad2deg = (180.0f / PI);
 double deg2rad = (PI / 180.0f);
+
+array<vec3> occupied_locations;
+array<EnvironmentAsset@> environment_assets = {	EnvironmentAsset("Data/Prototypes/OG/elm_tree_large.xml", 25.0f, 50),
+												EnvironmentAsset("Data/Prototypes/OG/elm_tree_small.xml", 25.0f, 50),
+												EnvironmentAsset("Data/Prototypes/OG/PineTree1_A.xml", 15.0f, 60),
+												EnvironmentAsset("Data/Prototypes/OG/PineTree1_B.xml", 15.0f, 60),
+												EnvironmentAsset("Data/Prototypes/OG/PineTree2_A.xml", 15.0f, 60),
+												EnvironmentAsset("Data/Prototypes/OG/PineTree2_B.xml", 15.0f, 60),
+												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/small_deciduous.xml", 10.0f, 30),
+												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/green_bush.xml", 2.0f, 75)};
+
+class EnvironmentAsset{
+	string path;
+	float min_object_distance;
+	int amount;
+
+	EnvironmentAsset(string _path, float _min_object_distance, int _amount){
+		path = _path;
+		min_object_distance = _min_object_distance;
+		amount = _amount;
+	}
+}
 
 class Intersection{
 	uint max_connections = 3;
@@ -30,6 +52,7 @@ class Intersection{
 		position = col.GetRayCollision(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z));
 		int debug_cube_id = CreateObject(debug_cube_path);
 		@debug_cube = ReadObjectFromID(debug_cube_id);
+		debug_cube.SetCollisionEnabled(false);
 		debug_cube.SetTranslation(position + vec3(0.0, 2.0, 0.0));
 		debug_cube.SetTint(vec3());
 		debug_cube.SetScale(vec3(1.0, 10.0, 1.0));
@@ -110,6 +133,7 @@ void CreateTrack(Intersection@ a, Intersection@ b){
 		Object@ track_obj = ReadObjectFromID(obj_id);
 
 		track_obj.SetTranslation(location);
+		occupied_locations.insertLast(location);
 
 		for(int j = 0; j < sphere_col.NumContacts(); j++){
 			CollisionPoint point = sphere_col.GetContact(j);
@@ -205,6 +229,7 @@ void Update(){
 
 void PostInit(){
 	CreateTrack();
+	CreateEnvironment();
 	post_init_done = true;
 }
 
@@ -216,6 +241,52 @@ void CreateTrack(){
 	for(uint i = 0; i < intersections.size(); i++){
 		intersections[i].SetConnected();
 	}
+}
+
+void CreateEnvironment(){
+	for(uint i = 0; i < environment_assets.size(); i++){
+		for(int j = 0; j < environment_assets[i].amount; j++){
+			AttemptAssetPlacement(environment_assets[i].path, environment_assets[i].min_object_distance);
+		}
+	}
+}
+
+void AttemptAssetPlacement(string path, float min_object_distance){
+	float random_x = RangedRandomFloat(-random_range, random_range);
+	float random_z = RangedRandomFloat(-random_range, random_range);
+
+	/* vec3 chosen_position = col.GetRayCollision(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z)); */
+	vec3 chosen_position;
+
+	col.GetSweptCylinderCollisionDoubleSided(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z), 0.1f, 1.0f);
+	for(int j = 0; j < sphere_col.NumContacts(); j++){
+		CollisionPoint point = sphere_col.GetContact(j);
+
+		if(length(point.normal) < 0.1f){continue;}
+		chosen_position = sphere_col.position;
+		for(uint i = 0; i < occupied_locations.size(); i++){
+			//Try to place it again if the location is occupied.
+			vec3 flat_location = vec3(occupied_locations[i].x, 0.0f, occupied_locations[i].z);
+			if(distance(flat_location, vec3(chosen_position.x, 0.0f, chosen_position.z)) < min_object_distance){
+				AttemptAssetPlacement(path, min_object_distance);
+				return;
+			}
+		}
+		break;
+	}
+
+	int asset_id = CreateObject(path);
+	Object@ asset_object = ReadObjectFromID(asset_id);
+	vec3 bounds = asset_object.GetBoundingBox();
+	//Make sure the bounds are not zero.
+	if(bounds == vec3()){bounds = vec3(1.0);}
+	float random_size = RangedRandomFloat(0.5f, 1.5f);
+	DebugDrawWireSphere(chosen_position, 1.0f, vec3(1.0, 0.0, 0.0), _persistent);
+	asset_object.SetTranslation(chosen_position + vec3(0.0, (bounds.y * 0.4f) * random_size, 0.0));
+	asset_object.SetScale(vec3(random_size));
+	occupied_locations.insertLast(chosen_position);
+	quaternion new_rotation = quaternion(vec4(0.0f,1.0,0.0f, RangedRandomFloat(-1, 1)));
+	asset_object.SetRotation(new_rotation);
 }
 
 bool HasFocus(){
