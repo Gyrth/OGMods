@@ -92,21 +92,27 @@ class EnvironmentAsset{
 class Intersection{
 	uint max_connections = 3;
 	vec3 position;
-	Object@ debug_cube;
+	Object@ rotating_track;
 	array<Intersection@> connections;
 	array<array<vec3>> paths;
+	array<Object@> turn_signal_objects;
+	string turn_signal_path = "Data/Objects/block.xml";
 
 	Intersection(){
 		float random_x = RangedRandomFloat(-random_range, random_range);
 		float random_z = RangedRandomFloat(-random_range, random_range);
 
 		position = col.GetRayCollision(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z));
-		int debug_cube_id = CreateObject(debug_cube_path);
-		@debug_cube = ReadObjectFromID(debug_cube_id);
-		debug_cube.SetCollisionEnabled(false);
-		debug_cube.SetTranslation(position + vec3(0.0, 2.0, 0.0));
-		debug_cube.SetTint(vec3());
-		debug_cube.SetScale(vec3(1.0, 10.0, 1.0));
+		int rotating_track_id = CreateObject(track_segment_path);
+		@rotating_track = ReadObjectFromID(rotating_track_id);
+		rotating_track.SetCollisionEnabled(false);
+		rotating_track.SetTranslation(position);
+	}
+
+	void Update(){
+		float y_rotation = 360.0f * sin(2 * PI * 0.15 * the_time + 0.0);
+		quaternion rot_y(vec4(0, 1, 0, y_rotation * deg2rad));
+		rotating_track.SetTranslationRotationFast(position, rot_y);
 	}
 
 	void SetConnected(){
@@ -158,11 +164,17 @@ class Intersection{
 
 		//Add the peer to the list of connected intersections.
 		CreateTrack(peer);
+
 		connections.insertLast(peer);
 		peer.connections.insertLast(this);
+
+		CreateTurnSignal();
+		peer.CreateTurnSignal();
+
 		array<vec3> reverse_path = paths[paths.size() - 1];
 		reverse_path.reverse();
 		peer.paths.insertLast(reverse_path);
+
 		return true;
 	}
 
@@ -216,6 +228,16 @@ class Intersection{
 		}
 
 		paths.insertLast(new_path);
+	}
+
+	void CreateTurnSignal(){
+		int turn_signal_id = CreateObject(turn_signal_path);
+		Object@ turn_signal_obj = ReadObjectFromID(turn_signal_id);
+		turn_signal_objects.insertLast(turn_signal_obj);
+
+		vec3 direction = normalize(connections[connections.size() - 1].position - position);
+		turn_signal_obj.SetTranslation(position + (direction * 4.0f) + vec3(0.0f, 4.0f, 0.0f));
+		turn_signal_obj.SetCollisionEnabled(false);
 	}
 }
 
@@ -282,6 +304,7 @@ void Update(){
 	imGUI.update();
 
 	for(uint i = 0; i < intersections.size() - 1; i++){
+		intersections[i].Update();
 		intersections[i].DrawDebug();
 	}
 
