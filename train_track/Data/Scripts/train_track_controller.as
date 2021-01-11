@@ -15,16 +15,23 @@ double rad2deg = (180.0f / PI);
 double deg2rad = (PI / 180.0f);
 
 array<vec3> occupied_locations;
-array<EnvironmentAsset@> environment_assets = {	EnvironmentAsset("Data/Prototypes/OG/elm_tree_large.xml", 25.0f, 50),
-												EnvironmentAsset("Data/Prototypes/OG/elm_tree_small.xml", 25.0f, 50),
-												EnvironmentAsset("Data/Prototypes/OG/PineTree1_A.xml", 15.0f, 60),
-												EnvironmentAsset("Data/Prototypes/OG/PineTree1_B.xml", 15.0f, 60),
-												EnvironmentAsset("Data/Prototypes/OG/PineTree2_A.xml", 15.0f, 60),
-												EnvironmentAsset("Data/Prototypes/OG/PineTree2_B.xml", 15.0f, 60),
-												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/small_deciduous.xml", 10.0f, 30),
+array<EnvironmentAsset@> environment_assets = {	EnvironmentAsset("Data/Prototypes/OG/elm_tree_large.xml", 25.0f, 75),
+												EnvironmentAsset("Data/Prototypes/OG/elm_tree_small.xml", 25.0f, 75),
+												EnvironmentAsset("Data/Prototypes/OG/PineTree1_A.xml", 15.0f, 80),
+												EnvironmentAsset("Data/Prototypes/OG/PineTree1_B.xml", 15.0f, 80),
+												EnvironmentAsset("Data/Prototypes/OG/PineTree2_A.xml", 15.0f, 80),
+												EnvironmentAsset("Data/Prototypes/OG/PineTree2_B.xml", 15.0f, 80),
+												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/small_deciduous.xml", 10.0f, 40),
 												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/green_bush.xml", 2.0f, 75)};
 
 MineCart@ player = MineCart();
+
+//Camera control variables.
+float cam_rotation_x = 90.0f;
+float cam_rotation_y = 180.0f;
+float cam_rotation_z = 0.0f;
+float camera_shake = 0.0f;
+float current_fov = 90.0f;
 
 class MineCart{
 	Object@ cart;
@@ -56,11 +63,9 @@ class MineCart{
 	}
 
 	void Update(){
-		//Increase or decrease speed based on steepness.
 
-		speed = mix(speed, base_speed + max(-max_subtracted_speed, min(max_added_speed, ((position.y - track_positions[track_index].y) * 25.0f))), time_step * 3.0f);
-
-		if(distance(position, track_positions[track_index]) < 0.1f){
+		if((track_index > 0 && distance(track_positions[track_index - 1], position) > distance(track_positions[track_index - 1], track_positions[track_index])) ||
+			distance(position, track_positions[track_index]) < 0.1f){
 			track_index += 1;
 			//Check if the cart is at the end of the track.
 			if(track_index == int(track_positions.size())){
@@ -69,12 +74,13 @@ class MineCart{
 			}
 		}
 
-		vec3 direction = normalize(track_positions[track_index] - position);
-		DebugDrawWireSphere(track_positions[track_index], 1.5, vec3(0.0, 0.0, 1.0), _delete_on_update);
-		position += direction * speed * time_step;
-		cart.SetTranslation(position);
+		//Increase or decrease speed based on steepness.
+		speed = mix(speed, base_speed + max(-max_subtracted_speed, min(max_added_speed, ((position.y - track_positions[track_index].y) * 25.0f))), time_step * 0.1f);
 
-		/* cart.SetTranslationRotationFast(position, quaternion()); */
+		vec3 direction = normalize(track_positions[track_index] - position);
+		position += direction * speed * time_step;
+		/* cart.SetTranslation(position); */
+
 
 		vec3 up = vec3(0.0f, 1.0f, 0.0f);
 		vec3 front = direction;
@@ -89,7 +95,11 @@ class MineCart{
 		quaternion rot_y(vec4(0, 1, 0, new_rotation.y * deg2rad));
 		quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
 		quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
-		cart.SetRotation(mix(cart.GetRotation(), rot_y * rot_x * rot_z, time_step * 5.0f));
+		quaternion slerped_rotation = mix(cart.GetRotation(), rot_y * rot_x * rot_z, time_step * 5.0f);
+		/* cart.SetRotation(slerped_rotation); */
+
+		/* cart.SetTranslationRotationFast(position, slerped_rotation); */
+
 	}
 
 	void DrawDebug(){
@@ -261,6 +271,7 @@ class Intersection{
 		vec3 direction = normalize(connections[connections.size() - 1].position - position);
 		turn_signal_obj.SetTranslation(position + (direction * 4.0f) + vec3(0.0f, 4.0f, 0.0f));
 		turn_signal_obj.SetCollisionEnabled(false);
+		turn_signal_obj.SetEnabled(false);
 	}
 
 	void RequestNextIntersection(MineCart@ cart, Intersection@ exclude){
@@ -268,7 +279,6 @@ class Intersection{
 		for(uint i = 0; i < choices.size(); i++){
 			if(choices[i] is exclude){
 				choices.removeAt(i);
-				Log(warning, "Remove at " + i);
 				break;
 			}
 		}
@@ -349,17 +359,17 @@ void Update(){
 
 	for(uint i = 0; i < intersections.size() - 1; i++){
 		intersections[i].Update();
-		intersections[i].DrawDebug();
+		/* intersections[i].DrawDebug(); */
 	}
 
 	player.Update();
-	player.DrawDebug();
+	/* player.DrawDebug(); */
 	UpdateCamera();
 }
 
 void PostInit(){
 	CreateTrack();
-	/* CreateEnvironment(); */
+	CreateEnvironment();
 	player.PostInit();
 	post_init_done = true;
 }
@@ -421,8 +431,29 @@ void AttemptAssetPlacement(string path, float min_object_distance){
 
 void UpdateCamera(){
 	if(!DialogueCameraControl()){return;}
-	camera.SetPos(player.position + vec3(15.0f, 10.0f, 0.0f));
-	camera.LookAt(player.position);
+
+	cam_rotation_y -= GetLookXAxis(0);
+	cam_rotation_x -= GetLookYAxis(0);
+
+	cam_rotation_x = min(50.0f, max(-50.0f, cam_rotation_x));
+
+	float camera_vibration_mult = 3.0f;
+    float camera_vibration = camera_shake * camera_vibration_mult;
+	float y_shake = RangedRandomFloat(-camera_vibration, camera_vibration);
+	float x_shake = RangedRandomFloat(-camera_vibration, camera_vibration);
+	camera.SetYRotation(cam_rotation_y + y_shake);
+	camera.SetXRotation(cam_rotation_x + x_shake);
+	camera.SetZRotation(cam_rotation_z);
+	camera.CalcFacing();
+
+	camera.SetFOV(current_fov);
+	camera.SetPos(player.position + vec3(0.0f, 2.0f, 0.0f));
+	camera.SetDistance(0.5f);
+
+	UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
+	/* camera.SetInterpSteps(ts.frames()); */
+
+	camera_shake *= 0.95f;
 }
 
 bool HasFocus(){
