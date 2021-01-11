@@ -24,6 +24,59 @@ array<EnvironmentAsset@> environment_assets = {	EnvironmentAsset("Data/Prototype
 												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/small_deciduous.xml", 10.0f, 30),
 												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/green_bush.xml", 2.0f, 75)};
 
+MineCart@ player = MineCart();
+
+class MineCart{
+	Object@ cart;
+	string cart_path = "Data/Objects/block.xml";
+	Intersection@ next_intersection;
+	array<vec3> track_positions;
+	int track_index = 0;
+	float base_speed = 10.0f;
+	float speed = base_speed;
+	vec3 position;
+
+	MineCart(){
+
+	}
+
+	void PostInit(){
+		@next_intersection = intersections[0];
+		track_positions = next_intersection.paths[0];
+		int cart_id = CreateObject(cart_path);
+		@cart = ReadObjectFromID(cart_id);
+		cart.SetCollisionEnabled(false);
+
+		position = track_positions[track_index];
+		cart.SetTranslation(position);
+	}
+
+	void Update(){
+		//Increase or decrease speed based on steepness.
+		speed = base_speed + ((position.y - track_positions[track_index].y) * 10.0f);
+
+		if(distance(position, track_positions[track_index]) < 0.1f){
+			track_index += 1;
+			//Check if the cart is at the end of the track.
+			if(track_index == int(track_positions.size())){
+				track_index = 0;
+			}
+		}
+
+		vec3 direction = normalize(track_positions[track_index] - position);
+		DebugDrawWireSphere(track_positions[track_index], 1.5, vec3(0.0, 0.0, 1.0), _delete_on_update);
+		position += direction * speed * time_step;
+		cart.SetTranslationRotationFast(position, quaternion());
+	}
+
+	void DrawDebug(){
+		for(uint i = 0; i < track_positions.size(); i++){
+			DebugDrawWireSphere(track_positions[i], 1.0, vec3(1.0, 0.0, 0.0), _delete_on_update);
+		}
+	}
+}
+
+
 class EnvironmentAsset{
 	string path;
 	float min_object_distance;
@@ -39,11 +92,9 @@ class EnvironmentAsset{
 class Intersection{
 	uint max_connections = 3;
 	vec3 position;
-	int num_paths;
-	array<vec3> paths;
 	Object@ debug_cube;
-
 	array<Intersection@> connections;
+	array<array<vec3>> paths;
 
 	Intersection(){
 		float random_x = RangedRandomFloat(-random_range, random_range);
@@ -63,6 +114,7 @@ class Intersection{
 		for(uint i = 0; i < intersections.size(); i++){
 			bool added = false;
 
+			//Do not allow the intersection to connect to itself.
 			if(intersections[i] is this){continue;}
 
 			for(uint j = 0; j < sorted_intersections.size(); j++){
@@ -88,8 +140,6 @@ class Intersection{
 
 			if(!can_connect){
 				connection_tries += 1;
-			}else{
-				connections.insertLast(sorted_intersections[i]);
 			}
 		}
 	}
@@ -107,8 +157,12 @@ class Intersection{
 		}
 
 		//Add the peer to the list of connected intersections.
-		CreateTrack(peer, this);
+		CreateTrack(peer);
 		connections.insertLast(peer);
+		peer.connections.insertLast(this);
+		array<vec3> reverse_path = paths[paths.size() - 1];
+		reverse_path.reverse();
+		peer.paths.insertLast(reverse_path);
 		return true;
 	}
 
@@ -118,48 +172,53 @@ class Intersection{
 			DebugDrawLine(connections[i].position + extra_height, position + extra_height, vec3(0.0, 0.0, 1.0), _delete_on_update);
 		}
 	}
-}
 
-void CreateTrack(Intersection@ a, Intersection@ b){
-	float intersection_distance = distance(a.position, b.position);
-	int segments_needed = int(intersection_distance / 2.0f) + 1;
-	/* Log(warning, "segments_needed " + segments_needed); */
+	void CreateTrack(Intersection@ peer){
+		float intersection_distance = distance(peer.position, position);
+		int segments_needed = int(intersection_distance / 2.0f);
+		/* Log(warning, "segments_needed " + segments_needed); */
+		array<vec3> new_path;
 
-	for(int i = 0; i < segments_needed; i++){
-		vec3 location = mix(a.position, b.position, float(i) / float(segments_needed));
-		location = col.GetRayCollision(vec3(location.x, height_range, location.z), vec3(location.x, -height_range, location.z));
-		col.GetSweptSphereCollision(vec3(location.x, height_range, location.z), vec3(location.x, -height_range, location.z), 0.001f);
-		int obj_id = CreateObject(track_segment_path);
-		Object@ track_obj = ReadObjectFromID(obj_id);
+		for(int i = 1; i < segments_needed; i++){
+			vec3 location = mix(peer.position, position, float(i) / float(segments_needed));
+			location = col.GetRayCollision(vec3(location.x, height_range, location.z), vec3(location.x, -height_range, location.z));
+			col.GetSweptSphereCollision(vec3(location.x, height_range, location.z), vec3(location.x, -height_range, location.z), 0.001f);
+			int obj_id = CreateObject(track_segment_path);
+			Object@ track_obj = ReadObjectFromID(obj_id);
 
-		track_obj.SetTranslation(location);
-		occupied_locations.insertLast(location);
+			track_obj.SetTranslation(location);
+			occupied_locations.insertLast(location);
+			new_path.insertLast(location);
 
-		for(int j = 0; j < sphere_col.NumContacts(); j++){
-			CollisionPoint point = sphere_col.GetContact(j);
+			for(int j = 0; j < sphere_col.NumContacts(); j++){
+				CollisionPoint point = sphere_col.GetContact(j);
 
-			if(length(point.normal) < 0.1f){continue;}
+				if(length(point.normal) < 0.1f){continue;}
 
-			vec3 up = point.normal;
-			vec3 front = cross(up, normalize(b.position - a.position));
+				vec3 up = point.normal;
+				vec3 front = cross(up, normalize(position - peer.position));
 
-			vec3 new_rotation;
-			new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
-			new_rotation.x = asin(front[1]) * -180.0f / PI;
-			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
-			vec3 expected_up = normalize(cross(expected_right, front));
-			new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
+				vec3 new_rotation;
+				new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
+				new_rotation.x = asin(front[1]) * -180.0f / PI;
+				vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+				vec3 expected_up = normalize(cross(expected_right, front));
+				new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
 
-			quaternion rot_y(vec4(0, 1, 0, new_rotation.y * deg2rad));
-			quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
-			quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
-			track_obj.SetRotation(rot_y * rot_x * rot_z);
-			/* Log(warning, "Num contacts " + sphere_col.NumContacts());
-			Log(warning, "x " + point.normal.x + " y " + point.normal.y + " z " + point.normal.z); */
-			/* break; */
+				quaternion rot_y(vec4(0, 1, 0, new_rotation.y * deg2rad));
+				quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
+				quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
+				track_obj.SetRotation(rot_y * rot_x * rot_z);
+				/* Log(warning, "Num contacts " + sphere_col.NumContacts());
+				Log(warning, "x " + point.normal.x + " y " + point.normal.y + " z " + point.normal.z); */
+				/* break; */
+			}
 		}
+
+		paths.insertLast(new_path);
 	}
 }
+
 
 void Init(string str){
 	@imGUI = CreateIMGUI();
@@ -225,11 +284,15 @@ void Update(){
 	for(uint i = 0; i < intersections.size() - 1; i++){
 		intersections[i].DrawDebug();
 	}
+
+	player.Update();
+	player.DrawDebug();
 }
 
 void PostInit(){
 	CreateTrack();
-	CreateEnvironment();
+	/* CreateEnvironment(); */
+	player.PostInit();
 	post_init_done = true;
 }
 
@@ -281,7 +344,6 @@ void AttemptAssetPlacement(string path, float min_object_distance){
 	//Make sure the bounds are not zero.
 	if(bounds == vec3()){bounds = vec3(1.0);}
 	float random_size = RangedRandomFloat(0.5f, 1.5f);
-	DebugDrawWireSphere(chosen_position, 1.0f, vec3(1.0, 0.0, 0.0), _persistent);
 	asset_object.SetTranslation(chosen_position + vec3(0.0, (bounds.y * 0.4f) * random_size, 0.0));
 	asset_object.SetScale(vec3(random_size));
 	occupied_locations.insertLast(chosen_position);
