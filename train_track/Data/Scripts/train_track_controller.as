@@ -26,12 +26,16 @@ const float PI = 3.14159265359f;
 double rad2deg = (180.0f / PI);
 double deg2rad = (PI / 180.0f);
 
-//Camera control variables.------------------------------------------------------------------------------------------------------------------
+//Camera control and player variables.---------------------------------------------------------------------------------------------------------
 float cam_rotation_x = 90.0f;
 float cam_rotation_y = 180.0f;
 float cam_rotation_z = 0.0f;
 float camera_shake = 0.0f;
 float current_fov = 90.0f;
+array<Bullet@> bullets;
+float crosshair_length = 20.0f;
+float crosshair_thickness = 1.0f;
+vec4 crosshair_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
 
 class MineCart{
 	Object@ cart;
@@ -287,6 +291,37 @@ class Intersection{
 	}
 }
 
+class Bullet{
+	float bullet_speed = 433.0f;
+	float max_bullet_distance = 1500.0f;
+	float distance_done = 0.0f;
+	vec3 direction;
+	vec3 starting_position;
+	float timer;
+	bool done;
+
+	Bullet(vec3 _starting_point, vec3 _direction){
+		starting_position = _starting_point;
+		direction = _direction;
+	}
+
+	void SetStartingPoint(vec3 new_starting_point){
+		distance_done += distance(starting_position, new_starting_point);
+		starting_position = new_starting_point;
+	}
+
+	void UpdateFlight(){
+		vec3 start = starting_position;
+		vec3 end = starting_position + (direction * bullet_speed * time_step);
+		done = CheckCollisions(start, end);
+		if(distance_done > max_bullet_distance){
+			done = true;
+		}
+		DebugDrawLine(start, end, vec3(0.5), vec3(0.5), _fade);
+		SetStartingPoint(end);
+	}
+}
+
 void Init(string str){
 	@imGUI = CreateIMGUI();
 	CreateIMGUIContainers();
@@ -317,6 +352,14 @@ void DrawGUI(){
 	blackout_image.position.z = -2.0f;
 	blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
 	blackout_image.color = vec4(0.0f, 0.0f, 0.0f, blackout_amount);
+
+	vec2 metrics = screenMetrics.getMetrics();
+	vec2 middle_screen = vec2(metrics.x / 2.0f, metrics.y / 2.0f);
+
+	//Vertical line.
+	imGUI.drawBox(middle_screen - vec2(crosshair_thickness / 2.0f, crosshair_length / 2.0f), vec2(crosshair_thickness, crosshair_length), crosshair_color, 0);
+	//Horizontal line.
+	imGUI.drawBox(middle_screen - vec2(crosshair_length / 2.0f, crosshair_thickness / 2.0f), vec2(crosshair_length, crosshair_thickness), crosshair_color, 0);
 }
 
 void ReceiveMessage(string msg){
@@ -356,6 +399,109 @@ void Update(){
 	player.Update();
 	/* player.DrawDebug(); */
 	UpdateCamera();
+	UpdateShooting();
+	UpdateBullets();
+}
+
+void UpdateShooting(){
+	if(GetInputPressed(0, "attack")){
+		Shoot();
+	}
+}
+
+void UpdateBullets(){
+	for(uint i = 0; i < bullets.size(); i++){
+		Bullet@ bullet = bullets[i];
+
+		bullet.UpdateFlight();
+
+		if(bullet.done){
+			bullets.removeAt(i);
+			return;
+		}
+	}
+}
+
+bool CheckCollisions(vec3 start, vec3 &inout end){
+	bool colliding = false;
+	col.GetObjRayCollision(start, end);
+	vec3 direction = normalize(end - start);
+	CollisionPoint point;
+
+	if(sphere_col.NumContacts() != 0){
+		point = sphere_col.GetContact(sphere_col.NumContacts() - 1);
+		MakeMetalSparks(point.position);
+		vec3 facing = camera.GetFacing();
+		MakeParticle("Data/Particles/gun_decal.xml", point.position - facing, facing * 10.0f);
+		string path;
+		switch(rand() % 3) {
+			case 0:
+				path = "Data/Sounds/rico1.wav"; break;
+			case 1:
+				path = "Data/Sounds/rico2.wav"; break;
+			default:
+				path = "Data/Sounds/rico3.wav"; break;
+		}
+		PlaySound(path, point.position);
+		colliding = true;
+		end = point.position;
+	}
+
+	col.CheckRayCollisionCharacters(start, end);
+	int char_id = -1;
+	if(sphere_col.NumContacts() != 0){
+		point = sphere_col.GetContact(0);
+		char_id = point.id;
+	}
+
+	if(char_id != -1){
+		MovementObject@ char = ReadCharacterID(char_id);
+		char.rigged_object().Stab(sphere_col.GetContact(0).position, direction, 1, 0);
+		vec3 force = direction * 15000.0f;
+		vec3 hit_pos = vec3(0.0f);
+		TimedSlowMotion(0.1f, 0.7f, 0.05f);
+		float damage = 0.1;
+		char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
+					 "vec3 pos = vec3("+hit_pos.x+", "+hit_pos.y+", "+hit_pos.z+");" +
+					 "HandleRagdollImpactImpulse(impulse, pos, " + damage + ");");
+		 colliding = true;
+		 end = point.position;
+	}
+	return colliding;
+}
+
+void Shoot(){
+	camera.FixDiscontinuity();
+	vec3 forward = camera.GetFacing();
+	vec3 forward_offset = forward * 1.0;
+	vec3 spawn_point = camera.GetPos() + forward_offset;
+
+	int smoke_particle_amount = 5;
+	vec3 smoke_velocity = forward * 5.0f;
+	for(int i = 0; i < smoke_particle_amount; i++){
+		MakeParticle("Data/Particles/gun_smoke.xml", spawn_point, smoke_velocity);
+	}
+	MakeParticle("Data/Particles/gun_fire.xml", spawn_point, forward);
+	PlaySound("Data/Sounds/Revolver.wav", spawn_point);
+
+	camera_shake += 0.15f;
+	bullets.insertLast(Bullet(spawn_point, forward));
+
+	/* DebugDrawWireSphere(spawn_point, 0.01, vec3(1.0), _fade); */
+}
+
+void MakeMetalSparks(vec3 pos) {
+	int num_sparks = rand() % 20;
+
+	for(int i = 0; i < num_sparks; ++i) {
+		MakeParticle("Data/Particles/metalspark.xml", pos, vec3(RangedRandomFloat(-5.0f, 5.0f),
+																RangedRandomFloat(-5.0f, 5.0f),
+																RangedRandomFloat(-5.0f, 5.0f)));
+
+		MakeParticle("Data/Particles/metalflash.xml", pos, vec3(RangedRandomFloat(-5.0f, 5.0f),
+																RangedRandomFloat(-5.0f, 5.0f),
+																RangedRandomFloat(-5.0f, 5.0f)));
+	}
 }
 
 void PostInit(){
@@ -439,7 +585,7 @@ void UpdateCamera(){
 
 	camera.SetFOV(current_fov);
 	camera.SetPos(player.position + vec3(0.0f, 2.0f, 0.0f));
-	camera.SetDistance(0.5f);
+	camera.SetDistance(0.0f);
 
 	UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
 	/* camera.SetInterpSteps(ts.frames()); */
