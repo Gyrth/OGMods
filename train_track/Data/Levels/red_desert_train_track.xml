@@ -1,11 +1,11 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
-<Name>train_track</Name>
+<Name>red_desert_train_track</Name>
 <Description></Description>
 <Shader>post</Shader>
 <Shadows>true</Shadows>
 <LoadingScreen>
-    <Image></Image>
+    <Image>Data/Images/red_desert_train_track.jpg</Image>
 </LoadingScreen>
 <Terrain>
     <Heightmap>Data/Textures/Terrain/red_desert/red_desert_hm.png</Heightmap>

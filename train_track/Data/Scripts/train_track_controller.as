@@ -1,3 +1,5 @@
+#include "train_track_save_load.as"
+
 //UI variables..----------------------------------------------------------------------------------------------------------------------------
 IMGUI@ imGUI;
 FontSetup default_font("arial", 70 , HexColor("#CCCCCC"), true);
@@ -7,9 +9,12 @@ float blackout_amount = 0.0f;
 array<Intersection@> intersections;
 string track_segment_path = "Data/Objects/track_segment.xml";
 uint num_intersections = 75;
+uint max_connections = 3;
 float height_range = 200.0f;
 float random_range = 400.0f;
 float base_height;
+float env_objects_mult;
+int chosen_level_index = 0;
 array<vec3> occupied_locations;
 MineCart@ player = MineCart();
 array<SignalAnimation@> signal_animations;
@@ -51,6 +56,7 @@ float crosshair_length = 20.0f;
 float crosshair_thickness = 1.0f;
 vec4 crosshair_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
 float mouse_sensitivity = 0.5f;
+bool editor_mode_active = false;
 
 class SignalAnimation{
 	signal_animation_types signal_animation_type;
@@ -248,7 +254,6 @@ class EnvironmentAsset{
 }
 
 class Intersection{
-	uint max_connections = 3;
 	vec3 position;
 	Object@ rotating_track;
 	array<Intersection@> connections;
@@ -416,7 +421,7 @@ class Intersection{
 		vec3 direction = normalize(connections[connections.size() - 1].position - position);
 		vec3 offset = cross(direction, up);
 		vec3 target_location = position + offset + (direction * 4.0f);
-		vec3 height_offset(0.0f, 2.0f, 0.0f);
+		vec3 height_offset(0.0f, 10.0f, 0.0f);
 		target_location = col.GetRayCollision(target_location + height_offset, target_location - height_offset);
 		turn_signal_obj.SetTranslation(target_location + vec3(0.0f, 1.0f, 0.0f));
 		turn_signal_obj.SetCollisionEnabled(false);
@@ -531,9 +536,9 @@ class Bullet{
 }
 
 void Init(string str){
+	LoadData();
 	@imGUI = CreateIMGUI();
 	CreateIMGUIContainers();
-	BuildUI();
 }
 
 void CreateIMGUIContainers(){
@@ -589,13 +594,15 @@ void DrawGUI(){
 	blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
 	blackout_image.color = vec4(0.0f, 0.0f, 0.0f, blackout_amount);
 
-	vec2 metrics = screenMetrics.getMetrics();
-	vec2 middle_screen = vec2(metrics.x / 2.0f, metrics.y / 2.0f);
+	if(!editor_mode_active){
+		vec2 metrics = screenMetrics.getMetrics();
+		vec2 middle_screen = vec2(metrics.x / 2.0f, metrics.y / 2.0f);
 
-	//Vertical line.
-	imGUI.drawBox(middle_screen - vec2(crosshair_thickness / 2.0f, crosshair_length / 2.0f), vec2(crosshair_thickness, crosshair_length), crosshair_color, 0);
-	//Horizontal line.
-	imGUI.drawBox(middle_screen - vec2(crosshair_length / 2.0f, crosshair_thickness / 2.0f), vec2(crosshair_length, crosshair_thickness), crosshair_color, 0);
+		//Vertical line.
+		imGUI.drawBox(middle_screen - vec2(crosshair_thickness / 2.0f, crosshair_length / 2.0f), vec2(crosshair_thickness, crosshair_length), crosshair_color, 0);
+		//Horizontal line.
+		imGUI.drawBox(middle_screen - vec2(crosshair_length / 2.0f, crosshair_thickness / 2.0f), vec2(crosshair_length, crosshair_thickness), crosshair_color, 0);
+	}
 }
 
 void ReceiveMessage(string msg){
@@ -619,6 +626,13 @@ void ReceiveMessage(string msg){
 void Update(){
 	if(!post_init_done){
 		PostInit();
+	}
+
+	if(editor_mode_active != EditorModeActive()){
+		editor_mode_active = EditorModeActive();
+		if(!editor_mode_active){
+			SetGrabMouse(true);
+		}
 	}
 
 	while(imGUI.getMessageQueueSize() > 0 ){
@@ -761,6 +775,7 @@ void PostInit(){
 	SpawnBarrels();
 	player.PostInit();
 	post_init_done = true;
+	BuildUI();
 	SetGrabMouse(true);
 }
 
@@ -822,7 +837,7 @@ void CreateTrack(){
 
 void CreateEnvironment(){
 	for(uint i = 0; i < environment_assets.size(); i++){
-		for(int j = 0; j < environment_assets[i].amount; j++){
+		for(int j = 0; j < int(environment_assets[i].amount * env_objects_mult); j++){
 			AttemptAssetPlacement(environment_assets[i].path, environment_assets[i].min_object_distance);
 		}
 	}

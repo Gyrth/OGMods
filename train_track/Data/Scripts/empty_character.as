@@ -291,14 +291,24 @@ bool aiming = false;
 int gun_aim_anim;
 uint32 aim_particle;
 float start_throwing_time = 0.0f;
+bool post_init_done = false;
 
 void Update(int num_frames) {
 	Timestep ts(time_step, num_frames);
 	time += ts.step();
 
+	PostInit();
+
 	RiggedObject@ rigged_object = this_mo.rigged_object();
 	camera.SetInterpSteps(ts.frames());
 	UpdateListener(camera.GetPos(), vec3(), camera.GetFacing(), camera.GetUpVector());
+}
+
+void PostInit(){
+	if(!post_init_done){
+		this_mo.visible = false;
+		post_init_done = true;
+	}
 }
 
 void SetScale(float new_character_scale){

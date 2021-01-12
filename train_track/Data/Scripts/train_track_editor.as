@@ -1,6 +1,7 @@
 #include "save/general.as"
 #include "menu_common.as"
 #include "music_load.as"
+#include "train_track_save_load.as"
 
 MusicLoad ml("Data/Music/menu.xml");
 
@@ -13,6 +14,7 @@ vec4 item_background(0.4f, 0.4f, 0.4f, 1.0f);
 vec4 item_hovered(0.3f, 0.3f, 0.3f, 1.0f);
 vec4 item_clicked(0.3f, 0.3f, 0.3f, 1.0f);
 vec4 text_color(0.9f, 0.9f, 0.9f, 1.0f);
+vec4 black_color(0.0f, 0.0f, 0.0f, 1.0f);
 int padding = 10;
 bool open = true;
 
@@ -40,7 +42,9 @@ array<TextureAssetRef> train_level_images = {	LoadTexture("Data/Images/desert_ou
 
 int chosen_level_index = 0;
 int num_intersections = 50;
+int max_connections = 3;
 float env_objects_mult = 1.0f;
+int num_barrels = 10;
 
 bool HasFocus() {
 	return false;
@@ -61,6 +65,7 @@ void Initialize() {
 	BuildUI();
 	setBackGround();
 	AddVerticalBar();
+	LoadData();
 }
 
 void BuildUI(){
@@ -104,6 +109,7 @@ void Update() {
 		if( message.name == "run_file" ){
 
 		}else if( message.name == "Back" ){
+			SaveData();
 			this_ui.SendCallback( "back" );
 		}
 	}
@@ -130,7 +136,7 @@ void DrawGUI() {
 	imGUI.render();
 
 	ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
-	ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
 	ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_TitleBg, titlebar_color);
@@ -194,17 +200,36 @@ void DrawGUI() {
 		ImGui_Text("Environmental Objects Multiplier");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
-		ImGui_SliderFloat("##Environmental Objects Mult", env_objects_mult, 0.1f, 10.0f, "%.1f");
+		ImGui_SliderFloat("##Environmental Objects Mult", env_objects_mult, 0.1f, 2.0f, "%.1f");
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Max Connections Per Intersection");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_SliderInt("##Max Connections Per Intersection", max_connections, 2, 5);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Number of Barrels");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_SliderInt("##Number of Barrels", num_barrels, 1, 20);
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
 		ImGui_NextColumn();
 		if(ImGui_Button("Load Level")){
+			SaveData();
 			LoadLevel(train_levels[chosen_level_index]);
 		}
 		ImGui_SameLine();
 		if(ImGui_Button("Reset to Defaults")){
-
+			DeleteData();
+			this_ui.SendCallback("back");
+			this_ui.SendCallback("Data/Scripts/train_track_editor.as");
 		}
 		ImGui_EndChildFrame();
 	}
