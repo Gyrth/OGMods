@@ -37,6 +37,7 @@ bool post_init_done = false;
 const float PI = 3.14159265359f;
 double rad2deg = (180.0f / PI);
 double deg2rad = (PI / 180.0f);
+IMContainer@ barrel_counter_holder;
 
 //Camera control and player variables.---------------------------------------------------------------------------------------------------------
 float cam_rotation_x = 0.0f;
@@ -153,7 +154,7 @@ class MineCart{
 	array<vec3> track_positions;
 	int track_index = 0;
 	float base_speed = 15.0f;
-	float speed = base_speed;
+	float speed = 0.0f;
 	float max_subtracted_speed = base_speed - 5.0f;
 	float max_added_speed = 10.0f;
 	vec3 position;
@@ -194,9 +195,9 @@ class MineCart{
 		//Increase or decrease speed based on steepness.
 		float target_speed = ((position.y - track_positions[track_index].y) * 50.0f);
 		float clamped_speed = base_speed + max(-max_subtracted_speed, min(max_added_speed, target_speed));
-		Log(warning, "clamped_speed " + clamped_speed);
+		/* Log(warning, "clamped_speed " + clamped_speed); */
 		speed = mix(speed, clamped_speed, time_step * 0.4f);
-		Log(warning, "speed " + speed);
+		/* Log(warning, "speed " + speed); */
 
 		vec3 direction = normalize(track_positions[track_index] - position);
 		position += direction * speed * time_step;
@@ -220,7 +221,7 @@ class MineCart{
 
 		cart.SetTranslationRotationFast(position, slerped_rotation);
 
-		float gain = max(0.0f, min(5.0f, (speed - base_speed) * 0.15 + 1.0f));
+		float gain = max(0.5f, min(5.0f, (speed - base_speed) * 0.15 + 1.0f));
 		SetSoundGain(wheel_sound_id, gain);
 		SetSoundPitch(wheel_sound_id, gain);
 		SetSoundPosition(wheel_sound_id, camera.GetPos() + vec3(0.0f, -3.0f, 0.0f));
@@ -414,7 +415,10 @@ class Intersection{
 
 		vec3 direction = normalize(connections[connections.size() - 1].position - position);
 		vec3 offset = cross(direction, up);
-		turn_signal_obj.SetTranslation(position + offset + (direction * 4.0f) + vec3(0.0f, 1.0f, 0.0f));
+		vec3 target_location = position + offset + (direction * 4.0f);
+		vec3 height_offset(0.0f, 2.0f, 0.0f);
+		target_location = col.GetRayCollision(target_location + height_offset, target_location - height_offset);
+		turn_signal_obj.SetTranslation(target_location + vec3(0.0f, 1.0f, 0.0f));
 		turn_signal_obj.SetCollisionEnabled(false);
 		turn_signal_obj.SetEnabled(false);
 
@@ -529,22 +533,49 @@ class Bullet{
 void Init(string str){
 	@imGUI = CreateIMGUI();
 	CreateIMGUIContainers();
+	BuildUI();
 }
 
 void CreateIMGUIContainers(){
+	imGUI.setHeaderHeight(200);
+	imGUI.setFooterHeight(200);
+
+	imGUI.setFooterPanels(200.0f, 1400.0f);
 	imGUI.setup();
+
 	imGUI.setBackgroundLayers(1);
 	imGUI.getMain().setZOrdering(-1);
 }
 
+void BuildUI(){
+	IMDivider mainDiv( "mainDiv", DOHorizontal );
+	IMDivider header_divider( "header_div", DOHorizontal );
+	header_divider.setAlignment(CACenter, CACenter);
+	imGUI.getHeader().setElement(header_divider);
+
+	// Add it to the main panel of the GUI
+	imGUI.getMain().setElement( @mainDiv );
+
+	IMDivider barrel_counter_divider("barrel_counter_divider", DOHorizontal);
+	barrel_counter_divider.setBorderColor(vec4(0,1,0,1));
+	barrel_counter_divider.setAlignment(CACenter, CABottom);
+
+	IMText barrel_counter("Barrels " + (num_barrels - barrels.size()) + "/" + num_barrels, default_font);
+	barrel_counter.setName("barrel_counter");
+	barrel_counter_divider.append(barrel_counter);
+
+	@barrel_counter_holder = IMContainer("barrel_counter_holder", -1, -1);
+	barrel_counter_holder.setElement(barrel_counter);
+
+	imGUI.getFooter().setAlignment(CALeft, CACenter);
+	imGUI.getFooter().setElement(barrel_counter_holder);
+}
+
 void SetWindowDimensions(int width, int height){
-	imGUI.clear();
-	CreateIMGUIContainers();
+	imGUI.doScreenResize();
 }
 
 void PostScriptReload(){
-	imGUI.clear();
-	CreateIMGUIContainers();
 	SetGrabMouse(true);
 }
 
@@ -764,9 +795,16 @@ void BarrelCheck(int id){
 			vec3 forward_offset = forward * 5.0;
 			vec3 spawn_point = camera.GetPos() + forward_offset;
 			PlaySound("Data/Sounds/explosion.wav", spawn_point);
+			TimedSlowMotion(0.1f, 0.7f, 0.05f);
 
 			barrels.removeAt(i);
 			QueueDeleteObjectID(id);
+			IMText @barrel_counter = cast<IMText>(barrel_counter_holder.getContents());
+			if(barrels.size() == 0){
+				barrel_counter.setText("You won a turkey dinner or whatever!");
+			}else{
+				barrel_counter.setText("Barrels " + (num_barrels - barrels.size()) + "/" + num_barrels);
+			}
 			break;
 		}
 	}

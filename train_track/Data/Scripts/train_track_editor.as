@@ -16,12 +16,27 @@ vec4 text_color(0.9f, 0.9f, 0.9f, 1.0f);
 int padding = 10;
 bool open = true;
 
+array<string> train_level_names = {	"Desert Outpost Train Track",
+									"Forgotten Plains Train Track",
+									"Patchy Highlands Train Track",
+									"Red Desert Train Track",
+									"Red Shards Train Track",
+									"Scrubby Hills Train Track"};
+
 array<string> train_levels = {	"desert_outpost_train_track.xml",
 								"forgotten_plains_train_track.xml",
 								"patchy_highlands_train_track.xml",
 								"red_desert_train_track.xml",
 								"red_shards_train_track.xml",
 								"scrubby_hills_train_track.xml"};
+
+int image_flags = TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce;
+array<TextureAssetRef> train_level_images = {	LoadTexture("Data/Images/desert_outpost_train_track.jpg", image_flags),
+												LoadTexture("Data/Images/forgotten_plains_train_track.jpg", image_flags),
+												LoadTexture("Data/Images/patchy_highlands_train_track.jpg", image_flags),
+												LoadTexture("Data/Images/red_desert_train_track.jpg", image_flags),
+												LoadTexture("Data/Images/red_shards_train_track.jpg", image_flags),
+												LoadTexture("Data/Images/scrubby_hills_train_track.jpg", image_flags)};
 
 int chosen_level_index = 0;
 int num_intersections = 50;
@@ -139,12 +154,15 @@ void DrawGUI() {
 	ImGui_SetWindowPos(vec2((screenMetrics.getScreenWidth() / 2.0f) - (target_width / 2.0f), (screenMetrics.getScreenHeight() / 2.0f) - (target_height / 2.0f)));
 	ImGui_SetWindowSize(vec2(target_width, target_height));
 
+	ImGui_PushStyleColor(ImGuiCol_WindowBg, item_hovered);
 	ImGui_PushStyleColor(ImGuiCol_FrameBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
 	if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth(), ImGui_GetWindowHeight() - (padding * 3.0)))){
 
-		if(ImGui_BeginCombo("Train Level ", train_levels[chosen_level_index], 0)){
+		if(ImGui_BeginCombo("Train Level ", train_level_names[chosen_level_index], ImGuiComboFlags_HeightLarge)){
 			for(uint i = 0; i < train_levels.size(); i++){
-				if(ImGui_Selectable(train_levels[i], int(i) == chosen_level_index, 0)){
+				ImGui_Image(train_level_images[i], vec2(150.0f));
+				ImGui_SameLine();
+				if(ImGui_Selectable(train_level_names[i], int(i) == chosen_level_index, 0, vec2(0.0f, 150.0f))){
 					chosen_level_index = i;
 				}
 			}
@@ -160,7 +178,7 @@ void DrawGUI() {
 		ImGui_EndChildFrame();
 	}
 	ImGui_End();
-	ImGui_PopStyleColor(19);
+	ImGui_PopStyleColor(20);
 }
 
 void Draw() {
