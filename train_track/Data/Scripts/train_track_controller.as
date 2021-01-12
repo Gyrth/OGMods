@@ -7,8 +7,9 @@ float blackout_amount = 0.0f;
 array<Intersection@> intersections;
 string track_segment_path = "Data/Objects/track_segment.xml";
 uint num_intersections = 75;
-float height_range = 500.0f;
+float height_range = 200.0f;
 float random_range = 400.0f;
+float base_height;
 array<vec3> occupied_locations;
 MineCart@ player = MineCart();
 array<SignalAnimation@> signal_animations;
@@ -23,6 +24,8 @@ array<EnvironmentAsset@> environment_assets = {	EnvironmentAsset("Data/Prototype
 
 vec3 signal_green = vec3(0.0f, 1.0f, 0.0f) * 2.0f;
 vec3 signal_red = vec3(1.0f, 0.0f, 0.0f) * 0.5f;
+int num_barrels = 10;
+array<Object@> barrels;
 enum signal_animation_types{
 	turn_animation = 0,
 	hide_animation = 1,
@@ -151,7 +154,7 @@ class MineCart{
 	int track_index = 0;
 	float base_speed = 15.0f;
 	float speed = base_speed;
-	float max_subtracted_speed = base_speed - 7.0f;
+	float max_subtracted_speed = base_speed - 5.0f;
 	float max_added_speed = 10.0f;
 	vec3 position;
 	int wheel_sound_id;
@@ -192,7 +195,7 @@ class MineCart{
 		float target_speed = ((position.y - track_positions[track_index].y) * 50.0f);
 		float clamped_speed = base_speed + max(-max_subtracted_speed, min(max_added_speed, target_speed));
 		Log(warning, "clamped_speed " + clamped_speed);
-		speed = mix(speed, clamped_speed, time_step * 0.22f);
+		speed = mix(speed, clamped_speed, time_step * 0.4f);
 		Log(warning, "speed " + speed);
 
 		vec3 direction = normalize(track_positions[track_index] - position);
@@ -217,9 +220,9 @@ class MineCart{
 
 		cart.SetTranslationRotationFast(position, slerped_rotation);
 
-		float gain = (speed - base_speed) * 0.15 + 1.0f;
+		float gain = max(0.0f, min(5.0f, (speed - base_speed) * 0.15 + 1.0f));
 		SetSoundGain(wheel_sound_id, gain);
-		/* SetSoundPitch(wheel_sound_id, gain); */
+		SetSoundPitch(wheel_sound_id, gain);
 		SetSoundPosition(wheel_sound_id, camera.GetPos() + vec3(0.0f, -3.0f, 0.0f));
 	}
 
@@ -264,7 +267,7 @@ class Intersection{
 
 		vec3 chosen_position;
 
-		col.GetSweptCylinderCollisionDoubleSided(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z), 0.1f, 1.0f);
+		col.GetSweptCylinderCollisionDoubleSided(vec3(random_x, base_height + height_range, random_z), vec3(random_x, base_height - height_range, random_z), 0.1f, 1.0f);
 		for(int j = 0; j < sphere_col.NumContacts(); j++){
 			CollisionPoint point = sphere_col.GetContact(j);
 
@@ -282,7 +285,7 @@ class Intersection{
 		}
 
 
-		position = col.GetRayCollision(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z));
+		position = col.GetRayCollision(vec3(random_x, base_height + height_range, random_z), vec3(random_x, base_height - height_range, random_z));
 		occupied_locations.insertLast(position);
 		int rotating_track_id = CreateObject(track_segment_path);
 		@rotating_track = ReadObjectFromID(rotating_track_id);
@@ -369,8 +372,8 @@ class Intersection{
 
 		for(int i = 1; i < segments_needed; i++){
 			vec3 location = mix(peer.position, position, float(i) / float(segments_needed));
-			location = col.GetRayCollision(vec3(location.x, height_range, location.z), vec3(location.x, -height_range, location.z));
-			col.GetSweptSphereCollision(vec3(location.x, height_range, location.z), vec3(location.x, -height_range, location.z), 0.001f);
+			location = col.GetRayCollision(vec3(location.x, base_height + height_range, location.z), vec3(location.x, base_height - height_range, location.z));
+			col.GetSweptSphereCollision(vec3(location.x, base_height + height_range, location.z), vec3(location.x, base_height - height_range, location.z), 0.001f);
 			int obj_id = CreateObject(track_segment_path);
 			Object@ track_obj = ReadObjectFromID(obj_id);
 
@@ -657,6 +660,7 @@ bool CheckCollisions(vec3 start, vec3 &inout end){
 		colliding = true;
 		end = point.position;
 		player.next_intersection.SignalCheck(point.id);
+		BarrelCheck(point.id);
 	}
 
 	col.CheckRayCollisionCharacters(start, end);
@@ -718,11 +722,54 @@ void MakeMetalSparks(vec3 pos) {
 }
 
 void PostInit(){
+	//Get the base height of the terrain to minimize collision check length.
+	vec3 collision_point = col.GetRayCollision(vec3(0.0f, 1000.0f, 0.0f), vec3(0.0f, -1000.0f, 0.0f));
+	base_height = collision_point.y;
 	CreateTrack();
 	CreateEnvironment();
+	SpawnBarrels();
 	player.PostInit();
 	post_init_done = true;
 	SetGrabMouse(true);
+}
+
+void SpawnBarrels(){
+	for(int i = 0; i < num_barrels; i++){
+		Object@ new_barrel = AttemptAssetPlacement("Data/Objects/barrel.xml", 10.0f);
+		barrels.insertLast(new_barrel);
+	}
+}
+
+void BarrelCheck(int id){
+	for(uint i = 0; i < barrels.size(); i++){
+		if(barrels[i].GetID() == id){
+			vec3 explosion_point = barrels[i].GetTranslation();
+
+			int num_sparks = 60;
+			float speed = 20.0f;
+			for(int j = 0; j < num_sparks; j++){
+				MakeParticle("Data/Particles/explosion_fire.xml", explosion_point, vec3(RangedRandomFloat(-speed,speed),
+																						RangedRandomFloat(-speed,speed),
+																						RangedRandomFloat(-speed,speed)));
+			}
+
+			int num_smoke = 10;
+			for(int j = 0; j < num_smoke; j++){
+				MakeParticle("Data/Particles/explosion_smoke.xml", explosion_point, vec3(	RangedRandomFloat(-speed,speed),
+																							RangedRandomFloat(-speed,speed),
+																							RangedRandomFloat(-speed,speed)));
+			}
+
+			vec3 forward = normalize(explosion_point - camera.GetPos());
+			vec3 forward_offset = forward * 5.0;
+			vec3 spawn_point = camera.GetPos() + forward_offset;
+			PlaySound("Data/Sounds/explosion.wav", spawn_point);
+
+			barrels.removeAt(i);
+			QueueDeleteObjectID(id);
+			break;
+		}
+	}
 }
 
 void CreateTrack(){
@@ -743,14 +790,13 @@ void CreateEnvironment(){
 	}
 }
 
-void AttemptAssetPlacement(string path, float min_object_distance){
+Object@ AttemptAssetPlacement(string path, float min_object_distance){
 	float random_x = RangedRandomFloat(-random_range, random_range);
 	float random_z = RangedRandomFloat(-random_range, random_range);
 
-	/* vec3 chosen_position = col.GetRayCollision(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z)); */
 	vec3 chosen_position;
 
-	col.GetSweptCylinderCollisionDoubleSided(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z), 0.1f, 1.0f);
+	col.GetSweptCylinderCollisionDoubleSided(vec3(random_x, base_height + height_range, random_z), vec3(random_x, base_height - height_range, random_z), 0.1f, 1.0f);
 	for(int j = 0; j < sphere_col.NumContacts(); j++){
 		CollisionPoint point = sphere_col.GetContact(j);
 
@@ -760,8 +806,7 @@ void AttemptAssetPlacement(string path, float min_object_distance){
 			//Try to place it again if the location is occupied.
 			vec3 flat_location = vec3(occupied_locations[i].x, 0.0f, occupied_locations[i].z);
 			if(distance(flat_location, vec3(chosen_position.x, 0.0f, chosen_position.z)) < min_object_distance){
-				AttemptAssetPlacement(path, min_object_distance);
-				return;
+				return AttemptAssetPlacement(path, min_object_distance);
 			}
 		}
 		break;
@@ -778,6 +823,8 @@ void AttemptAssetPlacement(string path, float min_object_distance){
 	occupied_locations.insertLast(chosen_position);
 	quaternion new_rotation = quaternion(vec4(0.0f,1.0,0.0f, RangedRandomFloat(-1, 1)));
 	asset_object.SetRotation(new_rotation);
+
+	return asset_object;
 }
 
 void UpdateCamera(){
