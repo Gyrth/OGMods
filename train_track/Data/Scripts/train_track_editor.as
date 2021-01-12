@@ -7,8 +7,8 @@ MusicLoad ml("Data/Music/menu.xml");
 IMGUI@ imGUI;
 
 // Coloring options
-vec4 background_color(0.2f, 0.2f, 0.2f, 0.7f);
-vec4 titlebar_color(0.0f);
+vec4 background_color(0.2f, 0.2f, 0.2f, 0.8f);
+vec4 titlebar_color(0.4f, 0.4f, 0.4f, 1.0f);
 vec4 item_background(0.4f, 0.4f, 0.4f, 1.0f);
 vec4 item_hovered(0.3f, 0.3f, 0.3f, 1.0f);
 vec4 item_clicked(0.3f, 0.3f, 0.3f, 1.0f);
@@ -40,7 +40,7 @@ array<TextureAssetRef> train_level_images = {	LoadTexture("Data/Images/desert_ou
 
 int chosen_level_index = 0;
 int num_intersections = 50;
-int env_objects_mult = 1;
+float env_objects_mult = 1.0f;
 
 bool HasFocus() {
 	return false;
@@ -130,35 +130,46 @@ void DrawGUI() {
 	imGUI.render();
 
 	ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
-	ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
+	ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
-	ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, background_color);
-	ImGui_PushStyleColor(ImGuiCol_TitleBg, background_color);
+	ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_TitleBg, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 	ImGui_PushStyleColor(ImGuiCol_Header, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_HeaderHovered, item_hovered);
 	ImGui_PushStyleColor(ImGuiCol_HeaderActive, item_clicked);
-	ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, background_color);
-	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrab, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrab, item_hovered);
 	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
-	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
-	ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
+	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_hovered);
+	ImGui_PushStyleColor(ImGuiCol_CloseButton, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_Button, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_ButtonHovered, item_hovered);
 	ImGui_PushStyleColor(ImGuiCol_ButtonActive, item_clicked);
 
 	ImGui_Begin("Train Editor", open, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
-	float target_height = screenMetrics.getScreenHeight() * 0.66f;
-	float target_width = screenMetrics.getScreenWidth() * 0.66f;
+	float target_height = screenMetrics.getScreenHeight() * 0.33f;
+	float target_width = screenMetrics.getScreenWidth() * 0.50f;
 	ImGui_SetWindowPos(vec2((screenMetrics.getScreenWidth() / 2.0f) - (target_width / 2.0f), (screenMetrics.getScreenHeight() / 2.0f) - (target_height / 2.0f)));
 	ImGui_SetWindowSize(vec2(target_width, target_height));
 
-	ImGui_PushStyleColor(ImGuiCol_WindowBg, item_hovered);
-	ImGui_PushStyleColor(ImGuiCol_FrameBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
-	if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth(), ImGui_GetWindowHeight() - (padding * 3.0)))){
+	ImGui_PushStyleColor(ImGuiCol_FrameBg, vec4(0.0f));
+	if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth()  - (padding * 3.0), ImGui_GetWindowHeight() - (padding * 3.0)))){
+		ImGui_PushStyleColor(ImGuiCol_FrameBg, item_hovered);
 
-		if(ImGui_BeginCombo("Train Level ", train_level_names[chosen_level_index], ImGuiComboFlags_HeightLarge)){
+		float option_name_width = 240.0;
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, option_name_width);
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Train Level");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+		ImGui_PushItemWidth(second_column_width);
+
+		if(ImGui_BeginCombo("##Train Level ", train_level_names[chosen_level_index], ImGuiComboFlags_HeightLarge)){
 			for(uint i = 0; i < train_levels.size(); i++){
 				ImGui_Image(train_level_images[i], vec2(150.0f));
 				ImGui_SameLine();
@@ -168,12 +179,32 @@ void DrawGUI() {
 			}
 			ImGui_EndCombo();
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
-		ImGui_DragInt("Number of intersections", num_intersections, 1.0f, 2, 100);
-		ImGui_DragInt("Environmental Objects Mult ", env_objects_mult, 1.0f, 1, 10);
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Number of intersections");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_SliderInt("##Number of intersections", num_intersections, 2, 100);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Environmental Objects Multiplier");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_SliderFloat("##Environmental Objects Mult", env_objects_mult, 0.1f, 10.0f, "%.1f");
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_NextColumn();
 		if(ImGui_Button("Load Level")){
 			LoadLevel(train_levels[chosen_level_index]);
+		}
+		ImGui_SameLine();
+		if(ImGui_Button("Reset to Defaults")){
+
 		}
 		ImGui_EndChildFrame();
 	}
