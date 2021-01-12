@@ -60,9 +60,35 @@ class SignalAnimation{
 	SignalAnimation(Object@ _target_object, signal_animation_types _signal_animation_type){
 		signal_animation_type = _signal_animation_type;
 		@target_object = _target_object;
+		//Cancel any animation that is using the same object, or else the rotation and/or the translation get messed up.
+		for(uint i = 0; i < signal_animations.size(); i++){
+			if(signal_animations[i].target_object.GetID() == target_object.GetID()){
+				signal_animations[i].Cancel();
+				signal_animations.removeAt(i);
+				break;
+			}
+		}
 		target_object.SetCollisionEnabled(false);
 		original_location = target_object.GetTranslation();
 		original_rotation = target_object.GetRotation();
+
+		if(signal_animation_type == show_animation){
+			int sound_id = PlaySound("Data/Sounds/signal_appear.wav", original_location + vec3(0.0f, 1.0f, 0.0f));
+			SetSoundGain(sound_id, 2.0f);
+		}else if(signal_animation_type == hide_animation){
+			int sound_id = PlaySound("Data/Sounds/signal_disappear.wav", original_location + vec3(0.0f, 1.0f, 0.0f));
+			SetSoundGain(sound_id, 2.0f);
+		}else if(signal_animation_type == turn_animation){
+			vec3 forward = normalize((original_location + vec3(0.0f, 1.0f, 0.0f)) - camera.GetPos());
+			vec3 forward_offset = forward * 1.0;
+			vec3 spawn_point = camera.GetPos() + forward_offset;
+			int sound_id = PlaySound("Data/Sounds/ding.wav", spawn_point);
+			SetSoundGain(sound_id, 2.0f);
+		}
+	}
+
+	void Cancel(){
+		target_object.SetTranslationRotationFast(original_location, original_rotation);
 	}
 
 	void Update(){
@@ -103,7 +129,6 @@ class SignalAnimation{
 				/* target_object.SetTranslationRotationFast(original_location, original_rotation); */
 				target_object.SetTranslation(original_location);
 				target_object.SetRotation(original_rotation);
-				Log(warning, "Show animation!!!!!!!");
 				return;
 			}
 
@@ -414,11 +439,6 @@ class Intersection{
 			if(turn_signal_objects[i].GetID() == id){
 				chosen_path = i;
 				change_path = true;
-				vec3 forward = normalize((turn_signal_objects[i].GetTranslation() + vec3(0.0f, 1.0f, 0.0f)) - camera.GetPos());
-				vec3 forward_offset = forward * 1.0;
-				vec3 spawn_point = camera.GetPos() + forward_offset;
-				int sound_id = PlaySound("Data/Sounds/ding.wav", spawn_point);
-				SetSoundGain(sound_id, 2.0f);
 				signal_animations.insertLast(SignalAnimation(turn_signal_objects[i], turn_animation));
 				break;
 			}
