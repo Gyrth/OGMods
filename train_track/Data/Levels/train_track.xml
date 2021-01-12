@@ -43,7 +43,7 @@
     <RayToSun r0="0.849746" r1="0.499721" r2="0.167961" />
 </Sky>
 <ActorObjects>
-    <ActorObject t0="0" t1="17.75" t2="0" s0="1" s1="1" s2="1" q0="0" q1="0.957869" q2="0" q3="0.287205" euler_x="3.14159" euler_y="0.582615" euler_z="3.14159" id="8" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <ActorObject t0="0" t1="17.75" t2="0" s0="1" s1="1" s2="1" q0="0" q1="0.957869" q2="0" q3="0.287205" euler_x="3.14159" euler_y="0.582615" euler_z="3.14159" id="8" type_file="Data/Characters/empty_character_actor.xml" pc_script_path="empty_character.as" is_player="1">
         <parameters>
             <parameter name="Aggression" type="string" val="0.5" />
             <parameter name="Attack Damage" type="string" val="1.0" />

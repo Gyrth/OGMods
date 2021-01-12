@@ -154,6 +154,7 @@ class MineCart{
 	float max_subtracted_speed = base_speed - 0.5f;
 	float max_added_speed = base_speed * 15.0f;
 	vec3 position;
+	int wheel_sound_id;
 
 	MineCart(){
 
@@ -170,7 +171,8 @@ class MineCart{
 		cart.SetEnabled(false);
 
 		position = track_positions[track_index];
-		cart.SetTranslation(position);
+		cart.SetTranslation(position + vec3(0.0f, -3.0f, 0.0f));
+		wheel_sound_id = PlaySoundLoopAtLocation("Data/Sounds/wheels_turning.wav", position, 1.0);
 	}
 
 	void Update(){
@@ -209,8 +211,12 @@ class MineCart{
 		quaternion slerped_rotation = mix(cart.GetRotation(), rot_y * rot_x * rot_z, time_step * 5.0f);
 		/* cart.SetRotation(slerped_rotation); */
 
-		/* cart.SetTranslationRotationFast(position, slerped_rotation); */
+		cart.SetTranslationRotationFast(position, slerped_rotation);
 
+		float gain = (speed - base_speed) * 0.15 + 1.0f;
+		SetSoundGain(wheel_sound_id, gain);
+		SetSoundPitch(wheel_sound_id, gain);
+		SetSoundPosition(wheel_sound_id, camera.GetPos() + vec3(0.0f, -3.0f, 0.0f));
 	}
 
 	void DrawDebug(){
@@ -685,7 +691,7 @@ void PostInit(){
 	/* CreateEnvironment(); */
 	player.PostInit();
 	post_init_done = true;
-	ReadCharacter(0).static_char = true;
+	SetGrabMouse(true);
 }
 
 void CreateTrack(){
@@ -747,9 +753,9 @@ void UpdateCamera(){
 	if(!DialogueCameraControl()){return;}
 
 	if(GetInputDown(0, "grab")){
-		mouse_sensitivity = 0.25f;
+		mouse_sensitivity = 0.15f;
 	}else{
-		mouse_sensitivity = 0.5f;
+		mouse_sensitivity = 0.3f;
 	}
 
 	cam_rotation_y -= GetLookXAxis(0) * mouse_sensitivity;
@@ -770,9 +776,7 @@ void UpdateCamera(){
 	camera.SetPos(player.position + vec3(0.0f, 2.0f, 0.0f));
 	camera.SetDistance(0.0f);
 
-	UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
-	/* camera.SetInterpSteps(ts.frames()); */
-
+	/* ReadCharacter(0).Execute("UpdateCartListener();"); */
 	camera_shake *= 0.95f;
 }
 
