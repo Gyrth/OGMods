@@ -58,23 +58,26 @@ class MineCart{
 		@next_intersection = intersections[0];
 		track_positions = next_intersection.paths[0];
 		@previous_intersection = next_intersection.connections[0];
+		next_intersection.PrepareSignals(previous_intersection);
 		int cart_id = CreateObject(cart_path);
 		@cart = ReadObjectFromID(cart_id);
 		cart.SetCollisionEnabled(false);
+		cart.SetEnabled(false);
 
 		position = track_positions[track_index];
 		cart.SetTranslation(position);
 	}
 
 	void Update(){
-
 		if((track_index > 0 && distance(track_positions[track_index - 1], position) > distance(track_positions[track_index - 1], track_positions[track_index])) ||
 			distance(position, track_positions[track_index]) < 0.1f){
 			track_index += 1;
 			//Check if the cart is at the end of the track.
 			if(track_index == int(track_positions.size())){
 				track_index = 0;
-				next_intersection.RequestNextIntersection(this, previous_intersection);
+				next_intersection.RequestNextIntersection(this);
+				previous_intersection.HideSignals();
+				next_intersection.PrepareSignals(previous_intersection);
 			}
 		}
 
@@ -84,7 +87,6 @@ class MineCart{
 		vec3 direction = normalize(track_positions[track_index] - position);
 		position += direction * speed * time_step;
 		/* cart.SetTranslation(position); */
-
 
 		vec3 up = vec3(0.0f, 1.0f, 0.0f);
 		vec3 front = direction;
@@ -133,7 +135,8 @@ class Intersection{
 	array<Intersection@> connections;
 	array<array<vec3>> paths;
 	array<Object@> turn_signal_objects;
-	string turn_signal_path = "Data/Objects/block.xml";
+	string turn_signal_path = "Data/Objects/signal.xml";
+	int chosen_path;
 
 	Intersection(){
 		float random_x = RangedRandomFloat(-random_range, random_range);
@@ -263,29 +266,90 @@ class Intersection{
 		int turn_signal_id = CreateObject(turn_signal_path);
 		Object@ turn_signal_obj = ReadObjectFromID(turn_signal_id);
 		turn_signal_objects.insertLast(turn_signal_obj);
+		vec3 up = vec3(0.0f, 1.0f, 0.0);
 
 		vec3 direction = normalize(connections[connections.size() - 1].position - position);
-		turn_signal_obj.SetTranslation(position + (direction * 4.0f) + vec3(0.0f, 4.0f, 0.0f));
+		vec3 offset = cross(direction, up);
+		turn_signal_obj.SetTranslation(position + offset + (direction * 4.0f) + vec3(0.0f, 2.0f, 0.0f));
 		turn_signal_obj.SetCollisionEnabled(false);
 		turn_signal_obj.SetEnabled(false);
+
+		vec3 front = vec3(direction.x, 0.0f, direction.z);
+
+		vec3 new_rotation;
+		new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
+		new_rotation.x = asin(front[1]) * -180.0f / PI;
+		vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+		vec3 expected_up = normalize(cross(expected_right, front));
+		new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
+
+		quaternion rot_y(vec4(0, 1, 0, new_rotation.y * deg2rad));
+		quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
+		quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
+		turn_signal_obj.SetRotation(rot_y * rot_x * rot_z);
 	}
 
-	void RequestNextIntersection(MineCart@ cart, Intersection@ exclude){
-		array<Intersection@> choices = connections;
-		for(uint i = 0; i < choices.size(); i++){
-			if(choices[i] is exclude){
-				choices.removeAt(i);
-				break;
-			}
-		}
-
-		@cart.next_intersection = choices[rand() % choices.size()];
+	void RequestNextIntersection(MineCart@ cart){
+		@cart.next_intersection = connections[chosen_path];
 		@cart.previous_intersection = @this;
 
 		for(uint i = 0; i < cart.next_intersection.connections.size(); i++){
 			if(cart.next_intersection.connections[i] is this){
 				cart.track_positions = cart.next_intersection.paths[i];
 				break;
+			}
+		}
+	}
+
+	void PrepareSignals(Intersection@ exclude){
+		int exclude_index = connections.findByRef(exclude);
+		array<int> choices;
+
+
+		for(int i = 0; i < int(turn_signal_objects.size()); i++){
+			turn_signal_objects[i].SetTint(vec3(1.0f, 0.0f, 0.0f));
+			if(exclude_index == i){
+				turn_signal_objects[i].SetEnabled(false);
+			}else{
+				turn_signal_objects[i].SetEnabled(true);
+				choices.insertLast(i);
+			}
+		}
+
+		//One path is chosen by default.
+		chosen_path = choices[rand() % choices.size()];
+		turn_signal_objects[chosen_path].SetTint(vec3(0.0f, 1.0f, 0.0f));
+	}
+
+	void HideSignals(){
+		for(uint i = 0; i < turn_signal_objects.size(); i++){
+			turn_signal_objects[i].SetEnabled(false);
+		}
+	}
+
+	void SignalCheck(int id){
+		bool change_path = false;
+		//Check if the id is one of the signal objects.
+		for(uint i = 0; i < turn_signal_objects.size(); i++){
+			if(turn_signal_objects[i].GetID() == id){
+				chosen_path = i;
+				change_path = true;
+				vec3 forward = normalize((turn_signal_objects[i].GetTranslation() + vec3(0.0f, 2.0f, 0.0f)) - camera.GetPos());
+				vec3 forward_offset = forward * 1.0;
+				vec3 spawn_point = camera.GetPos() + forward_offset;
+				int sound_id = PlaySound("Data/Sounds/ding.wav", spawn_point);
+				SetSoundGain(sound_id, 2.0f);
+				break;
+			}
+		}
+
+		if(change_path){
+			for(int i = 0; i < int(turn_signal_objects.size()); i++){
+				if(i == chosen_path){
+					turn_signal_objects[i].SetTint(vec3(0.0f, 1.0f, 0.0f));
+				}else{
+					turn_signal_objects[i].SetTint(vec3(1.0f, 0.0f, 0.0f));
+				}
 			}
 		}
 	}
@@ -445,6 +509,7 @@ bool CheckCollisions(vec3 start, vec3 &inout end){
 		PlaySound(path, point.position);
 		colliding = true;
 		end = point.position;
+		player.next_intersection.SignalCheck(point.id);
 	}
 
 	col.CheckRayCollisionCharacters(start, end);
@@ -482,7 +547,8 @@ void Shoot(){
 		MakeParticle("Data/Particles/gun_smoke.xml", spawn_point, smoke_velocity);
 	}
 	MakeParticle("Data/Particles/gun_fire.xml", spawn_point, forward);
-	PlaySound("Data/Sounds/Revolver.wav", spawn_point);
+	int sound_id = PlaySound("Data/Sounds/Revolver.wav", spawn_point);
+	SetSoundGain(sound_id, 0.15f);
 
 	camera_shake += 0.15f;
 	bullets.insertLast(Bullet(spawn_point, forward));
@@ -506,7 +572,7 @@ void MakeMetalSparks(vec3 pos) {
 
 void PostInit(){
 	CreateTrack();
-	CreateEnvironment();
+	/* CreateEnvironment(); */
 	player.PostInit();
 	post_init_done = true;
 }
