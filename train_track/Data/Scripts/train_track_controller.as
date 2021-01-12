@@ -11,6 +11,7 @@ float height_range = 100.0f;
 float random_range = 400.0f;
 array<vec3> occupied_locations;
 MineCart@ player = MineCart();
+array<SignalAnimation@> signal_animations;
 array<EnvironmentAsset@> environment_assets = {	EnvironmentAsset("Data/Prototypes/OG/elm_tree_large.xml", 25.0f, 75),
 												EnvironmentAsset("Data/Prototypes/OG/elm_tree_small.xml", 25.0f, 75),
 												EnvironmentAsset("Data/Prototypes/OG/PineTree1_A.xml", 15.0f, 80),
@@ -20,6 +21,13 @@ array<EnvironmentAsset@> environment_assets = {	EnvironmentAsset("Data/Prototype
 												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/small_deciduous.xml", 10.0f, 40),
 												EnvironmentAsset("Data/Objects/Plants/Trees/temperate/green_bush.xml", 2.0f, 75)};
 
+vec3 signal_green = vec3(0.0f, 1.0f, 0.0f) * 2.0f;
+vec3 signal_red = vec3(1.0f, 0.0f, 0.0f) * 0.5f;
+enum signal_animation_types{
+	turn_animation = 0,
+	hide_animation = 1
+}
+
 //General script variables.-------------------------------------------------------------------------------------------------------------------
 bool post_init_done = false;
 const float PI = 3.14159265359f;
@@ -27,7 +35,7 @@ double rad2deg = (180.0f / PI);
 double deg2rad = (PI / 180.0f);
 
 //Camera control and player variables.---------------------------------------------------------------------------------------------------------
-float cam_rotation_x = 90.0f;
+float cam_rotation_x = 0.0f;
 float cam_rotation_y = 180.0f;
 float cam_rotation_z = 0.0f;
 float camera_shake = 0.0f;
@@ -36,6 +44,45 @@ array<Bullet@> bullets;
 float crosshair_length = 20.0f;
 float crosshair_thickness = 1.0f;
 vec4 crosshair_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+
+class SignalAnimation{
+	signal_animation_types signal_animation_type;
+	Object@ target_object;
+	vec3 original_location;
+	quaternion original_rotation;
+	bool done;
+	float timer = 0.0f;
+
+	SignalAnimation(Object@ _target_object, signal_animation_types _signal_animation_type){
+		signal_animation_type = _signal_animation_type;
+		@target_object = _target_object;
+		original_location = target_object.GetTranslation();
+		original_rotation = target_object.GetRotation();
+		target_object.SetCollisionEnabled(false);
+	}
+
+	void Update(){
+		timer += time_step;
+
+		if(signal_animation_type == turn_animation){
+			float duration = 0.5f;
+			if(timer >= duration){
+				done = true;
+				target_object.SetTranslationRotationFast(original_location, original_rotation);
+				target_object.SetCollisionEnabled(true);
+				return;
+			}
+
+			vec3 facing = Mult(original_rotation, vec3(0,0,1));
+			float rot = atan2(facing.x, facing.z) * 180.0f / PI;
+			float initial_rotation = floor(rot + 0.5f);
+
+			float y_rotation = 180.0f * sin(2 * PI * 1.0 * (timer / duration) + initial_rotation);
+			quaternion rot_y(vec4(0, 1, 0, y_rotation * deg2rad));
+			target_object.SetTranslationRotationFast(original_location, rot_y);
+		}
+	}
+}
 
 class MineCart{
 	Object@ cart;
@@ -270,7 +317,7 @@ class Intersection{
 
 		vec3 direction = normalize(connections[connections.size() - 1].position - position);
 		vec3 offset = cross(direction, up);
-		turn_signal_obj.SetTranslation(position + offset + (direction * 4.0f) + vec3(0.0f, 2.0f, 0.0f));
+		turn_signal_obj.SetTranslation(position + offset + (direction * 4.0f) + vec3(0.0f, 1.0f, 0.0f));
 		turn_signal_obj.SetCollisionEnabled(false);
 		turn_signal_obj.SetEnabled(false);
 
@@ -307,7 +354,7 @@ class Intersection{
 
 
 		for(int i = 0; i < int(turn_signal_objects.size()); i++){
-			turn_signal_objects[i].SetTint(vec3(1.0f, 0.0f, 0.0f));
+			turn_signal_objects[i].SetTint(signal_red);
 			if(exclude_index == i){
 				turn_signal_objects[i].SetEnabled(false);
 			}else{
@@ -318,7 +365,7 @@ class Intersection{
 
 		//One path is chosen by default.
 		chosen_path = choices[rand() % choices.size()];
-		turn_signal_objects[chosen_path].SetTint(vec3(0.0f, 1.0f, 0.0f));
+		turn_signal_objects[chosen_path].SetTint(signal_green);
 	}
 
 	void HideSignals(){
@@ -334,11 +381,12 @@ class Intersection{
 			if(turn_signal_objects[i].GetID() == id){
 				chosen_path = i;
 				change_path = true;
-				vec3 forward = normalize((turn_signal_objects[i].GetTranslation() + vec3(0.0f, 2.0f, 0.0f)) - camera.GetPos());
+				vec3 forward = normalize((turn_signal_objects[i].GetTranslation() + vec3(0.0f, 1.0f, 0.0f)) - camera.GetPos());
 				vec3 forward_offset = forward * 1.0;
 				vec3 spawn_point = camera.GetPos() + forward_offset;
 				int sound_id = PlaySound("Data/Sounds/ding.wav", spawn_point);
 				SetSoundGain(sound_id, 2.0f);
+				signal_animations.insertLast(SignalAnimation(turn_signal_objects[i], turn_animation));
 				break;
 			}
 		}
@@ -346,9 +394,9 @@ class Intersection{
 		if(change_path){
 			for(int i = 0; i < int(turn_signal_objects.size()); i++){
 				if(i == chosen_path){
-					turn_signal_objects[i].SetTint(vec3(0.0f, 1.0f, 0.0f));
+					turn_signal_objects[i].SetTint(signal_green);
 				}else{
-					turn_signal_objects[i].SetTint(vec3(1.0f, 0.0f, 0.0f));
+					turn_signal_objects[i].SetTint(signal_red);
 				}
 			}
 		}
@@ -455,12 +503,22 @@ void Update(){
 
 	imGUI.update();
 
-	for(uint i = 0; i < intersections.size() - 1; i++){
+	for(uint i = 0; i < intersections.size(); i++){
 		intersections[i].Update();
 		/* intersections[i].DrawDebug(); */
 	}
 
-	player.Update();
+	for(uint i = 0; i < signal_animations.size(); i++){
+		signal_animations[i].Update();
+		if(signal_animations[i].done){
+			signal_animations.removeAt(i);
+			i--;
+		}
+	}
+
+	if(GetInputDown(0, "jump")){
+		player.Update();
+	}
 	/* player.DrawDebug(); */
 	UpdateCamera();
 	UpdateShooting();
@@ -468,6 +526,7 @@ void Update(){
 }
 
 void UpdateShooting(){
+	if(!DialogueCameraControl()){return;}
 	if(GetInputPressed(0, "attack")){
 		Shoot();
 	}
@@ -575,6 +634,7 @@ void PostInit(){
 	/* CreateEnvironment(); */
 	player.PostInit();
 	post_init_done = true;
+	ReadCharacter(0).static_char = true;
 }
 
 void CreateTrack(){
