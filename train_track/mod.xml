@@ -12,4 +12,5 @@
 	<SupportedVersion>*</SupportedVersion>
 	<NeedsRestart>false</NeedsRestart>
 	<Level title="Train Track" thumbnail="Images/train_track_full.jpg">Data/Levels/train_track.xml</Level>
+	<MenuItem title="Train Track" category="play">Data/Scripts/train_track_editor.as</MenuItem>
 </Mod>

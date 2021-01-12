@@ -6,8 +6,8 @@ float blackout_amount = 0.0f;
 //Intersection, track and environment variables.----------------------------------------------------------------------------------------------
 array<Intersection@> intersections;
 string track_segment_path = "Data/Objects/track_segment.xml";
-uint num_intersections = 50;
-float height_range = 100.0f;
+uint num_intersections = 75;
+float height_range = 500.0f;
 float random_range = 400.0f;
 array<vec3> occupied_locations;
 MineCart@ player = MineCart();
@@ -151,8 +151,8 @@ class MineCart{
 	int track_index = 0;
 	float base_speed = 15.0f;
 	float speed = base_speed;
-	float max_subtracted_speed = base_speed - 0.5f;
-	float max_added_speed = base_speed * 15.0f;
+	float max_subtracted_speed = base_speed - 7.0f;
+	float max_added_speed = 10.0f;
 	vec3 position;
 	int wheel_sound_id;
 
@@ -189,7 +189,11 @@ class MineCart{
 		}
 
 		//Increase or decrease speed based on steepness.
-		speed = mix(speed, base_speed + max(-max_subtracted_speed, min(max_added_speed, ((position.y - track_positions[track_index].y) * 25.0f))), time_step * 0.1f);
+		float target_speed = ((position.y - track_positions[track_index].y) * 50.0f);
+		float clamped_speed = base_speed + max(-max_subtracted_speed, min(max_added_speed, target_speed));
+		Log(warning, "clamped_speed " + clamped_speed);
+		speed = mix(speed, clamped_speed, time_step * 0.22f);
+		Log(warning, "speed " + speed);
 
 		vec3 direction = normalize(track_positions[track_index] - position);
 		position += direction * speed * time_step;
@@ -215,7 +219,7 @@ class MineCart{
 
 		float gain = (speed - base_speed) * 0.15 + 1.0f;
 		SetSoundGain(wheel_sound_id, gain);
-		SetSoundPitch(wheel_sound_id, gain);
+		/* SetSoundPitch(wheel_sound_id, gain); */
 		SetSoundPosition(wheel_sound_id, camera.GetPos() + vec3(0.0f, -3.0f, 0.0f));
 	}
 
@@ -248,12 +252,38 @@ class Intersection{
 	array<Object@> turn_signal_objects;
 	string turn_signal_path = "Data/Objects/signal.xml";
 	int chosen_path;
+	float min_intersection_distance = 50.0f;
 
 	Intersection(){
+		AttemptIntersectionPlacement();
+	}
+
+	void AttemptIntersectionPlacement(){
 		float random_x = RangedRandomFloat(-random_range, random_range);
 		float random_z = RangedRandomFloat(-random_range, random_range);
 
+		vec3 chosen_position;
+
+		col.GetSweptCylinderCollisionDoubleSided(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z), 0.1f, 1.0f);
+		for(int j = 0; j < sphere_col.NumContacts(); j++){
+			CollisionPoint point = sphere_col.GetContact(j);
+
+			if(length(point.normal) < 0.1f){continue;}
+			chosen_position = sphere_col.position;
+			for(uint i = 0; i < occupied_locations.size(); i++){
+				//Try to place it again if the location is occupied.
+				vec3 flat_location = vec3(occupied_locations[i].x, 0.0f, occupied_locations[i].z);
+				if(distance(flat_location, vec3(chosen_position.x, 0.0f, chosen_position.z)) < min_intersection_distance){
+					AttemptIntersectionPlacement();
+					return;
+				}
+			}
+			break;
+		}
+
+
 		position = col.GetRayCollision(vec3(random_x, height_range, random_z), vec3(random_x, -height_range, random_z));
+		occupied_locations.insertLast(position);
 		int rotating_track_id = CreateObject(track_segment_path);
 		@rotating_track = ReadObjectFromID(rotating_track_id);
 		rotating_track.SetCollisionEnabled(false);
@@ -512,6 +542,7 @@ void SetWindowDimensions(int width, int height){
 void PostScriptReload(){
 	imGUI.clear();
 	CreateIMGUIContainers();
+	SetGrabMouse(true);
 }
 
 void DrawGUI(){
@@ -688,7 +719,7 @@ void MakeMetalSparks(vec3 pos) {
 
 void PostInit(){
 	CreateTrack();
-	/* CreateEnvironment(); */
+	CreateEnvironment();
 	player.PostInit();
 	post_init_done = true;
 	SetGrabMouse(true);

@@ -1,0 +1,97 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>forgotten_plains_train_track</Name>
+<Description></Description>
+<Shader>post</Shader>
+<Shadows>true</Shadows>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/PlainsHills/PlainsHills_Height.png</Heightmap>
+    <ShaderExtra></ShaderExtra>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/PlainsHills/PlainsHills_Color.tga</ColorMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_normal.png" materialpath="Data/Materials/drygrass.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/leaves.tga" normalpath="Data/Textures/Terrain/DetailTextures/leaves_normal.png" materialpath="Data/Materials/grass.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/mixed.tga" normalpath="Data/Textures/Terrain/DetailTextures/mixed_normal.png" materialpath="Data/Materials/dirtyrock.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/woodchips.tga" normalpath="Data/Textures/Terrain/DetailTextures/woodchips_normal.png" materialpath="Data/Materials/gravel.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
+<AmbientSounds />
+<Script>train_track_controller.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="HDR Black point" type="float" val="0.005" />
+    <parameter name="HDR Bloom multiplier" type="float" val="1" />
+    <parameter name="HDR White point" type="float" val="0.7" />
+    <parameter name="Level Boundaries" type="int" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
+</LevelScriptParameters>
+<NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<Sky>
+    <DomeTexture>Data/Textures/skies/CloudySunset.tga</DomeTexture>
+    <SunAngularRad>0.106003</SunAngularRad>
+    <SunColorAngle>200.677</SunColorAngle>
+    <RayToSun r0="0.13403" r1="0.273363" r2="0.952527" />
+</Sky>
+<ActorObjects>
+	<ActorObject t0="0" t1="17.75" t2="0" s0="1" s1="1" s2="1" q0="0" q1="0.957869" q2="0" q3="0.287205" euler_x="3.14159" euler_y="0.582615" euler_z="3.14159" id="8" type_file="Data/Characters/empty_character_actor.xml" pc_script_path="empty_character.as" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="string" val="0.5" />
+            <parameter name="Attack Damage" type="string" val="1.0" />
+            <parameter name="Attack Knockback" type="string" val="1.0" />
+            <parameter name="Attack Speed" type="string" val="1.0" />
+            <parameter name="Block Follow-up" type="string" val="0.5" />
+            <parameter name="Block Skill" type="string" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="string" val="1.0" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fall Damage Multiplier" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
+            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
+            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
+            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Lives" type="int" val="1" />
+            <parameter name="Movement Speed" type="string" val="1.0" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="No Look Around" type="int" val="0" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Stick To Nav Mesh" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+            <parameter name="Throw Counter Probability" type="float" val="0.4" />
+            <parameter name="Throw Trainer" type="int" val="0" />
+            <parameter name="Weapon Catch Skill" type="float" val="1" />
+            <parameter name="Wearing Metal Armor" type="int" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <CameraObject t0="88.0174" t1="173.928" t2="143.089" s0="1" s1="1" s2="1" q0="0.183191" q1="-0.386867" q2="0.078717" q3="0.900321" euler_x="0.401465" euler_y="-0.811688" euler_z="0" id="-1">
+        <parameters />
+    </CameraObject>
+</ActorObjects>
+<RecentItems />
