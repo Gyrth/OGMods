@@ -25,7 +25,8 @@ vec3 signal_green = vec3(0.0f, 1.0f, 0.0f) * 2.0f;
 vec3 signal_red = vec3(1.0f, 0.0f, 0.0f) * 0.5f;
 enum signal_animation_types{
 	turn_animation = 0,
-	hide_animation = 1
+	hide_animation = 1,
+	show_animation = 2
 }
 
 //General script variables.-------------------------------------------------------------------------------------------------------------------
@@ -40,10 +41,12 @@ float cam_rotation_y = 180.0f;
 float cam_rotation_z = 0.0f;
 float camera_shake = 0.0f;
 float current_fov = 90.0f;
+float zoomed_fov = 50.0f;
 array<Bullet@> bullets;
 float crosshair_length = 20.0f;
 float crosshair_thickness = 1.0f;
 vec4 crosshair_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+float mouse_sensitivity = 0.5f;
 
 class SignalAnimation{
 	signal_animation_types signal_animation_type;
@@ -52,13 +55,14 @@ class SignalAnimation{
 	quaternion original_rotation;
 	bool done;
 	float timer = 0.0f;
+	bool init = false;
 
 	SignalAnimation(Object@ _target_object, signal_animation_types _signal_animation_type){
 		signal_animation_type = _signal_animation_type;
 		@target_object = _target_object;
+		target_object.SetCollisionEnabled(false);
 		original_location = target_object.GetTranslation();
 		original_rotation = target_object.GetRotation();
-		target_object.SetCollisionEnabled(false);
 	}
 
 	void Update(){
@@ -80,6 +84,35 @@ class SignalAnimation{
 			float y_rotation = 180.0f * sin(2 * PI * 1.0 * (timer / duration) + initial_rotation);
 			quaternion rot_y(vec4(0, 1, 0, y_rotation * deg2rad));
 			target_object.SetTranslationRotationFast(original_location, rot_y);
+		}else if(signal_animation_type == hide_animation){
+			float duration = 0.5f;
+			if(timer >= duration){
+				done = true;
+				target_object.SetTranslationRotationFast(original_location, original_rotation);
+				target_object.SetEnabled(false);
+				return;
+			}
+
+			vec3 new_location = mix(original_location, original_location + vec3(0.0f, -5.0f, 0.0f), (timer / duration));
+			target_object.SetTranslationRotationFast(new_location, original_rotation);
+		}else if(signal_animation_type == show_animation){
+			float duration = 0.5f;
+			if(timer >= duration){
+				done = true;
+				target_object.SetCollisionEnabled(true);
+				/* target_object.SetTranslationRotationFast(original_location, original_rotation); */
+				target_object.SetTranslation(original_location);
+				target_object.SetRotation(original_rotation);
+				Log(warning, "Show animation!!!!!!!");
+				return;
+			}
+
+			vec3 new_location = mix(original_location + vec3(0.0f, -5.0f, 0.0f), original_location, (timer / duration));
+			target_object.SetTranslationRotationFast(new_location, original_rotation);
+			if(!init){
+				target_object.SetEnabled(true);
+				init = true;
+			}
 		}
 	}
 }
@@ -91,7 +124,7 @@ class MineCart{
 	Intersection@ previous_intersection;
 	array<vec3> track_positions;
 	int track_index = 0;
-	float base_speed = 10.0f;
+	float base_speed = 15.0f;
 	float speed = base_speed;
 	float max_subtracted_speed = base_speed - 0.5f;
 	float max_added_speed = base_speed * 15.0f;
@@ -358,7 +391,7 @@ class Intersection{
 			if(exclude_index == i){
 				turn_signal_objects[i].SetEnabled(false);
 			}else{
-				turn_signal_objects[i].SetEnabled(true);
+				signal_animations.insertLast(SignalAnimation(turn_signal_objects[i], show_animation));
 				choices.insertLast(i);
 			}
 		}
@@ -370,7 +403,7 @@ class Intersection{
 
 	void HideSignals(){
 		for(uint i = 0; i < turn_signal_objects.size(); i++){
-			turn_signal_objects[i].SetEnabled(false);
+			signal_animations.insertLast(SignalAnimation(turn_signal_objects[i], hide_animation));
 		}
 	}
 
@@ -516,9 +549,7 @@ void Update(){
 		}
 	}
 
-	if(GetInputDown(0, "jump")){
-		player.Update();
-	}
+	player.Update();
 	/* player.DrawDebug(); */
 	UpdateCamera();
 	UpdateShooting();
@@ -695,8 +726,14 @@ void AttemptAssetPlacement(string path, float min_object_distance){
 void UpdateCamera(){
 	if(!DialogueCameraControl()){return;}
 
-	cam_rotation_y -= GetLookXAxis(0);
-	cam_rotation_x -= GetLookYAxis(0);
+	if(GetInputDown(0, "grab")){
+		mouse_sensitivity = 0.25f;
+	}else{
+		mouse_sensitivity = 0.5f;
+	}
+
+	cam_rotation_y -= GetLookXAxis(0) * mouse_sensitivity;
+	cam_rotation_x -= GetLookYAxis(0) * mouse_sensitivity;
 
 	cam_rotation_x = min(50.0f, max(-50.0f, cam_rotation_x));
 
@@ -709,7 +746,7 @@ void UpdateCamera(){
 	camera.SetZRotation(cam_rotation_z);
 	camera.CalcFacing();
 
-	camera.SetFOV(current_fov);
+	camera.SetFOV(GetInputDown(0, "grab")?zoomed_fov:current_fov);
 	camera.SetPos(player.position + vec3(0.0f, 2.0f, 0.0f));
 	camera.SetDistance(0.0f);
 
