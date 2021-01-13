@@ -153,8 +153,6 @@ class SignalAnimation{
 }
 
 class MineCart{
-	Object@ cart;
-	string cart_path = "Data/Objects/mine_cart.xml";
 	Intersection@ next_intersection;
 	Intersection@ previous_intersection;
 	array<vec3> track_positions;
@@ -175,13 +173,8 @@ class MineCart{
 		track_positions = next_intersection.paths[0];
 		@previous_intersection = next_intersection.connections[0];
 		next_intersection.PrepareSignals(previous_intersection);
-		int cart_id = CreateObject(cart_path);
-		@cart = ReadObjectFromID(cart_id);
-		cart.SetCollisionEnabled(false);
-		cart.SetEnabled(false);
 
 		position = track_positions[track_index];
-		cart.SetTranslation(position + vec3(0.0f, -3.0f, 0.0f));
 		wheel_sound_id = PlaySoundLoopAtLocation("Data/Sounds/wheels_turning.wav", position, 1.0);
 	}
 
@@ -201,31 +194,10 @@ class MineCart{
 		//Increase or decrease speed based on steepness.
 		float target_speed = ((position.y - track_positions[track_index].y) * 50.0f);
 		float clamped_speed = base_speed + max(-max_subtracted_speed, min(max_added_speed, target_speed));
-		/* Log(warning, "clamped_speed " + clamped_speed); */
 		speed = mix(speed, clamped_speed, time_step * 0.4f);
-		/* Log(warning, "speed " + speed); */
 
 		vec3 direction = normalize(track_positions[track_index] - position);
 		position += direction * speed * time_step;
-		/* cart.SetTranslation(position); */
-
-		vec3 up = vec3(0.0f, 1.0f, 0.0f);
-		vec3 front = direction;
-
-		vec3 new_rotation;
-		new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
-		new_rotation.x = asin(front[1]) * -180.0f / PI;
-		vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
-		vec3 expected_up = normalize(cross(expected_right, front));
-		new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
-
-		quaternion rot_y(vec4(0, 1, 0, new_rotation.y * deg2rad));
-		quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
-		quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
-		quaternion slerped_rotation = mix(cart.GetRotation(), rot_y * rot_x * rot_z, time_step * 5.0f);
-		/* cart.SetRotation(slerped_rotation); */
-
-		cart.SetTranslationRotationFast(position, slerped_rotation);
 
 		float gain = max(0.5f, min(5.0f, (speed - base_speed) * 0.15 + 1.0f));
 		SetSoundGain(wheel_sound_id, gain);
@@ -262,6 +234,7 @@ class Intersection{
 	string turn_signal_path = "Data/Objects/signal.xml";
 	int chosen_path;
 	float min_intersection_distance = 50.0f;
+	bool draw_debug = false;
 
 	Intersection(){
 		AttemptIntersectionPlacement();
@@ -271,38 +244,31 @@ class Intersection{
 		float random_x = RangedRandomFloat(-random_range, random_range);
 		float random_z = RangedRandomFloat(-random_range, random_range);
 
-		vec3 chosen_position;
-
-		col.GetSweptCylinderCollisionDoubleSided(vec3(random_x, base_height + height_range, random_z), vec3(random_x, base_height - height_range, random_z), 0.1f, 1.0f);
-		for(int j = 0; j < sphere_col.NumContacts(); j++){
-			CollisionPoint point = sphere_col.GetContact(j);
-
-			if(length(point.normal) < 0.1f){continue;}
-			chosen_position = sphere_col.position;
-			for(uint i = 0; i < occupied_locations.size(); i++){
-				//Try to place it again if the location is occupied.
-				vec3 flat_location = vec3(occupied_locations[i].x, 0.0f, occupied_locations[i].z);
-				if(distance(flat_location, vec3(chosen_position.x, 0.0f, chosen_position.z)) < min_intersection_distance){
-					AttemptIntersectionPlacement();
-					return;
-				}
+		position = col.GetRayCollision(vec3(random_x, base_height + height_range, random_z), vec3(random_x, base_height - height_range, random_z));
+		for(uint i = 0; i < occupied_locations.size(); i++){
+			//Try to place it again if the location is occupied.
+			vec3 flat_location = vec3(occupied_locations[i].x, 0.0f, occupied_locations[i].z);
+			if(distance(flat_location, vec3(position.x, 0.0f, position.z)) < min_intersection_distance){
+				AttemptIntersectionPlacement();
+				return;
 			}
-			break;
 		}
 
-
-		position = col.GetRayCollision(vec3(random_x, base_height + height_range, random_z), vec3(random_x, base_height - height_range, random_z));
 		occupied_locations.insertLast(position);
 		int rotating_track_id = CreateObject(track_segment_path);
 		@rotating_track = ReadObjectFromID(rotating_track_id);
 		rotating_track.SetCollisionEnabled(false);
-		rotating_track.SetTranslation(position);
+		rotating_track.SetTranslation(position + vec3(0.0f, 0.25f, 0.0f));
+		rotating_track.SetScale(vec3(2.0f));
 	}
 
 	void Update(){
 		float y_rotation = 360.0f * sin(2 * PI * 0.15 * the_time + 0.0);
 		quaternion rot_y(vec4(0, 1, 0, y_rotation * deg2rad));
 		rotating_track.SetTranslationRotationFast(position, rot_y);
+		if(draw_debug){
+			DrawDebug();
+		}
 	}
 
 	void SetConnected(){
@@ -373,40 +339,53 @@ class Intersection{
 	void CreateTrack(Intersection@ peer){
 		float intersection_distance = distance(peer.position, position);
 		int segments_needed = int(intersection_distance / 2.0f);
-		/* Log(warning, "segments_needed " + segments_needed); */
 		array<vec3> new_path;
 
 		for(int i = 1; i < segments_needed; i++){
 			vec3 location = mix(peer.position, position, float(i) / float(segments_needed));
 			location = col.GetRayCollision(vec3(location.x, base_height + height_range, location.z), vec3(location.x, base_height - height_range, location.z));
-			col.GetSweptSphereCollision(vec3(location.x, base_height + height_range, location.z), vec3(location.x, base_height - height_range, location.z), 0.001f);
+			if(draw_debug){
+				DebugDrawWireSphere(location, 0.5, vec3(1.0, 0.0, 0.0), _persistent);
+			}
+			new_path.insertLast(location);
+		}
+
+		vec3 flat_direction = normalize(vec3(peer.position.x, position.y, peer.position.z) - position);
+		vec3 left = normalize(cross(flat_direction, vec3(0.0f, 1.0f, 0.0f)));
+
+		for(int i = 0; i < int(new_path.size()) - 1; i++){
+
+			vec3 direction = normalize(new_path[i + 1] - new_path[i]);
+			vec3 location = mix(new_path[i], new_path[i + 1], 0.5f);
+			float track_length = distance(new_path[i], new_path[i + 1]);
+
 			int obj_id = CreateObject(track_segment_path);
 			Object@ track_obj = ReadObjectFromID(obj_id);
 
-			track_obj.SetTranslation(location);
+			float height_offset = 0.25f;
+			track_obj.SetTranslation(location + vec3(0.0f, height_offset, 0.0f));
 			occupied_locations.insertLast(location);
-			new_path.insertLast(location);
 
-			for(int j = 0; j < sphere_col.NumContacts(); j++){
-				CollisionPoint point = sphere_col.GetContact(j);
+			vec3 up = normalize(cross(direction, left));
+			vec3 front = direction;
 
-				if(length(point.normal) < 0.1f){continue;}
-
-				vec3 up = point.normal;
-				vec3 front = cross(up, normalize(position - peer.position));
-
-				vec3 new_rotation;
-				new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
-				new_rotation.x = asin(front[1]) * -180.0f / PI;
-				vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
-				vec3 expected_up = normalize(cross(expected_right, front));
-				new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
-
-				quaternion rot_y(vec4(0, 1, 0, new_rotation.y * deg2rad));
-				quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
-				quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
-				track_obj.SetRotation(rot_y * rot_x * rot_z);
+			if(draw_debug){
+				DebugDrawLine(location, location + up, vec3(1.0, 0.0, 0.0), _persistent);
+				DebugDrawLine(location, location + front, vec3(0.0, 1.0, 0.0), _persistent);
 			}
+
+			vec3 new_rotation;
+			new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
+			new_rotation.x = asin(front[1]) * -180.0f / PI;
+			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
+			vec3 expected_up = normalize(cross(expected_right, front));
+			new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
+
+			quaternion rot_y(vec4(0, 1, 0, new_rotation.y * deg2rad));
+			quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
+			quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
+			track_obj.SetRotation(rot_y * rot_x * rot_z);
+			track_obj.SetScale(vec3(1.0f, 1.0f, track_length / 2.0f));
 		}
 
 		paths.insertLast(new_path);
@@ -643,7 +622,6 @@ void Update(){
 
 	for(uint i = 0; i < intersections.size(); i++){
 		intersections[i].Update();
-		/* intersections[i].DrawDebug(); */
 	}
 
 	for(uint i = 0; i < signal_animations.size(); i++){
@@ -655,7 +633,6 @@ void Update(){
 	}
 
 	player.Update();
-	/* player.DrawDebug(); */
 	UpdateCamera();
 	UpdateShooting();
 	UpdateBullets();
@@ -847,22 +824,13 @@ Object@ AttemptAssetPlacement(string path, float min_object_distance){
 	float random_x = RangedRandomFloat(-random_range, random_range);
 	float random_z = RangedRandomFloat(-random_range, random_range);
 
-	vec3 chosen_position;
-
-	col.GetSweptCylinderCollisionDoubleSided(vec3(random_x, base_height + height_range, random_z), vec3(random_x, base_height - height_range, random_z), 0.1f, 1.0f);
-	for(int j = 0; j < sphere_col.NumContacts(); j++){
-		CollisionPoint point = sphere_col.GetContact(j);
-
-		if(length(point.normal) < 0.1f){continue;}
-		chosen_position = sphere_col.position;
-		for(uint i = 0; i < occupied_locations.size(); i++){
-			//Try to place it again if the location is occupied.
-			vec3 flat_location = vec3(occupied_locations[i].x, 0.0f, occupied_locations[i].z);
-			if(distance(flat_location, vec3(chosen_position.x, 0.0f, chosen_position.z)) < min_object_distance){
-				return AttemptAssetPlacement(path, min_object_distance);
-			}
+	vec3 chosen_position = col.GetRayCollision(vec3(random_x, base_height + height_range, random_z), vec3(random_x, base_height - height_range, random_z));
+	for(uint i = 0; i < occupied_locations.size(); i++){
+		//Try to place it again if the location is occupied.
+		vec3 flat_location = vec3(occupied_locations[i].x, 0.0f, occupied_locations[i].z);
+		if(distance(flat_location, vec3(chosen_position.x, 0.0f, chosen_position.z)) < min_object_distance){
+			return AttemptAssetPlacement(path, min_object_distance);
 		}
-		break;
 	}
 
 	int asset_id = CreateObject(path);
