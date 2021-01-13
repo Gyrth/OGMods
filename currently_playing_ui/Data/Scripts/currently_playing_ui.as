@@ -120,6 +120,15 @@ void FindLevelInfo(){
 					}
 				}
 
+				if(level_title == ""){
+					level_title = ModGetName(mod_id);
+				}
+
+				if(level_thumbnail_path == ""){
+					level_thumbnail_path = ModGetThumbnail(mod_id);
+					level_thumbnail_path.erase(0, 4);
+				}
+
 				break;
 			}
 		}
