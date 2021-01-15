@@ -1,8 +1,17 @@
 <?xml version="1.0" ?>
 <Object>
-	<Model>Data/Models/rope.obj</Model>
-	<ColorMap>Data/Textures/rope_c.png</ColorMap>
-	<NormalMap>Data/Textures/rope_n.jpg</NormalMap>
-	<ShaderName>envobject</ShaderName>
-	<flags no_collision=true double_sided=true/>
+	<Model>Data\Models\rope_segment.obj</Model>
+	<ColorMap>Data\Textures\Environments\SmallProps\Rope\rope_hd_color.tga</ColorMap>
+	<NormalMap>Data\Textures\Environments\SmallProps\Rope\rope_hd_normal.tga</NormalMap>
+		<WeightMap>Data/Textures/blank_random_w.tga</WeightMap>
+
+		<DetailMaps>
+		<DetailMap colorpath="Data/Textures/DetailTextures/ropefiber_color.tga" normalpath="Data/Textures/DetailTextures/ropefiber_normal.tga" materialpath="Data/Materials/cloth_leather.xml" />
+		<DetailMap colorpath="Data/Textures/DetailTextures/ropefiber_color.tga" normalpath="Data/Textures/DetailTextures/ropefiber_normal.tga" materialpath="Data/Materials/cloth_leather.xml" />
+		<DetailMap colorpath="Data/Textures/DetailTextures/ropefiber_color.tga" normalpath="Data/Textures/DetailTextures/ropefiber_normal.tga" materialpath="Data/Materials/cloth_leather.xml" />
+		<DetailMap colorpath="Data/Textures/DetailTextures/ropefiber_color.tga" normalpath="Data/Textures/DetailTextures/ropefiber_normal.tga" materialpath="Data/Materials/cloth_leather.xml" />
+		</DetailMaps>
+
+		<ShaderName>envobject #DETAILMAP4 #TANGENT #BASE_TANGENT #WHY_DOES_THIS_WORK</ShaderName>
+	<flags no_collision=true/>
 </Object>

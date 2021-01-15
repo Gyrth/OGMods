@@ -283,6 +283,7 @@ vec3 gravity_vector = vec3(0.0, -9.81, 0.0);
 bool resetting = false;
 int num_points = 20;
 float momentum_amount = 2.0f;
+float momentum_dampening = 0.0f;
 const float PI = 3.14159265359f;
 double radToDeg = (180.0f / PI);
 double degToRad = (PI / 180.0f);
@@ -295,6 +296,7 @@ bool post_init_done = false;
 string save_data;
 Object@ self = ReadObjectFromID(this_mo.GetID());
 array<int> anchor_point_ids;
+float rope_width = 0.25;
 
 class RopePoint{
 	bool static_point = false;
@@ -308,6 +310,7 @@ class RopePoint{
 	int anchor_id = -1;
 	Object@ anchor;
 	array<RopePoint@> connected_segments;
+	vec3 left;
 
 	RopePoint(vec3 initial_position, bool is_static){
 		position = initial_position;
@@ -322,6 +325,7 @@ class RopePoint{
 					anchor_id = -1;
 				}else{
 					@anchor = ReadObjectFromID(anchor_id);
+					position = anchor.GetTranslation();
 				}
 			}else{
 				anchor_id = -1;
@@ -355,7 +359,7 @@ class RopePoint{
 		}
 
 		if(anchor_id == -1 && static_point){
-			anchor_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml", false);
+			anchor_id = CreateObject("Data/Objects/rope_anchor.xml", false);
 			@anchor = ReadObjectFromID(anchor_id);
 			anchor.SetTranslation(this_mo.position + vec3(0.25f * rope_points.size(), 0.0f, 0.0f));
 			anchor.SetScale(vec3(0.25));
@@ -380,6 +384,7 @@ class RopePoint{
 	}
 
 	void DrawDebug(){
+		DebugDrawWireSphere(position, radius, vec3(0.0f, 0.0f, 1.0f), _delete_on_update);
 		DebugDrawWireSphere(position, radius * 0.1, vec3(1.0), _delete_on_update);
 		if(!static_point){
 			DebugDrawLine(position, connected_segments[0].position, vec3(5.0, 0.0, 0.0), _delete_on_draw);
@@ -388,7 +393,10 @@ class RopePoint{
 
 	void UpdateCollisions(){
 		if(static_point){
-			position = anchor.GetTranslation();
+			//Non visible objects get transformed way down below.
+			if(anchor.GetTranslation().y > -99999.0){
+				position = anchor.GetTranslation();
+			}
 		}else{
 			vec3 target_position = position + (gravity_vector * time_step);
 
@@ -398,6 +406,9 @@ class RopePoint{
 				if(connected_segments[i].ConnectedToStatic(this) && distance(target_position, connected_segments[i].position) > (radius * 2.0)){
 					vec3 direction = normalize(target_position - connected_segments[i].position);
 					collective_position += connected_segments[i].position + (direction * (radius * 2.0));
+					divide_by_connections += 1.0f;
+				}else{
+					collective_position += target_position;
 					divide_by_connections += 1.0f;
 				}
 			}
@@ -426,7 +437,7 @@ class RopePoint{
 				col.GetSweptSphereCollision(position, target_position, radius);
 				if(sphere_col.NumContacts() != 0){
 					target_position = sphere_col.adjusted_position;
-					momentum *= 0.0;
+					momentum *= 0.15f;
 				}
 			}
 
@@ -444,8 +455,7 @@ class RopePoint{
 				col.GetSweptSphereCollisionCharacters(position + vec3(RangedRandomFloat(-0.0001, 0.0001)), target_position + vec3(RangedRandomFloat(-0.0001, 0.0001)), char_radius);
 				if(sphere_col.NumContacts() != 0){
 					target_position = sphere_col.adjusted_position;
-					momentum *= 0.0;
-
+					momentum *= 0.15f;
 
 					array<int> character_ids;
 					GetCharactersInSphere(target_position, radius, character_ids);
@@ -474,22 +484,30 @@ class RopePoint{
 			momentum += velocity * time_step * momentum_amount;
 			position += velocity * time_step;
 			position += momentum * time_step;
+			momentum *= (1.0f - momentum_dampening);
 		}
 	}
 
 	void UpdateMesh(){
 		if(id != 0 && connected_segments.size() > 0 && ObjectExists(obj_id) && obj !is null){
 			RopePoint@ previous_segment = connected_segments[0];
-			vec3 front = normalize(position - previous_segment.position);
+
+			vec3 direction = normalize(previous_segment.position - position);
+			vec3 location = mix(position, previous_segment.position, 0.5f);
+
+			if(distance(vec3(previous_segment.position.x, position.y, previous_segment.position.z), position) < 0.01f){
+				/* DebugDrawWireSphere(position, radius, vec3(0.0f, 1.0f, 0.0f), _delete_on_update); */
+			}else{
+				vec3 flat_direction = normalize(vec3(previous_segment.position.x, position.y, previous_segment.position.z) - position);
+				left = normalize(cross(flat_direction, vec3(0.0f, 1.0f, 0.0f)));
+			}
+
+			vec3 up = normalize(cross(direction, left));
+			vec3 front = direction;
+
 			vec3 new_rotation;
 			new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
 			new_rotation.x = asin(front[1]) * -180.0f / PI;
-			/* vec3 up =  normalize(position - previous_segment.position); */
-			vec3 up = normalize(cross(vec3(0.0, 0.0, 1.0), front));
-			if(distance(front, up) < 0.01){
-				up = vec3(0, 1, 0);
-			}
-
 			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
 			vec3 expected_up = normalize(cross(expected_right, front));
 			new_rotation.z = atan2(dot(up,expected_right), dot(up, expected_up)) * 180.0f / PI;
@@ -499,9 +517,9 @@ class RopePoint{
 			quaternion rot_z(vec4(0, 0, 1, new_rotation.z * degToRad));
 			quaternion final_rotation = rot_y * rot_x * rot_z;
 
-			obj.SetTranslationRotationFast((position + previous_segment.position) / 2.0f, final_rotation);
-			float rope_length = distance(position, previous_segment.position) / (radius * 2.0);
-			obj.SetScale(vec3(1.0, 1.0, rope_length));
+			obj.SetTranslationRotationFast(location, final_rotation);
+			float rope_length = distance(position, previous_segment.position) / (radius * 20.0);
+			obj.SetScale(vec3(rope_width, rope_width, rope_length));
 		}
 	}
 }
@@ -818,6 +836,9 @@ void SetParameters() {
 	params.AddFloatSlider("Momentum Amount", 2.0f,"min:0.0,max:10.0,step:0.1,text_mult:100");
 	momentum_amount = params.GetFloat("Momentum Amount");
 
+	params.AddFloatSlider("Momentum Dampening", 0.0f,"min:0.0,max:1.0,step:0.01,text_mult:1");
+	momentum_dampening = params.GetFloat("Momentum Dampening");
+
 	string team_str;
 	character_getter.GetTeamString(team_str);
 	params.AddString("Teams", team_str);
@@ -842,6 +863,9 @@ void SetParameters() {
 	if(params.GetString("Anchors") != anchors_param){
 		anchors_param = params.GetString("Anchors");
 	}
+
+	params.AddFloatSlider("Rope Width", 0.25f, "min:0.01,max:1.0,step:0.01,text_mult:1");
+	rope_width = params.GetFloat("Rope Width");
 }
 
 void SaveData(){

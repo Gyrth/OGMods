@@ -34,26 +34,28 @@
     <RayToSun r0="0.121363" r1="0.062051" r2="0.990667" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-4.36245" t1="8.20744" t2="-1.14146" s0="1" s1="1" s2="1" q0="0.0910738" q1="0.710139" q2="-0.0934801" q3="0.691859" euler_x="-2.87982" euler_y="1.54472" euler_z="-3.14159" id="0">
+    <CameraObject t0="-5.76781" t1="3.22587" t2="-1.53092" s0="1" s1="1" s2="1" q0="0.0457358" q1="0.785809" q2="-0.0585346" q3="0.613992" euler_x="-2.99289" euler_y="1.32653" euler_z="-3.14159" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="0" t1="0" t2="0" s0="6" s1="1" s2="6" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="0.815604" t1="6.23608" t2="3.89646" s0="0.185232" s1="0.185232" s2="0.185232" q0="0.39815" q1="0.591893" q2="0.521322" q3="-0.468371" euler_x="1.64325" euler_y="-1.32351" euler_z="-3.07202" id="2" type_file="Data/Characters/rope_actor.xml" is_player="0">
+    <ActorObject t0="-1.18824" t1="6.75732" t2="4.32387" s0="0.185232" s1="0.185232" s2="0.185232" q0="0.39815" q1="0.591893" q2="0.521322" q3="-0.468371" euler_x="1.64325" euler_y="-1.32351" euler_z="-3.07202" id="2" type_file="Data/Characters/rope_actor.xml" is_player="0">
         <parameters>
-            <parameter name="Anchors" type="string" val="1,5, 10" />
+            <parameter name="Anchors" type="string" val="1,20" />
             <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Collide With Characters" type="int" val="0" />
             <parameter name="Collide With Static Objects" type="int" val="1" />
             <parameter name="Ear Size" type="float" val="1" />
             <parameter name="Fat" type="float" val="0.5" />
-            <parameter name="Momentum Amount" type="float" val="4" />
-            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Momentum Amount" type="float" val="5" />
+            <parameter name="Momentum Dampening" type="float" val="0.01" />
+            <parameter name="Muscle" type="float" val="0" />
             <parameter name="Num Points" type="int" val="20" />
-            <parameter name="Save Data" type="string" val='{&quot;rope_data&quot;:[4,-1,-1,-1,12,32,-1,-1,-1,18,38,-1,-1,-1,-1,-1,-1,-1,-1,-1]}&#x0A;' />
-            <parameter name="Show Debug" type="int" val="1" />
+            <parameter name="Rope Width" type="float" val="0.1" />
+            <parameter name="Save Data" type="string" val='{&quot;rope_data&quot;:[4,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,47]}&#x0A;' />
+            <parameter name="Show Debug" type="int" val="0" />
             <parameter name="Teams" type="string" val="cat, guard, turner, rabbit" />
         </parameters>
         <Connections>
@@ -108,26 +110,34 @@
         <Connections>
             <Connection id="-1" />
         </Connections>
-        <ItemConnections />
+        <ItemConnections>
+            <ItemConnection id="24" type="0" mirrored="1" attachment="" />
+        </ItemConnections>
         <Palette>
             <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
             <Color label="Rope" channel="1" red="1" green="1" blue="1" />
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
+        <EnvObjectAttachments>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="24" num_connections="1" m0="0.209934" m1="-0.709216" m2="0.673008" m3="0" m4="0.658728" m5="0.611265" m6="0.438672" m7="0" m8="-0.7225" m9="0.351237" m10="0.595505" m11="0" m12="-0.551431" m13="0.0196087" m14="0.985059" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+            </EnvObjectAttachment>
+        </EnvObjectAttachments>
+        <EnvObject s0="0.133794" s1="0.133794" s2="0.133794" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rope_anchor.xml">
+            <parameters />
+        </EnvObject>
     </ActorObject>
-    <PlaceholderObject t0="0.945904" t1="7.19345" t2="2.25799" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="" special_type="0">
+    <ItemObject t0="-0.345198" t1="2.46912" t2="-0.748568" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
-        <Connections>
-            <Connection id="-1" />
-        </Connections>
-    </PlaceholderObject>
-    <PlaceholderObject t0="0.968628" t1="7.1348" t2="0.356648" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="" special_type="0">
+    </ItemObject>
+    <EnvObject t0="0.224339" t1="1.03939" t2="3.16801" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rope_anchor.xml">
         <parameters />
-        <Connections>
-            <Connection id="-1" />
-        </Connections>
-    </PlaceholderObject>
+    </EnvObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="rope_actor.xml" path="Data/Characters/rope_actor.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Dog Spear" path="Data/Items/DogWeapons/DogSpear.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/wspear.png" />
 </RecentItems>
