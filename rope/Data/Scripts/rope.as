@@ -278,10 +278,10 @@ array<vec3> old_weap_points;
 array<vec3> weap_points;
 
 //Variables for the rope----------------------------------------------------------------------------------------------------
-array<RopeSegment@> rope_segments;
+array<RopePoint@> rope_points;
 vec3 gravity_vector = vec3(0.0, -9.81, 0.0);
 bool resetting = false;
-int num_segments = 20;
+int num_points = 20;
 float momentum_amount = 2.0f;
 const float PI = 3.14159265359f;
 double radToDeg = (180.0f / PI);
@@ -294,9 +294,10 @@ bool collide_with_characters = false;
 bool post_init_done = false;
 string save_data;
 Object@ self = ReadObjectFromID(this_mo.GetID());
+array<int> anchor_point_ids;
 
-class RopeSegment{
-	bool static_segment = false;
+class RopePoint{
+	bool static_point = false;
 	vec3 position;
 	float radius = 0.1;
 	vec3 velocity;
@@ -306,16 +307,33 @@ class RopeSegment{
 	Object@ obj;
 	int anchor_id = -1;
 	Object@ anchor;
-	array<RopeSegment@> connected_segments;
+	array<RopePoint@> connected_segments;
 
-	RopeSegment(vec3 initial_position, bool is_static){
+	RopePoint(vec3 initial_position, bool is_static){
 		position = initial_position;
-		static_segment = is_static;
-		id = rope_segments.size();
+		static_point = is_static;
+		id = rope_points.size();
+
+		if(int(anchor_point_ids.size()) > id){
+			anchor_id = anchor_point_ids[id];
+			if(anchor_id != -1 && ObjectExists(anchor_id)){
+				if(!static_point){
+					QueueDeleteObjectID(anchor_id);
+					anchor_id = -1;
+				}else{
+					@anchor = ReadObjectFromID(anchor_id);
+				}
+			}else{
+				anchor_id = -1;
+			}
+		}
 	}
 
-	~RopeSegment(){
+	~RopePoint(){
 		QueueDeleteObjectID(obj_id);
+	}
+
+	void Delete(){
 		QueueDeleteObjectID(anchor_id);
 	}
 
@@ -323,12 +341,12 @@ class RopeSegment{
 		connected_segments.resize(0);
 		//Get the previous rope segment.
 		if(id > 0){
-			connected_segments.insertLast(rope_segments[id - 1]);
+			connected_segments.insertLast(rope_points[id - 1]);
 		}
 
 		//Get the next rope segment.
-		if(id != int(rope_segments.size()) - 1){
-			connected_segments.insertLast(rope_segments[id + 1]);
+		if(id != int(rope_points.size()) - 1){
+			connected_segments.insertLast(rope_points[id + 1]);
 		}
 
 		if(id != 0 && obj_id == -1 && connected_segments.size() > 0){
@@ -336,18 +354,18 @@ class RopeSegment{
 			@obj = ReadObjectFromID(obj_id);
 		}
 
-		if(anchor_id == -1 && static_segment){
+		if(anchor_id == -1 && static_point){
 			anchor_id = CreateObject("Data/Objects/placeholder/empty_placeholder.xml", false);
 			@anchor = ReadObjectFromID(anchor_id);
-			anchor.SetTranslation(this_mo.position);
+			anchor.SetTranslation(this_mo.position + vec3(0.25f * rope_points.size(), 0.0f, 0.0f));
 			anchor.SetScale(vec3(0.25));
 			anchor.SetSelectable(true);
 			anchor.SetTranslatable(true);
 		}
 	}
 
-	bool ConnectedToStatic(RopeSegment@ exclude){
-		if(static_segment){
+	bool ConnectedToStatic(RopePoint@ exclude){
+		if(static_point){
 			return true;
 		}else if(connected_segments.size() == 0){
 			return false;
@@ -363,13 +381,13 @@ class RopeSegment{
 
 	void DrawDebug(){
 		DebugDrawWireSphere(position, radius * 0.1, vec3(1.0), _delete_on_update);
-		if(!static_segment){
+		if(!static_point){
 			DebugDrawLine(position, connected_segments[0].position, vec3(5.0, 0.0, 0.0), _delete_on_draw);
 		}
 	}
 
 	void UpdateCollisions(){
-		if(static_segment){
+		if(static_point){
 			position = anchor.GetTranslation();
 		}else{
 			vec3 target_position = position + (gravity_vector * time_step);
@@ -390,8 +408,8 @@ class RopeSegment{
 			}
 
 			//Repel other nope segments.
-			/* for(uint i = 0; i < rope_segments.size(); i++){
-				RopeSegment@ segment = rope_segments[i];
+			/* for(uint i = 0; i < rope_points.size(); i++){
+				RopePoint@ segment = rope_points[i];
 				if(segment !is this && segment !is previous_segment &&  segment !is next_segment){
 					float segment_distance = distance(segment.position, position);
 					if(segment_distance < (radius * 2.0) * 0.2){
@@ -461,7 +479,7 @@ class RopeSegment{
 
 	void UpdateMesh(){
 		if(id != 0 && connected_segments.size() > 0 && ObjectExists(obj_id) && obj !is null){
-			RopeSegment@ previous_segment = connected_segments[0];
+			RopePoint@ previous_segment = connected_segments[0];
 			vec3 front = normalize(position - previous_segment.position);
 			vec3 new_rotation;
 			new_rotation.y = atan2(front.x, front.z) * 180.0f / PI;
@@ -491,21 +509,24 @@ class RopeSegment{
 void UpdateRope(){
 	if(resetting){return;}
 
-	if(num_segments > int(rope_segments.size())){
-		if(anchor_points.find(rope_segments.size()) != -1){
-			rope_segments.insertLast(RopeSegment(this_mo.position, true));
+	if(num_points > int(rope_points.size())){
+		if(anchor_points.find(rope_points.size() + 1) != -1){
+			rope_points.insertLast(RopePoint(this_mo.position, true));
 		}else{
-			rope_segments.insertLast(RopeSegment(this_mo.position, false));
+			rope_points.insertLast(RopePoint(this_mo.position, false));
 		}
 		UpdateRopeNeighbours();
-	}else if(num_segments > 0 && num_segments < int(rope_segments.size())){
-		rope_segments.removeAt(rope_segments.size() - 1);
+		SaveData();
+	}else if(num_points > 0 && num_points < int(rope_points.size())){
+		rope_points[rope_points.size() - 1].Delete();
+		rope_points.removeAt(rope_points.size() - 1);
 		UpdateRopeNeighbours();
+		SaveData();
 	}
 
 	gravity_vector = vec3(0.0, -9.81, 0.0);
-	for(uint i = 0; i < rope_segments.size(); i++){
-		RopeSegment@ segment = rope_segments[i];
+	for(uint i = 0; i < rope_points.size(); i++){
+		RopePoint@ segment = rope_points[i];
 		segment.UpdateCollisions();
 		segment.UpdateMesh();
 	}
@@ -513,30 +534,34 @@ void UpdateRope(){
 
 void PreDrawFrame(float curr_game_time){
 	if(!show_debug){return;}
-	for(uint i = 0; i < rope_segments.size(); i++){
-		RopeSegment@ segment = rope_segments[i];
+	for(uint i = 0; i < rope_points.size(); i++){
+		RopePoint@ segment = rope_points[i];
 		segment.DrawDebug();
 	}
 }
 
 void UpdateRopeNeighbours(){
-	for(uint i = 0; i < rope_segments.size(); i++){
-		rope_segments[i].UpdateNeighbours();
+	for(uint i = 0; i < rope_points.size(); i++){
+		rope_points[i].UpdateNeighbours();
 	}
 }
 
 void Reset(){
-	Log(warning, "Num rope segments " + rope_segments.size());
 	resetting = true;
 }
 
-void PostReset() {
-	Log(warning, "Num rope segments " + rope_segments.size());
-	array<string> achor_point_strings = anchors_param.split(",");
+void ReadAnchorPoints(){
+	array<string> anchor_point_strings = anchors_param.split(",");
 	anchor_points.resize(0);
-	for(uint i = 0; i < achor_point_strings.size(); i++){
-		anchor_points.insertLast(atoi(achor_point_strings[i]));
+	for(uint i = 0; i < anchor_point_strings.size(); i++){
+		anchor_points.insertLast(atoi(anchor_point_strings[i]));
 	}
+}
+
+void PostReset() {
+	ReadAnchorPoints();
+	anchor_point_ids = LoadData();
+
 	resetting = false;
 	CacheSkeletonInfo();
 	if(body_bob_freq == 0.0f){
@@ -547,6 +572,9 @@ void PostReset() {
 
 void PostInit(){
 	if(post_init_done){return;}
+	ReadAnchorPoints();
+	anchor_point_ids = LoadData();
+
 	post_init_done = true;
 }
 
@@ -588,13 +616,13 @@ void Update(int num_frames) {
 void DrawEditor(){
 	if(EditorModeActive()){
 		DebugDrawText(this_mo.position, "Rope Controller", 1.0f, true, _delete_on_update);
-		if(self.IsSelected() && rope_segments.size() > 0){
+		if(self.IsSelected() && rope_points.size() > 0){
 			vec3 last_position = this_mo.position;
 
-			for(uint i = 0; i < rope_segments.size(); i++){
-				if(rope_segments[i].static_segment){
-					DebugDrawLine(last_position, rope_segments[i].position, vec3(0.0f, 0.0f, 1.0f), _delete_on_update);
-					last_position = rope_segments[i].position;
+			for(uint i = 0; i < rope_points.size(); i++){
+				if(rope_points[i].static_point){
+					DebugDrawLine(last_position, rope_points[i].position, vec3(0.0f, 0.0f, 1.0f), _delete_on_update);
+					last_position = rope_points[i].position;
 				}
 			}
 		}
@@ -615,7 +643,6 @@ bool Init(string character_path){
 }
 
 void CacheSkeletonInfo() {
-	Log(info, "Caching skeleton info");
 	RiggedObject@ rigged_object = this_mo.rigged_object();
 	Skeleton@ skeleton = rigged_object.skeleton();
 	int num_bones = skeleton.NumBones();
@@ -795,8 +822,10 @@ void SetParameters() {
 	character_getter.GetTeamString(team_str);
 	params.AddString("Teams", team_str);
 
-	params.AddIntSlider("Num Segments", 20, "min:0,max:100");
-	num_segments = params.GetInt("Num Segments");
+	params.AddInt("Num Points", 20);
+	if(params.GetInt("Num Points") != num_points){
+		num_points = params.GetInt("Num Points");
+	}
 
 	params.AddIntCheckbox("Show Debug", false);
 	show_debug = (params.GetInt("Show Debug") != 0);
@@ -810,7 +839,43 @@ void SetParameters() {
 	params.AddString("Save Data", save_data);
 
 	params.AddString("Anchors", "0");
-	anchors_param = params.GetString("Anchors");
+	if(params.GetString("Anchors") != anchors_param){
+		anchors_param = params.GetString("Anchors");
+	}
+}
+
+void SaveData(){
+	JSON data;
+	JSONValue root;
+	JSONValue rope_data;
+
+	for(uint i = 0; i < rope_points.size(); i++){
+		rope_data.append(rope_points[i].anchor_id);
+	}
+
+	root["rope_data"] = rope_data;
+
+	data.getRoot() = root;
+	params.SetString("Save Data", data.writeString(false));
+}
+
+array<int> LoadData(){
+	JSON data;
+	array<int> anchor_ids;
+
+	save_data = params.GetString("Save Data");
+	if(save_data != "" && data.parseString(save_data)){
+		JSONValue root;
+
+		root = data.getRoot();
+		JSONValue rope_data = root["rope_data"];
+
+		for(uint i = 0; i < rope_data.size(); i++){
+			int anchor_id = rope_data[i].asInt();
+			anchor_ids.insertLast(anchor_id);
+		}
+	}
+	return anchor_ids;
 }
 
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){}

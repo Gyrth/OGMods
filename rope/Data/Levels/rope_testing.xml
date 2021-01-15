@@ -34,15 +34,15 @@
     <RayToSun r0="0.121363" r1="0.062051" r2="0.990667" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-5.21874" t1="8.87745" t2="-6.40622" s0="1" s1="1" s2="1" q0="0.0648303" q1="0.933033" q2="-0.280775" q3="0.215435" euler_x="-2.55698" euler_y="0.453842" euler_z="3.14159" id="0">
+    <CameraObject t0="-4.36245" t1="8.20744" t2="-1.14146" s0="1" s1="1" s2="1" q0="0.0910738" q1="0.710139" q2="-0.0934801" q3="0.691859" euler_x="-2.87982" euler_y="1.54472" euler_z="-3.14159" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="0" t1="0" t2="0" s0="6" s1="1" s2="6" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="0.305313" t1="4.86182" t2="-0.136332" s0="0.131687" s1="0.131687" s2="0.131687" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" type_file="Data/Characters/rope_actor.xml" is_player="0">
+    <ActorObject t0="0.815604" t1="6.23608" t2="3.89646" s0="0.185232" s1="0.185232" s2="0.185232" q0="0.39815" q1="0.591893" q2="0.521322" q3="-0.468371" euler_x="1.64325" euler_y="-1.32351" euler_z="-3.07202" id="2" type_file="Data/Characters/rope_actor.xml" is_player="0">
         <parameters>
-            <parameter name="Anchors" type="string" val="0" />
+            <parameter name="Anchors" type="string" val="1,5, 10" />
             <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Collide With Characters" type="int" val="0" />
@@ -51,9 +51,9 @@
             <parameter name="Fat" type="float" val="0.5" />
             <parameter name="Momentum Amount" type="float" val="4" />
             <parameter name="Muscle" type="float" val="0.5" />
-            <parameter name="Num Segments" type="int" val="20" />
-            <parameter name="Save Data" type="string" val="" />
-            <parameter name="Show Debug" type="int" val="0" />
+            <parameter name="Num Points" type="int" val="20" />
+            <parameter name="Save Data" type="string" val='{&quot;rope_data&quot;:[4,-1,-1,-1,12,32,-1,-1,-1,18,38,-1,-1,-1,-1,-1,-1,-1,-1,-1]}&#x0A;' />
+            <parameter name="Show Debug" type="int" val="1" />
             <parameter name="Teams" type="string" val="cat, guard, turner, rabbit" />
         </parameters>
         <Connections>
@@ -115,7 +115,13 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <PlaceholderObject t0="0.305313" t1="4.86182" t2="-0.136332" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" type_file="" special_type="0">
+    <PlaceholderObject t0="0.945904" t1="7.19345" t2="2.25799" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="" special_type="0">
+        <parameters />
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+    </PlaceholderObject>
+    <PlaceholderObject t0="0.968628" t1="7.1348" t2="0.356648" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="" special_type="0">
         <parameters />
         <Connections>
             <Connection id="-1" />
