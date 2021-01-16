@@ -34,13 +34,13 @@
     <RayToSun r0="0.121363" r1="0.062051" r2="0.990667" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-5.76781" t1="3.22587" t2="-1.53092" s0="1" s1="1" s2="1" q0="0.0457358" q1="0.785809" q2="-0.0585346" q3="0.613992" euler_x="-2.99289" euler_y="1.32653" euler_z="-3.14159" id="0">
+    <CameraObject t0="5.24579" t1="5.65633" t2="2.51502" s0="1" s1="1" s2="1" q0="-0.127689" q1="0.600898" q2="-0.097998" q3="-0.782952" euler_x="0.323326" euler_y="-1.30919" euler_z="0" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="0" t1="0" t2="0" s0="6" s1="1" s2="6" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="-1.18824" t1="6.75732" t2="4.32387" s0="0.185232" s1="0.185232" s2="0.185232" q0="0.39815" q1="0.591893" q2="0.521322" q3="-0.468371" euler_x="1.64325" euler_y="-1.32351" euler_z="-3.07202" id="2" type_file="Data/Characters/rope_actor.xml" is_player="0">
+    <ActorObject t0="-0.0548096" t1="4.39591" t2="2.21482" s0="0.185232" s1="0.185232" s2="0.185232" q0="0.39815" q1="0.591893" q2="0.521322" q3="-0.468371" euler_x="1.64325" euler_y="-1.32351" euler_z="-3.07202" id="2" type_file="Data/Characters/rope_actor.xml" is_player="0">
         <parameters>
             <parameter name="Anchors" type="string" val="1,20" />
             <parameter name="Anim" type="string" val="Data/Animations/r_flail.anm" />
@@ -68,7 +68,7 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <ActorObject t0="0.299062" t1="5.77266" t2="-2.47406" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+    <ActorObject t0="0.299062" t1="1.87088" t2="-2.23437" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -133,7 +133,7 @@
     <ItemObject t0="-0.345198" t1="2.46912" t2="-0.748568" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </ItemObject>
-    <EnvObject t0="0.224339" t1="1.03939" t2="3.16801" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rope_anchor.xml">
+    <EnvObject t0="0.149808" t1="1.17582" t2="3.17679" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/rope_anchor.xml">
         <parameters />
     </EnvObject>
 </ActorObjects>
