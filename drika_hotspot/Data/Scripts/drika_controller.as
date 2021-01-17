@@ -1438,9 +1438,7 @@ void UpdateMusic(){
 
 void UpdateFadeOutAnimations(){
 	for(uint i = 0; i < fade_out_animations.size(); i++){
-		if(fade_out_animations[i].Update()){
-			
-		}
+		fade_out_animations[i].Update();
 	}
 }
 

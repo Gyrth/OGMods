@@ -69,9 +69,15 @@ class DrikaUIText : DrikaUIElement{
 				int tween_type = atoi(instruction[3]);
 				string name = instruction[4];
 
-				for(uint i = 0; i < text_elements.size(); i++){
-					IMFadeIn new_fade(duration, IMTweenType(tween_type));
-					text_elements[i].addUpdateBehavior(new_fade, name + "2");
+				if(instruction[1] == "fade_out"){
+					for(uint i = 0; i < text_elements.size(); i++){
+						fade_out_animations.insertLast(FadeOut(name, duration, tween_type, text_elements[i]));
+					}
+				}else{
+					for(uint i = 0; i < text_elements.size(); i++){
+						IMFadeIn new_fade(duration, IMTweenType(tween_type));
+						text_elements[i].addUpdateBehavior(new_fade, name + "2");
+					}
 				}
 			}else if(instruction[1] == "move_in" || instruction[1] == "move_out"){
 				int duration = atoi(instruction[2]);
@@ -95,9 +101,19 @@ class DrikaUIText : DrikaUIElement{
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string name = instruction[1];
+
+			for(uint i = 0; i < fade_out_animations.size(); i++){
+				if(fade_out_animations[i].name == name){
+					fade_out_animations[i].Remove();
+					fade_out_animations.removeAt(i);
+					i--;
+				}
+			}
+
 			if(holder.hasUpdateBehavior(name)){
 				holder.removeUpdateBehavior(name);
 			}
+
 			for(uint i = 0; i < text_elements.size(); i++){
 				text_elements[i].setDisplacement(vec2());
 				if(text_elements[i].hasUpdateBehavior(name)){

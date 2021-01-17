@@ -122,7 +122,6 @@ class DrikaUIImage : DrikaUIElement{
 					IMFadeIn new_fade(duration, IMTweenType(tween_type));
 					image.addUpdateBehavior(new_fade, name);
 				}
-
 			}else if(instruction[1] == "move_in" || instruction[1] == "move_out"){
 				int duration = atoi(instruction[2]);
 				int tween_type = atoi(instruction[3]);
@@ -148,6 +147,7 @@ class DrikaUIImage : DrikaUIElement{
 			for(uint i = 0; i < fade_out_animations.size(); i++){
 				if(fade_out_animations[i].name == name){
 					fade_out_animations[i].Remove();
+					fade_out_animations.removeAt(i);
 					break;
 				}
 			}

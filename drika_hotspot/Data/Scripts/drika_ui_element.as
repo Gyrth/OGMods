@@ -34,7 +34,6 @@ class DrikaUIElement{
 }
 
 class FadeOut{
-	int index;
 	string name;
 	float timer;
 	float duration;
@@ -47,27 +46,22 @@ class FadeOut{
 		duration = _duration / 1000.0f;
 		tween_type = IMTweenType(_tween_type);
 		@target = @_target;
-		index = fade_out_animations.size();
-		Log(warning, "tween_type " + tween_type);
 	}
 
-	bool Update(){
-		if(finished){return true;}
+	void Update(){
+		if(finished){return;}
 		timer += time_step;
 
 		if(timer >= duration){
 			timer = duration;
 			target.setAlpha(1.0f - ApplyTween((timer / duration), tween_type));
 			finished = true;
-			return true;
 		}
 
 		target.setAlpha(1.0f - ApplyTween((timer / duration), tween_type));
-		return false;
 	}
 
 	void Remove(){
 		target.setAlpha(1.0f);
-		fade_out_animations.removeAt(index);
 	}
 }

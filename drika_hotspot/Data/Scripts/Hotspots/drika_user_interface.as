@@ -20,6 +20,8 @@ class DrikaUserInterface : DrikaElement{
 	bool shadowed;
 	DrikaUserInterface@ font_element = null;
 	array<DrikaUserInterface@> text_elements;
+	bool out_timer_started;
+	float out_timer;
 
 	bool use_fade_in;
 	int fade_in_duration;
@@ -223,6 +225,20 @@ class DrikaUserInterface : DrikaElement{
 				data["move_in_offset"] = JSONValue(JSONarrayValue);
 				data["move_in_offset"].append(move_in_offset.x);
 				data["move_in_offset"].append(move_in_offset.y);
+			}
+
+			data["use_fade_out"] = JSONValue(use_fade_out);
+			if(use_fade_in){
+				data["fade_out_duration"] = JSONValue(fade_out_duration);
+				data["fade_out_tween_type"] = JSONValue(fade_out_tween_type);
+			}
+			data["use_move_out"] = JSONValue(use_move_out);
+			if(use_move_in){
+				data["move_out_duration"] = JSONValue(move_out_duration);
+				data["move_out_tween_type"] = JSONValue(move_out_tween_type);
+				data["move_out_offset"] = JSONValue(JSONarrayValue);
+				data["move_out_offset"].append(move_out_offset.x);
+				data["move_out_offset"].append(move_out_offset.y);
 			}
 		}
 
@@ -620,15 +636,20 @@ class DrikaUserInterface : DrikaElement{
 		SendLevelMessage("drika_ui_set_editing", {true});
 	}
 
-	void AddUIElement(){
+	bool AddUIElement(){
 		if(ui_function == ui_clear){
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
+			bool all_done = true;
 			for(uint i = 0; i < target_elements.size(); i++){
 				//Make sure the fonts are still available when cleaing the screen.
 				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text){
-					target_elements[i].RemoveUIElement();
+					if(!target_elements[i].RequestRemoveUIElement()){
+						all_done = false;
+					}
 				}
 			}
+
+			return all_done;
 		}else if(ui_function == ui_image){
 			if(!ui_element_added){
 				JSONValue data = GetSaveData();
@@ -663,6 +684,7 @@ class DrikaUserInterface : DrikaElement{
 				SendJSONMessage("drika_ui_add_element", data);
 			}
 		}
+		return true;
 	}
 
 	void SendJSONMessage(string message_name, JSONValue json_value){
@@ -737,13 +759,41 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
+	bool RequestRemoveUIElement(){
+		if(ui_element_added){
+			if(ui_function == ui_image || ui_function == ui_text){
+				if(!out_timer_started && (use_fade_out || use_move_out)){
+					if(use_fade_out){
+						out_timer = fade_out_duration / 1000.0f;
+					}
+					if(use_move_out){
+						//Pick the longest duration so the wait is correct before continuing.
+						out_timer = max(out_timer, float(move_out_duration / 1000.0f));
+					}
+					SendOutUpdateBehaviour();
+					out_timer_started = true;
+				}else{
+					out_timer -= time_step;
+					if(out_timer <= 0.0f){
+						SendRemoveUpdatebehaviour();
+						RemoveUIElement();
+						out_timer_started = false;
+						out_timer = 0.0f;
+						return true;
+					}
+				}
+				return false;
+			}
+		}
+		return true;
+	}
+
 	void Delete(){
 		RemoveUIElement();
 	}
 
 	bool Trigger(){
-		AddUIElement();
-		return true;
+		return AddUIElement();
 	}
 
 	void SendFontHasChanged(){
