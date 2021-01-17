@@ -1304,7 +1304,7 @@ class DrikaDialogue : DrikaElement{
 				}
 
 				float transition_duration = 1.0;
-				float alpha = ApplyEase(camera_transition_timer / transition_duration, easeInOutSine);
+				float alpha = ApplyTween(camera_transition_timer / transition_duration, inOutSineTween);
 				alpha = max(0.0, min(1.0, alpha));
 
 				// Convert the X Y Z rotations into quaternions.

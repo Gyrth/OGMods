@@ -32,3 +32,42 @@ class DrikaUIElement{
 	void ParseInput(bool left_mouse, bool right_mouse){}
 	void ReadUIInstruction(array<string> instruction){}
 }
+
+class FadeOut{
+	int index;
+	string name;
+	float timer;
+	float duration;
+	IMElement @target;
+	IMTweenType tween_type;
+	bool finished;
+
+	FadeOut(string _name, float _duration, int _tween_type, IMElement@ _target){
+		name = _name;
+		duration = _duration / 1000.0f;
+		tween_type = IMTweenType(_tween_type);
+		@target = @_target;
+		index = fade_out_animations.size();
+		Log(warning, "tween_type " + tween_type);
+	}
+
+	bool Update(){
+		if(finished){return true;}
+		timer += time_step;
+
+		if(timer >= duration){
+			timer = duration;
+			target.setAlpha(1.0f - ApplyTween((timer / duration), tween_type));
+			finished = true;
+			return true;
+		}
+
+		target.setAlpha(1.0f - ApplyTween((timer / duration), tween_type));
+		return false;
+	}
+
+	void Remove(){
+		target.setAlpha(1.0f);
+		fade_out_animations.removeAt(index);
+	}
+}

@@ -113,6 +113,42 @@ enum select_states {	select_hotspot = 0,
 						select_target_select_placeholder = 3
 					};
 
+enum IMTweenType {
+					linearTween = 0,
+					inQuadTween = 1,
+					outQuadTween = 2,
+					inOutQuadTween = 3,
+					outInQuadTween = 4,
+					inCubicTween = 5,
+					outCubicTween = 6,
+					inOutCubicTween = 7,
+					outInCubicTween = 8,
+					inQuartTween = 9,
+					outQuartTween = 10,
+					inOutQuartTween = 11,
+					outInQuartTween = 12,
+					inQuintTween = 13,
+					outQuintTween = 14,
+					inOutQuintTween = 15,
+					outInQuintTween = 16,
+					inSineTween = 17,
+					outSineTween = 18,
+					inOutSineTween = 19,
+					outInSineTween = 20,
+					inExpoTween = 21,
+					outExpoTween = 22,
+					inOutExpoTween = 23,
+					outInExpoTween = 24,
+					inCircTween = 25,
+					outCircTween = 26,
+					inOutCircTween = 27,
+					outInCircTween = 28,
+					outBounceTween = 29,
+					inBounceTween = 30,
+					inOutBounceTween = 31,
+					outInBounceTween = 32
+				};
+
 class BeforeValue{
 	string string_value;
 	float float_value;
@@ -506,5 +542,54 @@ class DrikaElement{
 	void RelativeTransform(vec3 origin, vec3 translation_offset, mat4 before_mat, mat4 after_mat){
 		placeholder.RelativeTranslate(translation_offset);
 		placeholder.RelativeRotate(origin, before_mat, after_mat);
+	}
+}
+
+void DrawTweenGraph(IMTweenType tween_type){
+	if(ImGui_IsItemHovered()){
+		ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+		ImGui_BeginTooltip();
+		vec2 tooltip_size = vec2(150.0, 150.0);
+		vec2 graph_size = vec2(tooltip_size.x , tooltip_size.y);
+		float y_padding = 50.0;
+		float x_padding = 30.0;
+
+		vec2 current_position = ImGui_GetWindowPos() + vec2(8.0, tooltip_size.y + 8) + vec2(x_padding / 2.0, y_padding / 2.0);
+
+		ImGui_BeginChild("Ease Preview", tooltip_size + vec2(x_padding, y_padding));
+
+		int nr_segments = 40;
+		for(int j = 0; j <= nr_segments; j++){
+			float x = j / float(nr_segments);
+			float ease_value = ApplyTween(x, IMTweenType(tween_type));
+			vec2 draw_location = vec2(x * graph_size.x, ease_value * graph_size.y);
+			draw_location.y *= -1.0;
+
+			vec4 in_color;
+			if(tween_types[tween_type].findFirst("In") != -1){
+				in_color = vec4(0.22, 0.56, 0.42, 1.0);
+			}else{
+				in_color = vec4(1.0);
+			}
+
+			vec4 out_color;
+			if(tween_types[tween_type].findFirst("Out") != -1){
+				out_color = vec4(0.22, 0.49, 1.0, 1.0);
+			}else{
+				out_color = vec4(1.0);
+			}
+
+			vec4 color = mix(out_color, in_color, x);
+
+			ImDrawList_PathLineTo(current_position + draw_location);
+			ImDrawList_PathStroke(ImGui_GetColorU32(color), false, 1.0f);
+			ImDrawList_PathLineTo(current_position + draw_location);
+
+		}
+
+		ImGui_EndChild();
+
+		ImGui_EndTooltip();
+		ImGui_PopStyleColor();
 	}
 }

@@ -1,39 +1,3 @@
-array<string> tween_types = {
-								"linearTween",
-							    "inQuadTween",
-							    "outQuadTween",
-							    "inOutQuadTween",
-							    "outInQuadTween",
-							    "inCubicTween",
-							    "outCubicTween",
-							    "inOutCubicTween",
-							    "outInCubicTween",
-							    "inQuartTween",
-							    "outQuartTween",
-							    "inOutQuartTween",
-							    "outInQuartTween",
-							    "inQuintTween",
-							    "outQuintTween",
-							    "inOutQuintTween",
-							    "outInQuintTween",
-							    "inSineTween",
-							    "outSineTween",
-							    "inOutSineTween",
-							    "outInSineTween",
-							    "inExpoTween",
-							    "outExpoTween",
-							    "inOutExpoTween",
-							    "outInExpoTween",
-							    "inCircTween",
-							    "outCircTween",
-							    "inOutCircTween",
-							    "outInCircTween",
-							    "outBounceTween",
-							    "inBounceTween",
-							    "inOutBounceTween",
-    							"outInBounceTween"
-							};
-
 class DrikaUserInterface : DrikaElement{
 	ui_functions ui_function;
 	int current_ui_function;
@@ -553,28 +517,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			if(use_fade_in){
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Fade In Duration");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_DragInt("##Fade In Duration", fade_in_duration, 1.0, 1, 10000)){
-					SendRemoveUpdatebehaviour();
-					SendInUpdateBehaviour();
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Fade In Tween");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_Combo("##Fade In Tween Type", fade_in_tween_type, tween_types, 10)){
-					SendRemoveUpdatebehaviour();
-					SendInUpdateBehaviour();
-				}
-
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
+				DrawSelectTween("Fade In", fade_in_tween_type, fade_in_duration);
 			}
 
 			//Move in UI-------------------------------------------------------------------------------------------------
@@ -590,39 +533,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			if(use_move_in){
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Move In Duration");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_DragInt("##Move In Duration", move_in_duration, 1.0, 1, 10000)){
-					SendRemoveUpdatebehaviour();
-					SendInUpdateBehaviour();
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Move In Tween");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_Combo("##Move In Tween", move_in_tween_type, tween_types, 10)){
-					SendRemoveUpdatebehaviour();
-					SendInUpdateBehaviour();
-				}
-
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Move In Offset");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_DragInt2("##Move In Offset", move_in_offset)){
-					SendRemoveUpdatebehaviour();
-					SendInUpdateBehaviour();
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
+				DrawSelectTween("Move In", move_in_tween_type, move_in_duration);
 			}
 
 			//Fade out UI-------------------------------------------------------------------------------------------------
@@ -638,28 +549,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			if(use_fade_out){
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Fade Out Duration");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_DragInt("##Fade Out Duration", fade_out_duration, 1.0, 1, 10000)){
-					SendRemoveUpdatebehaviour();
-					SendOutUpdateBehaviour();
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Fade Out Tween");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_Combo("##Fade Out Tween Type", fade_out_tween_type, tween_types, 10)){
-					SendRemoveUpdatebehaviour();
-					SendOutUpdateBehaviour();
-				}
-
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
+				DrawSelectTween("Fade Out", fade_out_tween_type, fade_out_duration);
 			}
 
 			//Move out UI-------------------------------------------------------------------------------------------------
@@ -675,41 +565,53 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			if(use_move_out){
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Move Out Duration");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_DragInt("##Move Out Duration", move_out_duration, 1.0, 1, 10000)){
-					SendRemoveUpdatebehaviour();
-					SendOutUpdateBehaviour();
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Move Out Tween");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_Combo("##Move Out Tween", move_out_tween_type, tween_types, 10)){
-					SendRemoveUpdatebehaviour();
-					SendOutUpdateBehaviour();
-				}
-
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Move Out Offset");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_DragInt2("##Move Out Offset", move_out_offset)){
-					SendRemoveUpdatebehaviour();
-					SendOutUpdateBehaviour();
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
+				DrawSelectTween("Move Out", move_out_tween_type, move_out_duration);
 			}
 		}
+	}
+
+	void DrawSelectTween(string name, int &inout tween_type, int &inout duration){
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text(name + " Duration");
+		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_DragInt("##" + name + " Duration", duration, 1.0, 1, 10000)){
+			SendRemoveUpdatebehaviour();
+			if(name.findFirst("In") != -1){
+				SendInUpdateBehaviour();
+			}else{
+				SendOutUpdateBehaviour();
+			}
+		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text(name + " Tween");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+
+
+		if(ImGui_BeginCombo("##" + name + " Tween Type", tween_types[tween_type], ImGuiComboFlags_HeightRegular)){
+			for(uint i = 0; i < tween_types.size(); i++){
+				if(ImGui_Selectable(tween_types[i], tween_type == int(i))){
+					tween_type = i;
+					SendRemoveUpdatebehaviour();
+					if(name.findFirst("In") != -1){
+						SendInUpdateBehaviour();
+					}else{
+						SendOutUpdateBehaviour();
+					}
+				}
+				DrawTweenGraph(IMTweenType(i));
+			}
+			ImGui_EndCombo();
+		}
+
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
 	}
 
 	void StartEdit(){

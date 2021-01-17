@@ -116,8 +116,13 @@ class DrikaUIImage : DrikaUIElement{
 				int tween_type = atoi(instruction[3]);
 				string name = instruction[4];
 
-				IMFadeIn new_fade(duration, IMTweenType(tween_type));
-				image.addUpdateBehavior(new_fade, name);
+				if(instruction[1] == "fade_out"){
+					fade_out_animations.insertLast(FadeOut(name, duration, tween_type, @image));
+				}else{
+					IMFadeIn new_fade(duration, IMTweenType(tween_type));
+					image.addUpdateBehavior(new_fade, name);
+				}
+
 			}else if(instruction[1] == "move_in" || instruction[1] == "move_out"){
 				int duration = atoi(instruction[2]);
 				int tween_type = atoi(instruction[3]);
@@ -139,6 +144,14 @@ class DrikaUIImage : DrikaUIElement{
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string name = instruction[1];
+
+			for(uint i = 0; i < fade_out_animations.size(); i++){
+				if(fade_out_animations[i].name == name){
+					fade_out_animations[i].Remove();
+					break;
+				}
+			}
+
 			holder.setDisplacement(vec2());
 			if(image.hasUpdateBehavior(name)){
 				image.removeUpdateBehavior(name);

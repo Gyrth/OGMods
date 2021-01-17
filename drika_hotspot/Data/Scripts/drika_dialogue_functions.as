@@ -1017,7 +1017,7 @@ void MafiaNameTag(IMContainer@ parent){
 
 void UpdateDialogueMoveIn(){
 	int direction = (dialogue_location == dialogue_top)?-1:1;
-	dialogue_container.setDisplacementY(EaseInQuad(dialogue_move_in_timer / dialogue_move_in_duration) * dialogue_holder_size.y * direction);
+	dialogue_container.setDisplacementY(InQuad(dialogue_move_in_timer / dialogue_move_in_duration) * dialogue_holder_size.y * direction);
 
 	if(dialogue_move_in_timer <= 0.0){
 		dialogue_move_in = false;

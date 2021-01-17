@@ -25,73 +25,49 @@ enum ui_functions	{
 						ui_font = 3
 					}
 
-enum ease_functions	{
-						linear = 0,
-						easeInSine = 1,
-						easeOutSine = 2,
-						easeInOutSine = 3,
-						easeInQuad = 4,
-						easeOutQuad = 5,
-						easeInOutQuad = 6,
-						easeInCubic = 7,
-						easeOutCubic = 8,
-						easeInOutCubic = 9,
-						easeInQuart = 10,
-						easeOutQuart = 11,
-						easeInOutQuart = 12,
-						easeInQuint = 13,
-						easeOutQuint = 14,
-						easeInOutQuint = 15,
-						easeInExpo = 16,
-						easeOutExpo = 17,
-						easeInOutExpo = 18,
-						easeInCirc = 19,
-						easeOutCirc = 20,
-						easeInOutCirc = 21,
-						easeInBack = 22,
-						easeOutBack = 23,
-						easeInOutBack = 24,
-						easeInElastic = 25,
-						easeOutElastic = 26,
-						easeInOutElastic = 27,
-						easeInBounce = 28,
-						easeOutBounce = 29,
-						easeInOutBounce = 30
-					};
+array<string> tween_types = {
+								"Linear",
 
-array<string> ease_function_names =	{
-										"Linear",
-										"EaseInSine",
-										"EaseOutSine",
-										"EaseInOutSine",
-										"EaseInQuad",
-										"EaseOutQuad",
-										"EaseInOutQuad",
-										"EaseInCubic",
-										"EaseOutCubic",
-										"EaseInOutCubic",
-										"EaseInQuart",
-										"EaseOutQuart",
-										"EaseInOutQuart",
-										"EaseInQuint",
-										"EaseOutQuint",
-										"EaseInOutQuint",
-										"EaseInExpo",
-										"EaseOutExpo",
-										"EaseInOutExpo",
-										"EaseInCirc",
-										"EaseOutCirc",
-										"EaseInOutCirc",
-										"EaseInBack",
-										"EaseOutBack",
-										"EaseInOutBack",
-										"EaseInElastic",
-										"EaseOutElastic",
-										"EaseInOutElastic",
-										"EaseInBounce",
-										"EaseOutBounce",
-										"EaseInOutBounce"
-									};
+								"InQuad",
+								"OutQuad",
+								"InOutQuad",
+								"OutInQuad",
+
+								"InCubic",
+								"OutCubic",
+								"InOutCubic",
+								"OutInCubic",
+
+								"InQuart",
+								"OutQuart",
+								"InOutQuart",
+								"OutInQuart",
+
+								"InQuint",
+								"OutQuint",
+								"InOutQuint",
+								"OutInQuint",
+
+								"InSine",
+								"OutSine",
+								"InOutSine",
+								"OutInSine",
+
+								"InExpo",
+								"OutExpo",
+								"InOutExpo",
+								"OutInExpo",
+
+								"InCirc",
+								"OutCirc",
+								"InOutCirc",
+								"OutInCirc",
+
+								"InBounce",
+								"OutBounce",
+								"InOutBounce",
+								"OutInBounce"
+							};
 
 enum dialogue_locations {
 							dialogue_bottom = 0,
@@ -204,75 +180,95 @@ array<DialogueScriptEntry@> InterpDialogueScript(string script_text){
 	return new_dialogue_script;
 }
 
-float EaseInSine(float progress){
-	return 1 - cos((progress * PI) / 2);
-}
-
-float EaseOutSine(float progress){
-	return sin((progress * PI) / 2);
-}
-
-float EaseInOutSine(float progress){
-	return -(cos(PI * progress) - 1) / 2;
-}
-
-float EaseInQuad(float progress){
+float InQuad(float progress){
 	return progress * progress;
 }
 
-float EaseOutQuad(float progress){
+float OutQuad(float progress){
 	return 1 - (1 - progress) * (1 - progress);
 }
 
-float EaseInOutQuad(float progress){
+float InOutQuad(float progress){
 	return progress < 0.5 ? 2 * progress * progress : 1 - pow(-2 * progress + 2, 2) / 2;
 }
 
-float EaseInCubic(float progress){
+float OutInQuad(float progress){
+	return mix(OutQuad(progress), InQuad(progress), progress);
+}
+
+float InCubic(float progress){
 	return progress * progress * progress;
 }
 
-float EaseOutCubic(float progress){
+float OutCubic(float progress){
 	return 1 - pow(1 - progress, 3);
 }
 
-float EaseInOutCubic(float progress){
+float InOutCubic(float progress){
 	return progress < 0.5 ? 4 * progress * progress * progress : 1 - pow(-2 * progress + 2, 3) / 2;
 }
 
-float EaseInQuart(float progress){
+float OutInCubic(float progress){
+	return mix(OutCubic(progress), InCubic(progress), progress);
+}
+
+float InQuart(float progress){
 	return progress * progress * progress * progress;
 }
 
-float EaseOutQuart(float progress){
+float OutQuart(float progress){
 	return 1 - pow(1 - progress, 4);
 }
 
-float EaseInOutQuart(float progress){
+float InOutQuart(float progress){
 	return progress < 0.5 ? 8 * progress * progress * progress * progress : 1 - pow(-2 * progress + 2, 4) / 2;
 }
 
-float EaseInQuint(float progress){
+float OutInQuart(float progress){
+	return mix(OutQuart(progress), InQuart(progress), progress);
+}
+
+float InQuint(float progress){
 	return progress * progress * progress * progress * progress;
 }
 
-float EaseOutQuint(float progress){
+float OutQuint(float progress){
 	return 1 - pow(1 - progress, 5);
 }
 
-float EaseInOutQuint(float progress){
+float InOutQuint(float progress){
 	return progress < 0.5 ? 16 * progress * progress * progress * progress * progress : 1 - pow(-2 * progress + 2, 5) / 2;
 }
 
-float EaseInExpo(float progress){
+float OutInQuint(float progress){
+	return mix(OutQuint(progress), InQuint(progress), progress);
+}
+
+float InSine(float progress){
+	return 1 - cos((progress * PI) / 2);
+}
+
+float OutSine(float progress){
+	return sin((progress * PI) / 2);
+}
+
+float InOutSine(float progress){
+	return -(cos(PI * progress) - 1) / 2;
+}
+
+float OutInSine(float progress){
+	return mix(OutSine(progress), InSine(progress), progress);
+}
+
+float InExpo(float progress){
 	return progress == 0 ? 0.0 : pow(2, 10 * progress - 10);
 }
 
-float EaseOutExpo(float progress){
+float OutExpo(float progress){
 	return progress == 1 ? 1.0 : 1 - pow(2, -10 * progress);
 }
 
-float EaseInOutExpo(float progress){
+float InOutExpo(float progress){
 	return progress == 0
 	  ? 0.0
 	  : progress == 1
@@ -281,80 +277,33 @@ float EaseInOutExpo(float progress){
 	  : (2 - pow(2, -20 * progress + 10)) / 2;
 }
 
-float EaseInCirc(float progress){
+float OutInExpo(float progress){
+	return mix(OutExpo(progress), InExpo(progress), progress);
+}
+
+float InCirc(float progress){
 	return 1 - sqrt(1 - pow(progress, 2));
 }
 
-float EaseOutCirc(float progress){
+float OutCirc(float progress){
 	return sqrt(1 - pow(progress - 1, 2));
 }
 
-float EaseInOutCirc(float progress){
+float InOutCirc(float progress){
 	return progress < 0.5
 	  ? (1 - sqrt(1 - pow(2 * progress, 2))) / 2
 	  : (sqrt(1 - pow(-2 * progress + 2, 2)) + 1) / 2;
 }
 
-float EaseInBack(float progress){
-	const float c1 = 1.70158;
-	const float c3 = c1 + 1;
-
-	return c3 * progress * progress * progress - c1 * progress * progress;
+float OutInCirc(float progress){
+	return mix(OutCirc(progress), InCirc(progress), progress);
 }
 
-float EaseOutBack(float progress){
-	const float c1 = 1.70158;
-	const float c3 = c1 + 1;
-
-	return 1 + c3 * pow(progress - 1, 3) + c1 * pow(progress - 1, 2);
+float InBounce(float progress){
+	return 1 - OutBounce(1 - progress);
 }
 
-float EaseInOutBack(float progress){
-	const float c1 = 1.70158;
-	const float c2 = c1 * 1.525;
-
-	return progress < 0.5
-	  ? (pow(2 * progress, 2) * ((c2 + 1) * 2 * progress - c2)) / 2
-	  : (pow(2 * progress - 2, 2) * ((c2 + 1) * (progress * 2 - 2) + c2) + 2) / 2;
-}
-
-float EaseInElastic(float progress){
-	const float c4 = (2 * PI) / 3;
-
-	return progress == 0
-	  ? 0.0
-	  : progress == 1
-	  ? 1.0
-	  : -pow(2, 10 * progress - 10) * sin((progress * 10 - 10.75) * c4);
-}
-
-float EaseOutElastic(float progress){
-	const float c4 = (2 * PI) / 3;
-
-	return progress == 0
-	  ? 0.0
-	  : progress == 1
-	  ? 1.0
-	  : pow(2, -10 * progress) * sin((progress * 10 - 0.75) * c4) + 1;
-}
-
-float EaseInOutElastic(float progress){
-	const float c5 = (2 * PI) / 4.5;
-
-	return progress == 0
-	  ? 0.0
-	  : progress == 1
-	  ? 1.0
-	  : progress < 0.5
-	  ? -(pow(2, 20 * progress - 10) * sin((20 * progress - 11.125) * c5)) / 2
-	  : (pow(2, -20 * progress + 10) * sin((20 * progress - 11.125) * c5)) / 2 + 1;
-}
-
-float EaseInBounce(float progress){
-	return 1 - EaseOutBounce(1 - progress);
-}
-
-float EaseOutBounce(float progress){
+float OutBounce(float progress){
 	const float n1 = 7.5625;
 	const float d1 = 2.75;
 
@@ -369,74 +318,92 @@ float EaseOutBounce(float progress){
 	}
 }
 
-float EaseInOutBounce(float progress){
+float InOutBounce(float progress){
 	return progress < 0.5
-	  ? (1 - EaseOutBounce(1 - 2 * progress)) / 2
-	  : (1 + EaseOutBounce(2 * progress - 1)) / 2;
+	  ? (1 - OutBounce(1 - 2 * progress)) / 2
+	  : (1 + OutBounce(2 * progress - 1)) / 2;
 }
 
-float ApplyEase(float progress, ease_functions ease){
-	switch(ease){
-		case easeInSine:
-			return EaseInSine(progress);
-		case easeOutSine:
-			return EaseOutSine(progress);
-		case easeInOutSine:
-			return EaseInOutSine(progress);
-		case easeInQuad:
-			return EaseInQuad(progress);
-		case easeOutQuad:
-			return EaseOutQuad(progress);
-		case easeInOutQuad:
-			return EaseInOutQuad(progress);
-		case easeInCubic:
-			return EaseInCubic(progress);
-		case easeOutCubic:
-			return EaseOutCubic(progress);
-		case easeInOutCubic:
-			return EaseInOutCubic(progress);
-		case easeInQuart:
-			return EaseInQuart(progress);
-		case easeOutQuart:
-			return EaseOutQuart(progress);
-		case easeInOutQuart:
-			return EaseInOutQuart(progress);
-		case easeInQuint:
-			return EaseInQuint(progress);
-		case easeOutQuint:
-			return EaseOutQuint(progress);
-		case easeInOutQuint:
-			return EaseInOutQuint(progress);
-		case easeInExpo:
-			return EaseInExpo(progress);
-		case easeOutExpo:
-			return EaseOutExpo(progress);
-		case easeInOutExpo:
-			return EaseInOutExpo(progress);
-		case easeInCirc:
-			return EaseInCirc(progress);
-		case easeOutCirc:
-			return EaseOutCirc(progress);
-		case easeInOutCirc:
-			return EaseInOutCirc(progress);
-		case easeInBack:
-			return EaseInBack(progress);
-		case easeOutBack:
-			return EaseOutBack(progress);
-		case easeInOutBack:
-			return EaseInOutBack(progress);
-		case easeInElastic:
-			return EaseInElastic(progress);
-		case easeOutElastic:
-			return EaseOutElastic(progress);
-		case easeInOutElastic:
-			return EaseInOutElastic(progress);
-		case easeInBounce:
-			return EaseInBounce(progress);
-		case easeOutBounce:
-			return EaseOutBounce(progress);
-		case easeInOutBounce:
-			return EaseInOutBounce(progress);
+float OutInBounce(float progress){
+	return mix(OutBounce(progress), InBounce(progress), progress);
+}
+
+float ApplyTween(float progress, IMTweenType tween_type){
+	switch(tween_type){
+		case linearTween:
+			return progress;
+		case inQuadTween:
+			return InQuad(progress);
+		case outQuadTween:
+			return OutQuad(progress);
+		case inOutQuadTween:
+			return InOutQuad(progress);
+		case outInQuadTween:
+			return OutInQuad(progress);
+
+		case inCubicTween:
+			return InCubic(progress);
+		case outCubicTween:
+			return OutCubic(progress);
+		case inOutCubicTween:
+			return InOutCubic(progress);
+		case outInCubicTween:
+			return OutInCubic(progress);
+
+		case inQuartTween:
+			return InQuart(progress);
+		case outQuartTween:
+			return OutQuart(progress);
+		case inOutQuartTween:
+			return InOutQuart(progress);
+		case outInQuartTween:
+			return OutInQuart(progress);
+
+		case inQuintTween:
+			return InQuint(progress);
+		case outQuintTween:
+			return OutQuint(progress);
+		case inOutQuintTween:
+			return InOutQuint(progress);
+		case outInQuintTween:
+			return OutInQuint(progress);
+
+		case inSineTween:
+			return InSine(progress);
+		case outSineTween:
+			return OutSine(progress);
+		case inOutSineTween:
+			return InOutSine(progress);
+		case outInSineTween:
+			return OutInSine(progress);
+
+		case inExpoTween:
+			return InExpo(progress);
+		case outExpoTween:
+			return OutExpo(progress);
+		case inOutExpoTween:
+			return InOutExpo(progress);
+		case outInExpoTween:
+			return OutInExpo(progress);
+
+		case inCircTween:
+			return InCirc(progress);
+		case outCircTween:
+			return OutCirc(progress);
+		case inOutCircTween:
+			return InOutCirc(progress);
+		case outInCircTween:
+			return OutInCirc(progress);
+
+		case inBounceTween:
+			return InBounce(progress);
+		case outBounceTween:
+			return OutBounce(progress);
+		case inOutBounceTween:
+			return InOutBounce(progress);
+		case outInBounceTween:
+			return OutInBounce(progress);
 	}
+	Log(warning, "Tween value not found " + tween_type);
 	return progress;
 }

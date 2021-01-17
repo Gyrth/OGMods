@@ -64,8 +64,8 @@ class DrikaAnimation : DrikaElement{
 	quaternion new_rotation;
 	vec3 new_scale;
 	bool done = false;
-	ease_functions ease_function;
-	int current_ease_function;
+	IMTweenType tween_type;
+	int current_tween_type;
 	bool preview_animation = false;
 
 	array<string> animation_type_names = 	{
@@ -103,8 +103,8 @@ class DrikaAnimation : DrikaElement{
 		duration = GetJSONFloat(params, "duration", 5.0);
 		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
 		parallel_operation = GetJSONBool(params, "parallel_operation", false);
-		ease_function = ease_functions(GetJSONInt(params, "ease_function", linear));
-		current_ease_function = ease_function;
+		tween_type = IMTweenType(GetJSONInt(params, "ease_function", linearTween));
+		current_tween_type = tween_type;
 		update_collision = GetJSONBool(params, "update_collision", true);
 
 		@target_select = DrikaTargetSelect(this, params);
@@ -128,7 +128,7 @@ class DrikaAnimation : DrikaElement{
 		data["duration"] = JSONValue(duration);
 		data["extra_yaw"] = JSONValue(extra_yaw);
 		data["parallel_operation"] = JSONValue(parallel_operation);
-		data["ease_function"] = JSONValue(ease_function);
+		data["ease_function"] = JSONValue(tween_type);
 		data["update_collision"] = JSONValue(update_collision);
 
 		data["key_ids"] = JSONValue(JSONarrayValue);
@@ -300,59 +300,13 @@ class DrikaAnimation : DrikaElement{
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
 
-		if(ImGui_BeginCombo("###Easing Function", ease_function_names[current_ease_function], ImGuiComboFlags_HeightLarge)){
-			for(uint i = 0; i < ease_function_names.size(); i++){
-				if(ImGui_Selectable(ease_function_names[i], current_ease_function == int(i))){
-					current_ease_function = i;
-					ease_function = ease_functions(current_ease_function);
+		if(ImGui_BeginCombo("###Easing Function", tween_types[current_tween_type], ImGuiComboFlags_HeightLarge)){
+			for(uint i = 0; i < tween_types.size(); i++){
+				if(ImGui_Selectable(tween_types[i], current_tween_type == int(i))){
+					current_tween_type = i;
+					tween_type = IMTweenType(current_tween_type);
 				}
-
-				/* if(ImGui_IsItemHovered()){
-					ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
-					ImGui_BeginTooltip();
-					vec2 tooltip_size = vec2(150.0, 150.0);
-					vec2 graph_size = vec2(tooltip_size.x , tooltip_size.y);
-					float y_padding = 125.0;
-					float x_padding = 75.0;
-
-					vec2 current_position = ImGui_GetWindowPos() + vec2(8.0, tooltip_size.y + 8) + vec2(x_padding / 2.0, y_padding / 2.0);
-
-					ImGui_BeginChild("Ease Preview", tooltip_size + vec2(x_padding, y_padding));
-
-					int nr_segments = 40;
-					for(int j = 0; j <= nr_segments; j++){
-						float x = j / float(nr_segments);
-						float ease_value = ApplyEase(x, ease_functions(i));
-						vec2 draw_location = vec2(x * graph_size.x, ease_value * graph_size.y);
-						draw_location.y *= -1.0;
-
-						vec4 in_color;
-						if(ease_function_names[i].findFirst("In") != -1){
-							in_color = vec4(0.22, 0.56, 0.42, 1.0);
-						}else{
-							in_color = vec4(1.0);
-						}
-
-						vec4 out_color;
-						if(ease_function_names[i].findFirst("Out") != -1){
-							out_color = vec4(0.22, 0.49, 1.0, 1.0);
-						}else{
-							out_color = vec4(1.0);
-						}
-
-						vec4 color = mix(out_color, in_color, x);
-
-						ImDrawList_PathLineTo(current_position + draw_location);
-						ImDrawList_PathStroke(ImGui_GetColorU32(color), false, 1.0f);
-						ImDrawList_PathLineTo(current_position + draw_location);
-
-					}
-
-					ImGui_EndChild();
-
-					ImGui_EndTooltip();
-					ImGui_PopStyleColor();
-				} */
+				DrawTweenGraph(tween_type);
 			}
 			ImGui_EndCombo();
 		}
@@ -766,7 +720,7 @@ class DrikaAnimation : DrikaElement{
 				float current_length = right_key.time - current_time;
 				alpha = 1.0 - (current_length / whole_length);
 
-				alpha = ApplyEase(alpha, ease_function);
+				alpha = ApplyTween(alpha, tween_type);
 
 				new_scale = mix(left_key.scale, right_key.scale, alpha);
 				new_rotation = mix(left_key.rotation, right_key.rotation, alpha);
@@ -872,7 +826,7 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void PlaceholderSetTransform(){
-		alpha = ApplyEase(alpha, ease_function);
+		alpha = ApplyTween(alpha, tween_type);
 
 		if(alpha == 0.0){
 			new_translation = current_key.GetTranslation();
