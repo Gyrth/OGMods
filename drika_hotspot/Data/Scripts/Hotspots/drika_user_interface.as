@@ -288,6 +288,8 @@ class DrikaUserInterface : DrikaElement{
 			display_string += "\"" + text_content + "\"";
 		}else if(ui_function == ui_font){
 			display_string += font_name + " " + font_size;
+		}else if(ui_function == ui_image){
+			display_string += "\"" + image_path + "\"";
 		}
 
 		return display_string;
