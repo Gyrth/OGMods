@@ -20,6 +20,7 @@ class DrikaUserInterface : DrikaElement{
 	bool shadowed;
 	DrikaUserInterface@ font_element = null;
 	array<DrikaUserInterface@> text_elements;
+	bool animated;
 
 	bool use_fade_in;
 	int fade_in_duration;
@@ -63,6 +64,7 @@ class DrikaUserInterface : DrikaElement{
 		font_size = GetJSONInt(params, "font_size", 75);
 		font_color = GetJSONVec4(params, "font_color", vec4(1.0, 1.0, 1.0, 1.0));
 		shadowed = GetJSONBool(params, "shadowed", true);
+		animated = GetJSONBool(params, "animated", false);
 
 		use_fade_in = GetJSONBool(params, "use_fade_in", false);
 		fade_in_duration = GetJSONInt(params, "fade_in_duration", 1000);
@@ -261,6 +263,7 @@ class DrikaUserInterface : DrikaElement{
 			data["position_offset"] = JSONValue(JSONarrayValue);
 			data["position_offset"].append(position_offset.x);
 			data["position_offset"].append(position_offset.y);
+			data["animated"] = JSONValue(animated);
 		}else if(ui_function == ui_text){
 			data["rotation"] = JSONValue(rotation);
 			data["position"] = JSONValue(JSONarrayValue);
@@ -338,6 +341,14 @@ class DrikaUserInterface : DrikaElement{
 			}
 			ImGui_SameLine();
 			ImGui_Text(image_path);
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Animated");
+			ImGui_NextColumn();
+			if(ImGui_Checkbox("##Animated", keep_aspect)){
+				SendUIInstruction("set_animated", {animated});
+			}
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();

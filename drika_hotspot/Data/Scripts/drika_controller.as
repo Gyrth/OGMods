@@ -66,7 +66,6 @@ IMContainer@ grabber_container;
 bool editing_ui = false;
 array<IMText@> text_elements;
 array<DrikaUIElement@> ui_elements;
-array<FadeOut@> fade_out_animations;
 bool grabber_dragging = false;
 DrikaUIGrabber@ current_grabber = null;
 DrikaUIElement@ current_ui_element = null;
@@ -1342,7 +1341,7 @@ void Update(){
 	UpdateReadFileProcesses();
 	UpdateWriteFileProcesses();
 	UpdateMusic();
-	UpdateFadeOutAnimations();
+	UpdateUIElements();
 	if(fading){
 		blackout_amount = fade_timer / fade_duration;
 		if(fade_direction == 1.0){
@@ -1434,12 +1433,9 @@ void UpdateMusic(){
 	}
 }
 
-void UpdateFadeOutAnimations(){
-	for(uint i = 0; i < fade_out_animations.size(); i++){
-		if(fade_out_animations[i].Update()){
-			fade_out_animations.removeAt(i);
-			i--;
-		}
+void UpdateUIElements(){
+	for(uint i = 0; i < ui_elements.size(); i++){
+		ui_elements[i].Update();
 	}
 }
 

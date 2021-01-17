@@ -16,6 +16,8 @@ class DrikaUIImage : DrikaUIElement{
 	bool keep_aspect;
 	ivec2 position_offset;
 	ivec2 size_offset;
+	bool animated;
+	FadeOut@ fade_out;
 
 	ivec2 max_offset(0, 0);
 
@@ -29,6 +31,7 @@ class DrikaUIImage : DrikaUIElement{
 		keep_aspect = GetJSONBool(params, "keep_aspect", false);
 		size = GetJSONIVec2(params, "size", ivec2());
 		index = GetJSONInt(params, "index", 0);
+		animated = GetJSONBool(params, "animated", false);
 
 		position_offset = GetJSONIVec2(params, "position_offset", ivec2());
 		size_offset = GetJSONIVec2(params, "size_offset", ivec2());
@@ -72,6 +75,14 @@ class DrikaUIImage : DrikaUIElement{
 		SetOffset();
 		imGUI.update();
 		UpdateContent();
+	}
+
+	void Update(){
+		if(fade_out !is null){
+			if(fade_out.Update()){
+				@fade_out = null;
+			}
+		}
 	}
 
 	void ReadUIInstruction(array<string> instruction){
@@ -119,12 +130,10 @@ class DrikaUIImage : DrikaUIElement{
 				bool preview = (instruction[7] == "true");
 
 				if(update_behaviour == "fade_out"){
-					fade_out_animations.insertLast(FadeOut(update_behaviour, identifier, duration, tween_type, @image, preview));
+					@fade_out = FadeOut(update_behaviour, identifier, duration, tween_type, @image, preview, color.a);
 				}else{
 					//Check if a fadeout made it completely transparent. Then just set to alpha to the color alpha.
-					if(image.getAlpha() == 0.0f){
-						image.setAlpha(color.a);
-					}
+					image.setAlpha(color.a);
 					IMFadeIn new_fade(duration, IMTweenType(tween_type));
 					image.addUpdateBehavior(new_fade, update_behaviour + identifier);
 				}
@@ -149,12 +158,11 @@ class DrikaUIImage : DrikaUIElement{
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string identifier = instruction[1];
-			for(uint i = 0; i < fade_out_animations.size(); i++){
-				if(fade_out_animations[i].name + fade_out_animations[i].identifier == identifier){
-					level.SendMessage("drika_ui_remove_element " + fade_out_animations[i].identifier);
-					fade_out_animations.removeAt(i);
-					return;
-				}
+
+			if(fade_out !is null && identifier == fade_out.name + fade_out.identifier){
+				level.SendMessage("drika_ui_remove_element " + ui_element_identifier);
+				@fade_out = null;
+				return;
 			}
 
 			holder.setDisplacement(vec2());
@@ -162,6 +170,8 @@ class DrikaUIImage : DrikaUIElement{
 				image.removeUpdateBehavior(identifier);
 				image.setDisplacement(vec2());
 			}
+		}else if(instruction[0] == "set_animated"){
+			animated = instruction[1] == "true";
 		}
 		UpdateContent();
 	}

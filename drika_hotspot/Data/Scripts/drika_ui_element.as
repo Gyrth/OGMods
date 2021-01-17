@@ -15,6 +15,7 @@ class DrikaUIElement{
 	int index = 0;
 	string json_string;
 
+	void Update(){}
 	void AddPosition(ivec2 added_positon){}
 	void AddSize(ivec2 added_size, int direction_x, int direction_y){}
 	DrikaUIGrabber@ GetGrabber(string grabber_name){return null;}
@@ -44,14 +45,14 @@ class FadeOut{
 	float starting_alpha;
 	float previous_ui_time;
 
-	FadeOut(string _name, string _identifier, float _duration, int _tween_type, IMElement@ _target, bool _preview){
+	FadeOut(string _name, string _identifier, float _duration, int _tween_type, IMElement@ _target, bool _preview, float _starting_alpha){
 		name = _name;
 		identifier = _identifier;
 		duration = _duration / 1000.0f;
 		tween_type = IMTweenType(_tween_type);
 		preview = _preview;
 		@target = @_target;
-		starting_alpha = target.getAlpha();
+		starting_alpha = _starting_alpha;
 		previous_ui_time = ui_time;
 	}
 

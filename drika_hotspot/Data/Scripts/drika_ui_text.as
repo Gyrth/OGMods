@@ -9,6 +9,7 @@ class DrikaUIText : DrikaUIElement{
 	DrikaUIGrabber@ grabber_center;
 	string holder_name;
 	DrikaUIFont@ font_element = null;
+	array<FadeOut@> fade_out_animations;
 
 	DrikaUIText(JSONValue params = JSONValue()){
 		drika_ui_element_type = drika_ui_text;
@@ -44,6 +45,14 @@ class DrikaUIText : DrikaUIElement{
 		SetNewText();
 	}
 
+	void Update(){
+		for(uint i = 0; i < fade_out_animations.size(); i++){
+			if(fade_out_animations[i].Update()){
+				fade_out_animations.removeAt(i);
+			}
+		}
+	}
+
 	void ReadUIInstruction(array<string> instruction){
 		/* Log(warning, "Got instruction " + instruction[0]); */
 		if(instruction[0] == "set_position"){
@@ -73,18 +82,17 @@ class DrikaUIText : DrikaUIElement{
 				bool preview = (instruction[7] == "true");
 
 				if(update_behaviour == "fade_out"){
+					float starting_alpha = (font_element is null)?default_font.color.a:font_element.font_color.a;
 					for(uint i = 0; i < text_elements.size(); i++){
-						fade_out_animations.insertLast(FadeOut(update_behaviour, identifier, duration, tween_type, text_elements[i], preview));
+						fade_out_animations.insertLast(FadeOut(update_behaviour, identifier, duration, tween_type, text_elements[i], preview, starting_alpha));
 					}
 				}else{
 					for(uint i = 0; i < text_elements.size(); i++){
 						//Check if a fadeout made it completely transparent. Then just set to alpha to the color alpha.
-						if(text_elements[i].getAlpha() == 0.0f){
-							if(font_element !is null){
-								text_elements[i].setAlpha(font_element.font_color.a);
-							}else{
-								text_elements[i].setAlpha(default_font.color.a);
-							}
+						if(font_element !is null){
+							text_elements[i].setAlpha(font_element.font_color.a);
+						}else{
+							text_elements[i].setAlpha(default_font.color.a);
 						}
 						IMFadeIn new_fade(duration, IMTweenType(tween_type));
 						text_elements[i].addUpdateBehavior(new_fade, update_behaviour + "2");
@@ -114,15 +122,10 @@ class DrikaUIText : DrikaUIElement{
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string identifier = instruction[1];
 
-			int found = 0;
 			for(uint i = 0; i < fade_out_animations.size(); i++){
-				if(fade_out_animations[i].name + fade_out_animations[i].identifier == identifier){
-					level.SendMessage("drika_ui_remove_element " + fade_out_animations[i].identifier);
-					fade_out_animations.removeAt(i);
-					i--;
-					found += 1;
-				}
-				if(found > 0){
+				if(identifier == fade_out_animations[i].name + fade_out_animations[i].identifier){
+					level.SendMessage("drika_ui_remove_element " + ui_element_identifier);
+					fade_out_animations.resize(0);
 					return;
 				}
 			}
