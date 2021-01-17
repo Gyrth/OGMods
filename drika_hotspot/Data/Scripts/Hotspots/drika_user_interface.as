@@ -66,6 +66,15 @@ class DrikaUserInterface : DrikaElement{
 	int move_in_tween_type;
 	ivec2 move_in_offset;
 
+	bool use_fade_out;
+	int fade_out_duration;
+	int fade_out_tween_type;
+
+	bool use_move_out;
+	int move_out_duration;
+	int move_out_tween_type;
+	ivec2 move_out_offset;
+
 	array<string> ui_function_names =	{
 											"Clear",
 											"Image",
@@ -99,6 +108,15 @@ class DrikaUserInterface : DrikaElement{
 		move_in_duration = GetJSONInt(params, "move_in_duration", 1000);
 		move_in_tween_type = GetJSONInt(params, "move_in_tween_type", 0);
 		move_in_offset = GetJSONIVec2(params, "move_in_offset", ivec2(100, 100));
+
+		use_fade_out = GetJSONBool(params, "use_fade_out", false);
+		fade_out_duration = GetJSONInt(params, "fade_out_duration", 1000);
+		fade_out_tween_type = GetJSONInt(params, "fade_out_tween_type", 0);
+
+		use_move_out = GetJSONBool(params, "use_move_out", false);
+		move_out_duration = GetJSONInt(params, "move_out_duration", 1000);
+		move_out_tween_type = GetJSONInt(params, "move_out_tween_type", 0);
+		move_out_offset = GetJSONIVec2(params, "move_out_offset", ivec2(100, 100));
 
 		text_content = GetJSONString(params, "text_content", "Example Text");
 		ui_element_identifier = GetUniqueID();
@@ -142,18 +160,33 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
-	void SendAddUpdateBehaviour(){
+	void SendInUpdateBehaviour(){
 		if(use_fade_in){
-			SendUIInstruction("add_update_behaviour", {"fade_in", fade_in_duration, fade_in_tween_type, "fade_" + ui_element_identifier});
+			AddUpdateBehavior("fade_in", fade_in_duration, fade_in_tween_type);
 		}
 		if(use_move_in){
-			SendUIInstruction("add_update_behaviour", {"move_in", move_in_duration, move_in_offset.x, move_in_offset.y, move_in_tween_type, "move_" + ui_element_identifier});
+			AddUpdateBehavior("move_in", move_in_duration, move_in_tween_type, move_in_offset);
+		}
+	}
+
+	void SendOutUpdateBehaviour(){
+		if(use_fade_out){
+			AddUpdateBehavior("fade_out", fade_out_duration, fade_out_tween_type);
+		}
+		if(use_move_out){
+			AddUpdateBehavior("move_out", move_out_duration, move_out_tween_type, move_out_offset);
 		}
 	}
 
 	void SendRemoveUpdatebehaviour(){
-		SendUIInstruction("remove_update_behaviour", {"fade_" + ui_element_identifier});
-		SendUIInstruction("remove_update_behaviour", {"move_" + ui_element_identifier});
+		SendUIInstruction("remove_update_behaviour", {"fade_in" + ui_element_identifier});
+		SendUIInstruction("remove_update_behaviour", {"move_in" + ui_element_identifier});
+		SendUIInstruction("remove_update_behaviour", {"fade_out" + ui_element_identifier});
+		SendUIInstruction("remove_update_behaviour", {"move_out" + ui_element_identifier});
+	}
+
+	void AddUpdateBehavior(string name, int duration, int tween_type, ivec2 offset = ivec2()){
+		SendUIInstruction("add_update_behaviour", {name, duration, tween_type, name + ui_element_identifier, offset.x, offset.y});
 	}
 
 	void AddTextElement(DrikaUserInterface@ new_text_element){
@@ -213,6 +246,22 @@ class DrikaUserInterface : DrikaElement{
 		data["ui_function"] = JSONValue(ui_function);
 		data["ui_element_identifier"] = JSONValue(ui_element_identifier);
 
+		if(ui_function == ui_image || ui_function == ui_text){
+			data["use_fade_in"] = JSONValue(use_fade_in);
+			if(use_fade_in){
+				data["fade_in_duration"] = JSONValue(fade_in_duration);
+				data["fade_in_tween_type"] = JSONValue(fade_in_tween_type);
+			}
+			data["use_move_in"] = JSONValue(use_move_in);
+			if(use_move_in){
+				data["move_in_duration"] = JSONValue(move_in_duration);
+				data["move_in_tween_type"] = JSONValue(move_in_tween_type);
+				data["move_in_offset"] = JSONValue(JSONarrayValue);
+				data["move_in_offset"].append(move_in_offset.x);
+				data["move_in_offset"].append(move_in_offset.y);
+			}
+		}
+
 		if(ui_function == ui_image){
 			data["image_path"] = JSONValue(image_path);
 			data["keep_aspect"] = JSONValue(keep_aspect);
@@ -234,16 +283,6 @@ class DrikaUserInterface : DrikaElement{
 			data["position_offset"] = JSONValue(JSONarrayValue);
 			data["position_offset"].append(position_offset.x);
 			data["position_offset"].append(position_offset.y);
-			data["use_fade_in"] = JSONValue(use_fade_in);
-			if(use_fade_in){
-				data["fade_in_duration"] = JSONValue(fade_in_duration);
-				data["fade_in_tween_type"] = JSONValue(fade_in_tween_type);
-			}
-			data["use_move_in"] = JSONValue(use_move_in);
-			if(use_move_in){
-				data["move_in_duration"] = JSONValue(move_in_duration);
-				data["move_in_tween_type"] = JSONValue(move_in_tween_type);
-			}
 		}else if(ui_function == ui_text){
 			data["rotation"] = JSONValue(rotation);
 			data["position"] = JSONValue(JSONarrayValue);
@@ -251,18 +290,6 @@ class DrikaUserInterface : DrikaElement{
 			data["position"].append(position.y);
 			data["text_content"] = JSONValue(text_content);
 			data["use_fade_in"] = JSONValue(use_fade_in);
-			if(use_fade_in){
-				data["fade_in_duration"] = JSONValue(fade_in_duration);
-				data["fade_in_tween_type"] = JSONValue(fade_in_tween_type);
-			}
-			data["use_move_in"] = JSONValue(use_move_in);
-			if(use_move_in){
-				data["move_in_duration"] = JSONValue(move_in_duration);
-				data["move_in_tween_type"] = JSONValue(move_in_tween_type);
-				data["move_in_offset"] = JSONValue(JSONarrayValue);
-				data["move_in_offset"].append(move_in_offset.x);
-				data["move_in_offset"].append(move_in_offset.y);
-			}
 		}else if(ui_function == ui_font){
 			data["font_name"] = JSONValue(font_name);
 			data["font_size"] = JSONValue(font_size);
@@ -513,13 +540,14 @@ class DrikaUserInterface : DrikaElement{
 		}
 
 		if(ui_function == ui_image || ui_function == ui_text){
+			//Fade in UI-------------------------------------------------------------------------------------------------
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Fade In");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Checkbox("##Use Fade In", use_fade_in)){
 				SendRemoveUpdatebehaviour();
-				SendAddUpdateBehaviour();
+				SendInUpdateBehaviour();
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -529,9 +557,9 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_Text("Fade In Duration");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_DragInt("##Fade Duration", fade_in_duration, 1.0, 1, 10000)){
+				if(ImGui_DragInt("##Fade In Duration", fade_in_duration, 1.0, 1, 10000)){
 					SendRemoveUpdatebehaviour();
-					SendAddUpdateBehaviour();
+					SendInUpdateBehaviour();
 				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
@@ -540,22 +568,23 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_Text("Fade In Tween");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_Combo("##Fade Tween Type", fade_in_tween_type, tween_types, tween_types.size())){
+				if(ImGui_Combo("##Fade In Tween Type", fade_in_tween_type, tween_types, 10)){
 					SendRemoveUpdatebehaviour();
-					SendAddUpdateBehaviour();
+					SendInUpdateBehaviour();
 				}
 
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
 			}
 
+			//Move in UI-------------------------------------------------------------------------------------------------
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Move In");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_Checkbox("##Use Move In", use_move_in)){
 				SendRemoveUpdatebehaviour();
-				SendAddUpdateBehaviour();
+				SendInUpdateBehaviour();
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -565,9 +594,9 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_Text("Move In Duration");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_DragInt("##Duration", move_in_duration, 1.0, 1, 10000)){
+				if(ImGui_DragInt("##Move In Duration", move_in_duration, 1.0, 1, 10000)){
 					SendRemoveUpdatebehaviour();
-					SendAddUpdateBehaviour();
+					SendInUpdateBehaviour();
 				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
@@ -576,9 +605,9 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_Text("Move In Tween");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_Combo("##Tween Type", move_in_tween_type, tween_types, tween_types.size())){
+				if(ImGui_Combo("##Move In Tween", move_in_tween_type, tween_types, 10)){
 					SendRemoveUpdatebehaviour();
-					SendAddUpdateBehaviour();
+					SendInUpdateBehaviour();
 				}
 
 				ImGui_PopItemWidth();
@@ -590,7 +619,92 @@ class DrikaUserInterface : DrikaElement{
 				ImGui_PushItemWidth(second_column_width);
 				if(ImGui_DragInt2("##Move In Offset", move_in_offset)){
 					SendRemoveUpdatebehaviour();
-					SendAddUpdateBehaviour();
+					SendInUpdateBehaviour();
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+			}
+
+			//Fade out UI-------------------------------------------------------------------------------------------------
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Use Fade Out");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_Checkbox("##Use Fade Out", use_fade_out)){
+				SendRemoveUpdatebehaviour();
+				SendOutUpdateBehaviour();
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			if(use_fade_out){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Fade Out Duration");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_DragInt("##Fade Out Duration", fade_out_duration, 1.0, 1, 10000)){
+					SendRemoveUpdatebehaviour();
+					SendOutUpdateBehaviour();
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Fade Out Tween");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_Combo("##Fade Out Tween Type", fade_out_tween_type, tween_types, 10)){
+					SendRemoveUpdatebehaviour();
+					SendOutUpdateBehaviour();
+				}
+
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+			}
+
+			//Move out UI-------------------------------------------------------------------------------------------------
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Use Move Out");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_Checkbox("##Use Move Out", use_move_out)){
+				SendRemoveUpdatebehaviour();
+				SendOutUpdateBehaviour();
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			if(use_move_out){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Move Out Duration");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_DragInt("##Move Out Duration", move_out_duration, 1.0, 1, 10000)){
+					SendRemoveUpdatebehaviour();
+					SendOutUpdateBehaviour();
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Move Out Tween");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_Combo("##Move Out Tween", move_out_tween_type, tween_types, 10)){
+					SendRemoveUpdatebehaviour();
+					SendOutUpdateBehaviour();
+				}
+
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Move Out Offset");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_DragInt2("##Move Out Offset", move_out_offset)){
+					SendRemoveUpdatebehaviour();
+					SendOutUpdateBehaviour();
 				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
@@ -621,7 +735,7 @@ class DrikaUserInterface : DrikaElement{
 				SendJSONMessage("drika_ui_add_element", data);
 			}
 			SendRemoveUpdatebehaviour();
-			SendAddUpdateBehaviour();
+			SendInUpdateBehaviour();
 			ui_element_added = true;
 		}else if(ui_function == ui_text){
 			if(!ui_element_added){
@@ -637,7 +751,7 @@ class DrikaUserInterface : DrikaElement{
 			}
 			ui_element_added = true;
 			SendRemoveUpdatebehaviour();
-			SendAddUpdateBehaviour();
+			SendInUpdateBehaviour();
 		}else if(ui_function == ui_font){
 			if(!ui_element_added){
 				ui_element_added = true;
@@ -702,6 +816,7 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void ApplySettings(){
+		SendRemoveUpdatebehaviour();
 		if(ui_function == ui_font){
 			SendFontHasChanged();
 		}

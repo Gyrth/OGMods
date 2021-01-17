@@ -1,5 +1,7 @@
 class DrikaUIImage : DrikaUIElement{
 	IMImage@ image;
+	IMContainer@ outline_container;
+	IMContainer@ holder;
 	DrikaUIGrabber@ grabber_top_left;
 	DrikaUIGrabber@ grabber_top_right;
 	DrikaUIGrabber@ grabber_bottom_left;
@@ -38,13 +40,10 @@ class DrikaUIImage : DrikaUIElement{
 	void PostInit(){
 		IMImage new_image(image_path);
 		@image = new_image;
-		new_image.setBorderColor(edit_outline_color);
 		ReadMaxOffsets();
 		if(size_offset.x == 0.0 || size_offset.y == 0.0){
 			size_offset = max_offset;
 		}
-		SetOffset();
-		new_image.setSize(vec2(size.x, size.y));
 		new_image.setZOrdering(index);
 		new_image.setClip(false);
 		image_name = imGUI.getUniqueName("image");
@@ -55,9 +54,23 @@ class DrikaUIImage : DrikaUIElement{
 		@grabber_bottom_right = DrikaUIGrabber("bottom_right", 1, 1, scaler);
 		@grabber_center = DrikaUIGrabber("center", 1, 1, mover);
 
-		image_container.addFloatingElement(new_image, image_name, vec2(position.x, position.y), 0);
+		@holder = IMContainer("holder");
+		holder.setZOrdering(index);
+		holder.setClip(false);
+		holder.setElement(image);
+
+		@outline_container = IMContainer("outline_container");
+		outline_container.setElement(holder);
+		outline_container.setBorderColor(edit_outline_color);
+		outline_container.setClip(false);
+		outline_container.setZOrdering(index);
+
+		image_container.addFloatingElement(outline_container, image_name, vec2(position.x, position.y), 0);
 		new_image.setRotation(rotation);
 		new_image.setColor(color);
+		SetSize();
+		SetOffset();
+		imGUI.update();
 		UpdateContent();
 	}
 
@@ -98,26 +111,38 @@ class DrikaUIImage : DrikaUIElement{
 			index = atoi(instruction[1]);
 			SetZOrder();
 		}else if(instruction[0] == "add_update_behaviour"){
-			if(instruction[1] == "fade_in"){
+			if(instruction[1] == "fade_in" || instruction[1] == "fade_out"){
 				int duration = atoi(instruction[2]);
 				int tween_type = atoi(instruction[3]);
 				string name = instruction[4];
 
 				IMFadeIn new_fade(duration, IMTweenType(tween_type));
 				image.addUpdateBehavior(new_fade, name);
-			}else if(instruction[1] == "move_in"){
+			}else if(instruction[1] == "move_in" || instruction[1] == "move_out"){
 				int duration = atoi(instruction[2]);
-				vec2 offset(atoi(instruction[3]), atoi(instruction[4]));
-				int tween_type = atoi(instruction[5]);
-				string name = instruction[6];
+				int tween_type = atoi(instruction[3]);
+				string name = instruction[4];
+				vec2 offset(atoi(instruction[5]), atoi(instruction[6]));
 
-				IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
-				image.addUpdateBehavior(new_move, name);
+				if(instruction[1] == "move_out"){
+					IMMoveIn new_move(duration, offset * -1.0f, IMTweenType(tween_type));
+					image.addUpdateBehavior(new_move, name);
+
+					imGUI.update();
+
+					holder.setDisplacement(offset);
+				}else{
+					IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
+					image.addUpdateBehavior(new_move, name);
+				}
+
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string name = instruction[1];
+			holder.setDisplacement(vec2());
 			if(image.hasUpdateBehavior(name)){
 				image.removeUpdateBehavior(name);
+				image.setDisplacement(vec2());
 			}
 		}
 		UpdateContent();
@@ -138,9 +163,10 @@ class DrikaUIImage : DrikaUIElement{
 
 	void SetNewImage(){
 		vec2 old_size = image.getSize();
+		size = ivec2(int(old_size.x), int(old_size.y));
 		image.setImageFile(image_path);
 		ReadMaxOffsets();
-		image.setSize(old_size);
+		SetSize();
 	}
 
 	void UpdateContent(){
@@ -160,7 +186,7 @@ class DrikaUIImage : DrikaUIElement{
 		grabber_bottom_right.SetVisible(editing);
 		grabber_center.SetVisible(editing);
 
-		image.showBorder(editing);
+		outline_container.showBorder(editing);
 	}
 
 	void AddSize(ivec2 added_size, int direction_x, int direction_y){
@@ -172,7 +198,6 @@ class DrikaUIImage : DrikaUIElement{
 					size.y = int(image.getSizeY());
 				}
 			}else{
-				image.setSizeX(image.getSizeX() + added_size.x);
 				size.x += added_size.x;
 			}
 		}else{
@@ -185,7 +210,6 @@ class DrikaUIImage : DrikaUIElement{
 					size.y = int(image.getSizeY());
 				}
 			}else{
-				image.setSizeX(image.getSizeX() - added_size.x);
 				size.x -= added_size.x;
 				image_container.moveElementRelative(image_name, vec2(added_size.x, 0.0));
 				position.x += added_size.x;
@@ -193,7 +217,6 @@ class DrikaUIImage : DrikaUIElement{
 		}
 		if(direction_y == 1){
 			if(!keep_aspect){
-				image.setSizeY(image.getSizeY() + added_size.y);
 				size.y += added_size.y;
 			}
 		}else{
@@ -208,18 +231,24 @@ class DrikaUIImage : DrikaUIElement{
 					float size_x_before = image.getSizeX();
 					image.scaleToSizeY(image.getSizeY() - added_size.y);
 					size.y -= added_size.y;
-					float moved_x = size_x_before - image.getSizeX();
+					float moved_x;
+					//The image will start drifting if the float value isn't rounded.
+					if(size_x_before > 0.0f){
+						moved_x = ceil(size_x_before - image.getSizeX());
+					}else{
+						moved_x = floor(size_x_before - image.getSizeX());
+					}
 					image_container.moveElementRelative(image_name, vec2(moved_x, added_size.y));
 					position.y += added_size.y;
 					size.x = int(image.getSizeX());
 				}
 			}else{
-				image.setSizeY(image.getSizeY() - added_size.y);
 				size.y -= added_size.y;
 				image_container.moveElementRelative(image_name, vec2(0.0, added_size.y));
 				position.y += added_size.y;
 			}
 		}
+		SetSize();
 		UpdateContent();
 		SendUIInstruction("set_size", {size.x, size.y});
 	}
@@ -229,7 +258,14 @@ class DrikaUIImage : DrikaUIElement{
 	}
 
 	void SetSize(){
-		image.setSize(vec2(size.x, size.y));
+		vec2 new_size = vec2(size.x, size.y);
+		image.setSize(new_size);
+		if(outline_container !is null){
+			outline_container.setSize(new_size);
+		}
+		if(holder !is null){
+			holder.setSize(new_size);
+		}
 	}
 
 	void AddPosition(ivec2 added_positon){

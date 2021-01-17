@@ -1,5 +1,6 @@
 class DrikaUIText : DrikaUIElement{
 	IMDivider@ holder;
+	IMContainer@ outline_container;
 	array<IMText@> text_elements;
 	array<string> split_content;
 	string text_content;
@@ -27,7 +28,6 @@ class DrikaUIText : DrikaUIElement{
 	void PostInit(){
 		IMDivider text_holder(ui_element_identifier + "textholder", DOVertical);
 		@holder = text_holder;
-		text_holder.setBorderColor(edit_outline_color);
 		text_holder.setAlignment(CALeft, CATop);
 		text_holder.setClip(false);
 		text_holder.setZOrdering(index);
@@ -35,7 +35,12 @@ class DrikaUIText : DrikaUIElement{
 		@grabber_center = DrikaUIGrabber("center", 1, 1, mover);
 		grabber_center.margin = 0.0;
 		holder_name = imGUI.getUniqueName("text");
-		text_container.addFloatingElement(text_holder, holder_name, vec2(position.x, position.y), 0);
+
+		@outline_container = IMContainer("outline_container");
+		outline_container.setElement(text_holder);
+		outline_container.setBorderColor(edit_outline_color);
+
+		text_container.addFloatingElement(outline_container, holder_name, vec2(position.x, position.y), 0);
 		SetNewText();
 	}
 
@@ -59,7 +64,7 @@ class DrikaUIText : DrikaUIElement{
 			index = atoi(instruction[1]);
 			SetZOrder();
 		}else if(instruction[0] == "add_update_behaviour"){
-			if(instruction[1] == "fade_in"){
+			if(instruction[1] == "fade_in" || instruction[1] == "fade_out"){
 				int duration = atoi(instruction[2]);
 				int tween_type = atoi(instruction[3]);
 				string name = instruction[4];
@@ -68,14 +73,25 @@ class DrikaUIText : DrikaUIElement{
 					IMFadeIn new_fade(duration, IMTweenType(tween_type));
 					text_elements[i].addUpdateBehavior(new_fade, name + "2");
 				}
-			}else if(instruction[1] == "move_in"){
+			}else if(instruction[1] == "move_in" || instruction[1] == "move_out"){
 				int duration = atoi(instruction[2]);
-				vec2 offset(atoi(instruction[3]), atoi(instruction[4]));
-				int tween_type = atoi(instruction[5]);
-				string name = instruction[6];
+				int tween_type = atoi(instruction[3]);
+				string name = instruction[4];
+				vec2 offset(atoi(instruction[5]), atoi(instruction[6]));
 
-				IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
-				holder.addUpdateBehavior(new_move, name);
+				if(instruction[1] == "move_out"){
+					IMMoveIn new_move(duration, offset * -1.0f, IMTweenType(tween_type));
+					holder.addUpdateBehavior(new_move, name);
+
+					imGUI.update();
+
+					for(uint i = 0; i < text_elements.size(); i++){
+						text_elements[i].setDisplacement(offset);
+					}
+				}else{
+					IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
+					holder.addUpdateBehavior(new_move, name);
+				}
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string name = instruction[1];
@@ -83,6 +99,7 @@ class DrikaUIText : DrikaUIElement{
 				holder.removeUpdateBehavior(name);
 			}
 			for(uint i = 0; i < text_elements.size(); i++){
+				text_elements[i].setDisplacement(vec2());
 				if(text_elements[i].hasUpdateBehavior(name)){
 					text_elements[i].removeUpdateBehavior(name);
 				}
@@ -126,7 +143,7 @@ class DrikaUIText : DrikaUIElement{
 	}
 
 	void UpdateContent(){
-		holder.showBorder(editing);
+		outline_container.showBorder(editing);
 		grabber_center.SetVisible(editing);
 
 		vec2 position = text_container.getElementPosition(holder_name);
