@@ -144,6 +144,7 @@ class DrikaUIImage : DrikaUIElement{
 				}else{
 					IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
 					image.addUpdateBehavior(new_move, update_behaviour + identifier);
+					imGUI.update();
 				}
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
@@ -176,6 +177,11 @@ class DrikaUIImage : DrikaUIElement{
 
 	void SetZOrder(){
 		image.setZOrdering(index);
+		grabber_top_left.SetZOrder(index);
+		grabber_top_right.SetZOrder(index);
+		grabber_bottom_left.SetZOrder(index);
+		grabber_bottom_right.SetZOrder(index);
+		grabber_center.SetZOrder(index);
 	}
 
 	void SetNewImage(){
@@ -204,6 +210,7 @@ class DrikaUIImage : DrikaUIElement{
 		grabber_center.SetVisible(editing);
 
 		outline_container.showBorder(editing);
+		SetZOrder();
 	}
 
 	void AddSize(ivec2 added_size, int direction_x, int direction_y){

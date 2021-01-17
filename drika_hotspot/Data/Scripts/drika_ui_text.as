@@ -108,6 +108,7 @@ class DrikaUIText : DrikaUIElement{
 				}else{
 					IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
 					holder.addUpdateBehavior(new_move, identifier);
+					imGUI.update();
 				}
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
@@ -145,6 +146,7 @@ class DrikaUIText : DrikaUIElement{
 		for(uint i = 0; i < text_elements.size(); i++){
 			text_elements[i].setZOrdering(index);
 		}
+		grabber_center.SetZOrder(index);
 	}
 
 	void SetNewText(){
@@ -179,6 +181,7 @@ class DrikaUIText : DrikaUIElement{
 		if(size.x + size.y > 0.0){
 			grabber_center.SetSize(vec2(size.x, size.y));
 		}
+		SetZOrder();
 	}
 
 	void SetEditing(bool _editing){
