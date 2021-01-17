@@ -150,10 +150,10 @@ class DrikaUIImage : DrikaUIElement{
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string identifier = instruction[1];
 			for(uint i = 0; i < fade_out_animations.size(); i++){
-				if(fade_out_animations[i].name == identifier){
-					fade_out_animations[i].Remove();
+				if(fade_out_animations[i].name + fade_out_animations[i].identifier == identifier){
+					level.SendMessage("drika_ui_remove_element " + fade_out_animations[i].identifier);
 					fade_out_animations.removeAt(i);
-					break;
+					return;
 				}
 			}
 
@@ -177,6 +177,7 @@ class DrikaUIImage : DrikaUIElement{
 
 	void SetZOrder(){
 		image.setZOrdering(index);
+		outline_container.setZOrdering(index);
 		grabber_top_left.SetZOrder(index);
 		grabber_top_right.SetZOrder(index);
 		grabber_bottom_left.SetZOrder(index);

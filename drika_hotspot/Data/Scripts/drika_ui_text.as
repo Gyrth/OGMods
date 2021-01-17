@@ -114,11 +114,16 @@ class DrikaUIText : DrikaUIElement{
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string identifier = instruction[1];
 
+			int found = 0;
 			for(uint i = 0; i < fade_out_animations.size(); i++){
-				if(fade_out_animations[i].name == identifier){
-					fade_out_animations[i].Remove();
+				if(fade_out_animations[i].name + fade_out_animations[i].identifier == identifier){
+					level.SendMessage("drika_ui_remove_element " + fade_out_animations[i].identifier);
 					fade_out_animations.removeAt(i);
 					i--;
+					found += 1;
+				}
+				if(found > 0){
+					return;
 				}
 			}
 
@@ -143,6 +148,7 @@ class DrikaUIText : DrikaUIElement{
 
 	void SetZOrder(){
 		holder.setZOrdering(index);
+		outline_container.setZOrdering(index);
 		for(uint i = 0; i < text_elements.size(); i++){
 			text_elements[i].setZOrdering(index);
 		}
@@ -181,6 +187,11 @@ class DrikaUIText : DrikaUIElement{
 		if(size.x + size.y > 0.0){
 			grabber_center.SetSize(vec2(size.x, size.y));
 		}
+
+		if(outline_container !is null){
+			outline_container.setSize(vec2(size.x, size.y));
+		}
+
 		SetZOrder();
 	}
 

@@ -41,6 +41,8 @@ class FadeOut{
 	IMElement @target;
 	IMTweenType tween_type;
 	bool preview;
+	float starting_alpha;
+	float previous_ui_time;
 
 	FadeOut(string _name, string _identifier, float _duration, int _tween_type, IMElement@ _target, bool _preview){
 		name = _name;
@@ -49,14 +51,18 @@ class FadeOut{
 		tween_type = IMTweenType(_tween_type);
 		preview = _preview;
 		@target = @_target;
+		starting_alpha = target.getAlpha();
+		previous_ui_time = ui_time;
 	}
 
 	bool Update(){
-		timer += time_step;
+		float step = (ui_time - previous_ui_time);
+		timer += step;
+		previous_ui_time = ui_time;
 
 		if(timer >= duration){
 			timer = duration;
-			target.setAlpha(1.0f - ApplyTween((timer / duration), tween_type));
+			target.setAlpha(mix(starting_alpha, 0.0f, ApplyTween((timer / duration), tween_type)));
 			//Don't remove the UIELement when DHS is editing and previewing the transitions.
 			if(!preview){
 				level.SendMessage("drika_ui_remove_element " + identifier);
@@ -64,11 +70,7 @@ class FadeOut{
 			return true;
 		}
 
-		target.setAlpha(1.0f - ApplyTween((timer / duration), tween_type));
+		target.setAlpha(mix(starting_alpha, 0.0f, ApplyTween((timer / duration), tween_type)));
 		return false;
-	}
-
-	void Remove(){
-		target.setAlpha(1.0f);
 	}
 }
