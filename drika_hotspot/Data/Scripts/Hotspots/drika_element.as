@@ -546,7 +546,8 @@ class DrikaElement{
 }
 
 void DrawTweenGraph(IMTweenType tween_type){
-	if(ImGui_IsItemHovered()){
+	//Not yet supported in non-IT.
+	/* if(ImGui_IsItemHovered()){
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
 		ImGui_BeginTooltip();
 		vec2 tooltip_size = vec2(150.0, 150.0);
@@ -591,5 +592,5 @@ void DrawTweenGraph(IMTweenType tween_type){
 
 		ImGui_EndTooltip();
 		ImGui_PopStyleColor();
-	}
+	} */
 }
