@@ -64,30 +64,41 @@ class DrikaUIText : DrikaUIElement{
 			index = atoi(instruction[1]);
 			SetZOrder();
 		}else if(instruction[0] == "add_update_behaviour"){
-			if(instruction[1] == "fade_in" || instruction[1] == "fade_out"){
+			string update_behaviour = instruction[1];
+			if(update_behaviour == "fade_in" || update_behaviour == "fade_out"){
+
 				int duration = atoi(instruction[2]);
 				int tween_type = atoi(instruction[3]);
-				string name = instruction[4];
+				string identifier = instruction[4];
+				bool preview = (instruction[7] == "true");
 
-				if(instruction[1] == "fade_out"){
+				if(update_behaviour == "fade_out"){
 					for(uint i = 0; i < text_elements.size(); i++){
-						fade_out_animations.insertLast(FadeOut(name, duration, tween_type, text_elements[i]));
+						fade_out_animations.insertLast(FadeOut(update_behaviour, identifier, duration, tween_type, text_elements[i], preview));
 					}
 				}else{
 					for(uint i = 0; i < text_elements.size(); i++){
+						//Check if a fadeout made it completely transparent. Then just set to alpha to the color alpha.
+						if(text_elements[i].getAlpha() == 0.0f){
+							if(font_element !is null){
+								text_elements[i].setAlpha(font_element.font_color.a);
+							}else{
+								text_elements[i].setAlpha(default_font.color.a);
+							}
+						}
 						IMFadeIn new_fade(duration, IMTweenType(tween_type));
-						text_elements[i].addUpdateBehavior(new_fade, name + "2");
+						text_elements[i].addUpdateBehavior(new_fade, update_behaviour + "2");
 					}
 				}
-			}else if(instruction[1] == "move_in" || instruction[1] == "move_out"){
+			}else if(update_behaviour == "move_in" || update_behaviour == "move_out"){
 				int duration = atoi(instruction[2]);
 				int tween_type = atoi(instruction[3]);
-				string name = instruction[4];
+				string identifier = instruction[4];
 				vec2 offset(atoi(instruction[5]), atoi(instruction[6]));
 
-				if(instruction[1] == "move_out"){
+				if(update_behaviour == "move_out"){
 					IMMoveIn new_move(duration, offset * -1.0f, IMTweenType(tween_type));
-					holder.addUpdateBehavior(new_move, name);
+					holder.addUpdateBehavior(new_move, identifier);
 
 					imGUI.update();
 
@@ -96,28 +107,28 @@ class DrikaUIText : DrikaUIElement{
 					}
 				}else{
 					IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
-					holder.addUpdateBehavior(new_move, name);
+					holder.addUpdateBehavior(new_move, identifier);
 				}
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
-			string name = instruction[1];
+			string identifier = instruction[1];
 
 			for(uint i = 0; i < fade_out_animations.size(); i++){
-				if(fade_out_animations[i].name == name){
+				if(fade_out_animations[i].name == identifier){
 					fade_out_animations[i].Remove();
 					fade_out_animations.removeAt(i);
 					i--;
 				}
 			}
 
-			if(holder.hasUpdateBehavior(name)){
-				holder.removeUpdateBehavior(name);
+			if(holder.hasUpdateBehavior(identifier)){
+				holder.removeUpdateBehavior(identifier);
 			}
 
 			for(uint i = 0; i < text_elements.size(); i++){
 				text_elements[i].setDisplacement(vec2());
-				if(text_elements[i].hasUpdateBehavior(name)){
-					text_elements[i].removeUpdateBehavior(name);
+				if(text_elements[i].hasUpdateBehavior(identifier)){
+					text_elements[i].removeUpdateBehavior(identifier);
 				}
 			}
 		}

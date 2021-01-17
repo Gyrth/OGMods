@@ -35,30 +35,37 @@ class DrikaUIElement{
 
 class FadeOut{
 	string name;
+	string identifier;
 	float timer;
 	float duration;
 	IMElement @target;
 	IMTweenType tween_type;
-	bool finished;
+	bool preview;
 
-	FadeOut(string _name, float _duration, int _tween_type, IMElement@ _target){
+	FadeOut(string _name, string _identifier, float _duration, int _tween_type, IMElement@ _target, bool _preview){
 		name = _name;
+		identifier = _identifier;
 		duration = _duration / 1000.0f;
 		tween_type = IMTweenType(_tween_type);
+		preview = _preview;
 		@target = @_target;
 	}
 
-	void Update(){
-		if(finished){return;}
+	bool Update(){
 		timer += time_step;
 
 		if(timer >= duration){
 			timer = duration;
 			target.setAlpha(1.0f - ApplyTween((timer / duration), tween_type));
-			finished = true;
+			//Don't remove the UIELement when DHS is editing and previewing the transitions.
+			if(!preview){
+				level.SendMessage("drika_ui_remove_element " + identifier);
+			}
+			return true;
 		}
 
 		target.setAlpha(1.0f - ApplyTween((timer / duration), tween_type));
+		return false;
 	}
 
 	void Remove(){

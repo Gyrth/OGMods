@@ -111,41 +111,45 @@ class DrikaUIImage : DrikaUIElement{
 			index = atoi(instruction[1]);
 			SetZOrder();
 		}else if(instruction[0] == "add_update_behaviour"){
-			if(instruction[1] == "fade_in" || instruction[1] == "fade_out"){
+			string update_behaviour = instruction[1];
+			if(update_behaviour == "fade_in" || update_behaviour == "fade_out"){
 				int duration = atoi(instruction[2]);
 				int tween_type = atoi(instruction[3]);
-				string name = instruction[4];
+				string identifier = instruction[4];
+				bool preview = (instruction[7] == "true");
 
-				if(instruction[1] == "fade_out"){
-					fade_out_animations.insertLast(FadeOut(name, duration, tween_type, @image));
+				if(update_behaviour == "fade_out"){
+					fade_out_animations.insertLast(FadeOut(update_behaviour, identifier, duration, tween_type, @image, preview));
 				}else{
+					//Check if a fadeout made it completely transparent. Then just set to alpha to the color alpha.
+					if(image.getAlpha() == 0.0f){
+						image.setAlpha(color.a);
+					}
 					IMFadeIn new_fade(duration, IMTweenType(tween_type));
-					image.addUpdateBehavior(new_fade, name);
+					image.addUpdateBehavior(new_fade, update_behaviour + identifier);
 				}
-			}else if(instruction[1] == "move_in" || instruction[1] == "move_out"){
+			}else if(update_behaviour == "move_in" || update_behaviour == "move_out"){
 				int duration = atoi(instruction[2]);
 				int tween_type = atoi(instruction[3]);
-				string name = instruction[4];
+				string identifier = instruction[4];
 				vec2 offset(atoi(instruction[5]), atoi(instruction[6]));
 
-				if(instruction[1] == "move_out"){
+				if(update_behaviour == "move_out"){
 					IMMoveIn new_move(duration, offset * -1.0f, IMTweenType(tween_type));
-					image.addUpdateBehavior(new_move, name);
+					image.addUpdateBehavior(new_move, update_behaviour + identifier);
 
 					imGUI.update();
 
 					holder.setDisplacement(offset);
 				}else{
 					IMMoveIn new_move(duration, offset, IMTweenType(tween_type));
-					image.addUpdateBehavior(new_move, name);
+					image.addUpdateBehavior(new_move, update_behaviour + identifier);
 				}
-
 			}
 		}else if(instruction[0] == "remove_update_behaviour"){
-			string name = instruction[1];
-
+			string identifier = instruction[1];
 			for(uint i = 0; i < fade_out_animations.size(); i++){
-				if(fade_out_animations[i].name == name){
+				if(fade_out_animations[i].name == identifier){
 					fade_out_animations[i].Remove();
 					fade_out_animations.removeAt(i);
 					break;
@@ -153,8 +157,8 @@ class DrikaUIImage : DrikaUIElement{
 			}
 
 			holder.setDisplacement(vec2());
-			if(image.hasUpdateBehavior(name)){
-				image.removeUpdateBehavior(name);
+			if(image.hasUpdateBehavior(identifier)){
+				image.removeUpdateBehavior(identifier);
 				image.setDisplacement(vec2());
 			}
 		}

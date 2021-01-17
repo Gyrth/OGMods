@@ -770,7 +770,6 @@ void ReceiveMessage(string msg){
 			save_names.insertLast("\"" + join(checkpoints[i].name.split("\""), "\\\"") + "\"");
 		}
 		return_msg += join(save_names, " ");
-		Log(warning, return_msg);
 
 		hotspot_obj.ReceiveScriptMessage(return_msg);
 	}else if(token == "drika_write_file"){
@@ -1036,7 +1035,6 @@ void SaveCheckpoint(string save_name){
 }
 
 void LoadCheckpoint(string load_name){
-	Log(warning, "Load checkpoint " + load_name);
 	CheckpointData@ checkpoint = null;
 	if(load_name == "Latest"){
 		if(checkpoints.size() > 0){
@@ -1438,7 +1436,10 @@ void UpdateMusic(){
 
 void UpdateFadeOutAnimations(){
 	for(uint i = 0; i < fade_out_animations.size(); i++){
-		fade_out_animations[i].Update();
+		if(fade_out_animations[i].Update()){
+			fade_out_animations.removeAt(i);
+			i--;
+		}
 	}
 }
 

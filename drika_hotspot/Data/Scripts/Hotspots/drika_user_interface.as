@@ -20,8 +20,6 @@ class DrikaUserInterface : DrikaElement{
 	bool shadowed;
 	DrikaUserInterface@ font_element = null;
 	array<DrikaUserInterface@> text_elements;
-	bool out_timer_started;
-	float out_timer;
 
 	bool use_fade_in;
 	int fade_in_duration;
@@ -152,7 +150,7 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void AddUpdateBehavior(string name, int duration, int tween_type, ivec2 offset = ivec2()){
-		SendUIInstruction("add_update_behaviour", {name, duration, tween_type, name + ui_element_identifier, offset.x, offset.y});
+		SendUIInstruction("add_update_behaviour", {name, duration, tween_type, ui_element_identifier, offset.x, offset.y, show_editor});
 	}
 
 	void AddTextElement(DrikaUserInterface@ new_text_element){
@@ -533,7 +531,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			if(use_fade_in){
-				DrawSelectTween("Fade In", fade_in_tween_type, fade_in_duration);
+				DrawSelectTween("Fade In", fade_in_tween_type, fade_in_duration, ivec2());
 			}
 
 			//Move in UI-------------------------------------------------------------------------------------------------
@@ -549,7 +547,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			if(use_move_in){
-				DrawSelectTween("Move In", move_in_tween_type, move_in_duration);
+				DrawSelectTween("Move In", move_in_tween_type, move_in_duration, move_in_offset);
 			}
 
 			//Fade out UI-------------------------------------------------------------------------------------------------
@@ -565,7 +563,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			if(use_fade_out){
-				DrawSelectTween("Fade Out", fade_out_tween_type, fade_out_duration);
+				DrawSelectTween("Fade Out", fade_out_tween_type, fade_out_duration, ivec2());
 			}
 
 			//Move out UI-------------------------------------------------------------------------------------------------
@@ -581,12 +579,12 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 
 			if(use_move_out){
-				DrawSelectTween("Move Out", move_out_tween_type, move_out_duration);
+				DrawSelectTween("Move Out", move_out_tween_type, move_out_duration, move_out_offset);
 			}
 		}
 	}
 
-	void DrawSelectTween(string name, int &inout tween_type, int &inout duration){
+	void DrawSelectTween(string name, int &inout tween_type, int &inout duration, ivec2 &inout offset){
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text(name + " Duration");
 		ImGui_NextColumn();
@@ -609,7 +607,6 @@ class DrikaUserInterface : DrikaElement{
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
 
-
 		if(ImGui_BeginCombo("##" + name + " Tween Type", tween_types[tween_type], ImGuiComboFlags_HeightRegular)){
 			for(uint i = 0; i < tween_types.size(); i++){
 				if(ImGui_Selectable(tween_types[i], tween_type == int(i))){
@@ -628,6 +625,23 @@ class DrikaUserInterface : DrikaElement{
 
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
+
+		if(name.findFirst("Move") != -1){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text(name + " Offset");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_DragInt2("##" + name + " Offset", offset)){
+				SendRemoveUpdatebehaviour();
+				if(name.findFirst("In") != -1){
+					SendInUpdateBehaviour();
+				}else{
+					SendOutUpdateBehaviour();
+				}
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+		}
 	}
 
 	void StartEdit(){
@@ -639,17 +653,12 @@ class DrikaUserInterface : DrikaElement{
 	bool AddUIElement(){
 		if(ui_function == ui_clear){
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
-			bool all_done = true;
 			for(uint i = 0; i < target_elements.size(); i++){
 				//Make sure the fonts are still available when cleaing the screen.
 				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text){
-					if(!target_elements[i].RequestRemoveUIElement()){
-						all_done = false;
-					}
+					target_elements[i].RequestRemoveUIElement();
 				}
 			}
-
-			return all_done;
 		}else if(ui_function == ui_image){
 			if(!ui_element_added){
 				JSONValue data = GetSaveData();
@@ -759,33 +768,19 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
-	bool RequestRemoveUIElement(){
+	void RequestRemoveUIElement(){
 		if(ui_element_added){
 			if(ui_function == ui_image || ui_function == ui_text){
-				if(!out_timer_started && (use_fade_out || use_move_out)){
-					if(use_fade_out){
-						out_timer = fade_out_duration / 1000.0f;
-					}
-					if(use_move_out){
-						//Pick the longest duration so the wait is correct before continuing.
-						out_timer = max(out_timer, float(move_out_duration / 1000.0f));
-					}
+				if(use_fade_out || use_move_out){
 					SendOutUpdateBehaviour();
-					out_timer_started = true;
-				}else{
-					out_timer -= time_step;
-					if(out_timer <= 0.0f){
-						SendRemoveUpdatebehaviour();
-						RemoveUIElement();
-						out_timer_started = false;
-						out_timer = 0.0f;
-						return true;
+					if(!show_editor){
+						ui_element_added = false;
 					}
+				}else{
+					RemoveUIElement();
 				}
-				return false;
 			}
 		}
-		return true;
 	}
 
 	void Delete(){
