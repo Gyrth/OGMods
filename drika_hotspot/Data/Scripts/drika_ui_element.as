@@ -100,11 +100,13 @@ class AnimatedImage{
 	float timer;
 	int image_index;
 	float speed;
+	float previous_ui_time;
 
 	AnimatedImage(string _image_path, IMImage@ _image, float _speed){
 		image_path = _image_path;
 		@image = @_image;
 		speed = _speed;
+		previous_ui_time = ui_time;
 
 		array<string> split_path = image_path.split("_");
 		if(split_path.size() >= 2){
@@ -155,7 +157,10 @@ class AnimatedImage{
 
 	void Update(){
 		if(valid){
-			timer += time_step;
+			float step = (ui_time - previous_ui_time);
+			timer += step;
+			previous_ui_time = ui_time;
+
 			if(timer > (1.0f / max(0.001, speed))){
 				timer = 0.0f;
 				image_index += 1;
