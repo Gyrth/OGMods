@@ -222,10 +222,21 @@ class DrikaUIImage : DrikaUIElement{
 
 	void SetNewImage(){
 		vec2 old_size = image.getSize();
+		if(animated_image !is null){
+			animated_image.Delete();
+			@animated_image = null;
+		}
+
 		size = ivec2(int(old_size.x), int(old_size.y));
 		image.setImageFile(image_path);
 		ReadMaxOffsets();
+		size_offset = max_offset;
 		SetSize();
+		SetOffset();
+
+		if(animated){
+			@animated_image = AnimatedImage(image_path, image, animation_speed);
+		}
 	}
 
 	void UpdateContent(){
