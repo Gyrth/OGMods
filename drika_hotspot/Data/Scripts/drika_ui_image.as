@@ -18,6 +18,8 @@ class DrikaUIImage : DrikaUIElement{
 	ivec2 size_offset;
 	bool animated;
 	FadeOut@ fade_out;
+	AnimatedImage@ animated_image;
+	float animation_speed;
 
 	ivec2 max_offset(0, 0);
 
@@ -32,6 +34,7 @@ class DrikaUIImage : DrikaUIElement{
 		size = GetJSONIVec2(params, "size", ivec2());
 		index = GetJSONInt(params, "index", 0);
 		animated = GetJSONBool(params, "animated", false);
+		animation_speed = GetJSONFloat(params, "animation_speed", 60.0);
 
 		position_offset = GetJSONIVec2(params, "position_offset", ivec2());
 		size_offset = GetJSONIVec2(params, "size_offset", ivec2());
@@ -75,6 +78,10 @@ class DrikaUIImage : DrikaUIElement{
 		SetOffset();
 		imGUI.update();
 		UpdateContent();
+
+		if(animated){
+			@animated_image = AnimatedImage(image_path, image, animation_speed);
+		}
 	}
 
 	void Update(){
@@ -82,6 +89,10 @@ class DrikaUIImage : DrikaUIElement{
 			if(fade_out.Update()){
 				@fade_out = null;
 			}
+		}
+
+		if(animated_image !is null){
+			animated_image.Update();
 		}
 	}
 
@@ -132,8 +143,6 @@ class DrikaUIImage : DrikaUIElement{
 				if(update_behaviour == "fade_out"){
 					@fade_out = FadeOut(update_behaviour, identifier, duration, tween_type, @image, preview, color.a);
 				}else{
-					//Check if a fadeout made it completely transparent. Then just set to alpha to the color alpha.
-					image.setAlpha(color.a);
 					IMFadeIn new_fade(duration, IMTweenType(tween_type));
 					image.addUpdateBehavior(new_fade, update_behaviour + identifier);
 				}
@@ -159,19 +168,35 @@ class DrikaUIImage : DrikaUIElement{
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string identifier = instruction[1];
 
-			if(fade_out !is null && identifier == fade_out.name + fade_out.identifier){
-				level.SendMessage("drika_ui_remove_element " + ui_element_identifier);
-				@fade_out = null;
-				return;
-			}
-
 			holder.setDisplacement(vec2());
 			if(image.hasUpdateBehavior(identifier)){
 				image.removeUpdateBehavior(identifier);
 				image.setDisplacement(vec2());
 			}
+
+			if(fade_out !is null && identifier == fade_out.name + fade_out.identifier){
+				if(fade_out.preview){
+					//Check if a fadeout made it completely transparent. Then just set to alpha to the color alpha.
+					image.setAlpha(color.a);
+				}else{
+					level.SendMessage("drika_ui_remove_element " + ui_element_identifier);
+				}
+				@fade_out = null;
+				return;
+			}
 		}else if(instruction[0] == "set_animated"){
 			animated = instruction[1] == "true";
+			if(animated){
+				@animated_image = AnimatedImage(image_path, image, animation_speed);
+			}else{
+				animated_image.Delete();
+				@animated_image = null;
+			}
+		}else if(instruction[0] == "set_animation_speed"){
+			if(animated_image !is null){
+				animation_speed = atof(instruction[1]);
+				animated_image.speed = animation_speed;
+			}
 		}
 		UpdateContent();
 	}

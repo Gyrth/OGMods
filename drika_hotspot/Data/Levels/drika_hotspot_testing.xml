@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="8.21215" t1="4.06141" t2="-0.717127" s0="1" s1="1" s2="1" q0="0.333699" q1="0.00418103" q2="-0.00148004" q3="0.942669" euler_x="0.680456" euler_y="0.00887055" euler_z="0" id="1">
+    <CameraObject t0="8.20607" t1="4.61673" t2="-0.0310171" s0="1" s1="1" s2="1" q0="0.333699" q1="0.00418103" q2="-0.00148004" q3="0.942669" euler_x="0.680456" euler_y="0.00887055" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.16529" t1="-3.42134" t2="1.76417" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -97,44 +97,6 @@
             <Color label="Rope" channel="1" red="1" green="1" blue="1" />
             <Color label="Fur" channel="2" red="0.99999" green="1" blue="0.99999" />
         </Palette>
-        <EnvObjectAttachments>
-            <EnvObjectAttachment>
-                <BoneConnect bone_id="51" num_connections="1" m0="-0.98407" m1="1.14595e-05" m2="0.177782" m3="0" m4="-2.57224e-06" m5="1" m6="-7.86959e-05" m7="0" m8="-0.177782" m9="-7.78996e-05" m10="-0.98407" m11="0" m12="-0.551012" m13="-0.775802" m14="0.118139" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-            </EnvObjectAttachment>
-            <EnvObjectAttachment>
-                <BoneConnect bone_id="44" num_connections="1" m0="-0.98407" m1="6.68271e-06" m2="0.177783" m3="0" m4="0" m5="1" m6="-3.60143e-05" m7="0" m8="-0.177783" m9="-3.539e-05" m10="-0.98407" m11="0" m12="0.541427" m13="-0.77662" m14="0.0545888" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-            </EnvObjectAttachment>
-            <EnvObjectAttachment>
-                <BoneConnect bone_id="51" num_connections="1" m0="-0.250755" m1="0.968052" m2="-7.85946e-05" m3="0" m4="-0.968052" m5="-0.250755" m6="-3.18146e-06" m7="0" m8="-2.27877e-05" m9="7.52857e-05" m10="1" m11="0" m12="-0.311647" m13="-0.819444" m14="0.0262702" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-            </EnvObjectAttachment>
-            <EnvObjectAttachment>
-                <BoneConnect bone_id="44" num_connections="1" m0="0.241274" m1="0.970458" m2="-2.90564e-05" m3="0" m4="-0.970458" m5="0.241274" m6="-3.02753e-05" m7="0" m8="-2.23704e-05" m9="3.55026e-05" m10="1" m11="0" m12="0.326268" m13="-0.713612" m14="0.0687623" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
-            </EnvObjectAttachment>
-        </EnvObjectAttachments>
-        <EnvObject s0="0.25" s1="0.25" s2="0.25" id="357" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-            <parameters />
-        </EnvObject>
-        <EnvObject s0="0.25" s1="0.25" s2="0.25" id="358" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-            <parameters />
-        </EnvObject>
-        <EnvObject s0="0.25" s1="0.25" s2="0.25" id="352" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-            <parameters />
-        </EnvObject>
-        <EnvObject s0="0.25" s1="0.25" s2="0.25" id="359" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-            <parameters />
-        </EnvObject>
     </ActorObject>
     <EnvObject t0="31.1054" t1="0.485653" t2="-7.62564" s0="1.7413" s1="1.7413" s2="1.7413" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
         <parameters />
@@ -695,7 +657,7 @@
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
             <parameter name="Run in EditorMode" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier_type&quot;:10,&quot;reference_string&quot;:&quot;&quot;},{&quot;check_all&quot;:false,&quot;check_all_known&quot;:false,&quot;continue_if_false&quot;:false,&quot;equals&quot;:true,&quot;function&quot;:23,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;state_check&quot;:14},{&quot;amount&quot;:2,&quot;connect_particles&quot;:false,&quot;function&quot;:5,&quot;particle_path&quot;:&quot;Data/Particles/heavydirt.xml&quot;,&quot;placeholder_id&quot;:352,&quot;spread&quot;:0.20500001311302185,&quot;tint&quot;:[0.27450978755950928,0.18878483772277832,0.12110724300146103],&quot;use_blood_tint&quot;:false,&quot;velocity&quot;:5},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;placeholder_id&quot;:357,&quot;play_sound_method&quot;:1,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0},{&quot;check_all&quot;:false,&quot;check_all_known&quot;:false,&quot;continue_if_false&quot;:false,&quot;equals&quot;:true,&quot;function&quot;:23,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;state_check&quot;:15},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;placeholder_id&quot;:358,&quot;play_sound_method&quot;:1,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0},{&quot;amount&quot;:2,&quot;connect_particles&quot;:false,&quot;function&quot;:5,&quot;particle_path&quot;:&quot;Data/Particles/heavydirt.xml&quot;,&quot;placeholder_id&quot;:359,&quot;spread&quot;:0.21700000762939453,&quot;tint&quot;:[0.27450978755950928,0.18878483772277832,0.12110724300146103],&quot;use_blood_tint&quot;:false,&quot;velocity&quot;:5},{&quot;function&quot;:7,&quot;line&quot;:1}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier_type&quot;:10,&quot;reference_string&quot;:&quot;&quot;},{&quot;animated&quot;:true,&quot;color&quot;:[1,1,1,1],&quot;function&quot;:36,&quot;image_path&quot;:&quot;Textures/braid_01.png&quot;,&quot;keep_aspect&quot;:true,&quot;position&quot;:[915,435],&quot;position_offset&quot;:[0,0],&quot;rotation&quot;:0,&quot;size&quot;:[625,625],&quot;size_offset&quot;:[0,0],&quot;ui_element_identifier&quot;:&quot;1791&quot;,&quot;ui_function&quot;:1,&quot;use_fade_in&quot;:false,&quot;use_fade_out&quot;:false,&quot;use_move_in&quot;:false,&quot;use_move_out&quot;:false}]}&#x0A;' />
             <parameter name="Show UI Grid" type="int" val="1" />
             <parameter name="Transform Relative" type="int" val="0" />
             <parameter name="UI Snap Scale" type="int" val="20" />

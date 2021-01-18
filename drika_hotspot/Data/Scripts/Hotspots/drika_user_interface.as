@@ -21,6 +21,7 @@ class DrikaUserInterface : DrikaElement{
 	DrikaUserInterface@ font_element = null;
 	array<DrikaUserInterface@> text_elements;
 	bool animated;
+	float animation_speed;
 
 	bool use_fade_in;
 	int fade_in_duration;
@@ -65,6 +66,7 @@ class DrikaUserInterface : DrikaElement{
 		font_color = GetJSONVec4(params, "font_color", vec4(1.0, 1.0, 1.0, 1.0));
 		shadowed = GetJSONBool(params, "shadowed", true);
 		animated = GetJSONBool(params, "animated", false);
+		animation_speed = GetJSONFloat(params, "animation_speed", 60.0);
 
 		use_fade_in = GetJSONBool(params, "use_fade_in", false);
 		fade_in_duration = GetJSONInt(params, "fade_in_duration", 1000);
@@ -264,6 +266,7 @@ class DrikaUserInterface : DrikaElement{
 			data["position_offset"].append(position_offset.x);
 			data["position_offset"].append(position_offset.y);
 			data["animated"] = JSONValue(animated);
+			data["animation_speed"] = JSONValue(animation_speed);
 		}else if(ui_function == ui_text){
 			data["rotation"] = JSONValue(rotation);
 			data["position"] = JSONValue(JSONarrayValue);
@@ -346,10 +349,22 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Animated");
 			ImGui_NextColumn();
-			if(ImGui_Checkbox("##Animated", keep_aspect)){
+			if(ImGui_Checkbox("##Animated", animated)){
 				SendUIInstruction("set_animated", {animated});
 			}
 			ImGui_NextColumn();
+
+			if(animated){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Animation Speed");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_SliderFloat("###Animation Speed", animation_speed, 0.0, 60.0f, "%.0f")){
+					SendUIInstruction("set_animation_speed", {animation_speed});
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+			}
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position");

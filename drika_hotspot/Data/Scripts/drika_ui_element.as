@@ -62,16 +62,114 @@ class FadeOut{
 		previous_ui_time = ui_time;
 
 		if(timer >= duration){
-			timer = duration;
-			target.setAlpha(mix(starting_alpha, 0.0f, ApplyTween((timer / duration), tween_type)));
 			//Don't remove the UIELement when DHS is editing and previewing the transitions.
-			if(!preview){
+			if(preview){
+				timer = duration;
+				target.setAlpha(mix(starting_alpha, 0.0f, ApplyTween((timer / duration), tween_type)));
+				return false;
+			}else{
 				level.SendMessage("drika_ui_remove_element " + identifier);
+				return true;
 			}
-			return true;
 		}
 
 		target.setAlpha(mix(starting_alpha, 0.0f, ApplyTween((timer / duration), tween_type)));
 		return false;
+	}
+
+	bool Remove(){
+		if(preview){
+			//Check if a fadeout made it completely transparent. Then just set to alpha to the color alpha.
+			target.setAlpha(starting_alpha);
+			return false;
+		}else{
+			return true;
+		}
+	}
+}
+
+class AnimatedImage{
+	string image_path;
+	int range_min;
+	int range_max;
+	IMImage@ image;
+	bool valid;
+	string base_path;
+	string extention;
+	int integer_padding;
+	float timer;
+	int image_index;
+	float speed;
+
+	AnimatedImage(string _image_path, IMImage@ _image, float _speed){
+		image_path = _image_path;
+		@image = @_image;
+		speed = _speed;
+
+		array<string> split_path = image_path.split("_");
+		if(split_path.size() >= 2){
+			for(int i = 0; i < int(split_path.size()) - 1; i++){
+				base_path += split_path[i];
+			}
+			base_path += "_";
+
+			array<string> extention_split = split_path[split_path.size() - 1].split(".");
+			extention = "." + extention_split[extention_split.size() - 1];
+
+			//Animated files can either start with 0 or 1, check for both.
+			for(int i = 0; i < 2; i++){
+				for(int j = 1; j <= 5; j++){
+
+					integer_padding = j;
+					string check_path = "Data/" + base_path + ApplyPadding(i) + extention;
+					if(FileExists(check_path)){
+						Log(warning, "Valid " + check_path);
+						range_min = i;
+						//Now find the highest number of frame.
+						for(int k = range_min; k <= 500; k++){
+							check_path = "Data/" + base_path + ApplyPadding(k) + extention;
+							if(!FileExists(check_path)){
+								range_max = k - 1;
+								valid = true;
+								image_index = range_min;
+								return;
+							}
+						}
+						return;
+					}
+				}
+			}
+		}
+		Log(error, "Invalid image for animation : " + image_path);
+	}
+
+	string ApplyPadding(int value){
+		string out_value;
+		out_value = formatInt(value, '0', integer_padding);
+		return out_value;
+	}
+
+	void Delete(){
+		SetNewImage(image_path);
+	}
+
+	void Update(){
+		if(valid){
+			timer += time_step;
+			if(timer > (1.0f / max(0.001, speed))){
+				timer = 0.0f;
+				image_index += 1;
+				if(image_index > range_max){
+					image_index = range_min;
+				}
+				SetNewImage(base_path + ApplyPadding(image_index) + extention);
+			}
+		}
+	}
+
+	void SetNewImage(string new_path){
+		vec2 old_size = image.getSize();
+		image.setImageFile(new_path);
+		image.setSize(old_size);
 	}
 }

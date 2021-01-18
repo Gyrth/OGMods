@@ -88,12 +88,6 @@ class DrikaUIText : DrikaUIElement{
 					}
 				}else{
 					for(uint i = 0; i < text_elements.size(); i++){
-						//Check if a fadeout made it completely transparent. Then just set to alpha to the color alpha.
-						if(font_element !is null){
-							text_elements[i].setAlpha(font_element.font_color.a);
-						}else{
-							text_elements[i].setAlpha(default_font.color.a);
-						}
 						IMFadeIn new_fade(duration, IMTweenType(tween_type));
 						text_elements[i].addUpdateBehavior(new_fade, update_behaviour + "2");
 					}
@@ -122,14 +116,6 @@ class DrikaUIText : DrikaUIElement{
 		}else if(instruction[0] == "remove_update_behaviour"){
 			string identifier = instruction[1];
 
-			for(uint i = 0; i < fade_out_animations.size(); i++){
-				if(identifier == fade_out_animations[i].name + fade_out_animations[i].identifier){
-					level.SendMessage("drika_ui_remove_element " + ui_element_identifier);
-					fade_out_animations.resize(0);
-					return;
-				}
-			}
-
 			if(holder.hasUpdateBehavior(identifier)){
 				holder.removeUpdateBehavior(identifier);
 			}
@@ -139,6 +125,36 @@ class DrikaUIText : DrikaUIElement{
 				if(text_elements[i].hasUpdateBehavior(identifier)){
 					text_elements[i].removeUpdateBehavior(identifier);
 				}
+			}
+
+			bool remove_element = false;
+			bool skip = false;
+
+			for(uint i = 0; i < fade_out_animations.size(); i++){
+
+				if(identifier == fade_out_animations[i].name + fade_out_animations[i].identifier){
+					if(fade_out_animations[i].preview){
+						//Check if a fadeout made it completely transparent. Then just set to alpha to the color alpha.
+						if(font_element !is null){
+							fade_out_animations[i].target.setAlpha(font_element.font_color.a);
+						}else{
+							fade_out_animations[i].target.setAlpha(default_font.color.a);
+						}
+					}else{
+						remove_element = true;
+					}
+					fade_out_animations.removeAt(i);
+					i--;
+				}
+				skip = true;
+			}
+
+			if(remove_element){
+				level.SendMessage("drika_ui_remove_element " + ui_element_identifier);
+			}
+
+			if(skip){
+				return;
 			}
 		}
 		UpdateContent();
