@@ -138,6 +138,7 @@ class DrikaGoToLine : DrikaElement{
 			}
 		}else{
 			array<string> line_indexes;
+			line_indexes.insertLast("" + line_element.GetTargetLineIndex());
 			if(choice_line2){line_indexes.insertLast("" + line_element_2.GetTargetLineIndex());}
 			if(choice_line3){line_indexes.insertLast("" + line_element_3.GetTargetLineIndex());}
 			if(choice_line4){line_indexes.insertLast("" + line_element_4.GetTargetLineIndex());}
