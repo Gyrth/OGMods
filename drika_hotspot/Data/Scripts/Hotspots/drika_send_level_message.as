@@ -33,7 +33,7 @@ class DrikaSendLevelMessage : DrikaElement{
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
 
 		ImGui_PushItemWidth(second_column_width);
-		if(ImGui_InputText("###Level Message", message, 64)){
+		if(ImGui_InputText("###Level Message", message, 128)){
 			SetDisplayMessage();
 		}
 		ImGui_PopItemWidth();

@@ -76,7 +76,7 @@ class DrikaSendCharacterMessage : DrikaElement{
 		ImGui_Text("Message");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
-		if(ImGui_InputText("##Message", message, 64)){
+		if(ImGui_InputText("##Message", message, 128)){
 			SetDisplayMessage();
 		}
 		ImGui_PopItemWidth();
@@ -91,9 +91,6 @@ class DrikaSendCharacterMessage : DrikaElement{
 
 	void SetDisplayMessage(){
 		display_message = join(message.split("\n"), "");
-		if(display_message.length() > 30){
-			display_message = display_message.substr(0, 30);
-		}
 	}
 
 	void DrawEditing(){
