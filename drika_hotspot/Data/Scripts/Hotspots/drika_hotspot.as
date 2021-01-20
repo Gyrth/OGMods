@@ -581,15 +581,13 @@ void DrawEditor(){
 		ImGui_Begin("Drika Hotspot" + (show_name?" - " + display_name:" " + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, ImGuiWindowFlags_MenuBar);
 		ImGui_PopStyleVar();
 
-		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
-		ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
+		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
+		ImGui_SetNextWindowSize(vec2(900.0f, 450.0f), ImGuiSetCond_FirstUseEver);
 
-        if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
-			ImGui_BeginChild("Element Settings", vec2(-1, -1));
+		if(ImGui_BeginPopupModal("Settings###Edit", 0)){
 			ImGui_PushItemWidth(-1);
 			GetCurrentElement().DrawSettings();
 			ImGui_PopItemWidth();
-			ImGui_EndChild();
 
 			if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
 				GetCurrentElement().ApplySettings();
@@ -697,7 +695,7 @@ void DrawEditor(){
 			ImGui_EndMenuBar();
 		}
 
-		if(!ImGui_IsPopupOpen("Edit") && !ImGui_IsPopupOpen("Palette") && !ImGui_IsPopupOpen("Quick Launch") && ImGui_IsWindowFocused()){
+		if(!ImGui_IsPopupOpen("###Edit") && !ImGui_IsPopupOpen("Palette") && !ImGui_IsPopupOpen("Quick Launch") && ImGui_IsWindowFocused()){
 			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
 				if(current_line > 0){
 					multi_select = {current_line - 1};
@@ -723,7 +721,7 @@ void DrawEditor(){
 					if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Enter))){
 						if(GetCurrentElement().has_settings){
 							GetCurrentElement().StartSettings();
-							ImGui_OpenPopup("Edit");
+							ImGui_OpenPopup("###Edit");
 						}
 					}else if(ImGui_IsWindowHovered() && ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_X))){
 						DeleteSelectedFunctions();
@@ -766,7 +764,7 @@ void DrawEditor(){
 				if(ImGui_IsMouseDoubleClicked(0)){
 					if(drika_elements[drika_indexes[i]].has_settings){
 						GetCurrentElement().StartSettings();
-						ImGui_OpenPopup("Edit");
+						ImGui_OpenPopup("###Edit");
 					}
 				}else{
 					if(GetInputDown(0, "lshift")){
@@ -1641,23 +1639,37 @@ void AddDialogueActor(MovementObject@ char){
 
 	if(dialogue_actor_ids.find(character_id) == -1){
 		dialogue_actor_ids.insertLast(character_id);
-		vec3 char_position = char.position;
+		vec3 char_position;
+		float char_rotation;
 
-		RiggedObject@ rigged_object = char.rigged_object();
-		Skeleton@ skeleton = rigged_object.skeleton();
-		// Get relative chest transformation
-		int chest_bone = skeleton.IKBoneStart("torso");
-		BoneTransform chest_frame_matrix = rigged_object.GetFrameMatrix(chest_bone);
-		quaternion quat = chest_frame_matrix.rotation;
-		vec3 facing = Mult(quat, vec3(1,0,0));
-		float rot = atan2(facing.x, facing.z) * 180.0f / PI;
-		float char_rotation = floor(rot + 0.5f);
+		//Use the spawn cube if the character has just been Reset();
+		if(char.GetIntVar("updated") != 0){
+			char_position = char.position;
+			RiggedObject@ rigged_object = char.rigged_object();
+			Skeleton@ skeleton = rigged_object.skeleton();
+			// Get relative chest transformation
+			int chest_bone = skeleton.IKBoneStart("torso");
+			BoneTransform chest_frame_matrix = rigged_object.GetFrameMatrix(chest_bone);
+			quaternion quat = chest_frame_matrix.rotation;
+			vec3 facing = Mult(quat, vec3(1,0,0));
+			float rot = atan2(facing.x, facing.z) * 180.0f / PI;
+			char_rotation = floor(rot + 0.5f);
+		}else{
+			Object@ char_obj = ReadObjectFromID(char.GetID());
+			char_position = char_obj.GetTranslation();
+			vec3 facing = Mult(char_obj.GetRotation(), vec3(-1,0,0));
+			float rot = atan2(facing.x, facing.z) * 180.0f / PI;
+			char_rotation = floor(rot + 0.5f);
+		}
 
 		char.ReceiveScriptMessage("set_dialogue_control true");
 		char.ReceiveScriptMessage("set_dialogue_position " + char_position.x + " " + char_position.y + " " + char_position.z);
 		char.ReceiveScriptMessage("set_rotation " + char_rotation);
-		string no_character_collision = "reset_no_collide = " + (the_time + 1000.0f) + ";";
-		char.Execute(no_character_collision);
+		char.Execute("FixDiscontinuity();");
+		if(!char.static_char){
+			string no_character_collision = "reset_no_collide = " + (the_time + 1000.0f) + ";";
+			char.Execute(no_character_collision);
+		}
 		/* char.rigged_object().anim_client().Reset(); */
 	}
 }

@@ -1262,12 +1262,19 @@ class DrikaDialogue : DrikaElement{
 			SetActorPosition();
 			return true;
 		}else if(dialogue_function == set_actor_animation){
+			//Wait for the next update if the character has just been Reset();
+			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				if(targets[i].GetIntVar("updated") == 0){
+					return false;
+				}
+			}
+
 			if(wait_anim_end){
 				if(!triggered){
 					SetActorAnimation();
 					triggered = true;
 				}else{
-					array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 					for(uint i = 0; i < targets.size(); i++){
 						if(targets[i].GetBoolVar("in_animation")){
 							return false;

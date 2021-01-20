@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="7.4847" t1="0.170787" t2="-1.11927" s0="1" s1="1" s2="1" q0="0.154426" q1="-0.345493" q2="0.0577523" q3="0.923825" euler_x="0.331256" euler_y="-0.715755" euler_z="0" id="1">
+    <CameraObject t0="7.97183" t1="0.280581" t2="-1.13785" s0="1" s1="1" s2="1" q0="0.192949" q1="-0.519635" q2="0.121773" q3="0.82336" euler_x="0.46038" euler_y="-1.12597" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.16529" t1="-3.42134" t2="1.76417" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -290,7 +290,7 @@
             <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
             <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
             <parameter name="Species" type="string" val="rabbit" />
-            <parameter name="Static" type="int" val="1" />
+            <parameter name="Static" type="int" val="0" />
             <parameter name="Stick To Nav Mesh" type="int" val="0" />
             <parameter name="Teams" type="string" val="guard, Team B, turner" />
             <parameter name="Throw Counter Probability" type="float" val="0.4" />
@@ -623,6 +623,9 @@
     <EnvObject t0="59.4756" t1="6.83865" t2="-3.41865" s0="0.571114" s1="4.66101" s2="11.5756" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
+    <EnvObject name="AIControl Helper" t0="4.75878" t1="-2.32676" t2="-0.668249" s0="0.25" s1="0.25" s2="0.25" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject t0="26.0346" t1="-2.7999" t2="6.13049" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="149" color_r="0.186021" color_g="0" color_b="0.282353" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
@@ -656,8 +659,8 @@
     <Hotspot t0="4.75878" t1="-1.64159" t2="-7.78291" s0="0.428653" s1="0.428653" s2="0.428653" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Run in EditorMode" type="int" val="0" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:true,&quot;anim_mobile&quot;:true,&quot;anim_super_mobile&quot;:true,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_animation&quot;:&quot;Data/Animations/r_dialogue_2handneck.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:false}]}&#x0A;' />
+            <parameter name="Run in EditorMode" type="int" val="1" />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;ai_goal&quot;:2,&quot;function&quot;:35,&quot;identifier&quot;:51,&quot;identifier_ai_target&quot;:-1,&quot;identifier_type&quot;:4,&quot;identifier_type_ai_target&quot;:0,&quot;placeholder_id&quot;:148},{&quot;duration&quot;:1000,&quot;function&quot;:2},{&quot;dialogue_control&quot;:true,&quot;dialogue_function&quot;:13,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4},{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:true,&quot;anim_mobile&quot;:false,&quot;anim_super_mobile&quot;:false,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_animation&quot;:&quot;Data/Animations/r_dialogue_2handneck.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:false}]}&#x0A;' />
             <parameter name="Show UI Grid" type="int" val="1" />
             <parameter name="Transform Relative" type="int" val="0" />
             <parameter name="UI Snap Scale" type="int" val="20" />
