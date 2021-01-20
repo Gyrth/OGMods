@@ -799,32 +799,33 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Text("Animation");
 			ImGui_NextColumn();
 
-			ImGui_Checkbox("From Start", anim_from_start);
+			if(ImGui_Checkbox("From Start", anim_from_start)){
+				SetActorAnimation();
+			}
 			ImGui_SameLine();
-			ImGui_Checkbox("Mirrored", anim_mirrored);
+			if(ImGui_Checkbox("Mirrored", anim_mirrored)){
+				SetActorAnimation();
+			}
 			ImGui_SameLine();
-			ImGui_Checkbox("Mobile", anim_mobile);
+			if(ImGui_Checkbox("Mobile", anim_mobile)){
+				SetActorAnimation();
+			}
 			ImGui_SameLine();
-			ImGui_Checkbox("Super Mobile", anim_super_mobile);
+			if(ImGui_Checkbox("Super Mobile", anim_super_mobile)){
+				SetActorAnimation();
+			}
 			ImGui_SameLine();
-			ImGui_Checkbox("Use IK", use_ik);
+			if(ImGui_Checkbox("Use IK", use_ik)){
+				SetActorAnimation();
+			}
 			ImGui_SameLine();
 			ImGui_Checkbox("Wait Animation End", wait_anim_end);
 
-			ImGui_BeginChild("animation_settings_ui", vec2(0, 20), false, ImGuiWindowFlags_AlwaysAutoResize);
-			ImGui_Columns(2, false);
-			ImGui_SetColumnWidth(0, 150);
-
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Transition Speed");
-			ImGui_NextColumn();
-			float second_settings_column_width = ImGui_GetContentRegionAvailWidth();
-			ImGui_PushItemWidth(second_settings_column_width);
-			ImGui_SliderFloat("##Transition Speed", transition_speed, 0.0, 10.0, "%.1f");
-			ImGui_PopItemWidth();
-			ImGui_EndChild();
+			if(ImGui_Button("Custom...")){
 
-			ImGui_AlignTextToFramePadding();
+			}
+			ImGui_SameLine();
 			ImGui_SetTextBuf(search_buffer);
 			ImGui_Text("Search");
 			ImGui_SameLine();
@@ -1139,7 +1140,8 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void AddCategory(string category, array<string> items){
-		if(current_animations.size() < 1){
+		//Skip the category if the animation list is empty.
+		if(items.size() < 1){
 			return;
 		}
 		if(ImGui_TreeNodeEx(category, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
@@ -1157,6 +1159,10 @@ class DrikaDialogue : DrikaElement{
 		if(ImGui_Selectable(name, is_selected)){
 			target_actor_animation = name;
 			SetActorAnimation();
+		}
+
+		if(ImGui_IsWindowAppearing() && is_selected){
+			ImGui_SetScrollHere(0.5);
 		}
 	}
 

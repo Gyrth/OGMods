@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="8.20601" t1="4.62239" t2="-0.0240209" s0="1" s1="1" s2="1" q0="0.333699" q1="0.00418103" q2="-0.00148004" q3="0.942669" euler_x="0.680456" euler_y="0.00887055" euler_z="0" id="1">
+    <CameraObject t0="7.4847" t1="0.170787" t2="-1.11927" s0="1" s1="1" s2="1" q0="0.154426" q1="-0.345493" q2="0.0577523" q3="0.923825" euler_x="0.331256" euler_y="-0.715755" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.16529" t1="-3.42134" t2="1.76417" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -251,7 +251,7 @@
     <EnvObject t0="-49.0925" t1="0.820754" t2="46.4075" s0="0.785062" s1="5.81264" s2="30.7675" q0="-0.183013" q1="0.683013" q2="-0.183013" q3="0.683013" euler_x="-1.5708" euler_y="1.0472" euler_z="-1.5708" id="50" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="13.1589" t1="-1.63192" t2="-4.53016" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="51" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
+    <ActorObject t0="4.71172" t1="-1.75252" t2="-4.19163" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="51" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
             <parameter name="Attack Damage" type="float" val="1" />
@@ -290,7 +290,7 @@
             <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
             <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
             <parameter name="Species" type="string" val="rabbit" />
-            <parameter name="Static" type="int" val="0" />
+            <parameter name="Static" type="int" val="1" />
             <parameter name="Stick To Nav Mesh" type="int" val="0" />
             <parameter name="Teams" type="string" val="guard, Team B, turner" />
             <parameter name="Throw Counter Probability" type="float" val="0.4" />
@@ -656,8 +656,8 @@
     <Hotspot t0="4.75878" t1="-1.64159" t2="-7.78291" s0="0.428653" s1="0.428653" s2="0.428653" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
-            <parameter name="Run in EditorMode" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier_type&quot;:10,&quot;reference_string&quot;:&quot;&quot;},{&quot;animated&quot;:true,&quot;animation_speed&quot;:30,&quot;color&quot;:[1,0,0,0.45490196347236633],&quot;fade_in_duration&quot;:1000,&quot;fade_in_tween_type&quot;:0,&quot;fade_out_duration&quot;:1000,&quot;fade_out_tween_type&quot;:0,&quot;function&quot;:36,&quot;image_path&quot;:&quot;Textures/braid_01.png&quot;,&quot;keep_aspect&quot;:true,&quot;move_in_duration&quot;:1000,&quot;move_in_offset&quot;:[100,100],&quot;move_in_tween_type&quot;:0,&quot;move_out_duration&quot;:1000,&quot;move_out_offset&quot;:[100,100],&quot;move_out_tween_type&quot;:0,&quot;position&quot;:[855,403],&quot;position_offset&quot;:[0,0],&quot;rotation&quot;:45,&quot;size&quot;:[685,685],&quot;size_offset&quot;:[0,0],&quot;ui_element_identifier&quot;:&quot;1791&quot;,&quot;ui_function&quot;:1,&quot;use_fade_in&quot;:true,&quot;use_fade_out&quot;:true,&quot;use_move_in&quot;:true,&quot;use_move_out&quot;:true}]}&#x0A;' />
+            <parameter name="Run in EditorMode" type="int" val="0" />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;anim_from_start&quot;:true,&quot;anim_mirrored&quot;:true,&quot;anim_mobile&quot;:true,&quot;anim_super_mobile&quot;:true,&quot;dialogue_function&quot;:3,&quot;function&quot;:33,&quot;identifier&quot;:51,&quot;identifier_type&quot;:4,&quot;target_actor_animation&quot;:&quot;Data/Animations/r_dialogue_2handneck.anm&quot;,&quot;transition_speed&quot;:3,&quot;use_ik&quot;:true,&quot;wait_anim_end&quot;:false}]}&#x0A;' />
             <parameter name="Show UI Grid" type="int" val="1" />
             <parameter name="Transform Relative" type="int" val="0" />
             <parameter name="UI Snap Scale" type="int" val="20" />
@@ -1191,55 +1191,6 @@
             <Color label="Pants" channel="2" red="1" green="1" blue="1" />
             <Color label="Spots" channel="3" red="1" green="1" blue="1" />
         </Palette>
-    </ActorObject>
-    <ActorObject t0="-5.21115" t1="-1.42138" t2="29.9068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="-1" euler_x="0" euler_y="0" euler_z="0" id="336" type_file="Data/Objects/IGF_Characters/IGF_GuardActor_reddy.xml" is_player="0">
-        <parameters>
-            <parameter name="Aggression" type="float" val="0.5" />
-            <parameter name="Attack Damage" type="float" val="1" />
-            <parameter name="Attack Knockback" type="float" val="1" />
-            <parameter name="Attack Speed" type="float" val="1" />
-            <parameter name="Block Follow-up" type="float" val="0.5" />
-            <parameter name="Block Skill" type="float" val="0.5" />
-            <parameter name="Cannot Be Disarmed" type="int" val="0" />
-            <parameter name="Character Scale" type="float" val="1" />
-            <parameter name="Damage Resistance" type="float" val="1" />
-            <parameter name="Ear Size" type="float" val="1" />
-            <parameter name="Fall Damage Multiplier" type="float" val="1" />
-            <parameter name="Fat" type="float" val="0.5" />
-            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
-            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
-            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
-            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
-            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
-            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
-            <parameter name="Ground Aggression" type="float" val="0.5" />
-            <parameter name="Jump - Air Control" type="float" val="3" />
-            <parameter name="Jump - Initial Velocity" type="float" val="5" />
-            <parameter name="Jump - Jump Sustain" type="float" val="5" />
-            <parameter name="Jump - Jump Sustain Boost" type="float" val="10" />
-            <parameter name="Knockout Shield" type="int" val="0" />
-            <parameter name="Left handed" type="int" val="0" />
-            <parameter name="Movement Speed" type="float" val="1" />
-            <parameter name="Muscle" type="float" val="0.5" />
-            <parameter name="No Look Around" type="int" val="0" />
-            <parameter name="Peripheral FOV distance" type="float" val="4" />
-            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
-            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
-            <parameter name="Species" type="string" val="rabbit" />
-            <parameter name="Static" type="int" val="0" />
-            <parameter name="Stick To Nav Mesh" type="int" val="0" />
-            <parameter name="Teams" type="string" val="guard" />
-            <parameter name="Throw Counter Probability" type="float" val="0.4" />
-            <parameter name="Throw Trainer" type="int" val="0" />
-            <parameter name="Weapon Catch Skill" type="float" val="1" />
-            <parameter name="Wearing Metal Armor" type="int" val="0" />
-        </parameters>
-        <Connections>
-            <Connection id="336" />
-        </Connections>
-        <ItemConnections />
-        <Palette />
     </ActorObject>
     <ReflectionCaptureObject t0="-7.13204" t1="-1.00793" t2="-7.66694" s0="0.292902" s1="0.292902" s2="0.292902" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="338" gicoeff00="0.0658035" gicoeff01="0.0437088" gicoeff02="0.0279999" gicoeff03="0.108521" gicoeff04="0.0773621" gicoeff05="0.0536346" gicoeff06="0.164215" gicoeff07="0.0952148" gicoeff08="0.0513535" gicoeff09="0.0533371" gicoeff10="0.0507965" gicoeff11="0.0434494" gicoeff12="0.128647" gicoeff13="0.0817566" gicoeff14="0.0495911" gicoeff15="0.0529709" gicoeff16="0.0437393" gicoeff17="0.0341377">
         <parameters>
