@@ -312,8 +312,6 @@ class DrikaUserInterface : DrikaElement{
 		ImGui_Text("UI Function");
 		ImGui_NextColumn();
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
-		float slider_width = second_column_width / 2.0;
-		float margin = 3.0;
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##UI Function", current_ui_function, ui_function_names, ui_function_names.size())){
 			if(current_ui_function != ui_function){
@@ -369,7 +367,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(slider_width);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
 				SendUIInstruction("set_position", {position.x, position.y});
 			}
@@ -383,7 +381,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(slider_width);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
 				SendUIInstruction("set_size", {size.x, size.y});
 			}
@@ -397,7 +395,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position Offset");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(slider_width);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_DragInt("##position_offset_x", position_offset.x, 1.0, 0.0f, max_offset.x, "%.0f")){
 				SendUIInstruction("set_position_offset", {position_offset.x, position_offset.y});
 			}
@@ -411,7 +409,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size Offset");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(slider_width);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_DragInt("##size_offset_x", size_offset.x, 1.0, 1.0f, max_offset.x, "%.0f")){
 				SendUIInstruction("set_size_offset", {size_offset.x, size_offset.y});
 			}
@@ -470,7 +468,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_Text("Position");
 
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(slider_width);
+			ImGui_PushItemWidth(second_column_width);
 			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
 				SendUIInstruction("set_position", {position.x, position.y});
 			}
