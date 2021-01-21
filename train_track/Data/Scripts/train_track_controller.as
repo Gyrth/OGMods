@@ -560,7 +560,7 @@ void SetWindowDimensions(int width, int height){
 }
 
 void PostScriptReload(){
-	SetGrabMouse(true);
+
 }
 
 void DrawGUI(){
@@ -610,7 +610,7 @@ void Update(){
 	if(editor_mode_active != EditorModeActive()){
 		editor_mode_active = EditorModeActive();
 		if(!editor_mode_active){
-			SetGrabMouse(true);
+			
 		}
 	}
 
@@ -850,6 +850,8 @@ Object@ AttemptAssetPlacement(string path, float min_object_distance){
 
 void UpdateCamera(){
 	if(!DialogueCameraControl()){return;}
+
+	SetGrabMouse(true);
 
 	if(GetInputDown(0, "grab")){
 		mouse_sensitivity = 0.15f;
