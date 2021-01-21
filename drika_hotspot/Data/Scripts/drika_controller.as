@@ -21,6 +21,7 @@ FontSetup red_dialogue_font("arial", 50 , HexColor("#990000"), true);
 FontSetup green_dialogue_font("arial", 50 , HexColor("#009900"), true);
 FontSetup blue_dialogue_font("arial", 50 , HexColor("#000099"), true);
 array<DrikaAnimationGroup@> all_animations;
+DrikaAnimationGroup @custom_group;
 vec3 camera_position;
 vec3 camera_rotation;
 float camera_zoom;
@@ -72,6 +73,7 @@ DrikaUIElement@ current_ui_element = null;
 vec2 click_position;
 bool show_grid = true;
 bool post_init_done = false;
+bool read_animation_list = false;
 
 string in_combat_song = "";
 bool in_combat_from_beginning_no_fade = false;
@@ -162,6 +164,7 @@ void Init(string str){
 	@text_container = IMContainer(2560, 1440);
 	@grabber_container = IMContainer(2560, 1440);
 	CreateIMGUIContainers();
+	ReadCustomAnimationList();
 }
 
 void PostInit(){
@@ -392,12 +395,12 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		int hotspot_id = atoi(token_iter.GetToken(msg));
 
-		if(all_animations.size() == 0){
+		if(!read_animation_list){
 			ReadAnimationList();
 		}
+
 		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
 		for(uint i = 0; i < all_animations.size(); i++){
-
 			hotspot_obj.ReceiveScriptMessage("drika_dialogue_add_animation_group " + "\"" + join(all_animations[i].name.split("\""), "\\\"") + "\"");
 
 			for(uint j = 0; j < all_animations[i].animations.size(); j++){
@@ -804,6 +807,11 @@ void ReceiveMessage(string msg){
 		return_msg += old_camera_rotation.y + " ";
 		return_msg += old_camera_rotation.z + " ";
 		hotspot_obj.ReceiveScriptMessage(return_msg);
+	}else if(token == "drika_dialogue_add_custom_animation" || token == "drika_dialogue_add_new_custom_animation"){
+		token_iter.FindNextToken(msg);
+		string custom_animation_path = token_iter.GetToken(msg);
+
+		AddCustomAnimation(custom_animation_path);
 	}
 }
 
@@ -1279,6 +1287,76 @@ int GetUIElementIndex(string identifier){
 	return -1;
 }
 
+void ReadCustomAnimationList(){
+	JSON data;
+	JSONValue root;
+
+	SavedLevel@ saved_level = save_file.GetSavedLevel("drika_data");
+	string custom_animations = saved_level.GetValue("custom_animations");
+	//Always add a custom group even if it's empty. DHS decides to not render it.
+	@custom_group = DrikaAnimationGroup("Custom");
+	all_animations.insertLast(@custom_group);
+
+	//Check if the saved json is parseble.
+	if(custom_animations == "" || !data.parseString(custom_animations)){
+		/* Log(warning, "Couldn't find custom animation list."); */
+		return;
+	}else{
+		/* Log(warning, "Found custom animation list."); */
+	}
+
+	//Check if the existing saved data has the relevant data.
+	root = data.getRoot();
+	if(!root.isMember("Custom Animations")){
+		/* Log(warning, "Could not find Custom Animations in JSON."); */
+		return;
+	}
+
+	JSONValue custom_animation_list = root["Custom Animations"];
+
+	for(uint i = 0; i < custom_animation_list.size(); i++){
+		string animation_path = custom_animation_list[i].asString();
+		if(FileExists(animation_path)){
+			custom_group.AddAnimation(animation_path);
+		}
+	}
+}
+
+void SaveCustomAnimationList(){
+	//If there are no custom animations, then just skip saving.
+	if(custom_group.Size() == 0 ){
+		return;
+	}
+
+	JSON data;
+	JSONValue root;
+
+	JSONValue custom_animation_list;
+
+	for(uint i = 0; i < custom_group.animations.size(); i++){
+		custom_animation_list.append(JSONValue(custom_group.animations[i]));
+	}
+	root["Custom Animations"] = custom_animation_list;
+
+	data.getRoot() = root;
+	SavedLevel@ saved_level = save_file.GetSavedLevel("drika_data");
+	saved_level.SetValue("custom_animations", data.writeString(false));
+	save_file.WriteInPlace();
+}
+
+bool AddCustomAnimation(string animation_path){
+	//Check if it's already in the custom animation group.
+	for(uint i = 0; i < custom_group.animations.size(); i++){
+		if(custom_group.animations[i] == animation_path){
+			return false;
+		}
+	}
+
+	custom_group.animations.insertLast(animation_path);
+	SaveCustomAnimationList();
+	return true;
+}
+
 void ReadAnimationList(){
 	JSON file;
 	file.parseFile("Data/Scripts/drika_dialogue_animation_list.json");
@@ -1308,6 +1386,8 @@ void ReadAnimationList(){
 		new_group.SortAlphabetically();
 		all_animations.insertLast(@new_group);
 	}
+
+	read_animation_list = true;
 }
 
 void Update(){
@@ -1548,7 +1628,7 @@ void UpdateWriteFileProcesses(){
 		AddFileString(write_file_processes[0].data);
 		bool success = WriteFileKeepBackup(write_file_processes[0].file_path);
 
-		Log(warning, "Success : " + success + ". Written placeholder for hotspot id : " + write_file_processes[0].hotspot_id);
+		/* Log(warning, "Success : " + success + ". Written placeholder for hotspot id : " + write_file_processes[0].hotspot_id); */
 
 		Object@ hotspot_obj = ReadObjectFromID(write_file_processes[0].hotspot_id);
 		hotspot_obj.ReceiveScriptMessage("drika_function_message " + " " + write_file_processes[0].function_index + " " + "drika_write_placeholder_done");

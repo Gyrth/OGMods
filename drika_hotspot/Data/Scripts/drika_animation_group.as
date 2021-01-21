@@ -10,4 +10,7 @@ class DrikaAnimationGroup{
 	void SortAlphabetically(){
 		animations.sortAsc();
 	}
+	int Size(){
+		return animations.size();
+	}
 }

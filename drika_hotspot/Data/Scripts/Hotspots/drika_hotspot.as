@@ -92,6 +92,7 @@ mat4 old_transform;
 
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;
+DrikaAnimationGroup@ custom_group;
 array<string> active_mods;
 array<int> refresh_queue_counter;
 
@@ -160,7 +161,7 @@ void LoadPalette(bool use_defaults = false){
 		}
 		retrieve_default_palette = true;
 	}else{
-		Log(warning, "Saved palette JSON loaded correctly.");
+		/* Log(warning, "Saved palette JSON loaded correctly."); */
 	}
 
 	//Check if the existing saved data has the relevant data.
@@ -180,14 +181,14 @@ void LoadPalette(bool use_defaults = false){
 
 	//Get the defaults values.
 	if(retrieve_default_palette){
-		Log(warning, "Loading the default palette.");
+		/* Log(warning, "Loading the default palette."); */
 		if(!data.parseFile("Data/Scripts/drika_default_palette.json")){
 			Log(warning, "Error loading the default palette.");
 			return;
 		}
 		root = data.getRoot();
 	}else{
-		Log(warning, "Using the palette from the saved JSON.");
+		/* Log(warning, "Using the palette from the saved JSON."); */
 	}
 
 	JSONValue color_palette = root["Function Palette"];
@@ -223,16 +224,35 @@ void LoadPalette(bool use_defaults = false){
 
 void QueryAnimation(string query){
 	current_animations.resize(0);
-	for(uint i = 0; i < all_animations.size(); i++){
-		DrikaAnimationGroup@ current_group = all_animations[i];
-		DrikaAnimationGroup new_group(current_group.name);
-		for(uint j = 0; j < current_group.animations.size(); j++){
-			if(ToLowerCase(current_group.animations[j]).findFirst(ToLowerCase(query)) != -1){
-				new_group.AddAnimation(current_group.animations[j]);
+	//If the query is empty then just return the whole list.
+	if(query == ""){
+		current_animations = all_animations;
+	}else{
+		//The query can be multiple words separated by spaces.
+		array<string> split_query = query.split(" ");
+
+		for(uint i = 0; i < all_animations.size(); i++){
+			DrikaAnimationGroup@ current_group = all_animations[i];
+			DrikaAnimationGroup new_group(current_group.name);
+
+			for(uint j = 0; j < current_group.animations.size(); j++){
+				bool found_result = true;
+				for(uint k = 0; k < split_query.size(); k++){
+					//Could not find part of query in the database.
+					if(ToLowerCase(current_group.animations[j]).findFirst(ToLowerCase(split_query[k])) == -1){
+						found_result = false;
+						break;
+					}
+				}
+				//Only if all parts of the query are found then add the result.
+				if(found_result){
+					new_group.AddAnimation(current_group.animations[j]);
+				}
 			}
-		}
-		if(new_group.animations.size() > 0){
-			current_animations.insertLast(@new_group);
+
+			if(new_group.animations.size() > 0){
+				current_animations.insertLast(@new_group);
+			}
 		}
 	}
 }
@@ -336,7 +356,7 @@ void InterpData(){
 			}
 		}
 	}
-	Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID());
+	/* Log(info, "Interp of script done. Hotspot number: " + this_hotspot.GetID()); */
 	ReorderElements();
 
 	for(int i = 0; i < int(drika_elements.size()) - 1; i++){
@@ -1288,7 +1308,7 @@ void SavePalette(){
 void ExportToFile(){
 	string write_path = GetUserPickedWritePath("txt", "Data/Dialogues");
 	if(write_path != ""){
-		Log(info,"Save to file: " + write_path);
+		/* Log(info,"Save to file: " + write_path); */
 
 		JSON data;
 		JSONValue functions;
@@ -1322,7 +1342,7 @@ void ExportToFile(){
 }
 
 void CopyToClipBoard(){
-	Log(info,"Copy To Clipboard");
+	/* Log(info,"Copy To Clipboard"); */
 
 	JSON data;
 	JSONValue functions;
@@ -1452,11 +1472,24 @@ void ReceiveMessage(string msg){
 			while(token_iter.FindNextToken(msg)){
 				editor_messages.insertLast(token_iter.GetToken(msg));
 			}
+
 			//This message is send when ctrl + s is pressed.
 			if(editor_messages[0] == "save_selected_dialogue"){
 				Save();
 			}else if(editor_messages[0] == "drika_hotspot_editing" && atoi(editor_messages[1]) != this_hotspot.GetID()){
 				show_editor = false;
+			}else if(editor_messages[0] == "drika_dialogue_add_new_custom_animation"){
+				//Only add the custom animation if there is existing data.
+				if(all_animations.size() > 0){
+					string custom_animation_path = editor_messages[1];
+
+					for(uint i = 0; i < custom_group.animations.size(); i++){
+						if(custom_group.animations[i] == custom_animation_path){
+							return;
+						}
+					}
+					custom_group.animations.insertLast(custom_animation_path);
+				}
 			}
 			GetCurrentElement().ReceiveEditorMessage(editor_messages);
 		}else{
@@ -1474,6 +1507,9 @@ void ReceiveMessage(string msg){
 
 		DrikaAnimationGroup new_group(group_name);
 		all_animations.insertLast(@new_group);
+		if(group_name == "Custom"){
+			@custom_group = @new_group;
+		}
 	}else if(token == "drika_dialogue_add_animation"){
 		token_iter.FindNextToken(msg);
 		string new_animation = token_iter.GetToken(msg);
@@ -1965,9 +2001,7 @@ void RefreshChildren(Object@ obj){
 
 array<string> GetReferences(){
 	array<string> reference_strings;
-	Log(info, "Getting references " + references.size());
 	for(uint i = 0; i < references.size(); i++){
-		Log(info, i + " ref " + references[i].elements[0].reference_string);
 		reference_strings.insertLast(references[i].elements[0].reference_string);
 	}
 	return reference_strings;

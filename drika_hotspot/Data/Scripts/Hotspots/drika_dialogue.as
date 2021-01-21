@@ -58,6 +58,7 @@ class DrikaDialogue : DrikaElement{
 	float fade_to_black_duration;
 	bool wait_for_fade = false;
 	bool skip_move_transition = false;
+	bool update_animation_list_scroll;
 
 	int dialogue_layout;
 	string dialogue_text_font;
@@ -79,8 +80,8 @@ class DrikaDialogue : DrikaElement{
 	bool anim_super_mobile;
 	bool anim_from_start;
 	bool use_ik;
-	float transition_speed;
 	bool wait_anim_end;
+	bool custom_animation;
 	bool dialogue_control;
 	int current_choice;
 	int nr_choices;
@@ -186,8 +187,11 @@ class DrikaDialogue : DrikaElement{
 		anim_super_mobile = GetJSONBool(params, "anim_super_mobile", false);
 		anim_from_start = GetJSONBool(params, "anim_from_start", true);
 		use_ik = GetJSONBool(params, "use_ik", true);
-		transition_speed = GetJSONFloat(params, "transition_speed", 3.0);
 		wait_anim_end = GetJSONBool(params, "wait_anim_end", false);
+		custom_animation = GetJSONBool(params, "custom_animation", false);
+		if(custom_animation){
+			level.SendMessage("drika_dialogue_add_custom_animation " + target_actor_animation);
+		}
 		dialogue_control = GetJSONBool(params, "dialogue_control", true);
 		nr_choices = GetJSONInt(params, "nr_choices", 5);
 		choice_1 = GetJSONString(params, "choice_1", "Pick choice nr 1");
@@ -256,7 +260,7 @@ class DrikaDialogue : DrikaElement{
 			data["anim_super_mobile"] = JSONValue(anim_super_mobile);
 			data["anim_from_start"] = JSONValue(anim_from_start);
 			data["use_ik"] = JSONValue(use_ik);
-			data["transition_speed"] = JSONValue(transition_speed);
+			data["custom_animation"] = JSONValue(custom_animation);
 			data["wait_anim_end"] = JSONValue(wait_anim_end);
 		}else if(dialogue_function == set_actor_eye_direction){
 			data["target_actor_eye_direction"] = JSONValue(JSONarrayValue);
@@ -667,10 +671,10 @@ class DrikaDialogue : DrikaElement{
 				placeholder.SetScale(vec3(scale));
 
 				float deg2rad = PI / 180.0f;
-	            quaternion rot_y(vec4(0, 1, 0, target_camera_rotation.y * deg2rad));
-	            quaternion rot_x(vec4(1, 0, 0, target_camera_rotation.x * deg2rad));
-	            quaternion rot_z(vec4(0, 0, 1, target_camera_rotation.z * deg2rad));
-	            placeholder.SetRotation(rot_y * rot_x * rot_z);
+				quaternion rot_y(vec4(0, 1, 0, target_camera_rotation.y * deg2rad));
+				quaternion rot_x(vec4(1, 0, 0, target_camera_rotation.x * deg2rad));
+				quaternion rot_z(vec4(0, 0, 1, target_camera_rotation.z * deg2rad));
+				placeholder.SetRotation(rot_y * rot_x * rot_z);
 
 				placeholder_object.SetPreview("Data/Objects/camera.xml");
 				placeholder_object.SetEditorDisplayName("Set Camera Position Helper");
@@ -823,11 +827,46 @@ class DrikaDialogue : DrikaElement{
 
 			ImGui_AlignTextToFramePadding();
 			if(ImGui_Button("Custom...")){
+				string new_path = GetUserPickedReadPath("anm", "Data/Animations");
+				if(new_path != ""){
+					array<string> path_split = new_path.split("/");
+					string file_name = path_split[path_split.size() - 1];
+					string file_extension = file_name.substr(file_name.length() - 3, 3);
 
+					if(file_extension == "anm" || file_extension == "ANM"){
+						custom_animation = true;
+						target_actor_animation = new_path;
+						//Check if the animation is a custom or part of an existing group.
+						for(uint i = 0; i < all_animations.size(); i++){
+							if(all_animations[i].name != "Custom"){
+								for(uint j = 0; j < all_animations[i].animations.size(); j++){
+									if(all_animations[i].animations[j] == target_actor_animation){
+										//Found the animation so it's not custom.
+										custom_animation = false;
+										break;
+									}
+								}
+							}
+							if(!custom_animation){
+								break;
+							}
+						}
+
+						//Register the custom animation so that it's saved to the SaveFile.
+						if(custom_animation){
+							level.SendMessage("drika_dialogue_add_new_custom_animation " + target_actor_animation);
+						}
+						SetActorAnimation();
+						update_animation_list_scroll = true;
+						QueryAnimation(search_buffer);
+					}else{
+						DisplayError("Animation issue", "Only .anm files are supported.");
+					}
+				}
 			}
 			ImGui_SameLine();
 			ImGui_SetTextBuf(search_buffer);
-			ImGui_Text("Search");
+			ImGui_Text("Search:");
 			ImGui_SameLine();
 			ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth());
 			if(ImGui_InputText("", ImGuiInputTextFlags_AutoSelectAll)){
@@ -861,7 +900,7 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Text("Fade Duration");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
- 			ImGui_SliderFloat("##Fade Duration", fade_to_black_duration, 0.0, 10.0, "%.3f");
+			ImGui_SliderFloat("##Fade Duration", fade_to_black_duration, 0.0, 10.0, "%.3f");
 			ImGui_PopItemWidth();
 		}else if(dialogue_function == settings){
 			ImGui_AlignTextToFramePadding();
@@ -1161,7 +1200,7 @@ class DrikaDialogue : DrikaElement{
 			SetActorAnimation();
 		}
 
-		if(ImGui_IsWindowAppearing() && is_selected){
+		if((ImGui_IsWindowAppearing() || update_animation_list_scroll) && is_selected){
 			ImGui_SetScrollHere(0.5);
 		}
 	}
@@ -1322,14 +1361,14 @@ class DrikaDialogue : DrikaElement{
 
 				// Convert the X Y Z rotations into quaternions.
 				float deg2rad = PI / 180.0f;
-	            quaternion rot_y(vec4(0, 1, 0, target_camera_rotation.y * deg2rad));
-	            quaternion rot_x(vec4(1, 0, 0, target_camera_rotation.x * deg2rad));
-	            quaternion rot_z(vec4(0, 0, 1, target_camera_rotation.z * deg2rad));
+				quaternion rot_y(vec4(0, 1, 0, target_camera_rotation.y * deg2rad));
+				quaternion rot_x(vec4(1, 0, 0, target_camera_rotation.x * deg2rad));
+				quaternion rot_z(vec4(0, 0, 1, target_camera_rotation.z * deg2rad));
 				quaternion target_rotation = rot_y * rot_x * rot_z;
 
-	            quaternion rot2_y(vec4(0, 1, 0, camera_rotation_from.y * deg2rad));
-	            quaternion rot2_x(vec4(1, 0, 0, camera_rotation_from.x * deg2rad));
-	            quaternion rot2_z(vec4(0, 0, 1, camera_rotation_from.z * deg2rad));
+				quaternion rot2_y(vec4(0, 1, 0, camera_rotation_from.y * deg2rad));
+				quaternion rot2_x(vec4(1, 0, 0, camera_rotation_from.x * deg2rad));
+				quaternion rot2_z(vec4(0, 0, 1, camera_rotation_from.z * deg2rad));
 				quaternion from_rotation = rot2_y * rot2_x * rot2_z;
 
 				// Use the alpha to mix the two quaternions, making them blend.
@@ -1766,10 +1805,10 @@ class DrikaDialogue : DrikaElement{
 			/* targets[i].Execute("dialogue_anim = \"Data/Animations/r_actionidle.anm\";"); */
 
 			if(targets[i].GetIntVar("state") == _ragdoll_state){
-                targets[i].Execute("WakeUp(_wake_stand);" +
-		                			"EndGetUp();" +
-		                			"unragdoll_time = 0.0f;");
-            }
+				targets[i].Execute("WakeUp(_wake_stand);" +
+									"EndGetUp();" +
+									"unragdoll_time = 0.0f;");
+			}
 
 			targets[i].ReceiveScriptMessage("set_rotation " + target_actor_rotation);
 			targets[i].ReceiveScriptMessage("set_dialogue_position " + target_actor_position.x + " " + target_actor_position.y + " " + target_actor_position.z);
@@ -1779,6 +1818,10 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void SetActorAnimation(){
+		if(!FileExists(target_actor_animation)){
+			Log(error, "Animation file does not exist : " + target_actor_animation);
+			return;
+		}
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 		for(uint i = 0; i < targets.size(); i++){
@@ -1793,14 +1836,14 @@ class DrikaDialogue : DrikaElement{
 			if(wait_anim_end) callback += "in_animation = true;this_mo.rigged_object().anim_client().SetAnimationCallback(\"void EndAnim()\");";
 
 			if(targets[i].GetIntVar("state") == _ragdoll_state){
-                targets[i].Execute("WakeUp(_wake_stand);" +
-		                			"EndGetUp();" +
-		                			"unragdoll_time = 0.0f;");
+				targets[i].Execute("WakeUp(_wake_stand);" +
+									"EndGetUp();" +
+									"unragdoll_time = 0.0f;");
 				targets[i].Execute("FixDiscontinuity();");
-            }
+			}
 
 			targets[i].rigged_object().anim_client().Reset();
-			targets[i].Execute(roll_fade + "this_mo.SetAnimation(\"" + target_actor_animation + "\", " + transition_speed + ", " + flags + ");dialogue_anim = \"" + target_actor_animation + "\";" + callback);
+			targets[i].Execute(roll_fade + "this_mo.SetAnimation(\"" + target_actor_animation + "\", " + 10.0f + ", " + flags + ");dialogue_anim = \"" + target_actor_animation + "\";" + callback);
 		}
 	}
 
