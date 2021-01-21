@@ -29,6 +29,7 @@ class Weapon{
 
 void Init(string p_level_name) {
     @imGUI = CreateIMGUI();
+	weapons.insertLast(Weapon("Empty",             		"empty",                                				empty));
     weapons.insertLast(Weapon("Cat Rapier",             "Data/Items/Rapier.xml",                                "UI/spawner/thumbs/Interactive Objects/Cat Rapier.png"));
     weapons.insertLast(Weapon("Cat Gauche",             "Data/Items/MainGauche.xml",                            "UI/spawner/thumbs/Interactive Objects/Main Gauche.png"));
     weapons.insertLast(Weapon("Dog Broad Sword",        "Data/Items/DogWeapons/DogBroadSword.xml",              "UI/spawner/thumbs/Interactive Objects/Dog Broad Sword.png"));
@@ -184,9 +185,12 @@ void SwitchToWeapon(){
         return;
     }
     player_mo.Execute("DropWeapon();");
-    weapon_id = CreateObject(weapons[current_weapon].item_path);
-    Object@ weapon_obj = ReadObjectFromID(weapon_id);
-    player.AttachItem(weapon_obj, _at_grip, false);
+	if(weapons[current_weapon].item_path != "empty"){
+    	weapon_id = CreateObject(weapons[current_weapon].item_path);
+    	Object@ weapon_obj = ReadObjectFromID(weapon_id);
+		weapon_obj.SetTranslation(vec3(0.0f, -10000.0f, 0.0f));
+		player.AttachItem(weapon_obj, _at_grip, false);
+	}
 }
 
 int GetPlayerCharacterID() {
