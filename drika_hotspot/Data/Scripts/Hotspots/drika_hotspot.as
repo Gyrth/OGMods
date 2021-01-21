@@ -89,6 +89,7 @@ array<DrikaElement@> imported_elements;
 array<Object@> refresh_queue;
 bool move_relative = false;
 mat4 old_transform;
+array<int> billboard_ids;
 
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;

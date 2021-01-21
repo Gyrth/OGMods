@@ -13,7 +13,6 @@ enum billboard_types{	billboard_image_at_placeholder = 0,
 
 class DrikaBillboard : DrikaElement{
 	string image_path;
-	array<int> billboard_ids;
 	float image_size = 1.0;
 	vec4 image_color = vec4(1.0);
 	string billboard_text_string;
