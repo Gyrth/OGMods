@@ -10,6 +10,8 @@ class DrikaSetVelocity : DrikaElement{
 	int current_set_velocity_mode;
 	DrikaTargetSelect@ towards_target;
 	float height_offset;
+	float placeholder_scale_multiplier = 5.0f;
+	float placeholder_velocity_arrow_multiplier = 0.5f;
 
 	array<string> set_velocity_mode_names = {	"Set Velocity With Placeholder",
 												"Set Velocity Towards Target"
@@ -125,7 +127,9 @@ class DrikaSetVelocity : DrikaElement{
 		ImGui_Text("Velocity");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
-		ImGui_DragFloat("###Velocity", velocity_magnitude, 1.0f, 0.0f, 1000.0f);
+		if(ImGui_DragFloat("###Velocity", velocity_magnitude, 0.01f, 0.0f, 1000.0f, "%.2f")){
+			placeholder.SetScale(velocity_magnitude / placeholder_scale_multiplier);
+		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
@@ -164,9 +168,11 @@ class DrikaSetVelocity : DrikaElement{
 				gizmo_transform_y.SetTranslationPart(placeholder.GetTranslation());
 				gizmo_transform_y.SetRotationPart(Mat4FromQuaternion(placeholder.GetRotation()));
 
+				velocity_magnitude = ((placeholder.GetScale().x + placeholder.GetScale().y + placeholder.GetScale().z) / 3.0f) * placeholder_scale_multiplier;
+
 				mat4 scale_mat_y;
 				scale_mat_y[0] = 1.0;
-				scale_mat_y[5] = velocity_magnitude / 10.0;
+				scale_mat_y[5] = velocity_magnitude * placeholder_velocity_arrow_multiplier;
 				scale_mat_y[10] = 1.0;
 				scale_mat_y[15] = 1.0f;
 				gizmo_transform_y = gizmo_transform_y * scale_mat_y;
@@ -189,12 +195,26 @@ class DrikaSetVelocity : DrikaElement{
 				DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_update);
 			}else{
 				placeholder.Create();
+				placeholder.SetScale(velocity_magnitude / placeholder_scale_multiplier);
 			}
 		}
 	}
 
+	void StartEdit(){
+		placeholder.SetScale(velocity_magnitude / placeholder_scale_multiplier);
+		DrikaElement::StartEdit();
+	}
+
 	bool Trigger(){
 		return ApplyVelocity();
+	}
+
+	void TargetChanged(){
+		array<Object@> targets = target_select.GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			placeholder.SetTranslation(targets[i].GetTranslation());
+			placeholder.SetRotation(targets[i].GetRotation());
+		}
 	}
 
 	bool ApplyVelocity(){
