@@ -862,14 +862,14 @@ class DrikaAnimation : DrikaElement{
 		mesh_transform = mesh_transform * scale_mat;
 
 		vec4 color = object.IsSelected()?vec4(0.0f, 0.85f, 0.0f, 0.75f):vec4(0.0f, 0.35f, 0.0f, 0.75f);
-		DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_update);
+		DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_draw);
 	}
 
 	void DrawEditing(){
 		CameraPlaceholderCheck();
 		if(animation_method == timeline_method){
 			if(target_select.identifier_type == cam){
-				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}
 			DrawTimeline();
 			MoveAnimationKey();
@@ -884,7 +884,7 @@ class DrikaAnimation : DrikaElement{
 						DrawDebugMesh(current_key);
 					}
 					DrawDebugMesh(next_key);
-					DebugDrawLine(current_key.GetTranslation(), next_key.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(current_key.GetTranslation(), next_key.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}else if(!ObjectExists(key_ids[i])){
 					key_ids.removeAt(i);
 					WriteAnimationKeyParams();
@@ -896,7 +896,7 @@ class DrikaAnimation : DrikaElement{
 				}
 			}
 			if(target_select.identifier_type == cam){
-				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 
 				for(uint i = 0; i < key_ids.size(); i++){
 					Object@ key = ReadObjectFromID(key_ids[i]);
@@ -915,7 +915,7 @@ class DrikaAnimation : DrikaElement{
 		if(target_select.identifier_type != cam){
 			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
-				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}
 		}
 	}

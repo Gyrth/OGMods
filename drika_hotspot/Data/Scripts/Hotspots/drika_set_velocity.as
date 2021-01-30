@@ -151,19 +151,19 @@ class DrikaSetVelocity : DrikaElement{
 
 			for(uint i = 0; i < targets.size(); i++){
 				vec3 target_location = GetTargetTranslation(targets[i]);
-				DebugDrawLine(target_location, this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_update);
+				DebugDrawLine(target_location, this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_draw);
 				for(uint j = 0; j < towards_targets.size(); j++){
 					vec3 towards_target_location = GetTargetTranslation(towards_targets[j]);
-					DebugDrawLine(target_location, towards_target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(target_location, towards_target_location, vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
 			}
 		}else if(set_velocity_mode == _set_velocity_with_placeholder){
 			if(placeholder.Exists()){
 				array<Object@> targets = target_select.GetTargetObjects();
 				for(uint i = 0; i < targets.size(); i++){
-					DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
-				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_update);
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_draw);
 				mat4 gizmo_transform_y;
 				gizmo_transform_y.SetTranslationPart(placeholder.GetTranslation());
 				gizmo_transform_y.SetRotationPart(Mat4FromQuaternion(placeholder.GetRotation()));
@@ -177,7 +177,7 @@ class DrikaSetVelocity : DrikaElement{
 				scale_mat_y[15] = 1.0f;
 				gizmo_transform_y = gizmo_transform_y * scale_mat_y;
 
-				DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, vec4(1.0f, 0.0f, 0.0f, 1.0f), _delete_on_update);
+				DebugDrawWireMesh("Data/Models/drika_gizmo_y.obj", gizmo_transform_y, vec4(1.0f, 0.0f, 0.0f, 1.0f), _delete_on_draw);
 
 				mat4 mesh_transform;
 				mesh_transform.SetTranslationPart(placeholder.GetTranslation());
@@ -192,7 +192,7 @@ class DrikaSetVelocity : DrikaElement{
 				mesh_transform = mesh_transform * scale_mat;
 
 				vec4 color = placeholder.IsSelected()?vec4(0.0f, 0.85f, 0.0f, 0.75f):vec4(0.0f, 0.35f, 0.0f, 0.75f);
-				DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_update);
+				DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_draw);
 			}else{
 				placeholder.Create();
 				placeholder.SetScale(velocity_magnitude / placeholder_scale_multiplier);

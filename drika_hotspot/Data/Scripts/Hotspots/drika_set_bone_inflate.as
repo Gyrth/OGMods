@@ -125,7 +125,7 @@ class DrikaSetBoneInflate : DrikaElement{
 	void DrawEditing(){
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 		}
 	}
 

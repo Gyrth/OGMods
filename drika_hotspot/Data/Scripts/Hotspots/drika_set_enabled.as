@@ -127,7 +127,7 @@ class DrikaSetEnabled : DrikaElement{
 	void DrawEditing(){
 		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 		}
 	}
 

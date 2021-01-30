@@ -286,12 +286,12 @@ class DrikaOnInput : DrikaElement{
 	void DrawEditing(){
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 		}
 
 		if(use_prompt && (input_type == button_pressed || input_type == button_down)){
 			if(placeholder.Exists()){
-				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}else{
 				placeholder.Create();
 			}
@@ -354,9 +354,9 @@ class DrikaOnInput : DrikaElement{
 		if(use_prompt){
 			if(placeholder.Exists()){
 				if(custom_prompt){
-					DebugDrawBillboard(custom_prompt_path, placeholder.GetTranslation(), prompt_size, prompt_color, _delete_on_update);
+					DebugDrawBillboard(custom_prompt_path, placeholder.GetTranslation(), prompt_size, prompt_color, _delete_on_draw);
 				}else{
-					DebugDrawBillboard(current_prompt_icon, placeholder.GetTranslation(), prompt_size, prompt_color, _delete_on_update);
+					DebugDrawBillboard(current_prompt_icon, placeholder.GetTranslation(), prompt_size, prompt_color, _delete_on_draw);
 				}
 			}
 		}

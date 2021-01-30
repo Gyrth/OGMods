@@ -231,9 +231,9 @@ class DrikaTransformObject : DrikaElement{
 			if(placeholder.Exists()){
 				array<Object@> targets = target_select.GetTargetObjects();
 				for(uint i = 0; i < targets.size(); i++){
-					DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
-				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				DrawGizmo(placeholder.object);
 			}else{
 				placeholder.Create();
@@ -245,9 +245,9 @@ class DrikaTransformObject : DrikaElement{
 			array<Object@> targets = target_select.GetTargetObjects();
 
 			for(uint i = 0; i < targets.size(); i++){
-				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				for(uint j = 0; j < target_location_objects.size(); j++){
-					DebugDrawLine(targets[i].GetTranslation(), GetTargetTranslation(target_location_objects[j]) + translation_offset, vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(targets[i].GetTranslation(), GetTargetTranslation(target_location_objects[j]) + translation_offset, vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
 			}
 

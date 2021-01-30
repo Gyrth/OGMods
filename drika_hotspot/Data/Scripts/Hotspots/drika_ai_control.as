@@ -117,15 +117,15 @@ class DrikaAIControl : DrikaElement{
 	void DrawEditing(){
 		PlaceholderCheck();
 		if(placeholder.Exists()){
-			DebugDrawBillboard("Data/Textures/ui/challenge_mode/quit_icon_c.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_update);
-			DebugDrawLine(this_hotspot.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawBillboard("Data/Textures/ui/challenge_mode/quit_icon_c.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_draw);
+			DebugDrawLine(this_hotspot.GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_draw);
 		}
 
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_update);
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_draw);
 			if(placeholder.Exists()){
-				DebugDrawLine(placeholder.GetTranslation(), targets[i].position, vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(placeholder.GetTranslation(), targets[i].position, vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}
 
 			if(ai_goal == _patrol || ai_goal == _attack_target || ai_goal == _escort || ai_goal == _get_weapon || ai_goal == _throw_weapon || ai_goal == _choke || ai_goal == _cut_throat || ai_goal == _investigate_slow_at_target || ai_goal == _investigate_urgent_at_target){
@@ -133,7 +133,7 @@ class DrikaAIControl : DrikaElement{
 
 				for(uint j = 0; j < ai_targets.size(); j++){
 					vec3 target_location = GetTargetTranslation(ai_targets[j]);
-					DebugDrawLine(targets[i].position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(targets[i].position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
 			}
 		}

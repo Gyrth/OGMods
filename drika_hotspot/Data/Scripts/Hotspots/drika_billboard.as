@@ -211,7 +211,7 @@ class DrikaBillboard : DrikaElement{
 		PlaceholderCheck();
 
 		if(billboard_type == billboard_image_at_placeholder || billboard_type == billboard_text_at_placeholder){
-			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 		}
 
 		float multiplier = 1.0 + overbright;

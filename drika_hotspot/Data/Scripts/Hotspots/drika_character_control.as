@@ -223,15 +223,15 @@ class DrikaCharacterControl : DrikaElement{
 	void DrawEditing(){
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
-			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			if(character_control_option == attach_item){
 				array<Object@> target_items = item_select.GetTargetObjects();
 				for(uint j = 0; j < target_items.size(); j++){
 					if(target_items[j].GetType() == _item_object){
 						ItemObject@ io = ReadItemID(target_items[j].GetID());
-						DebugDrawLine(io.GetPhysicsPosition(), targets[i].position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+						DebugDrawLine(io.GetPhysicsPosition(), targets[i].position, vec3(0.0, 0.0, 1.0), _delete_on_draw);
 					}else{
-						DebugDrawLine(target_items[j].GetTranslation(), targets[i].position, vec3(0.0, 0.0, 1.0), _delete_on_update);
+						DebugDrawLine(target_items[j].GetTranslation(), targets[i].position, vec3(0.0, 0.0, 1.0), _delete_on_draw);
 					}
 				}
 			}

@@ -46,7 +46,7 @@ class DrikaStartDialogue : DrikaElement{
 
 	void DrawEditing(){
 		if(@dialogue_obj != null){
-			DebugDrawLine(dialogue_obj.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			DebugDrawLine(dialogue_obj.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 		}
 	}
 

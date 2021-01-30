@@ -366,25 +366,25 @@ class DrikaOnEnterExit : DrikaElement{
 		if(IsCharacterFunction()){
 			array<MovementObject@> chars = target_select.GetTargetMovementObjects();
 			for(uint i = 0; i < chars.size(); i++){
-				DebugDrawLine(chars[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(chars[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}
 		}else if(IsItemFunction()){
 			array<Object@> objs = target_select.GetTargetObjects();
 			for(uint i = 0; i < objs.size(); i++){
 				if(objs[i].GetType() == _item_object){
 					ItemObject@ io = ReadItemID(objs[i].GetID());
-					DebugDrawLine(io.GetPhysicsPosition(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(io.GetPhysicsPosition(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
 			}
 		}else{
 			array<Object@> objs = target_select.GetTargetObjects();
 			for(uint i = 0; i < objs.size(); i++){
-				DebugDrawLine(objs[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(objs[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}
 		}
 
 		if(@external_hotspot_obj != null){
-			DebugDrawLine(external_hotspot_obj.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			DebugDrawLine(external_hotspot_obj.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 		}
 	}
 

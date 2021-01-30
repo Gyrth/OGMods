@@ -183,7 +183,7 @@ class DrikaCreateObject : DrikaElement{
 	void DrawEditing(){
 		if(create_delete_mode == _create_object){
 			if(placeholder.Exists()){
-				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				DrawGizmo(placeholder.GetTranslation(), placeholder.GetRotation(), placeholder.GetScale(), placeholder.IsSelected());
 				placeholder.DrawEditing();
 			}else{
@@ -193,7 +193,7 @@ class DrikaCreateObject : DrikaElement{
 		}else if(create_delete_mode == _delete_object){
 			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
-				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}
 		}
 	}

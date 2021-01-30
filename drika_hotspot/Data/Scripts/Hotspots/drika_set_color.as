@@ -198,9 +198,9 @@ class DrikaSetColor : DrikaElement{
 		for(uint i = 0; i < targets.size(); i++){
 			if(targets[i].GetType() == _movement_object){
 				MovementObject@ char = ReadCharacterID(targets[i].GetID());
-				DebugDrawLine(char.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(char.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}else{
-				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}
 		}
 	}

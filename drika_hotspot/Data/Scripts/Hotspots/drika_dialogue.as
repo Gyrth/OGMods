@@ -434,7 +434,7 @@ class DrikaDialogue : DrikaElement{
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			for(uint i = 0; i < targets.size(); i++){
-				DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+				DebugDrawLine(targets[i].position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 			}
 		}
 
@@ -461,7 +461,7 @@ class DrikaDialogue : DrikaElement{
 
 			for(uint i = 0; i < targets.size(); i++){
 				vec3 head_pos = targets[i].rigged_object().GetAvgIKChainPos("head");
-				DebugDrawLine(head_pos, placeholder.GetTranslation(), vec4(1.0), vec4(1.0), _delete_on_update);
+				DebugDrawLine(head_pos, placeholder.GetTranslation(), vec4(1.0), vec4(1.0), _delete_on_draw);
 			}
 
 			if(placeholder.IsSelected()){
@@ -488,7 +488,7 @@ class DrikaDialogue : DrikaElement{
 
 			for(uint i = 0; i < targets.size(); i++){
 				vec3 torso_pos = targets[i].rigged_object().GetAvgIKChainPos("torso");
-				DebugDrawLine(torso_pos, placeholder.GetTranslation(), vec4(1.0), vec4(1.0), _delete_on_update);
+				DebugDrawLine(torso_pos, placeholder.GetTranslation(), vec4(1.0), vec4(1.0), _delete_on_draw);
 			}
 
 			if(placeholder.IsSelected()){
@@ -515,7 +515,7 @@ class DrikaDialogue : DrikaElement{
 
 			for(uint i = 0; i < targets.size(); i++){
 				vec3 head_pos = targets[i].rigged_object().GetAvgIKChainPos("head");
-				DebugDrawLine(head_pos, placeholder.GetTranslation(), vec4(1.0), vec4(1.0), _delete_on_update);
+				DebugDrawLine(head_pos, placeholder.GetTranslation(), vec4(1.0), vec4(1.0), _delete_on_draw);
 			}
 
 			if(placeholder.IsSelected()){
@@ -575,7 +575,7 @@ class DrikaDialogue : DrikaElement{
 						MovementObject@ char = ReadCharacterID(track_targets[j].GetID());
 						target_location = char.position;
 					}
-					DebugDrawLine(placeholder.GetTranslation(), target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(placeholder.GetTranslation(), target_location, vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
 			}
 

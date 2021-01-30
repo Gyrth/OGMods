@@ -1722,7 +1722,7 @@ void SmoothCameraMoveWith(vec3 target_location){
 void SmoothCameraLookAt(vec3 target_location){
 	float camera_distance = distance(target_location, current_camera_position);
 	vec3 current_look_location = current_camera_position + (camera.GetFacing() * camera_distance);
-	/* DebugDrawWireSphere(current_look_location, 0.5, vec3(1.0), _delete_on_update); */
+	/* DebugDrawWireSphere(current_look_location, 0.5, vec3(1.0), _delete_on_draw); */
 	camera.LookAt(mix(current_look_location, target_location, time_step * 10.0));
 }
 

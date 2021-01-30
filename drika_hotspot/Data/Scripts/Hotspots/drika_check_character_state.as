@@ -349,13 +349,13 @@ class DrikaCheckCharacterState : DrikaElement{
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < targets.size(); i++){
 			MovementObject@ target = targets[i];
-			DebugDrawLine(target.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_update);
+			DebugDrawLine(target.position, this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 
 			if(state_choice == knows_about){
 				array<MovementObject@> known_targets = known_target.GetTargetMovementObjects();
 
 				for(uint j = 0; j < known_targets.size(); j++){
-					DebugDrawLine(target.position, known_targets[j].position, vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(target.position, known_targets[j].position, vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
 			}else if(state_choice == in_proximity){
 				array<Object@> target_objects = known_target.GetTargetObjects();
@@ -370,7 +370,7 @@ class DrikaCheckCharacterState : DrikaElement{
 						MovementObject@ char = ReadCharacterID(target_objects[j].GetID());
 						target_location = char.position;
 					}
-					DebugDrawLine(target.position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_update);
+					DebugDrawLine(target.position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
 			}
 		}
