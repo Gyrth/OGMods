@@ -29,6 +29,13 @@ class DrikaPlayMusic : DrikaElement{
 		has_settings = true;
 	}
 
+	void PostInit(){
+		//To make sure the music xml is correct each time, write it again at startup.
+		if(music_path != "Data/Music/drika_music.xml"){
+			WriteMusicXML();
+		}
+	}
+
 	JSONValue GetCheckpointData(){
 		JSONValue data;
 		data["triggered"] = triggered;
@@ -133,8 +140,8 @@ class DrikaPlayMusic : DrikaElement{
 		string filename = "";
 		while(filename.length() < 10){
 			string s('0');
-	        s[0] = rand() % (123 - 97) + 97;
-	        filename += s;
+			s[0] = rand() % (123 - 97) + 97;
+			filename += s;
 		}
 		if(FileExists("Data/Music/" + filename + ".xml")){
 			//Already exists so get a new one.
