@@ -1,9 +1,19 @@
+enum level_message_types {
+							send_message,
+							global_message
+						};
+
 class DrikaSendLevelMessage : DrikaElement{
 	string message;
 	string display_message;
+	level_message_types level_message_type;
+	int current_message_type;
+	array<string> message_type_choices = {"Send Message", "Global Message"};
 
 	DrikaSendLevelMessage(JSONValue params = JSONValue()){
 		message = GetJSONString(params, "message", "continue_drika_hotspot");
+		level_message_type = level_message_types(GetJSONInt(params, "level_message_type", send_message));
+		current_message_type = level_message_type;
 
 		drika_element_type = drika_send_level_message;
 		has_settings = true;
@@ -13,6 +23,7 @@ class DrikaSendLevelMessage : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["message"] = JSONValue(message);
+		data["level_message_type"] = JSONValue(level_message_type);
 		return data;
 	}
 
@@ -21,16 +32,25 @@ class DrikaSendLevelMessage : DrikaElement{
 	}
 
 	void DrawSettings(){
-
 		float option_name_width = 120.0;
-
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Level Message");
+		ImGui_Text("Message Type");
 		ImGui_NextColumn();
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
+
+		ImGui_PushItemWidth(second_column_width);
+		if(ImGui_Combo("##Message Type", current_message_type, message_type_choices, message_type_choices.size())){
+			level_message_type = level_message_types(current_message_type);
+		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Level Message");
+		ImGui_NextColumn();
 
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_InputText("###Level Message", message, 128)){
@@ -42,13 +62,14 @@ class DrikaSendLevelMessage : DrikaElement{
 
 	void SetDisplayMessage(){
 		display_message = join(message.split("\n"), "");
-		if(display_message.length() > 30){
-			display_message = display_message.substr(0, 30);
-		}
 	}
 
 	bool Trigger(){
-		level.SendMessage(message);
+		if(level_message_type == send_message){
+			level.SendMessage(message);
+		}else if(level_message_type == global_message){
+			SendGlobalMessage(message);
+		}
 		return true;
 	}
 }
