@@ -81,6 +81,8 @@ string player_died_song = "";
 bool player_died_from_beginning_no_fade = false;
 string enemies_defeated_song = "";
 bool enemies_defeated_from_beginning_no_fade = false;
+string ambient_song = "";
+bool ambient_from_beginning_no_fade = false;
 string current_song = "None";
 
 array<CheckpointData@> checkpoints;
@@ -718,6 +720,9 @@ void ReceiveMessage(string msg){
 		}else if(event_type == 2){
 			enemies_defeated_song = song_name;
 			enemies_defeated_from_beginning_no_fade = from_beginning_no_fade;
+		}else if(event_type == 3){
+			ambient_song = song_name;
+			ambient_from_beginning_no_fade = from_beginning_no_fade;
 		}
 
 		if(EditorModeActive()){
@@ -1509,6 +1514,14 @@ void UpdateMusic(){
 			return;
 		}else if(current_song == enemies_defeated_song){
 			current_song = "None";
+		}
+	}
+
+	if(ambient_song != ""){
+		if(ambient_from_beginning_no_fade){
+			SetSong(ambient_song);
+		}else{
+			PlaySong(ambient_song);
 		}
 	}
 }

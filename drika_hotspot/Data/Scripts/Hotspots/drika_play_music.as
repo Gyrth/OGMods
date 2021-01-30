@@ -1,6 +1,7 @@
 enum music_events{	in_combat_music = 0,
 					player_died_music = 1,
-					enemies_defeated_music = 2
+					enemies_defeated_music = 2,
+					ambient_music = 3
 				}
 
 class DrikaPlayMusic : DrikaElement{
@@ -13,7 +14,7 @@ class DrikaPlayMusic : DrikaElement{
 	int current_music_event;
 	music_events music_event;
 
-	array<string> music_event_names = { "In Combat", "Player Died", "Enemies Defeated" };
+	array<string> music_event_names = { "In Combat", "Player Died", "Enemies Defeated", "Ambient" };
 
 	DrikaPlayMusic(JSONValue params = JSONValue()){
 		music_path = GetJSONString(params, "music_path", "Data/Music/drika_music.xml");
