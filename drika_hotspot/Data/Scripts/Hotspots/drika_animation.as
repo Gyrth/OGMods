@@ -179,7 +179,6 @@ class DrikaAnimation : DrikaElement{
 	}
 
 	void PostInit(){
-		Reset();
 		target_select.PostInit();
 	}
 
@@ -553,6 +552,7 @@ class DrikaAnimation : DrikaElement{
 
 			for(uint i = 0; i < targets.size(); i++){
 				if(targets[i].GetType() == _movement_object){
+					if(resetting){continue;}
 					MovementObject@ char = ReadCharacterID(targets[i].GetID());
 
 					vec3 facing = Mult(rotation, vec3(0,0,1));
@@ -572,12 +572,7 @@ class DrikaAnimation : DrikaElement{
 						char.velocity = vec3(0.0, 0.0, 0.0);
 					}
 
-					if(editing || (!editing && moved_spawn_point)){
-						if(editing){
-							moved_spawn_point = true;
-						}else{
-							moved_spawn_point = false;
-						}
+					if(editing){
 						targets[i].SetTranslation(translation);
 						targets[i].SetRotation(rotation);
 					}
@@ -992,6 +987,7 @@ class DrikaAnimation : DrikaElement{
 					if(animation_finished){
 						Reset();
 					}
+					animation_started = true;
 					preview_animation = true;
 				}
 			}

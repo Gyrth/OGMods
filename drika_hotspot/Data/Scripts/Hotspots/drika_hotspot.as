@@ -91,6 +91,7 @@ bool move_relative = false;
 mat4 old_transform;
 array<int> billboard_ids;
 bool adding_function = false;
+bool resetting = false;
 
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;
@@ -1664,9 +1665,11 @@ void Reset(){
 
 	script_finished = false;
 	in_dialogue_mode = false;
+	resetting = true;
 	for(int i = int(drika_indexes.size() - 1); i > -1; i--){
 		drika_elements[drika_indexes[i]].Reset();
 	}
+	resetting = false;
 	if(editing && show_editor){
 		GetCurrentElement().StartEdit();
 	}
