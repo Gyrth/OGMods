@@ -30,7 +30,6 @@ class DrikaPlaceholder{
 	}
 
 	void Create(){
-		Log(warning, "Create " + path);
 		id = CreateObject(path, false);
 		@object = ReadObjectFromID(id);
 		object.SetName(name);

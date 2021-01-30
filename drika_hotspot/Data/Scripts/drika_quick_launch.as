@@ -86,6 +86,7 @@ class DrikaQuickLaunch{
 				if(!data.parseString(results[selected_item].json)){
 					Log(warning, "Unable to parse the JSON in the Quick Launch Database! " + results[selected_item].json);
 				}else{
+					adding_function = true;
 					DrikaElement@ new_element = InterpElement(none, data.getRoot());
 					post_init_queue.insertLast(@new_element);
 					InsertElement(new_element);

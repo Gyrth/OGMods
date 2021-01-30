@@ -230,6 +230,7 @@ class DrikaDialogue : DrikaElement{
 		choice_4_element.PostInit();
 		choice_5_element.PostInit();
 		target_select.PostInit();
+		track_target.PostInit();
 	}
 
 	JSONValue GetSaveData(){
@@ -409,10 +410,10 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void Delete(){
+		Reset();
 		placeholder.Remove();
 		target_select.Delete();
 		track_target.Delete();
-		Reset();
 	}
 
 	void StartSettings(){
@@ -429,6 +430,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void DrawEditing(){
+
 		array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 		if(dialogue_function == say || dialogue_function == actor_settings || dialogue_function == set_actor_position || dialogue_function == set_actor_animation || dialogue_function == set_actor_eye_direction || dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_omniscient || dialogue_function == set_actor_dialogue_control){
 			for(uint i = 0; i < targets.size(); i++){
@@ -628,19 +630,28 @@ class DrikaDialogue : DrikaElement{
 		if(!placeholder.Exists()){
 			placeholder.path = "Data/Objects/placeholder/empty_placeholder.xml";
 			placeholder.Create();
+			array<MovementObject@> targets = target_select.GetTargetMovementObjects();
 
 			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder.object);
 			if(dialogue_function == set_actor_eye_direction){
 				if(target_actor_eye_direction == vec3(0.0)){
-					target_actor_eye_direction = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+					if(targets.size() > 0){
+						target_actor_eye_direction = targets[0].position + vec3(0.0f, 1.0f, 0.0f);
+					}else{
+						target_actor_eye_direction = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+					}
 				}
 				placeholder.SetTranslation(target_actor_eye_direction);
 				placeholder.SetScale(0.05f + 0.05f * target_blink_multiplier);
 				placeholder_object.SetEditorDisplayName("Set Actor Eye Direction Helper");
 			}else if(dialogue_function == set_actor_position){
-				//If this is a new set character position then use the hotspot as the default position.
 				if(target_actor_position == vec3(0.0)){
-					target_actor_position = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+					if(targets.size() > 0){
+						target_actor_position = targets[0].position;
+					}else{
+						//If this is a new set character position then use the hotspot as the default position.
+						target_actor_position = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+					}
 				}
 				placeholder.SetTranslation(target_actor_position);
 				placeholder.SetRotation(quaternion(vec4(0,1,0, target_actor_rotation * PI / 180.0f)));
@@ -648,14 +659,22 @@ class DrikaDialogue : DrikaElement{
 				placeholder_object.SetEditorDisplayName("Set Actor Position Helper");
 			}else if(dialogue_function == set_actor_torso_direction){
 				if(target_actor_torso_direction == vec3(0.0)){
-					target_actor_torso_direction = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+					if(targets.size() > 0){
+						target_actor_torso_direction = targets[0].position + vec3(0.0f, 0.5f, 0.0f);
+					}else{
+						target_actor_torso_direction = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+					}
 				}
 				placeholder.SetScale(target_actor_torso_direction_weight / 4.0f + 0.1f);
 				placeholder.SetTranslation(target_actor_torso_direction);
 				placeholder_object.SetEditorDisplayName("Set Actor Torso Direction Helper");
 			}else if(dialogue_function == set_actor_head_direction){
 				if(target_actor_head_direction == vec3(0.0)){
-					target_actor_head_direction = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+					if(targets.size() > 0){
+						target_actor_head_direction = targets[0].position + vec3(0.0f, 0.9f, 0.0f);
+					}else{
+						target_actor_head_direction = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
+					}
 				}
 				placeholder.SetScale(target_actor_head_direction_weight / 4.0f + 0.1f);
 				placeholder.SetTranslation(target_actor_head_direction);
@@ -1206,6 +1225,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	void TargetChanged(){
+		PlaceholderCheck();
 		Apply();
 	}
 

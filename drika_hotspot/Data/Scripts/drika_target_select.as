@@ -170,6 +170,30 @@ class DrikaTargetSelect{
 		if(identifier_type == box_select){
 			box_select_placeholder.Retrieve();
 		}
+
+		if(adding_function){
+			AttemptSelectedAsTarget();
+		}
+	}
+
+	void AttemptSelectedAsTarget(){
+		array<int> selected = GetSelected();
+
+		for(uint i = 0; i < selected.size(); i++){
+			if(!ObjectExists(selected[i]) || selected[i] == -1){continue;}
+			Object@ target_obj = ReadObjectFromID(selected[i]);
+
+			if((target_option & character_option) != 0 && target_obj.GetType() == _movement_object){
+				MovementObject@ char = ReadCharacterID(selected[i]);
+				ConnectTo(target_obj);
+				return;
+			}
+
+			if((target_option & item_option) != 0 && target_obj.GetType() == _item_object){
+				ConnectTo(target_obj);
+				return;
+			}
+		}
 	}
 
 	bool ConnectTo(Object @other){

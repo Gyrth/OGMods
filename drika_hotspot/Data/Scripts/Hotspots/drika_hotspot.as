@@ -90,6 +90,7 @@ array<Object@> refresh_queue;
 bool move_relative = false;
 mat4 old_transform;
 array<int> billboard_ids;
+bool adding_function = false;
 
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;
@@ -130,7 +131,7 @@ void Init() {
 	current_line = 0;
 	show_name = (this_hotspot.GetName() != "");
 	display_name = this_hotspot.GetName();
-    level.ReceiveLevelEvents(hotspot.GetID());
+	level.ReceiveLevelEvents(hotspot.GetID());
 	LoadPalette();
 	SortFunctionsAlphabetical();
 	//When the user duplicates a hotspot the editormode is active and the left alt is pressed.
@@ -394,6 +395,7 @@ void Update(){
 	//The post init queue is necessary so that Update is executing it, and not the Draw functions.
 	//The Draw and DrawEditor sometimes can have issues such as spawning hotspots that crash the game.
 	if(post_init_queue.size() > 0){
+		Log(warning, "Post init size " + post_init_queue.size());
 		for(uint i = 0; i < post_init_queue.size(); i++){
 			post_init_queue[i].PostInit();
 		}
@@ -409,10 +411,13 @@ void Update(){
 		duplicating_hotspot = false;
 		duplicating_function = false;
 		importing = false;
+		adding_function = false;
 		return;
 	}
 
-	quick_launch.Update();
+	if(show_editor){
+		quick_launch.Update();
+	}
 
 	for(uint i = 0; i < refresh_queue_counter.size(); i++){
 		refresh_queue_counter[i] += 1;
@@ -1874,6 +1879,7 @@ void AddFunctionMenuItems(){
 		}
 		ImGui_PushStyleColor(ImGuiCol_Text, display_colors[current_element_type]);
 		if(ImGui_Selectable(sorted_element_names[i])){
+			adding_function = true;
 			DrikaElement@ new_element = InterpElement(current_element_type, JSONValue());
 			post_init_queue.insertLast(@new_element);
 			InsertElement(new_element);
