@@ -396,7 +396,6 @@ void Update(){
 	//The post init queue is necessary so that Update is executing it, and not the Draw functions.
 	//The Draw and DrawEditor sometimes can have issues such as spawning hotspots that crash the game.
 	if(post_init_queue.size() > 0){
-		Log(warning, "Post init size " + post_init_queue.size());
 		for(uint i = 0; i < post_init_queue.size(); i++){
 			post_init_queue[i].PostInit();
 		}
