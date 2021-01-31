@@ -10,8 +10,9 @@ class DrikaSetVelocity : DrikaElement{
 	int current_set_velocity_mode;
 	DrikaTargetSelect@ towards_target;
 	float height_offset;
-	float placeholder_scale_multiplier = 5.0f;
-	float placeholder_velocity_arrow_multiplier = 0.5f;
+	float placeholder_min_scale = 0.25;
+	float placeholder_scale_multiplier = 7.0f;
+	float placeholder_velocity_arrow_multiplier = 0.25f;
 
 	array<string> set_velocity_mode_names = {	"Set Velocity With Placeholder",
 												"Set Velocity Towards Target"
@@ -128,7 +129,7 @@ class DrikaSetVelocity : DrikaElement{
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_DragFloat("###Velocity", velocity_magnitude, 0.01f, 0.0f, 1000.0f, "%.2f")){
-			placeholder.SetScale(velocity_magnitude / placeholder_scale_multiplier);
+			placeholder.SetScale(placeholder_min_scale + (velocity_magnitude / placeholder_scale_multiplier));
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
@@ -159,6 +160,13 @@ class DrikaSetVelocity : DrikaElement{
 			}
 		}else if(set_velocity_mode == _set_velocity_with_placeholder){
 			if(placeholder.Exists()){
+				//Force the placeholder to be a minimum size.
+				vec3 placeholder_scale = placeholder.GetScale();
+				if(placeholder_scale.x < placeholder_min_scale || placeholder_scale.y < placeholder_min_scale || placeholder_scale.z < placeholder_min_scale){
+					placeholder_scale.x = placeholder_min_scale;
+					placeholder.SetScale(placeholder_min_scale);
+				}
+
 				array<Object@> targets = target_select.GetTargetObjects();
 				for(uint i = 0; i < targets.size(); i++){
 					DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
@@ -168,11 +176,11 @@ class DrikaSetVelocity : DrikaElement{
 				gizmo_transform_y.SetTranslationPart(placeholder.GetTranslation());
 				gizmo_transform_y.SetRotationPart(Mat4FromQuaternion(placeholder.GetRotation()));
 
-				velocity_magnitude = ((placeholder.GetScale().x + placeholder.GetScale().y + placeholder.GetScale().z) / 3.0f) * placeholder_scale_multiplier;
+				velocity_magnitude = (((placeholder.GetScale().x + placeholder.GetScale().y + placeholder.GetScale().z) / 3.0f) - placeholder_min_scale) * placeholder_scale_multiplier;
 
 				mat4 scale_mat_y;
 				scale_mat_y[0] = 1.0;
-				scale_mat_y[5] = velocity_magnitude * placeholder_velocity_arrow_multiplier;
+				scale_mat_y[5] = max(placeholder_min_scale, velocity_magnitude * placeholder_velocity_arrow_multiplier);
 				scale_mat_y[10] = 1.0;
 				scale_mat_y[15] = 1.0f;
 				gizmo_transform_y = gizmo_transform_y * scale_mat_y;
@@ -195,13 +203,13 @@ class DrikaSetVelocity : DrikaElement{
 				DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_draw);
 			}else{
 				placeholder.Create();
-				placeholder.SetScale(velocity_magnitude / placeholder_scale_multiplier);
+				placeholder.SetScale(placeholder_min_scale + (velocity_magnitude / placeholder_scale_multiplier));
 			}
 		}
 	}
 
 	void StartEdit(){
-		placeholder.SetScale(velocity_magnitude / placeholder_scale_multiplier);
+		placeholder.SetScale(placeholder_min_scale + (velocity_magnitude / placeholder_scale_multiplier));
 		DrikaElement::StartEdit();
 	}
 

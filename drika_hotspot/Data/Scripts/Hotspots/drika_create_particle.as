@@ -7,6 +7,9 @@ class DrikaCreateParticle : DrikaElement{
 	bool use_blood_tint;
 	bool connect_particles = false;
 	int previous_particle_id = -1;
+	float placeholder_min_scale = 0.25;
+	float placeholder_scale_multiplier = 7.0f;
+	float placeholder_velocity_arrow_multiplier = 0.25f;
 
 	DrikaCreateParticle(JSONValue params = JSONValue()){
 		placeholder.Load(params);
@@ -17,7 +20,7 @@ class DrikaCreateParticle : DrikaElement{
 
 		amount = GetJSONInt(params, "amount", 5);
 		tint = GetJSONVec3(params, "tint", vec3(1.0f));
-		velocity = GetJSONFloat(params, "velocity", 0.0f);
+		velocity = GetJSONFloat(params, "velocity", 5.0f);
 		spread = GetJSONFloat(params, "spread", 0.0f);
 		use_blood_tint = GetJSONBool(params, "use_blood_tint", true);
 		connect_particles = GetJSONBool(params, "connect_particles", false);
@@ -87,7 +90,9 @@ class DrikaCreateParticle : DrikaElement{
 		ImGui_Text("Velocity");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
-		ImGui_DragFloat("##Velocity", velocity, 1.0f, 0.0f, 1000.0f);
+		if(ImGui_DragFloat("##Velocity", velocity, 0.01f, 0.0f, 1000.0f)){
+			placeholder.SetScale(placeholder_min_scale + (velocity / placeholder_scale_multiplier));
+		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
@@ -124,10 +129,48 @@ class DrikaCreateParticle : DrikaElement{
 
 	void DrawEditing(){
 		if(placeholder.Exists()){
+			//Force the placeholder to be a minimum size.
+			vec3 placeholder_scale = placeholder.GetScale();
+			if(placeholder_scale.x < placeholder_min_scale || placeholder_scale.y < placeholder_min_scale || placeholder_scale.z < placeholder_min_scale){
+				placeholder_scale.x = placeholder_min_scale;
+				placeholder.SetScale(placeholder_min_scale);
+			}
+
 			vec3 forward_direction = placeholder.GetRotation() * vec3(1, 0, 0);
-			DebugDrawLine(placeholder.GetTranslation(), placeholder.GetTranslation() + (forward_direction * (velocity / 10.0)), vec3(1, 0, 0), _delete_on_draw);
-			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
+			mat4 gizmo_transform_y;
+			gizmo_transform_y.SetTranslationPart(placeholder.GetTranslation());
+			gizmo_transform_y.SetRotationPart(Mat4FromQuaternion(placeholder.GetRotation()));
+
+			velocity = (((placeholder.GetScale().x + placeholder.GetScale().y + placeholder.GetScale().z) / 3.0f) - placeholder_min_scale) * placeholder_scale_multiplier;
+
+			mat4 scale_mat_y;
+			float spread_width = 1.0f + (spread * 2.0f);
+			scale_mat_y[0] = max(placeholder_min_scale, velocity * placeholder_velocity_arrow_multiplier);
+			scale_mat_y[5] = spread_width;
+			scale_mat_y[10] = spread_width;
+			scale_mat_y[15] = 1.0f;
+			gizmo_transform_y = gizmo_transform_y * scale_mat_y;
+
+			DebugDrawWireMesh("Data/Models/drika_gizmo_x.obj", gizmo_transform_y, vec4(1.0f, 0.0f, 0.0f, 1.0f), _delete_on_draw);
+
+			/* DebugDrawLine(placeholder.GetTranslation(), placeholder.GetTranslation() + (forward_direction * (velocity / 10.0)), vec3(1, 0, 0), _delete_on_draw); */
+			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_draw);
 			DebugDrawBillboard("Data/Textures/ui/stealth_debug/zzzz.tga", placeholder.GetTranslation(), 0.25, vec4(1.0), _delete_on_draw);
+
+			mat4 mesh_transform;
+			mesh_transform.SetTranslationPart(placeholder.GetTranslation());
+			mat4 rotation = Mat4FromQuaternion(placeholder.GetRotation());
+			mesh_transform.SetRotationPart(rotation);
+
+			mat4 scale_mat;
+			scale_mat[0] = placeholder.GetScale().x;
+			scale_mat[5] = placeholder.GetScale().y;
+			scale_mat[10] = placeholder.GetScale().z;
+			scale_mat[15] = 1.0f;
+			mesh_transform = mesh_transform * scale_mat;
+
+			vec4 color = placeholder.IsSelected()?vec4(0.0f, 0.85f, 0.0f, 0.75f):vec4(0.0f, 0.35f, 0.0f, 0.75f);
+			DebugDrawWireMesh("Data/Models/drika_hotspot_cube.obj", mesh_transform, color, _delete_on_draw);
 		}else{
 			placeholder.Create();
 			StartEdit();
