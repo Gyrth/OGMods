@@ -191,7 +191,7 @@ class DrikaSetLevelParam : DrikaElement{
 				ImGui_Text("Param Name");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				ImGui_InputText("###Param Name", param_name, 64);
+				ImGui_InputText("###Param Name", param_name, 128);
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
 			}
@@ -199,7 +199,7 @@ class DrikaSetLevelParam : DrikaElement{
 			ImGui_Text("Value");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			ImGui_InputText("###Value", string_param_after, 64);
+			ImGui_InputText("###Value", string_param_after, 128);
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 		}else if(param_type == float_param){
