@@ -114,6 +114,7 @@ class DrikaDialogue : DrikaElement{
 	vec3 camera_rotation_from;
 	float camera_transition_timer = 0.0;
 	array<DialogueScriptEntry@> dialogue_script;
+	float say_changed_timer;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -790,7 +791,7 @@ class DrikaDialogue : DrikaElement{
 
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 				say_text = ImGui_GetTextBuf();
-				Reset();
+				say_changed_timer = 1.0f;
 			}
 
 			ImGui_PopItemWidth();
@@ -1326,6 +1327,12 @@ class DrikaDialogue : DrikaElement{
 	void Update(){
 		if(dialogue_function == say){
 			UpdateSayDialogue(true);
+			if(say_changed_timer > 0.0f){
+				say_changed_timer -= time_step;
+				if(say_changed_timer <= 0.0f){
+					Reset();
+				}
+			}
 		}else if(dialogue_function == choice){
 			ShowChoiceDialogue(true);
 		}else if(dialogue_function == set_camera_position){
