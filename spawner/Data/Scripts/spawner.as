@@ -2,6 +2,7 @@ bool show = false;
 int voice_preview = 1;
 bool select = false;
 int icon_size = 155;
+int new_icon_size = 155;
 int title_height = 23;
 int scrollbar_width = 10;
 int padding = 10;
@@ -460,8 +461,8 @@ void DrawGUI(){
 					open_palette = true;
 				}
 
-				if(ImGui_DragInt("Icon Size", icon_size, 1.0, 75, 500, "%.0f")){
-
+				if(ImGui_DragInt("Icon Size", new_icon_size, 1.0, 75, 500, "%.0f")){
+					icon_size = min(500, max(75, new_icon_size));
 				}
 
 				if(ImGui_DragFloat("Paint Distance", paint_max_distance, 0.01f, 0.0f, 100.0f, "%.1f")){
