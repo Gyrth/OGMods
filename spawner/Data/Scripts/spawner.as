@@ -26,6 +26,7 @@ float paint_timeout = 0.1;
 float spawn_height_offset = 0.0;
 bool open_palette = false;
 bool steal_focus = false;
+string input_query;
 
 // Coloring options
 vec4 background_color();
@@ -488,6 +489,7 @@ void DrawGUI(){
 		ImGui_Text("Search : ");
 		ImGui_SameLine();
 		ImGui_PushItemWidth(ImGui_GetWindowWidth() - 175);
+		ImGui_SetTextBuf(input_query);
 		if(ImGui_InputText("##Search", ImGuiInputTextFlags_AutoSelectAll)){
 			categories = SortIntoCategories(QuerySpawnerItems(ImGui_GetTextBuf()));
 		}
