@@ -97,6 +97,11 @@ class GUISpawnerItem{
 				SetSpawnSettings(path);
 			}
 		}
+		if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip(title);
+			ImGui_PopStyleColor();
+		}
 		ImGui_PopStyleColor(2);
 
 		ImGui_EndChild();
