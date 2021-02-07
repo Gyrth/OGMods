@@ -1,8 +1,8 @@
 bool show = false;
 int voice_preview = 1;
 bool select = false;
-int icon_size = 155;
-int new_icon_size = 155;
+int icon_size = 100;
+int new_icon_size = 100;
 int title_height = 23;
 int scrollbar_width = 10;
 int padding = 10;
@@ -492,7 +492,8 @@ void DrawGUI(){
 		ImGui_PushItemWidth(ImGui_GetWindowWidth() - 225);
 		ImGui_SetTextBuf(input_query);
 		if(ImGui_InputText("##Search", ImGuiInputTextFlags_AutoSelectAll)){
-			categories = SortIntoCategories(QuerySpawnerItems(ImGui_GetTextBuf()));
+			input_query = ImGui_GetTextBuf();
+			categories = SortIntoCategories(QuerySpawnerItems(input_query));
 		}
 		ImGui_SameLine();
 		if(ImGui_Button("Clear")){
