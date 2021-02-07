@@ -71,6 +71,10 @@ class GUISpawnerItem{
 		}
 	}
 
+	void SetSpawnerItem(SpawnerItem _spawner_item){
+		spawner_item = _spawner_item;
+	}
+
 	void DrawItem(){
 		if(currently_selected == id){
 			ImGui_PushStyleColor(ImGuiCol_ChildBg, item_clicked);
@@ -185,6 +189,24 @@ void LoadPalette(bool use_defaults = false){
 void GetAllSpawnerItems(){
 	array<SpawnerItem> spawner_items = ModGetAllSpawnerItems();
 	for(uint i = 0; i < spawner_items.size(); i++){
+		bool skip = false;
+		for(uint j = 0; j < all_items.size(); j++){
+			GUISpawnerItem @check_item = all_items[j];
+			//Check if the item is already in the list.
+			if(spawner_items[i].GetCategory() == check_item.category && spawner_items[i].GetPath() == check_item.path){
+				//Check if the item has a thumbnail.
+				if((spawner_items[i].GetThumbnail() != "" && spawner_items[i].GetThumbnail() != "Data/Textures/ui/t2/spawner.jpg") && (check_item.spawner_item.GetThumbnail() == "" || check_item.spawner_item.GetThumbnail() == "Data/Textures/ui/t2/spawner.jpg")){
+					check_item.SetSpawnerItem(spawner_items[i]);
+				}
+				skip = true;
+				break;
+			}
+		}
+
+		if(skip){
+			continue;
+		}
+
 		TextureAssetRef icon_texture = default_texture;
 		GUISpawnerItem @new_item = GUISpawnerItem(spawner_items[i].GetCategory(), spawner_items[i].GetTitle(), spawner_items[i].GetPath(), i, icon_texture, spawner_items[i]);
 		all_items.insertLast(new_item);
