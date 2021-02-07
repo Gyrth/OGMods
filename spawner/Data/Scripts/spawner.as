@@ -488,10 +488,15 @@ void DrawGUI(){
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Search : ");
 		ImGui_SameLine();
-		ImGui_PushItemWidth(ImGui_GetWindowWidth() - 175);
+		ImGui_PushItemWidth(ImGui_GetWindowWidth() - 225);
 		ImGui_SetTextBuf(input_query);
 		if(ImGui_InputText("##Search", ImGuiInputTextFlags_AutoSelectAll)){
 			categories = SortIntoCategories(QuerySpawnerItems(ImGui_GetTextBuf()));
+		}
+		ImGui_SameLine();
+		if(ImGui_Button("Clear")){
+			input_query = "";
+			categories = SortIntoCategories(QuerySpawnerItems(input_query));
 		}
 		ImGui_SameLine();
 		if(ImGui_Checkbox("Paint", paint)){
