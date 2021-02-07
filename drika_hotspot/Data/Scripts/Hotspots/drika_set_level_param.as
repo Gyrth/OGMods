@@ -318,16 +318,20 @@ class DrikaSetLevelParam : DrikaElement{
 						vec3 new_color = reset?vec3_param_before:vec3_param_after;
 						params.SetString("Sky Tint", int(new_color.x * 255) + ", " + int(new_color.y * 255) + ", " + int(new_color.z * 255));
 						SetSkyTint(new_color);
+						RefreshGlobalReflection();
 					}
 					break;
 				case sun_position:
 					SetSunPosition(reset?vec3_param_before:vec3_param_after);
+					RefreshGlobalReflection();
 					break;
 				case sun_color:
 					SetSunColor(reset?vec3_param_before:vec3_param_after);
+					RefreshGlobalReflection();
 					break;
 				case sun_intensity:
 					SetSunAmbient(reset?float_param_before:float_param_after);
+					RefreshGlobalReflection();
 					break;
 				case hdr_black_point:
 					SetHDRBlackPoint((reset?float_param_before:float_param_after) / 100.0f);
@@ -369,6 +373,16 @@ class DrikaSetLevelParam : DrikaElement{
 		if(triggered){
 			triggered = false;
 			SetParameter(true);
+		}
+	}
+
+	void RefreshGlobalReflection(){
+		array<int> reflection_objects = GetObjectIDsType(_reflection_capture_object);
+
+		for(uint i = 0; i < reflection_objects.size(); i++){
+			Object@ obj = ReadObjectFromID(reflection_objects[i]);
+			obj.SetTranslation(obj.GetTranslation());
+			/* DebugDrawWireSphere(obj.GetTranslation(), 1.0, vec3(1.0f), _persistent); */
 		}
 	}
 }
