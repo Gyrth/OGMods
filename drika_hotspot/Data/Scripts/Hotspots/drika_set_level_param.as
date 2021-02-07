@@ -207,7 +207,7 @@ class DrikaSetLevelParam : DrikaElement{
 			ImGui_Text("Value");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			ImGui_SliderFloat("###Value", float_param_after, -1000.0f, 1000.0f, "%.4f");
+			ImGui_SliderFloat("###Value", float_param_after, -500.0f, 500.0f, "%.3f");
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 		}else if(param_type == vec3_param){
@@ -215,7 +215,7 @@ class DrikaSetLevelParam : DrikaElement{
 			ImGui_Text("Value");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			ImGui_InputFloat3("###Value", vec3_param_after);
+			ImGui_SliderFloat3("###Value", vec3_param_after, -1.0f, 1.0f, "%.3f");
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 		}else if(param_type == vec3_color_param){
@@ -231,7 +231,10 @@ class DrikaSetLevelParam : DrikaElement{
 			ImGui_Text("Value");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			ImGui_InputInt("###Value", int_param_after);
+			bool checked = (int_param_after == 1);
+			if(ImGui_Checkbox("###Value", checked)){
+				int_param_after = checked?1:0;
+			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 		}
