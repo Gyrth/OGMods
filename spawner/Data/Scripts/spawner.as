@@ -36,6 +36,7 @@ vec4 item_background();
 vec4 item_hovered();
 vec4 item_clicked();
 vec4 text_color();
+vec4 transparent(0.0f);
 
 TextureAssetRef youdied_texture = LoadTexture("Data/Images/youdied.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/whaleman.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
@@ -422,7 +423,7 @@ void DrawGUI(){
 		ImGui_PushStyleColor(ImGuiCol_Header, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_HeaderHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_HeaderActive, item_clicked);
-		ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, background_color);
+		ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, transparent);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrab, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
@@ -508,12 +509,14 @@ void DrawGUI(){
 
 		ImGui_EndChild();
 
-		ImGui_PushStyleColor(ImGuiCol_FrameBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
-		if(ImGui_BeginChildFrame(55, vec2(ImGui_GetWindowWidth() - scrollbar_width, ImGui_GetWindowHeight() - (top_bar_height * 2.0 + padding * 3.0)))){
-			for(uint i = 0; i < categories.size(); i++){
-				AddCategory(categories[i]);
+		ImGui_PushStyleColor(ImGuiCol_FrameBg, transparent);
+		if(!ImGui_IsWindowCollapsed()){
+			if(ImGui_BeginChildFrame(55, vec2(-1, -1), ImGuiWindowFlags_AlwaysAutoResize)){
+				for(uint i = 0; i < categories.size(); i++){
+					AddCategory(categories[i]);
+				}
+				ImGui_EndChildFrame();
 			}
-			ImGui_EndChildFrame();
 		}
 		ImGui_End();
 		ImGui_PopStyleColor(19);
