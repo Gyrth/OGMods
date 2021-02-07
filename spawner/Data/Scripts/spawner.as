@@ -678,7 +678,7 @@ void AddCategory(GUISpawnerCategory@ category){
 		return;
 	}
 
-	if(ImGui_TreeNodeEx(category.category_name, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
+	if(ImGui_TreeNodeEx(category.category_name + "(" + category.spawner_items.size() + ")", ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
 		ImGui_Unindent(30.0f);
 		ImGui_BeginChild(category.category_name, vec2(ImGui_GetWindowWidth(), icon_size + title_height), false, ImGuiWindowFlags_NoScrollWithMouse);
 		float row_size = 0.0f;
