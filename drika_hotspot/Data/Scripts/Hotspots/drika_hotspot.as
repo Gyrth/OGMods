@@ -92,6 +92,7 @@ mat4 old_transform;
 array<int> billboard_ids;
 bool adding_function = false;
 bool resetting = false;
+string last_read_path = "";
 
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;
@@ -2024,4 +2025,18 @@ DrikaElement@ GetReferenceElement(string reference){
 		}
 	}
 	return null;
+}
+
+void SetLastReadPath(string new_path){
+	array<string> split_path = new_path.split("/");
+	split_path.removeLast();
+	last_read_path = join(split_path, "/");
+}
+
+string GetLastReadPath(string default_path){
+	if(last_read_path == ""){
+		return default_path;
+	}else{
+		return last_read_path;
+	}
 }

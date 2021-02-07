@@ -31,6 +31,8 @@ class DrikaDialogue : DrikaElement{
 	int current_dialogue_function;
 	string say_text;
 	array<string> say_text_split;
+	string voice_over_path;
+	int voice_over_sound_id = -1;
 	bool say_started = false;
 	float say_timer = 0.0;
 	bool auto_continue;
@@ -145,6 +147,7 @@ class DrikaDialogue : DrikaElement{
 		placeholder.default_scale = vec3(1.0);
 
 		say_text = GetJSONString(params, "say_text", "Drika Hotspot Dialogue");
+		voice_over_path = GetJSONString(params, "voice_over_path", "");
 		dialogue_color = GetJSONVec4(params, "dialogue_color", vec4(1));
 		voice = GetJSONInt(params, "voice", 0);
 		avatar_path = GetJSONString(params, "avatar_path", "None");
@@ -240,6 +243,7 @@ class DrikaDialogue : DrikaElement{
 		if(dialogue_function == say){
 			data["say_text"] = JSONValue(say_text);
 			data["auto_continue"] = JSONValue(auto_continue);
+			data["voice_over_path"] = JSONValue(voice_over_path);
 		}else if(dialogue_function == actor_settings){
 			data["dialogue_color"] = JSONValue(JSONarrayValue);
 			data["dialogue_color"].append(dialogue_color.x);
@@ -750,6 +754,29 @@ class DrikaDialogue : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			ImGui_Checkbox("", auto_continue);
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Voice Over");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_Button("Load...")){
+				string new_path = GetUserPickedReadPath("wav", GetLastReadPath("Data/Sounds"));
+				if(new_path != ""){
+					voice_over_path = new_path;
+					Reset();
+					SetLastReadPath(voice_over_path);
+				}
+			}
+			ImGui_SameLine();
+			ImGui_Text(voice_over_path);
+			if(voice_over_path != ""){
+				ImGui_SameLine();
+				if(ImGui_Button("Clear")){
+					voice_over_path = "";
+					Reset();
+				}
+			}
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
@@ -1270,6 +1297,7 @@ class DrikaDialogue : DrikaElement{
 			say_started = false;
 			say_timer = 0.0;
 			wait_timer = 0.0;
+			StopSound(voice_over_sound_id);
 		}else if(dialogue_function == fade_to_black){
 			if(triggered){
 				ResetFadeToBlack();
@@ -1686,6 +1714,10 @@ class DrikaDialogue : DrikaElement{
 			say_started = true;
 			dialogue_progress = 0;
 			dialogue_timer = 0.0;
+
+			if(voice_over_path != ""){
+				voice_over_sound_id = PlaySound(voice_over_path);
+			}
 
 			dialogue_script = InterpDialogueScript(say_text);
 
