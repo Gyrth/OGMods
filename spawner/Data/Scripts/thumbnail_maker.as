@@ -4,7 +4,7 @@ float z_distance = 1.0f;
 ScriptParams@ params = level.GetScriptParams();
 bool post_init_done = false;
 array<GUISpawnerItem@> all_items;
-int current_index = 0;
+int current_index = -1;
 int spawned_id = -1;
 JSON data;
 JSONValue screenshot_links;
@@ -14,6 +14,8 @@ float object_y_rotation = 0.0f;
 float object_z_rotation = 0.0f;
 IMGUI@ imGUI;
 IMContainer@ main_container;
+vec3 look_at_position = vec3();
+float vertical_offset;
 
 class GUISpawnerItem{
 	string title;
@@ -142,7 +144,7 @@ void Update(int is_paused){
 		y_rotation += 360.0f;
 	}
 
-	float step_size = 0.15;
+	float step_size = max(0.01, 0.02 * z_distance);
 	if(GetInputDown(char.controller_id, "mousescrollup")){
         z_distance = max(0.01f, z_distance - step_size);
     } else if(GetInputDown(char.controller_id, "mousescrolldown")){
@@ -167,23 +169,27 @@ void Update(int is_paused){
 	}
 
 	if(GetInputPressed(char.controller_id, "pageup")){
-		if(current_index < int(all_items.size())){
+		if(current_index < int(all_items.size() - 1)){
+			current_index += 1;
 			Log(warning, "Create : " + all_items[current_index].path);
 			DeleteObjectID(spawned_id);
 			spawned_id = CreateObject(all_items[current_index].path);
 			Object@ obj = ReadObjectFromID(spawned_id);
-			current_index += 1;
+			obj.SetTranslation(vec3());
 			object_x_rotation = 0.0f;
 			object_y_rotation = 0.0f;
 			object_z_rotation = 0.0f;
+		}else{
+			Log(warning, "No more items available.");
 		}
 	}else if(GetInputPressed(char.controller_id, "pagedown")){
-		if(current_index > -1){
+		if(current_index > 0){
+			current_index -= 1;
 			Log(warning, "Create : " + all_items[current_index].path);
 			DeleteObjectID(spawned_id);
 			spawned_id = CreateObject(all_items[current_index].path);
 			Object@ obj = ReadObjectFromID(spawned_id);
-			current_index -= 1;
+			obj.SetTranslation(vec3());
 			object_x_rotation = 0.0f;
 			object_y_rotation = 0.0f;
 			object_z_rotation = 0.0f;
@@ -200,7 +206,6 @@ void Update(int is_paused){
 	mat4 rotation_mat = rotationY_mat * rotationX_mat;
 	vec3 facing = rotation_mat * vec3(0.0f, 0.0f, -1.0f);
 	vec3 camera_position = vec3(0.0) + (facing * z_distance);
-	vec3 look_at_position = vec3();
 
 	if(spawned_id != -1){
 		Object@ obj = ReadObjectFromID(spawned_id);
@@ -209,7 +214,8 @@ void Update(int is_paused){
 		objectrotationX_mat.SetRotationX(object_x_rotation * 3.1415f / 180.0f);
 		objectrotationZ_mat.SetRotationZ(object_z_rotation * 3.1415f / 180.0f);
 		mat4 object_rotation_mat = objectrotationY_mat * objectrotationX_mat * objectrotationZ_mat;
-		float rotate_speed = 0.5;
+		float rotate_speed = 0.25;
+		float move_speed = max(0.001, 0.002 * z_distance);
 
 		if(GetInputDown(char.controller_id, "left")){
 			object_y_rotation = object_y_rotation + rotate_speed;
@@ -229,6 +235,12 @@ void Update(int is_paused){
 		}
 
 		obj.SetRotation(QuaternionFromMat4(object_rotation_mat));
+
+		if(GetInputDown(char.controller_id, "r")){
+			vertical_offset += move_speed;
+		}else if(GetInputDown(char.controller_id, "f")){
+			vertical_offset -= move_speed;
+		}
 
 		/* DebugDrawWireSphere(vec3(0.0), 0.5, vec3(1.0), _delete_on_update);
 		DebugDrawWireSphere(camera_position, 0.5, vec3(1.0), _delete_on_update);
@@ -251,7 +263,7 @@ void Update(int is_paused){
 	}
 
 	camera.SetPos(camera_position);
-	camera.LookAt(look_at_position);
+	camera.LookAt(look_at_position + vec3(0.0f, vertical_offset, 0.0f));
 	camera.SetDistance(0.0f);
 	imGUI.update();
 }

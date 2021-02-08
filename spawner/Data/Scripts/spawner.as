@@ -43,6 +43,8 @@ TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/
 
 array<GUISpawnerItem@> all_items;
 array<GUISpawnerCategory@> categories;
+array<string> thumbnail_object_paths;
+array<string> thumbnail_image_paths;
 
 class GUISpawnerItem{
 	string title;
@@ -65,9 +67,19 @@ class GUISpawnerItem{
 	void SetThumbnail(){
 		//If no thumbnail was set, use the default one.
 		if(spawner_item.GetThumbnail() == "" || !FileExists(spawner_item.GetThumbnail())){
-			return;
+			DatabaseThumbnailSearch();
 		}else{
 			icon = LoadTexture(spawner_item.GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
+		}
+	}
+
+	void DatabaseThumbnailSearch(){
+		for(uint i = 0; i < thumbnail_object_paths.size(); i++){
+			if(thumbnail_object_paths[i] == path){
+				Log(warning, "Using database image " + thumbnail_image_paths[i]);
+				icon = LoadTexture(thumbnail_image_paths[i], TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
+				break;
+			}
 		}
 	}
 
@@ -259,6 +271,7 @@ void Update(int paused){
 		}
 
 		if(show && !retrieved_item_list){
+			LoadThumbnailDatabase();
 			GetAllSpawnerItems();
 			categories = SortIntoCategories(QuerySpawnerItems(""));
 			retrieved_item_list = true;
@@ -266,6 +279,21 @@ void Update(int paused){
 
 	}else if(show){
 		show = false;
+	}
+}
+
+void LoadThumbnailDatabase(){
+	JSON file;
+	file.parseFile("Data/Scripts/thumbnail_database.json");
+	JSONValue root = file.getRoot();
+
+	JSONValue thumbnail_list = root["item_list"];
+	array<string> thumbnail_list_names = thumbnail_list.getMemberNames();
+
+	for(uint i = 0; i < thumbnail_list_names.size(); i++){
+		string thumbnail_object_path = thumbnail_list_names[i];
+		thumbnail_object_paths.insertLast(thumbnail_object_path);
+		thumbnail_image_paths.insertLast(thumbnail_list[thumbnail_object_path].asString());
 	}
 }
 
@@ -342,13 +370,13 @@ void SpawnObject(string load_item_path){
 			quaternion new_rotation = quaternion(vec4(rand_x?1.0:0.0f,rand_y?1.0:0.0f,rand_z?1.0:0.0f, RangedRandomFloat(-1, 1)));
 			obj.SetRotation(new_rotation);
 		}
-		obj.SetTranslation(spawn_position + vec3(0, spawn_height_offset, 0));
 		obj.SetCopyable(true);
 		obj.SetSelectable(true);
 		obj.SetTranslatable(true);
 		obj.SetScalable(true);
 		obj.SetRotatable(true);
 		obj.SetDeletable(true);
+		obj.SetTranslation(spawn_position + vec3(0, spawn_height_offset, 0));
 		DeselectAll();
 		obj.SetSelected(true);
 		painted_positions.insertLast(spawn_position);
