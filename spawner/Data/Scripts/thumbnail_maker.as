@@ -15,7 +15,6 @@ float object_z_rotation = 0.0f;
 IMGUI@ imGUI;
 IMContainer@ main_container;
 vec3 look_at_position = vec3();
-float vertical_offset;
 int set_position = -1;
 
 class GUISpawnerItem{
@@ -152,6 +151,11 @@ void Update(int is_paused){
 		Object@ obj = ReadObjectFromID(spawned_id);
 		obj.SetTranslation(vec3());
 		set_position -= 1;
+		AddObjectRotation(0.0f, 0.0f, 0.0f);
+		SetLookAtPosition();
+
+		vec3 bounds = obj.GetBoundingBox();
+		z_distance = max(1.0f, (bounds.x + bounds.y + bounds.z) / 3.0f);
 	}
 
 	if(GetInputDown(char.controller_id, "attack")){
@@ -163,8 +167,9 @@ void Update(int is_paused){
 		look_at_position += GetLookXAxis(char.controller_id) * right * tilt_speed;
 		look_at_position -= GetLookYAxis(char.controller_id) * up * tilt_speed;
 	}else{
-		x_rotation = max(-70.0f, min(70.0f, x_rotation -= GetLookYAxis(char.controller_id)));
-		y_rotation += GetLookXAxis(char.controller_id);
+		float look_speed = 0.5f;
+		x_rotation = max(-70.0f, min(70.0f, x_rotation - (GetLookYAxis(char.controller_id) * look_speed)));
+		y_rotation += GetLookXAxis(char.controller_id) * look_speed;
 		if(y_rotation > 180.0f){
 			y_rotation -= 360.0f;
 		}else if(y_rotation < -180.0f){
@@ -172,7 +177,7 @@ void Update(int is_paused){
 		}
 	}
 
-	float step_size = max(0.01, 0.08 * z_distance);
+	float step_size = max(0.01, 0.04 * z_distance) * (GetInputDown(char.controller_id, "lctrl")?4.0f:1.0f);
 	if(GetInputDown(char.controller_id, "mousescrollup")){
 		z_distance = max(0.01f, z_distance - step_size);
 	} else if(GetInputDown(char.controller_id, "mousescrolldown")){
@@ -201,10 +206,11 @@ void Update(int is_paused){
 			DeleteObjectID(spawned_id);
 			spawned_id = CreateObject(all_items[current_index].path);
 			set_position = 2;
+			Object@ obj = ReadObjectFromID(spawned_id);
+			obj.SetTranslation(vec3());
 			object_x_rotation = 0.0f;
 			object_y_rotation = 0.0f;
 			object_z_rotation = 0.0f;
-			SetLookAtPosition();
 		}else{
 			Log(warning, "No more items available.");
 		}
@@ -215,10 +221,11 @@ void Update(int is_paused){
 			DeleteObjectID(spawned_id);
 			spawned_id = CreateObject(all_items[current_index].path);
 			set_position = 2;
+			Object@ obj = ReadObjectFromID(spawned_id);
+			obj.SetTranslation(vec3());
 			object_x_rotation = 0.0f;
 			object_y_rotation = 0.0f;
 			object_z_rotation = 0.0f;
-			SetLookAtPosition();
 		}
 	}else if(GetInputPressed(char.controller_id, "home")){
 		WriteScreenshotData();
@@ -262,7 +269,7 @@ void Update(int is_paused){
 
 	if(!EditorModeActive()){
 		camera.SetPos(camera_position);
-		camera.LookAt(look_at_position + vec3(0.0f, vertical_offset, 0.0f));
+		camera.LookAt(look_at_position);
 		camera.SetDistance(0.0f);
 	}
 	imGUI.update();
@@ -270,9 +277,8 @@ void Update(int is_paused){
 
 void SetLookAtPosition(){
 	Object@ obj = ReadObjectFromID(spawned_id);
-	if(obj.GetType() == _env_object){
-		look_at_position = obj.GetTranslation();
-	}else if(obj.GetType() == _movement_object){
+
+	if(obj.GetType() == _movement_object){
 		MovementObject@ target_char = ReadCharacterID(obj.GetID());
 		RiggedObject@ rigged_object = target_char.rigged_object();
 		Skeleton@ skeleton = rigged_object.skeleton();
@@ -283,6 +289,8 @@ void SetLookAtPosition(){
 	}else if(obj.GetType() == _item_object){
 		ItemObject@ io = ReadItemID(obj.GetID());
 		look_at_position = io.GetPhysicsPosition();
+	}else{
+		look_at_position = obj.GetTranslation();
 	}
 }
 
