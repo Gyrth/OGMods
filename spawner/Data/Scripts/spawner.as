@@ -28,6 +28,8 @@ float spawn_height_offset = 0.0;
 bool open_palette = false;
 bool steal_focus = false;
 string input_query;
+int set_position = -1;
+int spawn_id = -1;
 
 // Coloring options
 vec4 background_color();
@@ -270,6 +272,19 @@ void Update(int paused){
 			SetPlaceholderVisible(show);
 		}
 
+		//Sometimes OG sets the scale, rot and pos to 0.0f when loading images.
+		//So keep setting it to the correct values if it's not. For 50 updates.
+		if(set_position > 0){
+			set_position -= 1;
+			Object@ obj = ReadObjectFromID(spawn_id);
+			if(obj.GetScale() == vec3()){
+				obj.SetScale(vec3(1.0f));
+				obj.SetTranslation(spawn_position + vec3(0, spawn_height_offset, 0));
+			}
+		}else if(set_position == 0){
+			set_position -= 1;
+		}
+
 		if(show && !retrieved_item_list){
 			LoadThumbnailDatabase();
 			GetAllSpawnerItems();
@@ -364,8 +379,8 @@ void ReceiveMessage(string msg){
 void SpawnObject(string load_item_path){
 	if(FileExists(load_item_path)){
 		Log(warning, "Creating object " + load_item_path);
-		int id = CreateObject(load_item_path, false);
-		Object@ obj = ReadObjectFromID(id);
+		spawn_id = CreateObject(load_item_path, false);
+		Object@ obj = ReadObjectFromID(spawn_id);
 		if(paint){
 			quaternion new_rotation = quaternion(vec4(rand_x?1.0:0.0f,rand_y?1.0:0.0f,rand_z?1.0:0.0f, RangedRandomFloat(-1, 1)));
 			obj.SetRotation(new_rotation);
@@ -380,7 +395,8 @@ void SpawnObject(string load_item_path){
 		DeselectAll();
 		obj.SetSelected(true);
 		painted_positions.insertLast(spawn_position);
-		painted_objects.insertLast(id);
+		painted_objects.insertLast(spawn_id);
+		set_position = 50;
 	}else{
 		DisplayError("Error", "This xml file does not exist: " + load_item_path);
 	}
