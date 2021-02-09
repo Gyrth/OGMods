@@ -70,14 +70,18 @@ void GetAllSpawnerItems(){
 			expected_thumbnail_path = join(expected_thumbnail_path.split(".xml"), ".png");
 
 			if(FileExists(expected_thumbnail_path)){
-				Log(warning, "Skipping " + expected_thumbnail_path);
+				/* Log(warning, "Skipping " + expected_thumbnail_path); */
 				continue;
 			}
 
-			if(category == "Hotspot"){
+			bool is_decal = FindStringFromXML(path, "<DecalObject>");
+			bool is_hotspot = FindStringFromXML(path, "<Hotspot>");
+			bool is_prefab = FindStringFromXML(path, "<Prefab>");
+
+			if(is_hotspot){
 				string image_path = GetStringFromXML(path, "<BillboardColorMap>", "</BillboardColorMap>");
 				screenshot_links[path] = JSONValue(image_path);
-			}else if(category == "Decal"){
+			}else if(is_decal && !is_prefab){
 				string image_path = GetStringFromXML(path, "<ColorMap>", "</ColorMap>");
 				screenshot_links[path] = JSONValue(image_path);
 			}else{
@@ -89,6 +93,24 @@ void GetAllSpawnerItems(){
 		}
 	}
 	Log(warning, "Items that don't have a thumbnail : " + all_items.size());
+}
+
+bool FindStringFromXML(string target_path, string value){
+	if(LoadFile(target_path)){
+		while(true){
+			string line = GetFileLine();
+			if(line == "end"){
+				break;
+			}else{
+				if(line.findFirst(value) != -1){
+					return true;
+				}
+			}
+		}
+	}else{
+		Log(error, "Error loading file: " + target_path);
+	}
+	return false;
 }
 
 string GetStringFromXML(string target_path, string first, string second){
