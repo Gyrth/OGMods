@@ -16,6 +16,7 @@ IMGUI@ imGUI;
 IMContainer@ main_container;
 vec3 look_at_position = vec3();
 float vertical_offset;
+int set_position = -1;
 
 class GUISpawnerItem{
 	string title;
@@ -145,22 +146,38 @@ void Update(int is_paused){
 	PostInit();
 	MovementObject@ char = ReadCharacter(0);
 
-	x_rotation = max(-70.0f, min(70.0f, x_rotation -= GetLookYAxis(char.controller_id)));
-	y_rotation += GetLookXAxis(char.controller_id);
-	if(y_rotation > 180.0f){
-		y_rotation -= 360.0f;
-	}else if(y_rotation < -180.0f){
-		y_rotation += 360.0f;
+	if(set_position > 0){
+		set_position -= 1;
+	}else if(set_position == 0){
+		Object@ obj = ReadObjectFromID(spawned_id);
+		obj.SetTranslation(vec3());
+		set_position -= 1;
+	}
+
+	if(GetInputDown(char.controller_id, "attack")){
+		vec3 forward = camera.GetFacing();
+		vec3 up = camera.GetUpVector();
+		vec3 right = cross(forward, up);
+		float tilt_speed = max(0.001, 0.002 * z_distance);
+
+		look_at_position += GetLookXAxis(char.controller_id) * right * tilt_speed;
+		look_at_position -= GetLookYAxis(char.controller_id) * up * tilt_speed;
+	}else{
+		x_rotation = max(-70.0f, min(70.0f, x_rotation -= GetLookYAxis(char.controller_id)));
+		y_rotation += GetLookXAxis(char.controller_id);
+		if(y_rotation > 180.0f){
+			y_rotation -= 360.0f;
+		}else if(y_rotation < -180.0f){
+			y_rotation += 360.0f;
+		}
 	}
 
 	float step_size = max(0.01, 0.08 * z_distance);
 	if(GetInputDown(char.controller_id, "mousescrollup")){
-        z_distance = max(0.01f, z_distance - step_size);
-    } else if(GetInputDown(char.controller_id, "mousescrolldown")){
+		z_distance = max(0.01f, z_distance - step_size);
+	} else if(GetInputDown(char.controller_id, "mousescrolldown")){
 		z_distance += step_size;
-    }
-	/* Log(warning, "x_rotation " + x_rotation);
-	Log(warning, "y_rotation " + y_rotation); */
+	}
 
 	vec3 sun_pos = GetSunPosition();
 	if(GetInputDown(char.controller_id, "n")){
@@ -180,28 +197,28 @@ void Update(int is_paused){
 	if(GetInputPressed(char.controller_id, "pageup")){
 		if(current_index < int(all_items.size() - 1)){
 			current_index += 1;
-			Log(warning, "Create : " + all_items[current_index].path);
+			Log(error, "Create : " + all_items[current_index].path);
 			DeleteObjectID(spawned_id);
 			spawned_id = CreateObject(all_items[current_index].path);
-			Object@ obj = ReadObjectFromID(spawned_id);
-			obj.SetTranslation(vec3());
+			set_position = 2;
 			object_x_rotation = 0.0f;
 			object_y_rotation = 0.0f;
 			object_z_rotation = 0.0f;
+			SetLookAtPosition();
 		}else{
 			Log(warning, "No more items available.");
 		}
 	}else if(GetInputPressed(char.controller_id, "pagedown")){
 		if(current_index > 0){
 			current_index -= 1;
-			Log(warning, "Create : " + all_items[current_index].path);
+			Log(error, "Create : " + all_items[current_index].path);
 			DeleteObjectID(spawned_id);
 			spawned_id = CreateObject(all_items[current_index].path);
-			Object@ obj = ReadObjectFromID(spawned_id);
-			obj.SetTranslation(vec3());
+			set_position = 2;
 			object_x_rotation = 0.0f;
 			object_y_rotation = 0.0f;
 			object_z_rotation = 0.0f;
+			SetLookAtPosition();
 		}
 	}else if(GetInputPressed(char.controller_id, "home")){
 		WriteScreenshotData();
@@ -217,68 +234,83 @@ void Update(int is_paused){
 	vec3 camera_position = vec3(0.0) + (facing * z_distance);
 
 	if(spawned_id != -1){
-		Object@ obj = ReadObjectFromID(spawned_id);
-		mat4 objectrotationY_mat, objectrotationX_mat, objectrotationZ_mat;
-		objectrotationY_mat.SetRotationY(object_y_rotation * 3.1415f / 180.0f);
-		objectrotationX_mat.SetRotationX(object_x_rotation * 3.1415f / 180.0f);
-		objectrotationZ_mat.SetRotationZ(object_z_rotation * 3.1415f / 180.0f);
-		mat4 object_rotation_mat = objectrotationY_mat * objectrotationX_mat * objectrotationZ_mat;
 		float rotate_speed = 0.25;
-		float move_speed = max(0.001, 0.002 * z_distance);
 
-		if(EditorModeActive()){
+		if(!EditorModeActive()){
 			if(GetInputDown(char.controller_id, "left")){
-				object_y_rotation = object_y_rotation + rotate_speed;
+				AddObjectRotationY(rotate_speed);
 			}else if(GetInputDown(char.controller_id, "right")){
-				object_y_rotation = object_y_rotation - rotate_speed;
+				AddObjectRotationY(-rotate_speed);
 			}
 			if(GetInputDown(char.controller_id, "down")){
-				object_x_rotation = object_x_rotation + rotate_speed;
+				AddObjectRotationX(rotate_speed);
 			}else if(GetInputDown(char.controller_id, "up")){
-				object_x_rotation = object_x_rotation - rotate_speed;
+				AddObjectRotationX(-rotate_speed);
 			}
 
 			if(GetInputDown(char.controller_id, "q")){
-				object_z_rotation = object_z_rotation + rotate_speed;
+				AddObjectRotationZ(rotate_speed);
 			}else if(GetInputDown(char.controller_id, "e")){
-				object_z_rotation = object_z_rotation - rotate_speed;
-			}
-
-			if(GetInputDown(char.controller_id, "r")){
-				vertical_offset += move_speed;
-			}else if(GetInputDown(char.controller_id, "f")){
-				vertical_offset -= move_speed;
+				AddObjectRotationZ(-rotate_speed);
 			}
 		}
-
-		obj.SetRotation(QuaternionFromMat4(object_rotation_mat));
 
 		/* DebugDrawWireSphere(vec3(0.0), 0.5, vec3(1.0), _delete_on_update);
 		DebugDrawWireSphere(camera_position, 0.5, vec3(1.0), _delete_on_update);
 		DebugDrawLine(vec3(0.0), camera_position, vec3(1.0), _delete_on_update); */
-
-		if(obj.GetType() == _env_object){
-			look_at_position = obj.GetTranslation();
-		}else if(obj.GetType() == _movement_object){
-			MovementObject@ target_char = ReadCharacterID(obj.GetID());
-			RiggedObject@ rigged_object = target_char.rigged_object();
-			Skeleton@ skeleton = rigged_object.skeleton();
-			// Get relative chest transformation
-			int chest_bone = skeleton.IKBoneStart("pelvis");
-			BoneTransform chest_frame_matrix = rigged_object.GetFrameMatrix(chest_bone);
-			look_at_position = chest_frame_matrix.origin;
-		}else if(obj.GetType() == _item_object){
-			ItemObject@ io = ReadItemID(obj.GetID());
-			look_at_position = io.GetPhysicsPosition();
-		}
 	}
 
-  	if(!EditorModeActive()){
+	if(!EditorModeActive()){
 		camera.SetPos(camera_position);
 		camera.LookAt(look_at_position + vec3(0.0f, vertical_offset, 0.0f));
 		camera.SetDistance(0.0f);
 	}
 	imGUI.update();
+}
+
+void SetLookAtPosition(){
+	Object@ obj = ReadObjectFromID(spawned_id);
+	if(obj.GetType() == _env_object){
+		look_at_position = obj.GetTranslation();
+	}else if(obj.GetType() == _movement_object){
+		MovementObject@ target_char = ReadCharacterID(obj.GetID());
+		RiggedObject@ rigged_object = target_char.rigged_object();
+		Skeleton@ skeleton = rigged_object.skeleton();
+		// Get relative chest transformation
+		int chest_bone = skeleton.IKBoneStart("pelvis");
+		BoneTransform chest_frame_matrix = rigged_object.GetFrameMatrix(chest_bone);
+		look_at_position = chest_frame_matrix.origin;
+	}else if(obj.GetType() == _item_object){
+		ItemObject@ io = ReadItemID(obj.GetID());
+		look_at_position = io.GetPhysicsPosition();
+	}
+}
+
+void AddObjectRotationX(float added_x){
+	AddObjectRotation(added_x, 0.0f, 0.0f);
+}
+
+void AddObjectRotationY(float added_y){
+	AddObjectRotation(0.0f, added_y, 0.0f);
+}
+
+void AddObjectRotationZ(float added_z){
+	AddObjectRotation(0.0f, 0.0f, added_z);
+}
+
+void AddObjectRotation(float added_x, float added_y, float added_z){
+	Object@ obj = ReadObjectFromID(spawned_id);
+	mat4 objectrotationY_mat, objectrotationX_mat, objectrotationZ_mat;
+	objectrotationY_mat.SetRotationY(object_y_rotation * 3.1415f / 180.0f);
+	objectrotationX_mat.SetRotationX(object_x_rotation * 3.1415f / 180.0f);
+	objectrotationZ_mat.SetRotationZ(object_z_rotation * 3.1415f / 180.0f);
+	mat4 object_rotation_mat = objectrotationY_mat * objectrotationX_mat * objectrotationZ_mat;
+
+	object_x_rotation += added_x;
+	object_y_rotation += added_y;
+	object_z_rotation += added_z;
+
+	obj.SetRotation(QuaternionFromMat4(object_rotation_mat));
 }
 
 void DrawGUI(){
