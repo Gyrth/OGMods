@@ -21,8 +21,11 @@ def write_json():
 	data["item_list"] = item_list
 	print("Total items found " + str(len(item_list)));
 	# print json.dumps(data, indent=4)
-	with open('spawner/Data/Scripts/thumbnail_database.json', 'w') as outfile:
-		json.dump(data, outfile, indent = 4, ensure_ascii = False)
+	with open('spawner/Data/Scripts/thumbnail_database.json', 'r+') as file:
+		old_data = json.load(file)
+		old_data["item_list"].update(item_list)
+		file.seek(0)
+		json.dump(old_data, file, indent = 4, ensure_ascii = False)
 
 def read_thumbnail_json(path):
 	with open(path) as f:
@@ -77,4 +80,4 @@ def create_thumbnail(object_path, name, base_path, path, directory):
 		return False
 
 read_thumbnail_json(screenshot_json_path)
-# write_json()
+write_json()
