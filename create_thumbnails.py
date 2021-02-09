@@ -77,4 +77,4 @@ def create_thumbnail(object_path, name, base_path, path, directory):
 		return False
 
 read_thumbnail_json(screenshot_json_path)
-write_json()
+# write_json()

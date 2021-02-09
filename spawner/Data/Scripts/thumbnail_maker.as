@@ -62,9 +62,18 @@ void GetAllSpawnerItems(){
 	array<SpawnerItem> spawner_items = ModGetAllSpawnerItems();
 	for(uint i = 0; i < spawner_items.size(); i++){
 		string thumbnail_path = spawner_items[i].GetThumbnail();
-		if(thumbnail_path == ""){
+		if(thumbnail_path == "" || thumbnail_path == "Data/Textures/ui/t2/spawner.jpg" || thumbnail_path == "Data/UI/spawner/thumbs/Utility/empty_placeholder.png"){
 			string category = spawner_items[i].GetCategory();
 			string path = spawner_items[i].GetPath();
+			array<string> split_path = path.split("/");
+			string expected_thumbnail_path = "Data/UI/spawner/thumbs/extra/" + split_path[split_path.size() - 1];
+			expected_thumbnail_path = join(expected_thumbnail_path.split(".xml"), ".png");
+
+			if(FileExists(expected_thumbnail_path)){
+				Log(warning, "Skipping " + expected_thumbnail_path);
+				continue;
+			}
+
 			if(category == "Hotspot"){
 				string image_path = GetStringFromXML(path, "<BillboardColorMap>", "</BillboardColorMap>");
 				screenshot_links[path] = JSONValue(image_path);
@@ -130,7 +139,7 @@ void PostInit(){
 }
 
 void Update(int is_paused){
-	if(GetNumCharacters() == 0 || EditorModeActive()){
+	if(GetNumCharacters() == 0){
 		return;
 	}
 	PostInit();
@@ -144,7 +153,7 @@ void Update(int is_paused){
 		y_rotation += 360.0f;
 	}
 
-	float step_size = max(0.01, 0.02 * z_distance);
+	float step_size = max(0.01, 0.08 * z_distance);
 	if(GetInputDown(char.controller_id, "mousescrollup")){
         z_distance = max(0.01f, z_distance - step_size);
     } else if(GetInputDown(char.controller_id, "mousescrolldown")){
@@ -217,30 +226,32 @@ void Update(int is_paused){
 		float rotate_speed = 0.25;
 		float move_speed = max(0.001, 0.002 * z_distance);
 
-		if(GetInputDown(char.controller_id, "left")){
-			object_y_rotation = object_y_rotation + rotate_speed;
-		}else if(GetInputDown(char.controller_id, "right")){
-			object_y_rotation = object_y_rotation - rotate_speed;
-		}
-		if(GetInputDown(char.controller_id, "down")){
-			object_x_rotation = object_x_rotation + rotate_speed;
-		}else if(GetInputDown(char.controller_id, "up")){
-			object_x_rotation = object_x_rotation - rotate_speed;
-		}
+		if(EditorModeActive()){
+			if(GetInputDown(char.controller_id, "left")){
+				object_y_rotation = object_y_rotation + rotate_speed;
+			}else if(GetInputDown(char.controller_id, "right")){
+				object_y_rotation = object_y_rotation - rotate_speed;
+			}
+			if(GetInputDown(char.controller_id, "down")){
+				object_x_rotation = object_x_rotation + rotate_speed;
+			}else if(GetInputDown(char.controller_id, "up")){
+				object_x_rotation = object_x_rotation - rotate_speed;
+			}
 
-		if(GetInputDown(char.controller_id, "q")){
-			object_z_rotation = object_z_rotation + rotate_speed;
-		}else if(GetInputDown(char.controller_id, "e")){
-			object_z_rotation = object_z_rotation - rotate_speed;
+			if(GetInputDown(char.controller_id, "q")){
+				object_z_rotation = object_z_rotation + rotate_speed;
+			}else if(GetInputDown(char.controller_id, "e")){
+				object_z_rotation = object_z_rotation - rotate_speed;
+			}
+
+			if(GetInputDown(char.controller_id, "r")){
+				vertical_offset += move_speed;
+			}else if(GetInputDown(char.controller_id, "f")){
+				vertical_offset -= move_speed;
+			}
 		}
 
 		obj.SetRotation(QuaternionFromMat4(object_rotation_mat));
-
-		if(GetInputDown(char.controller_id, "r")){
-			vertical_offset += move_speed;
-		}else if(GetInputDown(char.controller_id, "f")){
-			vertical_offset -= move_speed;
-		}
 
 		/* DebugDrawWireSphere(vec3(0.0), 0.5, vec3(1.0), _delete_on_update);
 		DebugDrawWireSphere(camera_position, 0.5, vec3(1.0), _delete_on_update);
@@ -262,9 +273,11 @@ void Update(int is_paused){
 		}
 	}
 
-	camera.SetPos(camera_position);
-	camera.LookAt(look_at_position + vec3(0.0f, vertical_offset, 0.0f));
-	camera.SetDistance(0.0f);
+  	if(!EditorModeActive()){
+		camera.SetPos(camera_position);
+		camera.LookAt(look_at_position + vec3(0.0f, vertical_offset, 0.0f));
+		camera.SetDistance(0.0f);
+	}
 	imGUI.update();
 }
 

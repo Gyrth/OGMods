@@ -66,21 +66,21 @@ class GUISpawnerItem{
 
 	void SetThumbnail(){
 		//If no thumbnail was set, use the default one.
-		if(spawner_item.GetThumbnail() == "" || !FileExists(spawner_item.GetThumbnail())){
-			DatabaseThumbnailSearch();
-		}else{
-			icon = LoadTexture(spawner_item.GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
+		if(!DatabaseThumbnailSearch()){
+			if(spawner_item.GetThumbnail() != "" && FileExists(spawner_item.GetThumbnail())){
+				icon = LoadTexture(spawner_item.GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
+			}
 		}
 	}
 
-	void DatabaseThumbnailSearch(){
+	bool DatabaseThumbnailSearch(){
 		for(uint i = 0; i < thumbnail_object_paths.size(); i++){
-			if(thumbnail_object_paths[i] == path){
-				Log(warning, "Using database image " + thumbnail_image_paths[i]);
+			if(thumbnail_object_paths[i] == path && FileExists(thumbnail_image_paths[i])){
 				icon = LoadTexture(thumbnail_image_paths[i], TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	void SetSpawnerItem(SpawnerItem _spawner_item){

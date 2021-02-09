@@ -7,19 +7,6 @@
 <LoadingScreen>
     <Image></Image>
 </LoadingScreen>
-<Terrain>
-    <Heightmap>Data/Textures/Terrain/red_hills/red_hills_hm.png</Heightmap>
-    <ShaderExtra></ShaderExtra>
-    <DetailMap></DetailMap>
-    <ColorMap>Data/Textures/Terrain/red_hills/red_hills_c.tga</ColorMap>
-    <DetailMaps>
-        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_rocks_normal.tga" materialpath="Data/Materials/gravel.xml" />
-        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_normal.png" materialpath="Data/Materials/dirt.xml" />
-        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_pebbles_normal.tga" materialpath="Data/Materials/gravel.xml" />
-        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/red_dirt.tga" normalpath="Data/Textures/Terrain/DetailTextures/red_dirt_normal.tga" materialpath="Data/Materials/dirt.xml" />
-    </DetailMaps>
-    <DetailObjects />
-</Terrain>
 <OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
 <Script>thumbnail_maker.as</Script>
