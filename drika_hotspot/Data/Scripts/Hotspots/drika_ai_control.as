@@ -25,6 +25,7 @@ class DrikaAIControl : DrikaElement{
 	int current_ai_goal;
 	int ai_goal;
 	DrikaTargetSelect@ ai_target;
+	bool wait_target_reached;
 
 	array<ai_goals> goals_with_placeholders = {_investigate_slow, _investigate_urgent, _jump_to_target};
 
@@ -55,6 +56,7 @@ class DrikaAIControl : DrikaElement{
 		placeholder.name = "AIControl Helper";
 		ai_goal = ai_goals(GetJSONInt(params, "ai_goal", _investigate_slow));
 		current_ai_goal = ai_goal;
+		wait_target_reached = GetJSONBool(params, "wait_target_reached", false);
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_ai_control;
@@ -109,6 +111,9 @@ class DrikaAIControl : DrikaElement{
 			placeholder.Save(data);
 		}
 		data["ai_goal"] = JSONValue(ai_goal);
+		if(ai_goal == _investigate_slow || ai_goal == _investigate_urgent){
+			data["wait_target_reached"] = JSONValue(wait_target_reached);
+		}
 		target_select.SaveIdentifier(data);
 		ai_target.SaveIdentifier(data);
 		return data;
@@ -209,6 +214,16 @@ class DrikaAIControl : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_NextColumn();
 			ai_target.DrawSelectTargetUI();
+		}
+
+		if(ai_goal == _investigate_slow || ai_goal == _investigate_urgent){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Wait For Target Reached");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("##Wait For Target Reached", wait_target_reached);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 	}
 
@@ -408,6 +423,28 @@ class DrikaAIControl : DrikaElement{
 		}
 
 		triggered = true;
+
+		if(ai_goal == _investigate_slow || ai_goal == _investigate_urgent){
+			if(wait_target_reached){
+				bool all_patrolling = true;
+				float radius = 1.0f;
+				if(ai_goal == _investigate_urgent){radius = 2.0f;}
+
+				for(uint i = 0; i < targets.size(); i++){
+					vec3 flat_char_position = targets[i].position;
+					flat_char_position.y = 0.0f;
+					vec3 flat_placeholder_position = placeholder.GetTranslation();
+					flat_placeholder_position.y = 0.0f;
+
+					if(!targets[i].controlled && distance_squared(flat_char_position, flat_placeholder_position) > radius){
+						all_patrolling = false;
+					}
+				}
+
+				return all_patrolling;
+			}
+		}
+
 		return true;
 	}
 
