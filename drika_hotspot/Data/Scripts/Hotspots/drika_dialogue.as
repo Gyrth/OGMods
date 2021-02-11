@@ -1684,6 +1684,10 @@ class DrikaDialogue : DrikaElement{
 
 		for(uint i = 0; i < targets.size(); i++){
 			targets[i].ReceiveScriptMessage("set_head_target " + target_actor_head_direction.x + " " + target_actor_head_direction.y + " " + target_actor_head_direction.z + " " + target_actor_head_direction_weight);
+			targets[i].Execute("ai_look_target = vec3(" +  target_actor_head_direction.x + ", " + target_actor_head_direction.y + ", " + target_actor_head_direction.z + ");");
+			targets[i].Execute("ai_look_override_time = time + 10.0;");
+			targets[i].Execute("blinking = false;blink_progress = 1.0f;blink_delay = 1.0f;blink_amount = 0.0f;blink_mult = 1.0f;");
+			targets[i].Execute("Update(60);");
 		}
 	}
 
