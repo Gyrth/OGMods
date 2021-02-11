@@ -24,7 +24,7 @@ array<DrikaAnimationGroup@> all_animations;
 DrikaAnimationGroup @custom_group;
 vec3 camera_position;
 vec3 camera_rotation;
-float camera_zoom;
+float camera_zoom = 90.0f;
 bool fading = false;
 float blackout_amount = 0.0;
 float starting_fade_amount = 0.0;
@@ -1716,6 +1716,7 @@ void SetCameraPosition(){
 void SmoothCameraMoveWith(vec3 target_location){
 	vec3 adjusted_target_location = target_location + target_positional_difference;
 	current_camera_position = mix(current_camera_position, adjusted_target_location, time_step * 10.0);
+	old_camera_translation = current_camera_position;
 	camera.SetPos(current_camera_position);
 }
 
@@ -1724,6 +1725,7 @@ void SmoothCameraLookAt(vec3 target_location){
 	vec3 current_look_location = current_camera_position + (camera.GetFacing() * camera_distance);
 	/* DebugDrawWireSphere(current_look_location, 0.5, vec3(1.0), _delete_on_draw); */
 	camera.LookAt(mix(current_look_location, target_location, time_step * 10.0));
+	old_camera_rotation = vec3(camera.GetXRotation(), camera.GetYRotation(), camera.GetZRotation());
 }
 
 void MessageWaitingForFadeOut(){
