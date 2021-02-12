@@ -104,11 +104,11 @@ class DrikaOnEnterExit : DrikaElement{
 		}
 
 		new_hotspot_trigger_type = hotspot_trigger_type;
-		SetTargetOptions();
 
 		connection_types = {};
 		drika_element_type = drika_on_enter_exit;
 		has_settings = true;
+		SetTargetOptions();
 	}
 
 	void SetTargetOptions(){
