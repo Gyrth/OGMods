@@ -428,7 +428,9 @@ class DrikaAIControl : DrikaElement{
 			if(wait_target_reached){
 				bool all_patrolling = true;
 				float radius = 1.0f;
+				float vel_radius = 0.5f;
 				if(ai_goal == _investigate_urgent){radius = 2.0f;}
+				if(ai_goal == _investigate_urgent){vel_radius = 5.0f;}
 
 				for(uint i = 0; i < targets.size(); i++){
 					vec3 flat_char_position = targets[i].position;
@@ -436,7 +438,7 @@ class DrikaAIControl : DrikaElement{
 					vec3 flat_placeholder_position = placeholder.GetTranslation();
 					flat_placeholder_position.y = 0.0f;
 
-					if(!targets[i].controlled && distance_squared(flat_char_position, flat_placeholder_position) > radius){
+					if(!targets[i].controlled && (distance_squared(flat_char_position, flat_placeholder_position) > radius || length(targets[i].velocity) > vel_radius)){
 						all_patrolling = false;
 					}
 				}
