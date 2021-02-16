@@ -34,7 +34,7 @@
     <RayToSun r0="0.121363" r1="0.062051" r2="0.990667" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="2.60841" t1="1.91224" t2="1.47179" s0="1" s1="1" s2="1" q0="0.0709826" q1="-0.283297" q2="0.0210309" q3="0.956171" euler_x="0.148201" euler_y="-0.576086" euler_z="0" id="0">
+    <CameraObject t0="-0.28355" t1="2.74514" t2="2.36998" s0="1" s1="1" s2="1" q0="0.147687" q1="-0.030229" q2="0.00451612" q3="0.988562" euler_x="0.296598" euler_y="-0.0611384" euler_z="0" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="0" t1="0" t2="0" s0="6" s1="1" s2="6" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -43,7 +43,22 @@
     <EnvObject t0="1.53496" t1="1.74995" t2="-1.16734" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/jalopy.xml">
         <parameters />
     </EnvObject>
+    <ActorObject t0="-1.10763" t1="2" t2="-0.339921" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Characters/jalopy_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Deep" type="float" val="0" />
+            <parameter name="Long" type="float" val="0" />
+            <parameter name="Teams" type="string" val="jalopy" />
+            <parameter name="Wide" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="3" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="jalopy.xml" path="Data/Objects/jalopy.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Jalopy" path="Data/Characters/jalopy_actor.xml" thumbnail_path="Data/UI/spawner/jalopy.png" />
 </RecentItems>

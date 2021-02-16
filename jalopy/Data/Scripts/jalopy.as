@@ -47,7 +47,7 @@ bool chase_allowed = false;
 
 float body_bob_freq = 0.0f;
 float body_bob_time_offset;
-string target_animation = "Data/Animations/gun_default.anm";
+string target_animation = "Data/Animations/jalopy_default.anm";
 
 class InvestigatePoint {
 	vec3 pos;
@@ -279,28 +279,6 @@ array<vec3> old_weap_points;
 array<vec3> weap_points;
 float current_fov = 90.0f;
 
-enum GunStates{
-	MagazineOut,
-	MagazineIn
-}
-
-class Bullet{
-	float distance_done = 0.0f;
-	vec3 direction;
-	vec3 starting_position;
-	float timer;
-	Bullet(vec3 _starting_point, vec3 _direction){
-		starting_position = _starting_point;
-		direction = _direction;
-	}
-	void SetStartingPoint(vec3 new_starting_point){
-		distance_done += distance(starting_position, new_starting_point);
-		starting_position = new_starting_point;
-	}
-}
-
-int gun_state = MagazineOut;
-
 int character_id = -1;
 bool has_camera_control = false;
 float camera_shake = 0.0f;
@@ -310,10 +288,8 @@ float target_rotation2 = 0.0f;
 float orig_sensitivity = -1.0f;
 float aim_sensitivity = 0.1f;
 bool aiming = false;
-int gun_aim_anim;
 uint32 aim_particle;
 float start_throwing_time = 0.0f;
-array<Bullet@> bullets;
 
 float trigger_time_out = 0.0f;
 float time_out_length = 0.25f;
@@ -333,8 +309,6 @@ void Update(int num_frames) {
 		camera_shake *= 0.95f;
 	}
 
-	UpdateBullets();
-	UpdateControls();
 	UpdateCamera(ts);
 
 	Skeleton@ skeleton = rigged_object.skeleton();
@@ -408,147 +382,6 @@ void UpdateCamera(const Timestep &in ts){
 	camera.SetInterpSteps(ts.frames());
 }
 
-void UpdateControls(){
-
-	if(this_mo.controlled){
-		cam_rotation_y -= GetLookXAxis(this_mo.controller_id);
-		cam_rotation_x -= GetLookYAxis(this_mo.controller_id);
-	}
-
-	vec3 facing = camera.GetFacing();
-	this_mo.SetRotationFromFacing(facing);
-
-	if(GetInputPressed(this_mo.controller_id, "b")){
-		this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, _ANM_FROM_START);
-	}else if(gun_state == MagazineIn && GetInputPressed(this_mo.controller_id, "attack")){
-		this_mo.SetAnimation("Data/Animations/gun_shoot.anm", 20.0f, _ANM_FROM_START);
-		Shoot();
-	}else if(gun_state == MagazineOut && GetInputPressed(this_mo.controller_id, "r")){
-		this_mo.SetAnimation("Data/Animations/gun_magazine_insert.anm", 20.0f, _ANM_FROM_START);
-		gun_state = MagazineIn;
-	}else if(gun_state == MagazineIn && GetInputPressed(this_mo.controller_id, "r")){
-		this_mo.SetAnimation("Data/Animations/gun_magazine_remove.anm", 20.0f, _ANM_FROM_START);
-		gun_state = MagazineOut;
-	}
-}
-
-void UpdateBullets(){
-	for(uint i = 0; i < bullets.size(); i++){
-
-		Bullet@ bullet = bullets[i];
-
-		vec3 start = bullet.starting_position;
-		vec3 end = bullet.starting_position + (bullet.direction * bullet_speed * time_step);
-		bool done = CheckCollisions(start, end, bullet);
-		DebugDrawLine(start, end, vec3(0.5), vec3(0.5), _fade);
-		bullet.SetStartingPoint(end);
-
-		if(bullet.distance_done > max_bullet_distance || done){
-			bullets.removeAt(i);
-			return;
-		}
-	}
-}
-
-bool CheckCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
-	bool colliding = false;
-	col.GetObjRayCollision(start, end);
-	vec3 direction = normalize(end - start);
-	CollisionPoint point;
-
-	if(sphere_col.NumContacts() != 0){
-		point = sphere_col.GetContact(sphere_col.NumContacts() - 1);
-		MakeMetalSparks(point.position);
-		vec3 facing = camera.GetFacing();
-		MakeParticle("Data/Particles/gun_decal.xml", point.position - facing, facing * 10.0f);
-		string path;
-		switch(rand() % 3) {
-			case 0:
-				path = "Data/Sounds/rico1.wav"; break;
-			case 1:
-				path = "Data/Sounds/rico2.wav"; break;
-			default:
-				path = "Data/Sounds/rico3.wav"; break;
-		}
-		PlaySound(path, point.position);
-		colliding = true;
-		end = point.position;
-	}
-
-	col.CheckRayCollisionCharacters(start, end);
-	int char_id = -1;
-	if(sphere_col.NumContacts() != 0){
-		point = sphere_col.GetContact(0);
-		char_id = point.id;
-	}
-
-	if(char_id != -1 && char_id != this_mo.GetID()){
-		MovementObject@ char = ReadCharacterID(char_id);
-		char.rigged_object().Stab(sphere_col.GetContact(0).position, direction, 1, 0);
-		vec3 force = direction * 15000.0f;
-		vec3 hit_pos = vec3(0.0f);
-		TimedSlowMotion(0.1f, 0.7f, 0.05f);
-		float damage = 0.1;
-		char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
-					 "vec3 pos = vec3("+hit_pos.x+", "+hit_pos.y+", "+hit_pos.z+");" +
-					 "HandleRagdollImpactImpulse(impulse, pos, " + damage + ");");
-		 colliding = true;
-		 end = point.position;
-	}
-	return colliding;
-}
-
-void Shoot(){
-	RiggedObject@ rigged_object = this_mo.rigged_object();
-	Skeleton@ skeleton = rigged_object.skeleton();
-	int bone = skeleton.IKBoneStart("pelvis");
-	vec3 bone_pos = skeleton.GetBoneTransform(bone).GetTranslationPart();
-	quaternion bone_quat = QuaternionFromMat4(skeleton.GetBoneTransform(bone));
-
-	mat4 translate_mat;
-	translate_mat.SetTranslationPart(bone_pos);
-	mat4 rotation_mat;
-	rotation_mat = Mat4FromQuaternion(bone_quat);
-	mat4 mat = translate_mat * rotation_mat;
-
-	vec3 bone_point = mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0));
-
-	float offset = 0.01f;
-	/* vec3 forward = this_mo.GetFacing() + vec3(RangedRandomFloat(-offset, offset), RangedRandomFloat(-offset, offset), RangedRandomFloat(-offset, offset)); */
-	vec3 forward = this_mo.GetFacing();
-	vec3 up = camera.GetUpVector();
-	vec3 forward_offset = forward * 0.2;
-	vec3 up_offset = up * 0.23;
-	vec3 spawn_point = bone_point + up_offset + forward_offset;
-
-	int smoke_particle_amount = 5;
-	vec3 smoke_velocity = forward * 5.0f;
-	for(int i = 0; i < smoke_particle_amount; i++){
-		MakeParticle("Data/Particles/gun_smoke.xml", spawn_point, smoke_velocity);
-	}
-	MakeParticle("Data/Particles/gun_fire.xml", spawn_point, forward);
-	PlaySound("Data/Sounds/Revolver.wav", spawn_point);
-
-	camera_shake += 0.25f;
-	bullets.insertLast(Bullet(spawn_point, forward));
-
-	/* DebugDrawWireSphere(spawn_point, 0.01, vec3(1.0), _fade); */
-}
-
-void MakeMetalSparks(vec3 pos) {
-	int num_sparks = rand() % 20;
-
-	for(int i = 0; i < num_sparks; ++i) {
-		MakeParticle("Data/Particles/metalspark.xml", pos, vec3(RangedRandomFloat(-5.0f, 5.0f),
-																RangedRandomFloat(-5.0f, 5.0f),
-																RangedRandomFloat(-5.0f, 5.0f)));
-
-		MakeParticle("Data/Particles/metalflash.xml", pos, vec3(RangedRandomFloat(-5.0f, 5.0f),
-																RangedRandomFloat(-5.0f, 5.0f),
-																RangedRandomFloat(-5.0f, 5.0f)));
-	}
-}
-
 void SetScale(float new_character_scale){
 	character_scale = new_character_scale;
 	vec3 old_facing = this_mo.GetFacing();
@@ -573,7 +406,7 @@ void Reset() {
 	this_mo.rigged_object().Extinguish();
 	ClearTemporaryDecals();
 	this_mo.rigged_object().ClearBoneConstraints();
-	this_mo.SetAnimation("Data/Animations/gun_default.anm", 20.0f, _ANM_FROM_START);
+	this_mo.SetAnimation(target_animation, 20.0f, _ANM_FROM_START);
 	SetGrabMouse(true);
 }
 
@@ -667,6 +500,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
 	offset.y -= character_scale;
 
 	vec3 facing = camera.GetFacing();
+
 	vec3 flat_facing = normalize(vec3(facing.x, 0.0f, facing.z));
 	float target_rotation =  atan2(-flat_facing.x, flat_facing.z) / 3.1417f * 180.0f;
 	float target_rotation2 =  asin(facing.y) / 3.1417f * 180.0f;
@@ -674,7 +508,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
 	quaternion rot = 	quaternion(vec4(0.0f, -1.0f, 0.0f, target_rotation  * 3.1417f / 180.0f)) *
 						quaternion(vec4(-1.0f, 0.0f, 0.0f, target_rotation2 * 3.1417f / 180.0f));
 
-	local_to_world.rotation = rot;
+	/* local_to_world.rotation = rot; */
 	local_to_world.origin = offset;
 	rigged_object.TransformAllFrameMats(local_to_world);
 }
@@ -763,7 +597,7 @@ void SetParameters() {
 	params.AddFloatSlider("Wide", 0.0, "min:0.0,max:1.0,step:0.01,text_mult:1");
 	params.AddFloatSlider("Deep", 0.0, "min:0.0,max:1.0,step:0.01,text_mult:1");
 
-	params.AddFloatSlider("Character Scale",0.5,"min:0.25,max:2.0,step:0.02,text_mult:100");
+	params.AddFloatSlider("Character Scale",1.0,"min:0.25,max:2.0,step:0.02,text_mult:100");
 	character_scale = params.GetFloat("Character Scale");
 	if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
 		this_mo.RecreateRiggedObject(this_mo.char_path);
