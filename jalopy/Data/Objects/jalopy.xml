@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <Object>
 	<Model>Data/Models/jalopy.obj</Model>
-	<ColorMap>Data/Textures/jalopy_c.jpg</ColorMap>
-	<NormalMap>Data/Textures/jalopy_n.jpg</NormalMap>
-	<ShaderName>envobject #TANGENT</ShaderName>
+	<ColorMap>Data/Textures/jalopy_c_s.png</ColorMap>
+	<NormalMap>Data/Textures/jalopy_n.png</NormalMap>
+	<ShaderName>envobject #TANGENT #KEEP_SPEC</ShaderName>
 </Object>
