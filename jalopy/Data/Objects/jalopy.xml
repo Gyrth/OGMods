@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <Object>
-	<Model>Data/Models/gun.obj</Model>
-	<ColorMap>Data/Textures/gun_c.png</ColorMap>
-	<NormalMap>Data/Textures/gun_n.png</NormalMap>
-    <ShaderName>envobject #TANGENT #NO_DECALS #KEEP_SPEC #BASE_TANGENT</ShaderName>
+	<Model>Data/Models/jalopy.obj</Model>
+	<ColorMap>Data/Textures/jalopy_c.jpg</ColorMap>
+	<NormalMap>Data/Textures/jalopy_n.jpg</NormalMap>
+	<ShaderName>envobject #TANGENT</ShaderName>
 </Object>
