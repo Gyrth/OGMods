@@ -3,11 +3,5 @@
 	<Model>Data/Models/jalopy.obj</Model>
 	<ColorMap>Data/Textures/jalopy_c_newuv.png</ColorMap>
 	<NormalMap>Data/Textures/jalopy_n_object.png</NormalMap>
-	<PaletteMap label_red="Fur"
-				label_green="Ropes"
-				label_blue="Pants"
-	 label_alpha="Spots">
-		Data/Textures/Characters/IGF_Turner/pale_turner_m.tga
-	</PaletteMap>
 	<ShaderName>cubemapobjchar</ShaderName>
 </Object>

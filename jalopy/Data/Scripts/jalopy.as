@@ -495,11 +495,13 @@ void PreDrawCameraNoCull(float curr_game_time) {
 void FinalAnimationMatrixUpdate(int num_frames) {
 	RiggedObject@ rigged_object = this_mo.rigged_object();
 	BoneTransform local_to_world;
+	Object@ obj = ReadObjectFromID(this_mo.GetID());
 
 	vec3 offset = this_mo.position;
 	offset.y -= character_scale;
 
-	vec3 facing = camera.GetFacing();
+	/* vec3 facing = camera.GetFacing(); */
+	vec3 facing = obj.GetRotation() * vec3(0.0f, 0.0f, 1.0f);
 
 	vec3 flat_facing = normalize(vec3(facing.x, 0.0f, facing.z));
 	float target_rotation =  atan2(-flat_facing.x, flat_facing.z) / 3.1417f * 180.0f;
@@ -508,7 +510,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
 	quaternion rot = 	quaternion(vec4(0.0f, -1.0f, 0.0f, target_rotation  * 3.1417f / 180.0f)) *
 						quaternion(vec4(-1.0f, 0.0f, 0.0f, target_rotation2 * 3.1417f / 180.0f));
 
-	/* local_to_world.rotation = rot; */
+	local_to_world.rotation = rot;
 	local_to_world.origin = offset;
 	rigged_object.TransformAllFrameMats(local_to_world);
 }
