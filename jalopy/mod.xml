@@ -1,0 +1,19 @@
+<? xml version="1.0" ?>
+<Mod>
+    <Id>jalopy</Id>
+    <Name>Jalopy</Name>
+    <Version>0.1.0</Version>
+    <Author>Gyrth</Author>
+    <Category>Item Pack</Category>
+    <Thumbnail>Data/Images/jalopy_thumb.jpg</Thumbnail>
+    <PreviewImage>Data/Images/jalopy_full.jpg</PreviewImage>
+    <Description>Jalopy.</Description>
+    <Tag>scripting</Tag>
+	<Tag>character</Tag>
+    <SupportedVersion>*</SupportedVersion>
+    <Item category="Character"
+        title="Jalopy"
+        path="Data/Characters/jalopy_actor.xml"
+        thumbnail="Data/UI/spawner/jalopy.png" />
+    <Level title="Jalopy Test" thumbnail="Images/jalopy_full.jpg">jalopy_test.xml</Level>
+</Mod>
