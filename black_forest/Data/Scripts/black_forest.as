@@ -14,6 +14,10 @@ float floor_height;
 vec2 grid_position;
 bool rebuild_world = false;
 EntityType _group = EntityType(29);
+bool post_init_done = false;
+IMGUI@ imGUI;
+IMContainer@ text_container;
+FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -78,20 +82,73 @@ class BlockType{
 	string path;
 	float probability;
 	Object@ original;
+	array<int> children_ids;
+	vec3 target_translation = vec3(0.0f, -10000.0f, 0.0f);
+
 	BlockType(string _path, float _probability){
 		path = _path;
 		probability = _probability;
 	}
+
+	void Preload(){
+		int id = CreateObject(path);
+		@original = ReadObjectFromID(id);
+		GetBlockChildrenIds(original);
+		original.SetEnabled(false);
+	}
+
+	void SetFinalTranslation(){
+		if(original.GetTranslation() != target_translation){
+			original.SetTranslation(target_translation);
+			for(uint i = 0; i < children_ids.size(); i++){
+				Object@ obj = ReadObjectFromID(children_ids[i]);
+				obj.SetTranslation(obj.GetTranslation());
+			}
+		}
+	}
+
+	void GetBlockChildrenIds(Object@ start_at){
+		array<int> ids = start_at.GetChildren();
+
+		for(uint i = 0; i < ids.size(); i++){
+			children_ids.insertLast(ids[i]);
+			Object@ obj = ReadObjectFromID(ids[i]);
+			obj.SetEnabled(false);
+			if(obj.GetType() == _group){
+				GetBlockChildrenIds(obj);
+			}
+		}
+	}
 }
 
+float preload_progress = 0.0f;
+int preload_counter = 0;
+
 void PreloadBlocks(){
-	array<int> block_ids;
+	if(!post_init_done || preload_done){return;}
+
+	if(preload_counter < int(block_types.size())){
+		preload_progress = (preload_counter + 1) * 100.0f / block_types.size();
+		block_types[preload_counter].Preload();
+		preload_counter += 1;
+		ShowPreloadProgress();
+	}else{
+		preload_done = true;
+		text_container.clear();
+		MovementObject@ player = ReadCharacterID(player_id);
+		player.static_char = false;
+	}
+}
+
+bool final_translation_done = false;
+
+void SetBlockFinalTranslation(){
+	if(!post_init_done || !preload_done || final_translation_done){return;}
+
 	for(uint i = 0; i < block_types.size(); i++){
-		block_ids.insertLast(CreateObject(block_types[i].path));
+		block_types[i].SetFinalTranslation();
 	}
-	for(uint i = 0; i < block_ids.size(); i++){
-		DeleteObjectID(block_ids[i]);
-	}
+	final_translation_done = true;
 }
 
 BlockType@ GetRandomBlockType(){
@@ -131,14 +188,17 @@ class Block{
 	vec3 position;
 	array<SpawnObject@> objects_to_spawn;
 	bool deleted = false;
+
 	Block(vec3 _position){
 		position = _position;
 		SpawnObject new_spawn(GetRandomBlockType(), position, this);
 		objects_to_spawn.insertLast(@new_spawn);
 	}
+
 	array<SpawnObject@> GetObjectsToSpawn(){
 		return objects_to_spawn;
 	}
+
 	Garbage Delete(){
 		deleted = true;
 		Garbage garbage();
@@ -180,9 +240,11 @@ class Block{
 		obj_ids.resize(0);
 		return garbage;
 	}
+
 	void AddObjectID(int id){
 		obj_ids.insertLast(id);
 	}
+
 	void ConnectAll(){
 		int char_id = -1;
 		int item_id = -1;
@@ -224,6 +286,7 @@ class SpawnObject{
 	BlockType@ block_type;
 	vec3 position;
 	Block@ owner;
+
 	SpawnObject(BlockType _block_type, vec3 _position, Block@ _owner){
 		position = _position;
 		@owner = @_owner;
@@ -235,7 +298,9 @@ class World{
 	array<array<Block@>> blocks;
 	array<SpawnObject@> objects_to_spawn;
 	array<Garbage> garbages;
+
 	World(){}
+
 	void Reset(){
 		for(uint i = 0; i < blocks.size(); i++){
 			for(uint j = 0; j < blocks[i].size(); j++){
@@ -255,6 +320,7 @@ class World{
 		blocks.resize(0);
 		garbages.resize(0);
 	}
+
 	void MoveXUp(){
 		for(uint i = 0; i < blocks.size(); i++){
 			garbages.insertAt(0, blocks[i][0].Delete());
@@ -265,6 +331,7 @@ class World{
 			blocks[i].insertLast(new_block);
 		}
 	}
+
 	void MoveXDown(){
 		//Remove all the blocks on the left side so we can move to the right.
 		for(uint i = 0; i < blocks.size(); i++){
@@ -276,6 +343,7 @@ class World{
 			blocks[i].insertAt(0, new_block);
 		}
 	}
+
 	void MoveZUp(){
 		for(uint i = 0; i < blocks[0].size(); i++){
 			garbages.insertAt(0, blocks[0][i].Delete());
@@ -288,6 +356,7 @@ class World{
 		}
 		blocks.insertLast(new_row);
 	}
+
 	void MoveZDown(){
 		//Remove the bottom row.
 		for(uint i = 0; i < blocks[blocks.size() - 1].size(); i++){
@@ -301,11 +370,13 @@ class World{
 		}
 		blocks.insertAt(0, new_row);
 	}
+
 	Block@ CreateBlock(Block@ adjacent_block, vec3 offset){
 		Block new_block(adjacent_block.position + offset);
 		objects_to_spawn.insertAt((objects_to_spawn.size()), new_block.GetObjectsToSpawn());
 		return @new_block;
 	}
+
 	void CreateFloor(){
 		Object@ player_obj = ReadObjectFromID(player_id);
 		vec3 player_pos = vec3(floor(player_obj.GetTranslation().x),floor(player_obj.GetTranslation().y),floor(player_obj.GetTranslation().z));
@@ -325,25 +396,27 @@ class World{
 			blocks.insertLast(new_row);
 		}
 	}
+
 	bool new_block = false;
 	void UpdateSpawning(){
 		if(objects_to_spawn.size() > 0){
 			SpawnObject@ spawn_obj = objects_to_spawn[0];
 			if(!spawn_obj.owner.deleted){
+				//In the first update we create the object.
 				if(!new_block){
-					MarkOldObjects();
-					int id = CreateObject(spawn_obj.block_type.path);
+					int id = DuplicateObject(spawn_obj.block_type.original);
 					Object@ obj = ReadObjectFromID(id);
+					obj.SetEnabled(true);
 					obj.SetSelectable(true);
 					obj.SetDeletable(true);
 					obj.SetTranslatable(true);
-					ScriptParams@ params = obj.GetScriptParams();
-					params.AddInt("Old", 1);
 					spawn_obj.owner.AddObjectID(id);
-					AddNewBlockObjects(spawn_obj.owner);
+					AddNewBlockObjects(spawn_obj.owner, obj);
+
 					RotateBlock(id);
 					new_block = true;
 				}else{
+					//In the second update we translate the object to the correct spot.
 					Block@ owner = spawn_obj.owner;
 					int id = owner.obj_ids[0];
 					Object@ obj = ReadObjectFromID(id);
@@ -362,17 +435,19 @@ class World{
 			}
 		}
 	}
-	void AddNewBlockObjects(Block@ owner){
-		array<int> all_obj = GetObjectIDs();
-		for(uint i = 0; i < all_obj.size(); i++){
-			Object@ obj = ReadObjectFromID(all_obj[i]);
-			ScriptParams@ params = obj.GetScriptParams();
-			if(!params.HasParam("Old")){
-				owner.AddObjectID(all_obj[i]);
-				params.AddInt("Old", 1);
+
+	void AddNewBlockObjects(Block@ owner, Object@ obj){
+		array<int> ids = obj.GetChildren();
+
+		for(uint i = 0; i < ids.size(); i++){
+			owner.AddObjectID(ids[i]);
+			Object@ child_obj = ReadObjectFromID(ids[i]);
+			if(child_obj.GetType() == _group){
+				AddNewBlockObjects(owner, child_obj);
 			}
 		}
 	}
+
 	void RotateBlock(int id){
 		Object@ obj = ReadObjectFromID(id);
 		ScriptParams@ params = obj.GetScriptParams();
@@ -404,6 +479,7 @@ class World{
 			DisplayError("Ohno!", "First block is not a group!");
 		}
 	}
+
 	void TransposeNewBlock(Block@ owner, string path){
 		vec3 offset = vec3(0.0f);
 		vec3 position = owner.position;
@@ -433,22 +509,19 @@ class World{
 			if(transpose_types.find(obj.GetType()) != -1){
 				ScriptParams@ params = obj.GetScriptParams();
 				if(obj_ids[i] != player_id){
+
+					if(obj.GetType() == _movement_object){
+						MovementObject@ char = ReadCharacterID(obj_ids[i]);
+						char.Execute("Reset();");
+						/* char.QueueScriptMessage("full_revive"); */
+					}
+
 					obj.SetTranslation(obj.GetTranslation() + base_pos + offset);
 				}
 			}
 		}
 	}
 
-	void MarkOldObjects(){
-		array<int> all_obj = GetObjectIDs();
-		for(uint i = 0; i < all_obj.size(); i++){
-			Object@ obj = ReadObjectFromID(all_obj[i]);
-			ScriptParams@ params = obj.GetScriptParams();
-			if(!params.HasParam("Old")){
-				params.AddInt("Old", 1);
-			}
-		}
-	}
 	float garbage_timer = 1.0f;
 	void RemoveGarbage(){
 		garbage_timer -= time_step;
@@ -494,11 +567,40 @@ class World{
 	}
 }
 
-void Init(string p_level_name) {
+void Init(string p_level_name){
+	@imGUI = CreateIMGUI();
+	@text_container = IMContainer(2560, 1440);
+	CreateIMGUIContainers();
+	text_container.setAlignment(CACenter, CACenter);
+	IMText@ load_progress = IMText("Progress");
+	load_progress.setFont(default_font);
+	load_progress.setText("Preloading assets.");
+	IMImage@ background = IMImage("Textures/error.tga");
+	background.setSize(vec2(2560, 1440));
+	background.setColor(vec4(0.0f, 0.0f, 0.0f, 1.0f));
+	text_container.addFloatingElement(background, "background", vec2(0.0f, 0.0f));
+	text_container.setElement(load_progress);
 	level_name = p_level_name;
-	PreloadBlocks();
 	PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
 	ReadScriptParameters();
+}
+
+void CreateIMGUIContainers(){
+	imGUI.setup();
+	imGUI.setBackgroundLayers(1);
+
+	imGUI.getMain().setZOrdering(-1);
+	imGUI.getMain().addFloatingElement(text_container, "text_container", vec2(0));
+}
+
+void SetWindowDimensions(int width, int height){
+	imGUI.doScreenResize();
+}
+
+void ShowPreloadProgress(){
+	IMText @load_progress = cast<IMText>(text_container.getContents());
+	/* IMText @load_progress = cast<IMText>(text_container.findElement("Progress")); */
+	load_progress.setText("Progress : " + floor(preload_progress) + "%");
 }
 
 void ReadScriptParameters(){
@@ -524,7 +626,7 @@ void ReadScriptParameters(){
 	  level_params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
 	}
 	if(world_size != level_params.GetInt("World Size")){
-		world_size = level_params.GetInt("World Size");
+		/* world_size = level_params.GetInt("World Size"); */
 		rebuild_world = true;
 	}
 	if(block_size != level_params.GetInt("Block Size")){
@@ -540,15 +642,17 @@ bool HasFocus(){
 void Reset(){
 	ReadScriptParameters();
 	ResetLevel();
-	if(rebuild_world){
-		BuildWorld();
-		rebuild_world = false;
-	}
 }
 
+bool created_world = false;
+
 void BuildWorld(){
-	world.Reset();
-	world.CreateFloor();
+	if((post_init_done && preload_done && final_translation_done && !created_world) || rebuild_world){
+		world.Reset();
+		world.CreateFloor();
+		created_world = true;
+		rebuild_world = false;
+	}
 }
 
 void ReceiveMessage(string msg) {
@@ -564,10 +668,39 @@ void ReceiveMessage(string msg) {
 }
 
 void DrawGUI() {
-
+	imGUI.render();
 }
 
+int update_counter = 0;
+void PostInit(){
+	if(!post_init_done){
+		if(update_counter > 100){
+			post_init_done = true;
+		}
+		update_counter += 1;
+	}
+}
+
+bool preload_done = false;
+
 void Update() {
+	PostInit();
+	PreloadBlocks();
+	SetBlockFinalTranslation();
+	GetPlayerID();
+	BuildWorld();
+
+	UpdateMovement();
+	world.UpdateSpawning();
+	world.RemoveGarbage();
+
+	UpdateMusic();
+	UpdateSounds();
+	UpdateReviving();
+	imGUI.update();
+}
+
+void GetPlayerID(){
 	if(player_id == -1){
 		uint num_chars = GetNumCharacters();
 		for(uint a=0; a<num_chars; ++a){
@@ -582,18 +715,15 @@ void Update() {
 		}
 		MovementObject@ player = ReadCharacterID(player_id);
 		grid_position = vec2(floor(player.position.x / (block_size)), floor(player.position.z / (block_size)));
-		BuildWorld();
-	}else{
-	  UpdateMovement();
-	  world.UpdateSpawning();
-	  world.RemoveGarbage();
+		player.static_char = true;
 	}
-	UpdateMusic();
-	UpdateSounds();
-	UpdateReviving();
 }
 
 void UpdateMovement(){
+	if(!post_init_done || !preload_done || !final_translation_done || !created_world || rebuild_world){
+		return;
+	}
+
 	MovementObject@ player = ReadCharacterID(player_id);
 	vec2 new_grid_position = vec2(floor(player.position.x / (2.0f * block_size)), floor(player.position.z / (2.0f * block_size)));
 	vec2 moved = vec2(0.0f);
