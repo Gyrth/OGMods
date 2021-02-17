@@ -18,6 +18,9 @@ bool post_init_done = false;
 IMGUI@ imGUI;
 IMContainer@ text_container;
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
+float blackout_amount = 0.0;
+array<int> character_reset_list;
+bool released_player = false;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -113,7 +116,7 @@ class BlockType{
 		for(uint i = 0; i < ids.size(); i++){
 			children_ids.insertLast(ids[i]);
 			Object@ obj = ReadObjectFromID(ids[i]);
-			obj.SetEnabled(false);
+			/* obj.SetEnabled(false); */
 			if(obj.GetType() == _group){
 				GetBlockChildrenIds(obj);
 			}
@@ -134,9 +137,6 @@ void PreloadBlocks(){
 		ShowPreloadProgress();
 	}else{
 		preload_done = true;
-		text_container.clear();
-		MovementObject@ player = ReadCharacterID(player_id);
-		player.static_char = false;
 	}
 }
 
@@ -399,7 +399,12 @@ class World{
 
 	bool new_block = false;
 	void UpdateSpawning(){
+		if(!preload_done){return;}
+
 		if(objects_to_spawn.size() > 0){
+
+			ShowBuildProgress();
+
 			SpawnObject@ spawn_obj = objects_to_spawn[0];
 			if(!spawn_obj.owner.deleted){
 				//In the first update we create the object.
@@ -433,6 +438,12 @@ class World{
 				objects_to_spawn.removeAt(0);
 				new_block = false;
 			}
+		}else if(!released_player){
+			MovementObject@ player = ReadCharacterID(player_id);
+			player.static_char = false;
+			released_player = true;
+			text_container.clear();
+			blackout_amount = 1.0f;
 		}
 	}
 
@@ -444,6 +455,10 @@ class World{
 			Object@ child_obj = ReadObjectFromID(ids[i]);
 			if(child_obj.GetType() == _group){
 				AddNewBlockObjects(owner, child_obj);
+			}else if(child_obj.GetType() == _movement_object){
+				MovementObject@ char = ReadCharacterID(ids[i]);
+				char.velocity = vec3(0.0f);
+				child_obj.SetEnabled(false);
 			}
 		}
 	}
@@ -509,14 +524,17 @@ class World{
 			if(transpose_types.find(obj.GetType()) != -1){
 				ScriptParams@ params = obj.GetScriptParams();
 				if(obj_ids[i] != player_id){
+					obj.SetTranslation(obj.GetTranslation() + base_pos + offset);
 
 					if(obj.GetType() == _movement_object){
 						MovementObject@ char = ReadCharacterID(obj_ids[i]);
-						char.Execute("Reset();");
-						/* char.QueueScriptMessage("full_revive"); */
+						obj.SetEnabled(true);
+						char.Execute("SwitchCharacter(this_mo.char_path);");
+						/* char.Execute("Reset();");
+						char.position = obj.GetTranslation();
+						char.velocity = vec3(0.0f);
+						char.QueueScriptMessage("full_revive"); */
 					}
-
-					obj.SetTranslation(obj.GetTranslation() + base_pos + offset);
 				}
 			}
 		}
@@ -600,7 +618,13 @@ void SetWindowDimensions(int width, int height){
 void ShowPreloadProgress(){
 	IMText @load_progress = cast<IMText>(text_container.getContents());
 	/* IMText @load_progress = cast<IMText>(text_container.findElement("Progress")); */
-	load_progress.setText("Progress : " + floor(preload_progress) + "%");
+	load_progress.setText("				" + floor(preload_progress) + "%\nPreloading assets.");
+}
+
+void ShowBuildProgress(){
+	if(released_player){return;}
+	IMText @load_progress = cast<IMText>(text_container.getContents());
+	load_progress.setText(world.objects_to_spawn.size() + " blocks left.\nCreating world.");
 }
 
 void ReadScriptParameters(){
@@ -626,7 +650,7 @@ void ReadScriptParameters(){
 	  level_params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
 	}
 	if(world_size != level_params.GetInt("World Size")){
-		/* world_size = level_params.GetInt("World Size"); */
+		world_size = level_params.GetInt("World Size");
 		rebuild_world = true;
 	}
 	if(block_size != level_params.GetInt("Block Size")){
@@ -647,7 +671,7 @@ void Reset(){
 bool created_world = false;
 
 void BuildWorld(){
-	if((post_init_done && preload_done && final_translation_done && !created_world) || rebuild_world){
+	if((post_init_done && preload_done && final_translation_done && !created_world)){
 		world.Reset();
 		world.CreateFloor();
 		created_world = true;
@@ -669,6 +693,13 @@ void ReceiveMessage(string msg) {
 
 void DrawGUI() {
 	imGUI.render();
+	HUDImage @blackout_image = hud.AddImage();
+	blackout_image.SetImageFromPath("Data/Textures/diffuse.tga");
+	blackout_image.position.y = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
+	blackout_image.position.x = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
+	blackout_image.position.z = -2.0f;
+	blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
+	blackout_image.color = vec4(0.0f, 0.0f, 0.0f, blackout_amount);
 }
 
 int update_counter = 0;
@@ -697,7 +728,14 @@ void Update() {
 	UpdateMusic();
 	UpdateSounds();
 	UpdateReviving();
+	UpdateFading();
 	imGUI.update();
+}
+
+void UpdateFading(){
+	if(world.objects_to_spawn.size() == 0 && blackout_amount > 0.0f){
+		blackout_amount -= time_step * 0.5f;;
+	}
 }
 
 void GetPlayerID(){
