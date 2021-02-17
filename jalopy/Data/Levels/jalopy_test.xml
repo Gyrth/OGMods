@@ -45,10 +45,19 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <EnvObject t0="47.4275" t1="8.85264" t2="-125.135" s0="4.78468" s1="4.78468" s2="4.78468" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+    <EnvObject t0="48.4253" t1="3.53424" t2="-125.642" s0="5.28464" s1="2.30415" s2="2.8768" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="1" color_r="0.309804" color_g="0.309801" color_b="0.309801" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="66.1585" t1="4.36" t2="-124.816" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="-1.57045" euler_z="0" id="5" type_file="Data/Characters/jalopy_actor.xml" is_player="0">
+    <EnvObject t0="27.5769" t1="3.53424" t2="-123.48" s0="5.28818" s1="3.9988" s2="2.8768" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="2" color_r="0.309804" color_g="0.309801" color_b="0.309801" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="6.69338" t1="3.53424" t2="-123.68" s0="5.28818" s1="3.9988" s2="2.8768" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="3" color_r="0.309804" color_g="0.309801" color_b="0.309801" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="6.92687" t1="3.88671" t2="-124.034" s0="2.08781" s1="3.9988" s2="1.50512" q0="0.700348" q1="0.0975292" q2="0.0975293" q3="0.700349" euler_x="1.5708" euler_y="0" euler_z="0.276737" id="4" color_r="0.309804" color_g="0.309801" color_b="0.309801" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+        <parameters />
+    </EnvObject>
+    <ActorObject t0="56.0261" t1="5.26869" t2="-125.275" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="5" type_file="Data/Characters/jalopy_actor.xml" pc_script_path="jalopy.as" is_player="1">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Deep" type="float" val="0" />
@@ -67,7 +76,22 @@
             <parameter name="Global" type="string" val="1" />
         </parameters>
     </ReflectionCaptureObject>
-    <CameraObject t0="68.7952" t1="5.59818" t2="-122.978" s0="1" s1="1" s2="1" q0="0.147337" q1="-0.399123" q2="0.0651489" q3="0.902634" euler_x="0.323606" euler_y="-0.832658" euler_z="0" id="271">
+    <EnvObject t0="14.7383" t1="3.75671" t2="-124.034" s0="2.08781" s1="3.9988" s2="1.50512" q0="0.698486" q1="-0.110077" q2="-0.110077" q3="0.698486" euler_x="1.5708" euler_y="0" euler_z="-0.312616" id="7" color_r="0.309804" color_g="0.309801" color_b="0.309801" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="13.4825" t1="3.09261" t2="-124.034" s0="2.08781" s1="3.9988" s2="1.50512" q0="0.700348" q1="0.0975292" q2="0.0975293" q3="0.700349" euler_x="1.5708" euler_y="0" euler_z="0.276737" id="8" color_r="0.309804" color_g="0.309801" color_b="0.309801" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.2939" t1="2.96261" t2="-124.034" s0="2.08781" s1="3.9988" s2="1.50512" q0="0.698486" q1="-0.110077" q2="-0.110077" q3="0.698486" euler_x="1.5708" euler_y="0" euler_z="-0.312616" id="9" color_r="0.309804" color_g="0.309801" color_b="0.309801" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="20.757" t1="3.6471" t2="-124.034" s0="2.08781" s1="3.9988" s2="1.50512" q0="0.700348" q1="0.0975292" q2="0.0975293" q3="0.700349" euler_x="1.5708" euler_y="0" euler_z="0.276737" id="10" color_r="0.309804" color_g="0.309801" color_b="0.309801" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="28.5685" t1="3.5171" t2="-124.034" s0="2.08781" s1="3.9988" s2="1.50512" q0="0.698486" q1="-0.110077" q2="-0.110077" q3="0.698486" euler_x="1.5708" euler_y="0" euler_z="-0.312616" id="11" color_r="0.309804" color_g="0.309801" color_b="0.309801" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+        <parameters />
+    </EnvObject>
+    <CameraObject t0="22.8408" t1="8.91121" t2="-108.932" s0="1" s1="1" s2="1" q0="0.147689" q1="-0.0793391" q2="0.0118865" q3="0.985775" euler_x="0.297427" euler_y="-0.160622" euler_z="0" id="271">
         <parameters />
     </CameraObject>
 </ActorObjects>

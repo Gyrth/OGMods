@@ -186,6 +186,9 @@ AttackScriptGetter attack_attacker;
 float block_stunned = 1.0f;
 int block_stunned_by_id = -1;
 
+const float PI = 3.14159265359f;
+double rad2deg = (180.0f / PI);
+double deg2rad = (PI / 180.0f);
 
 array<BoneTransform> skeleton_bind_transforms;
 array<BoneTransform> inv_skeleton_bind_transforms;
@@ -296,7 +299,7 @@ float time_out_length = 0.25f;
 float bullet_speed = 433.0f;
 float max_bullet_distance = 1500.0f;
 float cam_rotation_x = 0.0f;
-float cam_rotation_y = 180.0f;
+float cam_rotation_y = 90.0f;
 float cam_rotation_z = 0.0f;
 
 void Update(int num_frames) {
@@ -310,6 +313,9 @@ void Update(int num_frames) {
 	}
 
 	UpdateCamera(ts);
+	ApplyPhysics(ts);
+	HandleCollisions(ts);
+	UpdateControls(ts);
 
 	Skeleton@ skeleton = rigged_object.skeleton();
 	int num_bones = skeleton.NumBones();
@@ -338,21 +344,47 @@ void Update(int num_frames) {
 	}
 }
 
+void UpdateControls(const Timestep &in ts){
+	if(!this_mo.controlled || !on_ground){return;}
+
+	vec3 facing = this_mo.GetFacing();
+	vec3 up_direction = vec3(0.0f, 1.0f, 0.0f);
+	vec3 right_direction = normalize(cross(facing, up_direction));
+	float movement_speed = 25.0f;
+
+	vec3 forward_velocity = facing * ((GetMoveYAxis(this_mo.controller_id) * -1.0f) + 0.0f) * ts.step() * movement_speed;
+	vec3 sideways_velocity = right_direction * GetMoveXAxis(this_mo.controller_id) * ts.step() * movement_speed;
+
+	vec3 added_velocity = forward_velocity + sideways_velocity;
+	vec3 slerped_direction = mix(facing, normalize(added_velocity), time_step);
+	this_mo.SetRotationFromFacing(slerped_direction);
+	this_mo.velocity += added_velocity;
+}
+
+float cam_distance = 1.0f;
+
 void UpdateCamera(const Timestep &in ts){
 	if(!this_mo.controlled){
 		return;
 	}
+	SetGrabMouse(true);
 	RiggedObject@ rigged_object = this_mo.rigged_object();
 	Skeleton@ skeleton = rigged_object.skeleton();
 
 	float camera_vibration_mult = 3.0f;
-    float camera_vibration = camera_shake * camera_vibration_mult;
+	float camera_vibration = camera_shake * camera_vibration_mult;
 	float y_shake = RangedRandomFloat(-camera_vibration, camera_vibration);
 	float x_shake = RangedRandomFloat(-camera_vibration, camera_vibration);
 	camera.SetYRotation(cam_rotation_y + y_shake);
 	camera.SetXRotation(cam_rotation_x + x_shake);
 	camera.SetZRotation(cam_rotation_z);
 	camera.CalcFacing();
+
+	cam_rotation_y -= GetLookXAxis(this_mo.controller_id);
+	cam_rotation_x -= GetLookYAxis(this_mo.controller_id);
+
+	cam_distance += GetInputPressed(this_mo.controller_id, "grab")?0.5f:0.0f;
+	cam_distance -= GetInputPressed(this_mo.controller_id, "attack")?0.5f:0.0f;
 
 	int bone = skeleton.IKBoneStart("pelvis");
 	vec3 bone_pos = skeleton.GetBoneTransform(bone).GetTranslationPart();
@@ -368,12 +400,11 @@ void UpdateCamera(const Timestep &in ts){
 				  mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)),
 				  vec4(1.0f), vec4(1.0f), _delete_on_draw);
 
-	vec3 cam_pos = mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0));
-	vec3 up_offset = camera.GetUpVector() * 0.25f;
+	vec3 cam_pos = this_mo.position + vec3(0.0f, 0.0f, 0.0f);
 
 	camera.SetFOV(current_fov);
-	camera.SetPos(cam_pos + up_offset);
-	camera.SetDistance(0.5f);
+	camera.SetPos(cam_pos);
+	camera.SetDistance(cam_distance);
 
 	if(this_mo.focused_character) {
 		UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
@@ -492,6 +523,8 @@ void PreDrawCameraNoCull(float curr_game_time) {
 	DebugDrawLine(start, end, vec3(1.0f), _delete_on_draw); */
 }
 
+quaternion old_rotation;
+
 void FinalAnimationMatrixUpdate(int num_frames) {
 	RiggedObject@ rigged_object = this_mo.rigged_object();
 	BoneTransform local_to_world;
@@ -500,19 +533,33 @@ void FinalAnimationMatrixUpdate(int num_frames) {
 	vec3 offset = this_mo.position;
 	offset.y -= character_scale;
 
-	/* vec3 facing = camera.GetFacing(); */
-	vec3 facing = obj.GetRotation() * vec3(0.0f, 0.0f, 1.0f);
+	vec3 facing = this_mo.GetFacing();
+	DebugDrawLine(this_mo.position, this_mo.position + facing * 2.0f, vec3(1.0f), _delete_on_draw);
+	vec3 up_direction = vec3(0.0f, 1.0f, 0.0f);
+	vec3 right_direction = normalize(cross(facing, up_direction));
+	/* vec3 facing = obj.GetRotation() * vec3(0.0f, 0.0f, 1.0f); */
+	vec3 car_direction = normalize(cross(ground_normal, right_direction));
 
-	vec3 flat_facing = normalize(vec3(facing.x, 0.0f, facing.z));
-	float target_rotation =  atan2(-flat_facing.x, flat_facing.z) / 3.1417f * 180.0f;
-	float target_rotation2 =  asin(facing.y) / 3.1417f * 180.0f;
+	vec3 new_rotation;
+	new_rotation.y = atan2(car_direction.x, car_direction.z) * 180.0f / PI;
+	new_rotation.x = asin(car_direction[1]) * -180.0f / PI;
+	vec3 expected_right = normalize(cross(car_direction, vec3(0,1,0)));
+	vec3 expected_up = normalize(cross(expected_right, car_direction));
+	new_rotation.z = atan2(dot(up_direction, expected_right), dot(up_direction, expected_up)) * 180.0f / PI;
 
-	quaternion rot = 	quaternion(vec4(0.0f, -1.0f, 0.0f, target_rotation  * 3.1417f / 180.0f)) *
-						quaternion(vec4(-1.0f, 0.0f, 0.0f, target_rotation2 * 3.1417f / 180.0f));
+	quaternion rot_y(vec4(0, 1, 0, new_rotation.y * deg2rad));
+	quaternion rot_x(vec4(1, 0, 0, new_rotation.x * deg2rad));
+	quaternion rot_z(vec4(0, 0, 1, new_rotation.z * deg2rad));
 
-	local_to_world.rotation = rot;
+	quaternion slerped_rotation = mix(old_rotation, rot_y * rot_x * rot_z, time_step * 5.0f);
+	old_rotation = slerped_rotation;
+	local_to_world.rotation = slerped_rotation;
+
 	local_to_world.origin = offset;
 	rigged_object.TransformAllFrameMats(local_to_world);
+	vec3 flat_direction = car_direction;
+	flat_direction.y = 0.0f;
+	flat_direction = normalize(flat_direction);
 }
 
 int IsUnaware() {
@@ -607,6 +654,120 @@ void SetParameters() {
 		FixDiscontinuity();
 	}
 }
+
+void ApplyPhysics(const Timestep &in ts) {
+	if(!on_ground){
+	}
+	this_mo.velocity += physics.gravity_vector * ts.step();
+	bool feet_moving = false;
+	float _walk_accel = 35.0f; // how fast characters accelerate when moving
+	if(on_ground){
+		this_mo.velocity *= pow(0.95f,ts.frames());
+	}else{
+		/* this_mo.velocity *= pow(0.90f,ts.frames()); */
+	}
+}
+
+void HandleCollisions(const Timestep &in ts) {
+	vec3 scale;
+	float size;
+	GetCollisionSphere(scale, size);
+	if(show_debug){
+		DebugDrawWireSphere(this_mo.position, size, vec3(1.0f,1.0f,1.0f), _delete_on_update);
+	}
+	if(on_ground){
+		HandleGroundCollisions(ts);
+	} else {
+		HandleAirCollisions(ts);
+	}
+}
+
+void HandleGroundCollisions(const Timestep &in ts) {
+	// Check if character has room to stand up
+	vec3 old_pos = this_mo.position;
+	vec3 scale;
+	float size;
+	GetCollisionSphere(scale, size);
+	col.GetSlidingScaledSphereCollision(this_mo.position, size, scale);
+	if(show_debug){
+		DebugDrawWireScaledSphere(this_mo.position, size, scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
+	}
+
+	if(sphere_col.NumContacts() > 0){
+		CollisionPoint point = sphere_col.GetContact(0);
+		ground_normal = point.normal;
+	}
+
+	this_mo.position = sphere_col.adjusted_position;
+	bool in_air = HandleStandingCollision();
+	if(in_air){
+		on_ground = false;
+	}
+}
+
+bool HandleStandingCollision() {
+	vec3 lower_pos = this_mo.position - vec3(0.0f, 0.05f, 0.0f);
+	vec3 scale;
+	float size;
+	GetCollisionSphere(scale, size);
+	col.GetSweptSphereCollision(this_mo.position, lower_pos, size);
+	if(show_debug){
+		DebugDrawWireSphere(this_mo.position, size, vec3(0.0f,0.0f,1.0f), _delete_on_update);
+		DebugDrawWireSphere(lower_pos, size, vec3(0.0f,0.0f,1.0f), _delete_on_update);
+	}
+	return (sphere_col.position == lower_pos);
+}
+
+void HandleAirCollisions(const Timestep &in ts) {
+	vec3 offset = this_mo.position - last_col_pos;
+	this_mo.position = last_col_pos;
+	bool landing = false;
+	vec3 old_vel = this_mo.velocity;
+	for(int i=0; i<ts.frames(); ++i){ // Divide movement into multiple pieces to help prevent surface penetration
+		if(on_ground){
+			break;
+		}
+		this_mo.position += offset/ts.frames();
+		vec3 scale;
+		float size;
+		GetCollisionSphere(scale, size);
+		col.GetSlidingScaledSphereCollision(this_mo.position, size, scale);
+		if(show_debug){
+			DebugDrawWireScaledSphere(this_mo.position, size, scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
+		}
+
+		vec3 closest_point;
+		float closest_dist = -1.0f;
+		for(int j=0; j<sphere_col.NumContacts(); j++){
+			const CollisionPoint contact = sphere_col.GetContact(j);
+			land_magnitude = length(this_mo.velocity);
+			float bounciness = 0.2f;
+			if(contact.normal.y > _ground_normal_y_threshold ||
+				(this_mo.velocity.y < 0.0f && contact.normal.y > 0.2f) ||
+				(contact.custom_normal.y >= 1.0 && contact.custom_normal.y < 4.0))
+				{  // If collision with a surface that can be walked on, then land
+					landing = true;
+					PlaySoundGroup("Data/Sounds/weapon_foley/impact/weapon_drop_light_dirt.xml", this_mo.position, 1.0f);
+					//The charater is pushed back when colliding with the ground.
+					if(length(this_mo.velocity) > 3.0f){
+						this_mo.velocity = reflect(this_mo.velocity, contact.normal) * bounciness;
+					}
+				}else{
+					//A wall
+					this_mo.velocity = reflect(this_mo.velocity, contact.normal);
+				}
+		}
+	}
+	if(landing){
+		on_ground = true;
+	}
+}
+
+void GetCollisionSphere(vec3 &out scale, float &out size){
+	scale = vec3(1.0f);
+	size = character_scale;
+}
+
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){}
 void NotifyItemDetach(int idex){}
 void HandleEditorAttachment(int x, int y, bool mirror){}
