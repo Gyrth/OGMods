@@ -48,7 +48,7 @@
     <EnvObject t0="47.4275" t1="8.85264" t2="-125.135" s0="4.78468" s1="4.78468" s2="4.78468" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="60.2322" t1="5.01725" t2="-131.278" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" type_file="Data/Characters/jalopy_actor.xml" is_player="0">
+    <ActorObject t0="66.1585" t1="4.36" t2="-124.816" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="-1.57045" euler_z="0" id="5" type_file="Data/Characters/jalopy_actor.xml" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Deep" type="float" val="0" />
@@ -60,73 +60,19 @@
             <Connection id="5" />
         </Connections>
         <ItemConnections />
-        <Palette>
-            <Color label="Fur" channel="0" red="1" green="1" blue="1" />
-            <Color label="Ropes" channel="1" red="1" green="1" blue="1" />
-            <Color label="Pants" channel="2" red="1" green="1" blue="1" />
-            <Color label="Spots" channel="3" red="1" green="1" blue="1" />
-        </Palette>
+        <Palette />
     </ActorObject>
-    <CameraObject t0="62.5527" t1="6.9364" t2="-135.447" s0="1" s1="1" s2="1" q0="-0.0298708" q1="0.97011" q2="-0.167144" q3="-0.173371" euler_x="-2.80036" euler_y="-0.353692" euler_z="-3.14159" id="271">
+    <ReflectionCaptureObject t0="53.1784" t1="7.09047" t2="-134.207" s0="1.75489" s1="1.75489" s2="1.75489" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" gicoeff00="0.112122" gicoeff01="0.13884" gicoeff02="0.29425" gicoeff03="0.0822754" gicoeff04="0.109161" gicoeff05="0.255646" gicoeff06="0.095108" gicoeff07="0.173798" gicoeff08="0.423767" gicoeff09="0.0856781" gicoeff10="0.0663986" gicoeff11="0.119003" gicoeff12="0.088028" gicoeff13="0.124496" gicoeff14="0.263733" gicoeff15="0.104919" gicoeff16="0.11937" gicoeff17="0.275574">
+        <parameters>
+            <parameter name="Global" type="string" val="1" />
+        </parameters>
+    </ReflectionCaptureObject>
+    <CameraObject t0="68.7952" t1="5.59818" t2="-122.978" s0="1" s1="1" s2="1" q0="0.147337" q1="-0.399123" q2="0.0651489" q3="0.902634" euler_x="0.323606" euler_y="-0.832658" euler_z="0" id="271">
         <parameters />
     </CameraObject>
-    <ActorObject t0="47.2102" t1="5.10655" t2="-137.298" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" euler_x="0" euler_y="-0.605973" euler_z="0" id="550" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
-        <parameters>
-            <parameter name="Aggression" type="string" val="0.5" />
-            <parameter name="Attack Damage" type="string" val="1.0" />
-            <parameter name="Attack Knockback" type="string" val="1.0" />
-            <parameter name="Attack Speed" type="string" val="1.0" />
-            <parameter name="Block Follow-up" type="string" val="0.5" />
-            <parameter name="Block Skill" type="string" val="0.5" />
-            <parameter name="Bloodthirsty" type="int" val="0" />
-            <parameter name="Cannot Be Disarmed" type="int" val="0" />
-            <parameter name="Character Scale" type="float" val="1" />
-            <parameter name="Damage Resistance" type="string" val="1.0" />
-            <parameter name="Ear Size" type="float" val="1" />
-            <parameter name="Fall Damage Multiplier" type="float" val="1" />
-            <parameter name="Fat" type="float" val="0.5" />
-            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
-            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
-            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
-            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
-            <parameter name="Focus FOV distance" type="float" val="100" />
-            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
-            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
-            <parameter name="Ground Aggression" type="float" val="0.5" />
-            <parameter name="Jump - Air Control" type="float" val="3" />
-            <parameter name="Jump - Initial Velocity" type="float" val="5" />
-            <parameter name="Jump - Jump Sustain" type="float" val="5" />
-            <parameter name="Jump - Jump Sustain Boost" type="float" val="10" />
-            <parameter name="Knockout Shield" type="int" val="0" />
-            <parameter name="Left handed" type="string" val="0.0" />
-            <parameter name="Lives" type="string" val="1" />
-            <parameter name="Movement Speed" type="string" val="1.0" />
-            <parameter name="Muscle" type="float" val="0.5" />
-            <parameter name="No Look Around" type="int" val="0" />
-            <parameter name="Peripheral FOV distance" type="float" val="4" />
-            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
-            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
-            <parameter name="Species" type="string" val="rabbit" />
-            <parameter name="Static" type="int" val="0" />
-            <parameter name="Stick To Nav Mesh" type="int" val="0" />
-            <parameter name="Teams" type="string" val="turner" />
-            <parameter name="Throw Counter Probability" type="float" val="0.4" />
-            <parameter name="Throw Trainer" type="int" val="0" />
-            <parameter name="Weapon Catch Skill" type="float" val="1" />
-            <parameter name="Wearing Metal Armor" type="int" val="0" />
-        </parameters>
-        <Connections>
-            <Connection id="-1" />
-        </Connections>
-        <ItemConnections />
-        <Palette>
-            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
-            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
-            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
-        </Palette>
-    </ActorObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Basics Stone Wall" path="Data/Objects/Buildings/basics/soft_wall.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/soft_wall.png" />
     <SpawnerItem display_name="Jalopy" path="Data/Characters/jalopy_actor.xml" thumbnail_path="Data/UI/spawner/jalopy.png" />
+    <SpawnerItem display_name="Global Reflection" path="Data/Objects/global_reflection_capture.xml" thumbnail_path="" />
 </RecentItems>
