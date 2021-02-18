@@ -405,6 +405,13 @@ class World{
 
 			ShowBuildProgress();
 
+			if(!released_player){
+				MovementObject@ player = ReadCharacterID(player_id);
+				Object@ spawn = ReadObjectFromID(player_id);
+				player.velocity = vec3(0.0f);
+				player.position = spawn.GetTranslation();
+			}
+
 			SpawnObject@ spawn_obj = objects_to_spawn[0];
 			if(!spawn_obj.owner.deleted){
 				//In the first update we create the object.
@@ -622,9 +629,10 @@ void ShowPreloadProgress(){
 }
 
 void ShowBuildProgress(){
-	if(released_player){return;}
 	IMText @load_progress = cast<IMText>(text_container.getContents());
-	load_progress.setText(world.objects_to_spawn.size() + " blocks left.\nCreating world.");
+	if(load_progress !is null){
+		load_progress.setText(world.objects_to_spawn.size() + " blocks left.\nCreating world.");
+	}
 }
 
 void ReadScriptParameters(){
@@ -666,6 +674,9 @@ bool HasFocus(){
 void Reset(){
 	ReadScriptParameters();
 	ResetLevel();
+	resetting = true;
+	MovementObject@ player = ReadCharacterID(player_id);
+	player.static_char = true;
 }
 
 bool created_world = false;
@@ -713,6 +724,7 @@ void PostInit(){
 }
 
 bool preload_done = false;
+bool resetting = false;
 
 void Update() {
 	PostInit();
@@ -730,6 +742,14 @@ void Update() {
 	UpdateReviving();
 	UpdateFading();
 	imGUI.update();
+
+	if(resetting){
+		created_world = false;
+		released_player = false;
+		player_id = -1;
+		resetting = false;
+		blackout_amount = 1.0f;
+	}
 }
 
 void UpdateFading(){
@@ -816,7 +836,7 @@ void UpdateSounds(){
 
 void UpdateReviving(){
 	MovementObject@ player = ReadCharacterID(player_id);
-	if(!EditorModeActive() && player.GetIntVar("knocked_out") == _dead && GetInputPressed(0, "mouse0")){
+	if(!EditorModeActive() && player.GetIntVar("knocked_out") != _awake && GetInputPressed(0, "mouse0")){
 		Reset();
 	}
 }
