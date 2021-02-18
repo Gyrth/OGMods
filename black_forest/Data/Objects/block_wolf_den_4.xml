@@ -1,95 +1,71 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="11.4364" t1="13.086" t2="78.7213" s0="24.197" s1="26.9007" s2="24.9602" q0="0" q1="0" q2="0" q3="1" id="208" version="1">
+    <Group t0="37.7434" t1="103.317" t2="55.7444" s0="24.1971" s1="26.9007" s2="24.9602" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" version="1">
         <parameters />
-        <EnvObject t0="10.0197" t1="9.64063" t2="77.2974" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+        <EnvObject t0="36.3267" t1="99.8715" t2="54.3205" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
             <parameters>
                 <parameter name="BlockBase" type="int" val="1" />
             </parameters>
         </EnvObject>
-        <EnvObject t0="11.4364" t1="22.0221" t2="78.7213" s0="1.19651" s1="0.933777" s2="1.21791" q0="0.00418645" q1="-0.257427" q2="-0.12548" q3="0.958103" id="111" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_capital_mossy.xml">
+        <EnvObject t0="37.7434" t1="112.253" t2="55.7444" s0="1.19651" s1="0.933777" s2="1.21791" q0="0.00418645" q1="-0.257427" q2="-0.12548" q3="0.958103" euler_x="0.0835309" euler_y="-0.514653" euler_z="-0.282444" id="3" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_capital_mossy.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="13.8622" t1="19.9506" t2="73.1385" s0="1" s1="1" s2="1" q0="0" q1="0.535008" q2="0" q3="0.844847" id="133" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
+        <EnvObject t0="40.1692" t1="110.182" t2="50.1616" s0="1" s1="1" s2="1" q0="0" q1="0.535008" q2="0" q3="0.844847" euler_x="0" euler_y="1.12903" euler_z="0" id="4" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="8.22997" t1="19.9506" t2="81.918" s0="1" s1="1" s2="1" q0="0" q1="0.535008" q2="0" q3="0.844847" id="144" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
+        <EnvObject t0="34.5369" t1="110.182" t2="58.9411" s0="1" s1="1" s2="1" q0="0" q1="0.535008" q2="0" q3="0.844847" euler_x="0" euler_y="1.12903" euler_z="0" id="5" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
             <parameters />
         </EnvObject>
-        <Decal t0="11.2687" t1="17.5467" t2="76.96" s0="5.03509" s1="5.03509" s2="5.03509" q0="0" q1="0" q2="0" q3="1" id="132" type_file="Data/Objects/Decals/Hay_02.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <Decal t0="37.5757" t1="107.778" t2="53.9831" s0="5.03509" s1="5.03509" s2="5.03509" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" type_file="Data/Objects/Decals/Hay_02.xml" color_r="1" color_g="1" color_b="1" overbright="0">
             <parameters />
         </Decal>
-        <Decal t0="10.7965" t1="17.8299" t2="79.1883" s0="5.03509" s1="5.03509" s2="5.03509" q0="-0.0189111" q1="-0.400044" q2="-0.0017451" q3="0.9163" id="148" type_file="Data/Objects/Decals/Hay_02.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <Decal t0="37.1035" t1="108.061" t2="56.2114" s0="5.03509" s1="5.03509" s2="5.03509" q0="-0.0189111" q1="-0.400044" q2="-0.0017451" q3="0.9163" euler_x="-0.0489296" euler_y="-0.822996" euler_z="0.0175479" id="7" type_file="Data/Objects/Decals/Hay_02.xml" color_r="1" color_g="1" color_b="1" overbright="0">
             <parameters />
         </Decal>
-        <Hotspot t0="5.55423" t1="19.6016" t2="74.1332" s0="2.47576" s1="1" s2="2.72119" q0="0" q1="0" q2="0" q3="1" id="190" type_file="Data/Objects/Hotspots/emitter.xml">
+        <Hotspot t0="31.8612" t1="109.833" t2="51.1563" s0="2.47576" s1="1" s2="2.72119" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" type_file="Data/Objects/Hotspots/emitter.xml">
             <parameters>
                 <parameter name="Type" type="string" val="Smoke" />
             </parameters>
+            <Connections />
+            <ConnectionsFrom />
         </Hotspot>
-        <ActorObject t0="11.5003" t1="18.2407" t2="78.2314" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="192" type_file="Data/Objects/IGF_Characters/IGF_WolfActor.xml" is_player="0">
-            <parameters>
-                <parameter name="Aggression" type="float" val="0.5" />
-                <parameter name="Attack Damage" type="float" val="1" />
-                <parameter name="Attack Knockback" type="float" val="1" />
-                <parameter name="Attack Speed" type="float" val="1" />
-                <parameter name="Block Follow-up" type="float" val="0.5" />
-                <parameter name="Block Skill" type="float" val="0.5" />
-                <parameter name="Character Scale" type="float" val="1" />
-                <parameter name="Damage Resistance" type="float" val="1" />
-                <parameter name="Ear Size" type="float" val="1" />
-                <parameter name="Fat" type="float" val="0.5" />
-                <parameter name="Focus FOV distance" type="float" val="15" />
-                <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
-                <parameter name="Focus FOV vertical" type="float" val="0.62834" />
-                <parameter name="Ground Aggression" type="float" val="0.5" />
-                <parameter name="Knockout Shield" type="int" val="0" />
-                <parameter name="Left handed" type="int" val="0" />
-                <parameter name="Movement Speed" type="float" val="1" />
-                <parameter name="Muscle" type="float" val="0.5" />
-                <parameter name="Peripheral FOV distance" type="float" val="4" />
-                <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
-                <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
-                <parameter name="Static" type="int" val="0" />
-                <parameter name="Teams" type="string" val="wolf" />
-            </parameters>
-            <Connections>
-            </Connections>
-            <ItemConnections />
-            <Palette />
-        </ActorObject>
-        <PathPointObject t0="10.0705" t1="17.8632" t2="78.8621" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="201" type_file="">
+        <PathPointObject t0="36.3775" t1="108.094" t2="55.8852" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
-        <PathPointObject t0="7.43222" t1="20.1284" t2="67.9773" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="203" type_file="">
+        <PathPointObject t0="33.7392" t1="110.359" t2="45.0004" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
-        <PathPointObject t0="1.5385" t1="20.1284" t2="74.5283" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="205" type_file="">
+        <PathPointObject t0="27.8455" t1="110.359" t2="51.5514" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
-        <PathPointObject t0="1.76978" t1="19.6406" t2="86.5666" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="207" type_file="">
+        <PathPointObject t0="28.0768" t1="109.872" t2="63.5897" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" type_file="">
             <parameters>
                 <parameter name="Type" type="string" val="Stand" />
                 <parameter name="Wait" type="float" val="0" />
             </parameters>
-            <Connections>
-            </Connections>
+            <Connections />
         </PathPointObject>
+        <PlaceholderObject t0="38.1565" t1="108.61" t2="54.5749" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Objects/IGF_Characters/IGF_WolfActor.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
     </Group>
 </ActorObjects>

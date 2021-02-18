@@ -15,75 +15,72 @@
                 <parameter name="Wave Height" type="float" val="0.5" />
             </parameters>
         </Hotspot>
-        <Prefab t0="9.8764" t1="22.8087" t2="74.6251" s0="18.6935" s1="21.1145" s2="19.9503" q0="0" q1="0" q2="0" q3="1" id="212" version="1" prefab_locked="true" prefab_path="Data/Objects/Plants/Trees/prefabs/swamp_tree_large.xml" os0="18.6935" os1="21.1145" os2="19.9503">
+        <Group t0="9.8764" t1="22.8087" t2="74.6251" s0="18.6835" s1="21.1045" s2="19.9403" q0="0" q1="0" q2="0" q3="1" id="211" version="1">
             <parameters />
-            <Group t0="9.8764" t1="22.8087" t2="74.6251" s0="18.6835" s1="21.1045" s2="19.9403" q0="0" q1="0" q2="0" q3="1" id="211" version="1">
+            <EnvObject t0="9.35801" t1="17.5271" t2="74.1796" s0="1.22503" s1="1.22503" s2="1.22503" q0="0" q1="0" q2="0" q3="1" id="189" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_stump_mossy.xml">
                 <parameters />
-                <EnvObject t0="9.35801" t1="17.5271" t2="74.1796" s0="1.22503" s1="1.22503" s2="1.22503" q0="0" q1="0" q2="0" q3="1" id="189" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_stump_mossy.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="11.8049" t1="20.7469" t2="75.2081" s0="1" s1="1" s2="1" q0="0.485544" q1="0.1726" q2="0.851332" q3="-0.09844" id="190" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="8.57437" t1="20.3407" t2="71.8017" s0="1" s1="1.09832" s2="1.01525" q0="-0.93604" q1="0.299547" q2="0.183759" q3="-0.0182289" id="191" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="8.01274" t1="21.0383" t2="75.0697" s0="0.715486" s1="0.715486" s2="0.715486" q0="-0.43612" q1="0.107566" q2="0.892849" q3="0.0324007" id="192" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="8.27282" t1="23.5173" t2="74.0785" s0="0.715486" s1="0.785833" s2="0.726399" q0="-0.61648" q1="0.432938" q2="0.632952" q3="0.178558" id="193" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="10.0121" t1="22.6832" t2="73.5749" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.252056" q3="0.967713" id="194" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/broken_branch_mossy.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="9.76646" t1="24.7912" t2="71.6127" s0="3.11106" s1="3.11103" s2="3.11104" q0="-0.0831905" q1="0.38515" q2="-0.0930434" q3="0.914374" id="195" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="13.7377" t1="23.6471" t2="76.536" s0="2.21351" s1="2.21351" s2="2.21351" q0="0.171558" q1="0.894806" q2="0.196754" q3="-0.362187" id="196" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="10.5881" t1="25.2732" t2="76.2052" s0="3.56203" s1="3.56199" s2="3.56201" q0="0.212994" q1="-0.245466" q2="-0.0213282" q3="0.945475" id="198" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="7.70884" t1="25.6213" t2="74.6066" s0="3.16413" s1="3.16412" s2="3.16409" q0="0.202924" q1="-0.781474" q2="0.148533" q3="0.571016" id="199" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="8.49266" t1="20.7507" t2="72.761" s0="1.53023" s1="1.53023" s2="1.53023" q0="-0.332593" q1="0.27115" q2="0.100466" q3="0.897645" id="200" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="11.1868" t1="20.0613" t2="72.26" s0="2.12699" s1="2.12699" s2="2.12699" q0="0.271453" q1="0.753529" q2="-0.54277" q3="0.252808" id="201" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="13.5202" t1="20.3266" t2="75.681" s0="2.00118" s1="2.00118" s2="2.00118" q0="0.673724" q1="0.346704" q2="-0.324931" q3="0.565965" id="202" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="9.64798" t1="19.813" t2="76.0758" s0="2.22558" s1="2.22558" s2="2.22558" q0="0.652546" q1="-0.041975" q2="-0.000305998" q3="0.756588" id="203" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="7.25837" t1="21.4213" t2="74.3787" s0="2.2384" s1="2.22558" s2="2.31291" q0="0.359397" q1="-0.394528" q2="0.447608" q3="0.717518" id="204" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="9.48131" t1="17.2902" t2="72.429" s0="0.795065" s1="0.795065" s2="0.795065" q0="0" q1="0" q2="0" q3="1" id="205" color_r="0.780392" color_g="0.67328" color_b="0.728726" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="10.8645" t1="17.2642" t2="75.1562" s0="0.802923" s1="0.795065" s2="0.672221" q0="0" q1="-0.912713" q2="0" q3="0.408601" id="206" color_r="0.780392" color_g="0.67328" color_b="0.728726" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="8.20965" t1="18.0688" t2="74.4604" s0="0.802923" s1="0.795065" s2="0.672221" q0="0" q1="-0.869343" q2="0" q3="-0.494209" id="207" color_r="0.780392" color_g="0.67328" color_b="0.728726" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="10.3312" t1="17.1963" t2="74.73" s0="1" s1="1" s2="1" q0="0" q1="0.861793" q2="0" q3="-0.507259" id="208" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="11.4502" t1="14.1788" t2="73.0337" s0="1" s1="1" s2="1" q0="0" q1="-0.276748" q2="0" q3="0.960943" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
-                    <parameters />
-                </EnvObject>
-                <EnvObject t0="7.34055" t1="14.4638" t2="73.6582" s0="1" s1="1" s2="1" q0="0" q1="0.150764" q2="0" q3="0.98857" id="210" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
-                    <parameters />
-                </EnvObject>
-            </Group>
-        </Prefab>
+            </EnvObject>
+            <EnvObject t0="11.8049" t1="20.7469" t2="75.2081" s0="1" s1="1" s2="1" q0="0.485544" q1="0.1726" q2="0.851332" q3="-0.09844" id="190" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.57437" t1="20.3407" t2="71.8017" s0="1" s1="1.09832" s2="1.01525" q0="-0.93604" q1="0.299547" q2="0.183759" q3="-0.0182289" id="191" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.01274" t1="21.0383" t2="75.0697" s0="0.715486" s1="0.715486" s2="0.715486" q0="-0.43612" q1="0.107566" q2="0.892849" q3="0.0324007" id="192" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.27282" t1="23.5173" t2="74.0785" s0="0.715486" s1="0.785833" s2="0.726399" q0="-0.61648" q1="0.432938" q2="0.632952" q3="0.178558" id="193" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="10.0121" t1="22.6832" t2="73.5749" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.252056" q3="0.967713" id="194" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/broken_branch_mossy.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="9.76646" t1="24.7912" t2="71.6127" s0="3.11106" s1="3.11103" s2="3.11104" q0="-0.0831905" q1="0.38515" q2="-0.0930434" q3="0.914374" id="195" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="13.7377" t1="23.6471" t2="76.536" s0="2.21351" s1="2.21351" s2="2.21351" q0="0.171558" q1="0.894806" q2="0.196754" q3="-0.362187" id="196" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="10.5881" t1="25.2732" t2="76.2052" s0="3.56203" s1="3.56199" s2="3.56201" q0="0.212994" q1="-0.245466" q2="-0.0213282" q3="0.945475" id="198" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="7.70884" t1="25.6213" t2="74.6066" s0="3.16413" s1="3.16412" s2="3.16409" q0="0.202924" q1="-0.781474" q2="0.148533" q3="0.571016" id="199" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.49266" t1="20.7507" t2="72.761" s0="1.53023" s1="1.53023" s2="1.53023" q0="-0.332593" q1="0.27115" q2="0.100466" q3="0.897645" id="200" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="11.1868" t1="20.0613" t2="72.26" s0="2.12699" s1="2.12699" s2="2.12699" q0="0.271453" q1="0.753529" q2="-0.54277" q3="0.252808" id="201" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="13.5202" t1="20.3266" t2="75.681" s0="2.00118" s1="2.00118" s2="2.00118" q0="0.673724" q1="0.346704" q2="-0.324931" q3="0.565965" id="202" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="9.64798" t1="19.813" t2="76.0758" s0="2.22558" s1="2.22558" s2="2.22558" q0="0.652546" q1="-0.041975" q2="-0.000305998" q3="0.756588" id="203" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="7.25837" t1="21.4213" t2="74.3787" s0="2.2384" s1="2.22558" s2="2.31291" q0="0.359397" q1="-0.394528" q2="0.447608" q3="0.717518" id="204" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="9.48131" t1="17.2902" t2="72.429" s0="0.795065" s1="0.795065" s2="0.795065" q0="0" q1="0" q2="0" q3="1" id="205" color_r="0.780392" color_g="0.67328" color_b="0.728726" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="10.8645" t1="17.2642" t2="75.1562" s0="0.802923" s1="0.795065" s2="0.672221" q0="0" q1="-0.912713" q2="0" q3="0.408601" id="206" color_r="0.780392" color_g="0.67328" color_b="0.728726" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.20965" t1="18.0688" t2="74.4604" s0="0.802923" s1="0.795065" s2="0.672221" q0="0" q1="-0.869343" q2="0" q3="-0.494209" id="207" color_r="0.780392" color_g="0.67328" color_b="0.728726" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="10.3312" t1="17.1963" t2="74.73" s0="1" s1="1" s2="1" q0="0" q1="0.861793" q2="0" q3="-0.507259" id="208" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="11.4502" t1="14.1788" t2="73.0337" s0="1" s1="1" s2="1" q0="0" q1="-0.276748" q2="0" q3="0.960943" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="7.34055" t1="14.4638" t2="73.6582" s0="1" s1="1" s2="1" q0="0" q1="0.150764" q2="0" q3="0.98857" id="210" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
         <EnvObject t0="4.31205" t1="15.7357" t2="81.1081" s0="4.85635" s1="4.85635" s2="4.85635" q0="0" q1="0.516811" q2="0" q3="0.856099" id="217" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/ForkedWeed.xml">
             <parameters />
         </EnvObject>

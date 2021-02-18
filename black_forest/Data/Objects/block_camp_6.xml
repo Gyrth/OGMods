@@ -1,88 +1,40 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
 <ActorObjects>
-    <Group t0="76.0165" t1="-21.4441" t2="-19.7545" s0="20.01" s1="25.2553" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="39" version="1">
+    <Group t0="21.8569" t1="24.6002" t2="5.2531" s0="20.01" s1="25.098" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" version="1">
         <parameters />
-        <EnvObject t0="76.0165" t1="-24.0667" t2="-19.7545" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="171" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+        <EnvObject t0="21.8569" t1="22.0562" t2="5.2531" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
             <parameters>
                 <parameter name="BlockBase" type="int" val="1" />
             </parameters>
         </EnvObject>
-        <EnvObject t0="75.0009" t1="-13.8707" t2="-17.748" s0="2.69524" s1="2.69524" s2="2.69524" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="172" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_ash.xml">
-            <parameters>
-            </parameters>
+        <EnvObject t0="20.8413" t1="32.2522" t2="7.2596" s0="2.69524" s1="2.69524" s2="2.69524" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_ash.xml">
+            <parameters />
         </EnvObject>
-        <EnvObject t0="70.2365" t1="-13.7431" t2="-12.4131" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="173" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
-            <parameters>
-            </parameters>
+        <EnvObject t0="16.0769" t1="32.3798" t2="12.5945" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
         </EnvObject>
-        <EnvObject t0="75.3764" t1="-13.1177" t2="-21.2305" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="174" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
-            <parameters>
-            </parameters>
+        <EnvObject t0="21.2168" t1="33.0052" t2="3.7771" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+            <parameters />
         </EnvObject>
-        <EnvObject t0="70.6984" t1="-11.9784" t2="-16.7206" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="175" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
-            <parameters>
-            </parameters>
+        <EnvObject t0="16.5388" t1="34.1445" t2="8.287" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
         </EnvObject>
-        <ActorObject t0="73.4978" t1="-9.82144" t2="-17.7116" s0="1" s1="1" s2="1" q0="0" q1="0.704369" q2="0" q3="0.709834" euler_x="0" euler_y="1.56307" euler_z="0" id="176" type_file="Data/Objects/IGF_Characters/base_guard_actor.xml" is_player="0">
-            <parameters>
-                <parameter name="Aggression" type="float" val="0.5" />
-                <parameter name="Attack Damage" type="float" val="1" />
-                <parameter name="Attack Knockback" type="float" val="1" />
-                <parameter name="Attack Speed" type="float" val="1" />
-                <parameter name="Block Follow-up" type="float" val="0.5" />
-                <parameter name="Block Skill" type="float" val="0.5" />
-                <parameter name="Cannot Be Disarmed" type="int" val="0" />
-                <parameter name="Character Scale" type="float" val="1" />
-                <parameter name="Damage Resistance" type="float" val="1" />
-                <parameter name="Ear Size" type="float" val="1" />
-                <parameter name="Fat" type="float" val="0.5" />
-                <parameter name="Focus FOV distance" type="float" val="100" />
-                <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
-                <parameter name="Focus FOV vertical" type="float" val="0.62834" />
-                <parameter name="Ground Aggression" type="float" val="0.5" />
-                <parameter name="Knockout Shield" type="int" val="0" />
-                <parameter name="Left handed" type="int" val="0" />
-                <parameter name="Movement Speed" type="float" val="1" />
-                <parameter name="Muscle" type="float" val="0.5" />
-                <parameter name="Peripheral FOV distance" type="float" val="4" />
-                <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
-                <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
-                <parameter name="Species" type="string" val="rabbit" />
-                <parameter name="Static" type="int" val="0" />
-                <parameter name="Teams" type="string" val="guard" />
-            </parameters>
-            <Connections>
-                <Connection id="-1" />
-            </Connections>
-            <ItemConnections />
-            <Palette>
-                <Color label="Clothes" channel="0" red="0.635294" green="0.403599" blue="0" />
-                <Color label="Fur" channel="1" red="0.498039" green="0.498034" blue="0.498034" />
-                <Color label="Leather" channel="2" red="0.435294" green="0.174118" blue="0" />
-                <Color label="Armor" channel="3" red="0.435294" green="0" blue="0" />
-            </Palette>
-        </ActorObject>
-        <EnvObject t0="80.5045" t1="-12.7649" t2="-25.368" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="177" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
-            <parameters>
-            </parameters>
+        <EnvObject t0="26.3449" t1="33.358" t2="-0.360402" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
         </EnvObject>
-        <EnvObject t0="70.9571" t1="-12.9326" t2="-24.0162" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="178" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
-            <parameters>
-            </parameters>
+        <EnvObject t0="16.7975" t1="33.1903" t2="0.991399" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
         </EnvObject>
-        <EnvObject t0="81.0813" t1="-12.8499" t2="-16.9244" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
-            <parameters>
-            </parameters>
+        <EnvObject t0="26.9217" t1="33.273" t2="8.0832" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
         </EnvObject>
-        <ItemObject t0="75.1851" t1="-13.3693" t2="-18.6727" s0="1" s1="1" s2="1" q0="0.347483" q1="0" q2="0" q3="0.937686" euler_x="0.709771" euler_y="0" euler_z="0" id="180" type_file="Data/Items/DogWeapons/DogSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
-            <parameters>
-            </parameters>
+        <ItemObject t0="21.0255" t1="32.7536" t2="6.3349" s0="1" s1="1" s2="1" q0="0.347483" q1="0" q2="0" q3="0.937686" euler_x="0.709771" euler_y="0" euler_z="0" id="11" type_file="Data/Items/DogWeapons/DogSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
         </ItemObject>
-        <Group t0="75.0793" t1="-13.7677" t2="-17.7484" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="181" version="1">
-            <parameters>
-            </parameters>
-            <Hotspot t0="75.084" t1="-13.7612" t2="-17.7325" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" euler_x="0" euler_y="0" euler_z="-3.1405" id="182" type_file="Data/Objects/Hotspots/fire_test.xml">
+        <Group t0="20.9197" t1="32.3552" t2="7.25918" s0="0.368812" s1="0.372465" s2="0.390866" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" version="1">
+            <parameters />
+            <Hotspot t0="20.9244" t1="32.3617" t2="7.2751" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" euler_x="0" euler_y="0" euler_z="-3.1405" id="13" type_file="Data/Objects/Hotspots/fire_test.xml">
                 <parameters>
                     <parameter name="Fire Ribbons" type="int" val="4" />
                     <parameter name="Ignite Characters" type="int" val="1" />
@@ -90,15 +42,23 @@
                     <parameter name="Light Distance" type="float" val="2" />
                 </parameters>
                 <Connections />
+                <ConnectionsFrom />
             </Hotspot>
-            <EnvObject t0="75.0693" t1="-13.8365" t2="-17.7716" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="183" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
-                <parameters>
-                </parameters>
+            <EnvObject t0="20.9097" t1="32.2864" t2="7.236" s0="0.169482" s1="0.0261955" s2="0.167265" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+                <parameters />
             </EnvObject>
-            <Decal t0="75.0864" t1="-13.8136" t2="-17.7736" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="184" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
-                <parameters>
-                </parameters>
+            <Decal t0="20.9268" t1="32.3093" t2="7.234" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+                <parameters />
             </Decal>
         </Group>
+        <PlaceholderObject t0="19.1749" t1="32.93" t2="6.99995" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Objects/IGF_Characters/base_guard_actor.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
     </Group>
 </ActorObjects>

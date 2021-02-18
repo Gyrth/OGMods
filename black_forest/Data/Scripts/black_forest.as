@@ -26,16 +26,23 @@ MusicLoad ml("Data/Music/black_forest.xml");
 
 World world;
 
+enum block_creation_states{
+	duplicate_block,
+	translate_block,
+	skip_state,
+	make_connections
+}
+
 array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_house_1.xml", 1.0f),
 									BlockType("Data/Objects/block_house_2.xml", 1.0f),
 									BlockType("Data/Objects/block_house_3.xml", 1.0f),
 									BlockType("Data/Objects/block_trees_falen.xml", 1.0f),
 
-									BlockType("Data/Objects/block_wolf_den_1.xml", 0.25f),
-									BlockType("Data/Objects/block_wolf_den_2.xml", 0.25f),
-									BlockType("Data/Objects/block_wolf_den_3.xml", 0.25f),
-									BlockType("Data/Objects/block_wolf_den_4.xml", 0.25f),
+									BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f),
+									BlockType("Data/Objects/block_wolf_den_2.xml", 0.05f),
+									BlockType("Data/Objects/block_wolf_den_3.xml", 0.05f),
+									BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f),
 
 									BlockType("Data/Objects/block_lake_1.xml", 0.5f),
 									BlockType("Data/Objects/block_lake_2.xml", 0.5f),
@@ -45,13 +52,13 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_lake_6.xml", 0.5f),
 									BlockType("Data/Objects/block_lake_7.xml", 0.5f),
 
-									BlockType("Data/Objects/block_guard_patrol.xml", 1.0f),
-									BlockType("Data/Objects/block_camp_1.xml", 1.0f),
-									BlockType("Data/Objects/block_camp_2.xml", 1.0f),
-									BlockType("Data/Objects/block_camp_3.xml", 1.0f),
-									BlockType("Data/Objects/block_camp_4.xml", 1.0f),
-									BlockType("Data/Objects/block_camp_5.xml", 1.0f),
-									BlockType("Data/Objects/block_camp_6.xml", 1.0f),
+									BlockType("Data/Objects/block_guard_patrol.xml", 0.75f),
+									BlockType("Data/Objects/block_camp_1.xml", 0.75f),
+									BlockType("Data/Objects/block_camp_2.xml", 0.75f),
+									BlockType("Data/Objects/block_camp_3.xml", 0.75f),
+									BlockType("Data/Objects/block_camp_4.xml", 0.75f),
+									BlockType("Data/Objects/block_camp_5.xml", 0.75f),
+									BlockType("Data/Objects/block_camp_6.xml", 0.75f),
 
 									BlockType("Data/Objects/block_ruins_1.xml", 3.0f),
 									BlockType("Data/Objects/block_ruins_2.xml", 3.0f),
@@ -60,26 +67,26 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_ruins_5.xml", 3.0f),
 									BlockType("Data/Objects/block_ruins_6.xml", 3.0f),
 
-									BlockType("Data/Objects/block_trees_1.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_2.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_3.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_4.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_5.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_6.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_7.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_8.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_9.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_10.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_11.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_12.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_13.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_14.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_15.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_16.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_17.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_18.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_19.xml", 10.0f),
-									BlockType("Data/Objects/block_trees_20.xml", 10.0f)};
+									BlockType("Data/Objects/block_trees_1.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_2.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_3.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_4.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_5.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_6.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_7.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_8.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_9.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_10.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_11.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_12.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_13.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_14.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_15.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_16.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_17.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_18.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_19.xml", 15.0f),
+									BlockType("Data/Objects/block_trees_20.xml", 15.0f)};
 
 class BlockType{
 	string path;
@@ -126,15 +133,19 @@ class BlockType{
 
 float preload_progress = 0.0f;
 int preload_counter = 0;
+bool skip_one_preload = false;
 
 void PreloadBlocks(){
 	if(!post_init_done || preload_done){return;}
 
-	if(preload_counter < int(block_types.size())){
+	if(skip_one_preload){
+		skip_one_preload = false;
+	}else if(preload_counter < int(block_types.size())){
 		preload_progress = (preload_counter + 1) * 100.0f / block_types.size();
 		block_types[preload_counter].Preload();
 		preload_counter += 1;
 		ShowPreloadProgress();
+		skip_one_preload = true;
 	}else{
 		preload_done = true;
 	}
@@ -249,31 +260,46 @@ class Block{
 		int char_id = -1;
 		int item_id = -1;
 		array<int> pathpoints;
+
 		for(uint i = 0; i < obj_ids.size(); i++){
 			Object@ obj = ReadObjectFromID(obj_ids[i]);
 			if(obj.GetType() == _path_point_object){
 				pathpoints.insertLast(obj_ids[i]);
-			}else if(obj.GetType() == _movement_object){
-				char_id = obj_ids[i];
 			}else if(obj.GetType() == _item_object){
 				item_id = obj_ids[i];
+			}else if(obj.GetType() == _placeholder_object){
+				ScriptParams@ obj_params = obj.GetScriptParams();
+				if(obj_params.HasParam("Path")){
+					PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(obj);
+					placeholder_object.SetPreview("Data/Objects/IGF_Characters/pale_turner.xml");
+					placeholder_object.SetSpecialType(kSpawn);
+
+					string path = obj_params.GetString("Path");
+					char_id = CreateObject(path);
+					obj_ids.insertLast(char_id);
+					Object@ char_obj = ReadObjectFromID(char_id);
+					char_obj.SetTranslation(obj.GetTranslation());
+				}
 			}
 		}
+
 		if(char_id != -1){
 			Object@ char = ReadObjectFromID(char_id);
 			for(uint i = 0; i < pathpoints.size(); i++){
+				//Connect the character to the first pathpoint.
 				Object@ pathpoint = ReadObjectFromID(pathpoints[i]);
 				if(i == 0){
 					pathpoint.ConnectTo(char);
 				}
-				if(i == (pathpoints.size() - 1)){
-					/*Object@ next_pathpoint = ReadObjectFromID(pathpoints[0]);
-					pathpoint.ConnectTo(next_pathpoint);*/
-				}else{
+
+				//Connect all the pathspoints together.
+				if(i != (pathpoints.size() - 1)){
 					Object@ next_pathpoint = ReadObjectFromID(pathpoints[i + 1]);
 					pathpoint.ConnectTo(next_pathpoint);
 				}
 			}
+
+			//Attach any item/weapon to the grip of the target character.
 			if(item_id != -1){
 				Object@ item = ReadObjectFromID(item_id);
 				char.AttachItem(item, _at_grip, false);
@@ -397,7 +423,9 @@ class World{
 		}
 	}
 
-	bool new_block = false;
+	block_creation_states block_creation_state = duplicate_block;
+	int skip_counter = 0;
+
 	void UpdateSpawning(){
 		if(!preload_done){return;}
 
@@ -415,7 +443,7 @@ class World{
 			SpawnObject@ spawn_obj = objects_to_spawn[0];
 			if(!spawn_obj.owner.deleted){
 				//In the first update we create the object.
-				if(!new_block){
+				if(block_creation_state == duplicate_block){
 					int id = DuplicateObject(spawn_obj.block_type.original);
 					Object@ obj = ReadObjectFromID(id);
 					obj.SetEnabled(true);
@@ -426,24 +454,32 @@ class World{
 					AddNewBlockObjects(spawn_obj.owner, obj);
 
 					RotateBlock(id);
-					new_block = true;
-				}else{
+					block_creation_state = skip_state;
+				}if(block_creation_state == skip_state){
+					//Because prefabs take a while to load, we need to pause a couple of updates before translating.
+					skip_counter += 1;
+					if(skip_counter == 2){
+						skip_counter = 0;
+						block_creation_state = translate_block;
+					}
+				}if(block_creation_state == translate_block){
 					//In the second update we translate the object to the correct spot.
-					Block@ owner = spawn_obj.owner;
-					int id = owner.obj_ids[0];
+					int id = spawn_obj.owner.obj_ids[0];
 					Object@ obj = ReadObjectFromID(id);
 					if(IsGroupDerived(id)){
 						TransposeNewBlock(spawn_obj.owner, spawn_obj.block_type.path);
 					}else{
 						obj.SetTranslation(spawn_obj.position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f));
 					}
+					block_creation_state = make_connections;
+				}if(block_creation_state == make_connections){
 					spawn_obj.owner.ConnectAll();
-					new_block = false;
 					objects_to_spawn.removeAt(0);
+					block_creation_state = duplicate_block;
 				}
 			}else{
 				objects_to_spawn.removeAt(0);
-				new_block = false;
+				block_creation_state = duplicate_block;
 			}
 		}else if(!released_player){
 			MovementObject@ player = ReadCharacterID(player_id);
@@ -464,8 +500,6 @@ class World{
 				AddNewBlockObjects(owner, child_obj);
 			}else if(child_obj.GetType() == _movement_object){
 				MovementObject@ char = ReadCharacterID(ids[i]);
-				char.velocity = vec3(0.0f);
-				child_obj.SetEnabled(false);
 			}
 		}
 	}
@@ -521,28 +555,22 @@ class World{
 				break;
 			}
 		}
+
 		if(!block_base_found){
 			DisplayError("Ohno", "No blockbase found in " + path);
 		}
+
 		//Now set all children with the offset.
-		array<EntityType> transpose_types = {_env_object, _movement_object, _item_object, _hotspot_object, _decal_object, _dynamic_light_object, _path_point_object};
+		array<EntityType> transpose_types = {_env_object, _movement_object, _item_object, _hotspot_object, _decal_object, _dynamic_light_object, _path_point_object, _placeholder_object};
 		for(uint i = 0; i < obj_ids.size(); i++){
 			Object@ obj = ReadObjectFromID(obj_ids[i]);
-			if(transpose_types.find(obj.GetType()) != -1){
-				ScriptParams@ params = obj.GetScriptParams();
-				if(obj_ids[i] != player_id){
-					obj.SetTranslation(obj.GetTranslation() + base_pos + offset);
-
-					if(obj.GetType() == _movement_object){
-						MovementObject@ char = ReadCharacterID(obj_ids[i]);
-						obj.SetEnabled(true);
-						char.Execute("SwitchCharacter(this_mo.char_path);");
-						/* char.Execute("Reset();");
-						char.position = obj.GetTranslation();
-						char.velocity = vec3(0.0f);
-						char.QueueScriptMessage("full_revive"); */
-					}
-				}
+			if(obj.GetType() == _prefab){
+				DisplayError("Error", "Block contains a prefab! " + path);
+			}
+			if(obj_ids[i] != player_id && transpose_types.find(obj.GetType()) != -1){
+				vec3 start_pos = obj.GetTranslation();
+				quaternion start_rot = obj.GetRotation();
+				obj.SetTranslation(start_pos + base_pos + offset);
 			}
 		}
 	}
@@ -625,7 +653,7 @@ void SetWindowDimensions(int width, int height){
 void ShowPreloadProgress(){
 	IMText @load_progress = cast<IMText>(text_container.getContents());
 	/* IMText @load_progress = cast<IMText>(text_container.findElement("Progress")); */
-	load_progress.setText("				" + floor(preload_progress) + "%\nPreloading assets.");
+	load_progress.setText("       " + floor(preload_progress) + "%\nPreloading assets.");
 }
 
 void ShowBuildProgress(){
