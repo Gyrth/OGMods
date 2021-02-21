@@ -11,7 +11,7 @@ int rain_sound_id = -1;
 string level_name;
 int player_id = -1;
 float floor_height;
-vec2 grid_position;
+ivec2 grid_position(0, 0);
 bool rebuild_world = false;
 EntityType _group = EntityType(29);
 bool post_init_done = false;
@@ -21,6 +21,7 @@ FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 float blackout_amount = 0.0;
 array<int> character_reset_list;
 bool released_player = false;
+vec3 starting_pos;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -34,59 +35,63 @@ enum block_creation_states{
 }
 
 array<BlockType@> block_types = {
-									BlockType("Data/Objects/block_house_1.xml", 1.0f),
-									BlockType("Data/Objects/block_house_2.xml", 1.0f),
-									BlockType("Data/Objects/block_house_3.xml", 1.0f),
-									BlockType("Data/Objects/block_trees_falen.xml", 1.0f),
+									BlockType("Data/Objects/block_house_1.xml", 1.0f, 1),
+									BlockType("Data/Objects/block_house_2.xml", 1.0f, 1),
+									BlockType("Data/Objects/block_house_3.xml", 1.0f, 1),
+									BlockType("Data/Objects/block_trees_falen.xml", 1.0f, 1),
 
-									BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f),
-									BlockType("Data/Objects/block_wolf_den_2.xml", 0.05f),
-									BlockType("Data/Objects/block_wolf_den_3.xml", 0.05f),
-									BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f),
+									BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f, 1),
+									BlockType("Data/Objects/block_wolf_den_2.xml", 0.05f, 1),
+									BlockType("Data/Objects/block_wolf_den_3.xml", 0.05f, 1),
+									BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f, 1),
 
-									BlockType("Data/Objects/block_lake_1.xml", 0.5f),
-									BlockType("Data/Objects/block_lake_2.xml", 0.5f),
-									BlockType("Data/Objects/block_lake_3.xml", 0.5f),
-									BlockType("Data/Objects/block_lake_4.xml", 0.5f),
-									BlockType("Data/Objects/block_lake_5.xml", 0.5f),
-									BlockType("Data/Objects/block_lake_6.xml", 0.5f),
-									BlockType("Data/Objects/block_lake_7.xml", 0.5f),
+									BlockType("Data/Objects/block_lake_1.xml", 0.5f, 1),
+									BlockType("Data/Objects/block_lake_2.xml", 0.5f, 1),
+									BlockType("Data/Objects/block_lake_3.xml", 0.5f, 1),
+									BlockType("Data/Objects/block_lake_4.xml", 0.5f, 1),
+									BlockType("Data/Objects/block_lake_5.xml", 0.5f, 1),
+									BlockType("Data/Objects/block_lake_6.xml", 0.5f, 1),
+									BlockType("Data/Objects/block_lake_7.xml", 0.5f, 1),
 
-									BlockType("Data/Objects/block_guard_patrol.xml", 0.75f),
-									BlockType("Data/Objects/block_camp_1.xml", 0.75f),
-									BlockType("Data/Objects/block_camp_2.xml", 0.75f),
-									BlockType("Data/Objects/block_camp_3.xml", 0.75f),
-									BlockType("Data/Objects/block_camp_4.xml", 0.75f),
-									BlockType("Data/Objects/block_camp_5.xml", 0.75f),
-									BlockType("Data/Objects/block_camp_6.xml", 0.75f),
+									BlockType("Data/Objects/block_guard_patrol.xml", 0.75f, 1),
+									BlockType("Data/Objects/block_camp_1.xml", 0.75f, 1),
+									BlockType("Data/Objects/block_camp_2.xml", 0.75f, 1),
+									BlockType("Data/Objects/block_camp_3.xml", 0.75f, 1),
+									BlockType("Data/Objects/block_camp_4.xml", 0.75f, 1),
+									BlockType("Data/Objects/block_camp_5.xml", 0.75f, 1),
+									BlockType("Data/Objects/block_camp_6.xml", 0.75f, 1),
 
-									BlockType("Data/Objects/block_ruins_1.xml", 3.0f),
-									BlockType("Data/Objects/block_ruins_2.xml", 3.0f),
-									BlockType("Data/Objects/block_ruins_3.xml", 3.0f),
-									BlockType("Data/Objects/block_ruins_4.xml", 3.0f),
-									BlockType("Data/Objects/block_ruins_5.xml", 3.0f),
-									BlockType("Data/Objects/block_ruins_6.xml", 3.0f),
+									BlockType("Data/Objects/block_ruins_1.xml", 3.0f, 1),
+									BlockType("Data/Objects/block_ruins_2.xml", 3.0f, 1),
+									BlockType("Data/Objects/block_ruins_3.xml", 3.0f, 1),
+									BlockType("Data/Objects/block_ruins_4.xml", 3.0f, 1),
+									BlockType("Data/Objects/block_ruins_5.xml", 3.0f, 1),
+									BlockType("Data/Objects/block_ruins_6.xml", 3.0f, 1),
 
-									BlockType("Data/Objects/block_trees_1.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_2.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_3.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_4.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_5.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_6.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_7.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_8.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_9.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_10.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_11.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_12.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_13.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_14.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_15.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_16.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_17.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_18.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_19.xml", 15.0f),
-									BlockType("Data/Objects/block_trees_20.xml", 15.0f)};
+									BlockType("Data/Objects/block_trees_1.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_2.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_3.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_4.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_5.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_6.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_7.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_8.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_9.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_10.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_11.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_12.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_13.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_14.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_15.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_16.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_17.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_18.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_19.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1),
+
+									BlockType("Data/Objects/block_gatehouse.xml", 50.0f, 2),
+									BlockType("Data/Objects/block_stucco_house.xml", 50.0f, 4)
+								};
 
 class BlockType{
 	string path;
@@ -94,10 +99,12 @@ class BlockType{
 	Object@ original;
 	array<int> children_ids;
 	vec3 target_translation = vec3(0.0f, -10000.0f, 0.0f);
+	int block_size_mult;
 
-	BlockType(string _path, float _probability){
+	BlockType(string _path, float _probability, int _block_size_mult){
 		path = _path;
 		probability = _probability;
+		block_size_mult = _block_size_mult;
 	}
 
 	void Preload(){
@@ -162,20 +169,30 @@ void SetBlockFinalTranslation(){
 	final_translation_done = true;
 }
 
-BlockType@ GetRandomBlockType(){
+BlockType@ GetRandomBlockType(int available_space){
 	float sum = 0.0f;
+	array<BlockType@> filtered_block_types;
+
 	for(uint i = 0; i < block_types.size(); i++){
-		sum += block_types[i].probability;
-	}
-	float random = RangedRandomFloat(0.0f, sum);
-	for(uint i = 0; i < block_types.size(); i++){
-		if(random < block_types[i].probability){
-			return block_types[i];
+		if(block_types[i].block_size_mult <= available_space){
+			filtered_block_types.insertLast(block_types[i]);
 		}
-		random -= block_types[i].probability;
 	}
+
+	for(uint i = 0; i < filtered_block_types.size(); i++){
+		sum += filtered_block_types[i].probability;
+	}
+
+	float random = RangedRandomFloat(0.0f, sum);
+	for(uint i = 0; i < filtered_block_types.size(); i++){
+		if(random < filtered_block_types[i].probability){
+			return filtered_block_types[i];
+		}
+		random -= filtered_block_types[i].probability;
+	}
+
 	DisplayError("Ohno", "Random block did not return anything.");
-	return block_types[0];
+	return filtered_block_types[0];
 }
 
 void ForgetCharacter(int id){
@@ -199,11 +216,18 @@ class Block{
 	vec3 position;
 	array<SpawnObject@> objects_to_spawn;
 	bool deleted = false;
+	BlockType@ type;
+	array<ivec2> on_grid_positions;
+	array<ivec2> off_grid_positions;
 
-	Block(vec3 _position){
+	Block(vec3 _position, int available_space){
 		position = _position;
-		SpawnObject new_spawn(GetRandomBlockType(), position, this);
+		@type = @GetRandomBlockType(available_space);
+		SpawnObject new_spawn(type, position, this);
 		objects_to_spawn.insertLast(@new_spawn);
+		position.x += (type.block_size_mult * block_size) - (block_size);
+		position.y -= (type.block_size_mult * block_size);
+		position.z += (type.block_size_mult * block_size) - (block_size);
 	}
 
 	array<SpawnObject@> GetObjectsToSpawn(){
@@ -256,7 +280,7 @@ class Block{
 		obj_ids.insertLast(id);
 	}
 
-	void ConnectAll(){
+	void MakeConnections(){
 		int char_id = -1;
 		int item_id = -1;
 		array<int> pathpoints;
@@ -313,7 +337,7 @@ class SpawnObject{
 	vec3 position;
 	Block@ owner;
 
-	SpawnObject(BlockType _block_type, vec3 _position, Block@ _owner){
+	SpawnObject(BlockType @_block_type, vec3 _position, Block@ _owner){
 		position = _position;
 		@owner = @_owner;
 		@block_type = @_block_type;
@@ -330,10 +354,12 @@ class World{
 	void Reset(){
 		for(uint i = 0; i < blocks.size(); i++){
 			for(uint j = 0; j < blocks[i].size(); j++){
-				//Delete all the existing blocks and their garbage.
-				Garbage garbage = blocks[i][j].Delete();
-				if(garbage.group != -1){
-					DeleteObjectID(garbage.group);
+				if(blocks[i][j] !is null){
+					//Delete all the existing blocks and their garbage.
+					Garbage garbage = blocks[i][j].Delete();
+					if(garbage.group != -1){
+						DeleteObjectID(garbage.group);
+					}
 				}
 			}
 		}
@@ -349,11 +375,11 @@ class World{
 
 	void MoveXUp(){
 		for(uint i = 0; i < blocks.size(); i++){
-			garbages.insertAt(0, blocks[i][0].Delete());
-			blocks[i].removeAt(0);
+			/* garbages.insertAt(0, blocks[i][0].Delete()); */
 		}
+
 		for(uint i = 0; i < blocks.size(); i++){
-			Block@ new_block = CreateBlock(blocks[i][blocks[i].size() - 1], vec3(block_size * 2.0f, 0.0f, 0.0f));
+			Block@ new_block = CreateBlock(vec3(block_size * 2.0f, 0.0f, 0.0f), i, blocks[i].size() - 1, 1, 1);
 			blocks[i].insertLast(new_block);
 		}
 	}
@@ -361,65 +387,155 @@ class World{
 	void MoveXDown(){
 		//Remove all the blocks on the left side so we can move to the right.
 		for(uint i = 0; i < blocks.size(); i++){
-			garbages.insertAt(0, blocks[i][blocks[i].size() - 1].Delete());
-			blocks[i].removeAt(blocks[i].size() - 1);
+			/* garbages.insertAt(0, blocks[i][blocks[i].size() - 1].Delete()); */
 		}
+
 		for(uint i = 0; i < blocks.size(); i++){
-			Block@ new_block = CreateBlock(blocks[i][0], vec3(-block_size * 2.0f, 0.0f, 0.0f));
+			Block@ new_block = CreateBlock(vec3(-block_size * 2.0f, 0.0f, 0.0f), i, 0, -1, 1);
 			blocks[i].insertAt(0, new_block);
 		}
 	}
 
 	void MoveZUp(){
 		for(uint i = 0; i < blocks[0].size(); i++){
-			garbages.insertAt(0, blocks[0][i].Delete());
+			/* garbages.insertAt(0, blocks[0][i].Delete()); */
 		}
-		blocks.removeAt(0);
+
 		array<Block@> new_row;
-		for(uint i = 0; i < blocks[blocks.size() - 1].size(); i++){
-			Block@ new_block = CreateBlock(blocks[blocks.size() - 1][i], vec3(0.0f, 0.0f, block_size * 2.0f));
-			new_row.insertLast(new_block);
-		}
 		blocks.insertLast(new_row);
+		for(uint i = 0; i < blocks[blocks.size() - 1].size(); i++){
+			Block@ new_block = CreateBlock(vec3(0.0f, 0.0f, block_size * 2.0f), blocks.size() - 1, i, 1, -1);
+			blocks[blocks.size() - 1].insertLast(new_block);
+		}
 	}
 
 	void MoveZDown(){
 		//Remove the bottom row.
 		for(uint i = 0; i < blocks[blocks.size() - 1].size(); i++){
-			garbages.insertAt(0, blocks[blocks.size() - 1][i].Delete());
+			/* garbages.insertAt(0, blocks[blocks.size() - 1][i].Delete()); */
 		}
-		blocks.removeLast();
+
 		array<Block@> new_row;
-		for(uint i = 0; i < blocks[0].size(); i++){
-			Block@ new_block = CreateBlock(blocks[0][i], vec3(0.0f, 0.0f, -block_size * 2.0f));
-			new_row.insertLast(new_block);
-		}
 		blocks.insertAt(0, new_row);
+		for(uint i = 0; i < blocks[0].size(); i++){
+			Block@ new_block = CreateBlock(vec3(0.0f, 0.0f, -block_size * 2.0f), 0, i, 1, 1);
+			blocks[0].insertLast(new_block);
+		}
 	}
 
-	Block@ CreateBlock(Block@ adjacent_block, vec3 offset){
-		Block new_block(adjacent_block.position + offset);
+	Block@ CreateBlock(vec3 position, int start_x, int start_y, int direction_x, int direction_y){
+		int available_space = GetAvailableSpace(start_x, start_y, direction_x, direction_y);
+		Block new_block(position, available_space);
 		objects_to_spawn.insertAt((objects_to_spawn.size()), new_block.GetObjectsToSpawn());
 		return @new_block;
+	}
+
+	int GetAvailableSpace(int start_x, int start_y, int direction_x, int direction_y){
+		int available_space_y = 1;
+		int available_space_x = 1;
+
+		while(true){
+			//Check how many blocks of space we have available in the row.
+			if(int(blocks[start_x].size()) > start_y + (available_space_y * direction_x) && start_y + (available_space_y * direction_x) > 0){
+				if(blocks[start_x][start_y + (available_space_y * direction_x)] is null){
+					available_space_y += 1;
+				}else{
+					break;
+				}
+			}else{
+				if(available_space_y > 2 * world_size){
+					break;
+				}else{
+					available_space_y += 1;
+				}
+			}
+		}
+
+		while(true){
+			//Check how many rows we have available in the whole blocks array.
+			if(int(blocks.size()) > start_x + (available_space_x * direction_y) && start_x + (available_space_x * direction_y) > 0){
+				if(blocks[start_x + (available_space_x * direction_y)][start_x] is null){
+					available_space_x += 1;
+				}else{
+					break;
+				}
+			}else{
+				if(available_space_x > 2 * world_size){
+					break;
+				}else{
+					available_space_x += 1;
+				}
+			}
+		}
+
+		if(available_space_x < available_space_y){
+			return available_space_x;
+		}else{
+			return available_space_y;
+		}
+	}
+
+	void InsertBlock(int x, int y){
+		if(int(blocks.size()) <= x){
+			array<Block@> new_row(world_size);
+			blocks.insertLast(new_row);
+		}
+
+		if(int(blocks.size()) > x && int(blocks[x].size()) > y && blocks[x][y] !is null){
+			return;
+		}
+
+		int available_space = GetAvailableSpace(x, y, 1, 1);
+
+		/* Log(warning, "available space " + available_space); */
+
+		ivec2 adjusted_grid_location  = ivec2(grid_position.x - (world_size / 2) + x, grid_position.y - (world_size / 2) + y);
+		Log(warning, "Grid position " + adjusted_grid_location.x + " " + adjusted_grid_location.y);
+		vec3 adjusted_grid_position = vec3(adjusted_grid_location.x, 0.0f, adjusted_grid_location.y) * (block_size * 2.0f);
+		Log(warning, "adjusted_grid_position " + adjusted_grid_position.x + " " + adjusted_grid_position.z);
+
+		vec3 spawn_pos = starting_pos + adjusted_grid_position;
+		Block new_block(spawn_pos, available_space);
+		DebugDrawText(spawn_pos + vec3(0.0f, block_size, 0.0f), "x:" + x + "y:" + y + "\n" + available_space, 1.0f, true, _persistent);
+		objects_to_spawn.insertAt((objects_to_spawn.size()), new_block.GetObjectsToSpawn());
+
+		//Set the same block at all the positions it occupies.
+		for(uint k = 0; k < uint(pow(new_block.type.block_size_mult, 2.0f)); k++){
+			int x_offset = int(floor(k / new_block.type.block_size_mult));
+			int y_offset = int(floor(k % new_block.type.block_size_mult));
+
+			//Add a new row if needed.
+			if(int(blocks.size()) <= (x + x_offset)){
+				array<Block@> new_row(world_size);
+				blocks.insertLast(new_row);
+			}
+			//Expand row if needed.
+			if(int(blocks[x + x_offset].size()) <= (y + y_offset)){
+				blocks[x + x_offset].resize(blocks[x + x_offset].size() + 1);
+			}
+
+			if((x + x_offset) < world_size && (y + y_offset) < world_size){
+				new_block.on_grid_positions.insertLast(ivec2(x + x_offset, y + y_offset));
+			}else{
+				new_block.off_grid_positions.insertLast(ivec2(x + x_offset, y + y_offset));
+			}
+
+			@blocks[x + x_offset][y + y_offset] = new_block;
+		}
 	}
 
 	void CreateFloor(){
 		Object@ player_obj = ReadObjectFromID(player_id);
 		vec3 player_pos = vec3(floor(player_obj.GetTranslation().x),floor(player_obj.GetTranslation().y),floor(player_obj.GetTranslation().z));
-		//Combine the player position, block size and player scale to create the floor height.
-		floor_height = player_pos.y - (block_size * 2.0f) - 1.0f;
+		floor_height = player_pos.y - (block_size) - 1.0f;
 
-		//Looking top town, we start in the left top corner with builing.
-		vec3 starting_pos = vec3(player_pos.x - (world_size * block_size) + (block_size), floor_height, player_pos.z - (world_size * block_size) + (block_size));
+		starting_pos = player_pos;
+		starting_pos.y = floor_height;
+
 		for(uint i = 0; i < uint(world_size); i++){
-			array<Block@> new_row;
 			for(uint j = 0; j < uint(world_size); j++){
-				vec3 new_block_pos = vec3(starting_pos.x + (block_size * float(j) * 2.0f), floor_height, starting_pos.z + (block_size * float(i) * 2.0f));
-				Block new_block(new_block_pos);
-				objects_to_spawn.insertAt((objects_to_spawn.size()), new_block.GetObjectsToSpawn());
-				new_row.insertLast(@new_block);
+				InsertBlock(i, j);
 			}
-			blocks.insertLast(new_row);
 		}
 	}
 
@@ -473,7 +589,7 @@ class World{
 					}
 					block_creation_state = make_connections;
 				}if(block_creation_state == make_connections){
-					spawn_obj.owner.ConnectAll();
+					spawn_obj.owner.MakeConnections();
 					objects_to_spawn.removeAt(0);
 					block_creation_state = duplicate_block;
 				}
@@ -487,6 +603,7 @@ class World{
 			released_player = true;
 			text_container.clear();
 			blackout_amount = 1.0f;
+			UpdateGlobalReflection();
 		}
 	}
 
@@ -552,6 +669,10 @@ class World{
 				base_pos = position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f);
 				params.Remove("BlockBase");
 				block_base_found = true;
+				if(!released_player){
+					obj.SetTint(vec3(0.0f, 0.0f, 10.0f));
+				}
+
 				break;
 			}
 		}
@@ -718,6 +839,15 @@ void BuildWorld(){
 	}
 }
 
+void UpdateGlobalReflection(){
+	array<int> gl_ids = GetObjectIDsType(_reflection_capture_object);
+	for(uint i = 0; i < gl_ids.size(); i++){
+		Object@ gl_obj = ReadObjectFromID(gl_ids[i]);
+		gl_obj.SetTranslation(gl_obj.GetTranslation() + vec3(RangedRandomFloat(-1.0f, 1.0f)));
+		DebugDrawText(gl_obj.GetTranslation(), "GlobalReflection", 1.0f, true, _persistent);
+	}
+}
+
 void ReceiveMessage(string msg) {
 	TokenIterator token_iter;
 	token_iter.Init();
@@ -792,15 +922,15 @@ void GetPlayerID(){
 		for(uint a=0; a<num_chars; ++a){
 			MovementObject@ char = ReadCharacter(a);
 			if(char.controlled){
-			  player_id = char.GetID();
-			  break;
+				player_id = char.GetID();
+				break;
 			}
 		}
 		if(player_id == -1){
-		  player_id = ReadCharacter(0).GetID();
+			player_id = ReadCharacter(0).GetID();
 		}
 		MovementObject@ player = ReadCharacterID(player_id);
-		grid_position = vec2(floor(player.position.x / (block_size)), floor(player.position.z / (block_size)));
+		grid_position = ivec2(int(floor(player.position.x / (block_size))), int(floor(player.position.z / (block_size))));
 		player.static_char = true;
 	}
 }
@@ -811,26 +941,27 @@ void UpdateMovement(){
 	}
 
 	MovementObject@ player = ReadCharacterID(player_id);
-	vec2 new_grid_position = vec2(floor(player.position.x / (2.0f * block_size)), floor(player.position.z / (2.0f * block_size)));
-	vec2 moved = vec2(0.0f);
-	if(grid_position != new_grid_position){
-	  if(new_grid_position.y > grid_position.y){
-		  world.MoveZUp();
-		  moved += vec2(0.0f, 1.0f);
-	  }
-	  if(new_grid_position.y < grid_position.y){
-		  world.MoveZDown();
-		  moved += vec2(0.0f, -1.0f);
-	  }
-	  if(new_grid_position.x > grid_position.x){
-		  world.MoveXUp();
-		  moved += vec2(1.0f, 0.0f);
-	  }
-	  if(new_grid_position.x < grid_position.x){
-		  world.MoveXDown();
-		  moved += vec2(-1.0f, 0.0f);
-	  }
-	  grid_position = grid_position + moved;
+	ivec2 new_grid_position = ivec2(int(floor(player.position.x / (2.0f * block_size))), int(floor(player.position.z / (2.0f * block_size))));
+	ivec2 moved = ivec2(0);
+	if(grid_position.x != new_grid_position.x && grid_position.y != new_grid_position.y){
+		if(new_grid_position.y > grid_position.y){
+			/* world.MoveZUp(); */
+			moved += ivec2(0, 1);
+		}
+		if(new_grid_position.y < grid_position.y){
+			/* world.MoveZDown(); */
+			moved += ivec2(0, -1);
+		}
+		if(new_grid_position.x > grid_position.x){
+			/* world.MoveXUp(); */
+			moved += ivec2(1, 0);
+		}
+		if(new_grid_position.x < grid_position.x){
+			/* world.MoveXDown(); */
+			moved += ivec2(-1, 0);
+		}
+		grid_position = grid_position + moved;
+		Log(warning, "grid_position : " + grid_position.x + "," + grid_position.y);
 	}
 }
 
