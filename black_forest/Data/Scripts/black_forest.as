@@ -234,10 +234,23 @@ class Block{
 		return objects_to_spawn;
 	}
 
-	Garbage Delete(){
+	void Delete(ivec2 delete_position){
+		for(uint i = 0; i < on_grid_positions.size(); i++){
+			if(on_grid_positions[i].x == delete_position.x && on_grid_positions[i].y == delete_position.y){
+				on_grid_positions.removeAt(i);
+			}
+		}
+
+		if(on_grid_positions.size() == 0){
+			AddToGarbage();
+		}
+	}
+
+	void AddToGarbage(){
 		deleted = true;
 		Garbage garbage();
 		array<int> groups;
+
 		for(uint i = 0; i < obj_ids.size(); i++){
 			if(!ObjectExists(obj_ids[i])){
 				continue;
@@ -272,8 +285,9 @@ class Block{
 			}
 			DeleteObjectID(obj_ids[i]);
 		}
+
+		world.garbages.insertLast(garbage);
 		obj_ids.resize(0);
-		return garbage;
 	}
 
 	void AddObjectID(int id){
@@ -356,19 +370,18 @@ class World{
 			for(uint j = 0; j < blocks[i].size(); j++){
 				if(blocks[i][j] !is null){
 					//Delete all the existing blocks and their garbage.
-					Garbage garbage = blocks[i][j].Delete();
-					if(garbage.group != -1){
-						DeleteObjectID(garbage.group);
-					}
+					blocks[i][j].Delete(ivec2(i, j));
 				}
 			}
 		}
+
 		//Delete all the garbage that's already collected.
 		for(uint i = 0; i < garbages.size(); i++){
 			if(garbages[i].group != -1){
 				DeleteObjectID(garbages[i].group);
 			}
 		}
+
 		blocks.resize(0);
 		garbages.resize(0);
 	}
@@ -496,7 +509,7 @@ class World{
 
 		vec3 spawn_pos = starting_pos + adjusted_grid_position;
 		Block new_block(spawn_pos, available_space);
-		DebugDrawText(spawn_pos + vec3(0.0f, block_size, 0.0f), "x:" + x + "y:" + y + "\n" + available_space, 1.0f, true, _persistent);
+		/* DebugDrawText(spawn_pos + vec3(0.0f, block_size, 0.0f), "x:" + x + "y:" + y + "\n" + available_space, 1.0f, true, _persistent); */
 		objects_to_spawn.insertAt((objects_to_spawn.size()), new_block.GetObjectsToSpawn());
 
 		//Set the same block at all the positions it occupies.
@@ -602,7 +615,7 @@ class World{
 			player.static_char = false;
 			released_player = true;
 			text_container.clear();
-			blackout_amount = 1.0f;
+			/* blackout_amount = 1.0f; */
 			UpdateGlobalReflection();
 		}
 	}
@@ -752,7 +765,7 @@ void Init(string p_level_name){
 	IMImage@ background = IMImage("Textures/error.tga");
 	background.setSize(vec2(2560, 1440));
 	background.setColor(vec4(0.0f, 0.0f, 0.0f, 1.0f));
-	text_container.addFloatingElement(background, "background", vec2(0.0f, 0.0f));
+	/* text_container.addFloatingElement(background, "background", vec2(0.0f, 0.0f)); */
 	text_container.setElement(load_progress);
 	level_name = p_level_name;
 	PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
@@ -844,7 +857,7 @@ void UpdateGlobalReflection(){
 	for(uint i = 0; i < gl_ids.size(); i++){
 		Object@ gl_obj = ReadObjectFromID(gl_ids[i]);
 		gl_obj.SetTranslation(gl_obj.GetTranslation() + vec3(RangedRandomFloat(-1.0f, 1.0f)));
-		DebugDrawText(gl_obj.GetTranslation(), "GlobalReflection", 1.0f, true, _persistent);
+		/* DebugDrawText(gl_obj.GetTranslation(), "GlobalReflection", 1.0f, true, _persistent); */
 	}
 }
 
@@ -906,7 +919,7 @@ void Update() {
 		released_player = false;
 		player_id = -1;
 		resetting = false;
-		blackout_amount = 1.0f;
+		/* blackout_amount = 1.0f; */
 	}
 }
 
