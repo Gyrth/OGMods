@@ -615,7 +615,7 @@ class World{
 			player.static_char = false;
 			released_player = true;
 			text_container.clear();
-			/* blackout_amount = 1.0f; */
+			blackout_amount = 1.0f;
 			UpdateGlobalReflection();
 		}
 	}
@@ -914,6 +914,11 @@ void Update() {
 	UpdateFading();
 	imGUI.update();
 
+	if(!released_player){
+		camera.SetPos(starting_pos + vec3(world_size * 7.0f));
+		camera.LookAt(starting_pos);
+	}
+
 	if(resetting){
 		created_world = false;
 		released_player = false;
@@ -1011,4 +1016,11 @@ void UpdateReviving(){
 	if(!EditorModeActive() && player.GetIntVar("knocked_out") != _awake && GetInputPressed(0, "mouse0")){
 		Reset();
 	}
+}
+
+bool DialogueCameraControl(){
+	if(!released_player){
+		return true;
+	}
+	return false;
 }
