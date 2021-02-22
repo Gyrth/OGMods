@@ -22,6 +22,7 @@ float blackout_amount = 0.0;
 array<int> character_reset_list;
 bool released_player = false;
 vec3 starting_pos;
+ivec2 array_offset(0, 0);
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -40,10 +41,10 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_house_3.xml", 1.0f, 1),
 									BlockType("Data/Objects/block_trees_falen.xml", 1.0f, 1),
 
-									BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f, 1),
+									/* BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f, 1),
 									BlockType("Data/Objects/block_wolf_den_2.xml", 0.05f, 1),
 									BlockType("Data/Objects/block_wolf_den_3.xml", 0.05f, 1),
-									BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f, 1),
+									BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f, 1), */
 
 									BlockType("Data/Objects/block_lake_1.xml", 0.5f, 1),
 									BlockType("Data/Objects/block_lake_2.xml", 0.5f, 1),
@@ -53,13 +54,13 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_lake_6.xml", 0.5f, 1),
 									BlockType("Data/Objects/block_lake_7.xml", 0.5f, 1),
 
-									BlockType("Data/Objects/block_guard_patrol.xml", 0.75f, 1),
+									/* BlockType("Data/Objects/block_guard_patrol.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_1.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_2.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_3.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_4.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_5.xml", 0.75f, 1),
-									BlockType("Data/Objects/block_camp_6.xml", 0.75f, 1),
+									BlockType("Data/Objects/block_camp_6.xml", 0.75f, 1), */
 
 									BlockType("Data/Objects/block_ruins_1.xml", 3.0f, 1),
 									BlockType("Data/Objects/block_ruins_2.xml", 3.0f, 1),
@@ -87,10 +88,10 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_trees_17.xml", 15.0f, 1),
 									BlockType("Data/Objects/block_trees_18.xml", 15.0f, 1),
 									BlockType("Data/Objects/block_trees_19.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1)
 
-									BlockType("Data/Objects/block_gatehouse.xml", 50.0f, 2),
-									BlockType("Data/Objects/block_stucco_house.xml", 50.0f, 4)
+									/* BlockType("Data/Objects/block_gatehouse.xml", 50.0f, 2),
+									BlockType("Data/Objects/block_stucco_house.xml", 50.0f, 4) */
 								};
 
 class BlockType{
@@ -217,8 +218,7 @@ class Block{
 	array<SpawnObject@> objects_to_spawn;
 	bool deleted = false;
 	BlockType@ type;
-	array<ivec2> on_grid_positions;
-	array<ivec2> off_grid_positions;
+	int on_grid = 0;
 
 	Block(vec3 _position, int available_space){
 		position = _position;
@@ -234,15 +234,13 @@ class Block{
 		return objects_to_spawn;
 	}
 
-	void Delete(ivec2 delete_position){
-		for(uint i = 0; i < on_grid_positions.size(); i++){
-			if(on_grid_positions[i].x == delete_position.x && on_grid_positions[i].y == delete_position.y){
-				on_grid_positions.removeAt(i);
-			}
-		}
+	void Delete(){
+		on_grid -= 1;
 
-		if(on_grid_positions.size() == 0){
+		Log(warning, "on_grid " + on_grid);
+		if(on_grid == 0){
 			AddToGarbage();
+			world.RemoveBlock(this);
 		}
 	}
 
@@ -370,7 +368,7 @@ class World{
 			for(uint j = 0; j < blocks[i].size(); j++){
 				if(blocks[i][j] !is null){
 					//Delete all the existing blocks and their garbage.
-					blocks[i][j].Delete(ivec2(i, j));
+					blocks[i][j].Delete();
 				}
 			}
 		}
@@ -386,53 +384,131 @@ class World{
 		garbages.resize(0);
 	}
 
-	void MoveXUp(){
+	void RemoveBlock(Block@ block){
 		for(uint i = 0; i < blocks.size(); i++){
-			/* garbages.insertAt(0, blocks[i][0].Delete()); */
-		}
-
-		for(uint i = 0; i < blocks.size(); i++){
-			Block@ new_block = CreateBlock(vec3(block_size * 2.0f, 0.0f, 0.0f), i, blocks[i].size() - 1, 1, 1);
-			blocks[i].insertLast(new_block);
+			for(uint j = 0; j < blocks[i].size(); j++){
+				if(blocks[i][j] is block){
+					Log(warning, "remove block at x:" + i + ",y" + j);
+					/* DebugDrawText(block.position, "Removed", 1.0f, true, _persistent); */
+					@blocks[i][j] = null;
+				}
+			}
 		}
 	}
 
-	void MoveXDown(){
-		//Remove all the blocks on the left side so we can move to the right.
-		for(uint i = 0; i < blocks.size(); i++){
-			/* garbages.insertAt(0, blocks[i][blocks[i].size() - 1].Delete()); */
+	void RemoveEmptyRowTop(){
+		bool row_empty = true;
+
+		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
+			int y = array_offset.y;
+			ivec2 location = ivec2(x, y);
+			if(blocks[location.y][location.x] !is null){
+				row_empty = false;
+				Log(warning, "Not null at " + location.x + "," + location.y);
+				break;
+			}
 		}
 
-		for(uint i = 0; i < blocks.size(); i++){
-			Block@ new_block = CreateBlock(vec3(-block_size * 2.0f, 0.0f, 0.0f), i, 0, -1, 1);
-			blocks[i].insertAt(0, new_block);
-		}
-	}
-
-	void MoveZUp(){
-		for(uint i = 0; i < blocks[0].size(); i++){
-			/* garbages.insertAt(0, blocks[0][i].Delete()); */
-		}
-
-		array<Block@> new_row;
-		blocks.insertLast(new_row);
-		for(uint i = 0; i < blocks[blocks.size() - 1].size(); i++){
-			Block@ new_block = CreateBlock(vec3(0.0f, 0.0f, block_size * 2.0f), blocks.size() - 1, i, 1, -1);
-			blocks[blocks.size() - 1].insertLast(new_block);
+		if(row_empty){
+			Log(warning, "Remove top row");
+			blocks.removeAt(array_offset.y);
+			RemoveEmptyRowTop();
 		}
 	}
 
-	void MoveZDown(){
+	void RemoveEmptyRowLeft(){
+		bool row_empty = true;
+		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
+			ivec2 location = ivec2(array_offset.x, y);
+			if(blocks[location.y][location.x] !is null){
+				row_empty = false;
+				Log(warning, "Not null at " + location.x + "," + location.y);
+				break;
+			}
+		}
+
+		if(row_empty){
+			Log(warning, "Remove leftx row");
+			for(int y = array_offset.y; y < array_offset.y + world_size; y++){
+				ivec2 location = ivec2(array_offset.x, y);
+				blocks[location.y].removeAt(location.x);
+			}
+			RemoveEmptyRowLeft();
+		}
+	}
+
+	void MoveRight(){
+		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
+			ivec2 location = ivec2(array_offset.x, y);
+			Log(warning, "Delete at " + location.x + " " + location.y);
+			if(blocks[location.y][location.x] !is null){
+				blocks[location.y][location.x].Delete();
+			}
+		}
+
+		RemoveEmptyRowLeft();
+
+		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
+			ivec2 location = ivec2(array_offset.x + world_size - 1, y);
+			Log(warning, "Insert at " + location.x + " " + location.y);
+			InsertBlock(location.x, location.y);
+		}
+	}
+
+	void MoveLeft(){
+		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
+			int x = array_offset.x + world_size - 1;
+			ivec2 location = ivec2(x, y);
+			Log(warning, "Delete at " + location.x + " " + location.y);
+			if(blocks[location.y][location.x] !is null){
+				blocks[location.y][location.x].Delete();
+			}
+		}
+
+		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
+			ivec2 location = ivec2(array_offset.x, y);
+			Log(warning, "Insert at " + location.x + " " + location.y);
+			blocks[location.y].insertAt(location.x, null);
+			InsertBlock(location.x, location.y);
+		}
+	}
+
+	void MoveUp(){
 		//Remove the bottom row.
-		for(uint i = 0; i < blocks[blocks.size() - 1].size(); i++){
-			/* garbages.insertAt(0, blocks[blocks.size() - 1][i].Delete()); */
+		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
+			int y = array_offset.y + world_size - 1;
+			ivec2 location = ivec2(x, y);
+			Log(warning, "Delete at " + location.x + " " + location.y);
+			if(blocks[location.y][location.x] !is null){
+				blocks[location.y][location.x].Delete();
+			}
 		}
 
-		array<Block@> new_row;
-		blocks.insertAt(0, new_row);
-		for(uint i = 0; i < blocks[0].size(); i++){
-			Block@ new_block = CreateBlock(vec3(0.0f, 0.0f, -block_size * 2.0f), 0, i, 1, 1);
-			blocks[0].insertLast(new_block);
+		blocks.insertAt(array_offset.y, array<Block@>(blocks.size()));
+		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
+			ivec2 location = ivec2(x, array_offset.y);
+			Log(warning, "Insert at " + location.x + " " + location.y);
+			InsertBlock(location.x, location.y);
+		}
+	}
+
+	void MoveDown(){
+		//Remove the top row.
+		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
+			int y = array_offset.y;
+			ivec2 location = ivec2(x, y);
+			Log(warning, "Delete at " + location.x + " " + location.y);
+			if(blocks[location.y][location.x] !is null){
+				blocks[location.y][location.x].Delete();
+			}
+		}
+
+		RemoveEmptyRowTop();
+
+		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
+			ivec2 location = ivec2(x, array_offset.y + world_size - 1);
+			Log(warning, "Insert at " + location.x + " " + location.y);
+			InsertBlock(location.x, location.y);
 		}
 	}
 
@@ -489,12 +565,13 @@ class World{
 	}
 
 	void InsertBlock(int x, int y){
-		if(int(blocks.size()) <= x){
+		if(int(blocks.size()) <= y){
 			array<Block@> new_row(world_size);
 			blocks.insertLast(new_row);
 		}
 
-		if(int(blocks.size()) > x && int(blocks[x].size()) > y && blocks[x][y] !is null){
+		if(int(blocks.size()) > y && int(blocks[y].size()) > x && blocks[y][x] !is null){
+			blocks[y][x].on_grid += 1;
 			return;
 		}
 
@@ -518,22 +595,21 @@ class World{
 			int y_offset = int(floor(k % new_block.type.block_size_mult));
 
 			//Add a new row if needed.
-			if(int(blocks.size()) <= (x + x_offset)){
+			if(int(blocks.size()) <= (y + y_offset)){
 				array<Block@> new_row(world_size);
 				blocks.insertLast(new_row);
+				/* array_offset.y += 1; */
 			}
 			//Expand row if needed.
-			if(int(blocks[x + x_offset].size()) <= (y + y_offset)){
-				blocks[x + x_offset].resize(blocks[x + x_offset].size() + 1);
+			if(int(blocks[y + y_offset].size()) <= (x + x_offset)){
+				blocks[y + y_offset].resize(blocks[y + y_offset].size() + 1);
 			}
 
-			if((x + x_offset) < world_size && (y + y_offset) < world_size){
-				new_block.on_grid_positions.insertLast(ivec2(x + x_offset, y + y_offset));
-			}else{
-				new_block.off_grid_positions.insertLast(ivec2(x + x_offset, y + y_offset));
+			if((y + y_offset) < world_size && (x + x_offset) < world_size){
+				new_block.on_grid += 1;
 			}
 
-			@blocks[x + x_offset][y + y_offset] = new_block;
+			@blocks[y + y_offset][x + x_offset] = new_block;
 		}
 	}
 
@@ -683,7 +759,7 @@ class World{
 				params.Remove("BlockBase");
 				block_base_found = true;
 				if(!released_player){
-					obj.SetTint(vec3(0.0f, 0.0f, 10.0f));
+					obj.SetTint(vec3(RangedRandomFloat(0.0f, 5.0f)));
 				}
 
 				break;
@@ -748,6 +824,17 @@ class World{
 					}
 					garbages.removeAt(i);
 					i--;
+				}
+			}
+		}
+	}
+
+	void DrawDebug(){
+		for(uint i = 0; i < blocks.size(); i++){
+			for(uint j = 0; j < blocks[i].size(); j++){
+				Block@ target_block = blocks[i][j];
+				if(target_block !is null){
+					DebugDrawText(target_block.position, "x" + j + ",y" + i, 1.0f, true, _delete_on_update);
 				}
 			}
 		}
@@ -907,6 +994,7 @@ void Update() {
 	UpdateMovement();
 	world.UpdateSpawning();
 	world.RemoveGarbage();
+	world.DrawDebug();
 
 	UpdateMusic();
 	UpdateSounds();
@@ -948,37 +1036,54 @@ void GetPlayerID(){
 			player_id = ReadCharacter(0).GetID();
 		}
 		MovementObject@ player = ReadCharacterID(player_id);
-		grid_position = ivec2(int(floor(player.position.x / (block_size))), int(floor(player.position.z / (block_size))));
 		player.static_char = true;
 	}
 }
 
 void UpdateMovement(){
-	if(!post_init_done || !preload_done || !final_translation_done || !created_world || rebuild_world){
+	if(!post_init_done || !preload_done || !final_translation_done || !created_world || rebuild_world || !released_player){
 		return;
 	}
 
 	MovementObject@ player = ReadCharacterID(player_id);
-	ivec2 new_grid_position = ivec2(int(floor(player.position.x / (2.0f * block_size))), int(floor(player.position.z / (2.0f * block_size))));
-	ivec2 moved = ivec2(0);
-	if(grid_position.x != new_grid_position.x && grid_position.y != new_grid_position.y){
+	vec3 target_position;
+	if(EditorModeActive()){
+		target_position = camera.GetPos();
+	}else{
+		target_position = player.position;
+	}
+
+	//Added offset to make sure the character is in the center of the blocks.
+	target_position += vec3(block_size * 2.0f);
+
+	if(GetInputPressed(0, "g")){
+		Log(warning, "Pressed g");
+
+		ivec2 moved = ivec2(0);
+		moved += ivec2(0, -1);
+		grid_position = grid_position + moved;
+
+		world.MoveUp();
+	}
+
+	ivec2 new_grid_position = ivec2(int(floor(target_position.x / (block_size * 2.0f))), int(floor(target_position.z / (block_size * 2.0f))));
+	if(grid_position.x != new_grid_position.x || grid_position.y != new_grid_position.y){
 		if(new_grid_position.y > grid_position.y){
-			/* world.MoveZUp(); */
-			moved += ivec2(0, 1);
+			grid_position += ivec2(0, 1);
+			world.MoveDown();
 		}
 		if(new_grid_position.y < grid_position.y){
-			/* world.MoveZDown(); */
-			moved += ivec2(0, -1);
+			grid_position += ivec2(0, -1);
+			world.MoveUp();
 		}
 		if(new_grid_position.x > grid_position.x){
-			/* world.MoveXUp(); */
-			moved += ivec2(1, 0);
+			grid_position += ivec2(1, 0);
+			world.MoveRight();
 		}
 		if(new_grid_position.x < grid_position.x){
-			/* world.MoveXDown(); */
-			moved += ivec2(-1, 0);
+			grid_position += ivec2(-1, 0);
+			world.MoveLeft();
 		}
-		grid_position = grid_position + moved;
 		Log(warning, "grid_position : " + grid_position.x + "," + grid_position.y);
 	}
 }

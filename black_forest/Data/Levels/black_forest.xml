@@ -14,7 +14,7 @@
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
     <parameter name="Block Size" type="float" val="10" />
     <parameter name="Custom Shader" type="string" val="#MISTY2 #ADD_MOON" />
-    <parameter name="Fog amount" type="float" val="0.0" />
+    <parameter name="Fog amount" type="float" val="0" />
     <parameter name="GPU Particle Field" type="string" val="#BUGS" />
     <parameter name="HDR Black point" type="float" val="0" />
     <parameter name="HDR Bloom multiplier" type="float" val="0" />
@@ -27,7 +27,7 @@
     <parameter name="Sky Brightness" type="float" val="5" />
     <parameter name="Sky Rotation" type="float" val="-239" />
     <parameter name="Sky Tint" type="string" val="120, 158, 103" />
-    <parameter name="World Size" type="int" val="18" />
+    <parameter name="World Size" type="int" val="8" />
 </LevelScriptParameters>
 <NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
 <Sky>
@@ -37,7 +37,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-79.3375" t1="12.5702" t2="-59.4944" s0="1" s1="1" s2="1" q0="-0.0622876" q1="0.815167" q2="-0.0892497" q3="-0.568909" euler_x="-2.92349" euler_y="-1.21864" euler_z="3.14159" id="1">
+    <CameraObject t0="-7.5735" t1="169.17" t2="-10.1001" s0="1" s1="1" s2="1" q0="0.694605" q1="0.0083645" q2="-0.00807736" q3="0.719297" euler_x="1.53587" euler_y="0.0232564" euler_z="0" id="1">
         <parameters>
             <parameter name="Old" type="int" val="1" />
         </parameters>
@@ -96,7 +96,7 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <ReflectionCaptureObject t0="-3.33409" t1="52.137" t2="-3.87828" s0="0.759925" s1="0.759925" s2="0.759925" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="477" gicoeff00="0.317688" gicoeff01="0.415894" gicoeff02="0.274231" gicoeff03="0.332153" gicoeff04="0.447937" gicoeff05="0.295044" gicoeff06="0.172607" gicoeff07="0.232208" gicoeff08="0.171234" gicoeff09="0.414368" gicoeff10="0.549133" gicoeff11="0.348694" gicoeff12="0.44873" gicoeff13="0.590454" gicoeff14="0.391907" gicoeff15="0.190674" gicoeff16="0.258728" gicoeff17="0.166168">
+    <ReflectionCaptureObject t0="-4.16573" t1="51.3054" t2="-4.70992" s0="0.759925" s1="0.759925" s2="0.759925" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="477" gicoeff00="0.172302" gicoeff01="0.227997" gicoeff02="0.144867" gicoeff03="0.21994" gicoeff04="0.297241" gicoeff05="0.194458" gicoeff06="0.157745" gicoeff07="0.212799" gicoeff08="0.15799" gicoeff09="0.163116" gicoeff10="0.216064" gicoeff11="0.124039" gicoeff12="0.207642" gicoeff13="0.273743" gicoeff14="0.178741" gicoeff15="0.201508" gicoeff16="0.270996" gicoeff17="0.174591">
         <parameters>
             <parameter name="Global" type="string" val="1" />
         </parameters>
