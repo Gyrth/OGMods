@@ -17,7 +17,7 @@ EntityType _group = EntityType(29);
 bool post_init_done = false;
 IMGUI@ imGUI;
 IMContainer@ text_container;
-FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
+FontSetup default_font("Lato-Regular", 100 , HexColor("#CCCCCC"), true);
 float blackout_amount = 0.0;
 array<int> character_reset_list;
 bool released_player = false;
@@ -88,10 +88,10 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_trees_17.xml", 15.0f, 1),
 									BlockType("Data/Objects/block_trees_18.xml", 15.0f, 1),
 									BlockType("Data/Objects/block_trees_19.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1)
+									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1),
 
-									/* BlockType("Data/Objects/block_gatehouse.xml", 50.0f, 2),
-									BlockType("Data/Objects/block_stucco_house.xml", 50.0f, 4) */
+									BlockType("Data/Objects/block_gatehouse.xml", 50.0f, 2),
+									BlockType("Data/Objects/block_stucco_house.xml", 50.0f, 4)
 								};
 
 class BlockType{
@@ -219,9 +219,11 @@ class Block{
 	bool deleted = false;
 	BlockType@ type;
 	int on_grid = 0;
+	int available_space;
 
-	Block(vec3 _position, int available_space){
+	Block(vec3 _position, int _available_space){
 		position = _position;
+		available_space = _available_space;
 		@type = @GetRandomBlockType(available_space);
 		SpawnObject new_spawn(type, position, this);
 		objects_to_spawn.insertLast(@new_spawn);
@@ -237,7 +239,7 @@ class Block{
 	void Delete(){
 		on_grid -= 1;
 
-		Log(warning, "on_grid " + on_grid);
+		Log(warning, on_grid + " Request delete " + type.block_size_mult);
 		if(on_grid == 0){
 			AddToGarbage();
 			world.RemoveBlock(this);
@@ -342,6 +344,10 @@ class Block{
 			}
 		}
 	}
+
+	void DrawDebug(ivec2 location){
+		DebugDrawText(vec3(position.x,  floor_height + block_size, position.z), "x" + location.x + ",y" + location.y + "\n" + available_space, 1.0f, true, _delete_on_update);
+	}
 }
 
 class SpawnObject{
@@ -388,7 +394,7 @@ class World{
 		for(uint i = 0; i < blocks.size(); i++){
 			for(uint j = 0; j < blocks[i].size(); j++){
 				if(blocks[i][j] is block){
-					Log(warning, "remove block at x:" + i + ",y" + j);
+					/* Log(warning, "remove block at x:" + i + ",y" + j); */
 					/* DebugDrawText(block.position, "Removed", 1.0f, true, _persistent); */
 					@blocks[i][j] = null;
 				}
@@ -404,25 +410,25 @@ class World{
 			ivec2 location = ivec2(x, y);
 			if(blocks[location.y][location.x] !is null){
 				row_empty = false;
-				Log(warning, "Not null at " + location.x + "," + location.y);
+				/* Log(warning, "Not null at " + location.x + "," + location.y); */
 				break;
 			}
 		}
 
 		if(row_empty){
-			Log(warning, "Remove top row");
+			/* Log(warning, "Remove top row"); */
 			blocks.removeAt(array_offset.y);
 			RemoveEmptyRowTop();
 		}
 	}
 
-	void RemoveEmptyRowLeft(){
+	bool RemoveEmptyRowLeft(){
 		bool row_empty = true;
 		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
 			ivec2 location = ivec2(array_offset.x, y);
 			if(blocks[location.y][location.x] !is null){
 				row_empty = false;
-				Log(warning, "Not null at " + location.x + "," + location.y);
+				/* Log(warning, "Not null at " + location.x + "," + location.y); */
 				break;
 			}
 		}
@@ -433,8 +439,15 @@ class World{
 				ivec2 location = ivec2(array_offset.x, y);
 				blocks[location.y].removeAt(location.x);
 			}
+
+			if(array_offset.x > 0){
+				array_offset.x -= 1;
+			}
+
 			RemoveEmptyRowLeft();
 		}
+
+		return row_empty;
 	}
 
 	void MoveRight(){
@@ -446,7 +459,9 @@ class World{
 			}
 		}
 
-		RemoveEmptyRowLeft();
+		if(!RemoveEmptyRowLeft()){
+			array_offset.x += 1;
+		}
 
 		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
 			ivec2 location = ivec2(array_offset.x + world_size - 1, y);
@@ -459,7 +474,7 @@ class World{
 		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
 			int x = array_offset.x + world_size - 1;
 			ivec2 location = ivec2(x, y);
-			Log(warning, "Delete at " + location.x + " " + location.y);
+			/* Log(warning, "Delete at " + location.x + " " + location.y); */
 			if(blocks[location.y][location.x] !is null){
 				blocks[location.y][location.x].Delete();
 			}
@@ -467,7 +482,7 @@ class World{
 
 		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
 			ivec2 location = ivec2(array_offset.x, y);
-			Log(warning, "Insert at " + location.x + " " + location.y);
+			/* Log(warning, "Insert at " + location.x + " " + location.y); */
 			blocks[location.y].insertAt(location.x, null);
 			InsertBlock(location.x, location.y);
 		}
@@ -478,7 +493,7 @@ class World{
 		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
 			int y = array_offset.y + world_size - 1;
 			ivec2 location = ivec2(x, y);
-			Log(warning, "Delete at " + location.x + " " + location.y);
+			/* Log(warning, "Delete at " + location.x + " " + location.y); */
 			if(blocks[location.y][location.x] !is null){
 				blocks[location.y][location.x].Delete();
 			}
@@ -487,7 +502,7 @@ class World{
 		blocks.insertAt(array_offset.y, array<Block@>(blocks.size()));
 		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
 			ivec2 location = ivec2(x, array_offset.y);
-			Log(warning, "Insert at " + location.x + " " + location.y);
+			/* Log(warning, "Insert at " + location.x + " " + location.y); */
 			InsertBlock(location.x, location.y);
 		}
 	}
@@ -497,7 +512,7 @@ class World{
 		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
 			int y = array_offset.y;
 			ivec2 location = ivec2(x, y);
-			Log(warning, "Delete at " + location.x + " " + location.y);
+			/* Log(warning, "Delete at " + location.x + " " + location.y); */
 			if(blocks[location.y][location.x] !is null){
 				blocks[location.y][location.x].Delete();
 			}
@@ -507,7 +522,7 @@ class World{
 
 		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
 			ivec2 location = ivec2(x, array_offset.y + world_size - 1);
-			Log(warning, "Insert at " + location.x + " " + location.y);
+			/* Log(warning, "Insert at " + location.x + " " + location.y); */
 			InsertBlock(location.x, location.y);
 		}
 	}
@@ -525,25 +540,9 @@ class World{
 
 		while(true){
 			//Check how many blocks of space we have available in the row.
-			if(int(blocks[start_x].size()) > start_y + (available_space_y * direction_x) && start_y + (available_space_y * direction_x) > 0){
-				if(blocks[start_x][start_y + (available_space_y * direction_x)] is null){
-					available_space_y += 1;
-				}else{
-					break;
-				}
-			}else{
-				if(available_space_y > 2 * world_size){
-					break;
-				}else{
-					available_space_y += 1;
-				}
-			}
-		}
-
-		while(true){
-			//Check how many rows we have available in the whole blocks array.
-			if(int(blocks.size()) > start_x + (available_space_x * direction_y) && start_x + (available_space_x * direction_y) > 0){
-				if(blocks[start_x + (available_space_x * direction_y)][start_x] is null){
+			if(	int(blocks.size()) > start_y &&
+				int(blocks[start_y].size()) > start_x + (available_space_x * direction_x) && start_x + (available_space_x * direction_x) > 0){
+				if(blocks[start_y][start_x + (available_space_x * direction_x)] is null){
 					available_space_x += 1;
 				}else{
 					break;
@@ -557,6 +556,24 @@ class World{
 			}
 		}
 
+		while(true){
+			//Check how many rows we have available in the whole blocks array.
+			if(int(blocks.size()) > start_y + (available_space_y * direction_y) && start_y + (available_space_y * direction_y) > 0 &&
+				int(blocks[start_y + (available_space_y * direction_y)].size()) > start_x){
+				if(blocks[start_y + (available_space_y * direction_y)][start_x] is null){
+					available_space_y += 1;
+				}else{
+					break;
+				}
+			}else{
+				if(available_space_y > 2 * world_size){
+					break;
+				}else{
+					available_space_y += 1;
+				}
+			}
+		}
+
 		if(available_space_x < available_space_y){
 			return available_space_x;
 		}else{
@@ -565,24 +582,21 @@ class World{
 	}
 
 	void InsertBlock(int x, int y){
-		if(int(blocks.size()) <= y){
-			array<Block@> new_row(world_size);
-			blocks.insertLast(new_row);
-		}
-
 		if(int(blocks.size()) > y && int(blocks[y].size()) > x && blocks[y][x] !is null){
+			Log(warning, "Adding on_grid to " + x + "," + y);
 			blocks[y][x].on_grid += 1;
 			return;
 		}
 
 		int available_space = GetAvailableSpace(x, y, 1, 1);
 
-		/* Log(warning, "available space " + available_space); */
+		Log(warning, "Insert at " + x + "," + y);
+		Log(warning, "available space " + available_space);
 
-		ivec2 adjusted_grid_location  = ivec2(grid_position.x - (world_size / 2) + x, grid_position.y - (world_size / 2) + y);
+		ivec2 adjusted_grid_location  = ivec2(grid_position.x - array_offset.x - (world_size / 2) + x, grid_position.y - array_offset.y - (world_size / 2) + y);
 		Log(warning, "Grid position " + adjusted_grid_location.x + " " + adjusted_grid_location.y);
 		vec3 adjusted_grid_position = vec3(adjusted_grid_location.x, 0.0f, adjusted_grid_location.y) * (block_size * 2.0f);
-		Log(warning, "adjusted_grid_position " + adjusted_grid_position.x + " " + adjusted_grid_position.z);
+		/* Log(warning, "adjusted_grid_position " + adjusted_grid_position.x + " " + adjusted_grid_position.z); */
 
 		vec3 spawn_pos = starting_pos + adjusted_grid_position;
 		Block new_block(spawn_pos, available_space);
@@ -595,22 +609,22 @@ class World{
 			int y_offset = int(floor(k % new_block.type.block_size_mult));
 
 			//Add a new row if needed.
-			if(int(blocks.size()) <= (y + y_offset)){
+			while(int(blocks.size()) <= (y + y_offset)){
 				array<Block@> new_row(world_size);
 				blocks.insertLast(new_row);
 				/* array_offset.y += 1; */
 			}
 			//Expand row if needed.
-			if(int(blocks[y + y_offset].size()) <= (x + x_offset)){
+			while(int(blocks[y + y_offset].size()) <= (x + x_offset)){
 				blocks[y + y_offset].resize(blocks[y + y_offset].size() + 1);
 			}
 
 			if((y + y_offset) < world_size && (x + x_offset) < world_size){
-				new_block.on_grid += 1;
 			}
 
 			@blocks[y + y_offset][x + x_offset] = new_block;
 		}
+		new_block.on_grid += 1;
 	}
 
 	void CreateFloor(){
@@ -623,7 +637,7 @@ class World{
 
 		for(uint i = 0; i < uint(world_size); i++){
 			for(uint j = 0; j < uint(world_size); j++){
-				InsertBlock(i, j);
+				InsertBlock(j, i);
 			}
 		}
 	}
@@ -834,7 +848,7 @@ class World{
 			for(uint j = 0; j < blocks[i].size(); j++){
 				Block@ target_block = blocks[i][j];
 				if(target_block !is null){
-					DebugDrawText(target_block.position, "x" + j + ",y" + i, 1.0f, true, _delete_on_update);
+					target_block.DrawDebug(ivec2(j, i));
 				}
 			}
 		}
@@ -874,7 +888,7 @@ void SetWindowDimensions(int width, int height){
 void ShowPreloadProgress(){
 	IMText @load_progress = cast<IMText>(text_container.getContents());
 	/* IMText @load_progress = cast<IMText>(text_container.findElement("Progress")); */
-	load_progress.setText("       " + floor(preload_progress) + "%\nPreloading assets.");
+	load_progress.setText("           " + floor(preload_progress) + "%\nPreloading assets.");
 }
 
 void ShowBuildProgress(){
@@ -1054,19 +1068,16 @@ void UpdateMovement(){
 	}
 
 	//Added offset to make sure the character is in the center of the blocks.
-	target_position += vec3(block_size * 2.0f);
+	/* target_position += vec3(block_size * 2.0f); */
 
 	if(GetInputPressed(0, "g")){
 		Log(warning, "Pressed g");
 
-		ivec2 moved = ivec2(0);
-		moved += ivec2(0, -1);
-		grid_position = grid_position + moved;
-
-		world.MoveUp();
+		grid_position += ivec2(1, 0);
+		world.MoveRight();
 	}
 
-	ivec2 new_grid_position = ivec2(int(floor(target_position.x / (block_size * 2.0f))), int(floor(target_position.z / (block_size * 2.0f))));
+	/* ivec2 new_grid_position = ivec2(int(floor(target_position.x / (block_size * 2.0f))), int(floor(target_position.z / (block_size * 2.0f))));
 	if(grid_position.x != new_grid_position.x || grid_position.y != new_grid_position.y){
 		if(new_grid_position.y > grid_position.y){
 			grid_position += ivec2(0, 1);
@@ -1085,7 +1096,7 @@ void UpdateMovement(){
 			world.MoveLeft();
 		}
 		Log(warning, "grid_position : " + grid_position.x + "," + grid_position.y);
-	}
+	} */
 }
 
 void UpdateMusic() {
