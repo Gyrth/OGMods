@@ -1,6 +1,7 @@
 #include "ui_effects.as"
 #include "threatcheck.as"
 #include "music_load.as"
+#include "black_forest_save_load.as"
 
 //Parameters for user to change
 int world_size = 4;
@@ -27,6 +28,7 @@ string wall_path = "Data/Objects/Buildings/Ruins/mysterious/ruin_wall.xml";
 const float PI = 3.14159265359f;
 double deg2rad = (PI / 180.0f);
 bool wall_created = false;
+game_modes game_mode = dynamic_world;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -684,7 +686,7 @@ class World{
 	}
 
 	void CreateWall(){
-		if(wall_created){return;}
+		if(wall_created || game_mode == dynamic_world){return;}
 		for(int j = 0; j < 4; j++){
 			for(int i = 0; i < world_size; i++){
 				int id = CreateObject(wall_path);
@@ -930,6 +932,7 @@ class World{
 }
 
 void Init(string p_level_name){
+	LoadSettings();
 	CreateUI();
 	level_name = p_level_name;
 	PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
@@ -964,32 +967,25 @@ void ShowBuildProgress(){
 void ReadScriptParameters(){
 	ScriptParams@ level_params = level.GetScriptParams();
 	rain = level_params.GetInt("Rain") == 1;
+
 	if(rain){
-	  level_params.SetString("GPU Particle Field", "#RAIN");
-	  level_params.SetString("Custom Shader", "#RAINY #ADD_MOON");
-	  if(rand() % 2 == 0){
-		  PlaySoundGroup("Data/Sounds/weather/thunder_strike_mike_koenig.xml");
-	  }
-	  if(rain_sound_id != -1){
-		  StopSound(rain_sound_id);
-		  rain_sound_id = -1;
-	  }
-	  rain_sound_id = PlaySoundLoop("Data/Sounds/weather/rain.wav", 1.0f);
+		level_params.SetString("GPU Particle Field", "#RAIN");
+		level_params.SetString("Custom Shader", "#RAINY #ADD_MOON");
+		if(rand() % 2 == 0){
+			PlaySoundGroup("Data/Sounds/weather/thunder_strike_mike_koenig.xml");
+		}
+		if(rain_sound_id != -1){
+			StopSound(rain_sound_id);
+			rain_sound_id = -1;
+		}
+		rain_sound_id = PlaySoundLoop("Data/Sounds/weather/rain.wav", 1.0f);
 	}else{
-	  if(rain_sound_id != -1){
-		  StopSound(rain_sound_id);
-		  rain_sound_id = -1;
-	  }
-	  level_params.SetString("GPU Particle Field", "#BUGS");
-	  level_params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
-	}
-	if(world_size != level_params.GetInt("World Size")){
-		world_size = level_params.GetInt("World Size");
-		rebuild_world = true;
-	}
-	if(block_size != level_params.GetInt("Block Size")){
-		block_size = level_params.GetInt("Block Size");
-		rebuild_world = true;
+		if(rain_sound_id != -1){
+			StopSound(rain_sound_id);
+			rain_sound_id = -1;
+		}
+		level_params.SetString("GPU Particle Field", "#BUGS");
+		level_params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
 	}
 }
 
@@ -1085,7 +1081,9 @@ void Update() {
 	GetPlayerID();
 	BuildWorld();
 
-	/* UpdateMovement(); */
+	if(game_mode == dynamic_world){
+		UpdateMovement();
+	}
 	world.UpdateSpawning();
 	world.RemoveGarbage();
 	/* world.DrawDebug(); */

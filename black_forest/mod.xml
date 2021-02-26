@@ -14,5 +14,6 @@
 	<Tag>script</Tag>
 	<SupportedVersion>*</SupportedVersion>
 	<NeedsRestart>false</NeedsRestart>
-	<Level title="Black Forest" thumbnail="Images/black_forest_full.jpg">black_forest.xml</Level>
+	<!-- <Level title="Black Forest" thumbnail="Images/black_forest_full.jpg">black_forest.xml</Level> -->
+	<MenuItem title="Black Forest" category="play">Data/Scripts/black_forest_editor.as</MenuItem>
 </Mod>
