@@ -30,6 +30,7 @@ double deg2rad = (PI / 180.0f);
 bool wall_created = false;
 game_modes game_mode = dynamic_world;
 vec3 player_pos;
+float enemy_spawn_mult = 1.0f;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -43,62 +44,62 @@ enum block_creation_states{
 }
 
 array<BlockType@> block_types = {
-									BlockType("Data/Objects/block_house_1.xml", 1.0f, 1),
-									BlockType("Data/Objects/block_house_2.xml", 1.0f, 1),
-									BlockType("Data/Objects/block_house_3.xml", 1.0f, 1),
-									BlockType("Data/Objects/block_trees_falen.xml", 1.0f, 1),
+									BlockType("Data/Objects/block_house_1.xml", 1.0f, 1, false),
+									BlockType("Data/Objects/block_house_2.xml", 1.0f, 1, false),
+									BlockType("Data/Objects/block_house_3.xml", 1.0f, 1, false),
+									BlockType("Data/Objects/block_trees_falen.xml", 1.0f, 1, false),
 
-									BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f, 1),
-									BlockType("Data/Objects/block_wolf_den_2.xml", 0.05f, 1),
-									BlockType("Data/Objects/block_wolf_den_3.xml", 0.05f, 1),
-									BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f, 1),
+									BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f, 1, true),
+									BlockType("Data/Objects/block_wolf_den_2.xml", 0.05f, 1, true),
+									BlockType("Data/Objects/block_wolf_den_3.xml", 0.05f, 1, true),
+									BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f, 1, true),
 
-									BlockType("Data/Objects/block_lake_1.xml", 0.5f, 1),
-									BlockType("Data/Objects/block_lake_2.xml", 0.5f, 1),
-									BlockType("Data/Objects/block_lake_3.xml", 0.5f, 1),
-									BlockType("Data/Objects/block_lake_4.xml", 0.5f, 1),
-									BlockType("Data/Objects/block_lake_5.xml", 0.5f, 1),
-									BlockType("Data/Objects/block_lake_6.xml", 0.5f, 1),
-									BlockType("Data/Objects/block_lake_7.xml", 0.5f, 1),
+									BlockType("Data/Objects/block_lake_1.xml", 0.5f, 1, false),
+									BlockType("Data/Objects/block_lake_2.xml", 0.5f, 1, false),
+									BlockType("Data/Objects/block_lake_3.xml", 0.5f, 1, false),
+									BlockType("Data/Objects/block_lake_4.xml", 0.5f, 1, false),
+									BlockType("Data/Objects/block_lake_5.xml", 0.5f, 1, false),
+									BlockType("Data/Objects/block_lake_6.xml", 0.5f, 1, false),
+									BlockType("Data/Objects/block_lake_7.xml", 0.5f, 1, false),
 
-									BlockType("Data/Objects/block_guard_patrol.xml", 0.75f, 1),
-									BlockType("Data/Objects/block_camp_1.xml", 0.75f, 1),
-									BlockType("Data/Objects/block_camp_2.xml", 0.75f, 1),
-									BlockType("Data/Objects/block_camp_3.xml", 0.75f, 1),
-									BlockType("Data/Objects/block_camp_4.xml", 0.75f, 1),
-									BlockType("Data/Objects/block_camp_5.xml", 0.75f, 1),
-									BlockType("Data/Objects/block_camp_6.xml", 0.75f, 1),
+									BlockType("Data/Objects/block_guard_patrol.xml", 0.75f, 1, true),
+									BlockType("Data/Objects/block_camp_1.xml", 0.75f, 1, false),
+									BlockType("Data/Objects/block_camp_2.xml", 0.75f, 1, true),
+									BlockType("Data/Objects/block_camp_3.xml", 0.75f, 1, true),
+									BlockType("Data/Objects/block_camp_4.xml", 0.75f, 1, true),
+									BlockType("Data/Objects/block_camp_5.xml", 0.75f, 1, true),
+									BlockType("Data/Objects/block_camp_6.xml", 0.75f, 1, true),
 
-									BlockType("Data/Objects/block_ruins_1.xml", 3.0f, 1),
-									BlockType("Data/Objects/block_ruins_2.xml", 3.0f, 1),
-									BlockType("Data/Objects/block_ruins_3.xml", 3.0f, 1),
-									BlockType("Data/Objects/block_ruins_4.xml", 3.0f, 1),
-									BlockType("Data/Objects/block_ruins_5.xml", 3.0f, 1),
-									BlockType("Data/Objects/block_ruins_6.xml", 3.0f, 1),
+									BlockType("Data/Objects/block_ruins_1.xml", 3.0f, 1, false),
+									BlockType("Data/Objects/block_ruins_2.xml", 3.0f, 1, false),
+									BlockType("Data/Objects/block_ruins_3.xml", 3.0f, 1, false),
+									BlockType("Data/Objects/block_ruins_4.xml", 3.0f, 1, false),
+									BlockType("Data/Objects/block_ruins_5.xml", 3.0f, 1, false),
+									BlockType("Data/Objects/block_ruins_6.xml", 3.0f, 1, false),
 
-									BlockType("Data/Objects/block_trees_1.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_2.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_3.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_4.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_5.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_6.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_7.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_8.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_9.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_10.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_11.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_12.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_13.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_14.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_15.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_16.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_17.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_18.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_19.xml", 15.0f, 1),
-									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1),
+									BlockType("Data/Objects/block_trees_1.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_2.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_3.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_4.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_5.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_6.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_7.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_8.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_9.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_10.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_11.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_12.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_13.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_14.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_15.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_16.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_17.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_18.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_19.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1, false),
 
-									BlockType("Data/Objects/block_gatehouse.xml", 5.0f, 2),
-									BlockType("Data/Objects/block_stucco_house.xml", 5.0f, 4)
+									BlockType("Data/Objects/block_gatehouse.xml", 2.0f, 2, false),
+									BlockType("Data/Objects/block_stucco_house.xml", 2.0f, 4, false)
 								};
 
 class BlockType{
@@ -108,11 +109,13 @@ class BlockType{
 	array<int> children_ids;
 	vec3 target_translation = vec3(0.0f, -10000.0f, 0.0f);
 	int block_size_mult;
+	bool contains_enemy;
 
-	BlockType(string _path, float _probability, int _block_size_mult){
+	BlockType(string _path, float _probability, int _block_size_mult, bool _contains_enemy){
 		path = _path;
 		probability = _probability;
 		block_size_mult = _block_size_mult;
+		contains_enemy = _contains_enemy;
 	}
 
 	void Preload(){
@@ -188,15 +191,15 @@ BlockType@ GetRandomBlockType(int available_space){
 	}
 
 	for(uint i = 0; i < filtered_block_types.size(); i++){
-		sum += filtered_block_types[i].probability;
+		sum += (filtered_block_types[i].probability * (filtered_block_types[i].contains_enemy?enemy_spawn_mult:1.0f));
 	}
 
 	float random = RangedRandomFloat(0.0f, sum);
 	for(uint i = 0; i < filtered_block_types.size(); i++){
-		if(random < filtered_block_types[i].probability){
+		if(random < (filtered_block_types[i].probability * (filtered_block_types[i].contains_enemy?enemy_spawn_mult:1.0f))){
 			return filtered_block_types[i];
 		}
-		random -= filtered_block_types[i].probability;
+		random -= (filtered_block_types[i].probability * (filtered_block_types[i].contains_enemy?enemy_spawn_mult:1.0f));
 	}
 
 	DisplayError("Ohno", "Random block did not return anything.");
@@ -240,7 +243,7 @@ class Block{
 		for(uint i = 0; i < char_ids.size(); i++){
 			MovementObject@ char = ReadCharacterID(char_ids[i]);
 			Object@ char_obj = ReadObjectFromID(char_ids[i]);
-			if(distance(char.position, player_pos) < 30.0f){
+			if(distance(char.position, player_pos) < 50.0f){
 				char_obj.SetEnabled(true);
 			}else{
 				char_obj.SetEnabled(false);
@@ -782,7 +785,6 @@ class World{
 					spawn_obj.owner.AddObjectID(id);
 					AddNewBlockObjects(spawn_obj.owner, obj);
 
-					RotateBlock(id);
 					block_creation_state = skip_state;
 				}if(block_creation_state == skip_state){
 					//Because prefabs take a while to load, we need to pause a couple of updates before translating.
@@ -795,6 +797,7 @@ class World{
 					//In the second update we translate the object to the correct spot.
 					int id = spawn_obj.owner.obj_ids[0];
 					Object@ obj = ReadObjectFromID(id);
+					RotateBlock(id);
 					if(IsGroupDerived(id)){
 						TransposeNewBlock(spawn_obj.owner, spawn_obj.block_type.path);
 					}else{
@@ -860,7 +863,8 @@ class World{
 			}
 			float cur_rotation = atan2(x, z);
 			quaternion rotation(vec4(0,1,0,cur_rotation));
-			obj.SetRotation(rotation);
+			obj.SetTranslationRotationFast(obj.GetTranslation(), rotation);
+
 		}else{
 			DisplayError("Ohno!", "First block is not a group!");
 		}

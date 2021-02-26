@@ -24,6 +24,7 @@ array<string> game_mode_names = {	"Dynamic World",
 
 int game_mode = dynamic_world;
 int world_size = 8;
+float enemy_spawn_mult = 1.0f;
 
 bool HasFocus() {
 	return false;
@@ -171,6 +172,14 @@ void DrawGUI() {
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
 		ImGui_SliderInt("##World Size", world_size, 4, 64);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Enemy Spawn Multiplier");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_SliderFloat("##Enemy Spawn Multiplier", enemy_spawn_mult, 0.0f, 5.0f, "%.1f");
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
