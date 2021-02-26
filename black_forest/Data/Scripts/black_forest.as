@@ -26,6 +26,7 @@ ivec2 array_offset(0, 0);
 string wall_path = "Data/Objects/Buildings/Ruins/mysterious/ruin_wall.xml";
 const float PI = 3.14159265359f;
 double deg2rad = (PI / 180.0f);
+bool wall_created = false;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -683,6 +684,7 @@ class World{
 	}
 
 	void CreateWall(){
+		if(wall_created){return;}
 		for(int j = 0; j < 4; j++){
 			for(int i = 0; i < world_size; i++){
 				int id = CreateObject(wall_path);
@@ -711,6 +713,7 @@ class World{
 				wall_obj.SetTranslation(spawn_position);
 			}
 		}
+		wall_created = true;
 	}
 
 	block_creation_states block_creation_state = duplicate_block;
@@ -927,18 +930,7 @@ class World{
 }
 
 void Init(string p_level_name){
-	@imGUI = CreateIMGUI();
-	@text_container = IMContainer(2560, 1440);
-	CreateIMGUIContainers();
-	text_container.setAlignment(CACenter, CACenter);
-	IMText@ load_progress = IMText("Progress");
-	load_progress.setFont(default_font);
-	load_progress.setText("Preloading assets.");
-	IMImage@ background = IMImage("Textures/error.tga");
-	background.setSize(vec2(2560, 1440));
-	background.setColor(vec4(0.0f, 0.0f, 0.0f, 1.0f));
-	/* text_container.addFloatingElement(background, "background", vec2(0.0f, 0.0f)); */
-	text_container.setElement(load_progress);
+	CreateUI();
 	level_name = p_level_name;
 	PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
 	ReadScriptParameters();
@@ -1017,12 +1009,28 @@ bool created_world = false;
 
 void BuildWorld(){
 	if((post_init_done && preload_done && final_translation_done && !created_world)){
+		CreateUI();
 		world.Reset();
 		world.CreateFloor();
 		world.CreateWall();
 		created_world = true;
 		rebuild_world = false;
 	}
+}
+
+void CreateUI(){
+	@imGUI = CreateIMGUI();
+	@text_container = IMContainer(2560, 1440);
+	CreateIMGUIContainers();
+	text_container.setAlignment(CACenter, CACenter);
+	IMText@ load_progress = IMText("Progress");
+	load_progress.setFont(default_font);
+	load_progress.setText("Preloading assets.");
+	IMImage@ background = IMImage("Textures/error.tga");
+	background.setSize(vec2(2560, 1440));
+	background.setColor(vec4(0.0f, 0.0f, 0.0f, 1.0f));
+	/* text_container.addFloatingElement(background, "background", vec2(0.0f, 0.0f)); */
+	text_container.setElement(load_progress);
 }
 
 void UpdateGlobalReflection(){
@@ -1088,7 +1096,7 @@ void Update() {
 	UpdateFading();
 	imGUI.update();
 
-	if(!released_player){
+	if(!released_player && !EditorModeActive()){
 		camera.SetPos(starting_pos + vec3(world_size * 7.0f));
 		camera.LookAt(starting_pos);
 	}
