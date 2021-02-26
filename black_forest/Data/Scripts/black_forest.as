@@ -31,6 +31,7 @@ game_modes game_mode = dynamic_world;
 vec3 player_pos;
 float enemy_spawn_mult = 1.0f;
 weather_states weather_state = foggy;
+int update_block_index = 0;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -243,7 +244,7 @@ class Block{
 		for(uint i = 0; i < char_ids.size(); i++){
 			MovementObject@ char = ReadCharacterID(char_ids[i]);
 			Object@ char_obj = ReadObjectFromID(char_ids[i]);
-			if(distance(char.position, player_pos) < 50.0f){
+			if(distance(char.position, player_pos) < 75.0f){
 				char_obj.SetEnabled(true);
 			}else{
 				char_obj.SetEnabled(false);
@@ -419,6 +420,7 @@ class World{
 
 		blocks.resize(0);
 		garbages.resize(0);
+		objects_to_spawn.resize(0);
 	}
 
 	void RemoveBlock(Block@ block){
@@ -706,9 +708,13 @@ class World{
 		}
 	}
 
-	int update_block_index = 0;
 	void BlockUpdate(){
-		if(blocks.size() == 0 || !released_player){return;}
+		if(blocks.size() == 0 || resetting || !released_player){return;}
+
+		if(int(blocks.size()) <= update_block_index){
+			update_block_index = 0;
+			return;
+		}
 
 		for(uint j = 0; j < blocks[update_block_index].size(); j++){
 			if(blocks[update_block_index][j] !is null){
@@ -1091,6 +1097,9 @@ void Reset(){
 	ReadScriptParameters();
 	ResetLevel();
 	resetting = true;
+	array_offset = ivec2(0, 0);
+	grid_position = ivec2(0, 0);
+	update_block_index = 0;
 	MovementObject@ player = ReadCharacterID(player_id);
 	player.static_char = true;
 }
@@ -1230,7 +1239,7 @@ void GetPlayerID(){
 }
 
 void UpdateMovement(){
-	if(!post_init_done || !preload_done || !final_translation_done || !created_world || rebuild_world || !released_player){
+	if(!post_init_done || !preload_done || !final_translation_done || !created_world || rebuild_world || !released_player || resetting){
 		return;
 	}
 
