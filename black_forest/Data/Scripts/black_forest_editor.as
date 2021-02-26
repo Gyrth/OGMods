@@ -18,9 +18,19 @@ vec4 black_color(0.0f, 0.0f, 0.0f, 1.0f);
 int padding = 10;
 bool open = true;
 string level_path = "Data/Levels/black_forest.xml";
+string sunny_level_path = "Data/Levels/black_forest_sunny.xml";
+string evening_level_path = "Data/Levels/black_forest_evening.xml";
+int weather_state = foggy;
 
 array<string> game_mode_names = {	"Dynamic World",
 									"Fixed World"};
+
+array<string> weather_state_names = {	"Foggy",
+										"Rainy",
+										"Sunny",
+										"Snowy",
+										"Evening",
+										"Creepy"};
 
 int game_mode = dynamic_world;
 int world_size = 8;
@@ -183,10 +193,34 @@ void DrawGUI() {
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Weather");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+
+		if(ImGui_BeginCombo("##Weather", weather_state_names[weather_state], ImGuiComboFlags_HeightLarge)){
+			for(uint i = 0; i < weather_state_names.size(); i++){
+				if(ImGui_Selectable(weather_state_names[i], int(i) == weather_state, 0)){
+					weather_state = i;
+				}
+			}
+			ImGui_EndCombo();
+		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		ImGui_NextColumn();
 		if(ImGui_Button("Load")){
 			SaveSettings();
-			LoadLevel(level_path);
+			string load_level = level_path;
+
+			if(weather_state == sunny){
+				load_level = sunny_level_path;
+			}else if(weather_state == evening){
+				load_level = evening_level_path;
+			}
+
+			LoadLevel(load_level);
 		}
 
 		ImGui_SameLine();

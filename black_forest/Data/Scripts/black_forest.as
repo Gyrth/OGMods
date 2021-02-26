@@ -6,7 +6,6 @@
 //Parameters for user to change
 int world_size = 4;
 float block_size = 10.0f;
-bool rain = false;
 //Variables not to be manually changed
 int rain_sound_id = -1;
 string level_name;
@@ -31,6 +30,7 @@ bool wall_created = false;
 game_modes game_mode = dynamic_world;
 vec3 player_pos;
 float enemy_spawn_mult = 1.0f;
+weather_states weather_state = foggy;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -971,9 +971,9 @@ class World{
 
 void Init(string p_level_name){
 	LoadSettings();
+	SetWeather();
 	CreateUI();
 	level_name = p_level_name;
-	PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
 	ReadScriptParameters();
 }
 
@@ -1003,28 +1003,84 @@ void ShowBuildProgress(){
 }
 
 void ReadScriptParameters(){
-	ScriptParams@ level_params = level.GetScriptParams();
-	rain = level_params.GetInt("Rain") == 1;
 
-	if(rain){
-		level_params.SetString("GPU Particle Field", "#RAIN");
-		level_params.SetString("Custom Shader", "#RAINY #ADD_MOON");
-		if(rand() % 2 == 0){
-			PlaySoundGroup("Data/Sounds/weather/thunder_strike_mike_koenig.xml");
-		}
-		if(rain_sound_id != -1){
-			StopSound(rain_sound_id);
-			rain_sound_id = -1;
-		}
-		rain_sound_id = PlaySoundLoop("Data/Sounds/weather/rain.wav", 1.0f);
-	}else{
-		if(rain_sound_id != -1){
-			StopSound(rain_sound_id);
-			rain_sound_id = -1;
-		}
-		level_params.SetString("GPU Particle Field", "#BUGS");
-		level_params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
+}
+
+void SetWeather(){
+	if(rain_sound_id != -1){
+		StopSound(rain_sound_id);
+		rain_sound_id = -1;
 	}
+
+	switch(weather_state){
+		case foggy:
+			SetWeatherFoggy();
+			break;
+		case rainy:
+			SetWeatherRainy();
+			break;
+		case snowy:
+			SetWeatherSnowy();
+			break;
+		case sunny:
+			SetWeatherSunny();
+			break;
+		case evening:
+			SetWeatherEvening();
+			break;
+		case creepy:
+			SetWeatherCreepy();
+			break;
+		default:
+			DisplayError("Error", "Unknown weather type : " + weather_state);
+			break;
+	}
+}
+
+void SetWeatherSnowy(){
+	ScriptParams@ level_params = level.GetScriptParams();
+	level_params.SetString("GPU Particle Field", "#SNOW #MED");
+	level_params.SetString("Custom Shader", "#SNOW_EVERYWHERE");
+	PlaySoundLoop("Data/Sounds/ambient/amb_ice_wind_2.wav", 1.0f);
+}
+
+void SetWeatherRainy(){
+	ScriptParams@ level_params = level.GetScriptParams();
+	level_params.SetString("GPU Particle Field", "#RAIN");
+	level_params.SetString("Custom Shader", "#RAINY #ADD_MOON #TEST_CLOUDS_2");
+	if(rand() % 2 == 0){
+		PlaySoundGroup("Data/Sounds/weather/thunder_strike_mike_koenig.xml");
+	}
+	rain_sound_id = PlaySoundLoop("Data/Sounds/weather/rain.wav", 1.0f);
+	PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
+}
+
+void SetWeatherFoggy(){
+	ScriptParams@ level_params = level.GetScriptParams();
+	level_params.SetString("GPU Particle Field", "#BUGS");
+	level_params.SetString("Custom Shader", "#MISTY2 #ADD_MOON");
+	PlaySoundLoop("Data/Sounds/ambient/night_woods.wav", 1.0f);
+}
+
+void SetWeatherEvening(){
+	ScriptParams@ level_params = level.GetScriptParams();
+	level_params.SetString("GPU Particle Field", "#FIREFLY");
+	level_params.SetString("Custom Shader", "#WATER_HORIZON");
+	PlaySoundLoop("Data/Sounds/ambient/amb_forestquiet_1.wav", 1.0f);
+}
+
+void SetWeatherSunny(){
+	ScriptParams@ level_params = level.GetScriptParams();
+	level_params.SetString("GPU Particle Field", "");
+	level_params.SetString("Custom Shader", "#MISTY");
+	PlaySoundLoop("Data/Sounds/ambient/meadow_morning_birds.wav", 0.025f);
+}
+
+void SetWeatherCreepy(){
+	ScriptParams@ level_params = level.GetScriptParams();
+	level_params.SetString("GPU Particle Field", "");
+	level_params.SetString("Custom Shader", "#MISTY #SCROLL_VERY_SLOW");
+	PlaySoundLoop("Data/Sounds/ambient/whisper.wav", 0.03f);
 }
 
 bool HasFocus(){

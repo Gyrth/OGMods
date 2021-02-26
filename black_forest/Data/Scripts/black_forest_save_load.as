@@ -9,6 +9,7 @@ void SaveSettings(){
 	settings["world_size"] = JSONValue(world_size);
 	settings["game_mode"] = JSONValue(game_mode);
 	settings["enemy_spawn_mult"] = JSONValue(enemy_spawn_mult);
+	settings["weather_state"] = JSONValue(weather_state);
 	root["settings"] = settings;
 
 	data.getRoot() = root;
@@ -30,6 +31,7 @@ void LoadSettings(){
 		world_size = settings["world_size"].asInt();
 		game_mode = game_modes(settings["game_mode"].asInt());
 		enemy_spawn_mult = settings["enemy_spawn_mult"].asFloat();
+		weather_state = weather_states(settings["weather_state"].asInt());
 	}
 }
 
