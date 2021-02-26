@@ -414,13 +414,11 @@ class World{
 			ivec2 location = ivec2(x, y);
 			if(blocks[location.y][location.x] !is null){
 				row_empty = false;
-				/* Log(warning, "Not null at " + location.x + "," + location.y); */
 				break;
 			}
 		}
 
 		if(row_empty){
-			Log(warning, "Remove top row");
 			blocks.removeAt(array_offset.y);
 
 			if(array_offset.y > 0){
@@ -439,15 +437,13 @@ class World{
 			ivec2 location = ivec2(array_offset.x, y);
 			if(blocks[location.y][location.x] !is null){
 				row_empty = false;
-				/* Log(warning, "Not null at " + location.x + "," + location.y); */
 				break;
 			}
 		}
 
 		if(row_empty){
-			Log(warning, "Remove leftx row");
-			for(int y = array_offset.y; y < array_offset.y + world_size; y++){
-				ivec2 location = ivec2(array_offset.x, y);
+			for(uint y = 0; y < blocks.size(); y++){
+				ivec2 location = ivec2(0, y);
 				blocks[location.y].removeAt(location.x);
 			}
 
@@ -464,7 +460,6 @@ class World{
 	void MoveRight(){
 		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
 			ivec2 location = ivec2(array_offset.x, y);
-			Log(warning, "Delete at " + location.x + " " + location.y);
 			if(blocks[location.y][location.x] !is null){
 				blocks[location.y][location.x].Delete();
 			}
@@ -476,7 +471,6 @@ class World{
 
 		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
 			ivec2 location = ivec2(array_offset.x + world_size - 1, y);
-			Log(warning, "Insert at " + location.x + " " + location.y);
 			InsertBlock(location.x, location.y, 1, 1);
 		}
 	}
@@ -485,7 +479,6 @@ class World{
 		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
 			int x = array_offset.x + world_size - 1;
 			ivec2 location = ivec2(x, y);
-			/* Log(warning, "Delete at " + location.x + " " + location.y); */
 			if(blocks[location.y][location.x] !is null){
 				blocks[location.y][location.x].Delete();
 			}
@@ -498,7 +491,6 @@ class World{
 
 		for(int y = array_offset.y; y < array_offset.y + world_size; y++){
 			ivec2 location = ivec2(array_offset.x, y);
-			/* Log(warning, "Insert at " + location.x + " " + location.y); */
 			InsertBlock(location.x, location.y, -1, 1);
 		}
 	}
@@ -508,16 +500,20 @@ class World{
 		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
 			int y = array_offset.y + world_size - 1;
 			ivec2 location = ivec2(x, y);
-			/* Log(warning, "Delete at " + location.x + " " + location.y); */
 			if(blocks[location.y][location.x] !is null){
 				blocks[location.y][location.x].Delete();
 			}
 		}
 
-		blocks.insertAt(0, array<Block@>(blocks.size()));
+		int row_size = world_size;
+		if(blocks.size() > 0){
+			row_size = blocks[0].size();
+		}
+		array<Block@> new_row(row_size);
+		blocks.insertAt(0, new_row);
+
 		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
 			ivec2 location = ivec2(x, array_offset.y);
-			/* Log(warning, "Insert at " + location.x + " " + location.y); */
 			InsertBlock(location.x, location.y, 1, -1);
 		}
 	}
@@ -527,7 +523,6 @@ class World{
 		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
 			int y = array_offset.y;
 			ivec2 location = ivec2(x, y);
-			/* Log(warning, "Delete at " + location.x + " " + location.y); */
 			if(blocks[location.y][location.x] !is null){
 				blocks[location.y][location.x].Delete();
 			}
@@ -539,7 +534,6 @@ class World{
 
 		for(int x = array_offset.x; x < array_offset.x + world_size; x++){
 			ivec2 location = ivec2(x, array_offset.y + world_size - 1);
-			/* Log(warning, "Insert at " + location.x + " " + location.y); */
 			InsertBlock(location.x, location.y, 1, 1);
 		}
 	}
@@ -570,12 +564,10 @@ class World{
 			//Check how many rows we have available in the whole blocks array.
 			if(int(blocks.size()) > start_y + (available_space_y * direction_y) && start_y + (available_space_y * direction_y) > 0 &&
 				int(blocks[start_y + (available_space_y * direction_y)].size()) > start_x){
-				/* Log(warning, "Checking at " + start_x + "," + (start_y + (available_space_y * direction_y))); */
 
 				if(blocks[start_y + (available_space_y * direction_y)][start_x] is null){
 					available_space_y += 1;
 				}else{
-					/* Log(warning, "Not null"); */
 					break;
 				}
 			}else{
@@ -586,8 +578,6 @@ class World{
 				}
 			}
 		}
-
-		Log(warning, "spacey " + available_space_y);
 
 		if(available_space_x < available_space_y){
 			return available_space_x;
@@ -608,7 +598,6 @@ class World{
 		Block new_block(available_space);
 
 		ivec2 adjusted_grid_location  = ivec2(grid_position.x - array_offset.x - (world_size / 2) + x, grid_position.y - array_offset.y - (world_size / 2) + y);
-		/* Log(warning, "adjusted_grid_location " + adjusted_grid_location.x + "," + adjusted_grid_location.y); */
 
 		if(direction_x == -1){
 			adjusted_grid_location.x -= new_block.type.block_size_mult - 1;
@@ -622,15 +611,12 @@ class World{
 		vec3 spawn_pos = starting_pos + adjusted_grid_position;
 		new_block.SetSpawnPosition(spawn_pos);
 
-		/* DebugDrawText(spawn_pos + vec3(0.0f, block_size, 0.0f), "x:" + x + "y:" + y + "\n" + available_space, 1.0f, true, _persistent); */
 		objects_to_spawn.insertAt((objects_to_spawn.size()), new_block.GetObjectsToSpawn());
 
 		//Set the same block at all the positions it occupies.
 		for(uint k = 0; k < uint(pow(new_block.type.block_size_mult, 2.0f)); k++){
 			int x_offset = int(floor(k / new_block.type.block_size_mult));
 			int y_offset = int(floor(k % new_block.type.block_size_mult));
-
-			/* Log(warning, "x_offset " + (x_offset * direction_x) + " y_offset " + (y_offset * direction_y)); */
 
 			//Add a new row at the bottom if needed.
 			while(int(blocks.size()) <= (y + y_offset)){
@@ -639,14 +625,28 @@ class World{
 				if(blocks.size() > 0){
 					row_size = blocks[blocks.size() - 1].size();
 				}
-				array<Block@> new_row(world_size);
+				array<Block@> new_row(row_size);
 				blocks.insertLast(new_row);
+			}
+
+			//Add a new row at the top if needed.
+			while(y + (direction_y * y_offset) < 0){
+				//Use use world size as the standard size, but the whole block size after that.
+				int row_size = world_size;
+				if(blocks.size() > 0){
+					row_size = blocks[0].size();
+				}
+				array<Block@> new_row(row_size);
+				blocks.insertAt(0, new_row);
+
+				array_offset.y += 1;
+				y += 1;
 			}
 
 			//Expand row to the right if needed.
 			while(int(blocks[y + y_offset].size()) <= (x + x_offset)){
 				for(uint j = 0; j < blocks.size(); j++){
-					blocks[j].resize(blocks[j].size() + 1);
+					blocks[j].insertLast(null);
 				}
 			}
 
@@ -659,16 +659,6 @@ class World{
 				x += 1;
 			}
 
-			//Add a new row at the top if needed.
-			while(y + (direction_y * y_offset) < 0){
-				array<Block@> new_row(blocks[0].size());
-				blocks.insertAt(0, new_row);
-
-				array_offset.y += 1;
-				y += 1;
-			}
-
-			/* Log(warning, "Trying to insert at " + (x + (direction_x * x_offset)) + "," + (y + (direction_y * y_offset))); */
 			@blocks[y + (direction_y * y_offset)][x + (direction_x * x_offset)] = new_block;
 		}
 		new_block.on_grid += 1;
@@ -1118,8 +1108,6 @@ void UpdateMovement(){
 	/* target_position += vec3(block_size * 2.0f); */
 
 	if(GetInputPressed(0, "g")){
-		Log(warning, "Pressed g");
-
 		grid_position += ivec2(-1, 0);
 		world.MoveLeft();
 
