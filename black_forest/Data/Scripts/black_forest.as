@@ -29,6 +29,7 @@ const float PI = 3.14159265359f;
 double deg2rad = (PI / 180.0f);
 bool wall_created = false;
 game_modes game_mode = dynamic_world;
+vec3 player_pos;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -47,10 +48,10 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_house_3.xml", 1.0f, 1),
 									BlockType("Data/Objects/block_trees_falen.xml", 1.0f, 1),
 
-									/* BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f, 1),
+									BlockType("Data/Objects/block_wolf_den_1.xml", 0.05f, 1),
 									BlockType("Data/Objects/block_wolf_den_2.xml", 0.05f, 1),
 									BlockType("Data/Objects/block_wolf_den_3.xml", 0.05f, 1),
-									BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f, 1), */
+									BlockType("Data/Objects/block_wolf_den_4.xml", 0.05f, 1),
 
 									BlockType("Data/Objects/block_lake_1.xml", 0.5f, 1),
 									BlockType("Data/Objects/block_lake_2.xml", 0.5f, 1),
@@ -60,13 +61,13 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_lake_6.xml", 0.5f, 1),
 									BlockType("Data/Objects/block_lake_7.xml", 0.5f, 1),
 
-									/* BlockType("Data/Objects/block_guard_patrol.xml", 0.75f, 1),
+									BlockType("Data/Objects/block_guard_patrol.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_1.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_2.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_3.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_4.xml", 0.75f, 1),
 									BlockType("Data/Objects/block_camp_5.xml", 0.75f, 1),
-									BlockType("Data/Objects/block_camp_6.xml", 0.75f, 1), */
+									BlockType("Data/Objects/block_camp_6.xml", 0.75f, 1),
 
 									BlockType("Data/Objects/block_ruins_1.xml", 3.0f, 1),
 									BlockType("Data/Objects/block_ruins_2.xml", 3.0f, 1),
@@ -96,8 +97,8 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_trees_19.xml", 15.0f, 1),
 									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1),
 
-									BlockType("Data/Objects/block_gatehouse.xml", 50.0f, 2),
-									BlockType("Data/Objects/block_stucco_house.xml", 50.0f, 4)
+									BlockType("Data/Objects/block_gatehouse.xml", 5.0f, 2),
+									BlockType("Data/Objects/block_stucco_house.xml", 5.0f, 4)
 								};
 
 class BlockType{
@@ -226,10 +227,25 @@ class Block{
 	BlockType@ type;
 	int on_grid = 0;
 	int available_space;
+	array<int> char_ids;
 
 	Block(int _available_space){
 		available_space = _available_space;
 		@type = @GetRandomBlockType(available_space);
+	}
+
+	void Update(){
+		if(deleted){return;}
+
+		for(uint i = 0; i < char_ids.size(); i++){
+			MovementObject@ char = ReadCharacterID(char_ids[i]);
+			Object@ char_obj = ReadObjectFromID(char_ids[i]);
+			if(distance(char.position, player_pos) < 30.0f){
+				char_obj.SetEnabled(true);
+			}else{
+				char_obj.SetEnabled(false);
+			}
+		}
 	}
 
 	void SetSpawnPosition(vec3 _position){
@@ -327,6 +343,8 @@ class Block{
 					obj_ids.insertLast(char_id);
 					Object@ char_obj = ReadObjectFromID(char_id);
 					char_obj.SetTranslation(obj.GetTranslation());
+					char_ids.insertLast(char_id);
+					char_obj.SetEnabled(false);
 				}
 			}
 		}
@@ -670,7 +688,7 @@ class World{
 
 	void CreateFloor(){
 		Object@ player_obj = ReadObjectFromID(player_id);
-		vec3 player_pos = vec3(floor(player_obj.GetTranslation().x),floor(player_obj.GetTranslation().y),floor(player_obj.GetTranslation().z));
+		player_pos = vec3(floor(player_obj.GetTranslation().x),floor(player_obj.GetTranslation().y),floor(player_obj.GetTranslation().z));
 		floor_height = player_pos.y - (block_size) - 1.0f;
 
 		starting_pos = player_pos;
@@ -682,6 +700,22 @@ class World{
 			for(uint j = 0; j < uint(world_size); j++){
 				InsertBlock(j, i, 1, 1);
 			}
+		}
+	}
+
+	int update_block_index = 0;
+	void BlockUpdate(){
+		if(blocks.size() == 0 || !released_player){return;}
+
+		for(uint j = 0; j < blocks[update_block_index].size(); j++){
+			if(blocks[update_block_index][j] !is null){
+				blocks[update_block_index][j].Update();
+			}
+		}
+
+		update_block_index += 1;
+		if(update_block_index >= int(blocks.size())){
+			update_block_index = 0;
 		}
 	}
 
@@ -753,7 +787,7 @@ class World{
 				}if(block_creation_state == skip_state){
 					//Because prefabs take a while to load, we need to pause a couple of updates before translating.
 					skip_counter += 1;
-					if(skip_counter == 2){
+					if(skip_counter == 1){
 						skip_counter = 0;
 						block_creation_state = translate_block;
 					}
@@ -1086,6 +1120,9 @@ void Update() {
 	}
 	world.UpdateSpawning();
 	world.RemoveGarbage();
+	MovementObject@ player_char = ReadCharacterID(player_id);
+	player_pos = player_char.position;
+	world.BlockUpdate();
 	/* world.DrawDebug(); */
 
 	UpdateMusic();
