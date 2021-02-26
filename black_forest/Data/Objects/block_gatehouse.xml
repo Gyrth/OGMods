@@ -3,7 +3,7 @@
 <ActorObjects>
     <Group t0="-0.314592" t1="14.427" t2="-3.41271" s0="40.01" s1="69.6795" s2="40.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" version="1">
         <parameters />
-        <EnvObject t0="-0.314593" t1="-0.407784" t2="-3.41271" s0="2" s1="2" s2="2" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="0" color_b="0" overbright="27.092" type_file="Data/Objects/block_basic.xml">
+        <EnvObject t0="-0.314593" t1="-0.407784" t2="-3.41271" s0="2" s1="2" s2="2" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
 			<parameters>
                 <parameter name="BlockBase" type="int" val="1" />
             </parameters>

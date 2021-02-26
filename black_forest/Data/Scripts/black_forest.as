@@ -23,6 +23,9 @@ array<int> character_reset_list;
 bool released_player = false;
 vec3 starting_pos;
 ivec2 array_offset(0, 0);
+string wall_path = "Data/Objects/Buildings/Ruins/mysterious/ruin_wall.xml";
+const float PI = 3.14159265359f;
+double deg2rad = (PI / 180.0f);
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -398,8 +401,6 @@ class World{
 		for(uint i = 0; i < blocks.size(); i++){
 			for(uint j = 0; j < blocks[i].size(); j++){
 				if(blocks[i][j] is block){
-					/* Log(warning, "remove block at x:" + i + ",y" + j); */
-					/* DebugDrawText(block.position, "Removed", 1.0f, true, _persistent); */
 					@blocks[i][j] = null;
 				}
 			}
@@ -670,11 +671,44 @@ class World{
 		floor_height = player_pos.y - (block_size) - 1.0f;
 
 		starting_pos = player_pos;
+		starting_pos.x += block_size;
+		starting_pos.z += block_size;
 		starting_pos.y = floor_height;
 
 		for(uint i = 0; i < uint(world_size); i++){
 			for(uint j = 0; j < uint(world_size); j++){
 				InsertBlock(j, i, 1, 1);
+			}
+		}
+	}
+
+	void CreateWall(){
+		for(int j = 0; j < 4; j++){
+			for(int i = 0; i < world_size; i++){
+				int id = CreateObject(wall_path);
+				Object@ wall_obj = ReadObjectFromID(id);
+				wall_obj.SetSelectable(true);
+				wall_obj.SetTranslatable(true);
+				wall_obj.SetRotatable(true);
+
+				wall_obj.SetScale(vec3(3.34f));
+				vec3 spawn_position = starting_pos;
+				spawn_position.x += (i * block_size * 2.0f) - ((world_size / 2) * block_size * 2.0f);
+				spawn_position.z -= ((world_size / 2) * block_size * 2.0f) + block_size + 2.0f;
+				if(j == 0 || j == 3){
+					spawn_position.z *= -1;
+				}
+
+				if(j == 2 || j == 3){
+					quaternion rotation(vec4(0, 1, 0, 90.0f * deg2rad));
+					wall_obj.SetRotation(rotation);
+
+					float old_x = spawn_position.x;
+					spawn_position.x = spawn_position.z;
+					spawn_position.z = old_x;
+				}
+				spawn_position.y = floor_height + (block_size * 2.0f);
+				wall_obj.SetTranslation(spawn_position);
 			}
 		}
 	}
@@ -810,7 +844,7 @@ class World{
 				params.Remove("BlockBase");
 				block_base_found = true;
 				if(!released_player){
-					obj.SetTint(vec3(RangedRandomFloat(0.0f, 5.0f)));
+					/* obj.SetTint(vec3(RangedRandomFloat(0.0f, 5.0f))); */
 				}
 
 				break;
@@ -985,6 +1019,7 @@ void BuildWorld(){
 	if((post_init_done && preload_done && final_translation_done && !created_world)){
 		world.Reset();
 		world.CreateFloor();
+		world.CreateWall();
 		created_world = true;
 		rebuild_world = false;
 	}
@@ -1042,10 +1077,10 @@ void Update() {
 	GetPlayerID();
 	BuildWorld();
 
-	UpdateMovement();
+	/* UpdateMovement(); */
 	world.UpdateSpawning();
 	world.RemoveGarbage();
-	world.DrawDebug();
+	/* world.DrawDebug(); */
 
 	UpdateMusic();
 	UpdateSounds();
@@ -1105,7 +1140,7 @@ void UpdateMovement(){
 	}
 
 	//Added offset to make sure the character is in the center of the blocks.
-	/* target_position += vec3(block_size * 2.0f); */
+	/* target_position += vec3(block_size); */
 
 	if(GetInputPressed(0, "g")){
 		grid_position += ivec2(-1, 0);
@@ -1133,7 +1168,7 @@ void UpdateMovement(){
 			grid_position += ivec2(-1, 0);
 			world.MoveLeft();
 		}
-		/* Log(warning, "grid_position : " + grid_position.x + "," + grid_position.y); */
+		Log(warning, "grid_position : " + grid_position.x + "," + grid_position.y);
 	}
 }
 

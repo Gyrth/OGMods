@@ -27,7 +27,7 @@
     <parameter name="Sky Brightness" type="float" val="5" />
     <parameter name="Sky Rotation" type="float" val="-239" />
     <parameter name="Sky Tint" type="string" val="120, 158, 103" />
-    <parameter name="World Size" type="int" val="8" />
+    <parameter name="World Size" type="int" val="32" />
 </LevelScriptParameters>
 <NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
 <Sky>
