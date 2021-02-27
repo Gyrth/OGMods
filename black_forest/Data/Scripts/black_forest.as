@@ -7,6 +7,8 @@
 int world_size = 4;
 float block_size = 10.0f;
 int cull_distance = 8;
+bool distance_cull = false;
+bool add_detail_objects = false;
 //Variables not to be manually changed
 int rain_sound_id = -1;
 string level_name;
@@ -142,12 +144,19 @@ class BlockType{
 		array<int> ids = start_at.GetChildren();
 
 		for(uint i = 0; i < ids.size(); i++){
-			children_ids.insertLast(ids[i]);
 			Object@ obj = ReadObjectFromID(ids[i]);
 			/* obj.SetEnabled(false); */
 			if(obj.GetType() == _group){
 				GetBlockChildrenIds(obj);
+			}else if(!add_detail_objects && obj.GetType() == _env_object){
+				ScriptParams@ obj_params = obj.GetScriptParams();
+				if(obj_params.HasParam("DetailObjects")){
+					Log(warning, "Delete detailobject " + ids[i]);
+					DeleteObjectID(ids[i]);
+					continue;
+				}
 			}
+			children_ids.insertLast(ids[i]);
 		}
 	}
 }
@@ -845,8 +854,10 @@ class World{
 			released_player = true;
 			text_container.clear();
 			blackout_amount = 1.0f;
-			DisableAllBLocks();
-			EnableCloseBlocks();
+			if(distance_cull){
+				DisableAllBLocks();
+				EnableCloseBlocks();
+			}
 			UpdateGlobalReflection();
 		}
 	}
@@ -1327,7 +1338,11 @@ void Update() {
 	if(game_mode == dynamic_world){
 		UpdateMovement();
 	}
-	UpdateCullMovement();
+
+	if(distance_cull){
+		UpdateCullMovement();
+	}
+
 	world.UpdateSpawning();
 	world.RemoveGarbage();
 	MovementObject@ player_char = ReadCharacterID(player_id);

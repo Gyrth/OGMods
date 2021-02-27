@@ -23,5 +23,10 @@
         <EnvObject t0="39.4692" t1="11.1354" t2="78.3875" s0="1" s1="1" s2="1" q0="-0.00594278" q1="0.999532" q2="0.0107208" q3="0.0280136" id="45" color_r="0.247059" color_g="0.247056" color_b="0.247056" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="32.122" t1="-5.32256" t2="79.2211" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

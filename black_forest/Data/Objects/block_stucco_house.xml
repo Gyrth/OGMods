@@ -209,5 +209,10 @@
         <Decal t0="26.677" t1="35.2352" t2="18.0849" s0="5.57494" s1="5.57494" s2="5.57494" q0="0" q1="0.707107" q2="0.707107" q3="0" euler_x="1.5708" euler_y="0" euler_z="-3.14159" id="69" type_file="Data/Objects/Decals/ErodedSlope.xml" color_r="1" color_g="1" color_b="1" overbright="0">
             <parameters />
         </Decal>
+		<EnvObject t0="-5.13564" t1="-3.58772" t2="5.00176" s0="4" s1="4" s2="4" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

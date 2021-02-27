@@ -104,5 +104,10 @@
                 <Connection id="1" />
             </Connections>
         </PlaceholderObject>
+		<EnvObject t0="12.3512" t1="12.5733" t2="-8.50884" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

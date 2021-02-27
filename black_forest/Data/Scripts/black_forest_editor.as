@@ -35,6 +35,8 @@ array<string> weather_state_names = {	"Foggy",
 int game_mode = dynamic_world;
 int world_size = 8;
 float enemy_spawn_mult = 1.0f;
+bool distance_cull = false;
+bool add_detail_objects = false;
 
 bool HasFocus() {
 	return false;
@@ -168,7 +170,7 @@ void DrawGUI() {
 
 		if(ImGui_BeginCombo("##Game Mode ", game_mode_names[game_mode], ImGuiComboFlags_HeightLarge)){
 			for(uint i = 0; i < game_mode_names.size(); i++){
-				if(ImGui_Selectable(game_mode_names[i], int(i) == game_mode, 0)){
+				if(ImGui_Selectable(game_mode_names[i], int(i) != game_mode, 0)){
 					game_mode = i;
 				}
 			}
@@ -200,12 +202,28 @@ void DrawGUI() {
 
 		if(ImGui_BeginCombo("##Weather", weather_state_names[weather_state], ImGuiComboFlags_HeightLarge)){
 			for(uint i = 0; i < weather_state_names.size(); i++){
-				if(ImGui_Selectable(weather_state_names[i], int(i) == weather_state, 0)){
+				if(ImGui_Selectable(weather_state_names[i], int(i) != weather_state, 0)){
 					weather_state = i;
 				}
 			}
 			ImGui_EndCombo();
 		}
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Add Detail Objects");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_Checkbox("##Add Detail Objects", add_detail_objects);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Distance Culling");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_Checkbox("##Distance Culling", distance_cull);
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 

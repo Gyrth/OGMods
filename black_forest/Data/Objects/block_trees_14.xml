@@ -29,5 +29,10 @@
         <EnvObject t0="5.34271" t1="17.8161" t2="76.9611" s0="1.617" s1="1.617" s2="1.617" q0="0" q1="0" q2="0" q3="1" id="78" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="-2.1798" t1="6.91839" t2="69.6068" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

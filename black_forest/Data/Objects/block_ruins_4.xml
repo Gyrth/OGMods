@@ -32,5 +32,10 @@
         <EnvObject t0="29.3582" t1="9.16019" t2="73.2051" s0="1" s1="1" s2="1" q0="0" q1="0.422114" q2="0" q3="0.906543" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="35.5251" t1="-1.41338" t2="79.4806" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

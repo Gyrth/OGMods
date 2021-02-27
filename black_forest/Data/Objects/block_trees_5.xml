@@ -26,5 +26,10 @@
         <EnvObject t0="13.3404" t1="21.039" t2="67.9846" s0="1" s1="1" s2="1" q0="0" q1="0.602997" q2="0" q3="0.797743" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A_tops.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="8.67019" t1="-3.66092" t2="63.1833" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>
