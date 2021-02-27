@@ -6,7 +6,7 @@
 //Parameters for user to change
 int world_size = 4;
 float block_size = 10.0f;
-int cull_distance = 8;
+int cull_distance = 6;
 bool distance_cull = false;
 bool add_detail_objects = false;
 //Variables not to be manually changed
@@ -101,10 +101,10 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_trees_17.xml", 15.0f, 1, false),
 									BlockType("Data/Objects/block_trees_18.xml", 15.0f, 1, false),
 									BlockType("Data/Objects/block_trees_19.xml", 15.0f, 1, false),
-									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1, false),
+									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1, false)
 
-									BlockType("Data/Objects/block_gatehouse.xml", 2.0f, 2, false),
-									BlockType("Data/Objects/block_stucco_house.xml", 2.0f, 4, false)
+									/* BlockType("Data/Objects/block_gatehouse.xml", 2.0f, 2, false),
+									BlockType("Data/Objects/block_stucco_house.xml", 2.0f, 4, false) */
 								};
 
 class BlockType{
@@ -151,7 +151,6 @@ class BlockType{
 			}else if(!add_detail_objects && obj.GetType() == _env_object){
 				ScriptParams@ obj_params = obj.GetScriptParams();
 				if(obj_params.HasParam("DetailObjects")){
-					Log(warning, "Delete detailobject " + ids[i]);
 					DeleteObjectID(ids[i]);
 					continue;
 				}
@@ -244,6 +243,7 @@ class Block{
 	int available_space;
 	array<int> char_ids;
 	int num_enabled = 0;
+	array<vec3> orig_tints;
 
 	Block(int _available_space){
 		available_space = _available_space;
@@ -256,15 +256,34 @@ class Block{
 		}
 
 		if(num_enabled == 0){
-			Object@ obj = ReadObjectFromID(obj_ids[0]);
-			obj.SetEnabled(false);
+			if(orig_tints.size() == 0){
+				GetOriginalTint();
+			}
+			for(uint i = 0; i < obj_ids.size(); i++){
+				Object@ obj = ReadObjectFromID(obj_ids[i]);
+				obj.SetTint(vec3(0.123f));
+				/* obj.SetEnabled(false); */
+			}
 		}
 	}
 
 	void Enable(){
 		num_enabled += 1;
-		Object@ obj = ReadObjectFromID(obj_ids[0]);
-		obj.SetEnabled(true);
+
+		for(uint i = 0; i < obj_ids.size(); i++){
+			Object@ obj = ReadObjectFromID(obj_ids[i]);
+			obj.SetTint(orig_tints[i]);
+			/* obj.SetEnabled(true); */
+		}
+	}
+
+	void GetOriginalTint(){
+		if(distance_cull){
+			for(uint i = 0; i < obj_ids.size(); i++){
+				Object@ obj = ReadObjectFromID(obj_ids[i]);
+				orig_tints.insertLast(obj.GetTint());
+			}
+		}
 	}
 
 	void Update(){
@@ -849,15 +868,15 @@ class World{
 				block_creation_state = duplicate_block;
 			}
 		}else if(!released_player){
+			if(distance_cull){
+				DisableAllBLocks();
+				EnableCloseBlocks();
+			}
 			MovementObject@ player = ReadCharacterID(player_id);
 			player.static_char = false;
 			released_player = true;
 			text_container.clear();
 			blackout_amount = 1.0f;
-			if(distance_cull){
-				DisableAllBLocks();
-				EnableCloseBlocks();
-			}
 			UpdateGlobalReflection();
 		}
 	}
