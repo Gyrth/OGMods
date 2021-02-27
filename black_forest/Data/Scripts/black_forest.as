@@ -6,12 +6,14 @@
 //Parameters for user to change
 int world_size = 4;
 float block_size = 10.0f;
+int cull_distance = 8;
 //Variables not to be manually changed
 int rain_sound_id = -1;
 string level_name;
 int player_id = -1;
 float floor_height;
 ivec2 grid_position(0, 0);
+ivec2 cull_grid_position(0, 0);
 bool rebuild_world = false;
 EntityType _group = EntityType(29);
 bool post_init_done = false;
@@ -232,10 +234,28 @@ class Block{
 	int on_grid = 0;
 	int available_space;
 	array<int> char_ids;
+	int num_enabled = 0;
 
 	Block(int _available_space){
 		available_space = _available_space;
 		@type = @GetRandomBlockType(available_space);
+	}
+
+	void Disable(){
+		if(num_enabled > 0){
+			num_enabled -= 1;
+		}
+
+		if(num_enabled == 0){
+			Object@ obj = ReadObjectFromID(obj_ids[0]);
+			obj.SetEnabled(false);
+		}
+	}
+
+	void Enable(){
+		num_enabled += 1;
+		Object@ obj = ReadObjectFromID(obj_ids[0]);
+		obj.SetEnabled(true);
 	}
 
 	void Update(){
@@ -825,7 +845,126 @@ class World{
 			released_player = true;
 			text_container.clear();
 			blackout_amount = 1.0f;
+			DisableAllBLocks();
+			EnableCloseBlocks();
 			UpdateGlobalReflection();
+		}
+	}
+
+	void DisableAllBLocks(){
+		for(uint i = 0; i < blocks.size(); i++){
+			for(uint j = 0; j < blocks[i].size(); j++){
+				if(blocks[i][j] !is null){
+					blocks[i][j].Disable();
+				}
+			}
+		}
+	}
+
+	void EnableCloseBlocks(){
+		for(int i = 0; i < cull_distance; i++){
+			for(int j = 0; j < cull_distance; j++){
+				ivec2 position = ivec2(i, j);
+				ivec2 adjusted_grid_location  = ivec2((world_size / 2) - (cull_distance / 2) + position.x, (world_size / 2) - (cull_distance / 2) + position.y);
+				adjusted_grid_location += array_offset;
+				blocks[adjusted_grid_location.x][adjusted_grid_location.y].Enable();
+			}
+		}
+	}
+
+	void CullMoveUp(){
+		for(int i = 0; i < 2; i++){
+			int direction = (i == 0)?1:-1;
+			for(int j = 0; j < cull_distance; j++){
+
+				ivec2 position = ivec2(cull_grid_position.x - (cull_distance / 2) + j, cull_grid_position.y - ((cull_distance / 2) * direction));
+				ivec2 adjusted_grid_location  = ivec2((world_size / 2) + position.x + array_offset.x, (world_size / 2) + position.y + array_offset.y);
+
+				if(adjusted_grid_location.y >= int(blocks.size()) || adjusted_grid_location.y < 0 ||
+					adjusted_grid_location.x >= int(blocks[adjusted_grid_location.y].size()) || adjusted_grid_location.x < 0){
+						continue;
+				}
+
+				if(blocks[adjusted_grid_location.y][adjusted_grid_location.x] is null){return;}
+
+				if(direction == 1){
+					blocks[adjusted_grid_location.y][adjusted_grid_location.x].Enable();
+				}else if(direction == -1){
+					blocks[adjusted_grid_location.y][adjusted_grid_location.x].Disable();
+				}
+			}
+		}
+	}
+
+	void CullMoveDown(){
+		for(int i = 0; i < 2; i++){
+			int direction = (i == 0)?1:-1;
+			for(int j = 0; j < cull_distance; j++){
+
+				ivec2 position = ivec2(cull_grid_position.x - (cull_distance / 2) + j, cull_grid_position.y - ((cull_distance / 2) * direction) - 1);
+				ivec2 adjusted_grid_location  = ivec2((world_size / 2) + position.x + array_offset.x, (world_size / 2) + position.y + array_offset.y);
+
+				if(adjusted_grid_location.y >= int(blocks.size()) || adjusted_grid_location.y < 0 ||
+					adjusted_grid_location.x >= int(blocks[adjusted_grid_location.y].size()) || adjusted_grid_location.x < 0){
+						continue;
+				}
+
+				if(blocks[adjusted_grid_location.y][adjusted_grid_location.x] is null){return;}
+
+				if(direction == 1){
+					blocks[adjusted_grid_location.y][adjusted_grid_location.x].Disable();
+				}else if(direction == -1){
+					blocks[adjusted_grid_location.y][adjusted_grid_location.x].Enable();
+				}
+			}
+		}
+	}
+
+	void CullMoveLeft(){
+		for(int i = 0; i < 2; i++){
+			int direction = (i == 0)?1:-1;
+			for(int j = 0; j < cull_distance; j++){
+
+				ivec2 position = ivec2(cull_grid_position.x - ((cull_distance / 2) * direction), cull_grid_position.y - (cull_distance / 2) + j);
+				ivec2 adjusted_grid_location  = ivec2((world_size / 2) + position.x + array_offset.x, (world_size / 2) + position.y + array_offset.y);
+
+				if(adjusted_grid_location.y >= int(blocks.size()) || adjusted_grid_location.y < 0 ||
+					adjusted_grid_location.x >= int(blocks[adjusted_grid_location.y].size()) || adjusted_grid_location.x < 0){
+						continue;
+				}
+
+				if(blocks[adjusted_grid_location.y][adjusted_grid_location.x] is null){return;}
+
+				if(direction == 1){
+					blocks[adjusted_grid_location.y][adjusted_grid_location.x].Enable();
+				}else if(direction == -1){
+					blocks[adjusted_grid_location.y][adjusted_grid_location.x].Disable();
+				}
+			}
+		}
+	}
+
+	void CullMoveRight(){
+		for(int i = 0; i < 2; i++){
+			int direction = (i == 0)?1:-1;
+			for(int j = 0; j < cull_distance; j++){
+
+				ivec2 position = ivec2(cull_grid_position.x - ((cull_distance / 2) * direction) - 1, cull_grid_position.y - (cull_distance / 2) + j);
+				ivec2 adjusted_grid_location  = ivec2((world_size / 2) + position.x + array_offset.x, (world_size / 2) + position.y + array_offset.y);
+
+				if(adjusted_grid_location.y >= int(blocks.size()) || adjusted_grid_location.y < 0 ||
+					adjusted_grid_location.x >= int(blocks[adjusted_grid_location.y].size()) || adjusted_grid_location.x < 0){
+						continue;
+				}
+
+				if(blocks[adjusted_grid_location.y][adjusted_grid_location.x] is null){return;}
+
+				if(direction == 1){
+					blocks[adjusted_grid_location.y][adjusted_grid_location.x].Disable();
+				}else if(direction == -1){
+					blocks[adjusted_grid_location.y][adjusted_grid_location.x].Enable();
+				}
+			}
 		}
 	}
 
@@ -1099,6 +1238,7 @@ void Reset(){
 	resetting = true;
 	array_offset = ivec2(0, 0);
 	grid_position = ivec2(0, 0);
+	cull_grid_position = ivec2(0, 0);
 	update_block_index = 0;
 	MovementObject@ player = ReadCharacterID(player_id);
 	player.static_char = true;
@@ -1187,6 +1327,7 @@ void Update() {
 	if(game_mode == dynamic_world){
 		UpdateMovement();
 	}
+	UpdateCullMovement();
 	world.UpdateSpawning();
 	world.RemoveGarbage();
 	MovementObject@ player_char = ReadCharacterID(player_id);
@@ -1238,7 +1379,7 @@ void GetPlayerID(){
 	}
 }
 
-void UpdateMovement(){
+void UpdateCullMovement(){
 	if(!post_init_done || !preload_done || !final_translation_done || !created_world || rebuild_world || !released_player || resetting){
 		return;
 	}
@@ -1251,15 +1392,44 @@ void UpdateMovement(){
 		target_position = player.position;
 	}
 
-	//Added offset to make sure the character is in the center of the blocks.
-	/* target_position += vec3(block_size); */
-
 	if(GetInputPressed(0, "g")){
-		grid_position += ivec2(-1, 0);
-		world.MoveLeft();
+		cull_grid_position += ivec2(1, 0);
+		world.CullMoveRight();
+		Log(warning, "grid_position : " + cull_grid_position.x + "," + cull_grid_position.y);
+	}
 
-		grid_position += ivec2(0, -1);
-		world.MoveUp();
+	ivec2 new_cull_grid_position = ivec2(int(floor(target_position.x / (block_size * 2.0f))), int(floor(target_position.z / (block_size * 2.0f))));
+	if(cull_grid_position.x != new_cull_grid_position.x || cull_grid_position.y != new_cull_grid_position.y){
+		if(new_cull_grid_position.y > cull_grid_position.y){
+			cull_grid_position += ivec2(0, 1);
+			world.CullMoveDown();
+		}
+		if(new_cull_grid_position.y < cull_grid_position.y){
+			cull_grid_position += ivec2(0, -1);
+			world.CullMoveUp();
+		}
+		if(new_cull_grid_position.x > cull_grid_position.x){
+			cull_grid_position += ivec2(1, 0);
+			world.CullMoveRight();
+		}
+		if(new_cull_grid_position.x < cull_grid_position.x){
+			cull_grid_position += ivec2(-1, 0);
+			world.CullMoveLeft();
+		}
+	}
+}
+
+void UpdateMovement(){
+	if(!post_init_done || !preload_done || !final_translation_done || !created_world || rebuild_world || !released_player || resetting){
+		return;
+	}
+
+	MovementObject@ player = ReadCharacterID(player_id);
+	vec3 target_position;
+	if(EditorModeActive()){
+		target_position = camera.GetPos();
+	}else{
+		target_position = player.position;
 	}
 
 	ivec2 new_grid_position = ivec2(int(floor(target_position.x / (block_size * 2.0f))), int(floor(target_position.z / (block_size * 2.0f))));
