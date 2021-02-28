@@ -1040,52 +1040,22 @@ void main() {
 		discard;
 	#endif
 
-	// defined(PLANT) && 
+	// defined(PLANT) &&
 	#if!defined(INSTANCED) && defined(INSTANCED_MESH) && !defined(DETAIL_OBJECT)&& !defined(TERRAIN) && !defined(ITEM) && !defined(CHARACTER)
 		int target_id = 0;
 		#if !defined(NO_INSTANCE_ID)
 			target_id = instance_id;
-			// discard;
 		#else
-			// out_color.xyz = vec3(0.0f);
-			// out_color.a = 0.0f;
-			// discard;
+			discard;
 		#endif
 
-		vec4 color_tint = instances[target_id].color_tint;
+		vec3 color_tint = instances[target_id].color_tint.xyz;
 		vec3 target_color = vec3(0.123f, 0.123f, 0.123f);
-		vec3 extra = vec3(0.01f);
 
-		if(color_tint.r < target_color.x + extra.x && color_tint.r > target_color.x - extra.x){
-			if(target_id != 0 ){
-				vec3 ws_vertex = world_vert - cam_pos;
-				#if !defined(NO_DETAIL_OBJECT_SHADOWS)
-					vec4 shadow_coords[4];
-					shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
-					shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
-					shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
-					shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
-					CALC_SHADOWED
-
-					#if defined(SIMPLE_SHADOW)
-						shadow_tex.r *= ambient_mult;
-					#endif
-
-					shadow_tex.r *= CloudShadow(world_vert);
-				#else
-					vec3 shadow_tex = vec3(0.5f);
-				#endif
-			}
+		if(color_tint == target_color){
 			discard;
 		}
 	#endif
-
-	// #if !defined(INSTANCED) && defined(INSTANCED_MESH) && !defined(DETAIL_OBJECT) && defined(PLANT)
-	// 	bool match_color = test_tint.xyz == vec3(1.234f, 1.234f, 1.234f);
-	// 	#if match_color
-	// 		discard;
-	// 	#endif
-	// #endif
 
 	/*{
 	vec3 world_dx = dFdx(world_vert);
