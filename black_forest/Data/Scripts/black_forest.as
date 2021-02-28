@@ -36,6 +36,8 @@ vec3 player_pos;
 float enemy_spawn_mult = 1.0f;
 weather_states weather_state = foggy;
 int update_block_index = 0;
+bool updated_global_reflection = false;
+int updated_global_reflection_counter = 0;
 
 MusicLoad ml("Data/Music/black_forest.xml");
 
@@ -101,10 +103,13 @@ array<BlockType@> block_types = {
 									BlockType("Data/Objects/block_trees_17.xml", 15.0f, 1, false),
 									BlockType("Data/Objects/block_trees_18.xml", 15.0f, 1, false),
 									BlockType("Data/Objects/block_trees_19.xml", 15.0f, 1, false),
-									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1, false)
+									BlockType("Data/Objects/block_trees_20.xml", 15.0f, 1, false),
 
-									/* BlockType("Data/Objects/block_gatehouse.xml", 2.0f, 2, false),
-									BlockType("Data/Objects/block_stucco_house.xml", 2.0f, 4, false) */
+									/* BlockType("Data/Objects/block_test_trees_1.xml", 50.0f, 1, false),
+									BlockType("Data/Objects/block_test_offset_trees_1.xml", 50.0f, 1, false), */
+
+									BlockType("Data/Objects/block_gatehouse.xml", 2.0f, 2, false),
+									BlockType("Data/Objects/block_stucco_house.xml", 2.0f, 4, false)
 								};
 
 class BlockType{
@@ -127,6 +132,8 @@ class BlockType{
 		int id = CreateObject(path);
 		@original = ReadObjectFromID(id);
 		GetBlockChildrenIds(original);
+		original.SetTranslation(starting_pos);
+		original.SetTranslationRotationFast(starting_pos, quaternion());
 	}
 
 	void SetFinalTranslation(){
@@ -877,7 +884,6 @@ class World{
 			released_player = true;
 			text_container.clear();
 			blackout_amount = 1.0f;
-			UpdateGlobalReflection();
 		}
 	}
 
@@ -1240,7 +1246,7 @@ void SetWeatherFoggy(){
 void SetWeatherEvening(){
 	ScriptParams@ level_params = level.GetScriptParams();
 	level_params.SetString("GPU Particle Field", "#FIREFLY");
-	level_params.SetString("Custom Shader", "#WATER_HORIZON");
+	level_params.SetString("Custom Shader", "#MISTY");
 	PlaySoundLoop("Data/Sounds/ambient/amb_forestquiet_1.wav", 1.0f);
 }
 
@@ -1254,7 +1260,7 @@ void SetWeatherSunny(){
 void SetWeatherCreepy(){
 	ScriptParams@ level_params = level.GetScriptParams();
 	level_params.SetString("GPU Particle Field", "");
-	level_params.SetString("Custom Shader", "#MISTY #SCROLL_VERY_SLOW");
+	level_params.SetString("Custom Shader", "#MISTY2 #SCROLL_VERY_SLOW");
 	PlaySoundLoop("Data/Sounds/ambient/whisper.wav", 0.03f);
 }
 
@@ -1303,11 +1309,20 @@ void CreateUI(){
 }
 
 void UpdateGlobalReflection(){
+	if(updated_global_reflection || !post_init_done || !preload_done || !final_translation_done || !created_world || rebuild_world || !released_player || resetting){
+		return;
+	}
+
 	array<int> gl_ids = GetObjectIDsType(_reflection_capture_object);
 	for(uint i = 0; i < gl_ids.size(); i++){
 		Object@ gl_obj = ReadObjectFromID(gl_ids[i]);
-		gl_obj.SetTranslation(gl_obj.GetTranslation() + vec3(RangedRandomFloat(-1.0f, 1.0f)));
+		gl_obj.SetTranslation(gl_obj.GetTranslation() + vec3(RangedRandomFloat(-0.1f, 0.1f)));
 		/* DebugDrawText(gl_obj.GetTranslation(), "GlobalReflection", 1.0f, true, _persistent); */
+	}
+
+	updated_global_reflection_counter += 1;
+	if(updated_global_reflection_counter > 100){
+		updated_global_reflection = true;
 	}
 }
 
@@ -1353,6 +1368,7 @@ void Update() {
 	SetBlockFinalTranslation();
 	GetPlayerID();
 	BuildWorld();
+	UpdateGlobalReflection();
 
 	if(game_mode == dynamic_world){
 		UpdateMovement();
