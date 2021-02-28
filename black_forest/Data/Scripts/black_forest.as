@@ -1309,7 +1309,7 @@ void CreateUI(){
 }
 
 void UpdateGlobalReflection(){
-	if(updated_global_reflection || !post_init_done || !preload_done || !final_translation_done || !created_world || rebuild_world || !released_player || resetting){
+	if(updated_global_reflection || !released_player || resetting){
 		return;
 	}
 
@@ -1406,7 +1406,7 @@ void Update() {
 }
 
 void UpdateFading(){
-	if(world.objects_to_spawn.size() == 0 && blackout_amount > 0.0f){
+	if(world.objects_to_spawn.size() == 0 && updated_global_reflection && blackout_amount > 0.0f){
 		blackout_amount -= time_step * 0.5f;;
 	}
 }
