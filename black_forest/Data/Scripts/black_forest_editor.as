@@ -36,7 +36,7 @@ int game_mode = dynamic_world;
 int world_size = 8;
 float enemy_spawn_mult = 1.0f;
 bool distance_cull = false;
-bool add_detail_objects = false;
+bool add_detail_objects = true;
 
 bool HasFocus() {
 	return false;
@@ -219,13 +219,13 @@ void DrawGUI() {
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		ImGui_AlignTextToFramePadding();
+		/* ImGui_AlignTextToFramePadding();
 		ImGui_Text("Distance Culling");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
 		ImGui_Checkbox("##Distance Culling", distance_cull);
 		ImGui_PopItemWidth();
-		ImGui_NextColumn();
+		ImGui_NextColumn(); */
 
 		ImGui_NextColumn();
 		if(ImGui_Button("Load")){

@@ -11,7 +11,7 @@ void SaveSettings(){
 	settings["enemy_spawn_mult"] = JSONValue(enemy_spawn_mult);
 	settings["weather_state"] = JSONValue(weather_state);
 	settings["add_detail_objects"] = JSONValue(add_detail_objects);
-	settings["distance_cull"] = JSONValue(distance_cull);
+	/* settings["distance_cull"] = JSONValue(distance_cull); */
 	root["settings"] = settings;
 
 	data.getRoot() = root;
@@ -34,7 +34,7 @@ void LoadSettings(){
 		game_mode = game_modes(settings["game_mode"].asInt());
 		enemy_spawn_mult = settings["enemy_spawn_mult"].asFloat();
 		add_detail_objects = settings["add_detail_objects"].asBool();
-		distance_cull = settings["distance_cull"].asBool();
+		/* distance_cull = settings["distance_cull"].asBool(); */
 		weather_state = weather_states(settings["weather_state"].asInt());
 	}
 }

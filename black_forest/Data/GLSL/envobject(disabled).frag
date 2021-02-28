@@ -1046,7 +1046,7 @@ void main() {
 		#if !defined(NO_INSTANCE_ID)
 			target_id = instance_id;
 		#else
-			discard;
+			// discard;
 		#endif
 
 		vec3 color_tint = instances[target_id].color_tint.xyz;
