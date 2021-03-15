@@ -9,6 +9,7 @@ enum additional_conditions 	{
 						};
 
 class DrikaReadWriteSaveFile : DrikaElement{
+	//The variables that can be changed by the user don't have a default value, instead this is done in the constructor.
 	string param;
 	string value;
 	string param2;
@@ -20,12 +21,17 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	int current_read_write_mode;
 	int current_condition_count;
 	DrikaGoToLineSelect@ continue_element;
-	bool continue_if_false = false;
-	bool if_any_are_true = false;
+	bool continue_if_false;
+	bool if_any_are_true;
+	//These strings are not changed by the user, but simply to display readable text in the dropdown menus.
 	array<string> mode_choices = {"Read", "Write"};
 	array<string> condition_choices = {"No additional conditions", "One additional condition", "Two additional conditions"};
 
-	DrikaReadWriteSaveFile(JSONValue params = JSONValue()){
+	DrikaReadWriteSaveFile(JSONValue params = JSONValue())
+	{
+		//Every user editable variable is retrieved from the JSON data.
+		//However when a variable isn't found the default value at the end is returned.
+		//This makes sure older savedata is still valid when adding new functions.
 		continue_if_false = GetJSONBool(params, "continue_if_false", false);
 		if_any_are_true = GetJSONBool(params, "if_any_are_true", false);
 		@continue_element = DrikaGoToLineSelect("continue_line", params);
@@ -36,19 +42,27 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		param3 = GetJSONString(params, "param3", "drika_save_param_three");
 		value3 = GetJSONString(params, "value3", "drika_save_value_three");
 
+		//The mode and count are enum values which can't be used by dropdown menus (combo).
 		read_write_mode = read_write_modes(GetJSONInt(params, "read_write_mode", 0));
 		condition_count = additional_conditions(GetJSONInt(params, "condition_count", 0));
+		//So we need to use an extra integer value to keep track of the currently selected dropdown item.
 		current_read_write_mode = read_write_mode;
 		current_condition_count = condition_count;
+		//Every DHS function has it's own enum value that describes it's type.
 		drika_element_type = drika_read_write_savefile;
+		//Not sure why this was added. But the settings can be turned off if there are none to show.
 		has_settings = true;
 	}
 
 	void PostInit(){
+		//Objects in the scene are often not ready yet when you run your function in the constructor.
+		//That's why we run this function on the first update only once, in which case all objects in the scene are added.
 		continue_element.PostInit();
 	}
 
 	JSONValue GetSaveData(){
+		//Every function returns it's savedata to DHS for saving separately.
+		//The JSON library takes any variable type, and when writing to a file it saves it as strings.
 		JSONValue data;
 		data["param"] = JSONValue(param);
 		data["value"] = JSONValue(value);
@@ -67,6 +81,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	}
 
 	string GetDisplayString(){
+		//This creates a readable string for the UI to display.
+		//Setting the text color and determinating text cutoff is done in the main DHS script.
 		continue_element.CheckLineAvailable();
 		string display_string;
 
@@ -87,22 +103,36 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	}
 
 	void DrawSettings(){
-
+		//The settings are divided into two column by default. (Exceptions do exist)
+		//Inside the first column a description/name of the setting is displayed.
+		//To keep this visible at all times a static width is used.
 		float option_name_width = 150.0;
 
+		//You need to keep good track of the number of columns and how many times you use NextColumn.
+		//Or else every UI element going forward is going to be in the wrong column.
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
 
+		//This function makes the UI element vertically centered.
+		//We need to do this a lot because going to a new column seems to undo this setting.
 		ImGui_AlignTextToFramePadding();
+		//By default we are on the first column, so add the first descriptor for the setting.
 		ImGui_Text("Read Write Mode");
+		//Now we are going to the second column where the actual setting is displayed.
 		ImGui_NextColumn();
+		//The window size can change so we need to calculate the maximum amount of width we have left.
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
 
+		//This values is then used to make sure dropdown menus and other elements have the correct width.
 		ImGui_PushItemWidth(second_column_width);
+		//We use an enum for tracking the current read/write mode, but a combo can only use integers for the currently selected item.
+		//So when the combo changes the ``current_`` value, we also change the enum value by casting it to the correct enum type.
 		if(ImGui_Combo("##Read Write Mode", current_read_write_mode, mode_choices, mode_choices.size())){
 			read_write_mode = read_write_modes(current_read_write_mode);
 		}
+		//The setting is now rendering so clear the width for the next item.
 		ImGui_PopItemWidth();
+		//Using NextColumn here goes from the second column to the first column because we only have two columns.
 		ImGui_NextColumn();
 
 		if(read_write_mode == read){
@@ -116,6 +146,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 
+			//You can show/hide certain settings based on conditions.
+			//However the settings still keep their values.
 			if(condition_count == condition_count_none){
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Check if param");
@@ -270,6 +302,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	}
 
 	bool Trigger(){
+		//When DHS arrives at this function it will keep running Trigger on every update untill true is returned.
+		//In which case this function is done. Every function needs to handle it's own reset on trigger if it supports multiple triggers.
 		int continue_line = continue_element.GetTargetLineIndex();
 		if(read_write_mode == read and condition_count == condition_count_none){
 			if(ReadParamValue() == value){
