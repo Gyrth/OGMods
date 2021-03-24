@@ -86,8 +86,16 @@ class DrikaGoToLineSelect{
 				bool is_selected = (target_element.index == drika_elements[drika_indexes[i]].index);
 				vec4 text_color = drika_elements[item_no].GetDisplayColor();
 
+				string display_string = drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString();
+				display_string = join(display_string.split("\n"), "");
+				float space_for_characters = ImGui_CalcTextSize(display_string).x;
+
+				if(space_for_characters > ImGui_GetWindowContentRegionWidth()){
+					display_string = display_string.substr(0, int(display_string.length() * (ImGui_GetWindowContentRegionWidth() / space_for_characters)) - 3) + "...";
+				}
+
 				ImGui_PushStyleColor(ImGuiCol_Text, text_color);
-				if(ImGui_Selectable(drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString(), is_selected)){
+				if(ImGui_Selectable(display_string, is_selected)){
 					@target_element = drika_elements[item_no];
 				}
 				ImGui_PopStyleColor();
