@@ -85,6 +85,17 @@ string ambient_song = "";
 bool ambient_from_beginning_no_fade = false;
 string current_song = "None";
 
+string report_version;
+string os;
+string arch;
+string gpu_vendor;
+string gl_renderer;
+string gl_version;
+string gl_driver_version;
+string vram;
+string glsl_version;
+string shader_model;
+
 array<CheckpointData@> checkpoints;
 bool loading_checkpoint = false;
 float PI = 3.14159265359f;
@@ -167,6 +178,7 @@ void Init(string str){
 	@grabber_container = IMContainer(2560, 1440);
 	CreateIMGUIContainers();
 	ReadCustomAnimationList();
+	ReadHardwareReport();
 }
 
 void PostInit(){
@@ -817,6 +829,26 @@ void ReceiveMessage(string msg){
 		string custom_animation_path = token_iter.GetToken(msg);
 
 		AddCustomAnimation(custom_animation_path);
+	}else if(token == "drika_hardware_info"){
+		token_iter.FindNextToken(msg);
+		int hotspot_id = atoi(token_iter.GetToken(msg));
+		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
+		array<string> save_names;
+
+		string return_msg = "drika_hardware_info";
+
+		return_msg += "\"" + report_version + "\"" + " ";
+		return_msg += "\"" + os + "\"" + " ";
+		return_msg += "\"" + arch + "\"" + " ";
+		return_msg += "\"" + gpu_vendor + "\"" + " ";
+		return_msg += "\"" + gl_renderer + "\"" + " ";
+		return_msg += "\"" + gl_version + "\"" + " ";
+		return_msg += "\"" + gl_driver_version + "\"" + " ";
+		return_msg += "\"" + vram + "\"" + " ";
+		return_msg += "\"" + glsl_version + "\"" + " ";
+		return_msg += "\"" + shader_model + "\"" + " ";
+
+		hotspot_obj.ReceiveScriptMessage(return_msg);
 	}
 }
 
@@ -1745,5 +1777,42 @@ bool DialogueCameraControl() {
 		return true;
 	}else{
 		return false;
+	}
+}
+
+void ReadHardwareReport(){
+	string path = "Data/hwreport.txt";
+
+	if(!LoadFile(path)){
+		Print("Couldn't load " + path + "\n");
+	}else{
+		string new_str;
+		while(true){
+			new_str = GetFileLine();
+			if(new_str == "end"){
+				break;
+			}
+			if(new_str.findFirst("Report Version: ") != -1){
+				report_version = join(new_str.split("Report Version: "), "");
+			}else if(new_str.findFirst("OS: ") != -1){
+				os = join(new_str.split("OS: "), "");
+			}else if(new_str.findFirst("Arch: ") != -1){
+				arch = join(new_str.split("Arch: "), "");
+			}else if(new_str.findFirst("GPU Vendor: ") != -1){
+				gpu_vendor += join(new_str.split("GPU Vendor: "), "");
+			}else if(new_str.findFirst("GL Renderer: ") != -1){
+				gl_renderer += join(new_str.split("GL Renderer: "), "");
+			}else if(new_str.findFirst("GL Version: ") != -1){
+				gl_version = join(new_str.split("GL Version: "), "");
+			}else if(new_str.findFirst("GL Driver Version: ") != -1){
+				gl_driver_version = join(new_str.split("GL Driver Version: "), "");
+			}else if(new_str.findFirst("VRAM: ") != -1){
+				vram = join(new_str.split("VRAM: "), "");
+			}else if(new_str.findFirst("GLSL Version: ") != -1){
+				glsl_version = join(new_str.split("GLSL Version: "), "");
+			}else if(new_str.findFirst("Shader Model: ") != -1){
+				shader_model = join(new_str.split("Shader Model: "), "");
+			}
+		}
 	}
 }

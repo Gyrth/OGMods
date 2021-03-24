@@ -94,6 +94,23 @@ bool adding_function = false;
 bool resetting = false;
 string last_read_path = "";
 
+string build_version_short = GetBuildVersionShort( );
+string build_version_full = GetBuildVersionFull( );
+string build_timestamp = GetBuildTimestamp( );
+int monitor_count = GetMonitorCount();
+bool workshop_available = IsWorkshopAvailable();
+bool controller_connected = IsControllerConnected();
+string report_version;
+string os;
+string arch;
+string gpu_vendor;
+string gl_renderer;
+string gl_version;
+string gl_driver_version;
+string vram;
+string glsl_version;
+string shader_model;
+
 array<DrikaAnimationGroup@> all_animations;
 array<DrikaAnimationGroup@> current_animations;
 DrikaAnimationGroup@ custom_group;
@@ -144,6 +161,7 @@ void Init() {
 	}
 	InterpData();
 	quick_launch.Init();
+	level.SendMessage("drika_hardware_info " + this_hotspot.GetID());
 }
 
 string GetTypeString(){
@@ -702,6 +720,18 @@ void DrawEditor(){
 				ImGui_EndMenu();
 			}
 
+			if(ImGui_BeginMenu("About")){
+				DrawHardwareInfoModal();
+				if(ImGui_Selectable("Hardware Info")){}
+				ImGui_OpenPopupOnItemClick("Hardware Info", 0);
+
+				DrawCreditsModal();
+				if(ImGui_Selectable("Credits")){}
+				ImGui_OpenPopupOnItemClick("Credits", 0);
+
+				ImGui_EndMenu();
+			}
+
 			if(ImGui_ImageButton(delete_icon, vec2(10), vec2(0), vec2(1), 5, vec4(0))){
 				DeleteSelectedFunctions();
 			}
@@ -999,6 +1029,150 @@ void DrawPaletteModal(){
 		if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
 			steal_focus = true;
 			SavePalette();
+			ImGui_CloseCurrentPopup();
+		}
+
+		ImGui_EndPopup();
+	}
+}
+
+void DrawHardwareInfoModal(){
+	ImGui_SetNextWindowSize(vec2(450.0f, 450.0f), ImGuiSetCond_FirstUseEver);
+	if(ImGui_BeginPopupModal("Hardware Info", ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
+
+		vec2 resolution = vec2(GetScreenWidth(), GetScreenHeight());
+
+		ImGui_BeginChild("Hardware Info", vec2(-1, -1));
+		ImGui_PushItemWidth(-1);
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, 200.0);
+
+		ImGui_Text("Hardware Info");
+		ImGui_NextColumn();
+		ImGui_NextColumn();
+
+		ImGui_Text("Build Version");
+		ImGui_NextColumn();
+		ImGui_Text(build_version_full);
+		ImGui_NextColumn();
+
+		ImGui_Text("Build Timestamp");
+		ImGui_NextColumn();
+		ImGui_Text(build_timestamp);
+		ImGui_NextColumn();
+
+		ImGui_Text("Monitor Count");
+		ImGui_NextColumn();
+		ImGui_Text("" + monitor_count);
+		ImGui_NextColumn();
+
+		ImGui_Text("Workshop Available");
+		ImGui_NextColumn();
+		ImGui_Text("" + workshop_available);
+		ImGui_NextColumn();
+
+		ImGui_Text("Controller Connected");
+		ImGui_NextColumn();
+		ImGui_Text("" + controller_connected);
+		ImGui_NextColumn();
+
+		ImGui_Text("Resolution");
+		ImGui_NextColumn();
+		ImGui_Text(resolution.x + "x" + resolution.y);
+		ImGui_NextColumn();
+
+		ImGui_Text("Report Version");
+		ImGui_NextColumn();
+		ImGui_Text(report_version);
+		ImGui_NextColumn();
+
+		ImGui_Text("OS");
+		ImGui_NextColumn();
+		ImGui_Text(os);
+		ImGui_NextColumn();
+
+		ImGui_Text("Arch");
+		ImGui_NextColumn();
+		ImGui_Text(arch);
+		ImGui_NextColumn();
+
+		ImGui_Text("GPU Vendor");
+		ImGui_NextColumn();
+		ImGui_Text(gpu_vendor);
+		ImGui_NextColumn();
+
+		ImGui_Text("GL Renderer");
+		ImGui_NextColumn();
+		ImGui_Text(gl_renderer);
+		ImGui_NextColumn();
+
+		ImGui_Text("GL Version");
+		ImGui_NextColumn();
+		ImGui_Text(gl_version);
+		ImGui_NextColumn();
+
+		ImGui_Text("GL Driver Version");
+		ImGui_NextColumn();
+		ImGui_Text(gl_driver_version);
+		ImGui_NextColumn();
+
+		ImGui_Text("VRAM");
+		ImGui_NextColumn();
+		ImGui_Text(vram);
+		ImGui_NextColumn();
+
+		ImGui_Text("GLSL Version");
+		ImGui_NextColumn();
+		ImGui_Text(glsl_version);
+		ImGui_NextColumn();
+
+		ImGui_Text("Shader Model");
+		ImGui_NextColumn();
+		ImGui_Text(shader_model);
+		ImGui_NextColumn();
+
+		ImGui_PopItemWidth();
+		ImGui_EndChild();
+
+		if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
+			steal_focus = true;
+			ImGui_CloseCurrentPopup();
+		}
+
+		ImGui_EndPopup();
+	}
+}
+
+void DrawCreditsModal(){
+	ImGui_SetNextWindowSize(vec2(450.0f, 450.0f), ImGuiSetCond_FirstUseEver);
+	if(ImGui_BeginPopupModal("Credits", ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
+
+		ImGui_Columns(2, false);
+		ImGui_SetColumnWidth(0, 180.0);
+
+		ImGui_NextColumn();
+		ImGui_Text("Created by");
+		ImGui_Spacing();
+		ImGui_NextColumn();
+
+		ImGui_NextColumn();
+		ImGui_Text("Gyrth");
+		ImGui_NextColumn();
+
+		ImGui_NextColumn();
+		ImGui_Text("Fason7");
+		ImGui_NextColumn();
+
+		ImGui_NextColumn();
+		ImGui_Text("Alpines");
+		ImGui_NextColumn();
+
+		ImGui_NextColumn();
+		ImGui_Text("Merlyn");
+		ImGui_NextColumn();
+
+		if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
+			steal_focus = true;
 			ImGui_CloseCurrentPopup();
 		}
 
@@ -1590,6 +1764,36 @@ void ReceiveMessage(string msg){
 		string message = token_iter.GetToken(msg);
 
 		drika_elements[drika_indexes[function_index]].ReceiveMessage(message);
+	}else if(token == "drika_hardware_info"){
+		token_iter.FindNextToken(msg);
+		report_version = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		os = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		arch = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		gpu_vendor = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		gl_renderer = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		gl_version = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		gl_driver_version = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		vram = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		glsl_version = token_iter.GetToken(msg);
+
+		token_iter.FindNextToken(msg);
+		shader_model = token_iter.GetToken(msg);
 	}
 }
 
