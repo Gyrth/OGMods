@@ -523,10 +523,9 @@ void DrawGUI(){
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_Button("Load File")){
 				string path = GetUserPickedReadPath("xml", "Data/Objects");
-				if(path == ""){
-					return;
+				if(path != ""){
+					SetSpawnSettings(path);
 				}
-				SetSpawnSettings(path);
 			}
 
 			if(ImGui_BeginMenu("Settings")){
