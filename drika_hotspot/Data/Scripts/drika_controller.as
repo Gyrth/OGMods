@@ -58,6 +58,20 @@ IMText@ rtn_skip;
 vec3 old_camera_translation;
 vec3 old_camera_rotation;
 bool show_avatar;
+bool add_camera_shake = false;
+float position_shake_max_distance;
+float position_shake_slerp_speed;
+float position_shake_interval;
+float rotation_shake_max_distance;
+float rotation_shake_slerp_speed;
+float rotation_shake_interval;
+
+vec3 camera_shake_position;
+vec3 camera_shake_rotation;
+float rotation_shake_timer;
+vec3 new_camera_shake_rotation;
+float position_shake_timer;
+vec3 new_camera_shake_position;
 
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 IMContainer@ dialogue_container;
@@ -439,6 +453,29 @@ void ReceiveMessage(string msg){
 
 		token_iter.FindNextToken(msg);
 		camera_zoom = atof(token_iter.GetToken(msg));
+
+		token_iter.FindNextToken(msg);
+		add_camera_shake = token_iter.GetToken(msg) == "true";
+
+		if(add_camera_shake){
+			token_iter.FindNextToken(msg);
+			position_shake_max_distance = atof(token_iter.GetToken(msg));
+
+			token_iter.FindNextToken(msg);
+			position_shake_slerp_speed = atof(token_iter.GetToken(msg));
+
+			token_iter.FindNextToken(msg);
+			position_shake_interval = atof(token_iter.GetToken(msg));
+
+			token_iter.FindNextToken(msg);
+			rotation_shake_max_distance = atof(token_iter.GetToken(msg));
+
+			token_iter.FindNextToken(msg);
+			rotation_shake_slerp_speed = atof(token_iter.GetToken(msg));
+
+			token_iter.FindNextToken(msg);
+			rotation_shake_interval = atof(token_iter.GetToken(msg));
+		}
 
 		token_iter.FindNextToken(msg);
 		enable_look_at_target = token_iter.GetToken(msg) == "true";
@@ -1685,15 +1722,16 @@ void UpdateWriteFileProcesses(){
 
 void SetCameraPosition(){
 	if((animating_camera || has_camera_control) && !EditorModeActive()){
+		UpdateCameraShake();
 
 		if(camera_settings_changed){
 			camera.SetDistance(0.0f);
 			camera.SetFOV(camera_zoom);
 			camera.SetDOF(camera_near_blur, camera_near_dist, camera_near_transition, camera_far_blur, camera_far_dist, camera_far_transition);
-			camera.SetPos(camera_position);
-			camera.SetXRotation(camera_rotation.x);
-			camera.SetYRotation(camera_rotation.y);
-			camera.SetZRotation(camera_rotation.z);
+			camera.SetPos(camera_position + camera_shake_position);
+			camera.SetXRotation(camera_rotation.x + camera_shake_rotation.x);
+			camera.SetYRotation(camera_rotation.y + camera_shake_rotation.y);
+			camera.SetZRotation(camera_rotation.z + camera_shake_rotation.z);
 
 			camera.CalcFacing();
 			camera.FixDiscontinuity();
@@ -1714,9 +1752,9 @@ void SetCameraPosition(){
 				}
 			}
 		}else{
-			camera.SetXRotation(camera_rotation.x);
-			camera.SetYRotation(camera_rotation.y);
-			camera.SetZRotation(camera_rotation.z);
+			camera.SetXRotation(camera_rotation.x + camera_shake_rotation.x);
+			camera.SetYRotation(camera_rotation.y + camera_shake_rotation.y);
+			camera.SetZRotation(camera_rotation.z + camera_shake_rotation.z);
 		}
 
 		if(enable_move_with_target){
@@ -1731,7 +1769,7 @@ void SetCameraPosition(){
 				}
 			}
 		}else{
-			camera.SetPos(camera_position);
+			camera.SetPos(camera_position + camera_shake_position);
 			current_camera_position = camera_position;
 		}
 
@@ -1745,11 +1783,47 @@ void SetCameraPosition(){
 
 }
 
+void UpdateCameraShake(){
+	if(!add_camera_shake){
+		camera_shake_rotation = vec3();
+		camera_shake_position = vec3();
+		return;
+	}
+
+	rotation_shake_timer += time_step;
+	position_shake_timer += time_step;
+
+	if(position_shake_timer > position_shake_interval){
+		position_shake_timer = 0.0f;
+		new_camera_shake_position = vec3(	RangedRandomFloat(-position_shake_max_distance, position_shake_max_distance),
+											RangedRandomFloat(-position_shake_max_distance, position_shake_max_distance),
+											RangedRandomFloat(-position_shake_max_distance, position_shake_max_distance));
+	}
+	camera_shake_position = mix(camera_shake_position, new_camera_shake_position, time_step * position_shake_slerp_speed);
+
+	camera_shake_position.x = min(position_shake_max_distance, max(-position_shake_max_distance, camera_shake_position.x));
+	camera_shake_position.y = min(position_shake_max_distance, max(-position_shake_max_distance, camera_shake_position.y));
+	camera_shake_position.z = min(position_shake_max_distance, max(-position_shake_max_distance, camera_shake_position.z));
+
+	if(rotation_shake_timer > rotation_shake_interval){
+		rotation_shake_timer = 0.0f;
+		new_camera_shake_rotation = vec3(	RangedRandomFloat(-rotation_shake_max_distance, rotation_shake_max_distance),
+											RangedRandomFloat(-rotation_shake_max_distance, rotation_shake_max_distance),
+											RangedRandomFloat(-rotation_shake_max_distance, rotation_shake_max_distance));
+	}
+	camera_shake_rotation = mix(camera_shake_rotation, new_camera_shake_rotation, time_step * rotation_shake_slerp_speed);
+
+	camera_shake_rotation.x = min(rotation_shake_max_distance, max(-rotation_shake_max_distance, camera_shake_rotation.x));
+	camera_shake_rotation.y = min(rotation_shake_max_distance, max(-rotation_shake_max_distance, camera_shake_rotation.y));
+	/* camera_shake_rotation.z = min(rotation_shake_max_distance, max(-rotation_shake_max_distance, camera_shake_rotation.z)); */
+	camera_shake_rotation.z = 0.0f;
+}
+
 void SmoothCameraMoveWith(vec3 target_location){
 	vec3 adjusted_target_location = target_location + target_positional_difference;
 	current_camera_position = mix(current_camera_position, adjusted_target_location, time_step * 10.0);
 	old_camera_translation = current_camera_position;
-	camera.SetPos(current_camera_position);
+	camera.SetPos(current_camera_position + camera_shake_position);
 }
 
 void SmoothCameraLookAt(vec3 target_location){

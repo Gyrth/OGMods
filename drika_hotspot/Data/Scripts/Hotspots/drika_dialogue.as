@@ -115,6 +115,13 @@ class DrikaDialogue : DrikaElement{
 	float camera_transition_timer = 0.0;
 	array<DialogueScriptEntry@> dialogue_script;
 	float say_changed_timer;
+	bool add_camera_shake;
+	float position_shake_max_distance;
+	float position_shake_slerp_speed;
+	float position_shake_interval;
+	float rotation_shake_max_distance;
+	float rotation_shake_slerp_speed;
+	float rotation_shake_interval;
 
 	array<string> dialogue_function_names =	{
 												"Say",
@@ -211,6 +218,15 @@ class DrikaDialogue : DrikaElement{
 		@choice_5_element = DrikaGoToLineSelect("choice_5_go_to_line", params);
 
 		dof_settings = GetJSONFloatArray(params, "dof_settings", {0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
+		add_camera_shake = GetJSONBool(params, "add_camera_shake", false);
+		position_shake_max_distance = GetJSONFloat(params, "position_shake_max_distance", 0.2f);
+		position_shake_slerp_speed = GetJSONFloat(params, "position_shake_slerp_speed", 0.2f);
+		position_shake_interval = GetJSONFloat(params, "position_shake_interval", 0.1f);
+
+		rotation_shake_max_distance = GetJSONFloat(params, "rotation_shake_max_distance", 10.0f);
+		rotation_shake_slerp_speed = GetJSONFloat(params, "rotation_shake_slerp_speed", 0.2f);
+		rotation_shake_interval = GetJSONFloat(params, "rotation_shake_interval", 0.15f);
+
 		enable_look_at_target = GetJSONBool(params, "enable_look_at_target", false);
 		enable_move_with_target = GetJSONBool(params, "enable_move_with_target", false);
 		@track_target = DrikaTargetSelect(this, params, "track_target");
@@ -301,6 +317,15 @@ class DrikaDialogue : DrikaElement{
 			data["dof_settings"] = JSONValue(JSONarrayValue);
 			for(uint i = 0; i < dof_settings.size(); i++){
 				data["dof_settings"].append(dof_settings[i]);
+			}
+			data["add_camera_shake"] = JSONValue(add_camera_shake);
+			if(add_camera_shake){
+				data["position_shake_max_distance"] = JSONValue(position_shake_max_distance);
+				data["position_shake_slerp_speed"] = JSONValue(position_shake_slerp_speed);
+				data["position_shake_interval"] = JSONValue(position_shake_interval);
+				data["rotation_shake_max_distance"] = JSONValue(rotation_shake_max_distance);
+				data["rotation_shake_slerp_speed"] = JSONValue(rotation_shake_slerp_speed);
+				data["rotation_shake_interval"] = JSONValue(rotation_shake_interval);
 			}
 			data["enable_look_at_target"] = JSONValue(enable_look_at_target);
 			data["enable_move_with_target"] = JSONValue(enable_move_with_target);
@@ -709,7 +734,7 @@ class DrikaDialogue : DrikaElement{
 
 	void DrawSettings(){
 
-		float option_name_width = 150.0;
+		float option_name_width = 155.0;
 
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
@@ -1192,6 +1217,7 @@ class DrikaDialogue : DrikaElement{
 
 			if(enable_look_at_target || enable_move_with_target){
 				ImGui_Separator();
+				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Target Character");
 				ImGui_NextColumn();
 				ImGui_NextColumn();
@@ -1205,7 +1231,64 @@ class DrikaDialogue : DrikaElement{
 			if(ImGui_Combo("###Transition Method", current_camera_transition, camera_transition_names, camera_transition_names.size())){
 				camera_transition = camera_transitions(current_camera_transition);
 			}
+			ImGui_NextColumn();
 
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Add Camera Shake");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Add Camera Shake", add_camera_shake);
+			ImGui_NextColumn();
+
+			if(add_camera_shake){
+				ImGui_Separator();
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Pos Shake Max");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_SliderFloat("##Pos Shake Max", position_shake_max_distance, 0.1, 2.0, "%.1f");
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Pos Shake Slerp Speed");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_SliderFloat("##Pos Shake Slerp Speed", position_shake_slerp_speed, 0.01, 5.0, "%.2f");
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Pos Shake Interval");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_SliderFloat("##Pos Shake Interval", position_shake_interval, 0.01, 1.0, "%.2f");
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Rot Shake Max");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_SliderFloat("##Rot Shake Max", rotation_shake_max_distance, 0.1, 90.0, "%.1f");
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Rot Shake Slerp Speed");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_SliderFloat("##Rot Shake Slerp Speed", rotation_shake_slerp_speed, 0.01, 5.0, "%.2f");
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Rot Shake Interval");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_SliderFloat("##Rot Shake Interval", rotation_shake_interval, 0.01, 1.0, "%.2f");
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+			}
 		}else if(dialogue_function == start){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Fade");
@@ -1663,6 +1746,16 @@ class DrikaDialogue : DrikaElement{
 		msg += position.y + " ";
 		msg += position.z + " ";
 		msg += target_camera_zoom + " ";
+
+		msg += add_camera_shake + " ";
+		if(add_camera_shake){
+			msg += position_shake_max_distance + " ";
+			msg += position_shake_slerp_speed + " ";
+			msg += position_shake_interval + " ";
+			msg += rotation_shake_max_distance + " ";
+			msg += rotation_shake_slerp_speed + " ";
+			msg += rotation_shake_interval + " ";
+		}
 
 		array<Object@> targets = track_target.GetTargetObjects();
 		msg += enable_look_at_target + " ";
