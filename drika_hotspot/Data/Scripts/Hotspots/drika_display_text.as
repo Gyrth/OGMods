@@ -26,7 +26,7 @@ class DrikaDisplayText : DrikaElement{
 	}
 
 	void StartEdit(){
-		ShowText(display_message, font_size, font_path);
+		ShowText(ParseDisplayMessage(display_message), font_size, font_path);
 	}
 
 	void EditDone(){
@@ -52,7 +52,7 @@ class DrikaDisplayText : DrikaElement{
 
 				if(file_extension == "ttf" || file_extension == "TTF"){
 					font_path = new_path;
-					ShowText(display_message, font_size, font_path);
+					ShowText(ParseDisplayMessage(display_message), font_size, font_path);
 				}else{
 					DisplayError("Font issue", "Only ttf font files are supported.");
 				}
@@ -67,7 +67,7 @@ class DrikaDisplayText : DrikaElement{
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_SliderInt("##Font Size", font_size, 0, 100, "%.0f")){
-			ShowText(display_message, font_size, font_path);
+			ShowText(ParseDisplayMessage(display_message), font_size, font_path);
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
@@ -78,10 +78,63 @@ class DrikaDisplayText : DrikaElement{
 		ImGui_SetTextBuf(display_message);
 		if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, -1.0))){
 			display_message = ImGui_GetTextBuf();
-			ShowText(display_message, font_size, font_path);
+			ShowText(ParseDisplayMessage(display_message), font_size, font_path);
 		}
 		ImGui_NextColumn();
+		ImGui_NextColumn();
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Entering words between [brackets] will cause that word to be interpreted as a variable.");
+		ImGui_Text("If you want to display a word between brackets on screen, just add a backslash in front of that \\[word].");
+		ImGui_NextColumn();
 	}
+
+	string ParseDisplayMessage(string input) // This function reads the input for items between braces[] and interprets those as variables.
+	{
+		int position_in_string = 0;
+
+		while(uint(position_in_string) < input.length()) // First let's see if there are any braces in the string at all.
+		{
+			int start_brace_pos = input.findFirst("[", position_in_string); //We'll use these two statements a lot, so let's assign them to a variable.
+			int end_brace_pos = input.findFirst("]", start_brace_pos);
+
+			if (start_brace_pos >= 0 && end_brace_pos >= 0)
+			{
+				string unfiltered_braces = input.substr(start_brace_pos, end_brace_pos - start_brace_pos + 1); //First get the contents of the braces, including extra start braces inside
+				string filtered_braces = unfiltered_braces.substr(unfiltered_braces.findLast("["),unfiltered_braces.length()); //Reduce to the start brace closest to the end brace
+				string stored_value;
+
+				int difference = unfiltered_braces.length() - filtered_braces.length(); //We use this to figure out the start position to replace the [variable]
+
+				if (start_brace_pos + difference == 0 || input[start_brace_pos + difference - 1] != "\\"[0]) //We need to check if there is a backslash first
+				{
+					input.erase(start_brace_pos + difference, filtered_braces.length()); //Here we erase the variable name
+					stored_value = ReadParamValue(filtered_braces.substr(1, filtered_braces.length() - 2)); //Get the actual contents of the variable
+					input.insert(start_brace_pos + difference, stored_value); //And replace filtered_braces with those contents
+				}
+				else
+				{
+				input.erase(start_brace_pos + difference - 1,1); //If there was a backslash just before the variable, that's the only thing we want to remove
+				stored_value = filtered_braces;
+				}
+
+				position_in_string = start_brace_pos + difference + stored_value.length(); //Let's update our position and continue checking
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		return input;
+	}
+
+
+	string ReadParamValue(string key)
+		{
+		SavedLevel@ data = save_file.GetSavedLevel("drika_data");
+
+		return (data.GetValue("[" + key + "]") == "true")? data.GetValue(key) : "--ERROR - " + key + " does not exist--";
+		}
 
 	void Reset(){
 		if(triggered){
@@ -93,7 +146,7 @@ class DrikaDisplayText : DrikaElement{
 		if(!triggered){
 			triggered = true;
 		}
-		ShowText(display_message, font_size, font_path);
+		ShowText(ParseDisplayMessage(display_message), font_size, font_path);
 		return true;
 	}
 }

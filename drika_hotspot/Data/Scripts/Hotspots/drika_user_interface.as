@@ -291,7 +291,7 @@ class DrikaUserInterface : DrikaElement{
 		string display_string = "UserInterface ";
 		display_string += ui_function_names[ui_function] + " ";
 		if(ui_function == ui_text){
-			display_string += "\"" + text_content + "\"";
+			display_string += ("") + "\"" + text_content + "\"";
 		}else if(ui_function == ui_font){
 			display_string += font_name + " " + font_size;
 		}else if(ui_function == ui_image){
@@ -453,6 +453,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_Text("Text");
 			ImGui_NextColumn();
 			ImGui_SetTextBuf(text_content);
+			ImGui_PushItemWidth(second_column_width);
 
 			if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
 				ImGui_SetKeyboardFocusHere(0);
@@ -460,8 +461,25 @@ class DrikaUserInterface : DrikaElement{
 
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, ImGui_GetWindowHeight() / 3.0), ImGuiInputTextFlags_AllowTabInput)){
 				text_content = ImGui_GetTextBuf();
-				SendUIInstruction("set_content", {"\"" + text_content + "\""});
+
+				for(int i = 0; i < int(text_content.length()); i++)
+				{
+					if (text_content[i] == "\""[0])
+					{
+						text_content.insert(i, "\\");
+						i++;
+					}
+				}
+
+				SendUIInstruction("set_content", {("\"" + text_content + " " + "\"")});
 			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_NextColumn();
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Entering words between [brackets] will cause that word to be interpreted as a variable.");
+			ImGui_Text("If you want to display a word between brackets on screen, just add a backslash in front of that \\[word].");
 			ImGui_NextColumn();
 
 			ImGui_AlignTextToFramePadding();
