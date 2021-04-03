@@ -537,21 +537,22 @@ class DrikaReadWriteSaveFile : DrikaElement{
 
 	string ReduceZeroes(string input)
 	{
-			//Go over each character backwards.
-	for(int i = input.length() - 1; i >= 0; i--){
-		//If you find the decimal point, remove it and return the string.
-		if(input[i] == "."[0]){
-			input.erase(i, 1);
-			break;
-		//Remove any zero.
-		}else if(input[i] == "0"[0]){
-			input.erase(i, 1);
-		}else{
-			//Once we encouner a number, stop removing zeros.
-			break;
+		if (input.findFirst(".") == -1) return input;
+		//Go over each character backwards.
+		for(int i = input.length() - 1; i >= 0; i--){
+			//If you find the decimal point, remove it and return the string.
+			if(input[i] == "."[0]){
+				input.erase(i, 1);
+				break;
+			//Remove any zero.
+			}else if(input[i] == "0"[0]){
+				input.erase(i, 1);
+			}else{
+				//Once we encouner a number, stop removing zeros.
+				break;
 			}
 		}
-	return input;
+		return input;
 	}
 
 	//The Trigger function does all the heavy lifting for this bit.
