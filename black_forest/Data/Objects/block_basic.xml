@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <Object>
 	<Model>Data/Models/block_basic.obj</Model>
-	<ColorMap>Data/Textures/Terrain/forest_hills/forest_hills_c.tga</ColorMap>
+	<ColorMap>Data/Textures/block_basic_c.jpg</ColorMap>
 	<NormalMap>Data/Textures/block_basic_n.png</NormalMap>
 	<WeightMap>Data/Textures/block_basic_cw.png</WeightMap>
 	<DetailMaps>
@@ -11,5 +11,5 @@
 		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt_rubble.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_rubble_normal.tga" materialpath="Data/Materials/dirtyrock.xml" />
 	</DetailMaps>
 	<MaterialPath>Data/Materials/grass.xml</MaterialPath>
-	<ShaderName>envobject #DETAILMAP4 #TANGENT #BASE_TANGENT</ShaderName>
+	<ShaderName>block_shader #DETAILMAP4 #TANGENT</ShaderName>
 </Object>

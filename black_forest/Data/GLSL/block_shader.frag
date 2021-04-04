@@ -1,6 +1,22 @@
 #version 150
 #extension GL_ARB_shading_language_420pack : enable
 
+vec3 blendNormal(vec3 normal){
+	vec3 blending = abs(normal);
+	blending = normalize(max(blending, 0.00001));
+	blending /= vec3(blending.x + blending.y + blending.z);
+	return blending;
+}
+
+vec3 triplanarMapping (sampler2D texture, vec3 normal, vec3 position) {
+	vec3 normalBlend = blendNormal(normal);
+	vec3 xColor = texture2D(texture, position.yz).rgb;
+	vec3 yColor = texture2D(texture, position.xz).rgb;
+	vec3 zColor = texture2D(texture, position.xy).rgb;
+
+	return (xColor * normalBlend.x + yColor * normalBlend.y + zColor * normalBlend.z);
+}
+
 /*#if defined(WATER)
 #define NO_DECALS
 #endif
@@ -1038,23 +1054,6 @@ float CloudShadow(vec3 pos){
 void main() {
 	#if defined(INVISIBLE) && !defined(COLLISION)
 		discard;
-	#endif
-
-	// defined(PLANT) &&
-	#if!defined(INSTANCED) && defined(INSTANCED_MESH) && !defined(DETAIL_OBJECT)&& !defined(TERRAIN) && !defined(ITEM) && !defined(CHARACTER)
-		int target_id = 0;
-		#if !defined(NO_INSTANCE_ID)
-			target_id = instance_id;
-		#else
-			// discard;
-		#endif
-
-		vec3 color_tint = instances[target_id].color_tint.xyz;
-		vec3 target_color = vec3(0.123f, 0.123f, 0.123f);
-
-		if(color_tint == target_color){
-			discard;
-		}
 	#endif
 
 	/*{
@@ -2166,6 +2165,7 @@ void main() {
 
 					// Get color
 					vec4 base_color = texture(color_tex,base_tex_coords);
+					base_color.xyz = triplanarMapping(color_tex, ws_normal, world_vert / 50.0f);
 
 					#if !defined(KEEP_SPEC)
 						base_color.a = 0.0;
