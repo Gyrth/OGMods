@@ -3131,7 +3131,7 @@ void main() {
 								float sponge = 1.0 - preserve_wetness;
 
 								#if !defined(TERRAIN)
-									roughness *= mix(0.3, 1.0, sponge);
+									// roughness *= mix(0.3, 1.0, sponge);
 								#else
 									roughness *= mix(0.3, 1.0, mix(min(1.0, length(ws_vertex)*0.1), 1.0, sponge));
 								#endif
