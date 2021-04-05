@@ -2720,7 +2720,10 @@ void main() {
 						vec3 norm = normalize(cross(X, Y));
 						float slope_dot = dot(norm, ws_light);
 						slope_dot = min(slope_dot, 1);
-						shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex), slope_dot);
+						// shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex), slope_dot);
+						#if !defined(SNOW_EVERYWHERE)
+							shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex));
+						#endif
 					}
 					shadow_tex.r *= ambient_mult;
 				#else
