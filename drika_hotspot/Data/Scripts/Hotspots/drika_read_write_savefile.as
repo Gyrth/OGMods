@@ -507,13 +507,13 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				//In the case of add and addvariable, we do different operations depending on whether both the values are floats or not.
 				//If they are floats we do a normal addition operation. If either or both values are strings, we concatenate the values instead.
 				case operator_mode_add: 				if (is_float == true) {value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) + atof(local_value)),'', 0, 3));}
-														else  {value_to_save = ReduceZeroes(saved_parameter + local_value);} break;
+														else  {value_to_save = saved_parameter + local_value;} break;
 				case operator_mode_subtract: 			value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) - atof(local_value)),'', 0, 3)); break;
 				case operator_mode_divide: 				value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) / atof(local_value)),'', 0, 3)); break;
 				case operator_mode_multiply: 			value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) * atof(local_value)),'', 0, 3)); break;
 
 				case operator_mode_addvariable: 		if (is_float == true) {value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) + atof(saved_value)),'', 0, 3));}
-														else  {value_to_save = ReduceZeroes(saved_parameter + saved_value);} break;
+														else  {value_to_save = saved_parameter + saved_value;} break;
 
 				case operator_mode_subtractvariable: 	value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) - atof(saved_value)),'', 0, 3)); break;
 				case operator_mode_dividevariable: 		value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) / atof(saved_value)),'', 0, 3)); break;
@@ -537,22 +537,23 @@ class DrikaReadWriteSaveFile : DrikaElement{
 
 	string ReduceZeroes(string input)
 	{
-		if (input.findFirst(".") == -1) return input;
-		//Go over each character backwards.
-		for(int i = input.length() - 1; i >= 0; i--){
-			//If you find the decimal point, remove it and return the string.
-			if(input[i] == "."[0]){
-				input.erase(i, 1);
-				break;
-			//Remove any zero.
-			}else if(input[i] == "0"[0]){
-				input.erase(i, 1);
-			}else{
-				//Once we encouner a number, stop removing zeros.
-				break;
+	if (input.findFirst(".") >= 0){
+			//Go over each character backwards.
+	for(int i = input.length() - 1; i >= 0; i--){
+		//If you find the decimal point, remove it and return the string.
+		if(input[i] == "."[0]){
+			input.erase(i, 1);
+			break;
+		//Remove any zero.
+		}else if(input[i] == "0"[0]){
+			input.erase(i, 1);
+		}else{
+			//Once we encounter a number, stop removing zeros.
+			break;
 			}
 		}
-		return input;
+	}
+	return input;
 	}
 
 	//The Trigger function does all the heavy lifting for this bit.
