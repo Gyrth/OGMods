@@ -1321,8 +1321,14 @@ void UpdateGlobalReflection(){
 	}
 
 	updated_global_reflection_counter += 1;
-	if(updated_global_reflection_counter > 100){
-		updated_global_reflection = true;
+	if(weather_state == rainy){
+		if(updated_global_reflection_counter > 0){
+			updated_global_reflection = true;
+		}
+	}else{
+		if(updated_global_reflection_counter > 100){
+			updated_global_reflection = true;
+		}
 	}
 }
 
