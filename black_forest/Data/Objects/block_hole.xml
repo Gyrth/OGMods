@@ -10,6 +10,12 @@
 		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dead_leaves_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/dead_leaves_n.tga" materialpath="Data/Materials/dirt.xml" />
 		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt_rubble.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_rubble_normal.tga" materialpath="Data/Materials/dirtyrock.xml" />
 	</DetailMaps>
+	<!-- <DetailObjects>
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/WildGrass.xml" 					weight_path="Data/Textures/block_basic_w.png" 	normal_conform="1" 	density="1.20" 	min_embed="0.1"		max_embed="0.2"		min_scale="1.0"		max_scale="3.25"	view_distance="50"	jitter_degrees="10"		overbright="0.2"	tint_weight="1"/>
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/wild_grass_rocky_mountain.xml" 	weight_path="Data/Textures/block_basic_w.png" 	normal_conform="1" 	density="1.25" 	min_embed="0.1"		max_embed="0.2"		min_scale="1.0"		max_scale="3.25"	view_distance="75"	jitter_degrees="10"		overbright="0.2"	tint_weight="1"/>
+		<DetailObject obj_path="Data/Prototypes/OG/QuixelGrass.xml" 									weight_path="Data/Textures/block_basic_w.png" 	normal_conform="1" 	density="1.05" 	min_embed="0.2"		max_embed="0.3"		min_scale="1.0"		max_scale="1.5"		view_distance="25"	jitter_degrees="5.0"	overbright="2.0"	tint_weight="0.95"/>
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/fall_tall_grass.xml" 				weight_path="Data/Textures/block_basic_w.png" 	normal_conform="1" 	density="1.2" 	min_embed="0.1"		max_embed="0.2"		min_scale="1.0" 	max_scale="2.25"	view_distance="100"	jitter_degrees="30.0"	overbright="0.3"	tint_weight="1"/>
+	</DetailObjects> -->
 	<MaterialPath>Data/Materials/grass.xml</MaterialPath>
 	<ShaderName>block_shader #DETAILMAP4 #TANGENT</ShaderName>
 </Object>
