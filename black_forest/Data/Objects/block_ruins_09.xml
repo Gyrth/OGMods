@@ -1,0 +1,60 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-19.2921" t1="-4.60896" t2="-24.1354" s0="20.01" s1="27.3089" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="677" version="1">
+        <parameters />
+        <EnvObject t0="-19.2921" t1="-8.2584" t2="-24.1354" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="114" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-16.598" t1="3.83395" t2="-26.2974" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="115" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.2813" t1="3.22266" t2="-26.3585" s0="1" s1="1" s2="1" q0="0" q1="0.00630413" q2="0" q3="0.99998" euler_x="0" euler_y="0.0126083" euler_z="0" id="116" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.619" t1="3.98221" t2="-26.4263" s0="0.999999" s1="1.03564" s2="1" q0="0.000597775" q1="0.706685" q2="0.000653685" q3="0.707528" euler_x="0.978092" euler_y="1.56884" euler_z="0.978163" id="117" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_relief.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.0016" t1="3.22266" t2="-26.299" s0="1" s1="1" s2="1" q0="0" q1="0.00630413" q2="0" q3="0.99998" euler_x="0" euler_y="0.0126083" euler_z="0" id="118" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.619" t1="3.98174" t2="-26.4334" s0="0.999999" s1="1.03564" s2="1" q0="0.000653676" q1="-0.707528" q2="-0.000597835" q3="0.706685" euler_x="2.16374" euler_y="-1.56884" euler_z="-2.16367" id="119" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_relief.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-20.2533" t1="3.32366" t2="-24.5586" s0="3.01977" s1="3.01977" s2="3.01977" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="120" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.2444" t1="2.54307" t2="-25.7624" s0="-0.632884" s1="0.881636" s2="0.421923" q0="0" q1="0.499483" q2="0" q3="0.866324" euler_x="0" euler_y="1.046" euler_z="0" id="121" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/lugaru/cypress_branch_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.2142" t1="2.52045" t2="-27.3325" s0="-0.869418" s1="1" s2="0.666667" q0="0" q1="0.999336" q2="0.0364338" q3="0" euler_x="3.06871" euler_y="0" euler_z="3.14159" id="122" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/lugaru/cypress_branch_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.2058" t1="3.50153" t2="-27.2394" s0="-0.620048" s1="1.05631" s2="0.505518" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="123" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/lugaru/cypress_branch_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.5612" t1="2.54307" t2="-26.8389" s0="-0.758276" s1="1.05631" s2="0.505518" q0="0" q1="0.812512" q2="0" q3="0.582945" euler_x="3.14159" euler_y="1.2447" euler_z="3.14159" id="124" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/lugaru/cypress_branch_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-23.5015" t1="2.77199" t2="-30.0615" s0="1" s1="1" s2="1" q0="-0.00134552" q1="0.935641" q2="0.00199193" q3="0.352939" euler_x="3.13789" euler_y="0.721423" euler_z="-3.14011" id="125" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-26.3659" t1="2.71894" t2="-17.684" s0="1" s1="1" s2="1" q0="-0.000646397" q1="0.775974" q2="0.00231526" q3="0.630757" euler_x="3.128" euler_y="1.36503" euler_z="3.13221" id="126" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.7882" t1="3.24181" t2="-20.6211" s0="1" s1="1" s2="1" q0="0" q1="0.506449" q2="0" q3="0.86227" euler_x="0" euler_y="1.06212" euler_z="0" id="127" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-16.6303" t1="5.43594" t2="-26.1491" s0="7.20907" s1="7.20907" s2="7.20907" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" type_file="Data/Objects/Decals/ThickMoss.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-17.2069" t1="5.23676" t2="-27.3102" s0="8.52924" s1="7.20907" s2="7.20907" q0="-0.707107" q1="0" q2="0" q3="0.707107" euler_x="-1.5708" euler_y="0" euler_z="0" id="149" type_file="Data/Objects/Decals/ThickMoss.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-16.2576" t1="4.84686" t2="-26.5106" s0="7.20907" s1="7.20907" s2="7.20907" q0="-0.707107" q1="0" q2="0" q3="-0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="150" type_file="Data/Objects/Decals/ThickMoss.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+    </Group>
+</ActorObjects>

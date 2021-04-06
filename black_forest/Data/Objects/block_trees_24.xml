@@ -1,0 +1,33 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-46.2682" t1="90.2788" t2="-31.5722" s0="24.7668" s1="58.1877" s2="27.4391" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="779" version="1">
+        <parameters />
+        <EnvObject t0="-43.8898" t1="71.19" t2="-30.9484" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="279" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-49.2659" t1="81.1468" t2="-34.0897" s0="1.08248" s1="1.08248" s2="1.08248" q0="0.647231" q1="-0.381651" q2="0.38968" q3="0.532526" euler_x="1.8891" euler_y="-1.14547" euler_z="-0.192658" id="280" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_evergreen_log_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-48.1844" t1="99.3836" t2="-28.5281" s0="1.24803" s1="1.24803" s2="1.24803" q0="0" q1="-0.235535" q2="0" q3="0.971866" euler_x="0" euler_y="-0.475538" euler_z="0" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-42.8124" t1="92.8813" t2="-38.6294" s0="0.827532" s1="0.827532" s2="0.827532" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="282" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-42.4935" t1="90.9928" t2="-27.7752" s0="1" s1="1" s2="1" q0="0.0273725" q1="-0.00880578" q2="0.262465" q3="0.964513" euler_x="0.0482222" euler_y="-0.0313604" euler_z="0.53062" id="283" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/large_evergreen_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-39.1435" t1="82.6897" t2="-37.8591" s0="1.48723" s1="1" s2="1.42452" q0="0" q1="0.506449" q2="0" q3="0.86227" euler_x="0" euler_y="1.06212" euler_z="0" id="284" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-50.4853" t1="82.3099" t2="-23.74" s0="1.57091" s1="0.963889" s2="1.70118" q0="0" q1="0.0645628" q2="0" q3="0.997914" euler_x="0" euler_y="0.129216" euler_z="0" id="285" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-40.4861" t1="82.3002" t2="-27.7118" s0="0.603529" s1="0.800289" s2="0.681137" q0="-0.0021049" q1="0.993729" q2="0.00116088" q3="-0.111766" euler_x="3.13874" euler_y="-0.223994" euler_z="-3.13704" id="286" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

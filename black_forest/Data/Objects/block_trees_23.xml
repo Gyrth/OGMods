@@ -1,0 +1,42 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-16.8155" t1="80.7994" t2="-58.0231" s0="21.8652" s1="50.6091" s2="25.1268" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="778" version="1">
+        <parameters />
+        <EnvObject t0="-16.7894" t1="65.4998" t2="-55.4647" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="268" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-21.0281" t1="83.5406" t2="-53.7104" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="269" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/mossy_trunk_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.171" t1="75.9222" t2="-51.184" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.75563" t1="75.7621" t2="-50.6966" s0="1" s1="1" s2="1" q0="0" q1="-0.553447" q2="0" q3="0.832885" euler_x="0" euler_y="-1.173" euler_z="0" id="271" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-9.53923" t1="78.1628" t2="-49.7837" s0="1" s1="1" s2="1" q0="0" q1="0.374171" q2="0" q3="0.92736" euler_x="0" euler_y="0.767006" euler_z="0" id="272" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/evergreen_stump_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.3051" t1="90.1377" t2="-62.5367" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="273" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.2484" t1="76.9747" t2="-56.479" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="274" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.9632" t1="76.2129" t2="-52.3583" s0="1" s1="1" s2="1" q0="0" q1="-0.587167" q2="0" q3="0.809466" euler_x="0" euler_y="-1.25511" euler_z="0" id="275" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.3121" t1="76.5894" t2="-56.3994" s0="1" s1="1" s2="1" q0="-0.00235602" q1="0.914557" q2="0.000476733" q3="-0.404445" euler_x="3.13746" euler_y="-0.832734" euler_z="-3.13461" id="276" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.5575" t1="75.664" t2="-53.6363" s0="1" s1="1" s2="1" q0="0.03662" q1="-0.0584579" q2="0.0938415" q3="0.993196" euler_x="0.062283" euler_y="-0.123305" euler_z="0.184564" id="277" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.4666" t1="75.7188" t2="-52.8157" s0="1" s1="1" s2="1" q0="0.0736245" q1="-0.883241" q2="0.148214" q3="0.438745" euler_x="-2.80908" euler_y="-0.922079" euler_z="-3.14159" id="278" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

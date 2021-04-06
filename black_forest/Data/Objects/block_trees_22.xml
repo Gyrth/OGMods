@@ -1,0 +1,33 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="21.4925" t1="74.7941" t2="-59.696" s0="28.8344" s1="50.9932" s2="31.0856" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="777" version="1">
+        <parameters />
+        <EnvObject t0="18.1888" t1="59.3025" t2="-57.1085" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="260" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="21.9221" t1="82.2976" t2="-62.0412" s0="0.60348" s1="0.60348" s2="0.60348" q0="0" q1="-0.704744" q2="0" q3="0.709462" euler_x="0" euler_y="-1.56418" euler_z="0" id="261" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.7827" t1="84.3245" t2="-52.203" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="262" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.8313" t1="69.3023" t2="-61.9827" s0="0.999878" s1="0.999878" s2="0.999878" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="263" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/plain_rock_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="22.7665" t1="70.8841" t2="-55.9236" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="264" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="17.221" t1="70.7773" t2="-64.2832" s0="1" s1="1" s2="1" q0="0" q1="0.638128" q2="0" q3="0.769931" euler_x="0" euler_y="1.38413" euler_z="0" id="265" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="19.3843" t1="69.166" t2="-57.4364" s0="1" s1="1" s2="1" q0="-0.100382" q1="-0.376953" q2="0.0182468" q3="0.920596" euler_x="-0.278059" euler_y="-0.762014" euler_z="0.151627" id="266" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/evergreen_roots.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="21.874" t1="69.0656" t2="-64.3505" s0="0.71266" s1="0.71266" s2="0.71266" q0="-0.000456631" q1="-0.857815" q2="-0.121894" q3="0.499298" euler_x="2.72509" euler_y="-1.02888" euler_z="-2.90491" id="267" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/evergreen_roots.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

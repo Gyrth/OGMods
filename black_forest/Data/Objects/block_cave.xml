@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/block_cave.obj</Model>
+	<ColorMap>Data/Textures/block_basic_c.jpg</ColorMap>
+	<NormalMap>Data/Textures/block_basic_n.png</NormalMap>
+	<WeightMap>Data/Textures/block_basic_cw.png</WeightMap>
+	<DetailMaps>
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_normal.png" materialpath="Data/Materials/dirt.xml" />
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dead_grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/dead_grass_normal.tga" materialpath="Data/Materials/grass.xml" />
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dead_leaves_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/dead_leaves_n.tga" materialpath="Data/Materials/dirt.xml" />
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt_rubble.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_rubble_normal.tga" materialpath="Data/Materials/dirtyrock.xml" />
+	</DetailMaps>
+	<MaterialPath>Data/Materials/grass.xml</MaterialPath>
+	<ShaderName>block_shader #DETAILMAP4 #TANGENT</ShaderName>
+</Object>

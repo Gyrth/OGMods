@@ -1,0 +1,51 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-76.3073" t1="-2.27908" t2="-25.8533" s0="23.4944" s1="33.0206" s2="23.1165" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="690" version="1">
+        <parameters />
+        <EnvObject t0="-76.351" t1="-8.78598" t2="-25.9924" s0="0.999839" s1="0.999839" s2="0.999839" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="134" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-82.4539" t1="7.21667" t2="-22.9026" s0="0.999839" s1="0.999839" s2="0.999839" q0="-0.00594278" q1="0.999532" q2="0.0107208" q3="0.0280136" euler_x="3.12046" euler_y="0.0561579" euler_z="-3.1303" id="135" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.3694" t1="13.3802" t2="-23.1119" s0="1.28975" s1="0.965434" s2="1.22154" q0="0" q1="-0.0396222" q2="0" q3="0.999215" euler_x="0" euler_y="-0.0792652" euler_z="0" id="136" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.4638" t1="7.28434" t2="-22.5658" s0="0.999839" s1="0.999839" s2="0.999839" q0="-0.0107208" q1="0.0280136" q2="-0.00594278" q3="-0.999532" euler_x="0.0211335" euler_y="-0.0561579" euler_z="0.0112974" id="137" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.2696" t1="10.8979" t2="-24.6592" s0="0.999839" s1="0.999839" s2="0.999839" q0="0" q1="0.99975" q2="0" q3="0.0223771" euler_x="3.14159" euler_y="0.044758" euler_z="3.14159" id="138" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.2636" t1="10.8979" t2="-24.9277" s0="0.999839" s1="0.999839" s2="0.999839" q0="0" q1="0.99975" q2="0" q3="0.0223771" euler_x="3.14159" euler_y="0.044758" euler_z="3.14159" id="139" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-74.2089" t1="2.38607" t2="-20.0384" s0="1.65814" s1="1.65814" s2="1.65814" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="140" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.9208" t1="2.04231" t2="-31.5645" s0="0.999839" s1="0.999839" s2="0.999839" q0="-0.000646397" q1="0.775974" q2="0.00231526" q3="0.630757" euler_x="3.128" euler_y="1.36503" euler_z="3.13221" id="141" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.2636" t1="10.8979" t2="-20.7806" s0="1" s1="1" s2="1" q0="0" q1="0.022377" q2="0" q3="-0.99975" euler_x="0" euler_y="-0.0447578" euler_z="0" id="142" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.2696" t1="10.8979" t2="-20.5121" s0="1" s1="1" s2="1" q0="0" q1="0.022377" q2="0" q3="-0.99975" euler_x="0" euler_y="-0.0447578" euler_z="0" id="143" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-72.2881" t1="0.985716" t2="-28.2729" s0="0.852922" s1="0.713484" s2="0.713484" q0="-0.0440278" q1="-0.552796" q2="-0.0231833" q3="0.831832" euler_x="-0.123067" euler_y="-1.17246" euler_z="0.0260608" id="144" color_r="0.768627" color_g="0.76862" color_b="0.76862" overbright="0" type_file="Data/Objects/Crete/hex_crete_rubble_simplecol.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.9079" t1="1.23753" t2="-22.0873" s0="0.852922" s1="0.713484" s2="0.713484" q0="0.00979292" q1="0.60912" q2="0.0257447" q3="0.792604" euler_x="0.179939" euler_y="1.30574" euler_z="0.202699" id="145" color_r="0.768627" color_g="0.76862" color_b="0.76862" overbright="0" type_file="Data/Objects/Crete/hex_crete_rubble_simplecol.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.466" t1="1.07096" t2="-28.8064" s0="0.852922" s1="0.713484" s2="0.713484" q0="-0.00459212" q1="0.395523" q2="-0.0495463" q3="0.917109" euler_x="-0.0691918" euler_y="0.811064" euler_z="-0.13766" id="146" color_r="0.768627" color_g="0.76862" color_b="0.76862" overbright="0" type_file="Data/Objects/Crete/hex_crete_rubble_simplecol.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-77.0822" t1="-4.64528" t2="-25.884" s0="13.8501" s1="13.8501" s2="13.8501" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+    </Group>
+</ActorObjects>

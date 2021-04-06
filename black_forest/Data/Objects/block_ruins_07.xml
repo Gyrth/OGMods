@@ -1,0 +1,42 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="29.0253" t1="-6.09715" t2="-22.4355" s0="20.01" s1="24.4007" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="665" version="1">
+        <parameters />
+        <EnvObject t0="25.9766" t1="1.27874" t2="-25.55" s0="1" s1="1" s2="1" q0="0" q1="0.00499837" q2="0" q3="0.999987" euler_x="0" euler_y="0.00999678" euler_z="0" id="82" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.0253" t1="-8.2925" t2="-22.4355" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="83" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="29.2467" t1="3.74244" t2="-26.8779" s0="1" s1="1" s2="1" q0="0" q1="-0.687979" q2="0" q3="0.72573" euler_x="0" euler_y="-1.51739" euler_z="0" id="97" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.2677" t1="3.06417" t2="-22.7422" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="-0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="98" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="26.7802" t1="3.09823" t2="-29.314" s0="1" s1="1" s2="1" q0="0" q1="0.00630413" q2="0" q3="0.99998" euler_x="0" euler_y="0.0126083" euler_z="0" id="99" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="23.5274" t1="2.46606" t2="-29.2425" s0="1" s1="1" s2="1" q0="0" q1="0.0263617" q2="0" q3="0.999653" euler_x="0" euler_y="0.0527295" euler_z="0" id="100" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="24.2937" t1="2.62317" t2="-22.019" s0="1" s1="1" s2="1" q0="0" q1="0.0329522" q2="0" q3="0.999457" euler_x="0" euler_y="0.0659163" euler_z="0" id="101" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="22.2505" t1="1.93847" t2="-23.3752" s0="1" s1="1" s2="1" q0="0.999413" q1="0.00117795" q2="-0.0342296" q3="-0.00118849" euler_x="-3.13913" euler_y="0.0684697" euler_z="0.0024416" id="102" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_top.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="34.7149" t1="3.20772" t2="-23.421" s0="1" s1="1" s2="1" q0="0" q1="0.506449" q2="0" q3="0.86227" euler_x="0" euler_y="1.06212" euler_z="0" id="103" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="25.1332" t1="3.18889" t2="-15.8061" s0="1" s1="1" s2="1" q0="-0.00186986" q1="0.997979" q2="0.00151058" q3="0.0634649" euler_x="3.13879" euler_y="0.12702" euler_z="-3.13802" id="104" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="25.5492" t1="1.1576" t2="-25.794" s0="7.54724" s1="3.65262" s2="7.23115" q0="0" q1="0.0118593" q2="0" q3="0.99993" euler_x="0" euler_y="0.0237192" euler_z="0" id="151" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+    </Group>
+</ActorObjects>

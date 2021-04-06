@@ -1,0 +1,48 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="0.839616" t1="-6.5226" t2="-52.9667" s0="20.4171" s1="24.0974" s2="22.2449" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="721" version="1">
+        <parameters />
+        <EnvObject t0="1.04316" t1="-8.56628" t2="-51.8492" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="167" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="5.83829" t1="0.539376" t2="-52.9165" s0="1" s1="1" s2="1" q0="0.0670698" q1="0" q2="0" q3="0.997748" euler_x="0.13424" euler_y="0" euler_z="0" id="168" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_dirty.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="0.138392" t1="2.35274" t2="-56.6558" s0="1.49842" s1="1.49842" s2="1.49842" q0="0" q1="-0.202608" q2="0" q3="0.97926" euler_x="0" euler_y="-0.408041" euler_z="0" id="169" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/Tent.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.00793" t1="2.93344" t2="-60.1663" s0="1.48723" s1="1" s2="1.42452" q0="0" q1="0.226478" q2="0" q3="0.974016" euler_x="0" euler_y="0.45692" euler_z="0" id="170" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-5.92556" t1="2.55516" t2="-55.6132" s0="1" s1="1" s2="1" q0="-0.00231321" q1="0.942531" q2="0.000653599" q3="-0.334105" euler_x="3.13802" euler_y="-0.681303" euler_z="-3.13542" id="177" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.22812" t1="2.61643" t2="-45.1448" s0="1" s1="1" s2="1" q0="0.00127476" q1="0.0570047" q2="0.00203795" q3="0.998369" euler_x="0.00279588" euler_y="0.114065" euler_z="0.00424217" id="178" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-6.44329" t1="3.03181" t2="-46.6821" s0="3.01977" s1="3.01977" s2="3.01977" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-1.42007" t1="1.43372" t2="-52.3656" s0="1.60296" s1="1.60296" s2="1.60296" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="180" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-1.4519" t1="1.48464" t2="-52.36" s0="1.96361" s1="1.96361" s2="1.96361" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="181" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_ash.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="0.328717" t1="1.49696" t2="-53.219" s0="1.93501" s1="1.93501" s2="1.93501" q0="0" q1="0.970751" q2="0" q3="-0.24009" euler_x="3.14159" euler_y="-0.484917" euler_z="3.14159" id="182" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/wood_pile.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-1.2075" t1="0.901233" t2="-52.6256" s0="2.714" s1="1.07402" s2="2.714" q0="0" q1="0.171197" q2="0" q3="0.985237" euler_x="0" euler_y="0.344089" euler_z="0" id="183" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-0.0250194" t1="0.91104" t2="-55.9913" s0="3.58694" s1="1.09363" s2="6.71569" q0="0" q1="-0.17927" q2="0" q3="0.9838" euler_x="0" euler_y="-0.360489" euler_z="0" id="184" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="-0.789274" t1="1.52176" t2="-53.8678" s0="1.29866" s1="1.29866" s2="1.29866" q0="0" q1="0.127422" q2="0" q3="0.991849" euler_x="0" euler_y="0.255539" euler_z="0" id="185" color_r="0.666667" color_g="0.596109" color_b="0.504575" overbright="0" type_file="Data/Objects/Environment/camp/bed_roll.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

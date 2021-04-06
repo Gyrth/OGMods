@@ -1,0 +1,27 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-44.0861" t1="-2.68875" t2="-25.7441" s0="23.3746" s1="30.9583" s2="22.2595" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="689" version="1">
+        <parameters />
+        <EnvObject t0="-42.4038" t1="-8.16291" t2="-25.9082" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="128" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+			<parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-43.1534" t1="0.0743663" t2="-22.4592" s0="0.703928" s1="0.634529" s2="0.752163" q0="-0.149825" q1="0.378652" q2="-0.0848927" q3="0.909382" euler_x="-0.466768" euler_y="0.72514" euler_z="-0.366028" id="129" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/hex_crete_rubble_simplecol.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-39.8141" t1="0.164933" t2="-26.026" s0="0.853059" s1="0.713599" s2="0.713599" q0="-0.0505784" q1="0.587312" q2="0.0949773" q3="0.802178" euler_x="0.0993945" euler_y="1.25926" euler_z="0.308145" id="130" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/hex_crete_rubble_simplecol.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-42.7896" t1="1.37807" t2="-25.8007" s0="17.7484" s1="17.7484" s2="17.7484" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="131" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="-47.1863" t1="6.18666" t2="-28.1861" s0="0.897768" s1="0.782329" s2="0.988926" q0="0.025821" q1="0.366927" q2="-0.0101893" q3="0.929836" euler_x="0.0555247" euler_y="0.751711" euler_z="0" id="132" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-43.3502" t1="-0.802561" t2="-26.7743" s0="1" s1="1" s2="1" q0="-0.0153491" q1="-0.708583" q2="-0.0318963" q3="0.704738" euler_x="1.76563" euler_y="-1.54671" euler_z="-1.83247" id="133" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,36 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="59.9685" t1="67.6072" t2="-70.4353" s0="28.3576" s1="51.2274" s2="26.8122" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="776" version="1">
+        <parameters />
+        <EnvObject t0="60.5908" t1="51.9985" t2="-69.4603" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="187" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="55.8095" t1="76.6158" t2="-73.944" s0="1" s1="1" s2="1" q0="0" q1="-0.479882" q2="0" q3="0.877333" euler_x="0" euler_y="-1.00104" euler_z="0" id="252" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="60.8974" t1="77.2034" t2="-63.5137" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="253" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="66.4399" t1="76.6364" t2="-70.8867" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="254" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="64.1562" t1="63.4985" t2="-76.3554" s0="1.48723" s1="1" s2="1.42452" q0="0" q1="0.506449" q2="0" q3="0.86227" euler_x="0" euler_y="1.06212" euler_z="0" id="255" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="65.1763" t1="62.8352" t2="-63.3636" s0="1" s1="1" s2="1" q0="-0.00231321" q1="0.942531" q2="0.000653599" q3="-0.334105" euler_x="3.13802" euler_y="-0.681303" euler_z="-3.13542" id="256" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="61.089" t1="63.0971" t2="-71.4464" s0="0.603529" s1="0.800289" s2="0.681137" q0="-0.0021049" q1="0.993729" q2="0.00116088" q3="-0.111766" euler_x="3.13874" euler_y="-0.223994" euler_z="-3.13704" id="257" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="54.6427" t1="62.0018" t2="-65.0195" s0="1" s1="1" s2="1" q0="0" q1="-0.181754" q2="0" q3="0.983344" euler_x="0" euler_y="-0.36554" euler_z="0" id="258" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="59.2084" t1="62.2607" t2="-64.8051" s0="1" s1="1" s2="1" q0="0" q1="0.345332" q2="0" q3="0.938481" euler_x="0" euler_y="0.705185" euler_z="0" id="259" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

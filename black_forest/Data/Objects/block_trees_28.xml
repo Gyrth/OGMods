@@ -1,0 +1,33 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-153.124" t1="5.36219" t2="-81.4926" s0="37.1779" s1="47.8583" s2="36.5957" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="783" version="1">
+        <parameters />
+        <EnvObject t0="-150.773" t1="-7.74182" t2="-78.2802" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="337" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_hill6.xml">
+            <parameters>
+                <parameter name="BlockBase" type="string" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-145.93" t1="9.18392" t2="-82.3949" s0="1" s1="1" s2="1" q0="0" q1="-0.930194" q2="0" q3="0.367068" euler_x="3.14159" euler_y="-0.75171" euler_z="3.14159" id="338" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-153.124" t1="15.4265" t2="-81.4926" s0="0.60348" s1="0.60348" s2="0.60348" q0="0" q1="0.5" q2="0" q3="0.866025" euler_x="0" euler_y="1.0472" euler_z="0" id="339" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-148.891" t1="7.62818" t2="-73.962" s0="1.00001" s1="1.00001" s2="1.00001" q0="0" q1="-0.899874" q2="0" q3="0.436151" euler_x="3.14159" euler_y="-0.902635" euler_z="3.14159" id="340" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/Elm/Elm_Trunk.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-158.174" t1="3.39347" t2="-73.4865" s0="1.48723" s1="1" s2="1.42452" q0="0" q1="0.506449" q2="0" q3="0.86227" euler_x="0" euler_y="1.06212" euler_z="0" id="342" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-142.914" t1="2.8732" t2="-83.0379" s0="0.603529" s1="0.800289" s2="0.681137" q0="-0.0021049" q1="0.993729" q2="0.00116088" q3="-0.111766" euler_x="3.13874" euler_y="-0.223994" euler_z="-3.13704" id="343" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-153.026" t1="3.02205" t2="-75.7864" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="344" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-156.834" t1="2.02381" t2="-81.6925" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.0838101" q3="0.996482" euler_x="0" euler_y="0" euler_z="0.167817" id="345" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/low_fern_.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

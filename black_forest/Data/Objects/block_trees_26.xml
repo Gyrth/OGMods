@@ -1,0 +1,45 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-64.6472" t1="94.6796" t2="-84.8887" s0="31.8896" s1="50.9887" s2="29.4697" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="781" version="1">
+        <parameters />
+        <EnvObject t0="-65.1721" t1="80.0104" t2="-86.0872" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="316" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_hill6.xml">
+            <parameters>
+                <parameter name="BlockBase" type="string" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-67.4869" t1="103.728" t2="-84.0544" s0="0.60348" s1="0.60348" s2="0.60348" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="317" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_large.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.4758" t1="103.803" t2="-81.8844" s0="1" s1="1" s2="1" q0="0" q1="0.258819" q2="0" q3="0.965926" euler_x="0" euler_y="0.523599" euler_z="0" id="318" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-61.0387" t1="104.208" t2="-91.5738" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="319" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-56.6506" t1="89.6081" t2="-79.6681" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="320" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.5727" t1="91.6333" t2="-81.6645" s0="1.48723" s1="1" s2="1.42452" q0="0" q1="0.506449" q2="0" q3="0.86227" euler_x="0" euler_y="1.06212" euler_z="0" id="321" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.0405" t1="90.504" t2="-83.4898" s0="0.603529" s1="0.800289" s2="0.681137" q0="-0.0021049" q1="0.993729" q2="0.00116088" q3="-0.111766" euler_x="3.13874" euler_y="-0.223994" euler_z="-3.13704" id="322" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-62.4603" t1="89.1122" t2="-86.6823" s0="2.88037" s1="2.88037" s2="2.88037" q0="0" q1="0.60556" q2="0" q3="0.7958" euler_x="0" euler_y="1.30094" euler_z="0" id="323" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.8836" t1="89.6081" t2="-84.117" s0="1" s1="1" s2="1" q0="0" q1="0.731797" q2="0" q3="0.681522" euler_x="3.14159" euler_y="1.49967" euler_z="3.14159" id="324" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.5606" t1="89.1929" t2="-92.7323" s0="2.88037" s1="2.88037" s2="2.88037" q0="0" q1="0.89659" q2="0" q3="0.442861" euler_x="3.14159" euler_y="0.917574" euler_z="3.14159" id="325" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-59.2638" t1="90.6857" t2="-94.1614" s0="1.48723" s1="1" s2="1.42452" q0="0" q1="0.0196838" q2="0" q3="0.999806" euler_x="0" euler_y="0.0393701" euler_z="0" id="326" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-71.1775" t1="89.281" t2="-92.0388" s0="1.45292" s1="1.45292" s2="1.45292" q0="-0.0133787" q1="-0.510792" q2="0.0133662" q3="0.859494" euler_x="-0.0765571" euler_y="-1.07102" euler_z="0.0765388" id="327" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/lichen_rubble.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>
