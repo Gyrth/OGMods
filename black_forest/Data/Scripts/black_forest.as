@@ -1085,7 +1085,8 @@ class World{
 			ScriptParams@ params = obj.GetScriptParams();
 			if(params.HasParam("BlockBase")){
 				offset = offset - obj.GetTranslation();
-				base_pos = position + vec3(0.0f, obj.GetBoundingBox().y / 2.0f, 0.0f);
+				float over_limit = (obj.GetBoundingBox().y - 20.0f);
+				base_pos = position + vec3(0.0f, ((over_limit / 2.0f) * owner.type.block_size_mult) + 10.0f, 0.0f);
 				params.Remove("BlockBase");
 				block_base_found = true;
 				if(!released_player){
