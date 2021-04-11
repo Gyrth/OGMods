@@ -12,6 +12,7 @@ index = 0
 root_element = etree.Element('root')
 data = {}
 item_list = {}
+plant_names = ["tree"]
 
 def fix_texture_alpha(path):
 	resolved_path =  os.path.abspath(path)
@@ -26,6 +27,17 @@ def fix_texture_alpha(path):
 			print(model_path)
 			im_rgb = Image.open(resolved_path + "/" + model_path)
 			im_rgba = im_rgb.copy()
+			if any(plant_name in model_path for plant_name in plant_names):
+				pixdata = im_rgba.load()
+				width, height = im_rgba.size
+				for y in range(height):
+					for x in range(width):
+						if pixdata[x, y] < (15, 15, 15, 255):
+							pixdata[x, y] = (255, 255, 255, 0)
+				im_rgba.save(resolved_path + "/" + model_path)
+				continue
+			# else:
+			# 	continue
 			im_rgba.putalpha(5)
 			im_rgba.save(resolved_path + "/" + model_path)
 

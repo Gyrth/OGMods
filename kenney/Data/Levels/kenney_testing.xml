@@ -9,7 +9,7 @@
 </LoadingScreen>
 <OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
-<Script></Script>
+<Script>kenney_asset_spawner.as</Script>
 <LevelScriptParameters>
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
     <parameter name="Custom Shader" type="string" val="" />
@@ -31,24 +31,12 @@
     <DomeTexture>Data/Textures/skies/CloudySunset.tga</DomeTexture>
     <SunAngularRad>0.153056</SunAngularRad>
     <SunColorAngle>353.589</SunColorAngle>
-    <RayToSun r0="0.121363" r1="0.062051" r2="0.990667" />
+    <RayToSun r0="0.293037" r1="0.687405" r2="0.664533" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-12.5585" t1="17.5524" t2="8.35387" s0="1" s1="1" s2="1" q0="-0.294464" q1="-0.424802" q2="0.148367" q3="-0.843102" euler_x="0.672035" euler_y="0.933456" euler_z="0" id="0">
+    <CameraObject t0="38.1165" t1="29.5872" t2="-6.65367" s0="1" s1="1" s2="1" q0="0.0126061" q1="0.956632" q2="-0.288" q3="0.0418728" euler_x="-2.55674" euler_y="0.0874864" euler_z="3.14159" id="0">
         <parameters />
     </CameraObject>
-    <EnvObject t0="0" t1="0" t2="0" s0="6" s1="1" s2="6" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="-0.182824" t1="5.65866" t2="8.19537" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/kenney/house_type03.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="3.4566" t1="4.96497" t2="-2.67973" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/kenney/truck_green.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="-7.20937" t1="5.12502" t2="-4.89336" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/kenney/wallA_painted.xml">
-        <parameters />
-    </EnvObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="House Type03" path="Data/Objects/kenney/house_type03.xml" thumbnail_path="Data/UI/spawner/thumbs/kenney/house_type03_NE.png" />
