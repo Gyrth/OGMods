@@ -39,7 +39,7 @@ def get_models(import_path, export_path, info):
     split_path = import_path.split("/")
     category_name = split_path[len(split_path) - 2]
     resolved_export_path = bpy.path.abspath(export_path)
-    resolved_import_path = bpy.path.abspath(import_path + "Models/OBJ format")
+    resolved_import_path = bpy.path.abspath(import_path + "Models")
     resolved_thumbnail_path = bpy.path.abspath(import_path + "Isometric")
     print("Import path : ", resolved_import_path)
     print("Export path : ", resolved_export_path)
