@@ -1,4 +1,5 @@
 import bpy
+import bmesh
 from mathutils import *
 import os.path
 from os import walk
@@ -45,7 +46,7 @@ def get_models(import_path, export_path, info):
     print("Export path : ", resolved_export_path)
     print("Category name : ", category_name)
     
-#    f = ["tree_large.obj"]
+#    f = ["modularBuildings_023.obj"]
     f = []
     for (dirpath, dirnames, filenames) in walk(resolved_import_path):
         f.extend(filenames)
@@ -115,6 +116,7 @@ def get_models(import_path, export_path, info):
             bpy.ops.object.bake(type='DIFFUSE', save_mode='INTERNAL')
             
             bpy.ops.object.mode_set(mode='OBJECT')
+            triangulate_object(bpy.context.active_object)
             
             #Export the newly created image.
             if export_texture:
@@ -161,7 +163,6 @@ def get_models(import_path, export_path, info):
                 
                 #Add an extra tag for doublesided.
                 flags_xml = object_xml_root.createElement('flags')
-                flags_xml.setAttribute('no_collision', 'true')
                 #Plants are double sided by default.
                 flags_xml.setAttribute('double_sided', 'true')
                 object_xml.appendChild(flags_xml)
@@ -170,7 +171,6 @@ def get_models(import_path, export_path, info):
                 #An extra check to see if this object is double sided.
                 if any(double_sided_name in model_name for double_sided_name in double_sided_names):
                     flags_xml = object_xml_root.createElement('flags')
-                    flags_xml.setAttribute('no_collision', 'true')
                     flags_xml.setAttribute('double_sided', 'true')
                     object_xml.appendChild(flags_xml)
                 
@@ -217,6 +217,19 @@ def get_models(import_path, export_path, info):
     
     with open(resolved_export_path + "/new_assets.xml", "w", encoding="utf8") as outfile:
         outfile.write(xml_str)
+
+def triangulate_object(obj):
+    me = obj.data
+    # Get a BMesh representation
+    bm = bmesh.new()
+    bm.from_mesh(me)
+
+    bmesh.ops.triangulate(bm, faces=bm.faces[:])
+    # V2.79 : bmesh.ops.triangulate(bm, faces=bm.faces[:], quad_method=0, ngon_method=0)
+
+    # Finish up, write the bmesh back to the mesh
+    bm.to_mesh(me)
+    bm.free()
 
 def clear():
     objs = bpy.data.objects
