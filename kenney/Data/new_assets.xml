@@ -1,107 +1,156 @@
 <?xml version="1.0" ?>
 <root>
-	<Item category="Kenney Platformer Kit" title="Spikeslarge" path="Data/Objects/kenney/Platformer_Kit/spikesLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/spikesLarge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Barrel" path="Data/Objects/kenney/Platformer_Kit/barrel.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/barrel_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockslope" path="Data/Objects/kenney/Platformer_Kit/blockSlope.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSlope_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowslope" path="Data/Objects/kenney/Platformer_Kit/blockSnowSlope.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowSlope_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockcornersmall" path="Data/Objects/kenney/Platformer_Kit/blockCornerSmall.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockCornerSmall_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Fencelowcornercurved" path="Data/Objects/kenney/Platformer_Kit/fenceLowCornerCurved.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/fenceLowCornerCurved_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockcurve" path="Data/Objects/kenney/Platformer_Kit/blockCurve.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockCurve_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockslopehalf" path="Data/Objects/kenney/Platformer_Kit/blockSlopeHalf.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSlopeHalf_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Bridge" path="Data/Objects/kenney/Platformer_Kit/bridge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/bridge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Treepine" path="Data/Objects/kenney/Platformer_Kit/treePine.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/treePine_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockroundedlong" path="Data/Objects/kenney/Platformer_Kit/blockRoundedLong.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockRoundedLong_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Ladderlong" path="Data/Objects/kenney/Platformer_Kit/ladderLong.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/ladderLong_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Crateitemstrong" path="Data/Objects/kenney/Platformer_Kit/crateItemStrong.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/crateItemStrong_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockcornerlarge" path="Data/Objects/kenney/Platformer_Kit/blockCornerLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockCornerLarge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocklong" path="Data/Objects/kenney/Platformer_Kit/blockLong.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockLong_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Sign" path="Data/Objects/kenney/Platformer_Kit/sign.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/sign_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowcornersmall" path="Data/Objects/kenney/Platformer_Kit/blockSnowCornerSmall.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowCornerSmall_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockroundedlow" path="Data/Objects/kenney/Platformer_Kit/blockRoundedLow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockRoundedLow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowhexagon" path="Data/Objects/kenney/Platformer_Kit/blockSnowHexagon.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowHexagon_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockdirthalf" path="Data/Objects/kenney/Platformer_Kit/blockDirtHalf.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockDirtHalf_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Spikeshidden" path="Data/Objects/kenney/Platformer_Kit/spikesHidden.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/spikesHidden_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Fencecornercurved" path="Data/Objects/kenney/Platformer_Kit/fenceCornerCurved.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/fenceCornerCurved_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Fencelowcorner" path="Data/Objects/kenney/Platformer_Kit/fenceLowCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/fenceLowCorner_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Hedgecorner" path="Data/Objects/kenney/Platformer_Kit/hedgeCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/hedgeCorner_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockcliffcorner" path="Data/Objects/kenney/Platformer_Kit/blockCliffCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockCliffCorner_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockcurvehalf" path="Data/Objects/kenney/Platformer_Kit/blockCurveHalf.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockCurveHalf_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Buttonround" path="Data/Objects/kenney/Platformer_Kit/buttonRound.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/buttonRound_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Plant" path="Data/Objects/kenney/Platformer_Kit/plant.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/plant_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Block" path="Data/Objects/kenney/Platformer_Kit/block.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/block_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Lever" path="Data/Objects/kenney/Platformer_Kit/lever.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/lever_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowslopehalf" path="Data/Objects/kenney/Platformer_Kit/blockSnowSlopeHalf.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowSlopeHalf_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Ladderbroken" path="Data/Objects/kenney/Platformer_Kit/ladderBroken.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/ladderBroken_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Tree" path="Data/Objects/kenney/Platformer_Kit/tree.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/tree_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Cratestrong" path="Data/Objects/kenney/Platformer_Kit/crateStrong.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/crateStrong_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Buttonsquare" path="Data/Objects/kenney/Platformer_Kit/buttonSquare.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/buttonSquare_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockroundedlarge" path="Data/Objects/kenney/Platformer_Kit/blockRoundedLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockRoundedLarge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Platform" path="Data/Objects/kenney/Platformer_Kit/platform.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/platform_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Coinbronze" path="Data/Objects/kenney/Platformer_Kit/coinBronze.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/coinBronze_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowend" path="Data/Objects/kenney/Platformer_Kit/blockSnowEnd.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowEnd_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockquarter" path="Data/Objects/kenney/Platformer_Kit/blockQuarter.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockQuarter_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockmovingred" path="Data/Objects/kenney/Platformer_Kit/blockMovingRed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockMovingRed_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Fencelowbroken" path="Data/Objects/kenney/Platformer_Kit/fenceLowBroken.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/fenceLowBroken_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowcurvehalf" path="Data/Objects/kenney/Platformer_Kit/blockSnowCurveHalf.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowCurveHalf_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Saw" path="Data/Objects/kenney/Platformer_Kit/saw.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/saw_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Hedge" path="Data/Objects/kenney/Platformer_Kit/hedge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/hedge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Coinsilver" path="Data/Objects/kenney/Platformer_Kit/coinSilver.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/coinSilver_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockdirtramp" path="Data/Objects/kenney/Platformer_Kit/blockDirtRamp.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockDirtRamp_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Dooropen" path="Data/Objects/kenney/Platformer_Kit/doorOpen.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/doorOpen_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Rocks" path="Data/Objects/kenney/Platformer_Kit/rocks.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/rocks_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockmoving" path="Data/Objects/kenney/Platformer_Kit/blockMoving.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockMoving_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockcliff" path="Data/Objects/kenney/Platformer_Kit/blockCliff.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockCliff_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Ladder" path="Data/Objects/kenney/Platformer_Kit/ladder.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/ladder_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockcurvelow" path="Data/Objects/kenney/Platformer_Kit/blockCurveLow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockCurveLow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowroundedlow" path="Data/Objects/kenney/Platformer_Kit/blockSnowRoundedLow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowRoundedLow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Fencelow" path="Data/Objects/kenney/Platformer_Kit/fenceLow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/fenceLow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowrounded" path="Data/Objects/kenney/Platformer_Kit/blockSnowRounded.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowRounded_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowroundedlarge" path="Data/Objects/kenney/Platformer_Kit/blockSnowRoundedLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowRoundedLarge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowhexagonlow" path="Data/Objects/kenney/Platformer_Kit/blockSnowHexagonLow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowHexagonLow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockend" path="Data/Objects/kenney/Platformer_Kit/blockEnd.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockEnd_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Spikes" path="Data/Objects/kenney/Platformer_Kit/spikes.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/spikes_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Jewel" path="Data/Objects/kenney/Platformer_Kit/jewel.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/jewel_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowroundedlowlong" path="Data/Objects/kenney/Platformer_Kit/blockSnowRoundedLowLong.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowRoundedLowLong_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Fencecorner" path="Data/Objects/kenney/Platformer_Kit/fenceCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/fenceCorner_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowcornerlarge" path="Data/Objects/kenney/Platformer_Kit/blockSnowCornerLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowCornerLarge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockdirtramphalf" path="Data/Objects/kenney/Platformer_Kit/blockDirtRampHalf.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockDirtRampHalf_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Flowerslow" path="Data/Objects/kenney/Platformer_Kit/flowersLow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/flowersLow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowlevel" path="Data/Objects/kenney/Platformer_Kit/blockSnowLevel.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowLevel_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Bridgehalf" path="Data/Objects/kenney/Platformer_Kit/bridgeHalf.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/bridgeHalf_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Crateitem" path="Data/Objects/kenney/Platformer_Kit/crateItem.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/crateItem_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Bridgeramp" path="Data/Objects/kenney/Platformer_Kit/bridgeRamp.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/bridgeRamp_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowcurve" path="Data/Objects/kenney/Platformer_Kit/blockSnowCurve.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowCurve_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowroundedlong" path="Data/Objects/kenney/Platformer_Kit/blockSnowRoundedLong.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowRoundedLong_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Arrows" path="Data/Objects/kenney/Platformer_Kit/arrows.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/arrows_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Mushrooms" path="Data/Objects/kenney/Platformer_Kit/mushrooms.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/mushrooms_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockhexagon" path="Data/Objects/kenney/Platformer_Kit/blockHexagon.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockHexagon_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Treesnow" path="Data/Objects/kenney/Platformer_Kit/treeSnow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/treeSnow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Coingold" path="Data/Objects/kenney/Platformer_Kit/coinGold.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/coinGold_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Fence" path="Data/Objects/kenney/Platformer_Kit/fence.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/fence_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowlong" path="Data/Objects/kenney/Platformer_Kit/blockSnowLong.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowLong_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Heart" path="Data/Objects/kenney/Platformer_Kit/heart.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/heart_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocklevel" path="Data/Objects/kenney/Platformer_Kit/blockLevel.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockLevel_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockhalf" path="Data/Objects/kenney/Platformer_Kit/blockHalf.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockHalf_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Flag" path="Data/Objects/kenney/Platformer_Kit/flag.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/flag_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowquarter" path="Data/Objects/kenney/Platformer_Kit/blockSnowQuarter.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowQuarter_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Arrow" path="Data/Objects/kenney/Platformer_Kit/arrow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/arrow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowcliff" path="Data/Objects/kenney/Platformer_Kit/blockSnowCliff.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowCliff_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockroundedlowlong" path="Data/Objects/kenney/Platformer_Kit/blockRoundedLowLong.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockRoundedLowLong_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowhalf" path="Data/Objects/kenney/Platformer_Kit/blockSnowHalf.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowHalf_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Flowers" path="Data/Objects/kenney/Platformer_Kit/flowers.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/flowers_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockhexagonlow" path="Data/Objects/kenney/Platformer_Kit/blockHexagonLow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockHexagonLow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Doorclosed" path="Data/Objects/kenney/Platformer_Kit/doorClosed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/doorClosed_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Crate" path="Data/Objects/kenney/Platformer_Kit/crate.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/crate_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Chest" path="Data/Objects/kenney/Platformer_Kit/chest.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/chest_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnow" path="Data/Objects/kenney/Platformer_Kit/blockSnow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowcliffcorner" path="Data/Objects/kenney/Platformer_Kit/blockSnowCliffCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowCliffCorner_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockmovinglarge" path="Data/Objects/kenney/Platformer_Kit/blockMovingLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockMovingLarge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockrounded" path="Data/Objects/kenney/Platformer_Kit/blockRounded.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockRounded_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Treepinesnow" path="Data/Objects/kenney/Platformer_Kit/treePineSnow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/treePineSnow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowlarge" path="Data/Objects/kenney/Platformer_Kit/blockSnowLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowLarge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocklarge" path="Data/Objects/kenney/Platformer_Kit/blockLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockLarge_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blocksnowcurvelow" path="Data/Objects/kenney/Platformer_Kit/blockSnowCurveLow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockSnowCurveLow_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Key" path="Data/Objects/kenney/Platformer_Kit/key.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/key_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Fencebroken" path="Data/Objects/kenney/Platformer_Kit/fenceBroken.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/fenceBroken_NE.png"/>
-	<Item category="Kenney Platformer Kit" title="Blockdirt" path="Data/Objects/kenney/Platformer_Kit/blockDirt.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Platformer_Kit/blockDirt_NE.png"/>
+	<Item category="Kenney Space Kit" title="Barrel" path="Data/Objects/kenney/Space_Kit/barrel.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/barrel_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Sidecorner" path="Data/Objects/kenney/Space_Kit/terrain_sideCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_sideCorner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe End" path="Data/Objects/kenney/Space_Kit/pipe_end.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_end_NE.png"/>
+	<Item category="Kenney Space Kit" title="Stairs" path="Data/Objects/kenney/Space_Kit/stairs.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/stairs_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Finsb" path="Data/Objects/kenney/Space_Kit/rocket_finsB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_finsB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Tracksupportcorner" path="Data/Objects/kenney/Space_Kit/monorail_trackSupportCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trackSupportCorner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rail Corner" path="Data/Objects/kenney/Space_Kit/rail_corner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rail_corner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Desk Computercorner" path="Data/Objects/kenney/Space_Kit/desk_computerCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/desk_computerCorner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Turret Single" path="Data/Objects/kenney/Space_Kit/turret_single.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/turret_single_NE.png"/>
+	<Item category="Kenney Space Kit" title="Structure" path="Data/Objects/kenney/Space_Kit/structure.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/structure_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Wall" path="Data/Objects/kenney/Space_Kit/corridor_wall.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_wall_NE.png"/>
+	<Item category="Kenney Space Kit" title="Craft Speederb" path="Data/Objects/kenney/Space_Kit/craft_speederB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/craft_speederB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rail" path="Data/Objects/kenney/Space_Kit/rail.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rail_NE.png"/>
+	<Item category="Kenney Space Kit" title="Hangar Rounda" path="Data/Objects/kenney/Space_Kit/hangar_roundA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/hangar_roundA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Machine Generator" path="Data/Objects/kenney/Space_Kit/machine_generator.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/machine_generator_NE.png"/>
+	<Item category="Kenney Space Kit" title="Craterlarge" path="Data/Objects/kenney/Space_Kit/craterLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/craterLarge_NE.png"/>
+	<Item category="Kenney Space Kit" title="Hangar Roundglass" path="Data/Objects/kenney/Space_Kit/hangar_roundGlass.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/hangar_roundGlass_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rock" path="Data/Objects/kenney/Space_Kit/rock.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rock_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Trackcornersmall" path="Data/Objects/kenney/Space_Kit/monorail_trackCornerSmall.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trackCornerSmall_NE.png"/>
+	<Item category="Kenney Space Kit" title="Supports High" path="Data/Objects/kenney/Space_Kit/supports_high.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/supports_high_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Traincargo" path="Data/Objects/kenney/Space_Kit/monorail_trainCargo.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trainCargo_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Split" path="Data/Objects/kenney/Space_Kit/pipe_split.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_split_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Roof" path="Data/Objects/kenney/Space_Kit/corridor_roof.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_roof_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Basea" path="Data/Objects/kenney/Space_Kit/rocket_baseA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_baseA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Trainend" path="Data/Objects/kenney/Space_Kit/monorail_trainEnd.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trainEnd_NE.png"/>
+	<Item category="Kenney Space Kit" title="Stairs Corner" path="Data/Objects/kenney/Space_Kit/stairs_corner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/stairs_corner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Sidesb" path="Data/Objects/kenney/Space_Kit/rocket_sidesB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_sidesB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Ramp" path="Data/Objects/kenney/Space_Kit/terrain_ramp.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_ramp_NE.png"/>
+	<Item category="Kenney Space Kit" title="Alien" path="Data/Objects/kenney/Space_Kit/alien.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/alien_NE.png"/>
+	<Item category="Kenney Space Kit" title="Machine Barrel" path="Data/Objects/kenney/Space_Kit/machine_barrel.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/machine_barrel_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Trackstraight" path="Data/Objects/kenney/Space_Kit/monorail_trackStraight.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trackStraight_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Ringhigh" path="Data/Objects/kenney/Space_Kit/pipe_ringHigh.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_ringHigh_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Trainbox" path="Data/Objects/kenney/Space_Kit/monorail_trainBox.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trainBox_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Corner" path="Data/Objects/kenney/Space_Kit/platform_corner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_corner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Ramplarge" path="Data/Objects/kenney/Space_Kit/pipe_rampLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_rampLarge_NE.png"/>
+	<Item category="Kenney Space Kit" title="Barrels Rail" path="Data/Objects/kenney/Space_Kit/barrels_rail.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/barrels_rail_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Cross" path="Data/Objects/kenney/Space_Kit/pipe_cross.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_cross_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Trainflat" path="Data/Objects/kenney/Space_Kit/monorail_trainFlat.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trainFlat_NE.png"/>
+	<Item category="Kenney Space Kit" title="Craft Racer" path="Data/Objects/kenney/Space_Kit/craft_racer.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/craft_racer_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Roadsplit" path="Data/Objects/kenney/Space_Kit/terrain_roadSplit.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_roadSplit_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Roadend" path="Data/Objects/kenney/Space_Kit/terrain_roadEnd.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_roadEnd_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Entrance" path="Data/Objects/kenney/Space_Kit/pipe_entrance.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_entrance_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform High" path="Data/Objects/kenney/Space_Kit/platform_high.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_high_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Corneropen" path="Data/Objects/kenney/Space_Kit/platform_cornerOpen.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_cornerOpen_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Ring" path="Data/Objects/kenney/Space_Kit/pipe_ring.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_ring_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Ringhighend" path="Data/Objects/kenney/Space_Kit/pipe_ringHighEnd.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_ringHighEnd_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Sidesa" path="Data/Objects/kenney/Space_Kit/rocket_sidesA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_sidesA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Weapon Rifle" path="Data/Objects/kenney/Space_Kit/weapon_rifle.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/weapon_rifle_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Topa" path="Data/Objects/kenney/Space_Kit/rocket_topA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_topA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Straight" path="Data/Objects/kenney/Space_Kit/pipe_straight.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_straight_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Detailed" path="Data/Objects/kenney/Space_Kit/corridor_detailed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_detailed_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rail Middle" path="Data/Objects/kenney/Space_Kit/rail_middle.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rail_middle_NE.png"/>
+	<Item category="Kenney Space Kit" title="Desk Computer" path="Data/Objects/kenney/Space_Kit/desk_computer.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/desk_computer_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Corner" path="Data/Objects/kenney/Space_Kit/pipe_corner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_corner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Astronautb" path="Data/Objects/kenney/Space_Kit/astronautB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/astronautB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Craft Cargoa" path="Data/Objects/kenney/Space_Kit/craft_cargoA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/craft_cargoA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Smalldiagonal" path="Data/Objects/kenney/Space_Kit/platform_smallDiagonal.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_smallDiagonal_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Supportlow" path="Data/Objects/kenney/Space_Kit/pipe_supportLow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_supportLow_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Straight" path="Data/Objects/kenney/Space_Kit/platform_straight.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_straight_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor" path="Data/Objects/kenney/Space_Kit/corridor.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_NE.png"/>
+	<Item category="Kenney Space Kit" title="Structure Closed" path="Data/Objects/kenney/Space_Kit/structure_closed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/structure_closed_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Split" path="Data/Objects/kenney/Space_Kit/corridor_split.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_split_NE.png"/>
+	<Item category="Kenney Space Kit" title="Desk Chairstool" path="Data/Objects/kenney/Space_Kit/desk_chairStool.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/desk_chairStool_NE.png"/>
+	<Item category="Kenney Space Kit" title="Chimney" path="Data/Objects/kenney/Space_Kit/chimney.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/chimney_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Trainpassenger" path="Data/Objects/kenney/Space_Kit/monorail_trainPassenger.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trainPassenger_NE.png"/>
+	<Item category="Kenney Space Kit" title="Hangar Smallb" path="Data/Objects/kenney/Space_Kit/hangar_smallB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/hangar_smallB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Trackcornerlarge" path="Data/Objects/kenney/Space_Kit/monorail_trackCornerLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trackCornerLarge_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Roadstraight" path="Data/Objects/kenney/Space_Kit/terrain_roadStraight.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_roadStraight_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Sidecliff" path="Data/Objects/kenney/Space_Kit/terrain_sideCliff.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_sideCliff_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Open" path="Data/Objects/kenney/Space_Kit/pipe_open.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_open_NE.png"/>
+	<Item category="Kenney Space Kit" title="Weapon Gun" path="Data/Objects/kenney/Space_Kit/weapon_gun.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/weapon_gun_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Ramplarge Detailed" path="Data/Objects/kenney/Space_Kit/terrain_rampLarge_detailed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_rampLarge_detailed_NE.png"/>
+	<Item category="Kenney Space Kit" title="Gate Complex" path="Data/Objects/kenney/Space_Kit/gate_complex.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/gate_complex_NE.png"/>
+	<Item category="Kenney Space Kit" title="Craft Miner" path="Data/Objects/kenney/Space_Kit/craft_miner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/craft_miner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Gate Simple" path="Data/Objects/kenney/Space_Kit/gate_simple.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/gate_simple_NE.png"/>
+	<Item category="Kenney Space Kit" title="Craft Speederc" path="Data/Objects/kenney/Space_Kit/craft_speederC.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/craft_speederC_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Fuela" path="Data/Objects/kenney/Space_Kit/rocket_fuelA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_fuelA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Ringsupport" path="Data/Objects/kenney/Space_Kit/pipe_ringSupport.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_ringSupport_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rail End" path="Data/Objects/kenney/Space_Kit/rail_end.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rail_end_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Roadcorner" path="Data/Objects/kenney/Space_Kit/terrain_roadCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_roadCorner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Satellitedish Detailed" path="Data/Objects/kenney/Space_Kit/satelliteDish_detailed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/satelliteDish_detailed_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Window" path="Data/Objects/kenney/Space_Kit/corridor_window.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_window_NE.png"/>
+	<Item category="Kenney Space Kit" title="Meteor" path="Data/Objects/kenney/Space_Kit/meteor.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/meteor_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rock Largea" path="Data/Objects/kenney/Space_Kit/rock_largeA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rock_largeA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Crater" path="Data/Objects/kenney/Space_Kit/crater.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/crater_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Long" path="Data/Objects/kenney/Space_Kit/platform_long.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_long_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rock Largeb" path="Data/Objects/kenney/Space_Kit/rock_largeB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rock_largeB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Cornerroundlarge" path="Data/Objects/kenney/Space_Kit/pipe_cornerRoundLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_cornerRoundLarge_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Windowclosed" path="Data/Objects/kenney/Space_Kit/corridor_windowClosed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_windowClosed_NE.png"/>
+	<Item category="Kenney Space Kit" title="Bones" path="Data/Objects/kenney/Space_Kit/bones.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/bones_NE.png"/>
+	<Item category="Kenney Space Kit" title="Desk Computerscreen" path="Data/Objects/kenney/Space_Kit/desk_computerScreen.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/desk_computerScreen_NE.png"/>
+	<Item category="Kenney Space Kit" title="Barrels" path="Data/Objects/kenney/Space_Kit/barrels.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/barrels_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Wallcorner" path="Data/Objects/kenney/Space_Kit/corridor_wallCorner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_wallCorner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Cornerround" path="Data/Objects/kenney/Space_Kit/platform_cornerRound.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_cornerRound_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocks Smalla" path="Data/Objects/kenney/Space_Kit/rocks_smallA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocks_smallA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Supporthigh" path="Data/Objects/kenney/Space_Kit/pipe_supportHigh.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_supportHigh_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Small" path="Data/Objects/kenney/Space_Kit/platform_small.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_small_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Side" path="Data/Objects/kenney/Space_Kit/platform_side.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_side_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Fuelb" path="Data/Objects/kenney/Space_Kit/rocket_fuelB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_fuelB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Supports Low" path="Data/Objects/kenney/Space_Kit/supports_low.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/supports_low_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Corner" path="Data/Objects/kenney/Space_Kit/corridor_corner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_corner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Hangar Smalla" path="Data/Objects/kenney/Space_Kit/hangar_smallA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/hangar_smallA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain" path="Data/Objects/kenney/Space_Kit/terrain.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_NE.png"/>
+	<Item category="Kenney Space Kit" title="Satellitedish" path="Data/Objects/kenney/Space_Kit/satelliteDish.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/satelliteDish_NE.png"/>
+	<Item category="Kenney Space Kit" title="Desk Chair" path="Data/Objects/kenney/Space_Kit/desk_chair.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/desk_chair_NE.png"/>
+	<Item category="Kenney Space Kit" title="Astronauta" path="Data/Objects/kenney/Space_Kit/astronautA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/astronautA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Craft Speedera" path="Data/Objects/kenney/Space_Kit/craft_speederA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/craft_speederA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Trainfront" path="Data/Objects/kenney/Space_Kit/monorail_trainFront.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trainFront_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Sideend" path="Data/Objects/kenney/Space_Kit/terrain_sideEnd.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_sideEnd_NE.png"/>
+	<Item category="Kenney Space Kit" title="Meteor Half" path="Data/Objects/kenney/Space_Kit/meteor_half.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/meteor_half_NE.png"/>
+	<Item category="Kenney Space Kit" title="Hangar Roundb" path="Data/Objects/kenney/Space_Kit/hangar_roundB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/hangar_roundB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Hangar Largea" path="Data/Objects/kenney/Space_Kit/hangar_largeA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/hangar_largeA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Sidecornerinner" path="Data/Objects/kenney/Space_Kit/terrain_sideCornerInner.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_sideCornerInner_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rover" path="Data/Objects/kenney/Space_Kit/rover.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rover_NE.png"/>
+	<Item category="Kenney Space Kit" title="Craft Speederd" path="Data/Objects/kenney/Space_Kit/craft_speederD.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/craft_speederD_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocks Smallb" path="Data/Objects/kenney/Space_Kit/rocks_smallB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocks_smallB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Low" path="Data/Objects/kenney/Space_Kit/platform_low.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_low_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Cross" path="Data/Objects/kenney/Space_Kit/corridor_cross.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_cross_NE.png"/>
+	<Item category="Kenney Space Kit" title="Craft Cargob" path="Data/Objects/kenney/Space_Kit/craft_cargoB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/craft_cargoB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Roadcross" path="Data/Objects/kenney/Space_Kit/terrain_roadCross.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_roadCross_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Finsa" path="Data/Objects/kenney/Space_Kit/rocket_finsA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_finsA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Meteor Detailed" path="Data/Objects/kenney/Space_Kit/meteor_detailed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/meteor_detailed_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rock Crystals" path="Data/Objects/kenney/Space_Kit/rock_crystals.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rock_crystals_NE.png"/>
+	<Item category="Kenney Space Kit" title="Structure Diagonal" path="Data/Objects/kenney/Space_Kit/structure_diagonal.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/structure_diagonal_NE.png"/>
+	<Item category="Kenney Space Kit" title="Satellitedish Large" path="Data/Objects/kenney/Space_Kit/satelliteDish_large.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/satelliteDish_large_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Cornerround" path="Data/Objects/kenney/Space_Kit/pipe_cornerRound.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_cornerRound_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Side" path="Data/Objects/kenney/Space_Kit/terrain_side.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_side_NE.png"/>
+	<Item category="Kenney Space Kit" title="Structure Detailed" path="Data/Objects/kenney/Space_Kit/structure_detailed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/structure_detailed_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Center" path="Data/Objects/kenney/Space_Kit/platform_center.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_center_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Cornerround" path="Data/Objects/kenney/Space_Kit/corridor_cornerRound.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_cornerRound_NE.png"/>
+	<Item category="Kenney Space Kit" title="Machine Generatorlarge" path="Data/Objects/kenney/Space_Kit/machine_generatorLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/machine_generatorLarge_NE.png"/>
+	<Item category="Kenney Space Kit" title="Machine Barrellarge" path="Data/Objects/kenney/Space_Kit/machine_barrelLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/machine_barrelLarge_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform End" path="Data/Objects/kenney/Space_Kit/platform_end.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_end_NE.png"/>
+	<Item category="Kenney Space Kit" title="Terrain Ramplarge" path="Data/Objects/kenney/Space_Kit/terrain_rampLarge.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/terrain_rampLarge_NE.png"/>
+	<Item category="Kenney Space Kit" title="Chimney Detailed" path="Data/Objects/kenney/Space_Kit/chimney_detailed.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/chimney_detailed_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Baseb" path="Data/Objects/kenney/Space_Kit/rocket_baseB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_baseB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Stairs Short" path="Data/Objects/kenney/Space_Kit/stairs_short.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/stairs_short_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Cornerroundwindow" path="Data/Objects/kenney/Space_Kit/corridor_cornerRoundWindow.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_cornerRoundWindow_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Rampsmall" path="Data/Objects/kenney/Space_Kit/pipe_rampSmall.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_rampSmall_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Tracksupport" path="Data/Objects/kenney/Space_Kit/monorail_trackSupport.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trackSupport_NE.png"/>
+	<Item category="Kenney Space Kit" title="Hangar Largeb" path="Data/Objects/kenney/Space_Kit/hangar_largeB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/hangar_largeB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Turret Double" path="Data/Objects/kenney/Space_Kit/turret_double.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/turret_double_NE.png"/>
+	<Item category="Kenney Space Kit" title="Machine Wireless" path="Data/Objects/kenney/Space_Kit/machine_wireless.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/machine_wireless_NE.png"/>
+	<Item category="Kenney Space Kit" title="Monorail Trackslope" path="Data/Objects/kenney/Space_Kit/monorail_trackSlope.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/monorail_trackSlope_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rock Crystalslargeb" path="Data/Objects/kenney/Space_Kit/rock_crystalsLargeB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rock_crystalsLargeB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Machine Wirelesscable" path="Data/Objects/kenney/Space_Kit/machine_wirelessCable.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/machine_wirelessCable_NE.png"/>
+	<Item category="Kenney Space Kit" title="Pipe Cornerdiagonal" path="Data/Objects/kenney/Space_Kit/pipe_cornerDiagonal.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/pipe_cornerDiagonal_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor Open" path="Data/Objects/kenney/Space_Kit/corridor_open.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_open_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rocket Topb" path="Data/Objects/kenney/Space_Kit/rocket_topB.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rocket_topB_NE.png"/>
+	<Item category="Kenney Space Kit" title="Corridor End" path="Data/Objects/kenney/Space_Kit/corridor_end.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/corridor_end_NE.png"/>
+	<Item category="Kenney Space Kit" title="Platform Large" path="Data/Objects/kenney/Space_Kit/platform_large.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/platform_large_NE.png"/>
+	<Item category="Kenney Space Kit" title="Rock Crystalslargea" path="Data/Objects/kenney/Space_Kit/rock_crystalsLargeA.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/rock_crystalsLargeA_NE.png"/>
+	<Item category="Kenney Space Kit" title="Desk Chairarms" path="Data/Objects/kenney/Space_Kit/desk_chairArms.xml" thumbnail="Data/UI/spawner/thumbs/kenney/Space_Kit/desk_chairArms_NE.png"/>
 </root>
