@@ -48,12 +48,14 @@ void PostInit(){
 	int y_counter = 0;
 	int z_counter = 0;
 	string category = "";
+	int number_of_assets;
 
 	array<array<SpawnerItem>> categories;
 
 	for(uint i = 0; i < mod_ids.size(); i++){
 		if(ModGetID(mod_ids[i]) == "kenney-assets"){
 			array<SpawnerItem> spawner_items = ModGetSpawnerItems(mod_ids[i]);
+			number_of_assets = spawner_items.size();
 			for(uint j = 0; j < spawner_items.size(); j++){
 				bool added_to_existing_category = false;
 
@@ -106,6 +108,8 @@ void PostInit(){
 		}
 		z_counter++;
 	}
+
+	Log(warning, "Number of assets : " + number_of_assets);
 }
 
 bool HasFocus(){
