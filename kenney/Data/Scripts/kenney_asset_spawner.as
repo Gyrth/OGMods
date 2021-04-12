@@ -94,11 +94,7 @@ void PostInit(){
 			vec3 bounds = obj.GetBoundingBox();
 
 			float over_scale = ((bounds.x + bounds.y + bounds.z) / 3.0f);
-			if(over_scale > 10.0f){
-				/* Log(warning, "x: " + bounds.x + " y: " + bounds.y + " z: " + bounds.z); */
-				Log(warning, "over_scale: " + over_scale);
-				obj.SetScale(vec3(max(0.01, 1.0f - (over_scale * 0.05f))));
-			}
+			obj.SetScale(vec3((1.0f / over_scale) * 5.0f));
 
 			x_counter++;
 			if(x_counter > row_size){

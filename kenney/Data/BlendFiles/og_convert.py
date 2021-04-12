@@ -32,7 +32,8 @@ export_texture = True
 cached_object_names = []
 cached_object_meshes = []
 #plant_names = ["tree_large", "tree_shrub", "tree_small", "treePine_small", "treePine_large", "balconyLadder_bottom", "balconyLadder_top", "balcony_typeA"]
-plant_names = ["fenceStraight", "fenceCurved"]
+#plant_names = ["fenceStraight", "fenceCurved"]
+plant_names = []
 double_sided_names = []
 
 def get_models(import_path, export_path, info):
@@ -40,8 +41,8 @@ def get_models(import_path, export_path, info):
     split_path = import_path.split("/")
     category_name = split_path[len(split_path) - 2]
     resolved_export_path = bpy.path.abspath(export_path)
-    resolved_import_path = bpy.path.abspath(import_path + "Models/OBJ format")
-#    resolved_import_path = bpy.path.abspath(import_path + "Models")
+#    resolved_import_path = bpy.path.abspath(import_path + "Models/OBJ format")
+    resolved_import_path = bpy.path.abspath(import_path + "Models")
     resolved_thumbnail_path = bpy.path.abspath(import_path + "Isometric")
     print("Import path : ", resolved_import_path)
     print("Export path : ", resolved_export_path)
@@ -208,7 +209,7 @@ def get_models(import_path, export_path, info):
             item_title = model_name.replace("_", " ")
             item.setAttribute('title', item_title.title())
             item.setAttribute('path', "Data/Objects/kenney/" + category_name + "/" + model_name + ".xml")
-            item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/kenney/" + category_name + "/" + model_name + "_N.png")
+            item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/kenney/" + category_name + "/" + model_name + "_NE.png")
               
             xml.appendChild(item)
             clear()
