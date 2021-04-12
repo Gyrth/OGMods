@@ -4,4 +4,5 @@
 	<ColorMap>Data/Textures/kenney/ship_light.png</ColorMap>
 	<NormalMap>Data/Textures/normal.tga</NormalMap>
 	<ShaderName>envobject #TANGENT</ShaderName>
+	<flags no_collision="true" double_sided="true"/>
 </Object>
