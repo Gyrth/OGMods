@@ -6,7 +6,7 @@ from lxml import etree
 from PIL import Image, ImageDraw, ImageFilter
 from os import walk
 
-textures_path = "./kenney/Data/Textures/kenney/City_Kit_(Suburban)"
+textures_path = "./kenney/Data/Textures/kenney/City_Kit_(Roads)"
 
 index = 0
 root_element = etree.Element('root')
