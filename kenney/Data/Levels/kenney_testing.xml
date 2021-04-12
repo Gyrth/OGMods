@@ -28,10 +28,10 @@
 </LevelScriptParameters>
 <NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
 <Sky>
-    <DomeTexture>Data/Textures/skies/CloudySunset.tga</DomeTexture>
-    <SunAngularRad>0.153056</SunAngularRad>
-    <SunColorAngle>353.589</SunColorAngle>
-    <RayToSun r0="0.293037" r1="0.687405" r2="0.664533" />
+    <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
+    <SunAngularRad>0.112145</SunAngularRad>
+    <SunColorAngle>6.8534</SunColorAngle>
+    <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
     <CameraObject t0="38.1165" t1="29.5872" t2="-6.65367" s0="1" s1="1" s2="1" q0="0.0126061" q1="0.956632" q2="-0.288" q3="0.0418728" euler_x="-2.55674" euler_y="0.0874864" euler_z="3.14159" id="0">
