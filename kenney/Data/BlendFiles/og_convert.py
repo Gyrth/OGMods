@@ -40,7 +40,8 @@ def get_models(import_path, export_path, info):
     split_path = import_path.split("/")
     category_name = split_path[len(split_path) - 2]
     resolved_export_path = bpy.path.abspath(export_path)
-    resolved_import_path = bpy.path.abspath(import_path + "Models")
+    resolved_import_path = bpy.path.abspath(import_path + "Models/OBJ format")
+#    resolved_import_path = bpy.path.abspath(import_path + "Models")
     resolved_thumbnail_path = bpy.path.abspath(import_path + "Isometric")
     print("Import path : ", resolved_import_path)
     print("Export path : ", resolved_export_path)
@@ -195,10 +196,11 @@ def get_models(import_path, export_path, info):
                 to_thumbnail_path = resolved_export_path + "/UI/spawner/thumbs/kenney/" + category_name + "/"
                 if not os.path.exists(to_thumbnail_path):
                     os.makedirs(to_thumbnail_path)
-                copyfile(from_thumbnail_path + "_NE.png", to_thumbnail_path + "/" + model_name + "_NE.png")
-                copyfile(from_thumbnail_path + "_NW.png", to_thumbnail_path + "/" + model_name + "_NW.png")
-                copyfile(from_thumbnail_path + "_SE.png", to_thumbnail_path + "/" + model_name + "_SE.png")
-                copyfile(from_thumbnail_path + "_SW.png", to_thumbnail_path + "/" + model_name + "_SW.png")
+                
+#                extentions = ["_NE.png", "_NW.png", "_SE.png", "_SW.png"]
+                extentions = ["_N.png", "_E.png", "_S.png", "_W.png"]
+                for ext in extentions:
+                    copyfile(from_thumbnail_path + ext, to_thumbnail_path + "/" + model_name + ext)
             
             #Create the xml to be inserted into the mod.xml.
             item = root.createElement('Item')
@@ -206,7 +208,7 @@ def get_models(import_path, export_path, info):
             item_title = model_name.replace("_", " ")
             item.setAttribute('title', item_title.title())
             item.setAttribute('path', "Data/Objects/kenney/" + category_name + "/" + model_name + ".xml")
-            item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/kenney/" + category_name + "/" + model_name + "_NE.png")
+            item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/kenney/" + category_name + "/" + model_name + "_N.png")
               
             xml.appendChild(item)
             clear()
