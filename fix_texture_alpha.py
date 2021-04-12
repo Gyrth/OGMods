@@ -6,13 +6,14 @@ from lxml import etree
 from PIL import Image, ImageDraw, ImageFilter
 from os import walk
 
-textures_path = "./kenney/Data/Textures/kenney/Retro_Urban_Kit"
+textures_path = "./kenney/Data/Textures/kenney/City_Kit_(Suburban)"
 
 index = 0
 root_element = etree.Element('root')
 data = {}
 item_list = {}
-plant_names = ["tree_large", "tree_shrub", "tree_small", "treePine_small", "treePine_large", "balconyLadder_bottom", "balconyLadder_top", "balcony_typeA"]
+# plant_names = ["tree_large", "tree_shrub", "tree_small", "treePine_small", "treePine_large", "balconyLadder_bottom", "balconyLadder_top", "balcony_typeA"]
+plant_names = []
 
 def fix_texture_alpha(path):
 	resolved_path =  os.path.abspath(path)

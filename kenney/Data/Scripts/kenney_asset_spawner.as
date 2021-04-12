@@ -46,17 +46,25 @@ void PostInit(){
 	array<ModID> mod_ids =  GetActiveModSids();
 	int x_counter = 0;
 	int y_counter = 0;
+	int z_counter = 0;
+	string category = "";
 
 	for(uint i = 0; i < mod_ids.size(); i++){
 		if(ModGetID(mod_ids[i]) == "kenney-assets"){
 			array<SpawnerItem> spawner_items = ModGetSpawnerItems(mod_ids[i]);
 			int row_size = int(sqrt(spawner_items.size()));
 			for(uint j = 0; j < spawner_items.size(); j++){
+				if(category != spawner_items[j].GetCategory()){
+					category = spawner_items[j].GetCategory();
+					z_counter++;
+					x_counter = 0;
+					y_counter = 0;
+				}
 				string path = spawner_items[j].GetPath();
 				int object_id = CreateObject(path, true);
 				Object@ obj = ReadObjectFromID(object_id);
 
-				obj.SetTranslation(vec3(15.0f * x_counter, 0.0f, 15.0f * y_counter));
+				obj.SetTranslation(vec3(15.0f * x_counter, 15.0f * z_counter, 15.0f * y_counter));
 				obj.SetSelectable(true);
 				obj.SetTranslatable(true);
 				obj.SetRotatable(true);
