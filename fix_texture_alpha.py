@@ -32,7 +32,7 @@ def fix_texture_alpha(path):
 				width, height = im_rgba.size
 				for y in range(height):
 					for x in range(width):
-						if pixdata[x, y] < (15, 15, 15, 255):
+						if pixdata[x, y] < (20, 20, 20, 255):
 							pixdata[x, y] = (255, 255, 255, 0)
 				im_rgba.save(resolved_path + "/" + model_path)
 				continue

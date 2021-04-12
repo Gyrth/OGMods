@@ -58,7 +58,7 @@ void PostInit(){
 				obj.SetTranslation(vec3(15.0f * x_counter, 0.0f, 15.0f * y_counter));
 				obj.SetSelectable(true);
 				x_counter++;
-				if(x_counter > 10){
+				if(x_counter > spawner_items.size() / 2){
 					x_counter = 0;
 					y_counter++;
 				}
