@@ -113,5 +113,5 @@ bool HasFocus(){
 }
 
 bool DialogueCameraControl() {
-	return EditorModeActive()?false:true;
+	return false;
 }
