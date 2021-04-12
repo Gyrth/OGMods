@@ -13,7 +13,7 @@ root_element = etree.Element('root')
 data = {}
 item_list = {}
 # plant_names = ["tree_large", "tree_shrub", "tree_small", "treePine_small", "treePine_large", "balconyLadder_bottom", "balconyLadder_top", "balcony_typeA"]
-plant_names = []
+plant_names = ["fenceStraight", "fenceCurved"]
 
 def fix_texture_alpha(path):
 	resolved_path =  os.path.abspath(path)

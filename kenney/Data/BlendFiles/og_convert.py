@@ -17,21 +17,21 @@ from shutil import copyfile
 
 bpy.types.Scene.import_path = StringProperty(subtype='DIR_PATH', name="Import Path")
 bpy.types.Scene.export_path = StringProperty(subtype='FILE_PATH', name="Export Path")
-bpy.types.Scene.import_plants = BoolProperty(name="Import Plants")
-bpy.types.Scene.import_terrain = BoolProperty(name="Import Terrain")
-bpy.types.Scene.draw_during_import = BoolProperty(name="Draw During Import")
-bpy.types.Scene.create_materials = BoolProperty(name="Create Materials")
+bpy.types.Scene.export_xml = BoolProperty(name="Export XML")
+bpy.types.Scene.export_thumbnails = BoolProperty(name="Export Thumbnails")
+bpy.types.Scene.export_model = BoolProperty(name="Export Model")
+bpy.types.Scene.export_texture = BoolProperty(name="Export Texture")
 
 load_models = True
-draw_during_import = True
-import_plants = False
-import_terrain = False
-create_materials = True
+export_model = True
+export_xml = False
+export_thumbnails = False
+export_texture = True
 
 cached_object_names = []
 cached_object_meshes = []
 #plant_names = ["tree_large", "tree_shrub", "tree_small", "treePine_small", "treePine_large", "balconyLadder_bottom", "balconyLadder_top", "balcony_typeA"]
-plant_names = []
+plant_names = ["fenceStraight", "fenceCurved"]
 double_sided_names = []
 
 def get_models(import_path, export_path, info):
@@ -39,7 +39,7 @@ def get_models(import_path, export_path, info):
     split_path = import_path.split("/")
     category_name = split_path[len(split_path) - 2]
     resolved_export_path = bpy.path.abspath(export_path)
-    resolved_import_path = bpy.path.abspath(import_path + "Models")
+    resolved_import_path = bpy.path.abspath(import_path + "Models/OBJ format")
     resolved_thumbnail_path = bpy.path.abspath(import_path + "Isometric")
     print("Import path : ", resolved_import_path)
     print("Export path : ", resolved_export_path)
@@ -117,21 +117,23 @@ def get_models(import_path, export_path, info):
             bpy.ops.object.mode_set(mode='OBJECT')
             
             #Export the newly created image.
-            image_export_path = resolved_export_path + "/Textures/kenney/" + category_name + "/"
-            if not os.path.exists(image_export_path):
-                os.makedirs(image_export_path)
-            bake_image.filepath_raw = image_export_path + model_name + ".png"
-            bake_image.file_format = 'PNG'
-            bake_image.save()
+            if export_texture:
+                image_export_path = resolved_export_path + "/Textures/kenney/" + category_name + "/"
+                if not os.path.exists(image_export_path):
+                    os.makedirs(image_export_path)
+                bake_image.filepath_raw = image_export_path + model_name + ".png"
+                bake_image.file_format = 'PNG'
+                bake_image.save()
             
             #Remove the old uvmap and make sure the new uvmap is the main one.
             obj.data.uv_layers.remove(obj.data.uv_layers["UVMap"])
             
             #Export the obj file.
-            obj_export_path = resolved_export_path + "/Models/kenney/" + category_name + "/"
-            if not os.path.exists(obj_export_path):
-                os.makedirs(obj_export_path)
-            bpy.ops.export_scene.obj(filepath=obj_export_path + model_name + ".obj", use_materials=False)
+            if export_model:
+                obj_export_path = resolved_export_path + "/Models/kenney/" + category_name + "/"
+                if not os.path.exists(obj_export_path):
+                    os.makedirs(obj_export_path)
+                bpy.ops.export_scene.obj(filepath=obj_export_path + model_name + ".obj", use_materials=False)
             
             #Create the object xml.
             #First the model path.
@@ -178,22 +180,25 @@ def get_models(import_path, export_path, info):
             xml_str = object_xml_root.toprettyxml(indent ="\t")
             print(xml_str)
             
-            xml_export_path = resolved_export_path + "/Objects/kenney/" + category_name + "/"
-            if not os.path.exists(xml_export_path):
-                os.makedirs(xml_export_path)
-            
-            with open(xml_export_path + model_name + ".xml", "w", encoding="utf8") as outfile:
-                outfile.write(xml_str)
+            #Export the XML.
+            if export_xml:
+                xml_export_path = resolved_export_path + "/Objects/kenney/" + category_name + "/"
+                if not os.path.exists(xml_export_path):
+                    os.makedirs(xml_export_path)
+                
+                with open(xml_export_path + model_name + ".xml", "w", encoding="utf8") as outfile:
+                    outfile.write(xml_str)
             
             #Copy the thumbnails from the import folder to the export folder.
-            from_thumbnail_path = resolved_thumbnail_path + "/" + model_name
-            to_thumbnail_path = resolved_export_path + "/UI/spawner/thumbs/kenney/" + category_name + "/"
-            if not os.path.exists(to_thumbnail_path):
-                os.makedirs(to_thumbnail_path)
-            copyfile(from_thumbnail_path + "_NE.png", to_thumbnail_path + "/" + model_name + "_NE.png")
-            copyfile(from_thumbnail_path + "_NW.png", to_thumbnail_path + "/" + model_name + "_NW.png")
-            copyfile(from_thumbnail_path + "_SE.png", to_thumbnail_path + "/" + model_name + "_SE.png")
-            copyfile(from_thumbnail_path + "_SW.png", to_thumbnail_path + "/" + model_name + "_SW.png")
+            if export_thumbnails:
+                from_thumbnail_path = resolved_thumbnail_path + "/" + model_name
+                to_thumbnail_path = resolved_export_path + "/UI/spawner/thumbs/kenney/" + category_name + "/"
+                if not os.path.exists(to_thumbnail_path):
+                    os.makedirs(to_thumbnail_path)
+                copyfile(from_thumbnail_path + "_NE.png", to_thumbnail_path + "/" + model_name + "_NE.png")
+                copyfile(from_thumbnail_path + "_NW.png", to_thumbnail_path + "/" + model_name + "_NW.png")
+                copyfile(from_thumbnail_path + "_SE.png", to_thumbnail_path + "/" + model_name + "_SE.png")
+                copyfile(from_thumbnail_path + "_SW.png", to_thumbnail_path + "/" + model_name + "_SW.png")
             
             #Create the xml to be inserted into the mod.xml.
             item = root.createElement('Item')
@@ -237,15 +242,15 @@ class ImportOperator(Operator):
     
     def execute(self, context):
         clear()
-        global draw_during_import
-        global import_plants
-        global import_terrain
-        global create_materials
+        global export_model
+        global export_xml
+        global export_thumbnails
+        global export_texture
         
-        draw_during_import = context.scene.draw_during_import
-        import_plants = context.scene.import_plants
-        import_terrain = context.scene.import_terrain
-        create_materials = context.scene.create_materials
+        export_model = context.scene.export_model
+        export_xml = context.scene.export_xml
+        export_thumbnails = context.scene.export_thumbnails
+        export_texture = context.scene.export_texture
         
         get_models(context.scene.import_path, context.scene.export_path, self)
         return {'FINISHED'}
@@ -268,10 +273,10 @@ class OGLevelImport(Panel):
         layout = self.layout
         self.layout.prop(context.scene, "import_path")
         self.layout.prop(context.scene, "export_path")
-        self.layout.prop(context.scene, "import_plants")
-        self.layout.prop(context.scene, "import_terrain")
-        self.layout.prop(context.scene, "draw_during_import")
-        self.layout.prop(context.scene, "create_materials")
+        self.layout.prop(context.scene, "export_xml")
+        self.layout.prop(context.scene, "export_thumbnails")
+        self.layout.prop(context.scene, "export_model")
+        self.layout.prop(context.scene, "export_texture")
         
         row = layout.row()
         row.operator(ImportOperator.bl_idname, text="Import", icon="LIBRARY_DATA_DIRECT")
