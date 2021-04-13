@@ -30,6 +30,8 @@ bool steal_focus = false;
 string input_query;
 int set_position = -1;
 int spawn_id = -1;
+bool update_animated_thumbnail = false;
+float animated_thumbnail_update = 0.0f;
 
 // Coloring options
 vec4 background_color();
@@ -56,6 +58,9 @@ class GUISpawnerItem{
 	TextureAssetRef icon;
 	SpawnerItem spawner_item;
 	bool has_thumbnail = false;
+	bool animated_thumbnail = false;
+	array<TextureAssetRef> anims;
+	int thumbnail_index = 0;
 
 	GUISpawnerItem(string _category, string _title, string _path, int _id, TextureAssetRef _icon, SpawnerItem _spawner_item){
 		category = _category;
@@ -69,10 +74,45 @@ class GUISpawnerItem{
 	void SetThumbnail(){
 		//If no thumbnail was set, use the default one.
 		if(!DatabaseThumbnailSearch()){
-			if(spawner_item.GetThumbnail() != "" && FileExists(spawner_item.GetThumbnail())){
-				icon = LoadTexture(spawner_item.GetThumbnail(), TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
+			string thumbnail_path = spawner_item.GetThumbnail();
+			if(thumbnail_path != "" && FileExists(thumbnail_path)){
+				if(thumbnail_path.length() > 7){
+					if(thumbnail_path.substr(thumbnail_path.length() - 7, 8) == "_NE.png"){
+						string anim_path = thumbnail_path.substr(0, thumbnail_path.length() - 7);
+
+						Log(warning, "Found animated thumbnail");
+						array<string> extentions = {"_NE.png", "_NW.png", "_SW.png", "_SE.png"};
+						for(uint i = 0; i < extentions.size(); i++){
+							if(!FileExists(anim_path + extentions[i])){
+								Log(warning, "Does not exist " + anim_path + extentions[i]);
+								break;
+							}
+
+							TextureAssetRef image = LoadTexture(anim_path + extentions[i], TextureLoadFlags_NoLiveUpdate);
+							if(!image.IsValid()){
+								continue;
+							}
+							anims.insertLast(image);
+						}
+						animated_thumbnail = true;
+						has_thumbnail = true;
+						return;
+					}
+				}
+				has_thumbnail = true;
+				icon = LoadTexture(thumbnail_path, TextureLoadFlags_NoMipmap | TextureLoadFlags_NoReduce);
 			}
 		}
+	}
+
+	void UpdateThumbnailAnimation(){
+		if(thumbnail_index >= int(anims.size())){
+			thumbnail_index = 0;
+		}
+
+		icon = anims[thumbnail_index];
+
+		thumbnail_index++;
 	}
 
 	bool DatabaseThumbnailSearch(){
@@ -123,7 +163,10 @@ class GUISpawnerItem{
 
 		if(!has_thumbnail && ImGui_IsItemVisible()){
 			SetThumbnail();
-			has_thumbnail = true;
+		}
+
+		if(update_animated_thumbnail && animated_thumbnail && ImGui_IsItemVisible()){
+			UpdateThumbnailAnimation();
 		}
 	}
 }
@@ -507,6 +550,12 @@ void DrawGUI(){
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(550,450));
 		ImGui_Begin("Spawner", show, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_MenuBar);
 		ImGui_PopStyleVar(1);
+
+		update_animated_thumbnail = false;
+		if(ui_time - animated_thumbnail_update > 1.0f){
+			animated_thumbnail_update = ui_time;
+			update_animated_thumbnail = true;
+		}
 
 		if(steal_focus){
 			steal_focus = false;
