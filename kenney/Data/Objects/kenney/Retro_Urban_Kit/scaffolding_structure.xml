@@ -3,5 +3,6 @@
 	<Model>Data/Models/kenney/Retro_Urban_Kit/scaffolding_structure.obj</Model>
 	<ColorMap>Data/Textures/kenney/Retro_Urban_Kit/scaffolding_structure.png</ColorMap>
 	<NormalMap>Data/Textures/normal.tga</NormalMap>
-	<ShaderName>envobject #TANGENT</ShaderName>
+	<flags double_sided="true"/>
+	<ShaderName>plant</ShaderName>
 </Object>

@@ -3,5 +3,6 @@
 	<Model>Data/Models/kenney/Retro_Urban_Kit/wallFence.obj</Model>
 	<ColorMap>Data/Textures/kenney/Retro_Urban_Kit/wallFence.png</ColorMap>
 	<NormalMap>Data/Textures/normal.tga</NormalMap>
-	<ShaderName>envobject #TANGENT</ShaderName>
+	<flags double_sided="true"/>
+	<ShaderName>plant</ShaderName>
 </Object>
