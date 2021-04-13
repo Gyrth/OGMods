@@ -39,6 +39,7 @@ for dirpath, dnames, fnames in walk("./"):
 			image_path = dirpath + "/" + f
 			print(image_path)
 			im = Image.open(image_path)
-			im = trim(im)
-			im = make_square(im)
+			# im = trim(im)
+			# im = make_square(im)
+			im = im.resize((256, 256))
 			im.save(image_path, "PNG")
