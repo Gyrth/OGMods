@@ -30,6 +30,7 @@ bool steal_focus = false;
 string input_query;
 int set_position = -1;
 int spawn_id = -1;
+int load_wait_counter = 0;
 
 // Coloring options
 vec4 background_color();
@@ -41,6 +42,7 @@ vec4 text_color();
 vec4 transparent(0.0f);
 
 TextureAssetRef youdied_texture = LoadTexture("Data/Images/youdied.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
+TextureAssetRef loading_texture = LoadTexture("Data/Images/spawner_loading.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/whaleman.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
 array<GUISpawnerItem@> all_items;
@@ -358,6 +360,18 @@ void Update(int paused){
 				ClearSpawnSettings();
 			}
 		}
+
+		if(show && !retrieved_item_list){
+			//To be able to show the Loading... image we need to wait a couple of updates.
+			if(load_wait_counter > 5){
+				LoadThumbnailDatabase();
+				GetAllSpawnerItems();
+				categories = SortIntoCategories(QuerySpawnerItems(""));
+				retrieved_item_list = true;
+			}
+			load_wait_counter++;
+		}
+
 		if(GetInputPressed(0, "i")){
 			show = !show;
 			SetPlaceholderVisible(show);
@@ -374,13 +388,6 @@ void Update(int paused){
 			}
 		}else if(set_position == 0){
 			set_position -= 1;
-		}
-
-		if(show && !retrieved_item_list){
-			LoadThumbnailDatabase();
-			GetAllSpawnerItems();
-			categories = SortIntoCategories(QuerySpawnerItems(""));
-			retrieved_item_list = true;
 		}
 
 	}else if(show){
@@ -672,14 +679,20 @@ void DrawGUI(){
 		ImGui_EndChild();
 
 		ImGui_PushStyleColor(ImGuiCol_FrameBg, transparent);
-		if(!ImGui_IsWindowCollapsed()){
-			if(ImGui_BeginChildFrame(55, vec2(-1, -1), ImGuiWindowFlags_AlwaysAutoResize)){
-				for(uint i = 0; i < categories.size(); i++){
-					AddCategory(categories[i]);
+		if(!retrieved_item_list){
+			float image_width = ImGui_GetContentRegionAvailWidth();
+			ImGui_Image(loading_texture, vec2(image_width, image_width / 2.0f), vec2(0,0), vec2(1,1), vec4(1.0f, 1.0f, 1.0f, 0.15f));
+		}else{
+			if(!ImGui_IsWindowCollapsed()){
+				if(ImGui_BeginChildFrame(55, vec2(-1, -1), ImGuiWindowFlags_AlwaysAutoResize)){
+					for(uint i = 0; i < categories.size(); i++){
+						AddCategory(categories[i]);
+					}
+					ImGui_EndChildFrame();
 				}
-				ImGui_EndChildFrame();
 			}
 		}
+
 		ImGui_End();
 		ImGui_PopStyleColor(19);
 	}
