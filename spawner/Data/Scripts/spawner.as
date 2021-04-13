@@ -138,6 +138,15 @@ class GUISpawnerItem{
 		has_thumbnail = true;
 	}
 
+	void ClearThumbnail(){
+		for(uint i = 0; i < anims.size(); i++){
+			anims[i].Clear();
+		}
+		anims.resize(0);
+		icon = default_texture;
+		has_thumbnail = false;
+	}
+
 	void UpdateThumbnailAnimation(){
 		if(ui_time - thumbnail_update_timer > 0.5f){
 			thumbnail_update_timer = ui_time;
@@ -204,6 +213,8 @@ class GUISpawnerItem{
 
 		if(!has_thumbnail && ImGui_IsItemVisible()){
 			SetThumbnail();
+		}else if(has_thumbnail && !ImGui_IsItemVisible()){
+			ClearThumbnail();
 		}
 	}
 }
