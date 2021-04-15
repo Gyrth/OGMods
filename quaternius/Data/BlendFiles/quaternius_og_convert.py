@@ -104,13 +104,16 @@ def get_models(import_path, export_path, mod_name, info):
                         node.interpolation = 'Closest'
                     elif node.type=="EMISSION":
                         color = node.inputs['Color'].default_value
-                        print(material.name, color[0], color[1], color[2])
-                        
                         outputnode = node.outputs['Emission'].links[0].to_node
                         newnode = material.node_tree.nodes.new('ShaderNodeBsdfDiffuse')
                         newnode.inputs['Color'].default_value = color
                         material.node_tree.links.new(newnode.outputs[0], outputnode.inputs[0])
-                        
+                    elif node.type=="BSDF_GLOSSY":
+                        color = node.inputs['Color'].default_value
+                        outputnode = node.outputs['BSDF'].links[0].to_node
+                        newnode = material.node_tree.nodes.new('ShaderNodeBsdfDiffuse')
+                        newnode.inputs['Color'].default_value = color
+                        material.node_tree.links.new(newnode.outputs[0], outputnode.inputs[0])
                     elif node.type=="BSDF_GLASS":
                         # store the nodes that are connected to it
 #                        inputnode = node.inputs['Color'].links[0].from_nodes
