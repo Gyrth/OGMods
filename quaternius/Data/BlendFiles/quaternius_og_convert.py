@@ -25,12 +25,14 @@ bpy.types.Scene.export_xml = BoolProperty(name="Export XML")
 bpy.types.Scene.export_thumbnails = BoolProperty(name="Export Thumbnails")
 bpy.types.Scene.export_model = BoolProperty(name="Export Model")
 bpy.types.Scene.export_texture = BoolProperty(name="Export Texture")
+bpy.types.Scene.single_object_export = BoolProperty(name="Single Object Export")
 
 load_models = True
 export_model = True
 export_xml = False
 export_thumbnails = False
 export_texture = True
+single_object_export = True
 
 cached_object_names = []
 cached_object_meshes = []
@@ -99,9 +101,12 @@ def get_models(import_path, export_path, mod_name, info):
             if obj.type != 'MESH':
                 continue
             for material in obj.data.materials:
+                did_not_use_nodes = not material.use_nodes
+                orig_color = material.diffuse_color
                 material.use_nodes = True
                 
                 for node in material.node_tree.nodes:
+#                    print(node.type)
                     if node.type == "TEX_IMAGE":
                         node.interpolation = 'Closest'
                     elif node.type=="EMISSION":
@@ -130,6 +135,9 @@ def get_models(import_path, export_path, mod_name, info):
                         newnode = material.node_tree.nodes.new('ShaderNodeBsdfDiffuse')
                         newnode.inputs['Color'].default_value = color
                         material.node_tree.links.new(newnode.outputs[0], outputnode.inputs[0])
+                    elif node.type=="BSDF_PRINCIPLED":
+                        if did_not_use_nodes:
+                            node.inputs['Base Color'].default_value = orig_color
                 
                 bake_texture = material.node_tree.nodes.new('ShaderNodeTexImage')
                 bake_texture.image = bake_image
@@ -143,6 +151,7 @@ def get_models(import_path, export_path, mod_name, info):
             if mesh.type == 'MESH':
                 obj = mesh
                 mesh.select_set(True)
+                mesh.hide_render=False
             else:
                 mesh.select_set(False)
         bpy.context.view_layer.objects.active = obj
@@ -196,7 +205,7 @@ def get_models(import_path, export_path, mod_name, info):
                 orig_uv = layer
                 break
 
-        if not orig_uv is None:
+        if not orig_uv is None and not single_object_export:
             obj.data.uv_layers.remove(orig_uv)
         
         #Export the obj file.
@@ -267,13 +276,18 @@ def get_models(import_path, export_path, mod_name, info):
         item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/" + model_name + ".png")
           
         xml.appendChild(item)
-#        clear()
-        break
+        if single_object_export:
+            break
+        else:
+            clear()
         
     #Write the new spawner items to an xml. This can then be copy pasted to the mod.xml.
     xml_str = root.toprettyxml(indent ="\t")
     with open(resolved_export_path + "/" + mod_name + "_new_assets.xml", "w", encoding="utf8") as outfile:
         outfile.write(xml_str)
+    
+    print("--------------------------------------")
+    print("Done exporting!")
 
 def triangulate_object(obj):
     me = obj.data
@@ -316,11 +330,13 @@ class ImportOperator(Operator):
         global export_xml
         global export_thumbnails
         global export_texture
+        global single_object_export
         
         export_model = context.scene.export_model
         export_xml = context.scene.export_xml
         export_thumbnails = context.scene.export_thumbnails
         export_texture = context.scene.export_texture
+        single_object_export = context.scene.single_object_export
         
         get_models(context.scene.import_path, context.scene.export_path, context.scene.mod_name, self)
         return {'FINISHED'}
@@ -348,6 +364,7 @@ class OGLevelImport(Panel):
         self.layout.prop(context.scene, "export_thumbnails")
         self.layout.prop(context.scene, "export_model")
         self.layout.prop(context.scene, "export_texture")
+        self.layout.prop(context.scene, "single_object_export")
         
         row = layout.row()
         row.operator(ImportOperator.bl_idname, text="Export", icon="LIBRARY_DATA_DIRECT")
