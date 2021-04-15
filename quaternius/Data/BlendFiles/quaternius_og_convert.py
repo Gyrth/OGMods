@@ -55,15 +55,15 @@ def get_models(import_path, export_path, mod_name, info):
     xml = root.createElement('root')
     root.appendChild(xml)
     
-#    obj_file_paths = ["/home/gyrth/Documents/GitHub/OGMods/quaternius/Data/BlendFiles/../../../../../Quaternius/Public Transport Pack/Blends/Taxi.blend"]
-    obj_file_paths = []
+    obj_file_paths = ["/home/gyrth/Documents/GitHub/OGMods/quaternius/Data/BlendFiles/../../../../../Quaternius/Textured Fantasy Nature/Blends/Mushroom.blend"]
+#    obj_file_paths = []
     
-    for dirpath, dnames, fnames in os.walk(resolved_import_path):
-        for f in fnames:
-            if f.endswith(".blend"):
-                obj_path = os.path.join(dirpath, f)
-                print(obj_path);
-                obj_file_paths.append(obj_path)
+#    for dirpath, dnames, fnames in os.walk(resolved_import_path):
+#        for f in fnames:
+#            if f.endswith(".blend"):
+#                obj_path = os.path.join(dirpath, f)
+#                print(obj_path);
+#                obj_file_paths.append(obj_path)
     
     #Import all the obj files.
     for obj_file_path in obj_file_paths:
@@ -125,6 +125,19 @@ def get_models(import_path, export_path, mod_name, info):
         #The angle limit is done in radians not degrees.
         bpy.ops.uv.smart_project(angle_limit = 1.1519, island_margin = 0.01)
         
+        #Create a thumbnail.
+        #Create a texture to render to.
+        bpy.ops.image.new(name="thumbnail", width=1024, height=1024, color=(0.0, 0.0, 0.0, 0.0), alpha=True, generated_type='BLANK', float=False, use_stereo_3d=False)
+        thumbnail_image = bpy.data.images['thumbnail']
+        if export_thumbnails:
+            thumbnail_path = resolved_export_path + "/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/"
+            if not os.path.exists(thumbnail_path):
+                os.makedirs(thumbnail_path)
+            
+            bpy.ops.view3d.camera_to_view_selected()
+            bpy.context.scene.render.filepath = thumbnail_path + "/" + model_name + ".png"
+            bpy.ops.render.render(write_still = True)
+        
         #Now bake the colors and textures from all the materials into one.
         bpy.ops.object.bake(type='DIFFUSE', save_mode='INTERNAL')
         
@@ -147,8 +160,8 @@ def get_models(import_path, export_path, mod_name, info):
                 orig_uv = layer
                 break
 
-        if not orig_uv is None:
-            obj.data.uv_layers.remove(orig_uv)
+#        if not orig_uv is None:
+#            obj.data.uv_layers.remove(orig_uv)
         
         #Export the obj file.
         if export_model:
@@ -208,19 +221,6 @@ def get_models(import_path, export_path, mod_name, info):
             
             with open(xml_export_path + model_name + ".xml", "w", encoding="utf8") as outfile:
                 outfile.write(xml_str)
-        
-        #Create a thumbnail.
-        #Create a texture to render to.
-        bpy.ops.image.new(name="thumbnail", width=1024, height=1024, color=(0.0, 0.0, 0.0, 0.0), alpha=True, generated_type='BLANK', float=False, use_stereo_3d=False)
-        thumbnail_image = bpy.data.images['thumbnail']
-        if export_thumbnails:
-            thumbnail_path = resolved_export_path + "/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/"
-            if not os.path.exists(thumbnail_path):
-                os.makedirs(thumbnail_path)
-            
-            bpy.ops.view3d.camera_to_view_selected()
-            bpy.context.scene.render.filepath = thumbnail_path + "/" + model_name + ".png"
-            bpy.ops.render.render(write_still = True)
                 
         #Create the xml to be inserted into the mod.xml.
         item = root.createElement('Item')
@@ -231,7 +231,7 @@ def get_models(import_path, export_path, mod_name, info):
         item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/" + model_name + ".png")
           
         xml.appendChild(item)
-        clear()
+#        clear()
 #        break
         
     #Write the new spawner items to an xml. This can then be copy pasted to the mod.xml.
