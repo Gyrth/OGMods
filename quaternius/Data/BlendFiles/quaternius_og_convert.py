@@ -154,6 +154,7 @@ def get_models(import_path, export_path, mod_name, info):
                 mesh.hide_render=False
             else:
                 mesh.select_set(False)
+                bpy.data.objects.remove(mesh, do_unlink=True)
         bpy.context.view_layer.objects.active = obj
         
         #Create a thumbnail.
