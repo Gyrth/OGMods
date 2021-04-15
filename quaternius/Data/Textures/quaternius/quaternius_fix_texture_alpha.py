@@ -29,6 +29,12 @@ def fix_texture_alpha(path):
 
 	for image_file_path in image_file_paths:
 		im_rgb = Image.open(image_file_path)
+
+		img2 = im_rgb.resize((1, 1))
+		r, g, b, a = img2.getpixel((0, 0))
+		if a == 5:
+			continue
+
 		im_rgba = im_rgb.copy()
 		if any(plant_name in image_file_path for plant_name in plant_names):
 			pixdata = im_rgba.load()
@@ -39,8 +45,6 @@ def fix_texture_alpha(path):
 						pixdata[x, y] = (255, 255, 255, 0)
 			im_rgba.save(image_file_path)
 			continue
-		# else:
-		# 	continue
 		im_rgba.putalpha(5)
 		im_rgba.save(image_file_path)
 

@@ -55,11 +55,12 @@ def get_models(import_path, export_path, mod_name, info):
     xml = root.createElement('root')
     root.appendChild(xml)
     
+#    obj_file_paths = ["/home/gyrth/Documents/GitHub/OGMods/quaternius/Data/BlendFiles/../../../../../Quaternius/Public Transport Pack/Blends/Taxi.blend"]
     obj_file_paths = []
     
     for dirpath, dnames, fnames in os.walk(resolved_import_path):
         for f in fnames:
-            if f.endswith(".obj"):
+            if f.endswith(".blend"):
                 obj_path = os.path.join(dirpath, f)
                 print(obj_path);
                 obj_file_paths.append(obj_path)
@@ -69,7 +70,15 @@ def get_models(import_path, export_path, mod_name, info):
         model_name = bpy.path.display_name_from_filepath(obj_file_path)
         print("--------------------------------------")
         print("Model name : " + model_name)
-        imported_object = bpy.ops.import_scene.obj(filepath=obj_file_path)
+#        imported_object = bpy.ops.import_scene.obj(filepath=obj_file_path)
+        
+        files = []
+        with bpy.data.libraries.load(obj_file_path) as (data_from, data_to):
+            for name in data_from.objects:
+                files.append({'name': name})
+
+        bpy.ops.wm.append(directory=obj_file_path+"/Object/", files=files)
+        
         obj_objects = bpy.context.selected_objects[:]
         
         object_xml_root = minidom.Document()
@@ -96,16 +105,13 @@ def get_models(import_path, export_path, mod_name, info):
                 bake_texture.image = bake_image
                 bake_texture.interpolation = 'Closest'
                 
-                bsdf = material.node_tree.nodes["Principled BSDF"]
-                bsdf.inputs['Alpha'].default_value = 1.0
-                
                 nodes = material.node_tree.nodes
                 nodes.active = bake_texture
             
         obj = obj_objects[0]
         obj.select_set(True)
         bpy.context.view_layer.objects.active = obj
-        obj.scale = (1.0, 1.0, 1.0)
+        bpy.ops.object.join()
         
         baked_uv = obj.data.uv_layers.new(name='BakedUV')
         obj.data.uv_layers.active = baked_uv
@@ -115,6 +121,7 @@ def get_models(import_path, export_path, mod_name, info):
         
         #Create a new smart uv map for the new texture.
         bpy.ops.mesh.remove_doubles(threshold=0.0001)
+        bpy.ops.mesh.normals_make_consistent(inside=False)
         #The angle limit is done in radians not degrees.
         bpy.ops.uv.smart_project(angle_limit = 1.1519, island_margin = 0.01)
         
