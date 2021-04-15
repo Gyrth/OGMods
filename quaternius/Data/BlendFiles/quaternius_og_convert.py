@@ -267,8 +267,8 @@ def get_models(import_path, export_path, mod_name, info):
         item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/" + model_name + ".png")
           
         xml.appendChild(item)
-        clear()
-#        break
+#        clear()
+        break
         
     #Write the new spawner items to an xml. This can then be copy pasted to the mod.xml.
     xml_str = root.toprettyxml(indent ="\t")
