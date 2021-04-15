@@ -55,15 +55,15 @@ def get_models(import_path, export_path, mod_name, info):
     xml = root.createElement('root')
     root.appendChild(xml)
     
-    obj_file_paths = ["/home/gyrth/Documents/GitHub/OGMods/quaternius/Data/BlendFiles/../../../../../Quaternius/Textured Fantasy Nature/Blends/Mushroom.blend"]
-#    obj_file_paths = []
+#    obj_file_paths = ["/home/gyrth/Documents/GitHub/OGMods/quaternius/Data/BlendFiles/../../../../../Quaternius/RPG Asset Pack/Blends/Gems.blend"]
+    obj_file_paths = []
     
-#    for dirpath, dnames, fnames in os.walk(resolved_import_path):
-#        for f in fnames:
-#            if f.endswith(".blend"):
-#                obj_path = os.path.join(dirpath, f)
-#                print(obj_path);
-#                obj_file_paths.append(obj_path)
+    for dirpath, dnames, fnames in os.walk(resolved_import_path):
+        for f in fnames:
+            if f.endswith(".blend"):
+                obj_path = os.path.join(dirpath, f)
+                print(obj_path);
+                obj_file_paths.append(obj_path)
     
     #Import all the obj files.
     for obj_file_path in obj_file_paths:
@@ -94,12 +94,35 @@ def get_models(import_path, export_path, mod_name, info):
                 area.spaces.active.image = bake_image
         
         for obj in obj_objects:
+            if obj.type != 'MESH':
+                continue
             for material in obj.data.materials:
                 material.use_nodes = True
                 
                 for node in material.node_tree.nodes:
                     if node.type == "TEX_IMAGE":
                         node.interpolation = 'Closest'
+                    elif node.type=="EMISSION":
+                        color = node.inputs['Color'].default_value
+                        print(material.name, color[0], color[1], color[2])
+                        
+                        outputnode = node.outputs['Emission'].links[0].to_node
+                        newnode = material.node_tree.nodes.new('ShaderNodeBsdfDiffuse')
+                        newnode.inputs['Color'].default_value = color
+                        material.node_tree.links.new(newnode.outputs[0], outputnode.inputs[0])
+                        
+                    elif node.type=="BSDF_GLASS":
+                        # store the nodes that are connected to it
+#                        inputnode = node.inputs['Color'].links[0].from_nodes
+                        color = node.inputs['Color'].default_value
+                        outputnode = node.outputs['BSDF'].links[0].to_node
+                        # remove the node
+#                        material.node_tree.nodes.remove(node)
+                        # add the nodegroup
+                        newnode = material.node_tree.nodes.new('ShaderNodeBsdfDiffuse')
+                        newnode.inputs['Color'].default_value = color
+                        # relink everything
+                        material.node_tree.links.new(newnode.outputs[0], outputnode.inputs[0])
                 
                 bake_texture = material.node_tree.nodes.new('ShaderNodeTexImage')
                 bake_texture.image = bake_image
@@ -108,22 +131,14 @@ def get_models(import_path, export_path, mod_name, info):
                 nodes = material.node_tree.nodes
                 nodes.active = bake_texture
             
-        obj = obj_objects[0]
-        obj.select_set(True)
+        obj = None
+        for mesh in obj_objects:
+            if mesh.type == 'MESH':
+                obj = mesh
+                mesh.select_set(True)
+            else:
+                mesh.select_set(False)
         bpy.context.view_layer.objects.active = obj
-        bpy.ops.object.join()
-        
-        baked_uv = obj.data.uv_layers.new(name='BakedUV')
-        obj.data.uv_layers.active = baked_uv
-        
-        bpy.ops.object.mode_set(mode='EDIT')
-        bpy.ops.mesh.select_all(action='SELECT')
-        
-        #Create a new smart uv map for the new texture.
-        bpy.ops.mesh.remove_doubles(threshold=0.0001)
-        bpy.ops.mesh.normals_make_consistent(inside=False)
-        #The angle limit is done in radians not degrees.
-        bpy.ops.uv.smart_project(angle_limit = 1.1519, island_margin = 0.01)
         
         #Create a thumbnail.
         #Create a texture to render to.
@@ -138,10 +153,24 @@ def get_models(import_path, export_path, mod_name, info):
             bpy.context.scene.render.filepath = thumbnail_path + "/" + model_name + ".png"
             bpy.ops.render.render(write_still = True)
         
+        bpy.ops.object.join()
+        
+        baked_uv = obj.data.uv_layers.new(name='BakedUV')
+        obj.data.uv_layers.active = baked_uv
+        
+        bpy.ops.object.mode_set(mode='EDIT')
+        bpy.ops.mesh.select_all(action='SELECT')
+        
+        #Create a new smart uv map for the new texture.
+        bpy.ops.mesh.remove_doubles(threshold=0.0001)
+        bpy.ops.mesh.normals_make_consistent(inside=False)
+        #The angle limit is done in radians not degrees.
+        bpy.ops.uv.smart_project(angle_limit = 1.1519, island_margin = 0.01)
+        
+        bpy.ops.object.mode_set(mode='OBJECT')
         #Now bake the colors and textures from all the materials into one.
         bpy.ops.object.bake(type='DIFFUSE', save_mode='INTERNAL')
         
-        bpy.ops.object.mode_set(mode='OBJECT')
         triangulate_object(bpy.context.active_object)
         
         #Export the newly created image.
@@ -160,8 +189,8 @@ def get_models(import_path, export_path, mod_name, info):
                 orig_uv = layer
                 break
 
-#        if not orig_uv is None:
-#            obj.data.uv_layers.remove(orig_uv)
+        if not orig_uv is None:
+            obj.data.uv_layers.remove(orig_uv)
         
         #Export the obj file.
         if export_model:
@@ -231,7 +260,7 @@ def get_models(import_path, export_path, mod_name, info):
         item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/" + model_name + ".png")
           
         xml.appendChild(item)
-#        clear()
+        clear()
 #        break
         
     #Write the new spawner items to an xml. This can then be copy pasted to the mod.xml.
