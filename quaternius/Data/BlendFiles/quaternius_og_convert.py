@@ -65,6 +65,8 @@ def get_models(import_path, export_path, mod_name, info):
                 print(obj_path);
                 obj_file_paths.append(obj_path)
     
+    random.shuffle(obj_file_paths)
+    
     #Import all the obj files.
     for obj_file_path in obj_file_paths:
         model_name = bpy.path.display_name_from_filepath(obj_file_path)
@@ -103,28 +105,30 @@ def get_models(import_path, export_path, mod_name, info):
                     if node.type == "TEX_IMAGE":
                         node.interpolation = 'Closest'
                     elif node.type=="EMISSION":
+                        if not len(node.outputs['Emission'].links) > 0:
+                            continue
                         color = node.inputs['Color'].default_value
                         outputnode = node.outputs['Emission'].links[0].to_node
                         newnode = material.node_tree.nodes.new('ShaderNodeBsdfDiffuse')
                         newnode.inputs['Color'].default_value = color
                         material.node_tree.links.new(newnode.outputs[0], outputnode.inputs[0])
                     elif node.type=="BSDF_GLOSSY":
+                        if not len(node.outputs['BSDF'].links) > 0:
+                            continue
                         color = node.inputs['Color'].default_value
                         outputnode = node.outputs['BSDF'].links[0].to_node
                         newnode = material.node_tree.nodes.new('ShaderNodeBsdfDiffuse')
                         newnode.inputs['Color'].default_value = color
                         material.node_tree.links.new(newnode.outputs[0], outputnode.inputs[0])
                     elif node.type=="BSDF_GLASS":
-                        # store the nodes that are connected to it
+                        if not len(node.outputs['BSDF'].links) > 0:
+                            continue
 #                        inputnode = node.inputs['Color'].links[0].from_nodes
                         color = node.inputs['Color'].default_value
                         outputnode = node.outputs['BSDF'].links[0].to_node
-                        # remove the node
 #                        material.node_tree.nodes.remove(node)
-                        # add the nodegroup
                         newnode = material.node_tree.nodes.new('ShaderNodeBsdfDiffuse')
                         newnode.inputs['Color'].default_value = color
-                        # relink everything
                         material.node_tree.links.new(newnode.outputs[0], outputnode.inputs[0])
                 
                 bake_texture = material.node_tree.nodes.new('ShaderNodeTexImage')
