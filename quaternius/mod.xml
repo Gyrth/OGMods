@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<Mod>
+	<Id>quaternius-assets</Id>
+	<Name>Quaternius Assets</Name>
+	<Version>0.1.0</Version>
+	<Author>Gyrth</Author>
+	<Category>Quaternius Assets</Category>
+	<Thumbnail>Data/Images/quaternius_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/quaternius_full.jpg</PreviewImage>
+	<Description>Assets made by Quaternius (www.quaternius.com) in a bunch of different categories and themes. I've converted them so they are directly usable in the OG engine from the spawner menu.</Description>
+	<Tag>scripting</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<Level title="Quaternius Assets Testing" thumbnail="Images/quaternius_full.jpg">quaternius_testing.xml</Level>
+
+	<Item category="Quaternius Simple Nature Pack" title="Grass2" path="Data/Objects/quaternius/Simple_Nature_Pack/Grass2.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Grass2.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Grass3" path="Data/Objects/quaternius/Simple_Nature_Pack/Grass3.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Grass3.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Bush2" path="Data/Objects/quaternius/Simple_Nature_Pack/Bush2.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Bush2.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Rock1" path="Data/Objects/quaternius/Simple_Nature_Pack/Rock1.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Rock1.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Rock3" path="Data/Objects/quaternius/Simple_Nature_Pack/Rock3.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Rock3.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Tree2" path="Data/Objects/quaternius/Simple_Nature_Pack/Tree2.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Tree2.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Tree3" path="Data/Objects/quaternius/Simple_Nature_Pack/Tree3.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Tree3.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Bush1" path="Data/Objects/quaternius/Simple_Nature_Pack/Bush1.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Bush1.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Tree1" path="Data/Objects/quaternius/Simple_Nature_Pack/Tree1.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Tree1.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Grass1" path="Data/Objects/quaternius/Simple_Nature_Pack/Grass1.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Grass1.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Rock2" path="Data/Objects/quaternius/Simple_Nature_Pack/Rock2.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Rock2.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Tree4" path="Data/Objects/quaternius/Simple_Nature_Pack/Tree4.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Tree4.png"/>
+	<Item category="Quaternius Simple Nature Pack" title="Bush3" path="Data/Objects/quaternius/Simple_Nature_Pack/Bush3.xml" thumbnail="Data/UI/spawner/thumbs/quaternius/Simple_Nature_Pack/Bush3.png"/>
+</Mod>
