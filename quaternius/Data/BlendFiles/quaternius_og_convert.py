@@ -20,6 +20,7 @@ from os.path import isfile, join
 from PIL import Image, ImageDraw, ImageFilter
 from math import pi
 
+bpy.types.Scene.single_object_import_path = StringProperty(subtype='FILE_PATH', name="Single Object Import Path")
 bpy.types.Scene.import_path = StringProperty(subtype='DIR_PATH', name="Import Path")
 bpy.types.Scene.export_path = StringProperty(subtype='FILE_PATH', name="Export Path")
 bpy.types.Scene.mod_name = StringProperty(subtype='FILE_NAME', name="Mod Name")
@@ -44,8 +45,7 @@ cached_object_meshes = []
 plant_names = []
 double_sided_names = []
 
-def get_models(import_path, export_path, mod_name, info):
-    
+def get_models(import_path, single_object_import_path, export_path, mod_name, info):
     split_path = import_path.split("/")
     category_name = split_path[len(split_path) - 2].replace(" ", "_")
     resolved_export_path = bpy.path.abspath(export_path)
@@ -63,12 +63,15 @@ def get_models(import_path, export_path, mod_name, info):
 #    obj_file_paths = ["/home/gyrth/Documents/GitHub/OGMods/quaternius/Data/BlendFiles/../../../../../Quaternius/RPG Asset Pack/Blends/Gems.blend"]
     obj_file_paths = []
     
-    for dirpath, dnames, fnames in os.walk(resolved_import_path):
-        for f in fnames:
-            if f.endswith(".blend"):
-                obj_path = os.path.join(dirpath, f)
-                print(obj_path);
-                obj_file_paths.append(obj_path)
+    if single_object_export:
+        obj_file_paths.append(bpy.path.abspath(single_object_import_path))
+    else:
+        for dirpath, dnames, fnames in os.walk(resolved_import_path):
+            for f in fnames:
+                if f.endswith(".blend"):
+                    obj_path = os.path.join(dirpath, f)
+                    print(obj_path);
+                    obj_file_paths.append(obj_path)
     
     random.shuffle(obj_file_paths)
     
@@ -188,6 +191,9 @@ def get_models(import_path, export_path, mod_name, info):
         
         bpy.ops.object.mode_set(mode='EDIT')
         bpy.ops.mesh.select_all(action='SELECT')
+        
+        #Make sure some of the mesh isn't hidden.
+        bpy.ops.mesh.reveal()
         
         #Create a new smart uv map for the new texture.
         bpy.ops.mesh.remove_doubles(threshold=0.0001)
@@ -394,15 +400,16 @@ class ImportOperator(Operator):
         global export_texture
         global single_object_export
         global fix_texture_alpha
+        global single_object_export
         
         export_model = context.scene.export_model
         export_xml = context.scene.export_xml
         export_thumbnails = context.scene.export_thumbnails
         export_texture = context.scene.export_texture
-        single_object_export = context.scene.single_object_export
         fix_texture_alpha = context.scene.fix_texture_alpha
+        single_object_export = context.scene.single_object_export
         
-        get_models(context.scene.import_path, context.scene.export_path, context.scene.mod_name, self)
+        get_models(context.scene.import_path, context.scene.single_object_import_path, context.scene.export_path, context.scene.mod_name, self)
         return {'FINISHED'}
 
 class ClearOperator(Operator):
@@ -421,6 +428,7 @@ class OGLevelImport(Panel):
 
     def draw(self, context):
         layout = self.layout
+        self.layout.prop(context.scene, "single_object_import_path")
         self.layout.prop(context.scene, "import_path")
         self.layout.prop(context.scene, "export_path")
         self.layout.prop(context.scene, "mod_name")
