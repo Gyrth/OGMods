@@ -103,6 +103,28 @@ def get_models(import_path, export_path, mod_name, info):
             if area.type == 'IMAGE_EDITOR' :
                 area.spaces.active.image = bake_image
         
+        #Remove the old uvmap and make sure the new uvmap is the main one.
+        orig_uv_layers = []
+        obj = None
+        for mesh in obj_objects:
+            if mesh.type == 'MESH':
+                obj = mesh
+                mesh.select_set(True)
+                mesh.hide_render=False
+                
+                for layer in mesh.data.uv_layers:
+                    if layer.name != "BakedUV":
+                        layer.name = "Default"
+                        orig_uv_layers.append(layer)
+            else:
+                mesh.select_set(False)
+                bpy.data.objects.remove(mesh, do_unlink=True)
+        
+            
+        bpy.context.view_layer.objects.active = obj
+        bpy.ops.object.join()
+        obj_objects = bpy.context.selected_objects[:]
+        
         for obj in obj_objects:
             if obj.type != 'MESH':
                 continue
@@ -157,22 +179,9 @@ def get_models(import_path, export_path, mod_name, info):
                 
                 nodes = material.node_tree.nodes
                 nodes.active = bake_texture
-            
-        obj = None
-        for mesh in obj_objects:
-            if mesh.type == 'MESH':
-                obj = mesh
-                mesh.select_set(True)
-                mesh.hide_render=False
-            else:
-                mesh.select_set(False)
-                bpy.data.objects.remove(mesh, do_unlink=True)
-        bpy.context.view_layer.objects.active = obj
         
         #Create a thumbnail.
         create_thumbnails(model_name, mod_name, category_name, resolved_export_path)
-        
-        bpy.ops.object.join()
         
         baked_uv = obj.data.uv_layers.new(name='BakedUV')
         obj.data.uv_layers.active = baked_uv
@@ -200,16 +209,6 @@ def get_models(import_path, export_path, mod_name, info):
             bake_image.filepath_raw = image_export_path + model_name + ".png"
             bake_image.file_format = 'PNG'
             bake_image.save()
-        
-        #Remove the old uvmap and make sure the new uvmap is the main one.
-        orig_uv = None
-        for layer in obj.data.uv_layers:
-            if layer.name == "UVMap":
-                orig_uv = layer
-                break
-
-        if not orig_uv is None and not single_object_export:
-            obj.data.uv_layers.remove(orig_uv)
         
         #Export the obj file.
         if export_model:
