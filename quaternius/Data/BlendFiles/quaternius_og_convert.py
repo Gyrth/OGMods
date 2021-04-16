@@ -284,7 +284,7 @@ def get_models(import_path, export_path, mod_name, info):
     
     fix_texture_alpha(resolved_export_path + "/Textures/")
     print("--------------------------------------")
-    print("Done exporting!")
+    print("Done exporting " + str(len(obj_file_paths)) + " models.")
 
 def create_thumbnails(model_name, mod_name, category_name, resolved_export_path):
     scene = bpy.data.scenes["Scene"]
