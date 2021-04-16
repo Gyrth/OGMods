@@ -27,6 +27,7 @@ bpy.types.Scene.export_xml = BoolProperty(name="Export XML")
 bpy.types.Scene.export_thumbnails = BoolProperty(name="Export Thumbnails")
 bpy.types.Scene.export_model = BoolProperty(name="Export Model")
 bpy.types.Scene.export_texture = BoolProperty(name="Export Texture")
+bpy.types.Scene.fix_texture_alpha = BoolProperty(name="Fix Texture Alpha")
 bpy.types.Scene.single_object_export = BoolProperty(name="Single Object Export")
 
 load_models = True
@@ -35,11 +36,12 @@ export_xml = False
 export_thumbnails = False
 export_texture = True
 single_object_export = True
+fix_texture_alpha = True
 
 cached_object_names = []
 cached_object_meshes = []
 
-plant_names = []
+plant_names = ["Birch", "Pine", "Tree"]
 double_sided_names = []
 
 def get_models(import_path, export_path, mod_name, info):
@@ -70,11 +72,14 @@ def get_models(import_path, export_path, mod_name, info):
     
     random.shuffle(obj_file_paths)
     
+    num_models = len(obj_file_paths)
+    
     #Import all the obj files.
-    for obj_file_path in obj_file_paths:
+    for idx, obj_file_path in enumerate(obj_file_paths):
         model_name = bpy.path.display_name_from_filepath(obj_file_path)
         print("--------------------------------------")
         print("Model name : " + model_name)
+        print("Model number : " + str(idx) + "/" + str(num_models))
 #        imported_object = bpy.ops.import_scene.obj(filepath=obj_file_path)
         
         files = []
@@ -282,7 +287,8 @@ def get_models(import_path, export_path, mod_name, info):
     with open(resolved_export_path + "/" + mod_name + "_new_assets.xml", "w", encoding="utf8") as outfile:
         outfile.write(xml_str)
     
-    fix_texture_alpha(resolved_export_path + "/Textures/")
+    if fix_texture_alpha:
+        fix_texture_alpha(resolved_export_path + "/Textures/" + mod_name + "/" + category_name + "/")
     print("--------------------------------------")
     print("Done exporting " + str(len(obj_file_paths)) + " models.")
 
@@ -382,12 +388,14 @@ class ImportOperator(Operator):
         global export_thumbnails
         global export_texture
         global single_object_export
+        global fix_texture_alpha
         
         export_model = context.scene.export_model
         export_xml = context.scene.export_xml
         export_thumbnails = context.scene.export_thumbnails
         export_texture = context.scene.export_texture
         single_object_export = context.scene.single_object_export
+        fix_texture_alpha = context.scene.fix_texture_alpha
         
         get_models(context.scene.import_path, context.scene.export_path, context.scene.mod_name, self)
         return {'FINISHED'}
@@ -416,6 +424,7 @@ class OGLevelImport(Panel):
         self.layout.prop(context.scene, "export_model")
         self.layout.prop(context.scene, "export_texture")
         self.layout.prop(context.scene, "single_object_export")
+        self.layout.prop(context.scene, "fix_texture_alpha")
         
         row = layout.row()
         row.operator(ImportOperator.bl_idname, text="Export", icon="LIBRARY_DATA_DIRECT")
