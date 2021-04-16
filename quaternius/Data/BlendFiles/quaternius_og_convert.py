@@ -41,7 +41,7 @@ fix_texture_alpha = True
 cached_object_names = []
 cached_object_meshes = []
 
-plant_names = ["Birch", "Pine", "Tree"]
+plant_names = []
 double_sided_names = []
 
 def get_models(import_path, export_path, mod_name, info):
@@ -79,7 +79,7 @@ def get_models(import_path, export_path, mod_name, info):
         model_name = bpy.path.display_name_from_filepath(obj_file_path)
         print("--------------------------------------")
         print("Model name : " + model_name)
-        print("Model number : " + str(idx) + "/" + str(num_models))
+        print("Model number : " + str(idx + 1) + "/" + str(num_models))
 #        imported_object = bpy.ops.import_scene.obj(filepath=obj_file_path)
         
         files = []
@@ -218,55 +218,7 @@ def get_models(import_path, export_path, mod_name, info):
             bpy.ops.export_scene.obj(filepath=obj_export_path + model_name + ".obj", use_materials=False)
         
         #Create the object xml.
-        #First the model path.
-        model_xml = object_xml_root.createElement('Model')
-        model_path = object_xml_root.createTextNode("Data/Models/" + mod_name + "/" + category_name + "/" + model_name + ".obj")
-        model_xml.appendChild(model_path)
-        object_xml.appendChild(model_xml)
-        
-        #Then the colormap.
-        colormap_xml = object_xml_root.createElement('ColorMap')
-        colormap_path = object_xml_root.createTextNode("Data/Textures/" + mod_name + "/" + category_name + "/" + model_name + ".png")
-        colormap_xml.appendChild(colormap_path)
-        object_xml.appendChild(colormap_xml)
-        
-        #The normalmap is all the same.
-        normalmap_xml = object_xml_root.createElement('NormalMap')
-        normalmap_path = object_xml_root.createTextNode("Data/Textures/normal.tga")
-        normalmap_xml.appendChild(normalmap_path)
-        object_xml.appendChild(normalmap_xml)
-        
-        #The shadername is also the same.
-        shadername_xml = object_xml_root.createElement('ShaderName')
-        if any(plant_name in model_name for plant_name in plant_names):
-            shadername_path = object_xml_root.createTextNode("plant")
-            
-            #Add an extra tag for doublesided.
-            flags_xml = object_xml_root.createElement('flags')
-            #Plants are double sided by default.
-            flags_xml.setAttribute('double_sided', 'true')
-            object_xml.appendChild(flags_xml)
-        else:
-            shadername_path = object_xml_root.createTextNode("envobject #TANGENT")
-            #An extra check to see if this object is double sided.
-            if any(double_sided_name in model_name for double_sided_name in double_sided_names):
-                flags_xml = object_xml_root.createElement('flags')
-                flags_xml.setAttribute('double_sided', 'true')
-                object_xml.appendChild(flags_xml)
-            
-        shadername_xml.appendChild(shadername_path)
-        object_xml.appendChild(shadername_xml)
-          
-        xml_str = object_xml_root.toprettyxml(indent ="\t")
-        
-        #Export the XML.
-        if export_xml:
-            xml_export_path = resolved_export_path + "/Objects/" + mod_name + "/" + category_name + "/"
-            if not os.path.exists(xml_export_path):
-                os.makedirs(xml_export_path)
-            
-            with open(xml_export_path + model_name + ".xml", "w", encoding="utf8") as outfile:
-                outfile.write(xml_str)
+        create_object_xml(mod_name, category_name, model_name, object_xml, object_xml_root, resolved_export_path)
                 
         #Create the xml to be inserted into the mod.xml.
         item = root.createElement('Item')
@@ -291,6 +243,59 @@ def get_models(import_path, export_path, mod_name, info):
         fix_texture_alpha(resolved_export_path + "/Textures/" + mod_name + "/" + category_name + "/")
     print("--------------------------------------")
     print("Done exporting " + str(len(obj_file_paths)) + " models.")
+
+def create_object_xml(mod_name, category_name, model_name, object_xml, object_xml_root, resolved_export_path):
+    if not export_xml:
+        return
+    
+    #First the model path.
+    model_xml = object_xml_root.createElement('Model')
+    model_path = object_xml_root.createTextNode("Data/Models/" + mod_name + "/" + category_name + "/" + model_name + ".obj")
+    model_xml.appendChild(model_path)
+    object_xml.appendChild(model_xml)
+    
+    #Then the colormap.
+    colormap_xml = object_xml_root.createElement('ColorMap')
+    colormap_path = object_xml_root.createTextNode("Data/Textures/" + mod_name + "/" + category_name + "/" + model_name + ".png")
+    colormap_xml.appendChild(colormap_path)
+    object_xml.appendChild(colormap_xml)
+    
+    #The normalmap is all the same.
+    normalmap_xml = object_xml_root.createElement('NormalMap')
+    normalmap_path = object_xml_root.createTextNode("Data/Textures/normal.tga")
+    normalmap_xml.appendChild(normalmap_path)
+    object_xml.appendChild(normalmap_xml)
+    
+    #The shadername is also the same.
+    shadername_xml = object_xml_root.createElement('ShaderName')
+    if any(plant_name in model_name for plant_name in plant_names):
+        shadername_path = object_xml_root.createTextNode("plant")
+        
+        #Add an extra tag for doublesided.
+        flags_xml = object_xml_root.createElement('flags')
+        #Plants are double sided by default.
+        flags_xml.setAttribute('double_sided', 'true')
+        object_xml.appendChild(flags_xml)
+    else:
+        shadername_path = object_xml_root.createTextNode("envobject #TANGENT")
+        #An extra check to see if this object is double sided.
+        if any(double_sided_name in model_name for double_sided_name in double_sided_names):
+            flags_xml = object_xml_root.createElement('flags')
+            flags_xml.setAttribute('double_sided', 'true')
+            object_xml.appendChild(flags_xml)
+        
+    shadername_xml.appendChild(shadername_path)
+    object_xml.appendChild(shadername_xml)
+      
+    xml_str = object_xml_root.toprettyxml(indent ="\t")
+    
+    #Export the XML.
+    xml_export_path = resolved_export_path + "/Objects/" + mod_name + "/" + category_name + "/"
+    if not os.path.exists(xml_export_path):
+        os.makedirs(xml_export_path)
+    
+    with open(xml_export_path + model_name + ".xml", "w", encoding="utf8") as outfile:
+        outfile.write(xml_str)
 
 def create_thumbnails(model_name, mod_name, category_name, resolved_export_path):
     scene = bpy.data.scenes["Scene"]
@@ -423,8 +428,8 @@ class OGLevelImport(Panel):
         self.layout.prop(context.scene, "export_thumbnails")
         self.layout.prop(context.scene, "export_model")
         self.layout.prop(context.scene, "export_texture")
-        self.layout.prop(context.scene, "single_object_export")
         self.layout.prop(context.scene, "fix_texture_alpha")
+        self.layout.prop(context.scene, "single_object_export")
         
         row = layout.row()
         row.operator(ImportOperator.bl_idname, text="Export", icon="LIBRARY_DATA_DIRECT")
