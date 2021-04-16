@@ -184,7 +184,7 @@ def get_models(import_path, single_object_import_path, export_path, mod_name, in
                 nodes.active = bake_texture
         
         #Create a thumbnail.
-        create_thumbnails(model_name, mod_name, category_name, resolved_export_path)
+        create_thumbnails(model_name, mod_name, category_name, resolved_export_path, obj)
         
         baked_uv = obj.data.uv_layers.new(name='BakedUV')
         obj.data.uv_layers.active = baked_uv
@@ -303,16 +303,16 @@ def create_object_xml(mod_name, category_name, model_name, object_xml, object_xm
     with open(xml_export_path + model_name + ".xml", "w", encoding="utf8") as outfile:
         outfile.write(xml_str)
 
-def create_thumbnails(model_name, mod_name, category_name, resolved_export_path):
+def create_thumbnails(model_name, mod_name, category_name, resolved_export_path, obj):
     scene = bpy.data.scenes["Scene"]
     
     extentions = ["_N", "_E", "_S", "_W"]
-    angles = [0.0, 90.0, -90.0, 180.0]
+    angles = [0.0, 90.0, 180.0, -90.0]
     
     for idx, ext in enumerate(extentions):
-        scene.camera.rotation_euler[0] = (pi * 75.0 / 180)
-        scene.camera.rotation_euler[1] = (pi * 0.0 / 180)
-        scene.camera.rotation_euler[2] = (pi * angles[idx] / 180)
+        obj.rotation_euler[0] = 0.0
+        obj.rotation_euler[1] = 0.0
+        obj.rotation_euler[2] = (pi * angles[idx] / 180)
         
         #Create a texture to render to.
         bpy.ops.image.new(name="thumbnail", width=1024, height=1024, color=(0.0, 0.0, 0.0, 0.0), alpha=True, generated_type='BLANK', float=False, use_stereo_3d=False)
