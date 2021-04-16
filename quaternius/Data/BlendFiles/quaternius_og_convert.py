@@ -142,6 +142,7 @@ def get_models(import_path, export_path, mod_name, info):
                         newnode.inputs['Color'].default_value = color
                         material.node_tree.links.new(newnode.outputs[0], outputnode.inputs[0])
                     elif node.type=="BSDF_PRINCIPLED":
+                        node.inputs['Roughness'].default_value = 1.0
                         if did_not_use_nodes:
                             node.inputs['Base Color'].default_value = orig_color
                     elif node.type=="BSDF_DIFFUSE":
@@ -240,7 +241,7 @@ def get_models(import_path, export_path, mod_name, info):
         outfile.write(xml_str)
     
     if fix_texture_alpha:
-        fix_texture_alpha(resolved_export_path + "/Textures/" + mod_name + "/" + category_name + "/")
+        fix_texture(resolved_export_path + "/Textures/" + mod_name + "/" + category_name + "/")
     print("--------------------------------------")
     print("Done exporting " + str(len(obj_file_paths)) + " models.")
 
@@ -320,7 +321,7 @@ def create_thumbnails(model_name, mod_name, category_name, resolved_export_path)
             bpy.context.scene.render.filepath = thumbnail_path + "/" + model_name + ext + ".png"
             bpy.ops.render.render(write_still = True)
 
-def fix_texture_alpha(path):
+def fix_texture(path):
     image_file_paths = []
 
     for dirpath, dnames, fnames in os.walk(path):
