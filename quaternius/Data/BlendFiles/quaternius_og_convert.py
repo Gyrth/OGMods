@@ -311,7 +311,7 @@ def create_thumbnails(model_name, mod_name, category_name, resolved_export_path,
         obj.rotation_euler[2] += (pi * 90.0 / 180)
         
         #Create a texture to render to.
-        bpy.ops.image.new(name="thumbnail", width=1024, height=1024, color=(0.0, 0.0, 0.0, 0.0), alpha=True, generated_type='BLANK', float=False, use_stereo_3d=False)
+        bpy.ops.image.new(name="thumbnail", width=128, height=128, color=(0.0, 0.0, 0.0, 0.0), alpha=True, generated_type='BLANK', float=False, use_stereo_3d=False)
         thumbnail_image = bpy.data.images['thumbnail']
         if export_thumbnails:
             thumbnail_path = resolved_export_path + "/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/"
