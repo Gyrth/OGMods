@@ -142,6 +142,8 @@ def get_models(import_path, export_path, mod_name, info):
                     elif node.type=="BSDF_DIFFUSE":
                         if did_not_use_nodes:
                             node.inputs['Color'].default_value = orig_color
+                            mat_output = material.node_tree.nodes.get("Material Output")
+                            material.node_tree.links.new(node.outputs[0], mat_output.inputs[0])
                 
                 bake_texture = material.node_tree.nodes.new('ShaderNodeTexImage')
                 bake_texture.image = bake_image
