@@ -122,7 +122,6 @@ def get_models(import_path, single_object_import_path, export_path, mod_name, in
             else:
                 mesh.select_set(False)
                 bpy.data.objects.remove(mesh, do_unlink=True)
-        
             
         bpy.context.view_layer.objects.active = obj
         bpy.ops.object.join()
@@ -307,12 +306,9 @@ def create_thumbnails(model_name, mod_name, category_name, resolved_export_path,
     scene = bpy.data.scenes["Scene"]
     
     extentions = ["_N", "_E", "_S", "_W"]
-    angles = [0.0, 90.0, 180.0, -90.0]
     
     for idx, ext in enumerate(extentions):
-        obj.rotation_euler[0] = 0.0
-        obj.rotation_euler[1] = 0.0
-        obj.rotation_euler[2] = (pi * angles[idx] / 180)
+        obj.rotation_euler[2] += (pi * 90.0 / 180)
         
         #Create a texture to render to.
         bpy.ops.image.new(name="thumbnail", width=1024, height=1024, color=(0.0, 0.0, 0.0, 0.0), alpha=True, generated_type='BLANK', float=False, use_stereo_3d=False)
