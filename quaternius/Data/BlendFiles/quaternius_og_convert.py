@@ -321,6 +321,9 @@ def create_thumbnails(model_name, mod_name, category_name, resolved_export_path,
             bpy.ops.view3d.camera_to_view_selected()
             bpy.context.scene.render.filepath = thumbnail_path + "/" + model_name + ext + ".png"
             bpy.ops.render.render(write_still = True)
+            
+            im = Image.open(bpy.context.scene.render.filepath)
+            im.save(bpy.context.scene.render.filepath, optimize=True, quality=10)
 
 def fix_texture(path):
     image_file_paths = []
