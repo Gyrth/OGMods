@@ -31,6 +31,7 @@ string input_query;
 int set_position = -1;
 int spawn_id = -1;
 int load_wait_counter = 0;
+bool allow_animated_thumbnail = true;
 
 // Coloring options
 vec4 background_color();
@@ -77,7 +78,7 @@ class GUISpawnerItem{
 		bool two_letter_orientation = false;
 		bool one_letter_orientation = false;
 		//Make sure we don't go over the string length limit.
-		if(thumbnail_path.length() > 7){
+		if(thumbnail_path.length() > 7 && allow_animated_thumbnail){
 			two_letter_orientation = thumbnail_path.substr(thumbnail_path.length() - 7, 7) == "_NE.png";
 			one_letter_orientation = thumbnail_path.substr(thumbnail_path.length() - 6, 6) == "_N.png";
 		}
@@ -208,7 +209,7 @@ class GUISpawnerItem{
 			ImGui_SetTooltip(title);
 			ImGui_PopStyleColor();
 
-			if(animated_thumbnail){
+			if(animated_thumbnail && allow_animated_thumbnail){
 				UpdateThumbnailAnimation();
 			}
 		}
@@ -234,6 +235,29 @@ class GUISpawnerCategory{
 
 void Init(string str){
 	LoadPalette();
+	LoadSettings();
+}
+
+void LoadSettings(){
+	JSON data;
+	JSONValue root;
+
+	SavedLevel@ saved_level = save_file.GetSavedLevel("spawner_data");
+	string palette_data = saved_level.GetValue("settings_json");
+
+	if(palette_data == "" || !data.parseString(palette_data)){
+		if(!data.parseString(palette_data)){
+			Log(warning, "Unable to parse the saved JSON in the saved data!");
+		}
+		return;
+	}
+
+	root = data.getRoot();
+
+	icon_size = root["icon_size"].asInt();
+	paint_max_distance = root["paint_max_distance"].asFloat();
+	spawn_height_offset = root["spawn_height_offset"].asFloat();
+	allow_animated_thumbnail = root["allow_animated_thumbnail"].asBool();
 }
 
 void LoadPalette(bool use_defaults = false){
@@ -323,6 +347,13 @@ void GetAllSpawnerItems(){
 		TextureAssetRef icon_texture = default_texture;
 		GUISpawnerItem @new_item = GUISpawnerItem(spawner_items[i].GetCategory(), spawner_items[i].GetTitle(), spawner_items[i].GetPath(), i, icon_texture, spawner_items[i]);
 		all_items.insertLast(new_item);
+	}
+}
+
+void CacheThumbnails(){
+	for(uint i = 0; i < all_items.size(); i++){
+		all_items[i].SetThumbnail();
+		all_items[i].ClearThumbnail();
 	}
 }
 
@@ -470,6 +501,8 @@ void ReceiveMessage(string msg){
 					break;
 				}
 			}
+		}else if(token == "dispose_level"){
+			SaveSettings();
 		}
 	}
 }
@@ -647,9 +680,18 @@ void DrawGUI(){
 
 				}
 
+				if(ImGui_Checkbox("Allow Animated Thumbnail", allow_animated_thumbnail)){}
 
 				ImGui_EndMenu();
 			}
+
+			if(ImGui_BeginMenu("Tools")){
+				if(ImGui_Button("Cache Thumbnails")){
+					CacheThumbnails();
+				}
+				ImGui_EndMenu();
+			}
+
 			ImGui_EndMenuBar();
 		}
 
@@ -924,3 +966,19 @@ string GetStringBetween(string source, string first, string second){
 /* void Menu(){
 	ImGui_Checkbox("Spawner", show);
 } */
+
+void SaveSettings(){
+	JSON data;
+	JSONValue root;
+
+	root["icon_size"] = JSONValue(icon_size);
+	root["paint_max_distance"] = JSONValue(paint_max_distance);
+	root["spawn_height_offset"] = JSONValue(spawn_height_offset);
+	root["allow_animated_thumbnail"] = JSONValue(allow_animated_thumbnail);
+
+	data.getRoot() = root;
+
+	SavedLevel@ saved_level = save_file.GetSavedLevel("spawner_data");
+	saved_level.SetValue("settings_json", data.writeString(false));
+	save_file.WriteInPlace();
+}
