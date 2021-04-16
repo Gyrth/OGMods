@@ -17,6 +17,8 @@ from xml.dom import minidom
 from shutil import copyfile
 from os import listdir
 from os.path import isfile, join
+from PIL import Image, ImageDraw, ImageFilter
+from math import pi
 
 bpy.types.Scene.import_path = StringProperty(subtype='DIR_PATH', name="Import Path")
 bpy.types.Scene.export_path = StringProperty(subtype='FILE_PATH', name="Export Path")
@@ -46,7 +48,6 @@ def get_models(import_path, export_path, mod_name, info):
     category_name = split_path[len(split_path) - 2].replace(" ", "_")
     resolved_export_path = bpy.path.abspath(export_path)
     resolved_import_path = bpy.path.abspath(import_path)
-    resolved_thumbnail_path = bpy.path.abspath(import_path + "Isometric")
     print("--------------------------------------")
     print("Import path : ", resolved_import_path)
     print("Export path : ", resolved_export_path)
@@ -161,17 +162,7 @@ def get_models(import_path, export_path, mod_name, info):
         bpy.context.view_layer.objects.active = obj
         
         #Create a thumbnail.
-        #Create a texture to render to.
-        bpy.ops.image.new(name="thumbnail", width=1024, height=1024, color=(0.0, 0.0, 0.0, 0.0), alpha=True, generated_type='BLANK', float=False, use_stereo_3d=False)
-        thumbnail_image = bpy.data.images['thumbnail']
-        if export_thumbnails:
-            thumbnail_path = resolved_export_path + "/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/"
-            if not os.path.exists(thumbnail_path):
-                os.makedirs(thumbnail_path)
-            
-            bpy.ops.view3d.camera_to_view_selected()
-            bpy.context.scene.render.filepath = thumbnail_path + "/" + model_name + ".png"
-            bpy.ops.render.render(write_still = True)
+        create_thumbnails(model_name, mod_name, category_name, resolved_export_path)
         
         bpy.ops.object.join()
         
@@ -260,7 +251,6 @@ def get_models(import_path, export_path, mod_name, info):
         object_xml.appendChild(shadername_xml)
           
         xml_str = object_xml_root.toprettyxml(indent ="\t")
-        print(xml_str)
         
         #Export the XML.
         if export_xml:
@@ -277,7 +267,7 @@ def get_models(import_path, export_path, mod_name, info):
         item_title = model_name.replace("_", " ")
         item.setAttribute('title', item_title.title())
         item.setAttribute('path', "Data/Objects/" + mod_name + "/" + category_name + "/" + model_name + ".xml")
-        item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/" + model_name + ".png")
+        item.setAttribute('thumbnail', "Data/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/" + model_name + "_N.png")
           
         xml.appendChild(item)
         if single_object_export:
@@ -290,8 +280,63 @@ def get_models(import_path, export_path, mod_name, info):
     with open(resolved_export_path + "/" + mod_name + "_new_assets.xml", "w", encoding="utf8") as outfile:
         outfile.write(xml_str)
     
+    fix_texture_alpha(resolved_export_path + "/Textures/")
     print("--------------------------------------")
     print("Done exporting!")
+
+def create_thumbnails(model_name, mod_name, category_name, resolved_export_path):
+    scene = bpy.data.scenes["Scene"]
+    
+    extentions = ["_N", "_E", "_S", "_W"]
+    angles = [0.0, 90.0, -90.0, 180.0]
+    
+    for idx, ext in enumerate(extentions):
+        scene.camera.rotation_euler[0] = (pi * 75.0 / 180)
+        scene.camera.rotation_euler[1] = (pi * 0.0 / 180)
+        scene.camera.rotation_euler[2] = (pi * angles[idx] / 180)
+        
+        #Create a texture to render to.
+        bpy.ops.image.new(name="thumbnail", width=1024, height=1024, color=(0.0, 0.0, 0.0, 0.0), alpha=True, generated_type='BLANK', float=False, use_stereo_3d=False)
+        thumbnail_image = bpy.data.images['thumbnail']
+        if export_thumbnails:
+            thumbnail_path = resolved_export_path + "/UI/spawner/thumbs/" + mod_name + "/" + category_name + "/"
+            if not os.path.exists(thumbnail_path):
+                os.makedirs(thumbnail_path)
+            
+            bpy.ops.view3d.camera_to_view_selected()
+            bpy.context.scene.render.filepath = thumbnail_path + "/" + model_name + ext + ".png"
+            bpy.ops.render.render(write_still = True)
+
+def fix_texture_alpha(path):
+    image_file_paths = []
+
+    for dirpath, dnames, fnames in os.walk(path):
+        for f in fnames:
+            if f.endswith(".png"):
+                image_file_path = os.path.join(dirpath, f)
+                image_file_paths.append(image_file_path)
+
+    for image_file_path in image_file_paths:
+        im_rgb = Image.open(image_file_path)
+
+        img2 = im_rgb.resize((1, 1))
+        r, g, b, a = img2.getpixel((0, 0))
+        if a == 5:
+            continue
+
+        im_rgba = im_rgb.copy()
+        if any(plant_name in image_file_path for plant_name in plant_names):
+            pixdata = im_rgba.load()
+            width, height = im_rgba.size
+            for y in range(height):
+                for x in range(width):
+                    if pixdata[x, y] < (20, 20, 20, 255):
+                        pixdata[x, y] = (255, 255, 255, 0)
+            im_rgba.save(image_file_path)
+            continue
+        print(image_file_path);
+        im_rgba.putalpha(5)
+        im_rgba.save(image_file_path)
 
 def triangulate_object(obj):
     me = obj.data
