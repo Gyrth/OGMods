@@ -1,5 +1,7 @@
-# OGMods
-A collection of mods for Overgrowth.  
-Choose a branch for each mod.  
+# Quaternius Assets
+Assets made by Quaternius in a bunch of different categories and themes. I've converted them so they are directly usable in the OG engine from the spawner menu.  
 
-[Preorder the game here.](http://www.wolfire.com/overgrowth)
+[Quaternius Website.](http://www.quaternius.com)
+[Quaternius Patreon.](https://www.patreon.com/quaternius)
+
+[Buy Overgrowth here.](http://www.wolfire.com/overgrowth)
