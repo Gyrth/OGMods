@@ -68,7 +68,7 @@ def get_models(import_path, single_object_import_path, export_path, mod_name, in
     else:
         for dirpath, dnames, fnames in os.walk(resolved_import_path):
             for f in fnames:
-                if f.endswith(".blend"):
+                if f.endswith(".obj"):
                     obj_path = os.path.join(dirpath, f)
                     print(obj_path);
                     obj_file_paths.append(obj_path)
@@ -83,14 +83,14 @@ def get_models(import_path, single_object_import_path, export_path, mod_name, in
         print("--------------------------------------")
         print("Model name : " + model_name)
         print("Model number : " + str(idx + 1) + "/" + str(num_models))
-#        imported_object = bpy.ops.import_scene.obj(filepath=obj_file_path)
+        imported_object = bpy.ops.import_scene.obj(filepath=obj_file_path)
         
-        files = []
-        with bpy.data.libraries.load(obj_file_path) as (data_from, data_to):
-            for name in data_from.objects:
-                files.append({'name': name})
+#        files = []
+#        with bpy.data.libraries.load(obj_file_path) as (data_from, data_to):
+#            for name in data_from.objects:
+#                files.append({'name': name})
 
-        bpy.ops.wm.append(directory=obj_file_path+"/Object/", files=files)
+#        bpy.ops.wm.append(directory=obj_file_path+"/Object/", files=files)
         
         obj_objects = bpy.context.selected_objects[:]
         
