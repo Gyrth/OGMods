@@ -19,6 +19,7 @@ from os import listdir
 from os.path import isfile, join
 from PIL import Image, ImageDraw, ImageFilter
 from math import pi
+from mathutils import Color
 
 bpy.types.Scene.single_object_import_path = StringProperty(subtype='FILE_PATH', name="Single Object Import Path")
 bpy.types.Scene.import_path = StringProperty(subtype='DIR_PATH', name="Import Path")
@@ -169,6 +170,17 @@ def get_models(import_path, single_object_import_path, export_path, mod_name, in
                         node.inputs['Roughness'].default_value = 1.0
                         if did_not_use_nodes:
                             node.inputs['Base Color'].default_value = orig_color
+                        
+                        default_value = node.inputs['Base Color'].default_value
+                        c = Color((default_value[0], default_value[1], default_value[2]))
+                        c.s = 1.0
+                        c.v = 1.0
+                        
+                        default_value[0] = c.r
+                        default_value[1] = c.g
+                        default_value[2] = c.b
+
+                        node.inputs['Base Color'].default_value = default_value
                     elif node.type=="BSDF_DIFFUSE":
                         if did_not_use_nodes:
                             node.inputs['Color'].default_value = orig_color
