@@ -56,7 +56,9 @@ plant_names = ["balconyLadder_bottom",
                 "tree_shrub",
                 "wallC_flatLow",
                 "wallC_flat",
-                "wallFence"]
+                "wallFence",
+                "scaffolding_structure"]
+
 double_sided_names = []
 
 def get_models(import_path, single_object_import_path, export_path, mod_name, info):
