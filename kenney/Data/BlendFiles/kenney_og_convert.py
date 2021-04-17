@@ -43,7 +43,20 @@ fix_texture_alpha = True
 cached_object_names = []
 cached_object_meshes = []
 
-plant_names = ["fenceCurved", "fenceStraight"]
+#plant_names = ["fenceCurved", "fenceStraight"]
+plant_names = ["balconyLadder_bottom",
+                "balconyLadder_top",
+                "balcony_typeA",
+                "detailCables_typeA",
+                "detailCables_typeB",
+                "scaffolding_structure"
+                "tree_large",
+                "treePine_large",
+                "treePine_small",
+                "tree_shrub",
+                "wallC_flatLow",
+                "wallC_flat",
+                "wallFence"]
 double_sided_names = []
 
 def get_models(import_path, single_object_import_path, export_path, mod_name, info):
@@ -180,6 +193,11 @@ def get_models(import_path, single_object_import_path, export_path, mod_name, in
                         default_value[2] = c.b
 
                         node.inputs['Base Color'].default_value = default_value
+                        
+                        if any(plant_name in model_name for plant_name in plant_names):
+                            texture_node = node.inputs['Base Color'].links[0].from_node
+                            material.node_tree.links.new(texture_node.outputs['Alpha'], node.inputs['Alpha'])
+                        
                     elif node.type=="BSDF_DIFFUSE":
                         if did_not_use_nodes:
                             node.inputs['Color'].default_value = orig_color
