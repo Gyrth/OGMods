@@ -43,7 +43,7 @@ fix_texture_alpha = True
 cached_object_names = []
 cached_object_meshes = []
 
-plant_names = []
+plant_names = ["fenceCurved", "fenceStraight"]
 double_sided_names = []
 
 def get_models(import_path, single_object_import_path, export_path, mod_name, info):
@@ -173,8 +173,7 @@ def get_models(import_path, single_object_import_path, export_path, mod_name, in
                         
                         default_value = node.inputs['Base Color'].default_value
                         c = Color((default_value[0], default_value[1], default_value[2]))
-                        c.s = 1.0
-                        c.v = 1.0
+                        c.s *= 1.5
                         
                         default_value[0] = c.r
                         default_value[1] = c.g
