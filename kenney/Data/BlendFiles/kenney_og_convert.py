@@ -222,10 +222,11 @@ def get_models(import_path, single_object_import_path, export_path, mod_name, in
         
         #Make sure some of the mesh isn't hidden.
         bpy.ops.mesh.reveal()
+#        bpy.ops.mesh.flip_normals()
         
         #Create a new smart uv map for the new texture.
         bpy.ops.mesh.remove_doubles(threshold=0.0001)
-        bpy.ops.mesh.normals_make_consistent(inside=False)
+#        bpy.ops.mesh.normals_make_consistent(inside=False)
         #The angle limit is done in radians not degrees.
         bpy.ops.uv.smart_project(angle_limit = 1.1519, island_margin = 0.01)
         
