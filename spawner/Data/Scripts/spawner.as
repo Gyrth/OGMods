@@ -32,6 +32,8 @@ int set_position = -1;
 int spawn_id = -1;
 int load_wait_counter = 0;
 bool allow_animated_thumbnail = true;
+int thumbnailed_counter = 0;
+int max_thumbnailed_per_draw = 5;
 
 // Coloring options
 vec4 background_color();
@@ -158,9 +160,12 @@ class GUISpawnerItem{
 				thumbnail_index = 0;
 			}
 
-			icon = anims[thumbnail_index];
-
-			thumbnail_index++;
+			if(int(anims.size()) > thumbnail_index){
+				icon = anims[thumbnail_index];
+				thumbnail_index++;
+			}else{
+				thumbnail_index = 0;
+			}
 		}
 	}
 
@@ -214,8 +219,9 @@ class GUISpawnerItem{
 			}
 		}
 
-		if(!has_thumbnail && ImGui_IsItemVisible()){
+		if(thumbnailed_counter < max_thumbnailed_per_draw && !has_thumbnail && ImGui_IsItemVisible()){
 			SetThumbnail();
+			thumbnailed_counter++;
 		}else if(has_thumbnail && !ImGui_IsItemVisible()){
 			ClearThumbnail();
 		}
@@ -602,6 +608,7 @@ array<GUISpawnerCategory@> SortIntoCategories(array<GUISpawnerItem@> unsorted){
 
 void DrawGUI(){
 	if(show){
+		thumbnailed_counter = 0;
 		if(paint && currently_selected != -1){
 			ImGui_PushStyleColor(ImGuiCol_WindowBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
 			ImGui_Begin("PaintContainer", show, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBringToFrontOnFocus);
