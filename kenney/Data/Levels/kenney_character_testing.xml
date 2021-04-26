@@ -1,0 +1,106 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>kenney_character_testing</Name>
+<Description></Description>
+<Shader>post</Shader>
+<Shadows>true</Shadows>
+<LoadingScreen>
+    <Image></Image>
+</LoadingScreen>
+<Terrain>
+    <Heightmap>Data/Textures/Terrain/dead_volcano/dead_volcano_hm.png</Heightmap>
+    <ShaderExtra></ShaderExtra>
+    <DetailMap></DetailMap>
+    <ColorMap>Data/Textures/Terrain/dead_volcano/dead_volcano_c.tga</ColorMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/rubble.tga" normalpath="Data/Textures/Terrain/DetailTextures/rubble_normal.tga" materialpath="Data/Materials/rocks.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/pebbles.tga" normalpath="Data/Textures/Terrain/DetailTextures/pebbles_normal.tga" materialpath="Data/Materials/gravel.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/smooth_mud.tga" normalpath="Data/Textures/Terrain/DetailTextures/smooth_mud_normal.tga" materialpath="Data/Materials/sand.xml" />
+        <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/volcanic.tga" normalpath="Data/Textures/Terrain/DetailTextures/volcanic_normal.tga" materialpath="Data/Materials/dirtyrock.xml" />
+    </DetailMaps>
+    <DetailObjects />
+</Terrain>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
+<AmbientSounds>
+    <Ambient path="Data/Sounds/ambient/amb_deadvolcano_loop" />
+</AmbientSounds>
+<Script></Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Extra AO" type="string" val="0.9" />
+    <parameter name="HDR Black point" type="string" val="0.005" />
+    <parameter name="HDR Bloom multiplier" type="string" val="0.502" />
+    <parameter name="HDR White point" type="string" val="0.8" />
+    <parameter name="Level Boundaries" type="string" val="1" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Saturation" type="float" val="1" />
+    <parameter name="Sky Rotation" type="string" val="0" />
+</LevelScriptParameters>
+<NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<Sky>
+    <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
+    <SunAngularRad>0.0808992</SunAngularRad>
+    <SunColorAngle>348.094</SunColorAngle>
+    <RayToSun r0="-0.016404" r1="0.766062" r2="0.642557" />
+</Sky>
+<ActorObjects>
+    <ActorObject t0="-47.6259" t1="-69.5152" t2="-175.001" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="Data/Characters/kenney/Animated_Characters_1/SurvivorMaleB_actor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fall Damage Multiplier" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
+            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
+            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
+            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Jump - Air Control" type="float" val="3" />
+            <parameter name="Jump - Initial Velocity" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain Boost" type="float" val="10" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="No Look Around" type="int" val="0" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Stick To Nav Mesh" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+            <parameter name="Throw Counter Probability" type="float" val="0.4" />
+            <parameter name="Throw Trainer" type="int" val="0" />
+            <parameter name="Weapon Catch Skill" type="float" val="1" />
+            <parameter name="Wearing Metal Armor" type="int" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="1" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <EnvObject t0="-43.7283" t1="-70.0654" t2="-175.306" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/kenney/Animated_Characters_1/SurvivorMaleB.xml">
+        <parameters />
+    </EnvObject>
+    <CameraObject t0="-45.7918" t1="-69.3533" t2="-170.714" s0="1" s1="1" s2="1" q0="0.052309" q1="0.049025" q2="-0.00257111" q3="0.997424" euler_x="0.104792" euler_y="0.0982242" euler_z="0" id="106">
+        <parameters />
+    </CameraObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="SurvivorMaleB_actor.xml" path="Data/Characters/kenney/Animated_Characters_1/SurvivorMaleB_actor.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="SurvivorMaleB.xml" path="Data/Objects/kenney/Animated_Characters_1/SurvivorMaleB.xml" thumbnail_path="empty_placeholder.png" />
+</RecentItems>
