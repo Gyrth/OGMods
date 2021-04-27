@@ -85,6 +85,11 @@ void PostInit(){
 			int object_id = CreateObject(path, true);
 			Object@ obj = ReadObjectFromID(object_id);
 
+			if(obj.GetType() == _movement_object){
+				MovementObject@ char = ReadCharacterID(object_id);
+				char.static_char = true;
+			}
+
 			obj.SetTranslation(vec3(15.0f * x_counter, 15.0f * z_counter, 15.0f * y_counter));
 			obj.SetSelectable(true);
 			obj.SetTranslatable(true);
@@ -93,7 +98,7 @@ void PostInit(){
 
 			vec3 bounds = obj.GetBoundingBox();
 
-			float over_scale = ((bounds.x + bounds.y + bounds.z) / 3.0f);
+			float over_scale = max(1.0, ((bounds.x + bounds.y + bounds.z) / 3.0f));
 			obj.SetScale(vec3((1.0f / over_scale) * 5.0f));
 
 			x_counter++;
