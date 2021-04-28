@@ -7,7 +7,8 @@ enum play_sound_methods	{
 							play_sound_group_gain = 5,
 							play_sound_group_position = 6,
 							play_sound_group_position_gain = 7,
-							play_sound_group_position_priority = 8
+							play_sound_group_position_priority = 8,
+							stop_sounds = 9
 						};
 
 enum SoundType	{
@@ -41,7 +42,8 @@ class DrikaPlaySound : DrikaElement{
 												"Play Sound Group With Gain",
 												"Play Sound Group At Position",
 												"Play Sound Group At Position With Gain",
-												"Play Sound Group At Position With Priority"
+												"Play Sound Group At Position With Priority",
+												"Stop Sounds"
 											};
 
 	array<string> sound_priority_names = {
@@ -121,11 +123,7 @@ class DrikaPlaySound : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		if(play_sound_method < play_sound || play_sound_method > play_sound_group_position_priority){
-			play_sound_method = play_sound;
-			current_play_sound_method = play_sound_method;
-		}
-		return play_sound_method_names[play_sound_method] + " " + sound_path;
+		return play_sound_method_names[current_play_sound_method] + " " + (current_play_sound_method != stop_sounds? sound_path: "");
 	}
 
 	void DrawSettings(){
@@ -134,26 +132,29 @@ class DrikaPlaySound : DrikaElement{
 
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
-
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Sound Path");
-		ImGui_NextColumn();
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
-		if(ImGui_Button("Set Sound Path")){
-			string new_path = "";
-			if(is_group){
-				new_path = GetUserPickedReadPath("xml", "Data/Sounds");
-			}else{
-				new_path = GetUserPickedReadPath("wav", "Data/Sounds");
+
+		if (current_play_sound_method != stop_sounds)
+			{
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Sound Path");
+				ImGui_NextColumn();
+				if(ImGui_Button("Set Sound Path")){
+					string new_path = "";
+					if(is_group){
+						new_path = GetUserPickedReadPath("xml", "Data/Sounds");
+					}else{
+						new_path = GetUserPickedReadPath("wav", "Data/Sounds");
+					}
+					if(new_path != ""){
+						sound_path = new_path;
+						PreviewSound();
+					}
+				}
+				ImGui_SameLine();
+				ImGui_Text(sound_path);
+				ImGui_NextColumn();
 			}
-			if(new_path != ""){
-				sound_path = new_path;
-				PreviewSound();
-			}
-		}
-		ImGui_SameLine();
-		ImGui_Text(sound_path);
-		ImGui_NextColumn();
 
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Play Sound Method");
@@ -309,6 +310,14 @@ class DrikaPlaySound : DrikaElement{
 				break;
 			case play_sound_group_position_priority:
 				sound_handles.insertLast(PlaySoundGroup(sound_path, placeholder.GetTranslation(), priority));
+				break;
+			case stop_sounds:
+
+				for(uint i = 0; i < drika_elements.size(); i++)
+				{
+					if 	(drika_elements[i].drika_element_type == drika_play_sound)
+						{drika_elements[i].Reset();}
+				}
 				break;
 			default:
 				break;
