@@ -121,7 +121,11 @@ class DrikaPlaySound : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return play_sound_method_names[current_play_sound_method] + " " + sound_path;
+		if(play_sound_method < play_sound || play_sound_method > play_sound_group_position_priority){
+			play_sound_method = play_sound;
+			current_play_sound_method = play_sound_method;
+		}
+		return play_sound_method_names[play_sound_method] + " " + sound_path;
 	}
 
 	void DrawSettings(){
