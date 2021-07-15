@@ -132,7 +132,6 @@ class DrikaPlaySound : DrikaElement{
 
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
-		float second_column_width = ImGui_GetContentRegionAvailWidth();
 
 		if (current_play_sound_method != stop_sounds)
 			{
@@ -159,6 +158,7 @@ class DrikaPlaySound : DrikaElement{
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Play Sound Method");
 		ImGui_NextColumn();
+		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
 		if(ImGui_Combo("##Play Sound Method", current_play_sound_method, play_sound_method_names, play_sound_method_names.size())){
 			play_sound_method = play_sound_methods(current_play_sound_method);
