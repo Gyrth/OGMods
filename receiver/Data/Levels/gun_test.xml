@@ -34,20 +34,20 @@
     <RayToSun r0="0.121363" r1="0.062051" r2="0.990667" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-3.49994" t1="3.41838" t2="-4.43341" s0="1" s1="1" s2="1" q0="0.0377683" q1="0.770864" q2="-0.0459055" q3="0.63422" euler_x="-3.02263" euler_y="1.37691" euler_z="-3.14159" id="0">
+    <CameraObject t0="-6.28808" t1="4.69984" t2="14.1537" s0="1" s1="1" s2="1" q0="0.0230091" q1="-0.187566" q2="-0.00439501" q3="-0.981973" euler_x="-0.0468545" euler_y="0.377472" euler_z="0" id="0">
         <parameters />
     </CameraObject>
-    <EnvObject t0="0.153155" t1="-0.310473" t2="-0.189899" s0="6" s1="1" s2="6" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="1" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="4.87319" t1="-0.634031" t2="-19.8801" s0="23.6692" s1="0.999999" s2="21.3596" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="1" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <ActorObject t0="-0.328917" t1="3.39977" t2="-4.47345" s0="1" s1="1" s2="1" q0="-0.00219417" q1="0.0169344" q2="0.0120613" q3="0.999782" euler_x="-0.00398118" euler_y="0.0339208" euler_z="0.0240592" id="2" type_file="Data/Characters/gun_actor.xml" pc_script_path="gun.as" is_player="1">
+    <ActorObject t0="-0.328917" t1="3.39977" t2="-4.47345" s0="1" s1="1" s2="1" q0="-0.00219417" q1="0.0169344" q2="0.0120613" q3="0.999782" euler_x="-0.00398118" euler_y="0.0339209" euler_z="0.0240592" id="2" type_file="Data/Characters/gun_actor.xml" pc_script_path="gun.as" is_player="1">
         <parameters>
             <parameter name="Character Scale" type="float" val="1.2" />
             <parameter name="Deep" type="float" val="0" />
             <parameter name="Follow Player" type="int" val="1" />
             <parameter name="Long" type="float" val="0" />
             <parameter name="Multiply" type="int" val="0" />
-            <parameter name="Teams" type="string" val="gun" />
+            <parameter name="Teams" type="string" val="gun, turner" />
             <parameter name="Wide" type="float" val="0" />
         </parameters>
         <Connections>
@@ -56,16 +56,123 @@
         <ItemConnections />
         <Palette />
     </ActorObject>
-    <EnvObject t0="0.153155" t1="-0.310473" t2="-0.189899" s0="6" s1="1" s2="6" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="3" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="2.25174" t1="-2.42474" t2="-120.922" s0="8.4895" s1="0.999999" s2="80.2377" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="3" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="1.43308" t1="4.01192" t2="19.7542" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="4" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
+    <ActorObject t0="-0.424451" t1="4.37005" t2="12.6368" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1" />
+            <parameter name="Attack Speed" type="float" val="1" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fall Damage Multiplier" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Fear - Afraid At Health Level" type="float" val="0" />
+            <parameter name="Fear - Always Afraid On Sight" type="int" val="0" />
+            <parameter name="Fear - Causes Fear On Sight" type="int" val="0" />
+            <parameter name="Fear - Never Afraid On Sight" type="int" val="0" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Jump - Air Control" type="float" val="3" />
+            <parameter name="Jump - Initial Velocity" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain" type="float" val="5" />
+            <parameter name="Jump - Jump Sustain Boost" type="float" val="10" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="No Look Around" type="int" val="0" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Stick To Nav Mesh" type="int" val="0" />
+            <parameter name="Teams" type="string" val="turner" />
+            <parameter name="Throw Counter Probability" type="float" val="0.4" />
+            <parameter name="Throw Trainer" type="int" val="0" />
+            <parameter name="Weapon Catch Skill" type="float" val="1" />
+            <parameter name="Wearing Metal Armor" type="int" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="6" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <EnvObject t0="20.0889" t1="4.78716" t2="-30.0845" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="9" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-11.1461" t1="5.08451" t2="-25.321" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="10" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-19.508" t1="4.78468" t2="-49.8795" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="11" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-27.3985" t1="5.31034" t2="-18.001" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="12" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-17.275" t1="5.5094" t2="0.569817" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="13" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="17.9617" t1="5.31049" t2="4.49232" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="14" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-12.9372" t1="4.0139" t2="-99.1014" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="15" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-21.2991" t1="3.71408" t2="-123.66" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="16" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-29.1896" t1="4.23973" t2="-91.7814" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="17" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-19.0661" t1="4.4388" t2="-73.2106" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="18" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="35.5073" t1="3.54936" t2="-106.718" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="19" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="27.1453" t1="3.24954" t2="-131.277" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="20" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="19.2549" t1="3.77519" t2="-99.398" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="21" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="29.3784" t1="3.97426" t2="-80.8272" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="22" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="52.908" t1="4.40722" t2="-39.6862" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="23" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="44.5461" t1="4.10739" t2="-64.2447" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="24" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="36.6556" t1="4.63305" t2="-32.3662" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="25" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="46.7791" t1="4.83211" t2="-13.7954" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="26" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject t0="-0.477954" t1="-1.71374" t2="15.7838" s0="5.45758" s1="5.12971" s2="5.02197" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="89" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="0.153155" t1="-0.310473" t2="-0.189899" s0="6" s1="1" s2="6" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="219" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+    <EnvObject t0="0.23404" t1="-0.327554" t2="4.15736" s0="6.01953" s1="1.05643" s2="2.56422" q0="-0.00729227" q1="0.0137421" q2="-0.00374012" q3="0.999872" euler_x="-0.0146915" euler_y="0.0274296" euler_z="-0.00768267" id="219" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="0.322429" t1="-0.590516" t2="6.05803" s0="6" s1="1" s2="6" q0="-0.26583" q1="0.0142419" q2="-5.59455e-05" q3="0.963915" euler_x="-0.538291" euler_y="0.0274297" euler_z="-0.00768267" id="220" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -75,4 +182,5 @@
 <RecentItems>
     <SpawnerItem display_name="Gun" path="Data/Characters/gun_actor.xml" thumbnail_path="Data/UI/spawner/gun.png" />
     <SpawnerItem display_name="Ouranian Hand Cat" path="Data/Objects/characters/cats/ouranian_hand_actor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/ouranian_hand_actor.png" />
+    <SpawnerItem display_name="Default Turner" path="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_TurnerActor.png" />
 </RecentItems>
