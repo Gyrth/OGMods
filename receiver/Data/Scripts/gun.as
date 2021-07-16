@@ -48,7 +48,7 @@ bool chase_allowed = false;
 float body_bob_freq = 0.0f;
 float body_bob_time_offset;
 float mouse_sensitivity = 0.5;
-string target_animation = "Data/Animations/gun_default2.anm";
+string target_animation = "Data/Animations/gun_default.anm";
 
 const float _ground_normal_y_threshold = 0.5f;
 const float _leg_sphere_size = 0.45f;  // affects the size of a sphere collider used for leg collisions
@@ -344,12 +344,15 @@ void Update(int num_frames) {
 	ApplyPhysics(ts);
 	HandleCollisions(ts);
 	UpdateBullets();
-	UpdateControls();
 	UpdateCamera(ts);
 	UpdateCharacterRotation();
-	UpdateJumping();
-	UpdateMovement();
-	UpdateAiming();
+
+	if(this_mo.controlled){
+		UpdateControls();
+		UpdateJumping();
+		UpdateMovement();
+		UpdateAiming();
+	}
 
 	old_vel = this_mo.velocity;
 
@@ -387,7 +390,7 @@ void UpdateAiming(){
 void UpdateMovement(){
 	float movement_speed = 35.0;
 	if(!on_ground){
-		movement_speed = 15.0;
+		movement_speed = 10.0;
 	}
 	this_mo.velocity += GetTargetVelocity() * time_step * movement_speed;
 }
@@ -481,11 +484,9 @@ void UpdateCamera(const Timestep &in ts){
 
 void UpdateControls(){
 
-	if(this_mo.controlled){
-		cam_rotation_y -= GetLookXAxis(this_mo.controller_id) * mouse_sensitivity;
-		cam_rotation_x -= GetLookYAxis(this_mo.controller_id) * mouse_sensitivity;
-		cam_rotation_x = max(-75.0f, min(cam_rotation_x, 75.0f));
-	}
+	cam_rotation_y -= GetLookXAxis(this_mo.controller_id) * mouse_sensitivity;
+	cam_rotation_x -= GetLookYAxis(this_mo.controller_id) * mouse_sensitivity;
+	cam_rotation_x = max(-75.0f, min(cam_rotation_x, 75.0f));
 
 	if(GetInputPressed(this_mo.controller_id, "b")){
 		this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, _ANM_FROM_START);
@@ -568,18 +569,6 @@ bool CheckCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
 }
 
 void Shoot(){
-	RiggedObject@ rigged_object = this_mo.rigged_object();
-	Skeleton@ skeleton = rigged_object.skeleton();
-	int bone = skeleton.IKBoneStart("pelvis");
-	vec3 bone_pos = skeleton.GetBoneTransform(bone).GetTranslationPart();
-	quaternion bone_quat = QuaternionFromMat4(skeleton.GetBoneTransform(bone));
-
-	mat4 translate_mat;
-	translate_mat.SetTranslationPart(bone_pos);
-	mat4 rotation_mat;
-	rotation_mat = Mat4FromQuaternion(bone_quat);
-	mat4 mat = translate_mat * rotation_mat;
-
 	vec3 forward = this_mo.GetFacing();
 	vec3 muzzle_offset = forward * 0.15;
 	vec3 spawn_point = this_mo.position;
@@ -647,11 +636,11 @@ bool Init(string character_path) {
 	bool success = character_getter.Load(this_mo.char_path);
 	if(success){
 		this_mo.RecreateRiggedObject(this_mo.char_path);
-		this_mo.SetAnimation(target_animation, 20.0f, 0);
+		this_mo.SetAnimation(target_animation, 10.0f, _ANM_FROM_START);
 		/* this_mo.SetScriptUpdatePeriod(1);
-		this_mo.rigged_object().SetAnimUpdatePeriod(1); */
+		this_mo.rigged_object().SetAnimUpdatePeriod(1);
 
-		/* RiggedObject@ rigged_object = this_mo.rigged_object();
+		RiggedObject@ rigged_object = this_mo.rigged_object();
 		Skeleton@ skeleton = rigged_object.skeleton();
 		int num_bones = skeleton.NumBones();
 		skeleton_bind_transforms.resize(num_bones);
@@ -661,8 +650,11 @@ bool Init(string character_path) {
 			skeleton_bind_transforms[i] = BoneTransform(skeleton.GetBindMatrix(i));
 			inv_skeleton_bind_transforms[i] = invert(skeleton_bind_transforms[i]);
 		} */
+		return true;
+	}else {
+		Log(error, "Failed at loading character " + character_path);
+		return false;
 	}
-	return success;
 }
 
 int WasHit(string type, string attack_path, vec3 dir, vec3 pos, int attacker_id, float attack_damage_mult, float attack_knockback_mult) {
@@ -835,6 +827,7 @@ void SetParameters() {
 		this_mo.RecreateRiggedObject(this_mo.char_path);
 		this_mo.SetAnimation(target_animation, 20.0f, 0);
 		FixDiscontinuity();
+		CacheSkeletonInfo();
 	}
 }
 
@@ -986,7 +979,7 @@ void HandleAirCollisions(const Timestep &in ts) {
 		for(int j=0; j<sphere_col.NumContacts(); j++){
 			const CollisionPoint contact = sphere_col.GetContact(j);
 			land_magnitude = length(this_mo.velocity);
-			float bounciness = 0.9f;
+			float bounciness = 0.7f;
 
 			if(GetInputDown(this_mo.controller_id, "walk")){
 				bounciness = 0.1;
@@ -1021,11 +1014,154 @@ void UpdateJumping(){
 	if(on_ground && GetInputDown(this_mo.controller_id, "jump")){
 		if(jump_wait < 0.0f){
 			jump_wait = 0.5;
-			float jump_mult = 10.0f;
+			float jump_mult = 7.0f;
 			vec3 jump_vel = vec3(0.0, 1.0, 0.0);
 			this_mo.velocity += jump_vel * jump_mult;
 		}
 	}
+}
+
+
+void CacheSkeletonInfo() {
+    Log(info, "Caching skeleton info");
+    RiggedObject@ rigged_object = this_mo.rigged_object();
+    Skeleton@ skeleton = rigged_object.skeleton();
+    int num_bones = skeleton.NumBones();
+    skeleton_bind_transforms.resize(num_bones);
+    inv_skeleton_bind_transforms.resize(num_bones);
+
+    for(int i = 0; i < num_bones; ++i) {
+        skeleton_bind_transforms[i] = BoneTransform(skeleton.GetBindMatrix(i));
+        inv_skeleton_bind_transforms[i] = invert(skeleton_bind_transforms[i]);
+    }
+
+    ik_chain_elements.resize(0);
+    ik_chain_bone_lengths.resize(0);
+    ik_chain_start_index.resize(kNumIK);
+    ik_chain_length.resize(kNumIK);
+
+    for(int i = 0; i < kNumIK; ++i) {
+        string bone_label;
+
+        switch(i) {
+            case kLeftArmIK: bone_label = "leftarm"; break;
+            case kRightArmIK: bone_label = "rightarm"; break;
+            case kLeftLegIK: bone_label = "left_leg"; break;
+            case kRightLegIK: bone_label = "right_leg"; break;
+            case kHeadIK: bone_label = "head"; break;
+            case kLeftEarIK: bone_label = "leftear"; break;
+            case kRightEarIK: bone_label = "rightear"; break;
+            case kTorsoIK: bone_label = "torso"; break;
+            case kTailIK: bone_label = "tail"; break;
+        }
+
+        int bone = skeleton.IKBoneStart(bone_label);
+        ik_chain_length[i] = skeleton.IKBoneLength(bone_label);
+        ik_chain_start_index[i] = ik_chain_elements.size();
+        int count = 0;
+
+        while(bone != -1 && count < ik_chain_length[i]) {
+            ik_chain_bone_lengths.push_back(distance(skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)), skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1))));
+            ik_chain_elements.push_back(bone);
+            bone = skeleton.GetParent(bone);
+            ++count;
+        }
+    }
+
+    ik_chain_start_index.push_back(ik_chain_elements.size());
+    bone_children.resize(0);
+    bone_children_index.resize(num_bones);
+
+    for(int bone = 0; bone < num_bones; ++bone) {
+        bone_children_index[bone] = bone_children.size();
+
+        for(int i = 0; i < num_bones; ++i) {
+            int temp_bone = i;
+
+            while(skeleton.GetParent(temp_bone) != -1 && skeleton.GetParent(temp_bone) != bone) {
+                temp_bone = skeleton.GetParent(temp_bone);
+            }
+
+            if(skeleton.GetParent(temp_bone) == bone) {
+                bone_children.push_back(i);
+            }
+        }
+    }
+
+    bone_children_index.push_back(bone_children.size());
+
+    convex_hull_points.resize(0);
+    convex_hull_points_index.resize(num_bones);
+
+    for(int bone = 0; bone < num_bones; ++bone) {
+        convex_hull_points_index[bone] = convex_hull_points.size();
+        array<float> @hull_points = skeleton.GetConvexHullPoints(bone);
+
+        for(int i = 0, len = hull_points.size(); i < len; i += 3) {
+            convex_hull_points.push_back(vec3(hull_points[i], hull_points[i + 1], hull_points[i + 2]));
+        }
+    }
+
+    convex_hull_points_index.push_back(convex_hull_points.size());
+
+    key_masses.resize(kNumKeys);
+    root_bone.resize(kNumKeys);
+
+    for(int j = 0; j < 2; ++j) {
+        int bone = skeleton.IKBoneStart(legs[j]);
+
+        for(int i = 0, len = skeleton.IKBoneLength(legs[j]); i < len; ++i) {
+            key_masses[kLeftLegKey + j] += skeleton.GetBoneMass(bone);
+
+            if(i < len - 1) {
+                bone = skeleton.GetParent(bone);
+            }
+        }
+
+        root_bone[kLeftLegKey + j] = bone;
+    }
+
+    for(int j = 0; j < 2; ++j) {
+        int bone = skeleton.IKBoneStart(arms[j]);
+
+        for(int i = 0, len = skeleton.IKBoneLength(arms[j]); i < len; ++i) {
+            key_masses[kLeftArmKey + j] += skeleton.GetBoneMass(bone);
+
+            if(i < len - 1) {
+                bone = skeleton.GetParent(bone);
+            }
+        }
+
+        root_bone[kLeftArmKey + j] = bone;
+    }
+
+    {
+        int bone = skeleton.IKBoneStart("torso");
+
+        for(int i = 0, len = skeleton.IKBoneLength("torso"); i < len; ++i) {
+            key_masses[kChestKey] += skeleton.GetBoneMass(bone);
+
+            if(i < len - 1) {
+                bone = skeleton.GetParent(bone);
+            }
+        }
+
+        root_bone[kChestKey] = bone;
+    }
+
+    {
+        int bone = skeleton.IKBoneStart("head");
+
+        for(int i = 0, len = skeleton.IKBoneLength("head"); i < len; ++i) {
+            key_masses[kHeadKey] += skeleton.GetBoneMass(bone);
+
+            if(i < len - 1) {
+                bone = skeleton.GetParent(bone);
+            }
+        }
+
+        root_bone[kHeadKey] = bone;
+    }
 }
 
 void NotifyItemDetach(int idex){}
@@ -1039,4 +1175,6 @@ void AttachWeapon(int id){}
 void SetEnabled(bool on){}
 void UpdatePaused(){}
 void LayerRemoved(int id){}
-void PostReset(){}
+void PostReset(){
+	CacheSkeletonInfo();
+}
