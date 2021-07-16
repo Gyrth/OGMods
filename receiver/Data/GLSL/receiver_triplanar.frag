@@ -1788,6 +1788,7 @@ void main() {
 
                 #if defined(NORMAL_MAP_TRANSLUCENT)
                     vec4 normalmap = texture(tex1, tex_coord);
+
                     ws_normal = vec3(tangent_to_world3 * normalmap.b +
                         tangent_to_world1 * (normalmap.r*2.0-1.0) +
                         tangent_to_world2 * (normalmap.g*2.0-1.0));
@@ -2028,7 +2029,10 @@ void main() {
                         vec3 base_bitangent = normalize(cross(frag_tangent,base_normal));
                         vec3 base_tangent = normalize(cross(base_normal,base_bitangent));
                     #else
-                        vec4 base_normalmap = texture(tex1,base_tex_coords);
+						vec4 base_normalmap = texture(tex1, base_tex_coords);
+						mat3 model_rotation_mat = instances[instance_id].model_rotation_mat;
+						base_normalmap.xyz = triplanarMapping(tex0, model_rotation_mat * frag_normal, world_vert);
+
                         color_tint_alpha = base_normalmap.a;
 
                         #if defined(BASE_TANGENT)
@@ -2442,13 +2446,22 @@ void main() {
 
                             ws_normal = normalize((instances[instance_id].model_rotation_mat * (tan_to_obj * unpacked_normal)).xyz);
 
+							vec4 normalmap = texture(tex1, base_tex_coords);
+							mat3 model_rotation_mat = instances[instance_id].model_rotation_mat;
+							ws_normal = triplanarMapping(tex0, model_rotation_mat * frag_normal, world_vert);
+
                             #if defined(WATER)
                                 //ws_normal = vec3(0,1,0);
                                 //ws_normal = normalize(vec3(unpacked_normal.x, unpacked_normal.z, unpacked_normal.y));
                             #endif
                         }
                     #else
-                        vec4 normalmap = texture(tex1,tc0);
+                        // vec4 normalmap = texture(tex1,tc0);
+
+						vec4 normalmap = texture(tex1, base_tex_coords);
+						mat3 model_rotation_mat = instances[instance_id].model_rotation_mat;
+						normalmap.xyz = triplanarMapping(tex0, model_rotation_mat * frag_normal, world_vert);
+
                         vec3 os_normal = UnpackObjNormal(normalmap);
                         vec3 ws_normal = instances[instance_id].model_rotation_mat * os_normal;
                     #endif
@@ -3534,7 +3547,8 @@ void main() {
                                     temp_tex_coords.x -= time * 0.1;
                                 #endif
 
-                                vec3 temp_color = texture(tex1, temp_tex_coords).xyz;
+                                // vec3 temp_color = texture(tex1, temp_tex_coords).xyz;
+								vec3 temp_color = vec3(0.0);
 
                                 #if defined(DIRECTED_WATER_DECALS)
                                     color.xyz = mix(color.xyz, diffuse_color * 4.0, pow(extra_froth, 1.0));
@@ -3563,7 +3577,8 @@ void main() {
                                 temp_tex_coords.y += time * 0.4;
                             #endif
 
-                            vec3 temp_color = texture(tex1, temp_tex_coords).xyz;
+                            // vec3 temp_color = texture(tex1, temp_tex_coords).xyz;
+							vec3 temp_color = vec3(0.0);
 
                             #if defined(DIRECTED_WATER_DECALS)
                                 color.xyz = mix(color.xyz, diffuse_color * 4.0, pow(extra_froth, 1.0));
@@ -3651,6 +3666,7 @@ void main() {
                     vec3 temp_color = mix(texture(tex0, temp_tex_coords + vec2(offset*0.2)).xyz, texture(tex0, temp_tex_coords.yx*0.8+vec2(0.5,0.5)-vec2(offset*0.2)).xyz, vec);
 
                     color.xyz = temp_color * 16.0 * mix(1.0, texture(tex1, frag_tex_coordsB).a, pow(temp_color.r,0.2));
+					color.xyz = vec3(0.0);
                     color.xyz *= max(0.0, fractal(world_vert.xz*0.5)+0.5);
                 #endif
 
@@ -3662,6 +3678,7 @@ void main() {
 
                     vec3 temp_color = texture(tex0, frag_tex_coordsB).xyz * (pow(texture(tex1, frag_tex_coordsC).a, 2.2) + 0.1);
                     color.xyz = temp_color * 2.0;
+					color.xyz = vec3(0.0);
                 #endif
 
                 #if defined(VOLUME_SHADOWS)

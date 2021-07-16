@@ -903,8 +903,11 @@ void HandleGroundCollisions(const Timestep &in ts) {
 	if(show_debug){
 		DebugDrawWireScaledSphere(this_mo.position, size, scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
 	}
-	this_mo.position = sphere_col.adjusted_position;
-	bool in_air = HandleStandingCollision();
+	/* this_mo.position = sphere_col.adjusted_position; */
+
+	HandleBumperCollision();
+	HandleStandingCollision();
+	this_mo.position = sphere_col.position;
 }
 
 vec3 HandleBumperCollision() {
