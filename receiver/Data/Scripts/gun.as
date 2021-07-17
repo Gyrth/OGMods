@@ -324,10 +324,11 @@ array<Bullet@> bullets;
 float trigger_time_out = 0.0f;
 float time_out_length = 0.25f;
 float bullet_speed = 433.0f;
-float max_bullet_distance = 1500.0f;
+float max_bullet_distance = 150.0f;
 float cam_rotation_x = 0.0f;
 float cam_rotation_y = 180.0f;
 float cam_rotation_z = 0.0f;
+bool tick = false;
 
 void Update(int num_frames) {
 	Timestep ts(time_step, num_frames);
@@ -343,9 +344,9 @@ void Update(int num_frames) {
 
 	ApplyPhysics(ts);
 	HandleCollisions(ts);
-	UpdateBullets();
 	UpdateCamera(ts);
 	UpdateCharacterRotation();
+	UpdateBullets();
 
 	if(this_mo.controlled){
 		UpdateControls();
@@ -355,32 +356,7 @@ void Update(int num_frames) {
 	}
 
 	old_vel = this_mo.velocity;
-
-	Skeleton@ skeleton = rigged_object.skeleton();
-	int num_bones = skeleton.NumBones();
-
-	bool draw_bones = false;
-
-	if(draw_bones){
-		for(int i = 0; i < num_bones; i++){
-			int bone = i;
-			if(skeleton.HasPhysics(i)){
-				vec3 bone_pos = skeleton.GetBoneTransform(i).GetTranslationPart();
-				quaternion bone_quat = QuaternionFromMat4(skeleton.GetBoneTransform(i));
-
-				mat4 translate_mat;
-				translate_mat.SetTranslationPart(bone_pos);
-				mat4 rotation_mat;
-				rotation_mat = Mat4FromQuaternion(bone_quat);
-				mat4 mat = translate_mat * rotation_mat;
-
-				DebugDrawLine(mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)),
-							  mat * skeleton.GetBindMatrix(bone) * skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)),
-							  vec4(1.0f), vec4(1.0f), _delete_on_draw);
-
-			}
-		}
-	}
+	last_col_pos = this_mo.position;
 }
 
 void UpdateAiming(){
@@ -388,9 +364,9 @@ void UpdateAiming(){
 }
 
 void UpdateMovement(){
-	float movement_speed = 35.0;
+	float movement_speed = 25.0;
 	if(!on_ground){
-		movement_speed = 10.0;
+		movement_speed = 3.0;
 	}
 	this_mo.velocity += GetTargetVelocity() * time_step * movement_speed;
 }
@@ -430,7 +406,8 @@ vec3 GetTargetVelocity() {
 
 void UpdateCharacterRotation(){
 	if(this_mo.controlled){
-		vec3 facing = mix((camera.GetUpVector() * -1.0), camera.GetFacing(), max(0.5f, aiming_amount));
+		vec3 down_direction = mix(camera.GetFacing(), (camera.GetUpVector() * -1.0), 0.85f);
+		vec3 facing = mix(down_direction, camera.GetFacing(), max(0.5f, aiming_amount));
 		vec3 current_facing = this_mo.GetFacing();
 		this_mo.SetRotationFromFacing(mix(current_facing, facing, time_step * 20.0));
 	}
@@ -486,7 +463,7 @@ void UpdateControls(){
 
 	cam_rotation_y -= GetLookXAxis(this_mo.controller_id) * mouse_sensitivity;
 	cam_rotation_x -= GetLookYAxis(this_mo.controller_id) * mouse_sensitivity;
-	cam_rotation_x = max(-75.0f, min(cam_rotation_x, 75.0f));
+	cam_rotation_x = max(-50.0f, min(cam_rotation_x, 70.0f));
 
 	if(GetInputPressed(this_mo.controller_id, "b")){
 		this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, _ANM_FROM_START);
@@ -509,8 +486,8 @@ void UpdateBullets(){
 
 		vec3 start = bullet.starting_position;
 		vec3 end = bullet.starting_position + (bullet.direction * bullet_speed * time_step);
-		bool done = CheckCollisions(start, end, bullet);
-		/* DebugDrawLine(start, end, vec3(0.5), vec3(0.5), _fade); */
+		bool done = CheckBulletCollisions(start, end, bullet);
+		DebugDrawLine(start, end, vec3(0.5), vec3(0.5), _fade);
 		bullet.SetStartingPoint(end);
 
 		if(bullet.distance_done > max_bullet_distance || done){
@@ -520,17 +497,18 @@ void UpdateBullets(){
 	}
 }
 
-bool CheckCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
+bool CheckBulletCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
 	bool colliding = false;
-	col.GetObjRayCollision(start, end);
+	vec3 position = col.GetRayCollision(start, end);
 	vec3 direction = normalize(end - start);
-	CollisionPoint point;
 
-	if(sphere_col.NumContacts() != 0){
-		point = sphere_col.GetContact(sphere_col.NumContacts() - 1);
-		MakeMetalSparks(point.position);
+	/* DebugDrawWireSphere(start, 0.01, vec3(1.0), _fade);
+	DebugDrawWireSphere(end, 0.01, vec3(1.0), _fade); */
+
+	if(position != end){
+		MakeMetalSparks(position);
 		vec3 facing = camera.GetFacing();
-		MakeParticle("Data/Particles/gun_decal.xml", point.position - facing, facing * 10.0f);
+		MakeParticle("Data/Particles/gun_decal.xml", position - facing, facing * 10.0f);
 		string path;
 		switch(rand() % 3) {
 			case 0:
@@ -540,10 +518,12 @@ bool CheckCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
 			default:
 				path = "Data/Sounds/rico3.wav"; break;
 		}
-		PlaySound(path, point.position);
+		PlaySound(path, position);
 		colliding = true;
-		end = point.position;
+		end = position;
 	}
+
+	CollisionPoint point;
 
 	col.CheckRayCollisionCharacters(start, end);
 	int char_id = -1;
@@ -555,23 +535,24 @@ bool CheckCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
 	if(char_id != -1 && char_id != this_mo.GetID()){
 		MovementObject@ char = ReadCharacterID(char_id);
 		char.rigged_object().Stab(sphere_col.GetContact(0).position, direction, 1, 0);
-		vec3 force = direction * 15000.0f;
+		vec3 force = direction * 30000.0f;
 		vec3 hit_pos = vec3(0.0f);
 		TimedSlowMotion(0.1f, 0.7f, 0.05f);
-		float damage = 0.1;
+		float damage = 0.5;
 		char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
 					 "vec3 pos = vec3("+hit_pos.x+", "+hit_pos.y+", "+hit_pos.z+");" +
 					 "HandleRagdollImpactImpulse(impulse, pos, " + damage + ");");
 		 colliding = true;
 		 end = point.position;
 	}
+
 	return colliding;
 }
 
 void Shoot(){
 	vec3 forward = this_mo.GetFacing();
 	vec3 muzzle_offset = forward * 0.15;
-	vec3 spawn_point = this_mo.position;
+	vec3 spawn_point = this_mo.position + vec3(0.0, -0.01, 0.0) + ((1.0 - aiming_amount) * (vec3(0.0, -0.25, 0.0)));
 
 	int smoke_particle_amount = 5;
 	vec3 smoke_velocity = forward * 5.0f;
@@ -637,10 +618,10 @@ bool Init(string character_path) {
 	if(success){
 		this_mo.RecreateRiggedObject(this_mo.char_path);
 		this_mo.SetAnimation(target_animation, 10.0f, _ANM_FROM_START);
-		/* this_mo.SetScriptUpdatePeriod(1);
-		this_mo.rigged_object().SetAnimUpdatePeriod(1);
+		this_mo.SetScriptUpdatePeriod(1);
+		/* this_mo.rigged_object().SetAnimUpdatePeriod(1); */
 
-		RiggedObject@ rigged_object = this_mo.rigged_object();
+		/* RiggedObject@ rigged_object = this_mo.rigged_object();
 		Skeleton@ skeleton = rigged_object.skeleton();
 		int num_bones = skeleton.NumBones();
 		skeleton_bind_transforms.resize(num_bones);
@@ -660,7 +641,7 @@ bool Init(string character_path) {
 int WasHit(string type, string attack_path, vec3 dir, vec3 pos, int attacker_id, float attack_damage_mult, float attack_knockback_mult) {
 	attack_attacker.Load(attack_path);
 	if(type == "attackimpact"){
-		PlaySoundGroup("Data/Sounds/hit/hit_block.xml", pos, _sound_priority_high);
+		PlaySoundGroup("Data/Sounds/hit/hit_hard.xml", pos, _sound_priority_high);
 		return HitByAttack(dir, pos, attacker_id, attack_damage_mult, attack_knockback_mult);
 	}
 	return 2;
@@ -733,7 +714,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
 						quaternion(vec4(-1.0f, 0.0f, 0.0f, target_rotation2 * 3.1417f / 180.0f));
 
 	local_to_world.rotation = rot;
-	local_to_world.origin = location + vec3(0.0, -0.01, 0.0) + ((1.0 - aiming_amount) * vec3(0.0, -0.25, 0.0));
+	local_to_world.origin = location + vec3(0.0, -0.01, 0.0) + ((1.0 - aiming_amount) * (vec3(0.0, -0.25, 0.0)));
 	rigged_object.TransformAllFrameMats(local_to_world);
 }
 
@@ -880,83 +861,27 @@ void ApplyPhysics(const Timestep &in ts) {
 }
 
 void HandleCollisions(const Timestep &in ts) {
-	vec3 scale;
-	float size;
-	GetCollisionSphere(scale, size);
-	if(show_debug){
-		DebugDrawWireSphere(this_mo.position, size, vec3(1.0f,1.0f,1.0f), _delete_on_update);
-	}
-	if(on_ground){
-		HandleGroundCollisions(ts);
+	HandleGroundCollisions(ts);
+	/* if(on_ground){
 	} else {
 		HandleAirCollisions(ts);
-	}
+	} */
 }
 
 void HandleGroundCollisions(const Timestep &in ts) {
-	// Check if character has room to stand up
-	vec3 old_pos = this_mo.position;
-	vec3 scale;
-	float size;
-	GetCollisionSphere(scale, size);
-	col.GetSlidingScaledSphereCollision(this_mo.position, size, scale);
-	if(show_debug){
-		DebugDrawWireScaledSphere(this_mo.position, size, scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
-	}
-	/* this_mo.position = sphere_col.adjusted_position; */
+	vec3 offset= vec3(0.0, -0.75, 0.0);
+	vec3 scale = vec3(1.0);
+	float size = 0.5f;
 
-	HandleBumperCollision();
-	HandleStandingCollision();
-	this_mo.position = sphere_col.position;
-}
-
-vec3 HandleBumperCollision() {
-    vec3 offset;
-    vec3 scale;
-    float size;
-    GetCollisionSphere(offset, scale, size);
     col.GetSlidingScaledSphereCollision(this_mo.position + offset, size, scale);
-
-    /* for(int i = 0, len = sphere_col.NumContacts(); i < len; ++i) {
-        CollisionPoint contact = sphere_col.GetContact(i);
-        DebugDrawLine(contact.position, contact.position + contact.normal, vec4(1.0), vec4(1.0), _fade);
-    } */
 
 	bool _draw_collision_spheres = false;
     if(_draw_collision_spheres) {
-        DebugDrawWireScaledSphere(this_mo.position + offset, size, scale, vec3(0.0f, 1.0f, 0.0f), _delete_on_update);
+        DebugDrawWireScaledSphere(sphere_col.adjusted_position, size, scale, vec3(0.0f, 1.0f, 0.0f), _delete_on_update);
     }
 
     // the value of sphere_col.adjusted_position variable was set by the GetSlidingSphereCollision() called on the previous line.
     this_mo.position = sphere_col.adjusted_position - offset;
-
-    return (sphere_col.adjusted_position - sphere_col.position);
-}
-
-void GetCollisionSphere(vec3 &out offset, vec3 &out scale, float &out size) {
-    if(on_ground) {
-        offset = vec3(0.0f, mix(0.3f, 0.15f, duck_amount), 0.0f);
-        scale = vec3(1.0f, mix(1.4f, 0.6f, duck_amount), 1.0f);
-        size = _bumper_size;
-    } else {
-        offset = vec3(0.0f, mix(0.2f, 0.35f, 0.25), 0.0f);
-        scale = vec3(1.0f, mix(1.25f, 1.0f, 0.25), 1.0f);
-        size = _leg_sphere_size;
-    }
-}
-
-
-bool HandleStandingCollision() {
-	vec3 lower_pos = this_mo.position - vec3(0.0f, 0.05f, 0.0f);
-	vec3 scale;
-	float size;
-	GetCollisionSphere(scale, size);
-	col.GetSweptSphereCollision(this_mo.position, lower_pos, size);
-	if(show_debug){
-		DebugDrawWireSphere(this_mo.position, size, vec3(0.0f,0.0f,1.0f), _delete_on_update);
-		DebugDrawWireSphere(lower_pos, size, vec3(0.0f,0.0f,1.0f), _delete_on_update);
-	}
-	return (sphere_col.position == lower_pos);
 }
 
 void HandleAirCollisions(const Timestep &in ts) {
@@ -965,15 +890,12 @@ void HandleAirCollisions(const Timestep &in ts) {
 	bool landing = false;
 	vec3 old_vel = this_mo.velocity;
 	for(int i=0; i<ts.frames(); ++i){ // Divide movement into multiple pieces to help prevent surface penetration
-		if(on_ground){
-			break;
-		}
 		this_mo.position += offset/ts.frames();
-		vec3 scale;
-		float size;
-		GetCollisionSphere(scale, size);
+		vec3 scale = vec3(1.0);
+		float size = 0.75f;
+
 		col.GetSlidingScaledSphereCollision(this_mo.position, size, scale);
-		if(show_debug){
+		if(false){
 			DebugDrawWireScaledSphere(this_mo.position, size, scale, vec3(0.0f,1.0f,0.0f), _delete_on_update);
 		}
 
@@ -982,7 +904,7 @@ void HandleAirCollisions(const Timestep &in ts) {
 		for(int j=0; j<sphere_col.NumContacts(); j++){
 			const CollisionPoint contact = sphere_col.GetContact(j);
 			land_magnitude = length(this_mo.velocity);
-			float bounciness = 0.7f;
+			float bounciness = 0.3f;
 
 			if(GetInputDown(this_mo.controller_id, "walk")){
 				bounciness = 0.1;
@@ -1002,11 +924,6 @@ void HandleAirCollisions(const Timestep &in ts) {
 	}
 }
 
-void GetCollisionSphere(vec3 &out scale, float &out size){
-	scale = vec3(1.0f);
-	size = character_scale;
-}
-
 float jump_wait = 0.1f;
 
 void UpdateJumping(){
@@ -1017,7 +934,7 @@ void UpdateJumping(){
 	if(on_ground && GetInputDown(this_mo.controller_id, "jump")){
 		if(jump_wait < 0.0f){
 			jump_wait = 0.5;
-			float jump_mult = 7.0f;
+			float jump_mult = 5.0f;
 			vec3 jump_vel = vec3(0.0, 1.0, 0.0);
 			this_mo.velocity += jump_vel * jump_mult;
 		}
