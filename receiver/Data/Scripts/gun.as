@@ -1084,6 +1084,10 @@ void CacheSkeletonInfo() {
     }
 }
 
+void HandleRagdollImpactImpulse(const vec3 &in impulse, const vec3 &in pos, float damage) {
+	Log(warning, "damage " + damage);
+}
+
 void NotifyItemDetach(int idex){}
 void HandleEditorAttachment(int x, int y, bool mirror){}
 void Contact(){}
