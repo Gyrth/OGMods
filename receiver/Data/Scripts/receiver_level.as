@@ -197,6 +197,9 @@ void Reset(){
 }
 
 void DrawGUI() {
+	if(EditorModeActive()){
+		return;
+	}
 
 	if(show_red){
 		fade_in_start = the_time;
