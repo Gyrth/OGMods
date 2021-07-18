@@ -1929,7 +1929,6 @@ void main() {
 				mat3 model_rotation_mat = instances[instance_id].model_rotation_mat;
 				vec3 ws_normal2 = model_rotation_mat * frag_normal;
 				colormap.xyz = triplanarMapping(tex0, ws_normal2, world_vert);
-
             #endif
 
             vec4 shadow_coords[4];
@@ -2029,10 +2028,10 @@ void main() {
                         vec3 base_bitangent = normalize(cross(frag_tangent,base_normal));
                         vec3 base_tangent = normalize(cross(base_normal,base_bitangent));
                     #else
-						vec4 base_normalmap = texture(tex1, base_tex_coords);
-						mat3 model_rotation_mat = instances[instance_id].model_rotation_mat;
-						base_normalmap.xyz = triplanarMapping(tex0, model_rotation_mat * frag_normal, world_vert);
-
+						// vec4 base_normalmap = texture(tex1, base_tex_coords);
+						// mat3 model_rotation_mat = instances[instance_id].model_rotation_mat;
+						// base_normalmap.xyz = triplanarMapping(tex0, model_rotation_mat * frag_normal, world_vert);
+                        vec4 base_normalmap = texture(tex1,base_tex_coords);
                         color_tint_alpha = base_normalmap.a;
 
                         #if defined(BASE_TANGENT)
@@ -2444,11 +2443,13 @@ void main() {
                                 base_ws_normal = normalize((instances[instance_id].model_rotation_mat * (tan_to_obj * vec3(0,0,1))).xyz);
                             #endif
 
-                            ws_normal = normalize((instances[instance_id].model_rotation_mat * (tan_to_obj * unpacked_normal)).xyz);
+                            // ws_normal = normalize((instances[instance_id].model_rotation_mat * (tan_to_obj * unpacked_normal)).xyz);
 
 							vec4 normalmap = texture(tex1, base_tex_coords);
 							mat3 model_rotation_mat = instances[instance_id].model_rotation_mat;
 							ws_normal = triplanarMapping(tex0, model_rotation_mat * frag_normal, world_vert);
+							ws_normal = normalize(ws_normal);
+							// ws_normal *= 0.75f;
 
                             #if defined(WATER)
                                 //ws_normal = vec3(0,1,0);
@@ -2456,15 +2457,12 @@ void main() {
                             #endif
                         }
                     #else
-                        // vec4 normalmap = texture(tex1,tc0);
-
-						vec4 normalmap = texture(tex1, base_tex_coords);
-						mat3 model_rotation_mat = instances[instance_id].model_rotation_mat;
-						normalmap.xyz = triplanarMapping(tex0, model_rotation_mat * frag_normal, world_vert);
-
+                        vec4 normalmap = texture(tex1,tc0);
                         vec3 os_normal = UnpackObjNormal(normalmap);
                         vec3 ws_normal = instances[instance_id].model_rotation_mat * os_normal;
                     #endif
+
+					colormap.xyz *= vec3(0.5f);
 
                     #if !defined(WATER)
                         colormap.xyz *= instance_color_tint.xyz;
@@ -3547,8 +3545,7 @@ void main() {
                                     temp_tex_coords.x -= time * 0.1;
                                 #endif
 
-                                // vec3 temp_color = texture(tex1, temp_tex_coords).xyz;
-								vec3 temp_color = vec3(0.0);
+                                vec3 temp_color = texture(tex1, temp_tex_coords).xyz;
 
                                 #if defined(DIRECTED_WATER_DECALS)
                                     color.xyz = mix(color.xyz, diffuse_color * 4.0, pow(extra_froth, 1.0));
@@ -3577,8 +3574,7 @@ void main() {
                                 temp_tex_coords.y += time * 0.4;
                             #endif
 
-                            // vec3 temp_color = texture(tex1, temp_tex_coords).xyz;
-							vec3 temp_color = vec3(0.0);
+                            vec3 temp_color = texture(tex1, temp_tex_coords).xyz;
 
                             #if defined(DIRECTED_WATER_DECALS)
                                 color.xyz = mix(color.xyz, diffuse_color * 4.0, pow(extra_froth, 1.0));
@@ -3666,7 +3662,6 @@ void main() {
                     vec3 temp_color = mix(texture(tex0, temp_tex_coords + vec2(offset*0.2)).xyz, texture(tex0, temp_tex_coords.yx*0.8+vec2(0.5,0.5)-vec2(offset*0.2)).xyz, vec);
 
                     color.xyz = temp_color * 16.0 * mix(1.0, texture(tex1, frag_tex_coordsB).a, pow(temp_color.r,0.2));
-					color.xyz = vec3(0.0);
                     color.xyz *= max(0.0, fractal(world_vert.xz*0.5)+0.5);
                 #endif
 
@@ -3678,7 +3673,6 @@ void main() {
 
                     vec3 temp_color = texture(tex0, frag_tex_coordsB).xyz * (pow(texture(tex1, frag_tex_coordsC).a, 2.2) + 0.1);
                     color.xyz = temp_color * 2.0;
-					color.xyz = vec3(0.0);
                 #endif
 
                 #if defined(VOLUME_SHADOWS)
