@@ -9,12 +9,12 @@
 </LoadingScreen>
 <OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
-<Script></Script>
+<Script>Data/Scripts/receiver_level.as</Script>
 <LevelScriptParameters>
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
     <parameter name="Block Size" type="float" val="10" />
     <parameter name="Custom Shader" type="string" val="" />
-    <parameter name="Fog amount" type="float" val="2" />
+    <parameter name="Fog amount" type="float" val="3.0061" />
     <parameter name="GPU Particle Field" type="string" val="" />
     <parameter name="HDR Black point" type="float" val="0" />
     <parameter name="HDR Bloom multiplier" type="float" val="0" />
@@ -37,10 +37,10 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="2.41946" t1="3.53995" t2="19.7422" s0="1" s1="1" s2="1" q0="0.0969608" q1="0.33765" q2="-0.0349919" q3="0.93561" euler_x="0.20653" euler_y="0.692682" euler_z="0" id="0">
+    <CameraObject t0="5.30679" t1="2.03205" t2="-55.5096" s0="1" s1="1" s2="1" q0="-0.0629448" q1="0.175725" q2="-0.0112596" q3="-0.98236" euler_x="0.127975" euler_y="-0.354017" euler_z="0" id="0">
         <parameters />
     </CameraObject>
-    <ActorObject t0="10.9929" t1="1.43544" t2="-40.1334" s0="1" s1="1" s2="1" q0="-0.00219417" q1="0.0169344" q2="0.0120613" q3="0.999782" euler_x="-0.00398118" euler_y="0.0339209" euler_z="0.0240592" id="2" type_file="Data/Characters/gun_actor.xml" pc_script_path="gun.as" is_player="1">
+    <ActorObject t0="2.96615" t1="1.4599" t2="-57.1475" s0="1" s1="1" s2="1" q0="-0.00243407" q1="0.0169016" q2="-0.00211313" q3="0.999852" euler_x="-0.00494169" euler_y="0.0337943" euler_z="-0.00431039" id="2" type_file="Data/Characters/gun_actor.xml" pc_script_path="gun.as" is_player="1">
         <parameters>
             <parameter name="Character Scale" type="float" val="1.2" />
             <parameter name="Deep" type="float" val="0" />
@@ -65,7 +65,7 @@
     <EnvObject t0="8.03689" t1="2.20789" t2="-24.2037" s0="3.62216" s1="1.77737" s2="0.319135" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <DynamicLightObject t0="6.98721" t1="3.73218" t2="-26.1149" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="6.97563" t1="3.11388" t2="-26.36" s0="7.75591" s1="7.75591" s2="7.75591" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
     <EnvObject t0="7.09585" t1="0.986111" t2="-27.7574" s0="1.16697" s1="0.532747" s2="0.425185" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -92,13 +92,13 @@
     <DynamicLightObject t0="3.37945" t1="3.00643" t2="-38.7632" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
-    <DynamicLightObject t0="3.1146" t1="3.00203" t2="-45.1855" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="3.11456" t1="3.002" t2="-45.1853" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
     <DynamicLightObject t0="10.7906" t1="3.00203" t2="-39.0183" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
-    <ActorObject t0="7.06366" t1="13.3875" t2="-10.272" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="-1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Characters/receiver_drone_actor.xml" is_player="0">
+    <ActorObject t0="7.06366" t1="1.07833" t2="-10.1536" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="-1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Characters/receiver_drone_actor.xml" is_player="0">
         <parameters>
             <parameter name="Activation Radius" type="float" val="20" />
             <parameter name="Attack Radius" type="float" val="5" />
@@ -107,7 +107,7 @@
             <parameter name="Teams" type="string" val="drone, turner" />
         </parameters>
         <Connections>
-            <Connection id="17" />
+            <Connection id="508" />
         </Connections>
         <ItemConnections />
         <Palette />
@@ -136,7 +136,7 @@
     <EnvObject t0="4.22673" t1="3.38429" t2="-45.5751" s0="0.17177" s1="0.542192" s2="0.967092" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="2.84481" t1="2.17177" t2="-48.3281" s0="0.231062" s1="1.75197" s2="3.07532" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="4.46129" t1="2.13166" t2="-48.3281" s0="0.231062" s1="1.71186" s2="1.45884" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <ReflectionCaptureObject t0="10.3415" t1="19.3914" t2="-51.5705" s0="0.947432" s1="0.947432" s2="0.947432" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" gicoeff00="0.0769958" gicoeff01="0.0840912" gicoeff02="0.0704956" gicoeff03="0.112686" gicoeff04="0.141235" gicoeff05="0.116653" gicoeff06="0.11264" gicoeff07="0.146301" gicoeff08="0.118958" gicoeff09="0.0706024" gicoeff10="0.0758362" gicoeff11="0.0701904" gicoeff12="0.0802002" gicoeff13="0.0929108" gicoeff14="0.0789337" gicoeff15="0.104965" gicoeff16="0.12619" gicoeff17="0.103104">
@@ -183,13 +183,13 @@
     <EnvObject t0="13.4612" t1="3.46413" t2="-22.2115" s0="8.70393" s1="0.532747" s2="0.981351" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="40" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <DynamicLightObject t0="12.3428" t1="2.29523" t2="-24.9278" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="12.3708" t1="2.02523" t2="-25.8248" s0="7.74676" s1="7.74676" s2="7.74676" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
-    <DynamicLightObject t0="6.25111" t1="4.67352" t2="-19.1577" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="42" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="6.25111" t1="4.67352" t2="-19.1577" s0="9.03444" s1="9.03444" s2="9.03444" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="42" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
-    <DynamicLightObject t0="11.4614" t1="5.28085" t2="-7.97325" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="11.4614" t1="5.28085" t2="-7.97325" s0="12.9714" s1="12.9714" s2="12.9714" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
     <DynamicLightObject t0="2.23226" t1="5.97089" t2="-9.38053" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="44" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
@@ -204,7 +204,7 @@
     <EnvObject t0="7.5748" t1="-3.20843" t2="-23.2359" s0="7.73397" s1="3.69501" s2="16.9125" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="9.3596" t1="1.69066" t2="-15.9473" s0="0.363064" s1="1.22515" s2="0.276793" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="9.29628" t1="1.69066" t2="-16.449" s0="0.363064" s1="1.22515" s2="0.276793" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="6.16525" t1="1.69066" t2="-16.3406" s0="0.363064" s1="1.22515" s2="0.276793" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -498,7 +498,7 @@
     <EnvObject t0="9.9394" t1="4.53546" t2="-44.6464" s0="0.0936581" s1="0.545999" s2="0.0633601" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="4.00585" t1="-4.051" t2="-77.7236" s0="9.4239" s1="4.53098" s2="40.8946" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="6.46416" t1="-4.054" t2="-77.6356" s0="6.96559" s1="4.52798" s2="40.9827" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="9.08823" t1="4.54405" t2="-44.6464" s0="0.0936581" s1="0.545999" s2="0.0633601" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="149" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -552,10 +552,10 @@
     <EnvObject t0="11.7566" t1="4.47737" t2="-46.4666" s0="0.0936581" s1="0.545999" s2="0.0633601" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="165" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="6.44239" t1="5.63567" t2="-48.4468" s0="0.219648" s1="1.78615" s2="6.93093" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="166" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="6.5262" t1="4.48846" t2="-48.4468" s0="0.219648" s1="0.638942" s2="6.84712" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="166" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="7.67955" t1="5.68042" t2="-36.3665" s0="0.219648" s1="1.8309" s2="7.51502" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="167" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="7.71531" t1="4.44283" t2="-36.3665" s0="0.219648" s1="0.593308" s2="7.55078" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="167" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="13.7426" t1="3.95006" t2="-42.4879" s0="6.05987" s1="3.53026" s2="0.511144" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="168" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -591,10 +591,10 @@
     <EnvObject t0="-21.7262" t1="4.84687" t2="-104.63" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="178" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/city_slices.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-21.2478" t1="7.77484" t2="-24.9783" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">
+    <EnvObject t0="-21.2478" t1="-2.68472" t2="-25.2608" s0="1" s1="2.63307" s2="1.04069" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="179" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-15.6026" t1="5.24432" t2="-7.26755" s0="1.4648" s1="1.4648" s2="1.4648" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="180" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+    <EnvObject t0="-17.7035" t1="-4.7161" t2="-7.26755" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.965926" q2="0" q3="0.258819" euler_x="3.14159" euler_y="0.523599" euler_z="3.14159" id="180" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="-20.963" t1="-3.05336" t2="-40.8363" s0="1.42017" s1="1.42017" s2="1.42017" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="181" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/cylinder_dome_building.xml">
@@ -660,7 +660,7 @@
     <EnvObject t0="5.25961" t1="6.96377" t2="-14.3928" s0="0.985034" s1="0.532747" s2="1.17808" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="202" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6165" t1="8.89787" t2="-13.4258" s0="4.77597" s1="1.45313" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="203" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.5991" t1="8.84811" t2="-13.4258" s0="4.79336" s1="1.40337" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="203" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="1.98439" t1="8.8666" t2="-13.4258" s0="2.17042" s1="1.39589" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="204" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -678,7 +678,7 @@
     <EnvObject t0="3.61092" t1="7.96858" t2="-11.7136" s0="1.27666" s1="0.528363" s2="0.0914521" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="208" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="8.60459" t1="7.96861" t2="-10.3928" s0="5.08243" s1="0.528363" s2="0.0952004" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="8.60672" t1="7.95439" t2="-10.3928" s0="5.08456" s1="0.542587" s2="0.0952004" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="8.64177" t1="6.9527" t2="-10.8378" s0="0.569064" s1="0.532747" s2="2.73727" q0="-0.00238067" q1="-0.707105" q2="-0.000131698" q3="0.707105" euler_x="-1.57278" euler_y="-1.56783" euler_z="1.56922" id="210" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -690,7 +690,7 @@
     <EnvObject t0="13.6954" t1="4.44556" t2="-11.6519" s0="1.30778" s1="0.466433" s2="0.0914521" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="212" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="8.73241" t1="4.506" t2="-10.3233" s0="5.05022" s1="0.406215" s2="0.0966864" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="213" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="8.72846" t1="4.48379" t2="-10.3233" s0="5.04627" s1="0.428423" s2="0.0966864" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="213" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="12.5009" t1="6.96457" t2="-11.7004" s0="1.38962" s1="0.532747" s2="1.20519" q0="-0.00238067" q1="-0.707105" q2="-0.000131698" q3="0.707105" euler_x="-1.57278" euler_y="-1.56783" euler_z="1.56922" id="214" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -729,7 +729,7 @@
     <EnvObject t0="3.30167" t1="-0.0932963" t2="10.2494" s0="4.07319" s1="0.582942" s2="1.28067" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="227" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="4.60077" t1="0.832147" t2="10.3769" s0="0.268441" s1="0.534505" s2="4.28087" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="228" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="4.59716" t1="0.853807" t2="9.24966" s0="0.264827" s1="0.556165" s2="3.15363" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="228" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="89.5137" t1="-7.95387" t2="-64.6308" s0="0.382502" s1="0.382502" s2="0.382502" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="229" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/environment/rocky_dry_bluffs.xml">
@@ -741,10 +741,10 @@
     <EnvObject t0="-13.3206" t1="-3.16787" t2="55.7174" s0="-1.22232" s1="1" s2="1.0461" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="231" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/city_projection.xml">
         <parameters />
     </EnvObject>
-    <DynamicLightObject t0="7.11191" t1="4.56685" t2="1.24371" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="232" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="7.11191" t1="4.56685" t2="1.24371" s0="16.4915" s1="16.4915" s2="16.4915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="232" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
-    <DynamicLightObject t0="6.10785" t1="4.52995" t2="6.29364" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="233" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="6.10785" t1="4.52995" t2="6.29364" s0="13.2934" s1="13.2934" s2="13.2934" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="233" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
     <EnvObject t0="5.62047" t1="2.45973" t2="1.37972" s0="0.159362" s1="1.12172" s2="0.164726" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="234" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -759,25 +759,25 @@
     <EnvObject t0="5.61073" t1="3.64184" t2="6.30527" s0="0.189758" s1="0.302719" s2="0.203504" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="237" color_r="1" color_g="1" color_b="1" overbright="13.842" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <DynamicLightObject t0="4.08287" t1="7.05295" t2="-31.8821" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="238" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="4.08287" t1="7.05295" t2="-31.8821" s0="9.88658" s1="9.88658" s2="9.88658" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="238" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
-    <EnvObject t0="9.17037" t1="1.88986" t2="14.7204" s0="4.77597" s1="1.45313" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="239" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="9.1692" t1="1.91246" t2="14.7204" s0="4.77714" s1="1.47573" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="239" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="0.538266" t1="1.85859" t2="14.7204" s0="2.17042" s1="1.39589" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="240" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="0.541709" t1="1.93197" t2="14.7204" s0="2.17386" s1="1.46927" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="240" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="3.59427" t1="2.87387" t2="14.7204" s0="0.952016" s1="0.370337" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="241" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="3.58314" t1="2.9545" t2="14.7204" s0="0.963145" s1="0.450965" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="241" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="5.7132" t1="-0.0932543" t2="19.872" s0="5.63802" s1="0.582986" s2="7.36271" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="242" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="5.7132" t1="-0.0931222" t2="19.8721" s0="5.63802" s1="0.582986" s2="7.36271" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="242" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="6.19003" t1="4.94847" t2="14.7204" s0="7.72444" s1="1.86449" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="243" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="4.81136" t1="5.49682" t2="14.7204" s0="6.34577" s1="2.11227" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="243" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <DynamicLightObject t0="6.06893" t1="4.13553" t2="11.8979" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="244" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="6.06893" t1="4.13553" t2="11.8979" s0="13.5583" s1="13.5583" s2="13.5583" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="244" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
     <DynamicLightObject t0="5.93686" t1="3.98986" t2="18.7322" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="245" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
@@ -786,163 +786,163 @@
     <DynamicLightObject t0="5.52282" t1="3.99852" t2="23.7686" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="246" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
-    <EnvObject t0="8.67763" t1="3.71818" t2="16.7231" s0="0.290881" s1="3.29179" s2="0.290489" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="247" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="8.67763" t1="3.71831" t2="16.7232" s0="0.290881" s1="3.29179" s2="0.290489" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="247" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="4.74371" t1="4.81986" t2="16.0181" s0="3.95264" s1="0.0840738" s2="0.968679" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="248" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="4.74371" t1="4.81999" t2="16.0182" s0="3.95264" s1="0.0840738" s2="0.968679" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="248" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="0.616016" t1="3.71818" t2="16.6855" s0="0.290881" s1="3.29179" s2="0.290489" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="249" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="0.616012" t1="3.71831" t2="16.6856" s0="0.290881" s1="3.29179" s2="0.290489" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="249" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-0.0673063" t1="4.81986" t2="19.1112" s0="3.95264" s1="0.0840738" s2="0.968679" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="250" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-0.0673101" t1="4.81999" t2="19.1113" s0="3.95264" s1="0.0840738" s2="0.968679" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="250" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="9.58539" t1="4.81986" t2="19.0915" s0="3.95264" s1="0.0840738" s2="0.968679" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="251" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="9.58539" t1="4.81999" t2="19.0916" s0="3.95264" s1="0.0840738" s2="0.968679" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="251" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="8.9204" t1="3.71818" t2="23.2583" s0="0.290881" s1="3.29179" s2="0.290489" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="252" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="8.9204" t1="3.71831" t2="23.2584" s0="0.290881" s1="3.29179" s2="0.290489" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="252" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="0.594516" t1="3.71818" t2="23.2669" s0="0.290881" s1="3.29179" s2="0.290489" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="253" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="0.594512" t1="3.71831" t2="23.267" s0="0.290881" s1="3.29179" s2="0.290489" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="253" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="4.75233" t1="4.81986" t2="23.7558" s0="5.79619" s1="0.0840738" s2="0.878824" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="254" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="4.75233" t1="4.81999" t2="23.7559" s0="5.79619" s1="0.0840738" s2="0.878824" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="254" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.57051" t1="0.736802" t2="19.8796" s0="5.62284" s1="0.745529" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="255" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.57051" t1="0.736934" t2="19.8797" s0="5.62284" s1="0.745529" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="255" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.57051" t1="5.5305" t2="19.8553" s0="5.59826" s1="1.28097" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="256" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.57051" t1="5.53063" t2="19.8554" s0="5.59826" s1="1.28097" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="256" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.57051" t1="2.95321" t2="24.8773" s0="0.594948" s1="1.64195" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="257" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.57051" t1="2.95334" t2="24.8774" s0="0.594948" s1="1.64195" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="257" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.57051" t1="2.83871" t2="20.7986" s0="0.594948" s1="1.64195" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="258" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.57051" t1="2.83884" t2="20.7987" s0="0.594948" s1="1.64195" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="258" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.7206" t2="21.7048" s0="0.0742485" s1="1.56571" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="259" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.72073" t2="21.7049" s0="0.0742485" s1="1.56571" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="259" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.71024" t2="22.027" s0="0.0742485" s1="1.56571" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="260" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.71037" t2="22.0271" s0="0.0742485" s1="1.56571" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="260" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.70456" t2="22.3725" s0="0.0742485" s1="1.56571" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="261" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.70469" t2="22.3726" s0="0.0742485" s1="1.56571" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="261" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.72811" t2="22.726" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="262" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.72824" t2="22.7261" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="262" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.72241" t2="23.0694" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="263" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.72254" t2="23.0695" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="263" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.74023" t2="23.4117" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="264" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.74036" t2="23.4118" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="264" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.75793" t2="23.7718" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="265" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.75806" t2="23.7719" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="265" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.74287" t2="24.1031" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="266" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.743" t2="24.1032" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="266" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.78034" t2="17.5394" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="267" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.78047" t2="17.5395" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="267" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.76997" t2="17.8616" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="268" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.7701" t2="17.8617" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="268" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.76429" t2="18.2071" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="269" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.76442" t2="18.2072" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="269" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.81523" t2="18.5611" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.81536" t2="18.5612" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.80953" t2="18.9046" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="271" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.80966" t2="18.9047" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="271" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.82735" t2="19.2468" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="272" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.82748" t2="19.2469" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="272" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.84506" t2="19.6069" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="273" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.84519" t2="19.607" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="273" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-1.56048" t1="2.83" t2="19.9382" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="274" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="-1.56048" t1="2.83013" t2="19.9383" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="274" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="-1.57051" t1="2.68875" t2="15.7814" s0="1.52008" s1="1.6239" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="275" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6781" t1="0.734975" t2="20.2194" s0="5.62284" s1="0.745529" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="276" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6781" t1="0.735107" t2="20.2195" s0="5.62284" s1="0.745529" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="276" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6781" t1="5.52868" t2="20.1951" s0="5.59826" s1="1.28097" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="277" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6781" t1="5.53909" t2="21.4255" s0="4.36797" s1="1.27069" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="277" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6781" t1="2.83688" t2="21.1383" s0="0.594948" s1="1.64195" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="278" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6781" t1="2.83701" t2="21.1384" s0="0.594948" s1="1.64195" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="278" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.77851" t2="17.8791" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="279" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.77864" t2="17.8792" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="279" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.76814" t2="18.2013" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="280" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.76827" t2="18.2014" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="280" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.76246" t2="18.5468" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.76259" t2="18.5469" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.8134" t2="18.9009" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="282" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.81353" t2="18.901" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="282" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.8077" t2="19.2443" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="283" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.80783" t2="19.2444" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="283" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.82553" t2="19.5865" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="284" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.82566" t2="19.5866" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="284" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.84323" t2="19.9466" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="285" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.84336" t2="19.9467" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="285" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.82817" t2="20.278" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="286" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.8283" t2="20.2781" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="286" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6781" t1="2.68692" t2="16.1211" s0="1.52008" s1="1.6239" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="287" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6781" t1="2.90771" t2="16.1131" s0="1.51201" s1="1.84456" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="287" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.73361" t2="22.0093" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="288" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.73374" t2="22.0094" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="288" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.72325" t2="22.3315" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="289" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.72338" t2="22.3316" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="289" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.71757" t2="22.677" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="290" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.7177" t2="22.6771" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="290" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.76851" t2="23.031" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="291" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.76864" t2="23.0311" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="291" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.7628" t2="23.3745" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="292" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.76293" t2="23.3746" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="292" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.78063" t2="23.7167" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="293" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.78076" t2="23.7168" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="293" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.79833" t2="24.0768" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="294" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.79846" t2="24.0769" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="294" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6881" t1="2.78327" t2="24.4081" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="295" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6881" t1="2.7834" t2="24.4082" s0="0.0737367" s1="1.53833" s2="0.132268" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="295" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="10.6848" t1="2.76641" t2="24.8773" s0="0.594948" s1="1.64195" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="296" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.6848" t1="2.76654" t2="24.8774" s0="0.594948" s1="1.64195" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="296" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="5.69883" t1="3.00154" t2="25.8691" s0="7.76439" s1="3.81141" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="297" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="2.63501" t1="3.1091" t2="25.8692" s0="4.70057" s1="3.91884" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="297" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="5.52151" t1="7.04899" t2="20.3892" s0="5.63802" s1="0.582986" s2="7.36271" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="298" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="0.34534" t1="7.21801" t2="20.2951" s0="5.54377" s1="0.414095" s2="2.18654" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="298" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <PathPointObject t0="7.77176" t1="2.42526" t2="17.8555" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="300" type_file="">
+    <PathPointObject t0="7.77176" t1="2.42539" t2="17.8556" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="300" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -952,7 +952,7 @@
             <Connection id="303" />
         </Connections>
     </PathPointObject>
-    <PathPointObject t0="7.30198" t1="2.08628" t2="22.8048" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="301" type_file="">
+    <PathPointObject t0="5.41477" t1="2.08641" t2="23.7454" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="301" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -962,7 +962,7 @@
             <Connection id="300" />
         </Connections>
     </PathPointObject>
-    <PathPointObject t0="2.15643" t1="2.21341" t2="22.2717" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="302" type_file="">
+    <PathPointObject t0="4.70129" t1="2.21354" t2="20.3375" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="302" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -972,7 +972,7 @@
             <Connection id="301" />
         </Connections>
     </PathPointObject>
-    <PathPointObject t0="2.34531" t1="2.38163" t2="17.3423" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="303" type_file="">
+    <PathPointObject t0="2.28672" t1="1.98594" t2="17.4403" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="303" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -982,7 +982,7 @@
             <Connection id="302" />
         </Connections>
     </PathPointObject>
-    <ActorObject t0="3.62941" t1="2.70835" t2="16.6578" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="304" type_file="Data/Characters/receiver_drone_actor.xml" is_player="0">
+    <ActorObject t0="3.62941" t1="2.70848" t2="16.6579" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="304" type_file="Data/Characters/receiver_drone_actor.xml" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
             <parameter name="Follow Player" type="int" val="1" />
@@ -994,6 +994,764 @@
         <ItemConnections />
         <Palette />
     </ActorObject>
+    <Decal t0="6.90214" t1="0.363872" t2="-18.6954" s0="0.909955" s1="1" s2="2.98545" q0="0" q1="0" q2="0.295571" q3="0.955321" euler_x="0" euler_y="0" euler_z="0.600106" id="308" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="8.94147" t1="0.514097" t2="-18.556" s0="0.909955" s1="1" s2="2.98545" q0="0" q1="0" q2="-0.389223" q3="0.921144" euler_x="0" euler_y="0" euler_z="-0.799576" id="309" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="7.87262" t1="0.602013" t2="-17.5544" s0="0.909955" s1="1" s2="2.98545" q0="0.171119" q1="-0.686089" q2="-0.18798" q3="0.681662" euler_x="1.5708" euler_y="-1.05729" euler_z="-1.59545" id="310" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="7.90384" t1="0.424177" t2="-19.8485" s0="0.909955" s1="1" s2="2.98545" q0="-0.252934" q1="-0.660321" q2="0.23658" q3="0.666356" euler_x="-1.57079" euler_y="-0.863836" euler_z="1.54614" id="311" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="10.3216" t1="0.320122" t2="-19.8617" s0="1.28994" s1="1" s2="1.38355" q0="-0.010469" q1="-0.707029" q2="-0.00696268" q3="0.707073" euler_x="-1.57064" euler_y="-1.56589" euler_z="1.54599" id="312" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="3.77841" t1="0.477451" t2="-20.6705" s0="1.28994" s1="1" s2="1.38355" q0="-0.010469" q1="-0.707029" q2="-0.00696268" q3="0.707073" euler_x="-1.57064" euler_y="-1.56589" euler_z="1.54599" id="313" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="6.09311" t1="0.441845" t2="-16.3426" s0="1.28994" s1="1" s2="1.38355" q0="-0.010469" q1="-0.707029" q2="-0.00696268" q3="0.707073" euler_x="-1.57064" euler_y="-1.56589" euler_z="1.54599" id="314" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="9.2945" t1="0.363546" t2="-16.4004" s0="1.28994" s1="1" s2="1.38355" q0="-0.010469" q1="-0.707029" q2="-0.00696268" q3="0.707073" euler_x="-1.57064" euler_y="-1.56589" euler_z="1.54599" id="315" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="6.37969" t1="0.402137" t2="-22.9227" s0="2.35612" s1="1" s2="2.92156" q0="-0.010469" q1="-0.707029" q2="-0.00696268" q3="0.707073" euler_x="-1.57064" euler_y="-1.56589" euler_z="1.54599" id="316" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="7.09028" t1="0.383043" t2="-23.2397" s0="2.35612" s1="1" s2="2.92156" q0="-0.010469" q1="-0.707029" q2="-0.00696268" q3="0.707073" euler_x="-1.57064" euler_y="-1.56589" euler_z="1.54599" id="317" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="2.22175" t1="3.88234" t2="-21.0582" s0="2.76414" s1="1" s2="2.97897" q0="-0.707073" q1="0.00696273" q2="-0.707029" q3="-0.0104691" euler_x="1.57106" euler_y="-1.56589" euler_z="1.54599" id="318" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="3.71747" t1="3.87727" t2="-21.2196" s0="3.351" s1="1" s2="3.57227" q0="-0.707073" q1="0.00696273" q2="-0.707029" q3="-0.0104691" euler_x="1.57106" euler_y="-1.56589" euler_z="1.54599" id="319" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="1.58411" t1="3.92246" t2="-22.7153" s0="3.351" s1="1" s2="3.57227" q0="-0.707073" q1="0.00696273" q2="-0.707029" q3="-0.0104691" euler_x="1.57106" euler_y="-1.56589" euler_z="1.54599" id="320" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="3.86791" t1="3.86702" t2="-22.5387" s0="3.351" s1="1" s2="3.57227" q0="-0.707073" q1="0.00696273" q2="-0.707029" q3="-0.0104691" euler_x="1.57106" euler_y="-1.56589" euler_z="1.54599" id="321" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <DynamicLightObject t0="13.7255" t1="1.96467" t2="-32.8171" s0="6.6628" s1="6.6628" s2="6.6628" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="322" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+        <parameters />
+    </DynamicLightObject>
+    <PathPointObject t0="2.77192" t1="5.07164" t2="-32.0341" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="323" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="324" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="13.531" t1="5.29859" t2="-30.3386" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="324" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="323" />
+            <Connection id="325" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="13.3359" t1="5.36777" t2="-23.2414" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="325" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="324" />
+            <Connection id="326" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="2.04396" t1="1.85076" t2="-22.6015" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="326" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="325" />
+            <Connection id="327" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="2.51165" t1="1.72317" t2="-15.2263" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="327" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="326" />
+            <Connection id="328" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="12.326" t1="1.95777" t2="-15.1175" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="328" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="327" />
+        </Connections>
+    </PathPointObject>
+    <ActorObject t0="13.8906" t1="9.05694" t2="-12.0585" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="329" type_file="Data/Characters/receiver_drone_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Follow Player" type="int" val="1" />
+            <parameter name="Teams" type="string" val="drone" />
+        </parameters>
+        <Connections>
+            <Connection id="355" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <ActorObject t0="1.80206" t1="5.33265" t2="-30.4387" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="330" type_file="Data/Characters/receiver_drone_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Follow Player" type="int" val="1" />
+            <parameter name="Teams" type="string" val="drone" />
+        </parameters>
+        <Connections>
+            <Connection id="323" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <EnvObject t0="7.54104" t1="6.89679" t2="-36.3665" s0="0.219648" s1="1.27773" s2="7.55058" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="333" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="6.47564" t1="6.23868" t2="-48.4468" s0="0.219648" s1="0.638942" s2="6.84712" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="334" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="6.44865" t1="5.34292" t2="-48.306" s0="6.98229" s1="0.859084" s2="0.324292" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="335" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters />
+    </EnvObject>
+    <PathPointObject t0="7.27179" t1="1.37093" t2="-45.1216" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="345" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="346" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="8.66703" t1="1.37094" t2="-38.9637" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="346" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="345" />
+            <Connection id="347" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="11.5269" t1="1.37094" t2="-38.9711" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="347" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="346" />
+            <Connection id="348" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="11.6499" t1="5.75009" t2="-45.5081" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="348" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="347" />
+            <Connection id="349" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="2.65514" t1="5.42519" t2="-45.7318" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="349" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="348" />
+        </Connections>
+    </PathPointObject>
+    <ActorObject t0="6.63517" t1="5.10677" t2="-45.2622" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="350" type_file="Data/Characters/receiver_drone_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Follow Player" type="int" val="1" />
+            <parameter name="Teams" type="string" val="drone" />
+        </parameters>
+        <Connections>
+            <Connection id="348" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <Decal t0="1.46436" t1="6.18203" t2="-48.6537" s0="7.82082" s1="1.06091" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="354" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <PathPointObject t0="11.932" t1="8.56581" t2="-11.8086" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="355" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="356" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="5.33778" t1="8.11579" t2="-11.7545" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="356" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="355" />
+            <Connection id="357" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="5.0713" t1="8.46753" t2="-15.0869" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="357" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="356" />
+            <Connection id="358" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="13.3599" t1="5.16022" t2="-15.4871" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="358" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="357" />
+            <Connection id="359" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="13.6766" t1="4.57977" t2="-21.9455" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="359" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="358" />
+        </Connections>
+    </PathPointObject>
+    <Decal t0="6.98895" t1="3.63822" t2="-48.9482" s0="7.82082" s1="1.06091" s2="1" q0="-0.5" q1="0" q2="0" q3="0.866025" euler_x="-1.0472" euler_y="0" euler_z="0" id="360" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="11.1317" t1="3.58383" t2="-48.7941" s0="7.82082" s1="1.06091" s2="1" q0="-0.965926" q1="0" q2="0" q3="0.258819" euler_x="-2.61799" euler_y="0" euler_z="0" id="361" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="10.8628" t1="0.665481" t2="-51.2128" s0="2.71367" s1="1.06091" s2="2.61304" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383184" euler_y="0" euler_z="0" id="362" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="8.3894" t1="0.848183" t2="-55.9785" s0="3.7468" s1="1.46481" s2="3.60785" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383184" euler_y="0" euler_z="0" id="363" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.594783" t1="0.657439" t2="-51.003" s0="1.14475" s1="1.46481" s2="7.21391" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383184" euler_y="0" euler_z="0" id="364" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.556415" t1="0.795377" t2="-54.6011" s0="0.945013" s1="1.46481" s2="6.33839" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383184" euler_y="0" euler_z="0" id="365" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <EnvObject t0="0.450444" t1="5.00439" t2="-39.747" s0="0.12323" s1="1.08173" s2="1.08929" q0="0.378328" q1="0" q2="0" q3="0.925672" euler_x="0.775979" euler_y="0" euler_z="0" id="366" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <Decal t0="0.757156" t1="4.92318" t2="-39.6144" s0="3.51359" s1="1" s2="3.67447" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="367" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <EnvObject t0="7.41501" t1="-0.140009" t2="-54.5923" s0="5.63802" s1="0.582986" s2="7.36271" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="368" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="0.131304" t1="0.699593" t2="-54.4232" s0="5.78435" s1="0.755074" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="369" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="0.131303" t1="5.4732" t2="-54.4042" s0="5.80298" s1="1.29151" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="370" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="0.131307" t1="2.64186" t2="-58.6829" s0="1.52008" s1="1.6239" s2="0.202063" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="371" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="13.7271" t1="3.62678" t2="-53.9099" s0="5.56904" s1="3.73229" s2="0.467539" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="372" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.22332" t1="7.00224" t2="-54.0751" s0="5.63802" s1="0.582986" s2="7.36271" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="373" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="8.79102" t1="3.42354" t2="-56.6359" s0="3.05204" s1="3.1755" s2="0.159445" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="374" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <DynamicLightObject t0="11.5353" t1="2.75639" t2="-51.2271" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="375" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+        <parameters />
+    </DynamicLightObject>
+    <DynamicLightObject t0="5.14886" t1="3.76563" t2="-53.5464" s0="24.5588" s1="24.5588" s2="24.5588" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="376" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+        <parameters />
+    </DynamicLightObject>
+    <EnvObject t0="7.73969" t1="3.51464" t2="-55.7719" s0="2.21498" s1="3.15724" s2="0.112882" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="377" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.92006" t1="0.868683" t2="-56.1134" s0="0.506672" s1="0.755134" s2="1.15584" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="378" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="4.74238" t1="0.817883" t2="-49.0329" s0="0.506672" s1="0.438461" s2="1.09541" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="379" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="8.43122" t1="4.19701" t2="-48.571" s0="0.419336" s1="0.634153" s2="4.15266" q0="0.183013" q1="0.683013" q2="0.183013" q3="0.683013" euler_x="1.5708" euler_y="1.0472" euler_z="1.5708" id="380" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <Decal t0="8.3665" t1="6.2455" t2="-48.7229" s0="7.82082" s1="1.06091" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="381" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.757156" t1="5.54924" t2="-39.1815" s0="3.51359" s1="1" s2="3.67447" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="382" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <EnvObject t0="10.8961" t1="5.27312" t2="-51.3006" s0="0.516632" s1="1.41009" s2="0.675543" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="383" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="10.8695" t1="0.536034" t2="-51.2947" s0="0.777269" s1="1.41009" s2="0.790713" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="384" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="10.4801" t1="3.69019" t2="-51.3099" s0="0.507438" s1="0.271994" s2="0.805293" q0="0.683013" q1="0.183013" q2="-0.683013" q3="0.183013" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="385" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="11.2883" t1="3.71158" t2="-51.3056" s0="0.517066" s1="0.271994" s2="0.787117" q0="0.183013" q1="0.683013" q2="-0.183013" q3="0.683013" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="386" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <Group t0="10.9012" t1="3.68591" t2="-51.3056" s0="2.46927" s1="1.2987" s2="1.04413" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="389" version="1">
+        <parameters />
+        <EnvObject t0="10.9012" t1="3.70115" t2="-50.8937" s0="0.517066" s1="0.271994" s2="0.787117" q0="0.258819" q1="0" q2="0" q3="0.965926" euler_x="0.523599" euler_y="0" euler_z="0" id="387" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.9054" t1="3.67976" t2="-51.7019" s0="0.507438" s1="0.271994" s2="0.805293" q0="0.965926" q1="0" q2="0" q3="0.258819" euler_x="2.61799" euler_y="0" euler_z="0" id="388" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <EnvObject t0="10.7955" t1="1.9246" t2="-51.2947" s0="0.230302" s1="0.417804" s2="0.234285" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="390" color_r="1" color_g="1" color_b="1" overbright="4.802" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.15055" t1="3.49841" t2="-59.5163" s0="6.95658" s1="3.10474" s2="0.112881" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="391" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <Decal t0="11.0438" t1="2.75541" t2="-60.0455" s0="3.38408" s1="3.38408" s2="3.38408" q0="0" q1="0.707107" q2="0.707107" q3="0" euler_x="1.5708" euler_y="0" euler_z="3.14159" id="392" type_file="Data/Objects/Decals/WolfireLogo.xml" color_r="0.172549" color_g="0.172547" color_b="0.172547" overbright="0">
+        <parameters />
+    </Decal>
+    <EnvObject t0="6.70266" t1="0.868683" t2="-59.2815" s0="0.506672" s1="0.755134" s2="1.15584" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="393" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="2.79073" t1="2.03369" t2="-59.2815" s0="0.506672" s1="1.8053" s2="1.14648" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="394" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <Decal t0="0.757156" t1="5.7296" t2="-40.3829" s0="3.51359" s1="1" s2="3.67447" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="395" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.757156" t1="4.4086" t2="-40.0622" s0="3.51359" s1="1" s2="3.67447" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="396" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.63503" t1="5.4898" t2="-33.807" s0="1.87039" s1="0.906592" s2="1.60962" q0="0" q1="0" q2="-1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="397" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.12391" t1="5.52097" t2="-33.7841" s0="1.87039" s1="0.906592" s2="1.60962" q0="0" q1="0" q2="-1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="398" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.57073" t1="5.61719" t2="-33.7568" s0="1.87039" s1="0.906592" s2="1.60962" q0="0" q1="0" q2="-1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="399" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.5311" t1="5.5877" t2="-33.7678" s0="1.87039" s1="0.906592" s2="1.60962" q0="0" q1="0" q2="-1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="400" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.48175" t1="4.0655" t2="-34.0771" s0="0.860146" s1="0.456154" s2="0.803502" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="401" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="5.51987" t1="4.04208" t2="-34.0771" s0="0.860146" s1="0.456154" s2="0.803502" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="402" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="5.58346" t1="4.04208" t2="-34.4186" s0="0.860146" s1="0.456154" s2="0.803502" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="403" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="5.35264" t1="4.04208" t2="-35.3174" s0="0.860146" s1="0.456154" s2="0.803502" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="404" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.66107" t1="4.04208" t2="-35.2927" s0="0.860146" s1="0.456154" s2="0.803502" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="405" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.6663" t1="4.04208" t2="-35.5514" s0="0.860146" s1="0.456154" s2="0.803502" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="406" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="5.45756" t1="4.04208" t2="-35.5026" s0="0.860146" s1="0.456154" s2="0.803502" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="407" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.49684" t1="4.04208" t2="-34.38" s0="0.860146" s1="0.456154" s2="0.803502" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="408" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.8326" t1="4.43953" t2="-35.6848" s0="1.37422" s1="0.456155" s2="0.809241" q0="0" q1="0.866025" q2="0.5" q3="0" euler_x="2.09439" euler_y="0" euler_z="3.14159" id="409" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="8.53897" t1="0.682971" t2="16.8496" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="410" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="8.87869" t1="0.682971" t2="23.1329" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="411" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.664682" t1="0.682971" t2="23.3388" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="412" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.664682" t1="0.645694" t2="16.7714" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="413" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="-0.953885" t1="4.56034" t2="20.3892" s0="2.00265" s1="2.08148" s2="8.3023" q0="0" q1="0" q2="-0.866025" q3="0.5" euler_x="0" euler_y="0" euler_z="-2.0944" id="414" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="4.64658" t1="4.53845" t2="15.4002" s0="1.68066" s1="2.08148" s2="9.22418" q0="0.612461" q1="-0.3534" q2="-0.612284" q3="0.353707" euler_x="1.5708" euler_y="0.523599" euler_z="-1.5703" id="415" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="1.80834" t1="4.54893" t2="15.407" s0="1.68066" s1="2.08148" s2="9.22418" q0="0.612461" q1="-0.3534" q2="-0.612284" q3="0.353707" euler_x="1.5708" euler_y="0.523599" euler_z="-1.5703" id="416" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <EnvObject t0="8.2715" t1="2.47209" t2="-48.3715" s0="2.48439" s1="1.30452" s2="0.389799" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="417" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.86386" t1="2.34156" t2="13.3661" s0="3.97647" s1="0.155367" s2="0.968679" q0="0.258819" q1="-0.965926" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="-2.61799" id="418" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="12.0913" t1="4.34126" t2="13.3383" s0="0.86197" s1="0.117892" s2="0.957585" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="419" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="11.7534" t1="4.81999" t2="15.6958" s0="1.20259" s1="0.0840738" s2="1.38513" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="420" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="12.0579" t1="4.56402" t2="13.9713" s0="0.891166" s1="0.120018" s2="0.464914" q0="0" q1="-0.965926" q2="0.258819" q3="0" euler_x="-2.61799" euler_y="0" euler_z="3.14159" id="421" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="12.7938" t1="5.22092" t2="15.6831" s0="0.147633" s1="0.394678" s2="1.39875" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="422" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="12.7938" t1="5.03382" t2="13.3543" s0="0.147633" s1="0.57953" s2="0.962549" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="423" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="11.8863" t1="5.22083" t2="16.9303" s0="0.147633" s1="0.40645" s2="0.968926" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="424" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <DynamicLightObject t0="12.518" t1="6.14787" t2="14.3061" s0="10.8473" s1="10.8473" s2="10.8473" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="425" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
+        <parameters />
+    </DynamicLightObject>
+    <Decal t0="8.64471" t1="4.42013" t2="15.3307" s0="1.68066" s1="2.08148" s2="9.22418" q0="0.612461" q1="-0.3534" q2="-0.612284" q3="0.353707" euler_x="1.5708" euler_y="0.523599" euler_z="-1.5703" id="426" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="3.62435" t1="1.29957" t2="14.7048" s0="1.61395" s1="2.64588" s2="2.55551" q0="0.00394362" q1="-0.707096" q2="-0.0035898" q3="0.707098" euler_x="1.57084" euler_y="-1.56017" euler_z="-1.57034" id="427" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="3.49829" t1="1.83524" t2="14.6644" s0="1.61395" s1="2.64588" s2="2.55551" q0="0.707098" q1="-0.00358978" q2="0.707096" q3="-0.00394368" euler_x="-1.57077" euler_y="-1.56016" euler_z="-1.57034" id="428" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.684352" t1="6.47029" t2="23.3388" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="429" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.684352" t1="6.45077" t2="16.8063" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="430" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="8.18583" t1="6.67501" t2="16.8063" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="431" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="8.18583" t1="6.56239" t2="23.0287" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="432" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.72375" t1="4.82808" t2="16.8167" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="433" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <Decal t0="0.72375" t1="4.70092" t2="23.2382" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="434" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+        <parameters />
+    </Decal>
+    <EnvObject t0="9.38823" t1="7.21801" t2="19.8345" s0="5.54377" s1="0.414095" s2="2.18654" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="435" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="4.93058" t1="7.21848" t2="23.7124" s0="1.69191" s1="0.414095" s2="2.55809" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="436" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="4.84938" t1="7.21848" t2="15.9466" s0="1.69191" s1="0.414095" s2="2.55809" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="437" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <Group t0="4.59863" t1="8.3476" t2="19.5674" s0="6.18857" s1="2.76408" s2="6.05538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="440" version="1">
+        <parameters />
+        <EnvObject t0="3.25192" t1="8.3356" t2="18.2957" s0="0.148911" s1="0.138153" s2="2.57406" q0="0.103373" q1="-0.894453" q2="0.226718" q3="0.371304" euler_x="-2.65494" euler_y="-0.791063" euler_z="-3.11803" id="438" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.15549" t1="8.5817" t2="21.1188" s0="0.148912" s1="0.110112" s2="2.18857" q0="-0.10158" q1="-0.890489" q2="-0.224414" q3="0.382557" euler_x="2.65363" euler_y="-0.813823" euler_z="3.12818" id="439" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <Group t0="4.55181" t1="8.30578" t2="20.1222" s0="6.18857" s1="2.76408" s2="6.05538" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="1.57045" euler_z="0" id="441" version="1">
+        <parameters />
+        <EnvObject t0="3.28013" t1="8.29379" t2="21.4689" s0="0.148911" s1="0.138153" s2="2.57406" q0="0.23341" q1="-0.369923" q2="0.0872181" q3="0.895025" euler_x="0.519774" euler_y="-0.779461" euler_z="-0.0232875" id="442" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.10326" t1="8.53988" t2="18.5653" s0="0.148912" s1="0.110112" s2="2.18857" q0="-0.230513" q1="-0.359162" q2="-0.086857" q3="0.900179" euler_x="-0.506412" euler_y="-0.756891" euler_z="0.0126682" id="443" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <EnvObject t0="7.35086" t1="5.30107" t2="-26.47" s0="0.476684" s1="0.418083" s2="0.73298" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="444" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="4.44532" t1="5.32143" t2="-26.5635" s0="0.476684" s1="0.418083" s2="0.73298" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="445" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="3.14973" t1="-2.62388" t2="80.9202" s0="-1.22232" s1="1" s2="1.0461" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="446" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/city_projection.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="5.57447" t1="1.88292" t2="-99.5339" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="447" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/city_projection.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="23.2511" t1="-4.7161" t2="42.2627" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.965926" q2="0" q3="0.258819" euler_x="3.14159" euler_y="0.523599" euler_z="3.14159" id="448" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+        <parameters />
+    </EnvObject>
+    <ActorObject t0="3.56707" t1="1.56776" t2="10.7594" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="449" type_file="Data/Characters/receiver_drone_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Follow Player" type="int" val="1" />
+            <parameter name="Teams" type="string" val="drone" />
+        </parameters>
+        <Connections>
+            <Connection id="453" />
+        </Connections>
+        <ItemConnections />
+        <Palette />
+    </ActorObject>
+    <EnvObject t0="33.0493" t1="-4.7161" t2="13.7148" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.965926" q2="0" q3="0.258819" euler_x="3.14159" euler_y="0.523599" euler_z="3.14159" id="450" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="23.7598" t1="-4.7161" t2="-29.4656" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.965926" q2="0" q3="0.258819" euler_x="3.14159" euler_y="0.523599" euler_z="3.14159" id="451" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+        <parameters />
+    </EnvObject>
+    <PathPointObject t0="3.2072" t1="1.30614" t2="6.20975" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="452" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections />
+    </PathPointObject>
+    <PathPointObject t0="3.84686" t1="1.47784" t2="13.0246" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="453" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="454" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="11.7758" t1="5.7211" t2="13.2188" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="454" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="453" />
+            <Connection id="455" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="11.848" t1="6.18227" t2="15.7716" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="455" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="454" />
+            <Connection id="456" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="1.6868" t1="5.98111" t2="16.2505" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="456" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="455" />
+        </Connections>
+    </PathPointObject>
+    <EnvObject t0="-21.1547" t1="-4.71603" t2="-56.2794" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.965926" q2="0" q3="0.258819" euler_x="3.14159" euler_y="0.523599" euler_z="3.14159" id="457" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="48.724" t1="-2.68472" t2="-28.7048" s0="1" s1="2.63307" s2="1.04069" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="458" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="53.2369" t1="-2.68472" t2="5.25741" s0="1" s1="2.63307" s2="1.04069" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="459" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="38.7728" t1="-2.68472" t2="33.1231" s0="1" s1="2.63307" s2="1.04069" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="460" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="12.0246" t1="2.89052" t2="-111.966" s0="1" s1="2.63307" s2="1.04069" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="461" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-13.3732" t1="-4.7161" t2="14.6473" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0.11731" euler_y="1.57045" euler_z="0.11731" id="462" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-41.5214" t1="2.22623" t2="68.8097" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0.11731" euler_y="1.57045" euler_z="0.11731" id="463" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-31.0834" t1="-15.4701" t2="15.6995" s0="1" s1="2.63307" s2="1.04069" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="464" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">
+        <parameters />
+    </EnvObject>
+    <Group t0="7.26909" t1="1.59966" t2="36.582" s0="4.85281" s1="4.6308" s2="21.2654" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="480" version="1">
+        <parameters />
+        <EnvObject t0="9.4551" t1="0.797647" t2="36.582" s0="0.2354" s1="0.534505" s2="10.6277" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="471" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.2633" t1="-0.127796" t2="36.4558" s0="2.66746" s1="0.582942" s2="2.41561" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="472" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.1246" t1="0.797647" t2="36.4366" s0="0.271241" s1="0.534505" s2="2.64284" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="473" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.16085" t1="0.797647" t2="38.929" s0="0.220322" s1="0.534505" s2="1.2775" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="474" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.1353" t1="0.797647" t2="34.0003" s0="0.220322" s1="0.534505" s2="1.2775" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="475" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.12913" t1="2.42523" t2="38.9313" s0="0.159362" s1="1.12172" s2="0.164726" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="476" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.13887" t1="3.60545" t2="38.9332" s0="0.189758" s1="0.302719" s2="0.203504" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="477" color_r="1" color_g="1" color_b="1" overbright="13.842" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.12913" t1="2.42712" t2="34.0039" s0="0.159362" s1="1.12172" s2="0.164726" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="478" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.13887" t1="3.60734" t2="34.0058" s0="0.189758" s1="0.302719" s2="0.203504" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="479" color_r="1" color_g="1" color_b="1" overbright="13.842" type_file="Data/Objects/receiver_triplanar_block.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <EnvObject t0="10.9975" t1="3.00369" t2="25.8692" s0="1.7968" s1="3.79321" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="481" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="8.17479" t1="3.48987" t2="25.8692" s0="1.68112" s1="3.45166" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="482" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="8.46632" t1="-0.12982" t2="29.7149" s0="4.07319" s1="0.582942" s2="1.28067" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="483" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="8.49867" t1="-0.12982" t2="42.7893" s0="4.07319" s1="0.582942" s2="1.28067" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="484" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.01002" t1="0.832147" t2="29.9068" s0="0.268441" s1="0.534505" s2="4.28087" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="485" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="7.04237" t1="0.832147" t2="42.9811" s0="0.268441" s1="0.534505" s2="4.28087" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="486" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <DynamicLightObject t0="7.67488" t1="4.56685" t2="34.4651" s0="16.4915" s1="16.4915" s2="16.4915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="487" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+        <parameters />
+    </DynamicLightObject>
+    <DynamicLightObject t0="7.45608" t1="4.56685" t2="39.1756" s0="16.4915" s1="16.4915" s2="16.4915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="488" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+        <parameters />
+    </DynamicLightObject>
+    <Hotspot t0="4.89326" t1="-2.87598" t2="3.75739" s0="3.51414" s1="1" s2="5.40399" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="489" type_file="Data/Objects/Hotspots/emitter.xml">
+        <parameters>
+            <parameter name="Type" type="string" val="Smoke" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
+    <Hotspot t0="5.40963" t1="7.14564" t2="-24.5117" s0="3.51414" s1="1" s2="5.40399" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="490" type_file="Data/Objects/Hotspots/emitter.xml">
+        <parameters>
+            <parameter name="Type" type="string" val="Smoke" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
+    <EnvObject t0="0.380007" t1="2.14332" t2="-48.3281" s0="0.231062" s1="1.67579" s2="0.853768" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="491" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="2.11019" t1="3.91252" t2="-48.3264" s0="0.229333" s1="1.00188" s2="0.914788" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="492" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="8.45001" t1="1.00678" t2="-48.0482" s0="0.217575" s1="0.476529" s2="1.81385" q0="-0.0840015" q1="-0.7021" q2="0.0840015" q3="0.7021" euler_x="-1.5708" euler_y="-1.33265" euler_z="1.5708" id="493" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="8.45001" t1="0.587209" t2="-47.4148" s0="0.487677" s1="0.348261" s2="1.81385" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="494" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="11.7847" t1="0.587208" t2="-47.256" s0="0.425217" s1="0.348261" s2="0.600041" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="495" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="12.1393" t1="1.07916" t2="-47.326" s0="0.0888046" s1="0.228774" s2="0.0699839" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="496" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="11.92" t1="0.939107" t2="-47.3056" s0="0.0595014" s1="0.153285" s2="0.0468911" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="497" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="12.0635" t1="0.939107" t2="-47.0607" s0="0.0595014" s1="0.153285" s2="0.0468911" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="498" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="4.39992" t1="2.49286" t2="-43.6501" s0="0.506672" s1="0.144353" s2="0.318295" q0="0.226863" q1="-0.669727" q2="0.226863" q3="0.669726" euler_x="-2.9362" euler_y="-1.5708" euler_z="-2.9362" id="499" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <DynamicLightObject t0="4.42899" t1="3.38349" t2="-43.5364" s0="3.11348" s1="3.11348" s2="3.11348" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="500" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
+        <parameters />
+    </DynamicLightObject>
+    <EnvObject t0="4.38032" t1="2.54014" t2="-43.6722" s0="0.400817" s1="0.114194" s2="0.251797" q0="0.226863" q1="-0.669727" q2="0.226863" q3="0.669726" euler_x="-2.9362" euler_y="-1.5708" euler_z="-2.9362" id="501" color_r="1" color_g="1" color_b="1" overbright="2.26" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="2.40746" t1="0.621976" t2="-43.6843" s0="0.506672" s1="0.755134" s2="1.15584" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="502" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="3.17252" t1="2.85777" t2="-43.3447" s0="0.506672" s1="0.403044" s2="0.539425" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="503" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="23.0304" t1="-0.508651" t2="-83.8562" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="504" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/city_projection.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-18.4921" t1="-3.16786" t2="-85.5117" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="505" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/city_projection.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-50.1325" t1="-1.86682" t2="10.3189" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="506" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/city_slices.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="1.62409" t1="2.88093" t2="-43.3447" s0="0.506672" s1="0.403044" s2="0.539425" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="507" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <parameters />
+    </EnvObject>
+    <PathPointObject t0="12.299" t1="1.56553" t2="-9.07553" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="508" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="509" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="3.5419" t1="1.74817" t2="-8.53239" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="509" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="508" />
+            <Connection id="510" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="3.49449" t1="1.957" t2="3.90276" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="510" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="509" />
+            <Connection id="511" />
+        </Connections>
+    </PathPointObject>
+    <PathPointObject t0="5.7041" t1="1.87386" t2="3.93541" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="511" type_file="">
+        <parameters>
+            <parameter name="Type" type="string" val="Stand" />
+            <parameter name="Wait" type="float" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="510" />
+        </Connections>
+    </PathPointObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Gun" path="Data/Characters/gun_actor.xml" thumbnail_path="Data/UI/spawner/gun.png" />
@@ -1003,7 +1761,6 @@
     <SpawnerItem display_name="receiver_triplanar_block.xml" path="Data/Objects/receiver_triplanar_block.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Alpha Male Wolf" path="Data/Objects/IGF_Characters/IGF_WolfActor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/IGF_wolfActor.png" />
     <SpawnerItem display_name="drone_hotspot.xml" path="Data/Objects/drone_hotspot.xml" thumbnail_path="empty_placeholder.png" />
-    <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
     <SpawnerItem display_name="Chevron Tower Building (impostor)" path="Data/Objects/2d_3d/structures/chevron_tower_building.xml" thumbnail_path="" />
     <SpawnerItem display_name="City Projection (impostor)" path="Data/Objects/2d_3d/structures/city_projection.xml" thumbnail_path="" />
     <SpawnerItem display_name="City Slices (impostor)" path="Data/Objects/2d_3d/structures/city_slices.xml" thumbnail_path="" />
@@ -1011,6 +1768,12 @@
     <SpawnerItem display_name="Construction Monument (impostor)" path="Data/Objects/2d_3d/structures/construction_monument.xml" thumbnail_path="" />
     <SpawnerItem display_name="Cylinder Dome Building (impostor)" path="Data/Objects/2d_3d/structures/cylinder_dome_building.xml" thumbnail_path="" />
     <SpawnerItem display_name="Rocky Dry Bluffs (impostor)" path="Data/Objects/2d_3d/environment/rocky_dry_bluffs.xml" thumbnail_path="" />
-    <SpawnerItem display_name="Path Point" path="Data/Objects/pathpoint/pathpoint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/pathpoint.png" />
+    <SpawnerItem display_name="Particle Emitter Hotspot" path="Data/Objects/Hotspots/emitter.xml" thumbnail_path="Data/UI/spawner/thumbs/Hotspot/emitter_icon.png" />
+    <SpawnerItem display_name="Map Decal" path="Data/Objects/therium/Decals/notes/collinpeakmap.xml" thumbnail_path="" />
+    <SpawnerItem display_name="Wolfire Logo" path="Data/Objects/Decals/WolfireLogo.xml" thumbnail_path="Data/UI/spawner/thumbs/Decal/WolfireLogo.png" />
+    <SpawnerItem display_name="Invisible Block" path="Data/Objects/invisibleblock.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/invisibleblock.png" />
+    <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
     <SpawnerItem display_name="receiver_drone_actor.xml" path="Data/Characters/receiver_drone_actor.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Path Point" path="Data/Objects/pathpoint/pathpoint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/pathpoint.png" />
+    <SpawnerItem display_name="Blob Shadow" path="Data/Objects/Decals/blob_shadow.xml" thumbnail_path="" />
 </RecentItems>
