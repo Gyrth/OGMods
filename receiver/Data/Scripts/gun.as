@@ -463,7 +463,7 @@ void UpdateControls(){
 
 	cam_rotation_y -= GetLookXAxis(this_mo.controller_id) * mouse_sensitivity;
 	cam_rotation_x -= GetLookYAxis(this_mo.controller_id) * mouse_sensitivity;
-	cam_rotation_x = max(-50.0f, min(cam_rotation_x, 70.0f));
+	cam_rotation_x = max(-70.0f, min(cam_rotation_x, 70.0f));
 
 	if(GetInputPressed(this_mo.controller_id, "b")){
 		this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, _ANM_FROM_START);
@@ -487,7 +487,7 @@ void UpdateBullets(){
 		vec3 start = bullet.starting_position;
 		vec3 end = bullet.starting_position + (bullet.direction * bullet_speed * time_step);
 		bool done = CheckBulletCollisions(start, end, bullet);
-		DebugDrawLine(start, end, vec3(0.5), vec3(0.5), _fade);
+		/* DebugDrawLine(start, end, vec3(0.5), vec3(0.5), _fade); */
 		bullet.SetStartingPoint(end);
 
 		if(bullet.distance_done > max_bullet_distance || done){

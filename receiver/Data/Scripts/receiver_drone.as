@@ -294,8 +294,8 @@ int starting_path_point_id = -1;
 vec3 drone_translation;
 float collision_sphere_size = 0.35;
 float attack_sphere_size = 0.25;
-float patrol_movement_speed = 2.0;
-float attack_movement_speed = 5.5;
+float patrol_movement_speed = 3.0;
+float attack_movement_speed = 20.0;
 
 float patrol_turn_speed = 2.0;
 float attack_turn_speed = 6.0;
@@ -359,7 +359,7 @@ void Update(int num_frames) {
 }
 
 void PostInit(){
-	drone_sound_id = PlaySoundLoopAtLocation("Data/Sounds/drone.wav", drone_translation, 0.25);
+	drone_sound_id = PlaySoundLoopAtLocation("Data/Sounds/drone.wav", drone_translation, 0.05);
 	SetSoundPitch(drone_sound_id, 1.5);
 	light.SetTint(vec3(0.0));
 	light.SetScale(vec3(4.0));
@@ -461,13 +461,13 @@ void EnemyCheck(){
 			vec3 target_position = char.position;
 			vec3 target_direction = normalize(target_position - drone_translation);
 
-			DebugDrawLine(target_position, target_position + current_direction, vec3(1.0), _fade);
-			DebugDrawLine(target_position, target_position + target_direction, vec3(1.0), _fade);
 
-			if(character_ids[i] == this_mo.GetID()){
+			if(character_ids[i] == this_mo.GetID() || char.OnSameTeam(this_mo)){
 				continue;
 			}
 
+			/* DebugDrawLine(target_position, target_position + current_direction, vec3(1.0), _fade);
+			DebugDrawLine(target_position, target_position + target_direction, vec3(1.0), _fade); */
 
 			if(!ObstructionCheck(character_ids[i]) && dot(current_direction, target_direction) > 0.75){
 				//Check if the current target is closer.
@@ -489,14 +489,14 @@ void EnemyCheck(){
 }
 
 bool ObstructionCheck(int char_id){
-	vec3 raycast_start = drone_translation + vec3(0.0, 0.25, 0.0);
+	vec3 raycast_start = this_mo.position + vec3(0.0, 0.25, 0.0);
 	MovementObject@ char = ReadCharacterID(char_id);
-	vec3 raycast_end = char.rigged_object().GetAvgIKChainPos("torso");
-	col.GetObjRayCollision(raycast_start, raycast_end);
+	vec3 raycast_end = char.position;
+	vec3 point = col.GetRayCollision(raycast_start, raycast_end);
 
 	/* DebugDrawLine(raycast_start, raycast_end, vec3(1.0), _fade); */
 
-	if(sphere_col.NumContacts() == 0){
+	if(distance(point, char.position) < 1.0){
 		return false;
 	}else{
 		return true;
@@ -592,6 +592,8 @@ void UpdatePatrolling(){
 			}
 			old_waypoint_target_id = temp_waypoint_target_id;
 		}
+	}else{
+		current_path_point_id = this_mo.GetWaypointTarget();
 	}
 }
 
@@ -639,7 +641,7 @@ void MoveTowards(vec3 position){
 	}
 
 	this_mo.velocity += velocity;
-	velocity *= 0.98;
+	velocity *= 0.9;
 }
 
 void ActiveCheck(){
@@ -700,7 +702,7 @@ void HandleAirCollisions(const Timestep &in ts) {
 
 		this_mo.position += offset/ts.frames();
 		vec3 scale = vec3(1.0);
-		float size = 0.25f;
+		float size = 0.5f;
 
 		col.GetSlidingScaledSphereCollision(this_mo.position, size, scale);
 		if(false){
@@ -735,7 +737,7 @@ void HandleAirCollisions(const Timestep &in ts) {
 void HandleGroundCollisions(const Timestep &in ts) {
 	vec3 offset= vec3(0.0, -0.0, 0.0);
 	vec3 scale = vec3(1.0);
-	float size = 0.25f;
+	float size = 0.35f;
 
 	col.GetSlidingScaledSphereCollision(this_mo.position + offset, size, scale);
 
