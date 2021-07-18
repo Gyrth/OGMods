@@ -1,6 +1,6 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
-<Name>gun_test</Name>
+<Name>overceiver</Name>
 <Description></Description>
 <Shader>post</Shader>
 <Shadows>true</Shadows>
@@ -12,12 +12,11 @@
 <Script>Data/Scripts/receiver_level.as</Script>
 <LevelScriptParameters>
     <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
-    <parameter name="Block Size" type="float" val="10" />
     <parameter name="Custom Shader" type="string" val="" />
-    <parameter name="Fog amount" type="float" val="3.0061" />
+    <parameter name="Fog amount" type="float" val="3" />
     <parameter name="GPU Particle Field" type="string" val="" />
-    <parameter name="HDR Black point" type="float" val="0" />
-    <parameter name="HDR Bloom multiplier" type="float" val="0" />
+    <parameter name="HDR Black point" type="float" val="0.25" />
+    <parameter name="HDR Bloom multiplier" type="float" val="0.05" />
     <parameter name="HDR White point" type="float" val="2" />
     <parameter name="Level Boundaries" type="int" val="0" />
     <parameter name="Load Tip" type="string" val="" />
@@ -26,8 +25,7 @@
     <parameter name="Saturation" type="float" val="1" />
     <parameter name="Sky Brightness" type="float" val="5" />
     <parameter name="Sky Rotation" type="float" val="-239" />
-    <parameter name="Sky Tint" type="string" val="120, 158, 103" />
-    <parameter name="World Size" type="int" val="32" />
+    <parameter name="Sky Tint" type="string" val="99, 99, 99" />
 </LevelScriptParameters>
 <NavMeshParameters generate="false" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
 <Sky>
@@ -37,10 +35,10 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="5.30679" t1="2.03205" t2="-55.5096" s0="1" s1="1" s2="1" q0="-0.0629448" q1="0.175725" q2="-0.0112596" q3="-0.98236" euler_x="0.127975" euler_y="-0.354017" euler_z="0" id="0">
+    <CameraObject t0="1.45814" t1="4.50589" t2="7.23587" s0="1" s1="1" s2="1" q0="-0.101564" q1="-0.3255" q2="0.0351914" q3="-0.939413" euler_x="0.215393" euler_y="0.667094" euler_z="0" id="0">
         <parameters />
     </CameraObject>
-    <ActorObject t0="2.96615" t1="1.4599" t2="-57.1475" s0="1" s1="1" s2="1" q0="-0.00243407" q1="0.0169016" q2="-0.00211313" q3="0.999852" euler_x="-0.00494169" euler_y="0.0337943" euler_z="-0.00431039" id="2" type_file="Data/Characters/gun_actor.xml" pc_script_path="gun.as" is_player="1">
+    <ActorObject t0="2.96615" t1="1.4599" t2="-57.1475" s0="1" s1="1" s2="1" q0="-0.00243407" q1="0.0169016" q2="-0.00211313" q3="0.999852" euler_x="-0.00494169" euler_y="0.0337943" euler_z="-0.00431039" id="2" type_file="Data/Characters/receiver_gun_actor.xml" pc_script_path="receiver_gun.as" is_player="1">
         <parameters>
             <parameter name="Character Scale" type="float" val="1.2" />
             <parameter name="Deep" type="float" val="0" />
@@ -139,7 +137,7 @@
     <EnvObject t0="4.46129" t1="2.13166" t2="-48.3281" s0="0.231062" s1="1.71186" s2="1.45884" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <ReflectionCaptureObject t0="10.3415" t1="19.3914" t2="-51.5705" s0="0.947432" s1="0.947432" s2="0.947432" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" gicoeff00="0.0769958" gicoeff01="0.0840912" gicoeff02="0.0704956" gicoeff03="0.112686" gicoeff04="0.141235" gicoeff05="0.116653" gicoeff06="0.11264" gicoeff07="0.146301" gicoeff08="0.118958" gicoeff09="0.0706024" gicoeff10="0.0758362" gicoeff11="0.0701904" gicoeff12="0.0802002" gicoeff13="0.0929108" gicoeff14="0.0789337" gicoeff15="0.104965" gicoeff16="0.12619" gicoeff17="0.103104">
+    <ReflectionCaptureObject t0="4.0222" t1="1.27518" t2="-67.6214" s0="0.947432" s1="0.947432" s2="0.947432" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" gicoeff00="0.17746" gicoeff01="0.180481" gicoeff02="0.192932" gicoeff03="0.195923" gicoeff04="0.200317" gicoeff05="0.213623" gicoeff06="0.227142" gicoeff07="0.228943" gicoeff08="0.245148" gicoeff09="0.12767" gicoeff10="0.13327" gicoeff11="0.14389" gicoeff12="0.170227" gicoeff13="0.174103" gicoeff14="0.187408" gicoeff15="0.200653" gicoeff16="0.204681" gicoeff17="0.217133">
         <parameters>
             <parameter name="Global" type="string" val="1" />
         </parameters>
@@ -1247,16 +1245,16 @@
     <Decal t0="11.1317" t1="3.58383" t2="-48.7941" s0="7.82082" s1="1.06091" s2="1" q0="-0.965926" q1="0" q2="0" q3="0.258819" euler_x="-2.61799" euler_y="0" euler_z="0" id="361" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="10.8628" t1="0.665481" t2="-51.2128" s0="2.71367" s1="1.06091" s2="2.61304" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383184" euler_y="0" euler_z="0" id="362" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="10.8628" t1="0.665481" t2="-51.2128" s0="2.71367" s1="1.06091" s2="2.61304" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383183" euler_y="0" euler_z="0" id="362" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="8.3894" t1="0.848183" t2="-55.9785" s0="3.7468" s1="1.46481" s2="3.60785" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383184" euler_y="0" euler_z="0" id="363" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="8.3894" t1="0.848183" t2="-55.9785" s0="3.7468" s1="1.46481" s2="3.60785" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383183" euler_y="0" euler_z="0" id="363" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="0.594783" t1="0.657439" t2="-51.003" s0="1.14475" s1="1.46481" s2="7.21391" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383184" euler_y="0" euler_z="0" id="364" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="0.594783" t1="0.657439" t2="-51.003" s0="1.14475" s1="1.46481" s2="7.21391" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383183" euler_y="0" euler_z="0" id="364" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="0.556415" t1="0.795377" t2="-54.6011" s0="0.945013" s1="1.46481" s2="6.33839" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383184" euler_y="0" euler_z="0" id="365" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="0.556415" t1="0.795377" t2="-54.6011" s0="0.945013" s1="1.46481" s2="6.33839" q0="0.019158" q1="0" q2="0" q3="0.999816" euler_x="0.0383183" euler_y="0" euler_z="0" id="365" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
     <EnvObject t0="0.450444" t1="5.00439" t2="-39.747" s0="0.12323" s1="1.08173" s2="1.08929" q0="0.378328" q1="0" q2="0" q3="0.925672" euler_x="0.775979" euler_y="0" euler_z="0" id="366" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -1403,7 +1401,7 @@
     <Decal t0="0.664682" t1="0.645694" t2="16.7714" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="413" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="-0.953885" t1="4.56034" t2="20.3892" s0="2.00265" s1="2.08148" s2="8.3023" q0="0" q1="0" q2="-0.866025" q3="0.5" euler_x="0" euler_y="0" euler_z="-2.0944" id="414" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="-0.953885" t1="4.56034" t2="20.3892" s0="2.00265" s1="2.08148" s2="8.3023" q0="0" q1="0" q2="-0.866025" q3="0.5" euler_x="0" euler_y="0" euler_z="-2.09439" id="414" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
     <Decal t0="4.64658" t1="4.53845" t2="15.4002" s0="1.68066" s1="2.08148" s2="9.22418" q0="0.612461" q1="-0.3534" q2="-0.612284" q3="0.353707" euler_x="1.5708" euler_y="0.523599" euler_z="-1.5703" id="415" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
@@ -1442,28 +1440,28 @@
     <Decal t0="8.64471" t1="4.42013" t2="15.3307" s0="1.68066" s1="2.08148" s2="9.22418" q0="0.612461" q1="-0.3534" q2="-0.612284" q3="0.353707" euler_x="1.5708" euler_y="0.523599" euler_z="-1.5703" id="426" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="3.62435" t1="1.29957" t2="14.7048" s0="1.61395" s1="2.64588" s2="2.55551" q0="0.00394362" q1="-0.707096" q2="-0.0035898" q3="0.707098" euler_x="1.57084" euler_y="-1.56017" euler_z="-1.57034" id="427" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="3.62435" t1="1.29957" t2="14.7048" s0="1.61395" s1="2.64588" s2="2.55551" q0="0.00394362" q1="-0.707096" q2="-0.0035898" q3="0.707098" euler_x="1.57084" euler_y="-1.56022" euler_z="-1.57034" id="427" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="3.49829" t1="1.83524" t2="14.6644" s0="1.61395" s1="2.64588" s2="2.55551" q0="0.707098" q1="-0.00358978" q2="0.707096" q3="-0.00394368" euler_x="-1.57077" euler_y="-1.56016" euler_z="-1.57034" id="428" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="3.49829" t1="1.83524" t2="14.6644" s0="1.61395" s1="2.64588" s2="2.55551" q0="0.707098" q1="-0.00358978" q2="0.707096" q3="-0.00394368" euler_x="-1.57089" euler_y="-1.56022" euler_z="-1.57034" id="428" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="0.684352" t1="6.47029" t2="23.3388" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="429" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="0.684352" t1="6.47029" t2="23.3388" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="429" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="0.684352" t1="6.45077" t2="16.8063" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="430" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="0.684352" t1="6.45077" t2="16.8063" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="430" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="8.18583" t1="6.67501" t2="16.8063" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="431" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="8.18583" t1="6.67501" t2="16.8063" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="431" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="8.18583" t1="6.56239" t2="23.0287" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="432" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="8.18583" t1="6.56239" t2="23.0287" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="432" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="0.72375" t1="4.82808" t2="16.8167" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="433" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="0.72375" t1="4.82808" t2="16.8167" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="433" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <Decal t0="0.72375" t1="4.70092" t2="23.2382" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="-3.14159" id="434" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+    <Decal t0="0.72375" t1="4.70092" t2="23.2382" s0="1.89504" s1="1.89504" s2="1.89504" q0="0" q1="0" q2="1" q3="0" euler_x="0" euler_y="0" euler_z="3.14159" id="434" type_file="Data/Objects/Decals/blob_shadow.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
     <EnvObject t0="9.38823" t1="7.21801" t2="19.8345" s0="5.54377" s1="0.414095" s2="2.18654" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="435" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -1484,12 +1482,12 @@
             <parameters />
         </EnvObject>
     </Group>
-    <Group t0="4.55181" t1="8.30578" t2="20.1222" s0="6.18857" s1="2.76408" s2="6.05538" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="1.57045" euler_z="0" id="441" version="1">
+    <Group t0="4.55181" t1="8.30578" t2="20.1222" s0="6.18857" s1="2.76408" s2="6.05538" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="441" version="1">
         <parameters />
         <EnvObject t0="3.28013" t1="8.29379" t2="21.4689" s0="0.148911" s1="0.138153" s2="2.57406" q0="0.23341" q1="-0.369923" q2="0.0872181" q3="0.895025" euler_x="0.519774" euler_y="-0.779461" euler_z="-0.0232875" id="442" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="6.10326" t1="8.53988" t2="18.5653" s0="0.148912" s1="0.110112" s2="2.18857" q0="-0.230513" q1="-0.359162" q2="-0.086857" q3="0.900179" euler_x="-0.506412" euler_y="-0.756891" euler_z="0.0126682" id="443" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+        <EnvObject t0="6.10326" t1="8.53988" t2="18.5653" s0="0.148912" s1="0.110112" s2="2.18857" q0="-0.230513" q1="-0.359162" q2="-0.086857" q3="0.900179" euler_x="-0.506413" euler_y="-0.75689" euler_z="0.0126684" id="443" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
             <parameters />
         </EnvObject>
     </Group>
@@ -1586,10 +1584,10 @@
     <EnvObject t0="12.0246" t1="2.89052" t2="-111.966" s0="1" s1="2.63307" s2="1.04069" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="461" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-13.3732" t1="-4.7161" t2="14.6473" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0.11731" euler_y="1.57045" euler_z="0.11731" id="462" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+    <EnvObject t0="-13.3732" t1="-4.7161" t2="14.6473" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="462" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="-41.5214" t1="2.22623" t2="68.8097" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0.11731" euler_y="1.57045" euler_z="0.11731" id="463" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
+    <EnvObject t0="-41.5214" t1="2.22623" t2="68.8097" s0="2.16887" s1="3.01349" s2="1.4648" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="463" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_monument.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="-31.0834" t1="-15.4701" t2="15.6995" s0="1" s1="2.63307" s2="1.04069" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="464" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/2d_3d/structures/construction_building_1.xml">

@@ -2,9 +2,11 @@
 #include "situationawareness.as"
 #include "interpdirection.as"
 
-int light_id = CreateObject("Data/Objects/lights/dynamic_light.xml", true);
+int light_id = -1;
+Object@ light;
 
-Object@ light = ReadObjectFromID(light_id);
+int shock_light_id = -1;
+Object@ shock_light;
 
 Situation situation;
 int target_id = -1;
@@ -184,7 +186,7 @@ array<int> weapon_slots = {-1, -1};
 int knife_layer_id = -1;
 int throw_knife_layer_id = -1;
 float land_magnitude = 0.0f;
-float character_scale = 1.0f;
+float character_scale = 4.0f;
 AttackScriptGetter attack_attacker;
 float block_stunned = 1.0f;
 int block_stunned_by_id = -1;
@@ -293,9 +295,9 @@ int current_path_point_id = -1;
 int starting_path_point_id = -1;
 vec3 drone_translation;
 float collision_sphere_size = 0.35;
-float attack_sphere_size = 0.25;
-float patrol_movement_speed = 3.0;
-float attack_movement_speed = 20.0;
+float attack_sphere_size = 0.35;
+float patrol_movement_speed = 5.0;
+float attack_movement_speed = 30.0;
 
 float patrol_turn_speed = 2.0;
 float attack_turn_speed = 6.0;
@@ -306,15 +308,15 @@ float target_yaw = 0.0;
 float movement_speed = patrol_movement_speed;
 float turn_speed = patrol_turn_speed;
 float attack_timer = 0.0;
-float attack_interval = 0.5;
+float attack_interval = 0.02;
 int drone_sound_id = -1;
 float electric_timer = 0.0;
 float electric_interval = 0.05;
 float flash_timer = 0.0;
 bool active = false;
 float active_check_timer = 0.0;
-float activation_radius = 100.0;
-float attack_radius = 100.0;
+float activation_radius = 150.0;
+float attack_radius = 25.0;
 vec3 old_vel;
 bool dead = false;
 
@@ -332,7 +334,11 @@ void Update(int num_frames) {
 
 	ActiveCheck();
 
-	this_mo.velocity *= pow(0.95f,ts.frames());
+	if(!dead){
+		this_mo.velocity *= pow(0.95f,ts.frames());
+	}else{
+		this_mo.velocity *= pow(0.99f,ts.frames());
+	}
 
 	old_vel = this_mo.velocity;
 	last_col_pos = this_mo.position;
@@ -343,15 +349,19 @@ void Update(int num_frames) {
 	if(flash_timer > 0.0){
 		flash_timer -= time_step;
 		if(flash_timer <= 0.0){
-			light.SetTint(vec3(0.0));
+			shock_light.SetTint(vec3(0.0));
 		}
 	}
+
+	SetSoundPosition(drone_sound_id, drone_translation);
 
 	if(!active || dead){
 		return;
 	}
 
-	SetSoundPosition(drone_sound_id, drone_translation);
+	light.SetTranslation(drone_translation + current_direction);
+	light.SetTint(vec3(10.0));
+	light.SetScale(vec3(10.0));
 
 	UpdatePatrolling();
 	EnemyCheck();
@@ -359,10 +369,17 @@ void Update(int num_frames) {
 }
 
 void PostInit(){
-	drone_sound_id = PlaySoundLoopAtLocation("Data/Sounds/drone.wav", drone_translation, 0.05);
+	light_id = CreateObject("Data/Objects/lights/dynamic_light.xml", true);
+	@light = ReadObjectFromID(light_id);
+	light.SetTint(vec3(1.0));
+	light.SetScale(vec3(10.0));
+
+	shock_light_id = CreateObject("Data/Objects/lights/dynamic_light.xml", true);
+	@shock_light = ReadObjectFromID(light_id);
+	shock_light.SetTint(vec3(0.0));
+	shock_light.SetScale(vec3(5.0));
+
 	SetSoundPitch(drone_sound_id, 1.5);
-	light.SetTint(vec3(0.0));
-	light.SetScale(vec3(4.0));
 }
 
 void SetScale(float new_character_scale){
@@ -380,7 +397,7 @@ float wave = 1.0f;
 bool targeted_jump = false;
 
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
-	float distance_threshold = character_scale * 1.25f;
+	float distance_threshold = character_scale * 0.5f;
 	vec3 this_com = this_mo.rigged_object().skeleton().GetCenterOfMass();
 	vec3 other_com = other.rigged_object().skeleton().GetCenterOfMass();
 	this_com.y = this_mo.position.y;
@@ -425,9 +442,9 @@ void HandleAnimationEvent(string event, vec3 world_pos){
 }
 
 void Flash(vec3 position){
-	light.SetTranslation(position);
+	shock_light.SetTranslation(position);
 	flash_timer = 0.05;
-	light.SetTint(vec3(0.5));
+	shock_light.SetTint(vec3(20.0));
 }
 
 void Reset() {
@@ -441,6 +458,8 @@ void Reset() {
 }
 
 bool Init(string character_path) {
+	drone_sound_id = PlaySoundLoopAtLocation("Data/Sounds/drone.wav", drone_translation, 0.05);
+
 	this_mo.char_path = character_path;
 	bool success = character_getter.Load(this_mo.char_path);
 	if(success){
@@ -461,7 +480,6 @@ void EnemyCheck(){
 			vec3 target_position = char.position;
 			vec3 target_direction = normalize(target_position - drone_translation);
 
-
 			if(character_ids[i] == this_mo.GetID() || char.OnSameTeam(this_mo)){
 				continue;
 			}
@@ -469,7 +487,7 @@ void EnemyCheck(){
 			/* DebugDrawLine(target_position, target_position + current_direction, vec3(1.0), _fade);
 			DebugDrawLine(target_position, target_position + target_direction, vec3(1.0), _fade); */
 
-			if(!ObstructionCheck(character_ids[i]) && dot(current_direction, target_direction) > 0.75){
+			if(!ObstructionCheck(character_ids[i]) && dot(current_direction, target_direction) > 0.5){
 				//Check if the current target is closer.
 				if(target_id != -1){
 					MovementObject@ current_target_char = ReadCharacterID(target_id);
@@ -477,7 +495,10 @@ void EnemyCheck(){
 						continue;
 					}
 				}
+				string team_string;
+				character_getter.GetTeamString(team_string);
 				target_id = character_ids[i];
+				PlaySound("Data/Sounds/receiver_drone_beep.wav", drone_translation);
 			}
 		}
 	}else{
@@ -505,7 +526,7 @@ bool ObstructionCheck(int char_id){
 
 void UpdateAttacking(){
 
-	if(target_id != -1){
+	if(target_id != -1 && !dead){
 		MovementObject@ char = ReadCharacterID(target_id);
 		vec3 attack_target = char.position;
 		movement_speed = attack_movement_speed;
@@ -566,7 +587,7 @@ void UpdateAttacking(){
 }
 
 void UpdatePatrolling(){
-	if(target_id == -1 && current_path_point_id != -1){
+	if(target_id == -1 && current_path_point_id != -1 && current_path_point_id != this_mo.GetID()){
 
 		Object@ path_point = ReadObjectFromID(current_path_point_id);
 		movement_speed = patrol_movement_speed;
@@ -597,10 +618,13 @@ void UpdatePatrolling(){
 	}
 }
 
+void ResetWaypointTarget(){
+
+}
+
 void MoveTowards(vec3 position){
 	vec3 velocity_direction = normalize(velocity);
-	vec3 target_direction = normalize(position - drone_translation);
-
+	vec3 target_direction = normalize(position - this_mo.position);
 
 	float dot_product = dot(velocity_direction, target_direction);
 	vec3 direction;
@@ -611,33 +635,18 @@ void MoveTowards(vec3 position){
 		direction = target_direction;
 	}
 
-	float adjusted_turn_speed = max(0.15, (1.0 - (length(velocity) / movement_speed)) * turn_speed);
-	/* Log(warning, "turn speed " + turn_speed); */
-
-	DebugDrawLine(this_mo.position, this_mo.position + target_direction, vec3(), _delete_on_draw);
+	/* DebugDrawLine(this_mo.position, position, vec3(1.0f), _delete_on_draw); */
 
 	vec3 current_facing = this_mo.GetFacing();
-	this_mo.SetRotationFromFacing(mix(current_facing, direction, time_step * 20.0));
+	this_mo.SetRotationFromFacing(mix(current_facing, direction, time_step * 30.0));
 	velocity += current_direction * movement_speed * time_step;
-
-	col.GetSlidingScaledSphereCollision(drone_translation, collision_sphere_size, 1.0);
 
 	/* DebugDrawWireSphere(drone_translation, collision_sphere_size, vec3(0.0f, 0.0f, 1.0f), _delete_on_update); */
 	/* DebugDrawLine(drone_translation, drone_translation + current_direction, vec3(), _delete_on_draw); */
 
-	if(sphere_col.NumContacts() > 0) {
+	if(on_ground) {
 		PlaySoundGroup("Data/Sounds/weapon_foley/impact/weapon_metal_hit_metal.xml", drone_translation, 0.25);
-		MakeMetalSparks(sphere_col.GetContact(0).position);
-
-		for(int j=0; j<sphere_col.NumContacts(); j++){
-			const CollisionPoint contact = sphere_col.GetContact(j);
-			velocity = reflect(velocity, contact.normal);
-			vec3 offset = sphere_col.adjusted_position - sphere_col.position;
-			this_mo.position = drone_translation + offset;
-			colliding = true;
-		}
-	}else{
-		colliding = false;
+		MakeMetalSparks(this_mo.position);
 	}
 
 	this_mo.velocity += velocity;
@@ -658,7 +667,6 @@ void ActiveCheck(){
 
 	for(uint i = 0; i < character_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(character_ids[i]);
-		Log(warning, "Found " + char.is_player);
 		if(char.is_player){
 			active = true;
 			return;
@@ -958,7 +966,7 @@ void SetParameters() {
 	character_getter.GetTeamString(team_str);
 	params.AddString("Teams",team_str);
 
-	params.AddFloatSlider("Character Scale",0.25,"min:0.25,max:2.0,step:0.02,text_mult:100");
+	params.AddFloatSlider("Character Scale", 1.0, "min:0.25,max:2.0,step:0.02,text_mult:100");
 	character_scale = params.GetFloat("Character Scale");
 	if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
 		this_mo.RecreateRiggedObject(this_mo.char_path);
