@@ -284,6 +284,8 @@ array<vec3> temp_old_weap_points;
 array<vec3> old_weap_points;
 array<vec3> weap_points;
 float current_fov = 90.0f;
+int rounds = 0;
+float step_counter = 0.0f;
 
 enum GunStates{
 	MagazineOut,
@@ -328,7 +330,8 @@ float max_bullet_distance = 150.0f;
 float cam_rotation_x = 0.0f;
 float cam_rotation_y = 180.0f;
 float cam_rotation_z = 0.0f;
-bool tick = false;
+bool running = true;
+bool resetting = false;
 
 void Update(int num_frames) {
 	Timestep ts(time_step, num_frames);
@@ -348,28 +351,72 @@ void Update(int num_frames) {
 	UpdateCharacterRotation();
 	UpdateBullets();
 
-	if(this_mo.controlled){
+	if(this_mo.controlled && knocked_out != _dead){
 		UpdateControls();
 		UpdateJumping();
 		UpdateMovement();
 		UpdateAiming();
+		UpdateFootsteps();
 	}
 
 	old_vel = this_mo.velocity;
 	last_col_pos = this_mo.position;
+	resetting = false;
+}
+
+float footstep_wait_timer = 0.0;
+
+void UpdateFootsteps(){
+	if(!on_ground || resetting){
+		return;
+	}
+
+	if(footstep_wait_timer < 1.0f){
+		footstep_wait_timer += time_step;
+		return;
+	}
+
+	vec3 flat_current_position = this_mo.position;
+	vec3 flat_last_position = last_col_pos;
+	flat_current_position.y = 0.0;
+	flat_last_position.y = 0.0;
+
+	step_counter += distance(flat_current_position, flat_last_position);
+	float step_threshold = 1.25f;
+	if(step_counter > step_threshold){
+		step_counter -= step_threshold;
+		string path;
+		switch(rand() % 5) {
+			case 0:
+				path = "Data/Sounds/receiver_gun_fs_1.wav"; break;
+			case 1:
+				path = "Data/Sounds/receiver_gun_fs_2.wav"; break;
+			case 2:
+				path = "Data/Sounds/receiver_gun_fs_3.wav"; break;
+			case 3:
+				path = "Data/Sounds/receiver_gun_fs_4.wav"; break;
+			default:
+				path = "Data/Sounds/receiver_gun_fs_5.wav"; break;
+		}
+		PlaySound(path, this_mo.position + vec3(0.0, -1.0, 0.0));
+	}
 }
 
 void UpdateAiming(){
 	aiming_amount = mix(aiming_amount, GetInputDown(this_mo.controller_id, "grab")?1.0:0.0, time_step * 7.0);
 }
 
+
 void UpdateMovement(){
-	float movement_speed = 25.0;
+	float movement_speed = running?25.0f: 10.0f;
+
 	if(!on_ground){
 		movement_speed = 3.0;
 	}
 	this_mo.velocity += GetTargetVelocity() * time_step * movement_speed;
 }
+
+float run_timer = 0.0f;
 
 // Converts the keyboard controls into a target velocity that is used for movement calculations in aschar.as and aircontrol.as.
 vec3 GetTargetVelocity() {
@@ -408,8 +455,9 @@ void UpdateCharacterRotation(){
 	if(this_mo.controlled){
 		vec3 down_direction = mix(camera.GetFacing(), (camera.GetUpVector() * -1.0), 0.85f);
 		vec3 facing = mix(down_direction, camera.GetFacing(), max(0.5f, aiming_amount));
-		vec3 current_facing = this_mo.GetFacing();
-		this_mo.SetRotationFromFacing(mix(current_facing, facing, time_step * 20.0));
+		vec3 current_facing = camera.GetFacing();
+		/* this_mo.SetRotationFromFacing(mix(current_facing, facing, time_step * 20.0)); */
+		this_mo.SetRotationFromFacing(facing);
 	}
 }
 
@@ -450,7 +498,7 @@ void UpdateCamera(const Timestep &in ts){
 
 	camera.SetFOV(current_fov);
 	camera.SetPos(cam_pos);
-	camera.SetDistance(0.4f);
+	camera.SetDistance(0.5f);
 
 	if(this_mo.focused_character) {
 		UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
@@ -459,23 +507,40 @@ void UpdateCamera(const Timestep &in ts){
 	camera.SetInterpSteps(ts.frames());
 }
 
+float gun_state_timeout = 0.0;
+
 void UpdateControls(){
 
 	cam_rotation_y -= GetLookXAxis(this_mo.controller_id) * mouse_sensitivity;
 	cam_rotation_x -= GetLookYAxis(this_mo.controller_id) * mouse_sensitivity;
 	cam_rotation_x = max(-70.0f, min(cam_rotation_x, 70.0f));
 
+	/* if(GetInputDown(this_mo.controller_id, "crouch")){
+		running = true;
+	}else{
+		running = false;
+	} */
+
 	if(GetInputPressed(this_mo.controller_id, "b")){
 		this_mo.SetAnimation("Data/Animations/gun_animation.anm", 20.0f, _ANM_FROM_START);
-	}else if(gun_state == MagazineIn && GetInputPressed(this_mo.controller_id, "attack")){
-		this_mo.SetAnimation("Data/Animations/gun_shoot.anm", 20.0f, _ANM_FROM_START);
+	}else if(GetInputPressed(this_mo.controller_id, "attack")){
 		Shoot();
-	}else if(gun_state == MagazineOut && GetInputPressed(this_mo.controller_id, "r")){
-		this_mo.SetAnimation("Data/Animations/gun_magazine_insert.anm", 20.0f, _ANM_FROM_START);
-		gun_state = MagazineIn;
-	}else if(gun_state == MagazineIn && GetInputPressed(this_mo.controller_id, "r")){
-		this_mo.SetAnimation("Data/Animations/gun_magazine_remove.anm", 20.0f, _ANM_FROM_START);
-		gun_state = MagazineOut;
+	}
+	if(gun_state_timeout > 0.0){
+		gun_state_timeout -= time_step;
+	}else{
+		if(gun_state == MagazineOut && GetInputPressed(this_mo.controller_id, "r")){
+			this_mo.SetAnimation("Data/Animations/gun_magazine_insert.anm", 20.0f, _ANM_FROM_START);
+			gun_state = MagazineIn;
+			gun_state_timeout = 0.5;
+			PlaySound("Data/Sounds/receiver_insert_mag.wav", this_mo.position);
+			rounds = 5;
+		}else if(gun_state == MagazineIn && GetInputPressed(this_mo.controller_id, "r")){
+			this_mo.SetAnimation("Data/Animations/gun_magazine_remove.anm", 20.0f, _ANM_FROM_START);
+			gun_state = MagazineOut;
+			gun_state_timeout = 0.5;
+			PlaySound("Data/Sounds/receiver_remove_mag.wav", this_mo.position);
+		}
 	}
 }
 
@@ -550,9 +615,13 @@ bool CheckBulletCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
 }
 
 void Shoot(){
+	if(rounds <= 0){
+		PlaySound("Data/Sounds/receiver_gun_click.wav", this_mo.position);
+		return;
+	}
 	vec3 forward = this_mo.GetFacing();
 	vec3 muzzle_offset = forward * 0.15;
-	vec3 spawn_point = this_mo.position + vec3(0.0, -0.01, 0.0) + ((1.0 - aiming_amount) * (vec3(0.0, -0.25, 0.0)));
+	vec3 spawn_point = this_mo.position + vec3(0.0, -0.02, 0.0) + ((1.0 - aiming_amount) * (vec3(0.0, -0.25, 0.0)));
 
 	int smoke_particle_amount = 5;
 	vec3 smoke_velocity = forward * 5.0f;
@@ -563,10 +632,13 @@ void Shoot(){
 	MakeParticle("Data/Particles/gun_fire.xml", spawn_point + muzzle_offset, forward * 5.0);
 
 	int sound_id = PlaySound("Data/Sounds/Revolver.wav", spawn_point);
+	/* SetSoundGain(sound_id, 0.75f); */
 	SetSoundPitch(sound_id, RangedRandomFloat(0.9f, 1.2f));
 
 	camera_shake += 0.25f;
 	bullets.insertLast(Bullet(spawn_point, forward));
+	this_mo.SetAnimation("Data/Animations/gun_shoot.anm", 20.0f, _ANM_FROM_START);
+	rounds -= 1;
 	/* DebugDrawWireSphere(spawn_point, 0.01, vec3(1.0), _fade); */
 }
 
@@ -610,6 +682,12 @@ void Reset() {
 	this_mo.rigged_object().ClearBoneConstraints();
 	this_mo.SetAnimation(target_animation, 20.0f, _ANM_FROM_START);
 	SetGrabMouse(true);
+	gun_state = MagazineOut;
+	rounds = 0;
+	last_col_pos = this_mo.position;
+	step_counter = 0.0f;
+	resetting = true;
+	footstep_wait_timer = 0.0;
 }
 
 bool Init(string character_path) {
@@ -620,17 +698,6 @@ bool Init(string character_path) {
 		this_mo.SetAnimation(target_animation, 10.0f, _ANM_FROM_START);
 		this_mo.SetScriptUpdatePeriod(1);
 		/* this_mo.rigged_object().SetAnimUpdatePeriod(1); */
-
-		/* RiggedObject@ rigged_object = this_mo.rigged_object();
-		Skeleton@ skeleton = rigged_object.skeleton();
-		int num_bones = skeleton.NumBones();
-		skeleton_bind_transforms.resize(num_bones);
-		inv_skeleton_bind_transforms.resize(num_bones);
-
-		for(int i = 0; i < num_bones; ++i) {
-			skeleton_bind_transforms[i] = BoneTransform(skeleton.GetBindMatrix(i));
-			inv_skeleton_bind_transforms[i] = invert(skeleton_bind_transforms[i]);
-		} */
 		return true;
 	}else {
 		Log(error, "Failed at loading character " + character_path);
@@ -688,15 +755,6 @@ void PreDrawCameraNoCull(float curr_game_time) {
 		FinalAnimationMatrixUpdate(1);
 		queue_fix_discontinuity = false;
 	}
-	/* RiggedObject@ rigged_object = this_mo.rigged_object();
-	Skeleton@ skeleton = rigged_object.skeleton();
-
-	int bone = skeleton.IKBoneStart("head");
-	BoneTransform transform = BoneTransform(skeleton.GetBoneTransform(bone));
-	vec3 start = transform * (skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)));
-	vec3 end = transform * (skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1)));
-
-	DebugDrawLine(start, end, vec3(1.0f), _delete_on_draw); */
 }
 
 void FinalAnimationMatrixUpdate(int num_frames) {
@@ -714,7 +772,7 @@ void FinalAnimationMatrixUpdate(int num_frames) {
 						quaternion(vec4(-1.0f, 0.0f, 0.0f, target_rotation2 * 3.1417f / 180.0f));
 
 	local_to_world.rotation = rot;
-	local_to_world.origin = location + vec3(0.0, -0.01, 0.0) + ((1.0 - aiming_amount) * (vec3(0.0, -0.25, 0.0)));
+	local_to_world.origin = location + ((1.0 - aiming_amount) * (vec3(0.0, -0.25, 0.0)));
 	rigged_object.TransformAllFrameMats(local_to_world);
 }
 
@@ -813,7 +871,7 @@ void SetParameters() {
 }
 
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
-	float distance_threshold = character_scale * 1.25f;
+	float distance_threshold = character_scale * 0.5f;
 	vec3 this_com = this_mo.rigged_object().skeleton().GetCenterOfMass();
 	vec3 other_com = other.rigged_object().skeleton().GetCenterOfMass();
 	this_com.y = this_mo.position.y;
@@ -843,14 +901,17 @@ void ApplyPhysics(const Timestep &in ts) {
 		}
 	}
 	if(sphere_col.NumContacts() > 0 && collision_below){
+		if(!on_ground){
+			PlaySound("Data/Sounds/receiver_gun_land.wav", this_mo.position + vec3(0.0, -1.0, 0.0));
+		}
 		on_ground = true;
 	}else{
 		on_ground = false;
 	}
 
 	if(!on_ground){
-		this_mo.velocity += physics.gravity_vector * ts.step();
 	}
+	this_mo.velocity += physics.gravity_vector * ts.step();
 
 	bool feet_moving = false;
 	float _walk_accel = 35.0f; // how fast characters accelerate when moving
@@ -862,10 +923,6 @@ void ApplyPhysics(const Timestep &in ts) {
 
 void HandleCollisions(const Timestep &in ts) {
 	HandleGroundCollisions(ts);
-	/* if(on_ground){
-	} else {
-		HandleAirCollisions(ts);
-	} */
 }
 
 void HandleGroundCollisions(const Timestep &in ts) {
@@ -873,15 +930,15 @@ void HandleGroundCollisions(const Timestep &in ts) {
 	vec3 scale = vec3(1.0);
 	float size = 0.5f;
 
-    col.GetSlidingScaledSphereCollision(this_mo.position + offset, size, scale);
+	col.GetSlidingScaledSphereCollision(this_mo.position + offset, size, scale);
 
 	bool _draw_collision_spheres = false;
-    if(_draw_collision_spheres) {
-        DebugDrawWireScaledSphere(sphere_col.adjusted_position, size, scale, vec3(0.0f, 1.0f, 0.0f), _delete_on_update);
-    }
+	if(_draw_collision_spheres) {
+		DebugDrawWireScaledSphere(sphere_col.adjusted_position, size, scale, vec3(0.0f, 1.0f, 0.0f), _delete_on_update);
+	}
 
-    // the value of sphere_col.adjusted_position variable was set by the GetSlidingSphereCollision() called on the previous line.
-    this_mo.position = sphere_col.adjusted_position - offset;
+	// the value of sphere_col.adjusted_position variable was set by the GetSlidingSphereCollision() called on the previous line.
+	this_mo.position = sphere_col.adjusted_position - offset;
 }
 
 void HandleAirCollisions(const Timestep &in ts) {
@@ -934,7 +991,7 @@ void UpdateJumping(){
 	if(on_ground && GetInputDown(this_mo.controller_id, "jump")){
 		if(jump_wait < 0.0f){
 			jump_wait = 0.5;
-			float jump_mult = 5.0f;
+			float jump_mult = 6.0f;
 			vec3 jump_vel = vec3(0.0, 1.0, 0.0);
 			this_mo.velocity += jump_vel * jump_mult;
 		}
@@ -943,149 +1000,153 @@ void UpdateJumping(){
 
 
 void CacheSkeletonInfo() {
-    Log(info, "Caching skeleton info");
-    RiggedObject@ rigged_object = this_mo.rigged_object();
-    Skeleton@ skeleton = rigged_object.skeleton();
-    int num_bones = skeleton.NumBones();
-    skeleton_bind_transforms.resize(num_bones);
-    inv_skeleton_bind_transforms.resize(num_bones);
+	Log(info, "Caching skeleton info");
+	RiggedObject@ rigged_object = this_mo.rigged_object();
+	Skeleton@ skeleton = rigged_object.skeleton();
+	int num_bones = skeleton.NumBones();
+	skeleton_bind_transforms.resize(num_bones);
+	inv_skeleton_bind_transforms.resize(num_bones);
 
-    for(int i = 0; i < num_bones; ++i) {
-        skeleton_bind_transforms[i] = BoneTransform(skeleton.GetBindMatrix(i));
-        inv_skeleton_bind_transforms[i] = invert(skeleton_bind_transforms[i]);
-    }
+	for(int i = 0; i < num_bones; ++i) {
+		skeleton_bind_transforms[i] = BoneTransform(skeleton.GetBindMatrix(i));
+		inv_skeleton_bind_transforms[i] = invert(skeleton_bind_transforms[i]);
+	}
 
-    ik_chain_elements.resize(0);
-    ik_chain_bone_lengths.resize(0);
-    ik_chain_start_index.resize(kNumIK);
-    ik_chain_length.resize(kNumIK);
+	ik_chain_elements.resize(0);
+	ik_chain_bone_lengths.resize(0);
+	ik_chain_start_index.resize(kNumIK);
+	ik_chain_length.resize(kNumIK);
 
-    for(int i = 0; i < kNumIK; ++i) {
-        string bone_label;
+	for(int i = 0; i < kNumIK; ++i) {
+		string bone_label;
 
-        switch(i) {
-            case kLeftArmIK: bone_label = "leftarm"; break;
-            case kRightArmIK: bone_label = "rightarm"; break;
-            case kLeftLegIK: bone_label = "left_leg"; break;
-            case kRightLegIK: bone_label = "right_leg"; break;
-            case kHeadIK: bone_label = "head"; break;
-            case kLeftEarIK: bone_label = "leftear"; break;
-            case kRightEarIK: bone_label = "rightear"; break;
-            case kTorsoIK: bone_label = "torso"; break;
-            case kTailIK: bone_label = "tail"; break;
-        }
+		switch(i) {
+			case kLeftArmIK: bone_label = "leftarm"; break;
+			case kRightArmIK: bone_label = "rightarm"; break;
+			case kLeftLegIK: bone_label = "left_leg"; break;
+			case kRightLegIK: bone_label = "right_leg"; break;
+			case kHeadIK: bone_label = "head"; break;
+			case kLeftEarIK: bone_label = "leftear"; break;
+			case kRightEarIK: bone_label = "rightear"; break;
+			case kTorsoIK: bone_label = "torso"; break;
+			case kTailIK: bone_label = "tail"; break;
+		}
 
-        int bone = skeleton.IKBoneStart(bone_label);
-        ik_chain_length[i] = skeleton.IKBoneLength(bone_label);
-        ik_chain_start_index[i] = ik_chain_elements.size();
-        int count = 0;
+		int bone = skeleton.IKBoneStart(bone_label);
+		ik_chain_length[i] = skeleton.IKBoneLength(bone_label);
+		ik_chain_start_index[i] = ik_chain_elements.size();
+		int count = 0;
 
-        while(bone != -1 && count < ik_chain_length[i]) {
-            ik_chain_bone_lengths.push_back(distance(skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)), skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1))));
-            ik_chain_elements.push_back(bone);
-            bone = skeleton.GetParent(bone);
-            ++count;
-        }
-    }
+		while(bone != -1 && count < ik_chain_length[i]) {
+			ik_chain_bone_lengths.push_back(distance(skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)), skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1))));
+			ik_chain_elements.push_back(bone);
+			bone = skeleton.GetParent(bone);
+			++count;
+		}
+	}
 
-    ik_chain_start_index.push_back(ik_chain_elements.size());
-    bone_children.resize(0);
-    bone_children_index.resize(num_bones);
+	ik_chain_start_index.push_back(ik_chain_elements.size());
+	bone_children.resize(0);
+	bone_children_index.resize(num_bones);
 
-    for(int bone = 0; bone < num_bones; ++bone) {
-        bone_children_index[bone] = bone_children.size();
+	for(int bone = 0; bone < num_bones; ++bone) {
+		bone_children_index[bone] = bone_children.size();
 
-        for(int i = 0; i < num_bones; ++i) {
-            int temp_bone = i;
+		for(int i = 0; i < num_bones; ++i) {
+			int temp_bone = i;
 
-            while(skeleton.GetParent(temp_bone) != -1 && skeleton.GetParent(temp_bone) != bone) {
-                temp_bone = skeleton.GetParent(temp_bone);
-            }
+			while(skeleton.GetParent(temp_bone) != -1 && skeleton.GetParent(temp_bone) != bone) {
+				temp_bone = skeleton.GetParent(temp_bone);
+			}
 
-            if(skeleton.GetParent(temp_bone) == bone) {
-                bone_children.push_back(i);
-            }
-        }
-    }
+			if(skeleton.GetParent(temp_bone) == bone) {
+				bone_children.push_back(i);
+			}
+		}
+	}
 
-    bone_children_index.push_back(bone_children.size());
+	bone_children_index.push_back(bone_children.size());
 
-    convex_hull_points.resize(0);
-    convex_hull_points_index.resize(num_bones);
+	convex_hull_points.resize(0);
+	convex_hull_points_index.resize(num_bones);
 
-    for(int bone = 0; bone < num_bones; ++bone) {
-        convex_hull_points_index[bone] = convex_hull_points.size();
-        array<float> @hull_points = skeleton.GetConvexHullPoints(bone);
+	for(int bone = 0; bone < num_bones; ++bone) {
+		convex_hull_points_index[bone] = convex_hull_points.size();
+		array<float> @hull_points = skeleton.GetConvexHullPoints(bone);
 
-        for(int i = 0, len = hull_points.size(); i < len; i += 3) {
-            convex_hull_points.push_back(vec3(hull_points[i], hull_points[i + 1], hull_points[i + 2]));
-        }
-    }
+		for(int i = 0, len = hull_points.size(); i < len; i += 3) {
+			convex_hull_points.push_back(vec3(hull_points[i], hull_points[i + 1], hull_points[i + 2]));
+		}
+	}
 
-    convex_hull_points_index.push_back(convex_hull_points.size());
+	convex_hull_points_index.push_back(convex_hull_points.size());
 
-    key_masses.resize(kNumKeys);
-    root_bone.resize(kNumKeys);
+	key_masses.resize(kNumKeys);
+	root_bone.resize(kNumKeys);
 
-    for(int j = 0; j < 2; ++j) {
-        int bone = skeleton.IKBoneStart(legs[j]);
+	for(int j = 0; j < 2; ++j) {
+		int bone = skeleton.IKBoneStart(legs[j]);
 
-        for(int i = 0, len = skeleton.IKBoneLength(legs[j]); i < len; ++i) {
-            key_masses[kLeftLegKey + j] += skeleton.GetBoneMass(bone);
+		for(int i = 0, len = skeleton.IKBoneLength(legs[j]); i < len; ++i) {
+			key_masses[kLeftLegKey + j] += skeleton.GetBoneMass(bone);
 
-            if(i < len - 1) {
-                bone = skeleton.GetParent(bone);
-            }
-        }
+			if(i < len - 1) {
+				bone = skeleton.GetParent(bone);
+			}
+		}
 
-        root_bone[kLeftLegKey + j] = bone;
-    }
+		root_bone[kLeftLegKey + j] = bone;
+	}
 
-    for(int j = 0; j < 2; ++j) {
-        int bone = skeleton.IKBoneStart(arms[j]);
+	for(int j = 0; j < 2; ++j) {
+		int bone = skeleton.IKBoneStart(arms[j]);
 
-        for(int i = 0, len = skeleton.IKBoneLength(arms[j]); i < len; ++i) {
-            key_masses[kLeftArmKey + j] += skeleton.GetBoneMass(bone);
+		for(int i = 0, len = skeleton.IKBoneLength(arms[j]); i < len; ++i) {
+			key_masses[kLeftArmKey + j] += skeleton.GetBoneMass(bone);
 
-            if(i < len - 1) {
-                bone = skeleton.GetParent(bone);
-            }
-        }
+			if(i < len - 1) {
+				bone = skeleton.GetParent(bone);
+			}
+		}
 
-        root_bone[kLeftArmKey + j] = bone;
-    }
+		root_bone[kLeftArmKey + j] = bone;
+	}
 
-    {
-        int bone = skeleton.IKBoneStart("torso");
+	{
+		int bone = skeleton.IKBoneStart("torso");
 
-        for(int i = 0, len = skeleton.IKBoneLength("torso"); i < len; ++i) {
-            key_masses[kChestKey] += skeleton.GetBoneMass(bone);
+		for(int i = 0, len = skeleton.IKBoneLength("torso"); i < len; ++i) {
+			key_masses[kChestKey] += skeleton.GetBoneMass(bone);
 
-            if(i < len - 1) {
-                bone = skeleton.GetParent(bone);
-            }
-        }
+			if(i < len - 1) {
+				bone = skeleton.GetParent(bone);
+			}
+		}
 
-        root_bone[kChestKey] = bone;
-    }
+		root_bone[kChestKey] = bone;
+	}
 
-    {
-        int bone = skeleton.IKBoneStart("head");
+	{
+		int bone = skeleton.IKBoneStart("head");
 
-        for(int i = 0, len = skeleton.IKBoneLength("head"); i < len; ++i) {
-            key_masses[kHeadKey] += skeleton.GetBoneMass(bone);
+		for(int i = 0, len = skeleton.IKBoneLength("head"); i < len; ++i) {
+			key_masses[kHeadKey] += skeleton.GetBoneMass(bone);
 
-            if(i < len - 1) {
-                bone = skeleton.GetParent(bone);
-            }
-        }
+			if(i < len - 1) {
+				bone = skeleton.GetParent(bone);
+			}
+		}
 
-        root_bone[kHeadKey] = bone;
-    }
+		root_bone[kHeadKey] = bone;
+	}
 }
 
 void HandleRagdollImpactImpulse(const vec3 &in impulse, const vec3 &in pos, float damage) {
-	Log(warning, "damage " + damage);
+	/* Died(); */
+}
+
+void Died(){
+	knocked_out = _dead;
 }
 
 void NotifyItemDetach(int idex){}
