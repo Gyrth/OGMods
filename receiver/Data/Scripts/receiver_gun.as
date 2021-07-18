@@ -406,7 +406,6 @@ void UpdateAiming(){
 	aiming_amount = mix(aiming_amount, GetInputDown(this_mo.controller_id, "grab")?1.0:0.0, time_step * 7.0);
 }
 
-
 void UpdateMovement(){
 	float movement_speed = running?25.0f: 10.0f;
 
@@ -455,9 +454,8 @@ void UpdateCharacterRotation(){
 	if(this_mo.controlled){
 		vec3 down_direction = mix(camera.GetFacing(), (camera.GetUpVector() * -1.0), 0.85f);
 		vec3 facing = mix(down_direction, camera.GetFacing(), max(0.5f, aiming_amount));
-		vec3 current_facing = camera.GetFacing();
-		/* this_mo.SetRotationFromFacing(mix(current_facing, facing, time_step * 20.0)); */
-		this_mo.SetRotationFromFacing(facing);
+		vec3 current_facing = this_mo.GetFacing();
+		this_mo.SetRotationFromFacing(mix(current_facing, facing, time_step * 20.0));
 	}
 }
 
@@ -1142,10 +1140,11 @@ void CacheSkeletonInfo() {
 }
 
 void HandleRagdollImpactImpulse(const vec3 &in impulse, const vec3 &in pos, float damage) {
-	/* Died(); */
+	Died();
 }
 
 void Died(){
+	aiming_amount = 0.0;
 	knocked_out = _dead;
 }
 
