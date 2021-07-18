@@ -35,7 +35,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="1.45814" t1="4.50589" t2="7.23587" s0="1" s1="1" s2="1" q0="-0.101564" q1="-0.3255" q2="0.0351914" q3="-0.939413" euler_x="0.215393" euler_y="0.667094" euler_z="0" id="0">
+    <CameraObject t0="-0.638083" t1="6.00587" t2="-3.08823" s0="1" s1="1" s2="1" q0="0.0794571" q1="0.905445" q2="-0.195289" q3="0.368399" euler_x="-2.71674" euler_y="0.77283" euler_z="3.14159" id="0">
         <parameters />
     </CameraObject>
     <ActorObject t0="2.96615" t1="1.4599" t2="-57.1475" s0="1" s1="1" s2="1" q0="-0.00243407" q1="0.0169016" q2="-0.00211313" q3="0.999852" euler_x="-0.00494169" euler_y="0.0337943" euler_z="-0.00431039" id="2" type_file="Data/Characters/receiver_gun_actor.xml" pc_script_path="receiver_gun.as" is_player="1">
@@ -1332,7 +1332,7 @@
     <EnvObject t0="10.7955" t1="1.9246" t2="-51.2947" s0="0.230302" s1="0.417804" s2="0.234285" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="390" color_r="1" color_g="1" color_b="1" overbright="4.802" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="7.15055" t1="3.49841" t2="-59.5163" s0="6.95658" s1="3.10474" s2="0.112881" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="391" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="7.20306" t1="3.49322" t2="-59.5163" s0="7.00909" s1="3.10993" s2="0.112881" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="391" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <Decal t0="11.0438" t1="2.75541" t2="-60.0455" s0="3.38408" s1="3.38408" s2="3.38408" q0="0" q1="0.707107" q2="0.707107" q3="0" euler_x="1.5708" euler_y="0" euler_z="3.14159" id="392" type_file="Data/Objects/Decals/WolfireLogo.xml" color_r="0.172549" color_g="0.172547" color_b="0.172547" overbright="0">
@@ -1623,7 +1623,7 @@
             <parameters />
         </EnvObject>
     </Group>
-    <EnvObject t0="10.9975" t1="3.00369" t2="25.8692" s0="1.7968" s1="3.79321" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="481" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
+    <EnvObject t0="10.999" t1="3.07298" t2="25.8692" s0="1.79827" s1="3.8625" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="481" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="8.17479" t1="3.48987" t2="25.8692" s0="1.68112" s1="3.45166" s2="0.467539" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="482" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/receiver_triplanar_block.xml">
@@ -1750,6 +1750,9 @@
             <Connection id="510" />
         </Connections>
     </PathPointObject>
+    <EnvObject t0="7.56013" t1="5.21074" t2="-36.358" s0="7.36368" s1="0.454205" s2="0.228327" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="516" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+        <parameters />
+    </EnvObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Gun" path="Data/Characters/gun_actor.xml" thumbnail_path="Data/UI/spawner/gun.png" />
@@ -1769,9 +1772,9 @@
     <SpawnerItem display_name="Particle Emitter Hotspot" path="Data/Objects/Hotspots/emitter.xml" thumbnail_path="Data/UI/spawner/thumbs/Hotspot/emitter_icon.png" />
     <SpawnerItem display_name="Map Decal" path="Data/Objects/therium/Decals/notes/collinpeakmap.xml" thumbnail_path="" />
     <SpawnerItem display_name="Wolfire Logo" path="Data/Objects/Decals/WolfireLogo.xml" thumbnail_path="Data/UI/spawner/thumbs/Decal/WolfireLogo.png" />
-    <SpawnerItem display_name="Invisible Block" path="Data/Objects/invisibleblock.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/invisibleblock.png" />
     <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
     <SpawnerItem display_name="receiver_drone_actor.xml" path="Data/Characters/receiver_drone_actor.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Path Point" path="Data/Objects/pathpoint/pathpoint.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/pathpoint.png" />
     <SpawnerItem display_name="Blob Shadow" path="Data/Objects/Decals/blob_shadow.xml" thumbnail_path="" />
+    <SpawnerItem display_name="Invisible Block" path="Data/Objects/invisibleblock.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/invisibleblock.png" />
 </RecentItems>

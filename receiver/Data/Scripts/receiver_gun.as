@@ -696,6 +696,7 @@ bool Init(string character_path) {
 		this_mo.SetAnimation(target_animation, 10.0f, _ANM_FROM_START);
 		this_mo.SetScriptUpdatePeriod(1);
 		/* this_mo.rigged_object().SetAnimUpdatePeriod(1); */
+		CacheSkeletonInfo();
 		return true;
 	}else {
 		Log(error, "Failed at loading character " + character_path);
@@ -996,7 +997,6 @@ void UpdateJumping(){
 	}
 }
 
-
 void CacheSkeletonInfo() {
 	Log(info, "Caching skeleton info");
 	RiggedObject@ rigged_object = this_mo.rigged_object();
@@ -1004,138 +1004,9 @@ void CacheSkeletonInfo() {
 	int num_bones = skeleton.NumBones();
 	skeleton_bind_transforms.resize(num_bones);
 	inv_skeleton_bind_transforms.resize(num_bones);
-
 	for(int i = 0; i < num_bones; ++i) {
 		skeleton_bind_transforms[i] = BoneTransform(skeleton.GetBindMatrix(i));
 		inv_skeleton_bind_transforms[i] = invert(skeleton_bind_transforms[i]);
-	}
-
-	ik_chain_elements.resize(0);
-	ik_chain_bone_lengths.resize(0);
-	ik_chain_start_index.resize(kNumIK);
-	ik_chain_length.resize(kNumIK);
-
-	for(int i = 0; i < kNumIK; ++i) {
-		string bone_label;
-
-		switch(i) {
-			case kLeftArmIK: bone_label = "leftarm"; break;
-			case kRightArmIK: bone_label = "rightarm"; break;
-			case kLeftLegIK: bone_label = "left_leg"; break;
-			case kRightLegIK: bone_label = "right_leg"; break;
-			case kHeadIK: bone_label = "head"; break;
-			case kLeftEarIK: bone_label = "leftear"; break;
-			case kRightEarIK: bone_label = "rightear"; break;
-			case kTorsoIK: bone_label = "torso"; break;
-			case kTailIK: bone_label = "tail"; break;
-		}
-
-		int bone = skeleton.IKBoneStart(bone_label);
-		ik_chain_length[i] = skeleton.IKBoneLength(bone_label);
-		ik_chain_start_index[i] = ik_chain_elements.size();
-		int count = 0;
-
-		while(bone != -1 && count < ik_chain_length[i]) {
-			ik_chain_bone_lengths.push_back(distance(skeleton.GetPointPos(skeleton.GetBonePoint(bone, 0)), skeleton.GetPointPos(skeleton.GetBonePoint(bone, 1))));
-			ik_chain_elements.push_back(bone);
-			bone = skeleton.GetParent(bone);
-			++count;
-		}
-	}
-
-	ik_chain_start_index.push_back(ik_chain_elements.size());
-	bone_children.resize(0);
-	bone_children_index.resize(num_bones);
-
-	for(int bone = 0; bone < num_bones; ++bone) {
-		bone_children_index[bone] = bone_children.size();
-
-		for(int i = 0; i < num_bones; ++i) {
-			int temp_bone = i;
-
-			while(skeleton.GetParent(temp_bone) != -1 && skeleton.GetParent(temp_bone) != bone) {
-				temp_bone = skeleton.GetParent(temp_bone);
-			}
-
-			if(skeleton.GetParent(temp_bone) == bone) {
-				bone_children.push_back(i);
-			}
-		}
-	}
-
-	bone_children_index.push_back(bone_children.size());
-
-	convex_hull_points.resize(0);
-	convex_hull_points_index.resize(num_bones);
-
-	for(int bone = 0; bone < num_bones; ++bone) {
-		convex_hull_points_index[bone] = convex_hull_points.size();
-		array<float> @hull_points = skeleton.GetConvexHullPoints(bone);
-
-		for(int i = 0, len = hull_points.size(); i < len; i += 3) {
-			convex_hull_points.push_back(vec3(hull_points[i], hull_points[i + 1], hull_points[i + 2]));
-		}
-	}
-
-	convex_hull_points_index.push_back(convex_hull_points.size());
-
-	key_masses.resize(kNumKeys);
-	root_bone.resize(kNumKeys);
-
-	for(int j = 0; j < 2; ++j) {
-		int bone = skeleton.IKBoneStart(legs[j]);
-
-		for(int i = 0, len = skeleton.IKBoneLength(legs[j]); i < len; ++i) {
-			key_masses[kLeftLegKey + j] += skeleton.GetBoneMass(bone);
-
-			if(i < len - 1) {
-				bone = skeleton.GetParent(bone);
-			}
-		}
-
-		root_bone[kLeftLegKey + j] = bone;
-	}
-
-	for(int j = 0; j < 2; ++j) {
-		int bone = skeleton.IKBoneStart(arms[j]);
-
-		for(int i = 0, len = skeleton.IKBoneLength(arms[j]); i < len; ++i) {
-			key_masses[kLeftArmKey + j] += skeleton.GetBoneMass(bone);
-
-			if(i < len - 1) {
-				bone = skeleton.GetParent(bone);
-			}
-		}
-
-		root_bone[kLeftArmKey + j] = bone;
-	}
-
-	{
-		int bone = skeleton.IKBoneStart("torso");
-
-		for(int i = 0, len = skeleton.IKBoneLength("torso"); i < len; ++i) {
-			key_masses[kChestKey] += skeleton.GetBoneMass(bone);
-
-			if(i < len - 1) {
-				bone = skeleton.GetParent(bone);
-			}
-		}
-
-		root_bone[kChestKey] = bone;
-	}
-
-	{
-		int bone = skeleton.IKBoneStart("head");
-
-		for(int i = 0, len = skeleton.IKBoneLength("head"); i < len; ++i) {
-			key_masses[kHeadKey] += skeleton.GetBoneMass(bone);
-
-			if(i < len - 1) {
-				bone = skeleton.GetParent(bone);
-			}
-		}
-
-		root_bone[kHeadKey] = bone;
 	}
 }
 
