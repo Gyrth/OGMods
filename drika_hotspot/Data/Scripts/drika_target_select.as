@@ -1056,4 +1056,25 @@ class DrikaTargetSelect{
 			}
 		}
 	}
+
+	array<vec3> GetTargetPositions(){
+		array<vec3> target_positions;
+		array<Object@> target_objects = GetTargetObjects();
+
+		for(uint i = 0; i < target_objects.size(); i++){
+			vec3 target_location = target_objects[i].GetTranslation();
+
+			if(target_objects[i].GetType() == _item_object){
+				ItemObject@ item_obj = ReadItemID(target_objects[i].GetID());
+				target_location = item_obj.GetPhysicsPosition();
+			}else if(target_objects[i].GetType() == _movement_object){
+				MovementObject@ char = ReadCharacterID(target_objects[i].GetID());
+				target_location = char.position;
+			}
+
+			target_positions.insertLast(target_location);
+		}
+
+		return target_positions;
+	}
 }

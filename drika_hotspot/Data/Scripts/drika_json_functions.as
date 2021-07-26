@@ -117,3 +117,7 @@ quaternion GetJSONQuaternion(JSONValue data, string var_name, quaternion default
 		return default_value;
 	}
 }
+
+bool GetJSONValueAvailable(JSONValue data, string var_name){
+	return data.isMember(var_name);
+}

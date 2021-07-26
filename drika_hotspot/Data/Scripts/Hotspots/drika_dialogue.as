@@ -107,7 +107,8 @@ class DrikaDialogue : DrikaElement{
 	bool update_dof = false;
 	bool enable_look_at_target;
 	bool enable_move_with_target;
-	DrikaTargetSelect@ track_target;
+	DrikaTargetSelect@ look_at_target;
+	DrikaTargetSelect@ move_with_target;
 	camera_transitions camera_transition;
 	int current_camera_transition;
 	vec3 camera_translation_from;
@@ -227,10 +228,17 @@ class DrikaDialogue : DrikaElement{
 		rotation_shake_slerp_speed = GetJSONFloat(params, "rotation_shake_slerp_speed", 0.2f);
 		rotation_shake_interval = GetJSONFloat(params, "rotation_shake_interval", 0.15f);
 
+		if(GetJSONValueAvailable(params, "identifier_track_target")){
+			@look_at_target = DrikaTargetSelect(this, params, "track_target");
+			@move_with_target = DrikaTargetSelect(this, params, "track_target");
+		}else{
+			@look_at_target = DrikaTargetSelect(this, params, "look_at_target");
+			@move_with_target = DrikaTargetSelect(this, params, "move_with_target");
+		}
 		enable_look_at_target = GetJSONBool(params, "enable_look_at_target", false);
 		enable_move_with_target = GetJSONBool(params, "enable_move_with_target", false);
-		@track_target = DrikaTargetSelect(this, params, "track_target");
-		track_target.target_option = character_option | item_option;
+		look_at_target.target_option = id_option | name_option | character_option | reference_option | team_option;
+		move_with_target.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		drika_element_type = drika_dialogue;
 		has_settings = true;
@@ -250,7 +258,8 @@ class DrikaDialogue : DrikaElement{
 		choice_4_element.PostInit();
 		choice_5_element.PostInit();
 		target_select.PostInit();
-		track_target.PostInit();
+		look_at_target.PostInit();
+		move_with_target.PostInit();
 	}
 
 	JSONValue GetSaveData(){
@@ -329,8 +338,11 @@ class DrikaDialogue : DrikaElement{
 			}
 			data["enable_look_at_target"] = JSONValue(enable_look_at_target);
 			data["enable_move_with_target"] = JSONValue(enable_move_with_target);
-			if(enable_look_at_target || enable_move_with_target){
-				track_target.SaveIdentifier(data);
+			if(enable_look_at_target){
+				look_at_target.SaveIdentifier(data);
+			}
+			if(enable_move_with_target){
+				move_with_target.SaveIdentifier(data);
 			}
 			data["camera_transition"] = JSONValue(camera_transition);
 		}else if(dialogue_function == fade_to_black){
@@ -443,12 +455,14 @@ class DrikaDialogue : DrikaElement{
 		Reset();
 		placeholder.Remove();
 		target_select.Delete();
-		track_target.Delete();
+		look_at_target.Delete();
+		move_with_target.Delete();
 	}
 
 	void StartSettings(){
 		target_select.CheckAvailableTargets();
-		track_target.CheckAvailableTargets();
+		look_at_target.CheckAvailableTargets();
+		move_with_target.CheckAvailableTargets();
 		if(dialogue_function == say){
 
 		}else if(dialogue_function == set_actor_animation){
@@ -592,23 +606,21 @@ class DrikaDialogue : DrikaElement{
 				}
 			}
 
-			if(enable_look_at_target || enable_move_with_target){
-				array<Object@> track_targets = track_target.GetTargetObjects();
+			if(enable_look_at_target){
+				array<vec3> look_target_positions = look_at_target.GetTargetPositions();
 
-				for(uint j = 0; j < track_targets.size(); j++){
-					vec3 target_location = track_targets[j].GetTranslation();
-
-					if(track_targets[j].GetType() == _item_object){
-						ItemObject@ item_obj = ReadItemID(track_targets[j].GetID());
-						target_location = item_obj.GetPhysicsPosition();
-					}else if(track_targets[j].GetType() == _movement_object){
-						MovementObject@ char = ReadCharacterID(track_targets[j].GetID());
-						target_location = char.position;
-					}
-					DebugDrawLine(placeholder.GetTranslation(), target_location, vec3(0.0, 1.0, 0.0), _delete_on_draw);
+				for(uint j = 0; j < look_target_positions.size(); j++){
+					DebugDrawLine(placeholder.GetTranslation(), look_target_positions[j], vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
 			}
 
+			if(enable_move_with_target){
+				array<vec3> move_target_positions = move_with_target.GetTargetPositions();
+
+				for(uint j = 0; j < move_target_positions.size(); j++){
+					DebugDrawLine(placeholder.GetTranslation(), move_target_positions[j], vec3(0.0, 0.0, 1.0), _delete_on_draw);
+				}
+			}
 		}
 	}
 
@@ -1203,11 +1215,21 @@ class DrikaDialogue : DrikaElement{
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 
+			ImGui_Separator();
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Look At Target");
 			ImGui_NextColumn();
 			ImGui_Checkbox("###Look At Target", enable_look_at_target);
 			ImGui_NextColumn();
+
+			if(enable_look_at_target){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Look Target");
+				ImGui_NextColumn();
+				ImGui_NextColumn();
+				look_at_target.DrawSelectTargetUI();
+			}
+			ImGui_Separator();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Move With Target");
@@ -1215,14 +1237,15 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Checkbox("###Move With Target", enable_move_with_target);
 			ImGui_NextColumn();
 
-			if(enable_look_at_target || enable_move_with_target){
-				ImGui_Separator();
+			if(enable_move_with_target){
 				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Target Character");
+				ImGui_Text("Move Target");
 				ImGui_NextColumn();
 				ImGui_NextColumn();
-				track_target.DrawSelectTargetUI();
+				move_with_target.DrawSelectTargetUI();
 			}
+
+			ImGui_Separator();
 
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Transition Method");
@@ -1233,6 +1256,7 @@ class DrikaDialogue : DrikaElement{
 			}
 			ImGui_NextColumn();
 
+			ImGui_Separator();
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Add Camera Shake");
 			ImGui_NextColumn();
@@ -1240,7 +1264,6 @@ class DrikaDialogue : DrikaElement{
 			ImGui_NextColumn();
 
 			if(add_camera_shake){
-				ImGui_Separator();
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Pos Shake Max");
 				ImGui_NextColumn();
@@ -1289,6 +1312,7 @@ class DrikaDialogue : DrikaElement{
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
 			}
+			ImGui_Separator();
 		}else if(dialogue_function == start){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Fade");
@@ -1757,10 +1781,14 @@ class DrikaDialogue : DrikaElement{
 			msg += rotation_shake_interval + " ";
 		}
 
-		array<Object@> targets = track_target.GetTargetObjects();
+		array<Object@> look_targets = look_at_target.GetTargetObjects();
 		msg += enable_look_at_target + " ";
+		msg += ((look_targets.size() > 0)?look_targets[0].GetID():-1) + " ";
+
+		array<Object@> move_targets = move_with_target.GetTargetObjects();
 		msg += enable_move_with_target + " ";
-		msg += ((targets.size() > 0)?targets[0].GetID():-1) + " ";
+		msg += ((move_targets.size() > 0)?move_targets[0].GetID():-1) + " ";
+
 		level.SendMessage(msg);
 	}
 

@@ -48,7 +48,8 @@ float camera_far_transition = 0.0;
 bool update_dof = false;
 bool enable_look_at_target = false;
 bool enable_move_with_target = false;
-int track_target_id = -1;
+int look_at_target_id = -1;
+int move_with_target_id = -1;
 vec3 target_positional_difference = vec3();
 vec3 current_camera_position = vec3();
 bool camera_settings_changed = false;
@@ -480,21 +481,26 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		enable_look_at_target = token_iter.GetToken(msg) == "true";
 
+		if(enable_look_at_target){
+			token_iter.FindNextToken(msg);
+			look_at_target_id = atoi(token_iter.GetToken(msg));
+		}
+
 		token_iter.FindNextToken(msg);
 		enable_move_with_target = token_iter.GetToken(msg) == "true";
 
-		if(enable_look_at_target || enable_move_with_target){
+		if(enable_move_with_target){
 			token_iter.FindNextToken(msg);
-			track_target_id = atoi(token_iter.GetToken(msg));
+			move_with_target_id = atoi(token_iter.GetToken(msg));
 
-			if(track_target_id != -1 && ObjectExists(track_target_id)){
-				Object@ track_target = ReadObjectFromID(track_target_id);
+			if(move_with_target_id != -1 && ObjectExists(move_with_target_id)){
+				Object@ track_target = ReadObjectFromID(move_with_target_id);
 				vec3 target_location;
 				if(track_target.GetType() == _movement_object){
-					MovementObject@ char = ReadCharacterID(track_target_id);
+					MovementObject@ char = ReadCharacterID(move_with_target_id);
 					target_location = char.rigged_object().GetAvgIKChainPos("torso");
 				}else if(track_target.GetType() == _item_object){
-					ItemObject@ item = ReadItemID(track_target_id);
+					ItemObject@ item = ReadItemID(move_with_target_id);
 					target_location = item.GetPhysicsPosition();
 				}
 				target_positional_difference = camera_position - target_location;
@@ -1741,13 +1747,13 @@ void SetCameraPosition(){
 		}
 
 		if(enable_look_at_target){
-			if(track_target_id != -1 && ObjectExists(track_target_id)){
-				Object@ track_target = ReadObjectFromID(track_target_id);
+			if(look_at_target_id != -1 && ObjectExists(look_at_target_id)){
+				Object@ track_target = ReadObjectFromID(look_at_target_id);
 				if(track_target.GetType() == _movement_object){
-					MovementObject@ char = ReadCharacterID(track_target_id);
+					MovementObject@ char = ReadCharacterID(look_at_target_id);
 					SmoothCameraLookAt(char.rigged_object().GetAvgIKChainPos("torso"));
 				}else if(track_target.GetType() == _item_object){
-					ItemObject@ item = ReadItemID(track_target_id);
+					ItemObject@ item = ReadItemID(look_at_target_id);
 					SmoothCameraLookAt(item.GetPhysicsPosition());
 				}
 			}
@@ -1758,13 +1764,13 @@ void SetCameraPosition(){
 		}
 
 		if(enable_move_with_target){
-			if(track_target_id != -1 && ObjectExists(track_target_id)){
-				Object@ track_target = ReadObjectFromID(track_target_id);
+			if(move_with_target_id != -1 && ObjectExists(move_with_target_id)){
+				Object@ track_target = ReadObjectFromID(move_with_target_id);
 				if(track_target.GetType() == _movement_object){
-					MovementObject@ char = ReadCharacterID(track_target_id);
+					MovementObject@ char = ReadCharacterID(move_with_target_id);
 					SmoothCameraMoveWith(char.rigged_object().GetAvgIKChainPos("torso"));
 				}else if(track_target.GetType() == _item_object){
-					ItemObject@ item = ReadItemID(track_target_id);
+					ItemObject@ item = ReadItemID(move_with_target_id);
 					SmoothCameraMoveWith(item.GetPhysicsPosition());
 				}
 			}
