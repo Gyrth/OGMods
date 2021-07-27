@@ -1755,6 +1755,9 @@ void SetCameraPosition(){
 				}else if(track_target.GetType() == _item_object){
 					ItemObject@ item = ReadItemID(look_at_target_id);
 					SmoothCameraLookAt(item.GetPhysicsPosition());
+				}else{
+					Object@ obj = ReadObjectFromID(look_at_target_id);
+					SmoothCameraLookAt(obj.GetTranslation());
 				}
 			}
 		}else{
@@ -1772,6 +1775,9 @@ void SetCameraPosition(){
 				}else if(track_target.GetType() == _item_object){
 					ItemObject@ item = ReadItemID(move_with_target_id);
 					SmoothCameraMoveWith(item.GetPhysicsPosition());
+				}else{
+					Object@ obj = ReadObjectFromID(move_with_target_id);
+					SmoothCameraMoveWith(obj.GetTranslation());
 				}
 			}
 		}else{
