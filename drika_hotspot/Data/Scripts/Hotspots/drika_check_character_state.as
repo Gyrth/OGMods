@@ -19,7 +19,9 @@ enum state_choices { 	awake = 0,
 						check_blood_health = 18,
 						check_block_health = 19,
 						check_temp_health = 20,
-						check_permanent_health = 21
+						check_permanent_health = 21,
+						current_animation = 22,
+						ray_collides_with = 23
 					}
 
 enum AIGoal {
@@ -73,7 +75,7 @@ class HealthData{
 }
 
 class DrikaCheckCharacterState : DrikaElement{
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage", "Blood Damage", "Blood Health", "Block Health", "Temp Health", "Permanent Health"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage", "Blood Damage", "Blood Health", "Block Health", "Temp Health", "Permanent Health", "Current Animation", "Ray Collides With"};
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
@@ -90,6 +92,7 @@ class DrikaCheckCharacterState : DrikaElement{
 	ValueCompare compare_choice;
 	int current_compare_choice;
 	float compare_value;
+	string animation_path;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		state_choice = state_choices(GetJSONInt(params, "state_check", awake));
@@ -103,6 +106,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		current_compare_choice = GetJSONInt(params, "compare_choice", less_than);
 		compare_choice = ValueCompare(current_compare_choice);
 		compare_value = GetJSONFloat(params, "compare_value", 1.0);
+		animation_path = GetJSONString(params, "animation_path", "Data/Animations/");
 
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
@@ -142,7 +146,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		data["check_all_known"] = JSONValue(check_all_known);
 		if(state_choice == knows_about){
 			known_target.SaveIdentifier(data);
-		}else if(state_choice == in_proximity){
+		}else if(state_choice == in_proximity || state_choice == ray_collides_with){
 			known_target.SaveIdentifier(data);
 			data["proximity_distance"] = JSONValue(proximity_distance);
 		}
@@ -154,6 +158,10 @@ class DrikaCheckCharacterState : DrikaElement{
 		if(state_choice == check_blood_damage || state_choice == check_blood_health || state_choice == check_block_health || state_choice == check_temp_health || state_choice == check_permanent_health){
 			data["compare_choice"] = JSONValue(compare_choice);
 			data["compare_value"] = JSONValue(compare_value);
+		}
+
+		if(state_choice == current_animation){
+		data["animation_path"] = JSONValue(animation_path);
 		}
 
 		target_select.SaveIdentifier(data);
@@ -244,7 +252,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(state_choice != right_footstep && state_choice != left_footstep && state_choice != check_blood_damage && state_choice != check_blood_health && state_choice != check_block_health && state_choice != check_temp_health && state_choice != check_permanent_health){
+		if(state_choice != check_blood_damage && state_choice != check_blood_health && state_choice != check_block_health && state_choice != check_temp_health && state_choice != check_permanent_health){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Equals");
 			ImGui_NextColumn();
@@ -329,6 +337,31 @@ class DrikaCheckCharacterState : DrikaElement{
 			if(ImGui_SliderFloat("##Value", compare_value, 0.0f, 1.0f, "%.1f")){
 
 			}
+			ImGui_NextColumn();
+
+		}else if(state_choice == current_animation){
+			ImGui_Separator();
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Animation Path:");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_SetTextBuf(animation_path);
+
+			if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
+				ImGui_SetKeyboardFocusHere(0);
+			}
+
+			if(ImGui_InputText("##Animation Path",0)){
+				animation_path = ImGui_GetTextBuf();
+			}
+			ImGui_NextColumn();
+		}else if(state_choice == ray_collides_with){
+			ImGui_Separator();
+			ImGui_Text("Target For Ray:");
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+			known_target.DrawSelectTargetUI();
+			ImGui_NextColumn();
 			ImGui_NextColumn();
 		}
 
@@ -559,7 +592,33 @@ class DrikaCheckCharacterState : DrikaElement{
 						Log(warning, "Unknown compare choice!");
 						break;
 				}
+
+			}else if(state_choice == ray_collides_with){
+				bool contact_found = false;
+
+				array<Object@> ray_from_objects = target_select.GetTargetObjects();
+				array<Object@> ray_to_objects = known_target.GetTargetObjects();
+
+				for(uint j = 0; j < ray_from_objects.size(); j++){
+					for(uint k = 0; k < ray_to_objects.size(); k++){
+						col.GetObjRayCollision(GetTargetTranslation(ray_from_objects[j]),GetTargetTranslation(ray_to_objects[k]));
+						if (sphere_col.NumContacts() > int(ray_to_objects.size())){
+							//This next bit is just debug lines
+							//for(int l = 0; l < sphere_col.NumContacts(); l++){
+							//    Object@ obj = ReadObjectFromID(sphere_col.GetContact(l).id);
+							//    DebugDrawLine(GetTargetTranslation(ray_from_objects[j]),GetTargetTranslation(obj),vec3(0,0,0),1);
+							//}
+							contact_found = true;
+							break;
+							}
+						}
+
+					if (contact_found){break;}
+				}
+				state = !contact_found;
 			}
+
+
 
 			if(!check_all && state == equals){
 				all_in_state = true;

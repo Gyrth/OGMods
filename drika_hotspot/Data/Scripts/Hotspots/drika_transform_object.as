@@ -1,8 +1,10 @@
 enum transform_modes	{
 							transform_to_placeholder = 0,
 							transform_to_target = 1,
-							move_towards_target = 2
+							move_towards_target = 2,
+							transform_specific = 3
 						}
+
 
 class DrikaTransformObject : DrikaElement{
 	vec3 before_translation;
@@ -18,10 +20,35 @@ class DrikaTransformObject : DrikaElement{
 	float move_speed;
 	float extra_yaw;
 
+	float s_transform_x;
+	float s_transform_y;
+	float s_transform_z;
+
+	float s_scale_x;
+	float s_scale_y;
+	float s_scale_z;
+
+	float s_rotate_x;
+	float s_rotate_y;
+	float s_rotate_z;
+
+	bool s_transform_x_relative;
+	bool s_transform_y_relative;
+	bool s_transform_z_relative;
+
+	bool s_scale_x_relative;
+	bool s_scale_y_relative;
+	bool s_scale_z_relative;
+
+	bool s_rotate_relative;
+
+	bool s_transform_to_target_first;
+
 	array<string> transform_mode_names =	{
 												"Transform To Placeholder",
 												"Transform To Target",
-												"Move To Target"
+												"Move To Target",
+												"Transform Specific"
 											};
 
 	DrikaTransformObject(JSONValue params = JSONValue()){
@@ -45,6 +72,30 @@ class DrikaTransformObject : DrikaElement{
 		extra_yaw = GetJSONFloat(params, "extra_yaw", 0.0);
 		@target_location = DrikaTargetSelect(this, params, "target_location");
 		target_location.target_option = id_option | name_option | character_option | reference_option | team_option | item_option;
+
+		s_transform_x = GetJSONFloat(params, "s_transform_x", 0.0);
+		s_transform_y = GetJSONFloat(params, "s_transform_y", 0.0);
+		s_transform_z = GetJSONFloat(params, "s_transform_z", 0.0);
+
+		s_scale_x = GetJSONFloat(params, "s_scale_x", 1.0);
+		s_scale_y = GetJSONFloat(params, "s_scale_y", 1.0);
+		s_scale_z = GetJSONFloat(params, "s_scale_z", 1.0);
+
+		s_rotate_x = GetJSONFloat(params, "s_rotate_x", 0.0);
+		s_rotate_y = GetJSONFloat(params, "s_rotate_y", 0.0);
+		s_rotate_z = GetJSONFloat(params, "s_rotate_z", 0.0);
+
+		s_transform_x_relative = GetJSONBool(params, "s_transform_x_relative", false);
+		s_transform_y_relative = GetJSONBool(params, "s_transform_y_relative", false);
+		s_transform_z_relative = GetJSONBool(params, "s_transform_z_relative", false);
+
+		s_scale_x_relative = GetJSONBool(params, "s_scale_x_relative", false);
+		s_scale_y_relative = GetJSONBool(params, "s_scale_y_relative", false);
+		s_scale_z_relative = GetJSONBool(params, "s_scale_z_relative", false);
+
+		s_rotate_relative = GetJSONBool(params, "s_rotate_relative", false);
+
+		s_transform_to_target_first = GetJSONBool(params, "s_transform_to_target_first", false);
 
 		has_settings = true;
 	}
@@ -76,6 +127,32 @@ class DrikaTransformObject : DrikaElement{
 			target_location.SaveIdentifier(data);
 			data["move_speed"] = JSONValue(move_speed);
 			data["extra_yaw"] = JSONValue(extra_yaw);
+		}else if(transform_mode == transform_specific){
+			target_location.SaveIdentifier(data);
+			data["translation_offset"] = JSONValue(JSONarrayValue);
+			data["translation_offset"].append(translation_offset.x);
+			data["translation_offset"].append(translation_offset.y);
+			data["translation_offset"].append(translation_offset.z);
+			data["use_target_location"] = JSONValue(use_target_location);
+			data["use_target_rotation"] = JSONValue(use_target_rotation);
+			data["use_target_scale"] = JSONValue(use_target_scale);
+			data["s_transform_x"] = JSONValue(s_transform_x);
+			data["s_transform_y"] = JSONValue(s_transform_y);
+			data["s_transform_z"] = JSONValue(s_transform_z);
+			data["s_scale_x"] = JSONValue(s_scale_x);
+			data["s_scale_y"] = JSONValue(s_scale_y);
+			data["s_scale_z"] = JSONValue(s_scale_z);
+			data["s_rotate_x"] = JSONValue(s_rotate_x);
+			data["s_rotate_y"] = JSONValue(s_rotate_y);
+			data["s_rotate_z"] = JSONValue(s_rotate_z);
+			data["s_transform_x_relative"] = JSONValue(s_transform_x_relative);
+			data["s_transform_y_relative"] = JSONValue(s_transform_y_relative);
+			data["s_transform_z_relative"] = JSONValue(s_transform_z_relative);
+			data["s_scale_x_relative"] = JSONValue(s_scale_x_relative);
+			data["s_scale_y_relative"] = JSONValue(s_scale_y_relative);
+			data["s_scale_z_relative"] = JSONValue(s_scale_z_relative);
+			data["s_rotate_relative"] = JSONValue(s_rotate_relative);
+			data["s_transform_to_target_first"] = JSONValue(s_transform_to_target_first);
 		}
 		return data;
 	}
@@ -146,6 +223,7 @@ class DrikaTransformObject : DrikaElement{
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
+		ImGui_Separator();
 
 		if(transform_mode == transform_to_target){
 			target_location.DrawSelectTargetUI();
@@ -211,6 +289,196 @@ class DrikaTransformObject : DrikaElement{
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
+		}else if(transform_mode == transform_specific){
+			ImGui_Columns(4, false);
+			ImGui_SetColumnWidth(0, option_name_width);
+
+			ImGui_AlignTextToFramePadding();
+
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+
+			ImGui_Text("Translation:");
+			ImGui_NextColumn();
+			ImGui_Text(s_transform_x_relative? "x+" : "x=");
+			ImGui_SameLine();
+			if(ImGui_Checkbox("###Transform X Relative", s_transform_x_relative)){}
+			if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("Check for relative transformations");
+			ImGui_PopStyleColor();
+			}
+			ImGui_SameLine();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat("###Transform X", s_transform_x, 0, 5, 3);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			ImGui_Text(s_transform_y_relative? "y+" : "y=");
+			ImGui_SameLine();
+			if(ImGui_Checkbox("###Transform Y Relative", s_transform_y_relative)){}
+			if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("Check for relative transformations");
+			ImGui_PopStyleColor();
+			}
+			ImGui_SameLine();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat("###Transform Y", s_transform_y, 0, 5, 3);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			ImGui_Text(s_transform_z_relative? "z+" : "z=");
+			ImGui_SameLine();
+			if(ImGui_Checkbox("###Transform Z Relative", s_transform_z_relative)){}
+			if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("Check for relative transformations");
+			ImGui_PopStyleColor();
+			}
+			ImGui_SameLine();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat("###Transform Z", s_transform_z, 0, 5, 3);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_Text("Scale:");
+			ImGui_NextColumn();
+			ImGui_Text(s_scale_x_relative? "x+" : "x=");
+			ImGui_SameLine();
+			if(ImGui_Checkbox("###Scale X Relative", s_scale_x_relative)){}
+			if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("Check for relative transformations");
+			ImGui_PopStyleColor();
+			}
+			ImGui_SameLine();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat("###Scale X", s_scale_x, 0, 5, 3);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			ImGui_Text(s_scale_y_relative? "y+" : "y=");
+			ImGui_SameLine();
+			if(ImGui_Checkbox("###Scale Y Relative", s_scale_y_relative)){}
+			if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("Check for relative transformations");
+			ImGui_PopStyleColor();
+			}
+			ImGui_SameLine();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat("###Scale Y", s_scale_y, 0, 5, 3);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			ImGui_Text(s_scale_z_relative? "z+" : "z=");
+			ImGui_SameLine();
+			if(ImGui_Checkbox("###Scale Z Relative", s_scale_z_relative)){}
+			if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("Check for relative transformations");
+			ImGui_PopStyleColor();
+			}
+			ImGui_SameLine();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat("###Scale Z", s_scale_z, 0, 5, 3);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_Text("Rotation:");
+			ImGui_NextColumn();
+			ImGui_Text(s_rotate_relative? "x+" : "x=");
+			ImGui_SameLine();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat("###Rotate X", s_rotate_x, 0, 5, 3);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			ImGui_Text(s_rotate_relative? "y+" : "y=");
+			ImGui_SameLine();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat("###Rotate Y", s_rotate_y, 0, 5, 3);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			ImGui_Text(s_rotate_relative? "z+" : "z=");
+			ImGui_SameLine();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_InputFloat("###Rotate Z", s_rotate_z, 0, 5, 3);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Relative rotation?");
+			ImGui_NextColumn();
+			if(ImGui_Checkbox("###Rotate Relative", s_rotate_relative)){}
+			if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("If checked, the object will ADD to the current rotation, rather than setting it");
+			ImGui_PopStyleColor();
+			}
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+
+			ImGui_Separator();
+			ImGui_Columns(2, false);
+			ImGui_SetColumnWidth(0, option_name_width);
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Transform to target?");
+			ImGui_NextColumn();
+			if(ImGui_Checkbox("###Transform To Target First", s_transform_to_target_first)){}
+			if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("If checked, this will be done first");
+			ImGui_PopStyleColor();
+			}
+			ImGui_NextColumn();
+			if(s_transform_to_target_first == true){
+				target_location.DrawSelectTargetUI();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Translation Offset");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_DragFloat3("###Translation Offset", translation_offset, 0.001f, -5.0f, 5.0f, "%.3f")){
+
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Use Target Location");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_Checkbox("###Use Target Location", use_target_location)){
+
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Use Target Rotation");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_Checkbox("###Use Target Rotation", use_target_rotation)){
+
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Use Target Scale");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_Checkbox("###Use Target Scale", use_target_scale)){
+
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+			}
 		}
 	}
 
@@ -312,11 +580,61 @@ class DrikaTransformObject : DrikaElement{
 					SetTargetTranslation(targets[i], reset?before_translation:new_translation);
 					SetTargetRotation(targets[i], reset?before_rotation:new_rotation);
 				}
+			}else if(transform_mode == transform_specific){
+
+			if(s_transform_to_target_first == true){
+				array<Object@> target_location_objects = target_location.GetTargetObjects();
+				for(uint j = 0; j < target_location_objects.size(); j++){
+					if(use_target_location){
+						SetTargetTranslation(targets[i], reset?before_translation:GetTargetTranslation(target_location_objects[j]) + translation_offset);
+					}
+					if(use_target_rotation){
+						SetTargetRotation(targets[i], reset?before_rotation:GetTargetRotation(target_location_objects[j]));
+					}
+					if(use_target_scale){
+						vec3 scale = target_location_objects[j].GetScale();
+						vec3 bounds = targets[i].GetBoundingBox();
+						if(bounds == vec3(0.0)){
+							bounds = vec3(1.0);
+						}
+						vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
+						targets[i].SetScale(reset?before_scale:new_scale);
+					}
+				}
+			}
+
+
+			vec3 translation;
+			vec3 scale;
+
+			translation.x = (s_transform_x_relative? GetTargetTranslation(targets[i]).x : 0) + s_transform_x;
+			translation.y = (s_transform_y_relative? GetTargetTranslation(targets[i]).y : 0) + s_transform_y;
+			translation.z = (s_transform_z_relative? GetTargetTranslation(targets[i]).z : 0) + s_transform_z;
+			SetTargetTranslation(targets[i], reset?before_translation:translation);
+
+
+			scale.x = (s_scale_x_relative? targets[i].GetScale().x : 0) + s_scale_x;
+			scale.y = (s_scale_y_relative? targets[i].GetScale().y : 0) + s_scale_y;
+			scale.z = (s_scale_z_relative? targets[i].GetScale().z : 0) + s_scale_z;
+			targets[i].SetScale(reset?before_scale:scale);
+
+			float pi = atan(1)*4.0;
+			quaternion new_rotation =
+			quaternion(vec4(0,1,0,s_rotate_y*pi/180.0f)) *
+			quaternion(vec4(1,0,0,s_rotate_x*pi/180.0f)) *
+			quaternion(vec4(0,0,1,s_rotate_z*pi/180.0f)) *
+			(s_rotate_relative? GetTargetRotation(targets[i]) : quaternion(0,0,0,1));
+
+
+			SetTargetRotation(targets[i], reset?before_rotation:new_rotation);
+
 			}
 			RefreshChildren(targets[i]);
 		}
 		return true;
 	}
+
+
 
 	void Reset(){
 		if(triggered){
