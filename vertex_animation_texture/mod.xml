@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Mod>
+	<Id>vertex-animation-texture</Id>
+	<Name>Vertex Animation Texture</Name>
+	<Category>Item Pack</Category>
+	<Version>0.1.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Thumbnail>Data/Images/vertex_animation_texture_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/vertex_animation_texture_full.jpg</PreviewImage>
+	<Description>Vertex Animation Texture.</Description>
+	<Tag>scripting</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<NeedsRestart>false</NeedsRestart>
+	<Level title="Vertex Animation Texture" thumbnail="Images/vertex_animation_texture_full.jpg">vertex_animation.xml</Level>
+</Mod>

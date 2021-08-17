@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/flag.obj</Model>
+	<ColorMap>Data/Textures/vertex_animation_texture_1.png</ColorMap>
+	<NormalMap>Data/Textures/vertex_animation_texture_2.png</NormalMap>
+	<TranslucencyMap>Data/Textures/vertex_animation_texture_2.png</TranslucencyMap>
+	<WindMap>Data/Textures/vertex_animation_texture_2.png</WindMap>
+	<ShaderName>vertex_animated</ShaderName>
+	<flags no_collision = "true"/>
+	<!-- double_sided="true" -->
+	<!-- clamp_texture = "true" -->
+</Object>
