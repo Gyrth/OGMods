@@ -65,18 +65,31 @@ void main() {
 	tex_coord[1] = 1.0 - tex_coord[1];
 
 	float x_frame_position = (instances[gl_InstanceID].color_tint.r);
-	// float y_frame_position = (instances[gl_InstanceID].color_tint.g);
-	float y_frame_position = (gl_VertexID / 256.0);
-	vec4 color_value_1 = texture(tex0, vec2(x_frame_position, y_frame_position));
-	vertex_color = color_value_1.xyz;
+	// float x_frame_position = (sin(time));
 
-	vec4 color_value_2 = texture(tex1, vec2(x_frame_position, ((gl_VertexID + 256.0) / 255.0)));
+	float expected_vertex_count = 244.0f;
+	float top_white_pixel = 168.0f;
+	float texture_height = 256.0f;
+	vec4 color_value_1 = texture(tex0, vec2(x_frame_position, (gl_VertexID / expected_vertex_count) * (top_white_pixel / texture_height)));
+	// vertex_color = color_value_1.xyz;
+
+	// vertex_color = vec3(0.0f);
+	// float reveal = (instances[gl_InstanceID].color_tint.g) * 244.0f;
+	// if (gl_VertexID < reveal)
+	// {
+	// 	vertex_color.r = 1.0;
+	// }
+
+	vec4 color_value_2 = texture(tex1, vec2(x_frame_position, (gl_VertexID / expected_vertex_count) * (top_white_pixel / texture_height)));
 
 	float position_x = DecodeFloatRG(vec2(color_value_1.x, color_value_2.x));
 	float position_y = DecodeFloatRG(vec2(color_value_1.y, color_value_2.y));
 	float position_z = DecodeFloatRG(vec2(color_value_1.z, color_value_2.z));
 
-	vec3 transformed_vertex = (instances[gl_InstanceID].model_mat * vec4(vertex_attrib, 1.0)).xyz;
+	vec3 animated_vertex_position = vec3(position_x, position_y, position_z);
+	vertex_color = animated_vertex_position;
+
+	vec3 transformed_vertex = (instances[gl_InstanceID].model_mat * vec4(vertex_attrib + animated_vertex_position, 1.0)).xyz;
 
 	world_vert = transformed_vertex;
 	frag_normal = normal_attrib;
