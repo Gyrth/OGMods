@@ -34,10 +34,10 @@
     <RayToSun r0="0.121363" r1="0.062051" r2="0.990667" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="2.08398" t1="2.44429" t2="-1.55782" s0="1" s1="1" s2="1" q0="0.056364" q1="-0.918003" q2="0.141278" q3="0.366244" euler_x="-2.83619" euler_y="-0.759215" euler_z="3.14159" id="0">
+    <CameraObject t0="2.62401" t1="3.01435" t2="1.74121" s0="1" s1="1" s2="1" q0="0.20425" q1="-0.369326" q2="0.0835642" q3="0.902717" euler_x="0.445029" euler_y="-0.7767" euler_z="0" id="0">
         <parameters />
     </CameraObject>
-    <EnvObject t0="1.14259" t1="1.99969" t2="0.0794452" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0.0196078" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vertex_animated.xml">
+    <EnvObject t0="1.14259" t1="1.99969" t2="0.0794452" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="0.329412" color_b="1" overbright="0" type_file="Data/Objects/vertex_animated.xml">
         <parameters />
     </EnvObject>
 </ActorObjects>

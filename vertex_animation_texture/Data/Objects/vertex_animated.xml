@@ -1,12 +1,15 @@
 <?xml version="1.0" ?>
 <Object>
 	<Model>Data/Models/flag.obj</Model>
-	<ColorMap>Data/Textures/vertex_animation_texture_1.png</ColorMap>
-	<NormalMap>Data/Textures/vertex_animation_texture_2.png</NormalMap>
+	<ColorMap>Data/Textures/ui/t2/logo.png</ColorMap>
+	<NormalMap>Data/Textures/vertex_animation_texture_1.png</NormalMap>
 	<TranslucencyMap>Data/Textures/vertex_animation_texture_2.png</TranslucencyMap>
-	<WindMap>Data/Textures/vertex_animation_texture_2.png</WindMap>
+	<WeightMap>Data/Textures/vertex_animation_texture_2.png</WeightMap>
+	<DetailMaps>
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/gray_rock.tga" normalpath="Data/Textures/Terrain/DetailTextures/gray_rock_normal.tga" materialpath="Data/Materials/rocks.xml" />
+	</DetailMaps>
 	<ShaderName>vertex_animated</ShaderName>
-	<flags no_collision = "true"/>
-	<!-- double_sided="true" -->
+	<flags double_sided = "true" transparent = "true"/>
+	<!-- no_collision = "true"  -->
 	<!-- clamp_texture = "true" -->
 </Object>

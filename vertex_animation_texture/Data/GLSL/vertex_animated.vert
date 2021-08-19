@@ -42,7 +42,7 @@ uniform sampler2D tex1; // Normalmap
 uniform sampler2D tex2;
 uniform sampler2D tex3;
 uniform sampler2D tex4;
-uniform sampler2D tex5;
+uniform sampler2D tex5;// TranslucencyMap / WeightMap
 uniform sampler2D tex6;
 uniform sampler2D tex7;
 uniform sampler2D tex8;
@@ -54,8 +54,21 @@ in int gl_BaseVertex; // Requires GLSL 4.60 or ARB_shader_draw_parameters
 in int gl_BaseInstance; // Requires GLSL 4.60 or ARB_shader_draw_parameters
 
 float DecodeFloatRG(vec2 enc){
-	vec2 kDecodeDot = vec2(1.0, 1 / 255.0);
+	vec2 kDecodeDot = vec2(1.0, 1.0 / 255.0);
 	return dot(enc, kDecodeDot);
+}
+
+vec2 EncodeFloatRG(float v){
+	vec2 kEncodeMul = vec2(1.0f, 255.0f);
+	float kEncodeBit = 1.0 / 255.0;
+	vec2 enc = kEncodeMul * v;
+
+	enc.x = mod(enc.x, 1.0f);
+	enc.y = mod(enc.y, 1.0f);
+
+	enc.x -= enc.y * kEncodeBit;
+
+	return enc;
 }
 
 void main() {
@@ -63,36 +76,56 @@ void main() {
 
 	tex_coord = tex_coord_attrib;
 	tex_coord[1] = 1.0 - tex_coord[1];
+	vec3 bounds = vec3(5.0, 5.0, 5.0);
 
-	float x_frame_position = (instances[gl_InstanceID].color_tint.r);
-	// float x_frame_position = (sin(time));
+	float freq = 1.5f;
+	// float x_frame_position = (instances[gl_InstanceID].color_tint.r);
+	float x_frame_position = 0.5f * (sin((time) / freq)) + 0.5;
 
-	float expected_vertex_count = 244.0f;
-	float top_white_pixel = 168.0f;
+	float expected_vertex_count = 85.0f;
+	float top_white_pixel = 84.0f;
 	float texture_height = 256.0f;
-	vec4 color_value_1 = texture(tex0, vec2(x_frame_position, (gl_VertexID / expected_vertex_count) * (top_white_pixel / texture_height)));
-	// vertex_color = color_value_1.xyz;
-
-	// vertex_color = vec3(0.0f);
-	// float reveal = (instances[gl_InstanceID].color_tint.g) * 244.0f;
-	// if (gl_VertexID < reveal)
-	// {
-	// 	vertex_color.r = 1.0;
-	// }
-
-	vec4 color_value_2 = texture(tex1, vec2(x_frame_position, (gl_VertexID / expected_vertex_count) * (top_white_pixel / texture_height)));
+	float y_frame_position = 0.5f + (0.5f - ((gl_VertexID + 1) / expected_vertex_count) * (top_white_pixel / texture_height));
+	vec4 color_value_1 = texture(tex1, vec2(x_frame_position, y_frame_position));
+	vec4 color_value_2 = texture(tex5, vec2(x_frame_position, y_frame_position));
 
 	float position_x = DecodeFloatRG(vec2(color_value_1.x, color_value_2.x));
 	float position_y = DecodeFloatRG(vec2(color_value_1.y, color_value_2.y));
 	float position_z = DecodeFloatRG(vec2(color_value_1.z, color_value_2.z));
 
+	// position_x = 0.5f;
+	// position_y = 0.5f;
+	// position_y = color_value_2.x;
+	// position_z = 0.5f;
+
 	vec3 animated_vertex_position = vec3(position_x, position_y, position_z);
+	animated_vertex_position = animated_vertex_position * bounds.x;
+	animated_vertex_position = animated_vertex_position - (bounds / 2.0f);
+
+	// vertex_color = vec3(position_x, position_y, position_z);
+
+	// float x = un_origin_adjusted.y;
+	// x = x + (bounds.x / 2.0);
+	// x = x / bounds.x;
+	//
+	// vec2 encoded = EncodeFloatRG(x);
+	// float result = DecodeFloatRG(encoded);
+	// result = result * bounds.x;
+	// result = result - (bounds.x / 2.0f);
+	// vertex_color = vec3(0.0, result, 0.0);
+
+	vec3 transformed_vertex = (instances[gl_InstanceID].model_mat * vec4(vertex_attrib, 1.0)).xyz;
+	transformed_vertex += animated_vertex_position;
+
 	vertex_color = animated_vertex_position;
+	// vertex_color = color_value_2.xyz;
 
-	vec3 transformed_vertex = (instances[gl_InstanceID].model_mat * vec4(vertex_attrib + animated_vertex_position, 1.0)).xyz;
+	if(gl_VertexID < (instances[gl_InstanceID].color_tint.g * 255)){
+		vertex_color = vec3(1.0, 0.0, 0.0);
+	}
 
-	world_vert = transformed_vertex;
-	frag_normal = normal_attrib;
+	// world_vert = transformed_vertex;
+	// frag_normal = normal_attrib;
 
 	orig_vert = vertex_attrib;
 	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);

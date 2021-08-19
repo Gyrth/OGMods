@@ -51,6 +51,8 @@ uniform float overbright;
 const float cloud_speed = 0.1;
 
 void main() {
-	out_color.xyz = vertex_color;
-	out_color.a = 1.0;
+
+	vec4 colormap = texture(tex0, tex_coord);
+	out_color = colormap;
+	// out_color.xyz = vertex_color;
 }
