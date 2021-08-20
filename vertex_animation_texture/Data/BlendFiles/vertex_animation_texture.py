@@ -10,6 +10,11 @@ from math import radians
 from bpy.props import BoolProperty, IntVectorProperty, StringProperty
 from bpy.types import (Panel, Operator)
 
+# The image size can be increased to hold more animations, vertices or longer animation.
+image_size = 256
+# This is the max the vertex can move out of it's own rest pose. 2.5 units each way.
+bounds = Vector([5.0, 5.0, 5.0])
+
 def EncodeFloatRG(v):
     kEncodeMul = Vector([1.0, 255.0])
     kEncodeBit = 1.0 / 255.0
@@ -40,13 +45,25 @@ def get_pixel(img,x,y):
         color.append( img.pixels[offs+i] )
     return color
 
+def float_to_textures(f, x, y, output_image_1, output_image_2):
+    # Range need to be adjusted so it's between 0.0 - 1.0f;
+    origin_adjusted_location = f + (bounds / 2.0)
+    range_adjusted_location = origin_adjusted_location / bounds.x
+    
+    # The y and z axis might need to be swapped so they are correct in-engine.
+    split_x = EncodeFloatRG(range_adjusted_location.x)
+    split_y = EncodeFloatRG(range_adjusted_location.y)
+    split_z = EncodeFloatRG(range_adjusted_location.z)
+    
+    color_image_1 = (split_x.x, split_y.x, split_z.x, 1.0)
+    color_image_2 = (split_x.y, split_y.y, split_z.y, 1.0)
+    
+    set_pixel(output_image_1, x, y, color_image_1)
+    set_pixel(output_image_2, x, y, color_image_2)
+
 def create_animation_textures(info):
     # The selected mesh is used to export.
     obj = bpy.context.active_object
-    # The image size can be increased to hold more animations, vertices or longer animation.
-    image_size = 256
-    # This is the max the vertex can move out of it's own rest pose. 2.5 units each way.
-    bounds = Vector([5.0, 5.0, 5.0])
     
     # Based on the bounds we need to set a background color that's contains NO vertex offset.
     background_value = (bounds.x / 2.0)
@@ -91,29 +108,16 @@ def create_animation_textures(info):
         # Go over all the mesh's vertices in order.
         for v in bm.verts:
             rest_vert = rest_data[v.index]
-            vert = v.co
+            vert = v.co    
             
             difference = rest_vert - vert
-            
-#            difference = Vector([0.5, 0.5, 0.5])
-            
-            # Range need to be adjusted so it's between 0.0 - 1.0f;
-            origin_adjusted_location = difference + (bounds / 2.0)
-            range_adjusted_location = origin_adjusted_location / bounds.x
-            
-            # The y and z axis might need to be swapped so they are correct in-engine.
-            split_x = EncodeFloatRG(range_adjusted_location.x)
-            split_y = EncodeFloatRG(range_adjusted_location.y)
-            split_z = EncodeFloatRG(range_adjusted_location.z)
-            
-            color_image_1 = (split_x.x, split_y.x, split_z.x, 1.0)
-            color_image_2 = (split_x.y, split_y.y, split_z.y, 1.0)
         
-            x = frame_index
+            x = frame_index + 1
             y = v.index
             
-            set_pixel(output_image_1, x, y, color_image_1)
-            set_pixel(output_image_2, x, y, color_image_2)
+            # The first column of pixels is the vertex rest position.
+            float_to_textures(rest_vert, 0, y, output_image_1, output_image_2)
+            float_to_textures(difference, x, y, output_image_1, output_image_2)
             
 #            # Convert it back for debugging purpose.
 #            print("Color value", difference)

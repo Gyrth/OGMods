@@ -81,11 +81,37 @@ void main() {
 	float freq = 1.5f;
 	// float x_frame_position = (instances[gl_InstanceID].color_tint.r);
 	float x_frame_position = 0.5f * (sin((time) / freq)) + 0.5;
-
+	vec3 rest_vert = vertex_attrib;
+	float index = 0.0f;
+	vec3 last_vertex_position = vec3(1000.0f, 1000.0f, 1000.0f);
 	float expected_vertex_count = 85.0f;
 	float top_white_pixel = 84.0f;
-	float texture_height = 256.0f;
-	float y_frame_position = 0.5f + (0.5f - ((gl_VertexID + 1) / expected_vertex_count) * (top_white_pixel / texture_height));
+	float texture_height = 84.0f;
+
+	for(int i = 0; i < 85; i++){
+		float index_x_frame_position = 0.0;
+		float index_y_frame_position = 0.5f + (0.5f - ((i + 0) / texture_height));
+
+		vec4 color_value_1 = texture(tex1, vec2(index_x_frame_position, index_y_frame_position));
+		vec4 color_value_2 = texture(tex5, vec2(index_x_frame_position, index_y_frame_position));
+
+		float position_x = DecodeFloatRG(vec2(color_value_1.x, color_value_2.x));
+		float position_y = DecodeFloatRG(vec2(color_value_1.y, color_value_2.y));
+		float position_z = DecodeFloatRG(vec2(color_value_1.z, color_value_2.z));
+
+		vec3 vertex_position = vec3(position_x, position_y, position_z);
+		vertex_position = vertex_position * bounds.x;
+		vertex_position = vertex_position - (bounds / 2.0f);
+		vertex_position = vec3(vertex_position.x, vertex_position.z, vertex_position.y);
+
+		if(distance(rest_vert, vertex_position) < distance(rest_vert, last_vertex_position)){
+			last_vertex_position = vertex_position;
+			index = index_y_frame_position;
+		}
+	}
+
+	// float y_frame_position = 0.5f + (0.5f - ((gl_VertexID + 1) / expected_vertex_count) * (top_white_pixel / texture_height));
+	float y_frame_position = index;
 	vec4 color_value_1 = texture(tex1, vec2(x_frame_position, y_frame_position));
 	vec4 color_value_2 = texture(tex5, vec2(x_frame_position, y_frame_position));
 
@@ -93,36 +119,19 @@ void main() {
 	float position_y = DecodeFloatRG(vec2(color_value_1.y, color_value_2.y));
 	float position_z = DecodeFloatRG(vec2(color_value_1.z, color_value_2.z));
 
-	// position_x = 0.5f;
-	// position_y = 0.5f;
-	// position_y = color_value_2.x;
-	// position_z = 0.5f;
-
 	vec3 animated_vertex_position = vec3(position_x, position_y, position_z);
 	animated_vertex_position = animated_vertex_position * bounds.x;
 	animated_vertex_position = animated_vertex_position - (bounds / 2.0f);
-
-	// vertex_color = vec3(position_x, position_y, position_z);
-
-	// float x = un_origin_adjusted.y;
-	// x = x + (bounds.x / 2.0);
-	// x = x / bounds.x;
-	//
-	// vec2 encoded = EncodeFloatRG(x);
-	// float result = DecodeFloatRG(encoded);
-	// result = result * bounds.x;
-	// result = result - (bounds.x / 2.0f);
-	// vertex_color = vec3(0.0, result, 0.0);
+	animated_vertex_position = vec3(animated_vertex_position.x, animated_vertex_position.z, animated_vertex_position.y);
 
 	vec3 transformed_vertex = (instances[gl_InstanceID].model_mat * vec4(vertex_attrib, 1.0)).xyz;
 	transformed_vertex += animated_vertex_position;
 
-	vertex_color = animated_vertex_position;
-	// vertex_color = color_value_2.xyz;
+	// if(gl_VertexID < (instances[gl_InstanceID].color_tint.g * 84)){
+	// 	vertex_color = vec3(1.0, 0.0, 0.0);
+	// }
 
-	if(gl_VertexID < (instances[gl_InstanceID].color_tint.g * 255)){
-		vertex_color = vec3(1.0, 0.0, 0.0);
-	}
+	vertex_color = last_vertex_position;
 
 	// world_vert = transformed_vertex;
 	// frag_normal = normal_attrib;
