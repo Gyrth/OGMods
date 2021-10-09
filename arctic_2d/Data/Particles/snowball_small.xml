@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<particle>
+    <textures color_map = "Data/Textures/Ice expansion/Tiles/snowBallBig.png"
+              shader = "glowsprite"
+              soft_shader = "envobject #PARTICLE"/>
+    <stretch velocity_axis = "false" speed_stretch = "false" min_squash = "false"/>
+    <size min = "0.25" max = "0.25"/>
+    <color red =   "1.0"
+           green = "1.0"
+           blue =  "1.0"
+           alpha = "1.0"/>
+    <behavior inertia="0.95" gravity="1.0" wind="15.0" size_decay_rate="1.2" opacity_decay_rate="1.0"/>
+</particle>

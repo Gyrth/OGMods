@@ -1,10 +1,9 @@
 <?xml version="1.0" ?>
 <Object>
 	<Model>Data/Models/2d_plane.obj</Model>
-	<ColorMap>Data/Textures/Base pack/Player/p1_walk/PNG/p1_walk01.png</ColorMap>
+	<ColorMap>Data/Textures/Ice expansion/Tiles/iglooRoofRight.png</ColorMap>
 	<NormalMap>Data/Textures/normal.tga</NormalMap>
 	<ShaderName>2d_cutout #TANGENT</ShaderName>
 	<MaterialPath>Data/Materials/default.xml</MaterialPath>
-	<flags double_sided="true"/>
 	<!-- no_collision = "true" -->
 </Object>

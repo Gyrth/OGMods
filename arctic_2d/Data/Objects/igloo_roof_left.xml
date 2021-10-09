@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/2d_plane.obj</Model>
+	<ColorMap>Data/Textures/Ice expansion/Tiles/iglooRoofLeft.png</ColorMap>
+	<NormalMap>Data/Textures/normal.tga</NormalMap>
+	<ShaderName>2d_cutout #TANGENT</ShaderName>
+	<MaterialPath>Data/Materials/default.xml</MaterialPath>
+	<!-- no_collision = "true" -->
+</Object>
