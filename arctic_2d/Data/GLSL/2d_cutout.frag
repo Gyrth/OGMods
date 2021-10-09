@@ -1932,16 +1932,13 @@ void main() {
 
 				#if defined(TRIPLANAR)
 					colormap.xyz = triplanarMapping(tex0, ws_normal2, world_vert);
-					color_length = length(colormap.rgb);
+					color_length = length(colormap.rgb) * 2.5f;
 				#endif
 
-				if(color_length < 0.1){
+				if(color_length < 0.7){
 					discard;
-				}else if(color_length < 0.4){
-					if(int(gl_FragCoord.x) % 2 != 0 || int(gl_FragCoord.y) % 2 != 0){
-						discard;
-					}
 				}
+
             #endif
 
             vec4 shadow_coords[4];
