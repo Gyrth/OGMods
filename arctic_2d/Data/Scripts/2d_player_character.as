@@ -46,11 +46,6 @@ void UpdateJumping(){
 	}
 
 	if(on_ground && GetInputDown(this_mo.controller_id, "jump")){
-		if(movement_state != jump){
-			movement_state = jump;
-			SetAnimation(@jump_animation);
-		}
-
 		if(jump_wait <= 0.0f){
 			jump_wait = 0.15;
 			float jump_mult = 6.0f;

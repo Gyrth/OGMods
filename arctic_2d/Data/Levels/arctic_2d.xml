@@ -33,7 +33,7 @@
     <RayToSun r0="0.304636" r1="0.717594" r2="0.626303" />
 </Sky>
 <ActorObjects>
-    <ActorObject t0="44.9994" t1="8.69688" t2="-148.548" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" euler_x="0" euler_y="-0.605973" euler_z="0" id="1" type_file="Data/Objects/2d_player_character_actor.xml" pc_script_path="2d_player_character.as" is_player="1">
+    <ActorObject t0="92.064" t1="8.27331" t2="-147.748" s0="1" s1="1" s2="1" q0="0" q1="-0.298372" q2="0" q3="0.95445" euler_x="0" euler_y="-0.605973" euler_z="0" id="1" type_file="Data/Objects/2d_player_character_actor.xml" pc_script_path="2d_player_character.as" is_player="1">
         <parameters>
             <parameter name="Aggression" type="string" val="0.5" />
             <parameter name="Attack Damage" type="string" val="1.0" />
@@ -846,7 +846,7 @@
     <EnvObject t0="77.7952" t1="7.56689" t2="-152.793" s0="1.3295" s1="0.513822" s2="1.16424" q0="0" q1="0" q2="0.258819" q3="0.965926" euler_x="0" euler_y="0" euler_z="0.523599" id="264" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/tundra_top.xml">
         <parameters />
     </EnvObject>
-    <CameraObject t0="45.0371" t1="9.68383" t2="-146.017" s0="1" s1="1" s2="1" q0="-0.191075" q1="-0.0108133" q2="0.00210506" q3="-0.981514" euler_x="0.384538" euler_y="0.022033" euler_z="0" id="271">
+    <CameraObject t0="77.8928" t1="12.0287" t2="-138.296" s0="1" s1="1" s2="1" q0="0.0872115" q1="-0.0801896" q2="0.00704327" q3="0.992932" euler_x="0.175215" euler_y="-0.161171" euler_z="0" id="271">
         <parameters />
     </CameraObject>
     <EnvObject t0="79.5592" t1="8.28811" t2="-151.308" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="276" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plant.xml">
@@ -864,7 +864,7 @@
     <EnvObject t0="82.5872" t1="8.29253" t2="-150.392" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="280" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plant_alt.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="88.9269" t1="8.19279" t2="-150.996" s0="1.008" s1="4.81447" s2="1.00948" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/ice_block.xml">
+    <EnvObject t0="88.9269" t1="8.19279" t2="-150.491" s0="1.008" s1="4.81447" s2="1.51422" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/ice_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="86.7249" t1="8.2926" t2="-152.046" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="282" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plant_alt.xml">
@@ -994,6 +994,21 @@
         </parameters>
         <Connections>
             <Connection id="325" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ActorObject t0="99.7468" t1="8.43948" t2="-148.135" s0="0.197531" s1="0.197531" s2="0.197531" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="326" type_file="Data/Objects/2d_frog_character_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="0.5" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="326" />
         </Connections>
         <ItemConnections />
         <Palette>
@@ -1158,4 +1173,5 @@
     <SpawnerItem display_name="2d_bat_character_actor.xml" path="Data/Objects/2d_bat_character_actor.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Male Rabbit Guard" path="Data/Objects/IGF_Characters/base_guard_actor.xml" thumbnail_path="Data/UI/spawner/thumbs/Character/base_guard_actor.png" />
     <SpawnerItem display_name="2d_mouse_character_actor.xml" path="Data/Objects/2d_mouse_character_actor.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="2d_frog_character_actor.xml" path="Data/Objects/2d_frog_character_actor.xml" thumbnail_path="empty_placeholder.png" />
 </RecentItems>

@@ -807,7 +807,7 @@ bool CheckBulletCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
 void Shoot(){
 	vec3 forward = aim_direction;
 	vec3 muzzle_offset = forward * 0.15;
-	vec3 spawn_point = this_mo.position + (aim_direction * 0.5);
+	vec3 spawn_point = this_mo.position + (aim_direction * 0.15);
 
 	int smoke_particle_amount = 5;
 	for(int i = 0; i < smoke_particle_amount; i++){
@@ -1066,6 +1066,7 @@ void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
 
 	vec3 this_com = this_mo.position;
 	vec3 other_com = other.position;
+	Log(warning, "check");
 
 	this_com.y = this_mo.position.y;
 	other_com.y = other.position.y;
@@ -1208,11 +1209,15 @@ void HandleRagdollImpactImpulse(const vec3 &in impulse, const vec3 &in pos, floa
 		return;
 	}
 
-	this_mo.velocity += normalize(impulse) * 5.0;
-	/* ApplyDamage(damage); */
+	this_mo.velocity += normalize(impulse) * 0.5;
+	ApplyDamage(damage);
 }
 
 void ApplyDamage(float damage){
+	if(this_mo.is_player){
+		return;
+	}
+
 	health -= damage;
 
 	string path;
