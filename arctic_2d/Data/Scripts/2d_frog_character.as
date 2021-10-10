@@ -42,7 +42,7 @@ void UpdateMovement(){
 
 			if(dist < 0.25 && attack_timer <= 0.0f){
 				attack_timer = 0.25;
-				vec3 force = target_velocity * 15000.0f;
+				vec3 force = target_velocity * 0.5f;
 				vec3 hit_pos = vec3(0.0f);
 				float damage = 0.1;
 				char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +

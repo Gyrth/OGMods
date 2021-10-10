@@ -32,12 +32,12 @@ void UpdateMovement(){
 	for(uint i = 0; i < character_ids.size(); i++){
 		MovementObject@ char = ReadCharacterID(character_ids[i]);
 		if(char.is_player){
-			float dist = min(1.0, distance(char.position, this_mo.position)) * 1.0f;
-			target_velocity = normalize(char.position - this_mo.position) * dist;
+			float dist = min(1.0, distance(char.position, this_mo.position));
+			target_velocity = normalize(char.position - this_mo.position) * (dist * 0.5);
 
 			if(dist < 0.5 && attack_timer <= 0.0f){
 				attack_timer = 0.25;
-				vec3 force = target_velocity * 15000.0f;
+				vec3 force = target_velocity * 0.5f;
 				vec3 hit_pos = vec3(0.0f);
 				float damage = 0.1;
 				char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +

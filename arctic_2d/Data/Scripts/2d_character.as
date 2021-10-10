@@ -451,7 +451,6 @@ void Update(int num_frames) {
 	ApplyPhysics(ts);
 	HandleCollisions(ts);
 	UpdateCamera(ts);
-	UpdateBullets();
 	UpdateState();
 
 	if(knocked_out != _dead){
@@ -473,7 +472,7 @@ void UpdateSpritePosition(){
 
 		current_animation.Update();
 
-		vec3 new_position = mix(last_char_pos, this_mo.position, time_step * 20.0);
+		vec3 new_position = mix(last_char_pos, this_mo.position + vec3(0.0, (movement_state == dead?-character_scale + 0.1:-abs(1.0 - character_scale) / 2.0), 0.0), time_step * 20.0);
 		current_animation.current_frame.SetTranslation(new_position);
 		last_char_pos = new_position;
 
@@ -734,76 +733,6 @@ void UpdateCamera(const Timestep &in ts){
 	camera.SetInterpSteps(ts.frames());
 }
 
-void UpdateBullets(){
-	for(uint i = 0; i < bullets.size(); i++){
-
-		Bullet@ bullet = bullets[i];
-
-		vec3 start = bullet.starting_position;
-		vec3 end = bullet.starting_position + (bullet.direction * bullet_speed * time_step);
-		bool done = CheckBulletCollisions(start, end, bullet);
-		/* DebugDrawLine(start, end, vec3(0.5), vec3(0.5), _fade); */
-		bullet.SetStartingPoint(end);
-
-		if(bullet.distance_done > max_bullet_distance || done){
-			bullets.removeAt(i);
-			return;
-		}
-	}
-}
-
-bool CheckBulletCollisions(vec3 start, vec3 &inout end, Bullet@ bullet){
-	bool colliding = false;
-	vec3 position = col.GetRayCollision(start, end);
-	vec3 direction = normalize(end - start);
-
-	/* DebugDrawWireSphere(start, 0.01, vec3(1.0), _fade);
-	DebugDrawWireSphere(end, 0.01, vec3(1.0), _fade); */
-
-	if(position != end){
-		MakeMetalSparks(position);
-		vec3 facing = camera.GetFacing();
-		MakeParticle("Data/Particles/stepdust.xml", position - facing, facing * 10.0f);
-		string path;
-		switch(rand() % 3) {
-			case 0:
-				path = "Data/Sounds/rico1.wav"; break;
-			case 1:
-				path = "Data/Sounds/rico2.wav"; break;
-			default:
-				path = "Data/Sounds/rico3.wav"; break;
-		}
-		PlaySound(path, position);
-		colliding = true;
-		end = position;
-	}
-
-	CollisionPoint point;
-
-	col.CheckRayCollisionCharacters(start, end);
-	int char_id = -1;
-	if(sphere_col.NumContacts() != 0){
-		point = sphere_col.GetContact(0);
-		char_id = point.id;
-	}
-
-	if(char_id != -1 && char_id != this_mo.GetID()){
-		MovementObject@ char = ReadCharacterID(char_id);
-		char.rigged_object().Stab(sphere_col.GetContact(0).position, direction, 1, 0);
-		vec3 force = direction * 30000.0f;
-		vec3 hit_pos = vec3(0.0f);
-		TimedSlowMotion(0.1f, 0.7f, 0.05f);
-		float damage = 0.5;
-		char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
-					 "vec3 pos = vec3("+hit_pos.x+", "+hit_pos.y+", "+hit_pos.z+");" +
-					 "HandleRagdollImpactImpulse(impulse, pos, " + damage + ");");
-		 colliding = true;
-		 end = point.position;
-	}
-
-	return colliding;
-}
-
 void Shoot(){
 	vec3 forward = aim_direction;
 	vec3 muzzle_offset = forward * 0.15;
@@ -1060,13 +989,12 @@ void SetParameters() {
 }
 
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){
-	float distance_threshold = 0.5f;
+	float distance_threshold = 0.3f;
 	/* vec3 this_com = this_mo.rigged_object().skeleton().GetCenterOfMass();
 	vec3 other_com = other.rigged_object().skeleton().GetCenterOfMass(); */
 
 	vec3 this_com = this_mo.position;
 	vec3 other_com = other.position;
-	Log(warning, "check");
 
 	this_com.y = this_mo.position.y;
 	other_com.y = other.position.y;
@@ -1117,7 +1045,9 @@ void ApplyPhysics(const Timestep &in ts) {
 	if(!on_ground){
 	}
 
-	this_mo.velocity += physics.gravity_vector * ts.step();
+	if(!flying_character || movement_state == dead){
+		this_mo.velocity += physics.gravity_vector * ts.step();
+	}
 
 	bool feet_moving = false;
 	float _walk_accel = 35.0f; // how fast characters accelerate when moving
@@ -1205,11 +1135,12 @@ void CacheSkeletonInfo() {
 }
 
 void HandleRagdollImpactImpulse(const vec3 &in impulse, const vec3 &in pos, float damage) {
+	this_mo.velocity += normalize(impulse) * 1.0;
+
 	if(movement_state == dead){
 		return;
 	}
 
-	this_mo.velocity += normalize(impulse) * 0.5;
 	ApplyDamage(damage);
 }
 

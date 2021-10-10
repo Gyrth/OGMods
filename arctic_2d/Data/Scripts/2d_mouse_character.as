@@ -35,11 +35,14 @@ void UpdateMovement(){
 			float dist = min(1.0, distance(char.position, this_mo.position)) * 1.25f;
 			vec3 target_position = char.position;
 			target_position.y = this_mo.position.y;
-			target_velocity = normalize(target_position - this_mo.position) * dist;
+
+			if(on_ground){
+				target_velocity = normalize(target_position - this_mo.position) * dist;
+			}
 
 			if(dist < 0.65 && attack_timer <= 0.0f){
 				attack_timer = 0.25;
-				vec3 force = target_velocity * 15000.0f;
+				vec3 force = target_velocity * 0.5f;
 				vec3 hit_pos = vec3(0.0f);
 				float damage = 0.1;
 				char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +

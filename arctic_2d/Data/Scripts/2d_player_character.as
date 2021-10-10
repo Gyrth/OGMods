@@ -45,7 +45,7 @@ void UpdateJumping(){
 		jump_wait -= time_step;
 	}
 
-	if(on_ground && GetInputDown(this_mo.controller_id, "jump")){
+	if(on_ground && this_mo.controlled && GetInputDown(this_mo.controller_id, "jump")){
 		if(jump_wait <= 0.0f){
 			jump_wait = 0.15;
 			float jump_mult = 6.0f;

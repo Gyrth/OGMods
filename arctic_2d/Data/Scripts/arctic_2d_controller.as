@@ -116,7 +116,7 @@ void BuildUI(){
 
 	IMDivider barrel_counter_divider("barrel_counter_divider", DOVertical);
 	barrel_counter_divider.setBorderColor(vec4(0,1,0,1));
-	barrel_counter_divider.setAlignment(CACenter, CATop);
+	barrel_counter_divider.setAlignment(CALeft, CATop);
 	barrel_counter_divider.appendSpacer(50.0f);
 
 	IMDivider coins_counter_divider("coins_counter_divider", DOHorizontal);
@@ -150,11 +150,12 @@ void BuildUI(){
 	barrel_counter_divider.append(star_counter_divider);
 
 	@barrel_counter_holder = IMContainer("barrel_counter_holder", -1, -1);
+	barrel_counter_holder.showBorder(false);
 	barrel_counter_holder.setElement(barrel_counter_divider);
+	barrel_counter_holder.setAlignment(CALeft, CACenter);
 
 	imGUI.getHeader().setAlignment(CALeft, CACenter);
 	imGUI.getHeader().setElement(barrel_counter_holder);
-
 
 	IMDivider health_divider("health_divider", DOVertical);
 	health_divider.setBorderColor(vec4(0,1,0,1));
