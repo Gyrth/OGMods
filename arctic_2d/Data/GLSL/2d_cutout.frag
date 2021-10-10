@@ -2460,7 +2460,8 @@ void main() {
 							#if defined(TRIPLANAR)
 								ws_normal = triplanarMapping(tex0, model_rotation_mat * frag_normal, world_vert);
 							#else
-								ws_normal = vec3(0,1,0);
+								// ws_normal = vec3(0,0,1);
+								ws_normal = texture(tex1,tc0).xyz;
 							#endif
 
 							ws_normal = normalize(ws_normal);
