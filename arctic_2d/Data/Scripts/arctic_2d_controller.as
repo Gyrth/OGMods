@@ -1,6 +1,6 @@
 //UI variables..----------------------------------------------------------------------------------------------------------------------------
 IMGUI@ imGUI;
-FontSetup default_font("arial", 70 , HexColor("#CCCCCC"), true);
+FontSetup default_font("arialbd", 100 , HexColor("#ffffff"), true);
 float blackout_amount = 0.0f;
 
 uint max_connections = 3;
@@ -27,6 +27,7 @@ const float PI = 3.14159265359f;
 double rad2deg = (180.0f / PI);
 double deg2rad = (PI / 180.0f);
 IMContainer@ barrel_counter_holder;
+IMContainer@ health_holder;
 
 //Camera control and player variables.---------------------------------------------------------------------------------------------------------
 float cam_rotation_x = 0.0f;
@@ -41,11 +42,19 @@ float crosshair_thickness = 1.0f;
 vec4 crosshair_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
 float mouse_sensitivity = 0.5f;
 bool editor_mode_active = false;
-
+int total_coins = 0;
+int total_gems = 0;
+int total_stars = 0;
+int collected_coins = 0;
+int collected_gems = 0;
+int collected_stars = 0;
+float player_health = 1.0f;
+float died_timer = 0.0;
+bool player_died = false;
 
 class Bullet{
 	float bullet_speed = 20.0f;
-	float max_bullet_distance = 1500.0f;
+	float max_bullet_distance = 5.0f;
 	float distance_done = 0.0f;
 	vec3 direction;
 	vec3 starting_position;
@@ -83,11 +92,11 @@ void Init(string str){
 }
 
 void CreateIMGUIContainers(){
-	imGUI.setHeaderHeight(200);
-	imGUI.setFooterHeight(200);
+	imGUI.setHeaderHeight(300);
+	imGUI.setFooterHeight(300);
 
-	imGUI.setFooterPanels(200.0f, 1400.0f);
 	imGUI.setup();
+	/* imGUI.getFooter().showBorder(); */
 
 	imGUI.setBackgroundLayers(1);
 	imGUI.getMain().setZOrdering(-1);
@@ -98,23 +107,89 @@ void BuildUI(){
 	IMDivider header_divider( "header_div", DOHorizontal );
 	header_divider.setAlignment(CACenter, CACenter);
 	imGUI.getHeader().setElement(header_divider);
+	float image_size = 100.0f;
+	float heart_size = 150.0f;
+	float spacer = 50.0f;
 
 	// Add it to the main panel of the GUI
 	imGUI.getMain().setElement( @mainDiv );
 
-	IMDivider barrel_counter_divider("barrel_counter_divider", DOHorizontal);
+	IMDivider barrel_counter_divider("barrel_counter_divider", DOVertical);
 	barrel_counter_divider.setBorderColor(vec4(0,1,0,1));
-	barrel_counter_divider.setAlignment(CACenter, CABottom);
+	barrel_counter_divider.setAlignment(CACenter, CATop);
+	barrel_counter_divider.appendSpacer(50.0f);
 
-	IMText barrel_counter("Barrels " + (num_barrels - barrels.size()) + "/" + num_barrels, default_font);
-	barrel_counter.setName("barrel_counter");
-	barrel_counter_divider.append(barrel_counter);
+	IMDivider coins_counter_divider("coins_counter_divider", DOHorizontal);
+	IMImage coin_image("Textures/Base pack/HUD/hud_coins.png");
+	coin_image.scaleToSizeX(image_size);
+	coins_counter_divider.append(coin_image);
+	coins_counter_divider.appendSpacer(spacer);
+	IMText coin_counter(collected_coins + "/" + total_coins, default_font);
+	coin_counter.setName("coin_counter");
+	coins_counter_divider.append(coin_counter);
+	barrel_counter_divider.append(coins_counter_divider);
+
+	IMDivider gem_counter_divider("gem_counter_divider", DOHorizontal);
+	IMImage gem_image("Textures/Base pack/HUD/hud_gem_red.png");
+	gem_image.scaleToSizeX(image_size);
+	gem_counter_divider.append(gem_image);
+	gem_counter_divider.appendSpacer(spacer);
+	IMText gem_counter(collected_gems + "/" + total_gems, default_font);
+	gem_counter.setName("gem_counter");
+	gem_counter_divider.append(gem_counter);
+	barrel_counter_divider.append(gem_counter_divider);
+
+	IMDivider star_counter_divider("star_counter_divider", DOHorizontal);
+	IMImage star_image("Textures/Base pack/HUD/star.png");
+	star_image.scaleToSizeX(image_size);
+	star_counter_divider.append(star_image);
+	star_counter_divider.appendSpacer(spacer);
+	IMText star_counter(collected_stars + "/" + total_stars, default_font);
+	star_counter.setName("gem_counter");
+	star_counter_divider.append(star_counter);
+	barrel_counter_divider.append(star_counter_divider);
 
 	@barrel_counter_holder = IMContainer("barrel_counter_holder", -1, -1);
-	barrel_counter_holder.setElement(barrel_counter);
+	barrel_counter_holder.setElement(barrel_counter_divider);
 
-	imGUI.getFooter().setAlignment(CALeft, CACenter);
-	imGUI.getFooter().setElement(barrel_counter_holder);
+	imGUI.getHeader().setAlignment(CALeft, CACenter);
+	imGUI.getHeader().setElement(barrel_counter_holder);
+
+
+	IMDivider health_divider("health_divider", DOVertical);
+	health_divider.setBorderColor(vec4(0,1,0,1));
+	health_divider.setAlignment(CACenter, CATop);
+	health_divider.appendSpacer(50.0f);
+
+	IMDivider health_horiz_divider("health_horiz_divider", DOHorizontal);
+
+	for(int i = 1; i < 6; i++){
+		string path = "Textures/Base pack/HUD/hud_heartFull.png";
+
+		if((i / 5.0) > player_health){
+			path = "Textures/Base pack/HUD/hud_heartEmpty.png";
+
+			float bigger = (((i * 2) - 1) / 10.01);
+			float smaller = (((i * 2)) / 10.01);
+
+			if( bigger < player_health && smaller > player_health ){
+				path = "Textures/Base pack/HUD/hud_heartHalf.png";
+			}
+		}
+
+		IMImage health_image(path);
+		health_image.scaleToSizeX(heart_size);
+		health_horiz_divider.append(health_image);
+	}
+
+	health_divider.append(health_horiz_divider);
+
+	@health_holder = IMContainer("health_holder", -1, -1);
+	health_holder.setElement(health_divider);
+
+	imGUI.getFooter().setAlignment(CACenter, CACenter);
+	/* imGUI.getFooter().showBorder(); */
+	imGUI.getFooter().setElement(health_holder);
 }
 
 void SetWindowDimensions(int width, int height){
@@ -170,13 +245,86 @@ void ReceiveMessage(string msg){
 
 		/* Log(warning, "Adding bullet"); */
 		bullets.insertLast(Bullet(spawn_point, forward));
+	}else if(token == "reset"){
+		Reset();
+		BuildUI();
+	}else if(token == "register_coin"){
+		total_coins += 1;
+		BuildUI();
+	}else if(token == "register_gem"){
+		total_gems += 1;
+		BuildUI();
+	}else if(token == "register_star"){
+		total_stars += 1;
+		BuildUI();
+	}else if(token == "collect_coin"){
+		collected_coins += 1;
+		BuildUI();
+	}else if(token == "collect_gem"){
+		collected_gems += 1;
+		BuildUI();
+	}else if(token == "collect_star"){
+		collected_stars += 1;
+		BuildUI();
+	}else if(token == "update_player_health"){
+		token_iter.FindNextToken(msg);
+		player_health = atof(token_iter.GetToken(msg));
+		BuildUI();
+		if(player_health <= 0.0){
+			PlayerDied();
+		}
 	}
+}
+
+void Reset() {
+	total_coins = 0;
+	total_gems = 0;
+	total_stars = 0;
+	collected_coins = 0;
+	collected_gems = 0;
+	collected_stars = 0;
+	player_died = false;
+}
+
+void PlayerDied(){
+	PlaySound("Data/Sounds/lowDown.ogg");
+	died_timer = 3.0;
+	player_died = true;
+
+	IMContainer lose_holder("lose_holder", -1, -1);
+	IMDivider lose_divider("lose_divider", DOHorizontal);
+	IMImage lose_image("Textures/Base pack/HUD/hud_x.png");
+	lose_image.scaleToSizeX(700.0f);
+	lose_image.setColor(vec4(1.0, 0.0, 0.0, 0.5));
+	lose_divider.append(lose_image);
+
+	lose_image.addUpdateBehavior(IMFadeIn( 3500, inSineTween ), "");
+	lose_image.addUpdateBehavior(IMMoveIn( 1000, vec2(0.0, -500.0), outBounceTween ), "");
+
+	lose_image.setClip(false);
+	lose_divider.setClip(false);
+	lose_holder.setClip(false);
+	lose_holder.setElement(lose_divider);
+	imGUI.getMain().setAlignment(CACenter, CACenter);
+	/* imGUI.getMain().showBorder(); */
+	imGUI.getMain().setElement(lose_holder);
 }
 
 
 void Update(){
 	if(!post_init_done){
 		PostInit();
+	}
+
+	if(player_died){
+		if(died_timer <= 0.0){
+			if(GetInputPressed(0, "attack")){
+				Reset();
+				ResetLevel();
+			}
+		}else{
+			died_timer -= time_step;
+		}
 	}
 
 	if(editor_mode_active != EditorModeActive()){
@@ -218,20 +366,6 @@ bool CheckCollisions(vec3 start, vec3 &inout end){
 		MakeMetalSparks(point.position);
 		vec3 facing = camera.GetFacing();
 		/* MakeParticle("Data/Particles/gun_decal.xml", point.position - facing, facing * 10.0f); */
-		string path;
-		switch(rand() % 5) {
-			case 0:
-				path = "Data/Sounds/footstep_snow_000.wav"; break;
-			case 1:
-				path = "Data/Sounds/footstep_snow_001.wav"; break;
-			case 2:
-				path = "Data/Sounds/footstep_snow_002.wav"; break;
-			case 3:
-				path = "Data/Sounds/footstep_snow_003.wav"; break;
-			default:
-				path = "Data/Sounds/footstep_snow_004.wav"; break;
-		}
-		PlaySound(path, point.position);
 		colliding = true;
 		end = point.position;
 	}
@@ -253,9 +387,36 @@ bool CheckCollisions(vec3 start, vec3 &inout end){
 		char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
 					 "vec3 pos = vec3("+hit_pos.x+", "+hit_pos.y+", "+hit_pos.z+");" +
 					 "HandleRagdollImpactImpulse(impulse, pos, " + damage + ");");
-		 colliding = true;
-		 end = point.position;
+		colliding = true;
+		end = point.position;
 	}
+
+	array<int> character_ids;
+	GetCharactersInSphere(start, 0.25, character_ids);
+	/* DebugDrawWireSphere(start, 0.25, vec3(1.0), _delete_on_update); */
+	for(uint i = 0; i < character_ids.size(); i++){
+		MovementObject@ char = ReadCharacterID(character_ids[i]);
+		float character_scale = 1.0;
+		if(char.HasVar("character_scale")){
+			character_scale = char.GetFloatVar("character_scale") / 2.0;
+		}
+		float dist = distance(start, char.position);
+
+		if(!char.is_player && dist < character_scale){
+			colliding = true;
+			MakeMetalSparks(start);
+
+			vec3 force = direction * 15000.0f;
+			vec3 hit_pos = vec3(0.0f);
+			float damage = 1.0;
+			char.Execute("vec3 impulse = vec3("+force.x+", "+force.y+", "+force.z+");" +
+						 "vec3 pos = vec3("+hit_pos.x+", "+hit_pos.y+", "+hit_pos.z+");" +
+						 "HandleRagdollImpactImpulse(impulse, pos, " + damage + ");");
+
+			break;
+		}
+	}
+
 	return colliding;
 }
 
@@ -271,6 +432,21 @@ void MakeMetalSparks(vec3 pos) {
 																RangedRandomFloat(-5.0f, 5.0f),
 																RangedRandomFloat(-5.0f, 5.0f)));
 	}
+
+	string path;
+	switch(rand() % 5) {
+		case 0:
+			path = "Data/Sounds/footstep_snow_000.wav"; break;
+		case 1:
+			path = "Data/Sounds/footstep_snow_001.wav"; break;
+		case 2:
+			path = "Data/Sounds/footstep_snow_002.wav"; break;
+		case 3:
+			path = "Data/Sounds/footstep_snow_003.wav"; break;
+		default:
+			path = "Data/Sounds/footstep_snow_004.wav"; break;
+	}
+	PlaySound(path, pos);
 }
 
 void PostInit(){

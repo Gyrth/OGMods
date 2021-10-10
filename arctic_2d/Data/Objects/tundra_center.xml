@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/box.obj</Model>
+	<ColorMap>Data/Textures/Ice expansion/Tiles/tundraCenter.png</ColorMap>
+	<NormalMap>Data/Textures/normal.tga</NormalMap>
+	<ShaderName>2d_cutout #TANGENT #TRIPLANAR</ShaderName>
+	<MaterialPath>Data/Materials/default.xml</MaterialPath>
+	<flags double_sided="true"/>
+	<!-- <flags no_collision = "true"/> -->
+</Object>
