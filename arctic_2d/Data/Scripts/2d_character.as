@@ -348,6 +348,8 @@ bool flying_character = false;
 bool ghost_character = false;
 float health = 1.0f;
 float hurt_timer = 0.0f;
+bool stop_controls = false;
+float intro_cam_offset = 2.5f;
 
 enum movement_states {idle, walk, jump, dead, hurt};
 movement_states movement_state = idle;
@@ -454,7 +456,7 @@ void Update(int num_frames) {
 	UpdateCamera(ts);
 	UpdateState();
 
-	if(knocked_out != _dead){
+	if(knocked_out != _dead && !stop_controls){
 		UpdateControls();
 		UpdateJumping();
 		UpdateMovement();
@@ -704,6 +706,10 @@ void UpdateCamera(const Timestep &in ts){
 
 
 	float distance = 3.5f;
+
+	distance -= intro_cam_offset;
+	intro_cam_offset = max(0.0, intro_cam_offset - time_step * 2.0);
+
 	vec3 new_cam_position = this_mo.position + vec3(0.0, distance / 2.0, distance);
 	vec3 new_look_position = this_mo.position;
 
@@ -808,6 +814,8 @@ void Reset() {
 	jump_animation.Reset();
 	dead_animation.Reset();
 	hurt_animation.Reset();
+	stop_controls = false;
+	intro_cam_offset = 2.5;
 }
 
 bool Init(string character_path) {
@@ -940,6 +948,10 @@ void MindReceiveMessage(string msg){
 
 void ReceiveMessage(string msg){
 	/* Log(warning, msg); */
+
+	if(msg == "stop_controls"){
+		stop_controls = true;
+	}
 }
 
 bool IsAware(){

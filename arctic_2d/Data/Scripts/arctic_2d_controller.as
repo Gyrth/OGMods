@@ -49,7 +49,7 @@ int collected_coins = 0;
 int collected_gems = 0;
 int collected_stars = 0;
 float player_health = 1.0f;
-float died_timer = 0.0;
+float click_reset_timer = 0.0;
 bool player_died = false;
 bool flag_captured = false;
 
@@ -303,6 +303,14 @@ void Reset() {
 void FlagCaptured(){
 	PlaySound("Data/Sounds/powerUp9.ogg");
 	flag_captured = true;
+	click_reset_timer = 3.0;
+
+	for(int i = 0; i < GetNumCharacters(); i++){
+		MovementObject@ char = ReadCharacter(i);
+		if(char.is_player){
+			char.ReceiveMessage("stop_controls");
+		}
+	}
 
 	IMContainer win_holder("win_holder", 2560, 1000);
 	IMDivider win_divider("win_divider", DOHorizontal);
@@ -340,7 +348,7 @@ void FlagCaptured(){
 
 void PlayerDied(){
 	PlaySound("Data/Sounds/lowDown.ogg");
-	died_timer = 3.0;
+	click_reset_timer = 3.0;
 	player_died = true;
 
 	IMContainer lose_holder("lose_holder", -1, -1);
@@ -368,14 +376,14 @@ void Update(){
 		PostInit();
 	}
 
-	if(player_died){
-		if(died_timer <= 0.0){
+	if(player_died || flag_captured){
+		if(click_reset_timer <= 0.0){
 			if(!EditorModeActive() && GetInputPressed(0, "attack")){
 				Reset();
 				ResetLevel();
 			}
 		}else{
-			died_timer -= time_step;
+			click_reset_timer -= time_step;
 		}
 	}
 
