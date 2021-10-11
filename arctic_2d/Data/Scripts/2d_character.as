@@ -472,7 +472,10 @@ void UpdateSpritePosition(){
 
 		current_animation.Update();
 
-		vec3 new_position = mix(last_char_pos, this_mo.position + vec3(0.0, (movement_state == dead?-character_scale + 0.1:-abs(1.0 - character_scale) / 2.0), 0.0), time_step * 20.0);
+		vec3 alive_position = this_mo.position + vec3(0.0, -abs(1.0 - character_scale) / 2.0, 0.0);
+		vec3 dead_position = alive_position + vec3(0.0, -(character_scale / 2.0) + 0.1, 0.0);
+
+		vec3 new_position = mix(last_char_pos, movement_state == dead?dead_position:alive_position, time_step * 20.0);
 		current_animation.current_frame.SetTranslation(new_position);
 		last_char_pos = new_position;
 
