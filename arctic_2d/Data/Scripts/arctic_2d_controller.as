@@ -51,6 +51,7 @@ int collected_stars = 0;
 float player_health = 1.0f;
 float died_timer = 0.0;
 bool player_died = false;
+bool flag_captured = false;
 
 class Bullet{
 	float bullet_speed = 20.0f;
@@ -103,59 +104,18 @@ void CreateIMGUIContainers(){
 }
 
 void BuildUI(){
-	IMDivider mainDiv( "mainDiv", DOHorizontal );
-	IMDivider header_divider( "header_div", DOHorizontal );
-	header_divider.setAlignment(CACenter, CACenter);
-	imGUI.getHeader().setElement(header_divider);
-	float image_size = 100.0f;
+	/* IMDivider mainDiv( "mainDiv", DOHorizontal ); */
 	float heart_size = 150.0f;
-	float spacer = 50.0f;
 
 	// Add it to the main panel of the GUI
-	imGUI.getMain().setElement( @mainDiv );
+	/* imGUI.getMain().setElement( @mainDiv ); */
 
-	IMDivider barrel_counter_divider("barrel_counter_divider", DOVertical);
-	barrel_counter_divider.setBorderColor(vec4(0,1,0,1));
-	barrel_counter_divider.setAlignment(CALeft, CATop);
-	barrel_counter_divider.appendSpacer(50.0f);
-
-	IMDivider coins_counter_divider("coins_counter_divider", DOHorizontal);
-	IMImage coin_image("Textures/Base pack/HUD/hud_coins.png");
-	coin_image.scaleToSizeX(image_size);
-	coins_counter_divider.append(coin_image);
-	coins_counter_divider.appendSpacer(spacer);
-	IMText coin_counter(collected_coins + "/" + total_coins, default_font);
-	coin_counter.setName("coin_counter");
-	coins_counter_divider.append(coin_counter);
-	barrel_counter_divider.append(coins_counter_divider);
-
-	IMDivider gem_counter_divider("gem_counter_divider", DOHorizontal);
-	IMImage gem_image("Textures/Base pack/HUD/hud_gem_red.png");
-	gem_image.scaleToSizeX(image_size);
-	gem_counter_divider.append(gem_image);
-	gem_counter_divider.appendSpacer(spacer);
-	IMText gem_counter(collected_gems + "/" + total_gems, default_font);
-	gem_counter.setName("gem_counter");
-	gem_counter_divider.append(gem_counter);
-	barrel_counter_divider.append(gem_counter_divider);
-
-	IMDivider star_counter_divider("star_counter_divider", DOHorizontal);
-	IMImage star_image("Textures/Base pack/HUD/star.png");
-	star_image.scaleToSizeX(image_size);
-	star_counter_divider.append(star_image);
-	star_counter_divider.appendSpacer(spacer);
-	IMText star_counter(collected_stars + "/" + total_stars, default_font);
-	star_counter.setName("gem_counter");
-	star_counter_divider.append(star_counter);
-	barrel_counter_divider.append(star_counter_divider);
+	IMDivider @collected_divider = GetCollected();
 
 	@barrel_counter_holder = IMContainer("barrel_counter_holder", -1, -1);
 	barrel_counter_holder.showBorder(false);
-	barrel_counter_holder.setElement(barrel_counter_divider);
+	barrel_counter_holder.setElement(collected_divider);
 	barrel_counter_holder.setAlignment(CALeft, CACenter);
-
-	imGUI.getHeader().setAlignment(CALeft, CACenter);
-	imGUI.getHeader().setElement(barrel_counter_holder);
 
 	IMDivider health_divider("health_divider", DOVertical);
 	health_divider.setBorderColor(vec4(0,1,0,1));
@@ -185,12 +145,61 @@ void BuildUI(){
 
 	health_divider.append(health_horiz_divider);
 
-	@health_holder = IMContainer("health_holder", -1, -1);
+	@health_holder = IMContainer("health_holder", 2560, -1);
 	health_holder.setElement(health_divider);
 
-	imGUI.getFooter().setAlignment(CACenter, CACenter);
-	/* imGUI.getFooter().showBorder(); */
-	imGUI.getFooter().setElement(health_holder);
+	if(!flag_captured){
+		imGUI.getFooter().setAlignment(CACenter, CACenter);
+		imGUI.getHeader().setAlignment(CALeft, CACenter);
+		imGUI.getFooter().setElement(health_holder);
+		imGUI.getHeader().setElement(barrel_counter_holder);
+		imGUI.getMain().clear();
+	}else{
+		imGUI.getFooter().clear();
+		imGUI.getHeader().clear();
+	}
+}
+
+IMDivider@ GetCollected(){
+	float image_size = 100.0f;
+	float spacer = 50.0f;
+
+	IMDivider collected_divider("collected_divider", DOVertical);
+	collected_divider.setBorderColor(vec4(0,1,0,1));
+	collected_divider.setAlignment(CALeft, CATop);
+	collected_divider.appendSpacer(50.0f);
+
+	IMDivider coins_counter_divider("coins_counter_divider", DOHorizontal);
+	IMImage coin_image("Textures/Base pack/HUD/hud_coins.png");
+	coin_image.scaleToSizeX(image_size);
+	coins_counter_divider.append(coin_image);
+	coins_counter_divider.appendSpacer(spacer);
+	IMText coin_counter(collected_coins + "/" + total_coins, default_font);
+	coin_counter.setName("coin_counter");
+	coins_counter_divider.append(coin_counter);
+	collected_divider.append(coins_counter_divider);
+
+	IMDivider gem_counter_divider("gem_counter_divider", DOHorizontal);
+	IMImage gem_image("Textures/Base pack/HUD/hud_gem_red.png");
+	gem_image.scaleToSizeX(image_size);
+	gem_counter_divider.append(gem_image);
+	gem_counter_divider.appendSpacer(spacer);
+	IMText gem_counter(collected_gems + "/" + total_gems, default_font);
+	gem_counter.setName("gem_counter");
+	gem_counter_divider.append(gem_counter);
+	collected_divider.append(gem_counter_divider);
+
+	IMDivider star_counter_divider("star_counter_divider", DOHorizontal);
+	IMImage star_image("Textures/Base pack/HUD/star.png");
+	star_image.scaleToSizeX(image_size);
+	star_counter_divider.append(star_image);
+	star_counter_divider.appendSpacer(spacer);
+	IMText star_counter(collected_stars + "/" + total_stars, default_font);
+	star_counter.setName("gem_counter");
+	star_counter_divider.append(star_counter);
+	collected_divider.append(star_counter_divider);
+
+	return @collected_divider;
 }
 
 void SetWindowDimensions(int width, int height){
@@ -274,6 +283,9 @@ void ReceiveMessage(string msg){
 		if(player_health <= 0.0){
 			PlayerDied();
 		}
+	}else if(token == "flag_captured"){
+		FlagCaptured();
+		BuildUI();
 	}
 }
 
@@ -285,6 +297,45 @@ void Reset() {
 	collected_gems = 0;
 	collected_stars = 0;
 	player_died = false;
+	flag_captured = false;
+}
+
+void FlagCaptured(){
+	PlaySound("Data/Sounds/powerUp9.ogg");
+	flag_captured = true;
+
+	IMContainer win_holder("win_holder", 2560, 1000);
+	IMDivider win_divider("win_divider", DOHorizontal);
+	IMImage star_image("Textures/Base pack/HUD/star.png");
+	star_image.scaleToSizeX(800.0f);
+	star_image.setColor(vec4(1.0, 1.0, 1.0, 0.75));
+	imGUI.getMain().addFloatingElement(star_image, "star_image", vec2(2560 / 2.0 - 400, 1000 / 2.0 - 450));
+
+	IMDivider @collected_divider = GetCollected();
+	collected_divider.addUpdateBehavior(IMMoveIn( 1000, vec2(0.0, -500.0), outBounceTween ), "");
+	win_divider.append(collected_divider);
+
+	star_image.addUpdateBehavior(IMFadeIn( 3500, inSineTween ), "");
+	star_image.addUpdateBehavior(IMMoveIn( 1000, vec2(0.0, -500.0), outBounceTween ), "");
+
+	for(int i = 0; i < 100; i++){
+		IMImage small_star_image("Textures/Base pack/HUD/star.png");
+		small_star_image.scaleToSizeX(RangedRandomFloat(25.0, 75.0));
+		small_star_image.setRotation(RangedRandomFloat(0.0, 360.0f));
+		small_star_image.addUpdateBehavior(IMFadeIn( int(RangedRandomFloat(1000.0, 2000)), inSineTween ), "");
+		/* small_star_image.addUpdateBehavior(IMMoveIn( 1000, vec2(0.0, -840.0), outSineTween ), ""); */
+		small_star_image.setClip(false);
+		small_star_image.setColor(vec4(RangedRandomFloat(0.5, 1.0), RangedRandomFloat(0.5, 1.0), RangedRandomFloat(0.5, 1.0), 1.0));
+		imGUI.getMain().addFloatingElement(small_star_image, "small_star_image" + i, vec2(RangedRandomFloat(0.0, 2500), RangedRandomFloat(0.0, 840)));
+	}
+
+	star_image.setClip(false);
+	win_divider.setClip(false);
+	win_holder.setClip(false);
+	win_holder.setElement(win_divider);
+	imGUI.getMain().setAlignment(CACenter, CACenter);
+	imGUI.getMain().showBorder(false);
+	imGUI.getMain().setElement(win_holder);
 }
 
 void PlayerDied(){
