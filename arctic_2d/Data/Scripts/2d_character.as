@@ -1184,8 +1184,9 @@ void ApplyDamage(float damage){
 		}
 	}else{
 		movement_state = hurt;
-		hurt_timer = 0.15f;
 		SetAnimation(@hurt_animation);
+		hurt_timer = 0.15f;
+		UpdateSpritePosition();
 	}
 
 	if(this_mo.is_player){
