@@ -319,7 +319,7 @@ void Update(){
 
 	if(player_died){
 		if(died_timer <= 0.0){
-			if(GetInputPressed(0, "attack")){
+			if(!EditorModeActive() && GetInputPressed(0, "attack")){
 				Reset();
 				ResetLevel();
 			}
