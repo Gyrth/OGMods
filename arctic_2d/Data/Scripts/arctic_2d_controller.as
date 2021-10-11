@@ -52,6 +52,18 @@ float player_health = 1.0f;
 float click_reset_timer = 0.0;
 bool player_died = false;
 bool flag_captured = false;
+float update_music_timer = 0.0;
+
+array<string> instruments = {	"banjo",
+								"bass",
+								"drums_heavy",
+								"drums_light",
+								"fiddle",
+								"guitar_simple",
+								"guitar_back",
+								"piano",
+								"vocals"
+							};
 
 class Bullet{
 	float bullet_speed = 20.0f;
@@ -90,6 +102,9 @@ class Bullet{
 void Init(string str){
 	@imGUI = CreateIMGUI();
 	CreateIMGUIContainers();
+
+	AddMusic("Data/Music/arctic_2d_music.xml");
+	SetSong("song");
 }
 
 void CreateIMGUIContainers(){
@@ -284,8 +299,10 @@ void ReceiveMessage(string msg){
 			PlayerDied();
 		}
 	}else if(token == "flag_captured"){
-		FlagCaptured();
-		BuildUI();
+		if(!player_died){
+			FlagCaptured();
+			BuildUI();
+		}
 	}
 }
 
@@ -351,7 +368,7 @@ void PlayerDied(){
 	click_reset_timer = 3.0;
 	player_died = true;
 
-	IMContainer lose_holder("lose_holder", -1, -1);
+	IMContainer lose_holder("lose_holder", 2560, 1000);
 	IMDivider lose_divider("lose_divider", DOHorizontal);
 	IMImage lose_image("Textures/Base pack/HUD/hud_x.png");
 	lose_image.scaleToSizeX(700.0f);
@@ -400,6 +417,26 @@ void Update(){
 
 	imGUI.update();
 	UpdateBullets();
+	UpdateMusic();
+}
+
+void UpdateMusic(){
+	if(update_music_timer <= 0.0f){
+		update_music_timer = RangedRandomFloat(25.0, 35.0);
+
+		for(uint i = 0; i < instruments.size(); i++){
+			SetLayerGain(instruments[i], 0.0);
+		}
+
+		// At least 2 instruments and max 5;
+		int random_instrument_amount = int(RangedRandomFloat(2.0, 5.0));
+		for(int i = 0; i < random_instrument_amount; i++){
+			string instrument_name = instruments[rand() % instruments.size()];
+			SetLayerGain(instrument_name, 0.25);
+		}
+	}else{
+		update_music_timer -= time_step;
+	}
 }
 
 void UpdateBullets(){

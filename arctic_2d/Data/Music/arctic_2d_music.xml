@@ -1,0 +1,25 @@
+<?xml version="2.0" ?>
+<Music version="1">
+    <Song name="banjo" type="single" file_path="Data/Music/LayeredTest/banjo.ogg"/>
+    <Song name="bass" type="single" file_path="Data/Music/LayeredTest/bass.ogg"/>
+    <Song name="drums_heavy" type="single" file_path="Data/Music/LayeredTest/drums_heavy.ogg"/>
+    <Song name="drums_light" type="single" file_path="Data/Music/LayeredTest/drums_light.ogg"/>
+	<Song name="fiddle" type="single" file_path="Data/Music/LayeredTest/fiddle.ogg"/>
+	<Song name="guitar_simple" type="single" file_path="Data/Music/LayeredTest/guitar_simple.ogg"/>
+	<Song name="guitar_back" type="single" file_path="Data/Music/LayeredTest/guitar_back.ogg"/>
+	<Song name="piano" type="single" file_path="Data/Music/LayeredTest/piano.ogg"/>
+    <Song name="vocals" type="single" file_path="Data/Music/LayeredTest/vocals.ogg"/>
+
+    <!-- Song groups are used to create layered tracks, such songs have to consists of songs with single files -->
+    <Song name="song" type="layered">
+        <SongRef name="banjo"/>
+        <SongRef name="bass"/>
+        <SongRef name="drums_heavy"/>
+        <SongRef name="drums_light"/>
+		<SongRef name="fiddle"/>
+		<SongRef name="guitar_simple"/>
+		<SongRef name="guitar_back"/>
+		<SongRef name="piano"/>
+        <SongRef name="vocals"/>
+    </Song>
+</Music>
