@@ -119,12 +119,7 @@ void CreateIMGUIContainers(){
 }
 
 void BuildUI(){
-	/* IMDivider mainDiv( "mainDiv", DOHorizontal ); */
 	float heart_size = 150.0f;
-
-	// Add it to the main panel of the GUI
-	/* imGUI.getMain().setElement( @mainDiv ); */
-
 	IMDivider @collected_divider = GetCollected();
 
 	@barrel_counter_holder = IMContainer("barrel_counter_holder", -1, -1);
