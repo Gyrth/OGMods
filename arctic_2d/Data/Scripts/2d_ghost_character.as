@@ -3,17 +3,17 @@
 float attack_timer = 0.0f;
 
 void SetAnimations(){
-	@walk_animation = Animation({	"Data/Objects/2d_bat_walk_1.xml",
-									"Data/Objects/2d_bat_walk_2.xml"
-								});
+	@walk_animation = Animation({	"Data/Objects/2d_ghost_walk_1.xml"});
 
-	@idle_animation = Animation({	"Data/Objects/2d_bat_idle.xml"});
-	@jump_animation = Animation({	"Data/Objects/2d_bat_walk_2.xml"});
-	@dead_animation = Animation({	"Data/Objects/2d_bat_dead.xml"});
-	@hurt_animation = Animation({	"Data/Objects/2d_bat_dead.xml"});
+	@idle_animation = Animation({	"Data/Objects/2d_ghost_idle.xml"});
+	@jump_animation = Animation({	"Data/Objects/2d_ghost_idle.xml"});
+	@dead_animation = Animation({	"Data/Objects/2d_ghost_dead.xml"});
+	@hurt_animation = Animation({	"Data/Objects/2d_ghost_dead.xml"});
 
 	flying_character = true;
-	character_scale = 0.5;
+	ghost_character = true;
+	character_scale = 0.75;
+	health = 5.0f;
 }
 
 void UpdateControls(){
@@ -33,7 +33,7 @@ void UpdateMovement(){
 		MovementObject@ char = ReadCharacterID(character_ids[i]);
 		if(char.is_player){
 			float dist = min(1.0, distance(char.position, this_mo.position));
-			target_velocity = normalize(char.position - this_mo.position) * (dist * 1.25);
+			target_velocity = normalize(char.position - this_mo.position) * (dist * 0.5);
 
 			if(dist < 0.5 && attack_timer <= 0.0f){
 				attack_timer = 0.25;

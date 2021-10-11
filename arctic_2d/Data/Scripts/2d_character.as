@@ -345,6 +345,7 @@ vec3 old_target_velocity = vec3();
 vec3 aim_direction = vec3(0.0, 0.0, 1.0);
 float jump_wait = 0.1f;
 bool flying_character = false;
+bool ghost_character = false;
 float health = 1.0f;
 float hurt_timer = 0.0f;
 
@@ -1055,7 +1056,7 @@ void ApplyPhysics(const Timestep &in ts) {
 	bool feet_moving = false;
 	float _walk_accel = 35.0f; // how fast characters accelerate when moving
 
-	if(on_ground){
+	if(on_ground || flying_character){
 		this_mo.velocity *= pow(0.95f,ts.frames());
 	}
 }
@@ -1065,6 +1066,7 @@ void HandleCollisions(const Timestep &in ts) {
 }
 
 void HandleGroundCollisions(const Timestep &in ts) {
+	if(ghost_character && movement_state != dead){return;}
 	vec3 offset= vec3(0.0, -0.0, 0.0);
 	vec3 scale = vec3(1.0);
 	float size = 0.5f;
@@ -1148,9 +1150,9 @@ void HandleRagdollImpactImpulse(const vec3 &in impulse, const vec3 &in pos, floa
 }
 
 void ApplyDamage(float damage){
-	if(this_mo.is_player){
+	/* if(this_mo.is_player){
 		return;
-	}
+	} */
 
 	health -= damage;
 
