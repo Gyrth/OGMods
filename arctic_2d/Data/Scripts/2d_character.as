@@ -723,11 +723,11 @@ void UpdateCamera(const Timestep &in ts){
 	camera.SetPos(cam_pos);
 	camera.SetDistance(0.5f);
 
-	/* if(knocked_out == _dead){
-		camera.SetDOF(0, 0, 0, 1.0, 0, 0.2);
+	if(knocked_out == _dead){
+		camera.SetDOF(0.15, 4.0, 1.0, 0.15, 5.0, 1.0);
 	}else{
-		camera.SetDOF(0, 0, 0, 0.0, 0.0, 0.0);
-	} */
+		camera.SetDOF(0.15, 4.0, 1.0, 0.15, 5.0, 1.0);
+	}
 
 	if(this_mo.focused_character) {
 		UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
