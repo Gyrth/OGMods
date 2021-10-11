@@ -684,7 +684,7 @@ vec3 GetTargetVelocity() {
 }
 
 void UpdateCamera(const Timestep &in ts){
-	if(!this_mo.controlled){
+	if(!this_mo.controlled || !this_mo.is_player){
 		return;
 	}
 
