@@ -13,7 +13,7 @@ void SetAnimations(){
 	flying_character = true;
 	ghost_character = true;
 	character_scale = 0.75;
-	health = 5.0f;
+	health = 3.0f;
 }
 
 void UpdateControls(){
