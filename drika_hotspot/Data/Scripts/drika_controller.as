@@ -999,6 +999,31 @@ void SaveCheckpoint(string save_name){
 		character_data["frozen"] = JSONValue(char.GetBoolVar("frozen"));
 		character_data["no_freeze"] = JSONValue(char.GetBoolVar("no_freeze"));
 		character_data["cut_throat"] = JSONValue(char.GetBoolVar("cut_throat"));
+		character_data["tethered"] = JSONValue(char.GetIntVar("tethered"));
+		character_data["water_id"] = JSONValue(char.GetIntVar("water_id"));
+		character_data["water_depth"] = JSONValue(char.GetFloatVar("water_depth"));
+		character_data["breath"] = JSONValue(char.GetFloatVar("breath"));
+		character_data["breath_bars"] = JSONValue(char.GetIntVar("breath_bars"));
+		character_data["red_tint"] = JSONValue(char.GetFloatVar("red_tint"));
+		character_data["black_tint"] = JSONValue(char.GetFloatVar("black_tint"));
+		character_data["level_blackout"] = JSONValue(char.GetFloatVar("level_blackout"));
+		character_data["blood_flash_time"] = JSONValue(char.GetFloatVar("blood_flash_time"));
+		character_data["hit_flash_time"] = JSONValue(char.GetFloatVar("hit_flash_time"));
+		character_data["dark_hit_flash_time"] = JSONValue(char.GetFloatVar("dark_hit_flash_time"));
+		character_data["idle_stance"] = JSONValue(char.GetBoolVar("idle_stance"));
+		character_data["idle_stance_amount"] = JSONValue(char.GetFloatVar("idle_stance_amount"));
+		character_data["target_rotation"] = JSONValue(char.GetFloatVar("target_rotation"));
+		character_data["target_rotation2"] = JSONValue(char.GetFloatVar("target_rotation2"));
+		character_data["cam_rotation"] = JSONValue(char.GetFloatVar("cam_rotation"));
+		character_data["cam_rotation2"] = JSONValue(char.GetFloatVar("cam_rotation2"));
+		character_data["cam_distance"] = JSONValue(char.GetFloatVar("cam_distance"));
+		character_data["auto_cam_override"] = JSONValue(char.GetFloatVar("auto_cam_override"));
+		character_data["on_ground"] = JSONValue(char.GetBoolVar("on_ground"));
+		character_data["air_time"] = JSONValue(char.GetFloatVar("air_time"));
+		character_data["on_ground_time"] = JSONValue(char.GetFloatVar("on_ground_time"));
+		character_data["duck_amount"] = JSONValue(char.GetFloatVar("duck_amount"));
+		character_data["target_duck_amount"] = JSONValue(char.GetFloatVar("target_duck_amount"));
+		character_data["duck_vel"] = JSONValue(char.GetFloatVar("duck_vel"));
 
 		if(state == _ragdoll_state){
 			string bone_data;
@@ -1170,8 +1195,6 @@ void LoadCheckpoint(string load_name){
 			char.position = position;
 			char.ReceiveScriptMessage("set_rotation " + rotation);
 			char.velocity = velocity;
-			char.FixDiscontinuity();
-			char.Execute("FixDiscontinuity();");
 
 			char.Execute("knocked_out = " + obj_data["knocked_out"].asInt() + ";");
 
@@ -1258,6 +1281,34 @@ void LoadCheckpoint(string load_name){
 			char.Execute("frozen = " + obj_data["frozen"].asBool() + ";");
 			char.Execute("no_freeze = " + obj_data["no_freeze"].asBool() + ";");
 			char.Execute("cut_throat = " + obj_data["cut_throat"].asBool() + ";");
+			char.Execute("tethered = " + obj_data["tethered"].asInt() + ";");
+			char.Execute("water_id = " + obj_data["water_id"].asInt() + ";");
+			char.Execute("water_depth = " + obj_data["water_depth"].asFloat() + ";");
+			char.Execute("breath_bars = " + obj_data["breath_bars"].asInt() + ";");
+			char.Execute("breath = " + obj_data["breath"].asFloat() + ";");
+			char.Execute("red_tint = " + obj_data["red_tint"].asFloat() + ";");
+			char.Execute("black_tint = " + obj_data["black_tint"].asFloat() + ";");
+			char.Execute("level_blackout = " + obj_data["level_blackout"].asFloat() + ";");
+			char.Execute("blood_flash_time = " + obj_data["blood_flash_time"].asFloat() + ";");
+			char.Execute("hit_flash_time = " + obj_data["hit_flash_time"].asFloat() + ";");
+			char.Execute("dark_hit_flash_time = " + obj_data["dark_hit_flash_time"].asFloat() + ";");
+			char.Execute("idle_stance = " + obj_data["idle_stance"].asBool() + ";");
+			char.Execute("idle_stance_amount = " + obj_data["idle_stance_amount"].asFloat() + ";");
+			char.Execute("target_rotation = " + obj_data["target_rotation"].asFloat() + ";");
+			char.Execute("target_rotation2 = " + obj_data["target_rotation2"].asFloat() + ";");
+			char.Execute("cam_rotation = " + obj_data["cam_rotation"].asFloat() + ";");
+			char.Execute("cam_rotation2 = " + obj_data["cam_rotation2"].asFloat() + ";");
+			char.Execute("cam_distance = " + obj_data["cam_distance"].asFloat() + ";");
+			char.Execute("auto_cam_override = " + obj_data["auto_cam_override"].asFloat() + ";");
+			char.Execute("on_ground = " + obj_data["on_ground"].asBool() + ";");
+			char.Execute("air_time = " + obj_data["air_time"].asFloat() + ";");
+			char.Execute("on_ground_time = " + obj_data["on_ground_time"].asFloat() + ";");
+			char.Execute("duck_amount = " + obj_data["duck_amount"].asFloat() + ";");
+			char.Execute("target_duck_amount = " + obj_data["target_duck_amount"].asFloat() + ";");
+			char.Execute("duck_vel = " + obj_data["duck_vel"].asFloat() + ";");
+
+			char.FixDiscontinuity();
+			char.Execute("FixDiscontinuity();");
 
 			/* char.Execute("ResetMind();"); */
 			/* char.Execute("SetState(" + state + ");"); */
