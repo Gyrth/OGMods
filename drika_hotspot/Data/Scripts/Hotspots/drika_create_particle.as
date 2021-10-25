@@ -71,7 +71,7 @@ class DrikaCreateParticle : DrikaElement{
 		if(ImGui_Button("Set Particle Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Particles");
 			if(new_path != ""){
-				particle_path = new_path;
+				particle_path = ShortenPath(new_path);
 			}
 		}
 		ImGui_SameLine();

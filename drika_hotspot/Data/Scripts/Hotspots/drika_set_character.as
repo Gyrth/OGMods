@@ -65,7 +65,7 @@ class DrikaSetCharacter : DrikaElement{
 		if(ImGui_Button("Set Character Path")){
 			string new_path = GetUserPickedReadPath("xml", "Data/Characters");
 			if(new_path != ""){
-				character_path = new_path;
+				character_path = ShortenPath(new_path);
 			}
 		}
 		ImGui_AlignTextToFramePadding();

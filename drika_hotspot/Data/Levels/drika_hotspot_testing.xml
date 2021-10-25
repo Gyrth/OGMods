@@ -34,7 +34,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="12.0332" t1="1.24578" t2="-4.30885" s0="1" s1="1" s2="1" q0="-0.249961" q1="-0.241937" q2="0.0646576" q3="-0.93531" euler_x="0.522294" euler_y="0.506244" euler_z="0" id="1">
+    <CameraObject t0="13.12" t1="0.558283" t2="-3.05676" s0="1" s1="1" s2="1" q0="0.142745" q1="0.0259056" q2="-0.00373745" q3="0.989413" euler_x="0.286566" euler_y="0.0523537" euler_z="0" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="6.16529" t1="-3.42134" t2="1.76417" s0="23.8876" s1="1" s2="31.3035" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -613,7 +613,7 @@
         <parameters>
             <parameter name="Debug Current Line" type="int" val="0" />
             <parameter name="Run in EditorMode" type="int" val="1" />
-            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;reference_string&quot;:&quot;&quot;},{&quot;checkmodes&quot;:[2],&quot;continue_if_false&quot;:true,&quot;continue_line&quot;:7,&quot;function&quot;:32,&quot;if_any_are_true&quot;:false,&quot;operatormodes&quot;:[0],&quot;parameters&quot;:[&quot;money&quot;],&quot;read_write_mode&quot;:0,&quot;values&quot;:[&quot;9.000&quot;]},{&quot;billboard_text_string&quot;:&quot;Press E to buy sword.&quot;,&quot;billboard_type&quot;:1,&quot;billboard_update_type&quot;:1,&quot;function&quot;:31,&quot;placeholder_id&quot;:154},{&quot;function&quot;:26,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;input_identifier&quot;:7,&quot;input_type&quot;:0,&quot;use_prompt&quot;:false},{&quot;create_delete_mode&quot;:0,&quot;function&quot;:15,&quot;object_path&quot;:&quot;Data/Items/DogWeapons/DogSword.xml&quot;,&quot;placeholder_id&quot;:156,&quot;reference_string&quot;:&quot;&quot;},{&quot;checkmodes&quot;:[0],&quot;continue_if_false&quot;:false,&quot;function&quot;:32,&quot;if_any_are_true&quot;:false,&quot;operatormodes&quot;:[3],&quot;parameters&quot;:[&quot;money&quot;],&quot;read_write_mode&quot;:1,&quot;values&quot;:[&quot;10.000&quot;]},{&quot;function&quot;:7,&quot;line&quot;:8},{&quot;billboard_text_string&quot;:&quot;Not enough money.&quot;,&quot;billboard_type&quot;:1,&quot;billboard_update_type&quot;:1,&quot;function&quot;:31,&quot;placeholder_id&quot;:153},{&quot;function&quot;:7,&quot;line&quot;:0}]}&#x0A;' />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;reference_string&quot;:&quot;&quot;},{&quot;ai_sound&quot;:false,&quot;function&quot;:6,&quot;gain&quot;:1,&quot;max_range&quot;:5,&quot;play_sound_method&quot;:0,&quot;priority&quot;:0,&quot;sound_path&quot;:&quot;Data/Sounds/weapon_foley/impact/weapon_knife_hit_neck_2.wav&quot;,&quot;sound_type&quot;:0}]}&#x0A;' />
             <parameter name="Show UI Grid" type="int" val="1" />
             <parameter name="Transform Relative" type="int" val="0" />
             <parameter name="UI Snap Scale" type="int" val="20" />
@@ -630,16 +630,7 @@
     <EnvObject t0="7.57836" t1="1.42775" t2="45.2896" s0="3.65214" s1="3.65214" s2="3.65214" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="152" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Billboard Helper" t0="14.4706" t1="-1.28603" t2="-7.70807" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="153" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject name="Billboard Helper" t0="14.4706" t1="-1.28603" t2="-7.70807" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="154" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="-3.46762" t1="8.08869" t2="-11.4157" s0="1.63927" s1="0.197876" s2="5.02873" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="155" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject name="Create Object Helper" t0="14.4505" t1="0.482411" t2="-7.70807" s0="0.104685" s1="0.860263" s2="0.044675" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="156" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="62.0044" t1="0.854475" t2="-22.8891" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="159" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/inkpot.xml">

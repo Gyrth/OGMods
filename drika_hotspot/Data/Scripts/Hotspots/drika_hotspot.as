@@ -2241,6 +2241,26 @@ string GetLastReadPath(string default_path){
 	if(last_read_path == ""){
 		return default_path;
 	}else{
-		return last_read_path;
+		return ShortenPath(last_read_path);
 	}
+}
+
+string ShortenPath(string path){
+	array<string> split_path = path.split("Data/");
+
+	for(int i = split_path.size() - 1; i > -1; i--){
+		if(split_path[i] == ""){continue;}
+
+		array<string> possible_path_array;
+		for(uint j = i; j < split_path.size(); j++){
+			possible_path_array.insertLast(split_path[j]);
+		}
+
+		string possible_path = "Data/" + join(possible_path_array, "Data/");
+		if(FileExists(possible_path)){
+			return possible_path;
+		}
+	}
+
+	return "";
 }

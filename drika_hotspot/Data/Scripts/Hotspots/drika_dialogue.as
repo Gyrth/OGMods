@@ -862,7 +862,7 @@ class DrikaDialogue : DrikaElement{
 			if(ImGui_Button("Pick Avatar")){
 				string new_path = GetUserPickedReadPath("png", "Data/Textures");
 				if(new_path != ""){
-					new_path = new_path;
+					new_path = ShortenPath(new_path);
 					array<string> split_path = new_path.split(".");
 					string extention = split_path[split_path.size() - 1];
 					if(extention != "jpg" && extention != "png" && extention != "tga"){
@@ -913,6 +913,7 @@ class DrikaDialogue : DrikaElement{
 			if(ImGui_Button("Custom...")){
 				string new_path = GetUserPickedReadPath("anm", "Data/Animations");
 				if(new_path != ""){
+					new_path = ShortenPath(new_path);
 					array<string> path_split = new_path.split("/");
 					string file_name = path_split[path_split.size() - 1];
 					string file_extension = file_name.substr(file_name.length() - 3, 3);
@@ -1001,6 +1002,7 @@ class DrikaDialogue : DrikaElement{
 			if(ImGui_Button("Set Font")){
 				string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 				if(new_path != ""){
+					new_path = ShortenPath(new_path);
 					array<string> path_split = new_path.split("/");
 					string file_name = path_split[path_split.size() - 1];
 					string file_extension = file_name.substr(file_name.length() - 3, 3);

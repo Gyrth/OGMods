@@ -46,6 +46,7 @@ class DrikaDisplayText : DrikaElement{
 		if(ImGui_Button("Set Font Path")){
 			string new_path = GetUserPickedReadPath("ttf", "Data/Fonts");
 			if(new_path != ""){
+				new_path = ShortenPath(new_path);
 				array<string> path_split = new_path.split("/");
 				string file_name = path_split[path_split.size() - 1];
 				string file_extension = file_name.substr(file_name.length() - 3, 3);

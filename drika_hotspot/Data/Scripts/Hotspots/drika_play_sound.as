@@ -145,8 +145,9 @@ class DrikaPlaySound : DrikaElement{
 					}else{
 						new_path = GetUserPickedReadPath("wav", "Data/Sounds");
 					}
+					// The path will be returned empty if the user cancels the file pick.
 					if(new_path != ""){
-						sound_path = new_path;
+						sound_path = ShortenPath(new_path);
 						PreviewSound();
 					}
 				}

@@ -268,7 +268,7 @@ class DrikaOnInput : DrikaElement{
 						string new_path = "";
 						new_path = GetUserPickedReadPath("png", "Data/Textures/UI");
 						if(new_path != ""){
-							custom_prompt_path = new_path;
+							custom_prompt_path = ShortenPath(new_path);
 						}
 					}
 					ImGui_SameLine();

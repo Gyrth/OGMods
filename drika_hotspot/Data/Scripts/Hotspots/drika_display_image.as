@@ -74,7 +74,7 @@ class DrikaDisplayImage : DrikaElement{
 			if(ImGui_Button("Set Image Path")){
 				string new_path = GetUserPickedReadPath("png", "Data/Textures");
 				if(new_path != ""){
-					image_path = new_path;
+					image_path = ShortenPath(new_path);
 					ShowImage(image_path, tint, scale);
 				}
 			}
