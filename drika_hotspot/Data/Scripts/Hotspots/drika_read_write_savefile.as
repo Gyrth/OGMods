@@ -266,7 +266,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			if (ImGui_SliderInt("##Condition Count", condition_count, 1, 10, "%.0f"))
 			{
 				if (condition_count < 1) condition_count = 1;
-				if (condition_count > 25) condition_count = 25;
+				if (condition_count > 100) condition_count = 100;
 			}
 
 			ImGui_PopItemWidth();
@@ -352,7 +352,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			if (ImGui_SliderInt("##Parameter count", condition_count, 1, 10, "%.0f"))
 			{
 				if (condition_count < 1) condition_count = 1;
-				if (condition_count > 25) condition_count = 25;
+				if (condition_count > 100) condition_count = 100;
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();

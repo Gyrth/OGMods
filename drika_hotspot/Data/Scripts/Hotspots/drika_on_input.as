@@ -1,23 +1,32 @@
-enum input_types{ 	button_pressed = 0,
-					type_text = 1,
-					button_down = 2,
-					button_up = 3
+enum input_types{ 			button_pressed = 0,
+							type_text = 1,
+							button_down = 2,
+							button_up = 3
 				};
 
-enum input_identifiers{	up = 0,
-						down = 1,
-						left = 2,
-						right = 3,
-						jump = 4,
-						crouch = 5,
-						slow = 6,
-						use_item = 7,
-						drop = 8,
-						skip_dialogue = 9,
-						attack = 10,
-						grab = 11,
-						walk = 12,
-						input_other = 13
+enum multi_input_types{ 	multi_button_pressed = 0,
+							multi_button_down = 1,
+							multi_button_up = 2
+				};
+
+enum input_modes{ 			single_input = 0,
+							multi_input = 1
+				};
+
+enum input_identifiers{		up = 0,
+							down = 1,
+							left = 2,
+							right = 3,
+							jump = 4,
+							crouch = 5,
+							slow = 6,
+							use_item = 7,
+							drop = 8,
+							skip_dialogue = 9,
+							attack = 10,
+							grab = 11,
+							walk = 12,
+							input_other = 13
 					};
 
 class InputData{
@@ -34,12 +43,22 @@ class InputData{
 
 class DrikaOnInput : DrikaElement{
 	input_types input_type;
+	multi_input_types multi_input_type;
+	input_modes input_mode;
 	array<string> input_names;
 	int current_input_type;
+	int current_input_mode;
 
 	int input_index;
 	InputData@ input;
 	string other_input;
+
+	int input_count;
+
+	array<int> multi_input_buttons;
+	array<string> multi_input_others;
+	array<int> multi_input_types;
+	array<DrikaGoToLineSelect@> input_lines;
 
 	string typed_text;
 	int character_index = 0;
@@ -52,6 +71,10 @@ class DrikaOnInput : DrikaElement{
 	string current_prompt_icon;
 
 	array<string> input_type_names = { "Button Pressed", "Type Text", "Button Down", "Button Up" };
+	array<string> multi_input_type_names = { "Button Pressed", "Button Down", "Button Up" };
+	array<string> input_mode_names = { "Single Input", "Multi Input" };
+
+	array<string> multi_inputs = { "up","down","left","right","jump","crouch","slow","item","drop","skip_dialogue","attack","grab","walk","w" };
 
 	array<InputData@> inputs = {	InputData(up, "Forward", "up"),
 									InputData(down, "Backward", "down"),
@@ -74,7 +97,23 @@ class DrikaOnInput : DrikaElement{
 		placeholder.name = "Input Prompt Helper";
 
 		input_type = input_types(GetJSONInt(params, "input_type", button_pressed));
+		multi_input_type = multi_input_types(GetJSONInt(params, "multi_input_type", button_pressed));
 		current_input_type = input_type;
+
+		input_mode = input_modes(GetJSONInt(params, "input_mode", button_pressed));
+		current_input_mode = input_mode;
+
+		input_count = GetJSONInt(params, "input_count", 1);
+
+		multi_input_buttons = GetJSONIntArray(params, "multi_input_buttons", array<int> = { 0 });
+		multi_input_types = GetJSONIntArray(params, "multi_input_types", array<int> = { 0 });
+		multi_input_others = GetJSONStringArray(params, "multi_input_others", array<string> = { "w" });
+
+		input_lines.resize(input_count);
+
+		for(int i = 0; i < input_count; i++){
+			@input_lines[i] = DrikaGoToLineSelect("inputline" + i, params);
+		}
 
 		typed_text = GetJSONString(params, "typed_text", "Drika's Hotspot");
 		input_index = GetJSONInt(params, "input_identifier", up);
@@ -103,6 +142,10 @@ class DrikaOnInput : DrikaElement{
 			GetIcon();
 		}
 		target_select.PostInit();
+
+		for(int i = 0; i < input_count; i++){
+			input_lines[i].PostInit();
+		}
 	}
 
 	void GetInputData(){
@@ -137,7 +180,28 @@ class DrikaOnInput : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["input_type"] = JSONValue(input_type);
+		data["multi_input_type"] = JSONValue(multi_input_type);
+		data["input_mode"] = JSONValue(input_mode);
 		placeholder.Save(data);
+
+		data["input_count"] = JSONValue(input_count);
+
+		data["multi_input_buttons"] = JSONValue(JSONarrayValue);
+		data["multi_input_types"] = JSONValue(JSONarrayValue);
+		data["multi_input_others"] = JSONValue(JSONarrayValue);
+
+		for (int i = 0; i < input_count; i++){
+			input_lines[i].SaveGoToLine(data);
+		}
+
+		for (int i = 0; i < input_count; i++)
+			(data["multi_input_buttons"])[i] = JSONValue(multi_input_buttons[i]);
+
+		for (int i = 0; i < input_count; i++)
+			(data["multi_input_types"])[i] = JSONValue(multi_input_types[i]);
+
+		for (int i = 0; i < input_count; i++)
+			(data["multi_input_others"])[i] = JSONValue(multi_input_others[i]);
 
 		if(input_type == type_text){
 			data["typed_text"] = JSONValue(typed_text);
@@ -161,12 +225,18 @@ class DrikaOnInput : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		string display_string = "OnInput " + target_select.GetTargetDisplayText() + " " + input_type_names[input_type] + " ";
+		string display_string;
 
-		if(input_type == type_text){
-			display_string += "\"" + typed_text + "\"";
+		if(input_mode == single_input){
+			display_string = "OnInput " + target_select.GetTargetDisplayText() + " " + input_type_names[input_type] + " ";
+
+			if(input_type == type_text){
+				display_string += "\"" + typed_text + "\"";
+			}else{
+				display_string += "\"" + ((input.input_identifier == input_other)?(other_input):input.input_bind_name) + "\"";
+			}
 		}else{
-			display_string += "\"" + ((input.input_identifier == input_other)?(other_input):input.input_bind_name) + "\"";
+			display_string = "Check for multiple inputs from " + target_select.GetTargetDisplayText();
 		}
 
 		return display_string;
@@ -195,85 +265,157 @@ class DrikaOnInput : DrikaElement{
 		target_select.DrawSelectTargetUI();
 
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Input Type");
+		ImGui_Text("Input Mode");
 		ImGui_NextColumn();
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
-		if(ImGui_Combo("##Input Type", current_input_type, input_type_names, input_type_names.size())){
-			input_type = input_types(current_input_type);
+		if(ImGui_Combo("##Input Mode", current_input_mode, input_mode_names, input_mode_names.size())){
+			input_mode = input_modes(current_input_mode);
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(input_type == type_text){
+		if(input_mode == multi_input){
 			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Input");
+			ImGui_Text("Number of inputs");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			ImGui_InputText("##Input", typed_text, 64);
+			if (ImGui_SliderInt("##Input Count", input_count, 1, 10, "%.0f"))
+			{
+				if (input_count < 1) input_count = 1;
+				if (input_count > 100) input_count = 100;
+			}
+
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
-		}else{
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Button");
+
+			ImGui_Separator();
 			ImGui_NextColumn();
+			ImGui_NextColumn();
+
+			ImGui_Columns(4, false);
+			ImGui_SetColumnWidth(0, option_name_width);
+			ImGui_SetColumnWidth(1, option_name_width*2);
+			ImGui_SetColumnWidth(2, option_name_width*1.5);
+
+			if (int(multi_input_buttons.length()) != input_count){
+				multi_input_buttons.resize(input_count);
+				multi_input_types.resize(input_count);
+				multi_input_others.resize(input_count);
+
+				int old_length = input_lines.length();
+				input_lines.resize(input_count);
+				for(int i = old_length; i < input_count; i++){
+					@input_lines[i] = DrikaGoToLineSelect("inputline" + i);
+					input_lines[i].PostInit();
+					Log(fatal, "added line " + i);
+				}
+			}
+
+			for (int i = 0; i < input_count; i++){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Input " + (i+1) + ":");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth()*0.75);
+				ImGui_Combo("##Button" + (i+1), multi_input_buttons[(i)], input_names, input_names.size());
+				if(multi_input_buttons[(i)] == input_other){
+					ImGui_SameLine();
+					ImGui_InputText("##Input" + (i+1), multi_input_others[(i)], 64);
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth());
+				ImGui_Combo("##Type" + (i+1), multi_input_types[(i)], multi_input_type_names, multi_input_type_names.size());
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth());
+				input_lines[i].DrawInputGoToLineUI();
+				ImGui_PopItemWidth();
+			}
+		}
+
+		if(input_mode == single_input){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Input Type");
+			ImGui_NextColumn();
+			second_column_width = ImGui_GetContentRegionAvailWidth();
 			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_Combo("##Button", input_index, input_names, input_names.size())){
-				GetInputData();
-				GetIcon();
+			if(ImGui_Combo("##Input Type", current_input_type, input_type_names, input_type_names.size())){
+				input_type = input_types(current_input_type);
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 
-			if(input.input_identifier == input_other){
+			if(input_type == type_text){
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Input");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_InputText("##Input", other_input, 64)){
+				ImGui_InputText("##Input", typed_text, 64);
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
+			}else{
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Button");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_Combo("##Button", input_index, input_names, input_names.size())){
+					GetInputData();
 					GetIcon();
 				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
-			}
 
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Use prompt");
-			ImGui_NextColumn();
-			if(ImGui_Checkbox("###Use prompt", use_prompt)){
-				GetIcon();
-			}
-			ImGui_NextColumn();
-
-			if(use_prompt){
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Prompt Size");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_DragFloat("###Prompt Size", prompt_size, 0.001f, 0.0f, 5.0f, "%.2f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Custom Prompt");
-				ImGui_NextColumn();
-				ImGui_Checkbox("###Custom Prompt", custom_prompt);
-				ImGui_NextColumn();
-
-				if(custom_prompt){
+				if(input.input_identifier == input_other){
 					ImGui_AlignTextToFramePadding();
-					ImGui_Text("Path");
+					ImGui_Text("Input");
 					ImGui_NextColumn();
-					if(ImGui_Button("Set Path")){
-						string new_path = "";
-						new_path = GetUserPickedReadPath("png", "Data/Textures/UI");
-						if(new_path != ""){
-							custom_prompt_path = ShortenPath(new_path);
-						}
+					ImGui_PushItemWidth(second_column_width);
+					if(ImGui_InputText("##Input", other_input, 64)){
+						GetIcon();
 					}
-					ImGui_SameLine();
-					ImGui_Text(custom_prompt_path);
+					ImGui_PopItemWidth();
 					ImGui_NextColumn();
+				}
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Use prompt");
+				ImGui_NextColumn();
+				if(ImGui_Checkbox("###Use prompt", use_prompt)){
+					GetIcon();
+				}
+				ImGui_NextColumn();
+
+				if(use_prompt){
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Prompt Size");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_DragFloat("###Prompt Size", prompt_size, 0.001f, 0.0f, 5.0f, "%.2f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Custom Prompt");
+					ImGui_NextColumn();
+					ImGui_Checkbox("###Custom Prompt", custom_prompt);
+					ImGui_NextColumn();
+
+					if(custom_prompt){
+						ImGui_AlignTextToFramePadding();
+						ImGui_Text("Path");
+						ImGui_NextColumn();
+						if(ImGui_Button("Set Path")){
+							string new_path = "";
+							new_path = GetUserPickedReadPath("png", "Data/Textures/UI");
+							if(new_path != ""){
+								custom_prompt_path = ShortenPath(new_path);
+							}
+						}
+						ImGui_SameLine();
+						ImGui_Text(custom_prompt_path);
+						ImGui_NextColumn();
+					}
 				}
 			}
 		}
@@ -318,35 +460,54 @@ class DrikaOnInput : DrikaElement{
 
 		bool one_triggered = false;
 		for(uint i = 0; i < targets.size(); i++){
-			if(input_type == type_text){
-				if(GetInputPressed(targets[i].controller_id, input_array[character_index])){
-					character_index++;
-					if(character_index == int(input_array.size())){
-						character_index = 0;
+			string check_input;
+			if(input_mode == single_input){
+				if(input_type == type_text){
+					if(GetInputPressed(targets[i].controller_id, input_array[character_index])){
+						character_index++;
+						if(character_index == int(input_array.size())){
+							character_index = 0;
+							one_triggered = true;
+						}
+					}
+				}else{
+
+					if(input.input_identifier == input_other){
+						check_input = other_input;
+					}else{
+						check_input = input.input_bind;
+					}
+
+					if(input_type == button_pressed && GetInputPressed(targets[i].controller_id, check_input)){
+						one_triggered = true;
+					}else if(input_type == button_down && GetInputDown(targets[i].controller_id, check_input)){
+						one_triggered = true;
+						}else if(input_type == button_up && !GetInputDown(targets[i].controller_id, check_input)){
 						one_triggered = true;
 					}
 				}
+
 			}else{
-				string check_input;
+				for(int j = 0; j < input_count; j++){
+					multi_input_buttons[(j)] == input_other ? check_input = multi_input_others[j] : check_input = multi_inputs[multi_input_buttons[j]];
 
-				if(input.input_identifier == input_other){
-					check_input = other_input;
-				}else{
-					check_input = input.input_bind;
-				}
+					if(multi_input_types[j] == multi_button_pressed && GetInputPressed(targets[i].controller_id, check_input)){
+						current_line = input_lines[j].GetTargetLineIndex();
+						display_index = drika_indexes[input_lines[j].GetTargetLineIndex()];
 
-				if(input_type == button_pressed && GetInputPressed(targets[i].controller_id, check_input)){
-					one_triggered = true;
-				}else if(input_type == button_down && GetInputDown(targets[i].controller_id, check_input)){
-					one_triggered = true;
-					}else if(input_type == button_up && !GetInputDown(targets[i].controller_id, check_input)){
-					one_triggered = true;
+					}else if(multi_input_types[j] == multi_button_down && GetInputDown(targets[i].controller_id, check_input)){
+						current_line = input_lines[j].GetTargetLineIndex();
+						display_index = drika_indexes[input_lines[j].GetTargetLineIndex()];
+
+						}else if(multi_input_types[j] == multi_button_up && !GetInputDown(targets[i].controller_id, check_input)){
+						current_line = input_lines[j].GetTargetLineIndex();
+						display_index = drika_indexes[input_lines[j].GetTargetLineIndex()];
+					}
 				}
+				one_triggered = false;
 			}
 		}
-
 		DrawPrompt();
-
 		return one_triggered;
 	}
 

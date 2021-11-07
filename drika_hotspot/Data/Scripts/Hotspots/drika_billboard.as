@@ -226,14 +226,14 @@ class DrikaBillboard : DrikaElement{
 				if(billboard_type == billboard_image_at_target){
 					DebugDrawBillboard(image_path, target_location, image_size, combined_color, _delete_on_draw);
 				}else if(billboard_type == billboard_text_at_target){
-					DebugDrawText(target_location, billboard_text_string, 1.0, false, _delete_on_draw);
+					DebugDrawText(target_location, ParseTextInput(billboard_text_string), 1.0, false, _delete_on_draw);
 				}
 			}
 		}else{
 			if(billboard_type == billboard_image_at_placeholder){
 				DebugDrawBillboard(image_path, placeholder.GetTranslation(), image_size, combined_color, _delete_on_draw);
 			}else if(billboard_type == billboard_text_at_placeholder){
-				DebugDrawText(placeholder.GetTranslation(), billboard_text_string, 1.0, false, _delete_on_draw);
+				DebugDrawText(placeholder.GetTranslation(), ParseTextInput(billboard_text_string), 1.0, false, _delete_on_draw);
 			}
 		}
 	}
@@ -265,6 +265,53 @@ class DrikaBillboard : DrikaElement{
 			return false;
 		}
 	}
+	
+	string ParseTextInput(string input) // This function reads the input for items between braces[] and interprets those as variables.
+	{
+		int position_in_string = 0;
+
+		while(uint(position_in_string) < input.length()) // First let's see if there are any braces in the string at all.
+		{
+			int start_brace_pos = input.findFirst("[", position_in_string); //We'll use these two statements a lot, so let's assign them to a variable.
+			int end_brace_pos = input.findFirst("]", start_brace_pos);
+
+			if (start_brace_pos >= 0 && end_brace_pos >= 0)
+			{
+				string unfiltered_braces = input.substr(start_brace_pos, end_brace_pos - start_brace_pos + 1); //First get the contents of the braces, including extra start braces inside
+				string filtered_braces = unfiltered_braces.substr(unfiltered_braces.findLast("["),unfiltered_braces.length()); //Reduce to the start brace closest to the end brace
+				string stored_value;
+
+				int difference = unfiltered_braces.length() - filtered_braces.length(); //We use this to figure out the start position to replace the [variable]
+
+				if (start_brace_pos + difference == 0 || input[start_brace_pos + difference - 1] != "\\"[0]) //We need to check if there is a backslash first
+				{
+					input.erase(start_brace_pos + difference, filtered_braces.length()); //Here we erase the variable name
+					stored_value = ReadParamValue(filtered_braces.substr(1, filtered_braces.length() - 2)); //Get the actual contents of the variable
+					input.insert(start_brace_pos + difference, stored_value); //And replace filtered_braces with those contents
+				}
+				else
+				{
+				input.erase(start_brace_pos + difference - 1,1); //If there was a backslash just before the variable, that's the only thing we want to remove
+				stored_value = filtered_braces;
+				}
+
+				position_in_string = start_brace_pos + difference + stored_value.length(); //Let's update our position and continue checking
+			}
+			else
+			{
+				break;
+			}
+		}
+		return input;
+	}
+
+
+	string ReadParamValue(string key)
+		{
+		SavedLevel@ data = save_file.GetSavedLevel("drika_data");
+
+		return (data.GetValue("[" + key + "]") == "true")? data.GetValue(key) : "--ERROR - " + key + " does not exist--";
+		}
 
 	void CreateBillboard(){
 		int draw_method = _persistent;
@@ -292,14 +339,14 @@ class DrikaBillboard : DrikaElement{
 				if(billboard_type == billboard_image_at_target){
 					billboard_ids.insertLast(DebugDrawBillboard(image_path, target_location, image_size, combined_color, draw_method));
 				}else if(billboard_type == billboard_text_at_target){
-					billboard_ids.insertLast(DebugDrawText(target_location, billboard_text_string, 1.0, false, draw_method));
+					billboard_ids.insertLast(DebugDrawText(target_location, ParseTextInput(billboard_text_string), 1.0, false, draw_method));
 				}
 			}
 		}else{
 			if(billboard_type == billboard_image_at_placeholder){
 				billboard_ids.insertLast(DebugDrawBillboard(image_path, placeholder.GetTranslation(), image_size, combined_color, draw_method));
 			}else if(billboard_type == billboard_text_at_placeholder){
-				billboard_ids.insertLast(DebugDrawText(placeholder.GetTranslation(), billboard_text_string, 1.0, false, draw_method));
+				billboard_ids.insertLast(DebugDrawText(placeholder.GetTranslation(), ParseTextInput(billboard_text_string), 1.0, false, draw_method));
 			}
 		}
 	}

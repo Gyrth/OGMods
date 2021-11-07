@@ -592,7 +592,8 @@ class DrikaCheckCharacterState : DrikaElement{
 						Log(warning, "Unknown compare choice!");
 						break;
 				}
-
+			}else if(state_choice == current_animation){
+				state = target.rigged_object().anim_client().GetCurrAnim() == animation_path;
 			}else if(state_choice == ray_collides_with){
 				bool contact_found = false;
 

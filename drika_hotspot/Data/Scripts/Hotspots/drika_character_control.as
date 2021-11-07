@@ -48,9 +48,18 @@ enum character_control_options { 	aggression = 0,
 									attach_item = 47
 					};
 
+enum value_type_options			{ 	manual_input = 0,
+									variable = 1
+					};
+
 class DrikaCharacterControl : DrikaElement{
 	int current_type;
 
+	int current_value_type;
+	
+	string variable_input_1 = "";
+	string variable_input_2 = "";
+	
 	string string_param_after = "";
 	int int_param_after = 0;
 	bool bool_param_after = false;
@@ -68,6 +77,7 @@ class DrikaCharacterControl : DrikaElement{
 
 	param_types param_type;
 	character_control_options character_control_option;
+	value_type_options value_type_option;
 	string param_name;
 
 	array<int> string_parameters = {species, teams};
@@ -131,10 +141,16 @@ class DrikaCharacterControl : DrikaElement{
 												"At Attachment",
 												"At Unspecified"
 											};
+											
+	array<string> value_type_names = 		{	"Manual Input",
+												"Variable"
+											};
 
 	DrikaCharacterControl(JSONValue params = JSONValue()){
 		character_control_option = character_control_options(GetJSONInt(params, "character_option", 0));
+		value_type_option = value_type_options(GetJSONInt(params, "value_type_option", 0));
 		current_type = character_control_option;
+		current_value_type = value_type_option;
 		param_type = param_types(GetJSONInt(params, "param_type", 0));
 
 		@target_select = DrikaTargetSelect(this, params);
@@ -149,6 +165,9 @@ class DrikaCharacterControl : DrikaElement{
 		wet_amount = GetJSONFloat(params, "wet_amount", 1.0);
 		attachment_type = GetJSONInt(params, "attachment_type", _at_grip);
 		mirrored = GetJSONBool(params, "mirrored", false);
+		
+		variable_input_1 = GetJSONString(params, "variable_input_1", "");
+		variable_input_2 = GetJSONString(params, "variable_input_2", "");
 
 		connection_types = {_movement_object};
 		drika_element_type = drika_character_control;
@@ -166,7 +185,12 @@ class DrikaCharacterControl : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["character_option"] = JSONValue(character_control_option);
+		data["value_type_option"] = JSONValue(value_type_option);
 		data["param_type"] = JSONValue(param_type);
+		if(value_type_option == variable){
+			data["variable_input_1"] = JSONValue(variable_input_1);
+			data["variable_input_2"] = JSONValue(variable_input_2);
+		}
 		if(param_type == int_param){
 			data["param_after"] = JSONValue(int_param_after);
 		}else if(param_type == float_param){
@@ -289,16 +313,20 @@ class DrikaCharacterControl : DrikaElement{
 
 	string GetDisplayString(){
 		string display_string;
-		if(param_type == int_param){
-			display_string = "" + int_param_after;
-		}else if(param_type == float_param){
-			display_string = "" + float_param_after;
-		}else if(param_type == bool_param){
-			display_string = bool_param_after?"true":"false";
-		}else if(param_type == string_param){
-			display_string = string_param_after;
-		}else if(character_control_option == attach_item){
-			display_string = item_select.GetTargetDisplayText();
+		if(current_value_type == variable){
+			display_string = "[" + variable_input_1 + "]";
+		}else{
+			if(param_type == int_param){
+				display_string = "" + int_param_after;
+			}else if(param_type == float_param){
+				display_string = "" + float_param_after;
+			}else if(param_type == bool_param){
+				display_string = bool_param_after?"true":"false";
+			}else if(param_type == string_param){
+				display_string = string_param_after;
+			}else if(character_control_option == attach_item){
+				display_string = item_select.GetTargetDisplayText();
+			}
 		}
 		return "CharacterControl " + target_select.GetTargetDisplayText() + " " + param_name + " " + display_string;
 	}
@@ -330,460 +358,700 @@ class DrikaCharacterControl : DrikaElement{
 			character_control_option = character_control_options(current_type);
 			SetParamType();
 			SetParamName();
+			if(IsValidOption(character_control_option) == false){
+				current_value_type = manual_input;
+			}
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
+		
+		if(IsValidOption(character_control_option) == true){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Value Type");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_Combo("##Value Type", current_value_type, value_type_names, 2)){
+				value_type_option = value_type_options(current_value_type);
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+		}
 
+		if(current_value_type == manual_input){
+			switch(character_control_option){
+				case aggression:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-		switch(character_control_option){
-			case aggression:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case attack_damage:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case attack_knockback:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case attack_damage:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case attack_knockback:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case attack_speed:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case attack_speed:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case block_followup:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case block_followup:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case block_skill:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case block_skill:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case cannot_be_disarmed:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case cannot_be_disarmed:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					ImGui_NextColumn();
+					break;
+				case character_scale:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				ImGui_NextColumn();
-				break;
-			case character_scale:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 60, 140, "%.2f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case damage_resistance:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 60, 140, "%.2f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case damage_resistance:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case ear_size:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case ear_size:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 300.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case fat:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 300.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case fat:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case focus_fov_distance:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case focus_fov_distance:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case focus_fov_horizontal:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case focus_fov_horizontal:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case focus_fov_vertical:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case focus_fov_vertical:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case ground_aggression:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case ground_aggression:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case knocked_out_shield:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case knocked_out_shield:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderInt(param_name, int_param_after, 0, 10);
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case left_handed:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderInt(param_name, int_param_after, 0, 10);
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case left_handed:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					break;
+				case movement_speed:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				break;
-			case movement_speed:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 10.0, 150.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case muscle:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 10.0, 150.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case muscle:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case peripheral_fov_distance:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 200.0, "%.3f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case peripheral_fov_distance:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case peripheral_fov_horizontal:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case peripheral_fov_horizontal:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case peripheral_fov_vertical:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case peripheral_fov_vertical:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case species:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.573, 90.0, "%.2f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case species:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_InputText(param_name, string_param_after, 64);
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case static_char:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_InputText(param_name, string_param_after, 64);
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case static_char:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					ImGui_NextColumn();
+					break;
+				case teams:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				ImGui_NextColumn();
-				break;
-			case teams:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_InputText(param_name, string_param_after, 64);
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case fall_damage_mult:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_InputText(param_name, string_param_after, 64);
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case fall_damage_mult:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 10.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case fear_afraid_at_health_level:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 10.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case fear_afraid_at_health_level:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case fear_always_afraid_on_sight:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.2f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case fear_always_afraid_on_sight:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					break;
+				case fear_causes_fear_on_sight:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				break;
-			case fear_causes_fear_on_sight:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					break;
+				case fear_never_afraid_on_sight:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				break;
-			case fear_never_afraid_on_sight:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					break;
+				case no_look_around:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				break;
-			case no_look_around:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					break;
+				case stick_to_nav_mesh:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				break;
-			case stick_to_nav_mesh:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					break;
+				case throw_counter_probability:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				break;
-			case throw_counter_probability:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case is_throw_trainer:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case is_throw_trainer:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					break;
+				case weapon_catch_skill:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				break;
-			case weapon_catch_skill:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case wearing_metal_armor:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat(param_name, float_param_after, 0.0, 100.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case wearing_metal_armor:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					break;
+				case ignite:
+					break;
+				case extinguish:
+					break;
+				case is_player:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text(param_name);
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				break;
-			case ignite:
-				break;
-			case extinguish:
-				break;
-			case is_player:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text(param_name);
-				ImGui_NextColumn();
+					ImGui_Checkbox("###" + param_name, bool_param_after);
+					break;
+				case kill:
+					break;
+				case revive:
+					break;
+				case limp_ragdoll:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Recovery Time");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
 
-				ImGui_Checkbox("###" + param_name, bool_param_after);
-				break;
-			case kill:
-				break;
-			case revive:
-				break;
-			case limp_ragdoll:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Recovery Time");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Roll Recovery Time");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case injured_ragdoll:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Recovery Time");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
 
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Roll Recovery Time");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case injured_ragdoll:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Recovery Time");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Roll Recovery Time");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case ragdoll:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Recovery Time");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
 
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Roll Recovery Time");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case ragdoll:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Recovery Time");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat("##Recovery Time", recovery_time, 0.0, 10.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Roll Recovery Time");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case apply_damage:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Amount");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat("##Amount", damage_amount, 0.0, 2.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case cut_throat:
+					break;
+				case wet:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Amount");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_SliderFloat("##Amount", wet_amount, 0.0, 1.0, "%.1f");
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case attach_item:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Target Item");
+					ImGui_NextColumn();
+					ImGui_NextColumn();
+					item_select.DrawSelectTargetUI();
 
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Roll Recovery Time");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat("##Roll Recovery Time", roll_recovery_time, 0.0, 10.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case apply_damage:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Amount");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat("##Amount", damage_amount, 0.0, 2.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case cut_throat:
-				break;
-			case wet:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Amount");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SliderFloat("##Amount", wet_amount, 0.0, 1.0, "%.1f");
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			case attach_item:
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Target Item");
-				ImGui_NextColumn();
-				ImGui_NextColumn();
-				item_select.DrawSelectTargetUI();
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Attachment Type");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					if(ImGui_Combo("##Attachment Type", attachment_type, attachment_type_names, attachment_type_names.size())){
 
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Attachment Type");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_Combo("##Attachment Type", attachment_type, attachment_type_names, attachment_type_names.size())){
+					}
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
 
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Mirrored");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_Checkbox("##Mirrored", mirrored);
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				break;
-			default:
-				Log(warning, "Found a non standard parameter type. " + param_type);
-				break;
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Mirrored");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_Checkbox("##Mirrored", mirrored);
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				default:
+					Log(warning, "Found a non standard parameter type. " + param_type);
+					break;
+			}
+		}else if 	(current_value_type == variable){
+			bool var_is_valid;
+			switch(character_control_option){
+				case aggression:
+				case attack_damage:
+				case attack_knockback:
+				case attack_speed:
+				case block_followup:
+				case block_skill:
+				case character_scale:
+				case damage_resistance:
+				case ear_size:
+				case fat:
+				case focus_fov_distance:
+				case focus_fov_horizontal:
+				case focus_fov_vertical:
+				case ground_aggression:
+				case movement_speed:
+				case muscle:
+				case peripheral_fov_distance:
+				case peripheral_fov_horizontal:
+				case peripheral_fov_vertical:
+				case fall_damage_mult:
+				case fear_afraid_at_health_level:
+				case throw_counter_probability:
+				case weapon_catch_skill:
+				case cannot_be_disarmed:
+				case left_handed:
+				case static_char:
+				case fear_always_afraid_on_sight:
+				case fear_causes_fear_on_sight:
+				case fear_never_afraid_on_sight:
+				case no_look_around:
+				case stick_to_nav_mesh:
+				case is_throw_trainer:
+				case wearing_metal_armor:
+				case is_player:
+				case knocked_out_shield:
+				case species:
+				case teams:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Input Variable:");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					if(ImGui_InputText("##Variable1", variable_input_1, 64)){
+						if(IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
+					}
+					
+					IsValidParam(variable_input_1) == true ? var_is_valid = true : var_is_valid = false;
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					if (var_is_valid == false){
+						ImGui_NextColumn();
+						ImGui_PushItemWidth(second_column_width);
+						ImGui_Text("Variable does not exist or is the wrong type.");
+						ImGui_PopItemWidth();
+						ImGui_NextColumn();
+					}
+					break;
+					
+				case limp_ragdoll:
+				case injured_ragdoll:
+				case ragdoll:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Recovery Var:");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					if(ImGui_InputText("##Variable1", variable_input_1, 64)){
+						if(IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"recovery_time");
+						}
+					}
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Roll Recovery Var:");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					if(ImGui_InputText("##Variable2", variable_input_2, 64)){
+						if(IsValidParam(variable_input_2) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"roll_recovery_time");
+						}
+					}
+					IsValidParam(variable_input_1) == true && IsValidParam(variable_input_2) == true ? var_is_valid = true : var_is_valid = false;
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					if (var_is_valid == false){
+						ImGui_NextColumn();
+						ImGui_PushItemWidth(second_column_width);
+						ImGui_Text("One or more variables do not exist or are the wrong type.");
+						ImGui_PopItemWidth();
+						ImGui_NextColumn();
+					}
+					break;
+				
+				case apply_damage:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Input Variable:");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					if(ImGui_InputText("##Variable1", variable_input_1, 64)){
+						if(IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"damage_amount");
+						}
+					}
+					IsValidParam(variable_input_1) == true ? var_is_valid = true : var_is_valid = false;
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case wet:
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Input Variable:");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					if(ImGui_InputText("##Variable1", variable_input_1, 64)){
+						if(IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"wet_amount");
+						}
+					}
+					IsValidParam(variable_input_1) == true ? var_is_valid = true : var_is_valid = false;
+					ImGui_PopItemWidth();
+					ImGui_NextColumn();
+					break;
+				case ignite:
+				case extinguish:
+				case kill:
+				case revive:
+				case cut_throat:
+				case attach_item:
+					ImGui_Text("Variable Input is not supported for this setting.");
+					break;
+					
+				default:
+					Log(warning, "Found a non standard parameter type. " + param_type);
+					break;
+			}
 		}
 	}
+	
+	bool IsValidOption(int input){
+		if(input == ignite){return false;}
+		if(input == extinguish){return false;}
+		if(input == kill){return false;}
+		if(input == revive){return false;}
+		if(input == cut_throat){return false;}
+		if(input == attach_item){return false;}
+		return true;
+	}
+	
+	bool IsValidParam(string input){
+		if		(CheckParamExists(input) == false){return false;}
+		else if(param_type == bool_param && IsBool(ReadParamValue(input)) == false){return false;}
+		else if((param_type == float_param || param_type == int_param) && IsFloat(ReadParamValue(input)) == false){return false;}
+		return true;
+	}
+	
+	void SetParamFromVariable(string var1, string var2, string param_input){
+		string input = ReadParamValue(var1);
+		string input2 = ReadParamValue(var2);
+		
+		if (param_input == "recovery_time"){
+			IsFloat(input) ? recovery_time = atof(input) : recovery_time = 0.0f;
+		}else if(param_input == "roll_recovery_time"){
+			IsFloat(input2) ? roll_recovery_time = atof(input2) : roll_recovery_time = 0.0f;
+		}else if(param_input == "damage_amount"){
+			IsFloat(input) ? damage_amount = atof(input) : damage_amount = 0.0f;
+		}else if(param_input == "wet_amount"){
+			IsFloat(input) ? wet_amount = atof(input) : wet_amount = 0.0f;
+		}else{
+			switch(param_type){
+				case float_param:
+					IsFloat(input) ? float_param_after = atof(input) : float_param_after = 0.0f;
+					break;
+				case int_param:
+					IsFloat(input) ? int_param_after = atoi(input) : int_param_after = 0;
+					break;
+				case bool_param:
+					IsBool(input) ? bool_param_after = ReturnBool(input) : bool_param_after = false;
+					break;
+				case string_param:
+					string_param_after = input;
+					break;
+				
+				default:
+					break;
+			};
+		}
+	}
+	
+	bool ReturnBool(string input){
+		return input == "true";
+	}
+	
+	string ReadParamValue(string key){
+		SavedLevel@ data = save_file.GetSavedLevel("drika_data");
+		return data.GetValue(key);
+	}
 
+	bool CheckParamExists(string key){
+		return ReadParamValue("[" + key + "]") == "true";
+	}
+	
+	bool IsFloat(string test) {
+		bool decimal_found = false;
+
+		// Checking for certain edge cases
+		if (test == "." || test == "-" || test == "-.") return false;
+			for (uint i = 0; i < test.length(); i++)
+			{
+				if (test[i] == "."[0])
+					{if (decimal_found) {return false;} else {decimal_found = true;} }
+
+				else if (test[i] == "-"[0])
+					{if (i > 0) {return false;} }
+
+				else if (test[i] < "0"[0] || test[i] > "9"[0]) {return false;}
+			}
+
+		return true;
+	}
+		
+	bool IsBool(string test) {
+		if (test == "true" || test == "false") {return true;} else {return false;}
+	}
+		
 	bool Trigger(){
 		if(!triggered){
 			GetBeforeParam();
@@ -826,111 +1094,219 @@ class DrikaCharacterControl : DrikaElement{
 			}else{
 				switch(character_control_option){
 					case aggression:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case attack_damage:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case attack_knockback:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case attack_speed:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case block_followup:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case block_skill:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case cannot_be_disarmed:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case character_scale:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case damage_resistance:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case ear_size:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case fat:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 200.0);
 						break;
 					case focus_fov_distance:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after);
 						break;
 					case focus_fov_horizontal:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 57.2957);
 						break;
 					case focus_fov_vertical:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 57.2957);
 						break;
 					case ground_aggression:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case knocked_out_shield:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, reset?params_before[i].int_value:int_param_after);
 						break;
 					case left_handed:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case movement_speed:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case muscle:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 200.0);
 						break;
 					case peripheral_fov_distance:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after);
 						break;
 					case peripheral_fov_horizontal:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 57.2957);
 						break;
 					case peripheral_fov_vertical:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 57.2957);
 						break;
 					case species:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetString(param_name, reset?params_before[i].string_value:string_param_after);
 						break;
 					case static_char:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case teams:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetString(param_name, reset?params_before[i].string_value:string_param_after);
 						break;
 					case fall_damage_mult:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after);
 						break;
 					case fear_afraid_at_health_level:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case fear_always_afraid_on_sight:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case fear_causes_fear_on_sight:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case fear_never_afraid_on_sight:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case no_look_around:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case stick_to_nav_mesh:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case throw_counter_probability:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case is_throw_trainer:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case weapon_catch_skill:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetFloat(param_name, reset?params_before[i].float_value:float_param_after / 100.0);
 						break;
 					case wearing_metal_armor:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						params.SetInt(param_name, (reset?params_before[i].bool_value:bool_param_after)?1:0);
 						break;
 					case ignite:
@@ -950,6 +1326,9 @@ class DrikaCharacterControl : DrikaElement{
 						}
 						break;
 					case is_player:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"param_after");
+						}
 						if(targets[i].GetType() == _movement_object){
 							char.is_player = reset?params_before[i].bool_value:bool_param_after;
 						}
@@ -965,16 +1344,28 @@ class DrikaCharacterControl : DrikaElement{
 						}
 						break;
 					case limp_ragdoll:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true && IsValidParam(variable_input_2) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"recovery_time");
+							SetParamFromVariable(variable_input_1,variable_input_2,"roll_recovery_time");
+						}
 						if(!reset){
 							char.Execute("Ragdoll(_RGDL_LIMP);recovery_time = " + recovery_time + ";roll_recovery_time = " + roll_recovery_time + ";");
 						}
 						break;
 					case injured_ragdoll:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true && IsValidParam(variable_input_2) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"recovery_time");
+							SetParamFromVariable(variable_input_1,variable_input_2,"roll_recovery_time");
+						}
 						if(!reset){
 							char.Execute("if(state != _ragdoll_state){string sound = \"Data/Sounds/hit/hit_hard.xml\";PlaySoundGroup(sound, this_mo.position);}Ragdoll(_RGDL_INJURED);recovery_time = " + recovery_time + ";roll_recovery_time = " + roll_recovery_time + ";");
 						}
 						break;
 					case ragdoll:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true && IsValidParam(variable_input_2) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"recovery_time");
+							SetParamFromVariable(variable_input_1,variable_input_2,"roll_recovery_time");
+						}
 						if(!reset){
 							char.Execute("GoLimp();recovery_time = " + recovery_time + ";roll_recovery_time = " + roll_recovery_time + ";");
 						}
@@ -985,11 +1376,17 @@ class DrikaCharacterControl : DrikaElement{
 						}
 						break;
 					case apply_damage:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"damage_amount");
+						}
 						if(!reset){
 							char.Execute("TakeBloodDamage(" + damage_amount + ");if(knocked_out != _awake){Ragdoll(_RGDL_INJURED);}");
 						}
 						break;
 					case wet:
+						if(current_value_type == variable && IsValidParam(variable_input_1) == true){
+							SetParamFromVariable(variable_input_1,variable_input_2,"wet_amount");
+						}
 						{
 							char.rigged_object().SetWet(reset?0.0:wet_amount);
 						}

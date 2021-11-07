@@ -120,7 +120,8 @@ class DialogueScriptEntry{
 	}
 }
 
-array<DialogueScriptEntry@> InterpDialogueScript(string script_text){
+array<DialogueScriptEntry@> InterpDialogueScript(string script_text_input){
+	string script_text = DialogueParseTextInput(script_text_input);
 	array<DialogueScriptEntry@> new_dialogue_script;
 	array<string> script_text_split;
 
@@ -131,9 +132,9 @@ array<DialogueScriptEntry@> InterpDialogueScript(string script_text){
 
 	for(uint i = 0; i < script_text_split.size(); i++){
 		//When the next character is an opening bracket then it might be a command.
-		if(script_text_split[i] == "["){
+		if(script_text_split[i] == "{"){
 			//Get the locaton of the end bracket so that we can get the whole command inside.
-			int end_bracket_index = script_text.findFirst("]", i);
+			int end_bracket_index = script_text.findFirst("}", i);
 			if(end_bracket_index != -1){
 				string command = script_text.substr(i + 1, end_bracket_index - (i + 1));
 				//Check if the first 4 letters turn out to be a wait command.
@@ -179,6 +180,51 @@ array<DialogueScriptEntry@> InterpDialogueScript(string script_text){
 
 	return new_dialogue_script;
 }
+
+string DialogueParseTextInput(string input) // This function reads the input for items between braces[] and interprets those as variables.
+	{
+		int position_in_string = 0;
+
+		while(uint(position_in_string) < input.length()) // First let's see if there are any braces in the string at all.
+		{
+			int start_brace_pos = input.findFirst("[", position_in_string); //We'll use these two statements a lot, so let's assign them to a variable.
+			int end_brace_pos = input.findFirst("]", start_brace_pos);
+
+			if (start_brace_pos >= 0 && end_brace_pos >= 0)
+			{
+				string unfiltered_braces = input.substr(start_brace_pos, end_brace_pos - start_brace_pos + 1); //First get the contents of the braces, including extra start braces inside
+				string filtered_braces = unfiltered_braces.substr(unfiltered_braces.findLast("["),unfiltered_braces.length()); //Reduce to the start brace closest to the end brace
+				string stored_value;
+
+				int difference = unfiltered_braces.length() - filtered_braces.length(); //We use this to figure out the start position to replace the [variable]
+
+				if (start_brace_pos + difference == 0 || input[start_brace_pos + difference - 1] != "\\"[0]) //We need to check if there is a backslash first
+				{
+					input.erase(start_brace_pos + difference, filtered_braces.length()); //Here we erase the variable name
+					stored_value = DialogueReadParamValue(filtered_braces.substr(1, filtered_braces.length() - 2)); //Get the actual contents of the variable
+					input.insert(start_brace_pos + difference, stored_value); //And replace filtered_braces with those contents
+				}
+				else
+				{
+				input.erase(start_brace_pos + difference - 1,1); //If there was a backslash just before the variable, that's the only thing we want to remove
+				stored_value = filtered_braces;
+				}
+
+				position_in_string = start_brace_pos + difference + stored_value.length(); //Let's update our position and continue checking
+			}
+			else
+			{
+				break;
+			}
+		}
+		return input;
+	}
+
+
+	string DialogueReadParamValue(string key){
+		SavedLevel@ data = save_file.GetSavedLevel("drika_data");
+		return (data.GetValue("[" + key + "]") == "true")? data.GetValue(key) : "--ERROR - " + key + " does not exist--";
+	}
 
 float InQuad(float progress){
 	return progress * progress;
