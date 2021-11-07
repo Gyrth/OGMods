@@ -41,6 +41,7 @@
 #include "hotspots/drika_user_interface.as"
 #include "hotspots/drika_checkpoint.as"
 #include "drika_quick_launch.as"
+#include "drika_docs.as"
 
 const float PI = 3.14159265359f;
 double radToDeg = (180.0f / PI);
@@ -609,7 +610,7 @@ void DrawEditor(){
 		ImGui_PushStyleColor(ImGuiCol_Button, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ButtonHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ButtonActive, item_clicked);
-		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
+		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(350, 350));
 
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
 		ImGui_SetNextWindowPos(vec2(100.0f, 100.0f), ImGuiSetCond_FirstUseEver);
@@ -626,7 +627,7 @@ void DrawEditor(){
 		ImGui_Begin("Drika Hotspot" + (show_name?" - " + display_name:" " + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, ImGuiWindowFlags_MenuBar);
 		ImGui_PopStyleVar();
 
-		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
+		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(350, 350));
 		ImGui_SetNextWindowSize(vec2(900.0f, 450.0f), ImGuiSetCond_FirstUseEver);
 
 		if(ImGui_BeginPopupModal("Settings###Edit", 0)){
@@ -728,6 +729,10 @@ void DrawEditor(){
 				DrawCreditsModal();
 				if(ImGui_Selectable("Credits")){}
 				ImGui_OpenPopupOnItemClick("Credits", 0);
+
+				DrawDocsModal();
+				if(ImGui_Selectable("Docs")){}
+				ImGui_OpenPopupOnItemClick("Docs", 0);
 
 				ImGui_EndMenu();
 			}
@@ -1710,6 +1715,8 @@ void ReceiveMessage(string msg){
 
 		if(param_1 == "drika_import_from_file"){
 			InterpImportData(file_content);
+		}else if(param_1 == "doc"){
+			SetDocData(file_content, function_index);
 		}else{
 			drika_elements[drika_indexes[function_index]].ReceiveMessage(file_content, param_1);
 		}
