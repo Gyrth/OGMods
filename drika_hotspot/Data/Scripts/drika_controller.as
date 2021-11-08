@@ -6,6 +6,7 @@
 #include "drika_ui_image.as"
 #include "drika_ui_text.as"
 #include "drika_ui_font.as"
+#include "drika_ui_button.as"
 #include "drika_dialogue_functions.as"
 
 bool animating_camera = false;
@@ -916,6 +917,9 @@ void AddUIElement(string json_string){
 			case ui_font:
 				@new_element = DrikaUIFont(json_data);
 				break;
+			case ui_button:
+				@new_element = DrikaUIButton(json_data);
+				break;
 			default:
 				Log(warning, "Unknown ui element type: " + json_data["type"].asInt());
 				break;
@@ -1386,20 +1390,6 @@ void LoadCheckpoint(string load_name){
 	loading_checkpoint = false;
 }
 
-void SendUIInstruction(string param_1, array<string> params){
-	if(ui_hotspot_id != -1){
-		Object@ hotspot_obj = ReadObjectFromID(ui_hotspot_id);
-
-		string msg = "drika_ui_instruction ";
-		msg += param_1 + " ";
-		for(uint i = 0; i < params.size(); i++){
-			msg += params[i] + " ";
-		}
-
-		hotspot_obj.ReceiveScriptMessage(msg);
-	}
-}
-
 DrikaUIElement@ GetUIElement(string identifier){
 	for(uint i = 0; i < ui_elements.size(); i++){
 		if(ui_elements[i].ui_element_identifier == identifier){
@@ -1527,7 +1517,7 @@ void Update(){
 	}
 
 	while(imGUI.getMessageQueueSize() > 0 ){
-        IMMessage@ message = imGUI.getNextMessage();
+		IMMessage@ message = imGUI.getNextMessage();
 
 		if(ui_hotspot_id != -1){
 			Object@ hotspot_obj = ReadObjectFromID(ui_hotspot_id);
@@ -1544,6 +1534,10 @@ void Update(){
 					@current_grabber = null;
 				}
 			}
+		}
+
+		if(message.name == "drika_button_go_to_line"){
+			GetUIElement(message.getString(0)).ReadUIInstruction({"button_clicked"});
 		}
 	}
 

@@ -340,7 +340,7 @@ bool Disconnect(Object @other){
 }
 
 void Dispose() {
-    level.StopReceivingLevelEvents(hotspot.GetID());
+	level.StopReceivingLevelEvents(hotspot.GetID());
 	if(GetInputDown(0, "delete")){
 		if(editing && drika_elements.size() > 0){
 			GetCurrentElement().EditDone();
@@ -1647,8 +1647,8 @@ void InsertElement(DrikaElement@ new_element){
 }
 
 void ReceiveMessage(string msg){
-    TokenIterator token_iter;
-    token_iter.Init();
+	TokenIterator token_iter;
+	token_iter.Init();
 	token_iter.FindNextToken(msg);
 	string token = token_iter.GetToken(msg);
 
@@ -1748,6 +1748,24 @@ void ReceiveMessage(string msg){
 		}
 
 		GetCurrentElement().ReadUIInstruction(instruction);
+	}else if(token == "drika_ui_function_event"){
+		token_iter.FindNextToken(msg);
+		string ui_element_identifier = token_iter.GetToken(msg);
+		array<string> parameters;
+
+		while(token_iter.FindNextToken(msg)){
+			parameters.insertLast(token_iter.GetToken(msg));
+		}
+
+		for(uint i = 0; i < drika_elements.size(); i++){
+			if(drika_elements[i].drika_element_type == drika_user_interface){
+				DrikaUserInterface@ ui_function = cast<DrikaUserInterface@>(drika_elements[i]);
+				if(ui_function.ui_element_identifier == ui_element_identifier){
+					ui_function.ReadUIFunctionEvent(parameters);
+					break;
+				}
+			}
+		}
 	}else if(token == "drika_message"){
 		array<string> drika_messages;
 

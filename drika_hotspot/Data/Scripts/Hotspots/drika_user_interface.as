@@ -2,6 +2,11 @@ class DrikaUserInterface : DrikaElement{
 	ui_functions ui_function;
 	int current_ui_function;
 	string image_path;
+
+	string button_image_path;
+
+	DrikaGoToLineSelect@ button_line;
+
 	ivec2 size;
 	ivec2 position;
 	ivec2 position_offset;
@@ -12,6 +17,7 @@ class DrikaUserInterface : DrikaElement{
 	bool keep_aspect;
 	array<string> content;
 	string text_content;
+	string button_text;
 	string ui_element_identifier;
 	bool ui_element_added = false;
 	string font_name;
@@ -45,7 +51,8 @@ class DrikaUserInterface : DrikaElement{
 											"Clear",
 											"Image",
 											"Text",
-											"Font"
+											"Font",
+											"Button"
 										};
 
 	DrikaUserInterface(JSONValue params = JSONValue()){
@@ -53,6 +60,11 @@ class DrikaUserInterface : DrikaElement{
 		current_ui_function = ui_function;
 
 		image_path = GetJSONString(params, "image_path", "Textures/ui/menus/credits/overgrowth.png");
+
+		button_image_path = GetJSONString(params, "button_image_path", "Textures/ui/menus/main/button-diamond.png");
+
+		@button_line = DrikaGoToLineSelect("button_line", params);
+
 		rotation = GetJSONFloat(params, "rotation", 0.0);
 		position = GetJSONIVec2(params, "position", ivec2(ui_snap_scale, ui_snap_scale) * 5);
 		color = GetJSONVec4(params, "color", vec4(1.0, 1.0, 1.0, 1.0));
@@ -87,6 +99,7 @@ class DrikaUserInterface : DrikaElement{
 		move_out_offset = GetJSONIVec2(params, "move_out_offset", ivec2(100, 100));
 
 		text_content = GetJSONString(params, "text_content", "Example Text");
+		button_text = GetJSONString(params, "button_text", "Click Here");
 		ui_element_identifier = GetUniqueID();
 
 		drika_element_type = drika_user_interface;
@@ -110,7 +123,7 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void UpdateExternalResource(){
-		if(ui_function == ui_text){
+		if(ui_function == ui_text || ui_function == ui_button){
 			DrikaUserInterface@ new_font_element = GetPreviousUIElementOfType({ui_font});
 			if(new_font_element !is font_element){
 				if(font_element !is null){
@@ -207,6 +220,7 @@ class DrikaUserInterface : DrikaElement{
 			AddUIElement();
 		}
 		SendUIInstruction("set_z_order", {index});
+		button_line.PostInit();
 	}
 
 	JSONValue GetSaveData(){
@@ -214,7 +228,7 @@ class DrikaUserInterface : DrikaElement{
 		data["ui_function"] = JSONValue(ui_function);
 		data["ui_element_identifier"] = JSONValue(ui_element_identifier);
 
-		if(ui_function == ui_image || ui_function == ui_text){
+		if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button){
 			data["use_fade_in"] = JSONValue(use_fade_in);
 			if(use_fade_in){
 				data["fade_in_duration"] = JSONValue(fade_in_duration);
@@ -283,6 +297,23 @@ class DrikaUserInterface : DrikaElement{
 			data["font_color"].append(font_color.z);
 			data["font_color"].append(font_color.a);
 			data["shadowed"] = JSONValue(shadowed);
+		}else if(ui_function == ui_button){
+			data["button_image_path"] = JSONValue(button_image_path);
+			data["keep_aspect"] = JSONValue(keep_aspect);
+			data["rotation"] = JSONValue(rotation);
+			data["position"] = JSONValue(JSONarrayValue);
+			data["position"].append(position.x);
+			data["position"].append(position.y);
+			data["color"] = JSONValue(JSONarrayValue);
+			data["color"].append(color.x);
+			data["color"].append(color.y);
+			data["color"].append(color.z);
+			data["color"].append(color.a);
+			data["size"] = JSONValue(JSONarrayValue);
+			data["size"].append(size.x);
+			data["size"].append(size.y);
+			data["button_text"] = JSONValue(button_text);
+			button_line.SaveGoToLine(data);
 		}
 		return data;
 	}
@@ -290,12 +321,18 @@ class DrikaUserInterface : DrikaElement{
 	string GetDisplayString(){
 		string display_string = "UserInterface ";
 		display_string += ui_function_names[ui_function] + " ";
+
 		if(ui_function == ui_text){
 			display_string += ("") + "\"" + text_content + "\"";
 		}else if(ui_function == ui_font){
 			display_string += font_name + " " + font_size;
 		}else if(ui_function == ui_image){
 			display_string += "\"" + image_path + "\"";
+		}else if(ui_function == ui_button){
+			button_line.CheckLineAvailable();
+			string display_line = button_line.GetTargetLineIndex();
+			string displayed_text = button_text != "" ? button_text : image_path;
+			display_string += "\"" + displayed_text + "\", target Line " + display_line;
 		}
 
 		return display_string;
@@ -462,10 +499,6 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_SetTextBuf(text_content);
 			ImGui_PushItemWidth(second_column_width);
 
-			if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
-				ImGui_SetKeyboardFocusHere(0);
-			}
-
 			if(ImGui_InputTextMultiline("##TEXT", vec2(-1.0, ImGui_GetWindowHeight() / 3.0), ImGuiInputTextFlags_AllowTabInput)){
 				text_content = ImGui_GetTextBuf();
 
@@ -561,9 +594,110 @@ class DrikaUserInterface : DrikaElement{
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
+		}else if(ui_function == ui_button){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Button Image");
+			ImGui_NextColumn();
+			if(ImGui_Button("Set Image")){
+				string new_path = GetUserPickedReadPath("png", "Data/Images");
+				if(new_path != ""){
+					new_path = ShortenPath(new_path);
+					//Remove the Data/ in the beginning of the path because IMImage starts in Data/.
+					array<string> split_path = new_path.split("/");
+					split_path.removeAt(0);
+					button_image_path = join(split_path, "/");
+					SendUIInstruction("set_button_image_path", {button_image_path});
+				}
+			}
+			ImGui_SameLine();
+			ImGui_Text(button_image_path);
+			ImGui_NextColumn();
+
+			ImGui_Separator();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Position");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width/2);
+			if(ImGui_DragInt("##Button Position X", position.x, 1.0, 0, 2560, "%.0f")){
+				SendUIInstruction("set_position", {position.x, position.y});
+			}
+			ImGui_SameLine();
+			if(ImGui_DragInt("##Button Position Y", position.y, 1.0, 0, 1440, "%.0f")){
+				SendUIInstruction("set_position", {position.x, position.y});
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Size");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width/2);
+			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
+				SendUIInstruction("set_size", {size.x, size.y});
+			}
+			ImGui_SameLine();
+			if(ImGui_DragInt("##size_y", size.y, 1.0, 1.0f, 1000, "%.0f")){
+				SendUIInstruction("set_size", {size.x, size.y});
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Rotation");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_SliderFloat("###Button Rotation", rotation, -360, 360, "%.0f")){
+				SendUIInstruction("set_rotation", {rotation});
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Color");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_ColorEdit4("###Color", color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
+				SendUIInstruction("set_color", {color.x, color.y, color.z, color.a});
+			}
+			ImGui_PopItemWidth();
+
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Keep aspect ratio");
+			ImGui_NextColumn();
+			if(ImGui_Checkbox("##Button keep aspect ratio", keep_aspect)){
+				SendUIInstruction("set_aspect_ratio", {keep_aspect});
+			}
+			ImGui_NextColumn();
+			ImGui_Separator();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Label");
+			ImGui_NextColumn();
+			ImGui_SetTextBuf(button_text);
+			ImGui_PushItemWidth(second_column_width);
+
+			if(ImGui_InputText( "##BUTTON TEXT", ImGuiInputTextFlags_AllowTabInput)){
+				button_text = ImGui_GetTextBuf();
+
+				for(int i = 0; i < int(button_text.length()); i++)
+				{
+					if (button_text[i] == "\""[0])
+					{
+						button_text.insert(i, "\\");
+						i++;
+					}
+				}
+
+				SendUIInstruction("set_content", {("\"" + button_text + " " + "\"")});
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 		}
 
-		if(ui_function == ui_image || ui_function == ui_text){
+		if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button){
 			//Fade in UI-------------------------------------------------------------------------------------------------
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Fade In");
@@ -627,6 +761,10 @@ class DrikaUserInterface : DrikaElement{
 			if(use_move_out){
 				DrawSelectTween("Move Out", move_out_tween_type, move_out_duration, move_out_offset);
 			}
+		}
+
+		if(ui_function == ui_button){
+			button_line.DrawGoToLineUI();
 		}
 	}
 
@@ -701,7 +839,7 @@ class DrikaUserInterface : DrikaElement{
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
 			for(uint i = 0; i < target_elements.size(); i++){
 				//Make sure the fonts are still available when cleaing the screen.
-				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text){
+				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text || target_elements[i].ui_function == ui_button){
 					target_elements[i].RequestRemoveUIElement();
 				}
 			}
@@ -710,6 +848,7 @@ class DrikaUserInterface : DrikaElement{
 				JSONValue data = GetSaveData();
 				data["type"] = JSONValue(ui_image);
 				data["index"] = JSONValue(index);
+				data["hotspot_id"] = JSONValue(hotspot.GetID());
 				SendJSONMessage("drika_ui_add_element", data);
 			}
 			SendRemoveUpdatebehaviour();
@@ -720,6 +859,7 @@ class DrikaUserInterface : DrikaElement{
 				JSONValue data = GetSaveData();
 				data["type"] = JSONValue(ui_text);
 				data["index"] = JSONValue(index);
+				data["hotspot_id"] = JSONValue(hotspot.GetID());
 				if(font_element is null){
 					data["font_id"] = JSONValue("");
 				}else{
@@ -736,8 +876,25 @@ class DrikaUserInterface : DrikaElement{
 				JSONValue data = GetSaveData();
 				data["index"] = JSONValue(index);
 				data["type"] = JSONValue(ui_font);
+				data["hotspot_id"] = JSONValue(hotspot.GetID());
 				SendJSONMessage("drika_ui_add_element", data);
 			}
+		}else if(ui_function == ui_button){
+			if(!ui_element_added){
+				JSONValue data = GetSaveData();
+				data["type"] = JSONValue(ui_button);
+				data["index"] = JSONValue(index);
+				data["hotspot_id"] = JSONValue(hotspot.GetID());
+				if(font_element is null){
+					data["font_id"] = JSONValue("");
+				}else{
+					data["font_id"] = JSONValue(font_element.ui_element_identifier);
+				}
+				SendJSONMessage("drika_ui_add_element", data);
+			}
+			SendRemoveUpdatebehaviour();
+			SendInUpdateBehaviour();
+			ui_element_added = true;
 		}
 		return true;
 	}
@@ -789,6 +946,16 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
+	void ReadUIFunctionEvent(array<string> instruction){
+		if(instruction[0] == "button_clicked"){
+			if(button_line !is null && !show_editor){
+				current_line = button_line.GetTargetLineIndex();
+				display_index = drika_indexes[button_line.GetTargetLineIndex()];
+			}
+		}
+		Log(warning, "button_clicked in UI");
+	}
+
 	void EditDone(){
 		SendLevelMessage("drika_edit_ui", {false});
 		SendLevelMessage("drika_ui_set_editing", {false});
@@ -807,7 +974,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void RemoveUIElement(){
 		if(ui_element_added){
-			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_font){
+			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_font || ui_function == ui_button){
 				SendLevelMessage("drika_ui_remove_element");
 				ui_element_added = false;
 			}
@@ -816,7 +983,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void RequestRemoveUIElement(){
 		if(ui_element_added){
-			if(ui_function == ui_image || ui_function == ui_text){
+			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button){
 				if(use_fade_out || use_move_out){
 					SendOutUpdateBehaviour();
 					if(!show_editor){

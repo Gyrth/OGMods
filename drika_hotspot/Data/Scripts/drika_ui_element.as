@@ -2,7 +2,8 @@ enum drika_ui_element_types	{
 								none,
 								drika_ui_image,
 								drika_ui_text,
-								drika_ui_font
+								drika_ui_font,
+								drika_ui_button
 							};
 
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -14,6 +15,7 @@ class DrikaUIElement{
 	bool editing;
 	int index = 0;
 	string json_string;
+	int hotspot_id;
 
 	void Update(){}
 	void AddPosition(ivec2 added_positon){}
@@ -32,6 +34,35 @@ class DrikaUIElement{
 	void RefreshTarget(){}
 	void ParseInput(bool left_mouse, bool right_mouse){}
 	void ReadUIInstruction(array<string> instruction){}
+
+	void SendUIInstruction(string param_1, array<string> params){
+		if(hotspot_id != -1 && ObjectExists(hotspot_id)){
+			Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
+
+			string msg = "drika_ui_instruction ";
+			msg += param_1 + " ";
+			for(uint i = 0; i < params.size(); i++){
+				msg += params[i] + " ";
+			}
+
+			hotspot_obj.ReceiveScriptMessage(msg);
+		}
+	}
+
+	void SendUIFunctionEvent(array<string> params){
+		Log(warning, "hotspot_id " + hotspot_id);
+		if(hotspot_id != -1 && ObjectExists(hotspot_id)){
+			Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
+
+			string msg = "drika_ui_function_event ";
+			msg += ui_element_identifier + " ";
+			for(uint i = 0; i < params.size(); i++){
+				msg += params[i] + " ";
+			}
+
+			hotspot_obj.ReceiveScriptMessage(msg);
+		}
+	}
 }
 
 class FadeOut{

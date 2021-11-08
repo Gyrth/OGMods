@@ -13,6 +13,7 @@ class DrikaUIFont : DrikaUIElement{
 		font_size = GetJSONInt(params, "font_size", 0);
 		font_color = GetJSONVec4(params, "font_color", vec4());
 		shadowed = GetJSONBool(params, "shadowed", false);
+		hotspot_id = GetJSONInt(params, "hotspot_id", -1);
 
 		font.fontName = font_name;
 		font.size = font_size;

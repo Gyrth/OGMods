@@ -21,6 +21,7 @@ class DrikaUIText : DrikaUIElement{
 		rotation = GetJSONFloat(params, "rotation", 0.0);
 		position = GetJSONIVec2(params, "position", ivec2());
 		index = GetJSONInt(params, "index", 0);
+		hotspot_id = GetJSONInt(params, "hotspot_id", -1);
 
 		@font_element = cast<DrikaUIFont@>(GetUIElement(GetJSONString(params, "font_id", "")));
 
@@ -58,7 +59,7 @@ class DrikaUIText : DrikaUIElement{
 			if(variable_tracker[i][1] == GetSavedVariable(variable_tracker[i][0])){
 				continue;
 			}else {
-				SetNewText(); 
+				SetNewText();
 				break;
 			}
 		}

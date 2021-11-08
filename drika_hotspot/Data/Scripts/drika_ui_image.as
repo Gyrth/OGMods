@@ -33,6 +33,7 @@ class DrikaUIImage : DrikaUIElement{
 		keep_aspect = GetJSONBool(params, "keep_aspect", false);
 		size = GetJSONIVec2(params, "size", ivec2());
 		index = GetJSONInt(params, "index", 0);
+		hotspot_id = GetJSONInt(params, "hotspot_id", -1);
 		animated = GetJSONBool(params, "animated", false);
 		animation_speed = GetJSONFloat(params, "animation_speed", 60.0);
 
