@@ -367,7 +367,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
+			ImGui_PushItemWidth(second_column_width/2);
 			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
 				SendUIInstruction("set_position", {position.x, position.y});
 			}
@@ -381,7 +381,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
+			ImGui_PushItemWidth(second_column_width/2);
 			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
 				SendUIInstruction("set_size", {size.x, size.y});
 			}
@@ -395,7 +395,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position Offset");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
+			ImGui_PushItemWidth(second_column_width/2);
 			if(ImGui_DragInt("##position_offset_x", position_offset.x, 1.0, 0.0f, max_offset.x, "%.0f")){
 				SendUIInstruction("set_position_offset", {position_offset.x, position_offset.y});
 			}
@@ -409,7 +409,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size Offset");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
+			ImGui_PushItemWidth(second_column_width/2);
 			if(ImGui_DragInt("##size_offset_x", size_offset.x, 1.0, 1.0f, max_offset.x, "%.0f")){
 				SendUIInstruction("set_size_offset", {size_offset.x, size_offset.y});
 			}
@@ -450,6 +450,13 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_NextColumn();
 		}else if(ui_function == ui_text){
 			ImGui_AlignTextToFramePadding();
+
+			ImGui_NextColumn();
+			ImGui_AlignTextToFramePadding();
+			ImGui_TextWrapped("Entering words between {braces} will cause that word to be interpreted as a variable.");
+			ImGui_TextWrapped("If you want to display a word between braces on screen, just add a backslash in front of that \\{word}.");
+			ImGui_NextColumn();
+
 			ImGui_Text("Text");
 			ImGui_NextColumn();
 			ImGui_SetTextBuf(text_content);
@@ -476,17 +483,11 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 
-			ImGui_NextColumn();
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Entering words between [brackets] will cause that word to be interpreted as a variable.");
-			ImGui_Text("If you want to display a word between brackets on screen, just add a backslash in front of that \\[word].");
-			ImGui_NextColumn();
-
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position");
 
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
+			ImGui_PushItemWidth(second_column_width/2);
 			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
 				SendUIInstruction("set_position", {position.x, position.y});
 			}

@@ -38,9 +38,8 @@ enum error_states 					{
 class DrikaReadWriteSaveFile : DrikaElement{
 	//The variables that can be changed by the user don't have a default value, instead this is done in the constructor.
 
-	~DrikaReadWriteSaveFile()
-	{
-	  save_file.WriteInPlace();
+	~DrikaReadWriteSaveFile(){
+		save_file.WriteInPlace();
 	}
 
 	read_write_modes read_write_mode;
@@ -95,8 +94,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 
 	float max_float_range = 3.402823466e+38;
 
-	DrikaReadWriteSaveFile(JSONValue params = JSONValue())
-	{
+	DrikaReadWriteSaveFile(JSONValue params = JSONValue()){
 		//Every user editable variable is retrieved from the JSON data.
 		//However when a variable isn't found the default value at the end is returned.
 		//This makes sure older savedata is still valid when adding new functions.ar
@@ -110,14 +108,16 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		array<int> array_int_operatormodes = GetJSONIntArray(params, "operatormodes", array<int> = { operator_mode_set });
 		operatormodes.resize(array_int_operatormodes.length());
 
-		for (uint i = 0; i < array_int_operatormodes.length(); i++)
+		for(uint i = 0; i < array_int_operatormodes.length(); i++){
 			operatormodes[i] = operator_modes(array_int_operatormodes[i]);
+		}
 
 		array<int> array_int_checkmodes = GetJSONIntArray(params, "checkmodes", array<int> = { check_mode_equals });
 		checkmodes.resize(array_int_checkmodes.length());
 
-		for (uint i = 0; i < array_int_checkmodes.length(); i++)
+		for(uint i = 0; i < array_int_checkmodes.length(); i++){
 			checkmodes[i] = check_modes(array_int_checkmodes[i]);
+		}
 
 		condition_count = int(parameters.length());
 
@@ -167,56 +167,52 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		if(continue_if_false){
 			continue_element.SaveGoToLine(data);
 		}
+
 		return data;
 	}
 
-		string GetDisplayString(){
-				//This creates a readable string for the UI to display.
-				//Setting the text color and determinating text cutoff is done in the main DHS script.
+	string GetDisplayString(){
+		//This creates a readable string for the UI to display.
+		//Setting the text color and determinating text cutoff is done in the main DHS script.
 		continue_element.CheckLineAvailable();
 		string display_string;
 		string display_value = IsFloat(values[0]) == true ? ReduceZeroes(values[0]) : values[0];
-			if (current_error_state == error_state_nothing) //This is determined in the Trigger function.
-				{
-					switch (read_write_mode)
+
+		if(current_error_state == error_state_nothing){ //This is determined in the Trigger function.
+				switch(read_write_mode){
+					case read:
 						{
-						case read:
-							{
-								if (condition_count == 1)
-									{
-									display_string += "Check if " + parameters[0] + " " + check_mode_display[checkmodes[0]] +  " " + display_value;
-									display_string += (continue_if_false?" else line " + continue_element.GetTargetLineIndex():"");
-									}
-								else
+							if(condition_count == 1){
+								display_string += "Check if " + parameters[0] + " " + check_mode_display[checkmodes[0]] +  " " + display_value;
+								display_string += (continue_if_false?" else line " + continue_element.GetTargetLineIndex():"");
+							}else{
 								//Perhaps in the future this could show the first two or three conditions. This could get cluttered tho. Needs testing.
-									{display_string += "Check multiple conditions";}
+								display_string += "Check multiple conditions";
 							}
-							break;
-
-						case write:
-							{
-								if (condition_count == 1)
-									{
-									//TODO - this should be rewritten into a switch statement or something
-									if (operatormodes[0] == operator_mode_add || operatormodes[0] == operator_mode_subtract ||
-										operatormodes[0] == operator_mode_addvariable || operatormodes[0] == operator_mode_subtractvariable)
-									//Reverse order of parameters and values if operation is Add or Subtract (better readability)
-										{display_string += operator_mode_display1[operatormodes[0]] +  " " + display_value + " " + operator_mode_display2[operatormodes[0]] +  " " +  parameters[0];}
-									else
-										{display_string += operator_mode_display1[operatormodes[0]] +  " " + parameters[0] + " " + operator_mode_display2[operatormodes[0]] +  " " +  display_value;}
-									}
-								else
-									{display_string += "Set multiple variables";}
-							}
-							break;
 						}
-				}
-
+						break;
+					case write:
+						{
+							if(condition_count == 1){
+								//TODO - this should be rewritten into a switch statement or something
+								if(operatormodes[0] == operator_mode_add || operatormodes[0] == operator_mode_subtract || operatormodes[0] == operator_mode_addvariable || operatormodes[0] == operator_mode_subtractvariable){
+									//Reverse order of parameters and values if operation is Add or Subtract (better readability)
+									display_string += operator_mode_display1[operatormodes[0]] +  " " + display_value + " " + operator_mode_display2[operatormodes[0]] +  " " +  parameters[0];
+								}else{
+									display_string += operator_mode_display1[operatormodes[0]] +  " " + parameters[0] + " " + operator_mode_display2[operatormodes[0]] +  " " +  display_value;
+								}
+							}else{
+								display_string += "Set multiple variables";
+							}
+						}
+						break;
+					}
 			//Because of how DHS works, this error will not appear while inside the DHS editor. DHS will have to try to run it first.
 			//It would be nice to have this error show up immediately, but that would likely require a substantial change in how DHS works first.
 			//Probably not worth it.
-			else
-			{display_string += error_state_display[current_error_state];}
+			}else{
+				display_string += error_state_display[current_error_state];
+			}
 
 		return display_string;
 	}
@@ -263,10 +259,10 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			ImGui_PushItemWidth(second_column_width);
 			//Probably not a good idea to allow the user to create 5000 conditions and send the file size of the level xml through the roof
 			//So the slider goes to 10 and the user can override, up to 25 conditions. Anything above that or below 1 gets set back to the permissible range
-			if (ImGui_SliderInt("##Condition Count", condition_count, 1, 10, "%.0f"))
+			if(ImGui_SliderInt("##Condition Count", condition_count, 1, 10, "%.0f"))
 			{
-				if (condition_count < 1) condition_count = 1;
-				if (condition_count > 100) condition_count = 100;
+				if(condition_count < 1) condition_count = 1;
+				if(condition_count > 100) condition_count = 100;
 			}
 
 			ImGui_PopItemWidth();
@@ -277,7 +273,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			ImGui_NextColumn();
 
 			//Let's make sure the arrays are the same length as the number of conditions.
-			if (int(parameters.length()) != condition_count)
+			if(int(parameters.length()) != condition_count)
 			{
 				parameters.resize(condition_count);
 				values.resize(condition_count);
@@ -297,7 +293,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				ImGui_Text("Check if param");
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				if (ImGui_InputText("Parameter" + (i + 1), parameters[i], 64))
+				if(ImGui_InputText("Parameter" + (i + 1), parameters[i], 64))
 					{parameters[i] = CleanString(parameters[i]);}
 
 				ImGui_PopItemWidth();
@@ -315,7 +311,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 
 				//Here we want to only allow float inputs when the user is attempting certain checks where strings would never be used.
 				//This doesn't guarantee that the user won't mess up anyway, but it decreases the number of conditions where an error could happen.
-				if (checkmodes[i] == check_mode_greaterthan || checkmodes[i] == check_mode_lessthan)
+				if(checkmodes[i] == check_mode_greaterthan || checkmodes[i] == check_mode_lessthan)
 					{float buf = atof(values[i]); ImGui_InputFloat("##Operator Input" + (i + 1), buf, 1, 5, 6); values[i] = formatFloat(buf,'', 0, 3);}
 				else {ImGui_InputText("Value " + (i + 1), values[i], 64);}
 
@@ -349,10 +345,10 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
 			//Although using same array(condition_count),"Parameter" makes more sense for this mode
-			if (ImGui_SliderInt("##Parameter count", condition_count, 1, 10, "%.0f"))
+			if(ImGui_SliderInt("##Parameter count", condition_count, 1, 10, "%.0f"))
 			{
-				if (condition_count < 1) condition_count = 1;
-				if (condition_count > 100) condition_count = 100;
+				if(condition_count < 1) condition_count = 1;
+				if(condition_count > 100) condition_count = 100;
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -361,7 +357,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			ImGui_NextColumn();
 			ImGui_NextColumn();
 
-			if (int(parameters.length()) != condition_count)
+			if(int(parameters.length()) != condition_count)
 			{
 				parameters.resize(condition_count);
 				values.resize(condition_count);
@@ -379,8 +375,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
 
-				if (ImGui_InputText("Parameter" + (i + 1), parameters[i], 64))
-						{parameters[i] = CleanString(parameters[i]);}
+				if(ImGui_InputText("Parameter" + (i + 1), parameters[i], 64))
+					{parameters[i] = CleanString(parameters[i]);}
 
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
@@ -399,7 +395,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				ImGui_PushItemWidth(second_column_width);
 
 				//Here we are also checking for cases where the user should only ever input a float, and changing the input box accordingly.
-				if (operatormodes[i] < operator_mode_subtract || operatormodes[i] > operator_mode_multiply)
+				if(operatormodes[i] < operator_mode_subtract || operatormodes[i] > operator_mode_multiply)
 				ImGui_InputText("Value" + (i + 1), values[i], 64);
 
 				//The user is limited to two decimal positions. This is just to makes things easier to read and keep the strings shorter in DisplayString.
@@ -419,8 +415,9 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			ImGui_Text("Parameter: ");
 			ImGui_SameLine();
 			ImGui_PushItemWidth((second_column_width - text_width)/2 - 10);
-			if (ImGui_InputText("###DebugSetParameter", direct_set_param, 64))
-						{direct_set_param = CleanString(direct_set_param);}
+			if(ImGui_InputText("###DebugSetParameter", direct_set_param, 64)){
+				direct_set_param = CleanString(direct_set_param);
+			}
 			ImGui_PopItemWidth();
 			ImGui_SameLine();
 			ImGui_Text("Value: ");
@@ -440,51 +437,45 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		ImGui_NextColumn();
 		ImGui_NextColumn();
 		ImGui_PushItemWidth (ImGui_GetContentRegionAvailWidth());
-		if (debug_display_values == true)
-			{
-			for (int i = 0; i < condition_count; i++)
-				{
-				if (CheckParamExists(parameters[i]) == true)
-				{ImGui_Text(parameters[i] + " = " + ReadParamValue(parameters[i]));}
-				else
-				{ImGui_Text("This variable does not exist!");}
-
-				ImGui_NextColumn();
-				ImGui_NextColumn();
+		if(debug_display_values == true){
+			for (int i = 0; i < condition_count; i++){
+				if(CheckParamExists(parameters[i]) == true){
+					ImGui_Text(parameters[i] + " = " + ReadParamValue(parameters[i]));
+				}else{
+					ImGui_Text("This variable does not exist!");}
+					ImGui_NextColumn();
+					ImGui_NextColumn();
 				}
 			}
 		ImGui_PopItemWidth();
 	}
 
-	string CleanString(string my_string)
-{
-    for (int i = int(my_string.length()) - 1; i >= 0; i--)
-    {
-        if (my_string[i] == "["[0] || my_string[i] == "]"[0])
-        {
-            my_string.erase(i, 1);
-        }
-    }
-    return my_string;
-}
+	string CleanString(string my_string){
+		for (int i = int(my_string.length()) - 1; i >= 0; i--){
+			if(my_string[i] == "["[0] || my_string[i] == "]"[0]){
+				my_string.erase(i, 1);
+			}
+		}
+		return my_string;
+	}
 
 	//This function is used to see if the user is attempting an illegal operation on a string.
 	//All it does is check to see if the string contains anything aside from numbers and a few cases to handle decimals and negative numbers.
 	//For reference, "-"[0] is just a quick way to refer to the ASCII location of that character.
-	bool IsFloat(string test) {
+	bool IsFloat(string test){
 		bool decimal_found = false;
 
 		// Checking for certain edge cases
-		if (test == "." || test == "-" || test == "-.") return false;
+		if(test == "." || test == "-" || test == "-.") return false;
 			for (uint i = 0; i < test.length(); i++)
 			{
-				if (test[i] == "."[0])
-					{if (decimal_found) {return false;} else {decimal_found = true;} }
+				if(test[i] == "."[0])
+					{if(decimal_found) {return false;} else {decimal_found = true;} }
 
-				else if (test[i] == "-"[0])
-					{if (i > 0) {return false;} }
+				else if(test[i] == "-"[0])
+					{if(i > 0) {return false;} }
 
-				else if (test[i] < "0"[0] || test[i] > "9"[0]) {return false;}
+				else if(test[i] < "0"[0] || test[i] > "9"[0]) {return false;}
 			}
 
 		return true;
@@ -506,13 +497,13 @@ class DrikaReadWriteSaveFile : DrikaElement{
 
 				//In the case of add and addvariable, we do different operations depending on whether both the values are floats or not.
 				//If they are floats we do a normal addition operation. If either or both values are strings, we concatenate the values instead.
-				case operator_mode_add: 				if (is_float == true) {value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) + atof(local_value)),'', 0, 3));}
+				case operator_mode_add: 				if(is_float == true) {value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) + atof(local_value)),'', 0, 3));}
 														else  {value_to_save = saved_parameter + local_value;} break;
 				case operator_mode_subtract: 			value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) - atof(local_value)),'', 0, 3)); break;
 				case operator_mode_divide: 				value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) / atof(local_value)),'', 0, 3)); break;
 				case operator_mode_multiply: 			value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) * atof(local_value)),'', 0, 3)); break;
 
-				case operator_mode_addvariable: 		if (is_float == true) {value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) + atof(saved_value)),'', 0, 3));}
+				case operator_mode_addvariable: 		if(is_float == true) {value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) + atof(saved_value)),'', 0, 3));}
 														else  {value_to_save = saved_parameter + saved_value;} break;
 
 				case operator_mode_subtractvariable: 	value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) - atof(saved_value)),'', 0, 3)); break;
@@ -520,7 +511,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				case operator_mode_multiplyvariable: 	value_to_save = ReduceZeroes(formatFloat((atof(saved_parameter) * atof(saved_value)),'', 0, 3)); break;
 				}
 		//If the Debug Set Value button is pressed, we want to ignore the usual way of doing things and take our values directly from those two input boxes.
-		if (set_direct == true)
+		if(set_direct == true)
 			{
 			data.SetValue(direct_set_param, direct_set_value);
 			data.SetValue("[" + direct_set_param + "]", "true");
@@ -535,25 +526,24 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		//save_file.WriteInPlace();
 	}
 
-	string ReduceZeroes(string input)
-	{
-	if (input.findFirst(".") >= 0){
+	string ReduceZeroes(string input){
+		if(input.findFirst(".") >= 0){
 			//Go over each character backwards.
-	for(int i = input.length() - 1; i >= 0; i--){
-		//If you find the decimal point, remove it and return the string.
-		if(input[i] == "."[0]){
-			input.erase(i, 1);
-			break;
-		//Remove any zero.
-		}else if(input[i] == "0"[0]){
-			input.erase(i, 1);
-		}else{
-			//Once we encounter a number, stop removing zeros.
-			break;
+			for(int i = input.length() - 1; i >= 0; i--){
+				//If you find the decimal point, remove it and return the string.
+				if(input[i] == "."[0]){
+					input.erase(i, 1);
+					break;
+				//Remove any zero.
+				}else if(input[i] == "0"[0]){
+					input.erase(i, 1);
+				}else{
+					//Once we encounter a number, stop removing zeros.
+					break;
+				}
 			}
 		}
-	}
-	return input;
+		return input;
 	}
 
 	//The Trigger function does all the heavy lifting for this bit.
@@ -562,9 +552,8 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		return data.GetValue(key);
 	}
 
-	bool CheckParamExists(string key)
-	{
-	return ReadParamValue("[" + key + "]") == "true";
+	bool CheckParamExists(string key){
+		return ReadParamValue("[" + key + "]") == "true";
 	}
 
 	void ParseParameters(int index)
@@ -582,7 +571,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		int continue_line = continue_element.GetTargetLineIndex();
 		current_error_state = error_state_nothing;
 
-		if (read_write_mode == read) { //READ
+		if(read_write_mode == read) { //READ
 			//For the Read mode we need to know if either all, some, or none of the conditions are true. An easy way to do this is to count upwards every time a condition is true.
 			//If count reads 0, no condition is true. If count = condition_count, all the conditions are true. If < condition_count but > 0, some are true.
 
@@ -600,55 +589,55 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				switch (checkmodes[i])
 					{
 					case check_mode_equals:
-						if (CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+						if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
 						//Because floats aren't exact, we simply check if they are very very close.
-						if (IsFloat(saved_parameter) == true) 									{count += CheckEpsilon(saved_parameter, local_value);}
+						if(IsFloat(saved_parameter) == true) 									{count += CheckEpsilon(saved_parameter, local_value);}
 						else																	{count += (saved_parameter == local_value)? 1:0;}
 						break;
 
 					case check_mode_notequals:
-						if (CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
-						if (IsFloat(saved_parameter) == true) 									{count += CheckEpsilon(saved_parameter, local_value);}
+						if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+						if(IsFloat(saved_parameter) == true) 									{count += CheckEpsilon(saved_parameter, local_value);}
 						else																	{count += (saved_parameter != local_value)? 1:0;}
 						break;
 
 					case check_mode_greaterthan:
-						if (CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
-						if (IsFloat(saved_parameter) == true)									{count += (atof(saved_parameter) > atof(local_value))? 1:0;}
+						if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+						if(IsFloat(saved_parameter) == true)									{count += (atof(saved_parameter) > atof(local_value))? 1:0;}
 						else 																	{current_error_state = error_state_opcheckstring;}
 						break;
 
 					case check_mode_lessthan:
-						if (CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
-						if (IsFloat(saved_parameter) == true)									{count += (atof(saved_parameter) < atof(local_value))? 1:0;}
+						if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+						if(IsFloat(saved_parameter) == true)									{count += (atof(saved_parameter) < atof(local_value))? 1:0;}
 						else 																	{current_error_state = error_state_opcheckstring;}
 						break;
 
 					case check_mode_variable:
-						if (CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
-						if (IsFloat(saved_parameter) == true)									{count += CheckEpsilon(saved_parameter, saved_value);}
+						if(CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
+						if(IsFloat(saved_parameter) == true)									{count += CheckEpsilon(saved_parameter, saved_value);}
 						else																	{count += (saved_parameter == saved_value)? 1:0;}
 						break;
 
 					case check_mode_notvariable:
-						if (CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
-						if (IsFloat(saved_parameter) == true)									{count += CheckEpsilon(saved_parameter, saved_value);}
+						if(CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
+						if(IsFloat(saved_parameter) == true)									{count += CheckEpsilon(saved_parameter, saved_value);}
 						else																	{count += (saved_parameter != saved_value)? 1:0;}
 						break;
 
 					case check_mode_greaterthanvariable:
-						if (CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
-						if (IsFloat(saved_parameter) == true && IsFloat(saved_value) == true)	{count += (atof(saved_parameter) > atof(saved_value))? 1:0;}
+						if(CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
+						if(IsFloat(saved_parameter) == true && IsFloat(saved_value) == true)	{count += (atof(saved_parameter) > atof(saved_value))? 1:0;}
 						else 																	{current_error_state = error_state_opcheckstring;} break;
 
 					case check_mode_lessthanvariable:
-						if (CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
-						if (IsFloat(saved_parameter) == true && IsFloat(saved_value) == true)	{count += (atof(saved_parameter) < atof(saved_value))? 1:0;}
+						if(CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
+						if(IsFloat(saved_parameter) == true && IsFloat(saved_value) == true)	{count += (atof(saved_parameter) < atof(saved_value))? 1:0;}
 						else 																	{current_error_state = error_state_opcheckstring;} break;
 					}
 			}
 				//Now that we've completed the count of what returned true, let's compare that to condition count and decide what to do.
-				if (count == condition_count || (count > 0 && if_any_are_true))	return current_error_state == error_state_nothing;
+				if(count == condition_count || (count > 0 && if_any_are_true))	return current_error_state == error_state_nothing;
 				else if(continue_if_false == true and continue_line < int(drika_elements.size())){
 					current_line = continue_line;
 					display_index = drika_indexes[continue_line];}
@@ -669,107 +658,107 @@ class DrikaReadWriteSaveFile : DrikaElement{
 					switch (operatormodes[i])
 					{
 						case operator_mode_set:
-							if (CheckOverflow(local_value, "set") == true)							{current_error_state = error_state_floatoverflow;}
+							if(CheckOverflow(local_value, "set") == true)							{current_error_state = error_state_floatoverflow;}
 							break;
 
 						case operator_mode_reference:
-							if (CheckExisting(local_value, local_value) == false)					{current_error_state = error_state_emptyvariable;}
-							if (CheckOverflow(saved_value, "set") == true)							{current_error_state = error_state_floatoverflow;}
+							if(CheckExisting(local_value, local_value) == false)					{current_error_state = error_state_emptyvariable;}
+							if(CheckOverflow(saved_value, "set") == true)							{current_error_state = error_state_floatoverflow;}
 							break;
 
 						case operator_mode_add:
-							if (CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+							if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
 							if 	(IsFloat(saved_parameter) == true && IsFloat(local_value) == true) 	{thisoperation_float = true;}
-							if (CheckOverflow(saved_parameter, thisoperation_float ? "+" : "concat", local_value) == true)			{current_error_state = error_state_floatoverflow;}
+							if(CheckOverflow(saved_parameter, thisoperation_float ? "+" : "concat", local_value) == true)			{current_error_state = error_state_floatoverflow;}
 							break;
 
 						case operator_mode_subtract:
-							if (CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
-							if (IsFloat(saved_parameter) == true && IsFloat(local_value) == true)	{thisoperation_float = true;}
-							if (thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
-							if (CheckOverflow(saved_parameter, "-", local_value) == true)			{current_error_state = error_state_floatoverflow;}
+							if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+							if(IsFloat(saved_parameter) == true && IsFloat(local_value) == true)	{thisoperation_float = true;}
+							if(thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
+							if(CheckOverflow(saved_parameter, "-", local_value) == true)			{current_error_state = error_state_floatoverflow;}
 							break;
 
 						case operator_mode_divide:
-							if (CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
-							if (IsFloat(saved_parameter) == true && IsFloat(local_value) == true) 	{thisoperation_float = true;}
-							if (atof(local_value) == 0.0)											{current_error_state = error_state_dividebyzero;}
-							if (thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
-							if (CheckOverflow(saved_parameter, "/", local_value) == true)			{current_error_state = error_state_floatoverflow;}
+							if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+							if(IsFloat(saved_parameter) == true && IsFloat(local_value) == true) 	{thisoperation_float = true;}
+							if(atof(local_value) == 0.0)											{current_error_state = error_state_dividebyzero;}
+							if(thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
+							if(CheckOverflow(saved_parameter, "/", local_value) == true)			{current_error_state = error_state_floatoverflow;}
 							break;
 
 						case operator_mode_multiply:
-							if (CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
-							if (IsFloat(saved_parameter) == true && IsFloat(local_value) == true) 	{thisoperation_float = true;}
-							if (thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
-							if (CheckOverflow(saved_parameter, "*", local_value) == true)			{current_error_state = error_state_floatoverflow;}
+							if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+							if(IsFloat(saved_parameter) == true && IsFloat(local_value) == true) 	{thisoperation_float = true;}
+							if(thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
+							if(CheckOverflow(saved_parameter, "*", local_value) == true)			{current_error_state = error_state_floatoverflow;}
 							break;
 
 						case operator_mode_addvariable:
-							if (CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
+							if(CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
 							if 	(IsFloat(saved_parameter) == true && IsFloat(saved_value) == true) 	{thisoperation_float = true;}
-							if (CheckOverflow(saved_parameter, thisoperation_float ? "+" : "concat", saved_value) == true)			{current_error_state = error_state_floatoverflow;}
+							if(CheckOverflow(saved_parameter, thisoperation_float ? "+" : "concat", saved_value) == true)			{current_error_state = error_state_floatoverflow;}
 							break;
 
 						case operator_mode_subtractvariable:
-							if (CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
-							if (IsFloat(saved_parameter) == true && IsFloat(saved_value) == true) 	{thisoperation_float = true;}
-							if (thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
-							if (CheckOverflow(saved_parameter, "-", saved_value) == true)			{current_error_state = error_state_floatoverflow;}
+							if(CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
+							if(IsFloat(saved_parameter) == true && IsFloat(saved_value) == true) 	{thisoperation_float = true;}
+							if(thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
+							if(CheckOverflow(saved_parameter, "-", saved_value) == true)			{current_error_state = error_state_floatoverflow;}
 							break;
 
 						case operator_mode_dividevariable:
-							if (CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
-							if (IsFloat(saved_parameter) == true && IsFloat(saved_value) == true) 	{thisoperation_float = true;}
-							if (atof(saved_value) == 0.0)											{current_error_state = error_state_dividebyzero;}
-							if (thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
-							if (CheckOverflow(saved_parameter, "/", saved_value) == true)			{current_error_state = error_state_floatoverflow;}
+							if(CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
+							if(IsFloat(saved_parameter) == true && IsFloat(saved_value) == true) 	{thisoperation_float = true;}
+							if(atof(saved_value) == 0.0)											{current_error_state = error_state_dividebyzero;}
+							if(thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
+							if(CheckOverflow(saved_parameter, "/", saved_value) == true)			{current_error_state = error_state_floatoverflow;}
 							break;
 
 						case operator_mode_multiplyvariable:
-							if (CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
-							if (IsFloat(saved_parameter) == true && IsFloat(saved_value) == true) 	{thisoperation_float = true;}
-							if (thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
-							if (CheckOverflow(saved_parameter, "*", saved_value) == true)			{current_error_state = error_state_floatoverflow;}
+							if(CheckExisting(local_parameter, local_value) == false)				{current_error_state = error_state_emptyvariable;}
+							if(IsFloat(saved_parameter) == true && IsFloat(saved_value) == true) 	{thisoperation_float = true;}
+							if(thisoperation_float == false)										{current_error_state = error_state_opcheckstring;}
+							if(CheckOverflow(saved_parameter, "*", saved_value) == true)			{current_error_state = error_state_floatoverflow;}
 							break;
 					}
 
-				if(current_error_state == error_state_nothing) {WriteParamValue(i,thisoperation_float);}
+				if(current_error_state == error_state_nothing){
+					WriteParamValue(i,thisoperation_float);
 				}
-				return current_error_state == error_state_nothing;
 			}
+			return current_error_state == error_state_nothing;
+		}
 	}
-	bool CheckOverflow(string operand1, string operation, string operand2 = "")
+
+	bool CheckOverflow(string operand1, string operation, string operand2 = ""){
+		float result;
+
+		if(operation == "concat")
 		{
-			float result;
-
-			if (operation == "concat")
-			{
-				return (operand1 + operand2).length() >= 1024 * 1024;
-			}
-
-			float op1 = atof(operand1);
-			float op2 = atof(operand2);
-
-			if 	(operation == "set") result = op1;
-			else if (operation == "+") result = op1 + op2;
-			else if (operation == "-") result = op1 - op2;
-			else if (operation == "*") result = op1 * op2;
-			else if (operation == "/") result = op1 / op2;
-
-			return abs(result) > max_float_range;
+			return (operand1 + operand2).length() >= 1024 * 1024;
 		}
 
-	int CheckEpsilon(string operand1, string operand2)
-		{
+		float op1 = atof(operand1);
+		float op2 = atof(operand2);
+
+		if 	(operation == "set") result = op1;
+		else if(operation == "+") result = op1 + op2;
+		else if(operation == "-") result = op1 - op2;
+		else if(operation == "*") result = op1 * op2;
+		else if(operation == "/") result = op1 / op2;
+
+		return abs(result) > max_float_range;
+	}
+
+	int CheckEpsilon(string operand1, string operand2){
 		float op1 = atof(operand1);
 		float op2 = atof(operand2);
 
 		return (abs(op1 - op2) < 0.0000000001)? 1:0;
-		}
+	}
 
-	bool CheckExisting(string operand1, string operand2)
-	{
-	return (CheckParamExists(operand1) == true && CheckParamExists(operand2) == true);
+	bool CheckExisting(string operand1, string operand2){
+		return (CheckParamExists(operand1) == true && CheckParamExists(operand2) == true);
 	}
 }
