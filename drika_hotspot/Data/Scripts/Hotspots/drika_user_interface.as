@@ -953,7 +953,6 @@ class DrikaUserInterface : DrikaElement{
 				display_index = drika_indexes[button_line.GetTargetLineIndex()];
 			}
 		}
-		Log(warning, "button_clicked in UI");
 	}
 
 	void EditDone(){

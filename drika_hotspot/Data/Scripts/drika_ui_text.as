@@ -11,8 +11,6 @@ class DrikaUIText : DrikaUIElement{
 	DrikaUIFont@ font_element = null;
 	array<FadeOut@> fade_out_animations;
 
-	array<array<string>> variable_tracker;
-
 	DrikaUIText(JSONValue params = JSONValue()){
 		drika_ui_element_type = drika_ui_text;
 
@@ -54,15 +52,6 @@ class DrikaUIText : DrikaUIElement{
 				fade_out_animations.removeAt(i);
 			}
 		}
-
-		for(uint i = 0; i < variable_tracker.length(); i++){
-			if(variable_tracker[i][1] == GetSavedVariable(variable_tracker[i][0])){
-				continue;
-			}else {
-				SetNewText();
-				break;
-			}
-		}
 	}
 
 	void ReadUIInstruction(array<string> instruction){
@@ -80,6 +69,8 @@ class DrikaUIText : DrikaUIElement{
 			SetNewText();
 		}else if(instruction[0] == "font_changed"){
 			@font_element = cast<DrikaUIFont@>(GetUIElement(instruction[1]));
+			SetNewText();
+		}else if(instruction[0] == "variable_changed"){
 			SetNewText();
 		}else if(instruction[0] == "set_z_order"){
 			index = atoi(instruction[1]);
@@ -190,8 +181,6 @@ class DrikaUIText : DrikaUIElement{
 		text_elements.resize(0);
 		holder.clear();
 		holder.setSize(vec2(-1,-1));
-
-		variable_tracker.resize(0);
 
 		split_content = text_content.split("\n");
 

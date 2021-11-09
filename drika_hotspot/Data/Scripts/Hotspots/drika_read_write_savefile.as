@@ -524,6 +524,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 			data.SetValue(("[" + local_parameter + "]"), "true"); //This additional var is used to check if the var exists
 			}
 		//save_file.WriteInPlace();
+		level.SendMessage("drika_variable_changed");
 	}
 
 	string ReduceZeroes(string input){

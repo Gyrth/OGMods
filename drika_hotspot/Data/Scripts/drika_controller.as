@@ -893,6 +893,10 @@ void ReceiveMessage(string msg){
 		return_msg += "\"" + shader_model + "\"" + " ";
 
 		hotspot_obj.ReceiveScriptMessage(return_msg);
+	}else if(token == "drika_variable_changed"){
+		for(uint i = 0; i < ui_elements.size(); i++){
+			ui_elements[i].ReadUIInstruction({"variable_changed"});
+		}
 	}
 }
 

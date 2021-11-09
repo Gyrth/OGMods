@@ -50,7 +50,6 @@ class DrikaUIElement{
 	}
 
 	void SendUIFunctionEvent(array<string> params){
-		Log(warning, "hotspot_id " + hotspot_id);
 		if(hotspot_id != -1 && ObjectExists(hotspot_id)){
 			Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
 

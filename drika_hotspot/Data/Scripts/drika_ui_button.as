@@ -128,6 +128,9 @@ class DrikaUIButton : DrikaUIImage{
 			@font_element = cast<DrikaUIFont@>(GetUIElement(instruction[1]));
 			SetButtonText();
 			SetSize();
+		}else if(instruction[0] == "variable_changed"){
+			SetButtonText();
+			SetSize();
 		}else if(instruction[0] == "set_content"){
 			button_text = instruction[1].substr(0, instruction[1].length() - 1);
 			SetButtonText();
