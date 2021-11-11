@@ -838,11 +838,14 @@ class DrikaUserInterface : DrikaElement{
 		if(ui_function == ui_clear){
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
 			for(uint i = 0; i < target_elements.size(); i++){
-				//Make sure the fonts are still available when cleaing the screen.
+				//Make sure the fonts are still available when clearing the screen.
 				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text || target_elements[i].ui_function == ui_button){
 					target_elements[i].RequestRemoveUIElement();
 				}
 			}
+			JSONValue data = GetSaveData();
+			data["type"] = JSONValue(ui_clear);
+			SendJSONMessage("drika_ui_add_element", data);
 		}else if(ui_function == ui_image){
 			if(!ui_element_added){
 				JSONValue data = GetSaveData();

@@ -11,6 +11,7 @@
 
 bool animating_camera = false;
 bool has_camera_control = false;
+bool showing_interactive_ui = false;
 bool show_dialogue = false;
 array<string> hotspot_ids;
 IMGUI@ imGUI;
@@ -325,6 +326,8 @@ void ReceiveMessage(string msg){
 		camera_far_dist = 0.0;
 		camera_far_transition = 0.0;
 		allow_dialogue_move_in = true;
+		showing_choice = false;
+		showing_interactive_ui = false;
 	}else if(token == "write_music_xml"){
 		array<string> lines;
 		string xml_content;
@@ -911,7 +914,9 @@ void AddUIElement(string json_string){
 
 		switch(json_data["type"].asInt()) {
 			case ui_clear:
-				break;
+				SetGrabMouse(true);
+				showing_interactive_ui = false;
+				return;
 			case ui_image:
 				@new_element = DrikaUIImage(json_data);
 				break;
@@ -922,6 +927,8 @@ void AddUIElement(string json_string){
 				@new_element = DrikaUIFont(json_data);
 				break;
 			case ui_button:
+				SetGrabMouse(false);
+				showing_interactive_ui = true;
 				@new_element = DrikaUIButton(json_data);
 				break;
 			default:
@@ -1904,7 +1911,7 @@ void MessageWaitingForFadeOut(){
 }
 
 bool HasFocus(){
-	return (showing_choice && !EditorModeActive())?true:false;
+	return ((showing_choice || showing_interactive_ui) && !EditorModeActive())?true:false;
 }
 
 bool DialogueCameraControl() {
