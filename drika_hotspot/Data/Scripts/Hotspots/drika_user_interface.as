@@ -100,12 +100,27 @@ class DrikaUserInterface : DrikaElement{
 
 		text_content = GetJSONString(params, "text_content", "Example Text");
 		button_text = GetJSONString(params, "button_text", "Click Here");
+		// This identifier is used to get the messages between the hotspot and levelscript to the right objects.
+		// So for example this Text function is linked to a UIText element in drika_controller's ui_elements array.
 		ui_element_identifier = GetUniqueID();
 
 		drika_element_type = drika_user_interface;
 		has_settings = true;
 	}
 
+	void PostInit(){
+		UpdateExternalResource();
+		// The font needs to be available from the start so that during editing the text are using the correct font.
+		if(ui_function == ui_font){
+			AddUIElement();
+		}
+		SendUIInstruction("set_z_order", {index});
+		button_line.PostInit();
+	}
+
+	// Checkpoints are saved and loaded in drika_controller.as levelscript.
+	// The UI Elements that were on screen during a save are restored in this levelscript,
+	// so the only thing this function needs to keep track of is if the element was added or not.
 	JSONValue GetCheckpointData(){
 		JSONValue data;
 		data["ui_element_added"] = ui_element_added;
@@ -119,12 +134,18 @@ class DrikaUserInterface : DrikaElement{
 
 	void ReorderDone(){
 		UpdateExternalResource();
+		// The Z order is used to draw elements on top of each other.
+		// To make this simple for the user we use the function index, so Text at index 8 is drawn below Text at index9 for example.
 		SendUIInstruction("set_z_order", {index});
 	}
 
+	// Buttons and text use a font function that is higher on the DHS function list.
+	// This function is called when the user is reordering the function list or when this function is added to the list.
+	// This can be when the level loads or when the user adds a new User Interface function.
 	void UpdateExternalResource(){
 		if(ui_function == ui_text || ui_function == ui_button){
 			DrikaUserInterface@ new_font_element = GetPreviousUIElementOfType({ui_font});
+			// Register this Text or Button with the Font so that it can send messages back when the font changes settings.
 			if(new_font_element !is font_element){
 				if(font_element !is null){
 					font_element.RemoveTextElement(this);
@@ -141,6 +162,7 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
+	// Update behaviors are effects like fading and moving. They can be added and deleted when the user is editing the UI element as well.
 	void SendInUpdateBehaviour(){
 		if(use_fade_in){
 			AddUpdateBehavior("fade_in", fade_in_duration, fade_in_tween_type);
@@ -170,6 +192,7 @@ class DrikaUserInterface : DrikaElement{
 		SendUIInstruction("add_update_behaviour", {name, duration, tween_type, ui_element_identifier, offset.x, offset.y, show_editor});
 	}
 
+	// These next two functions are used by Font to keep track of Text and Button elements.
 	void AddTextElement(DrikaUserInterface@ new_text_element){
 		for(uint i = 0; i < text_elements.size(); i++){
 			if(text_elements[i].ui_element_identifier == new_text_element.ui_element_identifier){
@@ -190,6 +213,8 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
+	// Loop over the functions backwards, starting at the current index to find a specific functon type.
+	// This is used to find a User Interface Font function, but may be useful in the future for other functions.
 	DrikaUserInterface@ GetPreviousUIElementOfType(array<ui_functions> function_types){
 		for(int i = index - 1; i > -1; i--){
 			if(drika_elements[drika_indexes[i]].drika_element_type == drika_user_interface){
@@ -202,6 +227,7 @@ class DrikaUserInterface : DrikaElement{
 		return null;
 	}
 
+	// Loop over all the functions in the current DHS to find User Interface functions.
 	array<DrikaUserInterface@> GetAllUIElements(){
 		array<DrikaUserInterface@> collection;
 		for(uint i = 0; i < drika_elements.size(); i++){
@@ -213,16 +239,8 @@ class DrikaUserInterface : DrikaElement{
 		return collection;
 	}
 
-	void PostInit(){
-		UpdateExternalResource();
-		//The font needs to be available from the start so that during editing the text are using the correct font.
-		if(ui_function == ui_font){
-			AddUIElement();
-		}
-		SendUIInstruction("set_z_order", {index});
-		button_line.PostInit();
-	}
-
+	// SaveData is not only used to save it to a level xml, but also for checkpoints and create UI Elements in drika_controller.
+	// Since it has all the information needed to create the UI, just send over all of it and let the controller pick the data it needs.
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["ui_function"] = JSONValue(ui_function);
@@ -339,7 +357,6 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void DrawSettings(){
-
 		float option_name_width = 140.0;
 
 		ImGui_Columns(2, false);
@@ -768,6 +785,8 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
+	// Tweening is used for all the update behaviors, so to prevent duplicate code,
+	// this function draws all of the Dear Imgui tween settings.
 	void DrawSelectTween(string name, int &inout tween_type, int &inout duration, ivec2 &inout offset){
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text(name + " Duration");
@@ -828,14 +847,23 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
+	// The StartEdit function is called when the user clicks on this function in the DHS list.
 	void StartEdit(){
+		// Tell the drika_controller that we want to start editing a UI element.
+		// This will display the grid if that option is enabled and tells the drika_controller which hotspot id to send messages to.
 		SendLevelMessage("drika_edit_ui", {true, hotspot.GetID(), show_grid, ui_snap_scale});
 		AddUIElement();
+		// This message is send to the ui_element in the drika_controller ui_elements array.
 		SendLevelMessage("drika_ui_set_editing", {true});
 	}
 
 	bool AddUIElement(){
+		// To add the UI Element to screen we send of a bunch of data to the drika_controller.
+		// This included everything that is saved to the level xml in JSON **plus** some extra values.
 		if(ui_function == ui_clear){
+			// To clear the UI we just loop over all the functions and check if it's a User Interface function.
+			// Then we request it to remove itself from the screen.
+			// This means two different hotspots can display elements without removing each other's content.
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
 			for(uint i = 0; i < target_elements.size(); i++){
 				//Make sure the fonts are still available when clearing the screen.
@@ -843,6 +871,8 @@ class DrikaUserInterface : DrikaElement{
 					target_elements[i].RequestRemoveUIElement();
 				}
 			}
+
+			// We still need to "add" the clear element to the drika_controller so that it can hide the cursor if a button was shown.
 			JSONValue data = GetSaveData();
 			data["type"] = JSONValue(ui_clear);
 			SendJSONMessage("drika_ui_add_element", data);
@@ -908,8 +938,9 @@ class DrikaUserInterface : DrikaElement{
 		JSON data;
 		data.getRoot() = json_value;
 
-		//Level messages strip out the " so add an extra \ to prevent this.
+		// Convert the JSONValue into a string so that it can be send to the level.
 		string json_string = data.writeString(false);
+		// Level messages strip out the " so add an extra \ to prevent this.
 		json_string = join(json_string.split("\""), "\\\"");
 
 		msg += "\"" + json_string + "\"";
@@ -938,8 +969,9 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void ReadUIInstruction(array<string> instruction){
-		//This function comes from the ui_element on screen -> drika_controller levelscript -> drika_hotspot -> here.
+		// This function comes from the ui_element on screen -> drika_controller levelscript -> drika_hotspot -> here.
 		/* Log(warning, "Got instruction " + instruction[0]); */
+		// When an Image gets dragged or resized it send a message back to this function to keep size and position the same between classes.
 		if(instruction[0] == "set_position"){
 			position.x = atoi(instruction[1]);
 			position.y = atoi(instruction[2]);
@@ -949,6 +981,8 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
+	// Receive an event back from the drika_controller like button presses.
+	// This can later be expanded upon with interactive elements like slider, text inputs etc.
 	void ReadUIFunctionEvent(array<string> instruction){
 		if(instruction[0] == "button_clicked"){
 			if(button_line !is null && !show_editor){
@@ -958,18 +992,25 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
+	// The user clicks on a different function or closes DHS.
+	// Tell drika_controller to stop showing the grid and the UI Element that editing has stopped.
 	void EditDone(){
 		SendLevelMessage("drika_edit_ui", {false});
 		SendLevelMessage("drika_ui_set_editing", {false});
 	}
 
+	// The user has edited the settings of this function and closed the Edit window.
 	void ApplySettings(){
 		SendRemoveUpdatebehaviour();
+		// The UI Font should only update once when the settings are closed.
+		// Doing this on every settings change can cause issues. Like sliders changing the font size for example.
+		// That will delete and create a new font very rapidly.
 		if(ui_function == ui_font){
 			SendFontHasChanged();
 		}
 	}
 
+	// Is called when the user presses L or the level is reset by code.
 	void Reset(){
 		RemoveUIElement();
 	}
@@ -1007,12 +1048,15 @@ class DrikaUserInterface : DrikaElement{
 	}
 
 	void SendFontHasChanged(){
+		// This function is only used by Font.
+		// Go over all the Text and Buttons that use this Font and tell them the font settings have changed.
 		for(uint i = 0; i < text_elements.size(); i++){
 			text_elements[i].FontHasChanged();
 		}
 	}
 
 	void FontHasChanged(){
+		// An empty font identifier is used to tell drika_controller to use the default font.
 		if(font_element is null){
 			SendUIInstruction("font_changed", {""});
 		}else{

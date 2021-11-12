@@ -725,6 +725,7 @@ void ReceiveMessage(string msg){
 	}else if(token == "drika_ui_add_element"){
 		token_iter.FindNextToken(msg);
 		string json_string = token_iter.GetToken(msg);
+		// Get all the JSON from the message as a string. It is later converted into a JSONValue.
 		AddUIElement(json_string);
 	}else if(token == "drika_ui_remove_element"){
 		token_iter.FindNextToken(msg);
@@ -897,6 +898,8 @@ void ReceiveMessage(string msg){
 
 		hotspot_obj.ReceiveScriptMessage(return_msg);
 	}else if(token == "drika_variable_changed"){
+		// Tell all the ui elements that a variable has changed.
+		// The UI Element can choose what to do next, like update it's text for example.
 		for(uint i = 0; i < ui_elements.size(); i++){
 			ui_elements[i].ReadUIInstruction({"variable_changed"});
 		}
@@ -906,6 +909,7 @@ void ReceiveMessage(string msg){
 void AddUIElement(string json_string){
 	JSON data;
 
+	// Convert the string from the message into JSON.
 	if(!data.parseString(json_string)){
 		Log(warning, "Unable to parse the JSON in the UI JSON Data!");
 	}else{
@@ -916,6 +920,7 @@ void AddUIElement(string json_string){
 			case ui_clear:
 				SetGrabMouse(true);
 				showing_interactive_ui = false;
+				// Don't add a new ui_element to the array, just grab the mouse and return.
 				return;
 			case ui_image:
 				@new_element = DrikaUIImage(json_data);
@@ -936,6 +941,7 @@ void AddUIElement(string json_string){
 				break;
 		}
 
+		// Store the original json string in the class so that it can be used by the checkpoint system.
 		new_element.json_string = json_string;
 		@current_ui_element = @new_element;
 		ui_elements.insertLast(new_element);
@@ -1383,7 +1389,7 @@ void LoadCheckpoint(string load_name){
 		}
 	}
 
-	//Restore all the ui elements that were on the screen.
+	// Restore all the ui elements that were on the screen when the checkpoint was saved.
 	@current_ui_element = null;
 	for(uint i = 0; i < ui_elements.size(); i++){
 		ui_elements[i].Delete();
