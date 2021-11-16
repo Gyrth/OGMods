@@ -452,7 +452,7 @@ class DrikaReadWriteSaveFile : DrikaElement{
 
 	string CleanString(string my_string){
 		for (int i = int(my_string.length()) - 1; i >= 0; i--){
-			if(my_string[i] == "["[0] || my_string[i] == "]"[0]){
+			if(my_string[i] == "["[0] || my_string[i] == "]"[0]|| my_string[i] == "{"[0]|| my_string[i] == "}"[0]){
 				my_string.erase(i, 1);
 			}
 		}

@@ -1,9 +1,20 @@
+enum drika_input_box_modes	{
+								everything,
+								onlynumbers,
+								onlyletters
+							};
+
 class DrikaUserInterface : DrikaElement{
 	ui_functions ui_function;
+	drika_input_box_modes drika_input_box_mode;
 	int current_ui_function;
 	string image_path;
 
 	string button_image_path;
+
+	string input_image_path;
+	int input_max_length;
+	int current_input_box_mode;
 
 	DrikaGoToLineSelect@ button_line;
 
@@ -18,6 +29,8 @@ class DrikaUserInterface : DrikaElement{
 	array<string> content;
 	string text_content;
 	string button_text;
+	string input_text; //The actual text content stored
+	string input_variable; //The name of the variable used to store it in
 	string ui_element_identifier;
 	bool ui_element_added = false;
 	string font_name;
@@ -47,13 +60,20 @@ class DrikaUserInterface : DrikaElement{
 	int move_out_tween_type;
 	ivec2 move_out_offset;
 
-	array<string> ui_function_names =	{
-											"Clear",
-											"Image",
-											"Text",
-											"Font",
-											"Button"
-										};
+	array<string> ui_function_names =		{
+												"Clear",
+												"Image",
+												"Text",
+												"Font",
+												"Button",
+												"Input Box"
+											};
+
+	array<string> input_box_mode_names =	{
+												"All Inputs",
+												"Only Numbers",
+												"Only Letters"
+											};
 
 	DrikaUserInterface(JSONValue params = JSONValue()){
 		ui_function = ui_functions(GetJSONInt(params, "ui_function", ui_clear));
@@ -62,6 +82,11 @@ class DrikaUserInterface : DrikaElement{
 		image_path = GetJSONString(params, "image_path", "Textures/ui/menus/credits/overgrowth.png");
 
 		button_image_path = GetJSONString(params, "button_image_path", "Textures/ui/menus/main/button-diamond.png");
+
+		input_image_path = GetJSONString(params, "input_image_path", "Textures/ui/menus/main/button-back-rect.png");
+		input_max_length = GetJSONInt(params, "input_max_length", 100);
+		drika_input_box_mode = drika_input_box_modes(GetJSONInt(params, "drika_input_box_mode", everything));
+		current_input_box_mode = drika_input_box_mode;
 
 		@button_line = DrikaGoToLineSelect("button_line", params);
 
@@ -100,6 +125,7 @@ class DrikaUserInterface : DrikaElement{
 
 		text_content = GetJSONString(params, "text_content", "Example Text");
 		button_text = GetJSONString(params, "button_text", "Click Here");
+		input_variable = GetJSONString(params, "input_variable", "drika_input_box");
 		// This identifier is used to get the messages between the hotspot and levelscript to the right objects.
 		// So for example this Text function is linked to a UIText element in drika_controller's ui_elements array.
 		ui_element_identifier = GetUniqueID();
@@ -116,6 +142,12 @@ class DrikaUserInterface : DrikaElement{
 		}
 		SendUIInstruction("set_z_order", {index});
 		button_line.PostInit();
+
+		if(CheckParamExists(input_variable) == true){
+			input_text = ReadParamValue(input_variable);
+		}else{
+			input_text = "";
+		}
 	}
 
 	// Checkpoints are saved and loaded in drika_controller.as levelscript.
@@ -143,7 +175,7 @@ class DrikaUserInterface : DrikaElement{
 	// This function is called when the user is reordering the function list or when this function is added to the list.
 	// This can be when the level loads or when the user adds a new User Interface function.
 	void UpdateExternalResource(){
-		if(ui_function == ui_text || ui_function == ui_button){
+		if(ui_function == ui_text || ui_function == ui_button || ui_function == ui_input){
 			DrikaUserInterface@ new_font_element = GetPreviousUIElementOfType({ui_font});
 			// Register this Text or Button with the Font so that it can send messages back when the font changes settings.
 			if(new_font_element !is font_element){
@@ -332,6 +364,24 @@ class DrikaUserInterface : DrikaElement{
 			data["size"].append(size.y);
 			data["button_text"] = JSONValue(button_text);
 			button_line.SaveGoToLine(data);
+		}else if(ui_function == ui_input){
+			data["input_image_path"] = JSONValue(input_image_path);
+			data["input_max_length"] = JSONValue(input_max_length);
+			data["keep_aspect"] = JSONValue(keep_aspect);
+			data["rotation"] = JSONValue(rotation);
+			data["position"] = JSONValue(JSONarrayValue);
+			data["position"].append(position.x);
+			data["position"].append(position.y);
+			data["color"] = JSONValue(JSONarrayValue);
+			data["color"].append(color.x);
+			data["color"].append(color.y);
+			data["color"].append(color.z);
+			data["color"].append(color.a);
+			data["size"] = JSONValue(JSONarrayValue);
+			data["size"].append(size.x);
+			data["size"].append(size.y);
+			data["input_variable"] = JSONValue(input_variable);
+			data["drika_input_box_mode"] = JSONValue(drika_input_box_mode);
 		}
 		return data;
 	}
@@ -351,6 +401,8 @@ class DrikaUserInterface : DrikaElement{
 			string display_line = button_line.GetTargetLineIndex();
 			string displayed_text = button_text != "" ? button_text : image_path;
 			display_string += "\"" + displayed_text + "\", target Line " + display_line;
+		}else if(ui_function == ui_input){
+			display_string += input_box_mode_names[current_input_box_mode]  + ", target var \"" + input_variable + "\"";
 		}
 
 		return display_string;
@@ -712,9 +764,141 @@ class DrikaUserInterface : DrikaElement{
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
+
+		}else if(ui_function == ui_input){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Input Box Image");
+			ImGui_NextColumn();
+			if(ImGui_Button("Set Box Image")){
+				string new_path = GetUserPickedReadPath("png", "Data/Images");
+				if(new_path != ""){
+					new_path = ShortenPath(new_path);
+					//Remove the Data/ in the beginning of the path because IMImage starts in Data/.
+					array<string> split_path = new_path.split("/");
+					split_path.removeAt(0);
+					input_image_path = join(split_path, "/");
+					SendUIInstruction("set_input_image_path", {input_image_path});
+				}
+			}
+			ImGui_SameLine();
+			ImGui_Text(button_image_path);
+			ImGui_NextColumn();
+
+			ImGui_Separator();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Position");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width/2);
+			if(ImGui_DragInt("##Input Position X", position.x, 1.0, 0, 2560, "%.0f")){
+				SendUIInstruction("set_position", {position.x, position.y});
+			}
+			ImGui_SameLine();
+			if(ImGui_DragInt("##Input Position Y", position.y, 1.0, 0, 1440, "%.0f")){
+				SendUIInstruction("set_position", {position.x, position.y});
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Size");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width/2);
+			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
+				SendUIInstruction("set_size", {size.x, size.y});
+			}
+			ImGui_SameLine();
+			if(ImGui_DragInt("##size_y", size.y, 1.0, 1.0f, 1000, "%.0f")){
+				SendUIInstruction("set_size", {size.x, size.y});
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Rotation");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_SliderFloat("###Input Rotation", rotation, -360, 360, "%.0f")){
+				SendUIInstruction("set_rotation", {rotation});
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Color");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_ColorEdit4("###Color", color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
+				SendUIInstruction("set_color", {color.x, color.y, color.z, color.a});
+			}
+			ImGui_PopItemWidth();
+
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Keep aspect ratio");
+			ImGui_NextColumn();
+			if(ImGui_Checkbox("##Input keep aspect ratio", keep_aspect)){
+				SendUIInstruction("set_aspect_ratio", {keep_aspect});
+			}
+			ImGui_NextColumn();
+			ImGui_Separator();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Max Input Length");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_SliderInt("###Max Input Length", input_max_length, 0, 100, "%.0f")){
+				SendUIInstruction("set_input_max_length", {input_max_length});
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Input Box Mode");
+			ImGui_NextColumn();
+			second_column_width = ImGui_GetContentRegionAvailWidth();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_Combo("##Input Box Mode", current_input_box_mode, input_box_mode_names, input_box_mode_names.size())){
+				drika_input_box_mode = drika_input_box_modes(current_input_box_mode);
+				SendUIInstruction("set_input_box_mode", {drika_input_box_mode});
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Input Variable");
+			ImGui_NextColumn();
+			ImGui_SetTextBuf(input_variable);
+			ImGui_PushItemWidth(second_column_width);
+
+			if(ImGui_InputText( "##INPUT VARIABLE", ImGuiInputTextFlags_AllowTabInput)){
+				input_variable = ImGui_GetTextBuf();
+
+				for(int i = 0; i < int(input_variable.length()); i++)
+				{
+					if (input_variable[i] == "\""[0])
+					{
+						input_variable.insert(i, "\\");
+						i++;
+					}
+				}
+
+				SendUIInstruction("set_content", {("\"" + input_variable + " " + "\"")});
+			}
+
+			if (CheckParamExists(input_variable) == true && input_variable != ""){
+				ImGui_NextColumn();
+				ImGui_NextColumn();
+				ImGui_Text("Variable " + input_variable + " is set to " + ReadParamValue(input_variable));
+			}
+
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
 		}
 
-		if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button){
+		if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button || ui_function == ui_input){
 			//Fade in UI-------------------------------------------------------------------------------------------------
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Fade In");
@@ -847,6 +1031,15 @@ class DrikaUserInterface : DrikaElement{
 		}
 	}
 
+	string ReadParamValue(string key){
+		SavedLevel@ data = save_file.GetSavedLevel("drika_data");
+		return data.GetValue(key);
+	}
+
+	bool CheckParamExists(string key){
+		return ReadParamValue("[" + key + "]") == "true";
+	}
+
 	// The StartEdit function is called when the user clicks on this function in the DHS list.
 	void StartEdit(){
 		// Tell the drika_controller that we want to start editing a UI element.
@@ -867,7 +1060,7 @@ class DrikaUserInterface : DrikaElement{
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
 			for(uint i = 0; i < target_elements.size(); i++){
 				//Make sure the fonts are still available when clearing the screen.
-				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text || target_elements[i].ui_function == ui_button){
+				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text || target_elements[i].ui_function == ui_button || target_elements[i].ui_function == ui_input){
 					target_elements[i].RequestRemoveUIElement();
 				}
 			}
@@ -916,6 +1109,23 @@ class DrikaUserInterface : DrikaElement{
 			if(!ui_element_added){
 				JSONValue data = GetSaveData();
 				data["type"] = JSONValue(ui_button);
+				data["index"] = JSONValue(index);
+				data["hotspot_id"] = JSONValue(hotspot.GetID());
+				if(font_element is null){
+					data["font_id"] = JSONValue("");
+				}else{
+					data["font_id"] = JSONValue(font_element.ui_element_identifier);
+				}
+				SendJSONMessage("drika_ui_add_element", data);
+			}
+			SendRemoveUpdatebehaviour();
+			SendInUpdateBehaviour();
+			ui_element_added = true;
+
+		}else if(ui_function == ui_input){
+			if(!ui_element_added){
+				JSONValue data = GetSaveData();
+				data["type"] = JSONValue(ui_input);
 				data["index"] = JSONValue(index);
 				data["hotspot_id"] = JSONValue(hotspot.GetID());
 				if(font_element is null){
@@ -1017,7 +1227,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void RemoveUIElement(){
 		if(ui_element_added){
-			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_font || ui_function == ui_button){
+			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_font || ui_function == ui_button || ui_function == ui_input){
 				SendLevelMessage("drika_ui_remove_element");
 				ui_element_added = false;
 			}
@@ -1026,7 +1236,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void RequestRemoveUIElement(){
 		if(ui_element_added){
-			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button){
+			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button || ui_function == ui_input){
 				if(use_fade_out || use_move_out){
 					SendOutUpdateBehaviour();
 					if(!show_editor){

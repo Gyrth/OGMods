@@ -7,6 +7,7 @@
 #include "drika_ui_text.as"
 #include "drika_ui_font.as"
 #include "drika_ui_button.as"
+#include "drika_ui_input.as"
 #include "drika_dialogue_functions.as"
 
 bool animating_camera = false;
@@ -936,6 +937,11 @@ void AddUIElement(string json_string){
 				showing_interactive_ui = true;
 				@new_element = DrikaUIButton(json_data);
 				break;
+			case ui_input:
+				SetGrabMouse(false);
+				showing_interactive_ui = true;
+				@new_element = DrikaUIInput(json_data);
+				break;
 			default:
 				Log(warning, "Unknown ui element type: " + json_data["type"].asInt());
 				break;
@@ -1555,6 +1561,9 @@ void Update(){
 
 		if(message.name == "drika_button_go_to_line"){
 			GetUIElement(message.getString(0)).ReadUIInstruction({"button_clicked"});
+		}
+		if(message.name == "drika_input_clicked"){
+			GetUIElement(message.getString(0)).ReadUIInstruction({"input_clicked"});
 		}
 	}
 

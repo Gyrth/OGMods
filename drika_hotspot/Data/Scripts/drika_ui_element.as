@@ -3,7 +3,8 @@ enum drika_ui_element_types	{
 								drika_ui_image,
 								drika_ui_text,
 								drika_ui_font,
-								drika_ui_button
+								drika_ui_button,
+								drika_ui_input
 							};
 
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);

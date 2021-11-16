@@ -23,7 +23,8 @@ enum ui_functions	{
 						ui_image = 1,
 						ui_text = 2,
 						ui_font = 3,
-						ui_button = 4
+						ui_button = 4,
+						ui_input = 5
 					}
 
 array<string> tween_types = {
