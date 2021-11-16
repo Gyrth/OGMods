@@ -1861,7 +1861,7 @@ void SetCameraPosition(){
 		camera.SetDistance(0.0f);
 		camera.SetFOV(camera_zoom);
 		UpdateListener(camera_position, vec3(0.0f), camera.GetFacing(), camera.GetUpVector());
-		if(!showing_choice){
+		if(!showing_choice && !showing_interactive_ui){
 			SetGrabMouse(true);
 		}
 	}
