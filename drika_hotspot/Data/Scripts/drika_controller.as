@@ -919,7 +919,9 @@ void AddUIElement(string json_string){
 
 		switch(json_data["type"].asInt()) {
 			case ui_clear:
-				SetGrabMouse(true);
+				if(!EditorModeActive()){
+					SetGrabMouse(true);
+				}
 				showing_interactive_ui = false;
 				// Don't add a new ui_element to the array, just grab the mouse and return.
 				return;
