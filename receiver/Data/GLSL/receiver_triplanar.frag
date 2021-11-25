@@ -1595,11 +1595,13 @@ void main() {
                 float env_ambient_mult = 1.0;
                 float roughness = 1.0;
 
+				vec3 decal_diffuse_color = vec3(0.0);
+
                 #if !defined(NO_DECALS)
                     float spec_amount = 0.0;
                     vec3 flame_final_color = vec3(0.0, 0.0, 0.0);;
                     float flame_final_contrib = 0.0;
-                    CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
+                    CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, decal_diffuse_color, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
                 #endif
 
                 #if defined(SSAO_TEST)
@@ -1638,6 +1640,8 @@ void main() {
                 #endif
 
                 CALC_DIRECT_DIFFUSE_COLOR
+
+				 diffuse_color += decal_diffuse_color;
 
                 if(!use_amb_cube){
                     diffuse_color += LookupCubemapSimpleLod(ws_normal, spec_cubemap, 5.0) * GetAmbientContrib(1.0) * ambient_mult * env_ambient_mult;
@@ -1748,9 +1752,10 @@ void main() {
                 float preserve_wetness = 1.0;
                 float ambient_mult = 1.0;
                 float env_ambient_mult = 1.0;
+				vec3 decal_diffuse_color = vec3(0.0);
 
                 #if !defined(NO_DECALS)
-                    CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
+                    CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, decal_diffuse_color, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
 
                     if(ws_normal == vec3(-1.0)){
                         discard;
@@ -1824,6 +1829,7 @@ void main() {
                 #endif
 
                 diffuse_color += ambient_color * GetAmbientContrib(1.0) * env_ambient_mult;
+				diffuse_color += decal_diffuse_color;  // Is zero if decals aren't enabled
 
                 CalculateLightContribParticle(diffuse_color, world_vert, light_val);
 
@@ -2618,6 +2624,8 @@ void main() {
                     float extra_froth = 0.0;
                 #endif
 
+				vec3 decal_diffuse_color = vec3(0.0);
+
                 #if !defined(NO_DECALS)
                     #if defined(INSTANCED_MESH)
                         vec4 old_colormap = colormap;
@@ -2633,7 +2641,7 @@ void main() {
                     #endif
 
                     {
-                        CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
+                        CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, decal_diffuse_color, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
                     }
 
                     #if defined(WATER)
@@ -2748,6 +2756,8 @@ void main() {
                 #endif
 
                 CALC_DIRECT_DIFFUSE_COLOR
+
+				diffuse_color += decal_diffuse_color;  // Is zero if decals aren't enabled
 
                 bool use_amb_cube = false;
                 bool use_3d_tex = false;
