@@ -21,7 +21,9 @@ enum state_choices { 	awake = 0,
 						check_temp_health = 20,
 						check_permanent_health = 21,
 						current_animation = 22,
-						ray_collides_with = 23
+						ray_collides_with = 23,
+						on_ground = 24,
+						dhs_is_player = 25
 					}
 
 enum AIGoal {
@@ -75,7 +77,7 @@ class HealthData{
 }
 
 class DrikaCheckCharacterState : DrikaElement{
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage", "Blood Damage", "Blood Health", "Block Health", "Temp Health", "Permanent Health", "Current Animation", "Ray Collides With"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage", "Blood Damage", "Blood Health", "Block Health", "Temp Health", "Permanent Health", "Current Animation", "Ray Collides With", "On Ground", "Is Player"};
 	state_choices state_choice;
 	int current_state_choice;
 	bool equals = true;
@@ -617,9 +619,11 @@ class DrikaCheckCharacterState : DrikaElement{
 					if (contact_found){break;}
 				}
 				state = !contact_found;
+			}else if (state_choice == on_ground){
+				state = target.GetIntVar("on_ground") == 1;
+			}else if (state_choice == dhs_is_player){
+				state = target.is_player;
 			}
-
-
 
 			if(!check_all && state == equals){
 				all_in_state = true;
