@@ -232,13 +232,13 @@ uniform vec3 cam_pos;
 	#else
 		#define INSTANCED_MESH
 
-		const int kMaxInstances = 100;
+		const int kMaxInstances = 256;
 
 		struct Instance {
-			mat4 model_mat;
-			mat3 model_rotation_mat;
+			vec3 model_scale;
+			vec4 model_rotation_quat;
 			vec4 color_tint;
-			vec4 detail_scale;
+			vec4 detail_scale;  // TODO: DETAILMAP4 only?
 		};
 
 		uniform InstanceInfo {
@@ -331,14 +331,6 @@ in vec3 world_vert;
 			#define tan_to_obj tan_to_obj_fs
 		#else
 			in mat3 tan_to_obj;
-		#endif
-	#endif
-
-	#if defined(DETAILMAP4)
-		in mat3 model_rotation_mat_inv;
-
-		#if defined(AXIS_UV)
-			in mat4 model_mat_inv;
 		#endif
 	#endif
 
@@ -1051,6 +1043,17 @@ float CloudShadow(vec3 pos){
 	#endif
 }
 
+
+vec3 quat_mul_vec3(vec4 q, vec3 v) {
+	// Adapted from https://github.com/g-truc/glm/blob/master/glm/detail/type_quat.inl
+	// Also from Fabien Giesen, according to - https://blog.molecular-matters.com/2013/05/24/a-faster-quaternion-vector-multiplication/
+	vec3 quat_vector = q.xyz;
+	vec3 uv = cross(quat_vector, v);
+	vec3 uuv = cross(quat_vector, uv);
+	return v + ((uv * q.w) + uuv) * 2;
+}
+
+
 void main() {
 	#if defined(INVISIBLE) && !defined(COLLISION)
 		discard;
@@ -1232,8 +1235,13 @@ void main() {
 			vec3 dir = (world_vert.xyz - cam_pos) / dist;
 			vec3 right = cross(dir, up);
 			up = cross(dir, right);
-			out_color.xyz = LookupCubemapSimpleLod(normalize(world_vert.xyz - cam_pos)+right*(tex_coord[0]-0.5)*2.0+up*(tex_coord[1]-0.5)*2.0, tex3, 0.0).xyz;
+			#if !defined(GPU_PARTICLE_FIELD_SIMPLE)
+				out_color.xyz = LookupCubemapSimpleLod(normalize(world_vert.xyz - cam_pos)+right*(tex_coord[0]-0.5)*2.0+up*(tex_coord[1]-0.5)*2.0, tex3, 0.0).xyz;
+			#endif
 			out_color.xyz *= 1.0 + primary_light_color.x * 2.0 * max(0.0, (dot(dir, ws_light)*0.5+0.5))*max(0.0, dir.y+0.1);
+			#if defined(GPU_PARTICLE_FIELD_SIMPLE)
+				out_color.a *= 0.1;
+			#endif
 		#endif
 
 		//out_color.xyz = vec3(tex_coord[0]-0.5);
@@ -1595,11 +1603,13 @@ void main() {
 				float env_ambient_mult = 1.0;
 				float roughness = 1.0;
 
+				vec3 decal_diffuse_color = vec3(0.0);
+
 				#if !defined(NO_DECALS)
 					float spec_amount = 0.0;
 					vec3 flame_final_color = vec3(0.0, 0.0, 0.0);;
 					float flame_final_contrib = 0.0;
-					CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
+					CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, decal_diffuse_color, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
 				#endif
 
 				#if defined(SSAO_TEST)
@@ -1638,6 +1648,8 @@ void main() {
 				#endif
 
 				CALC_DIRECT_DIFFUSE_COLOR
+
+				diffuse_color += decal_diffuse_color;  // Is zero if decals aren't enabled
 
 				if(!use_amb_cube){
 					diffuse_color += LookupCubemapSimpleLod(ws_normal, spec_cubemap, 5.0) * GetAmbientContrib(1.0) * ambient_mult * env_ambient_mult;
@@ -1748,9 +1760,10 @@ void main() {
 				float preserve_wetness = 1.0;
 				float ambient_mult = 1.0;
 				float env_ambient_mult = 1.0;
+				vec3 decal_diffuse_color = vec3(0.0);
 
 				#if !defined(NO_DECALS)
-					CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
+					CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, decal_diffuse_color, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
 
 					if(ws_normal == vec3(-1.0)){
 						discard;
@@ -1823,6 +1836,7 @@ void main() {
 				#endif
 
 				diffuse_color += ambient_color * GetAmbientContrib(1.0) * env_ambient_mult;
+				diffuse_color += decal_diffuse_color;  // Is zero if decals aren't enabled
 
 				CalculateLightContribParticle(diffuse_color, world_vert, light_val);
 
@@ -1988,15 +2002,6 @@ void main() {
 						return;
 					#endif
 
-					#if !defined(TERRAIN)
-						vec3 temp_scale;
-						{
-							mat3 temp_mat = mat3(instances[instance_id].model_mat[0].xyz, instances[instance_id].model_mat[1].xyz, instances[instance_id].model_mat[2].xyz);
-							temp_mat = model_rotation_mat_inv * temp_mat;
-							temp_scale = vec3(temp_mat[0][0], temp_mat[1][1], temp_mat[2][2]);
-						}
-					#endif
-
 					vec4 weight_map = GetWeightMap(weight_tex, base_tex_coords);
 
 					#if defined(HEIGHT_BLEND)
@@ -2038,19 +2043,19 @@ void main() {
 						base_bitangent *= 1.0 - step(dot(base_bitangent, tan_to_obj[1]),0.0) * 2.0;
 
 						{
-							if(temp_scale[0] < 0.0){
+							if(instances[instance_id].model_scale[0] < 0.0){
 								base_tangent[0] *= -1.0;
 								base_bitangent[0] *= -1.0;
 								base_normal[0] *= -1.0;
 							}
 
-							if(temp_scale[1] < 0.0){
+							if(instances[instance_id].model_scale[1] < 0.0){
 								base_tangent[1] *= -1.0;
 								base_bitangent[1] *= -1.0;
 								base_normal[1] *= -1.0;
 							}
 
-							if(temp_scale[2] < 0.0){
+							if(instances[instance_id].model_scale[2] < 0.0){
 								base_tangent[2] *= -1.0;
 								base_bitangent[2] *= -1.0;
 								base_normal[2] *= -1.0;
@@ -2065,7 +2070,7 @@ void main() {
 					#if defined(AXIS_BLEND) && !defined(TERRAIN) && !defined(AXIS_UV)
 						float axis_blend_scale = 0.15;
 						{
-							vec3 rotated_base_normal = instances[instance_id].model_rotation_mat * base_normal;
+							vec3 rotated_base_normal = quat_mul_vec3(instances[instance_id].model_rotation_quat, base_normal);
 							float temp = 2;
 							weight_map[0] = pow(abs(rotated_base_normal.x),temp);
 							weight_map[1] = pow(max(0.0, rotated_base_normal.y),temp);
@@ -2094,13 +2099,10 @@ void main() {
 							normalmap = vec4(0.0);
 
 							if(detail_fade < 1.0){
-								vec3 temp_pos = (model_mat_inv * vec4(world_vert, 1.0)).xyz;
-								temp_pos *= temp_scale;
-
 								vec2 temp_uv;
 								temp_uv = base_tex_coords;
-								temp_uv.x *= abs(dot(temp_scale, base_tangent));
-								temp_uv.y *= abs(dot(temp_scale, base_bitangent));
+								temp_uv.x *= abs(dot(instances[instance_id].model_scale, base_tangent));
+								temp_uv.y *= abs(dot(instances[instance_id].model_scale, base_bitangent));
 
 								for(int i=0; i<4; ++i){
 									if(weight_map[i] > 0.0){
@@ -2159,7 +2161,7 @@ void main() {
 						#if defined(TERRAIN)
 							ws_normal = ws_from_ns * normalmap.xyz;
 						#else
-							ws_normal = normalize(instances[instance_id].model_rotation_mat * (ws_from_ns * normalmap.xyz));
+							ws_normal = normalize(quat_mul_vec3(instances[instance_id].model_rotation_quat, ws_from_ns * normalmap.xyz));
 						#endif
 					}
 
@@ -2201,13 +2203,10 @@ void main() {
 						colormap = vec4(0.0);
 
 						if(detail_fade < 1.0){
-							vec3 temp_pos = (model_mat_inv * vec4(world_vert, 1.0)).xyz;
-							temp_pos *= temp_scale;
-
 							vec2 temp_uv;
 							temp_uv = base_tex_coords;
-							temp_uv.x *= abs(dot(temp_scale, base_tangent));
-							temp_uv.y *= abs(dot(temp_scale, base_bitangent));
+							temp_uv.x *= abs(dot(instances[instance_id].model_scale, base_tangent));
+							temp_uv.y *= abs(dot(instances[instance_id].model_scale, base_bitangent));
 
 							for(int i=0; i<4; ++i){
 								if(weight_map[i] > 0.0){
@@ -2434,10 +2433,10 @@ void main() {
 									}
 								#endif
 
-								base_ws_normal = normalize((instances[instance_id].model_rotation_mat * (tan_to_obj * vec3(0,0,1))).xyz);
+								base_ws_normal = normalize(quat_mul_vec3(instances[instance_id].model_rotation_quat, tan_to_obj * vec3(0,0,1)));
 							#endif
 
-							ws_normal = normalize((instances[instance_id].model_rotation_mat * (tan_to_obj * unpacked_normal)).xyz);
+							ws_normal = normalize(quat_mul_vec3(instances[instance_id].model_rotation_quat, tan_to_obj * unpacked_normal));
 
 							#if defined(WATER)
 								//ws_normal = vec3(0,1,0);
@@ -2447,7 +2446,7 @@ void main() {
 					#else
 						vec4 normalmap = texture(tex1,tc0);
 						vec3 os_normal = UnpackObjNormal(normalmap);
-						vec3 ws_normal = instances[instance_id].model_rotation_mat * os_normal;
+						vec3 ws_normal = quat_mul_vec3(instances[instance_id].model_rotation_quat, os_normal);
 					#endif
 
 					#if !defined(WATER)
@@ -2501,6 +2500,7 @@ void main() {
 							if(val == 5){
 								out_color.xyz += vec3(0.0,0.5,0.0);
 							}
+
 							if(val == 6){
 								out_color.xyz += vec3(0.0,0.0,0.5);
 							}
@@ -2604,6 +2604,8 @@ void main() {
 					float extra_froth = 0.0;
 				#endif
 
+				vec3 decal_diffuse_color = vec3(0.0);
+
 				#if !defined(NO_DECALS)
 					#if defined(INSTANCED_MESH)
 						vec4 old_colormap = colormap;
@@ -2619,7 +2621,7 @@ void main() {
 					#endif
 
 					{
-						CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
+						CalculateDecals(colormap, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, decal_diffuse_color, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
 					}
 
 					#if defined(WATER)
@@ -2720,10 +2722,7 @@ void main() {
 						vec3 norm = normalize(cross(X, Y));
 						float slope_dot = dot(norm, ws_light);
 						slope_dot = min(slope_dot, 1);
-						// shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex), slope_dot);
-						#if !defined(SNOW_EVERYWHERE)
-							shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex));
-						#endif
+						shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex), slope_dot);
 					}
 					shadow_tex.r *= ambient_mult;
 				#else
@@ -2737,6 +2736,8 @@ void main() {
 				#endif
 
 				CALC_DIRECT_DIFFUSE_COLOR
+
+				diffuse_color += decal_diffuse_color;  // Is zero if decals aren't enabled
 
 				bool use_amb_cube = false;
 				bool use_3d_tex = false;
