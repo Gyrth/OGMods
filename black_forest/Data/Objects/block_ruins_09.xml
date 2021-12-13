@@ -56,5 +56,10 @@
         <Decal t0="-16.2576" t1="4.84686" t2="-26.5106" s0="7.20907" s1="7.20907" s2="7.20907" q0="-0.707107" q1="0" q2="0" q3="-0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="150" type_file="Data/Objects/Decals/ThickMoss.xml" color_r="1" color_g="1" color_b="1" overbright="0">
             <parameters />
         </Decal>
+		<EnvObject t0="-19.2921" t1="-8.2584" t2="-24.1354" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="151" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

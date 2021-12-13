@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/block_hill5.obj</Model>
+	<ColorMap>Data/Textures/block_basic_c.jpg</ColorMap>
+	<NormalMap>Data/Textures/block_basic_n.png</NormalMap>
+	<WeightMap>Data/Textures/block_basic_cw.png</WeightMap>
+	<DetailMaps>
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/grass_normal.png" materialpath="Data/Materials/dirt.xml" />
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dead_grass.tga" normalpath="Data/Textures/Terrain/DetailTextures/dead_grass_normal.tga" materialpath="Data/Materials/grass.xml" />
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dead_leaves_c.tga" normalpath="Data/Textures/Terrain/DetailTextures/dead_leaves_n.tga" materialpath="Data/Materials/dirt.xml" />
+		<DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt_rubble.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_rubble_normal.tga" materialpath="Data/Materials/dirtyrock.xml" />
+	</DetailMaps>
+	<DetailObjects>
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/WildGrass.xml" weight_path="Data/Textures/block_basic_w.png" normal_conform="1" density="0.5" min_embed="0.2" max_embed="0.4" min_scale="0.7" max_scale="2" view_distance="50" jitter_degrees="10" overbright="0" tint_weight="1" />
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/wild_grass_rocky_mountain.xml" weight_path="Data/Textures/block_basic_w.png" normal_conform="0.9" density="0.5" min_embed="0" max_embed="0.4" min_scale="2" max_scale="3" view_distance="20" jitter_degrees="10" overbright="0.2" tint_weight="1" />
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/GrassSeed.xml" weight_path="Data/Textures/block_basic_w.png" normal_conform="0.000000" density="0.005" min_embed="0.000000" max_embed="0.100000" min_scale="0.800000" max_scale="1.000000" view_distance="50.000000" jitter_degrees="5.000000" overbright="0.400000" />
+		<DetailObject obj_path="Data/Objects/Environment/Rocks/lichen_rock_c.xml" weight_path="Data/Textures/block_basic_w.png" normal_conform="0.900000" density="0.600000" min_embed="0.400000" max_embed="0.600000" min_scale="0.200000" max_scale="0.800000" view_distance="30.000000" jitter_degrees="30.000000" overbright="0.300000" collision_type="static" />
+	</DetailObjects>
+	<ShaderName>envobject #INVISIBLE</ShaderName>
+	<flags no_collision=true/>
+</Object>

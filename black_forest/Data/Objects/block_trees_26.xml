@@ -41,5 +41,10 @@
         <EnvObject t0="-71.1775" t1="89.281" t2="-92.0388" s0="1.45292" s1="1.45292" s2="1.45292" q0="-0.0133787" q1="-0.510792" q2="0.0133662" q3="0.859494" euler_x="-0.0765571" euler_y="-1.07102" euler_z="0.0765388" id="327" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/lichen_rubble.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="-65.1721" t1="80.0104" t2="-86.0872" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="328" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_hill6_detail_objects.xml">
+			<parameters>
+				<parameter name="DetailObjects" type="string" val="1" />
+			</parameters>
+		</EnvObject>
     </Group>
 </ActorObjects>

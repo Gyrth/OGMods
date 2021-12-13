@@ -93,5 +93,10 @@
         <EnvObject t0="10.3633" t1="18.7031" t2="78.5222" s0="1" s1="1" s2="1" q0="0.582997" q1="-0.165898" q2="0.264627" q3="0.750044" id="452" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/IGF_RabbitCiv.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="10.2277" t1="10.0658" t2="77.5377" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="453" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

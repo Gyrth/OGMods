@@ -111,5 +111,10 @@
         <EnvObject t0="9.41298" t1="15.0753" t2="81.68" s0="1" s1="1" s2="1" q0="0" q1="-0.910118" q2="0" q3="0.414349" id="234" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="9.9019" t1="5.05406" t2="74.52" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="235" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

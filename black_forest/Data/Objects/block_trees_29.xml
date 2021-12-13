@@ -29,5 +29,10 @@
         <EnvObject t0="67.4019" t1="10.063" t2="103.254" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.0838101" q3="0.996482" euler_x="0" euler_y="0" euler_z="0.167817" id="345" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/low_fern_.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="75.4095" t1="-36.1291" t2="105.315" s0="4" s1="4" s2="4" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="346" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_hill6_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="string" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

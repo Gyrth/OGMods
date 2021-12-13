@@ -78,5 +78,10 @@
         <EnvObject t0="14.5965" t1="21.1149" t2="77.489" s0="1.04482" s1="1.04482" s2="1.04482" q0="-0.409596" q1="-0.588378" q2="-0.415129" q3="0.560066" id="338" color_r="0.0753556" color_g="0.109804" color_b="0.0849929" overbright="0" type_file="Data/Objects/Buildings/spires/spire_trim.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="10.6535" t1="11.8462" t2="77.6652" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="339" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

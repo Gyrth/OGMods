@@ -23,5 +23,10 @@
         <EnvObject t0="-43.3502" t1="-0.802561" t2="-26.7743" s0="1" s1="1" s2="1" q0="-0.0153491" q1="-0.708583" q2="-0.0318963" q3="0.704738" euler_x="1.76563" euler_y="-1.54671" euler_z="-1.83247" id="133" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="-42.4038" t1="-8.16291" t2="-25.9082" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="134" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+			<parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

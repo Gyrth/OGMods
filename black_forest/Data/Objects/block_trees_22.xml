@@ -29,5 +29,10 @@
         <EnvObject t0="21.874" t1="69.0656" t2="-64.3505" s0="0.71266" s1="0.71266" s2="0.71266" q0="-0.000456631" q1="-0.857815" q2="-0.121894" q3="0.499298" euler_x="2.72509" euler_y="-1.02888" euler_z="-2.90491" id="267" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/evergreen_roots.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="18.1888" t1="59.3025" t2="-57.1085" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="268" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

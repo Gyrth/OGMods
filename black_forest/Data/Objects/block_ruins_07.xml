@@ -38,5 +38,10 @@
         <Decal t0="25.5492" t1="1.1576" t2="-25.794" s0="7.54724" s1="3.65262" s2="7.23115" q0="0" q1="0.0118593" q2="0" q3="0.99993" euler_x="0" euler_y="0.0237192" euler_z="0" id="151" type_file="Data/Objects/Decals/WhiteRocksAndDirt.xml" color_r="1" color_g="1" color_b="1" overbright="0">
             <parameters />
         </Decal>
+		<EnvObject t0="29.0253" t1="-8.2925" t2="-22.4355" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="152" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

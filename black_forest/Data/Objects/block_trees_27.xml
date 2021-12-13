@@ -32,5 +32,10 @@
         <EnvObject t0="-64.0204" t1="0.304244" t2="-67.4289" s0="3.01977" s1="3.01977" s2="3.01977" q0="0" q1="-0.820532" q2="0" q3="0.571601" euler_x="3.14159" euler_y="-1.21691" euler_z="3.14159" id="336" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/evergreen_sapling.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="-70.1054" t1="-10.5538" t2="-68.4893" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="337" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_hill6_detail_objects.xml">
+			<parameters>
+				<parameter name="DetailObjects" type="string" val="1" />
+			</parameters>
+		</EnvObject>
     </Group>
 </ActorObjects>

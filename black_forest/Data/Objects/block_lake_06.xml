@@ -41,5 +41,10 @@
                 <parameter name="Type" type="string" val="Smoke" />
             </parameters>
         </Hotspot>
+		<EnvObject t0="10.2279" t1="10.0662" t2="77.5377" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="335" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

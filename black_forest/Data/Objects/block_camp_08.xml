@@ -44,5 +44,10 @@
         <EnvObject t0="-0.789274" t1="1.52176" t2="-53.8678" s0="1.29866" s1="1.29866" s2="1.29866" q0="0" q1="0.127422" q2="0" q3="0.991849" euler_x="0" euler_y="0.255539" euler_z="0" id="185" color_r="0.666667" color_g="0.596109" color_b="0.504575" overbright="0" type_file="Data/Objects/Environment/camp/bed_roll.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="1.04316" t1="-8.56628" t2="-51.8492" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="186" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

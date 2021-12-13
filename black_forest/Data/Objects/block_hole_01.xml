@@ -110,5 +110,10 @@
                 <parameters />
             </EnvObject>
         </Group>
+		<EnvObject t0="-23.0717" t1="-8.56342" t2="-105.571" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="367" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_hole_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="string" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

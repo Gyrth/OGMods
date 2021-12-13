@@ -38,5 +38,10 @@
         <EnvObject t0="-19.4666" t1="75.7188" t2="-52.8157" s0="1" s1="1" s2="1" q0="0.0736245" q1="-0.883241" q2="0.148214" q3="0.438745" euler_x="-2.80908" euler_y="-0.922079" euler_z="-3.14159" id="278" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall2.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="-16.7894" t1="65.4998" t2="-55.4647" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="279" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

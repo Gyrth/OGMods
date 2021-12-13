@@ -47,5 +47,10 @@
         <Decal t0="-77.0822" t1="-4.64528" t2="-25.884" s0="13.8501" s1="13.8501" s2="13.8501" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" type_file="Data/Objects/Decals/DarkStonyDirt.xml" color_r="1" color_g="1" color_b="1" overbright="0">
             <parameters />
         </Decal>
+		<EnvObject t0="-76.351" t1="-8.78598" t2="-25.9924" s0="0.999839" s1="0.999839" s2="0.999839" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>

@@ -59,5 +59,10 @@
         <EnvObject t0="25.8242" t1="1.69992" t2="-57.9916" s0="1" s1="1" s2="1" q0="-0.271644" q1="0.647005" q2="0.660976" q3="0.265902" euler_x="1.54943" euler_y="0.77986" euler_z="-3.14159" id="176" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
             <parameters />
         </EnvObject>
+		<EnvObject t0="22.7116" t1="-8.56629" t2="-51.8492" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="177" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
     </Group>
 </ActorObjects>
