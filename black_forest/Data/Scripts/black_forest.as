@@ -161,10 +161,6 @@ class BlockType{
 		if(original.GetTranslation() != target_translation){
 			original.SetTranslation(target_translation);
 			original.SetEnabled(false);
-			for(uint i = 0; i < children_ids.size(); i++){
-				Object@ obj = ReadObjectFromID(children_ids[i]);
-				obj.SetTranslation(obj.GetTranslation());
-			}
 		}
 	}
 
