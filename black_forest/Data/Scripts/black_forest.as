@@ -1408,6 +1408,7 @@ void Update() {
 	player_pos = player_char.position;
 	world.BlockUpdate();
 	/* world.DrawDebug(); */
+	/* Log(warning, player_pos.x + "," + player_pos.y + "," + player_pos.z); */
 
 	UpdateMusic();
 	UpdateSounds();
@@ -1450,6 +1451,7 @@ void GetPlayerID(){
 		}
 		MovementObject@ player = ReadCharacterID(player_id);
 		player.static_char = true;
+		/* player.Execute("run_speed = 1000.0f; true_max_speed = 1000.0f"); */
 	}
 }
 
