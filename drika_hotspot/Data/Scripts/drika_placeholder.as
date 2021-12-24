@@ -143,8 +143,10 @@ class DrikaPlaceholder{
 	}
 
 	void SetBoundingBox(Object@ obj){
-		vec3 new_bounding_box = obj.GetBoundingBox();
-		bounding_box = (new_bounding_box == vec3(0.0)?vec3(1.0):new_bounding_box);
+		bounding_box = obj.GetBoundingBox();
+		bounding_box.x = (bounding_box.x == 0.0)?1.0:bounding_box.x;
+		bounding_box.y = (bounding_box.y == 0.0)?1.0:bounding_box.y;
+		bounding_box.z = (bounding_box.z == 0.0)?1.0:bounding_box.z;
 	}
 
 	void RemovePlaceholderObject(){

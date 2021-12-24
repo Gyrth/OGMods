@@ -2,7 +2,8 @@ enum transform_modes	{
 							transform_to_placeholder = 0,
 							transform_to_target = 1,
 							move_towards_target = 2,
-							transform_specific = 3
+							transform_specific = 3,
+							transform_to_hotspot = 4
 						}
 
 
@@ -48,7 +49,8 @@ class DrikaTransformObject : DrikaElement{
 												"Transform To Placeholder",
 												"Transform To Target",
 												"Move To Target",
-												"Transform Specific"
+												"Transform Specific",
+												"Transform To Hotspot"
 											};
 
 	DrikaTransformObject(JSONValue params = JSONValue()){
@@ -185,9 +187,9 @@ class DrikaTransformObject : DrikaElement{
 				placeholder.SetTranslation(targets[i].GetTranslation());
 				placeholder.SetRotation(targets[i].GetRotation());
 				vec3 bounds = targets[i].GetBoundingBox();
-				if(bounds == vec3(0.0)){
-					bounds = vec3(1.0);
-				}
+				bounds.x = (bounds.x == 0.0)?1.0:bounds.x;
+				bounds.y = (bounds.y == 0.0)?1.0:bounds.y;
+				bounds.z = (bounds.z == 0.0)?1.0:bounds.z;
 				placeholder.SetScale(bounds * targets[i].GetScale());
 			}
 		}
@@ -525,6 +527,11 @@ class DrikaTransformObject : DrikaElement{
 				vec3 gizmo_scale = use_target_scale?target_location_objects[j].GetScale():before_scale;
 				DrawGizmo(gizmo_location + translation_offset, gizmo_rotation, gizmo_scale, true);
 			}
+		}else if(transform_mode == transform_to_hotspot){
+			array<Object@> targets = target_select.GetTargetObjects();
+			for(uint i = 0; i < targets.size(); i++){
+				DebugDrawLine(targets[i].GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
+			}
 		}
 	}
 
@@ -544,9 +551,9 @@ class DrikaTransformObject : DrikaElement{
 					if(use_target_scale){
 						vec3 scale = target_location_objects[j].GetScale();
 						vec3 bounds = targets[i].GetBoundingBox();
-						if(bounds == vec3(0.0)){
-							bounds = vec3(1.0);
-						}
+						bounds.x = (bounds.x == 0.0)?1.0:bounds.x;
+						bounds.y = (bounds.y == 0.0)?1.0:bounds.y;
+						bounds.z = (bounds.z == 0.0)?1.0:bounds.z;
 						vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
 						targets[i].SetScale(reset?before_scale:new_scale);
 					}
@@ -560,9 +567,9 @@ class DrikaTransformObject : DrikaElement{
 				SetTargetRotation(targets[i], reset?before_rotation:placeholder.GetRotation());
 				vec3 scale = placeholder.GetScale();
 				vec3 bounds = targets[i].GetBoundingBox();
-				if(bounds == vec3(0.0)){
-					bounds = vec3(1.0);
-				}
+				bounds.x = (bounds.x == 0.0)?1.0:bounds.x;
+				bounds.y = (bounds.y == 0.0)?1.0:bounds.y;
+				bounds.z = (bounds.z == 0.0)?1.0:bounds.z;
 				vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
 				targets[i].SetScale(reset?before_scale:new_scale);
 			}else if(transform_mode == move_towards_target){
@@ -582,59 +589,62 @@ class DrikaTransformObject : DrikaElement{
 				}
 			}else if(transform_mode == transform_specific){
 
-			if(s_transform_to_target_first == true){
-				array<Object@> target_location_objects = target_location.GetTargetObjects();
-				for(uint j = 0; j < target_location_objects.size(); j++){
-					if(use_target_location){
-						SetTargetTranslation(targets[i], reset?before_translation:GetTargetTranslation(target_location_objects[j]) + translation_offset);
-					}
-					if(use_target_rotation){
-						SetTargetRotation(targets[i], reset?before_rotation:GetTargetRotation(target_location_objects[j]));
-					}
-					if(use_target_scale){
-						vec3 scale = target_location_objects[j].GetScale();
-						vec3 bounds = targets[i].GetBoundingBox();
-						if(bounds == vec3(0.0)){
-							bounds = vec3(1.0);
+				if(s_transform_to_target_first == true){
+					array<Object@> target_location_objects = target_location.GetTargetObjects();
+					for(uint j = 0; j < target_location_objects.size(); j++){
+						if(use_target_location){
+							SetTargetTranslation(targets[i], reset?before_translation:GetTargetTranslation(target_location_objects[j]) + translation_offset);
 						}
-						vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
-						targets[i].SetScale(reset?before_scale:new_scale);
+						if(use_target_rotation){
+							SetTargetRotation(targets[i], reset?before_rotation:GetTargetRotation(target_location_objects[j]));
+						}
+						if(use_target_scale){
+							vec3 scale = target_location_objects[j].GetScale();
+							vec3 bounds = targets[i].GetBoundingBox();
+							bounds.x = (bounds.x == 0.0)?1.0:bounds.x;
+							bounds.y = (bounds.y == 0.0)?1.0:bounds.y;
+							bounds.z = (bounds.z == 0.0)?1.0:bounds.z;
+							vec3 new_scale = vec3(scale.x / bounds.x, scale.y / bounds.y, scale.z / bounds.z);
+							targets[i].SetScale(reset?before_scale:new_scale);
+						}
 					}
 				}
+
+				vec3 translation;
+				vec3 scale;
+
+				translation.x = (s_transform_x_relative? GetTargetTranslation(targets[i]).x : 0) + s_transform_x;
+				translation.y = (s_transform_y_relative? GetTargetTranslation(targets[i]).y : 0) + s_transform_y;
+				translation.z = (s_transform_z_relative? GetTargetTranslation(targets[i]).z : 0) + s_transform_z;
+				SetTargetTranslation(targets[i], reset?before_translation:translation);
+
+
+				scale.x = (s_scale_x_relative? targets[i].GetScale().x : 0) + s_scale_x;
+				scale.y = (s_scale_y_relative? targets[i].GetScale().y : 0) + s_scale_y;
+				scale.z = (s_scale_z_relative? targets[i].GetScale().z : 0) + s_scale_z;
+				targets[i].SetScale(reset?before_scale:scale);
+
+				float pi = atan(1)*4.0;
+				quaternion new_rotation =
+				quaternion(vec4(0,1,0,s_rotate_y*pi/180.0f)) *
+				quaternion(vec4(1,0,0,s_rotate_x*pi/180.0f)) *
+				quaternion(vec4(0,0,1,s_rotate_z*pi/180.0f)) *
+				(s_rotate_relative? GetTargetRotation(targets[i]) : quaternion(0,0,0,1));
+
+
+				SetTargetRotation(targets[i], reset?before_rotation:new_rotation);
+
+			}else if(transform_mode == transform_to_hotspot){
+				SetTargetTranslation(targets[i], reset?before_translation:this_hotspot.GetTranslation());
+				SetTargetRotation(targets[i], reset?before_rotation:this_hotspot.GetRotation());
+				targets[i].SetScale(reset?before_scale:vec3(1.0, 1.0, 1.0));
 			}
 
-
-			vec3 translation;
-			vec3 scale;
-
-			translation.x = (s_transform_x_relative? GetTargetTranslation(targets[i]).x : 0) + s_transform_x;
-			translation.y = (s_transform_y_relative? GetTargetTranslation(targets[i]).y : 0) + s_transform_y;
-			translation.z = (s_transform_z_relative? GetTargetTranslation(targets[i]).z : 0) + s_transform_z;
-			SetTargetTranslation(targets[i], reset?before_translation:translation);
-
-
-			scale.x = (s_scale_x_relative? targets[i].GetScale().x : 0) + s_scale_x;
-			scale.y = (s_scale_y_relative? targets[i].GetScale().y : 0) + s_scale_y;
-			scale.z = (s_scale_z_relative? targets[i].GetScale().z : 0) + s_scale_z;
-			targets[i].SetScale(reset?before_scale:scale);
-
-			float pi = atan(1)*4.0;
-			quaternion new_rotation =
-			quaternion(vec4(0,1,0,s_rotate_y*pi/180.0f)) *
-			quaternion(vec4(1,0,0,s_rotate_x*pi/180.0f)) *
-			quaternion(vec4(0,0,1,s_rotate_z*pi/180.0f)) *
-			(s_rotate_relative? GetTargetRotation(targets[i]) : quaternion(0,0,0,1));
-
-
-			SetTargetRotation(targets[i], reset?before_rotation:new_rotation);
-
-			}
+			// TODO Remove this once internal_testing is released. Bug has been fixed there.
 			RefreshChildren(targets[i]);
 		}
 		return true;
 	}
-
-
 
 	void Reset(){
 		if(triggered){
