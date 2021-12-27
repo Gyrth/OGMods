@@ -232,18 +232,28 @@ uniform vec3 cam_pos;
 	#else
 		#define INSTANCED_MESH
 
-		const int kMaxInstances = 256;
+		#if !defined(ATTRIB_ENVOBJ_INSTANCING)
+			#if defined(UBO_BATCH_SIZE_8X)
+				const int kMaxInstances = 256 * 8;
+			#elif defined(UBO_BATCH_SIZE_4X)
+				const int kMaxInstances = 256 * 4;
+			#elif defined(UBO_BATCH_SIZE_2X)
+				const int kMaxInstances = 256 * 2;
+			#else
+				const int kMaxInstances = 256 * 1;
+			#endif
 
-		struct Instance {
-			vec3 model_scale;
-			vec4 model_rotation_quat;
-			vec4 color_tint;
-			vec4 detail_scale;  // TODO: DETAILMAP4 only?
-		};
+			struct Instance {
+				vec3 model_scale;
+				vec4 model_rotation_quat;
+				vec4 color_tint;
+				vec4 detail_scale;  // TODO: DETAILMAP4 only?
+			};
 
-		uniform InstanceInfo {
-			Instance instances[kMaxInstances];
-		};
+			uniform InstanceInfo {
+				Instance instances[kMaxInstances];
+			};
+		#endif
 	#endif
 #endif // PARTICLE
 
@@ -323,7 +333,52 @@ in vec3 world_vert;
 	#endif
 #elif defined(SKY)
 	// Section empty right now
-#else
+#else // static object
+
+	#if defined(ATTRIB_ENVOBJ_INSTANCING)
+		flat in vec3 model_scale_frag;
+		flat in vec4 model_rotation_quat_frag;
+		flat in vec4 color_tint_frag;
+
+		#if defined(DETAILMAP4)
+			flat in vec4 detail_scale_frag;
+		#endif
+	#endif
+
+	vec3 GetInstancedModelScale(int instance_id) {
+		#if defined(ATTRIB_ENVOBJ_INSTANCING)
+			return model_scale_frag;
+		#else
+			return instances[instance_id].model_scale;
+		#endif
+	}
+
+	vec4 GetInstancedModelRotationQuat(int instance_id) {
+		#if defined(ATTRIB_ENVOBJ_INSTANCING)
+			return model_rotation_quat_frag;
+		#else
+			return instances[instance_id].model_rotation_quat;
+		#endif
+	}
+
+	vec4 GetInstancedColorTint(int instance_id) {
+		#if defined(ATTRIB_ENVOBJ_INSTANCING)
+			return color_tint_frag;
+		#else
+			return instances[instance_id].color_tint;
+		#endif
+	}
+
+	#if defined(DETAILMAP4)
+		vec4 GetInstancedDetailScale(int instance_id) {
+			#if defined(ATTRIB_ENVOBJ_INSTANCING)
+				return detail_scale_frag;
+			#else
+				return instances[instance_id].detail_scale;
+			#endif
+		}
+	#endif
+
 	#if defined(TANGENT)
 		#if defined(USE_GEOM_SHADER)
 			in mat3 tan_to_obj_fs;
@@ -1930,11 +1985,11 @@ void main() {
 					vec2 base_tex_coords = frag_tex_coords;
 
 					#if !defined(ITEM)
-						vec4 instance_color_tint = instances[instance_id].color_tint;
+						vec4 instance_color_tint = GetInstancedColorTint(instance_id);
 					#endif
 
 					#if defined(DETAILMAP4)
-						vec2 detail_coords = base_tex_coords*instances[instance_id].detail_scale.xy;
+						vec2 detail_coords = base_tex_coords*GetInstancedDetailScale(instance_id).xy;
 					#endif
 				#endif
 
@@ -2043,19 +2098,19 @@ void main() {
 						base_bitangent *= 1.0 - step(dot(base_bitangent, tan_to_obj[1]),0.0) * 2.0;
 
 						{
-							if(instances[instance_id].model_scale[0] < 0.0){
+							if(GetInstancedModelScale(instance_id)[0] < 0.0){
 								base_tangent[0] *= -1.0;
 								base_bitangent[0] *= -1.0;
 								base_normal[0] *= -1.0;
 							}
 
-							if(instances[instance_id].model_scale[1] < 0.0){
+							if(GetInstancedModelScale(instance_id)[1] < 0.0){
 								base_tangent[1] *= -1.0;
 								base_bitangent[1] *= -1.0;
 								base_normal[1] *= -1.0;
 							}
 
-							if(instances[instance_id].model_scale[2] < 0.0){
+							if(GetInstancedModelScale(instance_id)[2] < 0.0){
 								base_tangent[2] *= -1.0;
 								base_bitangent[2] *= -1.0;
 								base_normal[2] *= -1.0;
@@ -2070,7 +2125,7 @@ void main() {
 					#if defined(AXIS_BLEND) && !defined(TERRAIN) && !defined(AXIS_UV)
 						float axis_blend_scale = 0.15;
 						{
-							vec3 rotated_base_normal = quat_mul_vec3(instances[instance_id].model_rotation_quat, base_normal);
+							vec3 rotated_base_normal = quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), base_normal);
 							float temp = 2;
 							weight_map[0] = pow(abs(rotated_base_normal.x),temp);
 							weight_map[1] = pow(max(0.0, rotated_base_normal.y),temp);
@@ -2101,8 +2156,8 @@ void main() {
 							if(detail_fade < 1.0){
 								vec2 temp_uv;
 								temp_uv = base_tex_coords;
-								temp_uv.x *= abs(dot(instances[instance_id].model_scale, base_tangent));
-								temp_uv.y *= abs(dot(instances[instance_id].model_scale, base_bitangent));
+								temp_uv.x *= abs(dot(GetInstancedModelScale(instance_id), base_tangent));
+								temp_uv.y *= abs(dot(GetInstancedModelScale(instance_id), base_bitangent));
 
 								for(int i=0; i<4; ++i){
 									if(weight_map[i] > 0.0){
@@ -2138,7 +2193,7 @@ void main() {
 								// TODO: would it be possible to reduce this to two samples by using the tex coord z to interpolate?
 								for(int i=0; i<4; ++i){
 									if(weight_map[i] > 0.0){
-										normalmap += texture(detail_normal, vec3(base_tex_coords*instances[instance_id].detail_scale[i], detail_normal_indices[i])) * weight_map[i];
+										normalmap += texture(detail_normal, vec3(base_tex_coords*GetInstancedDetailScale(instance_id)[i], detail_normal_indices[i])) * weight_map[i];
 									}
 								}
 							}
@@ -2161,7 +2216,7 @@ void main() {
 						#if defined(TERRAIN)
 							ws_normal = ws_from_ns * normalmap.xyz;
 						#else
-							ws_normal = normalize(quat_mul_vec3(instances[instance_id].model_rotation_quat, ws_from_ns * normalmap.xyz));
+							ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), ws_from_ns * normalmap.xyz));
 						#endif
 					}
 
@@ -2205,8 +2260,8 @@ void main() {
 						if(detail_fade < 1.0){
 							vec2 temp_uv;
 							temp_uv = base_tex_coords;
-							temp_uv.x *= abs(dot(instances[instance_id].model_scale, base_tangent));
-							temp_uv.y *= abs(dot(instances[instance_id].model_scale, base_bitangent));
+							temp_uv.x *= abs(dot(GetInstancedModelScale(instance_id), base_tangent));
+							temp_uv.y *= abs(dot(GetInstancedModelScale(instance_id), base_bitangent));
 
 							for(int i=0; i<4; ++i){
 								if(weight_map[i] > 0.0){
@@ -2242,7 +2297,7 @@ void main() {
 						if(detail_fade < 1.0){
 							for(int i=0; i<4; ++i){
 								if(weight_map[i] > 0.0){
-									colormap += texture(detail_color, vec3(base_tex_coords*instances[instance_id].detail_scale[i], detail_color_indices[i])) * weight_map[i];
+									colormap += texture(detail_color, vec3(base_tex_coords*GetInstancedDetailScale(instance_id)[i], detail_color_indices[i])) * weight_map[i];
 								}
 							}
 						}
@@ -2433,10 +2488,10 @@ void main() {
 									}
 								#endif
 
-								base_ws_normal = normalize(quat_mul_vec3(instances[instance_id].model_rotation_quat, tan_to_obj * vec3(0,0,1)));
+								base_ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), tan_to_obj * vec3(0,0,1)));
 							#endif
 
-							ws_normal = normalize(quat_mul_vec3(instances[instance_id].model_rotation_quat, tan_to_obj * unpacked_normal));
+							ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), tan_to_obj * unpacked_normal));
 
 							#if defined(WATER)
 								//ws_normal = vec3(0,1,0);
@@ -2446,7 +2501,7 @@ void main() {
 					#else
 						vec4 normalmap = texture(tex1,tc0);
 						vec3 os_normal = UnpackObjNormal(normalmap);
-						vec3 ws_normal = quat_mul_vec3(instances[instance_id].model_rotation_quat, os_normal);
+						vec3 ws_normal = quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), os_normal);
 					#endif
 
 					#if !defined(WATER)

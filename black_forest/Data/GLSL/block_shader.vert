@@ -41,7 +41,15 @@ in vec2 tex_coord_attrib;
 
 	in vec3 vel_attrib;
 #else // static object
-	in vec3 model_translation_attrib;  // set per-instance
+
+	in vec3 model_translation_attrib;  // set per-instance. separate from rest because it's not needed in the fragment shader, so is not slow on low-end GPUs
+
+	#if defined(ATTRIB_ENVOBJ_INSTANCING)
+		in vec3 model_scale_attrib;
+		in vec4 model_rotation_quat_attrib;
+		in vec4 color_tint_attrib;
+		in vec4 detail_scale_attrib;
+	#endif
 
 	#ifdef TANGENT
 		in vec3 tangent_attrib;
@@ -117,18 +125,63 @@ in vec2 tex_coord_attrib;
 	uniform mat4 projection_view_mat;
 	uniform vec3 cam_pos;
 #else // static object
-	const int kMaxInstances = 256;
 
-	struct Instance {
-		vec3 model_scale;
-		vec4 model_rotation_quat;
-		vec4 color_tint;
-		vec4 detail_scale;  // TODO: DETAILMAP4 only?
-	};
+	#if !defined(ATTRIB_ENVOBJ_INSTANCING)
+		#if defined(UBO_BATCH_SIZE_8X)
+			const int kMaxInstances = 256 * 8;
+		#elif defined(UBO_BATCH_SIZE_4X)
+			const int kMaxInstances = 256 * 4;
+		#elif defined(UBO_BATCH_SIZE_2X)
+			const int kMaxInstances = 256 * 2;
+		#else
+			const int kMaxInstances = 256 * 1;
+		#endif
 
-	uniform InstanceInfo {
-		Instance instances[kMaxInstances];
-	};
+		struct Instance {
+			vec3 model_scale;
+			vec4 model_rotation_quat;
+			vec4 color_tint;
+			vec4 detail_scale;  // TODO: DETAILMAP4 only?
+		};
+
+		uniform InstanceInfo {
+			Instance instances[kMaxInstances];
+		};
+	#endif
+
+	vec3 GetInstancedModelScale(int instance_id) {
+		#if defined(ATTRIB_ENVOBJ_INSTANCING)
+			return model_scale_attrib;
+		#else
+			return instances[instance_id].model_scale;
+		#endif
+	}
+
+	vec4 GetInstancedModelRotationQuat(int instance_id) {
+		#if defined(ATTRIB_ENVOBJ_INSTANCING)
+			return model_rotation_quat_attrib;
+		#else
+			return instances[instance_id].model_rotation_quat;
+		#endif
+	}
+
+	vec4 GetInstancedColorTint(int instance_id) {
+		#if defined(ATTRIB_ENVOBJ_INSTANCING)
+			return color_tint_attrib;
+		#else
+			return instances[instance_id].color_tint;
+		#endif
+	}
+
+	#if defined(DETAILMAP4)
+		vec4 GetInstancedDetailScale(int instance_id) {
+			#if defined(ATTRIB_ENVOBJ_INSTANCING)
+				return detail_scale_attrib;
+			#else
+				return instances[instance_id].detail_scale;
+			#endif
+		}
+	#endif
 
 	uniform mat4 projection_view_mat;
 	uniform vec3 cam_pos;
@@ -213,7 +266,18 @@ out vec3 world_vert;
 			out vec3 vel;
 		#endif
 	#endif
-#else
+#else // static object
+
+	#if defined(ATTRIB_ENVOBJ_INSTANCING)
+		flat out vec3 model_scale_frag;
+		flat out vec4 model_rotation_quat_frag;
+		flat out vec4 color_tint_frag;
+
+		#if defined(DETAILMAP4)
+			flat out vec4 detail_scale_frag;
+		#endif
+	#endif
+
 	#ifdef TANGENT
 		out mat3 tan_to_obj;
 	#endif
@@ -818,10 +882,20 @@ void main() {
 			tan_to_obj = mat3(tangent_attrib, bitangent_attrib, normal_attrib);
 		#endif
 
-		vec3 transformed_vertex = transform_vec3(instances[instance_id].model_scale, instances[instance_id].model_rotation_quat, model_translation_attrib, vertex_attrib);
+		#if defined(ATTRIB_ENVOBJ_INSTANCING)
+			model_scale_frag = model_scale_attrib;
+			model_rotation_quat_frag = model_rotation_quat_attrib;
+			color_tint_frag = color_tint_attrib;
+
+			#if defined(DETAILMAP4)
+				detail_scale_frag = detail_scale_attrib;
+			#endif
+		#endif
+
+		vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, vertex_attrib);
 
 		#ifdef PLANT
-			float plant_shake = max(0.0, instances[instance_id].color_tint[3]);
+			float plant_shake = max(0.0, GetInstancedColorTint(instance_id)[3]);
 			float stability = plant_stability_attrib.r;
 
 			#ifdef GRASS_ESSENTIALS
@@ -847,7 +921,7 @@ void main() {
 			#endif
 
 			vec3 vertex_offset = CalcVertexOffset(transformed_vertex, stability, time, plant_shake);
-			transformed_vertex.xyz += quat_mul_vec3(instances[instance_id].model_rotation_quat, vertex_offset);
+			transformed_vertex.xyz += quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), vertex_offset);
 		#endif
 
 		#ifdef WATERFALL
