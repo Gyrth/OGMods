@@ -278,9 +278,6 @@ class DrikaCheckCharacterState : DrikaElement{
 				state_choice = state_choices(current_state_choice);
 				SetTargetOptions();
 				StartSettings();
-				if(state_choice == right_footstep || state_choice == left_footstep){
-					continue_if_false = false;
-				}
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
@@ -398,16 +395,14 @@ class DrikaCheckCharacterState : DrikaElement{
 				ImGui_NextColumn();
 			}
 
-			if(state_choice != right_footstep && state_choice != left_footstep){
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("If not, go to line");
-				ImGui_NextColumn();
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("If not, go to line");
+			ImGui_NextColumn();
 
-				ImGui_Checkbox("###If not, go to line", continue_if_false);
-				ImGui_NextColumn();
-				if(continue_if_false){
-					continue_element.DrawGoToLineUI();
-				}
+			ImGui_Checkbox("###If not, go to line", continue_if_false);
+			ImGui_NextColumn();
+			if(continue_if_false){
+				continue_element.DrawGoToLineUI();
 			}
 		}
 		else if(current_ccs_mode == ccs_write){
