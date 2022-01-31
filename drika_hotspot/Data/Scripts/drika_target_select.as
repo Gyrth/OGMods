@@ -180,7 +180,7 @@ class DrikaTargetSelect{
 		array<int> selected = GetSelected();
 
 		for(uint i = 0; i < selected.size(); i++){
-			if(!ObjectExists(selected[i]) || selected[i] == -1){continue;}
+			if(selected[i] == -1 || !ObjectExists(selected[i])){continue;}
 			Object@ target_obj = ReadObjectFromID(selected[i]);
 
 			if((target_option & character_option) != 0 && target_obj.GetType() == _movement_object){
@@ -752,7 +752,7 @@ class DrikaTargetSelect{
 
 		array<Object@> target_objects;
 		if(identifier_type == id){
-			if(object_id != -1){
+			if(object_id != -1 && ObjectExists(object_id)){
 				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
 		}else if(identifier_type == reference){
@@ -760,48 +760,56 @@ class DrikaTargetSelect{
 			if(reference_element !is null){
 				array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
 				for(uint i = 0; i < registered_object_ids.size(); i++){
-					target_objects.insertLast(ReadObjectFromID(registered_object_ids[i]));
+					if(ObjectExists(registered_object_ids[i])){
+						target_objects.insertLast(ReadObjectFromID(registered_object_ids[i]));
+					}
 				}
 			}
 		}else if(identifier_type == team){
 			array<int> object_ids = GetObjectIDsType(_movement_object);
 			for(uint i = 0; i < object_ids.size(); i++){
-				Object@ obj = ReadObjectFromID(object_ids[i]);
-				ScriptParams@ obj_params = obj.GetScriptParams();
+				if(ObjectExists(object_ids[i])){
+					Object@ obj = ReadObjectFromID(object_ids[i]);
+					ScriptParams@ obj_params = obj.GetScriptParams();
 
-				if(obj_params.HasParam("Teams")){
-					array<string> teams;
-					//Teams are , seperated or space comma.
-					array<string> space_comma_separated = obj_params.GetString("Teams").split(", ");
-					for(uint j = 0; j < space_comma_separated.size(); j++){
-						array<string> comma_separated = space_comma_separated[j].split(",");
-						teams.insertAt(0, comma_separated);
-					}
+					if(obj_params.HasParam("Teams")){
+						array<string> teams;
+						//Teams are , seperated or space comma.
+						array<string> space_comma_separated = obj_params.GetString("Teams").split(", ");
+						for(uint j = 0; j < space_comma_separated.size(); j++){
+							array<string> comma_separated = space_comma_separated[j].split(",");
+							teams.insertAt(0, comma_separated);
+						}
 
-					if(teams.find(character_team) != -1){
-						target_objects.insertLast(obj);
+						if(teams.find(character_team) != -1){
+							target_objects.insertLast(obj);
+						}
 					}
 				}
 			}
 		}else if(identifier_type == name){
 			array<int> object_ids = GetObjectIDs();
 			for(uint i = 0; i < object_ids.size(); i++){
-				Object@ obj = ReadObjectFromID(object_ids[i]);
-				if(obj.GetName() == object_name){
-					target_objects.insertLast(obj);
+				if(ObjectExists(object_ids[i])){
+					Object@ obj = ReadObjectFromID(object_ids[i]);
+					if(obj.GetName() == object_name){
+						target_objects.insertLast(obj);
+					}
 				}
 			}
 		}else if(identifier_type == character){
-			if(object_id != -1){
+			if(object_id != -1 && ObjectExists(object_id)){
 				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
 		}else if(identifier_type == item){
-			if(object_id != -1){
+			if(object_id != -1 && ObjectExists(object_id)){
 				target_objects.insertLast(ReadObjectFromID(object_id));
 			}
 		}else if(identifier_type == batch){
 			for(uint i = 0; i < batch_ids.size(); i++){
-				target_objects.insertLast(ReadObjectFromID(batch_ids[i]));
+				if(ObjectExists(batch_ids[i])){
+					target_objects.insertLast(ReadObjectFromID(batch_ids[i]));
+				}
 			}
 		}else if(identifier_type == box_select){
 			mat4 placeholder_transform = box_select_placeholder.object.GetTransform();
@@ -831,26 +839,34 @@ class DrikaTargetSelect{
 		}else if(identifier_type == any_character){
 			for(int i = 0; i < GetNumCharacters(); i++){
 				MovementObject@ char = ReadCharacter(i);
-				target_objects.insertLast(ReadObjectFromID(char.GetID()));
+				if(ObjectExists(char.GetID())){
+					target_objects.insertLast(ReadObjectFromID(char.GetID()));
+				}
 			}
 		}else if(identifier_type == any_player){
 			for(int i = 0; i < GetNumCharacters(); i++){
 				MovementObject@ char = ReadCharacter(i);
-				if(char.is_player){
-					target_objects.insertLast(ReadObjectFromID(char.GetID()));
+				if(ObjectExists(char.GetID())){
+					if(char.is_player){
+						target_objects.insertLast(ReadObjectFromID(char.GetID()));
+					}
 				}
 			}
 		}else if(identifier_type == any_npc){
 			for(int i = 0; i < GetNumCharacters(); i++){
 				MovementObject@ char = ReadCharacter(i);
-				if(!char.is_player){
-					target_objects.insertLast(ReadObjectFromID(char.GetID()));
+				if(ObjectExists(char.GetID())){
+					if(!char.is_player){
+						target_objects.insertLast(ReadObjectFromID(char.GetID()));
+					}
 				}
 			}
 		}else if(identifier_type == any_item){
 			for(int i = 0; i < GetNumItems(); i++){
 				ItemObject@ item = ReadItem(i);
-				target_objects.insertLast(ReadObjectFromID(item.GetID()));
+				if(ObjectExists(item.GetID())){
+					target_objects.insertLast(ReadObjectFromID(item.GetID()));
+				}
 			}
 		}
 		return target_objects;
@@ -860,18 +876,20 @@ class DrikaTargetSelect{
 		array<int> object_ids = GetObjectIDsType(type);
 
 		for(uint i = 0; i < object_ids.size(); i++){
-			Object@ obj = ReadObjectFromID(object_ids[i]);
-			//Exclude all the helper objects.
-			if(obj.GetName().findFirst("Helper") != -1){
-				continue;
-			}
-			vec3 obj_translation = obj.GetTranslation();
-			vec3 local_space_translation = invert(box_transform) * obj_translation;
+			if(ObjectExists(object_ids[i])){
+				Object@ obj = ReadObjectFromID(object_ids[i]);
+				//Exclude all the helper objects.
+				if(obj.GetName().findFirst("Helper") != -1){
+					continue;
+				}
+				vec3 obj_translation = obj.GetTranslation();
+				vec3 local_space_translation = invert(box_transform) * obj_translation;
 
-			if(local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
-				local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
-				local_space_translation.z >= -2 && local_space_translation.z <= 2){
-				target_objects.insertLast(obj);
+				if(local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
+					local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
+					local_space_translation.z >= -2 && local_space_translation.z <= 2){
+					target_objects.insertLast(obj);
+				}
 			}
 		}
 	}
@@ -881,70 +899,98 @@ class DrikaTargetSelect{
 
 		array<MovementObject@> target_movement_objects;
 		if(identifier_type == id){
-			if(object_id != -1 && MovementObjectExists(object_id)){
-				target_movement_objects.insertLast(ReadCharacterID(object_id));
+			if(object_id != -1 && ObjectExists(object_id)){
+				Object@ char_obj = ReadObjectFromID(object_id);
+				if(char_obj.GetType() == _movement_object){
+					target_movement_objects.insertLast(ReadCharacterID(object_id));
+				}
 			}
 		}else if (identifier_type == reference){
 			DrikaElement@ reference_element = GetReferenceElement(reference_string);
 			if(reference_element !is null){
 				array<int> registered_object_ids = reference_element.GetReferenceObjectIDs();
 				for(uint i = 0; i < registered_object_ids.size(); i++){
-					if(MovementObjectExists(registered_object_ids[i])){
-						target_movement_objects.insertLast(ReadCharacterID(registered_object_ids[i]));
+					if(ObjectExists(registered_object_ids[i])){
+						Object@ char_obj = ReadObjectFromID(registered_object_ids[i]);
+						if(char_obj.GetType() == _movement_object){
+							target_movement_objects.insertLast(ReadCharacterID(registered_object_ids[i]));
+						}
 					}
 				}
 			}
 		}else if (identifier_type == team){
 			array<int> mo_ids = GetObjectIDsType(_movement_object);
 			for(uint i = 0; i < mo_ids.size(); i++){
-				MovementObject@ mo = ReadCharacterID(mo_ids[i]);
-				Object@ obj = ReadObjectFromID(mo_ids[i]);
-				ScriptParams@ obj_params = obj.GetScriptParams();
-				if(obj_params.HasParam("Teams")){
-					//Removed all the spaces.
-					string no_spaces_param = join(obj_params.GetString("Teams").split(" "), "");
-					//Teams are , seperated.
-					array<string> teams = no_spaces_param.split(",");
-					if(teams.find(character_team) != -1){
-						target_movement_objects.insertLast(mo);
+				if(mo_ids[i] != -1 && ObjectExists(mo_ids[i])){
+					Object@ char_obj = ReadObjectFromID(mo_ids[i]);
+					if(char_obj.GetType() == _movement_object){
+						MovementObject@ mo = ReadCharacterID(mo_ids[i]);
+						ScriptParams@ obj_params = char_obj.GetScriptParams();
+						if(obj_params.HasParam("Teams")){
+							//Removed all the spaces.
+							string no_spaces_param = join(obj_params.GetString("Teams").split(" "), "");
+							//Teams are , seperated.
+							array<string> teams = no_spaces_param.split(",");
+							if(teams.find(character_team) != -1){
+								target_movement_objects.insertLast(mo);
+							}
+						}
 					}
 				}
 			}
 		}else if (identifier_type == name){
 			array<int> mo_ids = GetObjectIDsType(_movement_object);
 			for(uint i = 0; i < mo_ids.size(); i++){
-				Object@ obj = ReadObjectFromID(mo_ids[i]);
-				MovementObject@ mo = ReadCharacterID(mo_ids[i]);
-				if(obj.GetName() == object_name){
-					target_movement_objects.insertLast(mo);
+				if(mo_ids[i] != -1 && ObjectExists(mo_ids[i])){
+					Object@ char_obj = ReadObjectFromID(mo_ids[i]);
+					if(char_obj.GetType() == _movement_object){
+						MovementObject@ mo = ReadCharacterID(mo_ids[i]);
+
+						if(char_obj.GetName() == object_name){
+							target_movement_objects.insertLast(mo);
+						}
+					}
 				}
 			}
 		}else if(identifier_type == character){
-			if(object_id != -1 && MovementObjectExists(object_id)){
-				target_movement_objects.insertLast(ReadCharacterID(object_id));
+			if(object_id != -1 && ObjectExists(object_id)){
+				Object@ char_obj = ReadObjectFromID(object_id);
+				if(char_obj.GetType() == _movement_object){
+					target_movement_objects.insertLast(ReadCharacterID(object_id));
+				}
 			}
 		}else if(identifier_type == batch){
 			for(uint i = 0; i < batch_ids.size(); i++){
-				if(!MovementObjectExists(batch_ids[i])){
-					target_movement_objects.insertLast(ReadCharacterID(batch_ids[i]));
+				if(batch_ids[i] != -1 && ObjectExists(batch_ids[i])){
+					Object@ char_obj = ReadObjectFromID(batch_ids[i]);
+					if(char_obj.GetType() == _movement_object){
+						target_movement_objects.insertLast(ReadCharacterID(batch_ids[i]));
+					}
 				}
 			}
 		}else if(identifier_type == any_character){
 			for(int i = 0; i < GetNumCharacters(); i++){
-				target_movement_objects.insertLast(ReadCharacter(i));
+				MovementObject@ char = ReadCharacter(i);
+				if(ObjectExists(char.GetID())){
+					target_movement_objects.insertLast(ReadCharacter(i));
+				}
 			}
 		}else if(identifier_type == any_player){
 			for(int i = 0; i < GetNumCharacters(); i++){
 				MovementObject@ char = ReadCharacter(i);
-				if(char.is_player){
-					target_movement_objects.insertLast(char);
+				if(ObjectExists(char.GetID())){
+					if(char.is_player){
+						target_movement_objects.insertLast(char);
+					}
 				}
 			}
 		}else if(identifier_type == any_npc){
 			for(int i = 0; i < GetNumCharacters(); i++){
 				MovementObject@ char = ReadCharacter(i);
-				if(!char.is_player){
-					target_movement_objects.insertLast(char);
+				if(ObjectExists(char.GetID())){
+					if(!char.is_player){
+						target_movement_objects.insertLast(char);
+					}
 				}
 			}
 		}

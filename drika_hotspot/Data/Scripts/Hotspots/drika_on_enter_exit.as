@@ -438,20 +438,20 @@ class DrikaOnEnterExit : DrikaElement{
 		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
 			return;
 		}
-		if(!MovementObjectExists(char_id)){
+		if(!ObjectExists(char_id)){
 			return;
 		}
 
 		if((hotspot_trigger_type == on_character_enter && event == "enter") ||
 			(hotspot_trigger_type == on_character_exit && event == "exit")){
-				array<MovementObject@> chars = target_select.GetTargetMovementObjects();
-				for(uint i = 0; i < chars.size(); i++){
-					if(chars[i].GetID() == char_id){
-						triggered = true;
-						reference_ids.insertLast(char_id);
-						return;
-					}
+			array<MovementObject@> chars = target_select.GetTargetMovementObjects();
+			for(uint i = 0; i < chars.size(); i++){
+				if(chars[i].GetID() == char_id){
+					triggered = true;
+					reference_ids.insertLast(char_id);
+					return;
 				}
+			}
 		}
 	}
 

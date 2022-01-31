@@ -63,7 +63,7 @@ class HealthData{
 	}
 
 	bool CheckHealthDecreased(){
-		if(!MovementObjectExists(character_id)){
+		if(!ObjectExists(character_id)){
 			Log(warning, "The target character does not exist anymore! " + character_id);
 			return false;
 		}
