@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<particle>
+    <textures color_map = "Data/Textures/electric.png"
+		shader = "glowsprite"
+		soft_shader = "envobject #PARTICLE #GLOW"/>
+<rotation min = "-45.0" max = "45.0"/>
+<size min = "0.1" max = "0.2"/>
+<color red =   "1.0"
+	 green = "1.0"
+	 blue =  "1.0"
+	 alpha = "0.5"/>
+<behavior inertia="0.99" gravity="-0.4" wind="0.0" size_decay_rate="-2.0" opacity_decay_rate="10.0"/>
+</particle>

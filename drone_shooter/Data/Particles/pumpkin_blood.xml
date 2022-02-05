@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<particle>
+    <textures color_map = "Data/Textures/splatspritelight_c.tga"
+              normal_map = "Data/Textures/splatspritelight_n.tga"
+              shader = "envobject #PARTICLE #SPLAT"
+              soft_shader = "envobject #PARTICLE #SPLAT"/>
+    <size min = "0.02" max = "0.04"/>
+    <color red =   "1.0"
+           green = "1.0"
+           blue =  "1.0"
+           alpha_min = "1.0" alpha_max = "2.0"/>
+    <behavior inertia="1.0" gravity="1.0" wind="1.0" size_decay_rate="-0.75" opacity_decay_rate="1.0"/>
+    <collision decal="Data/Objects/Decals/pumpkinbloodspatter.xml" decal_size_mult = "3.0" materialevent="blood_spatter"/>
+</particle>

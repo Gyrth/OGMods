@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<flags no_collision = "true"/>
+<Object>
+	<Model>Data/Models/receiver_drone.obj</Model>
+	<ColorMap>Data/Textures/fason_drone.png</ColorMap>
+	<NormalMap>Data/Textures/receiver_drone_n.png</NormalMap>
+	<ShaderName>envobject #TANGENT #NO_DECALS #KEEP_SPEC #BASE_TANGENT</ShaderName>
+</Object>

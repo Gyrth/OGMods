@@ -1,0 +1,16 @@
+<? xml version="1.0" ?>
+<Mod>
+	<Id>drone-shooter</Id>
+	<Name>Drone Shooter</Name>
+	<Version>0.1.0</Version>
+	<Author>Gyrth</Author>
+	<Category>Level</Category>
+	<Thumbnail>Data/Images/drone_shooter_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/drone_shooter_full.jpg</PreviewImage>
+	<Description>My entry for the 24 hour jam. It's a map that combines a bunch of my mods. Also known as trash.</Description>
+	<Tag>scripting</Tag>
+	<Tag>character</Tag>
+	<Tag>24HourJam</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<Level title="Drone Shooter" thumbnail="Images/drone_shooter_full.jpg">drone_shooter.xml</Level>
+</Mod>
