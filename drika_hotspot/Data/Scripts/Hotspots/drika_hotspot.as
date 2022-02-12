@@ -615,11 +615,6 @@ void DrawEditor(){
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
 		ImGui_SetNextWindowPos(vec2(100.0f, 100.0f), ImGuiSetCond_FirstUseEver);
 
-		bool show_graph_editor = false;
-		if(show_graph_editor){
-			DrawGraphEditor();
-		}
-
 		if(steal_focus){
 			steal_focus = false;
 			ImGui_SetNextWindowFocus();
@@ -792,12 +787,6 @@ void DrawEditor(){
 					}
 				}
 			}
-		}
-
-		if(show_graph_editor){
-			ImGui_PopStyleColor(18);
-			ImGui_End();
-			return;
 		}
 
 		for(uint i = 0; i < drika_indexes.size(); i++){
@@ -1238,163 +1227,6 @@ void DuplicateSelectedFunctions(){
 
 		element_added = true;
 	}
-}
-
-array<vec2> node_positions = {vec2(50.0, 50.0), vec2(150.0, 150.0)};
-int target_node = -1;
-bool graph_hover = false;
-
-void DrawGraphEditor(){
-	bool show_graph_editor = true;
-	vec4 line_color = vec4(0.25, 0.25, 0.25, 1.0);
-	vec4 background_color = vec4(0.15, 0.15, 0.15, 1.0);
-	vec4 node_color = vec4(0.2, 0.2, 0.2, 1.0);
-	vec4 bezier_line_color = vec4(0.45, 0.45, 0.45, 1.0);
-	vec4 in_slot_color = vec4(0.45, 0.75, 0.45, 1.0);
-	vec4 then_slot_color = vec4(0.45, 0.75, 0.45, 1.0);
-	vec4 else_slot_color = vec4(0.45, 0.45, 0.75, 1.0);
-	float NODE_SLOT_RADIUS = 7.0f;
-
-	ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
-	int window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_AlwaysHorizontalScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-	if(graph_hover){
-		window_flags = window_flags | ImGuiWindowFlags_NoMove;
-	}
-	ImGui_Begin("Drika Hotspot" + (show_name?" - " + display_name:" " + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, window_flags);
-	ImGui_PopStyleColor();
-
-	ImGui_BeginChild("Node Graph", vec2(2000, 2000), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoInputs);
-
-	vec2 window_position = ImGui_GetWindowPos();
-	vec2 vertical_position = window_position;
-	vec2 horizontal_position = window_position;
-	vec2 window_size = ImGui_GetWindowSize();
-	float grid_size = 50.0f;
-	int nr_horizontal_lines = int(ceil(window_size.y / grid_size));
-	int nr_vertical_lines = int(ceil(window_size.x / grid_size)) + 1;
-	float line_width = 1.0;
-	float thick_line_width = 3.0;
-
-	for(int i = 0; i < nr_vertical_lines; i++){
-		ImDrawList_AddLine(vertical_position, vertical_position + vec2(0, window_size.y), ImGui_GetColorU32(line_color), line_width);
-		vertical_position += vec2(grid_size, 0.0);
-	}
-
-	for(int i = 0; i < nr_horizontal_lines; i++){
-		ImDrawList_AddLine(horizontal_position, horizontal_position + vec2(window_size.x, 0.0), ImGui_GetColorU32(line_color), line_width);
-		horizontal_position += vec2(0.0, grid_size);
-	}
-
-	/* Log(warning, "target_node " + target_node + ImGui_IsMouseDown(0)); */
-
-	if(target_node != -1 && ImGui_IsMouseDown(0)){
-		drika_elements[target_node].node_position += ImGui_GetMouseDragDelta(0, 0.0f);
-		ImGui_ResetMouseDragDelta(0);
-	}else{
-		target_node = -1;
-	}
-
-	for(uint i = 0; i < 1; i++){
-		DrikaElement@ current_element = drika_elements[i];
-
-		vec2 node_rect_min = window_position + current_element.node_position;
-		vec2 node_rect_max = node_rect_min + current_element.node_size;
-
-		vec2 node_slot_in_position = node_rect_min + vec2(0.0, current_element.node_size.y * 0.5f);
-		current_element.node_slot_in_position = node_slot_in_position;
-
-		vec2 node_slot_then_position = node_rect_min + vec2(current_element.node_size.x, current_element.node_size.y * 0.25f);
-		current_element.node_slot_then_position = node_slot_then_position;
-
-		vec2 node_slot_else_position = node_rect_min + vec2(current_element.node_size.x, current_element.node_size.y * 0.75f);
-		current_element.node_slot_else_position = node_slot_else_position;
-
-		vec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
-
-		// Display node box
-		ImDrawList_AddRectFilled(node_rect_min, node_rect_max + NODE_WINDOW_PADDING, ImGui_GetColorU32(node_color), 4.0f);
-		ImDrawList_AddRect(node_rect_min, node_rect_max + NODE_WINDOW_PADDING, ImGui_GetColorU32(line_color), 4.0f);
-
-		ImGui_SetCursorScreenPos(node_rect_min);
-		ImGui_InvisibleButton("node" + i, current_element.node_size + NODE_WINDOW_PADDING);
-		if(!ImGui_IsMouseDown(0) && ImGui_IsItemHoveredRect()){
-			target_node = i;
-		}
-
-		// Display the node contents
-		ImGui_SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
-
-		/* ImGui_PushItemWidth(current_element.node_size.x - (NODE_WINDOW_PADDING.x * 2.0f)); */
-	    ImGui_BeginGroup(); // Lock horizontal position
-		/* ImGui_PopItemWidth(); */
-
-		int item_no = drika_indexes[i];
-		vec4 text_color = drika_elements[item_no].GetDisplayColor();
-
-		string display_string = drika_elements[item_no].GetDisplayString();
-		display_string = join(display_string.split("\n"), "");
-		float space_for_characters = ImGui_CalcTextSize(display_string).x;
-
-		if(space_for_characters > ImGui_GetWindowContentRegionWidth()){
-			display_string = display_string.substr(0, int(display_string.length() * (ImGui_GetWindowContentRegionWidth() / space_for_characters)) - 3) + "...";
-		}
-
-		float title_height = 20.0f;
-
-		/* ImGui_BeginChild("Title" + i, vec2(current_element.node_size.x - (NODE_WINDOW_PADDING.x * 2.0f), title_height)); */
-		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
-		ImGui_Text(display_string);
-		ImGui_PopStyleColor();
-		ImDrawList_AddLine(vec2(node_rect_min.x, node_rect_min.y + title_height), vec2(node_rect_min.x + current_element.node_size.x + - NODE_WINDOW_PADDING.x, node_rect_min.y + title_height), ImGui_GetColorU32(line_color), line_width);
-
-		/* ImGui_EndChild(); */
-
-		/* ImGui_BeginChildFrame(i, vec2(current_element.node_size.x - (NODE_WINDOW_PADDING.x * 2.0f), 200.0f)); */
-		ImGui_PushItemWidth(-1);
-		current_element.DrawSettings();
-		ImGui_PopItemWidth();
-		/* ImGui_EndChild(); */
-
-		/* vec2 cursor_pos = ImGui_GetCursorScreenPos(); */
-		/* current_element.node_size.y = height; */
-
-		/* ImGui_Text("Testing the group feature.");
-		ImGui_Text("Testing the group feature.");
-		ImGui_Text("Testing the group feature.");
-		ImGui_Text("Testing the group feature."); */
-
-	    ImGui_EndGroup();
-		float height = ImGui_GetItemRectSize().y;
-		/* ImGui_SetCursorScreenPos(node_rect_min - NODE_WINDOW_PADDING); */
-		/* ImGui_Text(" " + height); */
-		current_element.node_size.y = height;
-	}
-
-	for(uint i = 0; i < drika_elements.size(); i++){
-		if(drika_elements[i].nodes_slot_then_connected !is null){
-			vec2 then_position = drika_elements[i].node_slot_then_position;
-			vec2 in_position = drika_elements[i].nodes_slot_then_connected.node_slot_in_position;
-			float bezier_vert_offset = min(50.0f, abs(then_position.y - in_position.y));
-
-			ImDrawList_AddCircleFilled(drika_elements[i].node_slot_in_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(in_slot_color));
-			ImDrawList_AddCircleFilled(drika_elements[i].node_slot_then_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(then_slot_color));
-			ImDrawList_AddCircleFilled(drika_elements[i].node_slot_else_position, NODE_SLOT_RADIUS, ImGui_GetColorU32(else_slot_color));
-
-			ImDrawList_AddBezierCurve(then_position, then_position + vec2(0.0f, bezier_vert_offset), in_position + vec2(0.0f, -bezier_vert_offset), in_position, ImGui_GetColorU32(bezier_line_color), 3.0f);
-		}
-	}
-
-	ImGui_EndChild();
-	graph_hover = ImGui_IsItemHovered();
-
-	if(graph_hover && target_node == -1 && ImGui_IsMouseDown(0)){
-		vec2 delta = ImGui_GetMouseDragDelta(0, 0.0f);
-		ImGui_SetScrollX(ImGui_GetScrollX() - delta.x);
-		ImGui_SetScrollY(ImGui_GetScrollY() - delta.y);
-		ImGui_ResetMouseDragDelta(0);
-	}
-
-	ImGui_End();
 }
 
 void SavePalette(){
