@@ -796,6 +796,7 @@ void DrawEditor(){
 			bool line_selected = display_index == int(item_no) || multi_select.find(i) != -1;
 
 			string display_string = drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString();
+			// Remove any new lines so that every function stays as one selectable object.
 			display_string = join(display_string.split("\n"), "");
 			float space_for_characters = ImGui_CalcTextSize(display_string).x;
 
@@ -1415,7 +1416,7 @@ void ReorderElements(){
 
 		int item_no = drika_indexes[index];
 		current_element.line_number = drika_elements[item_no].index + ".";
-		int initial_length = max(1, (7 - current_element.line_number.length()));
+		int initial_length = max(1, (5 - current_element.line_number.length()));
 		for(int j = 0; j < initial_length; j++){
 			current_element.line_number += " ";
 		}
