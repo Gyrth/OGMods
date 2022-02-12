@@ -558,7 +558,7 @@ class DrikaAnimation : DrikaElement{
 					vec3 facing = Mult(rotation, vec3(0,0,1));
 					float rot = atan2(facing.x, facing.z) * 180.0f / PI;
 					float new_rotation = floor(rot + 0.5f);
-					vec3 new_facing = Mult(quaternion(vec4(0, 1, 0, new_rotation * 3.1415f / 180.0f)), vec3(1, 0, 0));
+					vec3 new_facing = Mult(quaternion(vec4(0, 1, 0, new_rotation * PI / 180.0f)), vec3(1, 0, 0));
 
 					if(char.GetBoolVar("dialogue_control")){
 						vec3 direction = SingularityFix(rotation);
