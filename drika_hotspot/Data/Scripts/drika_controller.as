@@ -10,6 +10,7 @@
 #include "drika_ui_input.as"
 #include "drika_dialogue_functions.as"
 
+bool resetting = false;
 bool animating_camera = false;
 bool has_camera_control = false;
 bool showing_interactive_ui = false;
@@ -23,6 +24,7 @@ FontSetup controls_font("arial", 45 , HexColor("#616161"), true);
 FontSetup red_dialogue_font("arial", 50 , HexColor("#990000"), true);
 FontSetup green_dialogue_font("arial", 50 , HexColor("#009900"), true);
 FontSetup blue_dialogue_font("arial", 50 , HexColor("#000099"), true);
+FontSetup death_font_arial("Lato-Regular", 70 , HexColor("#CCCCCC"), true);
 array<DrikaAnimationGroup@> all_animations;
 DrikaAnimationGroup @custom_group;
 vec3 camera_position;
@@ -32,7 +34,7 @@ bool fading = false;
 float blackout_amount = 0.0;
 float starting_fade_amount = 0.0;
 float fade_direction = 1.0;
-float fade_duration = 0.2;
+float fade_duration = 0.25;
 float fade_timer = 0.0;
 float target_fade_to_black = 1.0;
 float fade_to_black_duration = 1.0;
@@ -82,6 +84,8 @@ IMContainer@ dialogue_container;
 IMContainer@ image_container;
 IMContainer@ text_container;
 IMContainer@ grabber_container;
+IMContainer@ death_container;
+IMContainer@ death_ui_container;
 bool editing_ui = false;
 array<IMText@> text_elements;
 array<DrikaUIElement@> ui_elements;
@@ -92,6 +96,14 @@ vec2 click_position;
 bool show_grid = true;
 bool post_init_done = false;
 bool read_animation_list = false;
+bool added_death_screen = false;
+string defeat_sting = "Data/Music/slaver_loop/the_slavers_defeat.wav";
+float ko_time;
+bool checkpoint_fading = false;
+float checkpoint_blackout_amount = 0.0f;
+float checkpoint_fade_timer = 0.0f;
+float checkpoint_fade_duration = 0.25f;
+float checkpoint_fade_direction = 1.0f;
 
 string in_combat_song = "";
 bool in_combat_from_beginning_no_fade = false;
@@ -114,8 +126,7 @@ string vram;
 string glsl_version;
 string shader_model;
 
-array<CheckpointData@> checkpoints;
-bool loading_checkpoint = false;
+CheckpointData@ checkpoint = null;
 float PI = 3.14159265359f;
 
 const int _movement_state = 0;  // character is moving on the ground
@@ -131,13 +142,10 @@ const int _RGDL_INJURED = 3;
 const int _RGDL_ANIMATION = 4;
 
 class CheckpointData{
-	string name;
 	string data;
-	// This is the number of Checkpoint Save functions that use this specific CheckpointData.
-	int nr_saves = 1;
 
-	CheckpointData(string _name){
-		name = _name;
+	CheckpointData(){
+
 	}
 }
 
@@ -194,6 +202,7 @@ void Init(string str){
 	@image_container = IMContainer(2560, 1440);
 	@text_container = IMContainer(2560, 1440);
 	@grabber_container = IMContainer(2560, 1440);
+	@death_container = IMContainer(2560, 1440);
 	CreateIMGUIContainers();
 	ReadCustomAnimationList();
 	ReadHardwareReport();
@@ -202,6 +211,66 @@ void Init(string str){
 void PostInit(){
 	level.SendMessage("level_start");
 	post_init_done = true;
+}
+
+void AddDeathScreen(){
+	if(added_death_screen){
+		int player_id = GetPlayerCharacterID();
+
+		if(player_id != -1 && ObjectExists(player_id)){
+			float player_blackout_amount = 0.2 + 0.6 * (1.0 - pow(0.5, (the_time - ko_time)));
+			ReadCharacter(player_id).SetFloatVar("level_blackout", player_blackout_amount);
+		}
+		return;
+	}
+
+	bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
+	death_container.clear();
+	@death_ui_container = IMContainer(2560, 800);
+	death_container.setAlignment(CACenter, CATop);
+	death_container.setElement(death_ui_container);
+	death_container.setSize(vec2(2560, 1440));
+
+	IMContainer text_container(0.0, 125.0);
+
+	IMDivider text_divider("text_divider", DOHorizontal);
+	text_divider.setZOrdering(2);
+	text_divider.setAlignment(CACenter, CACenter);
+	text_container.setElement(text_divider);
+
+	vec2 offset(0.0, 15.0);
+	IMText death_text("Press " + GetStringDescriptionForBinding(use_keyboard?"key":"gamepad_0", "attack") + " to load checkpoint.", death_font_arial);
+	death_text.addUpdateBehavior(IMFadeIn(1000, inSineTween ), "");
+	text_divider.appendSpacer(150.0);
+	text_divider.append(death_text);
+	text_divider.appendSpacer(130.0);
+	death_text.setVisible(false);
+
+	IMImage text_background("Textures/ui/menus/main/brushStroke.png");
+	text_background.addUpdateBehavior(IMFadeIn(1000, inSineTween ), "");
+	text_background.setClip(false);
+	text_background.setColor(vec4(1.0, 1.0, 1.0, 0.5));
+	death_ui_container.setElement(text_container);
+	text_background.setVisible(false);
+
+	imGUI.update();
+	float added_height = 50.0f;
+	text_background.setSize(text_container.getSize() + vec2(0.0, added_height));
+	text_container.addFloatingElement(text_background, "text_background", vec2(0, -(added_height / 2.0)), 1);
+	text_background.setZOrdering(1);
+
+	imGUI.update();
+	text_background.setVisible(true);
+	death_text.setVisible(true);
+
+	PlayDeathSting();
+	ko_time = the_time;
+	added_death_screen = true;
+}
+
+void PlayDeathSting(){
+	int sting_handle = PlaySound(defeat_sting);
+	SetSoundGain(sting_handle, GetConfigValueFloat("music_volume"));
 }
 
 void CreateIMGUIContainers(){
@@ -215,6 +284,7 @@ void CreateIMGUIContainers(){
 	imGUI.getMain().addFloatingElement(image_container, "image_container", vec2(0));
 	imGUI.getMain().addFloatingElement(text_container, "text_container", vec2(0));
 	imGUI.getMain().addFloatingElement(grabber_container, "grabber_container", vec2(0));
+	imGUI.getMain().addFloatingElement(death_container, "death_container", vec2(0));
 }
 
 void SetWindowDimensions(int width, int height){
@@ -238,6 +308,7 @@ void WriteMusicXML(string music_path, string song_name, string song_path){
 
 void DrawGUI(){
 	imGUI.render();
+
 	HUDImage @blackout_image = hud.AddImage();
 	blackout_image.SetImageFromPath("Data/Textures/diffuse.tga");
 	blackout_image.position.y = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
@@ -245,6 +316,15 @@ void DrawGUI(){
 	blackout_image.position.z = -2.0f;
 	blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
 	blackout_image.color = vec4(0.0f, 0.0f, 0.0f, blackout_amount);
+
+	HUDImage @checkpoint_blackout_image = hud.AddImage();
+	checkpoint_blackout_image.SetImageFromPath("Data/Textures/diffuse.tga");
+	checkpoint_blackout_image.position.y = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
+	checkpoint_blackout_image.position.x = (GetScreenWidth() + GetScreenHeight()) * -1.0f;
+	checkpoint_blackout_image.position.z = -2.0f;
+	checkpoint_blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
+	checkpoint_blackout_image.color = vec4(0.0f, 0.0f, 0.0f, checkpoint_blackout_amount);
+
 	if(editing_ui){
 		DrawMouseBlockContainer();
 		DrawGrid();
@@ -329,6 +409,10 @@ void ReceiveMessage(string msg){
 		allow_dialogue_move_in = true;
 		showing_choice = false;
 		showing_interactive_ui = false;
+		blackout_amount = 0.0f;
+		death_container.clear();
+		checkpoint_blackout_amount = 0.0f;
+		resetting = true;
 	}else if(token == "write_music_xml"){
 		array<string> lines;
 		string xml_content;
@@ -701,9 +785,9 @@ void ReceiveMessage(string msg){
 		while(token_iter.FindNextToken(msg)){
 			content += token_iter.GetToken(msg);
 		}
-        StartWriteFile();
+		StartWriteFile();
 		AddFileString(content);
-        WriteFileKeepBackup(path);
+		WriteFileKeepBackup(path);
 	}else if(token == "drika_edit_ui"){
 		token_iter.FindNextToken(msg);
 		string ui_element_identifier = token_iter.GetToken(msg);
@@ -793,53 +877,10 @@ void ReceiveMessage(string msg){
 				PlaySong(song_name);
 			}
 		}
-	}else if(token == "drika_register_save"){
-		token_iter.FindNextToken(msg);
-		string save_name = token_iter.GetToken(msg);
-
-		for(uint i = 0; i < checkpoints.size(); i++){
-			if(checkpoints[i].name == save_name){
-				checkpoints[i].nr_saves += 1;
-				return;
-			}
-		}
-
-		CheckpointData new_data(save_name);
-		checkpoints.insertLast(new_data);
-	}else if(token == "drika_remove_save"){
-		token_iter.FindNextToken(msg);
-		string save_name = token_iter.GetToken(msg);
-
-		for(uint i = 0; i < checkpoints.size(); i++){
-			if(checkpoints[i].name == save_name){
-				checkpoints[i].nr_saves -= 1;
-				// Remove the CheckpointData if no save functions are using it.
-				if(checkpoints[i].nr_saves == 0){
-					checkpoints.removeAt(i);
-				}
-			}
-		}
 	}else if(token == "drika_save_checkpoint"){
-		token_iter.FindNextToken(msg);
-		string save_name = token_iter.GetToken(msg);
-		SaveCheckpoint(save_name);
+		SaveCheckpoint();
 	}else if(token == "drika_load_checkpoint"){
-		token_iter.FindNextToken(msg);
-		string save_name = token_iter.GetToken(msg);
-		LoadCheckpoint(save_name);
-	}else if(token == "drika_get_save_names"){
-		token_iter.FindNextToken(msg);
-		int hotspot_id = atoi(token_iter.GetToken(msg));
-		Object@ hotspot_obj = ReadObjectFromID(hotspot_id);
-		array<string> save_names;
-
-		string return_msg = "drika_message drika_save_names";
-		for(uint i = 0; i < checkpoints.size(); i++){
-			save_names.insertLast("\"" + join(checkpoints[i].name.split("\""), "\\\"") + "\"");
-		}
-		return_msg += join(save_names, " ");
-
-		hotspot_obj.ReceiveScriptMessage(return_msg);
+		LoadCheckpoint();
 	}else if(token == "drika_write_file"){
 		token_iter.FindNextToken(msg);
 		int hotspot_id = atoi(token_iter.GetToken(msg));
@@ -956,23 +997,8 @@ void AddUIElement(string json_string){
 	}
 }
 
-void SaveCheckpoint(string save_name){
-	CheckpointData@ checkpoint = null;
-	for(uint i = 0; i < checkpoints.size(); i++){
-		if(checkpoints[i].name == save_name){
-			@checkpoint = @checkpoints[i];
-			checkpoints.removeAt(i);
-			break;
-		}
-	}
-
-	if(checkpoint is null){
-		Log(error, "Could not find the checkpoint data! " + save_name);
-		return;
-	}
-
-	//Move the checkpoint to the end of the array so it can be used as the latest checkpoint.
-	checkpoints.insertLast(checkpoint);
+void SaveCheckpoint(){
+	@checkpoint = CheckpointData();
 
 	JSON json;
 	JSONValue object_data;
@@ -1175,25 +1201,14 @@ void SaveCheckpoint(string save_name){
 	checkpoint.data = json.writeString(false);
 }
 
-void LoadCheckpoint(string load_name){
-	CheckpointData@ checkpoint = null;
-	if(load_name == "Latest"){
-		if(checkpoints.size() > 0){
-			@checkpoint = @checkpoints[checkpoints.size() - 1];
-		}
-	}else{
-		for(uint i = 0; i < checkpoints.size(); i++){
-			if(checkpoints[i].name == load_name){
-				@checkpoint = @checkpoints[i];
-				break;
-			}
-		}
-	}
-
+void LoadCheckpoint(){
 	if(checkpoint is null){
-		Log(error, "Could not find the checkpoint data! " + load_name);
+		Log(error, "Could not find the checkpoint data!");
 		return;
 	}
+
+	added_death_screen = false;
+	death_container.clear();
 
 	JSON file;
 	file.parseString(checkpoint.data);
@@ -1411,8 +1426,6 @@ void LoadCheckpoint(string load_name){
 		string json_string = ui_element_data[i].asString();
 		AddUIElement(json_string);
 	}
-
-	loading_checkpoint = false;
 }
 
 DrikaUIElement@ GetUIElement(string identifier){
@@ -1575,6 +1588,55 @@ void Update(){
 	UpdateWriteFileProcesses();
 	UpdateMusic();
 	UpdateUIElements();
+	UpdateDialogueFade();
+	UpdateCheckpointFade();
+	CheckPlayerDeath();
+
+	if(show_dialogue){
+		if(dialogue_move_in){
+			UpdateDialogueMoveIn();
+		}
+		UpdateDialogueDisplacement();
+	}
+
+	if(resetting){
+		PostReset();
+		resetting = false;
+	}
+}
+
+void PostReset(){
+	added_death_screen = false;
+}
+
+void CheckPlayerDeath(){
+	// Only check for player death if there is a checkpoint data available.
+	if(checkpoint is null || checkpoint_fading){
+		return;
+	}
+
+	int player_id = GetPlayerCharacterID();
+
+	if(player_id != -1 && ObjectExists(player_id)){
+		MovementObject@ char = ReadCharacter(player_id);
+
+		// Allow clicking to load checkpoint after one second of showing the death screen.
+		if(added_death_screen && ko_time < the_time - 1.0){
+			if(GetInputPressed(char.controller_id, "attack")){
+				added_death_screen = false;
+				death_container.clear();
+				blackout_amount = 0.0f;
+				checkpoint_fading = true;
+				checkpoint_fade_timer = 0.0f;
+				checkpoint_fade_direction = 1.0f;
+			}
+		}else if(char.GetIntVar("knocked_out") != _awake) {
+			AddDeathScreen();
+		}
+	}
+}
+
+void UpdateDialogueFade(){
 	if(fading){
 		blackout_amount = fade_timer / fade_duration;
 		if(fade_direction == 1.0){
@@ -1600,12 +1662,25 @@ void Update(){
 		}
 		fade_timer += time_step;
 	}
+}
 
-	if(show_dialogue){
-		if(dialogue_move_in){
-			UpdateDialogueMoveIn();
+void UpdateCheckpointFade(){
+	if(checkpoint_fading){
+		checkpoint_blackout_amount = checkpoint_fade_timer / checkpoint_fade_duration;
+		if(checkpoint_fade_direction == 1.0){
+			if(checkpoint_fade_timer >= checkpoint_fade_duration){
+				//Screen has faded all the way to black.
+				checkpoint_fade_direction = -1.0;
+				LoadCheckpoint();
+			}
+			checkpoint_fade_timer += time_step;
+		}else{
+			if(checkpoint_fade_timer <= 0.0){
+				//Screen has faded all the way from black to clear.
+				checkpoint_fading = false;
+			}
+			checkpoint_fade_timer -= time_step;
 		}
-		UpdateDialogueDisplacement();
 	}
 }
 
@@ -1681,33 +1756,33 @@ void UpdateUIElements(){
 }
 
 int GetPlayerCharacterID() {
-    int num = GetNumCharacters();
-    for(int i=0; i<num; ++i){
-        MovementObject@ char = ReadCharacter(i);
-        if(char.controlled){
-            return i;
-        }
-    }
-    return -1;
+	int num = GetNumCharacters();
+	for(int i=0; i<num; ++i){
+		MovementObject@ char = ReadCharacter(i);
+		if(char.controlled){
+			return i;
+		}
+	}
+	return -1;
 }
 
 int ThreatsRemaining() {
-    int player_id = GetPlayerCharacterID();
-    if(player_id == -1){
-        return -1;
-    }
-    MovementObject@ player_char = ReadCharacter(player_id);
+	int player_id = GetPlayerCharacterID();
+	if(player_id == -1){
+		return -1;
+	}
+	MovementObject@ player_char = ReadCharacter(player_id);
 
-    int num = GetNumCharacters();
-    int num_threats = 0;
-    for(int i=0; i<num; ++i){
-        MovementObject@ char = ReadCharacter(i);
-        if(char.GetIntVar("knocked_out") == _awake && !player_char.OnSameTeam(char))
-        {
-            ++num_threats;
-        }
-    }
-    return num_threats;
+	int num = GetNumCharacters();
+	int num_threats = 0;
+	for(int i=0; i<num; ++i){
+		MovementObject@ char = ReadCharacter(i);
+		if(char.GetIntVar("knocked_out") == _awake && !player_char.OnSameTeam(char))
+		{
+			++num_threats;
+		}
+	}
+	return num_threats;
 }
 
 void UpdateGrabber(){
