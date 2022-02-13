@@ -219,7 +219,9 @@ void AddDeathScreen(){
 
 		if(player_id != -1 && ObjectExists(player_id)){
 			float player_blackout_amount = 0.2 + 0.6 * (1.0 - pow(0.5, (the_time - ko_time)));
-			ReadCharacter(player_id).SetFloatVar("level_blackout", player_blackout_amount);
+			// TODO replace this with the next function once IT is released.
+			ReadCharacter(player_id).Execute("level_blackout = "+player_blackout_amount+";");
+			/* ReadCharacter(player_id).SetFloatVar("level_blackout", player_blackout_amount); */
 		}
 		return;
 	}
