@@ -594,22 +594,39 @@ void DrawEditor(){
 	if(show_editor){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
+		ImGui_PushStyleColor(ImGuiCol_TitleBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, background_color);
-		ImGui_PushStyleColor(ImGuiCol_TitleBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 		ImGui_PushStyleColor(ImGuiCol_Header, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_HeaderHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_HeaderActive, item_clicked);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, background_color);
+
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrab, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
+
 		ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
 		ImGui_PushStyleColor(ImGuiCol_Button, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ButtonHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ButtonActive, item_clicked);
+
+		ImGui_PushStyleColor(ImGuiCol_CheckMark, text_color);
+		ImGui_PushStyleColor(ImGuiCol_TextSelectedBg, titlebar_color);
+
+		ImGui_PushStyleColor(ImGuiCol_SliderGrab, item_clicked);
+		ImGui_PushStyleColor(ImGuiCol_SliderGrabActive, titlebar_color);
+
+		ImGui_PushStyleColor(ImGuiCol_FrameBg, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_FrameBgHovered, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_FrameBgActive, item_clicked);
+
+		ImGui_PushStyleColor(ImGuiCol_ResizeGrip, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_ResizeGripHovered, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_ResizeGripActive, item_clicked);
+
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(350, 350));
 
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
@@ -630,14 +647,14 @@ void DrawEditor(){
 			GetCurrentElement().DrawSettings();
 			ImGui_PopItemWidth();
 
-			if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
-				GetCurrentElement().ApplySettings();
-				Save();
-				steal_focus = true;
-				ImGui_CloseCurrentPopup();
-			}
+			vec4 window_info = GetWindowInfo();
 
 			ImGui_EndPopup();
+
+			if(CheckClosePopup(window_info)){
+				GetCurrentElement().ApplySettings();
+				Save();
+			}
 		}
 		ImGui_PopStyleVar();
 
@@ -689,10 +706,9 @@ void DrawEditor(){
 				} */
 
 				DrawPaletteModal();
-				if(ImGui_Selectable("Configure Palette")){
-
+				if(ImGui_Selectable("Configure Palette", false, ImGuiSelectableFlags_DontClosePopups)){
+					ImGui_OpenPopup("Configure Palette");
 				}
-				ImGui_OpenPopupOnItemClick("Configure Palette", 0);
 
 				ImGui_EndMenu();
 			}
@@ -718,16 +734,19 @@ void DrawEditor(){
 
 			if(ImGui_BeginMenu("About")){
 				DrawHardwareInfoModal();
-				if(ImGui_Selectable("Hardware Info")){}
-				ImGui_OpenPopupOnItemClick("Hardware Info", 0);
+				if(ImGui_Selectable("Hardware Info", false, ImGuiSelectableFlags_DontClosePopups)){
+					ImGui_OpenPopup("Hardware Info");
+				}
 
 				DrawCreditsModal();
-				if(ImGui_Selectable("Credits")){}
-				ImGui_OpenPopupOnItemClick("Credits", 0);
+				if(ImGui_Selectable("Credits", false, ImGuiSelectableFlags_DontClosePopups)){
+					ImGui_OpenPopup("Credits");
+				}
 
 				DrawDocsModal();
-				if(ImGui_Selectable("Docs")){}
-				ImGui_OpenPopupOnItemClick("Docs", 0);
+				if(ImGui_Selectable("Docs", false, ImGuiSelectableFlags_DontClosePopups)){
+					ImGui_OpenPopup("Docs");
+				}
 
 				ImGui_EndMenu();
 			}
@@ -935,7 +954,7 @@ void DrawEditor(){
 			dragging = false;
 		}
 
-		ImGui_PopStyleColor(18);
+		ImGui_PopStyleColor(28);
 	}
 	if(reorded && !ImGui_IsMouseDragging(0)){
 		reorded = false;
@@ -946,18 +965,18 @@ void DrawEditor(){
 
 void DrawPaletteModal(){
 	ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
-	if(ImGui_BeginPopupModal("Configure Palette", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
+	if(ImGui_BeginPopupModal("Configure Palette", 0)){
 		if(ImGui_Button("Reset to defaults")){
 			LoadPalette(true);
 			SavePalette();
 		}
 		ImGui_Separator();
 
-		ImGui_BeginChild("Palette", vec2(-1, -1));
 		ImGui_PushItemWidth(-1);
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, 200.0);
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Function Colors");
 		ImGui_NextColumn();
 		ImGui_NextColumn();
@@ -979,10 +998,12 @@ void DrawPaletteModal(){
 			ImGui_NextColumn();
 		}
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("UI Colors");
 		ImGui_NextColumn();
 		ImGui_NextColumn();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Background Color");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(-1);
@@ -990,6 +1011,7 @@ void DrawPaletteModal(){
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Titlebar Color");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(-1);
@@ -997,6 +1019,7 @@ void DrawPaletteModal(){
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Item Hovered");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(-1);
@@ -1004,6 +1027,7 @@ void DrawPaletteModal(){
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Item Clicked");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(-1);
@@ -1011,6 +1035,7 @@ void DrawPaletteModal(){
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
+		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Text Color");
 		ImGui_NextColumn();
 		ImGui_PushItemWidth(-1);
@@ -1019,15 +1044,14 @@ void DrawPaletteModal(){
 		ImGui_NextColumn();
 
 		ImGui_PopItemWidth();
-		ImGui_EndChild();
 
-		if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
-			steal_focus = true;
-			SavePalette();
-			ImGui_CloseCurrentPopup();
-		}
+		vec4 window_info = GetWindowInfo();
 
 		ImGui_EndPopup();
+
+		if(CheckClosePopup(window_info)){
+			SavePalette();
+		}
 	}
 }
 
@@ -1166,12 +1190,11 @@ void DrawCreditsModal(){
 		ImGui_Text("Merlyn");
 		ImGui_NextColumn();
 
-		if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
-			steal_focus = true;
-			ImGui_CloseCurrentPopup();
-		}
+		vec4 window_info = GetWindowInfo();
 
 		ImGui_EndPopup();
+
+		CheckClosePopup(window_info);
 	}
 }
 
@@ -2088,4 +2111,32 @@ string ShortenPath(string path){
 	}
 
 	return "";
+}
+
+vec4 GetWindowInfo(){
+	vec4 info;
+
+	info.x = ImGui_GetWindowPos().x;
+	info.y = ImGui_GetWindowPos().y;
+	info.z = info.x + ImGui_GetWindowSize().x;
+	info.a = info.y + ImGui_GetWindowSize().y;
+
+	return info;
+}
+
+bool CheckClosePopup(vec4 window_info){
+	vec2 mouse_pos = ImGui_GetMousePos();
+	bool hovering_window = (mouse_pos.x > window_info.x && mouse_pos.x < window_info.z && mouse_pos.y > window_info.y && mouse_pos.y < window_info.a);
+
+	if(ImGui_IsRootWindowOrAnyChildHovered() || ImGui_IsAnyItemHovered()){
+		hovering_window = true;
+	}
+
+	if((!hovering_window && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
+		steal_focus = true;
+		ImGui_CloseCurrentPopup();
+		return true;
+	}
+
+	return false;
 }

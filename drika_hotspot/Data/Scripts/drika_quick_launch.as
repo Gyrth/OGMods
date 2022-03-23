@@ -59,10 +59,9 @@ class DrikaQuickLaunch{
 			update_quick_launch_scroll = true;
 			QueryElement(quick_launch_search_buffer);
 			open_quick_launch = false;
-			quick_launch_open = true;
 		}
 
-		if(ImGui_BeginPopupModal("Quick Launch", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar)){
+		if(ImGui_BeginPopupModal("Quick Launch", ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar)){
 			ImGui_SetWindowFontScale(2.0);
 			ImGui_AlignTextToFramePadding();
 			ImGui_SetTextBuf(quick_launch_search_buffer);
@@ -70,14 +69,16 @@ class DrikaQuickLaunch{
 			ImGui_SameLine();
 			ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth());
 
-			if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
-				ImGui_SetKeyboardFocusHere(-1);
-			}
-
 			if(ImGui_InputText("", ImGuiInputTextFlags_AutoSelectAll)){
 				quick_launch_search_buffer = ImGui_GetTextBuf();
 				QueryElement(quick_launch_search_buffer);
 				selected_item = 0;
+			}
+
+			if(!quick_launch_open){
+				Log(warning, "Set keyboard focus");
+				ImGui_SetKeyboardFocusHere(-1);
+				quick_launch_open = true;
 			}
 
 			//The lctrl check only works once when the popup opens. When after that, it's always returning false.
@@ -100,7 +101,7 @@ class DrikaQuickLaunch{
 			ImGui_PopItemWidth();
 
 			ImGui_BeginChild("Quick Launch Elements", vec2(-1, -1), false, ImGuiWindowFlags_NoInputs);
-			ImGui_SetWindowFontScale(2.0);
+			ImGui_SetWindowFontScale(1.5);
 			for(uint i = 0; i < results.size(); i++){
 				vec4 text_color = display_colors[results[i].type];
 				ImGui_PushStyleColor(ImGuiCol_Text, text_color);
@@ -128,28 +129,25 @@ class DrikaQuickLaunch{
 
 			ImGui_EndChild();
 
-			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
-				ImGui_CloseCurrentPopup();
-				quick_launch_open = false;
-			}
-
-			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow))){
+			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_UpArrow), true)){
 				if(selected_item > 0){
 					selected_item -= 1;
 					update_quick_launch_scroll = true;
 				}
-			}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow))){
+			}else if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_DownArrow), true)){
 				if(selected_item < int(results.size() - 1)){
 					selected_item += 1;
 					update_quick_launch_scroll = true;
 				}
 			}
 
-			if(!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)){
-				ImGui_CloseCurrentPopup();
-			}
+			vec4 window_info = GetWindowInfo();
 
 			ImGui_EndPopup();
+
+			if(CheckClosePopup(window_info)){
+				quick_launch_open = false;
+			}
 		}
 		ImGui_PopStyleVar();
 	}

@@ -947,7 +947,21 @@ class DrikaDialogue : DrikaElement{
 			ImGui_SameLine();
 			ImGui_Checkbox("Wait Animation End", wait_anim_end);
 
+			float custom_width = 100.0f;
+
+			ImGui_SetTextBuf(search_buffer);
+			ImGui_Text("Search:");
+			ImGui_SameLine();
+			ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth() - custom_width);
+			if(ImGui_InputText("", ImGuiInputTextFlags_AutoSelectAll)){
+				search_buffer = ImGui_GetTextBuf();
+				QueryAnimation(ImGui_GetTextBuf());
+			}
+			ImGui_PopItemWidth();
+
+			ImGui_SameLine();
 			ImGui_AlignTextToFramePadding();
+			ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth());
 			if(ImGui_Button("Custom...")){
 				string new_path = GetUserPickedReadPath("anm", "Data/Animations");
 				if(new_path != ""){
@@ -986,15 +1000,6 @@ class DrikaDialogue : DrikaElement{
 						DisplayError("Animation issue", "Only .anm files are supported.");
 					}
 				}
-			}
-			ImGui_SameLine();
-			ImGui_SetTextBuf(search_buffer);
-			ImGui_Text("Search:");
-			ImGui_SameLine();
-			ImGui_PushItemWidth(ImGui_GetContentRegionAvailWidth());
-			if(ImGui_InputText("", ImGuiInputTextFlags_AutoSelectAll)){
-				search_buffer = ImGui_GetTextBuf();
-				QueryAnimation(ImGui_GetTextBuf());
 			}
 			ImGui_PopItemWidth();
 
@@ -1378,12 +1383,9 @@ class DrikaDialogue : DrikaElement{
 			return;
 		}
 		if(ImGui_TreeNodeEx(category, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
-			ImGui_Unindent(22.0f);
 			for(uint i = 0; i < items.size(); i++){
 				AddItem(items[i]);
 			}
-			ImGui_Indent(22.0f);
-			ImGui_TreePop();
 		}
 	}
 

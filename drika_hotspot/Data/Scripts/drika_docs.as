@@ -82,7 +82,6 @@ void DrawDocsModal(){
 	ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(350, 350));
 
 	if(ImGui_BeginPopupModal("Docs", 0)){
-
 		ImGui_BeginChild("Docsss", vec2(-1.0, -1.0), false);
 
 		ImGui_Columns(2, false);
@@ -99,7 +98,7 @@ void DrawDocsModal(){
 			}
 
 			ImGui_PushStyleColor(ImGuiCol_Text, display_colors[doc_data[i].function_color]);
-			if(ImGui_Selectable(doc_data[i].name, current_page.name == doc_data[i].name)){
+			if(ImGui_Selectable(doc_data[i].name, current_page.name == doc_data[i].name, ImGuiSelectableFlags_DontClosePopups)){
 				OpenDocPage(doc_data[i].name);
 			}
 			ImGui_PopStyleColor();
@@ -128,14 +127,13 @@ void DrawDocsModal(){
 
 		ImGui_EndChild();
 
-		if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
-			steal_focus = true;
-			ImGui_CloseCurrentPopup();
-		}
-
 		ImGui_EndChild();
 
+		vec4 window_info = GetWindowInfo();
+
 		ImGui_EndPopup();
+
+		CheckClosePopup(window_info);
 	}
 	ImGui_PopStyleVar();
 }
