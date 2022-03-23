@@ -54,17 +54,14 @@ flat in int instance_id;
 
 uniform float overbright;
 
-uniform int stipple[64];
-
 void main() {
-	vec4 colormap = texture(tex0, tex_coord);
+	vec4 colormap = texture(tex0, frag_tex_coords);
 	out_color = colormap;
 
 	float scale = 2.0;
 
 	if(int(gl_FragCoord.x) % 2 != 0 || int(gl_FragCoord.y) % 2 != 0){
-
 	// if(int((gl_FragCoord.x + gl_FragCoord.y) / scale) % 2 == 0 || int((gl_FragCoord.x - gl_FragCoord.y) / scale) % 2 == 0){
-    	discard;
+		discard;
 	}
 }
