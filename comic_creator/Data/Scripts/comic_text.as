@@ -153,7 +153,7 @@ class ComicText : ComicElement{
 	}
 
 	void DrawSettings(){
-		if(ImGui_InputTextMultiline("", joined_content, 512, vec2(-1, ImGui_GetWindowHeight() -80.0))){
+		if(ImGui_InputTextMultiline("", joined_content, 512, vec2(-1, ImGui_GetWindowHeight() -120.0))){
 			content = joined_content.split("\n");
 			SetNewText();
 		}

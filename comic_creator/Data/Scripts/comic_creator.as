@@ -70,38 +70,38 @@ vec4 text_color(0.7, 0.7, 0.7, 1.0);
 
 array<string> tween_types = {
 								"linearTween",
-							    "inQuadTween",
-							    "outQuadTween",
-							    "inOutQuadTween",
-							    "outInQuadTween",
-							    "inCubicTween",
-							    "outCubicTween",
-							    "inOutCubicTween",
-							    "outInCubicTween",
-							    "inQuartTween",
-							    "outQuartTween",
-							    "inOutQuartTween",
-							    "outInQuartTween",
-							    "inQuintTween",
-							    "outQuintTween",
-							    "inOutQuintTween",
-							    "outInQuintTween",
-							    "inSineTween",
-							    "outSineTween",
-							    "inOutSineTween",
-							    "outInSineTween",
-							    "inExpoTween",
-							    "outExpoTween",
-							    "inOutExpoTween",
-							    "outInExpoTween",
-							    "inCircTween",
-							    "outCircTween",
-							    "inOutCircTween",
-							    "outInCircTween",
-							    "outBounceTween",
-							    "inBounceTween",
-							    "inOutBounceTween",
-    							"outInBounceTween"
+								"inQuadTween",
+								"outQuadTween",
+								"inOutQuadTween",
+								"outInQuadTween",
+								"inCubicTween",
+								"outCubicTween",
+								"inOutCubicTween",
+								"outInCubicTween",
+								"inQuartTween",
+								"outQuartTween",
+								"inOutQuartTween",
+								"outInQuartTween",
+								"inQuintTween",
+								"outQuintTween",
+								"inOutQuintTween",
+								"outInQuintTween",
+								"inSineTween",
+								"outSineTween",
+								"inOutSineTween",
+								"outInSineTween",
+								"inExpoTween",
+								"outExpoTween",
+								"inOutExpoTween",
+								"outInExpoTween",
+								"inCircTween",
+								"outCircTween",
+								"inOutCircTween",
+								"outInCircTween",
+								"outBounceTween",
+								"inBounceTween",
+								"inOutBounceTween",
+								"outInBounceTween"
 							};
 
 // This init is used when loaded from the main menu.
@@ -656,22 +656,39 @@ void DrawGUI(){
 	if(editor_open){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
+		ImGui_PushStyleColor(ImGuiCol_TitleBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, background_color);
-		ImGui_PushStyleColor(ImGuiCol_TitleBg, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 		ImGui_PushStyleColor(ImGuiCol_Header, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_HeaderHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_HeaderActive, item_clicked);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, background_color);
+
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrab, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
+
 		ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
 		ImGui_PushStyleColor(ImGuiCol_Button, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ButtonHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ButtonActive, item_clicked);
+
+		ImGui_PushStyleColor(ImGuiCol_CheckMark, text_color);
+		ImGui_PushStyleColor(ImGuiCol_TextSelectedBg, titlebar_color);
+
+		ImGui_PushStyleColor(ImGuiCol_SliderGrab, item_clicked);
+		ImGui_PushStyleColor(ImGuiCol_SliderGrabActive, titlebar_color);
+
+		ImGui_PushStyleColor(ImGuiCol_FrameBg, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_FrameBgHovered, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_FrameBgActive, item_clicked);
+
+		ImGui_PushStyleColor(ImGuiCol_ResizeGrip, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_ResizeGripHovered, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_ResizeGripActive, item_clicked);
+
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 300));
 
 		ImGui_SetNextWindowSize(vec2(600.0f, 400.0f), ImGuiSetCond_FirstUseEver);
@@ -689,21 +706,11 @@ void DrawGUI(){
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(300, 150));
 		ImGui_SetNextWindowSize(vec2(500.0f, 450.0f), ImGuiSetCond_FirstUseEver);
-        if(ImGui_BeginPopupModal("Edit", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
-			ImGui_BeginChild("Element Settings", vec2(-1, ImGui_GetWindowHeight() - 60));
+		if(ImGui_BeginPopupModal("Edit", 0)){
 			GetCurrentElement().DrawSettings();
-			ImGui_EndChild();
-			ImGui_BeginChild("Modal Buttons", vec2(-1, 60));
-			if(ImGui_Button("Close")){
-				unsaved = true;
-				GetCurrentElement().EditDone();
-				ImGui_CloseCurrentPopup();
-			}
-			ImGui_EndChild();
 
-			if(ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
+			if(CheckClosePopup(GetWindowInfo())){
 				GetCurrentElement().EditDone();
-				ImGui_CloseCurrentPopup();
 			}
 
 			ImGui_EndPopup();
@@ -822,13 +829,13 @@ void DrawGUI(){
 				if(drag_dy < 0.0 && i > 0){
 					// Swap
 					comic_indexes[i] = comic_indexes[i-1];
-            		comic_indexes[i-1] = item_no;
+					comic_indexes[i-1] = item_no;
 					drag_target_line = i-1;
 					reorded = true;
 					ImGui_ResetMouseDragDelta();
 				}else if(drag_dy > 0.0 && i < comic_elements.size() - 1){
 					comic_indexes[i] = comic_indexes[i+1];
-            		comic_indexes[i+1] = item_no;
+					comic_indexes[i+1] = item_no;
 					drag_target_line = i+1;
 					reorded = true;
 					ImGui_ResetMouseDragDelta();
@@ -857,7 +864,7 @@ void DrawGUI(){
 		}
 
 		ImGui_End();
-		ImGui_PopStyleColor(18);
+		ImGui_PopStyleColor(28);
 	}
 
 	if(reorded && !ImGui_IsMouseDragging(0)){
@@ -1123,4 +1130,32 @@ array<JSONValue> GetJSONValueArray(JSONValue data, string var_name, array<JSONVa
 	}else{
 		return default_value;
 	}
+}
+
+vec4 GetWindowInfo(){
+	vec4 info;
+
+	info.x = ImGui_GetWindowPos().x;
+	info.y = ImGui_GetWindowPos().y;
+	info.z = info.x + ImGui_GetWindowSize().x;
+	info.a = info.y + ImGui_GetWindowSize().y;
+
+	return info;
+}
+
+bool CheckClosePopup(vec4 window_info){
+	vec2 mouse_pos = ImGui_GetMousePos();
+	bool hovering_window = (mouse_pos.x > window_info.x && mouse_pos.x < window_info.z && mouse_pos.y > window_info.y && mouse_pos.y < window_info.a);
+
+	if(ImGui_IsRootWindowOrAnyChildHovered() || ImGui_IsAnyItemHovered()){
+		hovering_window = true;
+	}
+
+	if((!hovering_window && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
+		unsaved = true;
+		ImGui_CloseCurrentPopup();
+		return true;
+	}
+
+	return false;
 }
