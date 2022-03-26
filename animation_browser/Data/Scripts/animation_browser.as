@@ -115,24 +115,38 @@ void Display(){
 
 	ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 	ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
+	ImGui_PushStyleColor(ImGuiCol_TitleBg, background_color);
 	ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
-	ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, titlebar_color);
-	ImGui_PushStyleColor(ImGuiCol_TitleBg, item_hovered);
+	ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, background_color);
 	ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 	ImGui_PushStyleColor(ImGuiCol_Header, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_HeaderHovered, item_hovered);
 	ImGui_PushStyleColor(ImGuiCol_HeaderActive, item_clicked);
 	ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, background_color);
+
 	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrab, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
 	ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
+
 	ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
 	ImGui_PushStyleColor(ImGuiCol_Button, titlebar_color);
 	ImGui_PushStyleColor(ImGuiCol_ButtonHovered, item_hovered);
 	ImGui_PushStyleColor(ImGuiCol_ButtonActive, item_clicked);
+
+	ImGui_PushStyleColor(ImGuiCol_CheckMark, text_color);
 	ImGui_PushStyleColor(ImGuiCol_TextSelectedBg, titlebar_color);
-	ImGui_PushStyleColor(ImGuiCol_ComboBg, titlebar_color);
+
+	ImGui_PushStyleColor(ImGuiCol_SliderGrab, item_clicked);
+	ImGui_PushStyleColor(ImGuiCol_SliderGrabActive, titlebar_color);
+
+	ImGui_PushStyleColor(ImGuiCol_FrameBg, item_hovered);
+	ImGui_PushStyleColor(ImGuiCol_FrameBgHovered, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_FrameBgActive, item_clicked);
+
+	ImGui_PushStyleColor(ImGuiCol_ResizeGrip, item_hovered);
+	ImGui_PushStyleColor(ImGuiCol_ResizeGripHovered, titlebar_color);
+	ImGui_PushStyleColor(ImGuiCol_ResizeGripActive, item_clicked);
 
 	if(show_pick_animation_button){
 		if(ImGui_Begin("###Dialogue Editor", show_pick_animation_button, ImGuiWindowFlags_MenuBar)){
@@ -195,7 +209,7 @@ void Display(){
 		}
 	}
 
-	ImGui_PopStyleColor(20);
+	ImGui_PopStyleColor(28);
 }
 
 void AddCategory(string category, array<string> items){
@@ -203,13 +217,10 @@ void AddCategory(string category, array<string> items){
 		return;
 	}
 	if(ImGui_TreeNodeEx(category, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
-		ImGui_Unindent(22.0f);
 		for(uint i = 0; i < items.size(); i++){
 			AddItem(items[i], animation_index);
 			animation_index++;
 		}
-		ImGui_Indent(22.0f);
-		ImGui_TreePop();
 	}
 }
 
