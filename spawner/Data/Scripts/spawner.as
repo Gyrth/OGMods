@@ -25,7 +25,6 @@ int placeholder_id = -1;
 float paint_timer = 0.0;
 float paint_timeout = 0.1;
 float spawn_height_offset = 0.0;
-bool open_palette = false;
 bool steal_focus = false;
 string input_query;
 int set_position = -1;
@@ -190,7 +189,7 @@ class GUISpawnerItem{
 			ImGui_PushStyleColor(ImGuiCol_ChildBg, item_background);
 		}
 
-		ImGui_BeginChild(id + "button", vec2(icon_size, icon_size + title_height), true, ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui_BeginChild(id + "button", vec2(icon_size + 15.0f, icon_size + title_height + 20.0f), true, ImGuiWindowFlags_NoScrollWithMouse);
 		ImGui_Indent((title_height / 2.0f) - (padding / 2.0f));
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text(title);
@@ -625,22 +624,38 @@ void DrawGUI(){
 
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
+		ImGui_PushStyleColor(ImGuiCol_TitleBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgActive, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_TitleBgCollapsed, background_color);
-		ImGui_PushStyleColor(ImGuiCol_TitleBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_MenuBarBg, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_Text, text_color);
 		ImGui_PushStyleColor(ImGuiCol_Header, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_HeaderHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_HeaderActive, item_clicked);
-		ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, transparent);
+		ImGui_PushStyleColor(ImGuiCol_ScrollbarBg, background_color);
+
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrab, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ScrollbarGrabActive, item_clicked);
+
 		ImGui_PushStyleColor(ImGuiCol_CloseButton, background_color);
 		ImGui_PushStyleColor(ImGuiCol_Button, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ButtonHovered, item_hovered);
 		ImGui_PushStyleColor(ImGuiCol_ButtonActive, item_clicked);
+
+		ImGui_PushStyleColor(ImGuiCol_CheckMark, text_color);
+		ImGui_PushStyleColor(ImGuiCol_TextSelectedBg, titlebar_color);
+
+		ImGui_PushStyleColor(ImGuiCol_SliderGrab, item_clicked);
+		ImGui_PushStyleColor(ImGuiCol_SliderGrabActive, titlebar_color);
+
+		ImGui_PushStyleColor(ImGuiCol_FrameBg, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_FrameBgHovered, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_FrameBgActive, item_clicked);
+
+		ImGui_PushStyleColor(ImGuiCol_ResizeGrip, item_hovered);
+		ImGui_PushStyleColor(ImGuiCol_ResizeGripHovered, titlebar_color);
+		ImGui_PushStyleColor(ImGuiCol_ResizeGripActive, item_clicked);
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(550,450));
 		ImGui_Begin("Spawner", show, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_MenuBar);
@@ -651,13 +666,6 @@ void DrawGUI(){
 			ImGui_SetNextWindowFocus();
 		}
 
-		if(open_palette){
-			ImGui_OpenPopup("Configure Palette");
-			open_palette = false;
-		}
-
-		DrawPalettePopup();
-
 		if(ImGui_BeginMenuBar()){
 			if(ImGui_Button("Load File")){
 				string path = GetUserPickedReadPath("xml", "Data/Objects");
@@ -667,8 +675,10 @@ void DrawGUI(){
 			}
 
 			if(ImGui_BeginMenu("Settings")){
-				if(ImGui_MenuItem("Configure Palette")){
-					open_palette = true;
+				DrawPaletteModal();
+
+				if(ImGui_Selectable("Configure Palette", false, ImGuiSelectableFlags_DontClosePopups)){
+					ImGui_OpenPopup("Configure Palette");
 				}
 
 				if(ImGui_DragInt("Icon Size", new_icon_size, 1.0, 75, 500, "%.0f")){
@@ -743,20 +753,19 @@ void DrawGUI(){
 		}
 
 		ImGui_End();
-		ImGui_PopStyleColor(19);
+		ImGui_PopStyleColor(29);
 	}
 }
 
-void DrawPalettePopup(){
+void DrawPaletteModal(){
 	ImGui_SetNextWindowSize(vec2(700.0f, 450.0f), ImGuiSetCond_FirstUseEver);
-	if(ImGui_BeginPopupModal("Configure Palette", ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)){
+	if(ImGui_BeginPopupModal("Configure Palette", 0)){
 		if(ImGui_Button("Reset to defaults")){
 			LoadPalette(true);
 			SavePalette();
 		}
 		ImGui_Separator();
 
-		ImGui_BeginChild("Palette", vec2(-1, -1));
 		ImGui_PushItemWidth(-1);
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, 200.0);
@@ -808,15 +817,14 @@ void DrawPalettePopup(){
 		ImGui_NextColumn();
 
 		ImGui_PopItemWidth();
-		ImGui_EndChild();
 
-		if((!ImGui_IsMouseHoveringAnyWindow() && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
-			steal_focus = true;
-			SavePalette();
-			ImGui_CloseCurrentPopup();
-		}
+		vec4 window_info = GetWindowInfo();
 
 		ImGui_EndPopup();
+
+		if(CheckClosePopup(window_info)){
+			SavePalette();
+		}
 	}
 }
 
@@ -881,22 +889,19 @@ void AddCategory(GUISpawnerCategory@ category){
 	}
 
 	if(ImGui_TreeNodeEx(category.category_name + "(" + category.spawner_items.size() + ")", ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
-		ImGui_Unindent(30.0f);
-		ImGui_BeginChild(category.category_name, vec2(ImGui_GetWindowWidth(), icon_size + title_height), false, ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui_BeginChild(category.category_name, vec2(ImGui_GetWindowWidth(), icon_size + title_height + 20.0f), false, ImGuiWindowFlags_NoScrollWithMouse);
 		float row_size = 0.0f;
 		for(uint i = 0; i < category.spawner_items.size(); i++){
-			row_size += icon_size + padding;
+			row_size += icon_size + padding + 15.0f;
 			if(row_size > ImGui_GetWindowWidth()){
-				row_size = icon_size + padding;
 				ImGui_EndChild();
-				ImGui_BeginChild("child " + i, vec2(ImGui_GetWindowWidth(), icon_size + title_height), false, ImGuiWindowFlags_NoScrollWithMouse);
+				row_size = icon_size + padding + 15.0f;
+				ImGui_BeginChild(category.category_name + i, vec2(ImGui_GetWindowWidth(), icon_size + title_height + 20.0f), false, ImGuiWindowFlags_NoScrollWithMouse);
 			}
 			ImGui_SameLine();
 			category.spawner_items[i].DrawItem();
 		}
 		ImGui_EndChild();
-		ImGui_Indent(30.0f);
-		ImGui_TreePop();
 	}
 }
 
@@ -988,4 +993,33 @@ void SaveSettings(){
 	SavedLevel@ saved_level = save_file.GetSavedLevel("spawner_data");
 	saved_level.SetValue("settings_json", data.writeString(false));
 	save_file.WriteInPlace();
+}
+
+vec4 GetWindowInfo(){
+	vec4 info;
+
+	info.x = ImGui_GetWindowPos().x;
+	info.y = ImGui_GetWindowPos().y;
+	info.z = info.x + ImGui_GetWindowSize().x;
+	info.a = info.y + ImGui_GetWindowSize().y;
+
+	return info;
+}
+
+bool CheckClosePopup(vec4 window_info){
+	vec2 mouse_pos = ImGui_GetMousePos();
+	bool hovering_window = (mouse_pos.x > window_info.x && mouse_pos.x < window_info.z && mouse_pos.y > window_info.y && mouse_pos.y < window_info.a);
+
+	if(ImGui_IsRootWindowOrAnyChildHovered() || ImGui_IsAnyItemHovered()){
+		hovering_window = true;
+	}
+
+	if((!hovering_window && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
+		steal_focus = true;
+		ImGui_CloseCurrentPopup();
+		Log(warning, "Close");
+		return true;
+	}
+
+	return false;
 }
