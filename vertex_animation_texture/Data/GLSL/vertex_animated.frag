@@ -54,17 +54,26 @@ flat in int vertex_id;
 uniform float overbright;
 const float cloud_speed = 0.1;
 
+UNIFORM_AVG_COLOR4
+
 void main() {
 	vec2 pixelated_coord;
+	int normal_image = 0;
 	vec2 texture_size = textureSize(tex0, 0);
+	// vec2 texture_size = vec2(8, 8);
 	float pixels = texture_size.y;
 
 	pixelated_coord.x = (floor(frag_tex_coords.x * pixels) / pixels + ceil(frag_tex_coords.x * pixels) / pixels) / 2.0f;
 	pixelated_coord.y = (floor(frag_tex_coords.y * pixels) / pixels + ceil(frag_tex_coords.y * pixels) / pixels) / 2.0f;
 
-	vec4 colormap = texture(tex0, frag_tex_coords);
+	// vec4 colormap = texture(tex0, frag_tex_coords);
 	// vec4 colormap = textureLod(detail_normal, vec2(frag_tex_coords), 0.0);
 	// vec4 colormap = textureLod(detail_normal, vec3(frag_tex_coords, 1.0), 0.0);
+	// vec4 colormap = textureLod(detail_normal, vec3(pixelated_coord, detail_normal_indices[0]), 0.0);
+
+	// vec4 colormap = textureLod(detail_normal, vec3(pixelated_coord, detail_normal_indices[normal_image]), 0.0);
+	vec4 colormap = textureLod(tex0, vec2(pixelated_coord), 0.0);
+
 	out_color = colormap;
 	// out_color.xyz = vertex_color;
 }

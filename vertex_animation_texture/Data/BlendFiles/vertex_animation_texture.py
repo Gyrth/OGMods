@@ -121,7 +121,7 @@ def create_animation_textures(info):
             difference = rest_vert - vert
         
             x = v.index
-            y = 254 - frame_index
+            y = image_size - 2 - frame_index
             
             float_to_textures(difference, x, y, output_image_1, output_image_2)
             
