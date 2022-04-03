@@ -146,7 +146,7 @@ void main() {
 	int target_resolution = int(texture_size_1.x / texture_mult);
 	float half_pixel_offset = (1.0 / target_resolution) / 2.0;
 
-	for(int i = 0; i <= 83; i++){
+	for(int i = 0; i <= int(texture_size_1.x); i++){
 		int x_pixel = i;
 		float x_pos = 1.0 / target_resolution * x_pixel;
 
@@ -181,8 +181,12 @@ void main() {
 	int y_pixel = 90;
 	float y_pos = 1.0 / target_resolution * y_pixel;
 
-	float animation_speed = 0.15f;
-	float animation_length = 160.0f;
+	float animation_speed = 0.00005f;
+	float animation_length = 48.0f;
+
+	// float animation_speed = 0.15f;
+	// float animation_length = 160.0f;
+
 	float range = animation_length / (texture_size_1.y / texture_mult);
 	float skip_first_frame = half_pixel_offset * 2.0f;
 	float animation_progress = mod((time * animation_speed) / range, range) + skip_first_frame;
@@ -206,7 +210,7 @@ void main() {
 	animated_vertex_position = vertex_position;
 
 	// vertex_color = color_value_2.xyz;
-	vertex_color = index < 14 ? vec3(1.0, 0.0, 0.0) : vec3(1.0);
+	vertex_color = index < 300 ? vec3(1.0, 0.0, 0.0) : vec3(1.0);
 
 	instance_id = gl_InstanceID;
 

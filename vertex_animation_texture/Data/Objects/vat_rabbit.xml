@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <Object>
-	<Model>Data/Models/flag.obj</Model>
+	<Model>Data/Models/rabbit.obj</Model>
 
 	<!-- <ColorMap>Data/Textures/Characters/IGF_Turner/IGF_Turner_color.tga</ColorMap>
 	<NormalMap>Data/Textures/Characters/IGF_Turner/IGF_Turner_normal.tga</NormalMap> -->
 
-	<ColorMap>Data/Textures/ui/t2/logo.png</ColorMap>
-	<NormalMap>Data/Textures/vertex_animation_texture_1.png</NormalMap>
-	<WeightMap>Data/Textures/vertex_animation_texture_2.png</WeightMap>
+	<ColorMap>Data/Textures/Characters/IGF_Guard/IGF_Guard_Color.tga</ColorMap>
+	<NormalMap>Data/Textures/vat_rabbit_1.png</NormalMap>
+	<WeightMap>Data/Textures/vat_rabbit_2.png</WeightMap>
 
 	<!-- <DetailMaps>
 		<DetailMap 	colorpath="Data/Textures/Characters/IGF_Turner/IGF_Turner_color.tga"
@@ -19,6 +19,7 @@
 	</DetailMaps> -->
 
 	<ShaderName>vertex_animated</ShaderName>
-	<flags transparent = "false" double_sided = "false" clamp_texture = "true"/>
+	<flags transparent = "true" double_sided = "false" clamp_texture = "true"/>
+	<!-- clamp_texture = "true" -->
 	<!-- no_collision = "true"  -->
 </Object>

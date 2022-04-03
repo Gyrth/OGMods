@@ -20,7 +20,7 @@
     </DetailMaps>
     <DetailObjects />
 </Terrain>
-<OutOfDate NavMesh="false" NavMeshParamHash="-1674835251" />
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
 <Script></Script>
 <LevelScriptParameters>
@@ -47,7 +47,7 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-40.9958" t1="-9.20044" t2="8.33384" s0="1" s1="1" s2="1" q0="0.0793442" q1="-0.283055" q2="0.0235041" q3="0.955527" euler_x="0.165694" euler_y="-0.575988" euler_z="0" id="0">
+    <CameraObject t0="-37.4751" t1="-8.76203" t2="8.63347" s0="1" s1="1" s2="1" q0="0.0934664" q1="-0.215478" q2="0.0207243" q3="0.971804" euler_x="0.191767" euler_y="-0.436399" euler_z="0" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="-40.9844" t1="-9.54857" t2="6.54892" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/IGF_Turner.xml">
@@ -59,9 +59,17 @@
     <NavmeshRegionObject t0="-54.8046" t1="-8.82827" t2="4.3709" s0="3" s1="3" s2="3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3">
         <parameters />
     </NavmeshRegionObject>
+    <EnvObject t0="-39.4012" t1="-9.59126" t2="6.50426" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/base_guard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-37.8501" t1="-9.52408" t2="6.64768" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+        <parameters />
+    </EnvObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="vertex_animated.xml" path="Data/Objects/vertex_animated.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Default Turner" path="Data/Objects/IGF_Characters/IGF_Turner.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/default Turner.png" />
     <SpawnerItem display_name="Nav Region" path="Data/Objects/navmesh/navmesh_region.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
+    <SpawnerItem display_name="Male Rabbit Guard" path="Data/Objects/IGF_Characters/base_guard.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/Male Rabbit Guard.png" />
+    <SpawnerItem display_name="vat_rabbit.xml" path="Data/Objects/vat_rabbit.xml" thumbnail_path="empty_placeholder.png" />
 </RecentItems>
