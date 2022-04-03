@@ -33,6 +33,7 @@ void Update(int is_paused){
 	position = position + (bounds.x / 2.0);
 	position = position / bounds.x;
 
+	Log(warning, "--------------------");
 	Log(warning, "adjusted " + position);
 	vec2 encoded = EncodeFloatRG(position);
 	Log(warning, "encoded " + encoded.x + "," + encoded.y);

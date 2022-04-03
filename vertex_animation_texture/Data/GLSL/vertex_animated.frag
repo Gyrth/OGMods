@@ -1,5 +1,6 @@
-#version 150 core
+#version 460 core
 #extension GL_ARB_shader_storage_buffer_object : enable
+#extension GL_ARB_shader_draw_parameters : enable
 
 uniform float time;
 uniform vec3 cam_pos;
@@ -14,6 +15,11 @@ uniform sampler2D tex1; // Normalmap
 uniform sampler2D tex2; // Diffuse cubemap
 uniform sampler2D tex3; // Diffuse cubemap
 uniform sampler2DShadow tex4; // Shadows
+uniform sampler2D tex5;// TranslucencyMap / WeightMap
+uniform sampler2D tex6;
+uniform sampler2D tex7;
+uniform sampler2D tex8;
+uniform sampler2D tex9;
 
 const int kMaxInstances = 100;
 
@@ -51,8 +57,14 @@ uniform float overbright;
 const float cloud_speed = 0.1;
 
 void main() {
+	vec2 pixelated_coord;
+	vec2 texture_size = textureSize(tex0, 0);
+	float pixels = texture_size.y;
 
-	vec4 colormap = texture(tex0, tex_coord);
+	pixelated_coord.x = (floor(frag_tex_coords.x * pixels) / pixels + ceil(frag_tex_coords.x * pixels) / pixels) / 2.0f;
+	pixelated_coord.y = (floor(frag_tex_coords.y * pixels) / pixels + ceil(frag_tex_coords.y * pixels) / pixels) / 2.0f;
+
+	vec4 colormap = textureLod(tex0, pixelated_coord, 0);
 	out_color = colormap;
 	// out_color.xyz = vertex_color;
 }

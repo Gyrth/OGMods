@@ -70,6 +70,9 @@ def create_animation_textures(info):
     background_value = background_value / bounds.x
     encoded_background_value = EncodeFloatRG(background_value)
     
+    print("encoded_background_value x ", encoded_background_value.x)
+    print("encoded_background_value y ", encoded_background_value.y)
+    
     # The single float value is split into two texture color values.
     background_color_1 = Vector([encoded_background_value.x, encoded_background_value.x, encoded_background_value.x, 1.0])
     background_color_2 = Vector([encoded_background_value.y, encoded_background_value.y, encoded_background_value.y, 1.0])
@@ -94,6 +97,11 @@ def create_animation_textures(info):
     # The vertices location in rest position is used to calculate the vertex offset for the animation.
     rest_data = [vert.co for vert in obj.data.vertices]
     
+    for rest_index in range(len(rest_data)):
+        rest_vert = rest_data[rest_index]
+        # The first column of pixels is the vertex rest position.
+        float_to_textures(rest_vert, rest_index, 255, output_image_1, output_image_2)
+    
     # Each animation frame is single pixel in the x axis on the texture.
     for frame_index in range(frame_start, frame_end + 1):
         bpy.context.scene.frame_set(frame_index)
@@ -112,11 +120,9 @@ def create_animation_textures(info):
             
             difference = rest_vert - vert
         
-            x = frame_index + 1
-            y = v.index
+            x = v.index
+            y = 254 - frame_index
             
-            # The first column of pixels is the vertex rest position.
-            float_to_textures(rest_vert, 0, y, output_image_1, output_image_2)
             float_to_textures(difference, x, y, output_image_1, output_image_2)
             
 #            # Convert it back for debugging purpose.
