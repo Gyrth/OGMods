@@ -1,6 +1,5 @@
-#version 460 core
-#extension GL_ARB_shader_storage_buffer_object : enable
-#extension GL_ARB_shader_draw_parameters : enable
+#version 150
+#extension GL_ARB_shading_language_420pack : enable
 
 uniform float time;
 uniform vec3 cam_pos;
@@ -9,17 +8,16 @@ uniform vec3 cam_pos;
 #include "object_shared150.glsl"
 #include "ambient_tet_mesh.glsl"
 
+// #define detail_normal tex7
+
 uniform vec4 color_tint;
 uniform sampler2D tex0; // ColorMap
 uniform sampler2D tex1; // Normalmap
 uniform sampler2D tex2; // Diffuse cubemap
 uniform sampler2D tex3; // Diffuse cubemap
 uniform sampler2DShadow tex4; // Shadows
-uniform sampler2D tex5;// TranslucencyMap / WeightMap
-uniform sampler2D tex6;
-uniform sampler2D tex7;
-uniform sampler2D tex8;
-uniform sampler2D tex9;
+
+UNIFORM_DETAIL4_TEXTURES
 
 const int kMaxInstances = 100;
 
@@ -64,7 +62,9 @@ void main() {
 	pixelated_coord.x = (floor(frag_tex_coords.x * pixels) / pixels + ceil(frag_tex_coords.x * pixels) / pixels) / 2.0f;
 	pixelated_coord.y = (floor(frag_tex_coords.y * pixels) / pixels + ceil(frag_tex_coords.y * pixels) / pixels) / 2.0f;
 
-	vec4 colormap = textureLod(tex0, pixelated_coord, 0);
+	vec4 colormap = texture(tex0, frag_tex_coords);
+	// vec4 colormap = textureLod(detail_normal, vec2(frag_tex_coords), 0.0);
+	// vec4 colormap = textureLod(detail_normal, vec3(frag_tex_coords, 1.0), 0.0);
 	out_color = colormap;
 	// out_color.xyz = vertex_color;
 }

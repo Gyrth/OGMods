@@ -2,12 +2,20 @@
 <Object>
 	<Model>Data/Models/flag.obj</Model>
 	<ColorMap>Data/Textures/ui/t2/logo.png</ColorMap>
-	<NormalMap>Data/Textures/vertex_animation_texture_1.png</NormalMap>
-	<WeightMap>Data/Textures/vertex_animation_texture_2.png</WeightMap>
+	<NormalMap>Data/Textures/Terrain/DetailTextures/gray_rock_normal.tga</NormalMap>
+	<WeightMap>Data/Prototypes/CaveArena/Textures/CaveArena_Weights.tga</WeightMap>
 	<DetailMaps>
-		<DetailMap 	colorpath="Data/Textures/Terrain/DetailTextures/gray_rock.tga"
-					normalpath="Data/Textures/Terrain/DetailTextures/gray_rock_normal.tga"
-					materialpath="Data/Materials/rocks.xml">
+		<DetailMap 	colorpath="Data/Textures/vertex_animation_texture_1.png"
+					normalpath="Data/Textures/vertex_animation_texture_1.png">
+		</DetailMap>
+		<DetailMap 	colorpath="Data/Textures/vertex_animation_texture_2.png"
+					normalpath="Data/Textures/vertex_animation_texture_2.png">
+		</DetailMap>
+		<DetailMap 	colorpath="Data/Textures/vertex_animation_texture_1.png"
+					normalpath="Data/Textures/vertex_animation_texture_1.png">
+		</DetailMap>
+		<DetailMap 	colorpath="Data/Textures/vertex_animation_texture_2.png"
+					normalpath="Data/Textures/vertex_animation_texture_2.png">
 		</DetailMap>
 	</DetailMaps>
 	<ShaderName>vertex_animated</ShaderName>
