@@ -11,9 +11,9 @@ from bpy.props import BoolProperty, IntVectorProperty, StringProperty
 from bpy.types import (Panel, Operator)
 
 # The image size can be increased to hold more animations, vertices or longer animation.
-image_size = 4096
-# This is the max the vertex can move out of it's own rest pose. 2.5 units each way.
-bounds = Vector([5.0, 5.0, 5.0])
+image_size = 2048
+# This is the max the vertex can move out of it's own rest pose. 1.5 units each way.
+bounds = Vector([4.0, 4.0, 4.0])
 
 def EncodeFloatRG(v):
     kEncodeMul = Vector([1.0, 255.0])
@@ -71,8 +71,10 @@ def create_animation_textures(info):
     background_value = background_value / bounds.x
     encoded_background_value = EncodeFloatRG(background_value)
     
-    print("encoded_background_value x ", encoded_background_value.x)
-    print("encoded_background_value y ", encoded_background_value.y)
+#    print("encoded_background_value x ", encoded_background_value.x)
+#    print("encoded_background_value y ", encoded_background_value.y)
+    
+    bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
     
     # The single float value is split into two texture color values.
     background_color_1 = Vector([encoded_background_value.x, encoded_background_value.x, encoded_background_value.x, 1.0])
@@ -101,8 +103,7 @@ def create_animation_textures(info):
     pixels_1 = list(output_image_1.pixels)
     pixels_2 = list(output_image_2.pixels)
     
-    for rest_index in range(len(rest_data)):
-#    for rest_index in range(256):
+    for rest_index in range(min(image_size, len(rest_data))):
         rest_vert = rest_data[rest_index]
         # The first column of pixels is the vertex rest position.
         float_to_textures(rest_vert, rest_index, image_size - 1, pixels_1, pixels_2)
@@ -111,7 +112,7 @@ def create_animation_textures(info):
     for frame_index in range(frame_start, frame_end + 1):
         bpy.context.scene.frame_set(frame_index)
         bpy.context.view_layer.update()
-        print("Animation frame", frame_index)
+#        print("Animation frame", frame_index)
 
         depgraph = bpy.context.evaluated_depsgraph_get()
         bm = bmesh.new()
@@ -128,9 +129,9 @@ def create_animation_textures(info):
             position_x = v.index
             position_y = image_size - 2 - frame_index + frame_start
             
-            print(position_x, position_y)
+#            print(position_x, position_y)
             
-            float_to_textures(difference, position_x, position_y, pixels_1, pixels_2)
+            float_to_textures(vert, position_x, position_y, pixels_1, pixels_2)
             
 #            # Convert it back for debugging purpose.
 #            print("Color value", difference)

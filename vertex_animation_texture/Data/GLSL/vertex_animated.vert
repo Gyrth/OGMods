@@ -167,7 +167,7 @@ void main() {
 		vec3 vertex_position = vec3(position_x, position_y, position_z);
 		vertex_position = vertex_position * bounds.x;
 		vertex_position = vertex_position - (bounds / 2.0f);
-		vertex_position = vec3(vertex_position.x, vertex_position.z, vertex_position.y * -1.0f);
+		vertex_position = vec3(vertex_position.x * 1.0, vertex_position.z * 1.0, vertex_position.y * -1.0f);
 
 		if(distance(rest_vert, vertex_position) < distance(rest_vert, last_vertex_position)){
 			last_vertex_position = vertex_position;
@@ -182,8 +182,8 @@ void main() {
 	int y_pixel = 90;
 	float y_pos = 1.0 / target_resolution * y_pixel;
 
-	float animation_speed = 0.005f;
-	float animation_length = 47.0f;
+	float animation_length = 42.0f;
+	float animation_speed = (animation_length / texture_size_1.y) * 0.015;
 
 	// float animation_speed = 0.15f;
 	// float animation_length = 160.0f;
@@ -206,21 +206,21 @@ void main() {
 	vec3 vertex_position = vec3(position_x, position_y, position_z);
 	vertex_position = vertex_position * bounds.x;
 	vertex_position = vertex_position - (bounds / 2.0f);
-	vertex_position = vec3(vertex_position.x * -1.0f, vertex_position.z * -1.0f, vertex_position.y * 1.0f);
+	vertex_position = vec3(vertex_position.x * 1.0f, vertex_position.z * 1.0f, vertex_position.y * -1.0f);
 
 	animated_vertex_position = vertex_position;
 
 	// vertex_color = color_value_2.xyz;
-	vertex_color = gl_VertexID < 300 ? vec3(1.0, 0.0, 0.0) : vec3(1.0);
+	vertex_color = index < 34 ? vec3(1.0, 0.0, 0.0) : vec3(1.0);
 
 	instance_id = gl_InstanceID;
 
-	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, vertex_attrib + animated_vertex_position);
+	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
 
 	frag_tex_coords = tex_coord_attrib;
 	frag_tex_coords[1] = 1.0 - frag_tex_coords[1];
 
-	vertex_color = frag_tex_coords.x < 0.5? vec3(1.0, 0.0, 0.0) : vec3(1.0);
+	// vertex_color = frag_tex_coords.x < 0.5? vec3(1.0, 0.0, 0.0) : vec3(1.0);
 
 	frag_normal = normal_attrib;
 
