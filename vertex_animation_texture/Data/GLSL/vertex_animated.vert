@@ -136,11 +136,11 @@ vec2 EncodeFloatRG(float v){
 }
 
 void main() {
-	vec3 bounds = vec3(4.0, 4.0, 4.0);
+	vec3 bounds = vec3(5.0, 5.0, 5.0);
 	vec3 rest_vert = vertex_attrib;
 	int index = -1;
 	vec3 last_vertex_position = vec3(0.0f, 0.0f, 0.0f);
-	vec3 animated_vertex_position = vec3(0.0);
+	vec3 animated_vertex_position = vertex_attrib;
 	float texture_mult = 1.0f;
 
 	vec2 texture_size_1 = textureSize(tex1, 0);
@@ -169,10 +169,15 @@ void main() {
 		vertex_position = vertex_position - (bounds / 2.0f);
 		vertex_position = vec3(vertex_position.x * 1.0, vertex_position.z * 1.0, vertex_position.y * -1.0f);
 
-		if(distance(rest_vert, vertex_position) < distance(rest_vert, last_vertex_position)){
-			last_vertex_position = vertex_position;
+		if(distance(rest_vert, vertex_position) < 0.01){
+			// last_vertex_position = vertex_position;
 			index = i;
 		}
+
+		// if(distance(rest_vert, vertex_position) < distance(rest_vert, last_vertex_position)){
+		// 	last_vertex_position = vertex_position;
+		// 	index = i;
+		// }
 	}
 
 	int x_pixel = index;
@@ -182,15 +187,18 @@ void main() {
 	int y_pixel = 90;
 	float y_pos = 1.0 / target_resolution * y_pixel;
 
-	float animation_length = 42.0f;
-	float animation_speed = (animation_length / texture_size_1.y) * 0.015;
+	float animation_length = 1024.0f;
+	float animation_speed = (animation_length / texture_size_1.y) * 0.05;
 
 	// float animation_speed = 0.15f;
 	// float animation_length = 160.0f;
 
 	float range = animation_length / (texture_size_1.y / texture_mult);
 	float skip_first_frame = half_pixel_offset * 2.0f;
-	float animation_progress = mod((time * animation_speed) / range, range) + skip_first_frame;
+
+	float position_offset = model_translation_attrib.x + model_translation_attrib.z;
+
+	float animation_progress = mod((time * animation_speed + position_offset) / range, range) + skip_first_frame;
 	y_pos = animation_progress;
 
 	// vec4 color_value_1 = textureLod(detail_normal, vec3(x_pos + x_center_offset, y_pos + y_center_offset, detail_normal_indices[0]), 0.0);

@@ -11,9 +11,9 @@ from bpy.props import BoolProperty, IntVectorProperty, StringProperty
 from bpy.types import (Panel, Operator)
 
 # The image size can be increased to hold more animations, vertices or longer animation.
-image_size = 2048
+image_size = 1024
 # This is the max the vertex can move out of it's own rest pose. 1.5 units each way.
-bounds = Vector([4.0, 4.0, 4.0])
+bounds = Vector([5.0, 5.0, 5.0])
 
 def EncodeFloatRG(v):
     kEncodeMul = Vector([1.0, 255.0])
@@ -35,8 +35,9 @@ def set_pixel(img,x,y,color):
     width = image_size
     
     offs = (x + int(y*width)) * 4
-    for i in range(4):
-        img[offs+i] = color[i]
+    if offs + 4 < len(img) + 1:
+        for i in range(4):
+            img[offs + i] = color[i]
 
 def get_pixel(img,x,y):
     width = img.size[0]
@@ -63,18 +64,24 @@ def float_to_textures(f, x, y, output_image_1, output_image_2):
     set_pixel(output_image_2, x, y, color_image_2)
 
 def create_animation_textures(info):
-    # The selected mesh is used to export.
-    obj = bpy.context.active_object
+    obj = None
+    arm = None
+    
+    for object in bpy.context.selected_objects:
+        # The selected mesh is used to export.
+        if object.type == 'MESH':
+            obj = object
+        elif object.type == 'ARMATURE':
+            arm = object
+    
+#    obj = bpy.context.active_object
     
     # Based on the bounds we need to set a background color that's contains NO vertex offset.
     background_value = (bounds.x / 2.0)
     background_value = background_value / bounds.x
     encoded_background_value = EncodeFloatRG(background_value)
     
-#    print("encoded_background_value x ", encoded_background_value.x)
-#    print("encoded_background_value y ", encoded_background_value.y)
-    
-    bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
+#    bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
     
     # The single float value is split into two texture color values.
     background_color_1 = Vector([encoded_background_value.x, encoded_background_value.x, encoded_background_value.x, 1.0])
@@ -92,13 +99,12 @@ def create_animation_textures(info):
     bpy.ops.image.new(name='Output2', width=image_size, height=image_size, color=background_color_2, alpha=True)
     output_image_2 = bpy.data.images['Output2']
     
-    frame_start = bpy.context.scene.frame_start
-    frame_end = bpy.context.scene.frame_end
-    
-    bpy.context.scene.frame_set(frame_start)
-    bpy.context.view_layer.update()
+#    frame_start = bpy.context.scene.frame_start
+#    frame_end = bpy.context.scene.frame_end
+
     # The vertices location in rest position is used to calculate the vertex offset for the animation.
     rest_data = [vert.co for vert in obj.data.vertices]
+    frame_counter = 0
     
     pixels_1 = list(output_image_1.pixels)
     pixels_2 = list(output_image_2.pixels)
@@ -108,46 +114,45 @@ def create_animation_textures(info):
         # The first column of pixels is the vertex rest position.
         float_to_textures(rest_vert, rest_index, image_size - 1, pixels_1, pixels_2)
     
-    # Each animation frame is single pixel in the x axis on the texture.
-    for frame_index in range(frame_start, frame_end + 1):
-        bpy.context.scene.frame_set(frame_index)
+    target_actions = bpy.data.actions
+#    target_actions = [bpy.data.actions.get("Run")]
+    
+    for action in target_actions:
+        arm.animation_data.action = bpy.data.actions.get(action.name)
+        frame_start, frame_end = map(int, action.frame_range)
+        print(action.name, frame_start, frame_end)
+    
+        bpy.context.scene.frame_set(frame_start)
         bpy.context.view_layer.update()
-#        print("Animation frame", frame_index)
-
-        depgraph = bpy.context.evaluated_depsgraph_get()
-        bm = bmesh.new()
-        bm.verts.ensure_lookup_table()
-        bm.from_object(obj, depgraph)
-
-        # Go over all the mesh's vertices in order.
-        for v in bm.verts:
-            rest_vert = rest_data[v.index]
-            vert = v.co
-            
-            difference = rest_vert - vert
         
-            position_x = v.index
-            position_y = image_size - 2 - frame_index + frame_start
+        # Each animation frame is single pixel in the x axis on the texture.
+        for frame_index in range(frame_start, frame_end + 1):
+            bpy.context.scene.frame_set(frame_index)
+            bpy.context.view_layer.update()
+    #        print("Animation frame", frame_index)
+
+            depgraph = bpy.context.evaluated_depsgraph_get()
+            bm = bmesh.new()
+            bm.verts.ensure_lookup_table()
+            bm.from_object(obj, depgraph)
             
-#            print(position_x, position_y)
+            position_y = image_size - 2 - frame_counter
             
-            float_to_textures(vert, position_x, position_y, pixels_1, pixels_2)
+            frame_counter += 1
             
-#            # Convert it back for debugging purpose.
-#            print("Color value", difference)
-#            color_1 = get_pixel(output_image_1, x, y)
-#            color_2 = get_pixel(output_image_2, x, y)
-#            
-#            decoded_color = Vector([
-#            DecodeFloatRG(Vector([color_1[0], color_2[0]])), 
-#            DecodeFloatRG(Vector([color_1[1], color_2[1]])), 
-#            DecodeFloatRG(Vector([color_1[2], color_2[2]]))
-#            ])
-#            
-#            print("Decoded ", decoded_color.x)
-#            un_range_adjusted = decoded_color * bounds.x
-#            un_origin_adjusted = un_range_adjusted - (bounds / 2.0)
-#            print("Unadjusted ", un_origin_adjusted)
+            if position_y < 0:
+                break
+
+            # Go over all the mesh's vertices in order.
+            for v in bm.verts:
+                rest_vert = rest_data[v.index]
+                vert = v.co
+                
+                difference = rest_vert - vert
+            
+                position_x = v.index
+                
+                float_to_textures(vert, position_x, position_y, pixels_1, pixels_2)
     
     output_image_1.pixels[:] = pixels_1
     output_image_2.pixels[:] = pixels_2
@@ -156,7 +161,7 @@ def create_animation_textures(info):
     output_image_1.update()
     output_image_2.update()
     
-    bpy.context.scene.frame_set(frame_start)
+#    bpy.context.scene.frame_set(frame_start)
 
 class ExecuteOperator(Operator):
     bl_label = "Operator"
