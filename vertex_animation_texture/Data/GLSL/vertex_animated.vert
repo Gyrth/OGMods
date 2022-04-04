@@ -6,6 +6,7 @@
 #include "object_vert150.glsl"
 
 out vec2 frag_tex_coords;
+out vec2 tex_coords;
 out mat3 tangent_to_world;
 out vec3 orig_vert;
 out vec3 world_vert;
@@ -135,10 +136,10 @@ vec2 EncodeFloatRG(float v){
 }
 
 void main() {
-	vec3 bounds = vec3(5.0, 5.0, 5.0);
+	vec3 bounds = vec3(4.0, 4.0, 4.0);
 	vec3 rest_vert = vertex_attrib;
-	int index = gl_VertexID;
-	vec3 last_vertex_position = vec3(1000.0f, 1000.0f, 1000.0f);
+	int index = -1;
+	vec3 last_vertex_position = vec3(0.0f, 0.0f, 0.0f);
 	vec3 animated_vertex_position = vec3(0.0);
 	float texture_mult = 1.0f;
 
@@ -181,8 +182,8 @@ void main() {
 	int y_pixel = 90;
 	float y_pos = 1.0 / target_resolution * y_pixel;
 
-	float animation_speed = 0.00005f;
-	float animation_length = 48.0f;
+	float animation_speed = 0.005f;
+	float animation_length = 47.0f;
 
 	// float animation_speed = 0.15f;
 	// float animation_length = 160.0f;
@@ -210,7 +211,7 @@ void main() {
 	animated_vertex_position = vertex_position;
 
 	// vertex_color = color_value_2.xyz;
-	vertex_color = index < 300 ? vec3(1.0, 0.0, 0.0) : vec3(1.0);
+	vertex_color = gl_VertexID < 300 ? vec3(1.0, 0.0, 0.0) : vec3(1.0);
 
 	instance_id = gl_InstanceID;
 
@@ -218,6 +219,8 @@ void main() {
 
 	frag_tex_coords = tex_coord_attrib;
 	frag_tex_coords[1] = 1.0 - frag_tex_coords[1];
+
+	vertex_color = frag_tex_coords.x < 0.5? vec3(1.0, 0.0, 0.0) : vec3(1.0);
 
 	frag_normal = normal_attrib;
 

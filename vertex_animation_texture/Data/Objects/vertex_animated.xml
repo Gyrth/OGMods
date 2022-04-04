@@ -19,6 +19,6 @@
 	</DetailMaps> -->
 
 	<ShaderName>vertex_animated</ShaderName>
-	<flags transparent = "false" double_sided = "false" clamp_texture = "true"/>
+	<flags transparent = "true" double_sided = "true" clamp_texture = "true"/>
 	<!-- no_collision = "true"  -->
 </Object>
