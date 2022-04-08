@@ -11,6 +11,6 @@
 	<Tag>scripting</Tag>
 	<SupportedVersion>*</SupportedVersion>
 	<NeedsRestart>false</NeedsRestart>
-	<!-- <LevelHookFile>Data/Scripts/texture_decode.as</LevelHookFile> -->
+	<LevelHookFile>Data/Scripts/texture_decode.as</LevelHookFile>
 	<Level title="Vertex Animation Texture" thumbnail="Images/vertex_animation_texture_full.jpg">vertex_animation.xml</Level>
 </Mod>

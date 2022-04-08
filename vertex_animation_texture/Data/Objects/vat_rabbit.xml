@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <Object>
-	<Model>Data/Models/rabbit.obj</Model>
+	<Model>Data/Models/vat_rabbit.obj</Model>
 
 	<!-- <ColorMap>Data/Textures/Characters/IGF_Turner/IGF_Turner_color.tga</ColorMap>
 	<NormalMap>Data/Textures/Characters/IGF_Turner/IGF_Turner_normal.tga</NormalMap> -->
@@ -8,6 +8,9 @@
 	<ColorMap>Data/Textures/Characters/IGF_Guard/IGF_Guard_Color.tga</ColorMap>
 	<NormalMap>Data/Textures/vat_rabbit_1.png</NormalMap>
 	<WeightMap>Data/Textures/vat_rabbit_2.png</WeightMap>
+
+	<!-- <TranslucencyMap>Data/Textures/vat_rabbit_2.png</TranslucencyMap> -->
+	<!-- <WindMap>Data/Textures/vat_rabbit_2.png</WindMap> -->
 
 	<!-- <DetailMaps>
 		<DetailMap 	colorpath="Data/Textures/Characters/IGF_Turner/IGF_Turner_color.tga"
@@ -17,6 +20,10 @@
 					normalpath="Data/Textures/vertex_animation_texture_2.png">
 		</DetailMap>
 	</DetailMaps> -->
+
+	<!-- <DetailObjects>
+		<DetailObject obj_path="Data/Objects/Plants/Groundcover/Groundcover1.xml" weight_path="Data/Textures/Environments/Rocks/granite_vine_rocks/granite_vine_boulder_overgrown_vine_mask.tga" normal_conform="0.9" density="10" min_embed="0" max_embed="0.4" min_scale="0.7" max_scale="2" view_distance="40" jitter_degrees="10" overbright="0" />
+	</DetailObjects> -->
 
 	<ShaderName>vertex_animated</ShaderName>
 	<flags no_collision = "true"/>

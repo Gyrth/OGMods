@@ -8,7 +8,7 @@ uniform vec3 cam_pos;
 #include "object_shared150.glsl"
 #include "ambient_tet_mesh.glsl"
 
-// #define detail_normal tex7
+#define detail_normal tex7
 
 uniform vec4 color_tint;
 uniform sampler2D tex0; // ColorMap
@@ -50,6 +50,7 @@ in vec3 frag_normal;
 flat in int instance_id;
 in vec3 vertex_color;
 flat in int vertex_id;
+flat in int skip_render;
 
 uniform float overbright;
 const float cloud_speed = 0.1;
@@ -57,23 +58,28 @@ const float cloud_speed = 0.1;
 UNIFORM_AVG_COLOR4
 
 void main() {
-	vec2 pixelated_coord;
-	int normal_image = 0;
-	vec2 texture_size = textureSize(tex0, 0);
-	// vec2 texture_size = vec2(8, 8);
-	float pixels = texture_size.y;
+	if(skip_render == 1){
+		discard;
+	}
 
-	pixelated_coord.x = (floor(frag_tex_coords.x * pixels) / pixels + ceil(frag_tex_coords.x * pixels) / pixels) / 2.0f;
-	pixelated_coord.y = (floor(frag_tex_coords.y * pixels) / pixels + ceil(frag_tex_coords.y * pixels) / pixels) / 2.0f;
+	// vec2 pixelated_coord;
+	// int normal_image = 0;
+	// vec2 texture_size = textureSize(tex0, 0);
+	// float pixels = texture_size.y;
+	//
+	// pixelated_coord.x = (floor(frag_tex_coords.x * pixels) / pixels + ceil(frag_tex_coords.x * pixels) / pixels) / 2.0f;
+	// pixelated_coord.y = (floor(frag_tex_coords.y * pixels) / pixels + ceil(frag_tex_coords.y * pixels) / pixels) / 2.0f;
 
-	// vec4 colormap = texture(tex0, frag_tex_coords);
+	// vec4 colormap = texture(tex0, pixelated_coord);
 	// vec4 colormap = textureLod(detail_normal, vec2(frag_tex_coords), 0.0);
 	// vec4 colormap = textureLod(detail_normal, vec3(frag_tex_coords, 1.0), 0.0);
 	// vec4 colormap = textureLod(detail_normal, vec3(pixelated_coord, detail_normal_indices[0]), 0.0);
 
 	// vec4 colormap = textureLod(detail_normal, vec3(pixelated_coord, detail_normal_indices[normal_image]), 0.0);
-	vec4 colormap = textureLod(tex0, vec2(frag_tex_coords), 0.0);
+	// vec4 colormap = textureLod(tex0, vec2(frag_tex_coords), 6.0);
 
+	vec4 colormap = texture(tex0, vec2(frag_tex_coords));
 	out_color = colormap;
-	// out_color.xyz = vertex_color;
+
+	out_color.xyz = vertex_color;
 }
