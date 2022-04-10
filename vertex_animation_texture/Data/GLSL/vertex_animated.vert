@@ -246,7 +246,10 @@ void main() {
 	settings.z = DecodeFloatRG(vec2(settings_color_1.z, settings_color_2.z));
 
 	float animation_length = int(settings.x * 10000.0);
-	float animation_speed = (animation_length / texture_size_1.y) * 0.01 / texture_mult;
+	// float animation_speed = 0.0021;
+	float animation_speed = 1.0;
+	// float animation_speed = 24.0 / animation_length;
+	// float animation_speed =  ((texture_size_1.y - 2.0) / animation_length) / 24.0;
 	// float animation_speed = (animation_length / (texture_size_1.y - 2.0)) * (1.0 / 24.0);
 
 	float range = animation_length / (texture_size_1.y / texture_mult);
