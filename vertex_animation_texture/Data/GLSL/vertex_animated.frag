@@ -81,5 +81,5 @@ void main() {
 	vec4 colormap = texture(tex0, vec2(frag_tex_coords));
 	out_color = colormap;
 
-	out_color.xyz = vertex_color;
+	// out_color.xyz = vertex_color;
 }

@@ -47,13 +47,13 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="0.210852" t1="0.681345" t2="2.49592" s0="1" s1="1" s2="1" q0="0.0956122" q1="-0.0302277" q2="0.00290475" q3="0.994955" euler_x="0.191606" euler_y="-0.0607433" euler_z="0" id="0">
+    <CameraObject t0="-23.6671" t1="-8.38956" t2="8.74258" s0="1" s1="1" s2="1" q0="0.132109" q1="-0.382362" q2="0.0553365" q3="0.912844" euler_x="0.28745" euler_y="-0.793332" euler_z="0" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="-40.9844" t1="-9.54857" t2="6.54892" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/IGF_Turner.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="0" t1="0" t2="0" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vertex_animated.xml">
+    <EnvObject t0="-42.2894" t1="-9.68526" t2="6.74093" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vertex_animated.xml">
         <parameters />
     </EnvObject>
     <NavmeshRegionObject t0="-54.8046" t1="-8.82827" t2="4.3709" s0="3" s1="3" s2="3" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3">
@@ -62,7 +62,25 @@
     <EnvObject t0="-39.4012" t1="-9.59126" t2="6.50426" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/base_guard.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="0" t1="0" t2="0" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+    <EnvObject t0="-38.0494" t1="-9.82292" t2="6.00633" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-35.6277" t1="-7.246" t2="6.88508" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_cloth.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-34.8925" t1="-13.012" t2="5.85445" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-36.4895" t1="-7.56459" t2="7.36335" s0="0.011998" s1="0.011998" s2="0.011998" q0="0.0435265" q1="-0.0529009" q2="-0.0314979" q3="0.997153" euler_x="0.0907419" euler_y="-0.10294" euler_z="-0.0678324" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/sphere_crete_whole.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-34.8385" t1="-8.26484" t2="6.36279" s0="0.011998" s1="0.011998" s2="0.011998" q0="0.0435265" q1="-0.0529009" q2="-0.0314979" q3="0.997153" euler_x="0.0907419" euler_y="-0.10294" euler_z="-0.0678324" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/sphere_crete_whole.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-27.2763" t1="-7.66" t2="5.606" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_blocks.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-27.6422" t1="-13.012" t2="4.63587" s0="2.36297" s1="1" s2="2.27055" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
         <parameters />
     </EnvObject>
 </ActorObjects>
@@ -72,4 +90,8 @@
     <SpawnerItem display_name="Male Rabbit Guard" path="Data/Objects/IGF_Characters/base_guard.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/Male Rabbit Guard.png" />
     <SpawnerItem display_name="vat_rabbit.xml" path="Data/Objects/vat_rabbit.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="vertex_animated.xml" path="Data/Objects/vertex_animated.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="vat_cloth.xml" path="Data/Objects/vat_cloth.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Crete Block Standard" path="Data/Objects/Crete/CreteBlockStandard.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/CreteBlockStandard.png" />
+    <SpawnerItem display_name="Sphere Crete Whole" path="Data/Objects/Crete/sphere_crete_whole.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/sphere_crete_whole.png" />
+    <SpawnerItem display_name="vat_blocks.xml" path="Data/Objects/vat_blocks.xml" thumbnail_path="empty_placeholder.png" />
 </RecentItems>
