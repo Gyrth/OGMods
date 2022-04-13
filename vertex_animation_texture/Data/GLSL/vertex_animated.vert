@@ -255,7 +255,7 @@ void main() {
 	float range = animation_length / (texture_size_1.y / texture_mult);
 	float skip_frames = half_pixel_offset * 4.0f;
 
-	float position_offset = model_translation_attrib.x + model_translation_attrib.z;
+	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z) / texture_size_1));
 
 	float animation_progress = mod((time * animation_speed + position_offset) / range, range) + skip_frames;
 	y_pos = animation_progress;
