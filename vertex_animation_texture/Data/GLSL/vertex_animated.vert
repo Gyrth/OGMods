@@ -141,14 +141,6 @@ vec2 EncodeFloatRG(float v){
 	return enc;
 }
 
-float distSquared( vec3 A, vec3 B )
-{
-
-	vec3 C = A - B;
-	return dot( C, C );
-
-}
-
 int GetIndex(vec3 vertex){
 	int x_num = int( (vertex.x < 0.0? vertex.x * -1.0 : vertex.x) * 10000.001 );
 	int y_num = int( (vertex.y < 0.0? vertex.y * -1.0 : vertex.y) * 10000.001 );
@@ -217,7 +209,6 @@ void main() {
 		// vertex_position = vec3(vertex_position.x * 1.0, vertex_position.z * 1.0, vertex_position.y * -1.0f);
 
 		float dist = distance(rest_vert, vertex_position);
-		// float dist = sqrt(distSquared(rest_vert, vertex_position));
 
 		// Get the index based comparing rounded vertex positions.
 		// vec3 rounded_rest = vec3(ceil(rest_vert.x * 1000.0) / 1000.0, ceil(rest_vert.y * 1000.0) / 1000.0, ceil(rest_vert.z * 1000.0) / 1000.0);
@@ -246,18 +237,15 @@ void main() {
 	settings.z = DecodeFloatRG(vec2(settings_color_1.z, settings_color_2.z));
 
 	float animation_length = int(settings.x * 10000.0);
-	float animation_speed = 0.003;
-	// float animation_speed = 1.0;
-	// float animation_speed = 24.0 / animation_length;
-	// float animation_speed =  ((texture_size_1.y - 2.0) / animation_length) / 24.0;
-	// float animation_speed = (animation_length / (texture_size_1.y - 2.0)) * (1.0 / 24.0);
+	// float animation_speed = 1.0 / 24.0;
+	float animation_speed = (animation_length / texture_size_1.y) / 8.0;
 
 	float range = animation_length / (texture_size_1.y / texture_mult);
 	float skip_frames = half_pixel_offset * 4.0f;
 
 	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z) / texture_size_1));
 
-	float animation_progress = mod((time * animation_speed + position_offset) / range, range) + skip_frames;
+	float animation_progress = mod(time * animation_speed + position_offset / range, range) + skip_frames;
 	y_pos = animation_progress;
 
 	vec4 color_1 = textureLod(tex1, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset), 0.0);

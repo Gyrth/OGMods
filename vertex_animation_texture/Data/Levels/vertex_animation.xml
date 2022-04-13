@@ -48,7 +48,7 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-22.9179" t1="-5.8614" t2="16.9228" s0="1" s1="1" s2="1" q0="0.130227" q1="-0.0126094" q2="0.00165633" q3="0.991403" euler_x="0.261218" euler_y="-0.0254361" euler_z="0" id="0">
+    <CameraObject t0="-42.0665" t1="-7.29844" t2="15.5615" s0="1" s1="1" s2="1" q0="-0.0805145" q1="-0.220685" q2="0.0182832" q3="-0.971844" euler_x="0.165317" euler_y="0.446585" euler_z="0" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="-40.235" t1="-8.91578" t2="5.20651" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/IGF_Turner.xml">
@@ -96,6 +96,1251 @@
     <EnvObject t0="-17.4956" t1="-8.31639" t2="5.347" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_arch.xml">
         <parameters />
     </EnvObject>
+    <Group t0="-48.045" t1="21.1624" t2="-148.076" s0="206.939" s1="39.7527" s2="179.202" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="270" version="1">
+        <parameters />
+        <EnvObject t0="-21.0047" t1="22.6427" t2="-111.557" s0="1" s1="1" s2="1" q0="0" q1="0.422153" q2="0" q3="0.906525" euler_x="0" euler_y="0.871639" euler_z="0" id="116" color_r="0.494118" color_g="0.498039" color_b="0.470588" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-72.3356" t1="13.7966" t2="-93.4203" s0="1" s1="1" s2="1" q0="0" q1="-0.152879" q2="0" q3="0.988245" euler_x="0" euler_y="-0.306962" euler_z="0" id="117" color_r="0.337255" color_g="0.341176" color_b="0.329412" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-28.8132" t1="22.6427" t2="-102.45" s0="1" s1="1" s2="1" q0="0" q1="0.372867" q2="0" q3="0.927885" euler_x="0" euler_y="0.764194" euler_z="0" id="118" color_r="0.494118" color_g="0.498039" color_b="0.470588" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-61.3988" t1="13.7966" t2="-89.3911" s0="1" s1="1" s2="1" q0="0" q1="-0.152879" q2="0" q3="0.988245" euler_x="0" euler_y="-0.306962" euler_z="0" id="119" color_r="0.337255" color_g="0.341176" color_b="0.329412" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.3703" t1="13.2535" t2="-101.236" s0="1" s1="1" s2="1" q0="-0.167044" q1="0" q2="0.985949" q3="0" euler_x="0" euler_y="0.335661" euler_z="3.14159" id="120" color_r="0.207843" color_g="0.176471" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_gate.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.3957" t1="16.3471" t2="-132.402" s0="0.579298" s1="0.579298" s2="0.579298" q0="0" q1="0.739548" q2="0" q3="0.673104" euler_x="3.14159" euler_y="1.4768" euler_z="3.14159" id="121" color_r="0.623529" color_g="0.623529" color_b="0.6" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.1241" t1="16.5359" t2="-116.253" s0="0.556983" s1="0.556983" s2="0.556983" q0="0" q1="0.818465" q2="0" q3="0.574556" euler_x="3.14159" euler_y="1.22412" euler_z="3.14159" id="122" color_r="0.623529" color_g="0.623529" color_b="0.6" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.3246" t1="16.3114" t2="-124.505" s0="0.579298" s1="0.579298" s2="0.579298" q0="0" q1="0.773021" q2="0" q3="0.63438" euler_x="3.14159" euler_y="1.37441" euler_z="3.14159" id="123" color_r="0.623529" color_g="0.623529" color_b="0.6" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.9636" t1="35.3968" t2="-105.273" s0="0.389702" s1="0.389702" s2="0.389702" q0="0" q1="-0.987471" q2="0" q3="-0.157798" euler_x="-3.14159" euler_y="0.31692" euler_z="-3.14159" id="124" color_r="0.4" color_g="0.4" color_b="0.380392" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-57.4033" t1="35.3679" t2="-101.696" s0="0.389702" s1="0.389702" s2="0.389702" q0="0" q1="-0.987471" q2="0" q3="-0.157798" euler_x="-3.14159" euler_y="0.31692" euler_z="-3.14159" id="125" color_r="0.4" color_g="0.4" color_b="0.380392" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-29.38" t1="35.4613" t2="-190.182" s0="0.389702" s1="0.389702" s2="0.389702" q0="0" q1="-0.157798" q2="0" q3="0.987471" euler_x="0" euler_y="-0.31692" euler_z="0" id="126" color_r="0.4" color_g="0.4" color_b="0.380392" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-39.9157" t1="35.4613" t2="-193.832" s0="0.389702" s1="0.389702" s2="0.389702" q0="0" q1="-0.157798" q2="0" q3="0.987471" euler_x="0" euler_y="-0.31692" euler_z="0" id="127" color_r="0.4" color_g="0.4" color_b="0.380392" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.531" t1="24.8712" t2="-171.424" s0="0.453556" s1="0.453556" s2="0.453556" q0="0" q1="-0.966946" q2="0" q3="-0.25498" euler_x="-3.14159" euler_y="0.515654" euler_z="-3.14159" id="128" color_r="0.494118" color_g="0.498039" color_b="0.466667" overbright="0" type_file="Data/Objects/Buildings/arena/arena_small_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.1231" t1="24.8716" t2="-172.143" s0="0.453556" s1="0.453556" s2="0.453556" q0="0" q1="-0.254979" q2="0" q3="0.966946" euler_x="0" euler_y="-0.515652" euler_z="0" id="129" color_r="0.494118" color_g="0.498039" color_b="0.466667" overbright="0" type_file="Data/Objects/Buildings/arena/arena_small_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.6757" t1="25.8706" t2="-172.822" s0="0.453556" s1="0.453556" s2="0.453556" q0="0" q1="0.515289" q2="0" q3="0.857017" euler_x="0" euler_y="1.08269" euler_z="0" id="130" color_r="0.976471" color_g="0.980392" color_b="0.945098" overbright="0" type_file="Data/Objects/Buildings/arena/arena_small_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.8829" t1="15.0843" t2="-194.172" s0="1" s1="1" s2="1" q0="-0.167044" q1="0" q2="0.985949" q3="0" euler_x="0" euler_y="0.335661" euler_z="3.14159" id="131" color_r="0.207843" color_g="0.176471" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_gate.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-36.5744" t1="22.4609" t2="-95.7553" s0="1" s1="1" s2="1" q0="0" q1="0.312111" q2="0" q3="0.950046" euler_x="0" euler_y="0.634829" euler_z="0" id="132" color_r="0.494118" color_g="0.498039" color_b="0.470588" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-44.7449" t1="25.4683" t2="-92.6822" s0="0.94169" s1="0.860173" s2="0.949007" q0="0" q1="-0.959621" q2="0" q3="0.281295" euler_x="3.14159" euler_y="-0.570286" euler_z="3.14159" id="133" color_r="0.521569" color_g="0.52549" color_b="0.501961" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-37.5791" t1="12.426" t2="-97.2538" s0="1" s1="1" s2="1" q0="0" q1="-0.952315" q2="0" q3="0.305117" euler_x="3.14159" euler_y="-0.620123" euler_z="3.14159" id="134" color_r="0.384314" color_g="0.384314" color_b="0.372549" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.1877" t1="22.0011" t2="-182.741" s0="1" s1="1" s2="1" q0="0" q1="0.133272" q2="0" q3="0.991079" euler_x="0" euler_y="0.267339" euler_z="0" id="135" color_r="0.415686" color_g="0.419608" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.82563" t1="22.0011" t2="-161.788" s0="1" s1="1" s2="1" q0="0" q1="0.0325449" q2="0" q3="0.99947" euler_x="0" euler_y="0.0651013" euler_z="0" id="136" color_r="0.415686" color_g="0.419608" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.2822" t1="22.0005" t2="-172.217" s0="1" s1="1" s2="1" q0="-0.00128448" q1="0.0888736" q2="0.000633538" q3="0.996042" euler_x="-0.00248545" euler_y="0.177984" euler_z="0.00105034" id="137" color_r="0.415686" color_g="0.419608" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.4322" t1="14.388" t2="-182.925" s0="1.00265" s1="1.0314" s2="0.999999" q0="0" q1="0.133272" q2="0" q3="0.991079" euler_x="0" euler_y="0.267339" euler_z="0" id="138" color_r="0.415686" color_g="0.419608" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.07054" t1="14.3892" t2="-161.973" s0="1.00265" s1="1.0314" s2="0.999999" q0="0" q1="0.0325449" q2="0" q3="0.99947" euler_x="0" euler_y="0.0651013" euler_z="0" id="139" color_r="0.415686" color_g="0.419608" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.52665" t1="14.3874" t2="-172.401" s0="1.00265" s1="1.0314" s2="0.999999" q0="0" q1="0.0889508" q2="0" q3="0.996036" euler_x="0" euler_y="0.178137" euler_z="0" id="140" color_r="0.415686" color_g="0.419608" color_b="0.4" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-4.24662" t1="14.0685" t2="-145.887" s0="1" s1="1" s2="1" q0="0" q1="0.615092" q2="0" q3="0.788455" euler_x="0" euler_y="1.325" euler_z="0" id="141" color_r="0.521569" color_g="0.52549" color_b="0.501961" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.3545" t1="14.0685" t2="-124.712" s0="1" s1="1" s2="1" q0="0" q1="0.517646" q2="0" q3="0.855595" euler_x="0" euler_y="1.0882" euler_z="0" id="142" color_r="0.521569" color_g="0.52549" color_b="0.501961" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.27739" t1="14.0685" t2="-134.28" s0="1" s1="1" s2="1" q0="0" q1="0.571868" q2="0" q3="0.820346" euler_x="0" euler_y="1.21756" euler_z="0" id="143" color_r="0.521569" color_g="0.52549" color_b="0.501961" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.5472" t1="12.426" t2="-94.4083" s0="1" s1="1" s2="1" q0="0" q1="-0.952315" q2="0" q3="0.305117" euler_x="3.14159" euler_y="-0.620123" euler_z="3.14159" id="144" color_r="0.596078" color_g="0.603922" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.03898" t1="25.3078" t2="-153.936" s0="1.02387" s1="0.870501" s2="0.997313" q0="0" q1="-0.719742" q2="0" q3="0.694242" euler_x="3.14159" euler_y="-1.53475" euler_z="3.14159" id="145" color_r="0.713726" color_g="0.717647" color_b="0.690196" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-87.9811" t1="21.4182" t2="-129.879" s0="1" s1="1" s2="1" q0="-0.000677288" q1="0.0543644" q2="-0.00126147" q3="0.99852" euler_x="-0.00149859" euler_y="0.108781" euler_z="-0.00260827" id="146" color_r="0.713726" color_g="0.717647" color_b="0.690196" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-89.5347" t1="13.9303" t2="-129.538" s0="1" s1="1" s2="1" q0="-0.00126177" q1="-0.99852" q2="0.000677168" q3="0.0543652" euler_x="-3.14009" euler_y="-0.108782" euler_z="3.13898" id="147" color_r="0.713726" color_g="0.717647" color_b="0.690196" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-87.0357" t1="13.9439" t2="-116.282" s0="1" s1="1" s2="1" q0="-0.00131923" q1="-0.989137" q2="0.000556946" q3="0.146989" euler_x="-3.14004" euler_y="-0.295045" euler_z="3.13869" id="148" color_r="0.713726" color_g="0.717647" color_b="0.690196" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.2468" t1="25.8706" t2="-169.864" s0="0.453556" s1="0.453556" s2="0.453556" q0="0" q1="0.515289" q2="0" q3="0.857017" euler_x="0" euler_y="1.08269" euler_z="0" id="149" color_r="0.976471" color_g="0.980392" color_b="0.945098" overbright="0" type_file="Data/Objects/Buildings/arena/arena_small_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-85.482" t1="21.4317" t2="-116.623" s0="1" s1="1" s2="1" q0="-0.000557184" q1="0.14699" q2="-0.00131893" q3="0.989137" euler_x="-0.0015573" euler_y="0.295047" euler_z="-0.00289825" id="150" color_r="0.713726" color_g="0.717647" color_b="0.690196" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-54.5568" t1="13.5271" t2="-191.168" s0="0.908825" s1="0.908825" s2="0.908825" q0="-0.000330985" q1="0.308682" q2="-0.00139341" q3="0.951164" euler_x="-0.00184065" euler_y="0.627612" euler_z="-0.00352725" id="151" color_r="0.65098" color_g="0.658824" color_b="0.607843" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-60.6961" t1="13.5498" t2="-186.026" s0="0.908825" s1="0.908825" s2="0.908825" q0="-0.000252336" q1="0.361653" q2="-0.00140962" q3="0.932312" euler_x="-0.00201797" euler_y="0.740079" euler_z="-0.00380671" id="152" color_r="0.65098" color_g="0.658824" color_b="0.607843" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.6742" t1="13.5738" t2="-179.644" s0="0.908825" s1="0.908825" s2="0.908825" q0="-0.000149041" q1="0.428393" q2="-0.00142418" q3="0.903591" euler_x="-0.00235333" euler_y="0.885424" euler_z="-0.00426797" id="153" color_r="0.65098" color_g="0.658824" color_b="0.607843" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.8109" t1="17.4546" t2="-142.792" s0="0.334332" s1="0.334332" s2="0.334332" q0="-0.777061" q1="0" q2="0.629425" q3="0" euler_x="3.14159" euler_y="1.36162" euler_z="0" id="154" color_r="0.337255" color_g="0.341176" color_b="0.329412" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-20.2834" t1="17.4546" t2="-134.777" s0="0.334332" s1="0.334332" s2="0.334332" q0="-0.835646" q1="0" q2="0.549268" q3="0" euler_x="3.14159" euler_y="1.16298" euler_z="0" id="155" color_r="0.337255" color_g="0.341176" color_b="0.329412" overbright="0" type_file="Data/Objects/Buildings/arena/arena_buttress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-48.045" t1="8.35984" t2="-148.076" s0="0.920659" s1="0.847694" s2="0.864582" q0="0" q1="-0.988137" q2="0" q3="-0.153575" euler_x="-3.14159" euler_y="0.30837" euler_z="-3.14159" id="156" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.9018" t1="17.4911" t2="-191.611" s0="1" s1="1" s2="1" q0="0" q1="-0.151662" q2="0" q3="0.988432" euler_x="0" euler_y="-0.304499" euler_z="0" id="157" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_deck_left.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-44.9918" t1="17.3706" t2="-199.461" s0="1" s1="1" s2="1" q0="0" q1="-0.145532" q2="0" q3="0.989354" euler_x="0" euler_y="-0.292101" euler_z="0" id="158" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_deck_right.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.845" t1="21.2507" t2="-192.857" s0="1" s1="1" s2="1" q0="0" q1="-0.174038" q2="0" q3="0.984739" euler_x="0" euler_y="-0.349858" euler_z="0" id="159" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-23.0512" t1="24.4513" t2="-192.481" s0="1" s1="1" s2="1" q0="0" q1="-0.987569" q2="0" q3="-0.157183" euler_x="-3.14159" euler_y="0.315675" euler_z="-3.14159" id="160" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-43.4438" t1="24.4513" t2="-199.378" s0="1" s1="1" s2="1" q0="0" q1="0.574258" q2="0" q3="0.818674" euler_x="0" euler_y="1.22339" euler_z="0" id="161" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-50.7959" t1="20.631" t2="-194.056" s0="1" s1="1" s2="1" q0="0" q1="-0.968069" q2="0" q3="0.250685" euler_x="3.14159" euler_y="-0.506776" euler_z="3.14159" id="162" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.4499" t1="17.7661" t2="-107.727" s0="1" s1="1" s2="1" q0="0" q1="-0.389934" q2="0" q3="0.920843" euler_x="0" euler_y="-0.80112" euler_z="0" id="163" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_stands.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-26.6974" t1="20.6078" t2="-119.701" s0="1" s1="1" s2="1" q0="0" q1="-0.880076" q2="0" q3="0.474834" euler_x="3.14159" euler_y="-0.989552" euler_z="3.14159" id="164" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.9066" t1="25.3332" t2="-116.19" s0="1" s1="1" s2="1" q0="0" q1="0.462055" q2="0" q3="0.886851" euler_x="0" euler_y="0.960622" euler_z="0" id="165" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-39.8652" t1="24.0561" t2="-104.813" s0="1" s1="1" s2="1" q0="0" q1="0.308881" q2="0" q3="0.951101" euler_x="0" euler_y="0.628033" euler_z="0" id="166" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-41.7161" t1="24.9092" t2="-101.122" s0="1" s1="1" s2="1" q0="0" q1="0.308881" q2="0" q3="0.951101" euler_x="0" euler_y="0.628033" euler_z="0" id="167" color_r="0.921569" color_g="0.301961" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.7193" t1="23.7949" t2="-109.624" s0="1" s1="1" s2="1" q0="0" q1="0.339545" q2="0" q3="0.94059" euler_x="0" euler_y="0.692866" euler_z="0" id="168" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.9081" t1="25.2599" t2="-105.398" s0="1" s1="1" s2="1" q0="0" q1="-0.964861" q2="0" q3="0.262763" euler_x="3.14159" euler_y="-0.53177" euler_z="3.14159" id="169" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-29.9989" t1="23.9616" t2="-114.35" s0="1" s1="1" s2="1" q0="0.00302379" q1="0.505833" q2="0.035115" q3="0.861911" euler_x="0.0832426" euler_y="1.05877" euler_z="0.13016" id="170" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-30.7944" t1="25.3479" t2="-110.279" s0="1" s1="1" s2="1" q0="0" q1="0.368808" q2="0" q3="0.929506" euler_x="0" euler_y="0.755453" euler_z="0" id="171" color_r="0.870588" color_g="0.070588" color_b="0.070588" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.4215" t1="19.321" t2="-121.151" s0="1" s1="1" s2="1" q0="0" q1="-0.866912" q2="0" q3="0.498462" euler_x="3.14159" euler_y="-1.04365" euler_z="3.14159" id="172" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.6634" t1="28.6425" t2="-121.212" s0="1.16411" s1="1.16411" s2="1.16411" q0="0.0717142" q1="-0.860113" q2="0.0999751" q3="0.495044" euler_x="-2.93831" euler_y="-1.047" euler_z="-3.09283" id="173" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-75.3529" t1="17.5338" t2="-103.822" s0="1" s1="1" s2="1" q0="0.00011152" q1="-0.988038" q2="0.000238627" q3="-0.154211" euler_x="-3.14106" euler_y="0.309658" euler_z="-3.14128" id="174" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_deck_left.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-51.9772" t1="17.4214" t2="-96.0851" s0="1" s1="1" s2="1" q0="0.000108868" q1="-0.98984" q2="0.000240386" q3="-0.142183" euler_x="-3.14106" euler_y="0.285333" euler_z="-3.1413" id="175" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_deck_right.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-71.6861" t1="21.2945" t2="-102.615" s0="1" s1="1" s2="1" q0="0.000117004" q1="-0.984287" q2="0.000235856" q3="-0.176578" euler_x="-3.14105" euler_y="0.355018" euler_z="-3.14126" id="176" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-74.2091" t1="24.4946" t2="-102.949" s0="1" s1="1" s2="1" q0="-0.000238001" q1="-0.159731" q2="0.000112891" q3="0.98716" euler_x="-0.000533161" euler_y="-0.320836" euler_z="0.000314988" id="177" color_r="0.921569" color_g="0.301961" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-52.743" t1="24.5019" t2="-94.6378" s0="1" s1="1" s2="1" q0="-8.4579e-05" q1="-0.820153" q2="0.000249386" q3="0.572144" euler_x="-3.14013" euler_y="-1.21823" euler_z="3.14036" id="178" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.8439" t1="20.6674" t2="-157.763" s0="1" s1="1" s2="1" q0="-0.000230694" q1="0.708617" q2="-0.000127456" q3="0.705594" euler_x="-3.02377" euler_y="1.56673" euler_z="-3.02362" id="179" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.3699" t1="17.7681" t2="-187.646" s0="1" s1="1" s2="1" q0="-0.000166953" q1="0.920095" q2="-0.000203907" q3="0.391695" euler_x="-3.14086" euler_y="0.804946" euler_z="-3.14092" id="180" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_stands.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.207" t1="20.6328" t2="-137.807" s0="1" s1="1" s2="1" q0="-0.000124395" q1="-0.714393" q2="0.000231981" q3="0.699745" euler_x="-3.11719" euler_y="-1.5501" euler_z="3.11734" id="181" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.9596" t1="25.3384" t2="-179.226" s0="1" s1="1" s2="1" q0="-5.07832e-05" q1="-0.88804" q2="0.000258565" q3="0.459765" euler_x="-3.14072" euler_y="-0.95546" euler_z="3.14102" id="182" color_r="0.921569" color_g="0.301961" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-56.9427" t1="24.0576" t2="-190.53" s0="1" s1="1" s2="1" q0="-7.33137e-06" q1="-0.951895" q2="0.000263214" q3="0.306424" euler_x="-3.14097" euler_y="-0.622868" euler_z="3.14138" id="183" color_r="1" color_g="0.180392" color_b="0.317647" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-55.073" t1="24.9092" t2="-194.212" s0="1" s1="1" s2="1" q0="-7.33137e-06" q1="-0.951895" q2="0.000263214" q3="0.306424" euler_x="-3.14097" euler_y="-0.622868" euler_z="3.14138" id="184" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-62.113" t1="23.7981" t2="-185.746" s0="1" s1="1" s2="1" q0="-1.60336e-05" q1="-0.941463" q2="0.000263214" q3="0.337116" euler_x="-3.14094" euler_y="-0.687704" euler_z="3.14132" id="185" color_r="0.921569" color_g="0.301961" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-60.9025" t1="25.261" t2="-189.967" s0="1" s1="1" s2="1" q0="-0.000263482" q1="0.260272" q2="4.88758e-06" q3="0.965535" euler_x="-0.000585596" euler_y="0.526608" euler_z="-0.000147731" id="186" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.8573" t1="23.9665" t2="-181.044" s0="1" s1="1" s2="1" q0="-0.0351862" q1="-0.863215" q2="0.00318843" q3="0.503598" euler_x="-3.05869" euler_y="-1.05359" euler_z="3.01188" id="187" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.0412" t1="25.3508" t2="-185.112" s0="1" s1="1" s2="1" q0="-2.42591e-05" q1="-0.930454" q2="0.000262558" q3="0.366407" euler_x="-3.1409" euler_y="-0.750288" euler_z="3.14127" id="188" color_r="0.870588" color_g="0.070588" color_b="0.070588" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-74.4692" t1="19.3281" t2="-174.28" s0="1" s1="1" s2="1" q0="-0.000256136" q1="0.496223" q2="-6.15567e-05" q3="0.868195" euler_x="-0.000996686" euler_y="1.03849" euler_z="-0.000711467" id="189" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-74.2292" t1="28.6496" t2="-174.223" s0="1.16411" s1="1.16411" s2="1.16411" q0="0.0999053" q1="0.492812" q2="-0.0715172" q3="0.861418" euler_x="0.202777" euler_y="1.04182" euler_z="-0.0490503" id="190" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-56.2462" t1="21.2992" t2="-97.3002" s0="1" s1="1" s2="1" q0="-0.000237226" q1="-0.166892" q2="0.000114918" q3="0.985975" euler_x="-0.000536015" euler_y="-0.335353" euler_z="0.000323834" id="191" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-46.0197" t1="20.6001" t2="-101.376" s0="1" s1="1" s2="1" q0="-0.00026381" q1="0.258186" q2="5.27501e-06" q3="0.966095" euler_x="-0.000584999" euler_y="0.522288" euler_z="-0.000145419" id="192" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-23.4663" t1="20.5912" t2="-125.652" s0="1" s1="1" s2="1" q0="-0.000256613" q1="0.488329" q2="-5.93215e-05" q3="0.87266" euler_x="-0.000967" euler_y="1.02035" euler_z="-0.000677076" id="193" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-41.0764" t1="21.2506" t2="-198.068" s0="1" s1="1" s2="1" q0="0" q1="-0.986403" q2="0" q3="-0.164347" euler_x="-3.14159" euler_y="0.330192" euler_z="-3.14159" id="194" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.1862" t1="20.6149" t2="-175.708" s0="1" s1="1" s2="1" q0="-0.000257611" q1="0.472561" q2="-5.48214e-05" q3="0.881298" euler_x="-0.000914171" euler_y="0.984389" euler_z="-0.000614599" id="195" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-73.447" t1="20.6174" t2="-169.859" s0="1" s1="1" s2="1" q0="-6.85453e-05" q1="-0.854544" q2="0.000254154" q3="0.51938" euler_x="-3.14049" euler_y="-1.09225" euler_z="3.14076" id="196" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.3733" t1="24.1894" t2="-195.652" s0="1" s1="1" s2="1" q0="0" q1="-0.164347" q2="0" q3="0.986403" euler_x="0" euler_y="-0.330192" euler_z="0" id="197" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_vip_gate.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.3562" t1="38.4582" t2="-195.475" s0="1.05763" s1="1.05763" s2="1.05763" q0="0.139973" q1="-0.162684" q2="0.0233212" q3="0.976421" euler_x="0.284766" euler_y="-0.330192" euler_z="0" id="198" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_vip_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-30.2866" t1="35.9201" t2="-191.983" s0="1.75635" s1="1.75635" s2="1.75635" q0="0" q1="-0.829656" q2="0" q3="0.558275" euler_x="3.14159" euler_y="-1.18461" euler_z="3.14159" id="199" color_r="1" color_g="0.835294" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/window_boxes/box_base_squared.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-36.453" t1="37.2714" t2="-199.332" s0="1.75635" s1="1.75635" s2="1.75635" q0="0" q1="0.558275" q2="0" q3="0.829656" euler_x="0" euler_y="1.18461" euler_z="0" id="200" color_r="1" color_g="0.835294" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/window_boxes/box_base_squared.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-28.6552" t1="37.3705" t2="-196.735" s0="1.75635" s1="1.75635" s2="1.75635" q0="0" q1="-0.829656" q2="0" q3="0.558275" euler_x="3.14159" euler_y="-1.18461" euler_z="3.14159" id="201" color_r="1" color_g="0.835294" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/window_boxes/box_base_squared.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-32.5299" t1="38.4922" t2="-198.101" s0="3.42213" s1="3.42213" s2="3.42213" q0="-0.411391" q1="-0.574865" q2="-0.575884" q3="0.410664" euler_x="1.56902" euler_y="-1.2406" euler_z="-3.14159" id="202" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.1617" t1="36.965" t2="-193.225" s0="3.42213" s1="3.42213" s2="3.42213" q0="0.698681" q1="0.697448" q2="0.112825" q3="0.112613" euler_x="2.82141" euler_y="-0.000573948" euler_z="1.56912" id="203" color_r="1" color_g="1" color_b="1" overbright="31" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-38.1183" t1="35.88" t2="-194.498" s0="1.75635" s1="1.75635" s2="1.75635" q0="0" q1="0.558275" q2="0" q3="0.829656" euler_x="0" euler_y="1.18461" euler_z="0" id="204" color_r="1" color_g="0.835294" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/window_boxes/box_base_squared.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-49.6255" t1="19.3196" t2="-198.381" s0="1" s1="1" s2="1" q0="-0.000263482" q1="0.255953" q2="6.70552e-06" q3="0.966689" euler_x="-0.000582269" euler_y="0.517667" euler_z="-0.000140296" id="205" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-49.4481" t1="28.6411" t2="-198.212" s0="1.16411" s1="1.16411" s2="1.16411" q0="0.11492" q1="0.254418" q2="-0.0432518" q3="0.959268" euler_x="0.230924" euler_y="0.52135" euler_z="-0.0282627" id="206" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.6229" t1="17.7803" t2="-158.3" s0="1" s1="1" s2="1" q0="0.000112087" q1="-0.987435" q2="0.00023815" q3="-0.158026" euler_x="-3.14106" euler_y="0.317382" euler_z="-3.14128" id="207" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_stands.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.0348" t1="20.6289" t2="-144.528" s0="1" s1="1" s2="1" q0="-0.000236634" q1="0.671806" q2="-0.00011557" q3="0.740727" euler_x="-0.00519591" euler_y="1.47329" euler_z="-0.00502449" id="208" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-85.1447" t1="19.3438" t2="-141.255" s0="1" s1="1" s2="1" q0="-0.000233578" q1="0.691593" q2="-0.000121828" q3="0.722287" euler_x="-0.0116574" euler_y="1.52737" euler_z="-0.0114993" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.9043" t1="28.6647" t2="-141.319" s0="1.16411" s1="1.16411" s2="1.16411" q0="0.0796564" q1="0.686628" q2="-0.0936933" q3="0.716532" euler_x="-0.315947" euler_y="1.52407" euler_z="-0.561784" id="210" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.3686" t1="25.3526" t2="-147.272" s0="1" s1="1" s2="1" q0="-0.000111938" q1="-0.750366" q2="0.000238359" q3="0.661022" euler_x="-3.13758" euler_y="-1.44435" euler_z="3.13776" id="211" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.3026" t1="24.0681" t2="-163.834" s0="1" s1="1" s2="1" q0="-7.09891e-05" q1="-0.849434" q2="0.000253618" q3="0.527694" euler_x="-3.14045" euler_y="-1.11177" euler_z="3.14072" id="212" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.3811" t1="24.9192" t2="-167.964" s0="1" s1="1" s2="1" q0="-7.09891e-05" q1="-0.849434" q2="0.000253618" q3="0.527694" euler_x="-3.14045" euler_y="-1.11177" euler_z="3.14072" id="213" color_r="0.870588" color_g="0.070588" color_b="0.070588" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.6203" t1="23.8099" t2="-157.182" s0="1" s1="1" s2="1" q0="-7.92742e-05" q1="-0.831885" q2="0.000251234" q3="0.554948" euler_x="-3.14028" euler_y="-1.1766" euler_z="3.14052" id="214" color_r="1" color_g="0.180392" color_b="0.317647" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.5336" t1="25.2725" t2="-161.478" s0="1" s1="1" s2="1" q0="-0.000256807" q1="0.486215" q2="-5.86212e-05" q3="0.873839" euler_x="-0.000959466" euler_y="1.01551" euler_z="-0.000668028" id="215" color_r="0.921569" color_g="0.301961" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.6012" t1="23.9796" t2="-150.803" s0="1" s1="1" s2="1" q0="-0.0334921" q1="-0.715666" q2="0.0115789" q3="0.697543" euler_x="-1.96861" euler_y="-1.50208" euler_z="1.9376" id="216" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.7904" t1="25.3637" t2="-154.778" s0="1" s1="1" s2="1" q0="-8.69036e-05" q1="-0.814114" q2="0.000248551" q3="0.580705" euler_x="-3.14004" euler_y="-1.23919" euler_z="3.14027" id="217" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.5986" t1="17.8865" t2="-123.852" s0="1" s1="1" s2="1" q0="4.85182e-05" q1="-0.995218" q2="0.000258923" q3="0.0976781" euler_x="-3.14108" euler_y="-0.195668" euler_z="-3.14155" id="218" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_stands.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.197" t1="20.7354" t2="-111.651" s0="1" s1="1" s2="1" q0="-0.000199631" q1="0.837761" q2="-0.00017181" q3="0.546037" euler_x="-3.14034" euler_y="1.15525" euler_z="-3.1403" id="219" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.3007" t1="19.4511" t2="-107.274" s0="1" s1="1" s2="1" q0="-0.000195026" q1="0.852222" q2="-0.000177234" q3="0.52318" euler_x="-3.14047" euler_y="1.10116" euler_z="-3.14045" id="220" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.1209" t1="28.772" t2="-107.448" s0="1.16411" s1="1.16411" s2="1.16411" q0="0.0533397" q1="0.845945" q2="-0.110956" q3="0.518865" euler_x="-2.84742" euler_y="1.09669" euler_z="-3.08703" id="221" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.5766" t1="25.4597" t2="-112.896" s0="1" s1="1" s2="1" q0="-0.000168979" q1="-0.558097" q2="0.000202119" q3="0.829776" euler_x="-0.00134207" euler_y="-1.18418" euler_z="0.00138982" id="222" color_r="0.921569" color_g="0.301961" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.5499" t1="24.1732" t2="-130.794" s0="1" s1="1" s2="1" q0="-0.000133336" q1="-0.687751" q2="0.000227451" q3="0.725946" euler_x="-0.00937891" euler_y="-1.51675" euler_z="0.00951205" id="223" color_r="0.870588" color_g="0.070588" color_b="0.070588" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.6448" t1="25.0242" t2="-134.353" s0="1" s1="1" s2="1" q0="-0.000133336" q1="-0.687751" q2="0.000227451" q3="0.725946" euler_x="-0.00937891" euler_y="-1.51675" euler_z="0.00951205" id="224" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.3038" t1="23.9157" t2="-123.861" s0="1" s1="1" s2="1" q0="-0.000140429" q1="-0.663861" q2="0.000222981" q3="0.747856" euler_x="-0.00426807" euler_y="-1.45194" euler_z="0.00438502" id="225" color_r="0.921569" color_g="0.188235" color_b="0.337255" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.2078" t1="25.3785" t2="-127.155" s0="1" s1="1" s2="1" q0="-0.000233574" q1="0.692016" q2="-0.000121827" q3="0.721882" euler_x="-0.0119783" euler_y="1.52855" euler_z="-0.0118202" id="226" color_r="0.921569" color_g="0.301961" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.8983" t1="24.0859" t2="-117.331" s0="1" s1="1" s2="1" q0="-0.0295762" q1="-0.515262" q2="0.0196346" q3="0.856297" euler_x="-0.150557" euler_y="-1.07855" euler_z="0.136061" id="227" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.8858" t1="25.4703" t2="-120.211" s0="1" s1="1" s2="1" q0="-0.000147343" q1="-0.640137" q2="0.000218332" q3="0.768261" euler_x="-0.00280367" euler_y="-1.38935" euler_z="0.00290448" id="228" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.9779" t1="24.1016" t2="-99.7503" s0="1" s1="1" s2="1" q0="0.000114769" q1="-0.985975" q2="0.000236809" q3="-0.166891" euler_x="-3.14106" euler_y="0.335351" euler_z="-3.14127" id="229" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_vip_gate.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.996" t1="38.3703" t2="-99.9348" s0="1.05763" s1="1.05763" s2="1.05763" q0="-0.0235684" q1="-0.975964" q2="0.140147" q3="-0.165219" euler_x="-2.85629" euler_y="0.335352" euler_z="-3.14127" id="230" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_vip_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-47.2447" t1="19.4298" t2="-97.0481" s0="1" s1="1" s2="1" q0="0.000564873" q1="-0.964006" q2="-0.000170529" q3="0.26588" euler_x="3.14086" euler_y="-0.538233" euler_z="-3.14022" id="231" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-47.3305" t1="28.792" t2="-97.2768" s0="1.16411" s1="1.16411" s2="1.16411" q0="0.0450323" q1="-0.956597" q2="0.114511" q3="0.264161" euler_x="-2.91163" euler_y="-0.54183" euler_z="-3.11164" id="232" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.351" t1="17.7661" t2="-137.167" s0="1" s1="1" s2="1" q0="0" q1="-0.155477" q2="0" q3="0.987839" euler_x="0" euler_y="-0.31222" euler_z="0" id="233" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_stands.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.1002" t1="20.6078" t2="-150.95" s0="1" s1="1" s2="1" q0="0" q1="-0.738991" q2="0" q3="0.673715" euler_x="3.14159" euler_y="-1.47845" euler_z="3.14159" id="234" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.9168" t1="19.3215" t2="-154.23" s0="1" s1="1" s2="1" q0="0" q1="-0.7205" q2="0" q3="0.693455" euler_x="3.14159" euler_y="-1.53255" euler_z="3.14159" id="235" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-12.1588" t1="28.6424" t2="-154.169" s0="1.16411" s1="1.16411" s2="1.16411" q0="0.0937788" q1="-0.714731" q2="0.079647" q3="0.688493" euler_x="2.77052" euler_y="-1.52867" euler_z="-2.52459" id="236" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-12.663" t1="25.3332" t2="-148.213" s0="1" s1="1" s2="1" q0="0" q1="0.662956" q2="0" q3="0.748658" euler_x="0" euler_y="1.44952" euler_z="0" id="237" color_r="1" color_g="0.180392" color_b="0.317647" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.6428" t1="24.0561" t2="-131.613" s0="1" s1="1" s2="1" q0="0" q1="0.529885" q2="0" q3="0.848069" euler_x="0" euler_y="1.11693" euler_z="0" id="238" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.5434" t1="24.9092" t2="-127.485" s0="1" s1="1" s2="1" q0="0" q1="0.529885" q2="0" q3="0.848069" euler_x="0" euler_y="1.11693" euler_z="0" id="239" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.3596" t1="23.7949" t2="-138.277" s0="1" s1="1" s2="1" q0="0" q1="0.557093" q2="0" q3="0.83045" euler_x="0" euler_y="1.18176" euler_z="0" id="240" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.4238" t1="25.2598" t2="-133.987" s0="1" s1="1" s2="1" q0="0" q1="-0.872581" q2="0" q3="0.488469" euler_x="3.14159" euler_y="-1.02067" euler_z="3.14159" id="241" color_r="0.921569" color_g="0.301961" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.4118" t1="23.9616" t2="-144.667" s0="1" s1="1" s2="1" q0="0.0114323" q1="0.699397" q2="0.0333387" q3="0.713864" euler_x="1.24276" euler_y="1.50425" euler_z="1.27376" id="242" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.2022" t1="25.3479" t2="-140.699" s0="1" s1="1" s2="1" q0="0" q1="0.582804" q2="0" q3="0.812613" euler_x="0" euler_y="1.24435" euler_z="0" id="243" color_r="0.870588" color_g="0.070588" color_b="0.070588" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.5524" t1="17.8552" t2="-171.624" s0="1" s1="1" s2="1" q0="0" q1="0.100246" q2="0" q3="0.994963" euler_x="0" euler_y="0.200829" euler_z="0" id="244" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_stands.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-20.1492" t1="20.8809" t2="-183.751" s0="1" s1="1" s2="1" q0="0" q1="-0.52419" q2="0" q3="0.851601" euler_x="0" euler_y="-1.10353" euler_z="0" id="245" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.9048" t1="19.3623" t2="-188.116" s0="1" s1="1" s2="1" q0="0" q1="-0.520979" q2="0" q3="0.85357" euler_x="0" euler_y="-1.096" euler_z="0" id="246" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.0854" t1="28.6833" t2="-187.945" s0="1.16411" s1="1.16411" s2="1.16411" q0="0.110918" q1="-0.516658" q2="0.053247" q3="0.847305" euler_x="0.292464" euler_y="-1.09156" euler_z="-0.0528988" id="247" color_r="0.027451" color_g="0.07451" color_b="0.133333" overbright="0" type_file="Data/Objects/Buildings/arena/arena_staircase_roof.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.6326" t1="25.4223" t2="-182.568" s0="1" s1="1" s2="1" q0="0" q1="0.831213" q2="0" q3="0.555954" euler_x="3.14159" euler_y="1.17902" euler_z="3.14159" id="248" color_r="0.960784" color_g="0.262745" color_b="0.121569" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.5663" t1="24.1452" t2="-164.68" s0="1" s1="1" s2="1" q0="0" q1="0.727719" q2="0" q3="0.685876" euler_x="3.14159" euler_y="1.51163" euler_z="3.14159" id="249" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-12.4533" t1="24.9984" t2="-161.132" s0="1" s1="1" s2="1" q0="0" q1="0.727719" q2="0" q3="0.685876" euler_x="3.14159" euler_y="1.51163" euler_z="3.14159" id="250" color_r="0.764706" color_g="0.203922" color_b="0.203922" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.8478" t1="23.884" t2="-171.607" s0="1" s1="1" s2="1" q0="0" q1="0.749566" q2="0" q3="0.661929" euler_x="3.14159" euler_y="1.44677" euler_z="3.14159" id="251" color_r="0.870588" color_g="0.070588" color_b="0.070588" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-12.9271" t1="25.3489" t2="-168.328" s0="1" s1="1" s2="1" q0="0" q1="-0.720093" q2="0" q3="0.693877" euler_x="3.14159" euler_y="-1.5337" euler_z="3.14159" id="252" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.2869" t1="24.0507" t2="-178.129" s0="1" s1="1" s2="1" q0="0.0195173" q1="0.857633" q2="0.0293474" q3="0.513053" euler_x="2.99355" euler_y="1.0735" euler_z="3.00789" id="253" color_r="0.545098" color_g="0.113725" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.285" t1="25.4371" t2="-175.266" s0="1" s1="1" s2="1" q0="0" q1="0.76991" q2="0" q3="0.638152" euler_x="3.14159" euler_y="1.38419" euler_z="3.14159" id="254" color_r="0.921569" color_g="0.301961" color_b="0.113725" overbright="0" type_file="Data/Objects/Buildings/arena/arena_umbrella_fine.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.3488" t1="12.426" t2="-110.234" s0="1" s1="1" s2="1" q0="0" q1="-0.90477" q2="0" q3="0.425901" euler_x="3.14159" euler_y="-0.879915" euler_z="3.14159" id="255" color_r="0.596078" color_g="0.603922" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.0436" t1="12.426" t2="-112.462" s0="1" s1="1" s2="1" q0="0" q1="-0.90477" q2="0" q3="0.425901" euler_x="3.14159" euler_y="-0.879915" euler_z="3.14159" id="256" color_r="0.596078" color_g="0.603922" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-27.5284" t1="12.426" t2="-101.222" s0="1" s1="1" s2="1" q0="0" q1="-0.927578" q2="0" q3="0.37363" euler_x="3.14159" euler_y="-0.765839" euler_z="3.14159" id="257" color_r="0.596078" color_g="0.603922" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-29.9519" t1="12.426" t2="-103.742" s0="1" s1="1" s2="1" q0="0" q1="-0.927578" q2="0" q3="0.37363" euler_x="3.14159" euler_y="-0.765839" euler_z="3.14159" id="258" color_r="0.596078" color_g="0.603922" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.62855" t1="21.8395" t2="-146.947" s0="1" s1="1" s2="1" q0="0" q1="-0.790294" q2="0" q3="0.612728" euler_x="3.14159" euler_y="-1.31902" euler_z="3.14159" id="259" color_r="0.596078" color_g="0.603922" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.2361" t1="21.8395" t2="-126.59" s0="1" s1="1" s2="1" q0="0" q1="-0.84811" q2="0" q3="0.529821" euler_x="3.14159" euler_y="-1.11678" euler_z="3.14159" id="260" color_r="0.596078" color_g="0.603922" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.4855" t1="21.8395" t2="-135.783" s0="1" s1="1" s2="1" q0="0" q1="-0.816827" q2="0" q3="0.576883" euler_x="3.14159" euler_y="-1.22982" euler_z="3.14159" id="261" color_r="0.596078" color_g="0.603922" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.5384" t1="17.2452" t2="-149.598" s0="0.702149" s1="0.702149" s2="0.702149" q0="2.16514e-05" q1="0.64121" q2="0.000160098" q3="0.767365" euler_x="0.00134239" euler_y="1.39215" euler_z="0.00153897" id="262" color_r="0.698039" color_g="0.694118" color_b="0.639216" overbright="0" type_file="Data/Objects/Buildings/arena/arena_small_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.0995" t1="17.2007" t2="-155.46" s0="0.752779" s1="0.752779" s2="0.752779" q0="3.36915e-05" q1="0.582118" q2="0.000158034" q3="0.813104" euler_x="0.000740909" euler_y="1.24266" euler_z="0.000919149" id="263" color_r="0.698039" color_g="0.694118" color_b="0.639216" overbright="0" type_file="Data/Objects/Buildings/arena/arena_small_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.329" t1="16.9358" t2="-161.412" s0="0.891755" s1="0.891755" s2="0.891755" q0="0" q1="0.56662" q2="0" q3="0.823979" euler_x="0" euler_y="1.2048" euler_z="0" id="264" color_r="0.698039" color_g="0.694118" color_b="0.639216" overbright="0" type_file="Data/Objects/Buildings/arena/arena_small_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-74.8049" t1="17.1861" t2="-166.941" s0="0.891755" s1="0.891755" s2="0.891755" q0="0" q1="0.503508" q2="0" q3="0.86399" euler_x="0" euler_y="1.05531" euler_z="0" id="265" color_r="0.698039" color_g="0.694118" color_b="0.639216" overbright="0" type_file="Data/Objects/Buildings/arena/arena_small_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.1476" t1="18.4588" t2="-142.49" s0="0.589841" s1="0.589841" s2="0.589841" q0="-0.00038047" q1="0.695948" q2="-0.00138044" q3="0.718091" euler_x="-0.0786512" euler_y="1.53939" euler_z="-0.0800655" id="266" color_r="0.643137" color_g="0.643137" color_b="0.615686" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.1563" t1="12.4963" t2="-142.475" s0="0.589841" s1="0.589841" s2="0.589841" q0="-0.00038047" q1="0.695948" q2="-0.00138044" q3="0.718091" euler_x="-0.0786512" euler_y="1.53939" euler_z="-0.0800655" id="267" color_r="0.643137" color_g="0.643137" color_b="0.615686" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.2413" t1="18.4663" t2="-139.5" s0="0.589841" s1="0.589841" s2="0.589841" q0="-0.00038047" q1="0.695948" q2="-0.00138044" q3="0.718091" euler_x="-0.0786512" euler_y="1.53939" euler_z="-0.0800655" id="268" color_r="0.643137" color_g="0.643137" color_b="0.615686" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.25" t1="12.5039" t2="-139.485" s0="0.589841" s1="0.589841" s2="0.589841" q0="-0.00038047" q1="0.695948" q2="-0.00138044" q3="0.718091" euler_x="-0.0786512" euler_y="1.53939" euler_z="-0.0800655" id="269" color_r="0.643137" color_g="0.643137" color_b="0.615686" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <Group t0="-61.9934" t1="22.6393" t2="-185.809" s0="20.7003" s1="4.42399" s2="19.6308" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="300" version="1">
+        <parameters />
+        <EnvObject t0="-53.0872" t1="21.2996" t2="-192.191" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-52.289" t1="21.2996" t2="-192.716" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-53.7004" t1="21.268" t2="-191.739" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-54.8982" t1="21.3358" t2="-190.92" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-55.7313" t1="21.3358" t2="-190.264" s0="1" s1="1" s2="1" q0="0" q1="0.326717" q2="0" q3="0.945122" euler_x="0" euler_y="0.665655" euler_z="0" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-56.5115" t1="21.3359" t2="-189.604" s0="1" s1="1" s2="1" q0="0" q1="0.330833" q2="0" q3="0.943689" euler_x="0" euler_y="0.674372" euler_z="0" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-57.6128" t1="21.3359" t2="-188.724" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.3369" t1="21.3045" t2="-188.138" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-59.5177" t1="21.3359" t2="-187.136" s0="1" s1="1" s2="1" q0="0" q1="0.363295" q2="0" q3="0.931674" euler_x="0" euler_y="0.743604" euler_z="0" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-60.4441" t1="21.3359" t2="-186.291" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-61.1799" t1="21.3359" t2="-185.668" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-62.1666" t1="21.3359" t2="-184.748" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.1895" t1="21.2788" t2="-183.657" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.7283" t1="21.3359" t2="-183.068" s0="1" s1="1" s2="1" q0="0" q1="0.394678" q2="0" q3="0.918819" euler_x="0" euler_y="0.811434" euler_z="0" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.2754" t1="21.3359" t2="-182.413" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-65.29" t1="21.3359" t2="-181.389" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.0906" t1="21.3359" t2="-180.42" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.7509" t1="21.3359" t2="-179.521" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.4296" t1="21.3359" t2="-178.569" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.1381" t1="21.3359" t2="-177.594" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.9019" t1="21.3359" t2="-176.632" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-54.1067" t1="21.8424" t2="-192.686" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-53.3085" t1="21.8424" t2="-193.211" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-54.9079" t1="21.8787" t2="-192.097" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="40" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-55.9177" t1="21.8787" t2="-191.415" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-57.5346" t1="21.8787" t2="-190.104" s0="1" s1="1" s2="1" q0="0" q1="0.326717" q2="0" q3="0.945122" euler_x="0" euler_y="0.665655" euler_z="0" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.0305" t1="21.8787" t2="-189.663" s0="1" s1="1" s2="1" q0="0" q1="0.330833" q2="0" q3="0.943689" euler_x="0" euler_y="0.674372" euler_z="0" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.6323" t1="21.8787" t2="-189.219" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-59.8422" t1="21.8595" t2="-188.212" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-60.5372" t1="21.8787" t2="-187.631" s0="1" s1="1" s2="1" q0="0" q1="0.363295" q2="0" q3="0.931674" euler_x="0" euler_y="0.743604" euler_z="0" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-61.2052" t1="21.8787" t2="-186.911" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-61.7095" t1="21.8787" t2="-186.28" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.186" t1="21.8787" t2="-185.243" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.9671" t1="21.8787" t2="-184.384" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.7478" t1="21.8787" t2="-183.563" s0="1" s1="1" s2="1" q0="0" q1="0.394678" q2="0" q3="0.918819" euler_x="0" euler_y="0.811434" euler_z="0" id="51" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-65.5911" t1="21.8787" t2="-182.683" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.3095" t1="21.8787" t2="-181.884" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.3415" t1="21.8581" t2="-180.392" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.8456" t1="21.8862" t2="-179.687" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.4491" t1="21.8787" t2="-179.064" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.9204" t1="21.8787" t2="-178.383" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-69.9213" t1="21.8787" t2="-177.127" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-55.0463" t1="22.4669" t2="-193.177" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="60" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-54.1479" t1="22.4669" t2="-193.981" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="61" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-55.8475" t1="22.5032" t2="-192.588" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="62" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-56.8573" t1="22.5032" t2="-191.906" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="63" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-57.6903" t1="22.5032" t2="-191.251" s0="1" s1="1" s2="1" q0="0" q1="0.326717" q2="0" q3="0.945122" euler_x="0" euler_y="0.665655" euler_z="0" id="64" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.4706" t1="22.5032" t2="-190.59" s0="1" s1="1" s2="1" q0="0" q1="0.330833" q2="0" q3="0.943689" euler_x="0" euler_y="0.674372" euler_z="0" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-59.5719" t1="22.5032" t2="-189.71" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="66" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-60.566" t1="22.5032" t2="-188.89" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-61.4768" t1="22.5032" t2="-188.122" s0="1" s1="1" s2="1" q0="0" q1="0.363295" q2="0" q3="0.931674" euler_x="0" euler_y="0.743604" euler_z="0" id="68" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-62.4032" t1="22.5032" t2="-187.278" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-62.972" t1="22.5032" t2="-186.672" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="70" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.1256" t1="22.5032" t2="-185.734" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="71" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.9067" t1="22.5032" t2="-184.875" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-65.6874" t1="22.5032" t2="-184.054" s0="1" s1="1" s2="1" q0="0" q1="0.394678" q2="0" q3="0.918819" euler_x="0" euler_y="0.811434" euler_z="0" id="73" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.5307" t1="22.5032" t2="-183.174" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="74" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.2491" t1="22.5032" t2="-182.375" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="75" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.854" t1="22.5032" t2="-181.468" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="76" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.7653" t1="22.5032" t2="-180.141" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="77" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-69.3887" t1="22.5032" t2="-179.556" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="78" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.0972" t1="22.5032" t2="-178.58" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="79" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.8609" t1="22.5032" t2="-177.618" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="80" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-55.9878" t1="23.2679" t2="-193.719" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="82" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-54.5117" t1="23.2679" t2="-194.867" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="83" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-56.7889" t1="23.3042" t2="-193.13" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="84" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-57.7988" t1="23.3042" t2="-192.448" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="85" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.6318" t1="23.3042" t2="-191.792" s0="1" s1="1" s2="1" q0="0" q1="0.326717" q2="0" q3="0.945122" euler_x="0" euler_y="0.665655" euler_z="0" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-59.4121" t1="23.3042" t2="-191.132" s0="1" s1="1" s2="1" q0="0" q1="0.330833" q2="0" q3="0.943689" euler_x="0" euler_y="0.674372" euler_z="0" id="87" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-60.5133" t1="23.3042" t2="-190.252" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="88" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-61.5075" t1="23.3042" t2="-189.432" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="89" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-62.4183" t1="23.3042" t2="-188.664" s0="1" s1="1" s2="1" q0="0" q1="0.363295" q2="0" q3="0.931674" euler_x="0" euler_y="0.743604" euler_z="0" id="90" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.3447" t1="23.3042" t2="-187.819" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="91" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.0805" t1="23.3042" t2="-187.196" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="92" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-65.0671" t1="23.3042" t2="-186.276" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="93" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-65.6074" t1="23.2656" t2="-185.647" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="94" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.6289" t1="23.3042" t2="-184.596" s0="1" s1="1" s2="1" q0="0" q1="0.394678" q2="0" q3="0.918819" euler_x="0" euler_y="0.811434" euler_z="0" id="95" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.4722" t1="23.3042" t2="-183.716" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="96" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.1906" t1="23.3042" t2="-182.917" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="97" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.9911" t1="23.3042" t2="-181.948" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="98" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-69.6515" t1="23.3042" t2="-181.049" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="99" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.3302" t1="23.3042" t2="-180.097" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="100" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-71.2787" t1="23.2993" t2="-178.8" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="101" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-71.8024" t1="23.3042" t2="-178.16" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="102" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-57.1607" t1="23.9743" t2="-194.47" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="104" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-56.2199" t1="23.9743" t2="-195.097" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="105" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.0704" t1="24.0106" t2="-193.802" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="106" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.9644" t1="24.0106" t2="-193.098" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="107" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-59.7885" t1="24.0106" t2="-192.439" s0="1" s1="1" s2="1" q0="0" q1="0.326717" q2="0" q3="0.945122" euler_x="0" euler_y="0.665655" euler_z="0" id="108" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-60.4394" t1="24.0106" t2="-191.675" s0="1" s1="1" s2="1" q0="0" q1="0.330833" q2="0" q3="0.943689" euler_x="0" euler_y="0.674372" euler_z="0" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-61.5407" t1="24.0106" t2="-190.796" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="110" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-62.5349" t1="24.0106" t2="-189.976" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="111" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.4456" t1="24.0106" t2="-189.208" s0="1" s1="1" s2="1" q0="0" q1="0.363295" q2="0" q3="0.931674" euler_x="0" euler_y="0.743604" euler_z="0" id="112" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.372" t1="24.0106" t2="-188.363" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="113" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-65.1078" t1="24.0106" t2="-187.74" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="114" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.0945" t1="24.0106" t2="-186.82" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="115" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-66.8755" t1="24.0106" t2="-185.96" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="271" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.4723" t1="23.9642" t2="-185.333" s0="1" s1="1" s2="1" q0="0" q1="0.394678" q2="0" q3="0.918819" euler_x="0" euler_y="0.811434" euler_z="0" id="272" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.4995" t1="24.0106" t2="-184.26" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="273" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-69.2179" t1="24.0106" t2="-183.46" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="274" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.0185" t1="24.0106" t2="-182.492" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="275" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.6789" t1="24.0106" t2="-181.593" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="276" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-71.3575" t1="24.0106" t2="-180.641" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="277" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-72.066" t1="24.0106" t2="-179.666" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="278" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-72.8298" t1="24.0106" t2="-178.703" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="279" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-73.7516" t1="24.0106" t2="-177.384" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="280" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-53.6224" t1="23.2483" t2="-195.474" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="103" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-52.0377" t1="23.2679" t2="-196.436" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="281" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-54.9496" t1="23.9743" t2="-196.05" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="282" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-53.3544" t1="23.9743" t2="-197.198" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="283" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-53.462" t1="22.5701" t2="-194.468" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="81" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-52.519" t1="22.4669" t2="-195.099" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="284" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-51.5189" t1="22.4669" t2="-195.586" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="285" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-52.5121" t1="21.8424" t2="-193.683" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-51.5412" t1="21.8424" t2="-194.432" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="59" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-72.4203" t1="23.3042" t2="-177.158" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="286" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-71.5906" t1="22.5032" t2="-176.571" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="287" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-70.5117" t1="21.8787" t2="-176.172" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="288" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-62.6895" t1="21.2972" t2="-184.136" s0="1" s1="1" s2="1" q0="0" q1="0.372513" q2="0" q3="0.928027" euler_x="0" euler_y="0.763431" euler_z="0" id="289" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-59.2223" t1="21.8811" t2="-188.75" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="290" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-56.3494" t1="22.5383" t2="-192.222" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="291" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-67.9858" t1="23.9632" t2="-184.792" s0="1" s1="1" s2="1" q0="0" q1="0.394678" q2="0" q3="0.918819" euler_x="0" euler_y="0.811434" euler_z="0" id="292" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-52.8079" t1="23.1595" t2="-196.041" s0="1" s1="1" s2="1" q0="0" q1="0.299572" q2="0" q3="0.954074" euler_x="0" euler_y="0.608488" euler_z="0" id="293" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-54.3251" t1="21.2632" t2="-191.284" s0="1" s1="1" s2="1" q0="0" q1="0.309856" q2="0" q3="0.950784" euler_x="0" euler_y="0.630084" euler_z="0" id="294" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.9169" t1="21.3205" t2="-187.635" s0="1" s1="1" s2="1" q0="0" q1="0.349691" q2="0" q3="0.936865" euler_x="0" euler_y="0.714482" euler_z="0" id="295" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-63.5005" t1="22.5032" t2="-186.159" s0="1" s1="1" s2="1" q0="0" q1="0.373958" q2="0" q3="0.927446" euler_x="0" euler_y="0.766546" euler_z="0" id="296" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-68.2468" t1="22.5032" t2="-180.697" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="297" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-69.3335" t1="21.8787" t2="-177.715" s0="1" s1="1" s2="1" q0="0" q1="0.448428" q2="0" q3="0.893819" euler_x="0" euler_y="0.930012" euler_z="0" id="298" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-64.6681" t1="21.3359" t2="-181.868" s0="1" s1="1" s2="1" q0="0" q1="0.418553" q2="0" q3="0.908192" euler_x="0" euler_y="0.863702" euler_z="0" id="299" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+    <Group t0="-79.5583" t1="22.6465" t2="-157.225" s0="20.7003" s1="4.42399" s2="19.6308" q0="0" q1="0.243526" q2="0" q3="0.969894" euler_x="0" euler_y="0.491999" euler_z="0" id="430" version="1">
+        <parameters />
+        <EnvObject t0="-74.7233" t1="21.3067" t2="-167.057" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="301" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-74.2681" t1="21.3067" t2="-167.897" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="302" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-75.0505" t1="21.2752" t2="-166.369" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="303" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-75.7192" t1="21.343" t2="-165.081" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="304" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.1437" t1="21.343" t2="-164.11" s0="1" s1="1" s2="1" q0="0" q1="0.547043" q2="0" q3="0.837104" euler_x="0" euler_y="1.15765" euler_z="0" id="305" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.5193" t1="21.343" t2="-163.159" s0="1" s1="1" s2="1" q0="0" q1="0.550687" q2="0" q3="0.834712" euler_x="0" euler_y="1.16637" euler_z="0" id="306" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.0744" t1="21.343" t2="-161.864" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="307" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.436" t1="21.3117" t2="-161.005" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="308" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.0032" t1="21.343" t2="-159.564" s0="1" s1="1" s2="1" q0="0" q1="0.579245" q2="0" q3="0.815153" euler_x="0" euler_y="1.2356" euler_z="0" id="309" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.4208" t1="21.343" t2="-158.382" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="310" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.7748" t1="21.343" t2="-157.485" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="311" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.2098" t1="21.343" t2="-156.208" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="312" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.5961" t1="21.2859" t2="-154.763" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="313" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.7927" t1="21.343" t2="-153.989" s0="1" s1="1" s2="1" q0="0" q1="0.606553" q2="0" q3="0.795043" euler_x="0" euler_y="1.30344" euler_z="0" id="314" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.9655" t1="21.343" t2="-153.154" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="315" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.376" t1="21.343" t2="-151.772" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="316" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.6241" t1="21.343" t2="-150.54" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="317" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.7814" t1="21.343" t2="-149.435" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="318" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.9299" t1="21.343" t2="-148.276" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="319" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.0936" t1="21.343" t2="-147.082" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="320" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.3121" t1="21.343" t2="-145.872" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="321" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-75.8557" t1="21.8496" t2="-167.011" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="322" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-75.4005" t1="21.8496" t2="-167.852" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="323" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.2838" t1="21.8859" t2="-166.114" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="324" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.8516" t1="21.8859" t2="-165.036" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="325" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.6576" t1="21.8859" t2="-163.117" s0="1" s1="1" s2="1" q0="0" q1="0.547043" q2="0" q3="0.837104" euler_x="0" euler_y="1.15765" euler_z="0" id="326" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.8863" t1="21.8859" t2="-162.494" s0="1" s1="1" s2="1" q0="0" q1="0.550687" q2="0" q3="0.834712" euler_x="0" euler_y="1.16637" euler_z="0" id="327" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.2068" t1="21.8859" t2="-161.818" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="328" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.7975" t1="21.8666" t2="-160.359" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="329" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.1356" t1="21.8859" t2="-159.518" s0="1" s1="1" s2="1" q0="0" q1="0.579245" q2="0" q3="0.815153" euler_x="0" euler_y="1.2356" euler_z="0" id="330" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.3842" t1="21.8859" t2="-158.568" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="331" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.5306" t1="21.8859" t2="-157.774" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="332" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.3422" t1="21.8859" t2="-156.162" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="333" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.6247" t1="21.8859" t2="-155.036" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="334" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.9251" t1="21.8859" t2="-153.944" s0="1" s1="1" s2="1" q0="0" q1="0.606553" q2="0" q3="0.795043" euler_x="0" euler_y="1.30344" euler_z="0" id="335" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.2528" t1="21.8859" t2="-152.77" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="336" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.5084" t1="21.8859" t2="-151.726" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="337" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.7134" t1="21.8653" t2="-149.924" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="338" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.8247" t1="21.8933" t2="-149.065" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="339" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.0623" t1="21.8859" t2="-148.23" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="340" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.1557" t1="21.8859" t2="-147.407" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="341" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.4445" t1="21.8859" t2="-145.827" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="342" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.9159" t1="22.4741" t2="-167.001" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="343" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.5038" t1="22.4741" t2="-168.134" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="344" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.344" t1="22.5104" t2="-166.103" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="345" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.9118" t1="22.5104" t2="-165.025" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="346" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.3363" t1="22.5104" t2="-164.054" s0="1" s1="1" s2="1" q0="0" q1="0.547043" q2="0" q3="0.837104" euler_x="0" euler_y="1.15765" euler_z="0" id="347" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.712" t1="22.5104" t2="-163.103" s0="1" s1="1" s2="1" q0="0" q1="0.550687" q2="0" q3="0.834712" euler_x="0" euler_y="1.16637" euler_z="0" id="348" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.2671" t1="22.5104" t2="-161.807" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="349" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.756" t1="22.5104" t2="-160.615" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="350" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.1958" t1="22.5104" t2="-159.508" s0="1" s1="1" s2="1" q0="0" q1="0.579245" q2="0" q3="0.815153" euler_x="0" euler_y="1.2356" euler_z="0" id="351" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.6134" t1="22.5104" t2="-158.326" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="352" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.8287" t1="22.5104" t2="-157.523" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="353" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.4024" t1="22.5104" t2="-156.152" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="354" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.6849" t1="22.5104" t2="-155.025" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="355" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.9853" t1="22.5104" t2="-153.933" s0="1" s1="1" s2="1" q0="0" q1="0.606553" q2="0" q3="0.795043" euler_x="0" euler_y="1.30344" euler_z="0" id="356" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.313" t1="22.5104" t2="-152.759" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="357" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.5686" t1="22.5104" t2="-151.715" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="358" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.6732" t1="22.5104" t2="-150.63" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="359" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.8498" t1="22.5104" t2="-149.03" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="360" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.1225" t1="22.5104" t2="-148.22" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="361" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.2862" t1="22.5104" t2="-147.025" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="362" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.5048" t1="22.5104" t2="-145.816" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="363" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.0015" t1="23.2751" t2="-167.033" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="364" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.2431" t1="23.2751" t2="-168.743" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="365" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.4296" t1="23.3114" t2="-166.136" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="366" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.9974" t1="23.3114" t2="-165.058" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="367" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.4219" t1="23.3114" t2="-164.086" s0="1" s1="1" s2="1" q0="0" q1="0.547043" q2="0" q3="0.837104" euler_x="0" euler_y="1.15765" euler_z="0" id="368" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.7976" t1="23.3114" t2="-163.136" s0="1" s1="1" s2="1" q0="0" q1="0.550687" q2="0" q3="0.834712" euler_x="0" euler_y="1.16637" euler_z="0" id="369" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.3527" t1="23.3114" t2="-161.84" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="370" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.8416" t1="23.3114" t2="-160.648" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="371" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.2814" t1="23.3114" t2="-159.54" s0="1" s1="1" s2="1" q0="0" q1="0.579245" q2="0" q3="0.815153" euler_x="0" euler_y="1.2356" euler_z="0" id="372" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.699" t1="23.3114" t2="-158.358" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="373" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.053" t1="23.3114" t2="-157.461" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="374" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.4881" t1="23.3114" t2="-156.184" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="375" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.6672" t1="23.2728" t2="-155.375" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="376" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.0709" t1="23.3114" t2="-153.966" s0="1" s1="1" s2="1" q0="0" q1="0.606553" q2="0" q3="0.795043" euler_x="0" euler_y="1.30344" euler_z="0" id="377" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.3986" t1="23.3114" t2="-152.792" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="378" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.6542" t1="23.3114" t2="-151.748" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="379" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.9024" t1="23.3114" t2="-150.516" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="380" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.0597" t1="23.3114" t2="-149.412" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="381" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.2081" t1="23.3114" t2="-148.252" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="382" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.4314" t1="23.3065" t2="-146.661" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="383" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.5904" t1="23.3114" t2="-145.849" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="384" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.3901" t1="23.9814" t2="-167.141" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="385" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.8572" t1="23.9814" t2="-168.138" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="386" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.8766" t1="24.0177" t2="-166.123" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="387" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.3318" t1="24.0177" t2="-165.08" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="388" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.7469" t1="24.0177" t2="-164.11" s0="1" s1="1" s2="1" q0="0" q1="0.547043" q2="0" q3="0.837104" euler_x="0" euler_y="1.15765" euler_z="0" id="389" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.96" t1="24.0177" t2="-163.129" s0="1" s1="1" s2="1" q0="0" q1="0.550687" q2="0" q3="0.834712" euler_x="0" euler_y="1.16637" euler_z="0" id="390" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.5151" t1="24.0177" t2="-161.834" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="391" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.004" t1="24.0177" t2="-160.642" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="392" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.4438" t1="24.0177" t2="-159.534" s0="1" s1="1" s2="1" q0="0" q1="0.579245" q2="0" q3="0.815153" euler_x="0" euler_y="1.2356" euler_z="0" id="393" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.8614" t1="24.0177" t2="-158.352" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="394" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.2154" t1="24.0177" t2="-157.455" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="395" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.6504" t1="24.0177" t2="-156.178" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="396" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.9329" t1="24.0177" t2="-155.052" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="397" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.1627" t1="23.9713" t2="-154.217" s0="1" s1="1" s2="1" q0="0" q1="0.606553" q2="0" q3="0.795043" euler_x="0" euler_y="1.30344" euler_z="0" id="398" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.561" t1="24.0177" t2="-152.786" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="399" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.8166" t1="24.0177" t2="-151.742" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="400" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-85.0648" t1="24.0177" t2="-150.51" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="401" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-85.2221" t1="24.0177" t2="-149.406" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="402" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-85.3705" t1="24.0177" t2="-148.246" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="403" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-85.5342" t1="24.0177" t2="-147.052" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="404" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-85.7528" t1="24.0177" t2="-145.843" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="405" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-85.9421" t1="24.0177" t2="-144.245" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="406" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.7458" t1="23.2555" t2="-169.698" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="407" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-75.8034" t1="23.2751" t2="-171.294" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="408" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.1878" t1="23.9815" t2="-169.579" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="409" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.324" t1="23.9814" t2="-171.344" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="410" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.1292" t1="22.5772" t2="-168.887" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="411" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-75.5962" t1="22.4741" t2="-169.888" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="412" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-74.9451" t1="22.4741" t2="-170.791" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="413" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-74.9213" t1="21.8496" t2="-168.644" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="414" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-74.4192" t1="21.8496" t2="-169.762" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="415" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.6619" t1="23.3114" t2="-144.674" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="416" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-83.6535" t1="22.5104" t2="-144.549" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="417" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.5138" t1="21.8859" t2="-144.707" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="418" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-79.3815" t1="21.3044" t2="-155.421" s0="1" s1="1" s2="1" q0="0" q1="0.587298" q2="0" q3="0.809371" euler_x="0" euler_y="1.25543" euler_z="0" id="419" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-78.5051" t1="21.8883" t2="-161.126" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="420" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.6135" t1="22.5455" t2="-165.544" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="421" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-84.3598" t1="23.9704" t2="-153.498" s0="1" s1="1" s2="1" q0="0" q1="0.606553" q2="0" q3="0.795043" euler_x="0" euler_y="1.30344" euler_z="0" id="422" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-76.296" t1="23.1667" t2="-170.583" s0="1" s1="1" s2="1" q0="0" q1="0.522895" q2="0" q3="0.852397" euler_x="0" euler_y="1.10049" euler_z="0" id="423" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-75.3858" t1="21.2704" t2="-165.673" s0="1" s1="1" s2="1" q0="0" q1="0.532068" q2="0" q3="0.846701" euler_x="0" euler_y="1.12208" euler_z="0" id="424" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-77.7095" t1="21.3276" t2="-160.288" s0="1" s1="1" s2="1" q0="0" q1="0.567315" q2="0" q3="0.823501" euler_x="0" euler_y="1.20648" euler_z="0" id="425" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-81.0523" t1="22.5104" t2="-156.822" s0="1" s1="1" s2="1" q0="0" q1="0.588557" q2="0" q3="0.808455" euler_x="0" euler_y="1.25854" euler_z="0" id="426" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.6551" t1="22.5104" t2="-149.765" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="427" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-82.2046" t1="21.8859" t2="-146.624" s0="1" s1="1" s2="1" q0="0" q1="0.652596" q2="0" q3="0.757706" euler_x="0" euler_y="1.42201" euler_z="0" id="428" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-80.0542" t1="21.343" t2="-152.488" s0="1" s1="1" s2="1" q0="0" q1="0.627121" q2="0" q3="0.778922" euler_x="0" euler_y="1.3557" euler_z="0" id="429" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_rabbit.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Default Turner" path="Data/Objects/IGF_Characters/IGF_Turner.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/default Turner.png" />
@@ -108,4 +1353,6 @@
     <SpawnerItem display_name="Sphere Crete Whole" path="Data/Objects/Crete/sphere_crete_whole.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/sphere_crete_whole.png" />
     <SpawnerItem display_name="vat_blocks.xml" path="Data/Objects/vat_blocks.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="vat_arch.xml" path="Data/Objects/vat_arch.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Arena Prefab One" path="Data/Objects/Buildings/arena/arena_prefab.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/Arena.png" />
+    <SpawnerItem display_name="Arena Prefab Two" path="Data/Objects/Buildings/arena/arena_prefab_2.xml" thumbnail_path="Data/UI/spawner/thumbs/Prefabs/Arena Prefab Two.png" />
 </RecentItems>

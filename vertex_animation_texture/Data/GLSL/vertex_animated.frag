@@ -78,9 +78,10 @@ void main() {
 	// vec4 colormap = textureLod(detail_normal, vec3(pixelated_coord, detail_normal_indices[normal_image]), 0.0);
 	// vec4 colormap = textureLod(tex0, vec2(frag_tex_coords), 6.0);
 
-	// vec4 colormap = textureLod(tex0, vec2(frag_tex_coords), 6.0);
-	// vec4 colormap = texture(tex0, vec2(frag_tex_coords));
-	// out_color = colormap;
-
-	out_color.xyz = vertex_color;
+	#if defined(VERTEX_COLOR)
+		out_color.xyz = vertex_color;
+	#else
+		vec4 colormap = texture(tex0, vec2(frag_tex_coords));
+		out_color = colormap;
+	#endif
 }
