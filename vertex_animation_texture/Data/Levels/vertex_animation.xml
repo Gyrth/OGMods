@@ -35,6 +35,7 @@
     <parameter name="Load Tip" type="string" val="" />
     <parameter name="Objectives" type="string" val="destroy_all" />
     <parameter name="Saturation" type="float" val="1" />
+    <parameter name="Shared Camera" type="int" val="0" />
     <parameter name="Sky Brightness" type="float" val="1" />
     <parameter name="Sky Rotation" type="float" val="0" />
     <parameter name="Sky Tint" type="string" val="255, 255, 255" />
@@ -47,7 +48,7 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-45.2883" t1="-6.77333" t2="12.2689" s0="1" s1="1" s2="1" q0="0.144205" q1="0.378323" q2="-0.0597929" q3="0.912415" euler_x="0.313502" euler_y="0.786124" euler_z="0" id="0">
+    <CameraObject t0="-22.9179" t1="-5.8614" t2="16.9228" s0="1" s1="1" s2="1" q0="0.130227" q1="-0.0126094" q2="0.00165633" q3="0.991403" euler_x="0.261218" euler_y="-0.0254361" euler_z="0" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="-40.235" t1="-8.91578" t2="5.20651" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/IGF_Turner.xml">
@@ -89,6 +90,12 @@
     <EnvObject t0="-43.6671" t1="-13.012" t2="6.62749" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
         <parameters />
     </EnvObject>
+    <EnvObject t0="-17.4423" t1="-13.012" t2="4.70058" s0="2.36297" s1="1" s2="2.27055" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="-17.4956" t1="-8.31639" t2="5.347" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_arch.xml">
+        <parameters />
+    </EnvObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Default Turner" path="Data/Objects/IGF_Characters/IGF_Turner.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/default Turner.png" />
@@ -100,4 +107,5 @@
     <SpawnerItem display_name="Crete Block Standard" path="Data/Objects/Crete/CreteBlockStandard.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/CreteBlockStandard.png" />
     <SpawnerItem display_name="Sphere Crete Whole" path="Data/Objects/Crete/sphere_crete_whole.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/sphere_crete_whole.png" />
     <SpawnerItem display_name="vat_blocks.xml" path="Data/Objects/vat_blocks.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="vat_arch.xml" path="Data/Objects/vat_arch.xml" thumbnail_path="empty_placeholder.png" />
 </RecentItems>

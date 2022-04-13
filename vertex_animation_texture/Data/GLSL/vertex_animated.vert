@@ -224,7 +224,7 @@ void main() {
 		// vec3 rounded_vertex = vec3(ceil(vertex_position.x * 1000.0) / 1000.0, ceil(vertex_position.y * 1000.0) / 1000.0, ceil(vertex_position.z * 1000.0) / 1000.0);
 
 		// if(rounded_rest == rounded_vertex){
-		if(dist < 0.01){
+		if(dist < 0.001){
 			index = i;
 			break;
 		}
@@ -246,7 +246,7 @@ void main() {
 	settings.z = DecodeFloatRG(vec2(settings_color_1.z, settings_color_2.z));
 
 	float animation_length = int(settings.x * 10000.0);
-	float animation_speed = 0.0021;
+	float animation_speed = 0.003;
 	// float animation_speed = 1.0;
 	// float animation_speed = 24.0 / animation_length;
 	// float animation_speed =  ((texture_size_1.y - 2.0) / animation_length) / 24.0;

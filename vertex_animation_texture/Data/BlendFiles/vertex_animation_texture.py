@@ -96,6 +96,10 @@ def CreateAnimationTextures(export_path, model_name, info):
     bpy.context.view_layer.update()
     
     joined_object.select_set(True)
+#    joined_object.parent = None
+#    joined_object.modifiers.clear()
+    if len(joined_object.data.shape_keys.key_blocks.keys()) > 0:
+        joined_object.active_shape_key_index = 0
     bpy.context.view_layer.objects.active = joined_object
     
     bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
@@ -216,7 +220,7 @@ def CreateAnimationTextures(export_path, model_name, info):
     print("Image size :", image_size, "px")
     print("Vertex count :", vertex_count)
     print("Animation length :", frame_counter)
-    print("Animation length :", settings[0])
+    print("Center Location :", center_location)
     
     output_image_1.pixels[:] = pixels_1
     output_image_2.pixels[:] = pixels_2
