@@ -2,8 +2,8 @@
 <Object>
 	<Model>Data/Models/vat_rabbit.obj</Model>
 	<ColorMap>Data/Textures/Characters/IGF_Guard/IGF_Guard_Color.tga</ColorMap>
-	<NormalMap>Data/Textures/vat_rabbit_1.png</NormalMap>
-	<WeightMap>Data/Textures/vat_rabbit_2.png</WeightMap>
+	<NormalMap>Data/Textures/vat_rabbit_sorted_1.png</NormalMap>
+	<WeightMap>Data/Textures/vat_rabbit_sorted_2.png</WeightMap>
 	<ShaderName>vertex_animated #VERTEX_COLOR</ShaderName>
 	<flags no_collision = "true"/>
 </Object>

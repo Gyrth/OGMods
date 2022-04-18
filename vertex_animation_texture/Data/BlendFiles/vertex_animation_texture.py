@@ -10,12 +10,23 @@ from pathlib import Path
 from math import radians
 from bpy.props import BoolProperty, IntVectorProperty, StringProperty
 from bpy.types import (Panel, Operator)
+from functools import partial
+from os import path
+from PIL import Image, ImageDraw, ImageFilter
+from sys import argv
+import json
+import os
+import re
+import struct
 
 bpy.types.Scene.export_path = StringProperty(subtype='DIR_PATH', name="Export Path")
 bpy.types.Scene.model_name = StringProperty(subtype='FILE_NAME', name="Model Name")
+bpy.types.Scene.cache_path = StringProperty(subtype='FILE_PATH', name="Cache Path")
 
 # This is the max the vertex can move out of it's own rest pose. 5 units each way.
 bounds = Vector([10.0, 10.0, 10.0])
+
+SUPPORTED_CACHE_FILE_VERSION = 41
 
 def EncodeFloatRG(v):
     kEncodeMul = Vector([1.0, 255.0])
@@ -66,6 +77,7 @@ def FloatToTextures(f, x, y, output_image_1, output_image_2, image_size):
     SetPixel(output_image_2, x, y, color_image_2, image_size)
 
 def CreateAnimationTextures(export_path, model_name, info):
+    print("check")
     # The image size can be increased to hold more animations, vertices or longer animation.
     image_size = 1
     arm = None
@@ -162,7 +174,6 @@ def CreateAnimationTextures(export_path, model_name, info):
     
     for v in bme.verts:
         rest_data.append(v.co.copy())
-        BoundedFloatToTextures(v.co, v.index, image_size - 2, pixels_1, pixels_2, image_size)
     
     bme.free()
     
@@ -187,7 +198,7 @@ def CreateAnimationTextures(export_path, model_name, info):
         
         depgraph = bpy.context.evaluated_depsgraph_get()
         vertex_counter = 0
-        position_y = image_size - 3 - frame_counter
+        position_y = image_size - 2 - frame_counter
         
         if position_y < 0:
             break
@@ -236,13 +247,348 @@ def CreateAnimationTextures(export_path, model_name, info):
     
     bpy.context.scene.frame_set(frame_start)
 
-class VAT_OT_Operator(Operator):
+def read_tuple(input_file, bytes_for_field, byte_struct_format_string, field_name):
+    field_bytes = input_file.read(bytes_for_field)
+
+    if not field_bytes or len(field_bytes) < bytes_for_field:
+        print('file truncated while reading ', field_name, sep='')
+        return None
+
+    result = struct.unpack(byte_struct_format_string, field_bytes)  # result is always a tuple, even if byte_struct_format)string only contains a single value
+
+    return result
+
+
+def read_scalar(input_file, bytes_for_field, byte_struct_format_string, field_name):
+    result, = read_tuple(input_file, bytes_for_field, byte_struct_format_string, field_name)  # unpacks tuple with (assumed) single value into scalar
+    return result
+
+
+def read_tuple_array(input_file, output_array, array_count, bytes_per_entry, byte_struct_format_string, field_name):
+    for current_array_index in range(array_count):
+        current_array_entry_bytes = input_file.read(bytes_per_entry)
+
+        if not current_array_entry_bytes or len(current_array_entry_bytes) < bytes_per_entry:
+            print('file truncated while reading ', field_name, '. at index: ', current_array_index, sep='')
+            return False
+
+        current_array_entry = struct.unpack(byte_struct_format_string, current_array_entry_bytes)
+        output_array.append(current_array_entry)
+
+    return True
+
+
+def read_scalar_array(input_file, output_array, array_count, bytes_per_entry, byte_struct_format_string, field_name):
+    for current_array_index in range(array_count):
+        current_array_entry_bytes = input_file.read(bytes_per_entry)
+
+        if not current_array_entry_bytes or len(current_array_entry_bytes) < bytes_per_entry:
+            print('file truncated while reading ', field_name, '. at index: ', current_array_index, sep='')
+            return False
+
+        current_array_entry, = struct.unpack(byte_struct_format_string, current_array_entry_bytes)
+        output_array.append(current_array_entry)
+
+    return True
+
+
+def read_file(input_file):
+    # read initial header and verify version matches parser
+    file_checksum, file_version = read_tuple(input_file, 4, '=HH', 'file_checksum and file_version')
+    if file_checksum is None:
+        return None
+
+    global SUPPORTED_CACHE_FILE_VERSION
+    if file_version != SUPPORTED_CACHE_FILE_VERSION:
+        print('file is wrong version. expected:', SUPPORTED_CACHE_FILE_VERSION, 'actual:', file_version)
+        return None
+
+    # read rest of file
+    vertex_count = read_scalar(input_file, 4, '=i', 'vertex_count')
+    if vertex_count is None:
+        return None
+
+    vertices = []
+    if not read_tuple_array(input_file, vertices, vertex_count, 12, '=fff', 'vertices'):
+        return None
+
+    normals = []
+    if not read_tuple_array(input_file, normals, vertex_count, 12, '=fff', 'normals'):
+        return None
+
+    tangents = []
+    if not read_tuple_array(input_file, tangents, vertex_count, 12, '=fff', 'tangents'):
+        return None
+
+    bitangents = []
+    if not read_tuple_array(input_file, bitangents, vertex_count, 12, '=fff', 'bitangents'):
+        return None
+
+    tex_coords = []
+    if not read_tuple_array(input_file, tex_coords, vertex_count, 8, '=ff', 'tex_coords'):
+        return None
+
+    face_count = read_scalar(input_file, 4, '=i', 'face_count')
+    if face_count is None:
+        return None
+
+    face_vertex_indices = []
+    if not read_tuple_array(input_file, face_vertex_indices, face_count, 12, '=III', 'face_vertex_indices'):
+        return None
+
+    face_normals = []
+    if not read_tuple_array(input_file, face_normals, face_count, 12, '=fff', 'face_normals'):
+        return None
+
+    precollapse_num_vertices = read_scalar(input_file, 4, '=i', 'precollapse_num_vertices')
+    if precollapse_num_vertices is None:
+        return None
+
+    precollapse_vert_reorder_index_count = read_scalar(input_file, 4, '=i', 'precollapse_vert_reorder_index_count')
+    if precollapse_vert_reorder_index_count is None:
+        return None
+
+    precollapse_vert_reorder_indices = []
+    if not read_scalar_array(input_file, precollapse_vert_reorder_indices, precollapse_vert_reorder_index_count, 4, '=i', 'precollapse_vert_reorder_indices'):
+        return None
+
+    optimize_vert_reorder_index_count = read_scalar(input_file, 4, '=i', 'optimize_vert_reorder_index_count')
+    if optimize_vert_reorder_index_count is None:
+        return None
+
+    optimize_vert_reorder_indices = []
+    if not read_scalar_array(input_file, optimize_vert_reorder_indices, optimize_vert_reorder_index_count, 4, '=i', 'optimize_vert_reorder_indices'):
+        return None
+
+    tex_coord2_count = read_scalar(input_file, 4, '=i', 'tex_coord2_count')
+    if tex_coord2_count is None:
+        return None
+
+    tex_coords2 = []
+    if not read_tuple_array(input_file, tex_coords2, tex_coord2_count, 8, '=ff', 'tex_coords2'):
+        return None
+
+    min_coords = read_tuple(input_file, 12, '=fff', 'min_coords')
+    if min_coords is None:
+        return None
+
+    max_coords = read_tuple(input_file, 12, '=fff', 'max_coords')
+    if max_coords is None:
+        return None
+
+    center_coords = read_tuple(input_file, 12, '=fff', 'center_coords')
+    if center_coords is None:
+        return None
+
+    old_center_coords = read_tuple(input_file, 12, '=fff', 'old_center_coords')
+    if old_center_coords is None:
+        return None
+
+    bounding_sphere_origin = read_tuple(input_file, 12, '=fff', 'bounding_sphere_origin')
+    if bounding_sphere_origin is None:
+        return None
+
+    bounding_sphere_radius = read_scalar(input_file, 4, '=f', 'bounding_sphere_radius')
+    if bounding_sphere_radius is None:
+        return None
+
+    texel_density = read_scalar(input_file, 4, '=f', 'texel_density')
+    if texel_density is None:
+        return None
+
+    average_triangle_edge_length = read_scalar(input_file, 4, '=f', 'average_triangle_edge_length')
+    if average_triangle_edge_length is None:
+        return None
+
+    # parsed successfully. return result
+    return {
+        'file_checksum': file_checksum,
+        'file_version': file_version,
+        'vertex_count': vertex_count,
+        'vertices': vertices,
+        'normals': normals,
+        'tangents': tangents,
+        'bitangents': bitangents,
+        'tex_coords': tex_coords,
+        'face_count': face_count,
+        'face_vertex_indices': face_vertex_indices,
+        'face_normals': face_normals,
+        'precollapse_num_vertices': precollapse_num_vertices,
+        'precollapse_vert_reorder_index_count': precollapse_vert_reorder_index_count,
+        'precollapse_vert_reorder_indices': precollapse_vert_reorder_indices,
+        'optimize_vert_reorder_index_count': optimize_vert_reorder_index_count,
+        'optimize_vert_reorder_indices': optimize_vert_reorder_indices,
+        'tex_coord2_count': tex_coord2_count,
+        'tex_coords2': tex_coords2,
+        'min_coords': min_coords,
+        'max_coords': max_coords,
+        'center_coords': center_coords,
+        'old_center_coords': old_center_coords,
+        'bounding_sphere_origin': bounding_sphere_origin,
+        'bounding_sphere_radius': bounding_sphere_radius,
+        'texel_density': texel_density,
+        'average_triangle_edge_length': average_triangle_edge_length,
+    }
+
+
+def CreateJSON(cache_path, model_name, info):
+    blend_file_path = bpy.data.filepath
+    directory = os.path.dirname(blend_file_path)
+    target_file = str(Path(directory + cache_path).resolve())
+    
+    if not path.exists(target_file):
+        print('file not found:', target_file)
+        return
+    
+    with open(target_file, mode='rb') as file:
+        parsed_file = read_file(file)
+
+        if parsed_file:
+            with open(directory + '/' + model_name + '.json', 'w') as outfile:
+                outfile.write(json.dumps(parsed_file, indent = 4))
+
+
+def SortTextures(cache_path, export_path, model_name, info):
+    blend_file_path = bpy.data.filepath
+    directory = os.path.dirname(blend_file_path)
+    
+    input_model_obj_filename = str(Path(directory + export_path + "/Models/" + model_name + ".obj").resolve())
+    input_model_cache_json_filename = str(Path(directory + "/" + model_name + ".json").resolve())
+    input_image_filename = str(Path(directory + export_path + "/Textures/" + model_name + "_1.png").resolve())
+    
+    print(input_model_obj_filename)
+    print(input_model_cache_json_filename)
+    print(input_image_filename)
+    
+    output_image_filename = str(Path(directory + export_path + "/Textures/" + model_name + "_sorted.png").resolve())
+    
+    if not path.exists(input_model_obj_filename):
+        print('file not found:', input_model_obj_filename)
+        return
+
+    if not path.exists(input_model_cache_json_filename):
+        print('file not found:', input_model_cache_json_filename)
+        return
+
+    if not path.exists(input_image_filename):
+        print('file not found:', input_image_filename)
+        return
+
+    # load model checksum
+    original_model_checksum = 0
+
+    with open(input_model_obj_filename, mode='rb') as input_obj_file_binary:
+        input_obj_file_binary.seek(0, os.SEEK_END)
+        short_count = int(input_obj_file_binary.tell() / 2)
+        input_obj_file_binary.seek(0, os.SEEK_SET)
+
+        for current_short_index in range(short_count):
+            chunk = input_obj_file_binary.read(2)
+            current_chunk_value, = struct.unpack('=H', chunk)
+            original_model_checksum = original_model_checksum + current_chunk_value
+
+        original_model_checksum = original_model_checksum % 65536
+
+    # load model vertices
+    original_model_face_vertex_indices = []
+
+    with open(input_model_obj_filename) as input_obj_file:
+        for line in input_obj_file:
+            match = re.match('^f (\\d+)(?:/\\d+)?(?:/\\d+)? (\\d+)(?:/\\d+)?(?:/\\d+)? (\\d+)(?:/\\d+)?(?:/\\d+)?$', line)
+            if match:
+                # obj file indices are 1-based not 0-based
+                original_model_face_vertex_indices.append(int(match.group(1)) - 1)
+                original_model_face_vertex_indices.append(int(match.group(2)) - 1)
+                original_model_face_vertex_indices.append(int(match.group(3)) - 1)
+
+    original_model_face_vertex_indices_count = len(original_model_face_vertex_indices)
+
+    # load model cache data
+    model_cache_data = None
+
+    with open(input_model_cache_json_filename) as input_json_file:
+        model_cache_data = json.load(input_json_file)
+
+        if not model_cache_data:
+            print('unable to parse model cache input file:', input_model_cache_json_filename)
+            print_usage()
+            return
+
+    model_cache_checksum = model_cache_data['file_checksum']
+    model_cache_precollapse_vertex_indices_count = model_cache_data['precollapse_num_vertices']
+
+    # verify model and cache match
+    if original_model_checksum != model_cache_checksum:
+        print('original model file and model cache file had inconsistent checksum.')
+        print('original model checksum:', original_model_checksum)
+        print('model cache checksum:', model_cache_checksum)
+        return
+
+    if original_model_face_vertex_indices_count != model_cache_precollapse_vertex_indices_count:
+        print('original model file and model cache file had inconsistent vertex indices count.')
+        print('original model face vertex indices count:', original_model_face_vertex_indices_count)
+        print('model cache pre-collapse vertex indices count:', model_cache_precollapse_vertex_indices_count)
+        return
+
+    # create map of final collapsed and optimized vertex indices to original vertex indices
+    precollapse_vert_reorder_indices = model_cache_data["precollapse_vert_reorder_indices"]  # map of post-collapse vertex indices to original model vertex indices
+    optimize_vert_reorder_indices = model_cache_data["optimize_vert_reorder_indices"]  # map of optimized vertex order indices to post-collapse vertex indices
+
+    collapsed_indices = [
+        original_model_face_vertex_indices[collapsed_index]
+        for collapsed_index in precollapse_vert_reorder_indices
+    ]
+    optimized_indices = [
+        collapsed_indices[optimized_index]
+        for optimized_index in optimize_vert_reorder_indices
+    ]
+
+    with Image.open(input_image_filename) as input_image:
+        column_height = input_image.height
+        greatest_input_dimension = max(model_cache_data['optimize_vert_reorder_index_count'], column_height)
+        output_image_dimensions = 1 << (greatest_input_dimension - 1).bit_length()  # smallest power of 2 that is >= greatest_input_dimension
+
+        output_image = Image.new(mode='RGB', size=(output_image_dimensions, output_image_dimensions))
+        
+        # The settings are on the first row of the image. So copy those over.
+        copied_row = input_image.crop((0, 0, column_height, column_height))
+        output_image.paste(copied_row, (0, 0, column_height, column_height))
+
+        for output_column_index, input_column_index in enumerate(optimized_indices):
+            copied_column = input_image.crop((input_column_index, 1, input_column_index + 1, column_height))
+            output_image.paste(copied_column, (output_column_index, 1, output_column_index + 1, column_height))
+
+        output_image.save(output_image_filename)
+        print("Written sorted image", output_image_filename)
+
+
+class VAT_OT_CreateTextures(Operator):
     bl_label = "Operator"
-    bl_idname = "object.create"
+    bl_idname = "object.create_textures"
     
     def execute(self, context):
+        print("check")
         CreateAnimationTextures(context.scene.export_path, str(context.scene.model_name), self)
         return {'FINISHED'}
+
+
+class VAT_OT_CreateJSON(Operator):
+    bl_label = "Operator"
+    bl_idname = "object.create_json"
+    
+    def execute(self, context):
+        CreateJSON(context.scene.cache_path, str(context.scene.model_name), self)
+        return {'FINISHED'}
+
+
+class VAT_OT_SortTextures(Operator):
+    bl_label = "Operator"
+    bl_idname = "object.sort_textures"
+    
+    def execute(self, context):
+        SortTextures(context.scene.cache_path, context.scene.export_path, str(context.scene.model_name), self)
+        return {'FINISHED'}
+
 
 class VAT_PT_Panel(Panel):
     """Creates a Panel in the Object properties window"""
@@ -256,15 +602,28 @@ class VAT_PT_Panel(Panel):
         self.layout.prop(context.scene, "model_name")
         
         row = layout.row()
-        row.operator(VAT_OT_Operator.bl_idname, text="Create", icon="LIBRARY_DATA_DIRECT")
+        row.operator(VAT_OT_CreateTextures.bl_idname, text="Create Textures", icon="LIBRARY_DATA_DIRECT")
+        
+        self.layout.prop(context.scene, "cache_path")
+        row = layout.row()
+        row.operator(VAT_OT_CreateJSON.bl_idname, text="Create JSON", icon="LIBRARY_DATA_DIRECT")
+        row = layout.row()
+        row.operator(VAT_OT_SortTextures.bl_idname, text="Sort Textures", icon="LIBRARY_DATA_DIRECT")
+
 
 def register():
-    bpy.utils.register_class(VAT_OT_Operator)
+    bpy.utils.register_class(VAT_OT_CreateTextures)
+    bpy.utils.register_class(VAT_OT_CreateJSON)
+    bpy.utils.register_class(VAT_OT_SortTextures)
     bpy.utils.register_class(VAT_PT_Panel)
 
+
 def unregister():
-    bpy.utils.unregister_class(ExecuteOperator)
-    bpy.utils.register_class(VertexAnimationTexture)
+    bpy.utils.unregister_class(VAT_OT_CreateTextures)
+    bpy.utils.unregister_class(VAT_OT_CreateJSON)
+    bpy.utils.unregister_class(VAT_OT_SortTextures)
+    bpy.utils.unregister_class(VAT_PT_Panel)
+
 
 if __name__ == "__main__":
     register()

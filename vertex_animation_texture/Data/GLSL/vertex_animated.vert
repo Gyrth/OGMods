@@ -2,7 +2,6 @@
 #extension GL_ARB_shading_language_420pack : enable
 
 #include "lighting150.glsl"
-
 #include "object_vert150.glsl"
 
 vec3 quat_mul_vec3(vec4 q, vec3 v) {
@@ -119,10 +118,6 @@ uniform vec4 detail_normal_indices;
 
 const vec3 bounds = vec3(10.0, 10.0, 10.0);
 
-// UNIFORM_DETAIL4_TEXTURES
-//
-// UNIFORM_AVG_COLOR4
-
 float DecodeFloatRG(vec2 enc){
 	vec2 kDecodeDot = vec2(1.0, 1.0 / 255.0);
 	return dot(enc, kDecodeDot);
@@ -141,34 +136,8 @@ vec2 EncodeFloatRG(float v){
 	return enc;
 }
 
-int GetIndex(vec3 vertex){
-	int x_num = int( (vertex.x < 0.0? vertex.x * -1.0 : vertex.x) * 10000.001 );
-	int y_num = int( (vertex.y < 0.0? vertex.y * -1.0 : vertex.y) * 10000.001 );
-	int z_num = int( (vertex.z < 0.0? vertex.z * -1.0 : vertex.z) * 10000.001 );
-
-	int x_tens = (x_num % 100) / 10;
-	int x_units = (x_num % 10);
-
-	int y_tens = (y_num % 100) / 10;
-	int y_units = (y_num % 10);
-
-	int z_tens = (z_num % 100) / 10;
-	int z_units = (z_num % 10);
-
-	int arr[6] = int[6](x_tens, x_units, y_tens, y_units, z_tens, z_units);
-	int result = 0;
-
-	for(int i = 0 ; i < arr.length() ; i++){
-		result = (result * 10) + arr[i];
-	}
-
-	return result;
-}
-
 void main() {
-	vec3 rest_vert = vertex_attrib;
-	int index = -1;
-	vec3 last_vertex_position = vec3(0.0f, 0.0f, 0.0f);
+	int index = gl_VertexID;
 	vec3 animated_vertex_position = vertex_attrib;
 	float texture_mult = 1.0f;
 
@@ -185,41 +154,9 @@ void main() {
 		skip_render = 0;
 	}
 
-	vec2 texture_size_1 = textureSize(tex1, 0);
-	int target_resolution = int(texture_size_1.x / texture_mult);
+	vec2 texture_size = textureSize(tex1, 0);
+	int target_resolution = int(texture_size.x / texture_mult);
 	float half_pixel_offset = (1.0 / target_resolution) / 2.0;
-
-	for(int i = 0; i <= int(texture_size_1.x); i++){
-		int x_pixel = i;
-		float x_pos = 1.0 / target_resolution * x_pixel;
-
-		int y_pixel = 1;
-		float y_pos = 1.0 / target_resolution * y_pixel;
-
-		vec4 color_1 = textureLod(tex1, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset), 0.0);
-		vec4 color_2 = textureLod(tex5, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset), 0.0);
-
-		vec3 vertex_position;
-		vertex_position.x = DecodeFloatRG(vec2(color_1.x, color_2.x));
-		vertex_position.y = DecodeFloatRG(vec2(color_1.y, color_2.y));
-		vertex_position.z = DecodeFloatRG(vec2(color_1.z, color_2.z));
-
-		vertex_position = vertex_position * bounds.x;
-		vertex_position = vertex_position - (bounds / 2.0f);
-		// vertex_position = vec3(vertex_position.x * 1.0, vertex_position.z * 1.0, vertex_position.y * -1.0f);
-
-		float dist = distance(rest_vert, vertex_position);
-
-		// Get the index based comparing rounded vertex positions.
-		// vec3 rounded_rest = vec3(ceil(rest_vert.x * 1000.0) / 1000.0, ceil(rest_vert.y * 1000.0) / 1000.0, ceil(rest_vert.z * 1000.0) / 1000.0);
-		// vec3 rounded_vertex = vec3(ceil(vertex_position.x * 1000.0) / 1000.0, ceil(vertex_position.y * 1000.0) / 1000.0, ceil(vertex_position.z * 1000.0) / 1000.0);
-
-		// if(rounded_rest == rounded_vertex){
-		if(dist < 0.001){
-			index = i;
-			break;
-		}
-	}
 
 	int x_pixel = index;
 	float x_pos = 1.0 / target_resolution * x_pixel;
@@ -231,26 +168,22 @@ void main() {
 	vec4 settings_color_1 = textureLod(tex1, vec2(half_pixel_offset, half_pixel_offset), 0.0);
 	vec4 settings_color_2 = textureLod(tex5, vec2(half_pixel_offset, half_pixel_offset), 0.0);
 
+	// The top row of the images is used for settings. Currently only the animation length, but there's room for more features.
 	vec3 settings;
 	settings.x = DecodeFloatRG(vec2(settings_color_1.x, settings_color_2.x));
 	settings.y = DecodeFloatRG(vec2(settings_color_1.y, settings_color_2.y));
 	settings.z = DecodeFloatRG(vec2(settings_color_1.z, settings_color_2.z));
 
 	float animation_length = int(settings.x * 10000.0);
-	// float animation_speed = 1.0 / 24.0;
-	float animation_speed = (animation_length / texture_size_1.y) / 8.0;
-
-	float range = animation_length / (texture_size_1.y / texture_mult);
+	float range = animation_length / (texture_size.y / texture_mult);
 	float skip_frames = half_pixel_offset * 4.0f;
 
-	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z) / texture_size_1));
-
-	float animation_progress = mod(time * animation_speed + position_offset / range, range) + skip_frames;
+	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z)));
+	float animation_progress = mod((time * 0.1 + position_offset) * range, range) + skip_frames;
 	y_pos = animation_progress;
 
 	vec4 color_1 = textureLod(tex1, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset), 0.0);
 	vec4 color_2 = textureLod(tex5, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset), 0.0);
-	// vec3 color_1 = plant_stability_attrib;
 
 	vec3 vertex_position;
 	vertex_position.x = DecodeFloatRG(vec2(color_1.x, color_2.x));
@@ -259,7 +192,6 @@ void main() {
 
 	vertex_position = vertex_position * bounds.x;
 	vertex_position = vertex_position - (bounds / 2.0f);
-	// vertex_position = vec3(vertex_position.x * 1.0f, vertex_position.z * 1.0f, vertex_position.y * -1.0f);
 
 	animated_vertex_position = vertex_attrib - vertex_position;
 
@@ -269,21 +201,9 @@ void main() {
 	}
 
 	instance_id = gl_InstanceID;
-
-	// vertex_color = textureLod(tex24, frag_tex_coords, 0.0).xyz;
-	// vertex_color = plant_stability_attrib;
-	// vertex_color = vec3(0.0, 0.0, normal_attrib.r);
-	// vertex_color = (normal_attrib + vec3(2.0)) / 4.0;
-
-	// vertex_color = color_1.xyz;
 	vertex_color = albedo_color.xyz;
-	// vertex_color = index <= 34 ? vec3(1.0, 0.0, 0.0) : vec3(1.0);
 
 	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
-
-	// transformed_vertex = vertex_attrib;
-	// frag_normal = normal_attrib;
-	// world_vert = transformed_vertex;
 
 	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
 }
