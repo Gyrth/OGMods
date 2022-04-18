@@ -24,7 +24,7 @@ bpy.types.Scene.model_name = StringProperty(subtype='FILE_NAME', name="Model Nam
 bpy.types.Scene.cache_path = StringProperty(subtype='FILE_PATH', name="Cache Path")
 
 # This is the max the vertex can move out of it's own rest pose. 5 units each way.
-bounds = Vector([10.0, 10.0, 10.0])
+bounds = Vector([20.0, 20.0, 20.0])
 
 SUPPORTED_CACHE_FILE_VERSION = 41
 

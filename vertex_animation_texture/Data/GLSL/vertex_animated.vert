@@ -116,7 +116,7 @@ uniform vec4 detail_color_indices;
 uniform sampler2DArray detail_normal;
 uniform vec4 detail_normal_indices;
 
-const vec3 bounds = vec3(10.0, 10.0, 10.0);
+const vec3 bounds = vec3(20.0, 20.0, 20.0);
 
 float DecodeFloatRG(vec2 enc){
 	vec2 kDecodeDot = vec2(1.0, 1.0 / 255.0);
