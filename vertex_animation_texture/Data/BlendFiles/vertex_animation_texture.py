@@ -77,7 +77,6 @@ def FloatToTextures(f, x, y, output_image_1, output_image_2, image_size):
     SetPixel(output_image_2, x, y, color_image_2, image_size)
 
 def CreateAnimationTextures(export_path, model_name, info):
-    print("check")
     # The image size can be increased to hold more animations, vertices or longer animation.
     image_size = 1
     arm = None
@@ -110,8 +109,10 @@ def CreateAnimationTextures(export_path, model_name, info):
     joined_object.select_set(True)
 #    joined_object.parent = None
 #    joined_object.modifiers.clear()
-    if len(joined_object.data.shape_keys.key_blocks.keys()) > 0:
+
+    if joined_object.data.shape_keys != None and len(joined_object.data.shape_keys.key_blocks.keys()) > 0:
         joined_object.active_shape_key_index = 0
+    
     bpy.context.view_layer.objects.active = joined_object
     
     bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
@@ -454,13 +455,13 @@ def SortTextures(cache_path, export_path, model_name, info):
     
     input_model_obj_filename = str(Path(directory + export_path + "/Models/" + model_name + ".obj").resolve())
     input_model_cache_json_filename = str(Path(directory + "/" + model_name + ".json").resolve())
-    input_image_filename = str(Path(directory + export_path + "/Textures/" + model_name + "_1.png").resolve())
+    input_image_filename_1 = str(Path(directory + export_path + "/Textures/" + model_name + "_1.png").resolve())
+    input_image_filename_2 = str(Path(directory + export_path + "/Textures/" + model_name + "_2.png").resolve())
+    output_image_filename_1 = str(Path(directory + export_path + "/Textures/" + model_name + "_sorted_1.png").resolve())
+    output_image_filename_2 = str(Path(directory + export_path + "/Textures/" + model_name + "_sorted_2.png").resolve())
     
-    print(input_model_obj_filename)
-    print(input_model_cache_json_filename)
-    print(input_image_filename)
-    
-    output_image_filename = str(Path(directory + export_path + "/Textures/" + model_name + "_sorted.png").resolve())
+    print("obj", input_model_obj_filename)
+    print("json", input_model_cache_json_filename)
     
     if not path.exists(input_model_obj_filename):
         print('file not found:', input_model_obj_filename)
@@ -470,8 +471,12 @@ def SortTextures(cache_path, export_path, model_name, info):
         print('file not found:', input_model_cache_json_filename)
         return
 
-    if not path.exists(input_image_filename):
-        print('file not found:', input_image_filename)
+    if not path.exists(input_image_filename_1):
+        print('file not found:', input_image_filename_1)
+        return
+    
+    if not path.exists(input_image_filename_2):
+        print('file not found:', input_image_filename_2)
         return
 
     # load model checksum
@@ -543,7 +548,7 @@ def SortTextures(cache_path, export_path, model_name, info):
         for optimized_index in optimize_vert_reorder_indices
     ]
 
-    with Image.open(input_image_filename) as input_image:
+    with Image.open(input_image_filename_1) as input_image:
         column_height = input_image.height
         greatest_input_dimension = max(model_cache_data['optimize_vert_reorder_index_count'], column_height)
         output_image_dimensions = 1 << (greatest_input_dimension - 1).bit_length()  # smallest power of 2 that is >= greatest_input_dimension
@@ -558,8 +563,26 @@ def SortTextures(cache_path, export_path, model_name, info):
             copied_column = input_image.crop((input_column_index, 1, input_column_index + 1, column_height))
             output_image.paste(copied_column, (output_column_index, 1, output_column_index + 1, column_height))
 
-        output_image.save(output_image_filename)
-        print("Written sorted image", output_image_filename)
+        output_image.save(output_image_filename_1)
+        print("Written sorted image", output_image_filename_1)
+    
+    with Image.open(input_image_filename_2) as input_image:
+        column_height = input_image.height
+        greatest_input_dimension = max(model_cache_data['optimize_vert_reorder_index_count'], column_height)
+        output_image_dimensions = 1 << (greatest_input_dimension - 1).bit_length()  # smallest power of 2 that is >= greatest_input_dimension
+
+        output_image = Image.new(mode='RGB', size=(output_image_dimensions, output_image_dimensions))
+        
+        # The settings are on the first row of the image. So copy those over.
+        copied_row = input_image.crop((0, 0, column_height, column_height))
+        output_image.paste(copied_row, (0, 0, column_height, column_height))
+
+        for output_column_index, input_column_index in enumerate(optimized_indices):
+            copied_column = input_image.crop((input_column_index, 1, input_column_index + 1, column_height))
+            output_image.paste(copied_column, (output_column_index, 1, output_column_index + 1, column_height))
+
+        output_image.save(output_image_filename_2)
+        print("Written sorted image", output_image_filename_2)
 
 
 class VAT_OT_CreateTextures(Operator):
