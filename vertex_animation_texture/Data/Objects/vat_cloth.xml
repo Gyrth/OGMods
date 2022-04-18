@@ -3,8 +3,8 @@
 	<Model>Data/Models/vat_cloth.obj</Model>
 
 	<ColorMap>Data/Textures/ui/t2/logo.png</ColorMap>
-	<NormalMap>Data/Textures/vat_cloth_1.png</NormalMap>
-	<WeightMap>Data/Textures/vat_cloth_2.png</WeightMap>
+	<NormalMap>Data/Textures/vat_cloth_sorted_1.png</NormalMap>
+	<WeightMap>Data/Textures/vat_cloth_sorted_2.png</WeightMap>
 
 	<ShaderName>vertex_animated</ShaderName>
 	<flags no_collision = "true" double_sided = "true"/>

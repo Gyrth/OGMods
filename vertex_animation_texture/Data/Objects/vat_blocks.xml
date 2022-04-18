@@ -3,8 +3,8 @@
 	<Model>Data/Models/vat_blocks.obj</Model>
 
 	<ColorMap>Data/Textures/Terrain/DetailTextures/gray_rock.tga</ColorMap>
-	<NormalMap>Data/Textures/vat_blocks_1.png</NormalMap>
-	<WeightMap>Data/Textures/vat_blocks_2.png</WeightMap>
+	<NormalMap>Data/Textures/vat_blocks_sorted_1.png</NormalMap>
+	<WeightMap>Data/Textures/vat_blocks_sorted_2.png</WeightMap>
 
 	<ShaderName>vertex_animated</ShaderName>
 	<flags no_collision = "true" double_sided = "true"/>
