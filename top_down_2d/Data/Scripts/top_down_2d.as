@@ -103,7 +103,7 @@ float PI = 3.14159265359f;
 bool ui_created = false;
 string current_actor_name = "Default";
 bool show_editor = true;
-TextureAssetRef imgui_image = LoadTexture("Data/Textures/HEROS/ADVENTURER/hero.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |
+TextureAssetRef imgui_image = LoadTexture("Data/Textures/HEROS/spritesheets/adventurer_idle_down.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |
 TextureLoadFlags_NoReduce);
 
 // Coloring options
