@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/2d_block.obj</Model>
+	<ColorMap>Data/Textures/TILESET/tree_top_right.png</ColorMap>
+	<NormalMap>Data/Textures/normal.tga</NormalMap>
+	<ShaderName>therium_advance #TANGENT</ShaderName>
+	<flags no_collision = "false"/>
+</Object>
