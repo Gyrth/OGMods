@@ -8,7 +8,7 @@ from PIL import Image
 
 root_element = etree.Element('root')
 
-tileset_path = "./Data/Textures/TILESET/"
+tileset_path = "./Data/Textures/ENEMIES/spritesheets/"
 f = []
 
 for (dirpath, dirnames, filenames) in walk(tileset_path):
@@ -19,9 +19,9 @@ for file_name in f:
 	image = Image.open(tileset_path + file_name)
 	name = path.splitext(file_name)[0]
 
-	if image.size[1] == 16:
+	if image.size[1] == 32:
 		print("convert image " + file_name)
-		new_image = image.resize((image.size[0] * 2, image.size[1] * 2), Image.NEAREST)
+		new_image = image.resize((int(image.size[0] / 2), int(image.size[1] / 2)), Image.NEAREST)
 		new_image.save(fp=tileset_path + file_name, quality=100, optimize=True)
 
 	xml_path = "./Data/Objects/" + name + ".xml"
