@@ -7,7 +7,7 @@ array<string> hotspot_ids;
 IMGUI@ imGUI;
 FontSetup name_font_arial("arial", 70 , HexColor("#CCCCCC"), true);
 FontSetup name_font("edosz", 70 , HexColor("#CCCCCC"), true);
-FontSetup dialogue_font("arial", 50 , HexColor("#CCCCCC"), true);
+FontSetup dialogue_font("Kenney Mini Square", 80 , HexColor("#000000"), false);
 FontSetup controls_font("arial", 45 , HexColor("#616161"), true);
 FontSetup red_dialogue_font("arial", 50 , HexColor("#990000"), true);
 FontSetup green_dialogue_font("arial", 50 , HexColor("#009900"), true);
@@ -67,6 +67,7 @@ vec3 new_camera_shake_position;
 
 FontSetup default_font("Cella", 70 , HexColor("#CCCCCC"), true);
 IMContainer@ dialogue_container;
+IMContainer@ dialogue_ui_container;
 IMContainer@ image_container;
 IMContainer@ text_container;
 IMContainer@ grabber_container;
@@ -367,6 +368,47 @@ void Init(string str){
 	SetSong("Adventure");
 }
 
+void AddDialogueUI(){
+	bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
+	dialogue_container.clear();
+	@dialogue_ui_container = IMContainer(2560, 600);
+	dialogue_container.setAlignment(CACenter, CABottom);
+	dialogue_container.setElement(dialogue_ui_container);
+	dialogue_container.setSize(vec2(2560, 1440));
+
+	IMContainer text_container(0.0, 400.0);
+
+	IMDivider text_divider("text_divider", DOHorizontal);
+	text_divider.setZOrdering(2);
+	text_divider.setAlignment(CACenter, CACenter);
+	text_container.setElement(text_divider);
+
+	vec2 offset(0.0, 15.0);
+	IMText death_text("I have to get out of here. As soon as possible.", dialogue_font);
+	death_text.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
+	text_divider.appendSpacer(300.0);
+	text_divider.append(death_text);
+	text_divider.appendSpacer(300.0);
+	death_text.setVisible(false);
+
+	IMImage text_background("Textures/UI/buttonLong_grey.png");
+	text_background.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
+	text_background.setClip(false);
+	text_background.setColor(vec4(1.0, 1.0, 1.0, 0.97));
+	dialogue_ui_container.setElement(text_container);
+	text_background.setVisible(false);
+
+	imGUI.update();
+	float added_height = 50.0f;
+	text_background.setSize(text_container.getSize() + vec2(0.0, added_height));
+	text_container.addFloatingElement(text_background, "text_background", vec2(0, -(added_height / 2.0)), 1);
+	text_background.setZOrdering(1);
+
+	imGUI.update();
+	text_background.setVisible(true);
+	death_text.setVisible(true);
+}
+
 void LoadPalette(bool use_defaults = false){
 	JSON data;
 	JSONValue root;
@@ -466,6 +508,9 @@ void ReceiveMessage(string msg){
 	string token = token_iter.GetToken(msg);
 
 	/* Log(warning, token); */
+	if(token == "reset"){
+		resetting = true;
+	}
 }
 
 void Update(int paused){
@@ -552,9 +597,13 @@ void Update(int paused){
 			obj.SetTranslation(translation);
 		}
 	}
+
+	imGUI.update();
 }
 
 void DrawGUI(){
+	imGUI.render();
+
 	if(show){
 		thumbnailed_counter = 0;
 
@@ -755,10 +804,12 @@ string ToLowerCase(string input){
 
 void PostInit(){
 	post_init_done = true;
+	AddDialogueUI();
 }
 
 void PostReset(){
 	added_death_screen = false;
+	AddDialogueUI();
 }
 
 bool HasFocus(){
