@@ -73,6 +73,13 @@ IMContainer@ text_container;
 IMContainer@ grabber_container;
 IMContainer@ death_container;
 IMContainer@ death_ui_container;
+array<IMText@> dialogue_texts;
+array<string> split_dialogue;
+/* string dialogue_string = "I have to get out of here. As soon as possible. \n I have to get out of here. As soon as possible. \n I have to get out of here. As soon as possible."; */
+string dialogue_string = "I have to get out of here. \n I have to get out of here. \n I have to get out of here.";
+float dialogue_progress = 0.0f;
+float last_sound_time = 0.0f;
+int dialogue_array_index = 0;
 bool editing_ui = false;
 array<IMText@> text_elements;
 bool grabber_dragging = false;
@@ -369,27 +376,33 @@ void Init(string str){
 }
 
 void AddDialogueUI(){
+	dialogue_progress = 0.0f;
+	dialogue_array_index = 0;
+	dialogue_texts.resize(0);
+
 	bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
 	dialogue_container.clear();
-	@dialogue_ui_container = IMContainer(2560, 600);
+	@dialogue_ui_container = IMContainer(2560, 400);
+	/* dialogue_ui_container.showBorder(); */
 	dialogue_container.setAlignment(CACenter, CABottom);
 	dialogue_container.setElement(dialogue_ui_container);
 	dialogue_container.setSize(vec2(2560, 1440));
 
-	IMContainer text_container(0.0, 400.0);
+	IMContainer text_container(0.0, 250.0);
 
 	IMDivider text_divider("text_divider", DOHorizontal);
+	/* text_divider.showBorder(); */
 	text_divider.setZOrdering(2);
-	text_divider.setAlignment(CACenter, CACenter);
+	text_divider.setAlignment(CALeft, CACenter);
 	text_container.setElement(text_divider);
 
-	vec2 offset(0.0, 15.0);
-	IMText death_text("I have to get out of here. As soon as possible.", dialogue_font);
-	death_text.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
+	IMDivider text_vert("text_vert", DOVertical);
+	text_vert.setZOrdering(2);
+	text_vert.setAlignment(CALeft, CACenter);
+
 	text_divider.appendSpacer(300.0);
-	text_divider.append(death_text);
+	text_divider.append(text_vert);
 	text_divider.appendSpacer(300.0);
-	death_text.setVisible(false);
 
 	IMImage text_background("Textures/UI/buttonLong_grey.png");
 	text_background.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
@@ -398,15 +411,31 @@ void AddDialogueUI(){
 	dialogue_ui_container.setElement(text_container);
 	text_background.setVisible(false);
 
+	split_dialogue = dialogue_string.split("\n");
+
+	for(uint i = 0; i < split_dialogue.size(); i++){
+		IMText @dialogue_text = IMText(split_dialogue[i], dialogue_font);
+		dialogue_text.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
+		/* dialogue_text.showBorder(); */
+		text_vert.append(dialogue_text);
+		dialogue_text.setVisible(false);
+		dialogue_texts.insertLast(dialogue_text);
+	}
+
 	imGUI.update();
-	float added_height = 50.0f;
+
+	float added_height = 100.0f;
 	text_background.setSize(text_container.getSize() + vec2(0.0, added_height));
 	text_container.addFloatingElement(text_background, "text_background", vec2(0, -(added_height / 2.0)), 1);
 	text_background.setZOrdering(1);
 
 	imGUI.update();
 	text_background.setVisible(true);
-	death_text.setVisible(true);
+
+	for(uint i = 0; i < dialogue_texts.size(); i++){
+		dialogue_texts[i].setText("");
+		dialogue_texts[i].setVisible(true);
+	}
 }
 
 void LoadPalette(bool use_defaults = false){
@@ -523,6 +552,8 @@ void Update(int paused){
 		resetting = false;
 	}
 
+	UpdateDialogue();
+
 	if(EditorModeActive()){
 		UpdatePlaceholder();
 		if(show && spawn){
@@ -599,6 +630,35 @@ void Update(int paused){
 	}
 
 	imGUI.update();
+}
+
+void UpdateDialogue(){
+	dialogue_progress = dialogue_progress + time_step * 0.75f;
+
+	if(dialogue_progress <= 1.0){
+		float dialogue_string_length = split_dialogue[dialogue_array_index].length();
+		string dialogue_substring = dialogue_string.substr(0, int(dialogue_progress * dialogue_string_length));
+		dialogue_texts[dialogue_array_index].setText(dialogue_substring);
+
+		if(last_sound_time < the_time){
+			string path;
+
+			switch(rand() % 2) {
+				case 0:
+				path = "Data/Sounds/tick_002.wav"; break;
+				default:
+				path = "Data/Sounds/tick_001.wav"; break;
+			}
+
+			int sound_id = PlaySound(path);
+			SetSoundPitch(sound_id, RangedRandomFloat(0.5f, 2.0f));
+			last_sound_time = the_time + 0.1f;
+		}
+
+	}else if(dialogue_progress >= 1.0 && dialogue_array_index < int(dialogue_texts.size() - 1)){
+		dialogue_array_index += 1;
+		dialogue_progress = 0.0f;
+	}
 }
 
 void DrawGUI(){
