@@ -33,9 +33,9 @@ void UpdateControls(){
 			UpdateAttack(true);
 		}
 
-		if(GetInputDown(this_mo.controller_id, "mousescrollup")){
+		if(GetInputDown(this_mo.controller_id, "mousescrollup") && camera_distance > 0.15){
 			camera_distance -= 0.5f;
-		} else if(GetInputDown(this_mo.controller_id, "mousescrolldown")){
+		} else if(GetInputDown(this_mo.controller_id, "mousescrolldown") && camera_distance < 10.0){
 			camera_distance += 0.5f;
 		}
 	}
