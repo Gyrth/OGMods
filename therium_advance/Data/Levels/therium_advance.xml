@@ -5,7 +5,7 @@
 <Shader>post</Shader>
 <Shadows>true</Shadows>
 <LoadingScreen>
-    <Image>Data/Images/therium_advance_loading.jpg</Image>
+    <Image>Data/Images/therium_advance_full.jpg</Image>
 </LoadingScreen>
 <OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
@@ -128,7 +128,7 @@
     <EnvObject t0="45" t1="6" t2="-135" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/grass_edge_top_left.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="57" t1="6.2" t2="-131" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/adventurer_attack_right.xml">
+    <EnvObject t0="3" t1="6.2" t2="-127" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="32" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/adventurer_attack_right.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="58" t1="6.2" t2="-131" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/adventurer_attack_up.xml">
@@ -845,7 +845,7 @@
     <EnvObject t0="50" t1="6" t2="-126" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
         <parameters />
     </EnvObject>
-    <CameraObject t0="3.96203" t1="17.2448" t2="-131.062" s0="1" s1="1" s2="1" q0="0.682181" q1="0.0177657" q2="-0.0165843" q3="0.730779" euler_x="1.50204" euler_y="0.0486118" euler_z="0" id="271">
+    <CameraObject t0="2.85209" t1="9.75743" t2="-125.093" s0="1" s1="1" s2="1" q0="0.566884" q1="0.0913681" q2="-0.0634548" q3="0.816253" euler_x="1.21404" euler_y="0.222944" euler_z="0" id="271">
         <parameters />
     </CameraObject>
     <EnvObject t0="49" t1="6" t2="-126" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="272" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">

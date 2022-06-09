@@ -732,6 +732,7 @@ void main(){
 
 	float frames = texture_size.x / pixels;
 	float max_frames = frames;
+	float half_pixel = 0.5f / texture_size.x;
 
 	// Remove any empty sprites.
 	for(int i = int(frames); i > 0; i--){
@@ -745,7 +746,14 @@ void main(){
 		}
 	}
 
-	float animation_progress = mod(time / 1.0, 1.0);
+	float animation_progress;
+
+	#if defined(TINT_PROGRESS)
+		animation_progress = min(0.99f, instance_color_tint.r);
+	#else
+		animation_progress = mod(time / 1.0, 1.0);
+	#endif
+
 	pixelated_coord.x /= frames;
 	pixelated_coord.x += (1.0f / frames) * floor(animation_progress * max_frames);
 
@@ -785,7 +793,7 @@ void main(){
 				vec3 ws_normal = quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), os_normal);
 			#endif
 
-			#if !defined(WATER)
+			#if !defined(WATER) && !defined(TINT_PROGRESS)
 				colormap.xyz *= instance_color_tint.xyz;
 			#endif
 
@@ -915,7 +923,9 @@ void main(){
 		float spec_val = mix(base_reflectivity, 1.0, fresnel);
 		spec_amount = spec_val;
 
-		colormap.xyz *= mix(vec3(1.0),instance_color_tint.xyz,normalmap.a);
+		#if !defined(TINT_PROGRESS)
+			colormap.xyz *= mix(vec3(1.0),instance_color_tint.xyz,normalmap.a);
+		#endif
 
 		#if defined(DAMP_FOG) || defined(RAINY) || defined(MISTY) || defined(VOLCANO) || defined(WATERFALL_ARENA) || defined(SKY_ARK) || defined(SHADOW_POINT_LIGHTS)
 			ambient_mult *= env_ambient_mult;

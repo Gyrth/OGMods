@@ -406,6 +406,10 @@ class Animation {
 		}
 	}
 
+	void SetProgress(float progress){
+		current_frame.SetTint(vec3(progress, 0.0, 0.0));
+	}
+
 	void Update(){
 
 		if(animation_timer >= animation_framerate){
@@ -574,7 +578,7 @@ void UpdateHurt(){
 }
 
 void UpdateAttack(bool force = false){
-	attack_timer -= time_step;
+	attack_timer -= time_step * 2.0f;
 
 	if(UpdateDirection() || force){
 		switch(direction){
@@ -592,6 +596,8 @@ void UpdateAttack(bool force = false){
 				break;
 		}
 	}
+
+	current_animation.SetProgress(attack_timer);
 
 	if(attack_timer <= 0.0){
 		movement_state = idle;
