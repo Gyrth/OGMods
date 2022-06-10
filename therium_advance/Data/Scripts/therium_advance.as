@@ -75,11 +75,13 @@ IMContainer@ death_container;
 IMContainer@ death_ui_container;
 array<IMText@> dialogue_texts;
 array<string> split_dialogue;
+IMImage@ continue_icon;
 /* string dialogue_string = "I have to get out of here. As soon as possible. \n I have to get out of here. As soon as possible. \n I have to get out of here. As soon as possible."; */
 string dialogue_string = "I have to get out of here. \n I have to get out of here. \n I have to get out of here.";
 float dialogue_progress = 0.0f;
 float last_sound_time = 0.0f;
 int dialogue_array_index = 0;
+bool dialogue_done = true;
 bool editing_ui = false;
 array<IMText@> text_elements;
 bool grabber_dragging = false;
@@ -378,6 +380,7 @@ void Init(string str){
 void AddDialogueUI(){
 	dialogue_progress = 0.0f;
 	dialogue_array_index = 0;
+	dialogue_done = false;
 	dialogue_texts.resize(0);
 
 	bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
@@ -428,6 +431,22 @@ void AddDialogueUI(){
 	text_background.setSize(text_container.getSize() + vec2(0.0, added_height));
 	text_container.addFloatingElement(text_background, "text_background", vec2(0, -(added_height / 2.0)), 1);
 	text_background.setZOrdering(1);
+
+	IMImage avatar("Textures/ghost_avatar.png");
+	avatar.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
+	avatar.setClip(false);
+	avatar.setColor(vec4(1.0, 1.0, 1.0, 0.97));
+	avatar.scaleToSizeX(350.0f);
+	avatar.setZOrdering(2);
+	text_container.addFloatingElement(avatar, "avatar", vec2(0.0f, 0.0f -(added_height / 2.0)), 1);
+
+	@continue_icon = IMImage("Textures/UI/arrowBlack_down.png");
+	continue_icon.setColor(vec4(1.0, 1.0, 1.0, 0.97));
+	continue_icon.scaleToSizeX(50.0f);
+	continue_icon.setZOrdering(2);
+	text_container.addFloatingElement(continue_icon, "continue_icon", vec2(text_container.getSize().x - 175.0f, 150.0f -(added_height / 2.0)), 1);
+	continue_icon.addUpdateBehavior(IMPulseAlpha(0.0, 1.0, 1.0), "pulse");
+	continue_icon.setVisible(false);
 
 	imGUI.update();
 	text_background.setVisible(true);
@@ -655,9 +674,14 @@ void UpdateDialogue(){
 			last_sound_time = the_time + 0.1f;
 		}
 
-	}else if(dialogue_progress >= 1.0 && dialogue_array_index < int(dialogue_texts.size() - 1)){
-		dialogue_array_index += 1;
-		dialogue_progress = 0.0f;
+	}else if(dialogue_progress >= 1.0){
+	 	if(dialogue_array_index < int(dialogue_texts.size() - 1)){
+			dialogue_array_index += 1;
+			dialogue_progress = 0.0f;
+		}else if(dialogue_done == false){
+			continue_icon.setVisible(true);
+			dialogue_done = true;
+		}
 	}
 }
 
