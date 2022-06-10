@@ -156,7 +156,16 @@ int load_wait_counter = 0;
 bool allow_animated_thumbnail = true;
 int thumbnailed_counter = 0;
 int max_thumbnailed_per_draw = 5;
+array<string> dialogue_queue = {};
 
+
+enum dialogue_states{
+	DIALOGUE_NONE,
+	DIALOGUE_ADDING,
+	DIALOGUE_WAIT_INPUT
+}
+
+dialogue_states dialogue_state = DIALOGUE_NONE;
 
 class GUISpawnerCategory{
 	string category_name;
@@ -408,17 +417,17 @@ void AddDialogueUI(){
 	text_divider.appendSpacer(300.0);
 
 	IMImage text_background("Textures/UI/buttonLong_grey.png");
-	text_background.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
+	text_background.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
 	text_background.setClip(false);
 	text_background.setColor(vec4(1.0, 1.0, 1.0, 0.97));
 	dialogue_ui_container.setElement(text_container);
 	text_background.setVisible(false);
 
-	split_dialogue = dialogue_string.split("\n");
+	split_dialogue = dialogue_string.split("\\n");
 
 	for(uint i = 0; i < split_dialogue.size(); i++){
 		IMText @dialogue_text = IMText(split_dialogue[i], dialogue_font);
-		dialogue_text.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
+		dialogue_text.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
 		/* dialogue_text.showBorder(); */
 		text_vert.append(dialogue_text);
 		dialogue_text.setVisible(false);
@@ -433,7 +442,7 @@ void AddDialogueUI(){
 	text_background.setZOrdering(1);
 
 	IMImage avatar("Textures/ghost_avatar.png");
-	avatar.addUpdateBehavior(IMFadeIn(500, inSineTween ), "");
+	avatar.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
 	avatar.setClip(false);
 	avatar.setColor(vec4(1.0, 1.0, 1.0, 0.97));
 	avatar.scaleToSizeX(350.0f);
@@ -558,7 +567,24 @@ void ReceiveMessage(string msg){
 
 	/* Log(warning, token); */
 	if(token == "reset"){
+		dialogue_queue.resize(0);
+		dialogue_state = DIALOGUE_NONE;
 		resetting = true;
+	}else if(token == "ta"){
+		token_iter.FindNextToken(msg);
+		string command = token_iter.GetToken(msg);
+
+		if(command == "dialogue"){
+			string text;
+			while(token_iter.FindNextToken(msg)){
+				text += " " + token_iter.GetToken(msg);
+			}
+
+			dialogue_queue.insertLast(text);
+
+			/* Log(warning, text); */
+		}
+
 	}
 }
 
@@ -653,36 +679,61 @@ void Update(int paused){
 }
 
 void UpdateDialogue(){
-	dialogue_progress = dialogue_progress + time_step * 0.75f;
 
-	if(dialogue_progress <= 1.0){
-		float dialogue_string_length = split_dialogue[dialogue_array_index].length();
-		string dialogue_substring = dialogue_string.substr(0, int(dialogue_progress * dialogue_string_length));
-		dialogue_texts[dialogue_array_index].setText(dialogue_substring);
+	switch(dialogue_state) {
+		case DIALOGUE_NONE:
+			if(dialogue_queue.size() > 0){
+				dialogue_string = dialogue_queue[dialogue_queue.size() - 1];
+				AddDialogueUI();
+				dialogue_state = DIALOGUE_ADDING;
+				dialogue_queue.removeAt(dialogue_queue.size() - 1);
+			}
+			break;
+		case DIALOGUE_ADDING:{
+			float dialogue_string_length = split_dialogue[dialogue_array_index].length();
+			dialogue_progress = min(1.0, dialogue_progress + (time_step / dialogue_string_length * 20.0f));
 
-		if(last_sound_time < the_time){
-			string path;
+			if(dialogue_progress <= 1.0){
+				string dialogue_substring = split_dialogue[dialogue_array_index].substr(0, int(dialogue_progress * dialogue_string_length));
+				dialogue_texts[dialogue_array_index].setText(dialogue_substring);
 
-			switch(rand() % 2) {
-				case 0:
-				path = "Data/Sounds/tick_002.wav"; break;
-				default:
-				path = "Data/Sounds/tick_001.wav"; break;
+				if(last_sound_time < the_time){
+					string path;
+
+					switch(rand() % 2) {
+						case 0:
+						path = "Data/Sounds/tick_002.wav"; break;
+						default:
+						path = "Data/Sounds/tick_001.wav"; break;
+					}
+
+					int sound_id = PlaySound(path);
+					SetSoundPitch(sound_id, RangedRandomFloat(0.5f, 2.0f));
+					last_sound_time = the_time + 0.1f;
+				}
+
+				if(dialogue_progress == 1.0){
+					if(dialogue_array_index < int(dialogue_texts.size() - 1)){
+						dialogue_array_index += 1;
+						dialogue_progress = 0.0f;
+					}else if(dialogue_done == false){
+						continue_icon.setVisible(true);
+						dialogue_done = true;
+						dialogue_state = DIALOGUE_WAIT_INPUT;
+					}
+				}
 			}
 
-			int sound_id = PlaySound(path);
-			SetSoundPitch(sound_id, RangedRandomFloat(0.5f, 2.0f));
-			last_sound_time = the_time + 0.1f;
-		}
-
-	}else if(dialogue_progress >= 1.0){
-	 	if(dialogue_array_index < int(dialogue_texts.size() - 1)){
-			dialogue_array_index += 1;
-			dialogue_progress = 0.0f;
-		}else if(dialogue_done == false){
-			continue_icon.setVisible(true);
-			dialogue_done = true;
-		}
+			break;}
+		case DIALOGUE_WAIT_INPUT:
+			if(GetInputPressed(0, "attack")){
+				dialogue_container.clear();
+				dialogue_state = DIALOGUE_NONE;
+			}
+			break;
+		default:
+			Log(error, "Dialogue Error");
+			break;
 	}
 }
 
@@ -889,12 +940,11 @@ string ToLowerCase(string input){
 
 void PostInit(){
 	post_init_done = true;
-	AddDialogueUI();
 }
 
 void PostReset(){
+	dialogue_container.clear();
 	added_death_screen = false;
-	AddDialogueUI();
 }
 
 bool HasFocus(){

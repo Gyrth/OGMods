@@ -845,7 +845,7 @@
     <EnvObject t0="50" t1="6" t2="-126" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
         <parameters />
     </EnvObject>
-    <CameraObject t0="5.84446" t1="21.8879" t2="-119.87" s0="1" s1="1" s2="1" q0="0.659642" q1="0.0148784" q2="-0.013063" q3="0.751319" euler_x="1.44103" euler_y="0.039601" euler_z="0" id="271">
+    <CameraObject t0="3.93262" t1="13.7677" t2="-119.232" s0="1" s1="1" s2="1" q0="0.433591" q1="0.0335988" q2="-0.0161807" q3="0.900338" euler_x="0.897618" euler_y="0.0746013" euler_z="0" id="271">
         <parameters />
     </CameraObject>
     <EnvObject t0="49" t1="6" t2="-126" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="272" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
@@ -9326,6 +9326,17 @@
     <EnvObject t0="-23" t1="6" t2="-150" s0="1" s1="6.33" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3108" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_blue.xml">
         <parameters />
     </EnvObject>
+    <Hotspot t0="6" t1="6.8" t2="-125" s0="0.350957" s1="0.350957" s2="0.350957" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3109" type_file="Data/Objects/Hotspots/therium_advance_dialogue.xml">
+        <parameters>
+            <parameter name="auto_start" type="int" val="1" />
+            <parameter name="dialogue" type="string" val="" />
+            <parameter name="dialogue_data" type="string" val="ta dialogue ...&#x0A;ta dialogue ...&#x0A;ta dialogue I have to get out of here.\n Test test testi&#x0A;ta dialogue I have to get out of here." />
+            <parameter name="dialogue_name" type="string" val="Intro" />
+            <parameter name="on_enter" type="int" val="0" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Nav Region" path="Data/Objects/navmesh/navmesh_region.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
@@ -9336,4 +9347,5 @@
     <SpawnerItem display_name="grass_edge_bottom_mid.xml" path="Data/Objects/grass_edge_bottom_mid.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Basics Stone Cube" path="Data/Objects/Buildings/basics/soft_cube.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/soft_cube.png" />
     <SpawnerItem display_name="Dog Spear" path="Data/Items/DogWeapons/DogSpear.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/wspear.png" />
+    <SpawnerItem display_name="therium_advance_dialogue.xml" path="Data/Objects/Hotspots/therium_advance_dialogue.xml" thumbnail_path="empty_placeholder.png" />
 </RecentItems>

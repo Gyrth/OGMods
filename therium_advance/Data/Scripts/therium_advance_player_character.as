@@ -27,9 +27,10 @@ void SetAnimations(){
 void UpdateControls(){
 	if(this_mo.controlled){
 		if(GetInputPressed(this_mo.controller_id, "attack") && on_ground && movement_state != attack){
-			/* Shoot(); */
 			movement_state = attack;
 			attack_timer = 1.0f;
+			int sound_id = PlaySound("Data/Sounds/Attack02.wav", this_mo.position);
+			SetSoundPitch(sound_id, RangedRandomFloat(0.9f, 1.2f));
 			UpdateAttack(true);
 		}
 
