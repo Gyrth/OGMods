@@ -440,6 +440,8 @@ void AddDialogueUI(){
 	avatar.setZOrdering(2);
 	text_container.addFloatingElement(avatar, "avatar", vec2(0.0f, 0.0f -(added_height / 2.0)), 1);
 
+	imGUI.update();
+
 	@continue_icon = IMImage("Textures/UI/arrowBlack_down.png");
 	continue_icon.setColor(vec4(1.0, 1.0, 1.0, 0.97));
 	continue_icon.scaleToSizeX(50.0f);
@@ -448,7 +450,6 @@ void AddDialogueUI(){
 	continue_icon.addUpdateBehavior(IMPulseAlpha(0.0, 1.0, 1.0), "pulse");
 	continue_icon.setVisible(false);
 
-	imGUI.update();
 	text_background.setVisible(true);
 
 	for(uint i = 0; i < dialogue_texts.size(); i++){
