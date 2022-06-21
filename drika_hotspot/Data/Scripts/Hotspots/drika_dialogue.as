@@ -1658,19 +1658,19 @@ class DrikaDialogue : DrikaElement{
 			string merged_choices;
 
 			if(nr_choices >= 1){
-				merged_choices += "\"" + choice_1 + "\"";
+				merged_choices += "\"" + ReplaceQuotes(choice_1) + "\"";
 			}
 			if(nr_choices >= 2){
-				merged_choices += "\"" + choice_2 + "\"";
+				merged_choices += "\"" + ReplaceQuotes(choice_2) + "\"";
 			}
 			if(nr_choices >= 3){
-				merged_choices += "\"" + choice_3 + "\"";
+				merged_choices += "\"" + ReplaceQuotes(choice_3) + "\"";
 			}
 			if(nr_choices >= 4){
-				merged_choices += "\"" + choice_4 + "\"";
+				merged_choices += "\"" + ReplaceQuotes(choice_4) + "\"";
 			}
 			if(nr_choices >= 5){
-				merged_choices += "\"" + choice_5 + "\"";
+				merged_choices += "\"" + ReplaceQuotes(choice_5) + "\"";
 			}
 
 			level.SendMessage("drika_dialogue_choice " + this_hotspot.GetID() + " " +  merged_choices);
@@ -1905,8 +1905,8 @@ class DrikaDialogue : DrikaElement{
 
 			level.SendMessage("drika_dialogue_clear_say");
 
-			string nametag = "\"" + actor_name + "\"";
-			level.SendMessage("drika_dialogue_add_say " + nametag + " " + "\"" + say_text + "\"");
+			string nametag = "\"" + ReplaceQuotes(actor_name) + "\"";
+			level.SendMessage("drika_dialogue_add_say " + nametag + " " + "\"" + ReplaceQuotes(say_text) + "\"");
 
 			return false;
 		}else if(say_started == true && (GetInputPressed(0, "skip_dialogue") && !preview)){

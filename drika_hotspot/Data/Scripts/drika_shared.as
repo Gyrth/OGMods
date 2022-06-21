@@ -221,6 +221,10 @@ string ReplaceVariablesFromText(string input){ // This function reads the input 
 	return input;
 }
 
+string ReplaceQuotes(string input_text){
+	return join(input_text.split("\""), "\\\"");
+}
+
 string GetSavedVariable(string key){
 	SavedLevel@ data = save_file.GetSavedLevel("drika_data");
 	return (data.GetValue("[" + key + "]") == "true")? data.GetValue(key) : "--ERROR - " + key + " does not exist--";

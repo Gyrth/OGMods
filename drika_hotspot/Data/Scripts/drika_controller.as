@@ -441,8 +441,10 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		string actor_name = token_iter.GetToken(msg);
 
-		token_iter.FindNextToken(msg);
-		string text = token_iter.GetToken(msg);
+		string text = "";
+		while(token_iter.FindNextToken(msg)){
+			text += token_iter.GetToken(msg);
+		}
 
 		DialogueAddSay(actor_name, text);
 	}else if(token == "drika_dialogue_next"){
