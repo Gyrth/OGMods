@@ -94,6 +94,14 @@ array<int> billboard_ids;
 bool adding_function = false;
 bool resetting = false;
 string last_read_path = "";
+bool reorded = false;
+int display_index = 0;
+bool update_scroll = false;
+bool debug_current_line = false;
+bool show_grid = true;
+float left_over_drag_y = 0.0;
+bool dragging = false;
+bool steal_focus = false;
 
 string build_version_short = GetBuildVersionShort( );
 string build_version_full = GetBuildVersionFull( );
@@ -570,27 +578,21 @@ void SwitchToPlaying(){
 	Reset();
 }
 
-bool reorded = false;
-int display_index = 0;
-bool update_scroll = false;
-bool debug_current_line = false;
-bool show_grid = true;
-float left_over_drag_y = 0.0;
-bool dragging = false;
-bool steal_focus = false;
-
 void DrawEditor(){
 	if(camera.GetFlags() == kPreviewCamera){
 		return;
 	}
+
 	if(show_name){
 		DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.5, 0), display_name, 1.0, false, _delete_on_draw);
 	}
+
 	if(show_editor){
 		DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.25, 1.0, 0.25, 1.0), _delete_on_draw);
 	}else{
 		DebugDrawBillboard("Data/Textures/drika_hotspot.png", this_hotspot.GetTranslation(), 0.5, vec4(0.5, 0.5, 0.5, 1.0), _delete_on_draw);
 	}
+
 	if(show_editor){
 		ImGui_PushStyleColor(ImGuiCol_WindowBg, background_color);
 		ImGui_PushStyleColor(ImGuiCol_PopupBg, background_color);
@@ -636,6 +638,7 @@ void DrawEditor(){
 			steal_focus = false;
 			ImGui_SetNextWindowFocus();
 		}
+
 		ImGui_Begin("Drika Hotspot" + (show_name?" - " + display_name:" " + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, ImGuiWindowFlags_MenuBar);
 		ImGui_PopStyleVar();
 
@@ -808,142 +811,147 @@ void DrawEditor(){
 			}
 		}
 
-		for(uint i = 0; i < drika_indexes.size(); i++){
-			int item_no = drika_indexes[i];
-			vec4 text_color = drika_elements[item_no].GetDisplayColor();
-			ImGui_PushStyleColor(ImGuiCol_Text, text_color);
-			bool line_selected = display_index == int(item_no) || multi_select.find(i) != -1;
+		// After duplicating with C, the function might not be ready since PostInit isn't triggered yet.
+		// So stop rendering for one update while that finishes.
+		if(!reorded && post_init_queue.size() == 0){
+			for(uint i = 0; i < drika_indexes.size(); i++){
+				int item_no = drika_indexes[i];
+				vec4 text_color = drika_elements[item_no].GetDisplayColor();
+				ImGui_PushStyleColor(ImGuiCol_Text, text_color);
+				bool line_selected = display_index == int(item_no) || multi_select.find(i) != -1;
 
-			string display_string = drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString();
-			// Remove any new lines so that every function stays as one selectable object.
-			display_string = join(display_string.split("\n"), "");
-			float space_for_characters = ImGui_CalcTextSize(display_string).x;
+				string display_string = drika_elements[item_no].line_number + drika_elements[item_no].GetDisplayString();
+				// Remove any new lines so that every function stays as one selectable object.
+				display_string = join(display_string.split("\n"), "");
+				float space_for_characters = ImGui_CalcTextSize(display_string).x;
 
-			if(space_for_characters > ImGui_GetWindowContentRegionWidth()){
-				display_string = display_string.substr(0, int(display_string.length() * (ImGui_GetWindowContentRegionWidth() / space_for_characters)) - 3) + "...";
-			}
-
-			if(ImGui_Selectable(display_string, line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
-				// This item has been selected that is inside multiselect, but no modifier key is pressed.
-				if(multi_select.find(i) != -1 && !dragging && multi_select.size() > 1 && !GetInputDown(0, "lshift") && !GetInputDown(0, "lctrl")){
-					multi_select = {i};
+				if(space_for_characters > ImGui_GetWindowContentRegionWidth()){
+					display_string = display_string.substr(0, int(display_string.length() * (ImGui_GetWindowContentRegionWidth() / space_for_characters)) - 3) + "...";
 				}
-			}
 
-			if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(0)){
-				left_over_drag_y = 0.0;
-				if(ImGui_IsMouseDoubleClicked(0)){
-					if(drika_elements[drika_indexes[i]].has_settings){
-						GetCurrentElement().StartSettings();
-						ImGui_OpenPopup("###Edit");
-					}
-				}else{
-					if(GetInputDown(0, "lshift")){
-						int starting_point = multi_select[multi_select.size() - 1];
-						int ending_point = i;
-						int direction = starting_point < ending_point?1:-1;
-
-						for(int j = starting_point; true; j += direction){
-							if(multi_select.find(j) == -1){
-								multi_select.insertLast(j);
-							}
-							if(j == ending_point){
-								break;
-							}
-						}
-					}else if(GetInputDown(0, "lctrl")){
-						int find_selected = multi_select.find(i);
-						if(multi_select.size() == 0){
-							multi_select.insertLast(i);
-						}else if(find_selected != -1 && multi_select.size() != 1){
-							multi_select.removeAt(find_selected);
-							GetCurrentElement().EditDone();
-							display_index = int(drika_indexes[multi_select[multi_select.size() - 1]]);
-							current_line = int(multi_select[multi_select.size() - 1]);
-							GetCurrentElement().StartEdit();
-							steal_focus = true;
-							continue;
-						}else{
-							multi_select.insertLast(i);
-						}
-					}else if(multi_select.find(i) == -1){
+				if(ImGui_Selectable(display_string, line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
+					// This item has been selected that is inside multiselect, but no modifier key is pressed.
+					if(multi_select.find(i) != -1 && !dragging && multi_select.size() > 1 && !GetInputDown(0, "lshift") && !GetInputDown(0, "lctrl")){
 						multi_select = {i};
 					}
-					GetCurrentElement().EditDone();
-					display_index = int(item_no);
-					current_line = int(i);
-					GetCurrentElement().StartEdit();
-					steal_focus = true;
 				}
-			}
 
-			if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(1)){
-				GetCurrentElement().LeftClick();
-			}
+				if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(0)){
+					left_over_drag_y = 0.0;
+					if(ImGui_IsMouseDoubleClicked(0)){
+						if(drika_elements[drika_indexes[i]].has_settings){
+							GetCurrentElement().StartSettings();
+							ImGui_OpenPopup("###Edit");
+						}
+					}else{
+						if(GetInputDown(0, "lshift")){
+							int starting_point = multi_select[multi_select.size() - 1];
+							int ending_point = i;
+							int direction = starting_point < ending_point?1:-1;
 
-			if(update_scroll && display_index == int(item_no)){
-				update_scroll = false;
-				ImGui_SetScrollHere(0.5);
-			}
-
-			ImGui_PopStyleColor();
-			if(ImGui_IsItemActive()){
-				float drag_dy = ImGui_GetMouseDragDelta(0).y + left_over_drag_y;
-				bool can_drag_up = multi_select.find(0) == -1;
-				bool can_drag_down = multi_select.find(drika_indexes.size() - 1) == -1;
-				float drag_threshold = 17.0;
-
-				if(drag_dy < -drag_threshold && can_drag_up){
-					while(drag_dy < -drag_threshold && can_drag_up){
-						// Dragging Up
-
-						for(uint k = 0; k < drika_indexes.size(); k++){
-							for(uint j = 0; j < multi_select.size(); j++){
-								if(multi_select[j] == int(k)){
-									SwapIndexes(k, k - 1);
-									reorded = true;
+							for(int j = starting_point; true; j += direction){
+								if(multi_select.find(j) == -1){
+									multi_select.insertLast(j);
+								}
+								if(j == ending_point){
+									break;
 								}
 							}
+						}else if(GetInputDown(0, "lctrl")){
+							int find_selected = multi_select.find(i);
+							if(multi_select.size() == 0){
+								multi_select.insertLast(i);
+							}else if(find_selected != -1 && multi_select.size() != 1){
+								multi_select.removeAt(find_selected);
+								GetCurrentElement().EditDone();
+								display_index = int(drika_indexes[multi_select[multi_select.size() - 1]]);
+								current_line = int(multi_select[multi_select.size() - 1]);
+								GetCurrentElement().StartEdit();
+								steal_focus = true;
+								continue;
+							}else{
+								multi_select.insertLast(i);
+							}
+						}else if(multi_select.find(i) == -1){
+							multi_select = {i};
 						}
-
-						for(uint j = 0; j < multi_select.size(); j++){
-							multi_select[j] -= 1;
-						}
-
-						current_line -= 1;
-						drag_dy += drag_threshold;
-						can_drag_up = multi_select.find(0) == -1;
+						GetCurrentElement().EditDone();
+						display_index = int(item_no);
+						current_line = int(i);
+						GetCurrentElement().StartEdit();
+						steal_focus = true;
 					}
-					left_over_drag_y = drag_dy;
-					ImGui_ResetMouseDragDelta();
-				}else if(drag_dy > drag_threshold && can_drag_down){
-					while(drag_dy > drag_threshold && can_drag_down){
-						// Dragging Down
+				}
 
-						for(int k = drika_indexes.size() - 1; k > -1; k--){
-							for(uint j = 0; j < multi_select.size(); j++){
-								if(multi_select[j] == int(k)){
-									SwapIndexes(k, k + 1);
-									reorded = true;
+				if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(1)){
+					GetCurrentElement().LeftClick();
+				}
+
+				if(update_scroll && display_index == int(item_no)){
+					update_scroll = false;
+					ImGui_SetScrollHere(0.5);
+				}
+
+				ImGui_PopStyleColor();
+				if(ImGui_IsItemActive()){
+					float drag_dy = ImGui_GetMouseDragDelta(0).y + left_over_drag_y;
+					bool can_drag_up = multi_select.find(0) == -1;
+					bool can_drag_down = multi_select.find(drika_indexes.size() - 1) == -1;
+					float drag_threshold = 17.0;
+
+					if(drag_dy < -drag_threshold && can_drag_up){
+						while(drag_dy < -drag_threshold && can_drag_up){
+							// Dragging Up
+
+							for(uint k = 0; k < drika_indexes.size(); k++){
+								for(uint j = 0; j < multi_select.size(); j++){
+									if(multi_select[j] == int(k)){
+										SwapIndexes(k, k - 1);
+										reorded = true;
+									}
 								}
 							}
-						}
 
-						for(uint j = 0; j < multi_select.size(); j++){
-							multi_select[j] += 1;
-						}
+							for(uint j = 0; j < multi_select.size(); j++){
+								multi_select[j] -= 1;
+							}
 
-						current_line += 1;
-						drag_dy -= drag_threshold;
-						can_drag_down = multi_select.find(drika_indexes.size() - 1) == -1;
+							current_line -= 1;
+							drag_dy += drag_threshold;
+							can_drag_up = multi_select.find(0) == -1;
+						}
+						left_over_drag_y = drag_dy;
+						ImGui_ResetMouseDragDelta();
+					}else if(drag_dy > drag_threshold && can_drag_down){
+						while(drag_dy > drag_threshold && can_drag_down){
+							// Dragging Down
+
+							for(int k = drika_indexes.size() - 1; k > -1; k--){
+								for(uint j = 0; j < multi_select.size(); j++){
+									if(multi_select[j] == int(k)){
+										SwapIndexes(k, k + 1);
+										reorded = true;
+									}
+								}
+							}
+
+							for(uint j = 0; j < multi_select.size(); j++){
+								multi_select[j] += 1;
+							}
+
+							current_line += 1;
+							drag_dy -= drag_threshold;
+							can_drag_down = multi_select.find(drika_indexes.size() - 1) == -1;
+						}
+						left_over_drag_y = drag_dy;
+						ImGui_ResetMouseDragDelta();
 					}
-					left_over_drag_y = drag_dy;
-					ImGui_ResetMouseDragDelta();
 				}
 			}
 		}
 
 		ImGui_End();
+
 		if(drika_elements.size() > 0 && !reorded && post_init_queue.size() == 0){
 			GetCurrentElement().DrawEditing();
 		}
@@ -956,6 +964,7 @@ void DrawEditor(){
 
 		ImGui_PopStyleColor(28);
 	}
+
 	if(reorded && !ImGui_IsMouseDragging(0)){
 		reorded = false;
 		ReorderElements();
@@ -1803,18 +1812,22 @@ void Draw(){
 	if(camera.GetFlags() == kPreviewCamera){
 		return;
 	}
-	if(debug_current_line && drika_elements.size() > 0){
+
+	if(debug_current_line && drika_elements.size() > 0 && post_init_queue.size() == 0){
 		if(!hotspot_enabled){
 			DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.75, 0), "Disabled", 1.0, false, _delete_on_draw);
 		}else{
 			string trimmed_display_string = GetCurrentElement().GetDisplayString();
 			trimmed_display_string = join(trimmed_display_string.split("\n"), "");
+
 			if(trimmed_display_string.length() > 35){
 				trimmed_display_string = trimmed_display_string.substr(0, 35) + "...";
 			}
+			
 			DebugDrawText(this_hotspot.GetTranslation() + vec3(0, 0.75, 0), trimmed_display_string, 1.0, false, _delete_on_draw);
 		}
 	}
+
 	if(show_text){
 		vec2 pos(GetScreenWidth() *0.5, GetScreenHeight() *0.2);
 		TextMetrics metrics = GetTextAtlasMetrics(font_path, font_size, 0, text);
@@ -1824,6 +1837,7 @@ void Draw(){
 		DrawTextAtlas(font_path, font_size, 0, text,
 					  int(pos.x), int(pos.y), vec4(vec3(1.0f), text_opacity));
 	}
+	
 	if(show_image){
 		HUDImage@ image = hud.AddImage();
 		image.SetImageFromPath(image_path);
