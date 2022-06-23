@@ -813,7 +813,7 @@ void DrawEditor(){
 
 		// After duplicating with C, the function might not be ready since PostInit isn't triggered yet.
 		// So stop rendering for one update while that finishes.
-		if(!reorded && post_init_queue.size() == 0){
+		if(post_init_queue.size() == 0){
 			for(uint i = 0; i < drika_indexes.size(); i++){
 				int item_no = drika_indexes[i];
 				vec4 text_color = drika_elements[item_no].GetDisplayColor();
