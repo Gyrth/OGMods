@@ -845,7 +845,7 @@
     <EnvObject t0="50" t1="6" t2="-126" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
         <parameters />
     </EnvObject>
-    <CameraObject t0="3.93262" t1="13.7677" t2="-119.232" s0="1" s1="1" s2="1" q0="0.433591" q1="0.0335988" q2="-0.0161807" q3="0.900338" euler_x="0.897618" euler_y="0.0746013" euler_z="0" id="271">
+    <CameraObject t0="4.01709" t1="12.3547" t2="-120.357" s0="1" s1="1" s2="1" q0="0.484169" q1="-0.009314" q2="0.0051543" q3="0.87491" euler_x="1.01089" euler_y="-0.0212905" euler_z="0" id="271">
         <parameters />
     </CameraObject>
     <EnvObject t0="49" t1="6" t2="-126" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="272" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
@@ -9330,9 +9330,10 @@
         <parameters>
             <parameter name="auto_start" type="int" val="1" />
             <parameter name="dialogue" type="string" val="" />
-            <parameter name="dialogue_data" type="string" val="ta dialogue ...&#x0A;ta dialogue ...&#x0A;ta dialogue I have to get out of here.\n Test test testi&#x0A;ta dialogue I have to get out of here." />
+            <parameter name="dialogue_data" type="string" val="ta dialogue ...&#x0A;ta dialogue ...&#x0A;ta dialogue I have to get out of here." />
             <parameter name="dialogue_name" type="string" val="Intro" />
             <parameter name="on_enter" type="int" val="0" />
+            <parameter name="take_player_controls" type="int" val="1" />
         </parameters>
         <Connections />
         <ConnectionsFrom />

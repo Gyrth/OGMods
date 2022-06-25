@@ -107,7 +107,7 @@ bool enemies_defeated_from_beginning_no_fade = false;
 string ambient_song = "";
 bool ambient_from_beginning_no_fade = false;
 string current_song = "None";
-
+bool take_player_controls = false;
 float PI = 3.14159265359f;
 
 bool ui_created = false;
@@ -570,6 +570,9 @@ void ReceiveMessage(string msg){
 		dialogue_queue.resize(0);
 		dialogue_state = DIALOGUE_NONE;
 		resetting = true;
+	}else if(token == "ta_take_player_controls"){
+		token_iter.FindNextToken(msg);
+		take_player_controls = token_iter.GetToken(msg) == "true";
 	}else if(token == "ta"){
 		token_iter.FindNextToken(msg);
 		string command = token_iter.GetToken(msg);
@@ -687,6 +690,7 @@ void UpdateDialogue(){
 				AddDialogueUI();
 				dialogue_state = DIALOGUE_ADDING;
 				dialogue_queue.removeAt(dialogue_queue.size() - 1);
+				TakePlayerControl();
 			}
 			break;
 		case DIALOGUE_ADDING:{
@@ -729,6 +733,7 @@ void UpdateDialogue(){
 			if(GetInputPressed(0, "attack")){
 				dialogue_container.clear();
 				dialogue_state = DIALOGUE_NONE;
+				ReleasePlayerControl();
 			}
 			break;
 		default:
@@ -1111,5 +1116,33 @@ void GetAllSpawnerItems(){
 
 		GUISpawnerItem @new_item = GUISpawnerItem("Sprites", assets_path, i, icon_texture);
 		all_items.insertLast(new_item);
+	}
+}
+
+void TakePlayerControl(){
+	if(!take_player_controls){return;}
+
+	int character_amount = GetNumCharacters();
+
+	for(int i = 0; i < character_amount; i++){
+		MovementObject@ char = ReadCharacter(i);
+
+		if(char.is_player){
+			char.Execute("stop_controls = true;");
+		}
+	}
+}
+
+void ReleasePlayerControl(){
+	if(!take_player_controls){return;}
+
+	int character_amount = GetNumCharacters();
+
+	for(int i = 0; i < character_amount; i++){
+		MovementObject@ char = ReadCharacter(i);
+
+		if(char.is_player){
+			char.Execute("stop_controls = false;");
+		}
 	}
 }

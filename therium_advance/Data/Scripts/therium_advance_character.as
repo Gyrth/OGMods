@@ -352,8 +352,17 @@ float attack_timer = 0.0f;
 bool stop_controls = false;
 float intro_cam_offset = 2.5f;
 float camera_distance = 3.0f;
+float animation_timer = 0.0f;
+bool state_changed = false;
 
-enum movement_states {idle, walk, jump, dead, hurt, attack};
+enum movement_states {	idle, 
+						walk, 
+						jump, 
+						dead, 
+						hurt, 
+						attack,
+						roll
+					};
 movement_states movement_state = idle;
 
 class Animation {
@@ -435,7 +444,11 @@ Animation @attack_right_animation;
 Animation @attack_left_animation;
 Animation @attack_up_animation;
 
-Animation @jump_animation;
+Animation @roll_down_animation;
+Animation @roll_left_animation;
+Animation @roll_right_animation;
+Animation @roll_up_animation;
+
 Animation @dead_animation;
 Animation @hurt_animation;
 
@@ -470,6 +483,7 @@ void Update(int num_frames) {
 	if(knocked_out != _dead && !stop_controls){
 		UpdateControls();
 		UpdateJumping();
+		UpdateRolling();
 		UpdateMovement();
 	}
 
@@ -545,6 +559,10 @@ void UpdateSpritePosition(){
 
 void UpdateState(){
 	/* Log(warning, "Movement state " + movement_state); */
+	DebugDrawText(this_mo.position, "Movement state " + movement_state, 1.0f, true, _delete_on_update);
+	// DebugDrawText(this_mo.position, "animation_timer " + animation_timer, 1.0f, true, _delete_on_update);
+
+	// DebugDrawText(this_mo.position, "animation_timer " + jump_wait, 1.0f, true, _delete_on_update);
 
 	switch (movement_state) {
 		case idle:
@@ -559,6 +577,9 @@ void UpdateState(){
 		case dead:
 			UpdateDead();
 			break;
+		case roll:
+			UpdateRoll();
+			break;
 		case hurt:
 			UpdateHurt();
 			break;
@@ -566,21 +587,22 @@ void UpdateState(){
 			UpdateAttack();
 			break;
 	}
+
+	animation_timer += time_step;
 }
 
 void UpdateHurt(){
 	hurt_timer -= time_step;
 
 	if(hurt_timer <= 0.0){
-		movement_state = idle;
-		UpdateIdle(true);
+		SetMovementState(idle);
 	}
 }
 
-void UpdateAttack(bool force = false){
+void UpdateAttack(){
 	attack_timer -= time_step * 2.0f;
 
-	if(UpdateDirection() || force){
+	if(UpdateDirection() || state_changed){
 		switch(direction){
 			case Up:
 				SetAnimation(@attack_up_animation);
@@ -600,8 +622,7 @@ void UpdateAttack(bool force = false){
 	current_animation.SetProgress(attack_timer);
 
 	if(attack_timer <= 0.0){
-		movement_state = idle;
-		UpdateIdle(true);
+		SetMovementState(idle);
 	}
 }
 
@@ -609,8 +630,32 @@ void UpdateDead(){
 
 }
 
-void UpdateIdle(bool force = false){
-	if(UpdateDirection() || force){
+void UpdateRoll(){
+
+	if(UpdateDirection() || state_changed){
+		switch(direction){
+			case Up:
+				SetAnimation(@roll_up_animation);
+				break;
+			case Down:
+				SetAnimation(@roll_down_animation);
+				break;
+			case Right:
+				SetAnimation(@roll_right_animation);
+				break;
+			case Left:
+				SetAnimation(@roll_left_animation);
+				break;
+		}
+	}
+
+	if(on_ground && animation_timer >= 1.0){
+		SetMovementState(idle);
+	}
+}
+
+void UpdateIdle(){
+	if(UpdateDirection() || state_changed){
 		/* Log(warning, "direction " + direction); */
 
 		switch(direction){
@@ -632,8 +677,7 @@ void UpdateIdle(bool force = false){
 	vec3 flat_velocity = vec3(this_mo.velocity.x, 0.0f, this_mo.velocity.z);
 
 	if(length(flat_velocity) > WALK_THRESHOLD){
-		movement_state = walk;
-		UpdateWalk(true);
+		SetMovementState(walk);
 	}
 }
 
@@ -684,12 +728,12 @@ bool UpdateDirection(){
 	return false;
 }
 
-void UpdateWalk(bool force = false){
+void UpdateWalk(){
 	float movement_speed = length(this_mo.velocity);
 	float flat_movement_speed = (abs(this_mo.velocity.x + this_mo.velocity.z));
 	vec3 flat_velocity = vec3(this_mo.velocity.x, 0.0f, this_mo.velocity.z);
 
-	if(UpdateDirection() || force){
+	if(UpdateDirection() || state_changed){
 		switch(direction){
 			case Up:
 				SetAnimation(@walk_up_animation);
@@ -711,11 +755,9 @@ void UpdateWalk(bool force = false){
 	/* DebugDrawLine(this_mo.position, this_mo.position + vec3(0.0f, 0.0f, 1.0f), vec3(1.0), _delete_on_draw); */
 
 	if(length(flat_velocity) < WALK_THRESHOLD){
-		movement_state = idle;
-		UpdateIdle(true);
+		SetMovementState(idle);
 	}else if(!on_ground && !flying_character){
-		movement_state = jump;
-		SetAnimation(@jump_animation);
+		SetMovementState(jump);
 	}
 
 	float speed = (1.0 - ((movement_speed - WALK_THRESHOLD) / 2.7));
@@ -727,13 +769,37 @@ void SetAnimation(Animation@ new_animation){
 	current_animation.Stop();
 	@current_animation = @new_animation;
 	current_animation.Start();
+	state_changed = false;
 }
 
 void UpdateJump(){
-	if(on_ground && jump_wait <= 0.0){
-		movement_state = idle;
-		UpdateIdle(true);
+
+	if(UpdateDirection() || state_changed){
+		switch(direction){
+			case Up:
+				SetAnimation(@roll_up_animation);
+				break;
+			case Down:
+				SetAnimation(@roll_down_animation);
+				break;
+			case Right:
+				SetAnimation(@roll_right_animation);
+				break;
+			case Left:
+				SetAnimation(@roll_left_animation);
+				break;
+		}
 	}
+
+	if(on_ground && jump_wait <= 0.0){
+		SetMovementState(idle);
+	}
+}
+
+void SetMovementState(movement_states state){
+	movement_state = state;
+	animation_timer = 0.0f;
+	state_changed = true;
 }
 
 void PostInit(){
@@ -752,7 +818,11 @@ void PostInit(){
 	attack_left_animation.Initialize();
 	attack_up_animation.Initialize();
 
-	jump_animation.Initialize();
+	roll_down_animation.Initialize();
+	roll_right_animation.Initialize();
+	roll_left_animation.Initialize();
+	roll_up_animation.Initialize();
+
 	dead_animation.Initialize();
 	hurt_animation.Initialize();
 	post_init_done = true;
@@ -974,7 +1044,11 @@ void Reset() {
 	attack_right_animation.Reset();
 	attack_up_animation.Reset();
 
-	jump_animation.Reset();
+	roll_down_animation.Reset();
+	roll_left_animation.Reset();
+	roll_right_animation.Reset();
+	roll_up_animation.Reset();
+
 	dead_animation.Reset();
 	hurt_animation.Reset();
 	stop_controls = false;
@@ -1378,6 +1452,40 @@ void Died(){
 	knocked_out = _dead;
 	movement_state = dead;
 	SetAnimation(dead_animation);
+}
+
+
+void UpdateMovement(){
+	float movement_speed = running?25.0f: 10.0f;
+	vec3 target_velocity = GetTargetVelocity();
+
+	if(!on_ground){
+		movement_speed = 3.0;
+	}
+
+	this_mo.velocity += target_velocity * time_step * movement_speed;
+}
+
+void UpdateJumping(){
+	if(jump_wait > 0.0f && on_ground){
+		jump_wait -= time_step;
+	}
+
+	if(on_ground && movement_state != attack && this_mo.controlled && GetInputDown(this_mo.controller_id, "jump")){
+		if(jump_wait <= 0.0f){
+			jump_wait = 0.15;
+			float jump_mult = 6.0f;
+			vec3 jump_vel = vec3(0.0, 1.0, 0.0);
+			this_mo.velocity += jump_vel * jump_mult;
+			SetMovementState(jump);
+		}
+	}
+}
+
+void UpdateRolling(){
+	if(on_ground && movement_state != attack && this_mo.controlled && GetInputDown(this_mo.controller_id, "crouch")){
+		SetMovementState(roll);
+	}
 }
 
 void NotifyItemDetach(int idex){}

@@ -4,7 +4,20 @@ string dialogue_data = "";
 string dialogue_string;
 bool auto_start = false;
 bool on_enter = false;
+bool take_player_controls = true;
 const int kObjectIdMaxCharacterCount = 10;
+bool post_init_done = false;
+
+void PostInit(){
+	if(!post_init_done){
+		Reset();
+		post_init_done = true;
+	}
+}
+
+void Update(){
+	PostInit();
+}
 
 void LaunchCustomGUI() {
 	is_editor_enabled = true;
@@ -15,11 +28,13 @@ void SetParameters(){
 	params.AddString("dialogue_name", "");
 	params.AddIntCheckbox("auto_start", false);
 	params.AddIntCheckbox("on_enter", false);
+	params.AddIntCheckbox("take_player_controls", true);
 
 	dialogue_name = params.GetString("dialogue_name");
 	dialogue_data = params.GetString("dialogue_data");
 	auto_start = params.GetInt("auto_start") == 1;
 	on_enter = params.GetInt("on_enter") == 1;
+	take_player_controls = params.GetInt("take_player_controls") == 1;
 }
 
 void HandleEvent(string event, MovementObject @mo){
@@ -29,6 +44,8 @@ void HandleEvent(string event, MovementObject @mo){
 }
 
 void SendDialogue(){
+	level.SendMessage("ta_take_player_controls " + take_player_controls);
+
 	array<string> split_data = dialogue_data.split("\n");
 	split_data.reverse();
 
@@ -56,6 +73,11 @@ void DrawEditor() {
 
 		if(ImGui_Checkbox("Auto Start", auto_start)){
 			params.SetInt("auto_start", auto_start?1:0);
+			is_updated = true;
+		}
+
+		if(ImGui_Checkbox("Stop Player Controls", take_player_controls)){
+			params.SetInt("take_player_controls", take_player_controls?1:0);
 			is_updated = true;
 		}
 
