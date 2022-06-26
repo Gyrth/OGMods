@@ -419,7 +419,7 @@ void AddDialogueUI(){
 	IMImage text_background("Textures/UI/buttonLong_grey.png");
 	text_background.addUpdateBehavior(IMFadeIn(250, inSineTween ), "");
 	text_background.setClip(false);
-	text_background.setColor(vec4(1.0, 1.0, 1.0, 0.97));
+	text_background.setColor(vec4(1.0, 0.65, 1.0, 0.97));
 	dialogue_ui_container.setElement(text_container);
 	text_background.setVisible(false);
 

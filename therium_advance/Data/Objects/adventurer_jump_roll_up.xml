@@ -3,6 +3,6 @@
   <Model>Data/Models/horizontal_2d_plane.obj</Model>
   <ColorMap>Data/Textures/HEROS/spritesheets/adventurer_jump_roll_up.png</ColorMap>
   <NormalMap>Data/Textures/normal.tga</NormalMap>
-  <ShaderName>therium_advance #TANGENT</ShaderName>
+  <ShaderName>therium_advance #TANGENT #TINT_PROGRESS</ShaderName>
   <flags no_collision="true"/>
 </Object>

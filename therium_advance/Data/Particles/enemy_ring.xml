@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<particle>
+    <textures color_map = "Data/Textures/enemy_ring.png"
+              shader = "envobject #PARTICLE #SPLAT"
+              soft_shader = "envobject #PARTICLE #SPLAT"/>
+    <size min = "1.0" max = "1.0"/>
+    <stretch velocity_axis = "false" speed_stretch = "false" min_squash = "false"/>
+    <color red =   "1.0"
+           green = "1.0"
+           blue =  "1.0"
+           alpha_min = "1.5" alpha_max = "1.6"/>
+    <behavior inertia="0.0" gravity="0.0" wind="0.0" size_decay_rate="-2.0" opacity_decay_rate="2.0"/>
+    <no_rotation />
+</particle>

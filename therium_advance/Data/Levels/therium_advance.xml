@@ -128,9 +128,6 @@
     <EnvObject t0="45" t1="6" t2="-135" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/grass_edge_top_left.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="3" t1="6.2" t2="-127" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="32" color_r="1" color_g="0.99999" color_b="0.99999" overbright="0" type_file="Data/Objects/adventurer_attack_right.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="58" t1="6.2" t2="-131" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/adventurer_attack_up.xml">
         <parameters />
     </EnvObject>
@@ -845,7 +842,7 @@
     <EnvObject t0="50" t1="6" t2="-126" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="270" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
         <parameters />
     </EnvObject>
-    <CameraObject t0="4.01709" t1="12.3547" t2="-120.357" s0="1" s1="1" s2="1" q0="0.484169" q1="-0.009314" q2="0.0051543" q3="0.87491" euler_x="1.01089" euler_y="-0.0212905" euler_z="0" id="271">
+    <CameraObject t0="3.89837" t1="13.034" t2="-123.897" s0="1" s1="1" s2="1" q0="0.66539" q1="-0.00469986" q2="0.00418937" q3="0.74647" euler_x="1.45607" euler_y="-0.0125921" euler_z="0" id="271">
         <parameters />
     </CameraObject>
     <EnvObject t0="49" t1="6" t2="-126" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="272" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
@@ -1451,7 +1448,7 @@
     <EnvObject t0="60" t1="6.2" t2="-122" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="472" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sorcerer_attack_up.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="61" t1="6.2" t2="-122" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="473" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sorcerer_death_down.xml">
+    <EnvObject t0="61" t1="6.2" t2="-122" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="473" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sorcerer_death.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="62" t1="6.2" t2="-121" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="474" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sorcerer_hurt_down.xml">
@@ -4697,10 +4694,10 @@
     <EnvObject t0="8" t1="6" t2="-128" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1565" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_mid_right.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="3" t1="6" t2="-129" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1566" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_top_mid.xml">
+    <EnvObject t0="4" t1="6" t2="-129" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1566" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand_waves_2.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="4" t1="6" t2="-129" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1567" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_top_mid.xml">
+    <EnvObject t0="3" t1="6" t2="-132" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1567" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_mid_left.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="5" t1="6" t2="-129" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1568" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_top_mid.xml">
@@ -4991,10 +4988,10 @@
     <EnvObject t0="2" t1="6" t2="-133" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1663" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_bottom_mid.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="3" t1="6" t2="-133" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1664" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_bottom_mid.xml">
+    <EnvObject t0="3" t1="6" t2="-133" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1664" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand_waves_2.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="4" t1="6" t2="-133" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1665" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_bottom_mid.xml">
+    <EnvObject t0="4" t1="6" t2="-133" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1665" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand_waves_2.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="5" t1="6" t2="-133" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1666" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_bottom_mid.xml">
@@ -5135,13 +5132,13 @@
     <EnvObject t0="1" t1="6" t2="-137" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1711" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="3" t1="6" t2="-130" s0="1" s1="6.33" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1712" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_blue.xml">
+    <EnvObject t0="3" t1="6" t2="-131" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1712" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_mid_left.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="0" t1="6" t2="-137" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1713" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="4" t1="6" t2="-130" s0="1" s1="6.33" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1714" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_blue.xml">
+    <EnvObject t0="4" t1="6" t2="-131" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1714" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_mid_right.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="0" t1="6" t2="-136" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1715" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand.xml">
@@ -5153,16 +5150,16 @@
     <EnvObject t0="5" t1="6" t2="-131" s0="1" s1="6.33" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1717" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_blue.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="4" t1="6" t2="-131" s0="1" s1="6.33" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1718" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_blue.xml">
+    <EnvObject t0="4" t1="6" t2="-132" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1718" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_mid_right.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="3" t1="6" t2="-131" s0="1" s1="6.33" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1719" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_blue.xml">
+    <EnvObject t0="3" t1="6" t2="-130" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1719" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_mid_left.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="3" t1="6" t2="-132" s0="1" s1="6.33" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1720" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_blue.xml">
+    <EnvObject t0="3" t1="6" t2="-129" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1720" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/sand_waves_2.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="4" t1="6" t2="-132" s0="1" s1="6.33" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1721" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_blue.xml">
+    <EnvObject t0="4" t1="6" t2="-130" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1721" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_sand_mid_right.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="8" t1="6" t2="-132" s0="1" s1="6.33" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1722" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/water_blue.xml">
@@ -9338,6 +9335,21 @@
         <Connections />
         <ConnectionsFrom />
     </Hotspot>
+    <ActorObject t0="3" t1="7.2" t2="-136" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3112" type_file="Data/Characters/therium_advance_sorcerer_character_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Teams" type="string" val="turner" />
+        </parameters>
+        <Connections>
+            <Connection id="3112" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="Nav Region" path="Data/Objects/navmesh/navmesh_region.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
@@ -9349,4 +9361,5 @@
     <SpawnerItem display_name="Basics Stone Cube" path="Data/Objects/Buildings/basics/soft_cube.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/soft_cube.png" />
     <SpawnerItem display_name="Dog Spear" path="Data/Items/DogWeapons/DogSpear.xml" thumbnail_path="Data/UI/spawner/thumbs/Object/wspear.png" />
     <SpawnerItem display_name="therium_advance_dialogue.xml" path="Data/Objects/Hotspots/therium_advance_dialogue.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="therium_advance_sorcerer_character_actor.xml" path="Data/Characters/therium_advance_sorcerer_character_actor.xml" thumbnail_path="empty_placeholder.png" />
 </RecentItems>

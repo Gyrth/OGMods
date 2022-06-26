@@ -354,6 +354,8 @@ float intro_cam_offset = 2.5f;
 float camera_distance = 3.0f;
 float animation_timer = 0.0f;
 bool state_changed = false;
+vec3 roll_direction;
+int close_enemy_id = -1;
 
 enum movement_states {	idle, 
 						walk, 
@@ -503,7 +505,7 @@ void UpdateSpritePosition(){
 		vec3 alive_position = this_mo.position + vec3(0.0, -0.2, 0.0);
 		vec3 dead_position = alive_position + vec3(0.0, -(character_scale / 2.0) + 0.1, 0.0);
 
-		vec3 new_position = mix(last_char_pos, movement_state == dead?dead_position:alive_position, time_step * 20.0);
+		vec3 new_position = mix(last_char_pos, alive_position, time_step * 20.0);
 		current_animation.current_frame.SetTranslation(new_position);
 		last_char_pos = new_position;
 
@@ -527,11 +529,6 @@ void UpdateSpritePosition(){
 			target_velocity = vec3(0.0, 0.0, 1.0);
 		}else{
 			target_velocity = vec3(0.0, 0.0, -1.0);
-		}
-
-		if(movement_state == dead){
-			target_velocity = vec3(0.0, 1.0, 0.0);
-			up = vec3(0.0, 0.0, -1.0);
 		}
 
 		vec3 new_target_velocity = mix(old_target_velocity, target_velocity, time_step * 25.0);
@@ -559,10 +556,10 @@ void UpdateSpritePosition(){
 
 void UpdateState(){
 	/* Log(warning, "Movement state " + movement_state); */
-	DebugDrawText(this_mo.position, "Movement state " + movement_state, 1.0f, true, _delete_on_update);
+	// DebugDrawText(this_mo.position, "Movement state " + movement_state, 1.0f, true, _delete_on_update);
 	// DebugDrawText(this_mo.position, "animation_timer " + animation_timer, 1.0f, true, _delete_on_update);
-
 	// DebugDrawText(this_mo.position, "animation_timer " + jump_wait, 1.0f, true, _delete_on_update);
+	// DebugDrawText(this_mo.position, "Anim " + current_animation, 1.0f, true, _delete_on_update);
 
 	switch (movement_state) {
 		case idle:
@@ -627,7 +624,7 @@ void UpdateAttack(){
 }
 
 void UpdateDead(){
-
+	
 }
 
 void UpdateRoll(){
@@ -649,7 +646,9 @@ void UpdateRoll(){
 		}
 	}
 
-	if(on_ground && animation_timer >= 1.0){
+	current_animation.SetProgress(animation_timer * 2.0);
+
+	if(on_ground && animation_timer >= 0.5){
 		SetMovementState(idle);
 	}
 }
@@ -691,29 +690,35 @@ enum Directions{
 Directions direction = Down;
 
 bool UpdateDirection(){
+	vec3 look_direction = this_mo.velocity;
 	vec3 flat_velocity = vec3(this_mo.velocity.x, 0.0f, this_mo.velocity.z);
 
 	if(length(flat_velocity) < 0.1){
 		return false;
 	}
 
+	if(close_enemy_id != -1 && movement_state != roll){
+		MovementObject@ char = ReadCharacterID(close_enemy_id);
+		look_direction = normalize(char.position - this_mo.position);
+	}
+
 	Directions new_direction = Up;
-	float up_dot = dot(vec3(0.0f, 0.0f, -1.0f), this_mo.velocity);
+	float up_dot = dot(vec3(0.0f, 0.0f, -1.0f), look_direction);
 	float closest_dot = up_dot;
 
-	float down_dot = dot(vec3(0.0f, 0.0f, 1.0f), this_mo.velocity);
+	float down_dot = dot(vec3(0.0f, 0.0f, 1.0f), look_direction);
 	if(down_dot > closest_dot){
 		closest_dot = down_dot;
 		new_direction = Down;
 	}
 
-	float right_dot = dot(vec3(1.0f, 0.0f, 0.0f), this_mo.velocity);
+	float right_dot = dot(vec3(1.0f, 0.0f, 0.0f), look_direction);
 	if(right_dot > closest_dot){
 		closest_dot = right_dot;
 		new_direction = Right;
 	}
 
-	float left_dot = dot(vec3(-1.0f, 0.0f, 0.0f), this_mo.velocity);
+	float left_dot = dot(vec3(-1.0f, 0.0f, 0.0f), look_direction);
 	if(left_dot > closest_dot){
 		closest_dot = left_dot;
 		new_direction = Left;
@@ -865,101 +870,6 @@ void UpdateFootsteps(){
 		int id = PlaySound(path, this_mo.position + vec3(0.0, -1.0, 0.0));
 		/* SetSoundGain(id, 0.5f); */
 	}
-}
-
-float run_timer = 0.0f;
-
-// Converts the keyboard controls into a target velocity that is used for movement calculations in aschar.as and aircontrol.as.
-vec3 GetTargetVelocity() {
-	vec3 target_velocity(0.0f);
-
-	if(!this_mo.controlled) {
-		return target_velocity;
-	}
-
-	vec3 right;
-
-	{
-		right = camera.GetFlatFacing();
-		float side = right.x;
-		right.x = -right .z;
-		right.z = side;
-	}
-
-	target_velocity -= GetMoveYAxis(this_mo.controller_id) * camera.GetFlatFacing();
-	target_velocity += GetMoveXAxis(this_mo.controller_id) * right;
-
-	if(GetInputDown(this_mo.controller_id, "walk")) {
-		if(length_squared(target_velocity)>kWalkSpeed * kWalkSpeed) {
-			target_velocity = normalize(target_velocity) * kWalkSpeed;
-		}
-	} else {
-		if(length_squared(target_velocity)>1) {
-			target_velocity = normalize(target_velocity);
-		}
-	}
-
-	return target_velocity;
-}
-
-void UpdateCamera(const Timestep &in ts){
-	if(!this_mo.controlled || !this_mo.is_player){
-		return;
-	}
-
-	SetGrabMouse(true);
-
-	RiggedObject@ rigged_object = this_mo.rigged_object();
-	Skeleton@ skeleton = rigged_object.skeleton();
-
-	float camera_vibration_mult = 3.0f;
-	float camera_vibration = camera_shake * camera_vibration_mult;
-	float y_shake = RangedRandomFloat(-camera_vibration, camera_vibration);
-	float x_shake = RangedRandomFloat(-camera_vibration, camera_vibration);
-	/* camera.SetYRotation(cam_rotation_y + y_shake);
-	camera.SetXRotation(cam_rotation_x + x_shake);
-	camera.SetZRotation(cam_rotation_z); */
-
-
-	float distance = 3.5f;
-
-	distance -= intro_cam_offset;
-	intro_cam_offset = max(0.0, intro_cam_offset - time_step * 2.0);
-
-	vec3 new_cam_position = this_mo.position + vec3(0.0, distance / 2.0, 0.001f);
-	vec3 new_look_position = this_mo.position;
-
-	if(last_cam_pos == vec3(0.0, 0.0, 0.0)){
-		last_cam_pos = new_cam_position;
-		last_look_pos = new_look_position;
-	}
-
-	vec3 cam_pos = mix(last_cam_pos, new_cam_position, time_step * 50.0);
-	vec3 look_pos = mix(last_look_pos, new_look_position, time_step * 50.0);
-	last_cam_pos = cam_pos;
-	last_look_pos = look_pos;
-
-	camera.SetXRotation(-90.0f);
-	camera.SetYRotation(0.0f);
-	camera.SetZRotation(0.0f);
-	/* camera.CalcFacing(); */
-
-	camera.SetFOV(current_fov);
-	camera.SetPos(cam_pos);
-	camera.SetDistance(camera_distance);
-
-	if(knocked_out == _dead){
-		camera.SetDOF(0.15, 4.0, 1.0, 0.15, 5.0, 1.0);
-	}else{
-		camera.SetDOF(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-		/* camera.SetDOF(0.15, 4.0, 1.0, 0.15, 5.0, 1.0); */
-	}
-
-	if(this_mo.focused_character) {
-		UpdateListener(camera.GetPos(), vec3(0, 0, 0), camera.GetFacing(), camera.GetUpVector());
-	}
-
-	camera.SetInterpSteps(ts.frames());
 }
 
 void Shoot(){
@@ -1437,7 +1347,6 @@ void ApplyDamage(float damage){
 		movement_state = hurt;
 		SetAnimation(@hurt_animation);
 		hurt_timer = 0.15f;
-		UpdateSpritePosition();
 	}
 
 	if(this_mo.is_player){
@@ -1450,14 +1359,18 @@ void ApplyDamage(float damage){
 void Died(){
 	aiming_amount = 0.0;
 	knocked_out = _dead;
-	movement_state = dead;
-	SetAnimation(dead_animation);
+	SetMovementState(dead);
+	SetAnimation(@dead_animation);
 }
 
 
 void UpdateMovement(){
 	float movement_speed = running?25.0f: 10.0f;
 	vec3 target_velocity = GetTargetVelocity();
+
+	if(movement_state == roll){
+		target_velocity = roll_direction;
+	}
 
 	if(!on_ground){
 		movement_speed = 3.0;
@@ -1483,7 +1396,8 @@ void UpdateJumping(){
 }
 
 void UpdateRolling(){
-	if(on_ground && movement_state != attack && this_mo.controlled && GetInputDown(this_mo.controller_id, "crouch")){
+	if(on_ground && movement_state == walk && this_mo.controlled && GetInputPressed(this_mo.controller_id, "crouch")){
+		roll_direction = normalize(vec3(this_mo.velocity.x, 0.0f, this_mo.velocity.z));
 		SetMovementState(roll);
 	}
 }
