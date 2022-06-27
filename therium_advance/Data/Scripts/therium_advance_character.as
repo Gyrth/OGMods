@@ -483,7 +483,7 @@ void Update(int num_frames) {
 
 	if(knocked_out != _dead && !stop_controls){
 		UpdateControls();
-		UpdateJumping();
+		// UpdateJumping();
 		UpdateRolling();
 		UpdateMovement();
 	}

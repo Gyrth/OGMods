@@ -25,7 +25,7 @@ void SetAnimations(){
 	@roll_up_animation = 		Animation({	"Data/Objects/adventurer_jump_roll_up.xml"});
 
 	@dead_animation = Animation({	"Data/Objects/adventurer_death.xml"});
-	@hurt_animation = Animation({	"Data/Objects/adventurer_hurt_right.xml"});
+	@hurt_animation = Animation({	"Data/Objects/adventurer_hurt_down.xml"});
 
 	health = 1.0f;
 	level.SendMessage("update_player_health " + health);
@@ -43,7 +43,7 @@ void UpdateControls(){
 
 		if(GetInputDown(this_mo.controller_id, "mousescrollup") && camera_distance > 0.15){
 			camera_distance -= 0.5f;
-		} else if(GetInputDown(this_mo.controller_id, "mousescrolldown") && camera_distance < 10.0){
+		} else if(GetInputDown(this_mo.controller_id, "mousescrolldown") && camera_distance < 8.0){
 			camera_distance += 0.5f;
 		}
 	}

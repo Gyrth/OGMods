@@ -45,7 +45,7 @@ void HandleEvent(string event, MovementObject @mo){
 }
 
 void SendDialogue(){
-	if(has_send){return;}
+	if(has_send || EditorModeActive()){return;}
 
 	level.SendMessage("ta_take_player_controls " + take_player_controls);
 
