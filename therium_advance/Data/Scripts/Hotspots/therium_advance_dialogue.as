@@ -7,6 +7,7 @@ bool on_enter = false;
 bool take_player_controls = true;
 const int kObjectIdMaxCharacterCount = 10;
 bool post_init_done = false;
+bool has_send = false;
 
 void PostInit(){
 	if(!post_init_done){
@@ -44,6 +45,8 @@ void HandleEvent(string event, MovementObject @mo){
 }
 
 void SendDialogue(){
+	if(has_send){return;}
+
 	level.SendMessage("ta_take_player_controls " + take_player_controls);
 
 	array<string> split_data = dialogue_data.split("\n");
@@ -52,6 +55,8 @@ void SendDialogue(){
 	for(uint i = 0; i < split_data.size(); i++){
 		level.SendMessage(split_data[i]);
 	}
+
+	has_send = true;
 }
 
 void DrawEditor() {
@@ -91,7 +96,7 @@ void DrawEditor() {
 			is_updated = true;
 		}
 
-		if(ImGui_InputTextMultiline("Dialogue", dialogue_data, 128)){
+		if(ImGui_InputTextMultiline("Dialogue", dialogue_data, ImGuiInputTextFlags_AllowTabInput)){
 			params.SetString("dialogue_data", dialogue_data);
 			is_updated = true;
 		}
@@ -106,13 +111,15 @@ void DrawEditor() {
 }
 
 void Reset(){
+	has_send = false;
+	
 	if(auto_start){
 		SendDialogue();
 	}
 }
 
 void OnEnter(MovementObject @mo){
-	if(on_enter){
+	if(mo.is_player && on_enter){
 		SendDialogue();
 	}
 }
