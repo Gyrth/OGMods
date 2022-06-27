@@ -603,6 +603,12 @@ void Update(int paused){
 
 	UpdateDialogue();
 
+	if(!EditorEnabled()){
+		if(GetInputPressed(0, "l")){
+			ResetLevel();
+		}
+	}
+
 	if(EditorModeActive()){
 		UpdatePlaceholder();
 		if(show && spawn){
@@ -733,7 +739,10 @@ void UpdateDialogue(){
 			if(GetInputPressed(0, "attack")){
 				dialogue_container.clear();
 				dialogue_state = DIALOGUE_NONE;
-				ReleasePlayerControl();
+
+				if(dialogue_queue.size() == 0){
+					ReleasePlayerControl();
+				}
 			}
 			break;
 		default:
