@@ -351,7 +351,6 @@ float hurt_timer = 0.0f;
 float attack_timer = 0.0f;
 bool stop_controls = false;
 float intro_cam_offset = 2.5f;
-float camera_distance = 3.0f;
 float animation_timer = 0.0f;
 bool state_changed = false;
 vec3 roll_direction;

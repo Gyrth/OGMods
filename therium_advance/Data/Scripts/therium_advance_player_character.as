@@ -1,6 +1,7 @@
 #include "therium_advance_character.as"
 
 float enemy_sphere_timer = 0.0f;
+float camera_distance = 4.0f;
 
 void SetAnimations(){
 	@walk_down_animation = 		Animation({	"Data/Objects/adventurer_walk_down.xml"});
@@ -65,6 +66,9 @@ void Attack(){
 		char.Execute(	"vec3 impulse = vec3(" + push_velocity.x + ", " + push_velocity.y + ", " + push_velocity.z + ");" +
 						"vec3 pos = vec3(" + hit_pos.x + ", " + hit_pos.y + ", " + hit_pos.z + ");" +
 						"HandleRagdollImpactImpulse(impulse, pos, " + damage + ");");
+		
+		vec3 color = vec3(1.0f, 0.0f, 0.0f);
+		MakeParticle("Data/Particles/enemy_ring.xml", char.position - vec3(0.0f, 0.15f, 0.0f), vec3(0.0f), color);
 	}
 }
 
