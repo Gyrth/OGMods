@@ -192,7 +192,14 @@ void SwitchToCharacter(){
         return;
     }
     Object@ player = ReadObjectFromID(player_id);
+    ScriptParams@ params = player.GetScriptParams();
 	vec3 translation = player.GetTranslation();
+    string teams = "";
+    string name = player.GetName();
+
+    if(params.HasParam("Teams")){
+        teams = params.GetString("Teams");
+    }
 
     MovementObject@ player_mo = ReadCharacterID(player_id);
 	vec3 position = player_mo.position;
@@ -201,17 +208,21 @@ void SwitchToCharacter(){
 	int new_character_id = CreateObject(characters[current_character].character_path);
 	Object@ new_player = ReadObjectFromID(new_character_id);
 	MovementObject@ new_player_mo = ReadCharacterID(new_character_id);
+    ScriptParams@ new_params = new_player.GetScriptParams();
 	new_player.SetPlayer(true);
 	QueueDeleteObjectID(player_id);
 	new_player.SetTranslation(translation);
 	new_player_mo.position = position;
 	new_player_mo.velocity = velocity;
+    new_player_mo.static_char = false;
 	new_player.SetCopyable(true);
 	new_player.SetSelectable(true);
 	new_player.SetDeletable(true);
 	new_player.SetScalable(true);
 	new_player.SetTranslatable(true);
 	new_player.SetRotatable(true);
+    new_params.SetString("Teams", teams);
+    new_player.SetName(name);
 }
 
 int GetPlayerCharacterID() {
