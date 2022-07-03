@@ -47,8 +47,10 @@ in vec3 model_translation_attrib;  // set per-instance. separate from rest becau
 	struct Instance {
 		vec3 model_scale;
 		vec4 model_rotation_quat;
+		mat4 model_mat;
+		mat3 model_rotation_mat;
 		vec4 color_tint;
-		vec4 detail_scale;  // TODO: DETAILMAP4 only?
+		vec4 detail_scale;
 	};
 
 	uniform InstanceInfo {
