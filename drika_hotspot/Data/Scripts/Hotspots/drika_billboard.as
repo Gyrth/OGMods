@@ -1,14 +1,8 @@
-enum billboard_update_types{ 	billboard_persistent = 0,
-								billboard_fade = 1,
-								billboard_delete_on_update = 2,
-								billboard_delete_on_draw = 3,
-								billboard_delete_previous = 4
-							};
-
 enum billboard_types{	billboard_image_at_placeholder = 0,
 						billboard_text_at_placeholder = 1,
 						billboard_image_at_target = 2,
-						billboard_text_at_target = 3
+						billboard_text_at_target = 3,
+						billboard_delete = 4
 					};
 
 class DrikaBillboard : DrikaElement{
@@ -19,13 +13,9 @@ class DrikaBillboard : DrikaElement{
 	float overbright;
 	float height_offset;
 
-	int current_billboard_update_type;
-	billboard_update_types billboard_update_type;
-	array<string> billboard_update_type_choices = {"Persistent", "Fade", "Delete On Update", "Delete On Draw", "Delete Previous"};
-
 	int current_billboard_type;
 	billboard_types billboard_type;
-	array<string> billboard_type_choices = {"Image At Placeholder", "Text At Placeholder", "Image At Target", "Text At Target"};
+	array<string> billboard_type_choices = {"Image At Placeholder", "Text At Placeholder", "Image At Target", "Text At Target", "Delete"};
 
 	DrikaBillboard(JSONValue params = JSONValue()){
 		placeholder.Load(params);
@@ -38,12 +28,10 @@ class DrikaBillboard : DrikaElement{
 		overbright = GetJSONFloat(params, "overbright", 0.0f);
 		billboard_text_string = GetJSONString(params, "billboard_text_string", "Example billboard text.");
 		height_offset = GetJSONFloat(params, "height_offset", 0.0);
+		reference_string = GetJSONString(params, "reference_string", "");
 
 		billboard_type = billboard_types(GetJSONInt(params, "billboard_type", billboard_image_at_placeholder));
 		current_billboard_type = billboard_type;
-
-		billboard_update_type = billboard_update_types(GetJSONInt(params, "billboard_update_type", billboard_delete_previous));
-		current_billboard_update_type = billboard_update_type;
 
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
@@ -73,7 +61,7 @@ class DrikaBillboard : DrikaElement{
 			data["height_offset"] = JSONValue(height_offset);
 		}
 
-		data["billboard_update_type"] = JSONValue(billboard_update_type);
+		data["reference_string"] = JSONValue(reference_string);
 		data["billboard_type"] = JSONValue(billboard_type);
 
 		placeholder.Save(data);
@@ -90,10 +78,7 @@ class DrikaBillboard : DrikaElement{
 	}
 
 	void Reset(){
-		for(uint i = 0; i < billboard_ids.size(); i++){
-			DebugDrawRemove(billboard_ids[i]);
-		}
-		billboard_ids.resize(0);
+		RemoveContinuesUpdateElement(this);
 	}
 
 	string GetDisplayString(){
@@ -105,6 +90,8 @@ class DrikaBillboard : DrikaElement{
 			return "Billboard Text At Placeholder \"" + billboard_text_string + "\"";
 		}else if(billboard_type == billboard_text_at_target){
 			return "Billboard Text At Target \"" + billboard_text_string + "\"";
+		}else if(billboard_type == billboard_delete){
+			return "Billboard Delete \"" + reference_string + "\"";
 		}
 		return "Billboard";
 	}
@@ -128,6 +115,32 @@ class DrikaBillboard : DrikaElement{
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
+		if(billboard_type == billboard_image_at_target || billboard_type == billboard_text_at_target || billboard_type == billboard_text_at_placeholder || billboard_type == billboard_image_at_placeholder){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Name");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+
+			if(ImGui_InputText("##Name", reference_string, 64)){
+				AddContinuesUpdateElement(this);
+			}
+
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+		}else if(billboard_type == billboard_delete){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Name");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+
+			if(ImGui_InputText("##Name", reference_string, 64)){
+				
+			}
+
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+		}
+
 		if(billboard_type == billboard_image_at_target || billboard_type == billboard_text_at_target){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Target");
@@ -143,17 +156,6 @@ class DrikaBillboard : DrikaElement{
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 		}
-
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Billboard Update Type");
-		ImGui_NextColumn();
-		ImGui_PushItemWidth(second_column_width);
-		if(ImGui_Combo("##Billboard Update Type", current_billboard_update_type, billboard_update_type_choices, billboard_update_type_choices.size())){
-			billboard_update_type = billboard_update_types(current_billboard_update_type);
-			Reset();
-		}
-		ImGui_PopItemWidth();
-		ImGui_NextColumn();
 
 		if(billboard_type == billboard_image_at_placeholder || billboard_type == billboard_image_at_target){
 			ImGui_AlignTextToFramePadding();
@@ -220,29 +222,6 @@ class DrikaBillboard : DrikaElement{
 		if(billboard_type == billboard_image_at_placeholder || billboard_type == billboard_text_at_placeholder){
 			DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 		}
-
-		float multiplier = 1.0 + overbright;
-		vec4 combined_color = vec4(image_color.x * multiplier, image_color.y * multiplier, image_color.z * multiplier, image_color.a);
-
-		if(billboard_type == billboard_image_at_target || billboard_type == billboard_text_at_target){
-			array<Object@> targets = target_select.GetTargetObjects();
-			for(uint i = 0; i < targets.size(); i++){
-				vec3 target_location = GetTargetTranslation(targets[i]) + vec3(0.0, height_offset, 0.0);
-
-				DebugDrawLine(target_location, this_hotspot.GetTranslation(), vec3(0.0, 0.0, 1.0), _delete_on_draw);
-				if(billboard_type == billboard_image_at_target){
-					DebugDrawBillboard(image_path, target_location, image_size, combined_color, _delete_on_draw);
-				}else if(billboard_type == billboard_text_at_target){
-					DebugDrawText(target_location, ReplaceVariablesFromText(billboard_text_string), 1.0, false, _delete_on_draw);
-				}
-			}
-		}else{
-			if(billboard_type == billboard_image_at_placeholder){
-				DebugDrawBillboard(image_path, placeholder.GetTranslation(), image_size, combined_color, _delete_on_draw);
-			}else if(billboard_type == billboard_text_at_placeholder){
-				DebugDrawText(placeholder.GetTranslation(), ReplaceVariablesFromText(billboard_text_string), 1.0, false, _delete_on_draw);
-			}
-		}
 	}
 
 	void PlaceholderCheck(){
@@ -264,30 +243,21 @@ class DrikaBillboard : DrikaElement{
 	}
 
 	bool Trigger(){
-		if(placeholder.Exists()){
-			CreateBillboard();
+		if(billboard_type == billboard_delete){
+			RemoveContinuesUpdateElementByName(reference_string);
 			return true;
 		}else{
-			placeholder.Create();
-			return false;
+			if(placeholder.Exists()){
+				AddContinuesUpdateElement(this);
+				return true;
+			}else{
+				placeholder.Create();
+				return false;
+			}
 		}
 	}
 
-	void CreateBillboard(){
-		int draw_method = _persistent;
-		if(billboard_update_type == billboard_persistent){
-			draw_method = _persistent;
-		}else if(billboard_update_type == billboard_fade){
-			draw_method = _fade;
-		}else if(billboard_update_type == billboard_delete_on_update){
-			draw_method = _delete_on_update;
-		}else if(billboard_update_type == billboard_delete_on_draw){
-			draw_method = _delete_on_draw;
-		}else if(billboard_update_type == billboard_delete_previous){
-			Reset();
-			draw_method = _persistent;
-		}
-
+	void Update(){
 		float multiplier = 1.0 + overbright;
 		vec4 combined_color = vec4(image_color.x * multiplier, image_color.y * multiplier, image_color.z * multiplier, image_color.a);
 
@@ -297,16 +267,16 @@ class DrikaBillboard : DrikaElement{
 				vec3 target_location = GetTargetTranslation(targets[i]) + vec3(0.0, height_offset, 0.0);
 
 				if(billboard_type == billboard_image_at_target){
-					billboard_ids.insertLast(DebugDrawBillboard(image_path, target_location, image_size, combined_color, draw_method));
+					DebugDrawBillboard(image_path, target_location, image_size, combined_color, _delete_on_update);
 				}else if(billboard_type == billboard_text_at_target){
-					billboard_ids.insertLast(DebugDrawText(target_location, ReplaceVariablesFromText(billboard_text_string), 1.0, false, draw_method));
+					DebugDrawText(target_location, ReplaceVariablesFromText(billboard_text_string), 1.0, false, _delete_on_update);
 				}
 			}
 		}else{
 			if(billboard_type == billboard_image_at_placeholder){
-				billboard_ids.insertLast(DebugDrawBillboard(image_path, placeholder.GetTranslation(), image_size, combined_color, draw_method));
+				DebugDrawBillboard(image_path, placeholder.GetTranslation(), image_size, combined_color, _delete_on_update);
 			}else if(billboard_type == billboard_text_at_placeholder){
-				billboard_ids.insertLast(DebugDrawText(placeholder.GetTranslation(), ReplaceVariablesFromText(billboard_text_string), 1.0, false, draw_method));
+				DebugDrawText(placeholder.GetTranslation(), ReplaceVariablesFromText(billboard_text_string), 1.0, false, _delete_on_update);
 			}
 		}
 	}

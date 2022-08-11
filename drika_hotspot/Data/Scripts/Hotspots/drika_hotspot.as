@@ -62,6 +62,7 @@ string param_delimiter = "|";
 array<string> messages;
 bool is_selected = false;
 array<Reference@> references;
+array<DrikaElement@> continues_update_elements;
 string default_preview_mesh = "Data/Objects/primitives/edged_cone.xml";
 bool duplicating_hotspot = false;
 bool duplicating_function = false;
@@ -90,7 +91,6 @@ array<DrikaElement@> imported_elements;
 array<Object@> refresh_queue;
 bool move_relative = false;
 mat4 old_transform;
-array<int> billboard_ids;
 bool adding_function = false;
 bool resetting = false;
 string last_read_path = "";
@@ -513,6 +513,10 @@ void Update(){
 	}
 
 	if(drika_indexes.size() > 0){
+		if(hotspot_enabled){
+			UpdateContinuesElements();
+		}
+
 		if(!show_editor && hotspot_enabled){
 			DeliverMessages();
 			UpdateParallelOperations();
@@ -534,7 +538,16 @@ void Update(){
 			GetCurrentElement().Update();
 		}
 	}
+
 	messages.resize(0);
+}
+
+void UpdateContinuesElements(){
+	if(hotspot_enabled){
+		for(uint i = 0; i < continues_update_elements.size(); i++){
+			continues_update_elements[i].Update();
+		}
+	}
 }
 
 void UpdateParallelOperations(){
@@ -2077,6 +2090,7 @@ void RefreshChildren(Object@ obj){
 
 array<string> GetReferences(){
 	array<string> reference_strings;
+
 	for(uint i = 0; i < references.size(); i++){
 		reference_strings.insertLast(references[i].elements[0].reference_string);
 	}
@@ -2153,4 +2167,33 @@ bool CheckClosePopup(vec4 window_info){
 	}
 
 	return false;
+}
+
+void AddContinuesUpdateElement(DrikaElement@ element){
+	// Check if this element has already been added.
+	for(uint i = 0; i < continues_update_elements.size(); i++){
+		if(element is continues_update_elements[i]){
+			return;
+		}
+	}
+
+	continues_update_elements.insertLast(element);
+}
+
+void RemoveContinuesUpdateElement(DrikaElement@ element){
+	for(uint i = 0; i < continues_update_elements.size(); i++){
+		if(element is continues_update_elements[i]){
+			continues_update_elements.removeAt(i);
+			return;
+		}
+	}
+}
+
+void RemoveContinuesUpdateElementByName(string name){
+	for(uint i = 0; i < continues_update_elements.size(); i++){
+		if(continues_update_elements[i].reference_string == name){
+			continues_update_elements.removeAt(i);
+			i--;
+		}
+	}
 }
