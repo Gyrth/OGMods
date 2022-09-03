@@ -44,6 +44,12 @@ class DrikaTransformObject : DrikaElement{
 	bool s_rotate_relative;
 
 	bool s_transform_to_target_first;
+	bool s_transform_to_bone;
+	bool s_copy_bone_rotation;
+	bool s_flatten_rotation;
+	bool s_copy_bone_position;
+	
+	string s_bone_name;
 
 	array<string> transform_mode_names =	{
 												"Transform To Placeholder",
@@ -98,6 +104,12 @@ class DrikaTransformObject : DrikaElement{
 		s_rotate_relative = GetJSONBool(params, "s_rotate_relative", false);
 
 		s_transform_to_target_first = GetJSONBool(params, "s_transform_to_target_first", false);
+		s_transform_to_bone = GetJSONBool(params, "s_transform_to_bone", false);
+		s_copy_bone_rotation = GetJSONBool(params, "s_copy_bone_rotation", false);
+		s_flatten_rotation = GetJSONBool(params, "s_flatten_rotation", false);
+		s_copy_bone_position = GetJSONBool(params, "s_copy_bone_position", false);
+		
+		s_bone_name = GetJSONString(params, "s_bone_name", "");
 
 		has_settings = true;
 	}
@@ -155,6 +167,11 @@ class DrikaTransformObject : DrikaElement{
 			data["s_scale_z_relative"] = JSONValue(s_scale_z_relative);
 			data["s_rotate_relative"] = JSONValue(s_rotate_relative);
 			data["s_transform_to_target_first"] = JSONValue(s_transform_to_target_first);
+			data["s_transform_to_bone"] = JSONValue(s_transform_to_bone);
+			data["s_copy_bone_rotation"] = JSONValue(s_copy_bone_rotation);
+			data["s_flatten_rotation"] = JSONValue(s_flatten_rotation);
+			data["s_copy_bone_position"] = JSONValue(s_copy_bone_position);
+			data["s_bone_name"] = JSONValue(s_bone_name);
 		}
 		return data;
 	}
@@ -438,9 +455,11 @@ class DrikaTransformObject : DrikaElement{
 			ImGui_PopStyleColor();
 			}
 			ImGui_NextColumn();
-			if(s_transform_to_target_first == true){
+			if(s_transform_to_target_first || s_transform_to_bone){
+				if(!s_transform_to_target_first){ImGui_Separator();}
 				target_location.DrawSelectTargetUI();
-
+			}
+			if(s_transform_to_target_first == true){
 				ImGui_AlignTextToFramePadding();
 				ImGui_Text("Translation Offset");
 				ImGui_NextColumn();
@@ -480,6 +499,50 @@ class DrikaTransformObject : DrikaElement{
 				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
+			}
+			
+			ImGui_Separator();
+			
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Transform to bone?");
+			ImGui_NextColumn();
+			if(ImGui_Checkbox("###Transform To Bone", s_transform_to_bone)){}
+			if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip("If checked, this will be applied before XYZ specific transformations");
+			ImGui_PopStyleColor();
+			}
+			ImGui_NextColumn();
+			
+			if(s_transform_to_bone == true){
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Bone Name");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				ImGui_InputText("###BoneName", s_bone_name, 64);
+				ImGui_PopItemWidth();
+				if(ImGui_IsItemHovered()){
+				ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+				ImGui_SetTooltip("leftarm\nrightarm\nleft_leg\nright_leg\nhead\nleftear\nrightear\ntorso\ntail");
+				ImGui_PopStyleColor();
+				}
+				
+				ImGui_NextColumn();
+				ImGui_Text("Copy Bone Position?");
+				ImGui_NextColumn();
+				if(ImGui_Checkbox("###Copy Bone Position", s_copy_bone_position)){}
+				ImGui_NextColumn();
+				ImGui_Text("Copy Bone Rotation?");
+				ImGui_NextColumn();
+				if(ImGui_Checkbox("###Copy Bone Rotation", s_copy_bone_rotation)){}
+				ImGui_NextColumn();
+				if(s_copy_bone_rotation){
+					ImGui_Text("Flatten Rotation?");
+					ImGui_NextColumn();
+					if(ImGui_Checkbox("###Flatten Rotation", s_flatten_rotation)){}
+					ImGui_NextColumn();
+				}
 			}
 		}
 	}
@@ -588,9 +651,9 @@ class DrikaTransformObject : DrikaElement{
 					SetTargetRotation(targets[i], reset?before_rotation:new_rotation);
 				}
 			}else if(transform_mode == transform_specific){
-
+				array<Object@> target_location_objects = target_location.GetTargetObjects();
+				
 				if(s_transform_to_target_first == true){
-					array<Object@> target_location_objects = target_location.GetTargetObjects();
 					for(uint j = 0; j < target_location_objects.size(); j++){
 						if(use_target_location){
 							SetTargetTranslation(targets[i], reset?before_translation:GetTargetTranslation(target_location_objects[j]) + translation_offset);
@@ -610,6 +673,34 @@ class DrikaTransformObject : DrikaElement{
 					}
 				}
 
+				//Transform to bone stuff
+				int target_id = target_location_objects[0].GetID();
+				MovementObject@ char = ReadCharacterID(target_id);
+				
+				if (target_location_objects[0].GetType() == _movement_object && s_transform_to_bone == true){
+					if (char.rigged_object().skeleton().IKBoneExists(s_bone_name)){
+						int bone = char.rigged_object().skeleton().IKBoneStart(s_bone_name);
+						
+						if (s_copy_bone_position == true) {
+							SetTargetTranslation(targets[i], reset?before_translation: char.rigged_object().GetBonePosition(bone));
+						}
+						
+						if (s_copy_bone_rotation == true){
+							quaternion bone_rotation = QuaternionFromMat4(char.rigged_object().GetDisplayBoneMatrix(bone));
+							vec3 direction = bone_rotation * vec3(0.0,1.0,0.0);
+							vec3 flat_direction = normalize(vec3(direction.x, 0.0, direction.z));
+							float rot = atan2(flat_direction.x, flat_direction.z) * 180.0f / PI;
+							float new_rotation = floor(rot + 0.5f);
+							quaternion flattened_rotation = quaternion(vec4(0, 1, 0, new_rotation * PI / 180.0f));
+								if (s_flatten_rotation == true){
+									SetTargetRotation(targets[i], reset?before_rotation: flattened_rotation);
+								}else{
+									SetTargetRotation(targets[i], reset?before_rotation: bone_rotation);
+								}
+						}
+					}
+				}
+				
 				vec3 translation;
 				vec3 scale;
 
