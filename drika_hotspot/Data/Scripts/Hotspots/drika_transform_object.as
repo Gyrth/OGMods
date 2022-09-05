@@ -672,31 +672,32 @@ class DrikaTransformObject : DrikaElement{
 						}
 					}
 				}
-
 				//Transform to bone stuff
-				int target_id = target_location_objects[0].GetID();
-				MovementObject@ char = ReadCharacterID(target_id);
-				
-				if (target_location_objects[0].GetType() == _movement_object && s_transform_to_bone == true){
-					if (char.rigged_object().skeleton().IKBoneExists(s_bone_name)){
-						int bone = char.rigged_object().skeleton().IKBoneStart(s_bone_name);
-						
-						if (s_copy_bone_position == true) {
-							SetTargetTranslation(targets[i], reset?before_translation: char.rigged_object().GetBonePosition(bone));
-						}
-						
-						if (s_copy_bone_rotation == true){
-							quaternion bone_rotation = QuaternionFromMat4(char.rigged_object().GetDisplayBoneMatrix(bone));
-							vec3 direction = bone_rotation * vec3(0.0,1.0,0.0);
-							vec3 flat_direction = normalize(vec3(direction.x, 0.0, direction.z));
-							float rot = atan2(flat_direction.x, flat_direction.z) * 180.0f / PI;
-							float new_rotation = floor(rot + 0.5f);
-							quaternion flattened_rotation = quaternion(vec4(0, 1, 0, new_rotation * PI / 180.0f));
-								if (s_flatten_rotation == true){
-									SetTargetRotation(targets[i], reset?before_rotation: flattened_rotation);
-								}else{
-									SetTargetRotation(targets[i], reset?before_rotation: bone_rotation);
-								}
+				Log(fatal, "reached bone stuff");
+				if (target_location_objects.size() > 0){
+					if (target_location_objects[0].GetType() == _movement_object && s_transform_to_bone == true){
+						int target_id = target_location_objects[0].GetID();
+						MovementObject@ char = ReadCharacterID(target_id);
+						if (char.rigged_object().skeleton().IKBoneExists(s_bone_name)){
+							int bone = char.rigged_object().skeleton().IKBoneStart(s_bone_name);
+							
+							if (s_copy_bone_position == true) {
+								SetTargetTranslation(targets[i], reset?before_translation: char.rigged_object().GetBonePosition(bone));
+							}
+							
+							if (s_copy_bone_rotation == true){
+								quaternion bone_rotation = QuaternionFromMat4(char.rigged_object().GetDisplayBoneMatrix(bone));
+								vec3 direction = bone_rotation * vec3(0.0,1.0,0.0);
+								vec3 flat_direction = normalize(vec3(direction.x, 0.0, direction.z));
+								float rot = atan2(flat_direction.x, flat_direction.z) * 180.0f / PI;
+								float new_rotation = floor(rot + 0.5f);
+								quaternion flattened_rotation = quaternion(vec4(0, 1, 0, new_rotation * PI / 180.0f));
+									if (s_flatten_rotation == true){
+										SetTargetRotation(targets[i], reset?before_rotation: flattened_rotation);
+									}else{
+										SetTargetRotation(targets[i], reset?before_rotation: bone_rotation);
+									}
+							}
 						}
 					}
 				}
