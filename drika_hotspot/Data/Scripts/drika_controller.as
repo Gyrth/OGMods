@@ -1430,6 +1430,8 @@ void LoadCheckpoint(){
 		string json_string = ui_element_data[i].asString();
 		AddUIElement(json_string);
 	}
+
+	level.SendMessage("drika_checkpoint_loaded");
 }
 
 DrikaUIElement@ GetUIElement(string identifier){
