@@ -1811,12 +1811,14 @@ void RemoveDialogueActor(MovementObject@ char){
 
 void ClearDialogueActors(){
 	for(uint i = 0; i < dialogue_actor_ids.size(); i++){
-		MovementObject@ char = ReadCharacterID(dialogue_actor_ids[i]);
-		char.Execute("roll_ik_fade = 0.0f;");
-		char.ReceiveScriptMessage("set_dialogue_control false");
-		string no_character_collision = "reset_no_collide = " + the_time + ";";
-		char.Execute(no_character_collision);
-		/* char.rigged_object().anim_client().Reset(); */
+		if(MovementObjectExists(dialogue_actor_ids[i])){
+			MovementObject@ char = ReadCharacterID(dialogue_actor_ids[i]);
+			char.Execute("roll_ik_fade = 0.0f;");
+			char.ReceiveScriptMessage("set_dialogue_control false");
+			string no_character_collision = "reset_no_collide = " + the_time + ";";
+			char.Execute(no_character_collision);
+			/* char.rigged_object().anim_client().Reset(); */
+		}
 	}
 	dialogue_actor_ids.resize(0);
 }
