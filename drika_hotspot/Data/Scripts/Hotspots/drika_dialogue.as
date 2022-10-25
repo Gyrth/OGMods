@@ -1382,10 +1382,12 @@ class DrikaDialogue : DrikaElement{
 		if(items.size() < 1){
 			return;
 		}
+
 		if(ImGui_TreeNodeEx(category, ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
 			for(uint i = 0; i < items.size(); i++){
 				AddItem(items[i]);
 			}
+			ImGui_TreePop();
 		}
 	}
 
