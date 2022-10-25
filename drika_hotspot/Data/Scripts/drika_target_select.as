@@ -788,14 +788,33 @@ class DrikaTargetSelect{
 				}
 			}
 		}else if(identifier_type == name){
-			array<int> object_ids = GetObjectIDs();
-			for(uint i = 0; i < object_ids.size(); i++){
-				if(ObjectExists(object_ids[i])){
-					Object@ obj = ReadObjectFromID(object_ids[i]);
-					if(obj.GetName() == object_name){
+			int cache_index = object_cache_names.find(object_name);
+
+			// Use the cached object ids if this name has already been searched.
+			if(cache_index != -1){
+				for(uint i = 0; i < object_cache[cache_index].size(); i++){
+					if(ObjectExists(object_cache[cache_index][i])){
+						Object@ obj = ReadObjectFromID(object_cache[cache_index][i]);
 						target_objects.insertLast(obj);
 					}
 				}
+			}else{
+				array<int> object_ids = GetObjectIDs();
+				array<int> object_ids_with_name = {};
+
+				for(uint i = 0; i < object_ids.size(); i++){
+					if(ObjectExists(object_ids[i])){
+						Object@ obj = ReadObjectFromID(object_ids[i]);
+						if(obj.GetName() == object_name){
+							target_objects.insertLast(obj);
+							object_ids_with_name.insertLast(object_ids[i]);
+						}
+					}
+				}
+
+				// Add the target objects to the cache so it can be used in the next update.
+				object_cache_names.insertLast(object_name);
+				object_cache.insertLast(object_ids_with_name);
 			}
 		}else if(identifier_type == character){
 			if(object_id != -1 && ObjectExists(object_id)){

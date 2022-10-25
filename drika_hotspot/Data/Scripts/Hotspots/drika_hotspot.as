@@ -125,6 +125,8 @@ array<DrikaAnimationGroup@> current_animations;
 DrikaAnimationGroup@ custom_group;
 array<string> active_mods;
 array<int> refresh_queue_counter;
+array<string> object_cache_names;
+array<array<int>> object_cache;
 
 const int _movement_state = 0;  // character is moving on the ground
 const int _ground_state = 1;  // character has fallen down or is raising up, ATM ragdolls handle most of this
@@ -1730,6 +1732,10 @@ void Reset(){
 	if(drika_elements.size() == 0){
 		return;
 	}
+
+	object_cache.resize(0);
+	object_cache_names.resize(0);
+
 	GetCurrentElement().EditDone();
 	//If the user is editing the script then stay with the current line to edit.
 	current_line = 0;
