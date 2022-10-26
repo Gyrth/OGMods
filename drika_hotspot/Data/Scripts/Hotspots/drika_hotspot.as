@@ -102,6 +102,9 @@ bool show_grid = true;
 float left_over_drag_y = 0.0;
 bool dragging = false;
 bool steal_focus = false;
+float fps_timer = 0.0f;
+int fps_counter = 0;
+int fps = 60;
 
 string build_version_short = GetBuildVersionShort( );
 string build_version_full = GetBuildVersionFull( );
@@ -423,6 +426,14 @@ void SendHotspotStateChange(){
 }
 
 void Update(){
+	fps_timer += time_step;
+	// Update the fps counter every half a second.
+	if(fps_timer > 0.5){
+		fps = int(fps_counter / fps_timer);
+		fps_timer = 0.0f;
+		fps_counter = 0;
+	}
+
 	//The post init queue is necessary so that Update is executing it, and not the Draw functions.
 	//The Draw and DrawEditor sometimes can have issues such as spawning hotspots that crash the game.
 	if(post_init_queue.size() > 0){
@@ -1833,6 +1844,8 @@ void Draw(){
 	if(camera.GetFlags() == kPreviewCamera){
 		return;
 	}
+
+	fps_counter += 1;
 
 	if(debug_current_line && drika_elements.size() > 0 && post_init_queue.size() == 0){
 		if(!hotspot_enabled){

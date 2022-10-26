@@ -67,6 +67,7 @@ class DrikaAnimation : DrikaElement{
 	IMTweenType tween_type;
 	int current_tween_type;
 	bool preview_animation = false;
+	int skipped_collision_counter = 0;
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -384,6 +385,7 @@ class DrikaAnimation : DrikaElement{
 		}
 
 		UpdateAnimation();
+
 		if(animation_finished){
 			done = true;
 			if(target_select.identifier_type == cam){
@@ -549,6 +551,29 @@ class DrikaAnimation : DrikaElement{
 			}
 		}else{
 			array<Object@> targets = target_select.GetTargetObjects();
+			bool skip_setting_collision = false;
+
+			// When the animation isn't being edited allow the collision update to be skipped.
+			if(!editing){
+				int allowed_skipped = 0;
+
+				// Allow more skipped set collisions if the framerate is lower.
+				if(fps < 15){
+					allowed_skipped = 20;
+				}else if(fps < 30){
+					allowed_skipped = 10;
+				}else if(fps < 50){
+					allowed_skipped = 5;
+				}
+
+				// Keep skipping untill the allowed skip amount is reached.
+				if(allowed_skipped > skipped_collision_counter){
+					skipped_collision_counter++;
+					skip_setting_collision = true;
+				}else{
+					skipped_collision_counter = 0;
+				}
+			}
 
 			for(uint i = 0; i < targets.size(); i++){
 				if(targets[i].GetType() == _movement_object){
@@ -577,13 +602,14 @@ class DrikaAnimation : DrikaElement{
 						targets[i].SetRotation(rotation);
 					}
 				}else{
-					if(update_collision){
+					if(update_collision && !skip_setting_collision){
 						targets[i].SetTranslation(translation);
 						targets[i].SetRotation(rotation);
 						RefreshChildren(targets[i]);
 					}else{
 						targets[i].SetTranslationRotationFast(translation, rotation);
 					}
+
 					if(animate_scale){
 						targets[i].SetScale(scale);
 					}
