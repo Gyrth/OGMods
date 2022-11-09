@@ -252,7 +252,7 @@ void LoadSettings(){
 
 	if(palette_data == "" || !data.parseString(palette_data)){
 		if(!data.parseString(palette_data)){
-			Log(warning, "Unable to parse the saved JSON in the saved data!");
+			// Log(warning, "Unable to parse the saved JSON in the saved data!");
 		}
 		return;
 	}
@@ -276,35 +276,35 @@ void LoadPalette(bool use_defaults = false){
 	//Check if the saved json is parseble, available or just use the defaults.
 	if(palette_data == "" || !data.parseString(palette_data) || use_defaults){
 		if(!data.parseString(palette_data)){
-			Log(warning, "Unable to parse the saved JSON in the palette!");
+			// Log(warning, "Unable to parse the saved JSON in the palette!");
 		}
 		retrieve_default_palette = true;
 	}else{
-		Log(warning, "Saved palette JSON loaded correctly.");
+		// Log(warning, "Saved palette JSON loaded correctly.");
 	}
 
 	//Check if the existing saved data has the relevant data.
 	if(!retrieve_default_palette){
 		root = data.getRoot();
 		if(!root.isMember("Function Palette")){
-			Log(warning, "Could not find Function Palette in JSON.");
+			// Log(warning, "Could not find Function Palette in JSON.");
 			retrieve_default_palette = true;
 		}else if(!root.isMember("UI Palette")){
-			Log(warning, "Could not find UI Palette in JSON.");
+			// Log(warning, "Could not find UI Palette in JSON.");
 			retrieve_default_palette = true;
 		}
 	}
 
 	//Get the defaults values.
 	if(retrieve_default_palette){
-		Log(warning, "Loading the default palette.");
+		// Log(warning, "Loading the default palette.");
 		if(!data.parseFile("Data/Scripts/spawner_default_palette.json")){
-			Log(warning, "Error loading the default palette.");
+			// Log(warning, "Error loading the default palette.");
 			return;
 		}
 		root = data.getRoot();
 	}else{
-		Log(warning, "Using the palette from the saved JSON.");
+		// Log(warning, "Using the palette from the saved JSON.");
 	}
 
 	JSONValue ui_palette = root["UI Palette"];
@@ -514,7 +514,7 @@ void ReceiveMessage(string msg){
 
 void SpawnObject(string load_item_path){
 	if(FileExists(load_item_path)){
-		Log(warning, "Creating object " + load_item_path);
+		// Log(warning, "Creating object " + load_item_path);
 		spawn_id = CreateObject(load_item_path, false);
 		Object@ obj = ReadObjectFromID(spawn_id);
 		if(paint){
@@ -914,7 +914,7 @@ void SetPlaceholderModel(){
 	}
 
 	string placeholder_path = GetObjectPath(load_item_path);
-	Log(warning, "placeholder_path " + placeholder_path);
+	// Log(warning, "placeholder_path " + placeholder_path);
 	Object@ placeholder_box = ReadObjectFromID(placeholder_id);
 	PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder_box);
 	placeholder_object.SetPreview(placeholder_path);
@@ -1017,7 +1017,7 @@ bool CheckClosePopup(vec4 window_info){
 	if((!hovering_window && ImGui_IsMouseClicked(0)) || ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Escape))){
 		steal_focus = true;
 		ImGui_CloseCurrentPopup();
-		Log(warning, "Close");
+		// Log(warning, "Close");
 		return true;
 	}
 
