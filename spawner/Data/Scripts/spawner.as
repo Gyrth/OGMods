@@ -43,7 +43,6 @@ vec4 item_clicked();
 vec4 text_color();
 vec4 transparent(0.0f);
 
-TextureAssetRef youdied_texture = LoadTexture("Data/Images/youdied.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef loading_texture = LoadTexture("Data/Images/spawner_loading.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 TextureAssetRef default_texture = LoadTexture("Data/UI/spawner/hd-thumbs/Object/whaleman.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 
@@ -195,7 +194,6 @@ class GUISpawnerItem{
 		ImGui_Text(title);
 		ImGui_Unindent((title_height / 2.0f) - (padding / 2.0f));
 		ImGui_PushStyleColor(ImGuiCol_Button, vec4(0.0f));
-		/* bool ImGui_ImageButton(const TextureAssetRef &in texture, const vec2 &in size, const vec2 &in uv0 = vec2(0,0), const vec2 &in uv1 = vec2(1,1), int frame_padding = -1, const vec4 &in background_color = vec4(0,0,0,0), const vec4 &in tint_color = vec4(1,1,1,1)); */
 		if(ImGui_ImageButton(icon, vec2(icon_size, icon_size), vec2(0,0), vec2(1,1), 0, vec4(0,0,0,0), vec4(1,1,1,1))){
 			if(currently_selected == id){
 				ClearSpawnSettings();
