@@ -657,7 +657,7 @@ void DrawGUI(){
 		ImGui_PushStyleColor(ImGuiCol_ResizeGripHovered, titlebar_color);
 		ImGui_PushStyleColor(ImGuiCol_ResizeGripActive, item_clicked);
 
-		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(550,450));
+		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(350,350));
 		ImGui_Begin("Spawner", show, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_MenuBar);
 		ImGui_PopStyleVar(1);
 
