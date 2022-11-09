@@ -189,7 +189,7 @@ class GUISpawnerItem{
 			ImGui_PushStyleColor(ImGuiCol_ChildBg, item_background);
 		}
 
-		ImGui_BeginChild(id + "button", vec2(icon_size + 15.0f, icon_size + title_height + 20.0f), true, ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui_BeginChild(id + "button", vec2(icon_size, icon_size + title_height), true, ImGuiWindowFlags_NoScrollWithMouse);
 		ImGui_Indent((title_height / 2.0f) - (padding / 2.0f));
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text(title);
@@ -889,19 +889,24 @@ void AddCategory(GUISpawnerCategory@ category){
 	}
 
 	if(ImGui_TreeNodeEx(category.category_name + "(" + category.spawner_items.size() + ")", ImGuiTreeNodeFlags_CollapsingHeader | ImGuiTreeNodeFlags_DefaultOpen)){
-		ImGui_BeginChild(category.category_name, vec2(ImGui_GetWindowWidth(), icon_size + title_height + 20.0f), false, ImGuiWindowFlags_NoScrollWithMouse);
+
+		ImGui_Unindent(25.0f);
+
+		ImGui_BeginChild(category.category_name, vec2(ImGui_GetWindowWidth(), icon_size + title_height + 20.0f), true, ImGuiWindowFlags_NoScrollWithMouse);
 		float row_size = 0.0f;
 		for(uint i = 0; i < category.spawner_items.size(); i++){
-			row_size += icon_size + padding + 15.0f;
+			row_size += icon_size + padding;
 			if(row_size > ImGui_GetWindowWidth()){
 				ImGui_EndChild();
-				row_size = icon_size + padding + 15.0f;
-				ImGui_BeginChild(category.category_name + i, vec2(ImGui_GetWindowWidth(), icon_size + title_height + 20.0f), false, ImGuiWindowFlags_NoScrollWithMouse);
+				row_size = icon_size + padding;
+				ImGui_BeginChild(category.category_name + i, vec2(ImGui_GetWindowWidth(), icon_size + title_height + 20.0f), true, ImGuiWindowFlags_NoScrollWithMouse);
 			}
 			ImGui_SameLine();
 			category.spawner_items[i].DrawItem();
 		}
 		ImGui_EndChild();
+		ImGui_TreePop();
+		ImGui_Indent(25.0f);
 	}
 }
 
