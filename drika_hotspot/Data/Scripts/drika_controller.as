@@ -600,14 +600,16 @@ void ReceiveMessage(string msg){
 			}
 		}
 
-		level.Execute("dialogue.cam_pos = vec3(" + camera_position.x + ", " + camera_position.y + ", " + camera_position.z + ");");
-		level.Execute("dialogue.cam_rot = vec3(" + camera_rotation.x + "," + camera_rotation.y + "," + camera_rotation.z + ");");
-		level.Execute("dialogue.cam_zoom = " + camera_zoom + ");");
+		if(!enable_look_at_target || !has_camera_control){
+			level.Execute("dialogue.cam_pos = vec3(" + camera_position.x + ", " + camera_position.y + ", " + camera_position.z + ");");
+			level.Execute("dialogue.cam_rot = vec3(" + camera_rotation.x + "," + camera_rotation.y + "," + camera_rotation.z + ");");
+			level.Execute("dialogue.cam_zoom = " + camera_zoom + ");");
 
-		current_camera_position = camera_position;
-		old_camera_translation = camera_position;
-		old_camera_rotation = camera_rotation;
-		camera_settings_changed = true;
+			current_camera_position = camera_position;
+			old_camera_translation = camera_position;
+			old_camera_rotation = camera_rotation;
+			camera_settings_changed = true;
+		}
 
 		if(!has_camera_control){
 			for(int i = 0; i < GetNumCharacters(); i++){
@@ -1914,10 +1916,12 @@ void SetCameraPosition(){
 					SmoothCameraLookAt(obj.GetTranslation());
 				}
 			}
+			SmoothCameraFOV(camera_zoom);
 		}else{
 			camera.SetXRotation(camera_rotation.x + camera_shake_rotation.x);
 			camera.SetYRotation(camera_rotation.y + camera_shake_rotation.y);
 			camera.SetZRotation(camera_rotation.z + camera_shake_rotation.z);
+			camera.SetFOV(camera_zoom);
 		}
 
 		if(enable_move_with_target){
@@ -1940,7 +1944,6 @@ void SetCameraPosition(){
 		}
 
 		camera.SetDistance(0.0f);
-		camera.SetFOV(camera_zoom);
 		UpdateListener(camera_position, vec3(0.0f), camera.GetFacing(), camera.GetUpVector());
 		if(!showing_choice && !showing_interactive_ui){
 			SetGrabMouse(true);
@@ -1998,6 +2001,11 @@ void SmoothCameraLookAt(vec3 target_location){
 	/* DebugDrawWireSphere(current_look_location, 0.5, vec3(1.0), _delete_on_draw); */
 	camera.LookAt(mix(current_look_location, target_location, time_step * 10.0));
 	old_camera_rotation = vec3(camera.GetXRotation(), camera.GetYRotation(), camera.GetZRotation());
+}
+
+void SmoothCameraFOV(float target_fov){
+	float current_fov = camera.GetFOV();
+	camera.SetFOV(mix(current_fov, target_fov, time_step * 5.0f));
 }
 
 void MessageWaitingForFadeOut(){
