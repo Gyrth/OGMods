@@ -1907,7 +1907,7 @@ void SetCameraPosition(){
 				Object@ track_target = ReadObjectFromID(look_at_target_id);
 				if(track_target.GetType() == _movement_object){
 					MovementObject@ char = ReadCharacterID(look_at_target_id);
-					SmoothCameraLookAt(char.rigged_object().GetAvgIKChainPos("torso"));
+					SmoothCameraLookAt(char.rigged_object().GetAvgIKChainPos("head"));
 				}else if(track_target.GetType() == _item_object){
 					ItemObject@ item = ReadItemID(look_at_target_id);
 					SmoothCameraLookAt(item.GetPhysicsPosition());
