@@ -600,7 +600,7 @@ void ReceiveMessage(string msg){
 			}
 		}
 
-		if(!enable_look_at_target || !has_camera_control){
+		if(!enable_look_at_target){
 			level.Execute("dialogue.cam_pos = vec3(" + camera_position.x + ", " + camera_position.y + ", " + camera_position.z + ");");
 			level.Execute("dialogue.cam_rot = vec3(" + camera_rotation.x + "," + camera_rotation.y + "," + camera_rotation.z + ");");
 			level.Execute("dialogue.cam_zoom = " + camera_zoom + ");");
