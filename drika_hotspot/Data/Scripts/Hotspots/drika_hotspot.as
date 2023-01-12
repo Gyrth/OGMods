@@ -855,7 +855,12 @@ void DrawEditor(){
 					display_string = display_string.substr(0, int(display_string.length() * (ImGui_GetWindowContentRegionWidth() / space_for_characters)) - 3) + "...";
 				}
 
-				if(ImGui_Selectable(display_string, line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
+				if(update_scroll && display_index == int(item_no)){
+					ImGui_SetScrollHere(0.5);
+					update_scroll = false;
+				}
+
+				if(ImGui_Selectable(display_string, line_selected, ImGuiSelectableFlags_AllowDoubleClick)){ 
 					// This item has been selected that is inside multiselect, but no modifier key is pressed.
 					if(multi_select.find(i) != -1 && !dragging && multi_select.size() > 1 && !GetInputDown(0, "lshift") && !GetInputDown(0, "lctrl")){
 						multi_select = {i};
@@ -911,11 +916,6 @@ void DrawEditor(){
 
 				if(ImGui_IsItemHovered() && ImGui_IsMouseClicked(1)){
 					GetCurrentElement().LeftClick();
-				}
-
-				if(update_scroll && display_index == int(item_no)){
-					update_scroll = false;
-					ImGui_SetScrollHere(0.5);
 				}
 
 				ImGui_PopStyleColor();
@@ -1285,6 +1285,7 @@ void DuplicateSelectedFunctions(){
 		}
 
 		element_added = true;
+		update_scroll = true;
 	}
 }
 
@@ -1987,6 +1988,7 @@ void AddFunctionMenuItems(){
 			post_init_queue.insertLast(@new_element);
 			InsertElement(new_element);
 			element_added = true;
+			update_scroll = true;
 			multi_select = {current_line};
 		}
 		ImGui_PopStyleColor();
