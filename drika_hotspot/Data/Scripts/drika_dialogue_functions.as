@@ -1004,14 +1004,13 @@ void MafiaNameTag(IMContainer@ parent){
 	parent.removeElement("name_container");
 
 	if(show_names){
-		string name_text = current_actor_settings.name + " :";
-		DialogueScriptEntry entry(character_entry);
-		entry.character = name_text;
-		dialogue_script.insertAt(0, entry);
-
-		DialogueScriptEntry space_entry(character_entry);
-		space_entry.character = " ";
-		dialogue_script.insertAt(1, space_entry);
+		IMDivider name_divider("name_divider", DOVertical);
+		name_divider.setZOrdering(3);
+		name_divider.setAlignment(CACenter, CATop);
+		dialogue_line.append(name_divider);
+		IMText name(current_actor_settings.name + " : ", dialogue_font);
+		name_divider.append(name);
+		name.setColor(current_actor_settings.color);
 	}
 }
 
