@@ -1,6 +1,7 @@
 enum set_velocity_modes {
 							_set_velocity_with_placeholder = 0,
-							_set_velocity_towards_target = 1
+							_set_velocity_towards_target = 1,
+							_set_velocity_multiplier = 2
 						};
 
 class DrikaSetVelocity : DrikaElement{
@@ -13,9 +14,11 @@ class DrikaSetVelocity : DrikaElement{
 	float placeholder_min_scale = 0.25;
 	float placeholder_scale_multiplier = 7.0f;
 	float placeholder_velocity_arrow_multiplier = 0.25f;
+	float velocity_multiplier = 1.0;
 
 	array<string> set_velocity_mode_names = {	"Set Velocity With Placeholder",
-												"Set Velocity Towards Target"
+												"Set Velocity Towards Target",
+												"Set Velocity Multiplier"
 											};
 
 	DrikaSetVelocity(JSONValue params = JSONValue()){
@@ -35,6 +38,8 @@ class DrikaSetVelocity : DrikaElement{
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		add_velocity = GetJSONBool(params, "add_velocity", true);
+
+		velocity_multiplier = GetJSONFloat(params, "velocity_multiplier", 1.0);
 
 		drika_element_type = drika_set_velocity;
 		connection_types = {_movement_object, _item_object};
@@ -59,6 +64,8 @@ class DrikaSetVelocity : DrikaElement{
 		}else if(set_velocity_mode == _set_velocity_towards_target){
 			towards_target.SaveIdentifier(data);
 			data["height_offset"] = JSONValue(height_offset);
+		}else if(set_velocity_mode == _set_velocity_multiplier){
+			data["velocity_multiplier"] = JSONValue(velocity_multiplier);
 		}
 
 		return data;
@@ -71,9 +78,13 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		string display_text = "SetVelocity " + target_select.GetTargetDisplayText() + " Vel:" + velocity_magnitude;
+		string display_text = "SetVelocity " + target_select.GetTargetDisplayText();
 		if(set_velocity_mode == _set_velocity_towards_target){
-			display_text += " " + towards_target.GetTargetDisplayText();
+			display_text +=  " Vel:" + velocity_magnitude + " Target:" + towards_target.GetTargetDisplayText();
+		}else if(set_velocity_mode == _set_velocity_with_placeholder){
+			display_text +=  " Vel:" + velocity_magnitude;
+		}else if(set_velocity_mode == _set_velocity_multiplier){
+			display_text +=  " Mul:" + velocity_multiplier;
 		}
 		return display_text;
 	}
@@ -124,21 +135,33 @@ class DrikaSetVelocity : DrikaElement{
 			ImGui_NextColumn();
 		}
 
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Velocity");
-		ImGui_NextColumn();
-		ImGui_PushItemWidth(second_column_width);
-		if(ImGui_DragFloat("###Velocity", velocity_magnitude, 0.01f, 0.0f, 1000.0f, "%.2f")){
-			placeholder.SetScale(placeholder_min_scale + (velocity_magnitude / placeholder_scale_multiplier));
-		}
-		ImGui_PopItemWidth();
-		ImGui_NextColumn();
+		if(set_velocity_mode == _set_velocity_towards_target || set_velocity_mode == _set_velocity_with_placeholder){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Velocity");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_DragFloat("###Velocity", velocity_magnitude, 0.01f, 0.0f, 1000.0f, "%.2f")){
+				placeholder.SetScale(placeholder_min_scale + (velocity_magnitude / placeholder_scale_multiplier));
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
 
-		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Add Velocity");
-		ImGui_NextColumn();
-		ImGui_Checkbox("###Add Velocity", add_velocity);
-		ImGui_NextColumn();
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Add Velocity");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Add Velocity", add_velocity);
+			ImGui_NextColumn();
+		}else if(set_velocity_mode == _set_velocity_multiplier){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Multiplier");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_DragFloat("###Multiplier", velocity_multiplier, 0.01f, -2.0f, 2.0f, "%.2f")){
+				
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+		}
 	}
 
 	void DrawEditing(){
@@ -214,7 +237,11 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	bool Trigger(){
-		return ApplyVelocity();
+		if(set_velocity_mode == _set_velocity_multiplier){
+			return MultiplyVelocity();
+		}else{
+			return ApplyVelocity();
+		}
 	}
 
 	void TargetChanged(){
@@ -272,6 +299,31 @@ class DrikaSetVelocity : DrikaElement{
 				}else{
 					io.SetLinearVelocity(up_direction * velocity_magnitude);
 				}
+				io.ActivatePhysics();
+				io.SetThrown();
+			}
+		}
+		return true;
+	}
+
+	bool MultiplyVelocity(){
+		array<Object@> targets = target_select.GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+
+			if(targets[i].GetType() == _movement_object){
+				MovementObject@ char = ReadCharacterID(targets[i].GetID());
+				if(char.GetIntVar("state") == _ragdoll_state){
+					char.rigged_object().ApplyForceToRagdoll(char.velocity * velocity_multiplier * 1000.0, char.rigged_object().skeleton().GetCenterOfMass());
+		        }else{
+					char.velocity = char.velocity * velocity_multiplier;
+				}
+			}else if(targets[i].GetType() == _item_object){
+				ItemObject@ io = ReadItemID(targets[i].GetID());
+				io.ActivatePhysics();
+				// For some reason the transform needs to be set or else the io doesn't wake up.
+				mat4 transform = io.GetPhysicsTransform();
+				io.SetPhysicsTransform(transform);
+				io.SetLinearVelocity(io.GetLinearVelocity() * velocity_multiplier);
 				io.ActivatePhysics();
 				io.SetThrown();
 			}
