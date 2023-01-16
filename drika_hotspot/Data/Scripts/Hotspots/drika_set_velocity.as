@@ -15,10 +15,13 @@ class DrikaSetVelocity : DrikaElement{
 	float placeholder_scale_multiplier = 7.0f;
 	float placeholder_velocity_arrow_multiplier = 0.25f;
 	float velocity_multiplier = 1.0;
+	bool apply_multiplier_x;
+	bool apply_multiplier_y;
+	bool apply_multiplier_z;
 
-	array<string> set_velocity_mode_names = {	"Set Velocity With Placeholder",
-												"Set Velocity Towards Target",
-												"Set Velocity Multiplier"
+	array<string> set_velocity_mode_names = {	"Velocity With Placeholder",
+												"Velocity Towards Target",
+												"Velocity Multiplier"
 											};
 
 	DrikaSetVelocity(JSONValue params = JSONValue()){
@@ -38,6 +41,10 @@ class DrikaSetVelocity : DrikaElement{
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		add_velocity = GetJSONBool(params, "add_velocity", true);
+		
+		apply_multiplier_x = GetJSONBool(params, "apply_multiplier_x", true);
+		apply_multiplier_y = GetJSONBool(params, "apply_multiplier_y", true);
+		apply_multiplier_z = GetJSONBool(params, "apply_multiplier_z", true);
 
 		velocity_multiplier = GetJSONFloat(params, "velocity_multiplier", 1.0);
 
@@ -58,6 +65,9 @@ class DrikaSetVelocity : DrikaElement{
 		data["add_velocity"] = JSONValue(add_velocity);
 		target_select.SaveIdentifier(data);
 		data["set_velocity_mode"] = JSONValue(set_velocity_mode);
+		data["apply_multiplier_x"] = JSONValue(apply_multiplier_x);
+		data["apply_multiplier_y"] = JSONValue(apply_multiplier_y);
+		data["apply_multiplier_z"] = JSONValue(apply_multiplier_z);
 
 		if(set_velocity_mode == _set_velocity_with_placeholder){
 			placeholder.Save(data);
@@ -78,13 +88,25 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		string display_text = "SetVelocity " + target_select.GetTargetDisplayText();
+		string display_text = (add_velocity ? "Add Velocity ":"Set Velocity ") + target_select.GetTargetDisplayText();
+		vec3 velocity_axis = vec3(apply_multiplier_x ? 1:0,apply_multiplier_y ? 1:0,apply_multiplier_z ? 1:0);
 		if(set_velocity_mode == _set_velocity_towards_target){
 			display_text +=  " Vel:" + velocity_magnitude + " Target:" + towards_target.GetTargetDisplayText();
 		}else if(set_velocity_mode == _set_velocity_with_placeholder){
-			display_text +=  " Vel:" + velocity_magnitude;
+			display_text +=  " Vel:" + velocity_magnitude + " Placeholder";
 		}else if(set_velocity_mode == _set_velocity_multiplier){
 			display_text +=  " Mul:" + velocity_multiplier;
+		}
+		
+		if (velocity_axis.x + velocity_axis.y + velocity_axis.z < 3){
+			display_text += ", applied in ";
+			if (velocity_axis.x + velocity_axis.y + velocity_axis.z < 1){
+				display_text += "no axis";
+			}else{
+				display_text += apply_multiplier_x ? "X ": "";
+				display_text += apply_multiplier_y ? "Y ": "";
+				display_text += apply_multiplier_z ? "Z": "";
+			}
 		}
 		return display_text;
 	}
@@ -145,7 +167,21 @@ class DrikaSetVelocity : DrikaElement{
 			}
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
-
+			
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Applied in axis:");
+			ImGui_NextColumn();
+			ImGui_Checkbox("X", apply_multiplier_x);
+			ImGui_SameLine();
+			ImGui_Checkbox("Y", apply_multiplier_y);
+			ImGui_SameLine();
+			ImGui_Checkbox("Z", apply_multiplier_z);
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+			
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Add Velocity");
 			ImGui_NextColumn();
@@ -160,6 +196,26 @@ class DrikaSetVelocity : DrikaElement{
 				
 			}
 			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Applied in axis:");
+			ImGui_NextColumn();
+			ImGui_Checkbox("X", apply_multiplier_x);
+			ImGui_SameLine();
+			ImGui_Checkbox("Y", apply_multiplier_y);
+			ImGui_SameLine();
+			ImGui_Checkbox("Z", apply_multiplier_z);
+			ImGui_NextColumn();
+			ImGui_NextColumn();
+			
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+			
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Add Velocity");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###Add Velocity", add_velocity);
 			ImGui_NextColumn();
 		}
 	}
@@ -253,6 +309,7 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	bool ApplyVelocity(){
+		vec3 velocity_axis = vec3(apply_multiplier_x ? 1:0,apply_multiplier_y ? 1:0,apply_multiplier_z ? 1:0);
 		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
 
@@ -275,15 +332,15 @@ class DrikaSetVelocity : DrikaElement{
 				MovementObject@ char = ReadCharacterID(targets[i].GetID());
 				if(char.GetIntVar("state") == _ragdoll_state){
 					if(add_velocity){
-						char.rigged_object().ApplyForceToRagdoll(char.rigged_object().GetAvgVelocity() + up_direction * velocity_magnitude * 1000.0, char.rigged_object().skeleton().GetCenterOfMass());
+						char.rigged_object().ApplyForceToRagdoll(char.rigged_object().GetAvgVelocity() + up_direction * velocity_magnitude * 1000.0 * velocity_axis, char.rigged_object().skeleton().GetCenterOfMass());
 					}else{
-						char.rigged_object().ApplyForceToRagdoll(up_direction * velocity_magnitude * 1000.0, char.rigged_object().skeleton().GetCenterOfMass());
+						char.rigged_object().ApplyForceToRagdoll(up_direction * velocity_magnitude * 1000.0 * velocity_axis, char.rigged_object().skeleton().GetCenterOfMass());
 					}
 		        }else{
 					if(add_velocity){
-						char.velocity = char.velocity + up_direction * velocity_magnitude;
+						char.velocity = char.velocity + up_direction * velocity_magnitude * velocity_axis;
 					}else{
-						char.velocity = up_direction * velocity_magnitude;
+						char.velocity = up_direction * velocity_magnitude * velocity_axis;
 					}
 					char.Execute("SetOnGround(false);");
 					char.Execute("pre_jump = false;");
@@ -295,9 +352,9 @@ class DrikaSetVelocity : DrikaElement{
 				mat4 transform = io.GetPhysicsTransform();
 				io.SetPhysicsTransform(transform);
 				if(add_velocity){
-					io.SetLinearVelocity(io.GetLinearVelocity() + up_direction * velocity_magnitude);
+					io.SetLinearVelocity(io.GetLinearVelocity() + up_direction * velocity_magnitude * velocity_axis);
 				}else{
-					io.SetLinearVelocity(up_direction * velocity_magnitude);
+					io.SetLinearVelocity(up_direction * velocity_magnitude * velocity_axis);
 				}
 				io.ActivatePhysics();
 				io.SetThrown();
@@ -307,23 +364,31 @@ class DrikaSetVelocity : DrikaElement{
 	}
 
 	bool MultiplyVelocity(){
+		vec3 velocity_axis = vec3(apply_multiplier_x ? 1:0,apply_multiplier_y ? 1:0,apply_multiplier_z ? 1:0);
 		array<Object@> targets = target_select.GetTargetObjects();
 		for(uint i = 0; i < targets.size(); i++){
+			vec3 old_velocity = vec3(0);
 
 			if(targets[i].GetType() == _movement_object){
 				MovementObject@ char = ReadCharacterID(targets[i].GetID());
+				if (add_velocity){
+					old_velocity = char.velocity;
+				}
 				if(char.GetIntVar("state") == _ragdoll_state){
-					char.rigged_object().ApplyForceToRagdoll(char.velocity * velocity_multiplier * 1000.0, char.rigged_object().skeleton().GetCenterOfMass());
+					char.rigged_object().ApplyForceToRagdoll(old_velocity + (char.velocity * velocity_multiplier * 1000.0) * velocity_axis, char.rigged_object().skeleton().GetCenterOfMass());
 		        }else{
-					char.velocity = char.velocity * velocity_multiplier;
+					char.velocity = old_velocity + (char.velocity * velocity_multiplier) * velocity_axis;
 				}
 			}else if(targets[i].GetType() == _item_object){
 				ItemObject@ io = ReadItemID(targets[i].GetID());
+				if (add_velocity){
+					old_velocity = io.GetLinearVelocity();
+				}
 				io.ActivatePhysics();
 				// For some reason the transform needs to be set or else the io doesn't wake up.
 				mat4 transform = io.GetPhysicsTransform();
 				io.SetPhysicsTransform(transform);
-				io.SetLinearVelocity(io.GetLinearVelocity() * velocity_multiplier);
+				io.SetLinearVelocity(old_velocity + (io.GetLinearVelocity() * velocity_multiplier) * velocity_axis);
 				io.ActivatePhysics();
 				io.SetThrown();
 			}
