@@ -68,6 +68,7 @@ class DrikaAnimation : DrikaElement{
 	int current_tween_type;
 	bool preview_animation = false;
 	int skipped_collision_counter = 0;
+	string last_error = "";
 
 	array<string> animation_type_names = 	{
 												"Looping Forwards",
@@ -551,6 +552,12 @@ class DrikaAnimation : DrikaElement{
 			}
 		}else{
 			array<Object@> targets = target_select.GetTargetObjects();
+
+			if(targets.size() > 1 && last_error != target_select.GetTargetDisplayText()){
+				last_error = target_select.GetTargetDisplayText();
+				DisplayError("DHS Warning", "Trying to animate multiple objects with identifier : " + last_error);
+			}
+
 			bool skip_setting_collision = false;
 
 			// When the animation isn't being edited allow the collision update to be skipped.
@@ -610,78 +617,15 @@ class DrikaAnimation : DrikaElement{
 						targets[i].SetTranslationRotationFast(translation, rotation);
 					}
 
-					if(animate_scale){
+					RefreshActors(targets[i]);
+
+					if(animate_scale && !IsGroupDerived(targets[i].GetID())){
 						targets[i].SetScale(scale);
 					}
 				}
 			}
 		}
 	}
-
-	vec3 SingularityFix(quaternion rotation){
-		// Set camera euler angles from rotation matrix
-		vec3 front = Mult(rotation, vec3(0,0,1));
-		float x_rot;
-		float y_rot;
-		float z_rot;
-
-		double sqw = rotation.w*rotation.w;
-		double sqx = rotation.x*rotation.x;
-		double sqy = rotation.y*rotation.y;
-		double sqz = rotation.z*rotation.z;
-
-		double unit = sqx + sqy + sqz + sqw; // if normalised is one, otherwise is correction factor
-		double test = rotation.x * rotation.w - rotation.y * rotation.z;
-		if(test > 0.49999*unit) { // singularity at north pole
-			x_rot = PI / 2.0f;
-			y_rot = 2.0f * atan2(rotation.y, rotation.x);
-			z_rot = 0.0f;
-
-			vec3 v = vec3(x_rot, y_rot, z_rot);
-			vec3 norm = NormalizeAngles(radToDeg * v);
-			x_rot = norm.x;
-			y_rot = norm.y;
-			z_rot = norm.z;
-		}else if(test < -0.49999*unit) { // singularity at south pole
-			y_rot = -2.0f * atan2(rotation.y, rotation.x);
-			x_rot = -PI / 2.0f;
-			z_rot = 0.0f;
-
-			vec3 v = vec3(x_rot, y_rot, z_rot);
-			vec3 norm = NormalizeAngles(radToDeg * v);
-			x_rot = norm.x;
-			y_rot = norm.y;
-			z_rot = norm.z;
-		}else{
-			y_rot = atan2(front.x, front.z)*180.0f/PI;
-			x_rot = asin(front[1])*-180.0f/PI;
-			vec3 up = Mult(rotation, vec3(0,1,0));
-			vec3 expected_right = normalize(cross(front, vec3(0,1,0)));
-			vec3 expected_up = normalize(cross(expected_right, front));
-			z_rot = atan2(dot(up,expected_right), dot(up, expected_up))*180.0f/PI;
-		}
-
-		return vec3(floor(x_rot * 100.0f + 0.5f) / 100.0f, floor(y_rot * 100.0f + 0.5f) / 100.0f, floor(z_rot * 100.0f + 0.5f) / 100.0f);
-	}
-
-	vec3 NormalizeAngles(vec3 angles){
-        double X = NormalizeAngle(angles.x);
-        double Y = NormalizeAngle(angles.y);
-        double Z = NormalizeAngle(angles.z);
-        return vec3(X, Y, Z);
-    }
-
-    double NormalizeAngle(double angle){
-        while (angle > 360)
-        {
-            angle -= 360;
-        }
-        while (angle < 0)
-        {
-            angle += 360;
-        }
-        return angle;
-    }
 
 	void TimelineUpdateAnimation(){
 		if(animation_type == forward){
@@ -745,9 +689,7 @@ class DrikaAnimation : DrikaElement{
 
 				new_scale = mix(left_key.scale, right_key.scale, alpha);
 				new_rotation = mix(left_key.rotation, right_key.rotation, alpha);
-				float extra_y_rot = (extra_yaw / 180.0f * PI);
 				new_translation = mix(left_key.translation, right_key.translation, alpha);
-				new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
 			}else if(@right_key != null){
 				new_translation = right_key.translation;
 				new_rotation = right_key.rotation;
@@ -761,6 +703,10 @@ class DrikaAnimation : DrikaElement{
 				return;
 			}
 		}
+
+		float extra_y_rot = (extra_yaw / 180.0f * PI);
+		new_rotation = new_rotation.opMul(quaternion(vec4(0,1,0,extra_y_rot)));
+
 		ApplyTransform(new_translation, new_rotation, new_scale);
 	}
 
