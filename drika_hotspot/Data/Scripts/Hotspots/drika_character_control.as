@@ -45,7 +45,8 @@ enum character_control_options { 	aggression = 0,
 									cut_throat = 44,
 									apply_damage = 45,
 									wet = 46,
-									attach_item = 47
+									attach_item = 47,
+									sheathe_item = 48
 					};
 
 enum value_type_options			{ 	manual_input = 0,
@@ -84,7 +85,7 @@ class DrikaCharacterControl : DrikaElement{
 	array<int> float_parameters = {aggression, attack_damage, attack_knockback, attack_speed, block_followup, block_skill, character_scale, damage_resistance, ear_size, fat, focus_fov_distance, focus_fov_horizontal, focus_fov_vertical, ground_aggression, movement_speed, muscle, peripheral_fov_distance, peripheral_fov_horizontal, peripheral_fov_vertical, fall_damage_mult, fear_afraid_at_health_level, throw_counter_probability, weapon_catch_skill};
 	array<int> int_parameters = {knocked_out_shield};
 	array<int> bool_parameters = {cannot_be_disarmed, left_handed, static_char, fear_always_afraid_on_sight, fear_causes_fear_on_sight, fear_never_afraid_on_sight, no_look_around, stick_to_nav_mesh, is_throw_trainer, wearing_metal_armor};
-	array<int> function_parameters = {ignite, extinguish, is_player, kill, revive, limp_ragdoll, injured_ragdoll, ragdoll, cut_throat, apply_damage, wet, attach_item};
+	array<int> function_parameters = {ignite, extinguish, is_player, kill, revive, limp_ragdoll, injured_ragdoll, ragdoll, cut_throat, apply_damage, wet, attach_item, sheathe_item};
 
 	array<string> param_names = {	"Aggression",
 	 								"Attack Damage",
@@ -133,7 +134,8 @@ class DrikaCharacterControl : DrikaElement{
 									"Cut Throat",
 									"Apply Damage",
 									"Wet",
-									"Attach Item"
+									"Attach Item",
+									"Sheathe Item"
 								};
 
 	array<string> attachment_type_names = 	{	"At Grip",
@@ -973,6 +975,7 @@ class DrikaCharacterControl : DrikaElement{
 		if(input == revive){return false;}
 		if(input == cut_throat){return false;}
 		if(input == attach_item){return false;}
+		if(input == sheathe_item){return false;}
 		return true;
 	}
 	
@@ -1445,6 +1448,14 @@ class DrikaCharacterControl : DrikaElement{
 					                char.Execute(	"this_mo.AttachItemToSlot(" + target_items[j].GetID() + ", " + attachment_type + ", " + mirrored + ");" +
 					                				"HandleEditorAttachment(" + target_items[j].GetID() + ", " + attachment_type + ", " + mirrored + ");");
 								}
+							}
+						}
+						break;
+					case sheathe_item:
+						{
+							if(!reset){
+								string command = "if(weapon_slots[primary_weapon_slot] != -1){StartSheathing(primary_weapon_slot);}";
+								char.Execute(command);
 							}
 						}
 						break;
