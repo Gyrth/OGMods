@@ -59,7 +59,6 @@ array<DrikaElement@> parallel_elements;
 array<int> drika_indexes;
 Object@ this_hotspot = ReadObjectFromID(hotspot.GetID());
 string param_delimiter = "|";
-array<string> messages;
 bool is_selected = false;
 array<Reference@> references;
 array<DrikaElement@> continues_update_elements;
@@ -531,7 +530,6 @@ void Update(){
 		}
 
 		if(!show_editor && hotspot_enabled){
-			DeliverMessages();
 			UpdateParallelOperations();
 
 			if(!script_finished){
@@ -551,8 +549,6 @@ void Update(){
 			GetCurrentElement().Update();
 		}
 	}
-
-	messages.resize(0);
 }
 
 void UpdateContinuesElements(){
@@ -579,14 +575,6 @@ void UpdateParallelOperations(){
 				}
 			}
 			parallel_elements.insertLast(GetCurrentElement());
-		}
-	}
-}
-
-void DeliverMessages(){
-	if(messages.size() > 0){
-		for(uint i = 0; i < messages.size(); i++){
-			GetCurrentElement().ReceiveMessage(messages[i]);
 		}
 	}
 }
@@ -1538,12 +1526,18 @@ void ReceiveMessage(string msg){
 			}
 			GetCurrentElement().ReceiveEditorMessage(editor_messages);
 		}else{
-			token_iter.FindNextToken(msg);
-			string message = token_iter.GetToken(msg);
-
 			// Discard the messages when this hotspot is disabled.
 			if(!script_finished && drika_elements.size() > 0 && hotspot_enabled){
-				messages.insertLast(message);
+				token_iter.FindNextToken(msg);
+				string first_message = token_iter.GetToken(msg);
+				array<string> all_messages = {first_message};
+
+				while(token_iter.FindNextToken(msg)){
+					all_messages.insertLast(token_iter.GetToken(msg));
+				}
+
+				GetCurrentElement().ReceiveMessage(first_message);
+				GetCurrentElement().ReceiveMessage(all_messages);
 			}
 		}
 	}else if(token == "drika_dialogue_add_animation_group"){
