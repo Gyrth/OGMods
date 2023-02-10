@@ -202,7 +202,7 @@ class DrikaCreateObject : DrikaElement{
 		if(create_delete_mode == _create_object){
 			if(triggered){
 				for(uint i = 0; i < spawned_object_ids.size(); i++){
-					QueueDeleteObjectID(spawned_object_ids[i]);
+					DeleteObjectID(spawned_object_ids[i]);
 				}
 				spawned_object_ids.resize(0);
 				triggered = false;
